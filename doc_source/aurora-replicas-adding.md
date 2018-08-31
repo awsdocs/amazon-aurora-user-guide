@@ -1,0 +1,75 @@
+# Adding Aurora Replicas to a DB Cluster<a name="aurora-replicas-adding"></a>
+
+In an Aurora DB clusters, there is one primary DB instance and up to 15 Aurora Replicas\. The primary DB instance supports read and write operations, and performs all of the data modifications to the cluster volume\. Aurora Replicas connect to the same storage volume as the primary DB instance and support only read operations\. Aurora Replicas can offload read workloads from the primary DB instance\. 
+
+We recommend that you distribute the primary instance and Aurora Replicas in your DB cluster over multiple Availability Zones to improve the availability of your DB cluster\. For more information, see [Availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
+
+You can add Aurora Replicas to a DB cluster using the AWS Management Console, the AWS CLI, or the RDS API\.
+
+To remove an Aurora Replica from a DB cluster, delete the Aurora Replica DB instance by following the instructions in [Deleting a DB Instance in a DB Cluster](USER_DeleteInstance.md)\.
+
+ For more information about Aurora Replicas, see [Aurora Replicas](Aurora.Replication.md#Aurora.Replication.Replicas)\. 
+
+**Note**  
+Amazon Aurora also supports replication with an external database, or an RDS DB instance\. When using Amazon Aurora, your RDS DB instance must be in the same AWS Region\. For more information, see [Replication with Amazon Aurora](Aurora.Replication.md)\.
+
+## AWS Management Console<a name="aurora-replicas-adding.Console"></a>
+
+**To add an Aurora Replica to a DB cluster**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Instances**, and then select the a DB instance in the DB cluster\. The selected DB instance can be the primary DB instance for the DB cluster or an Aurora Replica\. 
+
+1. Choose **Instance actions** and then choose **Create aurora replica**\. 
+
+   The **Create Aurora replica** page appears\.
+
+1. On the **Create Aurora replica** page, specify options for your Aurora Replica\. The following table shows settings for an Aurora Replica\.    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-replicas-adding.html)
+
+1. Choose **Create Aurora replica** to create the Aurora Replica\.
+
+## CLI<a name="aurora-replicas-adding.CLI"></a>
+
+To create an Aurora Replica in your DB cluster, run the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command\. Include the name of the DB cluster as the `--db-cluster-identifier` option\. You can optionally specify an Availability Zone for the Aurora Replica using the `--availability-zone` parameter, as shown in the following examples\.
+
+For example, the following command creates a new MySQL 5\.7–compatible Aurora Replica named `sample-instance-us-west-2a`\.
+
+For Linux, OS X, or Unix:
+
+```
+aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a \
+    --db-cluster-identifier sample-cluster --engine aurora-mysql --db-instance-class db.r4.large \
+    --availability-zone us-west-2a
+```
+
+For Windows:
+
+```
+aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a ^
+    --db-cluster-identifier sample-cluster --engine aurora-mysql --db-instance-class db.r4.large ^
+    --availability-zone us-west-2a
+```
+
+The following command creates a new MySQL 5\.6–compatible Aurora Replica named `sample-instance-us-west-2a`\.
+
+For Linux, OS X, or Unix:
+
+```
+aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a \
+    --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r4.large \
+    --availability-zone us-west-2a
+```
+
+For Windows:
+
+```
+aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a ^
+    --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r4.large ^
+    --availability-zone us-west-2a
+```
+
+## API<a name="aurora-replicas-adding.API"></a>
+
+To create an Aurora Replica in your DB cluster, call the [CreateDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action\. Include the name of the DB cluster as the `DBClusterIdentifier` parameter\. You can optionally specify an Availability Zone for the Aurora Replica using the `AvailabilityZone` parameter\.

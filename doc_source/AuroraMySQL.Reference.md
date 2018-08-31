@@ -1,0 +1,420 @@
+# Amazon Aurora MySQL Reference<a name="AuroraMySQL.Reference"></a>
+
+This reference includes information about Aurora MySQL parameters and status variables\.
+
+**Topics**
++ [Amazon Aurora MySQL Parameters](#AuroraMySQL.Reference.ParameterGroups)
++ [Inapplicable MySQL Parameters and Status Variables](#AuroraMySQL.Reference.Parameters.Inapplicable)
++ [Aurora MySQL Events](#AuroraMySQL.Reference.Waitevents)
+
+## Amazon Aurora MySQL Parameters<a name="AuroraMySQL.Reference.ParameterGroups"></a>
+
+You manage your Amazon Aurora MySQL DB cluster in the same way that you manage other Amazon RDS DB instances, by using parameters in a DB parameter group\. Amazon Aurora differs from other DB engines in that you have a DB cluster that contains multiple DB instances\. As a result, some of the parameters that you use to manage your Aurora MySQL DB cluster apply to the entire cluster, while other parameters apply only to a particular DB instance in the DB cluster\.
+
+Cluster\-level parameters are managed in DB cluster parameter groups\. Instance\-level parameters are managed in DB parameter groups\. Although each DB instance in an Aurora MySQL DB cluster is compatible with the MySQL database engine, some of the MySQL database engine parameters must be applied at the cluster level, and are managed using DB cluster parameter groups\. Cluster\-level parameters are not found in the DB parameter group for an instance in an Aurora DB cluster and are listed later in this topic\.
+
+You can manage both cluster\-level and instance\-level parameters using the AWS Management Console, the AWS CLI, or the Amazon RDS API\. There are separate commands for managing cluster\-level parameters and instance\-level parameters\. For example, you can use the [modify\-db\-cluster\-parameter\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) AWS CLI command to manage cluster\-level parameters in a DB cluster parameter group and use the [modify\-db\-parameter\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) AWS CLI command to manage instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
+
+You can view both cluster\-level and instance\-level parameters in the AWS Management Console, or by using the AWS CLI or Amazon RDS API\. For example, you can use the [describe\-db\-cluster\-parameters](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) AWS CLI command to view cluster\-level parameters in a DB cluster parameter group and use the [describe\-db\-parameters](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) AWS CLI command to view instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
+
+For more information on DB parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
+
+**Topics**
++ [Cluster\-level Parameters](#AuroraMySQL.Reference.Parameters.Cluster)
++ [Instance\-level Parameters](#AuroraMySQL.Reference.Parameters.Instance)
+
+### Cluster\-level Parameters<a name="AuroraMySQL.Reference.Parameters.Cluster"></a>
+
+The following table shows all of the parameters that apply to the entire Aurora MySQL DB cluster\. 
+
+
+| Parameter name | Modifiable | 
+| --- | --- | 
+|  `aurora_enable_replica_log_compression`  |  Yes  | 
+|  `aurora_enable_repl_bin_log_filtering`  |  Yes  | 
+|  `aurora_enable_zdr`  |  Yes  | 
+|  `aurora_load_from_s3_role`  |  Yes  | 
+|  `aurora_select_into_s3_role`  |  Yes  | 
+|  `auto_increment_increment`  |  Yes  | 
+|  `auto_increment_offset`  |  Yes  | 
+|  `aws_default_lambda_role`  |  Yes  | 
+|  `aws_default_s3_role`  |  Yes  | 
+|  `binlog_checksum`  |  Yes  | 
+|  `binlog_format`  |  Yes  | 
+|  `binlog_row_image`  |  No  | 
+|  `binlog_rows_query_log_events`  |  No  | 
+|  `character-set-client-handshake`  |  Yes  | 
+|  `character_set_client`  |  Yes  | 
+|  `character_set_connection`  |  Yes  | 
+|  `character_set_database`  |  Yes  | 
+|  `character_set_filesystem`  |  Yes  | 
+|  `character_set_results`  |  Yes  | 
+|  `character_set_server`  |  Yes  | 
+|  `collation_connection`  |  Yes  | 
+|  `collation_server`  |  Yes  | 
+|  `completion_type`  |  Yes  | 
+|  `default_storage_engine`  |  No  | 
+|  `innodb_autoinc_lock_mode`  |  Yes  | 
+|  `innodb_checksums`  |  No  | 
+|  `innodb_cmp_per_index_enabled`  |  Yes  | 
+|  `innodb_commit_concurrency`  |  Yes  | 
+|  `innodb_data_home_dir`  |  No  | 
+|  `innodb_file_per_table`  |  Yes  | 
+|  `innodb_flush_log_at_trx_commit`  |  Yes  | 
+|  `innodb_ft_max_token_size`  |  Yes  | 
+|  `innodb_ft_min_token_size`  |  Yes  | 
+|  `innodb_ft_num_word_optimize`  |  Yes  | 
+|  `innodb_ft_sort_pll_degree`  |  Yes  | 
+|  `innodb_online_alter_log_max_size`  |  Yes  | 
+|  `innodb_optimize_fulltext_only`  |  Yes  | 
+|  `innodb_page_size`  |  No  | 
+|  `innodb_purge_batch_size`  |  Yes  | 
+|  `innodb_purge_threads`  |  Yes  | 
+|  `innodb_rollback_on_timeout`  |  Yes  | 
+|  `innodb_rollback_segments`  |  Yes  | 
+|  `innodb_spin_wait_delay`  |  Yes  | 
+|  `innodb_strict_mode`  |  Yes  | 
+|  `innodb_support_xa`  |  Yes  | 
+|  `innodb_sync_array_size`  |  Yes  | 
+|  `innodb_sync_spin_loops`  |  Yes  | 
+|  `innodb_table_locks`  |  Yes  | 
+|  `innodb_undo_directory`  |  No  | 
+|  `innodb_undo_logs`  |  Yes  | 
+|  `innodb_undo_tablespaces`  |  No  | 
+|  `lc_time_names`  |  Yes  | 
+|  `lower_case_table_names`  |  Yes  | 
+|  `master-info-repository`  |  Yes  | 
+|  `master_verify_checksum`  |  Yes  | 
+|  `server_audit_events`  |  Yes  | 
+|  `server_audit_excl_users`  |  Yes  | 
+|  `server_audit_incl_users`  |  Yes  | 
+|  `server_audit_logging`  |  Yes  | 
+|  `server_id`  |  No  | 
+|  `skip-character-set-client-handshake`  |  Yes  | 
+|  `skip_name_resolve`  |  No  | 
+|  `sync_frm`  |  Yes  | 
+|  `time_zone`  |  Yes  | 
+
+### Instance\-level Parameters<a name="AuroraMySQL.Reference.Parameters.Instance"></a>
+
+The following table shows all of the parameters that apply to a specific DB instance in an Aurora MySQL DB cluster\. 
+
+
+| Parameter name | Modifiable | 
+| --- | --- | 
+| `allow-suspicious-udfs` | No | 
+| `aurora_lab_mode` | Yes | 
+| `autocommit` | Yes | 
+| `automatic_sp_privileges` | Yes | 
+| `back_log` | Yes | 
+| `basedir` | No | 
+| `binlog_cache_size` | Yes | 
+| `binlog_max_flush_queue_time` | Yes | 
+| `binlog_order_commits` | Yes | 
+| `binlog_stmt_cache_size` | Yes | 
+| `bulk_insert_buffer_size` | Yes | 
+| `concurrent_insert` | Yes | 
+| `connect_timeout` | Yes | 
+| `core-file` | No | 
+| `datadir` | No | 
+| `default_time_zone` | No | 
+| `default_tmp_storage_engine` | Yes | 
+| `default_week_format` | Yes | 
+| `delay_key_write` | Yes | 
+| `delayed_insert_limit` | Yes | 
+| `delayed_insert_timeout` | Yes | 
+| `delayed_queue_size` | Yes | 
+| `div_precision_increment` | Yes | 
+| `end_markers_in_json` | Yes | 
+| `enforce_gtid_consistency` | No | 
+| `eq_range_index_dive_limit` | Yes | 
+| `event_scheduler` | Yes | 
+| `explicit_defaults_for_timestamp` | Yes | 
+| `flush` | No | 
+| `flush_time` | Yes | 
+| `ft_boolean_syntax` | No | 
+| `ft_max_word_len` | Yes | 
+| `ft_min_word_len` | Yes | 
+| `ft_query_expansion_limit` | Yes | 
+| `ft_stopword_file` | Yes | 
+| `general_log` | Yes | 
+| `general_log_file` | No | 
+| `group_concat_max_len` | Yes | 
+| `gtid-mode` | No | 
+| `host_cache_size` | Yes | 
+| `init_connect` | Yes | 
+| `innodb_adaptive_hash_index` | Yes | 
+| `innodb_adaptive_max_sleep_delay` | Yes | 
+| `innodb_autoextend_increment` | Yes | 
+| `innodb_buffer_pool_dump_at_shutdown` | No | 
+| `innodb_buffer_pool_dump_now` | No | 
+| `innodb_buffer_pool_filename` | No | 
+| `innodb_buffer_pool_load_abort` | No | 
+| `innodb_buffer_pool_load_at_startup` | No | 
+| `innodb_buffer_pool_load_now` | No | 
+| `innodb_buffer_pool_size` | Yes | 
+| `innodb_change_buffer_max_size` | No | 
+| `innodb_compression_failure_threshold_pct` | Yes | 
+| `innodb_compression_level` | Yes | 
+| `innodb_compression_pad_pct_max` | Yes | 
+| `innodb_concurrency_tickets` | Yes | 
+| `innodb_file_format` | Yes | 
+| `innodb_flush_log_at_timeout` | No | 
+| `innodb_flushing_avg_loops` | No | 
+| `innodb_force_load_corrupted` | No | 
+| `innodb_ft_aux_table` | Yes | 
+| `innodb_ft_cache_size` | Yes | 
+| `innodb_ft_enable_stopword` | Yes | 
+| `innodb_ft_server_stopword_table` | Yes | 
+| `innodb_ft_user_stopword_table` | Yes | 
+| `innodb_large_prefix` | Yes | 
+| `innodb_lock_wait_timeout` | Yes | 
+| `innodb_log_compressed_pages` | No | 
+| `innodb_lru_scan_depth` | Yes | 
+| `innodb_max_purge_lag` | Yes | 
+| `innodb_max_purge_lag_delay` | Yes | 
+| `innodb_monitor_disable` | Yes | 
+| `innodb_monitor_enable` | Yes | 
+| `innodb_monitor_reset` | Yes | 
+| `innodb_monitor_reset_all` | Yes | 
+| `innodb_old_blocks_pct` | Yes | 
+| `innodb_old_blocks_time` | Yes | 
+| `innodb_open_files` | Yes | 
+| `innodb_print_all_deadlocks` | Yes | 
+| `innodb_random_read_ahead` | Yes | 
+| `innodb_read_ahead_threshold` | Yes | 
+| `innodb_read_io_threads` | No | 
+| `innodb_read_only` | No | 
+| `innodb_replication_delay` | Yes | 
+| `innodb_sort_buffer_size` | Yes | 
+| `innodb_stats_auto_recalc` | Yes | 
+| `innodb_stats_method` | Yes | 
+| `innodb_stats_on_metadata` | Yes | 
+| `innodb_stats_persistent` | Yes | 
+| `innodb_stats_persistent_sample_pages` | Yes | 
+| `innodb_stats_transient_sample_pages` | Yes | 
+| `innodb_thread_concurrency` | No | 
+| `innodb_thread_sleep_delay` | Yes | 
+| `interactive_timeout` | Yes | 
+| `join_buffer_size` | Yes | 
+| `keep_files_on_create` | Yes | 
+| `key_buffer_size` | Yes | 
+| `key_cache_age_threshold` | Yes | 
+| `key_cache_block_size` | Yes | 
+| `key_cache_division_limit` | Yes | 
+| `local_infile` | Yes | 
+| `lock_wait_timeout` | Yes | 
+| `log-bin` | No | 
+| `log_bin_trust_function_creators` | Yes | 
+| `log_bin_use_v1_row_events` | Yes | 
+| `log_error` | No | 
+| `log_output` | Yes | 
+| `log_queries_not_using_indexes` | Yes | 
+| `log_slave_updates` | No | 
+| `log_throttle_queries_not_using_indexes` | Yes | 
+| `log_warnings` | Yes | 
+| `long_query_time` | Yes | 
+| `low_priority_updates` | Yes | 
+| `max_allowed_packet` | Yes | 
+| `max_binlog_cache_size` | Yes | 
+| `max_binlog_size` | No | 
+| `max_binlog_stmt_cache_size` | Yes | 
+| `max_connect_errors` | Yes | 
+| `max_connections` | Yes | 
+| `max_delayed_threads` | Yes | 
+| `max_error_count` | Yes | 
+| `max_heap_table_size` | Yes | 
+| `max_insert_delayed_threads` | Yes | 
+| `max_join_size` | Yes | 
+| `max_length_for_sort_data` | Yes | 
+| `max_prepared_stmt_count` | Yes | 
+| `max_seeks_for_key` | Yes | 
+| `max_sort_length` | Yes | 
+| `max_sp_recursion_depth` | Yes | 
+| `max_tmp_tables` | Yes | 
+| `max_user_connections` | Yes | 
+| `max_write_lock_count` | Yes | 
+| `metadata_locks_cache_size` | Yes | 
+| `min_examined_row_limit` | Yes | 
+| `myisam_data_pointer_size` | Yes | 
+| `myisam_max_sort_file_size` | Yes | 
+| `myisam_mmap_size` | Yes | 
+| `myisam_sort_buffer_size` | Yes | 
+| `myisam_stats_method` | Yes | 
+| `myisam_use_mmap` | Yes | 
+| `net_buffer_length` | Yes | 
+| `net_read_timeout` | Yes | 
+| `net_retry_count` | Yes | 
+| `net_write_timeout` | Yes | 
+| `old-style-user-limits` | Yes | 
+| `old_passwords` | Yes | 
+| `optimizer_prune_level` | Yes | 
+| `optimizer_search_depth` | Yes | 
+| `optimizer_switch` | Yes | 
+| `optimizer_trace` | Yes | 
+| `optimizer_trace_features` | Yes | 
+| `optimizer_trace_limit` | Yes | 
+| `optimizer_trace_max_mem_size` | Yes | 
+| `optimizer_trace_offset` | Yes | 
+| `performance_schema` | Yes | 
+| `pid_file` | No | 
+| `plugin_dir` | No | 
+| `port` | No | 
+| `preload_buffer_size` | Yes | 
+| `profiling_history_size` | Yes | 
+| `query_alloc_block_size` | Yes | 
+| `query_cache_limit` | Yes | 
+| `query_cache_min_res_unit` | Yes | 
+| `query_cache_size` | Yes | 
+| `query_cache_type` | Yes | 
+| `query_cache_wlock_invalidate` | Yes | 
+| `query_prealloc_size` | Yes | 
+| `range_alloc_block_size` | Yes | 
+| `read_buffer_size` | Yes | 
+| `read_only` | No | 
+| `read_rnd_buffer_size` | Yes | 
+| `relay-log` | No | 
+| `relay_log_info_repository` | Yes | 
+| `relay_log_recovery` | No | 
+| `safe-user-create` | Yes | 
+| `secure_auth` | Yes | 
+| `secure_file_priv` | No | 
+| `skip-slave-start` | No | 
+| `skip_external_locking` | No | 
+| `skip_show_database` | Yes | 
+| `slave_checkpoint_group` | Yes | 
+| `slave_checkpoint_period` | Yes | 
+| `slave_parallel_workers` | Yes | 
+| `slave_pending_jobs_size_max` | Yes | 
+| `slave_sql_verify_checksum` | Yes | 
+| `slow_launch_time` | Yes | 
+| `slow_query_log` | Yes | 
+| `slow_query_log_file` | No | 
+| `socket` | No | 
+| `sort_buffer_size` | Yes | 
+| `sql_mode` | Yes | 
+| `sql_select_limit` | Yes | 
+| `stored_program_cache` | Yes | 
+| `sync_binlog` | No | 
+| `sync_master_info` | Yes | 
+| `sync_relay_log` | Yes | 
+| `sync_relay_log_info` | Yes | 
+| `sysdate-is-now` | Yes | 
+| `table_cache_element_entry_ttl` | No | 
+| `table_definition_cache` | Yes | 
+| `table_open_cache` | Yes | 
+| `table_open_cache_instances` | Yes | 
+| `temp-pool` | Yes | 
+| `thread_handling` | No | 
+| `thread_stack` | Yes | 
+| `timed_mutexes` | Yes | 
+| `tmp_table_size` | Yes | 
+| `tmpdir` | No | 
+| `transaction_alloc_block_size` | Yes | 
+| `transaction_prealloc_size` | Yes | 
+| `tx_isolation` | Yes | 
+| `updatable_views_with_limit` | Yes | 
+| `validate-password` | No | 
+| `validate_password_dictionary_file` | No | 
+| `validate_password_length` | No | 
+| `validate_password_mixed_case_count` | No | 
+| `validate_password_number_count` | No | 
+| `validate_password_policy` | No | 
+| `validate_password_special_char_count` | No | 
+| `wait_timeout` | Yes | 
+
+## Inapplicable MySQL Parameters and Status Variables<a name="AuroraMySQL.Reference.Parameters.Inapplicable"></a>
+
+Because of architectural differences between Aurora MySQL and MySQL, some MySQL parameters and status variables do not apply to Aurora MySQL\.
+
+The following MySQL parameters do not apply to Aurora MySQL:
++ `innodb_adaptive_flushing`
++ `innodb_adaptive_flushing_lwm`
++ `innodb_checksum_algorithm`
++ `innodb_doublewrite`
++ `innodb_flush_method`
++ `innodb_flush_neighbors`
++ `innodb_io_capacity`
++ `innodb_io_capacity_max`
++ `innodb_log_buffer_size`
++ `innodb_log_file_size`
++ `innodb_log_files_in_group`
++ `innodb_max_dirty_pages_pct`
++ `innodb_use_native_aio`
++ `innodb_write_io_threads`
++ `thread_cache_size`
+
+The following MySQL status variables do not apply to Aurora MySQL:
++ `innodb_buffer_pool_bytes_dirty`
++ `innodb_buffer_pool_pages_dirty`
++ `innodb_buffer_pool_pages_flushed`
+
+**Note**  
+These lists are not exhaustive\.
+
+## Aurora MySQL Events<a name="AuroraMySQL.Reference.Waitevents"></a>
+
+The following are some common wait events for Aurora MySQL\.
+
+**Note**  
+For information about the naming conventions used in MySQL wait events, see [ Performance Schema Instrument Naming Conventions](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-instrument-naming.html) in the MySQL documentation\.
+
+**io/aurora\_redo\_log\_flush**  
+In this wait event, a session is writing data to Aurora storage\. Typically, this wait event is for a write I/O operation in Aurora MySQL\.
+
+**io/aurora\_respond\_to\_client**  
+In this wait event, a thread is in the process of returning the result set to the client\.
+
+**io/file/csv/data**  
+In this wait event, there are threads writing to CSV tables\. Check your CSV table usage\. A typical cause of this event is setting log\_output on a table\.
+
+**io/file/innodb/innodb\_data\_file**  
+In this wait event, there are threads waiting on I/O operations to storage\. This event is more prevalent in I/O intensive workloads\. SQL statements showing a comparatively large proportion of this wait event might be running disk intensive queries or might be requesting data that cannot be satisfied from the InnoDB buffer pool\. You should check your query plans and cache hit ratios\. For more information, see [ Buffering and Caching](https://dev.mysql.com/doc/refman/5.6/en/buffering-caching.html) in the MySQL documentation\.
+
+**io/file/sql/binlog**  
+In this wait event, there is a thread waiting on a binlog file that is being written to disk\.
+
+**io/socket/sql/client\_connection**  
+In this wait event, a thread is in the process of handling a new connection\.
+
+**io/table/sql/handler**  
+This is a table I/O wait event\. Typically, these types of events can be followed by a nested event such as a file I/O event\. For more information about 'atom' and 'molecule' events in the Performance Schema, see [ Performance Schema Atom and Molecule Events](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\.
+
+**lock/table/sql/handler**  
+This wait event is a table lock wait event handler\. For more information about 'atom' and 'molecule' events in the Performance Schema, see [ Performance Schema Atom and Molecule Events](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\.
+
+**synch/cond/mysys/my\_thread\_var::suspend**  
+In this wait event, threads are suspended when they are waiting on a condition\. For example, this event occurs when threads are waiting for table level lock\. We recommend that you investigate your workload to see what threads may be acquiring table locks on your database instance\. For more information about table locking in MySQL, see [Table Locking Issues](https://dev.mysql.com/doc/refman/5.6/en/table-locking.html) in the MySQL documentation\.
+
+**synch/cond/sql/MDL\_context::COND\_wait\_status**  
+In this wait event, there are threads waiting on a table metadata lock\. For more information, see [Optimizing Locking Operations](https://dev.mysql.com/doc/refman/5.6/en/locking-issues.html) in the MySQL documentation\.
+
+**synch/cond/sql/MYSQL\_BIN\_LOG::COND\_done**  
+In this wait event, there is a thread waiting on a binlog file that is being written to disk\. Binary logging contention can occur on databases with a very high change rate\.
+
+**synch/mutex/innodb/buf\_pool\_mutex**  
+In this wait event, a thread has acquired a lock on the InnoDB buffer pool\.
+
+**synch/mutex/sql/LOCK\_open**  
+In this wait event, LOCK\_open is being used to protect various objects in the data dictionary\. This wait event indicates there are threads waiting to acquire these locks\. Typically, this event is caused by data dictionary contention\.
+
+**synch/mutex/sql/LOCK\_table\_cache**  
+In this wait event, there are threads waiting to acquire a lock on a table cache instance\. For more information, see [How MySQL Opens and Closes Tables](https://dev.mysql.com/doc/refman/5.6/en/table-cache.html) in the MySQL documentation\.
+
+**synch/mutex/sql/LOG**  
+In this wait event, there are threads waiting on a log lock\. For example, a thread might wait for a lock to write to the slow query log file\.
+
+**synch/mutex/sql/MYSQL\_BIN\_LOG::LOCK\_commit**  
+In this wait event, there is a thread that is waiting to acquire a lock with the intention of committing to the binary log\. Binary logging contention can occur on databases with a very high change rate\. Depending on your version of MySQL, there are certain locks being used to protect the consistency and durability of the binary log\. In RDS MySQL, binary logs are used for replication and the automated backup process\. In Aurora MySQL, binary logs are not needed for native replication or backups\. They are disabled by default but can be enabled and used for external replication or change data capture\. For more information, see [The Binary Log](https://dev.mysql.com/doc/refman/5.6/en/binary-log.html) in the MySQL documentation\.
+
+**synch/mutex/sql/MYSQL\_BIN\_LOG::LOCK\_log**  
+In this wait event, threads are actively locking the binary log file\. Binary logging contention can occur on databases with a very high change rate\. Depending on your version of MySQL, there are certain locks being used to protect the consistency and durability of the binary log\.
+
+**synch/rwlock/innodb/dict**  
+In this wait event, there are threads waiting on an rwlock held on the InnoDB data dictionary\.
+
+**synch/rwlock/innodb/dict sys RW lock**  
+In this event, there are threads that are waiting on an rwlock held on the InnoDB data dictionary\.
+
+**synch/rwlock/innodb/dict\_operation\_lock**  
+In this wait event, there are threads holding locks on InnoDB data dictionary operations\.

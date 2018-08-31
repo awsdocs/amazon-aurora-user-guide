@@ -1,0 +1,80 @@
+# Using Amazon Aurora Serverless<a name="aurora-serverless"></a>
+
+Amazon Aurora Serverless is an on\-demand, autoscaling configuration for Amazon Aurora\. An *Aurora Serverless DB cluster* is a DB cluster that automatically starts up, shuts down, and scales up or down capacity based on your application's needs\. Aurora Serverless provides a relatively simple, cost\-effective option for infrequent, intermittent, or unpredictable workloads\. It can provide this because it automatically starts up, scales capacity to match your application's usage, and shuts down when it's not in use\.
+
+**Note**  
+A non\-Serverless DB cluster for Aurora is called a *provisioned DB cluster*\.
+
+## Advantages of Aurora Serverless<a name="aurora-serverless.advantages"></a>
+
+Aurora Serverless provides the following advantages:
+
+**Simpler**  
+Aurora Serverless removes much of the complexity of managing DB instances and capacity\.
+
+**Scalable**  
+Aurora Serverless seamlessly scales compute and memory capacity as needed, with no disruption to client connections\.
+
+**Cost\-effective**  
+When you use Aurora Serverless, you pay for only the database resources that you consume, on a per\-second basis\. 
+
+**Highly available storage**  
+Aurora Serverless uses the same fault\-tolerant, distributed storage system with six\-way replication as Aurora to protect against data loss\.
+
+## Use Cases for Aurora Serverless<a name="aurora-serverless.use-cases"></a>
+
+Aurora Serverless is designed for the following use cases:
+
+**Infrequently used applications**  
+You have an application that is only used for a few minutes several times per day or week, such as a low\-volume blog site\. With Aurora Serverless, you pay for only the database resources that you consume on a per\-second basis\.
+
+**New applications**  
+You are deploying a new application and are unsure about which instance size you need\. With Aurora Serverless, you can create a database endpoint and have the database autoscale to the capacity requirements of your application\.
+
+**Variable workloads**  
+You are running a lightly used application, with peaks of 30 minutes to several hours a few times each day, or several times per year\. Examples are applications for human resources, budgeting, and operational reporting applications\. With Aurora Serverless, you no longer need to provision to either peak or average capacity\.
+
+**Unpredictable workloads**  
+You are running workloads where there is database usage throughout the day, but also peaks of activity that are hard to predict\. An example is a traffic site that sees a surge of activity when it starts raining\. With Aurora Serverless, your database autoscales capacity to meet the needs of the application's peak load and scales back down when the surge of activity is over\.
+
+**Development and test databases**  
+Your developers use databases during work hours but don't need them on nights or weekends\. With Aurora Serverless, your database automatically shuts down when it's not in use\.
+
+**Multi\-tenant applications**  
+With Aurora Serverless, you don't have to individually manage database capacity for each application in your fleet\. Aurora Serverless manages individual database capacity for you\.
+
+## Limitations of Aurora Serverless<a name="aurora-serverless.limitations"></a>
+
+The following limitations apply to Aurora Serverless:
++ Aurora Serverless is only available for Aurora with MySQL 5\.6 compatibility\.
++ The port number for connections must be `3306`\.
++ You can't give an Aurora Serverless DB cluster a public IP address\. You can access an Aurora Serverless DB cluster only from within a virtual private cloud \(VPC\) based on the Amazon VPC service\.
++ You can't access an Aurora Serverless DB cluster's endpoint through an AWS VPN connection or an inter\-region VPC peering connection\. There are limitations in accessing a cluster's endpoint through an intra\-region VPC peering connection; for more information, see [Interface VPC Endpoints \(AWS PrivateLink\)](http://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html) in the *Amazon VPC User Guide*\. However, you can access an Aurora Serverless cluster's endpoint through an AWS Direct Connect connection\. 
++ A DB subnet group used by Aurora Serverless can’t have more than one subnet in the same Availability Zone\.
++ Changes to a subnet group used by an Aurora Serverless DB cluster are not applied to the cluster\.
++ Aurora Serverless doesn't support the following features:
+  + [Loading data from an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)
+  + [Invoking an AWS Lambda function with an Aurora MySQL native function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)
+  + [Advanced auditing](AuroraMySQL.Auditing.md)
+  + [Aurora Replicas](AuroraMySQL.Replication.md)
+  + [Backtrack](AuroraMySQL.Replication.md)
+  + [Database cloning](Aurora.Managing.Clone.md)
+  + [IAM database authentication](UsingWithRDS.IAMDBAuth.md)
+  + [Cross\-region read replicas](AuroraMySQL.Replication.CrossRegion.md)
+  + [Restoring a snapshot from a MySQL DB instance](AuroraMySQL.Migrating.RDSMySQL.md)
+  + [Migrating backup files from Amazon S3](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)
+  + [Connecting to a DB cluster with Secure Socket Layer \(SSL\)](Aurora.Connecting.md#Aurora.Connecting.AuroraMySQL)
+
+**Note**  
+You can access an Aurora Serverless DB cluster from AWS Lambda\. For more information about working with AWS Lambda, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](http://docs.aws.amazon.com/lambda/latest/dg/vpc.html) in the *AWS Lambda Developer Guide*\.
+
+**Topics**
++ [Advantages of Aurora Serverless](#aurora-serverless.advantages)
++ [Use Cases for Aurora Serverless](#aurora-serverless.use-cases)
++ [Limitations of Aurora Serverless](#aurora-serverless.limitations)
++ [How Aurora Serverless Works](aurora-serverless.how-it-works.md)
++ [Creating an Aurora Serverless DB Cluster](aurora-serverless.create.md)
++ [Restoring an Aurora Serverless DB Cluster](aurora-serverless.restorefromsnapshot.md)
++ [Modifying an Aurora Serverless DB Cluster](aurora-serverless.modifying.md)
++ [Setting the Capacity of an Aurora Serverless DB Cluster](aurora-serverless.setting-capacity.md)
++ [Viewing Aurora Serverless DB Clusters](aurora-serverless.viewing.md)

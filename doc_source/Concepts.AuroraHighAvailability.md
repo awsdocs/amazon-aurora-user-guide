@@ -1,0 +1,13 @@
+# High Availability for Aurora<a name="Concepts.AuroraHighAvailability"></a>
+
+Aurora stores copies of the data in a DB cluster across multiple Availability Zones in a single AWS Region, regardless of whether the instances in the DB cluster span multiple Availability Zones\. For more information on Amazon Aurora, see [Managing an Amazon Aurora DB Cluster](CHAP_Aurora.md)\.
+
+When you create Aurora Replicas across Availability Zones, Amazon RDS automatically provisions and maintains them synchronously\. The primary DB instance is synchronously replicated across Availability Zones to Aurora Replicas to provide data redundancy, eliminate I/O freezes, and minimize latency spikes during system backups\. Running a DB instance with high availability can enhance availability during planned system maintenance, and help protect your databases against failure and Availability Zone disruption\. For more information on Availability Zones, see [Choosing the Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.
+
+Using the RDS console, you can create a Multi\-AZ deployment by simply specifying Multi\-AZ when creating a DB cluster\. If a DB cluster is in a single Availability Zone, you can make it a Multi\-AZ DB cluster adding an Aurora Replica in a different Availability Zone\.
+
+You can specify a Multi\-AZ deployment using the CLI as well\. Use the AWS CLI [describe\-db\-instances](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action to show the Availability Zone of the standby replica \(called the secondary AZ\)\. 
+
+After you create the primary instance for a DB cluster, you can create up to 15 Aurora Replicas in your DB cluster to support read\-only queries\. We recommend that you distribute the primary instance and Aurora Replicas in your DB cluster over multiple Availability Zones to improve the availability of your DB cluster\. For more information, see [Availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\. Call the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create an Aurora Replica in your DB cluster\. Include the name of the DB cluster as the `--db-cluster-identifier` parameter value\. You can optionally specify an Availability Zone for the Aurora Replica using the `--availability-zone` parameter\.
+
+For more information about failover to Aurora Replicas, see [Amazon Aurora Endpoints](Aurora.Overview.Endpoints.md)\. For more information about creating a DB cluster, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
