@@ -13,7 +13,7 @@ If you want to migrate a MySQL version 5\.6 snapshot to Aurora MySQL version 5\.
 **Note**  
  You can also migrate a MySQL DB instance to an Aurora MySQL DB cluster by creating an Aurora Read Replica of your source MySQL DB instance\. For more information, see [Migrating Data from a MySQL DB Instance to an Amazon Aurora MySQL DB Cluster by Using an Aurora Read Replica](AuroraMySQL.Migrating.RDSMySQL.Replica.md)\. 
 
-Incompatibilities between MySQL and MariaDB include the following:
+Incompatibilities between MySQL and Aurora MySQL include the following:
 + You can't migrate a MySQL version 5\.7 snapshot to Aurora MySQL version 5\.6\.
 + You can't migrate a DB snapshot created with MySQL 5\.6\.40 or 5\.7\.22 to Aurora MySQL\.
 
