@@ -22,11 +22,11 @@ If you have an AWS account already, skip to the next task\. If you don't have an
 
 1. Open [https://aws\.amazon\.com/](https://aws.amazon.com/), and then choose **Create an AWS Account**\.
 **Note**  
-This might be unavailable in your browser if you previously signed into the AWS Management Console\. In that case, choose **Sign in to a different account**, and then choose **Create a new AWS account**\.
+If you previously signed in to the AWS Management Console using AWS account root user credentials, choose **Sign in to a different account**\. If you previously signed in to the console using IAM credentials, choose **Sign\-in using root account credentials**\. Then choose **Create a new AWS account**\.
 
 1. Follow the online instructions\.
 
-   Part of the sign\-up procedure involves receiving a phone call and entering a PIN using the phone keypad\.
+   Part of the sign\-up procedure involves receiving a phone call and entering a verification code using the phone keypad\.
 
 Note your AWS account number, because you'll need it for the next task\.
 
@@ -38,9 +38,9 @@ If you signed up for AWS but have not created an IAM user for yourself, you can 
 
 **To create an IAM user for yourself and add the user to an Administrators group**
 
-1. Use your AWS account email address and password to sign in as the *[AWS account root user](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html)* to the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+1. Use your AWS account email address and password to sign in as the *[AWS account root user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html)* to the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 **Note**  
-We strongly recommend that you adhere to the best practice of using the **Administrator** IAM user below and securely lock away the root user credentials\. Sign in as the root user only to perform a few [account and service management tasks](http://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\.
+We strongly recommend that you adhere to the best practice of using the **Administrator** IAM user below and securely lock away the root user credentials\. Sign in as the root user only to perform a few [account and service management tasks](https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\.
 
 1. In the navigation pane of the console, choose **Users**, and then choose **Add user**\.
 
@@ -64,7 +64,7 @@ We strongly recommend that you adhere to the best practice of using the **Admini
 
 1. Choose **Next: Review** to see the list of group memberships to be added to the new user\. When you are ready to proceed, choose **Create user**\.
 
-You can use this same process to create more groups and users, and to give your users access to your AWS account resources\. To learn about using policies to restrict users' permissions to specific AWS resources, go to [Access Management](http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) and [Example Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html)\.
+You can use this same process to create more groups and users, and to give your users access to your AWS account resources\. To learn about using policies to restrict users' permissions to specific AWS resources, go to [Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) and [Example Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html)\.
 
 To sign in as this new IAM user, sign out of the AWS console, then use the following URL, where *your\_aws\_account\_id* is your AWS account number without the hyphens \(for example, if your AWS account number is `1234-5678-9012`, your AWS account ID is `123456789012`\):
 
@@ -90,14 +90,14 @@ You must know your DB cluster and network needs before you create a security gro
 + What are the memory and processor requirements for your application or service? You will use these settings when you determine what DB instance class you will use when you create your DB cluster\. For specifications about DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
 + Your DB cluster is in a virtual private cloud \(VPC\)\. Security group rules must be configured to connect to a DB cluster\. The follow list describes the rules for each VPC option:
   + **Default VPC** — If your AWS account has a default VPC in the region, that VPC is configured to support DB clusters\. If you specify the default VPC when you create the DB cluster:
-    + You must create a **VPC security group** that authorizes connections from the application or service to the Aurora DB cluster with the database\. Note that you must use the [Amazon EC2 API](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC Console to create VPC security groups\. For information, see [Step 4: Create a VPC Security Group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\.
+    + You must create a **VPC security group** that authorizes connections from the application or service to the Aurora DB cluster with the database\. Note that you must use the [Amazon EC2 API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC Console to create VPC security groups\. For information, see [Step 4: Create a VPC Security Group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\.
     + You must specify the default DB subnet group\. If this is the first DB cluster you have created in the region, Amazon RDS will create the default DB subnet group when it creates the DB cluster\.
   + **User\-defined VPC** — If you want to specify a user\-defined VPC when you create a DB cluster:
-    + You must create a **VPC security group** that authorizes connections from the application or service to the Aurora DB cluster with the database\. Note that you must use the [Amazon EC2 API](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC Console to create VPC security groups\. For information, see [Step 4: Create a VPC Security Group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\.\.
+    + You must create a **VPC security group** that authorizes connections from the application or service to the Aurora DB cluster with the database\. Note that you must use the [Amazon EC2 API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC Console to create VPC security groups\. For information, see [Step 4: Create a VPC Security Group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\.\.
     + The VPC must meet certain requirements in order to host DB clusters, such as having at least two subnets, each in a separate availability zone\. For information, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.
     + You must specify a DB subnet group that defines which subnets in that VPC can be used by the DB cluster\. For information, see the DB Subnet Group section in [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#Overview.RDSVPC.Create)\.
 + Do you need failover support? On Aurora, a Multi\-AZ deployment creates a primary instance and Aurora Replicas\. You can configure the primary instance and Aurora Replicas to be in different Availability Zones for failover support\. We recommend Multi\-AZ deployments for production workloads to maintain high availability\. For development and test purposes, you can use a non\-Multi\-AZ deployment\. For more information, see [High Availability for Aurora](Concepts.AuroraHighAvailability.md)\. 
-+ Does your AWS account have policies that grant the permissions needed to perform Amazon RDS operations? If you are connecting to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)\.
++ Does your AWS account have policies that grant the permissions needed to perform Amazon RDS operations? If you are connecting to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Authentication and Access Control](UsingWithRDS.IAM.md)\.
 + What TCP/IP port will your database be listening on? The firewall at some companies may block connections to the default port for your database engine\. If your company firewall blocks the default port, choose another port for the new DB cluster\. Note that once you create a DB cluster that listens on a port you specify, you can change the port by modifying the DB cluster\.
 + What region do you want your database in? Having the database close in proximity to the application or web service could reduce network latency\.
 
@@ -135,7 +135,7 @@ For example, if you have an application that will access a database on your DB c
 
    You will use the VPC security group you just created as the security group for your DB cluster when you create it\.
 
-   Finally, a quick note about VPC subnets: If you use a default VPC, a default subnet group spanning all of the VPC's subnets has already been created for you\. When you use the **Launch a DB Instance** wizard to create a DB cluster, you can select the default VPC and use **default** for the **DB Subnet Group**\.
+   Finally, a quick note about VPC subnets: If you use a default VPC, a default subnet group spanning all of the VPC's subnets has already been created for you\. When you create a DB cluster, you can select the default VPC and use **default** for the **DB Subnet Group**\.
 
    Once you have completed the setup requirements, you can use your requirements and the security group you created to launch a DB cluster\. For information on creating a DB cluster, see the relevant documentation in the following table: 
 

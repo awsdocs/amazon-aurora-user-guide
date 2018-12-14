@@ -33,7 +33,7 @@ You can use the following automated monitoring tools to watch Amazon RDS and rep
 In addition, Amazon RDS integrates with Amazon CloudWatch for additional monitoring capabilities:
 + **Amazon CloudWatch Metrics** – Amazon RDS automatically sends metrics to CloudWatch every minute for each active database\. You are not charged additionally for Amazon RDS metrics in CloudWatch\. For more information, see [Viewing DB Instance Metrics](#USER_Monitoring)\.
 + ** Amazon CloudWatch Alarms** – You can watch a single Amazon RDS metric over a specific time period, and perform one or more actions based on the value of the metric relative to a threshold you set\. For more information, see [Monitoring with Amazon CloudWatch](#monitoring-cloudwatch)
-+ **Amazon CloudWatch Logs** – Most DB engines enable you to monitor, store, and access your database log files in CloudWatch Logs\. For more information, see [Amazon CloudWatch Logs User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/) 
++ **Amazon CloudWatch Logs** – Most DB engines enable you to monitor, store, and access your database log files in CloudWatch Logs\. For more information, see [Amazon CloudWatch Logs User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/) 
 
 ### Manual Monitoring Tools<a name="monitoring_manual_tools"></a>
 
@@ -58,14 +58,14 @@ Another important part of monitoring Amazon RDS involves manually monitoring tho
   + Service health status
 
   In addition, you can use CloudWatch to do the following: 
-  + Create [customized dashboards](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CloudWatch_Dashboards.html) to monitor the services you care about
+  + Create [customized dashboards](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CloudWatch_Dashboards.html) to monitor the services you care about
   + Graph metric data to troubleshoot issues and discover trends
   + Search and browse all your AWS resource metrics
   + Create and edit alarms to be notified of problems
 
 ## Monitoring with Amazon CloudWatch<a name="monitoring-cloudwatch"></a>
 
-You can monitor DB instances using Amazon CloudWatch, which collects and processes raw data from Amazon RDS into readable, near real\-time metrics\. These statistics are recorded for a period of two weeks, so that you can access historical information and gain a better perspective on how your web application or service is performing\. By default, Amazon RDS metric data is automatically sent to CloudWatch in 1\-minute periods\. For more information about CloudWatch, see [What Are Amazon CloudWatch, Amazon CloudWatch Events, and Amazon CloudWatch Logs?](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.
+You can monitor DB instances using Amazon CloudWatch, which collects and processes raw data from Amazon RDS into readable, near real\-time metrics\. These statistics are recorded for a period of two weeks, so that you can access historical information and gain a better perspective on how your web application or service is performing\. By default, Amazon RDS metric data is automatically sent to CloudWatch in 1\-minute periods\. For more information about CloudWatch, see [What Are Amazon CloudWatch, Amazon CloudWatch Events, and Amazon CloudWatch Logs?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.
 
 ### Amazon RDS Metrics and Dimensions<a name="metrics_dimensions"></a>
 
@@ -101,6 +101,9 @@ The `AWS/RDS` namespace includes the following metrics\.
 
 | Metric | Description | 
 | --- | --- | 
+| AuroraGlobalDBReplicatedWriteIO |  Units: Bytes  | 
+| AuroraGlobalDBDataTransferBytes |  Units: Bytes  | 
+| AuroraGlobalDBReplicationLag |  Units: Milliseconds  | 
 | BinLogDiskUsage |  The amount of disk space occupied by binary logs on the master\. Applies to MySQL read replicas\. Units: Bytes  | 
 | BurstBalance |  The percent of General Purpose SSD \(gp2\) burst\-bucket I/O credits available\.  Units: Percent  | 
 | CPUUtilization |  The percentage of CPU utilization\. Units: Percent  | 
@@ -119,7 +122,7 @@ The `AWS/RDS` namespace includes the following metrics\.
 | ReadThroughput |  The average number of bytes read from disk per second\. Units: Bytes/Second  | 
 | ReplicaLag |  The amount of time a Read Replica DB instance lags behind the source DB instance\. Applies to MySQL, MariaDB, and PostgreSQL Read Replicas\. Units: Seconds  | 
 | ReplicationSlotDiskUsage |  The disk space used by replication slot files\. Applies to PostgreSQL\. Units: Megabytes  | 
-| SwapUsage |  The amount of swap space used on the DB instance\. Units: Bytes  | 
+| SwapUsage |  The amount of swap space used on the DB instance\. This metric is not available for SQL Server\. Units: Bytes  | 
 | TransactionLogsDiskUsage |  The disk space used by transaction logs\. Applies to PostgreSQL\. Units: Megabytes  | 
 | TransactionLogsGeneration |  The size of transaction logs generated per second\. Applies to PostgreSQL\. Units: Megabytes/second  | 
 | WriteIOPS |  The average number of disk write I/O operations per second\. Units: Count/Second  | 
@@ -131,15 +134,14 @@ The `AWS/RDS` namespace includes the following metrics\.
 Amazon RDS metrics data can be filtered by using any of the dimensions in the following table:
 
 
-****  
-
 |  Dimension  |  Description  | 
 | --- | --- | 
-|  DBInstanceIdentifier  |  This dimension filters the data you request for a specific DB instance\.  | 
+|  DBInstanceIdentifier  |  This dimension filters the data you request for a specific database instance\.  | 
 |  DBClusterIdentifier  |  This dimension filters the data you request for a specific Amazon Aurora DB cluster\.  | 
-|  DBClusterIdentifier, Role  |  This dimension filters the data you request for a specific Amazon Aurora DB cluster, aggregating the metric by instance role \(WRITER/READER\)\. The WRITER role applies to the primary instance, and the READER role applies to the Aurora Replicas\. For example, you can aggregate metrics for all READER instances that belong to a cluster\.  | 
+|  DBClusterIdentifier, Role  |  This dimension filters the data you request for a specific Aurora DB cluster, aggregating the metric by instance role \(WRITER/READER\)\. For example, you can aggregate metrics for all READER instances that belong to a cluster\.  | 
 |  DatabaseClass  |  This dimension filters the data you request for all instances in a database class\. For example, you can aggregate metrics for all instances that belong to the database class `db.m1.small`  | 
 |  EngineName  |  This dimension filters the data you request for the identified engine name only\. For example, you can aggregate metrics for all instances that have the engine name `mysql`\.  | 
+|  SourceRegion  |  This dimension filters the data you request for the specified region only\. For example, you can aggregate metrics for all instances in the region `us-east-1`\.  | 
 
 #### Creating CloudWatch Alarms to Monitor Amazon RDS<a name="creating_alarms"></a>
 
@@ -164,10 +166,10 @@ If you use **Create topic** to create a new Amazon SNS topic, the email addresse
 1. At this point, the **Alarm Preview** area gives you a chance to preview the alarm you’re about to create\. Choose **Create Alarm**\. 
 
 **To set an alarm using the AWS CLI**
-+ Call [http://docs.aws.amazon.com/cli/latest/reference/put-metric-alarm.html](http://docs.aws.amazon.com/cli/latest/reference/put-metric-alarm.html)\. For more information, see *[AWS CLI Command Reference](http://docs.aws.amazon.com/cli/latest/reference/)*\.
++ Call [https://docs.aws.amazon.com/cli/latest/reference/put-metric-alarm.html](https://docs.aws.amazon.com/cli/latest/reference/put-metric-alarm.html)\. For more information, see *[AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/)*\.
 
 **To set an alarm using the CloudWatch API**
-+ Call [http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html)\. For more information, see *[Amazon CloudWatch API Reference](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/)* 
++ Call [https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html)\. For more information, see *[Amazon CloudWatch API Reference](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/)* 
 
 ## Publishing Database Engine Logs to Amazon CloudWatch Logs<a name="publishing_cloudwatchlogs"></a>
 
@@ -215,7 +217,7 @@ You can choose any graph to bring up a more detailed view\. You can also apply m
 
 Amazon RDS integrates with CloudWatch metrics to provide a variety of DB instance metrics\. You can view CloudWatch metrics using the RDS console, AWS CLI, or API\.
 
- For a complete list of Amazon RDS metrics, go to [ Amazon RDS Dimensions and Metrics](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/rds-metricscollected.html) in the *Amazon CloudWatch User Guide*\. 
+ For a complete list of Amazon RDS metrics, go to [ Amazon RDS Dimensions and Metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/rds-metricscollected.html) in the *Amazon CloudWatch User Guide*\. 
 
 ##### Viewing DB Metrics by Using the CloudWatch CLI<a name="USER_Monitoring.CLI"></a>
 

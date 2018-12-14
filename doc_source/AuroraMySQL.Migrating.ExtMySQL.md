@@ -153,7 +153,7 @@ xtrabackup --stream=xbstream --user=myuser --password=<password>  \
 
 Once you have backed up your MySQL database using the Percona XtraBackup utility, you can copy your backup directories and files to an Amazon S3 bucket\.
 
-For information on creating and uploading a file to an Amazon S3 bucket, see [Getting Started with Amazon Simple Storage Service](http://docs.aws.amazon.com/AmazonS3/latest/gsg/GetStartedWithS3.html) in the *Amazon S3 Getting Started Guide*\.
+For information on creating and uploading a file to an Amazon S3 bucket, see [Getting Started with Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/gsg/GetStartedWithS3.html) in the *Amazon S3 Getting Started Guide*\.
 
 #### Using Incremental Backups With Percona XtraBackup<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup.Incr"></a>
 
@@ -161,7 +161,7 @@ Amazon Aurora MySQL supports both full and incremental backups created using Per
 
 When copying your existing full and incremental backup files to an Amazon S3 bucket, you must recursively copy the contents of the base directory\. Those contents include the full backup and also all incremental backup directories and files\. This copy must preserve the directory structure in the Amazon S3 bucket\. Aurora iterates through all files and directories\. Aurora uses the `xtrabackup-checkpoints` file included with each incremental backup to identify the base directory and to order incremental backups by log sequence number \(LSN\) range\.
 
-For information on creating and uploading a file to an Amazon S3 bucket, see [Getting Started with Amazon Simple Storage Service](http://docs.aws.amazon.com/AmazonS3/latest/gsg/GetStartedWithS3.html) in the *Amazon S3 Getting Started Guide*\.
+For information on creating and uploading a file to an Amazon S3 bucket, see [Getting Started with Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/gsg/GetStartedWithS3.html) in the *Amazon S3 Getting Started Guide*\.
 
 #### Backup Considerations<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup.Considerations"></a>
 
@@ -169,7 +169,7 @@ When you upload a file to an Amazon S3 bucket, you can use server\-side encrypti
 + Server\-side encryption with Amazon S3–managed keys \(SSE\-S3\) – Each object is encrypted with a unique key employing strong multifactor encryption\.
 + Server\-side encryption with AWS KMS–managed keys \(SSE\-KMS\) – Similar to SSE\-S3, but you have the option to create and manage encryption keys yourself, and also other differences\.
 
-For information about using server\-side encryption when uploading files to an Amazon S3 bucket, see [Protecting Data Using Server\-Side Encryption](http://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) in the *Amazon S3 Developer Guide*\.
+For information about using server\-side encryption when uploading files to an Amazon S3 bucket, see [Protecting Data Using Server\-Side Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) in the *Amazon S3 Developer Guide*\.
 
 Amazon S3 limits the size of a file uploaded to an Amazon S3 bucket to 5 terabytes \(TB\)\. If the backup data for your database exceeds 5 TB, use the `split` command to split the backup files into multiple files that are each less than 5 TB\.
 
@@ -209,14 +209,14 @@ You can restore your backup files from your Amazon S3 bucket to create a new Ama
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
 
    A typical **Specify DB details** page looks like the following\.   
-![\[Amazon Aurora Launch DB Instance Wizard DB Instance Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunchMySQL56.png)
+![\[Amazon Aurora Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunchMySQL56.png)
 
 1. Confirm your master password, and then choose **Next**\.
 
 1. On the **Configure advanced settings** page, you can customize additional settings for your Aurora MySQL DB cluster\. The following table shows the advanced settings for a DB cluster\.     
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
 
-1. Choose **Launch DB instance** to launch your Aurora DB instance, and then choose **Close** to close the wizard\. 
+1. Choose **Create database** to launch your Aurora DB instance, and then choose **Close** to close the wizard\. 
 
 On the Amazon RDS console, the new DB instance appears in the list of DB instances\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the primary instance for your DB cluster\. Depending on the DB instance class and store allocated, it can take several minutes for the new instance to be available\.
 
@@ -246,6 +246,9 @@ The following are prerequisites for using encrypted replication:
 + A client key and client certificate must be prepared for the Aurora MySQL DB cluster\.
 
 During encrypted replication, the Aurora MySQL DB cluster acts a client to the MySQL database server\. The certificates and keys for the Aurora MySQL client are in files in \.pem format\.
+
+**Note**  
+Currently, encrypted replication with an external MySQL database is only supported for Aurora MySQL version 5\.6\.
 
 **To configure your external MySQL database and your Aurora MySQL DB cluster for encrypted replication**
 
@@ -290,9 +293,9 @@ During encrypted replication, the Aurora MySQL DB cluster acts a client to the M
    -----END RSA PRIVATE KEY-----\n"}');
    ```
 
-   For more information, see [ mysql\_rds\_import\_binlog\_ssl\_material](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_import_binlog_ssl_material.html) [Using SSL with Aurora MySQL DB Clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
+   For more information, see [ mysql\_rds\_import\_binlog\_ssl\_material](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_import_binlog_ssl_material.html) [Using SSL with Aurora MySQL DB Clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
 **Note**  
-After running the procedure, the secrets are stored in files\. To erase the files later, you can run the [ mysql\_rds\_remove\_binlog\_ssl\_material](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_remove_binlog_ssl_material.html) stored procedure\.
+After running the procedure, the secrets are stored in files\. To erase the files later, you can run the [ mysql\_rds\_remove\_binlog\_ssl\_material](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_remove_binlog_ssl_material.html) stored procedure\.
 
 #### Synchronizing the Amazon Aurora MySQL DB Cluster with the External MySQL Database<a name="AuroraMySQL.Migrating.ExtMySQL.S3.RepSync.Synchronizing"></a>
 
@@ -374,7 +377,7 @@ You can synchronize your Amazon Aurora MySQL DB cluster with the MySQL database 
 **Note**  
 If `REQUIRE SSL` is not included, the replication connection might silently fall back to an unencrypted connection\.
 
-1. In the Amazon RDS Management Console, add the IP address of the server that hosts the external MySQL database to the VPC security group for the Aurora MySQL DB cluster\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+1. In the Amazon RDS Management Console, add the IP address of the server that hosts the external MySQL database to the VPC security group for the Aurora MySQL DB cluster\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
    You might also need to configure your local network to permit connections from the IP address of your Aurora MySQL DB cluster, so that it can communicate with your external MySQL database\. To find the IP address of the Aurora MySQL DB cluster, use the `host` command\.
 
@@ -398,7 +401,7 @@ If `REQUIRE SSL` is not included, the replication connection might silently fall
    );
    ```
 
-   For information about the parameters, see [ mysql\_rds\_set\_external\_master](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_external_master.html)\.
+   For information about the parameters, see [ mysql\_rds\_set\_external\_master](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_external_master.html)\.
 
    For `mysql_binary_log_file_name` and `mysql_binary_log_file_location`, use the position in the **Recovered from Binary log filename** event you noted earlier\.
 
@@ -443,6 +446,6 @@ If `REQUIRE SSL` is not included, the replication connection might silently fall
 
 Because Amazon Aurora MySQL is a MySQL\-compatible database, you can use the `mysqldump` utility to copy data from your MySQL or MariaDB database to an existing Aurora MySQL DB cluster\.
 
-For a discussion of how to do so with MySQL databases that are very large, see [ Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html)\. For MySQL databases that have smaller amounts of data, see [ Importing Data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB Instance](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.SmallExisting.html)\.
+For a discussion of how to do so with MySQL databases that are very large, see [ Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html)\. For MySQL databases that have smaller amounts of data, see [ Importing Data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB Instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.SmallExisting.html)\.
 
 ## <a name="AuroraMySQL.Migrating.ExtMySQL.RelatedTopics"></a>

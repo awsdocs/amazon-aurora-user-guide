@@ -3,10 +3,10 @@
 You can connect from the command line to an Aurora DB cluster with the AWS CLI and `mysql` command line tool as described following\.
 
 **Topics**
-+ [Generating an Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken)
++ [Generating an IAM Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken)
 + [Connecting to a DB Cluster](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.Connect)
 
-## Generating an Authentication Token<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken"></a>
+## Generating an IAM Authentication Token<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken"></a>
 
 The following example shows how to get a signed authentication token using the AWS CLI\.
 
@@ -19,10 +19,10 @@ aws rds generate-db-auth-token \
 ```
 
 In the example, the parameters are as follows:
-+ `--hostname` — The host name of the DB cluster that you want to access\.
-+ `--port` — The port number used for connecting to your DB cluster\.
-+ `--region` — The AWS Region where the DB cluster is running\. 
-+ `--username` — The database account that you want to access\.
++ `--hostname` – The host name of the DB cluster that you want to access\.
++ `--port` – The port number used for connecting to your DB cluster\.
++ `--region` – The AWS Region where the DB cluster is running\. 
++ `--username` – The database account that you want to access\.
 
 The first several characters of the token look like the following\.
 
@@ -39,12 +39,12 @@ mysql --host=hostName --port=portNumber --ssl-ca=[full path]rds-combined-ca-bund
 ```
 
 The parameters are as follows:
-+ `--host` — The host name of the DB cluster that you want to access\.
-+ `--port` — The port number used for connecting to your DB cluster\.
-+ `--ssl-ca` — The SSL certificate file that contains the public key\. For more information, see [Using SSL to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\.
-+ `--enable-cleartext-plugin` — A value that specifies that `AWSAuthenticationPlugin` must be used for this connection\.
-+ `--user` — The database account that you want to access\.
-+ `--password` — A signed IAM authentication token\.
++ `--host` – The host name of the DB cluster that you want to access\.
++ `--port` – The port number used for connecting to your DB cluster\.
++ `--ssl-ca` – The SSL certificate file that contains the public key\. For more information, see [Using SSL to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\.
++ `--enable-cleartext-plugin` – A value that specifies that `AWSAuthenticationPlugin` must be used for this connection\.
++ `--user` – The database account that you want to access\.
++ `--password` – A signed IAM authentication token\.
 
 The authentication token consists of several hundred characters\. It can be unwieldy on the command line\. One way to work around this is to save the token to an environment variable, and then use that variable when you connect\. The following example shows one way to perform this workaround\.
 

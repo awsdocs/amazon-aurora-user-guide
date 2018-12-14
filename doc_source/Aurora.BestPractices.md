@@ -44,7 +44,7 @@ Use AWS IAM accounts to control access to Amazon Aurora API actions, especially 
 
 For more information about security with Aurora, see [Amazon Aurora Security](Aurora.Overview.Security.md) and [Configuring Security in Amazon Aurora](UsingWithRDS.md)\.
 
-For more information about IAM, go to [AWS Identity and Access Management](http://docs.aws.amazon.com/IAM/latest/UserGuide/Welcome.html)\. For information on IAM best practices, go to [IAM Best Practices](http://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html)\.
+For more information about IAM, go to [AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/Welcome.html)\. For information on IAM best practices, go to [IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html)\.
 
 ## Monitoring Amazon Aurora<a name="Aurora.BestPractices.Monitoring"></a>
 

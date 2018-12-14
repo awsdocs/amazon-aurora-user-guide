@@ -1,10 +1,12 @@
 # Using Amazon RDS Performance Insights<a name="USER_PerfInsights"></a>
 
 Amazon RDS Performance Insights monitors your Amazon RDS DB instance load so that you can analyze and troubleshoot your database performance\. Amazon RDS Performance Insights is currently available for use with the following DB engines:
-+ Amazon Aurora MySQL \(MySQL 5\.6 version 1\.17\.3 and higher\)
-+ Amazon RDS MySQL \(MySQL 5\.7 version 5\.7\.22 and higher\)
-+ Amazon Aurora PostgreSQL
++ Amazon Aurora with MySQL compatibility version 1\.17\.3 and higher 1\.x versions
++ Amazon RDS MySQL version 5\.7\.22 and higher 5\.7 versions
++ Amazon RDS MySQL version 5\.6\.41 and higher 5\.6 versions
++ Amazon Aurora with PostgreSQL compatibility
 + Amazon RDS PostgreSQL version 10
++ Amazon RDS Oracle \(all versions\)
 
 **Note**  
 Performance Insights is not supported on db\.t2 DB instance classes\.
@@ -15,7 +17,7 @@ The central metric for Performance Insights is `DB Load`, which represents the a
 
 By combining `DB Load` with wait event data, you can get a complete picture of the state for an active session\. Wait events vary by DB engine: 
 + For a list of the most commonly used wait events for Aurora MySQL, see [Aurora MySQL Events ](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Waitevents)\.
-+ For information about all MySQL wait events, see [Wait Event Summary Tables](https://dev.mysql.com/doc/refman/5.6/en/wait-summary-tables.html) in the MySQL documentation\.
++ For information about all MySQL wait events, see [Wait Event Summary Tables](https://dev.mysql.com/doc/refman/5.7/en/wait-summary-tables.html) in the MySQL documentation\.
 + For a list of the most commonly used wait events for Aurora PostgreSQL, see [Amazon Aurora PostgreSQL Events](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.Waitevents)\.
 + For information about all PostgreSQL wait events, see [PostgreSQL Wait Events](https://www.postgresql.org/docs/10/static/monitoring-stats.html#WAIT-EVENT-TABLE) in the PostgreSQL documentation\.
 
@@ -34,4 +36,5 @@ You can find an overview of Performance Insights in the following video\.
 + [Additional User Interface Features](USER_PerfInsights.UIcontrols.md)
 + [Performance Insights API](USER_PerfInsights.API.md)
 + [Performance Insights Metrics Published to Amazon CloudWatch](USER_PerfInsights.Cloudwatch.md)
++ [Performance Insights Counters](USER_PerfInsights_Counters.md)
 + [Logging Performance Insights Operations by Using AWS CloudTrail](USER_PerfInsights.CloudTrail.md)

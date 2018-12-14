@@ -4,7 +4,7 @@ Amazon RDS uses the MySQL DB engines' binary log replication functionality to cr
 
 We recommend using this functionality to migrate from a MySQL DB instance to an Aurora MySQL DB cluster by creating an Aurora Read Replica of your source MySQL DB instance\. When the replica lag between the MySQL DB instance and the Aurora Read Replica is 0, you can direct your client applications to the Aurora Read Replica and then stop replication to make the Aurora Read Replica a standalone Aurora MySQL DB cluster\. Be prepared for migration to take a while, roughly several hours per tebibyte \(TiB\) of data\.
 
-For a list of regions where Aurora is available, see [Availability for Amazon Aurora MySQL](Concepts.RegionsAndAvailabilityZones.md#Aurora.AuroraMySQL.Availability)\.
+For a list of regions where Aurora is available, see [Amazon Aurora](https://docs.aws.amazon.com/general/latest/gr/rande.html#aurora) in the *AWS General Reference*\.
 
 When you create an Aurora Read Replica of a MySQL DB instance, Amazon RDS creates a DB snapshot of your source MySQL DB instance \(private to Amazon RDS, and incurring no charges\)\. Amazon RDS then migrates the data from the DB snapshot to the Aurora Read Replica\. After the data from the DB snapshot has been migrated to the new Aurora MySQL DB cluster, Amazon RDS starts replication between your MySQL DB instance and the Aurora MySQL DB cluster\. If your MySQL DB instance contains tables that use storage engines other than InnoDB, or that use compressed row format, you can speed up the process of creating an Aurora Read Replica by altering those tables to use the InnoDB storage engine and dynamic row format before you create your Aurora Read Replica\. For more information about the process of copying a MySQL DB snapshot to an Aurora MySQL DB cluster, see [Migrating Data from a MySQL DB Instance to an Amazon Aurora MySQL DB Cluster by Using a DB Snapshot](AuroraMySQL.Migrating.RDSMySQL.md)\.
 
@@ -13,7 +13,7 @@ You can only have one Aurora Read Replica for a MySQL DB instance\.
 **Note**  
 Replication issues can arise due to feature differences between Amazon Aurora MySQL and the MySQL database engine version of your RDS MySQL DB instance that is the replication master\. If you encounter an error, you can find help in the [Amazon RDS Community Forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
 
-For more information on MySQL Read Replicas, see [ Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide//USER_ReadRepl.html)\.
+For more information on MySQL Read Replicas, see [ Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide//USER_ReadRepl.html)\.
 
 ## Creating an Aurora Read Replica<a name="AuroraMySQL.Migrating.RDSMySQL.Replica.Create"></a>
 
@@ -36,7 +36,7 @@ You can create an Aurora Read Replica for a MySQL DB instance by using the conso
 
 ### CLI<a name="AuroraMySQL.Migrating.RDSMySQL.Replica.Create.CLI"></a>
 
-To create an Aurora Read Replica from a source MySQL DB instance, use the [http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and [ `create-db-instance`](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI commands to create a new Aurora MySQL DB cluster\. When you call the `create-db-cluster` command, include the `--replication-source-identifier` parameter to identify the Amazon Resource Name \(ARN\) for the source MySQL DB instance\. For more information about Amazon RDS ARNs, see [Amazon Relational Database Service \(Amazon RDS\)](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-rds)\.
+To create an Aurora Read Replica from a source MySQL DB instance, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and [ `create-db-instance`](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI commands to create a new Aurora MySQL DB cluster\. When you call the `create-db-cluster` command, include the `--replication-source-identifier` parameter to identify the Amazon Resource Name \(ARN\) for the source MySQL DB instance\. For more information about Amazon RDS ARNs, see [Amazon Relational Database Service \(Amazon RDS\)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-rds)\.
 
 Don't specify the master username, master password, or database name as the Aurora Read Replica uses the same master username, master password, and database name as the source MySQL DB instance\. 
 
@@ -58,7 +58,7 @@ aws rds create-db-cluster --db-cluster-identifier sample-replica-cluster --engin
 
 If you use the console to create an Aurora Read Replica, then Amazon RDS automatically creates the primary instance for your DB cluster Aurora Read Replica\. If you use the AWS CLI to create an Aurora Read Replica, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
 
-You can create a primary instance for your DB cluster by using the [http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command with the following parameters\.
+You can create a primary instance for your DB cluster by using the [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command with the following parameters\.
 + `--db-cluster-identifier`
 
   The name of your DB cluster\.
@@ -94,9 +94,9 @@ aws rds create-db-instance \
 
 ### API<a name="Aurora.Migration.RDSMySQL.Create.API"></a>
 
-To create an Aurora Read Replica from a source MySQL DB instance, use the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) Amazon RDS API commands to create a new Aurora DB cluster and primary instance\. Do not specify the master username, master password, or database name as the Aurora Read Replica uses the same master username, master password, and database name as the source MySQL DB instance\. 
+To create an Aurora Read Replica from a source MySQL DB instance, use the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) Amazon RDS API commands to create a new Aurora DB cluster and primary instance\. Do not specify the master username, master password, or database name as the Aurora Read Replica uses the same master username, master password, and database name as the source MySQL DB instance\. 
 
-You can create a new Aurora DB cluster for an Aurora Read Replica from a source MySQL DB instance by using the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) Amazon RDS API command with the following parameters:
+You can create a new Aurora DB cluster for an Aurora Read Replica from a source MySQL DB instance by using the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) Amazon RDS API command with the following parameters:
 + `DBClusterIdentifier`
 
   The name of the DB cluster to create\.
@@ -113,7 +113,7 @@ You can create a new Aurora DB cluster for an Aurora Read Replica from a source 
 You can't create an unencrypted DB cluster from an encrypted MySQL DB instance\.
 + `ReplicationSourceIdentifier`
 
-  The Amazon Resource Name \(ARN\) for the source MySQL DB instance\. For more information about Amazon RDS ARNs, see [Amazon Relational Database Service \(Amazon RDS\)](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-rds)\. 
+  The Amazon Resource Name \(ARN\) for the source MySQL DB instance\. For more information about Amazon RDS ARNs, see [Amazon Relational Database Service \(Amazon RDS\)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-rds)\. 
 + `VpcSecurityGroupIds`
 
   The list of EC2 VPC security groups to associate with this DB cluster\.
@@ -142,7 +142,7 @@ https://rds.us-east-1.amazonaws.com/
 
 If you use the console to create an Aurora Read Replica, then Amazon RDS automatically creates the primary instance for your DB cluster Aurora Read Replica\. If you use the AWS CLI to create an Aurora Read Replica, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
 
-You can create a primary instance for your DB cluster by using the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) Amazon RDS API command with the following parameters:
+You can create a primary instance for your DB cluster by using the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) Amazon RDS API command with the following parameters:
 + `DBClusterIdentifier`
 
   The name of your DB cluster\.
@@ -192,11 +192,11 @@ You can view the MySQL to Aurora MySQL replication relationships for your Aurora
 
 ### CLI<a name="AuroraMySQL.Migrating.RDSMySQL.Replica.View.CLI"></a>
 
-To view the MySQL to Aurora MySQL replication relationships for your Aurora MySQL DB clusters by using the AWS CLI, use the [http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) and [http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) commands\. 
+To view the MySQL to Aurora MySQL replication relationships for your Aurora MySQL DB clusters by using the AWS CLI, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) and [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) commands\. 
 
-To determine which MySQL DB instance is the master, use the [http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) and specify the cluster identifier of the Aurora Read Replica for the `--db-cluster-identifier` option\. Refer to the `ReplicationSourceIdentifier` element in the output for the ARN of the DB instance that is the replication master\. 
+To determine which MySQL DB instance is the master, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) and specify the cluster identifier of the Aurora Read Replica for the `--db-cluster-identifier` option\. Refer to the `ReplicationSourceIdentifier` element in the output for the ARN of the DB instance that is the replication master\. 
 
-To determine which DB cluster is the Aurora Read Replica, use the [http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) and specify the instance identifier of the MySQL DB instance for the `--db-instance-identifier` option\. Refer to the `ReadReplicaDBClusterIdentifiers` element in the output for the DB cluster identifier of the Aurora Read Replica\. 
+To determine which DB cluster is the Aurora Read Replica, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) and specify the instance identifier of the MySQL DB instance for the `--db-instance-identifier` option\. Refer to the `ReadReplicaDBClusterIdentifiers` element in the output for the DB cluster identifier of the Aurora Read Replica\. 
 
 **Example**  
 For Linux, OS X, or Unix:  
@@ -224,7 +224,7 @@ aws rds describe-db-instances ^
 
 ## Promoting an Aurora Read Replica<a name="AuroraMySQL.Migrating.RDSMySQL.Replica.Promote"></a>
 
-After migration completes, you can promote the Aurora Read Replica to a stand\-alone DB cluster and direct your client applications to the endpoint for the Aurora Read Replica\. For more information on the Aurora endpoints, see [Amazon Aurora Endpoints](Aurora.Overview.Endpoints.md)\. Promotion should complete fairly quickly, and you can read from and write to the Aurora Read Replica during promotion\. However, you can't delete the master MySQL DB instance or unlink the DB Instance and the Aurora Read Replica during this time\.
+After migration completes, you can promote the Aurora Read Replica to a stand\-alone DB cluster and direct your client applications to the endpoint for the Aurora Read Replica\. For more information on the Aurora endpoints, see [Amazon Aurora Connection Management](Aurora.Overview.Endpoints.md)\. Promotion should complete fairly quickly, and you can read from and write to the Aurora Read Replica during promotion\. However, you can't delete the master MySQL DB instance or unlink the DB Instance and the Aurora Read Replica during this time\.
 
 Before you promote your Aurora Read Replica, stop any transactions from being written to the source MySQL DB instance, and then wait for the replica lag on the Aurora Read Replica to reach 0\. You can view the replica lag for an Aurora Read Replica by calling the `SHOW SLAVE STATUS` command on your Aurora Read Replica and reading the **Seconds behind master** value\. 
 
@@ -246,7 +246,7 @@ After you promote, confirm that the promotion has completed by choosing **Instan
 
 ### CLI<a name="AuroraMySQL.Migrating.RDSMySQL.Replica.Promote.CLI"></a>
 
-To promote an Aurora Read Replica to a stand\-alone DB cluster, use the [http://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html](http://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html) AWS CLI command\. 
+To promote an Aurora Read Replica to a stand\-alone DB cluster, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html) AWS CLI command\. 
 
 **Example**  
 For Linux, OS X, or Unix:  

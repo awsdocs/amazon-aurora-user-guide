@@ -4,9 +4,9 @@ When you set up [access control](UsingWithRDS.IAM.md#UsingWithRDS.IAM.AccessCont
 
 The following lists each Amazon RDS API operation\. Included in the list are the corresponding actions for which you can grant permissions to perform the action, the AWS resource that you can grant the permissions for, and condition keys that you can include for fine\-grained access control\. You specify the actions in the policy's `Action` field, the resource value in the policy's `Resource` field, and conditions in the policy's `Condition` field\. For more information about conditions, see [Using IAM Policy Conditions for Fine\-Grained Access Control](UsingWithRDS.IAM.Conditions.md)\. 
 
-You can use AWS\-wide condition keys in your Amazon RDS policies to express conditions\. For a complete list of AWS\-wide keys, see [Available Keys](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\. 
+You can use AWS\-wide condition keys in your Amazon RDS policies to express conditions\. For a complete list of AWS\-wide keys, see [Available Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\. 
 
-You can test IAM policies with the IAM policy simulator\. It automatically provides a list of resources and parameters required for each AWS action, including Amazon RDS actions\. The IAM policy simulator determines the permissions required for each of the actions that you specify\. For information about the IAM policy simulator, see [ Testing IAM Policies with the IAM Policy Simulator](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html) in the *IAM User Guide*\. 
+You can test IAM policies with the IAM policy simulator\. It automatically provides a list of resources and parameters required for each AWS action, including Amazon RDS actions\. The IAM policy simulator determines the permissions required for each of the actions that you specify\. For information about the IAM policy simulator, see [ Testing IAM Policies with the IAM Policy Simulator](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html) in the *IAM User Guide*\. 
 
 **Note**  
 To specify an action, use the `rds:` prefix followed by the API operation name \(for example, `rds:CreateDBInstance`\)\.

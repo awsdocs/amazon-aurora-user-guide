@@ -5,7 +5,7 @@ This topic describes the resource limits and naming constraints for Amazon Auror
 **Topics**
 + [Limits in Amazon RDS](#RDS_Limits.Limits)
 + [Naming Constraints in Amazon RDS](#RDS_Limits.Constraints)
-+ [File Size Limits in Amazon RDS](#RDS_Limits.FileSize)
++ [Amazon Aurora File Size Limits](#RDS_Limits.FileSize.Aurora)
 
 ## Limits in Amazon RDS<a name="RDS_Limits.Limits"></a>
 
@@ -25,7 +25,6 @@ The following table lists the resources and their limits per region\.
 | Manual cluster snapshots | 100 | 
 | Option groups | 20 | 
 | Parameter groups | 50 | 
-| Read replicas per master | 5 | 
 | Reserved instances | 40 | 
 | Rules per DB security group | 20 | 
 | Rules per VPC security group | 50 inbound 50 outbound | 
@@ -34,7 +33,6 @@ The following table lists the resources and their limits per region\.
 | Subnet groups | 50 | 
 | Subnets per subnet group | 20 | 
 | Tags per resource | 50 | 
-| Total storage for all DB instances | 100 TiB | 
 
 1\. By default, you can have up to a total of 40 Amazon RDS DB instances\. If your application requires more DB instances, you can request additional DB instances via this request form [Request RDS DB instance limit](https://aws.amazon.com/contact-us/request-to-increase-the-amazon-rds-db-instance-limit/)\.
 
@@ -54,8 +52,6 @@ The following table describes naming constraints in Amazon RDS\.
 | DB parameter group name |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)  | 
 |  DB subnet group name  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)  | 
 
-## File Size Limits in Amazon RDS<a name="RDS_Limits.FileSize"></a>
-
-### Aurora File Size Limits in Amazon RDS<a name="RDS_Limits.FileSize.Aurora"></a>
+## Amazon Aurora File Size Limits<a name="RDS_Limits.FileSize.Aurora"></a>
 
 With Aurora, the table size limit is only constrained by the size of the Aurora cluster volume, which has a maximum of 64 tebibytes \(TiB\)\. As a result, the maximum table size for a table in an Aurora DB cluster is 64 TiB\. We recommend that you follow table design best practices, such as partitioning of large tables\.

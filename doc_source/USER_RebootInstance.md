@@ -6,6 +6,9 @@ Rebooting a DB instance restarts the database engine service\. Rebooting a DB in
 
 You can't reboot your DB instance if it is not in the "Available" state\. Your database can be unavailable for several reasons, such as an in\-progress backup, a previously requested modification, or a maintenance\-window action\. 
 
+**Important**  
+When you reboot the primary instance of an Amazon Aurora DB cluster, RDS also automatically restarts all of the Aurora Replicas in that DB cluster\. When you reboot the primary instance of an Aurora DB cluster, no failover occurs\. When you reboot an Aurora Replica, no failover occurs\. To failover an Aurora DB cluster, call the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html), or the API action [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html)\. 
+
 ## AWS Management Console<a name="USER_RebootInstance.Console"></a>
 
 **To reboot a DB instance**
@@ -24,7 +27,7 @@ You can't reboot your DB instance if it is not in the "Available" state\. Your d
 
 ## CLI<a name="USER_RebootInstance.CLI"></a>
 
-To reboot a DB instance by using the AWS CLI, call the [http://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html) command\. 
+To reboot a DB instance by using the AWS CLI, call the [https://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html) command\. 
 
 **Example Simple Reboot**  
 For Linux, OS X, or Unix:  
@@ -42,4 +45,4 @@ For Windows:
 
 ## API<a name="USER_RebootInstance.API"></a>
 
-To reboot a DB instance by using the Amazon RDS API, call the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) action\. 
+To reboot a DB instance by using the Amazon RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) action\. 

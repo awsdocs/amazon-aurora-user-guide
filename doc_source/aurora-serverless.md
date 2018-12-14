@@ -49,7 +49,7 @@ The following limitations apply to Aurora Serverless:
 + Aurora Serverless is only available for Aurora with MySQL 5\.6 compatibility\.
 + The port number for connections must be `3306`\.
 + You can't give an Aurora Serverless DB cluster a public IP address\. You can access an Aurora Serverless DB cluster only from within a virtual private cloud \(VPC\) based on the Amazon VPC service\.
-+ You can't access an Aurora Serverless DB cluster's endpoint through an AWS VPN connection or an inter\-region VPC peering connection\. There are limitations in accessing a cluster's endpoint through an intra\-region VPC peering connection; for more information, see [Interface VPC Endpoints \(AWS PrivateLink\)](http://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html) in the *Amazon VPC User Guide*\. However, you can access an Aurora Serverless cluster's endpoint through an AWS Direct Connect connection\. 
++ You can't access an Aurora Serverless DB cluster's endpoint through an AWS VPN connection or an inter\-region VPC peering connection\. There are limitations in accessing a cluster's endpoint through an intra\-region VPC peering connection; for more information, see [Interface VPC Endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html) in the *Amazon VPC User Guide*\. However, you can access an Aurora Serverless cluster's endpoint through an AWS Direct Connect connection\. 
 + A DB subnet group used by Aurora Serverless can’t have more than one subnet in the same Availability Zone\.
 + Changes to a subnet group used by an Aurora Serverless DB cluster are not applied to the cluster\.
 + Aurora Serverless doesn't support the following features:
@@ -63,18 +63,49 @@ The following limitations apply to Aurora Serverless:
   + [Cross\-region read replicas](AuroraMySQL.Replication.CrossRegion.md)
   + [Restoring a snapshot from a MySQL DB instance](AuroraMySQL.Migrating.RDSMySQL.md)
   + [Migrating backup files from Amazon S3](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)
-  + [Connecting to a DB cluster with Secure Socket Layer \(SSL\)](Aurora.Connecting.md#Aurora.Connecting.AuroraMySQL)
 
 **Note**  
-You can access an Aurora Serverless DB cluster from AWS Lambda\. For more information about working with AWS Lambda, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](http://docs.aws.amazon.com/lambda/latest/dg/vpc.html) in the *AWS Lambda Developer Guide*\.
+You can access an Aurora Serverless DB cluster from AWS Lambda\. For more information about working with AWS Lambda, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](https://docs.aws.amazon.com/lambda/latest/dg/vpc.html) in the *AWS Lambda Developer Guide*\.
+
+## TLS/SSL for Aurora Serverless<a name="aurora-serverless.tls"></a>
+
+ You can connect to Aurora Serverless clusters using the Transport Layer Security / Secure Sockets Layer \(TLS/SSL\) protocol\. You use the same general procedure described in [Connecting to an Amazon Aurora MySQL DB Cluster](Aurora.Connecting.md#Aurora.Connecting.AuroraMySQL)\. You use certificates from the [AWS Certificate Manager \(ACM\)](https://aws.amazon.com/certificate-manager/faqs/)\. 
+
+ You can encrypt traffic between your client application and the Aurora Serverless VPC endpoint using the TLS 1\.0, 1\.1, or 1\.2 protocol\. However, you don't need to configure the Aurora Serverless DB for TLS\. In particular, don't use the `REQUIRE` clause on your database user privileges for SSL\. Doing so prevents that user from connecting\. Aurora Serverless ensures that your session uses TLS between your client and the Aurora Serverless VPC endpoint if you specify the requirement on the client side with the `--ssl-mode` parameter\. 
+
+ By default, MySQL client programs will establish an encrypted connection with Aurora Serverless, with further control available through the `--ssl-mode` option\. From the client side, Aurora Serverless supports all SSL modes\. 
+
+ For the `mysql` client, the SSL modes are: 
+
+**PREFERRED**  
+ SSL is the first choice, but not required\. 
+
+**DISABLED**  
+ No SSL allowed\. 
+
+**REQUIRED**  
+ Enforce SSL\. 
+
+**VERIFY\_CA**  
+ Enforce SSL and verify CA\. 
+
+**VERIFY\_IDENTITY**  
+ Enforce SSL and verify CA and CA hostname\. 
+
+ For the `mysql` client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY` you must also specify the `--ssl-ca` option pointing to a certificate authority \(CA\) in PEM format\. For a PEM file that you can use, you can download the [Amazon Root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem)\. 
+
+ Aurora Serverless uses wildcard certificates\. If you use the `mysql` client to connect, currently you must use the MySQL 8\.0\-compatible `mysql` command\. 
 
 **Topics**
 + [Advantages of Aurora Serverless](#aurora-serverless.advantages)
 + [Use Cases for Aurora Serverless](#aurora-serverless.use-cases)
 + [Limitations of Aurora Serverless](#aurora-serverless.limitations)
++ [TLS/SSL for Aurora Serverless](#aurora-serverless.tls)
 + [How Aurora Serverless Works](aurora-serverless.how-it-works.md)
 + [Creating an Aurora Serverless DB Cluster](aurora-serverless.create.md)
 + [Restoring an Aurora Serverless DB Cluster](aurora-serverless.restorefromsnapshot.md)
 + [Modifying an Aurora Serverless DB Cluster](aurora-serverless.modifying.md)
 + [Setting the Capacity of an Aurora Serverless DB Cluster](aurora-serverless.setting-capacity.md)
 + [Viewing Aurora Serverless DB Clusters](aurora-serverless.viewing.md)
++ [Using the Query Editor for Aurora Serverless](query-editor.md)
++ [Using the Data API for Aurora Serverless](data-api.md)

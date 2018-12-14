@@ -1,16 +1,19 @@
 # Managing Performance and Scaling for Aurora DB Clusters<a name="Aurora.Managing.Performance"></a>
 
 You can use the following options to manage performance and scaling for Aurora DB clusters and DB instances:
+
+**Topics**
 + [Storage Scaling](#Aurora.Managing.Performance.StorageScaling)
 + [Instance Scaling](#Aurora.Managing.Performance.InstanceScaling)
 + [Read Scaling](#Aurora.Managing.Performance.ReadScaling)
 + [Managing Connections](#Aurora.Managing.MaxConnections)
++ [Managing query execution plans](#Aurora.Managing.Optimizing)
 
 ## Storage Scaling<a name="Aurora.Managing.Performance.StorageScaling"></a>
 
 Aurora storage automatically scales with the data in your cluster volume\. As your data grows, your cluster volume storage grows in 10 gibibyte \(GiB\) increments up to 64 TiB\.
 
-The size of your cluster volume is checked on an hourly basis to determine your storage costs\. For pricing information, see the [Amazon RDS product page](https://aws.amazon.com/rds/pricing)\.
+The size of your cluster volume is checked on an hourly basis to determine your storage costs\. For pricing information, see the [Aurora pricing page](https://aws.amazon.com/rds/aurora/pricing)\.
 
 **Note**  
  When Aurora data is removed, such as by dropping a table or partition, the overall allocated space remains the same\. The free space is reused automatically when data volume increases in the future\. Because storage costs are based on the storage "high water mark" \(the maximum amount that was allocated for the Aurora cluster at any point in time\), you can manage costs by avoiding ETL practices that create large volumes of temporary information, or that load large volumes of new data prior to removing unneeded older data\.   
@@ -41,3 +44,7 @@ The maximum number of connections allowed to an Aurora DB instance is determined
 | --- | --- | 
 |  Amazon Aurora MySQL  |  See [Maximum Connections to an Aurora MySQL DB Instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections)  | 
 |  Amazon Aurora PostgreSQL  |  See [Maximum Connections to an Aurora PostgreSQL DB Instance](AuroraPostgreSQL.Managing.md#AuroraPostgreSQL.Managing.MaxConnections)  | 
+
+## Managing query execution plans<a name="Aurora.Managing.Optimizing"></a>
+
+Query plan management for Aurora PostgreSQL gives you control over which plans the optimizer will execute\. For more information, see [Managing Query Execution Plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)\.

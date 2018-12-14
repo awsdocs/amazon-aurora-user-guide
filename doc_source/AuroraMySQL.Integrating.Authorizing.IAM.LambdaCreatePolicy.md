@@ -40,7 +40,7 @@ You can use the following steps to create an IAM policy that provides the minimu
 
    Specify the Lambda function to allow access to\. For instance, if you want to allow Aurora to access a Lambda function named `example_function`, then set the ARN value to `arn:aws:lambda:::function:example_function`\. 
 
-   For more information on how to define an access policy for AWS Lambda, see [Authentication and Access Control for AWS Lambda](http://docs.aws.amazon.com/lambda/latest/dg/lambda-auth-and-access-control.html)\.
+   For more information on how to define an access policy for AWS Lambda, see [Authentication and Access Control for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/lambda-auth-and-access-control.html)\.
 
 1. Optionally, choose **Add additional permissions** to add another AWS Lambda function to the policy, and repeat the previous steps for the function\.
 **Note**  

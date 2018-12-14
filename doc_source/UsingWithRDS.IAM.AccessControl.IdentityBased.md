@@ -40,7 +40,7 @@ The following is an example of an IAM policy:
 ```
 
 The policy includes a single statement that specifies the following permissions for the IAM user:
-+ The policy allows the IAM user to create a DB instance using the [CreateDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) API action \(this also applies to the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command and the AWS Management Console\)\.
++ The policy allows the IAM user to create a DB instance using the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) API action \(this also applies to the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command and the AWS Management Console\)\.
 + The `Resource` element specifies that the user can perform actions on or with resources\. You specify resources using an Amazon Resources Name \(ARN\)\. This ARN includes the name of the service that the resource belongs to \(`rds`\), the AWS Region \(`*` indicates any region in this example\), the user account number \(`123456789012` is the user ID in this example\), and the type of resource\. For more information about creating ARNs, see [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)\.
 
   The `Resource` element in the example specifies the following policy constraints on resources for the user:
@@ -64,7 +64,7 @@ You don't need to allow minimum console permissions for users that are making ca
 
 ## AWS Managed \(Predefined\) Policies for Amazon RDS<a name="UsingWithRDS.IAM.AccessControl.ManagedPolicies"></a>
 
-AWS addresses many common use cases by providing standalone IAM policies that are created and administered by AWS\. Managed policies grant necessary permissions for common use cases so you can avoid having to investigate what permissions are needed\. For more information, see [AWS Managed Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) in the *IAM User Guide*\.
+AWS addresses many common use cases by providing standalone IAM policies that are created and administered by AWS\. Managed policies grant necessary permissions for common use cases so you can avoid having to investigate what permissions are needed\. For more information, see [AWS Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) in the *IAM User Guide*\.
 
 The following AWS managed policies, which you can attach to users in your account, are specific to Amazon RDS:
 + **AmazonRDSReadOnlyAccess** – Grants read\-only access to all Amazon RDS resources for the root AWS account\.

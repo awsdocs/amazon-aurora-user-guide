@@ -3,13 +3,13 @@
 You can connect from the command line to an Aurora DB cluster with the AWS SDK for Java as described following\.
 
 **Topics**
-+ [Generating an Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken)
-+ [Manually Constructing an Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken2)
++ [Generating an IAM Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken)
++ [Manually Constructing an IAM Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken2)
 + [Connecting to a DB Cluster](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken.Connect)
 
-## Generating an Authentication Token<a name="UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken"></a>
+## Generating an IAM Authentication Token<a name="UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken"></a>
 
-If you are writing programs using the AWS SDK for Java, you can get a signed authentication token using the `RdsIamAuthTokenGenerator` class\. Using this class requires that you provide AWS credentials\. To do this, you create an instance of the `DefaultAWSCredentialsProviderChain` class\. `DefaultAWSCredentialsProviderChain` uses the first AWS access key and secret key that it finds in the [default credential provider chain](http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default)\. For more information about AWS access keys, see [Managing Access Keys for IAM Users](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)\.
+If you are writing programs using the AWS SDK for Java, you can get a signed authentication token using the `RdsIamAuthTokenGenerator` class\. Using this class requires that you provide AWS credentials\. To do this, you create an instance of the `DefaultAWSCredentialsProviderChain` class\. `DefaultAWSCredentialsProviderChain` uses the first AWS access key and secret key that it finds in the [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default)\. For more information about AWS access keys, see [Managing Access Keys for IAM Users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)\.
 
 After you create an instance of `RdsIamAuthTokenGenerator`, you can call the `getAuthToken` method to obtain a signed token\. Provide the AWS Region, host name, port number, and user name\. The following code example illustrates how to do this\.
 
@@ -52,9 +52,9 @@ public class GenerateRDSAuthToken {
 }
 ```
 
-## Manually Constructing an Authentication Token<a name="UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken2"></a>
+## Manually Constructing an IAM Authentication Token<a name="UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken2"></a>
 
-In Java, the easiest way to generate an authentication token is to use `RdsIamAuthTokenGenerator`\. This class creates an authentication token for you, and then signs it using AWS signature version 4\. For more information, see [Signature Version 4 Signing Process](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *AWS General Reference\.*
+In Java, the easiest way to generate an authentication token is to use `RdsIamAuthTokenGenerator`\. This class creates an authentication token for you, and then signs it using AWS signature version 4\. For more information, see [Signature Version 4 Signing Process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *AWS General Reference\.*
 
 However, you can also construct and sign an authentication token manually, as shown in the following code example\.
 
@@ -228,19 +228,19 @@ public class CreateRDSAuthTokenManually {
 
 ## Connecting to a DB Cluster<a name="UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken.Connect"></a>
 
-The following code example shows how to generate an authentication token, and then use it to connect to an Amazon RDS instance running MySQL\.
+The following code example shows how to generate an authentication token, and then use it to connect to a cluster running MySQL\. 
 
-To run this code example, you need the AWS SDK for Java \([https://aws\.amazon\.com/sdk\-for\-java](https://aws.amazon.com/sdk-for-java)\)\. In addition, you need the following:
+To run this code example, you need the [AWS SDK for Java](aws.amazon.com/sdk-for-java), found on the AWS site\. In addition, you need the following:
 + MySQL Connector/J\. This code example was tested with `mysql-connector-java-5.1.33-bin.jar`\.
-+ An intermediate certificate for Amazon RDS that is specific to an AWS Region\. \(For more information, see [Using SSL to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\.\) At runtime, the class loader looks for the certificate in the same directory as this Java code example, so that the class loader can find it\.
++ An intermediate certificate for Amazon Aurora that is specific to an AWS Region\. \(For more information, see [Using SSL to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\.\) At runtime, the class loader looks for the certificate in the same directory as this Java code example, so that the class loader can find it\.
 + Modify the values of the following variables as needed:
   + `RDS_INSTANCE_HOSTNAME` – The host name of the DB cluster that you want to access\.
-  + `RDS_INSTANCE_PORT` – The port number used for connecting to your DB cluster\.
+  + `RDS_INSTANCE_PORT` – The port number used for connecting to your PostgreSQL DB cluster\.
   + `REGION_NAME` – The AWS Region where the DB cluster is running\.
   + `DB_USER` – The database account that you want to access\.
   + `SSL_CERTIFICATE` – An SSL certificate for Amazon RDS that is specific to an AWS Region\. To download a certificate for your AWS Region, see [Intermediate Certificates](UsingWithRDS.SSL.md#UsingWithRDS.SSL.IntermediateCertificates)\. Place the SSL certificate in the same directory as this Java program file, so that the class loader can find the certificate at runtime\.
 
-This code example obtains AWS credentials from the [default credential provider chain](http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default)\.
+This code example obtains AWS credentials from the [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default)\.
 
 ```
 package com.amazonaws.samples;
@@ -302,6 +302,9 @@ public class IAMDatabaseAuthenticationTester {
         //close the connection
         stmt.close();
         connection.close();
+        
+        clearSslProperties();
+        
     }
 
     /**
@@ -396,11 +399,11 @@ public class IAMDatabaseAuthenticationTester {
         return keyStoreFile;
     }
     
-        /**
+    /**
      * This method clears the SSL properties.
      * @throws Exception
      */
-    private static void setSslProperties() throws Exception {
+    private static void clearSslProperties() throws Exception {
            System.clearProperty("javax.net.ssl.trustStore");
            System.clearProperty("javax.net.ssl.trustStoreType");
            System.clearProperty("javax.net.ssl.trustStorePassword"); 

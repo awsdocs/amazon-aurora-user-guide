@@ -80,7 +80,7 @@ The following Amazon Aurora MySQL features are supported in Aurora MySQL 5\.6, b
 
 Currently, Aurora MySQL 5\.7 does not support features added in Aurora MySQL version 1\.16 and later\. For information about Aurora MySQL version 1\.16, see [Amazon Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
 
-The performance schema is disabled for Aurora MySQL 5\.7\.
+The performance schema isn't available for early release of Aurora MySQL 5\.7\. Upgrade to Aurora 2\.03 or higher for performance schema support\.
 
 ## Comparison of Aurora MySQL 5\.7 and MySQL 5\.7<a name="Aurora.AuroraMySQL.CompareMySQL57"></a>
 

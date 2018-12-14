@@ -1,6 +1,10 @@
 # Replication with Amazon Aurora MySQL<a name="AuroraMySQL.Replication"></a>
 
- The Aurora MySQL replication features are key to the high availability and performance of your cluster\. Aurora makes it easy to create or resize clusters with up to fifteen Aurora Replicas\. All the replicas work from the same underlying data\. If some database instances go offline, others remain available to continue processing queries or to take over as the writer if needed\. Aurora automatically spreads your read\-only connections across multiple database instances, helping an Aurora cluster to support query\-intensive workloads\. Following, you can find information about how Aurora MySQL replication works and how to fine\-tune replication settings for best availability and performance\. 
+ The Aurora MySQL replication features are key to the high availability and performance of your cluster\. Aurora makes it easy to create or resize clusters with up to 15 Aurora Replicas\. 
+
+ All the replicas work from the same underlying data\. If some database instances go offline, others remain available to continue processing queries or to take over as the writer if needed\. Aurora automatically spreads your read\-only connections across multiple database instances, helping an Aurora cluster to support query\-intensive workloads\. 
+
+ Following, you can find information about how Aurora MySQL replication works and how to fine\-tune replication settings for best availability and performance\. 
 
 **Topics**
 + [Using Aurora Replicas](#AuroraMySQL.Replication.Replicas)
@@ -17,7 +21,7 @@ Aurora Replicas are independent endpoints in an Aurora DB cluster, best used for
 
 Aurora Replicas work well for read scaling because they are fully dedicated to read operations on your cluster volume\. Write operations are managed by the primary instance\. Because the cluster volume is shared among all instances in your Aurora MySQL DB cluster, no additional work is required to replicate a copy of the data for each Aurora Replica\. In contrast, MySQL Read Replicas must replay, on a single thread, all write operations from the master DB instance to their local data store\. This limitation can affect the ability of MySQL Read Replicas to support large volumes of read traffic\.
 
-With Aurora MySQL, when an Aurora Replica is deleted, its instance endpoint is removed immediately, and the Aurora Replica is removed from the reader endpoint\. If there are statements executing on the Aurora Replica that is being deleted, there is a five minute grace period\. Existing statements can finish gracefully during the grace period\. When the grace period ends, the Aurora Replica is shut down and deleted\.
+With Aurora MySQL, when an Aurora Replica is deleted, its instance endpoint is removed immediately, and the Aurora Replica is removed from the reader endpoint\. If there are statements executing on the Aurora Replica that is being deleted, there is a three minute grace period\. Existing statements can finish gracefully during the grace period\. When the grace period ends, the Aurora Replica is shut down and deleted\.
 
 **Important**  
 Aurora Replicas for Aurora MySQL always use the `REPEATABLE READ` default transaction isolation level for operations on InnoDB tables\. You can use the `SET TRANSACTION ISOLATION LEVEL` command to change the transaction level only for the primary instance of an Aurora MySQL DB cluster\. This restriction avoids user\-level locks on Aurora Replicas, and allows Aurora Replicas to scale to support thousands of active user connections while still keeping replica lag to a minimum\.
@@ -26,7 +30,7 @@ Aurora Replicas for Aurora MySQL always use the `REPEATABLE READ` default transa
 DDL statements executed on the primary instance might interrupt database connections on the associated Aurora Replicas\. If an Aurora Replica connection is actively using a database object, such as a table, and that object is modified on the primary instance using a DDL statement, the Aurora Replica connection is interrupted\.
 
 **Note**  
-The China \(Ningxia\) region does not support cross\-region read replicas or autoscaling\.
+The China \(Ningxia\) region does not support cross\-region read replicas\.
 
 ## Replication Options for Amazon Aurora MySQL<a name="AuroraMySQL.Replication.Options"></a>
 

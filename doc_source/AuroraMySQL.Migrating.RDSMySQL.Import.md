@@ -21,9 +21,9 @@ The general steps you must take are as follows:
 
 1. Determine the amount of space to provision for your Aurora MySQL DB cluster\. For more information, see [How Much Space Do I Need?](#AuroraMySQL.Migrating.RDSMySQL.Space)
 
-1. Use the console to create the snapshot in the AWS Region where the Amazon RDS MySQL instance is located\. For information about creating a DB snapshot, see [Creating a DB Snapshot](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
+1. Use the console to create the snapshot in the AWS Region where the Amazon RDS MySQL instance is located\. For information about creating a DB snapshot, see [Creating a DB Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
 
-1. If the DB snapshot is not in the same AWS Region as your DB cluster, use the Amazon RDS console to copy the DB snapshot to that AWS Region\. For information about copying a DB snapshot, see [Copying a DB Snapshot](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
+1. If the DB snapshot is not in the same AWS Region as your DB cluster, use the Amazon RDS console to copy the DB snapshot to that AWS Region\. For information about copying a DB snapshot, see [Copying a DB Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
 
 1. Use the console to migrate the DB snapshot and create an Aurora MySQL DB cluster with the same databases as the original MySQL DB instance\. 
 
@@ -126,9 +126,9 @@ The script produces output similar to the output in the following example\. The 
 
 ## AWS Management Console<a name="AuroraMySQL.Migrating.RDSMySQL.Import.Console"></a>
 
-You can migrate a DB snapshot of an Amazon RDS MySQL DB instance to create an Aurora MySQL DB cluster\. The new Aurora MySQL DB cluster is populated with the data from the original Amazon RDS MySQL DB instance\. The DB snapshot must have been made from an Amazon RDS DB instance running MySQL version 5\.6 or 5\.7\. For information about creating a DB snapshot, see [Creating a DB Snapshot](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
+You can migrate a DB snapshot of an Amazon RDS MySQL DB instance to create an Aurora MySQL DB cluster\. The new Aurora MySQL DB cluster is populated with the data from the original Amazon RDS MySQL DB instance\. The DB snapshot must have been made from an Amazon RDS DB instance running MySQL version 5\.6 or 5\.7\. For information about creating a DB snapshot, see [Creating a DB Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
 
-If the DB snapshot is not in the AWS Region where you want to locate your data, use the Amazon RDS console to copy the DB snapshot to that AWS Region\. For information about copying a DB snapshot, see [Copying a DB Snapshot](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
+If the DB snapshot is not in the AWS Region where you want to locate your data, use the Amazon RDS console to copy the DB snapshot to that AWS Region\. For information about copying a DB snapshot, see [Copying a DB Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
 
 When you migrate the DB snapshot by using the AWS Management Console, the console takes the actions necessary to create both the DB cluster and the primary instance\.
 
@@ -185,9 +185,9 @@ You might be behind a corporate firewall that doesn't allow access to default po
      If your DB snapshot isn't encrypted, specify an encryption key to have your DB cluster encrypted at rest\.
 
      If your DB snapshot is encrypted, specify an encryption key to have your DB cluster encrypted at rest using the specified encryption key\. You can specify the encryption key used by the DB snapshot or a different key\. You can't create an unencrypted DB cluster from an encrypted DB snapshot\.
-   + **Auto Minor Version Upgrade**: Select **Yes** if you want to enable your Aurora MySQL DB cluster to receive minor MySQL DB engine version upgrades automatically when they become available\.
+   + **Auto Minor Version Upgrade**: This setting doesn't apply to Aurora MySQL DB clusters\.
 
-     The **Auto Minor Version Upgrade** option only applies to upgrades to MySQL minor engine versions for your Amazon Aurora MySQL DB cluster\. It doesn't apply to regular patches applied to maintain system stability\.
+     For more information about engine updates for Aurora MySQL, see [Amazon Aurora MySQL Database Engine Updates](AuroraMySQL.Updates.md)\.
 
 1. Choose **Migrate** to migrate your DB snapshot\. 
 
@@ -195,11 +195,11 @@ You might be behind a corporate firewall that doesn't allow access to default po
 
 ## CLI<a name="USER_ImportAuroraCluster.CLI"></a>
 
-You can migrate a DB snapshot of an Amazon RDS MySQL DB instance to create an Aurora DB cluster\. The new DB cluster is then populated with the data from the DB snapshot\. The DB snapshot must come from an Amazon RDS DB instance running MySQL version 5\.6 or 5\.7\. For more information, see [Creating a DB Snapshot](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
+You can migrate a DB snapshot of an Amazon RDS MySQL DB instance to create an Aurora DB cluster\. The new DB cluster is then populated with the data from the DB snapshot\. The DB snapshot must come from an Amazon RDS DB instance running MySQL version 5\.6 or 5\.7\. For more information, see [Creating a DB Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
 
-If the DB snapshot is not in the AWS Region where you want to locate your data, copy the DB snapshot to that AWS Region\. For more information, see [Copying a DB Snapshot](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
+If the DB snapshot is not in the AWS Region where you want to locate your data, copy the DB snapshot to that AWS Region\. For more information, see [Copying a DB Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
 
-You can create an Aurora DB cluster from a DB snapshot of an Amazon RDS MySQL DB instance by using the [http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) command with the following parameters:
+You can create an Aurora DB cluster from a DB snapshot of an Amazon RDS MySQL DB instance by using the [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) command with the following parameters:
 + `--db-cluster-identifier`
 
   The name of the DB cluster to create\.
@@ -213,7 +213,7 @@ You can create an Aurora DB cluster from a DB snapshot of an Amazon RDS MySQL DB
 You can't create an unencrypted DB cluster from an encrypted DB snapshot\.
 + `--snapshot-identifier`
 
-  The Amazon Resource Name \(ARN\) of the DB snapshot to migrate\. For more information about Amazon RDS ARNs, see [Amazon Relational Database Service \(Amazon RDS\)](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-rds)\.
+  The Amazon Resource Name \(ARN\) of the DB snapshot to migrate\. For more information about Amazon RDS ARNs, see [Amazon Relational Database Service \(Amazon RDS\)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-rds)\.
 
 When you migrate the DB snapshot by using the `RestoreDBClusterFromSnapshot` command, the command creates both the DB cluster and the primary instance\.
 

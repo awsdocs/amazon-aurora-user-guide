@@ -6,61 +6,15 @@ Amazon operates state\-of\-the\-art, highly\-available data centers\. Although r
 
 ![\[Single AZ Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Con-AZ.png)
 
-It is important to remember that each AWS Region is completely independent\. Any Amazon RDS activity you initiate \(for example, creating database instances or listing available database instances\) runs only in your current default AWS Region\. The default AWS Region can be changed in the console, by setting the EC2\_REGION environment variable, or it can be overridden by using the `--region` parameter with the AWS Command Line Interface\. See [Configuring the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), specifically, the sections on Environment Variables and Command Line Options for more information\. 
+It is important to remember that each AWS Region is completely independent\. Any Amazon RDS activity you initiate \(for example, creating database instances or listing available database instances\) runs only in your current default AWS Region\. The default AWS Region can be changed in the console, by setting the EC2\_REGION environment variable, or it can be overridden by using the `--region` parameter with the AWS Command Line Interface\. See [Configuring the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), specifically, the sections on Environment Variables and Command Line Options for more information\. 
 
-Amazon RDS supports a special AWS Region called AWS GovCloud \(US\) that is designed to allow US government agencies and customers to move more sensitive workloads into the cloud\. AWS GovCloud \(US\) addresses the US government's specific regulatory and compliance requirements\. For more information about AWS GovCloud \(US\), see [What Is AWS GovCloud \(US\)?](http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/whatis.html) 
+Amazon RDS supports a special AWS Region called AWS GovCloud \(US\-West\) that is designed to allow US government agencies and customers to move more sensitive workloads into the cloud\. AWS GovCloud \(US\-West\) addresses the US government's specific regulatory and compliance requirements\. For more information about AWS GovCloud \(US\-West\), see [What Is AWS GovCloud \(US\-West\)?](https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/whatis.html) 
 
 To create or work with an Amazon RDS DB instance in a specific AWS Region, use the corresponding regional service endpoint\. 
 
 ## Availability<a name="Aurora.Overview.Availability"></a>
 
-Availability in AWS Regions for Amazon Aurora varies by database engine compatibility\.
-
-### Availability for Amazon Aurora MySQL<a name="Aurora.AuroraMySQL.Availability"></a>
-
-The following table shows the regions where Aurora MySQL is currently available\.
-
-
-| Region | Console Link | 
-| --- | --- | 
-| US East \(N\. Virginia\) | [https://console\.aws\.amazon\.com/rds/home?region=us\-east\-1](https://console.aws.amazon.com/rds/home?region=us-east-1) | 
-| US East \(Ohio\) | [https://console\.aws\.amazon\.com/rds/home?region=us\-east\-2](https://console.aws.amazon.com/rds/home?region=us-east-2) | 
-| US West \(N\. California\) | [https://console\.aws\.amazon\.com/rds/home?region=us\-west\-1](https://console.aws.amazon.com/rds/home?region=us-west-1) | 
-| US West \(Oregon\) | [https://console\.aws\.amazon\.com/rds/home?region=us\-west\-2](https://console.aws.amazon.com/rds/home?region=us-west-2) | 
-| Canada \(Central\) | [https://console\.aws\.amazon\.com/rds/home?region=ca\-central\-1](https://console.aws.amazon.com/rds/home?region=ca-central-1) | 
-| China \(Ningxia\) | [https://console\.aws\.amazon\.com/rds/home?region=cn\-northwest\-1](https://console.aws.amazon.com/rds/home?region=cn-northwest-1) | 
-| Asia Pacific \(Mumbai\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-south\-1](https://console.aws.amazon.com/rds/home?region=ap-south-1) | 
-| Asia Pacific \(Tokyo\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-northeast\-1](https://console.aws.amazon.com/rds/home?region=ap-northeast-1) | 
-| Asia Pacific \(Seoul\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-northeast\-2](https://console.aws.amazon.com/rds/home?region=ap-northeast-2) | 
-| Asia Pacific \(Singapore\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-southeast\-1](https://console.aws.amazon.com/rds/home?region=ap-southeast-1) | 
-| Asia Pacific \(Sydney\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-southeast\-2](https://console.aws.amazon.com/rds/home?region=ap-southeast-2) | 
-| EU \(Frankfurt\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-central\-1](https://console.aws.amazon.com/rds/home?region=eu-central-1) | 
-| EU \(Ireland\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-west\-1](https://console.aws.amazon.com/rds/home?region=eu-west-1) | 
-| EU \(London\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-west\-2](https://console.aws.amazon.com/rds/home?region=eu-west-2) | 
-| EU \(Paris\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-west\-3](https://console.aws.amazon.com/rds/home?region=eu-west-3) | 
-
-### Availability for Amazon Aurora PostgreSQL<a name="Aurora.AuroraPostgreSQL.Availability"></a>
-
-The following table shows the regions where Aurora PostgreSQL is currently available\.
-
-
-| Region | Console Link | 
-| --- | --- | 
-| US East \(Ohio\) | [https://console\.aws\.amazon\.com/rds/home?region=us\-east\-2](https://console.aws.amazon.com/rds/home?region=us-east-2) | 
-| US East \(N\. Virginia\) | [https://console\.aws\.amazon\.com/rds/home?region=us\-east\-1](https://console.aws.amazon.com/rds/home?region=us-east-1) | 
-| US West \(N\. California\) | [https://console\.aws\.amazon\.com/rds/home?region=us\-west\-1](https://console.aws.amazon.com/rds/home?region=us-west-1) | 
-| US West \(Oregon\) | [https://console\.aws\.amazon\.com/rds/home?region=us\-west\-2](https://console.aws.amazon.com/rds/home?region=us-west-2) | 
-| Asia Pacific \(Mumbai\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-south\-1](https://console.aws.amazon.com/rds/home?region=ap-south-1) | 
-| Asia Pacific \(Singapore\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-southeast\-1](https://console.aws.amazon.com/rds/home?region=ap-southeast-1) | 
-| Asia Pacific \(Sydney\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-southeast\-2](https://console.aws.amazon.com/rds/home?region=ap-southeast-2) | 
-| Asia Pacific \(Seoul\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-northeast\-2](https://console.aws.amazon.com/rds/home?region=ap-northeast-2) | 
-| Asia Pacific \(Tokyo\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-northeast\-1](https://console.aws.amazon.com/rds/home?region=ap-northeast-1) | 
-| Canada \(Central\) | [https://console\.aws\.amazon\.com/rds/home?region=ca\-central\-1](https://console.aws.amazon.com/rds/home?region=ca-central-1) | 
-| China \(Ningxia\) | [https://console\.aws\.amazon\.com/rds/home?region=cn\-northwest\-1](https://console.aws.amazon.com/rds/home?region=cn-northwest-1) | 
-| EU \(Frankfurt\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-central\-1](https://console.aws.amazon.com/rds/home?region=eu-central-1) | 
-| EU \(Ireland\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-west\-1](https://console.aws.amazon.com/rds/home?region=eu-west-1) | 
-| EU \(London\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-west\-2](https://console.aws.amazon.com/rds/home?region=eu-west-2) | 
-| EU \(Paris\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-west\-3](https://console.aws.amazon.com/rds/home?region=eu-west-3) | 
+For information about availability in AWS Regions for Amazon Aurora, see [Amazon Aurora](https://docs.aws.amazon.com/general/latest/gr/rande.html#aurora) in the *AWS General Reference*\.
 
 ## Local Time Zone for Amazon Aurora DB Clusters<a name="Aurora.Overview.LocalTimeZone"></a>
 

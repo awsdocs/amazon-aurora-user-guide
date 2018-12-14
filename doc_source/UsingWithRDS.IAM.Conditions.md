@@ -14,7 +14,7 @@ There are two ways to specify conditions in an IAM policy for Amazon RDS:
 
 ## Specifying Conditions: Using Condition Keys<a name="UsingWithRDS.IAM.SpecifyingConditions"></a>
 
-AWS provides a set of predefined condition keys \(AWS\-wide condition keys\) for all AWS services that support IAM for access control\. For example, you can use the `aws:userid` condition key to require a specific AWS ID when requesting an action\. For more information and a list of the AWS\-wide condition keys, see [Available Keys for Conditions](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\.
+AWS provides a set of predefined condition keys \(AWS\-wide condition keys\) for all AWS services that support IAM for access control\. For example, you can use the `aws:userid` condition key to require a specific AWS ID when requesting an action\. For more information and a list of the AWS\-wide condition keys, see [Available Keys for Conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\.
 
 **Note**  
 Condition keys are case sensitive\.
@@ -97,6 +97,28 @@ Explicitly denying permission supersedes any other permissions granted\. This en
 28.       }
 29.    ]
 30. }
+```
+
+#### Example 3: Limit the Set of Tag Keys and Values That Can Be Used to Tag a Resource<a name="w4aac16c13c17b7c16b8"></a>
+
+The following policy uses an RDS condition key and allows the addition of a tag with the key `stage` to be added to a resource with the values `test`, `qa`, and `production`\.
+
+```
+ 1. {
+ 2. 
+ 3.  {
+ 4.     "Version" : "2012-10-17",
+ 5.     "Statement" : [{
+ 6.        "Effect" : "Allow",
+ 7.        "Action" : [ "rds:AddTagsToResource", "rds:RemoveTagsFromResource" 
+ 8.        ],
+ 9.        "Resource" : "*",
+10.        "Condition" : { "streq" : { "rds:req-tag/stage" : [ "test", "qa", 
+11.        "production" ] } }
+12.   }
+13.  ]
+14. }
+15. }
 ```
 
 ## Specifying Conditions: Using Custom Tags<a name="UsingWithRDS.IAM.SpecifyingCustomTags"></a>

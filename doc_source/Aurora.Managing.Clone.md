@@ -13,6 +13,7 @@ There are some limitations involved with database cloning, described following:
 + You cannot create clone databases across AWS regions\. The clone databases must be created in the same region as the source databases\.
 + Currently, you are limited to up to 15 clones based on a copy, including clones based on other clones\. After that, only copies can be created\. However, each copy can also have up to 15 clones\. 
 + Cross\-account database cloning is not currently supported\.
++ Currently, you cannot clone from a cluster without the parallel query feature, to a cluster where parallel query is enabled\. To bring data into a cluster that uses parallel query, create a snapshot of the original cluster and restore it to a cluster where the parallel query option is enabled\.
 + You can provide a different virtual private cloud \(VPC\) for your clone\. However, the subnets in those VPCs must map to the same set of Availability Zones\.
 
 ## Copy\-on\-Write Protocol for Database Cloning<a name="Aurora.Managing.Clone.Protocol"></a>
@@ -67,7 +68,7 @@ The following procedure describes how to clone an Aurora DB cluster using the AW
 
 1. On the **Create Clone** page, type a name for the primary instance of the clone DB cluster as the **DB instance identifier**\.
 
-   If you want to, set any other settings for the clone DB cluster\. For information about the different DB cluster settings, see [AWS Management Console](Aurora.CreateInstance.md#Aurora.CreateInstance.Creating.Console)\.
+   If you want to, set any other settings for the clone DB cluster\. For information about the different DB cluster settings, see [Console](Aurora.CreateInstance.md#Aurora.CreateInstance.Creating.Console)\.
 
 1. Choose **Create Clone** to launch the clone DB cluster\.
 
@@ -76,7 +77,7 @@ The following procedure describes how to clone an Aurora DB cluster using the AW
 The following procedure describes how to clone an Aurora DB cluster using the AWS CLI\.
 
 **To create a clone of a DB cluster using the AWS CLI**
-+ Call the [restore\-db\-cluster\-to\-point\-in\-time](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) AWS CLI command and supply the following values:
++ Call the [restore\-db\-cluster\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) AWS CLI command and supply the following values:
   + `--source-db-cluster-identifier` – the name of the source DB cluster to create a clone of\.
   + `--db-cluster-identifier` – the name of the clone DB cluster\.
   + `--restore-type copy-on-write` – values that indicate to create a clone DB cluster\.
@@ -105,4 +106,4 @@ The following procedure describes how to clone an Aurora DB cluster using the AW
   ```
 
 **Note**  
-The [restore\-db\-cluster\-to\-point\-in\-time](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) AWS CLI command only restores the DB cluster, not the DB instances for that DB cluster\. You must invoke the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in `--db-instance-identifier`\. You can create DB instances only after the `restore-db-cluster-to-point-in-time` command has completed and the DB cluster is available\.
+The [restore\-db\-cluster\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) AWS CLI command only restores the DB cluster, not the DB instances for that DB cluster\. You must invoke the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in `--db-instance-identifier`\. You can create DB instances only after the `restore-db-cluster-to-point-in-time` command has completed and the DB cluster is available\.

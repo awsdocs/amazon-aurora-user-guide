@@ -1,16 +1,13 @@
 # Restoring from a DB Cluster Snapshot<a name="USER_RestoreFromSnapshot"></a>
 
-Amazon RDS creates a storage volume snapshot of your DB cluster, backing up the entire DB instance and not just individual databases\. You can create a DB cluster by restoring from this DB cluster snapshot\. When you restore the DB cluster, you provide the name of the DB cluster snapshot to restore from, and then provide a name for the new DB cluster that is created from the restore\. You cannot restore from a DB cluster snapshot to an existing DB cluster; a new DB cluster is created when you restore\. 
+Amazon RDS creates a storage volume snapshot of your DB cluster, backing up the entire DB instance and not just individual databases\. You can create a DB cluster by restoring from this DB cluster snapshot\. When you restore the DB cluster, you provide the name of the DB cluster snapshot to restore from, and then provide a name for the new DB cluster that is created from the restore\. You can't restore from a DB cluster snapshot to an existing DB cluster; a new DB cluster is created when you restore\. 
 
 **Note**  
 You can't restore a DB cluster from a DB cluster snapshot that is both shared and encrypted\. Instead, you can make a copy of the DB cluster snapshot and restore the DB cluster from the copy\.
 
 ## Parameter Group Considerations<a name="USER_RestoreFromSnapshot.Parameters"></a>
 
-When you restore a DB cluster, the default DB parameter group is associated with the restored instance\. As soon as the restore is complete and your new DB cluster is available, you must associate any custom DB parameter group used by the instance you restored from\. You must apply these changes by using the RDS console's *Modify* command, the `ModifyDBInstance` Amazon RDS API, or the AWS CLI `modify-db-instance` command\. 
-
-**Important**  
-We recommend that you retain the parameter group for any DB cluster snapshots you create, so that you can associate your restored DB cluster with the correct parameter group\. 
+We recommend that you retain the parameter group for any DB cluster snapshots you create, so that you can associate your restored DB cluster with the correct parameter group\. You can specify the parameter group when you restore the DB cluster\. 
 
 ## Security Group Considerations<a name="USER_RestoreFromSnapshot.Security"></a>
 
@@ -21,6 +18,8 @@ When you restore a DB cluster, the default security group is associated with the
 With Aurora, you restore a DB cluster snapshot to a DB cluster\.
 
 With Aurora MySQL, you can also restore a DB cluster snapshot to an Aurora Serverless DB cluster\. For more information, see [Restoring an Aurora Serverless DB Cluster](aurora-serverless.restorefromsnapshot.md)\.
+
+With Aurora MySQL, you can restore a DB cluster snapshot from a cluster without parallel query to a cluster with parallel query\. Because parallel query is typically used with very large tables, the snapshot mechanism is the fastest way to ingest large volumes of data to an Aurora MySQL parallel query\-enabled cluster\. For more information, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.
 
 ## Restoring from a Snapshot<a name="USER_RestoreFromSnapshot.Restoring"></a>
 
@@ -52,7 +51,7 @@ You can restore a DB cluster from a DB cluster snapshot using the AWS Management
 
 ### CLI<a name="USER_RestoreFromSnapshot.CLI"></a>
 
-To restore a DB cluster from a DB cluster snapshot, use the AWS CLI command [restore\-db\-cluster\-from\-snapshot](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html)\. 
+To restore a DB cluster from a DB cluster snapshot, use the AWS CLI command [restore\-db\-cluster\-from\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html)\. 
 
 In this example, you restore from a previously created DB cluster snapshot named *mydbclustersnapshot*\. You restore to a new DB cluster named *mynewdbcluster*\. 
 
@@ -72,10 +71,10 @@ For Windows:
 3.     --db-snapshot-identifier mydbclustersnapshot
 ```
 
-After the DB cluster has been restored, you must add the DB cluster to the security group and parameter group used by the DB cluster used to create the DB cluster snapshot if you want the same functionality as that of the previous DB cluster\.
+After the DB cluster has been restored, you must add the DB cluster to the security group used by the DB cluster used to create the DB cluster snapshot if you want the same functionality as that of the previous DB cluster\.
 
 ### API<a name="USER_RestoreFromSnapshot.API"></a>
 
-To restore a DB cluster from a DB cluster snapshot, call the Amazon RDS API function [RestoreDBClusterFromSnapshot](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromSnapshot.html) with the following parameters: 
+To restore a DB cluster from a DB cluster snapshot, call the Amazon RDS API function [RestoreDBClusterFromSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromSnapshot.html) with the following parameters: 
 + `DBClusterIdentifier` 
 + `SnapshotIdentifier` 

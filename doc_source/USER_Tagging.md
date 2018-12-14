@@ -16,13 +16,13 @@ All Amazon RDS resources can be tagged
 + DB security groups
 + DB subnet groups
 
-For information on managing access to tagged resources with IAM policies, see [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)\. 
+For information on managing access to tagged resources with IAM policies, see [Authentication and Access Control](UsingWithRDS.IAM.md)\. 
 
 ## Overview of Amazon RDS Resource Tags<a name="Overview.Tagging"></a>
 
 An Amazon RDS tag is a name\-value pair that you define and associate with an Amazon RDS resource\. The name is referred to as the key\. Supplying a value for the key is optional\. You can use tags to assign arbitrary information to an Amazon RDS resource\. You can use a tag key, for example, to define a category, and the tag value might be an item in that category\. For example, you might define a tag key of “project” and a tag value of “Salix,” indicating that the Amazon RDS resource is assigned to the Salix project\. You can also use tags to designate Amazon RDS resources as being used for test or production by using a key such as environment=test or environment=production\. We recommend that you use a consistent set of tag keys to make it easier to track metadata associated with Amazon RDS resources\. 
 
-Use tags to organize your AWS bill to reflect your own cost structure\. To do this, sign up to get your AWS account bill with tag key values included\. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values\. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services\. For more information, see [Cost Allocation and Tagging](http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in *About AWS Billing and Cost Management*\.
+Use tags to organize your AWS bill to reflect your own cost structure\. To do this, sign up to get your AWS account bill with tag key values included\. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values\. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services\. For more information, see [Cost Allocation and Tagging](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in *About AWS Billing and Cost Management*\.
 
 Each Amazon RDS resource has a tag set, which contains all the tags that are assigned to that Amazon RDS resource\. A tag set can contain as many as 10 tags, or it can be empty\. If you add a tag to an Amazon RDS resource that has the same key as an existing tag on resource, the new value overwrites the old value\. 
 
@@ -86,18 +86,18 @@ To filter the list of DB instances in the **Instances** pane, type a text string
 ## CLI<a name="USER_Tagging.CLI"></a>
 
 You can add, list, or remove tags for a DB instance using the AWS CLI\.
-+ To add one or more tags to an Amazon RDS resource, use the AWS CLI command [http://docs.aws.amazon.com/cli/latest/reference/rds/add-tags-to-resource.html](http://docs.aws.amazon.com/cli/latest/reference/rds/add-tags-to-resource.html)\.
-+ To list the tags on an Amazon RDS resource, use the AWS CLI command [http://docs.aws.amazon.com/cli/latest/reference/rds/list-tags-for-resource.html](http://docs.aws.amazon.com/cli/latest/reference/rds/list-tags-for-resource.html)\.
-+ To remove one or more tags from an Amazon RDS resource, use the AWS CLI command [http://docs.aws.amazon.com/cli/latest/reference/rds/remove-tags-from-resource.html](http://docs.aws.amazon.com/cli/latest/reference/rds/remove-tags-from-resource.html)\.
++ To add one or more tags to an Amazon RDS resource, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/add-tags-to-resource.html](https://docs.aws.amazon.com/cli/latest/reference/rds/add-tags-to-resource.html)\.
++ To list the tags on an Amazon RDS resource, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/list-tags-for-resource.html](https://docs.aws.amazon.com/cli/latest/reference/rds/list-tags-for-resource.html)\.
++ To remove one or more tags from an Amazon RDS resource, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/remove-tags-from-resource.html](https://docs.aws.amazon.com/cli/latest/reference/rds/remove-tags-from-resource.html)\.
 
 To learn more about how to construct the required ARN, see [Constructing an ARN for Amazon RDS](USER_Tagging.ARN.md#USER_Tagging.ARN.Constructing)\.
 
 ## API<a name="USER_Tagging.API"></a>
 
 You can add, list, or remove tags for a DB instance using the Amazon RDS API\.
-+ To add a tag to an Amazon RDS resource, use the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_AddTagsToResource.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_AddTagsToResource.html) operation\.
-+ To list tags that are assigned to an Amazon RDS resource, use the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ListTagsForResource.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ListTagsForResource.html)\.
-+ To remove tags from an Amazon RDS resource, use the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_RemoveTagsFromResource.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_RemoveTagsFromResource.html) operation\.
++ To add a tag to an Amazon RDS resource, use the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_AddTagsToResource.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_AddTagsToResource.html) operation\.
++ To list tags that are assigned to an Amazon RDS resource, use the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ListTagsForResource.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ListTagsForResource.html)\.
++ To remove tags from an Amazon RDS resource, use the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_RemoveTagsFromResource.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_RemoveTagsFromResource.html) operation\.
 
 To learn more about how to construct the required ARN, see [Constructing an ARN for Amazon RDS](USER_Tagging.ARN.md#USER_Tagging.ARN.Constructing)\.
 
@@ -125,4 +125,4 @@ The following table provides a list of the allowed XML tags and their characteri
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html)
 
 ## Related Topics<a name="USER_Tagging.related"></a>
-+ [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)
++ [Authentication and Access Control](UsingWithRDS.IAM.md)

@@ -8,6 +8,8 @@ With Aurora Serverless, you can create a database endpoint without specifying th
 
 Aurora Serverless introduces a new `serverless` DB engine mode for Aurora DB clusters\. Non\-Serverless DB clusters use the `provisioned` DB engine mode\.
 
+## Aurora Serverless Architecture<a name="aurora-serverless.architecture"></a>
+
  The following image provides an overview of the Aurora Serverless architecture\.
 
 ![\[Aurora Serverless Architecture\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-arch.png)
@@ -58,16 +60,26 @@ There are some differences between the way DB cluster parameter groups work with
 + `lower_case_table_names`
 + `time_zone`
 
-If you modify other cluster\-level parameters, the changes have no effect, and the Aurora Serverless DB cluster uses the default values for these parameters\. You can view the supported engine mode for cluster\-level parameters by running the [ describe\-engine\-default\-cluster\-parameters](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) command or the RDS API action [DescribeEngineDefaultClusterParameters](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEngineDefaultClusterParameters.html)\.
+If you modify other cluster\-level parameters, the changes have no effect, and the Aurora Serverless DB cluster uses the default values for these parameters\. You can view the supported engine mode for cluster\-level parameters by running the [ describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) command or the RDS API action [DescribeEngineDefaultClusterParameters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEngineDefaultClusterParameters.html)\.
 
 **Note**  
 Instance\-level parameters do not apply to Aurora Serverless\.
 
 When you modify a DB cluster parameter group that is associated with an Aurora Serverless DB cluster, the following applies:
 + When you change a cluster\-level parameter that can be modified with Aurora Serverless and save the DB cluster parameter group, the change is applied immediately regardless of the following settings:
-  + When modifying the DB cluster, the following settings are ignored: the **Apply Immediately** setting in the AWS Management Console, the `--apply-immediately|--no-apply-immediately` option in the AWS CLI command [modify\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html), and the `ApplyImmediately` parameter in the RDS API action [ModifyDBCluster](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html)\.
-  + When modifying parameters, the `ApplyMethod` value in the parameter list is ignored in the AWS CLI commands [modify\-db\-cluster\-parameter\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) and [reset\-db\-cluster\-parameter\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/reset-db-cluster-parameter-group.html), and in the RDS API actions [ModifyDBClusterParameterGroup](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterParameterGroup.html) and [ResetDBClusterParameterGroup](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ResetDBClusterParameterGroup.html)\.
+  + When modifying the DB cluster, the following settings are ignored: the **Apply Immediately** setting in the AWS Management Console, the `--apply-immediately|--no-apply-immediately` option in the AWS CLI command [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html), and the `ApplyImmediately` parameter in the RDS API action [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html)\.
+  + When modifying parameters, the `ApplyMethod` value in the parameter list is ignored in the AWS CLI commands [modify\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) and [reset\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/reset-db-cluster-parameter-group.html), and in the RDS API actions [ModifyDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterParameterGroup.html) and [ResetDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ResetDBClusterParameterGroup.html)\.
 + With Aurora Serverless, the DB cluster parameter group status of **pending\-reboot** is ignored\. An Aurora Serverless DB cluster applies changes to the DB cluster parameter group immediately without downtime\.
 + To apply a change to a DB cluster parameter group, Aurora Serverless starts a seamless scale with the current capacity if the DB cluster is active, or resumes the DB cluster if it is paused\.
 
 For information about parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
+
+## Aurora Serverless and Failover<a name="aurora-serverless.failover"></a>
+
+ An Aurora Serverless DB cluster currently is created in a single Availability Zone \(AZ\)\. If that availability zone becomes unavailable, Aurora recreates the cluster in a different AZ\. 
+
+ An Aurora Provisioned cluster that is configured for fast failover recovers in approximately 60 seconds\. Although Aurora Serverless does not support fast failover, it supports automatic multi\-AZ failover\. Failover for Aurora Serverless takes longer than for an Aurora Provisioned cluster\. The Aurora Serverless failover time is currently undefined because it depends on demand and capacity availability in other AZs within the given AWS Region\. 
+
+## Aurora Serverless and Snapshots<a name="aurora-serverless.snapshots"></a>
+
+ The cluster volume for an Aurora Serverless cluster is always encrypted\. You can choose the encryption key, but not turn off encryption\. Therefore, you can't perform operations that aren't allowed for encrypted snapshots\. For example, you can't copy snapshots of Aurora Serverless clusters to a different AWS Region\. 

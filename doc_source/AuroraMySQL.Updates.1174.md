@@ -6,6 +6,9 @@ Amazon Aurora MySQL 1\.17\.4 is generally available\. All new Aurora MySQL datab
 
 With version 1\.17\.4 of Aurora MySQL, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. 
 
+**Note**  
+ This version is currently not available in the regions AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] and China \(Beijing\) \[cn\-north\-1\]\. There will be a separate announcement once it is made available\. 
+
 Should you have any questions or concerns, the AWS Support Team is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.1174.Improvements"></a>
@@ -16,3 +19,7 @@ Should you have any questions or concerns, the AWS Support Team is available on 
 +  Fixed an issue where `ORDER BY LOWER(col_name)` could produce incorrect ordering while using the `utf8_bin` collation\. 
 +  Fixed an issue where DDLs \(especially `TRUNCATE TABLE` statements\) could cause problems on Aurora replicas, including instability or missing tables\. 
 +  Fixed an issue where sockets are left in a half\-open state when storage nodes are restarted\. 
++ The following new DB cluster parameters are available:
+  + `aurora_enable_zdr` – Allow connections opened on an Aurora Replica to stay active on replica restart\.
+  + `aurora_enable_replica_log_compression` – Enable compression of replication payloads to improve network bandwidth utilization between the master and Aurora Replicas\.
+  + `aurora_enable_repl_bin_log_filtering` – Enable filtering of replication records that are unusable by Aurora Replicas on the master\.

@@ -52,17 +52,17 @@ You can modify a DB instance to enable Performance Insights using the console\.
 
 ## CLI<a name="USER_PerfInsights.Enabling.CLI"></a>
 
-When you create a new DB instance using the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command, Performance Insights is enabled when you specify `--enable-performance-insights`\. 
+When you create a new DB instance using the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command, Performance Insights is enabled when you specify `--enable-performance-insights`\. 
 
 You can also specify the `--enable-performance-insights` value using the following AWS CLI commands:
-+  [create\-db\-instance\-read\-replica](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) 
-+  [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) 
-+  [restore\-db\-instance\-from\-s3](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-s3.html) 
++  [create\-db\-instance\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) 
++  [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) 
++  [restore\-db\-instance\-from\-s3](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-s3.html) 
 
 The following procedure describes how to enable Performance Insights for a DB instance using the AWS CLI\.
 
 **To enable Performance Insights for a DB instance using the AWS CLI**
-+ Call the [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command and supply the following values:
++ Call the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command and supply the following values:
   + `--db-instance-identifier` – The name of the DB instance\.
   + `--enable-performance-insights`
 
@@ -108,12 +108,12 @@ aws rds modify-db-instance ^
 
 ## API<a name="USER_PerfInsights.Enabling.API"></a>
 
-When you create a new DB instance using the [CreateDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action Amazon RDS API action, the Performance Schema is enabled when you set `EnablePerformanceInsights` to `True`\. 
+When you create a new DB instance using the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action Amazon RDS API action, the Performance Schema is enabled when you set `EnablePerformanceInsights` to `True`\. 
 
 You can also specify the `EnablePerformanceInsights` value using the following API actions:
-+  [ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) 
-+  [CreateDBInstanceReadReplica](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) 
-+  [RestoreDBInstanceFromS3](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html) 
++  [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) 
++  [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) 
++  [RestoreDBInstanceFromS3](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html) 
 
 When you enable Performance Insights, you can optionally specify the amount of time, in days, to retain Performance Insights data with the `PerformanceInsightsRetentionPeriod` parameter\. Valid values are 7 \(the default\) or 731 \(2 years\)\.
 
@@ -126,7 +126,7 @@ For Aurora MySQL, Performance Insights provides more detailed information when t
 + `performance-schema-consumer-global-instrumentation=ON`
 + `performance-schema-consumer-thread-instrumentation=ON`
 
-Performance Schema is enabled automatically only if your parameter group doesn't have an explicitly set value for the `performance_schema` parameter\. You can examine the `performance_schema` parameter, and if the value of source is `user`, then you set a value\. If you want the Performance Schema parameters to be set automatically, then unset the value for the `performance_schema` parameter\. You can view the source of a parameter value by viewing the parameter in the AWS Management Console or by running the AWS CLI [describe\-db\-parameters](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command\.
+Performance Schema is enabled automatically only if your parameter group doesn't have an explicitly set value for the `performance_schema` parameter\. You can examine the `performance_schema` parameter, and if the value of source is `user`, then you set a value\. If you want the Performance Schema parameters to be set automatically, then unset the value for the `performance_schema` parameter\. You can view the source of a parameter value by viewing the parameter in the AWS Management Console or by running the AWS CLI [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command\.
 
 When you change the value of the `performance_schema` parameter, a DB instance reboot is required\. If you're creating a new DB instance with Performance Insights enabled, the `performance_schema` parameter is set to 1 \(enabled\) by default\.
 

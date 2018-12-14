@@ -2,9 +2,11 @@
 
 The following sections discuss managing performance and scaling for an Amazon Aurora PostgreSQL DB cluster\.
 
-## Managing Performance and Scaling for Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Managing.Performance"></a>
+**Topics**
++ [Scaling Aurora PostgreSQL DB Instances](#AuroraPostgreSQL.Managing.Performance.InstanceScaling)
++ [Maximum Connections to an Aurora PostgreSQL DB Instance](#AuroraPostgreSQL.Managing.MaxConnections)
 
-### Scaling Aurora PostgreSQL DB Instances<a name="AuroraPostgreSQL.Managing.Performance.InstanceScaling"></a>
+## Scaling Aurora PostgreSQL DB Instances<a name="AuroraPostgreSQL.Managing.Performance.InstanceScaling"></a>
 
 You can scale Aurora PostgreSQL DB instances in two ways, instance scaling and read scaling\. For more information about read scaling, see [Read Scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.ReadScaling)\.
 
@@ -20,7 +22,7 @@ You can scale your Aurora PostgreSQL DB cluster by modifying the DB instance cla
 | db\.r4\.8xlarge | 32 | 244 | 
 | db\.r4\.16xlarge | 64 | 488 | 
 
-### Maximum Connections to an Aurora PostgreSQL DB Instance<a name="AuroraPostgreSQL.Managing.MaxConnections"></a>
+## Maximum Connections to an Aurora PostgreSQL DB Instance<a name="AuroraPostgreSQL.Managing.MaxConnections"></a>
 
 The maximum number of connections allowed to an Aurora PostgreSQL DB instance is determined by the `max_connections` parameter in the instance\-level parameter group for the DB instance\. By default, this value is set to the following equation:
 

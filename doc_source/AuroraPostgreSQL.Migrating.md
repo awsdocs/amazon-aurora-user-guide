@@ -6,13 +6,13 @@ You have several options for migrating data from your existing database to an Am
 | Migrating From | Solution | 
 | --- | --- | 
 | An RDS PostgreSQL DB instance |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Migrating.html)  | 
-| A database that is not PostgreSQL\-compatible |  You can use AWS Database Migration Service \(AWS DMS\) to migrate data from a database that is not PostgreSQL\-compatible\. For more information on AWS DMS, see [What Is AWS Database Migration Service?](http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) | 
+| A database that is not PostgreSQL\-compatible |  You can use AWS Database Migration Service \(AWS DMS\) to migrate data from a database that is not PostgreSQL\-compatible\. For more information on AWS DMS, see [What Is AWS Database Migration Service?](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) | 
 
 ## AWS Management Console<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Import.Console"></a>
 
-You can migrate a DB snapshot of an Amazon RDS PostgreSQL DB instance to create an Amazon Aurora PostgreSQL DB cluster\. The new Amazon Aurora PostgreSQL DB cluster will be populated with the data from the original Amazon RDS PostgreSQL DB instance\. The DB snapshot must have been made from an Amazon RDS DB instance running PostgreSQL 9\.6\.1 or 9\.6\.3\. For information about creating a DB snapshot, see [Creating a DB Snapshot](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
+You can migrate a DB snapshot of an Amazon RDS PostgreSQL DB instance to create an Amazon Aurora PostgreSQL DB cluster\. The new Amazon Aurora PostgreSQL DB cluster will be populated with the data from the original Amazon RDS PostgreSQL DB instance\. The DB snapshot must have been made from an Amazon RDS DB instance running PostgreSQL 9\.6\.1 or 9\.6\.3\. For information about creating a DB snapshot, see [Creating a DB Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
 
-If the DB snapshot is not in the AWS Region where you want to locate your data, use the Amazon RDS console to copy the DB snapshot to that AWS Region\. For information about copying a DB snapshot, see [Copying a DB Snapshot](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
+If the DB snapshot is not in the AWS Region where you want to locate your data, use the Amazon RDS console to copy the DB snapshot to that AWS Region\. For information about copying a DB snapshot, see [Copying a DB Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
 
 When you migrate the DB snapshot by using the AWS Management Console, the console takes the actions necessary to create both the DB cluster and the primary instance\.
 
@@ -51,7 +51,7 @@ Your production DB cluster might not need to be in a public subnet, because only
 **Note**  
 You might be behind a corporate firewall that doesn't allow access to default ports such as the PostgreSQL default port, 5432\. In this case, provide a port value that your corporate firewall allows\. Remember that port value later when you connect to the Amazon Aurora PostgreSQL DB cluster\.
    + **Enable Encryption**: Choose **Yes** for your new Amazon Aurora PostgreSQL DB cluster to be encrypted at rest\. If you choose **Yes**, you will be required to choose an AWS KMS encryption key as the **Master Key** value\.
-   + **Auto Minor Version Upgrade**: Select **Yes** if you want to enable your Amazon Aurora PostgreSQL DB cluster to receive minor PostgreSQL DB engine version upgrades automatically when they become available\.
+   + **Auto minor version upgrade**: Choose **Enable auto minor version upgrade** to enable your Amazon Aurora PostgreSQL DB cluster to receive minor PostgreSQL DB engine version upgrades automatically when they become available\.
 
      The **Auto Minor Version Upgrade** option only applies to upgrades to PostgreSQL minor engine versions for your Amazon Aurora PostgreSQL DB cluster\. It doesn't apply to regular patches applied to maintain system stability\.
 

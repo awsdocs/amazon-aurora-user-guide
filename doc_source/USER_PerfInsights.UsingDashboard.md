@@ -23,10 +23,12 @@ To see the Performance Insights dashboard, use the following procedure\.
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/perf_insights_0a.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/)
 
    The following image shows the dashboard for a DB instance\.  
-![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/perf_insights_0b.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/)
+![\[Enable Performance Insights during DB instance creation with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora_perf_insights_enabling.png)![\[Enable Performance Insights during DB instance creation with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/)![\[Enable Performance Insights during DB instance creation with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/)
 
-By default, the Performance Insights dashboard shows data for the last 60 minutes\. You can modify it to display data for the last 5 minutes, 60 minutes, 5 hours, 24 hours, or 1 week\. You can also show all of the data available\. The Performance Insight dashboard automatically refreshes with new data\. The refresh rate depends on the amount of data displayed\. 
-+ 5 Minutes refreshes every 5 seconds\.
+By default, the Performance Insights dashboard shows data for the last 60 minutes\. You can modify it to display data for the last 5 minutes, 60 minutes, 5 hours, 24 hours, or 1 week\. You can also show all of the data available\.
+
+The Performance Insight dashboard automatically refreshes with new data\. The refresh rate depends on the amount of data displayed: 
++ 5 minutes refreshes every 5 seconds\.
 + 1 hour and 5 hours both refresh every minute\.
 + 24 hours refreshes every 5 minutes\.
 + 1 week refreshes every hour\.
@@ -35,15 +37,25 @@ By default, the Performance Insights dashboard shows data for the last 60 minute
 
 ## Performance Insights Dashboard Components<a name="USER_PerfInsights.UsingDashboard.Components"></a>
 
-The dashboard is divided into two parts:
+The dashboard is divided into three parts:
+
+1. **Counter Metrics chart** – Shows data for specific performance counter metrics\.
+**Note**  
+The **Counter Metrics** chart is only available for Aurora PostgreSQL\.
 
 1. **Average Active Sessions chart** – Shows how the database load compares to DB instance capacity as represented by the **Max CPU** line\.
 
-1.  **Top load items table** – Shows the top items contributing to database load\.
+1.  **Top load items table** – Shows the top items contributing to database load\.The **Counter Metrics** chart is only available for Aurora PostgreSQL\.
+
+### Counter Metrics Chart<a name="USER_PerfInsights.UsingDashboard.Components.Countermetrics"></a>
+
+ The **Counter Metrics** chart displays data for performance counters\. The default metrics shown are `blks_read.avg` and `xact_commit.avg`\. You can choose which performance counters to display by selecting the gear icon in the upper right corner of the chart\. 
+
+![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora_perf_insights_counters.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/)
 
 ### Average Active Sessions Chart<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions"></a>
 
-The **Average Active Sessions** chart shows how the database load compares to DB instance capacity as represented by the **Max CPU** line\. By default, load is shown as active sessions grouped by wait states\. You can also choose to display load as active sessions grouped by SQL queries, hosts, or users instead\.
+The **Average Active Sessions** chart shows how the database load compares to DB instance capacity as represented by the **Max CPU** line\. By default, load is shown as active sessions grouped by wait states\. You can also choose instead to display load as active sessions grouped by SQL queries, hosts, or users\.
 
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/perf_insights_2.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/)
 

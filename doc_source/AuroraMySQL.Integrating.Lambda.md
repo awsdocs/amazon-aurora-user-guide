@@ -2,12 +2,14 @@
 
 You can invoke an AWS Lambda function from an Amazon Aurora with MySQL compatibility DB cluster with a native function or a stored procedure\. Before invoking a Lambda function from an Aurora MySQL, the Aurora DB cluster must have access to Lambda\.
 
+ Starting with Aurora MySQL version 1\.16, using a stored procedure is deprecated\. For Aurora MySQL 5\.6\-compatible clusters using Aurora MySQL version 1\.16 and later, we strongly recommend using an Aurora MySQL native function\. 
+
+For Aurora MySQL 5\.7\-compatible clusters, currently only the stored procedure technique is available\.
+
 **Topics**
 + [Giving Aurora Access to Lambda](#AuroraMySQL.Integrating.LambdaAccess)
 + [Invoking a Lambda Function with an Aurora MySQL Native Function](#AuroraMySQL.Integrating.NativeLambda)
 + [Invoking a Lambda Function with an Aurora MySQL Stored Procedure](#AuroraMySQL.Integrating.ProcLambda)
-
-For Aurora MySQL version 1\.16 and later, we recommend using an Aurora MySQL native function\. Starting with Aurora MySQL version 1\.16, using a stored procedure is deprecated\.
 
 ## Giving Aurora Access to Lambda<a name="AuroraMySQL.Integrating.LambdaAccess"></a>
 
@@ -21,11 +23,17 @@ Before you can invoke Lambda functions from an Aurora MySQL, you must first give
 
 1. Set the `aws_default_lambda_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\.
 
+   If the cluster is part of an Aurora global database, apply the same setting for each Aurora cluster in the global database\. 
+
    For more information about DB cluster parameters, see [Amazon Aurora DB Cluster and DB Instance Parameters](USER_WorkingWithParamGroups.md#Aurora.Managing.ParameterGroups)\.
 
 1. To permit database users in an Aurora MySQL DB cluster to invoke Lambda functions, associate the role that you created in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md) with the DB cluster\. For information about associating an IAM role with a DB cluster, see [Associating an IAM Role with an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.
 
+    If the cluster is part of an Aurora global database, associate the role with each Aurora cluster in the global database\. 
+
 1. Configure your Aurora MySQL DB cluster to allow outbound connections to Lambda\. For instructions, see [Enabling Network Communication from Amazon Aurora MySQL to Other AWS Services](AuroraMySQL.Integrating.Authorizing.Network.md)\.
+
+    If the cluster is part of an Aurora global database, enable outbound connections for each Aurora cluster in the global database\. 
 
 ## Invoking a Lambda Function with an Aurora MySQL Native Function<a name="AuroraMySQL.Integrating.NativeLambda"></a>
 
@@ -125,15 +133,17 @@ SELECT lambda_async(
 ### Related Topics<a name="AuroraMySQL.Integrating.NativeLambda.RelatedTopics"></a>
 + [Integrating Aurora with Other AWS Services](Aurora.Integrating.md)
 + [Managing an Amazon Aurora DB Cluster](CHAP_Aurora.md)
-+ [http://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html)
++ [https://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html)
 
 ## Invoking a Lambda Function with an Aurora MySQL Stored Procedure<a name="AuroraMySQL.Integrating.ProcLambda"></a>
 
-**Note**  
-For Aurora MySQL version 1\.8 and later, you can use direct integration with AWS Lambda\. For more information about Aurora MySQL versions, see [Amazon Aurora MySQL Database Engine Updates](AuroraMySQL.Updates.md)\.  
-Starting with Amazon Aurora version 1\.16, the stored procedure `mysql.lambda_async` is deprecated\. If you are using Aurora version 1\.16 or later, we strongly recommend that you work with native Lambda functions instead\. For more information, see [Working with Native Functions to Invoke a Lambda Function](#AuroraMySQL.Integrating.NativeLambda.lambda_functions)\.
-
 You can invoke an AWS Lambda function from an Aurora MySQL DB cluster by calling the `mysql.lambda_async` procedure\. This approach can be useful when you want to integrate your database running on Aurora MySQL with other AWS services\. For example, you might want to send a notification using Amazon Simple Notification Service \(Amazon SNS\) whenever a row is inserted into a specific table in your database\. 
+
+### Aurora MySQL Version Considerations<a name="AuroraMySQL.Integrating.ProcLambda.caveats"></a>
+
+ In Aurora MySQL version 1\.8 and later, you can use the native function method instead of these stored procedures to invoke a Lambda function\. Starting with Amazon Aurora version 1\.16, the stored procedure `mysql.lambda_async` is deprecated\. If you are using Aurora version 1\.16 or later, we strongly recommend that you work with native Lambda functions instead\. For more information about the native functions, see [Working with Native Functions to Invoke a Lambda Function](#AuroraMySQL.Integrating.NativeLambda.lambda_functions)\.  
+
+ Currently, in Aurora MySQL 2\.\* you cannot use the native function technique to invoke a lambda function\. For an Aurora MySQL 5\.7\-compatible cluster, use the stored procedure technique described in the following section\. 
 
 ### Working with the mysql\.lambda\_async Procedure to Invoke a Lambda Function<a name="AuroraMySQL.Integrating.Lambda.mysql_lambda_async"></a>
 
@@ -293,4 +303,4 @@ mysql> insert into Customer_Feedback (customer_name, customer_feedback) VALUES (
 ### Related Topics<a name="AuroraMySQL.Integrating.Lambda.RelatedTopics"></a>
 + [Integrating Aurora with Other AWS Services](Aurora.Integrating.md)
 + [Managing an Amazon Aurora DB Cluster](CHAP_Aurora.md)
-+ [http://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html)
++ [https://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html)

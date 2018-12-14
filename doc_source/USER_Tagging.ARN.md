@@ -8,8 +8,6 @@ Resources created in Amazon Web Services are each uniquely identified with an Am
 
  `arn:aws:rds:<region>:<account number>:<resourcetype>:<name>` 
 
-
-****  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html)
 
 The following table shows the format that you should use when constructing an ARN for a particular Amazon RDS resource type\. 

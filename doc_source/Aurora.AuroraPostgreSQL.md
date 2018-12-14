@@ -11,6 +11,8 @@ Aurora PostgreSQL can work with many industry standards\. For example, you can u
 + [Managing Amazon Aurora PostgreSQL](AuroraPostgreSQL.Managing.md)
 + [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)
 + [Integrating Amazon Aurora PostgreSQL with Other AWS Services](AuroraPostgreSQL.Integrating.md)
++ [Managing Query Execution Plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)
++ [Upgrading a DB Cluster Engine Version](USER_UpgradeDBInstance.Upgrading.md)
 + [Best Practices with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md)
 + [Amazon Aurora PostgreSQL Reference](AuroraPostgreSQL.Reference.md)
 + [Amazon Aurora PostgreSQL Database Engine Updates](AuroraPostgreSQL.Updates.md)

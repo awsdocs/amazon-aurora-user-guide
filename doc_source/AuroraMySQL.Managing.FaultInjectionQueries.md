@@ -8,13 +8,13 @@ You can test the fault tolerance of your Amazon Aurora DB cluster by using fault
 
 Fault injection queries that specify a crash force a crash of the Amazon Aurora instance\. The other fault injection queries result in simulations of failure events, but don't cause the event to occur\. When you submit a fault injection query, you also specify an amount of time for the failure event simulation to occur for\.
 
-You can submit a fault injection query to one of your Aurora Replica instances by connecting to the endpoint for the Aurora Replica\. For more information, see [Amazon Aurora Endpoints](Aurora.Overview.Endpoints.md)\.
+You can submit a fault injection query to one of your Aurora Replica instances by connecting to the endpoint for the Aurora Replica\. For more information, see [Amazon Aurora Connection Management](Aurora.Overview.Endpoints.md)\.
 
 ## Testing an Instance Crash<a name="AuroraMySQL.Managing.FaultInjectionQueries.Crash"></a>
 
 You can force a crash of an Amazon Aurora instance using the `ALTER SYSTEM CRASH` fault injection query\.
 
-For this fault injection query, a failover will not occur\. If you want to test a failover, then you can choose the **Failover** instance action for your DB cluster in the RDS console, or use the [failover\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html) AWS CLI command or the [FailoverDBCluster](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html) RDS API action\. 
+For this fault injection query, a failover will not occur\. If you want to test a failover, then you can choose the **Failover** instance action for your DB cluster in the RDS console, or use the [failover\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html) AWS CLI command or the [FailoverDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html) RDS API action\. 
 
 ### Syntax<a name="AuroraMySQL.Managing.FaultInjectionQueries.Crash-Syntax"></a>
 

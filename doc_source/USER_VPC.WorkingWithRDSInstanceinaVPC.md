@@ -26,7 +26,7 @@ Here are some tips on working with a DB instance in a VPC:
 + The CIDR blocks in each of your subnets must be large enough to accommodate spare IP addresses for Amazon RDS to use during maintenance activities, including failover and compute scaling\. 
 +  A VPC can have an *instance tenancy* attribute of either *default* or *dedicated*\. All default VPCs have the instance tenancy attribute set to default, and a default VPC can support any DB instance class\. 
 
-  If you choose to have your DB instance in a dedicated VPC where the instance tenancy attribute is set to dedicated, the DB instance class of your DB instance must be one of the approved Amazon EC2 dedicated instance types\. For example, the m3\.medium EC2 dedicated instance corresponds to the db\.m3\.medium DB instance class\. For information about instance tenancy in a VPC, go to [Using EC2 Dedicated Instances](http://docs.aws.amazon.com/vpc/latest/userguide/dedicated-instance.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+  If you choose to have your DB instance in a dedicated VPC where the instance tenancy attribute is set to dedicated, the DB instance class of your DB instance must be one of the approved Amazon EC2 dedicated instance types\. For example, the m3\.medium EC2 dedicated instance corresponds to the db\.m3\.medium DB instance class\. For information about instance tenancy in a VPC, go to [Using EC2 Dedicated Instances](https://docs.aws.amazon.com/vpc/latest/userguide/dedicated-instance.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
   For more information about the instance types that can be in a dedicated instance, see [Amazon EC2 Dedicated Instances](https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/) on the EC2 pricing page\. 
 
@@ -34,7 +34,7 @@ Here are some tips on working with a DB instance in a VPC:
 
 Subnets are segments of a VPC's IP address range that you designate to group your resources based on security and operational needs\. A DB subnet group is a collection of subnets \(typically private\) that you create in a VPC and that you then designate for your DB instances\. A DB subnet group allows you to specify a particular VPC when creating DB instances using the CLI or API; if you use the console, you can just select the VPC and subnets you want to use\. 
 
-Each DB subnet group should have subnets in at least two Availability Zones in a given region\.   When creating a DB instance in VPC, you must select a DB subnet group\. Amazon RDS uses that DB subnet group and your preferred Availability Zone to select a subnet and an IP address within that subnet to associate with your DB instance\. If the primary DB instance of a Multi\-AZ deployment fails, Amazon RDS can promote the corresponding standby and subsequently create a new standby using an IP address of the subnet in one of the other Availability Zones\. 
+Each DB subnet group should have subnets in at least two Availability Zones in a given region\.   When creating a DB instance in a VPC, you must select a DB subnet group\. Amazon RDS uses that DB subnet group and your preferred Availability Zone to select a subnet and an IP address within that subnet to associate with your DB instance\. If the primary DB instance of a Multi\-AZ deployment fails, Amazon RDS can promote the corresponding standby and subsequently create a new standby using an IP address of the subnet in one of the other Availability Zones\. 
 
 When Amazon RDS creates a DB instance in a VPC, it assigns a network interface to your DB instance by using an IP address selected from your DB subnet group\. However, we strongly recommend that you use the DNS name to connect to your DB instance because the underlying IP address can change during failover\. 
 
@@ -49,7 +49,7 @@ When you launch a DB instance inside a VPC, you can designate whether the DB ins
 
 You can modify a DB instance to turn on or off public accessibility by modifying the *Public accessibility* parameter\. This parameter is modified just like any other DB instance parameter\. For more information, see the modifying section for your DB engine\.
 
-The following illustration shows the **Public accessibility** option in the **Launch DB Instance Wizard**\. 
+The following illustration shows the **Public accessibility** option in the **Network & Security** section\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/VPC-example4.png)
 
@@ -58,7 +58,7 @@ The following illustration shows the **Public accessibility** option in the **La
 The following procedures help you create a DB instance in a VPC\. If your account has a default VPC, you can begin with step 3 because the VPC and DB subnet group have already been created for you\. If your AWS account doesn't have a default VPC, or if you want to create an additional VPC, you can create a new VPC\. 
 
 **Note**  
-If you want your DB instance in the VPC to be publicly accessible, you must update the DNS information for the VPC by enabling the VPC attributes *DNS hostnames* and *DNS resolution*\. For information about updating the DNS information for a VPC instance, see [Updating DNS Support for Your VPC](http://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html)\. 
+If you want your DB instance in the VPC to be publicly accessible, you must update the DNS information for the VPC by enabling the VPC attributes *DNS hostnames* and *DNS resolution*\. For information about updating the DNS information for a VPC instance, see [Updating DNS Support for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html)\. 
 
 Follow these steps to create a DB instance in a VPC:
 + [Step 1: Create a VPC](#USER_VPC.CreatingVPC) 
@@ -69,7 +69,7 @@ Follow these steps to create a DB instance in a VPC:
 
 ### Step 1: Create a VPC<a name="USER_VPC.CreatingVPC"></a>
 
-If your AWS account does not have a default VPC or if you want to create an additional VPC, follow the instructions for creating a new VPC\. See [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets) in the Amazon RDS documentation, or see [Step 1: Create a VPC](http://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/Wizard.html) in the Amazon VPC documentation\. 
+If your AWS account does not have a default VPC or if you want to create an additional VPC, follow the instructions for creating a new VPC\. See [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets) in the Amazon RDS documentation, or see [Step 1: Create a VPC](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/Wizard.html) in the Amazon VPC documentation\. 
 
 ### Step 2: Add Subnets to the VPC<a name="USER_VPC.AddingSubnets"></a>
 
@@ -82,7 +82,7 @@ For instructions on how to create subnets in a VPC, see [Create a VPC with Priva
  A DB subnet group is a collection of subnets \(typically private\) that you create for a VPC and that you then designate for your DB instances\. A DB subnet group allows you to specify a particular VPC when you create DB instances using the CLI or API\. If you use the Amazon RDS console, you can just select the VPC and subnets you want to use\. Each DB subnet group must have at least one subnet in at least two Availability Zones in the region\. 
 
 **Note**  
- For a DB instance to be publicly accessible, the subnets in the DB subnet group must have an Internet gateway\. For more information about Internet gateways for subnets, go to [ Internet Gateways](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) in the Amazon VPC documentation\. 
+ For a DB instance to be publicly accessible, the subnets in the DB subnet group must have an Internet gateway\. For more information about Internet gateways for subnets, go to [ Internet Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) in the Amazon VPC documentation\. 
 
 When you create a DB instance in a VPC, you must select a DB subnet group\. Amazon RDS then uses that DB subnet group and your preferred Availability Zone to select a subnet and an IP address within that subnet\. Amazon RDS creates and associates an Elastic Network Interface to your DB instance with that IP address\. For Multi\-AZ deployments, defining a subnet for two or more Availability Zones in a region allows Amazon RDS to create a new standby in another Availability Zone should the need arise\. You need to do this even for Single\-AZ deployments, just in case you want to convert them to Multi\-AZ deployments at some point\. 
 
@@ -113,16 +113,16 @@ In this step, you create a DB subnet group and add the subnets you created for y
 
 ### Step 4: Create a VPC Security Group<a name="USER_VPC.CreateVPCSecurityGroup"></a>
 
-Before you create your DB instance, you must create a VPC security group to associate with your DB instance\. For instructions on how to create a security group for your DB instance, see [ Create a VPC Security Group for a Private Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB) in the Amazon RDS documentation, or see [Security Groups for Your VPC](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the Amazon VPC documentation\. 
+Before you create your DB instance, you must create a VPC security group to associate with your DB instance\. For instructions on how to create a security group for your DB instance, see [ Create a VPC Security Group for a Private Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB) in the Amazon RDS documentation, or see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the Amazon VPC documentation\. 
 
 ### Step 5: Create a DB Instance in the VPC<a name="USER_VPC.CreateDBInstanceInVPC"></a>
 
 In this step, you create a DB instance and use the VPC name, the DB subnet group, and the VPC security group you created in the previous steps\. 
 
 **Note**  
-If you want your DB instance in the VPC to be publicly accessible, you must enable the VPC attributes *DNS hostnames* and *DNS resolution*\. For information on updating the DNS information for a VPC instance, see [Updating DNS Support for Your VPC](http://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html)\. 
+If you want your DB instance in the VPC to be publicly accessible, you must enable the VPC attributes *DNS hostnames* and *DNS resolution*\. For information on updating the DNS information for a VPC instance, see [Updating DNS Support for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html)\. 
 
-For details on how to create a DB instance for your DB engine, see the topic following that discusses your DB engine\. For each engine, when prompted in the **Launch DB Instance Wizard**, enter the VPC name, the DB subnet group, and the VPC security group you created in the previous steps\. 
+For details on how to create a DB instance for your DB engine, see the topic following that discusses your DB engine\. For each engine, when prompted in the **Network & Security** section, enter the VPC name, the DB subnet group, and the VPC security group you created in the previous steps\. 
 
 
 ****  

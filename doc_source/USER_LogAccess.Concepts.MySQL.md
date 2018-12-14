@@ -8,7 +8,9 @@ For more information about viewing, downloading, and watching file\-based databa
 
 ## Accessing MySQL Error Logs<a name="USER_LogAccess.MySQL.Errorlog"></a>
 
-The MySQL error log is written to the `mysql-error.log` file\. You can view `mysql-error.log` by using the Amazon RDS console or by retrieving the log using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\. `mysql-error.log` is flushed every 5 minutes, and its contents are appended to `mysql-error-running.log`\. The `mysql-error-running.log` file is then rotated every hour and the hourly files generated during the last 24 hours are retained\. Each log file has the hour it was generated \(in UTC\) appended to its name\. The log files also have a timestamp that helps you determine when the log entries were written\.
+The MySQL error log is written to the `mysql-error.log` file\. You can view `mysql-error.log` by using the Amazon RDS console or by retrieving the log using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\. `mysql-error.log` is flushed every 5 minutes, and its contents are appended to `mysql-error-running.log`\. The `mysql-error-running.log` file is then rotated every hour and the hourly files generated during the last 30 days are retained\. Note that the retention period is different between Amazon RDS and Aurora\.
+
+Each log file has the hour it was generated \(in UTC\) appended to its name\. The log files also have a timestamp that helps you determine when the log entries were written\.
 
 MySQL writes to the error log only on startup, shutdown, and when it encounters errors\. A DB instance can go hours or days without new entries being written to the error log\. If you see no recent entries, it's because the server did not encounter an error that would result in a log entry\.
 
@@ -36,7 +38,7 @@ When logging is enabled, Amazon RDS rotates table logs or deletes log files at r
 
   Table logs are rotated during a database version upgrade\.
 
-To work with the logs from the Amazon RDS console, Amazon RDS API, Amazon RDS CLI, or AWS SDKs, set the `log_output` parameter to FILE\. Like the MySQL error log, these log files are rotated hourly\. The log files that were generated during the previous 24 hours are retained\.
+To work with the logs from the Amazon RDS console, Amazon RDS API, Amazon RDS CLI, or AWS SDKs, set the `log_output` parameter to FILE\. Like the MySQL error log, these log files are rotated hourly\. The log files that were generated during the previous 72 hours are retained\. Note that the retention period is different between Amazon RDS and Aurora\.
 
 For more information about the slow query and general logs, go to the following topics in the MySQL documentation:
 + [The Slow Query Log](http://dev.mysql.com/doc/refman/5.6/en/slow-query-log.html)
@@ -50,7 +52,7 @@ You can configure your Aurora MySQL DB cluster to publish log data to a log grou
 
 The MySQL slow query log, error log, and the general log file sizes are constrained to no more than 2 percent of the allocated storage space for a DB instance\. To maintain this threshold, logs are automatically rotated every hour and log files older than 24 hours are removed\. If the combined log file size exceeds the threshold after removing old log files, then the largest log files are deleted until the log file size no longer exceeds the threshold\.
 
-For MySQL version 5\.6\.20 and later, there is a size limit on BLOBs written to the redo log\. To account for this limit, ensure that the `innodb_log_file_size` parameter for your MySQL DB instance is 10 times larger than the largest BLOB data size found in your tables, plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in the same tables\. For information on how to set parameter values, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\. For information on the redo log BLOB size limit, go to [Changes in MySQL 5\.6\.20](http://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html)\.
+For MySQL, there is a size limit on BLOBs written to the redo log\. To account for this limit, ensure that the `innodb_log_file_size` parameter for your MySQL DB instance is 10 times larger than the largest BLOB data size found in your tables, plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in the same tables\. For information on how to set parameter values, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\. For information on the redo log BLOB size limit, go to [Changes in MySQL 5\.6\.20](http://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html)\.
 
 ## Managing Table\-Based MySQL Logs<a name="Appendix.MySQL.CommonDBATasks.Logs"></a>
 
@@ -69,29 +71,34 @@ PROMPT> CALL mysql.rds_rotate_general_log;
 
 ## Binary Logging Format<a name="USER_LogAccess.MySQL.BinaryFormat"></a>
 
-MySQL on Amazon RDS supports both the *row\-based* and *mixed* binary logging formats for MySQL version 5\.6 and later\. The default binary logging format is mixed\. For DB instances running MySQL versions 5\.1 and 5\.5, only mixed binary logging is supported\. For details on the different MySQL binary log formats, see [Binary Logging Formats](http://dev.mysql.com/doc/refman/5.6/en/binary-log-formats.html) in the *MySQL Reference Manual*\.
+MySQL on Amazon RDS supports the *row\-based*, *statement\-based*, and *mixed* binary logging formats for MySQL version 5\.6 and later\. The default binary logging format is mixed\. For DB instances running MySQL versions 5\.1 and 5\.5, only mixed binary logging is supported\. For details on the different MySQL binary log formats, see [Binary Logging Formats](http://dev.mysql.com/doc/refman/5.6/en/binary-log-formats.html) in the MySQL documentation\.
+
+If you plan to use replication, the binary logging format is important because it determines the record of data changes that is recorded in the source and sent to the replication targets\. For information about the advantages and disadvantages of different binary logging formats for replication, see [Advantages and Disadvantages of Statement\-Based and Row\-Based Replication](https://dev.mysql.com/doc/refman/5.6/en/replication-sbr-rbr.html) in the MySQL documentation\.
 
 **Important**  
-Setting the binary logging format to row\-based can result in very large binary log files\. Large binary log files reduce the amount of storage available for a DB instance and can increase the amount of time to perform a restore operation of a DB instance\.
+Setting the binary logging format to row\-based can result in very large binary log files\. Large binary log files reduce the amount of storage available for a DB instance and can increase the amount of time to perform a restore operation of a DB instance\.  
+Statement\-based replication can cause inconsistencies between the source DB instance and a Read Replica\. For more information, see [ Determination of Safe and Unsafe Statements in Binary Logging](https://dev.mysql.com/doc/refman/5.6/en/replication-rbr-safe-unsafe.html) in the MySQL documentation\.
 
 **To set the MySQL binary logging format**
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Parameter Groups**\.
+1. In the navigation pane, choose **Parameter groups**\.
 
-1. For the `default.mysql5.6` or `default.mysql5.7` DB parameter group, choose the **Go to Details Page** icon\.
+1. Choose the parameter group used by the DB instance you want to modify\.
 
-1. Choose **Edit Parameters** to modify the parameters in the DB parameter group\.
+   You can't modify a default parameter group\. If the DB instance is using a default parameter group, create a new parameter group and associate it with the DB instance\.
 
-1. Set the `binlog_format` parameter to the binary logging format of your choice \(**MIXED** or **ROW**\)\.
+   For more information on DB parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
 
-1. Choose **Save Changes** to save the updates to the DB parameter group\.
+1. From **Parameter group actions**, choose **Edit**\.
+
+1. Set the `binlog_format` parameter to the binary logging format of your choice \(**ROW**, **STATEMENT**, or **MIXED**\)\.
+
+1. Choose **Save changes** to save the updates to the DB parameter group\.
 
 **Important**  
-Changing the `default.mysql5.6` or `default.mysql5.7` DB parameter group affects all MySQL version 5\.6 DB instances that use that parameter group\. If you want to specify different binary logging formats for different MySQL 5\.6 or 5\.7 DB instances in an AWS Region, you need to create your own DB parameter group\. This parameter group identifies the different logging format and assigns that DB parameter group to the intended DB instances\.
-
-For more information on DB parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
+Changing the `default.mysql5.6`, `default.mysql5.7`, or `default.mysql8.0` DB parameter group affects all MySQL version DB instances that use that parameter group\. If you want to specify different binary logging formats for different MySQL 5\.6, 5\.7, or 8\.0 DB instances in an AWS Region, you need to create your own DB parameter group\. This parameter group identifies the different logging format and assigns that DB parameter group to the intended DB instances\.
 
 ## Accessing MySQL Binary Logs<a name="USER_LogAccess.MySQL.Binarylog"></a>
 

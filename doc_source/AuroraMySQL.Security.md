@@ -1,7 +1,7 @@
 # Security with Amazon Aurora MySQL<a name="AuroraMySQL.Security"></a>
 
 Security for Amazon Aurora MySQL is managed at three levels:
-+ To control who can perform Amazon RDS management actions on Aurora MySQL DB clusters and DB instances, you use AWS Identity and Access Management \(IAM\)\. When you connect to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)\.
++ To control who can perform Amazon RDS management actions on Aurora MySQL DB clusters and DB instances, you use AWS Identity and Access Management \(IAM\)\. When you connect to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Authentication and Access Control](UsingWithRDS.IAM.md)\.
 
   If you are using an IAM account to access the Amazon RDS console, you must first log on to the AWS Management Console with your IAM account\. You then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds](https://console.aws.amazon.com/rds)\.
 + Aurora MySQL DB clusters must be created in an Amazon Virtual Private Cloud \(VPC\)\. To control which devices and Amazon EC2 instances can open connections to the endpoint and port of the DB instance for Aurora MySQL DB clusters in a VPC, you use a VPC security group\. These endpoint and port connections can be made using Secure Sockets Layer \(SSL\)\. In addition, firewall rules at your company can control whether devices running at your company can open connections to a DB instance\. For more information on VPCs, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.
@@ -11,14 +11,14 @@ Security for Amazon Aurora MySQL is managed at three levels:
   + The db\.r4 instance classes support `default` VPC tenancy only\.
   + The db\.t2 instance classes support `default` VPC tenancy only\.
 
-  For more information about instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\. For more information about `default` and `dedicated` VPC tenancy, see [Dedicated Instances](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html) in the *Amazon Elastic Compute Cloud User Guide*\.
+  For more information about instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\. For more information about `default` and `dedicated` VPC tenancy, see [Dedicated Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html) in the *Amazon Elastic Compute Cloud User Guide*\.
 + To authenticate login and permissions for an Amazon Aurora MySQL DB cluster, you can take either of the following approaches, or a combination of them:
   + You can take the same approach as with a standalone instance of MySQL\.
 
     Commands such as `CREATE USER`, `RENAME USER`, `GRANT`, `REVOKE`, and `SET PASSWORD` work just as they do in on\-premises databases, as does directly modifying database schema tables\. For more information, see [ MySQL User Account Management](http://dev.mysql.com/doc/mysql-security-excerpt/5.6/en/user-account-management.html) in the MySQL documentation\.
   + You can also use IAM database authentication\.
 
-    With IAM database authentication, you authenticate to your DB cluster by using an IAM user or IAM role and an authentication token\. An *authentication token* is a unique value that is generated using the Signature Version 4 signing process\. By using IAM database authentication, you can use the same credentials to control access to your AWS resources and your databases\. For more information, see [IAM Database Authentication for Aurora MySQL](UsingWithRDS.IAMDBAuth.md)\.
+    With IAM database authentication, you authenticate to your DB cluster by using an IAM user or IAM role and an authentication token\. An *authentication token* is a unique value that is generated using the Signature Version 4 signing process\. By using IAM database authentication, you can use the same credentials to control access to your AWS resources and your databases\. For more information, see [IAM Database Authentication](UsingWithRDS.IAMDBAuth.md)\.
 
 ## Master User Privileges with Amazon Aurora MySQL<a name="AuroraMySQL.Security.MasterUser"></a>
 
@@ -62,6 +62,8 @@ Encryption of a database instance and snapshots is not supported for the China \
 Amazon Aurora MySQL DB clusters support Secure Sockets Layer \(SSL\) connections from applications using the same process and public key as Amazon RDS MySQL DB instances\.
 
 Amazon RDS creates an SSL certificate and installs the certificate on the DB instance when Amazon RDS provisions the instance\. These certificates are signed by a certificate authority\. The SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. As a result, you can only use the DB cluster endpoint to connect to a DB cluster using SSL if your client supports Subject Alternative Names \(SAN\)\. Otherwise, you must use the endpoint of the primary instance\. 
+
+Aurora MySQL 5\.6 supports Transport Layer Security \(TLS\) version 1\.0\. Aurora MySQL 5\.7 supports TLS version 1\.0, 1\.1, and 1\.2\.
 
 We recommend the MariaDB Connector/J client as a client that supports SAN with SSL\. For more information, see the [MariaDB Connector/J download](https://downloads.mariadb.org/connector-java/) page\.
 

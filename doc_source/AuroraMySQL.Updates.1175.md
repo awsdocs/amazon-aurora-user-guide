@@ -6,6 +6,9 @@ Amazon Aurora MySQL 1\.17\.5 is generally available\. All new Aurora MySQL datab
 
 With version 1\.17\.5 of Aurora MySQL, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. 
 
+**Note**  
+ This version is currently not available in the regions AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] and China \(Beijing\) \[cn\-north\-1\]\. There will be a separate announcement once it is made available\. 
+
 Should you have any questions or concerns, the AWS Support Team is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.1175.Improvements"></a>

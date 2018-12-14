@@ -22,7 +22,7 @@ You can share DB cluster snapshots that have been encrypted "at rest" using the 
 
 1. Share the AWS Key Management Service \(AWS KMS\) encryption key that was used to encrypt the snapshot with any accounts that you want to be able to access the snapshot\.
 
-   You can share AWS KMS encryption keys with another AWS account by adding the other account to the KMS key policy\. For details on updating a key policy, see [Key Policies](http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *AWS KMS Developer Guide*\. For an example of creating a key policy, see [Allowing Access to an AWS KMS Encryption Key](#USER_ShareSnapshot.Encrypted.KeyPolicy) later in this topic\.
+   You can share AWS KMS encryption keys with another AWS account by adding the other account to the KMS key policy\. For details on updating a key policy, see [Key Policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *AWS KMS Developer Guide*\. For an example of creating a key policy, see [Allowing Access to an AWS KMS Encryption Key](#USER_ShareSnapshot.Encrypted.KeyPolicy) later in this topic\.
 
 1. Use the AWS Management Console, AWS CLI, or Amazon RDS API to share the encrypted snapshot with the other accounts\.
 
@@ -54,7 +54,7 @@ In the following key policy example, user `111122223333` is the owner of the KMS
         "kms:CreateGrant",
         "kms:Encrypt",
         "kms:Decrypt",
-        "kms:ReEncrypt",
+        "kms:ReEncrypt*",
         "kms:GenerateDataKey*",
         "kms:DescribeKey"
       ],
@@ -122,7 +122,7 @@ The following example shows a policy that can be attached to an IAM user for AWS
 }
 ```
 
-For details on updating a key policy, see [Key Policies](http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *AWS KMS Developer Guide*\.
+For details on updating a key policy, see [Key Policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *AWS KMS Developer Guide*\.
 
 ## Sharing a Snapshot<a name="USER_ShareSnapshot.Sharing"></a>
 
@@ -194,10 +194,10 @@ aws rds modify-db-cluster-snapshot-attribute \
 
 ### API<a name="USER_ShareSnapshot.API"></a>
 
-You can also share a manual DB cluster snapshot with other AWS accounts by using the Amazon RDS API\. To do so, call the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterSnapshotAttribute.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterSnapshotAttribute.html) action\. Specify `restore` for `AttributeName`, and use the `ValuesToAdd` parameter to add a list of the IDs for the AWS accounts that are authorized to restore the manual snapshot\. 
+You can also share a manual DB cluster snapshot with other AWS accounts by using the Amazon RDS API\. To do so, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterSnapshotAttribute.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterSnapshotAttribute.html) action\. Specify `restore` for `AttributeName`, and use the `ValuesToAdd` parameter to add a list of the IDs for the AWS accounts that are authorized to restore the manual snapshot\. 
 
 To make a manual snapshot public and restorable by all AWS accounts, use the value `all`\. However, take care not to add the `all` value for any manual snapshots that contain private information that you don't want to be available to all AWS accounts\. Also, don't specify `all` for encrypted snapshots, because making such snapshots public isn't supported\.
 
-To remove sharing permission for an AWS account, use the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterSnapshotAttribute.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterSnapshotAttribute.html) action with `AttributeName` set to `restore` and the `ValuesToRemove` parameter\. To mark a manual snapshot as private, remove the value `all` from the values list for the `restore` attribute\.
+To remove sharing permission for an AWS account, use the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterSnapshotAttribute.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterSnapshotAttribute.html) action with `AttributeName` set to `restore` and the `ValuesToRemove` parameter\. To mark a manual snapshot as private, remove the value `all` from the values list for the `restore` attribute\.
 
-To list all of the AWS accounts permitted to restore a snapshot, use the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterSnapshotAttributes.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterSnapshotAttributes.html) API action\.
+To list all of the AWS accounts permitted to restore a snapshot, use the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterSnapshotAttributes.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterSnapshotAttributes.html) API action\.

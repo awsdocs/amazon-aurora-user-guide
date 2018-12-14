@@ -5,7 +5,7 @@ This section shows how to set up your Aurora DB cluster\. Before creating an Aur
 **Topics**
 + [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)
 + [Choosing the Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)
-+ [DB Instance Billing](User_DBInstanceBilling.md)
++ [DB Instance Billing for Aurora](User_DBInstanceBilling.md)
 + [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)
 + [Using Amazon Aurora Serverless](aurora-serverless.md)
 + [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)

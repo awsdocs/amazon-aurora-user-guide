@@ -8,13 +8,14 @@ Use the following sections to help troubleshoot problems you have with Amazon RD
 + [Resetting the DB Instance Owner Role Password](#CHAP_Troubleshooting.ResetPassword)
 + [Amazon RDS DB Instance Outage or Reboot](#CHAP_Troubleshooting.Reboots)
 + [Amazon RDS DB Parameter Changes Not Taking Effect](#CHAP_Troubleshooting.Parameters)
-+ [Aurora MySQL Replication Issues](#CHAP_Troubleshooting.MySQL)
++ [Amazon Aurora MySQL Out of Memory Issues](#CHAP_Troubleshooting.AuroraMySQLOOM)
++ [Amazon Aurora MySQL Replication Issues](#CHAP_Troubleshooting.MySQL)
 + [No Space Left on Device Error](#CHAP_Troubleshooting.Aurora.NoSpaceLeft)
 
 ## Cannot Connect to Amazon RDS DB Instance<a name="CHAP_Troubleshooting.Connecting"></a>
 
 When you cannot connect to a DB instance, the following are common causes:
-+ The access rules enforced by your local firewall and the ingress IP addresses that you authorized to access your DB instance in the instance's security group are not in sync\. The problem is most likely the ingress rules in your security group\. By default, DB instances do not allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\.
++ The access rules enforced by your local firewall and the ingress IP addresses that you authorized to access your DB instance in the instance's security group are not in sync\. The problem is most likely the ingress rules in your security group\. By default, DB instances do not allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. If necessary, add rules to the security group associated with the VPC that allow traffic related to the source in and out of the DB instance\. You can specify an IP address, a range of IP addresses, or another VPC security group\.
 
   For more information about setting up a security group, see [Provide Access to the DB Cluster in the VPC by Creating a Security Group](CHAP_SettingUp_Aurora.md#CHAP_SettingUp_Aurora.SecurityGroup)\.
 + The port you specified when you created the DB instance cannot be used to send or receive communications due to your local firewall restrictions\. In this case, check with your network administrator to determine if your network allows the specified port to be used for inbound and outbound communication\.
@@ -49,6 +50,9 @@ Windows users can use Telnet to test the connection to a DB instance\. Note that
 
 If Telnet actions return success, your security group is properly configured\.
 
+**Note**  
+Amazon RDS does not accept internet control message protocol \(ICMP\) traffic, including ping\.
+
 ### Troubleshooting Connection Authentication<a name="CHAP_Troubleshooting.Connecting.Authorization"></a>
 
 If you can connect to your DB instance but you get authentication errors, you might want to reset the master user password for the DB instance\. You can do this by modifying the RDS instance\. 
@@ -65,7 +69,7 @@ There are several reasons you would get this error; it could be because your acc
 
 ## Resetting the DB Instance Owner Role Password<a name="CHAP_Troubleshooting.ResetPassword"></a>
 
-You can reset the assigned permissions for your DB instance by resetting the master password\. For example, if you lock yourself out of the `db_owner` role on your SQL Server database, you can reset the `db_owner` role password by modifying the DB instance master password\. By changing the DB instance password, you can regain access to the DB instance, access databases using the modified password for the `db_owner`, and restore privileges for the `db_owner` role that may have been accidentally revoked\. You can change the DB instance password by using the Amazon RDS console, the AWS CLI command [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), or by using the [ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\.
+You can reset the assigned permissions for your DB instance by resetting the master password\. For example, if you lock yourself out of the `db_owner` role on your SQL Server database, you can reset the `db_owner` role password by modifying the DB instance master password\. By changing the DB instance password, you can regain access to the DB instance, access databases using the modified password for the `db_owner`, and restore privileges for the `db_owner` role that may have been accidentally revoked\. You can change the DB instance password by using the Amazon RDS console, the AWS CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), or by using the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\.
 
 ## Amazon RDS DB Instance Outage or Reboot<a name="CHAP_Troubleshooting.Reboots"></a>
 
@@ -91,7 +95,21 @@ If you change a parameter in a DB parameter group but you don't see the changes 
 
 You can reboot a DB instance using the RDS console or explicitly calling the `RebootDbInstance` API action \(without failover, if the DB instance is in a Multi\-AZ deployment\)\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call, such as calling `ModifyDBInstance` to change DB instance class\. For more information, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
-## Aurora MySQL Replication Issues<a name="CHAP_Troubleshooting.MySQL"></a>
+## Amazon Aurora MySQL Out of Memory Issues<a name="CHAP_Troubleshooting.AuroraMySQLOOM"></a>
+
+The Aurora MySQL `aurora_oom_response` instance\-level parameter can enable the DB instance to monitor the system memory and estimate the memory consumed by various statements and connections\. If the system runs low on memory, it can perform a list of actions to release that memory in an attempt to avoid out\-of\-memory \(OOM\) and database restart\. The instance\-level parameter takes a string of comma separated actions that a DB instance should take when its memory is low\. Valid actions include "print", "tune", "decline", "kill\_query" or any combination of these\. An empty string means there should be no actions taken and effectively disables the feature\.
+
+The following are usage examples for the `aurora_oom_response` parameter:
++ "print" – Only prints the queries taking high amount of memory\.
++ "tune" – Tunes the internal table caches to release some memory back to the system\.
++ "decline" – Declines new queries once the instance is low on memory\.
++ "kill\_query" – Kills the queries in descending order of memory consumption until the instance memory surfaces above the low threshold\. DDL statements are not killed\.
++ "print, tune" – Performs actions described for both "print" and "tune"\.
++ "tune, decline, kill\_query" – Performs the actions described for "tune", "decline", and "kill\_query"\.
+
+For db\.t2 DB instance classes, the `aurora_oom_response` parameter is set to "print, tune" by default\. For all other DB instance classes, the parameter value is empty by default \(disabled\)\.
+
+## Amazon Aurora MySQL Replication Issues<a name="CHAP_Troubleshooting.MySQL"></a>
 
 Some MySQL and MariaDB replication problems also apply to Aurora MySQL\. You can diagnose and correct these problems\.
 
@@ -150,12 +168,12 @@ Common situations that can cause replication errors include the following:
 + Using unsafe non\-deterministic queries such as `SYSDATE()`\. For more information, see [Determination of Safe and Unsafe Statements in Binary Logging](http://dev.mysql.com/doc/refman/5.5/en/replication-rbr-safe-unsafe.html)\. 
 
 The following steps can help resolve your replication error: 
-+ If you encounter a logical error and you can safely skip the error, follow the steps described in [Skipping the Current Replication Error](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.MySQL.CommonDBATasks.SkipError.html)\. Your MySQL or MariaDB DB instance must be running a version that includes the `mysql_rds_skip_repl_error` procedure\. For more information, see [mysql\_rds\_skip\_repl\_error](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_skip_repl_error.html)\.
-+ If you encounter a binlog position issue, you can change the slave replay position with the `mysql_rds_next_master_log` command\. Your MySQL or MariaDB DB instance must be running a version that supports the `mysql_rds_next_master_log` command in order to change the slave replay position\. For version information, see [mysql\_rds\_next\_master\_log](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_next_master_log.html)\.
++ If you encounter a logical error and you can safely skip the error, follow the steps described in [Skipping the Current Replication Error](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.MySQL.CommonDBATasks.SkipError.html)\. Your MySQL or MariaDB DB instance must be running a version that includes the `mysql_rds_skip_repl_error` procedure\. For more information, see [mysql\_rds\_skip\_repl\_error](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_skip_repl_error.html)\.
++ If you encounter a binlog position issue, you can change the slave replay position with the `mysql_rds_next_master_log` command\. Your MySQL or MariaDB DB instance must be running a version that supports the `mysql_rds_next_master_log` command in order to change the slave replay position\. For version information, see [mysql\_rds\_next\_master\_log](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_next_master_log.html)\.
 + If you encounter a temporary performance issue due to high DML load, you can set the `innodb_flush_log_at_trx_commit` parameter to 2 in the DB parameter group on the Read Replica\. Doing this can help the Read Replica catch up, though it temporarily reduces atomicity, consistency, isolation, and durability \(ACID\)\.
 + You can delete the Read Replica and create an instance using the same DB instance identifier so that the endpoint remains the same as that of your old Read Replica\.
 
-If a replication error is fixed, the **Replication State** changes to **replicating**\. For more information, see [ Troubleshooting a MySQL or MariaDB Read Replica Problem](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.Troubleshooting.html)\.
+If a replication error is fixed, the **Replication State** changes to **replicating**\. For more information, see [ Troubleshooting a MySQL or MariaDB Read Replica Problem](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.Troubleshooting.html)\.
 
 ### Slave Down or Disabled Error<a name="CHAP_Troubleshooting.MySQL.SlaveDown"></a>
 
@@ -167,7 +185,7 @@ If you need to skip a large number of errors, the replication lag can increase b
 
 You can mitigate this issue by increasing the number of hours that binary log files are retained on your replication master\. After you have increased the binlog retention time, you can restart replication and call the `mysql.rds_skip_repl_error` command as needed\.
 
-To set the binlog retention time, use the [mysql\_rds\_set\_configuration](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.Troubleshooting.html) procedure and specify a configuration parameter of 'binlog retention hours' along with the number of hours to retain binlog files on the DB cluster, up to 720 \(30 days\)\. The following example sets the retention period for binlog files to 48 hours:
+To set the binlog retention time, use the [mysql\_rds\_set\_configuration](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.Troubleshooting.html) procedure and specify a configuration parameter of 'binlog retention hours' along with the number of hours to retain binlog files on the DB cluster, up to 720 \(30 days\)\. The following example sets the retention period for binlog files to 48 hours:
 
 ```
 CALL mysql.rds_set_configuration('binlog retention hours', 48);

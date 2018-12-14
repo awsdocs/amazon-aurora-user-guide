@@ -33,10 +33,12 @@ Aurora is not available in all AWS Regions\. For a list of AWS Regions where Aur
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Choose **Launch DB instance** to start the Launch DB Instance wizard\. The wizard opens on the **Select engine** page\.
+   If the navigation pane is closed, choose the menu icon at the top left to open it\.
+
+1. Choose **Create database** to open the **Select engine** page\.
 
 1. On the **Select engine** page, choose Amazon Aurora and choose the MySQL\-compatible edition\.  
-![\[Amazon Aurora Launch DB Instance Wizard Select Engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch01.png)
+![\[Amazon Aurora Select engine page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch01.png)
 
 1. Choose **Next**\.
 
@@ -69,7 +71,7 @@ This creates the default database\. To create additional databases, connect to t
 **Note**  
 You might be behind a corporate firewall that does not allow access to default ports such as the Aurora MySQL default port, 3306\. In this case, provide a port value that your corporate firewall allows\. Remember that port value later when you connect to the Aurora DB cluster\.
 
-1. Leave the rest of the values as their defaults, and choose **Launch DB instance** to create the DB cluster and primary instance\.
+1. Leave the rest of the values as their defaults, and choose **Create database** to create the DB cluster and primary instance\.
 
 ### Connect to an Instance in a DB Cluster<a name="CHAP_GettingStartedAurora.Aurora.Connect"></a>
 

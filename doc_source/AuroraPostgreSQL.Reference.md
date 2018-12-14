@@ -6,9 +6,9 @@ You manage your Amazon Aurora DB cluster in the same way that you manage other A
 
 Cluster\-level parameters are managed in DB cluster parameter groups\. Instance\-level parameters are managed in DB parameter groups\. Although each DB instance in an Aurora PostgreSQL DB cluster is compatible with the PostgreSQL database engine, some of the PostgreSQL database engine parameters must be applied at the cluster level, and are managed using DB cluster parameter groups\. Cluster\-level parameters are not found in the DB parameter group for a DB instance in an Aurora PostgreSQL DB cluster and are listed later in this topic\.
 
-You can manage both cluster\-level and instance\-level parameters using the Amazon RDS console, the AWS CLI, or the Amazon RDS API\. There are separate commands for managing cluster\-level parameters and instance\-level parameters\. For example, you can use the [modify\-db\-cluster\-parameter\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) AWS CLI command to manage cluster\-level parameters in a DB cluster parameter group and use the [modify\-db\-parameter\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) AWS CLI command to manage instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
+You can manage both cluster\-level and instance\-level parameters using the Amazon RDS console, the AWS CLI, or the Amazon RDS API\. There are separate commands for managing cluster\-level parameters and instance\-level parameters\. For example, you can use the [modify\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) AWS CLI command to manage cluster\-level parameters in a DB cluster parameter group and use the [modify\-db\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) AWS CLI command to manage instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
 
-You can view both cluster\-level and instance\-level parameters in the Amazon RDS console, or by using the AWS CLI or Amazon RDS API\. For example, you can use the [describe\-db\-cluster\-parameters](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) AWS CLI command to view cluster\-level parameters in a DB cluster parameter group and use the [describe\-db\-parameters](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) AWS CLI command to view instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
+You can view both cluster\-level and instance\-level parameters in the Amazon RDS console, or by using the AWS CLI or Amazon RDS API\. For example, you can use the [describe\-db\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) AWS CLI command to view cluster\-level parameters in a DB cluster parameter group and use the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) AWS CLI command to view instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
 
 For more information about parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
 
@@ -50,6 +50,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 | max\_prepared\_transactions | Yes | 
 |  `password_encryption`  |  No  | 
 |  `port`  |  No  | 
+| rds\.enable\_plan\_management  | Yes | 
 | rds\.extensions | No | 
 |  `rds.force_autovacuum_logging_level`  |  Yes  | 
 |  `rds.force_ssl`  |  Yes  | 
@@ -76,7 +77,17 @@ The following table shows all of the parameters that apply to a specific DB inst
 
 | Parameter name | Modifiable | 
 | --- | --- | 
-| `application_name` | Yes | 
+| apg\_plan\_mgmt\.capture\_plan\_baselines | Yes | 
+| apg\_plan\_mgmt\.max\_databases | Yes | 
+| apg\_plan\_mgmt\.max\_plans | Yes | 
+| apg\_plan\_mgmt\.pgss\_min\_calls | Yes | 
+| apg\_plan\_mgmt\.pgss\_min\_mean\_time\_ms | Yes | 
+| apg\_plan\_mgmt\.pgss\_min\_stddev\_time\_ms | Yes | 
+| apg\_plan\_mgmt\.pgss\_min\_total\_time\_ms | Yes | 
+| apg\_plan\_mgmt\.plan\_retention\_period | Yes | 
+| apg\_plan\_mgmt\.unapproved\_plan\_execution\_threshold | Yes | 
+| apg\_plan\_mgmt\.use\_plan\_baselines | Yes | 
+|  `application_name`  |  Yes  | 
 | `authentication_timeout` | Yes | 
 | `auto_explain.log_analyze` | Yes | 
 | `auto_explain.log_buffers` | Yes | 

@@ -27,7 +27,7 @@ If you click the link for the `aurora-sample` DB instance identifier, the Amazon
 
 ## CLI<a name="Aurora.Viewing.CLI"></a>
 
-To view DB cluster information by using the AWS CLI, use the [describe\-db\-clusters](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command\. For example, the following AWS CLI command lists the DB cluster information for all of the DB clusters in the `us-east-1` region for the configured AWS account\.
+To view DB cluster information by using the AWS CLI, use the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command\. For example, the following AWS CLI command lists the DB cluster information for all of the DB clusters in the `us-east-1` region for the configured AWS account\.
 
 ```
 aws rds describe-db-clusters --region us-east-1
@@ -128,7 +128,7 @@ The command returns the following output if your AWS CLI is configured for JSON 
 
 ## API<a name="Aurora.Viewing.API"></a>
 
-To view DB cluster information using the Amazon RDS API, use the [DescribeDBClusters](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) action\. For example, the following Amazon RDS API command lists the DB cluster information for all of the DB clusters in the `us-east-1` region\.
+To view DB cluster information using the Amazon RDS API, use the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) action\. For example, the following Amazon RDS API command lists the DB cluster information for all of the DB clusters in the `us-east-1` region\.
 
 ```
 https://rds.us-east-1.amazonaws.com/

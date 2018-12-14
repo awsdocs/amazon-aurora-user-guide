@@ -12,13 +12,21 @@ Before you can save data into an Amazon S3 bucket, you must first give your Auro
 
 1. Create an IAM role, and attach the IAM policy you created in [Creating an IAM Policy to Access Amazon S3 Resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md) to the new IAM role\. For instructions, see [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.
 
-1. Set either the `aurora_select_into_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for the `aurora_select_into_s3_role`, the IAM role specified in `aws_default_s3_role` is used\. 
+1. Set either the `aurora_select_into_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aurora_select_into_s3_role`, Aurora uses the IAM role specified in `aws_default_s3_role`\.
+
+   If the cluster is part of an Aurora global database, set this parameter for each Aurora cluster in the global database\.
 
    For more information about DB cluster parameters, see [Amazon Aurora DB Cluster and DB Instance Parameters](USER_WorkingWithParamGroups.md#Aurora.Managing.ParameterGroups)\.
 
-1. To permit database users in an Aurora MySQL DB cluster to access Amazon S3, associate the role that you created in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md) with the DB cluster\. For information about associating an IAM role with a DB cluster, see [Associating an IAM Role with an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.
+1. To permit database users in an Aurora MySQL DB cluster to access Amazon S3, associate the role that you created in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md) with the DB cluster\.
 
-1. Configure your Aurora MySQL DB cluster to allow outbound connections to Amazon S3\. For instructions, see [Enabling Network Communication from Amazon Aurora MySQL to Other AWS Services](AuroraMySQL.Integrating.Authorizing.Network.md)\.
+   For an Aurora global database, associate the role with each Aurora cluster in the global database\.
+
+   For information about associating an IAM role with a DB cluster, see [Associating an IAM Role with an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.
+
+1. Configure your Aurora MySQL DB cluster to allow outbound connections to Amazon S3\. For instructions, see [Enabling Network Communication from Amazon Aurora MySQL to Other AWS Services](AuroraMySQL.Integrating.Authorizing.Network.md)\. 
+
+    For an Aurora global database, enable outbound connections for each Aurora cluster in the global database\. 
 
 ## Granting Privileges to Save Data in Aurora MySQL<a name="AuroraMySQL.Integrating.SaveIntoS3.Grant"></a>
 
@@ -28,7 +36,7 @@ The database user that issues the `SELECT INTO OUTFILE S3` statement must be gra
 GRANT SELECT INTO S3 ON *.* TO 'user'@'domain-or-ip-address'
 ```
 
-The `SELECT INTO S3` privilege is specific to Amazon Aurora MySQL and is not available for MySQL databases or RDS MySQL DB instances\. If you have set up replication between an Aurora MySQL DB cluster as the replication master and a MySQL database as the replication client, then the `GRANT SELECT INTO S3` statement causes replication to stop with an error\. You can safely skip the error to resume replication\. To skip the error on an RDS MySQL DB instance, use the [ mysql\_rds\_skip\_repl\_error](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_skip_repl_error.html) procedure\. To skip the error on an external MySQL database, use the [SET GLOBAL sql\_slave\_skip\_counter ](http://dev.mysql.com/doc/refman/5.6/en/set-global-sql-slave-skip-counter.html) statement\.
+The `SELECT INTO S3` privilege is specific to Amazon Aurora MySQL and is not available for MySQL databases or RDS MySQL DB instances\. If you have set up replication between an Aurora MySQL DB cluster as the replication master and a MySQL database as the replication client, then the `GRANT SELECT INTO S3` statement causes replication to stop with an error\. You can safely skip the error to resume replication\. To skip the error on an RDS MySQL DB instance, use the [ mysql\_rds\_skip\_repl\_error](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_skip_repl_error.html) procedure\. To skip the error on an external MySQL database, use the [SET GLOBAL sql\_slave\_skip\_counter ](http://dev.mysql.com/doc/refman/5.6/en/set-global-sql-slave-skip-counter.html) statement\.
 
 ## Specifying a Path to an Amazon S3 Bucket<a name="AuroraMySQL.Integrating.SaveIntoS3.URI"></a>
 

@@ -36,7 +36,7 @@ The following policy adds the permissions required by Aurora to access Amazon Cl
 }
 ```
 
-You can use the following steps to create an IAM policy that provides the minimum required permissions for Aurora to access CloudWatch Logs on your behalf\. To allow Aurora full access to CloudWatch Logs, you can skip these steps and use the `CloudWatchLogsFullAccess` predefined IAM policy instead of creating your own\. For more information, see [Using Identity\-Based Policies \(IAM Policies\) for CloudWatch Logs](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring//iam-identity-based-access-control-cwl.html#managed-policies-cwl) in the* Amazon CloudWatch User Guide\.*
+You can use the following steps to create an IAM policy that provides the minimum required permissions for Aurora to access CloudWatch Logs on your behalf\. To allow Aurora full access to CloudWatch Logs, you can skip these steps and use the `CloudWatchLogsFullAccess` predefined IAM policy instead of creating your own\. For more information, see [Using Identity\-Based Policies \(IAM Policies\) for CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring//iam-identity-based-access-control-cwl.html#managed-policies-cwl) in the* Amazon CloudWatch User Guide\.*
 
 **To create an IAM policy to grant access to your CloudWatch Logs resources**
 

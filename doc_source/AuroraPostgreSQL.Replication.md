@@ -4,7 +4,10 @@
 
 Aurora Replicas are independent endpoints in an Aurora DB cluster, best used for scaling read operations and increasing availability\. Up to 15 Aurora Replicas can be distributed across the Availability Zones that a DB cluster spans within an AWS Region\. Although the DB cluster volume is made up of multiple copies of the data for the DB cluster, the data in the cluster volume is represented as a single, logical volume to the primary instance and to Aurora Replicas in the DB cluster\. For more information about Aurora Replicas, see [Aurora Replicas](Aurora.Replication.md#Aurora.Replication.Replicas)\.
 
-Aurora Replicas work well for read scaling because they are fully dedicated to read operations on your cluster volume\. Write operations are managed by the primary instance\. Because the cluster volume is shared among all instances in your Aurora PostgreSQL DB cluster, no additional work is required to replicate a copy of the data for each Aurora Replica\. In contrast, PostgreSQL Read Replicas must apply, on a single thread, all write operations from the master DB instance to their local data store\. This limitation can affect the ability of PostgreSQL Read Replicas to support large volumes of read traffic\.
+Aurora Replicas work well for read scaling because they are fully dedicated to read operations on your cluster volume\. Write operations are managed by the primary instance\. Because the cluster volume is shared among all instances in your Aurora PostgreSQL DB cluster, no additional work is required to replicate a copy of the data for each Aurora Replica\. In contrast, PostgreSQL Read Replicas must apply, on a single thread, all write operations from the master DB instance to their local data store\. This limitation can affect the ability of PostgreSQL Read Replicas to support large volumes of write traffic\.
+
+**Note**  
+Logical replication is not supported for Aurora PostgreSQL\. PostgreSQL logical replication is based on object replication identities whereas physical replication uses exact block addresses\. 
 
 ## Replication Options for Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Replication.Options"></a>
 

@@ -13,6 +13,7 @@ MySQL 5\.7\-compatible version Aurora contains all MySQL bug fixes through MySQL
 
 | Database engine update | Version | MySQL bugs fixed | 
 | --- | --- | --- | 
+| [Amazon Aurora MySQL Database Engine Updates 2018\-10\-11](AuroraMySQL.Updates.203.md) |  2\.03  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Amazon Aurora MySQL Database Engine Updates 2018\-05\-03](AuroraMySQL.Updates.202.md) |  2\.02  |  Left join returns incorrect results on the outer side \(Bug \#22833364\)  | 
 
 ## MySQL Bugs Fixed by Amazon Aurora MySQL 1\.x Database Engine Updates<a name="AuroraMySQL.Updates.MySQLBugs.v1"></a>
@@ -40,3 +41,5 @@ MySQL 5\.6\-compatible version Aurora contains all MySQL bug fixes through MySQL
 | [Amazon Aurora MySQL Database Engine Updates 2017\-10\-24](AuroraMySQL.Updates.20171024.md) | 1\.15 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Amazon Aurora MySQL Database Engine Updates 2017\-11\-20](AuroraMySQL.Updates.20171120.md) | 1\.15\.1 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Amazon Aurora MySQL Database Engine Updates 2018\-03\-13](AuroraMySQL.Updates.117.md) | 1\.17 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
+| [Amazon Aurora MySQL Database Engine Updates 2018\-09\-06](AuroraMySQL.Updates.1176.md) | 1\.17\.6 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
+| [Amazon Aurora MySQL Database Engine Updates 2018\-10\-08](AuroraMySQL.Updates.1177.md) | 1\.17\.7 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 

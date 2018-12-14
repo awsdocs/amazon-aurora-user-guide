@@ -11,7 +11,11 @@ You can create an Aurora Serverless DB cluster with the AWS Management Console, 
 
 For general information about creating a DB cluster, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
 
-## AWS Management Console<a name="aurora-serverless.create.console"></a>
+**Note**  
+ Currently, Aurora Serverless isn't available in all AWS Regions\. For more information, see [Aurora Serverless](https://aws.amazon.com/rds/aurora/serverless/#Pricing)\.   
+ The cluster volume for an Aurora Serverless cluster is always encrypted\. You can choose the encryption key, but not turn off encryption\. Therefore, you can't perform operations that aren't allowed for encrypted snapshots\. For example, you can't copy snapshots of Aurora Serverless clusters to a different AWS Region\. 
+
+## Console<a name="aurora-serverless.create.console"></a>
 
 To create a new Aurora Serverless DB cluster with the AWS Management Console, specify **Serverless** for **Capacity type** on the **Specify DB details** page\. 
 
@@ -25,6 +29,8 @@ The following image shows the **Capacity settings** you can adjust\.
 
 ![\[Setting capacity for an Aurora Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-capacity.png)
 
+You can also enable the Data API for an the Aurora Serverless DB cluster\. For more information, see [Using the Data API for Aurora Serverless](data-api.md)\. 
+
 For more information on creating an Aurora DB cluster using the console, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
 
 To connect to an Aurora Serverless DB cluster, use the database endpoint\. For details, see the instructions in [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\.
@@ -36,7 +42,7 @@ For more information, see [Using Service\-Linked Roles for Amazon RDS](UsingWith
 
 ## AWS CLI<a name="aurora-serverless.create.cli"></a>
 
-To create a new Aurora Serverless DB cluster with the AWS CLI, run the [create\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) command and specify `serverless` for the `--engine-mode` option\.
+To create a new Aurora Serverless DB cluster with the AWS CLI, run the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) command and specify `serverless` for the `--engine-mode` option\.
 
 You can optionally specify the `--scaling-configuration` option to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values are `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
 
@@ -45,8 +51,8 @@ The following command creates a new MySQL 5\.6–compatible Serverless DB cluste
 For Linux, OS X, or Unix:
 
 ```
-aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 5.6.10a \ 
---engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true \  
+aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 5.6.10a \
+--engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true \
 --master-username user-name --master-user-password password \
 --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
 ```
@@ -55,13 +61,13 @@ For Windows:
 
 ```
 aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 5.6.10a ^
---engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true ^                       
+--engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true ^
 --master-username user-name --master-user-password password ^
 --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
 ```
 
 ## RDS API<a name="aurora-serverless.create.api"></a>
 
-To create a new Aurora Serverless DB cluster with the RDS API, run the [CreateDBCluster](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) action and specify `serverless` for the `EngineMode` parameter\.
+To create a new Aurora Serverless DB cluster with the RDS API, run the [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) action and specify `serverless` for the `EngineMode` parameter\.
 
 You can optionally specify the `ScalingConfiguration` parameter to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values are `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.

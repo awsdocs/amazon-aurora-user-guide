@@ -1,7 +1,7 @@
 # Configuring Security in Amazon Aurora<a name="UsingWithRDS"></a>
 
 You can manage access to your Amazon RDS resources and your databases on a DB instance\. The method you use to manage access depends on what type of task the user needs to perform with Amazon RDS: 
-+ Run your DB instance in an Amazon Virtual Private Cloud \(VPC\) for the greatest possible network access control\. For more information about creating a DB instance in a VPC, see [Using Amazon RDS with Amazon Virtual Private Cloud \(VPC\)](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html)\. 
++ Run your DB instance in an Amazon Virtual Private Cloud \(VPC\) for the greatest possible network access control\. For more information about creating a DB instance in a VPC, see [Using Amazon RDS with Amazon Virtual Private Cloud \(VPC\)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html)\. 
 + Use AWS Identity and Access Management \(IAM\) policies to assign permissions that determine who is allowed to manage RDS resources\. For example, you can use IAM to determine who is allowed to create, describe, modify, and delete DB instances, tag resources, or modify security groups\.
 
    For information on setting up an IAM user, see [Create an IAM User](CHAP_SettingUp_Aurora.md#CHAP_SettingUp_Aurora.IAM)\.
@@ -16,10 +16,10 @@ You only have to configure security for your use cases\. You don't have to confi
 For more information on managing access to Amazon RDS resources and your databases on a DB instance, see the following topics\.
 
 **Topics**
-+ [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)
++ [Authentication and Access Control](UsingWithRDS.IAM.md)
 + [Encrypting Amazon RDS Resources](Overview.Encryption.md)
 + [Using SSL to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)
-+ [Controlling Access with Amazon RDS Security Groups](Overview.RDSSecurityGroups.md)
++ [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)
 + [Master User Account Privileges](UsingWithRDS.MasterAccounts.md)
 + [Using Service\-Linked Roles for Amazon RDS](UsingWithRDS.IAM.ServiceLinkedRoles.md)
 + [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)

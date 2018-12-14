@@ -4,7 +4,7 @@ Amazon RDS creates a storage volume snapshot of your DB cluster, backing up the 
 
 You can create a DB cluster snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 
-## AWS Management Console<a name="USER_CreateSnapshotCluster.CON"></a>
+## Console<a name="USER_CreateSnapshotCluster.CON"></a>
 
 **To create a DB cluster snapshot**
 
@@ -19,13 +19,13 @@ You can create a DB cluster snapshot using the AWS Management Console, the AWS C
    The **Take DB Snapshot** window appears\.
 
 1. Type the name of the DB cluster snapshot in the **Snapshot name** box\.   
-![\[Create snapshot\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/DBClusterSnapshot.png)
+![\[Create snapshot\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/DBSnapshotCluster.png)
 
 1. Choose **Take Snapshot**\.
 
-## CLI<a name="USER_CreateSnapshotCluster.CLI"></a>
+## AWS CLI<a name="USER_CreateSnapshotCluster.CLI"></a>
 
-When you create a DB cluster snapshot using the AWS CLI, you need to identify which DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\. You can do this by using the AWS CLI [ `create-db-cluster-snapshot`](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster-snapshot.html) command with the following parameters:
+When you create a DB cluster snapshot using the AWS CLI, you need to identify which DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\. You can do this by using the AWS CLI [ `create-db-cluster-snapshot`](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster-snapshot.html) command with the following parameters:
 + `--db-cluster-identifier`
 + `--db-cluster-snapshot-identifier`
 
@@ -47,8 +47,8 @@ For Windows:
 3.     --db-cluster-snapshot-identifier mydbclustersnapshot
 ```
 
-## API<a name="USER_CreateSnapshotCluster.API"></a>
+## RDS API<a name="USER_CreateSnapshotCluster.API"></a>
 
-When you create a DB cluster snapshot using the Amazon RDS API, you need to identify which DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\. You can do this by using the Amazon RDS API [ `CreateDBClusterSnapshot`](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterSnapshot.html) command with the following parameters:
+When you create a DB cluster snapshot using the Amazon RDS API, you need to identify which DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\. You can do this by using the Amazon RDS API [ `CreateDBClusterSnapshot`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterSnapshot.html) command with the following parameters:
 + DBClusterIdentifier
 + DBClusterSnapshotIdentifier

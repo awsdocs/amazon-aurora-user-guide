@@ -31,7 +31,7 @@ You can restore a DB cluster to a point in time using the AWS Management Console
 
 ## CLI<a name="USER_PIT.CLI"></a>
 
-To restore a DB cluster to a specified time, use the AWS CLI command [ `restore-db-cluster-to-point-in-time`](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) to create a new DB cluster\.
+To restore a DB cluster to a specified time, use the AWS CLI command [ `restore-db-cluster-to-point-in-time`](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) to create a new DB cluster\.
 
 **Example**  
 For Linux, OS X, or Unix:  
@@ -53,7 +53,7 @@ For Windows:
 
 ## API<a name="USER_PIT.API"></a>
 
-To restore a DB cluster to a specified time, call the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterToPointInTime.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterToPointInTime.html) action with the following parameters:
+To restore a DB cluster to a specified time, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterToPointInTime.html) action with the following parameters:
 + `SourceDBClusterIdentifier`
 + `DBClusterIdentifier`
 + `RestoreToTime`

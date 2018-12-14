@@ -7,7 +7,7 @@ The following topic shows how to create an Aurora DB cluster and then add an Aur
 **Important**  
 You must complete the tasks in the [Setting Up Your Environment for Amazon Aurora](CHAP_SettingUp_Aurora.md) section before you can create an Aurora DB cluster\.
 
-This topic describes how you can create an Aurora DB cluster using either the AWS Management Console or the AWS CLI\. For simple instructions on connecting to your Aurora DB cluster, see [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\. For a detailed guide on connecting to an Amazon Aurora DB cluster, see [RDS Aurora Connectivity](https://s3-us-west-2.amazonaws.com/jsmiley-share/Aurora/RDS+Aurora+Connectivity+Guide+-+v4.pdf)\.
+This topic describes how you can create an Aurora DB cluster using either the AWS Management Console or the AWS CLI\. For simple instructions on connecting to your Aurora DB cluster, see [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\.
 
 ## DB Cluster Prerequisites<a name="Aurora.CreateInstance.Prerequisites"></a>
 
@@ -28,7 +28,7 @@ If you don't have a default VPC or you have not created a VPC, you can have Amaz
 + Specify an RDS DB subnet group that defines at least two subnets in the VPC that can be used by the Aurora DB cluster\. For more information, see [Working with DB Subnet Groups](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Subnets)\.
 
 ### Additional Prerequisites<a name="Aurora.CreateInstance.Prerequisites.Additional"></a>
-+ If you are connecting to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)\.
++ If you are connecting to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Authentication and Access Control](UsingWithRDS.IAM.md)\.
 
   If you are using an IAM account to access the Amazon RDS console, you must first log on to the AWS Management Console with your IAM account, and then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 + If you want to tailor the configuration parameters for your DB cluster, you must specify a DB cluster parameter group and DB parameter group with the required parameter settings\. For information about creating or modifying a DB cluster parameter group or DB parameter group, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
@@ -38,7 +38,7 @@ If you don't have a default VPC or you have not created a VPC, you can have Amaz
 
 You can create an Aurora DB cluster using the AWS Management Console, the AWS CLI, or the RDS API\.
 
-### AWS Management Console<a name="Aurora.CreateInstance.Creating.Console"></a>
+### Console<a name="Aurora.CreateInstance.Creating.Console"></a>
 
 **To create an Aurora DB cluster using the AWS Management Console**
 
@@ -48,10 +48,12 @@ You can create an Aurora DB cluster using the AWS Management Console, the AWS CL
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Choose **Create database** to start the Create database wizard\. The wizard opens on the **Select engine** page\.
+   If the navigation pane is closed, choose the menu icon at the top left to open it\.
 
-1. On the **Select Engine** page, choose MySQL 5\.6\-compatible, MySQL 5\.7\-compatible, or PostgreSQL\-compatible edition of Aurora\.  
-![\[Amazon Aurora Create Database Wizard Select Engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch01.png)
+1. Choose **Create database** to open the **Select engine** page\.
+
+1. On the **Select engine** page, choose MySQL 5\.6\-compatible, MySQL 5\.7\-compatible, or PostgreSQL\-compatible edition of Aurora\.  
+![\[Amazon Aurora Select engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch01.png)
 
 1. Choose **Next**\.
 
@@ -59,14 +61,14 @@ You can create an Aurora DB cluster using the AWS Management Console, the AWS CL
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html)
 
    A typical **Specify DB details** page looks like the following\.   
-![\[Amazon Aurora Create Database Wizard DB Instance Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch02.png)
+![\[Amazon Aurora Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch02.png)
 
 1. Confirm your master password and choose **Next**\.
 
 1. On the **Configure advanced settings** page, you can customize additional settings for your Aurora DB cluster\. The following table shows the advanced settings for a DB cluster\.     
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html)
 
-1. Choose **Create database** to create your Aurora DB instance, and then choose **Close** to close the wizard\. 
+1. Choose **Create database** to create your Aurora DB instance, and then choose **Close**\. 
 
    On the Amazon RDS console, the new DB instance appears in the list of DB instances\. The DB instance will have a status of **creating** until the DB instance is created and ready for use\. When the state changes to available, you can connect to the primary instance for your DB cluster\. Depending on the DB instance class and store allocated, it can take several minutes for the new instance to be available\.
 
@@ -75,7 +77,7 @@ You can create an Aurora DB cluster using the AWS Management Console, the AWS CL
 
    Note the port and the endpoint of the cluster\. Use the endpoint and port of the cluster in your JDBC and ODBC connection strings for any application that performs write or read operations\.
 
-### CLI<a name="Aurora.CreateInstance.Creating.CLI"></a>
+### AWS CLI<a name="Aurora.CreateInstance.Creating.CLI"></a>
 
 **Note**  
 Before you can create an Aurora DB cluster using the AWS CLI, you must fulfill the required prerequisites, such as creating a VPC and an RDS DB subnet group\. For more information, see [DB Cluster Prerequisites](#Aurora.CreateInstance.Prerequisites)\.
@@ -90,7 +92,7 @@ When you create an Aurora MySQL DB cluster or DB instance, ensure that you speci
 
 Complete the following steps:
 
-1. Identify the DB subnet group and VPC security group ID for your new DB cluster, and then call the [create\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command to create the Aurora MySQL DB cluster\.
+1. Identify the DB subnet group and VPC security group ID for your new DB cluster, and then call the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command to create the Aurora MySQL DB cluster\.
 
    For example, the following command creates a new MySQL 5\.7–compatible DB cluster named `sample-cluster`\.
 
@@ -130,7 +132,7 @@ Complete the following steps:
 
 1. If you use the console to create a DB cluster, then Amazon RDS automatically creates the primary instance \(writer\) for your DB cluster\. If you use the AWS CLI to create a DB cluster, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
 
-   Call the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create the primary instance for your DB cluster\. Include the name of the DB cluster as the `--db-cluster-identifier` option value\.
+   Call the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create the primary instance for your DB cluster\. Include the name of the DB cluster as the `--db-cluster-identifier` option value\.
 
    For example, the following command creates a new MySQL 5\.7–compatible DB instance named `sample-instance`\.
 
@@ -166,7 +168,7 @@ Complete the following steps:
 
 **To create an Aurora PostgreSQL DB cluster using the AWS CLI**
 
-1. Identify the DB subnet group and VPC security group ID for your new DB cluster, and then call the [create\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command to create the Aurora PostgreSQL DB cluster\.
+1. Identify the DB subnet group and VPC security group ID for your new DB cluster, and then call the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command to create the Aurora PostgreSQL DB cluster\.
 
    For example, the following command creates a new DB cluster named `sample-cluster`\.
 
@@ -188,7 +190,7 @@ Complete the following steps:
 
 1. If you use the console to create a DB cluster, then Amazon RDS automatically creates the primary instance \(writer\) for your DB cluster\. If you use the AWS CLI to create a DB cluster, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
 
-   Call the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create the primary instance for your DB cluster\. Include the name of the DB cluster as the `--db-cluster-identifier` option value\.
+   Call the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create the primary instance for your DB cluster\. Include the name of the DB cluster as the `--db-cluster-identifier` option value\.
 
    For Linux, OS X, or Unix:
 
@@ -209,7 +211,7 @@ Complete the following steps:
 **Note**  
 Before you can create an Aurora DB cluster using the AWS CLI, you must fulfill the required prerequisites, such as creating a VPC and an RDS DB subnet group\. For more information, see [DB Cluster Prerequisites](#Aurora.CreateInstance.Prerequisites)\.
 
-Identify the DB subnet group and VPC security group ID for your new DB cluster, and then call the [CreateDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action to create the DB cluster\.
+Identify the DB subnet group and VPC security group ID for your new DB cluster, and then call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action to create the DB cluster\.
 
 When you create an Aurora MySQL DB cluster or DB instance, ensure that you specify the correct value for the `Engine` parameter value based on the MySQL compatibility of the DB cluster or DB instance\.
 + When you create an Aurora MySQL 5\.7 DB cluster or DB instance, you must specify `aurora-mysql` for the `Engine` parameter\.

@@ -4,15 +4,16 @@ You can create an Amazon Aurora MySQL DB cluster as a Read Replica in a differen
 
 You can create Read Replicas of both encrypted and unencrypted DB clusters\. The Read Replica must be encrypted if the source DB cluster is encrypted\.
 
-When you create an Aurora MySQL DB cluster Read Replica in another AWS Region, you should be aware of the following:
+For each source DB cluster, you can have up to five cross\-region DB clusters that are Read Replicas\. When you create an Aurora MySQL DB cluster Read Replica in another AWS Region, you should be aware of the following:
++ Both your source DB cluster and your cross\-region Read Replica DB cluster can have up to 15 Aurora Replicas, along with the primary instance for the DB cluster\. By using this functionality, you can scale read operations for both your source AWS Region and your replication target AWS Region\.
 + In a cross\-region scenario, there is more lag time between the source DB cluster and the Read Replica due to the longer network channels between regions\.
 + Data transferred for cross\-region replication incurs Amazon RDS data transfer charges\. The following cross\-region replication actions generate charges for the data transferred out of the source AWS Region:
   + When you create the Read Replica, Amazon RDS takes a snapshot of the source cluster and transfers the snapshot to the Read Replica region\.
   + For each data modification made in the source databases, Amazon RDS transfers data from the source region to the Read Replica region\.
 
   For more information about Amazon RDS data transfer pricing, see [Amazon Aurora Pricing](http://aws.amazon.com/rds/aurora/pricing/)\.
-
-For each source DB cluster, you can only have one cross\-region Read Replica DB cluster\. Both your source DB cluster and your cross\-region Read Replica DB cluster can have up to 15 Aurora Replicas along with the primary instance for the DB cluster\. This functionality lets you scale read operations for both your source AWS Region and your replication target AWS Region\.
++ You can run multiple concurrent create or delete actions for Read Replicas that reference the same source DB cluster\. However, you must stay within the limit of five Read Replicas for each source DB cluster\.
++ For replication to operate effectively, each Read Replica should have the same amount of compute and storage resources as the source DB cluster\. If you scale the source DB cluster, you should also scale the Read Replicas\.
 
 **Topics**
 + [Before You Begin](#AuroraMySQL.Replication.CrossRegion.Prerequisites)
@@ -41,9 +42,9 @@ Replication begins when the primary instance of the Read Replica DB cluster beco
 
 Use the following procedures to create a cross\-region Read Replica from an Aurora MySQL DB cluster\. These procedures work for creating Read Replicas from either encrypted or unencrypted DB clusters\.
 
-### AWS Management Console<a name="AuroraMySQL.Replication.CrossRegion.Creating.Console"></a>
+### Console<a name="AuroraMySQL.Replication.CrossRegion.Creating.Console"></a>
 
-**AWS Management Console**
+**To create an Aurora MySQL DB cluster that is a cross\-region read replica with the AWS Management Console**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -60,11 +61,11 @@ Use the following procedures to create a cross\-region Read Replica from an Auro
 
 ### AWS CLI<a name="AuroraMySQL.Replication.CrossRegion.Creating.CLI"></a>
 
-**CLI**
+**To create an Aurora MySQL DB cluster that is a cross\-region read replica with the CLI**
 
-1. Call the AWS CLI `[create\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)` command in the AWS Region where you want to create the Read Replica DB cluster\. Include the `--replication-source-identifier` option and specify the Amazon Resource Name \(ARN\) of the source DB cluster to create a Read Replica for\. 
+1. Call the AWS CLI `[create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)` command in the AWS Region where you want to create the Read Replica DB cluster\. Include the `--replication-source-identifier` option and specify the Amazon Resource Name \(ARN\) of the source DB cluster to create a Read Replica for\. 
 
-   For cross\-region replication where the DB cluster identified by `--replication-source-identifier` is encrypted, you must specify the `--kms-key-id` option and the `--storage-encrypted` option\. You must also specify either the `--source-region` or `--pre-signed-url` option\. Using `--source-region` autogenerates a pre\-signed URL that is a valid request for the `CreateDBCluster` API action that can be executed in the source AWS Region that contains the encrypted DB cluster to be replicated\. Using `--pre-signed-url` requires you to construct a pre\-signed URL manually instead\. The KMS key ID is used to encrypt the Read Replica, and must be a KMS encryption key valid for the destination AWS Region\. To learn more about these options, see `[create\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)`\. 
+   For cross\-region replication where the DB cluster identified by `--replication-source-identifier` is encrypted, you must specify the `--kms-key-id` option and the `--storage-encrypted` option\. You must also specify either the `--source-region` or `--pre-signed-url` option\. Using `--source-region` autogenerates a pre\-signed URL that is a valid request for the `CreateDBCluster` API action that can be executed in the source AWS Region that contains the encrypted DB cluster to be replicated\. Using `--pre-signed-url` requires you to construct a pre\-signed URL manually instead\. The KMS key ID is used to encrypt the Read Replica, and must be a KMS encryption key valid for the destination AWS Region\. To learn more about these options, see `[create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)`\. 
 **Note**  
 You can set up cross\-region replication from an unencrypted DB cluster to an encrypted Read Replica by specifying `--storage-encrypted` and providing a value for `--kms-key-id`\. In this case, you don't need to specify `--source-region` or `--pre-signed-url`\.
 
@@ -116,13 +117,13 @@ You can set up cross\-region replication from an unencrypted DB cluster to an en
      --storage-encrypted
    ```
 
-1. Check that the DB cluster has become available to use by using the AWS CLI `[describe\-db\-clusters](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html)` command, as shown in the following example\.
+1. Check that the DB cluster has become available to use by using the AWS CLI `[describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html)` command, as shown in the following example\.
 
    ```
    aws rds describe-db-clusters --db-cluster-identifier sample-replica-cluster                                
    ```
 
-   When the `describe-db-clusters` results show a status of `available`, create the primary instance for the DB cluster so that replication can begin\. To do so, use the AWS CLI `[create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)` command as shown in the following example\.
+   When the `describe-db-clusters` results show a status of `available`, create the primary instance for the DB cluster so that replication can begin\. To do so, use the AWS CLI `[create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)` command as shown in the following example\.
 
    For Linux, OS X, or Unix:
 
@@ -144,15 +145,15 @@ You can set up cross\-region replication from an unencrypted DB cluster to an en
      --engine aurora
    ```
 
-   When the DB instance is created and available, replication begins\. You can determine if the DB instance is available by calling the AWS CLI `[describe\-db\-instances](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html)` command\.
+   When the DB instance is created and available, replication begins\. You can determine if the DB instance is available by calling the AWS CLI `[describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html)` command\.
 
 ### RDS API<a name="AuroraMySQL.Replication.CrossRegion.Creating.API"></a>
 
-**API**
+**To create an Aurora MySQL DB cluster that is a cross\-region read replica with the API**
 
-1. Call the RDS API `[CreateDBCluster](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html)` action in the AWS Region where you want to create the Read Replica DB cluster\. Include the `ReplicationSourceIdentifier` parameter and specify the Amazon Resource Name \(ARN\) of the source DB cluster to create a Read Replica for\. 
+1. Call the RDS API `[CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html)` action in the AWS Region where you want to create the Read Replica DB cluster\. Include the `ReplicationSourceIdentifier` parameter and specify the Amazon Resource Name \(ARN\) of the source DB cluster to create a Read Replica for\. 
 
-   For cross\-region replication where the DB cluster identified by `ReplicationSourceIdentifier` is encrypted, you must specify the `KmsKeyId` parameter and set the `StorageEncrypted` parameter to `true`\. You must also specify the `PreSignedUrl` parameter\. The pre\-signed URL must be a valid request for the `CreateDBCluster` API action that can be executed in the source AWS Region that contains the encrypted DB cluster to be replicated\. The KMS key ID is used to encrypt the Read Replica, and must be a KMS encryption key valid for the destination AWS Region\. To automatically rather than manually generate a presigned URL, use the AWS CLI `[create\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)` command with the `--source-region` option instead\.
+   For cross\-region replication where the DB cluster identified by `ReplicationSourceIdentifier` is encrypted, you must specify the `KmsKeyId` parameter and set the `StorageEncrypted` parameter to `true`\. You must also specify the `PreSignedUrl` parameter\. The pre\-signed URL must be a valid request for the `CreateDBCluster` API action that can be executed in the source AWS Region that contains the encrypted DB cluster to be replicated\. The KMS key ID is used to encrypt the Read Replica, and must be a KMS encryption key valid for the destination AWS Region\. To automatically rather than manually generate a presigned URL, use the AWS CLI `[create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)` command with the `--source-region` option instead\.
 **Note**  
 You can set up cross\-region replication from an unencrypted DB cluster to an encrypted Read Replica by specifying `StorageEncrypted` as **true** and providing a value for `KmsKeyId`\. In this case, you don't need to specify `PreSignedUrl`\.
 
@@ -210,7 +211,7 @@ You can set up cross\-region replication from an unencrypted DB cluster to an en
      &X-Amz-Signature=a04c831a0b54b5e4cd236a90dcb9f5fab7185eb3b72b5ebe9a70a4e95790c8b7
    ```
 
-1. Check that the DB cluster has become available to use by using the RDS API `[DescribeDBClusters](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html)` action, as shown in the following example\.
+1. Check that the DB cluster has become available to use by using the RDS API `[DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html)` action, as shown in the following example\.
 
    ```
    https://rds.us-east-1.amazonaws.com/
@@ -226,7 +227,7 @@ You can set up cross\-region replication from an unencrypted DB cluster to an en
      &X-Amz-Signature=84c2e4f8fba7c577ac5d820711e34c6e45ffcd35be8a6b7c50f329a74f35f426
    ```
 
-   When the `DescribeDBClusters` results show a status of `available`, create the primary instance for the DB cluster so that replication can begin\. To do so, use the RDS API `[CreateDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)` action as shown in the following example\.
+   When the `DescribeDBClusters` results show a status of `available`, create the primary instance for the DB cluster so that replication can begin\. To do so, use the RDS API `[CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)` action as shown in the following example\.
 
    ```
    https://rds.us-east-1.amazonaws.com/
@@ -245,11 +246,11 @@ You can set up cross\-region replication from an unencrypted DB cluster to an en
      &X-Amz-Signature=125fe575959f5bbcebd53f2365f907179757a08b5d7a16a378dfa59387f58cdb
    ```
 
-   When the DB instance is created and available, replication begins\. You can determine if the DB instance is available by calling the AWS CLI `[DescribeDBInstances](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)` command\.
+   When the DB instance is created and available, replication begins\. You can determine if the DB instance is available by calling the AWS CLI `[DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)` command\.
 
 ## Viewing Amazon Aurora MySQL Cross\-Region Replicas<a name="AuroraMySQL.Replication.CrossRegion.Viewing"></a>
 
-You can view the cross\-region replication relationships for your Amazon Aurora MySQL DB clusters by calling the `[describe\-db\-clusters](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html)` AWS CLI command or the `[DescribeDBClusters](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html)` RDS API action\. In the response, refer to the `ReadReplicaIdentifiers` field for the DB cluster identifiers of any cross\-region Read Replica DB clusters, and refer to the `ReplicationSourceIdentifier` element for the ARN of the source DB cluster that is the replication master\. 
+You can view the cross\-region replication relationships for your Amazon Aurora MySQL DB clusters by calling the `[describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html)` AWS CLI command or the `[DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html)` RDS API action\. In the response, refer to the `ReadReplicaIdentifiers` field for the DB cluster identifiers of any cross\-region Read Replica DB clusters, and refer to the `ReplicationSourceIdentifier` element for the ARN of the source DB cluster that is the replication master\. 
 
 ## Promoting a Read Replica to Be a DB Cluster<a name="AuroraMySQL.Replication.CrossRegion.Promote"></a>
 
@@ -273,13 +274,13 @@ The following steps show the general process for promoting a Read Replica to a D
 
 1. Stop any transactions from being written to the Read Replica source DB cluster, and then wait for all updates to be made to the Read Replica\. Database updates occur on the Read Replica after they have occurred on the source DB cluster, and this replication lag can vary significantly\. Use the [Replica Lag](http://aws.amazon.com/rds/faqs/#105) metric to determine when all updates have been made to the Read Replica\.
 
-1. Promote the Read Replica by using the **Promote read replica** option on the Amazon RDS console, the AWS CLI command [http://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html](http://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html), or the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_PromoteReadReplicaDBCluster.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_PromoteReadReplicaDBCluster.html) Amazon RDS API operation\.
+1. Promote the Read Replica by using the **Promote read replica** option on the Amazon RDS console, the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html), or the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_PromoteReadReplicaDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_PromoteReadReplicaDBCluster.html) Amazon RDS API operation\.
 
    You choose an Aurora MySQL DB instance to promote the Read Replica\. After the Read Replica is promoted, the Aurora MySQL DB cluster is promoted to a standalone DB cluster\. The DB instance with the highest failover priority is promoted to the primary DB instance for the DB cluster\. The other DB instances become Aurora Replicas\.
 **Note**  
 The promotion process takes a few minutes to complete\. When you promote a Read Replica, replication is stopped and the DB instances are rebooted\. When the reboot is complete, the Read Replica is available as a new DB cluster\.
 
-### AWS Management Console<a name="AuroraMySQL.Replication.CrossRegion.Promote.Console"></a>
+### Console<a name="AuroraMySQL.Replication.CrossRegion.Promote.Console"></a>
 
 **To promote an Aurora MySQL Read Replica to a DB cluster**
 
@@ -299,7 +300,7 @@ The promotion process takes a few minutes to complete\. When you promote a Read 
 
 ### AWS CLI<a name="AuroraMySQL.Replication.CrossRegion.Promote.CLI"></a>
 
-To promote a Read Replica to a DB cluster, use the AWS CLI [ `promote-read-replica-db-cluster`](http://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html) command\. 
+To promote a Read Replica to a DB cluster, use the AWS CLI [ `promote-read-replica-db-cluster`](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html) command\. 
 
 **Example**  
 For Linux, OS X, or Unix:  
@@ -317,7 +318,7 @@ aws rds promote-read-replica-db-cluster ^
 
 ### RDS API<a name="AuroraMySQL.Replication.CrossRegion.Promote.API"></a>
 
-To promote a Read Replica to a DB cluster, call [ `PromoteReadReplicaDBCluster`](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplicaDBCluster.html)\. 
+To promote a Read Replica to a DB cluster, call [ `PromoteReadReplicaDBCluster`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplicaDBCluster.html)\. 
 
 ## Troubleshooting Amazon Aurora MySQL Cross Region Replicas<a name="AuroraMySQL.Replication.CrossRegion.Troubleshooting"></a>
 
@@ -333,7 +334,7 @@ You receive this error if you have updated the `binlog_format` DB cluster parame
 
 ### Source cluster \[DB cluster ARN\] already has a read replica in this region<a name="AuroraMySQL.Replication.CrossRegion.Troubleshooting.3"></a>
 
-You can only have one cross\-region Read Replica DB cluster for each source DB cluster\. You must delete the existing cross\-region DB cluster that is a Read Replica in order to create a new one\.
+You can only have one cross\-region DB cluster that is a Read Replica for each source DB cluster in any AWS Region\. To create a new cross\-region DB cluster that is a Read Replica in a particular AWS Region, you must delete the existing one\.
 
 ### DB cluster \[DB cluster ARN\] requires a database engine upgrade for cross\-region replication support<a name="AuroraMySQL.Replication.CrossRegion.Troubleshooting.4"></a>
 

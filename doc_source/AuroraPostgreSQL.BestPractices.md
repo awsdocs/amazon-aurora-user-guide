@@ -77,7 +77,7 @@ myauroracluster.cluster-ro-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432
 &tcpKeepAlive=true&targetServerType=master&loadBalanceHosts=true
 ```
 
- For best availability and to avoid a dependency on the RDS API, the best option for connecting is to maintain a file with a host string that your application reads from when you establish a connection to the database\. This host string would have all the Aurora endpoints available for the cluster\. For more information about Aurora endpoints, see [Amazon Aurora Endpoints](Aurora.Overview.Endpoints.md)\. For example, you could store the endpoints in a file locally like the following: 
+ For best availability and to avoid a dependency on the RDS API, the best option for connecting is to maintain a file with a host string that your application reads from when you establish a connection to the database\. This host string would have all the Aurora endpoints available for the cluster\. For more information about Aurora endpoints, see [Amazon Aurora Connection Management](Aurora.Overview.Endpoints.md)\. For example, you could store the endpoints in a file locally like the following: 
 
 ```
 myauroracluster.cluster-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432,

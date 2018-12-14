@@ -4,7 +4,7 @@ You can configure an Aurora Serverless DB cluster when you restore a provisioned
 
 For general information about restoring a DB cluster from a snapshot, see [Restoring from a DB Cluster Snapshot](USER_RestoreFromSnapshot.md)\.
 
-## AWS Management Console<a name="aurora-serverless.restorefromsnapshot.console"></a>
+## Console<a name="aurora-serverless.restorefromsnapshot.console"></a>
 
 You can restore a DB cluster snapshot to an Aurora DB cluster with the AWS Management Console\.
 
@@ -34,7 +34,7 @@ For more information, see [Using Service\-Linked Roles for Amazon RDS](UsingWith
 
 ## AWS CLI<a name="aurora-serverless.restorefromsnapshot.cli"></a>
 
-To configure an Aurora Serverless DB cluster when you restore from a DB cluster using the AWS CLI, run the [restore\-db\-cluster\-from\-snapshot](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) AWS CLI command and specify `serverless` for the `--engine-mode` option\.
+To configure an Aurora Serverless DB cluster when you restore from a DB cluster using the AWS CLI, run the [restore\-db\-cluster\-from\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) AWS CLI command and specify `serverless` for the `--engine-mode` option\.
 
 You can optionally specify the `--scaling-configuration` option to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values are `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
 
@@ -60,6 +60,6 @@ aws rds restore-db-cluster-from-snapshot ^
 
 ## RDS API<a name="aurora-serverless.restorefromsnapshot.api"></a>
 
-To configure an Aurora Serverless DB cluster when you restore from a DB cluster using the RDS API, run the [RestoreDBClusterFromSnapshot](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromSnapshot.html) action and specify `serverless` for the `EngineMode` parameter\.
+To configure an Aurora Serverless DB cluster when you restore from a DB cluster using the RDS API, run the [RestoreDBClusterFromSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromSnapshot.html) action and specify `serverless` for the `EngineMode` parameter\.
 
 You can optionally specify the `ScalingConfiguration` parameter to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values are `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.

@@ -49,7 +49,7 @@ The following diagram shows this scenario\.
 
 ![\[A DB Instance in a VPC Accessed by an EC2 Instance in a Different VPC\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/RDSVPC2EC2VPC.png)
 
-A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses\. Instances in either VPC can communicate with each other as if they are within the same network\. You can create a VPC peering connection between your own VPCs, with a VPC in another AWS account, or with a VPC in a different AWS Region\. To learn more about VPC peering, see the [VPC documentation](http://docs.aws.amazon.com/vpc/latest/userguide/vpc-peering.html)\. 
+A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses\. Instances in either VPC can communicate with each other as if they are within the same network\. You can create a VPC peering connection between your own VPCs, with a VPC in another AWS account, or with a VPC in a different AWS Region\. To learn more about VPC peering, see the [VPC documentation](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-peering.html)\. 
 
 ## A DB Instance in a VPC Accessed by an EC2 Instance Not in a VPC<a name="USER_VPC.ClassicLink"></a>
 
@@ -78,7 +78,7 @@ Using ClassicLink, you can connect an EC2 instance to a logically isolated datab
 1.  On the **Link to VPC** page, choose the security group you want to use, and then choose **Link to VPC**\. 
 
 **Note**  
- The ClassicLink features are only visible in the consoles for accounts and regions that support EC2\-Classic\. For more information, see [ ClassicLink](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in the *Amazon EC2 User Guide for Linux Instances\.* 
+ The ClassicLink features are only visible in the consoles for accounts and regions that support EC2\-Classic\. For more information, see [ ClassicLink](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in the *Amazon EC2 User Guide for Linux Instances\.* 
 
 ## A DB Instance in a VPC Accessed by a Client Application Through the Internet<a name="USER_VPC.Scenario4"></a>
 

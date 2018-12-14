@@ -1,6 +1,110 @@
-# Amazon Aurora PostgreSQL Database Engine Updates<a name="AuroraPostgreSQL.Updates.20180305"></a>
+# Amazon Aurora PostgreSQL Database Engine Versions<a name="AuroraPostgreSQL.Updates.20180305"></a>
+
+
+**Aurora with PostgreSQL compatibility**  
+
+| Aurora PostgreSQL | Compatible PostgreSQL Release | 
+| --- | --- | 
+| [Version 2\.1](#AuroraPostgreSQL.Updates.20180305.21) | [10\.5](https://www.postgresql.org/docs/current/static/release-10-5.html) | 
+| [Version 2\.0](#AuroraPostgreSQL.Updates.20180305.20) | [10\.4](https://www.postgresql.org/docs/current/static/release-10-4.html) | 
+| [Version 1\.3](#AuroraPostgreSQL.Updates.20180305.13) | [9\.6\.9](https://www.postgresql.org/docs/current/static/release-9-6-9.html) | 
+| [Version 1\.2](#AuroraPostgreSQL.Updates.20180305.12) | [9\.6\.8](https://www.postgresql.org/docs/current/static/release-9-6-8.html) | 
+| [Version 1\.1](#AuroraPostgreSQL.Updates.20180305.11) | [9\.6\.6](https://www.postgresql.org/docs/current/static/release-9-6-6.html) Deprecated | 
+| Version 1\.0 | [9\.6\.3](https://www.postgresql.org/docs/current/static/release-9-6-3.html) Deprecated | 
 
 The following updates are available for Aurora PostgreSQL\.
+
+## Version 2\.1<a name="AuroraPostgreSQL.Updates.20180305.21"></a>
+
+You can find the following improvements in this engine update\.
+
+**New features**
++ This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.5\. For more information about the improvements in release 10\.5, see [PostgreSQL Release 10\.5](https://www.postgresql.org/docs/current/static/release-10-5.html)\.
++ General availability of Aurora Query Plan Management, which enables customers to track and manage any or all query plans used by their applications, to control query optimizer plan selection, and to ensure high and stable application performance\. For more information, see [ Managing Query Execution Plans for Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.html)\. 
++ Updated the `libprotobuf` extension to version 1\.3\.0\. This is used by the PostGIS extension\.
++ Updated the `pg_similarity` extension to version 1\.0\.
++ Updated the `log_fdw` extension to version 1\.1\.
++ Updated the `pg_hint_plan` extension to version 1\.3\.1\.
+
+**Improvements**
++ Network traffic between the writer and reader nodes is now compressed to reduce network utilization\. This reduces the chance of read node unavailability due to network saturation\.
++ Implemented a high performance, scalable subsystem for PostgreSQL subtransactions\. This improves the performance of applications which make extensive use of savepoints and `PL/pgSQL` exception handlers\.
++ The `rds_superuser` role can now set the following parameters on a per\-session, database, or role level: 
+  + `log_duration`
+  + `log_error_verbosity`
+  + `log_executor_stats`
+  + `log_lock_waits`
+  +  `log_min_duration_statement`
+  +  `log_min_error_statement`
+  +  `log_min_messages`
+  +  `log_parser_stats`
+  +  `log_planner_stats`
+  +  `log_replication_commands`
+  +  `log_statement_stats`
+  + `log_temp_files `
++ Fixed a bug whereby the SQL command "ALTER FUNCTION \.\.\. OWNER TO \.\.\." may fail with error "improper qualified name \(too many dotted names\)"\.
++ Fixed a bug whereby a crash could occur while committing a transaction with more than two million subtransactions\.
++ Fixed a bug in community PostgreSQL code related to GIN indexes which can cause the Aurora Storage volume to become unavailable\.
++ Fixed a bug whereby an Aurora PostgreSQL replica of an RDS for PostgreSQL instance may fail to start, reporting error: "PANIC: could not locate a valid checkpoint record"\.
++ Fixed a bug whereby passing an invalid parameter to the `aurora_stat_backend_waits` function could cause a crash\.
+
+**Known issues**
++ The `pageinspect` extension is not supported in Aurora PostgreSQL\.
+
+## Version 2\.0<a name="AuroraPostgreSQL.Updates.20180305.20"></a>
+
+You can find the following improvements in this engine update\.
+
+**New features**
++ This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.4\. For more information about the improvements in release 10\.4, see [Release 10\.4](https://www.postgresql.org/docs/current/static/release-10-4.html)\.
+
+**Improvements**
++ This release contains all fixes, features, and improvements present in [Version 1\.3](#AuroraPostgreSQL.Updates.20180305.13)\.
++ The temporary file size limitation is user\-configurable\. You require the **rds\_superuser** role to modify the `temp_file_limit` parameter\.
++ Updated the `GDAL` library, which is used by the `PostGIS` extension\. 
++ Updated the `ip4r` extension to version 2\.1\.1\.
++ Updated the `pg_repack` extension to version 1\.4\.3\. 
++ Updated the `plv8` extension to version 2\.1\.2\.
++ Parallel queries – When you create a new Aurora PostgreSQL version 2\.0 instance, parallel queries are enabled for the `default.postgres10` parameter group\. The parameter `max_parallel_workers_per_gather` is set to 2 by default, but you can modify it to support your specific workload requirements\.
+
+**Known issues**
++ None\.
+
+## Version 1\.3<a name="AuroraPostgreSQL.Updates.20180305.13"></a>
+
+You can find the following improvements in this engine update\.
+
+**New features**
++ This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.9\. For more information about the improvements in version 9\.6\.9, see [Release 9\.6\.9](https://www.postgresql.org/docs/9.6/static/release-9-6-9.html)\.
+
+**Improvements**
++ This release contains all fixes, features, and improvements present in [Version 1\.2](#AuroraPostgreSQL.Updates.20180305.12)\.
++ Updated the GDAL library, which is used by the `PostGIS` extension\. 
++ Updated the following PostgreSQL extensions: 
+  + `ip4r` updated to version 2\.1\.1\.
+  + `pgaudit` updated to version 1\.1\.1\. 
+  + `pg_repack` updated to version 1\.4\.3\. 
+  + `plv8` updated to version 2\.1\.2\.
++ Fixed an issue in the monitoring system that could incorrectly cause a failover when local disk usage is high\.
++ Fixed a bug whereby Aurora PostgreSQL may repeatedly crash, reporting:
+
+  `PANIC: new_record_total_len (8201) must be less than BLCKSZ (8192), rmid (6), info (32)`
++ Fixed a bug whereby an Aurora PostgreSQL read node may be unable to rejoin a cluster due to recovery of a large buffer cache\. This issue is unlikely to occur on instances other than **r4\.16xlarge\.**
++ Fixed a bug whereby inserting into an empty GIN index leaf page imported from pre\-9\.4 engine versions may cause the Aurora Storage volume to become unavailable\.
++ Fixed a bug whereby, in rare circumstances, a crash during transaction commit could result in the loss of `CommitTs` data for the committing transaction\. The actual durability of the transaction was not impacted by this bug\.
++ Fixed a bug in the `PostGIS` extension whereby `PostGIS` may crash in the function `gserialized_gist_picksplit_2d()`\.
++ Improved the stability of read\-only nodes during heavy write traffic on instances smaller than **r4\.8xl**\. This specifically addresses a situation where the network bandwidth between the writer and the reader is constrained\.
++ Fixed a bug whereby an Aurora PostgreSQL instance acting as a replication target of an RDS for PostgreSQL instance crashed with the following error:
+
+  `FATAL: could not open file "base/16411/680897_vm": No such file or directory" during "xlog redo at 782/3122D540 for Storage/TRUNCATE"`
++ Fixed a memory leak on read\-only nodes whereby the heap size for the "aurora wal replay process" will continue to grow\. This is observable via Enhanced Monitoring\.
++ Fixed a bug whereby Aurora PostgreSQL may fail to start, with the following message reported in the PostgreSQL log:
+
+  `FATAL: Storage initialization failed.`
++ Fixed a performance limitation on heavy write workloads that caused waits on the `LWLock:buffer_content` and `IO:ControlFileSyncUpdate` events\.
+
+**Known issues**
++ None\.
 
 ## Version 1\.2<a name="AuroraPostgreSQL.Updates.20180305.12"></a>
 

@@ -10,7 +10,7 @@ You can restore snapshots of Aurora MySQL 1\.14\*, 1\.15\*, 1\.16\*, and 1\.17\*
 
 We do not allow in\-place upgrade of Aurora MySQL 1\.x clusters into Aurora MySQL 2\.01\.1 or restore to Aurora MySQL 2\.01\.1 from an Amazon S3 backup\. We plan to remove these restrictions in a later Aurora MySQL 2\.x release\.
 
-The performance schema is disabled for Aurora MySQL 5\.7\.
+The performance schema is disabled for this release of Aurora MySQL 5\.7\. Upgrade to Aurora 2\.03 for performance schema support\.
 
 ## Comparison with Aurora MySQL 5\.6<a name="AuroraMySQL.Updates.2011.Compare56"></a>
 

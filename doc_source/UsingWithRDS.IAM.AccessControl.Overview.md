@@ -3,7 +3,7 @@
 Every AWS resource is owned by an AWS account, and permissions to create or access the resources are governed by permissions policies\. An account administrator can attach permissions policies to IAM identities \(that is, users, groups, and roles\), and some services \(such as AWS Lambda\) also support attaching permissions policies to resources\.
 
 **Note**  
-An *account administrator* \(or administrator user\) is a user with administrator privileges\. For more information, see [IAM Best Practices](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) in the *IAM User Guide*\.
+An *account administrator* \(or administrator user\) is a user with administrator privileges\. For more information, see [IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) in the *IAM User Guide*\.
 
 When granting permissions, you decide who is getting the permissions, the resources they get permissions for, and the specific actions that you want to allow on those resources\. 
 
@@ -36,7 +36,7 @@ These resources and subresources have unique Amazon Resource Names \(ARNs\) asso
 | Read Replica | `arn:aws:rds:region:account-id:db:db-instance-name` | 
 | Reserved DB instance | `arn:aws:rds:region:account-id:ri:reserved-db-instance-name` | 
 
-Amazon RDS provides a set of operations to work with the Amazon RDS resources\. For a list of available operations, see [Actions](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Operations.html)\. 
+Amazon RDS provides a set of operations to work with the Amazon RDS resources\. For a list of available operations, see [Actions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Operations.html)\. 
 
 ## Understanding Resource Ownership<a name="UsingWithRDS.IAM.AccessControl.ResourceOwner"></a>
 
@@ -50,9 +50,9 @@ A *resource owner* is the AWS account that created a resource\. That is, the res
 A *permissions policy* describes who has access to what\. The following section explains the available options for creating permissions policies\.
 
 **Note**  
-This section discusses using IAM in the context of Amazon RDS\. It doesn't provide detailed information about the IAM service\. For complete IAM documentation, see [What Is IAM?](http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\. For information about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
+This section discusses using IAM in the context of Amazon RDS\. It doesn't provide detailed information about the IAM service\. For complete IAM documentation, see [What Is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\. For information about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
 
-Policies attached to an IAM identity are referred to as *identity\-based* policies \(IAM polices\) and policies attached to a resource are referred to as *resource\-based* policies\. Amazon RDS supports only identity\-based policies \(IAM policies\)\.
+Policies attached to an IAM identity are referred to as *identity\-based* policies \(IAM policies\) and policies attached to a resource are referred to as *resource\-based* policies\. Amazon RDS supports only identity\-based policies \(IAM policies\)\.
 
 **Topics**
 + [Identity\-Based Policies \(IAM Policies\)](#UsingWithRDS.IAM.AccessControl.ManagingAccess.IdentityBased)
@@ -70,7 +70,7 @@ You can attach policies to IAM identities\. For example, you can do the followin
 
   1. Account B administrator can then delegate permissions to assume the role to any users in Account B\. Doing this allows users in Account B to create or access resources in Account A\. The principal in the trust policy can also be an AWS service principal if you want to grant an AWS service permissions to assume the role\.
 
-   For more information about using IAM to delegate permissions, see [Access Management](http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*\. 
+   For more information about using IAM to delegate permissions, see [Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*\. 
 
 The following is an example policy that allows the user with the ID `123456789012` to create DB instances for your AWS account\. The policy requires that the name of the new DB instance begin with `test`\. The new DB instance must also use the MySQL database engine and the `db.t2.micro` DB instance class\. In addition, the new DB instance must use an option group and a DB parameter group that starts with `default`, and it must use the `default` subnet group\.
 
@@ -101,7 +101,7 @@ The following is an example policy that allows the user with the ID `12345678901
 24. }
 ```
 
-For more information about using identity\-based policies with Amazon RDS, see [Using Identity\-Based Policies \(IAM Policies\) for Amazon RDS](UsingWithRDS.IAM.AccessControl.IdentityBased.md)\. For more information about users, groups, roles, and permissions, see [Identities \(Users, Groups, and Roles\)](http://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the *IAM User Guide*\. 
+For more information about using identity\-based policies with Amazon RDS, see [Using Identity\-Based Policies \(IAM Policies\) for Amazon RDS](UsingWithRDS.IAM.AccessControl.IdentityBased.md)\. For more information about users, groups, roles, and permissions, see [Identities \(Users, Groups, and Roles\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the *IAM User Guide*\. 
 
 ### Resource\-Based Policies<a name="UsingWithRDS.IAM.AccessControl.ManagingAccess.ResourceBased"></a>
 
@@ -109,7 +109,7 @@ Other services, such as Amazon S3, also support resource\-based permissions poli
 
 ## Specifying Policy Elements: Actions, Effects, Resources, and Principals<a name="SpecifyingIAMPolicyActions-RDS"></a>
 
-For each Amazon RDS resource \(see [Amazon RDS Resources and Operations](#CreatingIAMPolicies-RDS)\), the service defines a set of API operations \(see [Actions](http://docs.aws.amazon.com/redshift/latest/APIReference/API_Operations.html)\)\. To grant permissions for these API operations, Amazon RDS defines a set of actions that you can specify in a policy\. Performing an API operation can require permissions for more than one action\. 
+For each Amazon RDS resource \(see [Amazon RDS Resources and Operations](#CreatingIAMPolicies-RDS)\), the service defines a set of API operations \(see [Actions](https://docs.aws.amazon.com/redshift/latest/APIReference/API_Operations.html)\)\. To grant permissions for these API operations, Amazon RDS defines a set of actions that you can specify in a policy\. Performing an API operation can require permissions for more than one action\. 
 
 The following are the basic policy elements:
 + **Resource** – In a policy, you use an Amazon Resource Name \(ARN\) to identify the resource to which the policy applies\. For more information, see [Amazon RDS Resources and Operations](#CreatingIAMPolicies-RDS)\. 
@@ -117,14 +117,14 @@ The following are the basic policy elements:
 + **Effect** – You specify the effect when the user requests the specific action—this can be either allow or deny\. If you don't explicitly grant access to \(allow\) a resource, access is implicitly denied\. You can also explicitly deny access to a resource, which you might do to make sure that a user cannot access it, even if a different policy grants access\.
 + **Principal** – In identity\-based policies \(IAM policies\), the user that the policy is attached to is the implicit principal\. For resource\-based policies, you specify the user, account, service, or other entity that you want to receive permissions \(applies to resource\-based policies only\)\. Amazon RDS doesn't support resource\-based policies\.
 
-To learn more about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
+To learn more about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
 
 For a table showing all of the Amazon RDS API actions and the resources that they apply to, see [Amazon RDS API Permissions: Actions, Resources, and Conditions Reference](UsingWithRDS.IAM.ResourcePermissions.md)\. 
 
-You can test IAM policies with the IAM policy simulator\. It automatically provides a list of resources and parameters required for each AWS action, including Amazon RDS actions\. The IAM policy simulator determines the permissions required for each of the actions that you specify\. For information about the IAM policy simulator, see [ Testing IAM Policies with the IAM Policy Simulator](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html) in the *IAM User Guide*\. 
+You can test IAM policies with the IAM policy simulator\. It automatically provides a list of resources and parameters required for each AWS action, including Amazon RDS actions\. The IAM policy simulator determines the permissions required for each of the actions that you specify\. For information about the IAM policy simulator, see [ Testing IAM Policies with the IAM Policy Simulator](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html) in the *IAM User Guide*\. 
 
 ## Specifying Conditions in a Policy<a name="SpecifyingIAMPolicyConditions-RDS"></a>
 
-When you grant permissions, you can use the access policy language to specify the conditions when a policy should take effect\. For example, you might want a policy to be applied only after a specific date\. For more information about specifying conditions in a policy language, see [Condition](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Condition) in the *IAM User Guide*\.
+When you grant permissions, you can use the access policy language to specify the conditions when a policy should take effect\. For example, you might want a policy to be applied only after a specific date\. For more information about specifying conditions in a policy language, see [Condition](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Condition) in the *IAM User Guide*\.
 
-To express conditions, you use predefined condition keys\. There are AWS\-wide condition keys and RDS\-specific keys that you can use as appropriate\. For a complete list of AWS\-wide keys, see [Available Keys for Conditions](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\. For a complete list of RDS\-specific keys, see [Using IAM Policy Conditions for Fine\-Grained Access Control](UsingWithRDS.IAM.Conditions.md)\. 
+To express conditions, you use predefined condition keys\. There are AWS\-wide condition keys and RDS\-specific keys that you can use as appropriate\. For a complete list of AWS\-wide keys, see [Available Keys for Conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\. For a complete list of RDS\-specific keys, see [Using IAM Policy Conditions for Fine\-Grained Access Control](UsingWithRDS.IAM.Conditions.md)\. 

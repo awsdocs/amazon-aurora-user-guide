@@ -30,7 +30,7 @@ This approach can be helpful if you want to add logic to your application code t
 
 ## Using T2 Instances<a name="AuroraMySQL.BestPractices.T2Medium"></a>
 
-Amazon Aurora MySQL instances that use the `db.t2.small` or `db.t2.medium` DB instance classes are best suited for applications that do not support a high workload for an extended amount of time\. T2 instances are designed to provide moderate baseline performance and the capability to burst to significantly higher performance as required by your workload\. They are intended for workloads that don't use the full CPU often or consistently, but occasionally need to burst\. We recommend only using the `db.t2.small` and `db.t2.medium` DB instance classes for development and test servers, or other non\-production servers\. For more details on T2 instances, see [T2 Instances](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html)\.
+Amazon Aurora MySQL instances that use the `db.t2.small` or `db.t2.medium` DB instance classes are best suited for applications that do not support a high workload for an extended amount of time\. T2 instances are designed to provide moderate baseline performance and the capability to burst to significantly higher performance as required by your workload\. They are intended for workloads that don't use the full CPU often or consistently, but occasionally need to burst\. We recommend only using the `db.t2.small` and `db.t2.medium` DB instance classes for development and test servers, or other non\-production servers\. For more details on T2 instances, see [T2 Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html)\.
 
 Do not enable the MySQL Performance Schema on Amazon Aurora MySQL T2 instances\. If the Performance Schema is enabled, the T2 instance might run out of memory\.
 
@@ -166,7 +166,7 @@ When you set up replication between your MySQL DB instance and your Amazon Auror
 When using self\-managed replication, you're responsible for monitoring and resolving any replication issues that may occur\. For more information, see [Diagnosing and Resolving Lag Between Read Replicas](CHAP_Troubleshooting.md#CHAP_Troubleshooting.MySQL.ReplicaLag)\.
 
 **Note**  
-The permissions required to start replication on an Amazon Aurora MySQL DB cluster are restricted and not available to your Amazon RDS master user\. Because of this, you must use the Amazon RDS [ mysql\_rds\_set\_external\_master](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_external_master.html) and [ mysql\_rds\_start\_replication](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_start_replication.html) procedures to set up replication between your Amazon Aurora MySQL DB cluster and your MySQL DB instance\.
+The permissions required to start replication on an Amazon Aurora MySQL DB cluster are restricted and not available to your Amazon RDS master user\. Because of this, you must use the Amazon RDS [ mysql\_rds\_set\_external\_master](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_external_master.html) and [ mysql\_rds\_start\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_start_replication.html) procedures to set up replication between your Amazon Aurora MySQL DB cluster and your MySQL DB instance\.
 
 ### Start Replication Between an External Master Instance and a MySQL DB Instance on Amazon RDS<a name="AuroraMySQL.BestPractices.ReadScaling.Procedure"></a>
 
@@ -186,7 +186,7 @@ The permissions required to start replication on an Amazon Aurora MySQL DB clust
    ------------------------------------
    ```
 
-1. Copy the database from the external MySQL DB instance to the Amazon Aurora MySQL DB cluster using `mysqldump`\. For very large databases, you might want to use the procedure in [ Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html) in the * Amazon Relational Database Service User Guide*\.
+1. Copy the database from the external MySQL DB instance to the Amazon Aurora MySQL DB cluster using `mysqldump`\. For very large databases, you might want to use the procedure in [ Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html) in the * Amazon Relational Database Service User Guide*\.
 
    For Linux, OS X, or Unix:
 
@@ -233,7 +233,7 @@ Make sure that there is not a space between the `-p` option and the entered pass
 
    For more information on making backups for use with replication, see [Backing Up a Master or Slave by Making It Read Only](http://dev.mysql.com/doc/refman/5.6/en/replication-solutions-backups-read-only.html) in the MySQL documentation\.
 
-1. In the Amazon RDS Management Console, add the IP address of the server that hosts the source MySQL database to the VPC security group for the Amazon Aurora DB cluster\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\.
+1. In the Amazon RDS Management Console, add the IP address of the server that hosts the source MySQL database to the VPC security group for the Amazon Aurora DB cluster\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\.
 
    You might also need to configure your local network to permit connections from the IP address of your Amazon Aurora DB cluster, so that it can communicate with your source MySQL instance\. To find the IP address of the Amazon Aurora DB cluster, use the `host` command\.
 
@@ -258,14 +258,14 @@ Make sure that there is not a space between the `-p` option and the entered pass
 
 1. Take a manual snapshot of the Aurora MySQL DB cluster to be the replication slave before setting up replication\. If you need to reestablish replication with the DB cluster as a replication slave, you can restore the Aurora MySQL DB cluster from this snapshot instead of having to import the data from your MySQL DB instance into a new Aurora MySQL DB cluster\.
 
-1. Make the Amazon Aurora DB cluster the replica\. Connect to the Amazon Aurora DB cluster as the master user and identify the source MySQL database as the replication master by using the [ mysql\_rds\_set\_external\_master](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_external_master.html) procedure\. Use the master log file name and master log position that you determined in Step 2\. The following is an example\.
+1. Make the Amazon Aurora DB cluster the replica\. Connect to the Amazon Aurora DB cluster as the master user and identify the source MySQL database as the replication master by using the [ mysql\_rds\_set\_external\_master](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_external_master.html) procedure\. Use the master log file name and master log position that you determined in Step 2\. The following is an example\.
 
    ```
    CALL mysql.rds_set_external_master ('mymasterserver.mydomain.com', 3306,
        'repl_user', '<password>', 'mysql-bin-changelog.000031', 107, 0);
    ```
 
-1. On the Amazon Aurora DB cluster, issue the [ mysql\_rds\_start\_replication](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_start_replication.html) procedure to start replication\.
+1. On the Amazon Aurora DB cluster, issue the [ mysql\_rds\_start\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_start_replication.html) procedure to start replication\.
 
    ```
    CALL mysql.rds_start_replication; 
@@ -284,7 +284,7 @@ For instructions on how to create an Amazon Aurora MySQL DB cluster and make it 
 
 ## Migrating from MySQL to Amazon Aurora MySQL with Reduced Downtime<a name="AuroraMySQL.BestPractices.Migrating"></a>
 
-When importing data from a MySQL database that supports a live application to an Amazon Aurora MySQL DB cluster, you might want to reduce the time that service is interrupted while you migrate\. To do so, you can use the procedure documented in [ Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html) in the *Amazon Relational Database Service User Guide*\. This procedure can especially help if you are working with a very large database\. You can use the procedure to reduce the cost of the import by minimizing the amount of data that is passed across the network to AWS\.
+When importing data from a MySQL database that supports a live application to an Amazon Aurora MySQL DB cluster, you might want to reduce the time that service is interrupted while you migrate\. To do so, you can use the procedure documented in [ Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html) in the *Amazon Relational Database Service User Guide*\. This procedure can especially help if you are working with a very large database\. You can use the procedure to reduce the cost of the import by minimizing the amount of data that is passed across the network to AWS\.
 
 The procedure lists steps to transfer a copy of your database data to an Amazon EC2 instance and import the data into a new Amazon RDS MySQL DB instance\. Because Amazon Aurora is compatible with MySQL, you can instead use an Amazon Aurora DB cluster for the target Amazon RDS MySQL DB instance\.
 

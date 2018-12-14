@@ -24,7 +24,9 @@ The first time that you enable Enhanced Monitoring in the console, you can selec
 
 You can also create the required role before you enable Enhanced Monitoring, and then specify your new role's name when you enable Enhanced Monitoring\. You must create this required role if you enable Enhanced Monitoring using the AWS CLI or the RDS API\.
 
-To create the appropriate IAM role to permit Amazon RDS to communicate with the Amazon CloudWatch Logs service on your behalf, take the following steps\.<a name="USER_Monitoring.OS.IAMRole"></a>
+To create the appropriate IAM role to permit Amazon RDS to communicate with the Amazon CloudWatch Logs service on your behalf, take the following steps\.
+
+The user that enables Enhanced Monitoring must be granted the `PassRole` permission\. For more information, see Example 2 in [Granting a User Permissions to Pass a Role to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\.<a name="USER_Monitoring.OS.IAMRole"></a>
 
 **To create an IAM role for Amazon RDS Enhanced Monitoring**
 
@@ -109,7 +111,7 @@ After you have enabled Enhanced Monitoring for your DB instance, you can view th
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. If necessary, choose the region that your DB instance is in\. For more information, go to [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/index.html?rande.html) in the *Amazon Web Services General Reference*\.
+1. If necessary, choose the region that your DB instance is in\. For more information, go to [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/index.html?rande.html) in the *Amazon Web Services General Reference*\.
 
 1. Choose **Logs** in the navigation pane\.
 

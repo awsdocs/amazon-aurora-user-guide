@@ -1,4 +1,4 @@
-# Controlling Access with Amazon RDS Security Groups<a name="Overview.RDSSecurityGroups"></a>
+# Controlling Access with Security Groups<a name="Overview.RDSSecurityGroups"></a>
 
 Security groups control the access that traffic has in and out of a DB instance\. Two types of security groups are used with Aurora: VPC security groups and Amazon EC2 security groups\. In simple terms, these work as follows:
 + A VPC security group controls access to DB instances and EC2 instances inside a VPC\.
@@ -8,13 +8,13 @@ By default, network access is turned off to a DB instance\. You can specify rule
 
 ## VPC Security Groups<a name="Overview.RDSSecurityGroups.VPCSec"></a>
 
-Each VPC security group rule enables a specific source to access a DB instance in a VPC that is associated with that VPC security group\. The source can be a range of addresses \(for example, 203\.0\.113\.0/24\), or another VPC security group\. By specifying a VPC security group as the source, you allow incoming traffic from all instances \(typically application servers\) that use the source VPC security group\. VPC security groups can have rules that govern both inbound and outbound traffic, though the outbound traffic rules typically do not apply to DB instances\. Outbound traffic rules only apply if the DB instance acts as a client\. You must use the [Amazon EC2 API](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC Console to create VPC security groups\. 
+Each VPC security group rule enables a specific source to access a DB instance in a VPC that is associated with that VPC security group\. The source can be a range of addresses \(for example, 203\.0\.113\.0/24\), or another VPC security group\. By specifying a VPC security group as the source, you allow incoming traffic from all instances \(typically application servers\) that use the source VPC security group\. VPC security groups can have rules that govern both inbound and outbound traffic, though the outbound traffic rules typically do not apply to DB instances\. Outbound traffic rules only apply if the DB instance acts as a client\. You must use the [Amazon EC2 API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC Console to create VPC security groups\. 
 
 When you create rules for your VPC security group that allow access to the instances in your VPC, you must specify a port for each range of addresses that the rule allows access for\. For example, if you want to enable SSH access to instances in the VPC, then you create a rule allowing access to TCP port 22 for the specified range of addresses\.
 
 You can configure multiple VPC security groups that allow access to different ports for different instances in your VPC\. For example, you can create a VPC security group that allows access to TCP port 80 for web servers in your VPC\. You can then create another VPC security group that allows access to TCP port 3306 for RDS MySQL DB instances in your VPC\.
 
-For more information on VPC security groups, see [Security Groups](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+For more information on VPC security groups, see [Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
 ## DB Security Groups vs\. VPC Security Groups<a name="Overview.RDSSecurityGroups.Compare"></a>
 
@@ -48,13 +48,13 @@ For more information about using a VPC, see [Amazon Virtual Private Cloud \(VPCs
 
 ## Creating a VPC Security Group<a name="Overview.RDSSecurityGroups.Create"></a>
 
-You can create a VPC security group for a DB instance by using the VPC console\. For information about creating a security group, see [Provide Access to the DB Cluster in the VPC by Creating a Security Group](CHAP_SettingUp_Aurora.md#CHAP_SettingUp_Aurora.SecurityGroup) and [Security Groups](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\.
+You can create a VPC security group for a DB instance by using the VPC console\. For information about creating a security group, see [Provide Access to the DB Cluster in the VPC by Creating a Security Group](CHAP_SettingUp_Aurora.md#CHAP_SettingUp_Aurora.SecurityGroup) and [Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\.
 
 ## Associating a Security Group with a DB Instance<a name="Overview.RDSSecurityGroups.Associate"></a>
 
 You can associate a security group with a DB instance by using **Modify** on the RDS console, the `ModifyDBInstance` Amazon RDS API, or the `modify-db-instance` AWS CLI command\.
 
- For information about modifying a DB instance, see [ Modifying an Amazon RDS DB Instance and Using the Apply Immediately Parameter](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html)\. For security group considerations when you restore a DB instance from a DB snapshot, see [Security Group Considerations](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Security)\.
+ For information about modifying a DB instance, see [ Modifying an Amazon RDS DB Instance and Using the Apply Immediately Parameter](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html)\. For security group considerations when you restore a DB instance from a DB snapshot, see [Security Group Considerations](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Security)\.
 
 ## Associating a Security Group with a DB Cluster<a name="Overview.RDSSecurityGroups.AssociateWithCluster"></a>
 
@@ -73,7 +73,7 @@ We strongly recommend that you delete any DB VPC security groups that you curren
 
 ### How Can I Determine If I Have a DB VPC Security Group?<a name="w4aac16c21c33b8"></a>
 
-Because DB VPC security groups have been deprecated, they don't appear in the RDS console\. However, you can call the [describe\-db\-security\-groups](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-security-groups.html) AWS CLI command or the [DescribeDBSecurityGroups](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSecurityGroups.html) API action to determine if you have any DB VPC security groups\.
+Because DB VPC security groups have been deprecated, they don't appear in the RDS console\. However, you can call the [describe\-db\-security\-groups](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-security-groups.html) AWS CLI command or the [DescribeDBSecurityGroups](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSecurityGroups.html) API action to determine if you have any DB VPC security groups\.
 
 In this case, you can call the `describe-db-security-groups` AWS CLI command with JSON specified as the output format\. If you do, you can identify DB VPC security groups by the VPC identifier on the second line of the output for the security group as shown in the following example\.
 
@@ -125,7 +125,7 @@ If you run the `DescribeDBSecurityGroups` API action, then you can identify DB V
 
 ### How Do I Delete a DB VPC Security Group?<a name="w4aac16c21c33c10"></a>
 
-Because DB VPC security groups don't appear in the RDS console, you must call the [delete\-db\-security\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-security-group.html) AWS CLI command or the [DeleteDBSecurityGroup](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBSecurityGroup.html) API action to delete a DB VPC security group\.
+Because DB VPC security groups don't appear in the RDS console, you must call the [delete\-db\-security\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-security-group.html) AWS CLI command or the [DeleteDBSecurityGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBSecurityGroup.html) API action to delete a DB VPC security group\.
 
 After you delete a DB VPC security group, your DB instances in your VPC continue to be secured by the VPC security group for that VPC\. The DB VPC security group that was deleted was merely a copy of the VPC security group information\.
 

@@ -3,6 +3,7 @@
  This section shows how to manage and maintain your Aurora DB cluster\. Aurora involves clusters of database servers that are connected in a replication topology\. Thus, managing Aurora often involves deploying changes to multiple servers and making sure that all Aurora Replicas are keeping up with the master server\. Because Aurora transparently scales the underlying storage as your data grows, managing Aurora requires relatively little management of disk storage\. Likewise, because Aurora automatically performs continuous backups, an Aurora cluster does not require extensive planning or downtime for performing backups\. 
 
 **Topics**
++ [Stopping and Starting an Amazon Aurora DB Cluster](aurora-cluster-stop-start.md)
 + [Modifying an Amazon Aurora DB Cluster](Aurora.Modifying.md)
 + [Adding Aurora Replicas to a DB Cluster](aurora-replicas-adding.md)
 + [Managing Performance and Scaling for Aurora DB Clusters](Aurora.Managing.Performance.md)
