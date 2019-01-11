@@ -1,7 +1,7 @@
 # Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf<a name="AuroraMySQL.Integrating.Authorizing"></a>
 
 **Note**  
-Integration with other AWS services is available for Amazon Aurora MySQL version 1\.8 and later\. Some integration features are only available for later versions of Aurora MySQL\. For more information on Aurora versions, see [Amazon Aurora MySQL Database Engine Updates](AuroraMySQL.Updates.md)\.
+Integration with other AWS services is available for Amazon Aurora MySQL version 1\.8 and later\. Some integration features are only available for later versions of Aurora MySQL\. For more information on Aurora versions, see [Database Engine Updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.
 
 For your Aurora MySQL DB cluster to access other services on your behalf, create and configure an AWS Identity and Access Management \(IAM\) role\. This role authorizes database users in your DB cluster to access other AWS services\. For more information, see [Setting Up IAM Roles to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.md)\.
 

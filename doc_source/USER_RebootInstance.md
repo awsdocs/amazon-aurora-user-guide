@@ -4,10 +4,10 @@ You might need to reboot your DB instance, usually for maintenance reasons\. For
 
 Rebooting a DB instance restarts the database engine service\. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to *rebooting*\. 
 
-You can't reboot your DB instance if it is not in the "Available" state\. Your database can be unavailable for several reasons, such as an in\-progress backup, a previously requested modification, or a maintenance\-window action\. 
+You can't reboot your DB instance if it is not in the available state\. Your database can be unavailable for several reasons, such as an in\-progress backup, a previously requested modification, or a maintenance\-window action\. 
 
 **Important**  
-When you reboot the primary instance of an Amazon Aurora DB cluster, RDS also automatically restarts all of the Aurora Replicas in that DB cluster\. When you reboot the primary instance of an Aurora DB cluster, no failover occurs\. When you reboot an Aurora Replica, no failover occurs\. To failover an Aurora DB cluster, call the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html), or the API action [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html)\. 
+When you reboot the primary instance of an Amazon Aurora DB cluster, RDS also automatically restarts all of the Aurora Replicas in that DB cluster\. When you reboot the primary instance of an Aurora DB cluster, no failover occurs\. When you reboot an Aurora Replica, no failover occurs\. To fail over an Aurora DB cluster, call the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html), or the API action [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html)\. 
 
 ## AWS Management Console<a name="USER_RebootInstance.Console"></a>
 
@@ -15,9 +15,9 @@ When you reboot the primary instance of an Amazon Aurora DB cluster, RDS also au
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to reboot\. 
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to reboot\. 
 
-1. Choose **Instance actions** and then choose **Reboot**\. 
+1. For **Actions**, choose **Reboot**\. 
 
    The **Reboot DB Instance** page appears\.
 

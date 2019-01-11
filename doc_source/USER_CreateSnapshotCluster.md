@@ -2,6 +2,9 @@
 
 Amazon RDS creates a storage volume snapshot of your DB cluster, backing up the entire DB cluster and not just individual databases\. When you create a DB cluster snapshot, you need to identify which DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\. The amount of time it takes to create a DB cluster snapshot varies with the size your databases\. Since the snapshot includes the entire storage volume, the size of files, such as temporary files, also affects the amount of time it takes to create the snapshot\.
 
+**Note**  
+ Amazon bills you based upon the amount of Aurora backup and snapshot data you keep and the period of time that you keep it\. For information about the storage associated with Aurora backups and snapshots, see [Understanding Aurora Backup Storage Usage](aurora-storage-backup.md)\. For pricing information about Aurora storage, see [Amazon RDS for Aurora Pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
+
 You can create a DB cluster snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 
 ## Console<a name="USER_CreateSnapshotCluster.CON"></a>

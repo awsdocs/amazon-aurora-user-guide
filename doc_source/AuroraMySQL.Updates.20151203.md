@@ -1,4 +1,4 @@
-# Amazon Aurora MySQL Database Engine Updates: 2015\-12\-03<a name="AuroraMySQL.Updates.20151203"></a>
+# Aurora MySQL Database Engine Updates: 2015\-12\-03<a name="AuroraMySQL.Updates.20151203"></a>
 
 **Version:** 1\.4
 
@@ -6,7 +6,7 @@ This update includes the following improvements:
 
 ## New Features<a name="AuroraMySQL.Updates.20151203.New"></a>
 + **Fast Insert** – Accelerates parallel inserts sorted by primary key\. For more information, see [Amazon Aurora MySQL Performance Enhancements](Aurora.AuroraMySQL.Overview.md#Aurora.AuroraMySQL.Performance)\.
-+ **Large dataset read performance** – Amazon Aurora MySQL automatically detects an IO heavy workload and launches more threads in order to boost the performance of the DB cluster\. The Aurora scheduler looks into IO activity and decides to dynamically adjust the optimal number of threads in the system, quickly adjusting between IO heavy and CPU heavy workloads with low overhead\.
++ **Large dataset read performance** – Aurora MySQL automatically detects an IO heavy workload and launches more threads in order to boost the performance of the DB cluster\. The Aurora scheduler looks into IO activity and decides to dynamically adjust the optimal number of threads in the system, quickly adjusting between IO heavy and CPU heavy workloads with low overhead\.
 + **Parallel read\-ahead** – Improves the performance of B\-Tree scans that are too large for the memory available on your primary instance or Aurora Replica \(including range queries\)\. Parallel read\-ahead automatically detects page read patterns and pre\-fetches pages into the buffer cache in advance of when they are needed\. Parallel read\-ahead works multiple tables at the same time within the same transaction\.
 
 ## Improvements:<a name="AuroraMySQL.Updates.20151203.Improvements"></a>

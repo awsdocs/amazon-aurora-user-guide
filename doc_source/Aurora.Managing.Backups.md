@@ -25,13 +25,13 @@ Amazon Aurora also supports replication with an external MySQL database, or an R
 
 Aurora backs up your cluster volume automatically and retains restore data for the length of the *backup retention period*\. Aurora backups are continuous and incremental so you can quickly restore to any point within the backup retention period\. No performance impact or interruption of database service occurs as backup data is being written\. You can specify a backup retention period, from 1 to 35 days, when you create or modify a DB cluster\.
 
-If you want to retain a backup beyond the backup retention period, you can also take a snapshot of the data in your cluster volume\. Storing snapshots incurs the standard storage charges for Amazon RDS\. For more information about RDS storage pricing, see [Amazon Relational Database Service Pricing](http://aws.amazon.com/rds/pricing/)\. 
-
-Because Aurora retains incremental restore data for the entire backup retention period, you only need to create a snapshot for data that you want to retain beyond the backup retention period\. You can create a new DB cluster from the snapshot\.
+If you want to retain a backup beyond the backup retention period, you can also take a snapshot of the data in your cluster volume\. Because Aurora retains incremental restore data for the entire backup retention period, you only need to create a snapshot for data that you want to retain beyond the backup retention period\. You can create a new DB cluster from the snapshot\.
 
 **Note**  
 For Amazon Aurora DB clusters, the default backup retention period is one day regardless of how the DB cluster is created\.
 You cannot disable automated backups on Aurora\. The backup retention period for Aurora is managed by the DB cluster\. 
+
+ Your costs for backup storage depend upon the amount of Aurora backup and snapshot data you keep and how long you keep it\. For information about the storage associated with Aurora backups and snapshots, see [Understanding Aurora Backup Storage Usage](aurora-storage-backup.md)\. For pricing information about Aurora backup storage, see [Amazon RDS for Aurora Pricing](https://aws.amazon.com/rds/aurora/pricing)\. After the Aurora cluster associated with a snapshot is deleted, storing that snapshot incurs the standard backup storage charges for Aurora\. 
 
 ## Restoring Data<a name="Aurora.Managing.Backups.Restore"></a>
 

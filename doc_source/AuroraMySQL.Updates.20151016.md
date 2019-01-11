@@ -1,4 +1,4 @@
-# Amazon Aurora MySQL Database Engine Updates: 2015\-10\-16<a name="AuroraMySQL.Updates.20151016"></a>
+# Aurora MySQL Database Engine Updates: 2015\-10\-16<a name="AuroraMySQL.Updates.20151016"></a>
 
 **Versions:** 1\.2, 1\.3
 
@@ -40,7 +40,7 @@ This update includes the following improvements:
 + Full\-text search on InnoDB tables failed on searches for literal phrases combined with \+ or \- operators\. \(Bug \#16516193\)
 + START SLAVE failed when the server was started with the options \-\-master\-info\-repository=TABLE relay\-log\-info\-repository=TABLE and with autocommit set to 0, together with \-\-skip\-slave\-start\. \(Bug \#16533802\)
 + Very large InnoDB full\-text search \(FTS\) results could consume an excessive amount of memory\. \(Bug \#16625973\)
-+ In debug builds, an assertion could occur in OPT\_CHECK\_ORDER\_BY when using binary directly in a search string, as binary may include NULL bytes and other non\-meaningful characters\. \(Bug \#16766016\)
++ In debug builds, an assertion could occur in OPT\_CHECK\_ORDER\_BY when using binary directly in a search string, as binary might include NULL bytes and other non\-meaningful characters\. \(Bug \#16766016\)
 + For some statements, memory leaks could result when the optimizer removed unneeded subquery clauses\. \(Bug \#16807641\)
 + It was possible to cause a deadlock after issuing FLUSH TABLES WITH READ LOCK by issuing STOP SLAVE in a new connection to the slave, then issuing SHOW SLAVE STATUS using the original connection\. \(Bug \#16856735\)
 + GROUP\_CONCAT\(\) with an invalid separator could cause a server exit\. \(Bug \#16870783\)

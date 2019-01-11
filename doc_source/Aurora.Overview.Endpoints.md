@@ -1,6 +1,6 @@
 # Amazon Aurora Connection Management<a name="Aurora.Overview.Endpoints"></a>
 
- Amazon Aurora typically involves a cluster of DB instances instead of a single instance\. Each connection is handled by a specific DB instance\. When you connect to an Aurora cluster, the host name and port that you specify point to an intermediate handler called an endpoint\. Aurora uses the endpoint mechanism to abstract these connections so that you don't have to hardcode all the hostnames, or write your own logic for load\-balancing and rerouting connections when some DB instances aren't available\. 
+ Amazon Aurora typically involves a cluster of DB instances instead of a single instance\. Each connection is handled by a specific DB instance\. When you connect to an Aurora cluster, the host name and port that you specify point to an intermediate handler called an *endpoint*\. Aurora uses the endpoint mechanism to abstract these connections\. Thus, you don't have to hardcode all the hostnames or write your own logic for load\-balancing and rerouting connections when some DB instances aren't available\. 
 
  For certain Aurora tasks, different instances or groups of instances perform different roles\. For example, the primary instance handles all data definition language \(DDL\) and data manipulation language \(DML\) statements\. Up to 15 Aurora Replicas handle read\-only query traffic\. 
 
@@ -65,7 +65,7 @@
 
  Each Aurora cluster has a single built\-in cluster endpoint, whose name and other attributes are managed by Aurora\. You can't create, delete, or modify this kind of endpoint\. 
 
- The physical IP address pointed to the cluster endpoint changes when the failover mechanism promotes a new DB instance to be the read\-write primary instance for the cluster\. If you use any form of connection pooling or other multiplexing, be prepared to flush or reduce the time\-to\-live for any cached DNS information\. Doing so ensures that you don't try to establish a read\-write connection to a DB instance that became unavailable or is now read\-only after a failover\. 
+ The physical IP address pointed to by the cluster endpoint changes when the failover mechanism promotes a new DB instance to be the read\-write primary instance for the cluster\. If you use any form of connection pooling or other multiplexing, be prepared to flush or reduce the time\-to\-live for any cached DNS information\. Doing so ensures that you don't try to establish a read\-write connection to a DB instance that became unavailable or is now read\-only after a failover\. 
 
 ## Using the Reader Endpoint<a name="Aurora.Endpoints.Reader"></a>
 

@@ -15,8 +15,11 @@ Aurora storage automatically scales with the data in your cluster volume\. As yo
 
 The size of your cluster volume is checked on an hourly basis to determine your storage costs\. For pricing information, see the [Aurora pricing page](https://aws.amazon.com/rds/aurora/pricing)\.
 
+ When Aurora data is removed, such as by dropping a table or partition, the overall allocated space remains the same\. The free space is reused automatically when data volume increases in the future\. 
+
 **Note**  
- When Aurora data is removed, such as by dropping a table or partition, the overall allocated space remains the same\. The free space is reused automatically when data volume increases in the future\. Because storage costs are based on the storage "high water mark" \(the maximum amount that was allocated for the Aurora cluster at any point in time\), you can manage costs by avoiding ETL practices that create large volumes of temporary information, or that load large volumes of new data prior to removing unneeded older data\.   
+ Because storage costs are based on the storage "high water mark" \(the maximum amount that was allocated for the Aurora cluster at any point in time\), you can manage costs by avoiding ETL practices that create large volumes of temporary information, or that load large volumes of new data prior to removing unneeded older data\. 
+
  If removing data from an Aurora cluster results in a substantial amount of allocated but unused space, resetting the high water mark requires doing a logical data dump and restore to a new cluster, using a tool such as `mysqldump`\. Creating and restoring a snapshot does *not* reduce the allocated storage because the physical layout of the underlying storage remains the same in the restored snapshot\. 
 
 ## Instance Scaling<a name="Aurora.Managing.Performance.InstanceScaling"></a>

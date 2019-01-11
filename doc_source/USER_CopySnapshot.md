@@ -8,6 +8,9 @@ Copying an automated snapshot to another AWS account is a two\-step process: You
 
 You can't copy a DB cluster snapshot across regions and accounts in a single step\. Perform one step for each of these copy actions\. As an alternative to copying, you can also share manual snapshots with other AWS accounts\. For more information, see [Sharing a DB Cluster Snapshot](USER_ShareSnapshot.md)\. 
 
+**Note**  
+ Amazon bills you based upon the amount of Aurora backup and snapshot data you keep and the period of time that you keep it\. For information about the storage associated with Aurora backups and snapshots, see [Understanding Aurora Backup Storage Usage](aurora-storage-backup.md)\. For pricing information about Aurora storage, see [Amazon RDS for Aurora Pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
+
 ## Limitations<a name="USER_CopySnapshot.Limitations"></a>
 
 The following are some limitations when you copy snapshots: 

@@ -1,12 +1,12 @@
-# Amazon Aurora MySQL Database Engine Updates 2017\-10\-24<a name="AuroraMySQL.Updates.20171024"></a>
+# Aurora MySQL Database Engine Updates 2017\-10\-24<a name="AuroraMySQL.Updates.20171024"></a>
 
 **Version:** 1\.15
 
-Amazon Aurora v1\.15 is generally available\. All new database clusters, including those restored from snapshots, will be created in Aurora v1\.15\. You have the option, but are not required, to upgrade existing DB clusters to Aurora v1\.15\. If you wish to create new DB clusters in Aurora v1\.14\.1, you can do so using the AWS CLI or the Amazon RDS API and specifying the engine version\.
+Aurora MySQL v1\.15 is generally available\. All new database clusters, including those restored from snapshots, will be created in Aurora v1\.15\. You have the option, but are not required, to upgrade existing DB clusters to Aurora v1\.15\. If you wish to create new DB clusters in Aurora v1\.14\.1, you can do so using the AWS CLI or the Amazon RDS API and specifying the engine version\.
 
-With version 1\.15 of Aurora, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. Updates require a database restart, so you will experience 20 to 30 seconds of downtime, after which you can resume using your DB cluster or clusters\. If your DB clusters are currently running Aurora v1\.14 or Aurora v1\.14\.1, Aurora's zero\-downtime patching feature may allow client connections to your Aurora primary instance to persist through the upgrade, depending on your workload\.
+With version 1\.15 of Aurora, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. Updates require a database restart, so you will experience 20 to 30 seconds of downtime, after which you can resume using your DB cluster or clusters\. If your DB clusters are currently running Aurora v1\.14 or Aurora v1\.14\.1, the zero\-downtime patching feature in Aurora MySQL might allow client connections to your Aurora MySQL primary instance to persist through the upgrade, depending on your workload\.
 
-Should you have any questions or concerns, the AWS Support Team is available on the community forums and through AWS Premium Support at [http://aws\.amazon\.com/support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through AWS Premium Support at [http://aws\.amazon\.com/support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Zero\-Downtime Patching<a name="AuroraMySQL.Updates.20171024.ZDP"></a>
 
@@ -21,9 +21,9 @@ The zero\-downtime patching \(ZDP\) attempts, on a *best\-effort* basis, to pres
 + Fixed `SHOW VARIABLE` command to show the updated `innodb_buffer_pool_size` parameter value whenever it is changed in the parameter group\.
 + Improved stability of primary instance during bulk insert into a table altered using Fast DDL when adaptive hash indexing is disabled and the record to be inserted is the first record of a page\.
 + Improved stability of Aurora when the user attempts to set **server\_audit\_events** DB cluster parameter value to **default**\.
-+ Fixed an issue in which a database charset change for an ALTER TABLE statement that ran on the Aurora primary instance was not being replicated on the Aurora Replicas until they were restarted\.
++ Fixed an issue in which a database character set change for an ALTER TABLE statement that ran on the Aurora primary instance was not being replicated on the Aurora Replicas until they were restarted\.
 + Improved stability by fixing a race condition on the primary instance which previously allowed it to register an Aurora Replica even if the primary instance had closed its own volume\.
-+ Improved performance of the primary instance during index creation on a large table by changing the locking protocol to enable concurrent DMLs during index build\.
++ Improved performance of the primary instance during index creation on a large table by changing the locking protocol to enable concurrent data manipulation language \(DML\) statements during index build\.
 + Fixed InnoDB metadata inconsistency during ALTER TABLE RENAME query which improved stability\. Example: When columns of table t1\(c1, c2\) are renamed cyclically to t1\(c2,c3\) within the same ALTER statement\.
 + Improved stability of Aurora Replicas for the scenario where an Aurora Replica has no active workload and the primary instance is unresponsive\.
 + Improved availability of Aurora Replicas for a scenario in which the Aurora Replica holds an explicit lock on a table and blocks the replication thread from applying any DDL changes received from the primary instance\.

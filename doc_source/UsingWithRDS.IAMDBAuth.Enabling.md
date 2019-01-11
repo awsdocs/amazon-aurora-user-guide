@@ -12,13 +12,13 @@ Each creation workflow has a **Configure Advanced Settings** page, where you can
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Clusters**\.
+1. In the navigation pane, choose **Databases**\.
 
 1. Choose the DB cluster that you want to modify\.
 
-1. Choose **Cluster actions**, and then choose **Modify cluster**\.
+1. Choose **Modify**\.
 
-1. In the **Database options** section, for **IAM DB authentication**, choose **Enable IAM DB authentication** or **Disable**, and then choose **Continue**\.
+1. In the **Database options** section, for **IAM DB authentication** choose **Enable IAM DB authentication** or **Disable**, and then choose **Continue**\.
 
 1. To apply the changes immediately, choose **Apply immediately**\.
 
@@ -30,7 +30,7 @@ Each creation workflow has a **Configure Advanced Settings** page, where you can
 
 1. In the navigation pane, choose **Snapshots**\.
 
-1. Choose the snapshot that you want to restore, and then choose **Restore Snapshot** from **Snapshot Actions**\.
+1. Choose the snapshot that you want to restore, and then choose **Restore Snapshot** for **Actions**\.
 
 1. In the **Settings** section, enter an identifier for the DB instance for **DB Instance Identifier**\.
 

@@ -1,4 +1,4 @@
-# Amazon Aurora MySQL Database Engine Updates: 2016\-12\-14<a name="AuroraMySQL.Updates.20161214"></a>
+# Aurora MySQL Database Engine Updates: 2016\-12\-14<a name="AuroraMySQL.Updates.20161214"></a>
 
 **Version:** 1\.10
 
@@ -15,9 +15,9 @@
 + **Spatial indexing ** – Spatial indexing improves query performance on large datasets for queries that use spatial data\. For more information about using spatial indexing, see [Amazon Aurora MySQL and Spatial Data](Aurora.AuroraMySQL.Overview.md#Aurora.AuroraMySQL.Spatial)\. 
 
   This feature is disabled by default and can be activated by enabling Aurora lab mode\. For information, see [Amazon Aurora MySQL Lab Mode](AuroraMySQL.Updates.LabMode.md)\. 
-+ **Replication pipeline improvements** – Amazon Aurora MySQL now uses an improved mechanism to apply log stream updates to the buffer cache of an Aurora Replica\. This feature improves the read performance and stability on Aurora Replicas when there is a heavy write load on the master as well as a significant read load on the Replica\. This feature is enabled by default\. 
-+ **Throughput improvement for workloads with cached reads** – Amazon Aurora MySQL now uses a latch\-free concurrent algorithm to implement read views, which leads to better throughput for read queries served by the buffer cache\. As a result of this and other improvements, Amazon Aurora MySQL can achieve throughput of up to 625K reads per second compared to 164K reads per second by MySQL 5\.7 for a sysbench SELECT\-only workload\. 
-+ **Throughput improvement for workloads with hot row contention** – Amazon Aurora MySQL uses a new lock release algorithm that improves performance, particularly when there is hot page contention \(that is, many transactions contending for the rows on the same page\)\. In tests with the TPC\-C benchmark, this can result in up to16x throughput improvement in transactions per minute relative to MySQL 5\.7\. This feature is disabled by default and can be activated by enabling Aurora lab mode\. For information, see [Amazon Aurora MySQL Lab Mode](AuroraMySQL.Updates.LabMode.md)\.
++ **Replication pipeline improvements** – Aurora MySQL now uses an improved mechanism to apply log stream updates to the buffer cache of an Aurora Replica\. This feature improves the read performance and stability on Aurora Replicas when there is a heavy write load on the master as well as a significant read load on the Replica\. This feature is enabled by default\. 
++ **Throughput improvement for workloads with cached reads** – Aurora MySQL now uses a latch\-free concurrent algorithm to implement read views, which leads to better throughput for read queries served by the buffer cache\. As a result of this and other improvements, Amazon Aurora MySQL can achieve throughput of up to 625K reads per second compared to 164K reads per second by MySQL 5\.7 for a SysBench SELECT\-only workload\. 
++ **Throughput improvement for workloads with hot row contention** – Aurora MySQL uses a new lock release algorithm that improves performance, particularly when there is hot page contention \(that is, many transactions contending for the rows on the same page\)\. In tests with the TPC\-C benchmark, this can result in up to16x throughput improvement in transactions per minute relative to MySQL 5\.7\. This feature is disabled by default and can be activated by enabling Aurora lab mode\. For information, see [Amazon Aurora MySQL Lab Mode](AuroraMySQL.Updates.LabMode.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.20161214.Improvements"></a>
 + Full\-text search index cache replication speed has been improved by updating the cache only after a read request to an Aurora Replica\. This approach avoids any reads from disk by the replication thread\. 

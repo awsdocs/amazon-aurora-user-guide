@@ -1,12 +1,12 @@
-# Amazon Aurora MySQL Database Engine Updates: 2017\-08\-07<a name="AuroraMySQL.Updates.20170807"></a>
+# Aurora MySQL Database Engine Updates: 2017\-08\-07<a name="AuroraMySQL.Updates.20170807"></a>
 
 **Version:** 1\.14
 
-Amazon Aurora MySQL 1\.14 is generally available\. All new database clusters, including those restored from snapshots, will be created in Aurora MySQL v1\.14\. Aurora MySQL v1\.14 is also a mandatory upgrade for existing Aurora MySQL DB clusters\. We will send a separate announcement with the timeline for deprecating earlier versions of Aurora MySQL\. 
+Aurora MySQL 1\.14 is generally available\. All new database clusters, including those restored from snapshots, will be created in Aurora MySQL v1\.14\. Aurora MySQL v1\.14 is also a mandatory upgrade for existing Aurora MySQL DB clusters\. We will send a separate announcement with the timeline for deprecating earlier versions of Aurora MySQL\. 
 
 With version 1\.14 of Aurora MySQL, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. Updates require a database restart, so you will experience 20 to 30 seconds of downtime, after which you can resume using your DB cluster or clusters\. If your DB clusters are currently running version 1\.13, Aurora's zero\-downtime patching feature may allow client connections to your Aurora primary instance to persist through the upgrade, depending on your workload\.
 
-Should you have any questions or concerns, the AWS Support Team is available on the community forums and through AWS Premium Support at [http://aws\.amazon\.com/support](http://aws.amazon.com/support)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through AWS Premium Support at [http://aws\.amazon\.com/support](http://aws.amazon.com/support)\.
 
 ## Zero\-Downtime Patching<a name="AuroraMySQL.Updates.20170807.ZDP"></a>
 

@@ -1,8 +1,8 @@
-# Amazon Aurora MySQL Database Engine Updates: 2017\-02\-23<a name="AuroraMySQL.Updates.20170223"></a>
+# Aurora MySQL Database Engine Updates: 2017\-02\-23<a name="AuroraMySQL.Updates.20170223"></a>
 
 **Version:** 1\.11
 
-We will patch all Amazon Aurora MySQL DB clusters with the latest version over a short period following the release\. DB clusters are patched using the legacy procedure with a downtime of about 5\-30 seconds\. 
+We will patch all Aurora MySQL DB clusters with the latest version over a short period following the release\. DB clusters are patched using the legacy procedure with a downtime of about 5\-30 seconds\. 
 
 Patching occurs during the system maintenance window that you have specified for each of your database instances\. You can view or change this window using the AWS Management Console\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 

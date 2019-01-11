@@ -1,4 +1,4 @@
-# Amazon Aurora MySQL Database Engine Updates: 2016\-10\-26<a name="AuroraMySQL.Updates.20161026"></a>
+# Aurora MySQL Database Engine Updates: 2016\-10\-26<a name="AuroraMySQL.Updates.20161026"></a>
 
 **Version:** 1\.8\.1
 

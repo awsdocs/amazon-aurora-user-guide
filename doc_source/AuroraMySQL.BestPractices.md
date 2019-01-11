@@ -65,7 +65,7 @@ For more information on invoking Lambda functions from Amazon Aurora, see [Invok
 ## Working with Asynchronous Key Prefetch in Amazon Aurora<a name="Aurora.BestPractices.AKP"></a>
 
 **Note**  
-The asynchronous key prefetch \(AKP\) feature is available for Amazon Aurora MySQL version 1\.15 and later\. For more information about Aurora MySQL versions, see [Amazon Aurora MySQL Database Engine Updates](AuroraMySQL.Updates.md)\.
+The asynchronous key prefetch \(AKP\) feature is available for Amazon Aurora MySQL version 1\.15 and later\. For more information about Aurora MySQL versions, see [Database Engine Updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.
 
 Amazon Aurora can use AKP to improve the performance of queries that join tables across indexes\. This feature improves performance by anticipating the rows needed to run queries in which a JOIN query requires use of the Batched Key Access \(BKA\) Join algorithm and Multi\-Range Read \(MRR\) optimization features\. For more information about BKA and MRR, see [Block Nested\-Loop and Batched Key Access Joins](https://dev.mysql.com/doc/refman/5.6/en/bnl-bka-optimization.html) and [Multi\-Range Read Optimization](https://dev.mysql.com/doc/refman/5.6/en/mrr-optimization.html) in the MySQL documentation\.
 

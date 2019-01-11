@@ -44,7 +44,7 @@ For more information about the slow query and general logs, go to the following 
 + [The Slow Query Log](http://dev.mysql.com/doc/refman/5.6/en/slow-query-log.html)
 + [The General Query Log](http://dev.mysql.com/doc/refman/5.6/en/query-log.html)
 
-## Publishing Aurora MySQL Logs to CloudWatch Logs<a name="USER_LogAccess.MySQLDB.PublishAuroraMySQLtoCloudWatchLogs"></a>
+## Publishing Aurora MySQL Logs to Amazon CloudWatch Logs<a name="USER_LogAccess.MySQLDB.PublishAuroraMySQLtoCloudWatchLogs"></a>
 
 You can configure your Aurora MySQL DB cluster to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. For more information, see [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\.
 

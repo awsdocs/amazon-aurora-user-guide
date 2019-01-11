@@ -13,16 +13,20 @@ The `AWS/RDS` namespace includes the following metrics that apply to database en
 
 | Metric | Description | Applies to | 
 | --- | --- | --- | 
-|  `ActiveTransactions`  |  The average number of current transactions executing on an Aurora database instance per second\.  | Aurora MySQL   | 
-|  `AuroraBinlogReplicaLag`  |  The amount of time a replica DB cluster running on Aurora with MySQL compatibility lags behind the source DB cluster\. This metric reports the value of the `Seconds_Behind_Master` field of the MySQL `SHOW SLAVE STATUS` command\. This metric is useful for monitoring replica lag between Aurora DB clusters that are replicating across different AWS Regions\. For more information, see [Aurora MySQL Replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AuroraMySQL.Replication.CrossRegion.html)\.  | Aurora MySQL   | 
+|  `ActiveTransactions`  |  The average number of current transactions executing on an Aurora database instance per second\.  | Aurora MySQL | 
+|  `AuroraBinlogReplicaLag`  |  The amount of time a replica DB cluster running on Aurora with MySQL compatibility lags behind the source DB cluster\. This metric reports the value of the `Seconds_Behind_Master` field of the MySQL `SHOW SLAVE STATUS` command\. This metric is useful for monitoring replica lag between Aurora DB clusters that are replicating across different AWS Regions\. For more information, see [Aurora MySQL Replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AuroraMySQL.Replication.CrossRegion.html)\.  | Aurora MySQL | 
+| AuroraGlobalDBReplicatedWriteIO |  Units: Bytes  | Aurora MySQL | 
+| AuroraGlobalDBDataTransferBytes |  Units: Bytes  | Aurora MySQL | 
+| AuroraGlobalDBReplicationLag |  Units: Milliseconds  | Aurora MySQL | 
 |  `AuroraReplicaLag`  |  For an Aurora Replica, the amount of lag when replicating updates from the primary instance, in milliseconds\.  | Aurora MySQL and Aurora PostgreSQL | 
 |  `AuroraReplicaLagMaximum`  |  The maximum amount of lag between the primary instance and each Aurora DB instance in the DB cluster, in milliseconds\.  | Aurora MySQL and Aurora PostgreSQL | 
 |  `AuroraReplicaLagMinimum`  |  The minimum amount of lag between the primary instance and each Aurora DB instance in the DB cluster, in milliseconds\.  | Aurora MySQL and Aurora PostgreSQL | 
-|  `BinLogDiskUsage`  |  The amount of disk space occupied by binary logs on the master, in bytes\.  |  Aurora MySQL  | 
 |  `BacktrackChangeRecordsCreationRate`  |  The number of backtrack change records created over five minutes for your DB cluster\.  |  Aurora MySQL  | 
 |  `BacktrackChangeRecordsStored`  |  The actual number of backtrack change records used by your DB cluster\.  |  Aurora MySQL  | 
 |  `BacktrackWindowActual`  |  The difference between the target backtrack window and the actual backtrack window\.  |  Aurora MySQL  | 
 |  `BacktrackWindowAlert`  |  The number of times that the actual backtrack window is smaller than the target backtrack window for a given period of time\.  |  Aurora MySQL  | 
+| BackupRetentionPeriodStorageUsed |   The total amount of backup storage in GiB used to support the point\-in\-time restore feature within the Aurora DB cluster's backup retention window\. Included in the total reported by the `TotalBackupStorageBilled` metric\. Computed separately for each Aurora cluster\. For instructions, see [Understanding Aurora Backup Storage Usage](aurora-storage-backup.md)\.  Units: Gibibytes \(GiB\)  | Aurora MySQL and Aurora PostgreSQL | 
+|  `BinLogDiskUsage`  |  The amount of disk space occupied by binary logs on the master, in bytes\.  |  Aurora MySQL  | 
 |  `BlockedTransactions`  | The average number of transactions in the database that are blocked per second\.  | Aurora MySQL | 
 |  `BufferCacheHitRatio`  |  The percentage of requests that are served by the buffer cache\.  | Aurora MySQL and Aurora PostgreSQL | 
 |  `CommitLatency`  | The amount of latency for commit operations, in milliseconds\.  | Aurora MySQL and Aurora PostgreSQL | 
@@ -57,7 +61,9 @@ The `AWS/RDS` namespace includes the following metrics that apply to database en
 |  `ResultSetCacheHitRatio`  |  The percentage of requests that are served by the Resultset cache\.  | Aurora MySQL | 
 |  `SelectLatency`  |  The amount of latency for select queries, in milliseconds\.  | Aurora MySQL | 
 |  `SelectThroughput`  |  The average number of select queries per second\.  | Aurora MySQL | 
+| SnapshotStorageUsed |   The total amount of backup storage in GiB consumed by all Aurora snapshots for an Aurora DB cluster outside its backup retention window\. Included in the total reported by the `TotalBackupStorageBilled` metric\. Computed separately for each Aurora cluster\. For instructions, see [Understanding Aurora Backup Storage Usage](aurora-storage-backup.md)\.  Units: Gibibytes \(GiB\)  | Aurora MySQL and Aurora PostgreSQL | 
 |  `SwapUsage`  |  The amount of swap space used on the Aurora PostgreSQL DB instance\.  | Aurora PostgreSQL | 
+| TotalBackupStorageBilled |   The total amount of backup storage in GiB for which you are billed for a given Aurora DB cluster\. Includes the backup storage measured by the `BackupRetentionPeriodStorageUsed` and `SnapshotStorageUsed` metrics\. Computed separately for each Aurora cluster\. For instructions, see [Understanding Aurora Backup Storage Usage](aurora-storage-backup.md)\.  Units: Gibibytes \(GiB\)  | Aurora MySQL and Aurora PostgreSQL | 
 |  `TransactionLogsDiskUsage`  |  The amount of disk space occupied by transaction logs on the Aurora PostgreSQL DB instance\.  | Aurora PostgreSQL | 
 |  `UpdateLatency`  |  The amount of latency for update queries, in milliseconds\.  | Aurora MySQL | 
 |  `UpdateThroughput`  |  The average number of update queries per second\.  | Aurora MySQL | 

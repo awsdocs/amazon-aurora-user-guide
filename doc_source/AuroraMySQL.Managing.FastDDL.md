@@ -12,7 +12,7 @@ For example, suppose that you use an ALTER TABLE operation to add a column to a 
 In Amazon Aurora, you can use fast DDL to execute an ALTER TABLE operation in place, nearly instantaneously\. The operation completes without requiring the table to be copied and without having a material impact on other DML statements\. Because the operation doesn't consume temporary storage for a table copy, it makes DDL statements practical even for large tables on small instance types\.
 
 **Note**  
-Fast DDL is available for Aurora version 1\.12 and later\. For more information about Aurora versions, see [Amazon Aurora MySQL Database Engine Updates](AuroraMySQL.Updates.md)
+Fast DDL is available for Aurora version 1\.12 and later\. For more information about Aurora versions, see [Database Engine Updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)
 
 ## Limitations<a name="AuroraMySQL.Managing.FastDDL.Limitations"></a>
 

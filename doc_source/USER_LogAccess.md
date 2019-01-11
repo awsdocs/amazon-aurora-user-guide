@@ -12,13 +12,15 @@ You can view database log files for your DB engine by using the Amazon RDS conso
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
-1. Click the name of the DB instance that has the log file that you want to view\.
+1. Choose the name of the DB instance that has the log file that you want to view\.
+
+1. Choose the **Logs & events** tab\.
 
 1. Scroll down to the **Logs** section\. 
 
-1. In the **Logs** section, choose the log you wish to view and then choose **View**\.
+1. In the **Logs** section, choose the log that you want to view, and then choose **View**\.
 
 ### AWS CLI<a name="USER_LogAccess.CLI"></a>
 
@@ -46,20 +48,22 @@ You can use the Amazon RDS console, AWS CLI or API to download a database log fi
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
-1. Click the name of the DB instance that has the log file that you want to view\.
+1. Choose the name of the DB instance that has the log file that you want to view\.
+
+1. Choose the **Logs & events** tab\.
 
 1. Scroll down to the **Logs** section\. 
 
-1. In the **Logs** section, choose the button next to the log you want to download, and then choose **Download**\.
+1. In the **Logs** section, choose the button next to the log that you want to download, and then choose **Download**\.
 
-1. Open the context \(right\-click\) menu for the link provided, and then choose **Save Link As**\. Type the location where you want the log file to be saved, and then choose **Save**\.  
+1. Open the context \(right\-click\) menu for the link provided, and then choose **Save Link As**\. Enter the location where you want the log file to be saved, and then choose **Save**\.  
 ![\[viewing log file\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/log_download2.png)
 
 ### AWS CLI<a name="USER_LogAccess.Procedural.Downloading.CLI"></a>
 
-To download a database log file, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html](https://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html)\. By default, this command will download only the latest portion of a log file; however, you can download an entire file by specifying the parameter `--starting-token 0`\.
+To download a database log file, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html](https://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html)\. By default, this command downloads only the latest portion of a log file\. However, you can download an entire file by specifying the parameter `--starting-token 0`\.
 
 The following example shows how to download the entire contents of a log file called *log/ERROR\.4* and store it in a local file called *errorlog\.txt*\.
 
@@ -95,11 +99,13 @@ You can monitor the contents of a log file by using the Amazon RDS console\.
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
-1. Click the name of the DB instance that has the log file that you want to view\.
+1. Choose the name of the DB instance that has the log file that you want to view\.
 
-1. In the **Logs** pane, choose a log file, and then choose **Watch**\.
+1. Choose the **Logs & events** tab\.
+
+1. In the **Logs** section, choose a log file, and then choose **Watch**\.
 
 ## Publishing Database Logs to Amazon CloudWatch Logs<a name="USER_LogAccess.Procedural.UploadtoCloudWatch"></a>
 

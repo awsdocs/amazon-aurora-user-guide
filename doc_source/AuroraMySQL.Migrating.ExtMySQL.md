@@ -116,10 +116,10 @@ You can create a full backup of your MySQL database files using Percona XtraBack
 
 To create a full backup of your MySQL database files that can be restored from Amazon S3 to create an Amazon Aurora MySQL DB cluster, use the Percona XtraBackup utility \(`xtrabackup`\) to back up your database\. 
 
-For example, the following command creates a backup of a MySQL database and stores the files in the `/s3-restore/backup` folder\.
+For example, the following command creates a backup of a MySQL database and stores the files in the `/on-premises/s3-restore/backup` folder\.
 
 ```
-xtrabackup --user=myuser --password=<password> /s3-restore/backup
+xtrabackup --backup --user=<myuser> --password=<password> --target-dir=</on-premises/s3-restore/backup>
 ```
 
 If you want to compress your backup into a single file \(which can be split, if needed\), you can use the `--stream` option to save your backup in one of the following formats:
@@ -130,25 +130,25 @@ If you want to compress your backup into a single file \(which can be split, if 
 The following command creates a backup of your MySQL database split into multiple Gzip files\.
 
 ```
-xtrabackup --user=myuser --password=<password> --stream=tar \
-   /s3-restore/backup | gzip - | split -d --bytes=500MB \
-   - /s3-restore/backup/backup.tar.gz
+xtrabackup --backup --user=<myuser> --password=<password> --stream=tar \
+   --target-dir=</on-premises/s3-restore/backup> | gzip - | split -d --bytes=500MB \
+   - </on-premises/s3-restore/backup/backup>.tar.gz
 ```
 
 The following command creates a backup of your MySQL database split into multiple tar files\.
 
 ```
-xtrabackup --user=myuser --password=<password> --stream=tar \
-   /s3-restore/backup | split -d --bytes=500MB \
-   - /s3-restore/backup/backup.tar
+xtrabackup --backup --user=<myuser> --password=<password> --stream=tar \
+   --target-dir=</on-premises/s3-restore/backup> | split -d --bytes=500MB \
+   - </on-premises/s3-restore/backup/backup>.tar
 ```
 
 The following command creates a backup of your MySQL database split into multiple xbstream files\.
 
 ```
-xtrabackup --stream=xbstream --user=myuser --password=<password>  \
-   /s3-restore/backup | split -d --bytes=500MB \
-   - /s3-restore/backup/backup.xbstream
+xtrabackup --backup --user=<myuser> --password=<password> --stream=xbstream \
+   --target-dir=</on-premises/s3-restore/backup> | split -d --bytes=500MB \
+   - </on-premises/s3-restore/backup/backup>.xbstream
 ```
 
 Once you have backed up your MySQL database using the Percona XtraBackup utility, you can copy your backup directories and files to an Amazon S3 bucket\.

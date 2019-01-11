@@ -159,7 +159,7 @@ You can also choose for your new Aurora MySQL DB cluster to be encrypted at rest
 1. Set the following values on the **Migrate Database** page:
    + **Migrate to DB Engine**: Select `aurora`\.
    + **DB Engine Version**: Select the DB engine version for the Aurora MySQL DB cluster\.
-   + **DB Instance Class**: Select a DB instance class that has the required storage and capacity for your database, for example `db.r3.large`\. Aurora cluster volumes automatically grow as the amount of data in your database increases, up to a maximum size of 64 tebibytes \(TiB\)\. So you only need to select a DB instance class that meets your current storage requirements\. For more information, see [Amazon Aurora Storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\.
+   + **DB Instance Class**: Select a DB instance class that has the required storage and capacity for your database, for example `db.r3.large`\. Aurora cluster volumes automatically grow as the amount of data in your database increases, up to a maximum size of 64 tebibytes \(TiB\)\. So you only need to select a DB instance class that meets your current storage requirements\. For more information, see [Overview of Aurora Storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\.
    + **DB Instance Identifier**: Type a name for the DB cluster that is unique for your account in the AWS Region you selected\. This identifier is used in the endpoint addresses for the instances in your DB cluster\. You might choose to add some intelligence to the name, such as including the AWS Region and DB engine you selected, for example **aurora\-cluster1**\.
 
      The DB instance identifier has the following constraints:
@@ -187,7 +187,7 @@ You might be behind a corporate firewall that doesn't allow access to default po
      If your DB snapshot is encrypted, specify an encryption key to have your DB cluster encrypted at rest using the specified encryption key\. You can specify the encryption key used by the DB snapshot or a different key\. You can't create an unencrypted DB cluster from an encrypted DB snapshot\.
    + **Auto Minor Version Upgrade**: This setting doesn't apply to Aurora MySQL DB clusters\.
 
-     For more information about engine updates for Aurora MySQL, see [Amazon Aurora MySQL Database Engine Updates](AuroraMySQL.Updates.md)\.
+     For more information about engine updates for Aurora MySQL, see [Database Engine Updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.
 
 1. Choose **Migrate** to migrate your DB snapshot\. 
 

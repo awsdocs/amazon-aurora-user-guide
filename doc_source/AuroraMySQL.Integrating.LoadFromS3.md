@@ -3,7 +3,7 @@
 You can use the `LOAD DATA FROM S3` or `LOAD XML FROM S3` statement to load data from files stored in an Amazon S3 bucket\. 
 
 **Note**  
-Loading data into a table from text files in an Amazon S3 bucket is available for Amazon Aurora MySQL version 1\.8 and later\. For more information about Aurora MySQL versions, see [Amazon Aurora MySQL Database Engine Updates](AuroraMySQL.Updates.md)\.
+Loading data into a table from text files in an Amazon S3 bucket is available for Amazon Aurora MySQL version 1\.8 and later\. For more information about Aurora MySQL versions, see [Database Engine Updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.
 
 ## Giving Aurora Access to Amazon S3<a name="AuroraMySQL.Integrating.LoadFromS3.Authorize"></a>
 

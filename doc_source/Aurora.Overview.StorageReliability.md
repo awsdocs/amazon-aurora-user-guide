@@ -1,16 +1,49 @@
 # Amazon Aurora Storage and Reliability<a name="Aurora.Overview.StorageReliability"></a>
 
- Aurora data is stored in the cluster volume, which is designed for reliability\. 
+ Following, you can learn about the Aurora storage subsystem\. Aurora uses a distributed and shared storage architecture that is an important factor in performance, scalability, and reliability for Aurora clusters\. 
 
-## Amazon Aurora Storage<a name="Aurora.Overview.Storage"></a>
+**Topics**
++ [Overview of Aurora Storage](#Aurora.Overview.Storage)
++ [What the Cluster Volume Contains](#aurora-storage-contents)
++ [How Aurora Storage Grows](#aurora-storage-growth)
++ [How Aurora Data Storage is Billed](#aurora-storage-data-billing)
++ [Amazon Aurora Reliability](#Aurora.Overview.Reliability)
+
+## Overview of Aurora Storage<a name="Aurora.Overview.Storage"></a>
 
  Aurora data is stored in the *cluster volume*, which is a single, virtual volume that uses solid state drives \(SSDs\)\. A cluster volume consists of copies of the data across multiple Availability Zones in a single AWS Region\. Because the data is automatically replicated across Availability Zones, your data is highly durable with less possibility of data loss\. This replication also ensures that your database is more available during a failover\. It does so because the data copies already exist in the other Availability Zones and continue to serve data requests to the DB instances in your DB cluster\. The amount of replication is independent of the number of DB instances in your cluster\. 
 
- Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of 64 tebibytes \(TiB\)\. Table size is limited to the size of the cluster volume\. That is, the maximum table size for a table in an Aurora DB cluster is 64 TiB\. Even though an Aurora cluster volume can grow to up to 64 TiB, you are only charged for the space that you use in an Aurora cluster volume\. For pricing information, see [Amazon RDS for Aurora Pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
+## What the Cluster Volume Contains<a name="aurora-storage-contents"></a>
+
+ The Aurora cluster volume contains all your user data, schema objects, and internal metadata such as the system tables and the binary log\. For example, Aurora stores all the tables, indexes, binary large objects \(BLOBs\), stored procedures, and so on for an Aurora cluster in the cluster volume\. 
+
+ The Aurora shared storage architecture makes your data independent from the DB instances in the cluster\. For example, you can add a DB instance quickly because Aurora doesn't make a new copy of the table data\. Instead, the DB instance connects to the shared volume that already contains all your data\. You can remove a DB instance from a cluster without removing any of the underlying data from the cluster\. Only when you delete the entire cluster does Aurora remove the data\. 
+
+## How Aurora Storage Grows<a name="aurora-storage-growth"></a>
+
+ Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of 64 tebibytes \(TiB\)\. Table size is limited to the size of the cluster volume\. That is, the maximum table size for a table in an Aurora DB cluster is 64 TiB\. 
+
+ This automatic storage scaling, combined with the high\-performance and highly distributed storage subsystem, makes Aurora a good choice for your important enterprise data when your main objectives are reliability and high availability\. See the following sections for ways to balance storage costs against these other priorities\. 
+
+## How Aurora Data Storage is Billed<a name="aurora-storage-data-billing"></a>
+
+ Even though an Aurora cluster volume can grow to up to 64 TiB, you are only charged for the space that you use in an Aurora cluster volume\. When Aurora data is removed, such as by dropping a table or partition, the overall allocated space remains the same\. The free space is reused automatically when data volume increases in the future\. 
+
+**Note**  
+ Because storage costs are based on the storage "high water mark" \(the maximum amount that was allocated for the Aurora cluster at any point in time\), you can manage costs by avoiding ETL practices that create large volumes of temporary information, or that load large volumes of new data prior to removing unneeded older data\. 
+
+ If removing data from an Aurora cluster results in a substantial amount of allocated but unused space, resetting the high water mark requires doing a logical data dump and restore to a new cluster, using a tool such as `mysqldump`\. Creating and restoring a snapshot does *not* reduce the allocated storage because the physical layout of the underlying storage remains the same in the restored snapshot\. 
+
+ For pricing information about Aurora data storage, see [Amazon RDS for Aurora Pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
 
 ## Amazon Aurora Reliability<a name="Aurora.Overview.Reliability"></a>
 
  Aurora is designed to be reliable, durable, and fault tolerant\. You can architect your Aurora DB cluster to improve availability by doing things such as adding Aurora Replicas and placing them in different Availability Zones, and also Aurora includes several automatic features that make it a reliable database solution\. 
+
+**Topics**
++ [Storage Auto\-Repair](#Aurora.Overview.AutoRepair)
++ [Survivable Cache Warming](#Aurora.Overview.CacheWarming)
++ [Crash Recovery](#Aurora.Overview.CrashRecovery)
 
 ### Storage Auto\-Repair<a name="Aurora.Overview.AutoRepair"></a>
 

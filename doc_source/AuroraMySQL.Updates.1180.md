@@ -1,12 +1,12 @@
-# Amazon Aurora MySQL Database Engine Updates 2018\-09\-20<a name="AuroraMySQL.Updates.1180"></a>
+# Aurora MySQL Database Engine Updates 2018\-09\-20<a name="AuroraMySQL.Updates.1180"></a>
 
 **Version:** 1\.18\.0
 
-Amazon Aurora MySQL 1\.18\.0 is generally available\. All new Aurora MySQL database clusters with MySQL 5\.6 compatibility, including those restored from snapshots, will be created in Aurora MySQL 1\.18\.0\. You have the option, but are not required, to upgrade existing database clusters to Aurora MySQL 1\.18\.0\. If you wish to create new DB clusters in Aurora MySQL v1\.14\.4, Aurora MySQL v1\.15\.1, Aurora MySQL 1\.16, or Aurora MySQL 1\.17\.6, you can do so using the AWS CLI or the Amazon RDS API and specifying the engine version\. 
+Aurora MySQL 1\.18\.0 is generally available\. All new Aurora MySQL database clusters with MySQL 5\.6 compatibility, including those restored from snapshots, will be created in Aurora MySQL 1\.18\.0\. You have the option, but are not required, to upgrade existing database clusters to Aurora MySQL 1\.18\.0\. If you wish to create new DB clusters in Aurora MySQL v1\.14\.4, Aurora MySQL v1\.15\.1, Aurora MySQL 1\.16, or Aurora MySQL 1\.17\.6, you can do so using the AWS CLI or the Amazon RDS API and specifying the engine version\. 
 
 With version 1\.18\.0 of Aurora MySQL, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. 
 
-If you have any questions or concerns, the AWS Support Team is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Features<a name="AuroraMySQL.Updates.1180.Features"></a>
 +  **Parallel Query** is available with this release\. Aurora MySQL parallel query is an optimization that parallelizes some of the I/O and computation involved in processing data\-intensive queries\. The work that is parallelized includes retrieving rows from storage, extracting column values, and determining which rows match the conditions in the `WHERE` clause and join clauses\. This data\-intensive work is delegated \(in database optimization terms, pushed down\) to multiple nodes in the Aurora distributed storage layer\. Without parallel query, each query brings all the scanned data to a single node within the Aurora MySQL cluster \(the head node\) and performs all the query processing there\. 
@@ -17,6 +17,6 @@ If you have any questions or concerns, the AWS Support Team is available on the 
   + "print" – Only prints the queries taking high amount of memory\.
   + "tune" – Tunes the internal table caches to release some memory back to the system\.
   + "decline" – Declines new queries once the instance is low on memory\.
-  + "kill\_query" – Kills the queries in descending order of memory consumption until the instance memory surfaces above the low threshold\. DDL statements are not killed\.
+  + "kill\_query" – Kills the queries in descending order of memory consumption until the instance memory surfaces above the low threshold\. Data definition language \(DDL\) statements are not killed\.
   + "print, tune" – Performs actions described for both "print" and "tune"\.
   + "tune, decline, kill\_query" – Performs the actions described for "tune", "decline", and "kill\_query"\.

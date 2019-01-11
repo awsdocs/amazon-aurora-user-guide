@@ -35,9 +35,9 @@ You can restore a DB cluster from a DB cluster snapshot using the AWS Management
 
 1. Choose the DB cluster snapshot that you want to restore from\. 
 
-1. From the **Actions** drop\-down, choose **Restore Snapshot**\. 
+1. For **Actions**, choose **Restore Snapshot**\. 
 
-1. On the **Restore DB Instance** page, in the **DB Instance Identifier** field, type the name for your restored DB cluster\. 
+1. On the **Restore DB Instance** page, for **DB Instance Identifier**, enter the name for your restored DB cluster\. 
 
 1. Choose **Restore DB Instance**\. 
 

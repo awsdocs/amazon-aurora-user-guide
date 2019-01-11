@@ -45,7 +45,7 @@ The **Counter Metrics** chart is only available for Aurora PostgreSQL\.
 
 1. **Average Active Sessions chart** – Shows how the database load compares to DB instance capacity as represented by the **Max CPU** line\.
 
-1.  **Top load items table** – Shows the top items contributing to database load\.The **Counter Metrics** chart is only available for Aurora PostgreSQL\.
+1.  **Top load items table** – Shows the top items contributing to database load\. The **Counter Metrics** chart is only available for Aurora PostgreSQL\.
 
 ### Counter Metrics Chart<a name="USER_PerfInsights.UsingDashboard.Components.Countermetrics"></a>
 

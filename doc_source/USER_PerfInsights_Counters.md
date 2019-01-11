@@ -71,6 +71,7 @@ The following operating system counters are available for Performance Insights\.
 | avgQueueLen | diskIO | 
 | avgReqSz | diskIO | 
 | await | diskIO | 
+| readIOsPS | diskIO | 
 | readKb | diskIO | 
 | readKbPS | diskIO | 
 | rrqmPS | diskIO | 
@@ -86,12 +87,13 @@ The following operating system counters are available for Performance Insights\.
 | stopped | tasks | 
 | total | tasks | 
 | zombie | tasks | 
-| os\.numVCPUs | numVCPUs | 
 | one | loadAverageMinute | 
 | fifteen | loadAverageMinute | 
 | five | loadAverageMinute | 
 | cached | swap | 
 | free | swap | 
+| in | swap | 
+| out | swap | 
 | total | swap | 
 | maxFiles | fileSys | 
 | usedFiles | fileSys | 
@@ -99,6 +101,6 @@ The following operating system counters are available for Performance Insights\.
 | usedPercent | fileSys | 
 | used | fileSys | 
 | total | fileSys | 
+| rx | network | 
 | tx | network | 
 | numVCPUs | general | 
-| uptime | uptime | 

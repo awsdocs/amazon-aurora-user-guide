@@ -1,4 +1,4 @@
-# Amazon Aurora MySQL Database Engine Updates: 2016\-10\-18<a name="AuroraMySQL.Updates.20161018"></a>
+# Aurora MySQL Database Engine Updates: 2016\-10\-18<a name="AuroraMySQL.Updates.20161018"></a>
 
 **Version:** 1\.8
 
@@ -19,10 +19,10 @@
 + Fixed an issue with high CPU consumption because of the purge thread spinning in the presence of a long\-running transaction\. 
 + Fixed an issue when running information schema queries to get information about locks under heavy load\.
 + Fixed an issue with a diagnostics process that could in rare cases cause Aurora writes to storage nodes to stall and restart/fail\-over\.
-+ Fixed a condition where a successfully created table may be deleted during crash recovery if the crash occurred while a `CREATE TABLE [if not exists]` statement was being handled\.
++ Fixed a condition where a successfully created table might be deleted during crash recovery if the crash occurred while a `CREATE TABLE [if not exists]` statement was being handled\.
 + Fixed a case where the log rotation procedure is broken when the general log and slow log are not stored on disk using catalog mitigation\.
 + Fixed a crash when a user creates a temporary table within a user defined function, and then uses the user defined function in the select list of the query\.
-+ Fixed a crash that occurred when replaying GTID events\. GTID is not supported by Amazon Aurora MySQL\.
++ Fixed a crash that occurred when replaying GTID events\. GTID is not supported by Aurora MySQL\.
 
 ## Integration of MySQL Bug Fixes:<a name="AuroraMySQL.Updates.20161018.Fixes"></a>
 + When dropping all indexes on a column with multiple indexes, InnoDB failed to block a DROP INDEX operation when a foreign key constraint requires an index\. \(Bug \#16896810\)

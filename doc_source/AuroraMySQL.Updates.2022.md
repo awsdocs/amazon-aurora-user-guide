@@ -1,21 +1,21 @@
-# Amazon Aurora MySQL Database Engine Updates 2018\-06\-04<a name="AuroraMySQL.Updates.2022"></a>
+# Aurora MySQL Database Engine Updates 2018\-06\-04<a name="AuroraMySQL.Updates.2022"></a>
 
 **Version:** 2\.02\.2
 
-Amazon Aurora MySQL 2\.02\.2 is generally available\. Please note that Aurora MySQL 2\.x versions are compatible with MySQL 5\.7 and Aurora MySQL 1\.x versions are compatible with MySQL 5\.6\.
+Aurora MySQL 2\.02\.2 is generally available\. Aurora MySQL 2\.x versions are compatible with MySQL 5\.7 and Aurora MySQL 1\.x versions are compatible with MySQL 5\.6\.
 
-When creating a new Aurora MySQL DB cluster, you have the option of choosing compatibility with either MySQL 5\.7 or MySQL 5\.6\. When restoring a MySQL 5\.6\-compatible snapshot, you have the option of choosing compatibility with either MySQL 5\.7 or MySQL 5\.6\.
+When creating a new Aurora MySQL DB cluster, you can choose compatibility with either MySQL 5\.7 or MySQL 5\.6\. When restoring a MySQL 5\.6\-compatible snapshot, you can choose compatibility with either MySQL 5\.7 or MySQL 5\.6\.
 
 You can restore snapshots of Aurora MySQL 1\.14\*, 1\.15\*, 1\.16\*, 1\.17\*, 2\.01\*, and 2\.02 into Aurora MySQL 2\.02\.2\. You can also perform an in\-place upgrade from Aurora MySQL 2\.01\* or 2\.02 to Aurora MySQL 2\.02\.2\.
 
-We do not allow in\-place upgrade of Aurora MySQL 1\.\* clusters into Aurora MySQL 2\.02\.2 or restore to Aurora MySQL 2\.02\.2 from an Amazon S3 backup\. We plan to remove these restrictions in a later Aurora MySQL 2\.\* release\.
+We don't allow in\-place upgrade of Aurora MySQL 1\.\* clusters into Aurora MySQL 2\.02\.2 or restore to Aurora MySQL 2\.02\.2 from an Amazon S3 backup\. We plan to remove these restrictions in a later Aurora MySQL 2\.\* release\.
 
 The performance schema is disabled for this release of Aurora MySQL 5\.7\. Upgrade to Aurora 2\.03 for performance schema support\.
 
 **Note**  
- This version is currently not available in the regions AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] and China \(Beijing\) \[cn\-north\-1\]\. There will be a separate announcement once it is made available\. 
+ This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] and China \(Beijing\) \[cn\-north\-1\] regions\. There will be a separate announcement once it is made available\. 
 
-Should you have any questions or concerns, the AWS Support Team is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Comparison with Aurora MySQL 5\.6<a name="AuroraMySQL.Updates.2022.Compare56"></a>
 
@@ -23,16 +23,16 @@ The following Amazon Aurora MySQL features are supported in Aurora MySQL 5\.6, b
 + Asynchronous key prefetch \(AKP\)\. For more information, see [Working with Asynchronous Key Prefetch in Amazon Aurora](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
 + Hash joins\. For more information, see [Working with Hash Joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
 + Native functions for synchronously invoking AWS Lambda functions\. For more information, see [Invoking a Lambda Function with an Aurora MySQL Native Function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)\.
-+ Scan batching\. For more information, see [Amazon Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
++ Scan batching\. For more information, see [Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
 + Migrating data from MySQL using an Amazon S3 bucket\. For more information, see [Migrating Data from MySQL by Using an Amazon S3 Bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.
 
-Currently, Aurora MySQL 2\.01 does not support features added in Aurora MySQL version 1\.16 and later\. For information about Aurora MySQL version 1\.16, see [Amazon Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
+Currently, Aurora MySQL 2\.01 does not support features added in Aurora MySQL version 1\.16 and later\. For information about Aurora MySQL version 1\.16, see [Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
 
 ## MySQL 5\.7 compatibility<a name="AuroraMySQL.Updates.2022.Compatibility"></a>
 
-Amazon Aurora MySQL 2\.01 is wire\-compatible with MySQL 5\.7 and includes features such as JSON support, spatial indexes, and generated columns\. Amazon Aurora MySQL uses a native implementation of spatial indexing using z\-order curves to deliver >20x better write performance and >10x better read performance than MySQL 5\.7 for spatial datasets\.
+Aurora MySQL 2\.01 is wire\-compatible with MySQL 5\.7 and includes features such as JSON support, spatial indexes, and generated columns\. Aurora MySQL uses a native implementation of spatial indexing using z\-order curves to deliver >20x better write performance and >10x better read performance than MySQL 5\.7 for spatial datasets\.
 
-Amazon Aurora MySQL 2\.01 does not currently support the following MySQL 5\.7 features:
+Aurora MySQL 2\.01 does not currently support the following MySQL 5\.7 features:
 + Global transaction identifiers \(GTIDs\)
 + Group replication plugin
 + Increased page size
