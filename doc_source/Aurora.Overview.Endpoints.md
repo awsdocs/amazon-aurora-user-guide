@@ -287,6 +287,10 @@ aws rds describe-db-cluster-endpoints --region region_name ^
 
 ### Editing a Custom Endpoint<a name="aurora-endpoint-editing"></a>
 
+ You can edit the properties of a custom endpoint to change which DB instances are associated with the endpoint\. You can also change an endpoint between a static list and an exclusion list\. If you need more details about these endpoint properties, see [Membership Rules for Custom Endpoints](#Aurora.Endpoints.Custom.Membership)\. 
+
+ You can't connect to or use a custom endpoint while the changes from an edit action are in progress\. It might take some minutes before the endpoint status returns to **Available** and you can connect again\. 
+
 #### AWS Management Console<a name="aurora-edit-endpoint.console"></a>
 
  To edit a custom endpoint with the AWS Management Console, you can select the endpoint on the cluster detail page, or bring up the detail page for the endpoint, and choose the **Edit** action\. 

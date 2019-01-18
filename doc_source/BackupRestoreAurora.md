@@ -10,3 +10,4 @@ This section shows how to back up and restore Amazon Aurora DB clusters\.
 + [Copying a Snapshot](USER_CopySnapshot.md)
 + [Sharing a DB Cluster Snapshot](USER_ShareSnapshot.md)
 + [Restoring a DB Cluster to a Specified Time](USER_PIT.md)
++ [Deleting a Snapshot](USER_DeleteSnapshot.md)

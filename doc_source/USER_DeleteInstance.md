@@ -1,7 +1,4 @@
 # Deleting a DB Instance in a DB Cluster<a name="USER_DeleteInstance"></a>
-+ Provide the name of the instance
-+ Enable or disable the option to take a final DB snapshot of the instance
-+ Enable or disable the option to retain automated backups
 
 You can delete a DB instance in a DB cluster, including deleting the primary DB instance in a DB cluster or an Amazon Aurora Replica\. To delete a DB instance, you must specify the name of the instance\. 
 

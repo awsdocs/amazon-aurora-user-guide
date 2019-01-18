@@ -92,6 +92,6 @@ If your current Aurora MySQL version is 1\.14\.x, but it is lower than 1\.14\.4,
 
 ## Related Topics<a name="AuroraMySQL.Updates.Related"></a>
 + [Database Engine Updates for Amazon Aurora MySQL 2\.0](AuroraMySQL.Updates.20Updates.md)
-+ [Aurora MySQL 1\.1 Database Engine Updates ](AuroraMySQL.Updates.11Updates.md)
++ [Database Engine Updates for Amazon Aurora MySQL 1\.1](AuroraMySQL.Updates.11Updates.md)
 + [MySQL Bugs Fixed by Aurora MySQL Database Engine Updates](AuroraMySQL.Updates.MySQLBugs.md)
 + [Aurora Lab Mode Features](AuroraMySQL.Updates.LabMode.md#AuroraMySQL.Updates.LabModeFeatures)
