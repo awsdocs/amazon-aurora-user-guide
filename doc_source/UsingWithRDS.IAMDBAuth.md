@@ -20,7 +20,7 @@ IAM database authentication provides the following benefits:
 
 ## Availability for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.Availability"></a>
 
-IAM database authentication is available for the following database engines and instance classes:
+IAM database authentication is available for the following database engines and DB instance classes:
 + Aurora with MySQL compatibility version 1\.10 or higher\. All instance classes are supported, except for db\.t2\.small\.
 + Aurora with PostgreSQL compatibility, PostgreSQL versions 9\.6\.9 and 10\.4 or higher\.
 
@@ -37,6 +37,5 @@ We recommend the following when using the MySQL engine:
 
 ## PostgreSQL Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.LimitsPostgreSQL"></a>
 
-When using IAM database authentication with PostgreSQL, note the following limitations:
+When using IAM database authentication with PostgreSQL, note the following limitation:
 + The maximum number of connections for your database cluster may be limited depending on the cluster type and your workload\.
-+ IAM database authentication is not supported with M5 instance types\.

@@ -13,7 +13,7 @@ The `AWS/RDS` namespace includes the following metrics that apply to database en
 
 | Metric | Description | Applies to | 
 | --- | --- | --- | 
-|  `ActiveTransactions`  |  The average number of current transactions executing on an Aurora database instance per second\.  | Aurora MySQL | 
+|  `ActiveTransactions`  |   The average number of current transactions executing on an Aurora database instance per second\.   By default, Aurora doesn't enable this metric\. To begin measuring this value, set `innodb_monitor_enable='all'` in the DB parameter group for a specific DB instance\.   | Aurora MySQL | 
 |  `AuroraBinlogReplicaLag`  |  The amount of time a replica DB cluster running on Aurora with MySQL compatibility lags behind the source DB cluster\. This metric reports the value of the `Seconds_Behind_Master` field of the MySQL `SHOW SLAVE STATUS` command\. This metric is useful for monitoring replica lag between Aurora DB clusters that are replicating across different AWS Regions\. For more information, see [Aurora MySQL Replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AuroraMySQL.Replication.CrossRegion.html)\.  | Aurora MySQL | 
 | AuroraGlobalDBReplicatedWriteIO |  Units: Bytes  | Aurora MySQL | 
 | AuroraGlobalDBDataTransferBytes |  Units: Bytes  | Aurora MySQL | 

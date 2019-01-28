@@ -13,7 +13,7 @@ The following are the Memory Optimized DB instance classes available:
 + **db\.r3** – Previous\-generation instance classes that provide memory optimization and more computing capacity than the db\.m2 instance classes\. The db\.r3 instances classes are not available in the EU \(Paris\) region\. 
 
 The following are the Burstable Performance DB instance classes available:
-+ **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\. 
++ **db\.t2** – Current\-generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\. 
 
 ## Specifications for All Available DB Instance Classes for Aurora<a name="Concepts.DBInstanceClass.SummaryAurora"></a>
 
