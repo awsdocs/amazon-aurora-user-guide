@@ -38,4 +38,4 @@ We recommend the following when using the MySQL engine:
 ## PostgreSQL Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.LimitsPostgreSQL"></a>
 
 When using IAM database authentication with PostgreSQL, note the following limitation:
-+ The maximum number of connections for your database cluster may be limited depending on the cluster type and your workload\.
++ The maximum number of connections per second for your database cluster may be limited depending on the cluster type and your workload\.

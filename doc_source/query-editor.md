@@ -97,7 +97,7 @@ If your connection is successful, your connection and authentication information
 1. In the query editor, enter the SQL query you want to run on the database\.  
 ![\[Query editor\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/query-editor.png)
 
-1. Choose **Run**, and the query editor displays the results of your query\.
+1. Choose **Run** or press Ctrl\+Enter, and the query editor displays the results of your query\.
 
    After running the query, save it to **Saved queries** by choosing **Save As** or **Save**\.
 

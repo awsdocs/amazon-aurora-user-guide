@@ -187,7 +187,7 @@ To remove an AWS account identifier from the list, use the `-- values-to-remove`
 
 ```
 aws rds modify-db-cluster-snapshot-attribute \ 
---db-snapshot-identifier manual-cluster-snapshot1 \ 
+--db-cluster-snapshot-identifier manual-cluster-snapshot1 \ 
 --attribute-name restore \ 
 --values-to-remove '["444455556666 "]'
 ```

@@ -33,14 +33,14 @@ To reboot a DB instance by using the AWS CLI, call the [https://docs.aws.amazon.
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds reboot-db-instance \
-2.     --db-instance-identifier mydbinstance
+aws rds reboot-db-instance \
+    --db-instance-identifier mydbinstance
 ```
 For Windows:  
 
 ```
-1. aws rds reboot-db-instance ^
-2.     --db-instance-identifier mydbinstance
+aws rds reboot-db-instance ^
+    --db-instance-identifier mydbinstance
 ```
 
 ## API<a name="USER_RebootInstance.API"></a>

@@ -28,24 +28,24 @@ You can test your connection to a DB instance using common Linux or Windows tool
 From a Linux or Unix terminal, you can test the connection by typing the following \(replace `<DB-instance-endpoint>` with the endpoint and `<port>` with the port of your DB instance\):
 
 ```
-1.   $nc -zv <DB-instance-endpoint> <port> 
+nc -zv <DB-instance-endpoint> <port> 
 ```
 
 For example, the following shows a sample command and the return value:
 
 ```
-1.   $nc -zv postgresql1.c6c8mn7tsdgv0.us-west-2.rds.amazonaws.com 8299
-2. 
-3.   Connection to postgresql1.c6c8mn7tsdgv0.us-west-2.rds.amazonaws.com 8299 port [tcp/vvr-data] succeeded!
+nc -zv postgresql1.c6c8mn7tsdgv0.us-west-2.rds.amazonaws.com 8299
+
+  Connection to postgresql1.c6c8mn7tsdgv0.us-west-2.rds.amazonaws.com 8299 port [tcp/vvr-data] succeeded!
 ```
 
 Windows users can use Telnet to test the connection to a DB instance\. Note that Telnet actions are not supported other than for testing the connection\. If a connection is successful, the action returns no message\. If a connection is not successful, you receive an error message such as the following:
 
 ```
-1.   C:\>telnet sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com 819
-2.   
-3.   Connecting To sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com...Could not open 
-4.   connection to the host, on port 819: Connect failed
+C:\>telnet sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com 819
+  
+  Connecting To sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com...Could not open 
+  connection to the host, on port 819: Connect failed
 ```
 
 If Telnet actions return success, your security group is properly configured\.
@@ -97,17 +97,17 @@ You can reboot a DB instance using the RDS console or explicitly calling the `Re
 
 ## Amazon Aurora MySQL Out of Memory Issues<a name="CHAP_Troubleshooting.AuroraMySQLOOM"></a>
 
-The Aurora MySQL `aurora_oom_response` instance\-level parameter can enable the DB instance to monitor the system memory and estimate the memory consumed by various statements and connections\. If the system runs low on memory, it can perform a list of actions to release that memory in an attempt to avoid out\-of\-memory \(OOM\) and database restart\. The instance\-level parameter takes a string of comma separated actions that a DB instance should take when its memory is low\. Valid actions include "print", "tune", "decline", "kill\_query" or any combination of these\. An empty string means there should be no actions taken and effectively disables the feature\.
+The Aurora MySQL `aurora_oom_response` instance\-level parameter can enable the DB instance to monitor the system memory and estimate the memory consumed by various statements and connections\. If the system runs low on memory, it can perform a list of actions to release that memory in an attempt to avoid out\-of\-memory \(OOM\) and database restart\. The instance\-level parameter takes a string of comma\-separated actions that a DB instance should take when its memory is low\. Valid actions include `print`, `tune`, `decline`, `kill_query`, or any combination of these\. An empty string means there should be no actions taken and effectively disables the feature\.
 
 The following are usage examples for the `aurora_oom_response` parameter:
-+ "print" – Only prints the queries taking high amount of memory\.
-+ "tune" – Tunes the internal table caches to release some memory back to the system\.
-+ "decline" – Declines new queries once the instance is low on memory\.
-+ "kill\_query" – Kills the queries in descending order of memory consumption until the instance memory surfaces above the low threshold\. DDL statements are not killed\.
-+ "print, tune" – Performs actions described for both "print" and "tune"\.
-+ "tune, decline, kill\_query" – Performs the actions described for "tune", "decline", and "kill\_query"\.
++ `print` – Only prints the queries taking high amount of memory\.
++ `tune` – Tunes the internal table caches to release some memory back to the system\.
++ `decline` – Declines new queries once the instance is low on memory\.
++ `kill_query` – Kills the queries in descending order of memory consumption until the instance memory surfaces above the low threshold\. DDL statements are not killed\.
++ `print, tune` – Performs actions described for both `print` and `tune`\.
++ `tune, decline, kill_query` – Performs the actions described for `tune`, `decline`, and `kill_query`\.
 
-For db\.t2 DB instance classes, the `aurora_oom_response` parameter is set to "print, tune" by default\. For all other DB instance classes, the parameter value is empty by default \(disabled\)\.
+For db\.t2 DB instance classes, the `aurora_oom_response` parameter is set to `print, tune` by default\. For all other DB instance classes, the parameter value is empty by default \(disabled\)\.
 
 ## Amazon Aurora MySQL Replication Issues<a name="CHAP_Troubleshooting.MySQL"></a>
 
@@ -132,23 +132,23 @@ You can reduce the lag between updates to a source DB instance and the subsequen
   For Linux, OS X, or Unix:
 
   ```
-  1. PROMPT> mysqldump \
-  2.     -h <endpoint> \
-  3.     --port=<port> \
-  4.     -u=<username> \
-  5.     -p <password> \
-  6.     database_name table1 table2 > /dev/null
+  PROMPT> mysqldump \
+      -h <endpoint> \
+      --port=<port> \
+      -u=<username> \
+      -p <password> \
+      database_name table1 table2 > /dev/null
   ```
 
   For Windows:
 
   ```
-  1. PROMPT> mysqldump ^
-  2.     -h <endpoint> ^
-  3.     --port=<port> ^
-  4.     -u=<username> ^
-  5.     -p <password> ^
-  6.     database_name table1 table2 > /dev/null
+  PROMPT> mysqldump ^
+      -h <endpoint> ^
+      --port=<port> ^
+      -u=<username> ^
+      -p <password> ^
+      database_name table1 table2 > /dev/null
   ```
 
 ### Diagnosing and Resolving a MySQL or MariaDB Read Replication Failure<a name="CHAP_Troubleshooting.MySQL.RR"></a>

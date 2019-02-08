@@ -104,7 +104,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | --- | --- | --- | 
 | `allow-suspicious-udfs` | No |  | 
 | `aurora_lab_mode` | Yes |   For more information, see [Amazon Aurora MySQL Lab Mode](AuroraMySQL.Updates.LabMode.md)\.   | 
-|  `aurora_oom_response`  |  Yes  |  | 
+|  `aurora_oom_response`  |  Yes  |   For more information, see [ Amazon Aurora MySQL Out of Memory Issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.   | 
 | `autocommit` | Yes |  | 
 | `automatic_sp_privileges` | Yes |  | 
 | `back_log` | Yes |  | 

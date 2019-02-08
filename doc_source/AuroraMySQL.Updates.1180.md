@@ -20,3 +20,5 @@ If you have any questions or concerns, AWS Support is available on the community
   + "kill\_query" – Kills the queries in descending order of memory consumption until the instance memory surfaces above the low threshold\. Data definition language \(DDL\) statements are not killed\.
   + "print, tune" – Performs actions described for both "print" and "tune"\.
   + "tune, decline, kill\_query" – Performs the actions described for "tune", "decline", and "kill\_query"\.
+
+   For information about handling out\-of\-memory conditions and other troubleshooting advice, see [ Amazon Aurora MySQL Out of Memory Issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\. 

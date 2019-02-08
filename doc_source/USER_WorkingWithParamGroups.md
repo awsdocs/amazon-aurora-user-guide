@@ -101,23 +101,23 @@ The output contains duplicates\.
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds create-db-parameter-group \
-2.     --db-parameter-group-name mydbparametergroup \
-3.     --db-parameter-group-family aurora5.6 \
-4.     --description "My new parameter group"
+aws rds create-db-parameter-group \
+    --db-parameter-group-name mydbparametergroup \
+    --db-parameter-group-family aurora5.6 \
+    --description "My new parameter group"
 ```
 For Windows:  
 
 ```
-1. aws rds create-db-parameter-group ^
-2.     --db-parameter-group-name mydbparametergroup ^
-3.     --db-parameter-group-family aurora5.6 ^
-4.     --description "My new parameter group"
+aws rds create-db-parameter-group ^
+    --db-parameter-group-name mydbparametergroup ^
+    --db-parameter-group-family aurora5.6 ^
+    --description "My new parameter group"
 ```
 This command produces output similar to the following:  
 
 ```
-1. DBPARAMETERGROUP  mydbparametergroup  aurora5.6  My new parameter group					
+DBPARAMETERGROUP  mydbparametergroup  aurora5.6  My new parameter group					
 ```
 
 ### API<a name="USER_WorkingWithParamGroups.Creating.API"></a>
@@ -177,23 +177,23 @@ The output contains duplicates\.
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds create-db-cluster-parameter-group \
-2.     --db-cluster-parameter-group-name mydbclusterparametergroup \
-3.     --db-parameter-group-family aurora5.6 \
-4.     --description "My new cluster parameter group"
+aws rds create-db-cluster-parameter-group \
+    --db-cluster-parameter-group-name mydbclusterparametergroup \
+    --db-parameter-group-family aurora5.6 \
+    --description "My new cluster parameter group"
 ```
 For Windows:  
 
 ```
-1. aws rds create-db-cluster-parameter-group ^
-2.     --db-cluster-parameter-group-name mydbclusterparametergroup ^
-3.     --db-parameter-group-family aurora5.6 ^
-4.     --description "My new cluster parameter group"
+aws rds create-db-cluster-parameter-group ^
+    --db-cluster-parameter-group-name mydbclusterparametergroup ^
+    --db-parameter-group-family aurora5.6 ^
+    --description "My new cluster parameter group"
 ```
 This command produces output similar to the following:  
 
 ```
-1. DBCLUSTERPARAMETERGROUP  mydbclusterparametergroup  mysql5.6  My cluster new parameter group	
+DBCLUSTERPARAMETERGROUP  mydbclusterparametergroup  mysql5.6  My cluster new parameter group	
 ```
 
 ### API<a name="USER_WorkingWithParamGroups.CreatingCluster.API"></a>
@@ -248,23 +248,23 @@ Amazon RDS does not support passing multiple comma\-delimited parameter values f
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds modify-db-parameter-group \
-2.     --db-parameter-group-name mydbparametergroup \
-3.     --parameters "ParameterName=max_connections,ParameterValue=250,ApplyMethod=immediate" \
-4.                  "ParameterName=max_allowed_packet,ParameterValue=1024,ApplyMethod=immediate"
+aws rds modify-db-parameter-group \
+    --db-parameter-group-name mydbparametergroup \
+    --parameters "ParameterName=max_connections,ParameterValue=250,ApplyMethod=immediate" \
+                 "ParameterName=max_allowed_packet,ParameterValue=1024,ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
-1. aws rds modify-db-parameter-group ^
-2.     --db-parameter-group-name mydbparametergroup ^
-3.     --parameters "ParameterName=max_connections,ParameterValue=250,ApplyMethod=immediate" ^
-4.                  "ParameterName=max_allowed_packet,ParameterValue=1024,ApplyMethod=immediate"
+aws rds modify-db-parameter-group ^
+    --db-parameter-group-name mydbparametergroup ^
+    --parameters "ParameterName=max_connections,ParameterValue=250,ApplyMethod=immediate" ^
+                 "ParameterName=max_allowed_packet,ParameterValue=1024,ApplyMethod=immediate"
 ```
 The command produces output like the following:  
 
 ```
-1. DBPARAMETERGROUP  mydbparametergroup
+DBPARAMETERGROUP  mydbparametergroup
 ```
 
 ### API<a name="USER_WorkingWithParamGroups.Modifying.API"></a>
@@ -316,23 +316,23 @@ Amazon RDS does not support passing multiple comma\-delimited parameter values f
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds modify-db-cluster-parameter-group \
-2.     --db-cluster-parameter-group-name mydbclusterparametergroup \
-3.     --parameters "ParameterName=server_audit_logging,ParameterValue=1,ApplyMethod=immediate" \
-4.                  "ParameterName=server_audit_logs_upload,ParameterValue=1,ApplyMethod=immediate"
+aws rds modify-db-cluster-parameter-group \
+    --db-cluster-parameter-group-name mydbclusterparametergroup \
+    --parameters "ParameterName=server_audit_logging,ParameterValue=1,ApplyMethod=immediate" \
+                 "ParameterName=server_audit_logs_upload,ParameterValue=1,ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
-1. aws rds modify-db-cluster-parameter-group ^
-2.     --db-cluster-parameter-group-name mydbclusterparametergroup ^
-3.     --parameters "ParameterName=server_audit_logging,ParameterValue=1,ApplyMethod=immediate" ^
-4.                  "ParameterName=server_audit_logs_upload,ParameterValue=1,ApplyMethod=immediate"
+aws rds modify-db-cluster-parameter-group ^
+    --db-cluster-parameter-group-name mydbclusterparametergroup ^
+    --parameters "ParameterName=server_audit_logging,ParameterValue=1,ApplyMethod=immediate" ^
+                 "ParameterName=server_audit_logs_upload,ParameterValue=1,ApplyMethod=immediate"
 ```
 The command produces output like the following:  
 
 ```
-1. DBCLUSTERPARAMETERGROUP  mydbclusterparametergroup
+DBCLUSTERPARAMETERGROUP  mydbclusterparametergroup
 ```
 
 ### API<a name="USER_WorkingWithParamGroups.ModifyingCluster.API"></a>
@@ -381,18 +381,18 @@ The following example creates a new DB parameter group named `mygroup2` that is 
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds copy-db-parameter-group \
-2.     --source-db-parameter-group-identifier mygroup1 \
-3.     --target-db-parameter-group-identifier mygroup2 \
-4.     --target-db-parameter-group-description "DB parameter group 2"
+aws rds copy-db-parameter-group \
+    --source-db-parameter-group-identifier mygroup1 \
+    --target-db-parameter-group-identifier mygroup2 \
+    --target-db-parameter-group-description "DB parameter group 2"
 ```
 For Windows:  
 
 ```
-1. aws rds copy-db-parameter-group ^
-2.     --source-db-parameter-group-identifier mygroup1 ^
-3.     --target-db-parameter-group-identifier mygroup2 ^
-4.     --target-db-parameter-group-description "DB parameter group 2"
+aws rds copy-db-parameter-group ^
+    --source-db-parameter-group-identifier mygroup1 ^
+    --target-db-parameter-group-identifier mygroup2 ^
+    --target-db-parameter-group-description "DB parameter group 2"
 ```
 
 ### API<a name="USER_WorkingWithParamGroups.Copying.API"></a>
@@ -442,18 +442,18 @@ The following example creates a new DB cluster parameter group named `mygroup2` 
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds copy-db-cluster-parameter-group \
-2.     --source-db-cluster-parameter-group-identifier mygroup1 \
-3.     --target-db-cluster-parameter-group-identifier mygroup2 \
-4.     --target-db-cluster-parameter-group-description "DB parameter group 2"
+aws rds copy-db-cluster-parameter-group \
+    --source-db-cluster-parameter-group-identifier mygroup1 \
+    --target-db-cluster-parameter-group-identifier mygroup2 \
+    --target-db-cluster-parameter-group-description "DB parameter group 2"
 ```
 For Windows:  
 
 ```
-1. aws rds copy-db-cluster-parameter-group ^
-2.     --source-db-cluster-parameter-group-identifier mygroup1 ^
-3.     --target-db-cluster-parameter-group-identifier mygroup2 ^
-4.     --target-db-cluster-parameter-group-description "DB parameter group 2"
+aws rds copy-db-cluster-parameter-group ^
+    --source-db-cluster-parameter-group-identifier mygroup1 ^
+    --target-db-cluster-parameter-group-identifier mygroup2 ^
+    --target-db-cluster-parameter-group-description "DB parameter group 2"
 ```
 
 ### API<a name="USER_WorkingWithParamGroups.Copying.API"></a>
@@ -488,32 +488,32 @@ To list all DB parameter groups for an AWS account, use the AWS CLI [https://doc
 The following example lists all available DB parameter groups for an AWS account\.  
 
 ```
-1. aws rds describe-db-parameter-groups
+aws rds describe-db-parameter-groups
 ```
 The command returns a response like the following:  
 
 ```
-1. DBPARAMETERGROUP  default.mysql5.5     mysql5.5  Default parameter group for MySQL5.5
-2. DBPARAMETERGROUP  default.mysql5.6     mysql5.6  Default parameter group for MySQL5.6
-3. DBPARAMETERGROUP  mydbparametergroup   mysql5.6  My new parameter group
+DBPARAMETERGROUP  default.mysql5.5     mysql5.5  Default parameter group for MySQL5.5
+DBPARAMETERGROUP  default.mysql5.6     mysql5.6  Default parameter group for MySQL5.6
+DBPARAMETERGROUP  mydbparametergroup   mysql5.6  My new parameter group
 ```
 The following example describes the *mydbparamgroup1* parameter group\.  
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds describe-db-parameter-groups \
-2.     --db-parameter-group-name mydbparamgroup1
+aws rds describe-db-parameter-groups \
+    --db-parameter-group-name mydbparamgroup1
 ```
 For Windows:  
 
 ```
-1. aws rds describe-db-parameter-groups ^
-2.     --db-parameter-group-name mydbparamgroup1
+aws rds describe-db-parameter-groups ^
+    --db-parameter-group-name mydbparamgroup1
 ```
 The command returns a response like the following:  
 
 ```
-1. DBPARAMETERGROUP  mydbparametergroup1  mysql5.5  My new parameter group
+DBPARAMETERGROUP  mydbparametergroup1  mysql5.5  My new parameter group
 ```
 
 ### API<a name="USER_WorkingWithParamGroups.Listing.API"></a>
@@ -545,31 +545,31 @@ To list all DB cluster parameter groups for an AWS account, use the AWS CLI [ `d
 The following example lists all available DB cluster parameter groups for an AWS account\.  
 
 ```
-1. aws rds describe-db-cluster-parameter-groups
+aws rds describe-db-cluster-parameter-groups
 ```
 The command returns a response like the following:  
 
 ```
-1. DBCLUSTERPARAMETERGROUPS        arn:aws:rds:us-west-2:1234567890:cluster-pg:default.aurora5.6 default.aurora5.6       aurora5.6       Default cluster parameter group for aurora5.6
-2. DBCLUSTERPARAMETERGROUPS        arn:aws:rds:us-west-2:1234567890:cluster-pg:mydbclusterparametergroup mydbclusterparametergroup       aurora5.6       My new cluster parameter group
+DBCLUSTERPARAMETERGROUPS        arn:aws:rds:us-west-2:1234567890:cluster-pg:default.aurora5.6 default.aurora5.6       aurora5.6       Default cluster parameter group for aurora5.6
+DBCLUSTERPARAMETERGROUPS        arn:aws:rds:us-west-2:1234567890:cluster-pg:mydbclusterparametergroup mydbclusterparametergroup       aurora5.6       My new cluster parameter group
 ```
 The following example describes the *mydbclusterparametergroup* parameter group\.  
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds describe-db-cluster-parameter-groups \
-2.     --db-cluster-parameter-group-name mydbclusterparametergroup
+aws rds describe-db-cluster-parameter-groups \
+    --db-cluster-parameter-group-name mydbclusterparametergroup
 ```
 For Windows:  
 
 ```
-1. aws rds describe-db-cluster-parameter-groups ^
-2.     --db-cluster-parameter-group-name mydbclusterparametergroup
+aws rds describe-db-cluster-parameter-groups ^
+    --db-cluster-parameter-group-name mydbclusterparametergroup
 ```
 The command returns a response like the following:  
 
 ```
-1. DBCLUSTERPARAMETERGROUPS        arn:aws:rds:us-west-2:1234567890:cluster-pg:mydbclusterparametergroup mydbclusterparametergroup       aurora5.6       My new cluster parameter group
+DBCLUSTERPARAMETERGROUPS        arn:aws:rds:us-west-2:1234567890:cluster-pg:mydbclusterparametergroup mydbclusterparametergroup       aurora5.6       My new cluster parameter group
 ```
 
 ### API<a name="USER_WorkingWithParamGroups.ListingCluster.API"></a>
@@ -601,7 +601,7 @@ To view the parameter values for a DB parameter group, use the AWS CLI [https://
 The following example lists the parameters and parameter values for a DB parameter group named *mydbparametergroup\.*  
 
 ```
-1. aws rds describe-db-parameters --db-parameter-group-name mydbparametergroup
+aws rds describe-db-parameters --db-parameter-group-name mydbparametergroup
 ```
 The command returns a response like the following:  
 
@@ -644,7 +644,7 @@ To view the parameter values for a DB cluster parameter group, use the AWS CLI [
 The following example lists the parameters and parameter values for a DB cluster parameter group named *mydbclusterparametergroup\.*  
 
 ```
-1. aws rds describe-db-cluster-parameters --db-cluster-parameter-group-name mydbclusterparametergroup
+aws rds describe-db-cluster-parameters --db-cluster-parameter-group-name mydbclusterparametergroup
 ```
 The command returns a response like the following:  
 

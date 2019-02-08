@@ -2,10 +2,10 @@
 
 Set the capacity of an Aurora Serverless DB cluster to a specific value with the AWS Management Console, the AWS CLI, or the RDS API\.
 
-Aurora Serverless scales seamlessly based on the workload on the DB cluster\. In some cases, the capacity might not scale fast enough to meet a sudden change in workload, such as a large number of new transactions\. In these cases, you can set the capacity explicitly\. After you set the capacity explicitly, Aurora Serverless can automatically scale the DB cluster\. It does so based on the cooldown period for scaling up and the cooldown period for scaling down\.
+Aurora Serverless scales seamlessly based on the workload on the DB cluster\. In some cases, the capacity might not scale fast enough to meet a sudden change in workload, such as a large number of new transactions\. In these cases, you can set the capacity explicitly\. After you set the capacity explicitly, Aurora Serverless can automatically scale the DB cluster\. It does so based on the cooldown period for scaling down\.
 
 **Important**  
-When you set the capacity explicitly, connections that prevent Aurora Serverless from finding a scaling point might be dropped\. For more information about scaling points, see [Autoscaling for Aurora Serverless](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\.
+When you set the capacity explicitly, connections that prevent Aurora Serverless from finding a scaling point might be dropped\. For more information about scaling points and cooldown periods, see [Autoscaling for Aurora Serverless](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\.
 
 ## Console<a name="aurora-serverless.setting-capacity.console"></a>
 

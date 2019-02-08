@@ -1,5 +1,5 @@
 # Document History<a name="WhatsNew"></a>
-+ **Latest documentation update: **January 24, 2019
++ **Latest documentation update: **February 6, 2019
 + **Current API version: **2014\-10\-31
 
 The following table describes important changes to the *Amazon Aurora User Guide*\. For notification about updates to this documentation, you can subscribe to an RSS feed\. For information about Amazon Relational Database Service \(Amazon RDS\), see the [ *Amazon Relational Database Service User Guide*](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html)\.
@@ -9,6 +9,7 @@ Before August 31, 2018, Amazon Aurora was documented in the * Amazon Relational 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Amazon RDS Performance Insights supports viewing more SQL text for Aurora MySQL](#WhatsNew) | Amazon RDS Performance Insights now supports viewing more SQL text in the Performance Insights dashboard for Aurora MySQL DB instances\. For more information, see [Viewing More SQL Text in the Performance Insights Dashboard](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.UsingDashboard.html#USER_PerfInsights.UsingDashboard.SQLTextSize)\.  | February 6, 2019 | 
 | [Amazon RDS Performance Insights supports viewing more SQL text for Aurora PostgreSQL](#WhatsNew) | Amazon RDS Performance Insights now supports viewing more SQL text in the Performance Insights dashboard for Aurora PostgreSQL DB instances\. For more information, see [Viewing More SQL Text in the Performance Insights Dashboard](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.UsingDashboard.html#USER_PerfInsights.UsingDashboard.SQLTextSize)\.  | January 24, 2019 | 
 | [Aurora backup billing](#WhatsNew) |  You can use the Amazon CloudWatch metrics `TotalBackupStorageBilled`, `SnapshotStorageUsed`, and `BackupRetentionPeriodStorageUsed` to monitor the space usage of your Aurora backups\. For more information about how to use CloudWatch metrics, see [Overview of Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/MonitoringOverview.html)\. For more information about how to manage storage for backup data, see [Understanding Aurora Backup Storage Usage](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-storage-backup.html)\.  | January 3, 2019 | 
 | [Performance Insights Counters ](#WhatsNew) | You can now add performance counters to your Performance Insights charts\. For more information, see [Performance Insights Dashboard Components ](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.UsingDashboard.html#USER_PerfInsights.UsingDashboard.Components)\.  | December 6, 2018 | 

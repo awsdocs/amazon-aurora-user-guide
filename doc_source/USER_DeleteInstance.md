@@ -40,14 +40,14 @@ To delete a DB instance by using the AWS CLI, call the [delete\-db\-instance](ht
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds delete-db-instance \
-2.     --db-instance-identifier mydbinstance
+aws rds delete-db-instance \
+    --db-instance-identifier mydbinstance
 ```
 For Windows:  
 
 ```
-1. aws rds delete-db-instance ^
-2.     --db-instance-identifier mydbinstance
+aws rds delete-db-instance ^
+    --db-instance-identifier mydbinstance
 ```
 
 ### RDS API<a name="USER_DeleteInstance.API"></a>

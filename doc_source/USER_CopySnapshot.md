@@ -41,9 +41,12 @@ For Amazon Aurora DB cluster snapshots, you can't encrypt an unencrypted DB clus
 
 ## Copying Snapshots Across AWS Regions<a name="USER_CopySnapshot.AcrossRegions"></a>
 
-When you copy a snapshot to an AWS Region that is different from the source snapshot's AWS Region, the first copy is a full snapshot copy, even if you copy an incremental snapshot\. A full snapshot copy contains all of the data and metadata required to restore the DB instance\. After the first snapshot copy, you can copy incremental snapshots of the same DB instance to the same destination region\.
+When you copy a snapshot to an AWS Region that is different from the source snapshot's AWS Region, the first copy is a full snapshot copy, even if you copy an incremental snapshot\. A full snapshot copy contains all of the data and metadata required to restore the DB instance\. After the first snapshot copy, you can copy incremental snapshots of the same DB instance to the same destination region within the same AWS account\.
 
 An incremental snapshot contains only the data that has changed after the most recent snapshot of the same DB instance\. Incremental snapshot copying is faster and results in lower storage costs than full snapshot copying\. Incremental snapshot copying across AWS Regions is supported for both unencrypted and encrypted snapshots\.
+
+**Important**  
+Copying incremental snapshots across multiple AWS accounts is not supported\. If you set up snapshot copies from one AWS account to another AWS account, all of the copies are full snapshots, even within the same region\.
 
 Depending on the AWS Regions involved and the amount of data to be copied, a cross\-region snapshot copy can take hours to complete\. In some cases, there might be a large number of cross\-region snapshot copy requests from a given source AWS Region\. In these cases, Amazon RDS might put new cross\-region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\. 
 
@@ -119,18 +122,18 @@ The following code creates a copy of DB cluster snapshot `arn:aws:rds:us-east-1:
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds copy-db-cluster-snapshot \
-2.   --source-db-cluster-snapshot-identifier arn:aws:rds:us-east-1:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20130805 \
-3.   --target-db-cluster-snapshot-identifier myclustersnapshotcopy \
-4.   --copy-tags
+aws rds copy-db-cluster-snapshot \
+  --source-db-cluster-snapshot-identifier arn:aws:rds:us-east-1:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20130805 \
+  --target-db-cluster-snapshot-identifier myclustersnapshotcopy \
+  --copy-tags
 ```
 For Windows:  
 
 ```
-1. aws rds copy-db-cluster-snapshot ^
-2.   --source-db-cluster-snapshot-identifier arn:aws:rds:us-east-1:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20130805 ^
-3.   --target-db-cluster-snapshot-identifier myclustersnapshotcopy ^
-4.   --copy-tags
+aws rds copy-db-cluster-snapshot ^
+  --source-db-cluster-snapshot-identifier arn:aws:rds:us-east-1:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20130805 ^
+  --target-db-cluster-snapshot-identifier myclustersnapshotcopy ^
+  --copy-tags
 ```
 
 #### API<a name="USER_CopyDBClusterSnapshot.Unencrypted.CrossRegion.API"></a>
@@ -146,19 +149,19 @@ The following code creates a copy of a snapshot `arn:aws:rds:us-east-1:123456789
 **Example**  
 
 ```
- 1. https://rds.us-west-1.amazonaws.com/
- 2.    ?Action=CopyDBClusterSnapshot
- 3.    &CopyTags=true
- 4.    &SignatureMethod=HmacSHA256
- 5.    &SignatureVersion=4
- 6.    &SourceDBSnapshotIdentifier=arn%3Aaws%3Ards%3Aus-east-1%3A123456789012%3Acluster-snapshot%3Aaurora-cluster1-snapshot-20130805
- 7.    &TargetDBSnapshotIdentifier=myclustersnapshotcopy
- 8.    &Version=2013-09-09
- 9.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-10.    &X-Amz-Credential=AKIADQKE4SARGYLE/20140429/us-west-1/rds/aws4_request
-11.    &X-Amz-Date=20140429T175351Z
-12.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-13.    &X-Amz-Signature=9164337efa99caf850e874a1cb7ef62f3cea29d0b448b9e0e7c53b288ddffed2
+https://rds.us-west-1.amazonaws.com/
+   ?Action=CopyDBClusterSnapshot
+   &CopyTags=true
+   &SignatureMethod=HmacSHA256
+   &SignatureVersion=4
+   &SourceDBSnapshotIdentifier=arn%3Aaws%3Ards%3Aus-east-1%3A123456789012%3Acluster-snapshot%3Aaurora-cluster1-snapshot-20130805
+   &TargetDBSnapshotIdentifier=myclustersnapshotcopy
+   &Version=2013-09-09
+   &X-Amz-Algorithm=AWS4-HMAC-SHA256
+   &X-Amz-Credential=AKIADQKE4SARGYLE/20140429/us-west-1/rds/aws4_request
+   &X-Amz-Date=20140429T175351Z
+   &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
+   &X-Amz-Signature=9164337efa99caf850e874a1cb7ef62f3cea29d0b448b9e0e7c53b288ddffed2
 ```
 
 ### Copying an Encrypted DB Cluster Snapshot by Using the AWS CLI or Amazon RDS API<a name="USER_CopyDBClusterSnapshot.Encrypted.CrossRegion"></a>
@@ -189,20 +192,20 @@ The following code example copies the encrypted DB cluster snapshot from the us\
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds copy-db-cluster-snapshot \
-2.   --source-db-cluster-snapshot-identifier arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115 \
-3.   --target-db-cluster-snapshot-identifier myclustersnapshotcopy \
-4.   --source-region us-west-2 \	
-5.   --kms-key-id my-us-east-1-key
+aws rds copy-db-cluster-snapshot \
+  --source-db-cluster-snapshot-identifier arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115 \
+  --target-db-cluster-snapshot-identifier myclustersnapshotcopy \
+  --source-region us-west-2 \	
+  --kms-key-id my-us-east-1-key
 ```
 For Windows:  
 
 ```
-1. aws rds copy-db-cluster-snapshot ^
-2.   --source-db-cluster-snapshot-identifier arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115 ^
-3.   --target-db-cluster-snapshot-identifier myclustersnapshotcopy ^
-4.   --source-region us-west-2 ^	
-5.   --kms-key-id my-us-east-1-key
+aws rds copy-db-cluster-snapshot ^
+  --source-db-cluster-snapshot-identifier arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115 ^
+  --target-db-cluster-snapshot-identifier myclustersnapshotcopy ^
+  --source-region us-west-2 ^	
+  --kms-key-id my-us-east-1-key
 ```
 
 #### API<a name="USER_CopyDBClusterSnapshot.Encrypted.CrossRegion.API"></a>
@@ -226,33 +229,33 @@ The following code example copies the encrypted DB cluster snapshot from the us\
 **Example**  
 
 ```
- 1. https://rds.us-east-1.amazonaws.com/
- 2.     ?Action=CopyDBClusterSnapshot
- 3.     &KmsKeyId=my-us-east-1-key
- 4.     &PreSignedUrl=https%253A%252F%252Frds.us-west-2.amazonaws.com%252F
- 5.          %253FAction%253DCopyDBClusterSnapshot
- 6.          %2526DestinationRegion%253Dus-east-1
- 7.          %2526KmsKeyId%253Dmy-us-east-1-key
- 8.          %2526SourceDBClusterSnapshotIdentifier%253Darn%25253Aaws%25253Ards%25253Aus-west-2%25253A123456789012%25253Acluster-snapshot%25253Aaurora-cluster1-snapshot-20161115
- 9.          %2526SignatureMethod%253DHmacSHA256
-10.          %2526SignatureVersion%253D4
-11.          %2526Version%253D2014-10-31
-12.          %2526X-Amz-Algorithm%253DAWS4-HMAC-SHA256
-13.          %2526X-Amz-Credential%253DAKIADQKE4SARGYLE%252F20161117%252Fus-west-2%252Frds%252Faws4_request
-14.          %2526X-Amz-Date%253D20161117T215409Z
-15.          %2526X-Amz-Expires%253D3600
-16.          %2526X-Amz-SignedHeaders%253Dcontent-type%253Bhost%253Buser-agent%253Bx-amz-content-sha256%253Bx-amz-date
-17.          %2526X-Amz-Signature%253D255a0f17b4e717d3b67fad163c3ec26573b882c03a65523522cf890a67fca613
-18.     &SignatureMethod=HmacSHA256
-19.     &SignatureVersion=4
-20.     &SourceDBClusterSnapshotIdentifier=arn%3Aaws%3Ards%3Aus-west-2%3A123456789012%3Acluster-snapshot%3Aaurora-cluster1-snapshot-20161115
-21.     &TargetDBClusterSnapshotIdentifier=myclustersnapshotcopy
-22.     &Version=2014-10-31
-23.     &X-Amz-Algorithm=AWS4-HMAC-SHA256
-24.     &X-Amz-Credential=AKIADQKE4SARGYLE/20161117/us-east-1/rds/aws4_request
-25.     &X-Amz-Date=20161117T221704Z
-26.     &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-27.     &X-Amz-Signature=da4f2da66739d2e722c85fcfd225dc27bba7e2b8dbea8d8612434378e52adccf
+https://rds.us-east-1.amazonaws.com/
+    ?Action=CopyDBClusterSnapshot
+    &KmsKeyId=my-us-east-1-key
+    &PreSignedUrl=https%253A%252F%252Frds.us-west-2.amazonaws.com%252F
+         %253FAction%253DCopyDBClusterSnapshot
+         %2526DestinationRegion%253Dus-east-1
+         %2526KmsKeyId%253Dmy-us-east-1-key
+         %2526SourceDBClusterSnapshotIdentifier%253Darn%25253Aaws%25253Ards%25253Aus-west-2%25253A123456789012%25253Acluster-snapshot%25253Aaurora-cluster1-snapshot-20161115
+         %2526SignatureMethod%253DHmacSHA256
+         %2526SignatureVersion%253D4
+         %2526Version%253D2014-10-31
+         %2526X-Amz-Algorithm%253DAWS4-HMAC-SHA256
+         %2526X-Amz-Credential%253DAKIADQKE4SARGYLE%252F20161117%252Fus-west-2%252Frds%252Faws4_request
+         %2526X-Amz-Date%253D20161117T215409Z
+         %2526X-Amz-Expires%253D3600
+         %2526X-Amz-SignedHeaders%253Dcontent-type%253Bhost%253Buser-agent%253Bx-amz-content-sha256%253Bx-amz-date
+         %2526X-Amz-Signature%253D255a0f17b4e717d3b67fad163c3ec26573b882c03a65523522cf890a67fca613
+    &SignatureMethod=HmacSHA256
+    &SignatureVersion=4
+    &SourceDBClusterSnapshotIdentifier=arn%3Aaws%3Ards%3Aus-west-2%3A123456789012%3Acluster-snapshot%3Aaurora-cluster1-snapshot-20161115
+    &TargetDBClusterSnapshotIdentifier=myclustersnapshotcopy
+    &Version=2014-10-31
+    &X-Amz-Algorithm=AWS4-HMAC-SHA256
+    &X-Amz-Credential=AKIADQKE4SARGYLE/20161117/us-east-1/rds/aws4_request
+    &X-Amz-Date=20161117T221704Z
+    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
+    &X-Amz-Signature=da4f2da66739d2e722c85fcfd225dc27bba7e2b8dbea8d8612434378e52adccf
 ```
 
 ### Copying a DB Cluster Snapshot Across Accounts<a name="USER_CopyDBClusterSnapshot.CrossAccount"></a>
@@ -300,19 +303,19 @@ Use the following procedure to copy an unencrypted DB cluster snapshot to anothe
    Running the following example using the account `123451234512` copies the DB cluster snapshot `aurora-cluster1-snapshot-20130805` from account `987654321` and creates a DB cluster snapshot named `dbclustersnapshot1`\.
 
    ```
-    1. https://rds.us-west-2.amazonaws.com/
-    2.    ?Action=CopyDBClusterSnapshot
-    3.    &CopyTags=true
-    4.    &SignatureMethod=HmacSHA256
-    5.    &SignatureVersion=4
-    6.    &SourceDBClusterSnapshotIdentifier=arn:aws:rds:us-west-2:987654321:cluster-snapshot:aurora-cluster1-snapshot-20130805
-    7.    &TargetDBClusterSnapshotIdentifier=dbclustersnapshot1
-    8.    &Version=2013-09-09
-    9.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-   10.    &X-Amz-Credential=AKIADQKE4SARGYLE/20150922/us-west-2/rds/aws4_request
-   11.    &X-Amz-Date=20140429T175351Z
-   12.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-   13.    &X-Amz-Signature=9164337efa99caf850e874a1cb7ef62f3cea29d0b448b9e0e7c53b288ddffed2
+   https://rds.us-west-2.amazonaws.com/
+      ?Action=CopyDBClusterSnapshot
+      &CopyTags=true
+      &SignatureMethod=HmacSHA256
+      &SignatureVersion=4
+      &SourceDBClusterSnapshotIdentifier=arn:aws:rds:us-west-2:987654321:cluster-snapshot:aurora-cluster1-snapshot-20130805
+      &TargetDBClusterSnapshotIdentifier=dbclustersnapshot1
+      &Version=2013-09-09
+      &X-Amz-Algorithm=AWS4-HMAC-SHA256
+      &X-Amz-Credential=AKIADQKE4SARGYLE/20150922/us-west-2/rds/aws4_request
+      &X-Amz-Date=20140429T175351Z
+      &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
+      &X-Amz-Signature=9164337efa99caf850e874a1cb7ef62f3cea29d0b448b9e0e7c53b288ddffed2
    ```
 
 #### Copying an Encrypted DB Cluster Snapshot to Another Account<a name="USER_CopyDBClusterSnapshot.Encrypted.CrossAccount"></a>
@@ -348,17 +351,17 @@ Use the following procedure to copy an encrypted DB cluster snapshot to another 
    Running the following example using the account `123451234512` copies the DB cluster snapshot `aurora-cluster1-snapshot-20130805` from account `987654321` and creates a DB cluster snapshot named `dbclustersnapshot1`\.
 
    ```
-    1. https://rds.us-west-2.amazonaws.com/
-    2.    ?Action=CopyDBClusterSnapshot
-    3.    &CopyTags=true
-    4.    &SignatureMethod=HmacSHA256
-    5.    &SignatureVersion=4
-    6.    &SourceDBClusterSnapshotIdentifier=arn:aws:rds:us-west-2:987654321:cluster-snapshot:aurora-cluster1-snapshot-20130805
-    7.    &TargetDBClusterSnapshotIdentifier=dbclustersnapshot1
-    8.    &Version=2013-09-09
-    9.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-   10.    &X-Amz-Credential=AKIADQKE4SARGYLE/20150922/us-west-2/rds/aws4_request
-   11.    &X-Amz-Date=20140429T175351Z
-   12.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-   13.    &X-Amz-Signature=9164337efa99caf850e874a1cb7ef62f3cea29d0b448b9e0e7c53b288ddffed2
+   https://rds.us-west-2.amazonaws.com/
+      ?Action=CopyDBClusterSnapshot
+      &CopyTags=true
+      &SignatureMethod=HmacSHA256
+      &SignatureVersion=4
+      &SourceDBClusterSnapshotIdentifier=arn:aws:rds:us-west-2:987654321:cluster-snapshot:aurora-cluster1-snapshot-20130805
+      &TargetDBClusterSnapshotIdentifier=dbclustersnapshot1
+      &Version=2013-09-09
+      &X-Amz-Algorithm=AWS4-HMAC-SHA256
+      &X-Amz-Credential=AKIADQKE4SARGYLE/20150922/us-west-2/rds/aws4_request
+      &X-Amz-Date=20140429T175351Z
+      &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
+      &X-Amz-Signature=9164337efa99caf850e874a1cb7ef62f3cea29d0b448b9e0e7c53b288ddffed2
    ```
