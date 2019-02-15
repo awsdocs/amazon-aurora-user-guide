@@ -4,7 +4,7 @@ With query plan management for Amazon Aurora with PostgreSQL compatibility, you 
 + Preventing plan regressions when the database system changes
 + Controlling when the query optimizer can use new plans
 
-The quality and consistency of query optimization have a major impact on the performance and stability of any relational database management system \(RDBMS\)\. Query optimizers create a query execution plan for a SQL statement at a specific point in time\. As conditions change, the optimizer might pick a different plan that makes performance worse\. For example, changes in statistics, constraints, environment settings, query parameter bindings, and software upgrades can all cause the query optimizer to choose a different plan and lead to performance regression\. Regression is a major concern for high\-performance applications\.
+The quality and consistency of query optimization have a major impact on the performance and stability of any relational database management system \(RDBMS\)\. Query optimizers create a query execution plan for a SQL statement at a specific point in time\. As conditions change, the optimizer might pick a different plan that makes performance worse\. A number of changes can all cause the query optimizer to choose a different plan and lead to performance regression\. These changes include changes in statistics, constraints, environment settings, query parameter bindings, and software upgrades\. Regression is a major concern for high\-performance applications\.
 
 With query plan management, you can control execution plans for a set of statements that you want to manage\. You can do the following:
 + Improve plan stability by forcing the optimizer to choose from a small number of known, good plans\.
@@ -15,6 +15,7 @@ With query plan management, you can control execution plans for a set of stateme
 
 **Topics**
 + [Enabling Query Plan Management for Aurora PostgreSQL](#AuroraPostgreSQL.Optimize.Enable)
++ [Upgrading Query Plan Management](#AuroraPostgreSQL.Optimize.Upgrade)
 + [Basics of Query Plan Management](#AuroraPostgreSQL.Optimize.Start)
 + [Best Practices for Query Plan Management](AuroraPostgreSQL.Optimize.BestPractice.md)
 + [Examining Plans in the apg\_plan\_mgmt\.dba\_plans view](AuroraPostgreSQL.Optimize.ViewPlans.md)
@@ -26,9 +27,9 @@ With query plan management, you can control execution plans for a set of stateme
 
 ## Enabling Query Plan Management for Aurora PostgreSQL<a name="AuroraPostgreSQL.Optimize.Enable"></a>
 
-**To enable query plan management**
+Query plan management is available with Amazon Aurora PostgreSQL version 2\.1\.0 and greater\.
 
-Query plan management is availble with Amazon Aurora PostgreSQL version 2\.1\.0 and above\.
+**To enable query plan management**
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -53,6 +54,18 @@ Query plan management is availble with Amazon Aurora PostgreSQL version 2\.1\.0 
 **Note**  
 To create the `apg_plan_mgmt` extension, you need the `rds_superuser` role\. When you create the `apg_plan_mgmt` extension, the `apg_plan_mgmt` role is created\. Users must be granted the `apg_plan_mgmt` role to administer the `apg_plan_mgmt` extension\. 
 
+## Upgrading Query Plan Management<a name="AuroraPostgreSQL.Optimize.Upgrade"></a>
+
+If you installed query plan management version 1\.0, we strongly recommend that you upgrade to version 1\.0\.1\. 
+
+To upgrade, run the following commands at the cluster or DB instance level\.
+
+```
+ALTER EXTENSION apg_plan_mgmt UPDATE TO '1.0.1';
+SELECT apg_plan_mgmt.validate_plans('update_plan_hash');
+SELECT apg_plan_mgmt.reload();
+```
+
 ## Basics of Query Plan Management<a name="AuroraPostgreSQL.Optimize.Start"></a>
 
 You can manage any SELECT, INSERT, UPDATE, or DELETE statement with query plan management, regardless of how complex the statement is\. Prepared, dynamic, embedded, and immediate\-mode SQL statements are all supported\. All PostgreSQL language features can be used, including partitioned tables, inheritance, row\-level security, and recursive common table expressions \(CTEs\)\.
@@ -63,7 +76,7 @@ Currently, you can't capture plans for statements inside a PL/pgSQL function\.
 **Topics**
 + [Performing a Manual Plan Capture](#AuroraPostgreSQL.Optimize.Start.Capture)
 + [Viewing Captured Plans](#AuroraPostgreSQL.Optimize.Start.View)
-+ [About Managed Statements and the SQL Hash](#AuroraPostgreSQL.Optimize.Start.ManagedStatements)
++ [Working with Managed Statements and the SQL Hash](#AuroraPostgreSQL.Optimize.Start.ManagedStatements)
 + [Working with Automatic Plan Capture](#AuroraPostgreSQL.Optimize.Start.AutomaticCapture)
 + [Validating Plans](#AuroraPostgreSQL.Optimize.Start.Validate)
 + [Approving New Plans That Improve Performance](#AuroraPostgreSQL.Optimize.Start.Verify)
@@ -81,11 +94,11 @@ SET apg_plan_mgmt.capture_plan_baselines = off;    -- turn off capture
 SET apg_plan_mgmt.use_plan_baselines =     true;   -- turn on plan usage
 ```
 
-You can either execute SELECT, INSERT, UPDATE, or DELETE statements, or you can include the EXPLAIN statement as shown above\. Use EXPLAIN to capture a plan without the overhead or potential side\-efects of executing the statement\. For more about manual capture, see [Manually Capturing Plans for Specific SQL Statements](AuroraPostgreSQL.Optimize.CapturePlans.md#AuroraPostgreSQL.Optimize.CapturePlans.Manual)\. 
+You can either execute SELECT, INSERT, UPDATE, or DELETE statements, or you can include the EXPLAIN statement as shown above\. Use EXPLAIN to capture a plan without the overhead or potential side\-effects of executing the statement\. For more about manual capture, see [Manually Capturing Plans for Specific SQL Statements](AuroraPostgreSQL.Optimize.CapturePlans.md#AuroraPostgreSQL.Optimize.CapturePlans.Manual)\. 
 
 ### Viewing Captured Plans<a name="AuroraPostgreSQL.Optimize.Start.View"></a>
 
-When EXPLAIN SELECT runs in the previous example, the optimizer saves the plan by inserting a row into the `apg_plan_mgmt.dba_plans` view and commiting it in an autonomous transaction\. You can see the contents of the `apg_plan_mgmt.dba_plans` view if you've been granted the `apg_plan_mgmt` role\. The following query displays some important columns of the `dba_plans` view\. 
+When EXPLAIN SELECT runs in the previous example, the optimizer saves the plan\. To do so, it inserts a row into the `apg_plan_mgmt.dba_plans` view and commits the plan in an autonomous transaction\. You can see the contents of the `apg_plan_mgmt.dba_plans` view if you've been granted the `apg_plan_mgmt` role\. The following query displays some important columns of the `dba_plans` view\. 
 
 ```
 SELECT sql_hash, plan_hash, status, enabled, plan_outline, sql_text::varchar(40)
@@ -98,15 +111,15 @@ Each row displayed represents a managed plan\. The preceding example displays th
 + `plan_hash` – The ID of the managed plan\.
 + `status` – The status of the plan\. The optimizer can run an approved plan\.
 + `enabled` – A value that indicates whether the plan is enabled for use or disabled and not for use\.
-+ `plan_outline` \- Details of the managed plan\.
++ `plan_outline` – Details of the managed plan\.
 
 For more about the `apg_plan_mgmt.dba_plans` view, see [Examining Plans in the apg\_plan\_mgmt\.dba\_plans view](AuroraPostgreSQL.Optimize.ViewPlans.md)\. 
 
-### About Managed Statements and the SQL Hash<a name="AuroraPostgreSQL.Optimize.Start.ManagedStatements"></a>
+### Working with Managed Statements and the SQL Hash<a name="AuroraPostgreSQL.Optimize.Start.ManagedStatements"></a>
 
-A *managed statement* is a SQL statement captured by the optimizer under query plan management\. You specify which SQL statements to capture as managed statements using either manual or automatic capture\. 
-+ For *manual* capture, you provide the specific statements to the optimizer as shown in the previous example\.
-+ For *automatic* capture, the optimizer captures plans for statements that run multiple times\. Automatic capture is shown in a later example\.
+A *managed statement* is a SQL statement captured by the optimizer under query plan management\. You specify which SQL statements to capture as managed statements using either manual or automatic capture: 
++ For manual capture, you provide the specific statements to the optimizer as shown in the previous example\.
++ For automatic capture, the optimizer captures plans for statements that run multiple times\. Automatic capture is shown in a later example\.
 
 In the `apg_plan_mgmt.dba_plans` view, you can identify a managed statement with a SQL hash value\. The SQL hash is calculated on a normalized representation of the SQL statement that removes some differences such as the literal values\. Using normalization means that when multiple SQL statements differ only in their literal or parameter values, they are represented by the same SQL hash in the `apg_plan_mgmt.dba_plans` view\. Therefore, there can be multiple plans for the same SQL hash where each plan is optimal under different conditions\. 
 
@@ -143,7 +156,7 @@ As your application continues to run, the optimizer might find additional plans 
 
 The set of all captured plans for a managed statement is known as the *plan history*\. Later, you can decide if the `unapproved` plans perform well and change them to `approved`, `rejected`, or `preferred` by using the `apg_plan_mgmt.evolve_plan_baselines` function or the `apg_plan_mgmt.set_plan_status` function\.
 
-If you want to turn off automatic plan capture, set `apg_plan_mgmt.capture_plan_baselines` to `off` in the parameter group for the DB instance and restart the database for the setting to take affect\.
+To turn off automatic plan capture, set `apg_plan_mgmt.capture_plan_baselines` to `off` in the parameter group for the DB instance\. Then restart the database for the setting to take effect\.
 
 For more about plan capture, see [Capturing Execution Plans](AuroraPostgreSQL.Optimize.CapturePlans.md)\. 
 
@@ -161,7 +174,7 @@ For more information, see [Validating Plans](AuroraPostgreSQL.Optimize.Maintenan
 
 While using your managed plans, you can verify whether newer, lower\-cost plans discovered by the optimizer are faster than the minimum\-cost plan already in the plan baseline\. To do the performance comparison and optionally approve the faster plans, call the `apg_plan_mgmt.evolve_plan_baselines` function\. 
 
-The following example automatically approves any unapproved plan that is enabled and faster by at least 10 percent than the minimum cost plan in the set of approved plans of the baseline\.
+The following example automatically approves any unapproved plan that is enabled and faster by at least 10 percent than the minimum\-cost plan in the plan baseline\.
 
 ```
 SELECT apg_plan_mgmt.evolve_plan_baselines(

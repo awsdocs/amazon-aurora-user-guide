@@ -7,11 +7,11 @@ To delete backups managed by AWS Backup, use the AWS Backup console\. For inform
 
 ## Deleting a DB Cluster Snapshot<a name="USER_DeleteDBClusterSnapshot"></a>
 
-You can delete a DB cluster snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
+You can delete a DB cluster snapshot using the console, the AWS CLI, or the RDS API\.
 
-To delete a shared or public snapshot, you must use the log into the AWS account that owns the snapshot\.
+To delete a shared or public snapshot, you must sign in to the AWS account that owns the snapshot\.
 
-### AWS Management Console<a name="USER_DeleteSnapshot.CON"></a>
+### Console<a name="USER_DeleteSnapshot.CON"></a>
 
 **To delete a DB cluster snapshot**
 
@@ -19,13 +19,13 @@ To delete a shared or public snapshot, you must use the log into the AWS account
 
 1. In the navigation pane, choose **Snapshots**\.
 
-1. Select the DB cluster snapshot that you want to delete\.
+1. Choose the DB cluster snapshot that you want to delete\.
 
-1. Choose **Actions**, and then choose **Delete Snapshot**\. 
+1. For **Actions**, choose **Delete Snapshot**\. 
 
 1. Choose **Delete** on the confirmation page\. 
 
-### CLI<a name="USER_DeleteSnapshot.CLI"></a>
+### AWS CLI<a name="USER_DeleteSnapshot.CLI"></a>
 
 You can delete a DB cluster snapshot by using the AWS CLI command [delete\-db\-cluster\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-cluster-snapshot.html)\. 
 
@@ -47,9 +47,9 @@ For Windows:
 2.     --db-cluster-snapshot-identifier mydbclustersnapshot
 ```
 
-### API<a name="USER_DeleteSnapshot.API"></a>
+### RDS API<a name="USER_DeleteSnapshot.API"></a>
 
-You can delete a DB cluster snapshot by using the Amazon RDS API action [DeleteDBClusterSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBClusterSnapshot.html)\. 
+You can delete a DB cluster snapshot by using the Amazon RDS API operation [DeleteDBClusterSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBClusterSnapshot.html)\. 
 
 The following parameters are used to delete a DB cluster snapshot\. 
 + `DBClusterSnapshotIdentifier` – The identifier for the DB cluster snapshot\. 

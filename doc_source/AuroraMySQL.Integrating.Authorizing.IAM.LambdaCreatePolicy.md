@@ -30,7 +30,7 @@ You can use the following steps to create an IAM policy that provides the minimu
 
 1. On the **Visual editor** tab, choose **Choose a service**, and then choose **Lambda**\.
 
-1. Choose **Expand all** under **Actions** and then choose the AWS Lambda permissions needed for the IAM policy\.
+1. For **Actions**, choose **Expand all**, and then choose the AWS Lambda permissions needed for the IAM policy\.
 
    Ensure that `InvokeFunction` is selected\. It is the minimum required permission to enable Amazon Aurora to invoke an AWS Lambda function\.
 

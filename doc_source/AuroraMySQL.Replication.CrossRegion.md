@@ -52,9 +52,9 @@ Use the following procedures to create a cross\-region Read Replica from an Auro
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Select the check box for the DB instance that you want to create a cross\-region Read Replica for\. Choose **Instance actions**, and then choose **Create cross region read replica**\.
+1. Choose the check box for the DB instance that you want to create a cross\-region Read Replica for\. For **Actions**, choose **Create cross region read replica**\.
 
-1. On the **Create cross region read replica** page, select the option settings for your cross\-region Read Replica DB cluster, as described in the following table\.    
+1. On the **Create cross region read replica** page, choose the option settings for your cross\-region Read Replica DB cluster, as described in the following table\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.CrossRegion.html)
 
 1. Choose **Create** to create your cross\-region Read Replica for Aurora\.
@@ -294,7 +294,7 @@ The promotion process takes a few minutes to complete\. When you promote a Read 
 
    The Read Replicas appear as Aurora MySQL DB instances\.
 
-1. Choose **Instance actions**, and then choose **Promote read replica**\. 
+1. For **Actions**, choose **Promote read replica**\. 
 
 1. On the acknowledgment page, choose **Promote Read Replica**\. 
 

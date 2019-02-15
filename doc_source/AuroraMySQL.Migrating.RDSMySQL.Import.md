@@ -144,7 +144,7 @@ You can also choose for your new Aurora MySQL DB cluster to be encrypted at rest
 
    1. In the navigation pane, choose **Instances**, and then select the MySQL DB instance\.
 
-   1. Choose **Instance Actions**, and then choose **Migrate latest snapshot**\.
+   1. For **Actions**, choose **Migrate latest snapshot**\.
 
    To start the migration from the snapshot:
 

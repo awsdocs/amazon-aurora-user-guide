@@ -65,14 +65,14 @@ The number of plans that were not faster than the best approved plan\.
 | --- | --- | 
 | sql\_hash | The sql\_hash ID of the plan's managed SQL statement\. | 
 | plan\_hash | The managed plan's plan\_hash ID\. Use NULL to mean all plans that have the same sql\_hash ID value\. | 
-| min\_speedup\_factor |  The *minimum speedup factor* is the number of times faster a plan must be than the best of the already approved plans to approve it, or the number of times slower it must be to reject or disable it\. This is a positive float value\.  | 
+| min\_speedup\_factor |  The *minimum speedup factor* can be the number of times faster that a plan must be than the best of the already approved plans to approve it\. Alternatively, this factor can be the number of times slower that a plan must be to reject or disable it\. This is a positive float value\.  | 
 | action |  The action the function is to perform\. Valid values include the following\. Case does not matter\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.Functions.html)  | 
 
 **Usage Notes**
 
 Set specified plans to approved, rejected, or disabled based on whether the planning plus execution time is faster than the best approved plan by a factor that you can set\. The action parameter might be set to `'approve'` or `'reject'` to automatically approve or reject a plan that meets the performance criteria\. Alternatively, it might be set to '' \(empty string\) to do the performance experiment and produce a report, but take no action\.
 
-To avoid pointlessly rerunning of the `apg_plan_mgmt.evolve_plan_baselines` function for a plan on which it was recently run, you can restrict the plans to be just the recently created unapproved plans\. Alternatively, you can avoid running the `apg_plan_mgmt.evolve_plan_baselines` function on any approved plan that has a recent `last_verified` timestamp\.
+You can avoid pointlessly rerunning of the `apg_plan_mgmt.evolve_plan_baselines` function for a plan on which it was recently run\. To do so, restrict the plans to just the recently created unapproved plans\. Alternatively, you can avoid running the `apg_plan_mgmt.evolve_plan_baselines` function on any approved plan that has a recent `last_verified` timestamp\.
 
 Conduct a performance experiment to compare the planning plus execution time of each plan relative to the other plans in the baseline\. In some cases, there is only one plan for a statement and the plan is approved\. In such a case, compare the planning plus execution time of the plan to the planning plus execution time of using no plan\.
 

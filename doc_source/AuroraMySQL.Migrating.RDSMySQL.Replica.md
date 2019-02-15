@@ -240,7 +240,7 @@ After you promote, confirm that the promotion has completed by choosing **Instan
 
 1. In the navigation pane, choose **Instances**\. 
 
-1. Choose the DB instance for the Aurora Read Replica and choose **Promote read replica** from **Instance actions**\. 
+1. Choose the DB instance for the Aurora Read Replica and choose **Promote read replica** for **Actions**\. 
 
 1. Choose **Promote Read Replica**\.
 

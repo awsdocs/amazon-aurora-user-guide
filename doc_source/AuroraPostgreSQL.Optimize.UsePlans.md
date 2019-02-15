@@ -6,7 +6,7 @@ To get the optimizer to use captured plans for your managed statements, set the 
 SET apg_plan_mgmt.use_plan_baselines = true;
 ```
 
-While the application runs, this setting causes the optimizer to use the minimum\-cost, preferred or approved plan that is valid and enabled, for each managed statement\. 
+While the application runs, this setting causes the optimizer to use the minimum\-cost, preferred, or approved plan that is valid and enabled, for each managed statement\. 
 
 ## How the Optimizer Chooses Which Plan to Run<a name="AuroraPostgreSQL.Optimize.UsePlans.ChoosePlans"></a>
 
@@ -34,10 +34,10 @@ The flow is as follows:
 
 1. The optimizer runs the generated plan if `apg_plan_mgmt.use_plan_baselines` is `false`\.
 
-1. If the optimizer's plan is not in the `apg_plan_mgmt.dba_plans` view , the optimizer captures the plan as a new `unapproved` plan\.
+1. If the optimizer's plan isn't in the `apg_plan_mgmt.dba_plans` view, the optimizer captures the plan as a new `unapproved` plan\.
 
 1. The optimizer runs the generated plan if the following are both true:
-   + The optimizer's plan is not a `rejected` or `disabled` plan\.
+   + The optimizer's plan isn't a `rejected` or `disabled` plan\.
    + The plan's total cost is less than the unapproved execution plan threshold\.
 
    The optimizer doesn't run disabled plans or any plans that have the rejected status\. In most cases, the optimizer doesn't execute unapproved plans\. However, the optimizer runs an unapproved plan if you set a value for the parameter `apg_plan_mgmt.unapproved_plan_execution_threshold` and the plan's total cost is less than the threshold\. For more information, see the [apg\_plan\_mgmt\.unapproved\_plan\_execution\_threshold](AuroraPostgreSQL.Optimize.Parameters.md#AuroraPostgreSQL.Optimize.Parameters.unapproved_plan_execution_threshold) parameter\. 
@@ -66,6 +66,6 @@ Index Cond: ((id >= 1) AND (id <= 10000))
  SQL Hash: 1984047223, Plan Hash: 512153379
 ```
 
-The optimizer indicates which plan it will run, but notice in this example that it found a lower\-cost plan\. In this case, you capture this new minimum cost plan by turning on automatic plan capture as described in [Automatically Capturing Plans](AuroraPostgreSQL.Optimize.CapturePlans.md#AuroraPostgreSQL.Optimize.CapturePlans.Automatic)\. 
+The optimizer indicates which plan it will run, but notice that in this example that it found a lower\-cost plan\. In this case, you capture this new minimum cost plan by turning on automatic plan capture as described in [Automatically Capturing Plans](AuroraPostgreSQL.Optimize.CapturePlans.md#AuroraPostgreSQL.Optimize.CapturePlans.Automatic)\. 
 
 The optimizer captures new plans as unapproved\. Use the `apg_plan_mgmt.evolve_plan_baselines` function to compare plans and change them to approved, rejected, or disabled\. For more information, see [Evaluating Plan Performance](AuroraPostgreSQL.Optimize.Maintenance.md#AuroraPostgreSQL.Optimize.Maintenance.EvaluatingPerformance)\. 

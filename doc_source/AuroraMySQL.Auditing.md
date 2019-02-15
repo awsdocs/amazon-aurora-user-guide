@@ -17,11 +17,11 @@ Configure Advanced Auditing by setting these parameters in the parameter group u
 
 Modifying these parameters doesn't require a DB cluster restart\.
 
-### `server_audit_logging`<a name="AuroraMySQL.Auditing.Enable.server_audit_logging"></a>
+### server\_audit\_logging<a name="AuroraMySQL.Auditing.Enable.server_audit_logging"></a>
 
 Enables or disables Advanced Auditing\. This parameter defaults to OFF; set it to ON to enable Advanced Auditing\.  
 
-### `server_audit_events`<a name="AuroraMySQL.Auditing.Enable.server_audit_events"></a>
+### server\_audit\_events<a name="AuroraMySQL.Auditing.Enable.server_audit_events"></a>
 
 Contains the comma\-delimited list of events to log\. Events must be specified in all caps, and there should be no white space between the list elements, for example: `CONNECT,QUERY_DDL`\. This parameter defaults to an empty string\.
 
@@ -33,13 +33,13 @@ You can log any combination of the following events:
 + QUERY\_DML – Similar to the QUERY event, but returns only data manipulation language \(DML\) queries \(INSERT, UPDATE, and so on\)\.
 + TABLE – Logs the tables that were affected by query execution\.
 
-### `server_audit_excl_users`<a name="AuroraMySQL.Auditing.Enable.server_audit_excl_users"></a>
+### server\_audit\_excl\_users<a name="AuroraMySQL.Auditing.Enable.server_audit_excl_users"></a>
 
 Contains the comma\-delimited list of user names for users whose activity isn't logged\. There should be no white space between the list elements, for example: `rdsadmin,user_1,user_2`\. This parameter defaults to an empty string\. Specified user names must match corresponding values in the `User` column of the `mysql.user` table\. For more information about user names, see [the MySQL documentation](https://dev.mysql.com/doc/refman/5.6/en/user-names.html)\.
 
 Connect and disconnect events aren't affected by this variable; they are always logged if specified\. A user is logged if that user is also specified in the `server_audit_incl_users` parameter, because that setting has higher priority than `server_audit_excl_users`\.
 
-### `server_audit_incl_users`<a name="AuroraMySQL.Auditing.Enable.server_audit_incl_users"></a>
+### server\_audit\_incl\_users<a name="AuroraMySQL.Auditing.Enable.server_audit_incl_users"></a>
 
 Contains the comma\-delimited list of user names for users whose activity is logged\. There should be no white space between the list elements, for example: `user_3,user_4`\. This parameter defaults to an empty string\. Specified user names must match corresponding values in the `User` column of the `mysql.user` table\. For more information about user names, see [the MySQL documentation](https://dev.mysql.com/doc/refman/5.6/en/user-names.html)\.
 
@@ -47,11 +47,11 @@ Connect and disconnect events aren't affected by this variable; they are always 
 
 ## Viewing Audit Logs<a name="AuroraMySQL.Auditing.View"></a>
 
-You can view and download the audit logs by using the AWS console\. On the **Instances** page, click the DB instance to show its details, then scroll to the **Logs** section\.
+ You can view and download the audit logs by using the console\. On the **Databases** page, choose the DB instance to show its details, then scroll to the **Logs** section\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-log.png)
 
-To download a log file, select that file in the **Logs** section and then choose **Download**\.
+To download a log file, choose that file in the **Logs** section and then choose **Download**\.
 
 You can also get a list of the log files by using the [describe\-db\-log\-files](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-log-files.html) AWS CLI command\. You can download the contents of a log file by using the [download\-db\-log\-file\-portion](https://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html) AWS CLI command\. For more information, see [Viewing and Listing Database Log Files](USER_LogAccess.md#USER_LogAccess.Procedural.Viewing) and [Downloading a Database Log File](USER_LogAccess.md#USER_LogAccess.Procedural.Downloading)\.
 

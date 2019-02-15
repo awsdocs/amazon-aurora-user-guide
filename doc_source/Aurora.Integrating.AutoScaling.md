@@ -7,12 +7,24 @@ You define and apply a scaling policy to an Aurora DB cluster\. The scaling poli
 You can use the AWS Management Console to apply a scaling policy based on a predefined metric\. Alternatively, you can use either the AWS CLI or Aurora Auto Scaling API to apply a scaling policy based on a predefined or custom metric\.
 
 **Topics**
-+ [Aurora Auto Scaling Policies](#Aurora.Integrating.AutoScaling.Concepts)
 + [Before You Begin](#Aurora.Integrating.AutoScaling.BYB)
++ [Aurora Auto Scaling Policies](#Aurora.Integrating.AutoScaling.Concepts)
 + [Adding a Scaling Policy](#Aurora.Integrating.AutoScaling.Add)
 + [Editing a Scaling Policy](#Aurora.Integrating.AutoScaling.Edit)
 + [Deleting a Scaling Policy](#Aurora.Integrating.AutoScaling.Delete)
 + [Related Topics](#Aurora.Integrating.AutoScaling.RelatedItems)
+
+## Before You Begin<a name="Aurora.Integrating.AutoScaling.BYB"></a>
+
+Before you can use Aurora Auto Scaling with an Aurora DB cluster, you must first create an Aurora DB cluster with a primary instance and at least one Aurora Replica\. Although Aurora Auto Scaling manages Aurora Replicas, the Aurora DB cluster must start with at least one Aurora Replica\. For more information about creating an Aurora DB cluster, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
+
+Aurora Auto Scaling only scales a DB cluster if all Aurora Replicas in a DB cluster are in the available state\. If any of the Aurora Replicas are in a state other than available, Aurora Auto Scaling waits until the whole DB cluster becomes available for scaling\. 
+
+When Aurora Auto Scaling adds a new Aurora Replica, the new Aurora Replica is the same DB instance class as the one used by the primary instance\. For more information about DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\. Also, the promotion tier for new Aurora Replicas is set to the last priority, which is 15 by default\. This means that during a failover, a replica with a better priority, such as one created manually, would be promoted first\. For more information, see [Fault Tolerance for an Aurora DB Cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\.
+
+Aurora Auto Scaling only removes Aurora Replicas that it created\.
+
+To benefit from Aurora Auto Scaling, your applications must support connections to new Aurora Replicas\. To do so, we recommend using the Aurora reader endpoint\. For Aurora MySQL you can use a driver such as the MariaDB Connector/J utility\. For more information, see [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\.
 
 ## Aurora Auto Scaling Policies<a name="Aurora.Integrating.AutoScaling.Concepts"></a>
 
@@ -31,8 +43,6 @@ Aurora Auto Scaling uses the `AWSServiceRoleForApplicationAutoScaling_RDSCluster
 In this type of policy, a predefined or custom metric and a target value for the metric is specified in a target\-tracking scaling policy configuration\. Aurora Auto Scaling creates and manages CloudWatch alarms that trigger the scaling policy and calculates the scaling adjustment based on the metric and target value\. The scaling policy adds or removes Aurora Replicas as required to keep the metric at, or close to, the specified target value\. In addition to keeping the metric close to the target value, a target\-tracking scaling policy also adjusts to fluctuations in the metric due to a changing workload\. Such a policy also minimizes rapid fluctuations in the number of available Aurora Replicas for your DB cluster\.
 
 For example, take a scaling policy that uses the predefined average CPU utilization metric\. Such a policy can keep CPU utilization at, or close to, a specified percentage of utilization, such as 40 percent\.
-
-Aurora Auto Scaling only scales a DB cluster if all Aurora Replicas in a DB cluster are in the available state\. If any of the Aurora Replicas are in a state other than available, Aurora Auto Scaling waits until the whole DB cluster becomes available for scaling\. Also, Aurora Auto Scaling only removes Aurora Replicas that it created\.
 
 **Note**  
  For each Aurora DB cluster, you can create only one Auto Scaling policy for each target metric\. 
@@ -63,14 +73,6 @@ You can enable or disable scale\-in activities for a policy\. Enabling scale\-in
 **Note**  
 Scale\-out activities are always enabled so that the scaling policy can create Aurora Replicas as needed\.
 
-## Before You Begin<a name="Aurora.Integrating.AutoScaling.BYB"></a>
-
-Before you can use Aurora Auto Scaling with an Aurora DB cluster, you must first create an Aurora DB cluster with a primary instance and at least one Aurora Replica\. Although Aurora Auto Scaling manages Aurora Replicas, the Aurora DB cluster must start with at least one Aurora Replica\. For more information about creating an Aurora DB cluster, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
-
-When Aurora Auto Scaling adds a new Aurora Replica, the new Aurora Replica is the same DB instance class as the one used by the primary instance\. For more information about DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
-
-To benefit from Aurora Auto Scaling, your applications must support connections to new Aurora Replicas\. To do so, we recommend using the Aurora reader endpoint\. For Aurora MySQL you can use a driver such as the MariaDB Connector/J utility\. For more information, see [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\.
-
 ## Adding a Scaling Policy<a name="Aurora.Integrating.AutoScaling.Add"></a>
 
 You can add a scaling policy using the AWS Management Console, the AWS CLI, or the Application Auto Scaling API\.
@@ -91,11 +93,11 @@ You can add a scaling policy to an Aurora DB cluster by using the AWS Management
 
 1. Choose the Aurora DB cluster that you want to add a policy for\.
 
-1. Choose **Cluster actions**, and then choose **Add Auto Scaling policy**\.
+1. For **Actions**, choose **Add Auto Scaling policy**\.
 
    The **Add Auto Scaling policy** dialog box appears\.
 
-1. Type the policy name in the **Policy Name** box\.
+1. For **Policy Name**, type the policy name\.
 
 1. For the target metric, choose one of the following:
    + **Average CPU utilization of Aurora Replicas** to create a policy based on the average CPU utilization\.

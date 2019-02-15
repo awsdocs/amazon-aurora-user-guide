@@ -41,7 +41,7 @@ You can create an Aurora Read Replica for a PostgreSQL DB instance by using the 
 
 1. In the navigation pane, choose **Instances**\. 
 
-1. Choose the PostgreSQL DB instance that you want to use as the source for your Aurora Read Replica and choose **Create Aurora Read Replica** from **Instance Actions**\.   
+1. Choose the PostgreSQL DB instance that you want to use as the source for your Aurora Read Replica, and choose **Create Aurora Read Replica** for **Actions**\.  
 ![\[Create Aurora Read Replica\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Aurorapgres-migrate.png)
 
 1. Choose the DB cluster specifications you want to use for the Aurora Read Replica, as described in the following table\.     
@@ -205,7 +205,7 @@ After you promote, confirm that the promotion has completed by choosing **Instan
 
 1. In the navigation pane, choose **Instances**\. 
 
-1. Choose the DB instance for the Aurora Read Replica and choose **Promote Read Replica** from **Instance Actions**\. 
+1. Choose the DB instance for the Aurora Read Replica and choose **Promote Read Replica** for **Actions**\. 
 
 1. Choose **Promote Read Replica**\.
 

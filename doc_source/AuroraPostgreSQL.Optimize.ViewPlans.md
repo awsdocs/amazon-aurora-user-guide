@@ -29,7 +29,7 @@ The columns of plan information in the `apg_plan_mgmt.dba_plans` view include th
 
 | dba\_plans Column | Description | 
 | --- | --- | 
-| cardinality\_error |  A measure of the error between the estimated cardinality versus the actual cardinality\. *Cardinality* is the number of table rows that the plan will process\. If the cardinality error is large, then it increases the likelihood that the plan is not optimal\. This column is populated by the [apg\_plan\_mgmt\.evolve\_plan\_baselines](AuroraPostgreSQL.Optimize.Functions.md#AuroraPostgreSQL.Optimize.Functions.evolve_plan_baselines) function\.   | 
+| cardinality\_error |  A measure of the error between the estimated cardinality versus the actual cardinality\. *Cardinality* is the number of table rows that the plan is to process\. If the cardinality error is large, then it increases the likelihood that the plan isn't optimal\. This column is populated by the [apg\_plan\_mgmt\.evolve\_plan\_baselines](AuroraPostgreSQL.Optimize.Functions.md#AuroraPostgreSQL.Optimize.Functions.evolve_plan_baselines) function\.   | 
 | compatibility\_level |  The feature level of the Aurora PostgreSQL optimizer\.  | 
 | created\_by | The authenticated user \(session\_user\) who created the plan\. | 
 | enabled |  An indicator of whether the plan is enabled or disabled\. All plans are enabled by default\. You can disable plans to prevent them from being used by the optimizer\. To modify this value, use the [apg\_plan\_mgmt\.set\_plan\_enabled](AuroraPostgreSQL.Optimize.Functions.md#AuroraPostgreSQL.Optimize.Functions.set_plan_enabled) function\.   | 

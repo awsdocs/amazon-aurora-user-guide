@@ -31,7 +31,7 @@ You can use the following steps to create an IAM policy that provides the minimu
 
 1. On the **Visual editor** tab, choose **Choose a service**, and then choose **KMS**\.
 
-1. In **Actions**, expand **Write**, and then choose **Decrypt**\.
+1. For **Actions**, choose **Write**, and then choose **Decrypt**\.
 
 1. Choose **Resources**, and choose **Add ARN**\.
 

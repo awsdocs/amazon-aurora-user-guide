@@ -23,15 +23,15 @@ You can use the following steps to create an IAM policy that provides the minimu
 
 1. On the **Visual editor** tab, choose **Choose a service**, and then choose **S3**\.
 
-1. Choose **Expand all** under **Actions** and then choose the bucket permissions and object permissions needed for the IAM policy\.
+1. For **Actions**, choose **Expand all**, and then choose the bucket permissions and object permissions needed for the IAM policy\.
 
    Object permissions are permissions for object operations in Amazon S3, and need to be granted for objects in a bucket, not the bucket itself\. For more information about permissions for object operations in Amazon S3, see [Permissions for Object Operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-objects)\.
 
-1. Choose **Resources** and choose **Add ARN** for **bucket**\.
+1. Choose **Resources**, and choose **Add ARN** for **bucket**\.
 
 1. In the **Add ARN\(s\)** dialog box, provide the details about your resource, and choose **Add**\.
 
-   Specify the Amazon S3 bucket to allow access to\. For instance, if you want to allow Aurora to access the Amazon S3 bucket named `example-bucket`, then set the ARN value to `arn:aws:s3:::example-bucket`\.
+   Specify the Amazon S3 bucket to allow access to\. For instance, if you want to allow Aurora to access the Amazon S3 bucket named `example-bucket`, then set the Amazon Resource Name \(ARN\) value to `arn:aws:s3:::example-bucket`\.
 
 1. If the **object** resource is listed, choose **Add ARN** for **object**\.
 
@@ -41,13 +41,13 @@ You can use the following steps to create an IAM policy that provides the minimu
 **Note**  
 You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value in order to allow Aurora to access only specific files or folders in an Amazon S3 bucket\. For more information about how to define an access policy for Amazon S3, see [Managing Access Permissions to Your Amazon S3 Resources](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)\.
 
-1. Optionally, choose **Add additional permissions** to add another Amazon S3 bucket to the policy, and repeat the previous steps for the bucket\.
+1. \(Optional\) Choose **Add additional permissions** to add another Amazon S3 bucket to the policy, and repeat the previous steps for the bucket\.
 **Note**  
 You can repeat this to add corresponding bucket permission statements to your policy for each Amazon S3 bucket that you want Aurora to access\. Optionally, you can also grant access to all buckets and objects in Amazon S3\.
 
 1. Choose **Review policy**\.
 
-1. Set **Name** to a name for your IAM policy, for example `AllowAuroraToExampleBucket`\. You use this name when you create an IAM role to associate with your Aurora DB cluster\. You can also add an optional **Description** value\.
+1. For **Name**, enter a name for your IAM policy, for example `AllowAuroraToExampleBucket`\. You use this name when you create an IAM role to associate with your Aurora DB cluster\. You can also add an optional **Description** value\.
 
 1. Choose **Create policy**\.
 

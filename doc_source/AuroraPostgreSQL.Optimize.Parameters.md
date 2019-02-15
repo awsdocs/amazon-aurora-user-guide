@@ -43,7 +43,7 @@ SET apg_plan_mgmt.capture_plan_baselines = [off | automatic |manual]
 Sets the maximum number of database objects that might use query plan management\. A database object is what gets created with the CREATE DATABASE SQL statement\. 
 
 **Important**  
-You must set `apg_plan_mgmt.max_databases` at the cluster or DB instance level and it requires a DB instance restart for a new value to take effect\.
+Set `apg_plan_mgmt.max_databases` at the cluster or DB instance level\. It requires a DB instance restart for a new value to take effect\.
 
 
 ****  
@@ -57,7 +57,7 @@ You must set `apg_plan_mgmt.max_databases` at the cluster or DB instance level a
 Sets the maximum number of plans that might be captured in the `apg_plan_mgmt.dba_plans` view\. 
 
 **Important**  
-You must set `apg_plan_mgmt.max_plans` at the cluster or DB instance level and it requires a DB instance restart for a new value to take effect\.
+Set `apg_plan_mgmt.max_plans` at the cluster or DB instance level\. It requires a DB instance restart for a new value to take effect\.
 
 
 ****  
@@ -168,8 +168,7 @@ SET apg_hint_plan.unapproved_plan_execution_threshold = integer-value;
 | --- | --- | --- | 
 | Positive integer | 0 | A positive integer value greater or equal to 0\. A value of 0 means no unapproved plans run when use\_plan\_baselines is true\. | 
 
-**Example**  
-With this example, the optimizer will run an unapproved plan if the estimated cost is less than 550, even if `use_plan_baselines` is `true`\.
+With the following example, the optimizer runs an unapproved plan if the estimated cost is less than 550, even if `use_plan_baselines` is `true`\.
 
 ```
 SET apg_plan_mgmt.unapproved_plan_execution_threshold = 550;
@@ -189,11 +188,11 @@ SET apg_hint_plan.use_plan_baselines = [true | false];
 | Value | Description | 
 | --- | --- | 
 | true |  Enforce the use of managed plans\. When a SQL statement runs and it is a managed statement in the `apg_plan_mgmt.dba_plans` view, the optimizer chooses a managed plan in the following order\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.Parameters.html)  | 
-| false | \(Default\) Do not use managed plans\. The optimizer will use its generated minimum\-cost plan\. | 
+| false | \(Default\) Do not use managed plans\. The optimizer uses its generated minimum\-cost plan\. | 
 
 **Usage Notes**
 
-When `use_plan_baselines` is `true`, then the optimizer makes the following execution decisions\.
+When `use_plan_baselines` is `true`, then the optimizer makes the following execution decisions:
 
 1. If the estimated cost of the optimizer's plan is below the `unapproved_plan_execution_threshold`, then execute it, else
 

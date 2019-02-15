@@ -1,18 +1,34 @@
 # Database Engine Versions for Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Updates.20180305"></a>
 
+Following, you can find information about updates to the Aurora with PostgreSQL compatibility database engine\. 
 
-**Aurora with PostgreSQL compatibility**  
+The following table shows the version of PostgreSQL that each Aurora PostgreSQL release is compatible with\.
 
-| Aurora PostgreSQL | Compatible PostgreSQL Release | 
+
+****  
+
+| Aurora with PostgreSQL Compatibility | Compatible PostgreSQL Release | 
 | --- | --- | 
+| [Version 2\.2\.0](#AuroraPostgreSQL.Updates.20180305.22) | [10\.6](https://www.postgresql.org/docs/current/static/release-10-6.html) | 
 | [Version 2\.1](#AuroraPostgreSQL.Updates.20180305.21) | [10\.5](https://www.postgresql.org/docs/current/static/release-10-5.html) | 
 | [Version 2\.0](#AuroraPostgreSQL.Updates.20180305.20) | [10\.4](https://www.postgresql.org/docs/current/static/release-10-4.html) | 
 | [Version 1\.3](#AuroraPostgreSQL.Updates.20180305.13) | [9\.6\.9](https://www.postgresql.org/docs/current/static/release-9-6-9.html) | 
 | [Version 1\.2](#AuroraPostgreSQL.Updates.20180305.12) | [9\.6\.8](https://www.postgresql.org/docs/current/static/release-9-6-8.html) | 
-| [Version 1\.1](#AuroraPostgreSQL.Updates.20180305.11) | [9\.6\.6](https://www.postgresql.org/docs/current/static/release-9-6-6.html) Deprecated | 
-| Version 1\.0 | [9\.6\.3](https://www.postgresql.org/docs/current/static/release-9-6-3.html) Deprecated | 
+| [Version 1\.1](#AuroraPostgreSQL.Updates.20180305.11) | [9\.6\.6](https://www.postgresql.org/docs/current/static/release-9-6-6.html) deprecated | 
+| Version 1\.0 | [9\.6\.3](https://www.postgresql.org/docs/current/static/release-9-6-3.html) deprecated | 
 
 The following updates are available for Aurora PostgreSQL\.
+
+## Version 2\.2\.0<a name="AuroraPostgreSQL.Updates.20180305.22"></a>
+
+You can find the following improvements in this engine update\.
+
+**New features**
++ This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.6\. For more information about the improvements in release 10\.6, see [PostgreSQL Release 10\.6](https://www.postgresql.org/docs/current/static/release-10-6.html)\.
++ Added the restricted password management feature\. Restricted password management enables you to restrict who can manage user passwords and password expiration changes by using the parameter `rds.restrict_password_commands` and the role `rds_password`\. For more information, see [Restricting Password Management](AuroraPostgreSQL.Security.md#RestrictPasswordMgmt)\. 
+
+**Known issues**
++ None\.
 
 ## Version 2\.1<a name="AuroraPostgreSQL.Updates.20180305.21"></a>
 
@@ -20,7 +36,7 @@ You can find the following improvements in this engine update\.
 
 **New features**
 + This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.5\. For more information about the improvements in release 10\.5, see [PostgreSQL Release 10\.5](https://www.postgresql.org/docs/current/static/release-10-5.html)\.
-+ General availability of Aurora Query Plan Management, which enables customers to track and manage any or all query plans used by their applications, to control query optimizer plan selection, and to ensure high and stable application performance\. For more information, see [ Managing Query Execution Plans for Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.html)\. 
++ General availability of Aurora Query Plan Management, which enables customers to track and manage any or all query plans used by their applications, to control query optimizer plan selection, and to ensure high and stable application performance\. For more information, see [Managing Query Execution Plans for Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.html)\. 
 + Updated the `libprotobuf` extension to version 1\.3\.0\. This is used by the PostGIS extension\.
 + Updated the `pg_similarity` extension to version 1\.0\.
 + Updated the `log_fdw` extension to version 1\.1\.
@@ -42,10 +58,10 @@ You can find the following improvements in this engine update\.
   +  `log_replication_commands`
   +  `log_statement_stats`
   + `log_temp_files `
-+ Fixed a bug whereby the SQL command "ALTER FUNCTION \.\.\. OWNER TO \.\.\." may fail with error "improper qualified name \(too many dotted names\)"\.
++ Fixed a bug whereby the SQL command "ALTER FUNCTION \.\.\. OWNER TO \.\.\." might fail with error "improper qualified name \(too many dotted names\)"\.
 + Fixed a bug whereby a crash could occur while committing a transaction with more than two million subtransactions\.
 + Fixed a bug in community PostgreSQL code related to GIN indexes which can cause the Aurora Storage volume to become unavailable\.
-+ Fixed a bug whereby an Aurora PostgreSQL replica of an RDS for PostgreSQL instance may fail to start, reporting error: "PANIC: could not locate a valid checkpoint record"\.
++ Fixed a bug whereby an Aurora PostgreSQL replica of an RDS for PostgreSQL instance might fail to start, reporting error: "PANIC: could not locate a valid checkpoint record"\.
 + Fixed a bug whereby passing an invalid parameter to the `aurora_stat_backend_waits` function could cause a crash\.
 
 **Known issues**
@@ -86,19 +102,19 @@ You can find the following improvements in this engine update\.
   + `pg_repack` updated to version 1\.4\.3\. 
   + `plv8` updated to version 2\.1\.2\.
 + Fixed an issue in the monitoring system that could incorrectly cause a failover when local disk usage is high\.
-+ Fixed a bug whereby Aurora PostgreSQL may repeatedly crash, reporting:
++ Fixed a bug whereby Aurora PostgreSQL can repeatedly crash, reporting:
 
   `PANIC: new_record_total_len (8201) must be less than BLCKSZ (8192), rmid (6), info (32)`
-+ Fixed a bug whereby an Aurora PostgreSQL read node may be unable to rejoin a cluster due to recovery of a large buffer cache\. This issue is unlikely to occur on instances other than **r4\.16xlarge\.**
-+ Fixed a bug whereby inserting into an empty GIN index leaf page imported from pre\-9\.4 engine versions may cause the Aurora Storage volume to become unavailable\.
++ Fixed a bug whereby an Aurora PostgreSQL read node might be unable to rejoin a cluster due to recovery of a large buffer cache\. This issue is unlikely to occur on instances other than **r4\.16xlarge\.**
++ Fixed a bug whereby inserting into an empty GIN index leaf page imported from pre\-9\.4 engine versions can cause the Aurora storage volume to become unavailable\.
 + Fixed a bug whereby, in rare circumstances, a crash during transaction commit could result in the loss of `CommitTs` data for the committing transaction\. The actual durability of the transaction was not impacted by this bug\.
-+ Fixed a bug in the `PostGIS` extension whereby `PostGIS` may crash in the function `gserialized_gist_picksplit_2d()`\.
++ Fixed a bug in the `PostGIS` extension whereby `PostGIS` can crash in the function `gserialized_gist_picksplit_2d()`\.
 + Improved the stability of read\-only nodes during heavy write traffic on instances smaller than **r4\.8xl**\. This specifically addresses a situation where the network bandwidth between the writer and the reader is constrained\.
 + Fixed a bug whereby an Aurora PostgreSQL instance acting as a replication target of an RDS for PostgreSQL instance crashed with the following error:
 
   `FATAL: could not open file "base/16411/680897_vm": No such file or directory" during "xlog redo at 782/3122D540 for Storage/TRUNCATE"`
 + Fixed a memory leak on read\-only nodes whereby the heap size for the "aurora wal replay process" will continue to grow\. This is observable via Enhanced Monitoring\.
-+ Fixed a bug whereby Aurora PostgreSQL may fail to start, with the following message reported in the PostgreSQL log:
++ Fixed a bug whereby Aurora PostgreSQL can fail to start, with the following message reported in the PostgreSQL log:
 
   `FATAL: Storage initialization failed.`
 + Fixed a performance limitation on heavy write workloads that caused waits on the `LWLock:buffer_content` and `IO:ControlFileSyncUpdate` events\.

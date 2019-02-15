@@ -37,7 +37,7 @@ The following limitations apply to backtracking:
 + Backtracking is not supported with binary log \(binlog\) replication\. Cross\-region replication must be disabled before you can configure or use backtracking\.
 + You can't backtrack a database clone to a time before that database clone was created\. However, you can use the original database to backtrack to a time before the clone was created\. For more information about database cloning, see [Cloning Databases in an Aurora DB Cluster](Aurora.Managing.Clone.md)\.
 + Backtracking causes a brief DB instance disruption\. You must stop or pause your applications before starting a backtrack operation to ensure that there are no new read or write requests\. During the backtrack operation, Aurora pauses the database, closes any open connections, and drops any uncommitted reads and writes\. It then waits for the backtrack operation to complete\.
-+ Backtracking is only supported for Aurora MySQL 5\.6\. It isn't supported for Aurora MySQL 5\.7\. Because of this limitation, you currently can't follow certain upgrade paths from Aurora MySQL 5\.6 to 5\.7 if you created the Aurora MySQL 5\.6 cluster with the Backtrack setting enabled: 
++  Backtracking is only supported for Aurora MySQL 5\.6\. It isn't supported for Aurora MySQL 5\.7\. Because of this limitation, you currently can't follow certain upgrade paths from Aurora MySQL 5\.6 to 5\.7 if you created the Aurora MySQL 5\.6 cluster with the Backtrack setting enabled: 
   +  You can't restore a snapshot of the Aurora MySQL 5\.6 DB cluster to Aurora MySQL 5\.7\. 
   +  You can't perform point\-in\-time recovery on the Aurora MySQL 5\.6 DB cluster to restore it to Aurora MySQL 5\.7\. 
 
@@ -177,9 +177,9 @@ The following procedure describes how to perform a backtrack operation for a DB 
 
 1. Choose the primary instance for the DB cluster that you want to backtrack\.
 
-1. Choose **Instance actions**, and then choose **Backtrack DB cluster**\.
+1. For **Actions**, choose **Backtrack DB cluster**\.
 
-1. On the **Backtrack DB cluster** page, type the backtrack time stamp to backtrack the DB cluster to\.  
+1. On the **Backtrack DB cluster** page, enter the backtrack time stamp to backtrack the DB cluster to\.  
 ![\[Backtrack DB cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-backtrack-db-cluster.png)
 
 1. Choose **Backtrack DB cluster**\.
