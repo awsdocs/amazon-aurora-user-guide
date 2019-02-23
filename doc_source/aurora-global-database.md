@@ -82,7 +82,7 @@
 
 1.  On the **Select engine** page, choose the MySQL 5\.6\-compatible Aurora engine and **Global** for **Database location**\. For an example, see the following images\. 
 **Note**  
- Make sure that **Quick create** is not selected\. Turning off **Quick create** makes visible the choices that you need for Aurora global databases\. 
+ Make sure that **Quick create** isn't selected\. Turning off **Quick create** makes visible the choices that you need for Aurora global databases\. 
 
    1.  Choose Aurora as the engine:   
 ![\[Screenshot of the engine options choices when creating a database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-create-global-01a.png)
@@ -389,7 +389,7 @@ aws rds --region secondary_region ^
 
 ![\[Screenshot showing confirmation prompt to remove a secondary cluster from an Aurora global database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-detach-secondary-convert-standalone.png)
 
- If a secondary cluster is still associated with the global database, you can't remove the primary cluster\. 
+ if a secondary cluster is still associated with the global database, you can't remove the primary cluster\. 
 
  After you remove or delete the secondary cluster, then you can remove the primary cluster the same way\. 
 

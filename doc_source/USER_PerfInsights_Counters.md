@@ -1,44 +1,15 @@
 # Performance Insights Counters<a name="USER_PerfInsights_Counters"></a>
 
-The following database counters are available for Performance Insights\. You can find definitions for these metrics in [Viewing Statistics](https://www.postgresql.org/docs/10/monitoring-stats.html#MONITORING-STATS-VIEWS) in the PostgreSQL documentation\.
+With counter metrics, you can customize the Performance Insights dashboard to include up to 10 additional graphs that show a selection of dozens of operating system and database performance metrics\. This information can be correlated with database load to help identify and analyze performance problems\.
 
+**Topics**
++ [Performance Insights Operating System Counters](#USER_PerfInsights_Counters.OS)
++ [Performance Insights Counters for Aurora MySQL](#USER_PerfInsights_Counters.Aurora_MySQL)
++ [Performance Insights Counters for Aurora PostgreSQL](#USER_PerfInsights_Counters.Aurora_PostgreSQL)
 
-| Counter | Type | 
-| --- | --- | 
-|  tup\_deleted  |  SQL  | 
-| tup\_fetched | SQL | 
-| tup\_inserted | SQL | 
-| tup\_returned | SQL | 
-| tup\_updated | SQL | 
-| buffers\_checkpoint | Checkpoint | 
-| checkpoints\_req | Checkpoint | 
-| checkpoint\_sync\_latency | Checkpoint | 
-| checkpoint\_sync\_time | Checkpoint | 
-| checkpoints\_timed | Checkpoint | 
-| checkpoint\_write\_latency | Checkpoint | 
-| checkpoint\_write\_time | Checkpoint | 
-| maxwritten\_clean | Checkpoint | 
-| time\_since\_checkpoint | Checkpoint | 
-| active\_transactions | Transactions | 
-| blocked\_transactions | Transactions | 
-| max\_used\_xact\_ids | Transactions | 
-| xact\_commit | Transactions | 
-| xaxt\_rollback | Transactions | 
-| blk\_read\_time | IO | 
-| blks\_read | IO | 
-| buffers\_backend | IO | 
-| buffers\_backend\_fsync | IO | 
-| buffers\_clean | IO | 
-| read\_latency | IO | 
-| blks\_hit | Cache | 
-| buffers\_alloc | Cache | 
-| temp\_files | Temp | 
-| numbackends | User | 
-| deadlocks | Concurrency | 
-| archived\_count | WAL | 
-| archive\_failed\_count | WAL | 
+## Performance Insights Operating System Counters<a name="USER_PerfInsights_Counters.OS"></a>
 
-The following operating system counters are available for Performance Insights\. You can find definitions for these metrics in [Available OS Metrics](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.CloudWatchLogs) in the *Amazon Aurora User Guide\.*
+The following operating system counters are available with Performance Insights for Aurora PostgreSQL\. You can find definitions for these metrics in [Viewing Enhanced Monitoring by Using CloudWatch Logs](USER_Monitoring.OS.md#USER_Monitoring.OS.CloudWatchLogs)\. 
 
 
 | Counter | Type | 
@@ -104,3 +75,124 @@ The following operating system counters are available for Performance Insights\.
 | rx | network | 
 | tx | network | 
 | numVCPUs | general | 
+
+## Performance Insights Counters for Aurora MySQL<a name="USER_PerfInsights_Counters.Aurora_MySQL"></a>
+
+The following database counters are available with Performance Insights for Aurora MySQL\.
+
+**Topics**
++ [Native Counters for Aurora MySQL](#USER_PerfInsights_Counters.Aurora_MySQL.Native)
++ [Non\-Native Counters for Aurora MySQL](#USER_PerfInsights_Counters.Aurora_MySQL.NonNative)
+
+### Native Counters for Aurora MySQL<a name="USER_PerfInsights_Counters.Aurora_MySQL.Native"></a>
+
+You can find definitions for these native metrics in [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.
+
+
+| Counter | Type | Unit | 
+| --- | --- | --- | 
+| Com\_analyze | SQL | Queries per second | 
+| Com\_optimize | SQL | Queries per second | 
+| Com\_select | SQL | Queries per second | 
+| Innodb\_rows\_deleted | SQL | Rows per second | 
+| Innodb\_rows\_inserted | SQL | Rows per second | 
+| Innodb\_rows\_read | SQL | Rows per second | 
+| Innodb\_rows\_updated | SQL | Rows per second | 
+| Select\_full\_join | SQL | Queries per second | 
+| Select\_full\_range\_join | SQL | Queries per second | 
+| Select\_range | SQL | Queries per second | 
+| Select\_range\_check | SQL | Queries per second | 
+| Select\_scan | SQL | Queries per second | 
+| Slow\_queries | SQL | Queries per second | 
+| Sort\_merge\_passes | SQL | Queries per second | 
+| Sort\_range | SQL | Queries per second | 
+| Sort\_rows | SQL | Queries per second | 
+| Sort\_scan | SQL | Queries per second | 
+| Questions | SQL | Queries per second | 
+| Table\_locks\_immediate | Locks | Requests per second | 
+| Table\_locks\_waited | Locks | Requests per second | 
+| Innodb\_row\_lock\_time | Locks | Milliseconds \(average\) | 
+| Aborted\_clients | Users | Connections | 
+| Aborted\_connects | Users | Connections | 
+| Threads\_created | Users | Connections | 
+| Threads\_running | Users | Connections | 
+| Created\_tmp\_disk\_tables | Temp | Tables per second | 
+| Created\_tmp\_tables | Temp | Tables per second | 
+| Innodb\_buffer\_pool\_pages\_data | Cache | Pages | 
+| Innodb\_buffer\_pool\_pages\_total | Cache | Pages | 
+| Innodb\_buffer\_pool\_read\_requests | Cache | Pages per second | 
+| Innodb\_buffer\_pool\_reads | Cache | Pages per second | 
+| Qcache\_hits | Cache | Queries | 
+
+### Non\-Native Counters for Aurora MySQL<a name="USER_PerfInsights_Counters.Aurora_MySQL.NonNative"></a>
+
+Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native metric can be a metric that you get with a specific query\. A non\-native metric also can be a derived metric, where two or more native counters are used in calculations for ratios, hit rates, or latencies\.
+
+
+| Counter | Type | Description | Definition | 
+| --- | --- | --- | --- | 
+| innodb\_buffer\_pool\_hits | Cache | The number of reads that InnoDB could satisfy from the buffer pool\. | innodb\_buffer\_pool\_read\_requests \- innodb\_buffer\_pool\_reads | 
+| innodb\_buffer\_pool\_hit\_rate | Cache | The percentage of reads that InnoDB could satisfy from the buffer pool\. | 100 \* innodb\_buffer\_pool\_read\_requests / \(innodb\_buffer\_pool\_read\_requests \+ innodb\_buffer\_pool\_reads\) | 
+| innodb\_buffer\_pool\_usage | Cache |  The percentage of the InnoDB buffer pool that contains data \(pages\)\.  When using compressed tables, this value can vary\. For more information, see the information about `Innodb_buffer_pool_pages_data` and `Innodb_buffer_pool_pages_total` in [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.   | Innodb\_buffer\_pool\_pages\_data / Innodb\_buffer\_pool\_pages\_total \* 100\.0 | 
+| query\_cache\_hit\_rate | Cache | The hit ratio for the MySQL result set cache \(query cache\)\. | Qcache\_hits / \(QCache\_hits \+ Com\_select\) \* 100 | 
+| innodb\_rows\_changed | SQL | The total InnoDB row operations\. | db\.SQL\.Innodb\_rows\_inserted \+ db\.SQL\.Innodb\_rows\_deleted \+ db\.SQL\.Innodb\_rows\_updated | 
+| active\_transactions | Transactions | The total active transactions\. | SELECT COUNT\(1\) AS active\_transactions FROM INFORMATION\_SCHEMA\.INNODB\_TRX | 
+| innodb\_deadlocks | Locks | The total number of deadlocks\. | SELECT COUNT AS innodb\_deadlocks FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_deadlocks' | 
+| innodb\_lock\_timeouts | Locks | The total number of deadlocks that timed out\. | SELECT COUNT AS innodb\_lock\_timeouts FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_timeouts' | 
+| innodb\_row\_lock\_waits | Locks | The total number of row locks that resulted in a wait\. | SELECT COUNT AS innodb\_row\_lock\_waits FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_row\_lock\_waits' | 
+
+## Performance Insights Counters for Aurora PostgreSQL<a name="USER_PerfInsights_Counters.Aurora_PostgreSQL"></a>
+
+The following database counters are available with Performance Insights for Aurora PostgreSQL\.
+
+**Topics**
++ [Native Counters for Aurora PostgreSQL](#USER_PerfInsights_Counters.Aurora_PostgreSQL.Native)
++ [Non\-Native Counters for Aurora PostgreSQL](#USER_PerfInsights_Counters.Aurora_PostgreSQL.NonNative)
+
+### Native Counters for Aurora PostgreSQL<a name="USER_PerfInsights_Counters.Aurora_PostgreSQL.Native"></a>
+
+You can find definitions for these native metrics in [Viewing Statistics](https://www.postgresql.org/docs/10/monitoring-stats.html#MONITORING-STATS-VIEWS) in the PostgreSQL documentation\.
+
+
+| Counter | Type | Unit | 
+| --- | --- | --- | 
+| tup\_deleted | SQL | Tuples per second | 
+| tup\_fetched | SQL | Tuples per second | 
+| tup\_inserted | SQL | Tuples per second | 
+| tup\_returned | SQL | Tuples per second | 
+| tup\_updated | SQL | Tuples per second | 
+| buffers\_checkpoint | Checkpoint | Blocks per second | 
+| checkpoints\_req | Checkpoint | Checkpoints per minute | 
+| checkpoint\_sync\_time | Checkpoint | Milliseconds per checkpoint | 
+| checkpoints\_timed | Checkpoint | Checkpoints per minute | 
+| checkpoint\_write\_time | Checkpoint | Milliseconds per checkpoint | 
+| maxwritten\_clean | Checkpoint | Bgwriter clean stops per minute | 
+| time\_since\_checkpoint | Checkpoint | Seconds | 
+| active\_transactions | Transactions | Transactions | 
+| blocked\_transactions | Transactions | Transactions | 
+| max\_used\_xact\_ids | Transactions | Transactions | 
+| xact\_commit | Transactions | Commits per second | 
+| xaxt\_rollback | Transactions | Rollbacks per second | 
+| blk\_read\_time | IO | Milliseconds | 
+| blks\_read | IO | Blocks per second | 
+| buffers\_backend | IO | Blocks per second | 
+| buffers\_backend\_fsync | IO | Blocks per second | 
+| buffers\_clean | IO | Blocks per second | 
+| blks\_hit | Cache | Blocks per second | 
+| buffers\_alloc | Cache | Blocks per second | 
+| temp\_files | Temp | Files per minute | 
+| numbackends | User | Connections | 
+| deadlocks | Concurrency | Deadlocks per minute | 
+| archived\_count | WAL | Files per minute | 
+| archive\_failed\_count | WAL | Files per minute | 
+
+### Non\-Native Counters for Aurora PostgreSQL<a name="USER_PerfInsights_Counters.Aurora_PostgreSQL.NonNative"></a>
+
+Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native metric can be a metric that you get with a specific query\. A non\-native metric also can be a derived metric, where two or more native counters are used in calculations for ratios, hit rates, or latencies\.
+
+
+| Counter | Type | Description | Definition | 
+| --- | --- | --- | --- | 
+| checkpoint\_sync\_latency | Checkpoint | The total amount of time that has been spent in the portion of checkpoint processing where files are synchronized to disk\. | checkpoint\_sync\_time / \(checkpoints\_timed \+ checkpoints\_req\) | 
+| checkpoint\_write\_latency | Checkpoint | The total amount of time that has been spent in the portion of checkpoint processing where files are written to disk\. | checkpoint\_write\_time / \(checkpoints\_timed \+ checkpoints\_req\) | 
+| read\_latency | IO | The time spent reading data file blocks by backends in this instance\. | blk\_read\_time / blks\_read | 

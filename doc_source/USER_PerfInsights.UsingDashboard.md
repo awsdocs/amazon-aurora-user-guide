@@ -41,18 +41,18 @@ The Performance Insight dashboard automatically refreshes with new data\. The re
 The dashboard is divided into three parts:
 
 1. **Counter Metrics chart** – Shows data for specific performance counter metrics\.
-**Note**  
-The **Counter Metrics** chart is only available for Aurora PostgreSQL\.
 
 1. **Average Active Sessions chart** – Shows how the database load compares to DB instance capacity as represented by the **Max CPU** line\.
 
-1.  **Top load items table** – Shows the top items contributing to database load\. The **Counter Metrics** chart is only available for Aurora PostgreSQL\.
+1.  **Top load items table** – Shows the top items contributing to database load\.
 
 ### Counter Metrics Chart<a name="USER_PerfInsights.UsingDashboard.Components.Countermetrics"></a>
 
- The **Counter Metrics** chart displays data for performance counters\. The default metrics shown are `blks_read.avg` and `xact_commit.avg`\. You can choose which performance counters to display by selecting the gear icon in the upper right corner of the chart\. 
+ The **Counter Metrics** chart displays data for performance counters\. The default metrics shown are `blks_read.avg` and `xact_commit.avg`\. You can choose which performance counters to display by selecting the gear icon in the upper\-right corner of the chart\. 
 
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora_perf_insights_counters.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/)
+
+For more information, see [Performance Insights Counters](USER_PerfInsights_Counters.md)\.
 
 ### Average Active Sessions Chart<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions"></a>
 

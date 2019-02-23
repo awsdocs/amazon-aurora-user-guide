@@ -14,7 +14,13 @@ To create or work with an Amazon RDS DB instance in a specific AWS Region, use t
 
 ## Availability<a name="Aurora.Overview.Availability"></a>
 
-For information about availability in AWS Regions for Amazon Aurora, see [Amazon Aurora](https://docs.aws.amazon.com/general/latest/gr/rande.html#aurora) in the *AWS General Reference*\.
+The following table shows the regions where Aurora MySQL is currently available\.
+
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html)
+
+The following table shows the regions where Aurora PostgreSQL is currently available\.
+
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html)
 
 ## Local Time Zone for Amazon Aurora DB Clusters<a name="Aurora.Overview.LocalTimeZone"></a>
 

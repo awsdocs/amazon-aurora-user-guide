@@ -5,6 +5,20 @@ Amazon Aurora Serverless is an on\-demand, autoscaling configuration for Amazon 
 **Note**  
 A non\-Serverless DB cluster for Aurora is called a *provisioned DB cluster*\.
 
+**Topics**
++ [Advantages of Aurora Serverless](#aurora-serverless.advantages)
++ [Use Cases for Aurora Serverless](#aurora-serverless.use-cases)
++ [Limitations of Aurora Serverless](#aurora-serverless.limitations)
++ [Using TLS/SSL with Aurora Serverless](#aurora-serverless.tls)
++ [How Aurora Serverless Works](aurora-serverless.how-it-works.md)
++ [Creating an Aurora Serverless DB Cluster](aurora-serverless.create.md)
++ [Restoring an Aurora Serverless DB Cluster](aurora-serverless.restorefromsnapshot.md)
++ [Modifying an Aurora Serverless DB Cluster](aurora-serverless.modifying.md)
++ [Setting the Capacity of an Aurora Serverless DB Cluster](aurora-serverless.setting-capacity.md)
++ [Viewing Aurora Serverless DB Clusters](aurora-serverless.viewing.md)
++ [Using the Query Editor for Aurora Serverless](query-editor.md)
++ [Using the Data API for Aurora Serverless](data-api.md)
+
 ## Advantages of Aurora Serverless<a name="aurora-serverless.advantages"></a>
 
 Aurora Serverless provides the following advantages:
@@ -67,45 +81,33 @@ The following limitations apply to Aurora Serverless:
 **Note**  
 You can access an Aurora Serverless DB cluster from AWS Lambda\. For more information about working with AWS Lambda, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](https://docs.aws.amazon.com/lambda/latest/dg/vpc.html) in the *AWS Lambda Developer Guide*\.
 
-## TLS/SSL for Aurora Serverless<a name="aurora-serverless.tls"></a>
+## Using TLS/SSL with Aurora Serverless<a name="aurora-serverless.tls"></a>
 
- You can connect to Aurora Serverless clusters using the Transport Layer Security / Secure Sockets Layer \(TLS/SSL\) protocol\. You use the same general procedure described in [Connecting to an Amazon Aurora MySQL DB Cluster](Aurora.Connecting.md#Aurora.Connecting.AuroraMySQL)\. You use certificates from the [AWS Certificate Manager \(ACM\)](https://aws.amazon.com/certificate-manager/faqs/)\. 
+ You can connect to Aurora Serverless clusters using the Transport Layer Security/Secure Sockets Layer \(TLS/SSL\) protocol\. To do so, you use the same general procedure as described in [Connecting to an Amazon Aurora MySQL DB Cluster](Aurora.Connecting.md#Aurora.Connecting.AuroraMySQL)\. You use certificates from the AWS Certificate Manager \(ACM\)\. For more information, see the *[AWS Certificate Manager User Guide](https://docs.aws.amazon.com/acm/latest/userguide/)*\. 
 
- You can encrypt traffic between your client application and the Aurora Serverless VPC endpoint using the TLS 1\.0, 1\.1, or 1\.2 protocol\. However, you don't need to configure the Aurora Serverless DB for TLS\. In particular, don't use the `REQUIRE` clause on your database user privileges for SSL\. Doing so prevents that user from connecting\. Aurora Serverless ensures that your session uses TLS between your client and the Aurora Serverless VPC endpoint if you specify the requirement on the client side with the `--ssl-mode` parameter\. 
+ TLS protocol, version 1\.0, 1\.1, or 1\.2\. However, you don't need to configure an Aurora Serverless database for TLS\. In particular, don't use the `REQUIRE` clause on your database user privileges for SSL\. Doing so prevents that user from connecting\. 
 
- By default, MySQL client programs will establish an encrypted connection with Aurora Serverless, with further control available through the `--ssl-mode` option\. From the client side, Aurora Serverless supports all SSL modes\. 
+ Aurora Serverless can ensure that your session uses TLS between your client and the Aurora Serverless VPC endpoint\. To have Aurora Serverless do so, specify the requirement on the client side with the `--ssl-mode` parameter\. 
 
- For the `mysql` client, the SSL modes are: 
+ By default, MySQL client programs establish an encrypted connection with Aurora Serverless, with further control available through the `--ssl-mode` option\. From the client side, Aurora Serverless supports all SSL modes\. 
+
+ For the `mysql` client, the SSL modes are the following: 
 
 **PREFERRED**  
- SSL is the first choice, but not required\. 
+ SSL is the first choice, but it isn't required\. 
 
 **DISABLED**  
- No SSL allowed\. 
+ No SSL is allowed\. 
 
 **REQUIRED**  
  Enforce SSL\. 
 
 **VERIFY\_CA**  
- Enforce SSL and verify CA\. 
+ Enforce SSL and verify the certificate authority \(CA\)\. 
 
 **VERIFY\_IDENTITY**  
- Enforce SSL and verify CA and CA hostname\. 
+ Enforce SSL and verify the CA and CA hostname\. 
 
- For the `mysql` client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY` you must also specify the `--ssl-ca` option pointing to a certificate authority \(CA\) in PEM format\. For a PEM file that you can use, you can download the [Amazon Root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem)\. 
+ When using a `mysql` client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in \.pem format\. For a \.pem file that you can use, download the [Amazon Root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) from Amazon Trust Services\. 
 
  Aurora Serverless uses wildcard certificates\. If you use the `mysql` client to connect, currently you must use the MySQL 8\.0\-compatible `mysql` command\. 
-
-**Topics**
-+ [Advantages of Aurora Serverless](#aurora-serverless.advantages)
-+ [Use Cases for Aurora Serverless](#aurora-serverless.use-cases)
-+ [Limitations of Aurora Serverless](#aurora-serverless.limitations)
-+ [TLS/SSL for Aurora Serverless](#aurora-serverless.tls)
-+ [How Aurora Serverless Works](aurora-serverless.how-it-works.md)
-+ [Creating an Aurora Serverless DB Cluster](aurora-serverless.create.md)
-+ [Restoring an Aurora Serverless DB Cluster](aurora-serverless.restorefromsnapshot.md)
-+ [Modifying an Aurora Serverless DB Cluster](aurora-serverless.modifying.md)
-+ [Setting the Capacity of an Aurora Serverless DB Cluster](aurora-serverless.setting-capacity.md)
-+ [Viewing Aurora Serverless DB Clusters](aurora-serverless.viewing.md)
-+ [Using the Query Editor for Aurora Serverless](query-editor.md)
-+ [Using the Data API for Aurora Serverless](data-api.md)
