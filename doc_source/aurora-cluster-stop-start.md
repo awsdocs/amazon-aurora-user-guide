@@ -32,9 +32,9 @@ To use an Aurora DB cluster or perform administration, you always begin with a r
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1.  In the navigation pane, choose **Clusters**, and then choose a cluster\. You can perform the stop operation from this page, or navigate to the details page for the DB cluster that you want to stop\.  
+1.  In the navigation pane, choose **Databases**, and then choose a cluster\. You can perform the stop operation from this page, or navigate to the details page for the DB cluster that you want to stop\.  
 
-1. Choose **Actions**, and then choose **Stop**\. 
+1. For **Actions**, choose **Stop**\. 
 
 ### AWS CLI<a name="aurora-stop-cluster.CLI"></a>
 
@@ -72,9 +72,9 @@ You always start an Aurora DB cluster beginning with an Aurora cluster that is a
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1.  In the navigation pane, choose **Clusters**, and then choose a cluster\. You can perform the start operation from this page, or navigate to the details page for the DB cluster that you want to start\.  
+1.  In the navigation pane, choose **Databases**, and then choose a cluster\. You can perform the start operation from this page, or navigate to the details page for the DB cluster that you want to start\.  
 
-1.  Choose **Actions**, and then choose **Start**\. 
+1.  For **Actions**, choose **Start**\. 
 
 ### AWS CLI<a name="aurora-start-cluster.CLI"></a>
 

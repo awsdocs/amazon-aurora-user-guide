@@ -6,15 +6,16 @@ Amazon RDS Performance Insights monitors your Amazon RDS DB instance load so tha
   Aurora MySQL 1\.x versions are compatible with MySQL 5\.6, and Aurora MySQL 2\.x versions are compatible with MySQL 5\.7\. Currently, Amazon RDS Performance Insights does not support Aurora MySQL 2\.x versions\.
 + Amazon RDS MySQL version 5\.7\.22 and higher 5\.7 versions
 + Amazon RDS MySQL version 5\.6\.41 and higher 5\.6 versions
++ Amazon RDS SQL Server \(all versions except SQL Server 2008\)
 + Amazon Aurora with PostgreSQL compatibility
 + Amazon RDS PostgreSQL version 10
 + Amazon RDS Oracle \(all versions\)
 
 **Note**  
-On Aurora, Performance Insights is not supported on db\.t2 DB instance classes\.  
+On Aurora MySQL, Performance Insights is not supported on db\.t2 or db\.t3 DB instance classes\.  
 Performance Insights is not supported for Aurora MySQL DB clusters enabled for parallel query\.
 
-Performance Insights expands on existing Amazon RDS monitoring features to illustrate your database's performance and help you analyze any issues that affect it\. With the Performance Insights dashboard, you can visualize the database load and filter the load by waits, SQL statements, hosts, or users\. Performance Insights is on by default in the console create wizard for the Amazon Aurora MySQL, Amazon RDS MySQL, Amazon Aurora PostgreSQL, and Amazon RDS PostgreSQL DB engines\. If you have more than one database on the DB instance, performance data for all of the databases is aggregated for the DB instance\. 
+Performance Insights expands on existing Amazon RDS monitoring features to illustrate your database's performance and help you analyze any issues that affect it\. With the Performance Insights dashboard, you can visualize the database load and filter the load by waits, SQL statements, hosts, or users\. Performance Insights is on by default in the console create wizard for the Amazon Aurora MySQL, Amazon RDS MySQL, Amazon RDS SQL Server, Amazon Aurora PostgreSQL, and Amazon RDS PostgreSQL DB engines\. If you have more than one database on the DB instance, performance data for all of the databases is aggregated for the DB instance\. 
 
 The central metric for Performance Insights is `DB Load`, which represents the average number of active sessions for the DB engine\. The `DB Load` metric is collected every second\. An *active session* is a connection that has submitted work to the DB engine and is waiting for a response from it\. For example, if you submit a SQL query to the DB engine, the database session is active while the DB engine is processing that query\. 
 

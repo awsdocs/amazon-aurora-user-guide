@@ -77,11 +77,11 @@ You might be behind a corporate firewall that does not allow access to default p
 
 Once Amazon RDS provisions your DB cluster and creates the primary instance, you can use any standard SQL client application to connect to a database on the DB cluster\. In this example, you connect to a database on the Aurora MySQL DB cluster using MySQL monitor commands\. One GUI\-based application that you can use to connect is MySQL Workbench\. For more information, go to the [ Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\.
 
- **To connect to a database on an Aurora MySQL DB cluster using the MySQL monitor** 
+**To connect to a database on an Aurora MySQL DB cluster using the MySQL monitor**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Choose **Clusters** and click the DB cluster to show the DB cluster details\. On the details page, copy the value for the **Cluster endpoint**\.   
+1. Choose **Databases** and then choose the DB cluster to show the DB cluster details\. On the details page, copy the value for the **Cluster endpoint**\.   
 ![\[DB Cluster Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch04.png)
 
 1. Type the following command at a command prompt on a client computer to connect to a database on an Aurora MySQL DB cluster using the MySQL monitor\. Use the cluster endpoint to connect to the primary instance, and the master user name that you created previously\. \(You are prompted for a password\.\) If you supplied a port value other than 3306, use that for the `-P` parameter instead\.
@@ -114,7 +114,7 @@ Once you have connected to the sample DB cluster that you created, you can delet
 
 1. Choose **Instances** and then choose the `gs-db-instance1` DB instance\.
 
-1. Choose **Instance actions**, and then choose **Delete**\.
+1. For **Actions**, choose **Delete**\.
 
 1. Choose **Delete**\. 
 
@@ -134,6 +134,6 @@ Once you have connected to the sample DB cluster that you created, you can delet
 
 1. Choose **Your VPCs** and then choose the VPC that was created for this procedure\.
 
-1. Choose **Actions** and then choose **Delete VPC**\.
+1. For **Actions**, choose **Delete VPC**\.
 
 1. Choose **Delete**\. 

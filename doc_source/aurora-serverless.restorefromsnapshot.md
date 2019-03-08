@@ -16,7 +16,7 @@ You can restore a DB cluster snapshot to an Aurora DB cluster with the AWS Manag
 
 1. In the navigation pane, choose **Snapshots**, and choose the DB cluster snapshot that you want to restore\.
 
-1. Choose **Actions**, and then choose **Restore Snapshot**\.
+1. For **Actions**, choose **Restore Snapshot**\.
 
 1. On the **Restore DB Cluster** page, choose **Serverless** for **Capacity type**\.  
 ![\[Restore Aurora Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-restore.png)

@@ -79,9 +79,9 @@ You can modify backtracking for a DB cluster using the console\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Choose **Clusters**\.
+1. Choose **Databases**\.
 
-1. Choose the cluster that you want to modify, and choose **Modify cluster** in **Actions**\.
+1. Choose the cluster that you want to modify, and choose **Modify**\.
 
 1. If backtracking is disabled in the **Backtrack** section, choose **Enable Backtrack**\.
 **Note**  
@@ -100,7 +100,7 @@ Currently, you can enable backtracking only for a DB cluster that was created wi
    + **Apply during the next scheduled maintenance window** – Wait to apply the **Target Backtrack window** modification until the next maintenance window\.
    + **Apply immediately** – Apply the **Target Backtrack window** modification as soon as possible\.
 
-1. Choose **Modify Cluster**\.
+1. Choose **Modify cluster**\.
 
 ### AWS CLI<a name="AuroraMySQL.Managing.Backtrack.Configuring.CLI"></a>
 
@@ -225,7 +225,7 @@ You can view backtracking information and monitor backtracking metrics for a DB 
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Choose **Clusters**\.
+1. Choose **Databases**\.
 
 1. Choose the DB cluster name to open information about it\.
 
@@ -360,9 +360,9 @@ You can disable backtracking for a DB cluster using the console\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Choose **Clusters**\.
+1. Choose **Databases**\.
 
-1. Choose the cluster you want to modify, and choose **Modify cluster** for **Actions**\.
+1. Choose the cluster you want to modify, and choose **Modify**\.
 
 1. In the **Backtrack** section, choose **Disable Backtrack**\.
 

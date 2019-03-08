@@ -105,7 +105,7 @@ Use one of the following procedures to delete a single cluster\. Repeat the proc
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the **Clusters** list, choose the cluster that you want to delete\.
+1. In the **Databases** list, choose the cluster that you want to delete\.
 
 1. For **Cluster Actions**, choose **Delete**\.
 

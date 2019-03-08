@@ -321,7 +321,7 @@
 
 1.  Choose the check box for the Aurora global database for which you want to create a secondary cluster\. If the primary cluster or DB instances inside it are still in `Creating` state, wait until they are all `Available`\. 
 
-1.  Choose **Actions**, and then choose **Add region**\.   
+1.  For **Actions**, choose **Add region**\.   
 ![\[Screenshot showing "Add region" choice for an Aurora global database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-cluster-tree-03-global-cluster-actions.png)
 
 1.  On the **Add a region** page, choose the secondary AWS Region\.   
@@ -385,7 +385,7 @@ aws rds --region secondary_region ^
 
 ### Console<a name="aurora-global-database-detach.console"></a>
 
- To remove an Aurora cluster from an Aurora global database with the AWS Management Console, choose the cluster on the **Databases**, choose **Actions**, and then choose **Remove from Global**\. The removed cluster becomes a regular Aurora cluster with full read\-write capability\. It is no longer kept synchronized with the primary cluster\. 
+ To remove an Aurora cluster from an Aurora global database with the AWS Management Console, choose the cluster on the **Databases** page\. For **Actions**, choose **Remove from Global**\. The removed cluster becomes a regular Aurora cluster with full read\-write capability\. It is no longer kept synchronized with the primary cluster\.
 
 ![\[Screenshot showing confirmation prompt to remove a secondary cluster from an Aurora global database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-detach-secondary-convert-standalone.png)
 

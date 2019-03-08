@@ -1,6 +1,6 @@
-# Troubleshooting<a name="CHAP_Troubleshooting"></a>
+# Troubleshooting for Aurora<a name="CHAP_Troubleshooting"></a>
 
-Use the following sections to help troubleshoot problems you have with Amazon RDS\. 
+Use the following sections to help troubleshoot problems you have with DB instances in Amazon RDS and Aurora\.
 
 **Topics**
 + [Cannot Connect to Amazon RDS DB Instance](#CHAP_Troubleshooting.Connecting)
@@ -11,6 +11,8 @@ Use the following sections to help troubleshoot problems you have with Amazon RD
 + [Amazon Aurora MySQL Out of Memory Issues](#CHAP_Troubleshooting.AuroraMySQLOOM)
 + [Amazon Aurora MySQL Replication Issues](#CHAP_Troubleshooting.MySQL)
 + [No Space Left on Device Error](#CHAP_Troubleshooting.Aurora.NoSpaceLeft)
+
+ For information about debugging problems using the Amazon RDS API, see [Troubleshooting Applications on Aurora](APITroubleshooting.md)\. 
 
 ## Cannot Connect to Amazon RDS DB Instance<a name="CHAP_Troubleshooting.Connecting"></a>
 
@@ -43,8 +45,8 @@ Windows users can use Telnet to test the connection to a DB instance\. Note that
 
 ```
 C:\>telnet sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com 819
-  
-  Connecting To sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com...Could not open 
+
+  Connecting To sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com...Could not open
   connection to the host, on port 819: Connect failed
 ```
 

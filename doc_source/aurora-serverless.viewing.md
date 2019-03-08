@@ -8,7 +8,7 @@ After you create one or more Aurora Serverless DB clusters, you can view which D
 
 1. In the upper\-right corner of the AWS Management Console, choose the AWS Region in which you created the Aurora Serverless DB clusters\.
 
-1. In the navigation pane, choose **Clusters**\.
+1. In the navigation pane, choose **Databases**\.
 
    For each DB cluster, the DB cluster type is shown under **Type**\. The provisioned DB clusters show **Provisioned** for the type, and the Aurora Serverless DB clusters show **Serverless** for the type\. You can view an Aurora Serverless DB cluster's current capacity under **Size**\.   
 ![\[Viewing Aurora Serverless DB clusters\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-viewing.png)
@@ -21,7 +21,7 @@ After you create one or more Aurora Serverless DB clusters, you can view which D
    A *scaling event *is generated when the DB cluster scales up, scales down, pauses, or resumes\. The following image shows examples of these events\.  
 ![\[Aurora Serverless scaling events\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-scaling.png)
 
-You can also monitor your Aurora Serverless DB cluster in CloudWatch\. Specifically, you can monitor the capacity allocated to the DB cluster with the `ServerlessDatabaseCapacity` metric\. In addition, you can monitor all of the standard Aurora CloudWatch metrics, such as `CPUUtilization`, `DatabaseConnections`, `Queries`, and so on\.
+You can also monitor your Aurora Serverless DB cluster in CloudWatch\. In particular, you can monitor the capacity allocated to the DB cluster with the `ServerlessDatabaseCapacity` metric\. You can also monitor all of the standard Aurora CloudWatch metrics, such as `CPUUtilization`, `DatabaseConnections`, `Queries`, and so on\. You can also have Aurora publish some or all database logs to CloudWatch\. You select which logs to publish when you create the cluster, or by modifying an existing cluster\. For details about how to monitor Aurora clusters through CloudWatch, see [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. 
 
 To connect to an Aurora Serverless DB cluster, use the database endpoint\. Follow the instructions in [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md) to connect to your Aurora Serverless DB cluster\.
 

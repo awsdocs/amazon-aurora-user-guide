@@ -1,27 +1,27 @@
 # Viewing an Amazon Aurora DB Cluster<a name="Aurora.Viewing"></a>
 
 You have several options for viewing information about your Amazon Aurora DB clusters and the DB instances in your DB clusters\.
-+ You can view DB clusters and DB instances in the Amazon RDS console by using the **Clusters** view\. 
++ You can view DB clusters and DB instances in the Amazon RDS console by choosing **Databases** from the navigation pane\. 
 + You can get DB cluster and DB instance information using the AWS Command Line Interface \(AWS CLI\)\.
 + You can get DB cluster and DB instance information using the Amazon RDS API\.
 
 ## AWS Management Console<a name="Aurora.Viewing.Console"></a>
 
-The Amazon RDS console has two sections where you can see information about a DB cluster\. You can see details about a DB cluster by using the **Clusters** view and you can see details about DB instances that are members of an Amazon Aurora DB cluster by using the **Instances** view\.
+In the Amazon RDS, you can see details about a DB cluster by choosing **Databases** from the console's navigation pane\. You can also see details about DB instances that are members of an Amazon Aurora DB cluster on the **Databases** page\.
 
-The **Clusters** view lists all of the DB clusters for your AWS account\. When you select a DB cluster, you see both information about the DB cluster and also a list of the DB instances that are members of that DB cluster\. You can choose the identifier for a DB instance in the list to go directly to the details page for that DB instance in the RDS console\.
+The **Databases** list shows all of the DB clusters for your AWS account\. When you choose a DB cluster, you see both information about the DB cluster and also a list of the DB instances that are members of that DB cluster\. You can choose the identifier for a DB instance in the list to go directly to the details page for that DB instance in the RDS console\.
 
-You can modify your DB cluster by using the **Clusters** view of the RDS console\. To modify a DB cluster, choose the DB cluster from the **Clusters** list and choose **Modify Cluster**\.
+To view the details page for a DB cluster, choose **Databases** in the navigation pane, and then choose the name of the DB cluster\.
 
-To modify a DB instance that is a member of a DB cluster, use the **Instances** view\.
+You can modify your DB cluster by choosing **Databases** from the console's navigation pane to go to the **Databases** list\. To modify a DB cluster, choose the DB cluster from the **Databases** list and choose **Modify**\.
+
+To modify a DB instance that is a member of a DB cluster, choose **Databases** from the console's navigation pane to go to the **Databases** list\.
 
 For example, the following image shows the details page for the DB cluster named `aurora-sample-cluster`\. The DB cluster has one DB instance shown in the **DB Cluster Members** list, named `aurora-sample`\. This instance is the primary instance for the DB cluster\.
 
-To view the details page for a DB cluster, choose Clusters in the navigation pane, and then click the name of the DB cluster\.
-
 ![\[Amazon Aurora DB Cluster View\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraView01.png)
 
-If you click the link for the `aurora-sample` DB instance identifier, the Amazon RDS console takes you to the **Instances** view for the `aurora-sample` DB instance as shown in the following image\.
+If you click the link for the `aurora-sample` DB instance identifier, the Amazon RDS console takes you to the details page for the `aurora-sample` DB instance as shown in the following image\.
 
 ![\[Amazon Aurora DB Instance View\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraView02.png)
 
@@ -195,5 +195,4 @@ The action returns the following output:
 </DescribeDBClustersResponse>
 ```
 
-## Related Topics<a name="Aurora.Viewing.RelatedTopics"></a>
-+ [Managing an Amazon Aurora DB Cluster](CHAP_Aurora.md)
+## <a name="Aurora.Viewing.RelatedTopics"></a>

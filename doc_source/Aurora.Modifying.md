@@ -17,9 +17,9 @@ For Aurora, when you modify a DB cluster, only changes to the **DB cluster ident
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Clusters**, and then select the DB cluster that you want to modify\. 
+1. In the navigation pane, choose **Databases**, and then select the DB cluster that you want to modify\. 
 
-1. Choose **Actions**, and then choose **Modify cluster**\. The **Modify DB cluster** page appears\.
+1. Choose **Modify**\. The **Modify DB cluster** page appears\.
 
 1. Change any of the settings that you want\. For information about each setting, see [Settings for Amazon Aurora](#Aurora.Modifying.Settings)\. 
 **Note**  
@@ -81,9 +81,9 @@ If any of the pending modifications require downtime, choosing apply immediately
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to modify\. 
+1. In the navigation pane, choose **Databases**, and then select the DB instance that you want to modify\. 
 
-1. Choose **Instance actions**, and then choose **Modify**\. The **Modify DB Instance** page appears\.
+1. For **Actions**, choose **Modify**\. The **Modify DB Instance** page appears\.
 
 1. Change any of the settings that you want\. For information about each setting, see [Settings for Amazon Aurora](#Aurora.Modifying.Settings)\. 
 **Note**  

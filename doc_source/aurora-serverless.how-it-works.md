@@ -48,34 +48,72 @@ When the DB cluster is paused, no compute or memory activity occurs, and you are
 **Note**  
 If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot\. In this case, the DB cluster is restored when there is a request to connect to it\.
 
-## Aurora Serverless and DB Cluster Parameter Groups<a name="aurora-serverless.parameter-groups"></a>
+## Aurora Serverless and Parameter Groups<a name="aurora-serverless.parameter-groups"></a>
 
-There are some differences between the way DB cluster parameter groups work with provisioned and serverless DB clusters\. With an Aurora Serverless DB cluster, you can only modify the following cluster\-level parameters:
-+ `character_set_server`
-+ `collation_server`
-+ `lc_time_names`
+ Parameter groups work differently for Serverless DB clusters than for provisioned DB clusters\. In particular, the DB instances in an Aurora Serverless cluster only have associated DB cluster parameter groups, not DB parameter groups\. Serverless clusters rely on DB cluster parameter groups because DB instances are not permanently associated with for Aurora Serverless clusters\. Aurora adds and removes DB instances automatically as needed\. 
+
+ To customize configuration settings for an Aurora Serverless cluster, you can define your own DB cluster parameter group and modify the parameters it contains\. You can modify both cluster\-level parameters, and parameters that apply at the instance level in other kinds of Aurora clusters\. However, when you modify a DB cluster parameter group that's associated with an Aurora Serverless DB cluster, modifications apply differently than for other DB cluster parameter groups\. 
+
+ When you save changes to a DB cluster parameter group for an Aurora Serverless DB cluster, changes are applied immediately\. In doing so, Aurora Serverless ignores the following settings: 
++ When modifying the DB cluster as a whole, Aurora Serverless ignores the following:
+  + The **Apply Immediately** setting in the AWS Management Console
+  + The `--apply-immediately|--no-apply-immediately` option in the AWS CLI command [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html)
+  + The `ApplyImmediately` parameter in the RDS API operation [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html)
++ When modifying parameters, Aurora Serverless ignores the `ApplyMethod` value in the parameter list in the AWS CLI commands [modify\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) and [reset\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/reset-db-cluster-parameter-group.html)\.
++ When modifying parameters, Aurora Serverless ignores the `ApplyMethod` value in the parameter list in the RDS API operations [ModifyDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterParameterGroup.html) and [ResetDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ResetDBClusterParameterGroup.html)\.
+
+Aurora Serverless ignores the DB cluster parameter group status of **pending\-reboot**\. Aurora applies parameter changes immediately without downtime\.
+
+To apply a change to a DB cluster parameter group, Aurora Serverless starts a seamless scale with the current capacity if the DB cluster is active\. It resumes the DB cluster if it is paused\.
+
+With an Aurora Serverless DB cluster, you can modify only the following parameters\. For all other configuration parameters, Aurora Serverless clusters use the default values\.
++ `character_set_server`\.
++ `collation_server`\.
++ `lc_time_names`\.
 + `lower_case_table_names`
-+ `time_zone`
++ `time_zone`\.
++  `general_log`\. This setting was formerly only in the DB instance parameter group\. 
++  `slow_query_log`\. This setting was formerly only in the DB instance parameter group\. 
++  `server_audit_logging`\.
++  `server_audit_events`\.
++  `server_audit_excl_users`\.
++  `server_audit_incl_users`\.
++  `log_output`\. This setting was formerly only in the DB instance parameter group\. This setting has a default value of `FILE`\. You can't change this value\. 
++  `slow_query_log`\. This setting was formerly only in the DB instance parameter group\. 
++  `general_log`\. This setting was formerly only in the DB instance parameter group\. 
++  `long_query_time`\. This setting was formerly only in the DB instance parameter group\. 
++  `log_queries_not_using_indexes`\. This setting was formerly only in the DB instance parameter group\. 
 
-If you modify other cluster\-level parameters, the changes have no effect, and the Aurora Serverless DB cluster uses the default values for these parameters\. You can view the supported engine mode for cluster\-level parameters by running the [ describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) command or the RDS API action [DescribeEngineDefaultClusterParameters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEngineDefaultClusterParameters.html)\.
+ To view the supported engine mode for cluster\-level parameters, run the [describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) command or the RDS API action [DescribeEngineDefaultClusterParameters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEngineDefaultClusterParameters.html)\. For example, the following Linux command extracts the names of parameters that you can set for Serverless clusters, from the `aurora5.6` default DB cluster parameter group\. 
 
-**Note**  
-Instance\-level parameters do not apply to Aurora Serverless\.
+```
+aws rds describe-engine-default-cluster-parameters \
+  --db-parameter-group-family aurora5.6 \
+  --query 'EngineDefaults.Parameters[*].{ParameterName:ParameterName, \
+    SupportedEngineModes:SupportedEngineModes} \
+  | [?contains(SupportedEngineModes, `serverless`) == `true`] \
+  | [*].{param:ParameterName}' \
+    --output text
+```
 
-When you modify a DB cluster parameter group that is associated with an Aurora Serverless DB cluster, the following applies:
-+ When you change a cluster\-level parameter that can be modified with Aurora Serverless and save the DB cluster parameter group, the change is applied immediately regardless of the following settings:
-  + When modifying the DB cluster, the following settings are ignored: the **Apply Immediately** setting in the AWS Management Console, the `--apply-immediately|--no-apply-immediately` option in the AWS CLI command [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html), and the `ApplyImmediately` parameter in the RDS API action [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html)\.
-  + When modifying parameters, the `ApplyMethod` value in the parameter list is ignored in the AWS CLI commands [modify\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) and [reset\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/reset-db-cluster-parameter-group.html), and in the RDS API actions [ModifyDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterParameterGroup.html) and [ResetDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ResetDBClusterParameterGroup.html)\.
-+ With Aurora Serverless, the DB cluster parameter group status of **pending\-reboot** is ignored\. An Aurora Serverless DB cluster applies changes to the DB cluster parameter group immediately without downtime\.
-+ To apply a change to a DB cluster parameter group, Aurora Serverless starts a seamless scale with the current capacity if the DB cluster is active, or resumes the DB cluster if it is paused\.
+ For example, the following Linux command extracts the names of parameters that you can set for Serverless clusters from a DB cluster parameter group that you created\. 
 
-For information about parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
+```
+aws rds describe-db-cluster-parameters \
+  --db-cluster-parameter-group-name my_cluster_param_group_name \
+  --query 'Parameters[*].{ParameterName:ParameterName, SupportedEngineModes:SupportedEngineModes}
+    | [?contains(SupportedEngineModes, `serverless`) == `true`]
+    | [*].{param:ParameterName}' \
+  --output text
+```
+
+For more information about parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
 
 ## Aurora Serverless and Failover<a name="aurora-serverless.failover"></a>
 
  An Aurora Serverless DB cluster currently is created in a single Availability Zone \(AZ\)\. If that availability zone becomes unavailable, Aurora recreates the cluster in a different AZ\. 
 
- An Aurora Provisioned cluster that is configured for fast failover recovers in approximately 60 seconds\. Although Aurora Serverless does not support fast failover, it supports automatic multi\-AZ failover\. Failover for Aurora Serverless takes longer than for an Aurora Provisioned cluster\. The Aurora Serverless failover time is currently undefined because it depends on demand and capacity availability in other AZs within the given AWS Region\. 
+An Aurora Provisioned cluster that is configured for fast failover recovers in approximately 60 seconds\. Although Aurora Serverless does not support fast failover, it supports automatic multi\-AZ failover\. Failover for Aurora Serverless takes longer than for an Aurora Provisioned cluster\. The Aurora Serverless failover time is currently undefined because it depends on demand and capacity availability in other AZs within the given AWS Region\. 
 
 ## Aurora Serverless and Snapshots<a name="aurora-serverless.snapshots"></a>
 

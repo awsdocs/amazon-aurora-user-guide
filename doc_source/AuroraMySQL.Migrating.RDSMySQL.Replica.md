@@ -185,7 +185,7 @@ You can view the MySQL to Aurora MySQL replication relationships for your Aurora
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Clusters**\. 
+1. In the navigation pane, choose **Databases**\. 
 
 1. Choose the DB cluster for the Aurora Read Replica to display its details\. The master MySQL DB instance information is in the **Replication source** field\.  
 ![\[View MySQL master\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-repl6.png)

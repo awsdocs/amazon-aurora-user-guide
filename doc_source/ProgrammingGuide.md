@@ -10,4 +10,4 @@ For more information about the AWS CLI, see [AWS Command Line Interface Referenc
 
 **Topics**
 + [Using the Query API](Using_the_Query_API.md)
-+ [Troubleshooting Applications on Amazon RDS](APITroubleshooting.md)
++ [Troubleshooting Applications on Aurora](APITroubleshooting.md)

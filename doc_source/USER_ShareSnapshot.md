@@ -140,7 +140,7 @@ Using the Amazon RDS console, you can share a manual DB cluster snapshot with up
 
 1. Select the manual snapshot that you want to share\.
 
-1. Choose **Actions**, and then choose **Share Snapshot**\.
+1. For **Actions**, choose **Share Snapshot**\.
 
 1. Choose one of the following options for **DB snapshot visibility**\.
    + If the source is unencrypted, choose **Public** to permit all AWS accounts to restore a DB cluster from your manual DB cluster snapshot, or choose **Private** to permit only AWS accounts that you specify to restore a DB cluster from your manual DB cluster snapshot\.

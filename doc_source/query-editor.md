@@ -73,7 +73,7 @@ You can run SQL statements on an Aurora Serverless DB cluster in the query edito
 
 1. In the upper\-right corner of the AWS Management Console, choose the AWS Region in which you created the Aurora Serverless DB clusters that you want to query\.
 
-1. In the navigation pane, choose **Clusters**\.
+1. In the navigation pane, choose **Databases**\.
 
 1. Choose the Aurora Serverless DB cluster that you want to run SQL queries against\.
 

@@ -20,7 +20,7 @@ You can publish Aurora MySQL logs to CloudWatch Logs with the console\.
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Clusters**\.
+1. In the navigation pane, choose **Databases**\.
 
 1. Choose the Aurora MySQL DB cluster that you want to publish the log data for\.
 

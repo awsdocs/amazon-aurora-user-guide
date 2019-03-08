@@ -131,7 +131,7 @@ The Aurora DB cluster maintenance window should fall at the time of lowest usage
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Clusters**\.
+1. In the navigation pane, choose **Databases**\.
 
 1. Choose the DB cluster for which you want to change the maintenance window\.
 

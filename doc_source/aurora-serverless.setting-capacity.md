@@ -15,7 +15,7 @@ You can set the capacity of an Aurora DB cluster with the AWS Management Console
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Clusters**\.
+1. In the navigation pane, choose **Databases**\.
 
 1. Choose the Aurora Serverless DB cluster that you want to modify\.
 

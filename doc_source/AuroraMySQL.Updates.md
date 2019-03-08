@@ -52,11 +52,11 @@ When upgrading to Amazon Aurora MySQL version 2\.03\.2 and higher, you upgrade t
 **To modify the engine version of a DB cluster**
 + **By using the Amazon RDS console** – Complete the following steps: 
 
-  1. Sign in to the Amazon RDS console and choose **Clusters**\.
+  1. Sign in to the Amazon RDS console and choose **Databases**\.
 
   1. Choose the DB cluster that you want to modify\.
 
-  1. Choose **Actions**, and choose **Modify cluster**\.
+  1. Choose **Modify**\.
 
   1. Change the Aurora MySQL engine version in the **DB engine version** box\.
 
@@ -77,11 +77,11 @@ When upgrading to Aurora MySQL version 1\.x versions, new database engine minor 
 **To apply pending maintenance actions**
 + **By using the Amazon RDS console** – Complete the following steps:
 
-  1. Sign in to the Amazon RDS console and choose **Clusters**\.
+  1. Sign in to the Amazon RDS console and choose **Databases**\.
 
   1. Choose the DB cluster that shows an **available** maintenance upgrade\.
 
-  1. Choose **Actions**, and choose **Upgrade now** to immediately update the database version for your DB cluster, or **Upgrade at next window** to update the database version for your DB cluster during the next DB cluster maintenance window\.
+  1. For **Actions**, choose **Upgrade now** to immediately update the database version for your DB cluster, or **Upgrade at next window** to update the database version for your DB cluster during the next DB cluster maintenance window\.
 + **By using the AWS CLI** – Call the [apply\-pending\-maintenance\-action](https://docs.aws.amazon.com/cli/latest/reference/rds/apply-pending-maintenance-action.html) AWS CLI command and specify the Amazon Resource Name \(ARN\) for your DB cluster for the `--resource-id` option and `system-update` for the `--apply-action` option\. Set the `--opt-in-type` option to `immediate` to immediately update the database version for your DB cluster, or `next-maintenance` to update the database version for your DB cluster during the next cluster maintenance window\. 
 + **By using the Amazon RDS API** – Call the [ApplyPendingMaintenanceAction](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html) API operation and specify the ARN for your DB cluster for the `ResourceId` parameter and `system-update` for the `ApplyAction` parameter\. Set the `OptInType` parameter to `immediate` to immediately update the database version for your DB cluster, or `next-maintenance` to update the database version for your instance during the next cluster maintenance window\.
 

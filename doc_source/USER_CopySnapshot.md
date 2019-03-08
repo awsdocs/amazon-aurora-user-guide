@@ -86,7 +86,7 @@ To cancel a copy operation once it is in progress, delete the target DB cluster 
 
 1. Select the check box for the DB cluster snapshot you want to copy\.
 
-1. Choose **Actions**, and then choose **Copy Snapshot**\. The **Make Copy of DB Snapshot** page appears\.   
+1. For **Actions**, choose **Copy Snapshot**\. The **Make Copy of DB Snapshot** page appears\.   
 ![\[Copy a DB cluster snapshot\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/DBSnapshotCopy1.png)
 
 1. \(Optional\) To copy the DB cluster snapshot to a different AWS Region, choose that AWS Region for **Destination Region**\.

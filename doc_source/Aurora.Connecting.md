@@ -22,7 +22,7 @@ The cluster endpoint connects you to the primary instance for the DB cluster\. Y
 **Note**  
 If the cluster is an Aurora Serverless DB cluster, you can only connect to its database endpoint\. For more information, see [Using Amazon Aurora Serverless](aurora-serverless.md)\.
 
-To view the cluster endpoint, choose **Clusters** on the Amazon RDS console and choose the DB cluster to show the DB cluster details\.
+To view the cluster endpoint, choose **Databases** on the Amazon RDS console and choose the DB cluster to show the DB cluster details\.
 
 ![\[Amazon Aurora details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraMySQLConnect.png)
 
@@ -81,7 +81,7 @@ In the details view for your Aurora PostgreSQL DB cluster you can find the clust
 
 The cluster endpoint connects you to the primary instance for the DB cluster\. You can perform both read and write operations using the cluster endpoint\. Your DB cluster can also have up to 15 Aurora Replicas that support read\-only access to the data in your DB cluster\. Each DB instance in the Aurora cluster \(that is, the primary instance and each Aurora Replica\) has a unique endpoint that is independent of the cluster endpoint\. This unique endpoint allows you to connect to a specific DB instance in the cluster directly\. The cluster endpoint always points to the primary instance\. If the primary instance fails and is replaced, the cluster endpoint points to the new primary instance\.
 
-To view the cluster endpoint, choose **Clusters** on the Amazon RDS console and click the DB cluster to show the DB cluster details\.
+To view the cluster endpoint, choose **Databases** on the Amazon RDS console and click the DB cluster to show the DB cluster details\.
 
 ![\[Amazon Aurora details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraPostgreSQLConnect.png)
 

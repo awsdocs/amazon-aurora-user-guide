@@ -89,7 +89,7 @@ You can add a scaling policy to an Aurora DB cluster by using the AWS Management
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Clusters**\. 
+1. In the navigation pane, choose **Databases**\. 
 
 1. Choose the Aurora DB cluster that you want to add a policy for\.
 
@@ -392,7 +392,7 @@ You can edit a scaling policy by using the AWS Management Console\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Clusters**\. 
+1. In the navigation pane, choose **Databases**\. 
 
 1. Choose the Aurora DB cluster whose Auto Scaling policy you want to edit to show the DB cluster's details\.
 
@@ -426,7 +426,7 @@ You can delete a scaling policy by using the AWS Management Console\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Clusters**\. 
+1. In the navigation pane, choose **Databases**\. 
 
 1. Choose the Aurora DB cluster with the scaling policy that you want to delete\.
 
