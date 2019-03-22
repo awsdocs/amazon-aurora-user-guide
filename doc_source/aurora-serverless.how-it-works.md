@@ -35,7 +35,7 @@ A *scaling point* is a point in time at which the database can safely initiate t
 + Long\-running queries or transactions are in progress
 + Temporary tables or table locks are in use
 
-In these cases, Aurora Serverless continues to try to find a scaling point so that it can initiate the scaling operation\.
+In these cases, Aurora Serverless continues to try to find a scaling point so that it can initiate the scaling operation for as long as it determines that the DB cluster should be scaled\.
 
 You can see scaling events in the details for a DB cluster in the AWS Management Console\. You can also monitor the current capacity allocated to the DB cluster by using the `ServerlessDatabaseCapacity` metric for Amazon CloudWatch\. 
 

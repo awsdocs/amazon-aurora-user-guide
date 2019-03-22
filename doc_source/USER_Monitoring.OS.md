@@ -1,10 +1,10 @@
 # Enhanced Monitoring<a name="USER_Monitoring.OS"></a>
 
-Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from CloudWatch Logs in a monitoring system of your choice\.
+Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\.
 
 By default, Enhanced Monitoring metrics are stored in the CloudWatch Logs for 30 days\. To modify the amount of time the metrics are stored in the CloudWatch Logs, change the retention for the `RDSOSMetrics` log group in the CloudWatch console\. For more information, see [Change Log Data Retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) in the *Amazon CloudWatch Logs User Guide*\.
 
-The cost for using Enhanced Monitoring varies depends on several factors:
+The cost for using Enhanced Monitoring depends on several factors:
 + You are only charged for Enhanced Monitoring that exceeds the free tier provided by Amazon CloudWatch Logs\. 
 
   For more information about pricing, see [Amazon CloudWatch Pricing](https://aws.amazon.com/cloudwatch/pricing/)\. 
@@ -17,6 +17,8 @@ The cost for using Enhanced Monitoring varies depends on several factors:
 CloudWatch gathers metrics about CPU utilization from the hypervisor for a DB instance, and Enhanced Monitoring gathers its metrics from an agent on the instance\. As a result, you might find differences between the measurements, because the hypervisor layer performs a small amount of work\. The differences can be greater if your DB instances use smaller instance classes, because then there are likely more virtual machines \(VMs\) that are managed by the hypervisor layer on a single physical instance\. Enhanced Monitoring metrics are useful when you want to see how different processes or threads on a DB instance use the CPU\.
 
 ## Setting Up for and Enabling Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling"></a>
+
+To set up for and enable Enhanced Monitoring, take the steps listed following\.
 
 ### Before You Begin<a name="USER_Monitoring.OS.Enabling.Prerequisites"></a>
 
@@ -42,13 +44,15 @@ The user that enables Enhanced Monitoring must be granted the `PassRole` permiss
 
 1. Choose **RDS \- Enhanced Monitoring**, and then choose **Next: Permissions**\.
 
-1. On the **Attached permissions policy** page, choose **AmazonRDSEnhancedMonitoringRole**, and then choose **Next: Review**\.
+1. Ensure that the **Attached permissions policy** page shows **AmazonRDSEnhancedMonitoringRole**, and then choose **Next: Tags**\.
 
-1. For **Role Name**, type a name for your role, for example **emaccess**, and then choose **Create role**\.
+1. On the **Add tags** page, choose **Next: Review**\.
+
+1. For **Role Name**, enter a name for your role, for example **emaccess**, and then choose **Create role**\.
 
 ### Enabling and Disabling Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling.Procedure"></a>
 
-You can enable Enhanced Monitoring when you create a DB cluster or Read Replica, or when you modify a DB cluster\. If you modify a DB instance to enable Enhanced Monitoring, you do not need to reboot your DB instance for the change to take effect\. 
+You can enable Enhanced Monitoring when you create a DB cluster or Read Replica, or when you modify a DB cluster\. If you modify a DB instance to enable Enhanced Monitoring, you don't need to reboot your DB instance for the change to take effect\. 
 
 You can enable Enhanced Monitoring in the RDS console when you do one of the following actions: 
 + **Create a DB Cluster** – You can enable Enhanced Monitoring in the **Configure Advanced Settings** page\.
@@ -67,27 +71,27 @@ To disable Enhanced Monitoring, choose **Disable enhanced monitoring**\.
 
 ![\[Enable Enhanced Monitoring\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/metrics3.png)
 
-Enabling Enhanced Monitoring does not require your DB instance to restart\.
+Enabling Enhanced Monitoring doesn't require your DB instance to restart\.
 
 **Note**  
-The fastest that the RDS console refreshes is every 5 seconds\. If you set the granularity to 1 second in the RDS console, you still see updated metrics only every 5 seconds\. You can retrieve 1 second metric updates by using CloudWatch Logs\.
+The fastest that the RDS console refreshes is every 5 seconds\. If you set the granularity to 1 second in the RDS console, you still see updated metrics only every 5 seconds\. You can retrieve 1\-second metric updates by using CloudWatch Logs\.
 
 ## Viewing Enhanced Monitoring<a name="USER_Monitoring.OS.Viewing"></a>
 
-You can view OS metrics reported by Enhanced Monitoring in the RDS console by choosing the **Enhanced monitoring** view from the **Monitoring** drop\-down\.
+You can view OS metrics reported by Enhanced Monitoring in the RDS console by choosing **Enhanced monitoring** for **Monitoring**\.
 
-The Enhanced Monitoring is shown following\.
+The Enhanced Monitoring page is shown following\.
 
 ![\[Dashboard view\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/metrics1.png)
 
 If you want to see details for the processes running on your DB instance, choose **OS process list** for **Monitoring**\.
 
-Process List view is shown following\.
+The **Process List** view is shown following\.
 
 ![\[Process list view\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/metrics2.png)
 
-The Enhanced Monitoring metrics shown in the Process List view are organized as follows:
-+ **RDS child processes** – Shows a summary of the RDS processes that support the DB instance, for example `aurora` for Amazon Aurora DB clusters and `mysqld` for MySQL DB instances\. Process threads appear nested beneath the parent process\. Process threads show CPU utilization only as other metrics are the same for all threads for the process\. The console displays a maximum of 100 processes and threads\. The results are a combination of the top CPU consuming and memory consuming processes and threads\. If there are more than 50 processes and more than 50 threads, the console displays the top 50 consumers in each category\. This display helps you identify which processes are having the greatest impact on performance\.
+The Enhanced Monitoring metrics shown in the **Process list** view are organized as follows:
++ **RDS child processes** – Shows a summary of the RDS processes that support the DB instance, for example `aurora` for Amazon Aurora DB clusters\. Process threads appear nested beneath the parent process\. Process threads show CPU utilization only as other metrics are the same for all threads for the process\. The console displays a maximum of 100 processes and threads\. The results are a combination of the top CPU consuming and memory consuming processes and threads\. If there are more than 50 processes and more than 50 threads, the console displays the top 50 consumers in each category\. This display helps you identify which processes are having the greatest impact on performance\.
 + **RDS processes** – Shows a summary of the resources used by the RDS management agent, diagnostics monitoring processes, and other AWS processes that are required to support RDS DB instances\.
 + **OS processes** – Shows a summary of the kernel and system processes, which generally have minimal impact on performance\.
 
@@ -113,7 +117,7 @@ After you have enabled Enhanced Monitoring for your DB instance, you can view th
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. If necessary, choose the region that your DB instance is in\. For more information, go to [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/index.html?rande.html) in the *Amazon Web Services General Reference*\.
+1. If necessary, choose the region that your DB instance is in\. For more information, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/index.html?rande.html) in the *Amazon Web Services General Reference*\.
 
 1. Choose **Logs** in the navigation pane\.
 

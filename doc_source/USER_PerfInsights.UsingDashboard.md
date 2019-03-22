@@ -130,6 +130,9 @@ For Aurora MySQL DB instances, you can view up to 1,024 bytes of SQL text\.
 
 For Aurora PostgreSQL DB instances, you can control the limit of the SQL text size by setting the `track_activity_query_size` DB instance parameter, up to 10,240 bytes\. For more information, see [Setting the SQL Text Limit for Aurora PostgreSQL DB Instances](#USER_PerfInsights.UsingDashboard.SQLTextLimit)\.
 
+**Important**  
+Currently, you can only view and download more SQL text with the AWS Management Console\. The AWS Performance Insights CLI and API can return a maximum of 500 bytes of text\.
+
 **Note**  
 For Aurora MySQL DB instances, viewing more SQL text is not supported in the EU \(Stockholm\) region\.
 

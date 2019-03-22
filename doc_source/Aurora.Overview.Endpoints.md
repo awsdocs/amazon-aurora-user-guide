@@ -223,7 +223,7 @@ aws rds describe-db-cluster-endpoints --region region_name ^
   --db-cluster-identifier cluster_id
 ```
 
- The following shows some sample output from a `describe-db-cluster-endpoints` command\. The `EndpointType` of `WRITER` or `READER` denotes the built\-in read\-write and read\-only endpoints for the cluster\. The `EndpointType` of `CUSTOM` denotes endpoints that you create and choose the associated DB instances\. One of the endpoints has a non\-empty `StaticMembers` field, denoting that it is associated with a precise set of DB instances\. The other endpoint has a non\-empty `ExcludedMembers` field, denoting that the endpoint is associated with all DB instances *other than* the ones listed under `ExcludedMembers`\. This second kind of custom endpoint grows to accomodate new instances as you add them to the cluster\. 
+ The following shows some sample output from a `describe-db-cluster-endpoints` command\. The `EndpointType` of `WRITER` or `READER` denotes the built\-in read\-write and read\-only endpoints for the cluster\. The `EndpointType` of `CUSTOM` denotes endpoints that you create and choose the associated DB instances\. One of the endpoints has a non\-empty `StaticMembers` field, denoting that it is associated with a precise set of DB instances\. The other endpoint has a non\-empty `ExcludedMembers` field, denoting that the endpoint is associated with all DB instances *other than* the ones listed under `ExcludedMembers`\. This second kind of custom endpoint grows to accommodate new instances as you add them to the cluster\. 
 
 ```
 {

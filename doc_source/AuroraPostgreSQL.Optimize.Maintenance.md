@@ -220,7 +220,7 @@ In some cases, you might dump from one version of the `apg_plan_mgmt` extension 
     estimated_total_cost = EXCLUDED.estimated_total_cost,
     planning_time_ms = EXCLUDED.planning_time_ms,
     execution_time_ms = EXCLUDED.execution_time_ms,
-    estmated_rows = EXCLUDED.estimated_rows,
+    estimated_rows = EXCLUDED.estimated_rows,
     actual_rows = EXCLUDED.actual_rows,
     total_time_benefit_ms = EXCLUDED.total_time_benefit_ms, 
     execution_time_benefit_ms = EXCLUDED.execution_time_benefit_ms;

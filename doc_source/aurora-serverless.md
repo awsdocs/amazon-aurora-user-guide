@@ -63,7 +63,6 @@ The following limitations apply to Aurora Serverless:
 + Aurora Serverless is only available for Aurora with MySQL 5\.6 compatibility\.
 + The port number for connections must be `3306`\.
 + You can't give an Aurora Serverless DB cluster a public IP address\. You can access an Aurora Serverless DB cluster only from within a virtual private cloud \(VPC\) based on the Amazon VPC service\.
-+ You can't access an Aurora Serverless DB cluster's endpoint through an AWS VPN connection or an inter\-region VPC peering connection\. There are limitations in accessing a cluster's endpoint through an intra\-region VPC peering connection; for more information, see [Interface VPC Endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html) in the *Amazon VPC User Guide*\. However, you can access an Aurora Serverless cluster's endpoint through an AWS Direct Connect connection\. 
 + A DB subnet group used by Aurora Serverless can’t have more than one subnet in the same Availability Zone\.
 + Changes to a subnet group used by an Aurora Serverless DB cluster are not applied to the cluster\.
 + Aurora Serverless doesn't support the following features:
