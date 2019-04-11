@@ -55,6 +55,7 @@
 +  Currently, you can only use parallel query with the following instance classes: 
   +  All instance types in the db\.r3 series\. 
   +  All instance types in the db\.r4 series\. 
+  +  All instance types in the db\.r5 series\. 
 **Note**  
  You can't create T2 instances for parallel query\. 
 +  The parallel query option is available in the following regions: 
