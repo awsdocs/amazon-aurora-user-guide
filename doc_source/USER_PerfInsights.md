@@ -21,7 +21,7 @@ Performance Insights expands on existing Amazon RDS monitoring features to illus
 The central metric for Performance Insights is `DB Load`, which represents the average number of active sessions for the DB engine\. The `DB Load` metric is collected every second\. An *active session* is a connection that has submitted work to the DB engine and is waiting for a response from it\. For example, if you submit a SQL query to the DB engine, the database session is active while the DB engine is processing that query\. 
 
 By combining `DB Load` with wait event data, you can get a complete picture of the state for an active session\. Wait events vary by DB engine: 
-+ For a list of the most commonly used wait events for Aurora MySQL, see [Aurora MySQL Events ](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Waitevents)\.
++ For a list of the most commonly used wait events for Aurora MySQL, see [Aurora MySQL Events](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Waitevents)\.
 + For information about all MySQL wait events, see [Wait Event Summary Tables](https://dev.mysql.com/doc/refman/5.7/en/wait-summary-tables.html) in the MySQL documentation\.
 + For a list of the most commonly used wait events for Aurora PostgreSQL, see [Amazon Aurora PostgreSQL Events](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.Waitevents)\.
 + For information about all PostgreSQL wait events, see [PostgreSQL Wait Events](https://www.postgresql.org/docs/10/static/monitoring-stats.html#WAIT-EVENT-TABLE) in the PostgreSQL documentation\.

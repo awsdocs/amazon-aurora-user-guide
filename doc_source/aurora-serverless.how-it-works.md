@@ -69,20 +69,33 @@ To apply a change to a DB cluster parameter group, Aurora Serverless starts a se
 With an Aurora Serverless DB cluster, you can modify only the following parameters\. For all other configuration parameters, Aurora Serverless clusters use the default values\.
 + `character_set_server`\.
 + `collation_server`\.
++  `general_log`\. This setting was formerly only in the DB instance parameter group\. 
++ `innodb_file_format`\. This setting was formerly only in the DB instance parameter group\.
++ `innodb_file_per_table`\.
++ `innodb_large_prefix`\. This setting was formerly only in the DB instance parameter group\.
++ `innodb_lock_wait_timeout`\. This setting was formerly only in the DB instance parameter group\.
++ `innodb_monitor_disable`\. This setting was formerly only in the DB instance parameter group\.
++ `innodb_monitor_enable`\. This setting was formerly only in the DB instance parameter group\.
++ `innodb_monitor_reset`\. This setting was formerly only in the DB instance parameter group\.
++ `innodb_monitor_reset_all`\. This setting was formerly only in the DB instance parameter group\.
++ `innodb_print_all_deadlocks`\. This setting was formerly only in the DB instance parameter group\.
 + `lc_time_names`\.
-+ `lower_case_table_names`
-+ `time_zone`\.
-+  `general_log`\. This setting was formerly only in the DB instance parameter group\. 
-+  `slow_query_log`\. This setting was formerly only in the DB instance parameter group\. 
-+  `server_audit_logging`\.
-+  `server_audit_events`\.
-+  `server_audit_excl_users`\.
-+  `server_audit_incl_users`\.
 +  `log_output`\. This setting was formerly only in the DB instance parameter group\. This setting has a default value of `FILE`\. You can't change this value\. 
-+  `slow_query_log`\. This setting was formerly only in the DB instance parameter group\. 
-+  `general_log`\. This setting was formerly only in the DB instance parameter group\. 
-+  `long_query_time`\. This setting was formerly only in the DB instance parameter group\. 
 +  `log_queries_not_using_indexes`\. This setting was formerly only in the DB instance parameter group\. 
++ `log_warnings`\. This setting was formerly only in the DB instance parameter group\.
++  `long_query_time`\. This setting was formerly only in the DB instance parameter group\. 
++ `lower_case_table_names`\.
++ `net_read_timeout`\. This setting was formerly only in the DB instance parameter group\.
++ `net_retry_count`\. This setting was formerly only in the DB instance parameter group\.
++ `net_write_timeout`\. This setting was formerly only in the DB instance parameter group\.
++  `server_audit_logging`\.
++ `server_audit_events`\.
++ `server_audit_excl_users`\.
++ `server_audit_incl_users`\.
++  `slow_query_log`\. This setting was formerly only in the DB instance parameter group\. 
++ `sql_mode`\. This setting was formerly only in the DB instance parameter group\.
++ `time_zone`\.
++ `tx_isolation`\. This setting was formerly only in the DB instance parameter group\.
 
  To view the supported engine mode for cluster\-level parameters, run the [describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) command or the RDS API action [DescribeEngineDefaultClusterParameters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEngineDefaultClusterParameters.html)\. For example, the following Linux command extracts the names of parameters that you can set for Serverless clusters, from the `aurora5.6` default DB cluster parameter group\. 
 
@@ -117,4 +130,4 @@ An Aurora Provisioned cluster that is configured for fast failover recovers in a
 
 ## Aurora Serverless and Snapshots<a name="aurora-serverless.snapshots"></a>
 
- The cluster volume for an Aurora Serverless cluster is always encrypted\. You can choose the encryption key, but not turn off encryption\. Therefore, you can't perform operations that aren't allowed for encrypted snapshots\. For example, you can't copy snapshots of Aurora Serverless clusters to a different AWS Region\. 
+ The cluster volume for an Aurora Serverless cluster is always encrypted\. You can choose the encryption key, but not turn off encryption\. To copy or share a snapshot of an Aurora Serverless cluster, you encrypt the snapshot using your own KMS key\.

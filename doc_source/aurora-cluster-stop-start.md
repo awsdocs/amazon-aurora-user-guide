@@ -4,6 +4,7 @@
 
 **Topics**
 + [Overview of Stopping and Starting an Aurora DB Cluster](#aurora-cluster-start-stop-overview)
++ [Limitations for Stopping and Starting Aurora DB Clusters](#aurora-cluster-stop-limitations)
 + [Stopping an Aurora DB Cluster](#aurora-cluster-stop)
 + [Possible Operations While an Aurora DB Cluster Is Stopped](#aurora-cluster-stopped)
 + [Starting an Aurora DB Cluster](#aurora-cluster-start)
@@ -17,6 +18,12 @@
  To minimize charges for a lightly loaded Aurora cluster, you can stop the cluster instead of deleting all of its Aurora Replicas\. For clusters with more than one or two instances, frequently deleting and recreating the DB instances is only practical using the AWS CLI or Amazon RDS API\. Such a sequence of operations can also be difficult to perform in the right order, for example to delete all Aurora Replicas before deleting the primary instance to avoid activating the failover mechanism\. 
 
  Don't use starting and stopping if you need to keep your DB cluster running but it has more capacity than you need\. If your cluster is too costly or not very busy, delete one or more DB instances or change all your DB instances to a small instance class\. You can't stop an individual Aurora DB instance\. 
+
+## Limitations for Stopping and Starting Aurora DB Clusters<a name="aurora-cluster-stop-limitations"></a>
+
+ Some Aurora clusters can't be stopped and started: 
++  You can't stop and start a cluster that's part of an [Aurora global database](aurora-global-database.md)\. 
++  You can't stop and start a cluster that uses the [Aurora parallel query](aurora-mysql-parallel-query.md) feature\. 
 
 ## Stopping an Aurora DB Cluster<a name="aurora-cluster-stop"></a>
 

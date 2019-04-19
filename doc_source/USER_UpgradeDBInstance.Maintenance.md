@@ -1,21 +1,33 @@
 # Maintaining an Amazon Aurora DB Cluster<a name="USER_UpgradeDBInstance.Maintenance"></a>
 
-Periodically, Amazon RDS performs maintenance on Amazon RDS resources\. Maintenance most often involves updates to the DB cluster's underlying operating system \(OS\) or database engine version\. Updates to the operating system most often occur for security issues and should be done as soon as possible\. 
+Periodically, Amazon RDS performs maintenance on Amazon RDS resources\. Maintenance most often involves updates to the DB cluster's underlying hardware, underlying operating system \(OS\), or database engine version\. Updates to the operating system most often occur for security issues and should be done as soon as possible\. 
 
 Some maintenance items require that Amazon RDS take your DB cluster offline for a short time\. Maintenance items that require a resource to be offline include required operating system or database patching\. Required patching is automatically scheduled only for patches that are related to security and instance reliability\. Such patching occurs infrequently \(typically once every few months\) and seldom requires more than a fraction of your maintenance window\. 
 
-You can view whether a maintenance update is available for your DB cluster by using the RDS console, the AWS CLI, or the Amazon RDS API\. If an update is available, it is indicated by the word **available** or **required** in the **Maintenance** column for the DB cluster on the Amazon RDS console, as shown following\. 
+You can view whether a maintenance update is available for your DB cluster by using the RDS console, the AWS CLI, or the Amazon RDS API\. If an update is available, it is indicated in the **Maintenance** column for the DB cluster on the Amazon RDS console, as shown following\. 
 
 ![\[Offline patch available\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/offlinepatchavailable.png)
 
+If no maintenance update is available for a DB cluster, the column value is **none** for it\.
+
+If a maintenance update is available for a DB cluster, the following column values are possible:
++ **required** – The maintenance action will be applied to the resource and can't be deferred\.
++ **available** – The maintenance action is available, but it will not be applied to the resource automatically\. You can apply it manually\.
++ **next window** – The maintenance action will be applied to the resource during the next maintenance window\.
++ **In progress** – The maintenance action is in the process of being applied to the resource\.
+
 If an update is available, you can take one of the actions: 
-+ Defer the maintenance items\.
++ If the maintenance value is **next window**, defer the maintenance items by choosing **defer upgrade** from **Actions**\.
 + Apply the maintenance items immediately\.
 + Schedule the maintenance items to start during your next maintenance window\.
 + Take no action\.
 
 **Note**  
 Certain OS updates are marked as **required**\. If you defer a required update, you get a notice from Amazon RDS indicating when the update will be performed\. Other updates are marked as **available**, and these you can defer indefinitely\.
+
+To take an action, choose the DB cluster to show its details, then choose **Maintenance & backups**\. The pending maintenance items appear\.
+
+![\[Pending maintenance items\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/offlinepatchavailabledetails.png)
 
 The maintenance window determines when pending operations start, but doesn't limit the total execution time of these operations\. Maintenance operations aren't guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS Maintenance Window](#Concepts.DBMaintenance)\. 
 
@@ -25,7 +37,7 @@ For information about updates to Amazon Aurora engines and instructions for upgr
 
 With Amazon RDS, you can choose when to apply maintenance operations\. You can decide when Amazon RDS applies updates by using the RDS console, AWS Command Line Interface \(AWS CLI\), or RDS API\. 
 
-### AWS Management Console<a name="USER_UpgradeDBInstance.OSUpgrades.Console"></a>
+### Console<a name="USER_UpgradeDBInstance.OSUpgrades.Console"></a>
 
 **To manage an update for a DB cluster**
 
@@ -41,7 +53,7 @@ With Amazon RDS, you can choose when to apply maintenance operations\. You can d
 **Note**  
 If you choose **Upgrade at next window** and later want to delay the update, you can choose **Defer upgrade**\.
 
-### CLI<a name="USER_UpgradeDBInstance.OSUpgrades.CLI"></a>
+### AWS CLI<a name="USER_UpgradeDBInstance.OSUpgrades.CLI"></a>
 
 To apply a pending update to a DB cluster, use the [apply\-pending\-maintenance\-action](https://docs.aws.amazon.com/cli/latest/reference/rds/apply-pending-maintenance-action.html) AWS CLI command\.
 
@@ -101,7 +113,7 @@ aws rds describe-pending-maintenance-actions ^
 	--filters Name=db-cluster-id,Values=sample-cluster1,sample-cluster2
 ```
 
-### API<a name="USER_UpgradeDBInstance.OSUpgrades.API"></a>
+### RDS API<a name="USER_UpgradeDBInstance.OSUpgrades.API"></a>
 
 To apply an update to a DB cluster, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html) action\.
 
@@ -125,7 +137,7 @@ Following, you can find the time blocks for each region from which default maint
 
 The Aurora DB cluster maintenance window should fall at the time of lowest usage and thus might need modification from time to time\. Your DB cluster is unavailable during this time only if the updates that are being applied require an outage\. The outage is for the minimum amount of time required to make the necessary updates\. 
 
-### AWS Management Console<a name="AdjustingTheMaintenanceWindow.Aurora.CON"></a>
+### Console<a name="AdjustingTheMaintenanceWindow.Aurora.CON"></a>
 
 **To adjust the preferred DB cluster maintenance window**
 
@@ -149,7 +161,7 @@ The Aurora DB cluster maintenance window should fall at the time of lowest usage
 
    Alternatively, choose **Back** to edit your changes, or choose **Cancel** to cancel your changes\. 
 
-### CLI<a name="AdjustingTheMaintenanceWindow.Aurora.CLI"></a>
+### AWS CLI<a name="AdjustingTheMaintenanceWindow.Aurora.CLI"></a>
 
 To adjust the preferred DB cluster maintenance window, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) command with the following parameters:
 + `--db-cluster-identifier`
@@ -172,7 +184,7 @@ aws rds modify-db-cluster ^
 --preferred-maintenance-window Tue:04:00-Tue:04:30
 ```
 
-### API<a name="AdjustingTheMaintenanceWindow.Aurora.API"></a>
+### RDS API<a name="AdjustingTheMaintenanceWindow.Aurora.API"></a>
 
 To adjust the preferred DB cluster maintenance window, use the Amazon RDS [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) API action with the following parameters:
 + `DBClusterIdentifier = my-cluster`

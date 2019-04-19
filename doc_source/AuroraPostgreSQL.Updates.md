@@ -21,4 +21,4 @@ SHOW SERVER_VERSION;
 
 ## Upgrading the Amazon Aurora PostgreSQL Engine Version<a name="AuroraPostgreSQL.Updates.Patching"></a>
 
-For more information about upgrading the Amazon Aurora PostgreSQL engine version, see [Upgrading a DB Cluster Engine Version](USER_UpgradeDBInstance.Upgrading.md)\.
+For more information about upgrading the Amazon Aurora PostgreSQL engine version, see [Upgrading an Aurora PostgreSQL DB Cluster Engine Version](USER_UpgradeDBInstance.Upgrading.md)\.

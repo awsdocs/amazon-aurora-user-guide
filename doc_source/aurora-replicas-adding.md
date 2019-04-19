@@ -6,7 +6,7 @@ We recommend that you distribute the primary instance and Aurora Replicas in you
 
 You can add Aurora Replicas to a DB cluster using the AWS Management Console, the AWS CLI, or the RDS API\.
 
-To remove an Aurora Replica from a DB cluster, delete the Aurora Replica DB instance by following the instructions in [Deleting a DB Instance in a DB Cluster](USER_DeleteInstance.md)\.
+To remove an Aurora Replica from a DB cluster, delete the Aurora Replica DB instance by following the instructions in [Deleting a DB Instance in an Aurora DB Cluster](USER_DeleteInstance.md)\.
 
  For more information about Aurora Replicas, see [Aurora Replicas](Aurora.Replication.md#Aurora.Replication.Replicas)\. 
 

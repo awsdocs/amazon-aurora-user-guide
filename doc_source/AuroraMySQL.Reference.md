@@ -3,21 +3,22 @@
 This reference includes information about Aurora MySQL parameters and status variables\.
 
 **Topics**
-+ [Amazon Aurora MySQL Parameters](#AuroraMySQL.Reference.ParameterGroups)
++ [Aurora MySQL Parameters](#AuroraMySQL.Reference.ParameterGroups)
 + [Inapplicable MySQL Parameters and Status Variables](#AuroraMySQL.Reference.Parameters.Inapplicable)
 + [Aurora MySQL Events](#AuroraMySQL.Reference.Waitevents)
++ [Aurora MySQL Stored Procedures](#AuroraMySQL.Reference.StoredProcs)
 
-## Amazon Aurora MySQL Parameters<a name="AuroraMySQL.Reference.ParameterGroups"></a>
+## Aurora MySQL Parameters<a name="AuroraMySQL.Reference.ParameterGroups"></a>
 
-You manage your Amazon Aurora MySQL DB cluster in the same way that you manage other Amazon RDS DB instances, by using parameters in a DB parameter group\. Amazon Aurora differs from other DB engines in that you have a DB cluster that contains multiple DB instances\. As a result, some of the parameters that you use to manage your Aurora MySQL DB cluster apply to the entire cluster, while other parameters apply only to a particular DB instance in the DB cluster\.
+You manage your Amazon Aurora MySQL DB cluster in the same way that you manage other Amazon RDS DB instances, by using parameters in a DB parameter group\. Amazon Aurora differs from other DB engines in that you have a DB cluster that contains multiple DB instances\. As a result, some of the parameters that you use to manage your Aurora MySQL DB cluster apply to the entire cluster\. Other parameters apply only to a particular DB instance in the DB cluster\.
 
-Cluster\-level parameters are managed in DB cluster parameter groups\. Instance\-level parameters are managed in DB parameter groups\. Although each DB instance in an Aurora MySQL DB cluster is compatible with the MySQL database engine, some of the MySQL database engine parameters must be applied at the cluster level, and are managed using DB cluster parameter groups\. Cluster\-level parameters are not found in the DB parameter group for an instance in an Aurora DB cluster and are listed later in this topic\.
+Cluster\-level parameters are managed in DB cluster parameter groups\. Instance\-level parameters are managed in DB parameter groups\. Each DB instance in an Aurora MySQL DB cluster is compatible with the MySQL database engine\. However, you apply some of the MySQL database engine parameters at the cluster level\. You manage these parameters using DB cluster parameter groups\. You can't find cluster\-level parameters in the DB parameter group for an instance in an Aurora DB cluster\. A list of cluster\-level parameters appears later in this topic\.
 
-You can manage both cluster\-level and instance\-level parameters using the AWS Management Console, the AWS CLI, or the Amazon RDS API\. There are separate commands for managing cluster\-level parameters and instance\-level parameters\. For example, you can use the [modify\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) AWS CLI command to manage cluster\-level parameters in a DB cluster parameter group and use the [modify\-db\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) AWS CLI command to manage instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
+You can manage both cluster\-level and instance\-level parameters using the AWS Management Console, the AWS CLI, or the Amazon RDS API\. There are separate commands for managing cluster\-level parameters and instance\-level parameters\. For example, you can use the [modify\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) CLI command to manage cluster\-level parameters in a DB cluster parameter group\. You can use the [modify\-db\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) CLI command to manage instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
 
-You can view both cluster\-level and instance\-level parameters in the AWS Management Console, or by using the AWS CLI or Amazon RDS API\. For example, you can use the [describe\-db\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) AWS CLI command to view cluster\-level parameters in a DB cluster parameter group and use the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) AWS CLI command to view instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
+You can view both cluster\-level and instance\-level parameters in the console, or by using the CLI or RDS API\. For example, you can use the [describe\-db\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) AWS CLI command to view cluster\-level parameters in a DB cluster parameter group\. You can use the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) CLI command to view instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
 
-For more information on DB parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\. For rules and restrictions related to Aurora Serverless clusters, see [Aurora Serverless and Parameter Groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.
+For more information on DB parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\. For rules and restrictions for Aurora Serverless clusters, see [Aurora Serverless and Parameter Groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.
 
 **Topics**
 + [Cluster\-Level Parameters](#AuroraMySQL.Reference.Parameters.Cluster)
@@ -127,7 +128,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `delayed_queue_size` | Yes |  | 
 | `div_precision_increment` | Yes |  | 
 | `end_markers_in_json` | Yes |  | 
-| `enforce_gtid_consistency` | No |  | 
+| `enforce_gtid_consistency` | Sometimes | Modifiable in Aurora MySQL version 2\.04 and later\. | 
 | `eq_range_index_dive_limit` | Yes |  | 
 | `event_scheduler` | Yes |  | 
 | `explicit_defaults_for_timestamp` | Yes |  | 
@@ -141,7 +142,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `general_log` | Yes |  | 
 | `general_log_file` | No |  | 
 | `group_concat_max_len` | Yes |  | 
-| `gtid-mode` | No |  | 
+| `gtid-mode` | Sometimes | Modifiable in Aurora MySQL version 2\.04 and later\. | 
 | `host_cache_size` | Yes |  | 
 | `init_connect` | Yes |  | 
 | `innodb_adaptive_hash_index` | Yes |  | 
@@ -370,7 +371,7 @@ In this wait event, a thread is in the process of returning the result set to th
 In this wait event, there are threads writing to CSV tables\. Check your CSV table usage\. A typical cause of this event is setting log\_output on a table\.
 
 **io/file/innodb/innodb\_data\_file**  
-In this wait event, there are threads waiting on I/O operations to storage\. This event is more prevalent in I/O intensive workloads\. SQL statements showing a comparatively large proportion of this wait event might be running disk intensive queries or might be requesting data that cannot be satisfied from the InnoDB buffer pool\. You should check your query plans and cache hit ratios\. For more information, see [ Buffering and Caching](https://dev.mysql.com/doc/refman/5.6/en/buffering-caching.html) in the MySQL documentation\.
+In this wait event, there are threads waiting on I/O operations to storage\. This event is more prevalent in I/O intensive workloads\. SQL statements showing a comparatively large proportion of this wait event might be running disk intensive queries\. Or they might be requesting data that can't be satisfied from the InnoDB buffer pool\. To find out, check your query plans and cache hit ratios\. For more information, see [ Buffering and Caching](https://dev.mysql.com/doc/refman/5.6/en/buffering-caching.html) in the MySQL documentation\.
 
 **io/file/sql/binlog**  
 In this wait event, there is a thread waiting on a binlog file that is being written to disk\.
@@ -422,3 +423,138 @@ In this event, there are threads that are waiting on an rwlock held on the InnoD
 
 **synch/rwlock/innodb/dict\_operation\_lock**  
 In this wait event, there are threads holding locks on InnoDB data dictionary operations\.
+
+## Aurora MySQL Stored Procedures<a name="AuroraMySQL.Reference.StoredProcs"></a>
+
+You can call the following stored procedures while connected to the primary instance in an Aurora MySQL cluster\. These procedures control how transactions are replicated from an external database into Aurora MySQL, or from Aurora MySQL to an external database\. To learn how to use replication based on global transaction identifiers \(GTIDs\) with Aurora MySQL, see [Using GTID\-Based Replication for Aurora MySQL](mysql-replication-gtid.md)\. 
+
+**Topics**
++ [mysql\.rds\_set\_master\_auto\_position](#mysql_rds_set_master_auto_position)
++ [mysql\.rds\_set\_external\_master\_with\_auto\_position](#mysql_rds_set_external_master_with_auto_position)
++ [mysql\.rds\_skip\_transaction\_with\_gtid](#mysql_rds_skip_transaction_with_gtid)
+
+### mysql\.rds\_set\_master\_auto\_position<a name="mysql_rds_set_master_auto_position"></a>
+
+Sets the replication mode to be based on either binary log file positions or on global transaction identifiers \(GTIDs\)\.
+
+#### Syntax<a name="mysql_rds_set_master_auto_position-syntax"></a>
+
+```
+CALL mysql.rds_set_master_auto_position (auto_position_mode);
+```
+
+#### Parameters<a name="mysql_rds_set_master_auto_position-parameters"></a>
+
+ *auto\_position\_mode*   
+A value that indicates whether to use log file position replication or GTID\-based replication:  
++ `0` – Use the replication method based on binary log file position\. The default is `0`\.
++ `1` – Use the GTID\-based replication method\.
+
+#### Usage Notes<a name="mysql_rds_set_master_auto_position-usage-notes"></a>
+
+ For an Aurora MySQL DB cluster, you call this stored procedure while connected to the primary instance\. 
+
+The master user must run the `mysql.rds_set_master_auto_position` procedure\.
+
+For Aurora, this procedure is supported for Aurora MySQL version 2\.04 and later MySQL 5\.7–compatible versions\. GTID\-based replication isn't supported for Aurora MySQL 1\.1 or 1\.0\.
+
+### mysql\.rds\_set\_external\_master\_with\_auto\_position<a name="mysql_rds_set_external_master_with_auto_position"></a>
+
+Configures an Aurora MySQL primary instance to accept incoming replication from an external MySQL instance\. This procedure also configures replication based on global transaction identifiers \(GTIDs\)\.
+
+ This procedure is available for both Amazon RDS MySQL and Aurora MySQL\. It works differently depending on the context\. When used with Aurora MySQL, this procedure doesn't configure delayed replication\. This limitation is because Amazon RDS MySQL supports delayed replication but Aurora MySQL doesn't\. 
+
+#### Syntax<a name="mysql_rds_set_external_master_with_auto_position-syntax"></a>
+
+```
+CALL mysql.rds_set_external_master_with_auto_position (
+  host_name
+  , host_port
+  , replication_user_name
+  , replication_user_password
+  , ssl_encryption
+);
+```
+
+#### Parameters<a name="mysql_rds_set_external_master_with_auto_position-parameters"></a>
+
+ *host\_name*   
+The host name or IP address of the MySQL instance running external to Aurora to become the replication master\.
+
+ *host\_port*   
+The port used by the MySQL instance running external to Aurora to be configured as the replication master\. If your network configuration includes Secure Shell \(SSH\) port replication that converts the port number, specify the port number that is exposed by SSH\.
+
+ *replication\_user\_name*   
+The ID of a user with `REPLICATION CLIENT` and `REPLICATION SLAVE` permissions on the MySQL instance running external to Aurora\. We recommend that you provide an account that is used solely for replication with the external instance\.
+
+ *replication\_user\_password*   
+The password of the user ID specified in `replication_user_name`\.
+
+ *ssl\_encryption*   
+This option is not currently implemented\.  The default is 0\.
+
+#### Usage Notes<a name="mysql_rds_set_external_master_with_auto_position-usage-notes"></a>
+
+ For an Aurora MySQL DB cluster, you call this stored procedure while connected to the primary instance\. 
+
+The master user must run the `mysql.rds_set_external_master_with_auto_position` procedure\. The master user runs this procedure on the primary instance of an Aurora MySQL DB cluster that acts as a replication target\. This can be the replication target of an external MySQL DB instance or an Aurora MySQL DB cluster\.
+
+For Aurora, this procedure is supported for Aurora MySQL version 2\.04 and later MySQL 5\.7\-compatible versions\. GTID\-based replication isn't supported for Aurora MySQL 1\.1 or 1\.0\.
+
+Before you run `mysql.rds_set_external_master_with_auto_position`, configure the external MySQL DB instance to be a replication master\. To connect to the external MySQL instance, specify values for `replication_user_name` and `replication_user_password`\. These values must indicate a replication user that has `REPLICATION CLIENT` and `REPLICATION SLAVE` permissions on the external MySQL instance\. 
+
+**To configure an external MySQL instance as a replication master**
+
+1. Using the MySQL client of your choice, connect to the external MySQL instance and create a user account to be used for replication\. The following is an example\.
+
+   ```
+   CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY 'SomePassW0rd'
+   ```
+
+1. On the external MySQL instance, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. The following example grants `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the `'repl_user'` user for your domain\.
+
+   ```
+   GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com'
+   IDENTIFIED BY 'SomePassW0rd'
+   ```
+
+When you call `mysql.rds_set_external_master_with_auto_position`, Amazon RDS records certain information\. This information is the time, the user, and an action of `"set master"` in the `mysql.rds_history` and `mysql.rds_replication_status` tables\.
+
+To skip a specific GTID\-based transaction that is known to cause a problem, you can use the [mysql\.rds\_skip\_transaction\_with\_gtid](#mysql_rds_skip_transaction_with_gtid) stored procedure\. For more information about working with GTID\-based replication, see [Using GTID\-Based Replication for Aurora MySQL](mysql-replication-gtid.md)\.
+
+#### Examples<a name="mysql_rds_set_external_master_with_auto_position-examples"></a>
+
+When run on an Aurora primary instance, the following example configures the Aurora cluster to act as a Read Replica of an instance of MySQL running external to Aurora\.
+
+```
+call mysql.rds_set_external_master_with_auto_position(
+  'Externaldb.some.com',
+  3306,
+  'repl_user'@'mydomain.com',
+  'SomePassW0rd');
+```
+
+### mysql\.rds\_skip\_transaction\_with\_gtid<a name="mysql_rds_skip_transaction_with_gtid"></a>
+
+Skips replication of a transaction with the specified global transaction identifier \(GTID\) on an Aurora primary instance\.
+
+You can use this procedure for disaster recovery when a specific GTID transaction is known to cause a problem\. Use this stored procedure to skip the problematic transaction\. Examples of problematic transactions include transactions that disable replication, delete important data, or cause the DB instance to become unavailable\.
+
+#### Syntax<a name="mysql_rds_skip_transaction_with_gtid-syntax"></a>
+
+```
+CALL mysql.rds_skip_transaction_with_gtid (gtid_to_skip);
+```
+
+#### Parameters<a name="mysql_rds_skip_transaction_with_gtid-parameters"></a>
+
+ *gtid\_to\_skip*   
+The GTID of the replication transaction to skip\.
+
+#### Usage Notes<a name="mysql_rds_skip_transaction_with_gtid-usage-notes"></a>
+
+ For an Aurora MySQL DB cluster, you call this stored procedure while connected to the primary instance\. 
+
+The master user must run the `mysql.rds_skip_transaction_with_gtid` procedure\.
+
+For Aurora, this procedure is supported for Aurora MySQL version 2\.04 and later MySQL 5\.7\-compatible versions\. GTID\-based replication isn't supported for Aurora MySQL 1\.1 or 1\.0\.

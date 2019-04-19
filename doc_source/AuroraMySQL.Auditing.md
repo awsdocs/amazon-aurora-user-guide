@@ -30,7 +30,7 @@ You can log any combination of the following events:
 + QUERY – Logs all queries in plain text, including queries that fail due to syntax or permission errors\.
 + QUERY\_DCL – Similar to the QUERY event, but returns only data control language \(DCL\) queries \(GRANT, REVOKE, and so on\)\.
 + QUERY\_DDL – Similar to the QUERY event, but returns only data definition language \(DDL\) queries \(CREATE, ALTER, and so on\)\.
-+ QUERY\_DML – Similar to the QUERY event, but returns only data manipulation language \(DML\) queries \(INSERT, UPDATE, and so on\)\.
++ QUERY\_DML – Similar to the QUERY event, but returns only data manipulation language \(DML\) queries \(INSERT, UPDATE, and so on, and also SELECT\)\.
 + TABLE – Logs the tables that were affected by query execution\.
 
 ### server\_audit\_excl\_users<a name="AuroraMySQL.Auditing.Enable.server_audit_excl_users"></a>

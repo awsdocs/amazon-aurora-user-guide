@@ -6,7 +6,7 @@ If your database supports the InnoDB or MyISAM tablespaces, you have these optio
 
 ## Migrating Data from MySQL by Using an Amazon S3 Bucket<a name="AuroraMySQL.Migrating.ExtMySQL.S3"></a>
 
-You can copy the full and incremental backup files from your source MySQL version 5\.5 or 5\.6 database to an Amazon S3 bucket, and then restore an Amazon Aurora MySQL DB cluster from those files\.
+You can copy the full and incremental backup files from your source MySQL version 5\.5, 5\.6, or 5\.7 database to an Amazon S3 bucket, and then restore an Amazon Aurora MySQL DB cluster from those files\.
 
 This option can be considerably faster than migrating data using `mysqldump`, because using `mysqldump` replays all of the commands to recreate the schema and data from your source database in your new Aurora MySQL DB cluster\. By copying your source MySQL data files, Aurora MySQL can immediately use those files as the data for an Aurora MySQL DB cluster\.
 
@@ -40,7 +40,7 @@ Before you can copy your data to an Amazon S3 bucket and restore a DB cluster fr
 Amazon Aurora can restore a DB cluster from files that were created using Percona XtraBackup\. You can install Percona XtraBackup from [Download Percona XtraBackup](https://www.percona.com/downloads/XtraBackup/LATEST/)\.
 
 **Note**  
-You must use Percona XtraBackup version 2\.3 or later\. Aurora MySQL is not compatible with earlier versions of Percona XtraBackup\.
+For MySQL 5\.7 migration, you must use Percona XtraBackup 2\.4\. For earlier MySQL versions, use Percona XtraBackup 2\.3 or 2\.4\.
 
 #### Required Permissions<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs.Permitting"></a>
 
@@ -193,25 +193,29 @@ You can restore your backup files from your Amazon S3 bucket to create a new Ama
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**, and then choose **Restore from S3**\.
+1. In the top right corner of the Amazon RDS console, choose the AWS Region in which to create your DB cluster\. Choose the same AWS Region as the Amazon S3 bucket that contains your database backup\. 
 
-1. On the **Select engine** page, choose Amazon Aurora, choose the MySQL\-compatible edition, and then choose **Next**\.
+1. In the navigation pane, choose **Databases**, and then choose **Restore from S3**\.
+
+1. On the **Select engine** page, choose **Amazon Aurora,** choose the MySQL\-compatible edition, and then choose **Next**\.
+
+   The **Specify source backup details** page appears\.   
+![\[Amazon Aurora migration from an Amazon S3 bucket\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraMigrateS3_01.png)
 
 1. In **Specify source backup details**, specify the following\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
 
-   A typical **Specify source backup details** page for AWS\-KMS encrypted backup files looks like the following\.  
-![\[Amazon Aurora migration from an Amazon S3 bucket\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraMigrateS3_01.png)
-
 1. Choose **Next**\.
 
-1. On the **Specify DB details** page, specify your DB cluster information\. The following table shows settings for a DB instance\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
+1. On the **Specify DB details** page, specify your DB cluster information\.
 
    A typical **Specify DB details** page looks like the following\.   
 ![\[Amazon Aurora Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunchMySQL56.png)
 
-1. Confirm your master password, and then choose **Next**\.
+   The following table shows settings for a DB instance\.    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
+
+1. Choose **Next**\.
 
 1. On the **Configure advanced settings** page, you can customize additional settings for your Aurora MySQL DB cluster\. The following table shows the advanced settings for a DB cluster\.     
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
@@ -224,7 +228,7 @@ To view the newly created cluster, choose the **Databases** view in the Amazon R
 
 ![\[Amazon Aurora DB Instances List\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch04.png)
 
-Note the port and the endpoint of the DB cluster\. Use the endpoint and port of the DB cluster in your JDBC and ODBC connection strings for any application that performs write or read operations\.
+Note the port and the writer endpoint of the DB cluster\. Use the writer endpoint and port of the DB cluster in your JDBC and ODBC connection strings for any application that performs write or read operations\.
 
 ### Synchronizing the Amazon Aurora MySQL DB Cluster with the MySQL Database Using Replication<a name="AuroraMySQL.Migrating.ExtMySQL.S3.RepSync"></a>
 

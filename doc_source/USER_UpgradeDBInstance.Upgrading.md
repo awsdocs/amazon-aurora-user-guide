@@ -1,12 +1,10 @@
-# Upgrading a DB Cluster Engine Version<a name="USER_UpgradeDBInstance.Upgrading"></a>
+# Upgrading an Aurora PostgreSQL DB Cluster Engine Version<a name="USER_UpgradeDBInstance.Upgrading"></a>
 
-Amazon RDS keeps your DB cluster up\-to\-date by providing newer versions of each supported database engine\. Newer versions can include bug fixes, security enhancements, and other improvements for the database engine\. When Amazon RDS supports a new version of a database engine, you can choose how and when to upgrade your database DB clusters\.
+Amazon Aurora provides newer versions of each supported database engine so you can keep your DB cluster up\-to\-date\. Newer versions can include bug fixes, security enhancements, and other improvements for the database engine\. When Amazon Aurora supports a new version of a database engine, you can choose how and when to upgrade your database DB clusters\.
 
-There are two kinds of upgrades: *major version upgrades* and *minor version upgrades*\. In general, a major engine version upgrade can introduce changes that are not compatible with existing applications\. In contrast, a minor version upgrade includes only changes that are backward\-compatible with existing applications\.
+There are two kinds of upgrades: major version upgrades and minor version upgrades\. In general, a *major engine version upgrade* can introduce changes that are not compatible with existing applications\. In contrast, a *minor version upgrade* includes only changes that are backward\-compatible with existing applications\.
 
-The version numbering sequence is specific for each database engine\. For example, Aurora PostgreSQL 9\.6 and 10\.4 are major engine versions and upgrading from any 9\.6 version to any 10\.4 version is a major version upgrade\. Aurora PostgreSQL version 9\.6\.6 and 9\.6\.9 are minor versions and upgrading from 9\.6\.6 to 9\.6\.9 is a minor version upgrade\. To determine the version of an Aurora DB cluster, follow the instructions in [Amazon Aurora Updates](Aurora.Updates.md)\.
-
-For major version upgrades, you can restore a snapshot of the DB cluster and specify a higher major engine version\. For minor version upgrades of an Aurora PostgreSQL DB cluster, you can manually modify the engine version, or you can choose to enable auto minor version upgrades\. 
+The version numbering sequence is specific for each database engine\. For example, Aurora PostgreSQL 10\.4 and 10\.5 are major engine versions and upgrading from any 10\.4 version to any 10\.5 version is a major version upgrade\. Aurora PostgreSQL version 9\.6\.8 and 9\.6\.9 are minor versions and upgrading from 9\.6\.8 to 9\.6\.9 is a minor version upgrade\. To determine the version of an Aurora DB cluster, follow the instructions in [Amazon Aurora Updates](Aurora.Updates.md)\.
 
 **Topics**
 + [Manually Upgrading the Engine Version](#USER_UpgradeDBInstance.Upgrading.Manual)
@@ -34,7 +32,7 @@ To perform a minor version upgrade of an Aurora PostgreSQL DB cluster, use the f
 
 1. To apply the changes immediately, choose **Apply immediately**\. Choosing this option can cause an outage in some cases\. For more information, see [Modifying an Amazon Aurora DB Cluster](Aurora.Modifying.md)\. 
 
-1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB Cluster** to save your changes\. 
+1. On the confirmation page, review your changes\. If they are correct, choose **Modify Cluster** to save your changes\. 
 
    Alternatively, choose **Back** to edit your changes, or choose **Cancel** to cancel your changes\. 
 
@@ -50,16 +48,16 @@ For Linux, OS X, or Unix:
 
 ```
 1. aws rds modify-db-cluster \
-2.     --db-cluster-identifier <mydbcluster> \
-3.     --engine-version <new_version> \
+2.     --db-cluster-identifier mydbcluster \
+3.     --engine-version new_version \
 4.     --no-apply-immediately
 ```
 For Windows:  
 
 ```
 1. aws rds modify-db-cluster ^
-2.     --db-cluster-identifier <mydbcluster> ^
-3.     --engine-version <new_version> ^
+2.     --db-cluster-identifier mydbcluster ^
+3.     --engine-version new_version ^
 4.     --no-apply-immediately
 ```
 
@@ -72,9 +70,9 @@ To upgrade the engine version of a DB cluster, use the [ ModifyDBCluster](https:
 
 ## Automatically Upgrading the Minor Engine Version<a name="USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades"></a>
 
-A *minor engine version* is an update to a DB engine version within a major engine version\. For example, a major engine version might be 5\.7 with the minor engine versions 5\.7\.4 and 5\.7\.5 within it\. 
+A *minor engine version* is an update to a DB engine version within a major engine version\. For example, a major engine version might be 5\.7 with the minor engine versions 5\.7\.22 and 5\.7\.23 within it\. 
 
-If you want Amazon RDS to upgrade the DB engine version of a database automatically, you can enable auto minor version upgrades for the database\. When a minor engine version is designated as the preferred minor engine version, each database that meets both of the following conditions is upgraded to the minor engine version automatically:
+If you want Amazon Aurora to upgrade the DB engine version of a database automatically, you can enable auto minor version upgrades for the database\. When a minor engine version is designated as the preferred minor engine version, each database that meets both of the following conditions is upgraded to the minor engine version automatically:
 + The database is running a minor version of the DB engine that is lower than the preferred minor engine version\.
 + The database has auto minor version upgrade enabled\.
 
@@ -82,7 +80,7 @@ You can control whether auto minor version upgrade is enabled for a DB instance 
 + [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)
 + [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)
 **Note**  
-Modify the primary DB instance to control whether auto minor version upgrade is enabled for the entire DB cluster\.
+Modify the writer DB instance to control whether auto minor version upgrade is enabled for the entire DB cluster\.
 + [Restoring a DB cluster from a snapshot](USER_RestoreFromSnapshot.md)
 **Note**  
 When you restore a DB cluster from a snapshot, you can control whether auto minor version upgrade is enabled for the DB cluster only when you use the console\.

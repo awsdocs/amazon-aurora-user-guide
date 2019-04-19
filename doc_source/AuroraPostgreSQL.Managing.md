@@ -10,17 +10,7 @@ The following sections discuss managing performance and scaling for an Amazon Au
 
 You can scale Aurora PostgreSQL DB instances in two ways, instance scaling and read scaling\. For more information about read scaling, see [Read Scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.ReadScaling)\.
 
-You can scale your Aurora PostgreSQL DB cluster by modifying the DB instance class for each DB instance in the DB cluster\. Aurora PostgreSQL supports several DB instance classes optimized for Aurora\. The following table describes the specifications of the DB instance classes supported by Aurora PostgreSQL\.
-
-
-| Instance Class | vCPU | Memory \(GiB\) | 
-| --- | --- | --- | 
-| db\.r4\.large | 2 | 15\.25 | 
-| db\.r4\.xlarge | 4 | 30\.5 | 
-| db\.r4\.2xlarge | 8 | 61 | 
-| db\.r4\.4xlarge | 16 | 122 | 
-| db\.r4\.8xlarge | 32 | 244 | 
-| db\.r4\.16xlarge | 64 | 488 | 
+You can scale your Aurora PostgreSQL DB cluster by modifying the DB instance class for each DB instance in the DB cluster\. Aurora PostgreSQL supports several DB instance classes optimized for Aurora\. For detailed specifications of the DB instance classes supported by Aurora PostgreSQL, see [Hardware Specifications for All Available DB Instance Classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SummaryAurora)\.
 
 ## Maximum Connections to an Aurora PostgreSQL DB Instance<a name="AuroraPostgreSQL.Managing.MaxConnections"></a>
 
@@ -45,3 +35,9 @@ The following table lists the resulting default value of `max_connections` for e
 | db\.r4\.4xlarge | 5000 | 
 | db\.r4\.8xlarge | 5000 | 
 | db\.r4\.16xlarge | 5000 | 
+| db\.r5\.large | 1600 | 
+| db\.r5\.xlarge | 3300 | 
+| db\.r5\.2xlarge | 5000 | 
+| db\.r5\.4xlarge | 5000 | 
+| db\.r5\.12xlarge | 5000 | 
+| db\.r5\.24xlarge | 5000 | 

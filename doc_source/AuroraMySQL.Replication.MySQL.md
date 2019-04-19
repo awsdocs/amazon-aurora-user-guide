@@ -6,14 +6,16 @@ You can also replicate with an Amazon RDS MySQL DB instance or Aurora MySQL DB c
 
 If you want to configure replication between an Aurora MySQL DB cluster and an Aurora MySQL DB cluster in another region, you can create an Aurora MySQL DB cluster as a Read Replica in a different AWS Region than the source DB cluster\. For more information, see [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\.
 
+ With Aurora MySQL 2\.04 and higher, you can replicate between Aurora MySQL and an external source or target that uses global transaction identifiers \(GTIDs\) for replication\. Ensure that the GTID\-related parameters in the Aurora MySQL DB cluster have settings that are compatible with the GTID status of the external database\. To learn how to do this, see [Using GTID\-Based Replication for Aurora MySQL](mysql-replication-gtid.md)\. 
+
 **Warning**  
-When you replicate between Aurora MySQL and MySQL, you must ensure that you use only InnoDB tables\. If you have MyISAM tables that you want to replicate, then you can convert them to InnoDB before setting up replication with the following command\.  
+When you replicate between Aurora MySQL and MySQL, ensure that you use only InnoDB tables\. If you have MyISAM tables that you want to replicate, you can convert them to InnoDB before setting up replication with the following command\.  
 
 ```
 alter table <schema>.<table_name> engine=innodb, algorithm=copy;
 ```
 
-Setting up MySQL replication with Aurora MySQL involves the following steps, which are discussed in detail following in this topic\.
+Setting up MySQL replication with Aurora MySQL involves the following steps, which are discussed in detail following in this topic:
 
 [1\. Enable Binary Logging on the Replication Master](#AuroraMySQL.Replication.MySQL.EnableBinlog)
 

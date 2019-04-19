@@ -29,8 +29,6 @@ The following terminology is used to describe hardware specifications for DB ins
 + **ECU** – The relative measure of the integer processing power of an Amazon EC2 instance\. To make it easy for developers to compare CPU capacity between different instance classes, we have defined an Amazon EC2 Compute Unit\. The amount of CPU that is allocated to a particular instance is expressed in terms of these EC2 Compute Units\. One ECU currently provides CPU capacity equivalent to a 1\.0–1\.2 GHz 2007 Opteron or 2007 Xeon processor\. 
 + **Memory \(GiB\)** – The RAM, in gibibytes, allocated to the DB instance\. There is often a consistent ratio between memory and vCPU\. As an example, take the db\.r4 instance class, which has a memory to vCPU ratio similar to the db\.r5 instance class\. However, for most use cases the db\.r5 instance class provides better, more consistent performance than the db\.r4 instance class\. 
 + **Max\. Bandwidth \(Mbps\)** – The maximum bandwidth in megabits per second\. Divide by 8 to get the expected throughput in megabytes per second\. 
-**Important**  
-For General Purpose \(gp2\) storage, the maximum throughput is 1,280 Mbps \(160 MB/s\)\. 
 + **Network Performance** – The network speed relative to other DB instance classes\. 
 
 ## Hardware Specifications for All Available DB Instance Classes for Aurora<a name="Concepts.DBInstanceClass.SummaryAurora"></a>
@@ -38,8 +36,8 @@ For General Purpose \(gp2\) storage, the maximum throughput is 1,280 Mbps \(160 
 In the following table, you can find details about the Amazon RDS DB instance classes available for Amazon Aurora\. For a more detailed explanation of the table column terminology, see [Terminology for DB Instance Class Hardware Specifications](#Concepts.DBInstanceClass.Terminology)\. 
 
 The following are DB engine considerations for DB instance classes:
-+ **Aurora Support for db\.r5** – Aurora MySQL supports the db\.r5 instance classes for all Aurora MySQL versions except 2\.03\.4\. The maximum available instance size is db\.r5\.12xlarge\. These instance classes are available for Aurora MySQL in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
-+ **Aurora Support for db\.t3** – Aurora MySQL supports the db\.t3 instance classes for all Aurora MySQL versions except 2\.03\.4\. These instance classes are available for Aurora MySQL in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
++ **Aurora Support for db\.r5** – All Aurora MySQL versions support the db\.r5 instance classes except the db\.r5\.24xlarge instance class\. For Aurora PostgreSQL, only versions compatible with PostgreSQL 10\.6 or later support the db\.r5 instance classes\. These instance classes are available in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
++ **Aurora Support for db\.t3** – Aurora MySQL supports the db\.t3 instance classes for Aurora MySQL 1\.15 and higher, and all Aurora MySQL 2\.\* versions\. These instance classes are available for Aurora MySQL in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
 
 
 ****  
@@ -47,12 +45,12 @@ The following are DB engine considerations for DB instance classes:
 | Instance Class | vCPU | ECU | Memory \(GiB\) | Max\. Bandwidth \(Mbps\) | Network Performance | Aurora MySQL | Aurora PostgreSQL | 
 | --- | --- | --- | --- | --- | --- | --- | --- | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
-| db\.r5\.24xlarge | 96 | 347 | 768 | 14,000 | 25 Gbps | No | No | 
-| db\.r5\.12xlarge | 48 | 173 | 384 | 7,000 | 10 Gbps | Yes | No | 
-| db\.r5\.4xlarge | 16 | 71 | 128 | 3,500 | Up to 10 Gbps | Yes | No | 
-| db\.r5\.2xlarge | 8 | 38 | 64 | Up to 3,500 | Up to 10 Gbps | Yes | No | 
-| db\.r5\.xlarge | 4 | 19 | 32 | Up to 3,500 | Up to 10 Gbps | Yes | No | 
-| db\.r5\.large | 2 | 10 | 16 | Up to 3,500 | Up to 10 Gbps | Yes | No | 
+| db\.r5\.24xlarge | 96 | 347 | 768 | 14,000 | 25 Gbps | No | Yes | 
+| db\.r5\.12xlarge | 48 | 173 | 384 | 7,000 | 10 Gbps | Yes | Yes | 
+| db\.r5\.4xlarge | 16 | 71 | 128 | 3,500 | Up to 10 Gbps | Yes | Yes | 
+| db\.r5\.2xlarge | 8 | 38 | 64 | Up to 3,500 | Up to 10 Gbps | Yes | Yes | 
+| db\.r5\.xlarge | 4 | 19 | 32 | Up to 3,500 | Up to 10 Gbps | Yes | Yes | 
+| db\.r5\.large | 2 | 10 | 16 | Up to 3,500 | Up to 10 Gbps | Yes | Yes | 
 | db\.r4 – Current Generation Memory Optimized Instance Classes | 
 | db\.r4\.16xlarge | 64 | 195 | 488 | 14,000 | 25 Gbps | 1\.14\.4 and later | Yes | 
 | db\.r4\.8xlarge | 32 | 99 | 244 | 7,000 | 10 Gbps | 1\.14\.4 and later | Yes | 

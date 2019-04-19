@@ -76,6 +76,7 @@ The following limitations apply to Aurora Serverless:
   + [Cross\-region read replicas](AuroraMySQL.Replication.CrossRegion.md)
   + [Restoring a snapshot from a MySQL DB instance](AuroraMySQL.Migrating.RDSMySQL.md)
   + [Migrating backup files from Amazon S3](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)
+  + [Amazon RDS Performance Insights](USER_PerfInsights.md)
 
 **Note**  
 You can access an Aurora Serverless DB cluster from AWS Lambda\. For more information about working with AWS Lambda, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](https://docs.aws.amazon.com/lambda/latest/dg/vpc.html) in the *AWS Lambda Developer Guide*\.

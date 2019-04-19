@@ -54,6 +54,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 | rds\.extensions | No | 
 |  `rds.force_autovacuum_logging_level`  |  Yes  | 
 |  `rds.force_ssl`  |  Yes  | 
+| rds\.logical\_replication | Yes | 
 | rds\.restrict\_password\_commands | Yes | 
 |  `server_encoding`  |  No  | 
 |  `ssl`  |  Yes  | 

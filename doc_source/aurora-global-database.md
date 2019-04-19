@@ -60,6 +60,7 @@
   +  Parallel query\. See [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md) for information about parallel query\. 
   +  Aurora Serverless\. See [Using Amazon Aurora Serverless](aurora-serverless.md) for information about Aurora Serverless\. 
   +  Performance Insights\. See [Using Amazon RDS Performance Insights](USER_PerfInsights.md) for information about Performance Insights\. 
+  +  Stopping and starting the DB clusters within the global database\. See [Stopping and Starting an Amazon Aurora DB Cluster](aurora-cluster-stop-start.md) for information about stopping and starting Aurora clusters\. 
 
 ## Creating an Aurora Global Database<a name="aurora-global-database-creating"></a>
 
@@ -443,7 +444,7 @@ aws rds --region primary_region ^
 
 **To delete an Aurora global database using the AWS Management Console**
 
- To delete a cluster that is part of an Aurora global database with the AWS Management Console, you remove or delete any secondary cluster associated with the global database, remove the primary cluster, and then delete the global database itself\. Because a global database typically holds business\-critical data, you can't delete the global database and the associated clusters in a single step\. See [Removing a Cluster from an Aurora Global Database](#aurora-global-database-detaching) for instructions on removing clusters from a global database\. See [Deleting a DB Instance in a DB Cluster](USER_DeleteInstance.md) for the procedure to delete clusters once they are removed\. Deleting the primary instance from an Aurora cluster deletes the cluster itself\. 
+ To delete a cluster that is part of an Aurora global database with the AWS Management Console, you remove or delete any secondary cluster associated with the global database, remove the primary cluster, and then delete the global database itself\. Because a global database typically holds business\-critical data, you can't delete the global database and the associated clusters in a single step\. See [Removing a Cluster from an Aurora Global Database](#aurora-global-database-detaching) for instructions on removing clusters from a global database\. See [Deleting a DB Instance in an Aurora DB Cluster](USER_DeleteInstance.md) for the procedure to delete clusters once they are removed\. Deleting the primary instance from an Aurora cluster deletes the cluster itself\. 
 
 1.  Confirm that all other clusters are removed from the Aurora global database\. 
 

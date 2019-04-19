@@ -64,9 +64,10 @@
   + EU \(Ireland\)
   + Asia Pacific \(Tokyo\)
 +  Using parallel query requires creating a new cluster, or restoring from an existing Aurora MySQL cluster snapshot, as described following\. 
-+  The Performance Insights feature is currently not available for clusters enabled for parallel query\. 
-+  The backtrack feature is currently not available for clusters enabled for parallel query\. 
-+  Currently, partitioned tables aren't supported for parallel query\. 
++  The Performance Insights feature is currently not available for clusters that are enabled for parallel query\. 
++  The backtrack feature is currently not available for clusters that are enabled for parallel query\. 
++  You can't stop and start DB clusters that are enabled for parallel query\.  
++  Currently, partitioned tables aren't supported for parallel query\. You can use partitioned tables in parallel query clusters\. Queries against those tables use the non\-parallel query execution path\. 
 **Note**  
  A join, union, or other multipart query can partially use parallel query, even if some query blocks refer to partitioned tables\. The query blocks that refer only to nonpartitioned tables can use the parallel query optimization\. 
 +  To work with parallel query, currently a table must use the `COMPACT` row format, which requires the Antelope file format of the InnoDB storage engine\. 

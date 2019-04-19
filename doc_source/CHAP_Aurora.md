@@ -13,7 +13,7 @@
 + [Backing Up and Restoring an Amazon Aurora DB Cluster](BackupRestoreAurora.md)
 + [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)
 + [Rebooting a DB Instance in a DB Cluster](USER_RebootInstance.md)
-+ [Deleting a DB Instance in a DB Cluster](USER_DeleteInstance.md)
++ [Deleting a DB Instance in an Aurora DB Cluster](USER_DeleteInstance.md)
 + [Tagging Amazon RDS Resources](USER_Tagging.md)
 + [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)
 + [Amazon Aurora Updates](Aurora.Updates.md)

@@ -14,6 +14,7 @@
 + [Monitoring Amazon Aurora MySQL Replication](#AuroraMySQL.Replication.Monitoring)
 + [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)
 + [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster](AuroraMySQL.Replication.MySQL.md)
++ [Using GTID\-Based Replication for Aurora MySQL](mysql-replication-gtid.md)
 
 ## Using Aurora Replicas<a name="AuroraMySQL.Replication.Replicas"></a>
 

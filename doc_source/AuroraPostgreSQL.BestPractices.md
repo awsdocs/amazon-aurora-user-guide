@@ -155,7 +155,7 @@ One thing to watch out for is when you connect to a replica that has data that h
 
 ##### API<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString.API"></a>
 
-You can programatically find the list of instances by using the [AWS Java SDK](https://aws.amazon.com/sdk-for-java/), specifically the [DescribeDbClusters ](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDS.html#describeDBClusters-com.amazonaws.services.rds.model.DescribeDBClustersRequest-)API\. Here's a small example of how you might do this in java 8:
+You can programmatically find the list of instances by using the [AWS Java SDK](https://aws.amazon.com/sdk-for-java/), specifically the [DescribeDbClusters ](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDS.html#describeDBClusters-com.amazonaws.services.rds.model.DescribeDBClustersRequest-)API\. Here's a small example of how you might do this in java 8:
 
 ```
 AmazonRDS client = AmazonRDSClientBuilder.defaultClient();

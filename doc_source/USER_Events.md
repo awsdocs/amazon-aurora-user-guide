@@ -52,6 +52,8 @@ The following table shows the event category and a list of events when a DB inst
 |  availability  | RDS\-EVENT\-0006 |  The DB instance is restarting due to a previous controlled shutdown, or a recovery\. The DB instance will be unavailable until the restart completes\.  | 
 |  availability  | RDS\-EVENT\-0004 |  The DB instance is undergoing a controlled shutdown\.  | 
 |  availability  | RDS\-EVENT\-0022 |  An error has occurred while restarting MySQL or MariaDB\.  | 
+|  backtrack  | RDS\-EVENT\-0131 |  The actual Backtrack window is smaller than the target Backtrack window you specified\. Consider reducing the number of hours in your target Backtrack window\. For more information about backtracking, see [Backtracking an Aurora DB Cluster](AuroraMySQL.Managing.Backtrack.md)\.  | 
+|  backtrack  | RDS\-EVENT\-0132 |  The actual Backtrack window is the same as the target Backtrack window\.  | 
 |  backup  | RDS\-EVENT\-0001 |  A backup of the DB instance has started\.   | 
 |  backup  | RDS\-EVENT\-0002 |  A backup of the DB instance is complete\.  | 
 |  configuration change  | RDS\-EVENT\-0009 |  The DB instance has been added to a security group\.  | 

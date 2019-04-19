@@ -2,7 +2,7 @@
 
 You can configure your Aurora MySQL DB cluster to publish general, slow, audit, and error log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\.
 
-To publish logs to CloudWatch Logs, the respective logs must be enabled\. Error logs are enabled by default, but you must enable the other types of logs explicitly\. For information about enabling logs in MySQL, see [Selecting General Query and Slow Query Log Output Destinations](https://dev.mysql.com/doc/refman/5.6/en/log-destinations.html) in the MySQL documentation\. For more information about enabling audit logs, see [Enabling Advanced Auditing](AuroraMySQL.Auditing.md#AuroraMySQL.Auditing.Enable)\.
+To publish logs to CloudWatch Logs, the respective logs must be enabled\. Error logs are enabled by default, but you must enable the other types of logs explicitly\. For information about enabling logs in MySQL, see [Selecting General Query and Slow Query Log Output Destinations](https://dev.mysql.com/doc/refman/5.6/en/log-destinations.html) in the MySQL documentation\. For more information about enabling Aurora MySQL audit logs, see [Enabling Advanced Auditing](AuroraMySQL.Auditing.md#AuroraMySQL.Auditing.Enable)\. 
 
 **Note**  
 Be aware of the following:  
@@ -11,10 +11,11 @@ If exporting log data is disabled, Aurora doesn't delete existing log groups or 
 An alternative way to publish audit logs to CloudWatch Logs is by enabling advanced auditing and setting the cluster\-level DB parameter `server_audit_logs_upload` to `1`\. The default for the `server_audit_logs_upload` parameter is `0`\.  
 If you use this alternative method, you must have an IAM role to access CloudWatch Logs and set the `aws_default_logs_role` cluster\-level parameter to the ARN for this role\. For information about creating the role, see [Setting Up IAM Roles to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.md)\. However, if you have the `AWSServiceRoleForRDS` service\-linked role, it provides access to CloudWatch Logs and overrides any custom\-defined roles\. For information service\-linked roles for Amazon RDS, see [Using Service\-Linked Roles for Amazon RDS](UsingWithRDS.IAM.ServiceLinkedRoles.md)\. 
 If you don't want to export audit logs to CloudWatch Logs, make sure that all methods of exporting audit logs are disabled\. These methods are the AWS Management Console, the AWS CLI, the RDS API, and the `server_audit_logs_upload` parameter\.
+ The procedure is slightly different for Aurora Serverless clusters than for provisioned clusters\. Serverless clusters automatically upload all the kinds of logs that you enable through the configuration parameters\. Therefore, you enable or disable log upload for Serverless clusters by turning different log types on and off in the DB cluster parameter group\. You don't modify the settings of the cluster itself through the AWS Management Console, AWS CLI, or RDS API\. For information about enabling MySQL logs for Serverless clusters, see [Aurora Serverless and Parameter Groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\. 
 
 ## Console<a name="AuroraMySQL.Integrating.CloudWatch.Console"></a>
 
-You can publish Aurora MySQL logs to CloudWatch Logs with the console\.
+You can publish Aurora MySQL logs for provisioned clusters to CloudWatch Logs with the console\.
 
 **To publish Aurora MySQL logs from the console**
 
@@ -24,7 +25,7 @@ You can publish Aurora MySQL logs to CloudWatch Logs with the console\.
 
 1. Choose the Aurora MySQL DB cluster that you want to publish the log data for\.
 
-1. For **Actions**, choose **Modify cluster**\.
+1. For **Actions**, choose **Modify**\.
 
 1. In the **Log exports** section, choose the logs that you want to start publishing to CloudWatch Logs\.
 
@@ -32,7 +33,7 @@ You can publish Aurora MySQL logs to CloudWatch Logs with the console\.
 
 ## AWS CLI<a name="AuroraMySQL.Integrating.CloudWatch.CLI"></a>
 
-You can publish Aurora MySQL logs with the AWS CLI\. You can run the [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) AWS CLI command with the following options: 
+You can publish Aurora MySQL logs for provisioned clusters with the AWS CLI\. To do so, you run the [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) AWS CLI command with the following options: 
 + `--db-cluster-identifier`—The DB cluster identifier\.
 + `--cloudwatch-logs-export-configuration`—The configuration setting for the log types to be enabled for export to CloudWatch Logs for the DB cluster\.
 
@@ -87,7 +88,7 @@ For Windows:
 
 ## RDS API<a name="AuroraMySQL.Integrating.CloudWatch.API"></a>
 
-You can publish Aurora MySQL logs with the RDS API\. You can run the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) action with the following options: 
+You can publish Aurora MySQL logs for provisioned clusters with the RDS API\. To do so, you run the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) action with the following options: 
 + `DBClusterIdentifier`—The DB cluster identifier\.
 + `CloudwatchLogsExportConfiguration`—The configuration setting for the log types to be enabled for export to CloudWatch Logs for the DB cluster\.
 

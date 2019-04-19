@@ -342,7 +342,7 @@ Use the following procedure to copy an encrypted DB cluster snapshot to another 
    	&X-Amz-Signature=ef38f1ce3dab4e1dbf113d8d2a265c67d17ece1999ffd36be85714ed36dddbb3
    ```
 
-1. In the source account for the DB cluster snapshot, update the key policy for the KMS key, first adding the ARN of the target account as a `Principa`l, and then allow the `kms:CreateGrant` action\. For more information, see [Allowing Access to an AWS KMS Encryption Key](USER_ShareSnapshot.md#USER_ShareSnapshot.Encrypted.KeyPolicy)\.
+1. In the source account for the DB cluster snapshot, update the key policy for the KMS key, first adding the ARN of the target account as a `Principal`, and then allow the `kms:CreateGrant` action\. For more information, see [Allowing Access to an AWS KMS Encryption Key](USER_ShareSnapshot.md#USER_ShareSnapshot.Encrypted.KeyPolicy)\.
 
 1. In the target account, choose or create an IAM user and attach an IAM policy to that user that allows it to copy an encrypted DB cluster snapshot using your KMS key\. For more information, see [Creating an IAM Policy to Enable Copying of the Encrypted Snapshot](USER_ShareSnapshot.md#USER_ShareSnapshot.Encrypted.KeyPolicy.IAM)\.
 
