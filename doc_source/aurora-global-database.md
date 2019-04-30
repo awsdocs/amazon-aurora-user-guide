@@ -64,7 +64,7 @@
 
 ## Creating an Aurora Global Database<a name="aurora-global-database-creating"></a>
 
- An Aurora global database spans multiple AWS Regions\. You create the global database itself along with the the read\-write primary cluster\. Then you create a read\-only secondary cluster in another AWS Region\. 
+ An Aurora global database spans multiple AWS Regions\. You create the global database itself along with the read\-write primary cluster\. Then you create a read\-only secondary cluster in another AWS Region\. 
 +  To create a new global database, you create the global database and the primary cluster that it contains, and then add a secondary cluster\. 
 +  If you have an existing Aurora cluster, you can take a snapshot and restore it to a new Aurora global database\. To do so, follow the procedure in [Importing Data into an Aurora Global Database](#aurora-global-database-etl)\. 
 
