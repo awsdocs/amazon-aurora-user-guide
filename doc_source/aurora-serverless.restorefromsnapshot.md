@@ -2,6 +2,12 @@
 
 You can configure an Aurora Serverless DB cluster when you restore a provisioned DB cluster snapshot with the AWS Management Console, the AWS CLI, or the RDS API\.
 
+When you restore a snapshot to an Aurora Serverless DB cluster, you can set the following specific values:
++ **Minimum Aurora capacity unit** – Aurora Serverless can reduce capacity down to this capacity unit\.
++ **Maximum Aurora capacity unit** – Aurora Serverless can increase capacity up to this capacity unit\.
++ **Timeout action** – The action to take when a capacity modification times out because it can't find a scaling point\. Aurora can force the capacity change to set the capacity to the specified value as soon as possible\. Or, it can roll back the capacity change to cancel it\. For more information, see [Timeout Action for Capacity Changes](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.timeout-action)\.
++ **Pause after inactivity** – The amount of time with no database traffic to scale to zero processing capacity\. When database traffic resumes, Aurora automatically resumes processing capacity and scales to handle the traffic\.
+
 For general information about restoring a DB cluster from a snapshot, see [Restoring from a DB Cluster Snapshot](USER_RestoreFromSnapshot.md)\.
 
 ## Console<a name="aurora-serverless.restorefromsnapshot.console"></a>
@@ -23,6 +29,9 @@ You can restore a DB cluster snapshot to an Aurora DB cluster with the AWS Manag
 
 1. In the **DB cluster identifier** field, type the name for your restored DB cluster, and complete the other fields\. 
 
+1. In the **Capacity settings** section, modify the scaling configuration\.  
+![\[Setting minimum and maximum capacity for an Aurora Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-capacity.png)
+
 1. Choose **Restore DB Cluster**\.
 
 To connect to an Aurora Serverless DB cluster, use the database endpoint\. For details, see the instructions in [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\.
@@ -36,7 +45,7 @@ For more information, see [Using Service\-Linked Roles for Amazon RDS](UsingWith
 
 To configure an Aurora Serverless DB cluster when you restore from a DB cluster using the AWS CLI, run the [restore\-db\-cluster\-from\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) AWS CLI command and specify `serverless` for the `--engine-mode` option\.
 
-You can optionally specify the `--scaling-configuration` option to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values are `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
+You can optionally specify the `--scaling-configuration` option to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values are `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
 
 In the following example, you restore from a previously created DB cluster snapshot named *mydbclustersnapshot*\. You restore to a new DB cluster named *mynewdbcluster*\. To restore the DB cluster as an Aurora Serverless DB cluster, set the `--engine-mode` option to `serverless`\. The example also specifies values for the `--scaling-configuration` option\.
 
@@ -46,7 +55,7 @@ For Linux, OS X, or Unix:
 aws rds restore-db-cluster-from-snapshot \
     --db-cluster-identifier mynewdbcluster \
     --snapshot-identifier mydbclustersnapshot \
-    --engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true
+    --engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,TimeoutAction='ForceApplyCapacityChange',SecondsUntilAutoPause=1000,AutoPause=true
 ```
 
 For Windows:
@@ -55,11 +64,11 @@ For Windows:
 aws rds restore-db-cluster-from-snapshot ^
     --db-instance-identifier mynewdbcluster ^
     --db-snapshot-identifier mydbclustersnapshot ^
-    --engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true
+    --engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,TimeoutAction='ForceApplyCapacityChange',SecondsUntilAutoPause=1000,AutoPause=true
 ```
 
 ## RDS API<a name="aurora-serverless.restorefromsnapshot.api"></a>
 
 To configure an Aurora Serverless DB cluster when you restore from a DB cluster using the RDS API, run the [RestoreDBClusterFromSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromSnapshot.html) action and specify `serverless` for the `EngineMode` parameter\.
 
-You can optionally specify the `ScalingConfiguration` parameter to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values are `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
+You can optionally specify the `ScalingConfiguration` parameter to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values are `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.

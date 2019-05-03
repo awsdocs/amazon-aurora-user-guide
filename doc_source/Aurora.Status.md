@@ -10,23 +10,23 @@ Find the possible status values for DB clusters in the following table\.
 
 | DB Cluster Status | Description | 
 | --- | --- | 
-|  available  |  The DB cluster is healthy and available\.  | 
-|  backing\-up  |  The DB cluster is currently being backed up\.  | 
+|  **available**  |  The DB cluster is healthy and available\.  | 
+|  **backing\-up**  |  The DB cluster is currently being backed up\.  | 
 | backtracking |  The DB cluster is currently being backtracked\. This status only applies to Aurora MySQL\.  | 
-|  cloning\-failed  |  Cloning a DB cluster failed\.   | 
-|  creating  |  The DB cluster is being created\. The DB cluster is inaccessible while it is being created\.   | 
-|  deleting  |  The DB cluster is being deleted\.  | 
-|  failing\-over  |  A failover from the primary instance to an Aurora Replica is being performed\.  | 
-|  inaccessible\-encryption\-credentials  |  The AWS KMS key used to encrypt or decrypt the DB cluster can't be accessed\.   | 
-|  maintenance  |  Amazon RDS is applying a maintenance update to the DB cluster\. This status is used for DB cluster\-level maintenance that RDS schedules well in advance\.   | 
-|  migrating  |  A DB cluster snapshot is being restored to a DB cluster\.   | 
-|  migration\-failed  |  A migration failed\.   | 
-|  modifying  |  The DB cluster is being modified because of a customer request to modify the DB cluster\.   | 
-|  promoting  |  A Read Replica is being promoted to a standalone DB cluster\.   | 
-|  renaming  |  The DB cluster is being renamed because of a customer request to rename it\.   | 
-|  resetting\-master\-credentials  |  The master credentials for the DB cluster are being reset because of a customer request to reset them\.  | 
-|  starting  |  The DB cluster is starting\.  | 
-|  stopped  |  The DB cluster is stopped\.  | 
-|  stopping  |  The DB cluster is being stopped\.  | 
-|  update\-iam\-db\-auth  |  IAM authorization for the DB cluster is being updated\.   | 
-|  upgrading  |  The DB cluster engine version is being upgraded\.  | 
+|  **cloning\-failed**  |  Cloning a DB cluster failed\.   | 
+|  **creating**  |  The DB cluster is being created\. The DB cluster is inaccessible while it is being created\.   | 
+|  **deleting**  |  The DB cluster is being deleted\.  | 
+|  **failing\-over**  |  A failover from the primary instance to an Aurora Replica is being performed\.  | 
+|  **inaccessible\-encryption\-credentials**  |  The AWS KMS key used to encrypt or decrypt the DB cluster can't be accessed\.   | 
+|  **maintenance**  |  Amazon RDS is applying a maintenance update to the DB cluster\. This status is used for DB cluster\-level maintenance that RDS schedules well in advance\.   | 
+|  **migrating**  |  A DB cluster snapshot is being restored to a DB cluster\.   | 
+|  **migration\-failed**  |  A migration failed\.   | 
+|  **modifying**  |  The DB cluster is being modified because of a customer request to modify the DB cluster\.   | 
+|  **promoting**  |  A Read Replica is being promoted to a standalone DB cluster\.   | 
+|  **renaming**  |  The DB cluster is being renamed because of a customer request to rename it\.   | 
+|  **resetting\-master\-credentials**  |  The master credentials for the DB cluster are being reset because of a customer request to reset them\.  | 
+|  **starting**  |  The DB cluster is starting\.  | 
+|  **stopped**  |  The DB cluster is stopped\.  | 
+|  **stopping**  |  The DB cluster is being stopped\.  | 
+|  **update\-iam\-db\-auth**  |  IAM authorization for the DB cluster is being updated\.   | 
+|  **upgrading**  |  The DB cluster engine version is being upgraded\.  | 

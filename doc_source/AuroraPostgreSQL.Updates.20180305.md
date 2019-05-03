@@ -12,6 +12,7 @@ The following table shows the version of PostgreSQL that each Aurora PostgreSQL 
 | [Version 2\.2\.0](#AuroraPostgreSQL.Updates.20180305.22) | [10\.6](https://www.postgresql.org/docs/current/static/release-10-6.html) | 
 | [Version 2\.1](#AuroraPostgreSQL.Updates.20180305.21) | [10\.5](https://www.postgresql.org/docs/current/static/release-10-5.html) | 
 | [Version 2\.0](#AuroraPostgreSQL.Updates.20180305.20) | [10\.4](https://www.postgresql.org/docs/current/static/release-10-4.html) | 
+| [Version 1\.4\.0](#AuroraPostgreSQL.Updates.20180305.14) | [9\.6\.11](https://www.postgresql.org/docs/9.6/release-9-6-11.html) | 
 | [Version 1\.3](#AuroraPostgreSQL.Updates.20180305.13) | [9\.6\.9](https://www.postgresql.org/docs/current/static/release-9-6-9.html) | 
 | [Version 1\.2](#AuroraPostgreSQL.Updates.20180305.12) | [9\.6\.8](https://www.postgresql.org/docs/current/static/release-9-6-8.html) | 
 | [Version 1\.1](#AuroraPostgreSQL.Updates.20180305.11) | [9\.6\.6](https://www.postgresql.org/docs/current/static/release-9-6-6.html) deprecated | 
@@ -26,9 +27,6 @@ You can find the following improvements in this engine update\.
 **New features**
 + This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.6\. For more information about the improvements in release 10\.6, see [PostgreSQL Release 10\.6](https://www.postgresql.org/docs/current/static/release-10-6.html)\.
 + Added the restricted password management feature\. Restricted password management enables you to restrict who can manage user passwords and password expiration changes by using the parameter `rds.restrict_password_commands` and the role `rds_password`\. For more information, see [Restricting Password Management](AuroraPostgreSQL.Security.md#RestrictPasswordMgmt)\. 
-
-**Known issues**
-+ None\.
 
 ## Version 2\.1<a name="AuroraPostgreSQL.Updates.20180305.21"></a>
 
@@ -83,8 +81,55 @@ You can find the following improvements in this engine update\.
 + Updated the `plv8` extension to version 2\.1\.2\.
 + Parallel queries – When you create a new Aurora PostgreSQL version 2\.0 instance, parallel queries are enabled for the `default.postgres10` parameter group\. The parameter `max_parallel_workers_per_gather` is set to 2 by default, but you can modify it to support your specific workload requirements\.
 
-**Known issues**
-+ None\.
+## Version 1\.4\.0<a name="AuroraPostgreSQL.Updates.20180305.14"></a>
+
+You can find the following improvements in this engine update\.
+
+**New features**
++ This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.11\. For more information about the improvements in release 9\.6\.11, see [PostgreSQL Release 9\.6\.11](https://www.postgresql.org/docs/9.6/release-9-6-11.html)\. 
++ Support is added for the `pg_similarity` extension version 1\.0\.
+
+**Improvements**
++ This release contains all fixes, features, and improvements present in [Version 1\.3](#AuroraPostgreSQL.Updates.20180305.13)\.
++ Performance of subtransactions has improved under high concurrency workloads\.
++ An update for the `pg_hint_plan` extension to version 1\.2\.3\.
++ Fixed an issue where on a busy system, a commit with millions of subtransactions \(and sometimes with commit timestamps enabled\) can cause Aurora to crash\.
++ Fixed an issue where an `INSERT` statement with `VALUES` could fail with the message "Attempting to read past EOF of relation"\.
++ An upgrade of the `apg_plan_mgmt` extension to version 1\.0\.1\. The `apg_plan_mgmt` extension is used with query plan management\. For more about how to install, upgrade, and use the `apg_plan_mgmt` extension, see [Managing Query Execution Plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)\.
+
+  The `apg_plan_mgmt` extension new features include the following:
+  + A new `update_plan_hash` parameter is available for the `validate_plans` function\. This parameter updates the `plan_hash` for plans that can't be reproduced exactly\. The `update_plan_hash` parameter also enables you to fix a plan by rewriting the SQL\. You can then register the good plan as an `Approved` plan for the original SQL\. Following is an example of using `update_plan_hash`\.
+
+    ```
+    UPDATE apg_plan_mgmt.dba_plans SET plan_hash = new _plan_hash, plan_outline = good_plan_outline 
+       WHERE sql_hash = bad_plan_sql_hash AND plan_hash = bad_plan_plan_hash;
+    SELECT apg_plan_mgmt.validate_plans(bad_plan_sql_hash, bad_plan_plan_hash, 'update_plan_hash');
+    SELECT apg_plan_mgmt.reload();
+    ```
+  + A new `get_explain_stmt` function is available that generates the text of an `EXPLAIN` statement for the specified SQL statement\. It includes the parameters `sql_hash`, `plan_hash` and `explain_options`\. 
+
+    The parameter `explain_options` can be any comma\-separated list of valid `EXPLAIN` options, as shown following\.
+
+    ```
+    analyze,verbose,buffers,hashes,format json
+    ```
+
+    If the parameter `explain_options` is NULL or an empty string, the `get_explain_stmt` function generates a simple `EXPLAIN` statement\. 
+
+    To create an `EXPLAIN` script for your workload or a portion of it, use the `\a` , `\t`, and `\o` options to redirect the output to a file\. For example, you can create an `EXPLAIN` script for the top\-ranked \(top\-K\) statements by using the PostgreSQL `pg_stat_statements` view sorted by `total_time` in `DESC` order\.
+  + The precise location of the Gather parallel query operator is determined by costing, and may change slightly over time\. To prevent these differences from invalidating the entire plan, query plan management now computes the same `plan_hash` even if the Gather operators move to different places in the plan tree\.
+  + Support is added for nonparameterized statements inside pl/pgsql functions\.
+  + Overhead is reduced when the `apg_plan_mgmt` extension is installed on multiple databases in the same cluster while two or more databases are being accessed concurrently\. Also, this release fixed a bug in this area that caused plans to not be stored in shared memory\.
+
+  The `apg_plan_mgmt extension` improvements include the following:
+  + Improvements to the `evolve_plan_baselines` function\.
+    + The `evolve_plan_baselines` function now computes a `cardinality_error` metric over all nodes in the plan\. Using this metric, you can identify any plan where the cardinality estimation error is large, and the plan quality is more doubtful\. Long\-running statements with high `cardinality_error` values are high\-priority candidates for query tuning\.
+    + Reports generated by `evolve_plan_baselines` now include `sql_hash`, `plan_hash`, and the plan `status`\.
+    + You can now allow `evolve_plan_baselines` to approve previously `Rejected` plans\.
+    + The meaning of `speedup_factor` for `evolve_plan_baselines` is now always relative to the baseline plan\. For example, a value of 1\.1 now means 10 percent faster than the baseline plan\. A value of 0\.9 means 10 percent slower than the baseline plan\. The comparison is made using execution time alone instead of total time\.
+    + The `evolve_plan_baselines` function now warms the cache in a new way\. It does this by running the baseline plan, then running the baseline plan one more time, and then running the candidate plan once\. Previously, `evolve_plan_baselines` ran the candidate plan twice\. This approach added significantly to execution time, especially for slow candidate plans\. However, running the candidate plan twice is more reliable when the candidate plan uses an index that isn't used in the baseline plan\.
+  + Query plan management no longer saves plans that refer to system tables or views, temporary tables, or the query plan management's own tables\.
+  + Bug fixes include caching a plan immediately when saved and fixing a bug that caused the back end to terminate\.
 
 ## Version 1\.3<a name="AuroraPostgreSQL.Updates.20180305.13"></a>
 
@@ -119,9 +164,6 @@ You can find the following improvements in this engine update\.
   `FATAL: Storage initialization failed.`
 + Fixed a performance limitation on heavy write workloads that caused waits on the `LWLock:buffer_content` and `IO:ControlFileSyncUpdate` events\.
 
-**Known issues**
-+ None\.
-
 ## Version 1\.2<a name="AuroraPostgreSQL.Updates.20180305.12"></a>
 
 You can find the following improvements in this engine update\.
@@ -145,7 +187,7 @@ You can find the following improvements in this engine update\.
 + Fixes a bug in which an RDS for PostgreSQL instance migrated to Aurora PostgreSQL using replication can run out of memory doing insert/update of GIST indexes, or cause other issues with GIST indexes\.
 + Fixes a bug in which vacuum can fail to update the corresponding `pg_database.datfrozenxid` value for a database\.
 + Fixes a bug in which a crash while creating a new MultiXact \(contended row level lock\) can cause Aurora PostgreSQL to hang indefinitely on the first access to the same relation after the engine restarts\.
-+ Fixes a bug in which a PostgreSQL backend cannot be terminated or canceled while invoking an `fdw` call\.
++ Fixes a bug in which a PostgreSQL backend can't be terminated or canceled while invoking an `fdw` call\.
 + Fixes a bug in which one vCPU is fully utilized at all times by the Aurora storage daemon\. This issue is especially noticeable on smaller instance types, such as r4\.large, where it can lead to 25–50 percent CPU usage when idle\.
 + Fixes a bug in which an Aurora PostgreSQL writer node can fail over spuriously\.
 + Fixes a bug in which, in a rare scenario, an Aurora PostgreSQL read node can report: 
@@ -153,9 +195,6 @@ You can find the following improvements in this engine update\.
   "FATAL: lock buffer\_io is not held"
 + Fixes a bug in which stale relcache entries can halt vacuuming of relations and push the system close to transaction ID wraparound\. The fix is a port of a PostgreSQL community patch scheduled to be released in a future minor version\.
 + Fixes a bug in which a failure while extending a relation can cause Aurora to crash while scanning the partially extended relation\.
-
-**Known issues**
-+ None\.
 
 ## Version 1\.1<a name="AuroraPostgreSQL.Updates.20180305.11"></a>
 

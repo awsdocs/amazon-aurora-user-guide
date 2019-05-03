@@ -1,9 +1,9 @@
-# Working with Amazon Aurora Global Databases<a name="aurora-global-database"></a>
+# Working with Amazon Aurora Global Database<a name="aurora-global-database"></a>
 
- Following, you can find a description of Amazon Aurora global databases\. An Aurora global database spans multiple AWS Regions, enabling low latency global reads and disaster recovery from region\-wide outages\. 
+ Following, you can find a description of Amazon Aurora Global Database\. Each Aurora global database spans multiple AWS Regions, enabling low latency global reads and disaster recovery from region\-wide outages\. 
 
 **Topics**
-+ [Overview of Aurora Global Databases](#aurora-global-database-overview)
++ [Overview of Aurora Global Database](#aurora-global-database-overview)
 + [Creating an Aurora Global Database](#aurora-global-database-creating)
 + [Adding an AWS Region to an Aurora Global Database](#aurora-global-database-attaching)
 + [Removing a Cluster from an Aurora Global Database](#aurora-global-database-detaching)
@@ -11,50 +11,40 @@
 + [Importing Data into an Aurora Global Database](#aurora-global-database-etl)
 + [Managing an Aurora Global Database](#aurora-global-database-managing)
 + [Configuring an Aurora Global Database](#aurora-global-database-modifying)
-+ [Connecting to Aurora Global Databases](#aurora-global-database-connecting)
++ [Connecting to an Aurora Global Database](#aurora-global-database-connecting)
 + [Failover for Aurora Global Database](#aurora-global-database-failover)
-+ [Using Aurora Global Databases with Other AWS Services](#aurora-global-database-interop)
++ [Using Aurora Global Database with Other AWS Services](#aurora-global-database-interop)
 
-## Overview of Aurora Global Databases<a name="aurora-global-database-overview"></a>
+## Overview of Aurora Global Database<a name="aurora-global-database-overview"></a>
 
- An Aurora global database consists of one primary AWS Region where your data is mastered, and one read\-only, secondary AWS Region\. Aurora replicates data to the secondary AWS Region with typical latency of under a second\. You issue write operations directly to the primary DB instance in the primary AWS Region\. Aurora global databases use dedicated infrastructure to replicate your data, leaving database resources available entirely to serve application workloads\. Applications with a worldwide footprint can use reader instances in the secondary Region for low latency reads\. In the unlikely event your database becomes degraded or isolated in an AWS region, you can promote the secondary AWS Region to take full read\-write workloads in under a minute\. 
+ An Aurora global database consists of one primary AWS Region where your data is mastered, and one read\-only, secondary AWS Region\. Aurora replicates data to the secondary AWS Region with typical latency of under a second\. You issue write operations directly to the primary DB instance in the primary AWS Region\. An Aurora global database uses dedicated infrastructure to replicate your data, leaving database resources available entirely to serve application workloads\. Applications with a worldwide footprint can use reader instances in the secondary AWS Region for low latency reads\. In the unlikely event your database becomes degraded or isolated in an AWS region, you can promote the secondary AWS Region to take full read\-write workloads in under a minute\. 
 
  The Aurora cluster in the primary AWS Region where your data is mastered performs both read and write operations\. The cluster in the secondary region enables low\-latency reads\. You can scale up the secondary cluster independently by adding one of more DB instances \(Aurora Replicas\) to serve read\-only workloads\. For disaster recovery, you can remove and promote the secondary cluster to allow full read and write operations\. 
 
  Only the primary cluster performs write operations\. Clients that perform write operations connect to the DB cluster endpoint of the primary cluster\. 
 
 **Topics**
-+ [Advantages of Aurora Global Databases](#aurora-global-database.advantages)
-+ [Requirements for Aurora Global Databases](#aurora-global-database-prereqs)
-+ [Current Limitations of Aurora Global Databases](#aurora-global-database.limitations)
++ [Advantages of Aurora Global Database](#aurora-global-database.advantages)
++ [Current Limitations of Aurora Global Database](#aurora-global-database.limitations)
 
-### Advantages of Aurora Global Databases<a name="aurora-global-database.advantages"></a>
+### Advantages of Aurora Global Database<a name="aurora-global-database.advantages"></a>
 
- Aurora global databases use dedicated infrastructure to replicate changes between the primary DB cluster and the secondary cluster\. Aurora global databases provide the following advantages: 
+ Aurora Global Database uses dedicated infrastructure to replicate changes between the primary DB cluster and the secondary cluster\. Aurora Global Database provides the following advantages: 
 +  The replication performed by an Aurora global database has limited to no performance impact on the primary DB cluster\. The resources of the DB instances are fully devoted to serve read and write workloads\. 
 +  Changes are replicated between AWS Regions with minimal lag, typically less than 1 second\. 
 +  The secondary cluster enables fast failover for disaster recovery\. You can typically promote a secondary cluster and make it available for writes in under a minute\. 
 +  Applications in remote AWS Regions experience lower query latency when they read from a secondary cluster\. 
 +  You can add up to 16 Aurora Replicas to the secondary cluster, allowing you to scale reads beyond the capacity of a single Aurora cluster\. 
 
-### Requirements for Aurora Global Databases<a name="aurora-global-database-prereqs"></a>
+### Current Limitations of Aurora Global Database<a name="aurora-global-database.limitations"></a>
 
- Aurora global databases are available in these AWS Regions: 
-+  US East \(N\. Virginia\) 
-+  US East \(Ohio\) 
-+  US West \(Oregon\) 
-+  EU \(Ireland\) 
-
- If you create an Aurora cluster through the AWS CLI or RDS API and intend to add it later to an Aurora global database, you must use the `global` value for the engine mode parameter\. 
-
-### Current Limitations of Aurora Global Databases<a name="aurora-global-database.limitations"></a>
-
- The following limitations currently apply to Aurora global databases: 
-+  Aurora global databases are only available for Aurora with MySQL 5\.6 compatibility\. 
-+  You can't use `db.t2` instance classes for an Aurora global database\. You have a choice of `db.r3` or `db.r4` instance classes\. 
+ The following limitations currently apply to Aurora Global Database: 
++  Aurora Global Database is only available for Aurora with MySQL 5\.6 compatibility\. 
++  You can't use `db.t2` instance classes for an Aurora global database\. You have a choice of `db.r4` or `db.r5` instance classes\. 
++  Currently, Aurora Global Database isn't available in the EU \(Stockholm\) and Asia Pacific \(Hong Kong\) regions\. 
 +  The secondary cluster must be in a different AWS Region than the primary cluster\. 
 +  You can't create a cross\-region Read Replica from the primary cluster in same region as the secondary\. See [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md) for information about cross\-region Read Replicas\. 
-+  The following features aren't supported for Aurora global databases: 
++  The following features aren't supported for Aurora Global Database: 
   +  Cloning\. See [Cloning Databases in an Aurora DB Cluster](Aurora.Managing.Clone.md) for information about cloning\. 
   +  Backtrack\. See [Backtracking an Aurora DB Cluster](AuroraMySQL.Managing.Backtrack.md) for information about backtracking\. 
   +  Parallel query\. See [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md) for information about parallel query\. 
@@ -72,6 +62,9 @@
 
 **Important**  
  Before you create an Aurora global database, complete the setup tasks for your account, network, and security settings in [Setting Up for Amazon RDS](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SettingUp.html) in the *Amazon Relational Database Service User Guide*\. 
+
+**Note**  
+ If you create an Aurora cluster through the AWS CLI or RDS API and intend to add it later to an Aurora global database, you must use the `global` value for the engine mode parameter\. 
 
 ### Console<a name="aurora-global-database-create.console"></a>
 
@@ -314,7 +307,7 @@
 
 ### Console<a name="aurora-global-database-attach.console"></a>
 
-**To add an AWS Region to a Aurora global database using the AWS Management Console**
+**To add an AWS Region to an Aurora global database using the AWS Management Console**
 
 1.  In the top\-right corner of the AWS Management Console, choose any AWS Region where Aurora global databases are available\. 
 
@@ -484,11 +477,10 @@ aws rds --region primary_region ^
 
 ## Importing Data into an Aurora Global Database<a name="aurora-global-database-etl"></a>
 
- To import data into an Aurora global database, do the same as for other kinds of Aurora clusters: 
+ To import data into an Aurora global database, use one of the following techniques: 
 +  Create a snapshot of an Aurora MySQL cluster or Amazon RDS MySQL DB instance and restore it to the primary cluster of an Aurora global database\. Currently, any snapshot must be from a source that is compatible with MySQL 5\.6\.   
 ![\[Screenshot showing the restore snapshot page for an Aurora global database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-restore-snapshot-01.png)
 +  Use point\-in\-time restore on the primary cluster to restore the cluster data to a previous state\. 
-+  Use a physical import technique, such as the Percona xtrabackup tool\. 
 +  Use a logical import technique, such as preparing data with the `mysqldump` command and loading it with the `mysql` command\. 
 
  The crucial distinction for an Aurora global database is that you always import the data to the cluster that you designate as the primary cluster\. You can do the initial data import before or after adding that cluster to the Aurora Global Database\. All the data from the primary cluster is automatically replicated to the secondary cluster\. 
@@ -515,7 +507,7 @@ aws rds --region primary_region ^
 
  You can configure the parameter groups independently for each Aurora cluster within the Aurora global database\. Most parameters work the same as for other kinds of Aurora clusters\. The `aurora_enable_repl_bin_log_filtering` and `aurora_enable_replica_log_compression` configuration settings have no effect\. We recommend keeping the settings consistent between all the clusters in a global database, to avoid unexpected behavior changes if you promote a secondary cluster to be the primary\. For example, use the same settings for time zones and character sets to avoid inconsistent behavior if a different cluster takes over as the primary cluster\. 
 
-## Connecting to Aurora Global Databases<a name="aurora-global-database-connecting"></a>
+## Connecting to an Aurora Global Database<a name="aurora-global-database-connecting"></a>
 
  For read\-only query traffic, you connect to the reader endpoint for the Aurora cluster in your AWS Region\. 
 
@@ -555,7 +547,7 @@ aws rds --region primary_region ^
 
    1.  You add an AWS Region to set up a secondary cluster in the same AWS Region as before\. 
 
-## Using Aurora Global Databases with Other AWS Services<a name="aurora-global-database-interop"></a>
+## Using Aurora Global Database with Other AWS Services<a name="aurora-global-database-interop"></a>
 
  In some cases, you access other AWS services in combination with an Aurora global database\. In these cases, you need the same privileges, external functions, and so on, in the corresponding AWS Regions for all the associated clusters\. Even though an Aurora cluster in a global database might start out as a read\-only replication target, you might later promote it to the primary cluster\. To prepare for that possibility, set up any necessary write privileges for other services ahead of time, for all Aurora clusters in the global database\. 
 

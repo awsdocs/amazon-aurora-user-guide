@@ -37,7 +37,7 @@ In the following table, you can find details about the Amazon RDS DB instance cl
 
 The following are DB engine considerations for DB instance classes:
 + **Aurora Support for db\.r5** – All Aurora MySQL versions support the db\.r5 instance classes except the db\.r5\.24xlarge instance class\. For Aurora PostgreSQL, only versions compatible with PostgreSQL 10\.6 or later support the db\.r5 instance classes\. These instance classes are available in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
-+ **Aurora Support for db\.t3** – Aurora MySQL supports the db\.t3 instance classes for Aurora MySQL 1\.15 and higher, and all Aurora MySQL 2\.\* versions\. These instance classes are available for Aurora MySQL in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
++ **Aurora Support for db\.t3** – Aurora MySQL supports the db\.t3\.medium and db\.t3\.small instance classes for Aurora MySQL 1\.15 and higher, and all Aurora MySQL 2\.\* versions\. These instance classes are available for Aurora MySQL in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
 
 
 ****  
@@ -65,9 +65,9 @@ The following are DB engine considerations for DB instance classes:
 | db\.r3\.xlarge | 4 | 13 | 30\.5 | 500 | Moderate | Yes | No | 
 | db\.r3\.large | 2 | 6\.5 | 15\.25 | — | Moderate | Yes | No | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
-| db\.t3\.2xlarge | 8 | Variable | 32 | 2,050 | Up to 5 Gigabit | Yes | No | 
-| db\.t3\.xlarge | 4 | Variable | 16 | 2,050 | Up to 5 Gigabit | Yes | No | 
-| db\.t3\.large | 2 | Variable | 8 | 2,050 | Up to 5 Gigabit | Yes | No | 
+| db\.t3\.2xlarge | 8 | Variable | 32 | 2,050 | Up to 5 Gigabit | No | No | 
+| db\.t3\.xlarge | 4 | Variable | 16 | 2,050 | Up to 5 Gigabit | No | No | 
+| db\.t3\.large | 2 | Variable | 8 | 2,050 | Up to 5 Gigabit | No | No | 
 | db\.t3\.medium | 2 | Variable | 4 | 1,500 | Up to 5 Gigabit | Yes | No | 
 | db\.t3\.small | 2 | Variable | 2 | 1,500 | Up to 5 Gigabit | Yes | No | 
 | db\.t3\.micro | 2 | Variable | 1 | 1,500 | Up to 5 Gigabit | Yes | No | 

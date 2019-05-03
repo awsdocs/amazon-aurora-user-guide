@@ -20,7 +20,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Amazon Aurora Storage and Reliability](Aurora.Overview.StorageReliability.md)
    + [Amazon Aurora Security](Aurora.Overview.Security.md)
    + [High Availability for Aurora](Concepts.AuroraHighAvailability.md)
-   + [Working with Amazon Aurora Global Databases](aurora-global-database.md)
+   + [Working with Amazon Aurora Global Database](aurora-global-database.md)
    + [Replication with Amazon Aurora](Aurora.Replication.md)
 + [Setting Up Your Environment for Amazon Aurora](CHAP_SettingUp_Aurora.md)
 + [Getting Started with Amazon Aurora](CHAP_GettingStartedAurora.md)

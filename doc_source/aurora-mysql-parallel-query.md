@@ -329,7 +329,7 @@ GROUP BY l_orderkey,
   o_orderdate,
   o_shippriority
 ORDER BY revenue DESC,
-  o_orderdate LIMIT 10
+  o_orderdate LIMIT 10;
 ```
 
  With parallel query disabled, the query might have an explain plan like the following, which uses hash join but not parallel query\. 

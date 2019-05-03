@@ -14,7 +14,7 @@ Aurora Serverless introduces a new `serverless` DB engine mode for Aurora DB clu
 
 ![\[Aurora Serverless Architecture\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-arch.png)
 
-Instead of provisioning and managing database servers, you specify Aurora Capacity Units \(ACUs\)\. Each ACU is a combination of processing and memory capacity\. Database storage automatically scales from 10 GiB to 64 TiB, the same as storage in a standard Aurora DB cluster\.
+Instead of provisioning and managing database servers, you specify Aurora capacity units \(ACUs\)\. Each ACU is a combination of processing and memory capacity\. Database storage automatically scales from 10 GiB to 64 TiB, the same as storage in a standard Aurora DB cluster\.
 
 You can specify the minimum and maximum ACU\. The *minimum Aurora capacity unit* is the lowest ACU to which the DB cluster can scale down\. The *maximum Aurora capacity unit* is the highest ACU to which the DB cluster can scale up\. Based on your settings, Aurora Serverless automatically creates scaling rules for thresholds for CPU utilization, connections, and available memory\. 
 
@@ -47,6 +47,17 @@ When the DB cluster is paused, no compute or memory activity occurs, and you are
 
 **Note**  
 If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot\. In this case, the DB cluster is restored when there is a request to connect to it\.
+
+## Timeout Action for Capacity Changes<a name="aurora-serverless.how-it-works.timeout-action"></a>
+
+You can change the capacity of an Aurora Serverless DB cluster\. When you change the capacity, Aurora Serverless tries to find a scaling point for the change\. If Aurora Serverless can't find a scaling point, it times out\. You can specify one of the following actions to take when a capacity change times out:
++ **Force the capacity change** – Set the capacity to the specified value as soon as possible\.
++ **Roll back the capacity change** – Cancel the capacity change\.
+
+**Important**  
+If you force the capacity change, connections that prevent Aurora Serverless from finding a scaling point might be dropped\.
+
+For information about changing the capacity, see [Modifying an Aurora Serverless DB Cluster](aurora-serverless.modifying.md)\.
 
 ## Aurora Serverless and Parameter Groups<a name="aurora-serverless.parameter-groups"></a>
 

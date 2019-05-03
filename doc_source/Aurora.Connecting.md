@@ -56,13 +56,13 @@ In order to connect to the cluster endpoint using SSL, your client connection ut
 You should see output similar to the following\.
 
 ```
-1. Welcome to the MySQL monitor.  Commands end with ; or \g.
-2. Your MySQL connection id is 350
-3. Server version: 5.6.10-log MySQL Community Server (GPL)
-4. 
-5. Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
-6. 
-7. mysql>
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 350
+Server version: 5.6.10-log MySQL Community Server (GPL)
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql>
 ```
 
 For general instructions on constructing Amazon RDS MySQL connection strings and finding the public key for SSL connections, see [ Connecting to a DB Instance Running the MySQL Database Engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide//USER_ConnectToInstance.html)\.

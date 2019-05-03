@@ -29,7 +29,7 @@
 +  Does Aurora support your specific business goals, such as cost reduction, increase in deployment, or provisioning speed? Do you have a way to quantify these goals? 
 +  Can you meet all security and compliance requirements for your workload? 
 
- Take some time to build knowledge about Aurora database engines and platform capabilities, and review the service documentation\. Take note of all the features that can help you achieve your desired outcomes\. One of these might be workload consolidation, described in the AWS Database Blog post [How to plan and optimize Amazon Aurora with MySQL compatibility for consolidated workloads](http://aws.amazon.com/blogs//database/planning-and-optimizing-amazon-aurora-with-mysql-compatibility-for-consolidated-workloads/)\. Another might be demand\-based scaling, described in [Using Amazon Aurora Auto Scaling with Aurora Replicas](Aurora.Integrating.AutoScaling.md) in the *Amazon Aurora User Guide\.* Others might be performance gains or simplified database operations\. 
+ Take some time to build knowledge about Aurora database engines and platform capabilities, and review the service documentation\. Take note of all the features that can help you achieve your desired outcomes\. One of these might be workload consolidation, described in the AWS Database Blog post [How to plan and optimize Amazon Aurora with MySQL compatibility for consolidated workloads](http://aws.amazon.com/blogs/database/planning-and-optimizing-amazon-aurora-with-mysql-compatibility-for-consolidated-workloads/)\. Another might be demand\-based scaling, described in [Using Amazon Aurora Auto Scaling with Aurora Replicas](Aurora.Integrating.AutoScaling.md) in the *Amazon Aurora User Guide\.* Others might be performance gains or simplified database operations\. 
 
 ## 2\. Understand Your Workload Characteristics<a name="Aurora.PoC.Workload"></a>
 
@@ -183,7 +183,7 @@
 
 ## 11\. Measure Performance<a name="Aurora.PoC.Measurement"></a>
 
- Best practices in this area are designed to ensure that all the right tools and processes are set up to quickly isolate abnormal behaviors during workload operations\. They're also set up to see that you can reliably identify any applicable causes\\\. 
+ Best practices in this area are designed to ensure that all the right tools and processes are set up to quickly isolate abnormal behaviors during workload operations\. They're also set up to see that you can reliably identify any applicable causes\. 
 
  You can always see the current state of your cluster, or examine trends over time, by examining the **Monitoring** tab\. This tab is available from the console detail page for each Aurora cluster or DB instance\. It displays metrics from the Amazon CloudWatch monitoring service in the form of charts\. You can filter the metrics by name, by DB instance, and by time period\. 
 

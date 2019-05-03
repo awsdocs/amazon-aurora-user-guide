@@ -63,8 +63,6 @@
 
  You use the cluster endpoint when you administer your cluster, perform extract, transform, load \(ETL\) operations, or develop and test applications\. The cluster endpoint connects to the primary instance of the cluster\. The primary instance is the only DB instance where you can create tables and indexes, run `INSERT` statements, and perform other DDL and DML operations\. 
 
- Each Aurora cluster has a single built\-in cluster endpoint, whose name and other attributes are managed by Aurora\. You can't create, delete, or modify this kind of endpoint\. 
-
  The physical IP address pointed to by the cluster endpoint changes when the failover mechanism promotes a new DB instance to be the read\-write primary instance for the cluster\. If you use any form of connection pooling or other multiplexing, be prepared to flush or reduce the time\-to\-live for any cached DNS information\. Doing so ensures that you don't try to establish a read\-write connection to a DB instance that became unavailable or is now read\-only after a failover\. 
 
 ## Using the Reader Endpoint<a name="Aurora.Endpoints.Reader"></a>
@@ -533,8 +531,6 @@ $ aws rds describe-db-cluster-endpoints --region $REGION
 
 ```
 $ mysql -h small-instances.cluster-custom-123456789012.ca-central-1.rds.amazonaws.com -u $MYUSER -p
-Enter password:
-...
 mysql> select @@aurora_server_id;
 +-------------------------+
 | @@aurora_server_id      |
@@ -543,20 +539,14 @@ mysql> select @@aurora_server_id;
 +-------------------------+
 
 $ mysql -h small-instances.cluster-custom-123456789012.ca-central-1.rds.amazonaws.com -u $MYUSER -p
-Warning: Using a password on the command line interface can be insecure.
-Enter password:
-...
 mysql> select @@aurora_server_id;
 +-------------------------+
 | @@aurora_server_id      |
 +-------------------------+
 | custom-endpoint-demo-07 |
 +-------------------------+
-1 row in set (0.00 sec)
 
 $ mysql -h small-instances.cluster-custom-123456789012.ca-central-1.rds.amazonaws.com -u $MYUSER -p
-Enter password:
-...
 mysql> select @@aurora_server_id;
 +-------------------------+
 | @@aurora_server_id      |
@@ -569,10 +559,6 @@ mysql> select @@aurora_server_id;
 
 ```
 $ mysql -h big-instances.cluster-custom-123456789012.ca-central-1.rds.amazonaws.com -u $MYUSER -p
-Enter password:
-...
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
 mysql> select @@aurora_server_id;
 +-------------------------+
 | @@aurora_server_id      |
@@ -581,8 +567,6 @@ mysql> select @@aurora_server_id;
 +-------------------------+
 
 $ mysql -h big-instances.cluster-custom-123456789012.ca-central-1.rds.amazonaws.com -u $MYUSER -p
-Enter password:
-...
 mysql> select @@aurora_server_id;
 +-------------------------+
 | @@aurora_server_id      |

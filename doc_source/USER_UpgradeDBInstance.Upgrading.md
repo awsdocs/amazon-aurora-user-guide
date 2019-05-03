@@ -4,7 +4,7 @@ Amazon Aurora provides newer versions of each supported database engine so you c
 
 There are two kinds of upgrades: major version upgrades and minor version upgrades\. In general, a *major engine version upgrade* can introduce changes that are not compatible with existing applications\. In contrast, a *minor version upgrade* includes only changes that are backward\-compatible with existing applications\.
 
-The version numbering sequence is specific for each database engine\. For example, Aurora PostgreSQL 10\.4 and 10\.5 are major engine versions and upgrading from any 10\.4 version to any 10\.5 version is a major version upgrade\. Aurora PostgreSQL version 9\.6\.8 and 9\.6\.9 are minor versions and upgrading from 9\.6\.8 to 9\.6\.9 is a minor version upgrade\. To determine the version of an Aurora DB cluster, follow the instructions in [Amazon Aurora Updates](Aurora.Updates.md)\.
+The version numbering sequence is specific to each database engine\. For example, Aurora PostgreSQL 9\.6 and 10\.5 are major engine versions and upgrading from any 9\.6 version to any 10\.x version is a major version upgrade\. Aurora PostgreSQL version 9\.6\.8 and 9\.6\.9 are minor versions and upgrading from 9\.6\.8 to 9\.6\.9 is a minor version upgrade\. To determine the version of an Aurora DB cluster, follow the instructions in [Amazon Aurora Updates](Aurora.Updates.md)\.
 
 **Topics**
 + [Manually Upgrading the Engine Version](#USER_UpgradeDBInstance.Upgrading.Manual)
