@@ -19,16 +19,14 @@ To associate an IAM role to permit your Amazon RDS cluster to communicate with o
 
 1. Choose **Databases**\.
 
-1. Choose the Aurora DB cluster that you want to associate an IAM role with, and then for **Actions** choose **Manage IAM roles**\.
+1. Choose the name of the Aurora DB cluster that you want to associate an IAM role with to show its details\.
 
-1. In **Manage IAM roles**, choose the role to associate with your DB cluster from **Add IAM roles to this cluster**\.  
+1. On the **Connectivity & security** tab, in the **Manage IAM roles** section, choose the role to add under **Add IAM roles to this cluster**\.  
 ![\[Associate an IAM role with a DB cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraAssociateIAMRole-02.png)
 
 1. Choose **Add role**\.
 
-1. \(Optional\) To stop associating an IAM role with a DB cluster and remove the related permission, choose **Delete** for the role\.
-
-1. Choose **Done**\.
+1. \(Optional\) To stop associating an IAM role with a DB cluster and remove the related permission, choose the role and choose **Delete**\.
 
 1. In the RDS console, choose **Parameter groups** in the navigation pane\.
 

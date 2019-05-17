@@ -5,7 +5,7 @@
 **Note**  
 We enabled a new feature \- SELECT INTO OUTFILE S3 \- in Aurora MySQL version 1\.13 after the initial release, and have updated the release notes to reflect that change\.
 
-Aurora MySQL 1\.13 is generally available\. All new database clusters, including those restored from snapshots, will be created in Aurora MySQL v1\.13\. You have the option, but are not required, to upgrade existing database clusters to Aurora MySQL v1\.13\. With version 1\.13 of Aurora, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. We are enabling zero\-downtime patching, which works on a best\-effort basis to preserve client connections through the patching process\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
+Aurora MySQL 1\.13 is generally available\. All new database clusters, including those restored from snapshots, will be created in Aurora MySQL 1\.13\. You have the option, but are not required, to upgrade existing database clusters to Aurora MySQL 1\.13\. With version 1\.13 of Aurora, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. We are enabling zero\-downtime patching, which works on a best\-effort basis to preserve client connections through the patching process\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
 
 ## Zero\-Downtime Patching<a name="AuroraMySQL.Updates.20170515.ZDP"></a>
 

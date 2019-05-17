@@ -15,8 +15,8 @@ For information about restoring a DB cluster to a point in time, see [Overview o
 ### Backtrack Window<a name="AuroraMySQL.Managing.Backtrack.Overview.BacktrackWindow"></a>
 
 With backtracking, there is a target backtrack window and an actual backtrack window:
-+ The target backtrack window is the amount of time you want to be able to backtrack your DB cluster\. When you enable backtracking, you specify a target backtrack window\. For example, you might specify a target backtrack window of 24 hours if you want to be able to backtrack the DB cluster one day\.
-+ The actual backtrack window is the actual amount of time you can backtrack your DB cluster, which can be smaller than the target backtrack window\. The actual backtrack window is based on your workload and the storage available for storing information about database changes, called *change records\.*
++ The *target backtrack window* is the amount of time you want to be able to backtrack your DB cluster\. When you enable backtracking, you specify a *target backtrack window*\. For example, you might specify a target backtrack window of 24 hours if you want to be able to backtrack the DB cluster one day\.
++ The *actual backtrack window* is the actual amount of time you can backtrack your DB cluster, which can be smaller than the target backtrack window\. The actual backtrack window is based on your workload and the storage available for storing information about database changes, called *change records\.*
 
 As you make updates to your Aurora DB cluster with backtracking enabled, you generate change records\. Aurora retains change records for the target backtrack window, and you pay an hourly rate for storing them\. Both the target backtrack window and the workload on your DB cluster determine the number of change records you store\. The workload is the number of changes you make to your DB cluster in a given amount of time\. If your workload is heavy, you store more change records in your backtrack window than you do if your workload is light\.
 

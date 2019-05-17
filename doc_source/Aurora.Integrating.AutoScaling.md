@@ -2,7 +2,7 @@
 
 To meet your connectivity and workload requirements, Aurora Auto Scaling dynamically adjusts the number of Aurora Replicas provisioned for an Aurora DB cluster\. Aurora Auto Scaling is available for both Aurora MySQL and Aurora PostgreSQL\. Aurora Auto Scaling enables your Aurora DB cluster to handle sudden increases in connectivity or workload\. When the connectivity or workload decreases, Aurora Auto Scaling removes unnecessary Aurora Replicas so that you don't pay for unused provisioned DB instances\.
 
-You define and apply a scaling policy to an Aurora DB cluster\. The scaling policy defines the minimum and maximum number of Aurora Replicas that Aurora Auto Scaling can manage\. Based on the policy, Aurora Auto Scaling adjusts the number of Aurora Replicas up or down in response to actual workloads, determined by using Amazon CloudWatch metrics and target values\.
+You define and apply a scaling policy to an Aurora DB cluster\. The *scaling policy* defines the minimum and maximum number of Aurora Replicas that Aurora Auto Scaling can manage\. Based on the policy, Aurora Auto Scaling adjusts the number of Aurora Replicas up or down in response to actual workloads, determined by using Amazon CloudWatch metrics and target values\.
 
 You can use the AWS Management Console to apply a scaling policy based on a predefined metric\. Alternatively, you can use either the AWS CLI or Aurora Auto Scaling API to apply a scaling policy based on a predefined or custom metric\.
 

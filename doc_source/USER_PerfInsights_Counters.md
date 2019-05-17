@@ -1,6 +1,6 @@
 # Performance Insights Counters<a name="USER_PerfInsights_Counters"></a>
 
-With counter metrics, you can customize the Performance Insights dashboard to include up to 10 additional graphs that show a selection of dozens of operating system and database performance metrics\. This information can be correlated with database load to help identify and analyze performance problems\.
+With counter metrics, you can customize the Performance Insights dashboard to include up to 10 additional graphs\. These graphs that show a selection of dozens of operating system and database performance metrics\. This information can be correlated with database load to help identify and analyze performance problems\.
 
 **Topics**
 + [Performance Insights Operating System Counters](#USER_PerfInsights_Counters.OS)
@@ -122,6 +122,8 @@ You can find definitions for these native metrics in [Server Status Variables](h
 | Innodb\_buffer\_pool\_pages\_total | Cache | Pages | 
 | Innodb\_buffer\_pool\_read\_requests | Cache | Pages per second | 
 | Innodb\_buffer\_pool\_reads | Cache | Pages per second | 
+| Opened\_tables | Cache | Tables | 
+| Opened\_table\_definitions | Cache | Tables | 
 | Qcache\_hits | Cache | Queries | 
 
 ### Non\-Native Counters for Aurora MySQL<a name="USER_PerfInsights_Counters.Aurora_MySQL.NonNative"></a>
@@ -167,7 +169,6 @@ You can find definitions for these native metrics in [Viewing Statistics](https:
 | checkpoints\_timed | Checkpoint | Checkpoints per minute | 
 | checkpoint\_write\_time | Checkpoint | Milliseconds per checkpoint | 
 | maxwritten\_clean | Checkpoint | Bgwriter clean stops per minute | 
-| time\_since\_checkpoint | Checkpoint | Seconds | 
 | active\_transactions | Transactions | Transactions | 
 | blocked\_transactions | Transactions | Transactions | 
 | max\_used\_xact\_ids | Transactions | Transactions | 

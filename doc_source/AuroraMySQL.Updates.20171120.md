@@ -2,7 +2,7 @@
 
 **Version:** 1\.15\.1
 
-Aurora MySQL v1\.15\.1 is generally available\. All new database clusters, including those restored from snapshots, will be created in Aurora v1\.15\.1\. You have the option, but are not required, to upgrade existing DB clusters to Aurora v1\.15\.1\. If you wish to create new DB clusters in Aurora v1\.14\.1, you can do so using the AWS CLI or the Amazon RDS API and specifying the engine version\.
+Aurora MySQL 1\.15\.1 is generally available\. All new database clusters, including those restored from snapshots, will be created in Aurora 1\.15\.1\. You have the option, but are not required, to upgrade existing DB clusters to Aurora 1\.15\.1\. You can create new DB clusters in Aurora 1\.14\.1\. You can do so using the AWS CLI or the Amazon RDS API and specifying the engine version\.
 
 With version 1\.15\.1 of Aurora, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. We are enabling zero\-downtime patching, which works on a best\-effort basis to preserve client connections through the patching process\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
@@ -18,7 +18,7 @@ The zero\-downtime patching \(ZDP\) attempts, on a *best\-effort* basis, to pres
 + Fixed an issue with stability of read replicas on large \(> 5 TB\) volumes\.
 + Fixed an issue where worker thread count increases continuously due to a bogus outstanding connection count\.
 + Fixed an issue with table locks that caused long semaphore waits during insert workloads\.
-+ Reverted the following MySQL bug fixes included in Aurora MySQL v1\.15:
++ Reverted the following MySQL bug fixes included in Aurora MySQL 1\.15:
   + MySQL instance stalling “doing SYNC index” \(Bug \#73816\)
   + Assert RBT\_EMPTY\(INDEX\_CACHE\->WORDS\) in ALTER TABLE CHANGE COLUMN \(Bug \#17536995\)
   + InnoDB Fulltext search doesn't find records when savepoints are involved \(Bug \#70333\)

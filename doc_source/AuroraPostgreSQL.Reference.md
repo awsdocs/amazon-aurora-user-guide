@@ -19,7 +19,8 @@ The following table shows all of the parameters that apply to the entire Aurora 
 
 | Parameter name | Modifiable | 
 | --- | --- | 
-|  `archive_command`  |  No  | 
+|  `apg_ccm_enabled`  |  Yes  | 
+| archive\_command | No | 
 |  `archive_timeout`  |  No  | 
 |  `array_nulls`  |  Yes  | 
 |  `autovacuum`  |  Yes  | 

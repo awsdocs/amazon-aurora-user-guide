@@ -50,16 +50,16 @@ The following table shows the event category and a list of events when a DB inst
 |  Category  | Amazon RDS Event ID |  Description  | 
 | --- | --- | --- | 
 |  availability  | RDS\-EVENT\-0006 |  The DB instance restarted\.  | 
-|  availability  | RDS\-EVENT\-0004 |  The DB instance is undergoing a controlled shutdown\.  | 
+|  availability  | RDS\-EVENT\-0004 |  DB instance shutdown\.  | 
 |  availability  | RDS\-EVENT\-0022 |  An error has occurred while restarting MySQL or MariaDB\.  | 
 |  backtrack  | RDS\-EVENT\-0131 |  The actual Backtrack window is smaller than the target Backtrack window you specified\. Consider reducing the number of hours in your target Backtrack window\. For more information about backtracking, see [Backtracking an Aurora DB Cluster](AuroraMySQL.Managing.Backtrack.md)\.  | 
 |  backtrack  | RDS\-EVENT\-0132 |  The actual Backtrack window is the same as the target Backtrack window\.  | 
-|  backup  | RDS\-EVENT\-0001 |  A backup of the DB instance has started\.   | 
-|  backup  | RDS\-EVENT\-0002 |  A backup of the DB instance is complete\.  | 
+|  backup  | RDS\-EVENT\-0001 |  Backing up DB instance\.  | 
+|  backup  | RDS\-EVENT\-0002 |  Finished DB Instance backup\.  | 
 |  configuration change  | RDS\-EVENT\-0009 |  The DB instance has been added to a security group\.  | 
 |  configuration change  | RDS\-EVENT\-0024 |  The DB instance is being converted to a Multi\-AZ DB instance\.  | 
 |  configuration change  | RDS\-EVENT\-0030 |  The DB instance is being converted to a Single\-AZ DB instance\.  | 
-|  configuration change  | RDS\-EVENT\-0012 |  The DB instance class for this DB instance is being changed\.   | 
+|  configuration change  | RDS\-EVENT\-0012 |  Applying modification to database instance class\.   | 
 |  configuration change  | RDS\-EVENT\-0018 |  The current storage settings for this DB instance are being changed\.  | 
 |  configuration change  | RDS\-EVENT\-0011 |  A parameter group for this DB instance has changed\.  | 
 |  configuration change  | RDS\-EVENT\-0092 |  A parameter group for this DB instance has finished updating\.  | 
@@ -74,7 +74,7 @@ The following table shows the event category and a list of events when a DB inst
 |  configuration change  | RDS\-EVENT\-0016 |  The master password for the DB instance has been reset\.  | 
 |  configuration change  | RDS\-EVENT\-0067 |  An attempt to reset the master password for the DB instance has failed\.  | 
 |  configuration change  | RDS\-EVENT\-0078 |  The Enhanced Monitoring configuration has been changed\.  | 
-|  creation  | RDS\-EVENT\-0005 |  A DB instance is being created\.  | 
+|  creation  | RDS\-EVENT\-0005 |  DB instance created\.  | 
 |  deletion  | RDS\-EVENT\-0003 |  The DB instance has been deleted\.  | 
 |  failover  | RDS\-EVENT\-0034 |  Amazon RDS is not attempting a requested failover because a failover recently occurred on the DB instance\.  | 
 |  failover  | RDS\-EVENT\-0013 |  A Multi\-AZ failover that resulted in the promotion of a standby instance has started\.  | 
@@ -94,6 +94,7 @@ The following table shows the event category and a list of events when a DB inst
 |  low storage  | RDS\-EVENT\-0007 |  The allocated storage for the DB instance has been exhausted\. To resolve this issue, you should allocate additional storage for the DB instance\. For more information, see the [RDS FAQ](https://aws.amazon.com/rds/faqs/#20)\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\. For more information, see [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring)\.  | 
 |  maintenance  | RDS\-EVENT\-0026 |  Offline maintenance of the DB instance is taking place\. The DB instance is currently unavailable\.  | 
 |  maintenance  | RDS\-EVENT\-0027 |  Offline maintenance of the DB instance is complete\. The DB instance is now available\.  | 
+|  maintenance  | RDS\-EVENT\-0155 |  The DB instance has a DB engine minor version upgrade available\.  | 
 | notification | RDS\-EVENT\-0044 | Operator\-issued notification\. For more information, see the event message\. | 
 | notification | RDS\-EVENT\-0047 | Patching of the DB instance has completed\. | 
 | notification | RDS\-EVENT\-0048 | Patching of the DB instance has been delayed\. | 
@@ -103,7 +104,6 @@ The following table shows the event category and a list of events when a DB inst
 | notification | RDS\-EVENT\-0087 |  The DB instance has been stopped\.   | 
 | notification | RDS\-EVENT\-0088 |  The DB instance has been started\.  | 
 | notification | RDS\-EVENT\-0154 |  The DB instance is being started due to it exceeding the maximum allowed time being stopped\.  | 
-|  notification  | RDS\-EVENT\-0155 |  The DB instance has a DB engine minor version upgrade available\.  | 
 | read replica | RDS\-EVENT\-0045 | An error has occurred in the read replication process\. For more information, see the event message\.   For information on troubleshooting Read Replica errors, see [ Troubleshooting a MySQL or MariaDB Read Replica Problem](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.Troubleshooting.html)\. | 
 | read replica | RDS\-EVENT\-0046 | The Read Replica has resumed replication\. This message appears when you first create a Read Replica, or as a monitoring message confirming that replication is functioning properly\. If this message follows an RDS\-EVENT\-0045 notification, then replication has resumed following an error or after replication was stopped\. | 
 |  read replica  | RDS\-EVENT\-0057 |  Replication on the Read Replica was terminated\.  | 
@@ -143,6 +143,7 @@ The following table shows the event category and a list of events when an Aurora
 |  failover  | RDS\-EVENT\-0072 |  A failover for the DB cluster has begun within the same Availability Zone\.  | 
 |  failover  | RDS\-EVENT\-0073 |  A failover for the DB cluster has begun across Availability Zones\.  | 
 |  failure  | RDS\-EVENT\-0083 |  Aurora was unable to copy backup data from an Amazon S3 bucket\. It is likely that the permissions for Aurora to access the Amazon S3 bucket are configured incorrectly\. For more information, see [Migrating Data from MySQL by Using an Amazon S3 Bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3) \.   | 
+|  maintenance  | RDS\-EVENT\-0156 |  The DB cluster has a DB engine minor version upgrade available\.  | 
 |  notification  | RDS\-EVENT\-0076 |  Migration to an Aurora DB cluster failed\.  | 
 |  notification  | RDS\-EVENT\-0077 |  An attempt to convert a table from the source database to InnoDB failed during the migration to an Aurora DB cluster\.  | 
 |  notification  | RDS\-EVENT\-0149 |  A scaling point was not found\.  | 
@@ -150,7 +151,6 @@ The following table shows the event category and a list of events when an Aurora
 |  notification  | RDS\-EVENT\-0151 |  The DB cluster started\.  | 
 |  notification  | RDS\-EVENT\-0152 |  The DB cluster stop failed\.  | 
 |  notification  | RDS\-EVENT\-0153 |  The DB cluster is being started due to it exceeding the maximum allowed time being stopped\.  | 
-|  notification  | RDS\-EVENT\-0156 |  The DB cluster has a DB engine minor version upgrade available\.  | 
 
 The following table shows the event category and a list of events when an Aurora DB cluster snapshot is the source type\.
 

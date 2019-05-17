@@ -49,7 +49,6 @@
   +  Backtrack\. See [Backtracking an Aurora DB Cluster](AuroraMySQL.Managing.Backtrack.md) for information about backtracking\. 
   +  Parallel query\. See [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md) for information about parallel query\. 
   +  Aurora Serverless\. See [Using Amazon Aurora Serverless](aurora-serverless.md) for information about Aurora Serverless\. 
-  +  Performance Insights\. See [Using Amazon RDS Performance Insights](USER_PerfInsights.md) for information about Performance Insights\. 
   +  Stopping and starting the DB clusters within the global database\. See [Stopping and Starting an Amazon Aurora DB Cluster](aurora-cluster-stop-start.md) for information about stopping and starting Aurora clusters\. 
 
 ## Creating an Aurora Global Database<a name="aurora-global-database-creating"></a>

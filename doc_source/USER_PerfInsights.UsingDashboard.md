@@ -79,10 +79,10 @@ For another example, suppose that the **Average Active Sessions** chart is group
 In the **Top Load Items** table, you can view the following types of identifiers \(IDs\) that are associated with SQL statements:
 + **SQL ID** – An ID that the database uses to uniquely identify a SQL statement\.
 + **Support SQL ID** – A hash value of the SQL ID\. This value is only for referencing a SQL ID when you are working with AWS Support\. AWS Support doesn't have access to your actual SQL IDs and SQL text\.
-+ **Digest ID** – An ID that the database uses to uniquely identify a SQL Digest\. A SQL Digest can contain one or more SQL statements with literals removed and white space standardized\. The literals are replaced with question marks \(?\)\.
++ **Digest ID** – An ID that the database uses to uniquely identify a SQL digest\. A SQL digest can contain one or more SQL statements with literals removed and white space standardized\. The literals are replaced with question marks \(?\)\.
 
-  For Aurora MySQL and Aurora PostgreSQL DB instances, you can use a Digest ID to find a specific SQL Digest\.
-+ **Support Digest ID** – A hash value of the Digest ID\. This value is only for referencing a Digest ID when you are working with AWS Support\. AWS Support doesn't have access to your actual Digest IDs and SQL text\.
+  For Aurora MySQL and Aurora PostgreSQL DB instances, you can use a digest ID to find a specific SQL digest\.
++ **Support Digest ID** – A hash value of the digest ID\. This value is only for referencing a digest ID when you are working with AWS Support\. AWS Support doesn't have access to your actual digest IDs and SQL text\.
 
 In the **Top Load Items** table, you can open a top statement to view its IDs\. The following image shows an open top statement\.
 

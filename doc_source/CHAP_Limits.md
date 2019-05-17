@@ -19,7 +19,7 @@ The following table lists the resources and their limits per region\.
 | Clusters | 40 | 
 | Cluster parameter groups | 50 | 
 | Cross\-region snapshots copy requests | 5 | 
-| DB Instances 1 | 40 | 
+| DB Instances | 40 | 
 | Event subscriptions | 20 | 
 | Manual snapshots | 100 | 
 | Manual cluster snapshots | 100 | 
@@ -34,7 +34,9 @@ The following table lists the resources and their limits per region\.
 | Subnets per subnet group | 20 | 
 | Tags per resource | 50 | 
 
-1\. By default, you can have up to a total of 40 Amazon RDS DB instances\. If your application requires more DB instances, you can request additional DB instances via this request form [Request RDS DB instance limit](https://aws.amazon.com/contact-us/request-to-increase-the-amazon-rds-db-instance-limit/)\.
+**Note**  
+By default, you can have up to a total of 40 Amazon RDS DB instances\. If your application requires more DB instances, you can request additional DB instances via this request form [Request RDS DB instance limit](https://aws.amazon.com/contact-us/request-to-increase-the-amazon-rds-db-instance-limit/)\.  
+Backups managed by AWS Backup are considered manual snapshots for the manual snapshot limit\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
 ## Naming Constraints in Amazon RDS<a name="RDS_Limits.Constraints"></a>
 

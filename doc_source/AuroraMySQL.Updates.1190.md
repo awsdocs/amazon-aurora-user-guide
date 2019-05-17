@@ -2,7 +2,7 @@
 
 **Version:** 1\.19\.0
 
- Aurora MySQL 1\.19\.0 is generally available\. All new Aurora MySQL database clusters with MySQL 5\.6 compatibility, including those restored from snapshots, can be created with 1\.17\.8 or 1\.19\.0\. You have the option, but are not required, to upgrade existing database clusters to Aurora MySQL 1\.19\.0\. To use an older version, you can create new database clusters in Aurora MySQL v1\.14\.4, Aurora MySQL v1\.15\.1, Aurora MySQL 1\.16, Aurora MySQL 1\.17\.8, or Aurora MySQL 1\.18\.0, you can do so using the AWS CLI or the Amazon RDS API and specifying the engine version\. 
+ Aurora MySQL 1\.19\.0 is generally available\. All new Aurora MySQL database clusters with MySQL 5\.6 compatibility, including those restored from snapshots, can be created with 1\.17\.8 or 1\.19\.0\. You have the option, but are not required, to upgrade existing database clusters to Aurora MySQL 1\.19\.0\. To use an older version, you can create new database clusters in Aurora MySQL 1\.14\.4, Aurora MySQL 1\.15\.1, Aurora MySQL 1\.16, Aurora MySQL 1\.17\.8, or Aurora MySQL 1\.18\.0\. You can do so using the AWS CLI or the Amazon RDS API and specifying the engine version\. 
 
 If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 

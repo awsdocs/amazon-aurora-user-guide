@@ -91,6 +91,7 @@ You can find the following improvements in this engine update\.
 
 **Improvements**
 + This release contains all fixes, features, and improvements present in [Version 1\.3](#AuroraPostgreSQL.Updates.20180305.13)\.
++ Network traffic between the writer and reader nodes is now compressed to reduce network utilization\. This reduces the chance of read node unavailability due to network saturation\.
 + Performance of subtransactions has improved under high concurrency workloads\.
 + An update for the `pg_hint_plan` extension to version 1\.2\.3\.
 + Fixed an issue where on a busy system, a commit with millions of subtransactions \(and sometimes with commit timestamps enabled\) can cause Aurora to crash\.

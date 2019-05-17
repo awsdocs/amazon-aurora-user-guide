@@ -15,6 +15,7 @@ MySQL 5\.7\-compatible version Aurora contains all MySQL bug fixes through MySQL
 | --- | --- | --- | 
 | [Aurora MySQL Database Engine Updates 2018\-10\-11](AuroraMySQL.Updates.203.md) |  2\.03  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL Database Engine Updates 2018\-05\-03](AuroraMySQL.Updates.202.md) |  2\.02  |  Left join returns incorrect results on the outer side \(Bug \#22833364\)  | 
+| [Aurora MySQL Database Engine Updates 2019\-05\-02 \(Version 2\.04\.2\)](AuroraMySQL.Updates.2042.md) |  2\.04\.2  |  Bug \#24829050 \- INDEX\_MERGE\_INTERSECTION OPTIMIZATION CAUSES WRONG QUERY RESULTS  | 
 
 ## MySQL Bugs Fixed by Aurora MySQL 1\.x Database Engine Updates<a name="AuroraMySQL.Updates.MySQLBugs.v1"></a>
 

@@ -2,7 +2,7 @@
 
 **Version:** 1\.14\.1
 
-Aurora MySQL v1\.14\.1 is generally available\. All new database clusters, including those restored from snapshots, will be created in Aurora MySQL v1\.14\.1\. Aurora MySQL v1\.14\.1 is also a mandatory upgrade for existing Aurora MySQL DB clusters\. For more information, see [Announcement: Extension to Mandatory Upgrade Schedule for Amazon Aurora](https://forums.aws.amazon.com/ann.jspa?annID=4983) on the AWS Developer Forums website\.
+Aurora MySQL 1\.14\.1 is generally available\. All new database clusters, including those restored from snapshots, will be created in Aurora MySQL 1\.14\.1\. Aurora MySQL 1\.14\.1 is also a mandatory upgrade for existing Aurora MySQL DB clusters\. For more information, see [Announcement: Extension to Mandatory Upgrade Schedule for Amazon Aurora](https://forums.aws.amazon.com/ann.jspa?annID=4983) on the AWS Developer Forums website\.
 
 With version 1\.14\.1 of Aurora MySQL, we are using a cluster patching model where all nodes in an Aurora MySQL DB cluster are patched at the same time\. Updates require a database restart, so you will experience 20 to 30 seconds of downtime, after which you can resume using your DB cluster or clusters\. If your DB clusters are currently running version 1\.13 or greater, the zero\-downtime patching feature in Aurora MySQL might allow client connections to your Aurora MySQL primary instance to persist through the upgrade, depending on your workload\.
 

@@ -5,13 +5,13 @@ Amazon Aurora PostgreSQL is a fully managed, PostgreSQL\-compatible, and ACID\-c
 Aurora PostgreSQL can work with many industry standards\. For example, you can use Aurora PostgreSQL databases to build HIPAA\-compliant applications and to store healthcare related information, including protected health information \(PHI\), under an executed Business Associate Agreement \(BAA\) with AWS\. For more information about BAAs with AWS, see [HIPAA Compliance](https://aws.amazon.com/compliance/hipaa-compliance/)\.
 
 **Topics**
-+ [Comparison of Amazon Aurora PostgreSQL and Amazon RDS PostgreSQL](Aurora.AuroraPostgreSQL.Compare.md)
 + [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md)
 + [Migrating Data to Amazon Aurora PostgreSQL](AuroraPostgreSQL.Migrating.md)
 + [Managing Amazon Aurora PostgreSQL](AuroraPostgreSQL.Managing.md)
 + [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)
 + [Integrating Amazon Aurora PostgreSQL with Other AWS Services](AuroraPostgreSQL.Integrating.md)
 + [Managing Query Execution Plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)
++ [Fast Recovery After Failover with Cluster Cache Management for Aurora PostgreSQL](AuroraPostgreSQL.cluster-cache-mgmt.md)
 + [Upgrading an Aurora PostgreSQL DB Cluster Engine Version](USER_UpgradeDBInstance.Upgrading.md)
 + [Best Practices with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md)
 + [Amazon Aurora PostgreSQL Reference](AuroraPostgreSQL.Reference.md)

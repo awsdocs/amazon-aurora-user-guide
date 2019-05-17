@@ -2,7 +2,7 @@
 
 **Version:** 1\.17\.1
 
-Aurora MySQL 1\.17\.1 is generally available\. All new database clusters, including those restored from snapshots, will be created in Aurora MySQL v1\.17\.1\. You have the option, but are not required, to upgrade existing database clusters to Aurora MySQL v1\.17\.1\. If you wish to create new DB clusters in Aurora MySQL v1\.15\.1, Aurora MySQL 1\.16, or Aurora MySQL 1\.17, you can do so using the AWS CLI or the Amazon RDS API and specifying the engine version\. 
+Aurora MySQL 1\.17\.1 is generally available\. All new database clusters, including those restored from snapshots, will be created in Aurora MySQL 1\.17\.1\. You have the option, but are not required, to upgrade existing database clusters to Aurora MySQL 1\.17\.1\. You can create new DB clusters in Aurora MySQL 1\.15\.1, Aurora MySQL 1\.16, or Aurora MySQL 1\.17\. You can do so using the AWS CLI or the Amazon RDS API and specifying the engine version\. 
 
 With version 1\.17\.1 of Aurora MySQL, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. This release fixes some known engine issues as well as regressions\. 
 

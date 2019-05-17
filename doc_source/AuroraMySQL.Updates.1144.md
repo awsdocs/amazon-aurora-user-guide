@@ -2,7 +2,7 @@
 
 **Version:** 1\.14\.4
 
-Aurora MySQL v1\.14\.4 is generally available\. If you wish to create new DB clusters in Aurora v1\.14\.4, you can do so using the AWS CLI or the Amazon RDS API and specifying the engine version\. You have the option, but are not required, to upgrade existing 1\.14\.x DB clusters to Aurora v1\.14\.4\.
+Aurora MySQL 1\.14\.4 is generally available\. You can create new DB clusters in Aurora 1\.14\.4, using the AWS CLI or the Amazon RDS API and specifying the engine version\. You have the option, but are not required, to upgrade existing 1\.14\.x DB clusters to Aurora 1\.14\.4\.
 
 With version 1\.14\.4 of Aurora, we are using a cluster\-patching model where all nodes in an Aurora DB cluster are patched at the same time\. We support zero\-downtime patching, which works on a best\-effort basis to preserve client connections through the patching process\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
