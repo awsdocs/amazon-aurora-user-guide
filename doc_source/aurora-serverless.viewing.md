@@ -1,6 +1,6 @@
 # Viewing Aurora Serverless DB Clusters<a name="aurora-serverless.viewing"></a>
 
-After you create one or more Aurora Serverless DB clusters, you can view which DB clusters are type **Serverless** and which are type **Instance**\. For each Aurora Serverless DB cluster, you can view the current number of Aurora Capacity Units \(ACUs\) it is using\. Each ACU is a combination of processing and memory capacity\.
+After you create one or more Aurora Serverless DB clusters, you can view which DB clusters are type **Serverless** and which are type **Instance**\. You can also view the current number of Aurora capacity units \(ACUs\) each Aurora Serverless DB cluster is using\. Each ACU is a combination of processing and memory capacity\.
 
 **To view your Aurora Serverless DB clusters**
 

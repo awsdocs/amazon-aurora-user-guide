@@ -13,6 +13,7 @@
 + [Configuring an Aurora Global Database](#aurora-global-database-modifying)
 + [Connecting to an Aurora Global Database](#aurora-global-database-connecting)
 + [Failover for Aurora Global Database](#aurora-global-database-failover)
++ [Performance Insights for Aurora Global Database](#aurora-global-database-pi)
 + [Using Aurora Global Database with Other AWS Services](#aurora-global-database-interop)
 
 ## Overview of Aurora Global Database<a name="aurora-global-database-overview"></a>
@@ -40,7 +41,7 @@
 
  The following limitations currently apply to Aurora Global Database: 
 +  Aurora Global Database is only available for Aurora with MySQL 5\.6 compatibility\. 
-+  You can't use `db.t2` instance classes for an Aurora global database\. You have a choice of `db.r4` or `db.r5` instance classes\. 
++  You can't use `db.t2` or `db.t3` instance classes for an Aurora global database\. You have a choice of `db.r4` or `db.r5` instance classes\. 
 +  Currently, Aurora Global Database isn't available in the EU \(Stockholm\) and Asia Pacific \(Hong Kong\) regions\. 
 +  The secondary cluster must be in a different AWS Region than the primary cluster\. 
 +  You can't create a cross\-region Read Replica from the primary cluster in same region as the secondary\. See [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md) for information about cross\-region Read Replicas\. 
@@ -378,7 +379,7 @@ aws rds --region secondary_region ^
 
 ### Console<a name="aurora-global-database-detach.console"></a>
 
- To remove an Aurora cluster from an Aurora global database with the AWS Management Console, choose the cluster on the **Databases** page\. For **Actions**, choose **Remove from Global**\. The removed cluster becomes a regular Aurora cluster with full read\-write capability\. It is no longer kept synchronized with the primary cluster\.
+ To remove an Aurora cluster from an Aurora global database with the AWS Management Console, choose the cluster on the **Databases** page\. For **Actions**, choose **Remove from Global**\. The removed cluster becomes a regular Aurora cluster with full read\-write capability\. It is no longer kept synchronized with the primary cluster\. 
 
 ![\[Screenshot showing confirmation prompt to remove a secondary cluster from an Aurora global database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-detach-secondary-convert-standalone.png)
 
@@ -545,6 +546,16 @@ aws rds --region primary_region ^
    1.  You redirect all the write traffic to the primary cluster in the original AWS Region\. 
 
    1.  You add an AWS Region to set up a secondary cluster in the same AWS Region as before\. 
+
+## Performance Insights for Aurora Global Database<a name="aurora-global-database-pi"></a>
+
+ You can use Amazon RDS Performance Insights and Aurora Global Database together\. When you do so, the Performance Insights reports apply to each cluster in the global database individually\. You can enable or turn off Performance Insights for each cluster that's part of the global database\. When you add a new secondary region to a global database, that's already using Performance Insights, you must enable Performance Insights in the newly added cluster\. It doesn't inherit the Performance Insights setting from the existing global database\. 
+
+ You can switch AWS Regions while viewing the Performance Insights page for a DB instance that's attached to a global database\. However, you might not see performance information immediately after switching AWS Regions\. Although the DB instances might have identical names in each AWS Region, the associated Performance Insights URL is different for each DB instance\. After switching AWS Regions, choose the name of the DB instance again in the Performance Insights navigation pane\. 
+
+ For DB instances associated with a global database, the factors affecting performance might be different in each AWS Region\. For example, the DB instances in each region might have different capacity\. 
+
+ For information about using Performance Insights, see [Using Amazon RDS Performance Insights](USER_PerfInsights.md)\. 
 
 ## Using Aurora Global Database with Other AWS Services<a name="aurora-global-database-interop"></a>
 

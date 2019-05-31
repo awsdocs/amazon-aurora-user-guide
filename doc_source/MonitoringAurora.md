@@ -10,6 +10,8 @@
 + [Monitoring Amazon Aurora DB Cluster Metrics](Aurora.Monitoring.md)
 + [Enhanced Monitoring](USER_Monitoring.OS.md)
 + [Using Amazon RDS Performance Insights](USER_PerfInsights.md)
++ [Using Amazon Aurora Recommendations](USER_Recommendations.md)
++ [Using Database Activity Streams with Aurora PostgreSQL](DBActivityStreams.md)
 + [Using Amazon RDS Event Notification](USER_Events.md)
 + [Viewing Amazon RDS Events](USER_ListEvents.md)
 + [Amazon RDS Database Log Files](USER_LogAccess.md)

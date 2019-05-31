@@ -2,6 +2,8 @@
 
 To use Performance Insights, you must enable it on your DB instance\.
 
+If you use Performance Insights together with Aurora Global Database, you must enable Performance Insights individually for the DB instances in each AWS Region\. For details, see [Performance Insights for Aurora Global Database](aurora-global-database.md#aurora-global-database-pi)\. 
+
 ## Console<a name="USER_PerfInsights.Enabling.Console"></a>
 
 You can use the console to enable Performance Insights when you create a new DB instance\. You can also modify a DB instance to enable Performance Insights\.

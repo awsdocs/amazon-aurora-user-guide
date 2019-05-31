@@ -10,6 +10,9 @@ Some of the best practices for Amazon Aurora are specific to a particular databa
 |  Amazon Aurora MySQL  |  See [Best Practices with Amazon Aurora MySQL](AuroraMySQL.BestPractices.md)  | 
 |  Amazon Aurora PostgreSQL  |  See [Best Practices with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md)  | 
 
+**Note**  
+For common recommendations for Aurora, see [Using Amazon Aurora Recommendations](USER_Recommendations.md)\.
+
 **Topics**
 + [Amazon Aurora Basic Operational Guidelines](#Aurora.BestPractices.OperationalGuidelines)
 + [DB Instance RAM Recommendations](#Aurora.BestPractices.Performance.Sizing)
@@ -17,13 +20,12 @@ Some of the best practices for Amazon Aurora are specific to a particular databa
 + [Monitoring Amazon Aurora](#Aurora.BestPractices.Monitoring)
 + [Working with DB Parameter Groups and DB Cluster Parameter Groups](#Aurora.BestPractices.ParameterGroups)
 + [Amazon Aurora Best Practices Presentation Video](#Aurora.BestPractices.Presentation)
-+ [Related Topics](#Aurora.BestPractices.RelatedTopics)
 
 ## Amazon Aurora Basic Operational Guidelines<a name="Aurora.BestPractices.OperationalGuidelines"></a>
 
 The following are basic operational guidelines that everyone should follow when working with Amazon Aurora\. Note that the Amazon RDS Service Level Agreement requires that you follow these guidelines:
 + Monitor your memory, CPU, and storage usage\. Amazon CloudWatch can be set up to notify you when usage patterns change or when you approach the capacity of your deployment, so that you can maintain system performance and availability\.
-+ If your client application is caching the Domain Name Service \(DNS\) data of your DB instances, set a time\-to\-live \(TTL\) value of less than 30 seconds\. Because the underlying IP address of a DB instance can change after a failover, caching the DNS data for an extended time can lead to connection failures if your application tries to connect to an IP address that no longer is in service\.
++ If your client application is caching the Domain Name Service \(DNS\) data of your DB instances, set a time\-to\-live \(TTL\) value of less than 30 seconds\. Because the underlying IP address of a DB instance can change after a failover, caching the DNS data for an extended time can lead to connection failures if your application tries to connect to an IP address that no longer is in service\. Aurora DB clusters with multiple Read Replicas can experience connection failures also when connections use the reader endpoint and one of the Read Replica instances is in maintenance or is deleted\.
 + Test failover for your DB cluster to understand how long the process takes for your use case and to ensure that the application that accesses your DB cluster can automatically connect to the new DB cluster after failover\. 
 
 ## DB Instance RAM Recommendations<a name="Aurora.BestPractices.Performance.Sizing"></a>
@@ -61,6 +63,3 @@ Always exercise caution when modifying DB engine parameters and back up your DB 
 The 2016 AWS Summit conference in Chicago included a presentation on best practices for creating and configuring a secure, highly available Amazon Aurora DB Cluster\. A video of the presentation is available here:
 
 [![AWS Videos](http://img.youtube.com/vi/https://www.youtube.com/embed/DZFPYzp1JJA/0.jpg)](http://www.youtube.com/watch?v=https://www.youtube.com/embed/DZFPYzp1JJA)
-
-## Related Topics<a name="Aurora.BestPractices.RelatedTopics"></a>
-+ [Managing an Amazon Aurora DB Cluster](CHAP_Aurora.md)

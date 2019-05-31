@@ -44,7 +44,7 @@ In the following example, the source database makes a change to the data in `Pag
 
 ### When a Change Occurs on the Clone Database<a name="Aurora.Managing.Clone.Protocol.CloneWrite"></a>
 
-In the following diagram, the clone database has also made a change, this time in `Page 4`\. Instead of writing to the original `Page 4`, additional storage is used to create a new page, called `Page 4'`\. The source database continues to point to `Page 1'`, and also `Page 2` through Page 4, but the clone database now points to `Page 1` through `Page 3`, and also `Page 4'`\.
+In the following diagram, the clone database has also made a change, this time in `Page 4`\. Instead of writing to the original `Page 4`, additional storage is used to create a new page, called `Page 4'`\. The source database continues to point to `Page 1'`, and also `Page 2` through `Page 4`, but the clone database now points to `Page 1` through `Page 3`, and also `Page 4'`\.
 
 ![\[Amazon Aurora source database and clone database, after change occurs on clone database\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraClone004.png)
 

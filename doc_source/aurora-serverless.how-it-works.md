@@ -35,7 +35,7 @@ A *scaling point* is a point in time at which the database can safely initiate t
 + Long\-running queries or transactions are in progress
 + Temporary tables or table locks are in use
 
-In these cases, Aurora Serverless continues to try to find a scaling point so that it can initiate the scaling operation for as long as it determines that the DB cluster should be scaled\.
+In these cases, Aurora Serverless continues to try to find a scaling point so that it can initiate the scaling operation\. It does this for as long as it determines that the DB cluster should be scaled\.
 
 You can see scaling events in the details for a DB cluster in the AWS Management Console\. You can also monitor the current capacity allocated to the DB cluster by using the `ServerlessDatabaseCapacity` metric for Amazon CloudWatch\. 
 
@@ -75,7 +75,7 @@ For information about changing the capacity, see [Modifying an Aurora Serverless
 
 Aurora Serverless ignores the DB cluster parameter group status of **pending\-reboot**\. Aurora applies parameter changes immediately without downtime\.
 
-To apply a change to a DB cluster parameter group, Aurora Serverless starts a seamless scale with the current capacity if the DB cluster is active\. It resumes the DB cluster if it is paused\.
+To apply a change to a DB cluster parameter group, Aurora Serverless starts a seamless scale with the current capacity if the DB cluster is active\. It resumes the DB cluster if it's paused\.
 
 With an Aurora Serverless DB cluster, you can modify only the following parameters\. For all other configuration parameters, Aurora Serverless clusters use the default values\.
 + `character_set_server`\.
@@ -91,10 +91,10 @@ With an Aurora Serverless DB cluster, you can modify only the following paramete
 + `innodb_monitor_reset_all`\. This setting was formerly only in the DB instance parameter group\.
 + `innodb_print_all_deadlocks`\. This setting was formerly only in the DB instance parameter group\.
 + `lc_time_names`\.
-+  `log_output`\. This setting was formerly only in the DB instance parameter group\. This setting has a default value of `FILE`\. You can't change this value\. 
-+  `log_queries_not_using_indexes`\. This setting was formerly only in the DB instance parameter group\. 
++ `log_output`\. This setting was formerly only in the DB instance parameter group\. This setting has a default value of `FILE`\. You can't change this value\. 
++ `log_queries_not_using_indexes`\. This setting was formerly only in the DB instance parameter group\. 
 + `log_warnings`\. This setting was formerly only in the DB instance parameter group\.
-+  `long_query_time`\. This setting was formerly only in the DB instance parameter group\. 
++ `long_query_time`\. This setting was formerly only in the DB instance parameter group\. 
 + `lower_case_table_names`\.
 + `net_read_timeout`\. This setting was formerly only in the DB instance parameter group\.
 + `net_retry_count`\. This setting was formerly only in the DB instance parameter group\.
@@ -137,7 +137,7 @@ For more information about parameter groups, see [Working with DB Parameter Grou
 
  An Aurora Serverless DB cluster currently is created in a single Availability Zone \(AZ\)\. If that availability zone becomes unavailable, Aurora recreates the cluster in a different AZ\. 
 
-An Aurora Provisioned cluster that is configured for fast failover recovers in approximately 60 seconds\. Although Aurora Serverless does not support fast failover, it supports automatic multi\-AZ failover\. Failover for Aurora Serverless takes longer than for an Aurora Provisioned cluster\. The Aurora Serverless failover time is currently undefined because it depends on demand and capacity availability in other AZs within the given AWS Region\. 
+An Aurora Provisioned cluster that is configured for fast failover recovers in approximately 60 seconds\. Although Aurora Serverless does not support fast failover, it supports automatic Multi\-AZ failover\. Failover for Aurora Serverless takes longer than for an Aurora Provisioned cluster\. The Aurora Serverless failover time is currently undefined because it depends on demand and capacity availability in other AZs within the given AWS Region\. 
 
 ## Aurora Serverless and Snapshots<a name="aurora-serverless.snapshots"></a>
 

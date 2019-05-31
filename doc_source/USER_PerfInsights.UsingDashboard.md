@@ -127,7 +127,8 @@ The last three roll\-up queries are the major contributors to CPU\. These are th
 By default, each row in the **Top Load Items** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement is larger than 500 bytes, you can view more of the SQL statement by opening the statement in the Performance Insights dashboard\. The Performance Insights dashboard can display up to 4,096 bytes for a SQL statement\. You can also copy or download the displayed SQL statement\.
 
 The limit for SQL text depends on the DB engine\. The following limits apply:
-+ Aurora MySQL – 1,024 bytes
++ Aurora MySQL 5\.7 – 4,096 bytes
++ Aurora MySQL 5\.6 – 1,024 bytes
 + Aurora PostgreSQL – Set by the `track_activity_query_size` DB instance parameter
 
 For Aurora PostgreSQL DB instances, you can control the limit of the SQL text size by setting the `track_activity_query_size` DB instance parameter, up to 102,400 bytes\. You can use the AWS Management Console to download SQL text up to the limit you set with this parameter\. For more information, see [Setting the SQL Text Limit for Aurora PostgreSQL DB Instances](#USER_PerfInsights.UsingDashboard.SQLTextLimit)\.

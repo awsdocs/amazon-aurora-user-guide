@@ -1,17 +1,12 @@
 # Using the Query Editor for Aurora Serverless<a name="query-editor"></a>
 
-
-|  | 
-| --- |
-| The query editor is in beta for Aurora Serverless and is subject to change\. | 
-
 With the query editor for Aurora Serverless, you can run SQL queries in the RDS console\. You can run any valid SQL statement on the Aurora Serverless DB cluster, including data manipulation and data definition statements\.
 
 The query editor requires an Aurora Serverless DB cluster with the Data API enabled\. For information about creating an Aurora Serverless DB cluster with the Data API enabled, see [Using the Data API for Aurora Serverless](data-api.md)\.
 
 ## Authorizing Access to the Query Editor<a name="query-editor.access"></a>
 
-A user must be authorized to run queries in the query editor\. You can authorize a user to run queries in the query editor by adding the `AmazonRDSDataFullAccess` predefined AWS Identity and Access Management \(IAM\) policy to the user\.
+A user must be authorized to run queries in the query editor\. You can authorize a user to run queries in the query editor by adding the `AmazonRDSDataFullAccess` policy, a predefined AWS Identity and Access Management \(IAM\) policy, to that user\.
 
 You can also create an IAM policy that grants access to the query editor\. After you create the policy, add it to each user that requires access to the query editor\.
 
@@ -51,7 +46,11 @@ The following policy provides the minimum required permissions for a user to acc
                 "dbqms:UpdateQueryHistory",
                 "dbqms:DeleteQueryHistory",
                 "dbqms:DescribeQueryHistory",
-                "rds-data:ExecuteSql"
+                "rds-data:BatchExecuteStatement",
+                "rds-data:BeginTransaction",
+                "rds-data:CommitTransaction",
+                "rds-data:ExecuteStatement",
+                "rds-data:RollbackTransaction"
             ],
             "Resource": "*"
         }
@@ -61,7 +60,7 @@ The following policy provides the minimum required permissions for a user to acc
 
 For information about creating an IAM policy, see [Creating IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) in the *AWS Identity and Access Management User Guide*\.
 
-For information about adding an IAM policy to a user, see [Adding and Removing IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) in the *AWS Identity and Access Management User Guide*\.
+For information about adding an IAM policy to a user, see [Adding and Removing IAM Identity Permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) in the *AWS Identity and Access Management User Guide*\.
 
 ## Running Queries in the Query Editor<a name="query-editor.running"></a>
 
@@ -77,30 +76,44 @@ You can run SQL statements on an Aurora Serverless DB cluster in the query edito
 
 1. Choose the Aurora Serverless DB cluster that you want to run SQL queries against\.
 
-1. For **Actions**, choose **Query**\.
-
-1. If you haven't connected to the database before, the **Connect to database** page opens\.  
+1. For **Actions**, choose **Query**\. If you haven't connected to the database before, the **Connect to database** page opens\.  
 ![\[Query editor Connect to database page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/query-editor-connect.png)
 
-   1. For **Database cluster**, choose the Aurora DB cluster that you want to run SQL queries on\.
+1. Enter the following information:
 
-   1. For **Database username**, choose the user name of the database user to connect with\.
+   1. For **Database instance or cluster**, choose the Aurora Serverless DB cluster that you want to run SQL queries on\.
 
-   1. For **Password**, enter the password for the database user that you chose\.
+   1. For **Database username**, choose the user name of the database user to connect with, or choose **Add new database credentials**\. If you choose **Add new database credentials**, enter the user name for the new database credentials in **Enter database username**\.
 
-   1. In the last box, enter the name of the schema that you want to use for the Aurora DB cluster\.
+   1. For **Enter database password**, enter the password for the database user that you chose\.
+
+   1. In the last box, enter the name of the database or schema that you want to use for the Aurora DB cluster\.
 
    1. Choose **Connect to database**\.
 **Note**  
 If your connection is successful, your connection and authentication information are stored in AWS Secrets Manager\. You don't need to enter the connection information again\.
 
-1. In the query editor, enter the SQL query you want to run on the database\.  
+1. In the query editor, enter the SQL query that you want to run on the database\.  
 ![\[Query editor\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/query-editor.png)
+
+   Each SQL statement can commit automatically, or you can run SQL statements in a script as part of a transaction\. To control this behavior, choose the gear icon above the query window\.   
+![\[Gear icon in Query editor\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/query-editor-gear.png)
+
+   The **Query Editor Settings** window appears\.  
+![\[Query Editor Settings\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/query-editor-settings.png)
+
+   If you choose **Auto\-commit**, every SQL statement commits automatically\. If you choose **Transaction**, you can run a group of statements in a script, and they don't commit automatically\. If **Transaction** is set, the statements in the group are committed when choose **Run**\. Also, you can choose to stop a running script if an error occurs by enabling **Stop on error**\.
+**Note**  
+In a group of statements, data definition language \(DDL\) statements can cause previous data manipulation language \(DML\) statements to commit\. You can also include `COMMIT` and `ROLLBACK` statements in a group of statements in a script\.
+
+   After you make your choices in the **Query Editor Settings** window, choose **Save**\.
 
 1. Choose **Run** or press Ctrl\+Enter, and the query editor displays the results of your query\.
 
-   After running the query, save it to **Saved queries** by choosing **Save As** or **Save**\.
+   After running the query, save it to **Saved queries** by choosing **Save**\.
 
-   Export the query results to spreadsheet format by choosing **Export**\.
+   Export the query results to spreadsheet format by choosing **Export to csv**\.
 
-After you run queries and save queries, you can rerun them\. To do so, choose the **History** tab or the **Saved queries** tab, choose the query, and then choose **Run**\.
+You can find, edit, and rerun previous queries\. To do so, choose the **Recent** tab or the **Saved queries** tab, choose the query text, and then choose **Run**\.
+
+To change the database, choose **Change database**\.

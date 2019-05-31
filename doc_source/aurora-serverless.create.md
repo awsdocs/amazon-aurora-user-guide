@@ -13,7 +13,7 @@ You can create an Aurora Serverless DB cluster with the AWS Management Console, 
 For general information about creating a DB cluster, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
 
 **Note**  
- Currently, Aurora Serverless isn't available in all AWS Regions\. For more information, see [Aurora Serverless](https://aws.amazon.com/rds/aurora/serverless/#Pricing)\.   
+ Currently, Aurora Serverless isn't available in all AWS Regions\. For more information on Aurora Serverless, see [Pricing](https://aws.amazon.com//rds/aurora/serverless/#Pricing)\.   
  The cluster volume for an Aurora Serverless cluster is always encrypted\. You can choose the encryption key, but not turn off encryption\. Therefore, you can't perform operations that aren't allowed for encrypted snapshots\. For example, you can't copy snapshots of Aurora Serverless clusters to a different AWS Region\. 
 
 ## Console<a name="aurora-serverless.create.console"></a>
@@ -30,9 +30,9 @@ The following image shows the **Capacity settings** you can adjust\.
 
 ![\[Setting capacity for an Aurora Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-capacity.png)
 
-You can also enable the Data API for an the Aurora Serverless DB cluster\. For more information, see [Using the Data API for Aurora Serverless](data-api.md)\. 
+You can also enable the Data API for your Aurora Serverless DB cluster\. For more information, see [Using the Data API for Aurora Serverless](data-api.md)\. 
 
-For more information on creating an Aurora DB cluster using the console, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
+For more information on creating an Aurora DB cluster using the AWS Management Console, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
 
 To connect to an Aurora Serverless DB cluster, use the database endpoint\. For details, see the instructions in [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\.
 

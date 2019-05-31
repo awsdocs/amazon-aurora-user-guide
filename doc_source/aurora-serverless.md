@@ -16,8 +16,8 @@ A non\-Serverless DB cluster for Aurora is called a *provisioned DB cluster*\.
 + [Modifying an Aurora Serverless DB Cluster](aurora-serverless.modifying.md)
 + [Setting the Capacity of an Aurora Serverless DB Cluster](aurora-serverless.setting-capacity.md)
 + [Viewing Aurora Serverless DB Clusters](aurora-serverless.viewing.md)
-+ [Using the Query Editor for Aurora Serverless](query-editor.md)
 + [Using the Data API for Aurora Serverless](data-api.md)
++ [Using the Query Editor for Aurora Serverless](query-editor.md)
 
 ## Advantages of Aurora Serverless<a name="aurora-serverless.advantages"></a>
 
@@ -46,10 +46,10 @@ You have an application that is only used for a few minutes several times per da
 You are deploying a new application and are unsure about which instance size you need\. With Aurora Serverless, you can create a database endpoint and have the database autoscale to the capacity requirements of your application\.
 
 **Variable workloads**  
-You are running a lightly used application, with peaks of 30 minutes to several hours a few times each day, or several times per year\. Examples are applications for human resources, budgeting, and operational reporting applications\. With Aurora Serverless, you no longer need to provision to either peak or average capacity\.
+You're running a lightly used application, with peaks of 30 minutes to several hours a few times each day, or several times per year\. Examples are applications for human resources, budgeting, and operational reporting applications\. With Aurora Serverless, you no longer need to provision to either peak or average capacity\.
 
 **Unpredictable workloads**  
-You are running workloads where there is database usage throughout the day, but also peaks of activity that are hard to predict\. An example is a traffic site that sees a surge of activity when it starts raining\. With Aurora Serverless, your database autoscales capacity to meet the needs of the application's peak load and scales back down when the surge of activity is over\.
+You're running workloads where there is database usage throughout the day, but also peaks of activity that are hard to predict\. An example is a traffic site that sees a surge of activity when it starts raining\. With Aurora Serverless, your database autoscales capacity to meet the needs of the application's peak load and scales back down when the surge of activity is over\.
 
 **Development and test databases**  
 Your developers use databases during work hours but don't need them on nights or weekends\. With Aurora Serverless, your database automatically shuts down when it's not in use\.

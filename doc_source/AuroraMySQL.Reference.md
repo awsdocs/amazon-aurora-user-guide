@@ -89,7 +89,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `server_audit_events`  |  Yes  |  | 
 |  `server_audit_excl_users`  |  Yes  |  | 
 |  `server_audit_incl_users`  |  Yes  |  | 
-|  `server_audit_logging`  |  Yes  |  | 
+|  `server_audit_logging`  |  Yes  | For instructions on uploading the logs to CloudWatch Logs, see [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. | 
 |  `server_id`  |  No  |  | 
 |  `skip-character-set-client-handshake`  |  Yes  |  | 
 |  `skip_name_resolve`  |  No  |  | 
@@ -139,7 +139,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `ft_min_word_len` | Yes |  | 
 | `ft_query_expansion_limit` | Yes |  | 
 | `ft_stopword_file` | Yes |  | 
-| `general_log` | Yes |  | 
+| `general_log` | Yes | For instructions on uploading the logs to CloudWatch Logs, see [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. | 
 | `general_log_file` | No |  | 
 | `group_concat_max_len` | Yes |  | 
 | `gtid-mode` | Sometimes | Modifiable in Aurora MySQL version 2\.04 and later\. | 
@@ -290,7 +290,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `slave_pending_jobs_size_max` | Yes |  | 
 | `slave_sql_verify_checksum` | Yes |  | 
 | `slow_launch_time` | Yes |  | 
-| `slow_query_log` | Yes |  | 
+| `slow_query_log` | Yes | For instructions on uploading the logs to CloudWatch Logs, see [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. | 
 | `slow_query_log_file` | No |  | 
 | `socket` | No |  | 
 | `sort_buffer_size` | Yes |  | 

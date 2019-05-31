@@ -12,9 +12,7 @@ The version numbering sequence is specific to each database engine\. For example
 
 ## Manually Upgrading the Engine Version<a name="USER_UpgradeDBInstance.Upgrading.Manual"></a>
 
-To perform a major version upgrade of a DB cluster, you can restore a snapshot of the DB cluster and specify a higher major engine version\. For information about restoring a DB cluster, see [Restoring from a DB Cluster Snapshot](USER_RestoreFromSnapshot.md)\.
-
-To perform a minor version upgrade of an Aurora PostgreSQL DB cluster, use the following instructions for the AWS Management Console, the AWS CLI, or the RDS API\.
+To perform a minor version upgrade of an Aurora PostgreSQL DB cluster, use the following instructions for the AWS Management Console, the AWS CLI, or the RDS API\. Aurora PostgreSQL does not currently support in\-place major version upgrades\. However, you can migrate from one major version to another using dump and load tools such as the PostgreSQL utilities `pg_dump` and `pg_restore`\.
 
 ### Upgrading the Engine Version of a DB Cluster Using the Console<a name="USER_UpgradeDBInstance.Upgrading.Manual.Console"></a>
 
