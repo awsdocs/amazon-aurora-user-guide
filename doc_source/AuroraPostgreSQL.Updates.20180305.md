@@ -462,7 +462,7 @@ You can find the following improvements in this engine update\.
 
 1. Fixes a bug in which a PostgreSQL backend can't be terminated or canceled while invoking an `fdw` call\.
 
-1. Fixes a bug in which one vCPU is fully utilized at all times by the Aurora storage daemon\. This issue is especially noticeable on smaller instance types, such as r4\.large, where it can lead to 25–50 percent CPU usage when idle\.
+1. Fixes a bug in which one vCPU is fully utilized at all times by the Aurora storage daemon\. This issue is especially noticeable on smaller instance classes, such as r4\.large, where it can lead to 25–50 percent CPU usage when idle\.
 
 1. Fixes a bug in which an Aurora PostgreSQL writer node can fail over spuriously\.
 

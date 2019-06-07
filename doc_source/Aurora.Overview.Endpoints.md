@@ -44,7 +44,7 @@
  `myendpoint.cluster-custom-123456789012.us-east-1.rds.amazonaws.com:3306` 
 
 **Instance endpoint**  
- An *instance endpoint* connects to a specific DB instance within an Aurora cluster\. Each DB instance in a DB cluster, regardless of instance type, has its own unique instance endpoint\. So there is one instance endpoint for the current primary DB instance of the DB cluster, and there is one instance endpoint for each of the Aurora Replicas in the DB cluster\.   
+ An *instance endpoint* connects to a specific DB instance within an Aurora cluster\. Each DB instance in a DB cluster has its own unique instance endpoint\. So there is one instance endpoint for the current primary DB instance of the DB cluster, and there is one instance endpoint for each of the Aurora Replicas in the DB cluster\.   
  The instance endpoint provides direct control over connections to the DB cluster, for scenarios where using the cluster endpoint or reader endpoint might not be appropriate\. For example, your client application might require more fine\-grained load balancing based on workload type\. In this case, you can configure multiple clients to connect to different Aurora Replicas in a DB cluster to distribute read workloads\. For an example that uses instance endpoints to improve connection speed after a failover for Aurora PostgreSQL, see [Fast Failover with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md#AuroraPostgreSQL.BestPractices.FastFailover)\. For an example that uses instance endpoints to improve connection speed after a failover for Aurora MySQL, see [MariaDB Connector/J failover support – case Amazon Aurora](https://mariadb.org/mariadb-connectorj-failover-support-case-amazon-aurora/)\.   
  The following example illustrates an instance endpoint for a DB instance in an Aurora MySQL DB cluster\.   
  `mydbinstance.123456789012.us-east-1.rds.amazonaws.com:3306` 
@@ -589,6 +589,6 @@ mysql> select @@aurora_server_id;
 
  If the primary DB instance of a DB cluster fails, Aurora automatically fails over to a new primary DB instance\. It does so by either promoting an existing Aurora Replica to a new primary DB instance or creating a new primary DB instance\. If a failover occurs, you can use the cluster endpoint to reconnect to the newly promoted or created primary DB instance, or use the reader endpoint to reconnect to one of the Aurora Replicas in the DB cluster\. During a failover, the reader endpoint might direct connections to the new primary DB instance of a DB cluster for a short time after an Aurora Replica is promoted to the new primary DB instance\. 
 
- If you design your own application logic to manage connections to instance endpoints, you can manually or programmatically discover the resulting set of available DB instances in the DB cluster\. You can then confirm their instance types after failover and connect to an appropriate instance endpoint\. 
+ If you design your own application logic to manage connections to instance endpoints, you can manually or programmatically discover the resulting set of available DB instances in the DB cluster\. You can then confirm their instance classes after failover and connect to an appropriate instance endpoint\. 
 
  For more information about failovers, see [Fault Tolerance for an Aurora DB Cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\. 

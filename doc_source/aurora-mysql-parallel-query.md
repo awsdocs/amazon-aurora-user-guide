@@ -53,8 +53,8 @@
  The following limitations apply to the parallel query feature: 
 +  Currently, Aurora MySQL versions that are compatible with MySQL 5\.6 support parallel query\. \(Note that the PostgreSQL database engine has an unrelated feature that is also called "parallel query"\.\)
 +  Currently, you can only use parallel query with the following instance classes: 
-  +  All instance types in the db\.r3 series\. 
-  +  All instance types in the db\.r4 series\. 
+  +  All instance classes in the db\.r3 series\. 
+  +  All instance classes in the db\.r4 series\. 
 **Note**  
  You can't create T2 instances for parallel query\. 
 +  The parallel query option is available in the following regions: 
@@ -308,9 +308,9 @@ mysql> select @@aurora_pq;
 
  As you monitor or tune cluster performance, you need to decide whether parallel query is being used in the appropriate contexts\. You might adjust the database schema, settings, SQL queries, or even the cluster topology and application connection settings to take advantage of this feature\. 
 
- To check if a query is using parallel query, check the query execution plan \(known as the "explain plan"\) by running the [EXPLAIN](https://dev.mysql.com/doc/refman/5.6/en/execution-plan-information.html) statement\. For examples of how SQL statements, clauses, and expressions affect `EXPLAIN` output for parallel query, see [How Parallel Query Works with SQL Constructs](#aurora-mysql-parallel-query-sql)\. 
+ To check if a query is using parallel query, check the query execution plan \(also known as the "explain plan"\) by running the [EXPLAIN](https://dev.mysql.com/doc/refman/5.6/en/execution-plan-information.html) statement\. For examples of how SQL statements, clauses, and expressions affect `EXPLAIN` output for parallel query, see [How Parallel Query Works with SQL Constructs](#aurora-mysql-parallel-query-sql)\. 
 
- The following example demonstrates the difference between a traditional explain plan and a parallel query plan\. This query is Query 3 from the TPC\-H benchmark\. Many of the sample queries throughout this section use the tables from the TPC\-H dataset\.  
+ The following example demonstrates the difference between a traditional execution plan and a parallel query plan\. This query is Query 3 from the TPC\-H benchmark\. Many of the sample queries throughout this section use the tables from the TPC\-H dataset\.  
 
 ```
 SELECT l_orderkey,
@@ -332,7 +332,7 @@ ORDER BY revenue DESC,
   o_orderdate LIMIT 10;
 ```
 
- With parallel query disabled, the query might have an explain plan like the following, which uses hash join but not parallel query\. 
+ With parallel query disabled, the query might have an execution plan like the following, which uses hash join but not parallel query\. 
 
 ```
 +----+-------------+----------+...+-----------+-----------------------------------------------------------------+
@@ -344,7 +344,7 @@ ORDER BY revenue DESC,
 +----+-------------+----------+...+-----------+-----------------------------------------------------------------+
 ```
 
- After parallel query is enabled, two steps in this explain plan can use the parallel query optimization, as shown under the `Extra` column in the `EXPLAIN` output\. The I/O\-intensive and CPU\-intensive processing for those steps is pushed down to the storage layer\. 
+ After parallel query is enabled, two steps in this execution plan can use the parallel query optimization, as shown under the `Extra` column in the `EXPLAIN` output\. The I/O\-intensive and CPU\-intensive processing for those steps is pushed down to the storage layer\. 
 
 ```
 +----+...+--------------------------------------------------------------------------------------------------------------------------------+
@@ -413,7 +413,7 @@ ORDER BY revenue DESC,
 
  In addition to the Amazon CloudWatch metrics described in [Monitoring Amazon Aurora DB Cluster Metrics](Aurora.Monitoring.md), Aurora provides other global status variables\. You can use these global status variables to help monitor parallel query execution and give you insights into why the optimizer might use or not use parallel query in a given situation\. To access these variables, you can use the `[SHOW GLOBAL STATUS](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html)` command\. You can also find these variables listed following\. 
 
- A parallel query session isn't necessarily a one\-to\-one mapping with an executed query\. For example, suppose your explain plan has two steps that use parallel query\. In that case, the query involves two parallel sessions and the counters for requests attempted and requests successful are incremented by two\. 
+ A parallel query session isn't necessarily a one\-to\-one mapping with an executed query\. For example, suppose your execution plan has two steps that use parallel query\. In that case, the query involves two parallel sessions and the counters for requests attempted and requests successful are incremented by two\. 
 
  When you experiment with parallel query by issuing `EXPLAIN` statements, expect to see increases in the counters designated as "not chosen" even though the queries aren't actually running\. When you work with parallel query in production, you can check if the "not chosen" counters are increasing faster than you expect\. You can then adjust your cluster settings, query mix, DB instances where parallel query is enabled, and so on, so that parallel query runs for the queries that you expect\. 
 
@@ -463,7 +463,7 @@ ORDER BY revenue DESC,
 
 ### EXPLAIN statement<a name="aurora-mysql-parallel-query-sql-explain"></a>
 
- As shown in examples throughout this section, the `EXPLAIN` statement indicates whether each stage of a query is currently eligible for parallel query\. It also indicates which aspects of a query can be pushed down to the storage layer\. The most important items in the explain plan are the following: 
+ As shown in examples throughout this section, the `EXPLAIN` statement indicates whether each stage of a query is currently eligible for parallel query\. It also indicates which aspects of a query can be pushed down to the storage layer\. The most important items in the execution plan are the following: 
 +  A value other than `NULL` for the `key` column suggests that the query can be performed efficiently using index lookups, and parallel query is unlikely\. 
 +  A small value for the `rows` column \(that is, a value not in the millions\) suggests that the query isn't accessing enough data to make parallel query worthwhile, and parallel query is unlikely\. 
 +  The `Extra` column shows you if parallel query is expected to be used\. This output looks like the following example\. 
@@ -715,7 +715,7 @@ mysql> explain select p_partkey from part where p_name like '%choco_ate%'
 
  The optimizer rewrites any query using a view as a longer query using the underlying tables\. Thus, parallel query works the same whether table references are views or real tables\. All the same considerations about whether to use parallel query for a query, and which parts are pushed down, apply to the final rewritten query\. 
 
- For example, the following explain plan shows a view definition that usually doesn't use parallel query\. When the view is queried with additional `WHERE` clauses, Aurora MySQL uses parallel query\. 
+ For example, the following execution plan shows a view definition that usually doesn't use parallel query\. When the view is queried with additional `WHERE` clauses, Aurora MySQL uses parallel query\. 
 
 ```
 mysql> create view part_view as select * from part;

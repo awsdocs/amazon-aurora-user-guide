@@ -23,13 +23,13 @@ select @@aurora_version;
 Starting with Aurora MySQL 2\.03\.2, Aurora engine versions have the following syntax\.
 
 ```
-<mysql-major-version>.mysql_aurora.<aurora-mysql-version>            
+<mysql-major-version>.mysql_aurora.<aurora-mysql-version>
 ```
 
 For example, the engine version for Aurora MySQL 2\.03\.2 is the following\.
 
 ```
-5.7.mysql_aurora.2.03.2            
+5.7.mysql_aurora.2.03.2
 ```
 
 **Note**  
