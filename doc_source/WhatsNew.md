@@ -1,5 +1,5 @@
 # Document History<a name="WhatsNew"></a>
-+ **Latest documentation update: **May 30, 2019
++ **Latest documentation update: **June 20, 2019
 + **Current API version: **2014\-10\-31
 
 The following table describes important changes to the *Amazon Aurora User Guide*\. For notification about updates to this documentation, you can subscribe to an RSS feed\. For information about Amazon Relational Database Service \(Amazon RDS\), see the [ *Amazon Relational Database Service User Guide*](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html)\.
@@ -9,6 +9,9 @@ Before August 31, 2018, Amazon Aurora was documented in the * Amazon Relational 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Aurora PostgreSQL supports db\.t3 DB instance classes](#WhatsNew) | You can now create Aurora PostgreSQL DB clusters that use the db\.t3 DB instance classes\. For more information, see [DB Instance Class](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html)\. | June 20, 2019 | 
+| [Support for importing data from Amazon S3 for Aurora PostgreSQL](#WhatsNew) | You can now import data from an Amazon S3 file into a table in an Aurora PostgreSQL DB cluster\. For more information, see [Importing Amazon S3 Data into an Aurora PostgreSQL DB Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AuroraPostgreSQL.Migrating.html#USER_PostgreSQL.S3Import)\.  | June 19, 2019 | 
+| [Aurora PostgreSQL now provides fast failover recovery with cluster cache management](#WhatsNew) | Aurora with PostgreSQL compatibility now provides cluster cache management to ensure fast recovery of the primary DB instance in the event of a failover\. For more information, see [Fast Recovery after Failover with Cluster Cache Management](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.cluster-cache-mgmt.html)\.  | June 11, 2019 | 
 | [Data API for Aurora Serverless generally available](#WhatsNew) | You can access Aurora Serverless clusters with web services–based applications using the Data API\. For more information, see [ Using the Data API for Aurora Serverless](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)\. | May 30, 2019 | 
 | [Aurora PostgreSQL version 2\.3](#WhatsNew) | Version 2\.3 of Amazon Aurora with PostgreSQL compatibility is available and compatible with PostgreSQL 10\.7\. For more information, see [ Version 2\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html#AuroraPostgreSQL.Updates.20180305.23)\.  | May 30, 2019 | 
 | [Aurora PostgreSQL supports database monitoring with database activity streams](#WhatsNew) | Aurora with PostgreSQL compatibility now includes database activity streams, which provide a near real\-time data stream of the database activity in your relational database\. For more information, see [ Using Database Activity Streams](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)\. | May 30, 2019 | 

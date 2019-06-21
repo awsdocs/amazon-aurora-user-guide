@@ -831,3 +831,60 @@ public class BatchExecuteExample {
   }
 }
 ```
+
+## Troubleshooting Data API Issues<a name="data-api.troubleshooting"></a>
+
+Use the following sections, titled with common error messages, to help troubleshoot problems that you have with the Data API\. 
+
+**Topics**
++ [Transaction *<transaction\_ID>* Is Not Found](#data-api.troubleshooting.tran-id-not-found)
++ [Packet for Query Is Too Large](#data-api.troubleshooting.packet-too-large)
++ [Query Response Exceeded Limit of Number of Records](#data-api.troubleshooting.query-response-too-large)
++ [Database Response Exceeded Size Limit](#data-api.troubleshooting.response-size-too-large)
++ [HttpEndpoint Is Not Enabled for Cluster *<cluster\_ID>*](#data-api.troubleshooting.http-endpoint-not-enabled)
+
+### Transaction *<transaction\_ID>* Is Not Found<a name="data-api.troubleshooting.tran-id-not-found"></a>
+
+In this case, the transaction ID specified in a Data API call wasn't found\. The cause for this issue is almost always one of the following:
++ The specified transaction ID wasn't created by a [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BeginTransaction.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BeginTransaction.html) call\.
++ The specified transaction ID has expired\.
+
+  A transaction expires if no call uses the transaction ID within three minutes\.
+
+To solve the issue, make sure that your call has a valid transaction ID\. Also make sure that each transaction call runs within three minutes of the last one\.
+
+For information about running transactions, see [Calling the Data API](#data-api.calling)\.
+
+### Packet for Query Is Too Large<a name="data-api.troubleshooting.packet-too-large"></a>
+
+In this case, the result set returned for a row was too large\. The Data API size limit is 64 KB per row in the result set returned by the database\.
+
+To solve this issue, ensure that each row in a result set is 64 KB or less\.
+
+### Query Response Exceeded Limit of Number of Records<a name="data-api.troubleshooting.query-response-too-large"></a>
+
+In this case, the number of rows in the result set returned was too large\. The Data API limit is 1,000 rows in the result set returned by the database\.
+
+To solve this issue, make sure that calls to the Data API return 1,000 rows or less\. If you need to return more than 1,000 rows, you can use multiple [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html) calls with the `LIMIT` clause in your query\.
+
+For more information about the `LIMIT` clause, see [SELECT Syntax](https://dev.mysql.com/doc/refman/5.7/en/select.html) in the MySQL documentation\.
+
+### Database Response Exceeded Size Limit<a name="data-api.troubleshooting.response-size-too-large"></a>
+
+In this case, the size of the result set returned by the database was too large\. The Data API limit is 1 MB in the result set returned by the database\.
+
+To solve this issue, make sure that calls to the Data API return 1 MB of data or less\. If you need to return more than 1 MB, you can use multiple [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html) calls with the `LIMIT` clause in your query\.
+
+For more information about the `LIMIT` clause, see [SELECT Syntax](https://dev.mysql.com/doc/refman/5.7/en/select.html) in the MySQL documentation\.
+
+### HttpEndpoint Is Not Enabled for Cluster *<cluster\_ID>*<a name="data-api.troubleshooting.http-endpoint-not-enabled"></a>
+
+The cause for this issue is almost always one of the following:
++ The Data API isn't enabled for the Aurora Serverless DB cluster\. To use the Data API with an Aurora Serverless DB cluster, the Data API must be enabled for the DB cluster\.
++ The DB cluster was renamed after the Data API was enabled for it\.
+
+If the Data API has not been enabled for the DB cluster, enable it\.
+
+If the DB cluster was renamed after the Data API was enabled for the DB cluster, disable the Data API and then enable it again\.
+
+For information about enabling the Data API, see [Enabling the Data API](#data-api.enabling)\.

@@ -6,11 +6,12 @@ Aurora PostgreSQL can work with many industry standards\. For example, you can u
 
 **Topics**
 + [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md)
-+ [Migrating Data to Amazon Aurora PostgreSQL](AuroraPostgreSQL.Migrating.md)
++ [Migrating Data to Amazon Aurora with PostgreSQL Compatibility](AuroraPostgreSQL.Migrating.md)
 + [Managing Amazon Aurora PostgreSQL](AuroraPostgreSQL.Managing.md)
 + [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)
 + [Integrating Amazon Aurora PostgreSQL with Other AWS Services](AuroraPostgreSQL.Integrating.md)
 + [Managing Query Execution Plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)
++ [Fast Recovery After Failover with Cluster Cache Management for Aurora PostgreSQL](AuroraPostgreSQL.cluster-cache-mgmt.md)
 + [Upgrading an Aurora PostgreSQL DB Cluster Engine Version](USER_UpgradeDBInstance.Upgrading.md)
 + [Best Practices with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md)
 + [Amazon Aurora PostgreSQL Reference](AuroraPostgreSQL.Reference.md)

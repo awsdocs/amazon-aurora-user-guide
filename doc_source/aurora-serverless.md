@@ -78,6 +78,7 @@ The following limitations apply to Aurora Serverless:
   + [Restoring a snapshot from a MySQL DB instance](AuroraMySQL.Migrating.RDSMySQL.md)
   + [Migrating backup files from Amazon S3](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)
   + [Amazon RDS Performance Insights](USER_PerfInsights.md)
++  TLS/SSL support for Aurora Serverless clusters currently isn't available in the China \(Beijing\) AWS Region\. 
 
 **Note**  
 You can access an Aurora Serverless DB cluster from AWS Lambda\. For more information about working with AWS Lambda, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](https://docs.aws.amazon.com/lambda/latest/dg/vpc.html) in the *AWS Lambda Developer Guide*\.
@@ -85,6 +86,9 @@ You can access an Aurora Serverless DB cluster from AWS Lambda\. For more inform
 ## Using TLS/SSL with Aurora Serverless<a name="aurora-serverless.tls"></a>
 
  You can connect to Aurora Serverless clusters using the Transport Layer Security/Secure Sockets Layer \(TLS/SSL\) protocol\. To do so, you use the same general procedure as described in [Connecting to an Amazon Aurora MySQL DB Cluster](Aurora.Connecting.md#Aurora.Connecting.AuroraMySQL)\. You use certificates from the AWS Certificate Manager \(ACM\)\. For more information, see the *[AWS Certificate Manager User Guide](https://docs.aws.amazon.com/acm/latest/userguide/)*\. 
+
+**Note**  
+ TLS support for Aurora Serverless clusters currently isn't available in the China \(Beijing\) AWS Region\. 
 
  TLS protocol, version 1\.0, 1\.1, or 1\.2\. However, you don't need to configure an Aurora Serverless database for TLS\. In particular, don't use the `REQUIRE` clause on your database user privileges for SSL\. Doing so prevents that user from connecting\. 
 

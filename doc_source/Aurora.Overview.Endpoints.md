@@ -134,10 +134,10 @@
 +  [delete\-db\-cluster\-endpoint](https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-cluster-endpoint.html) 
 
  To work with custom endpoints through the Amazon RDS API, you can use the following functions: 
-+  [CreateDBClusterEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CreateDBClusterEndpoint.html) 
-+  [DescribeDBClusterEndpoints](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/DescribeDBClusterEndpoints.html) 
-+  [ModifyDBClusterEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/ModifyDBClusterEndpoint.html) 
-+  [DeleteDBClusterEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/DeleteDBClusterEndpoint.html) 
++  [CreateDBClusterEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterEndpoint.html) 
++  [DescribeDBClusterEndpoints](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterEndpoints.html) 
++  [ModifyDBClusterEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterEndpoint.html) 
++  [DeleteDBClusterEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBClusterEndpoint.html) 
 
 ### Creating a Custom Endpoint<a name="aurora-custom-endpoint-creating"></a>
 
@@ -163,7 +163,7 @@ aws rds create-db-cluster-endpoint --db-cluster-endpoint-identifier custom-endpo
   --db-cluster-identifier cluster_id
 
 aws rds modify-db-cluster-endpoint --db-cluster-endpoint-identifier custom-endpoint-doc-sample \
-  --static-members instance_name_1,instance_name_2
+  --static-members instance_name_1 instance_name_2
 ```
 
 For Windows:
@@ -174,7 +174,7 @@ aws rds create-db-cluster-endpoint --db-cluster-endpoint-identifier custom-endpo
   --db-cluster-identifier cluster_id
 
 aws rds modify-db-cluster-endpoint --db-cluster-endpoint-identifier custom-endpoint-doc-sample ^
-  --static-members instance_name_1,instance_name_2
+  --static-members instance_name_1 instance_name_2
 ```
 
 #### RDS API<a name="aurora-create-endpoint.api"></a>

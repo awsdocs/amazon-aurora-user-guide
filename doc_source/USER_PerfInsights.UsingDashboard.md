@@ -124,7 +124,7 @@ The last three roll\-up queries are the major contributors to CPU\. These are th
 
 ## Viewing More SQL Text in the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard.SQLTextSize"></a>
 
-By default, each row in the **Top Load Items** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement is larger than 500 bytes, you can view more of the SQL statement by opening the statement in the Performance Insights dashboard\. The Performance Insights dashboard can display up to 4,096 bytes for a SQL statement\. You can also copy or download the displayed SQL statement\.
+By default, each row in the **Top Load Items** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement is larger than 500 bytes, you can view more of the SQL statement by opening the statement in the Performance Insights dashboard\. The Performance Insights dashboard can display up to 4,096 bytes for a SQL statement\. You can copy the displayed SQL statement\. To view more than 4,096 bytes, choose **Download full SQL** to view the SQL text up to the DB engine limit\.
 
 The limit for SQL text depends on the DB engine\. The following limits apply:
 + Aurora MySQL 5\.7 – 4,096 bytes
@@ -155,7 +155,7 @@ For Aurora MySQL DB instances, viewing more SQL text is not supported in the EU 
 
    The Performance Insights dashboard can display up to 4,096 bytes for each SQL statement\.
 
-1. \(Optional\) Choose **Copy snippet** to copy the displayed SQL statement, or choose **Download full SQL** to download the SQL statement\.
+1. \(Optional\) Choose **Copy snippet** to copy the displayed SQL statement, or choose **Download full SQL** to download the SQL statement to view the SQL text up to the DB engine limit\.
 **Note**  
 To copy or download the SQL statement, disable pop\-up blockers\. 
 

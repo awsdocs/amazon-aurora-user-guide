@@ -61,9 +61,9 @@ For Windows:
 
 ### Upgrading the Engine Version of a DB Cluster Using the RDS API<a name="USER_UpgradeDBInstance.Upgrading.Manual.API"></a>
 
-To upgrade the engine version of a DB cluster, use the [ ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBCluster.html) action\. Specify the following parameters: 
+To upgrade the engine version of a DB cluster, use the [ ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) action\. Specify the following parameters: 
 + `DBClusterIdentifier` – the name of the DB cluster, for example *`mydbcluster`*\. 
-+ `EngineVersion` – the version number of the database engine to upgrade to\. For information about valid engine versions, use the [ DescribeDBEngineVersions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DescribeDBEngineVersions.html) operation\.
++ `EngineVersion` – the version number of the database engine to upgrade to\. For information about valid engine versions, use the [ DescribeDBEngineVersions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBEngineVersions.html) operation\.
 + `ApplyImmediately` – whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to `true`\. To apply changes during the next maintenance window, set the value to `false`\. 
 
 ## Automatically Upgrading the Minor Engine Version<a name="USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades"></a>

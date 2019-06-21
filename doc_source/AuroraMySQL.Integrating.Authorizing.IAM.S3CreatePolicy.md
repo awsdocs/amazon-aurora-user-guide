@@ -11,6 +11,9 @@ The following table lists the Aurora features that can access an Amazon S3 bucke
 | LOAD XML FROM S3 |  `ListBucket`  |  `GetObject` `GetObjectVersion`  | 
 |  `SELECT INTO OUTFILE S3`  |  `ListBucket`  |  `AbortMultipartUpload` `DeleteObject` `GetObject` `ListMultipartUploadParts` `PutObject`  | 
 
+**Note**  
+Other permissions might be required\. For example, if your Amazon S3 bucket is encrypted, you need to add `kms:Decrypt` permissions\.
+
 You can use the following steps to create an IAM policy that provides the minimum required permissions for Aurora to access an Amazon S3 bucket on your behalf\. To allow Aurora to access all of your Amazon S3 buckets, you can skip these steps and use either the `AmazonS3ReadOnlyAccess` or `AmazonS3FullAccess` predefined IAM policy instead of creating your own\.
 
 **To create an IAM policy to grant access to your Amazon S3 resources**

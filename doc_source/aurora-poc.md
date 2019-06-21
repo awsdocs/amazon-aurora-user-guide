@@ -113,7 +113,7 @@
 
  During the proof of concept, you bring across the data, or a representative sample, from your former database system\. If practical, set up at least some data in each of your tables\. Doing so helps to test compatibility of all data types and schema features\. After you have exercised the basic Aurora features, scale up the amount of data\. By the time you finish the proof of concept, you should test your ETL tools, queries, and overall workload with a dataset that's big enough to draw accurate conclusions\. 
 
- You can use several techniques to import either physical or logical backup data to Aurora\. For details, see [Migrating Data to an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Migrating.md) or [Migrating Data to Amazon Aurora PostgreSQL](AuroraPostgreSQL.Migrating.md) depending on the database engine you're using in the proof of concept\. 
+ You can use several techniques to import either physical or logical backup data to Aurora\. For details, see [Migrating Data to an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Migrating.md) or [Migrating Data to Amazon Aurora with PostgreSQL Compatibility](AuroraPostgreSQL.Migrating.md) depending on the database engine you're using in the proof of concept\. 
 
  Experiment with the ETL tools and technologies that you're considering\. See which one best meets your needs\. Consider both throughput and flexibility\. For example, some ETL tools perform a one\-time transfer, and others involve ongoing replication from the old system to Aurora\. 
 

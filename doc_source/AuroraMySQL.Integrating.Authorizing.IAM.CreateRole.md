@@ -18,6 +18,8 @@ To create an IAM role to permit your Amazon RDS cluster to communicate with othe
 
 1. Choose **Next: Permissions**\.
 
+1. Choose **Next: Tags**\.
+
 1. Choose **Next: Review**\.
 
 1. Set **Role Name** to a name for your IAM role, for example `RDSLoadFromS3`\. You can also add an optional **Role Description** value\.
@@ -26,15 +28,15 @@ To create an IAM role to permit your Amazon RDS cluster to communicate with othe
 
 1. In the navigation pane, choose **Roles**\.
 
-1. In the **Search** field, enter the name of the role you created, and click the role when it appears in the list\.
+1. In the **Search** field, enter the name of the role you created, and choose the role name when it appears in the list\.
 
 1. On the **Permissions** tab, detach the following default roles from the policy:
    + `AmazonRDSDirectoryServiceAccess`
    + `RDSCloudHsmAuthorizationRole`
 
-   To detach a role, click the **X** associated with the role on the right, and then click **Detach**\.
+   To detach a role, choose the **X** associated with the role on the right, and then choose **Detach**\.
 
-1. On the **Permissions** tab, choose **Attach policy**\.
+1. On the **Permissions** tab, choose **Attach policies**\.
 
 1. On the **Attach policy** page, enter the name of your policy in the **Search** field\.
 

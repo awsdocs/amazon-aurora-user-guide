@@ -17,4 +17,4 @@ You can migrate data from one of the following sources to an Amazon Aurora Postg
 + An Amazon RDS PostgreSQL DB instance
 + A database that is not PostgreSQL\-compatible
 
-For more information, see [Migrating Data to Amazon Aurora PostgreSQL](AuroraPostgreSQL.Migrating.md)\.
+For more information, see [Migrating Data to Amazon Aurora with PostgreSQL Compatibility](AuroraPostgreSQL.Migrating.md)\.

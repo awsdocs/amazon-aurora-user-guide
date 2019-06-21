@@ -42,8 +42,9 @@ The following are DB engine considerations for DB instance classes:
 
 ****  
 
-| Instance Class | vCPU | ECU | Memory \(GiB\) | Max\. Bandwidth \(Mbps\) | Network Performance | Aurora MySQL | Aurora PostgreSQL | 
-| --- | --- | --- | --- | --- | --- | --- | --- | 
+|  |  |  |  |  |  |  |  | 
+| --- |--- |--- |--- |--- |--- |--- |--- |
+| **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **Max\. Bandwidth \(Mbps\)** | **Network Performance** | **Aurora MySQL** | **Aurora PostgreSQL** | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | 96 | 347 | 768 | 14,000 | 25 Gbps | No | Yes | 
 | db\.r5\.12xlarge | 48 | 173 | 384 | 7,000 | 10 Gbps | Yes | Yes | 
@@ -64,11 +65,12 @@ The following are DB engine considerations for DB instance classes:
 | db\.r3\.2xlarge | 8 | 26 | 61 | 1,000 | High | Yes | No | 
 | db\.r3\.xlarge | 4 | 13 | 30\.5 | 500 | Moderate | Yes | No | 
 | db\.r3\.large | 2 | 6\.5 | 15\.25 | — | Moderate | Yes | No | 
+| **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **Max\. Bandwidth \(Mbps\)** | **Network Performance** | **Aurora MySQL** | **Aurora PostgreSQL** | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
 | db\.t3\.2xlarge | 8 | Variable | 32 | 2,050 | Up to 5 Gigabit | No | No | 
 | db\.t3\.xlarge | 4 | Variable | 16 | 2,050 | Up to 5 Gigabit | No | No | 
 | db\.t3\.large | 2 | Variable | 8 | 2,050 | Up to 5 Gigabit | No | No | 
-| db\.t3\.medium | 2 | Variable | 4 | 1,500 | Up to 5 Gigabit | Yes | No | 
+| db\.t3\.medium | 2 | Variable | 4 | 1,500 | Up to 5 Gigabit | Yes | Yes | 
 | db\.t3\.small | 2 | Variable | 2 | 1,500 | Up to 5 Gigabit | Yes | No | 
 | db\.t3\.micro | 2 | Variable | 1 | 1,500 | Up to 5 Gigabit | Yes | No | 
 | db\.t2 – Current Generation Burstable Performance Instance Classes | 
