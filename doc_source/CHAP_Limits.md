@@ -1,4 +1,4 @@
-# Limits for Amazon RDS<a name="CHAP_Limits"></a>
+# Limits for Amazon Aurora<a name="CHAP_Limits"></a>
 
 This topic describes the resource limits and naming constraints for Amazon Aurora\.
 
