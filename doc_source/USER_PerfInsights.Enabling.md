@@ -24,7 +24,7 @@ The following image shows the **Performance Insights** section\.
 
 You have the following options when you choose **Enable Performance Insights**:
 + **Retention** – The amount of time to retain Performance Insights data\. Choose either 7 days \(the default\) or 2 years\.
-+ **Master key** – Specify your AWS Key Management Service \(AWS KMS\) key\. Performance Insights encrypts all potentially sensitive data using your AWS KMS key\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
++ **Master key** – Specify your AWS Key Management Service \(AWS KMS\) key\. Performance Insights encrypts all potentially sensitive data using your AWS KMS key\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon Aurora Resources](Overview.Encryption.md)\.
 
 ### Enabling Performance Insights with the Console When Modifying a DB Instance<a name="USER_PerfInsights.Enabling.Console.Modifying"></a>
 
@@ -42,7 +42,7 @@ You can modify a DB instance to enable Performance Insights using the console\.
 
    You have the following options when you choose **Enable Performance Insights**:
    + **Retention** – The amount of time to retain Performance Insights data\. Choose either 7 days \(the default\) or 2 years\.
-   + **Master key** – Specify your AWS Key Management Service \(AWS KMS\) key\. Performance Insights encrypts all potentially sensitive data using your AWS KMS key\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
+   + **Master key** – Specify your AWS Key Management Service \(AWS KMS\) key\. Performance Insights encrypts all potentially sensitive data using your AWS KMS key\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon Aurora Resources](Overview.Encryption.md)\.
 
 1. Choose **Continue**\.
 

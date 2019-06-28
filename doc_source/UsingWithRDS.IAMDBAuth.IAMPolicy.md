@@ -3,7 +3,7 @@
 To allow an IAM user or role to connect to your DB cluster, you must create an IAM policy\. After that, you attach the policy to an IAM user or role\.
 
 **Note**  
-To learn more about IAM policies, see [Authentication and Access Control](UsingWithRDS.IAM.md)\.
+To learn more about IAM policies, see [Identity and Access Management in Amazon Aurora](UsingWithRDS.IAM.md)\.
 
 The following example policy allows an IAM user to connect to a DB cluster using IAM database authentication\.
 
@@ -25,7 +25,7 @@ The following example policy allows an IAM user to connect to a DB cluster using
 ```
 
 **Note**  
-Don't confuse the `rds-db:` prefix with other Amazon RDS action prefixes that begin with `rds:`\. You use the `rds-db:` prefix and the `rds-db:connect` action only for IAM database authentication\. They aren't valid in any other context\.   
+Don't confuse the `rds-db:` prefix with other RDS API action prefixes that begin with `rds:`\. You use the `rds-db:` prefix and the `rds-db:connect` action only for IAM database authentication\. They aren't valid in any other context\.   
 Currently, the IAM console displays an error for policies with the `rds-db:connect` action\. You can ignore this error\.
 
 The example policy includes a single statement with the following elements:
@@ -42,7 +42,7 @@ The example policy includes a single statement with the following elements:
   + `account-id` is the AWS account number for the DB cluster\. In the example policy, the account number is `1234567890`\.
   + `DbClusterResourceId` is the identifier for the DB cluster\. This identifier is unique to an AWS Region and never changes\. In the example policy, the identifier is `cluster-ABCDEFGHIJKL01234`\.
 
-    To find a DB cluster resource ID in the AWS Management Console for Amazon RDS, choose the DB cluster to see its details\. Then choose the **Configuration** tab\. The **Resource ID** is shown in the **Configuration** section\.
+    To find a DB cluster resource ID in the AWS Management Console for Amazon Aurora, choose the DB cluster to see its details\. Then choose the **Configuration** tab\. The **Resource ID** is shown in the **Configuration** section\.
 
     Alternatively, you can use the AWS CLI command to list the identifiers and resource IDs for all of your DB cluster in the current AWS Region, as shown following\.
 

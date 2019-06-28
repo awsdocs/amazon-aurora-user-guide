@@ -16,7 +16,6 @@ For common recommendations for Aurora, see [Using Amazon Aurora Recommendations]
 **Topics**
 + [Amazon Aurora Basic Operational Guidelines](#Aurora.BestPractices.OperationalGuidelines)
 + [DB Instance RAM Recommendations](#Aurora.BestPractices.Performance.Sizing)
-+ [Amazon Aurora Security Best Practices](#Aurora.BestPractices.Security)
 + [Monitoring Amazon Aurora](#Aurora.BestPractices.Monitoring)
 + [Working with DB Parameter Groups and DB Cluster Parameter Groups](#Aurora.BestPractices.ParameterGroups)
 + [Amazon Aurora Best Practices Presentation Video](#Aurora.BestPractices.Presentation)
@@ -35,18 +34,6 @@ To optimize performance, allocate enough RAM so that your working set resides al
 + `BufferCacheHitRatio` – This metric measures the percentage of requests that are served by the buffer cache of a DB instance in your DB cluster\. This metric gives you an insight into the amount of data that is being served from memory\. If the hit ratio is low, it is a good indication that your queries on this DB instance are going to disk more often than not\. In this case, you should investigate your workload to see which queries are causing this behavior\.
 
 If, after investigating your workload, you find that you need more memory, scaling up the DB instance class to a class with more RAM could be beneficial\. After doing so, you can investigate the metrics above and continue to scale up as necessary\. For more information about monitoring a DB cluster, see [Monitoring Amazon Aurora DB Cluster Metrics](Aurora.Monitoring.md)\.
-
-## Amazon Aurora Security Best Practices<a name="Aurora.BestPractices.Security"></a>
-
-Use AWS IAM accounts to control access to Amazon Aurora API actions, especially actions that create, modify, or delete RDS resources such as DB clusters, DB instances, security groups, or parameter groups, and actions that perform common administrative actions such as backing up and restoring DB instances, or configuring Provisioned IOPS storage\.
-+ Assign an individual IAM account to each person who manages RDS resources\. Do not use AWS root credentials to manage Amazon RDS resources; you should create an IAM user for everyone, including yourself\.
-+ Grant each user the minimum set of permissions required to perform his or her duties\.
-+ Use IAM groups to effectively manage permissions for multiple users\.
-+ Rotate your IAM credentials regularly\.
-
-For more information about security with Aurora, see [Amazon Aurora Security](Aurora.Overview.Security.md) and [Configuring Security in Amazon Aurora](UsingWithRDS.md)\.
-
-For more information about IAM, go to [AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/Welcome.html)\. For information on IAM best practices, go to [IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html)\.
 
 ## Monitoring Amazon Aurora<a name="Aurora.BestPractices.Monitoring"></a>
 

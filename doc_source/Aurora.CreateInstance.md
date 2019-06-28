@@ -17,7 +17,7 @@ The following are prerequisites to create a DB cluster\.
 
 You can only create an Amazon Aurora DB cluster in a virtual private cloud \(VPC\), in an AWS Region that has at least two Availability Zones\. The DB subnet group that you choose for the DB cluster must cover at least two Availability Zones\. This configuration ensures that your DB cluster always has at least one DB instance available for failover, in the unlikely event of an Availability Zone failure\.
 
-If you are using the AWS Management Console to create your Aurora DB cluster, then you can have Amazon RDS automatically create a VPC for you\. Alternatively, you can use an existing VPC or create a new VPC for your Aurora DB cluster\. Your VPC must have at least one subnet in each of at least two Availability Zones in order for you to use it with an Amazon Aurora DB cluster\. For more information, see [How to Create a VPC for Use with Amazon Aurora](Aurora.CreateVPC.md)\. For information on VPCs, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.
+If you are using the AWS Management Console to create your Aurora DB cluster, then you can have Amazon RDS automatically create a VPC for you\. Alternatively, you can use an existing VPC or create a new VPC for your Aurora DB cluster\. Your VPC must have at least one subnet in each of at least two Availability Zones in order for you to use it with an Amazon Aurora DB cluster\. For more information, see [How to Create a VPC for Use with Amazon Aurora](Aurora.CreateVPC.md)\. For information on VPCs, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
 
 **Note**  
 You can communicate with an EC2 instance that is not in a VPC and an Amazon Aurora DB cluster using ClassicLink\. For more information, see [A DB Instance in a VPC Accessed by an EC2 Instance Not in a VPC](USER_VPC.Scenarios.md#USER_VPC.ClassicLink)\.
@@ -28,7 +28,7 @@ If you don't have a default VPC or you have not created a VPC, you can have Amaz
 + Specify an RDS DB subnet group that defines at least two subnets in the VPC that can be used by the Aurora DB cluster\. For more information, see [Working with DB Subnet Groups](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Subnets)\.
 
 ### Additional Prerequisites<a name="Aurora.CreateInstance.Prerequisites.Additional"></a>
-+ If you are connecting to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Authentication and Access Control](UsingWithRDS.IAM.md)\.
++ If you are connecting to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Identity and Access Management in Amazon Aurora](UsingWithRDS.IAM.md)\.
 
   If you are using an IAM account to access the Amazon RDS console, you must first log on to the AWS Management Console with your IAM account, and then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 + If you want to tailor the configuration parameters for your DB cluster, you must specify a DB cluster parameter group and DB parameter group with the required parameter settings\. For information about creating or modifying a DB cluster parameter group or DB parameter group, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.

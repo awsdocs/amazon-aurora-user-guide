@@ -26,7 +26,7 @@ Amazon Aurora also supports replication with an external database, or an RDS DB 
    The **Create Aurora replica** page appears\.
 
 1. On the **Create Aurora replica** page, specify options for your Aurora Replica\. The following table shows settings for an Aurora Replica\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-replicas-adding.html)
+<a name="aurora_replica_settings"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-replicas-adding.html)
 
 1. Choose **Create Aurora replica** to create the Aurora Replica\.
 

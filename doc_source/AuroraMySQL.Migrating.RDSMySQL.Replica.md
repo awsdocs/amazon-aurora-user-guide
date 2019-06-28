@@ -30,7 +30,7 @@ You can create an Aurora Read Replica for a MySQL DB instance by using the conso
 1. Choose the MySQL DB instance that you want to use as the source for your Aurora Read Replica and choose **Create Aurora read replica** from **Instance actions**\.
 
 1. Choose the DB cluster specifications you want to use for the Aurora Read Replica, as described in the following table\.     
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.RDSMySQL.Replica.html)
+<a name="aurora_read_replica_param_advice"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.RDSMySQL.Replica.html)
 
 1. Choose **Create read replica**\.
 

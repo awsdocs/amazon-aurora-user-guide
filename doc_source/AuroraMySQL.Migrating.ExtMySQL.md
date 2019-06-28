@@ -92,7 +92,7 @@ For example, the following IAM policy allows a user to associate the role named 
 }
 ```
 
-For more information on IAM user permissions, see [Using Identity\-Based Policies \(IAM Policies\) for Amazon RDS](UsingWithRDS.IAM.AccessControl.IdentityBased.md)\.
+For more information on IAM user permissions, see [Managing Access Using Policies](UsingWithRDS.IAM.md#security_iam_access-manage)\.
 
 #### Creating the IAM Service Role<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs.CreateRole"></a>
 
@@ -203,7 +203,7 @@ You can restore your backup files from your Amazon S3 bucket to create a new Ama
 ![\[Amazon Aurora migration from an Amazon S3 bucket\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraMigrateS3_01.png)
 
 1. In **Specify source backup details**, specify the following\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
+<a name="source_backup_details_advice"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
 
 1. Choose **Next**\.
 
@@ -213,12 +213,12 @@ You can restore your backup files from your Amazon S3 bucket to create a new Ama
 ![\[Amazon Aurora Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunchMySQL56.png)
 
    The following table shows settings for a DB instance\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
+<a name="aurora_migration_cluster_param_advice"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
 
 1. Choose **Next**\.
 
 1. On the **Configure advanced settings** page, you can customize additional settings for your Aurora MySQL DB cluster\. The following table shows the advanced settings for a DB cluster\.     
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
+<a name="aurora_migration_advanced_settings_advice"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
 
 1. Choose **Create database** to launch your Aurora DB instance, and then choose **Close** to close the wizard\. 
 

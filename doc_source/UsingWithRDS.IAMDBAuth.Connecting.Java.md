@@ -1,6 +1,6 @@
 # Connecting to Your DB Cluster Using the AWS SDK for Java<a name="UsingWithRDS.IAMDBAuth.Connecting.Java"></a>
 
-You can connect from the command line to an Aurora DB cluster with the AWS SDK for Java as described following\.
+You can connect from the command line to an Aurora MySQL or Aurora PostgreSQL DB cluster with the AWS SDK for Java as described following\.
 
 **Topics**
 + [Generating an IAM Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken)
@@ -238,7 +238,7 @@ To run this code example, you need the [AWS SDK for Java](aws.amazon.com/sdk-for
   + `RDS_INSTANCE_PORT` – The port number used for connecting to your PostgreSQL DB cluster\.
   + `REGION_NAME` – The AWS Region where the DB cluster is running\.
   + `DB_USER` – The database account that you want to access\.
-  + `SSL_CERTIFICATE` – An SSL certificate for Amazon RDS that is specific to an AWS Region\. To download a certificate for your AWS Region, see [Intermediate Certificates](UsingWithRDS.SSL.md#UsingWithRDS.SSL.IntermediateCertificates)\. Place the SSL certificate in the same directory as this Java program file, so that the class loader can find the certificate at runtime\.
+  + `SSL_CERTIFICATE` – An SSL certificate for Amazon Aurora that is specific to an AWS Region\. To download a certificate for your AWS Region, see [Intermediate Certificates](UsingWithRDS.SSL.md#UsingWithRDS.SSL.IntermediateCertificates)\. Place the SSL certificate in the same directory as this Java program file, so that the class loader can find the certificate at runtime\.
 
 This code example obtains AWS credentials from the [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default)\.
 

@@ -84,7 +84,7 @@ To monitor the health and performance of your Aurora DB cluster, you can view so
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Click the name of the DB instance you want to monitor to see its details\. 
+1. Choose the name of the DB instance you want to monitor to see its details\. 
 
 1. In the Cloudwatch section, choose one of the following options from **Monitoring** for how you want to view your metrics:
    + **Cloudwatch** – Shows a summary of CloudWatch metrics\. Each metric includes a graph showing the metric monitored over a specific time span\. For more information, see [Monitoring with Amazon CloudWatch](MonitoringOverview.md#monitoring-cloudwatch)\.
@@ -114,7 +114,7 @@ The following Aurora metrics are not available in the Amazon RDS console:
 In addition, some Aurora metrics are either shown only for specific instance classes, or only for DB instances, or with different names and different units of measurement:
 + The `CPUCreditBalance` and `CPUCreditUsage` metrics are displayed only for `db.t2.small` and `db.t2.medium` instances
 + The following metrics that are displayed with different names, as listed:    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Monitoring.html)
+<a name="aurora_cloudwatch_metrics_renamed"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Monitoring.html)
 + The following metrics apply to an entire Aurora DB cluster, but are displayed only when viewing DB instances for an Aurora DB cluster in the Amazon RDS console:
   + `VolumeBytesUsed`
   + `VolumeReadIOPs`

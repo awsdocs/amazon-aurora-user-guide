@@ -176,7 +176,7 @@ You can configure your Amazon RDS database engine to publish log data to a log g
 You can export logs for Aurora MySQL\. For more information, see [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\.
 
 **Note**  
-You must have a Service Linked Role before you enable log data publishing\. For more information about Service Linked Roles, see the following: [Using Service\-Linked Roles for Amazon RDS](UsingWithRDS.IAM.ServiceLinkedRoles.md)\.
+You must have a Service Linked Role before you enable log data publishing\. For more information about Service Linked Roles, see the following: [Using Service\-Linked Roles for Amazon Aurora](UsingWithRDS.IAM.ServiceLinkedRoles.md)\.
 
 ### Configuring CloudWatch Log Integration<a name="integrating_cloudwatchlogs.configure"></a>
 

@@ -18,7 +18,7 @@ The following limitations apply when sharing manual snapshots with other AWS acc
 
 ## Sharing an Encrypted Snapshot<a name="USER_ShareSnapshot.Encrypted"></a>
 
-You can share DB cluster snapshots that have been encrypted "at rest" using the AES\-256 encryption algorithm, as described in [Encrypting Amazon RDS Resources](Overview.Encryption.md)\. To do this, you must take the following steps:
+You can share DB cluster snapshots that have been encrypted "at rest" using the AES\-256 encryption algorithm, as described in [Encrypting Amazon Aurora Resources](Overview.Encryption.md)\. To do this, you must take the following steps:
 
 1. Share the AWS Key Management Service \(AWS KMS\) encryption key that was used to encrypt the snapshot with any accounts that you want to be able to access the snapshot\.
 

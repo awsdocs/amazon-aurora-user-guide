@@ -9,7 +9,7 @@ To associate an IAM role with a DB cluster you do two things:
 + Set the cluster\-level parameter for the related AWS service to the ARN for the associated IAM role\.
 
   The following table describes the cluster\-level parameter names for the IAM roles used to access other AWS services\.     
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.html)
+<a name="aurora_cluster_params_iam_roles"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.html)
 
 To associate an IAM role to permit your Amazon RDS cluster to communicate with other AWS services on your behalf, take the following steps\.
 

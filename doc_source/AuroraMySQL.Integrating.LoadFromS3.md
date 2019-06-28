@@ -216,7 +216,7 @@ The following table describes the fields in the `aurora_s3_load_history` table\.
 
 | Field | Description | 
 | --- | --- | 
-| `load_prefix` |  <a name="para_yt5_qkv_sy"></a>The URI that was specified in the load statement\. This URI can map to any of the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.LoadFromS3.html)  | 
+| `load_prefix` |  The URI that was specified in the load statement\. This URI can map to any of the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.LoadFromS3.html)  | 
 |  `file_name`  |  The name of a file that was loaded into Aurora from Amazon S3 using the URI identified in the `load_prefix` field\.  | 
 | `version_number` |  The version number of the file identified by the `file_name` field that was loaded, if the Amazon S3 bucket has a version number\.  | 
 |  `bytes_loaded`  |  The size of the file loaded, in bytes\.  | 

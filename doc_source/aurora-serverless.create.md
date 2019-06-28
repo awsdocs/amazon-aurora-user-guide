@@ -39,7 +39,7 @@ To connect to an Aurora Serverless DB cluster, use the database endpoint\. For d
 **Note**  
 If you encounter the following error message, your account requires additional permissions:  
 `Unable to create the resource. Verify that you have permission to create service linked role. Otherwise wait and try again later.`  
-For more information, see [Using Service\-Linked Roles for Amazon RDS](UsingWithRDS.IAM.ServiceLinkedRoles.md)\.
+For more information, see [Using Service\-Linked Roles for Amazon Aurora](UsingWithRDS.IAM.ServiceLinkedRoles.md)\.
 
 ## AWS CLI<a name="aurora-serverless.create.cli"></a>
 

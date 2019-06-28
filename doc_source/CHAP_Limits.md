@@ -3,13 +3,13 @@
 This topic describes the resource limits and naming constraints for Amazon Aurora\.
 
 **Topics**
-+ [Limits in Amazon RDS](#RDS_Limits.Limits)
-+ [Naming Constraints in Amazon RDS](#RDS_Limits.Constraints)
++ [Limits in Amazon Aurora](#RDS_Limits.Limits)
++ [Naming Constraints in Amazon Aurora](#RDS_Limits.Constraints)
 + [Amazon Aurora File Size Limits](#RDS_Limits.FileSize.Aurora)
 
-## Limits in Amazon RDS<a name="RDS_Limits.Limits"></a>
+## Limits in Amazon Aurora<a name="RDS_Limits.Limits"></a>
 
-Each AWS account has limits, for each AWS Region, on the number of Amazon RDS resources that can be created\. Once a limit for a resource has been reached, additional calls to create that resource fail with an exception\.
+Each AWS account has limits, for each AWS Region, on the number of Amazon Aurora resources that can be created\. Once a limit for a resource has been reached, additional calls to create that resource fail with an exception\.
 
 The following table lists the resources and their limits per region\.
 
@@ -23,24 +23,20 @@ The following table lists the resources and their limits per region\.
 | Event subscriptions | 20 | 
 | Manual snapshots | 100 | 
 | Manual cluster snapshots | 100 | 
-| Option groups | 20 | 
 | Parameter groups | 50 | 
 | Reserved instances | 40 | 
-| Rules per DB security group | 20 | 
 | Rules per VPC security group | 50 inbound 50 outbound | 
-| DB Security groups | 25 | 
 | VPC Security groups | 5 | 
 | Subnet groups | 50 | 
 | Subnets per subnet group | 20 | 
 | Tags per resource | 50 | 
 
 **Note**  
-By default, you can have up to a total of 40 Amazon RDS DB instances\. If your application requires more DB instances, you can request additional DB instances via this request form [Request RDS DB instance limit](https://aws.amazon.com/contact-us/request-to-increase-the-amazon-rds-db-instance-limit/)\.  
-Backups managed by AWS Backup are considered manual snapshots for the manual snapshot limit\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
+By default, you can have up to a total of 40 DB instances\. If your application requires more DB instances, you can request additional DB instances via this request form [Request RDS DB instance limit](https://aws.amazon.com/contact-us/request-to-increase-the-amazon-rds-db-instance-limit/)\.
 
-## Naming Constraints in Amazon RDS<a name="RDS_Limits.Constraints"></a>
+## Naming Constraints in Amazon Aurora<a name="RDS_Limits.Constraints"></a>
 
-The following table describes naming constraints in Amazon RDS\. 
+The following table describes naming constraints in Amazon Aurora\. 
 
 
 ****  
