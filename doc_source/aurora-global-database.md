@@ -46,10 +46,10 @@
 +  The secondary cluster must be in a different AWS Region than the primary cluster\. 
 +  You can't create a cross\-region Read Replica from the primary cluster in same region as the secondary\. See [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md) for information about cross\-region Read Replicas\. 
 +  The following features aren't supported for Aurora Global Database: 
-  +  Cloning\. See [Cloning Databases in an Aurora DB Cluster](Aurora.Managing.Clone.md) for information about cloning\. 
-  +  Backtrack\. See [Backtracking an Aurora DB Cluster](AuroraMySQL.Managing.Backtrack.md) for information about backtracking\. 
-  +  Parallel query\. See [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md) for information about parallel query\. 
-  +  Aurora Serverless\. See [Using Amazon Aurora Serverless](aurora-serverless.md) for information about Aurora Serverless\. 
+  +  Cloning\. For information about cloning, see [Cloning Databases in an Aurora DB Cluster](Aurora.Managing.Clone.md)\. 
+  +  Backtrack\. For information about backtracking, see [Backtracking an Aurora DB Cluster](AuroraMySQL.Managing.Backtrack.md)\. 
+  +  Parallel query\. For information about parallel query, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\. 
+  +  Aurora Serverless\. For information about Aurora Serverless, see [Using Amazon Aurora Serverless](aurora-serverless.md)\. 
   +  Stopping and starting the DB clusters within the global database\. See [Stopping and Starting an Amazon Aurora DB Cluster](aurora-cluster-stop-start.md) for information about stopping and starting Aurora clusters\. 
 
 ## Creating an Aurora Global Database<a name="aurora-global-database-creating"></a>

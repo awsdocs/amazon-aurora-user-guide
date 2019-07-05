@@ -13,6 +13,7 @@ The following table shows the version of PostgreSQL that each Aurora PostgreSQL 
 | [Version 2\.2](#AuroraPostgreSQL.Updates.20180305.22) | [10\.6](https://www.postgresql.org/docs/current/static/release-10-6.html) | 
 | [Version 2\.1](#AuroraPostgreSQL.Updates.20180305.21) | [10\.5](https://www.postgresql.org/docs/current/static/release-10-5.html) | 
 | [Version 2\.0](#AuroraPostgreSQL.Updates.20180305.20) | [10\.4](https://www.postgresql.org/docs/current/static/release-10-4.html) | 
+| [Version 1\.5](#AuroraPostgreSQL.Updates.20180305.15) | [9\.6\.12](https://www.postgresql.org/docs/9.6/release-9-6-12.html) | 
 | [Version 1\.4](#AuroraPostgreSQL.Updates.20180305.14) | [9\.6\.11](https://www.postgresql.org/docs/9.6/release-9-6-11.html) | 
 | [Version 1\.3](#AuroraPostgreSQL.Updates.20180305.13) | [9\.6\.9](https://www.postgresql.org/docs/current/static/release-9-6-9.html) | 
 | [Version 1\.2](#AuroraPostgreSQL.Updates.20180305.12) | [9\.6\.8](https://www.postgresql.org/docs/current/static/release-9-6-8.html) | 
@@ -26,8 +27,45 @@ The following updates are available for Aurora PostgreSQL\.
 This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.7\. For more information about the improvements in release 10\.7, see [PostgreSQL Release 10\.7](https://www.postgresql.org/docs/10/release-10-7.html)\.
 
 **Topics**
++ [Version 2\.3\.3](#AuroraPostgreSQL.Updates.20180305.233)
 + [Version 2\.3\.1](#AuroraPostgreSQL.Updates.20180305.231)
 + [Version 2\.3\.0](#AuroraPostgreSQL.Updates.20180305.230)
+
+### Version 2\.3\.3<a name="AuroraPostgreSQL.Updates.20180305.233"></a>
+
+You can find the following improvements in this engine update\.
+
+**Improvements**
+
+1. Provided a backport fix for the PostgreSQL community security issue CVE\-2019\-10130\.
+
+1. Provided a backport fix for the PostgreSQL community security issue CVE\-2019\-10164\.
+
+1. Fixed a bug whereby data activity streaming could consume excessive CPU time\.
+
+1. Fixed a bug whereby parallel threads scanning a B\-tree index could hang following a disk read\.
+
+1. Fixed a bug where use of the `not in` predicate against a common table expression \(CTE\) could return the following error: "ERROR: bad levelsup for CTE"\.
+
+1. Fixed a bug whereby the read node replay process could hang while applying a modification to a generalized search tree \(GiST\) index\.
+
+1. Fixed a bug whereby visibility map pages could contain incorrect freeze bits following a failover to a read node\.
+
+1. Optimized log traffic between the write node and read nodes during index maintenance\.
+
+1. Fixed a bug whereby queries on read nodes may crash while performing a B\-tree index scan\. 
+
+1. Fixed a bug whereby a query that has been optimized for redundant inner join removal could crash\.
+
+1. The function `aurora_stat_memctx_usage` now reports the number of instances of a given context name\.
+
+1. Fixed a bug whereby the function `aurora_stat_memctx_usage` reported incorrect results\.
+
+1. Fixed a bug whereby the read node replay process could wait to kill conflicting queries beyond the configured `max_standby_streaming_delay` value\.
+
+1. Additional information is now logged on read nodes when active connections conflict with the relay process\.
+
+1. Provided a backport fix for the PostgreSQL community bug \#15677, where a crash could occur while deleting from a partitioned table\.
 
 ### Version 2\.3\.1<a name="AuroraPostgreSQL.Updates.20180305.231"></a>
 
@@ -43,7 +81,7 @@ You can find the following improvements in this engine update\.
 
 **New Features**
 
-1. Aurora PostgreSQL now performs I/O prefetching while scanning BTree indexes\. This results in significantly improved performance for BTree scans over uncached data\.
+1. Aurora PostgreSQL now performs I/O prefetching while scanning B\-tree indexes\. This results in significantly improved performance for B\-tree scans over uncached data\.
 
 **Improvements**
 
@@ -233,6 +271,65 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug whereby read nodes may crash following a specific type of free space change from the write node\.
 
+## Version 1\.5<a name="AuroraPostgreSQL.Updates.20180305.15"></a>
+
+This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.12\. For more information about the improvements in release 9\.6\.12, see [PostgreSQL Release 9\.6\.12](https://www.postgresql.org/docs/9.6/release-9-6-12.html)\.
+
+**Topics**
++ [Version 1\.5\.2](#AuroraPostgreSQL.Updates.20180305.152)
++ [Version 1\.5\.1](#AuroraPostgreSQL.Updates.20180305.151)
++ [Version 1\.5\.0](#AuroraPostgreSQL.Updates.20180305.150)
+
+### Version 1\.5\.2<a name="AuroraPostgreSQL.Updates.20180305.152"></a>
+
+You can find the following improvements in this engine update\.
+
+**Improvements**
+
+1. Provided a backport fix for the PostgreSQL community security issue CVE\-2019\-10130\.
+
+1. Fixed a bug whereby the read node replay process may hang while applying a modification to a generalized search tree \(GiST\) index\.
+
+1. Fixed a bug whereby visibility map pages may contain incorrect freeze bits following a failover to a read node\.
+
+1. Fixed a bug whereby the error "relation `relation-name` does not exist" is incorrectly reported\.
+
+1. Optimized log traffic between the write node and read nodes during index maintenance\.
+
+1. Fixed a bug whereby queries on read nodes may crash while performing a B\-tree index scan\. 
+
+1. The function `aurora_stat_memctx_usage` now reports the number of instances of a given context name\.
+
+1. Fixed a bug whereby the function `aurora_stat_memctx_usage` reported incorrect results\.
+
+1. Fixed a bug whereby the read node replay process may wait to kill conflicting queries beyond the configured `max_standby_streaming_delay`\.
+
+1. Additional information is now logged on read nodes when active connections conflict with the relay process\.
+
+### Version 1\.5\.1<a name="AuroraPostgreSQL.Updates.20180305.151"></a>
+
+You can find the following improvements in this engine update\.
+
+**Improvements**
+
+1. Fixed multiple bugs related to I/O prefetching, which caused engine crashes\.
+
+### Version 1\.5\.0<a name="AuroraPostgreSQL.Updates.20180305.150"></a>
+
+You can find the following improvements in this engine update\.
+
+**New features**
+
+1. Aurora PostgreSQL now performs I/O prefetching while scanning B\-tree indexes\. This results in significantly improved performance for B\-tree scans over uncached data\.
+
+**Improvements**
+
+1. Addressed numerous issues that caused read nodes to fail to startup while the cluster is under heavy write workload\.
+
+1. Fixed a bug whereby usage of the `aurora_stat_memctx_usage()` function could lead to a crash\.
+
+1. Improved the cache replacement strategy used by table scans to minimize thrashing of the buffer cache\.
+
 ## Version 1\.4<a name="AuroraPostgreSQL.Updates.20180305.14"></a>
 
 This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.11\. For more information about the improvements in release 9\.6\.11, see [PostgreSQL Release 9\.6\.11](https://www.postgresql.org/docs/9.6/release-9-6-11.html)\. 
@@ -386,7 +483,7 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a performance limitation on heavy write workloads that caused waits on the `LWLock:buffer_content` and `IO:ControlFileSyncUpdate` events\.
 
-1. Fixed a bug whereby read nodes may crash following a specific type of free space change from the write node\.
+1. Fixed a bug whereby read nodes could crash following a specific type of free space change from the write node\.
 
 ## Version 1\.2<a name="AuroraPostgreSQL.Updates.20180305.12"></a>
 

@@ -90,6 +90,23 @@ For more information on how Amazon RDS manages database and operating system upd
 **Note**  
 If your current Aurora MySQL version is 1\.14\.x, but it is lower than 1\.14\.4, you can upgrade only to 1\.14\.4 \(which supports db\.r4 instance classes\)\. Also, to upgrade from 1\.14\.x to a higher minor Aurora MySQL version, such as 1\.17, the 1\.14\.x version must be 1\.14\.4\.
 
+## Zero\-Downtime Patching<a name="AuroraMySQL.Updates.ZDP"></a>
+
+ The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. If ZDP executes successfully, application sessions are preserved and the database engine restarts while patching\. The database engine restart can cause a drop in throughput lasting approximately 5 seconds\. ZDP is available in Aurora MySQL 1\.13 \(compatible with MySQL 5\.6\) and later\. It isn't available in Aurora MySQL version 2 \(compatible with MySQL 5\.7\)\. 
+
+ ZDP might not execute successfully under the following conditions: 
++  Long\-running queries or transactions are in progress\. In Aurora MySQL 1\.19 and later, ZDP might execute successfully\. In this case, any open transactions are cancelled\. 
++  Binary logging is enabled or binary log replication is in\-progress\. In Aurora MySQL 1\.19 and later, ZDP might execute successfully\. 
++  Open SSL connections exist\. 
++  Temporary tables or table locks are in use, for example during DDL statements\. In Aurora MySQL 1\.19 and later, ZDP might execute successfully\. In this case, any open transactions are cancelled\. 
++  Pending parameter changes exist\. 
+
+ If no suitable time window for executing ZDP becomes available because of one or more of these conditions, patching reverts to the standard behavior\. 
+
+**Note**  
+ ZDP applies only to the primary instance of a DB cluster\. ZDP isn't applicable to Aurora Replicas\. 
+ Prepared statements don'tt prevent ZDP, but they aren't preserved after ZDP executes\. 
+
 ## Related Topics<a name="AuroraMySQL.Updates.Related"></a>
 + [Database Engine Updates for Amazon Aurora MySQL 2\.0](AuroraMySQL.Updates.20Updates.md)
 + [Database Engine Updates for Amazon Aurora MySQL 1\.1](AuroraMySQL.Updates.11Updates.md)

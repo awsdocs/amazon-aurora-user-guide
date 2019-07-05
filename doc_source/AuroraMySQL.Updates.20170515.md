@@ -9,20 +9,7 @@ Aurora MySQL 1\.13 is generally available\. All new database clusters, including
 
 ## Zero\-Downtime Patching<a name="AuroraMySQL.Updates.20170515.ZDP"></a>
 
-The zero\-downtime patching \(ZDP\) attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. If ZDP executes successfully, application sessions are preserved and the database engine restarts while patching\. The database engine restart can cause a transient \(5 second or so\) drop in throughput\.
-
-ZDP will not execute successfully under the following conditions:
-+ Long\-running queries or transactions are in progress
-+ Binary logging is enabled or binary log replication is in\-progress
-+ Open SSL connections exist
-+ Temporary tables or table locks are in use
-+ Pending parameter changes exist
-
-If no suitable time window for executing ZDP becomes available because of one or more of these conditions, patching reverts to the standard behavior\.
-
-**Note**  
-ZDP applies only to the primary instance of a DB cluster\. ZDP is not applicable to Aurora Replicas\.
-Prepared statements don't prevent ZDP, but they are not preserved after ZDP executes\.
+The zero\-downtime patching \(ZDP\) attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-Downtime Patching](AuroraMySQL.Updates.md#AuroraMySQL.Updates.ZDP)\. 
 
 ## New Features:<a name="AuroraMySQL.Updates.20170515.NewFeatures"></a>
 + **SELECT INTO OUTFILE S3** – Aurora MySQL now allows you to upload the results of a query to one or more files in an Amazon S3 bucket\. For more information, see [Saving Data from an Amazon Aurora MySQL DB Cluster into Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\.

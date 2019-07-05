@@ -10,7 +10,7 @@ If you have any questions or concerns, AWS Support is available on the community
 
 ## Zero\-Downtime Patching<a name="AuroraMySQL.Updates.20170807.ZDP"></a>
 
-The zero\-downtime patching \(ZDP\) attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-Downtime Patching](AuroraMySQL.Updates.20170515.md#AuroraMySQL.Updates.20170515.ZDP)\.
+The zero\-downtime patching \(ZDP\) attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-Downtime Patching](AuroraMySQL.Updates.md#AuroraMySQL.Updates.ZDP)\. 
 
 ## Improvements<a name="AuroraMySQL.Updates.20170807.Improvements"></a>
 + Fixed an incorrect "record not found" error when a record is found in the secondary index but not in the primary index\.

@@ -133,6 +133,17 @@ aws rds describe-db-cluster-parameters \
 
 For more information about parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
 
+## Aurora Serverless and Maintenance<a name="aurora-serverless.maintenance"></a>
+
+Aurora Serverless performs regular maintenance so that your DB cluster has the latest features, fixes, and security updates\. Aurora Serverless performs maintenance in a non\-disruptive manner whenever possible\. If long\-running transactions are in progress, or temporary tables or table locks are in use, maintenance might cause actively used connections to drop momentarily\.
+
+To apply maintenance, Aurora Serverless must find a scaling point\. For more information about scaling points, see [Autoscaling for Aurora Serverless](#aurora-serverless.how-it-works.auto-scaling)\.
+
+If Aurora Serverless can't find a scaling point for maintenance after one day, Amazon RDS sends you a notification that states that Aurora Serverless must scale to apply maintenance\. You are notified about the amount of time you have to force the scaling of your DB cluster\. After you get this notification, you can control the time of the scaling, and the associated maintenance is applied at that time\. Otherwise, Aurora Serverless tries to apply maintenance seamlessly for seven days before dropping connections to apply it\.
+
+**Note**  
+Maintenance windows don't apply to Aurora Serverless\.
+
 ## Aurora Serverless and Failover<a name="aurora-serverless.failover"></a>
 
  An Aurora Serverless DB cluster currently is created in a single Availability Zone \(AZ\)\. If that availability zone becomes unavailable, Aurora recreates the cluster in a different AZ\. 
