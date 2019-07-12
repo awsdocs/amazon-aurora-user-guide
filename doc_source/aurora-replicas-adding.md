@@ -19,16 +19,16 @@ Amazon Aurora also supports replication with an external database, or an RDS DB 
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**, and then select the a DB instance in the DB cluster\. The selected DB instance can be the primary DB instance for the DB cluster or an Aurora Replica\. 
+1. In the navigation pane, choose **Databases**, and then select the DB cluster where you want to add the new DB instance\. 
 
-1. Choose **Instance actions** and then choose **Create aurora replica**\. 
+1. For **Actions**, choose **Add reader**\. 
 
-   The **Create Aurora replica** page appears\.
+   The **Add reader** page appears\.
 
-1. On the **Create Aurora replica** page, specify options for your Aurora Replica\. The following table shows settings for an Aurora Replica\.    
+1. On the **Add reader** page, specify options for your Aurora Replica\. The following table shows settings for an Aurora Replica\.    
 <a name="aurora_replica_settings"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-replicas-adding.html)
 
-1. Choose **Create Aurora replica** to create the Aurora Replica\.
+1. Choose **Add reader** to create the Aurora Replica\.
 
 ## AWS CLI<a name="aurora-replicas-adding.CLI"></a>
 

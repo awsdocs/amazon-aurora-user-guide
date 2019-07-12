@@ -32,7 +32,7 @@ To associate an IAM role to permit your Amazon RDS cluster to communicate with o
 
 1. If you are already using a custom DB parameter group, you can select that group to use instead of creating a new DB cluster parameter group\. If you are using the default DB cluster parameter group, create a new DB cluster parameter group, as described in the following steps: 
 
-   1. Choose **Create Parameter Group**\.
+   1. Choose **Create parameter group**\.
 
    1. For **Parameter group family**, choose `aurora5.6` for an Aurora MySQL 5\.6\-compatible DB cluster, or choose `aurora-mysql5.7` for an Aurora MySQL 5\.7\-compatible DB cluster\.
 
@@ -47,27 +47,31 @@ To associate an IAM role to permit your Amazon RDS cluster to communicate with o
 
 1. On the **Parameter groups** page, select your DB cluster parameter group and choose **Edit** for **Parameter group actions**\.
 
-1. Choose **Edit parameters**\.
-
 1. Set the appropriate cluster\-level parameters to the related IAM role ARN values\. For example, you can set just the `aws_default_s3_role` parameter to `arn:aws:iam::123456789012:role/AllowAuroraS3Role`\.
 
 1. Choose **Save changes**\.
 
-1. Choose **Databases**, and then choose the primary instance for your Aurora DB cluster\.
+1. To change the DB cluster parameter group for your DB cluster, complete the following steps:
 
-1. For **Actions**, choose **Modify**\.
+   1. Choose **Databases**, and then choose your Aurora DB cluster\.
 
-1. Scroll to **Database options** and set **DB cluster parameter group** to the new DB cluster parameter group that you created\. Choose **Continue**\.
+   1. Choose **Modify**\.
 
-1. Verify your changes and then choose **Apply immediately**\.
+   1. Scroll to **Database options** and set **DB cluster parameter group** to the DB cluster parameter group\.
 
-1. Choose **Modify DB Instance**\.
+   1. Choose **Continue**\.
 
-1. The primary instance for your DB cluster is still chosen in the list of instances\. For **Actions**, choose **Reboot**\.
+   1. Verify your changes and then choose **Apply immediately**\.
 
-   When the instance has rebooted, your IAM role is associated with your DB cluster\.
+   1. Choose **Modify cluster**\.
 
-   For more information about cluster parameter groups, see [Aurora MySQL Parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
+   1. Choose **Databases**, and then choose the primary instance for your DB cluster\.
+
+   1. For **Actions**, choose **Reboot**\.
+
+      When the instance has rebooted, your IAM role is associated with your DB cluster\.
+
+      For more information about cluster parameter groups, see [Aurora MySQL Parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
 
 **To associate an IAM role with a DB cluster by using the AWS CLI**
 

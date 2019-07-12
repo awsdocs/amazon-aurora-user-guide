@@ -161,6 +161,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Amazon Aurora MySQL Reference](AuroraMySQL.Reference.md)
    + [Database Engine Updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)
       + [Database Engine Updates for Amazon Aurora MySQL 2.0](AuroraMySQL.Updates.20Updates.md)
+         + [Aurora MySQL Database Engine Updates 2019-07-08 (Version 2.04.5)](AuroraMySQL.Updates.2045.md)
          + [Aurora MySQL Database Engine Updates 2019-05-29 (Version 2.04.4)](AuroraMySQL.Updates.2044.md)
          + [Aurora MySQL Database Engine Updates 2019-05-09 (Version 2.04.3)](AuroraMySQL.Updates.2043.md)
          + [Aurora MySQL Database Engine Updates 2019-05-02 (Version 2.04.2)](AuroraMySQL.Updates.2042.md)

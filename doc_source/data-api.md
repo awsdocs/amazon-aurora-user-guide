@@ -2,6 +2,9 @@
 
 You can access your Aurora Serverless DB cluster using the built\-in Data API\. Using this API, you can access Aurora Serverless with web services–based applications, including AWS Lambda, AWS AppSync, and AWS Cloud9\. For more information on these applications, see details at [AWS Lambda](https://aws.amazon.com/lambda/), [AWS AppSync](https://aws.amazon.com/appsync/), and [AWS Cloud9](https://aws.amazon.com/cloud9/)\. 
 
+**Note**  
+The Data API is currently only available for Aurora MySQL and not for Aurora PostgreSQL\.
+
 The Data API doesn't require a persistent connection to the DB cluster\. Instead, it provides a secure HTTP endpoint and integration with AWS SDKs\. You can use the endpoint to run SQL statements without managing connections\. All calls to the Data API are synchronous\. By default, a call times out and is terminated in one minute if it's not finished processing\. You can use the `continueAfterTimeout` parameter to continue running the SQL statement after the call times out\.
 
 The API uses database credentials stored in AWS Secrets Manager, so you don't need to pass credentials in the API calls\. The API also provides a more secure way to use AWS Lambda\. It enables you to access your DB cluster without your needing to configure a Lambda function to access resources in a virtual private cloud \(VPC\)\. For more information about AWS Secrets Manager, see [What Is AWS Secrets Manager?](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the *AWS Secrets Manager User Guide*\.
@@ -835,6 +838,9 @@ public class BatchExecuteExample {
 ## Troubleshooting Data API Issues<a name="data-api.troubleshooting"></a>
 
 Use the following sections, titled with common error messages, to help troubleshoot problems that you have with the Data API\. 
+
+**Note**  
+If you have questions or comments related to the Data API, send email to [Rds\-data\-api\-feedback@amazon\.com](mailto:Rds-data-api-feedback@amazon.com)\.
 
 **Topics**
 + [Transaction *<transaction\_ID>* Is Not Found](#data-api.troubleshooting.tran-id-not-found)

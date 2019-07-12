@@ -35,7 +35,9 @@ You can modify the scaling configuration of an Aurora DB cluster with the AWS Ma
 
 ## AWS CLI<a name="aurora-serverless.modifying.cli"></a>
 
-To modify the scaling configuration of an Aurora Serverless DB cluster using the AWS CLI, run the [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) AWS CLI command\. Specify the `--scaling-configuration` option to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values are `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
+To modify the scaling configuration of an Aurora Serverless DB cluster using the AWS CLI, run the [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) AWS CLI command\. Specify the `--scaling-configuration` option to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values include the following:
++ Aurora MySQL: `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
++ Aurora PostgreSQL: `8`, `16`, `32`, `64`, `192`, and `384`\.
 
 In this example, you modify the scaling configuration of an Aurora Serverless DB cluster named *sample\-cluster*\.
 
@@ -43,16 +45,18 @@ For Linux, OS X, or Unix:
 
 ```
 aws rds modify-db-cluster --db-cluster-identifier sample-cluster \
---scaling-configuration MinCapacity=2,MaxCapacity=24,SecondsUntilAutoPause=500,TimeoutAction='ForceApplyCapacityChange',AutoPause=true
+--scaling-configuration MinCapacity=8,MaxCapacity=64,SecondsUntilAutoPause=500,TimeoutAction='ForceApplyCapacityChange',AutoPause=true
 ```
 
 For Windows:
 
 ```
 aws rds modify-db-cluster --db-cluster-identifier sample-cluster ^
---scaling-configuration MinCapacity=2,MaxCapacity=24,SecondsUntilAutoPause=500,TimeoutAction='ForceApplyCapacityChange',AutoPause=true
+--scaling-configuration MinCapacity=8,MaxCapacity=64,SecondsUntilAutoPause=500,TimeoutAction='ForceApplyCapacityChange',AutoPause=true
 ```
 
 ## RDS API<a name="aurora-serverless.modifying.api"></a>
 
-You can modify the scaling configuration of an Aurora DB cluster with the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) API action\. Specify the `ScalingConfiguration` parameter to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values are `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
+You can modify the scaling configuration of an Aurora DB cluster with the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) API action\. Specify the `ScalingConfiguration` parameter to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values include the following:
++ Aurora MySQL: `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
++ Aurora PostgreSQL: `8`, `16`, `32`, `64`, `192`, and `384`\.

@@ -54,12 +54,12 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `collation_connection`  |  Yes  |  | 
 |  `collation_server`  |  Yes  |  | 
 |  `completion_type`  |  Yes  |  | 
-|  `default_storage_engine`  |  No  |   Aurora clusters use the InnoDB storage engine for all of your data\.   | 
+|  `default_storage_engine`  |  No  |   Aurora MySQL clusters use the InnoDB storage engine for all of your data\.   | 
 |  `innodb_autoinc_lock_mode`  |  Yes  |  | 
 |  `innodb_checksums`  |  No  |  | 
 |  `innodb_cmp_per_index_enabled`  |  Yes  |  | 
 |  `innodb_commit_concurrency`  |  Yes  |  | 
-|  `innodb_data_home_dir`  |  No  |  | 
+|  `innodb_data_home_dir`  |  No  | Aurora MySQL uses managed instances where you don't access the filesystem directly\. | 
 |  `innodb_file_per_table`  |  Yes  |  | 
 |  `innodb_flush_log_at_trx_commit`  |  Yes  |  | 
 |  `innodb_ft_max_token_size`  |  Yes  |  | 
@@ -79,7 +79,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `innodb_sync_array_size`  |  Yes  |  | 
 |  `innodb_sync_spin_loops`  |  Yes  |  | 
 |  `innodb_table_locks`  |  Yes  |  | 
-|  `innodb_undo_directory`  |  No  |  | 
+|  `innodb_undo_directory`  |  No  | Aurora MySQL uses managed instances where you don't access the filesystem directly\. | 
 |  `innodb_undo_logs`  |  Yes  |  | 
 |  `innodb_undo_tablespaces`  |  No  |  | 
 |  `lc_time_names`  |  Yes  |  | 
@@ -109,7 +109,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `autocommit` | Yes |  | 
 | `automatic_sp_privileges` | Yes |  | 
 | `back_log` | Yes |  | 
-| `basedir` | No |  | 
+| `basedir` | No | Aurora MySQL uses managed instances where you don't access the filesystem directly\. | 
 | `binlog_cache_size` | Yes |  | 
 | `binlog_max_flush_queue_time` | Yes |  | 
 | `binlog_order_commits` | Yes |  | 
@@ -117,8 +117,8 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `bulk_insert_buffer_size` | Yes |  | 
 | `concurrent_insert` | Yes |  | 
 | `connect_timeout` | Yes |  | 
-| `core-file` | No |  | 
-| `datadir` | No |  | 
+| `core-file` | No | Aurora MySQL uses managed instances where you don't access the filesystem directly\. | 
+| `datadir` | No | Aurora MySQL uses managed instances where you don't access the filesystem directly\. | 
 | `default_time_zone` | No |  | 
 | `default_tmp_storage_engine` | Yes |  | 
 | `default_week_format` | Yes |  | 
@@ -140,7 +140,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `ft_query_expansion_limit` | Yes |  | 
 | `ft_stopword_file` | Yes |  | 
 | `general_log` | Yes | For instructions on uploading the logs to CloudWatch Logs, see [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. | 
-| `general_log_file` | No |  | 
+| `general_log_file` | No | Aurora MySQL uses managed instances where you don't access the filesystem directly\. | 
 | `group_concat_max_len` | Yes |  | 
 | `gtid-mode` | Sometimes | Modifiable in Aurora MySQL version 2\.04 and later\. | 
 | `host_cache_size` | Yes |  | 
@@ -155,7 +155,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `innodb_buffer_pool_load_at_startup` | No |  | 
 | `innodb_buffer_pool_load_now` | No |  | 
 | `innodb_buffer_pool_size` | Yes |  | 
-| `innodb_change_buffer_max_size` | No |  | 
+| `innodb_change_buffer_max_size` | No | Aurora MySQL doesn't use the InnoDB change buffer at all\. | 
 | `innodb_compression_failure_threshold_pct` | Yes |  | 
 | `innodb_compression_level` | Yes |  | 
 | `innodb_compression_pad_pct_max` | Yes |  | 
@@ -186,7 +186,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `innodb_random_read_ahead` | Yes |  | 
 | `innodb_read_ahead_threshold` | Yes |  | 
 | `innodb_read_io_threads` | No |  | 
-| `innodb_read_only` | No |  | 
+| `innodb_read_only` | No |   Aurora MySQL manages the read\-only and read\-write state of DB instances based on the type of cluster\. For example, a provisioned cluster has one read\-write DB instance \(the *primary instance*\) and any other instances in the cluster are read\-only \(the Aurora Replicas\)\.   | 
 | `innodb_replication_delay` | Yes |  | 
 | `innodb_sort_buffer_size` | Yes |  | 
 | `innodb_stats_auto_recalc` | Yes |  | 
@@ -260,8 +260,8 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `optimizer_trace_offset` | Yes |  | 
 | `performance_schema` | Yes |  | 
 | `pid_file` | No |  | 
-| `plugin_dir` | No |  | 
-| `port` | No |  | 
+| `plugin_dir` | No | Aurora MySQL uses managed instances where you don't access the filesystem directly\. | 
+| `port` | No | Aurora MySQL manages the connection properties and enforces consistent settings for all DB instances in a cluster\. | 
 | `preload_buffer_size` | Yes |  | 
 | `profiling_history_size` | Yes |  | 
 | `query_alloc_block_size` | Yes |  | 
@@ -273,14 +273,14 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `query_prealloc_size` | Yes |  | 
 | `range_alloc_block_size` | Yes |  | 
 | `read_buffer_size` | Yes |  | 
-| `read_only` | No |  | 
+| `read_only` | No |   Aurora MySQL manages the read\-only and read\-write state of DB instances based on the type of cluster\. For example, a provisioned cluster has one read\-write DB instance \(the *primary instance*\) and any other instances in the cluster are read\-only \(the Aurora Replicas\)\.   | 
 | `read_rnd_buffer_size` | Yes |  | 
 | `relay-log` | No |  | 
 | `relay_log_info_repository` | Yes |  | 
 | `relay_log_recovery` | No |  | 
 | `safe-user-create` | Yes |  | 
 | `secure_auth` | Yes |  | 
-| `secure_file_priv` | No |  | 
+| `secure_file_priv` | No | Aurora MySQL uses managed instances where you don't access the filesystem directly\. | 
 | `skip-slave-start` | No |  | 
 | `skip_external_locking` | No |  | 
 | `skip_show_database` | Yes |  | 
@@ -291,7 +291,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `slave_sql_verify_checksum` | Yes |  | 
 | `slow_launch_time` | Yes |  | 
 | `slow_query_log` | Yes | For instructions on uploading the logs to CloudWatch Logs, see [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. | 
-| `slow_query_log_file` | No |  | 
+| `slow_query_log_file` | No | Aurora MySQL uses managed instances where you don't access the filesystem directly\. | 
 | `socket` | No |  | 
 | `sort_buffer_size` | Yes |  | 
 | `sql_mode` | Yes |  | 
@@ -311,7 +311,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `thread_stack` | Yes |  | 
 | `timed_mutexes` | Yes |  | 
 | `tmp_table_size` | Yes |  | 
-| `tmpdir` | No |  | 
+| `tmpdir` | No | Aurora MySQL uses managed instances where you don't access the filesystem directly\. | 
 | `transaction_alloc_block_size` | Yes |  | 
 | `transaction_prealloc_size` | Yes |  | 
 | `tx_isolation` | Yes |  | 
@@ -332,6 +332,7 @@ Because of architectural differences between Aurora MySQL and MySQL, some MySQL 
 The following MySQL parameters do not apply to Aurora MySQL:
 + `innodb_adaptive_flushing`
 + `innodb_adaptive_flushing_lwm`
++ `innodb_change_buffering`
 + `innodb_checksum_algorithm`
 + `innodb_doublewrite`
 + `innodb_flush_method`

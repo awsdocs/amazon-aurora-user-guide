@@ -72,7 +72,7 @@ The following are DB engine considerations for DB instance classes:
 | db\.t3\.large | 2 | Variable | 8 | 2,050 | Up to 5 Gigabit | No | No | 
 | db\.t3\.medium | 2 | Variable | 4 | 1,500 | Up to 5 Gigabit | Yes | Yes | 
 | db\.t3\.small | 2 | Variable | 2 | 1,500 | Up to 5 Gigabit | Yes | No | 
-| db\.t3\.micro | 2 | Variable | 1 | 1,500 | Up to 5 Gigabit | Yes | No | 
+| db\.t3\.micro | 2 | Variable | 1 | 1,500 | Up to 5 Gigabit | No | No | 
 | db\.t2 – Current Generation Burstable Performance Instance Classes | 
 | db\.t2\.medium | 2 | Variable | 4 | — | Moderate | Yes | No | 
 | db\.t2\.small | 1 | Variable | 2 | — | Low | Yes | No | 

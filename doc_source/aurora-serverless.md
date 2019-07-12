@@ -1,9 +1,9 @@
 # Using Amazon Aurora Serverless<a name="aurora-serverless"></a>
 
-Amazon Aurora Serverless is an on\-demand, autoscaling configuration for Amazon Aurora\. An *Aurora Serverless DB cluster* is a DB cluster that automatically starts up, shuts down, and scales up or down capacity based on your application's needs\. Aurora Serverless provides a relatively simple, cost\-effective option for infrequent, intermittent, or unpredictable workloads\. It can provide this because it automatically starts up, scales capacity to match your application's usage, and shuts down when it's not in use\.
+ Amazon Aurora Serverless is an on\-demand, autoscaling configuration for Amazon Aurora\. An *Aurora Serverless DB cluster* is a DB cluster that automatically starts up, shuts down, and scales up or down its compute capacity based on your application's needs\. Aurora Serverless provides a relatively simple, cost\-effective option for infrequent, intermittent, or unpredictable workloads\. It can provide this because it automatically starts up, scales compute capacity to match your application's usage, and shuts down when it's not in use\. 
 
 **Note**  
-A non\-Serverless DB cluster for Aurora is called a *provisioned DB cluster*\.
+ A non\-Serverless DB cluster for Aurora is called a *provisioned DB cluster*\. Aurora Serverless clusters and provisioned clusters both have the same kind of high\-capacity, distributed, and highly available storage volume\. 
 
 **Topics**
 + [Advantages of Aurora Serverless](#aurora-serverless.advantages)
@@ -60,10 +60,15 @@ With Aurora Serverless, you don't have to individually manage database capacity 
 ## Limitations of Aurora Serverless<a name="aurora-serverless.limitations"></a>
 
 The following limitations apply to Aurora Serverless:
-+ Aurora Serverless is only available for Aurora with MySQL 5\.6 compatibility\.
-+ The port number for connections must be `3306`\.
++ Aurora Serverless is only available for the following: 
+  + Aurora with MySQL version 5\.6 compatibility
+  + Aurora with PostgreSQL version 10\.7 compatibility\.
++ The port number for connections must be:
+  + `3306` forAurora MySQL
+  + `5432` for Aurora PostgreSQL
 + You can't give an Aurora Serverless DB cluster a public IP address\. You can access an Aurora Serverless DB cluster only from within a virtual private cloud \(VPC\) based on the Amazon VPC service\.
-+  Each Aurora Serverless DB cluster requires two AWS PrivateLink endpoints\. If you reach the limit for PrivateLink endpoints within your VPC, you can't create any more Aurora Serverless clusters in that VPC\. For information about checking and changing the limits on endpoints within a VPC, see [Amazon VPC Limits](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)\. 
++ Each Aurora Serverless DB cluster requires two AWS PrivateLink endpoints\. If you reach the limit for PrivateLink endpoints within your VPC, you can't create any more Aurora Serverless clusters in that VPC\. For information about checking and changing the limits on endpoints within a VPC, see [Amazon VPC Limits](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)\. 
++ You can't access an Aurora Serverless DB cluster's endpoint through an AWS VPN connection or an inter\-region VPC peering connection\. There are limitations in accessing a cluster's endpoint through an intra\-region VPC peering connection; for more information, see [Interface VPC Endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html) in the *Amazon VPC User Guide*\. However, you can access an Aurora Serverless cluster's endpoint through an AWS Direct Connect connection\. 
 + A DB subnet group used by Aurora Serverless can’t have more than one subnet in the same Availability Zone\.
 + Changes to a subnet group used by an Aurora Serverless DB cluster are not applied to the cluster\.
 + Aurora Serverless doesn't support the following features:
@@ -71,21 +76,20 @@ The following limitations apply to Aurora Serverless:
   + [Invoking an AWS Lambda function with an Aurora MySQL native function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)
   + [Advanced auditing](AuroraMySQL.Auditing.md)
   + [Aurora Replicas](AuroraMySQL.Replication.md)
-  + [Backtrack](AuroraMySQL.Replication.md)
+  + [Backtrack](AuroraMySQL.Managing.Backtrack.md)
   + [Database cloning](Aurora.Managing.Clone.md)
   + [IAM database authentication](UsingWithRDS.IAMDBAuth.md)
   + [Cross\-region read replicas](AuroraMySQL.Replication.CrossRegion.md)
   + [Restoring a snapshot from a MySQL DB instance](AuroraMySQL.Migrating.RDSMySQL.md)
   + [Migrating backup files from Amazon S3](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)
   + [Amazon RDS Performance Insights](USER_PerfInsights.md)
-+  TLS/SSL support for Aurora Serverless clusters currently isn't available in the China \(Beijing\) AWS Region\. 
 
 **Note**  
 You can access an Aurora Serverless DB cluster from AWS Lambda\. For more information about working with AWS Lambda, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](https://docs.aws.amazon.com/lambda/latest/dg/vpc.html) in the *AWS Lambda Developer Guide*\.
 
 ## Using TLS/SSL with Aurora Serverless<a name="aurora-serverless.tls"></a>
 
- You can connect to Aurora Serverless clusters using the Transport Layer Security/Secure Sockets Layer \(TLS/SSL\) protocol\. To do so, you use the same general procedure as described in [Connecting to an Amazon Aurora MySQL DB Cluster](Aurora.Connecting.md#Aurora.Connecting.AuroraMySQL)\. You use certificates from the AWS Certificate Manager \(ACM\)\. For more information, see the *[AWS Certificate Manager User Guide](https://docs.aws.amazon.com/acm/latest/userguide/)*\. 
+ You can connect to Aurora Serverless clusters using the Transport Layer Security/Secure Sockets Layer \(TLS/SSL\) protocol\. To do so, you use the same general procedure as described in [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\. You use certificates from the AWS Certificate Manager \(ACM\)\. For more information, see the *[AWS Certificate Manager User Guide](https://docs.aws.amazon.com/acm/latest/userguide/)*\. 
 
 **Note**  
  TLS support for Aurora Serverless clusters currently isn't available in the China \(Beijing\) AWS Region\. 
@@ -94,9 +98,9 @@ You can access an Aurora Serverless DB cluster from AWS Lambda\. For more inform
 
  Aurora Serverless can ensure that your session uses TLS between your client and the Aurora Serverless VPC endpoint\. To have Aurora Serverless do so, specify the requirement on the client side with the `--ssl-mode` parameter\. 
 
- By default, MySQL client programs establish an encrypted connection with Aurora Serverless, with further control available through the `--ssl-mode` option\. From the client side, Aurora Serverless supports all SSL modes\. 
+ By default, client programs establish an encrypted connection with Aurora Serverless, with further control available through the `--ssl-mode` option\. From the client side, Aurora Serverless supports all SSL modes\. 
 
- For the `mysql` client, the SSL modes are the following: 
+ For the `mysql` and `psql` client, the SSL modes are the following: 
 
 **PREFERRED**  
  SSL is the first choice, but it isn't required\. 
@@ -113,6 +117,6 @@ You can access an Aurora Serverless DB cluster from AWS Lambda\. For more inform
 **VERIFY\_IDENTITY**  
  Enforce SSL and verify the CA and CA hostname\. 
 
- When using a `mysql` client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in \.pem format\. For a \.pem file that you can use, download the [Amazon Root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) from Amazon Trust Services\. 
+When using a `mysql` or `psql` client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in \.pem format\. For a \.pem file that you can use, download the [Amazon Root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) from Amazon Trust Services\. 
 
  Aurora Serverless uses wildcard certificates\. If you use the `mysql` client to connect, currently you must use the MySQL 8\.0\-compatible `mysql` command\. 

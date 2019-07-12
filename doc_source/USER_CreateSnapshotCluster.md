@@ -38,8 +38,8 @@ In this example, you create a DB cluster snapshot named *mydbclustersnapshot* fo
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds create-db-cluster-snapshot /
-2.     --db-cluster-identifier mydbcluster /
+1. aws rds create-db-cluster-snapshot \
+2.     --db-cluster-identifier mydbcluster \
 3.     --db-cluster-snapshot-identifier mydbclustersnapshot
 ```
 For Windows:  

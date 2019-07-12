@@ -32,6 +32,8 @@ Some connection utilities you can use are the following:
 + **Command line** – You can connect to an Amazon Aurora DB cluster by using tools like the MySQL command line utility\. For more information on using the MySQL utility, see [mysql \- The MySQL Command Line Tool](http://dev.mysql.com/doc/refman/5.6/en/mysql.html) in the MySQL documentation\.
 + **GUI** – You can use the MySQL Workbench utility to connect by using a UI interface\. For more information, see the [Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\.
 + **Applications** – You can use the MariaDB Connector/J utility to connect your applications to your Aurora DB cluster\. For more information, see the [MariaDB Connector/J download](https://downloads.mariadb.org/connector-java/) page\.
+**Note**  
+ If you use the MariaDB Connector/J utility with an Aurora Serverless cluster, use the prefix `jdbc:mariadb:aurora//` in your connection string\. The `mariadb:aurora` parameter avoids the automatic DNS scan for failover targets\. That scanning is not needed with Aurora Serverless clusters and causes a delay in establishing the connection\. 
 
 You can use SSL encryption on connections to an Amazon Aurora DB instance\. For information, see [Using SSL with a MySQL DB Instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide//MySQL.Concepts.SSLSupport.html)\.
 

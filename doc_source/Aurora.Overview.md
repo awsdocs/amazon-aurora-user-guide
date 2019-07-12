@@ -7,3 +7,5 @@
  The following diagram illustrates the relationship between the cluster volume, the primary DB instance, and Aurora Replicas in an Aurora DB cluster\. 
 
 ![\[Amazon Aurora Architecture\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraArch001.png)
+
+ The Aurora cluster illustrates the separation of compute capacity and storage\. For example, an Aurora configuration with only a single DB instance is still a cluster, because the underlying storage volume involves multiple storage nodes distributed across multiple Availability Zones \(AZs\)\. 

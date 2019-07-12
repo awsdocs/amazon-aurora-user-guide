@@ -20,17 +20,31 @@ For general information about creating a DB cluster, see [Creating an Amazon Aur
 
 To create a new Aurora Serverless DB cluster with the AWS Management Console, specify **Serverless** for **Capacity type** on the **Specify DB details** page\. 
 
-The following image shows the **Specify DB details** page with **Serverless** chosen during DB cluster creation\.
+### Example for Aurora MySQL<a name="aurora-serverless.create.console.MySQL"></a>
+
+The following image shows the **Specify DB details** page with **Serverless** chosen during DB cluster creation for the Aurora MySQL engine\. 
 
 ![\[Create Aurora Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-select.png)
 
 You can configure the scaling configuration of the Aurora Serverless DB cluster by adjusting values in the **Capacity settings** section on the **Configure advanced settings** page\. 
 
-The following image shows the **Capacity settings** you can adjust\.
+The following image shows the **Capacity settings** you can adjust for an Aurora MySQL Serverless DB cluster\.
 
-![\[Setting capacity for an Aurora Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-capacity.png)
+![\[Setting capacity for an Aurora MySQL Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-capacity.png)
 
-You can also enable the Data API for your Aurora Serverless DB cluster\. For more information, see [Using the Data API for Aurora Serverless](data-api.md)\. 
+You can also enable the Data API for your Aurora MySQL Serverless DB cluster\. For more information, see [Using the Data API for Aurora Serverless](data-api.md)\. 
+
+### Example for Aurora PostgreSQL<a name="aurora-serverless.create.console.PostgreSQL"></a>
+
+For the Aurora PostgreSQL engine, first choose the **DB engine version** for Aurora PostgreSQL that is compatible with PostgreSQL version 10\.7\. Then choose **Serverless** for the **Capacity type**\.
+
+![\[Create Aurora PostgreSQL Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-select-postgres.png)
+
+You can configure the scaling configuration of the Aurora Serverless DB cluster by adjusting values in the **Capacity settings** section on the **Configure advanced settings** page\. 
+
+The following image shows the **Capacity settings** you can adjust for an Aurora PostgreSQL Serverless DB cluster\.
+
+![\[Setting capacity for an Aurora PostgreSQL Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-capacity-postgres.png)
 
 For more information on creating an Aurora DB cluster using the AWS Management Console, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
 
@@ -45,15 +59,19 @@ For more information, see [Using Service\-Linked Roles for Amazon Aurora](UsingW
 
 To create a new Aurora Serverless DB cluster with the AWS CLI, run the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) command and specify `serverless` for the `--engine-mode` option\.
 
-You can optionally specify the `--scaling-configuration` option to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values are `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
+You can optionally specify the `--scaling-configuration` option to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. 
 
-The following command creates a new MySQL 5\.6–compatible Serverless DB cluster by setting the `--engine-mode` option to `serverless`\. The example also specifies values for the `--scaling-configuration` option\.
+The following command examples create a new Serverless DB cluster by setting the `--engine-mode` option to `serverless`\. The examples also specify values for the `--scaling-configuration` option\.
+
+### Example for Aurora MySQL<a name="aurora-serverless.create.cli.MySQL"></a>
+
+The following command creates a new MySQL 5\.6–compatible Serverless DB cluster\. Valid capacity values for Aurora MySQL are `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
 
 For Linux, OS X, or Unix:
 
 ```
 aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 5.6.10a \
---engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,TimeoutAction='ForceApplyCapacityChange',SecondsUntilAutoPause=1000,AutoPause=true \
+--engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true \
 --master-username user-name --master-user-password password \
 --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
 ```
@@ -62,7 +80,29 @@ For Windows:
 
 ```
 aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 5.6.10a ^
---engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,TimeoutAction='ForceApplyCapacityChange',SecondsUntilAutoPause=1000,AutoPause=true ^
+--engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true ^
+--master-username user-name --master-user-password password ^
+--db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
+```
+
+### Example for Aurora PostgreSQL<a name="aurora-serverless.create.cli.PostgreSQL"></a>
+
+The following command creates a new PostgreSQL compatible Serverless DB cluster\. The valid `--engine-version` value is 2\.3, which is compatible with PostgreSQL version 10\.7\. Valid capacity values for Aurora PostgreSQL are `8`, `16`, `32`, `64`, `192`, and `384`\.
+
+For Linux, OS X, or Unix:
+
+```
+aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 2.3 \
+--engine-mode serverless --scaling-configuration MinCapacity=8,MaxCapacity=64,SecondsUntilAutoPause=1000,AutoPause=true \
+--master-username user-name --master-user-password password \
+--db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
+```
+
+For Windows:
+
+```
+aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 2.3 ^
+--engine-mode serverless --scaling-configuration MinCapacity=8,MaxCapacity=64,SecondsUntilAutoPause=1000,AutoPause=true ^
 --master-username user-name --master-user-password password ^
 --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
 ```
@@ -71,4 +111,6 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
 
 To create a new Aurora Serverless DB cluster with the RDS API, run the [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) action and specify `serverless` for the `EngineMode` parameter\.
 
-You can optionally specify the `ScalingConfiguration` parameter to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values are `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
+You can optionally specify the `ScalingConfiguration` parameter to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values include the following:
++ Aurora MySQL: `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
++ Aurora PostgreSQL: `8`, `16`, `32`, `64`, `192`, and `384`\.

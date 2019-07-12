@@ -13,7 +13,7 @@ After you create one or more Aurora Serverless DB clusters, you can view which D
    For each DB cluster, the DB cluster type is shown under **Role**\. The Aurora Serverless DB clusters show **Serverless** for the type\. You can view an Aurora Serverless DB cluster's current capacity under **Size**\.   
 ![\[Viewing Aurora Serverless DB clusters\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-viewing.png)
 
-1. Choose the name an Aurora Serverless DB cluster name to display its details\.
+1. Choose the name of an Aurora Serverless DB cluster to display its details\.
 
    On the **Connectivity & security** tab, note the database endpoint, because it's required to connect to the DB cluster\.  
 ![\[Viewing Aurora Serverless DB cluster database endpoint\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-endpoint.png)

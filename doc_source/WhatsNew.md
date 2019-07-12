@@ -1,5 +1,5 @@
 # Document History<a name="WhatsNew"></a>
-+ **Latest documentation update: **July 3, 2019
++ **Latest documentation update: **July 9, 2019
 + **Current API version: **2014\-10\-31
 
 The following table describes important changes to the *Amazon Aurora User Guide*\. For notification about updates to this documentation, you can subscribe to an RSS feed\. For information about Amazon Relational Database Service \(Amazon RDS\), see the [ *Amazon Relational Database Service User Guide*](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html)\.
@@ -9,6 +9,7 @@ Before August 31, 2018, Amazon Aurora was documented in the * Amazon Relational 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Aurora PostgreSQL supports Aurora Serverless](#WhatsNew) | You can now use Amazon Aurora Serverless with Aurora PostgreSQL\. An Aurora Serverless DB cluster automatically starts up, shuts down, and scales up or down its compute capacity based on your application's needs\. For more information, see [Using Amazon Aurora Serverless](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)\. | July 9, 2019 | 
 | [Aurora PostgreSQL versions 2\.3\.3 and 1\.5\.2](#WhatsNew) | Amazon Aurora with PostgreSQL compatibility version 2\.3\.3 is available and compatible with PostgreSQL 10\.7\. Amazon Aurora with PostgreSQL compatibility version 1\.5\.2 is available and compatible with PostgreSQL 9\.6\.12\. For more information, see [Database Engine Versions for Amazon Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html)\.  | July 3, 2019 | 
 | [Cross\-account cloning for Aurora MySQL](#WhatsNew) |  You can now clone the cluster volume for an Aurora MySQL DB cluster between AWS accounts\. You authorize the sharing through AWS Resource Access Manager \(AWS RAM\)\. The cloned cluster volume uses a copy\-on\-write mechanism, which only requires additional storage for new or changed data\. For more information about cloning for Aurora, see [Cloning Databases in an Aurora DB Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html)\.  | July 2, 2019 | 
 | [Aurora PostgreSQL versions 2\.3\.1 and 1\.5\.1](#WhatsNew) | Amazon Aurora with PostgreSQL compatibility version 2\.3\.1 is available and compatible with PostgreSQL 10\.7\. Amazon Aurora with PostgreSQL compatibility version 1\.5\.1 is available and compatible with PostgreSQL 9\.6\.12\. For more information, see [Database Engine Versions for Amazon Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html)\.  | July 2, 2019 | 

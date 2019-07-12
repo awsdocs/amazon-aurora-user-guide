@@ -45,7 +45,9 @@ For more information, see [Using Service\-Linked Roles for Amazon Aurora](UsingW
 
 To configure an Aurora Serverless DB cluster when you restore from a DB cluster using the AWS CLI, run the [restore\-db\-cluster\-from\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) CLI command and specify `serverless` for the `--engine-mode` option\.
 
-You can optionally specify the `--scaling-configuration` option to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values are `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
+You can optionally specify the `--scaling-configuration` option to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values include the following:
++ Aurora MySQL: `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
++ Aurora PostgreSQL: `8`, `16`, `32`, `64`, `192`, and `384`\.
 
 In the following example, you restore from a previously created DB cluster snapshot named *mydbclustersnapshot*\. You restore to a new DB cluster named *mynewdbcluster*\. To restore the DB cluster as an Aurora Serverless DB cluster, set the `--engine-mode` option to `serverless`\. The example also specifies values for the `--scaling-configuration` option\.
 
@@ -55,7 +57,7 @@ For Linux, OS X, or Unix:
 aws rds restore-db-cluster-from-snapshot \
     --db-cluster-identifier mynewdbcluster \
     --snapshot-identifier mydbclustersnapshot \
-    --engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,TimeoutAction='ForceApplyCapacityChange',SecondsUntilAutoPause=1000,AutoPause=true
+    --engine-mode serverless --scaling-configuration MinCapacity=8,MaxCapacity=64,TimeoutAction='ForceApplyCapacityChange',SecondsUntilAutoPause=1000,AutoPause=true
 ```
 
 For Windows:
@@ -64,11 +66,13 @@ For Windows:
 aws rds restore-db-cluster-from-snapshot ^
     --db-instance-identifier mynewdbcluster ^
     --db-snapshot-identifier mydbclustersnapshot ^
-    --engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,TimeoutAction='ForceApplyCapacityChange',SecondsUntilAutoPause=1000,AutoPause=true
+    --engine-mode serverless --scaling-configuration MinCapacity=8,MaxCapacity=64,TimeoutAction='ForceApplyCapacityChange',SecondsUntilAutoPause=1000,AutoPause=true
 ```
 
 ## RDS API<a name="aurora-serverless.restorefromsnapshot.api"></a>
 
 To configure an Aurora Serverless DB cluster when you restore from a DB cluster using the RDS API, run the [RestoreDBClusterFromSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromSnapshot.html) action and specify `serverless` for the `EngineMode` parameter\.
 
-You can optionally specify the `ScalingConfiguration` parameter to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values are `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
+You can optionally specify the `ScalingConfiguration` parameter to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values include the following:
++ Aurora MySQL: `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
++ Aurora PostgreSQL: `8`, `16`, `32`, `64`, `192`, and `384`\.

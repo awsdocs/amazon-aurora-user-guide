@@ -74,15 +74,15 @@ The following procedure describes how to clone an Aurora DB cluster using the AW
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\. Choose the primary instance for the DB cluster that you want to create a clone of\.
+1. In the navigation pane, choose **Databases**\. Choose the DB cluster that you want to create a clone of\.
 
-1. Choose **Instance actions**, and then choose **Create clone**\.
+1. For **Actions**, choose **Create clone**\.
 
-1. On the **Create Clone** page, type a name for the primary instance of the clone DB cluster as the **DB instance identifier**\.
+1. On the **Create clone** page, type a name for the primary instance of the clone DB cluster as the **DB instance identifier**\.
 
    If you want to, set any other settings for the clone DB cluster\. For information about the different DB cluster settings, see [Console](Aurora.CreateInstance.md#Aurora.CreateInstance.Creating.Console)\.
 
-1. Choose **Create Clone** to launch the clone DB cluster\.
+1. Choose **Create clone** to launch the clone DB cluster\.
 
 ## Cloning an Aurora Cluster Through the AWS CLI<a name="Aurora.Managing.Clone.CLI"></a>
 
