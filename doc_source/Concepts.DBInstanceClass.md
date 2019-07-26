@@ -36,8 +36,12 @@ The following terminology is used to describe hardware specifications for DB ins
 In the following table, you can find details about the Amazon RDS DB instance classes available for Amazon Aurora\. For a more detailed explanation of the table column terminology, see [Terminology for DB Instance Class Hardware Specifications](#Concepts.DBInstanceClass.Terminology)\. 
 
 The following are DB engine considerations for DB instance classes:
-+ **Aurora Support for db\.r5** – All Aurora MySQL versions support the db\.r5 instance classes except the db\.r5\.24xlarge instance class\. For Aurora PostgreSQL, only versions compatible with PostgreSQL 10\.6 or later support the db\.r5 instance classes\. These instance classes are available in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
-+ **Aurora Support for db\.t3** – Aurora MySQL supports the db\.t3\.medium and db\.t3\.small instance classes for Aurora MySQL 1\.15 and higher, and all Aurora MySQL 2\.\* versions\. These instance classes are available for Aurora MySQL in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
++ **Aurora Support for db\.r5** – These instance classes are available in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
+  + All Aurora MySQL versions support the db\.r5 instance classes except the db\.r5\.24xlarge instance class\.
+  + For Aurora PostgreSQL, only versions compatible with PostgreSQL 10\.6 or later support the db\.r5 instance classes\. 
++ **Aurora Support for db\.t3** 
+  + Aurora MySQL supports the db\.t3\.medium and db\.t3\.small instance classes for Aurora MySQL 1\.15 and higher, and all Aurora MySQL 2\.\* versions\. These instance classes are available for Aurora MySQL in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
+  + Aurora PostgreSQL supports only the db\.t3\.medium instance class for versions compatible with PostgreSQL 10\.7 or later\. These instance classes are available for Aurora PostgreSQL in all Aurora regions except China \(Ningxia\)\. 
 
 
 ****  

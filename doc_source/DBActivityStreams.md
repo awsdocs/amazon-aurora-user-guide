@@ -8,6 +8,7 @@ A database activity stream from Aurora PostgreSQL is pushed to an Amazon Kinesis
 
 Database activity streams have the following limits and requirements:
 + Currently, these streams are supported only with Aurora with PostgreSQL compatibility version 2\.3, which is compatible with PostgreSQL version 10\.7\.
++ Database activity streams support the DB instance classes listed for Aurora PostgreSQL in [Hardware Specifications for All Available DB Instance Classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SummaryAurora), except they don't support the t3\.medium instance class\.
 + They're not supported in the following AWS Regions:
   + China \(Beijing\) Region, `cn-north-1`
   + China \(Ningxia\) Region, `cn-northwest-1`
@@ -132,7 +133,9 @@ The response includes the following items for a database activity stream:
 
 ## Stopping a Database Activity Stream<a name="DBActivityStreams.Disabling"></a>
 
-You can stop a database activity stream using the console or AWS CLI\.
+You can stop a database activity stream using the console or AWS CLI\. 
+
+Note, if you delete a DB cluster, the database activity stream is stopped automatically\.
 
 ### Console<a name="DBActivityStreams.Disabling-collapsible-section-D1"></a>
 

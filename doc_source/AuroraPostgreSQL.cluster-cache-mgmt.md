@@ -12,6 +12,9 @@ With cluster cache management, you set a specific reader DB instance as the fail
 
 ## Configuring Cluster Cache Management<a name="AuroraPostgreSQL.cluster-cache-mgmt.Configure"></a>
 
+**Note**  
+Cluster cache management is supported for Aurora PostgreSQL DB clusters of versions 9\.6\.11 and above, and versions 10\.5 and above\.
+
 To configure cluster cache management, take the following steps\.
 
 **Topics**
@@ -19,9 +22,12 @@ To configure cluster cache management, take the following steps\.
 + [Set the Promotion Tier Priority for the Writer DB Instance](#AuroraPostgreSQL.cluster-cache-mgmt.Writer)
 + [Set the Promotion Tier Priority for a Reader DB Instance](#AuroraPostgreSQL.cluster-cache-mgmt.Reader)
 
+**Note**  
+Allow at least 1 minute after completing these steps for cluster cache management to be fully operational\.
+
 ### Enable Cluster Cache Management<a name="AuroraPostgreSQL.cluster-cache-mgmt.Enable"></a>
 
-To enable cluster cache management, set the `apg_ccm_enabled` cluster parameter to `1` as described following\. 
+To enable cluster cache management for a DB cluster, modify its parameter group by setting the `apg_ccm_enabled` parameter to `1` as described following\. 
 
 #### AWS Management Console<a name="AuroraPostgreSQL.cluster-cache-mgmt.Enable.CON"></a>
 
@@ -52,14 +58,14 @@ For Linux, OS X, or Unix:
 
 ```
 aws rds modify-db-cluster-parameter-group \
-    --db-cluster-parameter-group-name mydbclusterparametergroup \
+    --db-cluster-parameter-group-name my-db-cluster-parameter-group \
     --parameters "ParameterName=apg_ccm_enabled,ParameterValue=1,ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
 aws rds modify-db-cluster-parameter-group ^
-    --db-cluster-parameter-group-name mydbclusterparametergroup ^
+    --db-cluster-parameter-group-name my-db-cluster-parameter-group ^
     --parameters "ParameterName=apg_ccm_enabled,ParameterValue=1,ApplyMethod=immediate"
 ```
 
@@ -99,7 +105,7 @@ For Linux, OS X, or Unix:
 
 ```
 aws rds modify-db-instance \
-    --db-instance-identifier mydbinstance \
+    --db-instance-identifier writer-db-instance \
     --promotion-tier 0 \
     --apply-immediately
 ```
@@ -107,7 +113,7 @@ For Windows:
 
 ```
 aws rds modify-db-instance ^
-    --db-instance-identifier mydbinstance ^
+    --db-instance-identifier writer-db-instance ^
     ---promotion-tier 0  ^
     --apply-immediately
 ```
@@ -150,7 +156,7 @@ For Linux, OS X, or Unix:
 
 ```
 aws rds modify-db-instance \
-    --db-instance-identifier mydbinstance \
+    --db-instance-identifier reader-db-instance \
     --promotion-tier 0 \
     --apply-immediately
 ```
@@ -158,16 +164,17 @@ For Windows:
 
 ```
 aws rds modify-db-instance ^
-    --db-instance-identifier mydbinstance ^
+    --db-instance-identifier reader-db-instance ^
     ---promotion-tier 0  ^
     --apply-immediately
 ```
 
 ## Monitoring the Buffer Cache<a name="AuroraPostgreSQL.cluster-cache-mgmt.Monitoring"></a>
 
-Cluster cache management ensures that the designated reader's warm buffer cache is kept synchronized with the writer DB instance's buffer cache\. To examine the buffer cache contents on both the writer DB instance and the designated reader DB instance, use the PostgreSQL `pg_buffercache` module For more information, see the [PostgreSQL `pg_buffercache` documentation](https://www.postgresql.org/docs/current/pgbuffercache.html)\. 
+After setting up cluster cache management, you can monitor the state of synchronization between the writer DB instance's buffer cache and the designated reader's warm buffer cache\. To examine the buffer cache contents on both the writer DB instance and the designated reader DB instance, use the PostgreSQL `pg_buffercache` module\. For more information, see the [PostgreSQL `pg_buffercache` documentation](https://www.postgresql.org/docs/current/pgbuffercache.html)\. 
 
-Cluster cache management also provides the `apg_ccm_status` function\. Use the `apg_ccm_status` function on the writer DB instance to get the following information about the progress of cache warming on the designated reader:
+**Using the `aurora_ccm_status` Function**  
+Cluster cache management also provides the `aurora_ccm_status` function\. Use the `aurora_ccm_status` function on the writer DB instance to get the following information about the progress of cache warming on the designated reader:
 + `buffers_sent_last_minute` – How many buffers have been sent to the designated reader in the last minute\.
 + `buffers_sent_last_scan` – How many buffers have been sent to the designated reader during the last complete scan of the buffer cache\.
 + `buffers_found_last_scan` – How many buffers have been identified as frequently accessed and needed to be sent during the last complete scan of the buffer cache\. Buffers already cached on the designated reader aren't sent\.
@@ -175,10 +182,10 @@ Cluster cache management also provides the `apg_ccm_status` function\. Use the `
 + `buffers_found_current_scan` – How many buffers have been identified as frequently accessed in the current scan\.
 + `current_scan_progress` – How many buffers have been visited so far during the current scan\.
 
-The following example shows how to use the `apg_ccm_status` function to convert some of its output into a warm rate and warm percentage\.
+The following example shows how to use the `aurora_ccm_status` function to convert some of its output into a warm rate and warm percentage\.
 
 ```
 SELECT buffers_sent_last_minute*8/60 AS warm_rate_kbps, 
    100*(1.0-buffers_sent_last_scan/buffers_found_last_scan) AS warm_percent 
-   FROM apg_ccm_status();
+   FROM aurora_ccm_status();
 ```

@@ -73,8 +73,8 @@ The following limitations apply to Aurora Serverless:
 + Changes to a subnet group used by an Aurora Serverless DB cluster are not applied to the cluster\.
 + Aurora Serverless doesn't support the following features:
   + [Loading data from an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)
+  + [Saving data to an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)
   + [Invoking an AWS Lambda function with an Aurora MySQL native function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)
-  + [Advanced auditing](AuroraMySQL.Auditing.md)
   + [Aurora Replicas](AuroraMySQL.Replication.md)
   + [Backtrack](AuroraMySQL.Managing.Backtrack.md)
   + [Database cloning](Aurora.Managing.Clone.md)

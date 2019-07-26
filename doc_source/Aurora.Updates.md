@@ -10,7 +10,7 @@ Following, you can find information on general updates to Amazon Aurora\. Some o
 |  Amazon Aurora MySQL  |  See [Database Engine Updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)  | 
 |  Amazon Aurora PostgreSQL  |  See [Database Engine Updates for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.md)  | 
 
-## Amazon Aurora Versions<a name="Aurora.Updates.Versions"></a>
+## Identifying Your Amazon Aurora Version<a name="Aurora.Updates.Versions"></a>
 
 Amazon Aurora includes certain features that are general to Aurora and available to all Aurora DB clusters\. Aurora includes other features that are specific to a particular database engine that Aurora supports\. These features are available only to those Aurora DB clusters that use that database engine, such as Aurora PostgreSQL\.
 
@@ -27,6 +27,3 @@ To get the Aurora version number from an Aurora DB instance using a particular d
 | --- | --- | 
 |  Amazon Aurora MySQL  |  <pre>SELECT AURORA_VERSION();</pre> <pre>SHOW @@aurora_version;</pre>  | 
 |  Amazon Aurora PostgreSQL  |  <pre>SELECT AURORA_VERSION();</pre>  | 
-
-## Related Topics<a name="Aurora.Updates.RelatedTopics"></a>
-+ [Managing an Amazon Aurora DB Cluster](CHAP_Aurora.md)

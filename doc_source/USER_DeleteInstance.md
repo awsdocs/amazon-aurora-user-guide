@@ -28,8 +28,6 @@ You can delete a DB instance using the AWS Management Console, the AWS CLI, or t
 
 1. For **Actions**, choose **Delete**\. 
 
-1. To retain automated backups, choose **Retain automated backups**\.
-
 1. Enter **delete me** in the box\.
 
 1. Choose **Delete**\. 

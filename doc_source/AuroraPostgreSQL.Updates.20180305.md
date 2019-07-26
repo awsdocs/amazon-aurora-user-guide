@@ -1,8 +1,8 @@
 # Database Engine Versions for Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Updates.20180305"></a>
 
-Following, you can find information about updates to the Aurora with PostgreSQL compatibility database engine\. 
+Following, you can find information about supported versions of the Aurora with PostgreSQL compatibility database engine\. An Aurora database has two version numbers; the Aurora version number and the database engine version number\. To determine the version numbers of your Aurora PostgreSQL database, see [Identifying Your Version of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.md#AuroraPostgreSQL.Updates.Versions)\. 
 
-The following table shows the version of PostgreSQL that each Aurora PostgreSQL release is compatible with\.
+The following table shows the version of each Aurora PostgreSQL release and the PostgreSQL version that it is compatible with\.
 
 
 ****  
@@ -20,7 +20,7 @@ The following table shows the version of PostgreSQL that each Aurora PostgreSQL 
 | [Version 1\.1](#AuroraPostgreSQL.Updates.20180305.11) | [9\.6\.6](https://www.postgresql.org/docs/current/static/release-9-6-6.html) deprecated | 
 | [Version 1\.0](#AuroraPostgreSQL.Updates.20180305.10) | [9\.6\.3](https://www.postgresql.org/docs/current/static/release-9-6-3.html) deprecated | 
 
-The following updates are available for Aurora PostgreSQL\.
+The following Aurora PostgreSQL versions are supported\. 
 
 ## Version 2\.3<a name="AuroraPostgreSQL.Updates.20180305.23"></a>
 
