@@ -1,12 +1,12 @@
 # Testing Amazon Aurora Using Fault Injection Queries<a name="AuroraMySQL.Managing.FaultInjectionQueries"></a>
 
 You can test the fault tolerance of your Amazon Aurora DB cluster by using fault injection queries\. Fault injection queries are issued as SQL commands to an Amazon Aurora instance and they enable you to schedule a simulated occurrence of one of the following events:
-+ A crash of the master instance or an Aurora Replica
++ A crash of a writer or reader DB instance
 + A failure of an Aurora Replica
 + A disk failure
 + Disk congestion
 
-Fault injection queries that specify a crash force a crash of the Amazon Aurora instance\. The other fault injection queries result in simulations of failure events, but don't cause the event to occur\. When you submit a fault injection query, you also specify an amount of time for the failure event simulation to occur for\.
+Fault injection queries that specify a crash force a crash of the Aurora instance\. The other fault injection queries result in simulations of failure events, but don't cause the event to occur\. When you submit a fault injection query, you also specify an amount of time for the failure event simulation to occur for\.
 
 You can submit a fault injection query to one of your Aurora Replica instances by connecting to the endpoint for the Aurora Replica\. For more information, see [Amazon Aurora Connection Management](Aurora.Overview.Endpoints.md)\.
 
@@ -14,7 +14,7 @@ You can submit a fault injection query to one of your Aurora Replica instances b
 
 You can force a crash of an Amazon Aurora instance using the `ALTER SYSTEM CRASH` fault injection query\.
 
-For this fault injection query, a failover will not occur\. If you want to test a failover, then you can choose the **Failover** instance action for your DB cluster in the RDS console, or use the [failover\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html) AWS CLI command or the [FailoverDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html) RDS API action\. 
+For this fault injection query, a failover will not occur\. If you want to test a failover, then you can choose the **Failover** instance action for your DB cluster in the RDS console, or use the [failover\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html) AWS CLI command or the [FailoverDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html) RDS API operation\. 
 
 ### Syntax<a name="AuroraMySQL.Managing.FaultInjectionQueries.Crash-Syntax"></a>
 

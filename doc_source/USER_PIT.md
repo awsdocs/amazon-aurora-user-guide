@@ -1,6 +1,6 @@
 # Restoring a DB Cluster to a Specified Time<a name="USER_PIT"></a>
 
-You can restore a DB cluster to a specific point in time, creating a new DB cluster\. When you restore a DB cluster to a point in time, the default DB security group is applied to the new DB cluster\. If you need custom DB security groups applied to your DB cluster, you must apply them explicitly using the AWS Management Console, the AWS CLI `modify-db-cluster` command, or the Amazon RDS API `ModifyDBCluster` action after the DB instance is available\.
+You can restore a DB cluster to a specific point in time, creating a new DB cluster\. When you restore a DB cluster to a point in time, the default DB security group is applied to the new DB cluster\. If you need custom DB security groups applied to your DB cluster, you must apply them explicitly using the AWS Management Console, the AWS CLI `modify-db-cluster` command, or the Amazon RDS API `ModifyDBCluster` operation after the DB instance is available\.
 
 **Note**  
 For more information about backing up and restoring an Aurora DB cluster, see [Overview of Backing Up and Restoring an Aurora DB Cluster](Aurora.Managing.Backups.md)\. For Aurora MySQL, you can restore a provisioned DB cluster to an Aurora Serverless DB cluster\. For more information, see [Restoring an Aurora Serverless DB Cluster](aurora-serverless.restorefromsnapshot.md)\.
@@ -53,7 +53,7 @@ For Windows:
 
 ## API<a name="USER_PIT.API"></a>
 
-To restore a DB cluster to a specified time, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterToPointInTime.html) action with the following parameters:
+To restore a DB cluster to a specified time, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterToPointInTime.html) operation with the following parameters:
 + `SourceDBClusterIdentifier`
 + `DBClusterIdentifier`
 + `RestoreToTime`

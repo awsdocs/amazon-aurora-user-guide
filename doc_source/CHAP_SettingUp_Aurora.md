@@ -145,4 +145,4 @@ For example, if you have an application that will access a database on your DB c
 
    Once you have completed the setup requirements, you can use your requirements and the security group you created to launch a DB cluster\. For information on creating a DB cluster, see the relevant documentation in the following table: 
 
-   After setting up, you can create a test Amazon Aurora DB cluster\. For instructions, see [Creating a DB Cluster and Connecting to a Database on an Amazon Aurora DB Cluster](CHAP_GettingStartedAurora.md#CHAP_GettingStartedAurora.CreatingConnecting.Aurora)\.
+   After setting up, you can create a test Amazon Aurora DB cluster\. For instructions, see [Creating a DB Cluster and Connecting to a Database on an Aurora MySQL DB Cluster](CHAP_GettingStartedAurora.CreatingConnecting.Aurora.md)\.

@@ -39,6 +39,8 @@ In these cases, Aurora Serverless continues to try to find a scaling point so th
 
 You can see scaling events in the details for a DB cluster in the AWS Management Console\. You can also monitor the current capacity allocated to the DB cluster by using the `ServerlessDatabaseCapacity` metric for Amazon CloudWatch\. 
 
+During autoscaling, Aurora Serverless resets the `EngineUptime` metric\. The reset metric value doesn't indicate any issues with seamless scaling and doesn't mean that any connections were dropped\. For more information about metrics, see [Monitoring Amazon Aurora DB Cluster Metrics](Aurora.Monitoring.md)\.
+
 ## Automatic Pause and Resume for Aurora Serverless<a name="aurora-serverless.how-it-works.pause-resume"></a>
 
 You can choose to pause your Aurora Serverless DB cluster after a given amount of time with no activity\. You specify the amount of time with no activity before the DB cluster is paused\. The default is five minutes\. You can also disable pausing the DB cluster\.
@@ -76,7 +78,7 @@ For information about changing the capacity, see [Modifying an Aurora Serverless
 
 To apply a change to a DB cluster parameter group, Aurora Serverless starts a seamless scale with the current capacity if the DB cluster is active\. It resumes the DB cluster if it's paused\.
 
- To view the supported engine mode for cluster\-level parameters, run the [describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) command or the RDS API action [DescribeEngineDefaultClusterParameters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEngineDefaultClusterParameters.html)\. For example, the following Linux command extracts the names of parameters that you can set for Aurora MySQL Serverless clusters, from an `aurora5.6` default DB cluster parameter group\. 
+ To view the supported engine mode for cluster\-level parameters, run the [describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) command or the RDS API operation [DescribeEngineDefaultClusterParameters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEngineDefaultClusterParameters.html)\. For example, the following Linux command extracts the names of parameters that you can set for Aurora MySQL Serverless clusters, from an `aurora5.6` default DB cluster parameter group\. 
 
 ```
 aws rds describe-engine-default-cluster-parameters \

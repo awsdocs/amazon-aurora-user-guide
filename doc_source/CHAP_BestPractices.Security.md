@@ -1,6 +1,6 @@
 # Security Best Practices for Amazon Aurora<a name="CHAP_BestPractices.Security"></a>
 
-Use AWS Identity and Access Management \(IAM\) accounts to control access to Amazon RDS API actions, especially actions that create, modify, or delete Amazon Aurora resources\. Such resources include DB clusters, security groups, and parameter groups\. Also use IAM to control actions that perform common administrative actions such as backing up and restoring DB clusters\.
+Use AWS Identity and Access Management \(IAM\) accounts to control access to Amazon RDS API operations, especially operations that create, modify, or delete Amazon Aurora resources\. Such resources include DB clusters, security groups, and parameter groups\. Also use IAM to control actions that perform common administrative actions such as backing up and restoring DB clusters\.
 + Assign an individual IAM account to each person who manages Amazon Aurora resources\. Don't use AWS root credentials to manage Amazon Aurora resources; you should create an IAM user for everyone, including yourself\.
 + Grant each user the minimum set of permissions required to perform his or her duties\.
 + Use IAM groups to effectively manage permissions for multiple users\.

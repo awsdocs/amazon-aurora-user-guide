@@ -15,7 +15,7 @@ You can create a DB cluster snapshot using the AWS Management Console, the AWS C
 
 1. In the navigation pane, choose **Instances**\.
 
-1. In the list of DB instances, choose the primary instance for the DB cluster\.
+1. In the list of DB instances, choose a writer instance for the DB cluster\.
 
 1. Choose **Instance actions**, and then choose **Take snapshot**\.
 

@@ -43,6 +43,6 @@ aws rds modify-current-db-cluster-capacity --db-cluster-identifier sample-cluste
 
 ## RDS API<a name="aurora-serverless.setting-capacity.api"></a>
 
-You can set the capacity of an Aurora DB cluster with the [ModifyCurrentDBClusterCapacity](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyCurrentDBClusterCapacity.html) API action\. Specify the `Capacity` parameter\. Valid capacity values include the following:
+You can set the capacity of an Aurora DB cluster with the [ModifyCurrentDBClusterCapacity](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyCurrentDBClusterCapacity.html) API operation\. Specify the `Capacity` parameter\. Valid capacity values include the following:
 + Aurora MySQL: `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
 + Aurora PostgreSQL: `8`, `16`, `32`, `64`, `192`, and `384`\.

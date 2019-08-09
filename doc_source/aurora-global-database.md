@@ -20,7 +20,7 @@
 
  An Aurora global database consists of one primary AWS Region where your data is mastered, and one read\-only, secondary AWS Region\. Aurora replicates data to the secondary AWS Region with typical latency of under a second\. You issue write operations directly to the primary DB instance in the primary AWS Region\. An Aurora global database uses dedicated infrastructure to replicate your data, leaving database resources available entirely to serve application workloads\. Applications with a worldwide footprint can use reader instances in the secondary AWS Region for low latency reads\. In the unlikely event your database becomes degraded or isolated in an AWS region, you can promote the secondary AWS Region to take full read\-write workloads in under a minute\. 
 
- The Aurora cluster in the primary AWS Region where your data is mastered performs both read and write operations\. The cluster in the secondary region enables low\-latency reads\. You can scale up the secondary cluster independently by adding one of more DB instances \(Aurora Replicas\) to serve read\-only workloads\. For disaster recovery, you can remove and promote the secondary cluster to allow full read and write operations\. 
+ The Aurora cluster in the primary AWS Region where your data is mastered performs both read and write operations\. The cluster in the secondary region enables low\-latency reads\. You can scale up the secondary cluster independently by adding one or more DB instances \(Aurora Replicas\) to serve read\-only workloads\. For disaster recovery, you can remove and promote the secondary cluster to allow full read and write operations\. 
 
  Only the primary cluster performs write operations\. Clients that perform write operations connect to the DB cluster endpoint of the primary cluster\. 
 
@@ -76,7 +76,7 @@
 
 1.  On the **Select engine** page, choose the MySQL 5\.6\-compatible Aurora engine and **Global** for **Database location**\. For an example, see the following images\. 
 **Note**  
- Make sure that **Quick create** isn't selected\. Turning off **Quick create** makes visible the choices that you need for Aurora global databases\. 
+ Make sure that **Easy create** isn't selected\. Turning off **Easy create** makes visible the choices that you need for Aurora global databases\.  
 
    1.  Choose Aurora as the engine:   
 ![\[Screenshot of the engine options choices when creating a database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-create-global-01a.png)
@@ -208,7 +208,7 @@
    aws rds describe-db-clusters --db-cluster-identifier sample-global-cluster
    ```
 
-    When the `describe-db-clusters` results show a status of `available`, create the primary instance for the primary cluster cluster so that replication can begin\. To do so, use the AWS CLI `[create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)` command as shown in the following example\. 
+    When the `describe-db-clusters` results show a status of `available`, create the primary instance for the primary cluster so that replication can begin\. To do so, use the AWS CLI `[create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)` command as shown in the following example\. 
 
    For Linux, OS X, or Unix:
 
@@ -296,7 +296,7 @@
 
 ### RDS API<a name="aurora-global-database-create.api"></a>
 
- To create an Aurora global database with the RDS API, run the [CreateGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateGlobalCluster.html) action\. 
+ To create an Aurora global database with the RDS API, run the [CreateGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateGlobalCluster.html) operation\. 
 
 ## Adding an AWS Region to an Aurora Global Database<a name="aurora-global-database-attaching"></a>
 
@@ -367,7 +367,7 @@ aws rds --region secondary_region ^
 
 ### RDS API<a name="aurora-global-database-attach.api"></a>
 
- To add a new new AWS Region to an Aurora global database with the RDS API, run the [CreateGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateGlobalCluster.html) action\. 
+ To add a new AWS Region to an Aurora global database with the RDS API, run the [CreateGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateGlobalCluster.html) operation\. 
 
 ## Removing a Cluster from an Aurora Global Database<a name="aurora-global-database-detaching"></a>
 
@@ -427,7 +427,7 @@ aws rds --region primary_region ^
 
 ### RDS API<a name="aurora-global-database-detach.api"></a>
 
- To remove an Aurora cluster from an Aurora global database with the RDS API, run the [RemoveFromGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RemoveFromGlobalCluster.html) action\. 
+ To remove an Aurora cluster from an Aurora global database with the RDS API, run the [RemoveFromGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RemoveFromGlobalCluster.html) operation\. 
 
 ## Deleting an Aurora Global Database<a name="aurora-global-database-deleting"></a>
 

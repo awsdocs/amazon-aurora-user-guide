@@ -43,6 +43,7 @@ The following limitations apply to backtracking:
 
    These limitations still apply even if you turn off Backtrack for the Aurora MySQL 5\.6 cluster\. 
 + Backtracking is not supported for the China \(Ningxia\) region\.
++  You can't use Backtrack with Aurora multi\-master clusters\. 
 
 ## Configuring Backtracking<a name="AuroraMySQL.Managing.Backtrack.Configuring"></a>
 
@@ -142,9 +143,9 @@ Currently, you can enable backtracking only for a DB cluster that was created wi
 
 ### RDS API<a name="AuroraMySQL.Managing.Backtrack.Configuring.API"></a>
 
-When you create a new Aurora MySQL DB cluster using the [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) action Amazon RDS API action, backtracking is configured when you specify a `BacktrackWindow` value that is greater than zero\. The `BacktrackWindow` value specifies the target backtrack window for the DB cluster specified in the `DBClusterIdentifier` value\. For more information, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
+When you create a new Aurora MySQL DB cluster using the [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) Amazon RDS API operation, backtracking is configured when you specify a `BacktrackWindow` value that is greater than zero\. The `BacktrackWindow` value specifies the target backtrack window for the DB cluster specified in the `DBClusterIdentifier` value\. For more information, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
 
-You can also specify the `BacktrackWindow` value using the following API actions:
+You can also specify the `BacktrackWindow` value using the following API operations:
 +  [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) 
 +  [RestoreDBClusterFromS3](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromS3.html) 
 +  [RestoreDBClusterFromSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromSnapshot.html) 
@@ -282,7 +283,7 @@ The following procedure describes how to view backtrack information for a DB clu
 
 ### RDS API<a name="AuroraMySQL.Managing.Backtrack.Describing.API"></a>
 
-To view backtrack information for a DB cluster using the Amazon RDS API, use the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) action\. This action returns backtrack information for the DB cluster specified in the `DBClusterIdentifier` value\.
+To view backtrack information for a DB cluster using the Amazon RDS API, use the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) operation\. This action returns backtrack information for the DB cluster specified in the `DBClusterIdentifier` value\.
 
 ## Subscribing to a Backtrack Event with the Console<a name="AuroraMySQL.Managing.Backtrack.Event.Console"></a>
 
@@ -346,7 +347,7 @@ The following procedure describes how to retrieve existing backtracks for a DB c
 
 ### RDS API<a name="AuroraMySQL.Managing.Backtrack.Retrieving.API"></a>
 
-To retrieve information about the backtracks for a DB cluster using the Amazon RDS API, use the [DescribeDBClusterBacktracks](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterBacktracks.html) action\. This action returns information about backtracks for the DB cluster specified in the `DBClusterIdentifier` value\.
+To retrieve information about the backtracks for a DB cluster using the Amazon RDS API, use the [DescribeDBClusterBacktracks](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterBacktracks.html) operation\. This action returns information about backtracks for the DB cluster specified in the `DBClusterIdentifier` value\.
 
 ## Disabling Backtracking for a DB Cluster<a name="AuroraMySQL.Managing.Backtrack.Disabling"></a>
 
@@ -403,4 +404,4 @@ You can disable the Backtrack feature for a DB cluster using the AWS CLI by sett
 
 ### RDS API<a name="AuroraMySQL.Managing.Backtrack.Disabling.API"></a>
 
-To disable the Backtrack feature for a DB cluster using the Amazon RDS API, use the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) action\. Set the `BacktrackWindow` value to `0` \(zero\), and specify the DB cluster in the `DBClusterIdentifier` value\.
+To disable the Backtrack feature for a DB cluster using the Amazon RDS API, use the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) operation\. Set the `BacktrackWindow` value to `0` \(zero\), and specify the DB cluster in the `DBClusterIdentifier` value\.

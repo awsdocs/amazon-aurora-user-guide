@@ -6,7 +6,7 @@ In the following sections, you can find information about Aurora backups and how
 
 An Aurora DB cluster is fault tolerant by design\. The cluster volume spans multiple Availability Zones in a single AWS Region, and each Availability Zone contains a copy of the cluster volume data\. This functionality means that your DB cluster can tolerate a failure of an Availability Zone without any loss of data and only a brief interruption of service\.
 
-If the primary instance in a DB cluster fails, Aurora automatically fails over to a new primary instance in one of two ways:
+If the primary instance in a DB cluster using single\-master replication fails, Aurora automatically fails over to a new primary instance in one of two ways:
 + By promoting an existing Aurora Replica to the new primary instance
 + By creating a new primary instance
 

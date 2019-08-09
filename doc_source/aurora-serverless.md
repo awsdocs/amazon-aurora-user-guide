@@ -77,9 +77,9 @@ The following limitations apply to Aurora Serverless:
   + [Invoking an AWS Lambda function with an Aurora MySQL native function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)
   + [Aurora Replicas](AuroraMySQL.Replication.md)
   + [Backtrack](AuroraMySQL.Managing.Backtrack.md)
+  + [Multi\-master clusters](aurora-multi-master.md)
   + [Database cloning](Aurora.Managing.Clone.md)
   + [IAM database authentication](UsingWithRDS.IAMDBAuth.md)
-  + [Cross\-region read replicas](AuroraMySQL.Replication.CrossRegion.md)
   + [Restoring a snapshot from a MySQL DB instance](AuroraMySQL.Migrating.RDSMySQL.md)
   + [Migrating backup files from Amazon S3](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)
   + [Amazon RDS Performance Insights](USER_PerfInsights.md)
@@ -91,14 +91,14 @@ You can access an Aurora Serverless DB cluster from AWS Lambda\. For more inform
 
  You can connect to Aurora Serverless clusters using the Transport Layer Security/Secure Sockets Layer \(TLS/SSL\) protocol\. To do so, you use the same general procedure as described in [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\. You use certificates from the AWS Certificate Manager \(ACM\)\. For more information, see the *[AWS Certificate Manager User Guide](https://docs.aws.amazon.com/acm/latest/userguide/)*\. 
 
-**Note**  
- TLS support for Aurora Serverless clusters currently isn't available in the China \(Beijing\) AWS Region\. 
+ Aurora Serverless can ensure that your session uses TLS between your client and the Aurora Serverless VPC endpoint\. To have Aurora Serverless do so, specify the requirement on the client side with the `--ssl-mode` parameter\. SSL session variables are not set for SSL connections to an Aurora Serverless DB cluster\. 
 
- TLS protocol, version 1\.0, 1\.1, or 1\.2\. However, you don't need to configure an Aurora Serverless database for TLS\. In particular, don't use the `REQUIRE` clause on your database user privileges for SSL\. Doing so prevents that user from connecting\. 
-
- Aurora Serverless can ensure that your session uses TLS between your client and the Aurora Serverless VPC endpoint\. To have Aurora Serverless do so, specify the requirement on the client side with the `--ssl-mode` parameter\. 
+ Aurora Serverless supports TLS protocol version 1\.0, 1\.1, and 1\.2\. However, you don't need to configure an Aurora Serverless database for TLS\. In particular, don't use the `REQUIRE` clause on your database user privileges for SSL\. Doing so prevents that user from connecting\. 
 
  By default, client programs establish an encrypted connection with Aurora Serverless, with further control available through the `--ssl-mode` option\. From the client side, Aurora Serverless supports all SSL modes\. 
+
+**Note**  
+ TLS support for Aurora Serverless clusters currently isn't available in the China \(Beijing\) AWS Region\. 
 
  For the `mysql` and `psql` client, the SSL modes are the following: 
 

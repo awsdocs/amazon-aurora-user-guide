@@ -5,6 +5,4 @@ Amazon Aurora integrates with other AWS services so that you can extend your Aur
 
   For more information about Performance Insights, see [Using Amazon RDS Performance Insights](USER_PerfInsights.md)\. 
 + Automatically add or remove Aurora Replicas with Aurora Auto Scaling\. For more information, see [Using Amazon Aurora Auto Scaling with Aurora Replicas](Aurora.Integrating.AutoScaling.md)\.
-
-## Related Topics<a name="AuroraPostgreSQL.Integrating.RelatedTopics"></a>
-+ [Managing an Amazon Aurora DB Cluster](CHAP_Aurora.md)
++ Configure your Aurora PostgreSQL DB cluster to publish log data to Amazon CloudWatch Logs\. CloudWatch Logs provide highly durable storage for your log records\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. For more information, see [Publishing Aurora PostgreSQL Logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)\.

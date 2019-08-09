@@ -33,6 +33,8 @@ To use an Aurora DB cluster or perform administration, you always begin with a r
 
  You can't stop a DB cluster that acts as the replication target for data from another DB cluster, or acts as the replication master and transmits data to another cluster\. 
 
+ You can't stop certain special kinds of clusters\. Currently, you can't stop a cluster that's part of an Aurora global database, or a multi\-master cluster\. 
+
 ### Console<a name="aurora-stop-cluster.CON"></a>
 
 **To stop an Aurora cluster**
@@ -56,7 +58,7 @@ To stop a DB instance by using the AWS CLI, call the [stop\-db\-cluster](https:/
 
 ### RDS API<a name="aurora-stop-cluster.API"></a>
 
-To stop a DB instance by using the Amazon RDS API, call the [StopDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDBCluster.html) action with the following parameter: 
+To stop a DB instance by using the Amazon RDS API, call the [StopDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDBCluster.html) operation with the following parameter: 
 + `DBClusterIdentifier` – the name of the Aurora cluster\. 
 
 ## Possible Operations While an Aurora DB Cluster Is Stopped<a name="aurora-cluster-stopped"></a>
@@ -96,5 +98,5 @@ To start a DB cluster by using the AWS CLI, call the [start\-db\-cluster](https:
 
 ### RDS API<a name="aurora-start-cluster.API"></a>
 
-To start an Aurora DB cluster by using the Amazon RDS API, call the [StartDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StartDBCluster.html) action with the following parameter: 
+To start an Aurora DB cluster by using the Amazon RDS API, call the [StartDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StartDBCluster.html) operation with the following parameter: 
 + `DBCluster` – the name of the Aurora cluster\. This name is either a specific cluster identifier you chose when creating the cluster, or the DB instance identifier you chose with `-cluster` appended to the end\. 

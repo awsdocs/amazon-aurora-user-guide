@@ -4,17 +4,20 @@ Amazon Aurora provides newer versions of each supported database engine so you c
 
 There are two kinds of upgrades: major version upgrades and minor version upgrades\. In general, a *major engine version upgrade* can introduce changes that are not compatible with existing applications\. In contrast, a *minor version upgrade* includes only changes that are backward\-compatible with existing applications\.
 
+**Note**  
+Aurora PostgreSQL does not currently support in\-place major version upgrades\. To migrate a database from one major version to another you can use dump and load tools such as the PostgreSQL utilities [pg\_dump](https://www.postgresql.org/docs/current/app-pgdump.html) and [pg\_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)\.
+
 The version numbering sequence is specific to each database engine\. For example, Aurora PostgreSQL 9\.6 and 10\.5 are major engine versions and upgrading from any 9\.6 version to any 10\.x version is a major version upgrade\. Aurora PostgreSQL version 9\.6\.8 and 9\.6\.9 are minor versions and upgrading from 9\.6\.8 to 9\.6\.9 is a minor version upgrade\. To determine the version of an Aurora DB cluster, follow the instructions in [Amazon Aurora Updates](Aurora.Updates.md)\.
 
 **Topics**
-+ [Manually Upgrading the Engine Version](#USER_UpgradeDBInstance.Upgrading.Manual)
++ [Manually Upgrading the Minor Engine Version](#USER_UpgradeDBInstance.Upgrading.Manual)
 + [Automatically Upgrading the Minor Engine Version](#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades)
 
-## Manually Upgrading the Engine Version<a name="USER_UpgradeDBInstance.Upgrading.Manual"></a>
+## Manually Upgrading the Minor Engine Version<a name="USER_UpgradeDBInstance.Upgrading.Manual"></a>
 
-To perform a minor version upgrade of an Aurora PostgreSQL DB cluster, use the following instructions for the AWS Management Console, the AWS CLI, or the RDS API\. Aurora PostgreSQL does not currently support in\-place major version upgrades\. However, you can migrate from one major version to another using dump and load tools such as the PostgreSQL utilities `pg_dump` and `pg_restore`\.
+To perform a minor version upgrade of an Aurora PostgreSQL DB cluster, use the following instructions for the AWS Management Console, the AWS CLI, or the RDS API\. 
 
-### Upgrading the Engine Version of a DB Cluster Using the Console<a name="USER_UpgradeDBInstance.Upgrading.Manual.Console"></a>
+### Console<a name="USER_UpgradeDBInstance.Upgrading.Manual.Console"></a>
 
 **To upgrade the engine version of a DB cluster by using the console**
 
@@ -34,7 +37,7 @@ To perform a minor version upgrade of an Aurora PostgreSQL DB cluster, use the f
 
    Alternatively, choose **Back** to edit your changes, or choose **Cancel** to cancel your changes\. 
 
-### Upgrading the Engine Version of a DB Cluster Using the AWS CLI<a name="USER_UpgradeDBInstance.Upgrading.Manual.CLI"></a>
+### AWS CLI<a name="USER_UpgradeDBInstance.Upgrading.Manual.CLI"></a>
 
 To upgrade the engine version of a DB cluster, use the CLI [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) command\. Specify the following parameters: 
 + `--db-cluster-identifier` – the name of the DB cluster\. 
@@ -59,16 +62,16 @@ For Windows:
 4.     --no-apply-immediately
 ```
 
-### Upgrading the Engine Version of a DB Cluster Using the RDS API<a name="USER_UpgradeDBInstance.Upgrading.Manual.API"></a>
+### RDS API<a name="USER_UpgradeDBInstance.Upgrading.Manual.API"></a>
 
-To upgrade the engine version of a DB cluster, use the [ ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) action\. Specify the following parameters: 
+To upgrade the engine version of a DB cluster, use the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) action\. Specify the following parameters: 
 + `DBClusterIdentifier` – the name of the DB cluster, for example *`mydbcluster`*\. 
 + `EngineVersion` – the version number of the database engine to upgrade to\. For information about valid engine versions, use the [ DescribeDBEngineVersions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBEngineVersions.html) operation\.
 + `ApplyImmediately` – whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to `true`\. To apply changes during the next maintenance window, set the value to `false`\. 
 
 ## Automatically Upgrading the Minor Engine Version<a name="USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades"></a>
 
-A *minor engine version* is an update to a DB engine version within a major engine version\. For example, a major engine version might be 5\.7 with the minor engine versions 5\.7\.22 and 5\.7\.23 within it\. 
+A *minor engine version* is an update to a DB engine version within a major engine version\. For example, a major engine version might be 9\.6 with the minor engine versions 9\.6\.11 and 9\.6\.12 within it\. 
 
 If you want Amazon Aurora to upgrade the DB engine version of a database automatically, you can enable auto minor version upgrades for the database\. When a minor engine version is designated as the preferred minor engine version, each database that meets both of the following conditions is upgraded to the minor engine version automatically:
 + The database is running a minor version of the DB engine that is lower than the preferred minor engine version\.

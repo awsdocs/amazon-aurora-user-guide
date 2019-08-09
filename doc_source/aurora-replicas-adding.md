@@ -1,6 +1,6 @@
 # Adding Aurora Replicas to a DB Cluster<a name="aurora-replicas-adding"></a>
 
-In an Aurora DB cluster, there is one primary DB instance and up to 15 Aurora Replicas\. The primary DB instance supports read and write operations, and performs all of the data modifications to the cluster volume\. Aurora Replicas connect to the same storage volume as the primary DB instance and support only read operations\. Aurora Replicas can offload read workloads from the primary DB instance\. 
+In an Aurora DB cluster with single\-master replication, there is one primary DB instance and up to 15 Aurora Replicas\. The primary DB instance supports read and write operations, and performs all of the data modifications to the cluster volume\. Aurora Replicas connect to the same storage volume as the primary DB instance and support only read operations\. Aurora Replicas can offload read workloads from the primary DB instance\. 
 
 We recommend that you distribute the primary instance and Aurora Replicas in your DB cluster over multiple Availability Zones to improve the availability of your DB cluster\. For more information, see [Availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
 
@@ -72,4 +72,4 @@ aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a ^
 
 ## RDS API<a name="aurora-replicas-adding.API"></a>
 
-To create an Aurora Replica in your DB cluster, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action\. Include the name of the DB cluster as the `DBClusterIdentifier` parameter\. You can optionally specify an Availability Zone for the Aurora Replica using the `AvailabilityZone` parameter\.
+To create an Aurora Replica in your DB cluster, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation\. Include the name of the DB cluster as the `DBClusterIdentifier` parameter\. You can optionally specify an Availability Zone for the Aurora Replica using the `AvailabilityZone` parameter\.

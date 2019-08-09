@@ -1,10 +1,13 @@
-# Replication with Amazon Aurora MySQL<a name="AuroraMySQL.Replication"></a>
+# Single\-Master Replication with Amazon Aurora MySQL<a name="AuroraMySQL.Replication"></a>
 
  The Aurora MySQL replication features are key to the high availability and performance of your cluster\. Aurora makes it easy to create or resize clusters with up to 15 Aurora Replicas\. 
 
  All the replicas work from the same underlying data\. If some database instances go offline, others remain available to continue processing queries or to take over as the writer if needed\. Aurora automatically spreads your read\-only connections across multiple database instances, helping an Aurora cluster to support query\-intensive workloads\. 
 
  Following, you can find information about how Aurora MySQL replication works and how to fine\-tune replication settings for best availability and performance\. 
+
+**Note**  
+ Following, you can learn about replication features for Aurora clusters using single\-master replication\. This kind of cluster is the default for Aurora\. For information about Aurora multi\-master clusters, see [Working with Aurora Multi\-Master Clusters](aurora-multi-master.md)\. 
 
 **Topics**
 + [Using Aurora Replicas](#AuroraMySQL.Replication.Replicas)

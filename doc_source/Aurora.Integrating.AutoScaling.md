@@ -1,6 +1,6 @@
 # Using Amazon Aurora Auto Scaling with Aurora Replicas<a name="Aurora.Integrating.AutoScaling"></a>
 
-To meet your connectivity and workload requirements, Aurora Auto Scaling dynamically adjusts the number of Aurora Replicas provisioned for an Aurora DB cluster\. Aurora Auto Scaling is available for both Aurora MySQL and Aurora PostgreSQL\. Aurora Auto Scaling enables your Aurora DB cluster to handle sudden increases in connectivity or workload\. When the connectivity or workload decreases, Aurora Auto Scaling removes unnecessary Aurora Replicas so that you don't pay for unused provisioned DB instances\.
+To meet your connectivity and workload requirements, Aurora Auto Scaling dynamically adjusts the number of Aurora Replicas provisioned for an Aurora DB cluster using single\-master replication\. Aurora Auto Scaling is available for both Aurora MySQL and Aurora PostgreSQL\. Aurora Auto Scaling enables your Aurora DB cluster to handle sudden increases in connectivity or workload\. When the connectivity or workload decreases, Aurora Auto Scaling removes unnecessary Aurora Replicas so that you don't pay for unused provisioned DB instances\.
 
 You define and apply a scaling policy to an Aurora DB cluster\. The *scaling policy* defines the minimum and maximum number of Aurora Replicas that Aurora Auto Scaling can manage\. Based on the policy, Aurora Auto Scaling adjusts the number of Aurora Replicas up or down in response to actual workloads, determined by using Amazon CloudWatch metrics and target values\.
 
@@ -169,7 +169,7 @@ aws application-autoscaling register-scalable-target ^
 
 ##### API<a name="Aurora.Integrating.AutoScaling.AddCode.Register.API"></a>
 
-To register your Aurora DB cluster with Application Auto Scaling, use the [https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html](https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html) Application Auto Scaling API action with the following parameters:
+To register your Aurora DB cluster with Application Auto Scaling, use the [https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html](https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html) Application Auto Scaling API operation with the following parameters:
 + `ServiceNamespace` – Set this value to `rds`\.
 + `ResourceID` – The resource identifier for the Aurora DB cluster\. For this parameter, the resource type is `cluster` and the unique identifier is the name of the Aurora DB cluster, for example `cluster:myscalablecluster`\.
 + `ScalableDimension` – Set this value to `rds:cluster:ReadReplicaCount`\.
@@ -342,7 +342,7 @@ aws application-autoscaling put-scaling-policy ^
 
 ##### API<a name="Aurora.Integrating.AutoScaling.AddCode.ApplyScalingPolicy.API"></a>
 
-To apply a scaling policy to your Aurora DB cluster with the Application Auto Scaling API, use the [https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScalingPolicy.html](https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScalingPolicy.html) Application Auto Scaling API action with the following parameters:
+To apply a scaling policy to your Aurora DB cluster with the Application Auto Scaling API, use the [https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScalingPolicy.html](https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScalingPolicy.html) Application Auto Scaling API operation with the following parameters:
 + `PolicyName` – The name of the scaling policy\.
 + `ServiceNamespace` – Set this value to `rds`\.
 + `ResourceID` – The resource identifier for the Aurora DB cluster\. For this parameter, the resource type is `cluster` and the unique identifier is the name of the Aurora DB cluster, for example `cluster:myscalablecluster`\.
@@ -467,7 +467,7 @@ aws application-autoscaling delete-scaling-policy ^
 
 #### API<a name="Aurora.Integrating.AutoScaling.DeleteCode.API"></a>
 
-To delete a scaling policy from your Aurora DB cluster, use the [https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_DeleteScalingPolicy.html](https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_DeleteScalingPolicy.html) the Application Auto Scaling API action with the following parameters:
+To delete a scaling policy from your Aurora DB cluster, use the [https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_DeleteScalingPolicy.html](https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_DeleteScalingPolicy.html) the Application Auto Scaling API operation with the following parameters:
 + `PolicyName` – The name of the scaling policy\.
 + `ServiceNamespace` – Set this value to `rds`\.
 + `ResourceID` – The resource identifier for the Aurora DB cluster\. For this parameter, the resource type is `cluster` and the unique identifier is the name of the Aurora DB cluster, for example `cluster:myscalablecluster`\.

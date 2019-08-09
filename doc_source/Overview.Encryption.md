@@ -25,7 +25,7 @@ For an Amazon Aurora encrypted DB cluster, all logs, backups, and snapshots are 
 
 To enable encryption for a new DB cluster, choose **Enable encryption** on the console\. For information on creating a DB cluster, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
 
-If you use the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command to create an encrypted DB cluster, set the `--storage-encrypted` parameter to true\. If you use the [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) API action, set the `StorageEncrypted` parameter to true\.
+If you use the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command to create an encrypted DB cluster, set the `--storage-encrypted` parameter to true\. If you use the [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) API operation, set the `StorageEncrypted` parameter to true\.
 
 When you create an encrypted DB cluster, you can also supply the AWS KMS key identifier for your encryption key\. If you don't specify an AWS KMS key identifier, then Amazon Aurora uses your default encryption key for your new DB cluster\. AWS KMS creates your default encryption key for Amazon Aurora for your AWS account\. Your AWS account has a different default encryption key for each AWS Region\.
 

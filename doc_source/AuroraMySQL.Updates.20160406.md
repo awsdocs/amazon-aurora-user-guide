@@ -31,7 +31,7 @@ This update includes the following improvements:
   show variables like '%version';
   ```
 
-  You can also see the Aurora version in the AWS Management Console when you modify a DB cluster, or by calling the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command or the [DescribeDBEngineVersions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBEngineVersions.html) API action\.
+  You can also see the Aurora version in the AWS Management Console when you modify a DB cluster, or by calling the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command or the [DescribeDBEngineVersions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBEngineVersions.html) API operation\.
 + **Lock manager memory usage metric** – Information about lock manager memory usage is now available as a metric\.
 
   To get the lock manager memory usage metric, use one of the following queries:

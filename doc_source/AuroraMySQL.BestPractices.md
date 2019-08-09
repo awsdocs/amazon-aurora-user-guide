@@ -26,7 +26,7 @@ SHOW GLOBAL VARIABLES LIKE 'innodb_read_only';
 
 The `innodb_read_only` variable is set to `ON` if you are connected to an Aurora Replica and `OFF` if you are connected to the primary instance\.
 
-This approach can be helpful if you want to add logic to your application code to balance the workload or to ensure that a write operation is using the correct connection\.
+This approach can be helpful if you want to add logic to your application code to balance the workload or to ensure that a write operation is using the correct connection\. This technique only applies to Aurora clusters using single\-master replication\. For multi\-master clusters, all the DB instances have the setting `innodb_read_only=OFF`\.
 
 ## Using T2 Instances<a name="AuroraMySQL.BestPractices.T2Medium"></a>
 
@@ -34,7 +34,7 @@ Amazon Aurora MySQL instances that use the `db.t2.small` or `db.t2.medium` DB in
 
 Do not enable the MySQL Performance Schema on Amazon Aurora MySQL T2 instances\. If the Performance Schema is enabled, the T2 instance might run out of memory\.
 
-When you use a T2 instance for the primary instance or Aurora Replicas in an Aurora MySQL DB cluster, we recommend the following:
+When you use a T2 instance as a DB instance in an Aurora MySQL DB cluster, we recommend the following:
 + If you use a T2 instance as a DB instance class in your DB cluster, then we recommend that all instances in your DB cluster use the same DB instance class\. For example, if you use `db.t2.medium` for your primary instance, then we recommend that you use `db.t2.medium` for your Aurora Replicas as well\.
 + Monitor your CPU Credit Balance \(`CPUCreditBalance`\) to ensure that it is at a sustainable level\. That is, CPU credits are being accumulated at the same rate as they are being used\.
 
@@ -43,7 +43,7 @@ When you use a T2 instance for the primary instance or Aurora Replicas in an Aur
   If your CPU credit balance is not at a sustainable level, then we recommend that you modify your DB instance to use a one of the supported R3 DB instance classes \(scale compute\)\.
 
   For more information on monitoring metrics, see [Monitoring Amazon Aurora DB Cluster Metrics](Aurora.Monitoring.md)\.
-+ Monitor the replica lag \(`AuroraReplicaLag`\) between the primary instance and the Aurora Replicas in your Aurora MySQL DB cluster\.
++ For your Aurora MySQL DB clusters using single\-master replication, monitor the replica lag \(`AuroraReplicaLag`\) between the primary instance and the Aurora Replicas\.
 
   If an Aurora Replica runs out of CPU credits before the primary instance, the lag behind the primary instance results in the Aurora Replica frequently restarting\. This result is common when an application has a heavy load of read operations distributed among Aurora Replicas in an Aurora MySQL DB cluster, at the same time that the primary instance has a minimal load of write operations\.
 
@@ -52,7 +52,7 @@ When you use a T2 instance for the primary instance or Aurora Replicas in an Aur
   If your CPU credit balance is not at a sustainable level, then we recommend that you modify your DB instance to use one of the supported R3 DB instance classes \(scale compute\)\.
 + Keep the number of inserts per transaction below 1 million for DB clusters that have binary logging enabled\.
 
-  If the DB cluster parameter group for your DB cluster has the `binlog_format` parameter set to a value other than `OFF`, then your DB cluster might experience out\-of\-memory conditions if the DB cluster receives transactions that contain over 1 million rows to insert\. You can monitor the freeable memory \(`FreeableMemory`\) metric to determine if your DB cluster is running out of available memory\. You then check the write operations \(`VolumeWriteIOPS`\) metric to see if your primary instance is receiving a heavy load of writer operations\. If this is the case, then we recommend that you update your application to limit the number of inserts in a transaction to less than 1 million\. Alternatively, you can modify your instance to use one of the supported R3 DB instance classes \(scale compute\)\.
+  If the DB cluster parameter group for your DB cluster has the `binlog_format` parameter set to a value other than `OFF`, then your DB cluster might experience out\-of\-memory conditions if the DB cluster receives transactions that contain over 1 million rows to insert\. You can monitor the freeable memory \(`FreeableMemory`\) metric to determine if your DB cluster is running out of available memory\. You then check the write operations \(`VolumeWriteIOPS`\) metric to see if a writer instance is receiving a heavy load of write operations\. If this is the case, then we recommend that you update your application to limit the number of inserts in a transaction to less than 1 million\. Alternatively, you can modify your instance to use one of the supported R3 DB instance classes \(scale compute\)\.
 
 ## Invoking an AWS Lambda Function<a name="AuroraMySQL.BestPractices.Lambda"></a>
 

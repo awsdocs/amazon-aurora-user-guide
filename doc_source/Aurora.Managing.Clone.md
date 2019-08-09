@@ -80,7 +80,7 @@ The following procedure describes how to clone an Aurora DB cluster using the AW
 
 1. On the **Create clone** page, type a name for the primary instance of the clone DB cluster as the **DB instance identifier**\.
 
-   If you want to, set any other settings for the clone DB cluster\. For information about the different DB cluster settings, see [Console](Aurora.CreateInstance.md#Aurora.CreateInstance.Creating.Console)\.
+   If you want to, set any other settings for the clone DB cluster\. For information about the different DB cluster settings, see [New Console](Aurora.CreateInstance.md#Aurora.CreateInstance.Creating.Console)\.
 
 1. Choose **Create clone** to launch the clone DB cluster\.
 

@@ -137,14 +137,14 @@ When you call the Data API, you can pass credentials for the Aurora Serverless D
 
 ## Calling the Data API<a name="data-api.calling"></a>
 
-After you enable the Data API for an Aurora Serverless DB cluster, you can call the Data API or the AWS CLI to run SQL statements on the DB cluster\.
+After you enable the Data API for an Aurora Serverless DB cluster, you can call the Data API or the AWS CLI to run SQL statements on the DB cluster\. The Data API supports the programming languages supported by the AWS SDK\. For more information, see [ Tools to Build on AWS](https://aws.amazon.com/tools/)\.
 
 The Data API provides the following operations to execute SQL statements\.
 
 
 ****  
 
-|  Data API Action  |  AWS CLI Command  |  Description  | 
+|  Data API Operation  |  AWS CLI Command  |  Description  | 
 | --- | --- | --- | 
 |  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/execute-statement.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/execute-statement.html)  |  Runs a SQL statement against a database\.  | 
 |  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BatchExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BatchExecuteStatement.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/batch-execute-statement.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/batch-execute-statement.html)  |  Runs a batch SQL statement over an array of data for bulk update and insert operations\. You can run a DML statement with array of parameter sets\. A batch SQL statement can provide a significant performance improvement over individual insert and update statements\.  | 
@@ -154,7 +154,7 @@ You can run both operations for executing a SQL statement atomically, or you can
 
 ****  
 
-|  Data API Action  |  AWS CLI Command  |  Description  | 
+|  Data API Operation  |  AWS CLI Command  |  Description  | 
 | --- | --- | --- | 
 |  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BeginTransaction.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BeginTransaction.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/begin-transaction.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/begin-transaction.html)  |  Starts a SQL transaction\.  | 
 |  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_CommitTransaction.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_CommitTransaction.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/commit-transaction.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/commit-transaction.html)  |  Ends a SQL transaction and commits the changes\.  | 
@@ -165,7 +165,7 @@ The operations for executing SQL statements and supporting transactions have the
 
 ****  
 
-|  Data API Action Parameter  |  AWS CLI Command Option  |  Required  |  Description  | 
+|  Data API Operation Parameter  |  AWS CLI Command Option  |  Required  |  Description  | 
 | --- | --- | --- | --- | 
 |  `resourceArn`  |  `--resource-arn`  |  Yes  |  The Amazon Resource Name \(ARN\) of the Aurora Serverless DB cluster\.  | 
 |  `secretArn`  |  `--secret-arn`  |  Yes  |  The name or ARN of the secret that enables access to the DB cluster\.  | 
@@ -189,6 +189,9 @@ You can use parameters in Data API calls to `ExecuteStatement` and `BatchExecute
 + [Calling the Data API with the AWS CLI](#data-api.calling.cli)
 + [Calling the Data API from a Python Application](#data-api.calling.python)
 + [Calling the Data API from a Java Application](#data-api.calling.java)
+
+**Note**  
+These examples are not exhaustive\.
 
 ### Calling the Data API with the AWS CLI<a name="data-api.calling.cli"></a>
 

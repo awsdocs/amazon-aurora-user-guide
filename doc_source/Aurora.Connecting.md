@@ -1,6 +1,10 @@
 # Connecting to an Amazon Aurora DB Cluster<a name="Aurora.Connecting"></a>
 
-You can connect to a DB instance in an Amazon Aurora DB cluster using the same tools that you use to connect to a MySQL or PostgreSQL database\. As part of this, you use the same public key for Secure Sockets Layer \(SSL\) connections\. You can use the endpoint and port information from the primary instance or Aurora Replicas in your Aurora DB cluster in the connection string of any script, utility, or application that connects to a MySQL or PostgreSQL DB instance\. In the connection string, specify the DNS address from the primary instance or Aurora Replica endpoint as the host parameter\. Specify the port number from the endpoint as the port parameter\.
+You can connect to an Aurora DB cluster using the same tools that you use to connect to a MySQL or PostgreSQL database\. You specify a connection string with any script, utility, or application that connects to a MySQL or PostgreSQL DB instance\. You use the same public key for Secure Sockets Layer \(SSL\) connections\. 
+
+In the connection string, you typically use the host and port information from special endpoints associated with the DB cluster\. With these endpoints, you can use the same connection parameters regardless of how many DB instances are in the cluster\. 
+
+For specialized tasks such as troubleshooting, you can use the host and port information from a specific DB instance in your Aurora DB cluster\. 
 
 ## Connecting to an Amazon Aurora MySQL DB Cluster<a name="Aurora.Connecting.AuroraMySQL"></a>
 

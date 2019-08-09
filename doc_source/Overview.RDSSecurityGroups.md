@@ -21,7 +21,7 @@ For more information on VPC security groups, see [Security Groups](https://docs.
 
 ## Security Group Scenario<a name="Overview.RDSSecurityGroups.Scenarios"></a>
 
-A common use of a DB instance in a VPC is to share data with an application server running in an Amazon EC2 instance in the same VPC, which is accessed by a client application outside the VPC\. For this scenario, you use the RDS and VPC pages on the AWS Management Console or the RDS and EC2 API actions to create the necessary instances and security groups: 
+A common use of a DB instance in a VPC is to share data with an application server running in an Amazon EC2 instance in the same VPC, which is accessed by a client application outside the VPC\. For this scenario, you use the RDS and VPC pages on the AWS Management Console or the RDS and EC2 API operations to create the necessary instances and security groups: 
 
 1. Create a VPC security group \(for example, `sg-appsrv1`\) and define inbound rules that use the IP addresses of the client application as the source\. This security group allows your client application to connect to EC2 instances in a VPC that uses this security group\.
 

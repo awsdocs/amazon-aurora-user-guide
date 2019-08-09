@@ -113,6 +113,7 @@ In addition to viewing and downloading DB instance logs, you can publish logs to
 
  For engine\-specific information, see the following:
 + [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)
++ [Publishing Aurora PostgreSQL Logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)
 
 ## Reading Log File Contents Using REST<a name="DownloadCompleteDBLogFile"></a>
 

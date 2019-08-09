@@ -138,7 +138,7 @@ aws rds copy-db-cluster-snapshot ^
 
 #### API<a name="USER_CopyDBClusterSnapshot.Unencrypted.CrossRegion.API"></a>
 
-To copy a DB cluster snapshot, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBClusterSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBClusterSnapshot.html) action\. If you are copying the snapshot to another AWS Region, perform the action in the AWS Region to which the snapshot will be copied\. 
+To copy a DB cluster snapshot, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBClusterSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBClusterSnapshot.html) operation\. If you are copying the snapshot to another AWS Region, perform the action in the AWS Region to which the snapshot will be copied\. 
 
 The following parameters are used to copy an unencrypted DB cluster snapshot:
 + `SourceDBClusterSnapshotIdentifier` – The identifier for the DB cluster snapshot to be copied\. If you are copying the snapshot to another AWS Region, this identifier must be in the ARN format for the source AWS Region\.
@@ -210,7 +210,7 @@ aws rds copy-db-cluster-snapshot ^
 
 #### API<a name="USER_CopyDBClusterSnapshot.Encrypted.CrossRegion.API"></a>
 
-To copy a DB cluster snapshot, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBClusterSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBClusterSnapshot.html) action\. If you are copying the snapshot to another AWS Region, perform the action in the AWS Region to which the snapshot will be copied\.
+To copy a DB cluster snapshot, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBClusterSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBClusterSnapshot.html) operation\. If you are copying the snapshot to another AWS Region, perform the action in the AWS Region to which the snapshot will be copied\.
 
 The following parameters are used to copy an encrypted DB cluster snapshot:
 + `SourceDBClusterSnapshotIdentifier` – The identifier for the encrypted DB cluster snapshot to be copied\. If you are copying the snapshot to another AWS Region, this identifier must be in the ARN format for the source AWS Region\. 
@@ -270,7 +270,7 @@ You can enable other AWS accounts to copy DB cluster snapshots that you specify 
 
 1. Using Account B, call `CopyDBClusterSnapshot` and use the `SourceDBClusterSnapshotIdentifier` parameter to specify the ARN of the DB cluster snapshot to be copied, which must include the ID for Account A\.
 
-To list all of the AWS accounts permitted to restore a DB cluster snapshot, use the [ DescribeDBSnapshotAttributes](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSnapshotAttributes.html) or [ DescribeDBClusterSnapshotAttributes](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterSnapshotAttributes.html) API action\.
+To list all of the AWS accounts permitted to restore a DB cluster snapshot, use the [ DescribeDBSnapshotAttributes](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSnapshotAttributes.html) or [ DescribeDBClusterSnapshotAttributes](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterSnapshotAttributes.html) API operation\.
 
 To remove sharing permission for an AWS account, use the `ModifyDBSnapshotAttribute` or `ModifyDBClusterSnapshotAttribute` action with `AttributeName` set to `restore` and the ID of the account to remove in the `ValuesToRemove` parameter\.
 
