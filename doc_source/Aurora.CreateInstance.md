@@ -1,6 +1,6 @@
 # Creating an Amazon Aurora DB Cluster<a name="Aurora.CreateInstance"></a>
 
-An Amazon Aurora DB cluster consists of a DB instance, compatible with either MySQL or PostgreSQL, and a cluster volume that represents the data for the DB cluster, copied across three Availability Zones as a single, virtual volume\. By default, he DB cluster contains a primary writer DB instance and, optionally, up to 15 Aurora Replicas \(reader DB instances\)\. For more information about Aurora DB clusters, see [Amazon Aurora DB Clusters](Aurora.Overview.md)\.
+An Amazon Aurora DB cluster consists of a DB instance, compatible with either MySQL or PostgreSQL, and a cluster volume that represents the data for the DB cluster, copied across three Availability Zones as a single, virtual volume\. By default, the DB cluster contains a primary writer DB instance and, optionally, up to 15 Aurora Replicas \(reader DB instances\)\. For more information about Aurora DB clusters, see [Amazon Aurora DB Clusters](Aurora.Overview.md)\.
 
 In the following topic, you can find out how to create an Aurora DB cluster\. To get started, first see [DB Cluster Prerequisites](#Aurora.CreateInstance.Prerequisites)\.
 
