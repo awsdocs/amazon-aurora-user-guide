@@ -2,6 +2,9 @@
 
 Amazon Aurora provides a variety of Amazon CloudWatch metrics that you can monitor to determine the health and performance of your Aurora DB cluster\. You can use various tools, such as the Amazon RDS Management Console, AWS CLI, and CloudWatch API, to view Aurora metrics\. For more information, see [Monitoring an Amazon Aurora DB Cluster](MonitoringAurora.md)\.
 
+**Note**  
+If you are using Amazon RDS Performance Insights, additional metrics are available\. For more information, see [Performance Insights Metrics Published to Amazon CloudWatch](USER_PerfInsights.Cloudwatch.md)\.
+
 ## Amazon Aurora Metrics<a name="Aurora.AuroraMySQL.Monitoring.Metrics"></a>
 
 The following metrics are available from Amazon Aurora\.

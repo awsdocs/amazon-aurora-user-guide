@@ -14,13 +14,16 @@ Before you create a DB cluster, you must first have an virtual private cloud \(V
 If you want to create a VPC and DB subnet group for use with your Amazon Aurora DB cluster yourself, rather than having Amazon RDS create the VPC and DB subnet group for you, follow the instructions in [How to Create a VPC for Use with Amazon Aurora](Aurora.CreateVPC.md)\. Otherwise, follow the instructions in this topic to create your DB cluster and have Amazon RDS create a VPC and DB subnet group for you\.
 
 **Note**  
-A new console interface is available for database creation\. Choose either the **New Console** or the **Current Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
+A new console interface is available for database creation\. Choose either the **New Console** or the **Original Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
 
 ### New Console<a name="CHAP_GettingStarted.AuroraPostgreSQL.CreateDBCluster.Console"></a>
 
-You can create an Aurora PostgreSQL DB cluster with the AWS Management Console with **Easy create** enabled or disabled\. With **Easy create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default setting for other configuration options\. With **Easy create** disabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
+You can create an Aurora PostgreSQL DB cluster with the AWS Management Console with **Easy Create** enabled or disabled\. With **Easy Create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy Create** uses the default setting for other configuration options\. With **Easy Create** disabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
-**To create an Aurora PostgreSQL DB cluster with Easy create enabled**
+**Note**  
+For this example, **Easy Create** is enabled\. For information about creating an Aurora PostgreSQL DB cluster with **Easy Create** not enabled, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
+
+**To create an Aurora PostgreSQL DB cluster with Easy Create enabled**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -30,8 +33,8 @@ You can create an Aurora PostgreSQL DB cluster with the AWS Management Console w
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Choose **Create database** and ensure that **Easy create** is turned on\.   
-![\[Easy create option\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-option.png)
+1. Choose **Create database** and make sure that **Easy Create** is chosen\.   
+![\[Easy Create option\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-option.png)
 
 1. For **Engine type**, choose **Amazon Aurora**\.
 
@@ -66,7 +69,7 @@ You can't view the master user password again\. If you don't record it, you migh
    On the RDS console, the details for new DB cluster appear\. The DB cluster and its DB instance have a status of **creating** until the DB cluster is ready to use\. When the state changes to **available** for both, you can connect to the DB cluster\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new DB cluster is available\.   
 ![\[Summary during DB cluster creation\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/creating-status-aurora-postgresql.png)
 
-### Current Console<a name="CHAP_GettingStarted.AuroraPostgreSQL.CreateDBCluster.CurrentConsole"></a>
+### Original Console<a name="CHAP_GettingStarted.AuroraPostgreSQL.CreateDBCluster.CurrentConsole"></a>
 
 **To launch an Aurora PostgreSQL DB cluster**
 

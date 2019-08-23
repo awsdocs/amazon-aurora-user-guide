@@ -76,7 +76,7 @@
 
 1.  On the **Select engine** page, choose the MySQL 5\.6\-compatible Aurora engine and **Global** for **Database location**\. For an example, see the following images\. 
 **Note**  
- Make sure that **Easy create** isn't selected\. Turning off **Easy create** makes visible the choices that you need for Aurora global databases\.  
+ Make sure that **Standard Create** is chosen\. **Standard create** makes visible the choices that you need for Aurora global databases\. Don't choose **Easy Create**\. 
 
    1.  Choose Aurora as the engine:   
 ![\[Screenshot of the engine options choices when creating a database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-create-global-01a.png)
@@ -487,21 +487,21 @@ aws rds --region primary_region ^
 
 ## Managing an Aurora Global Database<a name="aurora-global-database-managing"></a>
 
- You can perform most management operations on the individual clusters that make up an Aurora global database\. When you select **Group related resources** on the **Databases** page in the console, you see the primary cluster and secondary cluster grouped under the associated global database object\. 
+ You can perform most management operations on the individual clusters that make up an Aurora global database\. When you choose **Group related resources** on the **Databases** page in the console, you see the primary cluster and secondary cluster grouped under the associated global database object\. 
 
 ![\[Screenshot showing how Aurora global databases are represented on the Databases page in the AWS Management Console.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-cluster-tree-01.png)
 
  To see the properties that apply to an entire Aurora global database, choose that global database\. 
 
-![\[Screenshot showing a selected Aurora global database and associated settings in the AWS Management Console.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-global-cluster-maintenance.png)
+![\[Screenshot showing Aurora global database and associated settings in the AWS Management Console.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-global-cluster-maintenance.png)
 
 ## Configuring an Aurora Global Database<a name="aurora-global-database-modifying"></a>
 
  The **Databases** page in the AWS Management Console lists all your Aurora global databases, showing the primary cluster and secondary cluster for each one\. The Aurora global database is an object that has its own configuration settings, in particular the AWS Regions associated with the primary and secondary cluster\. 
 
-![\[Screenshot showing a selected Aurora global database and associated configuration settings in the AWS Management Console.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-global-cluster-configuration.png)
+![\[Screenshot showing an Aurora global database and associated configuration settings in the AWS Management Console.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-global-cluster-configuration.png)
 
- You can select an Aurora global database and modify its settings, as shown in the following screenshot: 
+ You can choose an Aurora global database and modify its settings, as shown in the following screenshot\. 
 
 ![\[Screenshot showing the page to modify settings for an Aurora global database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-modify-global-01.png)
 
@@ -515,7 +515,7 @@ aws rds --region primary_region ^
 
  When you view the Aurora global database in the AWS Management Console, you can see all the general\-purpose endpoints associated with all of its clusters, as shown in the following screenshot\. There is a single cluster endpoint, associated with the primary cluster, that you use for write operations\. The primary cluster and each secondary cluster has a reader endpoint, which you use for read\-only queries\. Choose whichever reader endpoint is in your AWS Region or the AWS Region closest to you, to minimize latency\. 
 
-![\[Screenshot showing a selected Aurora global database and associated connectivity settings (endpoints) in the AWS Management Console.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-primary-cluster-connectivity.png)
+![\[Screenshot showing an Aurora global database and associated connectivity settings (endpoints) in the AWS Management Console.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-primary-cluster-connectivity.png)
 
 ## Failover for Aurora Global Database<a name="aurora-global-database-failover"></a>
 

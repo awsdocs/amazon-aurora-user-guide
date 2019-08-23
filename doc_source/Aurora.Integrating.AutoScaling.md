@@ -85,7 +85,7 @@ You can add a scaling policy using the AWS Management Console, the AWS CLI, or t
 
 You can add a scaling policy to an Aurora DB cluster by using the AWS Management Console\.
 
-**To add an Auto Scaling policy to an Aurora DB cluster**
+**To add an auto scaling policy to an Aurora DB cluster**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -93,7 +93,9 @@ You can add a scaling policy to an Aurora DB cluster by using the AWS Management
 
 1. Choose the Aurora DB cluster that you want to add a policy for\.
 
-1. For **Actions**, choose **Add Auto Scaling policy**\.
+1. Choose the **Logs & events** tab\.
+
+1. In the **Auto scaling policies** section, choose **Add**\.
 
    The **Add Auto Scaling policy** dialog box appears\.
 
@@ -119,9 +121,9 @@ You can add a scaling policy to an Aurora DB cluster by using the AWS Management
 
 The following dialog box creates an Auto Scaling policy based an average CPU utilization of 40 percent\. The policy specifies a minimum of 5 Aurora Replicas and a maximum of 15 Aurora Replicas\.
 
-![\[Creating an Auto Scaling policy based on average CPU utilization\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-autoscaling-cpu.png)
+![\[Creating an auto scaling policy based on average CPU utilization\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-autoscaling-cpu.png)
 
-The following dialog box creates an Auto Scaling policy based an average number of connections of 100\. The policy specifies a minimum of two Aurora Replicas and a maximum of eight Aurora Replicas\.
+The following dialog box creates an auto scaling policy based an average number of connections of 100\. The policy specifies a minimum of two Aurora Replicas and a maximum of eight Aurora Replicas\.
 
 ![\[Creating an Auto Scaling policy based on average connections\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-autoscaling-connections.png)
 
@@ -135,7 +137,7 @@ Before you can use Aurora Auto Scaling with an Aurora DB cluster, you register y
 
 To register your Aurora DB cluster, you can use either the AWS CLI or the Application Auto Scaling API\. 
 
-##### CLI<a name="Aurora.Integrating.AutoScaling.AddCode.Register.CLI"></a>
+##### AWS CLI<a name="Aurora.Integrating.AutoScaling.AddCode.Register.CLI"></a>
 
 To register your Aurora DB cluster, use the [https://docs.aws.amazon.com/cli/latest/reference/application-autoscaling/register-scalable-target.html](https://docs.aws.amazon.com/cli/latest/reference/application-autoscaling/register-scalable-target.html) AWS CLI command with the following parameters:
 + `--service-namespace` – Set this value to `rds`\.
@@ -167,7 +169,7 @@ aws application-autoscaling register-scalable-target ^
     --max-capacity 8 ^
 ```
 
-##### API<a name="Aurora.Integrating.AutoScaling.AddCode.Register.API"></a>
+##### RDS API<a name="Aurora.Integrating.AutoScaling.AddCode.Register.API"></a>
 
 To register your Aurora DB cluster with Application Auto Scaling, use the [https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html](https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html) Application Auto Scaling API operation with the following parameters:
 + `ServiceNamespace` – Set this value to `rds`\.
@@ -305,7 +307,7 @@ The following example describes a target\-tracking configuration for a scaling p
 
 After registering your Aurora DB cluster with Application Auto Scaling and defining a scaling policy, you apply the scaling policy to the registered Aurora DB cluster\. To apply a scaling policy to an Aurora DB cluster, you can use the AWS CLI or the Application Auto Scaling API\. 
 
-##### CLI<a name="Aurora.Integrating.AutoScaling.AddCode.ApplyScalingPolicy.CLI"></a>
+##### AWS CLI<a name="Aurora.Integrating.AutoScaling.AddCode.ApplyScalingPolicy.CLI"></a>
 
 To apply a scaling policy to your Aurora DB cluster, use the [https://docs.aws.amazon.com/cli/latest/reference/application-autoscaling/put-scaling-policy.html](https://docs.aws.amazon.com/cli/latest/reference/application-autoscaling/put-scaling-policy.html) AWS CLI command with the following parameters:
 + `--policy-name` – The name of the scaling policy\.
@@ -340,7 +342,7 @@ aws application-autoscaling put-scaling-policy ^
     --target-tracking-scaling-policy-configuration file://config.json
 ```
 
-##### API<a name="Aurora.Integrating.AutoScaling.AddCode.ApplyScalingPolicy.API"></a>
+##### RDS API<a name="Aurora.Integrating.AutoScaling.AddCode.ApplyScalingPolicy.API"></a>
 
 To apply a scaling policy to your Aurora DB cluster with the Application Auto Scaling API, use the [https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScalingPolicy.html](https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScalingPolicy.html) Application Auto Scaling API operation with the following parameters:
 + `PolicyName` – The name of the scaling policy\.
@@ -388,15 +390,17 @@ You can edit a scaling policy using the AWS Management Console, the AWS CLI, or 
 
 You can edit a scaling policy by using the AWS Management Console\.
 
-**To edit an Auto Scaling policy for an Aurora DB cluster**
+**To edit an auto scaling policy for an Aurora DB cluster**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
 1. In the navigation pane, choose **Databases**\. 
 
-1. Choose the Aurora DB cluster whose Auto Scaling policy you want to edit to show the DB cluster's details\.
+1. Choose the Aurora DB cluster whose auto scaling policy you want to edit\.
 
-1. In the **Auto Scaling Policies** section, choose the Auto Scaling policy, and then choose **Edit**\.
+1. Choose the **Logs & events** tab\.
+
+1. In the **Auto scaling policies** section, choose the auto scaling policy, and then choose **Edit**\.
 
 1. Make changes to the policy\.
 
@@ -404,7 +408,7 @@ You can edit a scaling policy by using the AWS Management Console\.
 
 The following is a sample **Edit Auto Scaling policy** dialog box\.
 
-![\[Editing an Auto Scaling policy based on average CPU utilization\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-autoscaling-edit-cpu.png)
+![\[Editing an auto scaling policy based on average CPU utilization\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-autoscaling-edit-cpu.png)
 
 ### Editing a Scaling Policy Using the AWS CLI or the Application Auto Scaling API<a name="Aurora.Integrating.AutoScaling.EditCode"></a>
 
@@ -422,21 +426,23 @@ You can delete a scaling policy using the AWS Management Console, the AWS CLI, o
 
 You can delete a scaling policy by using the AWS Management Console\.
 
-**To delete an Auto Scaling policy for an Aurora DB cluster**
+**To delete an auto scaling policy for an Aurora DB cluster**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
 1. In the navigation pane, choose **Databases**\. 
 
-1. Choose the Aurora DB cluster with the scaling policy that you want to delete\.
+1. Choose the Aurora DB cluster whose auto scaling policy you want to delete\.
 
-1. In the **Auto Scaling Policies** section, choose the Auto Scaling policy, and then choose **Delete**\.
+1. Choose the **Logs & events** tab\.
+
+1. In the **Auto scaling policies** section, choose the auto scaling policy, and then choose **Delete**\.
 
 ### Deleting a Scaling Policy Using the AWS CLI or the Application Auto Scaling API<a name="Aurora.Integrating.AutoScaling.DeleteCode"></a>
 
 You can use the AWS CLI or the Application Auto Scaling API to delete a scaling policy from an Aurora DB cluster\.
 
-#### CLI<a name="Aurora.Integrating.AutoScaling.DeleteCode.CLI"></a>
+#### AWS CLI<a name="Aurora.Integrating.AutoScaling.DeleteCode.CLI"></a>
 
 To delete a scaling policy from your Aurora DB cluster, use the [https://docs.aws.amazon.com/cli/latest/reference/application-autoscaling/delete-scaling-policy.html](https://docs.aws.amazon.com/cli/latest/reference/application-autoscaling/delete-scaling-policy.html) AWS CLI command with the following parameters:
 + `--policy-name` – The name of the scaling policy\.
@@ -465,7 +471,7 @@ aws application-autoscaling delete-scaling-policy ^
     --scalable-dimension rds:cluster:ReadReplicaCount ^
 ```
 
-#### API<a name="Aurora.Integrating.AutoScaling.DeleteCode.API"></a>
+#### RDS API<a name="Aurora.Integrating.AutoScaling.DeleteCode.API"></a>
 
 To delete a scaling policy from your Aurora DB cluster, use the [https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_DeleteScalingPolicy.html](https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_DeleteScalingPolicy.html) the Application Auto Scaling API operation with the following parameters:
 + `PolicyName` – The name of the scaling policy\.

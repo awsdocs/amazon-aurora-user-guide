@@ -78,48 +78,51 @@ For information about adding an IAM policy to a user, see [Adding and Removing I
 
 ## Enabling the Data API<a name="data-api.enabling"></a>
 
-To use the Data API, enable it for your Aurora Serverless DB cluster\. You can enable the Data API when you modify the DB cluster\.
+To use the Data API, enable it for your Aurora Serverless DB cluster\. You can enable the Data API when you create or modify the DB cluster\.
 
 ### Console<a name="data-api.enabling.console"></a>
 
-You can enable the Data API by using the RDS console when you modify an Aurora Serverless DB cluster\. You do so by enabling the Data API in the RDS console's **Network & Security** section\.
+You can enable the Data API by using the RDS console when you create or modify an Aurora Serverless DB cluster\. When you create an Aurora Serverless DB cluster, you do so by enabling the Data API in the RDS console's **Connectivity** section\. When you modify an Aurora Serverless DB cluster, you do so by enabling the Data API in the RDS console's **Network & Security** section\.
 
-The following screenshot shows the enabled **Data API**\.
+The following screenshot shows the enabled **Data API** when modifying an Aurora Serverless DB cluster\.
 
 ![\[Enabling the Data API for an Aurora Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/web-server-api-endpoint.png)
 
-For instructions, see [Modifying an Aurora Serverless DB Cluster](aurora-serverless.modifying.md)\.
+For instructions, see [Creating an Aurora Serverless DB Cluster](aurora-serverless.create.md) and [Modifying an Aurora Serverless DB Cluster](aurora-serverless.modifying.md)\.
 
 ### AWS CLI<a name="data-api.enabling.cli"></a>
 
-When you modify an Aurora Serverless DB cluster using the `modify-db-cluster` AWS CLI command, the Data API is enabled when you specify `--enable-http-endpoint`\.
+When you create or modify an Aurora Serverless DB cluster using AWS CLI commands, the Data API is enabled when you specify `-enable-http-endpoint`\.
 
-**To modify an Aurora Serverless DB cluster using the AWS CLI**
-+ Call the [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) CLI command and supply the following values:
-  + `--db-cluster-identifier` – The name of the DB cluster
-  + `--enable-http-endpoint`
+You can specify the `-enable-http-endpoint` using the following AWS CLI commands:
++  [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) 
++  [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) 
 
-  The following example enables the Data API for `sample-cluster`\.
+The following example modifies `sample-cluster` to enable the Data API\.
 
-  For Linux, OS X, or Unix:
+For Linux, OS X, or Unix:
 
-  ```
-  aws rds modify-db-cluster \
-      --db-cluster-identifier sample-cluster \
-      --enable-http-endpoint
-  ```
+```
+aws rds modify-db-cluster \
+    --db-cluster-identifier sample-cluster \
+    --enable-http-endpoint
+```
 
-  For Windows:
+For Windows:
 
-  ```
-  aws rds modify-db-cluster ^
-      --db-cluster-identifier sample-cluster ^
-      --enable-http-endpoint
-  ```
+```
+aws rds modify-db-cluster ^
+    --db-cluster-identifier sample-cluster ^
+    --enable-http-endpoint
+```
 
 ### RDS API<a name="data-api.enabling.api"></a>
 
-When you modify an Aurora Serverless DB cluster using the [ ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) RDS API operation, you enable the Data API by setting the `EnableHttpEndpoint` value to `true`\.
+When you create or modify an Aurora Serverless DB cluster using Amazon RDS API operations, you enable the Data API by setting the `EnableHttpEndpoint` value to `true`\.
+
+You can set the `EnableHttpEndpoint` value using the following API operations:
++  [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) 
++  [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) 
 
 ## Storing Database Credentials in AWS Secrets Manager<a name="data-api.secrets"></a>
 
@@ -201,6 +204,9 @@ The following examples use the AWS CLI for the Data API\. For more information, 
 
 In each example, replace the DB cluster ARN with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in AWS Secrets Manager that allows access to the DB cluster\.
 
+**Note**  
+The AWS CLI can format responses in JSON\.
+
 **Topics**
 + [Starting a SQL Transaction](#data-api.calling.cli.begin-transaction)
 + [Running a SQL Statement](#data-api.calling.cli.execute-statment)
@@ -257,7 +263,7 @@ In addition to the common options, specify the following options:
 + `--sql` \(required\) – A SQL statement to run on the DB cluster\.
 + `--transaction-id` \(optional\) – The identifier of a transaction that was started using the `begin-transaction` CLI command\. Specify the transaction ID of the transaction that you want to include the SQL statement in\.
 + `--parameters` \(optional\) – The parameters for the SQL statement\.
-+ `--include-result-metadata | --no-include-result-metadata` \(optional\) – A value that indicates whether to include metadata in the results\. The default is `--include-result-metadata`\.
++ `--include-result-metadata | --no-include-result-metadata` \(optional\) – A value that indicates whether to include metadata in the results\. The default is `--no-include-result-metadata`\.
 + `--database` \(optional\) – The name of the database\.
 + `--continue-after-timeout | --no-continue-after-timeout` \(optional\) – A value that indicates whether to continue running the statement after the call times out\. The default is `--no-continue-after-timeout`\.
 
@@ -268,14 +274,14 @@ The DB cluster returns a response for the call\.
 **Note**  
 The response size limit is 1 MB or 1,000 records\. If the call returns more than 1 MB of response data or over 1,000 records, the call is terminated\.
 
-For example, the following CLI command runs a single SQL statement and specifies `--no-include-result-metadata` to omit the metadata in the results\.
+For example, the following CLI command runs a single SQL statement and omits the metadata in the results \(the default\)\.
 
 For Linux, OS X, or Unix:
 
 ```
 aws rds-data execute-statement --resource-arn "arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster" \
 --database "mydb" --secret-arn "arn:aws:secretsmanager:us-east-1:123456789012:secret:mysecret" \
---sql "select * from mytable" --no-include-result-metadata
+--sql "select * from mytable"
 ```
 
 For Windows:
@@ -283,7 +289,7 @@ For Windows:
 ```
 aws rds-data execute-statement --resource-arn "arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster" ^
 --database "mydb" --secret-arn "arn:aws:secretsmanager:us-east-1:123456789012:secret:mysecret" ^
---sql "select * from mytable" --no-include-result-metadata
+--sql "select * from mytable"
 ```
 
 The following is an example of the response\.
@@ -664,12 +670,12 @@ response3 = rdsData.execute_statement(
      secretArn = secret_arn, 
      database = 'mydb', 
      sql = 'insert into employees(first_name, last_name) values('XIULAN', 'WANG')', 
-     transactionId = tr) 
+     transactionId = tr['transactionId']) 
  
 cr = rdsData.commit_transaction(
      resourceArn = cluster_arn, 
      secretArn = secret_arn, 
-     transactionId = tr) 
+     transactionId = tr['transactionId']) 
  
 cr['transactionStatus'] 
 'Transaction Committed' 

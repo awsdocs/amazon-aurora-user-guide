@@ -573,20 +573,20 @@ mysql> select @@aurora_server_id, @@aurora_has_primary;
 
  You can describe multi\-master cluster topology by selecting from the `information_schema.replica_host_status` table\. Multi\-master clusters have the following differences from single\-master clusters: 
 +  The `has_primary` column identifies the role of the node\. For multi\-master clusters, this value is true for the DB instance that handles all DDL and DCL statements\. Aurora forwards such requests to one of the DB instances in a multi\-master cluster\. 
-+  The `replica_lag_in_msec` column reports replication lag on all DB instances\. 
++  The `replica_lag_in_milliseconds` column reports replication lag on all DB instances\. 
 +  The `last_reported_status` column reports the status of the DB instance\. It can be `Online`, `Recovery`, or `Offline`\. 
 
  An example follows\. 
 
 ```
-mysql> select server_id, has_primary, replica_lag_in_msec, last_reported_status
+mysql> select server_id, has_primary, replica_lag_in_milliseconds, last_reported_status
     -> from information_schema.replica_host_status;
-+----------------------+-------------+---------------------+----------------------+
-| server_id            | has_primary | replica_lag_in_msec | last_reported_status |
-+----------------------+------------------+----------------+----------------------+
-| mmr-demo-test-mm-3-1 | true        |              37.302 | Online               |
-| mmr-demo-test-mm-3-2 | false       |              39.907 | Online               |
-+----------------------+-------------+---------------------+----------------------+
++----------------------+-------------+-----------------------------+----------------------+
+| server_id            | has_primary | replica_lag_in_milliseconds | last_reported_status |
++----------------------+------------------+------------------------+----------------------+
+| mmr-demo-test-mm-3-1 | true        |                      37.302 | Online               |
+| mmr-demo-test-mm-3-2 | false       |                      39.907 | Online               |
++----------------------+-------------+-----------------------------+----------------------+
 ```
 
 #### Using Instance Read\-Only Mode<a name="using-instance-read-only-mode"></a>
@@ -652,7 +652,7 @@ mysql> select @@read_only;
  Many best practices for multi\-master clusters focus on reducing the chance of write conflicts\. Resolving write conflicts involves network overhead\. Your applications must also handle error conditions and retry transactions\. Wherever possible, try to minimize these unwanted consequences: 
 +  Wherever practical, make all changes to a particular table and its associated indexes using the same DB instance\. If only one DB instance ever modifies a data page, changing that page cannot trigger any write conflicts\. This access pattern is common in sharded or multitenant database deployments\. Thus, it's relatively easy to switch such deployments to use multi\-master clusters\. 
 +  A multi\-master cluster doesn't have a reader endpoint\. The reader endpoint load\-balances incoming connections, freeing you from knowing which DB instance is handling a particular connection\. In a multi\-master cluster, managing connections involves being aware which DB instance is used for each connection\. That way, modifications to a particular database or table can always be routed to the same DB instance\. 
-+  A write conflict for a small amount of data \(one 16\-KB page\) can trigger a substantial amount of work to roll back the entire transaction\. Thus, ideally you keep the transactions for a multi\-maste cluster relatively brief and small\. This best practice for OLTP applications is especially important for Aurora multi\-master clusters\. 
++  A write conflict for a small amount of data \(one 16\-KB page\) can trigger a substantial amount of work to roll back the entire transaction\. Thus, ideally you keep the transactions for a multi\-master cluster relatively brief and small\. This best practice for OLTP applications is especially important for Aurora multi\-master clusters\. 
 
  Conflicts are detected at page level\. A conflict could occur because proposed changes from different DB instances modify different rows within the page\. All page changes introduced in the system are subject to conflict detection\. This rule applies regardless of whether the source is a user transaction or a server background process\. It also applies whether the data page is from a table, secondary index, undo space, and so on\. 
 

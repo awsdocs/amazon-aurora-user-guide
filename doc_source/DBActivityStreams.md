@@ -1,43 +1,43 @@
 # Using Database Activity Streams with Aurora PostgreSQL<a name="DBActivityStreams"></a>
 
-Monitoring your database activity can help you provide safeguards for your database and meet compliance and regulatory requirements\. One way of monitoring database activity with Amazon Aurora with PostgreSQL compatibility is to use database activity streams\. *Database activity streams* provide a near real\-time data stream of the database activity in your relational database\. When you integrate database activity streams with third\-party monitoring tools, you can monitor and audit database activity\. 
+Monitoring your database activity can help you provide safeguards for your database and meet compliance and regulatory requirements\. One way of monitoring database activity with Amazon Aurora with PostgreSQL compatibility is to use *Database Activity Streams*\. Database Activity Streams provide a near real\-time data stream of the database activity in your relational database\. When you integrate Database Activity Streams with third\-party monitoring tools, you can monitor and audit database activity\. 
 
-Beyond external security threats, managed databases need to provide protection against insider risks from database administrators \(DBAs\)\. Database activity streams protect your databases from internal threats by controlling DBA access to the database activity streams\. Thus, the collection, transmission, storage, and subsequent processing of the database activity stream is beyond the access of the DBAs that manage the database\. 
+Beyond external security threats, managed databases need to provide protection against insider risks from database administrators \(DBAs\)\. Database Activity Streams protect your databases from internal threats by controlling DBA access to the Database Activity Streams\. Thus, the collection, transmission, storage, and subsequent processing of the stream of database activity is beyond the access of the DBAs that manage the database\. 
 
-A database activity stream from Aurora PostgreSQL is pushed to an Amazon Kinesis data stream that is created on behalf of your database\. From Kinesis, the database activity stream can then be consumed by Amazon CloudWatch or by applications for compliance management\. These compliance applications include as Imperva's SecureSphere Database Audit and Protection, McAfee's Data Center Security Suite, or IBM's Infosphere Guardium\. These applications can use the database activity stream information to generate alerts and provide auditing of all activity on your Amazon Aurora databases\.
+A stream of database activity is pushed from Aurora PostgreSQL to an Amazon Kinesis data stream that is created on behalf of your database\. From Kinesis, the activity stream can then be consumed by Amazon CloudWatch or by applications for compliance management\. These compliance applications include Imperva's SecureSphere Database Audit and Protection, McAfee's Data Center Security Suite, or IBM's Infosphere Guardium\. These applications can use the activity stream information to generate alerts and provide auditing of all activity on your Amazon Aurora databases\.
 
-Database activity streams have the following limits and requirements:
+Database Activity Streams have the following limits and requirements:
 + Currently, these streams are supported only with Aurora with PostgreSQL compatibility version 2\.3, which is compatible with PostgreSQL version 10\.7\.
-+ Database activity streams support the DB instance classes listed for Aurora PostgreSQL in [Hardware Specifications for All Available DB Instance Classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SummaryAurora), except they don't support the t3\.medium instance class\.
++ Database Activity Streams support the DB instance classes listed for Aurora PostgreSQL in [Hardware Specifications for All Available DB Instance Classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SummaryAurora), except they don't support the t3\.medium instance class\.
 + They're not supported in the following AWS Regions:
   + China \(Beijing\) Region, `cn-north-1`
   + China \(Ningxia\) Region, `cn-northwest-1`
   + AWS GovCloud \(US\-East\), `us-gov-east-1` 
   + AWS GovCloud \(US\-West\), `us-gov-west-1` 
-+ They require use of AWS Key Management Service \(AWS KMS\)\.
++ They require use of AWS Key Management Service \(AWS KMS\) because the activity streams are always encrypted\.
 
 **Topics**
-+ [Starting a Database Activity Stream](#DBActivityStreams.Enabling)
-+ [Getting the Status of a Database Activity Stream](#DBActivityStreams.Status)
-+ [Stopping a Database Activity Stream](#DBActivityStreams.Disabling)
++ [Starting an Activity Stream](#DBActivityStreams.Enabling)
++ [Getting the Status of an Activity Stream](#DBActivityStreams.Status)
++ [Stopping an Activity Stream](#DBActivityStreams.Disabling)
 + [Monitoring Database Activity Streams](#DBActivityStreams.Monitoring)
 + [Managing Access to Database Activity Streams](#DBActivityStreams.ManagingAccess)
 
-## Starting a Database Activity Stream<a name="DBActivityStreams.Enabling"></a>
+## Starting an Activity Stream<a name="DBActivityStreams.Enabling"></a>
 
-You start a database activity stream at the DB cluster level to monitor activity for all DB instances of the cluster\. Any DB instances added to the cluster are also automatically monitored\. 
+You start an activity stream at the DB cluster level to monitor database activity for all DB instances of the cluster\. Any DB instances added to the cluster are also automatically monitored\. 
 
-When you start a database activity stream, each database activity event, such as a change or access, generates an activity stream event\. Access events are generated from SQL commands such as `CONNECT` and `SELECT`\. Change events are generated from SQL commands such as `CREATE` and `INSERT`\. To make each activity stream event durable, you encrypt and store it\. You can choose to have the database session handle database activity events either synchronously or asynchronously:
+When you start an activity stream, each database activity event, such as a change or access, generates an activity stream event\. Access events are generated from SQL commands such as `CONNECT` and `SELECT`\. Change events are generated from SQL commands such as `CREATE` and `INSERT`\. To make each activity stream event durable, you encrypt and store it\. You can choose to have the database session handle database activity events either synchronously or asynchronously:
 + *Synchronous mode* – In synchronous mode, when a database session generates an activity stream event, the session blocks until the event is made durable\. If the event can't be made durable for some reason, the database session returns to normal activities\. However, an RDS event is sent indicating that activity stream records might be lost for some time\. A second RDS event is sent after the system is back to a healthy state\.
 
-  The synchronous mode favors the accuracy of the database activity stream over database performance\. 
+  The synchronous mode favors the accuracy of the activity stream over database performance\. 
 + *Asynchronous mode* – In asynchronous mode, when a database session generates an activity stream event, the session returns to normal activities immediately\. In the background, the activity stream event is made a durable record\. If an error occurs in the background task, an RDS event is sent\. This event indicates the beginning and end of any time windows where activity stream event records might have been lost\.
 
-  Asynchronous mode favors database performance over the accuracy of the database activity stream\. 
+  Asynchronous mode favors database performance over the accuracy of the activity stream\. 
 
 ### Console<a name="DBActivityStreams.Enabling-collapsible-section-E1"></a>
 
-**To start a database activity stream**
+**To start an activity stream**
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -62,7 +62,7 @@ When you start a database activity stream, each database activity event, such as
 
 ### AWS CLI<a name="DBActivityStreams.Enabling-collapsible-section-E2"></a>
 
-To start database activity streams for a DB cluster, configure the DB cluster using the [start\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/start-activity-stream.html) AWS CLI command\. Identify the AWS Region for the DB cluster with the `--region` parameter\. The `--apply-immediately` parameter is optional\.
+To start Database Activity Streams for a DB cluster, configure the DB cluster using the [start\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/start-activity-stream.html) AWS CLI command\. Identify the AWS Region for the DB cluster with the `--region` parameter\. The `--apply-immediately` parameter is optional\.
 
 For Linux, OS X, or Unix:
 
@@ -88,13 +88,13 @@ aws rds --region us-west-2 ^
     --profile MY_PROFILE_CREDENTIALS
 ```
 
-## Getting the Status of a Database Activity Stream<a name="DBActivityStreams.Status"></a>
+## Getting the Status of an Activity Stream<a name="DBActivityStreams.Status"></a>
 
-You can get the status of a database activity stream using the console or AWS CLI\.
+You can get the status of an activity stream using the console or AWS CLI\.
 
 ### Console<a name="DBActivityStreams.Status-collapsible-section-S1"></a>
 
-**To get the status of a DB cluster's database activity stream**
+**To get the status of a DB cluster's activity stream**
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -104,7 +104,7 @@ You can get the status of a database activity stream using the console or AWS CL
 
 ### AWS CLI<a name="DBActivityStreams.Status-collapsible-section-S2"></a>
 
-You can get a DB cluster's database activity stream configuration as the response to a [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) CLI request\. In the following example, see the values for `ActivityStreamKinesisStreamName`, `ActivityStreamStatus`, `ActivityStreamKmsKeyId`, and `ActivityStreamMode`\.
+You can get a DB cluster's activity stream configuration as the response to a [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) CLI request\. In the following example, see the values for `ActivityStreamKinesisStreamName`, `ActivityStreamStatus`, `ActivityStreamKmsKeyId`, and `ActivityStreamMode`\.
 
 The request is as follows:
 
@@ -131,15 +131,15 @@ The response includes the following items for a database activity stream:
 }
 ```
 
-## Stopping a Database Activity Stream<a name="DBActivityStreams.Disabling"></a>
+## Stopping an Activity Stream<a name="DBActivityStreams.Disabling"></a>
 
-You can stop a database activity stream using the console or AWS CLI\. 
+You can stop an activity stream using the console or AWS CLI\. 
 
-Note, if you delete a DB cluster, the database activity stream is stopped automatically\.
+Note, if you delete a DB cluster, the activity stream is stopped automatically\.
 
 ### Console<a name="DBActivityStreams.Disabling-collapsible-section-D1"></a>
 
-**To turn off a database activity stream**
+**To turn off an activity stream**
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -157,7 +157,7 @@ Note, if you delete a DB cluster, the database activity stream is stopped automa
 
 ### AWS CLI<a name="DBActivityStreams.Disabling-collapsible-section-D2"></a>
 
-To stop database activity streams for a DB cluster, configure the DB cluster using the AWS CLI command [stop\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/stop-activity-stream.html)\. Identify the AWS Region for the DB cluster using the `--region` parameter\. The `--apply-immediately` parameter is optional\.
+To stop Database Activity Streams for a DB cluster, configure the DB cluster using the AWS CLI command [stop\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/stop-activity-stream.html)\. Identify the AWS Region for the DB cluster using the `--region` parameter\. The `--apply-immediately` parameter is optional\.
 
 For Linux, OS X, or Unix:
 
@@ -181,31 +181,31 @@ aws rds --region us-west-2 ^
 
 ## Monitoring Database Activity Streams<a name="DBActivityStreams.Monitoring"></a>
 
-A database activity stream monitors and reports all activities on the database\. The stream of data is collected and transmitted to a secure server by using Amazon Kinesis\. From Kinesis, the data stream can be monitored or later consumed by other services and applications for further analysis\. 
+Database Activity Streams monitor and report all activities on the database\. The stream of activity is collected and transmitted to a secure server by using Amazon Kinesis\. From Kinesis, the activity stream can be monitored or later consumed by other services and applications for further analysis\. 
 
-The following categories of activity are monitored and put in the database activity stream audit log:
+The following categories of activity are monitored and put in the activity stream audit log:
 + **SQL commands** – All SQL commands are audited, and also prepared statements, PostgreSQL functions, and functions in Procedural Language for SQL \(PL/SQL\)\.
 + **Other database information** – Activity monitored includes the full SQL statement, parameters, bind variables, the row count of affected rows from DML commands, accessed objects, and the unique database name\. 
 + **Connection information** – Activity monitored includes session and network information, the server process ID, and exit codes\.
 
-If a database activity stream has a failure while monitoring a DB instance, you are notified by using RDS events\. If a failure occurs, you can decide to shut down the DB instance or let it continue\.
+If an activity stream has a failure while monitoring a DB instance, you are notified by using RDS events\. If a failure occurs, you can decide to shut down the DB instance or let it continue\.
 
 **Topics**
-+ [Accessing a Database Activity Stream from Kinesis](#DBActivityStreams.KinesisAccess)
++ [Accessing an Activity Stream from Kinesis](#DBActivityStreams.KinesisAccess)
 + [Audit Log Contents and Examples](#DBActivityStreams.AuditLog)
-+ [Processing a Database Activity Stream using the AWS SDK](#DBActivityStreams.CodeExample)
++ [Processing an Activity Stream using the AWS SDK](#DBActivityStreams.CodeExample)
 
-### Accessing a Database Activity Stream from Kinesis<a name="DBActivityStreams.KinesisAccess"></a>
+### Accessing an Activity Stream from Kinesis<a name="DBActivityStreams.KinesisAccess"></a>
 
-When you enable a database activity stream for a DB cluster, a Kinesis stream is created for you\. From Kinesis, you can monitor your database activity in real time\. To further analyze database activity, you can connect your Kinesis stream to consumer applications such as Amazon CloudWatch\. You can also connect it to compliance management applications from Imperva, McAfee, or IBM\.
+When you enable an activity streams for a DB cluster, a Kinesis stream is created for you\. From Kinesis, you can monitor your database activity in real time\. To further analyze database activity, you can connect your Kinesis stream to consumer applications such as Amazon CloudWatch\. You can also connect it to compliance management applications from Imperva, McAfee, or IBM\.
 
-**To access a database activity stream from Kinesis**
+**To access an activity stream from Kinesis**
 
 1. Open the Kinesis console at [https://console\.aws\.amazon\.com/kinesis](https://console.aws.amazon.com/kinesis)\.
 
-1. Choose your database activity stream from the list of Kinesis streams\.
+1. Choose your activity stream from the list of Kinesis streams\.
 
-   A database activity stream's name includes the prefix `aws-rds-das-` followed by the DB cluster's resource ID\. The following is an example\. 
+   An activity stream's name includes the prefix `aws-rds-das-` followed by the DB cluster's resource ID\. The following is an example\. 
 
    ```
    aws-rds-das-cluster-NHVOV4PCLWHGF52NP
@@ -213,7 +213,7 @@ When you enable a database activity stream for a DB cluster, a Kinesis stream is
 
    To use the Amazon RDS console to find your DB cluster's resource ID, choose your DB cluster from the list of databases, and then choose the **Configuration** tab\.
 
-   To use the AWS CLI to find the full Kinesis stream name for a database activity stream, use a [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) CLI request and note the value of `DBActivityStreamKinesisStreamName` in the response\.
+   To use the AWS CLI to find the full Kinesis stream name for an activity stream, use a [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) CLI request and note the value of `DBActivityStreamKinesisStreamName` in the response\.
 
 1. Choose **Monitoring** to begin observing the database activity\.
 
@@ -401,9 +401,9 @@ The audit log payload is an encrypted `databaseActivityEventList` JSON array\. T
 | substatementId | int | An ID for a SQL substatement\. This value counts the contained substatements for each SQL statement identified by the statementId field\. | 
 | type | string | The event type\. Valid values are record or heartbeat\. | 
 
-### Processing a Database Activity Stream using the AWS SDK<a name="DBActivityStreams.CodeExample"></a>
+### Processing an Activity Stream using the AWS SDK<a name="DBActivityStreams.CodeExample"></a>
 
-You can programmatically process a database activity stream by using the AWS SDK\. The following are fully functioning Java and Python examples of how you might process the Kinesis data stream\.
+You can programmatically process an activity stream by using the AWS SDK\. The following are fully functioning Java and Python examples of how you might process the Kinesis data stream\.
 
 ------
 #### [ Java ]
@@ -679,24 +679,19 @@ public class DemoConsumer {
 #### [ Python ]
 
 ```
-import zlib
-import boto3
 import base64
 import json
+import zlib
 import aws_encryption_sdk
-from Crypto.Cipher import AES
-from aws_encryption_sdk import DefaultCryptoMaterialsManager
 from aws_encryption_sdk.internal.crypto import WrappingKey
 from aws_encryption_sdk.key_providers.raw import RawMasterKeyProvider
 from aws_encryption_sdk.identifiers import WrappingAlgorithm, EncryptionKeyType
+import boto3
 
+REGION_NAME = '<region>'                    # us-east-1
+RESOURCE_ID = '<external-resource-id>'      # cluster-ABCD123456
+STREAM_NAME = 'aws-rds-das-' + RESOURCE_ID  # aws-rds-das-cluster-ABCD123456
 
-aws_access_key_id="YOUR_ACCESS_KEY"
-aws_secret_access_key="YOUR_SECRET_KEY"
-key_id = "your_key_id"
-stream_name = "YOUR_KINESIS_STREAM_NAME"
-region_name = 'YOUR_REGION_NAME'
-cluster_id = "YOUR_CLUSTER_ID"
 
 class MyRawMasterKeyProvider(RawMasterKeyProvider):
     provider_id = "BC"
@@ -705,79 +700,72 @@ class MyRawMasterKeyProvider(RawMasterKeyProvider):
         obj = super(RawMasterKeyProvider, cls).__new__(cls)
         return obj
 
-    def __init__(self, wrapping_key):
+    def __init__(self, plain_key):
         RawMasterKeyProvider.__init__(self)
-        self.wrapping_key = wrapping_key
+        self.wrapping_key = WrappingKey(wrapping_algorithm=WrappingAlgorithm.AES_256_GCM_IV12_TAG16_NO_PADDING,
+                                        wrapping_key=plain_key, wrapping_key_type=EncryptionKeyType.SYMMETRIC)
 
     def _get_raw_key(self, key_id):
         return self.wrapping_key
 
 
-def decrypt(decoded, plaintext):
-    wrapping_key = WrappingKey(wrapping_algorithm=WrappingAlgorithm.AES_256_GCM_IV12_TAG16_NO_PADDING,
-                               wrapping_key=plaintext, wrapping_key_type=EncryptionKeyType.SYMMETRIC)
-    my_key_provider = MyRawMasterKeyProvider(wrapping_key)
+def decrypt_payload(payload, data_key):
+    my_key_provider = MyRawMasterKeyProvider(data_key)
     my_key_provider.add_master_key("DataKey")
-    with aws_encryption_sdk.stream(
-            mode='d',
-            source=decoded,
-            materials_manager=DefaultCryptoMaterialsManager(master_key_provider=my_key_provider)
-    ) as decryptor:
-        for chunk in decryptor:
-            d = zlib.decompressobj(16 + zlib.MAX_WBITS)
-            decompressed_database_stream = d.decompress(chunk)
-            print decompressed_database_stream
+    decrypted_plaintext, header = aws_encryption_sdk.decrypt(
+        source=payload,
+        materials_manager=aws_encryption_sdk.DefaultCryptoMaterialsManager(master_key_provider=my_key_provider))
+    return decrypted_plaintext
 
 
-if __name__ == '__main__':
-    session = boto3.session.Session(
-        aws_access_key_id=aws_access_key_id,
-        aws_secret_access_key=aws_secret_access_key
-    )
+def decrypt_decompress(payload, key):
+    decrypted = decrypt_payload(payload, key)
+    return zlib.decompress(decrypted, zlib.MAX_WBITS + 1)
 
-    kms = session.client('kms', region_name=region_name)
 
-    client = session.client('kinesis', region_name=region_name)
+def main():
+    session = boto3.session.Session()
+    kms = session.client('kms', region_name=REGION_NAME)
+    kinesis = session.client('kinesis', region_name=REGION_NAME)
 
-    response = client.describe_stream(StreamName=stream_name)
-    shard_it = {}
-    for idx, shard in enumerate(response['StreamDescription']['Shards']):
-        shared_iterator = client.get_shard_iterator(
-            StreamName=stream_name,
-            ShardId=response['StreamDescription']['Shards'][idx]['ShardId'],
-            ShardIteratorType='LATEST',
-        )["ShardIterator"]
-        shard_it[idx] = shared_iterator
+    response = kinesis.describe_stream(StreamName=STREAM_NAME)
+    shard_iters = []
+    for shard in response['StreamDescription']['Shards']:
+        shard_iter_response = kinesis.get_shard_iterator(StreamName=STREAM_NAME, ShardId=shard['ShardId'],
+                                                         ShardIteratorType='LATEST')
+        shard_iters.append(shard_iter_response['ShardIterator'])
 
-    while True:
-        rows = []
-        for shared_iterator in shard_it:
-            response = client.get_records(ShardIterator=shard_it[shared_iterator], Limit=10000)
+    while len(shard_iters) > 0:
+        next_shard_iters = []
+        for shard_iter in shard_iters:
+            response = kinesis.get_records(ShardIterator=shard_iter, Limit=10000)
             for record in response['Records']:
                 record_data = record['Data']
                 record_data = json.loads(record_data)
-                key = record_data['key']
-                decoded = base64.b64decode(record_data['DatabaseActivityEvents'])
-                decoded_data_key = base64.b64decode(record_data['key'])
-                decrypt_result = kms.decrypt(CiphertextBlob=decoded_data_key,
-                                             EncryptionContext={"aws:rds:dbc-id":
-                                                                    cluster_id})
-                plaintext = decrypt_result[u'Plaintext']
-                cipher = AES.new(plaintext, AES.MODE_GCM)
-                decrypt(decoded, decrypt_result[u'Plaintext'])
-            shard_it[shared_iterator] = response["NextShardIterator"]
+                payload_decoded = base64.b64decode(record_data['databaseActivityEvents'])
+                data_key_decoded = base64.b64decode(record_data['key'])
+                data_key_decrypt_result = kms.decrypt(CiphertextBlob=data_key_decoded,
+                                                      EncryptionContext={'aws:rds:dbc-id': RESOURCE_ID})
+                print decrypt_decompress(payload_decoded, data_key_decrypt_result['Plaintext'])
+            if 'NextShardIterator' in response:
+                next_shard_iters.append(response['NextShardIterator'])
+        shard_iters = next_shard_iters
+
+
+if __name__ == '__main__':
+    main()
 ```
 
 ------
 
 ## Managing Access to Database Activity Streams<a name="DBActivityStreams.ManagingAccess"></a>
 
-Any user with appropriate AWS Identity and Access Management \(IAM\) role privileges for the database activity streams can create, start, stop, and modify the database activity stream settings for a DB cluster\. These actions are included in the audit log of the stream\. For best compliance practices, we recommend that you don't provide these privileges to DBAs\.
+Any user with appropriate AWS Identity and Access Management \(IAM\) role privileges for Database Activity Streams can create, start, stop, and modify the activity stream settings for a DB cluster\. These actions are included in the audit log of the stream\. For best compliance practices, we recommend that you don't provide these privileges to DBAs\.
 
-You set access to database activity streams using IAM policies\. For more information about Aurora authentication, see [Identity and Access Management in Amazon Aurora](UsingWithRDS.IAM.md)\. For more information about creating IAM policies, see [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. 
+You set access to Database Activity Streams using IAM policies\. For more information about Aurora authentication, see [Identity and Access Management in Amazon Aurora](UsingWithRDS.IAM.md)\. For more information about creating IAM policies, see [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. 
 
 **Example Policy to Allow Configuring Database Activity Streams**  
-To give users fine\-grained access to modify database activity streams, use the service\-specific operation context key `rds:ConfigureDBActivityStreams` in an IAM policy\. The following IAM policy example allows a user or role to configure database activity streams\.  
+To give users fine\-grained access to modify activity streams, use the service\-specific operation context key `rds:ConfigureDBActivityStreams` in an IAM policy\. The following IAM policy example allows a user or role to configure activity streams\.  
 
 ```
 {
@@ -797,7 +785,7 @@ To give users fine\-grained access to modify database activity streams, use the 
 ```
 
 **Example Policy to Allow Starting Database Activity Streams**  
-The following IAM policy example allows a user or role to start database activity streams\.  
+The following IAM policy example allows a user or role to start activity streams\.  
 
 ```
 { 
@@ -814,7 +802,7 @@ The following IAM policy example allows a user or role to start database activit
 ```
 
 **Example Policy to Allow Stopping Database Activity Streams**  
-The following IAM policy example allows a user or role to stop database activity streams\.  
+The following IAM policy example allows a user or role to stop activity streams\.  
 
 ```
 { 
@@ -831,7 +819,7 @@ The following IAM policy example allows a user or role to stop database activity
 ```
 
 **Example Policy to Deny Starting Database Activity Streams**  
-The following IAM policy example denies a user or role from starting database activity streams\.  
+The following IAM policy example denies a user or role from starting activity streams\.  
 
 ```
 { 
@@ -848,7 +836,7 @@ The following IAM policy example denies a user or role from starting database ac
 ```
 
 **Example Policy to Deny Stopping Database Activity Streams**  
-The following IAM policy example denies a user or role from stopping database activity streams\.  
+The following IAM policy example denies a user or role from stopping activity streams\.  
 
 ```
 { 

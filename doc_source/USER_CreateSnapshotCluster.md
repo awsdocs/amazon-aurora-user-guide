@@ -13,15 +13,15 @@ You can create a DB cluster snapshot using the AWS Management Console, the AWS C
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
 1. In the list of DB instances, choose a writer instance for the DB cluster\.
 
-1. Choose **Instance actions**, and then choose **Take snapshot**\.
+1. Choose **Actions**, and then choose **Take snapshot**\.
 
    The **Take DB Snapshot** window appears\.
 
-1. Type the name of the DB cluster snapshot in the **Snapshot name** box\.   
+1. Enter the name of the DB cluster snapshot in the **Snapshot name** box\.   
 ![\[Create snapshot\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/DBSnapshotCluster.png)
 
 1. Choose **Take Snapshot**\.

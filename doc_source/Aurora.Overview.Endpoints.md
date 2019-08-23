@@ -109,7 +109,7 @@
 
  You can define a list of DB instances to include in, or exclude from, a custom endpoint\. We refer to these lists as *static* and *exclusion* lists, respectively\. You can use the inclusion/exclusion mechanism to further subdivide the groups of DB instances, and to make sure that the set of custom endpoints covers all the DB instances in the cluster\. Each custom endpoint can contain only one of these list types\. 
 
- In the AWS Management Console, the choice is represented by the checkbox **Attach future instances added to this cluster**\. When you leave the checkbox unselected, the custom endpoint uses a static list containing only the DB instances specified in the dialog\. When you select the checkbox, the custom endpoint uses an exclusion list\. In this case, the custom endpoint represents all DB instances in the cluster \(including any that you add in the future\) except the ones left unselected in the dialog\. The AWS CLI and Amazon RDS API have parameters representing each kind of list\. When you use the AWS CLI or Amazon RDS API, you can't add or remove individual members to the lists; you always specify the entire new list\. 
+ In the AWS Management Console, the choice is represented by the check box **Attach future instances added to this cluster**\. When you keep check box clear, the custom endpoint uses a static list containing only the DB instances specified in the dialog\. When you choose the check box, the custom endpoint uses an exclusion list\. In this case, the custom endpoint represents all DB instances in the cluster \(including any that you add in the future\) except the ones left unselected in the dialog\. The AWS CLI and Amazon RDS API have parameters representing each kind of list\. When you use the AWS CLI or Amazon RDS API, you can't add or remove individual members to the lists; you always specify the entire new list\. 
 
  Aurora doesn't change the DB instances specified in these lists when DB instances change roles between primary instance and Aurora Replica due to failover or promotion\. For example, a custom endpoint with type `READER` might include a DB instance that was an Aurora Replica and then was promoted to a primary instance\. However, you can only connect to a DB instance through a custom endpoint when that DB instance has a role compatible with the type of the custom endpoint \(`READER`, `WRITER`, or `ANY`\)\. 
 
@@ -140,9 +140,9 @@
 
 ## Creating a Custom Endpoint<a name="aurora-custom-endpoint-creating"></a>
 
-### AWS Management Console<a name="aurora-create-endpoint.console"></a>
+### Console<a name="aurora-create-endpoint.console"></a>
 
- To create a custom endpoint with the AWS Management Console, go to the cluster detail page and choose the `Create custom endpoint` action in the **Endpoints** section\. Choose a name for the custom endpoint, unique for your user ID and region\. To pick a list of DB instances that remains the same even as the cluster expands, leave the checkbox **Attach future instances added to this cluster** unselected\. When you select that checkbox, the custom endpoint dynamically adds any new instances as you add them to the cluster\. 
+ To create a custom endpoint with the AWS Management Console, go to the cluster detail page and choose the `Create custom endpoint` action in the **Endpoints** section\. Choose a name for the custom endpoint, unique for your user ID and region\. To choose a list of DB instances that remains the same even as the cluster expands, keep the check box **Attach future instances added to this cluster** clear\. When you choose that check box, the custom endpoint dynamically adds any new instances as you add them to the cluster\. 
 
 ![\[\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraCreateCustomEndpoint.png)
 
@@ -182,7 +182,7 @@ aws rds modify-db-cluster-endpoint --db-cluster-endpoint-identifier custom-endpo
 
 ## Viewing Custom Endpoints<a name="aurora-endpoint-viewing"></a>
 
-### AWS Management Console<a name="aurora-view-endpoint.console"></a>
+### Console<a name="aurora-view-endpoint.console"></a>
 
  To view custom endpoints with the AWS Management Console, go to the cluster detail page for the cluster and look under the **Endpoints** section\. This section contains information only about custom endpoints\. The details for the built\-in endpoints are listed in the main **Details** section\. To see the details for a specific custom endpoint, select its name to bring up the detail page for that endpoint\. 
 
@@ -288,7 +288,7 @@ aws rds describe-db-cluster-endpoints --region region_name ^
 
  You can't connect to or use a custom endpoint while the changes from an edit action are in progress\. It might take some minutes before the endpoint status returns to **Available** and you can connect again\. 
 
-### AWS Management Console<a name="aurora-edit-endpoint.console"></a>
+### Console<a name="aurora-edit-endpoint.console"></a>
 
  To edit a custom endpoint with the AWS Management Console, you can select the endpoint on the cluster detail page, or bring up the detail page for the endpoint, and choose the **Edit** action\. 
 
@@ -330,7 +330,7 @@ aws rds modify-db-cluster-endpoint --db-cluster-endpoint-identifier my-custom-en
 
 ## Deleting a Custom Endpoint<a name="aurora-endpoints-custom-deleting"></a>
 
-### AWS Management Console<a name="aurora-delete-endpoint.console"></a>
+### Console<a name="aurora-delete-endpoint.console"></a>
 
  To delete a custom endpoint with the AWS Management Console, go to the cluster detail page, select the appropriate custom endpoint, and select the **Delete** action\. 
 

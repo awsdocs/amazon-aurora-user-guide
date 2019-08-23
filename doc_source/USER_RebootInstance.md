@@ -12,7 +12,7 @@ You can't reboot your DB instance if it is not in the available state\. Your dat
 **Important**  
 When you reboot the primary instance of an Amazon Aurora DB cluster, RDS also automatically restarts all of the Aurora Replicas in that DB cluster\. When you reboot the primary instance of an Aurora DB cluster, no failover occurs\. When you reboot an Aurora Replica, no failover occurs\. To fail over an Aurora DB cluster, call the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html), or the API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html)\. 
 
-## AWS Management Console<a name="USER_RebootInstance.Console"></a>
+## Console<a name="USER_RebootInstance.Console"></a>
 
 **To reboot a DB instance**
 
@@ -28,7 +28,7 @@ When you reboot the primary instance of an Amazon Aurora DB cluster, RDS also au
 
    Alternatively, choose **Cancel**\. 
 
-## CLI<a name="USER_RebootInstance.CLI"></a>
+## AWS CLI<a name="USER_RebootInstance.CLI"></a>
 
 To reboot a DB instance by using the AWS CLI, call the [https://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html) command\. 
 
@@ -46,6 +46,6 @@ aws rds reboot-db-instance ^
     --db-instance-identifier mydbinstance
 ```
 
-## API<a name="USER_RebootInstance.API"></a>
+## RDS API<a name="USER_RebootInstance.API"></a>
 
 To reboot a DB instance by using the Amazon RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) action\. 

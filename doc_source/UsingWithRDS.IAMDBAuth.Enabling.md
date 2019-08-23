@@ -2,7 +2,7 @@
 
 By default, IAM database authentication is disabled on DB clusters\. You can enable IAM database authentication \(or disable it again\) using the AWS Management Console, AWS CLI, or the API\.
 
-## AWS Management Console<a name="UsingWithRDS.IAMDBAuth.Enabling.Console"></a>
+## Console<a name="UsingWithRDS.IAMDBAuth.Enabling.Console"></a>
 
 To create a new DB cluster with IAM authentication by using the console, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
 

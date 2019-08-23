@@ -42,14 +42,14 @@ You must determine the TCP/IP port number to specify for your DB cluster\. The f
 You can create an Aurora DB cluster using the AWS Management Console, the AWS CLI, or the RDS API\.
 
 **Note**  
-If you are using the console, a new console interface is available for database creation\. Choose either the **New Console** or the **Current Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
+If you are using the console, a new console interface is available for database creation\. Choose either the **New Console** or the **Original Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
 
 ### New Console<a name="Aurora.CreateInstance.Creating.Console"></a>
 
-You can create a DB instance running MySQL with the AWS Management Console with **Easy create** enabled or not enabled\. With **Easy create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default setting for other configuration options\. With **Easy create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
+You can create a DB instance running MySQL with the AWS Management Console with **Easy create** enabled or not enabled\. With **Easy create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy Create** uses the default setting for other configuration options\. With **Easy create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
 **Note**  
-For this example, **Easy create** is not enabled\. For information about creating an Aurora MySQL DB cluster with **Easy create** enabled, see [Getting Started with Amazon Aurora](CHAP_GettingStartedAurora.md)\.
+For this example, **Standard Create** is enabled, and **Easy Create** isn't enabled\. For information about creating an Aurora MySQL DB cluster with **Easy create** enabled, see [Getting Started with Amazon Aurora](CHAP_GettingStartedAurora.md)\.
 
 **To create an Aurora DB cluster using the console**
 
@@ -63,7 +63,7 @@ For this example, **Easy create** is not enabled\. For information about creatin
 
 1. Choose **Create database**\.
 
-1. In **Database settings**, turn the **Easy create** option off\.
+1. In **Choose a database creation method**, choose **Standard Create**\.
 
 1. In **Engine options**, choose **Amazon Aurora**\.   
 ![\[Engine options\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch01.png)
@@ -117,13 +117,13 @@ You can't view the master user password again\. If you don't record it, you migh
 
    On the **Connectivity & security** tab, note the port and the endpoint of the writer DB instance\. Use the endpoint and port of the cluster in your JDBC and ODBC connection strings for any application that performs write or read operations\.
 
-### Current Console<a name="Aurora.CreateInstance.Creating.CurrentConsole"></a>
+### Original Console<a name="Aurora.CreateInstance.Creating.CurrentConsole"></a>
 
 **To create an Aurora DB cluster using the AWS Management Console**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the top\-right corner of the AWS Management Console, select the AWS Region in which you want to create the Aurora DB cluster\.
+1. In the top\-right corner of the AWS Management Console, choose the AWS Region in which you want to create the Aurora DB cluster\.
 
 1. In the navigation pane, choose **Databases**\.
 
@@ -308,7 +308,7 @@ The following table contains details about settings that you choose when you cre
 |   **Backtrack**   |  Applies only to Aurora MySQL\. Choose **Enable Backtrack** to enable backtracking or **Disable Backtrack** to disable backtracking\. Using backtracking, you can rewind a DB cluster to a specific time, without creating a new DB cluster\. It is disabled by default\. If you enable backtracking, also specify the amount of time that you want to be able to backtrack your DB cluster \(the target backtrack window\)\. For more information, see [Backtracking an Aurora DB Cluster](AuroraMySQL.Managing.Backtrack.md)\.  | 
 |  Copy tags to snapshots  |  Choose this option to copy any DB instance tags to a DB snapshot when you create a snapshot\.  For more information, see [Tagging Amazon RDS Resources](USER_Tagging.md)\.   | 
 |   **Database port**   |  Specify the port for applications and utilities to use to access the database\. Aurora MySQL DB clusters default to the default MySQL port, 3306, and Aurora PostgreSQL DB clusters default to the default PostgreSQL port, 5432\. The firewalls at some companies block connections to these default ports\. If your company firewall blocks the default port, choose another port for the new DB cluster\.  | 
-|  **DB cluster identifier**  |  Type a name for your DB cluster that is unique for your account in the AWS Region you selected\. This identifier is used in the cluster endpoint address for your DB cluster\. For information on the cluster endpoint, see [Amazon Aurora Connection Management](Aurora.Overview.Endpoints.md)\. The DB cluster identifier has the following constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html)  | 
+|  **DB cluster identifier**  |  Enter a name for your DB cluster that is unique for your account in the AWS Region that you chose\. This identifier is used in the cluster endpoint address for your DB cluster\. For information on the cluster endpoint, see [Amazon Aurora Connection Management](Aurora.Overview.Endpoints.md)\. The DB cluster identifier has the following constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html)  | 
 |   **DB cluster parameter group**   |  Choose a DB cluster parameter group\. Aurora has a default DB cluster parameter group you can use, or you can create your own DB cluster parameter group\. For more information about DB cluster parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.  | 
 |   **DB engine version**   |  Applies only to the provisioned capacity type\. Choose the version number of your DB engine\.  | 
 |   **DB instance class**   |  Applies only to the provisioned capacity type\. Choose a DB instance class that defines the processing and memory requirements for each instance in the DB cluster\. For more information about DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.  | 
@@ -318,12 +318,12 @@ The following table contains details about settings that you choose when you cre
 |   **Enable encryption**   |  Choose `Enable encryption` to enable encryption at rest for this DB cluster\. For more information, see [Encrypting Amazon Aurora Resources](Overview.Encryption.md)\.  | 
 |  **Enable Enhanced Monitoring**  |  Choose **Enable enhanced monitoring** to enable gathering metrics in real time for the operating system that your DB cluster runs on\. For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.   | 
 |   **Enable Performance Insights**   |  Choose `Enable Performance Insights` to enable Amazon RDS Performance Insights\. For more information, see [Using Amazon RDS Performance Insights](USER_PerfInsights.md)\.  | 
-|   **Failover priority**   |  Choose a failover priority for the instance\. If you don't select a value, the default is **tier\-1**\. This priority determines the order in which Aurora Replicas are promoted when recovering from a primary instance failure\. For more information, see [Fault Tolerance for an Aurora DB Cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\.  | 
+|   **Failover priority**   |  Choose a failover priority for the instance\. If you don't choose a value, the default is **tier\-1**\. This priority determines the order in which Aurora Replicas are promoted when recovering from a primary instance failure\. For more information, see [Fault Tolerance for an Aurora DB Cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\.  | 
 |  **Granularity**  |  Only available if **Enhanced Monitoring** is set to **Enable enhanced monitoring**\. Set the interval, in seconds, between when metrics are collected for your DB cluster\.  | 
 |   **IAM DB authentication**   |  Choose **Enable IAM DB authentication** to enable IAM database authentication\. For more information, see [IAM Database Authentication](UsingWithRDS.IAMDBAuth.md)\.   | 
 |   **Initial database name**   |  Type a name for your default database of up to 64 alpha\-numeric characters\. If you don't provide a name, Amazon RDS doesn't create a database on the DB cluster you are creating\. To create additional databases, connect to the DB cluster and use the SQL command CREATE DATABASE\. For more information about connecting to the DB cluster, see [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\.  | 
 | **Log exports** |  Choose the types of MySQL or PostgreSQL database log files to generate\. For more information, see [MySQL Database Log Files](USER_LogAccess.Concepts.MySQL.md) and [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\.   | 
-|   **Maintenance window**   |  Choose **Select window** and specify the weekly time range during which system maintenance can occur\. Or, select **No preference** for Amazon RDS to assign a period randomly\.  | 
+|   **Maintenance window**   |  Choose **Select window** and specify the weekly time range during which system maintenance can occur\. Or choose **No preference** for Amazon RDS to assign a period randomly\.  | 
 |   **Master key**   |  Only available if **Encryption** is set to **Enable encryption**\. Choose the master key to use for encrypting this DB cluster\. For more information, see [Encrypting Amazon Aurora Resources](Overview.Encryption.md)\.  | 
 |   **Option group**   |  Aurora has a default option group\.  | 
 |   **Master password**   |  Enter a password that contains from 8 to 41 printable ASCII characters \(excluding /,", and @\) for your master user password\.   | 
@@ -337,4 +337,4 @@ The following table contains details about settings that you choose when you cre
 |   **Subnet group**   |  Choose the DB subnet group to use for the DB cluster\.  For more information, see [DB Cluster Prerequisites](#Aurora.CreateInstance.Prerequisites)\.  | 
 |  **Select the log types to publish to Amazon CloudWatch Logs**  | Applies only to Aurora MySQL\. In the Log exports section, choose the logs that you want to start publishing to Amazon CloudWatch Logs\. For more about publishing to CloudWatch Logs, see [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\.  | 
 |   **Virtual Private Cloud \(VPC\)**   |  Choose the VPC to host the DB cluster\. Choose **Create a New VPC** to have Amazon RDS create a VPC for you\. For more information, see [DB Cluster Prerequisites](#Aurora.CreateInstance.Prerequisites)\.  | 
-|   **VPC security group**   |  Choose **Create new** to have Amazon RDS create a VPC security group for you\. Or, select **Choose existing** and specify one or more VPC security groups to secure network access to the DB cluster\. When you choose **Create new** in the RDS console, a new security group is created with an inbound rule that allows access to the DB instance from the IP address detected in your browser\. For more information, see [DB Cluster Prerequisites](#Aurora.CreateInstance.Prerequisites)\.  | 
+|   **VPC security group**   |  Choose **Create new** to have Amazon RDS create a VPC security group for you\. Or choose **Choose existing** and specify one or more VPC security groups to secure network access to the DB cluster\. When you choose **Create new** in the RDS console, a new security group is created with an inbound rule that allows access to the DB instance from the IP address detected in your browser\. For more information, see [DB Cluster Prerequisites](#Aurora.CreateInstance.Prerequisites)\.  | 

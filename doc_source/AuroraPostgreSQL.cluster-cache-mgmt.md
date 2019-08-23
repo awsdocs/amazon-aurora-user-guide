@@ -29,7 +29,7 @@ Allow at least 1 minute after completing these steps for cluster cache managemen
 
 To enable cluster cache management for a DB cluster, modify its parameter group by setting the `apg_ccm_enabled` parameter to `1` as described following\. 
 
-#### AWS Management Console<a name="AuroraPostgreSQL.cluster-cache-mgmt.Enable.CON"></a>
+#### Console<a name="AuroraPostgreSQL.cluster-cache-mgmt.Enable.CON"></a>
 
 **To enable cluster cache management**
 
@@ -73,7 +73,7 @@ aws rds modify-db-cluster-parameter-group ^
 
 Make sure that the promotion priority is **tier\-0** for the writer DB instance of the Aurora PostgreSQL DB cluster\. The *promotion tier priority *is a value that specifies the order in which an Aurora reader is promoted to the writer DB instance after a failure\. Valid values are 0–15, where 0 is the first priority and 15 is the last priority\. For more information about the promotion tier, see [Fault Tolerance for an Aurora DB Cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\. 
 
-#### AWS Management Console<a name="AuroraPostgreSQL.cluster-cache-mgmt.Writer.Console"></a>
+#### Console<a name="AuroraPostgreSQL.cluster-cache-mgmt.Writer.Console"></a>
 
 **To set the promotion priority for the writer DB instance to tier\-0**
 
@@ -124,7 +124,7 @@ You set one reader DB instance for cluster cache management\. To do so, choose a
 
  The *promotion tier priority *is a value that specifies the order in which an Aurora reader is promoted to the writer DB instance after a failure\. Valid values are 0–15, where 0 is the first priority and 15 is the last priority\.
 
-#### AWS Management Console<a name="AuroraPostgreSQL.cluster-cache-mgmt.Reader.Console"></a>
+#### Console<a name="AuroraPostgreSQL.cluster-cache-mgmt.Reader.Console"></a>
 
 **To set the promotion priority of the reader DB instance to tier\-0**
 

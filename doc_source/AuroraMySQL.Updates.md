@@ -105,7 +105,7 @@ If your current Aurora MySQL version is 1\.14\.x, but it is lower than 1\.14\.4,
 
 **Note**  
  ZDP applies only to the primary instance of a DB cluster\. ZDP isn't applicable to Aurora Replicas\. 
- Prepared statements don'tt prevent ZDP, but they aren't preserved after ZDP executes\. 
+ Prepared statements don't prevent ZDP, but they aren't preserved after ZDP executes\.
 
 ## Related Topics<a name="AuroraMySQL.Updates.Related"></a>
 + [Database Engine Updates for Amazon Aurora MySQL 2\.0](AuroraMySQL.Updates.20Updates.md)

@@ -124,7 +124,7 @@ The script produces output similar to the output in the following example\. The 
 2 rows in set (0.01 sec)
 ```
 
-## AWS Management Console<a name="AuroraMySQL.Migrating.RDSMySQL.Import.Console"></a>
+## Console<a name="AuroraMySQL.Migrating.RDSMySQL.Import.Console"></a>
 
 You can migrate a DB snapshot of an Amazon RDS MySQL DB instance to create an Aurora MySQL DB cluster\. The new Aurora MySQL DB cluster is populated with the data from the original Amazon RDS MySQL DB instance\. The DB snapshot must have been made from an Amazon RDS DB instance running MySQL version 5\.6 or 5\.7\. For information about creating a DB snapshot, see [Creating a DB Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
 
@@ -193,7 +193,7 @@ You might be behind a corporate firewall that doesn't allow access to default po
 
 1. Choose **Instances**, and then choose the arrow icon to show the DB cluster details and monitor the progress of the migration\. On the details page, you can find the cluster endpoint used to connect to the primary instance of the DB cluster\. For more information on connecting to an Aurora MySQL DB cluster, see [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\. 
 
-## CLI<a name="USER_ImportAuroraCluster.CLI"></a>
+## AWS CLI<a name="USER_ImportAuroraCluster.CLI"></a>
 
 You can migrate a DB snapshot of an Amazon RDS MySQL DB instance to create an Aurora DB cluster\. The new DB cluster is then populated with the data from the DB snapshot\. The DB snapshot must come from an Amazon RDS DB instance running MySQL version 5\.6 or 5\.7\. For more information, see [Creating a DB Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
 

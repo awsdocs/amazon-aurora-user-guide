@@ -5,7 +5,7 @@ You have several options for viewing information about your Amazon Aurora DB clu
 + You can get DB cluster and DB instance information using the AWS Command Line Interface \(AWS CLI\)\.
 + You can get DB cluster and DB instance information using the Amazon RDS API\.
 
-## AWS Management Console<a name="Aurora.Viewing.Console"></a>
+## Console<a name="Aurora.Viewing.Console"></a>
 
 In the Amazon RDS, you can see details about a DB cluster by choosing **Databases** from the console's navigation pane\. You can also see details about DB instances that are members of an Amazon Aurora DB cluster on the **Databases** page\.
 
@@ -25,7 +25,7 @@ If you click the link for the `aurora-sample` DB instance identifier, the Amazon
 
 ![\[Amazon Aurora DB Instance View\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraView02.png)
 
-## CLI<a name="Aurora.Viewing.CLI"></a>
+## AWS CLI<a name="Aurora.Viewing.CLI"></a>
 
 To view DB cluster information by using the AWS CLI, use the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command\. For example, the following AWS CLI command lists the DB cluster information for all of the DB clusters in the `us-east-1` region for the configured AWS account\.
 
@@ -126,7 +126,7 @@ The command returns the following output if your AWS CLI is configured for JSON 
 }
 ```
 
-## API<a name="Aurora.Viewing.API"></a>
+## RDS API<a name="Aurora.Viewing.API"></a>
 
 To view DB cluster information using the Amazon RDS API, use the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) operation\. For example, the following Amazon RDS API command lists the DB cluster information for all of the DB clusters in the `us-east-1` region\.
 

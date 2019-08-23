@@ -19,6 +19,3 @@ Amazon Aurora PostgreSQL integrates with other AWS services so that you can exte
 + Automatically add or remove Aurora Replicas with Aurora Auto Scaling\. For more information, see [Using Amazon Aurora Auto Scaling with Aurora Replicas](Aurora.Integrating.AutoScaling.md)\.
 
 For more information about integrating Aurora PostgreSQL with other AWS services, see [Integrating Amazon Aurora PostgreSQL with Other AWS Services](AuroraPostgreSQL.Integrating.md)\.
-
-## Related Topics<a name="Aurora.Integrating.RelatedTopics"></a>
-+ [Managing an Amazon Aurora DB Cluster](CHAP_Aurora.md)

@@ -178,7 +178,7 @@ You can specify the type of source you want to be notified of and the Amazon RDS
 **Note**  
 Event notifications might take up to five minutes to be delivered\.
 
-### AWS Management Console<a name="USER_Events.Subscribing.Console"></a>
+### Console<a name="USER_Events.Subscribing.Console"></a>
 
 **To subscribe to RDS event notification**
 
@@ -206,7 +206,7 @@ The Amazon RDS console indicates that the subscription is being created\.
 
 ![\[List DB event notification subscriptions\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/EventNotification-Create2.png)
 
-### CLI<a name="USER_Events.Subscribing.CLI"></a>
+### AWS CLI<a name="USER_Events.Subscribing.CLI"></a>
 
 To subscribe to RDS event notification, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/create-event-subscription.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-event-subscription.html) command\. Include the following required parameters:
 + `--subscription-name`
@@ -240,7 +240,7 @@ To subscribe to Amazon RDS event notification, call the Amazon RDS API function 
 
 You can list your current Amazon RDS event notification subscriptions\.
 
-### AWS Management Console<a name="USER_Events.ListSubscription.Console"></a>
+### Console<a name="USER_Events.ListSubscription.Console"></a>
 
 **To list your current Amazon RDS event notification subscriptions**
 
@@ -249,7 +249,7 @@ You can list your current Amazon RDS event notification subscriptions\.
 1.  In the navigation pane, choose **Event subscriptions**\. The **Event subscriptions** pane shows all your event notification subscriptions\.  
 ![\[List DB event notification subscriptions\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/EventNotification-ListSubs.png)
 
-### CLI<a name="USER_Events.ListSubscription.CLI"></a>
+### AWS CLI<a name="USER_Events.ListSubscription.CLI"></a>
 
 To list your current Amazon RDS event notification subscriptions, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-event-subscriptions.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-event-subscriptions.html) command\. 
 
@@ -305,7 +305,7 @@ https://rds.us-east-1.amazonaws.com/
 
 After you have created a subscription, you can change the subscription name, source identifier, categories, or topic ARN\.
 
-### AWS Management Console<a name="USER_Events.Modifying.Console"></a>
+### Console<a name="USER_Events.Modifying.Console"></a>
 
 **To modify an Amazon RDS event notification subscription**
 
@@ -320,7 +320,7 @@ After you have created a subscription, you can change the subscription name, sou
 1. Choose **Edit**\. The Amazon RDS console indicates that the subscription is being modified\.  
 ![\[List DB event notification subscriptions\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/EventNotification-Modify2.png)
 
-### CLI<a name="USER_Events.Modifying.CLI"></a>
+### AWS CLI<a name="USER_Events.Modifying.CLI"></a>
 
 To modify an Amazon RDS event notification subscription, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-event-subscription.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-event-subscription.html) command\. Include the following required parameter:
 + `--subscription-name`
@@ -351,11 +351,11 @@ To modify an Amazon RDS event, call the Amazon RDS API operation [https://docs.a
 
 You can add a source identifier \(the Amazon RDS source generating the event\) to an existing subscription\.
 
-### AWS Management Console<a name="USER_Events.AddingSource.Console"></a>
+### Console<a name="USER_Events.AddingSource.Console"></a>
 
 You can easily add or remove source identifiers using the Amazon RDS console by selecting or deselecting them when modifying a subscription\. For more information, see [Modifying an Amazon RDS Event Notification Subscription](#USER_Events.Modifying)\.
 
-### CLI<a name="USER_Events.AddingSource.CLI"></a>
+### AWS CLI<a name="USER_Events.AddingSource.CLI"></a>
 
 To add a source identifier to an Amazon RDS event notification subscription, use the AWS CLI [https://docs.aws.amazon.com/](https://docs.aws.amazon.com/) command\. Include the following required parameters:
 + `--subscription-name`
@@ -388,11 +388,11 @@ To add a source identifier to an Amazon RDS event notification subscription, cal
 
 You can remove a source identifier \(the Amazon RDS source generating the event\) from a subscription if you no longer want to be notified of events for that source\. 
 
-### AWS Management Console<a name="USER_Events.RemovingSource.Console"></a>
+### Console<a name="USER_Events.RemovingSource.Console"></a>
 
 You can easily add or remove source identifiers using the Amazon RDS console by selecting or deselecting them when modifying a subscription\. For more information, see [Modifying an Amazon RDS Event Notification Subscription](#USER_Events.Modifying)\.
 
-### CLI<a name="USER_Events.RemovingSource.CLI"></a>
+### AWS CLI<a name="USER_Events.RemovingSource.CLI"></a>
 
 To remove a source identifier from an Amazon RDS event notification subscription, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/remove-source-identifier-from-subscription.html](https://docs.aws.amazon.com/cli/latest/reference/rds/remove-source-identifier-from-subscription.html) command\. Include the following required parameters:
 + `--subscription-name`
@@ -425,13 +425,13 @@ To remove a source identifier from an Amazon RDS event notification subscription
 
 All events for a resource type are grouped into categories\. To view the list of categories available, use the following procedures\.
 
-### AWS Management Console<a name="USER_Events.ListingCategories.Console"></a>
+### Console<a name="USER_Events.ListingCategories.Console"></a>
 
 When you create or modify an event notification subscription, the event categories are displayed in the Amazon RDS console\. For more information, see [Modifying an Amazon RDS Event Notification Subscription](#USER_Events.Modifying)\. 
 
 ![\[List DB event notification categories\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/EventNotification-Categories.png)
 
-### CLI<a name="USER_Events.ListingCategories.CLI"></a>
+### AWS CLI<a name="USER_Events.ListingCategories.CLI"></a>
 
 To list the Amazon RDS event notification categories, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-event-categories.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-event-categories.html) command\. This command has no required parameters\.
 
@@ -449,7 +449,7 @@ To list the Amazon RDS event notification categories, use the Amazon RDS API [ht
 
 You can delete a subscription when you no longer need it\. All subscribers to the topic will no longer receive event notifications specified by the subscription\.
 
-### AWS Management Console<a name="USER_Events.Deleting.Console"></a>
+### Console<a name="USER_Events.Deleting.Console"></a>
 
 **To delete an Amazon RDS event notification subscription**
 
@@ -464,7 +464,7 @@ You can delete a subscription when you no longer need it\. All subscribers to th
 1. The Amazon RDS console indicates that the subscription is being deleted\.  
 ![\[Delete an event notification subscription\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/EventNotification-Delete.png)
 
-### CLI<a name="USER_Events.Deleting.CLI"></a>
+### AWS CLI<a name="USER_Events.Deleting.CLI"></a>
 
 To delete an Amazon RDS event notification subscription, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/delete-event-subscription.html](https://docs.aws.amazon.com/cli/latest/reference/rds/delete-event-subscription.html) command\. Include the following required parameter:
 + `--subscription-name`

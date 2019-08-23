@@ -153,7 +153,7 @@ If the return value of the query is `OFF`, then you've successfully connected to
 
 One thing to watch out for is when you connect to a replica that has data that has become stale\. When this happens, the `aurora_replica_status` function may show out\-of\-date information\. A threshold for staleness can be set at the application level and examined by looking at the difference between the server time and the last\_update\_time\. In general, your application should be sure to avoid flip\-flopping between two hosts due to conflicting information returned by the aurora\_replica\_status function\. That is, your application should err on the side of trying all known hosts first instead of blindly following the data returned by the aurora\_replica\_status function\.
 
-##### API<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString.API"></a>
+##### RDS API<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString.API"></a>
 
 You can programmatically find the list of instances by using the [AWS Java SDK](https://aws.amazon.com/sdk-for-java/), specifically the [DescribeDbClusters ](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDS.html#describeDBClusters-com.amazonaws.services.rds.model.DescribeDBClustersRequest-)API\. Here's a small example of how you might do this in java 8:
 

@@ -72,7 +72,7 @@ For more information about data transfer pricing, see [Amazon RDS Pricing](https
 
 After the DB cluster snapshot copy has been created in the new AWS Region, the DB cluster snapshot copy behaves the same as all other DB cluster snapshots in that AWS Region\. 
 
-### AWS Management Console<a name="USER_CopyDBClusterSnapshot.CON"></a>
+### Console<a name="USER_CopyDBClusterSnapshot.CON"></a>
 
 This procedure works for copying encrypted or unencrypted DB cluster snapshots, in the same AWS Region or across regions\.
 
@@ -108,7 +108,7 @@ Use the procedures in the following sections to copy an unencrypted DB cluster s
 
 To cancel a copy operation once it is in progress, delete the target DB cluster snapshot identified by `--target-db-cluster-snapshot-identifier` or `TargetDBClusterSnapshotIdentifier` while that DB cluster snapshot is in **copying** status\.
 
-#### CLI<a name="USER_CopyDBClusterSnapshot.Unencrypted.CrossRegion.CLI"></a>
+#### AWS CLI<a name="USER_CopyDBClusterSnapshot.Unencrypted.CrossRegion.CLI"></a>
 
 To copy a DB cluster snapshot, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-snapshot.html) command\. If you are copying the snapshot to another AWS Region, run the command in the AWS Region to which the snapshot will be copied\. 
 
@@ -136,7 +136,7 @@ aws rds copy-db-cluster-snapshot ^
   --copy-tags
 ```
 
-#### API<a name="USER_CopyDBClusterSnapshot.Unencrypted.CrossRegion.API"></a>
+#### RDS API<a name="USER_CopyDBClusterSnapshot.Unencrypted.CrossRegion.API"></a>
 
 To copy a DB cluster snapshot, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBClusterSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBClusterSnapshot.html) operation\. If you are copying the snapshot to another AWS Region, perform the action in the AWS Region to which the snapshot will be copied\. 
 
@@ -170,7 +170,7 @@ Use the procedures in the following sections to copy an encrypted DB cluster sna
 
 To cancel a copy operation once it is in progress, delete the target DB cluster snapshot identified by `--target-db-cluster-snapshot-identifier` or `TargetDBClusterSnapshotIdentifier` while that DB cluster snapshot is in **copying** status\.
 
-#### CLI<a name="USER_CopyDBClusterSnapshot.Encrypted.CrossRegion.CLI"></a>
+#### AWS CLI<a name="USER_CopyDBClusterSnapshot.Encrypted.CrossRegion.CLI"></a>
 
 To copy a DB cluster snapshot, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-snapshot.html) command\. If you are copying the snapshot to another AWS Region, run the command in the AWS Region to which the snapshot will be copied\. 
 
@@ -208,7 +208,7 @@ aws rds copy-db-cluster-snapshot ^
   --kms-key-id my-us-east-1-key
 ```
 
-#### API<a name="USER_CopyDBClusterSnapshot.Encrypted.CrossRegion.API"></a>
+#### RDS API<a name="USER_CopyDBClusterSnapshot.Encrypted.CrossRegion.API"></a>
 
 To copy a DB cluster snapshot, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBClusterSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBClusterSnapshot.html) operation\. If you are copying the snapshot to another AWS Region, perform the action in the AWS Region to which the snapshot will be copied\.
 

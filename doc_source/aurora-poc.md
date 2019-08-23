@@ -262,12 +262,12 @@
 
  If, after the proof of concept, you decide that your use case is not suited for Aurora, consider these other AWS services: 
 +  For purely analytic use cases, workloads benefit from a columnar storage format and other features more suitable to OLAP workloads\. AWS services that address such use cases include the following: 
-  +  [Amazon Redshift](aws.amazon.comredshift/) 
-  +  [Amazon EMR](aws.amazon.comemr/) 
-  +  [Amazon Athena](aws.amazon.comathena/) 
+  +  [Amazon Redshift](https://docs.aws.amazon.com/redshift/) 
+  +  [Amazon EMR](https://docs.aws.amazon.com/emr/) 
+  +  [Amazon Athena](https://docs.aws.amazon.com/athena/) 
 +  Many workloads benefit from a combination of Aurora with one or more of these services\. You can move data between these services by using these: 
-  +  [AWS Glue](aws.amazon.comglue/) 
-  +  [AWS DMS](aws.amazon.comdms/) 
+  +  [AWS Glue](https://docs.aws.amazon.com/glue/) 
+  +  [AWS DMS](https://docs.aws.amazon.com/dms/) 
   +  [Importing from Amazon S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.LoadFromS3.html), as described in the *Amazon Aurora User Guide * 
   +  [Exporting to Amazon S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.SaveIntoS3.html), as described in the *Amazon Aurora User Guide* 
   +  Many other popular ETL tools 
