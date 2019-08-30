@@ -34,7 +34,7 @@ You can only copy a shared DB cluster snapshot, whether encrypted or not, in the
 
 ## Handling Encryption<a name="USER_CopySnapshot.Encryption"></a>
 
-You can copy a snapshot that has been encrypted using an AWS KMS encryption key\. If you copy an encrypted snapshot, the copy of the snapshot must also be encrypted\. If you copy an encrypted snapshot within the same AWS Region, you can encrypt the copy with the same KMS encryption key as the original snapshot, or you can specify a different KMS encryption key\. If you copy an encrypted snapshot across regions, you can't use the same KMS encryption key for the copy as used for the source snapshot, because KMS keys are region\-specific\. Instead, you must specify a KMS key valid in the destination AWS Region\. 
+You can copy a snapshot that has been encrypted using an AWS KMS encryption key\. If you copy an encrypted snapshot, the copy of the snapshot must also be encrypted\. If you copy an encrypted snapshot within the same AWS Region, you can encrypt the copy with the same KMS encryption key as the original snapshot, or you can specify a different KMS encryption key\. If you copy an encrypted snapshot across regions, you can't use the same KMS encryption key for the copy as used for the source snapshot, because KMS keys are region\-specific\. Instead, you must specify a KMS key valid in the destination AWS Region\. You can't use the default AWS KMS encryption key when copying snapshots across AWS Regions, even in the same AWS account\. 
 
 **Note**  
 For Amazon Aurora DB cluster snapshots, you can't encrypt an unencrypted DB cluster snapshot when you copy the snapshot\.

@@ -15,5 +15,5 @@ Amazon RDS provides the following purchasing options to enable you to optimize y
 For Aurora pricing information, see the [Aurora pricing page](https://aws.amazon.com/rds/aurora/pricing)\.
 
 **Topics**
-+ [On\-Demand DB Instances](USER_OnDemandDBInstances.md)
-+ [Reserved DB Instances](USER_WorkingWithReservedDBInstances.md)
++ [On\-Demand DB Instances for Aurora](USER_OnDemandDBInstances.md)
++ [Reserved DB Instances for Aurora](USER_WorkingWithReservedDBInstances.md)

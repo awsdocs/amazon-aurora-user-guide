@@ -19,7 +19,7 @@ Aurora MySQL doesn't restore everything from your database\. You should save the
 + Stored procedures
 + Time zone information\. Time zone information is loaded from the local operating system of your Amazon Aurora MySQL DB cluster\. For more information, see [Local Time Zone for Amazon Aurora DB Clusters](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.LocalTimeZone)\.
 
-You can encrypt the data being migrated, or leave the data unencrypted during the migration process\.
+You can't restore from an encrypted source database, but you can encrypt the data being migrated\. You can also leave the data unencrypted during the migration process\.
 
 Also, decide whether you want to minimize downtime by using binary log replication during the migration process\. If you use binary log replication, the external MySQL database remains open to transactions while the data is being migrated to the Aurora MySQL DB cluster\. After the Aurora MySQL DB cluster has been created, you use binary log replication to synchronize the Aurora MySQL DB cluster with the transactions that happened after the backup\. When the Aurora MySQL DB cluster is caught up with the MySQL database, you finish the migration by completely switching to the Aurora MySQL DB cluster for new transactions\.
 

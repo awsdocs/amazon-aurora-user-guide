@@ -1,4 +1,4 @@
-# Reserved DB Instances<a name="USER_WorkingWithReservedDBInstances"></a>
+# Reserved DB Instances for Aurora<a name="USER_WorkingWithReservedDBInstances"></a>
 
 Using reserved DB instances, you can reserve a DB instance for a one\- or three\-year term\. Reserved DB instances provide you with a significant discount compared to on\-demand DB instance pricing\. Reserved DB instances are not physical instances, but rather a billing discount applied to the use of certain on\-demand DB instances in your account\. Discounts for reserved DB instances are tied to instance type and AWS Region\. 
 
@@ -30,6 +30,10 @@ If you are using consolidated billing, all the accounts in the organization are 
 When you purchase a reserved DB instance, one thing that you specify is the instance class, for example db\.m4\.large\. For more information about instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\. 
 
 If you have a DB instance, and you need to scale it to larger capacity, your reserved DB instance is automatically applied to your scaled DB instance\. That is, your reserved DB instances are automatically applied across all DB instance class sizes\. Size\-flexible reserved DB instances are available for DB instances with the same AWS Region and database engine\. Size\-flexible reserved DB instances can only scale in their instance class type\. For example, a reserved DB instance for a db\.m4\.large can apply to a db\.m4\.xlarge, but not to a db\.m5\.large, because db\.m4 and db\.m5 are different instance class types\. Reserved DB instance benefits also apply for both Multi\-AZ and Single\-AZ configurations\.
+
+Size\-flexible reserved DB instances are available for the following Aurora database engines:
++ Aurora MySQL
++ Aurora PostgreSQL
 
 You can compare usage for different reserved DB instance sizes by using normalized units\. For example, one unit of usage on two db\.m3\.large DB instances is equivalent to eight normalized units of usage on one db\.m3\.small\. The following table shows the number of normalized units for each DB instance size\. 
 
