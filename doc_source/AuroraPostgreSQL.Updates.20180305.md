@@ -27,9 +27,26 @@ The following Aurora PostgreSQL versions are supported\.
 This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.7\. For more information about the improvements in release 10\.7, see [PostgreSQL Release 10\.7](https://www.postgresql.org/docs/10/release-10-7.html)\.
 
 **Topics**
++ [Version 2\.3\.5](#AuroraPostgreSQL.Updates.20180305.235)
 + [Version 2\.3\.3](#AuroraPostgreSQL.Updates.20180305.233)
 + [Version 2\.3\.1](#AuroraPostgreSQL.Updates.20180305.231)
 + [Version 2\.3\.0](#AuroraPostgreSQL.Updates.20180305.230)
+
+### Version 2\.3\.5<a name="AuroraPostgreSQL.Updates.20180305.235"></a>
+
+You can find the following improvements in this engine update\.
+
+**Improvements**
+
+1. Fixed a bug that could cause DB instance restarts\.
+
+1. Fixed a bug that could cause a crash when a backend exits while using logical replication\.
+
+1. Fixed a bug that could cause a restart when reads occurred during failovers\.
+
+1. Fixed a bug with the `wal2json` plugin for logical replication\.
+
+1. Fixed a bug that could result in inconsistent metadata\.
 
 ### Version 2\.3\.3<a name="AuroraPostgreSQL.Updates.20180305.233"></a>
 
@@ -276,9 +293,22 @@ You can find the following improvements in this engine update\.
 This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.12\. For more information about the improvements in release 9\.6\.12, see [PostgreSQL Release 9\.6\.12](https://www.postgresql.org/docs/9.6/release-9-6-12.html)\.
 
 **Topics**
++ [Version 1\.5\.3](#AuroraPostgreSQL.Updates.20180305.153)
 + [Version 1\.5\.2](#AuroraPostgreSQL.Updates.20180305.152)
 + [Version 1\.5\.1](#AuroraPostgreSQL.Updates.20180305.151)
 + [Version 1\.5\.0](#AuroraPostgreSQL.Updates.20180305.150)
+
+### Version 1\.5\.3<a name="AuroraPostgreSQL.Updates.20180305.153"></a>
+
+You can find the following improvements in this engine update\.
+
+**Improvements**
+
+1. Fixed a bug that could cause DB instance restarts\.
+
+1. Fixed a bug that could cause a restart when reads occurred during failovers\. 
+
+1. Fixed a bug that could result in inconsistent metadata\.
 
 ### Version 1\.5\.2<a name="AuroraPostgreSQL.Updates.20180305.152"></a>
 

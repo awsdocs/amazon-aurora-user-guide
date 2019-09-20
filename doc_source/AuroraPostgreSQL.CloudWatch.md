@@ -4,6 +4,7 @@ You can configure your Aurora PostgreSQL DB cluster to publish log data to a log
 
 **Note**  
 Be aware of the following:  
+Aurora PostgreSQL supports publishing logs to CloudWatch Logs for versions 9\.6\.12 and above and versions 10\.7 and above\. 
 You can't publish logs to CloudWatch Logs for the China \(Ningxia\) region\.
 If exporting log data is disabled, Aurora doesn't delete existing log groups or log streams\. If exporting log data is disabled, existing log data remains available in CloudWatch Logs, depending on log retention, and you still incur charges for stored audit log data\. You can delete log streams and log groups using the CloudWatch Logs console, the AWS CLI, or the CloudWatch Logs API\.
 An alternative way to publish audit logs to CloudWatch Logs is by enabling advanced auditing and setting the cluster\-level DB parameter `server_audit_logs_upload` to `1`\. The default for the `server_audit_logs_upload` parameter is `0`\.  

@@ -53,6 +53,11 @@ For this example, **Easy Create** is enabled\. For information about creating an
 
    To enter your master password, clear the **Auto generate a password** check box, and then enter the same password in **Master password** and **Confirm password**\.
 
+1. \(Optional\) Open **View default settings for Easy create**\.  
+![\[Easy Create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-view-default-settings.png)
+
+   You can examine the default settings used when **Easy Create** is enabled\. If you want to change one or more settings during database creation, choose **Standard Create** to set them\. The **Editable after database creation** column shows which options can be changed after database creation\. To change a setting with **No** in that column, use **Standard Create**\. For settings with **Yes** in that column, you can either use **Standard Create**, or you can modify the DB instance after it is created to change the setting\.
+
 1. Choose **Create database**\.
 
    If you chose to use an automatically generated password, the **View credential details** button appears on the **Databases** page\.

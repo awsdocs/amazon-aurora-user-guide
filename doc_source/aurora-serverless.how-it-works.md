@@ -74,7 +74,6 @@ For information about changing the capacity, see [Modifying an Aurora Serverless
   + The `ApplyImmediately` parameter in the RDS API operation [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html)
 + When modifying parameters, Aurora Serverless ignores the `ApplyMethod` value in the parameter list in the AWS CLI commands [modify\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) and [reset\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/reset-db-cluster-parameter-group.html)\.
 + When modifying parameters, Aurora Serverless ignores the `ApplyMethod` value in the parameter list in the RDS API operations [ModifyDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterParameterGroup.html) and [ResetDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ResetDBClusterParameterGroup.html)\.
-+ Aurora Serverless ignores the DB cluster parameter group status of **pending\-reboot**\. 
 
 To apply a change to a DB cluster parameter group, Aurora Serverless starts a seamless scale with the current capacity if the DB cluster is active\. It resumes the DB cluster if it's paused\.
 

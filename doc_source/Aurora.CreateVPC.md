@@ -45,16 +45,16 @@ All VPC and EC2 resources that you use with your Aurora DB cluster must be in on
 
 1. Set the following values in the **Create Subnet** panel:
    + **Name tag:** `gs-subnet2`
-   + **VPC:** Select the VPC that you created in the previous step, for example: `vpc-a464d1c1 (10.0.0.0/16) | gs-cluster-vpc`\.
+   + **VPC:** Choose the VPC that you created in the previous step, for example: `vpc-a464d1c1 (10.0.0.0/16) | gs-cluster-vpc`\.
    + **Availability Zone:** `us-east-1c`
    + **CIDR block:** `10.0.1.0/24`  
 ![\[Create a Subnet\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraCreateVPC03.png)
 
 1. Choose **Yes Create**\.
 
-1. To ensure that the second subnet that you created uses the same route table as the first subnet, in the VPC Dashboard, choose **Subnets**, and then select the first subnet that was created for the VPC, `gs-subnet1`\. Choose the **Route Table** tab, and note the **Current Route Table**, for example: `rtb-c16ce5bc`\. 
+1. To ensure that the second subnet that you created uses the same route table as the first subnet, in the VPC Dashboard, choose **Subnets**, and then choose the first subnet that was created for the VPC, `gs-subnet1`\. Choose the **Route Table** tab, and note the **Current Route Table**, for example: `rtb-c16ce5bc`\. 
 
-1. In the list of subnets, deselect the first subnet and select the second subnet, `gs-subnet2`\. Select the **Route Table** tab, and then choose **Edit**\. In the **Change to** list, select the route table from the previous step, for example: `rtb-c16ce5bc`\. Choose **Save** to save your selection\.  
+1. In the list of subnets, clear the first subnet and choose the second subnet, `gs-subnet2`\. Choose the **Route Table** tab, and then choose **Edit**\. In the **Change to** list, choose the route table from the previous step, for example: `rtb-c16ce5bc`\. Choose **Save** to save your choice\.  
 ![\[Edit the route table for a subnet\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraCreateVPC04.png)
 
 ## Create a Security Group and Add Inbound Rules<a name="CHAP_GettingStarted.Aurora.CreateSecurityGroup"></a>
@@ -71,7 +71,7 @@ The last step in creating a VPC for use with your Amazon Aurora DB cluster is to
    + **Name tag:** `gs-securitygroup1`
    + **Group name:** `gs-securitygroup1`
    + **Description:** `Getting Started Security Group`
-   + **VPC:** Select the VPC that you created earlier, for example: `vpc-b5754bcd | gs-cluster-vpc`\.  
+   + **VPC:** Choose the VPC that you created earlier, for example: `vpc-b5754bcd | gs-cluster-vpc`\.  
 ![\[Create a Security Group\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraCreateVPC05.png)
 
 1. Choose **Yes, Create** to create the security group\.
@@ -84,9 +84,9 @@ To connect to your Aurora DB cluster, you need to add an inbound rule to your VP
 **Warning**  
 If you use `0.0.0.0/0`, you enable all IP addresses to access your DB cluster\. This is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, you'll authorize only a specific IP address or range of addresses to access your DB cluster\.
 
-1. In the VPC Dashboard, choose **Security Groups**, and then select the `gs-securitygroup1` security group that you created in the previous procedure\.
+1. In the VPC Dashboard, choose **Security Groups**, and then choose the `gs-securitygroup1` security group that you created in the previous procedure\.
 
-1. Select the **Inbound Rules** tab, and then choose the **Edit** button\.
+1. Choose the **Inbound** tab, and then choose the **Edit** button\.
 
 1. Set the following values for your new inbound rule:
    + **Type:** `All Traffic`
@@ -103,14 +103,14 @@ The last thing that you need before you can create an Aurora DB cluster is a DB 
 
 1. Open the Amazon Aurora console at [https://console\.aws\.amazon\.com/rds](https://console.aws.amazon.com/rds)\.
 
-1. Select **Subnet Groups**, and then choose **Create DB Subnet Group**\.
+1. Choose **Subnet Groups**, and then choose **Create DB Subnet Group**\.
 
 1. Set the following values for your new DB subnet group:
    + **Name:** `gs-subnetgroup1`
    + **Description:** `Getting Started Subnet Group`
-   + **VPC ID:** Select the VPC that you created in the previous procedure, for example, `gs-cluster-vpc (vpc-b5754bcd)`\.
+   + **VPC ID:** Choose the VPC that you created in the previous procedure, for example, `gs-cluster-vpc (vpc-b5754bcd)`\.
 
-1. Choose **Add all the subnets related to this VPC** to add the subnets for the VPC that you created in earlier steps\. You can also add each subnet individually by selecting the **Availability zone** and the **Subnet** and clicking **Add subnet**\.  
+1. Choose **Add all the subnets related to this VPC** to add the subnets for the VPC that you created in earlier steps\. You can also add each subnet individually by choosine a value for **Availability zone** and **Subnet** and then choosing **Add subnet**\.  
 ![\[Create Subnet Group\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraCreateSubnetGroup01.png)
 
 1. Choose **Create** to create the subnet group\.

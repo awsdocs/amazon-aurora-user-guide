@@ -72,8 +72,7 @@ For Linux, OS X, or Unix:
 ```
 aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 5.6.10a \
 --engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true \
---master-username user-name --master-user-password password \
---db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
+--master-username username --master-user-password password
 ```
 
 For Windows:
@@ -81,30 +80,27 @@ For Windows:
 ```
 aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 5.6.10a ^
 --engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true ^
---master-username user-name --master-user-password password ^
---db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
+--master-username username --master-user-password password
 ```
 
 ### Example for Aurora PostgreSQL<a name="aurora-serverless.create.cli.PostgreSQL"></a>
 
-The following command creates a new PostgreSQL compatible Serverless DB cluster\. The valid `--engine-version` value is 2\.3, which is compatible with PostgreSQL version 10\.7\. Valid capacity values for Aurora PostgreSQL are `8`, `16`, `32`, `64`, `192`, and `384`\.
+The following command creates a new PostgreSQL 10\.7–compatible Serverless DB cluster\. Valid capacity values for Aurora PostgreSQL are `8`, `16`, `32`, `64`, `192`, and `384`\.
 
 For Linux, OS X, or Unix:
 
 ```
-aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 2.3 \
+aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-postgresql --engine-version 10.7 \
 --engine-mode serverless --scaling-configuration MinCapacity=8,MaxCapacity=64,SecondsUntilAutoPause=1000,AutoPause=true \
---master-username user-name --master-user-password password \
---db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
+--master-username username --master-user-password password
 ```
 
 For Windows:
 
 ```
-aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 2.3 ^
+aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-postgresql --engine-version 10.7 ^
 --engine-mode serverless --scaling-configuration MinCapacity=8,MaxCapacity=64,SecondsUntilAutoPause=1000,AutoPause=true ^
---master-username user-name --master-user-password password ^
---db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
+--master-username username --master-user-password password
 ```
 
 ## RDS API<a name="aurora-serverless.create.api"></a>

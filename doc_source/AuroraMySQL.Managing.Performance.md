@@ -22,6 +22,11 @@ You can scale your Aurora MySQL DB cluster by modifying the DB instance class fo
 |  db\.r4\.4xlarge  |  16  | 53 | 122 | 
 |  db\.r4\.8xlarge  |  32  | 99 | 244 | 
 |  db\.r4\.16xlarge  |  64  | 195 | 488 | 
+|  db\.r5\.large  |  2  | 10 | 16 | 
+|  db\.r5\.xlarge  |  4  | 19 | 32 | 
+|  db\.r5\.2xlarge  |  8  | 38 | 64 | 
+|  db\.r5\.4xlarge  |  16  | 71 | 128 | 
+|  db\.r5\.12xlarge  |  48  | 173 | 384 | 
 
 ## Maximum Connections to an Aurora MySQL DB Instance<a name="AuroraMySQL.Managing.MaxConnections"></a>
 
@@ -45,5 +50,10 @@ The following table lists the resulting default value of `max_connections` for e
 |  db\.r4\.4xlarge  |  4000  | 
 |  db\.r4\.8xlarge  |  5000  | 
 |  db\.r4\.16xlarge  |  6000  | 
+|  db\.r5\.large  |  1000  | 
+|  db\.r5\.xlarge  |  2000  | 
+|  db\.r5\.2xlarge  |  3000  | 
+|  db\.r5\.4xlarge  |  4000  | 
+|  db\.r5\.12xlarge  |  6000  | 
 
-If you create a new parameter group to customize your own default for the connection limit, you'll see that the default connection limit is derived using a formula based on the `DBInstanceClassMemory` value\. As shown in the preceding table, the formula produces connection limits that increase by 1000 as the memory doubles between progressively larger R3 and R4 instances, and by 45 for different memory sizes of T2 instances\. The much lower connectivity limits for T2 instances are because T2 instances are intended only for development and test scenarios, not for production workloads\. The default connection limits are tuned for systems that use the default values for other major memory consumers, such as the buffer pool and query cache\. If you change those other settings for your cluster, consider adjusting the connection limit to account for the increase or decrease in available memory on the DB instances\.
+If you create a new parameter group to customize your own default for the connection limit, you'll see that the default connection limit is derived using a formula based on the `DBInstanceClassMemory` value\. As shown in the preceding table, the formula produces connection limits that increase by 1000 as the memory doubles between progressively larger R3, R4, and R5 instances, and by 45 for different memory sizes of T2 instances\. The much lower connectivity limits for T2 instances are because T2 instances are intended only for development and test scenarios, not for production workloads\. The default connection limits are tuned for systems that use the default values for other major memory consumers, such as the buffer pool and query cache\. If you change those other settings for your cluster, consider adjusting the connection limit to account for the increase or decrease in available memory on the DB instances\.

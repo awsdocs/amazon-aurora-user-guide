@@ -308,6 +308,9 @@ aws rds promote-read-replica-db-cluster ^
 
 You can import data from Amazon S3 into a table belonging to an Aurora PostgreSQL DB cluster\. To do this, you use the `aws_s3` PostgreSQL extension that Aurora PostgreSQL provides\. 
 
+**Note**  
+To import from Amazon S3 into Aurora PostgreSQL, your database must be running PostgreSQL version 10\.7 or later\. 
+
 For more information on storing data with Amazon S3, see [Create a Bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\. For instructions on how to upload a file to an Amazon S3 bucket, see [Add an Object to a Bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\.
 
 **Topics**

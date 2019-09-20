@@ -10,7 +10,7 @@ If you have any questions or concerns, AWS Support is available on the community
 
 ## Zero\-Downtime Patching<a name="AuroraMySQL.Updates.20171211.ZDP"></a>
 
-The zero\-downtime patching \(ZDP\) attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-Downtime Patching](AuroraMySQL.Updates.md#AuroraMySQL.Updates.ZDP)\. 
+The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-Downtime Patching](AuroraMySQL.Updates.md#AuroraMySQL.Updates.ZDP)\. 
 
 ## New Features<a name="AuroraMySQL.Updates.20171211.New"></a>
 + Aurora MySQL now supports synchronous AWS Lambda invocations via the native function `lambda_sync()`\. Also available is native function `lambda_async()`, which can be used as an alternative to the existing stored procedure for asynchronous Lambda invocation\. For more information, see [Invoking a Lambda Function from an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Lambda.md)\.

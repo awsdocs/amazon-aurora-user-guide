@@ -17,7 +17,9 @@ Use the following sections to help troubleshoot problems you have with DB instan
 ## Cannot Connect to Amazon RDS DB Instance<a name="CHAP_Troubleshooting.Connecting"></a>
 
 When you cannot connect to a DB instance, the following are common causes:
-+ The access rules enforced by your local firewall and the ingress IP addresses that you authorized to access your DB instance in the instance's security group are not in sync\. The problem is most likely the ingress rules in your security group\. By default, DB instances do not allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. If necessary, add rules to the security group associated with the VPC that allow traffic related to the source in and out of the DB instance\. You can specify an IP address, a range of IP addresses, or another VPC security group\.
++ The access rules enforced by your local firewall and the ingress IP addresses that you authorized to access your DB instance in the instance's security group aren't in sync\. The problem is most likely the ingress rules in your security group\.
+
+  By default, DB instances don't allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. If necessary, add rules to the security group associated with the VPC that allow traffic related to the source in and out of the DB instance\. You can specify an IP address, a range of IP addresses, or another VPC security group\.
 
   For more information about setting up a security group, see [Provide Access to the DB Cluster in the VPC by Creating a Security Group](CHAP_SettingUp_Aurora.md#CHAP_SettingUp_Aurora.SecurityGroup)\.
 + The port you specified when you created the DB instance cannot be used to send or receive communications due to your local firewall restrictions\. In this case, check with your network administrator to determine if your network allows the specified port to be used for inbound and outbound communication\.

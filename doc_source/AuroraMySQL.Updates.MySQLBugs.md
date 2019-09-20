@@ -13,6 +13,7 @@ MySQL 5\.7\-compatible version Aurora contains all MySQL bug fixes through MySQL
 
 | Database engine update | Version | MySQL bugs fixed | 
 | --- | --- | --- | 
+| [Aurora MySQL Database Engine Updates 2019\-09\-19 \(Version 2\.04\.6\)](AuroraMySQL.Updates.2046.md) |  2\.04\.6  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL Database Engine Updates 2018\-10\-11](AuroraMySQL.Updates.203.md) |  2\.03  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL Database Engine Updates 2018\-05\-03](AuroraMySQL.Updates.202.md) |  2\.02  |  Left join returns incorrect results on the outer side \(Bug \#22833364\)  | 
 | [Aurora MySQL Database Engine Updates 2019\-05\-02 \(Version 2\.04\.2\)](AuroraMySQL.Updates.2042.md) |  2\.04\.2  |  Bug \#24829050 \- INDEX\_MERGE\_INTERSECTION OPTIMIZATION CAUSES WRONG QUERY RESULTS  | 
@@ -46,3 +47,4 @@ MySQL 5\.6\-compatible version Aurora contains all MySQL bug fixes through MySQL
 | [Aurora MySQL Database Engine Updates 2018\-10\-08](AuroraMySQL.Updates.1177.md) | 1\.17\.7 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL Database Engine Updates 2019\-01\-17](AuroraMySQL.Updates.1178.md) | 1\.17\.8 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL Database Engine Updates 2019\-02\-07](AuroraMySQL.Updates.1190.md) | 1\.19\.0 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
+| [Aurora MySQL Database Engine Updates 2019\-09\-19](AuroraMySQL.Updates.1195.md) | 1\.19\.5 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 

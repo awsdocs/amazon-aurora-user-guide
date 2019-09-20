@@ -10,7 +10,7 @@ If you have any questions or concerns, AWS Support is available on the community
 
 ## Zero\-Downtime Patching<a name="AuroraMySQL.Updates.20171024.ZDP"></a>
 
-The zero\-downtime patching \(ZDP\) attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-Downtime Patching](AuroraMySQL.Updates.md#AuroraMySQL.Updates.ZDP)\. 
+The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-Downtime Patching](AuroraMySQL.Updates.md#AuroraMySQL.Updates.ZDP)\. 
 
 ## New Features<a name="AuroraMySQL.Updates.20171024.New"></a>
 + **Asynchronous Key Prefetch** – Asynchronous key prefetch \(AKP\) is a feature targeted to improve the performance of non\-cached index joins, by prefetching keys in memory ahead of when they are needed\. The primary use case targeted by AKP is an index join between a small outer and large inner table, where the index is highly selective on the larger table\. Also, when the Multi\-Range Read \(MRR\) interface is enabled, AKP will be leveraged for a secondary to primary index lookup\. Smaller instances which have memory constraints might in some cases be able to leverage AKP, given the right key cardinality\. For more information, see [Working with Asynchronous Key Prefetch in Amazon Aurora](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.

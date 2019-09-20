@@ -2,7 +2,7 @@
 
 Amazon Virtual Private Cloud \(Amazon VPC\) enables you to launch AWS resources, such as Aurora DB clusters, into a virtual private cloud \(VPC\)\. 
 
-When you use an Amazon VPC, you have control over your virtual networking environment: you can select your own IP address range, create subnets, and configure routing and access control lists\. There is no additional cost to run your DB instance in an Amazon VPC\. 
+When you use an Amazon VPC, you have control over your virtual networking environment: you can choose your own IP address range, create subnets, and configure routing and access control lists\. There is no additional cost to run your DB instance in an Amazon VPC\. 
 
 ![\[VPC platform\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/GS-VPC network.png)
 

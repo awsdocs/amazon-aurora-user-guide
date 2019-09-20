@@ -131,4 +131,4 @@ The following tables list the OS metrics available using Amazon CloudWatch Logs\
 
 #### Metrics for Aurora<a name="w5aac21c30c21b7b5"></a>
 
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Monitoring.OS.html)
+<a name="cloudwatch-os-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Monitoring.OS.html)

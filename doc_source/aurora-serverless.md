@@ -119,4 +119,4 @@ You can access an Aurora Serverless DB cluster from AWS Lambda\. For more inform
 
 When using a `mysql` or `psql` client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in \.pem format\. For a \.pem file that you can use, download the [Amazon Root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) from Amazon Trust Services\. 
 
- Aurora Serverless uses wildcard certificates\. If you use the `mysql` client to connect, currently you must use the MySQL 8\.0\-compatible `mysql` command\. 
+ Aurora Serverless uses wildcard certificates\. If you use the `mysql` client to connect with SSL mode `VERIFY_IDENTITY`, currently you must use the MySQL 8\.0\-compatible `mysql` command\. 

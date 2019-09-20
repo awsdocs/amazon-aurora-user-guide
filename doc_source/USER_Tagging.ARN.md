@@ -46,7 +46,7 @@ To get an ARN from the AWS CLI for a particular RDS resource, you use the `descr
 
 
 ****  
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html)
+<a name="cli-command-arn-property"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html)
 
 For example, the following AWS CLI command gets the ARN for a DB instance\.
 
@@ -72,4 +72,4 @@ To get an ARN for a particular RDS resource, you can call the following RDS API 
 
 
 ****  
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html)
+<a name="rds-operation-arn-property"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html)

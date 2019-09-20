@@ -55,7 +55,7 @@ Use the following procedures to create a cross\-region Read Replica from an Auro
 1. Choose the check box for the DB instance that you want to create a cross\-region Read Replica for\. For **Actions**, choose **Create cross region read replica**\.
 
 1. On the **Create cross region read replica** page, choose the option settings for your cross\-region Read Replica DB cluster, as described in the following table\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.CrossRegion.html)
+<a name="cross-region-read-replica-settings"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.CrossRegion.html)
 
 1. Choose **Create** to create your cross\-region Read Replica for Aurora\.
 

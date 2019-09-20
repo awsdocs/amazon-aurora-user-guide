@@ -68,7 +68,7 @@ Rebooting the primary instance of an Amazon Aurora DB cluster also automatically
 
  Starting in Aurora MySQL 1\.17\.4, the following feature helps to ensure high availability even during these intervals when replicas are restarted\. 
 
- The "zero\-downtime restart" feature preserves existing connections when an Aurora MySQL Replica is restarted, for example if the replica falls too far behind the master\. Any open transaction is rolled back, and your application must retry it\. To enable this feature, turn on the `aurora_enable_zdr` parameter in the cluster parameter group\. This parameter is off by default\. 
+ The *zero\-downtime restart* \(ZDR\) feature preserves existing connections when an Aurora MySQL Replica is restarted, for example if the replica falls too far behind the master\. Any open transaction is rolled back, and your application must retry it\. To enable this feature, turn on the `aurora_enable_zdr` parameter in the cluster parameter group\. This parameter is off by default\. 
 
 ## Monitoring Amazon Aurora MySQL Replication<a name="AuroraMySQL.Replication.Monitoring"></a>
 

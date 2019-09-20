@@ -61,14 +61,16 @@ For Linux, OS X, or Unix:
 ```
 1. aws rds restore-db-cluster-from-snapshot \
 2.     --db-cluster-identifier mynewdbcluster \
-3.     --snapshot-identifier mydbclustersnapshot
+3.     --snapshot-identifier mydbclustersnapshot \
+4.     --engine aurora|aurora-postgresql
 ```
 For Windows:  
 
 ```
 1. aws rds restore-db-cluster-from-snapshot ^
 2.     --db-instance-identifier mynewdbcluster ^
-3.     --db-snapshot-identifier mydbclustersnapshot
+3.     --snapshot-identifier mydbclustersnapshot ^
+4.     --engine aurora|aurora-postgresql
 ```
 
 After the DB cluster has been restored, you must add the DB cluster to the security group used by the DB cluster used to create the DB cluster snapshot if you want the same functionality as that of the previous DB cluster\.
