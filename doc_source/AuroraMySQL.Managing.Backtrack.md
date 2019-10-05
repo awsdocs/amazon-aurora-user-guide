@@ -31,7 +31,7 @@ Aurora always backtracks to a time that is consistent for the DB cluster\. Doing
 ### Backtrack Limitations<a name="AuroraMySQL.Managing.Backtrack.Limitations"></a>
 
 The following limitations apply to backtracking:
-+ Backtracking is only available on DB clusters that were created with the Backtrack feature enabled\. You can enable the Backtrack feature when you create a new DB cluster, restore a snapshot of a DB cluster, or clone a DB cluster\. Currently, backtracking is not possible on DB clusters that were created with the Backtrack feature disabled\.
++ Backtracking is only available on DB clusters that were created with the Backtrack feature enabled\. You can enable the Backtrack feature when you create a new DB cluster or restore a snapshot of a DB cluster\. For DB clusters that were created with the Backtrack feature enabled, you can create a clone DB cluster with the Backtrack feature enabled\. Currently, backtracking is not possible on DB clusters that were created with the Backtrack feature disabled\.
 + The limit for a backtrack window is 72 hours\.
 + Backtracking affects the entire DB cluster\. For example, you can't selectively backtrack a single table or a single data update\.
 + Backtracking is not supported with binary log \(binlog\) replication\. Cross\-region replication must be disabled before you can configure or use backtracking\.

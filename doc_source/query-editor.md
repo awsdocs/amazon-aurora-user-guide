@@ -2,9 +2,6 @@
 
 With the query editor for Aurora Serverless, you can run SQL queries in the RDS console\. You can run any valid SQL statement on the Aurora Serverless DB cluster, including data manipulation and data definition statements\.
 
-**Note**  
-The query editor is currently only available for Aurora MySQL and not for Aurora PostgreSQL\.
-
 The query editor requires an Aurora Serverless DB cluster with the Data API enabled\. For information about creating an Aurora Serverless DB cluster with the Data API enabled, see [Using the Data API for Aurora Serverless](data-api.md)\.
 
 ## Authorizing Access to the Query Editor<a name="query-editor.access"></a>

@@ -15,7 +15,7 @@ You can restore a DB cluster to a point in time using the AWS Management Console
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Choose the  primary instance of the DB cluster that you want to restore\.
+1. Choose the DB cluster that you want to restore\.
 
 1. For **Actions**, choose **Restore to point in time**\.
 

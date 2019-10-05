@@ -367,7 +367,7 @@ aws rds --region secondary_region ^
 
 ### RDS API<a name="aurora-global-database-attach.api"></a>
 
- To add a new AWS Region to an Aurora global database with the RDS API, run the [CreateGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateGlobalCluster.html) operation\. 
+ To add a new AWS Region to an Aurora global database with the RDS API, run the [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) operation\. Specify the identifier of the existing global database using the `GlobalClusterIdentifier` parameter\. 
 
 ## Removing a Cluster from an Aurora Global Database<a name="aurora-global-database-detaching"></a>
 

@@ -65,7 +65,6 @@ For example, the following IAM policy grants a user the minimum required permiss
                 "iam:CreatePolicy",
                 "iam:AttachRolePolicy",
                 "s3:ListBucket",
-                "s3:ListObjects"
                 "kms:ListKeys"
             ],
             "Resource": "*"

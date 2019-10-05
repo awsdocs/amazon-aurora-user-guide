@@ -14,7 +14,7 @@ You can manage access to your Amazon Aurora resources and your databases on a DB
 
    For information on setting up an IAM user, see [Create an IAM User](CHAP_SettingUp_Aurora.md#CHAP_SettingUp_Aurora.IAM)\.
 + Use security groups to control what IP addresses or Amazon EC2 instances can connect to your databases on a DB cluster\. When you first create a DB cluster, its firewall prevents any database access except through rules specified by an associated security group\. 
-+ Use Secure Socket Layer \(SSL\) connections with DB clusters running the Aurora MySQL or Aurora PostgreSQL\. For more information on using SSL with a DB cluster, see [Using SSL to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\.
++ Use Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\) connections with DB clusters running the Aurora MySQL or Aurora PostgreSQL\. For more information on using SSL/TLS with a DB cluster, see [Using SSL/TLS to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\.
 + Use Amazon Aurora encryption to secure your DB clusters and snapshots at rest\. Amazon Aurora encryption uses the industry standard AES\-256 encryption algorithm to encrypt your data on the server that hosts your DB cluster\. For more information, see [Encrypting Amazon Aurora Resources](Overview.Encryption.md)\.
 + Use the security features of your DB engine to control who can log in to the databases on a DB cluster\. These features work just as if the database was on your local network\. 
 

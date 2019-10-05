@@ -2,10 +2,7 @@
 
 You can access your Aurora Serverless DB cluster using the built\-in Data API\. Using this API, you can access Aurora Serverless with web services–based applications, including AWS Lambda, AWS AppSync, and AWS Cloud9\. For more information on these applications, see details at [AWS Lambda](https://aws.amazon.com/lambda/), [AWS AppSync](https://aws.amazon.com/appsync/), and [AWS Cloud9](https://aws.amazon.com/cloud9/)\. 
 
-**Note**  
-The Data API is currently only available for Aurora MySQL and not for Aurora PostgreSQL\.
-
-The Data API doesn't require a persistent connection to the DB cluster\. Instead, it provides a secure HTTP endpoint and integration with AWS SDKs\. You can use the endpoint to run SQL statements without managing connections\. All calls to the Data API are synchronous\. By default, a call times out and is terminated in one minute if it's not finished processing\. You can use the `continueAfterTimeout` parameter to continue running the SQL statement after the call times out\.
+The Data API doesn't require a persistent connection to the DB cluster\. Instead, it provides a secure HTTP endpoint and integration with AWS SDKs\. You can use the endpoint to run SQL statements without managing connections\. All calls to the Data API are synchronous\. By default, a call times out and is terminated in 45 seconds if it's not finished processing\. You can use the `continueAfterTimeout` parameter to continue running the SQL statement after the call times out\.
 
 The API uses database credentials stored in AWS Secrets Manager, so you don't need to pass credentials in the API calls\. The API also provides a more secure way to use AWS Lambda\. It enables you to access your DB cluster without your needing to configure a Lambda function to access resources in a virtual private cloud \(VPC\)\. For more information about AWS Secrets Manager, see [What Is AWS Secrets Manager?](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the *AWS Secrets Manager User Guide*\.
 
@@ -14,7 +11,9 @@ When you enable the Data API, you can also use the query editor for Aurora Serve
 
 ## Availability of the Data API<a name="data-api.regions"></a>
 
-The Data API is only available for Aurora Serverless DB clusters with MySQL 5\.6 compatibility\.
+The Data API is only available for the following Aurora Serverless DB clusters:
++ Aurora with MySQL version 5\.6 compatibility
++ Aurora with PostgreSQL version 10\.7 compatibility
 
 The following table shows the AWS Regions where the Data API is currently available for Aurora Serverless\. Use the HTTPS protocol to access the Data API in these AWS Regions\.
 
@@ -182,7 +181,7 @@ You can use parameters in Data API calls to `ExecuteStatement` and `BatchExecute
 | --- | --- | 
 |  `INTEGER, TINYINT, SMALLINT, BIGINT`  |  `LONG`  | 
 |  `FLOAT, REAL, DOUBLE`  |  `DOUBLE`  | 
-|  `DECIMAL`  |  `LONG` if the scale is 0, `DOUBLE` otherwise  | 
+|  `DECIMAL`  |  `STRING`  | 
 |  `BOOLEAN, BIT`  |  `BOOLEAN`  | 
 |  `BLOB, BINARY, LONGVARBINARY, VARBINARY`  |  `BLOB`  | 
 |  `CLOB`  |  `STRING`  | 
@@ -219,7 +218,6 @@ The AWS CLI can format responses in JSON\.
 You can start a SQL transaction using the `aws rds-data begin-transaction` CLI command\. The call returns a transaction identifier\.
 
 **Important**  
-A transaction can run for a maximum of 24 hours\. A transaction is terminated and rolled back automatically after 24 hours\.  
 A transaction times out if there are no calls that use its transaction ID in three minutes\. If a transaction times out before it's committed, it's rolled back automatically\.  
 DDL statements inside a transaction cause an implicit commit\. We recommend that you run each DDL statement in a separate `execute-statement` command with the `--continue-after-timeout` option\.
 
@@ -407,6 +405,9 @@ The following is an example of the response\.
     "numberOfRecordsUpdated": 0
 }
 ```
+
+**Note**  
+The `generatedFields` data isn't supported by Aurora PostgreSQL\. To get the values of generated fields, use the `RETURNING` clause\. For more information, see [ Returning Data From Modified Rows](https://www.postgresql.org/docs/10/dml-returning.html) in the PostgreSQL documentation\.
 
 #### Running a Batch SQL Statement Over an Array of Data<a name="data-api.calling.cli.batch-execute-statement"></a>
 
@@ -646,7 +647,6 @@ response2['numberOfRecordsUpdated']
 You can start a SQL transaction, run one or more SQL statements, and then commit the changes with a Python application\.
 
 **Important**  
-A transaction can run for a maximum of 24 hours\. A transaction is terminated and rolled back automatically after 24 hours\.  
 A transaction times out if there are no calls that use its transaction ID in three minutes\. If a transaction times out before it's committed, it's rolled back automatically\.  
 If you don't specify a transaction ID, changes that result from the call are committed automatically\.
 
@@ -747,7 +747,6 @@ public class FetchResultsExample {
 You can start a SQL transaction, run one or more SQL statements, and then commit the changes with a Java application\.
 
 **Important**  
-A transaction can run for a maximum of 24 hours\. A transaction is terminated and rolled back automatically after 24 hours\.  
 A transaction times out if there are no calls that use its transaction ID in three minutes\. If a transaction times out before it's committed, it's rolled back automatically\.  
 If you don't specify a transaction ID, changes that result from the call are committed automatically\.
 

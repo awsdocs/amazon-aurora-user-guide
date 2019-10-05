@@ -40,7 +40,7 @@ In some cases, Amazon Aurora can lose access to the encryption key for a DB clus
 
 ## Availability of Amazon Aurora Encryption<a name="Overview.Encryption.Availability"></a>
 
-Amazon Aurora encryption is currently available for all database engines and storage types\. Amazon Aurora encryption is not currently available in the China \(Beijing\) Region\.
+Amazon Aurora encryption is currently available for all database engines and storage types\.
 
 **Note**  
 Amazon Aurora encryption is not available for the db\.t2\.micro DB instance class\.

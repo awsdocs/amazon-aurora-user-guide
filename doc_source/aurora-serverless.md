@@ -62,7 +62,7 @@ With Aurora Serverless, you don't have to individually manage database capacity 
 The following limitations apply to Aurora Serverless:
 + Aurora Serverless is only available for the following: 
   + Aurora with MySQL version 5\.6 compatibility
-  + Aurora with PostgreSQL version 10\.7 compatibility\.
+  + Aurora with PostgreSQL version 10\.7 compatibility
 + The port number for connections must be:
   + `3306` for Aurora MySQL
   + `5432` for Aurora PostgreSQL
@@ -81,7 +81,6 @@ The following limitations apply to Aurora Serverless:
   + [Database cloning](Aurora.Managing.Clone.md)
   + [IAM database authentication](UsingWithRDS.IAMDBAuth.md)
   + [Restoring a snapshot from a MySQL DB instance](AuroraMySQL.Migrating.RDSMySQL.md)
-  + [Migrating backup files from Amazon S3](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)
   + [Amazon RDS Performance Insights](USER_PerfInsights.md)
 
 **Note**  

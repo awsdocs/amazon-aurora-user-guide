@@ -8,14 +8,14 @@ Security for Amazon Aurora MySQL is managed at three levels:
 
   The supported VPC tenancy depends on the instance class used by your Aurora MySQL DB clusters\. With `default` VPC tenancy, the VPC runs on shared hardware\. With `dedicated` VPC tenancy, the VPC runs on a dedicated hardware instance\. Aurora MySQL supports the following VPC tenancy based on the instance class:
   + The db\.r3 instance classes support both `default` and `dedicated` VPC tenancy\.
-  + The db\.r4 instance classes support `default` VPC tenancy only\.
+  + The db\.r4 instance classes support `default` and `dedicated` VPC tenancy only\.
   + The db\.t2 instance classes support `default` VPC tenancy only\.
 
   For more information about instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\. For more information about `default` and `dedicated` VPC tenancy, see [Dedicated Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html) in the *Amazon Elastic Compute Cloud User Guide*\.
 + To authenticate login and permissions for an Amazon Aurora MySQL DB cluster, you can take either of the following approaches, or a combination of them:
   + You can take the same approach as with a standalone instance of MySQL\.
 
-    Commands such as `CREATE USER`, `RENAME USER`, `GRANT`, `REVOKE`, and `SET PASSWORD` work just as they do in on\-premises databases, as does directly modifying database schema tables\. For more information, see [ MySQL User Account Management](http://dev.mysql.com/doc/mysql-security-excerpt/5.6/en/user-account-management.html) in the MySQL documentation\.
+    Commands such as `CREATE USER`, `RENAME USER`, `GRANT`, `REVOKE`, and `SET PASSWORD` work just as they do in on\-premises databases, as does directly modifying database schema tables\. For more information, see [ Access Control and Account Management](https://dev.mysql.com/doc/refman/5.6/en/access-control.html) in the MySQL documentation\.
   + You can also use IAM database authentication\.
 
     With IAM database authentication, you authenticate to your DB cluster by using an IAM user or IAM role and an authentication token\. An *authentication token* is a unique value that is generated using the Signature Version 4 signing process\. By using IAM database authentication, you can use the same credentials to control access to your AWS resources and your databases\. For more information, see [IAM Database Authentication](UsingWithRDS.IAMDBAuth.md)\.

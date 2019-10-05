@@ -39,31 +39,32 @@ You will get output similar to the following:
 
 ## Amazon Aurora MySQL and Spatial Data<a name="Aurora.AuroraMySQL.Spatial"></a>
 
-Amazon Aurora MySQL supports the same spatial data types and spatial relation functions as the equivalent MySQL release\. For example, Amazon Aurora MySQL 5\.7 supports the same [spatial data types](https://dev.mysql.com/doc/refman/5.7/en/spatial-types.html) and [spatial relation functions](https://dev.mysql.com/doc/refman/5.7/en/spatial-relation-functions-object-shapes.html) as MySQL 5\.7\. 
-
-Aurora MySQL also supports spatial indexing on InnoDB tables, similar to that offered by MySQL 5\.7\. Spatial indexing improves query performance on large datasets for queries that use spatial data\. Aurora MySQL uses a different indexing strategy than MySQL, using a space\-filling curve on a B\-tree instead of an R\-tree\.
+ The following list summarizes the main Aurora MySQL spatial features and explains how they correspond to spatial features in MySQL\. 
++  Aurora MySQL 1\.x supports the same [spatial data types](https://dev.mysql.com/doc/refman/5.6/en/spatial-types.html) and [spatial relation functions](https://dev.mysql.com/doc/refman/5.6/en/spatial-relation-functions-object-shapes.html) as MySQL 5\.6\. 
++  Aurora MySQL 2\.x supports the same [spatial data types](https://dev.mysql.com/doc/refman/5.7/en/spatial-types.html) and [spatial relation functions](https://dev.mysql.com/doc/refman/5.7/en/spatial-relation-functions-object-shapes.html) as MySQL 5\.7\. 
++  Aurora MySQL 1\.x and 2\.x both support spatial indexing on InnoDB tables\. Spatial indexing improves query performance on large datasets for queries on spatial data\. In MySQL, spatial indexing for InnoDB tables isn't available in MySQL 5\.6, but is available in MySQL 5\.7\. Both Aurora MySQL 1\.x and 2\.x use a different spatial indexing strategy than MySQL for high performance with spatial queries\. The Aurora spatial index implementation uses a space\-filling curve on a B\-tree, which is intended to provide higher performance for spatial range scans than an R\-tree\. 
 
 The following data definition language \(DDL\) statements are supported for creating indexes on columns that use spatial data types\.
 
 ### CREATE TABLE<a name="Aurora.AuroraMySQL.Spatial.create_table"></a>
 
- You can use the SPATIAL INDEX keywords in a CREATE TABLE statement to add a spatial index to a column in a new table\. Following is an example\.
+ You can use the `SPATIAL INDEX` keywords in a `CREATE TABLE` statement to add a spatial index to a column in a new table\. Following is an example\.
 
 ```
-CREATE TABLE test (shape POLYGON NOT NULL, SPATIAL INDEX(shape)); 
+CREATE TABLE test (shape POLYGON NOT NULL, SPATIAL INDEX(shape));
 ```
 
 ### ALTER TABLE<a name="Aurora.AuroraMySQL.Spatial.alter_table"></a>
 
-You can use the SPATIAL INDEX keywords in an ALTER TABLE statement to add a spatial index to a column in an existing table\. Following is an example\.
+You can use the `SPATIAL INDEX` keywords in an `ALTER TABLE` statement to add a spatial index to a column in an existing table\. Following is an example\.
 
 ```
-ALTER TABLE test ADD SPATIAL INDEX(shape); 
+ALTER TABLE test ADD SPATIAL INDEX(shape);
 ```
 
 ### CREATE INDEX<a name="Aurora.AuroraMySQL.Spatial.create_index"></a>
 
-You can use the SPATIAL keyword in a CREATE INDEX statement to add a spatial index to a column in an existing table\. Following is an example\.
+You can use the `SPATIAL` keyword in a `CREATE INDEX` statement to add a spatial index to a column in an existing table\. Following is an example\.
 
 ```
 CREATE SPATIAL INDEX shape_index ON test (shape);
