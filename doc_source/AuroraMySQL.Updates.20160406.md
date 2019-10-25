@@ -21,13 +21,7 @@ This update includes the following improvements:
 
   ```
   select AURORA_VERSION();
-  ```
-
-  ```
   select @@aurora_version;
-  ```
-
-  ```
   show variables like '%version';
   ```
 
@@ -38,9 +32,6 @@ This update includes the following improvements:
 
   ```
   show global status where variable_name in ('aurora_lockmgr_memory_used');
-  ```
-
-  ```
   select * from INFORMATION_SCHEMA.GLOBAL_STATUS where variable_name in ('aurora_lockmgr_memory_used');
   ```
 

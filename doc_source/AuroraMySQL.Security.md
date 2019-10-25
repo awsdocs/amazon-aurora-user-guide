@@ -63,11 +63,11 @@ Amazon Aurora MySQL DB clusters support Secure Sockets Layer \(SSL\) connections
 
 Amazon RDS creates an SSL certificate and installs the certificate on the DB instance when Amazon RDS provisions the instance\. These certificates are signed by a certificate authority\. The SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. As a result, you can only use the DB cluster endpoint to connect to a DB cluster using SSL if your client supports Subject Alternative Names \(SAN\)\. Otherwise, you must use the instance endpoint of a writer instance\. 
 
+For information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\.
+
 Aurora MySQL 5\.6 supports Transport Layer Security \(TLS\) version 1\.0\. Aurora MySQL 5\.7 supports TLS version 1\.0, 1\.1, and 1\.2\.
 
 We recommend the MariaDB Connector/J client as a client that supports SAN with SSL\. For more information, see the [MariaDB Connector/J download](https://downloads.mariadb.org/connector-java/) page\.
-
-The public key is stored at [https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.pem](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem)\. 
 
 To encrypt connections using the default `mysql` client, launch the mysql client using the `--ssl-ca parameter` to reference the public key, for example: 
 

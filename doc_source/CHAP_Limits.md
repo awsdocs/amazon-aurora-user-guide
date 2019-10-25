@@ -32,7 +32,7 @@ The following table lists the resources and their limits per region\.
 | Tags per resource | 50 | 
 
 **Note**  
-By default, you can have up to a total of 40 DB instances\. If your application requires more DB instances, you can request additional DB instances via this request form [Request RDS DB instance limit](https://aws.amazon.com/contact-us/request-to-increase-the-amazon-rds-db-instance-limit/)\.
+By default, you can have up to a total of 40 DB instances\. If your application requires more DB instances, you can request additional DB instances using this request form [Request RDS DB instance limit](https://aws.amazon.com/contact-us/request-to-increase-the-amazon-rds-db-instance-limit/)\.
 
 ## Naming Constraints in Amazon Aurora<a name="RDS_Limits.Constraints"></a>
 

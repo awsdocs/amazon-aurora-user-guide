@@ -68,7 +68,6 @@ The following limitations apply to Aurora Serverless:
   + `5432` for Aurora PostgreSQL
 + You can't give an Aurora Serverless DB cluster a public IP address\. You can access an Aurora Serverless DB cluster only from within a virtual private cloud \(VPC\) based on the Amazon VPC service\.
 + Each Aurora Serverless DB cluster requires two AWS PrivateLink endpoints\. If you reach the limit for PrivateLink endpoints within your VPC, you can't create any more Aurora Serverless clusters in that VPC\. For information about checking and changing the limits on endpoints within a VPC, see [Amazon VPC Limits](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)\. 
-+ You can't access an Aurora Serverless DB cluster's endpoint through an AWS VPN connection or an inter\-region VPC peering connection\. There are limitations in accessing a cluster's endpoint through an intra\-region VPC peering connection; for more information, see [Interface VPC Endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html) in the *Amazon VPC User Guide*\. However, you can access an Aurora Serverless cluster's endpoint through an AWS Direct Connect connection\. 
 + A DB subnet group used by Aurora Serverless can’t have more than one subnet in the same Availability Zone\.
 + Changes to a subnet group used by an Aurora Serverless DB cluster are not applied to the cluster\.
 + Aurora Serverless doesn't support the following features:

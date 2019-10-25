@@ -12,9 +12,6 @@ Aurora versions use the format *<major version>*\.*<minor version>*\. *<patch ve
 
 ```
 select AURORA_VERSION();
-```
-
-```
 select @@aurora_version;
 ```
 
@@ -106,6 +103,23 @@ If your current Aurora MySQL version is 1\.14\.x, but it is lower than 1\.14\.4,
 **Note**  
  ZDP applies only to the primary instance of a DB cluster\. ZDP isn't applicable to Aurora Replicas\. 
  Prepared statements don't prevent ZDP, but they aren't preserved after ZDP executes\.
+
+## Aurora MySQL Long\-Term Support \(LTS\) Releases<a name="AuroraMySQL.Updates.LTS"></a>
+
+ Each new Aurora MySQL version remains available for a certain amount of time for you to use when you create or upgrade a DB cluster\. After this period, you must upgrade any clusters that use that version\. You can manually upgrade your cluster before the support period ends, or Aurora can automatically upgrade it for you when its Aurora MySQL version is no longer supported\. 
+
+ Aurora designates certain Aurora MySQL versions as "long\-term support" \(LTS\) releases\. DB clusters that use LTS releases can stay on the same version longer and undergo fewer upgrade cycles than clusters that use non\-LTS releases\. Aurora supports each LTS release for at least one year after that release becomes available\. When a DB cluster that's on an LTS release is required to upgrade, Aurora upgrades it to the next LTS release\. That way, the cluster doesn't need to be upgraded again for a long time\. 
+
+ During the lifetime of an Aurora MySQL LTS release, new patch levels introduce fixes to important issues\. The patch levels don't include any new features\. You can choose whether or not to apply such patches to DB clusters running the LTS release\. For certain critical fixes, Amazon might perform a forced upgrade to a patch level within the same LTS release\. 
+
+ We recommend that you upgrade to the latest release, instead of using the LTS release, for most of your Aurora MySQL clusters\. Doing so takes advantage of Aurora as a managed service and gives you access to the latest features and bug fixes\. The LTS releases are intended for clusters that have the following requirements and business needs: 
++  You can't afford downtime on your Aurora MySQL application for upgrades outside of rare occurrences for critical patches\. 
++  The testing cycle for the cluster and associated applications takes a long time for each update to the Aurora MySQL database engine\. 
++  The database version for your Aurora MySQL cluster has all the DB engine features and bug fixes that your application needs\. 
+
+ As of the publication date for this *Aurora User's Guide*, the current LTS releases for Aurora MySQL are: 
++  Aurora MySQL version 1\.19\.5\. For more details about this version, see [Aurora MySQL Database Engine Updates 2019\-09\-19 \(Version 1\.19\.5\)](AuroraMySQL.Updates.1195.md)\. 
++  Aurora MySQL version 2\.04\.6\. For more details about this version, see [Aurora MySQL Database Engine Updates 2019\-09\-19 \(Version 2\.04\.6\)](AuroraMySQL.Updates.2046.md)\. 
 
 ## Related Topics<a name="AuroraMySQL.Updates.Related"></a>
 + [Database Engine Updates for Amazon Aurora MySQL 2\.0](AuroraMySQL.Updates.20Updates.md)

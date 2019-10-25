@@ -421,7 +421,7 @@ After you create the policy, note the Amazon Resource Name \(ARN\) of the policy
             "Sid": "s3import",
             "Action": [
               "s3:GetObject",
-              "s3:ListBucket",
+              "s3:ListBucket"
             ],
             "Effect": "Allow",
             "Resource": [

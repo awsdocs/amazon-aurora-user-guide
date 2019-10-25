@@ -55,8 +55,9 @@
 +  Currently, you can only use parallel query with the following instance classes: 
   +  All instance classes in the db\.r3 series\. 
   +  All instance classes in the db\.r4 series\. 
+  +  All instance classes that Aurora MySQL supports in the db\.r5 series\. 
 **Note**  
- You can't create T2 instances for parallel query\. 
+ You can't create db\.t2 or db\.t3 instances for parallel query\. 
 +  The parallel query option is available in the following regions: 
   + US East \(N\. Virginia\)
   + US East \(Ohio\)

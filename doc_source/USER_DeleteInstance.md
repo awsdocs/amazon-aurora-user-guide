@@ -2,17 +2,21 @@
 
 You can delete a DB instance in a DB cluster, including deleting the primary DB instance in a DB cluster or an Amazon Aurora Replica\. To delete a DB instance, you must specify the name of the instance\.
 
-You can enable deletion protection so that users can't delete a DB cluster\. Deletion protection is enabled by default when you create a production DB cluster using the AWS Management Console\. However, deletion protection is disabled by default if you create a cluster using the AWS CLI or API\.
-
-Aurora enforces deletion protection for a DB cluster whether you perform the operation from the console, the CLI, or the API\. If you try to delete a DB cluster that has deletion protection enabled, you can't do so\. To be certain that you can delete the cluster, modify the cluster and disable deletion protection\.
-
-If you try to delete the cluster's last DB instance, the behavior depends on the method you use\. You can't delete the last DB instance through the AWS Management Console, because doing so also deletes the cluster\. You *can* delete the last DB instance through the AWS CLI or API even if the DB cluster has deletion protection enabled\. In this case, the DB cluster itself still exists and your data is preserved\. You can access the data by attaching new DB instances to the cluster\. For more information about turning deletion protection on and off, see [Modifying the DB Cluster by Using the Console, CLI, and API](Aurora.Modifying.md#Aurora.Modifying.Cluster)\.
-
 For Aurora MySQL, you can't delete a DB instance in a DB cluster if both of the following conditions are true:
 + The DB cluster is a Read Replica of another Aurora DB cluster\.
 + The DB instance is the only instance in the DB cluster\.
 
-To delete a DB instance in this case, first promote the DB cluster so it's no longer a Read Replica\. After the promotion completes, you can delete the final DB instance in the DB cluster\. For more information, see [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\.
+To delete a DB instance in this case, first promote the DB cluster so that it's no longer a Read Replica\. After the promotion completes, you can delete the final DB instance in the DB cluster\. For more information, see [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\.
+
+## Deletion Protection<a name="USER_DeleteInstance.DeletionProtection"></a>
+
+You can enable deletion protection so that users can't delete a DB cluster\. Deletion protection is enabled by default when you create a production DB cluster using the AWS Management Console\. However, deletion protection is disabled by default if you create a cluster using the AWS CLI or API\. For more information about turning deletion protection on and off, see [Modifying the DB Cluster by Using the Console, CLI, and API](Aurora.Modifying.md#Aurora.Modifying.Cluster)\.
+
+Aurora enforces deletion protection for a DB cluster whether you perform the operation from the console, the CLI, or the API\. If you try to delete a DB cluster that has deletion protection enabled, you can't do so\. To be certain that you can delete the cluster, modify the cluster and disable deletion protection\.
+
+## Aurora Clusters with a Single DB Instance<a name="USER_DeleteInstance.LastInstance"></a>
+
+If you try to delete the last DB instance in your Aurora cluster, the behavior depends on the method you use\. You can't delete the last DB instance through the AWS Management Console, because doing so also deletes the cluster\. You *can* delete the last DB instance through the AWS CLI or API, even if the DB cluster has deletion protection enabled\. In this case, the DB cluster itself still exists and your data is preserved\. You can access the data again by attaching a new DB instance to the cluster\.
 
 ## Deleting a DB Instance by Using the Console, CLI, and API<a name="USER_DeleteInstance.Deleting"></a>
 

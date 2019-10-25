@@ -4,7 +4,7 @@
 
 Aurora MySQL 2\.04\.1 is generally available\. Aurora MySQL 2\.x versions are compatible with MySQL 5\.7 and Aurora MySQL 1\.x versions are compatible with MySQL 5\.6\.
 
-When creating a new Aurora MySQL DB cluster \(including restoring a snapshot\), you have the option of choosing compatibility with either MySQL 5\.7 or MySQL 5\.6\. We do not allow in\-place upgrade of Aurora MySQL 1\.\* clusters or restore from an Amazon S3 backup into Aurora MySQL 2\.04\.1\. We plan to remove these restrictions in a later Aurora MySQL 2\.\* release\.
+When creating a new Aurora MySQL DB cluster \(including restoring a snapshot\), you have the option of choosing compatibility with either MySQL 5\.7 or MySQL 5\.6\. We do not allow in\-place upgrade of Aurora MySQL 1\.\* clusters or restore of Aurora MySQL 1\.\* clusters from an Amazon S3 backup into Aurora MySQL 2\.04\.1\. We plan to remove these restrictions in a later Aurora MySQL 2\.\* release\.
 
 You can restore snapshots of Aurora MySQL 1\.14\.\*, 1\.15\.\*, 1\.16\.\*, 1\.17\.\*, 1\.18\.\*, 1\.19\.\*, 2\.01\.\*, 2\.02\.\*, 2\.03\.\*, 2\.04\.0 into Aurora MySQL 2\.04\.1\.
 
