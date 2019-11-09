@@ -14,7 +14,7 @@
 
 Amazon RDS groups these events into categories that you can subscribe to so that you can be notified when an event in that category occurs\. You can subscribe to an event category for a DB instance, DB cluster,  DB cluster snapshot, DB parameter group, or DB security group\. For example, if you subscribe to the Backup category for a given DB instance, you are notified whenever a backup\-related event occurs that affects the DB instance\. If you subscribe to a configuration change category for a DB security group, you are notified when the DB security group is changed\. You also receive notification when an event notification subscription changes\.
 
-For Amazon Aurora, events occur at the cluster rather than instance level, so you don't receive events if you subscribe to an Aurora DB instance\. Subscribe to the DB cluster instead\.
+For Amazon Aurora, events occur at both the DB cluster and the DB instance level, so you can receive events if you subscribe to an Aurora DB cluster or an Aurora DB instance\.
 
 Event notifications are sent to the addresses that you provide when you create the subscription\. You might want to create several different subscriptions, such as one subscription receiving all event notifications and another subscription that includes only critical events for your production DB instances\. You can easily turn off notification without deleting a subscription by choosing **No** for **Enabled** in the Amazon RDS console or by setting the `Enabled` parameter to `false` using the AWS CLI or Amazon RDS API\. 
 
@@ -179,7 +179,8 @@ You can create an Amazon RDS event notification subscription so you can be notif
 You can specify the type of source you want to be notified of and the Amazon RDS source that triggers the event\. These are defined by the **SourceType** \(type of source\) and the **SourceIdentifier** \(the Amazon RDS source generating the event\)\. If you specify both the **SourceType** and **SourceIdentifier**, such as `SourceType = db-instance` and `SourceIdentifier = myDBInstance1`, you receive all the DB instance events for the specified source\. If you specify a **SourceType** but don't specify a **SourceIdentifier**, you receive notice of the events for that source type for all your Amazon RDS sources\. If you don't specify either the **SourceType** or the **SourceIdentifier**, you are notified of events generated from all Amazon RDS sources belonging to your customer account\.
 
 **Note**  
-Event notifications might take up to five minutes to be delivered\.
+Event notifications might take up to five minutes to be delivered\.  
+Amazon RDS event notification is only available for unencrypted SNS topics\. If you specify an encrypted SNS topic, event notifications aren't sent for the topic\.
 
 ### Console<a name="USER_Events.Subscribing.Console"></a>
 
@@ -281,7 +282,7 @@ https://rds.us-east-1.amazonaws.com/
    &MaxRecords=100
    &SignatureMethod=HmacSHA256
    &SignatureVersion=4
-   &Version=2014-09-01
+   &Version=2014-10-31
    &X-Amz-Algorithm=AWS4-HMAC-SHA256
    &X-Amz-Credential=AKIADQKE4SARGYLE/20140428/us-east-1/rds/aws4_request
    &X-Amz-Date=20140428T161907Z
@@ -296,7 +297,7 @@ https://rds.us-east-1.amazonaws.com/
    &SignatureMethod=HmacSHA256
    &SignatureVersion=4
    &SubscriptionName=myfirsteventsubscription
-   &Version=2014-09-01
+   &Version=2014-10-31
    &X-Amz-Algorithm=AWS4-HMAC-SHA256
    &X-Amz-Credential=AKIADQKE4SARGYLE/20140428/us-east-1/rds/aws4_request
    &X-Amz-Date=20140428T161907Z

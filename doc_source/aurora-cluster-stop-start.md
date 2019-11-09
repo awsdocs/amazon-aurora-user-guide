@@ -53,7 +53,7 @@ To stop a DB instance by using the AWS CLI, call the [stop\-db\-cluster](https:/
 **Example**  
 
 ```
-1. stop-db-cluster --db-cluster-identifier mydbcluster
+aws rds stop-db-cluster --db-cluster-identifier mydbcluster
 ```
 
 ### RDS API<a name="aurora-stop-cluster.API"></a>
@@ -93,7 +93,7 @@ To start a DB cluster by using the AWS CLI, call the [start\-db\-cluster](https:
 **Example**  
 
 ```
-1. start-db-cluster --db-cluster-identifier mydbcluster
+aws rds start-db-cluster --db-cluster-identifier mydbcluster
 ```
 
 ### RDS API<a name="aurora-start-cluster.API"></a>

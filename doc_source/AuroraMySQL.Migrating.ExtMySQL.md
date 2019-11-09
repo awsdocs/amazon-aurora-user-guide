@@ -37,7 +37,7 @@ Before you can copy your data to an Amazon S3 bucket and restore a DB cluster fr
 
 #### Installing Percona XtraBackup<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs.XtraBackup"></a>
 
-Amazon Aurora can restore a DB cluster from files that were created using Percona XtraBackup\. You can install Percona XtraBackup from [Download Percona XtraBackup](https://www.percona.com/downloads/XtraBackup/LATEST/)\.
+Amazon Aurora can restore a DB cluster from files that were created using Percona XtraBackup\. You can install Percona XtraBackup from [Download Percona XtraBackup](https://www.percona.com/downloads/Percona-XtraBackup-2.4/LATEST/)\.
 
 **Note**  
 For MySQL 5\.7 migration, you must use Percona XtraBackup 2\.4\. For earlier MySQL versions, use Percona XtraBackup 2\.3 or 2\.4\.

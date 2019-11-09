@@ -158,7 +158,7 @@ SET apg_plan_mgmt.plan_retention_period_ = integer-value;
 An estimated total plan cost threshold, below which the optimizer runs an unapproved plan\. By default, the optimizer does not run unapproved plans\. However, you can set an execution threshold for your fastest unapproved plans\. With this setting, the optimizer bypasses the overhead of enforcing only approved plans\.
 
 ```
-SET apg_hint_plan.unapproved_plan_execution_threshold = integer-value;
+SET apg_plan_mgmt.unapproved_plan_execution_threshold = integer-value;
 ```
 
 
@@ -179,7 +179,7 @@ SET apg_plan_mgmt.unapproved_plan_execution_threshold = 550;
 Enforce the optimizer to use managed plans for managed statements\.
 
 ```
-SET apg_hint_plan.use_plan_baselines = [true | false];
+SET apg_plan_mgmt.use_plan_baselines = [true | false];
 ```
 
 

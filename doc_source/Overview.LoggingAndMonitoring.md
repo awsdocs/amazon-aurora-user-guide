@@ -15,7 +15,7 @@ Amazon Aurora provides metrics in real time for the operating system \(OS\) that
 Performance Insights expands on existing Amazon Aurora monitoring features to illustrate your database's performance and help you analyze any issues that affect it\. With the Performance Insights dashboard, you can visualize the database load and filter the load by waits, SQL statements, hosts, or users\. For more information, see [Using Amazon RDS Performance Insights](USER_PerfInsights.md)\.
 
 **Database Logs**  
-You can view, download, and watch database logs using the AWS Management Console, AWS CLI, or RDS API\. For more information, see [Amazon RDS Database Log Files](USER_LogAccess.md)\.
+You can view, download, and watch database logs using the AWS Management Console, AWS CLI, or RDS API\. For more information, see [Amazon Aurora Database Log Files](USER_LogAccess.md)\.
 
 **Amazon Aurora Recommendations**  
 Amazon Aurora provides automated recommendations for database resources\. These recommendations provide best practice guidance by analyzing DB cluster configuration, usage, and performance data\. For more information, see [Using Amazon Aurora Recommendations](USER_Recommendations.md)\.

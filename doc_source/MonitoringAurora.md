@@ -14,5 +14,5 @@
 + [Using Database Activity Streams with Aurora PostgreSQL](DBActivityStreams.md)
 + [Using Amazon RDS Event Notification](USER_Events.md)
 + [Viewing Amazon RDS Events](USER_ListEvents.md)
-+ [Amazon RDS Database Log Files](USER_LogAccess.md)
++ [Amazon Aurora Database Log Files](USER_LogAccess.md)
 + [Logging Amazon RDS API Calls with AWS CloudTrail](logging-using-cloudtrail.md)

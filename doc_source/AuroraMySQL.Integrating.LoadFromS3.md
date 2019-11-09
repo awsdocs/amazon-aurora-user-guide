@@ -16,6 +16,10 @@ Before you can load data from an Amazon S3 bucket, you must first give your Auro
 
 1. Create an IAM role, and attach the IAM policy you created in [Creating an IAM Policy to Access Amazon S3 Resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md) to the new IAM role\. For instructions, see [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.
 
+1. Make sure the DB cluster is using a custom DB cluster parameter group\.
+
+   For more information about creating a custom DB cluster parameter group, see [Creating a DB Cluster Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\.
+
 1. Set either the `aurora_load_from_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aurora_load_from_s3_role`, Aurora uses the IAM role specified in `aws_default_s3_role`\.
 
    If the cluster is part of an Aurora global database, set this parameter for each Aurora cluster in the global database\. Although only the primary cluster in an Aurora global database can load data, another cluster might be promoted by the failover mechanism and become the primary cluster\.

@@ -656,18 +656,56 @@ To view the parameter values for a DB cluster parameter group, use the AWS CLI [
 + `--db-cluster-parameter-group-name`
 
 **Example**  
-The following example lists the parameters and parameter values for a DB cluster parameter group named *mydbclusterparametergroup\.*  
+The following example lists the parameters and parameter values for a DB cluster parameter group named *mydbclusterparametergroup*, in JSON format\.  
+The command returns a response like the following:  
 
 ```
 aws rds describe-db-cluster-parameters --db-cluster-parameter-group-name mydbclusterparametergroup
 ```
+
+```
+{
+    "Parameters": [
+        {
+            "ApplyMethod": "pending-reboot",
+            "Description": "Controls whether user-defined functions that have only an xxx symbol for the main function can be loaded",
+            "DataType": "boolean",
+            "AllowedValues": "0,1",
+            "SupportedEngineModes": [
+                "provisioned"
+            ],
+            "Source": "engine-default",
+            "IsModifiable": false,
+            "ParameterName": "allow-suspicious-udfs",
+            "ApplyType": "static"
+        },
+        {
+            "ApplyMethod": "pending-reboot",
+            "Description": "Enables new features in the Aurora engine.",
+            "DataType": "boolean",
+            "IsModifiable": true,
+            "AllowedValues": "0,1",
+            "SupportedEngineModes": [
+                "provisioned"
+            ],
+            "Source": "engine-default",
+            "ParameterValue": "0",
+            "ParameterName": "aurora_lab_mode",
+            "ApplyType": "static"
+        },
+...
+```
+The following example lists the parameters and parameter values for a DB cluster parameter group named *mydbclusterparametergroup*, in plain text format\.  
+
+```
+aws rds describe-db-cluster-parameters --db-cluster-parameter-group-name mydbclusterparametergroup --output text
+```
 The command returns a response like the following:  
 
 ```
-PARAMETERS              pending-reboot  dynamic string  IAM role ARN used to load data from AWS S3  True        aurora_load_from_s3_role                engine-default
-PARAMETERS              pending-reboot  dynamic string  IAM role ARN used to select data into AWS S3    True    aurora_select_into_s3_role              engine-default
-PARAMETERS              pending-reboot  dynamic string  Default IAM role ARN used to access AWS Lambda Service  True    aws_default_lambda_role         engine-default
-PARAMETERS              pending-reboot  dynamic string  Arn for the role used to upload data to CloudWatch Logs True    aws_default_logs_role           engine-default
+PARAMETERS	0,1	pending-reboot	static	boolean	Controls whether user-defined functions that have only an xxx symbol for the main function can be loaded	False	allow-suspicious-udfs		engine-default SUPPORTEDENGINEMODES	provisioned
+PARAMETERS	0,1	pending-reboot	static	boolean	Enables new features in the Aurora engine.	True	aurora_lab_mode	0	engine-default SUPPORTEDENGINEMODES	provisioned
+...
 ```
 
 ### RDS API<a name="USER_WorkingWithParamGroups.ViewingCluster.API"></a>
@@ -688,6 +726,8 @@ You can use the AWS Management Console to view the differences between two param
 1. In the list, choose the two parameter groups that you want to compare\.
 
 1. For **Parameter group actions**, choose **Compare**\.
+**Note**  
+If the items you selected aren't equivalent, you can't choose **Compare**\. For example, you can't compare a MySQL 5\.6 and a MySQL 5\.7 parameter group\. You can't compare a DB parameter group and an Aurora DB cluster parameter group\.
 
 ## DB Parameter Values<a name="USER_ParamValuesRef"></a>
 

@@ -14,31 +14,11 @@ To create an IAM role to permit your Amazon RDS cluster to communicate with othe
 
 1. Under **AWS service**, choose **RDS**\.
 
-1. Under **Select your use case**, choose **RDS – CloudHSM and Directory Service**\.
+1. Under **Select your use case**, choose **RDS – Add Role to Database**\.
 
 1. Choose **Next: Permissions**\.
 
-1. Choose **Next: Tags**\.
-
-1. Choose **Next: Review**\.
-
-1. Set **Role Name** to a name for your IAM role, for example `RDSLoadFromS3`\. You can also add an optional **Role Description** value\.
-
-1. Choose **Create Role**\.
-
-1. In the navigation pane, choose **Roles**\.
-
-1. In the **Search** field, enter the name of the role you created, and choose the role name when it appears in the list\.
-
-1. On the **Permissions** tab, detach the following default roles from the policy:
-   + `AmazonRDSDirectoryServiceAccess`
-   + `RDSCloudHsmAuthorizationRole`
-
-   To detach a role, choose the **X** associated with the role on the right, and then choose **Detach**\.
-
-1. On the **Permissions** tab, choose **Attach policies**\.
-
-1. On the **Attach policy** page, enter the name of your policy in the **Search** field\.
+1. On the **Attach permissions policies** page, enter the name of your policy in the **Search** field\.
 
 1. When it appears in the list, select the policy that you defined earlier using the instructions in one of the following sections:
    + [Creating an IAM Policy to Access Amazon S3 Resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md)
@@ -46,6 +26,10 @@ To create an IAM role to permit your Amazon RDS cluster to communicate with othe
    + [Creating an IAM Policy to Access CloudWatch Logs Resources](AuroraMySQL.Integrating.Authorizing.IAM.CWCreatePolicy.md)
    + [Creating an IAM Policy to Access AWS KMS Resources](AuroraMySQL.Integrating.Authorizing.IAM.KMSCreatePolicy.md)
 
-1. Choose **Attach policy**\.
+1. Choose **Next: Tags**, and then choose **Next: Review**\.
+
+1. In **Role name**, enter a name for your IAM role, for example `RDSLoadFromS3`\. You can also add an optional **Role description** value\.
+
+1. Choose **Create Role**\.
 
 1. Complete the steps in [Associating an IAM Role with an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.

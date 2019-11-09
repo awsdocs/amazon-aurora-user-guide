@@ -13,15 +13,15 @@ The **Databases** list shows all of the DB clusters for your AWS account\. When 
 
 To view the details page for a DB cluster, choose **Databases** in the navigation pane, and then choose the name of the DB cluster\.
 
-You can modify your DB cluster by choosing **Databases** from the console's navigation pane to go to the **Databases** list\. To modify a DB cluster, choose the DB cluster from the **Databases** list and choose **Modify**\.
+You can modify your DB cluster by choosing **Databases** from the console's navigation pane to go to the **Databases** list\. To modify a DB cluster, select the DB cluster from the **Databases** list and choose **Modify**\.
 
 To modify a DB instance that is a member of a DB cluster, choose **Databases** from the console's navigation pane to go to the **Databases** list\.
 
-For example, the following image shows the details page for the DB cluster named `aurora-sample-cluster`\. The DB cluster has one DB instance shown in the **DB Cluster Members** list, named `aurora-sample`\. This instance is the primary instance for the DB cluster\.
+For example, the following image shows the details page for the DB cluster named `aurora-test`\. The DB cluster has four DB instances shown in the **DB identifier** list\. The writer DB instance, `dbinstance4`, is the primary DB instance for the DB cluster\.
 
 ![\[Amazon Aurora DB Cluster View\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraView01.png)
 
-If you click the link for the `aurora-sample` DB instance identifier, the Amazon RDS console takes you to the details page for the `aurora-sample` DB instance as shown in the following image\.
+If you click the link for the `dbinstance4` DB instance identifier, the Amazon RDS console shows the details page for the `dbinstance4` DB instance, as shown in the following image\.
 
 ![\[Amazon Aurora DB Instance View\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraView02.png)
 
@@ -194,5 +194,3 @@ The action returns the following output:
   </ResponseMetadata>
 </DescribeDBClustersResponse>
 ```
-
-## <a name="Aurora.Viewing.RelatedTopics"></a>

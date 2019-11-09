@@ -151,7 +151,7 @@ The Data API provides the following operations to execute SQL statements\.
 |  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/execute-statement.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/execute-statement.html)  |  Runs a SQL statement against a database\.  | 
 |  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BatchExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BatchExecuteStatement.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/batch-execute-statement.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/batch-execute-statement.html)  |  Runs a batch SQL statement over an array of data for bulk update and insert operations\. You can run a DML statement with array of parameter sets\. A batch SQL statement can provide a significant performance improvement over individual insert and update statements\.  | 
 
-You can run both operations for executing a SQL statement atomically, or you can run them in a transaction\. The Data API provides the following operations to support transactions\.
+You can run both operations for executing a SQL statement independently, or you can run them in a transaction\. The Data API provides the following operations to support transactions\.
 
 
 ****  

@@ -4,7 +4,7 @@ You can monitor the MySQL error log, slow query log, and the general log\. The M
 
 You can monitor the MySQL logs directly through the Amazon RDS console, Amazon RDS API, AWS CLI, or AWS SDKs\. You can also access MySQL logs by directing the logs to a database table in the main database and querying that table\. You can use the mysqlbinlog utility to download a binary log\. 
 
-For more information about viewing, downloading, and watching file\-based database logs, see [Amazon RDS Database Log Files](USER_LogAccess.md)\.
+For more information about viewing, downloading, and watching file\-based database logs, see [Amazon Aurora Database Log Files](USER_LogAccess.md)\.
 
 ## Accessing MySQL Error Logs<a name="USER_LogAccess.MySQL.Errorlog"></a>
 

@@ -85,7 +85,7 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
 
 ### Example for Aurora PostgreSQL<a name="aurora-serverless.create.cli.PostgreSQL"></a>
 
-The following command creates a new PostgreSQL 10\.7–compatible Serverless DB cluster\. Valid capacity values for Aurora PostgreSQL are `8`, `16`, `32`, `64`, `192`, and `384`\.
+The following command creates a new PostgreSQL 10\.7–compatible Serverless DB cluster\. Valid capacity values for Aurora PostgreSQL are `2`, `4`, `8`, `16`, `32`, `64`, `192`, and `384`\.
 
 For Linux, OS X, or Unix:
 
@@ -109,4 +109,4 @@ To create a new Aurora Serverless DB cluster with the RDS API, run the [CreateDB
 
 You can optionally specify the `ScalingConfiguration` parameter to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values include the following:
 + Aurora MySQL: `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
-+ Aurora PostgreSQL: `8`, `16`, `32`, `64`, `192`, and `384`\.
++ Aurora PostgreSQL: `2`, `4`, `8`, `16`, `32`, `64`, `192`, and `384`\.

@@ -47,7 +47,7 @@ To configure an Aurora Serverless DB cluster when you restore from a DB cluster 
 
 You can optionally specify the `--scaling-configuration` option to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values include the following:
 + Aurora MySQL: `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
-+ Aurora PostgreSQL: `8`, `16`, `32`, `64`, `192`, and `384`\.
++ Aurora PostgreSQL: `2`, `4`, `8`, `16`, `32`, `64`, `192`, and `384`\.
 
 In the following example, you restore from a previously created DB cluster snapshot named *mydbclustersnapshot*\. You restore to a new DB cluster named *mynewdbcluster*\. To restore the DB cluster as an Aurora Serverless DB cluster, set the `--engine-mode` option to `serverless`\. The example also specifies values for the `--scaling-configuration` option\.
 
@@ -75,4 +75,4 @@ To configure an Aurora Serverless DB cluster when you restore from a DB cluster 
 
 You can optionally specify the `ScalingConfiguration` parameter to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values include the following:
 + Aurora MySQL: `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
-+ Aurora PostgreSQL: `8`, `16`, `32`, `64`, `192`, and `384`\.
++ Aurora PostgreSQL: `2`, `4`, `8`, `16`, `32`, `64`, `192`, and `384`\.

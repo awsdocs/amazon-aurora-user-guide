@@ -33,7 +33,7 @@ When the option is enabled, connections that prevent Aurora Serverless from find
 
 To set the capacity of an Aurora Serverless DB cluster using the AWS CLI, run the [modify\-current\-db\-cluster\-capacity](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-current-db-cluster-capacity.html) AWS CLI command, and specify the `--capacity` option\. Valid capacity values include the following:
 + Aurora MySQL: `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
-+ Aurora PostgreSQL: `8`, `16`, `32`, `64`, `192`, and `384`\.
++ Aurora PostgreSQL: `2`, `4`, `8`, `16`, `32`, `64`, `192`, and `384`\.
 
 In this example, you set the capacity of an Aurora Serverless DB cluster named *sample\-cluster* to *64*\.
 
@@ -45,4 +45,4 @@ aws rds modify-current-db-cluster-capacity --db-cluster-identifier sample-cluste
 
 You can set the capacity of an Aurora DB cluster with the [ModifyCurrentDBClusterCapacity](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyCurrentDBClusterCapacity.html) API operation\. Specify the `Capacity` parameter\. Valid capacity values include the following:
 + Aurora MySQL: `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
-+ Aurora PostgreSQL: `8`, `16`, `32`, `64`, `192`, and `384`\.
++ Aurora PostgreSQL: `2`, `4`, `8`, `16`, `32`, `64`, `192`, and `384`\.

@@ -1,6 +1,9 @@
-# Amazon RDS Database Log Files<a name="USER_LogAccess"></a>
+# Amazon Aurora Database Log Files<a name="USER_LogAccess"></a>
 
 You can view, download, and watch database logs using the Amazon RDS console, the AWS Command Line Interface \(AWS CLI\), or the Amazon RDS API\. Viewing, downloading, or watching transaction logs is not supported\. 
+
+**Note**  
+In some cases, logs contain hidden data\. Therefore, the AWS Management Console might show content in a log file, but the log file might be empty when you download it\.
 
 ## Viewing and Listing Database Log Files<a name="USER_LogAccess.Procedural.Viewing"></a>
 

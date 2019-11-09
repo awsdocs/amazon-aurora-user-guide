@@ -111,7 +111,7 @@ The following are usage examples for the `aurora_oom_response` parameter:
 + `print, tune` – Performs actions described for both `print` and `tune`\.
 + `tune, decline, kill_query` – Performs the actions described for `tune`, `decline`, and `kill_query`\.
 
-For db\.t2 DB instance classes, the `aurora_oom_response` parameter is set to `print, tune` by default\. For all other DB instance classes, the parameter value is empty by default \(disabled\)\.
+For the db\.t2\.small DB instance class, the `aurora_oom_response` parameter is set to `print, tune` by default\. For all other DB instance classes, the parameter value is empty by default \(disabled\)\.
 
 ## Amazon Aurora MySQL Replication Issues<a name="CHAP_Troubleshooting.MySQL"></a>
 
@@ -157,7 +157,7 @@ You can reduce the lag between updates to a source DB instance and the subsequen
 
 ### Diagnosing and Resolving a MySQL or MariaDB Read Replication Failure<a name="CHAP_Troubleshooting.MySQL.RR"></a>
 
-Amazon RDS monitors the replication status of your Read Replicas and updates the **Replication State** field of the Read Replica instance to **Error** if replication stops for any reason\. You can review the details of the associated error thrown by the MySQL or MariaDB engines by viewing the **Replication Error** field\. Events that indicate the status of the Read Replica are also generated, including [RDS-EVENT-0045](USER_Events.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Using Amazon RDS Event Notification](USER_Events.md)\. If a MySQL error message is returned, review the error in the [MySQL error message documentation](http://dev.mysql.com/doc/refman/5.5/en/error-messages-server.html)\. If a MariaDB error message is returned, review the error in the [MariaDB error message documentation](http://mariadb.com/kb/en/mariadb/mariadb-error-codes/)\.
+Amazon RDS monitors the replication status of your Read Replicas and updates the **Replication State** field of the Read Replica instance to **Error** if replication stops for any reason\. You can review the details of the associated error thrown by the MySQL or MariaDB engines by viewing the **Replication Error** field\. Events that indicate the status of the Read Replica are also generated, including [RDS-EVENT-0045](USER_Events.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Using Amazon RDS Event Notification](USER_Events.md)\. If a MySQL error message is returned, review the error in the [MySQL error message documentation](https://dev.mysql.com/doc/refman/5.7/en//server-error-reference.html)\. If a MariaDB error message is returned, review the error in the [MariaDB error message documentation](http://mariadb.com/kb/en/mariadb/mariadb-error-codes/)\.
 
 Common situations that can cause replication errors include the following:
 + The value for the `max_allowed_packet` parameter for a Read Replica is less than the `max_allowed_packet` parameter for the source DB instance\. 
@@ -203,6 +203,6 @@ You might encounter the following error message from Amazon Aurora:
 ERROR 3 (HY000): Error writing file '/rdsdbdata/tmp/XXXXXXXX' (Errcode: 28 - No space left on device)
 ```
 
-Each DB instance in an Amazon Aurora DB cluster uses local SSD storage to store temporary tables for a session\. This local storage for temporary tables does not autogrow like the Aurora cluster volume\. Instead, the amount of local storage is limited\. The limit is based on the DB instance class for DB instances in your DB cluster\. To find the amount of local SSD storage for memory optimized instance types, go to [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/#memory-optimized)\.
+Each DB instance in an Amazon Aurora DB cluster uses local SSD storage to store temporary tables for a session\. This local storage for temporary tables does not autogrow like the Aurora cluster volume\. Instead, the amount of local storage is limited\. The limit is based on the DB instance class for DB instances in your DB cluster\.
 
 If your workload cannot be modified to reduce the amount temporary storage required, then you can scale your DB instances up to use a DB instance class that has more local SSD storage\. 

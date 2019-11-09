@@ -27,7 +27,7 @@ AWS provides various tools that you can use to monitor Amazon RDS\. You can conf
 
 You can use the following automated monitoring tools to watch Amazon RDS and report when something is wrong:
 + **Amazon RDS Events** – Subscribe to Amazon RDS events to be notified when changes occur with a DB instance, DB cluster,  DB cluster snapshot, DB parameter group, or DB security group\. For more information, see [Using Amazon RDS Event Notification](USER_Events.md)\.
-+ **Database log files** – View, download, or watch database log files using the Amazon RDS console or Amazon RDS API operations\. You can also query some database log files that are loaded into database tables\. For more information, see [Amazon RDS Database Log Files](USER_LogAccess.md)\.
++ **Database log files** – View, download, or watch database log files using the Amazon RDS console or Amazon RDS API operations\. You can also query some database log files that are loaded into database tables\. For more information, see [Amazon Aurora Database Log Files](USER_LogAccess.md)\.
 + **Amazon RDS Enhanced Monitoring** — Look at metrics in real time for the operating system\. For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
 In addition, Amazon RDS integrates with Amazon CloudWatch for additional monitoring capabilities:

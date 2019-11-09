@@ -16,7 +16,7 @@ Aurora enforces deletion protection for a DB cluster whether you perform the ope
 
 ## Aurora Clusters with a Single DB Instance<a name="USER_DeleteInstance.LastInstance"></a>
 
-If you try to delete the last DB instance in your Aurora cluster, the behavior depends on the method you use\. You can't delete the last DB instance through the AWS Management Console, because doing so also deletes the cluster\. You *can* delete the last DB instance through the AWS CLI or API, even if the DB cluster has deletion protection enabled\. In this case, the DB cluster itself still exists and your data is preserved\. You can access the data again by attaching a new DB instance to the cluster\.
+If you try to delete the last DB instance in your Aurora cluster, the behavior depends on the method you use\. You can delete the last DB instance using the AWS Management Console, but doing so also deletes the DB cluster\. You can also delete the last DB instance through the AWS CLI or API, even if the DB cluster has deletion protection enabled\. In this case, the DB cluster itself still exists and your data is preserved\. You can access the data again by attaching a new DB instance to the cluster\.
 
 ## Deleting a DB Instance by Using the Console, CLI, and API<a name="USER_DeleteInstance.Deleting"></a>
 

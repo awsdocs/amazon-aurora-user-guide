@@ -25,7 +25,7 @@ You can publish Aurora MySQL logs for provisioned clusters to CloudWatch Logs wi
 
 1. Choose the Aurora MySQL DB cluster that you want to publish the log data for\.
 
-1. For **Actions**, choose **Modify**\.
+1. Choose **Modify**\.
 
 1. In the **Log exports** section, choose the logs that you want to start publishing to CloudWatch Logs\.
 
