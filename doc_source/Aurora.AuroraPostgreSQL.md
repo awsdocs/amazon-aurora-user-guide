@@ -6,6 +6,7 @@ Aurora PostgreSQL can work with many industry standards\. For example, you can u
 
 **Topics**
 + [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md)
++ [Updating Applications to Connect to Aurora PostgreSQL DB Clusters Using New SSL/TLS Certificates](ssl-certificate-rotation-aurora-postgresql.md)
 + [Migrating Data to Amazon Aurora with PostgreSQL Compatibility](AuroraPostgreSQL.Migrating.md)
 + [Managing Amazon Aurora PostgreSQL](AuroraPostgreSQL.Managing.md)
 + [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)

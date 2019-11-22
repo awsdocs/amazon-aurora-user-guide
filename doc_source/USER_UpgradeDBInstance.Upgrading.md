@@ -9,9 +9,13 @@ Aurora PostgreSQL does not currently support in\-place major version upgrades\. 
 
 The version numbering sequence is specific to each database engine\. For example, Aurora PostgreSQL 9\.6 and 10\.5 are major engine versions and upgrading from any 9\.6 version to any 10\.x version is a major version upgrade\. Aurora PostgreSQL version 9\.6\.8 and 9\.6\.9 are minor versions and upgrading from 9\.6\.8 to 9\.6\.9 is a minor version upgrade\. To determine the version of an Aurora DB cluster, follow the instructions in [Amazon Aurora Updates](Aurora.Updates.md)\.
 
+**Note**  
+A PostgreSQL engine upgrade doesn't upgrade any PostgreSQL extensions\. For more information, see [Upgrading PostgreSQL Extensions](#USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades)\. 
+
 **Topics**
 + [Manually Upgrading the Minor Engine Version](#USER_UpgradeDBInstance.Upgrading.Manual)
 + [Automatically Upgrading the Minor Engine Version](#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades)
++ [Upgrading PostgreSQL Extensions](#USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades)
 
 ## Manually Upgrading the Minor Engine Version<a name="USER_UpgradeDBInstance.Upgrading.Manual"></a>
 
@@ -95,3 +99,28 @@ When you perform these tasks, you can control whether auto minor version upgrade
 + Using the RDS API, set the `AutoMinorVersionUpgrade` parameter\.
 
 To determine whether a maintenance update, such as a DB engine version upgrade, is available for your DB cluster, you can use the console, AWS CLI, or RDS API\. You can also upgrade the DB engine version manually and adjust the maintenance window\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+
+## Upgrading PostgreSQL Extensions<a name="USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades"></a>
+
+A PostgreSQL engine upgrade doesn't upgrade any PostgreSQL extensions\. To update an extension after an engine upgrade, use the `ALTER EXTENSION UPDATE` command\. 
+
+**Note**  
+If you are running the `PostGIS` extension in your Amazon RDS PostgreSQL DB instance, make sure that you follow the [PostGIS upgrade instructions](https://postgis.net/docs/postgis_installation.html#upgrading) in the PostGIS documentation before you upgrade the extension\. 
+
+To upgrade an extension, use the following command\. 
+
+```
+ALTER EXTENSION extension_name UPDATE TO 'new_version';
+```
+
+To list your currently installed extensions, use the PostgreSQL [pg\_extension](https://www.postgresql.org/docs/current/catalog-pg-extension.html) catalog in the following command:
+
+```
+SELECT * FROM pg_extension;
+```
+
+To view a list of the specific extension versions that are available for your installation, use the PostgreSQL [ pg\_available\_extension\_versions](https://www.postgresql.org/docs/current/view-pg-available-extension-versions.html) view in the following command: 
+
+```
+SELECT * FROM pg_available_extension_versions;
+```

@@ -5,6 +5,7 @@ Amazon Aurora MySQL is a fully managed, MySQL\-compatible, relational database e
 **Topics**
 + [Overview of Amazon Aurora MySQL](Aurora.AuroraMySQL.Overview.md)
 + [Security with Amazon Aurora MySQL](AuroraMySQL.Security.md)
++ [Updating Applications to Connect to Aurora MySQL DB Clusters Using New SSL/TLS Certificates](ssl-certificate-rotation-aurora-mysql.md)
 + [Migrating Data to an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Migrating.md)
 + [Managing Amazon Aurora MySQL](AuroraMySQL.Managing.md)
 + [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)

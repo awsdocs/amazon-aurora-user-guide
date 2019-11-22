@@ -77,6 +77,9 @@ For information about changing the capacity, see [Modifying an Aurora Serverless
 
 To apply a change to a DB cluster parameter group, Aurora Serverless starts a seamless scale with the current capacity if the DB cluster is active\. It resumes the DB cluster if it's paused\.
 
+**Important**  
+Aurora performs the seamless scaling operation for a parameter group change with the `force-apply-capacity-change` option\. If a scaling point can't be found, connections that prevent Aurora Serverless from finding a scaling point might be dropped\.
+
  To view the supported engine mode for cluster\-level parameters, run the [describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) command or the RDS API operation [DescribeEngineDefaultClusterParameters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEngineDefaultClusterParameters.html)\. For example, the following Linux command extracts the names of parameters that you can set for Aurora MySQL Serverless clusters, from an `aurora5.6` default DB cluster parameter group\. 
 
 ```

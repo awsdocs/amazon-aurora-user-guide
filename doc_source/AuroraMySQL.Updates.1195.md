@@ -30,6 +30,6 @@ The procedure to upgrade your DB cluster has changed\. For more information, see
 +  [CVE\-2018\-2696](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-2696) 
 +  [CVE\-2015\-4737](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-4737) 
 +  Bug \#19929406: HANDLE\_FATAL\_SIGNAL \(SIG=11\) IN \_\_MEMMOVE\_SSSE3\_BACK FROM STRING::COPY 
-+  Bug \#17059925: For [UNION](https://dev.mysql.com/doc/refman/5.6/en/union.html) statements, the rows\-examined value was calculated incorrectly\. This was manifest as too\-large values for the `ROWS_EXAMINED` column of Performance Schema statement tables \(such as [events\_statements\_current](https://dev.mysql.com/doc/refman/5.6/en/events-statements-current-table.html)\)\. 
++  Bug \#17059925: For [UNION](https://dev.mysql.com/doc/refman/5.6/en/union.html) statements, the rows\-examined value was calculated incorrectly\. This was manifested as too\-large values for the `ROWS_EXAMINED` column of Performance Schema statement tables \(such as [events\_statements\_current](https://dev.mysql.com/doc/refman/5.6/en/events-statements-current-table.html)\)\. 
 +  Bug \#11827369: Some queries with `SELECT ... FROM DUAL` nested subqueries raised an assertion\. 
-+  Bug \#16311231: Incorrect results were returned if a query contained a subquery in an `IN` clause which contained an [XOR](https://dev.mysql.com/doc/refman/5.6/en/logical-operators.html#operator_xor) operation in the `WHERE` clause\. 
++  Bug \#16311231: Incorrect results were returned if a query contained a subquery in an `IN` clause that contained an [XOR](https://dev.mysql.com/doc/refman/5.6/en/logical-operators.html#operator_xor) operation in the `WHERE` clause\. 

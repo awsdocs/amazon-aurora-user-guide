@@ -39,9 +39,6 @@ You can use the AWS Management Console, the command line interface, or the Amazo
 
 Tags are cached for authorization purposes\. Because of this, additions and updates to tags on Amazon RDS resources can take several minutes before they are available\. 
 
-**Note**  
-Aurora DB clusters don't support cost allocation tags for storage, backups, I/O, Global Database replicated write I/O, or backtrack change records\.
-
 ## Console<a name="USER_Tagging.CON"></a>
 
 The process to tag an Amazon RDS resource is similar for all resources\. The following procedure shows how to tag an Amazon RDS DB instance\. 

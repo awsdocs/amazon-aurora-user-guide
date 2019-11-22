@@ -50,3 +50,104 @@ Some `ALTER ROLE` commands that include `RENAME TO` might also be restricted\. T
 The `rds_superuser` role has membership for the `rds_password` role by default, and you can't change this\. You can give other roles membership for the `rds_password` role by using the `GRANT` SQL command\. We recommend that you give membership to `rds_password` to only a few roles that you use solely for password management\. These roles require the `CREATEROLE` attribute to modify other roles\.
 
 Make sure that you verify password requirements such as expiration and needed complexity on the client side\. We recommend that you restrict password\-related changes by using your own client\-side utility\. This utility should have a role that is a member of `rds_password` and has the `CREATEROLE` role attribute\.
+
+## Securing Aurora PostgreSQL Data with SSL<a name="AuroraPostgreSQL.Security.SSL"></a>
+
+Amazon RDS supports Secure Socket Layer \(SSL\) encryption for Aurora PostgreSQL DB clusters\. Using SSL, you can encrypt a connection between your applications and your Aurora PostgreSQL DB clusters\. You can also force all connections to your Aurora PostgreSQL DB cluster to use SSL\. 
+
+For general information about SSL support and PostgreSQL databases, see [SSL Support](https://www.postgresql.org/docs/11/libpq-ssl.html) in the PostgreSQL documentation\. For information about using an SSL connection over JDBC, see [Configuring the Client](https://jdbc.postgresql.org/documentation/head/ssl-client.html) in the PostgreSQL documentation\.
+
+**Topics**
++ [Requiring an SSL Connection to an Aurora PostgreSQL DB cluster](#AuroraPostgreSQL.Security.SSL.Requiring)
++ [Determining the SSL Connection Status](#AuroraPostgreSQL.Security.SSL.Status)
+
+SSL support is available in all AWS Regions for Aurora PostgreSQL\. Amazon RDS creates an SSL certificate for your Aurora PostgreSQL DB cluster when the DB cluster is created\. If you enable SSL certificate verification, then the SSL certificate includes the DB cluster endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. 
+
+**To connect to an Aurora PostgreSQL DB cluster over SSL**
+
+1. Download the certificate\.
+
+   For information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\.
+
+1. Import the certificate into your operating system\.
+
+1. Connect to your Aurora PostgreSQL DB cluster over SSL\.
+
+   When you connect using SSL, your client can choose to verify the certificate chain or not\. If your connection parameters specify `sslmode=verify-ca` or `sslmode=verify-full`, then your client requires the RDS CA certificates to be in their trust store or referenced in the connection URL\. This requirement is to verify the certificate chain that signs your database certificate\.
+
+   When a client, such as psql or JDBC, is configured with SSL support, the client first tries to connect to the database with SSL by default\. If the client can't connect with SSL, it reverts to connecting without SSL\. The default `sslmode` mode used is different between libpq\-based clients \(such as psql\) and JDBC\. The libpq\-based clients default to `prefer`, where JDBC clients default to `verify-full`\.
+
+   Use the `sslrootcert` parameter to reference the certificate, for example `sslrootcert=rds-ssl-ca-cert.pem`\.
+
+The following is an example of using psql to connect to an Aurora PostgreSQL DB cluster\.
+
+```
+$ psql -h testpg.cdhmuqifdpib.us-east-1.rds.amazonaws.com -p 5432 \
+    "dbname=testpg user=testuser sslrootcert=rds-ca-2015-root.pem sslmode=verify-full"
+```
+
+### Requiring an SSL Connection to an Aurora PostgreSQL DB cluster<a name="AuroraPostgreSQL.Security.SSL.Requiring"></a>
+
+You can require that connections to your Aurora PostgreSQL DB cluster use SSL by using the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to 0 \(off\)\. You can set the `rds.force_ssl` parameter to 1 \(on\) to require SSL for connections to your DB cluster\. Updating the `rds.force_ssl` parameter also sets the PostgreSQL `ssl` parameter to 1 \(on\) and modifies your DB cluster’s `pg_hba.conf` file to support the new SSL configuration\.
+
+You can set the `rds.force_ssl` parameter value by updating the DB cluster parameter group for your DB cluster\. If the DB cluster parameter group isn't the default one, and the `ssl` parameter is already set to 1 when you set `rds.force_ssl` to 1, you don't need to reboot your DB cluster\. Otherwise, you must reboot your DB cluster for the change to take effect\. For more information on parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
+
+When the `rds.force_ssl` parameter is set to 1 for a DB cluster, you see output similar to the following when you connect, indicating that SSL is now required:
+
+```
+$ psql postgres -h SOMEHOST.amazonaws.com -p 8192 -U someuser
+psql (9.3.12, server 9.4.4)
+WARNING: psql major version 9.3, server major version 9.4.
+Some psql features might not work.
+SSL connection (cipher: DHE-RSA-AES256-SHA, bits: 256)
+Type "help" for help.
+
+postgres=>
+```
+
+### Determining the SSL Connection Status<a name="AuroraPostgreSQL.Security.SSL.Status"></a>
+
+The encrypted status of your connection is shown in the logon banner when you connect to the DB cluster\.
+
+```
+Password for user master: 
+psql (9.3.12) 
+SSL connection (cipher: DHE-RSA-AES256-SHA, bits: 256) 
+Type "help" for help.   
+
+postgres=>
+```
+
+You can also load the `sslinfo` extension and then call the `ssl_is_used()` function to determine if SSL is being used\. The function returns `t` if the connection is using SSL, otherwise it returns `f`\.
+
+```
+postgres=> create extension sslinfo;
+CREATE EXTENSION
+
+postgres=> select ssl_is_used();
+ ssl_is_used
+---------
+t
+(1 row)
+```
+
+You can use the `select ssl_cipher()` command to determine the SSL cipher:
+
+```
+postgres=> select ssl_cipher();
+ssl_cipher
+--------------------
+DHE-RSA-AES256-SHA
+(1 row)
+```
+
+ If you enable `set rds.force_ssl` and restart your DB cluster, non\-SSL connections are refused with the following message:
+
+```
+$ export PGSSLMODE=disable
+$ psql postgres -h SOMEHOST.amazonaws.com -p 8192 -U someuser
+psql: FATAL: no pg_hba.conf entry for host "host.ip", user "someuser", database "postgres", SSL off
+$
+```
+
+For information about the `sslmode` option, see [Database Connection Control Functions](https://www.postgresql.org/docs/11/libpq-connect.html#LIBPQ-CONNECT-SSLMODE) in the PostgreSQL documentation\.
