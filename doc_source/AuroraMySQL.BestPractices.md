@@ -331,9 +331,6 @@ With this setting, the optimizer chooses to use a hash join based on cost, query
 mysql> SET optimizer_switch='hash_join_cost_based=off';
 ```
 
-**Note**  
-Currently, Aurora lab mode must be enabled to use hash joins for Aurora MySQL\. For information about enabling Aurora lab mode, see [Amazon Aurora MySQL Lab Mode](AuroraMySQL.Updates.LabMode.md)\.
-
 ### Optimizing Queries for Hash Joins<a name="Aurora.BestPractices.HashJoin.Optimizing"></a>
 
 To find out whether a query can take advantage of a hash join, use the `EXPLAIN` statement to profile the query first\. The `EXPLAIN` statement provides information about the execution plan to use for a specified query\.

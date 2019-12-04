@@ -9,6 +9,7 @@ The following table shows the version of each Aurora PostgreSQL release and the 
 
 | Aurora with PostgreSQL Compatibility | Compatible PostgreSQL Release | 
 | --- | --- | 
+| [Version 3\.0](#AuroraPostgreSQL.Updates.20180305.30) | [11\.4](https://www.postgresql.org/docs/11/release-11-4.html) | 
 | [Version 2\.3](#AuroraPostgreSQL.Updates.20180305.23) | [10\.7](https://www.postgresql.org/docs/10/release-10-7.html) | 
 | [Version 2\.2](#AuroraPostgreSQL.Updates.20180305.22) | [10\.6](https://www.postgresql.org/docs/current/static/release-10-6.html) | 
 | [Version 2\.1](#AuroraPostgreSQL.Updates.20180305.21) | [10\.5](https://www.postgresql.org/docs/current/static/release-10-5.html) | 
@@ -21,6 +22,60 @@ The following table shows the version of each Aurora PostgreSQL release and the 
 | [Version 1\.0](#AuroraPostgreSQL.Updates.20180305.10) | [9\.6\.3](https://www.postgresql.org/docs/current/static/release-9-6-3.html) deprecated | 
 
 The following Aurora PostgreSQL versions are supported\. 
+
+## Version 3\.0<a name="AuroraPostgreSQL.Updates.20180305.30"></a>
+
+This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.4\. For more information about the improvements in release 11\.4, see [PostgreSQL Release 11\.4](https://www.postgresql.org/docs/11/release-11-4.html)\.
+
+**Note**  
+For the initial release, the supported AWS Regions are us\-east\-1, us\-east\-2, us\-west\-2, eu\-west\-1, ap\-northeast\-1, and ap\-northeast\-2\. For the complete list of AWS Regions, see [Aurora PostgreSQL Region Availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability.PostgreSQL)\.
+
+You can find the following improvements in this engine update\.
+
+**Improvements**
+
+1. This release contains all fixes, features, and improvements present in [Version 2\.3\.5](#AuroraPostgreSQL.Updates.20180305.235)\.
+
+1. Partitioning – Partitioning improvements include support for hash partitioning, enabling creation of a default partition, and dynamic row movement to another partition based on the key column update\.
+
+1. Performance – Performance improvements include parallelism while creating indexes, materialized views, hash joins, and sequential scans to make the operations perform better\.
+
+1. Stored procedures – SQL stored procedures now added support for embedded transactions\.
+
+1. Support for Just\-In\-Time \(JIT\) capability – RDS PostgreSQL 11 instances are created with JIT capability, speeding evaluation of expressions\. To enable this feature, set `jit` to ON\.
+
+1. Autovacuum improvements – To provide valuable logging, the parameter `rds.force_autovacuum_logging` is ON by default in conjunction with the `log_autovacuum_min_duration` parameter set to 10 seconds\. To increase autovacuum effectiveness, the values for the `autovacuum_max_workers` and `autovacuum_vacuum_cost_limit` parameters are computed based on host memory capacity to provide larger default values\.
+
+1. Improved transaction timeout – The parameter `idle_in_transaction_session_timeout` is set to 12 hours\. Any session that has been idle more than 12 hours is terminated\.
+
+1. The `tsearch2` module is no longer supported – If your application uses `tsearch2` functions, update it to use the equivalent functions provided by the core PostgreSQL engine\. For more information about the tsearch2 module, see [ PostgreSQL tsearch2](https://www.postgresql.org/docs/9.6/tsearch2.html)\.
+
+1. The `chkpass` module is no longer supported – For more information about the chkpass module, see [PostgreSQL chkpass](https://www.postgresql.org/docs/10/chkpass.html)\. 
+
+1. Updated the following extensions:
+   + `address_standardizer` to version 2\.5\.1
+   +  `address_standardizer_data_us` to version 2\.5\.1
+   +  `btree_gin` to version 1\.3
+   +  `citext` to version 1\.5
+   +  `cube` to version 1\.4
+   +  `hstore` to version 1\.5
+   +  `ip4r` to version 2\.2
+   +  `isn` to version 1\.2
+   +  `orafce` to version 3\.7
+   +  `pg_hint_plan` to version 1\.3\.4
+   +  `pg_prewarm` to version 1\.2
+   +  `pg_repack` to version 1\.4\.4
+   +  `pg_trgm` to version 1\.4
+   +  `pgaudit` to version 1\.3
+   +  `pgrouting` to version 2\.6\.1
+   +  `pgtap` to version 1\.0\.0
+   +  `plcoffee` to version 2\.3\.8
+   +  `plls` to version 2\.3\.8
+   +  `plv8` to version 2\.3\.8
+   +  `postgis` to version 2\.5\.1
+   +  `postgis_tiger_geocoder` to version 2\.5\.1
+   +  `postgis_topology` to version 2\.5\.1
+   +  `rds_activity_stream` to version 1\.3
 
 ## Version 2\.3<a name="AuroraPostgreSQL.Updates.20180305.23"></a>
 

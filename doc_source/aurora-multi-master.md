@@ -16,11 +16,11 @@
 
  For each new Amazon Aurora cluster, you can choose whether to create a single\-master or multi\-master cluster\. 
 
- Most kinds of Aurora clusters are *single\-master* clusters\. For example, provisioned, Serverless, parallel query, and Global Database clusters are all single\-master clusters\. In a single\-master cluster, a single DB instance performs all write operations and any other DB instances are read\-only\. If the writer DB instance becomes unavailable, a failover mechanism promotes one of the read\-only instances to be the new writer\. 
+ Most kinds of Aurora clusters are *single\-master* clusters\. For example, provisioned, Aurora Serverless, parallel query, and Global Database clusters are all single\-master clusters\. In a single\-master cluster, a single DB instance performs all write operations and any other DB instances are read\-only\. If the writer DB instance becomes unavailable, a failover mechanism promotes one of the read\-only instances to be the new writer\. 
 
  In a *multi\-master cluster*, all DB instances can perform write operations\. The notions of a single read\-write primary instance and multiple read\-only Aurora Replicas don't apply\. There isn't any failover when a writer DB instance becomes unavailable, because another writer DB instance is immediately available to take over the work of the failed instance\. We refer to this type of availability as *continuous availability*, to distinguish it from the high availability \(with brief downtime during failover\) offered by a single\-master cluster\. 
 
- Multi\-master clusters work differently in many ways from the other kinds of Aurora clusters, such as provisioned, Serverless, and parallel query clusters\. With multi\-master clusters, you consider different factors in areas such as high availability, monitoring, connection management, and database features\. For example, in applications where you can't afford even brief downtime for database write operations, a multi\-master cluster can help to avoid an outage when a writer instance becomes unavailable\. The multi\-master cluster doesn't use the failover mechanism, because it doesn't need to promote another DB instance to have read\-write capability\. With a multi\-master cluster, you examine metrics related to DML throughput, latency, and deadlocks for all DB instances instead of a single primary instance\. 
+ Multi\-master clusters work differently in many ways from the other kinds of Aurora clusters, such as provisioned, Aurora Serverless, and parallel query clusters\. With multi\-master clusters, you consider different factors in areas such as high availability, monitoring, connection management, and database features\. For example, in applications where you can't afford even brief downtime for database write operations, a multi\-master cluster can help to avoid an outage when a writer instance becomes unavailable\. The multi\-master cluster doesn't use the failover mechanism, because it doesn't need to promote another DB instance to have read\-write capability\. With a multi\-master cluster, you examine metrics related to DML throughput, latency, and deadlocks for all DB instances instead of a single primary instance\. 
 
  Currently, multi\-master clusters require Aurora MySQL version 1, which is compatible with MySQL 5\.6\. 
 
@@ -114,7 +114,7 @@
 ### Limitations of Multi\-Master Clusters<a name="aurora-multi-master-limitations"></a>
 
 **Note**  
- Aurora multi\-master clusters are highly specialized for continuous availability use cases\. Thus, such clusters might not be generally applicable to all workloads\. Your requirements for performance, scalability, and availability might be satisfied by using a larger DB instance class with an Aurora single\-master cluster\. If so, consider using a provisioned or serverless cluster\. 
+ Aurora multi\-master clusters are highly specialized for continuous availability use cases\. Thus, such clusters might not be generally applicable to all workloads\. Your requirements for performance, scalability, and availability might be satisfied by using a larger DB instance class with an Aurora single\-master cluster\. If so, consider using a provisioned or Aurora Serverless cluster\. 
 
 #### AWS and Aurora Limitations<a name="aurora-multi-master-limitations-aws"></a>
 
@@ -129,9 +129,9 @@
   +  Throughput benefits are most obvious on busy clusters with multiple concurrent write operations\. In many cases, a traditional Aurora cluster with a single primary instance can handle the write traffic for a cluster\. In these cases, the benefits of multi\-master clusters are mostly for high availability rather than performance\. 
   +  Single\-query performance is generally lower than for an equivalent single\-master cluster\. 
 +  You can't take a snapshot created on a single\-master cluster and restore it on a multi\-master cluster, or the opposite\. Instead, to transfer all data from one kind of cluster to the other, use a logical dump produced by a tool such as AWS Database Migration Service \(AWS DMS\) or the mysqldump command\. 
-+  You can't use the parallel query, Serverless, or Global Database features on a multi\-master cluster\. 
++  You can't use the parallel query, Aurora Serverless, or Global Database features on a multi\-master cluster\. 
 
-   The multi\-master aspect is a permanent choice for a cluster\. You can't switch an existing between a multi\-master cluster and another kind such as Serverless or parallel query\. 
+   The multi\-master aspect is a permanent choice for a cluster\. You can't switch an existing between a multi\-master cluster and another kind such as Aurora Serverless or parallel query\. 
 +  The zero\-downtime patching \(ZDP\) and zero\-downtime restart \(ZDR\) features aren't available for multi\-master clusters\. 
 +  Integration with other AWS services such as AWS Lambda, Amazon S3, and AWS Identity and Access Management isn't available for multi\-master clusters\. 
 +  The Performance Insights feature isn't available for multi\-master clusters\. 

@@ -6,6 +6,7 @@ This reference includes information about Aurora MySQL parameters and status var
 + [Aurora MySQL Parameters](#AuroraMySQL.Reference.ParameterGroups)
 + [Inapplicable MySQL Parameters and Status Variables](#AuroraMySQL.Reference.Parameters.Inapplicable)
 + [Aurora MySQL Events](#AuroraMySQL.Reference.Waitevents)
++ [Aurora MySQL Isolation Levels](#AuroraMySQL.Reference.IsolationLevels)
 + [Aurora MySQL Stored Procedures](#AuroraMySQL.Reference.StoredProcs)
 
 ## Aurora MySQL Parameters<a name="AuroraMySQL.Reference.ParameterGroups"></a>
@@ -89,7 +90,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `server_audit_events`  |  Yes  |  | 
 |  `server_audit_excl_users`  |  Yes  |  | 
 |  `server_audit_incl_users`  |  Yes  |  | 
-|  `server_audit_logging`  |  Yes  | For instructions on uploading the logs to CloudWatch Logs, see [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. | 
+|  `server_audit_logging`  |  Yes  | For instructions on uploading the logs to Amazon CloudWatch Logs, see [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. | 
 |  `server_id`  |  No  |  | 
 |  `skip-character-set-client-handshake`  |  Yes  |  | 
 |  `skip_name_resolve`  |  No  |  | 
@@ -106,6 +107,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `allow-suspicious-udfs` | No |  | 
 | `aurora_lab_mode` | Yes |   For more information, see [Amazon Aurora MySQL Lab Mode](AuroraMySQL.Updates.LabMode.md)\.   | 
 |  `aurora_oom_response`  |  Yes  |   For more information, see [ Amazon Aurora MySQL Out of Memory Issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.   | 
+|  `aurora_read_replica_read_committed`  |  Yes  |   Enables `READ COMMITTED` isolation level for Aurora Replicas and changes the isolation behavior to reduce purge lag during long\-running queries\. Enable this setting only if you understand the behavior changes and how they affect your query results\. For example, this setting uses less\-strict isolation than the MySQL default\. When it's enabled, long\-running queries might see more than one copy of the same row because Aurora reorganizes the table data while the query is running\. For more information, see [](#AuroraMySQL.Reference.IsolationLevels)\.   | 
 | `autocommit` | Yes |  | 
 | `automatic_sp_privileges` | Yes |  | 
 | `back_log` | Yes |  | 
@@ -327,9 +329,9 @@ The following table shows all of the parameters that apply to a specific DB inst
 
 ## Inapplicable MySQL Parameters and Status Variables<a name="AuroraMySQL.Reference.Parameters.Inapplicable"></a>
 
-Because of architectural differences between Aurora MySQL and MySQL, some MySQL parameters and status variables do not apply to Aurora MySQL\.
+Because of architectural differences between Aurora MySQL and MySQL, some MySQL parameters and status variables don't apply to Aurora MySQL\.
 
-The following MySQL parameters do not apply to Aurora MySQL:
+The following MySQL parameters don't apply to Aurora MySQL:
 + `innodb_adaptive_flushing`
 + `innodb_adaptive_flushing_lwm`
 + `innodb_change_buffering`
@@ -347,7 +349,7 @@ The following MySQL parameters do not apply to Aurora MySQL:
 + `innodb_write_io_threads`
 + `thread_cache_size`
 
-The following MySQL status variables do not apply to Aurora MySQL:
+The following MySQL status variables don't apply to Aurora MySQL:
 + `innodb_buffer_pool_bytes_dirty`
 + `innodb_buffer_pool_pages_dirty`
 + `innodb_buffer_pool_pages_flushed`
@@ -369,7 +371,7 @@ In this wait event, a session is writing data to Aurora storage\. Typically, thi
 In this wait event, a thread is in the process of returning the result set to the client\.
 
 **io/file/csv/data**  
-In this wait event, there are threads writing to CSV tables\. Check your CSV table usage\. A typical cause of this event is setting log\_output on a table\.
+In this wait event, there are threads writing to tables in comma\-separated value \(CSV\) format\. Check your CSV table usage\. A typical cause of this event is setting `log_output` on a table\.
 
 **io/file/innodb/innodb\_data\_file**  
 In this wait event, there are threads waiting on I/O operations to storage\. This event is more prevalent in I/O intensive workloads\. SQL statements showing a comparatively large proportion of this wait event might be running disk intensive queries\. Or they might be requesting data that can't be satisfied from the InnoDB buffer pool\. To find out, check your query plans and cache hit ratios\. For more information, see [ Buffering and Caching](https://dev.mysql.com/doc/refman/5.6/en/buffering-caching.html) in the MySQL documentation\.
@@ -387,7 +389,7 @@ This is a table I/O wait event\. Typically, these types of events can be followe
 This wait event is a table lock wait event handler\. For more information about 'atom' and 'molecule' events in the Performance Schema, see [ Performance Schema Atom and Molecule Events](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\.
 
 **synch/cond/mysys/my\_thread\_var::suspend**  
-In this wait event, threads are suspended when they are waiting on a condition\. For example, this event occurs when threads are waiting for table level lock\. We recommend that you investigate your workload to see what threads may be acquiring table locks on your database instance\. For more information about table locking in MySQL, see [Table Locking Issues](https://dev.mysql.com/doc/refman/5.6/en/table-locking.html) in the MySQL documentation\.
+In this wait event, threads are suspended when they are waiting on a condition\. For example, this event occurs when threads are waiting for table level lock\. We recommend that you investigate your workload to see what threads might be acquiring table locks on your DB instance\. For more information about table locking in MySQL, see [Table Locking Issues](https://dev.mysql.com/doc/refman/5.6/en/table-locking.html) in the MySQL documentation\.
 
 **synch/cond/sql/MDL\_context::COND\_wait\_status**  
 In this wait event, there are threads waiting on a table metadata lock\. For more information, see [Optimizing Locking Operations](https://dev.mysql.com/doc/refman/5.6/en/locking-issues.html) in the MySQL documentation\.
@@ -402,7 +404,7 @@ In this wait event, there is a thread that is waiting on an InnoDB record lock\.
 In this wait event, a thread has acquired a lock on the InnoDB buffer pool\.
 
 **synch/mutex/sql/LOCK\_open**  
-In this wait event, LOCK\_open is being used to protect various objects in the data dictionary\. This wait event indicates there are threads waiting to acquire these locks\. Typically, this event is caused by data dictionary contention\.
+In this wait event, LOCK\_open is being used to protect various objects in the data dictionary\. This wait event indicates that there are threads waiting to acquire these locks\. Typically, this event is caused by data dictionary contention\.
 
 **synch/mutex/sql/LOCK\_table\_cache**  
 In this wait event, there are threads waiting to acquire a lock on a table cache instance\. For more information, see [How MySQL Opens and Closes Tables](https://dev.mysql.com/doc/refman/5.6/en/table-cache.html) in the MySQL documentation\.
@@ -424,6 +426,85 @@ In this event, there are threads that are waiting on an rwlock held on the InnoD
 
 **synch/rwlock/innodb/dict\_operation\_lock**  
 In this wait event, there are threads holding locks on InnoDB data dictionary operations\.
+
+## Aurora MySQL Isolation Levels<a name="AuroraMySQL.Reference.IsolationLevels"></a>
+
+ Following, you can learn how DB instances in an Aurora MySQL cluster implement the database property of isolation\. Doing so helps you understand how the Aurora MySQL default behavior balances between strict consistency and high performance\. You can also decide when to change the default settings based on the characteristics of your workload\. 
+
+### Available Isolation Levels for Writer Instances<a name="AuroraMySQL.Reference.IsolationLevels.writer"></a>
+
+ You can use the isolation levels `REPEATABLE READ`, `READ COMMITTED`, `READ UNCOMMITTED`, and `SERIALIZABLE` on the primary instance of an Aurora MySQL single\-master cluster, or any DB instance in an Aurora MySQL multi\-master cluster\. These isolation levels work the same in Aurora MySQL as in RDS MySQL\. 
+
+### REPEATABLE READ Isolation Level for Reader Instances<a name="AuroraMySQL.Reference.IsolationLevels.reader"></a>
+
+ By default, Aurora MySQL DB instances configured as read\-only Aurora Replicas always use the `REPEATABLE READ` isolation level\. These DB instances ignore any `SET TRANSACTION ISOLATION LEVEL` statements and continue using the `REPEATABLE READ` isolation level\. 
+
+### READ COMMITTED Isolation Level for Reader Instances<a name="AuroraMySQL.Reference.IsolationLevels.relaxed"></a>
+
+ If your application includes a write\-intensive workload on the primary instance and long\-running queries on the Aurora Replicas, you might experience substantial purge lag\. *Purge lag* happens when internal garbage collection is blocked by long\-running queries\. The symptom that you see is a high value for `history list length` in output from the `SHOW ENGINE INNODB STATUS` command\. You can monitor this value using the `RollbackSegmentHistoryListLength` metric in CloudWatch\. This condition can reduce the effectiveness of secondary indexes and lead to reduced overall query performance and wasted storage space\. 
+
+ If you experience such issues, you can use an Aurora MySQL configuration setting, `aurora_read_replica_read_committed`, to use the `READ COMMITTED` isolation level on Aurora Replicas\. Using this setting can help reduce slowdowns and wasted space that can result from performing long\-running queries at the same time as transactions that modify your tables\. 
+
+ We recommend making sure that you understand the specific Aurora MySQL behavior of the `READ COMMITTED` isolation before using this setting\. The Aurora Replica `READ COMMITTED` behavior complies with the ANSI SQL standard\. However, the isolation is less strict than typical MySQL `READ COMMITTED` behavior that you might be familiar with\. Thus, you might see different query results under `READ COMMITTED` on an Aurora MySQL Read Replica than for the same query under `READ COMMITTED` on the Aurora MySQL primary instance or on Amazon RDS MySQL\. You might use the `aurora_read_replica_read_committed` setting for such use cases as a comprehensive report that scans a very large database\. You might avoid it for short queries with small result sets, where precision and repeatability are important\. 
+
+#### Enabling READ COMMITTED for Readers<a name="AuroraMySQL.Reference.IsolationLevels.relaxed.enabling"></a>
+
+ To enable the `READ COMMITTED` isolation level for Aurora Replicas, enable the `aurora_read_replica_read_committed` configuration setting\. Enable this setting at the session level while connected a specific Aurora Replica\. To do so, run the following SQL commands\. 
+
+```
+set session aurora_read_replica_read_committed = ON;
+set session transaction isolation level read committed;
+```
+
+ You might enable this configuration setting temporarily to perform interactive ad hoc \(one\-time\) queries\. You might also want to run a reporting or data analysis application that benefits from the `READ COMMITTED` isolation level, while leaving the default unchanged for other applications\. 
+
+ You can enable this feature permanently for one or more Aurora Replicas in your cluster\. To do so, turn on the `aurora_read_replica_read_committed` setting in the DB parameter group used by the associated DB instances\. Enable this setting on the DB instances where you run the long\-running queries\. In this case, connect to the instance endpoints to ensure the queries run on the intended DB instances\. 
+
+ When the `aurora_read_replica_read_committed` setting is enabled, use the `SET TRANSACTION ISOLATION LEVEL` command to specify the isolation level for the appropriate transactions\. 
+
+```
+set transaction isolation level read committed;
+```
+
+#### Differences in READ COMMITTED Behavior on Aurora Replicas<a name="AuroraMySQL.Reference.IsolationLevels.relaxed.behavior"></a>
+
+ The `aurora_read_replica_read_committed` setting makes the `READ COMMITTED` isolation level available for an Aurora Replica, with consistency behavior that is optimized for long\-running transactions\. The `READ COMMITTED` isolation level on Aurora Replicas has less strict isolation than on Aurora primary instances or multi\-master instances\. For that reason, enable this setting only on Aurora Replicas where you know that your queries can accept the possibility of certain types of inconsistent results\. 
+
+ Your queries can experience certain kinds of read anomalies when the `aurora_read_replica_read_committed` setting is turned on\. Two kinds of anomalies are especially important to understand and handle in your application code\. A *non\-repeatable read* occurs when another transaction commits while your query is running\. A long\-running query can see different data at the start of the query than it sees at the end\. A *phantom read* occurs when other transactions cause existing rows to be reorganized while your query is running, and one or more rows are read twice by your query\. 
+
+ Your queries might experience inconsistent row counts as a result of phantom reads\. Your queries might also return incomplete or inconsistent results due to non\-repeatable reads\. For example, suppose that a join operation refers to tables that are concurrently modified by SQL statements such as `INSERT` or `DELETE`\. In this case, the join query might read a row from one table but not the corresponding row from another table\. 
+
+ The ANSI SQL standard allows both of these behaviors for the `READ COMMITTED` isolation level\. However, those behaviors are different than the typical MySQL implementation of `READ COMMITTED`\. Thus, before enabling the `aurora_read_replica_read_committed` setting, check any existing SQL code to verify if it operates as expected under the looser consistency model\. 
+
+ Row counts and other results might not be strongly consistent under the `READ COMMITTED` isolation level while this setting is enabled\. Thus, you typically enable the setting only while running analytic queries that aggregate large amounts of data and don't require absolute precision\. If you don't have these kinds of long\-running queries alongside a write\-intensive workload, you probably don't need the `aurora_read_replica_read_committed` setting\. Without the combination of long\-running queries and a write\-intensive workload, you're unlikely to encounter issues with the length of the history list\. 
+
+**Example Queries Showing Isolation Behavior for READ COMMITTED on Aurora Replicas**  
+ The following example shows how `READ COMMITTED` queries on an Aurora Replica might return non\-repeatable results if transactions modify the associated tables at the same time\. The table `BIG_TABLE` contains 1 million rows before any queries start\. Other data manipulation language \(DML\) statements add, remove, or change rows while the are running\.   
+ The queries on the Aurora primary instance under the `READ COMMITTED` isolation level produce predictable results\. However, the overhead of keeping the consistent read view for the lifetime of every long\-running query can lead to expensive garbage collection later\.   
+ The queries on the Aurora Replica under the `READ COMMITTED` isolation level are optimized to minimize this garbage collection overhead\. The tradeoff is that the results might vary depending on whether the queries retrieve rows that are added, removed, or reorganized by transactions that commit while the query is running\. The queries are allowed to consider these rows but aren't required to\. For demonstration purposes, the queries check only the number of rows in the table by using the `COUNT(*)` function\.   
+
+
+|  Time  |  DML Statement on Aurora Primary Instance  |  Query on Aurora Primary Instance with READ COMMITTED  |  Query on Aurora Replica with READ COMMITTED  | 
+| --- | --- | --- | --- | 
+|  T1  |  INSERT INTO big\_table SELECT \* FROM other\_table LIMIT 1000000; COMMIT;   |  |  | 
+|  T2  |  |  Q1: SELECT COUNT\(\*\) FROM big\_table;  |  Q2: SELECT COUNT\(\*\) FROM big\_table;  | 
+|  T3  |  INSERT INTO big\_table \(c1, c2\) VALUES \(1, 'one more row'\); COMMIT;   |  |  | 
+|  T4  |  |  If Q1 finishes now, result is 1,000,000\.  |  If Q2 finishes now, result is 1,000,000 or 1,000,001\.  | 
+|  T5  |  DELETE FROM big\_table LIMIT 2; COMMIT;   |  |  | 
+|  T6  |  |  If Q1 finishes now, result is 1,000,000\.  |  If Q2 finishes now, result is 1,000,000 or 1,000,001 or 999,999 or 999,998\.  | 
+|  T7  |  UPDATE big\_table SET c2 = CONCAT\(c2,c2,c2\); COMMIT;   |  |  | 
+|  T8  |  |  If Q1 finishes now, result is 1,000,000\.  |  If Q2 finishes now, result is 1,000,000 or 1,000,001 or 999,999, or possibly some higher number\.  | 
+|  T9  |  |  Q3: SELECT COUNT\(\*\) FROM big\_table;  |  Q4: SELECT COUNT\(\*\) FROM big\_table;  | 
+|  T10  |  |  If Q3 finishes now, result is 999,999\.  |  If Q4 finishes now, result is 999,999\.  | 
+|  T11  |  |  Q5: SELECT COUNT\(\*\) FROM parent\_table p JOIN child\_table c ON \(p\.id = c\.id\) WHERE p\.id = 1000;  |  Q6: SELECT COUNT\(\*\) FROM parent\_table p JOIN child\_table c ON \(p\.id = c\.id\) WHERE p\.id = 1000;  | 
+|  T12  |   INSERT INTO parent\_table \(id, s\) VALUES \(1000, 'hello'\); INSERT INTO child\_table \(id, s\) VALUES \(1000, 'world'\); COMMIT;   |  |  | 
+|  T13  |  |  If Q5 finishes now, result is 0\.  |  If Q6 finishes now, result is 0 or 1\.  | 
+ If the queries finish quickly, before any other transactions perform DML statements and commit, the results are predictable and the same between the primary instance and the Aurora Replica\.   
+ The results for Q1 are highly predictable, because `READ COMMITTED` on the primary instance uses a strong consistency model similar to the `REPEATABLE READ` isolation level\.   
+ The results for Q2 might vary depending on what transactions commit while that query is running\. For example, suppose that other transactions perform DML statements and commit while the queries are running\. In this case, the query on the Aurora Replica with the `READ COMMITTED` isolation level might or might not take the changes into account\. The row counts are not predictable in the same way as under the `REPEATABLE READ` isolation level\. They also aren't as predictable as queries running under the `READ COMMITTED` isolation level on the primary instance, or on an RDS MySQL instance\.   
+ The `UPDATE` statement at T7 doesn't actually change the number of rows in the table\. However, by changing the length of a variable\-length column, this statement can cause rows to be reorganized internally\. A long\-running `READ COMMITTED` transaction might see the old version of a row, and later within the same query see the new version of the same row\. The query can also skip both the old and new versions of the row\. Thus, the row count might be different than expected\.   
+ The results of Q5 and Q6 might be identical or slightly different\. Query Q6 on the Aurora Replica under `READ COMMITTED` is able to see, but is not required to see, the new rows that are committed while the query is running\. It might also see the row from one table but not from the other table\. If the join query doesn't find a matching row in both tables, it returns a count of zero\. If the query does find both the new rows in `PARENT_TABLE` and `CHILD_TABLE`, the query returns a count of one\. In a long\-running query, the lookups from the joined tables might happen at widely separated times\.   
+ These differences in behavior depend on the timing of when transactions are committed and when the queries process the underlying table rows\. Thus, you're most likely to see such differences in report queries that take minutes or hours and that run on Aurora clusters processing OLTP transactions at the same time\. These are the kinds of mixed workloads that benefit the most from the `READ COMMITTED` isolation level on Aurora Replicas\. 
 
 ## Aurora MySQL Stored Procedures<a name="AuroraMySQL.Reference.StoredProcs"></a>
 

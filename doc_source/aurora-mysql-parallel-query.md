@@ -663,7 +663,7 @@ mysql> explain select * from part where p_type = 'LARGE BRUSHED BRASS';
  For example, when a join query includes `WHERE` predicates to filter the rows from one of the joined tables, that filtering option can use parallel query\. As another example, suppose that a join query uses the hash join mechanism, for example to join a big table with a small table\. In this case, the table scan to produce the Bloom filter data structure might be able to use parallel query\. 
 
 **Note**  
- Although currently the hash join feature requires enabling lab mode, hash joins are always available in parallel query\-enabled clusters\. 
+ Hash joins are always available in parallel query\-enabled clusters\. Parallel query is typically used for the kinds of resource\-intensive queries that benefit from the hash join optimization\. 
 
 ```
 mysql> explain select count(*) from orders join customer where o_custkey = c_custkey;

@@ -10,6 +10,10 @@ ERROR 1871 (HY000): S3 API returned error: Network Connection
 ERROR 1873 (HY000): Lambda API returned error: Network Connection. Unable to connect to endpoint
 ```
 
+```
+ERROR 1815 (HY000): Internal error: Unable to initialize S3Stream
+```
+
 If you encounter these messages while invoking AWS Lambda functions or accessing files from Amazon S3, check if your Aurora DB cluster is public or private\. If your Aurora DB cluster is private, you must configure it to enable connections\.
 
 For an Aurora DB cluster to be public, it must be marked as publicly accessible\. If you look at the details for the DB cluster in the AWS Management Console, **Publicly Accessible** is **Yes** if this is the case\. The DB cluster must also be in an Amazon VPC public subnet\. For more information about publicly accessible DB instances, see [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\. For more information about public Amazon VPC subnets, see [Your VPC and Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)\.

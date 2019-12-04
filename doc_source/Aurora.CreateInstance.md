@@ -57,7 +57,7 @@ For this example, **Standard Create** is enabled, and **Easy Create** isn't enab
 
 1. In the upper\-right corner of the AWS Management Console, choose the AWS Region in which you want to create the DB cluster\. 
 
-   Aurora is not available in all AWS Regions\. For a list of AWS Regions where Aurora is available, see [Availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
+   Aurora is not available in all AWS Regions\. For a list of AWS Regions where Aurora is available, see [Region Availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
 
 1. In the navigation pane, choose **Databases**\.
 

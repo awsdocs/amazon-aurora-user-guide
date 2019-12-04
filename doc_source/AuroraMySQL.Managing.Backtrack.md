@@ -37,13 +37,16 @@ The following limitations apply to backtracking:
 + Backtracking is not supported with binary log \(binlog\) replication\. Cross\-region replication must be disabled before you can configure or use backtracking\.
 + You can't backtrack a database clone to a time before that database clone was created\. However, you can use the original database to backtrack to a time before the clone was created\. For more information about database cloning, see [Cloning Databases in an Aurora DB Cluster](Aurora.Managing.Clone.md)\.
 + Backtracking causes a brief DB instance disruption\. You must stop or pause your applications before starting a backtrack operation to ensure that there are no new read or write requests\. During the backtrack operation, Aurora pauses the database, closes any open connections, and drops any uncommitted reads and writes\. It then waits for the backtrack operation to complete\.
-+  Backtracking is only supported for Aurora MySQL 5\.6\. It isn't supported for Aurora MySQL 5\.7\. Because of this limitation, you currently can't follow certain upgrade paths from Aurora MySQL 5\.6 to 5\.7 if you created the Aurora MySQL 5\.6 cluster with the Backtrack setting enabled: 
-  +  You can't restore a snapshot of the Aurora MySQL 5\.6 DB cluster to Aurora MySQL 5\.7\. 
-  +  You can't perform point\-in\-time recovery on the Aurora MySQL 5\.6 DB cluster to restore it to Aurora MySQL 5\.7\. 
-
-   These limitations still apply even if you turn off Backtrack for the Aurora MySQL 5\.6 cluster\. 
 + Backtracking is not supported for the China \(Ningxia\) region\.
 +  You can't use Backtrack with Aurora multi\-master clusters\. 
+
+## <a name="AuroraMySQL.Managing.Backtrack.Upgrade"></a>
+
+ Backtracking is available for Aurora MySQL 1\.\*, which is compatible with MySQL 5\.6\. It's also available for Aurora MySQL 2\.06 and higher, which is compatible with MySQL 5\.7\. Because of the Aurora MySQL 2\.\* version requirement, if you created the Aurora MySQL 1\.\* cluster with the Backtrack setting enabled, you can only upgrade to a Backtrack\-compatible version of Aurora MySQL 2\.\*\. This requirement affects the following types of upgrade paths: 
++  You can only restore a snapshot of the Aurora MySQL 1\.\* DB cluster to a Backtrack\-compatible version of Aurora MySQL 2\.\*\. 
++  You can only perform point\-in\-time recovery on the Aurora MySQL 1\.\* DB cluster to restore it to a Backtrack\-compatible version of Aurora MySQL 2\.\*\. 
+
+ These upgrade requirements still apply even if you turn off Backtrack for the Aurora MySQL 1\.\* cluster\. 
 
 ## Configuring Backtracking<a name="AuroraMySQL.Managing.Backtrack.Configuring"></a>
 

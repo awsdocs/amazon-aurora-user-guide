@@ -18,7 +18,7 @@ When you create a new DB instance, Performance Insights is enabled when you choo
 
 To create a DB instance, follow the instructions for your DB engine in [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
 
-The following image shows the **Performance Insights** section\.
+The following screenshot shows the **Performance Insights** section\.
 
 ![\[Enable Performance Insights during DB instance creation with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/perf_insights_enabling.png)
 

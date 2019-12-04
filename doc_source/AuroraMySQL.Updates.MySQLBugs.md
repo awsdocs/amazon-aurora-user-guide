@@ -13,6 +13,7 @@ MySQL 5\.7\-compatible version Aurora contains all MySQL bug fixes through MySQL
 
 | Database engine update | Version | MySQL bugs fixed | 
 | --- | --- | --- | 
+| [Aurora MySQL Database Engine Updates 2019\-11\-25 \(Version 2\.07\.0\)](AuroraMySQL.Updates.2070.md) |  2\.07\.0  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL Database Engine Updates 2019\-11\-11 \(Version 2\.05\.0\)](AuroraMySQL.Updates.2050.md) |  2\.05\.0  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL Database Engine Updates 2019\-09\-19 \(Version 2\.04\.6\)](AuroraMySQL.Updates.2046.md) |  2\.04\.6  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL Database Engine Updates 2018\-10\-11](AuroraMySQL.Updates.203.md) |  2\.03  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
@@ -50,3 +51,5 @@ MySQL 5\.6\-compatible version Aurora contains all MySQL bug fixes through MySQL
 | [Aurora MySQL Database Engine Updates 2019\-02\-07 \(Version 1\.19\.0\)](AuroraMySQL.Updates.1190.md) | 1\.19\.0 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL Database Engine Updates 2019\-09\-19 \(Version 1\.19\.5\)](AuroraMySQL.Updates.1195.md) | 1\.19\.5 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL Database Engine Updates 2019\-11\-11 \(Version 1\.20\.0\)](AuroraMySQL.Updates.1200.md) | 1\.20\.0 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
+| [Aurora MySQL Database Engine Updates 2019\-11\-25 \(Version 1\.21\.0\)](AuroraMySQL.Updates.1210.md) | 1\.21\.0 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
+| [Aurora MySQL Database Engine Updates 2019\-11\-25 \(Version 1\.22\.0\)](AuroraMySQL.Updates.1220.md) | 1\.22\.0 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 

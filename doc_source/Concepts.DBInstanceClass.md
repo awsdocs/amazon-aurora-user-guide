@@ -37,7 +37,7 @@ In the following table, you can find details about the Amazon RDS DB instance cl
 
 The following are DB engine considerations for DB instance classes:
 + **Aurora Support for db\.r5** – These instance classes are available in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
-  + All Aurora MySQL versions support the db\.r5 instance classes in the following table, except the db\.r5\.24xlarge instance class\.
+  + Aurora MySQL versions support the db\.r5 instance classes as specified in the following table\.
   + For Aurora PostgreSQL, only versions compatible with PostgreSQL 10\.6 or later support the db\.r5 instance classes\. 
 + **Aurora Support for db\.t3** 
   + Aurora MySQL supports the db\.t3\.medium and db\.t3\.small instance classes for Aurora MySQL 1\.15 and higher, and all Aurora MySQL 2\.x versions\. These instance classes are available for Aurora MySQL in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
@@ -50,8 +50,10 @@ The following are DB engine considerations for DB instance classes:
 | --- |--- |--- |--- |--- |--- |--- |--- |
 | **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **Max\. Bandwidth \(Mbps\)** | **Network Performance** | **Aurora MySQL** | **Aurora PostgreSQL** | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
-| db\.r5\.24xlarge | 96 | 347 | 768 | 14,000 | 25 Gbps | No | Yes | 
+| db\.r5\.24xlarge | 96 | 347 | 768 | 14,000 | 25 Gbps | 1\.22 and later, 2\.06 and later\* | Yes | 
+| db\.r5\.16xlarge | 64 | 264 | 512 | 10,000 | 20 Gbps | 1\.22 and later, 2\.06 and later\* | No | 
 | db\.r5\.12xlarge | 48 | 173 | 384 | 7,000 | 10 Gbps | 1\.14\.4 and later\* | Yes | 
+| db\.r5\.8xlarge | 32 | 132 | 256 | 5,000 | 10 Gbps | 1\.22 and later, 2\.06 and later\* | No | 
 | db\.r5\.4xlarge | 16 | 71 | 128 | 3,500 | Up to 10 Gbps | 1\.14\.4 and later\* | Yes | 
 | db\.r5\.2xlarge | 8 | 38 | 64 | Up to 3,500 | Up to 10 Gbps | 1\.14\.4 and later\* | Yes | 
 | db\.r5\.xlarge | 4 | 19 | 32 | Up to 3,500 | Up to 10 Gbps | 1\.14\.4 and later\* | Yes | 

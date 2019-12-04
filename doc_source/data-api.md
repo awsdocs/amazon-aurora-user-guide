@@ -187,6 +187,12 @@ You can use parameters in Data API calls to `ExecuteStatement` and `BatchExecute
 |  `CLOB`  |  `STRING`  | 
 |  Other types \(including types related to date and time\)  |  `STRING`  | 
 
+For some specific types, such as `DECIMAL` or `TIME`, a hint might be required to instruct the Data API that the `String` value should be passed to the database as a different type\. You can do this by including values in `typeHint` in the `SqlParameter` data type\. The possible values for `typeHint` are the following:
++ `DECIMAL` – The corresponding `String` parameter value is sent as an object of `DECIMAL` type to the database\.
++ `TIMESTAMP` – The corresponding `String` parameter value is sent as an object of `TIMESTAMP` type to the database\. The accepted format is `YYYY-MM-DD HH:MM:SS[.FFF]`\.
++ `TIME` – The corresponding `String` parameter value is sent as an object of `TIME` type to the database\. The accepted format is `HH:MM:SS[.FFF]`\.
++ `DATE` – The corresponding `String` parameter value is sent as an object of `DATE` type to the database\. The accepted format is `YYYY-MM-DD`\.
+
 **Topics**
 + [Calling the Data API with the AWS CLI](#data-api.calling.cli)
 + [Calling the Data API from a Python Application](#data-api.calling.python)
@@ -843,21 +849,109 @@ public class BatchExecuteExample {
 }
 ```
 
+## Using the Java Client Library for Data API \(Preview\)<a name="data-api.java-client-library"></a>
+
+
+|  | 
+| --- |
+| This is prerelease documentation for a service in preview release\. It is subject to change\. | 
+
+You can download and use a Java client library for the Data API\. The Java client library provides an alternative way to use the Data API\. Using this library, you can map your client\-side classes to requests and responses of the Data API\. This mapping support can ease integration with some specific Java types, such as `Date`, `Time`, and `BigDecimal`\.
+
+### Downloading the Java Client Library for Data API<a name="data-api.java-client-library.downloading"></a>
+
+The Data API Java client library is open source in GitHub\. You can build the library manually from the source files, but the best practice is to consume the library using Apache Maven dependency management\. To do this, use the following procedure\. 
+
+**To use the Data API in your application as a dependency**
+
+1.  Download and install Apache Maven\. For more information, see [Downloading Apache Maven](https://maven.apache.org/download.cgi) and [Installing Apache Maven](https://maven.apache.org/install.html) in the Maven documentation\.
+
+1.  Add the Data API Maven repository to your application's Project Object Model \(POM\) file as shown following\.
+
+   ```
+   <!--Dependency:-->
+   <dependencies>
+       <dependency>
+          <groupId>com.amazonaws</groupId>
+          <artifactId>rdsdata-client-library</artifactId>
+          <version>1.0</version>
+       </dependency>
+   </dependencies>
+   <!--Custom repository:-->
+   <repositories>
+       <repository>
+          <id>rdsdata-client-repository</id>
+          <name>RDS Data Client Library Release Repository</name>
+          <url>https://rds-data-client-library-java.s3.amazonaws.com/maven/release</url>
+       </repository>
+   </repositories>
+   ```
+
+### Java Client Library Examples<a name="data-api.java-client-library.examples"></a>
+
+Following, you can find some common examples of using the Data API Java client library\. These examples assume that you have a table `accounts` with two columns: `accountId` and `balance`\. You also have the following data transfer object \(DTO\)\.
+
+```
+@Value
+    public class Account {
+        String accountId;
+        double balance;
+    }
+```
+
+The client library enables you to pass DTOs as input parameters\. The following example shows how customer DTOs are mapped to input parameters sets\.
+
+```
+var account1 = new Account("A-1", 1.1);
+var account2 = new Account("B-2", 100);
+client.forSql("INSERT INTO accounts(accountId, balance) VALUES(:accountId, :balance)")
+         .withParams(account1, account2)
+         .execute();
+```
+
+In some cases, it's easier to work with simple values as input parameters\. You can do so with the following syntax\.
+
+```
+client.forSql("INSERT INTO accounts(accountId, balance) VALUES(:accountId, :balance)")
+         .withParam("accountId", "A-1")
+         .withParam("balance", 12.2)
+         .execute();
+```
+
+The following is another example that works with simple values as input parameters\.
+
+```
+client.forSql("INSERT INTO accounts(accountId, balance) VALUES(?, ?", "A-1", 12.2)
+         .execute();
+```
+
+The client library provides automatic mapping to DTOs when an execution result is returned\. The following examples show how the execution result is mapped to your DTOs\.
+
+```
+List<Account> result = client.forSql("SELECT * FROM accounts")
+          .execute()
+          .mapToList(Account.class);
+          
+Account result = client.forSql("SELECT * FROM accounts WHERE account_id = '1'")
+          .execute()
+          .mapToSingle(Account.class);
+```
+
 ## Troubleshooting Data API Issues<a name="data-api.troubleshooting"></a>
 
 Use the following sections, titled with common error messages, to help troubleshoot problems that you have with the Data API\. 
 
 **Note**  
-If you have questions or comments related to the Data API, send email to [Rds\-data\-api\-feedback@amazon\.com](mailto:Rds-data-api-feedback@amazon.com)\.
+If you have questions or comments related to the Data API, send email to [rds\-data\-api\-feedback@amazon\.com](mailto:Rds-data-api-feedback@amazon.com)\.
 
 **Topics**
-+ [Transaction *<transaction\_ID>* Is Not Found](#data-api.troubleshooting.tran-id-not-found)
++ [Transaction <transaction\_ID> Is Not Found](#data-api.troubleshooting.tran-id-not-found)
 + [Packet for Query Is Too Large](#data-api.troubleshooting.packet-too-large)
 + [Query Response Exceeded Limit of Number of Records](#data-api.troubleshooting.query-response-too-large)
 + [Database Response Exceeded Size Limit](#data-api.troubleshooting.response-size-too-large)
-+ [HttpEndpoint Is Not Enabled for Cluster *<cluster\_ID>*](#data-api.troubleshooting.http-endpoint-not-enabled)
++ [HttpEndpoint Is Not Enabled for Cluster <cluster\_ID>](#data-api.troubleshooting.http-endpoint-not-enabled)
 
-### Transaction *<transaction\_ID>* Is Not Found<a name="data-api.troubleshooting.tran-id-not-found"></a>
+### Transaction <transaction\_ID> Is Not Found<a name="data-api.troubleshooting.tran-id-not-found"></a>
 
 In this case, the transaction ID specified in a Data API call wasn't found\. The cause for this issue is almost always one of the following:
 + The specified transaction ID wasn't created by a [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BeginTransaction.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BeginTransaction.html) call\.
@@ -873,7 +967,7 @@ For information about running transactions, see [Calling the Data API](#data-api
 
 In this case, the result set returned for a row was too large\. The Data API size limit is 64 KB per row in the result set returned by the database\.
 
-To solve this issue, ensure that each row in a result set is 64 KB or less\.
+To solve this issue, make sure that each row in a result set is 64 KB or less\.
 
 ### Query Response Exceeded Limit of Number of Records<a name="data-api.troubleshooting.query-response-too-large"></a>
 
@@ -891,7 +985,7 @@ To solve this issue, make sure that calls to the Data API return 1 MB of data or
 
 For more information about the `LIMIT` clause, see [SELECT Syntax](https://dev.mysql.com/doc/refman/5.7/en/select.html) in the MySQL documentation\.
 
-### HttpEndpoint Is Not Enabled for Cluster *<cluster\_ID>*<a name="data-api.troubleshooting.http-endpoint-not-enabled"></a>
+### HttpEndpoint Is Not Enabled for Cluster <cluster\_ID><a name="data-api.troubleshooting.http-endpoint-not-enabled"></a>
 
 The cause for this issue is almost always one of the following:
 + The Data API isn't enabled for the Aurora Serverless DB cluster\. To use the Data API with an Aurora Serverless DB cluster, the Data API must be enabled for the DB cluster\.

@@ -22,7 +22,7 @@ Performance Insights is on by default in the console create wizard for all DB en
 
 The central metric for Performance Insights is `DB Load`, which represents the average number of active sessions for the DB engine\. The `DB Load` metric is collected every second\. An *active session* is a connection that has submitted work to the DB engine and is waiting for a response from it\. For example, if you submit a SQL query to the DB engine, the database session is active while the DB engine is processing that query\. 
 
-By combining `DB Load` with wait event data, you can get a complete picture of the state for an active session\. A **wait event** is a condition that causes the execution of a SQL statement to wait for a specific event to happen before it can continue\. For example, SQL statement execution might wait until a locked resource is unlocked\. Wait events vary by DB engine: 
+By combining `DB Load` with wait event data, you can get a complete picture of the state for an active session\. A *wait event* is a condition that causes the execution of a SQL statement to wait for a specific event to happen before it can continue\. For example, SQL statement execution might wait until a locked resource is unlocked\. Wait events vary by DB engine: 
 + For a list of the most commonly used wait events for Aurora MySQL, see [Aurora MySQL Events](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Waitevents)\.
 + For information about all MySQL wait events, see [Wait Event Summary Tables](https://dev.mysql.com/doc/refman/5.7/en/wait-summary-tables.html) in the MySQL documentation\.
 + For a list of the most commonly used wait events for Aurora PostgreSQL, see [Amazon Aurora PostgreSQL Events](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.Waitevents)\.

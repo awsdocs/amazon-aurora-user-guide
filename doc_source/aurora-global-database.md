@@ -14,36 +14,36 @@
 + [Connecting to an Aurora Global Database](#aurora-global-database-connecting)
 + [Failover for Aurora Global Database](#aurora-global-database-failover)
 + [Performance Insights for Aurora Global Database](#aurora-global-database-pi)
++ [Using Multiple Secondary Regions with Aurora Global Database](#aurora-global-database-multiple-secondary-regions)
 + [Using Aurora Global Database with Other AWS Services](#aurora-global-database-interop)
 
 ## Overview of Aurora Global Database<a name="aurora-global-database-overview"></a>
 
- An Aurora global database consists of one primary AWS Region where your data is mastered, and one read\-only, secondary AWS Region\. Aurora replicates data to the secondary AWS Region with typical latency of under a second\. You issue write operations directly to the primary DB instance in the primary AWS Region\. An Aurora global database uses dedicated infrastructure to replicate your data, leaving database resources available entirely to serve application workloads\. Applications with a worldwide footprint can use reader instances in the secondary AWS Region for low latency reads\. In the unlikely event your database becomes degraded or isolated in an AWS region, you can promote the secondary AWS Region to take full read\-write workloads in under a minute\. 
+ An Aurora global database consists of one primary AWS Region where your data is mastered, and up to five read\-only, secondary AWS Region\. Aurora replicates data to the secondary AWS Region with typical latency of under a second\. You issue write operations directly to the primary DB instance in the primary AWS Region\. An Aurora global database uses dedicated infrastructure to replicate your data, leaving database resources available entirely to serve application workloads\. Applications with a worldwide footprint can use reader instances in the secondary AWS Region for low latency reads\. In the unlikely event your database becomes degraded or isolated in an AWS region, you can promote the secondary AWS Region to take full read\-write workloads in under a minute\. 
 
- The Aurora cluster in the primary AWS Region where your data is mastered performs both read and write operations\. The cluster in the secondary region enables low\-latency reads\. You can scale up the secondary cluster independently by adding one or more DB instances \(Aurora Replicas\) to serve read\-only workloads\. For disaster recovery, you can remove and promote the secondary cluster to allow full read and write operations\. 
+ The Aurora cluster in the primary AWS Region where your data is mastered performs both read and write operations\. The cluster in the secondary region enables low\-latency reads\. You can scale up the secondary clusters independently by adding one of more DB instances \(Aurora Replicas\) to serve read\-only workloads\. For disaster recovery, you can remove and promote one of the secondary clusters to allow full read and write operations\. 
 
  Only the primary cluster performs write operations\. Clients that perform write operations connect to the DB cluster endpoint of the primary cluster\. 
 
 **Topics**
 + [Advantages of Aurora Global Database](#aurora-global-database.advantages)
-+ [Current Limitations of Aurora Global Database](#aurora-global-database.limitations)
++ [Requirements for Aurora Global Databases](#aurora-global-database.limitations)
 
 ### Advantages of Aurora Global Database<a name="aurora-global-database.advantages"></a>
 
- Aurora Global Database uses dedicated infrastructure to replicate changes between the primary DB cluster and the secondary cluster\. Aurora Global Database provides the following advantages: 
+ Aurora Global Database uses dedicated infrastructure to replicate changes between the primary DB cluster and any secondary clusters\. Aurora Global Database provides the following advantages: 
 +  The replication performed by an Aurora global database has limited to no performance impact on the primary DB cluster\. The resources of the DB instances are fully devoted to serve read and write workloads\. 
 +  Changes are replicated between AWS Regions with minimal lag, typically less than 1 second\. 
-+  The secondary cluster enables fast failover for disaster recovery\. You can typically promote a secondary cluster and make it available for writes in under a minute\. 
++  The secondary clusters enable fast failover for disaster recovery\. You can typically promote a secondary cluster and make it available for writes in under a minute\. 
 +  Applications in remote AWS Regions experience lower query latency when they read from a secondary cluster\. 
-+  You can add up to 16 Aurora Replicas to the secondary cluster, allowing you to scale reads beyond the capacity of a single Aurora cluster\. 
++  You can add up to 16 Aurora Replicas to any of the secondary clusters, allowing you to scale reads beyond the capacity of a single Aurora cluster\. 
 
-### Current Limitations of Aurora Global Database<a name="aurora-global-database.limitations"></a>
+### Requirements for Aurora Global Databases<a name="aurora-global-database.limitations"></a>
 
  The following limitations currently apply to Aurora Global Database: 
-+  Aurora Global Database is only available for Aurora with MySQL 5\.6 compatibility\. 
-+  You can't use `db.t2` or `db.t3` instance classes for an Aurora global database\. You have a choice of `db.r4` or `db.r5` instance classes\. 
++  You can't use `db.t2` instance classes for an Aurora global database\. You have a choice of `db.r4` or `db.r5` instance classes\. 
 +  Currently, Aurora Global Database isn't available in the EU \(Stockholm\) and Asia Pacific \(Hong Kong\) regions\. 
-+  The secondary cluster must be in a different AWS Region than the primary cluster\. 
++  The primary cluster and each of the secondary clusters must be in a separate AWS Region\. You can't put the primary cluster in the same AWS Region as one of the secondary clusters\. You can't put two secondary clusters in the same AWS Region\. 
 +  You can't create a cross\-region Read Replica from the primary cluster in same region as the secondary\. See [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md) for information about cross\-region Read Replicas\. 
 +  The following features aren't supported for Aurora Global Database: 
   +  Cloning\. For information about cloning, see [Cloning Databases in an Aurora DB Cluster](Aurora.Managing.Clone.md)\. 
@@ -54,11 +54,11 @@
 
 ## Creating an Aurora Global Database<a name="aurora-global-database-creating"></a>
 
- An Aurora global database spans multiple AWS Regions\. You create the global database itself along with the read\-write primary cluster\. Then you create a read\-only secondary cluster in another AWS Region\. 
-+  To create a new global database, you create the global database and the primary cluster that it contains, and then add a secondary cluster\. 
-+  If you have an existing Aurora cluster, you can take a snapshot and restore it to a new Aurora global database\. To do so, follow the procedure in [Importing Data into an Aurora Global Database](#aurora-global-database-etl)\. 
+ An Aurora global database spans multiple AWS Regions\. You create the global database itself along with the read\-write primary cluster\. Then you create one or more read\-only secondary clusters in other AWS Regions\. 
++  To create a new global database, you create the global database and the primary cluster that it contains, and then add one or more secondary clusters\. 
++  If you have an existing Aurora cluster using Aurora MySQL 1\.21 or lower, you can take a snapshot and restore it to a new Aurora global database\. To do so, follow the procedure in [Importing Data into an Aurora Global Database](#aurora-global-database-etl)\. For clusters running Aurora MySQL 1\.22 or higher, or 2\.07 or higher, you can add them to a global database without any special procedures or cluster creation options\. 
 
- When specifying names for the primary and secondary cluster, choose names that are different than your existing Aurora clusters, even if those clusters are in other AWS Regions\. 
+ When specifying names for the primary and secondary clusters, choose names that are different than your existing Aurora clusters, even if those clusters are in other AWS Regions\. 
 
 **Important**  
  Before you create an Aurora global database, complete the setup tasks for your account, network, and security settings in [Setting Up for Amazon RDS](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SettingUp.html) in the *Amazon Relational Database Service User Guide*\. 
@@ -74,15 +74,14 @@
 
 1.  Choose **Create Database**\. 
 
-1.  On the **Select engine** page, choose the MySQL 5\.6\-compatible Aurora engine and **Global** for **Database location**\. For an example, see the following images\. 
+1.  On the **Select engine** page, choose the MySQL 5\.6\-compatible or 5\.7\-compatible Aurora engine and **Global** for **Database location**\. For an example, see the following images\. 
 **Note**  
  Make sure that **Standard Create** is chosen\. **Standard create** makes visible the choices that you need for Aurora global databases\. Don't choose **Easy Create**\. 
 
    1.  Choose Aurora as the engine:   
 ![\[Screenshot of the engine options choices when creating a database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-create-global-01a.png)
 
-   1.  Choose MySQL 5\.6 compatibility:   
-![\[Screenshot of the edition and engine version choices when creating an Aurora cluster.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-create-global-01b.png)
+   1.  Choose MySQL 5\.6 or MySQL 5\.7 compatibility\. 
 
    1.  Choose **Global** as the location:   
 ![\[Screenshot of the database location choices when creating an Aurora cluster. Choose "global" to create an Aurora global databases.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-create-global-01c.png)
@@ -94,7 +93,7 @@
 
 1.  Choose **Create**\. 
 
- When the primary DB cluster is created and available, create a secondary cluster by following the steps in [Adding an AWS Region to an Aurora Global Database](#aurora-global-database-attaching)\. 
+ When the primary DB cluster is created and available, create one or more secondary clusters by following the steps in [Adding an AWS Region to an Aurora Global Database](#aurora-global-database-attaching)\. 
 
 ### AWS CLI<a name="aurora-global-database-create.cli"></a>
 
@@ -110,7 +109,7 @@
       aws rds create-global-cluster \
           --global-cluster-identifier global_database_id \
           --engine aurora \
-          --engine-version 5.6.10a
+          --engine-version version # optional
       ```
 
       For Windows:
@@ -119,7 +118,7 @@
       aws rds create-global-cluster ^
           --global-cluster-identifier global_database_id ^
           --engine aurora ^
-          --engine-version 5.6.10a
+          --engine-version version # optional
       ```
 
        To learn more about additional options, see `[create\-global\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-global-cluster.html)`\. 
@@ -129,10 +128,10 @@
       ```
       aws rds --region primary_region \
         describe-global-clusters \
-          --global-cluster-identifier global_database_id    # optional
+          --global-cluster-identifier global_database_id # optional
       ```
 
-   1.  When the `describe-global-clusters` results show a status of `available`, create the primary cluster for the Aurora global database\. To do so, use the AWS CLI `[create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)` command\. Specify `aurora` for the `--engine` parameter, `5.6.10a` for the `--engine-version` parameter, and `global` for the `--engine-mode` parameter\. Specify the same `--global-cluster-identifier` value as when you created the global database\. The following example shows how\. 
+   1.  When the `describe-global-clusters` results show a status of `available`, create the primary cluster for the Aurora global database\. To do so, use the AWS CLI `[create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)` command\. Specify `aurora` for the `--engine` parameter and `5.6.10a` for the `--engine-version` parameter\. Specify the same `--global-cluster-identifier` value as when you created the global database\. The following example shows how\. 
 
       For Linux, OS X, or Unix:
 
@@ -142,10 +141,10 @@
         --db-cluster-identifier db_cluster_id \
         --master-username master_userid \
         --master-user-password master_password \
-        --engine aurora \
-        --engine-version 5.6.10a \
-        --engine-mode global \
-        --global-cluster-identifier global_database_id
+        --engine { aurora | aurora-mysql } \
+        --engine-version version \
+        --global-cluster-identifier global_database_id \
+        --engine-mode global # Optional
       ```
 
       For Windows:
@@ -156,13 +155,11 @@
         --db-cluster-identifier db_cluster_id ^
         --master-username master_userid ^
         --master-user-password master_password ^
-        --engine aurora ^
-        --engine-version 5.6.10a ^
-        --engine-mode global ^
-        --global-cluster-identifier global_database_id
+        --engine { aurora | aurora-mysql } ^
+        --engine-version version ^
+        --global-cluster-identifier global_database_id ^
+        --engine-mode global # Optional
       ```
-
-       global database\. 
 
        To learn more about additional options, see `[create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)`\. 
 
@@ -174,7 +171,15 @@
           --db-cluster-identifier db_cluster_id # optional
       ```
 
-   1.  When the `describe-db-clusters` results show a status of `available`, create the primary DB instance for the primary cluster\. To do so, use the AWS CLI `[create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)` command\. Specify `aurora` for the `--engine` parameter, `5.6.10a` for the `--engine-version` parameter, and `global` for the `--engine-mode` parameter\. The following example shows how\. 
+   1.  When the `describe-db-clusters` results show a status of `available`, create the primary DB instance for the primary cluster\. To do so, use the AWS CLI `[create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)` command\. 
+      +  Specify `aurora` for the `--engine` parameter for MySQL 5\.6 compatibility\. Or specify `aurora-mysql` for the `--engine` parameter for MySQL 5\.6 compatibility\. 
+      +  Optionally, specify the `--engine-version` parameter to choose a specific Aurora MySQL version to use\. 
+      +  Depending on your Aurora MySQL version, you might or might not need to specify the `--engine-mode` option\. 
+        +  For Aurora MySQL version 1, in 1\.21 and lower, specify `--engine-mode global`\. For 1\.22 and higher, `--engine-mode` is optional\. 
+        +  For Aurora MySQL version 2, global database support isn't available in Aurora MySQL 2\.06 and lower\. For 2\.07 and higher, the `--engine-mode` option is optional\. 
+        +  The Aurora MySQL versions 1\.22 and higher and 2\.07 and higher all include global database support for clusters you create with the default engine mode, `provisioned`\. You can add such clusters to a global database without any special choices during cluster creation\. 
+
+       The following example shows how\. 
 
       For Linux, OS X, or Unix:
 
@@ -183,8 +188,9 @@
         --db-cluster-identifier db_cluster_id \
         --db-instance-class instance_class \
         --db-instance-identifier db_instance_id \
-        --engine aurora \
-        --engine-version 5.6.10a
+        --engine { aurora | aurora-mysql } \
+        --engine-version version \ # Optional
+        --engine-mode global # only needed if version 1.x is less than or equal to 1.21
       ```
 
       For Windows:
@@ -194,8 +200,9 @@
         --db-cluster-identifier db_cluster_id ^
         --db-instance-class instance_class ^
         --db-instance-identifier db_instance_id ^
-        --engine aurora ^
-        --engine-version 5.6.10a
+        --engine { aurora | aurora-mysql } ^
+        --engine-version version \ # Optional
+        --engine-mode global # only needed if version 2.x is less than or equal to 2.06
       ```
 
        You don't need to include the `--master-username` and `--master-user-password` parameters, because those values are taken from the primary DB cluster\. 
@@ -245,8 +252,7 @@
           --master-username master_userid \
           --master-user-password master_password \
           --engine aurora \
-          --engine-version 5.6.10a \
-          --engine-mode global
+          --engine-version 5.6.10a
       
       aws rds --region primary_region \
         create-db-instance \
@@ -265,8 +271,7 @@
           --master-username master_userid ^
           --master-user-password master_password ^
           --engine aurora ^
-          --engine-version 5.6.10a ^
-          --engine-mode global
+          --engine-version 5.6.10a
       
       aws rds --region primary_region ^
         create-db-instance ^
@@ -300,10 +305,10 @@
 
 ## Adding an AWS Region to an Aurora Global Database<a name="aurora-global-database-attaching"></a>
 
- After you create an Aurora global database and its primary cluster, you increase its global footprint by adding a new AWS Region\. This process involves attaching a secondary Aurora cluster\. The secondary cluster must be in a different AWS Region than the primary cluster\. 
+ After you create an Aurora global database and its primary cluster, you increase its global footprint by adding one or more new AWS Regions\. This process involves attaching one or more secondary Aurora clusters\. Each secondary cluster must be in a different AWS Region than the primary cluster\. 
 
 **Note**  
- Currently, the maximum number of secondary Aurora clusters you can attach to an Aurora global database is one\. 
+ Currently, the maximum number of secondary Aurora clusters you can attach to an Aurora global database is five\. Thus, the most clusters you can associate with a global database is six: one read\-write primary cluster, and five read\-only secondary clusters\. 
 
 ### Console<a name="aurora-global-database-attach.console"></a>
 
@@ -338,14 +343,14 @@ aws rds --region secondary_region \
   create-db-cluster \
     --db-cluster-identifier secondary_cluster_id \
     --global-cluster-identifier global_database_id \
-    --engine aurora
+    --engine { aurora | aurora-mysql }
 
 aws rds --region secondary_region \
   create-db-instance \
     --db-instance-class instance_class \
     --db-cluster-identifier secondary_cluster_id \
     --db-instance-identifier db_instance_id \
-    --engine aurora
+    --engine { aurora | aurora-mysql }
 ```
 
 For Windows:
@@ -355,14 +360,14 @@ aws rds --region secondary_region ^
   create-db-cluster ^
     --db-cluster-identifier secondary_cluster_id ^
     --global-cluster-identifier global_database_id_id ^
-    --engine aurora
+    --engine { aurora | aurora-mysql }
 
 aws rds --region secondary_region ^
   create-db-instance ^
     --db-instance-class instance_class ^
     --db-cluster-identifier secondary_cluster_id ^
     --db-instance-identifier db_instance_id ^
-    --engine aurora
+    --engine { aurora | aurora-mysql }
 ```
 
 ### RDS API<a name="aurora-global-database-attach.api"></a>
@@ -373,9 +378,9 @@ aws rds --region secondary_region ^
 
  Removing an Aurora cluster from an Aurora global database turns it back into a regional cluster, with full read\-write capability and no longer synchronized with the primary cluster\. 
 
- You might remove an Aurora cluster from a global database in case the primary cluster becomes degraded or isolated\. Performing a failover for an Aurora global database involves removing the secondary cluster from the original global database and then using it as the primary cluster in a new Aurora global database\. 
+ You might remove an Aurora cluster from a global database in case the primary cluster becomes degraded or isolated\. Performing a failover for an Aurora global database involves removing one of the secondary clusters from the original global database, and then using it as the primary cluster in a new Aurora global database\. 
 
- If you no longer need the global database, you must remove the secondary cluster and then the primary cluster before deleting the global database itself\. You can then delete one or both of the clusters you removed, or continue to use one or both as single\-region Aurora clusters\. 
+ If you no longer need the global database, you must remove all secondary clusters and then the primary cluster before deleting the global database itself\. You can then delete some orall of the clusters you removed, or continue to use some or all as single\-region Aurora clusters\. 
 
 ### Console<a name="aurora-global-database-detach.console"></a>
 
@@ -383,9 +388,9 @@ aws rds --region secondary_region ^
 
 ![\[Screenshot showing confirmation prompt to remove a secondary cluster from an Aurora global database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-detach-secondary-convert-standalone.png)
 
- if a secondary cluster is still associated with the global database, you can't remove the primary cluster\. 
+ If any secondary clusters are still associated with the global database, you can't remove the primary cluster\. 
 
- After you remove or delete the secondary cluster, then you can remove the primary cluster the same way\. 
+ After you remove or delete all secondary clusters, then you can remove the primary cluster the same way\. 
 
  After clusters are removed from an Aurora global database, you still see them in the **Databases** page, but without the **Global**, **Primary**, and **Secondary** labels\. 
 
@@ -404,6 +409,7 @@ aws rds --region secondary_region \
   remove-from-global-cluster \
     --db-cluster-identifier secondary_cluster_ARN \
     --global-cluster-identifier global_database_id
+... repeat above command with a different --region for all secondary clusters ...
 
 aws rds --region primary_region \
   remove-from-global-cluster \
@@ -418,6 +424,7 @@ aws rds --region secondary_region ^
   remove-from-global-cluster ^
     --db-cluster-identifier secondary_cluster_ARN ^
     --global-cluster-identifier global_database_id
+... repeat above command with a different --region for all secondary clusters ...
 
 aws rds --region primary_region ^
   remove-from-global-cluster ^
@@ -437,7 +444,7 @@ aws rds --region primary_region ^
 
 **To delete an Aurora global database using the AWS Management Console**
 
- To delete a cluster that is part of an Aurora global database with the AWS Management Console, you remove or delete any secondary cluster associated with the global database, remove the primary cluster, and then delete the global database itself\. Because a global database typically holds business\-critical data, you can't delete the global database and the associated clusters in a single step\. See [Removing a Cluster from an Aurora Global Database](#aurora-global-database-detaching) for instructions on removing clusters from a global database\. See [Deleting a DB Instance in an Aurora DB Cluster](USER_DeleteInstance.md) for the procedure to delete clusters once they are removed\. Deleting the primary instance from an Aurora cluster deletes the cluster itself\. 
+ To delete a cluster that is part of an Aurora global database with the AWS Management Console, you remove or delete any secondary clusters associated with the global database, remove the primary cluster, and then delete the global database itself\. Because a global database typically holds business\-critical data, you can't delete the global database and the associated clusters in a single step\. See [Removing a Cluster from an Aurora Global Database](#aurora-global-database-detaching) for instructions on removing clusters from a global database\. See [Deleting a DB Instance in an Aurora DB Cluster](USER_DeleteInstance.md) for the procedure to delete clusters once they are removed\. Deleting the primary instance from an Aurora cluster deletes the cluster itself\. 
 
 1.  Confirm that all other clusters are removed from the Aurora global database\. 
 
@@ -481,13 +488,14 @@ aws rds --region primary_region ^
 +  Create a snapshot of an Aurora MySQL cluster or Amazon RDS MySQL DB instance and restore it to the primary cluster of an Aurora global database\. Currently, any snapshot must be from a source that is compatible with MySQL 5\.6\.   
 ![\[Screenshot showing the restore snapshot page for an Aurora global database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-restore-snapshot-01.png)
 +  Use point\-in\-time restore on the primary cluster to restore the cluster data to a previous state\. 
++  Use a physical import technique, such as the Percona xtrabackup tool\. 
 +  Use a logical import technique, such as preparing data with the `mysqldump` command and loading it with the `mysql` command\. 
 
- The crucial distinction for an Aurora global database is that you always import the data to the cluster that you designate as the primary cluster\. You can do the initial data import before or after adding that cluster to the Aurora Global Database\. All the data from the primary cluster is automatically replicated to the secondary cluster\. 
+ The crucial distinction for an Aurora global database is that you always import the data to the cluster that you designate as the primary cluster\. You can do the initial data import before or after adding that cluster to the Aurora Global Database\. All the data from the primary cluster is automatically replicated to any secondary clusters\. 
 
 ## Managing an Aurora Global Database<a name="aurora-global-database-managing"></a>
 
- You can perform most management operations on the individual clusters that make up an Aurora global database\. When you choose **Group related resources** on the **Databases** page in the console, you see the primary cluster and secondary cluster grouped under the associated global database object\. 
+ You can perform most management operations on the individual clusters that make up an Aurora global database\. When you select **Group related resources** on the **Databases** page in the console, you see the primary cluster and any secondary clusters grouped under the associated global database object\. 
 
 ![\[Screenshot showing how Aurora global databases are represented on the Databases page in the AWS Management Console.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-cluster-tree-01.png)
 
@@ -497,7 +505,7 @@ aws rds --region primary_region ^
 
 ## Configuring an Aurora Global Database<a name="aurora-global-database-modifying"></a>
 
- The **Databases** page in the AWS Management Console lists all your Aurora global databases, showing the primary cluster and secondary cluster for each one\. The Aurora global database is an object that has its own configuration settings, in particular the AWS Regions associated with the primary and secondary cluster\. 
+ The **Databases** page in the AWS Management Console lists all your Aurora global databases, showing the primary cluster and any secondary clusters for each one\. The Aurora global database is an object that has its own configuration settings, in particular the AWS Regions associated with the primary and any secondary clusters\. 
 
 ![\[Screenshot showing an Aurora global database and associated configuration settings in the AWS Management Console.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-global-cluster-configuration.png)
 
@@ -505,7 +513,7 @@ aws rds --region primary_region ^
 
 ![\[Screenshot showing the page to modify settings for an Aurora global database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-modify-global-01.png)
 
- You can configure the parameter groups independently for each Aurora cluster within the Aurora global database\. Most parameters work the same as for other kinds of Aurora clusters\. The `aurora_enable_repl_bin_log_filtering` and `aurora_enable_replica_log_compression` configuration settings have no effect\. We recommend keeping the settings consistent between all the clusters in a global database, to avoid unexpected behavior changes if you promote a secondary cluster to be the primary\. For example, use the same settings for time zones and character sets to avoid inconsistent behavior if a different cluster takes over as the primary cluster\. 
+ You can configure the parameter groups independently for each Aurora cluster within the Aurora global database\. Most parameters work the same as for other kinds of Aurora clusters\. The `aurora_enable_repl_bin_log_filtering` and `aurora_enable_replica_log_compression` configuration settings have no effect\. We recommend keeping the settings consistent between all the clusters in a global database, to avoid unexpected behavior changes if you promote one of the secondary clusters to be the primary\. For example, use the same settings for time zones and character sets to avoid inconsistent behavior if a different cluster takes over as the primary cluster\. 
 
 ## Connecting to an Aurora Global Database<a name="aurora-global-database-connecting"></a>
 
@@ -521,13 +529,13 @@ aws rds --region primary_region ^
 
  Aurora global databases introduce a higher level of failover capability than a default Aurora cluster\. If an entire cluster in one AWS Region becomes unavailable, you can promote another cluster in the global database to have read\-write capability\. 
 
- You can manually activate the failover mechanism if a cluster in a different AWS Region is a better choice to be the primary cluster\. For example, you might increase the capacity of the secondary cluster and then promote it to be the primary cluster\. Or the balance of activity among the AWS Regions might change, so that switching the primary cluster to a different AWS Region might give lower latency for write operations\. 
+ You can manually activate the failover mechanism if a cluster in a different AWS Region is a better choice to be the primary cluster\. For example, you might increase the capacity of one of the secondary clusters and then promote it to be the primary cluster\. Or the balance of activity among the AWS Regions might change, so that switching the primary cluster to a different AWS Region might give lower latency for write operations\. 
 
- The following steps outline the sequence of events when you promote a secondary cluster in an Aurora global database: 
+ The following steps outline the sequence of events when you promote one of the secondary clusters in an Aurora global database: 
 
 1.  The primary cluster becomes unavailable\. 
 
-1.  You remove the secondary cluster from the Aurora global database\. Doing so promotes it to full read\-write capability\. To learn how to remove an Aurora cluster from a global database, see [Removing a Cluster from an Aurora Global Database](#aurora-global-database-detaching)\. 
+1.  You one of the secondary clusters from the Aurora global database\. Doing so promotes it to full read\-write capability\. To learn how to remove an Aurora cluster from a global database, see [Removing a Cluster from an Aurora Global Database](#aurora-global-database-detaching)\. 
 
 1.  You reconfigure your application to divert write traffic to the newly promoted cluster\. 
 **Important**  
@@ -539,13 +547,13 @@ aws rds --region primary_region ^
 
 1.  When the outage is resolved and you are ready to assign your original AWS Region as the primary cluster again, you perform the same steps in reverse: 
 
-   1.  You remove the secondary cluster from the Aurora global database\. 
+   1.  You remove one of the secondary clusters from the Aurora global database\. 
 
    1.  You make that cluster the primary cluster of a new Aurora global database in the original AWS Region\. 
 
    1.  You redirect all the write traffic to the primary cluster in the original AWS Region\. 
 
-   1.  You add an AWS Region to set up a secondary cluster in the same AWS Region as before\. 
+   1.  You add an AWS Region to set up one or more secondary clusters in the same AWS Regions as before\. 
 
 ## Performance Insights for Aurora Global Database<a name="aurora-global-database-pi"></a>
 
@@ -556,6 +564,12 @@ aws rds --region primary_region ^
  For DB instances associated with a global database, the factors affecting performance might be different in each AWS Region\. For example, the DB instances in each region might have different capacity\. 
 
  For information about using Performance Insights, see [Using Amazon RDS Performance Insights](USER_PerfInsights.md)\. 
+
+## Using Multiple Secondary Regions with Aurora Global Database<a name="aurora-global-database-multiple-secondary-regions"></a>
+
+ When your Aurora global database includes more than one secondary region, you can choose which AWS Region to fail over to in case of an outage affecting the primary AWS Region\. To help determine which secondary region to choose, you can monitor the replication lag for all the secondary regions\. If one secondary region has substantially less replication lag than the others, that's a good indication that the associated Aurora cluster has enough database and network capacity to take over the full read\-write workload for your application\. 
+
+ When your global database has multiple secondary regions, you must detach all the secondary regions if the primary region experiences an outage\. Then, you promote one of those secondary regions to be the new primary region\. Finally, you create new clusters in each of the other secondary regions and attach those clusters to the global database\. 
 
 ## Using Aurora Global Database with Other AWS Services<a name="aurora-global-database-interop"></a>
 

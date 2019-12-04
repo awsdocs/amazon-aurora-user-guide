@@ -12,11 +12,19 @@ Amazon RDS supports a special AWS Region called AWS GovCloud \(US\-West\) that i
 
 To create or work with an Amazon RDS DB instance in a specific AWS Region, use the corresponding regional service endpoint\. 
 
-## Availability<a name="Aurora.Overview.Availability"></a>
+## Region Availability<a name="Aurora.Overview.Availability"></a>
+
+**Topics**
++ [Aurora MySQL Region Availability](#Aurora.Overview.Availability.MySQL)
++ [Aurora PostgreSQL Region Availability](#Aurora.Overview.Availability.PostgreSQL)
+
+### Aurora MySQL Region Availability<a name="Aurora.Overview.Availability.MySQL"></a>
 
 The following table shows the regions where Aurora MySQL is currently available\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html)
+
+### Aurora PostgreSQL Region Availability<a name="Aurora.Overview.Availability.PostgreSQL"></a>
 
 The following table shows the regions where Aurora PostgreSQL is currently available\.
 

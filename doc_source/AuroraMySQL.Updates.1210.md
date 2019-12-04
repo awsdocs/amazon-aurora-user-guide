@@ -1,10 +1,10 @@
-# Aurora MySQL Database Engine Updates 2019\-11\-11 \(Version 1\.20\.0\)<a name="AuroraMySQL.Updates.1200"></a>
+# Aurora MySQL Database Engine Updates 2019\-11\-25 \(Version 1\.21\.0\)<a name="AuroraMySQL.Updates.1210"></a>
 
-**Version:** 1\.20\.0
+**Version:** 1\.21\.0
 
- Aurora MySQL 1\.20\.0 is generally available\. Aurora MySQL 1\.\* versions are compatible with MySQL 5\.6 and Aurora MySQL 2\.\* versions are compatible with MySQL 5\.7\. 
+ Aurora MySQL 1\.21\.0 is generally available\. Aurora MySQL 1\.\* versions are compatible with MySQL 5\.6 and Aurora MySQL 2\.\* versions are compatible with MySQL 5\.7\. 
 
- Currently supported Aurora MySQL releases are 1\.14\.\*, 1\.15\.\*, 1\.16\.\*, 1\.17\.\*, 1\.18\.\*, 1\.19\.\*, 1\.20\.\*, 2\.01\.\*, 2\.02\.\*, 2\.03\.\* and 2\.04\.\*\. To create a cluster with an older version of Aurora MySQL, please specify the engine version through the AWS Management Console, the AWS CLI or the RDS API\. You have the option to upgrade existing Aurora MySQL 1\.\* database clusters to Aurora MySQL 1\.20\.0\. 
+ Currently supported Aurora MySQL releases are 1\.14\.\*, 1\.15\.\*, 1\.16\.\*, 1\.17\.\*, 1\.18\.\*, 1\.19\.\*, 1\.20\.\*, 1\.21\.\*, 2\.01\.\*, 2\.02\.\*, 2\.03\.\* and 2\.04\.\*\. To create a cluster with an older version of Aurora MySQL, please specify the engine version through the AWS Management Console, the AWS CLI or the RDS API\. You have the option to upgrade existing Aurora MySQL 1\.\* database clusters to Aurora MySQL 1\.21\.0\. 
 
 **Note**  
  This version is currently not available in the following AWS Regions: AWS GovCloud \(US\-East\) \[us\-gov\-east\-1\], AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\], China \(Ningxia\) \[cn\-northwest\-1\], Asia Pacific \(Hong Kong\) \[ap\-east\-1\], EU \(Stockholm\) \[eu\-north\-1\], and Middle East \(Bahrain\) \[me\-south\-1\]\. There will be a separate announcement once it is made available\. 
@@ -14,7 +14,7 @@
 **Note**  
 The procedure to upgrade your DB cluster has changed\. For more information, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
 
-## Improvements<a name="AuroraMySQL.Updates.1200.Improvements"></a>
+## Improvements<a name="AuroraMySQL.Updates.1210.Improvements"></a>
 
  **Critical fixes:** 
 + [CVE\-2018\-0734](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734)
@@ -38,7 +38,7 @@ The procedure to upgrade your DB cluster has changed\. For more information, see
 +  Fixed an issue in the query cache where the "Too many connections" error could cause a reboot\. 
 +  Fixed the free memory calculation on T2 instances to include swap memory space to prevent unnecessary reboots\. 
 
-## Integration of MySQL community edition bug fixes<a name="AuroraMySQL.Updates.1200.Patches"></a>
+## Integration of MySQL community edition bug fixes<a name="AuroraMySQL.Updates.1210.Patches"></a>
 +  Bug \#19929406: HANDLE\_FATAL\_SIGNAL \(SIG=11\) IN \_\_MEMMOVE\_SSSE3\_BACK FROM STRING::COPY 
 +  Bug \#17059925: For [UNION](https://dev.mysql.com/doc/refman/5.6/en/union.html) statements, the rows\-examined value was calculated incorrectly\. This was manifested as too\-large values for the `ROWS_EXAMINED` column of Performance Schema statement tables \(such as [events\_statements\_current](https://dev.mysql.com/doc/refman/5.6/en/events-statements-current-table.html)\)\. 
 +  Bug \#11827369: Some queries with `SELECT ... FROM DUAL` nested subqueries raised an assertion\. 

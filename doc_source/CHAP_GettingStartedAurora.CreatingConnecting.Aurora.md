@@ -29,7 +29,7 @@ For this example, **Easy Create** is enabled\. For information about creating an
 
 1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region in which you want to create the DB instance\.
 
-   Aurora is not available in all AWS Regions\. For a list of AWS Regions where Aurora is available, see [Availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
+   Aurora is not available in all AWS Regions\. For a list of AWS Regions where Aurora is available, see [Region Availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
 
 1. In the navigation pane, choose **Databases**\.
 
@@ -80,7 +80,7 @@ You can't view the master user password again\. If you don't record it, you migh
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the top\-right corner of the AWS Management Console, choose the AWS Region that you want to create your DB cluster in\. For a list of AWS Regions where Aurora is available, see [Availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
+1. In the top\-right corner of the AWS Management Console, choose the AWS Region that you want to create your DB cluster in\. For a list of AWS Regions where Aurora is available, see [Region Availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
 
 1. In the navigation pane, choose **Databases**\.
 
