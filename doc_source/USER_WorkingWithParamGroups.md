@@ -256,9 +256,6 @@ To modify a DB parameter group, use the AWS CLI [https://docs.aws.amazon.com/cli
 
 The following example modifies the` max_connections` and `max_allowed_packet` values in the DB parameter group named *mydbparametergroup*\.
 
-**Note**  
-Amazon RDS does not support passing multiple comma\-delimited parameter values for a single parameter\. 
-
 **Example**  
 For Linux, OS X, or Unix:  
 
@@ -323,9 +320,6 @@ To modify a DB cluster parameter group, use the AWS CLI [ `modify-db-cluster-par
 + `--parameters`
 
 The following example modifies the `server_audit_logging` and `server_audit_logs_upload` values in the DB cluster parameter group named *mydbclusterparametergroup*\.
-
-**Note**  
-Amazon RDS does not support passing multiple comma\-delimited parameter values for a single parameter\. 
 
 **Example**  
 For Linux, OS X, or Unix:  

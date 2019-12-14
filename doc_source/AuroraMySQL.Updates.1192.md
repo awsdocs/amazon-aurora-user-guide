@@ -7,7 +7,7 @@
  If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
 
 **Note**  
- This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\], EU \(Stockholm\) \[eu\-north\-1\], China \(Ningxia\) \[cn\-northwest\-1\], and Asia Pacific \(Hong Kong\) \[ap\-east\-1\] AWS Regions\. There will be a separate announcement once it is made available\. 
+ This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\], Europe \(Stockholm\) \[eu\-north\-1\], China \(Ningxia\) \[cn\-northwest\-1\], and Asia Pacific \(Hong Kong\) \[ap\-east\-1\] AWS Regions\. There will be a separate announcement once it is made available\. 
 
 **Note**  
 The procedure to upgrade your DB cluster has changed\. For more information, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.

@@ -62,7 +62,7 @@
   + US East \(N\. Virginia\)
   + US East \(Ohio\)
   + US West \(Oregon\)
-  + EU \(Ireland\)
+  + Europe \(Ireland\)
   + Asia Pacific \(Tokyo\)
 +  Using parallel query requires creating a new cluster, or restoring from an existing Aurora MySQL cluster snapshot, as described following\. 
 +  The Performance Insights feature is currently not available for clusters that are enabled for parallel query\. 

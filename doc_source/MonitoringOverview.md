@@ -150,6 +150,10 @@ You can create a CloudWatch alarm that sends an Amazon SNS message when the alar
 
 Alarms invoke actions for sustained state changes only\. CloudWatch alarms will not invoke actions simply because they are in a particular state, the state must have changed and been maintained for a specified number of periods\. The following procedures show how to create alarms for Amazon RDS\.
 
+**Note**  
+For Aurora, use `WRITER` or `READER` role metrics to set up alarms instead of relying on metrics for specific DB instances\. Aurora DB instance roles can change roles over time\. You can find these role\-based metrics in the CloudWatch console\.  
+Aurora Auto Scaling automatically sets alarms based on `READER` role metrics\. For more information about Aurora Auto Scaling, see [Using Amazon Aurora Auto Scaling with Aurora Replicas](Aurora.Integrating.AutoScaling.md)\. 
+
 **To set alarms using the CloudWatch console**
 
 1. Sign in to the AWS Management Console and open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.

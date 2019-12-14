@@ -23,7 +23,7 @@ The following table shows the AWS Regions where the Data API is currently availa
 | US East \(N\. Virginia\) | rds\-data\.us\-east\-1\.amazonaws\.com | 
 | US East \(Ohio\) | rds\-data\.us\-east\-2\.amazonaws\.com | 
 | US West \(Oregon\) | rds\-data\.us\-west\-2\.amazonaws\.com | 
-| EU \(Ireland\) | rds\-data\.eu\-west\-1\.amazonaws\.com | 
+| Europe \(Ireland\) | rds\-data\.eu\-west\-1\.amazonaws\.com | 
 | Asia Pacific \(Tokyo\) | rds\-data\.ap\-northeast\-1\.amazonaws\.com | 
 
 ## Authorizing Access to the Data API<a name="data-api.access"></a>

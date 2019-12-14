@@ -4,7 +4,7 @@
 
 Aurora MySQL 2\.06\.0 is generally available\. Aurora MySQL 2\.x versions are compatible with MySQL 5\.7 and Aurora MySQL 1\.x versions are compatible with MySQL 5\.6\.
 
- Currently supported Aurora MySQL releases are 1\.14\.\*, 1\.15\.\*, 1\.16\.\*, 1\.17\.\*, 1\.18\.\*, 1\.19\.\*, 2\.01\.\*, 2\.02\.\*, 2\.03\.\*, 2\.04\.\*, and 2\.05\.\*\. 
+ Currently supported Aurora MySQL releases are 1\.14\.\*, 1\.15\.\*, 1\.16\.\*, 1\.17\.\*, 1\.18\.\*, 1\.19\.\*, 2\.01\.\*, 2\.02\.\*, 2\.03\.\*, 2\.04\.\*, 2\.05\.\*, and 2\.06\.\*\. 
 
  You can restore a snapshot from a currently supported Aurora MySQL release into Aurora MySQL 2\.06\.0\. You also have the option to upgrade existing Aurora MySQL 2\.\* database clusters to Aurora MySQL 2\.06\.0\. You cannot upgrade an existing Aurora MySQL 1\.\* cluster directly to 2\.06\.0; however, you can restore its snapshot to Aurora MySQL 2\.06\.0\. 
 
@@ -35,6 +35,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
  **CVE fixes** 
 + [CVE\-2019\-2805](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2805)
 + [CVE\-2019\-2730](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2730)
++ [CVE\-2019\-2739](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2739)
 + [CVE\-2019\-2778](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2778)
 + [CVE\-2019\-2758](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2758)
 + [CVE\-2018\-3064](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3064)
@@ -42,6 +43,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 + [CVE\-2018\-2786](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-2786)
 + [CVE\-2017\-3653](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-3653)
 + [CVE\-2017\-3455](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-3455)
++ [CVE\-2017\-3465](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-3465)
 + [CVE\-2017\-3244](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-3244)
 + [CVE\-2016\-5612](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5612)
 

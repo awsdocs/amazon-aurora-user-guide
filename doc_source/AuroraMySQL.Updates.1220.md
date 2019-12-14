@@ -4,7 +4,7 @@
 
  Aurora MySQL 1\.22\.0 is generally available\. Aurora MySQL 1\.\* versions are compatible with MySQL 5\.6 and Aurora MySQL 2\.\* versions are compatible with MySQL 5\.7\. 
 
- Currently supported Aurora MySQL releases are 1\.14\.\*, 1\.15\.\*, 1\.16\.\*, 1\.17\.\*, 1\.18\.\*, 1\.19\.\*, 1\.20, 1\.21, 1\.22, 2\.01\.\*, 2\.02\.\*, 2\.03\.\* and 2\.04\.\*\. To create a cluster with an older version of Aurora MySQL, please specify the engine version through the AWS Management Console, the AWS CLI or the RDS API\. You have the option to upgrade existing Aurora MySQL 1\.\* database clusters to Aurora MySQL 1\.22\.0\. 
+ Currently supported Aurora MySQL releases are 1\.14\.\*, 1\.15\.\*, 1\.16\.\*, 1\.17\.\*, 1\.18\.\*, 1\.19\.\*, 1\.20\.\*, 1\.21\.\*, 1\.22\.\*, 2\.01\.\*, 2\.02\.\*, 2\.03\.\*, 2\.04\.\*, 2\.05\.\*, 2\.06\.\*, and 2\.07\.\*\. To create a cluster with an older version of Aurora MySQL, please specify the engine version through the AWS Management Console, the AWS CLI or the RDS API\. You have the option to upgrade existing Aurora MySQL 1\.\* database clusters to Aurora MySQL 1\.22\.0\. 
 
 **Note**  
  This version is currently not available in the following AWS Regions: AWS GovCloud \(US\-East\) \[us\-gov\-east\-1\], AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\], China \(Ningxia\) \[cn\-northwest\-1\], Asia Pacific \(Hong Kong\) \[ap\-east\-1\], Middle East \(Bahrain\) \[me\-south\-1\], and South America \(São Paulo\) \[sa\-east\-1\]\. There will be a separate announcement once it is made available\. 
@@ -21,7 +21,7 @@ The procedure to upgrade your DB cluster has changed\. For more information, see
 +  Binlog has new enhancements for improved commit time latency when very large transactions are involved\. 
 +  Aurora MySQL now has a mechanism to minimize the time window during which events of a large transaction are written to binlog on commit\. This effectively prevents lengthy offline recovery incurred when database crashes occur during that time window\. This feature also fixes the issue where a large transaction blocks small transactions on binlog commit\. This feature is off by default and can be enabled by the service team if needed for your workload\. When enabled, it will be triggered when a transaction size is > 500MB\. 
 +  Added support for the ANSI `READ COMMITTED` isolation level on the read replicas\. This isolation level enables long\-running queries on the read replica to execute without impacting the high throughput of writes on the writer node\. For more information, see [Aurora MySQL Isolation Levels](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Reference.html#AuroraMySQL.Reference.IsolationLevels)\. 
-+  Global Databases now allow adding secondary read\-only replica regions for database clusters deployed in these AWS Regions: regions: US East \(N\. Virginia\) \[us\-east\-1\], US East \(Ohio\) \[us\-east\-2\], US West \(N\. California\) \[us\-west\-1\], US West \(Oregon\) \[us\-west\-2\], EU \(Ireland\) \[eu\-west\-1\], EU \(London\) \[eu\-west\-2\], EU \(Paris\) \[eu\-west\-3\], Asia Pacific \(Tokyo\) \[ap\-northeast\-1\], Asia Pacific \(Seoul\) \[ap\-northeast\-2\], Asia Pacific \(Singapore\) \[ap\-southeast\-1\], Asia Pacific \(Sydney\) \[ap\-southeast\-2\], Canada \(Central\) \[ca\-central\-1\], EU \(Frankfurt\) \[eu\-central\-1\], and Asia Pacific \(Mumbai\) \[ap\-south\-1\]\. 
++  Global Databases now allow adding secondary read\-only replica regions for database clusters deployed in these AWS Regions: regions: US East \(N\. Virginia\) \[us\-east\-1\], US East \(Ohio\) \[us\-east\-2\], US West \(N\. California\) \[us\-west\-1\], US West \(Oregon\) \[us\-west\-2\], Europe \(Ireland\) \[eu\-west\-1\], Europe \(London\) \[eu\-west\-2\], Europe \(Paris\) \[eu\-west\-3\], Asia Pacific \(Tokyo\) \[ap\-northeast\-1\], Asia Pacific \(Seoul\) \[ap\-northeast\-2\], Asia Pacific \(Singapore\) \[ap\-southeast\-1\], Asia Pacific \(Sydney\) \[ap\-southeast\-2\], Canada \(Central\) \[ca\-central\-1\], Europe \(Frankfurt\) \[eu\-central\-1\], and Asia Pacific \(Mumbai\) \[ap\-south\-1\]\. 
 +  The hot row contention feature is now generally available and does not require the Aurora lab mode setting to be ON\. This feature substantially improves throughput for workloads with many transactions contending for rows on the same page\. 
 +  This version has updated timezone files to support the latest Brazil timezone update for new clusters\. 
 
@@ -32,10 +32,13 @@ The procedure to upgrade your DB cluster has changed\. For more information, see
 + [CVE\-2019\-2910](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2910)
 
  **High priority fixes:** 
++ [CVE\-2019\-2805](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2805)
++ [CVE\-2019\-2730](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2730)
 + [CVE\-2019\-2740](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2740)
 + [CVE\-2018\-3064](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3064)
 + [CVE\-2018\-3058](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3058)
 + [CVE\-2017\-3653](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-3653)
++ [CVE\-2017\-3464](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-3464)
 + [CVE\-2017\-3244](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-3244)
 + [CVE\-2016\-5612](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5612)
 + [CVE\-2016\-5439](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5439)

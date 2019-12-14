@@ -16,11 +16,14 @@ Amazon Aurora supports two types of instance classes: Memory Optimized and Burst
 The following are the Memory Optimized DB instance classes available:
 + **db\.r5** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r4** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking performance\.
-+ **db\.r3** – Previous\-generation instance classes that provide memory optimization\. The db\.r3 instances classes are not available in the EU \(Paris\) region\. 
++ **db\.r3** – Previous\-generation instance classes that provide memory optimization\. The db\.r3 instances classes are not available in the Europe \(Paris\) region\. 
 
 The following are the Burstable Performance DB instance classes available:
-+ **db\.t3** – Latest\-generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. 
++ **db\.t3** – Latest\-generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
 + **db\.t2** – Current\-generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\. 
+
+**Note**  
+The DB instance classes that use the AWS Nitro System \(db\.r5, db\.t3\) are throttled on combined read plus write workload\.
 
 ## Terminology for DB Instance Class Hardware Specifications<a name="Concepts.DBInstanceClass.Terminology"></a>
 
@@ -41,6 +44,11 @@ The following are DB engine considerations for DB instance classes:
   + For Aurora PostgreSQL, only versions compatible with PostgreSQL 10\.6 or later support the db\.r5 instance classes\. 
 + **Aurora Support for db\.t3** 
   + Aurora MySQL supports the db\.t3\.medium and db\.t3\.small instance classes for Aurora MySQL 1\.15 and higher, and all Aurora MySQL 2\.x versions\. These instance classes are available for Aurora MySQL in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
+  + For Aurora MySQL db\.r5, db\.r4, and db\.t3 DB instance classes, no instances in the cluster can have pending instance\-level system updates\. To see pending system updates, use the following AWS CLI command\.
+
+    ```
+    aws rds describe-pending-maintenance-actions
+    ```
   + Aurora PostgreSQL supports only the db\.t3\.medium instance class for versions compatible with PostgreSQL 10\.7 or later\. These instance classes are available for Aurora PostgreSQL in all Aurora regions except China \(Ningxia\)\. 
 
 
@@ -50,21 +58,21 @@ The following are DB engine considerations for DB instance classes:
 | --- |--- |--- |--- |--- |--- |--- |--- |
 | **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **Max\. Bandwidth \(Mbps\)** | **Network Performance** | **Aurora MySQL** | **Aurora PostgreSQL** | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
-| db\.r5\.24xlarge | 96 | 347 | 768 | 14,000 | 25 Gbps | 1\.22 and later, 2\.06 and later\* | Yes | 
-| db\.r5\.16xlarge | 64 | 264 | 512 | 10,000 | 20 Gbps | 1\.22 and later, 2\.06 and later\* | No | 
-| db\.r5\.12xlarge | 48 | 173 | 384 | 7,000 | 10 Gbps | 1\.14\.4 and later\* | Yes | 
-| db\.r5\.8xlarge | 32 | 132 | 256 | 5,000 | 10 Gbps | 1\.22 and later, 2\.06 and later\* | No | 
-| db\.r5\.4xlarge | 16 | 71 | 128 | 3,500 | Up to 10 Gbps | 1\.14\.4 and later\* | Yes | 
-| db\.r5\.2xlarge | 8 | 38 | 64 | Up to 3,500 | Up to 10 Gbps | 1\.14\.4 and later\* | Yes | 
-| db\.r5\.xlarge | 4 | 19 | 32 | Up to 3,500 | Up to 10 Gbps | 1\.14\.4 and later\* | Yes | 
-| db\.r5\.large | 2 | 10 | 16 | Up to 3,500 | Up to 10 Gbps | 1\.14\.4 and later\* | Yes | 
+| db\.r5\.24xlarge | 96 | 347 | 768 | 19,000 | 25 Gbps | 1\.22 and later, 2\.06 and later | Yes | 
+| db\.r5\.16xlarge | 64 | 264 | 512 | 13,600 | 20 Gbps | 1\.22 and later, 2\.06 and later | No | 
+| db\.r5\.12xlarge | 48 | 173 | 384 | 9,500 | 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r5\.8xlarge | 32 | 132 | 256 | 6,800 | 10 Gbps | 1\.22 and later, 2\.06 and later | No | 
+| db\.r5\.4xlarge | 16 | 71 | 128 | 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r5\.2xlarge\* | 8 | 38 | 64 | Up to 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r5\.xlarge\* | 4 | 19 | 32 | Up to 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r5\.large\* | 2 | 10 | 16 | Up to 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
 | db\.r4 – Current Generation Memory Optimized Instance Classes | 
-| db\.r4\.16xlarge | 64 | 195 | 488 | 14,000 | 25 Gbps | 1\.14\.4 and later\* | Yes | 
-| db\.r4\.8xlarge | 32 | 99 | 244 | 7,000 | 10 Gbps | 1\.14\.4 and later\* | Yes | 
-| db\.r4\.4xlarge | 16 | 53 | 122 | 3,500 | Up to 10 Gbps | 1\.14\.4 and later\* | Yes | 
-| db\.r4\.2xlarge | 8 | 27 | 61 | 1,750 | Up to 10 Gbps | 1\.14\.4 and later\* | Yes | 
-| db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | 875 | Up to 10 Gbps | 1\.14\.4 and later\* | Yes | 
-| db\.r4\.large | 2 | 7 | 15\.25 | 437 | Up to 10 Gbps | 1\.14\.4 and later\* | Yes | 
+| db\.r4\.16xlarge | 64 | 195 | 488 | 14,000 | 25 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r4\.8xlarge | 32 | 99 | 244 | 7,000 | 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r4\.4xlarge | 16 | 53 | 122 | 3,500 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r4\.2xlarge | 8 | 27 | 61 | 1,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | 875 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r4\.large | 2 | 7 | 15\.25 | 437 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
 | db\.r3 – Previous Generation Memory Optimized Instance Classes | 
 | db\.r3\.8xlarge | 32 | 104 | 244 | — | 10 Gbps | Yes | No | 
 | db\.r3\.4xlarge | 16 | 52 | 122 | 2,000 | High | Yes | No | 
@@ -73,18 +81,14 @@ The following are DB engine considerations for DB instance classes:
 | db\.r3\.large | 2 | 6\.5 | 15\.25 | — | Moderate | Yes | No | 
 | **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **Max\. Bandwidth \(Mbps\)** | **Network Performance** | **Aurora MySQL** | **Aurora PostgreSQL** | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
-| db\.t3\.2xlarge | 8 | Variable | 32 | 2,050 | Up to 5 Gbps | No | No | 
-| db\.t3\.xlarge | 4 | Variable | 16 | 2,050 | Up to 5 Gbps | No | No | 
-| db\.t3\.large | 2 | Variable | 8 | 2,050 | Up to 5 Gbps | No | No | 
-| db\.t3\.medium | 2 | Variable | 4 | 1,500 | Up to 5 Gbps | 1\.14\.4 and later\* | Yes | 
-| db\.t3\.small | 2 | Variable | 2 | 1,500 | Up to 5 Gbps | 1\.14\.4 and later\* | No | 
-| db\.t3\.micro | 2 | Variable | 1 | 1,500 | Up to 5 Gbps | No | No | 
+| db\.t3\.2xlarge\* | 8 | Variable | 32 | Up to 2,048 | Up to 5 Gbps | No | No | 
+| db\.t3\.xlarge\* | 4 | Variable | 16 | Up to 2,048 | Up to 5 Gbps | No | No | 
+| db\.t3\.large\* | 2 | Variable | 8 | Up to 2,048 | Up to 5 Gbps | No | No | 
+| db\.t3\.medium\* | 2 | Variable | 4 | Up to 1,536 | Up to 5 Gbps | 1\.14\.4 and later | Yes | 
+| db\.t3\.small\* | 2 | Variable | 2 | Up to 1,536 | Up to 5 Gbps | 1\.14\.4 and later | No | 
+| db\.t3\.micro\* | 2 | Variable | 1 | Up to 1,536 | Up to 5 Gbps | No | No | 
 | db\.t2 – Current Generation Burstable Performance Instance Classes | 
 | db\.t2\.medium | 2 | Variable | 4 | — | Moderate | Yes | No | 
 | db\.t2\.small | 1 | Variable | 2 | — | Low | Yes | No | 
 
-\*No instances in the cluster can have pending instance\-level system updates\. To see pending system updates, use the following AWS CLI command\.
-
-```
-aws rds describe-pending-maintenance-actions
-```
+\* These DB instance classes can support maximum performance for 30 minutes at least once every 24 hours\. For more information on baseline performance of these instance types, see [Amazon EBS–Optimized Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*
