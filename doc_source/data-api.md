@@ -892,11 +892,11 @@ The Data API Java client library is open source in GitHub\. You can build the li
 Following, you can find some common examples of using the Data API Java client library\. These examples assume that you have a table `accounts` with two columns: `accountId` and `balance`\. You also have the following data transfer object \(DTO\)\.
 
 ```
-@Value
-    public class Account {
-        String accountId;
-        double balance;
-    }
+public class Account {
+    String accountId;
+    double balance;
+// getters and setters omitted
+}
 ```
 
 The client library enables you to pass DTOs as input parameters\. The following example shows how customer DTOs are mapped to input parameters sets\.

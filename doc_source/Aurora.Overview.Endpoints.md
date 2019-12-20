@@ -23,7 +23,7 @@
  An endpoint is represented as an Aurora\-specific URL that contains a host address and a port\. The following types of endpoints are available from an Aurora DB cluster\. 
 
 **Cluster endpoint**  
- A *cluster endpoint* for an Aurora DB cluster that connects to the current primary DB instance for that DB cluster\. This endpoint is the only one that can perform write operations such as DDL statements\. Because of this, the cluster endpoint is the one that you connect to when you first set up a cluster or when your cluster only contains a single DB instance\.   
+ A *cluster endpoint* \(or *writer endpoint*\) for an Aurora DB cluster connects to the current primary DB instance for that DB cluster\. This endpoint is the only one that can perform write operations such as DDL statements\. Because of this, the cluster endpoint is the one that you connect to when you first set up a cluster or when your cluster only contains a single DB instance\.   
  Each Aurora DB cluster has one cluster endpoint and one primary DB instance\.   
  You use the cluster endpoint for all write operations on the DB cluster, including inserts, updates, deletes, and DDL changes\. You can also use the cluster endpoint for read operations, such as queries\.   
  The cluster endpoint provides failover support for read/write connections to the DB cluster\. If the current primary DB instance of a DB cluster fails, Aurora automatically fails over to a new primary DB instance\. During a failover, the DB cluster continues to serve connection requests to the cluster endpoint from the new primary DB instance, with minimal interruption of service\.   

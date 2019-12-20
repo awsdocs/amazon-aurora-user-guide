@@ -17,6 +17,7 @@
 + [Setting the Capacity of an Aurora Serverless DB Cluster](aurora-serverless.setting-capacity.md)
 + [Viewing Aurora Serverless DB Clusters](aurora-serverless.viewing.md)
 + [Using the Data API for Aurora Serverless](data-api.md)
++ [Logging Data API Calls with AWS CloudTrail](logging-using-cloudtrail-data-api.md)
 + [Using the Query Editor for Aurora Serverless](query-editor.md)
 
 ## Advantages of Aurora Serverless<a name="aurora-serverless.advantages"></a>

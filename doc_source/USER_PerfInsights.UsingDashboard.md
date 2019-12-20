@@ -133,7 +133,7 @@ In Amazon RDS Performance Insights, you can find statistics on running queries i
 
 ### SQL Digest Statistics for Aurora PostgreSQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL"></a>
 
-To view SQL Digest statistics, the `pg_stat_statements` library must be loaded\. This library is loaded by default for Aurora PostgreSQL DB clusters that are compatible with PostgreSQL 10\. However, you must enable this library manually for Aurora PostgreSQL DB clusters that are compatible with PostgreSQL 9\.6\. To enable it manually, add `pg_stats_statements` to `shared_preload_libraries` in the DB parameter group associated with the DB instance\. Then reboot your DB instance\. For more information, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
+To view SQL Digest statistics, the `pg_stat_statements` library must be loaded\. This library is loaded by default for Aurora PostgreSQL DB clusters that are compatible with PostgreSQL 10\. However, you must enable this library manually for Aurora PostgreSQL DB clusters that are compatible with PostgreSQL 9\.6\. To enable it manually, add `pg_stat_statements` to `shared_preload_libraries` in the DB parameter group associated with the DB instance\. Then reboot your DB instance\. For more information, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
 
 **Note**  
 Performance Insights can only collect statistics for non\-truncated queries in `pg_stat_activity`\. By default, Aurora PostgreSQL databases truncate queries longer than 1,024 bytes\. You can increase the query size by changing the `track_activity_query_size` parameter in the DB parameter group associated to your DB instance\. When you change this parameter, a DB instance reboot is required\. Performance Insights also has a limit of 5,120 bytes when collecting queries, which also impacts statistics collection\. The limit of 5,120 bytes is required due to memory limitations\.
@@ -206,9 +206,6 @@ For Aurora PostgreSQL DB instances, you can control the limit of the SQL text si
 
 **Important**  
 Currently, you can only view and download more SQL text with the AWS Management Console\. The AWS Performance Insights CLI and API can return a maximum of 500 bytes of text\.
-
-**Note**  
-For Aurora MySQL DB instances, viewing more SQL text is not supported in the Europe \(Stockholm\) region\.
 
 **To view more SQL text in the Performance Insights dashboard**
 

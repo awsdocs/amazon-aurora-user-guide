@@ -131,7 +131,7 @@
 +  You can't take a snapshot created on a single\-master cluster and restore it on a multi\-master cluster, or the opposite\. Instead, to transfer all data from one kind of cluster to the other, use a logical dump produced by a tool such as AWS Database Migration Service \(AWS DMS\) or the mysqldump command\. 
 +  You can't use the parallel query, Aurora Serverless, or Global Database features on a multi\-master cluster\. 
 
-   The multi\-master aspect is a permanent choice for a cluster\. You can't switch an existing between a multi\-master cluster and another kind such as Aurora Serverless or parallel query\. 
+   The multi\-master aspect is a permanent choice for a cluster\. You can't switch an existing Aurora cluster between a multi\-master cluster and another kind such as Aurora Serverless or parallel query\. 
 +  The zero\-downtime patching \(ZDP\) and zero\-downtime restart \(ZDR\) features aren't available for multi\-master clusters\. 
 +  Integration with other AWS services such as AWS Lambda, Amazon S3, and AWS Identity and Access Management isn't available for multi\-master clusters\. 
 +  The Performance Insights feature isn't available for multi\-master clusters\. 

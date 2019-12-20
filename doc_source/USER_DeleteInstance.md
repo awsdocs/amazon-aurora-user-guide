@@ -10,7 +10,7 @@ To delete a DB instance in this case, first promote the DB cluster so that it's 
 
 ## Deletion Protection<a name="USER_DeleteInstance.DeletionProtection"></a>
 
-You can enable deletion protection so that users can't delete a DB cluster\. Deletion protection is enabled by default when you create a production DB cluster using the AWS Management Console\. However, deletion protection is disabled by default if you create a cluster using the AWS CLI or API\. For more information about turning deletion protection on and off, see [Modifying the DB Cluster by Using the Console, CLI, and API](Aurora.Modifying.md#Aurora.Modifying.Cluster)\.
+You can enable deletion protection so that users can't delete a DB cluster\. Deletion protection is enabled by default when you create a production DB cluster using the AWS Management Console\. However, deletion protection is disabled by default if you create a cluster using the AWS CLI or API\. Enabling or disabling deletion protection doesn't cause an outage\. For more information about turning deletion protection on and off, see [Modifying the DB Cluster by Using the Console, CLI, and API](Aurora.Modifying.md#Aurora.Modifying.Cluster)\.
 
 Aurora enforces deletion protection for a DB cluster whether you perform the operation from the console, the CLI, or the API\. If you try to delete a DB cluster that has deletion protection enabled, you can't do so\. To be certain that you can delete the cluster, modify the cluster and disable deletion protection\.
 

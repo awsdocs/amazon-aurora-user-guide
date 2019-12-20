@@ -70,9 +70,9 @@ The following are DB engine considerations for DB instance classes:
 | db\.r4\.16xlarge | 64 | 195 | 488 | 14,000 | 25 Gbps | 1\.14\.4 and later | Yes | 
 | db\.r4\.8xlarge | 32 | 99 | 244 | 7,000 | 10 Gbps | 1\.14\.4 and later | Yes | 
 | db\.r4\.4xlarge | 16 | 53 | 122 | 3,500 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r4\.2xlarge | 8 | 27 | 61 | 1,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | 875 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r4\.large | 2 | 7 | 15\.25 | 437 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r4\.2xlarge | 8 | 27 | 61 | 1,700 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | 850 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r4\.large | 2 | 7 | 15\.25 | 425 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
 | db\.r3 – Previous Generation Memory Optimized Instance Classes | 
 | db\.r3\.8xlarge | 32 | 104 | 244 | — | 10 Gbps | Yes | No | 
 | db\.r3\.4xlarge | 16 | 52 | 122 | 2,000 | High | Yes | No | 
