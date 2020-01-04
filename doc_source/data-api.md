@@ -193,6 +193,9 @@ For some specific types, such as `DECIMAL` or `TIME`, a hint might be required t
 + `TIME` – The corresponding `String` parameter value is sent as an object of `TIME` type to the database\. The accepted format is `HH:MM:SS[.FFF]`\.
 + `DATE` – The corresponding `String` parameter value is sent as an object of `DATE` type to the database\. The accepted format is `YYYY-MM-DD`\.
 
+**Note**  
+Currently, the Data API doesn't support arrays of Universal Unique Identifiers \(UUIDs\)\.
+
 **Topics**
 + [Calling the Data API with the AWS CLI](#data-api.calling.cli)
 + [Calling the Data API from a Python Application](#data-api.calling.python)

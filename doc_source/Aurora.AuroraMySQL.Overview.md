@@ -86,7 +86,6 @@ The performance schema isn't available for early release of Aurora MySQL 5\.7\. 
 ## Comparison of Aurora MySQL 5\.7 and MySQL 5\.7<a name="Aurora.AuroraMySQL.CompareMySQL57"></a>
 
 The following features are supported in MySQL 5\.7\.12 but are currently not supported in Aurora MySQL 5\.7:
-+ Global transaction identifiers \(GTIDs\)
 + Group replication plugin
 + Increased page size
 + InnoDB buffer pool loading at startup

@@ -80,17 +80,17 @@ For Linux, OS X, or Unix:
 ```
 aws rds create-db-instance \
     --db-cluster-identifier myreadreplicacluster \
-    --db-instance-class myinstanceclass
+    --db-instance-class myinstanceclass \
     --db-instance-identifier myreadreplicainstance \
     --engine aurora
 ```
 For Windows:  
 
 ```
-aws rds create-db-instance \
-    --db-cluster-identifier myreadreplicacluster \
-    --db-instance-class myinstanceclass
-    --db-instance-identifier myreadreplicainstance \
+aws rds create-db-instance ^
+    --db-cluster-identifier myreadreplicacluster ^
+    --db-instance-class myinstanceclass ^
+    --db-instance-identifier myreadreplicainstance ^
     --engine aurora
 ```
 

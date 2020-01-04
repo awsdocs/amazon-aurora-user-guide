@@ -11,7 +11,9 @@ Physical migration has the following advantages:
 
 Physical migration has the following limitations:
 + The `innodb_page_size` parameter must be set to its default value \(`16KB`\)\.
-+ The `innodb_data_file_path` must be configured with the default data file name `"ibdata1"`\. The following are examples of file names that are not allowed: `"innodb_data_file_path=ibdata1:50M; ibdata2:50M:autoextend"` and `"innodb_data_file_path=ibdata01:50M:autoextend"`\.
++ The `innodb_data_file_path` parameter must be configured with only one data file that uses the default data file name `"ibdata1"`\. Databases with two data files, or with a data file with a different name, can't be migrated using this method\.
+
+  The following are examples of file names that are not allowed: `"innodb_data_file_path=ibdata1:50M; ibdata2:50M:autoextend"` and `"innodb_data_file_path=ibdata01:50M:autoextend"`\.
 + The `innodb_log_files_in_group` parameter must be set to its default value \(`2`\)\.
 
 Logical migration has the following advantages:

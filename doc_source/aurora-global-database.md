@@ -42,7 +42,7 @@
 
  The following limitations currently apply to Aurora Global Database: 
 +  You can't use `db.t2` instance classes for an Aurora global database\. You have a choice of `db.r4` or `db.r5` instance classes\. 
-+  Currently, Aurora Global Database isn't available in the Europe \(Stockholm\) and Asia Pacific \(Hong Kong\) regions\. 
++  Aurora Global Database isn't available in the Europe \(Stockholm\), Asia Pacific \(Hong Kong\), China, Middle East \(Bahrain\) and South America \(São Paulo\) regions\.
 +  The primary cluster and each of the secondary clusters must be in a separate AWS Region\. You can't put the primary cluster in the same AWS Region as one of the secondary clusters\. You can't put two secondary clusters in the same AWS Region\. 
 +  You can't create a cross\-region Read Replica from the primary cluster in same region as the secondary\. See [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md) for information about cross\-region Read Replicas\. 
 +  The following features aren't supported for Aurora Global Database: 
@@ -535,7 +535,7 @@ aws rds --region primary_region ^
 
 1.  The primary cluster becomes unavailable\. 
 
-1.  You one of the secondary clusters from the Aurora global database\. Doing so promotes it to full read\-write capability\. To learn how to remove an Aurora cluster from a global database, see [Removing a Cluster from an Aurora Global Database](#aurora-global-database-detaching)\. 
+1.  You detach one of the secondary clusters from the Aurora global database\. Doing so promotes it to full read\-write capability\. To learn how to remove an Aurora cluster from a global database, see [Removing a Cluster from an Aurora Global Database](#aurora-global-database-detaching)\. 
 
 1.  You reconfigure your application to divert write traffic to the newly promoted cluster\. 
 **Important**  

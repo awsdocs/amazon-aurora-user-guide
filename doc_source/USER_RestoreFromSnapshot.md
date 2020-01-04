@@ -82,10 +82,14 @@ For Windows:
 
 After the DB cluster has been restored, you must add the DB cluster to the security group used by the DB cluster used to create the DB cluster snapshot if you want the same functionality as that of the previous DB cluster\.
 
+**Important**  
 If you use the console to restore a DB cluster, then Amazon RDS automatically creates the primary instance \(writer\) for your DB cluster\. If you use the AWS CLI to restore a DB cluster, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\. Call the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create the primary instance for your DB cluster\. Include the name of the DB cluster as the `--db-cluster-identifier` option value\.
 
 ### RDS API<a name="USER_RestoreFromSnapshot.API"></a>
 
-To restore a DB cluster from a DB cluster snapshot, call the Amazon RDS API function [RestoreDBClusterFromSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromSnapshot.html) with the following parameters: 
+To restore a DB cluster from a DB cluster snapshot, call the RDS API operation [RestoreDBClusterFromSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromSnapshot.html) with the following parameters: 
 + `DBClusterIdentifier` 
 + `SnapshotIdentifier` 
+
+**Important**  
+If you use the console to restore a DB cluster, then Amazon RDS automatically creates the primary instance \(writer\) for your DB cluster\. If you use the RDS API to restore a DB cluster, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\. Call the RDS API operation [ CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) to create the primary instance for your DB cluster\. Include the name of the DB cluster as the `DBClusterIdentifier` parameter value\.

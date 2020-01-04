@@ -112,7 +112,7 @@ You can update the trust store for applications that use JDBC for SSL/TLS connec
 
 ## Using SSL/TLS Connections for Different Types of Applications<a name="ssl-certificate-rotation-aurora-postgresql.applications"></a>
 
-The following provides information about using SSL/TLS connections for different types of applications"
+The following provides information about using SSL/TLS connections for different types of applications:
 + **psql**
 
   The client is invoked from the command line by specifying options either as a connection string or as environment variables\. For SSL/TLS connections, the relevant options are `sslmode` \(environment variable `PGSSLMODE`\), `sslrootcert` \(environment variable `PGSSLROOTCERT`\)\.

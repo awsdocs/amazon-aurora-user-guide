@@ -1,6 +1,7 @@
 # Database Engine Updates for Amazon Aurora MySQL 1\.1<a name="AuroraMySQL.Updates.11Updates"></a>
 
 The following are Amazon Aurora 1\.1 database engine updates:<a name="aurora_1x_updates"></a>
++ [Aurora MySQL Database Engine Updates 2019\-12\-23 \(Version 1\.22\.1\)](AuroraMySQL.Updates.1221.md)
 + [Aurora MySQL Database Engine Updates 2019\-11\-25 \(Version 1\.22\.0\)](AuroraMySQL.Updates.1220.md)
 + [Aurora MySQL Database Engine Updates 2019\-11\-25 \(Version 1\.21\.0\)](AuroraMySQL.Updates.1210.md)
 + [Aurora MySQL Database Engine Updates 2019\-11\-11 \(Version 1\.20\.0\)](AuroraMySQL.Updates.1200.md)

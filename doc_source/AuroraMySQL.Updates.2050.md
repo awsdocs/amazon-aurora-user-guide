@@ -6,7 +6,7 @@ Aurora MySQL 2\.05\.0 is generally available\. Aurora MySQL 2\.x versions are co
 
  Currently supported Aurora MySQL releases are 1\.14\.\*, 1\.15\.\*, 1\.16\.\*, 1\.17\.\*, 1\.18\.\*, 1\.19\.\*, 2\.01\.\*, 2\.02\.\*, 2\.03\.\* and 2\.04\.\*\. 
 
- You can restore a snapshot from a currently supported Aurora MySQL release into Aurora MySQL 2\.05\.0\. You also have the option to upgrade existing Aurora MySQL 2\.\* database clusters to Aurora MySQL 2\.05\.0\. You cannot upgrade an existing Aurora MySQL 1\.\* cluster directly to 2\.05\.0; however, you can restore its snapshot to Aurora MySQL 2\.05\.0\. 
+ You can restore a snapshot from a currently supported Aurora MySQL release into Aurora MySQL 2\.05\.0\. You also have the option to upgrade existing Aurora MySQL 2\.\* database clusters, up to 2\.04\.6, to Aurora MySQL 2\.05\.0\. You cannot upgrade an existing Aurora MySQL 1\.\* cluster directly to 2\.05\.0; however, you can restore its snapshot to Aurora MySQL 2\.05\.0\. 
 
  To create a cluster with an older version of Aurora MySQL, please specify the engine version through the AWS Management Console, the AWS CLI, or the RDS API\. 
 

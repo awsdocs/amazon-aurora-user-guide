@@ -6,7 +6,7 @@ The `aurora_lab_mode` parameter is an instance\-level parameter that is in the d
 
 ## Aurora Lab Mode Features<a name="AuroraMySQL.Updates.LabModeFeatures"></a>
 
-The following table lists the Aurora features currently available when Aurora lab mode is enabled\. You must enable Aurora lab mode before any of these features can be used\. For more information about Aurora lab mode, see [Amazon Aurora MySQL Lab Mode](#AuroraMySQL.Updates.LabMode)\.
+The following table lists the Aurora features currently available when Aurora lab mode is enabled\. You must enable Aurora lab mode before any of these features can be used\.
 
 
 | Feature | Description | 

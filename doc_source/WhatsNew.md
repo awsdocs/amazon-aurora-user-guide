@@ -9,6 +9,8 @@ Before August 31, 2018, Amazon Aurora was documented in the * Amazon Relational 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Aurora MySQL version 2\.07\.1](AuroraMySQL.Updates.2071.md) | Aurora MySQL version 2\.07\.1 is available\. | December 23, 2019 | 
+| [Aurora MySQL version 1\.22\.1](AuroraMySQL.Updates.1221.md) | Aurora MySQL version 1\.22\.1 is available\. | December 23, 2019 | 
 | [Aurora MySQL release notes in Document History](#WhatsNew) | This section now includes history entries for Aurora MySQL release notes for versions released after August 31, 2018\. For the full release notes for a specific version, choose the link in the first column of the history entry\.  | December 13, 2019 | 
 | [Amazon RDS Proxy](#WhatsNew) | You can reduce the overhead of connection management on your cluster, and reduce the chance of "too many connections" errors, by using the Amazon RDS Proxy\. You associate each proxy with an RDS DB instance or Aurora DB cluster\. Then you use the proxy endpoint in the connection string for your application\. The Amazon RDS Proxy is currently in a public preview state\. It supports the Aurora MySQL database engine\. For more information, see [Managing Connections with Amazon RDS Proxy \(Preview\)](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html)\.  | December 3, 2019 | 
 | [Data API for Aurora Serverless supports data type mapping hints](#WhatsNew) | You can now use a hint to instruct the Data API for Aurora Serverless to send a `String` value to the database as a different type\. For more information, see [ Calling the Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html#data-api.calling)\. | November 26, 2019 | 

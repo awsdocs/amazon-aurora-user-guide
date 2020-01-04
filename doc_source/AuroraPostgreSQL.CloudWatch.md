@@ -5,6 +5,7 @@ You can configure your Aurora PostgreSQL DB cluster to publish log data to a log
 **Note**  
 Be aware of the following:  
 Aurora PostgreSQL supports publishing logs to CloudWatch Logs for versions 9\.6\.12 and above and versions 10\.7 and above\. 
+From Aurora PostgreSQL, only postgresql logs can be published\. Publishing upgrade logs isn't supported\.
 You can't publish logs to CloudWatch Logs for the China \(Ningxia\) region\.
 If exporting log data is disabled, Aurora doesn't delete existing log groups or log streams\. If exporting log data is disabled, existing log data remains available in CloudWatch Logs, depending on log retention, and you still incur charges for stored audit log data\. You can delete log streams and log groups using the CloudWatch Logs console, the AWS CLI, or the CloudWatch Logs API\.
 An alternative way to publish audit logs to CloudWatch Logs is by enabling advanced auditing and setting the cluster\-level DB parameter `server_audit_logs_upload` to `1`\. The default for the `server_audit_logs_upload` parameter is `0`\.  
@@ -25,7 +26,7 @@ You can publish Aurora PostgreSQL logs to CloudWatch Logs with the console\.
 
 1. Choose **Modify**\.
 
-1. In the **Log exports** section, choose the logs that you want to start publishing to CloudWatch Logs\.
+1. In the **Log exports** section, choose **Postgresql log**\.
 
 1. Choose **Continue**, and then choose **Modify cluster** on the summary page\.
 
@@ -49,23 +50,6 @@ Run one of these AWS CLI commands with the following options:
 Other options might be required depending on the AWS CLI command that you run\.
 
 **Example**  
-The following command modifies an existing Aurora PostgreSQL DB cluster to publish log files to CloudWatch Logs\.  
-For Linux, OS X, or Unix:  
-
-```
-1. aws rds modify-db-cluster \
-2.     --db-cluster-identifier my-db-cluster \
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["postgresql", "upgrade"]}'
-```
-For Windows:  
-
-```
-1. aws rds modify-db-cluster ^
-2.     --db-cluster-identifier my-db-cluster ^
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["postgresql", "upgrade"]}'
-```
-
-**Example**  
 The following command creates an Aurora PostgreSQL DB cluster to publish log files to CloudWatch Logs\.  
 For Linux, OS X, or Unix:  
 
@@ -73,7 +57,7 @@ For Linux, OS X, or Unix:
 1. aws rds create-db-cluster \
 2.     --db-cluster-identifier my-db-cluster \
 3.     --engine aurora-postgresql \
-4.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["postgresql", "upgrade"]}'
+4.     --enable-cloudwatch-logs-exports postgresql
 ```
 For Windows:  
 
@@ -81,8 +65,44 @@ For Windows:
 1. aws rds create-db-cluster ^
 2.     --db-cluster-identifier my-db-cluster ^
 3.     --engine aurora-postgresql ^
-4.     ---cloudwatch-logs-export-configuration '{"EnableLogTypes":["postgresql", "upgrade"]}'
+4.     --enable-cloudwatch-logs-exports postgresql
 ```
+
+**Example**  
+The following command modifies an existing Aurora PostgreSQL DB cluster to publish log files to CloudWatch Logs\. The `--cloudwatch-logs-export-configuration` value is a JSON object\. The key for this object is `EnableLogTypes`, and its value is `postgresql`\.  
+For Linux, OS X, or Unix:  
+
+```
+1. aws rds modify-db-cluster \
+2.     --db-cluster-identifier my-db-cluster \
+3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["postgresql"]}'
+```
+For Windows:  
+
+```
+1. aws rds modify-db-cluster ^
+2.     --db-cluster-identifier my-db-cluster ^
+3.     --cloudwatch-logs-export-configuration '{\"EnableLogTypes\":[\"postgresql\"]}'
+```
+When using the Windows command prompt, you must escape double quotes \("\) in JSON code by prefixing them with a backslash \(\\\)\.
+
+**Example**  
+The following example modifies an existing Aurora PostgreSQL DB cluster to disable publishing log files to CloudWatch Logs\. The `--cloudwatch-logs-export-configuration` value is a JSON object\. The key for this object is `DisableLogTypes`, and its value is `postgresql`\.  
+For Linux, OS X, or Unix:  
+
+```
+aws rds modify-db-cluster \
+    --db-cluster-identifier mydbinstance \
+    --cloudwatch-logs-export-configuration '{"DisableLogTypes":["postgresql"]}'
+```
+For Windows:  
+
+```
+aws rds modify-db-cluster ^
+    --db-cluster-identifier mydbinstance ^
+    --cloudwatch-logs-export-configuration "{\"DisableLogTypes\":[\"postgresql\"]}"
+```
+When using the Windows command prompt, you must escape double quotes \("\) in JSON code by prefixing them with a backslash \(\\\)\.
 
 ## RDS API<a name="AuroraPostgreSQL.CloudWatch.API"></a>
 

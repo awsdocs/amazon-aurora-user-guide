@@ -14,6 +14,12 @@ To create or work with an Amazon RDS DB instance in a specific AWS Region, use t
 
 ## Region Availability<a name="Aurora.Overview.Availability"></a>
 
+**Note**  
+Aurora MySQL version 5\.7 and Aurora PostgreSQL version 10\.7 don’t have time zone data that reflect recent changes to Daylight Saving Time \(DST\) in Brazil\. For a workaround until updated versions are available, reset the DB cluster’s time zone parameter if the expected time doesn't show correctly for the recently changed Brazil time zone\. Do the following:  
+South America \(Sao Paulo\) region – set the time zone to `America/Fortaleza`\.
+South America \(Cuiaba\) region – set the time zone to `America/Manaus`\.
+To change the time zone, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+
 **Topics**
 + [Aurora MySQL Region Availability](#Aurora.Overview.Availability.MySQL)
 + [Aurora PostgreSQL Region Availability](#Aurora.Overview.Availability.PostgreSQL)
@@ -56,10 +62,10 @@ You can set your local time zone to one of the values listed in the following ta
 |  `America/Chihuahua`  |   | 
 |  `America/Cuiaba`  |   | 
 |  `America/Denver`  |   | 
-|  `America/Fortaleza`  |   | 
+|  `America/Fortaleza`  |  If your DB cluster is in the South America \(Sao Paulo\) region and the expected time doesn't show correctly for the recently changed Brazil time zone, reset the DB cluster's time zone parameter to `America/Fortaleza`\.  | 
 |  `America/Guatemala`  |   | 
 |  `America/Halifax`  |  This time zone setting can return incorrect values from 27 Oct 1918 05:00:00 GMT to 31 Oct 1918 05:00:00 GMT\.  | 
-|  `America/Manaus`  |   | 
+|  `America/Manaus`  |  If your DB cluster is in the South America \(Cuiaba\) region and the expected time doesn't show correctly for the recently changed Brazil time zone, reset the DB cluster's time zone parameter to `America/Manaus`\.  | 
 |  `America/Matamoros`  |   | 
 |  `America/Monterrey`  |   | 
 |  `America/Montevideo`  |   | 
