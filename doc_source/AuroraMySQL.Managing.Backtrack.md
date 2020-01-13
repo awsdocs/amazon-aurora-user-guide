@@ -37,7 +37,13 @@ The following limitations apply to backtracking:
 + Backtracking is not supported with binary log \(binlog\) replication\. Cross\-region replication must be disabled before you can configure or use backtracking\.
 + You can't backtrack a database clone to a time before that database clone was created\. However, you can use the original database to backtrack to a time before the clone was created\. For more information about database cloning, see [Cloning Databases in an Aurora DB Cluster](Aurora.Managing.Clone.md)\.
 + Backtracking causes a brief DB instance disruption\. You must stop or pause your applications before starting a backtrack operation to ensure that there are no new read or write requests\. During the backtrack operation, Aurora pauses the database, closes any open connections, and drops any uncommitted reads and writes\. It then waits for the backtrack operation to complete\.
-+ Backtracking is not supported for the China \(Ningxia\) region\.
++ Backtracking isn't supported for the following AWS Regions:
+  +  China \(Ningxia\) 
+  +  Asia Pacific \(Hong Kong\) 
+  +  Europe \(Stockholm\) 
+  +  Middle East \(Bahrain\) 
+  +  South America \(São Paulo\) 
++  You can't restore a cross\-region snapshot of a backtrack\-enabled cluster in an AWS Region that doesn't support backtracking\. 
 +  You can't use Backtrack with Aurora multi\-master clusters\. 
 
 ## <a name="AuroraMySQL.Managing.Backtrack.Upgrade"></a>

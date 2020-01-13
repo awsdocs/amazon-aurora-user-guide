@@ -27,15 +27,15 @@ With query plan management, you can control execution plans for a set of stateme
 
 ## Enabling Query Plan Management for Aurora PostgreSQL<a name="AuroraPostgreSQL.Optimize.Enable"></a>
 
-Query plan management is available with Amazon Aurora PostgreSQL version 2\.1\.0 and greater\.
+Query plan management is available with Amazon Aurora PostgreSQL version 2\.1\.0 \(compatible with PostgreSQL 10\.5\) and greater\.
 
 **To enable query plan management**
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Create a new instance\-level parameter group to use for query plan management\. For more information, see [Creating a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Creating)\.
+1. Create a new instance\-level parameter group to use for query plan management parameters\. For more information, see [Creating a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Creating)\. Associate the new parameter group with the DB instances in which you want to use query plan management\. For more information, see [Modify a DB Instance in a DB Cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\.
 
-1. Create a new cluster\-level parameter group to use for query plan management\. For more information, see [Creating a DB Cluster Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\.
+1. Create a new cluster\-level parameter group to use for query plan management parameters\. For more information, see [Creating a DB Cluster Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\. Associate the new cluster\-level parameter group with the DB clusters in which you want to use query plan management\. For more information, see [Modifying the DB Cluster by Using the Console, CLI, and API](Aurora.Modifying.md#Aurora.Modifying.Cluster)\.
 
 1. Open your cluster\-level parameter group and set the `rds.enable_plan_management` parameter to `1`\. For more information, see [Modifying Parameters in a DB Cluster Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
 
@@ -152,9 +152,9 @@ Use automatic plan capture if you want to capture plans for all SQL statements i
 
 As your application runs, the optimizer captures plans for any statement that runs more than once\. The optimizer always sets the status of a managed statement's first captured plan to `approved`\. A managed statement's set of approved plans is known as its *plan baseline*\. 
 
-As your application continues to run, the optimizer might find additional plans for the managed statements\. The optimizer sets additional captured plans to a status of `unapproved`\. 
+As your application continues to run, the optimizer might find additional plans for the managed statements\. The optimizer sets additional captured plans to a status of `Unapproved`\. 
 
-The set of all captured plans for a managed statement is known as the *plan history*\. Later, you can decide if the `unapproved` plans perform well and change them to `approved`, `rejected`, or `preferred` by using the `apg_plan_mgmt.evolve_plan_baselines` function or the `apg_plan_mgmt.set_plan_status` function\.
+The set of all captured plans for a managed statement is known as the *plan history*\. Later, you can decide if the `Unapproved` plans perform well and change them to `Approved`, `Rejected`, or `Preferred` by using the `apg_plan_mgmt.evolve_plan_baselines` function or the `apg_plan_mgmt.set_plan_status` function\.
 
 To turn off automatic plan capture, set `apg_plan_mgmt.capture_plan_baselines` to `off` in the parameter group for the DB instance\. Then restart the database for the setting to take effect\.
 

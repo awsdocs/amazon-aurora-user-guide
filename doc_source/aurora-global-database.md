@@ -172,7 +172,7 @@
       ```
 
    1.  When the `describe-db-clusters` results show a status of `available`, create the primary DB instance for the primary cluster\. To do so, use the AWS CLI `[create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)` command\. 
-      +  Specify `aurora` for the `--engine` parameter for MySQL 5\.6 compatibility\. Or specify `aurora-mysql` for the `--engine` parameter for MySQL 5\.6 compatibility\. 
+      +  Specify `aurora` for the `--engine` parameter for MySQL 5\.6 compatibility\. Or specify `aurora-mysql` for the `--engine` parameter for MySQL 5\.7 compatibility\. 
       +  Optionally, specify the `--engine-version` parameter to choose a specific Aurora MySQL version to use\. 
       +  Depending on your Aurora MySQL version, you might or might not need to specify the `--engine-mode` option\. 
         +  For Aurora MySQL version 1, in 1\.21 and lower, specify `--engine-mode global`\. For 1\.22 and higher, `--engine-mode` is optional\. 

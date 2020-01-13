@@ -555,15 +555,15 @@ mysql> select @@innodb_read_only;
 
 #### Checking the Node Name and Role<a name="checking-node-name-and-role"></a>
 
- You can check the name of the DB instance you're currently connected to by using the `aurora_server_id` status variable\. You can check whether that DB instance is running an additional server process that performs the underlying processing for DDL statements by using the `aurora_mm_has_primary` status variable\. The following example shows how\. 
+ You can check the name of the DB instance you're currently connected to by using the `aurora_server_id` status variable\.  The following example shows how\. 
 
 ```
-mysql> select @@aurora_server_id, @@aurora_has_primary;
-+----------------------+-------------------------+
-| @@aurora_server_id   | @@aurora_mm_has_primary |
-+----------------------+-------------------------+
-| mmr-demo-test-mm-3-1 | false                   |
-+----------------------+-------------------------+
+mysql> select @@aurora_server_id;
++----------------------+
+| @@aurora_server_id   |
++----------------------+
+| mmr-demo-test-mm-3-1 |
++----------------------+
 1 row in set (0.00 sec)
 ```
 

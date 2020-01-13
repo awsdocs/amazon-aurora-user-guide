@@ -68,4 +68,4 @@ Index Cond: ((id >= 1) AND (id <= 10000))
 
 The optimizer indicates which plan it will run, but notice that in this example that it found a lower\-cost plan\. In this case, you capture this new minimum cost plan by turning on automatic plan capture as described in [Automatically Capturing Plans](AuroraPostgreSQL.Optimize.CapturePlans.md#AuroraPostgreSQL.Optimize.CapturePlans.Automatic)\. 
 
-The optimizer captures new plans as unapproved\. Use the `apg_plan_mgmt.evolve_plan_baselines` function to compare plans and change them to approved, rejected, or disabled\. For more information, see [Evaluating Plan Performance](AuroraPostgreSQL.Optimize.Maintenance.md#AuroraPostgreSQL.Optimize.Maintenance.EvaluatingPerformance)\. 
+The optimizer captures new plans as `Unapproved`\. Use the `apg_plan_mgmt.evolve_plan_baselines` function to compare plans and change them to approved, rejected, or disabled\. For more information, see [Evaluating Plan Performance](AuroraPostgreSQL.Optimize.Maintenance.md#AuroraPostgreSQL.Optimize.Maintenance.EvaluatingPerformance)\. 

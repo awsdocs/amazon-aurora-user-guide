@@ -31,9 +31,8 @@
  `mydbcluster.cluster-123456789012.us-east-1.rds.amazonaws.com:3306` 
 
 **Reader endpoint**  
- A *reader endpoint* for an Aurora DB cluster connects to one of the available Aurora Replicas for that DB cluster\. Each Aurora DB cluster has one reader endpoint\. If there is more than one Aurora Replica, the reader endpoint directs each connection request to one of the Aurora Replicas\.   
- The reader endpoint provides load\-balancing support for read\-only connections to the DB cluster\. Use the reader endpoint for read operations, such as queries\. You can't use the reader endpoint for write operations\.   
- The DB cluster distributes connection requests to the reader endpoint among the available Aurora Replicas\. If the DB cluster contains only a primary DB instance, the reader endpoint serves connection requests from the primary DB instance\. If one or more Aurora Replicas are created for that DB cluster, subsequent connections to the reader endpoint are load\-balanced among the Replicas\.   
+ A *reader endpoint* for an Aurora DB cluster provides load\-balancing support for read\-only connections to the DB cluster\. Use the reader endpoint for read operations, such as queries\. By processing those statements on the read\-only Aurora Replicas, this endpoint reduces the overhead on the primary instance\. It also helps the cluster to scale the capacity to handle simultaneous `SELECT` queries, proportional to the number of Aurora Replicas in the cluster\. Each Aurora DB cluster has one reader endpoint\.   
+ If the cluster contains one or more Aurora Replicas, the reader endpoint load\-balances each connection request among the Aurora Replicas\. In that case, you can only perform read\-only statements such as `SELECT` in that session\. If the cluster only contains a primary instance and no Aurora Replicas, the reader endpoint connects to the primary instance\. In that case, you can perform write operations through the endpoint\.   
  The following example illustrates a reader endpoint for an Aurora MySQL DB cluster\.   
  `mydbcluster.cluster-ro-123456789012.us-east-1.rds.amazonaws.com:3306` 
 
@@ -56,7 +55,11 @@
 
  In the AWS Management Console, you see the cluster endpoint, the reader endpoint, and any custom endpoints in the detail page for each cluster\. You see the instance endpoint in the detail page for each instance\. When you connect, you must append the associated port number, following a colon, to the endpoint name shown on this detail page\. 
 
- With the AWS CLI, you see the endpoints in the output of the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command\. 
+ With the AWS CLI, you see the writer, reader, and any custom endpoints in the output of the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command\. For example, the following command shows the endpoint attributes for all clusters in your current AWS Region\. 
+
+```
+aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:ReaderEndpoint,CustomEndpoints:CustomEndpoints}'
+```
 
  With the Amazon RDS API, you retrieve the endpoints by calling the [DescribeDbClusterEndpoints](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDbClusterEndpoints.html) function\. 
 
@@ -72,9 +75,11 @@
 
  You use the reader endpoint for read\-only connections for your Aurora cluster\. This endpoint uses a load\-balancing mechanism to help your cluster handle a query\-intensive workload\. The reader endpoint is the endpoint that you supply to applications that do reporting or other read\-only operations on the cluster\. 
 
- The reader endpoint only load\-balances connections to available Aurora Replicas in an Aurora DB cluster\. It doesn't load\-balance individual queries\. If you want to load\-balance each query to distribute the read workload for a DB cluster, open a new connection to the reader endpoint for each query\.  
+ The reader endpoint load\-balances connections to available Aurora Replicas in an Aurora DB cluster\. It doesn'tt load\-balance individual queries\. If you want to load\-balance each query to distribute the read workload for a DB cluster, open a new connection to the reader endpoint for each query\. 
 
  Each Aurora cluster has a single built\-in reader endpoint, whose name and other attributes are managed by Aurora\. You can't create, delete, or modify this kind of endpoint\. 
+
+ If your cluster contains only a primary instance and no Aurora Replicas, the reader endpoint connects to the primary instance\. In that case, you can perform write operations through this endpoint\. 
 
 ## Using Custom Endpoints<a name="Aurora.Endpoints.Custom"></a>
 
@@ -111,7 +116,7 @@
 
  In the AWS Management Console, the choice is represented by the check box **Attach future instances added to this cluster**\. When you keep check box clear, the custom endpoint uses a static list containing only the DB instances specified in the dialog\. When you choose the check box, the custom endpoint uses an exclusion list\. In this case, the custom endpoint represents all DB instances in the cluster \(including any that you add in the future\) except the ones left unselected in the dialog\. The AWS CLI and Amazon RDS API have parameters representing each kind of list\. When you use the AWS CLI or Amazon RDS API, you can't add or remove individual members to the lists; you always specify the entire new list\. 
 
- Aurora doesn't change the DB instances specified in these lists when DB instances change roles between primary instance and Aurora Replica due to failover or promotion\. For example, a custom endpoint with type `READER` might include a DB instance that was an Aurora Replica and then was promoted to a primary instance\. However, you can only connect to a DB instance through a custom endpoint when that DB instance has a role compatible with the type of the custom endpoint \(`READER`, `WRITER`, or `ANY`\)\. 
+ Aurora doesn't change the DB instances specified in these lists when DB instances change roles between primary instance and Aurora Replica due to failover or promotion\. For example, a custom endpoint with type `READER` might include a DB instance that was an Aurora Replica and then was promoted to a primary instance\. The type of a custom endpoint \(`READER`, `WRITER`, or `ANY`\) determines what kinds of operations you can perform through that endpoint\. 
 
  You can associate a DB instance with more than one custom endpoint\. For example, suppose that you add a new DB instance to a cluster, or that Aurora adds a DB instance automatically through the autoscaling mechanism\. In these cases, the DB instance is added to all custom endpoints for which it is eligible\. Which endpoints the DB instance is added to is based on the custom endpoint type of `READER` , `WRITER`, or `ANY`, plus any static or exclusion lists defined for each endpoint\. For example, if the endpoint includes a static list of DB instances, newly added Aurora Replicas aren't added to that endpoint\. Conversely, if the endpoint has an exclusion list, newly added Aurora Replicas are added to the endpoint, if they aren't named in the exclusion list and their roles match the type of the custom endpoint\. 
 

@@ -208,11 +208,22 @@
 1. Check which combinations of Aurora MySQL version, AWS instance class, AWS Region, Availability Zone, and so on, are available for parallel query clusters\. To do so, use the `aws rds describe-orderable-db-instance-options` command, which produces output in JSON format\. The following code example shows how\. 
 
    ```
-   
-   
+   # See choices for a specified AWS Region.
+   aws rds describe-orderable-db-instance-options --engine aurora --query 'OrderableDBInstanceOptions[?contains(SupportedEngineModes,`parallelquery`)==`true`].{Engine:Engine,EngineVersion:EngineVersion,SupportedEngineModes:SupportedEngineModes,DBInstanceClass:DBInstanceClass}' --region us-east-1
+   [
+       {
+           "DBInstanceClass": "db.r3.2xlarge",
+           "EngineVersion": "5.6.10a",
+           "Engine": "aurora",
+           "SupportedEngineModes": [
+               "parallelquery"
+           ]
+       },
+       {
+           "DBInstanceClass": "db.r3.4xlarge",
+           "EngineVersion": "5.6.10a",
+   ...
    ```
-
-    `# See choices for a specified AWS Region. aws rds describe-orderable-db-instance-options --engine aurora --query 'OrderableDBInstanceOptions[?contains(SupportedEngineModes,`parallelquery`)==`true`].{Engine:Engine,EngineVersion:EngineVersion,SupportedEngineModes:SupportedEngineModes,DBInstanceClass:DBInstanceClass}' --region us-east-1 [ { "DBInstanceClass": "db.r3.2xlarge", "EngineVersion": "5.6.10a", "Engine": "aurora", "SupportedEngineModes": [ "parallelquery" ] }, { "DBInstanceClass": "db.r3.4xlarge", "EngineVersion": "5.6.10a", ...` 
 
 1.  Locate a snapshot from a MySQL 5\.6\-compatible database\. 
 

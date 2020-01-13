@@ -28,7 +28,7 @@ SELECT apg_plan_mgmt.evolve_plan_baselines (
    min_speedup_factor := 1.0, 
    action := 'approve'
 ) 
-FROM apg_plan_mgmt.dba_plans WHERE status = 'unapproved';
+FROM apg_plan_mgmt.dba_plans WHERE status = 'Unapproved';
                 
 NOTICE:     rangequery (1,10000)
 NOTICE:     Baseline   [ Planning time 0.761 ms, Execution time 13.261 ms]
@@ -41,7 +41,7 @@ evolve_plan_baselines
 (1 row)
 ```
 
-The output shows a performance report for the `rangequery` statement with parameter bindings of 1 and 10,000\. The new unapproved plan \(`Baseline+1`\) is better than the best previously approved plan \(`Baseline`\)\. To confirm that the new plan is now approved, check the `apg_plan_mgmt.dba_plans` view\. 
+The output shows a performance report for the `rangequery` statement with parameter bindings of 1 and 10,000\. The new unapproved plan \(`Baseline+1`\) is better than the best previously approved plan \(`Baseline`\)\. To confirm that the new plan is now `Approved`, check the `apg_plan_mgmt.dba_plans` view\. 
 
 ```
 SELECT sql_hash, plan_hash, status, enabled, stmt_name 
@@ -54,11 +54,11 @@ sql_hash  | plan_hash |  status  | enabled | stmt_name
 (2 rows)
 ```
 
-The managed plan now includes two approved plans that are the statement's plan baseline\. You can also call the `apg_plan_mgmt.set_plan_status` function to directly set a plan's status field to `'approved'`, `'rejected'`, `'unapproved'`, or `'preferred'`\. 
+The managed plan now includes two approved plans that are the statement's plan baseline\. You can also call the `apg_plan_mgmt.set_plan_status` function to directly set a plan's status field to `'Approved'`, `'Rejected'`, `'Unapproved'`, or `'Preferred'`\. 
 
 ### Rejecting or Disabling Slower Plans<a name="AuroraPostgreSQL.Optimize.Maintenance.EvaluatingPerformance.Rejecting"></a>
 
-To reject or disable plans, pass `'reject'` or `'disable' `as the action parameter to the `apg_plan_mgmt.evolve_plan_baselines` function\. This example disables any captured unapproved plan that is slower by at least 10 percent than the best approved plan for the statement\. 
+To reject or disable plans, pass `'reject'` or `'disable' `as the action parameter to the `apg_plan_mgmt.evolve_plan_baselines` function\. This example disables any captured `Unapproved` plan that is slower by at least 10 percent than the best `Approved` plan for the statement\. 
 
 ```
 SELECT apg_plan_mgmt.evolve_plan_baselines(
@@ -72,7 +72,7 @@ WHERE status = 'Unapproved' AND   -- plan is Unapproved
 origin = 'Automatic';       -- plan was auto-captured
 ```
 
-You can also directly set a plan to rejected or disabled\. To directly set a plan's enabled field to `true` or `false`, call the `apg_plan_mgmt.set_plan_enabled` function\. To directly set a plan's status field to `'approved'`, `'rejected'`, `'unapproved'`, or `'preferred'`, call the `apg_plan_mgmt.set_plan_status` function\.
+You can also directly set a plan to rejected or disabled\. To directly set a plan's enabled field to `true` or `false`, call the `apg_plan_mgmt.set_plan_enabled` function\. To directly set a plan's status field to `'Approved'`, `'Rejected'`, `'Unapproved'`, or `'Preferred'`, call the `apg_plan_mgmt.set_plan_status` function\.
 
 ## Validating Plans<a name="AuroraPostgreSQL.Optimize.Maintenance.ValidatingPlans"></a>
 
@@ -141,7 +141,7 @@ The following steps show how to use `pg_hint_plan`\.
    FROM apg_plan_mgmt.dba_plans;
    ```
 
-1. Set the status of the plan to `preferred`\. Doing so makes sure that the optimizer chooses to run it, instead of selecting from the set of approved plans, when the minimum\-cost plan isn't already `approved` or `preferred`\.
+1. Set the status of the plan to `Preferred`\. Doing so makes sure that the optimizer chooses to run it, instead of selecting from the set of approved plans, when the minimum\-cost plan isn't already `Approved` or `Preferred`\.
 
    ```
    SELECT apg_plan_mgmt.set_plan_status(<sql-hash>, <plan-hash>, 'preferred' ); 
@@ -154,7 +154,7 @@ The following steps show how to use `pg_hint_plan`\.
    SET apg_plan_mgmt.use_plan_baselines = true;
    ```
 
-   Now, when the original SQL statement runs, the optimizer chooses either an `approved` or `preferred` plan\. If the minimum\-cost plan isn't `approved` or `preferred`, then the optimizer chooses the `preferred` plan\.
+   Now, when the original SQL statement runs, the optimizer chooses either an `Approved` or `Preferred` plan\. If the minimum\-cost plan isn't `Approved` or `Preferred`, then the optimizer chooses the `Preferred` plan\.
 
 ## Deleting Plans<a name="AuroraPostgreSQL.Optimize.Maintenance.DeletingPlans"></a>
 
@@ -166,7 +166,7 @@ For example, you can use the `apg_plan_mgmt.delete_plan` function as follows\. D
 SELECT SUM(apg_plan_mgmt.delete_plan(sql_hash, plan_hash))
 FROM apg_plan_mgmt.dba_plans 
 WHERE last_used < (current_date - interval '31 days') 
-AND status <> 'rejected';
+AND status <> 'Rejected';
 ```
 
 To delete any plan that is no longer valid and that you expect not to become valid again, use the `apg_plan_mgmt.validate_plans` function\. For more information, see [Validating Plans](#AuroraPostgreSQL.Optimize.Maintenance.ValidatingPlans)\. 

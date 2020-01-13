@@ -161,7 +161,7 @@ Returns 0 if the setting was successful or \-1 if the setting failed\.
 
 ## apg\_plan\_mgmt\.set\_plan\_status<a name="AuroraPostgreSQL.Optimize.Functions.set_plan_status"></a>
 
-Set a managed plan's status to approved, unapproved, rejected, or preferred\.
+Set a managed plan's status to `Approved`, `Unapproved`, `Rejected`, or `Preferred`\.
 
 **Syntax**
 
@@ -186,11 +186,11 @@ Returns 0 if the setting was successful or \-1 if the setting failed\.
 | --- | --- | 
 | sql\_hash | The sql\_hash ID of the plan's managed SQL statement\. | 
 | plan\_hash | The managed plan's plan\_hash ID\. | 
-| status |  A string with one of the following values; case does not matter: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.Functions.html) For more information about these values, see `status` in [Reference for the apg\_plan\_mgmt\.dba\_plans View](AuroraPostgreSQL.Optimize.ViewPlans.md#AuroraPostgreSQL.Optimize.ViewPlans.dba_plans)\.   | 
+| status |  A string with one of the following values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.Functions.html) The case you use does not matter, however the status value is set to initial uppercase in the `apg_plan_mgmt.dba_plans` view\. For more information about these values, see `status` in [Reference for the apg\_plan\_mgmt\.dba\_plans View](AuroraPostgreSQL.Optimize.ViewPlans.md#AuroraPostgreSQL.Optimize.ViewPlans.dba_plans)\.   | 
 
 ## apg\_plan\_mgmt\.validate\_plans<a name="AuroraPostgreSQL.Optimize.Functions.validate_plans"></a>
 
-Validate that the optimizer can still recreate plans\. The optimizer validates approved, unapproved, and preferred plans, whether the plan is enabled or disabled\. Rejected plans are not validated\. Optionally, you can use the `apg_plan_mgmt.validate_plans` function to delete or disable invalid plans\.
+Validate that the optimizer can still recreate plans\. The optimizer validates `Approved`, `Unapproved`, and `Preferred` plans, whether the plan is enabled or disabled\. `Rejected` plans are not validated\. Optionally, you can use the `apg_plan_mgmt.validate_plans` function to delete or disable invalid plans\.
 
 **Syntax**
 

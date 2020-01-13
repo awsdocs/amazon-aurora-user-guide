@@ -17,8 +17,8 @@ FROM apg_plan_mgmt.dba_plans;
 
  sql_hash   | plan_hash |   status   | enabled | stmt_name
 ------------+-----------+------------+---------+------------
- 1984047223 | 512153379 | approved   | t       | rangequery 
- 1984047223 | 512284451 | unapproved | t       | rangequery 
+ 1984047223 | 512153379 | Approved   | t       | rangequery 
+ 1984047223 | 512284451 | Unapproved | t       | rangequery 
  (2 rows)
 ```
 
@@ -51,6 +51,6 @@ The columns of plan information in the `apg_plan_mgmt.dba_plans` view include th
 | queryId | A statement hash, as calculated by the pg\_stat\_statements extension\. This isn't a stable or database\-independent identifier because it depends on object identifiers \(OIDs\)\.  | 
 | sql\_hash | A hash value of the SQL statement text, normalized with literals removed\. | 
 | sql\_text | The full text of the SQL statement\. | 
-| status |  A plan's status, which determines how the optimizer uses a plan\. Valid values include the following\. Case does not matter\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.ViewPlans.html)  | 
+| status |  A plan's status, which determines how the optimizer uses a plan\. Valid values include the following\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.ViewPlans.html)  | 
 | stmt\_name | The name of the SQL statement within a PREPARE statement\. This value is an empty string for an unnamed prepared statement\. This value is NULL for a nonprepared statement\. | 
 | total\_time\_benefit\_ms |  The total time benefit in milliseconds of enabling this plan\. This value considers both planning time and execution time\. If this value is negative, there is a disadvantage to enabling this plan\. This column is populated by the [apg\_plan\_mgmt\.evolve\_plan\_baselines](AuroraPostgreSQL.Optimize.Functions.md#AuroraPostgreSQL.Optimize.Functions.evolve_plan_baselines) function\.   | 
