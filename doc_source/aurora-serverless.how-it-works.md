@@ -92,7 +92,7 @@ aws rds describe-engine-default-cluster-parameters \
     --output text
 ```
 
-the following Linux command extracts the names of parameters that you can set for Aurora PostgreSQL Serverless clusters, from a `aurora-postgresql10` default DB cluster parameter group\. 
+The following Linux command extracts the names of parameters that you can set for Aurora PostgreSQL Serverless clusters, from an `aurora-postgresql10` default DB cluster parameter group\. 
 
 ```
 aws rds describe-engine-default-cluster-parameters \

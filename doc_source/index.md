@@ -262,7 +262,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Database Engine Versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.20180305.md)
 + [Best Practices with Amazon Aurora](Aurora.BestPractices.md)
 + [Performing a Proof of Concept with Amazon Aurora](aurora-poc.md)
-+ [Quotas for Amazon Aurora](CHAP_Limits.md)
++ [Quotas and Constraints for Amazon Aurora](CHAP_Limits.md)
 + [Troubleshooting for Aurora](CHAP_Troubleshooting.md)
 + [Amazon RDS Application Programming Interface (API) Reference](ProgrammingGuide.md)
    + [Using the Query API](Using_the_Query_API.md)

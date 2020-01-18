@@ -142,6 +142,3 @@ You can view a subset of categorized Aurora metrics in the Latest Metrics view o
 
 **Note**  
 The **Failed SQL Statements** metric, displayed under the **SQL** category of the Latest Metrics view in the Amazon RDS console, does not apply to Amazon Aurora\.
-
-## Related Topics<a name="Aurora.Monitoring.RelatedTopics"></a>
-+ [Managing an Amazon Aurora DB Cluster](CHAP_Aurora.md)

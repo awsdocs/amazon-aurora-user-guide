@@ -19,7 +19,7 @@
 
 ## Overview of Aurora Global Database<a name="aurora-global-database-overview"></a>
 
- An Aurora global database consists of one primary AWS Region where your data is mastered, and up to five read\-only, secondary AWS Region\. Aurora replicates data to the secondary AWS Region with typical latency of under a second\. You issue write operations directly to the primary DB instance in the primary AWS Region\. An Aurora global database uses dedicated infrastructure to replicate your data, leaving database resources available entirely to serve application workloads\. Applications with a worldwide footprint can use reader instances in the secondary AWS Region for low latency reads\. In the unlikely event your database becomes degraded or isolated in an AWS region, you can promote the secondary AWS Region to take full read\-write workloads in under a minute\. 
+ An Aurora global database consists of one primary AWS Region where your data is mastered, and up to five read\-only, secondary AWS Regions\. Aurora replicates data to the secondary AWS Region with typical latency of under a second\. You issue write operations directly to the primary DB instance in the primary AWS Region\. An Aurora global database uses dedicated infrastructure to replicate your data, leaving database resources available entirely to serve application workloads\. Applications with a worldwide footprint can use reader instances in the secondary AWS Regions for low latency reads\. In the unlikely event your database becomes degraded or isolated in an AWS region, you can promote one of the secondary AWS Regions to take full read\-write workloads in under a minute\. 
 
  The Aurora cluster in the primary AWS Region where your data is mastered performs both read and write operations\. The cluster in the secondary region enables low\-latency reads\. You can scale up the secondary clusters independently by adding one of more DB instances \(Aurora Replicas\) to serve read\-only workloads\. For disaster recovery, you can remove and promote one of the secondary clusters to allow full read and write operations\. 
 
@@ -86,7 +86,7 @@
    1.  Choose **Global** as the location:   
 ![\[Screenshot of the database location choices when creating an Aurora cluster. Choose "global" to create an Aurora global databases.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-create-global-01c.png)
 **Note**  
- Choosing **Global** sets up the global database and the primary Aurora cluster\. Once the global database is created and available, you can add the secondary AWS Region\. 
+ Choosing **Global** sets up the global database and the primary Aurora cluster\. Once the global database is created and available, you can add a secondary AWS Region\. 
 
 1.  Fill in the remaining settings using the same decision process as for other Aurora clusters\. For more information about creating an Aurora DB cluster, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.   
 ![\[Screenshot showing supplemental settings when creating an Aurora global database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-create-global-02.png)

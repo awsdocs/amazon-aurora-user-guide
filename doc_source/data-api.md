@@ -863,32 +863,19 @@ You can download and use a Java client library for the Data API\. The Java clien
 
 ### Downloading the Java Client Library for Data API<a name="data-api.java-client-library.downloading"></a>
 
-The Data API Java client library is open source in GitHub\. You can build the library manually from the source files, but the best practice is to consume the library using Apache Maven dependency management\. To do this, use the following procedure\. 
+The Data API Java client library is open source in GitHub at the following location:
 
-**To use the Data API in your application as a dependency**
+[ https://github\.com/awslabs/rds\-data\-api\-client\-library\-java](https://github.com/awslabs/rds-data-api-client-library-java)
 
-1.  Download and install Apache Maven\. For more information, see [Downloading Apache Maven](https://maven.apache.org/download.cgi) and [Installing Apache Maven](https://maven.apache.org/install.html) in the Maven documentation\.
+You can build the library manually from the source files, but the best practice is to consume the library using Apache Maven dependency management\. Add the following dependency to your Maven POM file:
 
-1.  Add the Data API Maven repository to your application's Project Object Model \(POM\) file as shown following\.
-
-   ```
-   <!--Dependency:-->
-   <dependencies>
-       <dependency>
-          <groupId>com.amazonaws</groupId>
-          <artifactId>rdsdata-client-library</artifactId>
-          <version>1.0</version>
-       </dependency>
-   </dependencies>
-   <!--Custom repository:-->
-   <repositories>
-       <repository>
-          <id>rdsdata-client-repository</id>
-          <name>RDS Data Client Library Release Repository</name>
-          <url>https://rds-data-client-library-java.s3.amazonaws.com/maven/release</url>
-       </repository>
-   </repositories>
-   ```
+```
+<dependency>
+    <groupId>software.amazon.rdsdata</groupId>
+    <artifactId>rds-data-api-client-library-java</artifactId>
+    <version>1.0.1</version>
+</dependency>
+```
 
 ### Java Client Library Examples<a name="data-api.java-client-library.examples"></a>
 

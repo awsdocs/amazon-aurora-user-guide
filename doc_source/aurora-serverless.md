@@ -88,7 +88,10 @@ You can access an Aurora Serverless DB cluster from AWS Lambda\. For more inform
 
 ## Using TLS/SSL with Aurora Serverless<a name="aurora-serverless.tls"></a>
 
- You can connect to Aurora Serverless clusters using the Transport Layer Security/Secure Sockets Layer \(TLS/SSL\) protocol\. To do so, you use the same general procedure as described in [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\. You use certificates from the AWS Certificate Manager \(ACM\)\. For more information, see the *[AWS Certificate Manager User Guide](https://docs.aws.amazon.com/acm/latest/userguide/)*\. 
+ You can connect to Aurora Serverless clusters using the Transport Layer Security/Secure Sockets Layer \(TLS/SSL\) protocol\. To do so, you use the same general procedure as described in [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\. 
+
+**Note**  
+With Aurora Serverless clusters, you don't need to download and use Amazon RDS SSL/TLS certificates\. Instead, use certificates from the AWS Certificate Manager \(ACM\)\. For more information, see the *[AWS Certificate Manager User Guide](https://docs.aws.amazon.com/acm/latest/userguide/)*\.
 
  Aurora Serverless can ensure that your session uses TLS between your client and the Aurora Serverless VPC endpoint\. To have Aurora Serverless do so, specify the requirement on the client side with the `--ssl-mode` parameter\. SSL session variables are not set for SSL connections to an Aurora Serverless DB cluster\. 
 
