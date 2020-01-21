@@ -75,7 +75,7 @@ aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:Read
 
  You use the reader endpoint for read\-only connections for your Aurora cluster\. This endpoint uses a load\-balancing mechanism to help your cluster handle a query\-intensive workload\. The reader endpoint is the endpoint that you supply to applications that do reporting or other read\-only operations on the cluster\. 
 
- The reader endpoint load\-balances connections to available Aurora Replicas in an Aurora DB cluster\. It doesn'tt load\-balance individual queries\. If you want to load\-balance each query to distribute the read workload for a DB cluster, open a new connection to the reader endpoint for each query\. 
+ The reader endpoint load\-balances connections to available Aurora Replicas in an Aurora DB cluster\. It doesn't load\-balance individual queries\. If you want to load\-balance each query to distribute the read workload for a DB cluster, open a new connection to the reader endpoint for each query\. 
 
  Each Aurora cluster has a single built\-in reader endpoint, whose name and other attributes are managed by Aurora\. You can't create, delete, or modify this kind of endpoint\. 
 
