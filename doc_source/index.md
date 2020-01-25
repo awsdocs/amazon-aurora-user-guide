@@ -1,7 +1,7 @@
 # Amazon Aurora User Guide for Aurora
 
 -----
-*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -96,6 +96,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Restoring from a DB Cluster Snapshot](USER_RestoreFromSnapshot.md)
       + [Copying a Snapshot](USER_CopySnapshot.md)
       + [Sharing a DB Cluster Snapshot](USER_ShareSnapshot.md)
+      + [Exporting DB Snapshot Data to Amazon S3](USER_ExportSnapshot.md)
       + [Restoring a DB Cluster to a Specified Time](USER_PIT.md)
       + [Deleting a Snapshot](USER_DeleteSnapshot.md)
    + [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)

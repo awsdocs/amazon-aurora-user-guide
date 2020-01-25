@@ -9,6 +9,7 @@ Before August 31, 2018, Amazon Aurora was documented in the * Amazon Relational 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Support for exporting DB snapshot data to Amazon S3](#WhatsNew) | Amazon Aurora supports exporting DB snapshot data to Amazon S3 for MySQL and PostgreSQL\. For more information, see [ Exporting DB Snapshot Data to Amazon S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)\.  | January 9, 2020 | 
 | [Aurora MySQL version 2\.07\.1](AuroraMySQL.Updates.2071.md) | Aurora MySQL version 2\.07\.1 is available\. | December 23, 2019 | 
 | [Aurora MySQL version 1\.22\.1](AuroraMySQL.Updates.1221.md) | Aurora MySQL version 1\.22\.1 is available\. | December 23, 2019 | 
 | [Aurora MySQL release notes in Document History](#WhatsNew) | This section now includes history entries for Aurora MySQL release notes for versions released after August 31, 2018\. For the full release notes for a specific version, choose the link in the first column of the history entry\.  | December 13, 2019 | 

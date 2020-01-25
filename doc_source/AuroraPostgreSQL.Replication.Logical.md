@@ -16,9 +16,9 @@ Following, you can find information about how to work with PostgreSQL logical re
 
 ## Configuring Logical Replication<a name="AuroraPostgreSQL.Replication.Logical.Configure"></a>
 
-To use logical replication, you first set the `rds.logical_replication` parameter for a cluster parameter group\. You then set up the publisher and subscriber databases\. 
+To use logical replication, you first set the `rds.logical_replication` parameter for a cluster parameter group\. You then set up the publisher and subscriber\. 
 
-Logical replication uses a publish and subscribe model\. *Publishers* and *subscribers* are the nodes\. A *publication* is defined on a publisher and is a set of changes generated from one or more database tables\. A *subscription* defines the connection to another database and one or more publications to which it subscribes\. A *subscription* is defined on a subscriber\. The publication and subscription make the connection between the publisher and subscriber databases\.
+Logical replication uses a publish and subscribe model\. *Publishers* and *subscribers* are the nodes\. A *publication* is a set of changes generated from one or more database tables\. You specify a publication on a publisher\. A *subscription* defines the connection to another database and one or more publications to which it subscribes\. You specify a subscription on a subscriber\. The publication and subscription make the connection between the publisher and subscriber\.
 
 **Note**  
 To perform logical replication for a PostgreSQL database, your AWS user account needs the `rds_superuser` role\.
@@ -55,13 +55,15 @@ To perform logical replication for a PostgreSQL database, your AWS user account 
 
 To implement logical replication, use the PostgreSQL commands `CREATE PUBLICATION` and `CREATE SUBSCRIPTION`\. 
 
-For this example, table data is replicated from an Aurora PostgreSQL database as the publisher to an RDS for PostgreSQL database as the subscriber\. After the logical replication mechanism is set up, changes on the publisher are continually sent to the subscriber as they occur\. 
+For this example, table data is replicated from an Aurora PostgreSQL database as the publisher to a PostgreSQL database as the subscriber\. Note that a subscriber database can be an RDS PostgreSQL database or an Aurora PostgreSQL database\. A subscriber can also be an application that uses PosgreSQL logical replication\. After the logical replication mechanism is set up, changes on the publisher are continually sent to the subscriber as they occur\. 
 
 To set up logical replication for this example, do the following:
 
 1. Configure an Aurora PostgreSQL DB cluster as the publisher\. To do so, create a new Aurora PostgreSQL DB cluster, as described when configuring the publisher in [Configuring Logical Replication](#AuroraPostgreSQL.Replication.Logical.Configure)\.
 
-1. Set up the publisher database\. Create a table using the following SQL statement on the publisher database\. 
+1. Set up the publisher database\. 
+
+   For example, create a table using the following SQL statement on the publisher database\. 
 
    ```
    CREATE TABLE LogicalReplicationTest (a int PRIMARY KEY);
@@ -79,11 +81,15 @@ To set up logical replication for this example, do the following:
    CREATE PUBLICATION testpub FOR TABLE LogicalReplicationTest;
    ```
 
-1. Create a database to be your subscriber\.
+1. Create your subscriber\. A subscriber database can be either of the following:
+   + Aurora PostgreSQL database version 2\.2\.0 \(compatible with PostgreSQL 10\.6\) or later\. 
+   + Amazon RDS for PostgreSQL database with the PostgreSQL DB engine version 10\.4 or later\.
 
-   For this example, create an Amazon RDS for PostgreSQL database\. Be sure to use the PostgreSQL DB engine version 10\.4 or later, which supports logical replication\. For details on creating an RDS PostgreSQL DB instance, see [Creating a DB Instance Running the PostgreSQL Database Engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreatePostgreSQLInstance.html) in the *Amazon RDS User Guide\.* 
+   For this example, we create an Amazon RDS for PostgreSQL database as the subscriber\. For details on creating an RDS PostgreSQL DB instance, see [Creating a DB Instance Running the PostgreSQL Database Engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreatePostgreSQLInstance.html) in the *Amazon RDS User Guide\.* 
 
-1. Set up the subscriber database\. For this example, create a table like the one created for the publisher by using the following SQL statement\. 
+1. Set up the subscriber database\. 
+
+   For this example, create a table like the one created for the publisher by using the following SQL statement\. 
 
    ```
    CREATE TABLE LogicalReplicationTest (a int PRIMARY KEY);
@@ -95,7 +101,9 @@ To set up logical replication for this example, do the following:
    SELECT count(*) FROM LogicalReplicationTest;
    ```
 
-1. Create a subscription on the subscriber\. Use the following SQL statement on the subscriber database and the following settings for information from the publisher cluster: 
+1. Create a subscription on the subscriber\. 
+
+   Use the following SQL statement on the subscriber database and the following settings from the publisher cluster: 
    + **host** – The publisher cluster's writer DB instance\.
    + **port** – The port on which the writer DB instance is listening\. The default for PostgreSQL is 5432\.
    + **dbname** – The DB name of the publisher cluster\.
@@ -120,7 +128,7 @@ Any further changes on the publisher are replicated to the subscriber\.
 
 You can use the AWS Database Migration Service \(AWS DMS\) to replicate a database or a portion of a database\. Use AWS DMS to migrate your data from an Aurora PostgreSQL database to another open source or commercial database\. For more information about AWS DMS, see the [AWS Database Migration Service User Guide](https://docs.aws.amazon.com/dms/latest/userguide/)\.
 
-The following example shows how to set up logical replication from an Aurora PostgreSQL database as the publisher and then use AWS DMS for migration\. In this example, you migrate data from a database table to an RDS PostgreSQL database as the subscriber\. This example uses the same publisher and subscriber that were created in [Example of Logical Replication of a Database Table](#AuroraPostgreSQL.Replication.Logical.PostgreSQL-Example)\.
+The following example shows how to set up logical replication from an Aurora PostgreSQL database as the publisher and then use AWS DMS for migration\. This example uses the same publisher and subscriber that were created in [Example of Logical Replication of a Database Table](#AuroraPostgreSQL.Replication.Logical.PostgreSQL-Example)\.
 
 To set up logical replication with AWS DMS, you need details about your publisher and subscriber from Amazon RDS\. In particular, you need details about the publisher's writer DB instance and the subscriber's DB instance\.
 
@@ -151,17 +159,21 @@ Get the following information for the subscriber's DB instance:
    + For **Availability zone**, choose the same zone as for the writer DB instance\.
    + For **VPC Security Group**, choose the same group as for the writer DB instance\.
 
-1. Create an AWS DMS endpoint for the source\. Specify the publisher as the source endpoint by using the following settings: 
+1. Create an AWS DMS endpoint for the source\. 
+
+   Specify the publisher as the source endpoint by using the following settings: 
    + For **Endpoint type**, choose **Source endpoint**\. 
    + Choose **Select RDS DB Instance**\.
    + For **RDS Instance**, choose the DB identifier of the publisher's writer DB instance\.
    + For **Source engine**, choose **postgres**\.
 
-1. Create an AWS DMS endpoint for the target\. Specify the subscriber as the target endpoint by using the following settings:
+1. Create an AWS DMS endpoint for the target\. 
+
+   Specify the subscriber as the target endpoint by using the following settings:
    + For **Endpoint type**, choose **Target endpoint**\. 
    + Choose **Select RDS DB Instance**\.
    + For **RDS Instance**, choose the DB identifier of the subscriber DB instance\.
-   + Choose a value for **Source engine**\. For example, if the subscriber is an RDS PostgreSQL database, choose **postgres**\.
+   + Choose a value for **Source engine**\. For example, if the subscriber is an RDS PostgreSQL database, choose **postgres**\. If the subscriber is an Aurora PostgreSQL database, choose **aurora\-postgresql**\.
 
 1. Create an AWS DMS database migration task\. 
 
@@ -172,4 +184,4 @@ Get the following information for the subscriber's DB instance:
 
    The rest of the task details depend on your migration project\. For more information about specifying all the details for DMS tasks, see [Working with AWS DMS Tasks](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html) in the *AWS Database Migration Service User Guide\.*
 
-After the task is created, AWS DMS begins migrating data from the publisher to the subscriber\. 
+After AWS DMS creates the task, it begins migrating data from the publisher to the subscriber\. 

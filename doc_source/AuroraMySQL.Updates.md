@@ -30,11 +30,14 @@ For example, the engine version for Aurora MySQL 2\.03\.2 is the following\.
 ```
 
 **Note**  
-For Aurora MySQL 2\.x, the engine version for Aurora MySQL version 2\.03\.1 and lower is `5.7.12`\. Currently, the engine version for all Aurora MySQL 1\.x versions is `5.6.10a`\.
+All 1\.x Aurora MySQL engine versions are wire\-compatible with Community MySQL 5\.6\.10a\. All 2\.x Aurora MySQL engine versions are wire\-compatible with Community MySQL 5\.7\.12\.  
+For Aurora MySQL 2\.x, the engine version for Aurora MySQL version 2\.03\.1 and lower is `5.7.12`\. For Aurora MySQL 1\.x, the engine version for Aurora MySQL prior to 1\.19\.0 is `5.6.10a`\.
 
  You specify the Aurora MySQL engine version in some AWS CLI commands and RDS API operations\. For example, you specify the `--engine-version` option when you run the AWS CLI commands [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html)\. You specify the `EngineVersion` parameter when you run the RDS API operations [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html)\. 
 
- Prior to Aurora MySQL 2\.03\.2, the engine version displayed by the AWS Management Console remained the same even after you upgraded the engine in the cluster\. In Aurora MySQL 2\.03\.2 and higher, the engine version in the AWS Management Console also includes the Aurora version\. Upgrading the cluster changes the displayed value\. For Aurora clusters managed through AWS CloudFormation, this change in the `EngineVersion` setting can trigger actions by AWS CloudFormation\. For information about how AWS CloudFormation treats changes to the `EngineVersion` setting, see [the AWS CloudFormation documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html)\. 
+ The process to update the engine version prior to Aurora MySQL 1\.19\.0 and 2\.03\.2 is to Apply a Pending Maintenance Action in the Cluster\. This process does not change the Aurora MySQL engine version displayed by the AWS Management Console\. 
+
+ Prior to Aurora MySQL 1\.19\.0 and 2\.03\.2, the engine version displayed by the AWS Management Console remained the same even after you upgraded the engine in the cluster\. In Aurora MySQL 1\.19\.0 and higher or 2\.03\.2 and higher, the engine version in the AWS Management Console also includes the Aurora version\. Upgrading the cluster changes the displayed value\. For Aurora clusters managed through AWS CloudFormation, this change in the `EngineVersion` setting can trigger actions by AWS CloudFormation\. For information about how AWS CloudFormation treats changes to the `EngineVersion` setting, see [the AWS CloudFormation documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html)\. 
 
 ## Database Upgrades and Patches for Amazon Aurora MySQL<a name="AuroraMySQL.Updates.Patching"></a>
 
