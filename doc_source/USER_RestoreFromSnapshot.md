@@ -75,7 +75,7 @@ For Windows:
 
 ```
 1. aws rds restore-db-cluster-from-snapshot ^
-2.     --db-instance-identifier mynewdbcluster ^
+2.     --db-cluster-identifier mynewdbcluster ^
 3.     --snapshot-identifier mydbclustersnapshot ^
 4.     --engine aurora|aurora-postgresql
 ```
