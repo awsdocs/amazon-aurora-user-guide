@@ -185,13 +185,13 @@ For more information about these metrics, see [pg\_stat\_statements](https://www
 
 Using the AWS Management Console, you can view the metrics for a running SQL query by choosing the **SQL** tab\.
 
-![\[Viewing metrics for running queries.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/perf_insights_per_sql_digest.png)
+![\[Viewing metrics for running queries\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/perf_insights_per_sql_digest.png)
 
 Choose which statistics to display by choosing the gear icon in the upper\-right corner of the chart\.
 
 The following screenshot shows the preferences for Aurora PostgreSQL\.
 
-![\[Preferences for metrics for running queries for Aurora PostgreSQL DB instances.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/perf_insights_per_sql_pref_apg.png)
+![\[Preferences for metrics for running queries for Aurora PostgreSQL DB instances\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/perf_insights_per_sql_pref_apg.png)
 
 ## Viewing More SQL Text in the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard.SQLTextSize"></a>
 
