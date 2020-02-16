@@ -9,7 +9,6 @@ To control the maximum number of plans that can be captured and stored in the `d
 **Topics**
 + [Manually Capturing Plans for Specific SQL Statements](#AuroraPostgreSQL.Optimize.CapturePlans.Manual)
 + [Automatically Capturing Plans](#AuroraPostgreSQL.Optimize.CapturePlans.Automatic)
-+ [Using Statistics to Identify SQL Statements](#AuroraPostgreSQL.Optimize.CapturePlans.Statistics)
 
 ## Manually Capturing Plans for Specific SQL Statements<a name="AuroraPostgreSQL.Optimize.CapturePlans.Manual"></a>
 
@@ -50,52 +49,3 @@ Use automatic plan capture for situations such as the following:
 + Set the `apg_plan_mgmt.capture_plan_baselines` parameter to `off` from the DB instance\-level parameter group\.
 
 To measure the performance of the unapproved plans and approve, reject, or delete them, see [Evaluating Plan Performance](AuroraPostgreSQL.Optimize.Maintenance.md#AuroraPostgreSQL.Optimize.Maintenance.EvaluatingPerformance)\. 
-
-You can also identify which SQL statements to automatically capture based on statistical properties of the statements\. For more information, see [Using Statistics to Identify SQL Statements](#AuroraPostgreSQL.Optimize.CapturePlans.Statistics)\. 
-
-## Using Statistics to Identify SQL Statements<a name="AuroraPostgreSQL.Optimize.CapturePlans.Statistics"></a>
-
-With automatic plan capture, you can identify the SQL statements that you want to manage by their statistical properties\. To access SQL statements' statistics, install the `pg_stat_statements` extension\. 
-
-Query plan management provides parameters that access these statistics\. You set these parameters to supply criteria to the optimizer so it can identify which SQL statements to manage\. During automatic plan capture, the optimizer captures plans for statements that meet the statistical criteria\.
-
-Use the following parameters to define statistical criteria for the SQL statements that you want to manage\.
-
-
-****  
-
-| Parameter | Description | 
-| --- | --- | 
-| apg\_plan\_mgmt\.pgss\_min\_calls | How many times the statement ran\. For more information, see the [apg\_plan\_mgmt\.pgss\_min\_calls](AuroraPostgreSQL.Optimize.Parameters.md#AuroraPostgreSQL.Optimize.Parameters.pgss_min_calls) parameter\.  | 
-| apg\_plan\_mgmt\.pgss\_min\_total\_time\_ms  | The statement's total execution time\. For more information, see the [apg\_plan\_mgmt\.pgss\_min\_total\_time\_ms](AuroraPostgreSQL.Optimize.Parameters.md#AuroraPostgreSQL.Optimize.Parameters.pgss_min_total_time_ms) parameter\.  | 
-| apg\_plan\_mgmt\.pgss\_min\_mean\_time\_ms | The statement's average execution time\. For more information, see the [apg\_plan\_mgmt\.pgss\_min\_mean\_time\_ms](AuroraPostgreSQL.Optimize.Parameters.md#AuroraPostgreSQL.Optimize.Parameters.pgss_min_mean_time_ms) parameter\.  | 
-| apg\_plan\_mgmt\.pgss\_min\_stddev\_time\_ms | The statement's standard deviation of execution time\. For more information, see the [apg\_plan\_mgmt\.pgss\_min\_stddev\_time\_ms](AuroraPostgreSQL.Optimize.Parameters.md#AuroraPostgreSQL.Optimize.Parameters.pgss_min_stddev_time_ms) parameter\. | 
-
-**Note**  
-Your application's performance is affected if you use these statistics to identify which SQL statements to manage\.
-
-Before you can use statistics to identify which statements you want to manage, you need to install the `pg_stat_statements` extension\. For installation and other details, see the [PostgreSQL pg\_stats\_statements documentation](https://www.postgresql.org/docs/current/pgstatstatements.html)\. 
-
-The following procedure shows how to identify SQL statements to manage based on statistical criteria and capture plans automatically for all matching statements\. 
-
-**To capture plans based on SQL statement statistics**
-**Note**  
-Set the following `apg_plan_mgmt` parameters in the parameter group for your DB instance, then restart your DB instance\. For more about parameter groups, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
-
-1. Turn on automatic plan capture by setting the `apg_plan_mgmt.capture_plan_baselines` parameter to `automatic`\.
-
-1. Set `apg_plan_mgmt.use_plan_baselines` to `true` to enforce the optimizer to use managed plans as more plans continue to be captured\. Set a value of `false` if you only want to capture plans and not use them yet\.
-
-1. Set the statistical criteria to identify which SQL statements that you want to manage\.
-
-   For example, setting `apg_plan_mgmt.pgss_min_calls` to 3 tells the optimizer to save plans only for statements that run at least 3 times\. Setting `apg_plan_mgmt.pgss_min_total_time_ms` to 30000 tells the optimizer to save plans for statements that run for 30 seconds or more\.
-
-1. Restart your DB instance\.
-
-1. Enable the `pg_stat_statements` extension to make the statistics for the SQL statements available for this DB instance\. 
-
-   ```
-   CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
-   ```
-
-As the application runs, the optimizer captures plans for each matching statement\.

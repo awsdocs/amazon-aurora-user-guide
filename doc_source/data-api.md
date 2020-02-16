@@ -677,31 +677,25 @@ If a call isn't part of a transaction because it doesn't include the `transactio
 The following example runs an insert SQL statement and uses parameters\.
 
 ```
-import boto3 
-
-rdsData = boto3.client('rds-data')
+import boto3
 
 cluster_arn = 'arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster' 
 secret_arn = 'arn:aws:secretsmanager:us-east-1:123456789012:secret:mysecret' 
 
-response2 = rdsData.execute_statement(
-            resourceArn = cluster_arn, 
-            secretArn = secret_arn, 
-            database = 'mydb', 
-            sql = 'insert into employees(first_name, last_name) VALUES(:firstname, :lastname)')
+rdsData = boto3.client('rds-data')
+
+
 param1 = {'name':'firstname', 'value':{'stringValue': 'JACKSON'}}
 param2 = {'name':'lastname', 'value':{'stringValue': 'MATEO'}}
 paramSet = [param1, param2]
-response2 = rdsData.execute_statement(
-            resourceArn = cluster_arn, 
-            secretArn = secret_arn, 
-            database = 'mydb', 
-            parameters = paramSet,
-            sql = 'insert into employees(first_name, last_name) VALUES(:firstname, :lastname)')
-'numberOfRecordsUpdated': 1}
 
-response2['numberOfRecordsUpdated']
-1
+response2 = rdsData.execute_statement(resourceArn=cluster_arn, 
+                                      secretArn=secret_arn,
+                                      database='mydb',
+                                      sql='insert into employees(first_name, last_name) VALUES(:firstname, :lastname)',
+                                      parameters = paramSet)
+
+print (response2["numberOfRecordsUpdated"])
 ```
 
 #### Running a SQL Transaction<a name="data-api.calling.python.run-transaction"></a>

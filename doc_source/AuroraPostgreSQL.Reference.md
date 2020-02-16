@@ -1,18 +1,26 @@
 # Amazon Aurora PostgreSQL Reference<a name="AuroraPostgreSQL.Reference"></a>
 
+**Contents**
++ [Amazon Aurora PostgreSQL Parameters](#AuroraPostgreSQL.Reference.ParameterGroups)
+  + [Aurora PostgreSQL Cluster\-level Parameters](#AuroraPostgreSQL.Reference.Parameters.Cluster)
+  + [Aurora PostgreSQL Instance\-level Parameters](#AuroraPostgreSQL.Reference.Parameters.Instance)
++ [Amazon Aurora PostgreSQL Events](#AuroraPostgreSQL.Reference.Waitevents)
+
 ## Amazon Aurora PostgreSQL Parameters<a name="AuroraPostgreSQL.Reference.ParameterGroups"></a>
 
 You manage your Amazon Aurora DB cluster in the same way that you manage other Amazon RDS DB instances, by using parameters in a DB parameter group\. Amazon Aurora differs from other DB engines in that you have a DB cluster that contains multiple DB instances\. As a result, some of the parameters that you use to manage your Amazon Aurora DB cluster apply to the entire cluster, while other parameters apply only to a particular DB instance in the DB cluster\.
 
 Cluster\-level parameters are managed in DB cluster parameter groups\. Instance\-level parameters are managed in DB parameter groups\. Although each DB instance in an Aurora PostgreSQL DB cluster is compatible with the PostgreSQL database engine, some of the PostgreSQL database engine parameters must be applied at the cluster level, and are managed using DB cluster parameter groups\. Cluster\-level parameters are not found in the DB parameter group for a DB instance in an Aurora PostgreSQL DB cluster and are listed later in this topic\.
 
-You can manage both cluster\-level and instance\-level parameters using the Amazon RDS console, the AWS CLI, or the Amazon RDS API\. There are separate commands for managing cluster\-level parameters and instance\-level parameters\. For example, you can use the [modify\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) AWS CLI command to manage cluster\-level parameters in a DB cluster parameter group and use the [modify\-db\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) AWS CLI command to manage instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
+You can view both cluster\-level and instance\-level parameters in the Amazon RDS console, or by using the AWS CLI or Amazon RDS API\. For example, to view cluster\-level parameters in a DB cluster parameter group, use the [describe\-db\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) AWS CLI command\. To view instance\-level parameters in a DB parameter group for a DB instance in a DB cluster, use the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) AWS CLI command\.
 
-You can view both cluster\-level and instance\-level parameters in the Amazon RDS console, or by using the AWS CLI or Amazon RDS API\. For example, you can use the [describe\-db\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) AWS CLI command to view cluster\-level parameters in a DB cluster parameter group and use the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) AWS CLI command to view instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
+You can manage both cluster\-level and instance\-level parameters using the Amazon RDS console, the AWS CLI, or the Amazon RDS API\. There are separate commands for managing cluster\-level parameters and instance\-level parameters\. For example:
++ To manage cluster\-level parameters in a DB cluster parameter group, use the [modify\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) AWS CLI command\.
++ To manage instance\-level parameters in a DB parameter group for a DB instance in a DB cluster, use the [modify\-db\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) AWS CLI command\.
 
 For more information about parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
 
-### Cluster\-level Parameters<a name="AuroraPostgreSQL.Reference.Parameters.Cluster"></a>
+### Aurora PostgreSQL Cluster\-level Parameters<a name="AuroraPostgreSQL.Reference.Parameters.Cluster"></a>
 
 The following table shows all of the parameters that apply to the entire Aurora PostgreSQL DB cluster\. 
 
@@ -76,20 +84,23 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `vacuum_multixact_freeze_table_age`  |  Yes  | 
 |  `wal_buffers`  |  Yes  | 
 
-### Instance\-level Parameters<a name="AuroraPostgreSQL.Reference.Parameters.Instance"></a>
+### Aurora PostgreSQL Instance\-level Parameters<a name="AuroraPostgreSQL.Reference.Parameters.Instance"></a>
 
 The following table shows all of the parameters that apply to a specific DB instance in an Aurora PostgreSQL DB cluster\. 
 
 
 | Parameter name | Modifiable | 
 | --- | --- | 
+| apg\_enable\_not\_in\_transform | Yes | 
+| apg\_enable\_remove\_redundant\_inner\_joins | Yes | 
+| apg\_enable\_semijoin\_push\_down  | Yes | 
 | apg\_plan\_mgmt\.capture\_plan\_baselines | Yes | 
 | apg\_plan\_mgmt\.max\_databases | Yes | 
 | apg\_plan\_mgmt\.max\_plans | Yes | 
-| apg\_plan\_mgmt\.pgss\_min\_calls | Yes | 
-| apg\_plan\_mgmt\.pgss\_min\_mean\_time\_ms | Yes | 
-| apg\_plan\_mgmt\.pgss\_min\_stddev\_time\_ms | Yes | 
-| apg\_plan\_mgmt\.pgss\_min\_total\_time\_ms | Yes | 
+| apg\_plan\_mgmt\.pgss\_min\_calls \(deprecated\) | Yes | 
+| apg\_plan\_mgmt\.pgss\_min\_mean\_time\_ms \(deprecated\) | Yes | 
+| apg\_plan\_mgmt\.pgss\_min\_stddev\_time\_ms \(deprecated\) | Yes | 
+| apg\_plan\_mgmt\.pgss\_min\_total\_time\_ms \(deprecated\) | Yes | 
 | apg\_plan\_mgmt\.plan\_retention\_period | Yes | 
 | apg\_plan\_mgmt\.unapproved\_plan\_execution\_threshold | Yes | 
 | apg\_plan\_mgmt\.use\_plan\_baselines | Yes | 

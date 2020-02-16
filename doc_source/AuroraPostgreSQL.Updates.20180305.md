@@ -1,4 +1,4 @@
-# Database Engine Versions for Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Updates.20180305"></a>
+# Engine Versions for Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Updates.20180305"></a>
 
 Following, you can find information about supported versions of the Aurora with PostgreSQL compatibility database engine\. An Aurora database has two version numbers; the Aurora version number and the database engine version number\. To determine the version numbers of your Aurora PostgreSQL database, see [Identifying Your Version of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.md#AuroraPostgreSQL.Updates.Versions)\. 
 
@@ -9,11 +9,14 @@ The following table shows the version of each Aurora PostgreSQL release and the 
 
 | Aurora with PostgreSQL Compatibility | Compatible PostgreSQL Release | 
 | --- | --- | 
+| [Version 3\.1](#AuroraPostgreSQL.Updates.20180305.31) | [11\.6](https://www.postgresql.org/docs/11/release-11-6.html) | 
 | [Version 3\.0](#AuroraPostgreSQL.Updates.20180305.30) | [11\.4](https://www.postgresql.org/docs/11/release-11-4.html) | 
+| [Version 2\.4](#AuroraPostgreSQL.Updates.20180305.24) | [10\.11](https://www.postgresql.org/docs/10/release-10-11.html) | 
 | [Version 2\.3](#AuroraPostgreSQL.Updates.20180305.23) | [10\.7](https://www.postgresql.org/docs/10/release-10-7.html) | 
 | [Version 2\.2](#AuroraPostgreSQL.Updates.20180305.22) | [10\.6](https://www.postgresql.org/docs/current/static/release-10-6.html) | 
 | [Version 2\.1](#AuroraPostgreSQL.Updates.20180305.21) | [10\.5](https://www.postgresql.org/docs/current/static/release-10-5.html) | 
 | [Version 2\.0](#AuroraPostgreSQL.Updates.20180305.20) | [10\.4](https://www.postgresql.org/docs/current/static/release-10-4.html) | 
+| [Version 1\.6](#AuroraPostgreSQL.Updates.20180305.16) | [9\.6\.16](https://www.postgresql.org/docs/9.6/release-9-6-16.html) | 
 | [Version 1\.5](#AuroraPostgreSQL.Updates.20180305.15) | [9\.6\.12](https://www.postgresql.org/docs/9.6/release-9-6-12.html) | 
 | [Version 1\.4](#AuroraPostgreSQL.Updates.20180305.14) | [9\.6\.11](https://www.postgresql.org/docs/9.6/release-9-6-11.html) | 
 | [Version 1\.3](#AuroraPostgreSQL.Updates.20180305.13) | [9\.6\.9](https://www.postgresql.org/docs/current/static/release-9-6-9.html) | 
@@ -22,6 +25,92 @@ The following table shows the version of each Aurora PostgreSQL release and the 
 | [Version 1\.0](#AuroraPostgreSQL.Updates.20180305.10) | [9\.6\.3](https://www.postgresql.org/docs/current/static/release-9-6-3.html) deprecated | 
 
 The following Aurora PostgreSQL versions are supported\. 
+
+## Version 3\.1<a name="AuroraPostgreSQL.Updates.20180305.31"></a>
+
+This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.6\. For more information about the improvements in release 11\.6, see [PostgreSQL Release 11\.6](https://www.postgresql.org/docs/11/release-11-6.html)\.
+
+This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 11 engines to this release\.
+
+You can find the following new features and improvements in this engine version\.
+
+**New Features**
+
+1. Support for exporting data to Amazon S3\. For more information, see [Exporting Data from an Aurora PostgreSQL DB Cluster to Amazon S3](postgresql-s3-export.md)\.
+
+1. Support for Amazon Aurora Machine Learning\. For more information, see [Using Machine Learning \(ML\) with Aurora PostgreSQL](postgresql-ml.md)\.
+
+1. SQL processing enhancements include:
+   + Optimizations for `NOT IN` with the `apg_enable_not_in_transform` parameter\.
+   + Semi\-join filter pushdown enhancements for hash joins with the `apg_enable_semijoin_push_down` parameter\.
+   + Optimizations for redundant inner join removal with the `apg_enable_remove_redundant_inner_joins` parameter\.
+   + Improved ANSI compatibility options with the `ansi_constraint_trigger_ordering`, `ansi_force_foreign_key_checks` and `ansi_qualified_update_set_target` parameters\.
+
+   For more information, see [Amazon Aurora PostgreSQL Parameters](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.ParameterGroups)\.
+
+1. New and updated PostgreSQL extensions include:
+   + The new `aws_ml` extension\. For more information, see [Using Machine Learning \(ML\) with Aurora PostgreSQL](postgresql-ml.md)\.
+   + The new `aws_s3` extension\. For more information, see [Exporting Data from an Aurora PostgreSQL DB Cluster to Amazon S3](postgresql-s3-export.md)\.
+   + Updates to the `apg_plan_mgmt` extension\. For more information, see [Managing Query Execution Plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug related to creating B\-tree indexes on temporary tables that in rare cases may result in longer recovery time, and impact availability\.
+
+1. Fixed a bug related to replication when Aurora PostgreSQL is acting as a physical replica of an RDS PostgreSQL instance\. In rare cases, this bug causes a log write failure that may result in longer recovery time, and impact availability\. 
+
+1. Fixed a bug related to handling of reads with high I/O latency that in rare cases may result in longer recovery time, and impact availability\.
+
+**High Priority Stability Enhancements**
+
+1. Corrected a memory leak in the log\-apply process on read nodes\. To see this memory leak, use Enhancement Monitoring and observe the "% of memory usage" for the "wal replay" process\.
+
+1. Fixed a bug related to logical replication whereby `wal` segments are not properly removed from storage\. This can result in storage bloat\. To monitor this, view the `TransactionLogDiskUsage` parameter\. 
+
+1. Fixed multiple bugs, which cause Aurora to crash during prefetch operations on Btree indexes\.
+
+1. Fixed a bug whereby an Aurora restart may timeout when logical replication is used\.
+
+1. Enhanced the validation checks performed on data blocks in the buffer cache\. This improves Aurora's detection of inconsistency\.
+
+**Additional Improvements and Enhancements**
+
+1. The query plan management extension `apg_plan_mgmt` has an improved algorithm for managing plan generation for highly partitioned tables\.
+
+1. Reduced startup time on instances with large caches via improvements in the buffer cache recovery algorithm\.
+
+1. Improved the performance of the read\-node\-apply process under high transaction rate workloads by using changes to PostgreSQL `LWLock` prioritization\. These changes prevent starvation of the read\-node\-apply process while the PostgreSQL `ProcArray` is under heavy contention\.
+
+1. Improved handling of batch reads during vacuum, table scans, and index scans\. This results in greater throughput and lower CPU consumption\.
+
+1. Fixed a bug whereby a read node may crash during the replay of a PostgreSQL `SLRU`\-truncate operation\.
+
+1. Fixed a bug where in rare cases, database writes may stall following an error returned by one of the six copies of an Aurora log record\. 
+
+1. Fixed a bug related to logical replication where an individual transaction larger than 1 Gb in size may result in an engine crash\.
+
+1. Fixed a memory leak on read nodes when cluster cache management is enabled\.
+
+1. Fixed a bug whereby importing an RDS PostgreSQL snapshot may hang if the source snapshot contains a large number of unlogged relations\.
+
+1. Fixed a bug whereby the Aurora storage daemon may crash under heavy I/O load\.
+
+1. Fixed a bug related to `hot_standby_feedback` for read nodes whereby the read node may report the wrong transaction id epoch to the write node\. This can cause the write node to ignore the `hot_standby_feedback` and invalidate snapshots on the read node\.
+
+1. Fixed a bug whereby storage errors that occur during `CREATE DATABASE` statements are not properly handled\. The bug would leave the resulting database inaccessible\. The correct behavior is to fail the database creation and return the appropriate error to the user\.
+
+1. Improved handling of PostgreSQL snapshot overflow when a read node attempts to connect to a write node\. Prior to this change, if the write node was in a snapshot overflow state, the read node would be unable to join\. A message would appear in the PostgreSQL log file in the form, `DEBUG: recovery snapshot waiting for non-overflowed snapshot or until oldest active xid on standby is at least xxxxxxx (now yyyyyyy)`\. A snapshot overflow occurs when an individual transaction has created over 64 subtransactions\. 
+
+1. Fixed a bug related to common table expressions whereby an error is incorrectly raised when a NOT IN class exists in a CTE\. The error is `CTE with NOT IN fails with ERROR: could not find CTE CTE-Name`\.
+
+1. Fixed a bug related to an incorrect `last_error_timestamp` value in the `aurora_replica_status` table\.
+
+1. Fixed a bug to avoid populating shared buffers with blocks belonging to temporary objects\. These blocks correctly reside in backend local buffers\.
+
+1. Changed the following extensions:
+   + Updated `pg_hint_plan` to version 1\.3\.4\.
+   + Added `plprofiler` version 4\.1\.
+   + Added `pgTAP` version 1\.0\.0\.
 
 ## Version 3\.0<a name="AuroraPostgreSQL.Updates.20180305.30"></a>
 
@@ -76,6 +165,99 @@ You can find the following improvements in this engine update\.
    +  `postgis_tiger_geocoder` to version 2\.5\.1
    +  `postgis_topology` to version 2\.5\.1
    +  `rds_activity_stream` to version 1\.3
+
+## Version 2\.4<a name="AuroraPostgreSQL.Updates.20180305.24"></a>
+
+This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.11\. For more information about the improvements in release 10\.11, see [PostgreSQL Release 10\.11](https://www.postgresql.org/docs/10/release-10-11.html)\.
+
+This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 10 engines to this release\.
+
+You can find the following new features and improvements in this engine version\.
+
+**New Features**
+
+1. Support for exporting data to Amazon S3\. For more information, see [Exporting Data from an Aurora PostgreSQL DB Cluster to Amazon S3](postgresql-s3-export.md)\.
+
+1. Support for Amazon Aurora Machine Learning\. For more information, see [Using Machine Learning \(ML\) with Aurora PostgreSQL](postgresql-ml.md)\.
+
+1. SQL processing enhancements include:
+   + Optimizations for `NOT IN` with the `apg_enable_not_in_transform` parameter\.
+   + Semi\-join filter pushdown enhancements for hash joins with the `apg_enable_semijoin_push_down` parameter\.
+   + Optimizations for redundant inner join removal with the `apg_enable_remove_redundant_inner_joins` parameter\.
+   + Improved ANSI compatibility options with the `ansi_constraint_trigger_ordering`, `ansi_force_foreign_key_checks` and `ansi_qualified_update_set_target` parameters\.
+
+   For more information, see [Amazon Aurora PostgreSQL Parameters](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.ParameterGroups)\.
+
+1. New and updated PostgreSQL extensions include:
+   + The new `aws_ml` extension\. For more information, see [Using Machine Learning \(ML\) with Aurora PostgreSQL](postgresql-ml.md)\.
+   + The new `aws_s3` extension\. For more information, see [Exporting Data from an Aurora PostgreSQL DB Cluster to Amazon S3](postgresql-s3-export.md)\.
+   + Updates to the `apg_plan_mgmt` extension\. For more information, see [Managing Query Execution Plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug related to creating B\-tree indexes on temporary tables that in rare cases may result in longer recovery time, and impact availability\.
+
+1. Fixed a bug related to replication when Aurora PostgreSQL is acting as a physical replica of an RDS PostgreSQL instance\. In rare cases, this bug causes a log write failure that may result in longer recovery time, and impact availability\. 
+
+1. Fixed a bug related to handling of reads with high I/O latency that in rare cases may result in longer recovery time, and impact availability\.
+
+**High Priority Stability Enhancements**
+
+1. Corrected a memory leak in the log\-apply process on read nodes\. To see this memory leak, use Enhancement Monitoring and observe the "% of memory usage" for the "wal replay" process\.
+
+1. Fixed a bug related to logical replication whereby `wal` segments are not properly removed from storage\. This can result in storage bloat\. To monitor this, view the `TransactionLogDiskUsage` parameter\. 
+
+1. Fixed multiple bugs, which cause Aurora to crash during prefetch operations on Btree indexes\.
+
+1. Fixed a bug whereby an Aurora restart may timeout when logical replication is used\.
+
+1. Enhanced the validation checks performed on data blocks in the buffer cache\. This improves Aurora's detection of inconsistency\.
+
+**Additional Improvements and Enhancements**
+
+1. The query plan management extension `apg_plan_mgmt` has an improved algorithm for managing plan generation for highly partitioned tables\.
+
+1. Reduced startup time on instances with large caches via improvements in the buffer cache recovery algorithm\.
+
+1. Improved the performance of the read\-node\-apply process under high transaction rate workloads by using changes to PostgreSQL `LWLock` prioritization\. These changes prevent starvation of the read\-node\-apply process while the PostgreSQL `ProcArray` is under heavy contention\.
+
+1. Improved handling of batch reads during vacuum, table scans, and index scans\. This results in greater throughput and lower CPU consumption\.
+
+1. Fixed a bug whereby a read node may crash during the replay of a PostgreSQL `SLRU`\-truncate operation\.
+
+1. Fixed a bug where in rare cases, database writes may stall following an error returned by one of the six copies of an Aurora log record\. 
+
+1. Fixed a bug related to logical replication where an individual transaction larger than 1 Gb in size may result in an engine crash\.
+
+1. Fixed a memory leak on read nodes when cluster cache management is enabled\.
+
+1. Fixed a bug whereby importing an RDS PostgreSQL snapshot may hang if the source snapshot contains a large number of unlogged relations\.
+
+1. Fixed a bug whereby the Aurora storage daemon may crash under heavy I/O load\.
+
+1. Fixed a bug related to `hot_standby_feedback` for read nodes whereby the read node may report the wrong transaction id epoch to the write node\. This can cause the write node to ignore the `hot_standby_feedback` and invalidate snapshots on the read node\.
+
+1. Fixed a bug whereby storage errors that occur during `CREATE DATABASE` statements are not properly handled\. The bug would leave the resulting database inaccessible\. The correct behavior is to fail the database creation and return the appropriate error to the user\.
+
+1. Improved handling of PostgreSQL snapshot overflow when a read node attempts to connect to a write node\. Prior to this change, if the write node was in a snapshot overflow state, the read node would be unable to join\. A message would appear in the PostgreSQL log file in the form, `DEBUG: recovery snapshot waiting for non-overflowed snapshot or until oldest active xid on standby is at least xxxxxxx (now yyyyyyy)`\. A snapshot overflow occurs when an individual transaction has created over 64 subtransactions\. 
+
+1. Fixed a bug related to common table expressions whereby an error is incorrectly raised when a NOT IN class exists in a CTE\. The error is `CTE with NOT IN fails with ERROR: could not find CTE CTE-Name`\.
+
+1. Fixed a bug related to an incorrect `last_error_timestamp` value in the `aurora_replica_status` table\.
+
+1. Fixed a bug to avoid populating shared buffers with blocks belonging to temporary objects\. These blocks correctly reside in backend local buffers\. 
+
+1. Improved the performance of vacuum cleanup on GIN indexes\.
+
+1. Fixed a bug where in rare cases Aurora may exhibit 100% CPU utilization while acting as a replica of an RDS PostgreSQL instance even when the replication stream is idle\. 
+
+1. Backported a change from PostgreSQL 11 which improves the cleanup of orphaned temporary tables\. Without this change, it is possible that in rare cases orphaned temporary tables can to lead to transaction ID wraparound\. For more information, see this [PostgreSQL community commit](https://github.com/postgres/postgres/commit/246a6c8f7b237cc1943efbbb8a7417da9288f5c4)\. 
+
+1. Fixed a bug where a Writer instance may accept replication registration requests from Reader instances while having an uninitialized startup process\.
+
+1. Changed the following extensions:
+   + Updated `pg_hint_plan` to version 1\.3\.3\.
+   + Added `plprofiler` version 4\.1\.
 
 ## Version 2\.3<a name="AuroraPostgreSQL.Updates.20180305.23"></a>
 
@@ -343,6 +525,71 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug whereby read nodes may crash following a specific type of free space change from the write node\.
 
+## Version 1\.6<a name="AuroraPostgreSQL.Updates.20180305.16"></a>
+
+This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.16\. For more information about the improvements in release 9\.6\.16, see [PostgreSQL Release 9\.6\.16](https://www.postgresql.org/docs/9.6/release-9-6-16.html)\.
+
+This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 9\.6 engines to this release\.
+
+You can find the following new features and improvements in this engine version\.
+
+**New Features**
+
+1. Updates to the `apg_plan_mgmt` extension\. For more information, see [Managing Query Execution Plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug related to creating B\-tree indexes on temporary tables that in rare cases may result in longer recovery time, and impact availability\.
+
+1. Fixed a bug related to replication when Aurora PostgreSQL is acting as a physical replica of an RDS PostgreSQL instance\. In rare cases, this bug causes a log write failure that may result in longer recovery time, and impact availability\. 
+
+1. Fixed a bug related to handling of reads with high I/O latency that in rare cases may result in longer recovery time, and impact availability\.
+
+**High Priority Stability Enhancements**
+
+1. Corrected a memory leak in the log\-apply process on read nodes\. To see this memory leak, use Enhancement Monitoring and observe the "% of memory usage" for the "wal replay" process\.
+
+1. Fixed multiple bugs, which cause Aurora to crash during prefetch operations on Btree indexes\.
+
+1. Enhanced the validation checks performed on data blocks in the buffer cache\. This improves Aurora's detection of inconsistency\.
+
+**Additional Improvements and Enhancements**
+
+1. The query plan management extension `apg_plan_mgmt` has an improved algorithm for managing plan generation for highly partitioned tables\.
+
+1. Reduced startup time on instances with large caches via improvements in the buffer cache recovery algorithm\.
+
+1. Improved the performance of the read\-node\-apply process under high transaction rate workloads by using changes to PostgreSQL `LWLock` prioritization\. These changes prevent starvation of the read\-node\-apply process while the PostgreSQL `ProcArray` is under heavy contention\.
+
+1. Fixed a bug whereby a read node may crash during the replay of a PostgreSQL `SLRU`\-truncate operation\.
+
+1. Fixed a bug where in rare cases, database writes may stall following an error returned by one of the six copies of an Aurora log record\. 
+
+1. Fixed a memory leak on read nodes when cluster cache management is enabled\.
+
+1. Fixed a bug whereby importing an RDS PostgreSQL snapshot may hang if the source snapshot contains a large number of unlogged relations\.
+
+1. Fixed a bug related to `hot_standby_feedback` for read nodes whereby the read node may report the wrong transaction id epoch to the write node\. This can cause the write node to ignore the `hot_standby_feedback` and invalidate snapshots on the read node\.
+
+1. Fixed a bug whereby storage errors that occur during `CREATE DATABASE` statements are not properly handled\. The bug would leave the resulting database inaccessible\. The correct behavior is to fail the database creation and return the appropriate error to the user\.
+
+1. Improved handling of PostgreSQL snapshot overflow when a read node attempts to connect to a write node\. Prior to this change, if the write node was in a snapshot overflow state, the read node would be unable to join\. A message would appear in the PostgreSQL log file in the form, `DEBUG: recovery snapshot waiting for non-overflowed snapshot or until oldest active xid on standby is at least xxxxxxx (now yyyyyyy)`\. A snapshot overflow occurs when an individual transaction has created over 64 subtransactions\. 
+
+1. Fixed a bug related to common table expressions whereby an error is incorrectly raised when a NOT IN class exists in a CTE\. The error is `CTE with NOT IN fails with ERROR: could not find CTE CTE-Name`\.
+
+1. Fixed a bug related to an incorrect `last_error_timestamp` value in the `aurora_replica_status` table\.
+
+1. Fixed a bug to avoid populating shared buffers with blocks belonging to temporary objects\. These blocks correctly reside in backend local buffers\. 
+
+1. Fixed a bug where in rare cases Aurora may exhibit 100% CPU utilization while acting as a replica of an RDS PostgreSQL instance even when the replication stream is idle\. 
+
+1. Backported a change from PostgreSQL 11 which improves the cleanup of orphaned temporary tables\. Without this change, it is possible that in rare cases orphaned temporary tables can to lead to transaction ID wraparound\. For more information, see this [PostgreSQL community commit](https://github.com/postgres/postgres/commit/246a6c8f7b237cc1943efbbb8a7417da9288f5c4)\. 
+
+1. Fixed a bug where a Writer instance may accept replication registration requests from Reader instances while having an uninitialized startup process\.
+
+1. Changed the following extensions:
+   + Updated `pg_hint_plan` to version 1\.2\.5\.
+
 ## Version 1\.5<a name="AuroraPostgreSQL.Updates.20180305.15"></a>
 
 This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.12\. For more information about the improvements in release 9\.6\.12, see [PostgreSQL Release 9\.6\.12](https://www.postgresql.org/docs/9.6/release-9-6-12.html)\.
@@ -439,54 +686,9 @@ You can find the following improvements in this engine update\.
 
 1. Fixed an issue where an `INSERT` statement with `VALUES` could fail with the message "Attempting to read past EOF of relation"\.
 
-1. An upgrade of the `apg_plan_mgmt` extension to version 1\.0\.1\. The `apg_plan_mgmt` extension is used with query plan management\. For more about how to install, upgrade, and use the `apg_plan_mgmt` extension, see [Managing Query Execution Plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)\.
+1. An upgrade of the `apg_plan_mgmt` extension to version 1\.0\.1\. For details, see [The apg\_plan\_mgmt Extension Version 1\.0\.1](AuroraPostgreSQL.Updates.Extensions.md#AuroraPostgreSQL.Updates.Extensions.apg_plan_mgmt.101)\.
 
-   The `apg_plan_mgmt` extension new features include the following:
-
-   1. A new `update_plan_hash` parameter is available for the `validate_plans` function\. This parameter updates the `plan_hash` for plans that can't be reproduced exactly\. The `update_plan_hash` parameter also enables you to fix a plan by rewriting the SQL\. You can then register the good plan as an `Approved` plan for the original SQL\. Following is an example of using `update_plan_hash`\.
-
-      ```
-      UPDATE apg_plan_mgmt.dba_plans SET plan_hash = new _plan_hash, plan_outline = good_plan_outline 
-         WHERE sql_hash = bad_plan_sql_hash AND plan_hash = bad_plan_plan_hash;
-      SELECT apg_plan_mgmt.validate_plans(bad_plan_sql_hash, bad_plan_plan_hash, 'update_plan_hash');
-      SELECT apg_plan_mgmt.reload();
-      ```
-
-   1. A new `get_explain_stmt` function is available that generates the text of an `EXPLAIN` statement for the specified SQL statement\. It includes the parameters `sql_hash`, `plan_hash` and `explain_options`\. 
-
-      The parameter `explain_options` can be any comma\-separated list of valid `EXPLAIN` options, as shown following\.
-
-      ```
-      analyze,verbose,buffers,hashes,format json
-      ```
-
-      If the parameter `explain_options` is NULL or an empty string, the `get_explain_stmt` function generates a simple `EXPLAIN` statement\. 
-
-      To create an `EXPLAIN` script for your workload or a portion of it, use the `\a` , `\t`, and `\o` options to redirect the output to a file\. For example, you can create an `EXPLAIN` script for the top\-ranked \(top\-K\) statements by using the PostgreSQL `pg_stat_statements` view sorted by `total_time` in `DESC` order\.
-
-   1. The precise location of the Gather parallel query operator is determined by costing, and may change slightly over time\. To prevent these differences from invalidating the entire plan, query plan management now computes the same `plan_hash` even if the Gather operators move to different places in the plan tree\.
-
-   1. Support is added for nonparameterized statements inside pl/pgsql functions\.
-
-   1. Overhead is reduced when the `apg_plan_mgmt` extension is installed on multiple databases in the same cluster while two or more databases are being accessed concurrently\. Also, this release fixed a bug in this area that caused plans to not be stored in shared memory\.
-
-   The `apg_plan_mgmt extension` improvements include the following:
-
-   1. Improvements to the `evolve_plan_baselines` function\.
-
-      1. The `evolve_plan_baselines` function now computes a `cardinality_error` metric over all nodes in the plan\. Using this metric, you can identify any plan where the cardinality estimation error is large, and the plan quality is more doubtful\. Long\-running statements with high `cardinality_error` values are high\-priority candidates for query tuning\.
-
-      1. Reports generated by `evolve_plan_baselines` now include `sql_hash`, `plan_hash`, and the plan `status`\.
-
-      1. You can now allow `evolve_plan_baselines` to approve previously `Rejected` plans\.
-
-      1. The meaning of `speedup_factor` for `evolve_plan_baselines` is now always relative to the baseline plan\. For example, a value of 1\.1 now means 10 percent faster than the baseline plan\. A value of 0\.9 means 10 percent slower than the baseline plan\. The comparison is made using execution time alone instead of total time\.
-
-      1. The `evolve_plan_baselines` function now warms the cache in a new way\. It does this by running the baseline plan, then running the baseline plan one more time, and then running the candidate plan once\. Previously, `evolve_plan_baselines` ran the candidate plan twice\. This approach added significantly to execution time, especially for slow candidate plans\. However, running the candidate plan twice is more reliable when the candidate plan uses an index that isn't used in the baseline plan\.
-
-   1. Query plan management no longer saves plans that refer to system tables or views, temporary tables, or the query plan management's own tables\.
-
-   1. Bug fixes include caching a plan immediately when saved and fixing a bug that caused the back end to terminate\.
+   The `apg_plan_mgmt` extension is used with query plan management\. For more about how to install, upgrade, and use the `apg_plan_mgmt` extension, see [Managing Query Execution Plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)\.
 
 ## Version 1\.3<a name="AuroraPostgreSQL.Updates.20180305.13"></a>
 

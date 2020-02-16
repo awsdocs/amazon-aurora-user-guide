@@ -39,7 +39,7 @@ Some connection utilities you can use are the following:
 **Note**  
  If you use the MariaDB Connector/J utility with an Aurora Serverless cluster, use the prefix `jdbc:mariadb:aurora//` in your connection string\. The `mariadb:aurora` parameter avoids the automatic DNS scan for failover targets\. That scanning is not needed with Aurora Serverless clusters and causes a delay in establishing the connection\. 
 
-You can use SSL encryption on connections to an Amazon Aurora DB instance\. For information, see [Using SSL with a MySQL DB Instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide//MySQL.Concepts.SSLSupport.html)\.
+You can use SSL encryption on connections to an Amazon Aurora DB instance\. For information, see [Using SSL with a MySQL DB Instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Concepts.SSLSupport.html)\.
 
 **Note**  
 Because you can create Amazon Aurora DB cluster only in an Amazon Virtual Private Cloud \(VPC\), connections to an Amazon Aurora DB cluster from AWS instances that are not in a VPC have been required to use the public endpoint address of the Amazon Aurora DB cluster\. However, you can now communicate with an Amazon EC2 instance that is not in a VPC and an Amazon Aurora DB cluster using ClassicLink\. For more information, see [A DB Instance in a VPC Accessed by an EC2 Instance Not in a VPC](USER_VPC.Scenarios.md#USER_VPC.ClassicLink)\.
@@ -73,7 +73,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
 mysql>
 ```
 
-For general instructions on constructing Amazon RDS MySQL connection strings and finding the public key for SSL connections, see [ Connecting to a DB Instance Running the MySQL Database Engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide//USER_ConnectToInstance.html)\.
+For general instructions on constructing Amazon RDS MySQL connection strings and finding the public key for SSL connections, see [ Connecting to a DB Instance Running the MySQL Database Engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToInstance.html)\.
 
 ## Connecting to an Amazon Aurora PostgreSQL DB Cluster<a name="Aurora.Connecting.AuroraPostgreSQL"></a>
 

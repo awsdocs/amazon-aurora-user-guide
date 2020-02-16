@@ -27,7 +27,7 @@ With query plan management, you can control execution plans for a set of stateme
 
 ## Enabling Query Plan Management for Aurora PostgreSQL<a name="AuroraPostgreSQL.Optimize.Enable"></a>
 
-Query plan management is available with Amazon Aurora PostgreSQL version 2\.1\.0 \(compatible with PostgreSQL 10\.5\) and greater\.
+Query plan management is available with Amazon Aurora PostgreSQL version 2\.1\.0 \(compatible with PostgreSQL 10\.5\) and greater versions\.
 
 **To enable query plan management**
 
@@ -56,12 +56,12 @@ To create the `apg_plan_mgmt` extension, you need the `rds_superuser` role\. Whe
 
 ## Upgrading Query Plan Management<a name="AuroraPostgreSQL.Optimize.Upgrade"></a>
 
-If you installed query plan management version 1\.0, we strongly recommend that you upgrade to version 1\.0\.1\. 
+The latest version of query plan management is 2\.0\. If you installed an earlier version of query plan management, we strongly recommend that you upgrade to version 2\.0\. For version details, see [ Extension Versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Extensions.md)\.
 
 To upgrade, run the following commands at the cluster or DB instance level\.
 
 ```
-ALTER EXTENSION apg_plan_mgmt UPDATE TO '1.0.1';
+ALTER EXTENSION apg_plan_mgmt UPDATE TO '2.0';
 SELECT apg_plan_mgmt.validate_plans('update_plan_hash');
 SELECT apg_plan_mgmt.reload();
 ```
@@ -69,9 +69,6 @@ SELECT apg_plan_mgmt.reload();
 ## Basics of Query Plan Management<a name="AuroraPostgreSQL.Optimize.Start"></a>
 
 You can manage any SELECT, INSERT, UPDATE, or DELETE statement with query plan management, regardless of how complex the statement is\. Prepared, dynamic, embedded, and immediate\-mode SQL statements are all supported\. All PostgreSQL language features can be used, including partitioned tables, inheritance, row\-level security, and recursive common table expressions \(CTEs\)\.
-
-**Note**  
-Currently, you can't capture plans for statements inside a PL/pgSQL function\.
 
 **Topics**
 + [Performing a Manual Plan Capture](#AuroraPostgreSQL.Optimize.Start.Capture)

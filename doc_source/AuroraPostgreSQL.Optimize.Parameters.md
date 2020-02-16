@@ -68,6 +68,8 @@ Set `apg_plan_mgmt.max_plans` at the cluster or DB instance level\. It requires 
 
 ## apg\_plan\_mgmt\.pgss\_min\_calls<a name="AuroraPostgreSQL.Optimize.Parameters.pgss_min_calls"></a>
 
+This parameter has been deprecated\.
+
 Sets the minimum number of `pg_stat_statements` calls that are eligible for plan capture\.
 
 ```
@@ -85,6 +87,8 @@ SET apg_plan_mgmt.pgss_min_calls = integer-value;
 Requires installation of the `pg_stat_statements` extension\. For more information, see the [PostgreSQL pg\_stats\_statements documentation](https://www.postgresql.org/docs/current/pgstatstatements.html)\.
 
 ## apg\_plan\_mgmt\.pgss\_min\_mean\_time\_ms<a name="AuroraPostgreSQL.Optimize.Parameters.pgss_min_mean_time_ms"></a>
+
+This parameter has been deprecated\.
 
 Minimum value of the `pg_stat_statements mean_time` to be eligible for plan capture\.
 
@@ -104,6 +108,8 @@ Requires installation of the `pg_stat_statements `extension\. For more informati
 
 ## apg\_plan\_mgmt\.pgss\_min\_stddev\_time\_ms<a name="AuroraPostgreSQL.Optimize.Parameters.pgss_min_stddev_time_ms"></a>
 
+This parameter has been deprecated\.
+
 Minimum value of the `pg_stat_statements stddev_time` to be eligible for plan capture\.
 
 ```
@@ -121,6 +127,8 @@ SET apg_plan_mgmt.pgss_min_stddev_time_ms = double-value;
 Requires installation of the `pg_stat_statements` extension\. For more information, see the [PostgreSQL pg\_stats\_statements documentation](https://www.postgresql.org/docs/current/pgstatstatements.html)\.
 
 ## apg\_plan\_mgmt\.pgss\_min\_total\_time\_ms<a name="AuroraPostgreSQL.Optimize.Parameters.pgss_min_total_time_ms"></a>
+
+This parameter has been deprecated\.
 
 Minimum value of the `pg_stat_statements total_time` to be eligible for plan capture\.
 

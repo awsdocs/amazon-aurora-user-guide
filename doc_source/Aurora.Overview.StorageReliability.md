@@ -51,9 +51,9 @@
 
 ### Survivable Cache Warming<a name="Aurora.Overview.CacheWarming"></a>
 
- Aurora "warms" the buffer pool cache when a database starts up after it has been shut down or restarted after a failure\. That is, Aurora preloads the buffer pool with the pages for known common queries that are stored in an in\-memory page cache\. This provides a performance gain by bypassing the need for the buffer pool to "warm up" from normal database use\. 
+ Aurora manages the buffer pool cache separately from the database server process\. Doing so helps Aurora to preserve this cache in memory when a DB instance in an Aurora cluster restarts\. This feature helps to improve performance when you reboot a DB instance, or when Aurora restarts a DB instance automatically after a failure\. Aurora can avoid the I/O to read frequently accessed data into the buffer pool, a process known as *warming* the cache\. 
 
- The Aurora page cache is managed in a separate process from the database, which allows the page cache to survive independently of the database\. In the unlikely event of a database failure, the page cache remains in memory, which ensures that the buffer pool is warmed with the most current state when the database restarts\. 
+ Each DB instance has its own buffer pool cache, with its own contents depending on the queries processed by that DB instance\. If the DB instance that you connect to within the Aurora cluster is replaced by a different instance, Aurora doesn't preserve the buffer pool cache on that instance\. Aurora replaces the DB instance in situations such as when you change the instance class, or after Aurora detects an ongoing problem with the instance\. Also, if a failover promotes a different DB instance to be the primary instance, Aurora purges the buffer pool cache from all DB instances in the cluster\. 
 
 ### Crash Recovery<a name="Aurora.Overview.CrashRecovery"></a>
 

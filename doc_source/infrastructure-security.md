@@ -6,8 +6,6 @@ You use AWS published API calls to access Amazon Aurora through the network\. Cl
 
 Additionally, requests must be signed by using an access key ID and a secret access key that is associated with an IAM principal\. Or you can use the [AWS Security Token Service](https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html) \(AWS STS\) to generate temporary security credentials to sign requests\.
 
-You can call these API operations from any network location\. However, Amazon Aurora also supports resource\-based access policies, which can include restrictions based on the source IP address\. In addition, you can use Amazon Aurora policies to control access from specific Amazon VPC endpoints or specific VPCs\. Effectively, this isolates network access to a given Amazon Aurora resource from only the specific VPC within the AWS network\.
-
 In addition, Aurora offers features to help support infrastructure security\.
 
 ## Security Groups<a name="infrastructure-security.security-groups"></a>

@@ -2,6 +2,10 @@
 
 You can view, download, and watch database logs using the Amazon RDS console, the AWS Command Line Interface \(AWS CLI\), or the Amazon RDS API\. Viewing, downloading, or watching transaction logs is not supported\. 
 
+For engine\-specific information, see the following:
++ [MySQL Database Log Files](USER_LogAccess.Concepts.MySQL.md)
++ [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)
+
 **Note**  
 In some cases, logs contain hidden data\. Therefore, the AWS Management Console might show content in a log file, but the log file might be empty when you download it\.
 

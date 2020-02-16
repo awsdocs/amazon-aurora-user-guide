@@ -13,7 +13,7 @@ You can create an Aurora Serverless DB cluster with the AWS Management Console, 
 For general information about creating a DB cluster, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
 
 **Note**  
- Currently, Aurora Serverless isn't available in all AWS Regions\. For more information on Aurora Serverless, see [Pricing](https://aws.amazon.com//rds/aurora/serverless/#Pricing)\.   
+ Currently, Aurora Serverless isn't available in all AWS Regions\. For more information on Aurora Serverless, see [Pricing](https://aws.amazon.com/rds/aurora/serverless/#Pricing)\.   
  The cluster volume for an Aurora Serverless cluster is always encrypted\. You can choose the encryption key, but not turn off encryption\. Therefore, you can't perform operations that aren't allowed for encrypted snapshots\. For example, you can't copy snapshots of Aurora Serverless clusters to a different AWS Region\. 
 
 ## Console<a name="aurora-serverless.create.console"></a>

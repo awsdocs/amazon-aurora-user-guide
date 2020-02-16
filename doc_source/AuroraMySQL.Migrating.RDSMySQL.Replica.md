@@ -13,7 +13,7 @@ You can only have one Aurora Read Replica for a MySQL DB instance\.
 **Note**  
 Replication issues can arise due to feature differences between Amazon Aurora MySQL and the MySQL database engine version of your RDS MySQL DB instance that is the replication master\. If you encounter an error, you can find help in the [Amazon RDS Community Forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
 
-For more information on MySQL Read Replicas, see [ Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide//USER_ReadRepl.html)\.
+For more information on MySQL Read Replicas, see [ Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html)\.
 
 ## Creating an Aurora Read Replica<a name="AuroraMySQL.Migrating.RDSMySQL.Replica.Create"></a>
 

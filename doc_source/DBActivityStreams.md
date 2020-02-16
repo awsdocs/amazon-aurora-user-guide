@@ -50,7 +50,7 @@ When you start an activity stream, each database activity event, such as a chang
 1. Enter the following settings in the **Database Activity Stream** window:
    + For **Master key**, choose a key from the list of AWS KMS keys\. 
 
-     The master key is used to encrypt the key that in turn encrypts the database activity logged\. You must choose a master key other than the default key\. For more information about encryption keys and AWS KMS, see [What is AWS Key Management Service?](https://docs.aws.amazon.com//kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide\.*
+     The master key is used to encrypt the key that in turn encrypts the database activity logged\. You must choose a master key other than the default key\. For more information about encryption keys and AWS KMS, see [What is AWS Key Management Service?](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide\.*
    + For **Database activity stream mode**, choose **Asynchronous** or **Synchronous**\.
    + Choose **Apply immediately**\.
 

@@ -8,6 +8,16 @@ With Aurora Serverless, you can create a database endpoint without specifying th
 
 Aurora Serverless introduces a new `serverless` DB engine mode for Aurora DB clusters\. Non\-Serverless DB clusters use the `provisioned` DB engine mode\.
 
+**Topics**
++ [Aurora Serverless Architecture](#aurora-serverless.architecture)
++ [Autoscaling for Aurora Serverless](#aurora-serverless.how-it-works.auto-scaling)
++ [Automatic Pause and Resume for Aurora Serverless](#aurora-serverless.how-it-works.pause-resume)
++ [Timeout Action for Capacity Changes](#aurora-serverless.how-it-works.timeout-action)
++ [Aurora Serverless and Parameter Groups](#aurora-serverless.parameter-groups)
++ [Aurora Serverless and Maintenance](#aurora-serverless.maintenance)
++ [Aurora Serverless and Failover](#aurora-serverless.failover)
++ [Aurora Serverless and Snapshots](#aurora-serverless.snapshots)
+
 ## Aurora Serverless Architecture<a name="aurora-serverless.architecture"></a>
 
  The following image provides an overview of the Aurora Serverless architecture\.
@@ -63,7 +73,9 @@ For information about changing the capacity, see [Modifying an Aurora Serverless
 
 ## Aurora Serverless and Parameter Groups<a name="aurora-serverless.parameter-groups"></a>
 
- Parameter groups work differently for Serverless DB clusters than for provisioned DB clusters\. In particular, the DB instances in an Aurora Serverless cluster only have associated DB cluster parameter groups, not DB parameter groups\. Serverless clusters rely on DB cluster parameter groups because DB instances are not permanently associated with Aurora Serverless clusters\. Aurora adds and removes DB instances automatically as needed\. 
+Parameter groups work differently for Aurora Serverless DB clusters than for provisioned DB clusters\. Aurora manages the capacity settings for you\. Some of the configuration procedures, default parameter values, and so on that you use with other kinds of Aurora clusters don't apply for Aurora Serverless clusters\.
+
+The DB instances in an Aurora Serverless cluster only have associated DB cluster parameter groups, not DB parameter groups\. Serverless clusters rely on DB cluster parameter groups because DB instances are not permanently associated with Aurora Serverless clusters\. Aurora scales the associated DB instance automatically as needed\. The scaling operation involves modifying parameter values to be suitable for the larger or smaller capacity\.
 
  To customize configuration settings for an Aurora Serverless cluster, you can define your own DB cluster parameter group and modify the parameters it contains\. You can modify both cluster\-level parameters, and parameters that apply at the instance level in other kinds of Aurora clusters\. However, when you modify a DB cluster parameter group that's associated with an Aurora Serverless DB cluster, modifications apply differently than for other DB cluster parameter groups\. 
 
@@ -117,7 +129,7 @@ aws rds describe-db-cluster-parameters \
 
 For more information about parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
 
-With an Aurora MySQL Serverless DB cluster, you can modify only the following parameters\. For all other configuration parameters, Aurora MySQL Serverless clusters use the default values\.
+With an Aurora MySQL Serverless DB cluster, modifications to parameter values only take effect for the following parameters\. You can modify other parameters, but Aurora doesn't use the changed values\. For all other configuration parameters, Aurora MySQL Serverless clusters use default values\. These default values might be different than for other kinds of Aurora clusters\. These values might also change as Aurora scales the Aurora Serverless cluster up or down\.
 + `character_set_server`\.
 + `collation_server`\.
 +  `general_log`\. This setting was formerly only in the DB instance parameter group\. 

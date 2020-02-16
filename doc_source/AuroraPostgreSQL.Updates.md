@@ -5,7 +5,8 @@ In the following topic, you can find version and update information specific to 
 **Topics**
 + [Identifying Your Version of Amazon Aurora PostgreSQL](#AuroraPostgreSQL.Updates.Versions)
 + [Upgrading the Amazon Aurora PostgreSQL Engine Version](#AuroraPostgreSQL.Updates.Patching)
-+ [Database Engine Versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.20180305.md)
++ [Engine Versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.20180305.md)
++ [Extension Versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Extensions.md)
 
 ## Identifying Your Version of Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Updates.Versions"></a>
 
