@@ -4,7 +4,17 @@ You can export DB snapshot data to an Amazon S3 bucket\. After the data is expor
 
 When you export a DB snapshot, Amazon Aurora extracts data from the snapshot and stores it in an Amazon S3 bucket in your account\. The data is stored in an Apache Parquet format that is compressed and consistent\. 
 
-You can export manual snapshots and automated system snapshots\. By default, all data in the snapshot is exported\. However, you can choose to export specific sets of databases, schemas, or tables\. 
+You can export manual snapshots and automated system snapshots\. By default, all data in the snapshot is exported\. However, you can choose to export specific sets of databases, schemas, or tables\.
+
+Exporting snapshots is supported in the following AWS Regions:
++ US East \(N\. Virginia\)
++ US East \(Ohio\)
++ US West \(Oregon\)
++ Europe \(Ireland\)
++ Asia Pacific \(Tokyo\)
+
+**Note**  
+You can copy a snapshot from an AWS Region where S3 export isn't supported to one where it is supported, then export the copy\. The S3 bucket must be in the same AWS Region as the copy\.
 
 The following lists show the engine versions that are supported for exporting snapshot data to Amazon S3\.
 

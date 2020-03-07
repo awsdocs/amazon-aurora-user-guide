@@ -71,6 +71,7 @@ The following limitations apply to Aurora Serverless:
 + Each Aurora Serverless DB cluster requires two AWS PrivateLink endpoints\. If you reach the limit for AWS PrivateLink endpoints within your VPC, you can't create any more Aurora Serverless clusters in that VPC\. For information about checking and changing the limits on endpoints within a VPC, see [Amazon VPC Limits](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)\. 
 + A DB subnet group used by Aurora Serverless can’t have more than one subnet in the same Availability Zone\.
 + Changes to a subnet group used by an Aurora Serverless DB cluster are not applied to the cluster\.
++ A connection to an Aurora Serverless DB cluster is closed automatically if it stays open for longer than one day\.
 + Aurora Serverless doesn't support the following features:
   + [Loading data from an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)
   + [Saving data to an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)
@@ -93,7 +94,7 @@ You can access an Aurora Serverless DB cluster from AWS Lambda\. For more inform
 **Note**  
 With Aurora Serverless clusters, you don't need to download and use Amazon RDS SSL/TLS certificates\. Instead, use certificates from the AWS Certificate Manager \(ACM\)\. For more information, see the *[AWS Certificate Manager User Guide](https://docs.aws.amazon.com/acm/latest/userguide/)*\.
 
- Aurora Serverless can ensure that your session uses TLS between your client and the Aurora Serverless VPC endpoint\. To have Aurora Serverless do so, specify the requirement on the client side with the `--ssl-mode` parameter\. SSL session variables are not set for SSL connections to an Aurora Serverless DB cluster\. 
+ You can ensure that your session uses TLS between your client and the Aurora Serverless VPC endpoint\. To do so, specify the requirement on the client side with the `--ssl-mode` parameter\. SSL session variables are not set for SSL connections to an Aurora Serverless DB cluster\. 
 
  Aurora Serverless supports TLS protocol version 1\.0, 1\.1, and 1\.2\. However, you don't need to configure an Aurora Serverless database for TLS\. In particular, don't use the `REQUIRE` clause on your database user privileges for SSL\. Doing so prevents that user from connecting\. 
 

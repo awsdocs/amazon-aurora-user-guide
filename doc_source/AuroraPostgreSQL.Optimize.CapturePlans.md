@@ -31,7 +31,7 @@ If you know of a better plan than the optimizer's minimum cost plan, you might b
 Use automatic plan capture for situations such as the following:
 + You don't know the specific SQL statements that you want to manage\.
 + You have hundreds or thousands of SQL statements to manage\.
-+ Your application uses a client API\. For example, JDBC uses unnamed prepared statements or bulk\-mode statements that cannot be expressed in PostgreSQL SQL\.
++ Your application uses a client API\. For example, JDBC uses unnamed prepared statements or bulk\-mode statements that can't be expressed in psql\.
 
 **To capture plans automatically**
 

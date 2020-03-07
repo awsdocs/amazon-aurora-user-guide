@@ -32,7 +32,7 @@ Aurora machine learning is available for the following Aurora PostgreSQL version
 + Version 2\.4 of Aurora with PostgreSQL compatibility running the PostgreSQL engine version 10\.11\.
 + Version 3\.1 and higher of Aurora with PostgreSQL compatibility running the PostgreSQL engine version 11\.6 and higher
 
-For information about upgrading an older Aurora cluster, see [Upgrading an Aurora PostgreSQL DB Cluster Engine Version](USER_UpgradeDBInstance.Upgrading.md)\.
+For information about upgrading an older Aurora cluster, see [Upgrading the PostgreSQL DB Engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
 Enabling the ML capabilities involves the following steps\. 
 

@@ -55,3 +55,9 @@ For Windows:
 When you create a DB cluster snapshot using the Amazon RDS API, you need to identify which DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\. You can do this by using the Amazon RDS API [ `CreateDBClusterSnapshot`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterSnapshot.html) command with the following parameters:
 + DBClusterIdentifier
 + DBClusterSnapshotIdentifier
+
+## Determining Whether the DB Cluster Snapshot Is Available<a name="USER_CreateSnapshotCluster.Available"></a>
+
+You can check that the DB cluster snapshot is available by looking under **Snapshots** on the **Maintenance & backups** tab on the detail page for the cluster in the AWS Management Console, by using the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-snapshots](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-snapshots) CLI command, or by using the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterSnapshots.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterSnapshots.html) API action\.
+
+You can also use the [https://docs.aws.amazon.com/cli/latest/reference/rds/wait/db-cluster-snapshot-available.html](https://docs.aws.amazon.com/cli/latest/reference/rds/wait/db-cluster-snapshot-available.html) CLI command to poll the API every 30 seconds until the snapshot is available\.

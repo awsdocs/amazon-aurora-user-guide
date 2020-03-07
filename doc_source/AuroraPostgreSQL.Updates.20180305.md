@@ -131,8 +131,6 @@ You can find the following improvements in this engine update\.
 
 1. Stored procedures – SQL stored procedures now added support for embedded transactions\.
 
-1. Support for Just\-In\-Time \(JIT\) capability – RDS PostgreSQL 11 instances are created with JIT capability, speeding evaluation of expressions\. To enable this feature, set `jit` to ON\.
-
 1. Autovacuum improvements – To provide valuable logging, the parameter `rds.force_autovacuum_logging` is ON by default in conjunction with the `log_autovacuum_min_duration` parameter set to 10 seconds\. To increase autovacuum effectiveness, the values for the `autovacuum_max_workers` and `autovacuum_vacuum_cost_limit` parameters are computed based on host memory capacity to provide larger default values\.
 
 1. Improved transaction timeout – The parameter `idle_in_transaction_session_timeout` is set to 12 hours\. Any session that has been idle more than 12 hours is terminated\.

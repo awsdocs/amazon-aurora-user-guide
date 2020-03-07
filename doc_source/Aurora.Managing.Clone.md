@@ -22,7 +22,6 @@ You can use database cloning in a variety of use cases, especially where you don
 There are some limitations involved with database cloning, described following:
 + You cannot create clone databases across AWS regions\. The clone databases must be created in the same region as the source databases\.
 + Currently, you are limited to 15 clones based on a copy, including clones based on other clones\. After that, only copies can be created\. However, each copy can also have up to 15 clones\. 
-+ Cross\-account database cloning is currently supported only for Aurora MySQL\.
 + Currently, you cannot clone from a cluster without the parallel query feature, to a cluster where parallel query is enabled\. To bring data into a cluster that uses parallel query, create a snapshot of the original cluster and restore it to a cluster where the parallel query option is enabled\.
 + You can provide a different virtual private cloud \(VPC\) for your clone\. However, the subnets in those VPCs must map to the same set of Availability Zones\.
 

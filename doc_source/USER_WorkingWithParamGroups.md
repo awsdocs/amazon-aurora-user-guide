@@ -224,9 +224,7 @@ Include the following required parameters:
 
 You can modify parameter values in a customer\-created DB parameter group; you can't change the parameter values in a default DB parameter group\. Changes to parameters in a customer\-created DB parameter group are applied to all DB instances that are associated with the DB parameter group\. 
 
-If you change a parameter value, when the change is applied is determined by the type of parameter\. Changes to dynamic parameters are applied immediately\. Changes to static parameters require that the DB instance associated with DB parameter group be rebooted before the change takes effect\. To determine the type of a parameter, list the parameters in a parameter group using one of the procedures shown in the section [Listing DB Parameter Groups](#USER_WorkingWithParamGroups.Listing)\.
-
-The RDS console shows the status of the DB parameter group associated with a DB instance on the **Configuration** tab\. For example, if the DB instance isn't using the latest changes to its associated DB parameter group, the RDS console shows the DB parameter group with a status of **pending\-reboot**\. To apply the latest parameter changes to that DB instance, manually reboot the DB instance\.
+Changes to some parameters are applied to the DB instance immediately without a reboot\. Changes to other parameters are applied only after the DB instance is rebooted\. The RDS console shows the status of the DB parameter group associated with a DB instance on the **Configuration** tab\. For example, if the DB instance isn't using the latest changes to its associated DB parameter group, the RDS console shows the DB parameter group with a status of **pending\-reboot**\. To apply the latest parameter changes to that DB instance, manually reboot the DB instance\.
 
 ![\[Parameter change pending reboot scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/param-reboot.png)
 
@@ -289,9 +287,7 @@ To modify a DB parameter group, use the RDS API [https://docs.aws.amazon.com/Ama
 
 You can modify parameter values in a customer\-created DB cluster parameter group; you can't change the parameter values in a default DB cluster parameter group\. Changes to parameters in a customer\-created DB cluster parameter group are applied to all DB clusters that are associated with the DB cluster parameter group\. 
 
-If you change a parameter value, when the change is applied is determined by the type of parameter\. Changes to dynamic parameters are applied immediately\. Changes to static parameters require that the DB instances associated with DB cluster that uses the DB cluster parameter group be rebooted before the change takes effect\. To determine the type of a parameter, list the parameters in a parameter group using one of the procedures shown in the section [Listing DB Parameter Groups](#USER_WorkingWithParamGroups.Listing)\.
-
-The RDS console shows the status of the DB cluster parameter group associated with a DB instance\. For example, if the DB instance is not using the latest changes to the associated DB cluster parameter group, the RDS console shows the DB cluster parameter group with a status of **pending\-reboot**\. You would need to manually reboot the DB instance for the latest parameter changes to take effect for that DB instance\.
+Changes to some parameters are applied to the DB instance immediately without a reboot\. Changes to other parameters are applied only after the DB instance is rebooted\. The RDS console shows the status of the DB cluster parameter group associated with a DB instance\. For example, if the DB instance is not using the latest changes to the associated DB cluster parameter group, the RDS console shows the DB cluster parameter group with a status of **pending\-reboot**\. You would need to manually reboot the DB instance for the latest parameter changes to take effect for that DB instance\.
 
 ![\[Cluster parameter change pending reboot scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/param-cluster-reboot.png)
 

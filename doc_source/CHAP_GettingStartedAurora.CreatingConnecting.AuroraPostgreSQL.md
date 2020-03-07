@@ -9,7 +9,7 @@ The easiest way to create an Aurora PostgreSQL DB cluster is to use the Amazon R
 
 ## Create an Aurora PostgreSQL DB Cluster<a name="CHAP_GettingStarted.AuroraPostgreSQL.CreateDBCluster"></a>
 
-Before you create a DB cluster, you must first have an virtual private cloud \(VPC\) based on the Amazon VPC service and an Amazon RDS DB subnet group\. Your VPC must have at least one subnet in each of at least two Availability Zones\. You can use the default VPC for your AWS account, or you can create your own VPC\. The Amazon RDS console makes it easy for you to create your own VPC for use with Amazon Aurora or use an existing VPC with your Aurora DB cluster\.
+Before you create a DB cluster, you must first have a virtual private cloud \(VPC\) based on the Amazon VPC service and an Amazon RDS DB subnet group\. Your VPC must have at least one subnet in each of at least two Availability Zones\. You can use the default VPC for your AWS account, or you can create your own VPC\. The Amazon RDS console makes it easy for you to create your own VPC for use with Amazon Aurora or use an existing VPC with your Aurora DB cluster\.
 
 If you want to create a VPC and DB subnet group for use with your Amazon Aurora DB cluster yourself, rather than having Amazon RDS create the VPC and DB subnet group for you, follow the instructions in [How to Create a VPC for Use with Amazon Aurora](Aurora.CreateVPC.md)\. Otherwise, follow the instructions in this topic to create your DB cluster and have Amazon RDS create a VPC and DB subnet group for you\.
 

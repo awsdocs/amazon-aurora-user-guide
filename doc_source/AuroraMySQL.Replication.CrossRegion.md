@@ -69,7 +69,7 @@ Use the following procedures to create a cross\-region Read Replica from an Auro
 **Note**  
 You can set up cross\-region replication from an unencrypted DB cluster to an encrypted Read Replica by specifying `--storage-encrypted` and providing a value for `--kms-key-id`\. In this case, you don't need to specify `--source-region` or `--pre-signed-url`\.
 
-   You don't need to include the `--master-username` and `--master-user-password` parameters, because those values are taken from the source DB cluster\. 
+   You can't specify the `--master-username` and `--master-user-password` parameters\. Those values are taken from the source DB cluster\. 
 
    The following code example creates a Read Replica in the us\-east\-1 region from an unencrypted DB cluster snapshot in the us\-west\-2 region\. The command is called in the us\-east\-1 region\. 
 
@@ -272,7 +272,7 @@ Because the promoted DB cluster is no longer a Read Replica, you can't use it as
 
 The following steps show the general process for promoting a Read Replica to a DB cluster: 
 
-1. Stop any transactions from being written to the Read Replica source DB cluster, and then wait for all updates to be made to the Read Replica\. Database updates occur on the Read Replica after they have occurred on the source DB cluster, and this replication lag can vary significantly\. Use the [Replica Lag](http://aws.amazon.com/rds/faqs/#105) metric to determine when all updates have been made to the Read Replica\.
+1. Stop any transactions from being written to the Read Replica source DB cluster, and then wait for all updates to be made to the Read Replica\. Database updates occur on the Read Replica after they have occurred on the source DB cluster, and this replication lag can vary significantly\. Use the `ReplicaLag` metric to determine when all updates have been made to the Read Replica\. The `ReplicaLag` metric records the amount of time a Read Replica DB instance lags behind the source DB instance\. When the `ReplicaLag` metric reaches `0`, the Read Replica has caught up to the source DB instance\.
 
 1. Promote the Read Replica by using the **Promote read replica** option on the Amazon RDS console, the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html), or the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplicaDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplicaDBCluster.html) Amazon RDS API operation\.
 

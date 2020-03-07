@@ -22,4 +22,4 @@ An Aurora database has two version numbers; the Aurora version number and the da
 
 ## Upgrading the Amazon Aurora PostgreSQL Engine Version<a name="AuroraPostgreSQL.Updates.Patching"></a>
 
-For more information about upgrading the Amazon Aurora PostgreSQL engine version, see [Upgrading an Aurora PostgreSQL DB Cluster Engine Version](USER_UpgradeDBInstance.Upgrading.md)\.
+For more information about upgrading the Amazon Aurora PostgreSQL engine version, see [Upgrading the PostgreSQL DB Engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.

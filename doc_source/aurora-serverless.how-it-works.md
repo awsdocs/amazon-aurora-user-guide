@@ -173,7 +173,7 @@ Maintenance windows don't apply to Aurora Serverless\.
 
 ## Aurora Serverless and Failover<a name="aurora-serverless.failover"></a>
 
- The DB instance for an Aurora Serverless DB cluster currently is created in a single Availability Zone \(AZ\)\. If the DB instance or the AZ becomes unavailable, Aurora recreates the DB instance in a different AZ\. We refer to this capability as automatic multi\-AZ failover\. 
+ If the DB instance for an Aurora Serverless DB cluster becomes unavailable or the Availability Zone \(AZ\) it is in fails, Aurora recreates the DB instance in a different AZ\. We refer to this capability as automatic multi\-AZ failover\. 
 
  This failover mechanism takes longer than for an Aurora Provisioned cluster\. The Aurora Serverless failover time is currently undefined because it depends on demand and capacity availability in other AZs within the given AWS Region\. 
 
