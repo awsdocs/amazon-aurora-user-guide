@@ -4,32 +4,7 @@
 
 You can scale Aurora MySQL DB instances in two ways, instance scaling and read scaling\. For more information about read scaling, see [Read Scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.ReadScaling)\.
 
-You can scale your Aurora MySQL DB cluster by modifying the DB instance class for each DB instance in the DB cluster\. Aurora MySQL supports several DB instance classes optimized for Aurora\. The following table describes the specifications of the DB instance classes supported by Aurora MySQL\.
-
-
-| Instance Class | vCPU | ECU | Memory \(GiB\) | 
-| --- | --- | --- | --- | 
-|  db\.t2\.small  |  1  | 1 | 2 | 
-|  db\.t2\.medium  |  2  | 2 | 4 | 
-|  db\.r3\.large  |  2  | 6\.5 | 15\.25 | 
-|  db\.r3\.xlarge  |  4  | 13 | 30\.5 | 
-|  db\.r3\.2xlarge  |  8  | 26 | 61 | 
-|  db\.r3\.4xlarge  |  16  | 52 | 122 | 
-|  db\.r3\.8xlarge  |  32  | 104 | 244 | 
-|  db\.r4\.large  |  2  | 7 | 15\.25 | 
-|  db\.r4\.xlarge  |  4  | 13\.5 | 30\.5 | 
-|  db\.r4\.2xlarge  |  8  | 27 | 61 | 
-|  db\.r4\.4xlarge  |  16  | 53 | 122 | 
-|  db\.r4\.8xlarge  |  32  | 99 | 244 | 
-|  db\.r4\.16xlarge  |  64  | 195 | 488 | 
-|  db\.r5\.large  |  2  | 10 | 16 | 
-|  db\.r5\.xlarge  |  4  | 19 | 32 | 
-|  db\.r5\.2xlarge  |  8  | 38 | 64 | 
-|  db\.r5\.4xlarge  |  16  | 71 | 128 | 
-|  db\.r5\.8xlarge  | 32 | 132 | 256 | 
-| db\.r5\.12xlarge | 48 | 173 | 384 | 
-|  db\.r5\.16xlarge  | 64 | 264 | 512 | 
-|  db\.r5\.24xlarge  | 96 | 347 | 768 | 
+You can scale your Aurora MySQL DB cluster by modifying the DB instance class for each DB instance in the DB cluster\. Aurora MySQL supports several DB instance classes optimized for Aurora\. For the specifications of the DB instance classes supported by Aurora MySQL, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.
 
 ## Maximum Connections to an Aurora MySQL DB Instance<a name="AuroraMySQL.Managing.MaxConnections"></a>
 

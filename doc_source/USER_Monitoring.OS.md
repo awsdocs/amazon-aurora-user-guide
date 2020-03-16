@@ -98,8 +98,8 @@ The Enhanced Monitoring metrics shown in the **Process list** view are organized
 The items listed for each process are:
 + **VIRT** – Displays the virtual size of the process\.
 + **RES** – Displays the actual physical memory being used by the process\.
-+ **CPU%** – Displays the percentage of the CPU bandwidth consumed by the process\.
-+ **MEM%** – Displays the percentage of the total memory consumed by the process\.
++ **CPU%** – Displays the percentage of the total CPU bandwidth being used by the process\.
++ **MEM%** – Displays the percentage of the total memory being used by the process\.
 
 The monitoring data that is shown in the RDS console is retrieved from Amazon CloudWatch Logs\. You can also retrieve the metrics for a DB instance as a log stream from CloudWatch Logs\. For more information, see [Viewing Enhanced Monitoring by Using CloudWatch Logs](#USER_Monitoring.OS.CloudWatchLogs)\.
 
@@ -125,10 +125,10 @@ After you have enabled Enhanced Monitoring for your DB instance, you can view th
 
 1. Choose the log stream that you want to view from the list of log streams\.
 
-### Available OS Metrics<a name="w53aac21c30c21b7"></a>
+### Available OS Metrics<a name="w53aac18c30c21b7"></a>
 
 The following tables list the OS metrics available using Amazon CloudWatch Logs\.
 
-#### Metrics for Aurora<a name="w53aac21c30c21b7b5"></a>
+#### Metrics for Aurora<a name="w53aac18c30c21b7b5"></a>
 
 <a name="cloudwatch-os-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Monitoring.OS.html)

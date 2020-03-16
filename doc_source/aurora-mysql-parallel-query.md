@@ -781,7 +781,7 @@ mysql> explain delete from part where p_name is not null;
 
 ### Transactions and Locking<a name="aurora-mysql-parallel-query-sql-transactions"></a>
 
- Parallel query only applies to statements executed under the `REPEATABLE READ` isolation level\. This isolation level is the only one that you can set on Aurora DB instances that are Read Replicas\. You can use all the isolation levels on the Aurora primary instance\. 
+ Parallel query only applies to statements executed under the `REPEATABLE READ` isolation level\. This isolation level is the default for Aurora reader DB instances\. You can use all the isolation levels on the Aurora primary instance\. For more information about Aurora isolation levels, see [Aurora MySQL Isolation Levels](AuroraMySQL.Reference.md#AuroraMySQL.Reference.IsolationLevels)\. 
 
  After a big transaction is finished, the table statistics might be stale\. Such stale statistics might require an `ANALYZE TABLE` statement before Aurora can accurately estimate the number of rows\. A large\-scale DML statement might also bring a substantial portion of the table data into the buffer pool\. Having this data in the buffer pool can lead to parallel query being chosen less frequently for that table until the data is evicted from the pool\. 
 

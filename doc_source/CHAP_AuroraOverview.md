@@ -16,14 +16,17 @@
 
 **Topics**
 + [Amazon Aurora DB Clusters](Aurora.Overview.md)
++ [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)
 + [Amazon Aurora Connection Management](Aurora.Overview.Endpoints.md)
 + [Using the Instance Endpoints](#Aurora.Endpoints.Instance)
 + [How Aurora Endpoints Work with High Availability](#Aurora.Overview.Endpoints.HA)
++ [DB Instance Classes](Concepts.DBInstanceClass.md)
 + [Amazon Aurora Storage and Reliability](Aurora.Overview.StorageReliability.md)
 + [Amazon Aurora Security](Aurora.Overview.Security.md)
 + [High Availability for Aurora](Concepts.AuroraHighAvailability.md)
 + [Working with Amazon Aurora Global Database](aurora-global-database.md)
 + [Replication with Amazon Aurora](Aurora.Replication.md)
++ [DB Instance Billing for Aurora](User_DBInstanceBilling.md)
 
 ## Using the Instance Endpoints<a name="Aurora.Endpoints.Instance"></a>
 

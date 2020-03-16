@@ -88,7 +88,7 @@ Following, you can find a list of the required and optional parameters used by t
 + **S3\-URI** – Specifies the URI for a text or manifest file to load, or an Amazon S3 prefix to use\. Specify the URI using the syntax described in [Specifying a Path to an Amazon S3 Bucket](#AuroraMySQL.Integrating.LoadFromS3.URI)\.
 + **REPLACE \| IGNORE** – Determines what action to take if an input row as the same unique key values as an existing row in the database table\.
   + Specify `REPLACE` if you want the input row to replace the existing row in the table\.
-  + Specify `IGNORE` if you want to discard the input row\. `IGNORE` is the default\.
+  + Specify `IGNORE` if you want to discard the input row\.
 + **INTO TABLE** – Identifies the name of the database table to load the input rows into\.
 + **PARTITION** – Requires that all input rows be inserted into the partitions identified by the specified list of comma\-separated partition names\. If an input row cannot be inserted into one of the specified partitions, then the statement fails and an error is returned\.
 + **CHARACTER SET** – Identifies the character set of the data in the input file\.

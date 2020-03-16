@@ -9,6 +9,7 @@ Before August 31, 2018, Amazon Aurora was documented in the * Amazon Relational 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Aurora Global Database now supports Aurora PostgreSQL](#WhatsNew) | You can now create Aurora global databases for the PostgreSQL database engine\. An Aurora global database spans multiple AWS Regions, enabling low latency global reads and disaster recovery from region\-wide outages\. For more information, see [Working with Amazon Aurora Global Database](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html)\.  | March 10, 2020 | 
 | [Aurora MySQL version 1\.22\.2](AuroraMySQL.Updates.1222.md) | Aurora MySQL version 1\.22\.2 is available\. | March 5, 2020 | 
 | [Aurora MySQL version 1\.20\.1](AuroraMySQL.Updates.1201.md) | Aurora MySQL version 1\.20\.1 is available\. | March 5, 2020 | 
 | [Aurora MySQL version 1\.19\.6](AuroraMySQL.Updates.1196.md) | Aurora MySQL version 1\.19\.6 is available\. | March 5, 2020 | 

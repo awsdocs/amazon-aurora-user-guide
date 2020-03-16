@@ -6,7 +6,7 @@ You can test the fault tolerance of your Amazon Aurora DB cluster by using fault
 + A disk failure
 + Disk congestion
 
-Fault injection queries that specify a crash force a crash of the Aurora instance\. The other fault injection queries result in simulations of failure events, but don't cause the event to occur\. When you submit a fault injection query, you also specify an amount of time for the failure event simulation to occur for\.
+When a fault injection query specifies a crash, it forces a crash of the Aurora DB instance\. The other fault injection queries result in simulations of failure events, but don't cause the event to occur\. When you submit a fault injection query, you also specify an amount of time for the failure event simulation to occur for\.
 
 You can submit a fault injection query to one of your Aurora Replica instances by connecting to the endpoint for the Aurora Replica\. For more information, see [Amazon Aurora Connection Management](Aurora.Overview.Endpoints.md)\.
 

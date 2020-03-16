@@ -1,4 +1,4 @@
-# Choosing the DB Instance Class<a name="Concepts.DBInstanceClass"></a>
+# DB Instance Classes<a name="Concepts.DBInstanceClass"></a>
 
 The DB instance class determines the computation and memory capacity of an Amazon RDS DB instance\. The DB instance class you need depends on your processing power and memory requirements\. 
 
@@ -86,7 +86,7 @@ The following are DB engine considerations for DB instance classes:
 | db\.t3\.2xlarge\* | 8 | Variable | 32 | Up to 2,048 | Up to 5 Gbps | No | No | 
 | db\.t3\.xlarge\* | 4 | Variable | 16 | Up to 2,048 | Up to 5 Gbps | No | No | 
 | db\.t3\.large\* | 2 | Variable | 8 | Up to 2,048 | Up to 5 Gbps | No | No | 
-| db\.t3\.medium\* | 2 | Variable | 4 | Up to 1,536 | Up to 5 Gbps | 1\.14\.4 and later | 10.7 and later | 
+| db\.t3\.medium\* | 2 | Variable | 4 | Up to 1,536 | Up to 5 Gbps | 1\.14\.4 and later | 10\.7 or later | 
 | db\.t3\.small\* | 2 | Variable | 2 | Up to 1,536 | Up to 5 Gbps | 1\.14\.4 and later | No | 
 | db\.t3\.micro\* | 2 | Variable | 1 | Up to 1,536 | Up to 5 Gbps | No | No | 
 | db\.t2 – Current Generation Burstable Performance Instance Classes | 

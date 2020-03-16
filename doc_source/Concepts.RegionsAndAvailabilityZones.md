@@ -1,4 +1,4 @@
-# Choosing the Regions and Availability Zones<a name="Concepts.RegionsAndAvailabilityZones"></a>
+# Regions and Availability Zones<a name="Concepts.RegionsAndAvailabilityZones"></a>
 
 Amazon cloud computing resources are hosted in multiple locations world\-wide\. These locations are composed of AWS Regions and Availability Zones\. Each *AWS Region* is a separate geographic area\. Each AWS Region has multiple, isolated locations known as *Availability Zones*\. Amazon RDS provides you the ability to place resources, such as instances, and data in multiple locations\. Resources aren't replicated across AWS Regions unless you do so specifically\.
 

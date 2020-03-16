@@ -41,17 +41,11 @@ For Amazon Aurora DB cluster snapshots, you can't encrypt an unencrypted DB clus
 
 ## Copying Snapshots Across AWS Regions<a name="USER_CopySnapshot.AcrossRegions"></a>
 
-When you copy a snapshot to an AWS Region that is different from the source snapshot's AWS Region, the first copy is a full snapshot copy, even if you copy an incremental snapshot\. A full snapshot copy contains all of the data and metadata required to restore the DB instance\. After the first snapshot copy, you can copy incremental snapshots of the same DB instance to the same destination region within the same AWS account\.
-
-An incremental snapshot contains only the data that has changed after the most recent snapshot of the same DB instance\. Incremental snapshot copying is faster and results in lower storage costs than full snapshot copying\. Incremental snapshot copying across AWS Regions is supported for both unencrypted and encrypted snapshots\.
-
-**Important**  
-For shared snapshots, copying incremental snapshots is not supported\. For shared snapshots, all of the copies are full snapshots, even within the same region\.
+When you copy a snapshot to an AWS Region that is different from the source snapshot's AWS Region, the copy is a full snapshot copy\. A full snapshot copy contains all of the data and metadata required to restore the DB instance\.
 
 Depending on the AWS Regions involved and the amount of data to be copied, a cross\-region snapshot copy can take hours to complete\. In some cases, there might be a large number of cross\-region snapshot copy requests from a given source AWS Region\. In these cases, Amazon RDS might put new cross\-region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\. 
 
 **Note**  
-When you copy a source snapshot that is a snapshot copy, the copy isn't incremental because the snapshot copy doesn't include the required metadata for incremental copies\.  
 Aurora doesn't support incremental snapshot copying\. Aurora DB cluster snapshot copies are always full copies\.
 
 ## Parameter Group Considerations<a name="USER_CopySnapshot.Parameters"></a>
