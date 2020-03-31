@@ -96,7 +96,7 @@ The following procedure describes how to clone an Aurora DB cluster using the AW
 
   The following example creates a clone of the DB cluster named `sample-source-cluster`\. The name of the clone DB cluster is `sample-cluster-clone`\.
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   aws rds restore-db-cluster-to-point-in-time \
@@ -192,7 +192,7 @@ The [restore\-db\-cluster\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/
 
 1.  Run the RAM CLI command [https://docs.aws.amazon.com/cli/latest/reference/ram/create-resource-share.html](https://docs.aws.amazon.com/cli/latest/reference/ram/create-resource-share.html)\. 
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws ram create-resource-share --name descriptive_name \
@@ -321,7 +321,7 @@ The [restore\-db\-cluster\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/
 
 1.  Accept the invitation by calling the RAM CLI command [https://docs.aws.amazon.com/cli/latest/reference/ram/accept-resource-share-invitation.html](https://docs.aws.amazon.com/cli/latest/reference/ram/accept-resource-share-invitation.html), as shown following\. 
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws ram accept-resource-share-invitation \
@@ -379,7 +379,7 @@ The [restore\-db\-cluster\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/
 
     If the ARN passed as the `source-db-cluster-identifier` hasn't been shared, the same error is returned as if the specified cluster doesn't exist\. 
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds restore-db-cluster-to-point-in-time \
@@ -401,7 +401,7 @@ The [restore\-db\-cluster\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/
 
 1.  If the cluster that you are cloning is encrypted, encrypt your cloned cluster by including a `kms-key-id` parameter\. This `kms-key-id` value can be the same one used to encrypt the original DB cluster, or your own customer master key \(CMK\)\. Your account must have permission to use that encryption key\. 
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds restore-db-cluster-to-point-in-time \

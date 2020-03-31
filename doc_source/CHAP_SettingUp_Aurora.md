@@ -115,7 +115,7 @@ Your DB cluster will most likely be created in a VPC\. Security groups provide a
 
 The security group you need to create is a *VPC security group*, unless you have a legacy DB cluster not in a VPC that requires a* DB security group*\. If you created your AWS account after March 2013, chances are very good that you have a default VPC, and your DB cluster will be created in that VPC\. DB clusters in a VPC require that you add rules to a VPC security group to allow access to the cluster\.
 
-For example, if you have an application that will access a database on your DB cluster in a VPC, you must add a Custom TCP rule that specifies the port range and IP addresses that application will use to access the database\. If you have an application on an Amazon EC2 cluster, you can use the VPC or EC2 security group you set up for the Amazon EC2 cluster\.
+For example, if you have an application that will access a database on your DB cluster in a VPC, you must add a Custom TCP rule that specifies the port range and IP addresses that application will use to access the database\. If you have an application on an Amazon EC2 cluster, you can use the VPC security group you set up for the Amazon EC2 cluster\.
 
 **To create a VPC security group**
 

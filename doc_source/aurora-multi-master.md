@@ -179,7 +179,7 @@
 
  The following command shows the syntax for creating an Aurora cluster with multi\-master replication\. For the general procedure to create an Aurora cluster, see [Creating a DB Cluster](Aurora.CreateInstance.md#Aurora.CreateInstance.Creating)\. 
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora \

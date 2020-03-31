@@ -36,7 +36,7 @@ To create an Aurora Replica in your DB cluster, run the [create\-db\-instance](h
 
 For example, the following command creates a new MySQL 5\.7–compatible Aurora Replica named `sample-instance-us-west-2a`\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a \
@@ -54,7 +54,7 @@ aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a ^
 
 The following command creates a new MySQL 5\.6–compatible Aurora Replica named `sample-instance-us-west-2a`\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a \

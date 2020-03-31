@@ -188,7 +188,7 @@ The permissions required to start replication on an Amazon Aurora MySQL DB clust
 
 1. Copy the database from the external MySQL DB instance to the Amazon Aurora MySQL DB cluster using `mysqldump`\. For very large databases, you might want to use the procedure in [ Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html) in the * Amazon Relational Database Service User Guide*\.
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    mysqldump \

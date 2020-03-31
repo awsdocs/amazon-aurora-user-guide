@@ -73,7 +73,7 @@ You can set up cross\-region replication from an unencrypted DB cluster to an en
 
    The following code example creates a Read Replica in the us\-east\-1 region from an unencrypted DB cluster snapshot in the us\-west\-2 region\. The command is called in the us\-east\-1 region\. 
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-cluster \
@@ -93,7 +93,7 @@ You can set up cross\-region replication from an unencrypted DB cluster to an en
 
    The following code example creates a Read Replica in the us\-east\-1 region from an encrypted DB cluster snapshot in the us\-west\-2 region\. The command is called in the us\-east\-1 region\. 
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-cluster \
@@ -125,7 +125,7 @@ You can set up cross\-region replication from an unencrypted DB cluster to an en
 
    When the `describe-db-clusters` results show a status of `available`, create the primary instance for the DB cluster so that replication can begin\. To do so, use the AWS CLI `[create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)` command as shown in the following example\.
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-instance \
@@ -303,7 +303,7 @@ The promotion process takes a few minutes to complete\. When you promote a Read 
 To promote a Read Replica to a DB cluster, use the AWS CLI [ `promote-read-replica-db-cluster`](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html) command\. 
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds promote-read-replica-db-cluster \

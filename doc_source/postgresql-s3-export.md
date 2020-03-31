@@ -177,7 +177,7 @@ We strongly recommend that you do not create a policy with all\-resource access\
 + Use the following command to add the role to the PostgreSQL DB cluster named `my-db-cluster`\. Replace *`your-role-arn`* with the role ARN that you noted in a previous step\. Use `s3Export` for the value of the `--feature-name` option\.   
 **Example**  
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   aws rds add-role-to-db-cluster \

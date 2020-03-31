@@ -70,7 +70,7 @@ The following procedure describes how to enable Performance Insights for a DB in
 
   The following example enables Performance Insights for `sample-db-instance`\.
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   aws rds modify-db-instance \
@@ -90,7 +90,7 @@ When you enable Performance Insights, you can optionally specify the amount of t
 
 The following example enables Performance Insights for `sample-db-instance` and specifies that Performance Insights data is retained for two years\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds modify-db-instance \

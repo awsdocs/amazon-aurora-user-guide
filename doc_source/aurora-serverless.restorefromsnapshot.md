@@ -51,7 +51,7 @@ You can optionally specify the `--scaling-configuration` option to configure the
 
 In the following example, you restore from a previously created DB cluster snapshot named *mydbclustersnapshot*\. You restore to a new DB cluster named *mynewdbcluster*\. To restore the DB cluster as an Aurora Serverless DB cluster, set the `--engine-mode` option to `serverless`\. The example also specifies values for the `--scaling-configuration` option\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds restore-db-cluster-from-snapshot \

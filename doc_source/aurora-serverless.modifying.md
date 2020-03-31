@@ -41,7 +41,7 @@ To modify the scaling configuration of an Aurora Serverless DB cluster using the
 
 In this example, you modify the scaling configuration of an Aurora Serverless DB cluster named *sample\-cluster*\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds modify-db-cluster --db-cluster-identifier sample-cluster \

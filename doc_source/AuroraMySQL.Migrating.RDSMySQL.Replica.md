@@ -42,7 +42,7 @@ To create an Aurora Read Replica from a source MySQL DB instance, use the [https
 
 Don't specify the master username, master password, or database name as the Aurora Read Replica uses the same master username, master password, and database name as the source MySQL DB instance\. 
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds create-db-cluster --db-cluster-identifier sample-replica-cluster --engine aurora \
@@ -75,7 +75,7 @@ You can create a primary instance for your DB cluster by using the [https://docs
 In this example, you create a primary instance named *myreadreplicainstance* for the DB cluster named *myreadreplicacluster*, using the DB instance class specified in *myinstanceclass*\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds create-db-instance \
@@ -201,7 +201,7 @@ To determine which MySQL DB instance is the master, use the [https://docs.aws.am
 To determine which DB cluster is the Aurora Read Replica, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) and specify the instance identifier of the MySQL DB instance for the `--db-instance-identifier` option\. Refer to the `ReadReplicaDBClusterIdentifiers` element in the output for the DB cluster identifier of the Aurora Read Replica\. 
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds describe-db-clusters \
@@ -253,7 +253,7 @@ After you promote, confirm that the promotion has completed by choosing **Instan
 To promote an Aurora Read Replica to a stand\-alone DB cluster, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html) AWS CLI command\. 
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds promote-read-replica-db-cluster \

@@ -159,7 +159,7 @@ aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:Read
 
  The following command creates a custom endpoint attached to a specific cluster\. Initially, the endpoint is associated with all the Aurora Replica instances in the cluster\. A subsequent command associates it with a specific set of DB instances in the cluster\. 
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds create-db-cluster-endpoint --db-cluster-endpoint-identifier custom-endpoint-doc-sample \
@@ -211,7 +211,7 @@ aws rds modify-db-cluster-endpoint --db-cluster-endpoint-identifier custom-endpo
 
  The following command shows the custom endpoints associated with a specified cluster in a specified region\. The output includes both the built\-in endpoints and any custom endpoints\. 
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds describe-db-cluster-endpoints --region region_name \
@@ -305,7 +305,7 @@ aws rds describe-db-cluster-endpoints --region region_name ^
 
  The following commands change the set of DB instances that apply to a custom endpoint and optionally switches between the behavior of a static or exclusion list\. The `--static-members` and `--excluded-members` parameters take a space\-separated list of DB instance identifiers\. 
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds modify-db-cluster-endpoint --db-cluster-endpoint-identifier my-custom-endpoint \
@@ -347,7 +347,7 @@ aws rds modify-db-cluster-endpoint --db-cluster-endpoint-identifier my-custom-en
 
  The following command deletes a custom endpoint\. You don't need to specify the associated cluster, but you must specify the region\. 
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds delete-db-cluster-endpoint --db-cluster-endpoint-identifier custom-end-point-id \

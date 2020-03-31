@@ -54,7 +54,7 @@ To enable cluster cache management for an Aurora PostgreSQL DB cluster, use the 
 + `--parameters`
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-cluster-parameter-group \
@@ -101,7 +101,7 @@ To set the promotion tier priority to 0 for the writer DB instance using the AWS
 + `--apply-immediately`
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \
@@ -152,7 +152,7 @@ To set the promotion tier priority to 0 for the reader DB instance using the AWS
 + `--apply-immediately`
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \

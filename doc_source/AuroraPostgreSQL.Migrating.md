@@ -132,7 +132,7 @@ To create an Aurora Read Replica from a source PostgreSQL DB instance, use the [
 
 Don't specify the master user name, master password, or database name\. The Aurora Read Replica uses the same master user name, master password, and database name as the source PostgreSQL DB instance\. 
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds create-db-cluster --db-cluster-identifier sample-replica-cluster --engine aurora-postgresql \
@@ -167,7 +167,7 @@ You can create a primary instance for your DB cluster by using the [https://docs
 In the following example, you create a primary instance named *`myreadreplicainstance`* for the DB cluster named *`myreadreplicacluster`*\. You do this using the DB instance class specified in *`myinstanceclass`*\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds create-db-instance \
@@ -291,7 +291,7 @@ After you promote your Read Replica, confirm that the promotion has completed\. 
 To promote an Aurora Read Replica to a stand\-alone DB cluster, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html) AWS CLI command\. 
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds promote-read-replica-db-cluster \
@@ -409,7 +409,7 @@ To do this, create an IAM policy that provides access to the Amazon S3 bucket\. 
 After you create the policy, note the Amazon Resource Name \(ARN\) of the policy\. You need the ARN for a subsequent step when you attach the policy to an IAM role\.   
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws iam create-policy \
@@ -462,7 +462,7 @@ After you create the policy, note the Amazon Resource Name \(ARN\) of the policy
    The following example shows using the AWS CLI command to create a role named `rds-s3-import-role`\.   
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws iam create-role \
@@ -505,7 +505,7 @@ After you create the policy, note the Amazon Resource Name \(ARN\) of the policy
    The following AWS CLI command attaches the policy created earlier to the role named `rds-s3-import-role` Replace `your-policy-arn` with the policy ARN that you noted in an earlier step\.   
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws iam attach-role-policy \
@@ -543,7 +543,7 @@ After you create the policy, note the Amazon Resource Name \(ARN\) of the policy
 + Use the following command to add the role to the PostgreSQL DB cluster named `my-db-cluster`\. Replace *`your-role-arn`* with the role ARN that you noted in a previous step\. Use `s3Import` for the value of the `--feature-name` option\.   
 **Example**  
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   aws rds add-role-to-db-cluster \

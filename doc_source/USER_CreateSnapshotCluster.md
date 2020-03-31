@@ -35,7 +35,7 @@ When you create a DB cluster snapshot using the AWS CLI, you need to identify wh
 In this example, you create a DB cluster snapshot named *mydbclustersnapshot* for a DB cluster called *mydbcluster*\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds create-db-cluster-snapshot \

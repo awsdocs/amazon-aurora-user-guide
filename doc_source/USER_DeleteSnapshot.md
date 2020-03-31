@@ -31,7 +31,7 @@ The following options are used to delete a DB cluster snapshot\.
 
 **Example**  
 The following code deletes the `mydbclustersnapshot` DB cluster snapshot\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds delete-db-cluster-snapshot \

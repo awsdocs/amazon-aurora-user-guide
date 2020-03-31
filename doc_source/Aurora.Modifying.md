@@ -42,7 +42,7 @@ Some settings only apply to DB instances\. To change those settings, follow the 
 
 **Example**  
 The following command modifies `mydbcluster` by setting the backup retention period to 1 week \(7 days\)\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-cluster \
@@ -107,7 +107,7 @@ Some settings apply to the entire DB cluster\. To change those settings, follow 
 
 **Example**  
 The following code modifies `mydbinstance` by setting the DB instance class to `db.r4.xlarge`\. The changes are applied during the next maintenance window by using `--no-apply-immediately`\. Use `--apply-immediately` to apply the changes immediately\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \

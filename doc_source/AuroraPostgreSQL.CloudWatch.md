@@ -8,9 +8,7 @@ Aurora PostgreSQL supports publishing logs to CloudWatch Logs for versions 9\.6
 From Aurora PostgreSQL, only postgresql logs can be published\. Publishing upgrade logs isn't supported\.
 You can't publish logs to CloudWatch Logs for the China \(Ningxia\) region\.
 If exporting log data is disabled, Aurora doesn't delete existing log groups or log streams\. If exporting log data is disabled, existing log data remains available in CloudWatch Logs, depending on log retention, and you still incur charges for stored audit log data\. You can delete log streams and log groups using the CloudWatch Logs console, the AWS CLI, or the CloudWatch Logs API\.
-An alternative way to publish audit logs to CloudWatch Logs is by enabling advanced auditing and setting the cluster\-level DB parameter `server_audit_logs_upload` to `1`\. The default for the `server_audit_logs_upload` parameter is `0`\.  
-If you use this alternative method, you must have an IAM role to access CloudWatch Logs and set the `aws_default_logs_role` cluster\-level parameter to the ARN for this role\. For information about creating the role, see [Setting Up IAM Roles to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.md)\. However, if you have the `AWSServiceRoleForRDS` service\-linked role, it provides access to CloudWatch Logs and overrides any custom\-defined roles\. For information service\-linked roles for Amazon RDS, see [Using Service\-Linked Roles for Amazon Aurora](UsingWithRDS.IAM.ServiceLinkedRoles.md)\. 
-If you don't want to export audit logs to CloudWatch Logs, make sure that all methods of exporting audit logs are disabled\. These methods are the AWS Management Console, the AWS CLI, the RDS API, and the `server_audit_logs_upload` parameter\.
+If you don't want to export audit logs to CloudWatch Logs, make sure that all methods of exporting audit logs are disabled\. These methods are the AWS Management Console, the AWS CLI, and the RDS API\.
 
 ## Console<a name="AuroraPostgreSQL.CloudWatch.Console"></a>
 
@@ -51,7 +49,7 @@ Other options might be required depending on the AWS CLI command that you run\.
 
 **Example**  
 The following command creates an Aurora PostgreSQL DB cluster to publish log files to CloudWatch Logs\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds create-db-cluster \
@@ -70,7 +68,7 @@ For Windows:
 
 **Example**  
 The following command modifies an existing Aurora PostgreSQL DB cluster to publish log files to CloudWatch Logs\. The `--cloudwatch-logs-export-configuration` value is a JSON object\. The key for this object is `EnableLogTypes`, and its value is `postgresql`\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds modify-db-cluster \
@@ -88,7 +86,7 @@ When using the Windows command prompt, you must escape double quotes \("\) in JS
 
 **Example**  
 The following example modifies an existing Aurora PostgreSQL DB cluster to disable publishing log files to CloudWatch Logs\. The `--cloudwatch-logs-export-configuration` value is a JSON object\. The key for this object is `DisableLogTypes`, and its value is `postgresql`\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-cluster \

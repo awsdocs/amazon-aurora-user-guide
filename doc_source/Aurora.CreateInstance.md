@@ -173,7 +173,7 @@ Complete the following steps:
 
    For example, the following command creates a new MySQL 5\.7–compatible DB cluster named `sample-cluster`\.
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql \
@@ -191,7 +191,7 @@ Complete the following steps:
 
    The following command creates a new MySQL 5\.6–compatible DB cluster named `sample-cluster`\.
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora \
@@ -213,7 +213,7 @@ Complete the following steps:
 
    For example, the following command creates a new MySQL 5\.7–compatible DB instance named `sample-instance`\.
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-instance --db-instance-identifier sample-instance \
@@ -229,7 +229,7 @@ Complete the following steps:
 
    The following command creates a new MySQL 5\.6–compatible DB instance named `sample-instance`\.
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-instance --db-instance-identifier sample-instance \
@@ -249,7 +249,7 @@ Complete the following steps:
 
    For example, the following command creates a new DB cluster named `sample-cluster`\.
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-postgresql \
@@ -269,7 +269,7 @@ Complete the following steps:
 
    Call the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create the primary instance for your DB cluster\. Include the name of the DB cluster as the `--db-cluster-identifier` option value\.
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-instance --db-instance-identifier sample-instance \

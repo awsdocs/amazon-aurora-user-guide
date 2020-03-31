@@ -63,7 +63,7 @@ To restore a DB cluster from a DB cluster snapshot, use the AWS CLI command [res
 In this example, you restore from a previously created DB cluster snapshot named *mydbclustersnapshot*\. You restore to a new DB cluster named *mynewdbcluster*\. 
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds restore-db-cluster-from-snapshot \

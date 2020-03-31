@@ -33,7 +33,7 @@ When you reboot the primary instance of an Amazon Aurora DB cluster, RDS also au
 To reboot a DB instance by using the AWS CLI, call the [https://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html) command\. 
 
 **Example Simple Reboot**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds reboot-db-instance \

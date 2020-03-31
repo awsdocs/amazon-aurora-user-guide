@@ -45,7 +45,7 @@ The version numbering sequence for the PostgreSQL database engine is as follows:
 To determine which major engine version that you can upgrade your DB to, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) CLI command\. For example, the following command displays the major engine versions available for upgrading a DB cluster currently running the Aurora PostgreSQL engine version 9\.6\.12\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds describe-db-engine-versions  --engine aurora-postgresql  --engine-version 9.6.12  \
@@ -147,7 +147,7 @@ To upgrade the engine version of a DB cluster, use the CLI [modify\-db\-cluster]
 + `--no-apply-immediately` – apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\. 
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds modify-db-cluster \

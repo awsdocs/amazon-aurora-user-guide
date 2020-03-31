@@ -25,6 +25,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 
  **High\-priority fixes:** 
 +  Improved memory management in the Aurora writer instance that prevents restart of writer due to out of memory conditions during heavy workload in presence of reader instances within the Aurora DB cluster\. 
++  Fix for a non\-deterministic condition in the scheduler that results in engine restart while accessing the performance schema object concurrently\. 
 
 ## Comparison with Aurora MySQL Version 1<a name="AuroraMySQL.Updates.2048.Compare56"></a>
 

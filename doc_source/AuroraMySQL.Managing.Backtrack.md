@@ -131,7 +131,7 @@ The following procedure describes how to modify the target backtrack window for 
 
   The following example sets the target backtrack window for `sample-cluster` to one day \(86,400 seconds\)\.
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   aws rds modify-db-cluster \
@@ -205,7 +205,7 @@ The following procedure describes how to backtrack a DB cluster using the AWS CL
 
   The following example backtracks the DB cluster `sample-cluster` to March 19, 2018, at 10 a\.m\.
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   aws rds backtrack-db-cluster \
@@ -276,7 +276,7 @@ The following procedure describes how to view backtrack information for a DB clu
 
   The following example lists backtrack information for `sample-cluster`\.
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   aws rds describe-db-clusters \
@@ -340,7 +340,7 @@ The following procedure describes how to retrieve existing backtracks for a DB c
 
   The following example retrieves existing backtracks for `sample-cluster`\.
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   aws rds describe-db-cluster-backtracks \
@@ -395,7 +395,7 @@ You can disable the Backtrack feature for a DB cluster using the AWS CLI by sett
 
   The following example disables the Backtrack feature for the `sample-cluster` by setting `--backtrack-window` to `0`\.
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   aws rds modify-db-cluster \

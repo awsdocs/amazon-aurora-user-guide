@@ -215,6 +215,8 @@ Amazon's trademarks and trade dress may not be used in
    + [Updating Applications to Connect to Aurora PostgreSQL DB Clusters Using New SSL/TLS Certificates](ssl-certificate-rotation-aurora-postgresql.md)
    + [Migrating Data to Amazon Aurora with PostgreSQL Compatibility](AuroraPostgreSQL.Migrating.md)
    + [Managing Amazon Aurora PostgreSQL](AuroraPostgreSQL.Managing.md)
+      + [Testing Amazon Aurora PostgreSQL Using Fault Injection Queries](AuroraPostgreSQL.Managing.FaultInjectionQueries.md)
+      + [Displaying Volume Status for an Aurora DB Cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)
    + [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)
       + [Using PostgreSQL Logical Replication with Aurora](AuroraPostgreSQL.Replication.Logical.md)
    + [Integrating Amazon Aurora PostgreSQL with Other AWS Services](AuroraPostgreSQL.Integrating.md)

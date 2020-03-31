@@ -219,7 +219,7 @@ When you migrate the DB snapshot by using the `RestoreDBClusterFromSnapshot` com
 
 In this example, you create a MySQL 5\.7–compatible DB cluster named *mydbcluster* from a DB snapshot with an ARN set to *mydbsnapshotARN*\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds restore-db-cluster-from-snapshot \
@@ -239,7 +239,7 @@ aws rds restore-db-cluster-from-snapshot ^
 
 In this example, you create a MySQL 5\.6–compatible DB cluster named *mydbcluster* from a DB snapshot with an ARN set to *mydbsnapshotARN*\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds restore-db-cluster-from-snapshot \

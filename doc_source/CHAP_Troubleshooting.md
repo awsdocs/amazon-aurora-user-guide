@@ -147,7 +147,7 @@ You can reduce the lag between updates to a source DB instance and the subsequen
 + Disable the query cache\. For tables that are modified often, using the query cache can increase replica lag because the cache is locked and refreshed often\. If this is the case, you might see less replica lag if you disable the query cache\. You can disable the query cache by setting the `query_cache_type parameter` to 0 in the DB parameter group for the DB instance\. For more information on the query cache, see [Query Cache Configuration](http://dev.mysql.com/doc/refman/5.6/en/query-cache-configuration.html)\.
 + Warm the buffer pool on the Read Replica for InnoDB for MySQL\. For example, suppose that you have a small set of tables that are being updated often and you're using the InnoDB or XtraDB table schema\. In this case, dump those tables on the Read Replica\. Doing this causes the database engine to scan through the rows of those tables from the disk and then cache them in the buffer pool\. This approach can reduce replica lag\. The following shows an example\.
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   PROMPT> mysqldump \
@@ -211,12 +211,22 @@ CALL mysql.rds_set_configuration('binlog retention hours', 48);
 
 ## No Space Left on Device<a name="CHAP_Troubleshooting.Aurora.NoSpaceLeft"></a>
 
-You might encounter the following error message from Amazon Aurora\.
+You might encounter one of the following error messages\.
++ From Amazon Aurora MySQL:
 
-```
-ERROR 3 (HY000): Error writing file '/rdsdbdata/tmp/XXXXXXXX' (Errcode: 28 - No space left on device)
-```
+  ```
+  ERROR 3 (HY000): Error writing file '/rdsdbdata/tmp/XXXXXXXX' (Errcode: 28 - No space left on device)
+  ```
++ From Amazon Aurora PostgreSQL:
 
-Each DB instance in an Amazon Aurora DB cluster uses local SSD storage to store temporary tables for a session\. This local storage for temporary tables doesn't automatically grow like the Aurora cluster volume\. Instead, the amount of local storage is limited\. The limit is based on the DB instance class for DB instances in your DB cluster\.
+  ```
+  ERROR: could not write block XXXXXXXX of temporary file: No space left on device.
+  ```
 
-In some cases, you can't modify your workload to reduce the amount temporary storage required\. If so, scale your DB instances up to use a DB instance class that has more local SSD storage\.
+Each DB instance in an Amazon Aurora DB cluster uses local solid state drive \(SSD\) storage to store temporary tables for a session\. This local storage for temporary tables doesn't automatically grow like the Aurora cluster volume\. Instead, the amount of local storage is limited\. The limit is based on the DB instance class for DB instances in your DB cluster\. 
+
+To show the amount of storage available for temporary tables and logs, you can use the CloudWatch metric `FreeLocalStorage`\. This metric is for per\-instance temporary volumes, not the cluster volume\. For more information on available metrics, see [Monitoring Amazon Aurora DB Cluster Metrics](Aurora.Monitoring.md)\.
+
+In some cases, you can't modify your workload to reduce the amount temporary storage required\. If so, modify your DB instances to use a DB instance class that has more local SSD storage\. For more information, see [DB Instance Classes](Concepts.DBInstanceClass.md)\. 
+
+For more troubleshooting information, see [ What is stored in Aurora for MySQL local storage, and how can I troubleshoot local storage issues?](https://aws.amazon.com/premiumsupport/knowledge-center/aurora-mysql-local-storage/) or [What is stored in Amazon Aurora for PostgreSQL storage, and how can I troubleshoot storage issues?](https://aws.amazon.com/premiumsupport/knowledge-center/postgresql-aurora-storage-issue/)\. 

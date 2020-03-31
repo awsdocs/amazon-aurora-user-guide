@@ -252,9 +252,6 @@ The following are prerequisites for using encrypted replication:
 
 During encrypted replication, the Aurora MySQL DB cluster acts a client to the MySQL database server\. The certificates and keys for the Aurora MySQL client are in files in \.pem format\.
 
-**Note**  
-Currently, encrypted replication with an external MySQL database is only supported for Aurora MySQL version 5\.6\.
-
 **To configure your external MySQL database and your Aurora MySQL DB cluster for encrypted replication**
 
 1. Ensure that you are prepared for encrypted replication:

@@ -67,7 +67,7 @@ The following command examples create a new Serverless DB cluster by setting the
 
 The following command creates a new MySQL 5\.6–compatible Serverless DB cluster\. Valid capacity values for Aurora MySQL are `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 5.6.10a \
@@ -87,7 +87,7 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
 
 The following command creates a new PostgreSQL 10\.7–compatible Serverless DB cluster\. Valid capacity values for Aurora PostgreSQL are `2`, `4`, `8`, `16`, `32`, `64`, `192`, and `384`\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-postgresql --engine-version 10.7 \

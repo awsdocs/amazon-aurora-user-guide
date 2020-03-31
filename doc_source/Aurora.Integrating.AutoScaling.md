@@ -148,7 +148,7 @@ To register your Aurora DB cluster, use the [https://docs.aws.amazon.com/cli/lat
 
 **Example**  
 In the following example, you register an Aurora DB cluster named `myscalablecluster`\. The registration indicates that the DB cluster should be dynamically scaled to have from one to eight Aurora Replicas\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws application-autoscaling register-scalable-target \
@@ -319,7 +319,7 @@ To apply a scaling policy to your Aurora DB cluster, use the [https://docs.aws.a
 
 **Example**  
 In the following example, you apply a target\-tracking scaling policy named `myscalablepolicy` to an Aurora DB cluster named `myscalablecluster` with Application Auto Scaling\. To do so, you use a policy configuration saved in a file named `config.json`\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws application-autoscaling put-scaling-policy \
@@ -452,7 +452,7 @@ To delete a scaling policy from your Aurora DB cluster, use the [https://docs.aw
 
 **Example**  
 In the following example, you delete a target\-tracking scaling policy named `myscalablepolicy` from an Aurora DB cluster named `myscalablecluster`\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws application-autoscaling delete-scaling-policy \

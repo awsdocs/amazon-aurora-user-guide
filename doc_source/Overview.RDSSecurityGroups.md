@@ -1,10 +1,6 @@
 # Controlling Access with Security Groups<a name="Overview.RDSSecurityGroups"></a>
 
-Security groups control the access that traffic has in and out of a DB instance\. Two types of security groups are used with Aurora: VPC security groups and Amazon EC2 security groups\. In simple terms, these work as follows:
-+ A VPC security group controls access to DB instances and EC2 instances inside a VPC\.
-+ An EC2 security group controls access to an EC2 instance\.
-
-By default, network access is disabled for a DB instance\. You can specify rules in a security group that allow access from an IP address range, port, or EC2 security group\. Once ingress rules are configured, the same rules apply to all DB instances that are associated with that security group\. You can specify up to 20 rules in a security group\.
+Security groups control the access that traffic has in and out of a DB instance\. Aurora supports VPC security groups\.
 
 ## VPC Security Groups<a name="Overview.RDSSecurityGroups.VPCSec"></a>
 
@@ -33,7 +29,7 @@ A common use of a DB instance in a VPC is to share data with an application serv
 
 The following diagram shows this scenario\.
 
-![\[VPC and EC2 security group scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/con-VPC-sec-grp.png)
+![\[DB instance and EC2 instance in a VPC\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/con-VPC-sec-grp.png)
 
 For more information about using a VPC, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
 

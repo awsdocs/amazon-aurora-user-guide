@@ -707,7 +707,7 @@ The last process in setting up IAM access is to associate the IAM role and its I
 Use the following command to add the role to the PostgreSQL DB cluster named `my-db-cluster`\. Replace *`your-role-arn`* with the role ARN that you noted in a previous step\. For the value of the `--feature-name` option, use `SageMaker`, `Comprehend`, or `s3Export` depending on which service you want to use\.   
 **Example**  
 
-     For Linux, OS X, or Unix:
+     For Linux, macOS, or Unix:
 
      ```
      aws rds add-role-to-db-cluster \

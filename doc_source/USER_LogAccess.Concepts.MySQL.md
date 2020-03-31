@@ -119,7 +119,7 @@ For more information about mysqlbinlog options, go to [mysqlbinlog \- Utility fo
 
 For example, see the following\. 
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 mysqlbinlog \

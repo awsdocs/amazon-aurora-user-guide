@@ -86,9 +86,14 @@ Make sure that you save this password\. AWS Directory Service doesn't store this
 
 ## Step 2: Create an IAM Role for Amazon Aurora to Access the AWS Directory Service<a name="postgresql-kerberos-setting-up.CreateIAMRole"></a>
 
-For Amazon Aurora to call AWS Directory Service for you, you must create an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. This role allows Amazon Aurora to make calls to the AWS Directory Service\. When you create this IAM role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\.
+For Amazon Aurora to call AWS Directory Service for you, an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess` is required\. This role allows Amazon Aurora to make calls to the AWS Directory Service\.
 
-For more information about creating IAM roles for a service, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html)\.
+When a DB instance is created using the AWS Management Console and the console user has the `iam:CreateRole` permission, the console creates this role automatically\. In this case, the role name is `rds-directoryservice-kerberos-access-role`\. Otherwise, you must create the IAM role manually\. When you create this IAM role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\.
+
+For more information about creating IAM roles for a service, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
+
+**Note**  
+The IAM role used for Windows Authentication for RDS for Microsoft SQL Server can't be used for Amazon Aurora\.
 
 Optionally, you can create policies with the required permissions instead of using the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. In this case, the IAM role must have the following IAM trust policy\.
 
@@ -97,11 +102,12 @@ Optionally, you can create policies with the required permissions instead of usi
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Effect:" "Allow"
+      "Sid": "",
+      "Effect": "Allow",
       "Principal": {
         "Service": [
-          "rds.amazonaws.com",
-          "directoryservice.rds.amazonaws.com"
+          "directoryservice.rds.amazonaws.com",
+          "rds.amazonaws.com"
         ]
       },
       "Action": "sts:AssumeRole"

@@ -5,6 +5,8 @@ The following sections discuss managing performance and scaling for an Amazon Au
 **Topics**
 + [Scaling Aurora PostgreSQL DB Instances](#AuroraPostgreSQL.Managing.Performance.InstanceScaling)
 + [Maximum Connections to an Aurora PostgreSQL DB Instance](#AuroraPostgreSQL.Managing.MaxConnections)
++ [Testing Amazon Aurora PostgreSQL Using Fault Injection Queries](AuroraPostgreSQL.Managing.FaultInjectionQueries.md)
++ [Displaying Volume Status for an Aurora DB Cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)
 
 ## Scaling Aurora PostgreSQL DB Instances<a name="AuroraPostgreSQL.Managing.Performance.InstanceScaling"></a>
 

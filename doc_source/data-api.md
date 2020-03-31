@@ -99,7 +99,7 @@ You can specify the `-enable-http-endpoint` using the following AWS CLI commands
 
 The following example modifies `sample-cluster` to enable the Data API\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds modify-db-cluster \
@@ -288,7 +288,7 @@ In addition to the common options, specify the following option:
 
 For example, the following CLI command starts a SQL transaction\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds-data begin-transaction --resource-arn "arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster" \
@@ -332,11 +332,11 @@ In addition to the common options, specify the following options:
 The DB cluster returns a response for the call\.
 
 **Note**  
-The response size limit is 1 MB or 1,000 records\. If the call returns more than 1 MB of response data or over 1,000 records, the call is terminated\.
+The response size limit is 1 MB\. If the call returns more than 1 MB of response data, the call is terminated\.
 
 For example, the following CLI command runs a single SQL statement and omits the metadata in the results \(the default\)\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds-data execute-statement --resource-arn "arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster" \
@@ -388,7 +388,7 @@ The following is an example of the response\.
 
 The following CLI command runs a single SQL statement in a transaction by specifying the `--transaction-id` option\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds-data execute-statement --resource-arn "arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster" \
@@ -414,7 +414,7 @@ The following is an example of the response\.
 
 The following CLI command runs a single SQL statement with parameters\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds-data execute-statement --resource-arn "arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster" \
@@ -443,7 +443,7 @@ The following CLI command runs a data definition language \(DDL\) SQL statement\
 **Important**  
 For DDL statements, we recommend continuing to run the statement after the call times out\. When a DDL statement terminates before it is finished running, it can result in errors and possibly corrupted data structures\. To continue running a statement after a call times out, specify the `--continue-after-timeout` option\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds-data execute-statement --resource-arn "arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster" \
@@ -489,11 +489,11 @@ In addition to the common options, specify the following options:
 The DB cluster returns a response to the call\.
 
 **Note**  
-The response size limit is 1 MB or 1,000 records\. If the call returns more than 1 MB of response data or over 1,000 records, the call is terminated\.
+The response size limit is 1 MB\. If the call returns more than 1 MB of response data, the call is terminated\.
 
 For example, the following CLI command runs a batch SQL statement over an array of data with a parameter set\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds-data batch-execute-statement --resource-arn "arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster" \
@@ -527,7 +527,7 @@ In addition to the common options, specify the following option:
 
 For example, the following CLI command ends a SQL transaction and commits the changes\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds-data commit-transaction --resource-arn "arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster" \
@@ -563,7 +563,7 @@ In addition to the common options, specify the following option:
 
 For example, the following AWS CLI command rolls back a SQL transaction\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds-data rollback-transaction --resource-arn "arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster" \
@@ -984,7 +984,6 @@ If you have questions or comments related to the Data API, send email to [rds\-d
 **Topics**
 + [Transaction <transaction\_ID> Is Not Found](#data-api.troubleshooting.tran-id-not-found)
 + [Packet for Query Is Too Large](#data-api.troubleshooting.packet-too-large)
-+ [Query Response Exceeded Limit of Number of Records](#data-api.troubleshooting.query-response-too-large)
 + [Database Response Exceeded Size Limit](#data-api.troubleshooting.response-size-too-large)
 + [HttpEndpoint Is Not Enabled for Cluster <cluster\_ID>](#data-api.troubleshooting.http-endpoint-not-enabled)
 
@@ -1005,14 +1004,6 @@ For information about running transactions, see [Calling the Data API](#data-api
 In this case, the result set returned for a row was too large\. The Data API size limit is 64 KB per row in the result set returned by the database\.
 
 To solve this issue, make sure that each row in a result set is 64 KB or less\.
-
-### Query Response Exceeded Limit of Number of Records<a name="data-api.troubleshooting.query-response-too-large"></a>
-
-In this case, the number of rows in the result set returned was too large\. The Data API limit is 1,000 rows in the result set returned by the database\.
-
-To solve this issue, make sure that calls to the Data API return 1,000 rows or less\. If you need to return more than 1,000 rows, you can use multiple [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html) calls with the `LIMIT` clause in your query\.
-
-For more information about the `LIMIT` clause, see [SELECT Syntax](https://dev.mysql.com/doc/refman/5.7/en/select.html) in the MySQL documentation\.
 
 ### Database Response Exceeded Size Limit<a name="data-api.troubleshooting.response-size-too-large"></a>
 

@@ -52,7 +52,7 @@ Other options might be required depending on the AWS CLI command that you run\.
 
 **Example**  
 The following command modifies an existing Aurora MySQL DB cluster to publish log files to CloudWatch Logs\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds modify-db-cluster \
@@ -69,7 +69,7 @@ For Windows:
 
 **Example**  
 The following command creates an Aurora MySQL DB cluster to publish log files to CloudWatch Logs\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds create-db-cluster \

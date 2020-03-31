@@ -113,7 +113,7 @@ The following options are used to copy an unencrypted DB cluster snapshot:
 The following code creates a copy of DB cluster snapshot `arn:aws:rds:us-east-1:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20130805` named `myclustersnapshotcopy` in the AWS Region in which the command is run\. When the copy is made, all tags on the original snapshot are copied to the snapshot copy\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds copy-db-cluster-snapshot \
@@ -183,7 +183,7 @@ The following options are used to copy an encrypted DB cluster snapshot:
 The following code example copies the encrypted DB cluster snapshot from the us\-west\-2 region to the us\-east\-1 region\. The command is called in the us\-east\-1 region\. 
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds copy-db-cluster-snapshot \

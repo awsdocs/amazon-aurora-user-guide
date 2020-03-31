@@ -7,7 +7,7 @@ Beyond external security threats, managed databases need to provide protection a
 A stream of database activity is pushed from Aurora PostgreSQL to an Amazon Kinesis data stream that is created on behalf of your database\. From Kinesis, the activity stream can then be consumed by Amazon CloudWatch or by applications for compliance management\. These compliance applications include Imperva's SecureSphere Database Audit and Protection, McAfee's Data Center Security Suite, or IBM's Infosphere Guardium\. These applications can use the activity stream information to generate alerts and provide auditing of all activity on your Amazon Aurora databases\.
 
 Database Activity Streams have the following limits and requirements:
-+ Currently, these streams are supported only with Aurora with PostgreSQL compatibility version 2\.3, which is compatible with PostgreSQL version 10\.7\.
++ Currently, these streams are supported only with Aurora with PostgreSQL compatibility version 2\.3 and higher\.
 + Database Activity Streams support the DB instance classes listed for Aurora PostgreSQL in [Hardware Specifications for All Available DB Instance Classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SummaryAurora), except they don't support the t3\.medium instance class\.
 + They're not supported in the following AWS Regions:
   + China \(Beijing\) Region, `cn-north-1`
@@ -64,7 +64,7 @@ When you start an activity stream, each database activity event, such as a chang
 
 To start Database Activity Streams for a DB cluster, configure the DB cluster using the [start\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/start-activity-stream.html) AWS CLI command\. Identify the AWS Region for the DB cluster with the `--region` parameter\. The `--apply-immediately` parameter is optional\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds --region us-west-2 \
@@ -159,7 +159,7 @@ Note, if you delete a DB cluster, the activity stream is stopped automatically\.
 
 To stop Database Activity Streams for a DB cluster, configure the DB cluster using the AWS CLI command [stop\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/stop-activity-stream.html)\. Identify the AWS Region for the DB cluster using the `--region` parameter\. The `--apply-immediately` parameter is optional\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds --region us-west-2 \

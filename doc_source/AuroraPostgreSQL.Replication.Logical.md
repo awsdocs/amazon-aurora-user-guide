@@ -85,7 +85,7 @@ To set up logical replication for this example, do the following:
    + Aurora PostgreSQL database version 2\.2\.0 \(compatible with PostgreSQL 10\.6\) or later\. 
    + Amazon RDS for PostgreSQL database with the PostgreSQL DB engine version 10\.4 or later\.
 
-   For this example, we create an Amazon RDS for PostgreSQL database as the subscriber\. For details on creating an RDS PostgreSQL DB instance, see [Creating a DB Instance Running the PostgreSQL Database Engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreatePostgreSQLInstance.html) in the *Amazon RDS User Guide\.* 
+   For this example, we create an Amazon RDS for PostgreSQL database as the subscriber\. For details on creating a DB instance, see [Creating a DB Instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html) in the *Amazon RDS User Guide\.* 
 
 1. Set up the subscriber database\. 
 
