@@ -98,6 +98,22 @@ We recommend the following process when upgrading an Aurora PostgreSQL DB cluste
 
 1. **Perform a backup** – The upgrade process creates a DB cluster snapshot of your DB cluster during upgrading\. If you also want to do a manual backup before the upgrade process, see [Creating a DB Cluster Snapshot](USER_CreateSnapshotCluster.md) for more information\.
 
+1. **Drop unknown data types** – Drop `unknown` data types depending on the target version\.
+
+   PostgreSQL version 10 stopped supporting the `unknown` data type\. If a version 9\.6 database uses the `unknown` data type, an upgrade to a version 10 shows an error message such as the following: 
+
+   ```
+   Database instance is in a state that cannot be upgraded: PreUpgrade checks failed: 
+   The instance could not be upgraded because the 'unknown' data type is used in user tables. 
+   Please remove all usages of the 'unknown' data type and try again."
+   ```
+
+   To find the `unknown` data type in your database so you can remove the offending column or change it to a supported data type, use the following SQL:
+
+   ```
+   SELECT DISTINCT data_type FROM information_schema.columns WHERE data_type ILIKE 'unknown';
+   ```
+
 1. **Perform a dry run upgrade** – We highly recommend testing a major version upgrade on a duplicate of your production database before trying the upgrade on your production database\. To create a duplicate test instance, you can either restore your database from a recent snapshot or clone your database\. For more information, see [Restoring from a Snapshot](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Restoring) or [Cloning Databases in an Aurora DB Cluster](Aurora.Managing.Clone.md)\.
 
    To perform the dry\-run upgrade, see [Manually Upgrading the Aurora PostgreSQL Engine](#USER_UpgradeDBInstance.Upgrading.Manual) for more information\. 

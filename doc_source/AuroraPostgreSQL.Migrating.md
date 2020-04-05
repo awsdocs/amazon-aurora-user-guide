@@ -85,12 +85,12 @@ Be prepared for migration to take a while, roughly several hours per tebibyte \(
 
 When you create an Aurora Read Replica of a PostgreSQL DB instance, Amazon RDS creates a DB snapshot of your source PostgreSQL DB instance\. This snapshot is private to Amazon RDS and incurs no charges\. Amazon RDS then migrates the data from the DB snapshot to the Aurora Read Replica\. After the DB snapshot data is migrated to the new Aurora PostgreSQL DB cluster, RDS starts replication between your PostgreSQL DB instance and the Aurora PostgreSQL DB cluster\. 
 
-You can only have one Aurora Read Replica for a PostgreSQL DB instance\. If you try to create an Aurora Read Replica for your Amazon RDS PostgreSQL instance and you already have a Read Replica, the request is rejected\. 
+You can only have one Aurora Read Replica for a PostgreSQL DB instance\. If you try to create an Aurora Read Replica for your Amazon RDS PostgreSQL instance and you already have a read replica, the request is rejected\. 
 
 **Note**  
 Replication issues can arise due to feature differences between Aurora PostgreSQL and the PostgreSQL engine version of your RDS PostgreSQL DB instance that is the replication master\. You can replicate only from an Amazon RDS PostgreSQL instance that is compatible with the Aurora PostgreSQL version in question\. For example, if the supported Aurora PostgreSQL version is 9\.6\.3, the Amazon RDS PostgreSQL DB instance must be running version 9\.6\.1 or greater\. If you encounter an error, you can find help in the [Amazon RDS Community Forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
 
-For more information on PostgreSQL Read Replicas, see [Working with Read Replicas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html) in the *Amazon RDS User Guide*\.
+For more information on PostgreSQL read replicas, see [Working with Read Replicas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html) in the *Amazon RDS User Guide*\.
 
 ### Preparing to Migrate Data by Using an Aurora Read Replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Prepare"></a>
 
@@ -272,7 +272,7 @@ After migration completes, you can promote the Aurora Read Replica to a standalo
 
 Before you promote your Aurora Read Replica, stop any transactions from being written to the source PostgreSQL DB instance\. Then wait for the replica lag on the Aurora Read Replica to reach zero\.  
 
-After you promote your Read Replica, confirm that the promotion has completed\. To do this, choose **Instances** in the navigation pane and confirm that there is a **Promoted Read Replica cluster to stand\-alone database cluster** event for your Read Replica\. After promotion is complete, the master PostgreSQL DB Instance and the Aurora Read Replica are unlinked\. At this point, you can safely delete the DB instance if you want to\.
+After you promote your read replica, confirm that the promotion has completed\. To do this, choose **Instances** in the navigation pane and confirm that there is a **Promoted Read Replica cluster to stand\-alone database cluster** event for your read replica\. After promotion is complete, the master PostgreSQL DB Instance and the Aurora Read Replica are unlinked\. At this point, you can safely delete the DB instance if you want to\.
 
 #### Console<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote.Console"></a>
 
@@ -282,7 +282,7 @@ After you promote your Read Replica, confirm that the promotion has completed\. 
 
 1. In the navigation pane, choose **Instances**\. 
 
-1. Choose the DB instance for the Aurora Read Replica and choose **Promote Read Replica** for **Actions**\. 
+1. Choose the DB instance for the Aurora Read Replica and choose **Promote** for **Actions**\. 
 
 1. Choose **Promote Read Replica**\.
 

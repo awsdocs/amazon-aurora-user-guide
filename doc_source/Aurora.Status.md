@@ -22,7 +22,7 @@ Find the possible status values for DB clusters in the following table\.
 |  **migrating**  |  A DB cluster snapshot is being restored to a DB cluster\.   | 
 |  **migration\-failed**  |  A migration failed\.   | 
 |  **modifying**  |  The DB cluster is being modified because of a customer request to modify the DB cluster\.   | 
-|  **promoting**  |  A Read Replica is being promoted to a standalone DB cluster\.   | 
+|  **promoting**  |  A read replica is being promoted to a standalone DB cluster\.   | 
 |  **renaming**  |  The DB cluster is being renamed because of a customer request to rename it\.   | 
 |  **resetting\-master\-credentials**  |  The master credentials for the DB cluster are being reset because of a customer request to reset them\.  | 
 |  **starting**  |  The DB cluster is starting\.  | 

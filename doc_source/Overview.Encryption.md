@@ -1,11 +1,11 @@
 # Encrypting Amazon Aurora Resources<a name="Overview.Encryption"></a>
 
-You can encrypt your Amazon Aurora DB clusters and snapshots at rest by enabling the encryption option for your Amazon Aurora DB clusters\. Data that is encrypted at rest includes the underlying storage for DB clusters, its automated backups, Read Replicas, and snapshots\.
+You can encrypt your Amazon Aurora DB clusters and snapshots at rest by enabling the encryption option for your Amazon Aurora DB clusters\. Data that is encrypted at rest includes the underlying storage for DB clusters, its automated backups, read replicas, and snapshots\.
 
 Amazon Aurora encrypted DB clusters use the industry standard AES\-256 encryption algorithm to encrypt your data on the server that hosts your Amazon Aurora DB clusters\. After your data is encrypted, Amazon Aurora handles authentication of access and decryption of your data transparently with a minimal impact on performance\. You don't need to modify your database client applications to use encryption\.
 
 **Note**  
-For encrypted and unencrypted DB clusters, data that is in transit between the source and the Read Replicas is encrypted, even when replicating across AWS Regions\.
+For encrypted and unencrypted DB clusters, data that is in transit between the source and the read replicas is encrypted, even when replicating across AWS Regions\.
 
 **Topics**
 + [Overview of Encrypting Amazon Aurora Resources](#Overview.Encryption.Overview)
@@ -19,7 +19,7 @@ Amazon Aurora encrypted DB clusters provide an additional layer of data protecti
 
 To manage the keys used for encrypting and decrypting your Amazon Aurora resources, you use the [AWS Key Management Service \(AWS KMS\)](https://docs.aws.amazon.com/kms/latest/developerguide/)\. AWS KMS combines secure, highly available hardware and software to provide a key management system scaled for the cloud\. Using AWS KMS, you can create encryption keys and define the policies that control how these keys can be used\. AWS KMS supports CloudTrail, so you can audit key usage to verify that keys are being used appropriately\. You can use your AWS KMS keys with Amazon Aurora and supported AWS services such as and supported AWS services such as Amazon S3, Amazon EBS, and Amazon Redshift\. For a list of services that support AWS KMS, see [Supported Services](https://docs.aws.amazon.com/kms/latest/developerguide/services.html) in the *AWS Key Management Service Developer Guide*\.
 
-For an Amazon Aurora encrypted DB cluster, all logs, backups, and snapshots are encrypted\. You can also encrypt a Read Replica of an Amazon Aurora encrypted cluster\. The encryption for the Read Replica is protected by the AWS Region's KMS master key\.
+For an Amazon Aurora encrypted DB cluster, all logs, backups, and snapshots are encrypted\. You can also encrypt a read replica of an Amazon Aurora encrypted cluster\. The encryption for the read replica is protected by the AWS Region's KMS master key\.
 
 ## Enabling Encryption for an Amazon Aurora DB Cluster<a name="Overview.Encryption.Enabling"></a>
 

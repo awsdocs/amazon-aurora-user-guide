@@ -70,6 +70,24 @@ aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a ^
     --availability-zone us-west-2a
 ```
 
+The following command creates a new PostgreSQL\-compatible Aurora Replica named `sample-instance-us-west-2a`\.
+
+For Linux, macOS, or Unix:
+
+```
+aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a \
+    --db-cluster-identifier sample-cluster --engine aurora-postgresql --db-instance-class db.r4.large \
+    --availability-zone us-west-2a
+```
+
+For Windows:
+
+```
+aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a ^
+    --db-cluster-identifier sample-cluster --engine aurora-postgresql --db-instance-class db.r4.large ^
+    --availability-zone us-west-2a
+```
+
 ## RDS API<a name="aurora-replicas-adding.API"></a>
 
 To create an Aurora Replica in your DB cluster, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation\. Include the name of the DB cluster as the `DBClusterIdentifier` parameter\. You can optionally specify an Availability Zone for the Aurora Replica using the `AvailabilityZone` parameter\.

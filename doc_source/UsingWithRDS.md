@@ -27,7 +27,7 @@ Aurora includes a high\-performance storage subsystem\. Its MySQL\- and PostgreS
 For both Amazon RDS and Aurora, you can access the RDS API programmatically, and you can use the AWS CLI to access the RDS API interactively\. Some RDS API operations and AWS CLI commands apply to both Amazon RDS and Aurora, while others apply to either Amazon RDS or Aurora\. For information about RDS API operations, see [Amazon RDS API Reference](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/Welcome.html)\. For more information about the AWS CLI, see [AWS Command Line Interface Reference for Amazon RDS](https://docs.aws.amazon.com/cli/latest/reference/rds/index.html)\. 
 
 **Note**  
-You only have to configure security for your use cases\. You don't have to configure security access for processes that Amazon Aurora manages\. These include creating backups, replicating data between a master and a Read Replica, and other processes\.
+You only have to configure security for your use cases\. You don't have to configure security access for processes that Amazon Aurora manages\. These include creating backups, replicating data between a master and a read replica, and other processes\.
 
 For more information on managing access to Amazon Aurora resources and your databases on a DB cluster, see the following topics\.
 

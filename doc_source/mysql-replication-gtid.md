@@ -75,7 +75,7 @@ When GTID\-based replication is enabled for an Aurora MySQL DB cluster, the GTID
 You can disable GTID\-based replication for an Aurora MySQL DB cluster\. Doing so means that the Aurora cluster can't perform inbound or outbound binlog replication with external databases that use GTID\-based replication\. 
 
 **Note**  
-In the following procedure, *Read Replica* means the replication target in an Aurora configuration with binlog replication to or from an external database\. It doesn't mean the read\-only Aurora Replica DB instances\. For example, when an Aurora cluster accepts incoming replication from an external source, the Aurora primary instance acts as the Read Replica for binlog replication\. 
+In the following procedure, *read replica* means the replication target in an Aurora configuration with binlog replication to or from an external database\. It doesn't mean the read\-only Aurora Replica DB instances\. For example, when an Aurora cluster accepts incoming replication from an external source, the Aurora primary instance acts as the read replica for binlog replication\. 
 
 For more details about the stored procedures mentioned in this section, see [Aurora MySQL Stored Procedures](AuroraMySQL.Reference.md#AuroraMySQL.Reference.StoredProcs)\. 
 
@@ -116,7 +116,7 @@ For more details about the stored procedures mentioned in this section, see [Aur
 
       Note the file and position in your output\.
 
-   1. On each Read Replica, use the file and position information from its master in the previous step to run the following query\.
+   1. On each read replica, use the file and position information from its master in the previous step to run the following query\.
 
       ```
       SELECT MASTER_POS_WAIT(file, position);
@@ -128,7 +128,7 @@ For more details about the stored procedures mentioned in this section, see [Aur
       SELECT MASTER_POS_WAIT(mysql-bin-changelog.000031, 107);
       ```
 
-      If the Read Replica is past the specified position, the query returns immediately\. Otherwise, the function waits\. When the query returns for all Read Replicas, go to the next step\. 
+      If the read replica is past the specified position, the query returns immediately\. Otherwise, the function waits\. When the query returns for all read replicas, go to the next step\. 
 
 1. Reset the GTID parameters to disable GTID\-based replication:
 

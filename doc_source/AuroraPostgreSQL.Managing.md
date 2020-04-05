@@ -43,3 +43,6 @@ The following table lists the resulting default value of `max_connections` for e
 | db\.r5\.4xlarge | 5000 | 
 | db\.r5\.12xlarge | 5000 | 
 | db\.r5\.24xlarge | 5000 | 
+| db\.t3\.medium | 420 | 
+
+For the list of DB instance classes supported by Aurora PostgreSQL and amount of memory for each, see [Hardware Specifications for All Available DB Instance Classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SummaryAurora)\.

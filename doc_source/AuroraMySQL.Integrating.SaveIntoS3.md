@@ -118,6 +118,7 @@ INTO OUTFILE S3 's3_uri'
     [OVERWRITE {ON | OFF}]
 
 export_options:
+    [FORMAT {CSV|TEXT} [HEADER]]
     [{FIELDS | COLUMNS}
         [TERMINATED BY 'string']
         [[OPTIONALLY] ENCLOSED BY 'char']
@@ -133,6 +134,7 @@ export_options:
 
 Following, you can find a list of the required and optional parameters used by the `SELECT INTO OUTFILE S3` statement that are specific to Aurora\. 
 + **s3\-uri** – Specifies the URI for an Amazon S3 prefix to use\. Specify the URI using the syntax described in [Specifying a Path to an Amazon S3 Bucket](#AuroraMySQL.Integrating.SaveIntoS3.URI)\.
++  **FORMAT \{CSV\|TEXT\} \[HEADER\]** – Optionally saves the data in CSV format\. The `TEXT` option is the default and produces the existing MySQL export format\. The `CSV` option produces comma\-separated data values\. The CSV format follows the specification in [RFC\-4180](https://tools.ietf.org/html/rfc4180)\. If you specify the optional keyword `HEADER`, the output file contains one header line\. The labels in the header line correspond to the column names from the `SELECT` statement\. You can use the CSV files for training data models for use with AWS ML services\. For more information about using exported Aurora data with AWS ML services, see [](mysql-ml.md#exporting-data-to-s3-for-model-training)\. 
 + **MANIFEST \{ON \| OFF\}** – Indicates whether a manifest file is created in Amazon S3\. The manifest file is a JavaScript Object Notation \(JSON\) file that can be used to load data into an Aurora DB cluster with the `LOAD DATA FROM S3 MANIFEST` statement\. For more information about `LOAD DATA FROM S3 MANIFEST`, see [Loading Data into an Amazon Aurora MySQL DB Cluster from Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.
 
   If `MANIFEST ON` is specified in the query, the manifest file is created in Amazon S3 after all data files have been created and uploaded\. The manifest file is created using the following path: 

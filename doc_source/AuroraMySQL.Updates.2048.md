@@ -19,7 +19,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 ## Improvements<a name="AuroraMySQL.Updates.2048.Improvements"></a>
 
  **New features:** 
-+  **Read Replica improvements:** 
++  **Read replica improvements:** 
   +  Reduced network traffic from the writer instance by efficiently transmitting data to reader instances within the Aurora DB cluster\. This improvement is enabled by default, because it helps prevent replicas from falling behind and restarting\. The parameter for this feature is `aurora_enable_repl_bin_log_filtering`\. 
   +  Reduced network traffic from the writer to reader instances within the Aurora DB cluster using compression\. This improvement is enabled by default for 8xlarge and 16xlarge instance classes only, because these instances can tolerate additional CPU overhead for compression\. The parameter for this feature is `aurora_enable_replica_log_compression`\. 
 

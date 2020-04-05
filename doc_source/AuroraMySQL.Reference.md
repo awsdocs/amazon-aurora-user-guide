@@ -148,7 +148,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `host_cache_size` | Yes |  | 
 | `init_connect` | Yes |  | 
 | `innodb_adaptive_hash_index` | Yes |  | 
-| `innodb_adaptive_max_sleep_delay` | Yes |  | 
+| `innodb_adaptive_max_sleep_delay` | Yes | Modifying this parameter has no effect, because `innodb_thread_concurrency` is always 0 for Aurora\. | 
 | `innodb_autoextend_increment` | Yes |  | 
 | `innodb_buffer_pool_dump_at_shutdown` | No |  | 
 | `innodb_buffer_pool_dump_now` | No |  | 
@@ -161,7 +161,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `innodb_compression_failure_threshold_pct` | Yes |  | 
 | `innodb_compression_level` | Yes |  | 
 | `innodb_compression_pad_pct_max` | Yes |  | 
-| `innodb_concurrency_tickets` | Yes |  | 
+| `innodb_concurrency_tickets` | Yes | Modifying this parameter has no effect, because `innodb_thread_concurrency` is always 0 for Aurora\. | 
 | `innodb_file_format` | Yes |  | 
 | `innodb_flush_log_at_timeout` | No |  | 
 | `innodb_flushing_avg_loops` | No |  | 
@@ -198,7 +198,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `innodb_stats_persistent_sample_pages` | Yes |  | 
 | `innodb_stats_transient_sample_pages` | Yes |  | 
 | `innodb_thread_concurrency` | No |  | 
-| `innodb_thread_sleep_delay` | Yes |  | 
+| `innodb_thread_sleep_delay` | Yes | Modifying this parameter has no effect, because `innodb_thread_concurrency` is always 0 for Aurora\. | 
 | `interactive_timeout` | Yes |  | 
 | `join_buffer_size` | Yes |  | 
 | `keep_files_on_create` | Yes |  | 
@@ -445,7 +445,7 @@ In this wait event, there are threads holding locks on InnoDB data dictionary op
 
  If you experience such issues, you can use an Aurora MySQL configuration setting, `aurora_read_replica_read_committed`, to use the `READ COMMITTED` isolation level on Aurora Replicas\. Using this setting can help reduce slowdowns and wasted space that can result from performing long\-running queries at the same time as transactions that modify your tables\. 
 
- We recommend making sure that you understand the specific Aurora MySQL behavior of the `READ COMMITTED` isolation before using this setting\. The Aurora Replica `READ COMMITTED` behavior complies with the ANSI SQL standard\. However, the isolation is less strict than typical MySQL `READ COMMITTED` behavior that you might be familiar with\. Thus, you might see different query results under `READ COMMITTED` on an Aurora MySQL Read Replica than for the same query under `READ COMMITTED` on the Aurora MySQL primary instance or on Amazon RDS MySQL\. You might use the `aurora_read_replica_read_committed` setting for such use cases as a comprehensive report that scans a very large database\. You might avoid it for short queries with small result sets, where precision and repeatability are important\. 
+ We recommend making sure that you understand the specific Aurora MySQL behavior of the `READ COMMITTED` isolation before using this setting\. The Aurora Replica `READ COMMITTED` behavior complies with the ANSI SQL standard\. However, the isolation is less strict than typical MySQL `READ COMMITTED` behavior that you might be familiar with\. Thus, you might see different query results under `READ COMMITTED` on an Aurora MySQL read replica than for the same query under `READ COMMITTED` on the Aurora MySQL primary instance or on Amazon RDS MySQL\. You might use the `aurora_read_replica_read_committed` setting for such use cases as a comprehensive report that scans a very large database\. You might avoid it for short queries with small result sets, where precision and repeatability are important\. 
 
 #### Enabling READ COMMITTED for Readers<a name="AuroraMySQL.Reference.IsolationLevels.relaxed.enabling"></a>
 
@@ -606,7 +606,7 @@ To skip a specific GTID\-based transaction that is known to cause a problem, you
 
 #### Examples<a name="mysql_rds_set_external_master_with_auto_position-examples"></a>
 
-When run on an Aurora primary instance, the following example configures the Aurora cluster to act as a Read Replica of an instance of MySQL running external to Aurora\.
+When run on an Aurora primary instance, the following example configures the Aurora cluster to act as a read replica of an instance of MySQL running external to Aurora\.
 
 ```
 call mysql.rds_set_external_master_with_auto_position(

@@ -24,6 +24,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 
  **Connection Handling** 
 +  Database availability has been improved to better service a surge in client connections while executing one or more DDLs\. It is handled by temporarily creating additional threads when needed\. You are advised to upgrade if the database becomes unresponsive following a surge in connections while processing DDL\. 
++  Fixed an issue that resulted in an incorrect value for the `Threads_running` global status variable\. 
 
  **Engine Restart** 
 +  Fixed an issue of prolonged unavailability while restarting the engine\. This addresses an issue in the buffer pool initialization\. This issue occurs rarely but can potentially impact any supported release\. 

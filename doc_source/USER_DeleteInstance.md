@@ -3,10 +3,10 @@
 You can delete a DB instance in a DB cluster, including deleting the primary DB instance in a DB cluster or an Amazon Aurora Replica\. To delete a DB instance, you must specify the name of the instance\.
 
 For Aurora MySQL, you can't delete a DB instance in a DB cluster if both of the following conditions are true:
-+ The DB cluster is a Read Replica of another Aurora DB cluster\.
++ The DB cluster is a read replica of another Aurora DB cluster\.
 + The DB instance is the only instance in the DB cluster\.
 
-To delete a DB instance in this case, first promote the DB cluster so that it's no longer a Read Replica\. After the promotion completes, you can delete the final DB instance in the DB cluster\. For more information, see [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\.
+To delete a DB instance in this case, first promote the DB cluster so that it's no longer a read replica\. After the promotion completes, you can delete the final DB instance in the DB cluster\. For more information, see [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\.
 
 ## Deletion Protection<a name="USER_DeleteInstance.DeletionProtection"></a>
 

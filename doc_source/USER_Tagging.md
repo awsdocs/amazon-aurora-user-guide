@@ -5,7 +5,7 @@ You can use Amazon RDS tags to add metadata to your Amazon RDS resources\. You c
 All Amazon RDS resources can be tagged
 + DB instances
 + DB clusters
-+ Read Replicas
++ Read replicas
 + DB snapshots
 + DB cluster snapshots
 + Reserved DB instances

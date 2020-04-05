@@ -4,7 +4,7 @@ With Amazon RDS, you can copy automated or manual DB cluster snapshots\. After y
 
 You can copy a snapshot within the same AWS Region, you can copy a snapshot across AWS Regions, and you can copy shared snapshots\. 
 
-You can't copy a DB cluster snapshot across regions and accounts in a single step\. Perform one step for each of these copy actions\. As an alternative to copying, you can also share manual snapshots with other AWS accounts\. For more information, see [Sharing a DB Cluster Snapshot](USER_ShareSnapshot.md)\. 
+You can't copy a DB cluster snapshot across Regions and accounts in a single step\. Perform one step for each of these copy actions\. As an alternative to copying, you can also share manual snapshots with other AWS accounts\. For more information, see [Sharing a DB Cluster Snapshot](USER_ShareSnapshot.md)\. 
 
 **Note**  
  Amazon bills you based upon the amount of Aurora backup and snapshot data you keep and the period of time that you keep it\. For information about the storage associated with Aurora backups and snapshots, see [Understanding Aurora Backup Storage Usage](aurora-storage-backup.md)\. For pricing information about Aurora storage, see [Amazon RDS for Aurora Pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
@@ -13,10 +13,10 @@ You can't copy a DB cluster snapshot across regions and accounts in a single ste
 
 The following are some limitations when you copy snapshots: 
 + You can't copy a snapshot to or from the following AWS Regions: China \(Beijing\) or China \(Ningxia\)\. 
-+ You can copy a snapshot between AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\), but you can't copy a snapshot between these AWS GovCloud \(US\) regions and other AWS Regions\.
++ You can copy a snapshot between AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\), but you can't copy a snapshot between these AWS GovCloud \(US\) Regions and other AWS Regions\.
 + If you delete a source snapshot before the target snapshot becomes available, the snapshot copy may fail\. Verify that the target snapshot has a status of `AVAILABLE` before you delete a source snapshot\. 
-+ You can have up to five snapshot copy requests in progress to a single destination region per account\.
-+ Depending on the regions involved and the amount of data to be copied, a cross\-region snapshot copy can take hours to complete\. If there is a large number of cross\-region snapshot copy requests from a given source AWS Region, Amazon RDS might put new cross\-region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\. 
++ You can have up to five snapshot copy requests in progress to a single destination Region per account\.
++ Depending on the Regions involved and the amount of data to be copied, a cross\-Region snapshot copy can take hours to complete\. If there is a large number of cross\-Region snapshot copy requests from a given source AWS Region, Amazon RDS might put new cross\-Region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\. 
 
 ## Snapshot Retention<a name="USER_CopySnapshot.Retention"></a>
 
@@ -32,7 +32,7 @@ You can only copy a shared DB cluster snapshot, whether encrypted or not, in the
 
 ## Handling Encryption<a name="USER_CopySnapshot.Encryption"></a>
 
-You can copy a snapshot that has been encrypted using an AWS KMS encryption key\. If you copy an encrypted snapshot, the copy of the snapshot must also be encrypted\. If you copy an encrypted snapshot within the same AWS Region, you can encrypt the copy with the same KMS encryption key as the original snapshot, or you can specify a different KMS encryption key\. If you copy an encrypted snapshot across regions, you can't use the same KMS encryption key for the copy as used for the source snapshot, because KMS keys are region\-specific\. Instead, you must specify a KMS key valid in the destination AWS Region\. You can't use the default AWS KMS encryption key when copying snapshots across AWS Regions, even in the same AWS account\.
+You can copy a snapshot that has been encrypted using an AWS KMS encryption key\. If you copy an encrypted snapshot, the copy of the snapshot must also be encrypted\. If you copy an encrypted snapshot within the same AWS Region, you can encrypt the copy with the same KMS encryption key as the original snapshot, or you can specify a different KMS encryption key\. If you copy an encrypted snapshot across Regions, you can't use the same KMS encryption key for the copy as used for the source snapshot, because KMS keys are Region\-specific\. Instead, you must specify a KMS key valid in the destination AWS Region\.
 
 The source snapshot remains encrypted throughout the copy process\. For more information, see [Limitations of Amazon Aurora Encrypted DB Clusters](Overview.Encryption.md#Overview.Encryption.Limitations)\.
 
@@ -43,14 +43,14 @@ For Amazon Aurora DB cluster snapshots, you can't encrypt an unencrypted DB clus
 
 When you copy a snapshot to an AWS Region that is different from the source snapshot's AWS Region, the copy is a full snapshot copy\. A full snapshot copy contains all of the data and metadata required to restore the DB instance\.
 
-Depending on the AWS Regions involved and the amount of data to be copied, a cross\-region snapshot copy can take hours to complete\. In some cases, there might be a large number of cross\-region snapshot copy requests from a given source AWS Region\. In these cases, Amazon RDS might put new cross\-region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\. 
+Depending on the AWS Regions involved and the amount of data to be copied, a cross\-Region snapshot copy can take hours to complete\. In some cases, there might be a large number of cross\-Region snapshot copy requests from a given source AWS Region\. In these cases, Amazon RDS might put new cross\-Region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\. 
 
 **Note**  
 Aurora doesn't support incremental snapshot copying\. Aurora DB cluster snapshot copies are always full copies\.
 
 ## Parameter Group Considerations<a name="USER_CopySnapshot.Parameters"></a>
 
-When you copy a snapshot across regions, the copy doesn't include the parameter group used by the original DB cluster\. When you restore a snapshot to create a new DB cluster, that DB cluster gets the default parameter group for the AWS Region it is created in\. To give the new DB cluster the same parameters as the original, you must do the following: 
+When you copy a snapshot across Regions, the copy doesn't include the parameter group used by the original DB cluster\. When you restore a snapshot to create a new DB cluster, that DB cluster gets the default parameter group for the AWS Region it is created in\. To give the new DB cluster the same parameters as the original, you must do the following: 
 
 1. In the destination AWS Region, create a DB cluster parameter group with the same settings as the original DB cluster\. If one already exists in the new AWS Region, you can use that one\. 
 
@@ -68,7 +68,7 @@ After the DB cluster snapshot copy has been created in the new AWS Region, the D
 
 ### Console<a name="USER_CopyDBClusterSnapshot.CON"></a>
 
-This procedure works for copying encrypted or unencrypted DB cluster snapshots, in the same AWS Region or across regions\.
+This procedure works for copying encrypted or unencrypted DB cluster snapshots, in the same AWS Region or across Regions\.
 
 To cancel a copy operation once it is in progress, delete the target DB cluster snapshot while that DB cluster snapshot is in **copying** status\.
 
@@ -138,7 +138,7 @@ The following parameters are used to copy an unencrypted DB cluster snapshot:
 + `SourceDBClusterSnapshotIdentifier` – The identifier for the DB cluster snapshot to be copied\. If you are copying the snapshot to another AWS Region, this identifier must be in the ARN format for the source AWS Region\.
 + `TargetDBClusterSnapshotIdentifier` – The identifier for the new copy of the DB cluster snapshot\.
 
-The following code creates a copy of a snapshot `arn:aws:rds:us-east-1:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20130805` named `myclustersnapshotcopy` in the us\-west\-1 region\. When the copy is made, all tags on the original snapshot are copied to the snapshot copy\.
+The following code creates a copy of a snapshot `arn:aws:rds:us-east-1:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20130805` named `myclustersnapshotcopy` in the us\-west\-1 Region\. When the copy is made, all tags on the original snapshot are copied to the snapshot copy\.
 
 **Example**  
 
@@ -180,7 +180,7 @@ The following options are used to copy an encrypted DB cluster snapshot:
 
   You must use this option if the DB cluster snapshot is encrypted and you are copying the snapshot to another AWS Region\. In that case, you must specify a KMS key for the destination AWS Region\.
 
-The following code example copies the encrypted DB cluster snapshot from the us\-west\-2 region to the us\-east\-1 region\. The command is called in the us\-east\-1 region\. 
+The following code example copies the encrypted DB cluster snapshot from the us\-west\-2 Region to the us\-east\-1 Region\. The command is called in the us\-east\-1 Region\.
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -218,7 +218,7 @@ The following parameters are used to copy an encrypted DB cluster snapshot:
 
   To automatically rather than manually generate a presigned URL, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-snapshot.html) command with the `--source-region` option instead\.
 
-The following code example copies the encrypted DB cluster snapshot from the us\-west\-2 region to the us\-east\-1 region\. The action is called in the us\-east\-1 region\. 
+The following code example copies the encrypted DB cluster snapshot from the us\-west\-2 Region to the us\-east\-1 Region\. The action is called in the us\-east\-1 Region\. 
 
 **Example**  
 

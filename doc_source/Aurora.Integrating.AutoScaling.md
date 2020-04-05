@@ -36,7 +36,7 @@ Aurora Auto Scaling uses a scaling policy to adjust the number of Aurora Replica
 
 ### Service Linked Role<a name="Aurora.Integrating.AutoScaling.Concepts.SLR"></a>
 
-Aurora Auto Scaling uses the `AWSServiceRoleForApplicationAutoScaling_RDSCluster` service\-linked role\. For more information, see [Service\-Linked Roles for Application Auto Scaling](https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/application-autoscaling-service-linked-roles.html) in the *Application Auto Scaling API Reference*\.
+Aurora Auto Scaling uses the `AWSServiceRoleForApplicationAutoScaling_RDSCluster` service\-linked role\. For more information, see [Service\-Linked Roles for Application Auto Scaling](https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html) in the *Application Auto Scaling User Guide*\.
 
 ### Target Metric<a name="Aurora.Integrating.AutoScaling.Concepts.TargetMetric"></a>
 
