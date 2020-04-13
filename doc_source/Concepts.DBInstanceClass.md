@@ -56,14 +56,13 @@ The following are DB engine considerations for DB instance classes:
 
 ****  
 
-|  |  |  |  |  |  |  |  | 
-| --- |--- |--- |--- |--- |--- |--- |--- |
-| **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **Max\. Bandwidth \(Mbps\) of Local Storage** | **Network Performance** | **Aurora MySQL** | **Aurora PostgreSQL** | 
+| Instance Class | vCPU | ECU | Memory \(GiB\) | Max\. Bandwidth \(Mbps\) of Local Storage | Network Performance | Aurora MySQL | Aurora PostgreSQL | 
+| --- | --- | --- | --- | --- | --- | --- | --- | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | 96 | 347 | 768 | 19,000 | 25 Gbps | 1\.22 and later, 2\.06 and later | Yes | 
-| db\.r5\.16xlarge | 64 | 264 | 512 | 13,600 | 20 Gbps | 1\.22 and later, 2\.06 and later | No | 
+| db\.r5\.16xlarge | 64 | 264 | 512 | 13,600 | 20 Gbps | 1\.22 and later, 2\.06 and later | Yes | 
 | db\.r5\.12xlarge | 48 | 173 | 384 | 9,500 | 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r5\.8xlarge | 32 | 132 | 256 | 6,800 | 10 Gbps | 1\.22 and later, 2\.06 and later | No | 
+| db\.r5\.8xlarge | 32 | 132 | 256 | 6,800 | 10 Gbps | 1\.22 and later, 2\.06 and later | Yes | 
 | db\.r5\.4xlarge | 16 | 71 | 128 | 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
 | db\.r5\.2xlarge\* | 8 | 38 | 64 | Up to 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
 | db\.r5\.xlarge\* | 4 | 19 | 32 | Up to 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
@@ -81,7 +80,6 @@ The following are DB engine considerations for DB instance classes:
 | db\.r3\.2xlarge | 8 | 26 | 61 | 1,000 | High | Yes | No | 
 | db\.r3\.xlarge | 4 | 13 | 30\.5 | 500 | Moderate | Yes | No | 
 | db\.r3\.large | 2 | 6\.5 | 15\.25 | — | Moderate | Yes | No | 
-| **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **Max\. Bandwidth \(Mbps\) of Local Storage** | **Network Performance** | **Aurora MySQL** | **Aurora PostgreSQL** | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
 | db\.t3\.2xlarge\* | 8 | Variable | 32 | Up to 2,048 | Up to 5 Gbps | No | No | 
 | db\.t3\.xlarge\* | 4 | Variable | 16 | Up to 2,048 | Up to 5 Gbps | No | No | 

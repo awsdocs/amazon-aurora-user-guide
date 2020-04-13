@@ -7,7 +7,6 @@
 + [Modifying an Amazon Aurora DB Cluster](Aurora.Modifying.md)
 + [Adding Aurora Replicas to a DB Cluster](aurora-replicas-adding.md)
 + [Managing Performance and Scaling for Aurora DB Clusters](Aurora.Managing.Performance.md)
-+ [Managing Connections with Amazon RDS Proxy \(Preview\)](rds-proxy.md)
 + [Cloning Databases in an Aurora DB Cluster](Aurora.Managing.Clone.md)
 + [Integrating Aurora with Other AWS Services](Aurora.Integrating.md)
 + [Backing Up and Restoring an Amazon Aurora DB Cluster](BackupRestoreAurora.md)

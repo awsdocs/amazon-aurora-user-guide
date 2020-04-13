@@ -24,6 +24,10 @@
  Some Aurora clusters can't be stopped and started: 
 +  You can't stop and start a cluster that's part of an [Aurora global database](aurora-global-database.md)\. 
 +  You can't stop and start a cluster that uses the [Aurora parallel query](aurora-mysql-parallel-query.md) feature\. 
++  You can't stop and start an [Aurora Serverless cluster](aurora-serverless.md)\. 
++  You can't stop and start an [Aurora multi\-master cluster](aurora-multi-master.md)\. 
+
+ If an existing cluster can't be stopped and started, the **Stop** action isn't available from the **Actions** menu on the **Databases** page or the details page\. 
 
 ## Stopping an Aurora DB Cluster<a name="aurora-cluster-stop"></a>
 
@@ -41,7 +45,9 @@ To use an Aurora DB cluster or perform administration, you always begin with a r
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1.  In the navigation pane, choose **Databases**, and then choose a cluster\. You can perform the stop operation from this page, or navigate to the details page for the DB cluster that you want to stop\.  
+1.  In the navigation pane, choose **Databases**, and then choose a cluster\. You can perform the stop operation from this page, or navigate to the details page for the DB cluster that you want to stop\. 
+
+    If an existing cluster can't be stopped and started, the **Stop** action isn't available from the **Actions** menu on the **Databases** page or the details page\. For the kinds of clusters that you can't start and stop, see [Limitations for Stopping and Starting Aurora DB Clusters](#aurora-cluster-stop-limitations)\. 
 
 1. For **Actions**, choose **Stop**\. 
 

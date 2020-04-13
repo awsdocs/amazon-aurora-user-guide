@@ -42,7 +42,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `aws_default_lambda_role`  |  Yes  |   For more information, see [Invoking a Lambda Function from an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Lambda.md)\.   | 
 |  `aws_default_s3_role`  |  Yes  |  | 
 |  `binlog_checksum`  |  Yes  |  | 
-|  `binlog_format`  |  Yes  |  | 
+|  `binlog_format`  |  Yes  | For more information, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster](AuroraMySQL.Replication.MySQL.md)\. | 
 |  `binlog_row_image`  |  No  |  | 
 |  `binlog_rows_query_log_events`  |  No  |  | 
 |  `character-set-client-handshake`  |  Yes  |  | 
@@ -208,7 +208,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `key_cache_division_limit` | Yes |  | 
 | `local_infile` | Yes |  | 
 | `lock_wait_timeout` | Yes |  | 
-| `log-bin` | No |  | 
+| `log-bin` | No | Setting `binlog_format` to `STATEMENT`, `MIXED`, or `ROW` automatically sets `log-bin` to `ON`\. Setting `binlog_format` to `OFF` automatically sets `log-bin` to `OFF`\. For more information, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster](AuroraMySQL.Replication.MySQL.md)\. | 
 | `log_bin_trust_function_creators` | Yes |  | 
 | `log_bin_use_v1_row_events` | Yes |  | 
 | `log_error` | No |  | 

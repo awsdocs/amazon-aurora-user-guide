@@ -6,9 +6,15 @@ In the connection string, you typically use the host and port information from s
 
 For specialized tasks such as troubleshooting, you can use the host and port information from a specific DB instance in your Aurora DB cluster\. 
 
+**Topics**
++ [Connecting to an Amazon Aurora MySQL DB Cluster](#Aurora.Connecting.AuroraMySQL)
++ [Connecting to an Amazon Aurora PostgreSQL DB Cluster](#Aurora.Connecting.AuroraPostgreSQL)
++ [Troubleshooting Aurora Connection Failures](#Aurora.Connecting.Troubleshooting)
++ [Managing Connections with Amazon RDS Proxy \(Preview\)](rds-proxy.md)
+
 ## Connecting to an Amazon Aurora MySQL DB Cluster<a name="Aurora.Connecting.AuroraMySQL"></a>
 
-To authenticate to your Aurora MySQL DB cluster, you can use either MySQL user name and password authentication or AWS Identity and Access Management \(IAM\) database authentication\. For more information on using MySQL user name and password authentication, see [User Account Management](https://dev.mysql.com/doc/refman/5.6/en/user-account-management.html) in the MySQL documentation\. For more information on using IAM database authentication, see [IAM Database Authentication](UsingWithRDS.IAMDBAuth.md)\.
+To authenticate to your Aurora MySQL DB cluster, you can use either MySQL user name and password authentication or AWS Identity and Access Management \(IAM\) database authentication\. For more information on using MySQL user name and password authentication, see [ Access Control and Account Management](https://dev.mysql.com/doc/refman/5.7/en/access-control.html) in the MySQL documentation\. For more information on using IAM database authentication, see [IAM Database Authentication](UsingWithRDS.IAMDBAuth.md)\.
 
 When you have a connection to your Amazon Aurora DB cluster with MySQL 5\.6 compatibility, you can execute SQL commands that are compatible with MySQL version 5\.6\. For more information about MySQL 5\.6 SQL syntax, see the [MySQL 5\.6 Reference Manual](http://dev.mysql.com/doc/refman/5.6/en/index.html)\.
 
@@ -81,8 +87,6 @@ You can connect to a DB instance in your Amazon Aurora PostgreSQL DB cluster usi
 
 When you have a connection to a DB instance in your Amazon Aurora PostgreSQL DB cluster, you can run any SQL command that is compatible with PostgreSQL version 9\.6\.3\. 
 
-For a helpful and detailed guide on connecting to an Amazon Aurora MySQL DB cluster, you can see the [Aurora Connection Management](https://d1.awsstatic.com/whitepapers/RDS/amazon-aurora-connection-management-handbook.pdf) handbook\.
-
 In the details view for your Aurora PostgreSQL DB cluster you can find the cluster endpoint\. You use this endpoint in your PostgreSQL connection string\. The endpoint is made up of the domain name and port for your DB cluster\. For example, if an endpoint value is `mycluster.cluster-123456789012.us-east-1.rds.amazonaws.com:5432`, then you specify the following values in a PostgreSQL connection string:
 + For host or host name, specify `mycluster.cluster-123456789012.us-east-1.rds.amazonaws.com`
 + For port, specify `5432` or the port value you used when you created the DB cluster
@@ -105,10 +109,10 @@ Because you can create an Amazon Aurora PostgreSQL DB cluster only in an Amazon 
 
 ## Troubleshooting Aurora Connection Failures<a name="Aurora.Connecting.Troubleshooting"></a>
 
-**Note**  
-For a helpful and detailed guide on connecting to an Amazon Aurora MySQL DB cluster, you can see the [Aurora Connection Management](https://d1.awsstatic.com/whitepapers/RDS/amazon-aurora-connection-management-handbook.pdf) handbook\.
-
 Common causes of connection failures to a new Aurora DB cluster are as follows:
 + The DB cluster was created using a VPC that does not allow connections from your device\. To fix this failure, modify the VPC to allow connections from your device, or create a new VPC for your DB cluster that allows connections from your device\. For an example, see [Create a VPC and Subnets](Aurora.CreateVPC.md#CHAP_Aurora.CreateVPC)\.
 + The DB cluster was created using the default port, and your company has firewall rules blocking connections to that port from devices in your company network\. To fix this failure, recreate the instance with a different port\.
 + If you are using IAM database authentication, you might need to configure IAM database authentication\. For information, see [IAM Database Authentication](UsingWithRDS.IAMDBAuth.md)\.
+
+**Note**  
+For a helpful and detailed guide on connecting to an Amazon Aurora MySQL DB cluster, you can see the [Aurora Connection Management](https://d1.awsstatic.com/whitepapers/RDS/amazon-aurora-connection-management-handbook.pdf) handbook\.

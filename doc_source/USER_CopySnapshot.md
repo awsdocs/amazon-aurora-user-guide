@@ -81,18 +81,13 @@ To cancel a copy operation once it is in progress, delete the target DB cluster 
 1. Select the check box for the DB cluster snapshot you want to copy\.
 
 1. For **Actions**, choose **Copy Snapshot**\. The **Make Copy of DB Snapshot** page appears\.   
-![\[Copy a DB cluster snapshot\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/DBSnapshotCopy1.png)
+![\[Copy a DB cluster snapshot\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/DBClusterSnapshotCopy.png)
 
 1. \(Optional\) To copy the DB cluster snapshot to a different AWS Region, choose that AWS Region for **Destination Region**\.
 
 1. Type the name of the DB cluster snapshot copy in **New DB Snapshot Identifier**\. 
 
 1. To copy tags and values from the snapshot to the copy of the snapshot, choose **Copy Tags**\.
-
-1. For **Enable Encryption**, choose one of the following options: 
-   + Choose **Disable encryption** if the DB cluster snapshot isn't encrypted and you don't want to encrypt the copy\. 
-   + Choose **Enable encryption** if the DB cluster snapshot isn't encrypted but you want to encrypt the copy\. In this case, for **Master Key**, specify the KMS key identifier to use to encrypt the DB cluster snapshot copy\. 
-   + Choose **Enable encryption** if the DB cluster snapshot is encrypted\. In this case, you must encrypt the copy, so **Yes** is already selected\. For **Master Key**, specify the KMS key identifier to use to encrypt the DB cluster snapshot copy\. 
 
 1. Choose **Copy Snapshot**\. 
 
