@@ -1,14 +1,19 @@
 # Testing Amazon Aurora PostgreSQL Using Fault Injection Queries<a name="AuroraPostgreSQL.Managing.FaultInjectionQueries"></a>
 
-You can test the fault tolerance of your Aurora PostgreSQL DB cluster by using fault injection queries\. Fault injection queries are issued as SQL commands to an Amazon Aurora instance and they enable you to schedule a simulated occurrence of one of the following events:
-+ A crash of a writer or reader DB instance
-+ A failure of an Aurora Replica
-+ A disk failure
-+ Disk congestion
+You can test the fault tolerance of your Aurora PostgreSQL DB cluster by using fault injection queries\. Fault injection queries are issued as SQL commands to an Amazon Aurora instance\. Fault injection queries enable you to schedule simulated tests of the following events:
+
+**Topics**
++ [Testing an Instance Crash](#AuroraPostgreSQL.Managing.FaultInjectionQueries.Crash)
++ [Testing an Aurora Replica Failure](#AuroraPostgreSQL.Managing.FaultInjectionQueries.ReplicaFailure)
++ [Testing a Disk Failure](#AuroraPostgreSQL.Managing.FaultInjectionQueries.DiskFailure)
++ [Testing Disk Congestion](#AuroraPostgreSQL.Managing.FaultInjectionQueries.DiskCongestion)
 
 When a fault injection query specifies a crash, it forces a crash of the Aurora PostgreSQL DB instance\. The other fault injection queries result in simulations of failure events, but don't cause the event to occur\. When you submit a fault injection query, you also specify an amount of time for the failure event simulation to occur\.
 
 You can submit a fault injection query to one of your Aurora Replica instances by connecting to the endpoint for the Aurora Replica\. For more information, see [Amazon Aurora Connection Management](Aurora.Overview.Endpoints.md)\.
+
+**Note**  
+Fault injection queries for Aurora PostgreSQL are currently supported only for version 2\.4, which is compatible with PostgreSQL version 10\.11\.
 
 ## Testing an Instance Crash<a name="AuroraPostgreSQL.Managing.FaultInjectionQueries.Crash"></a>
 

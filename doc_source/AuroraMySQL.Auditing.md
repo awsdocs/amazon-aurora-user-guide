@@ -35,13 +35,13 @@ You can log any combination of the following events:
 
 ### server\_audit\_excl\_users<a name="AuroraMySQL.Auditing.Enable.server_audit_excl_users"></a>
 
-Contains the comma\-delimited list of user names for users whose activity isn't logged\. There should be no white space between the list elements, for example: `rdsadmin,user_1,user_2`\. This parameter defaults to an empty string\. Specified user names must match corresponding values in the `User` column of the `mysql.user` table\. For more information about user names, see [the MySQL documentation](https://dev.mysql.com/doc/refman/5.6/en/user-names.html)\.
+Contains the comma\-delimited list of user names for users whose activity isn't logged\. There should be no white space between the list elements, for example: `rdsadmin,user_1,user_2`\. This parameter defaults to an empty string\. The maximum length is 1024 characters\. Specified user names must match corresponding values in the `User` column of the `mysql.user` table\. For more information about user names, see [the MySQL documentation](https://dev.mysql.com/doc/refman/5.6/en/user-names.html)\.
 
 Connect and disconnect events aren't affected by this variable; they are always logged if specified\. A user is logged if that user is also specified in the `server_audit_incl_users` parameter, because that setting has higher priority than `server_audit_excl_users`\.
 
 ### server\_audit\_incl\_users<a name="AuroraMySQL.Auditing.Enable.server_audit_incl_users"></a>
 
-Contains the comma\-delimited list of user names for users whose activity is logged\. There should be no white space between the list elements, for example: `user_3,user_4`\. This parameter defaults to an empty string\. Specified user names must match corresponding values in the `User` column of the `mysql.user` table\. For more information about user names, see [the MySQL documentation](https://dev.mysql.com/doc/refman/5.6/en/user-names.html)\.
+Contains the comma\-delimited list of user names for users whose activity is logged\. There should be no white space between the list elements, for example: `user_3,user_4`\. This parameter defaults to an empty string\. The maximum length is 1024 characters\. Specified user names must match corresponding values in the `User` column of the `mysql.user` table\. For more information about user names, see [the MySQL documentation](https://dev.mysql.com/doc/refman/5.6/en/user-names.html)\.
 
 Connect and disconnect events aren't affected by this variable; they are always logged if specified\. A user is logged even if that user is also specified in the `server_audit_excl_users` parameter, because `server_audit_incl_users` has higher priority\.  
 

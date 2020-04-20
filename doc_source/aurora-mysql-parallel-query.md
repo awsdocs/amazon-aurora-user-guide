@@ -80,7 +80,7 @@
 +  Currently, parallel query isn't used for any query block that includes a `LIMIT` clause\. Parallel query might still be used for earlier query phases with `GROUP` by, `ORDER BY`, or joins\. 
 +  Currently, correlated subqueries can't use the parallel query optimization\. 
 +  Parallel query works with `SELECT` statements that do no writes or locking, and only under the `REPEATABLE READ` isolation level\. For example, parallel query doesn't work with `SELECT FOR UPDATE` or with the `WHERE` clauses of `UPDATE` or `DELETE` statements\. 
-+  Parallel query is only available for tables for which no fast online data definition language \(DDL\) operations are pending\. 
++  Parallel query is only available for tables for which no fast data definition language \(DDL\) operations are pending\. 
 +  The parallel query feature works with most, but not all, operators and functions in the `WHERE` clause\. For examples that illustrate compatible operations, see [How Parallel Query Works with SQL Constructs](#aurora-mysql-parallel-query-sql)\. 
 +  Each Aurora DB instance can run only a certain number of parallel query sessions at one time\. If a query has multiple parts that use parallel query, such as subqueries, joins, or `UNION` operators, those phases run in sequence\. The statement only counts as a single parallel query session at any one time\. You can monitor the number of active sessions using the [parallel query status variables](#aurora-mysql-parallel-query-monitoring)\. You can check the limit on concurrent sessions for a given DB instance by querying the status variable `Aurora_pq_max_concurrent_requests`\. 
 + Currently, parallel query doesn't support AWS Identity and Access Management \(IAM\) database authentication\.

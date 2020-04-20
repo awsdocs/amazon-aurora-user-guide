@@ -72,6 +72,7 @@ The following limitations apply to Aurora Serverless:
 + A DB subnet group used by Aurora Serverless can’t have more than one subnet in the same Availability Zone\.
 + Changes to a subnet group used by an Aurora Serverless DB cluster are not applied to the cluster\.
 + A connection to an Aurora Serverless DB cluster is closed automatically if it stays open for longer than one day\.
++ Binlog\-based replication isn't supported for Aurora Serverless DB clusters\. 
 + Aurora Serverless doesn't support the following features:
   + [Loading data from an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)
   + [Saving data to an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)

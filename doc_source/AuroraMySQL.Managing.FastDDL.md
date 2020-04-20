@@ -2,7 +2,7 @@
 
 In MySQL, many data definition language \(DDL\) operations have a significant performance impact\. Performance impacts occur even with recent online DDL improvements\.
 
-For example, suppose that you use an ALTER TABLE operation to add a column to a table\. Depending on the algorithm specified for the operation, this operation can involve the following:
+For example, suppose that you use an `ALTER TABLE` operation to add a column to a table\. Depending on the algorithm specified for the operation, this operation can involve the following:
 + Creating a full copy of the table
 + Creating a temporary table to process concurrent data manipulation language \(DML\) operations
 + Rebuilding all indexes for the table

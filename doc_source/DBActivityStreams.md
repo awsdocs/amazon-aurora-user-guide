@@ -7,11 +7,12 @@ Beyond external security threats, managed databases need to provide protection a
 A stream of database activity is pushed from Aurora PostgreSQL to an Amazon Kinesis data stream that is created on behalf of your database\. From Kinesis, the activity stream can then be consumed by Amazon CloudWatch or by applications for compliance management\. These compliance applications include Imperva's SecureSphere Database Audit and Protection, McAfee's Data Center Security Suite, or IBM's Infosphere Guardium\. These applications can use the activity stream information to generate alerts and provide auditing of all activity on your Amazon Aurora databases\.
 
 Database Activity Streams have the following limits and requirements:
-+ Currently, these streams are supported only with Aurora with PostgreSQL compatibility version 2\.3 and higher\.
-+ Database Activity Streams support the DB instance classes listed for Aurora PostgreSQL in [Hardware Specifications for All Available DB Instance Classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SummaryAurora), except they don't support the t3\.medium instance class\.
++ Currently, these streams are supported only with Aurora with PostgreSQL compatibility version 2\.3 and higher\. Version 2\.3 is compatible with PostgreSQL version 10\.7\.
++ Database Activity Streams only support db\.r4 and db\.r5 instance classes\. The t3\.medium instance classes aren't supported\. For more information, see Aurora PostgreSQL in [Hardware Specifications for All Available DB Instance Classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SummaryAurora)\.
 + They're not supported in the following AWS Regions:
   + China \(Beijing\) Region, `cn-north-1`
   + China \(Ningxia\) Region, `cn-northwest-1`
+  + Asia Pacific \(Hong Kong\) Region, `ap-east-1`
   + AWS GovCloud \(US\-East\), `us-gov-east-1` 
   + AWS GovCloud \(US\-West\), `us-gov-west-1` 
 + They require use of AWS Key Management Service \(AWS KMS\) because the activity streams are always encrypted\.

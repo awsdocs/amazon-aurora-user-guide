@@ -32,6 +32,55 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.6\. For more
 
 This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 11 engines to this release\.
 
+**Topics**
++ [Version 3\.1\.2](#AuroraPostgreSQL.Updates.20180305.312)
++ [Version 3\.1\.1](#AuroraPostgreSQL.Updates.20180305.311)
++ [Version 3\.1\.0](#AuroraPostgreSQL.Updates.20180305.310)
+
+### Version 3\.1\.2<a name="AuroraPostgreSQL.Updates.20180305.312"></a>
+
+This release contains a critical stability enhancement\. Amazon highly recommends updating your older Aurora PostgreSQL 11\-compatible clusters to this release\.
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug whereby a reader DB instance might temporarily use stale data\. This could lead to wrong results such as too few or too many rows\. This error is not persisted on storage, and will clear when the database page containing the row has been evicted from cache\. This can happen when the primary DB instance enters a transaction snapshot overflow due to having more than 64 subtransactions in a single transaction\. Applications susceptible to this bug include those that use SQL savepoints or PostgreSQL exception handlers with more than 64 subtransactions in the top transaction\. 
+
+**High Priority Stability Enhancements**
+
+1. Fixed a bug that may cause a reader DB instance to crash causing unavailability while attempting to the join the DB cluster\. This can happen in some cases when the primary DB instance has a transaction snapshot overflow due to a high number of subtransactions\. In this situation the reader DB instance will be unable to join until the snapshot overflow has cleared\.
+
+**Additional Improvements and Enhancements**
+
+1. Fixed a bug that prevented Performance Insights from determining the query ID of a running statement\.
+
+### Version 3\.1\.1<a name="AuroraPostgreSQL.Updates.20180305.311"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug whereby the DB instance might be briefly unavailable due to the self\-healing function of the underlying storage\. 
+
+**High Priority Stability Enhancements**
+
+1. Fixed a bug whereby the database engine might crash causing unavailability\. This occurred while scanning an included, non\-key column of a B\-Tree index\. This only applies to PostgreSQL 11 "included column" indexes\.
+
+1. Fixed a bug that might cause the database engine to crash causing unavailability\. This occurred if a newly established database connection encountered a resource exhaustion\-related error during initialization after successful authentication\.
+
+**Additional Improvements and Enhancements**
+
+1. Provided a fix for the `pg_hint_plan` extension that could lead the database engine to crash causing unavailability\. The open source issue can be tracked at [https://github.com/ossc-db/pg_hint_plan/pull/45](https://github.com/ossc-db/pg_hint_plan/pull/45)\.
+
+1. Fixed a bug where SQL of the form `ALTER FUNCTION ... OWNER TO ...` would incorrectly report `ERROR: improper qualified name (too many dotted names)`\.
+
+1. Improved the performance of `GIN` index vacuum via prefetching\.
+
+1. Fixed a bug in open source PostgreSQL that could lead to a database engine crash causing unavailability\. This occurred during parallel B\-Tree index scans\. This issue has been reported to the PostgreSQL community\. 
+
+1. Improved the performance of in\-memory B\-Tree index scans\.
+
+### Version 3\.1\.0<a name="AuroraPostgreSQL.Updates.20180305.310"></a>
+
 You can find the following new features and improvements in this engine version\.
 
 **New Features**
@@ -169,6 +218,55 @@ You can find the following improvements in this engine update\.
 This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.11\. For more information about the improvements in release 10\.11, see [PostgreSQL Release 10\.11](https://www.postgresql.org/docs/10/release-10-11.html)\.
 
 This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 10 engines to this release\.
+
+**Topics**
++ [Version 2\.4\.2](#AuroraPostgreSQL.Updates.20180305.242)
++ [Version 2\.4\.1](#AuroraPostgreSQL.Updates.20180305.241)
++ [Version 2\.4\.0](#AuroraPostgreSQL.Updates.20180305.240)
+
+### Version 2\.4\.2<a name="AuroraPostgreSQL.Updates.20180305.242"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug whereby a reader DB instance might temporarily use stale data\. This could lead to wrong results such as too few or too many rows\. This error is not persisted on storage, and will clear when the database page containing the row has been evicted from cache\. This can happen when the primary DB instance enters a transaction snapshot overflow due to having more than 64 subtransactions in a single transaction\. Applications susceptible to this bug include those that use SQL savepoints or PostgreSQL exception handlers with more than 64 subtransactions in the top transaction\. 
+
+**High Priority Stability Enhancements**
+
+1. Fixed a bug that may cause a reader DB instance to crash causing unavailability while attempting to the join the DB cluster\. This can happen in some cases when the primary DB instance has a transaction snapshot overflow due to a high number of subtransactions\. In this situation the reader DB instance will be unable to join until the snapshot overflow has cleared\.
+
+**Additional Improvements and Enhancements**
+
+1. Fixed a bug that prevented Performance Insights from determining the query ID of a running statement\.
+
+### Version 2\.4\.1<a name="AuroraPostgreSQL.Updates.20180305.241"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug whereby the DB instance might be briefly unavailable due to the self\-healing function of the underlying storage\. 
+
+**High Priority Stability Enhancements**
+
+1. Fixed a bug that might cause the database engine to crash causing unavailability\. This occurred if a newly established database connection encountered a resource exhaustion\-related error during initialization after successful authentication\.
+
+**Additional Improvements and Enhancements**
+
+1. Provided a fix for the `pg_hint_plan` extension that could lead the database engine to crash causing unavailability\. The open source issue can be tracked at [https://github.com/ossc-db/pg_hint_plan/pull/45](https://github.com/ossc-db/pg_hint_plan/pull/45)\.
+
+1. Fixed a bug where SQL of the form `ALTER FUNCTION ... OWNER TO ...` would incorrectly report `ERROR: improper qualified name (too many dotted names)`\.
+
+1. Improved the performance of `GIN` index vacuum via prefetching\.
+
+1. Fixed a bug in open source PostgreSQL that could lead to a database engine crash causing unavailability\. This occurred during parallel B\-Tree index scans\. This issue has been reported to the PostgreSQL community\. 
+
+1. Improved the performance of in\-memory B\-Tree index scans\.
+
+1. Additional general improvements to the stability and availability of Aurora PostgreSQL\.
+
+### Version 2\.4\.0<a name="AuroraPostgreSQL.Updates.20180305.240"></a>
 
 You can find the following new features and improvements in this engine version\.
 
@@ -528,6 +626,45 @@ You can find the following improvements in this engine update\.
 This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.16\. For more information about the improvements in release 9\.6\.16, see [PostgreSQL Release 9\.6\.16](https://www.postgresql.org/docs/9.6/release-9-6-16.html)\.
 
 This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 9\.6 engines to this release\.
+
+**Topics**
++ [Version 1\.6\.2](#AuroraPostgreSQL.Updates.20180305.162)
++ [Version 1\.6\.1](#AuroraPostgreSQL.Updates.20180305.161)
++ [Version 1\.6\.0](#AuroraPostgreSQL.Updates.20180305.160)
+
+### Version 1\.6\.2<a name="AuroraPostgreSQL.Updates.20180305.162"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug whereby a reader DB instance might temporarily use stale data\. This could lead to wrong results such as too few or too many rows\. This error is not persisted on storage, and will clear when the database page containing the row has been evicted from cache\. This can happen when the primary DB instance enters a transaction snapshot overflow due to having more than 64 subtransactions in a single transaction\. Applications susceptible to this bug include those that use SQL savepoints or PostgreSQL exception handlers with more than 64 subtransactions in the top transaction\. 
+
+**High Priority Stability Enhancements**
+
+1. Fixed a bug that may cause a reader DB instance to crash causing unavailability while attempting to the join the DB cluster\. This can happen in some cases when the primary DB instance has a transaction snapshot overflow due to a high number of subtransactions\. In this situation the reader DB instance will be unable to join until the snapshot overflow has cleared\.
+
+**Additional Improvements and Enhancements**
+
+1. Fixed a bug that prevented Performance Insights from determining the query ID of a running statement\.
+
+### Version 1\.6\.1<a name="AuroraPostgreSQL.Updates.20180305.161"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**
+
+1. None
+
+**High Priority Stability Enhancements**
+
+1. Fixed a bug that might cause the database engine to crash causing unavailability\. This occurred if a newly established database connection encountered a resource exhaustion\-related error during initialization after successful authentication\.
+
+**Additional Improvements and Enhancements**
+
+1. Provided general improvements to the stability and availability of Aurora PostgreSQL\.
+
+### Version 1\.6\.0<a name="AuroraPostgreSQL.Updates.20180305.160"></a>
 
 You can find the following new features and improvements in this engine version\.
 
