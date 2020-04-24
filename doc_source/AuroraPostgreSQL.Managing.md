@@ -41,7 +41,9 @@ The following table lists the resulting default value of `max_connections` for e
 | db\.r5\.xlarge | 3300 | 
 | db\.r5\.2xlarge | 5000 | 
 | db\.r5\.4xlarge | 5000 | 
+| db\.r5\.8xlarge | 5000 | 
 | db\.r5\.12xlarge | 5000 | 
+| db\.r5\.16xlarge | 5000 | 
 | db\.r5\.24xlarge | 5000 | 
 | db\.t3\.medium | 420 | 
 
