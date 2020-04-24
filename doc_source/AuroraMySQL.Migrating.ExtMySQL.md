@@ -47,10 +47,10 @@ For MySQL 5\.7 migration, you must use Percona XtraBackup 2\.4\. For earlier MyS
 #### Required Permissions<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs.Permitting"></a>
 
 To migrate your MySQL data to an Amazon Aurora MySQL DB cluster, several permissions are required:
-+ The user that is requesting that Amazon RDS create a new cluster from an Amazon S3 bucket must have permission to list the buckets for your AWS account\. You grant the user this permission using an AWS Identity and Access Management \(IAM\) policy\.
-+ Amazon RDS requires permission to act on your behalf to access the Amazon S3 bucket where you store the files used to create your Amazon Aurora MySQL DB cluster\. You grant Amazon RDS the required permissions using an IAM service role\. 
++ The user that is requesting that Aurora create a new cluster from an Amazon S3 bucket must have permission to list the buckets for your AWS account\. You grant the user this permission using an AWS Identity and Access Management \(IAM\) policy\.
++ Aurora requires permission to act on your behalf to access the Amazon S3 bucket where you store the files used to create your Amazon Aurora MySQL DB cluster\. You grant Aurora the required permissions using an IAM service role\. 
 + The user making the request must also have permission to list the IAM roles for your AWS account\.
-+ If the user making the request is to create the IAM service role or request that Amazon RDS create the IAM service role \(by using the console\), then the user must have permission to create an IAM role for your AWS account\.
++ If the user making the request is to create the IAM service role or request that Aurora create the IAM service role \(by using the console\), then the user must have permission to create an IAM role for your AWS account\.
 + If you plan to encrypt the data during the migration process, update the IAM policy of the user who will perform the migration to grant RDS access to the KMS keys used for encrypting the backups\. For instructions, see [Creating an IAM Policy to Access AWS KMS Resources](AuroraMySQL.Integrating.Authorizing.IAM.KMSCreatePolicy.md)\.
 
 For example, the following IAM policy grants a user the minimum required permissions to use the console to list IAM roles, create an IAM role, list the Amazon S3 buckets for your account, and list the KMS keys\.
@@ -97,11 +97,11 @@ For more information on IAM user permissions, see [Managing Access Using Policie
 
 #### Creating the IAM Service Role<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs.CreateRole"></a>
 
-You can have the AWS Management Console create a role for you by choosing the **Create a New Role** option \(shown later in this topic\)\. If you select this option and specify a name for the new role, then Amazon RDS creates the IAM service role required for Amazon RDS to access your Amazon S3 bucket with the name that you supply\.
+You can have the AWS Management Console create a role for you by choosing the **Create a New Role** option \(shown later in this topic\)\. If you select this option and specify a name for the new role, then Aurora creates the IAM service role required for Aurora to access your Amazon S3 bucket with the name that you supply\.
 
 As an alternative, you can manually create the role using the following procedure\.
 
-**To create an IAM role for Amazon RDS to access Amazon S3**
+**To create an IAM role for Aurora to access Amazon S3**
 
 1. Complete the steps in [Creating an IAM Policy to Access Amazon S3 Resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md)\.
 
@@ -174,7 +174,7 @@ For information about using server\-side encryption when uploading files to an A
 
 Amazon S3 limits the size of a file uploaded to an Amazon S3 bucket to 5 terabytes \(TB\)\. If the backup data for your database exceeds 5 TB, use the `split` command to split the backup files into multiple files that are each less than 5 TB\.
 
-Amazon RDS limits the number of source files uploaded to an Amazon S3 bucket to 1 million files\. In some cases, backup data for your database, including all full and incremental backups, can come to a large number of files\. In these cases, use a tarball \(\.tar\.gz\) file to store full and incremental backup files in the Amazon S3 bucket\.
+Aurora limits the number of source files uploaded to an Amazon S3 bucket to 1 million files\. In some cases, backup data for your database, including all full and incremental backups, can come to a large number of files\. In these cases, use a tarball \(\.tar\.gz\) file to store full and incremental backup files in the Amazon S3 bucket\.
 
 Aurora consumes your backup files based on the file name\. Be sure to name your backup files with the appropriate file extension based on the file format—for example, `.xbstream` for files stored using the Percona xbstream format\.
 
@@ -379,7 +379,7 @@ You can synchronize your Amazon Aurora MySQL DB cluster with the MySQL database 
 **Note**  
 If `REQUIRE SSL` is not included, the replication connection might silently fall back to an unencrypted connection\.
 
-1. In the Amazon RDS Management Console, add the IP address of the server that hosts the external MySQL database to the VPC security group for the Aurora MySQL DB cluster\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+1. In the Amazon RDS console, add the IP address of the server that hosts the external MySQL database to the VPC security group for the Aurora MySQL DB cluster\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
    You might also need to configure your local network to permit connections from the IP address of your Aurora MySQL DB cluster, so that it can communicate with your external MySQL database\. To find the IP address of the Aurora MySQL DB cluster, use the `host` command\.
 

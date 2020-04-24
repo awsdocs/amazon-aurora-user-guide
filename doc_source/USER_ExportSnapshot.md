@@ -18,17 +18,26 @@ You can copy a snapshot from an AWS Region where S3 export isn't supported to on
 
 The following lists show the engine versions that are supported for exporting snapshot data to Amazon S3\.
 
-**Aurora MySQL**
-+ Versions 1\.19\.2, 1\.19\.3, 1\.19\.4, and 1\.19\.5 compatible with MySQL 5\.6
-+ Versions 2\.04\.4, 2\.04\.5, and 2\.04\.6 compatible with MySQL 5\.7
+
+| Aurora MySQL Version | MySQL Campatible Version | 
+| --- | --- | 
+| 2\.04\.6  | 5\.7 | 
+| 2\.04\.5 | 5\.7 | 
+| 2\.04\.4 | 5\.7 | 
+| 1\.19\.5 | 5\.6 | 
+| 1\.19\.4 | 5\.6 | 
+| 1\.19\.3 | 5\.6 | 
+| 1\.19\.2 | 5\.6 | 
 
 For more information about Aurora MySQL engine versions, see [Database Engine Updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\. 
 
-**Aurora PostgreSQL**
-+ Version 1\.4 compatible with PostgreSQL 9\.6\.11
-+ Version 1\.5 compatible with PostgreSQL 9\.6\.12
-+ Version 2\.2 compatible with PostgreSQL 10\.6
-+ Version 2\.3 compatible with PostgreSQL 10\.7
+
+| Aurora PostgreSQL Version | PostgreSQL Campatible Version | 
+| --- | --- | 
+| 2\.3 | 10\.7 | 
+| 2\.2 | 10\.6 | 
+| 1\.5 | 9\.6\.12 | 
+| 1\.4 | 9\.6\.11 | 
 
 For more information about Aurora PostgreSQL engine versions, see [Engine Versions for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.20180305.md)\. 
 

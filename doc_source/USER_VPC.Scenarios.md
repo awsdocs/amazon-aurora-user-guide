@@ -16,7 +16,7 @@ The following diagram shows this scenario\.
 
 The simplest way to manage access between EC2 instances and DB instances in the same VPC is to do the following:
 + Create a VPC security group for your DB instances to be in\. This security group can be used to restrict access to the DB instances\. For example, you can create a custom rule for this security group that allows TCP access using the port you assigned to the DB instance when you created it and an IP address you use to access the DB instance for development or other purposes\.
-+ Create a VPC security group for your EC2 instances \(web servers and clients\) to be in\. This security group can, if needed, allow access to the EC2 instance from the Internet via the VPC's routing table\. For example, you can set rules on this security group to allow TCP access to the EC2 instance over port 22\.
++ Create a VPC security group for your EC2 instances \(web servers and clients\) to be in\. This security group can, if needed, allow access to the EC2 instance from the internet by using the VPC's routing table\. For example, you can set rules on this security group to allow TCP access to the EC2 instance over port 22\.
 + Create custom rules in the security group for your DB instances that allow connections from the security group you created for your EC2 instances\. This would allow any member of the security group to access the DB instances\.
 
 For a tutorial that shows you how to create a VPC with both public and private subnets for this scenario, see [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. 
@@ -82,17 +82,17 @@ Using ClassicLink, you can connect an EC2 instance to a logically isolated datab
 
 ## A DB Instance in a VPC Accessed by a Client Application Through the Internet<a name="USER_VPC.Scenario4"></a>
 
-To access a DB instance in a VPC from a client application through the internet, you configure a VPC with a single public subnet, and an Internet gateway to enable communication over the Internet\. 
+To access a DB instance in a VPC from a client application through the internet, you configure a VPC with a single public subnet, and an internet gateway to enable communication over the internet\. 
 
 The following diagram shows this scenario\. 
 
-![\[A DB Instance in a VPC Accessed by a Client Application Through the Internet\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/GS-VPC network.png)
+![\[A DB Instance in a VPC Accessed by a Client Application Through the internet\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/GS-VPC network.png)
 
 We recommend the following configuration:
 + A VPC of size /16 \(for example CIDR: 10\.0\.0\.0/16\)\. This size provides 65,536 private IP addresses\.
 + A subnet of size /24 \(for example CIDR: 10\.0\.0\.0/24\)\. This size provides 256 private IP addresses\.
 + An Amazon Aurora DB instance that is associated with the VPC and the subnet\. Amazon RDS assigns an IP address within the subnet to your DB instance\.
-+ An Internet gateway which connects the VPC to the Internet and to other AWS products\.
++ An internet gateway which connects the VPC to the internet and to other AWS products\.
 + A security group associated with the DB instance\. The security group's inbound rules allow your client application to access to your DB instance\.
 
 For information about creating a DB instance in a VPC, see [Creating a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.InstanceInVPC)\.

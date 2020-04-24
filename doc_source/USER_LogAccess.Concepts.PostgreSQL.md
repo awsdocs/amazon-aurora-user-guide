@@ -31,9 +31,11 @@ To retain older logs, publish them to Amazon CloudWatch Logs\. For more informat
 
 ## Setting Log File Rotation<a name="USER_LogAccess.PostgreSQL.log_rotation"></a>
 
-To control PostgreSQL log file rotation, set two parameters in the DB parameter group associated with your DB instance: `log_rotation_age` and `log_rotation_size`\. These two settings control when a new, distinct log file is created\. The log file names are based on the file name pattern of the `log_filename` parameter\. 
+To control PostgreSQL log file rotation, set two parameters in the DB parameter group associated with your DB instance: [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE) and [ `log_rotation_size`](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE) \. These two settings control when a new, distinct log file is created\. 
 
-To control log file rotation based on time, set the `log_rotation_age` parameter to anywhere from 1 minute to 1,440 minutes \(24 hours\)\. The `log_rotation_age` default is 60 minutes\. If you set the `log_rotation_age` parameter to less than 60 minutes, also set the `log_filename` parameter to the minute format: `postgresql.log.%Y-%m-%d-%H%M`\.
+The log file names are based on the file name pattern of the [ `log_filename`](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-FILENAME) parameter\. For example, to provide log files names with a granularity of less than an hour, set `log_filename` to the minute format: `postgresql.log.%Y-%m-%d-%H%M`\. Granularity of less than an hour is only supported for PostgreSQL version 10 and higher\. To use a granularity in hours for log file names, set `log_filename` to the hour format: `postgresql.log.%Y-%m-%d-%H`\. 
+
+To control log file rotation based on time, set the `log_rotation_age` parameter to anywhere from 1 minute to 1,440 minutes \(24 hours\)\. The `log_rotation_age` default is 60 minutes\. If you set the `log_rotation_age` parameter to less than 60 minutes, also set the `log_filename` parameter to the minute format\.
 
 To control log file rotation based on file size, set the `log_rotation_size` parameter to anywhere from 50,000 to 1,000,000 KB\. The default is 100,000 KB\. We recommend that you also set the `log_filename` parameter to the minute format\. Doing this makes sure that you can create a new log file in less than an hour if the `log_rotation_age` parameter is 60 minutes or greater\. 
 

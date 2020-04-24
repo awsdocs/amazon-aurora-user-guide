@@ -43,7 +43,23 @@ In the following table, you can find details about the Amazon RDS DB instance cl
 The following are DB engine considerations for DB instance classes:
 + **Aurora Support for db\.r5** – These instance classes are available in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
   + Aurora MySQL versions support the db\.r5 instance classes as specified in the following table\.
-  + For Aurora PostgreSQL, only versions compatible with PostgreSQL 9\.6\.12 and later or PostgreSQL 10\.6 and later support the db\.r5 instance classes\. 
+  + For Aurora PostgreSQL, the versions that support db\.r5 instance classes depend on the AWS Region that your DB cluster is in\. To determine which Aurora PostgreSQL versions support db\.r5 instance classes for a specific AWS Region, use the CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html)\. Enter the AWS Region of your cluster for the `--region` parameter in the following command\.
+
+    For Linux, macOS, or Unix:
+
+    ```
+    aws rds describe-orderable-db-instance-options --engine aurora-postgresql --db-instance-class db.r5.large \
+        --query 'OrderableDBInstanceOptions[].[DBInstanceClass,StorageType,Engine,EngineVersion]' \
+        --region your-cluster-AWS-Region --output text
+    ```
+
+    For Windows:
+
+    ```
+    aws rds describe-orderable-db-instance-options --engine aurora-postgresql --db-instance-class db.r5.large ^
+        --query 'OrderableDBInstanceOptions[].[DBInstanceClass,StorageType,Engine,EngineVersion]' ^
+        --region your-cluster-AWS-Region --output text
+    ```
 + **Aurora Support for db\.t3** 
   + Aurora MySQL supports the db\.t3\.medium and db\.t3\.small instance classes for Aurora MySQL 1\.15 and higher, and all Aurora MySQL 2\.x versions\. These instance classes are available for Aurora MySQL in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
   + For Aurora MySQL db\.r5, db\.r4, and db\.t3 DB instance classes, no instances in the cluster can have pending instance\-level system updates\. To see pending system updates, use the following AWS CLI command\.
@@ -64,9 +80,9 @@ The following are DB engine considerations for DB instance classes:
 | db\.r5\.12xlarge | 48 | 173 | 384 | 9,500 | 10 Gbps | 1\.14\.4 and later | Yes | 
 | db\.r5\.8xlarge | 32 | 132 | 256 | 6,800 | 10 Gbps | 1\.22 and later, 2\.06 and later | Yes | 
 | db\.r5\.4xlarge | 16 | 71 | 128 | 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r5\.2xlarge\* | 8 | 38 | 64 | Up to 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r5\.xlarge\* | 4 | 19 | 32 | Up to 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r5\.large\* | 2 | 10 | 16 | Up to 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r5\.2xlarge | 8 | 38 | 64 | Up to 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r5\.xlarge | 4 | 19 | 32 | Up to 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r5\.large | 2 | 10 | 16 | Up to 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
 | db\.r4 – Current Generation Memory Optimized Instance Classes | 
 | db\.r4\.16xlarge | 64 | 195 | 488 | 14,000 | 25 Gbps | 1\.14\.4 and later | Yes | 
 | db\.r4\.8xlarge | 32 | 99 | 244 | 7,000 | 10 Gbps | 1\.14\.4 and later | Yes | 
@@ -81,14 +97,12 @@ The following are DB engine considerations for DB instance classes:
 | db\.r3\.xlarge | 4 | 13 | 30\.5 | 500 | Moderate | Yes | No | 
 | db\.r3\.large | 2 | 6\.5 | 15\.25 | — | Moderate | Yes | No | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
-| db\.t3\.2xlarge\* | 8 | Variable | 32 | Up to 2,048 | Up to 5 Gbps | No | No | 
-| db\.t3\.xlarge\* | 4 | Variable | 16 | Up to 2,048 | Up to 5 Gbps | No | No | 
-| db\.t3\.large\* | 2 | Variable | 8 | Up to 2,048 | Up to 5 Gbps | No | No | 
-| db\.t3\.medium\* | 2 | Variable | 4 | Up to 1,536 | Up to 5 Gbps | 1\.14\.4 and later | 10\.7 or later | 
-| db\.t3\.small\* | 2 | Variable | 2 | Up to 1,536 | Up to 5 Gbps | 1\.14\.4 and later | No | 
-| db\.t3\.micro\* | 2 | Variable | 1 | Up to 1,536 | Up to 5 Gbps | No | No | 
+| db\.t3\.2xlarge | 8 | Variable | 32 | Up to 2,048 | Up to 5 Gbps | No | No | 
+| db\.t3\.xlarge | 4 | Variable | 16 | Up to 2,048 | Up to 5 Gbps | No | No | 
+| db\.t3\.large | 2 | Variable | 8 | Up to 2,048 | Up to 5 Gbps | No | No | 
+| db\.t3\.medium | 2 | Variable | 4 | Up to 1,536 | Up to 5 Gbps | 1\.14\.4 and later | 10\.7 or later | 
+| db\.t3\.small | 2 | Variable | 2 | Up to 1,536 | Up to 5 Gbps | 1\.14\.4 and later | No | 
+| db\.t3\.micro | 2 | Variable | 1 | Up to 1,536 | Up to 5 Gbps | No | No | 
 | db\.t2 – Current Generation Burstable Performance Instance Classes | 
 | db\.t2\.medium | 2 | Variable | 4 | — | Moderate | Yes | No | 
 | db\.t2\.small | 1 | Variable | 2 | — | Low | Yes | No | 
-
-\* These DB instance classes can support maximum performance for 30 minutes at least once every 24 hours\. For more information on baseline performance of these instance types, see [Amazon EBS–Optimized Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*

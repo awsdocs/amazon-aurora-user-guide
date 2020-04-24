@@ -254,7 +254,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `old_passwords` | Yes |  | 
 | `optimizer_prune_level` | Yes |  | 
 | `optimizer_search_depth` | Yes |  | 
-| `optimizer_switch` | Yes |  | 
+| `optimizer_switch` | Yes | For information about Aurora MySQL features that use this switch, see [Best Practices with Amazon Aurora MySQL](AuroraMySQL.BestPractices.md)\. | 
 | `optimizer_trace` | Yes |  | 
 | `optimizer_trace_features` | Yes |  | 
 | `optimizer_trace_limit` | Yes |  | 

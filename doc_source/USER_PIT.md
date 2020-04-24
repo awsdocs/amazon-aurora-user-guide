@@ -24,6 +24,8 @@ You can restore a DB cluster to a point in time using the AWS Management Console
 1. Choose **Latest restorable time** to restore to the latest possible time, or choose **Custom** to choose a time\.
 
    If you chose **Custom**, enter the date and time that you want to restore the cluster to\.
+**Note**  
+Times are shown in your local time zone, which is indicated by an offset from Coordinated Universal Time \(UTC\)\. For example, UTC\-5 is Eastern Standard Time/Central Daylight Time\.
 
 1. For **DB instance identifier**, enter the name of the restored DB instance, and then complete the other options\.
 

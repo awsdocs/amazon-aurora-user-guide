@@ -121,7 +121,8 @@
  The following limitations currently apply to the AWS and Aurora features that you can use with multi\-master clusters: 
 +  Currently, you can have a maximum of two DB instances in a multi\-master cluster\. 
 +  Currently, all DB instances in a multi\-master cluster must be in the same AWS Region\. 
-+  You can't enable cross\-region replicas from multi\-master clusters\. 
++  You can't enable cross\-Region replicas from multi\-master clusters\. 
++ Multi\-master clusters aren't supported in the Africa \(Cape Town\) Region\.
 +  The `Stop` action isn't available for multi\-master clusters\. 
 +  The Aurora survivable page cache, also known as the survivable buffer pool, isn't supported for multi\-master clusters\. 
 +  A multi\-master cluster doesn't do any load balancing for connections\. Your application must implement its own connection management logic to distribute read and write operations among multiple DB instance endpoints\. Typically, in a bring\-your\-own\-shard \(BYOS\) application, you already have logic to map each shard to a specific connection\. To learn how to adapt the connection management logic in your application, see [Connection Management for Multi\-Master Clusters](#aurora-multi-master-connectivity)\. 

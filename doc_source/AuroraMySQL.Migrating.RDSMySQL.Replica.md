@@ -1,6 +1,6 @@
 # Migrating Data from a MySQL DB Instance to an Amazon Aurora MySQL DB Cluster by Using an Aurora Read Replica<a name="AuroraMySQL.Migrating.RDSMySQL.Replica"></a>
 
-Amazon RDS uses the MySQL DB engines' binary log replication functionality to create a special type of DB cluster called an Aurora Read Replica for a source MySQL DB instance\. Updates made to the source MySQL DB instance are asynchronously replicated to the Aurora Read Replica\. 
+Aurora uses the MySQL DB engines' binary log replication functionality to create a special type of DB cluster called an Aurora Read Replica for a source MySQL DB instance\. Updates made to the source MySQL DB instance are asynchronously replicated to the Aurora Read Replica\. 
 
 We recommend using this functionality to migrate from a MySQL DB instance to an Aurora MySQL DB cluster by creating an Aurora Read Replica of your source MySQL DB instance\. When the replica lag between the MySQL DB instance and the Aurora Read Replica is 0, you can direct your client applications to the Aurora Read Replica and then stop replication to make the Aurora Read Replica a standalone Aurora MySQL DB cluster\. Be prepared for migration to take a while, roughly several hours per tebibyte \(TiB\) of data\.
 
@@ -58,7 +58,7 @@ aws rds create-db-cluster --db-cluster-identifier sample-replica-cluster --engin
     --replication-source-identifier arn:aws:rds:us-west-2:123456789012:db:master-mysql-instance
 ```
 
-If you use the console to create an Aurora Read Replica, then Amazon RDS automatically creates the primary instance for your DB cluster Aurora Read Replica\. If you use the AWS CLI to create an Aurora Read Replica, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
+If you use the console to create an Aurora Read Replica, then Aurora automatically creates the primary instance for your DB cluster Aurora Read Replica\. If you use the AWS CLI to create an Aurora Read Replica, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
 
 You can create a primary instance for your DB cluster by using the [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command with the following parameters\.
 + `--db-cluster-identifier`
@@ -142,7 +142,7 @@ https://rds.us-east-1.amazonaws.com/
     &X-Amz-Signature=6a8f4bd6a98f649c75ea04a6b3929ecc75ac09739588391cd7250f5280e716db
 ```
 
-If you use the console to create an Aurora Read Replica, then Amazon RDS automatically creates the primary instance for your DB cluster Aurora Read Replica\. If you use the AWS CLI to create an Aurora Read Replica, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
+If you use the console to create an Aurora Read Replica, then Aurora automatically creates the primary instance for your DB cluster Aurora Read Replica\. If you use the AWS CLI to create an Aurora Read Replica, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
 
 You can create a primary instance for your DB cluster by using the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) Amazon RDS API command with the following parameters:
 + `DBClusterIdentifier`

@@ -61,7 +61,7 @@ Following, you can find a description of Amazon Aurora Global Database\. Each Au
   + Asia Pacific \(Seoul\)
   + Canada \(Central\)
 +  A secondary cluster must be in a different AWS Region than the primary cluster\. 
-+  You can't create an Aurora MySQL cross\-region read replica from the primary cluster in the same region as a secondary cluster\. See [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md) for information about cross\-region read replicas\. 
++  You can't create an Aurora MySQL cross\-Region read replica from the primary cluster in the same region as a secondary cluster\. See [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md) for information about cross\-Region read replicas\. 
 + To upgrade your global database clusters, you must upgrade the secondary clusters before the primary cluster\. For more information about upgrading, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching) or [Upgrading the PostgreSQL DB Engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\. 
 
  The following features aren't supported for Aurora Global Database: 

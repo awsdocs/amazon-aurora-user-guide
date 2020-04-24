@@ -165,9 +165,6 @@ You can find the following new features and improvements in this engine version\
 
 This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.4\. For more information about the improvements in release 11\.4, see [PostgreSQL Release 11\.4](https://www.postgresql.org/docs/11/release-11-4.html)\.
 
-**Note**  
-For the initial release, the supported AWS Regions are us\-east\-1, us\-east\-2, us\-west\-2, eu\-west\-1, ap\-northeast\-1, and ap\-northeast\-2\. For the complete list of AWS Regions, see [Aurora PostgreSQL Region Availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability.PostgreSQL)\.
-
 You can find the following improvements in this engine update\.
 
 **Improvements**

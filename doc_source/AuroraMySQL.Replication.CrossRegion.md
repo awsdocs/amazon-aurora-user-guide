@@ -336,6 +336,6 @@ You receive this error if you have updated the `binlog_format` DB cluster parame
 
 You can only have one cross\-Region DB cluster that is a read replica for each source DB cluster in any AWS Region\. To create a new cross\-Region DB cluster that is a read replica in a particular AWS Region, you must delete the existing one\.
 
-### DB cluster \[DB cluster ARN\] requires a database engine upgrade for cross\-region replication support<a name="AuroraMySQL.Replication.CrossRegion.Troubleshooting.4"></a>
+### DB cluster \[DB cluster ARN\] requires a database engine upgrade for cross\-Region replication support<a name="AuroraMySQL.Replication.CrossRegion.Troubleshooting.4"></a>
 
 To resolve this issue, upgrade the database engine version for all of the instances in the source DB cluster to the most recent database engine version, and then try creating a cross\-Region read replica DB again\. 

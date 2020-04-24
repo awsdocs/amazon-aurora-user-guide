@@ -12,7 +12,7 @@ You can only create an Amazon Aurora DB cluster in a Virtual Private Cloud \(VPC
 Amazon Aurora optionally can create a VPC and subnet group for you to use with your DB cluster\. Doing this can be helpful if you have never created a VPC, or if you would like to create a new VPC that is separate from your other VPCs\. If you want Amazon Aurora to create a VPC and subnet group for you, then skip this procedure and see [Create an Aurora MySQL DB Cluster](CHAP_GettingStartedAurora.CreatingConnecting.Aurora.md#CHAP_GettingStarted.Aurora.CreateDBCluster)\.
 
 **Note**  
-All VPC and EC2 resources that you use with your Aurora DB cluster must be in one of the regions listed in [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.
+All VPC and EC2 resources that you use with your Aurora DB cluster must be in one of the regions listed in [   Regions and Availability Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
 
 **To create a VPC for use with an Aurora DB cluster**
 
@@ -110,7 +110,7 @@ The last thing that you need before you can create an Aurora DB cluster is a DB 
    + **Description:** `Getting Started Subnet Group`
    + **VPC ID:** Choose the VPC that you created in the previous procedure, for example, `gs-cluster-vpc (vpc-b5754bcd)`\.
 
-1. Choose **Add all the subnets related to this VPC** to add the subnets for the VPC that you created in earlier steps\. You can also add each subnet individually by choosing a value for **Availability zone** and **Subnet** and then choosing **Add subnet**\.  
+1. In the **Add subnets** section, choose **Add all the subnets related to this VPC**\.  
 ![\[Create Subnet Group\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraCreateSubnetGroup01.png)
 
 1. Choose **Create** to create the subnet group\.

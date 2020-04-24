@@ -14,9 +14,9 @@ We recommend that you retain the parameter group for any DB cluster snapshots yo
 When you restore a DB cluster, the default security group is associated with the restored cluster by default\.
 
 **Note**  
+If you're using the Amazon RDS console, you can specify a custom security group to associate with the cluster or create a new VPC security group\.
 If you're using the AWS CLI, you can specify a custom security group to associate with the cluster by including the `--vpc-security-group-ids` option in the `restore-db-cluster-from-snapshot` command\.
 If you're using the Amazon RDS API, you can include the `VpcSecurityGroupIds.VpcSecurityGroupId.N` parameter in the `RestoreDBClusterFromSnapshot` action\.
-The Amazon RDS console has no option for associating a custom security group while restoring\.
 
 As soon as the restore is complete and your new DB cluster is available, you can associate any custom security groups used by the snapshot you restored from\. You must apply these changes by modifying the DB cluster with the RDS console, the AWS CLI `modify-db-cluster` command, or the `ModifyDBCluster` Amazon RDS API operation\. For more information, see [Modifying an Amazon Aurora DB Cluster](Aurora.Modifying.md)\.
 
@@ -47,14 +47,6 @@ You can restore a DB cluster from a DB cluster snapshot using the AWS Management
 1. On the **Restore DB Instance** page, for **DB Instance Identifier**, enter the name for your restored DB cluster\. 
 
 1. Choose **Restore DB Instance**\. 
-
-1. If you want to restore the functionality of the DB cluster to that of the DB cluster that the snapshot was created from, you must modify the DB cluster to use the security group\. The next steps assume that your DB cluster is in a VPC\. If your DB cluster is not in a VPC, use the EC2 Management Console to locate the security group you need for the DB cluster\. 
-
-   1. Sign in to the AWS Management Console and open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\. 
-
-   1. In the navigation pane, choose **Security Groups**\. 
-
-   1. Select the security group that you want to use for your DB clusters\. If necessary, add rules to link the security group to a security group for an EC2 instance\. For more information, see [A DB Instance in a VPC Accessed by an EC2 Instance in the Same VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario1)\. 
 
 ### AWS CLI<a name="USER_RestoreFromSnapshot.CLI"></a>
 

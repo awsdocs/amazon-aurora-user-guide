@@ -142,7 +142,7 @@ You can also choose for your new Aurora MySQL DB cluster to be encrypted at rest
 
    To start the migration from the DB instance:
 
-   1. In the navigation pane, choose **Instances**, and then select the MySQL DB instance\.
+   1. In the navigation pane, choose **Databases**, and then select the MySQL DB instance\.
 
    1. For **Actions**, choose **Migrate latest snapshot**\.
 
@@ -169,14 +169,14 @@ You can also choose for your new Aurora MySQL DB cluster to be encrypted at rest
      + It must be unique for all DB instances per AWS account, per AWS Region\.
    + **Virtual Private Cloud \(VPC\)**: If you have an existing VPC, then you can use that VPC with your Aurora MySQL DB cluster by selecting your VPC identifier, for example `vpc-a464d1c1`\. For information on using an existing VPC, see [How to Create a VPC for Use with Amazon Aurora](Aurora.CreateVPC.md)\.
 
-     Otherwise, you can choose to have Amazon RDS create a VPC for you by selecting **Create a new VPC**\. 
+     Otherwise, you can choose to have Aurora create a VPC for you by selecting **Create a new VPC**\. 
    + **Subnet group**: If you have an existing subnet group, then you can use that subnet group with your Aurora MySQL DB cluster by selecting your subnet group identifier, for example `gs-subnet-group1`\.
 
-     Otherwise, you can choose to have Amazon RDS create a subnet group for you by selecting **Create a new subnet group**\. 
+     Otherwise, you can choose to have Aurora create a subnet group for you by selecting **Create a new subnet group**\. 
    + **Public accessibility**: Select **No** to specify that instances in your DB cluster can only be accessed by resources inside of your VPC\. Select **Yes** to specify that instances in your DB cluster can be accessed by resources on the public network\. The default is **Yes**\.
 **Note**  
 Your production DB cluster might not need to be in a public subnet, because only your application servers require access to your DB cluster\. If your DB cluster doesn't need to be in a public subnet, set **Publicly Accessible** to **No**\.
-   + **Availability Zone**: Select the Availability Zone to host the primary instance for your Aurora MySQL DB cluster\. To have Amazon RDS select an Availability Zone for you, select **No Preference**\.
+   + **Availability Zone**: Select the Availability Zone to host the primary instance for your Aurora MySQL DB cluster\. To have Aurora select an Availability Zone for you, select **No Preference**\.
    + **Database Port**: Type the default port to be used when connecting to instances in the Aurora MySQL DB cluster\. The default is `3306`\.
 **Note**  
 You might be behind a corporate firewall that doesn't allow access to default ports such as the MySQL default port, 3306\. In this case, provide a port value that your corporate firewall allows\. Remember that port value later when you connect to the Aurora MySQL DB cluster\.

@@ -23,7 +23,7 @@ The maximum number of connections allowed to an Aurora PostgreSQL DB instance is
 Setting the `max_connections` parameter to this equation makes sure that the number of allowed connection scales well with the size of the instance\. For example, suppose your DB instance class is db\.r4\.large, which has 15\.25 gibibytes \(GiB\) of memory\. Then the maximum connections allowed is 1600, as shown in the following equation:
 
 ```
-LEAST( (15.25 * 1000000000) / 9531392 ), 5000) = 1600
+LEAST((15.25*1000000000)/9531392,5000) = 1600
 ```
 
 The following table lists the resulting default value of `max_connections` for each DB instance class available to Aurora PostgreSQL\. You can increase the maximum number of connections to your Aurora PostgreSQL DB instance by scaling the instance up to a DB instance class with more memory, or by setting a larger value for the `max_connections` parameter, up to 262,143\.
