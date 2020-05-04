@@ -5,6 +5,7 @@ The following sections discuss managing performance and scaling for an Amazon Au
 **Topics**
 + [Scaling Aurora PostgreSQL DB Instances](#AuroraPostgreSQL.Managing.Performance.InstanceScaling)
 + [Maximum Connections to an Aurora PostgreSQL DB Instance](#AuroraPostgreSQL.Managing.MaxConnections)
++ [Temporary Storage Limits for Aurora PostgreSQL](#AuroraPostgreSQL.Managing.TempStorage)
 + [Testing Amazon Aurora PostgreSQL Using Fault Injection Queries](AuroraPostgreSQL.Managing.FaultInjectionQueries.md)
 + [Displaying Volume Status for an Aurora DB Cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)
 
@@ -46,3 +47,30 @@ The following table lists the resulting default value of `max_connections` for e
 | db\.t3\.medium | 420 | 
 
 For the list of DB instance classes supported by Aurora PostgreSQL and amount of memory for each, see [Hardware Specifications for All Available DB Instance Classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SummaryAurora)\.
+
+## Temporary Storage Limits for Aurora PostgreSQL<a name="AuroraPostgreSQL.Managing.TempStorage"></a>
+
+Aurora PostgreSQL stores tables and indexes in the Aurora storage subsystem\. Aurora PostgreSQL uses separate temporary storage for non\-persistent temporary files\. This includes files that are used for such purposes as sorting large datasets during query processing or for index build operations\. For more about storage, see [Amazon Aurora Storage and Reliability](Aurora.Overview.StorageReliability.md)\. 
+
+The following table shows the maximum amount of temporary storage available for each Aurora PostgreSQL DB instance class\.
+
+
+| DB Instance Class | Maximum Temporary Storage Available \(GiB\) | 
+| --- | --- | 
+| db\.r5\.24xlarge | 1500  | 
+| db\.r5\.12xlarge | 748 | 
+| db\.r5\.4xlarge | 249 | 
+| db\.r5\.2xlarge | 124 | 
+| db\.r5\.xlarge | 62 | 
+| db\.r5\.large | 31 | 
+| db\.r4\.16xlarge | 960 | 
+| db\.r4\.8xlarge | 480 | 
+| db\.r4\.4xlarge | 240 | 
+| db\.r4\.2xlarge | 120 | 
+| db\.r4\.xlarge | 60 | 
+| db\.r4\.large | 30 | 
+| db\.t3\.medium | 7\.5 | 
+
+You can monitor the temporary storage available for a DB instance with the `FreeLocalStorage` CloudWatch metric, described in [Amazon Aurora Metrics](Aurora.Monitoring.md#Aurora.AuroraMySQL.Monitoring.Metrics)\. 
+
+For some workloads, you can reduce the amount of temporary storage by allocating more memory to the processes that are perfoming the operation\. To increase the memory available to an operation, increasing the values of the [work\_mem](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-WORK-MEM) or [maintenance\_work\_mem](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) PostgreSQL parameters\.

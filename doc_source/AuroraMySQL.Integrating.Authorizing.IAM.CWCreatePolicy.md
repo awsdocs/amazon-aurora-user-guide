@@ -9,28 +9,29 @@ The following policy adds the permissions required by Aurora to access Amazon Cl
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "EnableCreationAndManagementOfRDSCloudwatchLogGroups",
+            "Sid": "EnableCreationAndManagementOfRDSCloudwatchLogEvents",
             "Effect": "Allow",
             "Action": [
-                "logs:CreateLogGroup",
-                "logs:PutRetentionPolicy"
+                "logs:GetLogEvents",
+                "logs:PutLogEvents"
             ],
-            "Resource": [
-                "arn:aws:logs:*:*:log-group:/aws/rds/*"
-            ]
+            "Resource": "arn:aws:logs:*:*:log-group:log-group:/aws/rds/*:log-stream:*"
         },
         {
             "Sid": "EnableCreationAndManagementOfRDSCloudwatchLogStreams",
             "Effect": "Allow",
             "Action": [
                 "logs:CreateLogStream",
-                "logs:PutLogEvents",
                 "logs:DescribeLogStreams",
-                "logs:GetLogEvents"
+                "logs:PutRetentionPolicy"
             ],
-            "Resource": [
-                "arn:aws:logs:*:*:log-group:/aws/rds/*:log-stream:*"
-            ]
+            "Resource": "arn:aws:logs:*:*:log-group:log-group:/aws/rds/*"
+        },
+        {
+            "Sid": "EnableCreationAndManagementOfRDSCloudwatchLogGroups",
+            "Effect": "Allow",
+            "Action": "logs:CreateLogGroup",
+            "Resource": "*"
         }
     ]
 }
@@ -48,7 +49,7 @@ You can use the following steps to create an IAM policy that provides the minimu
 
 1. On the **Visual editor** tab, choose **Choose a service**, and then choose **CloudWatch Logs**\.
 
-1. For **Actions**, choose **Expand all**, and then choose the Amazon CloudWatch Logs permissions needed for the IAM policy\.
+1. For **Actions**, choose **Expand all** \(on the right\), and then choose the Amazon CloudWatch Logs permissions needed for the IAM policy\.
 
    Ensure that the following permissions are selected:
    + `CreateLogGroup`
@@ -60,16 +61,22 @@ You can use the following steps to create an IAM policy that provides the minimu
 
 1. Choose **Resources** and choose **Add ARN** for **log\-group**\.
 
-1. In the **Add ARN\(s\)** dialog box, enter `log-group:/aws/rds/*` for **Log Group Name**, and choose **Add**\.
+1. In the **Add ARN\(s\)** dialog box, enter the following values:
+   + **Region** – An AWS Region or `*`
+   + **Account** – An account number or `*`
+   + **Log Group Name** – `log-group:/aws/rds/*`
+
+1. In the **Add ARN\(s\)** dialog box, choose **Add**\.
 
 1. Choose **Add ARN** for **log\-stream**\.
 
 1. In the **Add ARN\(s\)** dialog box, enter the following values:
+   + **Region** – An AWS Region or `*`
+   + **Account** – An account number or `*`
    + **Log Group Name** – `log-group:/aws/rds/*`
-   + **Log Stream** – `log-stream`
    + **Log Stream Name** – `*`
 
-1. In the **Add ARN\(s\)** dialog box, choose **Add**
+1. In the **Add ARN\(s\)** dialog box, choose **Add**\.
 
 1. Choose **Review policy**\.
 

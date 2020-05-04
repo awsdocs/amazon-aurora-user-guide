@@ -899,12 +899,7 @@ public class BatchExecuteExample {
 }
 ```
 
-## Using the Java Client Library for Data API \(Preview\)<a name="data-api.java-client-library"></a>
-
-
-|  | 
-| --- |
-| This is prerelease documentation for a service in preview release\. It is subject to change\. | 
+## Using the Java Client Library for Data API<a name="data-api.java-client-library"></a>
 
 You can download and use a Java client library for the Data API\. The Java client library provides an alternative way to use the Data API\. Using this library, you can map your client\-side classes to requests and responses of the Data API\. This mapping support can ease integration with some specific Java types, such as `Date`, `Time`, and `BigDecimal`\.
 

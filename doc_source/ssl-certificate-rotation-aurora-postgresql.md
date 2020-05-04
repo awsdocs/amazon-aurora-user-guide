@@ -1,6 +1,6 @@
 # Updating Applications to Connect to Aurora PostgreSQL DB Clusters Using New SSL/TLS Certificates<a name="ssl-certificate-rotation-aurora-postgresql"></a>
 
-As of September 19, 2019, Amazon RDS has published new Certificate Authority \(CA\) certificates for connecting to your Aurora DB clusters using Secure Socket Layer or Transport Layer Security \(SSL/TLS\)\. The previous CA certificates expire on March 5, 2020\. Following, you can find information about updating your applications to use the new certificates\. If your application connects to an Aurora DB cluster using SSL/TLS, you must take the following steps before **March 5, 2020**\. Doing this means you can avoid interruption of connectivity between your applications and your Aurora DB clusters\.
+As of September 19, 2019, Amazon RDS has published new Certificate Authority \(CA\) certificates for connecting to your Aurora DB clusters using Secure Socket Layer or Transport Layer Security \(SSL/TLS\)\. Following, you can find information about updating your applications to use the new certificates\.
 
 This topic can help you to determine whether any client applications use SSL/TLS to connect to your DB clusters\. If they do, you can further check whether those applications require certificate verification to connect\. 
 

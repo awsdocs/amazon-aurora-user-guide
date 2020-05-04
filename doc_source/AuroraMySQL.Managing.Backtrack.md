@@ -41,6 +41,7 @@ The following limitations apply to backtracking:
   + Africa \(Cape Town\)
   +  China \(Ningxia\) 
   +  Asia Pacific \(Hong Kong\) 
+  + Europe \(Milan\)
   +  Europe \(Stockholm\) 
   +  Middle East \(Bahrain\) 
   +  South America \(São Paulo\) 
@@ -86,6 +87,9 @@ Your actual cost might not match the typical cost, because your actual cost is b
 
 You can modify backtracking for a DB cluster using the console\.
 
+**Note**  
+Currently, you can modify backtracking only for a DB cluster that has the Backtrack feature enabled\. The **Backtrack** section doesn't appear for a DB cluster that was created with the Backtrack feature disabled or if the Backtrack feature has been disabled for the DB cluster\.
+
 **To modify backtracking for a DB cluster using the console**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
@@ -93,10 +97,6 @@ You can modify backtracking for a DB cluster using the console\.
 1. Choose **Databases**\.
 
 1. Choose the cluster that you want to modify, and choose **Modify**\.
-
-1. If backtracking is disabled in the **Backtrack** section, choose **Enable Backtrack**\.
-**Note**  
-Currently, you can enable backtracking only for a DB cluster that was created with the Backtrack feature enabled\. The **Backtrack **section doesn't appear for a DB cluster that was created with the Backtrack feature disabled\.
 
 1. For **Target Backtrack window**, modify the amount of time that you want to be able to backtrack\. The limit is 72 hours\.  
 ![\[Modify Backtrack with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-backtrack-modify.png)
