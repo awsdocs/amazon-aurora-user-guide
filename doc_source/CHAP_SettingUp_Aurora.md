@@ -131,13 +131,13 @@ For example, if you have an application that will access a database on your DB c
 
 1. The VPC security group you created should still be selected\. The details pane at the bottom of the console window displays the details for the security group, and tabs for working with inbound and outbound rules\. Choose the **Inbound Rules** tab\.
 
-1. On the **Inbound Rules** tab, choose **Edit**\. Select **Custom TCP Rule** from the **Type** list\. Type the port value you will use for your DB cluster in the **Port Range** text box, and then type the IP address range \(CIDR value\) from where you will access the cluster, or select a security group name in the **Source** text box\.
+1. On the **Inbound Rules** tab, choose **Edit rules**\. Click on **Add Rule**.  Select **Custom TCP Rule** from the **Type** list\. Type the port value you will use for your DB cluster in the **Port Range** text box, and then type the IP address range \(CIDR value\) from where you will access the cluster, or select a security group name in the **Source** text box\.
 
-1. If you need to add more IP addresses or different port ranges, choose **Add another rule**\.
+1. If you need to add more IP addresses or different port ranges, choose **Add Rule**\.
+
+1. When you have finished, choose **Save rules** on each tab with changes\.
 
 1. If you need to, you can use the **Outbound Rules** tab to add rules for outbound traffic\.
-
-1. When you have finished, choose **Save** on each tab with changes\.
 
    You will use the VPC security group you just created as the security group for your DB cluster when you create it\.
 
