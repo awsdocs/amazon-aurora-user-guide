@@ -110,7 +110,7 @@ The last thing that you need before you can create an Aurora DB cluster is a DB 
    + **Description:** `Getting Started Subnet Group`
    + **VPC ID:** Choose the VPC that you created in the previous procedure, for example, `gs-cluster-vpc (vpc-b5754bcd)`\.
 
-1. In the **Add subnets** section, choose **Add all the subnets related to this VPC**\.  
+1. In the **Add subnets** section, choose the Availability Zones that include the subnets from **Availability Zones**, and then choose the subnets from **Subnets**\.  
 ![\[Create Subnet Group\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraCreateSubnetGroup01.png)
 
 1. Choose **Create** to create the subnet group\.

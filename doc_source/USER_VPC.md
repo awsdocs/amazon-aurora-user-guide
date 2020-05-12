@@ -4,7 +4,7 @@ Amazon Virtual Private Cloud \(Amazon VPC\) enables you to launch AWS resources,
 
 When you use an Amazon VPC, you have control over your virtual networking environment: you can choose your own IP address range, create subnets, and configure routing and access control lists\. There is no additional cost to run your DB instance in an Amazon VPC\. 
 
-![\[VPC platform\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/GS-VPC network.png)
+![\[VPC platform\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/GS-VPC-network.png)
 
 Accounts that support only the *EC2\-VPC* platform have a default VPC\. All new DB instances are created in the default VPC unless you specify otherwise\. If you are a new Amazon Aurora customer, if you have never created a DB instance before, or if you are creating a DB instance in an AWS Region you have not used before, you are most likely on the *EC2\-VPC* platform and have a default VPC\. 
 

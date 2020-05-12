@@ -915,28 +915,28 @@ You can build the library manually from the source files, but the best practice 
 <dependency>
     <groupId>software.amazon.rdsdata</groupId>
     <artifactId>rds-data-api-client-library-java</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
 ### Java Client Library Examples<a name="data-api.java-client-library.examples"></a>
 
-Following, you can find some common examples of using the Data API Java client library\. These examples assume that you have a table `accounts` with two columns: `accountId` and `balance`\. You also have the following data transfer object \(DTO\)\.
+Following, you can find some common examples of using the Data API Java client library\. These examples assume that you have a table `accounts` with two columns: `accountId` and `name`\. You also have the following data transfer object \(DTO\)\.
 
 ```
 public class Account {
-    String accountId;
-    double balance;
-// getters and setters omitted
+    int accountId;
+    String name;
+    // getters and setters omitted
 }
 ```
 
 The client library enables you to pass DTOs as input parameters\. The following example shows how customer DTOs are mapped to input parameters sets\.
 
 ```
-var account1 = new Account("A-1", 1.1);
-var account2 = new Account("B-2", 100);
-client.forSql("INSERT INTO accounts(accountId, balance) VALUES(:accountId, :balance)")
+var account1 = new Account(1, "John");
+var account2 = new Account(2, "Mary");
+client.forSql("INSERT INTO accounts(accountId, name) VALUES(:accountId, :name)")
          .withParams(account1, account2)
          .execute();
 ```
@@ -944,16 +944,16 @@ client.forSql("INSERT INTO accounts(accountId, balance) VALUES(:accountId, :bala
 In some cases, it's easier to work with simple values as input parameters\. You can do so with the following syntax\.
 
 ```
-client.forSql("INSERT INTO accounts(accountId, balance) VALUES(:accountId, :balance)")
-         .withParam("accountId", "A-1")
-         .withParam("balance", 12.2)
+client.forSql("INSERT INTO accounts(accountId, name) VALUES(:accountId, :name)")
+         .withParam("accountId", 3)
+         .withParam("name", "Zhang")
          .execute();
 ```
 
 The following is another example that works with simple values as input parameters\.
 
 ```
-client.forSql("INSERT INTO accounts(accountId, balance) VALUES(?, ?", "A-1", 12.2)
+client.forSql("INSERT INTO accounts(accountId, name) VALUES(?, ?)", 4, "Carlos")
          .execute();
 ```
 
@@ -964,7 +964,7 @@ List<Account> result = client.forSql("SELECT * FROM accounts")
           .execute()
           .mapToList(Account.class);
           
-Account result = client.forSql("SELECT * FROM accounts WHERE account_id = '1'")
+Account result = client.forSql("SELECT * FROM accounts WHERE account_id = 1")
           .execute()
           .mapToSingle(Account.class);
 ```

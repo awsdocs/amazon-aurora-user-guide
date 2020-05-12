@@ -384,7 +384,7 @@ If `REQUIRE SSL` is not included, the replication connection might silently fall
    You might also need to configure your local network to permit connections from the IP address of your Aurora MySQL DB cluster, so that it can communicate with your external MySQL database\. To find the IP address of the Aurora MySQL DB cluster, use the `host` command\.
 
    ```
-   host RDS_MySQL_DB_<host_name>
+   host <db_cluster_endpoint>
    ```
 
    The host name is the DNS name from the Aurora MySQL DB cluster endpoint\.

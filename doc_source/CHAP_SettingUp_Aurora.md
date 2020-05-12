@@ -125,24 +125,24 @@ For example, if you have an application that will access a database on your DB c
 
 1. In the navigation pane, choose **Security Groups**\.
 
-1. Choose **Create Security Group**\.
+1. Choose **Create security group**\.
 
-1. In the **Create Security Group** window, type the **Name tag**, **Group name**, and **Description** of your security group\. Select the **VPC** that you want to create your DB cluster in\. Choose **Yes, Create**\.
+1. On the **Create Security Group** page, type the **Security group name** and **Description**\. Select the **VPC** that you want to create your DB cluster in\. Choose **Create**\.
 
-1. The VPC security group you created should still be selected\. The details pane at the bottom of the console window displays the details for the security group, and tabs for working with inbound and outbound rules\. Choose the **Inbound Rules** tab\.
+1. Select the VPC security group that you created\. The details pane at the bottom of the console window displays the details for the security group, and tabs for working with inbound and outbound rules\. Choose the **Inbound Rules** tab\.
 
-1. On the **Inbound Rules** tab, choose **Edit rules**\. Click on **Add Rule**.  Select **Custom TCP Rule** from the **Type** list\. Type the port value you will use for your DB cluster in the **Port Range** text box, and then type the IP address range \(CIDR value\) from where you will access the cluster, or select a security group name in the **Source** text box\.
+1. On the **Inbound Rules** tab, choose **Edit rules**, and then choose **Add rule**\. From the **Type** list, select **Custom TCP Rule**\. Type the port value you will use for your DB cluster in **Port Range**, and then type the IP address range \(CIDR value\) from where you will access the cluster, or select a security group name in **Source**\.
 
 1. If you need to add more IP addresses or different port ranges, choose **Add Rule**\.
 
-1. When you have finished, choose **Save rules** on each tab with changes\.
+1. Choose **Save rules**\.
 
-1. If you need to, you can use the **Outbound Rules** tab to add rules for outbound traffic\.
+1. If necessary, you can use the **Outbound Rules** tab to add rules for outbound traffic\.
 
-   You will use the VPC security group you just created as the security group for your DB cluster when you create it\.
+You will use the VPC security group you just created as the security group for your DB cluster when you create it\.
 
-   Finally, a quick note about VPC subnets: If you use a default VPC, a default subnet group spanning all of the VPC's subnets has already been created for you\. When you create a DB cluster, you can select the default VPC and use **default** for the **DB Subnet Group**\.
+Finally, a quick note about VPC subnets: If you use a default VPC, a default subnet group spanning all of the VPC's subnets has already been created for you\. When you create a DB cluster, you can select the default VPC and use **default** for the **DB Subnet Group**\.
 
-   Once you have completed the setup requirements, you can use your requirements and the security group you created to launch a DB cluster\. For information on creating a DB cluster, see the relevant documentation in the following table: 
+Once you have completed the setup requirements, you can use your requirements and the security group you created to launch a DB cluster\. For information on creating a DB cluster, see the relevant documentation in the following table: 
 
-   After setting up, you can create a test Amazon Aurora DB cluster\. For instructions, see [Creating a DB Cluster and Connecting to a Database on an Aurora MySQL DB Cluster](CHAP_GettingStartedAurora.CreatingConnecting.Aurora.md)\.
+After setting up, you can create a test Amazon Aurora DB cluster\. For instructions, see [Getting Started with Amazon Aurora](CHAP_GettingStartedAurora.md)\.

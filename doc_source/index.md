@@ -285,4 +285,4 @@ Amazon's trademarks and trade dress may not be used in
    + [Using the Query API](Using_the_Query_API.md)
    + [Troubleshooting Applications on Aurora](APITroubleshooting.md)
 + [Document History](WhatsNew.md)
-+ [AWS Glossary](glossary.md)
++ [AWS glossary](glossary.md)

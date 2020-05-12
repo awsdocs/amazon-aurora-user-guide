@@ -16,10 +16,10 @@ Exporting snapshots is supported in the following AWS Regions:
 **Note**  
 You can copy a snapshot from an AWS Region where S3 export isn't supported to one where it is supported, then export the copy\. The S3 bucket must be in the same AWS Region as the copy\.
 
-The following lists show the engine versions that are supported for exporting snapshot data to Amazon S3\.
+The following tables show the engine versions that are supported for exporting snapshot data to Amazon S3\.
 
 
-| Aurora MySQL Version | MySQL Campatible Version | 
+| Aurora MySQL Version | MySQL\-Compatible Version | 
 | --- | --- | 
 | 2\.04\.6  | 5\.7 | 
 | 2\.04\.5 | 5\.7 | 
@@ -32,7 +32,7 @@ The following lists show the engine versions that are supported for exporting sn
 For more information about Aurora MySQL engine versions, see [Database Engine Updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\. 
 
 
-| Aurora PostgreSQL Version | PostgreSQL Campatible Version | 
+| Aurora PostgreSQL Version | PostgreSQL\-Compatible Version | 
 | --- | --- | 
 | 2\.3 | 10\.7 | 
 | 2\.2 | 10\.6 | 
@@ -147,9 +147,9 @@ After you create the policy, note the ARN of the policy\. You need the ARN for a
    }'
    ```
 
-1. Create an IAM role\. You do this so that Aurora can assume this IAM role on your behalf to access your Amazon S3 buckets\. For more information, see [Creating a Role to Delegate Permissions to an IAM User ](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
+1. Create an IAM role\. You do this so that Aurora can assume this IAM role on your behalf to access your Amazon S3 buckets\. For more information, see [Creating a Role to Delegate Permissions to an IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
 
-   The following example shows using the AWS CLI command to create a role named `rds-s3-export-role`\. 
+   The following example shows using the AWS CLI command to create a role named `rds-s3-export-role`\.
 
    ```
    aws iam create-role  --role-name rds-s3-export-role  --assume-role-policy-document '{
@@ -180,7 +180,7 @@ You can have up to five concurrent DB snapshot export tasks in progress per acco
 
 **Note**  
 Exporting RDS Snapshots can take a while depending on your database type and size\. The export task first restores and scales the entire database before extracting the data to Amazon S3\. The task's progress during this phase displays as **STARTING**\. When the task switches to exporting data to Amazon S3, progress displays as **IN\_PROGRESS**\.   
-The time it takes for the export to complete depends on the data stored in the database\. For example, tables with well distributed numeric primary key or index columns will export the fastest\. If tables do not contain a column suitable for partitioning, the export becomes a slower single threaded process\.
+The time it takes for the export to complete depends on the data stored in the database\. For example, tables with well distributed numeric primary key or index columns will export the fastest\. Tables that don't contain a column suitable for partitioning and tables with only one index on a string\-based column will take longer because the export uses a slower single threaded process\. 
 
 You can export a DB snapshot to Amazon S3 using the AWS Management Console, the AWS CLI, or the RDS API\.
 

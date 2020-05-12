@@ -43,6 +43,8 @@ The following table lists the resulting default value of `max_connections` for e
 
  The `DBInstanceClassMemory` value represents the memory capacity available for the DB instance\. Aurora reserves some memory in each instance for the Aurora management components\. This adjustment to the `DBInstanceClassMemory` results in a lower `max_connections` value than if the formula used the full memory for the associated DB instance class\. 
 
+ Aurora MySQL and RDS MySQL DB instances have different amounts of memory overhead\. Therefore, the `max_connections` value can be different for Aurora MySQL and RDS MySQL DB instances that use the same instance class\. The values in the table only apply to Aurora MySQL DB instances\. 
+
  The much lower connectivity limits for T2 and T3 instances are because with Aurora, those instance classes are intended only for development and test scenarios, not for production workloads\. 
 
  The default connection limits are tuned for systems that use the default values for other major memory consumers, such as the buffer pool and query cache\. If you change those other settings for your cluster, consider adjusting the connection limit to account for the increase or decrease in available memory on the DB instances\. 

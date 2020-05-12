@@ -22,6 +22,10 @@ If you try to delete the last DB instance in your Aurora cluster, the behavior d
 
 You can delete a DB instance using the AWS Management Console, the AWS CLI, or the RDS API\.
 
+**Note**  
+You can't delete a DB instance when deletion protection is enabled for it\. For more information, see [Deletion Protection](#USER_DeleteInstance.DeletionProtection)\.  
+You can disable deletion protection for a DB instance by modifying its DB cluster\. For more information, see [Modifying an Amazon Aurora DB Cluster](Aurora.Modifying.md)\.
+
 ### Console<a name="USER_DeleteInstance.CON"></a>
 
 **To delete a DB instance**

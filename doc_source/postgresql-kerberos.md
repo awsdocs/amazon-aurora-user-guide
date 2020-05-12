@@ -1,8 +1,12 @@
 # Using Kerberos Authentication with Aurora PostgreSQL<a name="postgresql-kerberos"></a>
 
-You can use Kerberos authentication to authenticate users when they connect to your DB cluster running PostgreSQL\. In this case, your DB instance works with AWS Directory Service for Microsoft Active Directory, also called AWS Managed Microsoft AD, to enable Kerberos authentication\. When users authenticate with a PostgreSQL DB cluster joined to the trusting domain, authentication requests are forwarded to the directory that you create with AWS Directory Service\.
+You can use Kerberos authentication to authenticate users when they connect to your DB cluster running PostgreSQL\. In this case, your DB instance works with AWS Directory Service for Microsoft Active Directory to enable Kerberos authentication\. AWS Directory Service for Microsoft Active Directory is also called AWS Managed Microsoft AD\. 
+
+You create an AWS Managed Microsoft AD directory to store user credentials\. You then provide to your PostgreSQL DB cluster the Active Directory's domain and other information\. When users authenticate with the PostgreSQL DB cluster, authentication requests are forwarded to the AWS Managed Microsoft AD directory\. 
 
 Keeping all of your credentials in the same directory can save you time and effort\. You have a centralized place for storing and managing credentials for multiple DB clusters\. Using a directory can also improve your overall security profile\.
+
+You can also access credentials from your own on\-premises Microsoft Active Directory\. To do so you create a trusting domain relationship so that the AWS Managed Microsoft AD directory trusts your on\-premises Microsoft Active Directory\. In this way, your users can access your PostgreSQL clusters with the same Windows single sign\-on \(SSO\) experience as when they access workloads in your on\-premises network\.
 
 Kerberos provides a different authentication method than AWS Identity and Access Management \(IAM\)\. A database can use either Kerberos or IAM authentication but not both\. For more information about IAM authentication, see [IAM Database Authentication](UsingWithRDS.IAMDBAuth.md)\. 
 

@@ -171,7 +171,7 @@ A DB subnet group is a collection of subnets that you create in a VPC and that y
    + **Description:** `Tutorial DB Subnet Group`
    + **VPC:** `tutorial-vpc (vpc-identifier)` 
 
-1. In the **Add subnets** section, choose **Add all the subnets related to this VPC**\.
+1. In the **Add subnets** section, choose the Availability Zones that include the subnets from **Availability Zones**, and then choose the subnets from **Subnets**\.
 
 1. Choose **Create**\. 
 

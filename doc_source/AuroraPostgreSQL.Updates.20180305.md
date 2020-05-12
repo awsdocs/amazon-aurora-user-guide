@@ -112,8 +112,6 @@ You can find the following new features and improvements in this engine version\
 
 **High Priority Stability Enhancements**
 
-1. Corrected a memory leak in the log\-apply process on read nodes\. To see this memory leak, use Enhancement Monitoring and observe the "% of memory usage" for the "wal replay" process\.
-
 1. Fixed a bug related to logical replication whereby `wal` segments are not properly removed from storage\. This can result in storage bloat\. To monitor this, view the `TransactionLogDiskUsage` parameter\. 
 
 1. Fixed multiple bugs, which cause Aurora to crash during prefetch operations on Btree indexes\.
@@ -295,8 +293,6 @@ You can find the following new features and improvements in this engine version\
 1. Fixed a bug related to handling of reads with high I/O latency that in rare cases may result in longer recovery time, and impact availability\.
 
 **High Priority Stability Enhancements**
-
-1. Corrected a memory leak in the log\-apply process on read nodes\. To see this memory leak, use Enhancement Monitoring and observe the "% of memory usage" for the "wal replay" process\.
 
 1. Fixed a bug related to logical replication whereby `wal` segments are not properly removed from storage\. This can result in storage bloat\. To monitor this, view the `TransactionLogDiskUsage` parameter\. 
 
@@ -678,8 +674,6 @@ You can find the following new features and improvements in this engine version\
 1. Fixed a bug related to handling of reads with high I/O latency that in rare cases may result in longer recovery time, and impact availability\.
 
 **High Priority Stability Enhancements**
-
-1. Corrected a memory leak in the log\-apply process on read nodes\. To see this memory leak, use Enhancement Monitoring and observe the "% of memory usage" for the "wal replay" process\.
 
 1. Fixed multiple bugs, which cause Aurora to crash during prefetch operations on Btree indexes\.
 
