@@ -102,7 +102,7 @@ If your connection is successful, your connection and authentication information
    The **Query Editor Settings** window appears\.  
 ![\[Query Editor Settings\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/query-editor-settings.png)
 
-   If you choose **Auto\-commit**, every SQL statement commits automatically\. If you choose **Transaction**, you can run a group of statements in a script, and they don't commit automatically\. If **Transaction** is set, the statements in the group are committed when choose **Run**\. Also, you can choose to stop a running script if an error occurs by enabling **Stop on error**\.
+   If you choose **Auto\-commit**, every SQL statement commits automatically\. If you choose **Transaction**, you can run a group of statements in a script\. Statements are automatically committed at the end of the script unless explicitly committed or rolled back before then\. Also, you can choose to stop a running script if an error occurs by enabling **Stop on error**\.
 **Note**  
 In a group of statements, data definition language \(DDL\) statements can cause previous data manipulation language \(DML\) statements to commit\. You can also include `COMMIT` and `ROLLBACK` statements in a group of statements in a script\.
 

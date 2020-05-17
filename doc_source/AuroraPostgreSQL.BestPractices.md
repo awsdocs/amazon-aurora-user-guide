@@ -11,6 +11,12 @@ There are several things you can do to make a failover perform faster with Auror
 + Use the provided read and write Aurora endpoints to establish a connection to the cluster\.
 + Use RDS APIs to test application response on server side failures and use a packet dropping tool to test application response for client\-side failures\.
 
+**Topics**
++ [Setting TCP Keepalives Parameters](#AuroraPostgreSQL.BestPractices.FastFailover.TCPKeepalives)
++ [Configuring Your Application for Fast Failover](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring)
++ [Testing Failover](#AuroraPostgreSQL.BestPracticesFastFailover.Testing)
++ [Fast Failover Example](#AuroraPostgreSQL.BestPractices.FastFailover.Example)
+
 ### Setting TCP Keepalives Parameters<a name="AuroraPostgreSQL.BestPractices.FastFailover.TCPKeepalives"></a>
 
 The TCP keepalive process is simple: when you set up a TCP connection, you associate a set of timers\. When the keepalive timer reaches zero, you send a keepalive probe packet\. If you receive a reply to your keepalive probe, you can assume that the connection is still up and running\.
@@ -53,6 +59,11 @@ For information on setting TCP keepalive parameters on Windows, see [ Things You
 ### Configuring Your Application for Fast Failover<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring"></a>
 
 This section discusses several Aurora PostgreSQL specific configuration changes you can make\. Documentation for general setup and configuration of the JDBC driver is available from the [PostgreSQL JDBC site](https://jdbc.postgresql.org/documentation/documentation.html)\. 
+
+**Topics**
++ [Reducing DNS Cache Timeouts](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.Timeouts)
++ [Setting an Aurora PostgreSQL Connection String for Fast Failover](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.ConnectionString)
++ [Other Options for Obtaining The Host String](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString)
 
 #### Reducing DNS Cache Timeouts<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.Timeouts"></a>
 
@@ -97,16 +108,18 @@ my-node4.cksc6xlmwcyw.us-east-1-beta.rds.amazonaws.com:5432
 
 The benefit of this approach is that the PostgreSQL JDBC connection driver will loop through all nodes on this list to find a valid connection, whereas when using the Aurora endpoints only two nodes will be tried per connection attempt\. The downside of using DB instance nodes is that if you add or remove nodes from your cluster and the list of instance endpoints becomes stale, the connection driver may never find the correct host to connect to\.
 
-Setting the following parameters aggressively helps ensure that your application doesn't wait too long to connect to any one host\. 
-+ `loginTimeout` \- Controls how long your application waits to login to the database *after* a socket connection has been established\.
-+ `connectTimeout` \- Controls how long the socket waits to establish a connection to the database\.
+Set the following parameters aggressively to help ensure that your application doesn't wait too long to connect to any one host\. 
++ `targetServerType` – Use this parameter to control whether the driver connects to a write or read node\. To ensure your applications will reconnect only to a write node, set the `targetServerType` value to `master`\.
+
+  Possible values for the `targetServerType` parameter include `master`, `slave`, `any`, and `preferSlave`\. The `preferSlave` value attempts to establish a connection to a reader first but connects to the writer if no reader connection can be established\.
++ `loginTimeout` – Controls how long your application waits to login to the database *after* a socket connection has been established\.
++ `connectTimeout` – Controls how long the socket waits to establish a connection to the database\.
 
 Other application parameters can be modified to speed up the connection process, depending on how aggressive you want your application to be\.
-+ `cancelSignalTimeout` \- In some applications, you may want to send a "best effort" cancel signal on a query that has timed out\. If this cancel signal is in your failover path, you should consider setting it aggressively to avoid sending this signal to a dead host\.
-+ `socketTimeout` \- This parameter controls how long the socket waits for read operations\. This parameter can be used as a global "query timeout" to ensure no query waits longer than this value\. A good practice is to have one connection handler that runs short lived queries and sets this value lower, and to have another connection handler for long running queries with this value set much higher\. Then, you can rely on TCP keepalive parameters to kill long running queries if the server goes down\.
-+ `tcpKeepAlive` \- Enable this parameter to ensure the TCP keepalive parameters that you set are respected\.
-+ `targetServerType`\- This parameter can be used to control whether the driver connects to a read \(slave\) or write \(master\) node\. Possible values are: `any`, `master`, `slave `and `preferSlave`\. The `preferSlave` value attempts to establish a connection to a reader first but falls back and connects to the writer if no reader connection can be established\.
-+ `loadBalanceHosts` \- When set to `true`, this parameter has the application connect to a random host chosen from a list of candidate hosts\.
++ `cancelSignalTimeout` – In some applications, you may want to send a "best effort" cancel signal on a query that has timed out\. If this cancel signal is in your failover path, you should consider setting it aggressively to avoid sending this signal to a dead host\.
++ `socketTimeout` – This parameter controls how long the socket waits for read operations\. This parameter can be used as a global "query timeout" to ensure no query waits longer than this value\. A good practice is to have one connection handler that runs short lived queries and sets this value lower, and to have another connection handler for long running queries with this value set much higher\. Then, you can rely on TCP keepalive parameters to kill long running queries if the server goes down\.
++ `tcpKeepAlive` – Enable this parameter to ensure the TCP keepalive parameters that you set are respected\.
++ `loadBalanceHosts` – When set to `true`, this parameter has the application connect to a random host chosen from a list of candidate hosts\.
 
 #### Other Options for Obtaining The Host String<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString"></a>
 
@@ -191,7 +204,7 @@ For availability purposes, a good practice would be to default to using the [Aur
 
 ### Testing Failover<a name="AuroraPostgreSQL.BestPracticesFastFailover.Testing"></a>
 
-In all cases you must have a DB Cluster with >= 2 DB instances in it\.
+In all cases you must have a DB cluster with two or more DB instances in it\.
 
 From the server side, certain APIs can cause an outage that can be used to test how your applications responds:
 + [FailoverDBCluster ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html) \- Will attempt to promote a new DB Instance in your DB Cluster to writer
@@ -218,7 +231,7 @@ From the application/client side, if using Linux, you can test how the applicati
 
 ### Fast Failover Example<a name="AuroraPostgreSQL.BestPractices.FastFailover.Example"></a>
 
-The following code sample shows how an application might set up an Aurora PostgreSQL driver manager\. The application would call `getConnection(...)` when it needed a connection\. A call to that function can fail to find a valid host, such as when no writer is found but the targetServerType was set to "master"\), and the calling application should simply retry\. This can easily be wrapped into a connection pooler to avoid pushing the retry behavior onto the application\. Most connection poolers allow you to specify a JDBC connection string, so your application could call into `getJdbcConnectionString(...)` and pass that to the connection pooler to make use of faster failover on Aurora PostgreSQL\.
+The following code sample shows how an application might set up an Aurora PostgreSQL driver manager\. The application would call `getConnection()` when it needs a connection\. A call to this function can fail to find a valid host, such as when no writer is found but the `targetServerType` parameter was set to `master`\. The calling application should simply retry calling the function\. This can easily be wrapped into a connection pooler to avoid pushing the retry behavior onto the application\. Most connection poolers allow you to specify a JDBC connection string, so your application could call into `getJdbcConnectionString()` and pass that to the connection pooler to make use of faster failover on Aurora PostgreSQL\.
 
 ```
 import java.sql.Connection;

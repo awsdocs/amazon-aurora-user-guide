@@ -12,7 +12,6 @@ Database Activity Streams have the following limits and requirements:
 + They're not supported in the following AWS Regions:
   + China \(Beijing\) Region, `cn-north-1`
   + China \(Ningxia\) Region, `cn-northwest-1`
-  + Asia Pacific \(Hong Kong\) Region, `ap-east-1`
   + AWS GovCloud \(US\-East\), `us-gov-east-1` 
   + AWS GovCloud \(US\-West\), `us-gov-west-1` 
 + They require use of AWS Key Management Service \(AWS KMS\) because the activity streams are always encrypted\.
@@ -226,7 +225,8 @@ The database activity events that are monitored are represented in the Kinesis a
 
 **Topics**
 + [Audit Log Examples](#DBActivityStreams.AuditLog.Examples)
-+ [Activity Event Record](#DBActivityStreams.AuditLog.ActivityEvent)
++ [Database Activity Monitoring Records JSON Object](#DBActivityStreams.AuditLog.DatabaseActivityMonitoringRecords)
++ [databaseActivityEvents JSON Object](#DBActivityStreams.AuditLog.databaseActivityEvents)
 + [databaseActivityEventList JSON Array](#DBActivityStreams.AuditLog.databaseActivityEventList)
 
 #### Audit Log Examples<a name="DBActivityStreams.AuditLog.Examples"></a>
@@ -238,38 +238,46 @@ Following is an activity event record of a login with the use of a `CONNECT` SQL
 
 ```
 {
-   "type":"DatabaseActivityMonitoringRecord",
-   "clusterId":"cluster-4HNY5V4RRNPKKYB7ICFKE5JBQQ",
-   "instanceId":"db-FZJTMYKCXQBUUZ6VLU7NW3ITCM",
-   "databaseActivityEventList":[
-      {
-        "logTime": "2019-05-23 01:31:28.610198+00",
-        "statementId": 1,
-        "substatementId": 1,
-        "objectType": null,
-        "command": "CONNECT",
-        "objectName": null,
-        "databaseName": "postgres",
-        "dbUserName": "rdsadmin",
-        "remoteHost": "172.31.3.195",
-        "remotePort": "49804",
-        "sessionId": "5ce5f7f0.474b",
-        "rowCount": null,
-        "commandText": null,
-        "paramList": [],
-        "pid": 18251,
-        "clientApplication": "psql",
-        "exitCode": null,
-        "class": "MISC",
-        "serverVersion": "2.3.1",
-        "serverType": "PostgreSQL",
-        "serviceName": "Amazon Aurora PostgreSQL-Compatible edition",
-        "serverHost": "172.31.3.192",
-        "netProtocol": "TCP",
-        "dbProtocol": "Postgres 3.0",
-        "type": "record"
-      }
-   ]
+  "type":"DatabaseActivityMonitoringRecords",
+  "version":"1.1",
+  "databaseActivityEvents": 
+    {
+      "type":"DatabaseActivityMonitoringRecord",
+      "clusterId":"cluster-4HNY5V4RRNPKKYB7ICFKE5JBQQ",
+      "instanceId":"db-FZJTMYKCXQBUUZ6VLU7NW3ITCM",
+      "databaseActivityEventList":[
+        {
+          "startTime": "2019-10-30 00:39:49.940668+00",
+          "logTime": "2019-10-30 00:39:49.990579+00",
+          "statementId": 1,
+          "substatementId": 1,
+          "objectType": null,
+          "command": "CONNECT",
+          "objectName": null,
+          "databaseName": "postgres",
+          "dbUserName": "rdsadmin",
+          "remoteHost": "172.31.3.195",
+          "remotePort": "49804",
+          "sessionId": "5ce5f7f0.474b",
+          "rowCount": null,
+          "commandText": null,
+          "paramList": [],
+          "pid": 18251,
+          "clientApplication": "psql",
+          "exitCode": null,
+          "class": "MISC",
+          "serverVersion": "2.3.1",
+          "serverType": "PostgreSQL",
+          "serviceName": "Amazon Aurora PostgreSQL-Compatible edition",
+          "serverHost": "172.31.3.192",
+          "netProtocol": "TCP",
+          "dbProtocol": "Postgres 3.0",
+          "type": "record",
+          "errorMessage": null
+        }
+      ]
+    },
+   "key":"decryption-key"
 }
 ```
 
@@ -278,38 +286,46 @@ Following is an example of a `CREATE TABLE` event\.
 
 ```
 {
-   "type":"DatabaseActivityMonitoringRecord",
-   "clusterId":"cluster-4HNY5V4RRNPKKYB7ICFKE5JBQQ",
-   "instanceId":"db-FZJTMYKCXQBUUZ6VLU7NW3ITCM",
-   "databaseActivityEventList":[
-      {
-        "logTime": "2019-05-24 00:36:54.494235+00",
-        "statementId": 2,
-        "substatementId": 1,
-        "objectType": null,
-        "command": "CREATE TABLE",
-        "objectName": null,
-        "databaseName": "postgres",
-        "dbUserName": "rdsadmin",
-        "remoteHost": "172.31.3.195",
-        "remotePort": "34534",
-        "sessionId": "5ce73c6f.7e64",
-        "rowCount": null,
-        "commandText": "create table my_table (id serial primary key, name varchar(32));",
-        "paramList": [],
-        "pid": 32356,
-        "clientApplication": "psql",
-        "exitCode": null,
-        "class": "DDL",
-        "serverVersion": "2.3.1",
-        "serverType": "PostgreSQL",
-        "serviceName": "Amazon Aurora PostgreSQL-Compatible edition",
-        "serverHost": "172.31.3.192",
-        "netProtocol": "TCP",
-        "dbProtocol": "Postgres 3.0",
-        "type": "record"
-      }
-   ]
+  "type":"DatabaseActivityMonitoringRecords",
+  "version":"1.1",
+  "databaseActivityEvents": 
+    {
+      "type":"DatabaseActivityMonitoringRecord",
+      "clusterId":"cluster-4HNY5V4RRNPKKYB7ICFKE5JBQQ",
+      "instanceId":"db-FZJTMYKCXQBUUZ6VLU7NW3ITCM",
+      "databaseActivityEventList":[
+        {
+          "startTime": "2019-05-24 00:36:54.403455+00",
+          "logTime": "2019-05-24 00:36:54.494235+00",
+          "statementId": 2,
+          "substatementId": 1,
+          "objectType": null,
+          "command": "CREATE TABLE",
+          "objectName": null,
+          "databaseName": "postgres",
+          "dbUserName": "rdsadmin",
+          "remoteHost": "172.31.3.195",
+          "remotePort": "34534",
+          "sessionId": "5ce73c6f.7e64",
+          "rowCount": null,
+          "commandText": "create table my_table (id serial primary key, name varchar(32));",
+          "paramList": [],
+          "pid": 32356,
+          "clientApplication": "psql",
+          "exitCode": null,
+          "class": "DDL",
+          "serverVersion": "2.3.1",
+          "serverType": "PostgreSQL",
+          "serviceName": "Amazon Aurora PostgreSQL-Compatible edition",
+          "serverHost": "172.31.3.192",
+          "netProtocol": "TCP",
+          "dbProtocol": "Postgres 3.0",
+          "type": "record",
+          "errorMessage": null
+        }
+      ]
+    },
+   "key":"decryption-key"
 }
 ```
 
@@ -318,44 +334,66 @@ Following is an example of a `SELECT` event\.
 
 ```
 {
-   "type":"DatabaseActivityMonitoringRecord",
-   "clusterId":"cluster-4HNY5V4RRNPKKYB7ICFKE5JBQQ",
-   "instanceId":"db-FZJTMYKCXQBUUZ6VLU7NW3ITCM",
-   "databaseActivityEventList":[
-      {
-        "logTime": "2019-05-24 00:39:49.940668+00",
-        "statementId": 6,
-        "substatementId": 1,
-        "objectType": "TABLE",
-        "command": "SELECT",
-        "objectName": "public.my_table",
-        "databaseName": "postgres",
-        "dbUserName": "rdsadmin",
-        "remoteHost": "172.31.3.195",
-        "remotePort": "34534",
-        "sessionId": "5ce73c6f.7e64",
-        "rowCount": 10,
-        "commandText": "select * from my_table;",
-        "paramList": [],
-        "pid": 32356,
-        "clientApplication": "psql",
-        "exitCode": null,
-        "class": "READ",
-        "serverVersion": "2.3.1",
-        "serverType": "PostgreSQL",
-        "serviceName": "Amazon Aurora PostgreSQL-Compatible edition",
-        "serverHost": "172.31.3.192",
-        "netProtocol": "TCP",
-        "dbProtocol": "Postgres 3.0",
-        "type": "record"
-      }
-   ]
+  "type":"DatabaseActivityMonitoringRecords",
+  "version":"1.1",
+  "databaseActivityEvents": 
+    {
+      "type":"DatabaseActivityMonitoringRecord",
+      "clusterId":"cluster-4HNY5V4RRNPKKYB7ICFKE5JBQQ",
+      "instanceId":"db-FZJTMYKCXQBUUZ6VLU7NW3ITCM",
+      "databaseActivityEventList":[
+        {
+          "startTime": "2019-05-24 00:39:49.920564+00",
+          "logTime": "2019-05-24 00:39:49.940668+00",
+          "statementId": 6,
+          "substatementId": 1,
+          "objectType": "TABLE",
+          "command": "SELECT",
+          "objectName": "public.my_table",
+          "databaseName": "postgres",
+          "dbUserName": "rdsadmin",
+          "remoteHost": "172.31.3.195",
+          "remotePort": "34534",
+          "sessionId": "5ce73c6f.7e64",
+          "rowCount": 10,
+          "commandText": "select * from my_table;",
+          "paramList": [],
+          "pid": 32356,
+          "clientApplication": "psql",
+          "exitCode": null,
+          "class": "READ",
+          "serverVersion": "2.3.1",
+          "serverType": "PostgreSQL",
+          "serviceName": "Amazon Aurora PostgreSQL-Compatible edition",
+          "serverHost": "172.31.3.192",
+          "netProtocol": "TCP",
+          "dbProtocol": "Postgres 3.0",
+          "type": "record",
+          "errorMessage": null
+        }
+      ]
+    },
+   "key":"decryption-key"
 }
 ```
 
-#### Activity Event Record<a name="DBActivityStreams.AuditLog.ActivityEvent"></a>
+#### Database Activity Monitoring Records JSON Object<a name="DBActivityStreams.AuditLog.DatabaseActivityMonitoringRecords"></a>
 
-The audit log activity event record is a JSON object that contains the following information\.
+The database activity event records are in a JSON object that contains the following information\.
+
+
+****  
+
+| JSON Field | Data Type | Description | 
+| --- | --- | --- | 
+|  `type`  | string |  The type of JSON record\. The value is `DatabaseActivityMonitoringRecords`\.  | 
+| version | string | The version of the database activity monitoring records\. The version of the generated database activity records depends on the engine version of the DB cluster\.[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)All of the following fields are in both version 1\.0 and version 1\.1 except where specifically noted\. | 
+|  [databaseActivityEvents](#DBActivityStreams.AuditLog.databaseActivityEvents)  | string |  A JSON object containing the activity events\.  | 
+| key | string | An encryption key you use to decrypt the [databaseActivityEventList](#DBActivityStreams.AuditLog.databaseActivityEventList) databaseActivityEventList JSON array\. | 
+
+#### databaseActivityEvents JSON Object<a name="DBActivityStreams.AuditLog.databaseActivityEvents"></a>
+
+The `databaseActivityEvents` JSON object contains the following information\.
 
 
 ****  
@@ -365,7 +403,7 @@ The audit log activity event record is a JSON object that contains the following
 |  `type`  | string |  The type of JSON record\. The value is `DatabaseActivityMonitoringRecord`\.  | 
 | clusterId | string | The DB cluster ID | 
 | instanceId | string | The DB instance ID\. | 
-|  `databaseActivityEventList`   | string |  A JSON object encrypted as a base64 byte array\. Take the following steps to decrypt this content: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)  | 
+|  [databaseActivityEventList](#DBActivityStreams.AuditLog.databaseActivityEventList)   | string |  A JSON object encrypted as a base64 byte array\. Take the following steps to decrypt this content: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)  | 
 
 #### databaseActivityEventList JSON Array<a name="DBActivityStreams.AuditLog.databaseActivityEventList"></a>
 
@@ -383,8 +421,9 @@ The audit log payload is an encrypted `databaseActivityEventList` JSON array\. T
 | databaseName | string | The database to which the user connected\. | 
 | dbProtocol | string | The database protocol\. | 
 | dbUserName | string | The database user with which the client authenticated\. | 
-| exitCode | int | A value used for a session exit record\. On a clean exit, this contains the exit code\. An exit code can't always be obtained in some failure scenarios\. Examples are if PostgreSQL does an exit\(\) or if an operator performs a command such as kill \-9\. | 
-| logTime | string | A timestamp as recorded in the auditing code path\. | 
+| errorMessage\(version 1\.1 database activity records only\) | string |  If there was any error, this field is populated with the error message that would've been generated by the DB server\. The `errorMessage` value is null for normal statements that didn't result in an error\.  An error is defined as any activity that would produce a client\-visible PostgreSQL error log event at a severity level of `ERROR` or greater\. For more information, see [PostgreSQL Message Severity Levels](https://www.postgresql.org/docs/current/runtime-config-logging.html#RUNTIME-CONFIG-SEVERITY-LEVELS)\. For example, syntax errors and query cancellations generate an error message\.  Internal PostgreSQL server errors such as background checkpointer process errors do not generate an error message\. However, records for such events are still emitted regardless of the setting of the log severity level\. This prevents attackers from turning off logging to attempt avoiding detection\. See also the `exitCode` field\.  | 
+| exitCode | int | A value used for a session exit record\. On a clean exit, this contains the exit code\. An exit code can't always be obtained in some failure scenarios\. Examples are if PostgreSQL does an exit\(\) or if an operator performs a command such as kill \-9\.If there was any error, the `exitCode` field shows the SQL error code, `SQLSTATE`, as listed in [ PostgreSQL Error Codes](https://www.postgresql.org/docs/current/errcodes-appendix.html)\. See also the `errorMessage` field\. | 
+| logTime | string | A timestamp as recorded in the auditing code path\. This represents the SQL statement execution end time\. See also the startTime field\. | 
 | netProtocol | string | The network communication protocol\. | 
 | objectName | string | The name of the database object if the SQL statement is operating on one\. This field is used only where the SQL statement operates on a database object\. If the SQL statement is not operating on an object, this value is null\. | 
 | objectType | string | The database object type such as table, index, view, and so on\. This field is used only where the SQL statement operates on a database object\. If the SQL statement is not operating on an object, this value is null\. Valid values include the following:[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html) | 
@@ -398,6 +437,7 @@ The audit log payload is an encrypted `databaseActivityEventList` JSON array\. T
 | serverVersion | string | The database server version\. | 
 | serviceName | string | The name of the service, for example Amazon Aurora PostgreSQL\-Compatible edition\.  | 
 | sessionId | int | A pseudo\-unique session identifier\. | 
+| startTime\(version 1\.1 database activity records only\) | string |  The time when execution began for the SQL statement\.  To calculate the approximate execution time of the SQL statement, use `logTime – startTime`\. See also the `logTime` field\.  | 
 | statementId | int | An ID for the client's SQL statement\. The counter is at the session level and increments with each SQL statement entered by the client\.  | 
 | substatementId | int | An ID for a SQL substatement\. This value counts the contained substatements for each SQL statement identified by the statementId field\. | 
 | type | string | The event type\. Valid values are record or heartbeat\. | 
@@ -721,7 +761,7 @@ def decrypt_payload(payload, data_key):
 
 def decrypt_decompress(payload, key):
     decrypted = decrypt_payload(payload, key)
-    return zlib.decompress(decrypted, zlib.MAX_WBITS + 1)
+    return zlib.decompress(decrypted, zlib.MAX_WBITS + 16)
 
 
 def main():

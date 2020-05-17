@@ -297,7 +297,7 @@ For Aurora PostgreSQL DB instances, you can control the limit for the SQL text t
 
 To do so, modify the `track_activity_query_size` DB instance parameter\. On Aurora PostgreSQL version 9\.6, the default setting for the `track_activity_query_size` parameter is 1,024 bytes\. On Aurora PostgreSQL version 10 or higher, the default setting for the `track_activity_query_size` parameter is 4,096 bytes\. 
 
-You can increase the number of bytes to increase the SQL text size visible in the Performance Insights dashboard\. The limit for the parameter is 10,240 bytes\. For more information about the `track_activity_query_size` DB instance parameter, see [Run\-time Statistics](https://www.postgresql.org/docs/current/runtime-config-statistics.html) in the PostgreSQL documentation\.
+You can increase the number of bytes to increase the SQL text size visible in the Performance Insights dashboard\. The limit for the parameter is 102,400 bytes\. For more information about the `track_activity_query_size` DB instance parameter, see [Run\-time Statistics](https://www.postgresql.org/docs/current/runtime-config-statistics.html) in the PostgreSQL documentation\.
 
 To modify the parameter, change the parameter setting in the parameter group that is associated with the Aurora PostgreSQL DB instance\.
 
