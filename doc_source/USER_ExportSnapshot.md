@@ -2,7 +2,7 @@
 
 You can export DB snapshot data to an Amazon S3 bucket\. After the data is exported, you can analyze the exported data directly through tools like Amazon Athena or Amazon Redshift Spectrum\. The export process runs in the background and doesn't affect the performance of your active DB cluster\.
 
-When you export a DB snapshot, Amazon Aurora extracts data from the snapshot and stores it in an Amazon S3 bucket in your account\. The data is stored in an Apache Parquet format that is compressed and consistent\. 
+When you export a DB snapshot, Amazon Aurora extracts data from the snapshot and stores it in an Amazon S3 bucket in your account\. The data is stored in an Apache Parquet format that is compressed and consistent\.
 
 You can export manual snapshots and automated system snapshots\. By default, all data in the snapshot is exported\. However, you can choose to export specific sets of databases, schemas, or tables\.
 

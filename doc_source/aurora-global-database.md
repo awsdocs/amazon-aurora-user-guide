@@ -61,15 +61,14 @@ Following, you can find a description of Amazon Aurora Global Database\. Each Au
   + Asia Pacific \(Seoul\)
   + Canada \(Central\)
 +  A secondary cluster must be in a different AWS Region than the primary cluster\. 
-+  You can't create an Aurora MySQL cross\-Region read replica from the primary cluster in the same region as a secondary cluster\. See [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md) for information about cross\-Region read replicas\. 
 + To upgrade your global database clusters, you must upgrade the secondary clusters before the primary cluster\. For more information about upgrading, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching) or [Upgrading the PostgreSQL DB Engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\. 
++  You can start a Database Activity Stream only on the primary cluster, not on any secondary clusters\. For information about Database Activity Streams, see [Using Database Activity Streams with Aurora PostgreSQL](DBActivityStreams.md)\.
 
  The following features aren't supported for Aurora Global Database: 
 +  Cloning\. For information about cloning, see [Cloning Databases in an Aurora DB Cluster](Aurora.Managing.Clone.md)\. 
 +  Backtrack\. For information about backtracking, see [Backtracking an Aurora DB Cluster](AuroraMySQL.Managing.Backtrack.md)\. 
 +  Parallel query\. For information about parallel query, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\. 
 +  Aurora Serverless\. For information about Aurora Serverless, see [Using Amazon Aurora Serverless](aurora-serverless.md)\. 
-+ Database Activity Streams\. For information about Database Activity Streams, see [Using Database Activity Streams with Aurora PostgreSQL](DBActivityStreams.md)\.
 +  Stopping and starting the DB clusters within the global database\. See [Stopping and Starting an Amazon Aurora DB Cluster](aurora-cluster-stop-start.md) for information about stopping and starting Aurora clusters\. 
 
 ## Creating an Aurora Global Database<a name="aurora-global-database-creating"></a>

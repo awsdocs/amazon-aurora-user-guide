@@ -224,26 +224,29 @@ psql=> INSERT INTO sample_table (bid,name) VALUES (1, 'Monday'), (2,'Tuesday'), 
 
 ### Calling aws\_s3\.export\_query\_to\_s3<a name="postgresql-s3-export-examples-basic"></a>
 
-The following shows the basic ways of calling the [aws\_s3\.export\_query\_to\_s3](#aws_s3.export_query_to_s3) function\. Although the parameters vary, the results are the same for these examples\. All rows of the `sample_table` table are exported into a bucket called `sample-bucket`\. 
+The following shows the basic ways of calling the [aws\_s3\.export\_query\_to\_s3](#aws_s3.export_query_to_s3) function\. 
+
+These examples use the variable `s3_uri_1` to identify a structure that contains the information identifying the Amazon S3 file\. Use the [aws\_commons\.create\_s3\_uri](#aws_commons.create_s3_uri) function to create the structure\.
 
 ```
-psql=> SELECT * from aws_s3.query_export_to_s3('select * from sample_table', :'s3_uri_1');
-psql=> SELECT * from aws_s3.query_export_to_s3('select * from sample_table', :'s3_uri_1', options :='format text');
+psql=> SELECT aws_commons.create_s3_uri(
+   'sample-bucket',
+   'sample-filepath',
+   'us-west-2'
+) AS s3_uri_1 \gset
+```
+
+Although the parameters vary for the following two `aws_s3.query_export_to_s3` function calls, the results are the same for these examples\. All rows of the `sample_table` table are exported into a bucket called `sample-bucket`\. 
+
+```
+psql=> SELECT * FROM aws_s3.query_export_to_s3('SELECT * FROM sample_table', :'s3_uri_1');
+
+psql=> SELECT * FROM aws_s3.query_export_to_s3('SELECT * FROM sample_table', :'s3_uri_1', options :='format text');
 ```
 
 The parameters are described as follows:
-+ `'select * from sample_table'` – The first parameter is a required text string containing an SQL query\. The PostgreSQL engine runs this query\. The results of the query are copied to the S3 bucket identified in other parameters\.
-+ `:'s3_uri_1'` – This parameter is a structure that contains the information identifying the Amazon S3 file\. Use the [aws\_commons\.create\_s3\_uri](#aws_commons.create_s3_uri) function to create the structure as shown following\.
-
-  ```
-  psql=> SELECT aws_commons.create_s3_uri(
-     'sample-bucket',
-     'sample-filepath',
-     'us-west-2'
-  ) AS s3_uri_1 \gset
-  ```
-
-  Or you can include the `aws_commons.create_s3_uri` function call inline within the `aws_s3.query_export_to_s3` function call\.
++ `'SELECT * FROM sample_table'` – The first parameter is a required text string containing an SQL query\. The PostgreSQL engine runs this query\. The results of the query are copied to the S3 bucket identified in other parameters\.
++ `:'s3_uri_1'` – This parameter is a structure that identifies the Amazon S3 file\. This example uses a variable to identify the previously created structure\. You can instead create the structure by including the `aws_commons.create_s3_uri` function call inline within the `aws_s3.query_export_to_s3` function call as follows\.
 
   ```
   SELECT * from aws_s3.query_export_to_s3('select * from sample_table', 

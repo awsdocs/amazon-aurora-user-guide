@@ -83,6 +83,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `vacuum_multixact_freeze_min_age`  |  Yes  | 
 |  `vacuum_multixact_freeze_table_age`  |  Yes  | 
 |  `wal_buffers`  |  Yes  | 
+| `wal_sender_timeout` | Yes | 
 
 ### Aurora PostgreSQL Instance\-level Parameters<a name="AuroraPostgreSQL.Reference.Parameters.Instance"></a>
 
@@ -274,7 +275,6 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `update_process_title` | Yes | 
 | `wal_receiver_status_interval` | Yes | 
 | `wal_receiver_timeout` | Yes | 
-| `wal_sender_timeout` | Yes | 
 | `work_mem` | Yes | 
 | `xmlbinary` | Yes | 
 | `xmloption` | Yes | 

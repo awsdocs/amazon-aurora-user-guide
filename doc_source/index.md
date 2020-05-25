@@ -263,6 +263,7 @@ Amazon's trademarks and trade dress may not be used in
          + [Connecting to Your DB Cluster Using IAM Authentication](UsingWithRDS.IAMDBAuth.Connecting.md)
             + [Connecting to Your DB Cluster Using IAM Authentication from the Command Line: AWS CLI and mysql Client](UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.md)
             + [Connecting to Your DB Cluster Using IAM Authentication from the Command Line: AWS CLI and psql Client](UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.PostgreSQL.md)
+            + [Connecting to Your DB Cluster Using IAM Authentication and the AWS SDK for Python (Boto 3)](UsingWithRDS.IAMDBAuth.Connecting.Python.md)
             + [Connecting to Your DB Cluster Using IAM Authentication and the AWS SDK for Java](UsingWithRDS.IAMDBAuth.Connecting.Java.md)
       + [Troubleshooting Amazon Aurora Identity and Access](security_iam_troubleshoot.md)
    + [Kerberos Authentication](kerberos-authentication.md)

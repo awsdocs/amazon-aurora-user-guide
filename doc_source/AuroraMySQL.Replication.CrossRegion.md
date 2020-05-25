@@ -334,7 +334,7 @@ You receive this error if you have updated the `binlog_format` DB cluster parame
 
 ### Source cluster \[DB cluster ARN\] already has a read replica in this region<a name="AuroraMySQL.Replication.CrossRegion.Troubleshooting.3"></a>
 
-You can only have one cross\-Region DB cluster that is a read replica for each source DB cluster in any AWS Region\. To create a new cross\-Region DB cluster that is a read replica in a particular AWS Region, you must delete the existing one\.
+You can have up to five cross\-Region DB clusters that are read replicas for each source DB cluster in any AWS Region\. If you already have the maximum number of read replicas for a DB cluster in a particular AWS Region, you must delete an existing one before you can create a new cross\-Region DB cluster in that Region\.
 
 ### DB cluster \[DB cluster ARN\] requires a database engine upgrade for cross\-Region replication support<a name="AuroraMySQL.Replication.CrossRegion.Troubleshooting.4"></a>
 
