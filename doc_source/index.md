@@ -73,7 +73,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Working with Amazon Resource Names (ARNs) in Amazon RDS](USER_Tagging.ARN.md)
    + [Amazon Aurora Updates](Aurora.Updates.md)
 + [Monitoring an Amazon Aurora DB Cluster](MonitoringAurora.md)
-   + [Overview of Monitoring Amazon RDS](MonitoringOverview.md)
+   + [Overview of Monitoring Amazon Aurora](MonitoringOverview.md)
    + [Viewing an Amazon Aurora DB Cluster](Aurora.Viewing.md)
    + [DB Cluster Status](Aurora.Status.md)
    + [DB Instance Status](Overview.DBInstance.Status.md)

@@ -4,6 +4,26 @@ With the query editor for Aurora Serverless, you can run SQL queries in the RDS 
 
 The query editor requires an Aurora Serverless DB cluster with the Data API enabled\. For information about creating an Aurora Serverless DB cluster with the Data API enabled, see [Using the Data API for Aurora Serverless](data-api.md)\.
 
+## Availability of the Query Editor<a name="query-editor.regions"></a>
+
+The query editor is only available for the following Aurora Serverless DB clusters:
++ Aurora with MySQL version 5\.6 compatibility
++ Aurora with PostgreSQL version 10\.7 compatibility
+
+The query editor is currently available for Aurora Serverless in the following AWS Regions:
++ Asia Pacific \(Singapore\)
++ Asia Pacific \(Sydney\)
++ Asia Pacific \(Tokyo\)
++ Asia Pacific \(Mumbai\)
++ Europe \(Frankfurt\)
++ Europe \(Ireland\)
++ Europe \(London\)
++ Europe \(Paris\)
++ US East \(N\. Virginia\)
++ US East \(Ohio\)
++ US West \(N\. California\)
++ US West \(Oregon\)
+
 ## Authorizing Access to the Query Editor<a name="query-editor.access"></a>
 
 A user must be authorized to run queries in the query editor\. You can authorize a user to run queries in the query editor by adding the `AmazonRDSDataFullAccess` policy, a predefined AWS Identity and Access Management \(IAM\) policy, to that user\.

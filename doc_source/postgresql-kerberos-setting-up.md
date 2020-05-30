@@ -207,7 +207,7 @@ When you use the AWS CLI, the following parameters are required for the DB clust
 For example, the following CLI command modifies a DB cluster to use a directory\.
 
 ```
-aws rds  modify-db-cluster --db-instance-identifier mydbinstance --domain d-Directory-ID --domain-iam-role-name role-name 
+aws rds  modify-db-cluster --db-cluster-identifier mydbinstance --domain d-Directory-ID --domain-iam-role-name role-name 
 ```
 
 **Important**  

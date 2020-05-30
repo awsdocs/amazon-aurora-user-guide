@@ -20,11 +20,18 @@ The following table shows the AWS Regions where the Data API is currently availa
 
 | Region | Link | 
 | --- | --- | 
+| Asia Pacific \(Singapore\) | rds\-data\.ap\-southeast\-1\.amazonaws\.com | 
+| Asia Pacific \(Sydney\) | rds\-data\.ap\-southeast\-2\.amazonaws\.com | 
+| Asia Pacific \(Tokyo\) | rds\-data\.ap\-northeast\-1\.amazonaws\.com | 
+| Asia Pacific \(Mumbai\) | rds\-data\.ap\-south\-1\.amazonaws\.com | 
+| Europe \(Frankfurt\) | rds\-data\.eu\-central\-1\.amazonaws\.com | 
+| Europe \(Ireland\) | rds\-data\.eu\-west\-1\.amazonaws\.com | 
+| Europe \(London\) | rds\-data\.eu\-west\-2\.amazonaws\.com | 
+| Europe \(Paris\) | rds\-data\.eu\-west\-3\.amazonaws\.com | 
 | US East \(N\. Virginia\) | rds\-data\.us\-east\-1\.amazonaws\.com | 
 | US East \(Ohio\) | rds\-data\.us\-east\-2\.amazonaws\.com | 
+| US West \(N\. California\) | rds\-data\.us\-west\-1\.amazonaws\.com | 
 | US West \(Oregon\) | rds\-data\.us\-west\-2\.amazonaws\.com | 
-| Europe \(Ireland\) | rds\-data\.eu\-west\-1\.amazonaws\.com | 
-| Asia Pacific \(Tokyo\) | rds\-data\.ap\-northeast\-1\.amazonaws\.com | 
 
 ## Authorizing Access to the Data API<a name="data-api.access"></a>
 
