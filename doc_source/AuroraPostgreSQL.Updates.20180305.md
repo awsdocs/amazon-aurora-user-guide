@@ -9,13 +9,17 @@ The following table shows the version of each Aurora PostgreSQL release and the 
 
 | Aurora with PostgreSQL Compatibility | Compatible PostgreSQL Release | 
 | --- | --- | 
+|  |  | 
+| [Version 3\.2](#AuroraPostgreSQL.Updates.20180305.32) | [11\.7](https://www.postgresql.org/docs/11/release-11-7.html) | 
 | [Version 3\.1](#AuroraPostgreSQL.Updates.20180305.31) | [11\.6](https://www.postgresql.org/docs/11/release-11-6.html) | 
 | [Version 3\.0](#AuroraPostgreSQL.Updates.20180305.30) | [11\.4](https://www.postgresql.org/docs/11/release-11-4.html) | 
+| [Version 2\.5](#AuroraPostgreSQL.Updates.20180305.25) | [10\.12](https://www.postgresql.org/docs/10/release-10-12.html) | 
 | [Version 2\.4](#AuroraPostgreSQL.Updates.20180305.24) | [10\.11](https://www.postgresql.org/docs/10/release-10-11.html) | 
 | [Version 2\.3](#AuroraPostgreSQL.Updates.20180305.23) | [10\.7](https://www.postgresql.org/docs/10/release-10-7.html) | 
 | [Version 2\.2](#AuroraPostgreSQL.Updates.20180305.22) | [10\.6](https://www.postgresql.org/docs/current/static/release-10-6.html) | 
 | [Version 2\.1](#AuroraPostgreSQL.Updates.20180305.21) | [10\.5](https://www.postgresql.org/docs/current/static/release-10-5.html) | 
 | [Version 2\.0](#AuroraPostgreSQL.Updates.20180305.20) | [10\.4](https://www.postgresql.org/docs/current/static/release-10-4.html) | 
+| [Version 1\.7](#AuroraPostgreSQL.Updates.20180305.17) | [9\.6\.17](https://www.postgresql.org/docs/9.6/release-9-6-17.html) | 
 | [Version 1\.6](#AuroraPostgreSQL.Updates.20180305.16) | [9\.6\.16](https://www.postgresql.org/docs/9.6/release-9-6-16.html) | 
 | [Version 1\.5](#AuroraPostgreSQL.Updates.20180305.15) | [9\.6\.12](https://www.postgresql.org/docs/9.6/release-9-6-12.html) | 
 | [Version 1\.4](#AuroraPostgreSQL.Updates.20180305.14) | [9\.6\.11](https://www.postgresql.org/docs/9.6/release-9-6-11.html) | 
@@ -25,6 +29,73 @@ The following table shows the version of each Aurora PostgreSQL release and the 
 | [Version 1\.0](#AuroraPostgreSQL.Updates.20180305.10) | [9\.6\.3](https://www.postgresql.org/docs/current/static/release-9-6-3.html) deprecated | 
 
 The following Aurora PostgreSQL versions are supported\. 
+
+## Version 3\.2<a name="AuroraPostgreSQL.Updates.20180305.32"></a>
+
+This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.7\. For more information about the improvements in release 11\.7, see [PostgreSQL Release 11\.7](https://www.postgresql.org/docs/11/release-11-7.html)\.
+
+**Topics**
++ [Version 3\.2\.1](#AuroraPostgreSQL.Updates.20180305.321)
+
+### Version 3\.2\.1<a name="AuroraPostgreSQL.Updates.20180305.321"></a>
+
+**New Features**
+
+1. Added support for Amazon Aurora PostgreSQL Global Database\. For more information, see [Working with Amazon Aurora Global Databases](aurora-global-database.md)\.
+
+1. Added the ability to configure the recovery point objective \(RPO\) of a global database for Aurora PostgreSQL\. For more information, see [Managing Recovery for an Aurora Global Database](aurora-global-database.md#aurora-global-database-manage-recovery)\.
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**  
+None\.
+
+**High Priority Stability Enhancements**
+
+1. Improved performance and availability of read instances when applying DROP TABLE and TRUNCATE TABLE operations\.
+
+1. Fixed a small but continuous memory leak in a diagnostic module that could lead to an out\-of\-memory condition on smaller DB instance types\.
+
+1. Fixed a bug in the `PostGIS` extension which could lead to a database restart\. This has been reported to the PostGIS community as [https://trac.osgeo.org/postgis/ticket/4646](https://trac.osgeo.org/postgis/ticket/4646)\.
+
+1. Fixed a bug where read requests might hang due to incorrect error handling in the storage engine\.
+
+1. Fixed a bug that fails for some queries and results in the message, ERROR: found xmin xxxxxx from before relfrozenxid yyyyyyy\. This could occur following the promotion of a read instance to a write instance\.
+
+1. Fixed a bug where an Aurora serverless DB cluster might crash while rolling back a scale attempt\.
+
+**Additional Improvements and Enhancements**
+
+1. Improved performance for queries that read many rows from storage\.
+
+1. Improved performance and availability of reader DB instances during heavy read workload\.
+
+1. Enabled correlated IN and NOT IN subqueries to be transformed to joins when possible\.
+
+1. Improved the filtering estimation for enhanced semi\-join filter pushdown by using multi\-column statistics or indexes when available\.
+
+1. Improved read performance of the `pg_prewarm` extension\.
+
+1. Fixed a bug where an Aurora serverless DB cluster may report the meassage, ERROR: incorrect binary data format in bind parameter \.\.\. following a scale event\.
+
+1. Fixed a bug where a serverless DB cluster may report the meassage, ERROR: insufficient data left in message following a scale event\.
+
+1. Fixed a bug where an Aurora serverless DB cluster may experience prolonged or failed scale attempts\.
+
+1. Fixed a bug that resulted in the message, ERROR: could not create file "base/xxxxxx/yyyyyyy" as a previous version still exists on disk: Success\. Please contact AWS customer support\. This can occur during object creation after PostgreSQL's 32\-bit object identifier has wrapped around\. 
+
+1. Fixed a bug where the write\-ahead\-log \(WAL\) segment files for PostgreSQL logical replication were not deleted when changing the `wal_level` value from `logical` to `replica`\.
+
+1. Fixed a bug in the `pg_hint_plan` extension where a multi\-statement query could lead to a crash when `enable_hint_table` is enabled\. This is tracked in the PostgreSQL community as [https://github.com/ossc-db/pg_hint_plan/issues/25](https://github.com/ossc-db/pg_hint_plan/issues/25)\.
+
+1. Fixed a bug where JDBC clients might report the message, java\.io\.IOException: Unexpected packet type: 75 following a scale event in an Aurora serverless DB cluster\.
+
+1. Fixed a bug in PostgreSQL logical replication that resulted in the message, ERROR: snapshot reference is not owned by resource owner TopTransaction\.
+
+1. Changed the following extensions:
+   + Updated `orafce` to version 3\.8
+   + Updated `PGAudit` to version 1\.3\.1
+   + Updated `pgTAP` to version 1\.1 
 
 ## Version 3\.1<a name="AuroraPostgreSQL.Updates.20180305.31"></a>
 
@@ -207,6 +278,70 @@ You can find the following improvements in this engine update\.
    +  `postgis_tiger_geocoder` to version 2\.5\.1
    +  `postgis_topology` to version 2\.5\.1
    +  `rds_activity_stream` to version 1\.3
+
+## Version 2\.5<a name="AuroraPostgreSQL.Updates.20180305.25"></a>
+
+This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.12\. For more information about the improvements in release 10\.12, see [ PostgreSQL Release 10\.12](https://www.postgresql.org/docs/10/release-10-12.html)\.
+
+**Topics**
++ [Version 2\.5\.1](#AuroraPostgreSQL.Updates.20180305.251)
+
+### Version 2\.5\.1<a name="AuroraPostgreSQL.Updates.20180305.251"></a>
+
+**New Features**
+
+1. Added support for Amazon Aurora PostgreSQL Global Database\. For more information, see [Working with Amazon Aurora Global Databases](aurora-global-database.md)\.
+
+1. Added the ability to configure the recovery point objective \(RPO\) of a global database for Aurora PostgreSQL\. For more information, see [Managing Recovery for an Aurora Global Database](aurora-global-database.md#aurora-global-database-manage-recovery)\.
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**  
+None\.
+
+**High Priority Stability Enhancements**
+
+1. Improved performance and availability of read instances when applying DROP TABLE and TRUNCATE TABLE operations\.
+
+1. Fixed a small but continuous memory leak in a diagnostic module that could lead to an out\-of\-memory condition on smaller DB instance types\.
+
+1. Fixed a bug in the `PostGIS` extension which could lead to a database restart\. This has been reported to the PostGIS community as [https://trac.osgeo.org/postgis/ticket/4646](https://trac.osgeo.org/postgis/ticket/4646)\.
+
+1. Fixed a bug where read requests might hang due to incorrect error handling in the storage engine\.
+
+1. Fixed a bug that fails for some queries and results in the message, ERROR: found xmin xxxxxx from before relfrozenxid yyyyyyy\. This could occur following the promotion of a read instance to a write instance\.
+
+1. Fixed a bug where an Aurora serverless DB cluster might crash while rolling back a scale attempt\.
+
+**Additional Improvements and Enhancements**
+
+1. Improved performance for queries that read many rows from storage\.
+
+1. Improved performance and availability of reader DB instances during heavy read workload\.
+
+1. Enabled correlated IN and NOT IN subqueries to be transformed to joins when possible\.
+
+1. Improved read performance of the `pg_prewarm` extension\.
+
+1. Fixed a bug where an Aurora serverless DB cluster may report the meassage, ERROR: incorrect binary data format in bind parameter \.\.\. following a scale event\.
+
+1. Fixed a bug where a serverless DB cluster may report the meassage, ERROR: insufficient data left in message following a scale event\.
+
+1. Fixed a bug where an Aurora serverless DB cluster may experience prolonged or failed scale attempts\.
+
+1. Fixed a bug that resulted in the message, ERROR: could not create file "base/xxxxxx/yyyyyyy" as a previous version still exists on disk: Success\. Please contact AWS customer support\. This can occur during object creation after PostgreSQL's 32\-bit object identifier has wrapped around\. 
+
+1. Fixed a bug where the write\-ahead\-log \(WAL\) segment files for PostgreSQL logical replication were not deleted when changing the `wal_level` value from `logical` to `replica`\.
+
+1. Fixed a bug in the `pg_hint_plan` extension where a multi\-statement query could lead to a crash when `enable_hint_table` is enabled\. This is tracked in the PostgreSQL community as [https://github.com/ossc-db/pg_hint_plan/issues/25](https://github.com/ossc-db/pg_hint_plan/issues/25)\.
+
+1. Fixed a bug where JDBC clients might report the message, java\.io\.IOException: Unexpected packet type: 75 following a scale event in an Aurora serverless DB cluster\.
+
+1. Fixed a bug in PostgreSQL logical replication that resulted in the message, ERROR: snapshot reference is not owned by resource owner TopTransaction\.
+
+1. Changed the following extensions:
+   + Updated `orafce` to version 3\.8
+   + Updated `PGAudit` to version 1\.2\.1
 
 ## Version 2\.4<a name="AuroraPostgreSQL.Updates.20180305.24"></a>
 
@@ -613,6 +748,46 @@ You can find the following improvements in this engine update\.
 1. Parallel queries – When you create a new Aurora PostgreSQL version 2\.0 instance, parallel queries are enabled for the `default.postgres10` parameter group\. The parameter `max_parallel_workers_per_gather` is set to 2 by default, but you can modify it to support your specific workload requirements\.
 
 1. Fixed a bug whereby read nodes may crash following a specific type of free space change from the write node\.
+
+## Version 1\.7<a name="AuroraPostgreSQL.Updates.20180305.17"></a>
+
+This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.17\. For more information about the improvements in release 9\.6\.17, see [ PostgreSQL Release 9\.6\.17](https://www.postgresql.org/docs/9.6/release-9-6-17.html)\.
+
+**Topics**
++ [Version 1\.7\.1](#AuroraPostgreSQL.Updates.20180305.171)
+
+### Version 1\.7\.1<a name="AuroraPostgreSQL.Updates.20180305.171"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**  
+None\.
+
+**High Priority Stability Enhancements**
+
+1. Improved performance and availability of read instances when applying DROP TABLE and TRUNCATE TABLE operations\.
+
+1. Fixed a small but continuous memory leak in a diagnostic module that could lead to an out\-of\-memory condition on smaller DB instance types\.
+
+1. Fixed a bug in the `PostGIS` extension which could lead to a database restart\. This has been reported to the PostGIS community as [https://trac.osgeo.org/postgis/ticket/4646](https://trac.osgeo.org/postgis/ticket/4646)\.
+
+1. Fixed a bug where read requests might hang due to incorrect error handling in the storage engine\.
+
+1. Fixed a bug that fails for some queries and results in the message, ERROR: found xmin xxxxxx from before relfrozenxid yyyyyyy\. This could occur following the promotion of a read instance to a write instance\.
+
+**Additional Improvements and Enhancements**
+
+1. Improved performance for queries that read many rows from storage\.
+
+1. Improved performance and availability of reader DB instances during heavy read workload\.
+
+1. Fixed a bug that resulted in the message, ERROR: could not create file "base/xxxxxx/yyyyyyy" as a previous version still exists on disk: Success\. Please contact AWS customer support\. This can occur during object creation after PostgreSQL's 32\-bit object identifier has wrapped around\. 
+
+1. Fixed a bug in the `pg_hint_plan` extension where a multi\-statement query could lead to a crash when `enable_hint_table` is enabled\. This is tracked in the PostgreSQL community as [https://github.com/ossc-db/pg_hint_plan/issues/25](https://github.com/ossc-db/pg_hint_plan/issues/25)\.
+
+1. Changed the following extensions:
+   + Updated `orafce` to version 3\.8
+   + Updated `PGAudit` to version 1\.1\.2
 
 ## Version 1\.6<a name="AuroraPostgreSQL.Updates.20180305.16"></a>
 

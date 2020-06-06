@@ -16,7 +16,7 @@
 + [High Availability Considerations for Amazon Aurora MySQL Replication](#AuroraMySQL.Replication.Availability)
 + [Monitoring Amazon Aurora MySQL Replication](#AuroraMySQL.Replication.Monitoring)
 + [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)
-+ [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster](AuroraMySQL.Replication.MySQL.md)
++ [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster \(Binlog Replication\)](AuroraMySQL.Replication.MySQL.md)
 + [Using GTID\-Based Replication for Aurora MySQL](mysql-replication-gtid.md)
 
 ## Using Aurora Replicas<a name="AuroraMySQL.Replication.Replicas"></a>
@@ -44,7 +44,7 @@ You can set up replication between any of the following options:
   For more information, see [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\.
 + Two Aurora MySQL DB clusters in the same AWS Region, by using MySQL binary log \(binlog\) replication\.
 
-  For more information, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster](AuroraMySQL.Replication.MySQL.md)\.
+  For more information, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster \(Binlog Replication\)](AuroraMySQL.Replication.MySQL.md)\.
 + An Amazon RDS MySQL DB instance as the master and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an Amazon RDS MySQL DB instance\.
 
    Typically, this approach is used for migration to Aurora MySQL, rather than for ongoing replication\. For more information, see [Migrating Data from a MySQL DB Instance to an Amazon Aurora MySQL DB Cluster by Using a DB Snapshot](AuroraMySQL.Migrating.RDSMySQL.md)\.
@@ -54,11 +54,11 @@ Rebooting the primary instance of an Amazon Aurora DB cluster also automatically
 
 ## Performance Considerations for Amazon Aurora MySQL Replication<a name="AuroraMySQL.Replication.Performance"></a>
 
- Starting in Aurora MySQL 1\.17\.4, the following features help you to fine\-tune the performance of Aurora MySQL replication\. 
+ the following features help you to fine\-tune the performance of Aurora MySQL replication\. 
 
- The replica log compression feature automatically reduces network bandwidth for replication messages\. Because each message is transmitted to all Aurora Replicas, the benefits are greater for larger clusters\. This feature involves some CPU overhead on the writer node to perform the compression\. Thus, the feature is only available on the `8xlarge` and `16xlarge` instance classes, which have high CPU capacity\. It is enabled by default on these instance classes\. You can control this feature by turning off the `aurora_enable_replica_log_compression` parameter\. For example, you might turn off replica log compression for larger instance classes if your writer node is near its maximum CPU capacity\. 
+ Starting in Aurora MySQL 1\.17\.4, the replica log compression feature automatically reduces network bandwidth for replication messages\. Because each message is transmitted to all Aurora Replicas, the benefits are greater for larger clusters\. This feature involves some CPU overhead on the writer node to perform the compression\. Thus, the feature is only available on the `8xlarge` and `16xlarge` instance classes, which have high CPU capacity\. It is enabled by default on these instance classes\. You can control this feature by turning off the `aurora_enable_replica_log_compression` parameter\. For example, you might turn off replica log compression for larger instance classes if your writer node is near its maximum CPU capacity\. 
 
- The binlog filtering feature automatically reduces network bandwidth for replication messages\. Because the Aurora Replicas don't use the binlog information that is included in the replication messages, that data is omitted from the messages sent to those nodes\. You control this feature by changing the `aurora_enable_repl_bin_log_filtering` parameter\. This parameter is on by default\. Because this optimization is intended to be transparent, you might turn off this setting only during diagnosis or troubleshooting for issues related to replication\. For example, you can do so to match the behavior of an older Aurora MySQL cluster where this feature was not available\. 
+ Starting in Aurora MySQL 1\.17\.4, the binlog filtering feature automatically reduces network bandwidth for replication messages\. Because the Aurora Replicas don't use the binlog information that is included in the replication messages, that data is omitted from the messages sent to those nodes\. You control this feature by changing the `aurora_enable_repl_bin_log_filtering` parameter\. This parameter is on by default\. Because this optimization is intended to be transparent, you might turn off this setting only during diagnosis or troubleshooting for issues related to replication\. For example, you can do so to match the behavior of an older Aurora MySQL cluster where this feature was not available\. 
 
 ## High Availability Considerations for Amazon Aurora MySQL Replication<a name="AuroraMySQL.Replication.Availability"></a>
 
@@ -66,9 +66,9 @@ Rebooting the primary instance of an Amazon Aurora DB cluster also automatically
 
  The tradeoff with having multiple Aurora Replicas is that replicas become unavailable for brief periods when the underlying database instances are restarted\. These restarts can happen during maintenance operations, or when a replica begins to lag too far behind the master\. Restarting a replica interrupts existing connections to the corresponding database instance\. Restarting an Aurora cluster causes all the replicas to become unavailable at the same time\. 
 
- Starting in Aurora MySQL 1\.17\.4, the following feature helps to ensure high availability even during these intervals when replicas are restarted\. 
+ The following features help to ensure high availability even during these intervals when replicas are restarted\. 
 
- The *zero\-downtime restart* \(ZDR\) feature preserves existing connections when an Aurora MySQL Replica is restarted, for example if the replica falls too far behind the master\. Any open transaction is rolled back, and your application must retry it\. To enable this feature, turn on the `aurora_enable_zdr` parameter in the cluster parameter group\. This parameter is off by default\. 
+ Starting in Aurora 1\.17\.4, the *zero\-downtime restart* \(ZDR\) feature preserves existing connections when an Aurora MySQL Replica is restarted, for example if the replica falls too far behind the master\. Any open transaction is rolled back, and your application must retry it\. To enable this feature, turn on the `aurora_enable_zdr` parameter in the cluster parameter group\. This parameter is off by default\. 
 
 ## Monitoring Amazon Aurora MySQL Replication<a name="AuroraMySQL.Replication.Monitoring"></a>
 

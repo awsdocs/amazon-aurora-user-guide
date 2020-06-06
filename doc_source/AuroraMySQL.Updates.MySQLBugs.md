@@ -13,6 +13,7 @@ MySQL 5\.7\-compatible version Aurora contains all MySQL bug fixes through MySQL
 
 | Database engine update | Version | MySQL bugs fixed | 
 | --- | --- | --- | 
+| [Aurora MySQL Database Engine Updates 2020\-05\-28 \(Version 2\.08\.0\)](AuroraMySQL.Updates.2080.md) |  2\.08\.0  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL Database Engine Updates 2020\-04\-17 \(Version 2\.07\.2\)](AuroraMySQL.Updates.2072.md) |  2\.07\.2  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL Database Engine Updates 2019\-11\-25 \(Version 2\.07\.0\)](AuroraMySQL.Updates.2070.md) |  2\.07\.0  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL Database Engine Updates 2019\-11\-11 \(Version 2\.05\.0\)](AuroraMySQL.Updates.2050.md) |  2\.05\.0  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 

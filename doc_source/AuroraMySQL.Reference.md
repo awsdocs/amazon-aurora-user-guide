@@ -1,12 +1,13 @@
 # Amazon Aurora MySQL Reference<a name="AuroraMySQL.Reference"></a>
 
-This reference includes information about Aurora MySQL parameters and status variables\.
+This reference includes information about Aurora MySQL parameters, status variables, and general SQL extensions or differences from the community MySQL database engine\.
 
 **Topics**
 + [Aurora MySQL Parameters](#AuroraMySQL.Reference.ParameterGroups)
 + [Inapplicable MySQL Parameters and Status Variables](#AuroraMySQL.Reference.Parameters.Inapplicable)
 + [Aurora MySQL Events](#AuroraMySQL.Reference.Waitevents)
 + [Aurora MySQL Isolation Levels](#AuroraMySQL.Reference.IsolationLevels)
++ [Aurora MySQL Hints](#AuroraMySQL.Reference.Hints)
 + [Aurora MySQL Stored Procedures](#AuroraMySQL.Reference.StoredProcs)
 
 ## Aurora MySQL Parameters<a name="AuroraMySQL.Reference.ParameterGroups"></a>
@@ -42,7 +43,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `aws_default_lambda_role`  |  Yes  |   For more information, see [Invoking a Lambda Function from an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Lambda.md)\.   | 
 |  `aws_default_s3_role`  |  Yes  |  | 
 |  `binlog_checksum`  |  Yes  |  | 
-|  `binlog_format`  |  Yes  | For more information, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster](AuroraMySQL.Replication.MySQL.md)\. | 
+|  `binlog_format`  |  Yes  | For more information, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster \(Binlog Replication\)](AuroraMySQL.Replication.MySQL.md)\. | 
 |  `binlog_row_image`  |  No  |  | 
 |  `binlog_rows_query_log_events`  |  No  |  | 
 |  `character-set-client-handshake`  |  Yes  |  | 
@@ -208,7 +209,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `key_cache_division_limit` | Yes |  | 
 | `local_infile` | Yes |  | 
 | `lock_wait_timeout` | Yes |  | 
-| `log-bin` | No | Setting `binlog_format` to `STATEMENT`, `MIXED`, or `ROW` automatically sets `log-bin` to `ON`\. Setting `binlog_format` to `OFF` automatically sets `log-bin` to `OFF`\. For more information, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster](AuroraMySQL.Replication.MySQL.md)\. | 
+| `log-bin` | No | Setting `binlog_format` to `STATEMENT`, `MIXED`, or `ROW` automatically sets `log-bin` to `ON`\. Setting `binlog_format` to `OFF` automatically sets `log-bin` to `OFF`\. For more information, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster \(Binlog Replication\)](AuroraMySQL.Replication.MySQL.md)\. | 
 | `log_bin_trust_function_creators` | Yes |  | 
 | `log_bin_use_v1_row_events` | Yes |  | 
 | `log_error` | No |  | 
@@ -260,7 +261,61 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `optimizer_trace_limit` | Yes |  | 
 | `optimizer_trace_max_mem_size` | Yes |  | 
 | `optimizer_trace_offset` | Yes |  | 
+| `performance-schema-consumer-events-waits-current` | Yes |  | 
+| `performance-schema-instrument` | Yes |  | 
 | `performance_schema` | Yes |  | 
+| `performance_schema_accounts_size` | Yes |  | 
+| `performance_schema_consumer_global_instrumentation` | Yes |  | 
+| `performance_schema_consumer_thread_instrumentation` | Yes |  | 
+| `performance_schema_consumer_events_stages_current` | Yes |  | 
+| `performance_schema_consumer_events_stages_history` | Yes |  | 
+| `performance_schema_consumer_events_stages_history_long` | Yes |  | 
+| `performance_schema_consumer_events_statements_current` | Yes |  | 
+| `performance_schema_consumer_events_statements_history` | Yes |  | 
+| `performance_schema_consumer_events_statements_history_long` | Yes |  | 
+| `performance_schema_consumer_events_waits_history` | Yes |  | 
+| `performance_schema_consumer_events_waits_history_long` | Yes |  | 
+| `performance_schema_consumer_statements_digest` | Yes |  | 
+| `performance_schema_digests_size` | Yes |  | 
+| `performance_schema_events_stages_history_long_size` | Yes |  | 
+| `performance_schema_events_stages_history_size` | Yes |  | 
+| `performance_schema_events_statements_history_long_size` | Yes |  | 
+| `performance_schema_events_statements_history_size` | Yes |  | 
+| `performance_schema_events_transactions_history_long_size` | Yes | Aurora MySQL 2\.x only | 
+| `performance_schema_events_transactions_history_size` | Yes | Aurora MySQL 2\.x only | 
+| `performance_schema_events_waits_history_long_size` | Yes |  | 
+| `performance_schema_events_waits_history_size` | Yes |  | 
+| `performance_schema_hosts_size` | Yes |  | 
+| `performance_schema_max_cond_classes` | Yes |  | 
+| `performance_schema_max_cond_instances` | Yes |  | 
+| `performance_schema_max_digest_length` | Yes |  | 
+| `performance_schema_max_file_classes` | Yes |  | 
+| `performance_schema_max_file_handles` | Yes |  | 
+| `performance_schema_max_file_instances` | Yes |  | 
+| `performance_schema_max_index_stat` | Yes | Aurora MySQL 2\.x only | 
+| `performance_schema_max_memory_classes` | Yes | Aurora MySQL 2\.x only | 
+| `performance_schema_max_metadata_locks` | Yes | Aurora MySQL 2\.x only | 
+| `performance_schema_max_mutex_classes` | Yes |  | 
+| `performance_schema_max_mutex_instances` | Yes |  | 
+| `performance_schema_max_prepared_statements_instances` | Yes | Aurora MySQL 2\.x only | 
+| `performance_schema_max_program_instances` | Yes | Aurora MySQL 2\.x only | 
+| `performance_schema_max_rwlock_classes` | Yes |  | 
+| `performance_schema_max_rwlock_instances` | Yes |  | 
+| `performance_schema_max_socket_classes` | Yes |  | 
+| `performance_schema_max_socket_instances` | Yes |  | 
+| `performance_schema_max_sql_text_length` | Yes | Aurora MySQL 2\.x only | 
+| `performance_schema_max_stage_classes` | Yes |  | 
+| `performance_schema_max_statement_classes` | Yes |  | 
+| `performance_schema_max_statement_stack` | Yes | Aurora MySQL 2\.x only | 
+| `performance_schema_max_table_handles` | Yes |  | 
+| `performance_schema_max_table_instances` | Yes |  | 
+| `performance_schema_max_table_lock_stat` | Yes | Aurora MySQL 2\.x only | 
+| `performance_schema_max_thread_classes` | Yes |  | 
+| `performance_schema_max_thread_instances` | Yes |  | 
+| `performance_schema_session_connect_attrs_size` | Yes |  | 
+| `performance_schema_setup_actors_size` | Yes |  | 
+| `performance_schema_setup_objects_size` | Yes |  | 
+| `performance_schema_users_size` | Yes |  | 
 | `pid_file` | No |  | 
 | `plugin_dir` | No | Aurora MySQL uses managed instances where you don't access the filesystem directly\. | 
 | `port` | No | Aurora MySQL manages the connection properties and enforces consistent settings for all DB instances in a cluster\. | 
@@ -505,6 +560,89 @@ set transaction isolation level read committed;
  The `UPDATE` statement at T7 doesn't actually change the number of rows in the table\. However, by changing the length of a variable\-length column, this statement can cause rows to be reorganized internally\. A long\-running `READ COMMITTED` transaction might see the old version of a row, and later within the same query see the new version of the same row\. The query can also skip both the old and new versions of the row\. Thus, the row count might be different than expected\.   
  The results of Q5 and Q6 might be identical or slightly different\. Query Q6 on the Aurora Replica under `READ COMMITTED` is able to see, but is not required to see, the new rows that are committed while the query is running\. It might also see the row from one table but not from the other table\. If the join query doesn't find a matching row in both tables, it returns a count of zero\. If the query does find both the new rows in `PARENT_TABLE` and `CHILD_TABLE`, the query returns a count of one\. In a long\-running query, the lookups from the joined tables might happen at widely separated times\.   
  These differences in behavior depend on the timing of when transactions are committed and when the queries process the underlying table rows\. Thus, you're most likely to see such differences in report queries that take minutes or hours and that run on Aurora clusters processing OLTP transactions at the same time\. These are the kinds of mixed workloads that benefit the most from the `READ COMMITTED` isolation level on Aurora Replicas\. 
+
+## Aurora MySQL Hints<a name="AuroraMySQL.Reference.Hints"></a>
+
+ You can use SQL hints with Aurora MySQL queries to fine\-tune performance\. You can also use hints to prevent execution plans for important queries to change based on unpredictable conditions\. 
+
+**Tip**  
+ To verify the effect that a hint has on a query, examine the query plan produced by the `EXPLAIN` statement\. Compare the query plans with and without the hint\. 
+
+ The following hints apply to queries that use the hash join feature\. These hints are available in Aurora MySQL 2\.08 and higher\. 
+
+**HASH\_JOIN, NO\_HASH\_JOIN**  
+ Turns on or off the ability of the optimizer to choose whether to use the hash join optimization method for a query\. `HASH_JOIN` enables the optimizer to use hash join if that mechanism is more efficient\. `NO_HASH_JOIN` prevents the optimizer from using hash join for the query\. This hint is available in Aurora MySQL 2\.08 and higher\.   
+ The following examples show how to use this hint\.   
+
+```
+EXPLAIN SELECT/*+ HASH_JOIN(t2) */ f1, f2
+  FROM t1, t2 WHERE t1.f1 = t2.f1;
+
+EXPLAIN SELECT /*+ NO_HASH_JOIN(t2) */ f1, f2
+  FROM t1, t2 WHERE t1.f1 = t2.f1;
+```
+
+**HASH\_JOIN\_PROBING, NO\_HASH\_JOIN\_PROBING**  
+ In a hash join query, specifies whether or not to use the specified table for the probe side of the join\. The query tests whether column values from the build table exist in the probe table, instead of reading the entire contents of the probe table\. You can use `HASH_JOIN_PROBING` and `HASH_JOIN_BUILDING` to specify how hash join queries are processed without reordering the tables within the query text\. This hint is available in Aurora MySQL 2\.08 and higher\.   
+ The following examples show how to use this hint\. Specifying the `HASH_JOIN_PROBING` hint for the table `T2` has the same effect as specifying `NO_HASH_JOIN_PROBING` for the table `T1`\.   
+
+```
+EXPLAIN SELECT /*+ HASH_JOIN(t2) HASH_JOIN_PROBING(t2) */ f1, f2
+  FROM t1, t2 WHERE t1.f1 = t2.f1;
+
+EXPLAIN SELECT /*+ HASH_JOIN(t2) NO_HASH_JOIN_PROBING(t1) */ f1, f2
+  FROM t1, t2 WHERE t1.f1 = t2.f1;
+```
+
+**HASH\_JOIN\_BUILDING, NO\_HASH\_JOIN\_BUILDING**  
+ In a hash join query, specifies whether or not to use the specified table for the build side of the join\. The query processes all the rows from this table to build the list of column values to cross\-reference with the other table\. You can use `HASH_JOIN_PROBING` and `HASH_JOIN_BUILDING` to specify how hash join queries are processed without reordering the tables within the query text\. This hint is available in Aurora MySQL 2\.08 and higher\.   
+ The following examples show how to use this hint\. Specifying the `HASH_JOIN_BUILDING` hint for the table `T2` has the same effect as specifying `NO_HASH_JOIN_BUILDING` for the table `T1`\.   
+
+```
+EXPLAIN SELECT /*+ HASH_JOIN(t2) HASH_JOIN_BUILDING(t2) */ f1, f2
+  FROM t1, t2 WHERE t1.f1 = t2.f1;
+
+EXPLAIN SELECT /*+ HASH_JOIN(t2) NO_HASH_JOIN_BUILDING(t1) */ f1, f2
+  FROM t1, t2 WHERE t1.f1 = t2.f1;
+```
+
+**JOIN\_FIXED\_ORDER**  
+ Specifies that tables in the query are joined based on the order they are listed in the query\. It is especially useful with queries involving three or more tables\. It is intended as a replacement for the MySQL `STRAIGHT_JOIN` hint\. Equivalent to the MySQL [JOIN\_FIXED\_ORDER](https://dev.mysql.com/doc/refman/8.0/en/optimizer-hints.html) hint\. This hint is available in Aurora MySQL 2\.08 and higher\.   
+ The following examples show how to use this hint\.   
+
+```
+EXPLAIN SELECT /*+ JOIN_FIXED_ORDER */ f1, f2
+  FROM t1 JOIN t2 USING (id) JOIN t3 USING (id) JOIN t4 USING (id);
+```
+
+**JOIN\_ORDER**  
+ Specifies the join order for the tables in the query\. It is especially useful with queries involving three or more tables\. Equivalent to the MySQL [JOIN\_ORDER](https://dev.mysql.com/doc/refman/8.0/en/optimizer-hints.html) hint\. This hint is available in Aurora MySQL 2\.08 and higher\.   
+ The following examples show how to use this hint\.   
+
+```
+EXPLAIN SELECT /*+ JOIN_ORDER (t4, t2, t1, t3) */ f1, f2
+  FROM t1 JOIN t2 USING (id) JOIN t3 USING (id) JOIN t4 USING (id);
+```
+
+**JOIN\_PREFIX**  
+ Specifies the tables to put first in the join order\. It is especially useful with queries involving three or more tables\. Equivalent to the MySQL [JOIN\_PREFIX](https://dev.mysql.com/doc/refman/8.0/en/optimizer-hints.html) hint\. This hint is available in Aurora MySQL 2\.08 and higher\.   
+ The following examples show how to use this hint\.   
+
+```
+EXPLAIN SELECT /*+ JOIN_ORDER (t4, t2) */ f1, f2
+  FROM t1 JOIN t2 USING (id) JOIN t3 USING (id) JOIN t4 USING (id);
+```
+
+**JOIN\_SUFFIX**  
+ Specifies the tables to put last in the join order\. It is especially useful with queries involving three or more tables\. Equivalent to the MySQL [JOIN\_SUFFIX](https://dev.mysql.com/doc/refman/8.0/en/optimizer-hints.html) hint\. This hint is available in Aurora MySQL 2\.08 and higher\.   
+ The following examples show how to use this hint\.   
+
+```
+EXPLAIN SELECT /*+ JOIN_ORDER (t1, t3) */ f1, f2
+  FROM t1 JOIN t2 USING (id) JOIN t3 USING (id) JOIN t4 USING (id);
+```
+
+ For information about using hash join queries, see [Working with Hash Joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
 
 ## Aurora MySQL Stored Procedures<a name="AuroraMySQL.Reference.StoredProcs"></a>
 

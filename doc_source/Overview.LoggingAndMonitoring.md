@@ -33,7 +33,7 @@ Trusted Advisor has the following Amazon Aurora\-related checks:
 + Aurora DB Instance Accessibility
 For more information on these checks, see [Trusted Advisor Best Practices \(Checks\)](https://aws.amazon.com/premiumsupport/trustedadvisor/best-practices/)\.
 
-**Database Activity Streams**  
-For Aurora PostgreSQL, database activity streams can protect your databases from internal threats by controlling DBA access to the database activity streams\. Thus, the collection, transmission, storage, and subsequent processing of the database activity stream is beyond the access of the DBAs that manage the database\. Database activity streams can provide safeguards for your database and meet compliance and regulatory requirements\. For more information, see [Using Database Activity Streams with Aurora PostgreSQL](DBActivityStreams.md)\.
+**Database activity streams**  
+Database activity streams can protect your databases from internal threats by controlling DBA access to the database activity streams\. Thus, the collection, transmission, storage, and subsequent processing of the database activity stream is beyond the access of the DBAs that manage the database\. Database activity streams can provide safeguards for your database and meet compliance and regulatory requirements\. For more information, see [Using Database Activity Streams with Amazon Aurora](DBActivityStreams.md)\.
 
 For more information about monitoring Aurora see [Monitoring an Amazon Aurora DB Cluster](MonitoringAurora.md)\.

@@ -24,7 +24,7 @@
 + [Amazon Aurora Storage and Reliability](Aurora.Overview.StorageReliability.md)
 + [Amazon Aurora Security](Aurora.Overview.Security.md)
 + [High Availability for Aurora](Concepts.AuroraHighAvailability.md)
-+ [Working with Amazon Aurora Global Database](aurora-global-database.md)
++ [Working with Amazon Aurora Global Databases](aurora-global-database.md)
 + [Replication with Amazon Aurora](Aurora.Replication.md)
 + [DB Instance Billing for Aurora](User_DBInstanceBilling.md)
 

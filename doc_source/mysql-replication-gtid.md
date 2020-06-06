@@ -3,7 +3,7 @@
  Following, you can learn how to use global transaction identifiers \(GTIDs\) with binary log \(binlog\) replication between an Aurora MySQL cluster and an external source\. 
 
 **Note**  
-For Aurora, you can only use this feature with Aurora MySQL clusters that use binlog replication to or from an external MySQL database\. The other database might be an Amazon RDS MySQL instance, an on\-premises MySQL database, or an Aurora DB cluster in a different AWS Region\. To learn how to configure that kind of replication, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster](AuroraMySQL.Replication.MySQL.md)\. 
+For Aurora, you can only use this feature with Aurora MySQL clusters that use binlog replication to or from an external MySQL database\. The other database might be an Amazon RDS MySQL instance, an on\-premises MySQL database, or an Aurora DB cluster in a different AWS Region\. To learn how to configure that kind of replication, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster \(Binlog Replication\)](AuroraMySQL.Replication.MySQL.md)\. 
 
 If you use binlog replication and aren't familiar with GTID\-based replication with MySQL, see [Replication with Global Transaction Identifiers](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids.html) in the MySQL documentation for background\.
 

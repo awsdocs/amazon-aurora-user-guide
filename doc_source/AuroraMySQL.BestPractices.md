@@ -362,6 +362,8 @@ In the output, the `Hash Join Inner table` is the table used to build hash table
 
 For more information about the extended `EXPLAIN` output format, see [Extended EXPLAIN Output Format](https://dev.mysql.com/doc/refman/5.6/en/explain-extended.html) in the MySQL product documentation\.
 
+ In Aurora MySQL 2\.08 and higher, you can use SQL hints to influence whether a query uses hash join or not, and which tables to use for the build and probe sides of the join\. For details, see [Aurora MySQL Hints](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Hints)\. 
+
 ## Working with Foreign Keys in Aurora MySQL<a name="Aurora.BestPractices.ForeignKeys"></a>
 
 We strongly recommend that you don't run any data definition language \(DDL\) statements when the `foreign_key_checks` variable is set to `0` \(off\)\.

@@ -67,7 +67,9 @@ The following are DB engine considerations for DB instance classes:
     ```
     aws rds describe-pending-maintenance-actions
     ```
-  + Aurora PostgreSQL supports only the db\.t3\.medium instance class for versions compatible with PostgreSQL 10\.7 or later\. These instance classes are available for Aurora PostgreSQL in all Aurora regions except China \(Ningxia\)\. 
+  + Aurora PostgreSQL supports the following db\.t3 instance classes:
+    + The db\.t3\.medium instance class is supported for versions compatible with PostgreSQL 10\.7 or later\. These instance classes are available for Aurora PostgreSQL in all Aurora regions except China \(Ningxia\)\. 
+    + The db\.t3\.large instance class is supported for versions compatible with PostgreSQL versions 10\.11 or later and 11\.6 or later\.
 
 
 ****  
@@ -99,7 +101,7 @@ The following are DB engine considerations for DB instance classes:
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
 | db\.t3\.2xlarge | 8 | Variable | 32 | Up to 2,048 | Up to 5 Gbps | No | No | 
 | db\.t3\.xlarge | 4 | Variable | 16 | Up to 2,048 | Up to 5 Gbps | No | No | 
-| db\.t3\.large | 2 | Variable | 8 | Up to 2,048 | Up to 5 Gbps | No | No | 
+| db\.t3\.large | 2 | Variable | 8 | Up to 2,048 | Up to 5 Gbps | No | 10\.11 or later and 11\.6 or later | 
 | db\.t3\.medium | 2 | Variable | 4 | Up to 1,536 | Up to 5 Gbps | 1\.14\.4 and later | 10\.7 or later | 
 | db\.t3\.small | 2 | Variable | 2 | Up to 1,536 | Up to 5 Gbps | 1\.14\.4 and later | No | 
 | db\.t3\.micro | 2 | Variable | 1 | Up to 1,536 | Up to 5 Gbps | No | No | 

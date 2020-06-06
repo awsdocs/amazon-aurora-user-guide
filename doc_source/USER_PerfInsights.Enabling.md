@@ -2,7 +2,7 @@
 
 To use Performance Insights, you must enable it on your DB instance\.
 
-If you use Performance Insights together with Aurora Global Database, you must enable Performance Insights individually for the DB instances in each AWS Region\. For details, see [Performance Insights for Aurora Global Database](aurora-global-database.md#aurora-global-database-pi)\. 
+If you use Performance Insights together with Aurora Global Database, you must enable Performance Insights individually for the DB instances in each AWS Region\. For details, see [Performance Insights for Aurora Global Databases](aurora-global-database.md#aurora-global-database-pi)\. 
 
 The Performance Insights agent consumes limited CPU and memory on the DB host\. When the DB load is high, the agent limits the performance impact by collecting data less frequently\.
 

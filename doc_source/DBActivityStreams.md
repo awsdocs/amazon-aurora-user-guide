@@ -1,39 +1,74 @@
-# Using Database Activity Streams with Aurora PostgreSQL<a name="DBActivityStreams"></a>
+# Using Database Activity Streams with Amazon Aurora<a name="DBActivityStreams"></a>
 
-Monitoring your database activity can help you provide safeguards for your database and meet compliance and regulatory requirements\. One way of monitoring database activity with Amazon Aurora with PostgreSQL compatibility is to use *Database Activity Streams*\. Database Activity Streams provide a near real\-time data stream of the database activity in your relational database\. When you integrate Database Activity Streams with third\-party monitoring tools, you can monitor and audit database activity\. 
+Monitoring your database activity can help you provide safeguards for your database and help to meet compliance and regulatory requirements\. One way of monitoring database activity with Amazon Aurora is to use the database activity streams feature\. Database activity streams provide a near real\-time data stream of the database activity in your relational database\. When you integrate database activity streams with monitoring tools, you can monitor and audit database activity\. 
 
-Beyond external security threats, managed databases need to provide protection against insider risks from database administrators \(DBAs\)\. Database Activity Streams protect your databases from internal threats by controlling DBA access to the Database Activity Streams\. Thus, the collection, transmission, storage, and subsequent processing of the stream of database activity is beyond the access of the DBAs that manage the database\. 
+Beyond external security threats, managed databases need to provide protection against insider risks from database administrators \(DBAs\)\. Database activity streams help protect your databases from internal threats by controlling DBA access to the database activity streams\. Thus, the collection, transmission, storage, and subsequent processing of the stream of database activity is beyond the access of the DBAs that manage the database\. 
 
-A stream of database activity is pushed from Aurora PostgreSQL to an Amazon Kinesis data stream that is created on behalf of your database\. From Kinesis, the activity stream can then be consumed by Amazon CloudWatch or by applications for compliance management\. These compliance applications include Imperva's SecureSphere Database Audit and Protection, McAfee's Data Center Security Suite, or IBM's Infosphere Guardium\. These applications can use the activity stream information to generate alerts and provide auditing of all activity on your Amazon Aurora databases\.
+A stream of database activity is pushed from Aurora to an Amazon Kinesis data stream that is created on behalf of your Aurora DB cluster\. From Kinesis, the activity stream can then be consumed by AWS services such as Amazon Kinesis Data Firehose and AWS Lambda, or by applications for compliance management\. For database activity streams with Aurora PostgreSQL, these compliance applications include IBM's Infosphere Guardium, McAfee's Data Center Security Suite, and Imperva's SecureSphere Database Audit and Protection\. Such applications can use the activity stream information to generate alerts and provide auditing of all activity on your Aurora DB clusters\.
 
-Database Activity Streams have the following limits and requirements:
-+ Currently, these streams are supported only with Aurora with PostgreSQL compatibility version 2\.3 and higher\. Version 2\.3 is compatible with PostgreSQL version 10\.7\.
-+ Database Activity Streams only support db\.r4 and db\.r5 instance classes\. The t3\.medium instance classes aren't supported\. For more information, see Aurora PostgreSQL in [Hardware Specifications for All Available DB Instance Classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SummaryAurora)\.
-+ They're not supported in the following AWS Regions:
+**Tip**  
+ Check the website for the particular application that you want to use with database activity streams\. Confirm support for the specific Aurora DB engine and engine version that you intend to use\. 
+
+Database activity streams have the following limits and requirements:
++ Currently, database activity streams are supported with the following Aurora with PostgreSQL compatibility and Aurora MySQL versions\.
+  +  For Aurora PostgreSQL, database activity streams require version 2\.3, which is compatible with PostgreSQL version 10\.7\. 
+  +  For Aurora MySQL, database activity streams require version 2\.08 or higher, which is compatible with MySQL version 5\.7\. 
++ Database activity streams support the DB instance classes listed for Aurora in [Hardware Specifications for All Available DB Instance Classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SummaryAurora), with some exceptions:
+  +  For Aurora PostgreSQL, you can't use streams with the db\.t3\.medium instance class\. 
+  +  For Aurora MySQL, you can't use streams with any of the db\.t2 or db\.t3 instance classes\.
++ Database activity streams aren't supported in the following AWS Regions:
   + China \(Beijing\) Region, `cn-north-1`
   + China \(Ningxia\) Region, `cn-northwest-1`
-  + AWS GovCloud \(US\-East\), `us-gov-east-1` 
-  + AWS GovCloud \(US\-West\), `us-gov-west-1` 
-+ They require use of AWS Key Management Service \(AWS KMS\) because the activity streams are always encrypted\.
+  + AWS GovCloud \(US\-East\), `us-gov-east-1`
+  + AWS GovCloud \(US\-West\), `us-gov-west-1`
+  + Asia Pacific \(Osaka\-Local\) Region, `ap-northeast-3`
+  + Europe \(Milan\) Region, `eu-south-1`
+  + Africa \(Cape Town\) Region, `af-south-1`
+  + Middle East \(Bahrain\) Region, `me-south-1`
++ Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.
 
 **Topics**
-+ [Starting an Activity Stream](#DBActivityStreams.Enabling)
++ [Network Prerequisites for Aurora MySQL Database Activity Streams](#DBActivityStreams.Prereqs)
++ [Starting a Database Activity Stream](#DBActivityStreams.Enabling)
 + [Getting the Status of an Activity Stream](#DBActivityStreams.Status)
 + [Stopping an Activity Stream](#DBActivityStreams.Disabling)
 + [Monitoring Database Activity Streams](#DBActivityStreams.Monitoring)
 + [Managing Access to Database Activity Streams](#DBActivityStreams.ManagingAccess)
 
-## Starting an Activity Stream<a name="DBActivityStreams.Enabling"></a>
+## Network Prerequisites for Aurora MySQL Database Activity Streams<a name="DBActivityStreams.Prereqs"></a>
+
+ To use database activity streams with Aurora MySQL, all the DB instances that use database activity streams within a VPC must be able to access AWS KMS endpoints\. Make sure this requirement is satisfied before enabling database activity streams for your Aurora MySQL cluster\. 
+
+**Important**  
+ If the Aurora MySQL DB cluster can't access the AWS KMS endpoint, the activity stream stops functioning\. In that case, Aurora notifies you about this issue using RDS Events\. 
+
+ If the Aurora cluster is publicly available, this requirement is satisfied automatically\.  
+
+If you receive a notification that your Aurora MySQL cluster can't use database activity streams because it can't access a AWS KMS endpoint, check if your Aurora DB cluster is public or private\. If your Aurora DB cluster is private, you must configure it to enable connections\.
+
+For an Aurora DB cluster to be public, it must be marked as publicly accessible\. If you look at the details for the DB cluster in the AWS Management Console, **Publicly Accessible** is **Yes** if this is the case\. The DB cluster must also be in an Amazon VPC public subnet\. For more information about publicly accessible DB instances, see [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\. For more information about public Amazon VPC subnets, see [Your VPC and Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)\.
+
+If your Aurora DB cluster isn't publicly accessible and in a VPC public subnet, it is private\. You might keep your Aurora MySQL cluster private and use it with database activity streams\. If so, configure the cluster so that it can connect to Internet addresses through Network Address Translation \(NAT\)\. For more information about configuring NAT in your VPC, see [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)\.
+
+For more information about configuring VPC endpoints, see [VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html)\.
+
+## Starting a Database Activity Stream<a name="DBActivityStreams.Enabling"></a>
 
 You start an activity stream at the DB cluster level to monitor database activity for all DB instances of the cluster\. Any DB instances added to the cluster are also automatically monitored\. 
 
-When you start an activity stream, each database activity event, such as a change or access, generates an activity stream event\. Access events are generated from SQL commands such as `CONNECT` and `SELECT`\. Change events are generated from SQL commands such as `CREATE` and `INSERT`\. To make each activity stream event durable, you encrypt and store it\. You can choose to have the database session handle database activity events either synchronously or asynchronously:
-+ *Synchronous mode* – In synchronous mode, when a database session generates an activity stream event, the session blocks until the event is made durable\. If the event can't be made durable for some reason, the database session returns to normal activities\. However, an RDS event is sent indicating that activity stream records might be lost for some time\. A second RDS event is sent after the system is back to a healthy state\.
+When you start an activity stream, each database activity event, such as a change or access, generates an activity stream event\. Access events are generated from SQL commands such as `CONNECT` and `SELECT`\. Change events are generated from SQL commands such as `CREATE` and `INSERT`\. To make each activity stream event durable, Aurora encrypts and stores it\.
 
-  The synchronous mode favors the accuracy of the activity stream over database performance\. 
-+ *Asynchronous mode* – In asynchronous mode, when a database session generates an activity stream event, the session returns to normal activities immediately\. In the background, the activity stream event is made a durable record\. If an error occurs in the background task, an RDS event is sent\. This event indicates the beginning and end of any time windows where activity stream event records might have been lost\.
+You can choose to have the database session handle database activity events either asynchronously or synchronously:
++ **Asynchronous mode** – In *asynchronous mode, *when a database session generates an activity stream event, the session returns to normal activities immediately\. In the background, the activity stream event is made a durable record\. If an error occurs in the background task, an RDS event is sent\. This event indicates the beginning and end of any time windows where activity stream event records might have been lost\.
 
   Asynchronous mode favors database performance over the accuracy of the activity stream\. 
+**Note**  
+ Asynchronous mode is available for both Aurora PostgreSQL and Aurora MySQL\. 
++ **Synchronous mode** – In *synchronous mode, *when a database session generates an activity stream event, the session blocks other activities until the event is made durable\. If the event can't be made durable for some reason, the database session returns to normal activities\. However, an RDS event is sent indicating that activity stream records might be lost for some time\. A second RDS event is sent after the system is back to a healthy state\.
+
+  The synchronous mode favors the accuracy of the activity stream over database performance\.
+**Note**  
+ Synchronous mode is available for Aurora PostgreSQL\. You can't use synchronous mode with Aurora MySQL\. 
 
 ### Console<a name="DBActivityStreams.Enabling-collapsible-section-E1"></a>
 
@@ -49,12 +84,16 @@ When you start an activity stream, each database activity event, such as a chang
 
 1. Enter the following settings in the **Database Activity Stream** window:
    + For **Master key**, choose a key from the list of AWS KMS keys\. 
+**Note**  
+ If your Aurora MySQL cluster can't access AWS KMS keys, follow the instructions in [Network Prerequisites for Aurora MySQL Database Activity Streams](#DBActivityStreams.Prereqs) to enable such access first\. 
 
      The master key is used to encrypt the key that in turn encrypts the database activity logged\. You must choose a master key other than the default key\. For more information about encryption keys and AWS KMS, see [What is AWS Key Management Service?](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide\.*
    + For **Database activity stream mode**, choose **Asynchronous** or **Synchronous**\.
+**Note**  
+ Currently, this choice only applies to Aurora PostgreSQL\. For Aurora MySQL, you can use only asynchronous mode\. 
    + Choose **Apply immediately**\.
 
-     If you choose **Schedule for the next maintenance window**, the database doesn't restart right away\. Instead, it remains in the PENDING REBOOT state\. In this case, the database activity stream will not start until either the next maintenance window or a manual restart\.
+     If you choose **Schedule for the next maintenance window**, the database doesn't restart right away\. Instead, it remains in the `PENDING REBOOT` state\. In this case, the database activity stream doesn't start until the next maintenance window\.
 
    When you're done entering settings, choose **Continue**\.
 
@@ -62,31 +101,32 @@ When you start an activity stream, each database activity event, such as a chang
 
 ### AWS CLI<a name="DBActivityStreams.Enabling-collapsible-section-E2"></a>
 
-To start Database Activity Streams for a DB cluster, configure the DB cluster using the [start\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/start-activity-stream.html) AWS CLI command\. Identify the AWS Region for the DB cluster with the `--region` parameter\. The `--apply-immediately` parameter is optional\.
+To start database activity streams for a DB cluster, configure the DB cluster using the [start\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/start-activity-stream.html) AWS CLI command\. Identify the AWS Region for the DB cluster with the `--region` parameter\. The `--apply-immediately` parameter is optional\.
 
 For Linux, macOS, or Unix:
 
 ```
-aws rds --region us-west-2 \
+aws rds --region MY_REGION \
     start-activity-stream \
-    --mode sync \
+    --mode [sync | async] \
     --kms-key-id MY_KMS_KEY_ARN \
     --resource-arn MY_CLUSTER_ARN \
-    --apply-immediately \
-    --profile MY_PROFILE_CREDENTIALS
+    --apply-immediately
 ```
 
 For Windows:
 
 ```
-aws rds --region us-west-2 ^ 
-    start-activity-stream ^ 
-    --mode sync ^ 
-    --kms-key-id MY_KMS_KEY_ARN ^ 
-    --resource-arn MY_CLUSTER_ARN ^ 
-    --apply-immediately ^ 
-    --profile MY_PROFILE_CREDENTIALS
+aws rds --region MY_REGION ^
+    start-activity-stream ^
+    --mode [sync | async] ^
+    --kms-key-id MY_KMS_KEY_ARN ^
+    --resource-arn MY_CLUSTER_ARN ^
+    --apply-immediately
 ```
+
+**Note**  
+ The `--mode` parameter is required\. For Aurora PostgreSQL, you can choose either value\. For Aurora MySQL, you must always specify `async`\. 
 
 ## Getting the Status of an Activity Stream<a name="DBActivityStreams.Status"></a>
 
@@ -100,34 +140,36 @@ You can get the status of an activity stream using the console or AWS CLI\.
 
 1. In the navigation pane, choose **Databases**, and then choose the DB cluster\.
 
-1. Choose the **Configuration** tab and check **Database activity stream** for status\.
+1. Choose the **Configuration** tab, and check **Database activity stream** for status\.
 
 ### AWS CLI<a name="DBActivityStreams.Status-collapsible-section-S2"></a>
 
 You can get a DB cluster's activity stream configuration as the response to a [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) CLI request\. In the following example, see the values for `ActivityStreamKinesisStreamName`, `ActivityStreamStatus`, `ActivityStreamKmsKeyId`, and `ActivityStreamMode`\.
 
-The request is as follows:
+The request is as follows\.
 
 ```
-aws rds --region us-west-2 describe-db-clusters --db-cluster-identifier my-cluster --profile MY_PROFILE_CREDENTIALS
+aws rds --region MY_REGION describe-db-clusters --db-cluster-identifier my-cluster
 ```
 
-The response includes the following items for a database activity stream:
+The response includes the following items for a database activity stream\.
+
+ The following example shows a JSON response\. These fields are the same for Aurora PostgreSQL and Aurora MySQL, except that `ActivityStreamMode` is always `async` for Aurora MySQL, while for Aurora PostgreSQL it might be `sync` or `async`\.
 
 ```
 {
 "DBClusters": [
-    {
+  {
     "DBClusterIdentifier": "my-cluster",
-    . . .
+    ...
     "ActivityStreamKinesisStreamName": "aws-rds-das-cluster-A6TSYXITZCZXJHIRVFUBZ5LTWY",
     "ActivityStreamStatus": "starting",
     "ActivityStreamKmsKeyId": "12345678-abcd-efgh-ijkl-bd041f170262",
-    "ActivityStreamMode": "sync",
+    "ActivityStreamMode": "async",
     "DbClusterResourceId": "cluster-ABCD123456"
-    . . .
-    }
-  ]
+    ...
+  }
+]
 }
 ```
 
@@ -135,7 +177,7 @@ The response includes the following items for a database activity stream:
 
 You can stop an activity stream using the console or AWS CLI\. 
 
-Note, if you delete a DB cluster, the activity stream is stopped automatically\.
+If you delete a DB cluster, the activity stream is stopped and the underlying Amazon Kinesis stream is deleted automatically\.
 
 ### Console<a name="DBActivityStreams.Disabling-collapsible-section-D1"></a>
 
@@ -151,44 +193,56 @@ Note, if you delete a DB cluster, the activity stream is stopped automatically\.
 
    1. Choose **Apply immediately**\.
 
-      If you choose **Schedule for the next maintenance window**, the database doesn't restart right away\. Instead, it remains in the PENDING REBOOT state\. In this case, the data activity stream is not disabled until either the next maintenance window or a manual restart\.
+      If you choose **Schedule for the next maintenance window**, the database doesn't restart right away\. Instead, it remains in the `PENDING REBOOT` state\. In this case, the data activity stream isn't disabled until the next maintenance window\.
 
    1. Choose **Continue**\.
 
 ### AWS CLI<a name="DBActivityStreams.Disabling-collapsible-section-D2"></a>
 
-To stop Database Activity Streams for a DB cluster, configure the DB cluster using the AWS CLI command [stop\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/stop-activity-stream.html)\. Identify the AWS Region for the DB cluster using the `--region` parameter\. The `--apply-immediately` parameter is optional\.
+To stop database activity streams for a DB cluster, configure the DB cluster using the AWS CLI command [stop\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/stop-activity-stream.html)\. Identify the AWS Region for the DB cluster using the `--region` parameter\. The `--apply-immediately` parameter is optional\.
 
 For Linux, macOS, or Unix:
 
 ```
-aws rds --region us-west-2 \
+aws rds --region MY_REGION \
         stop-activity-stream \
         --resource-arn MY_CLUSTER_ARN \
-        --apply-immediately \
-        --profile MY_PROFILE_CREDENTIALS
+        --apply-immediately
 ```
 
 For Windows:
 
 ```
-aws rds --region us-west-2 ^
+aws rds --region MY_REGION ^
         stop-activity-stream ^
         --resource-arn MY_CLUSTER_ARN ^
-        --apply-immediately ^
-        --profile MY_PROFILE_CREDENTIALS
+        --apply-immediately
 ```
 
 ## Monitoring Database Activity Streams<a name="DBActivityStreams.Monitoring"></a>
 
-Database Activity Streams monitor and report all activities on the database\. The stream of activity is collected and transmitted to a secure server by using Amazon Kinesis\. From Kinesis, the activity stream can be monitored or later consumed by other services and applications for further analysis\. 
+Database activity streams monitor and report activities on the database as described following\.
+
+The stream of activity is collected and transmitted to Amazon Kinesis\. From Kinesis, you can monitor the activity stream, or other services and applications can consume the activity stream for further analysis\. You can find the underlying Kinesis stream name by using the AWS CLI command `describe-db-clusters` or the RDS API `DescribeDBClusters` operation\.
+
+Aurora manages the Kinesis stream for you\.
++  You don't use an existing Kinesis stream\. Aurora creates the Kinesis stream automatically with a 24\-hour retention period\. 
++  Aurora scales the Kinesis stream if necessary\. 
++  Aurora recreates the Kinesis stream if you delete it\. 
++  If you stop the database activity stream or delete the DB cluster, Aurora deletes the Kinesis stream\. 
 
 The following categories of activity are monitored and put in the activity stream audit log:
-+ **SQL commands** – All SQL commands are audited, and also prepared statements, PostgreSQL functions, and functions in Procedural Language for SQL \(PL/SQL\)\.
-+ **Other database information** – Activity monitored includes the full SQL statement, parameters, bind variables, the row count of affected rows from DML commands, accessed objects, and the unique database name\. 
++ **SQL commands** – All SQL commands are audited, and also prepared statements, built\-in functions, and functions in Procedural Language for SQL \(PL/SQL\)\. Calls to stored procedures are audited\. Any SQL statements issued inside stored procedures or functions are also audited\.
++ **Other database information** – Activity monitored includes the full SQL statement, the row count of affected rows from DML commands, accessed objects, and the unique database name\. For Aurora PostgreSQL, database activity streams also monitor the bind variables and stored procedure parameters\. 
+**Important**  
+The full SQL text of each statement is visible in the activity stream audit log, including any sensitive data\. However, database user passwords are redacted if Aurora can determine them from the context, such as in the following SQL statement\.   
+
+  ```
+  ALTER ROLE role-name WITH password
+  ```
 + **Connection information** – Activity monitored includes session and network information, the server process ID, and exit codes\.
 
-If an activity stream has a failure while monitoring a DB instance, you are notified by using RDS events\. If a failure occurs, you can decide to shut down the DB instance or let it continue\.
+If an activity stream has a failure while monitoring a DB instance, you are notified by using RDS events\. If a failure occurs, you can shut down the DB instance or let it continue\.
 
 **Topics**
 + [Accessing an Activity Stream from Kinesis](#DBActivityStreams.KinesisAccess)
@@ -197,7 +251,7 @@ If an activity stream has a failure while monitoring a DB instance, you are noti
 
 ### Accessing an Activity Stream from Kinesis<a name="DBActivityStreams.KinesisAccess"></a>
 
-When you enable an activity streams for a DB cluster, a Kinesis stream is created for you\. From Kinesis, you can monitor your database activity in real time\. To further analyze database activity, you can connect your Kinesis stream to consumer applications such as Amazon CloudWatch\. You can also connect it to compliance management applications from Imperva, McAfee, or IBM\.
+When you enable an activity stream for a DB cluster, a Kinesis stream is created for you\. From Kinesis, you can monitor your database activity in real time\. To further analyze database activity, you can connect your Kinesis stream to consumer applications\. You can also connect it to compliance management applications\.  
 
 **To access an activity stream from Kinesis**
 
@@ -213,7 +267,7 @@ When you enable an activity streams for a DB cluster, a Kinesis stream is create
 
    To use the Amazon RDS console to find your DB cluster's resource ID, choose your DB cluster from the list of databases, and then choose the **Configuration** tab\.
 
-   To use the AWS CLI to find the full Kinesis stream name for an activity stream, use a [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) CLI request and note the value of `DBActivityStreamKinesisStreamName` in the response\.
+   To use the AWS CLI to find the full Kinesis stream name for an activity stream, use a [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) CLI request and note the value of `ActivityStreamKinesisStreamName` in the response\.
 
 1. Choose **Monitoring** to begin observing the database activity\.
 
@@ -224,17 +278,17 @@ For more information about using Amazon Kinesis, see [What Is Amazon Kinesis Dat
 The database activity events that are monitored are represented in the Kinesis activity stream as JSON strings\. The structure consists of a JSON object containing a `DatabaseActivityMonitoringRecord`, which in turn contains a `databaseActivityEventList` array of activity events\. 
 
 **Topics**
-+ [Audit Log Examples](#DBActivityStreams.AuditLog.Examples)
++ [Examples of Database Activity Streams Audit Log](#DBActivityStreams.AuditLog.Examples)
 + [Database Activity Monitoring Records JSON Object](#DBActivityStreams.AuditLog.DatabaseActivityMonitoringRecords)
 + [databaseActivityEvents JSON Object](#DBActivityStreams.AuditLog.databaseActivityEvents)
 + [databaseActivityEventList JSON Array](#DBActivityStreams.AuditLog.databaseActivityEventList)
 
-#### Audit Log Examples<a name="DBActivityStreams.AuditLog.Examples"></a>
+#### Examples of Database Activity Streams Audit Log<a name="DBActivityStreams.AuditLog.Examples"></a>
 
 Following are sample decrypted JSON audit logs of activity event records\.
 
-**Example Activity Event Record of a CONNECT SQL Statement**  
-Following is an activity event record of a login with the use of a `CONNECT` SQL statement \(`command`\) by a psql client \(`clientApplication`\)\.   
+**Example Activity Event Record of an Aurora PostgreSQL CONNECT SQL Statement**  
+Following is an activity event record of a logon with the use of a `CONNECT` SQL statement \(`command`\) by a psql client \(`clientApplication`\)\.   
 
 ```
 {
@@ -281,8 +335,52 @@ Following is an activity event record of a login with the use of a `CONNECT` SQL
 }
 ```
 
-**Example Activity Event Record of a CREATE TABLE Statement**  
-Following is an example of a `CREATE TABLE` event\.  
+**Example Activity Event Record of an Aurora MySQL CONNECT SQL Statement**  
+Following is an activity event record of a logon with the use of a `CONNECT` SQL statement \(`command`\) by a mysql client \(`clientApplication`\)\.   
+
+```
+{
+  "type":"DatabaseActivityMonitoringRecord",
+  "clusterId":"cluster-some_id",
+  "instanceId":"db-some_id",
+  "databaseActivityEventList":[
+    {
+      "logTime":"2020-05-22 18:07:13.267214+00",
+      "type":"record",
+      "clientApplication":null,
+      "pid":2830,
+      "dbUserName":"rdsadmin",
+      "databaseName":"",
+      "remoteHost":"localhost",
+      "remotePort":"11053",
+      "command":"CONNECT",
+      "commandText":"",
+      "paramList":null,
+      "objectType":"TABLE",
+      "objectName":"",
+      "statementId":0,
+      "substatementId":1,
+      "exitCode":"0",
+      "sessionId":"725121",
+      "rowCount":0,
+      "serverHost":"master",
+      "serverType":"MySQL",
+      "serviceName":"Amazon Aurora MySQL",
+      "serverVersion":"MySQL 5.7.12",
+      "startTime":"2020-05-22 18:07:13.267207+00",
+      "endTime":"2020-05-22 18:07:13.267213+00",
+      "transactionId":"0",
+      "dbProtocol":"MySQL",
+      "netProtocol":"TCP",
+      "errorMessage":"",
+      "class":"MAIN"
+    }
+  ]
+}
+```
+
+**Example Activity Event Record of an Aurora PostgreSQL CREATE TABLE Statement**  
+Following is an example of a `CREATE TABLE` event for Aurora PostgreSQL\.  
 
 ```
 {
@@ -329,7 +427,94 @@ Following is an example of a `CREATE TABLE` event\.
 }
 ```
 
-**Example Activity Event Record of a SELECT Statement**  
+**Example Activity Event Record of an Aurora MySQL CREATE TABLE Statement**  
+Following is an example of a `CREATE TABLE` statement for Aurora MySQL\. The operation is represented as two separate event records\. One event has `"class":"MAIN"`\. The other event has `"class":"AUX"`\. The messages might arrive in any order\. The `logTime` field of the `MAIN` event is always earlier than the `logTime` fields of any corresponding `AUX` events\.   
+ The following example shows the event with a `class` value of `MAIN`\.   
+
+```
+{
+  "type":"DatabaseActivityMonitoringRecord",
+  "clusterId":"cluster-some_id",
+  "instanceId":"db-some_id",
+  "databaseActivityEventList":[
+    {
+      "logTime":"2020-05-22 18:07:12.250221+00",
+      "type":"record",
+      "clientApplication":null,
+      "pid":2830,
+      "dbUserName":"master",
+      "databaseName":"test",
+      "remoteHost":"localhost",
+      "remotePort":"11054",
+      "command":"QUERY",
+      "commandText":"CREATE TABLE test1 (id INT)",
+      "paramList":null,
+      "objectType":"TABLE",
+      "objectName":"test1",
+      "statementId":65459278,
+      "substatementId":1,
+      "exitCode":"0",
+      "sessionId":"725118",
+      "rowCount":0,
+      "serverHost":"master",
+      "serverType":"MySQL",
+      "serviceName":"Amazon Aurora MySQL",
+      "serverVersion":"MySQL 5.7.12",
+      "startTime":"2020-05-22 18:07:12.226384+00",
+      "endTime":"2020-05-22 18:07:12.250222+00",
+      "transactionId":"0",
+      "dbProtocol":"MySQL",
+      "netProtocol":"TCP",
+      "errorMessage":"",
+      "class":"MAIN"
+    }
+  ]
+}
+```
+ The following example shows the corresponding event with a `class` value of `AUX`\.   
+
+```
+{
+  "type":"DatabaseActivityMonitoringRecord",
+  "clusterId":"cluster-some_id",
+  "instanceId":"db-some_id",
+  "databaseActivityEventList":[
+    {
+      "logTime":"2020-05-22 18:07:12.247182+00",
+      "type":"record",
+      "clientApplication":null,
+      "pid":2830,
+      "dbUserName":"master",
+      "databaseName":"test",
+      "remoteHost":"localhost",
+      "remotePort":"11054",
+      "command":"CREATE",
+      "commandText":"test1",
+      "paramList":null,
+      "objectType":"TABLE",
+      "objectName":"test1",
+      "statementId":65459278,
+      "substatementId":2,
+      "exitCode":"",
+      "sessionId":"725118",
+      "rowCount":0,
+      "serverHost":"master",
+      "serverType":"MySQL",
+      "serviceName":"Amazon Aurora MySQL",
+      "serverVersion":"MySQL 5.7.12",
+      "startTime":"2020-05-22 18:07:12.226384+00",
+      "endTime":"2020-05-22 18:07:12.247182+00",
+      "transactionId":"0",
+      "dbProtocol":"MySQL",
+      "netProtocol":"TCP",
+      "errorMessage":"",
+      "class":"AUX"
+    }
+  ]
+}
+```
+
+**Example Activity Event Record of an Aurora PostgreSQL SELECT Statement**  
 Following is an example of a `SELECT` event\.  
 
 ```
@@ -377,6 +562,93 @@ Following is an example of a `SELECT` event\.
 }
 ```
 
+**Example Activity Event Record of an Aurora MySQL SELECT Statement**  
+Following is an example of a `SELECT` event\.  
+ The following example shows the event with a `class` value of `MAIN`\.   
+
+```
+{
+  "type":"DatabaseActivityMonitoringRecord",
+  "clusterId":"cluster-some_id",
+  "instanceId":"db-some_id",
+  "databaseActivityEventList":[
+    {
+      "logTime":"2020-05-22 18:29:57.986467+00",
+      "type":"record",
+      "clientApplication":null,
+      "pid":2830,
+      "dbUserName":"master",
+      "databaseName":"test",
+      "remoteHost":"localhost",
+      "remotePort":"11054",
+      "command":"QUERY",
+      "commandText":"SELECT * FROM test1 WHERE id < 28",
+      "paramList":null,
+      "objectType":"TABLE",
+      "objectName":"test1",
+      "statementId":65469218,
+      "substatementId":1,
+      "exitCode":"0",
+      "sessionId":"726571",
+      "rowCount":2,
+      "serverHost":"master",
+      "serverType":"MySQL",
+      "serviceName":"Amazon Aurora MySQL",
+      "serverVersion":"MySQL 5.7.12",
+      "startTime":"2020-05-22 18:29:57.986364+00",
+      "endTime":"2020-05-22 18:29:57.986467+00",
+      "transactionId":"0",
+      "dbProtocol":"MySQL",
+      "netProtocol":"TCP",
+      "errorMessage":"",
+      "class":"MAIN"
+    }
+  ]
+}
+```
+ The following example shows the corresponding event with a `class` value of `AUX`\.   
+
+```
+{
+  "type":"DatabaseActivityMonitoringRecord",
+  "clusterId":"cluster-some_id",
+  "instanceId":"db-some_id",
+  "databaseActivityEventList":[
+    {
+      "logTime":"2020-05-22 18:29:57.986399+00",
+      "type":"record",
+      "clientApplication":null,
+      "pid":2830,
+      "dbUserName":"master",
+      "databaseName":"test",
+      "remoteHost":"localhost",
+      "remotePort":"11054",
+      "command":"READ",
+      "commandText":"test1",
+      "paramList":null,
+      "objectType":"TABLE",
+      "objectName":"test1",
+      "statementId":65469218,
+      "substatementId":2,
+      "exitCode":"",
+      "sessionId":"726571",
+      "rowCount":0,
+      "serverHost":"master",
+      "serverType":"MySQL",
+      "serviceName":"Amazon Aurora MySQL",
+      "serverVersion":"MySQL 5.7.12",
+      "startTime":"2020-05-22 18:29:57.986364+00",
+      "endTime":"2020-05-22 18:29:57.986399+00",
+      "transactionId":"0",
+      "dbProtocol":"MySQL",
+      "netProtocol":"TCP",
+      "errorMessage":"",
+      "class":"AUX"
+    }
+  ]
+}
+```
+
 #### Database Activity Monitoring Records JSON Object<a name="DBActivityStreams.AuditLog.DatabaseActivityMonitoringRecords"></a>
 
 The database activity event records are in a JSON object that contains the following information\.
@@ -395,31 +667,75 @@ The database activity event records are in a JSON object that contains the follo
 
 The `databaseActivityEvents` JSON object contains the following information\.
 
+##### Top\-Level Fields in JSON Record<a name="DBActivityStreams.AuditLog.topLevel"></a>
+
+ Each event in the audit log is wrapped inside a record in JSON format\. This record contains the following fields\. 
+
+**type**  
+ This field always has the value `DatabaseActivityMonitoringRecords`\. 
+
+**version**  
+ This field represents the version of the DAS data protocol or contract\. It defines what fields are available\. Version 1\.0 represents the original data activity streams support for Aurora PostgreSQL versions 10\.7 and 11\.4\. Version 1\.1 represents the data activity streams support for Aurora PostgreSQL versions 10\.10 and higher and Aurora PostgreSQL 11\.5 and higher\. Version 1\.1 includes the additional fields `errorMessage` and `startTime`\. Version 1\.2 represents the data activity streams support for Aurora MySQL 2\.08 and higher\. Version 1\.2 includes the additional fields `endTime` and `transactionId`\. 
+
+**databaseActivityEvents**  
+ An encrypted string representing one or more activity events\. It's represented as a base64 byte array\. When you decrypt the string, the result is a record in JSON format with fields as shown in the the examples in this section\. 
+
+**key**  
+ The encrypted data key used to encrypt the `databaseActivityEvents` string\. This is the same AWS KMS key that you provided when you started the database activity stream\. 
+
+ The following example shows the format of this record\. 
+
+```
+{
+  "type":"DatabaseActivityMonitoringRecords",
+  "version":"1.1",
+  "databaseActivityEvents":"encrypted audit records",
+  "key":"encrypted key"
+}
+```
+
+Take the following steps to decrypt the contents of the `databaseActivityEvents` field:
+
+1.  Decrypt the value in the `key` JSON field using the AWS KMS key you provided when starting database activity stream\. Doing so returns the data encryption key in clear text\. 
+
+1.  Base64\-decode the value in the `databaseActivityEvents` JSON field to obtain the ciphertext, in binary format, of the audit payload\. 
+
+1.  Decrypt the binary ciphertext with the data encryption key that you decoded in the first step\. 
+
+1.  Decompress the decrypted payload\. 
+   +  The encrypted payload is in the `databaseActivityEvents` field\. 
+   +  The `databaseActivityEventList` field contains an array of audit records\. The `type` fields in the array can be `record` or `heartbeat`\. 
+
+The audit log activity event record is a JSON object that contains the following information\.
+
 
 ****  
 
 | JSON Field | Data Type | Description | 
 | --- | --- | --- | 
 |  `type`  | string |  The type of JSON record\. The value is `DatabaseActivityMonitoringRecord`\.  | 
-| clusterId | string | The DB cluster ID | 
-| instanceId | string | The DB instance ID\. | 
-|  [databaseActivityEventList](#DBActivityStreams.AuditLog.databaseActivityEventList)   | string |  A JSON object encrypted as a base64 byte array\. Take the following steps to decrypt this content: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)  | 
+| clusterId | string | The DB cluster resource identifier\. It corresponds to the DB cluster attribute DbClusterResourceId\. | 
+| instanceId | string | The DB instance resource identifier\. It corresponds to the DB instance attribute DbiResourceId\. | 
+|  [databaseActivityEventList](#DBActivityStreams.AuditLog.databaseActivityEventList)   | string |  An array of activity audit records or heartbeat messages\.  | 
 
 #### databaseActivityEventList JSON Array<a name="DBActivityStreams.AuditLog.databaseActivityEventList"></a>
 
-The audit log payload is an encrypted `databaseActivityEventList` JSON array\. The following table lists alphabetically the fields for each activity event in the decrypted `DatabaseActivityEventList` array of an audit log\.
+The audit log payload is an encrypted `databaseActivityEventList` JSON array\. The following table lists alphabetically the fields for each activity event in the decrypted `DatabaseActivityEventList` array of an audit log\. The fields are different depending on whether you use Aurora PostgreSQL or Aurora MySQL\. Consult the table that applies to your database engine\.
+
+**Important**  
+ The event structure is subject to change\. Aurora might add new fields to activity events in the future\. In applications that parse the JSON data, make sure that your code can ignore or take appropriate actions for unknown field names\. 
 
 
-****  
+**databaseActivityEventList fields for Aurora PostgreSQL**  
 
 | Field | Data Type | Description | 
 | --- | --- | --- | 
-| class | string |  The class of activity event\. Valid values are the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)  | 
+| class | string |  The class of activity event\. Valid values for Aurora PostgreSQL are the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)  | 
 | clientApplication | string | The application the client used to connect as reported by the client\. The client doesn't have to provide this information, so the value can be null\. | 
 | command | string | The name of the SQL command without any command details\. | 
-| commandText | string |  The actual SQL statement passed in by the user\. This field is used for all types of records except for connect or disconnect records, in which case the value is null\.  Sensitive Data The full SQL text is visible including any sensitive data\. However, database user passwords are redacted if they can be determined from the context, such as in the following SQL statement\.   <pre>ALTER ROLE role-name WITH password</pre>  | 
+| commandText | string |  The actual SQL statement passed in by the user\. For Aurora PostgreSQL, the value is identical to the original SQL statement\. This field is used for all types of records except for connect or disconnect records, in which case the value is null\.  The full SQL text of each statement is visible in the activity stream audit log, including any sensitive data\. However, database user passwords are redacted if Aurora can determine them from the context, such as in the following SQL statement\.  <pre>ALTER ROLE role-name WITH password</pre>   | 
 | databaseName | string | The database to which the user connected\. | 
-| dbProtocol | string | The database protocol\. | 
+| dbProtocol | string | The database protocol, for example Postgres 3\.0\. | 
 | dbUserName | string | The database user with which the client authenticated\. | 
 | errorMessage\(version 1\.1 database activity records only\) | string |  If there was any error, this field is populated with the error message that would've been generated by the DB server\. The `errorMessage` value is null for normal statements that didn't result in an error\.  An error is defined as any activity that would produce a client\-visible PostgreSQL error log event at a severity level of `ERROR` or greater\. For more information, see [PostgreSQL Message Severity Levels](https://www.postgresql.org/docs/current/runtime-config-logging.html#RUNTIME-CONFIG-SEVERITY-LEVELS)\. For example, syntax errors and query cancellations generate an error message\.  Internal PostgreSQL server errors such as background checkpointer process errors do not generate an error message\. However, records for such events are still emitted regardless of the setting of the log severity level\. This prevents attackers from turning off logging to attempt avoiding detection\. See also the `exitCode` field\.  | 
 | exitCode | int | A value used for a session exit record\. On a clean exit, this contains the exit code\. An exit code can't always be obtained in some failure scenarios\. Examples are if PostgreSQL does an exit\(\) or if an operator performs a command such as kill \-9\.If there was any error, the `exitCode` field shows the SQL error code, `SQLSTATE`, as listed in [ PostgreSQL Error Codes](https://www.postgresql.org/docs/current/errcodes-appendix.html)\. See also the `errorMessage` field\. | 
@@ -429,17 +745,52 @@ The audit log payload is an encrypted `databaseActivityEventList` JSON array\. T
 | objectType | string | The database object type such as table, index, view, and so on\. This field is used only where the SQL statement operates on a database object\. If the SQL statement is not operating on an object, this value is null\. Valid values include the following:[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html) | 
 | paramList | string | An array of comma\-separated parameters passed to the SQL statement\. If the SQL statement has no parameters, this value is an empty array\. | 
 | pid | int | The process ID of the backend process that is allocated for serving the client connection\. | 
-| remoteHost | string | Either the client IP address or hostname, depending on the database's log\_hostname parameter setting\. | 
+| remoteHost | string | Either the client IP address or hostname\. For Aurora PostgreSQL, which one is used depends on the database's log\_hostname parameter setting\. | 
 | remotePort | string | The client port number\. | 
 | rowCount | int | The number of table rows affected or retrieved by the SQL statement\. This field is used only for SQL statements that are data manipulation language \(DML\) statements\. If the SQL statement is not a DML statement, this value is null\. | 
 | serverHost | string | The database server host IP address\. | 
 | serverType | string | The database server type, for example PostgreSQL\. | 
-| serverVersion | string | The database server version\. | 
+| serverVersion | string | The database server version, for example 2\.3\.1 for Aurora PostgreSQL\. | 
 | serviceName | string | The name of the service, for example Amazon Aurora PostgreSQL\-Compatible edition\.  | 
 | sessionId | int | A pseudo\-unique session identifier\. | 
 | startTime\(version 1\.1 database activity records only\) | string |  The time when execution began for the SQL statement\.  To calculate the approximate execution time of the SQL statement, use `logTime – startTime`\. See also the `logTime` field\.  | 
-| statementId | int | An ID for the client's SQL statement\. The counter is at the session level and increments with each SQL statement entered by the client\.  | 
-| substatementId | int | An ID for a SQL substatement\. This value counts the contained substatements for each SQL statement identified by the statementId field\. | 
+| statementId | int | An identifier for the client's SQL statement\. The counter is at the session level and increments with each SQL statement entered by the client\.  | 
+| substatementId | int | An identifier for a SQL substatement\. This value counts the contained substatements for each SQL statement identified by the statementId field\. | 
+| type | string | The event type\. Valid values are record or heartbeat\. | 
+
+
+**databaseActivityEventList fields for Aurora MySQL**  
+
+| Field | Data Type | Description | 
+| --- | --- | --- | 
+| class | string |  The class of activity event\. Valid values for Aurora MySQL are the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)  | 
+| clientApplication | string | The application the client used to connect as reported by the client\. The client doesn't have to provide this information, so the value can be null\. | 
+| command | string | The general category of the SQL statement\. The values for this field depend on the value of `class`\. The values when `class` is `MAIN` include the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html) The values when `class` is `AUX` include the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)  | 
+| commandText | string |  For events with a `class` value of `MAIN`, this field represents the actual SQL statement passed in by the user\. This field is used for all types of records except for connect or disconnect records, in which case the value is null\.  For events with a `class` value of `AUX`, this field contains supplemental information about the objects involved in the event\.  For Aurora MySQL, characters such as quotation marks are preceded by a backslash, representing an escape character\.  The full SQL text of each statement is visible in the audit log, including any sensitive data\. However, database user passwords are redacted if Aurora can determine them from the context, such as in the following SQL statement\.  <pre>mysql> SET PASSWORD = 'my-password';</pre>   | 
+| databaseName | string | The database to which the user connected\. | 
+| dbProtocol | string | The database protocol\. Currently, this value is always MySQL for Aurora MySQL\. | 
+| dbUserName | string | The database user with which the client authenticated\. | 
+| endTime\(version 1\.2 database activity records only\) | string |  The time when execution ended for the SQL statement\. It is represented in Coordinated Universal Time \(UTC\) format\. To calculate the execution time of the SQL statement, use `endTime – startTime`\. See also the `startTime` field\.  | 
+| errorMessage\(version 1\.1 database activity records only\) | string |  If there was any error, this field is populated with the error message that would've been generated by the DB server\. The `errorMessage` value is null for normal statements that didn't result in an error\.  An error is defined as any activity that would produce a client\-visible MySQL error log event at a severity level of `ERROR` or greater\. For more information, see [The Error Log](https://dev.mysql.com/doc/refman/5.7/en/error-log.html) in the *MySQL Reference Manual*\. For example, syntax errors and query cancellations generate an error message\.  Internal MySQL server errors such as background checkpointer process errors do not generate an error message\. However, records for such events are still emitted regardless of the setting of the log severity level\. This prevents attackers from turning off logging to attempt avoiding detection\. See also the `exitCode` field\.  | 
+| exitCode | int | A value used for a session exit record\. On a clean exit, this contains the exit code\. An exit code can't always be obtained in some failure scenarios\. In such cases, this value might be zero or might be blank\. | 
+| logTime | string | A timestamp as recorded in the auditing code path\. It is represented in Coordinated Universal Time \(UTC\) format\. For the most accurate way to calculate statement duration, see the startTime and endTime fields\. | 
+| netProtocol | string | The network communication protocol\. Currently, this value is always TCP for Aurora MySQL\. | 
+| objectName | string | The name of the database object if the SQL statement is operating on one\. This field is used only where the SQL statement operates on a database object\. If the SQL statement isn't operating on an object, this value is blank\. To construct the fully qualified name of the object, combine databaseName and objectName\. If the query involves multiple objects, this field can be a comma\-separated list of names\. | 
+| objectType | string | The database object type such as table, index, and so on\. This field is used only where the SQL statement operates on a database object\. If the SQL statement is not operating on an object, this value is null\. Valid values for Aurora MySQL include the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)  | 
+| paramList | string | This field isn't used for Aurora MySQL and is always null\. | 
+| pid | int | The process ID of the backend process that is allocated for serving the client connection\. When the database server is restarted, the pid changes and the counter for the statementId field starts over\. | 
+| remoteHost | string | Either the IP address or hostname of the client that issued the SQL statement\. For Aurora MySQL, which one is used depends on the database's skip\_name\_resolve parameter setting\. The value localhost indicates activity from the rdsadmin special user\.  | 
+| remotePort | string | The client port number\. | 
+| rowCount | int | The number of table rows affected or retrieved by the SQL statement\. This field is used only for SQL statements that are data manipulation language \(DML\) statements\. If the SQL statement is not a DML statement, this value is null\. | 
+| serverHost | string | The database server instance identifier\. This value is represented differently for Aurora MySQL than for Aurora PostgreSQL\. Aurora PostgreSQL uses an IP address instead of an identifier\. | 
+| serverType | string | The database server type, for example MySQL\. | 
+| serverVersion | string | The database server version\. Currently, this value is always MySQL 5\.7\.12 for Aurora MySQL\. | 
+| serviceName | string | The name of the service\. Currently, this value is always Amazon Aurora MySQL for Aurora MySQL\. | 
+| sessionId | int | A pseudo\-unique session identifier\. | 
+| startTime\(version 1\.1 database activity records only\) | string |  The time when execution began for the SQL statement\. It is represented in Coordinated Universal Time \(UTC\) format\. To calculate the execution time of the SQL statement, use `endTime – startTime`\. See also the `endTime` field\.  | 
+| statementId | int | An identifier for the client's SQL statement\. The counter increments with each SQL statement entered by the client\. The counter is reset when the DB instance is restarted\. | 
+| substatementId | int | An identifier for a SQL substatement\. This value is 1 for events with class MAIN and 2 for events with class AUX\. Use the statementId field to identify all the events generated by the same statement\. | 
+| transactionId\(version 1\.2 database activity records only\) | int | An identifier for a transaction\. | 
 | type | string | The event type\. Valid values are record or heartbeat\. | 
 
 ### Processing an Activity Stream using the AWS SDK<a name="DBActivityStreams.CodeExample"></a>
@@ -528,6 +879,8 @@ public class DemoConsumer {
         String databaseName;
         String dbProtocol;
         String dbUserName;
+        String endTime;
+        String errorMessage;
         String exitCode;
         String logTime;
         String netProtocol;
@@ -543,8 +896,10 @@ public class DemoConsumer {
         String serverVersion;
         String serviceName;
         String sessionId;
+        String startTime;
         String statementId;
         String substatementId;
+        String transactionId;
         String type;
     }
 
@@ -801,12 +1156,12 @@ if __name__ == '__main__':
 
 ## Managing Access to Database Activity Streams<a name="DBActivityStreams.ManagingAccess"></a>
 
-Any user with appropriate AWS Identity and Access Management \(IAM\) role privileges for Database Activity Streams can create, start, stop, and modify the activity stream settings for a DB cluster\. These actions are included in the audit log of the stream\. For best compliance practices, we recommend that you don't provide these privileges to DBAs\.
+Any user with appropriate AWS Identity and Access Management \(IAM\) role privileges for database activity streams can create, start, stop, and modify the activity stream settings for a DB cluster\. These actions are included in the audit log of the stream\. For best compliance practices, we recommend that you don't provide these privileges to DBAs\.
 
-You set access to Database Activity Streams using IAM policies\. For more information about Aurora authentication, see [Identity and Access Management in Amazon Aurora](UsingWithRDS.IAM.md)\. For more information about creating IAM policies, see [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. 
+You set access to database activity streams using IAM policies\. For more information about Aurora authentication, see [Identity and Access Management in Amazon Aurora](UsingWithRDS.IAM.md)\. For more information about creating IAM policies, see [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. 
 
 **Example Policy to Allow Configuring Database Activity Streams**  
-To give users fine\-grained access to modify activity streams, use the service\-specific operation context key `rds:ConfigureDBActivityStreams` in an IAM policy\. The following IAM policy example allows a user or role to configure activity streams\.  
+To give users fine\-grained access to modify activity streams, use the service\-specific operation context keys `rds:StartActivityStream` and `rds:StopActivityStream`  in an IAM policy\. The following IAM policy example allows a user or role to configure activity streams\.  
 
 ```
 {
@@ -829,16 +1184,16 @@ To give users fine\-grained access to modify activity streams, use the service\-
 The following IAM policy example allows a user or role to start activity streams\.  
 
 ```
-{ 
-    "Version":"2012-10-17", 
-    "Statement":[ 
-        { 
-            "Sid":"AllowStartActivityStreams", 
-            "Effect":"Allow", 
-            "Action":"rds:StartActivityStream", 
-            "Resource":"*" 
-        } 
-    ] 
+{
+    "Version":"2012-10-17",
+    "Statement":[
+        {
+            "Sid":"AllowStartActivityStreams",
+            "Effect":"Allow",
+            "Action":"rds:StartActivityStream",
+            "Resource":"*"
+        }
+    ]
 }
 ```
 
@@ -846,48 +1201,48 @@ The following IAM policy example allows a user or role to start activity streams
 The following IAM policy example allows a user or role to stop activity streams\.  
 
 ```
-{ 
+{
     "Version":"2012-10-17",
-    "Statement":[ 
-        { 
+    "Statement":[
+        {
             "Sid":"AllowStopActivityStreams",
             "Effect":"Allow",
             "Action":"rds:StopActivityStream",
-            "Resource":"*" 
-        } 
-     ] 
+            "Resource":"*"
+        }
+     ]
 }
 ```
 
 **Example Policy to Deny Starting Database Activity Streams**  
-The following IAM policy example denies a user or role from starting activity streams\.  
+The following IAM policy example prevents a user or role from starting activity streams\.  
 
 ```
-{ 
-    "Version":"2012-10-17", 
-    "Statement":[ 
-        { 
-            "Sid":"DenyStartActivityStreams", 
-            "Effect":"Deny", 
-            "Action":"rds:StartActivityStream", 
-            "Resource":"*" 
-        } 
+{
+    "Version":"2012-10-17",
+    "Statement":[
+        {
+            "Sid":"DenyStartActivityStreams",
+            "Effect":"Deny",
+            "Action":"rds:StartActivityStream",
+            "Resource":"*"
+        }
      ]
 }
 ```
 
 **Example Policy to Deny Stopping Database Activity Streams**  
-The following IAM policy example denies a user or role from stopping activity streams\.  
+The following IAM policy example prevents a user or role from stopping activity streams\.  
 
 ```
-{ 
-    "Version":"2012-10-17", 
-    "Statement":[ 
-        { 
+{
+    "Version":"2012-10-17",
+    "Statement":[
+        {
             "Sid":"DenyStopActivityStreams",
             "Effect":"Deny",
             "Action":"rds:StopActivityStream",
-            "Resource":"*" 
+            "Resource":"*"
         }
     ]
 }
