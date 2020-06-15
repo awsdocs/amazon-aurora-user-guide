@@ -86,7 +86,7 @@ The following limitations apply to Aurora Serverless:
   + [Amazon RDS Performance Insights](USER_PerfInsights.md)
 
 **Note**  
-You can access an Aurora Serverless DB cluster from AWS Lambda\. For more information about working with AWS Lambda, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](https://docs.aws.amazon.com/lambda/latest/dg/vpc.html) in the *AWS Lambda Developer Guide*\.
+You can access an Aurora Serverless DB cluster from AWS Lambda\. You must configure your Lambda function to run in the same VPC as your Aurora Serverless DB cluster\. For more information about working with AWS Lambda, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](https://docs.aws.amazon.com/lambda/latest/dg/vpc.html) in the *AWS Lambda Developer Guide*\.
 
 ## Using TLS/SSL with Aurora Serverless<a name="aurora-serverless.tls"></a>
 

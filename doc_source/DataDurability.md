@@ -10,7 +10,7 @@ For data protection, we recommend that you protect AWS account credentials and s
 + Use advanced managed security services such as Amazon Macie, which assists in discovering and securing personal data that is stored in Amazon S3\.
 + For Aurora PostgreSQL, use database activity streams to monitor and audit database activity to provide safeguards for your database and meet compliance and regulatory requirements\.
 
-We strongly recommend that you never put sensitive identifying information, such as your customers' account numbers, into free\-form fields such as a **Name** field\. This recommendation includes when you work with Amazon Aurora or other AWS services using the console, API, AWS CLI, or AWS SDKs\. Any data that you enter into Amazon Aurora or other services might get picked up for inclusion in diagnostic logs\. When you provide a URL to an external server, don't include credentials information in the URL to validate your request to that server\.
+We strongly recommend that you never put sensitive identifying information, such as your customers' account numbers, into free\-form fields such as a **Name** field\. This recommendation includes when you work with Amazon Aurora or other AWS services using the console, API, AWS CLI, or AWS SDKs\. Any data that you enter into these fields in Amazon Aurora or other services might get picked up for inclusion in diagnostic logs\. When you provide a URL to an external server, don't include credentials information in the URL to validate your request to that server\.
 
 For more information about data protection, see the [AWS Shared Responsibility Model and GDPR](http://aws.amazon.com/blogs/security/the-aws-shared-responsibility-model-and-gdpr/) blog post on the *AWS Security Blog*\.
 

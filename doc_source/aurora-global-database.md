@@ -732,7 +732,7 @@ Before you begin the procedure, the primary cluster fails or otherwise becomes u
 You can control the point at which a global database resumes, in case of disasters such as network or hardware failures that affect the primary DB cluster\. You manage recovery by setting a recovery point objective \(RPO\) for the global database\. 
 
 **Note**  
-Managing the RPO is currently supported for Aurora PostgreSQL version 10\.12 in the AWS Regions US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\), and Europe \(Ireland\)\.
+Managing the RPO is currently supported for Amazon Aurora with PostgreSQL compatibility\. For a list of supported Aurora PostgreSQL versions and AWS Regions, see [Limitations of Aurora Global Databases](#aurora-global-database.limitations)\.
 
 The *recovery point objective* is the oldest age of data that you want recoverable from a secondary DB cluster\. The RPO is used when your database resumes operations in a new AWS Region after a failover\. It represents the amount of data loss measured in time that you're willing to accept on a database failover\.
 

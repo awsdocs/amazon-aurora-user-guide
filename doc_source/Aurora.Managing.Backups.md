@@ -2,6 +2,9 @@
 
 In the following sections, you can find information about Aurora backups and how to restore your Aurora DB cluster using the AWS Management Console\.
 
+**Note**  
+You can also use AWS Backup to manage backups of Aurora DB clusters\. Backups managed by AWS Backup are considered manual cluster snapshots for the manual cluster snapshots quota\. Backups that were created with AWS Backup have names ending in `awsbackup:AWS-Backup-job-number`\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
+
 ## Fault Tolerance for an Aurora DB Cluster<a name="Aurora.Managing.FaultTolerance"></a>
 
 An Aurora DB cluster is fault tolerant by design\. The cluster volume spans multiple Availability Zones in a single AWS Region, and each Availability Zone contains a copy of the cluster volume data\. This functionality means that your DB cluster can tolerate a failure of an Availability Zone without any loss of data and only a brief interruption of service\.
