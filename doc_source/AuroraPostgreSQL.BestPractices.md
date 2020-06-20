@@ -160,9 +160,9 @@ myauroracluster.cluster-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432,
 myauroracluster.cluster-ro-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432
 ```
 
-In this scenario, your application would attempt to establish a connection to any node type, master or slave\. Once connected, a good practice is to first examine the read\-write status of the node by querying for the result of the command `SHOW transaction_read_only`\. 
+In this scenario, your application would attempt to establish a connection to any node type, master or slave\. Once connected, a good practice is to first examine the read/write status of the node by querying for the result of the command `SHOW transaction_read_only`\. 
 
-If the return value of the query is `OFF`, then you've successfully connected to the master node\. If the return value is `ON`, and your application requires a read\-write connection, you can then call the `aurora_replica_status` function to determine the `server_id` that has `session_id='MASTER_SESSION_ID'`\. This function gives you the name of the master node\. You can use this in conjunction with the 'endpointPostfix' described below\.
+If the return value of the query is `OFF`, then you've successfully connected to the master node\. If the return value is `ON`, and your application requires a read/write connection, you can then call the `aurora_replica_status` function to determine the `server_id` that has `session_id='MASTER_SESSION_ID'`\. This function gives you the name of the master node\. You can use this in conjunction with the 'endpointPostfix' described below\.
 
 One thing to watch out for is when you connect to a replica that has data that has become stale\. When this happens, the `aurora_replica_status` function may show out\-of\-date information\. A threshold for staleness can be set at the application level and examined by looking at the difference between the server time and the last\_update\_time\. In general, your application should be sure to avoid flip\-flopping between two hosts due to conflicting information returned by the aurora\_replica\_status function\. That is, your application should err on the side of trying all known hosts first instead of blindly following the data returned by the aurora\_replica\_status function\.
 
@@ -212,7 +212,7 @@ From the server side, certain APIs can cause an outage that can be used to test 
   ```
   public void causeFailover() {
       /*
-       * See http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/basics.html for more details on setting up an RDS client
+       * For more details about setting up an RDS client, see: http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/basics.html
        */
       final AmazonRDS rdsClient = AmazonRDSClientBuilder.defaultClient();
      

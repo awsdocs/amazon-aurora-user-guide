@@ -922,7 +922,7 @@ You can build the library manually from the source files, but the best practice 
 <dependency>
     <groupId>software.amazon.rdsdata</groupId>
     <artifactId>rds-data-api-client-library-java</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 

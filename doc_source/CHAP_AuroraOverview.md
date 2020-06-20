@@ -23,8 +23,8 @@
 + [DB Instance Classes](Concepts.DBInstanceClass.md)
 + [Amazon Aurora Storage and Reliability](Aurora.Overview.StorageReliability.md)
 + [Amazon Aurora Security](Aurora.Overview.Security.md)
-+ [High Availability for Aurora](Concepts.AuroraHighAvailability.md)
-+ [Working with Amazon Aurora Global Databases](aurora-global-database.md)
++ [High Availability for Amazon Aurora](Concepts.AuroraHighAvailability.md)
++ [Aurora Global Databases](Concepts.Aurora.GlobalDB.md)
 + [Replication with Amazon Aurora](Aurora.Replication.md)
 + [DB Instance Billing for Aurora](User_DBInstanceBilling.md)
 
@@ -38,7 +38,7 @@
 
 ## How Aurora Endpoints Work with High Availability<a name="Aurora.Overview.Endpoints.HA"></a>
 
- For clusters where high availability is important, use the writer endpoint for read\-write connections and the reader endpoint for read\-only connections\. These kinds of connections manage DB instance failover better than instance endpoints do\. The instance endpoints connect to a specific DB instance in a DB cluster, requiring logic in your application to choose a different endpoint if the DB instance becomes unavailable\. 
+ For clusters where high availability is important, use the writer endpoint for read/write connections and the reader endpoint for read\-only connections\. These kinds of connections manage DB instance failover better than instance endpoints do\. The instance endpoints connect to a specific DB instance in a DB cluster, requiring logic in your application to choose a different endpoint if the DB instance becomes unavailable\. 
 
  If the primary DB instance of a DB cluster fails, Aurora automatically fails over to a new primary DB instance\. It does so by either promoting an existing Aurora Replica to a new primary DB instance or creating a new primary DB instance\. If a failover occurs, you can use the cluster endpoint to reconnect to the newly promoted or created primary DB instance, or use the reader endpoint to reconnect to one of the Aurora Replicas in the DB cluster\. During a failover, the reader endpoint might direct connections to the new primary DB instance of a DB cluster for a short time after an Aurora Replica is promoted to the new primary DB instance\. 
 

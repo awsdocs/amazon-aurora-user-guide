@@ -41,9 +41,9 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.7\. For more
 
 **New Features**
 
-1. Added support for Amazon Aurora PostgreSQL Global Database\. For more information, see [Working with Amazon Aurora Global Databases](aurora-global-database.md)\.
+1. Added support for Amazon Aurora PostgreSQL Global Database\. For more information, see [Using Amazon Aurora Global Databases](aurora-global-database.md)\.
 
-1. Added the ability to configure the recovery point objective \(RPO\) of a global database for Aurora PostgreSQL\. For more information, see [Managing Recovery for an Aurora Global Database](aurora-global-database.md#aurora-global-database-manage-recovery)\.
+1. Added the ability to configure the recovery point objective \(RPO\) of a global database for Aurora PostgreSQL\. For more information, see [Managing Recovery for Aurora Global Databases](aurora-global-database-managing.md#aurora-global-database-manage-recovery)\.
 
 You can find the following improvements in this engine update\.
 
@@ -290,9 +290,9 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.12\. For mor
 
 **New Features**
 
-1. Added support for Amazon Aurora PostgreSQL Global Database\. For more information, see [Working with Amazon Aurora Global Databases](aurora-global-database.md)\.
+1. Added support for Amazon Aurora PostgreSQL Global Database\. For more information, see [Using Amazon Aurora Global Databases](aurora-global-database.md)\.
 
-1. Added the ability to configure the recovery point objective \(RPO\) of a global database for Aurora PostgreSQL\. For more information, see [Managing Recovery for an Aurora Global Database](aurora-global-database.md#aurora-global-database-manage-recovery)\.
+1. Added the ability to configure the recovery point objective \(RPO\) of a global database for Aurora PostgreSQL\. For more information, see [Managing Recovery for Aurora Global Databases](aurora-global-database-managing.md#aurora-global-database-manage-recovery)\.
 
 You can find the following improvements in this engine update\.
 

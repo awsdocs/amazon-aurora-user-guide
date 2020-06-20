@@ -23,7 +23,7 @@
 
  Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of 64 tebibytes \(TiB\)\. Table size is limited to the size of the cluster volume\. That is, the maximum table size for a table in an Aurora DB cluster is 64 TiB\. 
 
- This automatic storage scaling, combined with the high\-performance and highly distributed storage subsystem, makes Aurora a good choice for your important enterprise data when your main objectives are reliability and high availability\. See the following sections for ways to balance storage costs against these other priorities\. 
+ This automatic storage scaling, combined with the high\-performance and highly distributed storage subsystem, makes Aurora a good choice for your important enterprise data when your main objectives are reliability and high availability\. For ways to balance storage costs against these other priorities, see the following sections\. 
 
 ## How Aurora Data Storage is Billed<a name="aurora-storage-data-billing"></a>
 

@@ -189,7 +189,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `innodb_random_read_ahead` | Yes |  | 
 | `innodb_read_ahead_threshold` | Yes |  | 
 | `innodb_read_io_threads` | No |  | 
-| `innodb_read_only` | No |   Aurora MySQL manages the read\-only and read\-write state of DB instances based on the type of cluster\. For example, a provisioned cluster has one read\-write DB instance \(the *primary instance*\) and any other instances in the cluster are read\-only \(the Aurora Replicas\)\.   | 
+| `innodb_read_only` | No |   Aurora MySQL manages the read\-only and read/write state of DB instances based on the type of cluster\. For example, a provisioned cluster has one read/write DB instance \(the *primary instance*\) and any other instances in the cluster are read\-only \(the Aurora Replicas\)\.   | 
 | `innodb_replication_delay` | Yes |  | 
 | `innodb_sort_buffer_size` | Yes |  | 
 | `innodb_stats_auto_recalc` | Yes |  | 
@@ -330,7 +330,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `query_prealloc_size` | Yes |  | 
 | `range_alloc_block_size` | Yes |  | 
 | `read_buffer_size` | Yes |  | 
-| `read_only` | No |   Aurora MySQL manages the read\-only and read\-write state of DB instances based on the type of cluster\. For example, a provisioned cluster has one read\-write DB instance \(the *primary instance*\) and any other instances in the cluster are read\-only \(the Aurora Replicas\)\.   | 
+| `read_only` | No |   Aurora MySQL manages the read\-only and read/write state of DB instances based on the type of cluster\. For example, a provisioned cluster has one read/write DB instance \(the *primary instance*\) and any other instances in the cluster are read\-only \(the Aurora Replicas\)\.   | 
 | `read_rnd_buffer_size` | Yes |  | 
 | `relay-log` | No |  | 
 | `relay_log_info_repository` | Yes |  | 
@@ -501,6 +501,8 @@ In this wait event, there are threads holding locks on InnoDB data dictionary op
  If you experience such issues, you can use an Aurora MySQL configuration setting, `aurora_read_replica_read_committed`, to use the `READ COMMITTED` isolation level on Aurora Replicas\. Using this setting can help reduce slowdowns and wasted space that can result from performing long\-running queries at the same time as transactions that modify your tables\. 
 
  We recommend making sure that you understand the specific Aurora MySQL behavior of the `READ COMMITTED` isolation before using this setting\. The Aurora Replica `READ COMMITTED` behavior complies with the ANSI SQL standard\. However, the isolation is less strict than typical MySQL `READ COMMITTED` behavior that you might be familiar with\. Thus, you might see different query results under `READ COMMITTED` on an Aurora MySQL read replica than for the same query under `READ COMMITTED` on the Aurora MySQL primary instance or on Amazon RDS MySQL\. You might use the `aurora_read_replica_read_committed` setting for such use cases as a comprehensive report that scans a very large database\. You might avoid it for short queries with small result sets, where precision and repeatability are important\. 
+
+ The `READ COMMITTED` isolation level isn't available for sessions within a secondary cluster in an Aurora global database that use the write forwarding feature\. For information about write forwarding, see [Write Forwarding for Secondary AWS Regions with an Aurora Global Database](aurora-global-database-write-forwarding.md)\. 
 
 #### Enabling READ COMMITTED for Readers<a name="AuroraMySQL.Reference.IsolationLevels.relaxed.enabling"></a>
 

@@ -456,6 +456,6 @@ show status like 'Aurora_ml%';
 
  The following limitations apply to Aurora machine learning\. 
 
- You can't use an Aurora machine learning function for a generated\-always column\. The same limitation applies to any Aurora MySQL stored function\. functions aren't compatible with this binary log \(binlog\) format\. See [the MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/create-table-generated-columns.html) for information about generated columns\. 
+ You can't use an Aurora machine learning function for a generated\-always column\. The same limitation applies to any Aurora MySQL stored function\. functions aren't compatible with this binary log \(binlog\) format\. for information about generated columns, see [the MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/create-table-generated-columns.html)\. 
 
- The setting `—binlog-format=STATEMENT` throws an exception for calls to Aurora machine learning functions\. The reason for the error is that Aurora Machine Learning considers all ML functions to be nondeterministic, and nondeterministic stored functions aren't compatible with this binlog format\. See [the MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/binary-log-formats.html) for information about this binlog format\. 
+ The setting `—binlog-format=STATEMENT` throws an exception for calls to Aurora machine learning functions\. The reason for the error is that Aurora Machine Learning considers all ML functions to be nondeterministic, and nondeterministic stored functions aren't compatible with this binlog format\. For information about this binlog format, see [the MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/binary-log-formats.html)\. 

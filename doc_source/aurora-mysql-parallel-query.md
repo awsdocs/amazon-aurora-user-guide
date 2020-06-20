@@ -21,7 +21,7 @@
  When the parallel query feature is enabled, the Aurora MySQL engine automatically determines when queries can benefit, without requiring SQL changes such as hints or table attributes\. In the following sections, you can find an explanation of when parallel query is applied to a query\. You can also find how to make sure that parallel query is applied where it provides the most benefit\. 
 
 **Note**  
- The parallel query optimization provides the most benefit for long\-running queries that take minutes or hours to complete\. Aurora MySQL generally doesn't perform parallel query optimization for inexpensive queries or if another optimization technique makes more sense, such as query caching, buffer pool caching, or index lookups\. See [Verifying Which Statements Use Parallel Query](#aurora-mysql-parallel-query-verifying) if you find parallel query isn't being used when you expect it\. 
+ The parallel query optimization provides the most benefit for long\-running queries that take minutes or hours to complete\. Aurora MySQL generally doesn't perform parallel query optimization for inexpensive queries or if another optimization technique makes more sense, such as query caching, buffer pool caching, or index lookups\. If you find parallel query isn't being used when you expect it, see [Verifying Which Statements Use Parallel Query](#aurora-mysql-parallel-query-verifying)\. 
 
 **Topics**
 + [Benefits](#aurora-mysql-parallel-query-benefits)

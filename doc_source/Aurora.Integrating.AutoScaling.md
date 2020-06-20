@@ -143,8 +143,8 @@ To register your Aurora DB cluster, use the [https://docs.aws.amazon.com/cli/lat
 + `--service-namespace` – Set this value to `rds`\.
 + `--resource-id` – The resource identifier for the Aurora DB cluster\. For this parameter, the resource type is `cluster` and the unique identifier is the name of the Aurora DB cluster, for example `cluster:myscalablecluster`\.
 + `--scalable-dimension` – Set this value to `rds:cluster:ReadReplicaCount`\.
-+ `--min-capacity` – The minimum number of reader DB instances to be managed by Application Auto Scaling\. See [Minimum and Maximum Capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity) for the relationship between `--min-capacity`, `--max-capacity`, and the number of DB instances in your cluster\.
-+ `--max-capacity` – The maximum number of reader DB instances to be managed by Application Auto Scaling\. See [Minimum and Maximum Capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity) for the relationship between `--min-capacity`, `--max-capacity`, and the number of DB instances in your cluster\.
++ `--min-capacity` – The minimum number of reader DB instances to be managed by Application Auto Scaling\. For information about the relationship between `--min-capacity`, `--max-capacity`, and the number of DB instances in your cluster, see [Minimum and Maximum Capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity)\.
++ `--max-capacity` – The maximum number of reader DB instances to be managed by Application Auto Scaling\. For information about the relationship between `--min-capacity`, `--max-capacity`, and the number of DB instances in your cluster, see [Minimum and Maximum Capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity)\.
 
 **Example**  
 In the following example, you register an Aurora DB cluster named `myscalablecluster`\. The registration indicates that the DB cluster should be dynamically scaled to have from one to eight Aurora Replicas\.  
@@ -175,8 +175,8 @@ To register your Aurora DB cluster with Application Auto Scaling, use the [https
 + `ServiceNamespace` – Set this value to `rds`\.
 + `ResourceID` – The resource identifier for the Aurora DB cluster\. For this parameter, the resource type is `cluster` and the unique identifier is the name of the Aurora DB cluster, for example `cluster:myscalablecluster`\.
 + `ScalableDimension` – Set this value to `rds:cluster:ReadReplicaCount`\.
-+ `MinCapacity` – The minimum number of reader DB instances to be managed by Application Auto Scaling\. See [Minimum and Maximum Capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity) for the relationship between `MinCapacity`, `MaxCapacity`, and the number of DB instances in your cluster\.
-+ `MaxCapacity` – The maximum number of reader DB instances to be managed by Application Auto Scaling\. See [Minimum and Maximum Capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity) for the relationship between `MinCapacity`, `MaxCapacity`, and the number of DB instances in your cluster\.
++ `MinCapacity` – The minimum number of reader DB instances to be managed by Application Auto Scaling\. For information about the relationship between `MinCapacity`, `MaxCapacity`, and the number of DB instances in your cluster, see [Minimum and Maximum Capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity)\.
++ `MaxCapacity` – The maximum number of reader DB instances to be managed by Application Auto Scaling\. For information about the relationship between `MinCapacity`, `MaxCapacity`, and the number of DB instances in your cluster, see [Minimum and Maximum Capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity)\.
 
 **Example**  
 In the following example, you register an Aurora DB cluster named `myscalablecluster` with the Application Auto Scaling API\. This registration indicates that the DB cluster should be dynamically scaled to have from one to eight Aurora Replicas\.  

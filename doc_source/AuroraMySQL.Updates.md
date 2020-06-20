@@ -42,12 +42,12 @@ For Aurora MySQL 2\.x, the engine version for Aurora MySQL version 2\.03\.1 and 
 ## Database Upgrades and Patches for Amazon Aurora MySQL<a name="AuroraMySQL.Updates.Patching"></a>
 
 There are two ways to upgrade the minor version of a DB cluster or patch a DB cluster:
-+ [Modifying the Engine Version](#AuroraMySQL.Updates.Patching.ModifyEngineVersion) \(upgrading to version 2\.03\.2 and higher only\)
++ [Modifying the Engine Version](#AuroraMySQL.Updates.Patching.ModifyEngineVersion) \(when upgrading to version 1\.19\.0 and higher, or 2\.03\.2 and higher\)
 + [Applying Pending Maintenance to an Aurora MySQL DB Cluster](#AuroraMySQL.Updates.PendingMaintenance)
 
 ### Modifying the Engine Version<a name="AuroraMySQL.Updates.Patching.ModifyEngineVersion"></a>
 
-When upgrading to Amazon Aurora MySQL version 2\.03\.2 and higher, you upgrade the minor version of a DB cluster\. You do so by modifying the engine version of the DB cluster using the AWS Management Console, AWS CLI, or the RDS API\.
+When upgrading to Amazon Aurora MySQL version 1\.19\.0 and higher, or 2\.03\.2 and higher, you upgrade the minor version of a DB cluster\. You do so by modifying the engine version of the DB cluster using the AWS Management Console, AWS CLI, or the RDS API\.
 
 **To modify the engine version of a DB cluster**
 + **By using the Amazon RDS console** – Complete the following steps: 

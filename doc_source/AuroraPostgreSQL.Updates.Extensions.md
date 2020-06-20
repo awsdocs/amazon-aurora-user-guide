@@ -16,7 +16,7 @@ The `apg_plan_mgmt` extension changes for version 2\.0 include the following:
 
 1. You can now manage all queries inside PL/pgSQL functions, whether they have parameters or not\.
 
-1. You can now manage queries in generic plans, whether they have parameters or not\. To learn more about generic plans versus custom plans, See the `PREPARE` statement in the [ PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-prepare.html)\. 
+1. You can now manage queries in generic plans, whether they have parameters or not\. To learn more about generic plans versus custom plans, see the `PREPARE` statement in the [ PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-prepare.html)\. 
 
 1. You can now use query plan management to enforce the use of specific types of aggregate methods in query plans\.
 

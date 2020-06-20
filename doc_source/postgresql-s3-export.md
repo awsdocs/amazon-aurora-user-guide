@@ -65,7 +65,7 @@ Specify the following information to identify the location in Amazon S3 where yo
 **Note**  
 Currently, the AWS Region must be the same as the region of the exporting DB cluster\.
 
-  For a listing of AWS Region names and associated values, see [   Regions and Availability Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
+  For a listing of AWS Region names and associated values, see [ Regions and Availability Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
 
 To hold the Amazon S3 file information about where the export is to be stored, you can use the [aws\_commons\.create\_s3\_uri](#aws_commons.create_s3_uri) function to create an `aws_commons._s3_uri_1` composite structure as follows\.
 
@@ -329,7 +329,7 @@ A required text string containing an SQL query that the PostgreSQL engine runs\.
 An `aws_commons._s3_uri_1` composite type containing the following information about the S3 object:  
 + `bucket` – The name of the Amazon S3 bucket to contain the file\.
 + `file_path` – The Amazon S3 path of the file\.
-+ `region` – The AWS Region that the bucket is in\. For a listing of AWS Region names and associated values, see [   Regions and Availability Zones ](Concepts.RegionsAndAvailabilityZones.md)\. 
++ `region` – The AWS Region that the bucket is in\. For a listing of AWS Region names and associated values, see [ Regions and Availability Zones ](Concepts.RegionsAndAvailabilityZones.md)\. 
 
   Currently, this value must be the same AWS Region as that of the exporting DB cluster\. The default is the AWS Region of the exporting DB cluster\. 
 To create an `aws_commons._s3_uri_1` composite structure, see the [aws\_commons\.create\_s3\_uri](#aws_commons.create_s3_uri) function\.
@@ -363,7 +363,7 @@ A required text string containing the name of the Amazon S3 bucket that contains
 A required text string containing the Amazon S3 path of the file\.
 
 *region*  
-An optional text string containing the AWS Region that the bucket is in\. For a listing of AWS Region names and associated values, see [   Regions and Availability Zones ](Concepts.RegionsAndAvailabilityZones.md)\.  
+An optional text string containing the AWS Region that the bucket is in\. For a listing of AWS Region names and associated values, see [ Regions and Availability Zones ](Concepts.RegionsAndAvailabilityZones.md)\.  
 Currently, this value must be the same AWS Region as that of the exporting DB cluster\. The default is the AWS Region of the exporting DB cluster\. 
 
 *options*  
@@ -417,4 +417,4 @@ A required text string containing the Amazon S3 bucket name for the file\.
 A required text string containing the Amazon S3 path of the file\.
 
 *region*  
-A required text string containing the AWS Region that the file is in\. For a listing of AWS Region names and associated values, see [   Regions and Availability Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
+A required text string containing the AWS Region that the file is in\. For a listing of AWS Region names and associated values, see [ Regions and Availability Zones ](Concepts.RegionsAndAvailabilityZones.md)\.

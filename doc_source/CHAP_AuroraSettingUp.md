@@ -5,6 +5,7 @@ This section shows how to set up your Aurora DB cluster\. Before creating an Aur
 **Topics**
 + [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)
 + [Using Amazon Aurora Serverless](aurora-serverless.md)
++ [Using Amazon Aurora Global Databases](aurora-global-database.md)
 + [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)
 + [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)
 + [Migrating Data to an Amazon Aurora DB Cluster](Aurora.Migrate.md)

@@ -1,6 +1,6 @@
 # Working with Aurora Multi\-Master Clusters<a name="aurora-multi-master"></a>
 
- Following, you can learn about Aurora multi\-master clusters\. In a multi\-master cluster, all DB instances have read\-write capability\. Multi\-master clusters have different availability characteristics, support for database features, and procedures for monitoring and troubleshooting than single\-master clusters\. 
+ Following, you can learn about Aurora multi\-master clusters\. In a multi\-master cluster, all DB instances have read/write capability\. Multi\-master clusters have different availability characteristics, support for database features, and procedures for monitoring and troubleshooting than single\-master clusters\. 
 
 **Topics**
 + [Overview of Aurora Multi\-Master Clusters](#aurora-multi-master-overview)
@@ -18,9 +18,9 @@
 
  Most kinds of Aurora clusters are *single\-master* clusters\. For example, provisioned, Aurora Serverless, parallel query, and Global Database clusters are all single\-master clusters\. In a single\-master cluster, a single DB instance performs all write operations and any other DB instances are read\-only\. If the writer DB instance becomes unavailable, a failover mechanism promotes one of the read\-only instances to be the new writer\. 
 
- In a *multi\-master cluster*, all DB instances can perform write operations\. The notions of a single read\-write primary instance and multiple read\-only Aurora Replicas don't apply\. There isn't any failover when a writer DB instance becomes unavailable, because another writer DB instance is immediately available to take over the work of the failed instance\. We refer to this type of availability as *continuous availability*, to distinguish it from the high availability \(with brief downtime during failover\) offered by a single\-master cluster\. 
+ In a *multi\-master cluster*, all DB instances can perform write operations\. The notions of a single read/write primary instance and multiple read\-only Aurora Replicas don't apply\. There isn't any failover when a writer DB instance becomes unavailable, because another writer DB instance is immediately available to take over the work of the failed instance\. We refer to this type of availability as *continuous availability*, to distinguish it from the high availability \(with brief downtime during failover\) offered by a single\-master cluster\. 
 
- Multi\-master clusters work differently in many ways from the other kinds of Aurora clusters, such as provisioned, Aurora Serverless, and parallel query clusters\. With multi\-master clusters, you consider different factors in areas such as high availability, monitoring, connection management, and database features\. For example, in applications where you can't afford even brief downtime for database write operations, a multi\-master cluster can help to avoid an outage when a writer instance becomes unavailable\. The multi\-master cluster doesn't use the failover mechanism, because it doesn't need to promote another DB instance to have read\-write capability\. With a multi\-master cluster, you examine metrics related to DML throughput, latency, and deadlocks for all DB instances instead of a single primary instance\. 
+ Multi\-master clusters work differently in many ways from the other kinds of Aurora clusters, such as provisioned, Aurora Serverless, and parallel query clusters\. With multi\-master clusters, you consider different factors in areas such as high availability, monitoring, connection management, and database features\. For example, in applications where you can't afford even brief downtime for database write operations, a multi\-master cluster can help to avoid an outage when a writer instance becomes unavailable\. The multi\-master cluster doesn't use the failover mechanism, because it doesn't need to promote another DB instance to have read/write capability\. With a multi\-master cluster, you examine metrics related to DML throughput, latency, and deadlocks for all DB instances instead of a single primary instance\. 
 
  Currently, multi\-master clusters require Aurora MySQL version 1, which is compatible with MySQL 5\.6\. 
 
@@ -70,11 +70,11 @@
 
 ### Multi\-Master Cluster Architecture<a name="aurora-multi-master-architecture"></a>
 
- Multi\-master clusters have a different architecture than other kinds of Aurora clusters\. In multi\-master clusters, all DB instances have read\-write capability\. Other kinds of Aurora clusters have a single dedicated DB instance that performs all write operations, while all other DB instances are read\-only and handle only `SELECT` queries\. Multi\-master clusters don't have a primary instance or read\-only Aurora Replicas\. 
+ Multi\-master clusters have a different architecture than other kinds of Aurora clusters\. In multi\-master clusters, all DB instances have read/write capability\. Other kinds of Aurora clusters have a single dedicated DB instance that performs all write operations, while all other DB instances are read\-only and handle only `SELECT` queries\. Multi\-master clusters don't have a primary instance or read\-only Aurora Replicas\. 
 
  Your application controls which write requests are handled by which DB instance\. Thus, with a multi\-master cluster, you connect to individual instance endpoints to issue DML and DDL statements\. That's different than other kinds of Aurora clusters, where you typically direct all write operations to the single cluster endpoint and all read operations to the single reader endpoint\. 
 
- The underlying storage for Aurora multi\-master clusters is similar to storage for single\-master clusters\. Your data is still stored in a highly reliable, shared storage volume that grows automatically\. The core difference lies in the number and type of DB instances\. In multi\-master clusters, there are *N* read\-write nodes\. Currently, the maximum for *N* is 2\. 
+ The underlying storage for Aurora multi\-master clusters is similar to storage for single\-master clusters\. Your data is still stored in a highly reliable, shared storage volume that grows automatically\. The core difference lies in the number and type of DB instances\. In multi\-master clusters, there are *N* read/write nodes\. Currently, the maximum for *N* is 2\. 
 
  Multi\-master clusters have no dedicated read\-only nodes\. Thus, the Aurora procedures and guidelines about Aurora Replicas don't apply to multi\-master clusters\. You can temporarily make a DB instance read\-only to place read and write workloads on different DB instances\. To do so, see [Using Instance Read\-Only Mode](#using-instance-read-only-mode)\. 
 
@@ -107,7 +107,7 @@
 ### Advantages of Multi\-Master Clusters<a name="aurora-multi-master-advantages"></a>
 
  You can take advantage of the following benefits with Aurora multi\-master clusters: 
-+  Multi\-master clusters improve Aurora's already high availability\. You can restart a read\-write DB instance without causing other DB instances in the cluster to restart\. There is no failover process and associated delay when a read\-write DB instance becomes unavailable\. 
++  Multi\-master clusters improve Aurora's already high availability\. You can restart a read/write DB instance without causing other DB instances in the cluster to restart\. There is no failover process and associated delay when a read/write DB instance becomes unavailable\. 
 +  Multi\-master clusters are well\-suited to sharded or multitenant applications\. As you manage the data, you can avoid complex resharding operations\. You might be able to consolidate sharded applications with a smaller number of clusters or DB instances\. For details, see [Using a Multi\-Master Cluster for a Sharded Database](#aurora-multi-master-sharding)\. 
 +  Aurora detects write conflicts immediately, not when the transaction commits\. For details about the write conflict mechanism, see [Conflict Resolution for Multi\-Master Clusters](#aurora-multi-master-conflicts)\. 
 
@@ -216,7 +216,7 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
 
 ### Adding a DB Instance to a Multi\-Master Cluster<a name="aurora-multi-master-add-instance"></a>
 
- You need more than one DB instance to see the benefits of a multi\-master cluster\.  You can create another DB instance afterward using the procedures from [Adding Aurora Replicas to a DB Cluster](aurora-replicas-adding.md)\. The difference for multi\-master clusters is that the new DB instance has read\-write capability instead of a read\-only Aurora Replica\. Use the same AWS instance class for all DB instances within the multi\-master cluster\. 
+ You need more than one DB instance to see the benefits of a multi\-master cluster\.  You can create another DB instance afterward using the procedures from [Adding Aurora Replicas to a DB Cluster](aurora-replicas-adding.md)\. The difference for multi\-master clusters is that the new DB instance has read/write capability instead of a read\-only Aurora Replica\. Use the same AWS instance class for all DB instances within the multi\-master cluster\. 
 
 ## Managing Aurora Multi\-Master Clusters<a name="aurora-multi-master-managing"></a>
 
@@ -275,7 +275,7 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
 
 ### High Availability Considerations for Aurora Multi\-Master Clusters<a name="aurora-multi-master-HA"></a>
 
- In an Aurora multi\-master cluster, any DB instance can restart without causing any other instance to restart\. This behavior provides a higher level of availability for read\-write and read\-only connections than for Aurora single\-master clusters\. We refer to this availability level as *continuous availability*\. In multi\-master clusters, there is no downtime for write availability when a writer DB instance fails\. Multi\-master clusters don't use the failover mechanism, because all cluster instances are writable\. If a DB instance fails in a multi\-master cluster, your application can redirect the workload towards the remaining healthy instances\. 
+ In an Aurora multi\-master cluster, any DB instance can restart without causing any other instance to restart\. This behavior provides a higher level of availability for read/write and read\-only connections than for Aurora single\-master clusters\. We refer to this availability level as *continuous availability*\. In multi\-master clusters, there is no downtime for write availability when a writer DB instance fails\. Multi\-master clusters don't use the failover mechanism, because all cluster instances are writable\. If a DB instance fails in a multi\-master cluster, your application can redirect the workload towards the remaining healthy instances\. 
 
  In a single\-master cluster, restarting the primary instance makes write operations unavailable until the failover mechanism promotes a new primary instance\. Read\-only operations also experience a brief downtime because all the Aurora Replicas in the cluster restart\. 
 
@@ -339,7 +339,7 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
  Aurora multi\-master clusters have the following kinds of endpoints: 
 
 **Cluster endpoint**  
- This type of endpoint always points to a DB instance with read\-write capability\. Each multi\-master cluster has one cluster endpoint\.   
+ This type of endpoint always points to a DB instance with read/write capability\. Each multi\-master cluster has one cluster endpoint\.   
  Because applications in multi\-master clusters typically include logic to manage connections to specific DB instances, you rarely need to use this endpoint\. It's mostly useful for connecting to a multi\-master cluster to perform administration\.   
  You can also connect to this endpoint to examine the cluster topology when you don't know the status of the DB instances in the cluster\. To learn that procedure, see [Describing Cluster Topology](#describing-cluster-topology)\. 
 
@@ -540,7 +540,7 @@ mysql> select @@aurora_mm_session_consistency_level;
 
 #### Checking DB Instance Read\-Write Mode<a name="checking-node-readwrite-mode"></a>
 
- In multi\-master clusters, all nodes operate in read\-write mode\. The `innodb_read_only` variable always returns zero\. The following example shows that when you connect to any DB instance in a multi\-master cluster, the DB instance reports that it has read\-write capability\. 
+ In multi\-master clusters, all nodes operate in read/write mode\. The `innodb_read_only` variable always returns zero\. The following example shows that when you connect to any DB instance in a multi\-master cluster, the DB instance reports that it has read/write capability\. 
 
 ```
 $ mysql -h mysql -A -h multi-master-instance-1.example123.us-east-1.rds.amazonaws.com
@@ -653,7 +653,7 @@ mysql> select @@read_only;
 
  You can use the following approaches to optimize query performance for a multi\-master cluster: 
 +  Perform `SELECT` statements on the DB instance that handles the shard containing the associated table, database, or other schema objects involved in the query\. This technique maximizes reuse of data in the buffer pool\. It also avoids the same data being cached on more than one DB instance\. For more details about this technique, see [Optimizing Buffer Pool and Dictionary Cache Usage](#optimizing-buffer-pool-and-dictionary-cache-usage)\. 
-+  If you need read\-write workload isolation, designate one or more DB instances as read\-only, as described in [Using Instance Read\-Only Mode](#using-instance-read-only-mode)\. You can direct read\-only sessions to those DB instances by connecting to the corresponding instance endpoints, or by defining a custom endpoint that is associated with all the read\-only instances\. 
++  If you need read/write workload isolation, designate one or more DB instances as read\-only, as described in [Using Instance Read\-Only Mode](#using-instance-read-only-mode)\. You can direct read\-only sessions to those DB instances by connecting to the corresponding instance endpoints, or by defining a custom endpoint that is associated with all the read\-only instances\. 
 +  Spread read\-only queries across all DB instances\. This approach is the least efficient\. Use one of the other approaches where practical, especially as you move from the development and test phase towards production\. 
 
 ### Conflict Resolution for Multi\-Master Clusters<a name="aurora-multi-master-conflicts"></a>
@@ -708,7 +708,7 @@ mysql> select @@read_only;
 
  An *active standby* is a DB instance that is kept synchronized with another DB instance, and is ready to take over for it very quickly\. This configuration helps with high availability in situations where a single DB instance can handle the full workload\. 
 
- You can use multi\-master clusters in an active standby configuration by directing all traffic, both read\-write and read\-only, to a single DB instance\. If that DB instance becomes unavailable, your application must detect the problem and switch all connections to a different DB instance\. In this case, Aurora doesn't perform any failover because the other DB instance is already available to accept read\-write connections\. By only writing to a single DB instance at any one time, you avoid write conflicts\. Thus, you don't need to have a sharded database schema to use multi\-master clusters in this way\. 
+ You can use multi\-master clusters in an active standby configuration by directing all traffic, both read/write and read\-only, to a single DB instance\. If that DB instance becomes unavailable, your application must detect the problem and switch all connections to a different DB instance\. In this case, Aurora doesn't perform any failover because the other DB instance is already available to accept read/write connections\. By only writing to a single DB instance at any one time, you avoid write conflicts\. Thus, you don't need to have a sharded database schema to use multi\-master clusters in this way\. 
 
 **Tip**  
  If your application can tolerate a brief pause, you can wait several seconds after a DB instance becomes unavailable before redirecting write traffic to another instance\. When an instance becomes unavailable because of a restart, it becomes available again after approximately 10–20 seconds\. If the instance can't restart quickly, Aurora might initiate recovery for that instance\. When an instance is shut down, it performs some additional cleanup activities as part of the shutdown\. If you begin writing to a different instance while the instance is restarting, undergoing recovery, or being shut down, you can encounter write conflicts\. The conflicts can occur between SQL statements on the new instance, and recovery operations such as rollback and purge on the instance that was restarted or shut down\. 

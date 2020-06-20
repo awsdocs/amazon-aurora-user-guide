@@ -148,7 +148,7 @@
 
  As you find when doing your initial schema and data setup and running sample queries, you can connect to different endpoints in an Aurora cluster\. The endpoint to use depends on whether the operation is a read such as `SELECT` statement, or a write such as a `CREATE` or `INSERT` statement\. As you increase the workload on an Aurora cluster and experiment with Aurora features, it's important for your application to assign each operation to the appropriate endpoint\. 
 
- By using the cluster endpoint for write operations, you always connect to a DB instance in the cluster that has read\-write capability\. By default, only one DB instance in an Aurora cluster has read\-write capability\. This DB instance is called the *primary instance*\. If the original primary instance becomes unavailable, Aurora activates a failover mechanism and a different DB instance takes over as the primary\. 
+ By using the cluster endpoint for write operations, you always connect to a DB instance in the cluster that has read/write capability\. By default, only one DB instance in an Aurora cluster has read/write capability\. This DB instance is called the *primary instance*\. If the original primary instance becomes unavailable, Aurora activates a failover mechanism and a different DB instance takes over as the primary\. 
 
  Similarly, by directing `SELECT` statements to the reader endpoint, you spread the work of processing queries among the DB instances in the cluster\. Each reader connection is assigned to a different DB instance using round\-robin DNS resolution\. Doing most of the query work on the read\-only DB Aurora Replicas reduces the load on the primary instance, freeing it to handle DDL and DML statements\. 
 
@@ -189,7 +189,7 @@
 
  To have more choices on the **Monitoring** tab, enable Enhanced Monitoring and Performance Insights in the cluster settings\. You can also enable those choices later if you didn't choose them when setting up the cluster\. 
 
- To measure performance, you rely mostly on the charts showing activity for the whole Aurora cluster\. You can verify whether the Aurora Replicas have similar load and response times\. You can also see how the work is split up between the read\-write primary instance and the read\-only Aurora Replicas\. If there is some imbalance between the DB instances or an issue affecting only one DB instance, you can examine the **Monitoring** tab for that specific instance\. 
+ To measure performance, you rely mostly on the charts showing activity for the whole Aurora cluster\. You can verify whether the Aurora Replicas have similar load and response times\. You can also see how the work is split up between the read/write primary instance and the read\-only Aurora Replicas\. If there is some imbalance between the DB instances or an issue affecting only one DB instance, you can examine the **Monitoring** tab for that specific instance\. 
 
  After the environment and the actual workload are set up to emulate your production application, you can measure how well Aurora performs\. The most important questions to answer are as follows: 
 +  How many queries per second is Aurora processing? You can examine the **Throughput** metrics to see the figures for various kinds of operations\. 
