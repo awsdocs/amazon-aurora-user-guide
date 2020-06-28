@@ -1,0 +1,3 @@
+# Aurora Serverless Versions<a name="aurora-serverless.relnotes"></a>
+
+ Aurora Serverless clusters can use different engine versions for Aurora MySQL version 1 and Aurora MySQL version 2\. You can choose the appropriate version when you create an Aurora MySQL Serverless cluster\. You can also upgrade an Aurora MySQL Serverless cluster from one version to another\. For information about changes in each Aurora MySQL Serverless version, see [Database Engine Updates for Aurora MySQL Serverless Clusters](AuroraMySQL.Updates.ServerlessUpdates.md)\. 

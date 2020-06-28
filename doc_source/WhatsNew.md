@@ -9,6 +9,7 @@ Before August 31, 2018, Amazon Aurora was documented in the * Amazon Relational 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Aurora Serverless version 2\.07\.1](AuroraMySQL.Updates.serverless_2_07_01.md) |  Aurora Serverless with MySQL 5\.7 compatibility is available\. The release includes features and bug fixes based on Aurora MySQL version 2\.07\.1\. For more information about Aurora Serverless, see [Using Amazon Aurora Serverless](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)\.  | June 24, 2020 | 
 | [Aurora global database write forwarding](#WhatsNew) |  You can now enable write capability on secondary clusters in a global database\. With write forwarding, you issue DML statements on a secondary cluster, Aurora forwards the write to the primary cluster, and the updated data is replicated to all the secondary clusters\. For more information, see [Write Forwarding for Secondary AWS Regions with an Aurora Global Database](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-write-forwarding.html)\. | June 18, 2020 | 
 | [Aurora MySQL version 2\.08\.1](AuroraMySQL.Updates.2081.md) | Aurora MySQL version 2\.08\.1 is available\. | June 18, 2020 | 
 | [Aurora MySQL version 1\.22\.2 for parallel query clusters](AuroraMySQL.Updates.1222.md) | Aurora MySQL version 1\.22\.2 is available when you create a parallel query cluster\. | June 18, 2020 | 

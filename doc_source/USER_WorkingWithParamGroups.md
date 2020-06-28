@@ -18,7 +18,7 @@ Here are some important points about working with parameters in a parameter grou
   If a DB instance isn't using the latest changes to its associated DB parameter group, the AWS Management Console shows the DB parameter group with a status of **pending\-reboot**\. The **pending\-reboot** parameter groups status doesn't result in an automatic reboot during the next maintenance window\. To apply the latest parameter changes to that DB instance, manually reboot the DB instance\.
 + When you change the DB parameter group associated with a DB instance, you must manually reboot the instance before the new DB parameter group is used by the DB instance\. 
 **Note**  
-Reboot isn't required when you change the DB cluster parameter group associated with a DB cluster\.
+After you change the DB cluster parameter group associated with a DB cluster, reboot the primary DB instance in the cluster to apply the changes to all of the DB instances in the cluster\.
 + You can specify the value for a parameter as an integer or as an integer expression built from formulas, variables, functions, and operators\. Functions can include a mathematical log expression\. For more information, see [DB Parameter Values](#USER_ParamValuesRef)\.
 + Set any parameters that relate to the character set or collation of your database in your parameter group before creating the DB instance and before you create a database in your DB instance\. This ensures that the default database and new databases in your DB instance use the character set and collation values that you specify\. If you change character set or collation parameters for your DB instance, the parameter changes are not applied to existing databases\.
 
@@ -226,7 +226,7 @@ You can modify parameter values in a customer\-created DB parameter group; you c
 
 Changes to some parameters are applied to the DB instance immediately without a reboot\. Changes to other parameters are applied only after the DB instance is rebooted\. The RDS console shows the status of the DB parameter group associated with a DB instance on the **Configuration** tab\. For example, if the DB instance isn't using the latest changes to its associated DB parameter group, the RDS console shows the DB parameter group with a status of **pending\-reboot**\. To apply the latest parameter changes to that DB instance, manually reboot the DB instance\.
 
-![\[Parameter change pending reboot scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/param-reboot.png)
+![\[Parameter change pending reboot scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/db-cluster-instance-param-group.png)
 
 ### Console<a name="USER_WorkingWithParamGroups.Modifying.CON"></a>
 
@@ -285,11 +285,7 @@ To modify a DB parameter group, use the RDS API [https://docs.aws.amazon.com/Ama
 
 ## Modifying Parameters in a DB Cluster Parameter Group<a name="USER_WorkingWithParamGroups.ModifyingCluster"></a>
 
-You can modify parameter values in a customer\-created DB cluster parameter group; you can't change the parameter values in a default DB cluster parameter group\. Changes to parameters in a customer\-created DB cluster parameter group are applied to all DB clusters that are associated with the DB cluster parameter group\. 
-
-Changes to some parameters are applied to the DB instance immediately without a reboot\. Changes to other parameters are applied only after the DB instance is rebooted\. The RDS console shows the status of the DB cluster parameter group associated with a DB instance\. For example, if the DB instance is not using the latest changes to the associated DB cluster parameter group, the RDS console shows the DB cluster parameter group with a status of **pending\-reboot**\. You would need to manually reboot the DB instance for the latest parameter changes to take effect for that DB instance\.
-
-![\[Cluster parameter change pending reboot scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/param-cluster-reboot.png)
+You can modify parameter values in a customer\-created DB cluster parameter group\. You can't change the parameter values in a default DB cluster parameter group\. Changes to parameters in a customer\-created DB cluster parameter group are applied to all DB clusters that are associated with the DB cluster parameter group\.
 
 ### Console<a name="USER_WorkingWithParamGroups.ModifyingCluster.CON"></a>
 
@@ -308,6 +304,8 @@ Changes to some parameters are applied to the DB instance immediately without a 
    You can't change values in a default parameter group\.
 
 1. Choose **Save changes**\.
+
+1. Reboot the primary DB instance in the cluster to apply the changes to all of the DB instances in the cluster\.
 
 ### AWS CLI<a name="USER_WorkingWithParamGroups.ModifyingCluster.CLI"></a>
 
@@ -732,7 +730,7 @@ You can specify the value for a DB parameter as any of the following:
 
 A DB parameter formula is an expression that resolves to an integer value or a Boolean value, and is enclosed in braces: \{\}\. You can specify formulas for either a DB parameter value or as an argument to a DB parameter function\.
 
-#### Syntax<a name="w91aac13c36c69b7b4"></a>
+#### Syntax<a name="USER_ParamFormulas.Syntax"></a>
 
 ```
 {FormulaVariable}

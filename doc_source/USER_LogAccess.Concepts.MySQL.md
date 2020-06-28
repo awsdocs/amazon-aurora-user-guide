@@ -33,9 +33,11 @@ You can control MySQL logging by using the parameters in this list:
 + `long_query_time`: To prevent fast\-running queries from being logged in the slow query log, specify a value for the shortest query execution time to be logged, in seconds\. The default is 10 seconds; the minimum is 0\. If log\_output = FILE, you can specify a floating point value that goes to microsecond resolution\. If log\_output = TABLE, you must specify an integer value with second resolution\. Only queries whose execution time exceeds the `long_query_time` value are logged\. For example, setting `long_query_time` to 0\.1 prevents any query that runs for less than 100 milliseconds from being logged\.
 + `log_queries_not_using_indexes`: To log all queries that do not use an index to the slow query log, set to 1\. The default is 0\. Queries that do not use an index are logged even if their execution time is less than the value of the `long_query_time` parameter\.
 + `log_output option`: You can specify one of the following options for the `log_output` parameter\. 
-  + **TABLE** \(default\)– Write general queries to the `mysql.general_log` table, and slow queries to the `mysql.slow_log` table\. 
-  + **FILE**– Write both general and slow query logs to the file system\. Log files are rotated hourly\. 
-  + **NONE**– Disable logging\.
+  + **TABLE** – Write general queries to the `mysql.general_log` table, and slow queries to the `mysql.slow_log` table\. 
+  + **FILE** – Write both general and slow query logs to the file system\. Log files are rotated hourly\. 
+  + **NONE** – Disable logging\.
+
+  For Aurora MySQL 5\.6, the default for `log_output` is `TABLE`\. For Aurora MySQL 5\.7, the default for `log_output` is `FILE`\.
 
 When logging is enabled, Amazon RDS rotates table logs or deletes log files at regular intervals\. This measure is a precaution to reduce the possibility of a large log file either blocking database use or affecting performance\. `FILE` and `TABLE` logging approach rotation and deletion as follows:
 + When `FILE` logging is enabled, log files are examined every hour and log files older than 24 hours are deleted\. In some cases, the remaining combined log file size after the deletion might exceed the threshold of 2 percent of a DB instance's allocated space\. In these cases, the largest log files are deleted until the log file size no longer exceeds the threshold\. 
@@ -80,13 +82,13 @@ PROMPT> CALL mysql.rds_rotate_general_log;
 
 ## Binary Logging Format<a name="USER_LogAccess.MySQL.BinaryFormat"></a>
 
-MySQL on Amazon RDS supports the *row\-based*, *statement\-based*, and *mixed* binary logging formats for MySQL version 5\.6 and later\. The default binary logging format is mixed\. For DB instances running MySQL versions 5\.1 and 5\.5, only mixed binary logging is supported\. For details on the different MySQL binary log formats, see [Binary Logging Formats](http://dev.mysql.com/doc/refman/5.6/en/binary-log-formats.html) in the MySQL documentation\.
+MySQL on Amazon Aurora supports the *row\-based*, *statement\-based*, and *mixed* binary logging formats for MySQL version 5\.6 and later\. The default binary logging format is mixed\. For details on the different MySQL binary log formats, see [Binary Logging Formats](http://dev.mysql.com/doc/refman/5.6/en/binary-log-formats.html) in the MySQL documentation\.
 
 If you plan to use replication, the binary logging format is important because it determines the record of data changes that is recorded in the source and sent to the replication targets\. For information about the advantages and disadvantages of different binary logging formats for replication, see [Advantages and Disadvantages of Statement\-Based and Row\-Based Replication](https://dev.mysql.com/doc/refman/5.6/en/replication-sbr-rbr.html) in the MySQL documentation\.
 
 **Important**  
-Setting the binary logging format to row\-based can result in very large binary log files\. Large binary log files reduce the amount of storage available for a DB instance and can increase the amount of time to perform a restore operation of a DB instance\.  
-Statement\-based replication can cause inconsistencies between the source DB instance and a read replica\. For more information, see [ Determination of Safe and Unsafe Statements in Binary Logging](https://dev.mysql.com/doc/refman/5.6/en/replication-rbr-safe-unsafe.html) in the MySQL documentation\.
+Setting the binary logging format to row\-based can result in very large binary log files\. Large binary log files reduce the amount of storage available for a DB cluster and can increase the amount of time to perform a restore operation of a DB cluster\.  
+Statement\-based replication can cause inconsistencies between the source DB cluster and a read replica\. For more information, see [ Determination of Safe and Unsafe Statements in Binary Logging](https://dev.mysql.com/doc/refman/5.6/en/replication-rbr-safe-unsafe.html) in the MySQL documentation\.
 
 **To set the MySQL binary logging format**
 
@@ -94,20 +96,20 @@ Statement\-based replication can cause inconsistencies between the source DB ins
 
 1. In the navigation pane, choose **Parameter groups**\.
 
-1. Choose the parameter group used by the DB instance you want to modify\.
+1. Choose the parameter group used by the DB cluster you want to modify\.
 
-   You can't modify a default parameter group\. If the DB instance is using a default parameter group, create a new parameter group and associate it with the DB instance\.
+   You can't modify a default parameter group\. If the DB cluster is using a default parameter group, create a new parameter group and associate it with the DB cluster\.
 
-   For more information on DB parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
+   For more information on parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
 
 1. From **Parameter group actions**, choose **Edit**\.
 
 1. Set the `binlog_format` parameter to the binary logging format of your choice \(**ROW**, **STATEMENT**, or **MIXED**\)\.
 
-1. Choose **Save changes** to save the updates to the DB parameter group\.
+1. Choose **Save changes** to save the updates to the DB cluster parameter group\.
 
 **Important**  
-Changing the `default.mysql5.6`, `default.mysql5.7`, or `default.mysql8.0` DB parameter group affects all MySQL version DB instances that use that parameter group\. If you want to specify different binary logging formats for different MySQL 5\.6, 5\.7, or 8\.0 DB instances in an AWS Region, you need to create your own DB parameter group\. This parameter group identifies the different logging format and assigns that DB parameter group to the intended DB instances\.
+Changing a DB cluster parameter group affects all DB clusters that use that parameter group\. If you want to specify different binary logging formats for different Aurora MySQL DB clusters in an AWS Region, the DB clusters must use different DB cluster parameter groups\. These parameter groups identify different logging formats\. Assign the appropriate DB cluster parameter group to each DB clusters\. For more information about Aurora MySQL parameters, see [Aurora MySQL Parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
 
 ## Accessing MySQL Binary Logs<a name="USER_LogAccess.MySQL.Binarylog"></a>
 

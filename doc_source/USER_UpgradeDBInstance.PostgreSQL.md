@@ -7,7 +7,7 @@ When Aurora PostgreSQL supports a new version of a database engine, you can upgr
 In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB cluster\. Or you can enable the **Auto minor version upgrade** option when creating or modifying a DB cluster\. Doing so means that your DB cluster is automatically upgraded after Aurora PostgreSQL tests and approves the new version\. For more details, see [Automatic Minor Version Upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)\. For information about manually performing a minor version upgrade, see [Manually Upgrading the Aurora PostgreSQL Engine](#USER_UpgradeDBInstance.Upgrading.Manual)\.
 
 **Note**  
-Currently, you can do a major version upgrade from Aurora PostgreSQL 9\.6 minor versions 9\.6\.9 and greater to Aurora PostgreSQL 10 minor versions 10\.11 or greater\.
+Currently, you can do a major version upgrade from Aurora PostgreSQL 9\.6 minor versions 9\.6\.9 and greater to Aurora PostgreSQL 10 minor versions 10\.11 or greater\. Currently, you can't do a major version upgrade to PostgreSQL version 11\. To determine valid upgrade targets, see [Determining Which Engine Version to Upgrade to](#USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion)\. 
 Aurora DB clusters that are configured as logical replication publishers or subscribers can't undergo a major version upgrade\. For more information, see [Using PostgreSQL Logical Replication with Aurora](AuroraPostgreSQL.Replication.Logical.md)\.
 
 **Topics**
@@ -45,7 +45,9 @@ The version numbering sequence for the PostgreSQL database engine is as follows:
 
 ## Determining Which Engine Version to Upgrade to<a name="USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion"></a>
 
-To determine which major engine version that you can upgrade your DB to, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) CLI command\. For example, the following command displays the major engine versions available for upgrading a DB cluster currently running the Aurora PostgreSQL engine version 9\.6\.12\.
+To determine which major engine version that you can upgrade your database to, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) CLI command\. In the output, a `ValidUpgradeTarget` array contains the target versions\. If the `IsMajorVersionUpgrade` value is true, you can do a major version upgrade to the associated `EngineVersion`\. If the array is empty, you can't do a major version upgrade\. 
+
+For example, the following command displays the major engine versions available for upgrading a DB cluster currently running the Aurora PostgreSQL engine version 9\.6\.12\. 
 
 **Example**  
 For Linux, macOS, or Unix:  

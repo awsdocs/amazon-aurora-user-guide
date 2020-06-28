@@ -123,17 +123,11 @@ When you enable Performance Insights, you can optionally specify the amount of t
 
 ## Enabling the Performance Schema for Performance Insights on Aurora MySQL<a name="USER_PerfInsights.EnableMySQL"></a>
 
-For Aurora MySQL, Performance Insights provides more detailed information when the Performance Schema feature is enabled\. The Performance Schema is enabled automatically when you create an Aurora MySQL DB instance with Performance Insights enabled\. When you create the DB instance with Performance Insights enabled, the following subset of Performance Schema parameters is set to the specified values automatically:
+For Aurora MySQL, Performance Insights provides more detailed information when the Performance Schema feature is enabled\. For example, Performance Insights displays DB load categorized by detailed wait events\. Without the Performance Schema enabled, Performance Insights displays DB load categorized by the list state of the MySQL process\.
+
+The Performance Schema is enabled automatically when you create an Aurora MySQL DB instance with Performance Insights enabled\. In this case, Performance Insights automatically manages the parameters in the following table\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.Enabling.html)
 
-Performance Schema is enabled automatically only if your parameter group doesn't have an explicitly set value for the `performance_schema` parameter\. You can examine the `performance_schema` parameter, and if the value of source is `user`, then you set a value\. If you want the Performance Schema parameters to be set automatically, then reset the value for the `performance_schema` parameter\. You can view the source of a parameter value by viewing the parameter in the AWS Management Console or by running the AWS CLI [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command\.
-
 **Important**  
-When Performance Insights enables the Performance Schema automatically, the parameter changes are made on the DB instance, but they aren't reflected in the parameter group associated with the DB instance\.
-
-When you change the value of the `performance_schema` parameter, a DB instance reboot is required\. If you're creating a new DB instance with Performance Insights enabled, the `performance_schema` parameter is set to 1 \(enabled\) by default\.
-
-Without the Performance Schema enabled, Performance Insights displays database load broken down by the list state of the MySQL process\. With Performance Schema enabled, Performance Insights displays database load broken down by detailed wait events\.
-
-For more information about the dashboard, see [Using the Performance Insights Dashboard](USER_PerfInsights.UsingDashboard.md)\. For more information about the MySQL performance schema, see [MySQL 8\.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html)\.
+When Performance Schema is enabled automatically, Performance Insights changes schema\-related parameters on the DB instance\. These changes aren't visible in the parameter group associated with the DB instance\.

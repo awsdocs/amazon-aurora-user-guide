@@ -16,6 +16,7 @@
 + [Modifying an Aurora Serverless DB Cluster](aurora-serverless.modifying.md)
 + [Setting the Capacity of an Aurora Serverless DB Cluster](aurora-serverless.setting-capacity.md)
 + [Viewing Aurora Serverless DB Clusters](aurora-serverless.viewing.md)
++ [Aurora Serverless Versions](aurora-serverless.relnotes.md)
 + [Using the Data API for Aurora Serverless](data-api.md)
 + [Logging Data API Calls with AWS CloudTrail](logging-using-cloudtrail-data-api.md)
 + [Using the Query Editor for Aurora Serverless](query-editor.md)
@@ -61,9 +62,10 @@ With Aurora Serverless, you don't have to individually manage database capacity 
 ## Limitations of Aurora Serverless<a name="aurora-serverless.limitations"></a>
 
 The following limitations apply to Aurora Serverless:
-+ Aurora Serverless is only available for the following: 
-  + Aurora with MySQL version 5\.6 compatibility
-  + Aurora with PostgreSQL version 10\.7 compatibility
++ Aurora Serverless is available for the following: 
+  + Aurora MySQL version 1, compatible with MySQL version 5\.6\.
+  + Aurora MySQL version 2, compatible with MySQL version 5\.7\. Select Aurora MySQL version 2\.07\.1 to be able to use Aurora Serverless with MySQL 5\.7 compatibility\.
+  + Aurora with PostgreSQL version 10\.7 compatibility\.
 + The port number for connections must be:
   + `3306` for Aurora MySQL
   + `5432` for Aurora PostgreSQL

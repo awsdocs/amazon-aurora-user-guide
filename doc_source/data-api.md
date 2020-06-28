@@ -13,6 +13,7 @@ When you enable the Data API, you can also use the query editor for Aurora Serve
 
 The Data API is only available for the following Aurora Serverless DB clusters:
 + Aurora with MySQL version 5\.6 compatibility
++ Aurora with MySQL version 5\.7 compatibility
 + Aurora with PostgreSQL version 10\.7 compatibility
 
 The following table shows the AWS Regions where the Data API is currently available for Aurora Serverless\. Use the HTTPS protocol to access the Data API in these AWS Regions\.
@@ -979,9 +980,6 @@ Account result = client.forSql("SELECT * FROM accounts WHERE account_id = 1")
 ## Troubleshooting Data API Issues<a name="data-api.troubleshooting"></a>
 
 Use the following sections, titled with common error messages, to help troubleshoot problems that you have with the Data API\. 
-
-**Note**  
-If you have questions or comments related to the Data API, send email to [rds\-data\-api\-feedback@amazon\.com](mailto:Rds-data-api-feedback@amazon.com)\.
 
 **Topics**
 + [Transaction <transaction\_ID> Is Not Found](#data-api.troubleshooting.tran-id-not-found)
