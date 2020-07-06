@@ -10,7 +10,7 @@ For specialized tasks such as troubleshooting, you can use the host and port inf
 + [Connecting to an Amazon Aurora MySQL DB Cluster](#Aurora.Connecting.AuroraMySQL)
 + [Connecting to an Amazon Aurora PostgreSQL DB Cluster](#Aurora.Connecting.AuroraPostgreSQL)
 + [Troubleshooting Aurora Connection Failures](#Aurora.Connecting.Troubleshooting)
-+ [Managing Connections with Amazon RDS Proxy \(Preview\)](rds-proxy.md)
++ [Managing Connections with Amazon RDS Proxy](rds-proxy.md)
 
 ## Connecting to an Amazon Aurora MySQL DB Cluster<a name="Aurora.Connecting.AuroraMySQL"></a>
 

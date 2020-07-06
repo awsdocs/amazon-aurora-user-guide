@@ -8,6 +8,9 @@ For Aurora MySQL, you can't delete a DB instance in a DB cluster if both of the 
 
 To delete a DB instance in this case, first promote the DB cluster so that it's no longer a read replica\. After the promotion completes, you can delete the final DB instance in the DB cluster\. For more information, see [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\.
 
+**Note**  
+When the status for a DB instance is `deleting`, its CA certificate value doesn't appear in the RDS console or in output for AWS CLI commands or RDS API operations\. For more information about CA certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\.
+
 ## Deletion Protection<a name="USER_DeleteInstance.DeletionProtection"></a>
 
 You can enable deletion protection so that users can't delete a DB cluster\. Deletion protection is enabled by default when you create a production DB cluster using the AWS Management Console\. However, deletion protection is disabled by default if you create a cluster using the AWS CLI or API\. Enabling or disabling deletion protection doesn't cause an outage\. For more information about turning deletion protection on and off, see [Modifying the DB Cluster by Using the Console, CLI, and API](Aurora.Modifying.md#Aurora.Modifying.Cluster)\.

@@ -15,7 +15,7 @@ The following policy adds the permissions required by Aurora to access Amazon Cl
                 "logs:GetLogEvents",
                 "logs:PutLogEvents"
             ],
-            "Resource": "arn:aws:logs:*:*:log-group:log-group:/aws/rds/*:log-stream:*"
+            "Resource": "arn:aws:logs:*:*:log-group:/aws/rds/*:log-stream:*"
         },
         {
             "Sid": "EnableCreationAndManagementOfRDSCloudwatchLogStreams",
@@ -25,7 +25,7 @@ The following policy adds the permissions required by Aurora to access Amazon Cl
                 "logs:DescribeLogStreams",
                 "logs:PutRetentionPolicy"
             ],
-            "Resource": "arn:aws:logs:*:*:log-group:log-group:/aws/rds/*"
+            "Resource": "arn:aws:logs:*:*:log-group:/aws/rds/*"
         },
         {
             "Sid": "EnableCreationAndManagementOfRDSCloudwatchLogGroups",

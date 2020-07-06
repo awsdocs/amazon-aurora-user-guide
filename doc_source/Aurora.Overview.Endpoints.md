@@ -17,6 +17,8 @@
 + [Editing a Custom Endpoint](#aurora-endpoint-editing)
 + [Deleting a Custom Endpoint](#aurora-endpoints-custom-deleting)
 + [End\-to\-End AWS CLI Example for Custom Endpoints](#Aurora.Endpoint.Tutorial)
++ [Using the Instance Endpoints](#Aurora.Endpoints.Instance)
++ [How Aurora Endpoints Work with High Availability](#Aurora.Overview.Endpoints.HA)
 
 ## Types of Aurora Endpoints<a name="Aurora.Overview.Endpoints.Types"></a>
 
@@ -578,3 +580,21 @@ mysql> select @@aurora_server_id;
 | custom-endpoint-demo-09 |
 +-------------------------+
 ```
+
+## Using the Instance Endpoints<a name="Aurora.Endpoints.Instance"></a>
+
+ Each DB instance in an Aurora cluster has its own built\-in instance endpoint, whose name and other attributes are managed by Aurora\. You can't create, delete, or modify this kind of endpoint\. You might be familiar with instance endpoints if you use Amazon RDS\. However, with Aurora you typically use the writer and reader endpoints more often than the instance endpoints\. 
+
+ In day\-to\-day Aurora operations, the main way that you use instance endpoints is to diagnose capacity or performance issues that affect one specific instance in an Aurora cluster\. While connected to a specific instance, you can examine its status variables, metrics, and so on\. Doing this can help you determine what's happening for that instance that's different from what's happening for other instances in the cluster\. 
+
+ In advanced use cases, you might configure some DB instances differently than others\. In this case, use the instance endpoint to connect directly to an instance that is smaller, larger, or otherwise has different characteristics than the others\. Also, set up failover priority so that this special DB instance is the last choice to take over as the primary instance\. We recommend that you use custom endpoints instead of the instance endpoint in such cases\. Doing so simplifies connection management and high availability as you add more DB instances to your cluster\. 
+
+## How Aurora Endpoints Work with High Availability<a name="Aurora.Overview.Endpoints.HA"></a>
+
+ For clusters where high availability is important, use the writer endpoint for read/write or general\-purpose connections and the reader endpoint for read\-only connections\. The writer and reader endpoints manage DB instance failover better than instance endpoints do\. Unlike the instance endpoints, the writer and reader endpoints automatically change which DB instance they connect to if a DB instance in your cluster becomes unavailable\. 
+
+ If the primary DB instance of a DB cluster fails, Aurora automatically fails over to a new primary DB instance\. It does so by either promoting an existing Aurora Replica to a new primary DB instance or creating a new primary DB instance\. If a failover occurs, you can use the writer endpoint to reconnect to the newly promoted or created primary DB instance, or use the reader endpoint to reconnect to one of the Aurora Replicas in the DB cluster\. During a failover, the reader endpoint might direct connections to the new primary DB instance of a DB cluster for a short time after an Aurora Replica is promoted to the new primary DB instance\. 
+
+ If you design your own application logic to manage connections to instance endpoints, you can manually or programmatically discover the resulting set of available DB instances in the DB cluster\. You can then confirm their instance classes after failover and connect to an appropriate instance endpoint\. 
+
+ For more information about failovers, see [Fault Tolerance for an Aurora DB Cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\. 

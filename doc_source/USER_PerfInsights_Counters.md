@@ -1,4 +1,4 @@
-# Performance Insights Counters<a name="USER_PerfInsights_Counters"></a>
+# Customizing the Performance Insights Dashboard<a name="USER_PerfInsights_Counters"></a>
 
 With counter metrics, you can customize the Performance Insights dashboard to include up to 10 additional graphs\. These graphs that show a selection of dozens of operating system and database performance metrics\. This information can be correlated with database load to help identify and analyze performance problems\.
 
@@ -158,7 +158,7 @@ You can find definitions for these native metrics in [Viewing Statistics](https:
 
 | Counter | Type | Unit | Metric | 
 | --- | --- | --- | --- | 
-| tup\_deleted | SQL | Tuples per second | db\.SQL\.tup\_deleted | 
+|  tup\_deleted  |  SQL  | Tuples per second | db\.SQL\.tup\_deleted | 
 | tup\_fetched | SQL | Tuples per second | db\.SQL\.tup\_fetched | 
 | tup\_inserted | SQL | Tuples per second | db\.SQL\.tup\_inserted | 
 | tup\_returned | SQL | Tuples per second | db\.SQL\.tup\_returned | 
@@ -174,11 +174,11 @@ You can find definitions for these native metrics in [Viewing Statistics](https:
 | max\_used\_xact\_ids | Transactions | Transactions | db\.Transactions\.max\_used\_xact\_ids | 
 | xact\_commit | Transactions | Commits per second | db\.Transactions\.xact\_commit | 
 | xaxt\_rollback | Transactions | Rollbacks per second | db\.Transactions\.xact\_rollback | 
-| blk\_read\_time | IO | Milliseconds | db\.IO\.blk\_read\_time | 
-| blks\_read | IO | Blocks per second | db\.IO\.blks\_read | 
-| buffers\_backend | IO | Blocks per second | db\.IO\.buffers\_backend | 
-| buffers\_backend\_fsync | IO | Blocks per second | db\.IO\.buffers\_backend\_fsync | 
-| buffers\_clean | IO | Blocks per second | db\.IO\.buffers\_clean | 
+| blk\_read\_time | I/O | Milliseconds | db\.IO\.blk\_read\_time | 
+| blks\_read | I/O | Blocks per second | db\.IO\.blks\_read | 
+| buffers\_backend | I/O | Blocks per second | db\.IO\.buffers\_backend | 
+| buffers\_backend\_fsync | I/O | Blocks per second | db\.IO\.buffers\_backend\_fsync | 
+| buffers\_clean | I/O | Blocks per second | db\.IO\.buffers\_clean | 
 | blks\_hit | Cache | Blocks per second | db\.Cache\.blks\_hit | 
 | buffers\_alloc | Cache | Blocks per second | db\.Cache\.buffers\_alloc | 
 | temp\_files | Temp | Files per minute | db\.Temp\.temp\_files | 
@@ -196,4 +196,4 @@ Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native m
 | --- | --- | --- | --- | --- | 
 | checkpoint\_sync\_latency | Checkpoint | db\.Checkpoint\.checkpoint\_sync\_latency | The total amount of time that has been spent in the portion of checkpoint processing where files are synchronized to disk\. | checkpoint\_sync\_time / \(checkpoints\_timed \+ checkpoints\_req\) | 
 | checkpoint\_write\_latency | Checkpoint | db\.Checkpoint\.checkpoint\_write\_latency | The total amount of time that has been spent in the portion of checkpoint processing where files are written to disk\. | checkpoint\_write\_time / \(checkpoints\_timed \+ checkpoints\_req\) | 
-| read\_latency | IO | db\.IO\.read\_latency | The time spent reading data file blocks by backends in this instance\. | blk\_read\_time / blks\_read | 
+| read\_latency | I/O | db\.IO\.read\_latency | The time spent reading data file blocks by backends in this instance\. | blk\_read\_time / blks\_read | 

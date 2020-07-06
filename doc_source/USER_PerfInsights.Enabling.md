@@ -10,10 +10,6 @@ The Performance Insights agent consumes limited CPU and memory on the DB host\. 
 
 You can use the console to enable Performance Insights when you create a new DB instance\. You can also modify a DB instance to enable Performance Insights\.
 
-**Topics**
-+ [Enabling Performance Insights with the Console When Creating a DB Instance](#USER_PerfInsights.Console.Creating)
-+ [Enabling Performance Insights with the Console When Modifying a DB Instance](#USER_PerfInsights.Enabling.Console.Modifying)
-
 ### Enabling Performance Insights with the Console When Creating a DB Instance<a name="USER_PerfInsights.Console.Creating"></a>
 
 When you create a new DB instance, Performance Insights is enabled when you choose **Enable Performance Insights** in the **Performance Insights** section\.
@@ -123,7 +119,7 @@ When you enable Performance Insights, you can optionally specify the amount of t
 
 ## Enabling the Performance Schema for Performance Insights on Aurora MySQL<a name="USER_PerfInsights.EnableMySQL"></a>
 
-For Aurora MySQL, Performance Insights provides more detailed information when the Performance Schema feature is enabled\. For example, Performance Insights displays DB load categorized by detailed wait events\. Without the Performance Schema enabled, Performance Insights displays DB load categorized by the list state of the MySQL process\.
+When the Performance Schema feature is enabled for Aurora MySQL, Performance Insights provides more detailed information\. For example, Performance Insights displays DB load categorized by detailed wait events\. Without the Performance Schema enabled, Performance Insights displays DB load categorized by the list state of the MySQL process\.
 
 The Performance Schema is enabled automatically when you create an Aurora MySQL DB instance with Performance Insights enabled\. In this case, Performance Insights automatically manages the parameters in the following table\.
 

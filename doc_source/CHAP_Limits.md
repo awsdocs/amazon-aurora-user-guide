@@ -28,6 +28,7 @@ The following table lists the resources and their quotas per AWS Region\.
 | IAM roles per DB instance | 5 | 
 | Manual cluster snapshots | 100 | 
 | Parameter groups | 50 | 
+| Proxies | 20 | 
 | Reserved DB instances | 40 | 
 | Rules per virtual private cloud \(VPC\) security group | 50 inbound, 50 outbound | 
 | Subnets per subnet group | 20 | 
