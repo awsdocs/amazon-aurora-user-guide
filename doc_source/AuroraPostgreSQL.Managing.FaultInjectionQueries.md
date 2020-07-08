@@ -31,8 +31,8 @@ For this fault injection query, a failover will not occur\. If you want to test 
 
 This fault injection query takes one of the following crash types:
 + **`'instance'`—** A crash of the PostgreSQL\-compatible database for the Amazon Aurora instance is simulated\.
-+ **`'dispacher'`—**A crash of the dispatcher on the master instance for the Aurora DB cluster is simulated\. The *dispatcher* writes updates to the cluster volume for an Amazon Aurora DB cluster\.
-+ **`'node'`—**A crash of both the PostgreSQL\-compatible database and the dispatcher for the Amazon Aurora instance is simulated\.
++ **`'dispatcher'`—** A crash of the dispatcher on the master instance for the Aurora DB cluster is simulated\. The *dispatcher* writes updates to the cluster volume for an Amazon Aurora DB cluster\.
++ **`'node'`—** A crash of both the PostgreSQL\-compatible database and the dispatcher for the Amazon Aurora instance is simulated\.
 
 The crash type is not case sensitive\.
 
