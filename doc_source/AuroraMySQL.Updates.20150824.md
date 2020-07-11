@@ -4,7 +4,7 @@
 
 This update includes the following improvements:
 + Replication stability improvements when replicating with a MySQL database \(binlog replication\)\. For information on Aurora MySQL replication with MySQL, see [Replication with Amazon Aurora](Aurora.Replication.md)\.
-+ A 1 gigabyte \(GB\) limit on the size of the relay logs accumulated for an Aurora MySQL DB cluster that is a replication slave\. This improves the file management for the Aurora DB clusters\.
++ A 1 gigabyte \(GB\) limit on the size of the relay logs accumulated for an Aurora MySQL DB cluster that is a replication worker\. This improves the file management for the Aurora DB clusters\.
 + Stability improvements in the areas of read ahead, recursive foreign\-key relationships, and Aurora replication\.
 + Integration of MySQL bug fixes\.
   + InnoDB databases with names beginning with a digit cause a full\-text search \(FTS\) parser error\. \(Bug \#17607956\)

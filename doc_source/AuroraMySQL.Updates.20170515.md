@@ -29,7 +29,7 @@ The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis,
 + Improved stability when sql\_mode is set to PAD\_CHAR\_TO\_FULL\_LENGTH and the command `SHOW FUNCTION STATUS WHERE Db='string'` is executed\.
 + Fixed a rare case when instances would not come up after Aurora version upgrade because of a false volume consistency check\.
 + Fixed the performance issue, introduced in Aurora MySQL version 1\.12, where the performance of the Aurora writer was reduced when users have a large number of tables\. 
-+ Improved stability issue when the Aurora writer is configured as a binlog slave and the number of connections approaches 16,000\. 
++ Improved stability issue when the Aurora writer is configured as a binlog worker and the number of connections approaches 16,000\. 
 + Fixed a rare issue where an Aurora Replica could restart when a connection gets blocked waiting for Metadata Lock when running DDL on the Aurora master\. 
 
 ## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.20170515.BugFixes"></a>

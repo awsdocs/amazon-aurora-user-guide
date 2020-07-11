@@ -11,4 +11,4 @@
 + Fixed connection issues when using secure connections\.
 
 ## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.20160601.BugFixes"></a>
-+ SLAVE CAN'T CONTINUE REPLICATION AFTER MASTER'S CRASH RECOVERY \(Port Bug \#17632285\) 
++ SLAVE CAN'T CONTINUE REPLICATION AFTER MASTER'S CRASH RECOVERY \(Port Bug \#17632285\)

@@ -13,6 +13,6 @@ If you have any questions or concerns, AWS Support is available on the community
 The procedure to upgrade your DB cluster has changed\. For more information, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.1191.Improvements"></a>
-+  Fixed a bug in binlog replication that can cause an issue on Aurora instances configured as binlog slave\. 
++  Fixed a bug in binlog replication that can cause an issue on Aurora instances configured as binlog worker\. 
 +  Fixed an error in handling certain kinds of `ALTER TABLE` commands\. 
 +  Fixed an issue with aborted connections because of an error in network protocol management\. 

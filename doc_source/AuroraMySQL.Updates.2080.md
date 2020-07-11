@@ -53,7 +53,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 +  Fixed an issue where queries including an Aurora Machine Learning function returned empty error messages due to an incorrectly handled error response from Machine Learning services such as Amazon Sagemaker and Amazon Comprehend\. 
 +  Fixed an issue in the out\-of\-memory monitoring functionality that did not honor a custom value of the `table_definition_cache` parameter\. 
 +  The error message "Query execution was interrupted" is returned if an Aurora Machine Learning query is interrupted\. Previously, the generic message "Internal error in processing ML request" was returned instead\. 
-+  Fixed an issue that could cause a binlog slave to experience a connection timeout when the `slave_net_timeout` parameter is less than the `aurora_binlog_replication_max_yield_seconds` parameter and there is low workload on the binlog master cluster\. 
++  Fixed an issue that could cause a binlog worker to experience a connection timeout when the `slave_net_timeout` parameter is less than the `aurora_binlog_replication_max_yield_seconds` parameter and there is low workload on the binlog master cluster\. 
 +  Improved monitoring of the binlog recovery progress by outputting informational messages in the error log at a frequency of one message per minute\. 
 +  Fixed an issue that could cause active transactions not to be reported by the `SHOW ENGINE INNODB STATUS` query\. 
 

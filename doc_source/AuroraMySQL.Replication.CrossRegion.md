@@ -250,7 +250,7 @@ You can set up cross\-Region replication from an unencrypted DB cluster to an en
 
 ## Viewing Amazon Aurora MySQL Cross\-Region Replicas<a name="AuroraMySQL.Replication.CrossRegion.Viewing"></a>
 
-You can view the cross\-Region replication relationships for your Amazon Aurora MySQL DB clusters by calling the `[describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html)` AWS CLI command or the `[DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html)` RDS API operation\. In the response, refer to the `ReadReplicaIdentifiers` field for the DB cluster identifiers of any cross\-Region read replica DB clusters, and refer to the `ReplicationSourceIdentifier` element for the ARN of the source DB cluster that is the replication master\. 
+You can view the cross\-Region replication relationships for your Amazon Aurora MySQL DB clusters by calling the `[describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html)` AWS CLI command or the `[DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html)` RDS API operation\. In the response, refer to the `ReadReplicaIdentifiers` field for the DB cluster identifiers of any cross\-Region read replica DB clusters, and refer to the `ReplicationSourceIdentifier` element for the ARN of the source DB cluster that is the replication source\. 
 
 ## Promoting a Read Replica to Be a DB Cluster<a name="AuroraMySQL.Replication.CrossRegion.Promote"></a>
 

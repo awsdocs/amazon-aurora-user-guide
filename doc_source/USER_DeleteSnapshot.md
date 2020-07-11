@@ -1,4 +1,4 @@
-# Deleting a Snapshot<a name="USER_DeleteSnapshot"></a>
+# Deleting a DB Cluster Snapshot<a name="USER_DeleteSnapshot"></a>
 
 You can delete DB cluster snapshots managed by Amazon RDS when you no longer need them\.
 

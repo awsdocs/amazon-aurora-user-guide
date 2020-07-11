@@ -23,7 +23,7 @@
 
 Aurora Replicas are independent endpoints in an Aurora DB cluster, best used for scaling read operations and increasing availability\. Up to 15 Aurora Replicas can be distributed across the Availability Zones that a DB cluster spans within an AWS Region\. Although the DB cluster volume is made up of multiple copies of the data for the DB cluster, the data in the cluster volume is represented as a single, logical volume to the primary instance and to Aurora Replicas in the DB cluster\. For more information about Aurora Replicas, see [Aurora Replicas](Aurora.Replication.md#Aurora.Replication.Replicas)\.
 
-Aurora Replicas work well for read scaling because they are fully dedicated to read operations on your cluster volume\. Write operations are managed by the primary instance\. Because the cluster volume is shared among all instances in your Aurora MySQL DB cluster, no additional work is required to replicate a copy of the data for each Aurora Replica\. In contrast, MySQL read replicas must replay, on a single thread, all write operations from the master DB instance to their local data store\. This limitation can affect the ability of MySQL read replicas to support large volumes of read traffic\.
+Aurora Replicas work well for read scaling because they are fully dedicated to read operations on your cluster volume\. Write operations are managed by the primary instance\. Because the cluster volume is shared among all instances in your Aurora MySQL DB cluster, no additional work is required to replicate a copy of the data for each Aurora Replica\. In contrast, MySQL read replicas must replay, on a single thread, all write operations from the source DB instance to their local data store\. This limitation can affect the ability of MySQL read replicas to support large volumes of read traffic\.
 
 With Aurora MySQL, when an Aurora Replica is deleted, its instance endpoint is removed immediately, and the Aurora Replica is removed from the reader endpoint\. If there are statements executing on the Aurora Replica that is being deleted, there is a three minute grace period\. Existing statements can finish gracefully during the grace period\. When the grace period ends, the Aurora Replica is shut down and deleted\.
 
@@ -45,7 +45,7 @@ You can set up replication between any of the following options:
 + Two Aurora MySQL DB clusters in the same AWS Region, by using MySQL binary log \(binlog\) replication\.
 
   For more information, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster \(Binlog Replication\)](AuroraMySQL.Replication.MySQL.md)\.
-+ An Amazon RDS MySQL DB instance as the master and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an Amazon RDS MySQL DB instance\.
++ An Amazon RDS MySQL DB instance as the source and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an Amazon RDS MySQL DB instance\.
 
    Typically, this approach is used for migration to Aurora MySQL, rather than for ongoing replication\. For more information, see [Migrating Data from a MySQL DB Instance to an Amazon Aurora MySQL DB Cluster by Using a DB Snapshot](AuroraMySQL.Migrating.RDSMySQL.md)\.
 
@@ -64,11 +64,11 @@ Rebooting the primary instance of an Amazon Aurora DB cluster also automatically
 
  Having more Aurora Replicas in your cluster helps to ensure high availability\. A database instance with a full copy of your data is always available for you to query, even if some database instances become unavailable\. 
 
- The tradeoff with having multiple Aurora Replicas is that replicas become unavailable for brief periods when the underlying database instances are restarted\. These restarts can happen during maintenance operations, or when a replica begins to lag too far behind the master\. Restarting a replica interrupts existing connections to the corresponding database instance\. Restarting an Aurora cluster causes all the replicas to become unavailable at the same time\. 
+ The tradeoff with having multiple Aurora Replicas is that replicas become unavailable for brief periods when the underlying database instances are restarted\. These restarts can happen during maintenance operations, or when a replica begins to lag too far behind the source\. Restarting a replica interrupts existing connections to the corresponding database instance\. Restarting an Aurora cluster causes all the replicas to become unavailable at the same time\. 
 
  The following features help to ensure high availability even during these intervals when replicas are restarted\. 
 
- Starting in Aurora 1\.17\.4, the *zero\-downtime restart* \(ZDR\) feature preserves existing connections when an Aurora MySQL Replica is restarted, for example if the replica falls too far behind the master\. Any open transaction is rolled back, and your application must retry it\. To enable this feature, turn on the `aurora_enable_zdr` parameter in the cluster parameter group\. This parameter is off by default\. 
+ Starting in Aurora 1\.17\.4, the *zero\-downtime restart* \(ZDR\) feature preserves existing connections when an Aurora MySQL Replica is restarted, for example if the replica falls too far behind the source\. Any open transaction is rolled back, and your application must retry it\. To enable this feature, turn on the `aurora_enable_zdr` parameter in the cluster parameter group\. This parameter is off by default\. 
 
 ## Monitoring Amazon Aurora MySQL Replication<a name="AuroraMySQL.Replication.Monitoring"></a>
 

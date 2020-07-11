@@ -25,6 +25,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 +  The hash join feature is now generally available and does not require the Aurora lab mode setting to be ON\. This feature can improve query performance when you need to join a large amount of data by using an equi\-join\. For more information about using this feature, see [Working with Hash Joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
 +  The hot row contention feature is now generally available and does not require the Aurora lab mode setting to be ON\. This feature substantially improves throughput for workloads with many transactions contending for rows on the same page\. 
 +  Aurora MySQL 2\.06 and higher support "rewinding" a DB cluster to a specific time, without restoring data from a backup\. This feature, known as Backtrack, provides a quick way to recover from user errors, such as dropping the wrong table or deleting the wrong row\. Backtrack completes within seconds, even for large databases\. Read [the AWS blog](https://aws.amazon.com/blogs/aws/amazon-aurora-backtrack-turn-back-time/) for an overview, and refer to [Backtracking an Aurora DB Cluster](AuroraMySQL.Managing.Backtrack.md) for more details\. 
++  Aurora 2\.06 and higher support synchronous AWS Lambda invocations through the native function `lambda_sync()`\. Also available is native function `lambda_async()`, which can be used as an alternative to the existing stored procedure for asynchronous Lambda invocation\. For information about calling Lambda functions, see [Invoking a Lambda Function from an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Lambda.md)\. 
 
  **Critical fixes:** 
 
@@ -62,7 +63,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 +  Fixed an issue that incorrectly reported `ERROR 1836` when a nested query is executed against a temporary table on the Aurora Replica\. 
 
  **Performance enhancements:** 
-+  Improved performance of binlog replication by preventing unnecessary API calls to the cache if the query cache has been disabled on the binlog slave\. 
++  Improved performance of binlog replication by preventing unnecessary API calls to the cache if the query cache has been disabled on the binlog worker\. 
 
 ## Comparison with Aurora MySQL Version 1<a name="AuroraMySQL.Updates.2060.Compare56"></a>
 

@@ -7,7 +7,7 @@ This topic includes information on best practices and options for using or migra
 + [Using T2 Instances](#AuroraMySQL.BestPractices.T2Medium)
 + [Invoking an AWS Lambda Function](#AuroraMySQL.BestPractices.Lambda)
 + [Working with Asynchronous Key Prefetch in Amazon Aurora](#Aurora.BestPractices.AKP)
-+ [Working with Multi\-Threaded Replication Slaves in Amazon Aurora MySQL](#AuroraMySQL.BestPractices.MTSlave)
++ [Working with Multi\-Threaded Replication in Amazon Aurora MySQL](#AuroraMySQL.BestPractices.MTReplica)
 + [Using Amazon Aurora to Scale Reads for Your MySQL Database](#AuroraMySQL.BestPractices.ReadScaling)
 + [Using Amazon Aurora for Disaster Recovery with Your MySQL Databases](#AuroraMySQL.BestPractices.DisasterRecovery)
 + [Migrating from MySQL to Amazon Aurora MySQL with Reduced Downtime](#AuroraMySQL.BestPractices.Migrating)
@@ -146,21 +146,21 @@ mysql> explain extended select sql_no_cache
 
 For more information about the extended `EXPLAIN` output format, see [Extended EXPLAIN Output Format](https://dev.mysql.com/doc/refman/5.6/en/explain-extended.html) in the MySQL product documentation\.
 
-## Working with Multi\-Threaded Replication Slaves in Amazon Aurora MySQL<a name="AuroraMySQL.BestPractices.MTSlave"></a>
+## Working with Multi\-Threaded Replication in Amazon Aurora MySQL<a name="AuroraMySQL.BestPractices.MTReplica"></a>
 
-By default, Aurora uses single\-threaded replication when an Aurora MySQL DB cluster is used as a replication slave\. While Amazon Aurora doesn't prohibit multithreaded replication, Aurora MySQL has inherited several issues regarding multithreaded replication from MySQL\. We recommend that you do not use multithreaded replication in production\. If you do use multi\-threaded replication, we recommend that you test any use thoroughly\.
+By default, Aurora uses single\-threaded replication when an Aurora MySQL DB cluster is used as a read replica for binary log replication\. While Amazon Aurora doesn't prohibit multithreaded replication, Aurora MySQL has inherited several issues regarding multithreaded replication from MySQL\. We recommend that you do not use multithreaded replication in production\. If you do use multithreaded replication, we recommend that you test any use thoroughly\.
 
 For more information about using replication in Amazon Aurora, see [Replication with Amazon Aurora](Aurora.Replication.md)\.
 
 ## Using Amazon Aurora to Scale Reads for Your MySQL Database<a name="AuroraMySQL.BestPractices.ReadScaling"></a>
 
-You can use Amazon Aurora with your MySQL DB instance to take advantage of the read scaling capabilities of Amazon Aurora and expand the read workload for your MySQL DB instance\. To use Aurora to read scale your MySQL DB instance, create an Amazon Aurora MySQL DB cluster and make it a replication slave of your MySQL DB instance\. This applies to an Amazon RDS MySQL DB instance, or a MySQL database running external to Amazon RDS\.
+You can use Amazon Aurora with your MySQL DB instance to take advantage of the read scaling capabilities of Amazon Aurora and expand the read workload for your MySQL DB instance\. To use Aurora to read scale your MySQL DB instance, create an Amazon Aurora MySQL DB cluster and make it a read replica of your MySQL DB instance\. This applies to an Amazon RDS MySQL DB instance, or a MySQL database running external to Amazon RDS\.
 
 For information on creating an Amazon Aurora DB cluster, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
 
 When you set up replication between your MySQL DB instance and your Amazon Aurora DB cluster, be sure to follow these guidelines:
 + Use the Amazon Aurora DB cluster endpoint address when you reference your Amazon Aurora MySQL DB cluster\. If a failover occurs, then the Aurora Replica that is promoted to the primary instance for the Aurora MySQL DB cluster continues to use the DB cluster endpoint address\.
-+ Maintain the binlogs on your master instance until you have verified that they have been applied to the Aurora Replica\. This maintenance ensures that you can restore your master instance in the event of a failure\.
++ Maintain the binlogs on your writer instance until you have verified that they have been applied to the Aurora Replica\. This maintenance ensures that you can restore your writer instance in the event of a failure\.
 
 **Important**  
 When using self\-managed replication, you're responsible for monitoring and resolving any replication issues that may occur\. For more information, see [Diagnosing and Resolving Lag Between Read Replicas](CHAP_Troubleshooting.md#CHAP_Troubleshooting.MySQL.ReplicaLag)\.
@@ -168,7 +168,7 @@ When using self\-managed replication, you're responsible for monitoring and reso
 **Note**  
 The permissions required to start replication on an Amazon Aurora MySQL DB cluster are restricted and not available to your Amazon RDS master user\. Because of this, you must use the Amazon RDS [ mysql\_rds\_set\_external\_master](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_external_master.html) and [ mysql\_rds\_start\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_start_replication.html) procedures to set up replication between your Amazon Aurora MySQL DB cluster and your MySQL DB instance\.
 
-### Start Replication Between an External Master Instance and a MySQL DB Instance on Amazon RDS<a name="AuroraMySQL.BestPractices.ReadScaling.Procedure"></a>
+### Start Replication Between an External Source Instance and a MySQL DB Instance on Amazon RDS<a name="AuroraMySQL.BestPractices.ReadScaling.Procedure"></a>
 
 1. Make the source MySQL DB instance read\-only:
 
@@ -231,7 +231,7 @@ Make sure that there is not a space between the `-p` option and the entered pass
    mysql> UNLOCK TABLES;
    ```
 
-   For more information on making backups for use with replication, see [Backing Up a Master or Slave by Making It Read Only](http://dev.mysql.com/doc/refman/5.6/en/replication-solutions-backups-read-only.html) in the MySQL documentation\.
+   For more information on making backups for use with replication, see [http://dev.mysql.com/doc/refman/5.6/en/replication-solutions-backups-read-only.html](http://dev.mysql.com/doc/refman/5.6/en/replication-solutions-backups-read-only.html) in the MySQL documentation\.
 
 1. In the Amazon RDS Management Console, add the IP address of the server that hosts the source MySQL database to the VPC security group for the Amazon Aurora DB cluster\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\.
 
@@ -256,7 +256,7 @@ Make sure that there is not a space between the `-p` option and the entered pass
        IDENTIFIED BY '<password>';
    ```
 
-1. Take a manual snapshot of the Aurora MySQL DB cluster to be the replication slave before setting up replication\. If you need to reestablish replication with the DB cluster as a replication slave, you can restore the Aurora MySQL DB cluster from this snapshot instead of having to import the data from your MySQL DB instance into a new Aurora MySQL DB cluster\.
+1. Take a manual snapshot of the Aurora MySQL DB cluster to be the read replica before setting up replication\. If you need to reestablish replication with the DB cluster as a read replica, you can restore the Aurora MySQL DB cluster from this snapshot instead of having to import the data from your MySQL DB instance into a new Aurora MySQL DB cluster\.
 
 1. Make the Amazon Aurora DB cluster the replica\. Connect to the Amazon Aurora DB cluster as the master user and identify the source MySQL database as the replication master by using the [ mysql\_rds\_set\_external\_master](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_external_master.html) procedure\. Use the master log file name and master log position that you determined in Step 2\. The following is an example\.
 
@@ -275,12 +275,12 @@ After you have established replication between your source MySQL DB instance and
 
 ## Using Amazon Aurora for Disaster Recovery with Your MySQL Databases<a name="AuroraMySQL.BestPractices.DisasterRecovery"></a>
 
-You can use Amazon Aurora with your MySQL DB instance to create an offsite backup for disaster recovery\. To use Aurora for disaster recovery of your MySQL DB instance, create an Amazon Aurora DB cluster and make it a replication slave of your MySQL DB instance\. This applies to an Amazon RDS MySQL DB instance, or a MySQL database running external to Amazon RDS\.
+You can use Amazon Aurora with your MySQL DB instance to create an offsite backup for disaster recovery\. To use Aurora for disaster recovery of your MySQL DB instance, create an Amazon Aurora DB cluster and make it a read replica of your MySQL DB instance\. This applies to an Amazon RDS MySQL DB instance, or a MySQL database running external to Amazon RDS\.
 
 **Important**  
 When you set up replication between a MySQL DB instance and an Amazon Aurora MySQL DB cluster, you should monitor the replication to ensure that it remains healthy and repair it if necessary\.
 
-For instructions on how to create an Amazon Aurora MySQL DB cluster and make it a replication slave of your MySQL DB instance, follow the procedure in [Using Amazon Aurora to Scale Reads for Your MySQL Database](#AuroraMySQL.BestPractices.ReadScaling)\.
+For instructions on how to create an Amazon Aurora MySQL DB cluster and make it a read replica of your MySQL DB instance, follow the procedure in [Using Amazon Aurora to Scale Reads for Your MySQL Database](#AuroraMySQL.BestPractices.ReadScaling)\.
 
 ## Migrating from MySQL to Amazon Aurora MySQL with Reduced Downtime<a name="AuroraMySQL.BestPractices.Migrating"></a>
 

@@ -14,7 +14,7 @@ If you have any questions or concerns, AWS Support is available on the community
 ## Improvements<a name="AuroraMySQL.Updates.1176.Improvements"></a>
 +  Fixed a stability issue on the Aurora Reader for `SELECT` queries while the Aurora Writer is performing DDL operations on the same table\. 
 +  Fixed a stability issue caused by the creation and deletion of DDL logs for temporary tables that use Heap/Memory engine\. 
-+  Fixed a stability issue on the Binlog Slave when DDL statements are being replicated while the connection to the Binlog Master is unstable\. 
++  Fixed a stability issue on the binlog worker when DDL statements are being replicated while the connection to the Binlog Master is unstable\. 
 +  Fixed a stability issue encountered while writing to the slow query log\. 
 +  Fixed an issue with the replica status table that exposed incorrect Aurora Reader lag information\. 
 

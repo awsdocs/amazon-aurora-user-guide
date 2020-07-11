@@ -7,7 +7,7 @@ Using Amazon RDS, you can share a manual DB cluster snapshot in the following wa
 **Note**  
 To share an automated DB cluster snapshot, create a manual DB cluster snapshot by copying the automated snapshot, and then share that copy\.
 
-For more information on copying a snapshot, see [Copying a Snapshot](USER_CopySnapshot.md)\. For more information on restoring a DB instance from a DB cluster snapshot, see [Restoring from a DB Cluster Snapshot](USER_RestoreFromSnapshot.md)\.
+For more information on copying a snapshot, see [Copying a DB Cluster Snapshot](USER_CopySnapshot.md)\. For more information on restoring a DB instance from a DB cluster snapshot, see [Restoring from a DB Cluster Snapshot](USER_RestoreFromSnapshot.md)\.
 
 For more information on restoring a DB cluster from a DB cluster snapshot, see [Overview of Backing Up and Restoring an Aurora DB Cluster](Aurora.Managing.Backups.md)\.
 

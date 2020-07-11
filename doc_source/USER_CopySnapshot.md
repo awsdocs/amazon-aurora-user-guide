@@ -1,4 +1,4 @@
-# Copying a Snapshot<a name="USER_CopySnapshot"></a>
+# Copying a DB Cluster Snapshot<a name="USER_CopySnapshot"></a>
 
 With Amazon RDS, you can copy automated or manual DB cluster snapshots\. After you copy a snapshot, the copy is a manual snapshot\. 
 

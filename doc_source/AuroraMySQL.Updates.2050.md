@@ -30,7 +30,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 + [CVE\-2018\-2562](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-2562)
 + [CVE\-2017\-3329](https://nvd.nist.gov/vuln/detail/CVE-2017-3329)
 + [CVE\-2018\-2696](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-2696)
-+  Fixed an issue where the events in current binlog file on the master were not replicated on the slave if the value of the parameter `sync_binlog` was not set to 1\. 
++  Fixed an issue where the events in current binlog file on the master were not replicated on the worker if the value of the parameter `sync_binlog` was not set to 1\. 
 
  **High\-priority fixes:** 
 +  Customers with database size close to 64 TiB are strongly advised to upgrade to this version to avoid downtime due to stability bugs affecting volumes close to the Aurora storage limit\. 

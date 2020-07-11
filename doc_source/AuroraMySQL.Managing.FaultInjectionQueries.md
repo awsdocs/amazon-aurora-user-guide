@@ -26,7 +26,7 @@ For this fault injection query, a failover will not occur\. If you want to test 
 
 This fault injection query takes one of the following crash types:
 + **`INSTANCE`—**A crash of the MySQL\-compatible database for the Amazon Aurora instance is simulated\.
-+ **`DISPATCHER`—**A crash of the dispatcher on the master instance for the Aurora DB cluster is simulated\. The *dispatcher* writes updates to the cluster volume for an Amazon Aurora DB cluster\.
++ **`DISPATCHER`—**A crash of the dispatcher on the writer instance for the Aurora DB cluster is simulated\. The *dispatcher* writes updates to the cluster volume for an Amazon Aurora DB cluster\.
 + **`NODE`—**A crash of both the MySQL\-compatible database and the dispatcher for the Amazon Aurora instance is simulated\. For this fault injection simulation, the cache is also deleted\.
 
 The default crash type is `INSTANCE`\.
@@ -52,7 +52,7 @@ This fault injection query takes the following parameters:
 + **Failure type—**The type of failure to simulate\. Specify `TO ALL` to simulate failures for all Aurora Replicas in the DB cluster\. Specify `TO` and the name of the Aurora Replica to simulate a failure of a single Aurora Replica\. The default failure type is `TO ALL`\.
 + **`quantity`—**The amount of time for which to simulate the Aurora Replica failure\. The interval is an amount followed by a time unit\. The simulation will occur for that amount of the specified unit\. For example, `20 MINUTE` will result in the simulation running for 20 minutes\.
 **Note**  
-Take care when specifying the time interval for your Aurora Replica failure event\. If you specify too long of a time interval, and your master instance writes a large amount of data during the failure event, then your Aurora DB cluster might assume that your Aurora Replica has crashed and replace it\.
+Take care when specifying the time interval for your Aurora Replica failure event\. If you specify too long of a time interval, and your writer instance writes a large amount of data during the failure event, then your Aurora DB cluster might assume that your Aurora Replica has crashed and replace it\.
 
 ## Testing a Disk Failure<a name="AuroraMySQL.Managing.FaultInjectionQueries.DiskFailure"></a>
 

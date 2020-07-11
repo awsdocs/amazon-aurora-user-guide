@@ -17,7 +17,7 @@ If you have any questions or concerns, AWS Support is available on the community
 For information on how to upgrade your Aurora MySQL database cluster, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2046.Improvements"></a>
-+  Fixed an issue where the events in current binlog file on the master were not replicated on the slave if the value of the parameter `sync_binlog` was not set to 1\. 
++  Fixed an issue where the events in current binlog file on the master were not replicated on the worker if the value of the parameter `sync_binlog` was not set to 1\. 
 +  The default value of the parameter `aurora_binlog_replication_max_yield_seconds` has been changed to zero to prevent an increase in replication lag in favor of foreground query performance on the binlog master\. 
 
 ## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.2046.BugFixes"></a>

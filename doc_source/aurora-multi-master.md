@@ -22,7 +22,7 @@
 
  Multi\-master clusters work differently in many ways from the other kinds of Aurora clusters, such as provisioned, Aurora Serverless, and parallel query clusters\. With multi\-master clusters, you consider different factors in areas such as high availability, monitoring, connection management, and database features\. For example, in applications where you can't afford even brief downtime for database write operations, a multi\-master cluster can help to avoid an outage when a writer instance becomes unavailable\. The multi\-master cluster doesn't use the failover mechanism, because it doesn't need to promote another DB instance to have read/write capability\. With a multi\-master cluster, you examine metrics related to DML throughput, latency, and deadlocks for all DB instances instead of a single primary instance\. 
 
- Currently, multi\-master clusters require Aurora MySQL version 1, which is compatible with MySQL 5\.6\. 
+ Currently, multi\-master clusters require Aurora MySQL version 1, which is compatible with MySQL 5\.6\. When specifying the DB engine version in the AWS Management Console, AWS CLI, or RDS API, choose `5.6.10a`\. 
 
  To create a multi\-master cluster, you choose **Multiple writers** under **Database features** when creating the cluster\. Doing so enables different behavior for replication among DB instances, availability, and performance than other kinds of Aurora clusters\. This choice remains in effect for the life of the cluster\. Make sure that you understand the specialized use cases that are appropriate for multi\-master clusters\. 
 

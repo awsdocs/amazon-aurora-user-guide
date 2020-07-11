@@ -9,7 +9,6 @@
 + [Managing Performance and Scaling for Aurora DB Clusters](Aurora.Managing.Performance.md)
 + [Cloning Databases in an Aurora DB Cluster](Aurora.Managing.Clone.md)
 + [Integrating Aurora with Other AWS Services](Aurora.Integrating.md)
-+ [Backing Up and Restoring an Amazon Aurora DB Cluster](BackupRestoreAurora.md)
 + [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)
 + [Rebooting a DB Instance in a DB Cluster](USER_RebootInstance.md)
 + [Deleting a DB Instance in an Aurora DB Cluster](USER_DeleteInstance.md)

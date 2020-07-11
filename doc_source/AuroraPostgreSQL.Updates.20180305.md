@@ -97,6 +97,8 @@ None\.
    + Updated `PGAudit` to version 1\.3\.1
    + Updated `pgTAP` to version 1\.1 
 
+1. Provided support for fault injection queries\.
+
 ## Version 3\.1<a name="AuroraPostgreSQL.Updates.20180305.31"></a>
 
 This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.6\. For more information about the improvements in release 11\.6, see [PostgreSQL Release 11\.6](https://www.postgresql.org/docs/11/release-11-6.html)\.

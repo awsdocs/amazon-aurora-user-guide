@@ -17,7 +17,7 @@ If you have any questions or concerns, AWS Support is available on the community
 For information on how to upgrade your Aurora MySQL database cluster, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2043.Improvements"></a>
-+  Fixed a bug in binlog replication that can cause an issue on Aurora instances configured as binlog slave\. 
++  Fixed a bug in binlog replication that can cause an issue on Aurora instances configured as binlog worker\. 
 +  Fixed an out\-of\-memory condition when handling large stored routines\. 
 +  Fixed an error in handling certain kinds of `ALTER TABLE` commands\. 
 +  Fixed an issue with aborted connections because of an error in network protocol management\. 
