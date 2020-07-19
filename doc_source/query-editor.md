@@ -8,6 +8,7 @@ The query editor requires an Aurora Serverless DB cluster with the Data API enab
 
 The query editor is only available for the following Aurora Serverless DB clusters:
 + Aurora with MySQL version 5\.6 compatibility
++ Aurora with MySQL version 5\.7 compatibility
 + Aurora with PostgreSQL version 10\.7 compatibility
 
 The query editor is currently available for Aurora Serverless in the following AWS Regions:
