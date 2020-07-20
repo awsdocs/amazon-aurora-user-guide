@@ -76,5 +76,5 @@ The audit log files include the following comma\-delimited information in rows, 
 |  queryid  |  The query ID number, which can be used for finding the relational table events and related queries\. For `TABLE` events, multiple lines are added\.  | 
 |  operation  |  The recorded action type\. Possible values are: `CONNECT`, `QUERY`, `READ`, `WRITE`, `CREATE`, `ALTER`, `RENAME`, and `DROP`\.  | 
 |  database  |  The active database, as set by the `USE` command\.  | 
-|  object  |  For QUERY events, this value indicates the executed query\. For TABLE events, it indicates the table name\.  | 
+|  object  |  For `QUERY` events, this value indicates the query that the database performed\. For `TABLE` events, it indicates the table name\.  | 
 |  retcode  |  The return code of the logged operation\.  | 

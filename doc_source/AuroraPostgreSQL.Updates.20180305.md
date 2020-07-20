@@ -35,7 +35,30 @@ The following Aurora PostgreSQL versions are supported\.
 This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.7\. For more information about the improvements in release 11\.7, see [PostgreSQL Release 11\.7](https://www.postgresql.org/docs/11/release-11-7.html)\.
 
 **Topics**
++ [Version 3\.2\.2](#AuroraPostgreSQL.Updates.20180305.322)
 + [Version 3\.2\.1](#AuroraPostgreSQL.Updates.20180305.321)
+
+### Version 3\.2\.2<a name="AuroraPostgreSQL.Updates.20180305.322"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug related to heap page extend that in rare cases resulted in longer recovery time and impacted availability\. 
+
+**High Priority Stability Enhancements**
+
+1. Fixed a bug in Aurora Global Database that could cause delays in upgrading the database engine in a secondary region\. For more information, see [Using Amazon Aurora Global Databases](aurora-global-database.md)\. 
+
+1. Fixed a bug that in rare cases caused delays in upgrading a database to engine version 11\.7\.
+
+**Additional Improvements and Enhancements**
+
+1. Fixed a bug where the database might be unavailable briefly due to error handling in database storage growth\.
+
+1. Fixed a bug where a SELECT query might incorrectly return the error, Attempting to read past EOF of relation rrrr\. blockno=bbb nblocks=nnn\.
+
+1. Fixed a bug where an Aurora PostgreSQL Serverless DB cluster might return the following error after a scaling event: ERROR: prepared statement "S\_6" already exists\.
 
 ### Version 3\.2\.1<a name="AuroraPostgreSQL.Updates.20180305.321"></a>
 
@@ -286,7 +309,30 @@ You can find the following improvements in this engine update\.
 This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.12\. For more information about the improvements in release 10\.12, see [ PostgreSQL Release 10\.12](https://www.postgresql.org/docs/10/release-10-12.html)\.
 
 **Topics**
++ [Version 2\.5\.2](#AuroraPostgreSQL.Updates.20180305.252)
 + [Version 2\.5\.1](#AuroraPostgreSQL.Updates.20180305.251)
+
+### Version 2\.5\.2<a name="AuroraPostgreSQL.Updates.20180305.252"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug related to heap page extend that in rare cases resulted in longer recovery time and impacted availability\. 
+
+**High Priority Stability Enhancements**
+
+1. Fixed a bug in Aurora Global Database that could cause delays in upgrading the database engine in a secondary region\. For more information, see [Using Amazon Aurora Global Databases](aurora-global-database.md)\. 
+
+1. Fixed a bug that in rare cases caused delays in upgrading a database to engine version 10\.12\.
+
+**Additional Improvements and Enhancements**
+
+1. Fixed a bug where the database might be unavailable briefly due to error handling in database storage growth\.
+
+1. Fixed a bug where a SELECT query might incorrectly return the error, Attempting to read past EOF of relation rrrr\. blockno=bbb nblocks=nnn\.
+
+1. Fixed a bug where an Aurora PostgreSQL Serverless DB cluster might return the following error after a scaling event: ERROR: prepared statement "S\_6" already exists\.
 
 ### Version 2\.5\.1<a name="AuroraPostgreSQL.Updates.20180305.251"></a>
 
@@ -756,7 +802,27 @@ You can find the following improvements in this engine update\.
 This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.17\. For more information about the improvements in release 9\.6\.17, see [ PostgreSQL Release 9\.6\.17](https://www.postgresql.org/docs/9.6/release-9-6-17.html)\.
 
 **Topics**
++ [Version 1\.7\.2](#AuroraPostgreSQL.Updates.20180305.172)
 + [Version 1\.7\.1](#AuroraPostgreSQL.Updates.20180305.171)
+
+### Version 1\.7\.2<a name="AuroraPostgreSQL.Updates.20180305.172"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug related to heap page extend that in rare cases resulted in longer recovery time and impacted availability\. 
+
+**High Priority Stability Enhancements**  
+None
+
+**Additional Improvements and Enhancements**
+
+1. Fixed a bug where the database might be unavailable briefly due to error handling in database storage growth\.
+
+1. Fixed a bug where a SELECT query might incorrectly return the error, Attempting to read past EOF of relation rrrr\. blockno=bbb nblocks=nnn\.
+
+1. Fixed an issue with the internal metrics collector that could result in erratic CPU spikes on database instances\.
 
 ### Version 1\.7\.1<a name="AuroraPostgreSQL.Updates.20180305.171"></a>
 

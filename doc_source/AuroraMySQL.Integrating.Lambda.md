@@ -44,7 +44,7 @@ You can invoke an AWS Lambda function from an Aurora MySQL DB cluster by calling
 
 ### Working with Native Functions to Invoke a Lambda Function<a name="AuroraMySQL.Integrating.NativeLambda.lambda_functions"></a>
 
-The `lambda_sync` and `lambda_async` functions are built\-in, native functions that invoke a Lambda function synchronously or asynchronously\. When you must know the result of the invoked function's execution before moving on to another action, use the synchronous function `lambda_sync`\. When you don't need to know the result of the execution before moving on to another action, use the asynchronous function `lambda_async`\.
+The `lambda_sync` and `lambda_async` functions are built\-in, native functions that invoke a Lambda function synchronously or asynchronously\. When you must know the result of the Lambda function before moving on to another action, use the synchronous function `lambda_sync`\. When you don't need to know the result of the Lambda function before moving on to another action, use the asynchronous function `lambda_async`\.
 
 The user invoking a native function must be granted the `INVOKE LAMBDA` privilege\. To grant this privilege to a user, connect to the DB instance as the master user, and run the following statement\.
 
@@ -70,7 +70,7 @@ lambda_sync (
 ```
 
 **Note**  
-You can use triggers to call Lambda on data\-modifying statements\. Remember that triggers are not executed once per SQL statement, but once per row modified, one row at a time\. Trigger execution is synchronous, and the data\-modifying statement will not return until trigger execution completes\.  
+You can use triggers to call Lambda on data\-modifying statements\. Remember that triggers are not run once per SQL statement, but once per row modified, one row at a time\. When a trigger runs, the process is synchronous\. The data\-modifying statement only returns when the trigger completes\.  
 Be careful when invoking an AWS Lambda function from triggers on tables that experience high write traffic\. INSERT, UPDATE, and DELETE triggers are activated per row\. A write\-heavy workload on a table with INSERT, UPDATE, or DELETE triggers results in a large number of calls to your AWS Lambda function\. 
 
 #### Parameters for the lambda\_sync Function<a name="AuroraMySQL.Integrating.NativeLambda.lambda_functions.Sync.Parameters"></a>
@@ -147,7 +147,7 @@ You can invoke an AWS Lambda function from an Aurora MySQL DB cluster by calling
 
 ### Working with the mysql\.lambda\_async Procedure to Invoke a Lambda Function<a name="AuroraMySQL.Integrating.Lambda.mysql_lambda_async"></a>
 
-The `mysql.lambda_async` procedure is a built\-in stored procedure that invokes a Lambda function asynchronously\. To use this procedure, your database user must have execute privilege on the `mysql.lambda_async` stored procedure\.
+The `mysql.lambda_async` procedure is a built\-in stored procedure that invokes a Lambda function asynchronously\. To use this procedure, your database user must have `EXECUTE` privilege on the `mysql.lambda_async` stored procedure\.
 
 #### Syntax<a name="AuroraMySQL.Integrating.Lambda.mysql_lambda_async.Syntax"></a>
 

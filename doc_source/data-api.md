@@ -202,7 +202,7 @@ When you use an Amazon VPC endpoint in a Data API call, all traffic between your
 
 After you enable the Data API for an Aurora Serverless DB cluster, you can call the Data API or the AWS CLI to run SQL statements on the DB cluster\. The Data API supports the programming languages supported by the AWS SDK\. For more information, see [ Tools to Build on AWS](https://aws.amazon.com/tools/)\.
 
-The Data API provides the following operations to execute SQL statements\.
+The Data API provides the following operations to perform SQL statements\.
 
 
 ****  
@@ -212,7 +212,7 @@ The Data API provides the following operations to execute SQL statements\.
 |  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/execute-statement.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/execute-statement.html)  |  Runs a SQL statement against a database\.  | 
 |  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BatchExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BatchExecuteStatement.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/batch-execute-statement.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/batch-execute-statement.html)  |  Runs a batch SQL statement over an array of data for bulk update and insert operations\. You can run a DML statement with array of parameter sets\. A batch SQL statement can provide a significant performance improvement over individual insert and update statements\.  | 
 
-You can run both operations for executing a SQL statement independently, or you can run them in a transaction\. The Data API provides the following operations to support transactions\.
+You can run both operations for performing a SQL statement independently, or you can run them in a transaction\. The Data API provides the following operations to support transactions\.
 
 
 ****  
@@ -223,7 +223,7 @@ You can run both operations for executing a SQL statement independently, or you 
 |  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_CommitTransaction.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_CommitTransaction.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/commit-transaction.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/commit-transaction.html)  |  Ends a SQL transaction and commits the changes\.  | 
 |  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_RollbackTransaction.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_RollbackTransaction.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/rollback-transaction.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/rollback-transaction.html)  |  Performs a rollback of a transaction\.  | 
 
-The operations for executing SQL statements and supporting transactions have the following common Data API parameters and AWS CLI options\. Some operations support other parameters or options\.
+The operations for performing SQL statements and supporting transactions have the following common Data API parameters and AWS CLI options\. Some operations support other parameters or options\.
 
 
 ****  
@@ -965,7 +965,7 @@ client.forSql("INSERT INTO accounts(accountId, name) VALUES(?, ?)", 4, "Carlos")
          .execute();
 ```
 
-The client library provides automatic mapping to DTOs when an execution result is returned\. The following examples show how the execution result is mapped to your DTOs\.
+The client library provides automatic mapping to DTOs when a result is returned\. The following examples show how the result is mapped to your DTOs\.
 
 ```
 List<Account> result = client.forSql("SELECT * FROM accounts")

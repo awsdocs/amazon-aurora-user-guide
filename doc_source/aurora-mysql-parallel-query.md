@@ -1,6 +1,6 @@
 # Working with Parallel Query for Amazon Aurora MySQL<a name="aurora-mysql-parallel-query"></a>
 
- Following, you can find a description of the parallel query performance optimization for Amazon Aurora with MySQL compatibility\. This feature uses a special execution path for certain data\-intensive queries, taking advantage of the Aurora shared storage architecture\. Currently, Aurora MySQL versions that are compatible with MySQL 5\.6 support parallel query\. Parallel query works best with Aurora MySQL DB clusters that have tables with millions of rows and analytic queries that take minutes or hours to complete\. 
+ Following, you can find a description of the parallel query performance optimization for Amazon Aurora with MySQL compatibility\. This feature uses a special processing path for certain data\-intensive queries, taking advantage of the Aurora shared storage architecture\. Currently, Aurora MySQL versions that are compatible with MySQL 5\.6 support parallel query\. Parallel query works best with Aurora MySQL DB clusters that have tables with millions of rows and analytic queries that take minutes or hours to complete\. 
 
 **Topics**
 + [Overview of Parallel Query for Aurora MySQL](#aurora-mysql-parallel-query-overview)
@@ -35,7 +35,7 @@
  Benefits of parallel query include the following: 
 +  Improved I/O performance, due to parallelizing physical read requests across multiple storage nodes\. 
 +  Reduced network traffic\. Aurora doesn't transmit entire data pages from storage nodes to the head node and then filter out unnecessary rows and columns afterward\. Instead, Aurora transmits compact tuples containing only the column values needed for the result set\. 
-+  Reduced CPU usage on the head node, due to pushing down function execution, row filtering, and column projection for the `WHERE` clause\. 
++  Reduced CPU usage on the head node, due to pushing down function processing, row filtering, and column projection for the `WHERE` clause\. 
 +  Reduced memory pressure on the buffer pool\. The pages processed by the parallel query aren't added to the buffer pool, which reduces the chance of a data\-intensive scan evicting frequently used data from the buffer pool\. 
 +  Potentially reduced data duplication in your extract, transform, load \(ETL\) pipeline, by making it practical to perform long\-running analytic queries on existing data\. 
 
@@ -44,7 +44,7 @@
  The parallel query feature uses the major architectural principles of Aurora MySQL: decoupling the database engine from the storage subsystem, and reducing network traffic by streamlining communication protocols\. Aurora MySQL uses these techniques to speed up write\-intensive operations such as redo log processing\. Parallel query applies the same principles to read operations\. 
 
 **Note**  
- The architecture of Aurora MySQL parallel query differs from that of similarly named features in other database systems\. Aurora MySQL parallel query doesn't involve symmetric multiprocessing \(SMP\) and so doesn't depend on the CPU capacity of the database server\. The parallel execution happens in the storage layer, independent of the Aurora MySQL server that serves as the query coordinator\. 
+ The architecture of Aurora MySQL parallel query differs from that of similarly named features in other database systems\. Aurora MySQL parallel query doesn't involve symmetric multiprocessing \(SMP\) and so doesn't depend on the CPU capacity of the database server\. The parallel processing happens in the storage layer, independent of the Aurora MySQL server that serves as the query coordinator\. 
 
  By default, without parallel query, the processing for an Aurora query involves transmitting raw data to a single node within the Aurora cluster \(the *head node*\) and performing all further processing in a single thread on that single node\. With parallel query, much of this I/O\-intensive and CPU\-intensive work is delegated to nodes in the storage layer\. Only the compact rows of the result set are transmitted back to the head node, with rows already filtered, and column values already extracted and transformed\. The performance benefit comes from the reduction in network traffic, reduction in CPU usage on the head node, and parallelizing the I/O across the storage nodes\. The amount of parallel I/O, filtering, and projection is independent of the number of DB instances in the Aurora cluster that runs the query\. 
 
@@ -68,7 +68,7 @@
 +  The Performance Insights feature is currently not available for clusters that are enabled for parallel query\. 
 +  The backtrack feature is currently not available for clusters that are enabled for parallel query\. 
 +  You can't stop and start DB clusters that are enabled for parallel query\.  
-+  Currently, partitioned tables aren't supported for parallel query\. You can use partitioned tables in parallel query clusters\. Queries against those tables use the non\-parallel query execution path\. 
++  Currently, partitioned tables aren't supported for parallel query\. You can use partitioned tables in parallel query clusters\. Queries against those tables use the nonparallel query processing path\. 
 **Note**  
  A join, union, or other multipart query can partially use parallel query, even if some query blocks refer to partitioned tables\. The query blocks that refer only to nonpartitioned tables can use the parallel query optimization\. 
 +  To work with parallel query, currently a table must use the `COMPACT` row format, which requires the Antelope file format of the InnoDB storage engine\. 
@@ -332,7 +332,7 @@ mysql> select @@aurora_pq;
 
  To check if a query is using parallel query, check the query execution plan \(also known as the "explain plan"\) by running the [EXPLAIN](https://dev.mysql.com/doc/refman/5.6/en/execution-plan-information.html) statement\. For examples of how SQL statements, clauses, and expressions affect `EXPLAIN` output for parallel query, see [How Parallel Query Works with SQL Constructs](#aurora-mysql-parallel-query-sql)\. 
 
- The following example demonstrates the difference between a traditional execution plan and a parallel query plan\. This query is Query 3 from the TPC\-H benchmark\. Many of the sample queries throughout this section use the tables from the TPC\-H dataset\.  
+ The following example demonstrates the difference between a traditional query plan and a parallel query plan\. This query is Query 3 from the TPC\-H benchmark\. Many of the sample queries throughout this section use the tables from the TPC\-H dataset\.  
 
 ```
 SELECT l_orderkey,
@@ -435,7 +435,7 @@ ORDER BY revenue DESC,
 
  In addition to the Amazon CloudWatch metrics described in [Monitoring Amazon Aurora DB Cluster Metrics](Aurora.Monitoring.md), Aurora provides other global status variables\. You can use these global status variables to help monitor parallel query execution and give you insights into why the optimizer might use or not use parallel query in a given situation\. To access these variables, you can use the `[SHOW GLOBAL STATUS](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html)` command\. You can also find these variables listed following\. 
 
- A parallel query session isn't necessarily a one\-to\-one mapping with an executed query\. For example, suppose your execution plan has two steps that use parallel query\. In that case, the query involves two parallel sessions and the counters for requests attempted and requests successful are incremented by two\. 
+ A parallel query session isn't necessarily a one\-to\-one mapping with the queries performed by the database\. For example, suppose your execution plan has two steps that use parallel query\. In that case, the query involves two parallel sessions and the counters for requests attempted and requests successful are incremented by two\. 
 
  When you experiment with parallel query by issuing `EXPLAIN` statements, expect to see increases in the counters designated as "not chosen" even though the queries aren't actually running\. When you work with parallel query in production, you can check if the "not chosen" counters are increasing faster than you expect\. You can then adjust your cluster settings, query mix, DB instances where parallel query is enabled, and so on, so that parallel query runs for the queries that you expect\. 
 
@@ -458,8 +458,8 @@ ORDER BY revenue DESC,
 |   `Aurora_pq_max_concurrent_requests`   |   The maximum number of parallel query sessions that can run concurrently on this Aurora DB instance\. This is a fixed number that depends on the AWS instance class\.   | 
 |   `Aurora_pq_request_in_progress`   |   The number of parallel query sessions currently in progress\. This number applies to the particular Aurora DB instance you are connected to, not the entire Aurora DB cluster\. To see if a DB instance is close to its concurrency limit, compare this value to `Aurora_pq_max_concurrent_requests`\.   | 
 |   `Aurora_pq_request_throttled`   |   The number of times parallel query wasn't chosen due to the maximum number of concurrent parallel queries already running on a particular Aurora DB instance\.   | 
-|   `Aurora_pq_request_not_chosen_long_trx`   |   The number of parallel query requests that used the nonparallel query execution path, due to the query being started inside a long\-running transaction\. This counter can be incremented by an `EXPLAIN` statement even though the query isn't actually performed\.   | 
-|   `Aurora_pq_request_not_chosen_unsupported_access`   |   The number of parallel query requests that use the nonparallel query execution path because the `WHERE` clause doesn't meet the criteria for parallel query\. This result can occur if the query doesn't require a data\-intensive scan, or if the query is a `DELETE` or `UPDATE` statement\.   | 
+|   `Aurora_pq_request_not_chosen_long_trx`   |   The number of parallel query requests that used the nonparallel query processing path, due to the query being started inside a long\-running transaction\. This counter can be incremented by an `EXPLAIN` statement even though the query isn't actually performed\.   | 
+|   `Aurora_pq_request_not_chosen_unsupported_access`   |   The number of parallel query requests that use the nonparallel query processing path because the `WHERE` clause doesn't meet the criteria for parallel query\. This result can occur if the query doesn't require a data\-intensive scan, or if the query is a `DELETE` or `UPDATE` statement\.   | 
 
 ## How Parallel Query Works with SQL Constructs<a name="aurora-mysql-parallel-query-sql"></a>
 
@@ -485,7 +485,7 @@ ORDER BY revenue DESC,
 
 ### EXPLAIN statement<a name="aurora-mysql-parallel-query-sql-explain"></a>
 
- As shown in examples throughout this section, the `EXPLAIN` statement indicates whether each stage of a query is currently eligible for parallel query\. It also indicates which aspects of a query can be pushed down to the storage layer\. The most important items in the execution plan are the following: 
+ As shown in examples throughout this section, the `EXPLAIN` statement indicates whether each stage of a query is currently eligible for parallel query\. It also indicates which aspects of a query can be pushed down to the storage layer\. The most important items in the query execution plan are the following: 
 +  A value other than `NULL` for the `key` column suggests that the query can be performed efficiently using index lookups, and parallel query is unlikely\. 
 +  A small value for the `rows` column \(that is, a value not in the millions\) suggests that the query isn't accessing enough data to make parallel query worthwhile, and parallel query is unlikely\. 
 +  The `Extra` column shows you if parallel query is expected to be used\. This output looks like the following example\. 
@@ -669,7 +669,7 @@ mysql> explain select * from part where p_type = 'LARGE BRUSHED BRASS';
 
  Join queries with large tables typically involve data\-intensive operations that benefit from the parallel query optimization\. The comparisons of column values between multiple tables \(that is, the join predicates themselves\) currently aren't parallelized\. However, parallel query can push down some of the internal processing for other join phases, such as constructing the Bloom filter during a hash join\. Parallel query can apply to join queries even without a `WHERE` clause\. Therefore, a join query is an exception to the rule that a `WHERE` clause is required to use parallel query\. 
 
- Each phase of join processing is evaluated to check if it is eligible for parallel query\. If more than one phase can use parallel query, these phases are executed in sequence\. Thus, each join query counts as a single parallel query session in terms of concurrency limits\. 
+ Each phase of join processing is evaluated to check if it is eligible for parallel query\. If more than one phase can use parallel query, these phases are performed in sequence\. Thus, each join query counts as a single parallel query session in terms of concurrency limits\. 
 
  For example, when a join query includes `WHERE` predicates to filter the rows from one of the joined tables, that filtering option can use parallel query\. As another example, suppose that a join query uses the hash join mechanism, for example to join a big table with a small table\. In this case, the table scan to produce the Bloom filter data structure might be able to use parallel query\. 
 
@@ -737,7 +737,7 @@ mysql> explain select p_partkey from part where p_name like '%choco_ate%'
 
  The optimizer rewrites any query using a view as a longer query using the underlying tables\. Thus, parallel query works the same whether table references are views or real tables\. All the same considerations about whether to use parallel query for a query, and which parts are pushed down, apply to the final rewritten query\. 
 
- For example, the following execution plan shows a view definition that usually doesn't use parallel query\. When the view is queried with additional `WHERE` clauses, Aurora MySQL uses parallel query\. 
+ For example, the following query execution plan shows a view definition that usually doesn't use parallel query\. When the view is queried with additional `WHERE` clauses, Aurora MySQL uses parallel query\. 
 
 ```
 mysql> create view part_view as select * from part;
@@ -781,7 +781,7 @@ mysql> explain delete from part where p_name is not null;
 
 ### Transactions and Locking<a name="aurora-mysql-parallel-query-sql-transactions"></a>
 
- Parallel query only applies to statements executed under the `REPEATABLE READ` isolation level\. This isolation level is the default for Aurora reader DB instances\. You can use all the isolation levels on the Aurora primary instance\. For more information about Aurora isolation levels, see [Aurora MySQL Isolation Levels](AuroraMySQL.Reference.md#AuroraMySQL.Reference.IsolationLevels)\. 
+ Parallel query only applies to statements performed under the `REPEATABLE READ` isolation level\. This isolation level is the default for Aurora reader DB instances\. You can use all the isolation levels on the Aurora primary instance\. For more information about Aurora isolation levels, see [Aurora MySQL Isolation Levels](AuroraMySQL.Reference.md#AuroraMySQL.Reference.IsolationLevels)\. 
 
  After a big transaction is finished, the table statistics might be stale\. Such stale statistics might require an `ANALYZE TABLE` statement before Aurora can accurately estimate the number of rows\. A large\-scale DML statement might also bring a substantial portion of the table data into the buffer pool\. Having this data in the buffer pool can lead to parallel query being chosen less frequently for that table until the data is evicted from the pool\. 
 
@@ -868,7 +868,7 @@ mysql> explain select o_orderpriority, o_shippriority from orders where o_clerk 
 
  When a parallel query filters rows and transforms and extracts column values, data is transmitted back to the head node as tuples rather than as data pages\. Therefore, running a parallel query doesn't add any pages to the buffer pool, or evict pages that are already in the buffer pool\. 
 
- Aurora checks the number of pages of table data that are present in the buffer pool, and what proportion of the table data that number represents\. Aurora uses that information to determine whether it is more efficient to use parallel query \(and bypass the data in the buffer pool\)\. Alternatively, Aurora might use the nonparallel query execution path, which uses data cached in the buffer pool\. Which pages are cached and how data\-intensive queries affect caching and eviction depends on configuration settings related to the buffer pool\. Therefore, it can be hard to predict whether any particular query uses parallel query, because the choice depends on the ever\-changing data within the buffer pool\. 
+ Aurora checks the number of pages of table data that are present in the buffer pool, and what proportion of the table data that number represents\. Aurora uses that information to determine whether it is more efficient to use parallel query \(and bypass the data in the buffer pool\)\. Alternatively, Aurora might use the nonparallel query processing path, which uses data cached in the buffer pool\. Which pages are cached and how data\-intensive queries affect caching and eviction depends on configuration settings related to the buffer pool\. Therefore, it can be hard to predict whether any particular query uses parallel query, because the choice depends on the ever\-changing data within the buffer pool\. 
 
  Also, Aurora imposes concurrency limits on parallel queries\. Because not every query uses parallel query, tables that are accessed by multiple queries simultaneously typically have a substantial portion of their data in the buffer pool\. Therefore, Aurora often doesn't choose these tables for parallel queries\. 
 

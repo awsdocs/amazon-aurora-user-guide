@@ -1,6 +1,6 @@
 # Enabling Performance Insights<a name="USER_PerfInsights.Enabling"></a>
 
-To use Performance Insights, you must enable it on your DB instance\.
+To use Performance Insights, you must enable it on your DB instance\. Enabling and disabling Performance Insights doesn't cause downtime, a reboot, or a failover\.
 
 If you use Performance Insights together with Aurora Global Database, you must enable Performance Insights individually for the DB instances in each AWS Region\. For details, see [Performance Insights for Aurora Global Databases](aurora-global-database-managing.md#aurora-global-database-pi)\. 
 

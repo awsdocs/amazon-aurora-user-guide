@@ -9,7 +9,7 @@ For example, suppose that you use an `ALTER TABLE` operation to add a column to 
 + Applying table locks while applying concurrent DML changes
 + Slowing concurrent DML throughput
 
-In Amazon Aurora, you can use fast DDL to execute an ALTER TABLE operation in place, nearly instantaneously\. The operation completes without requiring the table to be copied and without having a material impact on other DML statements\. Because the operation doesn't consume temporary storage for a table copy, it makes DDL statements practical even for large tables on small instance classes\.
+In Amazon Aurora, you can use fast DDL to run an `ALTER TABLE` operation in place, nearly instantaneously\. The operation completes without requiring the table to be copied and without having a material impact on other DML statements\. Because the operation doesn't consume temporary storage for a table copy, it makes DDL statements practical even for large tables on small instance classes\.
 
 **Important**  
 Currently, Aurora lab mode must be enabled to use fast DDL for Aurora MySQL\. We don't recommended using fast DDL for production DB clusters\. For information about enabling Aurora lab mode, see [Amazon Aurora MySQL Lab Mode](AuroraMySQL.Updates.LabMode.md)\.

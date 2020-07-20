@@ -377,7 +377,7 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
 +  You can't change GRAW mode within a transaction\. 
 +  When using GRAW without explicit transactions, each individual query incurs the performance overhead of establishing a globally consistent read view\. 
 +  With GRAW enabled, the performance penalty applies to both reads and writes\. 
-+  When you use GRAW with explicit transactions, the overhead of establishing a globally consistent view applies once for each transaction, when the transaction starts\. Queries executed later in the transaction are as fast as if executed without GRAW\. If multiple successive statements can all use the same read view, you can wrap them in a single transaction for a better overall performance\. That way, the penalty is only paid once per transaction instead of per query\. 
++  When you use GRAW with explicit transactions, the overhead of establishing a globally consistent view applies once for each transaction, when the transaction starts\. Queries performed later in the transaction are as fast as if run without GRAW\. If multiple successive statements can all use the same read view, you can wrap them in a single transaction for a better overall performance\. That way, the penalty is only paid once per transaction instead of per query\. 
 
 ### Multi\-Master Clusters and Transactions<a name="aurora-multi-master-transactions"></a>
 
@@ -388,7 +388,7 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
  There are certain workloads that benefit from large transactions\. For example, bulk data imports are significantly faster when run using multi\-megabyte transactions rather than single\-statement transactions\. If you observe an unacceptable number of conflicts while running such workloads, consider the following options: 
 +  Reduce transaction size\. 
 +  Reschedule or rearrange batch jobs so that they don't overlap and don't provoke conflicts with other workloads\. If practical, reschedule the batch jobs so that they run during off\-peak hours\. 
-+  Refactor the batch jobs so that they run on the same writer instance as the other transactions causing conflicts\. When conflicting transactions are executed on the same instance, the transactional engine manages access to the rows\. In that case, storage\-level write conflicts don't occur\. 
++  Refactor the batch jobs so that they run on the same writer instance as the other transactions causing conflicts\. When conflicting transactions are run on the same instance, the transactional engine manages access to the rows\. In that case, storage\-level write conflicts don't occur\. 
 
 ### Write Conflicts and Deadlocks in Multi\-Master Clusters<a name="aurora-multi-master-deadlocks"></a>
 
@@ -425,7 +425,7 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
 
  For more information about locking reads, see the [MySQL Reference Manual](https://dev.mysql.com/doc/refman/5.6/en/innodb-locking-reads.html)\. 
 
- Locking read operations are supported on all nodes, but the lock scope is local to the node on which the command was executed\. A locking read executed on one writer doesn't prevent other writers from accessing or modifying the locked rows\. Despite this limitation, you can still work with locking reads in use cases that guarantee strict workload scope separation between writers, such as in sharded or multitenant databases\. 
+ Locking read operations are supported on all nodes, but the lock scope is local to the node on which the command was run\. A locking read performed on one writer doesn't prevent other writers from accessing or modifying the locked rows\. Despite this limitation, you can still work with locking reads in use cases that guarantee strict workload scope separation between writers, such as in sharded or multitenant databases\. 
 
  Consider the following guidelines: 
 +  Remember that a node can always see its own changes immediately and without delay\. When possible, you can colocate reads and writes on the same node to eliminate the GRAW requirement\. 
@@ -438,12 +438,12 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
 
  The SQL data definition language \(DDL\) statements have special considerations for multi\-master clusters\. These statements sometimes cause substantial reorganization of the underlying data\. Such large\-scale changes potentially affect many data pages in the shared storage volume\. The definitions of tables and other schema objects are held in the `INFORMATION_SCHEMA` tables\. Aurora handles changes to those tables specially to avoid write conflicts when multiple DB instances run DDL statements at the same time\. 
 
- For DDL statements, Aurora automatically delegates the execution to a special server process in the cluster\. Because Aurora centralizes the changes to the `INFORMATION_SCHEMA` tables, this mechanism avoids the potential for write conflicts between DDL statements\. 
+ For DDL statements, Aurora automatically delegates the statement processing to a special server process in the cluster\. Because Aurora centralizes the changes to the `INFORMATION_SCHEMA` tables, this mechanism avoids the potential for write conflicts between DDL statements\. 
 
  DDL operations prevent concurrent writes to that table\. During a DDL operation on a table, all DB instances in the multi\-master cluster are limited to read\-only access to that table until the DDL statement finishes\. 
 
  The following DDL behaviors are the same in Aurora single\-master and multi\-master clusters: 
-+  A DDL executed on one DB instance causes other instances to terminate any connections actively using the table\. 
++  A DDL performed on one DB instance causes other instances to terminate any connections actively using the table\. 
 +  Session\-level temporary tables can be created on any node using the `MyISAM` or `MEMORY` storage engines\. 
 +  DDL operations on very large tables might fail if the DB instance doesn't have sufficient local temporary storage\. 
 

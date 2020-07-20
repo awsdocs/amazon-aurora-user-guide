@@ -210,7 +210,7 @@ After the statement completes, an entry for each successfully loaded file is wri
 
 Every successful `LOAD DATA FROM S3` statement updates the `aurora_s3_load_history` table in the `mysql` schema with an entry for each file that was loaded\.
 
-After you run the `LOAD DATA FROM S3` statement, you can verify which files were loaded by querying the `aurora_s3_load_history` table\. To see the files that were loaded from one execution of the statement, use the `WHERE` clause to filter the records on the Amazon S3 URI for the manifest file used in the statement\. If you have used the same manifest file before, filter the results using the `timestamp` field\.
+After you run the `LOAD DATA FROM S3` statement, you can verify which files were loaded by querying the `aurora_s3_load_history` table\. To see the files that were loaded from one iteration of the statement, use the `WHERE` clause to filter the records on the Amazon S3 URI for the manifest file used in the statement\. If you have used the same manifest file before, filter the results using the `timestamp` field\.
 
 ```
 select * from mysql.aurora_s3_load_history where load_prefix = 'S3_URI';

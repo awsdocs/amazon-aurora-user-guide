@@ -45,6 +45,7 @@ The following table shows the Aurora PostgreSQL engine versions that are support
 + [Exporting a Snapshot to an Amazon S3 Bucket](#USER_ExportSnapshot.Exporting)
 + [Monitoring Snapshot Exports](#USER_ExportSnapshot.Monitoring)
 + [Canceling a Snapshot Export Task](#USER_ExportSnapshot.Canceling)
++ [Troubleshooting PostgreSQL Permissions Errors](#USER_ExportSnapshot.postgres-permissions)
 + [Data Conversion When Exporting to an Amazon S3 Bucket](#USER_ExportSnapshot.data-types)
 
 ## Overview of Exporting Snapshot Data<a name="USER_ExportSnapshot.Overview"></a>
@@ -411,6 +412,18 @@ To cancel a snapshot export task using the AWS CLI, use the [cancel\-export\-tas
 ### RDS API<a name="USER_ExportSnapshot.CancelAPI"></a>
 
 To cancel a snapshot export task using the Amazon RDS API, use the [CancelExportTask](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CancelExportTask.html) operation with the `ExportTaskIdentifier` parameter\.
+
+## Troubleshooting PostgreSQL Permissions Errors<a name="USER_ExportSnapshot.postgres-permissions"></a>
+
+When exporting PostgreSQL databases to Amazon S3, you might see a `PERMISSIONS_DO_NOT_EXIST` error stating that certain tables were skipped\. This is usually caused by the superuser, which you specify when creating the DB instance, not having permissions to access those tables\.
+
+To fix this error, run the following command:
+
+```
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA schema_name TO superuser_name
+```
+
+For more information on superuser privileges, see [Master User Account Privileges](UsingWithRDS.MasterAccounts.md)\.
 
 ## Data Conversion When Exporting to an Amazon S3 Bucket<a name="USER_ExportSnapshot.data-types"></a>
 

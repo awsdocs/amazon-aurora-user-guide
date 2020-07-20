@@ -292,7 +292,7 @@ INTO OUTFILE S3 's3_uri'
 +  Configure the appropriate IAM roles for accessing external services such as Amazon SageMaker, Amazon Comprehend, or Lambda for the global database cluster in each AWS Region\. 
 +  Ensure that all AWS Regions have the same trained Amazon SageMaker models deployed with the same endpoint names\. Do so before running the `CREATE FUNCTION` statement for your Aurora Machine Learning function in the primary AWS Region\. In a global database, all `CREATE FUNCTION` statements you run in the primary AWS Region are immediately run in all the secondary regions also\. 
 
- To use models deployed in Amazon SageMaker for inference, you create user\-defined functions using the familiar MySQL data definition language \(DDL\) statements for stored functions\. Each stored function represents the Amazon SageMaker endpoint hosting the model\. When you define such a function, you specify the input parameters to the model, the specific Amazon SageMaker endpoint to invoke, and the return type\. The function returns the inference computed by the Amazon SageMaker endpoint after executing the model on the input parameters\. All Aurora Machine Learning stored functions return numeric types or `VARCHAR`\. You can use any numeric type except `BIT`\. Other types, such as `JSON`, `BLOB`, `TEXT`, and `DATE` are not allowed\. Use model input parameters that are the same as the input parameters that you exported to Amazon S3 for model training\. 
+ To use models deployed in Amazon SageMaker for inference, you create user\-defined functions using the familiar MySQL data definition language \(DDL\) statements for stored functions\. Each stored function represents the Amazon SageMaker endpoint hosting the model\. When you define such a function, you specify the input parameters to the model, the specific Amazon SageMaker endpoint to invoke, and the return type\. The function returns the inference computed by the Amazon SageMaker endpoint after applying the model to the input parameters\. All Aurora Machine Learning stored functions return numeric types or `VARCHAR`\. You can use any numeric type except `BIT`\. Other types, such as `JSON`, `BLOB`, `TEXT`, and `DATE` are not allowed\. Use model input parameters that are the same as the input parameters that you exported to Amazon S3 for model training\. 
 
 ```
 CREATE FUNCTION function_name (arg1 type1, arg2 type2, ...) -- variable number of arguments
@@ -308,7 +308,7 @@ CREATE FUNCTION function_name (arg1 type1, arg2 type2, ...) -- variable number o
 
  We recommend leaving the `MANIFEST` setting at its default value of `OFF`\. Although you can use the `MANIFEST ON` option, some Amazon SageMaker features can't directly use the CSV exported with this option\. The manifest format is not compatible with the expected manifest format from Amazon SageMaker\. 
 
- You create a separate stored function for each of your Amazon SageMaker models\. This mapping of functions to models is required because an endpoint is associated with a specific model, and each model accepts different parameters\. Using SQL types for the model inputs and the model output type helps to avoid type conversion errors passing data back and forth between the AWS services\. You can control who can execute the model\. You can also control the runtime characteristics by specifying a parameter representing the maximum batch size\. 
+ You create a separate stored function for each of your Amazon SageMaker models\. This mapping of functions to models is required because an endpoint is associated with a specific model, and each model accepts different parameters\. Using SQL types for the model inputs and the model output type helps to avoid type conversion errors passing data back and forth between the AWS services\. You can control who can apply the model\. You can also control the runtime characteristics by specifying a parameter representing the maximum batch size\. 
 
  Currently, all Aurora Machine Learning functions have the `NOT DETERMINISTIC` property\. If you don't specify that property explicitly, Aurora sets `NOT DETERMINISTIC` automatically\. This requirement is because the ML model can be changed without any notification to the database\. If that happens, calls to an Aurora Machine Learning function might return different results for the same input within a single transaction\. 
 
@@ -392,11 +392,11 @@ WHERE productTable.productCode = 1302 AND
 
 ### Batch Optimization for Aurora Machine Learning Function Calls<a name="ml-batch-optimization"></a>
 
- The main Aurora Machine Learning performance aspect that you can influence from your Aurora cluster is the batch mode setting for calls to the Aurora Machine Learning stored functions\. Machine learning functions typically require substantial overhead, making it impractical to call an external service separately for each row\. Aurora Machine Learning can minimize this overhead by combining the calls to the external Aurora Machine Learning service for many rows into a single batch\. Aurora Machine Learning receives the responses for all the input rows, and delivers the responses to the executing query one row at a time\. This optimization improves the throughput and latency of your Aurora queries without changing the results\. 
+ The main Aurora Machine Learning performance aspect that you can influence from your Aurora cluster is the batch mode setting for calls to the Aurora Machine Learning stored functions\. Machine learning functions typically require substantial overhead, making it impractical to call an external service separately for each row\. Aurora Machine Learning can minimize this overhead by combining the calls to the external Aurora Machine Learning service for many rows into a single batch\. Aurora Machine Learning receives the responses for all the input rows, and delivers the responses, one row at a time, to the query as it runs\. This optimization improves the throughput and latency of your Aurora queries without changing the results\. 
 
  When you create an Aurora stored function that's connected to an Amazon SageMaker endpoint, you define the batch size parameter\. This parameter influences how many rows are transferred for every underlying call to Amazon SageMaker\. For queries that process large numbers of rows, the overhead to make a separate Amazon SageMaker call for each row can be substantial\. The larger the data set processed by the stored procedure, the larger you can make the batch size\. 
 
- If the batch mode optimization can be applied to an Amazon SageMaker function, you can tell by checking the execution plan produced by the `EXPLAIN PLAN` statement\. In this case, the `extra` column in the execution plan includes `Batched machine learning`\. The following example shows a call to an Amazon SageMaker function that uses batch mode\. 
+ If the batch mode optimization can be applied to an Amazon SageMaker function, you can tell by checking the query plan produced by the `EXPLAIN PLAN` statement\. In this case, the `extra` column in the execution plan includes `Batched machine learning`\. The following example shows a call to an Amazon SageMaker function that uses batch mode\. 
 
 ```
 mysql> create function anomaly_score(val real) returns real alias aws_sagemaker_invoke_endpoint endpoint name 'my-rcf-model-20191126';
@@ -427,7 +427,7 @@ mysql> explain select timestamp, value, anomaly_score(value) from nyc_taxi;
 
 ## Monitoring Aurora Machine Learning<a name="aurora-ml-monitoring"></a>
 
- To monitor the performance of Aurora Machine Learning batch execution, Aurora MySQL includes several global variables that you can query as follows\. 
+ To monitor the performance of Aurora Machine Learning batch operations, Aurora MySQL includes several global variables that you can query as follows\. 
 
 ```
 show status like 'Aurora_ml%';
@@ -436,13 +436,13 @@ show status like 'Aurora_ml%';
  You can reset these status variables by using a `FLUSH STATUS` statement\. Thus, all of the figures represent totals, averages, and so on, since the last time the variable was reset\. 
 
 `Aurora_ml_logical_response_cnt`  
- The aggregate response count that Aurora MySQL receives from the ML services across all queries executed by users of the DB instance\. 
+ The aggregate response count that Aurora MySQL receives from the ML services across all queries run by users of the DB instance\. 
 
 `Aurora_ml_actual_request_cnt`  
  The aggregate request count that Aurora MySQL receives from the ML services across all queries run by users of the DB instance\. 
 
 `Aurora_ml_actual_response_cnt`  
- The aggregate response count that Aurora MySQL receives from the ML services across all queries executed by users of the DB instance\. 
+ The aggregate response count that Aurora MySQL receives from the ML services across all queries run by users of the DB instance\. 
 
 `Aurora_ml_cache_hit_cnt`  
  The aggregate internal cache hit count that Aurora MySQL receives from the ML services across all queries run by users of the DB instance\. 

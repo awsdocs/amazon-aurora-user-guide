@@ -33,6 +33,9 @@ The following table shows all of the parameters that apply to the entire Aurora 
 
 | Parameter name | Modifiable | Notes | 
 | --- | --- | --- | 
+|  `aurora_binlog_read_buffer_size`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster \(Binlog Replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
+|  `aurora_binlog_replication_max_yield_seconds`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster \(Binlog Replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
+|  `aurora_binlog_use_large_read_buffer`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster \(Binlog Replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
 |  `aurora_enable_replica_log_compression`  |  Yes  |   Doesn't apply to clusters that are part of an Aurora global database\.   | 
 |  `aurora_enable_repl_bin_log_filtering`  |  Yes  |   Doesn't apply to clusters that are part of an Aurora global database\.   | 
 |  `aurora_enable_zdr`  |  Yes  |   For more information, see [High Availability Considerations for Amazon Aurora MySQL Replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Availability)\.   | 

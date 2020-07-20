@@ -57,8 +57,10 @@ You can choose to pause your Aurora Serverless DB cluster after a given amount o
 
 When the DB cluster is paused, no compute or memory activity occurs, and you are charged only for storage\. If database connections are requested when an Aurora Serverless DB cluster is paused, the DB cluster automatically resumes and services the connection requests\.
 
+ When the DB cluster resumes activity, it has the same capacity as it had when Aurora paused the cluster\. The number of ACUs depends on how much Aurora scaled the cluster up or down before pausing it\. 
+
 **Note**  
-If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot\. In this case, the DB cluster is restored when there is a request to connect to it\.
+If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot\. In this case, Aurora restores the DB cluster from the snapshot when there is a request to connect to it\.
 
 ## Timeout Action for Capacity Changes<a name="aurora-serverless.how-it-works.timeout-action"></a>
 
