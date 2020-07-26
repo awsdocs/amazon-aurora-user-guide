@@ -29,7 +29,7 @@ To take an action, choose the DB cluster to show its details, then choose **Main
 
 ![\[Pending maintenance items\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/offlinepatchavailabledetails.png)
 
-The maintenance window determines when pending operations start, but doesn't limit the total execution time of these operations\. Maintenance operations aren't guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS Maintenance Window](#Concepts.DBMaintenance)\. 
+The maintenance window determines when pending operations start, but doesn't limit the total run time of these operations\. Maintenance operations aren't guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS Maintenance Window](#Concepts.DBMaintenance)\. 
 
 For information about updates to Amazon Aurora engines and instructions for upgrading and patching them, see [Database Engine Updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md) and [Database Engine Updates for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.md)\.
 

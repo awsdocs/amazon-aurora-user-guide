@@ -21,6 +21,10 @@ Amazon Aurora also supports replication with an external database, or an RDS DB 
 
 1. In the navigation pane, choose **Databases**, and then select the DB cluster where you want to add the new DB instance\. 
 
+1.  Make sure that both the cluster and the primary instance are in the **Available** state\. If the DB cluster or the primary instance are in a transitional state such as **Creating**, you can't add a replica\. 
+
+    If the cluster doesn't have a primary instance, create one using the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command\. This situation can arise if you used the CLI to restore a DB cluster snapshot and then view the cluster in the AWS Management Console\.  
+
 1. For **Actions**, choose **Add reader**\. 
 
    The **Add reader** page appears\.

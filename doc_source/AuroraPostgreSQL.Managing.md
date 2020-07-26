@@ -13,7 +13,7 @@ The following sections discuss managing performance and scaling for an Amazon Au
 
 You can scale Aurora PostgreSQL DB instances in two ways, instance scaling and read scaling\. For more information about read scaling, see [Read Scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.ReadScaling)\.
 
-You can scale your Aurora PostgreSQL DB cluster by modifying the DB instance class for each DB instance in the DB cluster\. Aurora PostgreSQL supports several DB instance classes optimized for Aurora\. For detailed specifications of the DB instance classes supported by Aurora PostgreSQL, see [Hardware Specifications for All Available DB Instance Classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SummaryAurora)\.
+You can scale your Aurora PostgreSQL DB cluster by modifying the DB instance class for each DB instance in the DB cluster\. Aurora PostgreSQL supports several DB instance classes optimized for Aurora\. For detailed specifications of the DB instance classes supported by Aurora PostgreSQL, see [Supported DB Engines for DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora) and [Hardware Specifications for DB Instance Classes for Aurora ](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.
 
 ## Maximum Connections to an Aurora PostgreSQL DB Instance<a name="AuroraPostgreSQL.Managing.MaxConnections"></a>
 
@@ -46,7 +46,7 @@ The following table lists the resulting default value of `max_connections` for e
 | db\.r5\.24xlarge | 5000 | 
 | db\.t3\.medium | 420 | 
 
-For the list of DB instance classes supported by Aurora PostgreSQL and amount of memory for each, see [Hardware Specifications for All Available DB Instance Classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SummaryAurora)\.
+For the list of DB instance classes supported by Aurora PostgreSQL, see [Supported DB Engines for DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora)\. For the amount of memory for each DB instance class, see [Hardware Specifications for DB Instance Classes for Aurora ](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.
 
 ## Temporary Storage Limits for Aurora PostgreSQL<a name="AuroraPostgreSQL.Managing.TempStorage"></a>
 

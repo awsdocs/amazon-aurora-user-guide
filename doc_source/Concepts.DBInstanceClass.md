@@ -6,8 +6,8 @@ For more information about instance class pricing, see [Amazon RDS Pricing](http
 
 **Topics**
 + [DB Instance Class Types](#Concepts.DBInstanceClass.Types)
-+ [Terminology for DB Instance Class Hardware Specifications](#Concepts.DBInstanceClass.Terminology)
-+ [Hardware Specifications for All Available DB Instance Classes for Aurora](#Concepts.DBInstanceClass.SummaryAurora)
++ [Supported DB Engines for DB Instance Classes](#Concepts.DBInstanceClass.SupportAurora)
++ [Hardware Specifications for DB Instance Classes for Aurora](#Concepts.DBInstanceClass.Summary)
 
 ## DB Instance Class Types<a name="Concepts.DBInstanceClass.Types"></a>
 
@@ -25,20 +25,9 @@ The following are the Burstable Performance DB instance classes available:
 **Note**  
 The DB instance classes that use the AWS Nitro System \(db\.r5, db\.t3\) are throttled on combined read plus write workload\.
 
-## Terminology for DB Instance Class Hardware Specifications<a name="Concepts.DBInstanceClass.Terminology"></a>
+For DB instance class hardware specifications, see [Hardware Specifications for DB Instance Classes for Aurora ](#Concepts.DBInstanceClass.Summary)\.
 
-The following terminology is used to describe hardware specifications for DB instance classes:
-+ **vCPU** – The number of virtual central processing units \(CPUs\)\. A *virtual CPU *is a unit of capacity that you can use to compare DB instance classes\. Instead of purchasing or leasing a particular processor to use for several months or years, you are renting capacity by the hour\. Our goal is to make a consistent and specific amount of CPU capacity available, within the limits of the actual underlying hardware\. 
-+ **ECU** – The relative measure of the integer processing power of an Amazon EC2 instance\. To make it easy for developers to compare CPU capacity between different instance classes, we have defined an Amazon EC2 Compute Unit\. The amount of CPU that is allocated to a particular instance is expressed in terms of these EC2 Compute Units\. One ECU currently provides CPU capacity equivalent to a 1\.0–1\.2 GHz 2007 Opteron or 2007 Xeon processor\. 
-+ **Memory \(GiB\)** – The RAM, in gibibytes, allocated to the DB instance\. There is often a consistent ratio between memory and vCPU\. As an example, take the db\.r4 instance class, which has a memory to vCPU ratio similar to the db\.r5 instance class\. However, for most use cases the db\.r5 instance class provides better, more consistent performance than the db\.r4 instance class\. 
-+ **Max\. Bandwidth \(Mbps\)** – The maximum bandwidth in megabits per second\. Divide by 8 to get the expected throughput in megabytes per second\. 
-**Note**  
-This figure refers to I/O bandwidth for local storage within the DB instance\. It doesn't apply to communication with the Aurora cluster volume\.
-+ **Network Performance** – The network speed relative to other DB instance classes\. 
-
-## Hardware Specifications for All Available DB Instance Classes for Aurora<a name="Concepts.DBInstanceClass.SummaryAurora"></a>
-
-In the following table, you can find details about the Amazon RDS DB instance classes available for Amazon Aurora\. For a more detailed explanation of the table column terminology, see [Terminology for DB Instance Class Hardware Specifications](#Concepts.DBInstanceClass.Terminology)\. 
+## Supported DB Engines for DB Instance Classes<a name="Concepts.DBInstanceClass.SupportAurora"></a>
 
 The following are DB engine considerations for DB instance classes:
 + **Aurora Support for db\.r5** – These instance classes are available in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
@@ -71,40 +60,104 @@ The following are DB engine considerations for DB instance classes:
     + The db\.t3\.medium instance class is supported for versions compatible with PostgreSQL 10\.7 or later\. These instance classes are available for Aurora PostgreSQL in all Aurora regions except China \(Ningxia\)\. 
     + The db\.t3\.large instance class is supported for versions compatible with PostgreSQL versions 10\.11 or later and 11\.6 or later\.
 
+In the following table, you can find details about supported Amazon Aurora DB instance classes for the Aurora DB engines\. 
+
 
 ****  
 
-| Instance Class | vCPU | ECU | Memory \(GiB\) | Max\. Bandwidth \(Mbps\) of Local Storage | Network Performance | Aurora MySQL | Aurora PostgreSQL | 
-| --- | --- | --- | --- | --- | --- | --- | --- | 
+| Instance Class | Aurora MySQL | Aurora PostgreSQL | 
+| --- | --- | --- | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
-| db\.r5\.24xlarge | 96 | 347 | 768 | 19,000 | 25 Gbps | 1\.22 and later, 2\.06 and later | Yes | 
-| db\.r5\.16xlarge | 64 | 264 | 512 | 13,600 | 20 Gbps | 1\.22 and later, 2\.06 and later | Yes | 
-| db\.r5\.12xlarge | 48 | 173 | 384 | 9,500 | 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r5\.8xlarge | 32 | 132 | 256 | 6,800 | 10 Gbps | 1\.22 and later, 2\.06 and later | Yes | 
-| db\.r5\.4xlarge | 16 | 71 | 128 | 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r5\.2xlarge | 8 | 38 | 64 | Up to 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r5\.xlarge | 4 | 19 | 32 | Up to 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r5\.large | 2 | 10 | 16 | Up to 4,750 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r5\.24xlarge | 1\.22 and later, 2\.06 and later | Yes | 
+| db\.r5\.16xlarge | 1\.22 and later, 2\.06 and later | Yes | 
+| db\.r5\.12xlarge | 1\.14\.4 and later | Yes | 
+| db\.r5\.8xlarge | 1\.22 and later, 2\.06 and later | Yes | 
+| db\.r5\.4xlarge | 1\.14\.4 and later | Yes | 
+| db\.r5\.2xlarge | 1\.14\.4 and later | Yes | 
+| db\.r5\.xlarge | 1\.14\.4 and later | Yes | 
+| db\.r5\.large | 1\.14\.4 and later | Yes | 
 | db\.r4 – Current Generation Memory Optimized Instance Classes | 
-| db\.r4\.16xlarge | 64 | 195 | 488 | 14,000 | 25 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r4\.8xlarge | 32 | 99 | 244 | 7,000 | 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r4\.4xlarge | 16 | 53 | 122 | 3,500 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r4\.2xlarge | 8 | 27 | 61 | 1,700 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | 850 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
-| db\.r4\.large | 2 | 7 | 15\.25 | 425 | Up to 10 Gbps | 1\.14\.4 and later | Yes | 
+| db\.r4\.16xlarge | 1\.14\.4 and later | Yes | 
+| db\.r4\.8xlarge | 1\.14\.4 and later | Yes | 
+| db\.r4\.4xlarge | 1\.14\.4 and later | Yes | 
+| db\.r4\.2xlarge | 1\.14\.4 and later | Yes | 
+| db\.r4\.xlarge | 1\.14\.4 and later | Yes | 
+| db\.r4\.large | 1\.14\.4 and later | Yes | 
 | db\.r3 – Previous Generation Memory Optimized Instance Classes | 
-| db\.r3\.8xlarge | 32 | 104 | 244 | — | 10 Gbps | Yes | No | 
-| db\.r3\.4xlarge | 16 | 52 | 122 | 2,000 | High | Yes | No | 
-| db\.r3\.2xlarge | 8 | 26 | 61 | 1,000 | High | Yes | No | 
-| db\.r3\.xlarge | 4 | 13 | 30\.5 | 500 | Moderate | Yes | No | 
-| db\.r3\.large | 2 | 6\.5 | 15\.25 | — | Moderate | Yes | No | 
+| db\.r3\.8xlarge | Yes | No | 
+| db\.r3\.4xlarge | Yes | No | 
+| db\.r3\.2xlarge | Yes | No | 
+| db\.r3\.xlarge | Yes | No | 
+| db\.r3\.large | Yes | No | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
-| db\.t3\.2xlarge | 8 | Variable | 32 | Up to 2,048 | Up to 5 Gbps | No | No | 
-| db\.t3\.xlarge | 4 | Variable | 16 | Up to 2,048 | Up to 5 Gbps | No | No | 
-| db\.t3\.large | 2 | Variable | 8 | Up to 2,048 | Up to 5 Gbps | No | 10\.11 or later and 11\.6 or later | 
-| db\.t3\.medium | 2 | Variable | 4 | Up to 1,536 | Up to 5 Gbps | 1\.14\.4 and later | 10\.7 or later | 
-| db\.t3\.small | 2 | Variable | 2 | Up to 1,536 | Up to 5 Gbps | 1\.14\.4 and later | No | 
-| db\.t3\.micro | 2 | Variable | 1 | Up to 1,536 | Up to 5 Gbps | No | No | 
+| db\.t3\.2xlarge | No | No | 
+| db\.t3\.xlarge | No | No | 
+| db\.t3\.large | No | 10\.11 or later and 11\.6 or later | 
+| db\.t3\.medium | 1\.14\.4 and later | 10\.7 or later | 
+| db\.t3\.small | 1\.14\.4 and later | No | 
+| db\.t3\.micro | No | No | 
 | db\.t2 – Current Generation Burstable Performance Instance Classes | 
-| db\.t2\.medium | 2 | Variable | 4 | — | Moderate | Yes | No | 
-| db\.t2\.small | 1 | Variable | 2 | — | Low | Yes | No | 
+| db\.t2\.medium | Yes | No | 
+| db\.t2\.small | Yes | No | 
+
+## Hardware Specifications for DB Instance Classes for Aurora<a name="Concepts.DBInstanceClass.Summary"></a>
+
+The following terminology is used to describe hardware specifications for DB instance classes:
+
+**vCPU**  
+The number of virtual central processing units \(CPUs\)\. A *virtual CPU *is a unit of capacity that you can use to compare DB instance classes\. Instead of purchasing or leasing a particular processor to use for several months or years, you are renting capacity by the hour\. Our goal is to make a consistent and specific amount of CPU capacity available, within the limits of the actual underlying hardware\.
+
+**ECU**  
+The relative measure of the integer processing power of an Amazon EC2 instance\. To make it easy for developers to compare CPU capacity between different instance classes, we have defined an Amazon EC2 Compute Unit\. The amount of CPU that is allocated to a particular instance is expressed in terms of these EC2 Compute Units\. One ECU currently provides CPU capacity equivalent to a 1\.0–1\.2 GHz 2007 Opteron or 2007 Xeon processor\.
+
+**Memory \(GiB\)**  
+The RAM, in gibibytes, allocated to the DB instance\. There is often a consistent ratio between memory and vCPU\. As an example, take the db\.r4 instance class, which has a memory to vCPU ratio similar to the db\.r5 instance class\. However, for most use cases the db\.r5 instance class provides better, more consistent performance than the db\.r4 instance class\. 
+
+**Max\. Bandwidth \(Mbps\)**  
+The maximum bandwidth in megabits per second\. Divide by 8 to get the expected throughput in megabytes per second\.   
+This figure refers to I/O bandwidth for local storage within the DB instance\. It doesn't apply to communication with the Aurora cluster volume\.
+
+**Network Performance**  
+The network speed relative to other DB instance classes\.
+
+In the following table, you can find hardware details about the Amazon RDS DB instance classes for Aurora\. 
+
+For information about Aurora DB engine support for each DB instance class, see [Supported DB Engines for DB Instance Classes](#Concepts.DBInstanceClass.SupportAurora)\. 
+
+
+****  
+
+| Instance Class | vCPU | ECU | Memory \(GiB\) | Max\. Bandwidth \(Mbps\) of Local Storage | Network Performance | 
+| --- | --- | --- | --- | --- | --- | 
+| db\.r5 – Latest Generation Memory Optimized Instance Classes | 
+| db\.r5\.24xlarge | 96 | 347 | 768 | 19,000 | 25 Gbps | 
+| db\.r5\.16xlarge | 64 | 264 | 512 | 13,600 | 20 Gbps | 
+| db\.r5\.12xlarge | 48 | 173 | 384 | 9,500 | 10 Gbps | 
+| db\.r5\.8xlarge | 32 | 132 | 256 | 6,800 | 10 Gbps | 
+| db\.r5\.4xlarge | 16 | 71 | 128 | 4,750 | Up to 10 Gbps | 
+| db\.r5\.2xlarge | 8 | 38 | 64 | Up to 4,750 | Up to 10 Gbps | 
+| db\.r5\.xlarge | 4 | 19 | 32 | Up to 4,750 | Up to 10 Gbps | 
+| db\.r5\.large | 2 | 10 | 16 | Up to 4,750 | Up to 10 Gbps | 
+| db\.r4 – Current Generation Memory Optimized Instance Classes | 
+| db\.r4\.16xlarge | 64 | 195 | 488 | 14,000 | 25 Gbps | 
+| db\.r4\.8xlarge | 32 | 99 | 244 | 7,000 | 10 Gbps | 
+| db\.r4\.4xlarge | 16 | 53 | 122 | 3,500 | Up to 10 Gbps | 
+| db\.r4\.2xlarge | 8 | 27 | 61 | 1,700 | Up to 10 Gbps | 
+| db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | 850 | Up to 10 Gbps | 
+| db\.r4\.large | 2 | 7 | 15\.25 | 425 | Up to 10 Gbps | 
+| db\.r3 – Previous Generation Memory Optimized Instance Classes | 
+| db\.r3\.8xlarge | 32 | 104 | 244 | — | 10 Gbps | 
+| db\.r3\.4xlarge | 16 | 52 | 122 | 2,000 | High | 
+| db\.r3\.2xlarge | 8 | 26 | 61 | 1,000 | High | 
+| db\.r3\.xlarge | 4 | 13 | 30\.5 | 500 | Moderate | 
+| db\.r3\.large | 2 | 6\.5 | 15\.25 | — | Moderate | 
+| db\.t3 – Latest Generation Burstable Performance Instance Classes | 
+| db\.t3\.2xlarge | 8 | Variable | 32 | Up to 2,048 | Up to 5 Gbps | 
+| db\.t3\.xlarge | 4 | Variable | 16 | Up to 2,048 | Up to 5 Gbps | 
+| db\.t3\.large | 2 | Variable | 8 | Up to 2,048 | Up to 5 Gbps | 
+| db\.t3\.medium | 2 | Variable | 4 | Up to 1,536 | Up to 5 Gbps | 
+| db\.t3\.small | 2 | Variable | 2 | Up to 1,536 | Up to 5 Gbps | 
+| db\.t3\.micro | 2 | Variable | 1 | Up to 1,536 | Up to 5 Gbps | 
+| db\.t2 – Current Generation Burstable Performance Instance Classes | 
+| db\.t2\.medium | 2 | Variable | 4 | — | Moderate | 
+| db\.t2\.small | 1 | Variable | 2 | — | Low | 

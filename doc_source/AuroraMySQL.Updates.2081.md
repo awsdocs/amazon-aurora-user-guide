@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2020\-05\-28 \(Version 2\.08\.1\)<a name="AuroraMySQL.Updates.2081"></a>
+# Aurora MySQL Database Engine Updates 2020\-06\-18 \(Version 2\.08\.1\)<a name="AuroraMySQL.Updates.2081"></a>
 
 **Version:** 2\.08\.1
 

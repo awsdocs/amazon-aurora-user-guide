@@ -139,7 +139,7 @@ The following are usage examples for the `aurora_oom_response` parameter:
 + `print` – Only prints the queries taking high amount of memory\.
 + `tune` – Tunes the internal table caches to release some memory back to the system\.
 + `decline` – Declines new queries once the instance is low on memory\.
-+ `kill_query` – Kills the queries in descending order of memory consumption until the instance memory surfaces above the low threshold\. Data definition language \(DDL\) statements aren't killed\.
++ `kill_query` – Ends the queries in descending order of memory consumption until the instance memory surfaces above the low threshold\. Data definition language \(DDL\) statements aren't ended\.
 + `print, tune` – Performs actions described for both `print` and `tune`\.
 + `tune, decline, kill_query` – Performs the actions described for `tune`, `decline`, and `kill_query`\.
 
@@ -152,24 +152,24 @@ Some MySQL replication issues also apply to Aurora MySQL\. You can diagnose and 
 **Topics**
 + [Diagnosing and Resolving Lag Between Read Replicas](#CHAP_Troubleshooting.MySQL.ReplicaLag)
 + [Diagnosing and Resolving a MySQL Read Replication Failure](#CHAP_Troubleshooting.MySQL.RR)
-+ [Slave Down or Disabled Error](#CHAP_Troubleshooting.MySQL.SlaveDown)
++ [Replication Stopped Error](#CHAP_Troubleshooting.MySQL.ReplicationStopped)
 
 ### Diagnosing and Resolving Lag Between Read Replicas<a name="CHAP_Troubleshooting.MySQL.ReplicaLag"></a>
 
 After you create a MySQL read replica and the replica is available, Amazon RDS first replicates the changes made to the source DB instance from the time the read replica create operation started\. During this phase, the replication lag time for the read replica is greater than 0\. You can monitor this lag time in Amazon CloudWatch by viewing the Amazon RDS `AuroraBinlogReplicaLag` metric\.
 
-The `AuroraBinlogReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the MySQL `SHOW SLAVE STATUS` command\. For more information, see [SHOW SLAVE STATUS](http://dev.mysql.com/doc/refman/5.6/en/show-slave-status.html)\. When the `AuroraBinlogReplicaLag` metric reaches 0, the replica has caught up to the source DB instance\. If the `AuroraBinlogReplicaLag` metric returns \-1, replication might not be active\. To troubleshoot a replication error, see [Diagnosing and Resolving a MySQL Read Replication Failure](#CHAP_Troubleshooting.MySQL.RR)\. A `AuroraBinlogReplicaLag` value of \-1 can also mean that the `Seconds_Behind_Master` value can't be determined or is `NULL`\.
+The `AuroraBinlogReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the MySQL `SHOW SLAVE STATUS` command\. For more information, see [SHOW SLAVE STATUS](https://dev.mysql.com/doc/refman/8.0/en/show-slave-status.html)\. When the `AuroraBinlogReplicaLag` metric reaches 0, the replica has caught up to the source DB instance\. If the `AuroraBinlogReplicaLag` metric returns \-1, replication might not be active\. To troubleshoot a replication error, see [Diagnosing and Resolving a MySQL Read Replication Failure](#CHAP_Troubleshooting.MySQL.RR)\. A `AuroraBinlogReplicaLag` value of \-1 can also mean that the `Seconds_Behind_Master` value can't be determined or is `NULL`\.
 
 The `AuroraBinlogReplicaLag` metric returns \-1 during a network outage or when a patch is applied during the maintenance window\. In this case, wait for network connectivity to be restored or for the maintenance window to end before you check the `AuroraBinlogReplicaLag` metric again\.
 
 The MySQL read replication technology is asynchronous\. Thus, you can expect occasional increases for the `BinLogDiskUsage` metric on the source DB instance and for the `AuroraBinlogReplicaLag` metric on the read replica\. For example, consider a situation where a high volume of write operations to the source DB instance occur in parallel\. At the same time, write operations to the read replica are serialized using a single I/O thread\. Such a situation can lead to a lag between the source instance and read replica\. 
 
-For more information about read replicas and MySQL, see [Replication Implementation Details](http://dev.mysql.com/doc/refman/5.5/en/replication-implementation-details.html) in the MySQL documentation\. 
+For more information about read replicas and MySQL, see [Replication Implementation Details](https://dev.mysql.com/doc/refman/8.0/en/replication-implementation-details.html) in the MySQL documentation\. 
 
 You can reduce the lag between updates to a source DB instance and the subsequent updates to the read replica by doing the following:
 + Set the DB instance class of the read replica to have a storage size comparable to that of the source DB instance\.
 + Make sure that parameter settings in the DB parameter groups used by the source DB instance and the read replica are compatible\. For more information and an example, see the discussion of the `max_allowed_packet` parameter in the next section\.
-+ Disable the query cache\. For tables that are modified often, using the query cache can increase replica lag because the cache is locked and refreshed often\. If this is the case, you might see less replica lag if you disable the query cache\. You can disable the query cache by setting the `query_cache_type parameter` to 0 in the DB parameter group for the DB instance\. For more information on the query cache, see [Query Cache Configuration](http://dev.mysql.com/doc/refman/5.6/en/query-cache-configuration.html)\.
++ Disable the query cache\. For tables that are modified often, using the query cache can increase replica lag because the cache is locked and refreshed often\. If this is the case, you might see less replica lag if you disable the query cache\. You can disable the query cache by setting the `query_cache_type parameter` to 0 in the DB parameter group for the DB instance\. For more information on the query cache, see [Query Cache Configuration](https://dev.mysql.com/doc/refman/5.7/en/query-cache-configuration.html)\.
 + Warm the buffer pool on the read replica for InnoDB for MySQL\. For example, suppose that you have a small set of tables that are being updated often and you're using the InnoDB or XtraDB table schema\. In this case, dump those tables on the read replica\. Doing this causes the database engine to scan through the rows of those tables from the disk and then cache them in the buffer pool\. This approach can reduce replica lag\. The following shows an example\.
 
   For Linux, macOS, or Unix:
@@ -196,7 +196,7 @@ You can reduce the lag between updates to a source DB instance and the subsequen
 
 ### Diagnosing and Resolving a MySQL Read Replication Failure<a name="CHAP_Troubleshooting.MySQL.RR"></a>
 
-Amazon RDS monitors the replication status of your read replicas and updates the **Replication State** field of the read replica instance to `Error` if replication stops for any reason\. You can review the details of the associated error thrown by the MySQL engines by viewing the **Replication Error** field\. Events that indicate the status of the read replica are also generated, including [RDS-EVENT-0045](USER_Events.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Using Amazon RDS Event Notification](USER_Events.md)\. If a MySQL error message is returned, check the error in the [MySQL error message documentation](https://dev.mysql.com/doc/refman/5.7/en/server-error-reference.html)\. 
+Amazon RDS monitors the replication status of your read replicas and updates the **Replication State** field of the read replica instance to `Error` if replication stops for any reason\. You can review the details of the associated error thrown by the MySQL engines by viewing the **Replication Error** field\. Events that indicate the status of the read replica are also generated, including [RDS-EVENT-0045](USER_Events.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Using Amazon RDS Event Notification](USER_Events.md)\. If a MySQL error message is returned, check the error in the [MySQL error message documentation](https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html)\. 
 
 Common situations that can cause replication errors include the following:
 + The value for the `max_allowed_packet` parameter for a read replica is less than the `max_allowed_packet` parameter for the source DB instance\. 
@@ -208,7 +208,7 @@ Common situations that can cause replication errors include the following:
   You can convert a MyISAM table to InnoDB with the following command:
 
   `alter table <schema>.<table_name> engine=innodb;`
-+ Using unsafe nondeterministic queries such as `SYSDATE()`\. For more information, see [Determination of Safe and Unsafe Statements in Binary Logging](http://dev.mysql.com/doc/refman/5.5/en/replication-rbr-safe-unsafe.html) in the MySQL documentation\. 
++ Using unsafe nondeterministic queries such as `SYSDATE()`\. For more information, see [Determination of Safe and Unsafe Statements in Binary Logging](https://dev.mysql.com/doc/refman/8.0/en/replication-rbr-safe-unsafe.html) in the MySQL documentation\. 
 
 The following steps can help resolve your replication error: 
 + If you encounter a logical error and you can safely skip the error, follow the steps described in [Skipping the Current Replication Error](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.MySQL.CommonDBATasks.SkipError.html)\. Your Aurora MySQL DB instance must be running a version that includes the `mysql_rds_skip_repl_error` procedure\. For more information, see [mysql\_rds\_skip\_repl\_error](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_skip_repl_error.html)\.
@@ -218,7 +218,7 @@ The following steps can help resolve your replication error:
 
 If a replication error is fixed, the **Replication State** changes to **replicating**\. For more information, see [Troubleshooting a MySQL Read Replica Problem](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.Troubleshooting.html)\.
 
-### Slave Down or Disabled Error<a name="CHAP_Troubleshooting.MySQL.SlaveDown"></a>
+### Replication Stopped Error<a name="CHAP_Troubleshooting.MySQL.ReplicationStopped"></a>
 
 When you call the `mysql.rds_skip_repl_error` command, you might receive the following error message: `Slave is down or disabled.`
 

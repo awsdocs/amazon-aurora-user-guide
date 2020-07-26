@@ -5,7 +5,7 @@ Using Amazon RDS, you can share a manual DB cluster snapshot in the following wa
 + Sharing a manual DB cluster snapshot, whether encrypted or unencrypted, enables authorized AWS accounts to directly restore a DB cluster from the snapshot instead of taking a copy of it and restoring from that\.
 
 **Note**  
-To share an automated DB cluster snapshot, create a manual DB cluster snapshot by copying the automated snapshot, and then share that copy\.
+To share an automated DB cluster snapshot, create a manual DB cluster snapshot by copying the automated snapshot, and then share that copy\. This process also applies to AWS Backup–generated resources\.
 
 For more information on copying a snapshot, see [Copying a DB Cluster Snapshot](USER_CopySnapshot.md)\. For more information on restoring a DB instance from a DB cluster snapshot, see [Restoring from a DB Cluster Snapshot](USER_RestoreFromSnapshot.md)\.
 
