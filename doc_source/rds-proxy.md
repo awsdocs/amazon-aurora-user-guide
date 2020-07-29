@@ -292,7 +292,7 @@ aws secretsmanager create-secret \
    }
    ```
 
-1.  Edit the trust policy for this IAM policy\. Paste the following JSON into the JSON text box\. 
+1.  Edit the trust policy for this IAM role\. Paste the following JSON into the JSON text box\. 
 
    ```
    {
