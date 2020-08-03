@@ -1,6 +1,10 @@
 # Working with DB Parameter Groups and DB Cluster Parameter Groups<a name="USER_WorkingWithParamGroups"></a>
 
- You manage your DB engine configuration by associating your DB instances and Aurora clusters with parameter groups\. Amazon RDS defines parameter groups with default settings that apply to newly created DB instances and Aurora clusters\. You can define your own parameter groups with customized settings\. Then you can modify your DB instances and Aurora clusters to use your own parameter groups\. 
+ You manage your DB engine configuration by associating your DB instances and Aurora DB clusters with parameter groups\. Amazon RDS defines parameter groups with default settings that apply to newly created DB instances and Aurora DB clusters\. 
+
+**Important**  
+You can define your own parameter groups with customized settings\. Then you can modify your DB instances and Aurora clusters to use your own parameter groups\.  
+For information about modifying a DB cluster or DB instance, see [Modifying an Amazon Aurora DB Cluster](Aurora.Modifying.md)\.
 
  A *DB parameter group* acts as a container for engine configuration values that are applied to one or more DB instances\. DB parameter groups apply to DB instances in both Amazon RDS and Aurora\. These configuration settings apply to properties that can vary among the DB instances within an Aurora cluster, such as the sizes for memory buffers\. 
 

@@ -71,7 +71,7 @@ lambda_sync (
 
 **Note**  
 You can use triggers to call Lambda on data\-modifying statements\. Remember that triggers are not run once per SQL statement, but once per row modified, one row at a time\. When a trigger runs, the process is synchronous\. The data\-modifying statement only returns when the trigger completes\.  
-Be careful when invoking an AWS Lambda function from triggers on tables that experience high write traffic\. INSERT, UPDATE, and DELETE triggers are activated per row\. A write\-heavy workload on a table with INSERT, UPDATE, or DELETE triggers results in a large number of calls to your AWS Lambda function\. 
+Be careful when invoking an AWS Lambda function from triggers on tables that experience high write traffic\. `INSERT`, `UPDATE`, and `DELETE` triggers are activated per row\. A write\-heavy workload on a table with `INSERT`, `UPDATE`, or `DELETE` triggers results in a large number of calls to your AWS Lambda function\. 
 
 #### Parameters for the lambda\_sync Function<a name="AuroraMySQL.Integrating.NativeLambda.lambda_functions.Sync.Parameters"></a>
 
@@ -175,7 +175,7 @@ The input string, in JSON format, for the invoked Lambda function\.
 As a best practice, we recommend that you wrap calls to the `mysql.lambda_async` procedure in a stored procedure that can be called from different sources such as triggers or client code\. This approach can help to avoid impedance mismatch issues and make it easier to invoke Lambda functions\. 
 
 **Note**  
-Be careful when invoking an AWS Lambda function from triggers on tables that experience high write traffic\. INSERT, UPDATE, and DELETE triggers are activated per row\. A write\-heavy workload on a table with INSERT, UPDATE, or DELETE triggers results in a large number of calls to your AWS Lambda function\.   
+Be careful when invoking an AWS Lambda function from triggers on tables that experience high write traffic\. `INSERT`, `UPDATE`, and `DELETE` triggers are activated per row\. A write\-heavy workload on a table with `INSERT`, `UPDATE`, or `DELETE` triggers results in a large number of calls to your AWS Lambda function\.   
 Although calls to the `mysql.lambda_async` procedure are asynchronous, triggers are synchronous\. A statement that results in a large number of trigger activations doesn't wait for the call to the AWS Lambda function to complete, but it does wait for the triggers to complete before returning control to the client\.
 
 **Example Example: Invoke an AWS Lambda Function to Send Email**  

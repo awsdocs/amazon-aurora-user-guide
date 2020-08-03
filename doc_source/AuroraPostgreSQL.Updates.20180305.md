@@ -129,9 +129,22 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.6\. For more
 This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 11 engines to this release\.
 
 **Topics**
++ [Version 3\.1\.3](#AuroraPostgreSQL.Updates.20180305.313)
 + [Version 3\.1\.2](#AuroraPostgreSQL.Updates.20180305.312)
 + [Version 3\.1\.1](#AuroraPostgreSQL.Updates.20180305.311)
 + [Version 3\.1\.0](#AuroraPostgreSQL.Updates.20180305.310)
+
+### Version 3\.1\.3<a name="AuroraPostgreSQL.Updates.20180305.313"></a>
+
+**Critical Stability Enhancements**
++ None 
+
+**High Priority Stability Enhancements**
+
+1. Fixed a bug where reads from storage might stop responding due to incorrect error handling\.
+
+**Additional Improvements and Enhancements**
++ None
 
 ### Version 3\.1\.2<a name="AuroraPostgreSQL.Updates.20180305.312"></a>
 
@@ -398,9 +411,22 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.11\. For mor
 This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 10 engines to this release\.
 
 **Topics**
++ [Version 2\.4\.3](#AuroraPostgreSQL.Updates.20180305.243)
 + [Version 2\.4\.2](#AuroraPostgreSQL.Updates.20180305.242)
 + [Version 2\.4\.1](#AuroraPostgreSQL.Updates.20180305.241)
 + [Version 2\.4\.0](#AuroraPostgreSQL.Updates.20180305.240)
+
+### Version 2\.4\.3<a name="AuroraPostgreSQL.Updates.20180305.243"></a>
+
+**Critical Stability Enhancements**
++ None 
+
+**High Priority Stability Enhancements**
+
+1. Fixed a bug where reads from storage might stop responding due to incorrect error handling\.
+
+**Additional Improvements and Enhancements**
++ None
 
 ### Version 2\.4\.2<a name="AuroraPostgreSQL.Updates.20180305.242"></a>
 
@@ -864,9 +890,22 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.16\. For m
 This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 9\.6 engines to this release\.
 
 **Topics**
++ [Version 1\.6\.3](#AuroraPostgreSQL.Updates.20180305.163)
 + [Version 1\.6\.2](#AuroraPostgreSQL.Updates.20180305.162)
 + [Version 1\.6\.1](#AuroraPostgreSQL.Updates.20180305.161)
 + [Version 1\.6\.0](#AuroraPostgreSQL.Updates.20180305.160)
+
+### Version 1\.6\.3<a name="AuroraPostgreSQL.Updates.20180305.163"></a>
+
+**Critical Stability Enhancements**
++ None 
+
+**High Priority Stability Enhancements**
+
+1. Fixed a bug where reads from storage might stop responding due to incorrect error handling\.
+
+**Additional Improvements and Enhancements**
++ None
 
 ### Version 1\.6\.2<a name="AuroraPostgreSQL.Updates.20180305.162"></a>
 

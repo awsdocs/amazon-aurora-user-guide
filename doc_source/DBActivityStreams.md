@@ -4,15 +4,14 @@ Monitoring your database activity can help you provide safeguards for your datab
 
 Beyond external security threats, managed databases need to provide protection against insider risks from database administrators \(DBAs\)\. Database activity streams help protect your databases from internal threats by controlling DBA access to the database activity streams\. Thus, the collection, transmission, storage, and subsequent processing of the stream of database activity is beyond the access of the DBAs that manage the database\. 
 
-A stream of database activity is pushed from Aurora to an Amazon Kinesis data stream that is created on behalf of your Aurora DB cluster\. From Kinesis, the activity stream can then be consumed by AWS services such as Amazon Kinesis Data Firehose and AWS Lambda, or by applications for compliance management\. For database activity streams with Aurora PostgreSQL, these compliance applications include IBM's Infosphere Guardium, McAfee's Data Center Security Suite, and Imperva's SecureSphere Database Audit and Protection\. Such applications can use the activity stream information to generate alerts and provide auditing of all activity on your Aurora DB clusters\.
+A stream of database activity is pushed from Aurora to an Amazon Kinesis data stream that is created on behalf of your Aurora DB cluster\. From Kinesis, the activity stream can then be consumed by AWS services such as Amazon Kinesis Data Firehose and AWS Lambda, or by applications for compliance management\. For database activity streams with Aurora PostgreSQL, these compliance applications include IBM's Security Guardium, McAfee's Data Center Security Suite, and Imperva's SecureSphere Database Audit and Protection\. Such applications can use the activity stream information to generate alerts and provide auditing of all activity on your Aurora DB clusters\.
 
 **Tip**  
  Check the website for the particular application that you want to use with database activity streams\. Confirm support for the specific Aurora DB engine and engine version that you intend to use\. 
 
 Database activity streams have the following limits and requirements:
-+ Currently, database activity streams are supported with the following Aurora with PostgreSQL compatibility and Aurora MySQL versions\.
-  +  For Aurora PostgreSQL, database activity streams require version 2\.3, which is compatible with PostgreSQL version 10\.7\. 
-  +  For Aurora MySQL, database activity streams require version 2\.08 or higher, which is compatible with MySQL version 5\.7\. 
++ For Aurora PostgreSQL, database activity streams are supported for version 2\.3 or higher and versions 3\.0 or higher\. For PostgreSQL version compatibility, see [Engine Versions for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.20180305.md)\. 
++ For Aurora MySQL, database activity streams are supported for version 2\.08 or higher, which is compatible with MySQL version 5\.7\. 
 + Database activity streams support the DB instance classes listed for Aurora in [Supported DB Engines for DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora), with some exceptions:
   +  For Aurora PostgreSQL, you can't use streams with the db\.t3\.medium instance class\. 
   +  For Aurora MySQL, you can't use streams with any of the db\.t2 or db\.t3 instance classes\.

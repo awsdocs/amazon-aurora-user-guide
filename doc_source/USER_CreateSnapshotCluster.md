@@ -2,6 +2,10 @@
 
 Amazon RDS creates a storage volume snapshot of your DB cluster, backing up the entire DB cluster and not just individual databases\. When you create a DB cluster snapshot, you need to identify which DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\. The amount of time it takes to create a DB cluster snapshot varies with the size your databases\. Since the snapshot includes the entire storage volume, the size of files, such as temporary files, also affects the amount of time it takes to create the snapshot\.
 
+Unlike automated backups, manual snapshots aren't subject to the backup retention period\. Snapshots don't expire\.
+
+For very long\-term backups, we recommend exporting snapshot data to Amazon S3\. If the major version of your DB engine is no longer supported, you can't restore to that version from a snapshot\. For more information, see [Exporting DB Snapshot Data to Amazon S3](USER_ExportSnapshot.md)\.
+
 **Note**  
  Amazon bills you based upon the amount of Aurora backup and snapshot data you keep and the period of time that you keep it\. For information about the storage associated with Aurora backups and snapshots, see [Understanding Aurora Backup Storage Usage](aurora-storage-backup.md)\. For pricing information about Aurora storage, see [Amazon RDS for Aurora Pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
 
