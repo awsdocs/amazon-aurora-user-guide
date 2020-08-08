@@ -26,4 +26,4 @@ To get the database engine version number for an Aurora PostgreSQL DB instance, 
 SHOW SERVER_VERSION;
 ```
 
-To see which Aurora version number maps to which PostgreSQL engine version number, see [](AuroraPostgreSQL.Updates.20180305.md)\.
+To see which Aurora version number maps to which PostgreSQL engine version number, see [Engine Versions for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.20180305.md)\.

@@ -202,6 +202,9 @@ When you use an Amazon VPC endpoint in a Data API call, all traffic between your
 
 After you enable the Data API for an Aurora Serverless DB cluster, you can call the Data API or the AWS CLI to run SQL statements on the DB cluster\. The Data API supports the programming languages supported by the AWS SDK\. For more information, see [ Tools to Build on AWS](https://aws.amazon.com/tools/)\.
 
+**Note**  
+Currently, the Data API doesn't support arrays of Universal Unique Identifiers \(UUIDs\)\.
+
 The Data API provides the following operations to perform SQL statements\.
 
 
@@ -255,7 +258,7 @@ For some specific types, such as `DECIMAL` or `TIME`, a hint might be required t
 + `DATE` – The corresponding `String` parameter value is sent as an object of `DATE` type to the database\. The accepted format is `YYYY-MM-DD`\.
 
 **Note**  
-Currently, the Data API doesn't support arrays of Universal Unique Identifiers \(UUIDs\)\.
+ For Amazon Aurora PostgreSQL, the Data API always returns the Aurora PostgreSQL datatype `TIMESTAMPTZ` in UTC timezone\.
 
 **Topics**
 + [Calling the Data API with the AWS CLI](#data-api.calling.cli)
@@ -340,7 +343,8 @@ In addition to the common options, specify the following options:
 The DB cluster returns a response for the call\.
 
 **Note**  
-The response size limit is 1 MB\. If the call returns more than 1 MB of response data, the call is terminated\.
+The response size limit is 1 MB\. If the call returns more than 1 MB of response data, the call is terminated\.  
+The maximum number of requests per second is 1,000\.
 
 For example, the following CLI command runs a single SQL statement and omits the metadata in the results \(the default\)\.
 
@@ -497,7 +501,8 @@ In addition to the common options, specify the following options:
 The DB cluster returns a response to the call\.
 
 **Note**  
-The response size limit is 1 MB\. If the call returns more than 1 MB of response data, the call is terminated\.
+The response size limit is 1 MB\. If the call returns more than 1 MB of response data, the call is terminated\.  
+The maximum number of requests per second is 1,000\.
 
 For example, the following CLI command runs a batch SQL statement over an array of data with a parameter set\.
 

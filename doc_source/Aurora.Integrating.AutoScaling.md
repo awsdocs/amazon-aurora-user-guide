@@ -77,6 +77,9 @@ Scale\-out activities are always enabled so that the scaling policy can create A
 
 You can add a scaling policy using the AWS Management Console, the AWS CLI, or the Application Auto Scaling API\.
 
+**Note**  
+For an example that adds a scaling policy using AWS CloudFormation, see [Declaring a scaling policy for an Aurora DB cluster](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html#w2ab1c19c22c15c21c11) in the *AWS CloudFormation User Guide\.*
+
 **Topics**
 + [Adding a Scaling Policy Using the AWS Management Console](#Aurora.Integrating.AutoScaling.AddConsole)
 + [Adding a Scaling Policy Using the AWS CLI or the Application Auto Scaling API](#Aurora.Integrating.AutoScaling.AddCode)

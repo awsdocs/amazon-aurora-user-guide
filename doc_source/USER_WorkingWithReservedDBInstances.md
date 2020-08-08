@@ -51,7 +51,9 @@ You can compare usage for different reserved DB instance sizes by using normaliz
 | 4xlarge | 32 | 64 | 
 | 8xlarge | 64 | 128 | 
 | 10xlarge | 80 | 160 | 
+| 12xlarge | 96 | 192 | 
 | 16xlarge | 128 | 256 | 
+| 24xlarge | 192 | 384 | 
 
 For example, suppose that you purchase a `db.t2.medium` reserved DB instance, and you have two running `db.t2.small` DB instances in your account in the same AWS Region\. In this case, the billing benefit is applied in full to both instances\. 
 
