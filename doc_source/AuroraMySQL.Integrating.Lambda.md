@@ -49,13 +49,13 @@ The `lambda_sync` and `lambda_async` functions are built\-in, native functions t
 The user invoking a native function must be granted the `INVOKE LAMBDA` privilege\. To grant this privilege to a user, connect to the DB instance as the master user, and run the following statement\.
 
 ```
-GRANT INVOKE LAMBDA ON *.* TO user@domain-or-ip-address                
+GRANT INVOKE LAMBDA ON *.* TO user@domain-or-ip-address
 ```
 
 You can revoke this privilege by running the following statement\.
 
 ```
-REVOKE INVOKE LAMBDA ON *.* FROM user@domain-or-ip-address               
+REVOKE INVOKE LAMBDA ON *.* FROM user@domain-or-ip-address
 ```
 
 #### Syntax for the lambda\_sync Function<a name="AuroraMySQL.Integrating.NativeLambda.lambda_functions.Sync.Syntax"></a>
@@ -92,7 +92,7 @@ The following query based on `lambda_sync` invokes the Lambda function `BasicTes
 
 ```
 SELECT lambda_sync(
-    'arn:aws:lambda:us-east-1:868710585169:function:BasicTestLambda', 
+    'arn:aws:lambda:us-east-1:868710585169:function:BasicTestLambda',
     '{"operation": "ping"}');
 ```
 
@@ -126,7 +126,7 @@ The following query based on `lambda_async` invokes the Lambda function `BasicTe
 
 ```
 SELECT lambda_async(
-    'arn:aws:lambda:us-east-1:868710585169:function:BasicTestLambda', 
+    'arn:aws:lambda:us-east-1:868710585169:function:BasicTestLambda',
     '{"operation": "ping"}');
 ```
 
@@ -214,20 +214,20 @@ def SES_send_email(event, context):
 ```
 DROP PROCEDURE IF EXISTS SES_send_email;
 DELIMITER ;;
-	CREATE PROCEDURE SES_send_email(IN email_from VARCHAR(255), 
-	                                IN email_to VARCHAR(255), 
-	                                IN subject VARCHAR(255), 
-	                                IN body TEXT) LANGUAGE SQL 
-	BEGIN
-		CALL mysql.lambda_async(
-	       'arn:aws:lambda:us-west-2:123456789012:function:SES_send_email',
-	       CONCAT('{"email_to" : "', email_to, 
-	           '", "email_from" : "', email_from, 
-	           '", "email_subject" : "', subject, 
-	           '", "email_body" : "', body, '"}')
-	   );
-	END
-	;;
+  CREATE PROCEDURE SES_send_email(IN email_from VARCHAR(255),
+                                  IN email_to VARCHAR(255),
+                                  IN subject VARCHAR(255),
+                                  IN body TEXT) LANGUAGE SQL
+  BEGIN
+    CALL mysql.lambda_async(
+         'arn:aws:lambda:us-west-2:123456789012:function:SES_send_email',
+         CONCAT('{"email_to" : "', email_to,
+             '", "email_from" : "', email_from,
+             '", "email_subject" : "', subject,
+             '", "email_body" : "', body, '"}')
+     );
+  END
+  ;;
 DELIMITER ;
 ```
 **Call the Stored Procedure to Invoke the AWS Lambda Function**  
@@ -246,7 +246,7 @@ import boto3
 sns = boto3.client('sns')
 
 def SNS_publish_message(event, context):
-    
+
     return sns.publish(
         TopicArn='arn:aws:sns:us-west-2:123456789012:Sample_Topic',
         Message=event['message'],
@@ -259,11 +259,11 @@ def SNS_publish_message(event, context):
 ```
 DROP PROCEDURE IF EXISTS SNS_Publish_Message;
 DELIMITER ;;
-CREATE PROCEDURE SNS_Publish_Message (IN subject VARCHAR(255), 
-                                      IN message TEXT) LANGUAGE SQL 
+CREATE PROCEDURE SNS_Publish_Message (IN subject VARCHAR(255),
+                                      IN message TEXT) LANGUAGE SQL
 BEGIN
-  CALL mysql.lambda_async('arn:aws:lambda:us-west-2:123456789012:function:SNS_publish_message', 
-     CONCAT('{ "subject" : "', subject, 
+  CALL mysql.lambda_async('arn:aws:lambda:us-west-2:123456789012:function:SNS_publish_message',
+     CONCAT('{ "subject" : "', subject,
             '", "message" : "', message, '" }')
      );
 END
@@ -284,8 +284,8 @@ CREATE TABLE 'Customer_Feedback' (
 
 ```
 DELIMITER ;;
-CREATE TRIGGER TR_Customer_Feedback_AI 
-  AFTER INSERT ON Customer_Feedback 
+CREATE TRIGGER TR_Customer_Feedback_AI
+  AFTER INSERT ON Customer_Feedback
   FOR EACH ROW
 BEGIN
   SELECT CONCAT('New customer feedback from ', NEW.customer_name), NEW.customer_feedback INTO @subject, @feedback;

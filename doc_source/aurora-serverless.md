@@ -5,6 +5,8 @@
 **Note**  
  A non\-Serverless DB cluster for Aurora is called a *provisioned DB cluster*\. Aurora Serverless clusters and provisioned clusters both have the same kind of high\-capacity, distributed, and highly available storage volume\. 
 
+For information on Aurora Serverless pricing, see [Serverless Pricing](https://aws.amazon.com/rds/aurora/pricing/) under either **MySQL\-Compatible Edition** or **PostgreSQL\-Compatible Edition**\.
+
 **Topics**
 + [Advantages of Aurora Serverless](#aurora-serverless.advantages)
 + [Use Cases for Aurora Serverless](#aurora-serverless.use-cases)
@@ -80,7 +82,7 @@ The following limitations apply to Aurora Serverless:
   + [Saving data to an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)
   + [Invoking an AWS Lambda function with an Aurora MySQL native function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)
   + [Aurora Replicas](AuroraMySQL.Replication.md)
-  + [Backtrack](AuroraMySQL.Managing.Backtrack.md)
+  + [Backtracking](AuroraMySQL.Managing.Backtrack.md)
   + [Multi\-master clusters](aurora-multi-master.md)
   + [Database cloning](Aurora.Managing.Clone.md)
   + [IAM database authentication](UsingWithRDS.IAMDBAuth.md)

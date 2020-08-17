@@ -213,14 +213,14 @@ The following SQL Digest statistics are available for Aurora PostgreSQL DB insta
 | db\.sql\_tokenized\.stats\.calls\_per\_sec | Calls per second | 
 | db\.sql\_tokenized\.stats\.rows\_per\_sec | Rows per second | 
 | db\.sql\_tokenized\.stats\.total\_time\_per\_sec | Average active executions per second \(AAE\) | 
-| db\.sql\_tokenized\.stats\.shared\_blks\_hit\_per\_sec | Bulk hits per second | 
-| db\.sql\_tokenized\.stats\.shared\_blks\_read\_per\_sec | Bulk reads per second | 
-| db\.sql\_tokenized\.stats\.shared\_blks\_dirtied\_per\_sec | Bulk dirty per second | 
-| db\.sql\_tokenized\.stats\.shared\_blks\_written\_per\_sec | Bulk writes per second | 
-| db\.sql\_tokenized\.stats\.local\_blks\_hit\_per\_sec | Local bulk hits per second | 
-| db\.sql\_tokenized\.stats\.local\_blks\_read\_per\_sec | Local bulk reads per second | 
-| db\.sql\_tokenized\.stats\.local\_blks\_dirtied\_per\_sec | Local bulk dirty per second | 
-| db\.sql\_tokenized\.stats\.local\_blks\_written\_per\_sec | Local bulk writes per second | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_hit\_per\_sec | Block hits per second | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_read\_per\_sec | Block reads per second | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_dirtied\_per\_sec | Blocks dirtied per second | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_written\_per\_sec | Block writes per second | 
+| db\.sql\_tokenized\.stats\.local\_blks\_hit\_per\_sec | Local block hits per second | 
+| db\.sql\_tokenized\.stats\.local\_blks\_read\_per\_sec | Local block reads per second | 
+| db\.sql\_tokenized\.stats\.local\_blks\_dirtied\_per\_sec | Local block dirty per second | 
+| db\.sql\_tokenized\.stats\.local\_blks\_written\_per\_sec | Local block writes per second | 
 | db\.sql\_tokenized\.stats\.temp\_blks\_written\_per\_sec | Temporary writes per second | 
 | db\.sql\_tokenized\.stats\.temp\_blks\_read\_per\_sec | Temporary reads per second | 
 | db\.sql\_tokenized\.stats\.blk\_read\_time\_per\_sec | Average concurrent reads per second | 
@@ -233,16 +233,16 @@ The following metrics provide per call statistics for a SQL statement\.
 | --- | --- | 
 | db\.sql\_tokenized\.stats\.rows\_per\_call | Rows per call | 
 | db\.sql\_tokenized\.stats\.avg\_latency\_per\_call | Average latency per call \(in ms\) | 
-| db\.sql\_tokenized\.stats\.shared\_blks\_hit\_per\_call | Bulk hits per call | 
-| db\.sql\_tokenized\.stats\.shared\_blks\_read\_per\_call | Bulk reads per call | 
-| db\.sql\_tokenized\.stats\.shared\_blks\_written\_per\_call | Bulk writes per call | 
-| db\.sql\_tokenized\.stats\.shared\_blks\_dirtied\_per\_call | Bulk dirty per call | 
-| db\.sql\_tokenized\.stats\.local\_blks\_hit\_per\_call | Local bulk hits per call | 
-| db\.sql\_tokenized\.stats\.local\_blks\_read\_per\_call | Local bulk reads per call | 
-| db\.sql\_tokenized\.stats\.local\_blks\_dirtied\_per\_call | Local bulk dirty per call | 
-| db\.sql\_tokenized\.stats\.local\_blks\_written\_per\_call | Local bulk writes per call | 
-| db\.sql\_tokenized\.stats\.temp\_blks\_written\_per\_call | Temporary bulk writes per call | 
-| db\.sql\_tokenized\.stats\.temp\_blks\_read\_per\_call | Temporary bulk reads per call | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_hit\_per\_call | Block hits per call | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_read\_per\_call | Block reads per call | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_written\_per\_call | Block writes per call | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_dirtied\_per\_call | Blocks dirtied per call | 
+| db\.sql\_tokenized\.stats\.local\_blks\_hit\_per\_call | Local block hits per call | 
+| db\.sql\_tokenized\.stats\.local\_blks\_read\_per\_call | Local block reads per call | 
+| db\.sql\_tokenized\.stats\.local\_blks\_dirtied\_per\_call | Local block dirty per call | 
+| db\.sql\_tokenized\.stats\.local\_blks\_written\_per\_call | Local block writes per call | 
+| db\.sql\_tokenized\.stats\.temp\_blks\_written\_per\_call | Temporary block writes per call | 
+| db\.sql\_tokenized\.stats\.temp\_blks\_read\_per\_call | Temporary block reads per call | 
 | db\.sql\_tokenized\.stats\.blk\_read\_time\_per\_call | Read time per call \(in ms\) | 
 | db\.sql\_tokenized\.stats\.blk\_write\_time\_per\_call | Write time per call \(in ms\) | 
 

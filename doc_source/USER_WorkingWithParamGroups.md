@@ -186,7 +186,7 @@ Include the following required parameters:
 To list all of the available parameter group families, use the following command:
 
 ```
-aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily"				
+aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily"
 ```
 
 **Note**  
@@ -212,7 +212,7 @@ aws rds create-db-cluster-parameter-group ^
 This command produces output similar to the following:  
 
 ```
-DBCLUSTERPARAMETERGROUP  mydbclusterparametergroup  mysql5.6  My cluster new parameter group	
+DBCLUSTERPARAMETERGROUP  mydbclusterparametergroup  mysql5.6  My cluster new parameter group  
 ```
 
 ### RDS API<a name="USER_WorkingWithParamGroups.CreatingCluster.API"></a>
@@ -695,8 +695,8 @@ aws rds describe-db-cluster-parameters --db-cluster-parameter-group-name mydbclu
 The command returns a response like the following:  
 
 ```
-PARAMETERS	0,1	pending-reboot	static	boolean	Controls whether user-defined functions that have only an xxx symbol for the main function can be loaded	False	allow-suspicious-udfs		engine-default SUPPORTEDENGINEMODES	provisioned
-PARAMETERS	0,1	pending-reboot	static	boolean	Enables new features in the Aurora engine.	True	aurora_lab_mode	0	engine-default SUPPORTEDENGINEMODES	provisioned
+PARAMETERS  0,1  pending-reboot  static  boolean  Controls whether user-defined functions that have only an xxx symbol for the main function can be loaded  False  allow-suspicious-udfs    engine-default SUPPORTEDENGINEMODES  provisioned
+PARAMETERS  0,1  pending-reboot  static  boolean  Enables new features in the Aurora engine.  True  aurora_lab_mode  0  engine-default SUPPORTEDENGINEMODES  provisioned
 ...
 ```
 

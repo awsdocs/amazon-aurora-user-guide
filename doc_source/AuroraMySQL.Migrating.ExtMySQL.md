@@ -323,7 +323,7 @@ You can synchronize your Amazon Aurora MySQL DB cluster with the MySQL database 
    server-id=2133421
    innodb_flush_log_at_trx_commit=1
    sync_binlog=1
-                               
+   
    # Setup SSL.
    ssl-ca=/home/sslcerts/ca.pem
    ssl-cert=/home/sslcerts/server-cert.pem
@@ -333,13 +333,12 @@ You can synchronize your Amazon Aurora MySQL DB cluster with the MySQL database 
    You can verify that SSL is enabled with the following command\.
 
    ```
-   mysql> show variables like 'have_ssl';                                                            
+   mysql> show variables like 'have_ssl';
    ```
 
    Your output should be similar the following\.
 
    ```
-                            
    +~-~-~-~-~-~-~-~-~-~-~-~-~-~--+~-~-~-~-~-~--+
    | Variable_name | Value |
    +~-~-~-~-~-~-~-~-~-~-~-~-~-~--+~-~-~-~-~-~--+
@@ -374,7 +373,7 @@ You can synchronize your Amazon Aurora MySQL DB cluster with the MySQL database 
    If you need to use encrypted replication, require SSL connections for the replication user\. For example, you can use the following statement to require SSL connections on the user account `<user_name>`\.
 
    ```
-   GRANT USAGE ON *.* TO '<user_name>'@'<domain_name>' REQUIRE SSL;            
+   GRANT USAGE ON *.* TO '<user_name>'@'<domain_name>' REQUIRE SSL;
    ```
 **Note**  
 If `REQUIRE SSL` is not included, the replication connection might silently fall back to an unencrypted connection\.
@@ -427,13 +426,13 @@ If `REQUIRE SSL` is not included, the replication connection might silently fall
 1. Start binary log replication by running the `mysql.rds_start_replication` stored procedure\.
 
    ```
-   CALL mysql.rds_start_replication;                            
+   CALL mysql.rds_start_replication;
    ```
 
 1. Monitor how far the Aurora MySQL DB cluster is behind the MySQL replication master database\. To do so, connect to the Aurora MySQL DB cluster and run the following command\.
 
    ```
-   SHOW SLAVE STATUS;                            
+   SHOW SLAVE STATUS;
    ```
 
    In the command output, the `Seconds Behind Master` field shows how far the Aurora MySQL DB cluster is behind the MySQL master\. When this value is `0` \(zero\), the Aurora MySQL DB cluster has caught up to the master, and you can move on to the next step to stop replication\.
@@ -441,7 +440,7 @@ If `REQUIRE SSL` is not included, the replication connection might silently fall
 1. Connect to the MySQL replication master database and stop replication\. To do so, run the following command\.
 
    ```
-   CALL mysql.rds_stop_replication;                            
+   CALL mysql.rds_stop_replication;
    ```
 
 ## Migrating from MySQL to Amazon Aurora by Using mysqldump<a name="AuroraMySQL.Migrating.ExtMySQL.mysqldump"></a>

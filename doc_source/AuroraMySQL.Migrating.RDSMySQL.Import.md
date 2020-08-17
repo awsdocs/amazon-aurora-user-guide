@@ -70,9 +70,9 @@ from
   select
     'This script should be run on MySQL version 5.6. ' +
     'Earlier versions are not supported.' as msg,
-    cast(substring_index(version(), '.', 1) as unsigned) * 100 + 
-      cast(substring_index(substring_index(version(), '.', 2), '.', -1) 
-      as unsigned) 
+    cast(substring_index(version(), '.', 1) as unsigned) * 100 +
+      cast(substring_index(substring_index(version(), '.', 2), '.', -1)
+      as unsigned)
     as major_minor
   ) as T
 where major_minor <> 506;
@@ -88,7 +88,7 @@ where
   and
   (
     -- User tables
-    TABLE_SCHEMA not in ('mysql', 'performance_schema', 
+    TABLE_SCHEMA not in ('mysql', 'performance_schema',
                          'information_schema')
     or
     -- Non-standard system tables
@@ -100,7 +100,7 @@ where
           'help_topic', 'host', 'ndb_binlog_index', 'plugin',
           'proc', 'procs_priv', 'proxies_priv', 'servers', 'slow_log',
           'tables_priv', 'time_zone', 'time_zone_leap_second',
-          'time_zone_name', 'time_zone_transition', 
+          'time_zone_name', 'time_zone_transition',
           'time_zone_transition_type', 'user'
         )
     )
