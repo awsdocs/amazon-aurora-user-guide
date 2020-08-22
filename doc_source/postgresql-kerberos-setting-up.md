@@ -92,7 +92,7 @@ If you don't plan to use your own on\-premises Microsoft Active Directory, skip 
 To get Kerberos authentication using your on\-premises Active Directory, you need to create a trusting domain relationship using a forest trust between your on\-premises Microsoft Active Directory and the AWS Managed Microsoft AD directory \(created in [Step 1: Create a Directory Using AWS Managed Microsoft AD](#postgresql-kerberos-setting-up.create-directory)\)\. The trust can be one\-way, where the AWS Managed Microsoft AD directory trusts the on\-premises Microsoft Active Directory\. The trust can also be two\-way, where both Active Directories trust each other\. For more information about setting up trusts using AWS Directory Service, see [When to Create a Trust Relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_setup_trust.html) in the *AWS Directory Service Administration Guide*\.
 
 **Note**  
-If you use an on\-premises Microsoft Active Directory, DB cluster endpoints can't be used by Windows clients\.
+If you use an on\-premises Microsoft Active Directory, DB cluster endpoints can't be used by Windows clients for global databases or custom endpoints\. For more information, see [Using Amazon Aurora Global Databases](aurora-global-database.md) and [Using Custom Endpoints](Aurora.Overview.Endpoints.md#Aurora.Endpoints.Custom)\. 
 
 Make sure that your on\-premises Microsoft Active Directory domain name includes a DNS suffix routing that corresponds to the newly created trust relationship\. The following screenshot shows an example\.
 

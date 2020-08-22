@@ -466,6 +466,9 @@ The [restore\-db\-cluster\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/
    }
    ```
 
+**Note**  
+The [restore\-db\-cluster\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) AWS CLI command only restores the DB cluster, not the DB instances for that DB cluster\. You must invoke the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in `--db-cluster-identifier`\. You can create DB instances only after the `restore-db-cluster-to-point-in-time` command has completed and the DB cluster is available\.
+
 ##### RDS API<a name="Aurora.Managing.Clone.CrossAccount.cloning.api"></a>
 
 **To clone an Aurora cluster owned by another AWS account using the RDS API**
@@ -522,6 +525,9 @@ The [restore\-db\-cluster\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/
      ]
    }
    ```
+
+**Note**  
+The [RestoreDBClusterToPointInTime](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterToPointInTime.html) RDS API operation only restores the DB cluster, not the DB instances for that DB cluster\. You must invoke the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) RDS API operation to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in `DBClusterIdentifier`\. You can create DB instances only after the `RestoreDBClusterToPointInTime` operation has completed and the DB cluster is available\.
 
 #### Checking If a DB Cluster is a Cross\-Account Clone<a name="Aurora.Managing.Clone.CrossAccount.checking"></a>
 

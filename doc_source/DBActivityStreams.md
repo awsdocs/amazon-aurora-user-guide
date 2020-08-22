@@ -674,7 +674,7 @@ The `databaseActivityEvents` JSON object contains the following information\.
  This field always has the value `DatabaseActivityMonitoringRecords`\. 
 
 **version**  
- This field represents the version of the DAS data protocol or contract\. It defines what fields are available\. Version 1\.0 represents the original data activity streams support for Aurora PostgreSQL versions 10\.7 and 11\.4\. Version 1\.1 represents the data activity streams support for Aurora PostgreSQL versions 10\.10 and higher and Aurora PostgreSQL 11\.5 and higher\. Version 1\.1 includes the additional fields `errorMessage` and `startTime`\. Version 1\.2 represents the data activity streams support for Aurora MySQL 2\.08 and higher\. Version 1\.2 includes the additional fields `endTime` and `transactionId`\. 
+ This field represents the version of the database activity stream data protocol or contract\. It defines what fields are available\. Version 1\.0 represents the original data activity streams support for Aurora PostgreSQL versions 10\.7 and 11\.4\. Version 1\.1 represents the data activity streams support for Aurora PostgreSQL versions 10\.10 and higher and Aurora PostgreSQL 11\.5 and higher\. Version 1\.1 includes the additional fields `errorMessage` and `startTime`\. Version 1\.2 represents the data activity streams support for Aurora MySQL 2\.08 and higher\. Version 1\.2 includes the additional fields `endTime` and `transactionId`\. 
 
 **databaseActivityEvents**  
  An encrypted string representing one or more activity events\. It's represented as a base64 byte array\. When you decrypt the string, the result is a record in JSON format with fields as shown in the the examples in this section\. 

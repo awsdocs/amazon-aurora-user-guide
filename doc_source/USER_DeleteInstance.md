@@ -35,17 +35,17 @@ You can disable deletion protection for a DB instance by modifying its DB cluste
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to delete\. 
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to delete\.
 
-1. For **Actions**, choose **Delete**\. 
+1. For **Actions**, choose **Delete**\.
 
 1. Enter **delete me** in the box\.
 
-1. Choose **Delete**\. 
+1. Choose **Delete**\.
 
 ### AWS CLI<a name="USER_DeleteInstance.CLI"></a>
 
-To delete a DB instance by using the AWS CLI, call the [delete\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-instance.html) command and specify the `--db-instance-identifier` option\. 
+To delete a DB instance by using the AWS CLI, call the [delete\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-instance.html) command and specify the `--db-instance-identifier` value\.
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -63,4 +63,4 @@ aws rds delete-db-instance ^
 
 ### RDS API<a name="USER_DeleteInstance.API"></a>
 
-To delete a DB instance by using the Amazon RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) operation and specify the `DBInstanceIdentifier` parameter\. 
+To delete a DB instance by using the Amazon RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) operation and specify the `DBInstanceIdentifier` parameter\.

@@ -30,9 +30,9 @@ Currently, Aurora MySQL 2\.01 does not support features added in Aurora MySQL ve
 
 ## MySQL 5\.7 compatibility<a name="AuroraMySQL.Updates.2023.Compatibility"></a>
 
-Aurora MySQL 2\.01 is wire\-compatible with MySQL 5\.7 and includes features such as JSON support, spatial indexes, and generated columns\. Aurora MySQL uses a native implementation of spatial indexing using z\-order curves to deliver >20x better write performance and >10x better read performance than MySQL 5\.7 for spatial datasets\.
+Aurora MySQL 2\.02\.3 is wire\-compatible with MySQL 5\.7 and includes features such as JSON support, spatial indexes, and generated columns\. Aurora MySQL uses a native implementation of spatial indexing using z\-order curves to deliver >20x better write performance and >10x better read performance than MySQL 5\.7 for spatial datasets\.
 
-Aurora MySQL 2\.01 does not currently support the following MySQL 5\.7 features:
+Aurora MySQL 2\.02\.3 does not currently support the following MySQL 5\.7 features:
 + Global transaction identifiers \(GTIDs\)\. Aurora MySQL supports GTIDs in version 2\.04 and higher\.
 + Group replication plugin
 + Increased page size

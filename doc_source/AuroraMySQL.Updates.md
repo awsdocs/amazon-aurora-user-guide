@@ -17,16 +17,17 @@ select @@aurora_version;
 
 ## Aurora MySQL Engine Versions<a name="AuroraMySQL.Updates.EngineVersions"></a>
 
-Starting with Aurora MySQL 2\.03\.2, Aurora engine versions have the following syntax\.
+Starting with Aurora MySQL 2\.03\.2 and 1\.19\.0, Aurora engine versions have the following syntax\.
 
 ```
 <mysql-major-version>.mysql_aurora.<aurora-mysql-version>
 ```
 
-For example, the engine version for Aurora MySQL 2\.03\.2 is the following\.
+For example, the engine versions for Aurora MySQL 2\.03\.2 and 1\.19\.0 are the following\.
 
 ```
 5.7.mysql_aurora.2.03.2
+5.6.mysql_aurora.1.19.0
 ```
 
 **Note**  
@@ -123,8 +124,8 @@ If your current Aurora MySQL version is 1\.14\.x, but it is lower than 1\.14\.4,
 +  The database version for your Aurora MySQL cluster has all the DB engine features and bug fixes that your application needs\. 
 
  As of the publication date for this *Aurora User's Guide*, the current LTS releases for Aurora MySQL are: 
-+  Aurora MySQL version 1\.19\.6\. For more details about this version, see [Aurora MySQL Database Engine Updates 2020\-03\-05](AuroraMySQL.Updates.1196.md)\. 
-+  Aurora MySQL version 2\.04\.9\. For more details about this version, see [Aurora MySQL Database Engine Updates 2019\-11\-20 \(Version 2\.04\.8\)](AuroraMySQL.Updates.2048.md)\. 
++  Aurora MySQL version 1\.19\.6\. For more details about this version, see [Aurora MySQL Database Engine Updates 2020\-03\-05 \(Version 1\.19\.6\)](AuroraMySQL.Updates.1196.md)\. 
++  Aurora MySQL version 2\.04\.9\. For more details about this version, see [Aurora MySQL Database Engine Updates 2020\-08\-14 \(Version 2\.04\.9\)](AuroraMySQL.Updates.2049.md)\. 
 
 ## Related Topics<a name="AuroraMySQL.Updates.Related"></a>
 + [Database Engine Updates for Amazon Aurora MySQL 2\.0](AuroraMySQL.Updates.20Updates.md)
@@ -132,3 +133,4 @@ If your current Aurora MySQL version is 1\.14\.x, but it is lower than 1\.14\.4,
 + [Database Engine Updates for Aurora MySQL Serverless Clusters](AuroraMySQL.Updates.ServerlessUpdates.md)
 + [MySQL Bugs Fixed by Aurora MySQL Database Engine Updates](AuroraMySQL.Updates.MySQLBugs.md)
 + [Aurora Lab Mode Features](AuroraMySQL.Updates.LabMode.md#AuroraMySQL.Updates.LabModeFeatures)
++ [Security Vulnerabilities Fixed in Amazon Aurora MySQL](AuroraMySQL.CVE_list.md)
