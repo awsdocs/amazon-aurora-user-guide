@@ -85,7 +85,7 @@ For cluster cache management, make sure that the promotion priority is **tier\-0
 
 1. Choose **Modify**\. The **Modify DB Instance** page appears\.
 
-1. On the **Failover** panel, choose **tier\-0** for the **Priority**\. 
+1. On the **Additional configuration** panel, choose **tier\-0** for the **Failover priority**\. 
 
 1. Choose **Continue** and check the summary of modifications\. 
 
@@ -136,7 +136,7 @@ You set one reader DB instance for cluster cache management\. To do so, choose a
 
 1. Choose **Modify**\. The **Modify DB Instance** page appears\.
 
-1. On the **Failover** panel, choose **tier\-0** for the **Priority**\. 
+1. On the **Additional configuration** panel, choose **tier\-0** for the **Failover priority**\. 
 
 1. Choose **Continue** and check the summary of modifications\. 
 

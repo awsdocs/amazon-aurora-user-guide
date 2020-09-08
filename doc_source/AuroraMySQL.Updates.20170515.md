@@ -17,7 +17,7 @@ The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis,
 ## Improvements:<a name="AuroraMySQL.Updates.20170515.Improvements"></a>
 + Implemented truncation of CSV format log files at engine startup to avoid long recovery time\. The `general_log_backup`, `general_log`, `slow_log_backup`, and `slow_log` tables now don't survive a database restart\. 
 + Fixed an issue where migration of a database named **test** would fail\.
-+ Improved stability in the lock manager’s garbage collector by reusing the correct lock segments\.
++ Improved stability in the lock manager's garbage collector by reusing the correct lock segments\.
 + Improved stability of the lock manager by removing invalid assertions during deadlock detection algorithm\. 
 + Re\-enabled asynchronous replication, and fixed an associated issue which caused incorrect replica lag to be reported under no\-load or read\-only workload\. The replication pipeline improvements that were introduced in version 1\.10\. These improvements were introduced in order to apply log stream updates to the buffer cache of an Aurora Replica\. which helps to improve read performance and stability on Aurora Replicas\.
 + Fixed an issue where autocommit=OFF leads to scheduled events being blocked and long transactions being held open until the server reboots\.

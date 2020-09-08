@@ -89,7 +89,7 @@ We recommend the following process when upgrading an Aurora PostgreSQL DB cluste
      ```
      SELECT count(*) FROM pg_catalog.pg_prepared_xacts;
      ```
-   + Remove all uses of the *reg\** data types before attempting an upgrade\. Except for `regtype` and `regclass`, you can't upgrade the *reg\** data types\. The pg\_upgrade utility can’t persist this data type, which is used by Amazon Aurora to do the upgrade\. For more information about the pg\_upgrade utility, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/pgupgrade.html)\.
+   + Remove all uses of the *reg\** data types before attempting an upgrade\. Except for `regtype` and `regclass`, you can't upgrade the *reg\** data types\. The pg\_upgrade utility can't persist this data type, which is used by Amazon Aurora to do the upgrade\. For more information about the pg\_upgrade utility, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/pgupgrade.html)\.
 
      To verify that there are no uses of unsupported *reg\** data types, use the following query for each database\. 
 

@@ -71,6 +71,8 @@ The following table shows all of the parameters that apply to the entire Aurora 
 | rds\.restrict\_password\_commands | Yes | 
 |  `server_encoding`  |  No  | 
 |  `ssl`  |  Yes  | 
+| ssl\_max\_protocol\_version | Yes | 
+| ssl\_min\_protocol\_version | Yes | 
 |  `synchronous_commit`  |  Yes  | 
 |  `timezone`  |  Yes  | 
 |  `track_commit_timestamp`  |  Yes  | 
@@ -297,11 +299,11 @@ In this wait event, a session is waiting for an asynchronous prefetch from Auror
 In this wait event, a session is reading data from Aurora Storage\. This may be a typical wait event for I/O intensive workloads\. SQL statements showing a comparatively large proportion of this wait event compared to other SQL statements may be using an inefficient query plan that requires reading large amounts of data\.
 
 **IO:XactSync**  
-In this wait event, a session is issuing a COMMIT or ROLLBACK, requiring the current transaction’s changes to be persisted\. Aurora is waiting for Aurora storage to acknowledge persistence\.   
+In this wait event, a session is issuing a COMMIT or ROLLBACK, requiring the current transaction's changes to be persisted\. Aurora is waiting for Aurora storage to acknowledge persistence\.   
 This wait most often arises when there is a very high rate of commit activity on the system\. You can sometimes alleviate this wait by modifying applications to commit transactions in batches\. You might see this wait at the same time as CPU waits in a case where the DB load exceeds the number of virtual CPUs \(vCPUs\) for the DB instance\. In this case, the storage persistence might be competing for CPU with CPU\-intensive database workloads\. To alleviate this scenario, you can try reducing those workloads, or scaling up to a DB instance with more vCPUs\. 
 
 **Lock:transactionid**  
-In this wait event, a session is trying to modify data that has been modified by another session, and is waiting for the other session’s transaction to be committed or rolled back\. You can investigate blocking and waiting sessions in the pg\_locks view\. 
+In this wait event, a session is trying to modify data that has been modified by another session, and is waiting for the other session's transaction to be committed or rolled back\. You can investigate blocking and waiting sessions in the pg\_locks view\. 
 
 **LWLock:buffer\_content**  
 In this wait event, a session is waiting to read or write a data page in memory while another session has that page locked for writing\. Heavy write contention for a single page \(hot page\), due to frequent updates of the same piece of data by many sessions, could lead to prevalence of this wait event\. Excessive use of foreign key constraints could increase lock duration, leading to increased contention\. You should investigate workloads experiencing high `buffer_content` waits for usage of foreign key constraints to determine if the constraints are necessary\. Alternatively, decreasing the fillfactor on the parent table will spread the keys across more of the block and can reduce contention on the page\.

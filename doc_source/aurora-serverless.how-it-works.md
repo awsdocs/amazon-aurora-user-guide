@@ -69,7 +69,7 @@ You can change the capacity of an Aurora Serverless DB cluster\. When you change
 + **Roll back the capacity change** – Cancel the capacity change\.
 
 **Important**  
-If you force the capacity change, connections that prevent Aurora Serverless from finding a scaling point might be dropped\.
+Note that for clusters with many concurrent connections, specifying **Force the capacity change** can result in dropping any connection—not only those with long\-running transactions\.
 
 For information about changing the capacity, see [Modifying an Aurora Serverless DB Cluster](aurora-serverless.modifying.md)\.
 

@@ -165,7 +165,7 @@
 +  Make separate functions for query operations\. Aurora assigns each new connection to the reader endpoint to a different Aurora Replica to balance the load for read\-intensive applications\. 
 +  For operations involving sets of queries, close and reopen the connection to the reader endpoint when each set of related queries is finished\. Use connection pooling if that feature is available in your software stack\. Directing queries to different connections helps Aurora to distribute the read workload among the DB instances in the cluster\. 
 
- For general information about connection management and endpoints for Aurora, see [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\. For a deep dive on this subject, see [Aurora MySQL Database Administrator’s Handbook – Connection Management](https://d1.awsstatic.com/whitepapers/RDS/amazon-aurora-mysql-database-administrator-handbook.pdf)\. 
+ For general information about connection management and endpoints for Aurora, see [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\. For a deep dive on this subject, see [Aurora MySQL Database Administrator's Handbook – Connection Management](https://d1.awsstatic.com/whitepapers/RDS/amazon-aurora-mysql-database-administrator-handbook.pdf)\. 
 
 ## 10\. Run Your Workload<a name="Aurora.PoC.Workload.Run"></a>
 
@@ -258,7 +258,7 @@
 
  For example, you can explore Aurora parallel query clusters for hybrid transaction/analytical processing \(HTAP\) applications\. If wide geographic distribution is crucial for disaster recovery or to minimize latency, you can explore Aurora global databases\. If your workload is intermittent or you're using Aurora in a development/test scenario, you can explore Aurora Serverless clusters\. 
 
- Your production clusters might also need to handle high volumes of incoming connections\. To learn those techniques, see the AWS whitepaper [Aurora MySQL Database Administrator’s Handbook – Connection Management](https://d1.awsstatic.com/whitepapers/RDS/amazon-aurora-mysql-database-administrator-handbook.pdf)\. 
+ Your production clusters might also need to handle high volumes of incoming connections\. To learn those techniques, see the AWS whitepaper [Aurora MySQL Database Administrator's Handbook – Connection Management](https://d1.awsstatic.com/whitepapers/RDS/amazon-aurora-mysql-database-administrator-handbook.pdf)\. 
 
  If, after the proof of concept, you decide that your use case is not suited for Aurora, consider these other AWS services: 
 +  For purely analytic use cases, workloads benefit from a columnar storage format and other features more suitable to OLAP workloads\. AWS services that address such use cases include the following: 

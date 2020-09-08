@@ -16,7 +16,7 @@ With version 1\.11 of Aurora MySQL, we are using a cluster patching model where 
 + **Advanced Auditing timing change** – This feature was released in version 1\.10\.1 to provide a high\-performance facility for auditing database activity\. In this release, the precision of audit log timestamps has been changed from one second to one microsecond\. The more accurate timestamps allow you to better understand when an audit event happened\. For more information about audit, see [Using Advanced Auditing with an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Auditing.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.20170223.Improvements"></a>
-+ Modified the `thread_handling` parameter to prevent you from setting it to anything other than **multiple\-connections\-per\-thread**, which is the only supported model with Aurora’s thread pool\.
++ Modified the `thread_handling` parameter to prevent you from setting it to anything other than **multiple\-connections\-per\-thread**, which is the only supported model with Aurora's thread pool\.
 + Fixed an issue caused when you set either the `buffer_pool_size` or the `query_cache_size` parameter to be larger than the DB cluster's total memory\. In this circumstance, Aurora sets the modified parameter to the default value, so the DB cluster can start up and not crash\.
 + Fixed an issue in the query cache where a transaction gets stale read results if the table is invalidated in another transaction\.
 + Fixed an issue where binlog files marked for deletion are removed after a small delay rather than right away\.
@@ -36,7 +36,7 @@ With version 1\.11 of Aurora MySQL, we are using a cluster patching model where 
 + Fixed an out\-of\-memory issue for certain long running queries by reducing memory consumption in the ACL module\.
 + Fixed a restart issue that occurs when a table has non\-spatial indexes, there are spatial predicates in the query, the planner chooses to use a non\-spatial index, and the planner incorrectly pushes the spatial condition down to the index\.
 + Fixed an issue where the DB cluster restarts when there is a delete, update, or purge of very large geospatial objects that are stored externally \(like LOBs\)\.
-+ Fixed an issue where fault simulation using ALTER SYSTEM SIMULATE … FOR INTERVAL isn't working properly\.
++ Fixed an issue where fault simulation using ALTER SYSTEM SIMULATE \.\.\. FOR INTERVAL isn't working properly\.
 + Fixed a stability issue caused by an invalid assertion on an incorrect invariant in the lock manager\.
 + Disabled the following two improvements to InnoDB Full\-Text Search that were introduced in version 1\.10 because they introduce stability issues for some demanding workloads:
   +  Updating the cache only after a read request to an Aurora Replica in order to improve full\-text search index cache replication speed\. 

@@ -178,7 +178,7 @@ As a best practice, we recommend that you wrap calls to the `mysql.lambda_async`
 Be careful when invoking an AWS Lambda function from triggers on tables that experience high write traffic\. `INSERT`, `UPDATE`, and `DELETE` triggers are activated per row\. A write\-heavy workload on a table with `INSERT`, `UPDATE`, or `DELETE` triggers results in a large number of calls to your AWS Lambda function\.   
 Although calls to the `mysql.lambda_async` procedure are asynchronous, triggers are synchronous\. A statement that results in a large number of trigger activations doesn't wait for the call to the AWS Lambda function to complete, but it does wait for the triggers to complete before returning control to the client\.
 
-**Example Example: Invoke an AWS Lambda Function to Send Email**  
+**Example: Invoke an AWS Lambda Function to Send Email**  
 The following example creates a stored procedure that you can call in your database code to send an email using a Lambda function\.  
 **AWS Lambda Function**  
 
@@ -236,7 +236,7 @@ DELIMITER ;
 mysql> call SES_send_email('example_from@amazon.com', 'example_to@amazon.com', 'Email subject', 'Email content');
 ```
 
-**Example Example: Invoke an AWS Lambda Function to Publish an Event from a Trigger**  
+**Example: Invoke an AWS Lambda Function to Publish an Event from a Trigger**  
 The following example creates a stored procedure that publishes an event by using Amazon SNS\. The code calls the procedure from a trigger when a row is added to a table\.  
 **AWS Lambda Function**  
 

@@ -13,7 +13,7 @@ If you have any questions or concerns, AWS Support is available on the community
 The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-Downtime Patching](AuroraMySQL.Updates.md#AuroraMySQL.Updates.ZDP)\. 
 
 ## New Features<a name="AuroraMySQL.Updates.117.New"></a>
-+  Aurora MySQL now supports lock compression, which optimizes the lock manager’s memory usage\. Starting in version 1\.17, you can use this feature without enabling lab mode\. 
++  Aurora MySQL now supports lock compression, which optimizes the lock manager's memory usage\. Starting in version 1\.17, you can use this feature without enabling lab mode\. 
 
 ## Improvements<a name="AuroraMySQL.Updates.117.Improvements"></a>
 + Fixed an issue predominantly seen on instances with fewer cores where a single core might have 100% CPU utilization even when the database is idle\.

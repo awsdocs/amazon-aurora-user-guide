@@ -3,7 +3,7 @@
 The following sections discuss how to create a VPC for use with Amazon Aurora\.
 
 **Note**  
-For a helpful and detailed guide on connecting to an Amazon Aurora DB cluster, you can see [Aurora MySQL Database Administrator’s Handbook – Connection Management](https://d1.awsstatic.com/whitepapers/RDS/amazon-aurora-mysql-database-administrator-handbook.pdf)\.
+For a helpful and detailed guide on connecting to an Amazon Aurora DB cluster, you can see [Aurora MySQL Database Administrator's Handbook – Connection Management](https://d1.awsstatic.com/whitepapers/RDS/amazon-aurora-mysql-database-administrator-handbook.pdf)\.
 
 ## Create a VPC and Subnets<a name="CHAP_Aurora.CreateVPC"></a>
 

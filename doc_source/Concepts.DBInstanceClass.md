@@ -30,24 +30,24 @@ For DB instance class hardware specifications, see [Hardware Specifications for 
 ## Supported DB Engines for DB Instance Classes<a name="Concepts.DBInstanceClass.SupportAurora"></a>
 
 The following are DB engine considerations for DB instance classes:
-+ **Aurora Support for db\.r5** – These instance classes are available in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
-  + Aurora MySQL versions support the db\.r5 instance classes as specified in the following table\.
++ **Aurora Support for db\.r5**
+  + Aurora MySQL versions support the db\.r5 instance classes as specified in the following table\. These instance classes are available in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
   + For Aurora PostgreSQL, the versions that support db\.r5 instance classes depend on the AWS Region that your DB cluster is in\. To determine which Aurora PostgreSQL versions support db\.r5 instance classes for a specific AWS Region, use the CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html)\. Enter the AWS Region of your cluster for the `--region` parameter in the following command\.
 
     For Linux, macOS, or Unix:
 
     ```
     aws rds describe-orderable-db-instance-options --engine aurora-postgresql --db-instance-class db.r5.large \
-        --query 'OrderableDBInstanceOptions[].[DBInstanceClass,StorageType,Engine,EngineVersion]' \
-        --region your-cluster-AWS-Region --output text
+        --query 'OrderableDBInstanceOptions[].[DBInstanceClass,StorageType,Engine,EngineVersion]' --output text \
+        --region your-cluster-AWS-Region
     ```
 
     For Windows:
 
     ```
     aws rds describe-orderable-db-instance-options --engine aurora-postgresql --db-instance-class db.r5.large ^
-        --query 'OrderableDBInstanceOptions[].[DBInstanceClass,StorageType,Engine,EngineVersion]' ^
-        --region your-cluster-AWS-Region --output text
+        --query 'OrderableDBInstanceOptions[].[DBInstanceClass,StorageType,Engine,EngineVersion]' --output text ^
+        --region your-cluster-AWS-Region
     ```
 + **Aurora Support for db\.t3** 
   + Aurora MySQL supports the db\.t3\.medium and db\.t3\.small instance classes for Aurora MySQL 1\.15 and higher, and all Aurora MySQL 2\.x versions\. These instance classes are available for Aurora MySQL in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
@@ -57,7 +57,7 @@ The following are DB engine considerations for DB instance classes:
     aws rds describe-pending-maintenance-actions
     ```
   + Aurora PostgreSQL supports the following db\.t3 instance classes:
-    + The db\.t3\.medium instance class is supported for versions compatible with PostgreSQL 10\.7 or later\. These instance classes are available for Aurora PostgreSQL in all Aurora regions except China \(Ningxia\)\. 
+    + The db\.t3\.medium instance class is supported for versions compatible with PostgreSQL 10\.7 or later\.
     + The db\.t3\.large instance class is supported for versions compatible with PostgreSQL versions 10\.11 or later and 11\.6 or later\.
 
 In the following table, you can find details about supported Amazon Aurora DB instance classes for the Aurora DB engines\. 

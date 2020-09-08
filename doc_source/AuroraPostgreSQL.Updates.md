@@ -8,7 +8,7 @@ For how to upgrade the Amazon Aurora PostgreSQL engine version, see [Upgrading t
 **Topics**
 + [Identifying Your Version of Amazon Aurora PostgreSQL](#AuroraPostgreSQL.Updates.Versions)
 + [Engine Versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.20180305.md)
-+ [Extension Versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Extensions.md)
++ [Extensions and Modules for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)
 
 ## Identifying Your Version of Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Updates.Versions"></a>
 

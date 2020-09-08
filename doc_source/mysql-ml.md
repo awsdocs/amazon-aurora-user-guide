@@ -1,23 +1,23 @@
 # Using Machine Learning \(ML\) with Aurora MySQL<a name="mysql-ml"></a>
 
- Aurora machine learning enables you to add machine learning\-based predictions to database applications using the SQL language\. Aurora machine learning makes use of a highly optimized integration between the Aurora database and the AWS machine learning \(ML\) services Amazon SageMaker and Amazon Comprehend\. 
+ Aurora machine learning enables you to add machine learning\-based predictions to database applications using the SQL language\. Aurora machine learning makes use of a highly optimized integration between the Aurora database and the AWS machine learning \(ML\) services SageMaker and Amazon Comprehend\. 
 
  Benefits of Aurora Machine Learning include the following: 
 +  You can add ML\-based predictions to your existing database applications\. You don't need to build custom integrations or learn separate tools\. You can embed machine learning processing directly into your SQL query as calls to stored functions\. 
 +  The ML integration is a fast way to enable ML services to work with transactional data\. You don't have to move the data out of the database to perform the machine learning operations\. You don't have to convert or reimport the results of the machine learning operations to use them in your database application\. 
 +  You can use your existing governance policies to control who has access to the underlying data and to the generated insights\. 
 
- AWS ML Services are managed services that are set up and run in their own production environments\. Currently, Aurora Machine Learning integrates with Amazon Comprehend for sentiment analysis and Amazon SageMaker for a wide variety of ML algorithms\. 
+ AWS ML Services are managed services that are set up and run in their own production environments\. Currently, Aurora Machine Learning integrates with Amazon Comprehend for sentiment analysis and SageMaker for a wide variety of ML algorithms\. 
 
  For general information about Amazon Comprehend, see [Amazon Comprehend](https://aws.amazon.com/comprehend)\. For details about using Aurora and Amazon Comprehend together, see [Using Amazon Comprehend for Sentiment Detection](#using-amazon-comprehend-for-sentiment-detection)\. 
 
- For general information about Amazon SageMaker, see [Amazon SageMaker](https://aws.amazon.com/sagemaker)\. For details about using Aurora and Amazon SageMaker together, see [Using Amazon SageMaker to Run Your Own ML Models](#using-amazon-sagemaker-to-run-your-own-ml-models)\. 
+ For general information about SageMaker, see [SageMaker](https://aws.amazon.com/sagemaker)\. For details about using Aurora and SageMaker together, see [Using SageMaker to Run Your Own ML Models](#using-amazon-sagemaker-to-run-your-own-ml-models)\. 
 
 **Topics**
 + [Prerequisites for Aurora Machine Learning](#aurora-ml-prereqs)
 + [Enabling Aurora Machine Learning](#aurora-ml-enabling)
-+ [Exporting Data to Amazon S3 for Amazon SageMaker Model Training](#exporting-data-to-s3-for-model-training)
-+ [Using Amazon SageMaker to Run Your Own ML Models](#using-amazon-sagemaker-to-run-your-own-ml-models)
++ [Exporting Data to Amazon S3 for SageMaker Model Training](#exporting-data-to-s3-for-model-training)
++ [Using SageMaker to Run Your Own ML Models](#using-amazon-sagemaker-to-run-your-own-ml-models)
 + [Using Amazon Comprehend for Sentiment Detection](#using-amazon-comprehend-for-sentiment-detection)
 + [Performance Considerations for Aurora Machine Learning](#aurora-ml-performance)
 + [Monitoring Aurora Machine Learning](#aurora-ml-monitoring)
@@ -30,39 +30,39 @@
 ## Enabling Aurora Machine Learning<a name="aurora-ml-enabling"></a>
 
  Enabling the ML capabilities involves the following steps: 
-+  You enable the Aurora cluster to access the Amazon machine learning services Amazon SageMaker or Amazon Comprehend, depending the kinds of ML algorithms you want for your application\. 
-+  For Amazon SageMaker, then you use the Aurora `CREATE FUNCTION` statement to set up stored functions that access inference features\. 
++  You enable the Aurora cluster to access the Amazon machine learning services SageMaker or Amazon Comprehend, depending the kinds of ML algorithms you want for your application\. 
++  For SageMaker, then you use the Aurora `CREATE FUNCTION` statement to set up stored functions that access inference features\. 
 **Note**  
  Aurora machine learning includes built\-in functions that call Amazon Comprehend for sentiment analysis\. You don't need to run any `CREATE FUNCTION` statements if you only use Amazon Comprehend\. 
 
 **Topics**
-+ [Setting Up IAM Access to Amazon Comprehend and Amazon SageMaker](#setting-up-access-to-amazon-comprehend-and-amazon-sagemaker)
++ [Setting Up IAM Access to Amazon Comprehend and SageMaker](#setting-up-access-to-amazon-comprehend-and-amazon-sagemaker)
 + [Granting SQL Privileges for Invoking Aurora Machine Learning Services](#aurora-ml-sql-privileges)
 + [Enabling Network Communication from Aurora MySQL to Other AWS Services](#aurora-ml-enabling-interop)
 
-### Setting Up IAM Access to Amazon Comprehend and Amazon SageMaker<a name="setting-up-access-to-amazon-comprehend-and-amazon-sagemaker"></a>
+### Setting Up IAM Access to Amazon Comprehend and SageMaker<a name="setting-up-access-to-amazon-comprehend-and-amazon-sagemaker"></a>
 
- Before you can access Amazon SageMaker and Amazon Comprehend services, enable the Aurora MySQL cluster to access the AWS ML services\. For your Aurora MySQL DB cluster to access AWS ML services on your behalf, create and configure AWS Identity and Access Management \(IAM\) roles\. These roles authorize the users of your Aurora MySQL database to access AWS ML services\. 
+ Before you can access SageMaker and Amazon Comprehend services, enable the Aurora MySQL cluster to access the AWS ML services\. For your Aurora MySQL DB cluster to access AWS ML services on your behalf, create and configure AWS Identity and Access Management \(IAM\) roles\. These roles authorize the users of your Aurora MySQL database to access AWS ML services\. 
 
- When you use the AWS Management Console, AWS does the IAM setup for you automatically\. You can skip the following information and follow the procedure in [Connecting an Aurora DB Cluster to Amazon S3, Amazon SageMaker, or Amazon Comprehend Using the Console](#aurora-ml-console)\. 
+ When you use the AWS Management Console, AWS does the IAM setup for you automatically\. You can skip the following information and follow the procedure in [Connecting an Aurora DB Cluster to Amazon S3, SageMaker, or Amazon Comprehend Using the Console](#aurora-ml-console)\. 
 
- Setting up the IAM roles for Amazon SageMaker or Amazon Comprehend using the AWS CLI or the RDS API consists of the following steps: 
+ Setting up the IAM roles for SageMaker or Amazon Comprehend using the AWS CLI or the RDS API consists of the following steps: 
 
-1.  Create an IAM policy to specify which Amazon SageMaker endpoints tan be invoked by your Aurora MySQL cluster or to enable access to Amazon Comprehend\. 
+1.  Create an IAM policy to specify which SageMaker endpoints tan be invoked by your Aurora MySQL cluster or to enable access to Amazon Comprehend\. 
 
 1.  Create an IAM role to permit your Aurora MySQL database cluster to access AWS ML services\. The IAM Policy created above is attached to the IAM role\. 
 
 1.  To permit the Aurora MySQL database cluster to access AWS ML services, you associate the IAM role that you created above to the database cluster\. 
 
-1.  To permit database applications to invoke AWS ML services, you must also grant privileges to specific database users\. For Amazon SageMaker, because the calls to the endpoints are wrapped inside a stored function, you also grant `EXECUTE` privileges on the stored functions to any database users that call them\. 
+1.  To permit database applications to invoke AWS ML services, you must also grant privileges to specific database users\. For SageMaker, because the calls to the endpoints are wrapped inside a stored function, you also grant `EXECUTE` privileges on the stored functions to any database users that call them\. 
 
  For general information about how to permit your Aurora MySQL DB cluster to access other AWS services on your behalf, see [Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf](AuroraMySQL.Integrating.Authorizing.md)\. 
 
-#### Connecting an Aurora DB Cluster to Amazon S3, Amazon SageMaker, or Amazon Comprehend Using the Console<a name="aurora-ml-console"></a>
+#### Connecting an Aurora DB Cluster to Amazon S3, SageMaker, or Amazon Comprehend Using the Console<a name="aurora-ml-console"></a>
 
- Aurora machine learning requires that your DB cluster use some combination of Amazon S3, Amazon SageMaker, and Amazon Comprehend\. Amazon Comprehend is for sentiment analysis\. Amazon SageMaker is for a wide variety of machine learning algorithms\. For Aurora Machine Learning, Amazon S3 is only for training Amazon SageMaker models\. You only need to use Amazon S3 with Aurora machine learning if you don't already have a trained model available and the training is your responsibility\. To connect a DB cluster to these services requires that you set up an AWS Identity and Access Management \(IAM\) role for each Amazon service\. The IAM role enables users of your DB cluster to authenticate with the corresponding service\. 
+ Aurora machine learning requires that your DB cluster use some combination of Amazon S3, SageMaker, and Amazon Comprehend\. Amazon Comprehend is for sentiment analysis\. SageMaker is for a wide variety of machine learning algorithms\. For Aurora Machine Learning, Amazon S3 is only for training SageMaker models\. You only need to use Amazon S3 with Aurora machine learning if you don't already have a trained model available and the training is your responsibility\. To connect a DB cluster to these services requires that you set up an AWS Identity and Access Management \(IAM\) role for each Amazon service\. The IAM role enables users of your DB cluster to authenticate with the corresponding service\. 
 
- To generate the IAM roles for Amazon S3, Amazon SageMaker, or Amazon Comprehend, repeat the following steps for each service that you need\. 
+ To generate the IAM roles for Amazon S3, SageMaker, or Amazon Comprehend, repeat the following steps for each service that you need\. 
 
 **To connect a DB cluster to an Amazon service**
 
@@ -77,36 +77,36 @@
 1.  Choose the service that you want to connect to from the dropdown list\. 
    +  **Amazon S3** 
    +  **Amazon Comprehend** 
-   +  **Amazon SageMaker** 
+   +  **SageMaker** 
 
 1.  Choose **Connect service**\. 
 
 1.  Enter the required information for the specific service on the **Connect cluster** window: 
-   +  For Amazon SageMaker, enter the Amazon Resource Name \(ARN\) of an Amazon SageMaker endpoint\. For details about what the endpoint represents, see [Deploy a Model on Amazon SageMaker Hosting Services](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-hosting.html)\. 
+   +  For SageMaker, enter the Amazon Resource Name \(ARN\) of an SageMaker endpoint\. For details about what the endpoint represents, see [Deploy a Model on Amazon SageMaker Hosting Services](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-hosting.html)\. 
 
-      In the navigation pane of the [Amazon SageMaker console](https://console.aws.amazon.com/sagemaker/home), choose **Endpoints** and copy the ARN of the endpoint you want to use\. 
+      In the navigation pane of the [SageMaker console](https://console.aws.amazon.com/sagemaker/home), choose **Endpoints** and copy the ARN of the endpoint you want to use\. 
    +  For Amazon Comprehend, you don't specify any additional parameter\. 
    +  For Amazon S3, enter the ARN of an Amazon S3 bucket to use\. 
 
-      The format of an Amazon S3 bucket ARN is `arn:aws:s3:::bucket_name`\. Ensure that the Amazon S3 bucket you use is set up with the requirements for training Amazon SageMaker models\. When you train a model, your Aurora DB cluster requires permission to export data to the Amazon S3 bucket, and also to import data from the bucket\. 
+      The format of an Amazon S3 bucket ARN is `arn:aws:s3:::bucket_name`\. Ensure that the Amazon S3 bucket you use is set up with the requirements for training SageMaker models\. When you train a model, your Aurora DB cluster requires permission to export data to the Amazon S3 bucket, and also to import data from the bucket\. 
 
-      For more about an Amazon S3 bucket ARN, see [Specifying Resources in a Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html) in the Amazon Simple Storage Service Developer Guide\. For more about using an Amazon S3 bucket with Amazon SageMaker, see [Step 1: Create an Amazon Amazon S3 Bucket](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-config-permissions.html) in the Amazon SageMaker Developer Guide\. 
+      For more about an Amazon S3 bucket ARN, see [Specifying Resources in a Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html) in the Amazon Simple Storage Service Developer Guide\. For more about using an Amazon S3 bucket with SageMaker, see [Step 1: Create an Amazon Amazon S3 Bucket](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-config-permissions.html) in the Amazon SageMaker Developer Guide\. 
 
 1.  Choose **Connect service**\. 
 
 1.  Aurora creates a new IAM role and adds it to the DB cluster's list of **Current IAM roles for this cluster**\. The IAM role's status is initially **In progress**\. The IAM role name is autogenerated with the following pattern for each connected service: 
    +  The Amazon S3 IAM role name pattern is `rds-cluster_ID-S3-policy-timestamp`\. 
-   +  The Amazon SageMaker IAM role name pattern is `rds-cluster_ID-SageMaker-policy-timestamp`\. 
+   +  The SageMaker IAM role name pattern is `rds-cluster_ID-SageMaker-policy-timestamp`\. 
    +  The Amazon Comprehend IAM role name pattern is `rds-cluster_ID-Comprehend-policy-timestamp`\. 
 
     Aurora also creates a new IAM policy and attaches it to the role\. The policy name follows a similar naming convention and also has a timestamp\. 
 
-#### Creating an IAM Policy to Access Amazon SageMaker \(AWS CLI Only\)<a name="aurora-ml-creating-iam-policy-sagemaker"></a>
+#### Creating an IAM Policy to Access SageMaker \(AWS CLI Only\)<a name="aurora-ml-creating-iam-policy-sagemaker"></a>
 
 **Note**  
  When you use the AWS Management Console, Aurora creates the IAM policy automatically\. In that case, you can skip this section\. 
 
- The following policy adds the permissions required by Aurora MySQL to invoke an Amazon SageMaker function on your behalf\. You can specify all of your Amazon SageMaker endpoints that you need your database applications to access from your Aurora MySQL cluster in a single policy\. The policy allows you to specify the AWS Region for an Amazon SageMaker endpoint\. However, an Aurora MySQL cluster can only invoke Amazon SageMaker models deployed in the same AWS Region as the cluster\. 
+ The following policy adds the permissions required by Aurora MySQL to invoke an SageMaker function on your behalf\. You can specify all of your SageMaker endpoints that you need your database applications to access from your Aurora MySQL cluster in a single policy\. The policy allows you to specify the AWS Region for an SageMaker endpoint\. However, an Aurora MySQL cluster can only invoke SageMaker models deployed in the same AWS Region as the cluster\. 
 
 ```
 {
@@ -178,7 +178,7 @@ aws iam put-role-policy --role-name role_name --policy-name policy_name --policy
 
 1.  Complete the procedure in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\. 
 
-#### Creating an IAM Role to Access Amazon SageMaker and Amazon Comprehend<a name="aurora-ml-creating-iam-role"></a>
+#### Creating an IAM Role to Access SageMaker and Amazon Comprehend<a name="aurora-ml-creating-iam-role"></a>
 
  After you create the IAM policies, create an IAM role that the Aurora MySQL cluster can assume on behalf of your database users to access ML services\. To create an IAM role, you can use the AWS Management Console or the AWS CLI\. To create an IAM role and attach the preceding policies to the role, follow the steps described in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\. For more information about IAM roles, see [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *AWS Identity and Access Management User Guide*\. 
 
@@ -223,7 +223,7 @@ PROMPT> aws rds failover-db-cluster --db-cluster-identifier your_cluster_id
 
 ### Granting SQL Privileges for Invoking Aurora Machine Learning Services<a name="aurora-ml-sql-privileges"></a>
 
- After you create the required IAM policies and roles and associating the role to the Aurora MySQL DB cluster, you authorize individual database users to invoke the Aurora Machine Learning stored functions for Amazon SageMaker and built\-in functions for Amazon Comprehend\. 
+ After you create the required IAM policies and roles and associating the role to the Aurora MySQL DB cluster, you authorize individual database users to invoke the Aurora Machine Learning stored functions for SageMaker and built\-in functions for Amazon Comprehend\. 
 
  The database user invoking a native function must be granted the `INVOKE SAGEMAKER` or `INVOKE COMPREHEND` privilege\. To grant this privilege to a user, connect to the DB instance as the master user, and run the following statements\. Substitute the appropriate details for the database user\. 
 
@@ -232,7 +232,7 @@ GRANT INVOKE SAGEMAKER ON *.* TO user@domain-or-ip-address
 GRANT INVOKE COMPREHEND ON *.* TO user@domain-or-ip-address
 ```
 
- For Amazon SageMaker, user\-defined functions define the parameters to be sent to the model for producing the inference and to configure the endpoint name to be invoked\. You grant `EXECUTE` permission to the stored functions configured for Amazon SageMaker for each of the database users who intend to invoke the endpoint\. 
+ For SageMaker, user\-defined functions define the parameters to be sent to the model for producing the inference and to configure the endpoint name to be invoked\. You grant `EXECUTE` permission to the stored functions configured for SageMaker for each of the database users who intend to invoke the endpoint\. 
 
 ```
 GRANT EXECUTE ON FUNCTION db1.anomaly_score TO user1@domain-or-ip-address1
@@ -241,15 +241,15 @@ GRANT EXECUTE ON FUNCTION db2.company_forecasts TO user2@domain-or-ip-address2
 
 ### Enabling Network Communication from Aurora MySQL to Other AWS Services<a name="aurora-ml-enabling-interop"></a>
 
- Since Amazon SageMaker and Amazon Comprehend are external AWS services, you must also configure your Aurora DB cluster to allow outbound connections to the target AWS service\. For more information, see [Enabling Network Communication from Amazon Aurora MySQL to Other AWS Services](AuroraMySQL.Integrating.Authorizing.Network.md)\. 
+ Since SageMaker and Amazon Comprehend are external AWS services, you must also configure your Aurora DB cluster to allow outbound connections to the target AWS service\. For more information, see [Enabling Network Communication from Amazon Aurora MySQL to Other AWS Services](AuroraMySQL.Integrating.Authorizing.Network.md)\. 
 
  You can use VPC endpoints to connect to Amazon S3\. AWS PrivateLink can't be used to connect Aurora to AWS machine learning services or Amazon S3 at this time\. 
 
-## Exporting Data to Amazon S3 for Amazon SageMaker Model Training<a name="exporting-data-to-s3-for-model-training"></a>
+## Exporting Data to Amazon S3 for SageMaker Model Training<a name="exporting-data-to-s3-for-model-training"></a>
 
- Depending on how your team divides the machine learning tasks, you might not perform this task\. If someone else provides the Amazon SageMaker model for you, you can skip this section\. 
+ Depending on how your team divides the machine learning tasks, you might not perform this task\. If someone else provides the SageMaker model for you, you can skip this section\. 
 
-  To train Amazon SageMaker models, you export data to an Amazon S3 bucket\. The Amazon S3 bucket is used by a Jupyter Amazon SageMaker notebook instance to train your model before it is deployed\. You can use the `SELECT INTO OUTFILE S3` statement to query data from an Aurora MySQL DB cluster and save it directly into text files stored in an Amazon S3 bucket\. Then the notebook instance consumes the data from the Amazon S3 bucket for training\. 
+  To train SageMaker models, you export data to an Amazon S3 bucket\. The Amazon S3 bucket is used by a Jupyter SageMaker notebook instance to train your model before it is deployed\. You can use the `SELECT INTO OUTFILE S3` statement to query data from an Aurora MySQL DB cluster and save it directly into text files stored in an Amazon S3 bucket\. Then the notebook instance consumes the data from the Amazon S3 bucket for training\. 
 
  Aurora Machine Learning extends the existing `SELECT INTO OUTFILE` syntax in Aurora MySQL to export data to CSV format\. The generated CSV file can be directly consumed by models that need this format for training purposes\. 
 
@@ -280,19 +280,19 @@ INTO OUTFILE S3 's3_uri'
 ]
 ```
 
-## Using Amazon SageMaker to Run Your Own ML Models<a name="using-amazon-sagemaker-to-run-your-own-ml-models"></a>
+## Using SageMaker to Run Your Own ML Models<a name="using-amazon-sagemaker-to-run-your-own-ml-models"></a>
 
- Amazon SageMaker is a fully managed machine learning service\. With Amazon SageMaker, data scientists and developers can quickly and easily build and train machine learning models\. Then they can directly deploy the models into a production\-ready hosted environment\. Amazon SageMaker provides an integrated Jupyter authoring notebook instance for easy access to your data sources\. That way, you can perform exploration and analysis without managing the hardware infrastructure for servers\. It also provides common machine learning algorithms that are optimized to run efficiently against extremely large datasets in a distributed environment\. With native support for bring\-your\-own\-algorithms and frameworks, Amazon SageMaker offers flexible distributed training options that adjust to your specific workflows\. 
+ SageMaker is a fully managed machine learning service\. With SageMaker, data scientists and developers can quickly and easily build and train machine learning models\. Then they can directly deploy the models into a production\-ready hosted environment\. SageMaker provides an integrated Jupyter authoring notebook instance for easy access to your data sources\. That way, you can perform exploration and analysis without managing the hardware infrastructure for servers\. It also provides common machine learning algorithms that are optimized to run efficiently against extremely large datasets in a distributed environment\. With native support for bring\-your\-own\-algorithms and frameworks, SageMaker offers flexible distributed training options that adjust to your specific workflows\. 
 
- Currently, Aurora Machine Learning supports any Amazon SageMaker endpoint that can read and write comma\-separated value format, through a `ContentType` of `text/csv`\. The built\-in Amazon SageMaker algorithms that currently accept this format are Random Cut Forest, Linear Learner, 1P, XGBoost, and 3P\. If the algorithms return multiple outputs per item, the Aurora Machine Learning function returns only the first item\. This first item is expected to be a representative result\. 
+ Currently, Aurora Machine Learning supports any SageMaker endpoint that can read and write comma\-separated value format, through a `ContentType` of `text/csv`\. The built\-in SageMaker algorithms that currently accept this format are Random Cut Forest, Linear Learner, 1P, XGBoost, and 3P\. If the algorithms return multiple outputs per item, the Aurora Machine Learning function returns only the first item\. This first item is expected to be a representative result\. 
 
- Aurora machine learning always invokes Amazon SageMaker endpoints in the same AWS Region as your Aurora cluster\. Therefore, for a single\-region Aurora cluster, always deploy the model in the same AWS Region as your Aurora MySQL cluster\. 
+ Aurora machine learning always invokes SageMaker endpoints in the same AWS Region as your Aurora cluster\. Therefore, for a single\-region Aurora cluster, always deploy the model in the same AWS Region as your Aurora MySQL cluster\. 
 
  If you are using an Aurora global database, you set up the same integration between the services for each AWS Region that's part of the global database\. In particular, make sure the following conditions are satisfied for all AWS Regions in the global database: 
-+  Configure the appropriate IAM roles for accessing external services such as Amazon SageMaker, Amazon Comprehend, or Lambda for the global database cluster in each AWS Region\. 
-+  Ensure that all AWS Regions have the same trained Amazon SageMaker models deployed with the same endpoint names\. Do so before running the `CREATE FUNCTION` statement for your Aurora Machine Learning function in the primary AWS Region\. In a global database, all `CREATE FUNCTION` statements you run in the primary AWS Region are immediately run in all the secondary regions also\. 
++  Configure the appropriate IAM roles for accessing external services such as SageMaker, Amazon Comprehend, or Lambda for the global database cluster in each AWS Region\. 
++  Ensure that all AWS Regions have the same trained SageMaker models deployed with the same endpoint names\. Do so before running the `CREATE FUNCTION` statement for your Aurora Machine Learning function in the primary AWS Region\. In a global database, all `CREATE FUNCTION` statements you run in the primary AWS Region are immediately run in all the secondary regions also\. 
 
- To use models deployed in Amazon SageMaker for inference, you create user\-defined functions using the familiar MySQL data definition language \(DDL\) statements for stored functions\. Each stored function represents the Amazon SageMaker endpoint hosting the model\. When you define such a function, you specify the input parameters to the model, the specific Amazon SageMaker endpoint to invoke, and the return type\. The function returns the inference computed by the Amazon SageMaker endpoint after applying the model to the input parameters\. All Aurora Machine Learning stored functions return numeric types or `VARCHAR`\. You can use any numeric type except `BIT`\. Other types, such as `JSON`, `BLOB`, `TEXT`, and `DATE` are not allowed\. Use model input parameters that are the same as the input parameters that you exported to Amazon S3 for model training\. 
+ To use models deployed in SageMaker for inference, you create user\-defined functions using the familiar MySQL data definition language \(DDL\) statements for stored functions\. Each stored function represents the SageMaker endpoint hosting the model\. When you define such a function, you specify the input parameters to the model, the specific SageMaker endpoint to invoke, and the return type\. The function returns the inference computed by the SageMaker endpoint after applying the model to the input parameters\. All Aurora Machine Learning stored functions return numeric types or `VARCHAR`\. You can use any numeric type except `BIT`\. Other types, such as `JSON`, `BLOB`, `TEXT`, and `DATE` are not allowed\. Use model input parameters that are the same as the input parameters that you exported to Amazon S3 for model training\. 
 
 ```
 CREATE FUNCTION function_name (arg1 type1, arg2 type2, ...) -- variable number of arguments
@@ -304,17 +304,17 @@ CREATE FUNCTION function_name (arg1 type1, arg2 type2, ...) -- variable number o
   [MAX_BATCH_SIZE max_batch_size];     -- default is 10,000
 ```
 
- This is a variation of the existing `CREATE FUNCTION` DDL statement\. In the `CREATE FUNCTION` statement that defines the Amazon SageMaker function, you don't specify a function body\. Instead, you specify the new keyword `ALIAS` where the function body usually goes\. Currently, Aurora Machine Learning only supports `aws_sagemaker_invoke_endpoint` for this extended syntax\. You must specify the `endpoint_name` parameter\. The optional parameter `max_batch_size` restricts the maximum number of inputs processed in an actual batched request to Amazon SageMaker\. An Amazon SageMaker endpoint can have different characteristics for each model\. The `max_batch_size` parameter can help to avoid an error caused by inputs that are too large, or to make Amazon SageMaker return a response more quickly\. The max\_batch\_size parameter affects the size of an internal buffer used for ML request processing\. Specifying too large a value for `max_batch_size` might cause substantial memory overhead on your DB instance\. 
+ This is a variation of the existing `CREATE FUNCTION` DDL statement\. In the `CREATE FUNCTION` statement that defines the SageMaker function, you don't specify a function body\. Instead, you specify the new keyword `ALIAS` where the function body usually goes\. Currently, Aurora Machine Learning only supports `aws_sagemaker_invoke_endpoint` for this extended syntax\. You must specify the `endpoint_name` parameter\. The optional parameter `max_batch_size` restricts the maximum number of inputs processed in an actual batched request to SageMaker\. An SageMaker endpoint can have different characteristics for each model\. The `max_batch_size` parameter can help to avoid an error caused by inputs that are too large, or to make SageMaker return a response more quickly\. The max\_batch\_size parameter affects the size of an internal buffer used for ML request processing\. Specifying too large a value for `max_batch_size` might cause substantial memory overhead on your DB instance\. 
 
- We recommend leaving the `MANIFEST` setting at its default value of `OFF`\. Although you can use the `MANIFEST ON` option, some Amazon SageMaker features can't directly use the CSV exported with this option\. The manifest format is not compatible with the expected manifest format from Amazon SageMaker\. 
+ We recommend leaving the `MANIFEST` setting at its default value of `OFF`\. Although you can use the `MANIFEST ON` option, some SageMaker features can't directly use the CSV exported with this option\. The manifest format is not compatible with the expected manifest format from SageMaker\. 
 
- You create a separate stored function for each of your Amazon SageMaker models\. This mapping of functions to models is required because an endpoint is associated with a specific model, and each model accepts different parameters\. Using SQL types for the model inputs and the model output type helps to avoid type conversion errors passing data back and forth between the AWS services\. You can control who can apply the model\. You can also control the runtime characteristics by specifying a parameter representing the maximum batch size\. 
+ You create a separate stored function for each of your SageMaker models\. This mapping of functions to models is required because an endpoint is associated with a specific model, and each model accepts different parameters\. Using SQL types for the model inputs and the model output type helps to avoid type conversion errors passing data back and forth between the AWS services\. You can control who can apply the model\. You can also control the runtime characteristics by specifying a parameter representing the maximum batch size\. 
 
  Currently, all Aurora Machine Learning functions have the `NOT DETERMINISTIC` property\. If you don't specify that property explicitly, Aurora sets `NOT DETERMINISTIC` automatically\. This requirement is because the ML model can be changed without any notification to the database\. If that happens, calls to an Aurora Machine Learning function might return different results for the same input within a single transaction\. 
 
  You can't use the characteristics `CONTAINS SQL`, `NO SQL`, `READS SQL DATA`, or `MODIFIES SQL DATA` in your `CREATE FUNCTION` statement\. 
 
- Following is an example usage of invoking an Amazon SageMaker endpoint to detect anomalies\. There is an Amazon SageMaker endpoint `random-cut-forest-model`\. The corresponding model is already trained by the `random-cut-forest` algorithm\. For each input, the model returns an anomaly score\. This example shows the data points whose score is greater than 3 standard deviations \(approximately the 99\.9th percentile\) from the mean score\. 
+ Following is an example usage of invoking an SageMaker endpoint to detect anomalies\. There is an SageMaker endpoint `random-cut-forest-model`\. The corresponding model is already trained by the `random-cut-forest` algorithm\. For each input, the model returns an anomaly score\. This example shows the data points whose score is greater than 3 standard deviations \(approximately the 99\.9th percentile\) from the mean score\. 
 
 ```
 create function anomaly_score(value real) returns real
@@ -326,15 +326,15 @@ select *, anomaly_detection(value) score from nyc_taxi
   where anomaly_detection(value) > @score_cutoff;
 ```
 
-### Character Set Requirement for Amazon SageMaker Functions that Return Strings<a name="note-character-set-of-ml-functions-return-type"></a>
+### Character Set Requirement for SageMaker Functions that Return Strings<a name="note-character-set-of-ml-functions-return-type"></a>
 
- We recommend specifying a character set of `utf8mb4` as the return type type for your Amazon SageMaker functions that return string values\. If that isn't practical, use a large enough string length for the return type to hold a value represented in the `utf8mb4` character set\. The following example shows how to declare the `utf8mb4` character set for your function\. 
+ We recommend specifying a character set of `utf8mb4` as the return type type for your SageMaker functions that return string values\. If that isn't practical, use a large enough string length for the return type to hold a value represented in the `utf8mb4` character set\. The following example shows how to declare the `utf8mb4` character set for your function\. 
 
 ```
 CREATE FUNCTION my_ml_func(...) RETURNS VARCHAR(5) CHARSET utf8mb4 ALIAS ...
 ```
 
- Currently, each Amazon SageMaker function that returns a string uses the character set `utf8mb4` for the return value\. The return value uses this character set even if your ML function declares a different character set for its return type implicitly or explicitly\. If your ML function declares a different character set for the return value, the returned data might be silently truncated if you store it in a table column that isn't long enough\. For example, a query with a `DISTINCT` clause creates a temporary table\. Thus, the ML function result might be truncated due to the way strings are handled internally during a query\. 
+ Currently, each SageMaker function that returns a string uses the character set `utf8mb4` for the return value\. The return value uses this character set even if your ML function declares a different character set for its return type implicitly or explicitly\. If your ML function declares a different character set for the return value, the returned data might be silently truncated if you store it in a table column that isn't long enough\. For example, a query with a `DISTINCT` clause creates a temporary table\. Thus, the ML function result might be truncated due to the way strings are handled internally during a query\. 
 
 ## Using Amazon Comprehend for Sentiment Detection<a name="using-amazon-comprehend-for-sentiment-detection"></a>
 
@@ -394,9 +394,9 @@ WHERE productTable.productCode = 1302 AND
 
  The main Aurora Machine Learning performance aspect that you can influence from your Aurora cluster is the batch mode setting for calls to the Aurora Machine Learning stored functions\. Machine learning functions typically require substantial overhead, making it impractical to call an external service separately for each row\. Aurora Machine Learning can minimize this overhead by combining the calls to the external Aurora Machine Learning service for many rows into a single batch\. Aurora Machine Learning receives the responses for all the input rows, and delivers the responses, one row at a time, to the query as it runs\. This optimization improves the throughput and latency of your Aurora queries without changing the results\. 
 
- When you create an Aurora stored function that's connected to an Amazon SageMaker endpoint, you define the batch size parameter\. This parameter influences how many rows are transferred for every underlying call to Amazon SageMaker\. For queries that process large numbers of rows, the overhead to make a separate Amazon SageMaker call for each row can be substantial\. The larger the data set processed by the stored procedure, the larger you can make the batch size\. 
+ When you create an Aurora stored function that's connected to an SageMaker endpoint, you define the batch size parameter\. This parameter influences how many rows are transferred for every underlying call to SageMaker\. For queries that process large numbers of rows, the overhead to make a separate SageMaker call for each row can be substantial\. The larger the data set processed by the stored procedure, the larger you can make the batch size\. 
 
- If the batch mode optimization can be applied to an Amazon SageMaker function, you can tell by checking the query plan produced by the `EXPLAIN PLAN` statement\. In this case, the `extra` column in the execution plan includes `Batched machine learning`\. The following example shows a call to an Amazon SageMaker function that uses batch mode\. 
+ If the batch mode optimization can be applied to an SageMaker function, you can tell by checking the query plan produced by the `EXPLAIN PLAN` statement\. In this case, the `extra` column in the execution plan includes `Batched machine learning`\. The following example shows a call to an SageMaker function that uses batch mode\. 
 
 ```
 mysql> create function anomaly_score(val real) returns real alias aws_sagemaker_invoke_endpoint endpoint name 'my-rcf-model-20191126';
@@ -450,7 +450,7 @@ show status like 'Aurora_ml%';
 `Aurora_ml_single_request_cnt`  
  The aggregate count of ML functions that are evaluated by non\-batch mode across all queries run by users of the DB instance\. 
 
- For information about monitoring the performance of the Amazon SageMaker operations called from Aurora Machine Learning functions, see [Monitor Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/monitoring-overview.html)\. 
+ For information about monitoring the performance of the SageMaker operations called from Aurora Machine Learning functions, see [Monitor Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/monitoring-overview.html)\. 
 
 ## Limitations of Aurora Machine Learning<a name="aurora-ml-limitations"></a>
 

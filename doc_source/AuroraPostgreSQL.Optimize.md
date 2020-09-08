@@ -56,7 +56,7 @@ To create the `apg_plan_mgmt` extension, you need the `rds_superuser` role\. Whe
 
 ## Upgrading Query Plan Management<a name="AuroraPostgreSQL.Optimize.Upgrade"></a>
 
-The latest version of query plan management is 2\.0\. If you installed an earlier version of query plan management, we strongly recommend that you upgrade to version 2\.0\. For version details, see [ Extension Versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Extensions.md)\.
+The latest version of query plan management is 2\.0\. If you installed an earlier version of query plan management, we strongly recommend that you upgrade to version 2\.0\. For version details, see [Extensions and Modules for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)\.
 
 To upgrade, run the following commands at the cluster or DB instance level\.
 

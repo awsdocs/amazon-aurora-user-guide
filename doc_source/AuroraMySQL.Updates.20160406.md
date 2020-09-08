@@ -48,7 +48,7 @@ This update includes the following improvements:
   + Fixed an issue for refreshing statistics on Aurora Replicas for newly created or updated statistics\.
   + Improved stability for Aurora Replicas when there are many transactions on the primary instance and concurrent reads on the Aurora Replicas across the same data\.
   + Improved stability for Aurora Replicas when running `UPDATE` and `DELETE` statements with `JOIN` statements\.
-  + Improved stability for Aurora Replicas when running `INSERT … SELECT` statements\.
+  + Improved stability for Aurora Replicas when running `INSERT ... SELECT` statements\.
 
 ## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.20160406.BugFixes"></a>
 + BACKPORT Bug \#18694052 FIX FOR ASSERTION `\!M\_ORDERED\_REC\_BUFFER' FAILED TO 5\.6 \(Port Bug \#18305270\) 
