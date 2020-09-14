@@ -108,7 +108,7 @@ You can create a new Aurora DB cluster for an Aurora Read Replica from a source 
 + `Engine=aurora`
 + `KmsKeyId`
 
-  The AWS Key Management Service \(AWS KMS\) encryption key to optionally encrypt the DB cluster with, depending on whether your MySQL DB instance is encrypted\.
+  The AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) to optionally encrypt the DB cluster with, depending on whether your MySQL DB instance is encrypted\.
   + If your MySQL DB instance isn't encrypted, specify an encryption key to have your DB cluster encrypted at rest\. Otherwise, your DB cluster is encrypted at rest using the default encryption key for your account\.
   + If your MySQL DB instance is encrypted, specify an encryption key to have your DB cluster encrypted at rest using the specified encryption key\. Otherwise, your DB cluster is encrypted at rest using the encryption key for the MySQL DB instance\.
 **Note**  

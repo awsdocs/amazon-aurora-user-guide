@@ -91,6 +91,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `lower_case_table_names`  |  Yes  |  | 
 |  `master-info-repository`  |  Yes  |  | 
 |  `master_verify_checksum`  |  Yes  |  | 
+|  `require_secure_transport`  |  Yes  | For more information, see [Using SSL/TLS with Aurora MySQL DB Clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\. | 
 |  `server_audit_events`  |  Yes  |  | 
 |  `server_audit_excl_users`  |  Yes  |  | 
 |  `server_audit_incl_users`  |  Yes  |  | 

@@ -132,7 +132,7 @@ If the DB snapshot is not in the AWS Region where you want to locate your data, 
 
 When you migrate the DB snapshot by using the AWS Management Console, the console takes the actions necessary to create both the DB cluster and the primary instance\.
 
-You can also choose for your new Aurora MySQL DB cluster to be encrypted at rest using an AWS Key Management Service \(AWS KMS\) encryption key\.
+You can also choose for your new Aurora MySQL DB cluster to be encrypted at rest using an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\.
 
 **To migrate a MySQL DB snapshot by using the AWS Management Console**
 
@@ -180,7 +180,7 @@ Your production DB cluster might not need to be in a public subnet, because only
    + **Database Port**: Type the default port to be used when connecting to instances in the Aurora MySQL DB cluster\. The default is `3306`\.
 **Note**  
 You might be behind a corporate firewall that doesn't allow access to default ports such as the MySQL default port, 3306\. In this case, provide a port value that your corporate firewall allows\. Remember that port value later when you connect to the Aurora MySQL DB cluster\.
-   + **Encryption**: Choose **Enable Encryption** for your new Aurora MySQL DB cluster to be encrypted at rest\. If you choose **Enable Encryption**, you must choose an AWS KMS encryption key as the **Master Key** value\.
+   + **Encryption**: Choose **Enable Encryption** for your new Aurora MySQL DB cluster to be encrypted at rest\. If you choose **Enable Encryption**, you must choose an AWS KMS customer master key \(CMK\) as the **Master Key** value\.
 
      If your DB snapshot isn't encrypted, specify an encryption key to have your DB cluster encrypted at rest\.
 
@@ -206,7 +206,7 @@ You can create an Aurora DB cluster from a DB snapshot of an Amazon RDS MySQL DB
 + Either `--engine aurora-mysql` for a MySQL 5\.7–compatible DB cluster, or `--engine aurora` for a MySQL 5\.6–compatible DB cluster
 + `--kms-key-id`
 
-  The AWS Key Management Service \(AWS KMS\) encryption key to optionally encrypt the DB cluster with, depending on whether your DB snapshot is encrypted\.
+  The AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) to optionally encrypt the DB cluster with, depending on whether your DB snapshot is encrypted\.
   + If your DB snapshot isn't encrypted, specify an encryption key to have your DB cluster encrypted at rest\. Otherwise, your DB cluster isn't encrypted\.
   + If your DB snapshot is encrypted, specify an encryption key to have your DB cluster encrypted at rest using the specified encryption key\. Otherwise, your DB cluster is encrypted at rest using the encryption key for the DB snapshot\.
 **Note**  

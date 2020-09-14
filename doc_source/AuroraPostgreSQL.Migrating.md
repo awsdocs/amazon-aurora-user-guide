@@ -22,7 +22,7 @@ In some cases, the DB snapshot might not be in the AWS Region where you want to 
 
 When you migrate the DB snapshot by using the console, the console takes the actions necessary to create both the DB cluster and the primary instance\.
 
-You can also choose for your new Aurora PostgreSQL DB cluster to be encrypted at rest by using an AWS Key Management Service \(AWS KMS\) encryption key\. This option is available only for unencrypted DB snapshots\.
+You can also choose for your new Aurora PostgreSQL DB cluster to be encrypted at rest by using an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. This option is available only for unencrypted DB snapshots\.
 
 **To migrate a PostgreSQL DB snapshot by using the RDS console**
 
@@ -56,7 +56,7 @@ Your production DB cluster might not need to be in a public subnet, because only
    + **Database Port**: Enter the default port to be used when connecting to instances in the Aurora PostgreSQL DB cluster\. The default is `5432`\.
 **Note**  
 You might be behind a corporate firewall that doesn't allow access to default ports such as the PostgreSQL default port, 5432\. In this case, provide a port value that your corporate firewall allows\. Remember that port value later when you connect to the Aurora PostgreSQL DB cluster\.
-   + **Enable Encryption**: Choose **Yes** for your new Aurora PostgreSQL DB cluster to be encrypted at rest\. If you choose **Yes**, also choose an AWS KMS encryption key as the **Master Key** value\.
+   + **Enable Encryption**: Choose **Yes** for your new Aurora PostgreSQL DB cluster to be encrypted at rest\. If you choose **Yes**, also choose an AWS KMS customer master key \(CMK\) as the **Master Key** value\.
    + **Auto minor version upgrade**: Choose **Enable auto minor version upgrade** to enable your Aurora PostgreSQL DB cluster to receive minor PostgreSQL DB engine version upgrades automatically when they become available\.
 
      The **Auto Minor Version Upgrade** option only applies to upgrades to PostgreSQL minor engine versions for your Aurora PostgreSQL DB cluster\. It doesn't apply to regular patches applied to maintain system stability\.
@@ -721,8 +721,6 @@ psql=> SELECT aws_s3.table_import_from_s3(
 + [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3)
 + [aws\_commons\.create\_s3\_uri](#USER_PostgreSQL.S3Import.create_s3_uri)
 + [aws\_commons\.create\_aws\_credentials](#USER_PostgreSQL.S3Import.create_aws_credentials)
-+ [Syntax](#USER_PostgreSQL.S3Import.create_aws_credentials-syntax)
-+ [Parameters](#USER_PostgreSQL.S3Import.create_aws_credentials-parameters)
 
 #### aws\_s3\.table\_import\_from\_s3<a name="aws_s3.table_import_from_s3"></a>
 
@@ -859,7 +857,7 @@ A required text string containing the AWS Region that the file is in\. For a lis
 
 Sets an access key and secret key in an `aws_commons._aws_credentials_1` structure\. Use the results of the `aws_commons.create_aws_credentials` function in the `credentials` parameter of the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function\. 
 
-#### Syntax<a name="USER_PostgreSQL.S3Import.create_aws_credentials-syntax"></a>
+##### Syntax<a name="USER_PostgreSQL.S3Import.create_aws_credentials-syntax"></a>
 
 ```
 aws_commons.create_aws_credentials(
@@ -869,7 +867,7 @@ aws_commons.create_aws_credentials(
 )
 ```
 
-#### Parameters<a name="USER_PostgreSQL.S3Import.create_aws_credentials-parameters"></a>
+##### Parameters<a name="USER_PostgreSQL.S3Import.create_aws_credentials-parameters"></a>
 
 *access\_key*  
 A required text string containing the access key to use for importing an Amazon S3 file\. The default is NULL\.

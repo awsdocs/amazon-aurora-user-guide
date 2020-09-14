@@ -17,7 +17,7 @@ Find the possible status values for DB clusters in the following table\.
 | creating | Not billed |  The DB cluster is being created\. The DB cluster is inaccessible while it is being created\.  | 
 | deleting | Not billed |  The DB cluster is being deleted\.  | 
 | failing\-over | Billed |  A failover from the primary instance to an Aurora Replica is being performed\.  | 
-| inaccessible\-encryption\-credentials | Not billed |  The AWS KMS key used to encrypt or decrypt the DB cluster can't be accessed\.  | 
+| inaccessible\-encryption\-credentials | Not billed |  The AWS Key Management Service customer master key \(CMK\) used to encrypt or decrypt the DB cluster can't be accessed\.  | 
 | maintenance | Billed |  Amazon RDS is applying a maintenance update to the DB cluster\. This status is used for DB cluster\-level maintenance that RDS schedules well in advance\.  | 
 | migrating | Billed |  A DB cluster snapshot is being restored to a DB cluster\.  | 
 | migration\-failed | Not billed |  A migration failed\.  | 

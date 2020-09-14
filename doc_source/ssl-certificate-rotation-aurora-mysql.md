@@ -10,7 +10,7 @@ For such applications, you must update your client application trust stores to i
 
 After you update your CA certificates in the client application trust stores, you can rotate the certificates on your DB clusters\. We strongly recommend testing these procedures in a development or staging environment before implementing them in your production environments\.
 
-For more information about certificate rotation, see [Rotating Your SSL/TLS Certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with Aurora MySQL DB clusters, see [Using SSL with Aurora MySQL DB Clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
+For more information about certificate rotation, see [Rotating Your SSL/TLS Certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with Aurora MySQL DB clusters, see [Using SSL/TLS with Aurora MySQL DB Clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
 
 **Topics**
 + [Determining Whether any Applications are Connecting to Your Aurora MySQL DB Cluster Using SSL](#ssl-certificate-rotation-aurora-mysql.determining-server)

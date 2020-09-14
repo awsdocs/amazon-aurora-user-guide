@@ -57,17 +57,34 @@ For management of the Aurora MySQL DB cluster, the standard `kill` and `kill_que
 **Note**  
 Encryption of a database instance and snapshots is not supported for the China \(Ningxia\) region\.
 
-## Using SSL with Aurora MySQL DB Clusters<a name="AuroraMySQL.Security.SSL"></a>
+## Using SSL/TLS with Aurora MySQL DB Clusters<a name="AuroraMySQL.Security.SSL"></a>
 
-Amazon Aurora MySQL DB clusters support Secure Sockets Layer \(SSL\) connections from applications using the same process and public key as Amazon RDS MySQL DB instances\.
+Amazon Aurora MySQL DB clusters support Secure Sockets Layer \(SSL\) and Transport Layer Security \(TLS\) connections from applications using the same process and public key as Amazon RDS MySQL DB instances\.
 
-Amazon RDS creates an SSL certificate and installs the certificate on the DB instance when Amazon RDS provisions the instance\. These certificates are signed by a certificate authority\. The SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. As a result, you can only use the DB cluster endpoint to connect to a DB cluster using SSL if your client supports Subject Alternative Names \(SAN\)\. Otherwise, you must use the instance endpoint of a writer instance\. 
+Amazon RDS creates an SSL/TLS certificate and installs the certificate on the DB instance when Amazon RDS provisions the instance\. These certificates are signed by a certificate authority\. The SSL/TLS certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL/TLS certificate to guard against spoofing attacks\. As a result, you can only use the DB cluster endpoint to connect to a DB cluster using SSL/TLS if your client supports Subject Alternative Names \(SAN\)\. Otherwise, you must use the instance endpoint of a writer instance\. 
 
 For information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\.
 
 Aurora MySQL 5\.6 supports Transport Layer Security \(TLS\) version 1\.0\. Aurora MySQL 5\.7 supports TLS version 1\.0, 1\.1, and 1\.2\.
 
 We recommend the MariaDB Connector/J client as a client that supports SAN with SSL\. For more information, see the [MariaDB Connector/J download](https://downloads.mariadb.org/connector-java/) page\.
+
+### Requiring an SSL/TLS Connection to an Aurora MySQL DB Cluster<a name="AuroraMySQL.Security.SSL.RequireSSL"></a>
+
+You can require that all user connections to your Aurora MySQL DB cluster use SSL/TLS by using the `require_secure_transport` DB cluster parameter\. By default, the `require_secure_transport` parameter is set to `OFF`\. You can set the `require_secure_transport` parameter to `ON` to require SSL/TLS for connections to your DB cluster\.
+
+You can set the `require_secure_transport` parameter value by updating the DB cluster parameter group for your DB cluster\. You don't need to reboot your DB cluster for the change to take effect\. For more information on parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
+
+**Note**  
+The `require_secure_transport` parameter is only available for Aurora MySQL version 5\.7\.
+
+When the `require_secure_transport` parameter is set to `ON` for a DB cluster, a database client can connect to it if it can establish an encrypted connection\. Otherwise, an error message similar to the following is returned to the client:
+
+```
+MySQL Error 3159 (HY000): Connections using insecure transport are prohibited while --require_secure_transport=ON.
+```
+
+### Encrypting Connections to an Aurora MySQL DB Cluster<a name="AuroraMySQL.Security.SSL.EncryptingConnections"></a>
 
 To encrypt connections using the default `mysql` client, launch the mysql client using the `--ssl-ca parameter` to reference the public key, for example: 
 
@@ -85,7 +102,7 @@ mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
 --ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-verify-server-cert
 ```
 
-You can require SSL connections for specific users accounts\. For example, you can use one of the following statements, depending on your MySQL version, to require SSL connections on the user account `encrypted_user`\.
+You can require SSL/TLS connections for specific users accounts\. For example, you can use one of the following statements, depending on your MySQL version, to require SSL/TLS connections on the user account `encrypted_user`\.
 
 For MySQL 5\.7 and later:
 
@@ -99,7 +116,7 @@ For MySQL 5\.6 and earlier:
 GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL;            
 ```
 
- When you use an RDS proxy, you connect to the proxy endpoint instead of the usual cluster endpoint\. You can make SSL required or optional for connections to the proxy, in the same way as for connections directly to the Aurora DB cluster\. For information about using the RDS Proxy, see [Managing Connections with Amazon RDS Proxy](rds-proxy.md)\. 
+ When you use an RDS proxy, you connect to the proxy endpoint instead of the usual cluster endpoint\. You can make SSL/TLS required or optional for connections to the proxy, in the same way as for connections directly to the Aurora DB cluster\. For information about using the RDS Proxy, see [Managing Connections with Amazon RDS Proxy](rds-proxy.md)\. 
 
 **Note**  
-For more information on SSL connections with MySQL, see the [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html)\.
+For more information on SSL/TLS connections with MySQL, see the [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html)\.

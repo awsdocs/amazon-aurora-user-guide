@@ -69,6 +69,30 @@ aws rds restore-db-cluster-from-snapshot ^
     --engine-mode serverless --scaling-configuration MinCapacity=8,MaxCapacity=64,TimeoutAction='ForceApplyCapacityChange',SecondsUntilAutoPause=1000,AutoPause=true
 ```
 
+ If you restore a snapshot to an Aurora Serverless cluster with MySQL 5\.7 compatibility, make sure that you add the options `--engine aurora-mysql` and `--engine-version 5.7`\. You can perform such a snapshot restore to create a MySQL 5\.7\-compatible Aurora Serverless cluster from a MySQL 5\.6\-compatible Aurora or Aurora Serverless snapshot\. 
+
+In the following example, you restore from a previously created DB cluster snapshot named *mydbclustersnapshot*\. You restore to a new DB cluster named *mynewdbcluster*\. To restore the DB cluster as an Aurora Serverless DB cluster with MySQL 5\.7 compatibility, specify the `--engine-mode`, `--engine`, and `--engine-version` parameters as follows\.
+
+For Linux, macOS, or Unix:
+
+```
+aws rds restore-db-cluster-from-snapshot \
+    --db-cluster-identifier mynewdbcluster \
+    --snapshot-identifier mydbclustersnapshot \
+    --engine-mode serverless --engine aurora-mysql --engine-version 5.7 \
+    --scaling-configuration MinCapacity=8,MaxCapacity=64,TimeoutAction='ForceApplyCapacityChange',SecondsUntilAutoPause=1000,AutoPause=true
+```
+
+For Windows:
+
+```
+aws rds restore-db-cluster-from-snapshot ^
+    --db-instance-identifier mynewdbcluster ^
+    --db-snapshot-identifier mydbclustersnapshot ^
+    --engine-mode serverless --engine aurora-mysql --engine-version 5.7 ^
+    --scaling-configuration MinCapacity=8,MaxCapacity=64,TimeoutAction='ForceApplyCapacityChange',SecondsUntilAutoPause=1000,AutoPause=true
+```
+
 ## RDS API<a name="aurora-serverless.restorefromsnapshot.api"></a>
 
 To configure an Aurora Serverless DB cluster when you restore from a DB cluster using the RDS API, run the [RestoreDBClusterFromSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromSnapshot.html) operation and specify `serverless` for the `EngineMode` parameter\.

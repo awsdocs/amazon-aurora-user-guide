@@ -16,4 +16,4 @@
 + [Viewing Amazon RDS Events](USER_ListEvents.md)
 + [Getting CloudWatch Events and Amazon EventBridge Events for Amazon Aurora](rds-cloud-watch-events.md)
 + [Amazon Aurora Database Log Files](USER_LogAccess.md)
-+ [Logging Amazon RDS API Calls with AWS CloudTrail](logging-using-cloudtrail.md)
++ [Working with AWS CloudTrail and Amazon RDS](logging-using-cloudtrail.md)

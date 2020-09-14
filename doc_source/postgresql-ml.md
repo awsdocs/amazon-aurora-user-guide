@@ -74,7 +74,7 @@ To connect a DB cluster to these services requires that you set up an AWS Identi
 1.  Choose **Connect service**\. 
 
 1.  Enter the required information for the specific service on the **Connect cluster** window: 
-   +  For SageMaker, enter the Amazon Resource Name \(ARN\) of an SageMaker endpoint\. 
+   +  For SageMaker, enter the Amazon Resource Name \(ARN\) of a SageMaker endpoint\. 
 
       From the navigation pane of the [SageMaker console](https://console.aws.amazon.com/sagemaker/home), choose **Endpoints** and copy the ARN of the endpoint you want to use\. For details about what the endpoint represents, see [Deploy a Model on Amazon SageMaker Hosting Services](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-hosting.html)\. 
    +  For Amazon Comprehend, you don't specify any additional parameters\. 
@@ -197,12 +197,12 @@ Be sure to deploy the model you are using in the same AWS Region as your Aurora 
 When you install the `aws_ml` extension \(as described in [Installing the aws\_ml Extension for Model Inference](#postgresql-ml-aws_ml-install)\), it provides the [aws\_sagemaker\.invoke\_endpoint](#aws_sagemaker.invoke_endpoint) function\. You use this function to invoke your SageMaker model and perform model inference directly from within your SQL database application\. 
 
 **Topics**
-+ [Creating a User\-Defined Function to Invoke an SageMaker Model](#postgresql-using-sagemaker-example1)
-+ [Passing an Array as Input to an SageMaker Model](#postgresql-using-sagemaker-example-array)
-+ [Specifying Batch Size When Invoking an SageMaker Model](#postgresql-using-sagemaker-example3)
-+ [Invoking an SageMaker Model that has Multiple Outputs](#postgresql-using-sagemaker-example4)
++ [Creating a User\-Defined Function to Invoke a SageMaker Model](#postgresql-using-sagemaker-example1)
++ [Passing an Array as Input to a SageMaker Model](#postgresql-using-sagemaker-example-array)
++ [Specifying Batch Size When Invoking a SageMaker Model](#postgresql-using-sagemaker-example3)
++ [Invoking a SageMaker Model that has Multiple Outputs](#postgresql-using-sagemaker-example4)
 
-### Creating a User\-Defined Function to Invoke an SageMaker Model<a name="postgresql-using-sagemaker-example1"></a>
+### Creating a User\-Defined Function to Invoke a SageMaker Model<a name="postgresql-using-sagemaker-example1"></a>
 
 Create a separate user\-defined function to call `aws_sagemaker.invoke_endpoint` for each of your SageMaker models\. Your user\-defined function represents the SageMaker endpoint hosting the model\. The `aws_sagemaker.invoke_endpoint` function runs within the user\-defined function\. User\-defined functions provide many advantages:
 + You can give your ML model its own name instead of only calling `aws_sagemaker.invoke_endpoint` for all of your ML models\. 
@@ -216,7 +216,7 @@ To specify a user\-defined function, use the SQL data definition language \(DDL\
 + The specific SageMaker endpoint to invoke\.
 + The return type\. 
 
-The user\-defined function returns the inference computed by the SageMaker endpoint after executing the model on the input parameters\. The following example creates a user\-defined function for an SageMaker model with two input parameters\.
+The user\-defined function returns the inference computed by the SageMaker endpoint after executing the model on the input parameters\. The following example creates a user\-defined function for a SageMaker model with two input parameters\.
 
 ```
 CREATE FUNCTION classify_event (IN arg1 INT, IN arg2 DATE, OUT category INT)
@@ -236,7 +236,7 @@ Note the following:
 + Specify `PARALLEL SAFE` to enable parallel query execution\. For more information, see [Exploiting Parallel Query Processing](#postgresql-using-sagemaker-example-parallel)\.
 + Specify `COST 5000` to estimate execution cost for the function\. Use a positive number giving the estimated execution cost for the function, in units of `cpu_operator_cost`\.
 
-### Passing an Array as Input to an SageMaker Model<a name="postgresql-using-sagemaker-example-array"></a>
+### Passing an Array as Input to a SageMaker Model<a name="postgresql-using-sagemaker-example-array"></a>
 
 The [aws\_sagemaker\.invoke\_endpoint](#aws_sagemaker.invoke_endpoint) function can have up to 100 input parameters, which is the limit for PostgreSQL functions\. If the SageMaker model requires more than 100 parameters of the same type, pass the model parameters as an array\. 
 
@@ -252,9 +252,9 @@ AS $$
 $$ LANGUAGE SQL PARALLEL SAFE COST 5000;
 ```
 
-### Specifying Batch Size When Invoking an SageMaker Model<a name="postgresql-using-sagemaker-example3"></a>
+### Specifying Batch Size When Invoking a SageMaker Model<a name="postgresql-using-sagemaker-example3"></a>
 
-The following example creates a user\-defined function for an SageMaker model that sets the batch size default to NULL\. The function also allows you to provide a different batch size when you invoke it\.
+The following example creates a user\-defined function for a SageMaker model that sets the batch size default to NULL\. The function also allows you to provide a different batch size when you invoke it\.
 
 ```
 CREATE FUNCTION classify_event (
@@ -274,9 +274,9 @@ Note the following:
 + By default, passing NULL as a parameter's value is translated to an empty string before passing to SageMaker\. For this example the inputs have different types\.
 + If you have a non\-text input, or text input that needs to default to some value other than an empty string, use the `COALESCE` statement\. Use `COALESCE` to translate NULL to the desired null replacement value in the call to `aws_sagemaker.invoke_endpoint`\. For the `amount` parameter in this example, a NULL value is converted to 0\.0\. 
 
-### Invoking an SageMaker Model that has Multiple Outputs<a name="postgresql-using-sagemaker-example4"></a>
+### Invoking a SageMaker Model that has Multiple Outputs<a name="postgresql-using-sagemaker-example4"></a>
 
-The following example creates a user\-defined function for an SageMaker model that returns multiple outputs\. Your function needs to cast the output of the `aws_sagemaker.invoke_endpoint` function to a corresponding data type\. For example, you could use the built\-in PostgreSQL point type for \(x,y\) pairs or a user\-defined composite type\. 
+The following example creates a user\-defined function for a SageMaker model that returns multiple outputs\. Your function needs to cast the output of the `aws_sagemaker.invoke_endpoint` function to a corresponding data type\. For example, you could use the built\-in PostgreSQL point type for \(x,y\) pairs or a user\-defined composite type\. 
 
 This user\-defined function returns values from a model that returns multiple outputs by using a composite type for the outputs\.
 
@@ -559,7 +559,7 @@ The maximum number of rows per batch for batch\-mode processing\. For more infor
 
 **model\_input**  
 One or more input parameters for the ML model\. These can be any data type\.  
-PostgreSQL allows you to specify up to 100 input parameters for a function\. Array data types must be one\-dimensional, but can contain as many elements as are expected by the SageMaker model\. The number of inputs to an SageMaker model is bounded only by the SageMaker 5 MB message size limit\.Output Parameters
+PostgreSQL allows you to specify up to 100 input parameters for a function\. Array data types must be one\-dimensional, but can contain as many elements as are expected by the SageMaker model\. The number of inputs to a SageMaker model is bounded only by the SageMaker 5 MB message size limit\.Output Parameters
 
 **model\_output**  
 The SageMaker model's output parameter, as text\.
@@ -596,10 +596,10 @@ Setting up the IAM roles for SageMaker or Amazon Comprehend using the AWS CLI or
 **Note**  
  Aurora can create the IAM policy for you automatically\. You can skip the following information and use the procedure in [Automatically Connecting an Aurora DB Cluster to AWS Services Using the Console](#postgresql-ml-connect-console)\. 
 
- The following policy adds the permissions required by Aurora PostgreSQL to invoke an SageMaker function on your behalf\. You can specify all of your SageMaker endpoints that you need your database applications to access from your Aurora PostgreSQL cluster in a single policy\. 
+ The following policy adds the permissions required by Aurora PostgreSQL to invoke a SageMaker function on your behalf\. You can specify all of your SageMaker endpoints that you need your database applications to access from your Aurora PostgreSQL cluster in a single policy\. 
 
 **Note**  
-This policy enables you to specify the AWS Region for an SageMaker endpoint\. However, an Aurora PostgreSQL cluster can only invoke SageMaker models deployed in the same AWS Region as the cluster\.
+This policy enables you to specify the AWS Region for a SageMaker endpoint\. However, an Aurora PostgreSQL cluster can only invoke SageMaker models deployed in the same AWS Region as the cluster\.
 
 `{ "Version": "2012-10-17", "Statement": [ { "Sid": "AllowAuroraToInvokeRCFEndPoint", "Effect": "Allow", "Action": "sagemaker:InvokeEndpoint", "Resource": "arn:aws:sagemaker:region:123456789012:endpoint/endpointName" } ] }`
 

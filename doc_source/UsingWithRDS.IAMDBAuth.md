@@ -11,8 +11,8 @@ IAM database authentication provides the following benefits:
 
 **Topics**
 + [Availability for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.Availability)
-+ [MySQL Limitations for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.ConnectionsPerSecond)
-+ [PostgreSQL Limitations for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.LimitsPostgreSQL)
++ [Aurora MySQL Limitations for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.ConnectionsPerSecond)
++ [Aurora PostgreSQL Limitations for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.LimitsPostgreSQL)
 + [Enabling and Disabling IAM Database Authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
 + [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
 + [Creating a Database Account Using IAM Authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
@@ -24,20 +24,26 @@ IAM database authentication is available for the following database engines and 
 + Aurora with MySQL compatibility version 1\.10 or higher\. All DB instance classes are supported, except for db\.t2\.small and db\.t3\.small\.
 + Aurora with PostgreSQL compatibility, PostgreSQL versions 9\.6\.9 and 10\.4 or higher\.
 
-## MySQL Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.ConnectionsPerSecond"></a>
+## Aurora MySQL Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.ConnectionsPerSecond"></a>
 
-When using IAM database authentication with Aurora MySQL, you are limited to a maximum of 200 new connections per second\. 
+When using IAM database authentication with Aurora MySQL, the following limitations apply:
++ Currently, Aurora MySQL parallel query doesn't support IAM database authentication\.
++ Currently, IAM DB authentication doesn't support global condition context keys\.
 
-The database engines that work with Amazon Aurora don't impose any limits on authentication attempts per second\. However, when you use IAM database authentication, your application must generate an authentication token\. Your application then uses that token to connect to the DB cluster\. If you exceed the limit of maximum new connections per second, then the extra overhead of IAM database authentication can cause connection throttling\. The extra overhead can cause even existing connections to drop\.   For information about the maximum total connections for Aurora MySQL, see [Maximum Connections to an Aurora MySQL DB Instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections)\. 
+  For more information about global condition context keys, see [ AWS Global Condition Context Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\.
++ The maximum number of connections per second for your DB cluster might be limited depending on its DB instance class and your workload\.
 
-Currently, Aurora MySQL parallel query doesn't support IAM database authentication\.
-
-We recommend the following when using the MySQL engine:
+We recommend the following when using the Aurora MySQL engine:
 + Use IAM database authentication as a mechanism for temporary, personal access to databases\.
 + Use IAM database authentication only for workloads that can be easily retried\.
-+ Don't use IAM database authentication if your application requires more than 200 new connections per second\.
++ Use IAM database authentication when your application requires fewer than 200 new IAM database authentication connections per second\.
 
-## PostgreSQL Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.LimitsPostgreSQL"></a>
+  The database engines that work with Amazon Aurora don't impose any limits on authentication attempts per second\. However, when you use IAM database authentication, your application must generate an authentication token\. Your application then uses that token to connect to the DB cluster\. If you exceed the limit of maximum new connections per second, then the extra overhead of IAM database authentication can cause connection throttling\. The extra overhead can cause even existing connections to drop\.   For information about the maximum total connections for Aurora MySQL, see [Maximum Connections to an Aurora MySQL DB Instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections)\. 
 
-When using IAM database authentication with PostgreSQL, note the following limitation:
-+ The maximum number of connections per second for your database cluster may be limited depending on the cluster type and your workload\.
+## Aurora PostgreSQL Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.LimitsPostgreSQL"></a>
+
+When using IAM database authentication with Aurora PostgreSQL, the following limitations apply:
++ The maximum number of connections per second for your DB cluster might be limited depending on its DB instance class and your workload\.
++ Currently, IAM DB authentication doesn't support global condition context keys\.
+
+  For more information about global condition context keys, see [ AWS Global Condition Context Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\.

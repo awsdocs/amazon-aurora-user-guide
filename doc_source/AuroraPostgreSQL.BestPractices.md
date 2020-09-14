@@ -6,7 +6,7 @@ This topic includes information on best practices and options for using or migra
 
 There are several things you can do to make a failover perform faster with Aurora PostgreSQL\. This section discusses each of the following ways:
 + Aggressively set TCP keepalives to ensure that longer running queries that are waiting for a server response will be killed before the read timeout expires in the event of a failure\.
-+ Set the Java DNS caching timeouts aggressively to ensure the Aurora Read\-Only Endpoint can properly cycle through read\-only nodes on subsequent connection attempts\.
++ Set the Java DNS caching timeouts aggressively to ensure the Aurora read\-only endpoint can properly cycle through read\-only nodes on subsequent connection attempts\.
 + Set the timeout variables used in the JDBC connection string as low as possible\. Use separate connection objects for short and long running queries\.
 + Use the provided read and write Aurora endpoints to establish a connection to the cluster\.
 + Use RDS APIs to test application response on server side failures and use a packet dropping tool to test application response for client\-side failures\.
@@ -23,7 +23,7 @@ The TCP keepalive process is simple: when you set up a TCP connection, you assoc
 
 Enabling TCP keepalive parameters and setting them aggressively ensures that if your client is no longer able to connect to the database, then any active connections are quickly closed\. This action allows the application to react appropriately, such as by picking a new host to connect to\.
 
-The following TCP keepalive parameters need to be set:
+You need to set the following TCP keepalive parameters:
 + `tcp_keepalive_time` controls the time, in seconds, after which a keepalive packet is sent when no data has been sent by the socket \(ACKs are not considered data\)\. We recommend the following setting: 
 
    `tcp_keepalive_time = 1`
@@ -46,7 +46,7 @@ These settings should notify the application within five seconds when the databa
    sudo sysctl net.ipv4.tcp_keepalive_probes=5
    ```
 
-1. Once you've found a configuration that works for your application, these settings must be persisted by adding the following lines \(including any changes you made\) to */etc/sysctl\.conf*:
+1. After you've found a configuration that works for your application, persist these settings by adding the following lines to */etc/sysctl\.conf*, including any changes you made:
 
    ```
    tcp_keepalive_time = 1
@@ -67,7 +67,7 @@ This section discusses several Aurora PostgreSQL specific configuration changes 
 
 #### Reducing DNS Cache Timeouts<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.Timeouts"></a>
 
-When your application tries to establish a connectionafter a failover, the new Aurora PostgreSQL writer will be a previous reader, which can be found using the Aurora **read only** endpoint before DNS updates have fully propagated\. Setting the java DNS TTL to a low value helps cycle between reader nodes on subsequent connection attempts\.
+When your application tries to establish a connection after a failover, the new Aurora PostgreSQL writer will be a previous reader, which can be found using the Aurora **read only** endpoint before DNS updates have fully propagated\. Setting the java DNS TTL to a low value helps cycle between reader nodes on subsequent connection attempts\.
 
 ```
 // Sets internal TTL to match the Aurora RO Endpoint TTL
@@ -83,9 +83,9 @@ To make use of Aurora PostgreSQL fast failover, your application's connection st
 ```
 jdbc:postgresql://myauroracluster.cluster-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432,
 myauroracluster.cluster-ro-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432
-/postgres?user=<masteruser>&password=<masterpw>&loginTimeout=2
+/postgres?user=<primaryuser>&password=<primarypw>&loginTimeout=2
 &connectTimeout=2&cancelSignalTimeout=2&socketTimeout=60
-&tcpKeepAlive=true&targetServerType=master&loadBalanceHosts=true
+&tcpKeepAlive=true&targetServerType=primary&loadBalanceHosts=true
 ```
 
  For best availability and to avoid a dependency on the RDS API, the best option for connecting is to maintain a file with a host string that your application reads from when you establish a connection to the database\. This host string would have all the Aurora endpoints available for the cluster\. For more information about Aurora endpoints, see [Amazon Aurora Connection Management](Aurora.Overview.Endpoints.md)\. For example, you could store the endpoints in a file locally like the following: 
@@ -109,13 +109,13 @@ my-node4.cksc6xlmwcyw.us-east-1-beta.rds.amazonaws.com:5432
 The benefit of this approach is that the PostgreSQL JDBC connection driver will loop through all nodes on this list to find a valid connection, whereas when using the Aurora endpoints only two nodes will be tried per connection attempt\. The downside of using DB instance nodes is that if you add or remove nodes from your cluster and the list of instance endpoints becomes stale, the connection driver may never find the correct host to connect to\.
 
 Set the following parameters aggressively to help ensure that your application doesn't wait too long to connect to any one host\. 
-+ `targetServerType` – Use this parameter to control whether the driver connects to a write or read node\. To ensure your applications will reconnect only to a write node, set the `targetServerType` value to `master`\.
++ `targetServerType` – Use this parameter to control whether the driver connects to a write or read node\. To ensure your applications will reconnect only to a write node, set the `targetServerType` value to `primary`\.
 
-  Possible values for the `targetServerType` parameter include `master`, `slave`, `any`, and `preferSlave`\. The `preferSlave` value attempts to establish a connection to a reader first but connects to the writer if no reader connection can be established\.
+  Values for the `targetServerType` parameter include `primary`, `secondary`, `any`, and `preferSecondary`\. The `preferSecondary` value attempts to establish a connection to a reader first but connects to the writer if no reader connection can be established\.
 + `loginTimeout` – Controls how long your application waits to login to the database *after* a socket connection has been established\.
 + `connectTimeout` – Controls how long the socket waits to establish a connection to the database\.
 
-Other application parameters can be modified to speed up the connection process, depending on how aggressive you want your application to be\.
+You can modify other application parameters to speed up the connection process, depending on how aggressive you want your application to be\.
 + `cancelSignalTimeout` – In some applications, you may want to send a "best effort" cancel signal on a query that has timed out\. If this cancel signal is in your failover path, you should consider setting it aggressively to avoid sending this signal to a dead host\.
 + `socketTimeout` – This parameter controls how long the socket waits for read operations\. This parameter can be used as a global "query timeout" to ensure no query waits longer than this value\. A good practice is to have one connection handler that runs short lived queries and sets this value lower, and to have another connection handler for long running queries with this value set much higher\. Then, you can rely on TCP keepalive parameters to kill long running queries if the server goes down\.
 + `tcpKeepAlive` – Enable this parameter to ensure the TCP keepalive parameters that you set are respected\.
@@ -132,8 +132,8 @@ A good way to ensure your application can find a node to connect to is to attemp
 Once you establish a connection using one of these endpoints, you can call the `aurora_replica_status` function to get information about the rest of the cluster\. For example, the following command retrieves information with the `aurora_replica_status` function\.
 
 ```
-postgres=> select server_id, session_id, highest_lsn_rcvd, 
-cur_replay_latency_in_usec, now(), last_update_timestamp from 
+postgres=> SELECT server_id, session_id, highest_lsn_rcvd, 
+cur_replay_latency_in_usec, now(), last_update_timestamp FROM 
 aurora_replica_status();
     server_id     |              session_id              |    
 vdl    | highest_lsn_rcvd | cur_replay_latency |              
@@ -160,11 +160,11 @@ myauroracluster.cluster-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432,
 myauroracluster.cluster-ro-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432
 ```
 
-In this scenario, your application would attempt to establish a connection to any node type, master or slave\. Once connected, a good practice is to first examine the read/write status of the node by querying for the result of the command `SHOW transaction_read_only`\. 
+In this scenario, your application would attempt to establish a connection to any node type, primary or secondary\. Once connected, a good practice is to first examine the read/write status of the node by querying for the result of the command `SHOW transaction_read_only`\. 
 
-If the return value of the query is `OFF`, then you've successfully connected to the master node\. If the return value is `ON`, and your application requires a read/write connection, you can then call the `aurora_replica_status` function to determine the `server_id` that has `session_id='MASTER_SESSION_ID'`\. This function gives you the name of the master node\. You can use this in conjunction with the 'endpointPostfix' described below\.
+If the return value of the query is `OFF`, then you've successfully connected to the primary node\. If the return value is `ON`, and your application requires a read/write connection, you can then call the `aurora_replica_status` function to determine the `server_id` that has `session_id='MASTER_SESSION_ID'`\. This function gives you the name of the primary node\. You can use this in conjunction with the 'endpointPostfix' described below\.
 
-One thing to watch out for is when you connect to a replica that has data that has become stale\. When this happens, the `aurora_replica_status` function may show out\-of\-date information\. A threshold for staleness can be set at the application level and examined by looking at the difference between the server time and the last\_update\_time\. In general, your application should be sure to avoid flip\-flopping between two hosts due to conflicting information returned by the aurora\_replica\_status function\. That is, your application should err on the side of trying all known hosts first instead of blindly following the data returned by the aurora\_replica\_status function\.
+One thing to be aware of is when you connect to a replica that has stale data\. When this happens, the `aurora_replica_status` function may show out\-of\-date information\. A threshold for staleness can be set at the application level and examined by looking at the difference between the server time and the `last_update_time`\. In general, your application should avoid flipping between two hosts due to conflicting information returned by the `aurora_replica_status` function\. Your application should try all known hosts first instead of blindly following the data returned by the `aurora_replica_status` function\.
 
 ##### RDS API<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString.API"></a>
 
@@ -194,13 +194,13 @@ my-node1.cksc6xlmwcyw.us-east-1-beta.rds.amazonaws.com:5432,
 my-node2.cksc6xlmwcyw.us-east-1-beta.rds.amazonaws.com:5432
 ```
 
-The variable 'endpointPostfix' can be a constant that your application sets, or can be obtained by querying the DescribeDBInstances API for a single instance in your cluster\. This value remains constant within a region and for an individual customer, so it would save an API call to simply keep this constant in a resource file that your application reads from\. In the example above, it would be set to:
+The variable `endpointPostfix` can be a constant that your application sets, or can be obtained by querying the `DescribeDBInstances` API for a single instance in your cluster\. This value remains constant within a region and for an individual customer, so it would save an API call to simply keep this constant in a resource file that your application reads from\. In the example above, it would be set to:
 
 ```
 .cksc6xlmwcyw.us-east-1-beta.rds.amazonaws.com
 ```
 
-For availability purposes, a good practice would be to default to using the [Aurora Endpoints](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Overview.html#Aurora.Overview.Endpoints) of your DB Cluster if the API is not responding, or taking too long to respond\. The endpoints are guaranteed to be up to date within the time it takes to update the DNS record \(typically less than 30 seconds\)\. This again can be stored in a resource file that your application consumes\.
+For availability purposes, a good practice is to default to using the [Aurora Endpoints](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Overview.html#Aurora.Overview.Endpoints) of your DB Cluster if the API is not responding, or is taking too long to respond\. The endpoints are guaranteed to be up to date within the time it takes to update the DNS record\. This is typically less than 30 seconds\. You can store this in a resource file that your application consumes\.
 
 ### Testing Failover<a name="AuroraPostgreSQL.BestPracticesFastFailover.Testing"></a>
 
@@ -225,13 +225,13 @@ From the server side, certain APIs can cause an outage that can be used to test 
 + [RebootDBInstance ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html)\- Failover is not guaranteed in this API\. It will shutdown the database on the writer, though, and can be used to test how your application responds to connections dropping \(note that the **ForceFailover **parameter is not applicable for Aurora engines and instead should use the FailoverDBCluster API\)
 + [ModifyDBCluster ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html)\- Modifying the **Port **will cause an outage when the nodes in the cluster begin listening on a new port\. In general your application can respond to this failure by ensuring that only your application controls port changes and can appropriately update the endpoints it depends on, by having someone manually update the port when they make modifications at the API level, or by querying the RDS API in your application to determine if the port has changed\.
 + [ModifyDBInstance ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)\- Modifying the **DBInstanceClass** will cause an outage
-+ [DeleteDBInstance ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html)\- Deleting the master/writer will cause a new DB Instance to be promoted to writer in your DB Cluster
++ [DeleteDBInstance ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html)\- Deleting the primary/writer will cause a new DB Instance to be promoted to writer in your DB Cluster
 
 From the application/client side, if using Linux, you can test how the application responds to sudden packet drops based on port, host, or if tcp keepalive packets are not sent or received by using iptables\.
 
 ### Fast Failover Example<a name="AuroraPostgreSQL.BestPractices.FastFailover.Example"></a>
 
-The following code sample shows how an application might set up an Aurora PostgreSQL driver manager\. The application would call `getConnection()` when it needs a connection\. A call to this function can fail to find a valid host, such as when no writer is found but the `targetServerType` parameter was set to `master`\. The calling application should simply retry calling the function\. This can easily be wrapped into a connection pooler to avoid pushing the retry behavior onto the application\. Most connection poolers allow you to specify a JDBC connection string, so your application could call into `getJdbcConnectionString()` and pass that to the connection pooler to make use of faster failover on Aurora PostgreSQL\.
+The following code sample shows how an application might set up an Aurora PostgreSQL driver manager\. The application would call `getConnection()` when it needs a connection\. A call to this function can fail to find a valid host, such as when no writer is found but the `targetServerType` parameter was set to `primary`\. The calling application should simply retry calling the function\. This can easily be wrapped into a connection pooler to avoid pushing the retry behavior onto the application\. Most connection poolers allow you to specify a JDBC connection string, so your application could call into `getJdbcConnectionString()` and pass that to the connection pooler to make use of faster failover on Aurora PostgreSQL\.
 
 ```
 import java.sql.Connection;
@@ -334,4 +334,4 @@ public class FastFailoverDriverManager {
 
 ## Troubleshooting storage issues<a name="AuroraPostgreSQL.BestPractices.TroubleshootingStorage"></a>
 
-If the amount of memory required by a sort or index creation operation exceeds the amount of memory available, Aurora PostgreSQL writes the excess data to storage\. When it writes the data it uses the same storage space it uses for storing error and message logs\. If your sorts or index creation functions exceed memory available, you could develop a local storage shortage\. If you experience issues with Aurora PostgreSQL running out of storage space, you can either reconfigure your data sorts to use more memory, or reduce the data retention period for your PostgreSQL log files\. For more information about changing the log retention period see, [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\. 
+If the amount of memory required by a sort or index creation operation exceeds the amount of memory available, Aurora PostgreSQL writes the excess data to storage\. When it writes the data it uses the same storage space it uses for storing error and message logs\. If your sorts or index creation functions exceed the memory available, you could develop a local storage shortage\. If you experience issues with Aurora PostgreSQL running out of storage space, you can either reconfigure your data sorts to use more memory, or reduce the data retention period for your PostgreSQL log files\. For more information about changing the log retention period see, [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\. 

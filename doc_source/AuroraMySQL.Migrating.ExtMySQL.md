@@ -51,9 +51,9 @@ To migrate your MySQL data to an Amazon Aurora MySQL DB cluster, several permiss
 + Aurora requires permission to act on your behalf to access the Amazon S3 bucket where you store the files used to create your Amazon Aurora MySQL DB cluster\. You grant Aurora the required permissions using an IAM service role\. 
 + The user making the request must also have permission to list the IAM roles for your AWS account\.
 + If the user making the request is to create the IAM service role or request that Aurora create the IAM service role \(by using the console\), then the user must have permission to create an IAM role for your AWS account\.
-+ If you plan to encrypt the data during the migration process, update the IAM policy of the user who will perform the migration to grant RDS access to the KMS keys used for encrypting the backups\. For instructions, see [Creating an IAM Policy to Access AWS KMS Resources](AuroraMySQL.Integrating.Authorizing.IAM.KMSCreatePolicy.md)\.
++ If you plan to encrypt the data during the migration process, update the IAM policy of the user who will perform the migration to grant RDS access to the AWS Key Management Service customer master keys \(CMKs\) used for encrypting the backups\. For instructions, see [Creating an IAM Policy to Access AWS KMS Resources](AuroraMySQL.Integrating.Authorizing.IAM.KMSCreatePolicy.md)\.
 
-For example, the following IAM policy grants a user the minimum required permissions to use the console to list IAM roles, create an IAM role, list the Amazon S3 buckets for your account, and list the KMS keys\.
+For example, the following IAM policy grants a user the minimum required permissions to use the console to list IAM roles, create an IAM role, list the Amazon S3 buckets for your account, and list the AWS KMS CMKs\.
 
 ```
 {
@@ -264,7 +264,7 @@ During encrypted replication, the Aurora MySQL DB cluster acts a client to the M
 
 1. Connect to the Aurora MySQL DB cluster as the master user using SSL\.
 
-   For information about connecting to an Aurora MySQL DB cluster with SSL, see [Using SSL with Aurora MySQL DB Clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
+   For information about connecting to an Aurora MySQL DB cluster with SSL, see [Using SSL/TLS with Aurora MySQL DB Clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
 
 1. Run the `mysql.rds_import_binlog_ssl_material` stored procedure to import the SSL information into the Aurora MySQL DB cluster\.
 
@@ -295,7 +295,7 @@ During encrypted replication, the Aurora MySQL DB cluster acts a client to the M
    -----END RSA PRIVATE KEY-----\n"}');
    ```
 
-   For more information, see [ mysql\_rds\_import\_binlog\_ssl\_material](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_import_binlog_ssl_material.html) [Using SSL with Aurora MySQL DB Clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
+   For more information, see [ mysql\_rds\_import\_binlog\_ssl\_material](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_import_binlog_ssl_material.html) [Using SSL/TLS with Aurora MySQL DB Clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
 **Note**  
 After running the procedure, the secrets are stored in files\. To erase the files later, you can run the [ mysql\_rds\_remove\_binlog\_ssl\_material](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_remove_binlog_ssl_material.html) stored procedure\.
 

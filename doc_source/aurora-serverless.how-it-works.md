@@ -183,4 +183,4 @@ Maintenance windows don't apply to Aurora Serverless\.
 
 ## Aurora Serverless and Snapshots<a name="aurora-serverless.snapshots"></a>
 
- The cluster volume for an Aurora Serverless cluster is always encrypted\. You can choose the encryption key, but not turn off encryption\. To copy or share a snapshot of an Aurora Serverless cluster, you encrypt the snapshot using your own KMS key\.
+ The cluster volume for an Aurora Serverless cluster is always encrypted\. You can choose the encryption key, but not turn off encryption\. To copy or share a snapshot of an Aurora Serverless cluster, you encrypt the snapshot using your own AWS Key Management Service customer master key \(CMK\)\.

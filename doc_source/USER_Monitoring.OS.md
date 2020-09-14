@@ -174,6 +174,6 @@ After you have enabled Enhanced Monitoring for your DB instance, you can view th
 
 The following tables list the OS metrics available using Amazon CloudWatch Logs\.
 
-#### Metrics for Aurora<a name="w129aac20c30c21b7b5"></a>
+#### Metrics for Aurora<a name="w131aac20c30c21b7b5"></a>
 
 <a name="cloudwatch-os-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Monitoring.OS.html)

@@ -82,9 +82,9 @@ You can choose to have the database session handle database activity events eith
 1. For **Actions**, choose **Start activity stream**\. The **Database Activity Stream** window appears\. 
 
 1. Enter the following settings in the **Database Activity Stream** window:
-   + For **Master key**, choose a key from the list of AWS KMS keys\. 
+   + For **Master key**, choose a key from the list of AWS KMS customer master keys \(CMKs\)\.
 **Note**  
- If your Aurora MySQL cluster can't access AWS KMS keys, follow the instructions in [Network Prerequisites for Aurora MySQL Database Activity Streams](#DBActivityStreams.Prereqs) to enable such access first\. 
+ If your Aurora MySQL cluster can't access AWS KMS CMKs, follow the instructions in [Network Prerequisites for Aurora MySQL Database Activity Streams](#DBActivityStreams.Prereqs) to enable such access first\. 
 
      The master key is used to encrypt the key that in turn encrypts the database activity logged\. You must choose a master key other than the default key\. For more information about encryption keys and AWS KMS, see [What is AWS Key Management Service?](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide\.*
    + For **Database activity stream mode**, choose **Asynchronous** or **Synchronous**\.
@@ -677,10 +677,10 @@ The `databaseActivityEvents` JSON object contains the following information\.
  This field represents the version of the database activity stream data protocol or contract\. It defines what fields are available\. Version 1\.0 represents the original data activity streams support for Aurora PostgreSQL versions 10\.7 and 11\.4\. Version 1\.1 represents the data activity streams support for Aurora PostgreSQL versions 10\.10 and higher and Aurora PostgreSQL 11\.5 and higher\. Version 1\.1 includes the additional fields `errorMessage` and `startTime`\. Version 1\.2 represents the data activity streams support for Aurora MySQL 2\.08 and higher\. Version 1\.2 includes the additional fields `endTime` and `transactionId`\. 
 
 **databaseActivityEvents**  
- An encrypted string representing one or more activity events\. It's represented as a base64 byte array\. When you decrypt the string, the result is a record in JSON format with fields as shown in the the examples in this section\. 
+ An encrypted string representing one or more activity events\. It's represented as a base64 byte array\. When you decrypt the string, the result is a record in JSON format with fields as shown in the examples in this section\. 
 
 **key**  
- The encrypted data key used to encrypt the `databaseActivityEvents` string\. This is the same AWS KMS key that you provided when you started the database activity stream\. 
+ The encrypted data key used to encrypt the `databaseActivityEvents` string\. This is the same AWS KMS customer master key \(CMK\) that you provided when you started the database activity stream\. 
 
  The following example shows the format of this record\. 
 
@@ -695,7 +695,7 @@ The `databaseActivityEvents` JSON object contains the following information\.
 
 Take the following steps to decrypt the contents of the `databaseActivityEvents` field:
 
-1.  Decrypt the value in the `key` JSON field using the AWS KMS key you provided when starting database activity stream\. Doing so returns the data encryption key in clear text\. 
+1.  Decrypt the value in the `key` JSON field using the AWS KMS CMK you provided when starting database activity stream\. Doing so returns the data encryption key in clear text\. 
 
 1.  Base64\-decode the value in the `databaseActivityEvents` JSON field to obtain the ciphertext, in binary format, of the audit payload\. 
 
