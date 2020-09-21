@@ -5,7 +5,7 @@ This topic includes information on best practices and options for using or migra
 ## Fast Failover with Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.BestPractices.FastFailover"></a>
 
 There are several things you can do to make a failover perform faster with Aurora PostgreSQL\. This section discusses each of the following ways:
-+ Aggressively set TCP keepalives to ensure that longer running queries that are waiting for a server response will be killed before the read timeout expires in the event of a failure\.
++ Aggressively set TCP keepalives to ensure that longer running queries that are waiting for a server response will be stopped before the read timeout expires in the event of a failure\.
 + Set the Java DNS caching timeouts aggressively to ensure the Aurora read\-only endpoint can properly cycle through read\-only nodes on subsequent connection attempts\.
 + Set the timeout variables used in the JDBC connection string as low as possible\. Use separate connection objects for short and long running queries\.
 + Use the provided read and write Aurora endpoints to establish a connection to the cluster\.
@@ -117,7 +117,7 @@ Set the following parameters aggressively to help ensure that your application d
 
 You can modify other application parameters to speed up the connection process, depending on how aggressive you want your application to be\.
 + `cancelSignalTimeout` – In some applications, you may want to send a "best effort" cancel signal on a query that has timed out\. If this cancel signal is in your failover path, you should consider setting it aggressively to avoid sending this signal to a dead host\.
-+ `socketTimeout` – This parameter controls how long the socket waits for read operations\. This parameter can be used as a global "query timeout" to ensure no query waits longer than this value\. A good practice is to have one connection handler that runs short lived queries and sets this value lower, and to have another connection handler for long running queries with this value set much higher\. Then, you can rely on TCP keepalive parameters to kill long running queries if the server goes down\.
++ `socketTimeout` – This parameter controls how long the socket waits for read operations\. This parameter can be used as a global "query timeout" to ensure no query waits longer than this value\. A good practice is to have one connection handler that runs short lived queries and sets this value lower, and to have another connection handler for long running queries with this value set much higher\. Then, you can rely on TCP keepalive parameters to stop long running queries if the server goes down\.
 + `tcpKeepAlive` – Enable this parameter to ensure the TCP keepalive parameters that you set are respected\.
 + `loadBalanceHosts` – When set to `true`, this parameter has the application connect to a random host chosen from a list of candidate hosts\.
 
@@ -277,7 +277,7 @@ public class FastFailoverDriverManager {
 
        /*
          * A good practice is to set socket and statement timeout to be the same thing since both 
-         * the client AND server will kill the query at the same time, leaving no running queries 
+         * the client AND server will stop the query at the same time, leaving no running queries 
          * on the backend
          */
         Statement st = conn.createStatement();

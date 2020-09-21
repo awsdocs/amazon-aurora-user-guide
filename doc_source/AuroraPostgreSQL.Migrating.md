@@ -35,7 +35,7 @@ You can also choose for your new Aurora PostgreSQL DB cluster to be encrypted at
 1. Choose **Migrate Database**\.
 
 1. Set the following values on the **Migrate Database** page:
-   + **DB Instance Class**: Choose a DB instance class that has the required storage and capacity for your database, for example `db.r3.large`\. Aurora cluster volumes automatically grow as the amount of data in your database increases, up to a maximum size of 64 tebibytes \(TiB\)\. So you only need to choose a DB instance class that meets your current storage requirements\. For more information, see [Overview of Aurora Storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\.
+   + **DB Instance Class**: Choose a DB instance class that has the required storage and capacity for your database, for example `db.r3.large`\. Aurora cluster volumes automatically grow as the amount of data in your database increases, up to a maximum size of 128 tebibytes \(TiB\) for Aurora MySQL and 64 TiB for Aurora PostgreSQL\. So you only need to choose a DB instance class that meets your current storage requirements\. For more information, see [Overview of Aurora Storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\.
    + **DB Instance Identifier**: Enter a name for the DB cluster that is unique for your account in the AWS Region that you chose\. This identifier is used in the endpoint addresses for the instances in your DB cluster\. You might choose to add some intelligence to the name, such as including the AWS Region and DB engine that you chose, for example **aurora\-cluster1**\.
 
      The DB instance identifier has the following constraints:
@@ -88,7 +88,7 @@ When you create an Aurora Read Replica of a PostgreSQL DB instance, Amazon RDS c
 You can only have one Aurora Read Replica for a PostgreSQL DB instance\. If you try to create an Aurora Read Replica for your Amazon RDS PostgreSQL instance and you already have a read replica, the request is rejected\. 
 
 **Note**  
-Replication issues can arise due to feature differences between Aurora PostgreSQL and the PostgreSQL engine version of your RDS PostgreSQL DB instance that is the replication master\. You can replicate only from an Amazon RDS PostgreSQL instance that is compatible with the Aurora PostgreSQL version in question\. For example, if the supported Aurora PostgreSQL version is 9\.6\.3, the Amazon RDS PostgreSQL DB instance must be running version 9\.6\.1 or greater\. If you encounter an error, you can find help in the [Amazon RDS Community Forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
+Replication issues can arise due to feature differences between Aurora PostgreSQL and the PostgreSQL engine version of your RDS PostgreSQL DB instance that is the replication source\. You can replicate only from an Amazon RDS PostgreSQL instance that is compatible with the Aurora PostgreSQL version in question\. For example, if the supported Aurora PostgreSQL version is 9\.6\.3, the Amazon RDS PostgreSQL DB instance must be running version 9\.6\.1 or greater\. If you encounter an error, you can find help in the [Amazon RDS Community Forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
 
 For more information on PostgreSQL read replicas, see [Working with Read Replicas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html) in the *Amazon RDS User Guide*\.
 
@@ -207,7 +207,7 @@ You can create a new Aurora DB cluster for an Aurora Read Replica from a source 
 
   The list of Amazon EC2 VPC security groups to associate with this DB cluster\.
 
-In the following example, you create a DB cluster named *`myreadreplicacluster`* from a source PostgreSQL DB instance\. This cluster has an ARN set to *`mysqlmasterARN`*\. The cluster is associated with a DB subnet group named *`mysubnetgroup`* and a VPC security group named *`mysecuritygroup`*\.
+In the following example, you create a DB cluster named *`myreadreplicacluster`* from a source PostgreSQL DB instance\. This cluster has an ARN set to *`mysqlARN`*\. The cluster is associated with a DB subnet group named *`mysubnetgroup`* and a VPC security group named *`mysecuritygroup`*\.
 
 **Example**  
 
@@ -217,7 +217,7 @@ https://rds.us-east-1.amazonaws.com/
     &DBClusterIdentifier=myreadreplicacluster
     &DBSubnetGroupName=mysubnetgroup
     &Engine=aurora-postgresql
-    &ReplicationSourceIdentifier=mysqlmasterARN
+    &ReplicationSourceIdentifier=mysqlARN
     &SignatureMethod=HmacSHA256
     &SignatureVersion=4
     &Version=2014-10-31
@@ -268,11 +268,11 @@ https://rds.us-east-1.amazonaws.com/
 
 ### Promoting an Aurora Read Replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote"></a>
 
-After migration completes, you can promote the Aurora Read Replica to a standalone DB cluster\. You then direct your client applications to the endpoint for the Aurora Read Replica\. For more information on the Aurora endpoints, see [Amazon Aurora Connection Management](Aurora.Overview.Endpoints.md)\. Promotion should complete fairly quickly\. You can't delete the master PostgreSQL DB instance or unlink the DB instance and the Aurora Read Replica until the promotion is complete\.
+After migration completes, you can promote the Aurora Read Replica to a standalone DB cluster\. You then direct your client applications to the endpoint for the Aurora Read Replica\. For more information on the Aurora endpoints, see [Amazon Aurora Connection Management](Aurora.Overview.Endpoints.md)\. Promotion should complete fairly quickly\. You can't delete the primary PostgreSQL DB instance or unlink the DB instance and the Aurora Read Replica until the promotion is complete\.
 
-Before you promote your Aurora Read Replica, stop any transactions from being written to the source PostgreSQL DB instance\. Then wait for the replica lag on the Aurora Read Replica to reach zero\.  
+Before you promote your Aurora Read Replica, stop any transactions from being written to the source PostgreSQL DB instance\. Then wait for the replica lag on the Aurora Read Replica to reach zero\. 
 
-After you promote your read replica, confirm that the promotion has completed\. To do this, choose **Instances** in the navigation pane and confirm that there is a **Promoted Read Replica cluster to stand\-alone database cluster** event for your read replica\. After promotion is complete, the master PostgreSQL DB Instance and the Aurora Read Replica are unlinked\. At this point, you can safely delete the DB instance if you want to\.
+After you promote your read replica, confirm that the promotion has completed\. To do this, choose **Instances** in the navigation pane and confirm that there is a **Promoted Read Replica cluster to stand\-alone database cluster** event for your read replica\. After promotion is complete, the primary PostgreSQL DB Instance and the Aurora Read Replica are unlinked\. At this point, you can safely delete the DB instance if you want to\.
 
 #### Console<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote.Console"></a>
 

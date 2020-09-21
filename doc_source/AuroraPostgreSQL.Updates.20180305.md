@@ -41,7 +41,21 @@ The following Aurora PostgreSQL versions are supported\.
 This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.8\. For more information about the improvements in release 11\.8, see [PostgreSQL Release 11\.8](https://www.postgresql.org/docs/11/release-11-8.html)\.
 
 **Topics**
++ [Version 3\.3\.1](#AuroraPostgreSQL.Updates.20180305.331)
 + [Version 3\.3\.0](#AuroraPostgreSQL.Updates.20180305.330)
+
+### Version 3\.3\.1<a name="AuroraPostgreSQL.Updates.20180305.331"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug which materializes when the `NOT EXISTS` operator incorrectly returns TRUE which can only happen under the following unusual set of circumstances:
+   + A query is using the `NOT EXISTS` operator\.
+   + The column or columns being evaluated against the outer query in the `NOT EXISTS` subquery contain a NULL value\.
+   + There is not a another predicate in the subquery that removes the need for the evaluation of the NULL values\.
+   + The filter used in the subquery does not use an index seek for its execution\.
+   + The operator is not converted to a join by the query optimizer\.
 
 ### Version 3\.3\.0<a name="AuroraPostgreSQL.Updates.20180305.330"></a>
 
@@ -90,9 +104,23 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.8\. For more
 This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.7\. For more information about the improvements in release 11\.7, see [PostgreSQL Release 11\.7](https://www.postgresql.org/docs/11/release-11-7.html)\.
 
 **Topics**
++ [Version 3\.2\.4](#AuroraPostgreSQL.Updates.20180305.324)
 + [Version 3\.2\.3](#AuroraPostgreSQL.Updates.20180305.323)
 + [Version 3\.2\.2](#AuroraPostgreSQL.Updates.20180305.322)
 + [Version 3\.2\.1](#AuroraPostgreSQL.Updates.20180305.321)
+
+### Version 3\.2\.4<a name="AuroraPostgreSQL.Updates.20180305.324"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug which materializes when the `NOT EXISTS` operator incorrectly returns TRUE which can only happen under the following unusual set of circumstances:
+   + A query is using the `NOT EXISTS` operator\.
+   + The column or columns being evaluated against the outer query in the `NOT EXISTS` subquery contain a NULL value\.
+   + There is not a another predicate in the subquery that removes the need for the evaluation of the NULL values\.
+   + The filter used in the subquery does not use an index seek for its execution\.
+   + The operator is not converted to a join by the query optimizer\.
 
 ### Version 3\.2\.3<a name="AuroraPostgreSQL.Updates.20180305.323"></a>
 
@@ -153,7 +181,7 @@ None\.
 
 1. Fixed a bug in the `PostGIS` extension which could lead to a database restart\. This has been reported to the PostGIS community as [https://trac.osgeo.org/postgis/ticket/4646](https://trac.osgeo.org/postgis/ticket/4646)\.
 
-1. Fixed a bug where read requests might hang due to incorrect error handling in the storage engine\.
+1. Fixed a bug where read requests might stop responding due to incorrect error handling in the storage engine\.
 
 1. Fixed a bug that fails for some queries and results in the message ERROR: found xmin xxxxxx from before relfrozenxid yyyyyyy\. This could occur following the promotion of a read instance to a write instance\.
 
@@ -315,7 +343,7 @@ You can find the following new features and improvements in this engine version\
 
 1. Fixed a memory leak on read nodes when cluster cache management is enabled\.
 
-1. Fixed a bug whereby importing an RDS PostgreSQL snapshot might hang if the source snapshot contains a large number of unlogged relations\.
+1. Fixed a bug whereby importing an RDS PostgreSQL snapshot might stop responding if the source snapshot contains a large number of unlogged relations\.
 
 1. Fixed a bug whereby the Aurora storage daemon might crash under heavy I/O load\.
 
@@ -390,7 +418,21 @@ You can find the following improvements in this engine update\.
 This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.13\. For more information about the improvements in release 10\.13, see [ PostgreSQL Release 10\.13](https://www.postgresql.org/docs/10/release-10-13.html)\.
 
 **Topics**
++ [Version 2\.6\.1](#AuroraPostgreSQL.Updates.20180305.261)
 + [Version 2\.6\.0](#AuroraPostgreSQL.Updates.20180305.260)
+
+### Version 2\.6\.1<a name="AuroraPostgreSQL.Updates.20180305.261"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug which materializes when the `NOT EXISTS` operator incorrectly returns TRUE which can only happen under the following unusual set of circumstances:
+   + A query is using the `NOT EXISTS` operator\.
+   + The column or columns being evaluated against the outer query in the `NOT EXISTS` subquery contain a NULL value\.
+   + There is not a another predicate in the subquery that removes the need for the evaluation of the NULL values\.
+   + The filter used in the subquery does not use an index seek for its execution\.
+   + The operator is not converted to a join by the query optimizer\.
 
 ### Version 2\.6\.0<a name="AuroraPostgreSQL.Updates.20180305.260"></a>
 
@@ -439,9 +481,23 @@ You can find the following improvements in this engine update\.
 This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.12\. For more information about the improvements in release 10\.12, see [ PostgreSQL Release 10\.12](https://www.postgresql.org/docs/10/release-10-12.html)\.
 
 **Topics**
++ [Version 2\.5\.4](#AuroraPostgreSQL.Updates.20180305.254)
 + [Version 2\.5\.3](#AuroraPostgreSQL.Updates.20180305.253)
 + [Version 2\.5\.2](#AuroraPostgreSQL.Updates.20180305.252)
 + [Version 2\.5\.1](#AuroraPostgreSQL.Updates.20180305.251)
+
+### Version 2\.5\.4<a name="AuroraPostgreSQL.Updates.20180305.254"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical Stability Enhancements**
+
+1. Fixed a bug which materializes when the `NOT EXISTS` operator incorrectly returns TRUE which can only happen under the following unusual set of circumstances:
+   + A query is using the `NOT EXISTS` operator\.
+   + The column or columns being evaluated against the outer query in the `NOT EXISTS` subquery contain a NULL value\.
+   + There is not a another predicate in the subquery that removes the need for the evaluation of the NULL values\.
+   + The filter used in the subquery does not use an index seek for its execution\.
+   + The operator is not converted to a join by the query optimizer\.
 
 ### Version 2\.5\.3<a name="AuroraPostgreSQL.Updates.20180305.253"></a>
 
@@ -504,7 +560,7 @@ None\.
 
 1. Fixed a bug in the `PostGIS` extension which could lead to a database restart\. This has been reported to the PostGIS community as [https://trac.osgeo.org/postgis/ticket/4646](https://trac.osgeo.org/postgis/ticket/4646)\.
 
-1. Fixed a bug where read requests might hang due to incorrect error handling in the storage engine\.
+1. Fixed a bug where read requests might stop responding due to incorrect error handling in the storage engine\.
 
 1. Fixed a bug that fails for some queries and results in the message ERROR: found xmin xxxxxx from before relfrozenxid yyyyyyy\. This could occur following the promotion of a read instance to a write instance\.
 
@@ -664,7 +720,7 @@ You can find the following new features and improvements in this engine version\
 
 1. Fixed a memory leak on read nodes when cluster cache management is enabled\.
 
-1. Fixed a bug whereby importing an RDS PostgreSQL snapshot may hang if the source snapshot contains a large number of unlogged relations\.
+1. Fixed a bug whereby importing an RDS PostgreSQL snapshot might stop responding if the source snapshot contains a large number of unlogged relations\.
 
 1. Fixed a bug whereby the Aurora storage daemon may crash under heavy I/O load\.
 
@@ -730,11 +786,11 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug whereby data activity streaming could consume excessive CPU time\.
 
-1. Fixed a bug whereby parallel threads scanning a B\-tree index could hang following a disk read\.
+1. Fixed a bug whereby parallel threads scanning a B\-tree index might stop responding following a disk read\.
 
 1. Fixed a bug where use of the `not in` predicate against a common table expression \(CTE\) could return the following error: "ERROR: bad levelsup for CTE"\.
 
-1. Fixed a bug whereby the read node replay process could hang while applying a modification to a generalized search tree \(GiST\) index\.
+1. Fixed a bug whereby the read node replay process might stop responding while applying a modification to a generalized search tree \(GiST\) index\.
 
 1. Fixed a bug whereby visibility map pages could contain incorrect freeze bits following a failover to a read node\.
 
@@ -748,7 +804,7 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug whereby the function `aurora_stat_memctx_usage` reported incorrect results\.
 
-1. Fixed a bug whereby the read node replay process could wait to kill conflicting queries beyond the configured `max_standby_streaming_delay` value\.
+1. Fixed a bug whereby the read node replay process could wait to stop conflicting queries beyond the configured `max_standby_streaming_delay` value\.
 
 1. Additional information is now logged on read nodes when active connections conflict with the relay process\.
 
@@ -1044,7 +1100,7 @@ None\.
 
 1. Fixed a bug in the `PostGIS` extension which could lead to a database restart\. This has been reported to the PostGIS community as [https://trac.osgeo.org/postgis/ticket/4646](https://trac.osgeo.org/postgis/ticket/4646)\.
 
-1. Fixed a bug where read requests might hang due to incorrect error handling in the storage engine\.
+1. Fixed a bug where read requests might stop responding due to incorrect error handling in the storage engine\.
 
 1. Fixed a bug that fails for some queries and results in the message ERROR: found xmin xxxxxx from before relfrozenxid yyyyyyy\. This could occur following the promotion of a read instance to a write instance\.
 
@@ -1149,11 +1205,11 @@ You can find the following new features and improvements in this engine version\
 
 1. Fixed a bug whereby a read node may crash during the replay of a PostgreSQL `SLRU`\-truncate operation\.
 
-1. Fixed a bug where in rare cases, database writes may stall following an error returned by one of the six copies of an Aurora log record\. 
+1. Fixed a bug where in rare cases, database writes might stall following an error returned by one of the six copies of an Aurora log record\. 
 
 1. Fixed a memory leak on read nodes when cluster cache management is enabled\.
 
-1. Fixed a bug whereby importing an RDS PostgreSQL snapshot may hang if the source snapshot contains a large number of unlogged relations\.
+1. Fixed a bug whereby importing an RDS PostgreSQL snapshot might stop responding if the source snapshot contains a large number of unlogged relations\.
 
 1. Fixed a bug related to `hot_standby_feedback` for read nodes whereby the read node may report the wrong transaction id epoch to the write node\. This can cause the write node to ignore the `hot_standby_feedback` and invalidate snapshots on the read node\.
 
@@ -1206,7 +1262,7 @@ You can find the following improvements in this engine update\.
 
 1. Provided a backport fix for the PostgreSQL community security issue CVE\-2019\-10130\.
 
-1. Fixed a bug whereby the read node replay process may hang while applying a modification to a generalized search tree \(GiST\) index\.
+1. Fixed a bug whereby the read node replay process might stop responding while applying a modification to a generalized search tree \(GiST\) index\.
 
 1. Fixed a bug whereby visibility map pages may contain incorrect freeze bits following a failover to a read node\.
 
@@ -1220,7 +1276,7 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug whereby the function `aurora_stat_memctx_usage` reported incorrect results\.
 
-1. Fixed a bug whereby the read node replay process may wait to kill conflicting queries beyond the configured `max_standby_streaming_delay`\.
+1. Fixed a bug whereby the read node replay process may wait to stop conflicting queries beyond the configured `max_standby_streaming_delay`\.
 
 1. Additional information is now logged on read nodes when active connections conflict with the relay process\.
 
@@ -1428,7 +1484,7 @@ You can find the following improvements in this engine update\.
 
 1. Fixes a bug in which vacuum can fail to update the corresponding `pg_database.datfrozenxid` value for a database\.
 
-1. Fixes a bug in which a crash while creating a new MultiXact \(contended row level lock\) can cause Aurora PostgreSQL to hang indefinitely on the first access to the same relation after the engine restarts\.
+1. Fixes a bug in which a crash while creating a new MultiXact \(contended row level lock\) can cause Aurora PostgreSQL to stop responding indefinitely on the first access to the same relation after the engine restarts\.
 
 1. Fixes a bug in which a PostgreSQL backend can't be terminated or canceled while invoking an `fdw` call\.
 
@@ -1503,7 +1559,7 @@ You can find the following improvements in this engine update:
 
    CONTEXT: xlog redo at 46E/F1330870 for Storage/TRUNCATE: base/13322/8058750 to 0 blocks flags 7
 
-1. Fixes a bug that could cause Aurora PostgreSQL to hang while replaying a multixact WAL record when replicating from RDS PostgreSQL to Aurora PostgreSQL\.
+1. Fixes a bug that could cause Aurora PostgreSQL to stop responding while replaying a multixact WAL record when replicating from RDS PostgreSQL to Aurora PostgreSQL\.
 
 1. Multiple improvements to the reliability of importing snapshots from RDS PostgreSQL to Aurora PostgreSQL\.
 
@@ -1524,7 +1580,7 @@ This version includes the following patch versions:
 
 You can find the following improvements in this engine update:
 
-1. Fixes an issue with parallel query execution that can lead to incorrect results\.
+1. Fixes an issue with parallel query processing that can lead to incorrect results\.
 
 1. Fixes an issue with visibility map handling during replication from Amazon RDS for PostgreSQL that can cause the Aurora storage volume to become unavailable\. 
 

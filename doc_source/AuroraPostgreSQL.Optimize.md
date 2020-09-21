@@ -125,7 +125,7 @@ When the optimizer processes any SQL statement, it uses the following rules to c
 + Removes the EXPLAIN keyword and EXPLAIN options, if present
 + Removes trailing spaces
 + Removes all literals
-+ Preserves whitespace and case for readability
++ Preserves space and case for readability
 
 For example, take the following statement\.
 

@@ -21,13 +21,13 @@
 
 ## How Aurora Storage Grows<a name="aurora-storage-growth"></a>
 
- Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of 64 tebibytes \(TiB\)\. Table size is limited to the size of the cluster volume\. That is, the maximum table size for a table in an Aurora DB cluster is 64 TiB\. 
+ Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\) for Aurora MySQL and 64 TiB for Aurora PostgreSQL\. 
 
  This automatic storage scaling, combined with the high\-performance and highly distributed storage subsystem, makes Aurora a good choice for your important enterprise data when your main objectives are reliability and high availability\. For ways to balance storage costs against these other priorities, see the following sections\. 
 
 ## How Aurora Data Storage is Billed<a name="aurora-storage-data-billing"></a>
 
- Even though an Aurora cluster volume can grow to up to 64 TiB, you are only charged for the space that you use in an Aurora cluster volume\. When Aurora data is removed, such as by dropping a table or partition, the overall allocated space remains the same\. The free space is reused automatically when data volume increases in the future\. 
+ Even though an Aurora cluster volume can grow to up to 128 TiB for MySQL and 64 TiB for PostgreSQL, you are only charged for the space that you use in an Aurora cluster volume\. When Aurora data is removed, such as by dropping a table or partition, the overall allocated space remains the same\. The free space is reused automatically when data volume increases in the future\. 
 
 **Note**  
  Because storage costs are based on the storage "high water mark" \(the maximum amount that was allocated for the Aurora cluster at any point in time\), you can manage costs by avoiding ETL practices that create large volumes of temporary information, or that load large volumes of new data prior to removing unneeded older data\. 

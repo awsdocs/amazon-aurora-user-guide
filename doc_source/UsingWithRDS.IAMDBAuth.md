@@ -11,8 +11,8 @@ IAM database authentication provides the following benefits:
 
 **Topics**
 + [Availability for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.Availability)
-+ [Aurora MySQL Limitations for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.ConnectionsPerSecond)
-+ [Aurora PostgreSQL Limitations for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.LimitsPostgreSQL)
++ [Limitations for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.Limitations)
++ [Aurora MySQL Recommendations for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.ConnectionsPerSecond)
 + [Enabling and Disabling IAM Database Authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
 + [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
 + [Creating a Database Account Using IAM Authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
@@ -24,26 +24,21 @@ IAM database authentication is available for the following database engines and 
 + Aurora with MySQL compatibility version 1\.10 or higher\. All DB instance classes are supported, except for db\.t2\.small and db\.t3\.small\.
 + Aurora with PostgreSQL compatibility, PostgreSQL versions 9\.6\.9 and 10\.4 or higher\.
 
-## Aurora MySQL Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.ConnectionsPerSecond"></a>
+## Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.Limitations"></a>
 
-When using IAM database authentication with Aurora MySQL, the following limitations apply:
-+ Currently, Aurora MySQL parallel query doesn't support IAM database authentication\.
-+ Currently, IAM DB authentication doesn't support global condition context keys\.
+When using IAM database authentication, the following limitations apply:
++ The maximum number of connections per second for your DB cluster might be limited depending on its DB instance class and your workload\.
++ Currently, IAM database authentication doesn't support global condition context keys\.
 
   For more information about global condition context keys, see [ AWS Global Condition Context Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\.
-+ The maximum number of connections per second for your DB cluster might be limited depending on its DB instance class and your workload\.
++ Currently, IAM database authentication isn't supported for CNAMEs\.
++ Currently, Aurora MySQL parallel query doesn't support IAM database authentication\.
 
-We recommend the following when using the Aurora MySQL engine:
+## Aurora MySQL Recommendations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.ConnectionsPerSecond"></a>
+
+We recommend the following when using the Aurora MySQL DB engine:
 + Use IAM database authentication as a mechanism for temporary, personal access to databases\.
 + Use IAM database authentication only for workloads that can be easily retried\.
 + Use IAM database authentication when your application requires fewer than 200 new IAM database authentication connections per second\.
 
   The database engines that work with Amazon Aurora don't impose any limits on authentication attempts per second\. However, when you use IAM database authentication, your application must generate an authentication token\. Your application then uses that token to connect to the DB cluster\. If you exceed the limit of maximum new connections per second, then the extra overhead of IAM database authentication can cause connection throttling\. The extra overhead can cause even existing connections to drop\.   For information about the maximum total connections for Aurora MySQL, see [Maximum Connections to an Aurora MySQL DB Instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections)\. 
-
-## Aurora PostgreSQL Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.LimitsPostgreSQL"></a>
-
-When using IAM database authentication with Aurora PostgreSQL, the following limitations apply:
-+ The maximum number of connections per second for your DB cluster might be limited depending on its DB instance class and your workload\.
-+ Currently, IAM DB authentication doesn't support global condition context keys\.
-
-  For more information about global condition context keys, see [ AWS Global Condition Context Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\.

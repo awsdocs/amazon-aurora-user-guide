@@ -119,7 +119,7 @@ SELECT sentiment FROM aws_comprehend.detect_sentiment(null, 'I like it!', 'en');
 
 When you install the `aws_ml` extension, the `aws_ml` administrative role is created and granted to the `rds_superuser` role\. Separate schemas are also created for the `aws_sagemaker` service and for the `aws_comprehend` service\. The `rds_superuser` role is made the `OWNER` of both of these schemas\. 
 
-For users or roles to obtain access to the functions in the `aws_ml` extension, grant `EXECUTE` privilege on those functions\. You can subsequently REVOKE execution privileges, if needed\. `EXECUTE` privileges are revoked from PUBLIC on the functions of these schemas by default\. In a multi\-tenant database configuration, to prevent tenants from accessing the functions use `REVOKE USAGE` on one or more of the ML service schemas\.
+For users or roles to obtain access to the functions in the `aws_ml` extension, grant `EXECUTE` privilege on those functions\. You can subsequently REVOKE the privileges, if needed\. `EXECUTE` privileges are revoked from PUBLIC on the functions of these schemas by default\. In a multi\-tenant database configuration, to prevent tenants from accessing the functions use `REVOKE USAGE` on one or more of the ML service schemas\.
 
 For a reference to the installed functions of the `aws_ml` extension, see [PostgreSQL Function Reference for Aurora Machine Learning](#postgresql-ml-functions)\. 
 
@@ -216,7 +216,7 @@ To specify a user\-defined function, use the SQL data definition language \(DDL\
 + The specific SageMaker endpoint to invoke\.
 + The return type\. 
 
-The user\-defined function returns the inference computed by the SageMaker endpoint after executing the model on the input parameters\. The following example creates a user\-defined function for a SageMaker model with two input parameters\.
+The user\-defined function returns the inference computed by the SageMaker endpoint after running the model on the input parameters\. The following example creates a user\-defined function for an SageMaker model with two input parameters\.
 
 ```
 CREATE FUNCTION classify_event (IN arg1 INT, IN arg2 DATE, OUT category INT)
@@ -233,8 +233,8 @@ Note the following:
 
   For more details about parameters, see the [aws\_sagemaker\.invoke\_endpoint](#aws_sagemaker.invoke_endpoint) function reference\.
 + This example uses an INT output type\. If you cast the output from a `varchar` type to a different type, then it must be cast to a PostgreSQL builtin scalar type such as `INTEGER`, `REAL`, `FLOAT`, or `NUMERIC`\. For more information about these types, see [Data Types](https://www.postgresql.org/docs/current/datatype.html) in the PostgreSQL documentation\.
-+ Specify `PARALLEL SAFE` to enable parallel query execution\. For more information, see [Exploiting Parallel Query Processing](#postgresql-using-sagemaker-example-parallel)\.
-+ Specify `COST 5000` to estimate execution cost for the function\. Use a positive number giving the estimated execution cost for the function, in units of `cpu_operator_cost`\.
++ Specify `PARALLEL SAFE` to enable parallel query processing\. For more information, see [Exploiting Parallel Query Processing](#postgresql-using-sagemaker-example-parallel)\.
++ Specify `COST 5000` to estimate the cost of running the function\. Use a positive number giving the estimated run cost for the function, in units of `cpu_operator_cost`\.
 
 ### Passing an Array as Input to a SageMaker Model<a name="postgresql-using-sagemaker-example-array"></a>
 
@@ -302,8 +302,8 @@ For the composite type, use fields in the same order as they appear in the model
 
  Most of the work in an `aws_ml` function call happens within the external Aurora Machine Learning service\. This separation allows you to scale the resources for the machine learning service independent of your Aurora cluster\. Within Aurora, you mostly focus on making the user\-defined function calls themselves as efficient as possible\. Some aspects that you can influence from your Aurora cluster include:
 + The `max_rows_per_batch` setting for calls to the `aws_ml` functions\.
-+ The number of virtual CPUs of the database instance, which determines the maximum degree of parallelism that the database might use when executing your ML functions\.
-+ the PostgreSQL parameters that control parallel query execution\.
++ The number of virtual CPUs of the database instance, which determines the maximum degree of parallelism that the database might use when running your ML functions\.
++ the PostgreSQL parameters that control parallel query processing\.
 
 **Topics**
 + [Optimizing Batch\-Mode Execution for Aurora Machine Learning Function Calls](#postgresql-ml-batch-mode)
@@ -363,7 +363,7 @@ If you do an `EXPLAIN` \(`VERBOSE`, `ANALYZE`\) of a query that uses batch\-mode
 
 #### Verifying Batch\-Mode Execution<a name="postgresql-ml-batch-mode-verify"></a>
 
-To see if a function executed in batch mode, use `EXPLAIN ANALYZE`\. If batch\-mode execution was used, then the query plan will include the information in a "Batch Processing" section\.
+To see if a function ran in batch mode, use `EXPLAIN ANALYZE`\. If batch\-mode execution was used, then the query plan will include the information in a "Batch Processing" section\.
 
 ```
 EXPLAIN ANALYZE SELECT user-defined-function();
@@ -389,7 +389,7 @@ To dramatically increase performance when processing a large number of rows, you
 **Note**  
 PostgreSQL doesn't yet support parallel query for data manipulation language \(DML\) statements\.
 
-Parallel query processing occurs both within the database and within the ML service\. The number of cores in the instance class of the database limits the degree of parallelism that can be used during query execution\. The database server can construct a parallel query execution plan that partitions the task among a set of parallel workers\. Then each of these workers can build batched requests containing tens of thousands of rows \(or as many as are allowed by each service\)\. 
+Parallel query processing occurs both within the database and within the ML service\. The number of cores in the instance class of the database limits the degree of parallelism that can be used when running a query\. The database server can construct a parallel query execution plan that partitions the task among a set of parallel workers\. Then each of these workers can build batched requests containing tens of thousands of rows \(or as many as are allowed by each service\)\. 
 
 The batched requests from all of the parallel workers are sent to the endpoint for the AWS service \(SageMaker, for example\)\. Thus, the number and type of instances behind the AWS service endpoint also limits the degree of parallelism that can be usefully exploited\. Even a two\-core instance class can benefit significantly from parallel query processing\. However, to fully exploit parallelism at higher K degrees, you need a database instance class that has at least K cores\. You also need to configure the AWS service so that it can process K batched requests in parallel\. For SageMaker, you need to configure the SageMaker endpoint for your ML model to have K initial instances of a sufficiently high\-performing instance class\.
 
@@ -411,7 +411,7 @@ SET max_parallel_workers_per_gather to 4;  -- not greater than max_parallel_work
 --
 ALTER TABLE yourTable SET (parallel_workers = 4);
 
--- Example query to exploit both batch mode execution and parallel query
+-- Example query to exploit both batch-mode execution and parallel query
 --
 EXPLAIN (verbose, analyze, buffers, hashes) 
 SELECT aws_comprehend.detect_sentiment(description, 'en')).*

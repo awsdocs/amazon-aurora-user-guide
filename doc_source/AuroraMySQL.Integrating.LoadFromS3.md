@@ -93,7 +93,7 @@ Following, you can find a list of the required and optional parameters used by t
 + **PARTITION** – Requires that all input rows be inserted into the partitions identified by the specified list of comma\-separated partition names\. If an input row cannot be inserted into one of the specified partitions, then the statement fails and an error is returned\.
 + **CHARACTER SET** – Identifies the character set of the data in the input file\.
 + **FIELDS \| COLUMNS** – Identifies how the fields or columns in the input file are delimited\. Fields are tab\-delimited by default\.
-+ **LINES** – Identifies how the lines in the input file are delimited\. Lines are delimited by a carriage return by default\.
++ **LINES** – Identifies how the lines in the input file are delimited\. Lines are delimited by a newline character \(`'\n'`\) by default\.
 + **IGNORE *number* LINES \| ROWS** – Specifies to ignore a certain number of lines or rows at the start of the input file\. For example, you can use `IGNORE 1 LINES` to skip over an initial header line containing column names, or `IGNORE 2 ROWS` to skip over the first two rows of data in the input file\. If you also use `PREFIX`, `IGNORE` skips a certain number of lines or rows at the start of the first input file\.
 + **col\_name\_or\_user\_var, \.\.\.** – Specifies a comma\-separated list of one or more column names or user variables that identify which columns to load by name\. The name of a user variable used for this purpose must match the name of an element from the text file, prefixed with @\. You can employ user variables to store the corresponding field values for subsequent reuse\. 
 

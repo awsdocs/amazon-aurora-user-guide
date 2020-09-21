@@ -52,7 +52,7 @@ Don't choose **Amazon Linux 2 AMI** because it doesn't have the software package
 
 1. Choose **View Instances** to find your instance\. 
 
-1. Wait until **Instance Status** for your instance reads as **running** before continuing\. 
+1. Wait until **Instance Status** for your instance reads as **Running** before continuing\. 
 
 ## Install an Apache Web Server with PHP<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.Apache"></a>
 

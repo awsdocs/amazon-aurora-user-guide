@@ -14,7 +14,7 @@ Following, you can find a description of the Amazon Aurora Global Database featu
 
 ## Overview of Aurora Global Databases<a name="aurora-global-database-overview"></a>
 
- An Aurora global database consists of one primary AWS Region where your data is mastered, and up to five read\-only, secondary AWS Regions\. Aurora replicates data to the secondary AWS Regions with typical latency of under a second\. You issue write operations directly to the primary DB instance in the primary AWS Region\. 
+ An Aurora global database consists of one primary AWS Region where your data is maintained, and up to five read\-only, secondary AWS Regions\. Aurora replicates data to the secondary AWS Regions with typical latency of under a second\. You issue write operations directly to the primary DB instance in the primary AWS Region\. 
 
 An Aurora global database uses dedicated infrastructure to replicate your data, leaving database resources available entirely to serve application workloads\. Applications with a worldwide footprint can use reader instances in the secondary AWS Regions for low\-latency reads\. In some unlikely cases, your database might become degraded or isolated in an AWS Region\. If this happens, with a global database you can promote one of the secondary AWS Regions to take full read/write workloads in under a minute\. 
 
@@ -60,7 +60,7 @@ With Aurora global databases, you can find the following advantages:
 +  You can start a Database Activity Stream only on the primary cluster, not on any secondary clusters\. For information about Database Activity Streams, see [Using Database Activity Streams with Amazon Aurora](DBActivityStreams.md)\.
 
  The following features aren't supported for Aurora global databases: 
-+  Cloning\. For information about cloning, see [Cloning Databases in an Aurora DB Cluster](Aurora.Managing.Clone.md)\. 
++  Cloning\. For information about cloning, see [Cloning an Aurora DB Cluster Volume](Aurora.Managing.Clone.md)\. 
 +  Backtrack\. For information about backtracking, see [Backtracking an Aurora DB Cluster](AuroraMySQL.Managing.Backtrack.md)\. 
 +  Parallel query\. For information about parallel query, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\. 
 + Aurora Serverless\. For information about Aurora Serverless, see [Using Amazon Aurora Serverless](aurora-serverless.md)\. 

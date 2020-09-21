@@ -145,7 +145,7 @@ We recommend the following process when upgrading an Aurora PostgreSQL DB cluste
 
 1. Perform a dry run upgrade\.
 
-   We highly recommend testing a major version upgrade on a duplicate of your production database before trying the upgrade on your production database\. To create a duplicate test instance, you can either restore your database from a recent snapshot or clone your database\. For more information, see [Restoring from a Snapshot](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Restoring) or [Cloning Databases in an Aurora DB Cluster](Aurora.Managing.Clone.md)\.
+   We highly recommend testing a major version upgrade on a duplicate of your production database before trying the upgrade on your production database\. To create a duplicate test instance, you can either restore your database from a recent snapshot or clone your database\. For more information, see [Restoring from a Snapshot](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Restoring) or [Cloning an Aurora DB Cluster Volume](Aurora.Managing.Clone.md)\.
 
    For more information, see [Manually Upgrading the Aurora PostgreSQL Engine](#USER_UpgradeDBInstance.Upgrading.Manual)\. 
 
@@ -161,6 +161,17 @@ During the upgrade process, you can't do a point\-in\-time restore of your clust
 
 After you complete a major version upgrade, we recommend the following:
 + Run the `ANALYZE` operation to refresh the `pg_statistic` table\.
++ If you upgraded to PostgreSQL version 10, run `REINDEX` on any hash indexes you have\. Hash indexes were changed in version 10 and must be rebuilt\. To locate invalid hash indexes, run the following SQL for each database that contains hash indexes\.
+
+  ```
+  SELECT idx.indrelid::regclass AS table_name, 
+     idx.indexrelid::regclass AS index_name 
+  FROM pg_catalog.pg_index idx
+     JOIN pg_catalog.pg_class cls ON cls.oid = idx.indexrelid 
+     JOIN pg_catalog.pg_am am ON am.oid = cls.relam 
+  WHERE am.amname = 'hash' 
+  AND NOT idx.indisvalid;
+  ```
 + Consider testing your application on the upgraded database with a similar workload to verify that everything works as expected\. After the upgrade is verified, you can delete this test instance\.
 
 ## Manually Upgrading the Aurora PostgreSQL Engine<a name="USER_UpgradeDBInstance.Upgrading.Manual"></a>

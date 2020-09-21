@@ -61,6 +61,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `log_autovacuum_min_duration`  |  Yes  | 
 | max\_prepared\_transactions | Yes | 
 |  `password_encryption`  |  No  | 
+|  `max_standby_streaming_delay`  |  Yes for PostgreSQL 11, No for earlier PostgreSQL versions  | 
 |  `port`  |  No  | 
 | rds\.enable\_plan\_management  | Yes | 
 | rds\.extensions | No | 
@@ -209,7 +210,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `max_replication_slots` | Yes | 
 | `max_stack_depth` | Yes | 
 | `max_standby_archive_delay` | No | 
-| `max_standby_streaming_delay` | No | 
+| `max_standby_streaming_delay` | Yes for PostgreSQL 11, No for earlier PostgreSQL versions | 
 | `max_wal_senders` | Yes | 
 | `max_worker_processes` | Yes | 
 | `min_parallel_relation_size` | Yes | 

@@ -65,9 +65,12 @@ Amazon RDS creates an SSL/TLS certificate and installs the certificate on the DB
 
 For information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\.
 
-Aurora MySQL 5\.6 supports Transport Layer Security \(TLS\) version 1\.0\. Aurora MySQL 5\.7 supports TLS version 1\.0, 1\.1, and 1\.2\.
-
 We recommend the MariaDB Connector/J client as a client that supports SAN with SSL\. For more information, see the [MariaDB Connector/J download](https://downloads.mariadb.org/connector-java/) page\.
+
+**Topics**
++ [Requiring an SSL/TLS Connection to an Aurora MySQL DB Cluster](#AuroraMySQL.Security.SSL.RequireSSL)
++ [TLS Versions for Aurora MySQL](#AuroraMySQL.Security.SSL.TLS_Version)
++ [Encrypting Connections to an Aurora MySQL DB Cluster](#AuroraMySQL.Security.SSL.EncryptingConnections)
 
 ### Requiring an SSL/TLS Connection to an Aurora MySQL DB Cluster<a name="AuroraMySQL.Security.SSL.RequireSSL"></a>
 
@@ -83,6 +86,30 @@ When the `require_secure_transport` parameter is set to `ON` for a DB cluster, a
 ```
 MySQL Error 3159 (HY000): Connections using insecure transport are prohibited while --require_secure_transport=ON.
 ```
+
+### TLS Versions for Aurora MySQL<a name="AuroraMySQL.Security.SSL.TLS_Version"></a>
+
+Aurora MySQL supports Transport Layer Security \(TLS\) versions 1\.0, 1\.1, and 1\.2\. The following table shows the TLS support for Aurora MySQL versions\. 
+
+
+****  
+
+| Aurora MySQL Version | TLS 1\.0 | TLS 1\.1 | TLS 1\.2 | 
+| --- | --- | --- | --- | 
+|  Aurora MySQL 5\.7  |  Supported  |  Supported  |  Supported  | 
+|  Aurora MySQL 5\.6  |  Supported  |  Not supported  |  Not supported  | 
+
+For an Aurora MySQL 5\.7 DB cluster, you can use the `tls_version` DB cluster parameter to indicate the permitted protocol versions\. Similar client parameters exist for most client tools or database drivers\. Some older clients might not support newer TLS versions\. By default, the DB cluster attempts to use the highest TLS protocol version allowed by both the server and client configuration\.
+
+Set the `tls_version` DB cluster parameter to one of the following values:
++ `TLSv1.2` – Only the TLS version 1\.2 protocol is permitted for encrypted connections\.
++ `TLSv1.1` – TLS version 1\.1 and 1\.2 protocols are permitted for encrypted connections\.
++ `TLSv1` – TLS version 1\.0, 1\.1, and 1\.2 protocols are permitted for encrypted connections\.
+
+If the parameter isn't set, then TLS version 1\.0, 1\.1, and 1\.2 protocols are permitted for encrypted connections\.
+
+**Note**  
+The `tls_version` DB cluster parameter isn't available for Aurora MySQL 5\.6\.
 
 ### Encrypting Connections to an Aurora MySQL DB Cluster<a name="AuroraMySQL.Security.SSL.EncryptingConnections"></a>
 

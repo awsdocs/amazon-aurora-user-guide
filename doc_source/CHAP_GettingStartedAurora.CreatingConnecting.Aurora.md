@@ -44,14 +44,14 @@ For this example, **Easy Create** is enabled\. For information about creating an
 
 1. For **DB cluster identifier**, enter a name for the DB cluster, or leave the default name\.
 
-1. For **Master username**, enter a name for the master user, or leave the default name\.
+1. For **Master username**, enter a name for the user, or leave the default name\.
 
    The **Create database** page should look similar to the following image:  
 ![\[Create database page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-aurora-mysql.png)
 
-1. To use an automatically generated master password for the DB cluster, make sure that the **Auto generate a password** is chosen\.
+1. To use an automatically generated password for the DB cluster, make sure that the **Auto generate a password** is chosen\.
 
-   To enter your master password, clear the **Auto generate a password** check box, and then enter the same password in **Master password** and **Confirm password**\.
+   To enter your password, clear the **Auto generate a password** check box, and then enter the same password in **Master password** and **Confirm password**\.
 
 1. \(Optional\) Open **View default settings for Easy create**\.  
 ![\[Easy Create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-view-default-settings.png)
@@ -62,8 +62,8 @@ For this example, **Easy Create** is enabled\. For information about creating an
 
    If you chose to use an automatically generated password, the **View credential details** button appears on the **Databases** page\.
 
-   To view the master user name and password for the DB instance, choose **View credential details**\.  
-![\[Master user credentials after automatic password generation.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-credentials.png)
+   To view the user name and password for the DB instance, choose **View credential details**\.  
+![\[User credentials after automatic password generation.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-credentials.png)
 
    To connect to the DB instance as the master user, use the user name and password that appear\.
 **Important**  
@@ -96,8 +96,8 @@ You can't view the master user password again\. If you don't record it, you migh
 1. Set the following values on the **Specify DB details** page: 
    + **DB instance class:** `db.r4.large`
    + **DB instance identifier:** `gs-db-instance1`
-   + **Master username:** Using alphanumeric characters, type a master user name, used to log on to your DB instances in the DB cluster\.
-   + **Master password** and **Confirm Password:** Type a password in the **Master Password** box that contains from 8 to 41 printable ASCII characters \(excluding /,", and @\) for your master user password, used to log on to your database\. Then type the password again in the **Confirm Password** box\.  
+   + **Master username:** Using alphanumeric characters, type a user name, used to log on to your DB instances in the DB cluster\.
+   + **Master password** and **Confirm Password:** Type a password in the **Master Password** box that contains from 8 to 41 printable ASCII characters \(excluding /,", and @\) for your user password, used to log on to your database\. Then type the password again in the **Confirm Password** box\.  
 ![\[Specify DB details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/CURRENT-AuroraLaunch02.png)
 
 1. Choose **Next** and set the following values on the **Configure Advanced Settings** page: 
@@ -138,7 +138,7 @@ Once Amazon RDS provisions your DB cluster and creates the primary instance, you
 1. Type the following command at a command prompt on a client computer to connect to a database on an Aurora MySQL DB cluster using the MySQL monitor\. Use the cluster endpoint to connect to the primary instance, and the master user name that you created previously\. \(You are prompted for a password\.\) If you supplied a port value other than 3306, use that for the `-P` parameter instead\.
 
    ```
-   PROMPT> mysql -h <cluster endpoint> -P 3306 -u <mymasteruser> -p						
+   PROMPT> mysql -h <cluster endpoint> -P 3306 -u <myusername> -p						
    ```
 
    You should see output similar to the following\.

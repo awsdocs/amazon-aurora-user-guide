@@ -11,7 +11,7 @@ You can use the following options to manage performance and scaling for Aurora D
 
 ## Storage Scaling<a name="Aurora.Managing.Performance.StorageScaling"></a>
 
-Aurora storage automatically scales with the data in your cluster volume\. As your data grows, your cluster volume storage grows in 10 gibibyte \(GiB\) increments up to 64 TiB\.
+Aurora storage automatically scales with the data in your cluster volume\. As your data grows, your cluster volume storage grows in 10 gibibyte \(GiB\) increments up to 128 TiB for MySQL and 64 TiB for PostgreSQL\.
 
 The size of your cluster volume is checked on an hourly basis to determine your storage costs\. For pricing information, see the [Aurora pricing page](https://aws.amazon.com/rds/aurora/pricing)\.
 

@@ -23,7 +23,7 @@
 
  Some Aurora clusters can't be stopped and started: 
 +  You can't stop and start a cluster that's part of an [Aurora global database](aurora-global-database.md)\. 
-+  You can't stop and start a cluster that uses the [Aurora parallel query](aurora-mysql-parallel-query.md) feature\. 
++  For a cluster that uses the [Aurora parallel query](aurora-mysql-parallel-query.md) feature, the minimum Aurora MySQL versions are 1\.23\.0 and 2\.09\.0\. 
 +  You can't stop and start an [Aurora Serverless cluster](aurora-serverless.md)\. 
 +  You can't stop and start an [Aurora multi\-master cluster](aurora-multi-master.md)\. 
 

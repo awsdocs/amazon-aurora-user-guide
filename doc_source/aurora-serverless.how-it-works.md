@@ -24,7 +24,7 @@ Aurora Serverless introduces a new `serverless` DB engine mode for Aurora DB clu
 
 ![\[Aurora Serverless Architecture\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-arch.png)
 
-Instead of provisioning and managing database servers, you specify Aurora capacity units \(ACUs\)\. Each ACU is a combination of processing and memory capacity\. Database storage automatically scales from 10 GiB to 64 TiB, the same as storage in a standard Aurora DB cluster\.
+Instead of provisioning and managing database servers, you specify Aurora capacity units \(ACUs\)\. Each ACU is a combination of processing and memory capacity\. Database storage automatically scales from 10 GiB to 128 TiB for MySQL and 64 TiB for PostgreSQL, the same as storage in a standard Aurora DB cluster\.
 
 You can specify the minimum and maximum ACU\. The *minimum Aurora capacity unit* is the lowest ACU to which the DB cluster can scale down\. The *maximum Aurora capacity unit* is the highest ACU to which the DB cluster can scale up\. Based on your settings, Aurora Serverless automatically creates scaling rules for thresholds for CPU utilization, connections, and available memory\. 
 

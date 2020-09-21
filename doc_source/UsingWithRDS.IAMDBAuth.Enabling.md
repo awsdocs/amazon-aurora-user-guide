@@ -6,7 +6,7 @@ By default, IAM database authentication is disabled on DB clusters\. You can ena
 
 To create a new DB cluster with IAM authentication by using the console, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
 
-Each creation workflow has a **Configure Advanced Settings** page, where you can enable IAM DB authentication\. In that page's **Database Options** section, choose **Yes** for **Enable IAM DB Authentication**\.
+Each creation workflow has a **Configure Advanced Settings** page, where you can enable IAM database authentication\. In that page's **Database Options** section, choose **Yes** for **Enable IAM DB Authentication**\.
 
 **To enable or disable IAM authentication for an existing DB cluster**
 

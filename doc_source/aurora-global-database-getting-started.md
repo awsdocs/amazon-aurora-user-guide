@@ -111,8 +111,8 @@ To create an Aurora global database using the CLI, use either of the following p
       aws rds create-db-cluster \
         --region primary_region \
         --db-cluster-identifier db_cluster_id \
-        --master-username master_userid \
-        --master-user-password master_password \
+        --master-username userid \
+        --master-user-password password \
         --engine { aurora | aurora-mysql | aurora-postgresql } \
         --engine-version version \
         --global-cluster-identifier global_database_id
@@ -124,8 +124,8 @@ To create an Aurora global database using the CLI, use either of the following p
       aws rds create-db-cluster ^
         --region primary_region ^
         --db-cluster-identifier db_cluster_id ^
-        --master-username master_userid ^
-        --master-user-password master_password ^
+        --master-username userid ^
+        --master-user-password password ^
         --engine { aurora | aurora-mysql | aurora-postgresql } ^
         --engine-version version ^
         --global-cluster-identifier global_database_id
@@ -232,8 +232,8 @@ As an alternative procedure, you can create the primary DB cluster first and the
    aws rds --region primary_region \
      create-db-cluster \
        --db-cluster-identifier primary_cluster_id \
-       --master-username master_userid \
-       --master-user-password master_password \
+       --master-username userid \
+       --master-user-password password \
        --engine { aurora | aurora-mysql | aurora-postgresql } \
        --engine-version version
    
@@ -251,8 +251,8 @@ As an alternative procedure, you can create the primary DB cluster first and the
    aws rds --region primary_region ^
      create-db-cluster ^
        --db-cluster-identifier primary_cluster_id ^
-       --master-username master_userid ^
-       --master-user-password master_password ^
+       --master-username userid ^
+       --master-user-password password ^
        --engine { aurora | aurora-mysql | aurora-postgresql } ^
        --engine-version version
    

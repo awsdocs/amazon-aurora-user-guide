@@ -5,7 +5,7 @@ Following, you can find a description of the resource quotas and naming constrai
 **Topics**
 + [Quotas in Amazon Aurora](#RDS_Limits.Limits)
 + [Naming Constraints in Amazon Aurora](#RDS_Limits.Constraints)
-+ [Amazon Aurora File Size Limits](#RDS_Limits.FileSize.Aurora)
++ [Amazon Aurora Size Limits](#RDS_Limits.FileSize.Aurora)
 
 ## Quotas in Amazon Aurora<a name="RDS_Limits.Limits"></a>
 
@@ -54,10 +54,10 @@ The following table describes naming constraints in Amazon Aurora\.
 | DB cluster identifier |  Identifiers have these naming constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)  | 
 |  Initial database name  |  Database name constraints differ between Aurora MySQL and PostgreSQL\. For more information, see the available settings when creating each DB cluster\.  | 
 |  Master user name  |  Master user name constraints differ for each database engine\. For more information, see the available settings when creating each DB cluster\.  | 
-|  Master password  |  The password for the master database user can include any printable ASCII character except `/`, `"`, `@`, or a space\. Master password length constraints differ for each database engine\. For more information, see the available settings when creating each DB cluster\.  | 
+|  Master password  |  The password for the database master user can include any printable ASCII character except `/`, `"`, `@`, or a space\. Master password length constraints differ for each database engine\. For more information, see the available settings when creating each DB cluster\.  | 
 | DB parameter group name |  These names have these constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)  | 
 |  DB subnet group name  |  These names have these constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)  | 
 
-## Amazon Aurora File Size Limits<a name="RDS_Limits.FileSize.Aurora"></a>
+## Amazon Aurora Size Limits<a name="RDS_Limits.FileSize.Aurora"></a>
 
-With Aurora, the table size limit is only constrained by the size of the Aurora cluster volume\. As a result, the maximum table size for an Aurora MySQL DB cluster is 64 tebibytes \(TiB\) and for an Aurora PostgreSQL DB cluster is 32 TiB\. We recommend that you follow table design best practices, such as partitioning of large tables\.
+For Aurora MySQL, the maximum table size is only constrained by the size of the Aurora cluster volume\. The maximum DB cluster volume is 128 tebibytes \(TiB\) for Aurora MySQL and 64 TiB for Aurora PostgreSQL\. For an Aurora PostgreSQL DB cluster, the maximum table size is 32 terabytes \(TB\)\. We recommend that you follow table design best practices, such as partitioning of large tables\.

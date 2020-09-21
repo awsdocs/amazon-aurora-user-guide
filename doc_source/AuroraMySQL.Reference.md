@@ -101,6 +101,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `skip_name_resolve`  |  No  |  | 
 |  `sync_frm`  |  Yes  |  | 
 |  `time_zone`  |  Yes  |  | 
+|  `tls_version`  |  Yes  | For more information, see [TLS Versions for Aurora MySQL](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL.TLS_Version)\. | 
 
 ### Instance\-Level Parameters<a name="AuroraMySQL.Reference.Parameters.Instance"></a>
 
@@ -112,6 +113,8 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `allow-suspicious-udfs` | No |  | 
 | `aurora_lab_mode` | Yes |   For more information, see [Amazon Aurora MySQL Lab Mode](AuroraMySQL.Updates.LabMode.md)\.   | 
 |  `aurora_oom_response`  |  Yes  |   For more information, see [ Amazon Aurora MySQL Out of Memory Issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.   | 
+|  `aurora_parallel_query`  |  Yes  |   Set to `ON` to enable parallel query in Aurora MySQL versions 1\.23 and 2\.09 or higher\. The old `aurora_pq` parameter isn't used in these versions\. For more information, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.   | 
+|  `aurora_pq`  |  Yes  |   Set to `OFF` to turn off parallel query for specific DB instances in Aurora MySQL versions before 1\.23 and 2\.09\. In 1\.23 and 2\.09 or higher, turn parallel query on and off with `aurora_parallel_query` instead\. For more information, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.   | 
 |  `aurora_read_replica_read_committed`  |  Yes  |   Enables `READ COMMITTED` isolation level for Aurora Replicas and changes the isolation behavior to reduce purge lag during long\-running queries\. Enable this setting only if you understand the behavior changes and how they affect your query results\. For example, this setting uses less\-strict isolation than the MySQL default\. When it's enabled, long\-running queries might see more than one copy of the same row because Aurora reorganizes the table data while the query is running\. For more information, see [Aurora MySQL Isolation Levels](#AuroraMySQL.Reference.IsolationLevels)\.   | 
 | `autocommit` | Yes |  | 
 | `automatic_sp_privileges` | Yes |  | 

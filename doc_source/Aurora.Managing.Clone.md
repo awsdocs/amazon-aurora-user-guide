@@ -1,69 +1,82 @@
-# Cloning Databases in an Aurora DB Cluster<a name="Aurora.Managing.Clone"></a>
+# Cloning an Aurora DB Cluster Volume<a name="Aurora.Managing.Clone"></a>
 
-Using database cloning, you can quickly and cost\-effectively create clones of all of the databases within an Aurora DB cluster\. The clone databases require only minimal additional space when first created\. 
+Using the Aurora cloning feature, you can quickly and cost\-effectively create a new cluster containing a duplicate of an Aurora cluster volume and all its data\. We refer to the new cluster and its associated cluster volume as a *clone*\. Creating a clone is faster and more space\-efficient than physically copying the data using a different technique such as restoring a snapshot\.
 
-Database cloning uses a *copy\-on\-write protocol, *in which data is copied at the time that data changes, either on the source databases or the clone databases\. You can make multiple clones from the same DB cluster\. You can also create additional clones from other clones\. For more information on how the copy\-on\-write protocol works in the context of Aurora storage, see [Copy\-on\-Write Protocol for Database Cloning](#Aurora.Managing.Clone.Protocol)\. 
+**Tip**  
+ If you aren't familiar with the Aurora cluster volume and what kinds of data it holds, you can learn more about it by reading [Overview of Aurora Storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\. 
 
-You can use database cloning in a variety of use cases, especially where you don't want to have an impact on your production environment\. Some examples are the following:  
+**Topics**
++ [Overview of Aurora Cloning](#Aurora.Clone.Overview)
++ [Limitations of Aurora Cloning](#Aurora.Managing.Clone.Limitations)
++ [Copy\-on\-Write Protocol for Aurora Cloning](#Aurora.Managing.Clone.Protocol)
++ [Deleting a Source Cluster Volume](#Aurora.Managing.Clone.Deleting)
++ [Creating an Aurora Clone Through the AWS Management Console](#Aurora.Managing.Clone.Console)
++ [Creating an Aurora Clone Through the AWS CLI](#Aurora.Managing.Clone.CLI)
++ [Cross\-Account Cloning](#Aurora.Managing.Clone.Cross-Account)
+
+## Overview of Aurora Cloning<a name="Aurora.Clone.Overview"></a>
+
+Aurora cloning uses a *copy\-on\-write protocol*\. With this mechanism, a clone requires only minimal additional space when first created\. In the beginning, Aurora maintains a single copy of the data, which is used by both the original and new DB clusters\. Aurora allocates new storage only when data changes, either on the source cluster or the cloned cluster\. You can make multiple clones from the same DB cluster\. You can also create additional clones from other clones\. For more information on how the copy\-on\-write protocol works in the context of Aurora storage, see [Copy\-on\-Write Protocol for Aurora Cloning](#Aurora.Managing.Clone.Protocol)\.
+
+You can use cloning in a variety of use cases, especially where you don't want to have an impact on your production environment\. Some examples are the following: 
 + Experiment with and assess the impact of changes, such as schema changes or parameter group changes\.
 + Perform workload\-intensive operations, such as exporting data or running analytical queries\.
 + Create a copy of a production DB cluster in a nonproduction environment for development or testing\.
 
-**Topics**
-+ [Limitations](#Aurora.Managing.Clone.Limitations)
-+ [Copy\-on\-Write Protocol for Database Cloning](#Aurora.Managing.Clone.Protocol)
-+ [Deleting Source Databases](#Aurora.Managing.Clone.Deleting)
-+ [Cloning an Aurora Cluster Through the AWS Management Console](#Aurora.Managing.Clone.Console)
-+ [Cloning an Aurora Cluster Through the AWS CLI](#Aurora.Managing.Clone.CLI)
-+ [Cross\-Account Cloning](#Aurora.Managing.Clone.Cross-Account)
+ Many of those use cases involve short\-lived clones\. In these cases, you run tests or query\-intensive jobs without causing overhead on the original cluster\. Then you delete the clone when that work is finished\. If either the original cluster or the cloned cluster have a high volume of write operations, the underlying storage diverges over time, reducing the efficiency advantage of cloning\. You can create a new clone if you need to perform similar work on the data later\. 
 
-## Limitations<a name="Aurora.Managing.Clone.Limitations"></a>
+**Tip**  
+ The cloned cluster starts with either one or zero associated DB instances\. Creating a clone using the AWS Management Console produces a cluster with a single DB instance\. Creating a clone using the AWS CLI or the RDS API produces an empty cluster with no associated DB instances\. You can configure the DB instances of the clone differently than the original cluster to match the requirements of the workload for the clone\. For example, the cloned cluster might not have the same high availability requirements as the original\. In that case, you might use multiple DB instances for the original cluster but only a single DB instance for the clone\. 
 
-There are some limitations involved with database cloning, described following:
-+ You cannot create clone databases across AWS regions\. The clone databases must be created in the same region as the source databases\.
+## Limitations of Aurora Cloning<a name="Aurora.Managing.Clone.Limitations"></a>
+
+There are some limitations involved with Aurora cloning, described following:
++ You cannot create clones across AWS Regions\. Each clone must be created in the same Region as the source cluster\.
 + Currently, you are limited to 15 clones based on a copy, including clones based on other clones\. After that, only copies can be created\. However, each copy can also have up to 15 clones\. 
 + Currently, you cannot clone from a cluster without the parallel query feature, to a cluster where parallel query is enabled\. To bring data into a cluster that uses parallel query, create a snapshot of the original cluster and restore it to a cluster where the parallel query option is enabled\.
 + You can provide a different virtual private cloud \(VPC\) for your clone\. However, the subnets in those VPCs must map to the same set of Availability Zones\.
 
-## Copy\-on\-Write Protocol for Database Cloning<a name="Aurora.Managing.Clone.Protocol"></a>
+## Copy\-on\-Write Protocol for Aurora Cloning<a name="Aurora.Managing.Clone.Protocol"></a>
 
 The following scenarios illustrate how the copy\-on\-write protocol works\.
-+ [Before Database Cloning](#Aurora.Managing.Clone.Protocol.Before)
-+ [After Database Cloning](#Aurora.Managing.Clone.After)
-+ [When a Change Occurs on the Source Database](#Aurora.Managing.Clone.Protocol.SourceWrite)
-+ [When a Change Occurs on the Clone Database](#Aurora.Managing.Clone.Protocol.CloneWrite)
 
-### Before Database Cloning<a name="Aurora.Managing.Clone.Protocol.Before"></a>
+**Topics**
++ [Before Cloning](#Aurora.Managing.Clone.Protocol.Before)
++ [After Cloning](#Aurora.Managing.Clone.After)
++ [When a Change Occurs on the Source Cluster Volume](#Aurora.Managing.Clone.Protocol.SourceWrite)
++ [When a Change Occurs on the Clone](#Aurora.Managing.Clone.Protocol.CloneWrite)
 
-Data in a source database is stored in pages\. In the following diagram, the source database has four pages\.
+### Before Cloning<a name="Aurora.Managing.Clone.Protocol.Before"></a>
 
-![\[Amazon Aurora source database, before database cloning\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraClone001.png)
+Data in a source cluster volume is stored in pages\. In the following diagram, the source cluster volume has four pages\.
 
-### After Database Cloning<a name="Aurora.Managing.Clone.After"></a>
+![\[Amazon Aurora source cluster volume, before cloning\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraClone001.png)
 
-As shown in the following diagram, there are no changes in the source database after database cloning\. Both the source database and the clone database point to the same four pages\. None of the pages has been physically copied, so no additional storage is required\.
+### After Cloning<a name="Aurora.Managing.Clone.After"></a>
 
-![\[Amazon Aurora source database and clone database, after database cloning\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraClone002.png)
+As shown in the following diagram, there are no changes in the source data after cloning\. Both the source cluster volume and the clone point to the same four pages\. None of the pages has been physically copied, so no additional storage is required\.
 
-### When a Change Occurs on the Source Database<a name="Aurora.Managing.Clone.Protocol.SourceWrite"></a>
+![\[Amazon Aurora source cluster volume and clone, after cloning\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraClone002.png)
 
-In the following example, the source database makes a change to the data in `Page 1`\. Instead of writing to the original `Page 1`, additional storage is used to create a new page, called `Page 1'`\. The source database now points to the new `Page 1'`, and also to `Page 2`, `Page 3`, and `Page 4`\. The clone database continues to point to `Page 1` through `Page 4`\.
+### When a Change Occurs on the Source Cluster Volume<a name="Aurora.Managing.Clone.Protocol.SourceWrite"></a>
 
-![\[Amazon Aurora source database and clone database, after change occurs in source database\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraClone003.png)
+In the following example, the source cluster volume makes a change to the data in `Page 1`\. Instead of writing to the original `Page 1`, additional storage is used to create a new page, called `Page 1'`\. The source cluster volume now points to the new `Page 1'`, and also to `Page 2`, `Page 3`, and `Page 4`\. The clone continues to point to `Page 1` through `Page 4`\.
 
-### When a Change Occurs on the Clone Database<a name="Aurora.Managing.Clone.Protocol.CloneWrite"></a>
+![\[Amazon Aurora source cluster volume and clone, after a change occurs in the source\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraClone003.png)
 
-In the following diagram, the clone database has also made a change, this time in `Page 4`\. Instead of writing to the original `Page 4`, additional storage is used to create a new page, called `Page 4'`\. The source database continues to point to `Page 1'`, and also `Page 2` through `Page 4`, but the clone database now points to `Page 1` through `Page 3`, and also `Page 4'`\.
+### When a Change Occurs on the Clone<a name="Aurora.Managing.Clone.Protocol.CloneWrite"></a>
 
-![\[Amazon Aurora source database and clone database, after change occurs on clone database\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraClone004.png)
+In the following diagram, the clone cluster volume has also made a change, this time in `Page 4`\. Instead of writing to the original `Page 4`, additional storage is used to create a new page, called `Page 4'`\. The source cluster volume continues to point to `Page 1'`, and also `Page 2` through `Page 4`, but the clone now points to `Page 1` through `Page 3`, and also `Page 4'`\.
 
-As shown in the second scenario, after database cloning there is no additional storage required at the point of clone creation\. However, as changes occur in the source database and clone database, only the changed pages are created, as shown in the third and fourth scenarios\. As more changes occur over time in both the source database and clone database, you need incrementally more storage to capture and store the changes\. 
+![\[Amazon Aurora source cluster volume and clone, after a change occurs on the clone\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraClone004.png)
 
-## Deleting Source Databases<a name="Aurora.Managing.Clone.Deleting"></a>
+As shown in the second scenario, after cloning there is no additional storage required at the point of clone creation\. However, as changes occur in the source cluster volume and the clone, only the changed pages are created, as shown in the third and fourth scenarios\. As more changes occur over time in both the source cluster volume and the clone, you need incrementally more storage to capture and store the changes\. 
 
-When deleting a source database that has one or more clone databases associated with it, the clone databases are not affected\. The clone databases continue to point to the pages that were previously owned by the source database\. 
+## Deleting a Source Cluster Volume<a name="Aurora.Managing.Clone.Deleting"></a>
 
-## Cloning an Aurora Cluster Through the AWS Management Console<a name="Aurora.Managing.Clone.Console"></a>
+When you delete a source cluster volume that has one or more clones associated with it, the clones are not affected\. The clones continue to point to the pages that were previously owned by the source cluster volume\. 
+
+## Creating an Aurora Clone Through the AWS Management Console<a name="Aurora.Managing.Clone.Console"></a>
 
 The following procedure describes how to clone an Aurora DB cluster using the AWS Management Console\.
 
@@ -83,11 +96,11 @@ The following procedure describes how to clone an Aurora DB cluster using the AW
 
 1. Choose **Create clone** to launch the clone DB cluster\.
 
-## Cloning an Aurora Cluster Through the AWS CLI<a name="Aurora.Managing.Clone.CLI"></a>
+## Creating an Aurora Clone Through the AWS CLI<a name="Aurora.Managing.Clone.CLI"></a>
 
-The following procedure describes how to clone an Aurora DB cluster using the AWS CLI\.
+The following procedure describes how to create an Aurora clone using the AWS CLI\.
 
-**To create a clone of a DB cluster using the AWS CLI**
+**To create a clone using the AWS CLI**
 + Call the [restore\-db\-cluster\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) AWS CLI command and supply the following values:
   + `--source-db-cluster-identifier` – the name of the source DB cluster to create a clone of\.
   + `--db-cluster-identifier` – the name of the clone DB cluster\.
@@ -363,7 +376,7 @@ The [restore\-db\-cluster\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/
 
 1.  For **Actions**, choose **Create clone**\. 
 
-1.  Follow the procedure in [Cloning an Aurora Cluster Through the AWS Management Console](#Aurora.Managing.Clone.Console) to finish setting up the cloned cluster\. 
+1.  Follow the procedure in [Creating an Aurora Clone Through the AWS Management Console](#Aurora.Managing.Clone.Console) to finish setting up the cloned cluster\. 
 
 1.  As needed, enable encryption for the cloned cluster\. If the cluster that you are cloning is encrypted, you must enable encryption for the cloned cluster\. The AWS account that shared the cluster with you must also share the AWS KMS customer master key \(CMK\) that was used to encrypt the cluster\. You can use the same CMK to encrypt the clone, or your own CMK\. You can't create a cross\-account clone for a cluster that is encrypted with the default RDS CMK\. 
 

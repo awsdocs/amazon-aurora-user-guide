@@ -43,7 +43,7 @@ aws rds create-global-cluster --global-cluster-identifier write-forwarding-test 
 aws rds create-db-cluster --global-cluster-identifier write-forwarding-test \
   --db-cluster-identifier write-forwarding-test-cluster-1 \
   --engine aurora-mysql --engine-version 5.7.mysql_aurora.2.08.1 \
-  --master-username my_master_user --master-user-password my_master_password \
+  --master-username my_user_name --master-user-password my_password \
   --region us-east-1
 
 aws rds create-db-instance --db-cluster-identifier write-forwarding-test-cluster-1 \
