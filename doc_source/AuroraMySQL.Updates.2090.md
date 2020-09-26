@@ -18,7 +18,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 ## Improvements<a name="AuroraMySQL.Updates.2090.Improvements"></a>
 
  **New features:** 
-+  With this release, you can create Amazon Aurora MySQL database instances with up to 128 TiB of storage\. The new storage limit is an increase from the prior 64 TiB\. The 128 TiB storage size supports larger databases\. This capability is not supported on small instances sizes \(db\.t2 or db\.t3\)\. A single tablespace cannot grow beyond 64 TiB due to [InnoDB limitations with 16 KB page size](https://dev.mysql.com/doc/refman/5.7/en/innodb-limits.html)\. 
++  With this release, you can create Amazon Aurora MySQL database instances with up to 128 tebibytes \(TiB\) of storage\. The new storage limit is an increase from the prior 64 TiB\. The 128 TiB storage size supports larger databases\. This capability is not supported on small instances sizes \(db\.t2 or db\.t3\)\. A single tablespace cannot grow beyond 64 TiB due to [InnoDB limitations with 16 KB page size](https://dev.mysql.com/doc/refman/5.7/en/innodb-limits.html)\. 
 
    Aurora alerts you when the cluster volume size is near 128 TiB, so that you can take action prior to hitting the size limit\. The alerts appear in the mysql log and RDS Events in the AWS Management Console\. 
 +  You can now turn parallel query on or off for an existing cluster by changing the value of the DB cluster parameter `aurora_parallel_query`\. You don't need to use the `parallelquery` setting for the `--engine-mode` parameter when creating the cluster\. 
@@ -122,6 +122,6 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 +  Bug \#23103937: PS\_TRUNCATE\_ALL\_TABLES\(\) DOES NOT WORK IN SUPER\_READ\_ONLY MODE 
 +  Bug \#26666274: INFINITE LOOP IN PERFORMANCE SCHEMA BUFFER CONTAINER 
 +  Bug \#26997096: relay\_log\_space value is not updated in a synchronized manner so that its value sometimes much higher than the actual disk space used by relay logs\. \([https://github.com/mysql/mysql-server/commit/78f25d2809ad457e81f90342239c9bc32a36cdfa](https://github.com/mysql/mysql-server/commit/78f25d2809ad457e81f90342239c9bc32a36cdfa)\) 
-+  Bug \#25082593: FOREIGN KEY VALIDATION DOESN’T NEED TO ACQUIRE GAP LOCK IN READ COMMITTED 
++  Bug \#25082593: FOREIGN KEY VALIDATION DOESN'T NEED TO ACQUIRE GAP LOCK IN READ COMMITTED 
 +  Bug \#24764800: REPLICATION FAILING ON SLAVE WITH XAER\_RMFAIL ERROR\. 
 +  Bug \#81441: WARNING ABOUT LOCALHOST WHEN USING SKIP\-NAME\-RESOLVE\. 

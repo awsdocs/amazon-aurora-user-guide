@@ -33,7 +33,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 +  Fixed an issue where the events in current binlog file on the master were not replicated on the worker if the value of the parameter `sync_binlog` was not set to 1\. 
 
  **High\-priority fixes:** 
-+  Customers with database size close to 64 TiB are strongly advised to upgrade to this version to avoid downtime due to stability bugs affecting volumes close to the Aurora storage limit\. 
++  Customers with database size close to 64 tebibytes \(TiB\) are strongly advised to upgrade to this version to avoid downtime due to stability bugs affecting volumes close to the Aurora storage limit\. 
 +  The default value of the parameter `aurora_binlog_replication_max_yield_seconds` has been changed to zero to prevent an increase in replication lag in favor of foreground query performance on the binlog master\. 
 
 ## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.2050.BugFixes"></a>

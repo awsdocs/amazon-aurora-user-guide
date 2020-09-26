@@ -963,7 +963,7 @@ mysql> explain delete from part where p_name is not null;
 
  You can use all the isolation levels on the Aurora primary instance\. 
 
- On Aurora reader DB instances, parallel query applies to statements performed under the `REPEATABLE READ` isolation level\. Aurora MySQL versions 1\.23 and 2\.09 or higher can also use the `READ COMMITTED` isolation level on reader DB instances\. `REPEATABLE READ` is the default isolation level for Aurora reader DB instances\. To use `READ COMMITTED` isolation level on reader DB instances requires setting the `aurora_read_replica_read_committed` configuration option\. 
+ On Aurora reader DB instances, parallel query applies to statements performed under the `REPEATABLE READ` isolation level\. Aurora MySQL versions 1\.23 and 2\.09 or higher can also use the `READ COMMITTED` isolation level on reader DB instances\. `REPEATABLE READ` is the default isolation level for Aurora reader DB instances\. To use `READ COMMITTED` isolation level on reader DB instances requires setting the `aurora_read_replica_read_committed` configuration option at the session level\. 
 
  For more information about Aurora isolation levels, see [Aurora MySQL Isolation Levels](AuroraMySQL.Reference.md#AuroraMySQL.Reference.IsolationLevels)\. 
 

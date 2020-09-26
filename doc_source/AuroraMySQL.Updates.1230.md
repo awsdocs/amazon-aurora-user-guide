@@ -21,7 +21,7 @@ Aurora MySQL 1\.23\.0 is generally available\. Aurora MySQL 1\.\* versions are c
    Parallel query is now expanded to be available in all regions where Aurora MySQL is available\. 
 
    There are a number of other functionality enhancements and changes to the procedures for upgrading and enabling parallel query in an Aurora cluster\. For more information, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\. 
-+  With this release, you can create Amazon Aurora MySQL database instances with up to 128 TiB of storage\. The new storage limit is an increase from the prior 64 TiB\. The 128 TiB storage size supports larger databases\. This capability is not supported on small instances sizes \(db\.t2 or db\.t3\)\. A single tablespace cannot grow beyond 64 TiB due to [InnoDB limitations with 16 KB page size](https://dev.mysql.com/doc/refman/5.7/en/innodb-limits.html)\. 
++  With this release, you can create Amazon Aurora MySQL database instances with up to 128 tebibytes \(TiB\) of storage\. The new storage limit is an increase from the prior 64 TiB\. The 128 TiB storage size supports larger databases\. This capability is not supported on small instances sizes \(db\.t2 or db\.t3\)\. A single tablespace cannot grow beyond 64 TiB due to [InnoDB limitations with 16 KB page size](https://dev.mysql.com/doc/refman/5.7/en/innodb-limits.html)\. 
 
    Aurora alerts you when the cluster volume size is near 128 TiB, so that you can take action prior to hitting the size limit\. The alerts appear in the mysql log and RDS Events in the AWS Management Console\. 
 +  Improved binary log \(binlog\) processing to reduce crash recovery time and commit time latency when very large transactions are involved\. 

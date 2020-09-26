@@ -4,7 +4,7 @@ This topic includes information on best practices and options for using or migra
 
 **Topics**
 + [Determining Which DB Instance You Are Connected To](#AuroraMySQL.BestPractices.DeterminePrimaryInstanceConnection)
-+ [Using T2 Instances](#AuroraMySQL.BestPractices.T2Medium)
++ [Using T2 and T3 Instances](#AuroraMySQL.BestPractices.T2Medium)
 + [Invoking an AWS Lambda Function](#AuroraMySQL.BestPractices.Lambda)
 + [Working with Asynchronous Key Prefetch in Amazon Aurora](#Aurora.BestPractices.AKP)
 + [Working with Multi\-Threaded Replication in Amazon Aurora MySQL](#AuroraMySQL.BestPractices.MTReplica)
@@ -28,11 +28,13 @@ The `innodb_read_only` variable is set to `ON` if you are connected to an Aurora
 
 This approach can be helpful if you want to add logic to your application code to balance the workload or to ensure that a write operation is using the correct connection\. This technique only applies to Aurora clusters using single\-master replication\. For multi\-master clusters, all the DB instances have the setting `innodb_read_only=OFF`\.
 
-## Using T2 Instances<a name="AuroraMySQL.BestPractices.T2Medium"></a>
+## Using T2 and T3 Instances<a name="AuroraMySQL.BestPractices.T2Medium"></a>
 
 Amazon Aurora MySQL instances that use the `db.t2.small` or `db.t2.medium` DB instance classes are best suited for applications that do not support a high workload for an extended amount of time\. T2 instances are designed to provide moderate baseline performance and the capability to burst to significantly higher performance as required by your workload\. They are intended for workloads that don't use the full CPU often or consistently, but occasionally need to burst\. We recommend only using the `db.t2.small` and `db.t2.medium` DB instance classes for development and test servers, or other non\-production servers\. For more details on T2 instances, see [T2 Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html)\.
 
-Do not enable the MySQL Performance Schema on Amazon Aurora MySQL T2 instances\. If the Performance Schema is enabled, the T2 instance might run out of memory\.
+If your Aurora cluster is larger than 40 TB, don't use db\.t2 or db\.t3 instance classes\.
+
+Don't enable the MySQL Performance Schema on Amazon Aurora MySQL T2 instances\. If the Performance Schema is enabled, the T2 instance might run out of memory\.
 
 When you use a T2 instance as a DB instance in an Aurora MySQL DB cluster, we recommend the following:
 + If you use a T2 instance as a DB instance class in your DB cluster, then we recommend that all instances in your DB cluster use the same DB instance class\. For example, if you use `db.t2.medium` for your primary instance, then we recommend that you use `db.t2.medium` for your Aurora Replicas as well\.

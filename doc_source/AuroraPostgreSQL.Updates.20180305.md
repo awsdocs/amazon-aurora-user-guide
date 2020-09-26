@@ -69,6 +69,10 @@ You can find the following improvements in this engine update\.
 
    Support for a minimum Transport Layer Security \(TLS\) version is back ported from PostgreSQL 12\. It allows the Aurora PostgreSQL server to constrain the TLS protocols with which a client is allowed to connect via two new PostgreSQL parameters\. These parameters include [ssl\_min\_protocol\_version](https://www.postgresql.org/docs/current/runtime-config-connection.html#GUC-SSL-MIN-PROTOCOL-VERSION)and [ssl\_max\_protocol\_version](https://www.postgresql.org/docs/current/runtime-config-connection.html#GUC-SSL-MAX-PROTOCOL-VERSION)\. For example, to limit client connections to the Aurora PostgreSQL server to at least TLS 1\.2 protocol version, set the `ssl_min_protocol_version` to `TLSv1.2`\.
 
+1. Added support for the `pglogical` extension version 2\.2\.2\.
+
+   The `pglogical` extension is a logical streaming replication system that provides additional features beyond what’s available in PostgreSQL native logical replication\. Features include conflict handling, row filtering, DDL/sequence replication and delayed apply\. You can use the `pglogical` extension to set up replication between Aurora PostgreSQL clusters, between RDS PostgreSQL and Aurora PostgreSQL, and with PostgreSQL databases running outside of RDS\.
+
 **Critical Stability Enhancements**
 
 1. Fixed a bug related to heap page extend that in rare cases resulted in longer recovery time and impacted availability\.
@@ -443,6 +447,10 @@ You can find the following improvements in this engine update\.
 1. Added support for the RDKit extension version 3\.8\. 
 
    The RDKit extension provides modeling functions for cheminformatics\. Cheminformatics is storing, indexing, searching, retrieving, and applying information about chemical compounds\. For example, with the RDKit extension you can construct models of molecules, search for molecular structures, and read or create molecules in various notations\. You can also perform research on data loaded from the [ChEMBL website](https://www.ebi.ac.uk/chembl/) or a SMILES file\. The Simplified Molecular Input Line Entry System \(SMILES\) is a typographical notation for representing molecules and reactions\. For more information, see [The RDKit database cartridge](http://rdkit.org/docs_temp/Cartridge.html) in the RDKit documentation\. 
+
+1. Added support for the `pglogical` extension version 2\.2\.2\.
+
+   The `pglogical` extension is a logical streaming replication system that provides additional features beyond what’s available in PostgreSQL native logical replication\. Features include conflict handling, row filtering, DDL/sequence replication and delayed apply\. You can use the `pglogical` extension to set up replication between Aurora PostgreSQL clusters, between RDS PostgreSQL and Aurora PostgreSQL, and with PostgreSQL databases running outside of RDS\.
 
 **Critical Stability Enhancements**
 

@@ -335,3 +335,5 @@ public class FastFailoverDriverManager {
 ## Troubleshooting storage issues<a name="AuroraPostgreSQL.BestPractices.TroubleshootingStorage"></a>
 
 If the amount of memory required by a sort or index creation operation exceeds the amount of memory available, Aurora PostgreSQL writes the excess data to storage\. When it writes the data it uses the same storage space it uses for storing error and message logs\. If your sorts or index creation functions exceed the memory available, you could develop a local storage shortage\. If you experience issues with Aurora PostgreSQL running out of storage space, you can either reconfigure your data sorts to use more memory, or reduce the data retention period for your PostgreSQL log files\. For more information about changing the log retention period see, [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\. 
+
+If your Aurora cluster is larger than 40 TB, don't use db\.t2 or db\.t3 instance classes\.

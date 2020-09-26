@@ -10,7 +10,7 @@ Find the possible status values for DB clusters in the following table\.
 
 | DB Cluster Status | Billed | Description | 
 | --- | --- | --- | 
-| available | Billed |  The DB cluster is healthy and available\.  | 
+| available | Billed |  The DB cluster is healthy and available\. When an Aurora Serverless cluster is available and paused, you're billed for storage only\.  | 
 | backing\-up | Billed |  The DB cluster is currently being backed up\.  | 
 | backtracking | Billed |  The DB cluster is currently being backtracked\. This status only applies to Aurora MySQL\.  | 
 | cloning\-failed | Not billed |  Cloning a DB cluster failed\.  | 

@@ -172,7 +172,7 @@ When you upload a file to an Amazon S3 bucket, you can use server\-side encrypti
 
 For information about using server\-side encryption when uploading files to an Amazon S3 bucket, see [Protecting Data Using Server\-Side Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) in the *Amazon S3 Developer Guide*\.
 
-Amazon S3 limits the size of a file uploaded to an Amazon S3 bucket to 5 terabytes \(TB\)\. If the backup data for your database exceeds 5 TB, use the `split` command to split the backup files into multiple files that are each less than 5 TB\.
+Amazon S3 limits the size of a file uploaded to an Amazon S3 bucket to 5 TB\. If the backup data for your database exceeds 5 TB, use the `split` command to split the backup files into multiple files that are each less than 5 TB\.
 
 Aurora limits the number of source files uploaded to an Amazon S3 bucket to 1 million files\. In some cases, backup data for your database, including all full and incremental backups, can come to a large number of files\. In these cases, use a tarball \(\.tar\.gz\) file to store full and incremental backup files in the Amazon S3 bucket\.
 

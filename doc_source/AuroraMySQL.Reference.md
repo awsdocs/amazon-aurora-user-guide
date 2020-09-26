@@ -115,7 +115,6 @@ The following table shows all of the parameters that apply to a specific DB inst
 |  `aurora_oom_response`  |  Yes  |   For more information, see [ Amazon Aurora MySQL Out of Memory Issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.   | 
 |  `aurora_parallel_query`  |  Yes  |   Set to `ON` to enable parallel query in Aurora MySQL versions 1\.23 and 2\.09 or higher\. The old `aurora_pq` parameter isn't used in these versions\. For more information, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.   | 
 |  `aurora_pq`  |  Yes  |   Set to `OFF` to turn off parallel query for specific DB instances in Aurora MySQL versions before 1\.23 and 2\.09\. In 1\.23 and 2\.09 or higher, turn parallel query on and off with `aurora_parallel_query` instead\. For more information, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.   | 
-|  `aurora_read_replica_read_committed`  |  Yes  |   Enables `READ COMMITTED` isolation level for Aurora Replicas and changes the isolation behavior to reduce purge lag during long\-running queries\. Enable this setting only if you understand the behavior changes and how they affect your query results\. For example, this setting uses less\-strict isolation than the MySQL default\. When it's enabled, long\-running queries might see more than one copy of the same row because Aurora reorganizes the table data while the query is running\. For more information, see [Aurora MySQL Isolation Levels](#AuroraMySQL.Reference.IsolationLevels)\.   | 
 | `autocommit` | Yes |  | 
 | `automatic_sp_privileges` | Yes |  | 
 | `back_log` | Yes |  | 
@@ -505,7 +504,7 @@ In this wait event, there are threads holding locks on InnoDB data dictionary op
 
  If your application includes a write\-intensive workload on the primary instance and long\-running queries on the Aurora Replicas, you might experience substantial purge lag\. *Purge lag* happens when internal garbage collection is blocked by long\-running queries\. The symptom that you see is a high value for `history list length` in output from the `SHOW ENGINE INNODB STATUS` command\. You can monitor this value using the `RollbackSegmentHistoryListLength` metric in CloudWatch\. This condition can reduce the effectiveness of secondary indexes and lead to reduced overall query performance and wasted storage space\. 
 
- If you experience such issues, you can use an Aurora MySQL configuration setting, `aurora_read_replica_read_committed`, to use the `READ COMMITTED` isolation level on Aurora Replicas\. Using this setting can help reduce slowdowns and wasted space that can result from performing long\-running queries at the same time as transactions that modify your tables\. 
+ If you experience such issues, you can use an Aurora MySQL session\-level configuration setting, `aurora_read_replica_read_committed`, to use the `READ COMMITTED` isolation level on Aurora Replicas\. Using this setting can help reduce slowdowns and wasted space that can result from performing long\-running queries at the same time as transactions that modify your tables\. 
 
  We recommend making sure that you understand the specific Aurora MySQL behavior of the `READ COMMITTED` isolation before using this setting\. The Aurora Replica `READ COMMITTED` behavior complies with the ANSI SQL standard\. However, the isolation is less strict than typical MySQL `READ COMMITTED` behavior that you might be familiar with\. Thus, you might see different query results under `READ COMMITTED` on an Aurora MySQL read replica than for the same query under `READ COMMITTED` on the Aurora MySQL primary instance or on Amazon RDS MySQL\. You might use the `aurora_read_replica_read_committed` setting for such use cases as a comprehensive report that scans a very large database\. You might avoid it for short queries with small result sets, where precision and repeatability are important\. 
 
@@ -521,8 +520,6 @@ set session transaction isolation level read committed;
 ```
 
  You might enable this configuration setting temporarily to perform interactive ad hoc \(one\-time\) queries\. You might also want to run a reporting or data analysis application that benefits from the `READ COMMITTED` isolation level, while leaving the default unchanged for other applications\. 
-
- You can enable this feature permanently for one or more Aurora Replicas in your cluster\. To do so, turn on the `aurora_read_replica_read_committed` setting in the DB parameter group used by the associated DB instances\. Enable this setting on the DB instances where you run the long\-running queries\. In this case, connect to the instance endpoints to ensure the queries run on the intended DB instances\. 
 
  When the `aurora_read_replica_read_committed` setting is enabled, use the `SET TRANSACTION ISOLATION LEVEL` command to specify the isolation level for the appropriate transactions\. 
 

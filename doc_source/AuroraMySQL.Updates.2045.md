@@ -20,7 +20,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 +  Fixed a database restart caused by a deadlatch between the thread performing full\-text search index sync and the thread performing eviction of full\-text search table from dictionary cache\. 
 +  Fixed a stability issue on the binlog worker during DDL replication while the connection to the binlog master is unstable\. 
 +  Fixed an out\-of\-memory issue in the full\-text search code that caused the database to restart\. 
-+  Fixed an issue on the Aurora Writer that caused it to restart when the entire 64 TiB volume is used\. 
++  Fixed an issue on the Aurora Writer that caused it to restart when the entire 64 tebibyte \(TiB\) volume is used\. 
 +  Fixed a race condition in the Performance Schema feature that caused the database to restart\. 
 +  Fixed an issue that caused aborted connections when handling an error in network protocol management\. 
 

@@ -21,7 +21,7 @@ The procedure to upgrade your DB cluster has changed\. For more information, see
 +  Fixed a parallel query abort error on Aurora reader instances while a heavy write workload is running on the Aurora writer instance\. 
 +  The value of the parameter `aurora_disable_hash_join` is now persisted after database restart or host replacement\. 
 +  Fixed an issue related to the Full Text Search cache that caused the Aurora instance to run out of memory\. 
-+  Improved stability of the database when the volume size is close to the 64 TiB volume limit by reserving 160 GB of space for the recovery workflow to complete without a failover\. 
++  Improved stability of the database when the volume size is close to the 64 tebibyte \(TiB\) volume limit by reserving 160 GB of space for the recovery workflow to complete without a failover\. 
 +  Improved stability of the database when the hash join feature is enabled and the instance is low on memory\. 
 +  Fixed the free memory calculation to include swap memory space on T2 instances that caused them to reboot prematurely\. 
 +  Fixed an issue in the query cache where the "Too many connections" error could cause a reboot\. 

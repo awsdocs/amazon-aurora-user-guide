@@ -60,4 +60,4 @@ The following table describes naming constraints in Amazon Aurora\.
 
 ## Amazon Aurora Size Limits<a name="RDS_Limits.FileSize.Aurora"></a>
 
-For Aurora MySQL, the maximum table size is only constrained by the size of the Aurora cluster volume\. The maximum DB cluster volume is 128 tebibytes \(TiB\) for Aurora MySQL and 64 TiB for Aurora PostgreSQL\. For an Aurora PostgreSQL DB cluster, the maximum table size is 32 terabytes \(TB\)\. We recommend that you follow table design best practices, such as partitioning of large tables\.
+For Aurora MySQL, the maximum table size is only constrained by the size of the Aurora cluster volume\. An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\)\. For an Aurora PostgreSQL DB cluster, the maximum table size is 32 terabytes \(TB\)\. We recommend that you follow table design best practices, such as partitioning of large tables\.

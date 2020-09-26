@@ -6,7 +6,7 @@ There are several replication options with Aurora\. The following sections expla
 
 Aurora Replicas are independent endpoints in an Aurora DB cluster, best used for scaling read operations and increasing availability\. Up to 15 Aurora Replicas can be distributed across the Availability Zones that a DB cluster spans within an AWS Region\. The DB cluster volume is made up of multiple copies of the data for the DB cluster\. However, the data in the cluster volume is represented as a single, logical volume to the primary instance and to Aurora Replicas in the DB cluster\.
 
-As a result, all Aurora Replicas return the same data for query results with minimal replica lag—usually much less than 100 milliseconds after the primary instance has written an update\. Replica lag varies depending on the rate of database change\. That is, during periods where a large amount of write operations occur for the database, you might see an increase in replica lag\.
+As a result, all Aurora Replicas return the same data for query results with minimal replica lag\. This lag is usually much less than 100 milliseconds after the primary instance has written an update\. Replica lag varies depending on the rate of database change\. That is, during periods where a large amount of write operations occur for the database, you might see an increase in replica lag\.
 
 Aurora Replicas work well for read scaling because they are fully dedicated to read operations on your cluster volume\. Write operations are managed by the primary instance\. Because the cluster volume is shared among all DB instances in your DB cluster, minimal additional work is required to replicate a copy of the data for each Aurora Replica\.
 

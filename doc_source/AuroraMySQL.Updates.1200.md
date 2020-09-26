@@ -27,7 +27,7 @@ The procedure to upgrade your DB cluster has changed\. For more information, see
 + [CVE\-2015\-4737](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-4737)
 
  **High priority fixes:** 
-+   Customers with database size close to 64 TiB are strongly advised to upgrade to this version to avoid downtime due to stability bugs affecting volumes close to the Aurora storage limit\. 
++  Customers with database size close to 64 tebibytes \(TiB\) are strongly advised to upgrade to this version to avoid downtime due to stability bugs affecting volumes close to the Aurora storage limit\. 
 
  **General stability fixes:** 
 +  Fixed a parallel query abort error on Aurora reader instances while a heavy write workload is running on the Aurora writer instance\. 
