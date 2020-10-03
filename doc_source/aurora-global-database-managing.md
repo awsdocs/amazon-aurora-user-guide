@@ -120,7 +120,7 @@ When you promote a secondary cluster to be the primary cluster, you also need to
 
 ### Failover for Aurora Global Databases<a name="aurora-global-database-failover"></a>
 
-Aurora global databases introduce a higher level of failover capability than a default Aurora cluster\. If an entire cluster in one AWS Region becomes unavailable, you can promote another cluster in the global database to have read/write capability\. 
+Aurora global databases offer a higher level of failover capability than a default Aurora cluster\. If an entire cluster in one AWS Region becomes unavailable, you can promote another cluster in the global database to have read/write capability\. 
 
 You can manually activate the failover mechanism if a cluster in a different AWS Region is a better choice to be the primary cluster\. For example, you might increase the capacity of one of the secondary clusters and then promote it to be the primary cluster\. Or the balance of activity among the AWS Regions might change, so that switching the primary cluster to a different AWS Region might give lower latency for write operations\. 
 

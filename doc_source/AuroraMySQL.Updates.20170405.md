@@ -23,7 +23,7 @@ This is not a mandatory upgrade for existing clusters\. You will have the option
 
 ## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.20170405.BugFixes"></a>
 + Reloading a table that was evicted while empty caused an AUTO\_INCREMENT value to be reset\. \(Bug \#21454472, Bug \#77743\)
-+ An index record was not found on rollback due to inconsistencies in the purge\_node\_t structure\. The inconsistency resulted in warnings and error messages such as “error in sec index entry update”, “unable to purge a record”, and “tried to purge sec index entry not marked for deletion”\. \(Bug \#19138298, Bug \#70214, Bug \#21126772, Bug \#21065746\) 
++ An index record was not found on rollback due to inconsistencies in the purge\_node\_t structure\. The inconsistency resulted in warnings and error messages such as "error in sec index entry update", "unable to purge a record", and "tried to purge sec index entry not marked for deletion"\. \(Bug \#19138298, Bug \#70214, Bug \#21126772, Bug \#21065746\) 
 + Wrong stack size calculation for qsort operation leads to stack overflow\. \(Bug \#73979\)
 + Record not found in an index upon rollback\. \(Bug \#70214, Bug \#72419\)
 + ALTER TABLE add column TIMESTAMP on update CURRENT\_TIMESTAMP inserts ZERO\-datas \(Bug \#17392\)

@@ -24,7 +24,7 @@ An Aurora global database uses dedicated infrastructure to replicate your data, 
 
 ## Advantages of Aurora Global Databases<a name="aurora-global-database.advantages"></a>
 
-With Aurora global databases, you can find the following advantages: 
+Aurora global databases can provide you with the following advantages: 
 + Secondary clusters provide scaling of reads far beyond the capacity of a single Aurora cluster\. 
 
   A secondary cluster doesn't have a writer primary DB instance\. This functionality means that it can have up to 16 read\-only Aurora Replica instances, instead of the limit of 15 for a single Aurora cluster\.
@@ -37,8 +37,9 @@ With Aurora global databases, you can find the following advantages:
 
  The following limitations currently apply to Aurora global databases:
 +  You can use Aurora global databases with the following Aurora versions:
-  + Aurora MySQL\. For Aurora MySQL with MySQL 5\.6 compatibility, you can use version 5\.6\.10a or version 1\.22 or later\. For Aurora MySQL with MySQL 5\.7 compatibility, you can use version 2\.07 or later\.
-  + Aurora PostgreSQL with PostgreSQL compatibility for versions 10\.11, 10\.12, 11\.7 and later\.
+  + **Aurora MySQL with MySQL 5\.6 compatibility** – Version 5\.6\.10a or version 1\.22 or later
+  + **Aurora MySQL with MySQL 5\.7 compatibility** – Version 2\.07 or later\.
+  + **Aurora PostgreSQL with PostgreSQL compatibility** – Versions 10\.11, 10\.12, 11\.7 and later\. 
 +  You have a choice of using `db.r4` or `db.r5` instance classes for an Aurora global database\. You can't use `db.t2` or `db.t3` instance classes\.
 + Aurora global databases are available in the following AWS Regions:
   + US East \(N\. Virginia\)
@@ -57,12 +58,13 @@ With Aurora global databases, you can find the following advantages:
   + Canada \(Central\)
 +  A secondary cluster must be in a different AWS Region than the primary cluster\. 
 + To upgrade your global database clusters, make sure to upgrade the secondary clusters before the primary cluster\. For more information about upgrading, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching) or [Upgrading the PostgreSQL DB Engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\. 
-+  You can start a Database Activity Stream only on the primary cluster, not on any secondary clusters\. For information about Database Activity Streams, see [Using Database Activity Streams with Amazon Aurora](DBActivityStreams.md)\.
++ If the primary AWS Region's DB instance restarts or fails over, any Aurora Replicas in that Region also restart\. The cluster is then unavailable until all replicas are back in sync with the writer of the primary DB cluster\. This behavior is documented more fully in [Replication with Amazon Aurora](Aurora.Replication.md) and [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)\. Be sure you understand the possible impacts discussed in those sections before making changes to your primary DB cluster\. For more information about Aurora global database failover in general and how to plan for and recover from outages, see [Managing an Aurora Global Database](aurora-global-database-managing.md)\. 
++  You can start a database activity stream only on the primary cluster, not on any secondary clusters\.  Currently, database activity stream is available for global database clusters using Aurora PostgreSQL only\. For information about database activity streams, see [Using Database Activity Streams with Amazon Aurora](DBActivityStreams.md)\.
 
  The following features aren't supported for Aurora global databases: 
 +  Cloning\. For information about cloning, see [Cloning an Aurora DB Cluster Volume](Aurora.Managing.Clone.md)\. 
 +  Backtrack\. For information about backtracking, see [Backtracking an Aurora DB Cluster](AuroraMySQL.Managing.Backtrack.md)\. 
-+  Parallel query\. For information about parallel query, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\. 
 + Aurora Serverless\. For information about Aurora Serverless, see [Using Amazon Aurora Serverless](aurora-serverless.md)\. 
 + Importing an RDS database into an Aurora PostgreSQL cluster using an Aurora Read Replica\. You can't make the Aurora PostgreSQL cluster a global database until after the replication is complete\. For more information, see [Migrating Data from an RDS PostgreSQL DB Instance to an Aurora PostgreSQL DB Cluster by Using an Aurora Read Replica](AuroraPostgreSQL.Migrating.md#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica)\.
++  When using Aurora with PostgreSQL compatibility with Aurora global clusters, you can't create a secondary cluster for your global database if its primary is based on a replica of an Amazon RDS PostgreSQL instance\. That is, if the primary instance in your primary cluster is populated from an Amazon RDS PostgreSQL DB instance, don't attempt to create a secondary from that cluster using the AWS Management Console, the AWS CLI, or the `CreateDBCluster` API\. These will time out and the secondary won't get created\. It's best to create secondary DB clusters using the same version as the primary\. For more information, see [Creating an Aurora Global Database](aurora-global-database-getting-started.md#aurora-global-database-creating)\. 
 +  Stopping and starting the DB clusters within the global database\. For information about stopping and starting Aurora clusters, see [Stopping and Starting an Amazon Aurora DB Cluster](aurora-cluster-stop-start.md)\. 

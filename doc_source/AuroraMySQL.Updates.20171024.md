@@ -36,6 +36,6 @@ The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis,
 ## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.20171024.BugFixes"></a>
 + CREATE USER accepts plugin and password hash, but ignores the password hash \(Bug \#78033\)
 + The partitioning engine adds fields to the read bit set to be able to return entries sorted from a partitioned index\. This leads to the join buffer will try to read unneeded fields\. Fixed by not adding all partitioning fields to the read\_set,but instead only sort on the already set prefix fields in the read\_set\. Added a DBUG\_ASSERT that if doing key\_cmp, at least the first field must be read \(Bug \#16367691\)\.
-+ MySQL instance stalling “doing SYNC index” \(Bug \#73816\)
++ MySQL instance stalling "doing SYNC index" \(Bug \#73816\)
 + Assert RBT\_EMPTY\(INDEX\_CACHE\->WORDS\) in ALTER TABLE CHANGE COLUMN \(Bug \#17536995\)
 + InnoDB Fulltext search doesn't find records when savepoints are involved \(Bug \#70333\)

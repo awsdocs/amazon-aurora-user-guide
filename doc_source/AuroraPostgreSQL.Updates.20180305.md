@@ -71,7 +71,7 @@ You can find the following improvements in this engine update\.
 
 1. Added support for the `pglogical` extension version 2\.2\.2\.
 
-   The `pglogical` extension is a logical streaming replication system that provides additional features beyond what’s available in PostgreSQL native logical replication\. Features include conflict handling, row filtering, DDL/sequence replication and delayed apply\. You can use the `pglogical` extension to set up replication between Aurora PostgreSQL clusters, between RDS PostgreSQL and Aurora PostgreSQL, and with PostgreSQL databases running outside of RDS\.
+   The `pglogical` extension is a logical streaming replication system that provides additional features beyond what's available in PostgreSQL native logical replication\. Features include conflict handling, row filtering, DDL/sequence replication and delayed apply\. You can use the `pglogical` extension to set up replication between Aurora PostgreSQL clusters, between RDS PostgreSQL and Aurora PostgreSQL, and with PostgreSQL databases running outside of RDS\.
 
 **Critical Stability Enhancements**
 
@@ -450,7 +450,7 @@ You can find the following improvements in this engine update\.
 
 1. Added support for the `pglogical` extension version 2\.2\.2\.
 
-   The `pglogical` extension is a logical streaming replication system that provides additional features beyond what’s available in PostgreSQL native logical replication\. Features include conflict handling, row filtering, DDL/sequence replication and delayed apply\. You can use the `pglogical` extension to set up replication between Aurora PostgreSQL clusters, between RDS PostgreSQL and Aurora PostgreSQL, and with PostgreSQL databases running outside of RDS\.
+   The `pglogical` extension is a logical streaming replication system that provides additional features beyond what's available in PostgreSQL native logical replication\. Features include conflict handling, row filtering, DDL/sequence replication and delayed apply\. You can use the `pglogical` extension to set up replication between Aurora PostgreSQL clusters, between RDS PostgreSQL and Aurora PostgreSQL, and with PostgreSQL databases running outside of RDS\.
 
 **Critical Stability Enhancements**
 

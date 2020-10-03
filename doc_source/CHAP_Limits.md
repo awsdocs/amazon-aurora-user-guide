@@ -19,6 +19,7 @@ The following table lists the resources and their quotas per AWS Region\.
 | Authorizations per DB security group | 20 | 
 | Burst balance \(for instances <1 TiB\) | 3000 IOPS | 
 | Cross\-region snapshot copy requests | 5 | 
+| Custom endpoints per DB cluster | 5 | 
 | Data API maximum result set size | 1 MB | 
 | Data API requests per second | 1000 | 
 | DB clusters | 40 | 

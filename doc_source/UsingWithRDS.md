@@ -32,9 +32,9 @@ You only have to configure security for your use cases\. You don't have to confi
 For more information on managing access to Amazon Aurora resources and your databases on a DB cluster, see the following topics\.
 
 **Topics**
++ [Database Authentication with Amazon Aurora](database-authentication.md)
 + [Data Protection in Amazon Aurora](DataDurability.md)
 + [Identity and Access Management in Amazon Aurora](UsingWithRDS.IAM.md)
-+ [Kerberos Authentication](kerberos-authentication.md)
 + [Logging and Monitoring in Amazon Aurora](Overview.LoggingAndMonitoring.md)
 + [Compliance Validation for Amazon Aurora](RDS-compliance.md)
 + [Resilience in Amazon Aurora](disaster-recovery-resiliency.md)

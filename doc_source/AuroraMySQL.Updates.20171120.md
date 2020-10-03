@@ -19,7 +19,7 @@ The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis,
 + Fixed an issue where worker thread count increases continuously due to a bogus outstanding connection count\.
 + Fixed an issue with table locks that caused long semaphore waits during insert workloads\.
 + Reverted the following MySQL bug fixes included in Aurora MySQL 1\.15:
-  + MySQL instance stalling “doing SYNC index” \(Bug \#73816\)
+  + MySQL instance stalling "doing SYNC index" \(Bug \#73816\)
   + Assert RBT\_EMPTY\(INDEX\_CACHE\->WORDS\) in ALTER TABLE CHANGE COLUMN \(Bug \#17536995\)
   + InnoDB Fulltext search doesn't find records when savepoints are involved \(Bug \#70333\)
 

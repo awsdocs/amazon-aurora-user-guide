@@ -5,7 +5,7 @@ You can authenticate to your DB cluster using AWS Identity and Access Management
 An *authentication token* is a unique string of characters that Amazon Aurora generates on request\. Authentication tokens are generated using AWS Signature Version 4\. Each token has a lifetime of 15 minutes\. You don't need to store user credentials in the database, because authentication is managed externally using IAM\. You can also still use standard database authentication\.
 
 IAM database authentication provides the following benefits:
-+ Network traffic to and from the database is encrypted using Secure Sockets Layer \(SSL\)\.
++ Network traffic to and from the database is encrypted using Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\)\. For more information about using SSL/TLS with Amazon Aurora, see [Using SSL/TLS to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\.
 + You can use IAM to centrally manage access to your database resources, instead of managing access individually on each DB cluster\.
 + For applications running on Amazon EC2, you can use profile credentials specific to your EC2 instance to access your database instead of a password, for greater security\.
 
@@ -20,9 +20,13 @@ IAM database authentication provides the following benefits:
 
 ## Availability for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.Availability"></a>
 
-IAM database authentication is available for the following database engines and DB instance classes:
-+ Aurora with MySQL compatibility version 1\.10 or higher\. All DB instance classes are supported, except for db\.t2\.small and db\.t3\.small\.
-+ Aurora with PostgreSQL compatibility, PostgreSQL versions 9\.6\.9 and 10\.4 or higher\.
+IAM database authentication is available for the following database engines:
++ Aurora MySQL version 2, all minor versions
++ Aurora MySQL version 1, minor version 1\.10 or higher
++ Aurora PostgreSQL version 10, minor version 10\.4 or higher
++ Aurora PostgreSQL version 9\.6, minor version 9\.6\.9 or higher\.
+
+For Aurora MySQL, all DB instance classes are supported, except for db\.t2\.small and db\.t3\.small\.
 
 ## Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.Limitations"></a>
 

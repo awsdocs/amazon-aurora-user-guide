@@ -9,6 +9,8 @@ The following are prerequisites for connecting to your DB cluster using IAM auth
 
 In addition, make sure the imported libraries in the sample code exist on your system\.
 
+The code examples use profiles for shared credentials\. For information about the specifying credentials, see [Credentials](http://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html) in the AWS SDK for Python \(Boto3\) documentation\.
+
 **Topics**
 + [Generating an IAM Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken)
 + [Connecting to a DB Cluster](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect)
@@ -65,7 +67,7 @@ Modify the values of the following variables as needed:
 + `PORT` – The port number used for connecting to your DB cluster
 + `USER` – The database account that you want to access\.
 + `REGION` – The AWS Region where the DB cluster is running
-+ `DBNAME` – The DB engine, either  `aurora` \(for MySQL 5\.6\-compatible Aurora\), `aurora-mysql` \(for MySQL 5\.7\-compatible Aurora\), or `aurora-postgresql`
++ `DBNAME` – The database that you want to access
 
 This code connects to an Aurora MySQL DB cluster\.
 
@@ -79,7 +81,7 @@ ENDPOINT="mysqlcluster.cluster-123456789012.us-east-1.rds.amazonaws.com"
 PORT="3306"
 USR="jane_doe"
 REGION="us-east-1"
-DBNAME="aurora"
+DBNAME="mydb"
 os.environ['LIBMYSQL_ENABLE_CLEARTEXT_PLUGIN'] = '1'
 
 #gets the credentials from .aws/credentials
@@ -109,7 +111,7 @@ ENDPOINT="postgresmycluster.cluster-123456789012.us-east-1.rds.amazonaws.com"
 PORT="5432"
 USR="jane_doe"
 REGION="us-east-1"
-DBNAME="aurora-postgresql"
+DBNAME="mydb"
 
 #gets the credentials from .aws/credentials
 session = boto3.Session(profile_name='RDSCreds')
