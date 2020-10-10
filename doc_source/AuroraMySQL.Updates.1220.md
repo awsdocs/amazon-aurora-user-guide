@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2019\-11\-25 \(Version 1\.22\.0\)<a name="AuroraMySQL.Updates.1220"></a>
+# Aurora MySQL database engine updates 2019\-11\-25 \(version 1\.22\.0\)<a name="AuroraMySQL.Updates.1220"></a>
 
 **Version:** 1\.22\.0
 
@@ -9,10 +9,10 @@
 **Note**  
  This version is currently not available in the following AWS Regions: AWS GovCloud \(US\-East\) \[us\-gov\-east\-1\], AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\], China \(Ningxia\) \[cn\-northwest\-1\], Asia Pacific \(Hong Kong\) \[ap\-east\-1\], Middle East \(Bahrain\) \[me\-south\-1\], and South America \(São Paulo\) \[sa\-east\-1\]\. There will be a separate announcement once it is made available\. 
 
- If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
+ If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
 
 **Note**  
-The procedure to upgrade your DB cluster has changed\. For more information, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+The procedure to upgrade your DB cluster has changed\. For more information, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.1220.Improvements"></a>
 
@@ -20,7 +20,7 @@ The procedure to upgrade your DB cluster has changed\. For more information, see
 +  Aurora MySQL clusters now support the instance types r5\.8xlarge, r5\.16xlarge and r5\.24xlarge\. 
 +  Binlog has new enhancements for improved commit time latency when very large transactions are involved\. 
 +  Aurora MySQL now has a mechanism to minimize the time window during which events of a large transaction are written to binlog on commit\. This effectively prevents lengthy offline recovery incurred when database crashes occur during that time window\. This feature also fixes the issue where a large transaction blocks small transactions on binlog commit\. This feature is off by default and can be enabled by the service team if needed for your workload\. When enabled, it will be triggered when a transaction size is > 500MB\. 
-+  Added support for the ANSI `READ COMMITTED` isolation level on the read replicas\. This isolation level enables long\-running queries on the read replica to execute without impacting the high throughput of writes on the writer node\. For more information, see [Aurora MySQL Isolation Levels](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Reference.html#AuroraMySQL.Reference.IsolationLevels)\. 
++  Added support for the ANSI `READ COMMITTED` isolation level on the read replicas\. This isolation level enables long\-running queries on the read replica to execute without impacting the high throughput of writes on the writer node\. For more information, see [Aurora MySQL isolation levels](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Reference.html#AuroraMySQL.Reference.IsolationLevels)\. 
 +  Global Databases now allow adding secondary read\-only replica regions for database clusters deployed in these AWS Regions: regions: US East \(N\. Virginia\) \[us\-east\-1\], US East \(Ohio\) \[us\-east\-2\], US West \(N\. California\) \[us\-west\-1\], US West \(Oregon\) \[us\-west\-2\], Europe \(Ireland\) \[eu\-west\-1\], Europe \(London\) \[eu\-west\-2\], Europe \(Paris\) \[eu\-west\-3\], Asia Pacific \(Tokyo\) \[ap\-northeast\-1\], Asia Pacific \(Seoul\) \[ap\-northeast\-2\], Asia Pacific \(Singapore\) \[ap\-southeast\-1\], Asia Pacific \(Sydney\) \[ap\-southeast\-2\], Canada \(Central\) \[ca\-central\-1\], Europe \(Frankfurt\) \[eu\-central\-1\], and Asia Pacific \(Mumbai\) \[ap\-south\-1\]\. 
 +  The hot row contention feature is now generally available and does not require the Aurora lab mode setting to be ON\. This feature substantially improves throughput for workloads with many transactions contending for rows on the same page\. 
 +  This version has updated timezone files to support the latest Brazil timezone update for new clusters\. 

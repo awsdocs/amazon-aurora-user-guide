@@ -1,8 +1,8 @@
-# Controlling Access with Security Groups<a name="Overview.RDSSecurityGroups"></a>
+# Controlling access with security groups<a name="Overview.RDSSecurityGroups"></a>
 
 Security groups control the access that traffic has in and out of a DB instance\. Aurora supports VPC security groups\.
 
-## VPC Security Groups<a name="Overview.RDSSecurityGroups.VPCSec"></a>
+## VPC security groups<a name="Overview.RDSSecurityGroups.VPCSec"></a>
 
 Each VPC security group rule enables a specific source to access a DB instance in a VPC that is associated with that VPC security group\. The source can be a range of addresses \(for example, 203\.0\.113\.0/24\), or another VPC security group\. By specifying a VPC security group as the source, you allow incoming traffic from all instances \(typically application servers\) that use the source VPC security group\. VPC security groups can have rules that govern both inbound and outbound traffic, though the outbound traffic rules typically do not apply to DB instances\. Outbound traffic rules only apply if the DB instance acts as a client\. You must use the [Amazon EC2 API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC Console to create VPC security groups\. 
 
@@ -13,9 +13,12 @@ You can configure multiple VPC security groups that allow access to different po
 **Note**  
 In an Aurora DB cluster, the VPC security group associated with the DB cluster is also associated with all of the DB instances in the DB cluster\. If you change the VPC security group for the DB cluster or for a DB instance, the change is applied automatically to all of the DB instances in the DB cluster\.
 
-For more information on VPC security groups, see [Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+For more information on VPC security groups, see [Security groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
-## Security Group Scenario<a name="Overview.RDSSecurityGroups.Scenarios"></a>
+**Note**  
+If your DB cluster is in a VPC but isn't publicly accessible, you can also use an AWS Site\-to\-Site VPN connection or an AWS Direct Connect connection to access it from a private network\. For more information, see [Internetwork traffic privacy](inter-network-traffic-privacy.md)\.
+
+## Security group scenario<a name="Overview.RDSSecurityGroups.Scenarios"></a>
 
 A common use of a DB instance in a VPC is to share data with an application server running in an Amazon EC2 instance in the same VPC, which is accessed by a client application outside the VPC\. For this scenario, you use the RDS and VPC pages on the AWS Management Console or the RDS and EC2 API operations to create the necessary instances and security groups: 
 
@@ -33,18 +36,18 @@ The following diagram shows this scenario\.
 
 For more information about using a VPC, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
 
-## Creating a VPC Security Group<a name="Overview.RDSSecurityGroups.Create"></a>
+## Creating a VPC security group<a name="Overview.RDSSecurityGroups.Create"></a>
 
-You can create a VPC security group for a DB instance by using the VPC console\. For information about creating a security group, see [Provide Access to the DB Cluster in the VPC by Creating a Security Group](CHAP_SettingUp_Aurora.md#CHAP_SettingUp_Aurora.SecurityGroup) and [Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\.
+You can create a VPC security group for a DB instance by using the VPC console\. For information about creating a security group, see [Provide access to the DB cluster in the VPC by creating a security group](CHAP_SettingUp_Aurora.md#CHAP_SettingUp_Aurora.SecurityGroup) and [Security groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\.
 
-## Associating a Security Group with a DB Instance<a name="Overview.RDSSecurityGroups.Associate"></a>
+## Associating a security group with a DB instance<a name="Overview.RDSSecurityGroups.Associate"></a>
 
 You can associate a security group with a DB instance by using **Modify** on the RDS console, the `ModifyDBInstance` Amazon RDS API, or the `modify-db-instance` AWS CLI command\.
 
- For information about modifying a DB instance in a DB cluster, see [Modify a DB Instance in a DB Cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\. For security group considerations when you restore a DB instance from a DB snapshot, see [Security Group Considerations](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Security)\.
+ For information about modifying a DB instance in a DB cluster, see [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\. For security group considerations when you restore a DB instance from a DB snapshot, see [Security group considerations](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Security)\.
 
-## Associating a Security Group with a DB Cluster<a name="Overview.RDSSecurityGroups.AssociateWithCluster"></a>
+## Associating a security group with a DB cluster<a name="Overview.RDSSecurityGroups.AssociateWithCluster"></a>
 
 You can associate a security group with a DB cluster by using **Modify cluster** on the RDS console, the `ModifyDBCluster` Amazon RDS API, or the `modify-db-cluster` AWS CLI command\.
 
-For information about modifying a DB cluster, see [Modifying an Amazon Aurora DB Cluster](Aurora.Modifying.md)\.
+For information about modifying a DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.

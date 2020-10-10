@@ -1,4 +1,4 @@
-# Managing an Aurora Global Database<a name="aurora-global-database-managing"></a>
+# Managing an Aurora global database<a name="aurora-global-database-managing"></a>
 
  You can perform most management operations on the individual clusters that make up an Aurora global database\. When you choose **Group related resources** on the **Databases** page in the console, you see the primary cluster and secondary clusters grouped under the associated global database object\. 
 
@@ -9,14 +9,14 @@
 ![\[Screenshot showing a selected Aurora global database and associated settings in the AWS Management Console.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-global-cluster-maintenance.png)
 
 **Topics**
-+ [Configuring an Aurora Global Database](#aurora-global-database-modifying)
-+ [Monitoring an Aurora Global Database](#aurora-global-database-monitoring)
-+ [Cross\-Region Disaster Recovery for Aurora Global Databases](#aurora-global-database-disaster-recovery)
-+ [Performance Insights for Aurora Global Databases](#aurora-global-database-pi)
-+ [Removing a Cluster from an Aurora Global Database](#aurora-global-database-detaching)
-+ [Deleting an Aurora Global Database](#aurora-global-database-deleting)
++ [Configuring an Aurora global database](#aurora-global-database-modifying)
++ [Monitoring an Aurora global database](#aurora-global-database-monitoring)
++ [Cross\-Region Disaster Recovery for Aurora global databases](#aurora-global-database-disaster-recovery)
++ [Performance Insights for Aurora global databases](#aurora-global-database-pi)
++ [Removing a cluster from an Aurora global database](#aurora-global-database-detaching)
++ [Deleting an Aurora global database](#aurora-global-database-deleting)
 
-## Configuring an Aurora Global Database<a name="aurora-global-database-modifying"></a>
+## Configuring an Aurora global database<a name="aurora-global-database-modifying"></a>
 
  The **Databases** page in the AWS Management Console lists all your Aurora global databases, showing the primary cluster and secondary clusters for each one\. The Aurora global database is an object that has its own configuration settings, in particular the AWS Regions associated with the primary and secondary clusters\. The following shows an Aurora MySQL example\.
 
@@ -30,7 +30,7 @@ You can configure the parameter groups independently for each Aurora cluster wit
 
 The `aurora_enable_repl_bin_log_filtering` and `aurora_enable_replica_log_compression` configuration settings have no effect\. 
 
-## Monitoring an Aurora Global Database<a name="aurora-global-database-monitoring"></a>
+## Monitoring an Aurora global database<a name="aurora-global-database-monitoring"></a>
 
 To view the status of a global database, use the `aurora_global_db_status` and `aurora_global_db_instance_status` functions\. 
 
@@ -39,7 +39,7 @@ Only Aurora PostgreSQL supports the `aurora_global_db_status` and `aurora_global
 
 **To monitor a global database**
 
-1. Connect to the global database primary cluster endpoint using a PostgreSQL utility such as psql\. For more information about how to connect, see [Connecting to an Aurora Global Database](aurora-global-database-connecting.md)\.
+1. Connect to the global database primary cluster endpoint using a PostgreSQL utility such as psql\. For more information about how to connect, see [Connecting to an Aurora global database](aurora-global-database-connecting.md)\.
 
 1. Use the `aurora_global_db_status` function in a psql command to list the primary and secondary volumes\. This shows the lag times of the global database secondary DB clusters\.
 
@@ -65,7 +65,7 @@ Only Aurora PostgreSQL supports the `aurora_global_db_status` and `aurora_global
    + **last\_lag\_calculation\_time** – The timestamp when values were last calculated for `replication_lag_in_msec` and `rpo_lag_in_msec`\.
    + **feedback\_epoch** – The epoch the secondary DB cluster uses when it generates hot standby information\.
 
-     *Hot standby *is when a DB cluster can connect and query while the server is in recovery or standby mode\. Hot standby feedback is information about the DB cluster when it's in hot standby\. For more information, see [Hot Standby](https://www.postgresql.org/docs/current/hot-standby.html) in the PostgreSQL documentation\.
+     *Hot standby *is when a DB cluster can connect and query while the server is in recovery or standby mode\. Hot standby feedback is information about the DB cluster when it's in hot standby\. For more information, see [Hot standby](https://www.postgresql.org/docs/current/hot-standby.html) in the PostgreSQL documentation\.
    + **feedback\_xmin** – The minimum \(oldest\) active transaction ID used by the secondary DB cluster\.
 
 1. Use the `aurora_global_db_instance_status` function to list all secondary DB instances for both the primary DB cluster and secondary DB clusters\.
@@ -91,7 +91,7 @@ Only Aurora PostgreSQL supports the `aurora_global_db_status` and `aurora_global
    + **highest\_lsn\_rcvd** – The highest LSN received by the DB Instance from the writer DB Instance\.
    + **feedback\_epoch** – The epoch the DB instance uses when it generates hot standby information\.
 
-     Hot standby is when a DB instance can connect and query while the server is in recovery or standby mode\. Hot standby feedback is information about the DB instance when it's in hot standby\. For more information, see the PostgreSQL documentation on [Hot Standby](https://www.postgresql.org/docs/current/hot-standby.html)\.
+     Hot standby is when a DB instance can connect and query while the server is in recovery or standby mode\. Hot standby feedback is information about the DB instance when it's in hot standby\. For more information, see the PostgreSQL documentation on [Hot standby](https://www.postgresql.org/docs/current/hot-standby.html)\.
    + **feedback\_xmin** – The minimum \(oldest\) active transaction ID used by the DB instance\.
    + **oldest\_read\_view\_lsn** – The oldest LSN used by the DB instance to read from storage\.
    + **visibility\_lag\_in\_msec** – How far this DB instance is lagging behind the writer DB instance\.
@@ -106,7 +106,7 @@ psql> COMMIT;
 
 In some cases, there might be a network disconnect between the primary DB cluster and the secondary DB cluster after the `BEGIN` statement\. If so, the secondary DB cluster's `replication_lag_in_msec` value starts increasing\. At the end of the `INSERT` statement, the `replication_lag_in_msec` value is 1 hour\. However, the `rpo_lag_in_msec` value is 0 because all the user data committed between the primary DB cluster and secondary DB cluster are still the same\. As soon as the `COMMIT` statement completes, the `rpo_lag_in_msec` value increases\. 
 
-## Cross\-Region Disaster Recovery for Aurora Global Databases<a name="aurora-global-database-disaster-recovery"></a>
+## Cross\-Region Disaster Recovery for Aurora global databases<a name="aurora-global-database-disaster-recovery"></a>
 
 In some cases, your Aurora global database might include more than one secondary AWS Region\. If so, you can choose which AWS Region to fail over to if an outage affects the primary AWS Region\. To help determine which secondary AWS Region to choose, you can monitor the replication lag for all your secondary Regions\. In some cases, one secondary Region might have substantially less replication lag than the others\. If so, that's a good indication that the associated Aurora cluster has enough database and network capacity to take over the full read/write workload for your application\. 
 
@@ -115,10 +115,10 @@ When your global database has multiple secondary Regions, make sure that you det
 When you promote a secondary cluster to be the primary cluster, you also need to update the endpoints that your applications use to connect to the global database\. To get a new writer endpoint from a newly promoted cluster, you can convert a former reader endpoint by removing `-ro` from the endpoint string\. For example, if a former reader endpoint is `global-16rr-test-cluster-1.cluster-ro-12345678901.us-west-2.rds.amazonaws.com`, then the new promoted writer endpoint is `global-16rr-test-cluster-1.cluster-cps2igpwyrwa.us-west-2.rds.amazonaws.com`\. 
 
 **Topics**
-+ [Failover for Aurora Global Databases](#aurora-global-database-failover)
-+ [Managing Recovery for Aurora Global Databases](#aurora-global-database-manage-recovery)
++ [Failover for Aurora global databases](#aurora-global-database-failover)
++ [Managing recovery for Aurora global databases](#aurora-global-database-manage-recovery)
 
-### Failover for Aurora Global Databases<a name="aurora-global-database-failover"></a>
+### Failover for Aurora global databases<a name="aurora-global-database-failover"></a>
 
 Aurora global databases offer a higher level of failover capability than a default Aurora cluster\. If an entire cluster in one AWS Region becomes unavailable, you can promote another cluster in the global database to have read/write capability\. 
 
@@ -130,15 +130,15 @@ The following procedure outlines what to do to promote one of the secondary clus
 
 Before you begin the procedure, the primary cluster fails or otherwise becomes unavailable\. 
 
-1. Remove the secondary cluster from the Aurora global database\. Doing so promotes the cluster to full read/write capability\. To learn how to remove an Aurora cluster from a global database, see [Removing a Cluster from an Aurora Global Database](#aurora-global-database-detaching)\. 
+1. Remove the secondary cluster from the Aurora global database\. Doing so promotes the cluster to full read/write capability\. To learn how to remove an Aurora cluster from a global database, see [Removing a cluster from an Aurora global database](#aurora-global-database-detaching)\. 
 
 1. Reconfigure your application to divert write traffic to the newly promoted cluster\. 
 **Important**  
  At this point, stop issuing any DML statements or other write operations to the cluster that became unavailable\. To avoid data inconsistencies between the clusters, known as a *"split\-brain" scenario*, avoid writing to the former primary cluster, even if it comes back online\. 
 
-1.  Create a new Aurora global database with the newly promoted cluster as the primary cluster\. To learn how to create an Aurora global database, see [Creating an Aurora Global Database](aurora-global-database-getting-started.md#aurora-global-database-creating)\. 
+1.  Create a new Aurora global database with the newly promoted cluster as the primary cluster\. To learn how to create an Aurora global database, see [Creating an Aurora global database](aurora-global-database-getting-started.md#aurora-global-database-creating)\. 
 
-1. Add to the Aurora global database the AWS Region of the cluster that encountered the issue\. Now that AWS Region contains a new secondary cluster\. To learn how to add an AWS Region to an Aurora global database, see [Adding an AWS Region to an Aurora Global Database](aurora-global-database-getting-started.md#aurora-global-database-attaching)\. 
+1. Add to the Aurora global database the AWS Region of the cluster that encountered the issue\. Now that AWS Region contains a new secondary cluster\. To learn how to add an AWS Region to an Aurora global database, see [Adding an AWS Region to an Aurora global database](aurora-global-database-getting-started.md#aurora-global-database-attaching)\. 
 
 1.  When the outage is resolved and you're ready to assign your original AWS Region as the primary cluster again, perform the same steps in reverse: 
 
@@ -150,12 +150,12 @@ Before you begin the procedure, the primary cluster fails or otherwise becomes u
 
    1.  Add an AWS Region to set up one or more secondary clusters in the same AWS Regions as before\. 
 
-### Managing Recovery for Aurora Global Databases<a name="aurora-global-database-manage-recovery"></a>
+### Managing recovery for Aurora global databases<a name="aurora-global-database-manage-recovery"></a>
 
 You can control the point at which a global database resumes, in case of disasters such as network or hardware failures that affect the primary DB cluster\. You manage recovery by setting a recovery point objective \(RPO\) for the global database\. 
 
 **Note**  
-Managing the RPO is currently supported for Amazon Aurora with PostgreSQL compatibility\. For a list of supported Aurora PostgreSQL versions and AWS Regions, see [Limitations of Aurora Global Databases](aurora-global-database.md#aurora-global-database.limitations)\.
+Managing the RPO is currently supported for Amazon Aurora with PostgreSQL compatibility\. For a list of supported Aurora PostgreSQL versions and AWS Regions, see [Limitations of Aurora global databases](aurora-global-database.md#aurora-global-database.limitations)\.
 
 The *recovery point objective* is the oldest age of data that you want recoverable from a secondary DB cluster\. The RPO is used when your database resumes operations in a new AWS Region after a failover\. It represents the amount of data loss measured in time that you're willing to accept on a database failover\.
 
@@ -170,17 +170,17 @@ By using a managed RPO, you can control the maximum amount of data loss as the s
 This approach ensures that Aurora PostgreSQL doesn't allow transaction commits to complete that would result in a violation of your chosen RPO time\. 
 
 **Topics**
-+ [Viewing the Recovery Point Objective](#aurora-global-database-view-rpo)
-+ [Setting the Recovery Point Objective](#aurora-global-database-set-rpo)
-+ [Disabling the Recovery Point Objective](#aurora-global-database-disable-rpo)
++ [Viewing the recovery point objective](#aurora-global-database-view-rpo)
++ [Setting the recovery point objective](#aurora-global-database-set-rpo)
++ [Disabling the recovery point objective](#aurora-global-database-disable-rpo)
 
-#### Viewing the Recovery Point Objective<a name="aurora-global-database-view-rpo"></a>
+#### Viewing the recovery point objective<a name="aurora-global-database-view-rpo"></a>
 
-The recovery point objective \(RPO\) of a global database is stored in the `rds.global_db_rpo` parameter\. To view the current RPO setting of the `rds.global_db_rpo` parameter and other parameters of the cluster parameter group, see [Viewing Parameter Values for a DB Cluster Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ViewingCluster)\.
+The recovery point objective \(RPO\) of a global database is stored in the `rds.global_db_rpo` parameter\. To view the current RPO setting of the `rds.global_db_rpo` parameter and other parameters of the cluster parameter group, see [Viewing parameter values for a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ViewingCluster)\.
 
-#### Setting the Recovery Point Objective<a name="aurora-global-database-set-rpo"></a>
+#### Setting the recovery point objective<a name="aurora-global-database-set-rpo"></a>
 
-You can set the global database's RPO using the AWS Management Console, the AWS CLI, or the RDS API\. For more information, see [Modifying Parameters in a DB Cluster Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
+You can set the global database's RPO using the AWS Management Console, the AWS CLI, or the RDS API\. For more information, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
 
 ##### Console<a name="aurora-global-database-set-rpo.Console"></a>
 
@@ -188,9 +188,9 @@ You can set the global database's RPO using the AWS Management Console, the AWS 
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Identify the primary DB cluster's parameter group of the global database\. For more information about a cluster's configuration settings, see [Configuring an Aurora Global Database](#aurora-global-database-modifying)\.
+1. Identify the primary DB cluster's parameter group of the global database\. For more information about a cluster's configuration settings, see [Configuring an Aurora global database](#aurora-global-database-modifying)\.
 
-1. Open the primary DB cluster parameter group and set the **rds\.global\_db\_rpo** parameter\. For more information, see [Modifying Parameters in a DB Cluster Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
+1. Open the primary DB cluster parameter group and set the **rds\.global\_db\_rpo** parameter\. For more information, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
 
 1. Set the **rds\.global\_db\_rpo** parameter value to the number of seconds you want for the recover point objective\. Valid values are from 20 seconds up to the maximum integer value of 2,147,483,647 \(68 years\)\.
 
@@ -220,7 +220,7 @@ aws rds modify-db-cluster-parameter-group ^
 
 To modify the `rds.global_db_rpo` parameter, use the Amazon RDS [ ModifyDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterParameterGroup.html) API operation\.
 
-#### Disabling the Recovery Point Objective<a name="aurora-global-database-disable-rpo"></a>
+#### Disabling the recovery point objective<a name="aurora-global-database-disable-rpo"></a>
 
 To disable the RPO, reset the `rds.global_db_rpo` parameter\. You can reset parameters using the AWS Management Console, the AWS CLI, or the RDS API\.
 
@@ -242,7 +242,7 @@ To disable the RPO, reset the `rds.global_db_rpo` parameter\. You can reset para
 
 1. When the screen shows **Reset parameters in DB parameter group**, choose **Reset parameters**\.
 
-For more information on how to reset a parameter with the console, see [Modifying Parameters in a DB Cluster Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
+For more information on how to reset a parameter with the console, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
 
 ##### AWS CLI<a name="aurora-global-database-set-rpo.CLI"></a>
 
@@ -268,7 +268,7 @@ aws rds reset-db-cluster-parameter-group ^
 
 To reset the `rds.global_db_rpo` parameter, use the Amazon RDS API [ ResetDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ResetDBClusterParameterGroup.html) operation\.
 
-## Performance Insights for Aurora Global Databases<a name="aurora-global-database-pi"></a>
+## Performance Insights for Aurora global databases<a name="aurora-global-database-pi"></a>
 
  You can use Amazon RDS Performance Insights and Aurora global databases together\. When you do so, the Performance Insights reports apply to each cluster in the global database individually\. You can enable or turn off Performance Insights for each cluster that's part of the global database\. When you add a new secondary AWS Region to a global database that's already using Performance Insights, make sure that you enable Performance Insights in the newly added cluster\. It doesn't inherit the Performance Insights setting from the existing global database\. 
 
@@ -278,13 +278,13 @@ To reset the `rds.global_db_rpo` parameter, use the Amazon RDS API [ ResetDBClus
 
  For information about using Performance Insights, see [Using Amazon RDS Performance Insights](USER_PerfInsights.md)\. 
 
-## Removing a Cluster from an Aurora Global Database<a name="aurora-global-database-detaching"></a>
+## Removing a cluster from an Aurora global database<a name="aurora-global-database-detaching"></a>
 
  Removing an Aurora cluster from an Aurora global database turns it back into a regional cluster, with full read/write capability and no longer synchronized with the primary cluster\. 
 
- You might remove an Aurora cluster from a global database in case the primary cluster becomes degraded or isolated\. Performing a failover for an Aurora global database involves removing one of the secondary clusters from the original global database\. You then use the cluster as the primary cluster in a new Aurora global database\. For more information, see [Failover for Aurora Global Databases](#aurora-global-database-failover)\. 
+ You might remove an Aurora cluster from a global database in case the primary cluster becomes degraded or isolated\. Performing a failover for an Aurora global database involves removing one of the secondary clusters from the original global database\. You then use the cluster as the primary cluster in a new Aurora global database\. For more information, see [Failover for Aurora global databases](#aurora-global-database-failover)\. 
 
- If you no longer need the global database, make sure that you remove all secondary clusters and then the primary cluster before deleting the global database itself\. You can then delete some or all of the clusters you removed, or continue to use some or all as single\-Region Aurora clusters\. For more information, see [Deleting an Aurora Global Database](#aurora-global-database-deleting)\.
+ If you no longer need the global database, make sure that you remove all secondary clusters and then the primary cluster before deleting the global database itself\. You can then delete some or all of the clusters you removed, or continue to use some or all as single\-Region Aurora clusters\. For more information, see [Deleting an Aurora global database](#aurora-global-database-deleting)\.
 
 ### Console<a name="aurora-global-database-detach.console"></a>
 
@@ -343,9 +343,9 @@ aws rds --region primary_region ^
 
  To remove an Aurora cluster from an Aurora global database with the RDS API, run the [RemoveFromGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RemoveFromGlobalCluster.html) action\. 
 
-## Deleting an Aurora Global Database<a name="aurora-global-database-deleting"></a>
+## Deleting an Aurora global database<a name="aurora-global-database-deleting"></a>
 
- Before you can delete an Aurora global database, make sure that you first remove or delete the global database's clusters\. Because a global database typically holds business\-critical data, you can't delete the global database and the associated clusters in a single step\. For instructions about how to remove a cluster from a global database, which makes it a standalone Aurora cluster again, see [Removing a Cluster from an Aurora Global Database](#aurora-global-database-detaching)\. For a procedure that demonstrates how to delete clusters after they are removed, see [Deleting a DB Instance in an Aurora DB Cluster](USER_DeleteInstance.md)\.
+ Before you can delete an Aurora global database, make sure that you first remove or delete the global database's clusters\. Because a global database typically holds business\-critical data, you can't delete the global database and the associated clusters in a single step\. For instructions about how to remove a cluster from a global database, which makes it a standalone Aurora cluster again, see [Removing a cluster from an Aurora global database](#aurora-global-database-detaching)\. For a procedure that demonstrates how to delete clusters after they are removed, see [Deleting a DB instance in an Aurora DB cluster](USER_DeleteInstance.md)\.
 
 ### Console<a name="aurora-global-database-delete.console"></a>
 
@@ -353,13 +353,13 @@ To delete an Aurora global database with the AWS Management Console, you first r
 
 Deleting the writer instance from an Aurora cluster deletes the cluster itself\. Because a global database typically holds business\-critical data, you can't delete the global database and the associated clusters in a single step\. 
 
-For instructions on removing clusters from a global database, see [Removing a Cluster from an Aurora Global Database](#aurora-global-database-detaching)\. For a procedure showing how to delete clusters after they are removed, see [Deleting a DB Instance in an Aurora DB Cluster](USER_DeleteInstance.md)\. Deleting the primary instance from an Aurora cluster deletes the cluster itself\. 
+For instructions on removing clusters from a global database, see [Removing a cluster from an Aurora global database](#aurora-global-database-detaching)\. For a procedure showing how to delete clusters after they are removed, see [Deleting a DB instance in an Aurora DB cluster](USER_DeleteInstance.md)\. Deleting the primary instance from an Aurora cluster deletes the cluster itself\. 
 
 **To delete an Aurora global database using the AWS Management Console**
 
 1.  Confirm that all other clusters are removed from the Aurora global database\. 
 
-    If the global database includes any clusters nested underneath it, as in the following screenshot, you can't delete the global database yet\. Follow the procedure in [Removing a Cluster from an Aurora Global Database](#aurora-global-database-detaching) for each cluster associated with the global database\.   
+    If the global database includes any clusters nested underneath it, as in the following screenshot, you can't delete the global database yet\. Follow the procedure in [Removing a cluster from an Aurora global database](#aurora-global-database-detaching) for each cluster associated with the global database\.   
 ![\[The global database shown preceding can't be deleted because it still has associated clusters.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-cluster-tree-08-not-empty.png)
 
    After the global database has no associated clusters, you can delete it\. The following screenshot shows how the `global-db-demo` cluster is no longer associated with the global database after being removed\.   

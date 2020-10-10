@@ -1,13 +1,13 @@
-# Examining Plans in the apg\_plan\_mgmt\.dba\_plans view<a name="AuroraPostgreSQL.Optimize.ViewPlans"></a>
+# Examining plans in the apg\_plan\_mgmt\.dba\_plans view<a name="AuroraPostgreSQL.Optimize.ViewPlans"></a>
 
 Query plan management provides a new SQL view for database administrators \(DBAs\) to use called `apg_plan_mgmt.dba_plans`\. Each database in a DB instance has its own `apg_plan_mgmt.dba_plans` view\. 
 
-This view contains the plan history for all of your managed statements\. Each managed plan is identified by the combination of a SQL hash value and a plan hash value\. With these identifiers, you can use tools such as Amazon RDS Performance Insights to track individual plan performance\. For more information on Performance Insights, see [Using Amazon RDS Performance Insights]( https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)\. 
+This view contains the plan history for all of your managed statements\. Each managed plan is identified by the combination of a SQL hash value and a plan hash value\. With these identifiers, you can use tools such as Amazon RDS Performance Insights to track individual plan performance\. For more information on Performance Insights, see [Using Amazon RDS performance insights]( https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)\. 
 
 **Note**  
 Access to the `apg_plan_mgmt.dba_plans` view is restricted to users that hold the `apg_plan_mgmt` role\. 
 
-## Listing Managed Plans<a name="AuroraPostgreSQL.Optimize.ViewPlans.List"></a>
+## Listing managed plans<a name="AuroraPostgreSQL.Optimize.ViewPlans.List"></a>
 
 To list the managed plans, use a SELECT statement on the `apg_plan_mgmt.dba_plans` view\. The following example displays some columns in the `dba_plans` view such as the `status`, which identifies the approved and unapproved plans\.
 
@@ -22,12 +22,12 @@ FROM apg_plan_mgmt.dba_plans;
  (2 rows)
 ```
 
-## Reference for the apg\_plan\_mgmt\.dba\_plans View<a name="AuroraPostgreSQL.Optimize.ViewPlans.dba_plans"></a>
+## Reference for the apg\_plan\_mgmt\.dba\_plans view<a name="AuroraPostgreSQL.Optimize.ViewPlans.dba_plans"></a>
 
 The columns of plan information in the `apg_plan_mgmt.dba_plans` view include the following\.
 
 
-| dba\_plans Column | Description | 
+| dba\_plans column | Description | 
 | --- | --- | 
 | cardinality\_error |  A measure of the error between the estimated cardinality versus the actual cardinality\. *Cardinality* is the number of table rows that the plan is to process\. If the cardinality error is large, then it increases the likelihood that the plan isn't optimal\. This column is populated by the [apg\_plan\_mgmt\.evolve\_plan\_baselines](AuroraPostgreSQL.Optimize.Functions.md#AuroraPostgreSQL.Optimize.Functions.evolve_plan_baselines) function\.   | 
 | compatibility\_level |  The feature level of the Aurora PostgreSQL optimizer\.  | 

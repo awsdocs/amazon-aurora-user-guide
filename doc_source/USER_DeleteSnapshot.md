@@ -1,11 +1,11 @@
-# Deleting a DB Cluster Snapshot<a name="USER_DeleteSnapshot"></a>
+# Deleting a DB cluster snapshot<a name="USER_DeleteSnapshot"></a>
 
 You can delete DB cluster snapshots managed by Amazon RDS when you no longer need them\.
 
 **Note**  
 To delete backups managed by AWS Backup, use the AWS Backup console\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
-## Deleting a DB Cluster Snapshot<a name="USER_DeleteDBClusterSnapshot"></a>
+## Deleting a DB cluster snapshot<a name="USER_DeleteDBClusterSnapshot"></a>
 
 You can delete a DB cluster snapshot using the console, the AWS CLI, or the RDS API\.
 

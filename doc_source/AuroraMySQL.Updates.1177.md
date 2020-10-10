@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2018\-10\-08<a name="AuroraMySQL.Updates.1177"></a>
+# Aurora MySQL database engine updates 2018\-10\-08<a name="AuroraMySQL.Updates.1177"></a>
 
 **Version:** 1\.17\.7
 
@@ -9,7 +9,7 @@ With version 1\.17\.7 of Aurora MySQL, we are using a cluster patching model whe
 **Note**  
  This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] and China \(Beijing\) \[cn\-north\-1\] regions\. There will be a separate announcement once it is made available\. 
 
-If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.1177.Improvements"></a>
 +  The InnoDB status variable `innodb_buffer_pool_size` has been made publicly visible for the customers to modify\. 
@@ -23,4 +23,4 @@ If you have any questions or concerns, AWS Support is available on the community
 +  Bug \#16208542: Drop index on a foreign key column leads to missing table\. 
 +  Bug \#76349: memory leak in add\_derived\_key\(\)\. 
 +  Bug \#16862316: For partitioned tables, queries could return different results depending on whether Index Merge was used\. 
-+  Bug \#17588348: Queries using the index\_merge optimization \(see [Index Merge Optimization](https://dev.mysql.com/doc/refman/5.6/en/index-merge-optimization.html)\) could return invalid results when run against tables that were partitioned by HASH\. 
++  Bug \#17588348: Queries using the index\_merge optimization \(see [Index merge optimization](https://dev.mysql.com/doc/refman/5.6/en/index-merge-optimization.html)\) could return invalid results when run against tables that were partitioned by HASH\. 

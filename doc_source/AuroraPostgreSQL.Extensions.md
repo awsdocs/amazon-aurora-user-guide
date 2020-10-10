@@ -1,18 +1,18 @@
-# Extensions and Modules for Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Extensions"></a>
+# Extensions and modules for Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Extensions"></a>
 
-## Aurora PostgreSQL apg\_plan\_mgmt Extension<a name="AuroraPostgreSQL.Extensions.apg_plan_mgmt"></a>
+## Aurora PostgreSQL apg\_plan\_mgmt extension<a name="AuroraPostgreSQL.Extensions.apg_plan_mgmt"></a>
 
 **Topics**
-+ [The Aurora PostgreSQL apg\_plan\_mgmt Extension Version 2\.0](#AuroraPostgreSQL.Extensions.apg_plan_mgmt.20)
-+ [The Aurora PostgreSQL apg\_plan\_mgmt Extension Version 1\.0\.1](#AuroraPostgreSQL.Extensions.apg_plan_mgmt.101)
++ [The Aurora PostgreSQL apg\_plan\_mgmt extension version 2\.0](#AuroraPostgreSQL.Extensions.apg_plan_mgmt.20)
++ [The Aurora PostgreSQL apg\_plan\_mgmt extension version 1\.0\.1](#AuroraPostgreSQL.Extensions.apg_plan_mgmt.101)
 
-### The Aurora PostgreSQL apg\_plan\_mgmt Extension Version 2\.0<a name="AuroraPostgreSQL.Extensions.apg_plan_mgmt.20"></a>
+### The Aurora PostgreSQL apg\_plan\_mgmt extension version 2\.0<a name="AuroraPostgreSQL.Extensions.apg_plan_mgmt.20"></a>
 
-You use the `apg_plan_mgmt` extension with query plan management\. For more about how to install, upgrade, and use the `apg_plan_mgmt` extension, see [Managing Query Execution Plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)\.
+You use the `apg_plan_mgmt` extension with query plan management\. For more about how to install, upgrade, and use the `apg_plan_mgmt` extension, see [Managing query execution plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)\.
 
 The `apg_plan_mgmt` extension changes for version 2\.0 include the following:
 
-**New Extension Features**
+**New extension features**
 
 1. You can now manage all queries inside SQL functions, whether they have parameters or not\.
 
@@ -22,7 +22,7 @@ The `apg_plan_mgmt` extension changes for version 2\.0 include the following:
 
 1. You can now use query plan management to enforce the use of specific types of aggregate methods in query plans\.
 
-**Extension Improvements**
+**Extension improvements**
 
 1. You can now save planswith a size up to 8KB times the setting of the `max_worker_processes` parameter\. Previously the maximum plan size was 8KB\.
 
@@ -42,11 +42,11 @@ The `apg_plan_mgmt` extension changes for version 2\.0 include the following:
    + `apg_plan_mgmt.pgss_min_stddev_time_ms`
    + `apg_plan_mgmt.pgss_min_total_time_ms`
 
-### The Aurora PostgreSQL apg\_plan\_mgmt Extension Version 1\.0\.1<a name="AuroraPostgreSQL.Extensions.apg_plan_mgmt.101"></a>
+### The Aurora PostgreSQL apg\_plan\_mgmt extension version 1\.0\.1<a name="AuroraPostgreSQL.Extensions.apg_plan_mgmt.101"></a>
 
 The `apg_plan_mgmt` extension changes for version 1\.0\.1 include the following:
 
-**New Extension Features**
+**New extension features**
 
 1. A new `update_plan_hash` parameter is available for the `validate_plans` function\. This parameter updates the `plan_hash` for plans that can't be reproduced exactly\. The `update_plan_hash` parameter also enables you to fix a plan by rewriting the SQL\. You can then register the good plan as an `Approved` plan for the original SQL\. Following is an example of using `update_plan_hash`\.
 
@@ -75,7 +75,7 @@ The `apg_plan_mgmt` extension changes for version 1\.0\.1 include the following:
 
 1. Overhead is reduced when the `apg_plan_mgmt` extension is installed on multiple databases in the same cluster while two or more databases are being accessed concurrently\. Also, this release fixed a bug in this area that caused plans to not be stored in shared memory\.
 
-**Extension Improvements**
+**Extension improvements**
 
 1. Improvements to the `evolve_plan_baselines` function\.
 

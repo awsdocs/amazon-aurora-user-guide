@@ -1,11 +1,11 @@
-# Connecting to Your DB Cluster Using IAM Authentication and the AWS SDK for Go<a name="UsingWithRDS.IAMDBAuth.Connecting.Go"></a>
+# Connecting to your DB cluster using IAM authentication and the AWS SDK for Go<a name="UsingWithRDS.IAMDBAuth.Connecting.Go"></a>
 
-You can connect from the command line to an Aurora MySQL or Aurora PostgreSQL DB cluster with the AWS SDK for Go as described following\.
+You can connect to an Aurora MySQL or Aurora PostgreSQL DB cluster with the AWS SDK for Go as described following\.
 
 The following are prerequisites for connecting to your DB cluster using IAM authentication:
-+ [Enabling and Disabling IAM Database Authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
-+ [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
-+ [Creating a Database Account Using IAM Authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
++ [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
++ [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
++ [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
 
 To run these code examples, you need the [AWS SDK for Go](http://aws.amazon.com/sdk-for-go/), found on the AWS site\.
 
@@ -19,10 +19,10 @@ Modify the values of the following variables as needed:
 In addition, make sure the imported libraries in the sample code exist on your system\.
 
 **Topics**
-+ [Generating an IAM Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Go.AuthToken)
-+ [Connecting to a DB Cluster](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect)
++ [Generating an IAM authentication token](#UsingWithRDS.IAMDBAuth.Connecting.Go.AuthToken)
++ [Connecting to a DB cluster](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect)
 
-## Generating an IAM Authentication Token<a name="UsingWithRDS.IAMDBAuth.Connecting.Go.AuthToken"></a>
+## Generating an IAM authentication token<a name="UsingWithRDS.IAMDBAuth.Connecting.Go.AuthToken"></a>
 
 You can use the [ `rdsutils`](https://docs.aws.amazon.com/sdk-for-go/api/service/rds/rdsutils/) package to generate tokens used to connect to a DB cluster\. Call the [https://docs.aws.amazon.com/sdk-for-go/api/service/rds/rdsutils/#BuildAuthToken](https://docs.aws.amazon.com/sdk-for-go/api/service/rds/rdsutils/#BuildAuthToken) function to generate a token\. Provide the DB instance endpoint, AWS region, username, and IAM credentials to generate the token for connecting to a DB cluster with IAM credentials\.
 
@@ -86,7 +86,7 @@ func main() {
 }
 ```
 
-## Connecting to a DB Cluster<a name="UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect"></a>
+## Connecting to a DB cluster<a name="UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect"></a>
 
 The following code example shows how to generate an authentication token, and then use it to connect to a DB cluster\. 
 

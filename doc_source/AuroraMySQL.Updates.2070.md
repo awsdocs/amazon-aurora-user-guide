@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2019\-11\-25 \(Version 2\.07\.0\)<a name="AuroraMySQL.Updates.2070"></a>
+# Aurora MySQL database engine updates 2019\-11\-25 \(version 2\.07\.0\)<a name="AuroraMySQL.Updates.2070"></a>
 
 **Version:** 2\.07\.0
 
@@ -13,17 +13,17 @@ Aurora MySQL 2\.07\.0 is generally available\. Aurora MySQL 2\.x versions are co
 **Note**  
  This version is currently not available in the following AWS Regions: AWS GovCloud \(US\-East\) \[us\-gov\-east\-1\], AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\], China \(Ningxia\) \[cn\-northwest\-1\], Asia Pacific \(Hong Kong\) \[ap\-east\-1\], Middle East \(Bahrain\) \[me\-south\-1\], and South America \(São Paulo\) \[sa\-east\-1\]\. There will be a separate announcement once it is made available\. 
 
-If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 **Note**  
-For information on how to upgrade your Aurora MySQL database cluster, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+For information on how to upgrade your Aurora MySQL database cluster, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2070.Improvements"></a>
 
  **New features:** 
 +  Global Databases now allow adding secondary read\-only replica regions for database clusters deployed in these AWS Regions: regions: US East \(N\. Virginia\) \[us\-east\-1\], US East \(Ohio\) \[us\-east\-2\], US West \(N\. California\) \[us\-west\-1\], US West \(Oregon\) \[us\-west\-2\], Europe \(Ireland\) \[eu\-west\-1\], Europe \(London\) \[eu\-west\-2\], Europe \(Paris\) \[eu\-west\-3\], Asia Pacific \(Tokyo\) \[ap\-northeast\-1\], Asia Pacific \(Seoul\) \[ap\-northeast\-2\], Asia Pacific \(Singapore\) \[ap\-southeast\-1\], Asia Pacific \(Sydney\) \[ap\-southeast\-2\], Canada \(Central\) \[ca\-central\-1\], Europe \(Frankfurt\) \[eu\-central\-1\], and Asia Pacific \(Mumbai\) \[ap\-south\-1\]\. 
-+  Amazon Aurora machine learning is a highly optimized integration between the Aurora MySQL database and AWS machine learning \(ML\) services\. Aurora machine learning allows developers to add a variety of ML\-based predictions to their database applications by invoking ML models using the familiar SQL programming language they already use for database development, without having to build custom integrations or learn separate tools\. For more information, see [Using Machine Learning \(ML\) Capabilities with Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-ml.html)\. 
-+  Added support for the ANSI `READ COMMITTED` isolation level on the read replicas\. This isolation level enables long\-running queries on the read replica to execute without impacting the high throughput of writes on the writer node\. For more information, see [Aurora MySQL Isolation Levels](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Reference.html#AuroraMySQL.Reference.IsolationLevels)\. 
++  Amazon Aurora machine learning is a highly optimized integration between the Aurora MySQL database and AWS machine learning \(ML\) services\. Aurora machine learning allows developers to add a variety of ML\-based predictions to their database applications by invoking ML models using the familiar SQL programming language they already use for database development, without having to build custom integrations or learn separate tools\. For more information, see [Using machine learning \(ML\) capabilities with Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-ml.html)\. 
++  Added support for the ANSI `READ COMMITTED` isolation level on the read replicas\. This isolation level enables long\-running queries on the read replica to execute without impacting the high throughput of writes on the writer node\. For more information, see [Aurora MySQL isolation levels](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Reference.html#AuroraMySQL.Reference.IsolationLevels)\. 
 
  **Critical fixes:** 
 + [CVE\-2019\-2922](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2922)
@@ -46,12 +46,12 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 +  Bug \#26191879: FOREIGN KEY CASCADES USE EXCESSIVE MEMORY 
 +  Bug \#20989615: INNODB AUTO\_INCREMENT PRODUCES SAME VALUE TWICE 
 
-## Comparison with Aurora MySQL Version 1<a name="AuroraMySQL.Updates.2070.Compare56"></a>
+## Comparison with Aurora MySQL version 1<a name="AuroraMySQL.Updates.2070.Compare56"></a>
 
 The following Amazon Aurora MySQL features are supported in Aurora MySQL Version 1 \(compatible with MySQL 5\.6\), but these features are currently not supported in Aurora MySQL Version 2 \(compatible with MySQL 5\.7\)\.
-+ Asynchronous key prefetch \(AKP\)\. For more information, see [Working with Asynchronous Key Prefetch in Amazon Aurora](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
-+ Scan batching\. For more information, see [Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
-+ Migrating data from MySQL using an Amazon S3 bucket\. For more information, see [Migrating Data from MySQL by Using an Amazon S3 Bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.
++ Asynchronous key prefetch \(AKP\)\. For more information, see [Working with asynchronous key prefetch in Amazon Aurora](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
++ Scan batching\. For more information, see [Aurora MySQL database engine updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
++ Migrating data from MySQL using an Amazon S3 bucket\. For more information, see [Migrating data from MySQL by using an Amazon S3 bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.
 
 ## MySQL 5\.7 compatibility<a name="AuroraMySQL.Updates.2070.Compatibility"></a>
 

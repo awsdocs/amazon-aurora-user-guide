@@ -1,37 +1,37 @@
-# Saving Data from an Amazon Aurora MySQL DB Cluster into Text Files in an Amazon S3 Bucket<a name="AuroraMySQL.Integrating.SaveIntoS3"></a>
+# Saving data from an Amazon Aurora MySQL DB cluster into text files in an Amazon S3 bucket<a name="AuroraMySQL.Integrating.SaveIntoS3"></a>
 
-You can use the `SELECT INTO OUTFILE S3` statement to query data from an Amazon Aurora MySQL DB cluster and save it directly into text files stored in an Amazon S3 bucket\. You can use this functionality to skip bringing the data down to the client first, and then copying it from the client to Amazon S3\. The `LOAD DATA FROM S3` statement can use the files created by this statement to load data into an Aurora DB cluster\. For more information, see [Loading Data into an Amazon Aurora MySQL DB Cluster from Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.
+You can use the `SELECT INTO OUTFILE S3` statement to query data from an Amazon Aurora MySQL DB cluster and save it directly into text files stored in an Amazon S3 bucket\. You can use this functionality to skip bringing the data down to the client first, and then copying it from the client to Amazon S3\. The `LOAD DATA FROM S3` statement can use the files created by this statement to load data into an Aurora DB cluster\. For more information, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.
 
 **Note**  
  This feature currently isn't available for Aurora Serverless clusters\. 
 
-## Giving Aurora MySQL Access to Amazon S3<a name="AuroraMySQL.Integrating.SaveIntoS3.Authorize"></a>
+## Giving Aurora MySQL access to Amazon S3<a name="AuroraMySQL.Integrating.SaveIntoS3.Authorize"></a>
 
 Before you can save data into an Amazon S3 bucket, you must first give your Aurora MySQL DB cluster permission to access Amazon S3\.
 
 **To give Aurora MySQL access to Amazon S3**
 
-1. Create an AWS Identity and Access Management \(IAM\) policy that provides the bucket and object permissions that allow your Aurora MySQL DB cluster to access Amazon S3\. For instructions, see [Creating an IAM Policy to Access Amazon S3 Resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md)\.
+1. Create an AWS Identity and Access Management \(IAM\) policy that provides the bucket and object permissions that allow your Aurora MySQL DB cluster to access Amazon S3\. For instructions, see [Creating an IAM policy to access Amazon S3 resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md)\.
 
-1. Create an IAM role, and attach the IAM policy you created in [Creating an IAM Policy to Access Amazon S3 Resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md) to the new IAM role\. For instructions, see [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.
+1. Create an IAM role, and attach the IAM policy you created in [Creating an IAM policy to access Amazon S3 resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md) to the new IAM role\. For instructions, see [Creating an IAM role to allow Amazon Aurora to access AWS services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.
 
 1. Set either the `aurora_select_into_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aurora_select_into_s3_role`, Aurora uses the IAM role specified in `aws_default_s3_role`\.
 
    If the cluster is part of an Aurora global database, set this parameter for each Aurora cluster in the global database\.
 
-   For more information about DB cluster parameters, see [Amazon Aurora DB Cluster and DB Instance Parameters](USER_WorkingWithParamGroups.md#Aurora.Managing.ParameterGroups)\.
+   For more information about DB cluster parameters, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithParamGroups.md#Aurora.Managing.ParameterGroups)\.
 
-1. To permit database users in an Aurora MySQL DB cluster to access Amazon S3, associate the role that you created in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md) with the DB cluster\.
+1. To permit database users in an Aurora MySQL DB cluster to access Amazon S3, associate the role that you created in [Creating an IAM role to allow Amazon Aurora to access AWS services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md) with the DB cluster\.
 
    For an Aurora global database, associate the role with each Aurora cluster in the global database\.
 
-   For information about associating an IAM role with a DB cluster, see [Associating an IAM Role with an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.
+   For information about associating an IAM role with a DB cluster, see [Associating an IAM role with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.
 
-1. Configure your Aurora MySQL DB cluster to allow outbound connections to Amazon S3\. For instructions, see [Enabling Network Communication from Amazon Aurora MySQL to Other AWS Services](AuroraMySQL.Integrating.Authorizing.Network.md)\. 
+1. Configure your Aurora MySQL DB cluster to allow outbound connections to Amazon S3\. For instructions, see [Enabling network communication from Amazon Aurora MySQL to other AWS services](AuroraMySQL.Integrating.Authorizing.Network.md)\. 
 
     For an Aurora global database, enable outbound connections for each Aurora cluster in the global database\. 
 
-## Granting Privileges to Save Data in Aurora MySQL<a name="AuroraMySQL.Integrating.SaveIntoS3.Grant"></a>
+## Granting privileges to save data in Aurora MySQL<a name="AuroraMySQL.Integrating.SaveIntoS3.Grant"></a>
 
 The database user that issues the `SELECT INTO OUTFILE S3` statement must be granted the `SELECT INTO S3` privilege to issue the statement\. The master user name for a DB cluster is granted the `SELECT INTO S3` privilege by default\. You can grant the privilege to another user by using the following statement\.
 
@@ -41,7 +41,7 @@ GRANT SELECT INTO S3 ON *.* TO 'user'@'domain-or-ip-address'
 
 The `SELECT INTO S3` privilege is specific to Amazon Aurora MySQL and is not available for MySQL databases or RDS MySQL DB instances\. If you have set up replication between an Aurora MySQL DB cluster as the replication master and a MySQL database as the replication client, then the `GRANT SELECT INTO S3` statement causes replication to stop with an error\. You can safely skip the error to resume replication\. To skip the error on an RDS MySQL DB instance, use the [mysql\_rds\_skip\_repl\_error](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_skip_repl_error.html) procedure\. To skip the error on an external MySQL database, use the [SET GLOBAL sql\_slave\_skip\_counter](http://dev.mysql.com/doc/refman/5.6/en/set-global-sql-slave-skip-counter.html) statement\.
 
-## Specifying a Path to an Amazon S3 Bucket<a name="AuroraMySQL.Integrating.SaveIntoS3.URI"></a>
+## Specifying a path to an Amazon S3 bucket<a name="AuroraMySQL.Integrating.SaveIntoS3.URI"></a>
 
 The syntax for specifying a path to store the data and manifest files on an Amazon S3 bucket is similar to that used in the `LOAD DATA FROM S3 PREFIX` statement, as shown following\.
 
@@ -65,9 +65,9 @@ For example, suppose that a `SELECT INTO OUTFILE S3` statement specifies `s3-us-
 + s3\-us\-west\-2://bucket/prefix\.part\_00001
 + s3\-us\-west\-2://bucket/prefix\.part\_00002
 
-## Creating a Manifest to List Data Files<a name="AuroraMySQL.Integrating.SaveIntoS3.Manifest"></a>
+## Creating a manifest to list data files<a name="AuroraMySQL.Integrating.SaveIntoS3.Manifest"></a>
 
-You can use the `SELECT INTO OUTFILE S3` statement with the `MANIFEST ON` option to create a manifest file in JSON format that lists the text files created by the statement\. The `LOAD DATA FROM S3` statement can use the manifest file to load the data files back into an Aurora MySQL DB cluster\. For more information about using a manifest to load data files from Amazon S3 into an Aurora MySQL DB cluster, see [Using a Manifest to Specify Data Files to Load](AuroraMySQL.Integrating.LoadFromS3.md#AuroraMySQL.Integrating.LoadFromS3.Manifest)\. 
+You can use the `SELECT INTO OUTFILE S3` statement with the `MANIFEST ON` option to create a manifest file in JSON format that lists the text files created by the statement\. The `LOAD DATA FROM S3` statement can use the manifest file to load the data files back into an Aurora MySQL DB cluster\. For more information about using a manifest to load data files from Amazon S3 into an Aurora MySQL DB cluster, see [Using a manifest to specify data files to load](AuroraMySQL.Integrating.LoadFromS3.md#AuroraMySQL.Integrating.LoadFromS3.Manifest)\. 
 
 The data files included in the manifest created by the `SELECT INTO OUTFILE S3` statement are listed in the order that they're created by the statement\. For example, suppose that a `SELECT INTO OUTFILE S3` statement specified `s3-us-west-2://bucket/prefix` as the path in which to store data files and creates three data files and a manifest file\. The specified Amazon S3 bucket contains a manifest file named `s3-us-west-2://bucket/prefix.manifest`, that contains the following information\.
 
@@ -133,13 +133,13 @@ export_options:
 ### Parameters<a name="AuroraMySQL.Integrating.SaveIntoS3.Statement.Parameters"></a>
 
 Following, you can find a list of the required and optional parameters used by the `SELECT INTO OUTFILE S3` statement that are specific to Aurora\. 
-+ **s3\-uri** – Specifies the URI for an Amazon S3 prefix to use\. Specify the URI using the syntax described in [Specifying a Path to an Amazon S3 Bucket](#AuroraMySQL.Integrating.SaveIntoS3.URI)\.
++ **s3\-uri** – Specifies the URI for an Amazon S3 prefix to use\. Specify the URI using the syntax described in [Specifying a path to an Amazon S3 bucket](#AuroraMySQL.Integrating.SaveIntoS3.URI)\.
 +  **FORMAT \{CSV\|TEXT\} \[HEADER\]** – Optionally saves the data in CSV format\. This syntax is available in Aurora MySQL version 2\.07\.0 and later\. 
 
    The `TEXT` option is the default and produces the existing MySQL export format\. 
 
-   The `CSV` option produces comma\-separated data values\. The CSV format follows the specification in [RFC\-4180](https://tools.ietf.org/html/rfc4180)\. If you specify the optional keyword `HEADER`, the output file contains one header line\. The labels in the header line correspond to the column names from the `SELECT` statement\. You can use the CSV files for training data models for use with AWS ML services\. For more information about using exported Aurora data with AWS ML services, see [Exporting Data to Amazon S3 for SageMaker Model Training](mysql-ml.md#exporting-data-to-s3-for-model-training)\. 
-+ **MANIFEST \{ON \| OFF\}** – Indicates whether a manifest file is created in Amazon S3\. The manifest file is a JavaScript Object Notation \(JSON\) file that can be used to load data into an Aurora DB cluster with the `LOAD DATA FROM S3 MANIFEST` statement\. For more information about `LOAD DATA FROM S3 MANIFEST`, see [Loading Data into an Amazon Aurora MySQL DB Cluster from Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.
+   The `CSV` option produces comma\-separated data values\. The CSV format follows the specification in [RFC\-4180](https://tools.ietf.org/html/rfc4180)\. If you specify the optional keyword `HEADER`, the output file contains one header line\. The labels in the header line correspond to the column names from the `SELECT` statement\. You can use the CSV files for training data models for use with AWS ML services\. For more information about using exported Aurora data with AWS ML services, see [Exporting data to Amazon S3 for SageMaker model training](mysql-ml.md#exporting-data-to-s3-for-model-training)\. 
++ **MANIFEST \{ON \| OFF\}** – Indicates whether a manifest file is created in Amazon S3\. The manifest file is a JavaScript Object Notation \(JSON\) file that can be used to load data into an Aurora DB cluster with the `LOAD DATA FROM S3 MANIFEST` statement\. For more information about `LOAD DATA FROM S3 MANIFEST`, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.
 
   If `MANIFEST ON` is specified in the query, the manifest file is created in Amazon S3 after all data files have been created and uploaded\. The manifest file is created using the following path: 
 
@@ -147,10 +147,10 @@ Following, you can find a list of the required and optional parameters used by t
   s3-region://bucket-name/file-prefix.manifest
   ```
 
-  For more information about the format of the manifest file's contents, see [Creating a Manifest to List Data Files](#AuroraMySQL.Integrating.SaveIntoS3.Manifest)\.
+  For more information about the format of the manifest file's contents, see [Creating a manifest to list data files](#AuroraMySQL.Integrating.SaveIntoS3.Manifest)\.
 + **OVERWRITE \{ON \| OFF\}** – Indicates whether existing files in the specified Amazon S3 bucket are overwritten\. If `OVERWRITE ON` is specified, existing files that match the file prefix in the URI specified in `s3-uri`are overwritten\. Otherwise, an error occurs\.
 
-You can find more details about other parameters in [SELECT Syntax](https://dev.mysql.com/doc/refman/5.6/en/select.html) and [LOAD DATA INFILE Syntax](https://dev.mysql.com/doc/refman/5.6/en/load-data.html), in the MySQL documentation\.
+You can find more details about other parameters in [SELECT syntax](https://dev.mysql.com/doc/refman/5.6/en/select.html) and [LOAD DATA INFILE syntax](https://dev.mysql.com/doc/refman/5.6/en/load-data.html), in the MySQL documentation\.
 
 ### Considerations<a name="AuroraMySQL.Integrating.SaveIntoS3.Considerations"></a>
 
@@ -206,8 +206,8 @@ SELECT * FROM employees INTO OUTFILE S3 's3://aurora-select-into-s3-pdx/sample_e
     OVERWRITE ON;
 ```
 
-## Related Topics<a name="AuroraMySQL.Integrating.SaveIntoS3.RelatedTopics"></a>
-+ [Integrating Aurora with Other AWS Services](Aurora.Integrating.md)
-+ [Loading Data into an Amazon Aurora MySQL DB Cluster from Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.LoadFromS3.md)
-+ [Managing an Amazon Aurora DB Cluster](CHAP_Aurora.md)
-+ [Migrating Data to an Amazon Aurora DB Cluster](Aurora.Migrate.md)
+## Related topics<a name="AuroraMySQL.Integrating.SaveIntoS3.RelatedTopics"></a>
++ [Integrating Aurora with other AWS services](Aurora.Integrating.md)
++ [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)
++ [Managing an Amazon Aurora DB cluster](CHAP_Aurora.md)
++ [Migrating data to an Amazon Aurora DB cluster](Aurora.Migrate.md)

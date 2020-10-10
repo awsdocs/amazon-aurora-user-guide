@@ -1,15 +1,15 @@
-# PostgreSQL Database Log Files<a name="USER_LogAccess.Concepts.PostgreSQL"></a>
+# PostgreSQL database log files<a name="USER_LogAccess.Concepts.PostgreSQL"></a>
 
-Amazon RDS for PostgreSQL generates query and error logs\. RDS PostgreSQL writes autovacuum information and rds\_admin actions to the error log\. PostgreSQL also logs connections, disconnections, and checkpoints to the error log\. For more information, see the [Error Reporting and Logging](https://www.postgresql.org/docs/current/runtime-config-logging.html) in the PostgreSQL documentation\.
+Amazon RDS for PostgreSQL generates query and error logs\. RDS PostgreSQL writes autovacuum information and rds\_admin actions to the error log\. PostgreSQL also logs connections, disconnections, and checkpoints to the error log\. For more information, see the [Error reporting and logging](https://www.postgresql.org/docs/current/runtime-config-logging.html) in the PostgreSQL documentation\.
 
-To set logging parameters for a DB instance, set the parameters in a DB parameter group and associate that parameter group with the DB instance\. For more information, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
+To set logging parameters for a DB instance, set the parameters in a DB parameter group and associate that parameter group with the DB instance\. For more information, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
 
 **Topics**
-+ [Setting the Log Retention Period](#USER_LogAccess.PostgreSQL.log_retention_period)
-+ [Setting Log File Rotation](#USER_LogAccess.PostgreSQL.log_rotation)
-+ [Using Query Logging](#USER_LogAccess.PostgreSQL.Query_Logging)
++ [Setting the log retention period](#USER_LogAccess.PostgreSQL.log_retention_period)
++ [Setting log file rotation](#USER_LogAccess.PostgreSQL.log_rotation)
++ [Using query logging](#USER_LogAccess.PostgreSQL.Query_Logging)
 
-## Setting the Log Retention Period<a name="USER_LogAccess.PostgreSQL.log_retention_period"></a>
+## Setting the log retention period<a name="USER_LogAccess.PostgreSQL.log_retention_period"></a>
 
 To set the retention period for system logs, use the `rds.log_retention_period` parameter\. You can find `rds.log_retention_period` in the DB parameter group associated with your DB instance\. The unit for this parameter is minutes\. For example, a setting of 1,440 retains logs for one day\. The default value is 4,320 \(three days\)\. The maximum value is 10,080 \(seven days\)\. Your instance must have enough allocated storage to contain the retained log files\. 
 
@@ -27,9 +27,9 @@ If storage gets too low, Aurora might delete compressed PostgreSQL logs before t
  The oldest PostgreSQL log files were deleted due to local storage constraints.
 ```
 
-To retain older logs, publish them to Amazon CloudWatch Logs\. For more information, see [Publishing Aurora PostgreSQL Logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)\. After you set up CloudWatch publishing, Aurora doesn't delete a log until it's published to CloudWatch Logs\.  
+To retain older logs, publish them to Amazon CloudWatch Logs\. For more information, see [Publishing Aurora PostgreSQL logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)\. After you set up CloudWatch publishing, Aurora doesn't delete a log until it's published to CloudWatch Logs\.  
 
-## Setting Log File Rotation<a name="USER_LogAccess.PostgreSQL.log_rotation"></a>
+## Setting log file rotation<a name="USER_LogAccess.PostgreSQL.log_rotation"></a>
 
 To control PostgreSQL log file rotation, set two parameters in the DB parameter group associated with your DB instance: [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE) and [ `log_rotation_size`](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE) \. These two settings control when a new, distinct log file is created\. 
 
@@ -39,7 +39,7 @@ To control log file rotation based on time, set the `log_rotation_age` parameter
 
 To control log file rotation based on file size, set the `log_rotation_size` parameter to anywhere from 50,000 to 1,000,000 KB\. The default is 100,000 KB\. We recommend that you also set the `log_filename` parameter to the minute format\. Doing this makes sure that you can create a new log file in less than an hour if the `log_rotation_age` parameter is 60 minutes or greater\. 
 
-## Using Query Logging<a name="USER_LogAccess.PostgreSQL.Query_Logging"></a>
+## Using query logging<a name="USER_LogAccess.PostgreSQL.Query_Logging"></a>
 
 To enable query logging for your PostgreSQL DB instance, set two parameters in the DB parameter group associated with your DB instance: `log_statement` and `log_min_duration_statement`\. 
 

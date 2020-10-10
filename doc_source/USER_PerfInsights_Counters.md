@@ -1,15 +1,15 @@
-# Customizing the Performance Insights Dashboard<a name="USER_PerfInsights_Counters"></a>
+# Customizing the Performance Insights dashboard<a name="USER_PerfInsights_Counters"></a>
 
 With counter metrics, you can customize the Performance Insights dashboard to include up to 10 additional graphs\. These graphs that show a selection of dozens of operating system and database performance metrics\. This information can be correlated with database load to help identify and analyze performance problems\.
 
 **Topics**
-+ [Performance Insights Operating System Counters](#USER_PerfInsights_Counters.OS)
-+ [Performance Insights Counters for Aurora MySQL](#USER_PerfInsights_Counters.Aurora_MySQL)
-+ [Performance Insights Counters for Aurora PostgreSQL](#USER_PerfInsights_Counters.Aurora_PostgreSQL)
++ [Performance Insights operating system counters](#USER_PerfInsights_Counters.OS)
++ [Performance Insights counters for Aurora MySQL](#USER_PerfInsights_Counters.Aurora_MySQL)
++ [Performance Insights counters for Aurora PostgreSQL](#USER_PerfInsights_Counters.Aurora_PostgreSQL)
 
-## Performance Insights Operating System Counters<a name="USER_PerfInsights_Counters.OS"></a>
+## Performance Insights operating system counters<a name="USER_PerfInsights_Counters.OS"></a>
 
-The following operating system counters are available with Performance Insights for Aurora PostgreSQL\. You can find definitions for these metrics in [Viewing Enhanced Monitoring by Using CloudWatch Logs](USER_Monitoring.OS.md#USER_Monitoring.OS.CloudWatchLogs)\. 
+The following operating system counters are available with Performance Insights for Aurora PostgreSQL\. You can find definitions for these metrics in [Viewing Enhanced Monitoring by using CloudWatch Logs](USER_Monitoring.OS.md#USER_Monitoring.OS.CloudWatchLogs)\. 
 
 
 | Counter | Type | Metric | 
@@ -76,15 +76,15 @@ The following operating system counters are available with Performance Insights 
 | tx | network | os\.network\.tx | 
 | numVCPUs | general | os\.general\.numVCPUs | 
 
-## Performance Insights Counters for Aurora MySQL<a name="USER_PerfInsights_Counters.Aurora_MySQL"></a>
+## Performance Insights counters for Aurora MySQL<a name="USER_PerfInsights_Counters.Aurora_MySQL"></a>
 
 The following database counters are available with Performance Insights for Aurora MySQL\.
 
 **Topics**
-+ [Native Counters for Aurora MySQL](#USER_PerfInsights_Counters.Aurora_MySQL.Native)
-+ [Non\-Native Counters for Aurora MySQL](#USER_PerfInsights_Counters.Aurora_MySQL.NonNative)
++ [Native counters for Aurora MySQL](#USER_PerfInsights_Counters.Aurora_MySQL.Native)
++ [Non\-native counters for Aurora MySQL](#USER_PerfInsights_Counters.Aurora_MySQL.NonNative)
 
-### Native Counters for Aurora MySQL<a name="USER_PerfInsights_Counters.Aurora_MySQL.Native"></a>
+### Native counters for Aurora MySQL<a name="USER_PerfInsights_Counters.Aurora_MySQL.Native"></a>
 
 You can find definitions for these native metrics in [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.
 
@@ -126,7 +126,7 @@ You can find definitions for these native metrics in [Server Status Variables](h
 | Opened\_table\_definitions | Cache | Tables | db\.Cache\.Opened\_table\_definitions | 
 | Qcache\_hits | Cache | Queries | db\.Cache\.Qcache\_hits | 
 
-### Non\-Native Counters for Aurora MySQL<a name="USER_PerfInsights_Counters.Aurora_MySQL.NonNative"></a>
+### Non\-native counters for Aurora MySQL<a name="USER_PerfInsights_Counters.Aurora_MySQL.NonNative"></a>
 
 Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native metric can be a metric that you get with a specific query\. A non\-native metric also can be a derived metric, where two or more native counters are used in calculations for ratios, hit rates, or latencies\.
 
@@ -143,13 +143,13 @@ Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native m
 | innodb\_lock\_timeouts | Locks | db\.Locks\.innodb\_lock\_timeouts | The total number of deadlocks that timed out\. | SELECT COUNT AS innodb\_lock\_timeouts FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_timeouts' | 
 | innodb\_row\_lock\_waits | Locks | db\.Locks\.innodb\_row\_lock\_waits | The total number of row locks that resulted in a wait\. | SELECT COUNT AS innodb\_row\_lock\_waits FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_row\_lock\_waits' | 
 
-## Performance Insights Counters for Aurora PostgreSQL<a name="USER_PerfInsights_Counters.Aurora_PostgreSQL"></a>
+## Performance Insights counters for Aurora PostgreSQL<a name="USER_PerfInsights_Counters.Aurora_PostgreSQL"></a>
 
 The following database counters are available with Performance Insights for Aurora PostgreSQL\.
 
 **Topics**
 + [Native Counters for Aurora PostgreSQL](#USER_PerfInsights_Counters.Aurora_PostgreSQL.Native)
-+ [Non\-Native Counters for Aurora PostgreSQL](#USER_PerfInsights_Counters.Aurora_PostgreSQL.NonNative)
++ [Non\-native counters for Aurora PostgreSQL](#USER_PerfInsights_Counters.Aurora_PostgreSQL.NonNative)
 
 ### Native Counters for Aurora PostgreSQL<a name="USER_PerfInsights_Counters.Aurora_PostgreSQL.Native"></a>
 
@@ -187,7 +187,7 @@ You can find definitions for these native metrics in [Viewing Statistics](https:
 | archived\_count | WAL | Files per minute | db\.WAL\.archived\_count | 
 | archive\_failed\_count | WAL | Files per minute | db\.WAL\.archive\_failed\_count | 
 
-### Non\-Native Counters for Aurora PostgreSQL<a name="USER_PerfInsights_Counters.Aurora_PostgreSQL.NonNative"></a>
+### Non\-native counters for Aurora PostgreSQL<a name="USER_PerfInsights_Counters.Aurora_PostgreSQL.NonNative"></a>
 
 Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native metric can be a metric that you get with a specific query\. A non\-native metric also can be a derived metric, where two or more native counters are used in calculations for ratios, hit rates, or latencies\.
 

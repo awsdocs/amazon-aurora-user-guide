@@ -1,10 +1,10 @@
-# Database Engine Updates for Amazon Aurora MySQL<a name="AuroraMySQL.Updates"></a>
+# Database engine updates for Amazon Aurora MySQL<a name="AuroraMySQL.Updates"></a>
 
 Amazon Aurora releases updates regularly\. Updates are applied to Aurora DB clusters during system maintenance windows\. The timing when updates are applied depends on the region and maintenance window setting for the DB cluster, as well as the type of update\. 
 
  Updates are applied to all instances in a DB cluster at the same time\. An update requires a database restart on all instances in a DB cluster, so you experience 20 to 30 seconds of downtime, after which you can resume using your DB cluster or clusters\. You can view or change your maintenance window settings from the [AWS Management Console](https://console.aws.amazon.com/)\. 
 
-## Aurora MySQL Versions<a name="AuroraMySQL.Updates.Versions"></a>
+## Aurora MySQL versions<a name="AuroraMySQL.Updates.Versions"></a>
 
 Although Aurora with MySQL compatibility is compatible with the MySQL database engines, Aurora MySQL includes features that are specific to Aurora MySQL and only available to Aurora MySQL DB clusters\.
 
@@ -15,7 +15,7 @@ select AURORA_VERSION();
 select @@aurora_version;
 ```
 
-## Aurora MySQL Engine Versions<a name="AuroraMySQL.Updates.EngineVersions"></a>
+## Aurora MySQL engine versions<a name="AuroraMySQL.Updates.EngineVersions"></a>
 
 Starting with Aurora MySQL 2\.03\.2 and 1\.19\.0, Aurora engine versions have the following syntax\.
 
@@ -40,13 +40,13 @@ For Aurora MySQL 2\.x, the engine version for Aurora MySQL version 2\.03\.1 and 
 
  Prior to Aurora MySQL 1\.19\.0 and 2\.03\.2, the engine version displayed by the AWS Management Console remained the same even after you upgraded the engine in the cluster\. In Aurora MySQL 1\.19\.0 and higher or 2\.03\.2 and higher, the engine version in the AWS Management Console also includes the Aurora version\. Upgrading the cluster changes the displayed value\. For Aurora clusters managed through AWS CloudFormation, this change in the `EngineVersion` setting can trigger actions by AWS CloudFormation\. For information about how AWS CloudFormation treats changes to the `EngineVersion` setting, see [the AWS CloudFormation documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html)\. 
 
-## Database Upgrades and Patches for Amazon Aurora MySQL<a name="AuroraMySQL.Updates.Patching"></a>
+## Database upgrades and patches for Amazon Aurora MySQL<a name="AuroraMySQL.Updates.Patching"></a>
 
 There are two ways to upgrade the minor version of a DB cluster or patch a DB cluster:
-+ [Modifying the Engine Version](#AuroraMySQL.Updates.Patching.ModifyEngineVersion) \(when upgrading to version 1\.19\.0 and higher, or 2\.03\.2 and higher\)
-+ [Applying Pending Maintenance to an Aurora MySQL DB Cluster](#AuroraMySQL.Updates.PendingMaintenance)
++ [Modifying the engine version](#AuroraMySQL.Updates.Patching.ModifyEngineVersion) \(when upgrading to version 1\.19\.0 and higher, or 2\.03\.2 and higher\)
++ [Applying pending maintenance to an Aurora MySQL DB cluster](#AuroraMySQL.Updates.PendingMaintenance)
 
-### Modifying the Engine Version<a name="AuroraMySQL.Updates.Patching.ModifyEngineVersion"></a>
+### Modifying the engine version<a name="AuroraMySQL.Updates.Patching.ModifyEngineVersion"></a>
 
 When upgrading to Amazon Aurora MySQL version 1\.19\.0 and higher, or 2\.03\.2 and higher, you upgrade the minor version of a DB cluster\. You do so by modifying the engine version of the DB cluster using the AWS Management Console, AWS CLI, or the RDS API\.
 
@@ -71,7 +71,7 @@ When upgrading to Amazon Aurora MySQL version 1\.19\.0 and higher, or 2\.03\.2 a
    For example, to upgrade to Aurora MySQL version 2\.03\.2, set the `--engine-version` option to `5.7.mysql_aurora.2.03.2`\. Specify the `--apply-immediately` option to immediately update the engine version for your DB cluster\. 
 + **By using the Amazon RDS API** – Call the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) API operation and specify the name of your DB cluster for the `DBClusterIdentifier` parameter and the engine version for the `EngineVersion` parameter\. Set the `ApplyImmediately` parameter to `true` to immediately update the engine version for your DB cluster\.
 
-### Applying Pending Maintenance to an Aurora MySQL DB Cluster<a name="AuroraMySQL.Updates.PendingMaintenance"></a>
+### Applying pending maintenance to an Aurora MySQL DB cluster<a name="AuroraMySQL.Updates.PendingMaintenance"></a>
 
 When upgrading to Aurora MySQL version 1\.x versions, new database engine minor versions and patches show as an **available** maintenance upgrade for your DB cluster\. You can upgrade or patch the database version of your DB cluster by applying the available maintenance action\. We recommend applying the update on a nonproduction DB cluster first, so that you can see how changes in the new version affect your instances and applications\.
 
@@ -86,12 +86,12 @@ When upgrading to Aurora MySQL version 1\.x versions, new database engine minor 
 + **By using the AWS CLI** – Call the [apply\-pending\-maintenance\-action](https://docs.aws.amazon.com/cli/latest/reference/rds/apply-pending-maintenance-action.html) AWS CLI command and specify the Amazon Resource Name \(ARN\) for your DB cluster for the `--resource-id` option and `system-update` for the `--apply-action` option\. Set the `--opt-in-type` option to `immediate` to immediately update the database version for your DB cluster, or `next-maintenance` to update the database version for your DB cluster during the next cluster maintenance window\. 
 + **By using the Amazon RDS API** – Call the [ApplyPendingMaintenanceAction](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html) API operation and specify the ARN for your DB cluster for the `ResourceId` parameter and `system-update` for the `ApplyAction` parameter\. Set the `OptInType` parameter to `immediate` to immediately update the database version for your DB cluster, or `next-maintenance` to update the database version for your instance during the next cluster maintenance window\.
 
-For more information on how Amazon RDS manages database and operating system updates, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
+For more information on how Amazon RDS manages database and operating system updates, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
 
 **Note**  
 If your current Aurora MySQL version is 1\.14\.x, but it is lower than 1\.14\.4, you can upgrade only to 1\.14\.4 \(which supports db\.r4 instance classes\)\. Also, to upgrade from 1\.14\.x to a higher minor Aurora MySQL version, such as 1\.17, the 1\.14\.x version must be 1\.14\.4\.
 
-## Zero\-Downtime Patching<a name="AuroraMySQL.Updates.ZDP"></a>
+## Zero\-downtime patching<a name="AuroraMySQL.Updates.ZDP"></a>
 
  The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. If ZDP completes successfully, application sessions are preserved and the database engine restarts while patching\. The database engine restart can cause a drop in throughput lasting approximately 5 seconds\. ZDP is available in Aurora MySQL 1\.13 and later, compatible with MySQL 5\.6\. It's also available in Aurora MySQL 2\.07 and later, compatible with MySQL 5\.7\. 
 
@@ -110,7 +110,7 @@ If your current Aurora MySQL version is 1\.14\.x, but it is lower than 1\.14\.4,
  ZDP applies only to the primary instance of a DB cluster\. ZDP isn't applicable to Aurora Replicas\. 
  Prepared statements don't prevent ZDP, but they aren't preserved after ZDP completes\. 
 
-## Aurora MySQL Long\-Term Support \(LTS\) Releases<a name="AuroraMySQL.Updates.LTS"></a>
+## Aurora MySQL long\-term support \(LTS\) releases<a name="AuroraMySQL.Updates.LTS"></a>
 
  Each new Aurora MySQL version remains available for a certain amount of time for you to use when you create or upgrade a DB cluster\. After this period, you must upgrade any clusters that use that version\. You can manually upgrade your cluster before the support period ends, or Aurora can automatically upgrade it for you when its Aurora MySQL version is no longer supported\. 
 
@@ -124,13 +124,13 @@ If your current Aurora MySQL version is 1\.14\.x, but it is lower than 1\.14\.4,
 +  The database version for your Aurora MySQL cluster has all the DB engine features and bug fixes that your application needs\. 
 
  As of the publication date for this *Aurora User's Guide*, the current LTS releases for Aurora MySQL are: 
-+  Aurora MySQL version 1\.19\.6\. For more details about this version, see [Aurora MySQL Database Engine Updates 2020\-03\-05 \(Version 1\.19\.6\)](AuroraMySQL.Updates.1196.md)\. 
-+  Aurora MySQL version 2\.04\.9\. For more details about this version, see [Aurora MySQL Database Engine Updates 2020\-08\-14 \(Version 2\.04\.9\)](AuroraMySQL.Updates.2049.md)\. 
++  Aurora MySQL version 1\.19\.6\. For more details about this version, see [Aurora MySQL database engine updates 2020\-03\-05 \(version 1\.19\.6\)](AuroraMySQL.Updates.1196.md)\. 
++  Aurora MySQL version 2\.04\.9\. For more details about this version, see [Aurora MySQL database engine updates 2020\-08\-14 \(version 2\.04\.9\)](AuroraMySQL.Updates.2049.md)\. 
 
-## Related Topics<a name="AuroraMySQL.Updates.Related"></a>
-+ [Database Engine Updates for Amazon Aurora MySQL 2\.0](AuroraMySQL.Updates.20Updates.md)
-+ [Database Engine Updates for Amazon Aurora MySQL 1\.1](AuroraMySQL.Updates.11Updates.md)
-+ [Database Engine Updates for Aurora MySQL Serverless Clusters](AuroraMySQL.Updates.ServerlessUpdates.md)
-+ [MySQL Bugs Fixed by Aurora MySQL Database Engine Updates](AuroraMySQL.Updates.MySQLBugs.md)
-+ [Aurora Lab Mode Features](AuroraMySQL.Updates.LabMode.md#AuroraMySQL.Updates.LabModeFeatures)
-+ [Security Vulnerabilities Fixed in Amazon Aurora MySQL](AuroraMySQL.CVE_list.md)
+## Related topics<a name="AuroraMySQL.Updates.Related"></a>
++ [Database engine updates for Amazon Aurora MySQL 2\.0](AuroraMySQL.Updates.20Updates.md)
++ [Database engine updates for Amazon Aurora MySQL 1\.1](AuroraMySQL.Updates.11Updates.md)
++ [Database engine updates for Aurora MySQL Serverless clusters](AuroraMySQL.Updates.ServerlessUpdates.md)
++ [MySQL bugs fixed by Aurora MySQL database engine updates](AuroraMySQL.Updates.MySQLBugs.md)
++ [Aurora lab mode features](AuroraMySQL.Updates.LabMode.md#AuroraMySQL.Updates.LabModeFeatures)
++ [Security vulnerabilities fixed in Amazon Aurora MySQL](AuroraMySQL.CVE_list.md)

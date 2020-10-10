@@ -1,12 +1,12 @@
-# Aurora MySQL Database Engine Updates: 2016\-10\-18<a name="AuroraMySQL.Updates.20161018"></a>
+# Aurora MySQL database engine updates: 2016\-10\-18<a name="AuroraMySQL.Updates.20161018"></a>
 
 **Version:** 1\.8
 
-## New Features<a name="AuroraMySQL.Updates.20161018.New"></a>
-+ **AWS Lambda integration** – You can now asynchronously invoke an AWS Lambda function from an Aurora DB cluster using the `mysql.lambda_async` procedure\. For more information, see [Invoking a Lambda Function from an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Lambda.md)\.
-+ **Load data from Amazon S3** – You can now load text or XML files from an Amazon S3 bucket into your Aurora DB cluster using the `LOAD DATA FROM S3` or `LOAD XML FROM S3` commands\. For more information, see [Loading Data into an Amazon Aurora MySQL DB Cluster from Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.
+## New features<a name="AuroraMySQL.Updates.20161018.New"></a>
++ **AWS Lambda integration** – You can now asynchronously invoke an AWS Lambda function from an Aurora DB cluster using the `mysql.lambda_async` procedure\. For more information, see [Invoking a Lambda function from an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Lambda.md)\.
++ **Load data from Amazon S3** – You can now load text or XML files from an Amazon S3 bucket into your Aurora DB cluster using the `LOAD DATA FROM S3` or `LOAD XML FROM S3` commands\. For more information, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.
 + **Catalog migration** – Aurora now persists catalog metadata in the cluster volume to support versioning\. This enables seamless catalog migration across versions and restores\.
-+ **Cluster\-level maintenance and patching** – Aurora now manages maintenance updates for an entire DB cluster\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
++ **Cluster\-level maintenance and patching** – Aurora now manages maintenance updates for an entire DB cluster\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.20161018.Improvements"></a>
 + Fixed an issue where an Aurora Replica crashes when not granting a metadata lock to an inflight DDL table\.
@@ -24,7 +24,7 @@
 + Fixed a crash when a user creates a temporary table within a user defined function, and then uses the user defined function in the select list of the query\.
 + Fixed a crash that occurred when replaying GTID events\. GTID is not supported by Aurora MySQL\.
 
-## Integration of MySQL Bug Fixes:<a name="AuroraMySQL.Updates.20161018.Fixes"></a>
+## Integration of MySQL bug fixes:<a name="AuroraMySQL.Updates.20161018.Fixes"></a>
 + When dropping all indexes on a column with multiple indexes, InnoDB failed to block a DROP INDEX operation when a foreign key constraint requires an index\. \(Bug \#16896810\)
 + Solve add foreign key constraint crash\. \(Bug \#16413976\)
 + Fixed a crash when fetching a cursor in a stored procedure, and analyzing or flushing the table at the same time\. \(Bug \# 18158639\)

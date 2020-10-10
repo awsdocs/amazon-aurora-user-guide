@@ -1,10 +1,10 @@
-# Migrating Data from an External MySQL Database to an Amazon Aurora MySQL DB Cluster<a name="AuroraMySQL.Migrating.ExtMySQL"></a>
+# Migrating data from an external MySQL database to an Amazon Aurora MySQL DB cluster<a name="AuroraMySQL.Migrating.ExtMySQL"></a>
 
 If your database supports the InnoDB or MyISAM tablespaces, you have these options for migrating your data to an Amazon Aurora MySQL DB cluster: 
-+ You can create a dump of your data using the `mysqldump` utility, and then import that data into an existing Amazon Aurora MySQL DB cluster\. For more information, see [Migrating from MySQL to Amazon Aurora by Using mysqldump](#AuroraMySQL.Migrating.ExtMySQL.mysqldump)\.
-+ You can copy the full and incremental backup files from your database to an Amazon S3 bucket, and then restore an Amazon Aurora MySQL DB cluster from those files\. This option can be considerably faster than migrating data using `mysqldump`\. For more information, see [Migrating Data from MySQL by Using an Amazon S3 Bucket](#AuroraMySQL.Migrating.ExtMySQL.S3)\.
++ You can create a dump of your data using the `mysqldump` utility, and then import that data into an existing Amazon Aurora MySQL DB cluster\. For more information, see [Migrating from MySQL to Amazon Aurora by using mysqldump](#AuroraMySQL.Migrating.ExtMySQL.mysqldump)\.
++ You can copy the full and incremental backup files from your database to an Amazon S3 bucket, and then restore an Amazon Aurora MySQL DB cluster from those files\. This option can be considerably faster than migrating data using `mysqldump`\. For more information, see [Migrating data from MySQL by using an Amazon S3 bucket](#AuroraMySQL.Migrating.ExtMySQL.S3)\.
 
-## Migrating Data from MySQL by Using an Amazon S3 Bucket<a name="AuroraMySQL.Migrating.ExtMySQL.S3"></a>
+## Migrating data from MySQL by using an Amazon S3 bucket<a name="AuroraMySQL.Migrating.ExtMySQL.S3"></a>
 
 You can copy the full and incremental backup files from your source MySQL version 5\.5, 5\.6, or 5\.7 database to an Amazon S3 bucket, and then restore an Amazon Aurora MySQL DB cluster from those files\.
 
@@ -17,7 +17,7 @@ Aurora MySQL doesn't restore everything from your database\. You should save the
 + User accounts
 + Functions
 + Stored procedures
-+ Time zone information\. Time zone information is loaded from the local operating system of your Amazon Aurora MySQL DB cluster\. For more information, see [Local Time Zone for Amazon Aurora DB Clusters](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.LocalTimeZone)\.
++ Time zone information\. Time zone information is loaded from the local operating system of your Amazon Aurora MySQL DB cluster\. For more information, see [Local time zone for Amazon Aurora DB clusters](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.LocalTimeZone)\.
 
 You can't restore from an encrypted source database, but you can encrypt the data being migrated\. You can also leave the data unencrypted during the migration process\.
 
@@ -26,12 +26,12 @@ You can't restore from an encrypted source database, but you can encrypt the dat
 Also, decide whether you want to minimize downtime by using binary log replication during the migration process\. If you use binary log replication, the external MySQL database remains open to transactions while the data is being migrated to the Aurora MySQL DB cluster\. After the Aurora MySQL DB cluster has been created, you use binary log replication to synchronize the Aurora MySQL DB cluster with the transactions that happened after the backup\. When the Aurora MySQL DB cluster is caught up with the MySQL database, you finish the migration by completely switching to the Aurora MySQL DB cluster for new transactions\.
 
 **Topics**
-+ [Before You Begin](#AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs)
-+ [Backing Up Files to be Restored as an Amazon Aurora MySQL DB Cluster](#AuroraMySQL.Migrating.ExtMySQL.S3.Backup)
-+ [Restoring an Amazon Aurora MySQL DB Cluster from an Amazon S3 Bucket](#AuroraMySQL.Migrating.ExtMySQL.S3.Restore)
-+ [Synchronizing the Amazon Aurora MySQL DB Cluster with the MySQL Database Using Replication](#AuroraMySQL.Migrating.ExtMySQL.S3.RepSync)
++ [Before you begin](#AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs)
++ [Backing up files to be restored as an Amazon Aurora MySQL DB cluster](#AuroraMySQL.Migrating.ExtMySQL.S3.Backup)
++ [Restoring an Amazon Aurora MySQL DB cluster from an Amazon S3 bucket](#AuroraMySQL.Migrating.ExtMySQL.S3.Restore)
++ [Synchronizing the Amazon Aurora MySQL DB cluster with the MySQL database using replication](#AuroraMySQL.Migrating.ExtMySQL.S3.RepSync)
 
-### Before You Begin<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs"></a>
+### Before you begin<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs"></a>
 
 Before you can copy your data to an Amazon S3 bucket and restore a DB cluster from those files, you must do the following:
 + Install Percona XtraBackup on your local server\.
@@ -44,14 +44,14 @@ Amazon Aurora can restore a DB cluster from files that were created using Percon
 **Note**  
 For MySQL 5\.7 migration, you must use Percona XtraBackup 2\.4\. For earlier MySQL versions, use Percona XtraBackup 2\.3 or 2\.4\.
 
-#### Required Permissions<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs.Permitting"></a>
+#### Required permissions<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs.Permitting"></a>
 
 To migrate your MySQL data to an Amazon Aurora MySQL DB cluster, several permissions are required:
 + The user that is requesting that Aurora create a new cluster from an Amazon S3 bucket must have permission to list the buckets for your AWS account\. You grant the user this permission using an AWS Identity and Access Management \(IAM\) policy\.
 + Aurora requires permission to act on your behalf to access the Amazon S3 bucket where you store the files used to create your Amazon Aurora MySQL DB cluster\. You grant Aurora the required permissions using an IAM service role\. 
 + The user making the request must also have permission to list the IAM roles for your AWS account\.
 + If the user making the request is to create the IAM service role or request that Aurora create the IAM service role \(by using the console\), then the user must have permission to create an IAM role for your AWS account\.
-+ If you plan to encrypt the data during the migration process, update the IAM policy of the user who will perform the migration to grant RDS access to the AWS Key Management Service customer master keys \(CMKs\) used for encrypting the backups\. For instructions, see [Creating an IAM Policy to Access AWS KMS Resources](AuroraMySQL.Integrating.Authorizing.IAM.KMSCreatePolicy.md)\.
++ If you plan to encrypt the data during the migration process, update the IAM policy of the user who will perform the migration to grant RDS access to the AWS Key Management Service customer master keys \(CMKs\) used for encrypting the backups\. For instructions, see [Creating an IAM policy to access AWS KMS resources](AuroraMySQL.Integrating.Authorizing.IAM.KMSCreatePolicy.md)\.
 
 For example, the following IAM policy grants a user the minimum required permissions to use the console to list IAM roles, create an IAM role, list the Amazon S3 buckets for your account, and list the AWS KMS CMKs\.
 
@@ -93,9 +93,9 @@ For example, the following IAM policy allows a user to associate the role named 
 }
 ```
 
-For more information on IAM user permissions, see [Managing Access Using Policies](UsingWithRDS.IAM.md#security_iam_access-manage)\.
+For more information on IAM user permissions, see [Managing access using policies](UsingWithRDS.IAM.md#security_iam_access-manage)\.
 
-#### Creating the IAM Service Role<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs.CreateRole"></a>
+#### Creating the IAM service role<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs.CreateRole"></a>
 
 You can have the AWS Management Console create a role for you by choosing the **Create a New Role** option \(shown later in this topic\)\. If you select this option and specify a name for the new role, then Aurora creates the IAM service role required for Aurora to access your Amazon S3 bucket with the name that you supply\.
 
@@ -103,17 +103,17 @@ As an alternative, you can manually create the role using the following procedur
 
 **To create an IAM role for Aurora to access Amazon S3**
 
-1. Complete the steps in [Creating an IAM Policy to Access Amazon S3 Resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md)\.
+1. Complete the steps in [Creating an IAM policy to access Amazon S3 resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md)\.
 
-1. Complete the steps in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.
+1. Complete the steps in [Creating an IAM role to allow Amazon Aurora to access AWS services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.
 
-1. Complete the steps in [Associating an IAM Role with an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.
+1. Complete the steps in [Associating an IAM role with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.
 
-### Backing Up Files to be Restored as an Amazon Aurora MySQL DB Cluster<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup"></a>
+### Backing up files to be restored as an Amazon Aurora MySQL DB cluster<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup"></a>
 
 You can create a full backup of your MySQL database files using Percona XtraBackup and upload the backup files to an Amazon S3 bucket\. Alternatively, if you already use Percona XtraBackup to back up your MySQL database files, you can upload your existing full and incremental backup directories and files to an Amazon S3 bucket\.
 
-#### Creating a Full Backup With Percona XtraBackup<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup.Full"></a>
+#### Creating a full backup with Percona XtraBackup<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup.Full"></a>
 
 To create a full backup of your MySQL database files that can be restored from Amazon S3 to create an Amazon Aurora MySQL DB cluster, use the Percona XtraBackup utility \(`xtrabackup`\) to back up your database\. 
 
@@ -154,23 +154,23 @@ xtrabackup --backup --user=<myuser> --password=<password> --stream=xbstream \
 
 Once you have backed up your MySQL database using the Percona XtraBackup utility, you can copy your backup directories and files to an Amazon S3 bucket\.
 
-For information on creating and uploading a file to an Amazon S3 bucket, see [Getting Started with Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/gsg/GetStartedWithS3.html) in the *Amazon S3 Getting Started Guide*\.
+For information on creating and uploading a file to an Amazon S3 bucket, see [Getting started with Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/gsg/GetStartedWithS3.html) in the *Amazon S3 Getting Started Guide*\.
 
-#### Using Incremental Backups With Percona XtraBackup<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup.Incr"></a>
+#### Using incremental backups with Percona XtraBackup<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup.Incr"></a>
 
-Amazon Aurora MySQL supports both full and incremental backups created using Percona XtraBackup\. If you already use Percona XtraBackup to perform full and incremental backups of your MySQL database files, you don't need to create a full backup and upload the backup files to Amazon S3\. Instead, you can save a significant amount of time by copying your existing backup directories and files for your full and incremental backups to an Amazon S3 bucket\. For more information about creating incremental backups using Percona XtraBackup, see [Incremental Backup](https://www.percona.com/doc/percona-xtrabackup/LATEST/backup_scenarios/incremental_backup.html)\.
+Amazon Aurora MySQL supports both full and incremental backups created using Percona XtraBackup\. If you already use Percona XtraBackup to perform full and incremental backups of your MySQL database files, you don't need to create a full backup and upload the backup files to Amazon S3\. Instead, you can save a significant amount of time by copying your existing backup directories and files for your full and incremental backups to an Amazon S3 bucket\. For more information about creating incremental backups using Percona XtraBackup, see [Incremental backup](https://www.percona.com/doc/percona-xtrabackup/LATEST/backup_scenarios/incremental_backup.html)\.
 
 When copying your existing full and incremental backup files to an Amazon S3 bucket, you must recursively copy the contents of the base directory\. Those contents include the full backup and also all incremental backup directories and files\. This copy must preserve the directory structure in the Amazon S3 bucket\. Aurora iterates through all files and directories\. Aurora uses the `xtrabackup-checkpoints` file included with each incremental backup to identify the base directory and to order incremental backups by log sequence number \(LSN\) range\.
 
-For information on creating and uploading a file to an Amazon S3 bucket, see [Getting Started with Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/gsg/GetStartedWithS3.html) in the *Amazon S3 Getting Started Guide*\.
+For information on creating and uploading a file to an Amazon S3 bucket, see [Getting started with Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/gsg/GetStartedWithS3.html) in the *Amazon S3 Getting Started Guide*\.
 
-#### Backup Considerations<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup.Considerations"></a>
+#### Backup considerations<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup.Considerations"></a>
 
 When you upload a file to an Amazon S3 bucket, you can use server\-side encryption to encrypt the data\. You can then restore an Amazon Aurora MySQL DB cluster from those encrypted files\. Amazon Aurora MySQL can restore a DB cluster with files encrypted using the following types of server\-side encryption:
 + Server\-side encryption with Amazon S3–managed keys \(SSE\-S3\) – Each object is encrypted with a unique key employing strong multifactor encryption\.
 + Server\-side encryption with AWS KMS–managed keys \(SSE\-KMS\) – Similar to SSE\-S3, but you have the option to create and manage encryption keys yourself, and also other differences\.
 
-For information about using server\-side encryption when uploading files to an Amazon S3 bucket, see [Protecting Data Using Server\-Side Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) in the *Amazon S3 Developer Guide*\.
+For information about using server\-side encryption when uploading files to an Amazon S3 bucket, see [Protecting data using server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) in the *Amazon S3 Developer Guide*\.
 
 Amazon S3 limits the size of a file uploaded to an Amazon S3 bucket to 5 TB\. If the backup data for your database exceeds 5 TB, use the `split` command to split the backup files into multiple files that are each less than 5 TB\.
 
@@ -182,11 +182,11 @@ Aurora consumes your backup files in alphabetical order and also in natural numb
 
 Aurora doesn't support partial backups created using Percona XtraBackup\. You can't use the following options to create a partial backup when you back up the source files for your database: `--tables`, `--tables-exclude`, `--tables-file`, `--databases`, `--databases-exclude`, or `--databases-file`\.
 
-For more information about backing up your database with Percona XtraBackup, see [Percona XtraBackup \- Documentation](https://www.percona.com/doc/percona-xtrabackup/LATEST/index.html) and [ The xtrabackup Binary](https://www.percona.com/doc/percona-xtrabackup/LATEST/xtrabackup_bin/xtrabackup_binary.html) on the Percona website\. 
+For more information about backing up your database with Percona XtraBackup, see [Percona XtraBackup \- documentation](https://www.percona.com/doc/percona-xtrabackup/LATEST/index.html) and [ The xtrabackup binary](https://www.percona.com/doc/percona-xtrabackup/LATEST/xtrabackup_bin/xtrabackup_binary.html) on the Percona website\. 
 
-Aurora supports incremental backups created using Percona XtraBackup\. For more information about creating incremental backups using Percona XtraBackup, see [Incremental Backup](https://www.percona.com/doc/percona-xtrabackup/LATEST/backup_scenarios/incremental_backup.html)\.
+Aurora supports incremental backups created using Percona XtraBackup\. For more information about creating incremental backups using Percona XtraBackup, see [Incremental backup](https://www.percona.com/doc/percona-xtrabackup/LATEST/backup_scenarios/incremental_backup.html)\.
 
-### Restoring an Amazon Aurora MySQL DB Cluster from an Amazon S3 Bucket<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Restore"></a>
+### Restoring an Amazon Aurora MySQL DB cluster from an Amazon S3 bucket<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Restore"></a>
 
 You can restore your backup files from your Amazon S3 bucket to create a new Amazon Aurora MySQL DB cluster by using the Amazon RDS console\. 
 
@@ -225,26 +225,26 @@ You can restore your backup files from your Amazon S3 bucket to create a new Ama
 
 On the Amazon RDS console, the new DB instance appears in the list of DB instances\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the primary instance for your DB cluster\. Depending on the DB instance class and store allocated, it can take several minutes for the new instance to be available\.
 
-To view the newly created cluster, choose the **Databases** view in the Amazon RDS console and choose the DB cluster\. For more information, see [Viewing an Amazon Aurora DB Cluster](Aurora.Viewing.md)\.
+To view the newly created cluster, choose the **Databases** view in the Amazon RDS console and choose the DB cluster\. For more information, see [Viewing an Amazon Aurora DB cluster](Aurora.Viewing.md)\.
 
 ![\[Amazon Aurora DB Instances List\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch04.png)
 
 Note the port and the writer endpoint of the DB cluster\. Use the writer endpoint and port of the DB cluster in your JDBC and ODBC connection strings for any application that performs write or read operations\.
 
-### Synchronizing the Amazon Aurora MySQL DB Cluster with the MySQL Database Using Replication<a name="AuroraMySQL.Migrating.ExtMySQL.S3.RepSync"></a>
+### Synchronizing the Amazon Aurora MySQL DB cluster with the MySQL database using replication<a name="AuroraMySQL.Migrating.ExtMySQL.S3.RepSync"></a>
 
 To achieve little or no downtime during the migration, you can replicate transactions that were committed on your MySQL database to your Aurora MySQL DB cluster\. Replication enables the DB cluster to catch up with the transactions on the MySQL database that happened during the migration\. When the DB cluster is completely caught up, you can stop the replication and finish the migration to Aurora MySQL\.
 
 **Topics**
-+ [Configuring Your External MySQL Database and Your Aurora MySQL DB Cluster for Encrypted Replication](#AuroraMySQL.Migrating.ExtMySQL.S3.RepSync.ConfigureEncryption)
-+ [Synchronizing the Amazon Aurora MySQL DB Cluster with the External MySQL Database](#AuroraMySQL.Migrating.ExtMySQL.S3.RepSync.Synchronizing)
++ [Configuring your external MySQL database and your Aurora MySQL DB cluster for encrypted replication](#AuroraMySQL.Migrating.ExtMySQL.S3.RepSync.ConfigureEncryption)
++ [Synchronizing the Amazon Aurora MySQL DB cluster with the external MySQL database](#AuroraMySQL.Migrating.ExtMySQL.S3.RepSync.Synchronizing)
 
-#### Configuring Your External MySQL Database and Your Aurora MySQL DB Cluster for Encrypted Replication<a name="AuroraMySQL.Migrating.ExtMySQL.S3.RepSync.ConfigureEncryption"></a>
+#### Configuring your external MySQL database and your Aurora MySQL DB cluster for encrypted replication<a name="AuroraMySQL.Migrating.ExtMySQL.S3.RepSync.ConfigureEncryption"></a>
 
 To replicate data securely, you can use encrypted replication\.
 
 **Note**  
-If you don't need to use encrypted replication, you can skip these steps and move on to the instructions in [Synchronizing the Amazon Aurora MySQL DB Cluster with the External MySQL Database](#AuroraMySQL.Migrating.ExtMySQL.S3.RepSync.Synchronizing)\.
+If you don't need to use encrypted replication, you can skip these steps and move on to the instructions in [Synchronizing the Amazon Aurora MySQL DB cluster with the external MySQL database](#AuroraMySQL.Migrating.ExtMySQL.S3.RepSync.Synchronizing)\.
 
 The following are prerequisites for using encrypted replication:
 + Secure Sockets Layer \(SSL\) must be enabled on the external MySQL master database\.
@@ -258,13 +258,13 @@ During encrypted replication, the Aurora MySQL DB cluster acts a client to the M
    + If you don't have SSL enabled on the external MySQL master database and don't have a client key and client certificate prepared, enable SSL on the MySQL database server and generate the required client key and client certificate\.
    + If SSL is enabled on the external master, supply a client key and certificate for the Aurora MySQL DB cluster\. If you don't have these, generate a new key and certificate for the Aurora MySQL DB cluster\. To sign the client certificate, you must have the certificate authority key that you used to configure SSL on the external MySQL master database\.
 
-   For more information, see [ Creating SSL Certificates and Keys Using openssl](https://dev.mysql.com/doc/refman/5.6/en/creating-ssl-files-using-openssl.html) in the MySQL documentation\.
+   For more information, see [ Creating SSL certificates and keys using openssl](https://dev.mysql.com/doc/refman/5.6/en/creating-ssl-files-using-openssl.html) in the MySQL documentation\.
 
    You need the certificate authority certificate, the client key, and the client certificate\.
 
 1. Connect to the Aurora MySQL DB cluster as the master user using SSL\.
 
-   For information about connecting to an Aurora MySQL DB cluster with SSL, see [Using SSL/TLS with Aurora MySQL DB Clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
+   For information about connecting to an Aurora MySQL DB cluster with SSL, see [Using SSL/TLS with Aurora MySQL DB clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
 
 1. Run the `mysql.rds_import_binlog_ssl_material` stored procedure to import the SSL information into the Aurora MySQL DB cluster\.
 
@@ -295,11 +295,11 @@ During encrypted replication, the Aurora MySQL DB cluster acts a client to the M
    -----END RSA PRIVATE KEY-----\n"}');
    ```
 
-   For more information, see [ mysql\_rds\_import\_binlog\_ssl\_material](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_import_binlog_ssl_material.html) [Using SSL/TLS with Aurora MySQL DB Clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
+   For more information, see [ mysql\_rds\_import\_binlog\_ssl\_material](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_import_binlog_ssl_material.html) [Using SSL/TLS with Aurora MySQL DB clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
 **Note**  
 After running the procedure, the secrets are stored in files\. To erase the files later, you can run the [ mysql\_rds\_remove\_binlog\_ssl\_material](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_remove_binlog_ssl_material.html) stored procedure\.
 
-#### Synchronizing the Amazon Aurora MySQL DB Cluster with the External MySQL Database<a name="AuroraMySQL.Migrating.ExtMySQL.S3.RepSync.Synchronizing"></a>
+#### Synchronizing the Amazon Aurora MySQL DB cluster with the external MySQL database<a name="AuroraMySQL.Migrating.ExtMySQL.S3.RepSync.Synchronizing"></a>
 
 You can synchronize your Amazon Aurora MySQL DB cluster with the MySQL database using replication\.
 
@@ -378,7 +378,7 @@ You can synchronize your Amazon Aurora MySQL DB cluster with the MySQL database 
 **Note**  
 If `REQUIRE SSL` is not included, the replication connection might silently fall back to an unencrypted connection\.
 
-1. In the Amazon RDS console, add the IP address of the server that hosts the external MySQL database to the VPC security group for the Aurora MySQL DB cluster\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+1. In the Amazon RDS console, add the IP address of the server that hosts the external MySQL database to the VPC security group for the Aurora MySQL DB cluster\. For more information on modifying a VPC security group, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
    You might also need to configure your local network to permit connections from the IP address of your Aurora MySQL DB cluster, so that it can communicate with your external MySQL database\. To find the IP address of the Aurora MySQL DB cluster, use the `host` command\.
 
@@ -443,10 +443,10 @@ If `REQUIRE SSL` is not included, the replication connection might silently fall
    CALL mysql.rds_stop_replication;
    ```
 
-## Migrating from MySQL to Amazon Aurora by Using mysqldump<a name="AuroraMySQL.Migrating.ExtMySQL.mysqldump"></a>
+## Migrating from MySQL to Amazon Aurora by using mysqldump<a name="AuroraMySQL.Migrating.ExtMySQL.mysqldump"></a>
 
 Because Amazon Aurora MySQL is a MySQL\-compatible database, you can use the `mysqldump` utility to copy data from your MySQL or MariaDB database to an existing Aurora MySQL DB cluster\.
 
-For a discussion of how to do so with MySQL databases that are very large, see [ Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html)\. For MySQL databases that have smaller amounts of data, see [ Importing Data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB Instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.SmallExisting.html)\.
+For a discussion of how to do so with MySQL databases that are very large, see [ Importing data to an Amazon RDS MySQL or MariaDB DB instance with reduced downtime](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html)\. For MySQL databases that have smaller amounts of data, see [ Importing data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.SmallExisting.html)\.
 
 ## <a name="AuroraMySQL.Migrating.ExtMySQL.RelatedTopics"></a>

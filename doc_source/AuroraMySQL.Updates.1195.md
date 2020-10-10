@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2019\-09\-19 \(Version 1\.19\.5\)<a name="AuroraMySQL.Updates.1195"></a>
+# Aurora MySQL database engine updates 2019\-09\-19 \(version 1\.19\.5\)<a name="AuroraMySQL.Updates.1195"></a>
 
 **Version:** 1\.19\.5
 
@@ -8,13 +8,13 @@
 
  To use an older version of Aurora MySQL, you can create new database clusters by specifying the engine version through the AWS Management Console, the AWS CLI, or the RDS API\. 
 
- If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
+ If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
 
 **Note**  
  This version is currently not available in the following AWS Regions: Europe \(London\) \[eu\-west\-2\], AWS GovCloud \(US\-East\) \[us\-gov\-east\-1\], AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\], China \(Ningxia\) \[cn\-northwest\-1\], and Asia Pacific \(Hong Kong\) \[ap\-east\-1\]\. There will be a separate announcement once it is made available\. 
 
 **Note**  
-The procedure to upgrade your DB cluster has changed\. For more information, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+The procedure to upgrade your DB cluster has changed\. For more information, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.1195.Improvements"></a>
 +  Fixed an issue on Aurora reader instances that reduced free memory during long\-running transactions while there is a heavy transaction commit traffic on the writer instance\. 

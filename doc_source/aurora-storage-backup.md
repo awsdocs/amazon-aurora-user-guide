@@ -1,6 +1,6 @@
-# Understanding Aurora Backup Storage Usage<a name="aurora-storage-backup"></a>
+# Understanding Aurora backup storage usage<a name="aurora-storage-backup"></a>
 
- Aurora stores continuous backups \(within the backup retention period\) and snapshots in Aurora backup storage\. To control your backup storage usage, you can reduce the backup retention interval, remove old manual snapshots when they are no longer needed, or both\. For general information about Aurora backups, see [Backups](Aurora.Managing.Backups.md#Aurora.Managing.Backups.Backup)\. For pricing information about Aurora backup storage, see the [Amazon Aurora Pricing](https://aws.amazon.com/rds/aurora/pricing) webpage\. 
+ Aurora stores continuous backups \(within the backup retention period\) and snapshots in Aurora backup storage\. To control your backup storage usage, you can reduce the backup retention interval, remove old manual snapshots when they are no longer needed, or both\. For general information about Aurora backups, see [Backups](Aurora.Managing.Backups.md#Aurora.Managing.Backups.Backup)\. For pricing information about Aurora backup storage, see the [Amazon Aurora pricing](https://aws.amazon.com/rds/aurora/pricing) webpage\. 
 
  To control your costs, you can monitor the amount of storage consumed by continuous backups and manual snapshots that persist beyond the retention period\. Then you can reduce the backup retention interval and remove manual snapshots when they are no longer needed\. 
 
@@ -10,8 +10,8 @@
 + `TotalBackupStorageBilled` represents the sum, in bytes, of `BackupRetentionPeriodStorageUsed` and `SnapshotStorageUsed`, minus an amount of free backup storage, which equals the size of the cluster volume for one day\. The free backup storage is equal to the latest volume size\. For example if your cluster's `VolumeBytesUsed` size is 100 GiB, your retention period is two days, and you have one manual snapshot outside the retention period, the `TotalBackupStorageBilled` is 214,748,364,800 bytes \(200 GiB \+ 100 GiB \- 100 GiB\)\.
 + These metrics are computed independently for each Aurora DB cluster\.
 
- You can monitor your Aurora clusters and build reports using CloudWatch metrics through the [CloudWatch console](https://console.aws.amazon.com/cloudwatch/ )\. For more information about how to use CloudWatch metrics, see [Overview of Monitoring Amazon Aurora](MonitoringOverview.md) and the table of metrics in [Amazon RDS Metrics](MonitoringOverview.md#rds-metrics)\. 
+ You can monitor your Aurora clusters and build reports using CloudWatch metrics through the [CloudWatch console](https://console.aws.amazon.com/cloudwatch/ )\. For more information about how to use CloudWatch metrics, see [Overview of monitoring Amazon Aurora](MonitoringOverview.md) and the table of metrics in [Amazon RDS metrics](MonitoringOverview.md#rds-metrics)\. 
 
- The backtrack setting for an Aurora DB cluster doesn't affect the volume of backup data for that cluster\. Amazon bills the storage for backtrack data separately\. You can also find the backtrack pricing information on the [Amazon Aurora Pricing](https://aws.amazon.com/rds/aurora/pricing) web page\. 
+ The backtrack setting for an Aurora DB cluster doesn't affect the volume of backup data for that cluster\. Amazon bills the storage for backtrack data separately\. You can also find the backtrack pricing information on the [Amazon Aurora pricing](https://aws.amazon.com/rds/aurora/pricing) web page\. 
 
  If you share a snapshot with another user, you are still the owner of that snapshot\. The storage costs apply to the snapshot owner\. If you delete a shared snapshot that you own, nobody can access it\. To keep access to a shared snapshot owned by someone else, you can copy that snapshot\. Doing so makes you the owner of the new snapshot\. Any storage costs for the copied snapshot apply to your account\. 

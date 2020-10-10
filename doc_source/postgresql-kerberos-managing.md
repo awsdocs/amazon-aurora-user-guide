@@ -1,4 +1,4 @@
-# Managing a DB Cluster in a Domain<a name="postgresql-kerberos-managing"></a>
+# Managing a DB cluster in a Domain<a name="postgresql-kerberos-managing"></a>
 
 You can use the console, the CLI, or the RDS API to manage your DB cluster and its relationship with your Microsoft Active Directory\. For example, you can associate an Active Directory to enable Kerberos authentication\. You can also remove the association for an Active Directory to disable Kerberos authentication\. You can also move a DB cluster to be externally authenticated by one Microsoft Active Directory to another\.
 
@@ -7,7 +7,7 @@ For example, using the CLI, you can do the following:
 + To disable Kerberos authentication on a DB instance, use the [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) CLI command\. Specify `none` for the `--domain` option\.
 + To move a DB instance from one domain to another, use the [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) CLI command\. Specify the domain identifier of the new domain for the `--domain` option\.
 
-## Understanding Domain Membership<a name="postgresql-kerberos-managing.understanding"></a>
+## Understanding Domain membership<a name="postgresql-kerberos-managing.understanding"></a>
 
 After you create or modify your DB cluster, the DB instances become members of the domain\. You can view the status of the domain membership in the console or by running the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) CLI command\. The status of the DB instance can be one of the following: 
 + `kerberos-enabled` – The DB instance has Kerberos authentication enabled\.

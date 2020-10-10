@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2019\-03\-25 \(Version 2\.04\)<a name="AuroraMySQL.Updates.204"></a>
+# Aurora MySQL database engine updates 2019\-03\-25 \(version 2\.04\)<a name="AuroraMySQL.Updates.204"></a>
 
 **Version:** 2\.04
 
@@ -8,17 +8,17 @@ When creating a new Aurora MySQL DB cluster \(including restoring a snapshot\), 
 
 You can restore snapshots of Aurora MySQL 1\.19\.\*, 2\.01\.\*, 2\.02\.\*, and 2\.03\.\* into Aurora MySQL 2\.04\.0\. You cannot restore snapshots of Aurora MySQL 1\.14\.\* or lower, 1\.15\.\*, 1\.16\.\*, 1\.17\.\*, 1\.18\.\* into Aurora MySQL 2\.04\.0\. This restriction is removed in Aurora MySQL 2\.04\.1\.
 
-If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 **Note**  
  This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] region\. There will be a separate announcement once it is made available\. 
 
 **Note**  
-The procedure to upgrade your DB cluster has changed\. For more information, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+The procedure to upgrade your DB cluster has changed\. For more information, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.204.Improvements"></a>
-+  Supports GTID\-based replication\. For information about using GTID\-based replication with Aurora MySQL, see [Using GTID\-Based Replication for Aurora MySQL](mysql-replication-gtid.md)\. 
++  Supports GTID\-based replication\. For information about using GTID\-based replication with Aurora MySQL, see [Using GTID\-based replication for Aurora MySQL](mysql-replication-gtid.md)\. 
 +  Fixed an issue where an Aurora Replica incorrectly throws a`Running in read-only mode` error when a statement deleting or updating rows in a temporary table contains an InnoDB subquery\. 
 
-## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.204.BugFixes"></a>
+## Integration of MySQL bug fixes<a name="AuroraMySQL.Updates.204.BugFixes"></a>
 +  Bug \#26225783: MYSQL CRASH ON CREATE TABLE \(REPRODUCEABLE\) \-> INNODB: ALONG SEMAPHORE WAIT\. 

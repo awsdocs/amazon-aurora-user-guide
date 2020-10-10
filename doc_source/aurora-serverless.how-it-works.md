@@ -1,24 +1,24 @@
-# How Aurora Serverless Works<a name="aurora-serverless.how-it-works"></a>
+# How Aurora Serverless works<a name="aurora-serverless.how-it-works"></a>
 
 When you work with Amazon Aurora without Aurora Serverless \(provisioned DB clusters\), you can choose your DB instance class size and create Aurora Replicas to increase read throughput\. If your workload changes, you can modify the DB instance class size and change the number of Aurora Replicas\. This model works well when the database workload is predictable, because you can adjust capacity manually based on the expected workload\.
 
 However, in some environments, workloads can be intermittent and unpredictable\. There can be periods of heavy workloads that might last only a few minutes or hours, and also long periods of light activity, or even no activity\. Some examples are retail websites with intermittent sales events, reporting databases that produce reports when needed, development and testing environments, and new applications with uncertain requirements\. In these cases and many others, it can be difficult to configure the correct capacity at the right times\. It can also result in higher costs when you pay for capacity that isn't used\.
 
-With Aurora Serverless, you can create a database endpoint without specifying the DB instance class size\. You set the minimum and maximum capacity\. With Aurora Serverless, the database endpoint connects to a* proxy fleet *that routes the workload to a fleet of resources that are automatically scaled\. Because of the proxy fleet, connections are continuous as Aurora Serverless scales the resources automatically based on the minimum and maximum capacity specifications\. Database client applications don't need to change to use the proxy fleet\. Aurora Serverless manages the connections automatically\. Scaling is rapid because it uses a pool of "warm" resources that are always ready to service requests\. Storage and processing are separate, so you can scale down to zero processing and pay only for storage\.
+With Aurora Serverless, you can create a database endpoint without specifying the DB instance class size\. You set the minimum and maximum capacity\. With Aurora Serverless, the database endpoint connects to a *router fleet * that sends the workload to a fleet of resources that are automatically scaled\. Because of the router fleet, connections are continuous as Aurora Serverless scales the resources automatically based on the minimum and maximum capacity specifications\. Database client applications don't need to change to use the router fleet\. Aurora Serverless manages the connections automatically\. Scaling is rapid because it uses a pool of "warm" resources that are always ready to service requests\. Storage and processing are separate, so you can scale down to zero processing and pay only for storage\.
 
 Aurora Serverless introduces a new `serverless` DB engine mode for Aurora DB clusters\. Non\-Serverless DB clusters use the `provisioned` DB engine mode\.
 
 **Topics**
-+ [Aurora Serverless Architecture](#aurora-serverless.architecture)
++ [Aurora Serverless architecture](#aurora-serverless.architecture)
 + [Autoscaling for Aurora Serverless](#aurora-serverless.how-it-works.auto-scaling)
-+ [Automatic Pause and Resume for Aurora Serverless](#aurora-serverless.how-it-works.pause-resume)
-+ [Timeout Action for Capacity Changes](#aurora-serverless.how-it-works.timeout-action)
-+ [Aurora Serverless and Parameter Groups](#aurora-serverless.parameter-groups)
-+ [Aurora Serverless and Maintenance](#aurora-serverless.maintenance)
-+ [Aurora Serverless and Failover](#aurora-serverless.failover)
-+ [Aurora Serverless and Snapshots](#aurora-serverless.snapshots)
++ [Automatic pause and resume for Aurora Serverless](#aurora-serverless.how-it-works.pause-resume)
++ [Timeout action for capacity changes](#aurora-serverless.how-it-works.timeout-action)
++ [Aurora Serverless and parameter groups](#aurora-serverless.parameter-groups)
++ [Aurora Serverless and maintenance](#aurora-serverless.maintenance)
++ [Aurora Serverless and failover](#aurora-serverless.failover)
++ [Aurora Serverless and snapshots](#aurora-serverless.snapshots)
 
-## Aurora Serverless Architecture<a name="aurora-serverless.architecture"></a>
+## Aurora Serverless architecture<a name="aurora-serverless.architecture"></a>
 
  The following image provides an overview of the Aurora Serverless architecture\.
 
@@ -28,7 +28,7 @@ Instead of provisioning and managing database servers, you specify Aurora capaci
 
 You can specify the minimum and maximum ACU\. The *minimum Aurora capacity unit* is the lowest ACU to which the DB cluster can scale down\. The *maximum Aurora capacity unit* is the highest ACU to which the DB cluster can scale up\. Based on your settings, Aurora Serverless automatically creates scaling rules for thresholds for CPU utilization, connections, and available memory\. 
 
-Aurora Serverless manages the warm pool of resources in an AWS Region to minimize scaling time\. When Aurora Serverless adds new resources to the Aurora DB cluster, it uses the proxy fleet to switch active client connections to the new resources\. At any specific time, you are only charged for the ACUs that are being actively used in your Aurora DB cluster\.
+Aurora Serverless manages the warm pool of resources in an AWS Region to minimize scaling time\. When Aurora Serverless adds new resources to the Aurora DB cluster, it uses the router fleet to switch active client connections to the new resources\. At any specific time, you are only charged for the ACUs that are being actively used in your Aurora DB cluster\.
 
 ## Autoscaling for Aurora Serverless<a name="aurora-serverless.how-it-works.auto-scaling"></a>
 
@@ -49,9 +49,9 @@ In these cases, Aurora Serverless continues to try to find a scaling point so th
 
 You can see scaling events in the details for a DB cluster in the AWS Management Console\. You can also monitor the current capacity allocated to the DB cluster by using the `ServerlessDatabaseCapacity` metric for Amazon CloudWatch\. 
 
-During autoscaling, Aurora Serverless resets the `EngineUptime` metric\. The reset metric value doesn't indicate any issues with seamless scaling and doesn't mean that any connections were dropped\. For more information about metrics, see [Monitoring Amazon Aurora DB Cluster Metrics](Aurora.Monitoring.md)\.
+During autoscaling, Aurora Serverless resets the `EngineUptime` metric\. The reset metric value doesn't indicate any issues with seamless scaling and doesn't mean that any connections were dropped\. For more information about metrics, see [Monitoring Amazon Aurora DB cluster metrics](Aurora.Monitoring.md)\.
 
-## Automatic Pause and Resume for Aurora Serverless<a name="aurora-serverless.how-it-works.pause-resume"></a>
+## Automatic pause and resume for Aurora Serverless<a name="aurora-serverless.how-it-works.pause-resume"></a>
 
 You can choose to pause your Aurora Serverless DB cluster after a given amount of time with no activity\. You specify the amount of time with no activity before the DB cluster is paused\. The default is five minutes\. You can also disable pausing the DB cluster\.
 
@@ -62,7 +62,7 @@ When the DB cluster is paused, no compute or memory activity occurs, and you are
 **Note**  
 If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot\. In this case, Aurora restores the DB cluster from the snapshot when there is a request to connect to it\.
 
-## Timeout Action for Capacity Changes<a name="aurora-serverless.how-it-works.timeout-action"></a>
+## Timeout action for capacity changes<a name="aurora-serverless.how-it-works.timeout-action"></a>
 
 You can change the capacity of an Aurora Serverless DB cluster\. When you change the capacity, Aurora Serverless tries to find a scaling point for the change\. If Aurora Serverless can't find a scaling point, it times out\. You can specify one of the following actions to take when a capacity change times out:
 + **Force the capacity change** – Set the capacity to the specified value as soon as possible\.
@@ -71,9 +71,9 @@ You can change the capacity of an Aurora Serverless DB cluster\. When you change
 **Important**  
 Note that for clusters with many concurrent connections, specifying **Force the capacity change** can result in dropping any connection—not only those with long\-running transactions\.
 
-For information about changing the capacity, see [Modifying an Aurora Serverless DB Cluster](aurora-serverless.modifying.md)\.
+For information about changing the capacity, see [Modifying an Aurora Serverless DB cluster](aurora-serverless.modifying.md)\.
 
-## Aurora Serverless and Parameter Groups<a name="aurora-serverless.parameter-groups"></a>
+## Aurora Serverless and parameter groups<a name="aurora-serverless.parameter-groups"></a>
 
 Parameter groups work differently for Aurora Serverless DB clusters than for provisioned DB clusters\. Aurora manages the capacity settings for you\. Some of the configuration procedures, default parameter values, and so on that you use with other kinds of Aurora clusters don't apply for Aurora Serverless clusters\.
 
@@ -129,7 +129,7 @@ aws rds describe-db-cluster-parameters \
   --output text
 ```
 
-For more information about parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
+For more information about parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
 
 With an Aurora MySQL Serverless DB cluster, modifications to parameter values only take effect for the following parameters\. You can modify other parameters, but Aurora doesn't use the changed values\. For all other configuration parameters, Aurora MySQL Serverless clusters use default values\. These default values might be different than for other kinds of Aurora clusters\. These values might also change as Aurora scales the Aurora Serverless cluster up or down\.
 + `character_set_server`\.
@@ -162,18 +162,18 @@ With an Aurora MySQL Serverless DB cluster, modifications to parameter values on
 + `time_zone`\.
 + `tx_isolation`\. This setting was formerly only in the DB instance parameter group\.
 
-## Aurora Serverless and Maintenance<a name="aurora-serverless.maintenance"></a>
+## Aurora Serverless and maintenance<a name="aurora-serverless.maintenance"></a>
 
 Aurora Serverless performs regular maintenance so that your DB cluster has the latest features, fixes, and security updates\. Aurora Serverless performs maintenance in a non\-disruptive manner whenever possible\.
 
 To apply maintenance, Aurora Serverless must find a scaling point\. For more information about scaling points, see [Autoscaling for Aurora Serverless](#aurora-serverless.how-it-works.auto-scaling)\.
 
-If there is maintenance required for an Aurora Serverless DB cluster, the DB cluster attempts to find a scaling point to apply the maintenance for seven days\. After each day that no scaling point can be found, Aurora Serverless creates a cluster event to notify you that it must scale to apply maintenance\. The notification includes the date at which scaling will be applied with the `ForceApplyCapacityChange` timeout action to apply the maintenance, regardless of the `ScalingConfiguration` settings\. If your DB cluster has `RollbackCapacityChange` set as the `TimeoutAction` for its `ScalingConfiguration`, Aurora Serverless tries to apply maintenance using the `RollbackCapacityChange` timeout action prior to the time included in the event\. If your DB cluster has `ForceApplyCapacityChange` set as the `TimeoutAction` for its `ScalingConfiguration`, then scaling to apply maintenance uses it for all attempts\. When `ForceApplyCapacityChange` is used, it might interrupt your workload\. For more information, see [Timeout Action for Capacity Changes](#aurora-serverless.how-it-works.timeout-action)\.
+If there is maintenance required for an Aurora Serverless DB cluster, the DB cluster attempts to find a scaling point to apply the maintenance for seven days\. After each day that no scaling point can be found, Aurora Serverless creates a cluster event to notify you that it must scale to apply maintenance\. The notification includes the date at which scaling will be applied with the `ForceApplyCapacityChange` timeout action to apply the maintenance, regardless of the `ScalingConfiguration` settings\. If your DB cluster has `RollbackCapacityChange` set as the `TimeoutAction` for its `ScalingConfiguration`, Aurora Serverless tries to apply maintenance using the `RollbackCapacityChange` timeout action prior to the time included in the event\. If your DB cluster has `ForceApplyCapacityChange` set as the `TimeoutAction` for its `ScalingConfiguration`, then scaling to apply maintenance uses it for all attempts\. When `ForceApplyCapacityChange` is used, it might interrupt your workload\. For more information, see [Timeout action for capacity changes](#aurora-serverless.how-it-works.timeout-action)\.
 
 **Note**  
 Maintenance windows don't apply to Aurora Serverless\.
 
-## Aurora Serverless and Failover<a name="aurora-serverless.failover"></a>
+## Aurora Serverless and failover<a name="aurora-serverless.failover"></a>
 
  If the DB instance for an Aurora Serverless DB cluster becomes unavailable or the Availability Zone \(AZ\) it is in fails, Aurora recreates the DB instance in a different AZ\. We refer to this capability as automatic multi\-AZ failover\. 
 
@@ -181,6 +181,6 @@ Maintenance windows don't apply to Aurora Serverless\.
 
  Because Aurora separates computation capacity and storage, the storage volume for the cluster is spread across multiple AZs\. Your data remains available even if outages affect the DB instance or the associated AZ\. 
 
-## Aurora Serverless and Snapshots<a name="aurora-serverless.snapshots"></a>
+## Aurora Serverless and snapshots<a name="aurora-serverless.snapshots"></a>
 
- The cluster volume for an Aurora Serverless cluster is always encrypted\. You can choose the encryption key, but not turn off encryption\. To copy or share a snapshot of an Aurora Serverless cluster, you encrypt the snapshot using your own AWS Key Management Service customer master key \(CMK\)\.
+ The cluster volume for an Aurora Serverless cluster is always encrypted\. You can choose the encryption key, but you can't disable encryption\. To copy or share a snapshot of an Aurora Serverless cluster, you encrypt the snapshot using your own AWS Key Management Service customer master key \(CMK\)\.

@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2018\-10\-08<a name="AuroraMySQL.Updates.2025"></a>
+# Aurora MySQL database engine updates 2018\-10\-08<a name="AuroraMySQL.Updates.2025"></a>
 
 **Version:** 2\.02\.5
 
@@ -15,7 +15,7 @@ The performance schema is disabled for this release of Aurora MySQL 5\.7\. Upgra
 **Note**  
  This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] and China \(Beijing\) \[cn\-north\-1\] regions\. There will be a separate announcement once it is made available\. 
 
-If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2025.Improvements"></a>
 +  Fix an issue where an Aurora Replica might restart when it is doing a reverse scan on a table\. 

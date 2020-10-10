@@ -1,19 +1,19 @@
-# Managing Performance and Scaling for Amazon Aurora MySQL<a name="AuroraMySQL.Managing.Performance"></a>
+# Managing performance and scaling for Amazon Aurora MySQL<a name="AuroraMySQL.Managing.Performance"></a>
 
-## Scaling Aurora MySQL DB Instances<a name="AuroraMySQL.Managing.Performance.InstanceScaling"></a>
+## Scaling Aurora MySQL DB instances<a name="AuroraMySQL.Managing.Performance.InstanceScaling"></a>
 
-You can scale Aurora MySQL DB instances in two ways, instance scaling and read scaling\. For more information about read scaling, see [Read Scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.ReadScaling)\.
+You can scale Aurora MySQL DB instances in two ways, instance scaling and read scaling\. For more information about read scaling, see [Read scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.ReadScaling)\.
 
-You can scale your Aurora MySQL DB cluster by modifying the DB instance class for each DB instance in the DB cluster\. Aurora MySQL supports several DB instance classes optimized for Aurora\. Don't use db\.t2 or db\.t3 instance classes for larger Aurora clusters of size greater than 40 TB\. For the specifications of the DB instance classes supported by Aurora MySQL, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.
+You can scale your Aurora MySQL DB cluster by modifying the DB instance class for each DB instance in the DB cluster\. Aurora MySQL supports several DB instance classes optimized for Aurora\. Don't use db\.t2 or db\.t3 instance classes for larger Aurora clusters of size greater than 40 TB\. For the specifications of the DB instance classes supported by Aurora MySQL, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 
-## Maximum Connections to an Aurora MySQL DB Instance<a name="AuroraMySQL.Managing.MaxConnections"></a>
+## Maximum connections to an Aurora MySQL DB instance<a name="AuroraMySQL.Managing.MaxConnections"></a>
 
 The maximum number of connections allowed to an Aurora MySQL DB instance is determined by the `max_connections` parameter in the instance\-level parameter group for the DB instance\.
 
 The following table lists the resulting default value of `max_connections` for each DB instance class available to Aurora MySQL\. You can increase the maximum number of connections to your Aurora MySQL DB instance by scaling the instance up to a DB instance class with more memory, or by setting a larger value for the `max_connections` parameter in the DB parameter group for your instance, up to 16,000\.
 
 
-| Instance Class | max\_connections Default Value | 
+| Instance class | max\_connections default value | 
 | --- | --- | 
 |  db\.t2\.small  |  45  | 
 |  db\.t2\.medium  |  90  | 

@@ -1,4 +1,4 @@
-# Modifying an Aurora Serverless DB Cluster<a name="aurora-serverless.modifying"></a>
+# Modifying an Aurora Serverless DB cluster<a name="aurora-serverless.modifying"></a>
 
 After you configure an Aurora Serverless DB cluster, you can modify its scaling configuration with the AWS Management Console, the AWS CLI, or the RDS API\.
 
@@ -7,7 +7,7 @@ You can set the minimum and maximum capacity for the DB cluster\. Each capacity 
 You can set the following specific values:
 + **Minimum Aurora capacity unit** – Aurora Serverless can reduce capacity down to this capacity unit\.
 + **Maximum Aurora capacity unit** – Aurora Serverless can increase capacity up to this capacity unit\.
-+ **Timeout action** – The action to take when a capacity modification times out because it can't find a scaling point\. Aurora can force the capacity change to set the capacity to the specified value as soon as possible\. Or, it can roll back the capacity change to cancel it\. For more information, see [Timeout Action for Capacity Changes](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.timeout-action)\.
++ **Timeout action** – The action to take when a capacity modification times out because it can't find a scaling point\. Aurora can force the capacity change to set the capacity to the specified value as soon as possible\. Or, it can roll back the capacity change to cancel it\. For more information, see [Timeout action for capacity changes](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.timeout-action)\.
 + **Pause after inactivity** – The amount of time with no database traffic to scale to zero processing capacity\. When database traffic resumes, Aurora automatically resumes processing capacity and scales to handle the traffic\.
 
 ## Console<a name="aurora-serverless.modifying.console"></a>

@@ -1,19 +1,19 @@
-# Aurora MySQL Database Engine Updates: 2017\-02\-23<a name="AuroraMySQL.Updates.20170223"></a>
+# Aurora MySQL database engine updates: 2017\-02\-23<a name="AuroraMySQL.Updates.20170223"></a>
 
 **Version:** 1\.11
 
 We will patch all Aurora MySQL DB clusters with the latest version over a short period following the release\. DB clusters are patched using the legacy procedure with a downtime of about 5\-30 seconds\. 
 
-Patching occurs during the system maintenance window that you have specified for each of your database instances\. You can view or change this window using the AWS Management Console\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+Patching occurs during the system maintenance window that you have specified for each of your database instances\. You can view or change this window using the AWS Management Console\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 Alternatively, you can apply the patch immediately in the AWS Management Console by choosing a DB cluster, choosing **Cluster Actions**, and then choosing **Upgrade Now**\.
 
 With version 1\.11 of Aurora MySQL, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\.
 
-## New Features<a name="AuroraMySQL.Updates.20170223.New"></a>
-+ **MANIFEST option for LOAD DATA FROM S3** – LOAD DATA FROM S3 was released in version 1\.8\. The options for this command have been expanded, and you can now specify a list of files to be loaded into an Aurora DB cluster from Amazon S3 by using a manifest file\. This makes it easy to load data from specific files in one or more locations, as opposed to loading data from a single file by using the FILE option or loading data from multiple files that have the same location and prefix by using the PREFIX option\. The manifest file format is the same as that used by Amazon Redshift\. For more information about using LOAD DATA FROM S3 with the MANIFEST option, see [Using a Manifest to Specify Data Files to Load](AuroraMySQL.Integrating.LoadFromS3.md#AuroraMySQL.Integrating.LoadFromS3.Manifest)\.
-+ **Spatial indexing enabled by default** – This feature was released in lab mode in version 1\.10, and is now turned on by default\. Spatial indexing improves query performance on large datasets for queries that use spatial data\. For more information about using spatial indexing, see [Amazon Aurora MySQL and Spatial Data](Aurora.AuroraMySQL.Overview.md#Aurora.AuroraMySQL.Spatial)\.
-+ **Advanced Auditing timing change** – This feature was released in version 1\.10\.1 to provide a high\-performance facility for auditing database activity\. In this release, the precision of audit log timestamps has been changed from one second to one microsecond\. The more accurate timestamps allow you to better understand when an audit event happened\. For more information about audit, see [Using Advanced Auditing with an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Auditing.md)\.
+## New features<a name="AuroraMySQL.Updates.20170223.New"></a>
++ **MANIFEST option for LOAD DATA FROM S3** – LOAD DATA FROM S3 was released in version 1\.8\. The options for this command have been expanded, and you can now specify a list of files to be loaded into an Aurora DB cluster from Amazon S3 by using a manifest file\. This makes it easy to load data from specific files in one or more locations, as opposed to loading data from a single file by using the FILE option or loading data from multiple files that have the same location and prefix by using the PREFIX option\. The manifest file format is the same as that used by Amazon Redshift\. For more information about using LOAD DATA FROM S3 with the MANIFEST option, see [Using a manifest to specify data files to load](AuroraMySQL.Integrating.LoadFromS3.md#AuroraMySQL.Integrating.LoadFromS3.Manifest)\.
++ **Spatial indexing enabled by default** – This feature was released in lab mode in version 1\.10, and is now turned on by default\. Spatial indexing improves query performance on large datasets for queries that use spatial data\. For more information about using spatial indexing, see [Amazon Aurora MySQL and spatial data](Aurora.AuroraMySQL.Overview.md#Aurora.AuroraMySQL.Spatial)\.
++ **Advanced Auditing timing change** – This feature was released in version 1\.10\.1 to provide a high\-performance facility for auditing database activity\. In this release, the precision of audit log timestamps has been changed from one second to one microsecond\. The more accurate timestamps allow you to better understand when an audit event happened\. For more information about audit, see [Using advanced auditing with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Auditing.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.20170223.Improvements"></a>
 + Modified the `thread_handling` parameter to prevent you from setting it to anything other than **multiple\-connections\-per\-thread**, which is the only supported model with Aurora's thread pool\.
@@ -42,7 +42,7 @@ With version 1\.11 of Aurora MySQL, we are using a cluster patching model where 
   +  Updating the cache only after a read request to an Aurora Replica in order to improve full\-text search index cache replication speed\. 
   + Offloading the cache sync task to a separate thread as soon as the cache size crosses 10% of the total size, in order to avoid MySQL queries stalling for too long during FTS cache sync to disk\. \(Bugs \#22516559, \#73816\)\.
 
-## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.20170223.BugFixes"></a>
+## Integration of MySQL bug fixes<a name="AuroraMySQL.Updates.20170223.BugFixes"></a>
 + Running ALTER table DROP foreign key simultaneously with another DROP operation causes the table to disappear\. \(Bug \#16095573\)
 + Some INFORMATION\_SCHEMA queries that used ORDER BY did not use a filesort optimization as they did previously\. \(Bug \#16423536\)
 + FOUND\_ROWS \(\) returns the wrong count of rows on a table\. \(Bug \#68458\)

@@ -1,4 +1,4 @@
-# Using Managed Plans<a name="AuroraPostgreSQL.Optimize.UsePlans"></a>
+# Using managed plans<a name="AuroraPostgreSQL.Optimize.UsePlans"></a>
 
 To get the optimizer to use captured plans for your managed statements, set the parameter `apg_plan_mgmt.use_plan_baselines` to `true`\. The following is a local instance example\. 
 
@@ -8,7 +8,7 @@ SET apg_plan_mgmt.use_plan_baselines = true;
 
 While the application runs, this setting causes the optimizer to use the minimum\-cost, preferred, or approved plan that is valid and enabled, for each managed statement\. 
 
-## How the Optimizer Chooses Which Plan to Run<a name="AuroraPostgreSQL.Optimize.UsePlans.ChoosePlans"></a>
+## How the optimizer chooses which plan to run<a name="AuroraPostgreSQL.Optimize.UsePlans.ChoosePlans"></a>
 
 The cost of an execution plan is an estimate that the optimizer makes to compare different plans\. Optimizer cost is a function of several factors that include the CPU and I/O operations that the plan uses\. For more information about PostgreSQL query planner costs, see the [PostgreSQL documentation on query planning](https://www.postgresql.org/docs/current/runtime-config-query.html)\. 
 
@@ -30,7 +30,7 @@ The flow is as follows:
 
 1. The optimizer goes through the capture plan processing if the parameter `apg_plan_mgmt.capture_plan_baselines` is `manual` or `automatic`\.
 
-   For details on how the optimizer captures plans, see [Capturing Execution Plans](AuroraPostgreSQL.Optimize.CapturePlans.md)\. 
+   For details on how the optimizer captures plans, see [Capturing execution plans](AuroraPostgreSQL.Optimize.CapturePlans.md)\. 
 
 1. The optimizer runs the generated plan if `apg_plan_mgmt.use_plan_baselines` is `false`\.
 
@@ -48,7 +48,7 @@ The flow is as follows:
 
 1. The optimizer determines the minimum\-cost plan from the managed statement's approved plans that are both enabled and valid\. The optimizer then runs the minimum\-cost approved plan\. 
 
-## Analyzing Which Plan the Optimizer Will Use<a name="AuroraPostgreSQL.Optimize.UsePlans.AnalyzePlans"></a>
+## Analyzing which plan the optimizer will use<a name="AuroraPostgreSQL.Optimize.UsePlans.AnalyzePlans"></a>
 
 When the `apg_plan_mgmt.use_plan_baselines` parameter is set to `true`, you can use EXPLAIN ANALYZE SQL statements to cause the optimizer to show the plan it would use if it were to run the statement\. The following is an example\.
 
@@ -66,6 +66,6 @@ Index Cond: ((id >= 1) AND (id <= 10000))
  SQL Hash: 1984047223, Plan Hash: 512153379
 ```
 
-The optimizer indicates which plan it will run, but notice that in this example that it found a lower\-cost plan\. In this case, you capture this new minimum cost plan by turning on automatic plan capture as described in [Automatically Capturing Plans](AuroraPostgreSQL.Optimize.CapturePlans.md#AuroraPostgreSQL.Optimize.CapturePlans.Automatic)\. 
+The optimizer indicates which plan it will run, but notice that in this example that it found a lower\-cost plan\. In this case, you capture this new minimum cost plan by turning on automatic plan capture as described in [Automatically capturing plans](AuroraPostgreSQL.Optimize.CapturePlans.md#AuroraPostgreSQL.Optimize.CapturePlans.Automatic)\. 
 
-The optimizer captures new plans as `Unapproved`\. Use the `apg_plan_mgmt.evolve_plan_baselines` function to compare plans and change them to approved, rejected, or disabled\. For more information, see [Evaluating Plan Performance](AuroraPostgreSQL.Optimize.Maintenance.md#AuroraPostgreSQL.Optimize.Maintenance.EvaluatingPerformance)\. 
+The optimizer captures new plans as `Unapproved`\. Use the `apg_plan_mgmt.evolve_plan_baselines` function to compare plans and change them to approved, rejected, or disabled\. For more information, see [Evaluating plan performance](AuroraPostgreSQL.Optimize.Maintenance.md#AuroraPostgreSQL.Optimize.Maintenance.EvaluatingPerformance)\. 

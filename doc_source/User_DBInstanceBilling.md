@@ -1,11 +1,11 @@
-# DB Instance Billing for Aurora<a name="User_DBInstanceBilling"></a>
+# DB instance billing for Aurora<a name="User_DBInstanceBilling"></a>
 
 Amazon RDS instances in an Aurora cluster are billed based on the following components:
-+ DB instance hours \(per hour\) – Based on the DB instance class of the DB instance \(for example, db\.t2\.small or db\.m4\.large\)\. Pricing is listed on a per\-hour basis, but bills are calculated down to the second and show times in decimal form\. RDS usage is billed in one second increments, with a minimum of 10 minutes\. For more information, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.
++ DB instance hours \(per hour\) – Based on the DB instance class of the DB instance \(for example, db\.t2\.small or db\.m4\.large\)\. Pricing is listed on a per\-hour basis, but bills are calculated down to the second and show times in decimal form\. RDS usage is billed in one second increments, with a minimum of 10 minutes\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 + I/O requests \(per 1 million requests per month\) – Total number of storage I/O requests that you have made in a billing cycle\.
 + Backup storage \(per GiB per month\) – *Backup storage *is the storage that is associated with automated database backups and any active database snapshots that you have taken\. Increasing your backup retention period or taking additional database snapshots increases the backup storage consumed by your database\. Per second billing doesn't apply to backup storage \(metered in GB\-month\)\.
 
-  For more information, see [Backing Up and Restoring an Amazon Aurora DB Cluster](BackupRestoreAurora.md)\.
+  For more information, see [Backing up and restoring an Amazon Aurora DB cluster](BackupRestoreAurora.md)\.
 + Data transfer \(per GB\) – Data transfer in and out of your DB instance from or to the internet and other AWS Regions\.
 
 Amazon RDS provides the following purchasing options to enable you to optimize your costs based on your needs:
@@ -15,5 +15,5 @@ Amazon RDS provides the following purchasing options to enable you to optimize y
 For Aurora pricing information, see the [Aurora pricing page](https://aws.amazon.com/rds/aurora/pricing)\.
 
 **Topics**
-+ [On\-Demand DB Instances for Aurora](USER_OnDemandDBInstances.md)
-+ [Reserved DB Instances for Aurora](USER_WorkingWithReservedDBInstances.md)
++ [On\-Demand DB instances for Aurora](USER_OnDemandDBInstances.md)
++ [reserved DB instances for Aurora](USER_WorkingWithReservedDBInstances.md)

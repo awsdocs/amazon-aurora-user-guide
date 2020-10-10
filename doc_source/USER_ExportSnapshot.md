@@ -1,4 +1,4 @@
-# Exporting DB Snapshot Data to Amazon S3<a name="USER_ExportSnapshot"></a>
+# Exporting DB snapshot data to Amazon S3<a name="USER_ExportSnapshot"></a>
 
 You can export DB snapshot data to an Amazon S3 bucket\. After the data is exported, you can analyze the exported data directly through tools like Amazon Athena or Amazon Redshift Spectrum\. The export process runs in the background and doesn't affect the performance of your active DB cluster\.
 
@@ -16,10 +16,10 @@ Exporting snapshots is supported in the following AWS Regions:
 **Note**  
 You can copy a snapshot from an AWS Region where S3 export isn't supported to one where it is supported, then export the copy\. The S3 bucket must be in the same AWS Region as the copy\.
 
-The following table shows the Aurora MySQL engine versions that are supported for exporting snapshot data to Amazon S3\. For more information about Aurora MySQL engine versions, see [Database Engine Updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\. 
+The following table shows the Aurora MySQL engine versions that are supported for exporting snapshot data to Amazon S3\. For more information about Aurora MySQL engine versions, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\. 
 
 
-| Aurora MySQL Version | MySQL\-Compatible Version | 
+| Aurora MySQL version | MySQL\-compatible version | 
 | --- | --- | 
 | 2\.04\.6  | 5\.7 | 
 | 2\.04\.5 | 5\.7 | 
@@ -29,10 +29,10 @@ The following table shows the Aurora MySQL engine versions that are supported fo
 | 1\.19\.3 | 5\.6 | 
 | 1\.19\.2 | 5\.6 | 
 
-The following table shows the Aurora PostgreSQL engine versions that are supported for exporting snapshot data to Amazon S3\. For more information about Aurora PostgreSQL engine versions, see [Engine Versions for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.20180305.md)\. 
+The following table shows the Aurora PostgreSQL engine versions that are supported for exporting snapshot data to Amazon S3\. For more information about Aurora PostgreSQL engine versions, see [Engine versions for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.20180305.md)\. 
 
 
-| Aurora PostgreSQL Version | PostgreSQL\-Compatible Version | 
+| Aurora PostgreSQL version | PostgreSQL\-compatible version | 
 | --- | --- | 
 | 2\.3 | 10\.7 | 
 | 2\.2 | 10\.6 | 
@@ -40,15 +40,15 @@ The following table shows the Aurora PostgreSQL engine versions that are support
 | 1\.4 | 9\.6\.11 | 
 
 **Topics**
-+ [Overview of Exporting Snapshot Data](#USER_ExportSnapshot.Overview)
-+ [Setting Up Access to an Amazon S3 Bucket](#USER_ExportSnapshot.Setup)
-+ [Exporting a Snapshot to an Amazon S3 Bucket](#USER_ExportSnapshot.Exporting)
-+ [Monitoring Snapshot Exports](#USER_ExportSnapshot.Monitoring)
-+ [Canceling a Snapshot Export Task](#USER_ExportSnapshot.Canceling)
-+ [Troubleshooting PostgreSQL Permissions Errors](#USER_ExportSnapshot.postgres-permissions)
-+ [Data Conversion When Exporting to an Amazon S3 Bucket](#USER_ExportSnapshot.data-types)
++ [Overview of exporting snapshot data](#USER_ExportSnapshot.Overview)
++ [Setting up access to an Amazon S3 bucket](#USER_ExportSnapshot.Setup)
++ [Exporting a snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)
++ [Monitoring snapshot exports](#USER_ExportSnapshot.Monitoring)
++ [Canceling a snapshot export task](#USER_ExportSnapshot.Canceling)
++ [Troubleshooting PostgreSQL permissions errors](#USER_ExportSnapshot.postgres-permissions)
++ [Data conversion when exporting to an Amazon S3 bucket](#USER_ExportSnapshot.data-types)
 
-## Overview of Exporting Snapshot Data<a name="USER_ExportSnapshot.Overview"></a>
+## Overview of exporting snapshot data<a name="USER_ExportSnapshot.Overview"></a>
 
 The following procedure provides a high\-level view of how to export DB snapshot data to an Amazon S3 bucket\. For more details, see the following sections\.
 
@@ -62,41 +62,44 @@ The following procedure provides a high\-level view of how to export DB snapshot
 
    A *bucket* is a container for Amazon S3 objects or files\. To provide the information to access a bucket, take the following steps:
 
-   1. Identify the S3 bucket where the snapshot is to be exported to\. The S3 bucket must be in the same AWS Region as the snapshot\. For more information, see [Identifying the Amazon S3 Bucket to Export to](#USER_ExportSnapshot.SetupBucket)\.
+   1. Identify the S3 bucket where the snapshot is to be exported to\. The S3 bucket must be in the same AWS Region as the snapshot\. For more information, see [Identifying the Amazon S3 bucket for export](#USER_ExportSnapshot.SetupBucket)\.
 
-   1. Create an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) for the server\-side encryption\. The AWS KMS CMK is used by the snapshot export task to set up AWS KMS server\-side encryption when writing the export data to S3\. For more information, see [Encrypting Amazon Aurora Resources](Overview.Encryption.md)\.
+   1. Create an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) for the server\-side encryption\. The AWS KMS CMK is used by the snapshot export task to set up AWS KMS server\-side encryption when writing the export data to S3\. For more information, see [Encrypting Amazon Aurora resources](Overview.Encryption.md)\.
 
-   1. Create an AWS Identity and Access Management \(IAM\) role that grants the snapshot export task access to the S3 bucket\. For more information, see [Providing Access to an Amazon S3 Bucket Using an IAM Role](#USER_ExportSnapshot.SetupIAMRole)\. 
+   1. Create an AWS Identity and Access Management \(IAM\) role that grants the snapshot export task access to the S3 bucket\. For more information, see [Providing access to an Amazon S3 bucket using an IAM role](#USER_ExportSnapshot.SetupIAMRole)\. 
 
-1. Export the snapshot to Amazon S3 using the console or the `start-export-task` CLI command\. For more information, see [Exporting a Snapshot to an Amazon S3 Bucket](#USER_ExportSnapshot.Exporting)\. 
+1. Export the snapshot to Amazon S3 using the console or the `start-export-task` CLI command\. For more information, see [Exporting a snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)\. 
 
-1. To access your exported data in the Amazon S3 bucket, see [ Uploading, Downloading, and Managing Objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-download-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
+1. To access your exported data in the Amazon S3 bucket, see [ Uploading, downloading, and managing objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-download-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
-## Setting Up Access to an Amazon S3 Bucket<a name="USER_ExportSnapshot.Setup"></a>
+## Setting up access to an Amazon S3 bucket<a name="USER_ExportSnapshot.Setup"></a>
 
 To export DB snapshot data to an Amazon S3 file, you first give the snapshot permission to access the Amazon S3 bucket\. You then create an IAM role to allow the Amazon Aurora service to write to the Amazon S3 bucket\.
 
 **Topics**
-+ [Identifying the Amazon S3 Bucket to Export to](#USER_ExportSnapshot.SetupBucket)
-+ [Providing Access to an Amazon S3 Bucket Using an IAM Role](#USER_ExportSnapshot.SetupIAMRole)
++ [Identifying the Amazon S3 bucket for export](#USER_ExportSnapshot.SetupBucket)
++ [Providing access to an Amazon S3 bucket using an IAM role](#USER_ExportSnapshot.SetupIAMRole)
 
-### Identifying the Amazon S3 Bucket to Export to<a name="USER_ExportSnapshot.SetupBucket"></a>
+### Identifying the Amazon S3 bucket for export<a name="USER_ExportSnapshot.SetupBucket"></a>
 
 Identify the Amazon S3 bucket to export the DB snapshot to\. Use an existing S3 bucket or create a new S3 bucket\.
 
 **Note**  
 The S3 bucket to export to must be in the same AWS Region as the snapshot\.
 
-For more information about working with Amazon S3 buckets, see [ How Do I View the Properties for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/view-bucket-properties.html), [ How Do I Enable Default Encryption for an Amazon S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/default-bucket-encryption.html), and [ How Do I Create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
+For more information about working with Amazon S3 buckets, see the following in the *Amazon Simple Storage Service Console User Guide*:
++ [ How do I view the properties for an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/view-bucket-properties.html)
++ [ How do I enable default encryption for an Amazon S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/default-bucket-encryption.html)
++ [ How do I create an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)
 
-### Providing Access to an Amazon S3 Bucket Using an IAM Role<a name="USER_ExportSnapshot.SetupIAMRole"></a>
+### Providing access to an Amazon S3 bucket using an IAM role<a name="USER_ExportSnapshot.SetupIAMRole"></a>
 
 Before you export DB snapshot data to Amazon S3, give the snapshot export tasks write\-access permission to the Amazon S3 bucket\. 
 
 To do this, create an IAM policy that provides access to the bucket\. Then create an IAM role and attach the policy to the role\. You later assign the IAM role to your snapshot export task\.
 
 **Important**  
-If you plan to use the AWS Management Console to export your snapshot, you can choose to create the IAM policy and the role automatically when you export the snapshot\. For instructions, see [Exporting a Snapshot to an Amazon S3 Bucket](#USER_ExportSnapshot.Exporting)\.
+If you plan to use the AWS Management Console to export your snapshot, you can choose to create the IAM policy and the role automatically when you export the snapshot\. For instructions, see [Exporting a snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)\.
 
 **To give DB snapshot tasks access to Amazon S3**
 
@@ -113,7 +116,7 @@ If you plan to use the AWS Management Console to export your snapshot, you can c
    + `arn:aws:s3:::your-s3-bucket`
    + `arn:aws:s3:::your-s3-bucket/*`
 
-   For more information on creating an IAM policy for Amazon Aurora, see [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. See also [Tutorial: Create and Attach Your First Customer Managed Policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html) in the *IAM User Guide*\.
+   For more information on creating an IAM policy for Amazon Aurora, see [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. See also [Tutorial: Create and attach your first customer managed policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html) in the *IAM User Guide*\.
 
    The following AWS CLI command creates an IAM policy named `ExportPolicy` with these options\. It grants access to a bucket named `your-s3-bucket`\. 
 **Note**  
@@ -149,7 +152,7 @@ After you create the policy, note the ARN of the policy\. You need the ARN for a
    }'
    ```
 
-1. Create an IAM role\. You do this so that Aurora can assume this IAM role on your behalf to access your Amazon S3 buckets\. For more information, see [Creating a Role to Delegate Permissions to an IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
+1. Create an IAM role\. You do this so that Aurora can assume this IAM role on your behalf to access your Amazon S3 buckets\. For more information, see [Creating a role to delegate permissions to an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
 
    The following example shows using the AWS CLI command to create a role named `rds-s3-export-role`\.
 
@@ -176,7 +179,7 @@ After you create the policy, note the ARN of the policy\. You need the ARN for a
    aws iam attach-role-policy  --policy-arn your-policy-arn  --role-name rds-s3-export-role
    ```
 
-## Exporting a Snapshot to an Amazon S3 Bucket<a name="USER_ExportSnapshot.Exporting"></a>
+## Exporting a snapshot to an Amazon S3 bucket<a name="USER_ExportSnapshot.Exporting"></a>
 
 You can have up to five concurrent DB snapshot export tasks in progress per account\. 
 
@@ -213,7 +216,7 @@ You can export a DB snapshot to Amazon S3 using the AWS Management Console, the 
    To assign the exported data to a folder path in the S3 bucket, enter the optional path for **S3 prefix**\.
 
 1. For **IAM role**, either choose a role that grants you write access to your chosen S3 bucket, or create a new role\. 
-   + If you created a role by following the steps in [Providing Access to an Amazon S3 Bucket Using an IAM Role](#USER_ExportSnapshot.SetupIAMRole), choose that role\.
+   + If you created a role by following the steps in [Providing access to an Amazon S3 bucket using an IAM role](#USER_ExportSnapshot.SetupIAMRole), choose that role\.
    + If you didn't create a role that grants you write access to your chosen S3 bucket, choose **Create a new role** to create the role automatically\. Next, enter a name for the role in **IAM role name**\.
 
 1. For **Master key**, enter the ARN for the key to use for encrypting the exported data\.
@@ -279,7 +282,7 @@ To export a DB snapshot to Amazon S3 using the Amazon RDS API, use the [StartExp
 + `IamRoleArn`
 + `KmsKeyId`
 
-## Monitoring Snapshot Exports<a name="USER_ExportSnapshot.Monitoring"></a>
+## Monitoring snapshot exports<a name="USER_ExportSnapshot.Monitoring"></a>
 
 You can monitor DB snapshot exports using the AWS Management Console, the AWS CLI, or the RDS API\.
 
@@ -361,14 +364,14 @@ To display information about a specific snapshot export, include the `--export-t
 
 To display information about DB snapshot exports using the Amazon RDS API, use the [DescribeExportTasks](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeExportTasks.html) operation\.
 
-To track completion of the export workflow or to trigger another workflow, you can subscribe to Amazon Simple Notification Service topics\. For more information on Amazon SNS, see [Using Amazon RDS Event Notification](USER_Events.md)\.
+To track completion of the export workflow or to trigger another workflow, you can subscribe to Amazon Simple Notification Service topics\. For more information on Amazon SNS, see [Using Amazon RDS event notification](USER_Events.md)\.
 
-## Canceling a Snapshot Export Task<a name="USER_ExportSnapshot.Canceling"></a>
+## Canceling a snapshot export task<a name="USER_ExportSnapshot.Canceling"></a>
 
 You can cancel a DB snapshot export task using the AWS Management Console, the AWS CLI, or the RDS API\.
 
 **Note**  
-Canceling a snapshot export task doesn't remove any data that was exported to Amazon S3\. For information about how to delete the data using the console, see [ How Do I Delete Objects from an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-objects.html) To delete the data using the CLI, use the [delete\-object](https://docs.aws.amazon.com/cli/latest/reference/s3api/delete-object.html) command\.
+Canceling a snapshot export task doesn't remove any data that was exported to Amazon S3\. For information about how to delete the data using the console, see [ How do I delete objects from an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-objects.html) To delete the data using the CLI, use the [delete\-object](https://docs.aws.amazon.com/cli/latest/reference/s3api/delete-object.html) command\.
 
 ### Console<a name="USER_ExportSnapshot.CancelConsole"></a>
 
@@ -413,7 +416,7 @@ To cancel a snapshot export task using the AWS CLI, use the [cancel\-export\-tas
 
 To cancel a snapshot export task using the Amazon RDS API, use the [CancelExportTask](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CancelExportTask.html) operation with the `ExportTaskIdentifier` parameter\.
 
-## Troubleshooting PostgreSQL Permissions Errors<a name="USER_ExportSnapshot.postgres-permissions"></a>
+## Troubleshooting PostgreSQL permissions errors<a name="USER_ExportSnapshot.postgres-permissions"></a>
 
 When exporting PostgreSQL databases to Amazon S3, you might see a `PERMISSIONS_DO_NOT_EXIST` error stating that certain tables were skipped\. This is usually caused by the superuser, which you specify when creating the DB instance, not having permissions to access those tables\.
 
@@ -423,9 +426,9 @@ To fix this error, run the following command:
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA schema_name TO superuser_name
 ```
 
-For more information on superuser privileges, see [Master User Account Privileges](UsingWithRDS.MasterAccounts.md)\.
+For more information on superuser privileges, see [Master user account privileges](UsingWithRDS.MasterAccounts.md)\.
 
-## Data Conversion When Exporting to an Amazon S3 Bucket<a name="USER_ExportSnapshot.data-types"></a>
+## Data conversion when exporting to an Amazon S3 bucket<a name="USER_ExportSnapshot.data-types"></a>
 
 When you export a DB snapshot to an Amazon S3 bucket, Amazon Aurora converts data to, exports data in, and stores data in the Parquet format\. For more information about Parquet, see the [Apache Parquet](https://parquet.apache.org/documentation/latest/) website\.
 
@@ -443,7 +446,7 @@ The Parquet data types are few to reduce the complexity of reading and writing t
 
 When the `STRING` logical type annotates a `BYTE_ARRAY` type, it indicates that the byte array should be interpreted as a UTF\-8 encoded character string\. After an export task completes, Amazon Aurora notifies you if any string conversion occurred\. The underlying data exported is always the same as the data from the source\. However, due to the encoding difference in UTF\-8, some characters might appear different from the source when read in tools such as Athena\.
 
-For more information, see [Parquet Logical Type Definitions](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md) in the Parquet documentation\.
+For more information, see [Parquet logical type definitions](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md) in the Parquet documentation\.
 
 **Note**  
 Some characters aren't supported in database table column names\. Tables with the following characters in column names are skipped during export\.   
@@ -455,21 +458,21 @@ If the data contains a huge value close to or greater than 500 MB, the export fa
 If the database, schema, or table name contains spaces, partial export isn't supported\. However, you can export the entire DB snapshot\.
 
 **Topics**
-+ [MySQL Data Type Mapping to Parquet](#USER_ExportSnapshot.data-types.MySQL)
-+ [PostgreSQL Data Type Mapping to Parquet](#USER_ExportSnapshot.data-types.PostgreSQL)
++ [MySQL data type mapping to Parquet](#USER_ExportSnapshot.data-types.MySQL)
++ [PostgreSQL data type mapping to Parquet](#USER_ExportSnapshot.data-types.PostgreSQL)
 
-### MySQL Data Type Mapping to Parquet<a name="USER_ExportSnapshot.data-types.MySQL"></a>
+### MySQL data type mapping to Parquet<a name="USER_ExportSnapshot.data-types.MySQL"></a>
 
 The following table shows the mapping from MySQL data types to Parquet data types when data is converted and exported to Amazon S3\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)
 
-### PostgreSQL Data Type Mapping to Parquet<a name="USER_ExportSnapshot.data-types.PostgreSQL"></a>
+### PostgreSQL data type mapping to Parquet<a name="USER_ExportSnapshot.data-types.PostgreSQL"></a>
 
 The following table shows the mapping from PostgreSQL data types to Parquet data types when data is converted and exported to Amazon S3\.
 
 
-| PostgreSQL Data Type | Parquet Primitive Type | Logical Type Annotation | Mapping Notes | 
+| PostgreSQL data type | Parquet primitive type | Logical type annotation | Mapping notes | 
 | --- | --- | --- | --- | 
 | Numeric Data Types | 
 | BIGINT | INT64 |  |   | 

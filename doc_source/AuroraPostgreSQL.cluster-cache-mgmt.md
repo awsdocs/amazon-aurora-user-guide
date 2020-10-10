@@ -1,4 +1,4 @@
-# Fast Recovery After Failover with Cluster Cache Management for Aurora PostgreSQL<a name="AuroraPostgreSQL.cluster-cache-mgmt"></a>
+# Fast recovery after failover with cluster cache management for Aurora PostgreSQL<a name="AuroraPostgreSQL.cluster-cache-mgmt"></a>
 
 For fast recovery of the writer DB instance in your Aurora PostgreSQL clusters if there's a failover, use cluster cache management for Amazon Aurora PostgreSQL\. Cluster cache management ensures that application performance is maintained if there's a failover\. 
 
@@ -7,10 +7,10 @@ In a typical failover situation, you might see a temporary but large performance
 With cluster cache management, you set a specific reader DB instance as the failover target\. Cluster cache management ensures that the data in the designated reader's cache is kept synchronized with the data in the writer DB instance's cache\. The designated reader's cache with prefilled values is known as a *warm cache*\. If a failover occurs, the designated reader uses values in its warm cache immediately when it's promoted to the new writer DB instance\. This approach provides your application much better recovery performance\.
 
 **Topics**
-+ [Configuring Cluster Cache Management](#AuroraPostgreSQL.cluster-cache-mgmt.Configure)
-+ [Monitoring the Buffer Cache](#AuroraPostgreSQL.cluster-cache-mgmt.Monitoring)
++ [Configuring cluster cache management](#AuroraPostgreSQL.cluster-cache-mgmt.Configure)
++ [Monitoring the buffer cache](#AuroraPostgreSQL.cluster-cache-mgmt.Monitoring)
 
-## Configuring Cluster Cache Management<a name="AuroraPostgreSQL.cluster-cache-mgmt.Configure"></a>
+## Configuring cluster cache management<a name="AuroraPostgreSQL.cluster-cache-mgmt.Configure"></a>
 
 **Note**  
 Cluster cache management is supported for Aurora PostgreSQL DB clusters of versions 9\.6\.11 and above, and versions 10\.5 and above\.
@@ -18,14 +18,14 @@ Cluster cache management is supported for Aurora PostgreSQL DB clusters of versi
 To configure cluster cache management, do the following processes in order\.
 
 **Topics**
-+ [Enabling Cluster Cache Management](#AuroraPostgreSQL.cluster-cache-mgmt.Enable)
-+ [Setting the Promotion Tier Priority for the Writer DB Instance](#AuroraPostgreSQL.cluster-cache-mgmt.Writer)
-+ [Setting the Promotion Tier Priority for a Reader DB Instance](#AuroraPostgreSQL.cluster-cache-mgmt.Reader)
++ [Enabling cluster cache management](#AuroraPostgreSQL.cluster-cache-mgmt.Enable)
++ [Setting the promotion tier priority for the writer DB instance](#AuroraPostgreSQL.cluster-cache-mgmt.Writer)
++ [Setting the promotion tier priority for a reader DB instance](#AuroraPostgreSQL.cluster-cache-mgmt.Reader)
 
 **Note**  
 Allow at least 1 minute after completing these steps for cluster cache management to be fully operational\.
 
-### Enabling Cluster Cache Management<a name="AuroraPostgreSQL.cluster-cache-mgmt.Enable"></a>
+### Enabling cluster cache management<a name="AuroraPostgreSQL.cluster-cache-mgmt.Enable"></a>
 
 To enable cluster cache management, take the steps described following\. 
 
@@ -69,9 +69,9 @@ aws rds modify-db-cluster-parameter-group ^
     --parameters "ParameterName=apg_ccm_enabled,ParameterValue=1,ApplyMethod=immediate"
 ```
 
-### Setting the Promotion Tier Priority for the Writer DB Instance<a name="AuroraPostgreSQL.cluster-cache-mgmt.Writer"></a>
+### Setting the promotion tier priority for the writer DB instance<a name="AuroraPostgreSQL.cluster-cache-mgmt.Writer"></a>
 
-For cluster cache management, make sure that the promotion priority is **tier\-0** for the writer DB instance of the Aurora PostgreSQL DB cluster\. The *promotion tier priority* is a value that specifies the order in which an Aurora reader is promoted to the writer DB instance after a failure\. Valid values are 0–15, where 0 is the first priority and 15 is the last priority\. For more information about the promotion tier, see [Fault Tolerance for an Aurora DB Cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\. 
+For cluster cache management, make sure that the promotion priority is **tier\-0** for the writer DB instance of the Aurora PostgreSQL DB cluster\. The *promotion tier priority* is a value that specifies the order in which an Aurora reader is promoted to the writer DB instance after a failure\. Valid values are 0–15, where 0 is the first priority and 15 is the last priority\. For more information about the promotion tier, see [Fault tolerance for an Aurora DB cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\. 
 
 #### Console<a name="AuroraPostgreSQL.cluster-cache-mgmt.Writer.Console"></a>
 
@@ -118,7 +118,7 @@ aws rds modify-db-instance ^
     --apply-immediately
 ```
 
-### Setting the Promotion Tier Priority for a Reader DB Instance<a name="AuroraPostgreSQL.cluster-cache-mgmt.Reader"></a>
+### Setting the promotion tier priority for a reader DB instance<a name="AuroraPostgreSQL.cluster-cache-mgmt.Reader"></a>
 
 You set one reader DB instance for cluster cache management\. To do so, choose a reader from the Aurora PostgreSQL cluster that is the same instance class as the writer DB instance\. Then set its promotion tier priority to 0\. 
 
@@ -169,7 +169,7 @@ aws rds modify-db-instance ^
     --apply-immediately
 ```
 
-## Monitoring the Buffer Cache<a name="AuroraPostgreSQL.cluster-cache-mgmt.Monitoring"></a>
+## Monitoring the buffer cache<a name="AuroraPostgreSQL.cluster-cache-mgmt.Monitoring"></a>
 
 After setting up cluster cache management, you can monitor the state of synchronization between the writer DB instance's buffer cache and the designated reader's warm buffer cache\. To examine the buffer cache contents on both the writer DB instance and the designated reader DB instance, use the PostgreSQL `pg_buffercache` module\. For more information, see the [PostgreSQL `pg_buffercache` documentation](https://www.postgresql.org/docs/current/pgbuffercache.html)\. 
 

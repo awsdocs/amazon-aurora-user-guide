@@ -1,18 +1,18 @@
-# Aurora MySQL Database Engine Updates: 2016\-04\-06<a name="AuroraMySQL.Updates.20160406"></a>
+# Aurora MySQL database engine updates: 2016\-04\-06<a name="AuroraMySQL.Updates.20160406"></a>
 
 **Version:** 1\.6
 
 This update includes the following improvements:
 
-## New Features<a name="AuroraMySQL.Updates.20160406.New"></a>
-+ **Parallel read\-ahead** – Parallel read\-ahead is now enabled by default for all Aurora MySQL DB clusters, and is not configurable\. Parallel read\-ahead was introduced in the December 2015 update\. For more information, see [Aurora MySQL Database Engine Updates: 2015\-12\-03](AuroraMySQL.Updates.20151203.md)\.
+## New features<a name="AuroraMySQL.Updates.20160406.New"></a>
++ **Parallel read\-ahead** – Parallel read\-ahead is now enabled by default for all Aurora MySQL DB clusters, and is not configurable\. Parallel read\-ahead was introduced in the December 2015 update\. For more information, see [Aurora MySQL database engine updates: 2015\-12\-03](AuroraMySQL.Updates.20151203.md)\.
 
   In addition to enabling parallel read\-ahead by default, this release includes the following improvements to parallel read\-ahead:
   + Improved logic so that parallel read\-ahead is less aggressive, which is beneficial when your DB cluster encounters many parallel workloads\.
   + Improved stability on smaller tables\.
 + **Efficient storage of Binary Logs \(lab mode\)** – MySQL binary log files are now stored more efficiently in Aurora MySQL\. The new storage implementation enables binary log files to be deleted much earlier and improves system performance for an instance in an Aurora MySQL DB cluster that is a binary log replication master\.
 
-  To enable efficient storage of binary logs, set the `aurora_lab_mode` parameter to `1` in the parameter group for your primary instance or Aurora Replica\. The `aurora_lab_mode` parameter is an instance\-level parameter that is in the `default.aurora5.6` parameter group by default\. For information on modifying a DB parameter group, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. For information on parameter groups and Aurora MySQL, see [Aurora MySQL Parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
+  To enable efficient storage of binary logs, set the `aurora_lab_mode` parameter to `1` in the parameter group for your primary instance or Aurora Replica\. The `aurora_lab_mode` parameter is an instance\-level parameter that is in the `default.aurora5.6` parameter group by default\. For information on modifying a DB parameter group, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. For information on parameter groups and Aurora MySQL, see [Aurora MySQL parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
 
   Only turn on efficient storage of binary logs for instances in an Aurora MySQL DB cluster that are MySQL binary log replication master instances\.
 + **AURORA\_VERSION system variable** – You can now get the Aurora version of your Aurora MySQL DB cluster by querying for the `AURORA_VERSION` system variable\.
@@ -50,7 +50,7 @@ This update includes the following improvements:
   + Improved stability for Aurora Replicas when running `UPDATE` and `DELETE` statements with `JOIN` statements\.
   + Improved stability for Aurora Replicas when running `INSERT ... SELECT` statements\.
 
-## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.20160406.BugFixes"></a>
+## Integration of MySQL bug fixes<a name="AuroraMySQL.Updates.20160406.BugFixes"></a>
 + BACKPORT Bug \#18694052 FIX FOR ASSERTION `\!M\_ORDERED\_REC\_BUFFER' FAILED TO 5\.6 \(Port Bug \#18305270\) 
 + SEGV IN MEMCPY\(\), HA\_PARTITION::POSITION \(Port Bug \# 18383840\)
 + WRONG RESULTS WITH PARTITIONING,INDEX\_MERGE AND NO PK \(Port Bug \# 18167648\)

@@ -1,15 +1,15 @@
 # Security with Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Security"></a>
 
 Security for Amazon Aurora PostgreSQL is managed at three levels:
-+ To control who can perform Amazon RDS management actions on Aurora MySQL DB clusters and DB instances, you use AWS Identity and Access Management \(IAM\)\. When you connect to AWS using IAM credentials, your AWS account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Identity and Access Management in Amazon Aurora](UsingWithRDS.IAM.md)\.
++ To control who can perform Amazon RDS management actions on Aurora MySQL DB clusters and DB instances, you use AWS Identity and Access Management \(IAM\)\. When you connect to AWS using IAM credentials, your AWS account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Identity and access management in Amazon Aurora](UsingWithRDS.IAM.md)\.
 
   If you are using IAM to access the Amazon RDS console, you must first sign on to the AWS Management Console with your IAM user credentials\. Then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 + Aurora DB clusters must be created in an Amazon Virtual Private Cloud \(VPC\)\. To control which devices and Amazon EC2 instances can open connections to the endpoint and port of the DB instance for Aurora DB clusters in a VPC, you use a VPC security group\. These endpoint and port connections can be made using Secure Sockets Layer \(SSL\)\. In addition, firewall rules at your company can control whether devices running at your company can open connections to a DB instance\. For more information on VPCs, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
 
-  Aurora PostgreSQL supports db\.r4 and db\.t3 instance classes with default VPC only\. With default VPC tenancy, the VPC runs on shared hardware\. With dedicated VPC tenancy, the VPC runs on a dedicated hardware instance\. For more information about instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\. For more information about default and dedicated VPC tenancy, see [Dedicated Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html) in the [Amazon EC2 User Guide for Linux Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/)\.
+  Aurora PostgreSQL supports db\.r4 and db\.t3 instance classes with default VPC only\. With default VPC tenancy, the VPC runs on shared hardware\. With dedicated VPC tenancy, the VPC runs on a dedicated hardware instance\. For more information about instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. For more information about default and dedicated VPC tenancy, see [Dedicated instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html) in the [Amazon EC2 User Guide for Linux Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/)\.
 + To authenticate login and permissions for an Amazon Aurora DB cluster, you can take the same approach as with a stand\-alone instance of PostgreSQL\.
 
-  Commands such as `CREATE ROLE`, `ALTER ROLE`, `GRANT`, and `REVOKE` work just as they do in on\-premises databases, as does directly modifying database schema tables\. For more information, see [Client Authentication](https://www.postgresql.org/docs/9.6/static/client-authentication.html) in the PostgreSQL documentation\.
+  Commands such as `CREATE ROLE`, `ALTER ROLE`, `GRANT`, and `REVOKE` work just as they do in on\-premises databases, as does directly modifying database schema tables\. For more information, see [Client authentication](https://www.postgresql.org/docs/9.6/static/client-authentication.html) in the PostgreSQL documentation\.
 **Note**  
 The Salted Challenge Response Authentication Mechanism \(SCRAM\) is not supported with Aurora PostgreSQL\.
 
@@ -24,7 +24,7 @@ When you create an Amazon Aurora PostgreSQL DB instance, the master user has the
 
 To provide management services for each DB cluster, the `rdsadmin` user is created when the DB cluster is created\. Attempting to drop, rename, change the password, or change privileges for the `rdsadmin` account will result in an error\.
 
-## Restricting Password Management<a name="RestrictPasswordMgmt"></a>
+## Restricting password management<a name="RestrictPasswordMgmt"></a>
 
 You can restrict who can manage database user passwords to a special role\. By doing this, you can have more control over password management on the client side\.
 
@@ -51,15 +51,15 @@ The `rds_superuser` role has membership for the `rds_password` role by default, 
 
 Make sure that you verify password requirements such as expiration and needed complexity on the client side\. We recommend that you restrict password\-related changes by using your own client\-side utility\. This utility should have a role that is a member of `rds_password` and has the `CREATEROLE` role attribute\.
 
-## Securing Aurora PostgreSQL Data with SSL<a name="AuroraPostgreSQL.Security.SSL"></a>
+## Securing Aurora PostgreSQL data with SSL<a name="AuroraPostgreSQL.Security.SSL"></a>
 
 Amazon RDS supports Secure Socket Layer \(SSL\) encryption for Aurora PostgreSQL DB clusters\. Using SSL, you can encrypt a connection between your applications and your Aurora PostgreSQL DB clusters\. You can also force all connections to your Aurora PostgreSQL DB cluster to use SSL\. 
 
-For general information about SSL support and PostgreSQL databases, see [SSL Support](https://www.postgresql.org/docs/11/libpq-ssl.html) in the PostgreSQL documentation\. For information about using an SSL connection over JDBC, see [Configuring the Client](https://jdbc.postgresql.org/documentation/head/ssl-client.html) in the PostgreSQL documentation\.
+For general information about SSL support and PostgreSQL databases, see [SSL support](https://www.postgresql.org/docs/11/libpq-ssl.html) in the PostgreSQL documentation\. For information about using an SSL connection over JDBC, see [Configuring the client](https://jdbc.postgresql.org/documentation/head/ssl-client.html) in the PostgreSQL documentation\.
 
 **Topics**
-+ [Requiring an SSL Connection to an Aurora PostgreSQL DB cluster](#AuroraPostgreSQL.Security.SSL.Requiring)
-+ [Determining the SSL Connection Status](#AuroraPostgreSQL.Security.SSL.Status)
++ [Requiring an SSL connection to an Aurora PostgreSQL DB cluster](#AuroraPostgreSQL.Security.SSL.Requiring)
++ [Determining the SSL connection status](#AuroraPostgreSQL.Security.SSL.Status)
 
 SSL support is available in all AWS Regions for Aurora PostgreSQL\. Amazon RDS creates an SSL certificate for your Aurora PostgreSQL DB cluster when the DB cluster is created\. If you enable SSL certificate verification, then the SSL certificate includes the DB cluster endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. 
 
@@ -67,7 +67,7 @@ SSL support is available in all AWS Regions for Aurora PostgreSQL\. Amazon RDS c
 
 1. Download the certificate\.
 
-   For information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Cluster](UsingWithRDS.SSL.md)\.
+   For information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\.
 
 1. Import the certificate into your operating system\.
 
@@ -86,11 +86,11 @@ $ psql -h testpg.cdhmuqifdpib.us-east-1.rds.amazonaws.com -p 5432 \
     "dbname=testpg user=testuser sslrootcert=rds-ca-2015-root.pem sslmode=verify-full"
 ```
 
-### Requiring an SSL Connection to an Aurora PostgreSQL DB cluster<a name="AuroraPostgreSQL.Security.SSL.Requiring"></a>
+### Requiring an SSL connection to an Aurora PostgreSQL DB cluster<a name="AuroraPostgreSQL.Security.SSL.Requiring"></a>
 
 You can require that connections to your Aurora PostgreSQL DB cluster use SSL by using the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to 0 \(off\)\. You can set the `rds.force_ssl` parameter to 1 \(on\) to require SSL for connections to your DB cluster\. Updating the `rds.force_ssl` parameter also sets the PostgreSQL `ssl` parameter to 1 \(on\) and modifies your DB cluster's `pg_hba.conf` file to support the new SSL configuration\.
 
-You can set the `rds.force_ssl` parameter value by updating the DB cluster parameter group for your DB cluster\. If the DB cluster parameter group isn't the default one, and the `ssl` parameter is already set to 1 when you set `rds.force_ssl` to 1, you don't need to reboot your DB cluster\. Otherwise, you must reboot your DB cluster for the change to take effect\. For more information on parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
+You can set the `rds.force_ssl` parameter value by updating the DB cluster parameter group for your DB cluster\. If the DB cluster parameter group isn't the default one, and the `ssl` parameter is already set to 1 when you set `rds.force_ssl` to 1, you don't need to reboot your DB cluster\. Otherwise, you must reboot your DB cluster for the change to take effect\. For more information on parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
 
 When the `rds.force_ssl` parameter is set to 1 for a DB cluster, you see output similar to the following when you connect, indicating that SSL is now required:
 
@@ -105,7 +105,7 @@ Type "help" for help.
 postgres=>
 ```
 
-### Determining the SSL Connection Status<a name="AuroraPostgreSQL.Security.SSL.Status"></a>
+### Determining the SSL connection status<a name="AuroraPostgreSQL.Security.SSL.Status"></a>
 
 The encrypted status of your connection is shown in the logon banner when you connect to the DB cluster\.
 
@@ -150,4 +150,4 @@ psql: FATAL: no pg_hba.conf entry for host "host.ip", user "someuser", database 
 $
 ```
 
-For information about the `sslmode` option, see [Database Connection Control Functions](https://www.postgresql.org/docs/11/libpq-connect.html#LIBPQ-CONNECT-SSLMODE) in the PostgreSQL documentation\.
+For information about the `sslmode` option, see [Database connection control functions](https://www.postgresql.org/docs/11/libpq-connect.html#LIBPQ-CONNECT-SSLMODE) in the PostgreSQL documentation\.

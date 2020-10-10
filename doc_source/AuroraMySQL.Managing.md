@@ -3,8 +3,8 @@
 The following sections discuss managing an Amazon Aurora MySQL DB cluster\.
 
 **Topics**
-+ [Managing Performance and Scaling for Amazon Aurora MySQL](AuroraMySQL.Managing.Performance.md)
-+ [Backtracking an Aurora DB Cluster](AuroraMySQL.Managing.Backtrack.md)
-+ [Testing Amazon Aurora Using Fault Injection Queries](AuroraMySQL.Managing.FaultInjectionQueries.md)
-+ [Altering Tables in Amazon Aurora Using Fast DDL](AuroraMySQL.Managing.FastDDL.md)
-+ [Displaying Volume Status for an Aurora DB Cluster](AuroraMySQL.Managing.VolumeStatus.md)
++ [Managing performance and scaling for Amazon Aurora MySQL](AuroraMySQL.Managing.Performance.md)
++ [Backtracking an Aurora DB cluster](AuroraMySQL.Managing.Backtrack.md)
++ [Testing Amazon Aurora using fault injection queries](AuroraMySQL.Managing.FaultInjectionQueries.md)
++ [Altering tables in Amazon Aurora using fast DDL](AuroraMySQL.Managing.FastDDL.md)
++ [Displaying volume status for an Aurora DB cluster](AuroraMySQL.Managing.VolumeStatus.md)

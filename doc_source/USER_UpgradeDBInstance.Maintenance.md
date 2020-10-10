@@ -1,4 +1,4 @@
-# Maintaining an Amazon Aurora DB Cluster<a name="USER_UpgradeDBInstance.Maintenance"></a>
+# Maintaining an Amazon Aurora DB cluster<a name="USER_UpgradeDBInstance.Maintenance"></a>
 
 Periodically, Amazon RDS performs maintenance on Amazon RDS resources\. Maintenance most often involves updates to the DB cluster's underlying hardware, underlying operating system \(OS\), or database engine version\. Updates to the operating system most often occur for security issues and should be done as soon as possible\. 
 
@@ -29,11 +29,11 @@ To take an action, choose the DB cluster to show its details, then choose **Main
 
 ![\[Pending maintenance items\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/offlinepatchavailabledetails.png)
 
-The maintenance window determines when pending operations start, but doesn't limit the total run time of these operations\. Maintenance operations aren't guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS Maintenance Window](#Concepts.DBMaintenance)\. 
+The maintenance window determines when pending operations start, but doesn't limit the total run time of these operations\. Maintenance operations aren't guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS maintenance window](#Concepts.DBMaintenance)\. 
 
-For information about updates to Amazon Aurora engines and instructions for upgrading and patching them, see [Database Engine Updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md) and [Database Engine Updates for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.md)\.
+For information about updates to Amazon Aurora engines and instructions for upgrading and patching them, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md) and [Database engine updates for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.md)\.
 
-## Applying Updates for a DB Cluster<a name="USER_UpgradeDBInstance.OSUpgrades"></a>
+## Applying updates for a DB cluster<a name="USER_UpgradeDBInstance.OSUpgrades"></a>
 
 With Amazon RDS, you can choose when to apply maintenance operations\. You can decide when Amazon RDS applies updates by using the RDS console, AWS Command Line Interface \(AWS CLI\), or RDS API\. 
 
@@ -124,7 +124,7 @@ To apply an update to a DB cluster, call the Amazon RDS API [https://docs.aws.am
 
 To return a list of resources that have at least one pending update, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html) operation\.
 
-## The Amazon RDS Maintenance Window<a name="Concepts.DBMaintenance"></a>
+## The Amazon RDS maintenance window<a name="Concepts.DBMaintenance"></a>
 
 Every DB cluster has a weekly maintenance window during which any system changes are applied\. You can think of the maintenance window as an opportunity to control when modifications and software patching occur, in the event either are requested or required\. If a maintenance event is scheduled for a given week, it is initiated during the 30\-minute maintenance window you identify\. Most maintenance events also complete during the 30\-minute maintenance window, although larger maintenance events may take more than 30 minutes to complete\. 
 
@@ -138,7 +138,7 @@ Following, you can find the time blocks for each region from which default maint
 ****  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html)
 
-## Adjusting the Preferred DB Cluster Maintenance Window<a name="AdjustingTheMaintenanceWindow.Aurora"></a>
+## Adjusting the preferred DB cluster maintenance window<a name="AdjustingTheMaintenanceWindow.Aurora"></a>
 
 The Aurora DB cluster maintenance window should fall at the time of lowest usage and thus might need modification from time to time\. Your DB cluster is unavailable during this time only if the updates that are being applied require an outage\. The outage is for the minimum amount of time required to make the necessary updates\. 
 
@@ -213,9 +213,9 @@ The following code example sets the maintenance window to Tuesdays from 4:00–4
 12. &X-Amz-Signature=d6d1c65c2e94f5800ab411a3f7336625820b103713b6c063430900514e21d784
 ```
 
-## Choosing the Frequency of Aurora MySQL Maintenance Updates<a name="Aurora.Maintenance.LTS"></a>
+## Choosing the frequency of Aurora MySQL maintenance updates<a name="Aurora.Maintenance.LTS"></a>
 
- You can control whether Aurora MySQL upgrades happen frequently or rarely for each DB cluster\. The best choice depends on your usage of Aurora MySQL and the priorities for your applications that run on Aurora, For information about the Aurora MySQL long\-term stability \(LTS\) releases that require less frequent upgrades, see [Aurora MySQL Long\-Term Support \(LTS\) Releases](AuroraMySQL.Updates.md#AuroraMySQL.Updates.LTS)\. 
+ You can control whether Aurora MySQL upgrades happen frequently or rarely for each DB cluster\. The best choice depends on your usage of Aurora MySQL and the priorities for your applications that run on Aurora, For information about the Aurora MySQL long\-term stability \(LTS\) releases that require less frequent upgrades, see [Aurora MySQL long\-term support \(LTS\) releases](AuroraMySQL.Updates.md#AuroraMySQL.Updates.LTS)\. 
 
  You might choose to upgrade an Aurora MySQL cluster rarely if some or all of the following conditions apply: 
 +  Your testing cycle for your application takes a long time for each update to the Aurora MySQL database engine\. 

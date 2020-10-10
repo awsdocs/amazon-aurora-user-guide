@@ -1,16 +1,16 @@
-# Amazon Aurora MySQL Reference<a name="AuroraMySQL.Reference"></a>
+# Amazon Aurora MySQL reference<a name="AuroraMySQL.Reference"></a>
 
 This reference includes information about Aurora MySQL parameters, status variables, and general SQL extensions or differences from the community MySQL database engine\.
 
 **Topics**
-+ [Aurora MySQL Parameters](#AuroraMySQL.Reference.ParameterGroups)
-+ [Inapplicable MySQL Parameters and Status Variables](#AuroraMySQL.Reference.Parameters.Inapplicable)
-+ [Aurora MySQL Events](#AuroraMySQL.Reference.Waitevents)
-+ [Aurora MySQL Isolation Levels](#AuroraMySQL.Reference.IsolationLevels)
-+ [Aurora MySQL Hints](#AuroraMySQL.Reference.Hints)
-+ [Aurora MySQL Stored Procedures](#AuroraMySQL.Reference.StoredProcs)
++ [Aurora MySQL parameters](#AuroraMySQL.Reference.ParameterGroups)
++ [Inapplicable MySQL parameters and status variables](#AuroraMySQL.Reference.Parameters.Inapplicable)
++ [Aurora MySQL events](#AuroraMySQL.Reference.Waitevents)
++ [Aurora MySQL isolation levels](#AuroraMySQL.Reference.IsolationLevels)
++ [Aurora MySQL hints](#AuroraMySQL.Reference.Hints)
++ [Aurora MySQL stored procedures](#AuroraMySQL.Reference.StoredProcs)
 
-## Aurora MySQL Parameters<a name="AuroraMySQL.Reference.ParameterGroups"></a>
+## Aurora MySQL parameters<a name="AuroraMySQL.Reference.ParameterGroups"></a>
 
 You manage your Amazon Aurora MySQL DB cluster in the same way that you manage other Amazon RDS DB instances, by using parameters in a DB parameter group\. Amazon Aurora differs from other DB engines in that you have a DB cluster that contains multiple DB instances\. As a result, some of the parameters that you use to manage your Aurora MySQL DB cluster apply to the entire cluster\. Other parameters apply only to a particular DB instance in the DB cluster\.
 
@@ -20,33 +20,33 @@ You can manage both cluster\-level and instance\-level parameters using the AWS 
 
 You can view both cluster\-level and instance\-level parameters in the console, or by using the CLI or RDS API\. For example, you can use the [describe\-db\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) AWS CLI command to view cluster\-level parameters in a DB cluster parameter group\. You can use the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) CLI command to view instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
 
-For more information on DB parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\. For rules and restrictions for Aurora Serverless clusters, see [Aurora Serverless and Parameter Groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.
+For more information on DB parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. For rules and restrictions for Aurora Serverless clusters, see [Aurora Serverless and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.
 
 **Topics**
-+ [Cluster\-Level Parameters](#AuroraMySQL.Reference.Parameters.Cluster)
-+ [Instance\-Level Parameters](#AuroraMySQL.Reference.Parameters.Instance)
++ [Cluster\-level parameters](#AuroraMySQL.Reference.Parameters.Cluster)
++ [Instance\-level parameters](#AuroraMySQL.Reference.Parameters.Instance)
 
-### Cluster\-Level Parameters<a name="AuroraMySQL.Reference.Parameters.Cluster"></a>
+### Cluster\-level parameters<a name="AuroraMySQL.Reference.Parameters.Cluster"></a>
 
 The following table shows all of the parameters that apply to the entire Aurora MySQL DB cluster\. 
 
 
 | Parameter name | Modifiable | Notes | 
 | --- | --- | --- | 
-|  `aurora_binlog_read_buffer_size`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster \(Binlog Replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
-|  `aurora_binlog_replication_max_yield_seconds`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster \(Binlog Replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
-|  `aurora_binlog_use_large_read_buffer`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster \(Binlog Replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
+|  `aurora_binlog_read_buffer_size`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
+|  `aurora_binlog_replication_max_yield_seconds`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
+|  `aurora_binlog_use_large_read_buffer`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
 |  `aurora_enable_replica_log_compression`  |  Yes  |   Doesn't apply to clusters that are part of an Aurora global database\.   | 
 |  `aurora_enable_repl_bin_log_filtering`  |  Yes  |   Doesn't apply to clusters that are part of an Aurora global database\.   | 
-|  `aurora_enable_zdr`  |  Yes  |   For more information, see [High Availability Considerations for Amazon Aurora MySQL Replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Availability)\.   | 
-|  `aurora_load_from_s3_role`  |  Yes  |   For more information, see [Loading Data into an Amazon Aurora MySQL DB Cluster from Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.   | 
-|  `aurora_select_into_s3_role`  |  Yes  |   For more information, see [Saving Data from an Amazon Aurora MySQL DB Cluster into Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\.   | 
+|  `aurora_enable_zdr`  |  Yes  |   For more information, see [High availability considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Availability)\.   | 
+|  `aurora_load_from_s3_role`  |  Yes  |   For more information, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.   | 
+|  `aurora_select_into_s3_role`  |  Yes  |   For more information, see [Saving data from an Amazon Aurora MySQL DB cluster into text files in an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\.   | 
 |  `auto_increment_increment`  |  Yes  |  | 
 |  `auto_increment_offset`  |  Yes  |  | 
-|  `aws_default_lambda_role`  |  Yes  |   For more information, see [Invoking a Lambda Function from an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Lambda.md)\.   | 
+|  `aws_default_lambda_role`  |  Yes  |   For more information, see [Invoking a Lambda function from an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Lambda.md)\.   | 
 |  `aws_default_s3_role`  |  Yes  |  | 
 |  `binlog_checksum`  |  Yes  |  | 
-|  `binlog_format`  |  Yes  | For more information, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster \(Binlog Replication\)](AuroraMySQL.Replication.MySQL.md)\. | 
+|  `binlog_format`  |  Yes  | For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)](AuroraMySQL.Replication.MySQL.md)\. | 
 |  `binlog_row_image`  |  No  |  | 
 |  `binlog_rows_query_log_events`  |  Yes  |  | 
 |  `character-set-client-handshake`  |  Yes  |  | 
@@ -91,19 +91,19 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `lower_case_table_names`  |  Yes  |  | 
 |  `master-info-repository`  |  Yes  |  | 
 |  `master_verify_checksum`  |  Yes  |  | 
-|  `require_secure_transport`  |  Yes  | For more information, see [Using SSL/TLS with Aurora MySQL DB Clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\. | 
+|  `require_secure_transport`  |  Yes  | For more information, see [Using SSL/TLS with Aurora MySQL DB clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\. | 
 |  `server_audit_events`  |  Yes  |  | 
 |  `server_audit_excl_users`  |  Yes  |  | 
 |  `server_audit_incl_users`  |  Yes  |  | 
-|  `server_audit_logging`  |  Yes  | For instructions on uploading the logs to Amazon CloudWatch Logs, see [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. | 
+|  `server_audit_logging`  |  Yes  | For instructions on uploading the logs to Amazon CloudWatch Logs, see [Publishing Amazon Aurora MySQL logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. | 
 |  `server_id`  |  No  |  | 
 |  `skip-character-set-client-handshake`  |  Yes  |  | 
 |  `skip_name_resolve`  |  No  |  | 
 |  `sync_frm`  |  Yes  |  | 
 |  `time_zone`  |  Yes  |  | 
-|  `tls_version`  |  Yes  | For more information, see [TLS Versions for Aurora MySQL](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL.TLS_Version)\. | 
+|  `tls_version`  |  Yes  | For more information, see [TLS versions for Aurora MySQL](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL.TLS_Version)\. | 
 
-### Instance\-Level Parameters<a name="AuroraMySQL.Reference.Parameters.Instance"></a>
+### Instance\-level parameters<a name="AuroraMySQL.Reference.Parameters.Instance"></a>
 
 The following table shows all of the parameters that apply to a specific DB instance in an Aurora MySQL DB cluster\. 
 
@@ -111,10 +111,10 @@ The following table shows all of the parameters that apply to a specific DB inst
 | Parameter name | Modifiable | Notes | 
 | --- | --- | --- | 
 | `allow-suspicious-udfs` | No |  | 
-| `aurora_lab_mode` | Yes |   For more information, see [Amazon Aurora MySQL Lab Mode](AuroraMySQL.Updates.LabMode.md)\.   | 
-|  `aurora_oom_response`  |  Yes  |   For more information, see [ Amazon Aurora MySQL Out of Memory Issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.   | 
-|  `aurora_parallel_query`  |  Yes  |   Set to `ON` to enable parallel query in Aurora MySQL versions 1\.23 and 2\.09 or higher\. The old `aurora_pq` parameter isn't used in these versions\. For more information, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.   | 
-|  `aurora_pq`  |  Yes  |   Set to `OFF` to turn off parallel query for specific DB instances in Aurora MySQL versions before 1\.23 and 2\.09\. In 1\.23 and 2\.09 or higher, turn parallel query on and off with `aurora_parallel_query` instead\. For more information, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.   | 
+| `aurora_lab_mode` | Yes |   For more information, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\.   | 
+|  `aurora_oom_response`  |  Yes  |   For more information, see [ Amazon Aurora MySQL out of memory issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.   | 
+|  `aurora_parallel_query`  |  Yes  |   Set to `ON` to enable parallel query in Aurora MySQL versions 1\.23 and 2\.09 or higher\. The old `aurora_pq` parameter isn't used in these versions\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.   | 
+|  `aurora_pq`  |  Yes  |   Set to `OFF` to turn off parallel query for specific DB instances in Aurora MySQL versions before 1\.23 and 2\.09\. In 1\.23 and 2\.09 or higher, turn parallel query on and off with `aurora_parallel_query` instead\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.   | 
 | `autocommit` | Yes |  | 
 | `automatic_sp_privileges` | Yes |  | 
 | `back_log` | Yes |  | 
@@ -148,7 +148,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `ft_min_word_len` | Yes |  | 
 | `ft_query_expansion_limit` | Yes |  | 
 | `ft_stopword_file` | Yes |  | 
-| `general_log` | Yes | For instructions on uploading the logs to CloudWatch Logs, see [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. | 
+| `general_log` | Yes | For instructions on uploading the logs to CloudWatch Logs, see [Publishing Amazon Aurora MySQL logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. | 
 | `general_log_file` | No | Aurora MySQL uses managed instances where you don't access the filesystem directly\. | 
 | `group_concat_max_len` | Yes |  | 
 | `gtid-mode` | Sometimes | Modifiable in Aurora MySQL version 2\.04 and later\. | 
@@ -215,7 +215,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `key_cache_division_limit` | Yes |  | 
 | `local_infile` | Yes |  | 
 | `lock_wait_timeout` | Yes |  | 
-| `log-bin` | No | Setting `binlog_format` to `STATEMENT`, `MIXED`, or `ROW` automatically sets `log-bin` to `ON`\. Setting `binlog_format` to `OFF` automatically sets `log-bin` to `OFF`\. For more information, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster \(Binlog Replication\)](AuroraMySQL.Replication.MySQL.md)\. | 
+| `log-bin` | No | Setting `binlog_format` to `STATEMENT`, `MIXED`, or `ROW` automatically sets `log-bin` to `ON`\. Setting `binlog_format` to `OFF` automatically sets `log-bin` to `OFF`\. For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)](AuroraMySQL.Replication.MySQL.md)\. | 
 | `log_bin_trust_function_creators` | Yes |  | 
 | `log_bin_use_v1_row_events` | Yes |  | 
 | `log_error` | No |  | 
@@ -231,7 +231,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `max_binlog_size` | No |  | 
 | `max_binlog_stmt_cache_size` | Yes |  | 
 | `max_connect_errors` | Yes |  | 
-| `max_connections` | Yes |   For more information, see [Maximum Connections to an Aurora MySQL DB Instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections)\.   | 
+| `max_connections` | Yes |   For more information, see [Maximum connections to an Aurora MySQL DB instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections)\.   | 
 | `max_delayed_threads` | Yes |  | 
 | `max_error_count` | Yes |  | 
 | `max_heap_table_size` | Yes |  | 
@@ -261,7 +261,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `old_passwords` | Yes |  | 
 | `optimizer_prune_level` | Yes |  | 
 | `optimizer_search_depth` | Yes |  | 
-| `optimizer_switch` | Yes | For information about Aurora MySQL features that use this switch, see [Best Practices with Amazon Aurora MySQL](AuroraMySQL.BestPractices.md)\. | 
+| `optimizer_switch` | Yes | For information about Aurora MySQL features that use this switch, see [Best practices with Amazon Aurora MySQL](AuroraMySQL.BestPractices.md)\. | 
 | `optimizer_trace` | Yes |  | 
 | `optimizer_trace_features` | Yes |  | 
 | `optimizer_trace_limit` | Yes |  | 
@@ -353,7 +353,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `slave_pending_jobs_size_max` | Yes |  | 
 | `slave_sql_verify_checksum` | Yes |  | 
 | `slow_launch_time` | Yes |  | 
-| `slow_query_log` | Yes | For instructions on uploading the logs to CloudWatch Logs, see [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. | 
+| `slow_query_log` | Yes | For instructions on uploading the logs to CloudWatch Logs, see [Publishing Amazon Aurora MySQL logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. | 
 | `slow_query_log_file` | No | Aurora MySQL uses managed instances where you don't access the filesystem directly\. | 
 | `socket` | No |  | 
 | `sort_buffer_size` | Yes |  | 
@@ -388,7 +388,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `validate_password_special_char_count` | No |  | 
 | `wait_timeout` | Yes |  | 
 
-## Inapplicable MySQL Parameters and Status Variables<a name="AuroraMySQL.Reference.Parameters.Inapplicable"></a>
+## Inapplicable MySQL parameters and status variables<a name="AuroraMySQL.Reference.Parameters.Inapplicable"></a>
 
 Because of architectural differences between Aurora MySQL and MySQL, some MySQL parameters and status variables don't apply to Aurora MySQL\.
 
@@ -418,12 +418,12 @@ The following MySQL status variables don't apply to Aurora MySQL:
 **Note**  
 These lists are not exhaustive\.
 
-## Aurora MySQL Events<a name="AuroraMySQL.Reference.Waitevents"></a>
+## Aurora MySQL events<a name="AuroraMySQL.Reference.Waitevents"></a>
 
 The following are some common wait events for Aurora MySQL\.
 
 **Note**  
-For information about the naming conventions used in MySQL wait events, see [ Performance Schema Instrument Naming Conventions](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-instrument-naming.html) in the MySQL documentation\.
+For information about the naming conventions used in MySQL wait events, see [ Performance Schema instrument naming conventions](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-instrument-naming.html) in the MySQL documentation\.
 
 **io/aurora\_redo\_log\_flush**  
 In this wait event, a session is writing data to Aurora storage\. Typically, this wait event is for a write I/O operation in Aurora MySQL\.
@@ -435,7 +435,7 @@ In this wait event, a thread is in the process of returning the result set to th
 In this wait event, there are threads writing to tables in comma\-separated value \(CSV\) format\. Check your CSV table usage\. A typical cause of this event is setting `log_output` on a table\.
 
 **io/file/innodb/innodb\_data\_file**  
-In this wait event, there are threads waiting on I/O operations to storage\. This event is more prevalent in I/O intensive workloads\. SQL statements showing a comparatively large proportion of this wait event might be running disk intensive queries\. Or they might be requesting data that can't be satisfied from the InnoDB buffer pool\. To find out, check your query plans and cache hit ratios\. For more information, see [ Buffering and Caching](https://dev.mysql.com/doc/refman/5.6/en/buffering-caching.html) in the MySQL documentation\.
+In this wait event, there are threads waiting on I/O operations to storage\. This event is more prevalent in I/O intensive workloads\. SQL statements showing a comparatively large proportion of this wait event might be running disk intensive queries\. Or they might be requesting data that can't be satisfied from the InnoDB buffer pool\. To find out, check your query plans and cache hit ratios\. For more information, see [ Buffering and caching](https://dev.mysql.com/doc/refman/5.6/en/buffering-caching.html) in the MySQL documentation\.
 
 **io/file/sql/binlog**  
 In this wait event, there is a thread waiting on a binlog file that is being written to disk\.
@@ -444,22 +444,22 @@ In this wait event, there is a thread waiting on a binlog file that is being wri
 In this wait event, a thread is in the process of handling a new connection\.
 
 **io/table/sql/handler**  
-This is a table I/O wait event\. Typically, these types of events can be followed by a nested event such as a file I/O event\. For more information about 'atom' and 'molecule' events in the Performance Schema, see [ Performance Schema Atom and Molecule Events](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\.
+This is a table I/O wait event\. Typically, these types of events can be followed by a nested event such as a file I/O event\. For more information about 'atom' and 'molecule' events in the Performance Schema, see [ Performance Schema atom and molecule events](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\.
 
 **lock/table/sql/handler**  
-This wait event is a table lock wait event handler\. For more information about 'atom' and 'molecule' events in the Performance Schema, see [ Performance Schema Atom and Molecule Events](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\.
+This wait event is a table lock wait event handler\. For more information about 'atom' and 'molecule' events in the Performance Schema, see [ Performance Schema atom and molecule events](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\.
 
 **synch/cond/mysys/my\_thread\_var::suspend**  
-In this wait event, threads are suspended when they are waiting on a condition\. For example, this event occurs when threads are waiting for table level lock\. We recommend that you investigate your workload to see what threads might be acquiring table locks on your DB instance\. For more information about table locking in MySQL, see [Table Locking Issues](https://dev.mysql.com/doc/refman/5.6/en/table-locking.html) in the MySQL documentation\.
+In this wait event, threads are suspended when they are waiting on a condition\. For example, this event occurs when threads are waiting for table level lock\. We recommend that you investigate your workload to see what threads might be acquiring table locks on your DB instance\. For more information about table locking in MySQL, see [Table locking issues](https://dev.mysql.com/doc/refman/5.6/en/table-locking.html) in the MySQL documentation\.
 
 **synch/cond/sql/MDL\_context::COND\_wait\_status**  
-In this wait event, there are threads waiting on a table metadata lock\. For more information, see [Optimizing Locking Operations](https://dev.mysql.com/doc/refman/5.6/en/locking-issues.html) in the MySQL documentation\.
+In this wait event, there are threads waiting on a table metadata lock\. For more information, see [Optimizing locking operations](https://dev.mysql.com/doc/refman/5.6/en/locking-issues.html) in the MySQL documentation\.
 
 **synch/cond/sql/MYSQL\_BIN\_LOG::COND\_done**  
 In this wait event, there is a thread waiting on a binlog file that is being written to disk\. Binary logging contention can occur on databases with a very high change rate\.
 
 **synch/mutex/innodb/aurora\_lock\_thread\_slot\_futex**  
-In this wait event, there is a thread that is waiting on an InnoDB record lock\. If you see this event, check your database for conflicting workloads\. For more information, see [InnoDB Locking](https://dev.mysql.com/doc/refman/5.6/en/innodb-locking.html) in the MySQL documentation\.
+In this wait event, there is a thread that is waiting on an InnoDB record lock\. If you see this event, check your database for conflicting workloads\. For more information, see [InnoDB locking](https://dev.mysql.com/doc/refman/5.6/en/innodb-locking.html) in the MySQL documentation\.
 
 **synch/mutex/innodb/buf\_pool\_mutex**  
 In this wait event, a thread has acquired a lock on the InnoDB buffer pool\.
@@ -468,13 +468,13 @@ In this wait event, a thread has acquired a lock on the InnoDB buffer pool\.
 In this wait event, LOCK\_open is being used to protect various objects in the data dictionary\. This wait event indicates that there are threads waiting to acquire these locks\. Typically, this event is caused by data dictionary contention\.
 
 **synch/mutex/sql/LOCK\_table\_cache**  
-In this wait event, there are threads waiting to acquire a lock on a table cache instance\. For more information, see [How MySQL Opens and Closes Tables](https://dev.mysql.com/doc/refman/5.6/en/table-cache.html) in the MySQL documentation\.
+In this wait event, there are threads waiting to acquire a lock on a table cache instance\. For more information, see [How MySQL opens and closes tables](https://dev.mysql.com/doc/refman/5.6/en/table-cache.html) in the MySQL documentation\.
 
 **synch/mutex/sql/LOG**  
 In this wait event, there are threads waiting on a log lock\. For example, a thread might wait for a lock to write to the slow query log file\.
 
 **synch/mutex/sql/MYSQL\_BIN\_LOG::LOCK\_commit**  
-In this wait event, there is a thread that is waiting to acquire a lock with the intention of committing to the binary log\. Binary logging contention can occur on databases with a very high change rate\. Depending on your version of MySQL, there are certain locks being used to protect the consistency and durability of the binary log\. In RDS MySQL, binary logs are used for replication and the automated backup process\. In Aurora MySQL, binary logs are not needed for native replication or backups\. They are disabled by default but can be enabled and used for external replication or change data capture\. For more information, see [The Binary Log](https://dev.mysql.com/doc/refman/5.6/en/binary-log.html) in the MySQL documentation\.
+In this wait event, there is a thread that is waiting to acquire a lock with the intention of committing to the binary log\. Binary logging contention can occur on databases with a very high change rate\. Depending on your version of MySQL, there are certain locks being used to protect the consistency and durability of the binary log\. In RDS MySQL, binary logs are used for replication and the automated backup process\. In Aurora MySQL, binary logs are not needed for native replication or backups\. They are disabled by default but can be enabled and used for external replication or change data capture\. For more information, see [The binary log](https://dev.mysql.com/doc/refman/5.6/en/binary-log.html) in the MySQL documentation\.
 
 **synch/mutex/sql/MYSQL\_BIN\_LOG::LOCK\_log**  
 In this wait event, threads are actively locking the binary log file\. Binary logging contention can occur on databases with a very high change rate\. Depending on your version of MySQL, there are certain locks being used to protect the consistency and durability of the binary log\.
@@ -488,19 +488,19 @@ In this event, there are threads that are waiting on an rwlock held on the InnoD
 **synch/rwlock/innodb/dict\_operation\_lock**  
 In this wait event, there are threads holding locks on InnoDB data dictionary operations\.
 
-## Aurora MySQL Isolation Levels<a name="AuroraMySQL.Reference.IsolationLevels"></a>
+## Aurora MySQL isolation levels<a name="AuroraMySQL.Reference.IsolationLevels"></a>
 
  Following, you can learn how DB instances in an Aurora MySQL cluster implement the database property of isolation\. Doing so helps you understand how the Aurora MySQL default behavior balances between strict consistency and high performance\. You can also decide when to change the default settings based on the characteristics of your workload\. 
 
-### Available Isolation Levels for Writer Instances<a name="AuroraMySQL.Reference.IsolationLevels.writer"></a>
+### Available isolation levels for writer instances<a name="AuroraMySQL.Reference.IsolationLevels.writer"></a>
 
  You can use the isolation levels `REPEATABLE READ`, `READ COMMITTED`, `READ UNCOMMITTED`, and `SERIALIZABLE` on the primary instance of an Aurora MySQL single\-master cluster, or any DB instance in an Aurora MySQL multi\-master cluster\. These isolation levels work the same in Aurora MySQL as in RDS MySQL\. 
 
-### REPEATABLE READ Isolation Level for Reader Instances<a name="AuroraMySQL.Reference.IsolationLevels.reader"></a>
+### REPEATABLE READ isolation level for reader instances<a name="AuroraMySQL.Reference.IsolationLevels.reader"></a>
 
  By default, Aurora MySQL DB instances configured as read\-only Aurora Replicas always use the `REPEATABLE READ` isolation level\. These DB instances ignore any `SET TRANSACTION ISOLATION LEVEL` statements and continue using the `REPEATABLE READ` isolation level\. 
 
-### READ COMMITTED Isolation Level for Reader Instances<a name="AuroraMySQL.Reference.IsolationLevels.relaxed"></a>
+### READ COMMITTED isolation level for reader instances<a name="AuroraMySQL.Reference.IsolationLevels.relaxed"></a>
 
  If your application includes a write\-intensive workload on the primary instance and long\-running queries on the Aurora Replicas, you might experience substantial purge lag\. *Purge lag* happens when internal garbage collection is blocked by long\-running queries\. The symptom that you see is a high value for `history list length` in output from the `SHOW ENGINE INNODB STATUS` command\. You can monitor this value using the `RollbackSegmentHistoryListLength` metric in CloudWatch\. This condition can reduce the effectiveness of secondary indexes and lead to reduced overall query performance and wasted storage space\. 
 
@@ -508,9 +508,9 @@ In this wait event, there are threads holding locks on InnoDB data dictionary op
 
  We recommend making sure that you understand the specific Aurora MySQL behavior of the `READ COMMITTED` isolation before using this setting\. The Aurora Replica `READ COMMITTED` behavior complies with the ANSI SQL standard\. However, the isolation is less strict than typical MySQL `READ COMMITTED` behavior that you might be familiar with\. Thus, you might see different query results under `READ COMMITTED` on an Aurora MySQL read replica than for the same query under `READ COMMITTED` on the Aurora MySQL primary instance or on Amazon RDS MySQL\. You might use the `aurora_read_replica_read_committed` setting for such use cases as a comprehensive report that scans a very large database\. You might avoid it for short queries with small result sets, where precision and repeatability are important\. 
 
- The `READ COMMITTED` isolation level isn't available for sessions within a secondary cluster in an Aurora global database that use the write forwarding feature\. For information about write forwarding, see [Write Forwarding for Secondary AWS Regions with an Aurora Global Database](aurora-global-database-write-forwarding.md)\. 
+ The `READ COMMITTED` isolation level isn't available for sessions within a secondary cluster in an Aurora global database that use the write forwarding feature\. For information about write forwarding, see [Write forwarding for secondary AWS Regions with an Aurora global database](aurora-global-database-write-forwarding.md)\. 
 
-#### Enabling READ COMMITTED for Readers<a name="AuroraMySQL.Reference.IsolationLevels.relaxed.enabling"></a>
+#### Enabling READ COMMITTED for readers<a name="AuroraMySQL.Reference.IsolationLevels.relaxed.enabling"></a>
 
  To enable the `READ COMMITTED` isolation level for Aurora Replicas, enable the `aurora_read_replica_read_committed` configuration setting\. Enable this setting at the session level while connected a specific Aurora Replica\. To do so, run the following SQL commands\. 
 
@@ -527,7 +527,7 @@ set session transaction isolation level read committed;
 set transaction isolation level read committed;
 ```
 
-#### Differences in READ COMMITTED Behavior on Aurora Replicas<a name="AuroraMySQL.Reference.IsolationLevels.relaxed.behavior"></a>
+#### Differences in READ COMMITTED behavior on Aurora replicas<a name="AuroraMySQL.Reference.IsolationLevels.relaxed.behavior"></a>
 
  The `aurora_read_replica_read_committed` setting makes the `READ COMMITTED` isolation level available for an Aurora Replica, with consistency behavior that is optimized for long\-running transactions\. The `READ COMMITTED` isolation level on Aurora Replicas has less strict isolation than on Aurora primary instances or multi\-master instances\. For that reason, enable this setting only on Aurora Replicas where you know that your queries can accept the possibility of certain types of inconsistent results\. 
 
@@ -539,13 +539,13 @@ set transaction isolation level read committed;
 
  Row counts and other results might not be strongly consistent under the `READ COMMITTED` isolation level while this setting is enabled\. Thus, you typically enable the setting only while running analytic queries that aggregate large amounts of data and don't require absolute precision\. If you don't have these kinds of long\-running queries alongside a write\-intensive workload, you probably don't need the `aurora_read_replica_read_committed` setting\. Without the combination of long\-running queries and a write\-intensive workload, you're unlikely to encounter issues with the length of the history list\. 
 
-**Example Queries Showing Isolation Behavior for READ COMMITTED on Aurora Replicas**  
+**Example Queries showing isolation behavior for READ COMMITTED on Aurora replicas**  
  The following example shows how `READ COMMITTED` queries on an Aurora Replica might return non\-repeatable results if transactions modify the associated tables at the same time\. The table `BIG_TABLE` contains 1 million rows before any queries start\. Other data manipulation language \(DML\) statements add, remove, or change rows while the are running\.   
  The queries on the Aurora primary instance under the `READ COMMITTED` isolation level produce predictable results\. However, the overhead of keeping the consistent read view for the lifetime of every long\-running query can lead to expensive garbage collection later\.   
  The queries on the Aurora Replica under the `READ COMMITTED` isolation level are optimized to minimize this garbage collection overhead\. The tradeoff is that the results might vary depending on whether the queries retrieve rows that are added, removed, or reorganized by transactions that commit while the query is running\. The queries are allowed to consider these rows but aren't required to\. For demonstration purposes, the queries check only the number of rows in the table by using the `COUNT(*)` function\.   
 
 
-|  Time  |  DML Statement on Aurora Primary Instance  |  Query on Aurora Primary Instance with READ COMMITTED  |  Query on Aurora Replica with READ COMMITTED  | 
+|  Time  |  DML statement on Aurora primary instance  |  Query on Aurora primary instance with READ COMMITTED  |  Query on Aurora replica with READ COMMITTED  | 
 | --- | --- | --- | --- | 
 |  T1  |  INSERT INTO big\_table SELECT \* FROM other\_table LIMIT 1000000; COMMIT;   |  |  | 
 |  T2  |  |  Q1: SELECT COUNT\(\*\) FROM big\_table;  |  Q2: SELECT COUNT\(\*\) FROM big\_table;  | 
@@ -567,7 +567,7 @@ set transaction isolation level read committed;
  The results of Q5 and Q6 might be identical or slightly different\. Query Q6 on the Aurora Replica under `READ COMMITTED` is able to see, but is not required to see, the new rows that are committed while the query is running\. It might also see the row from one table but not from the other table\. If the join query doesn't find a matching row in both tables, it returns a count of zero\. If the query does find both the new rows in `PARENT_TABLE` and `CHILD_TABLE`, the query returns a count of one\. In a long\-running query, the lookups from the joined tables might happen at widely separated times\.   
  These differences in behavior depend on the timing of when transactions are committed and when the queries process the underlying table rows\. Thus, you're most likely to see such differences in report queries that take minutes or hours and that run on Aurora clusters processing OLTP transactions at the same time\. These are the kinds of mixed workloads that benefit the most from the `READ COMMITTED` isolation level on Aurora Replicas\. 
 
-## Aurora MySQL Hints<a name="AuroraMySQL.Reference.Hints"></a>
+## Aurora MySQL hints<a name="AuroraMySQL.Reference.Hints"></a>
 
  You can use SQL hints with Aurora MySQL queries to fine\-tune performance\. You can also use hints to prevent execution plans for important queries to change based on unpredictable conditions\. 
 
@@ -648,11 +648,11 @@ EXPLAIN SELECT /*+ JOIN_ORDER (t1, t3) */ f1, f2
   FROM t1 JOIN t2 USING (id) JOIN t3 USING (id) JOIN t4 USING (id);
 ```
 
- For information about using hash join queries, see [Working with Hash Joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
+ For information about using hash join queries, see [Working with hash joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
 
-## Aurora MySQL Stored Procedures<a name="AuroraMySQL.Reference.StoredProcs"></a>
+## Aurora MySQL stored procedures<a name="AuroraMySQL.Reference.StoredProcs"></a>
 
-You can call the following stored procedures while connected to the primary instance in an Aurora MySQL cluster\. These procedures control how transactions are replicated from an external database into Aurora MySQL, or from Aurora MySQL to an external database\. To learn how to use replication based on global transaction identifiers \(GTIDs\) with Aurora MySQL, see [Using GTID\-Based Replication for Aurora MySQL](mysql-replication-gtid.md)\. 
+You can call the following stored procedures while connected to the primary instance in an Aurora MySQL cluster\. These procedures control how transactions are replicated from an external database into Aurora MySQL, or from Aurora MySQL to an external database\. To learn how to use replication based on global transaction identifiers \(GTIDs\) with Aurora MySQL, see [Using GTID\-based replication for Aurora MySQL](mysql-replication-gtid.md)\. 
 
 **Topics**
 + [mysql\.rds\_set\_master\_auto\_position](#mysql_rds_set_master_auto_position)
@@ -676,7 +676,7 @@ A value that indicates whether to use log file position replication or GTID\-bas
 + `0` – Use the replication method based on binary log file position\. The default is `0`\.
 + `1` – Use the GTID\-based replication method\.
 
-#### Usage Notes<a name="mysql_rds_set_master_auto_position-usage-notes"></a>
+#### Usage notes<a name="mysql_rds_set_master_auto_position-usage-notes"></a>
 
  For an Aurora MySQL DB cluster, you call this stored procedure while connected to the primary instance\. 
 
@@ -719,7 +719,7 @@ The password of the user ID specified in `replication_user_name`\.
  *ssl\_encryption*   
 This option is not currently implemented\.  The default is 0\.
 
-#### Usage Notes<a name="mysql_rds_set_external_master_with_auto_position-usage-notes"></a>
+#### Usage notes<a name="mysql_rds_set_external_master_with_auto_position-usage-notes"></a>
 
  For an Aurora MySQL DB cluster, you call this stored procedure while connected to the primary instance\. 
 
@@ -746,7 +746,7 @@ Before you run `mysql.rds_set_external_master_with_auto_position`, configure the
 
 When you call `mysql.rds_set_external_master_with_auto_position`, Amazon RDS records certain information\. This information is the time, the user, and an action of `"set master"` in the `mysql.rds_history` and `mysql.rds_replication_status` tables\.
 
-To skip a specific GTID\-based transaction that is known to cause a problem, you can use the [mysql\.rds\_skip\_transaction\_with\_gtid](#mysql_rds_skip_transaction_with_gtid) stored procedure\. For more information about working with GTID\-based replication, see [Using GTID\-Based Replication for Aurora MySQL](mysql-replication-gtid.md)\.
+To skip a specific GTID\-based transaction that is known to cause a problem, you can use the [mysql\.rds\_skip\_transaction\_with\_gtid](#mysql_rds_skip_transaction_with_gtid) stored procedure\. For more information about working with GTID\-based replication, see [Using GTID\-based replication for Aurora MySQL](mysql-replication-gtid.md)\.
 
 #### Examples<a name="mysql_rds_set_external_master_with_auto_position-examples"></a>
 
@@ -777,7 +777,7 @@ CALL mysql.rds_skip_transaction_with_gtid (gtid_to_skip);
  *gtid\_to\_skip*   
 The GTID of the replication transaction to skip\.
 
-#### Usage Notes<a name="mysql_rds_skip_transaction_with_gtid-usage-notes"></a>
+#### Usage notes<a name="mysql_rds_skip_transaction_with_gtid-usage-notes"></a>
 
  For an Aurora MySQL DB cluster, you call this stored procedure while connected to the primary instance\. 
 

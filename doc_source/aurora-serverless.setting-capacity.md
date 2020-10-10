@@ -1,4 +1,4 @@
-# Setting the Capacity of an Aurora Serverless DB Cluster<a name="aurora-serverless.setting-capacity"></a>
+# Setting the capacity of an Aurora Serverless DB cluster<a name="aurora-serverless.setting-capacity"></a>
 
 Set the capacity of an Aurora Serverless DB cluster to a specific value with the AWS Management Console, the AWS CLI, or the RDS API\.
 

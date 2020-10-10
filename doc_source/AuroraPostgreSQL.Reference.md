@@ -1,12 +1,12 @@
-# Amazon Aurora PostgreSQL Reference<a name="AuroraPostgreSQL.Reference"></a>
+# Amazon Aurora PostgreSQL reference<a name="AuroraPostgreSQL.Reference"></a>
 
 **Contents**
-+ [Amazon Aurora PostgreSQL Parameters](#AuroraPostgreSQL.Reference.ParameterGroups)
-  + [Aurora PostgreSQL Cluster\-level Parameters](#AuroraPostgreSQL.Reference.Parameters.Cluster)
-  + [Aurora PostgreSQL Instance\-level Parameters](#AuroraPostgreSQL.Reference.Parameters.Instance)
-+ [Amazon Aurora PostgreSQL Events](#AuroraPostgreSQL.Reference.Waitevents)
++ [Amazon Aurora PostgreSQL parameters](#AuroraPostgreSQL.Reference.ParameterGroups)
+  + [Aurora PostgreSQL cluster\-level parameters](#AuroraPostgreSQL.Reference.Parameters.Cluster)
+  + [Aurora PostgreSQL instance\-level parameters](#AuroraPostgreSQL.Reference.Parameters.Instance)
++ [Amazon Aurora PostgreSQL events](#AuroraPostgreSQL.Reference.Waitevents)
 
-## Amazon Aurora PostgreSQL Parameters<a name="AuroraPostgreSQL.Reference.ParameterGroups"></a>
+## Amazon Aurora PostgreSQL parameters<a name="AuroraPostgreSQL.Reference.ParameterGroups"></a>
 
 You manage your Amazon Aurora DB cluster in the same way that you manage other Amazon RDS DB instances, by using parameters in a DB parameter group\. Amazon Aurora differs from other DB engines in that you have a DB cluster that contains multiple DB instances\. As a result, some of the parameters that you use to manage your Amazon Aurora DB cluster apply to the entire cluster, while other parameters apply only to a particular DB instance in the DB cluster\.
 
@@ -18,9 +18,9 @@ You can manage both cluster\-level and instance\-level parameters using the Amaz
 + To manage cluster\-level parameters in a DB cluster parameter group, use the [modify\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) AWS CLI command\.
 + To manage instance\-level parameters in a DB parameter group for a DB instance in a DB cluster, use the [modify\-db\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) AWS CLI command\.
 
-For more information about parameter groups, see [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\.
+For more information about parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
 
-### Aurora PostgreSQL Cluster\-level Parameters<a name="AuroraPostgreSQL.Reference.Parameters.Cluster"></a>
+### Aurora PostgreSQL cluster\-level parameters<a name="AuroraPostgreSQL.Reference.Parameters.Cluster"></a>
 
 The following table shows all of the parameters that apply to the entire Aurora PostgreSQL DB cluster\. 
 
@@ -89,7 +89,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `wal_buffers`  |  Yes  | 
 | `wal_sender_timeout` | Yes | 
 
-### Aurora PostgreSQL Instance\-level Parameters<a name="AuroraPostgreSQL.Reference.Parameters.Instance"></a>
+### Aurora PostgreSQL instance\-level parameters<a name="AuroraPostgreSQL.Reference.Parameters.Instance"></a>
 
 The following table shows all of the parameters that apply to a specific DB instance in an Aurora PostgreSQL DB cluster\. 
 
@@ -283,7 +283,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `xmlbinary` | Yes | 
 | `xmloption` | Yes | 
 
-## Amazon Aurora PostgreSQL Events<a name="AuroraPostgreSQL.Reference.Waitevents"></a>
+## Amazon Aurora PostgreSQL events<a name="AuroraPostgreSQL.Reference.Waitevents"></a>
 
 The following are some common wait events for Aurora PostgreSQL\.
 

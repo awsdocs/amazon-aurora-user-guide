@@ -1,18 +1,18 @@
-# Aurora MySQL Database Engine Updates: 2017\-05\-15<a name="AuroraMySQL.Updates.20170515"></a>
+# Aurora MySQL database engine updates: 2017\-05\-15<a name="AuroraMySQL.Updates.20170515"></a>
 
 **Version:** 1\.13
 
 **Note**  
 We enabled a new feature \- SELECT INTO OUTFILE S3 \- in Aurora MySQL version 1\.13 after the initial release, and have updated the release notes to reflect that change\.
 
-Aurora MySQL 1\.13 is generally available\. All new database clusters, including those restored from snapshots, will be created in Aurora MySQL 1\.13\. You have the option, but are not required, to upgrade existing database clusters to Aurora MySQL 1\.13\. With version 1\.13 of Aurora, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. We are enabling zero\-downtime patching, which works on a best\-effort basis to preserve client connections through the patching process\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
+Aurora MySQL 1\.13 is generally available\. All new database clusters, including those restored from snapshots, will be created in Aurora MySQL 1\.13\. You have the option, but are not required, to upgrade existing database clusters to Aurora MySQL 1\.13\. With version 1\.13 of Aurora, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. We are enabling zero\-downtime patching, which works on a best\-effort basis to preserve client connections through the patching process\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
 
-## Zero\-Downtime Patching<a name="AuroraMySQL.Updates.20170515.ZDP"></a>
+## Zero\-downtime patching<a name="AuroraMySQL.Updates.20170515.ZDP"></a>
 
-The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-Downtime Patching](AuroraMySQL.Updates.md#AuroraMySQL.Updates.ZDP)\. 
+The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-downtime patching](AuroraMySQL.Updates.md#AuroraMySQL.Updates.ZDP)\. 
 
-## New Features:<a name="AuroraMySQL.Updates.20170515.NewFeatures"></a>
-+ **SELECT INTO OUTFILE S3** – Aurora MySQL now allows you to upload the results of a query to one or more files in an Amazon S3 bucket\. For more information, see [Saving Data from an Amazon Aurora MySQL DB Cluster into Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\.
+## New features:<a name="AuroraMySQL.Updates.20170515.NewFeatures"></a>
++ **SELECT INTO OUTFILE S3** – Aurora MySQL now allows you to upload the results of a query to one or more files in an Amazon S3 bucket\. For more information, see [Saving data from an Amazon Aurora MySQL DB cluster into text files in an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\.
 
 ## Improvements:<a name="AuroraMySQL.Updates.20170515.Improvements"></a>
 + Implemented truncation of CSV format log files at engine startup to avoid long recovery time\. The `general_log_backup`, `general_log`, `slow_log_backup`, and `slow_log` tables now don't survive a database restart\. 
@@ -32,7 +32,7 @@ The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis,
 + Improved stability issue when the Aurora writer is configured as a binlog worker and the number of connections approaches 16,000\. 
 + Fixed a rare issue where an Aurora Replica could restart when a connection gets blocked waiting for Metadata Lock when running DDL on the Aurora master\. 
 
-## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.20170515.BugFixes"></a>
+## Integration of MySQL bug fixes<a name="AuroraMySQL.Updates.20170515.BugFixes"></a>
 + With an empty InnoDB table, it's not possible to decrease the auto\_increment value using an ALTER TABLE statement, even when the table is empty\. \(Bug \#69882\)
 + MATCH\(\) \.\.\. AGAINST queries that use a long string as an argument for AGAINST\(\) could result in an error when run on an InnoDB table with a full\-text search index\. \(Bug \#17640261\)
 + Handling of SQL\_CALC\_FOUND\_ROWS in combination with ORDER BY and LIMIT could lead to incorrect results for FOUND\_ROWS\(\)\. \(Bug \#68458, Bug \# 16383173\)

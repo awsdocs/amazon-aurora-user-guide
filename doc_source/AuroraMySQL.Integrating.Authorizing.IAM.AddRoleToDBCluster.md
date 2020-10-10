@@ -1,6 +1,6 @@
-# Associating an IAM Role with an Amazon Aurora MySQL DB Cluster<a name="AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster"></a>
+# Associating an IAM role with an Amazon Aurora MySQL DB cluster<a name="AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster"></a>
 
-To permit database users in an Amazon Aurora DB cluster to access other AWS services, you associate the role that you created in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md) with that DB cluster\.
+To permit database users in an Amazon Aurora DB cluster to access other AWS services, you associate the role that you created in [Creating an IAM role to allow Amazon Aurora to access AWS services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md) with that DB cluster\.
 
 To associate an IAM role with a DB cluster you do two things:
 + Add the role to the list of associated roles for a DB cluster by using the RDS console, the [add\-role\-to\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/add-role-to-db-cluster.html) AWS CLI command, or the [AddRoleToDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddRoleToDBCluster.html) RDS API operation\.
@@ -71,7 +71,7 @@ To associate an IAM role to permit your Amazon RDS cluster to communicate with o
 
       When the instance has rebooted, your IAM role is associated with your DB cluster\.
 
-      For more information about cluster parameter groups, see [Aurora MySQL Parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
+      For more information about cluster parameter groups, see [Aurora MySQL parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
 
 **To associate an IAM role with a DB cluster by using the AWS CLI**
 
@@ -110,4 +110,4 @@ To associate an IAM role to permit your Amazon RDS cluster to communicate with o
 
    When the instance has rebooted, your IAM roles are associated with your DB cluster\.
 
-   For more information about cluster parameter groups, see [Aurora MySQL Parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
+   For more information about cluster parameter groups, see [Aurora MySQL parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.

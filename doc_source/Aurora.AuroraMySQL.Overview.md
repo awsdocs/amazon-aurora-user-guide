@@ -3,16 +3,16 @@
 The following sections provide an overview of Amazon Aurora MySQL\.
 
 **Topics**
-+ [Amazon Aurora MySQL Performance Enhancements](#Aurora.AuroraMySQL.Performance)
-+ [Amazon Aurora MySQL and Spatial Data](#Aurora.AuroraMySQL.Spatial)
++ [Amazon Aurora MySQL performance enhancements](#Aurora.AuroraMySQL.Performance)
++ [Amazon Aurora MySQL and spatial data](#Aurora.AuroraMySQL.Spatial)
 + [Comparison of Aurora MySQL 5\.6 and Aurora MySQL 5\.7](#Aurora.AuroraMySQL.CompareReleases)
 + [Comparison of Aurora MySQL 5\.7 and MySQL 5\.7](#Aurora.AuroraMySQL.CompareMySQL57)
 
-## Amazon Aurora MySQL Performance Enhancements<a name="Aurora.AuroraMySQL.Performance"></a>
+## Amazon Aurora MySQL performance enhancements<a name="Aurora.AuroraMySQL.Performance"></a>
 
 Amazon Aurora includes performance enhancements to support the diverse needs of high\-end commercial databases\.
 
-### Fast Insert<a name="Aurora.AuroraMySQL.Performance.FastInsert"></a>
+### Fast insert<a name="Aurora.AuroraMySQL.Performance.FastInsert"></a>
 
 Fast insert accelerates parallel inserts sorted by primary key and applies specifically to `LOAD DATA` and `INSERT INTO ... SELECT ...` statements\. Fast insert caches the position of a cursor in an index traversal while executing the statement\. This avoids unnecessarily traversing the index again\.
 
@@ -37,7 +37,7 @@ You will get output similar to the following:
 +---------------------------------+-----------+
 ```
 
-## Amazon Aurora MySQL and Spatial Data<a name="Aurora.AuroraMySQL.Spatial"></a>
+## Amazon Aurora MySQL and spatial data<a name="Aurora.AuroraMySQL.Spatial"></a>
 
  The following list summarizes the main Aurora MySQL spatial features and explains how they correspond to spatial features in MySQL\. 
 +  Aurora MySQL 1\.x supports the same [spatial data types](https://dev.mysql.com/doc/refman/5.6/en/spatial-types.html) and [spatial relation functions](https://dev.mysql.com/doc/refman/5.6/en/spatial-relation-functions-object-shapes.html) as MySQL 5\.6\. 
@@ -73,13 +73,13 @@ CREATE SPATIAL INDEX shape_index ON test (shape);
 ## Comparison of Aurora MySQL 5\.6 and Aurora MySQL 5\.7<a name="Aurora.AuroraMySQL.CompareReleases"></a>
 
 The following Amazon Aurora MySQL features are supported in Aurora MySQL 5\.6, but these features are currently not supported in Aurora MySQL 5\.7\.
-+ Asynchronous key prefetch \(AKP\)\. For more information, see [Working with Asynchronous Key Prefetch in Amazon Aurora](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
-+ Hash joins\. For more information, see [Working with Hash Joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
-+ Native functions for synchronously invoking AWS Lambda functions\. You can asynchronously invoke AWS Lambda functions from Aurora MySQL 5\.7\. For more information, see [Invoking a Lambda Function with an Aurora MySQL Native Function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)\.
-+ Scan batching\. For more information, see [Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
-+ Migrating data from MySQL using an Amazon S3 bucket\. For more information, see [Migrating Data from MySQL by Using an Amazon S3 Bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.
++ Asynchronous key prefetch \(AKP\)\. For more information, see [Working with asynchronous key prefetch in Amazon Aurora](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
++ Hash joins\. For more information, see [Working with hash joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
++ Native functions for synchronously invoking AWS Lambda functions\. You can asynchronously invoke AWS Lambda functions from Aurora MySQL 5\.7\. For more information, see [Invoking a Lambda function with an Aurora MySQL native function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)\.
++ Scan batching\. For more information, see [Aurora MySQL database engine updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
++ Migrating data from MySQL using an Amazon S3 bucket\. For more information, see [Migrating data from MySQL by using an Amazon S3 bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.
 
-Currently, Aurora MySQL 5\.7 does not support features added in Aurora MySQL version 1\.16 and later\. For information about Aurora MySQL version 1\.16, see [Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
+Currently, Aurora MySQL 5\.7 does not support features added in Aurora MySQL version 1\.16 and later\. For information about Aurora MySQL version 1\.16, see [Aurora MySQL database engine updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
 
 The performance schema isn't available for early release of Aurora MySQL 5\.7\. Upgrade to Aurora 2\.03 or higher for performance schema support\.
 

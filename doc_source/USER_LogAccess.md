@@ -1,15 +1,15 @@
-# Amazon Aurora Database Log Files<a name="USER_LogAccess"></a>
+# Amazon Aurora database log files<a name="USER_LogAccess"></a>
 
 You can view, download, and watch database logs using the AWS Management Console, the AWS Command Line Interface \(AWS CLI\), or the Amazon RDS API\. Viewing, downloading, or watching transaction logs isn't supported\. 
 
 For engine\-specific information, see the following:
-+ [MySQL Database Log Files](USER_LogAccess.Concepts.MySQL.md)
-+ [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)
++ [MySQL database log files](USER_LogAccess.Concepts.MySQL.md)
++ [PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)
 
 **Note**  
 In some cases, logs contain hidden data\. Therefore, the AWS Management Console might show content in a log file, but the log file might be empty when you download it\.
 
-## Viewing and Listing Database Log Files<a name="USER_LogAccess.Procedural.Viewing"></a>
+## Viewing and listing database log files<a name="USER_LogAccess.Procedural.Viewing"></a>
 
 You can view database log files for your DB engine by using the AWS Management Console\. You can list what log files are available for download or monitoring by using the AWS CLI or Amazon RDS API\. 
 
@@ -45,7 +45,7 @@ The following example returns a list of log files for a DB instance named `my-db
 
 To list the available database log files for a DB instance, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBLogFiles.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBLogFiles.html) action\.
 
-## Downloading a Database Log File<a name="USER_LogAccess.Procedural.Downloading"></a>
+## Downloading a database log file<a name="USER_LogAccess.Procedural.Downloading"></a>
 
 You can use the AWS Management Console, AWS CLI or API to download a database log file\. 
 
@@ -96,7 +96,7 @@ For Windows:
 
 To download a database log file, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DownloadDBLogFilePortion.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DownloadDBLogFilePortion.html) action\.
 
-## Watching a Database Log File<a name="USER_LogAccess.Procedural.Watching"></a>
+## Watching a database log file<a name="USER_LogAccess.Procedural.Watching"></a>
 
 You can monitor the contents of a log file by using the AWS Management Console\.
 
@@ -114,15 +114,15 @@ You can monitor the contents of a log file by using the AWS Management Console\.
 
 1. In the **Logs** section, choose a log file, and then choose **Watch**\.
 
-## Publishing Database Logs to Amazon CloudWatch Logs<a name="USER_LogAccess.Procedural.UploadtoCloudWatch"></a>
+## Publishing database logs to Amazon CloudWatch Logs<a name="USER_LogAccess.Procedural.UploadtoCloudWatch"></a>
 
-In addition to viewing and downloading DB instance logs, you can publish logs to Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, store the data in highly durable storage, and manage the data with the CloudWatch Logs Agent\. AWS retains log data published to CloudWatch Logs for an indefinite time period unless you specify a retention period\. For more information, see [Change Log Data Retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention)\. 
+In addition to viewing and downloading DB instance logs, you can publish logs to Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, store the data in highly durable storage, and manage the data with the CloudWatch Logs Agent\. AWS retains log data published to CloudWatch Logs for an indefinite time period unless you specify a retention period\. For more information, see [Change log data retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention)\. 
 
  For engine\-specific information, see the following:
-+ [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)
-+ [Publishing Aurora PostgreSQL Logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)
++ [Publishing Amazon Aurora MySQL logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)
++ [Publishing Aurora PostgreSQL logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)
 
-## Reading Log File Contents Using REST<a name="DownloadCompleteDBLogFile"></a>
+## Reading log file contents using REST<a name="DownloadCompleteDBLogFile"></a>
 
 Amazon RDS provides a REST endpoint that allows access to DB instance log files\. This is useful if you need to write an application to stream Amazon RDS log file contents\.
 

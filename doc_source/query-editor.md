@@ -1,10 +1,10 @@
-# Using the Query Editor for Aurora Serverless<a name="query-editor"></a>
+# Using the query editor for Aurora Serverless<a name="query-editor"></a>
 
 With the query editor for Aurora Serverless, you can run SQL queries in the RDS console\. You can run any valid SQL statement on the Aurora Serverless DB cluster, including data manipulation and data definition statements\.
 
 The query editor requires an Aurora Serverless DB cluster with the Data API enabled\. For information about creating an Aurora Serverless DB cluster with the Data API enabled, see [Using the Data API for Aurora Serverless](data-api.md)\.
 
-## Availability of the Query Editor<a name="query-editor.regions"></a>
+## Availability of the query editor<a name="query-editor.regions"></a>
 
 The query editor is only available for the following Aurora Serverless DB clusters:
 + Aurora with MySQL version 5\.6 compatibility
@@ -25,7 +25,7 @@ The query editor is currently available for Aurora Serverless in the following A
 + US West \(N\. California\)
 + US West \(Oregon\)
 
-## Authorizing Access to the Query Editor<a name="query-editor.access"></a>
+## Authorizing access to the query editor<a name="query-editor.access"></a>
 
 A user must be authorized to run queries in the query editor\. You can authorize a user to run queries in the query editor by adding the `AmazonRDSDataFullAccess` policy, a predefined AWS Identity and Access Management \(IAM\) policy, to that user\.
 
@@ -79,11 +79,11 @@ The following policy provides the minimum required permissions for a user to acc
 }
 ```
 
-For information about creating an IAM policy, see [Creating IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) in the *AWS Identity and Access Management User Guide*\.
+For information about creating an IAM policy, see [Creating IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) in the *AWS Identity and Access Management User Guide*\.
 
-For information about adding an IAM policy to a user, see [Adding and Removing IAM Identity Permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) in the *AWS Identity and Access Management User Guide*\.
+For information about adding an IAM policy to a user, see [Adding and removing IAM identity permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) in the *AWS Identity and Access Management User Guide*\.
 
-## Running Queries in the Query Editor<a name="query-editor.running"></a>
+## Running queries in the query editor<a name="query-editor.running"></a>
 
 You can run SQL statements on an Aurora Serverless DB cluster in the query editor\.
 

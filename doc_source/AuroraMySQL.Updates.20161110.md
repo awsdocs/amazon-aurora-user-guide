@@ -1,10 +1,10 @@
-# Aurora MySQL Database Engine Updates: 2016\-11\-10<a name="AuroraMySQL.Updates.20161110"></a>
+# Aurora MySQL database engine updates: 2016\-11\-10<a name="AuroraMySQL.Updates.20161110"></a>
 
 **Version:** 1\.9\.0, 1\.9\.1
 
-## New Features<a name="AuroraMySQL.Updates.20161110.New"></a>
-+ **Improved index build** – The implementation for building secondary indexes now operates by building the index in a bottom\-up fashion, which eliminates unnecessary page splits\. This can reduce the time needed to create an index or rebuild a table by up to 75% \(based on an `db.r3.8xlarge` DB instance class\)\. This feature was in lab mode in Aurora MySQL version 1\.7 and is enabled by default in Aurora version 1\.9 and later\. For information, see [Amazon Aurora MySQL Lab Mode](AuroraMySQL.Updates.LabMode.md)\.
-+ **Lock compression \(lab mode\)** – This implementation significantly reduces the amount of memory that lock manager consumes by up to 66%\. Lock manager can acquire more row locks without encountering an out\-of\-memory exception\. This feature is disabled by default and can be activated by enabling Aurora lab mode\. For information, see [Amazon Aurora MySQL Lab Mode](AuroraMySQL.Updates.LabMode.md)\.
+## New features<a name="AuroraMySQL.Updates.20161110.New"></a>
++ **Improved index build** – The implementation for building secondary indexes now operates by building the index in a bottom\-up fashion, which eliminates unnecessary page splits\. This can reduce the time needed to create an index or rebuild a table by up to 75% \(based on an `db.r3.8xlarge` DB instance class\)\. This feature was in lab mode in Aurora MySQL version 1\.7 and is enabled by default in Aurora version 1\.9 and later\. For information, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\.
++ **Lock compression \(lab mode\)** – This implementation significantly reduces the amount of memory that lock manager consumes by up to 66%\. Lock manager can acquire more row locks without encountering an out\-of\-memory exception\. This feature is disabled by default and can be activated by enabling Aurora lab mode\. For information, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\.
 + **Performance schema** – Aurora MySQL now includes support for performance schema with minimal impact on performance\. In our testing using SysBench, enabling performance schema could degrade MySQL performance by up to 60%\.
 
   SysBench testing of an Aurora DB cluster showed an impact on performance that is 4x less than MySQL\. Running the `db.r3.8xlarge` DB instance class resulted in 100K SQL writes/sec and over 550K SQL reads/sec, even with performance schema enabled\.

@@ -1,4 +1,4 @@
-# Security Vulnerabilities Fixed in Amazon Aurora MySQL<a name="AuroraMySQL.CVE_list"></a>
+# Security vulnerabilities fixed in Amazon Aurora MySQL<a name="AuroraMySQL.CVE_list"></a>
 
  CVE \(Common Vulnerabilities and Exposures\) is a list of entries for publicly known cybersecurity vulnerabilities\. Each entry contains an identification number, a description, and at least one public reference\. 
 
@@ -7,8 +7,8 @@
  We recommend that you always upgrade to the latest Aurora release to be protected against known vulnerabilities\. You can use this page to verify whether a particular version of Aurora MySQL has a fix for a specific security vulnerability\. If your cluster doesn't have the security fix, you can see which Aurora MySQL version you should upgrade to for that fix\. 
 
  Any CVEs fixed in a specific Aurora MySQL version are also listed in the release notes for that version: 
-+  [Database Engine Updates for Amazon Aurora MySQL 2\.0](AuroraMySQL.Updates.20Updates.md) 
-+  [Database Engine Updates for Amazon Aurora MySQL 1\.1](AuroraMySQL.Updates.11Updates.md) 
++  [Database engine updates for Amazon Aurora MySQL 2\.0](AuroraMySQL.Updates.20Updates.md) 
++  [Database engine updates for Amazon Aurora MySQL 1\.1](AuroraMySQL.Updates.11Updates.md) 
 
 **CVEs and minimum fixed Aurora MySQL versions**
 + [CVE\-2020\-2760](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-2760): [2\.04\.9](AuroraMySQL.Updates.2049.md)

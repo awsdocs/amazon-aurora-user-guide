@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2020\-06\-18 \(Version 2\.08\.1\)<a name="AuroraMySQL.Updates.2081"></a>
+# Aurora MySQL database engine updates 2020\-06\-18 \(version 2\.08\.1\)<a name="AuroraMySQL.Updates.2081"></a>
 
 **Version:** 2\.08\.1
 
@@ -10,15 +10,15 @@ Aurora MySQL 2\.08\.1 is generally available\. Aurora MySQL 2\.x versions are co
 
  To create a cluster with an older version of Aurora MySQL, specify the engine version through the AWS Management Console, the AWS CLI, or the RDS API\. 
 
-If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 **Note**  
-For information on how to upgrade your Aurora MySQL database cluster, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+For information on how to upgrade your Aurora MySQL database cluster, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2081.Improvements"></a>
 
  **New features:** 
-+  Global database write forwarding\. In an Aurora global database, now you can perform certain write operations, such as DML statements, while connected to a secondary cluster\. The write operations are forwarded to the primary cluster, and any changes are replicated back to the secondary clusters\. For more information, see [Write Forwarding for Secondary AWS Regions with an Aurora Global Database](aurora-global-database-write-forwarding.md)\. 
++  Global database write forwarding\. In an Aurora global database, now you can perform certain write operations, such as DML statements, while connected to a secondary cluster\. The write operations are forwarded to the primary cluster, and any changes are replicated back to the secondary clusters\. For more information, see [Write forwarding for secondary AWS Regions with an Aurora global database](aurora-global-database-write-forwarding.md)\. 
 
  **General stability fixes:** 
 +  Fixed an issue where restoring a cluster from Amazon S3 to Aurora MySQL version 2\.08\.0 took longer than expected if the S3 backup didn't include the `mysql.host` table\. 

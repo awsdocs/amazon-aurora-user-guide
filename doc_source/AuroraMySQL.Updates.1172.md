@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2018\-04\-27<a name="AuroraMySQL.Updates.1172"></a>
+# Aurora MySQL database engine updates 2018\-04\-27<a name="AuroraMySQL.Updates.1172"></a>
 
 **Version:** 1\.17\.2
 
@@ -6,7 +6,7 @@ Aurora MySQL 1\.17\.2 is generally available\. All new Aurora MySQL database clu
 
 With version 1\.17\.2 of Aurora MySQL, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. 
 
-If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.1172.Improvements"></a>
 + Fixed an issue which was causing restarts during certain DDL partition operations\.

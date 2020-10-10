@@ -1,4 +1,4 @@
-# Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions<a name="AuroraMySQL.Replication.CrossRegion"></a>
+# Replicating Amazon Aurora MySQL DB clusters across AWS Regions<a name="AuroraMySQL.Replication.CrossRegion"></a>
 
 You can create an Amazon Aurora MySQL DB cluster as a read replica in a different AWS Region than the source DB cluster\. Taking this approach can improve your disaster recovery capabilities, let you scale read operations into an AWS Region that is closer to your users, and make it easier to migrate from one AWS Region to another\.
 
@@ -11,26 +11,26 @@ For each source DB cluster, you can have up to five cross\-Region DB clusters th
   + When you create the read replica, Amazon RDS takes a snapshot of the source cluster and transfers the snapshot to the AWS Region that holds the read replica\.
   + For each data modification made in the source databases, Amazon RDS transfers data from the source region to the AWS Region that holds the read replica\.
 
-  For more information about Amazon RDS data transfer pricing, see [Amazon Aurora Pricing](http://aws.amazon.com/rds/aurora/pricing/)\.
+  For more information about Amazon RDS data transfer pricing, see [Amazon Aurora pricing](http://aws.amazon.com/rds/aurora/pricing/)\.
 + You can run multiple concurrent create or delete actions for read replicas that reference the same source DB cluster\. However, you must stay within the limit of five read replicas for each source DB cluster\.
 + For replication to operate effectively, each read replica should have the same amount of compute and storage resources as the source DB cluster\. If you scale the source DB cluster, you should also scale the read replicas\.
 
 **Topics**
-+ [Before You Begin](#AuroraMySQL.Replication.CrossRegion.Prerequisites)
-+ [Creating an Amazon Aurora MySQL DB Cluster That Is a Cross\-Region Read Replica](#AuroraMySQL.Replication.CrossRegion.Creating)
-+ [Viewing Amazon Aurora MySQL Cross\-Region Replicas](#AuroraMySQL.Replication.CrossRegion.Viewing)
-+ [Promoting a Read Replica to Be a DB Cluster](#AuroraMySQL.Replication.CrossRegion.Promote)
-+ [Troubleshooting Amazon Aurora MySQL Cross Region Replicas](#AuroraMySQL.Replication.CrossRegion.Troubleshooting)
++ [Before you begin](#AuroraMySQL.Replication.CrossRegion.Prerequisites)
++ [Creating an Amazon Aurora MySQL DB cluster that is a cross\-Region read replica](#AuroraMySQL.Replication.CrossRegion.Creating)
++ [Viewing Amazon Aurora MySQL cross\-Region replicas](#AuroraMySQL.Replication.CrossRegion.Viewing)
++ [Promoting a read replica to be a DB cluster](#AuroraMySQL.Replication.CrossRegion.Promote)
++ [Troubleshooting Amazon Aurora MySQL cross Region replicas](#AuroraMySQL.Replication.CrossRegion.Troubleshooting)
 
-## Before You Begin<a name="AuroraMySQL.Replication.CrossRegion.Prerequisites"></a>
+## Before you begin<a name="AuroraMySQL.Replication.CrossRegion.Prerequisites"></a>
 
 Before you can create an Aurora MySQL DB cluster that is a cross\-Region read replica, you must enable binary logging on your source Aurora MySQL DB cluster\. Cross\-region replication for Aurora MySQL uses MySQL binary replication to replay changes on the cross\-Region read replica DB cluster\.
 
 To enable binary logging on an Aurora MySQL DB cluster, update the `binlog_format` parameter for your source DB cluster\. The `binlog_format` parameter is a cluster\-level parameter that is in the default cluster parameter group\. If your DB cluster uses the default DB cluster parameter group, create a new DB cluster parameter group to modify `binlog_format` settings\. We recommend that you set the `binlog_format` to `MIXED`\. However, you can also set `binlog_format` to `ROW` or `STATEMENT` if you need a specific binlog format\. Reboot your Aurora DB cluster for the change to take effect\.
 
-For more information, see [Amazon Aurora DB Cluster and DB Instance Parameters](USER_WorkingWithParamGroups.md#Aurora.Managing.ParameterGroups) and [Working with DB Parameter Groups and DB Cluster Parameter Groups](USER_WorkingWithParamGroups.md)\. 
+For more information, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithParamGroups.md#Aurora.Managing.ParameterGroups) and [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
 
-## Creating an Amazon Aurora MySQL DB Cluster That Is a Cross\-Region Read Replica<a name="AuroraMySQL.Replication.CrossRegion.Creating"></a>
+## Creating an Amazon Aurora MySQL DB cluster that is a cross\-Region read replica<a name="AuroraMySQL.Replication.CrossRegion.Creating"></a>
 
 You can create an Aurora DB cluster that is a cross\-Region read replica by using the AWS Management Console, the AWS Command Line Interface \(AWS CLI\), or the Amazon RDS API\. You can create cross\-Region read replicas from both encrypted and unencrypted DB clusters\.
 
@@ -248,11 +248,11 @@ You can set up cross\-Region replication from an unencrypted DB cluster to an en
 
    When the DB instance is created and available, replication begins\. You can determine if the DB instance is available by calling the AWS CLI `[DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)` command\.
 
-## Viewing Amazon Aurora MySQL Cross\-Region Replicas<a name="AuroraMySQL.Replication.CrossRegion.Viewing"></a>
+## Viewing Amazon Aurora MySQL cross\-Region replicas<a name="AuroraMySQL.Replication.CrossRegion.Viewing"></a>
 
 You can view the cross\-Region replication relationships for your Amazon Aurora MySQL DB clusters by calling the `[describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html)` AWS CLI command or the `[DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html)` RDS API operation\. In the response, refer to the `ReadReplicaIdentifiers` field for the DB cluster identifiers of any cross\-Region read replica DB clusters, and refer to the `ReplicationSourceIdentifier` element for the ARN of the source DB cluster that is the replication source\. 
 
-## Promoting a Read Replica to Be a DB Cluster<a name="AuroraMySQL.Replication.CrossRegion.Promote"></a>
+## Promoting a read replica to be a DB cluster<a name="AuroraMySQL.Replication.CrossRegion.Promote"></a>
 
 You can promote an Aurora MySQL Read Replica to a standalone DB cluster\. When you promote an Aurora MySQL Read Replica, its DB instances are rebooted before they become available\. 
 
@@ -320,13 +320,13 @@ aws rds promote-read-replica-db-cluster ^
 
 To promote a read replica to a DB cluster, call [ `PromoteReadReplicaDBCluster`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplicaDBCluster.html)\. 
 
-## Troubleshooting Amazon Aurora MySQL Cross Region Replicas<a name="AuroraMySQL.Replication.CrossRegion.Troubleshooting"></a>
+## Troubleshooting Amazon Aurora MySQL cross Region replicas<a name="AuroraMySQL.Replication.CrossRegion.Troubleshooting"></a>
 
 Following you can find a list of common error messages that you might encounter when creating an Amazon Aurora cross\-Region read replica, and how to resolve the specified errors\.
 
 ### Source cluster \[DB cluster ARN\] doesn't have binlogs enabled<a name="AuroraMySQL.Replication.CrossRegion.Troubleshooting.1"></a>
 
-To resolve this issue, enable binary logging on the source DB cluster\. For more information, see [Before You Begin](#AuroraMySQL.Replication.CrossRegion.Prerequisites)\.
+To resolve this issue, enable binary logging on the source DB cluster\. For more information, see [Before you begin](#AuroraMySQL.Replication.CrossRegion.Prerequisites)\.
 
 ### Source cluster \[DB cluster ARN\] doesn't have cluster parameter group in sync on writer<a name="AuroraMySQL.Replication.CrossRegion.Troubleshooting.2"></a>
 

@@ -1,4 +1,4 @@
-# Amazon Aurora Connection Management<a name="Aurora.Overview.Endpoints"></a>
+# Amazon Aurora connection management<a name="Aurora.Overview.Endpoints"></a>
 
  Amazon Aurora typically involves a cluster of DB instances instead of a single instance\. Each connection is handled by a specific DB instance\. When you connect to an Aurora cluster, the host name and port that you specify point to an intermediate handler called an *endpoint*\. Aurora uses the endpoint mechanism to abstract these connections\. Thus, you don't have to hardcode all the hostnames or write your own logic for load\-balancing and rerouting connections when some DB instances aren't available\. 
 
@@ -7,20 +7,20 @@
  Using endpoints, you can map each connection to the appropriate instance or group of instances based on your use case\. For example, to perform DDL statements you can connect to whichever instance is the primary instance\. To perform queries, you can connect to the reader endpoint, with Aurora automatically performing load\-balancing among all the Aurora Replicas\. For clusters with DB instances of different capacities or configurations, you can connect to custom endpoints associated with different subsets of DB instances\. For diagnosis or tuning, you can connect to a specific instance endpoint to examine details about a specific DB instance\. 
 
 **Topics**
-+ [Types of Aurora Endpoints](#Aurora.Overview.Endpoints.Types)
-+ [Viewing the Endpoints for an Aurora Cluster](#Aurora.Endpoints.Viewing)
-+ [Using the Cluster Endpoint](#Aurora.Endpoints.Cluster)
-+ [Using the Reader Endpoint](#Aurora.Endpoints.Reader)
-+ [Using Custom Endpoints](#Aurora.Endpoints.Custom)
-+ [Creating a Custom Endpoint](#aurora-custom-endpoint-creating)
-+ [Viewing Custom Endpoints](#aurora-endpoint-viewing)
-+ [Editing a Custom Endpoint](#aurora-endpoint-editing)
-+ [Deleting a Custom Endpoint](#aurora-endpoints-custom-deleting)
-+ [End\-to\-End AWS CLI Example for Custom Endpoints](#Aurora.Endpoint.Tutorial)
-+ [Using the Instance Endpoints](#Aurora.Endpoints.Instance)
-+ [How Aurora Endpoints Work with High Availability](#Aurora.Overview.Endpoints.HA)
++ [Types of Aurora endpoints](#Aurora.Overview.Endpoints.Types)
++ [Viewing the endpoints for an Aurora cluster](#Aurora.Endpoints.Viewing)
++ [Using the cluster endpoint](#Aurora.Endpoints.Cluster)
++ [Using the reader endpoint](#Aurora.Endpoints.Reader)
++ [Using custom endpoints](#Aurora.Endpoints.Custom)
++ [Creating a custom endpoint](#aurora-custom-endpoint-creating)
++ [Viewing custom endpoints](#aurora-endpoint-viewing)
++ [Editing a custom endpoint](#aurora-endpoint-editing)
++ [Deleting a custom endpoint](#aurora-endpoints-custom-deleting)
++ [End\-to\-end AWS CLI example for custom endpoints](#Aurora.Endpoint.Tutorial)
++ [Using the instance endpoints](#Aurora.Endpoints.Instance)
++ [How Aurora endpoints work with high availability](#Aurora.Overview.Endpoints.HA)
 
-## Types of Aurora Endpoints<a name="Aurora.Overview.Endpoints.Types"></a>
+## Types of Aurora endpoints<a name="Aurora.Overview.Endpoints.Types"></a>
 
  An endpoint is represented as an Aurora\-specific URL that contains a host address and a port\. The following types of endpoints are available from an Aurora DB cluster\. 
 
@@ -49,11 +49,11 @@
 
 **Instance endpoint**  
  An *instance endpoint* connects to a specific DB instance within an Aurora cluster\. Each DB instance in a DB cluster has its own unique instance endpoint\. So there is one instance endpoint for the current primary DB instance of the DB cluster, and there is one instance endpoint for each of the Aurora Replicas in the DB cluster\.   
- The instance endpoint provides direct control over connections to the DB cluster, for scenarios where using the cluster endpoint or reader endpoint might not be appropriate\. For example, your client application might require more fine\-grained load balancing based on workload type\. In this case, you can configure multiple clients to connect to different Aurora Replicas in a DB cluster to distribute read workloads\. For an example that uses instance endpoints to improve connection speed after a failover for Aurora PostgreSQL, see [Fast Failover with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md#AuroraPostgreSQL.BestPractices.FastFailover)\. For an example that uses instance endpoints to improve connection speed after a failover for Aurora MySQL, see [MariaDB Connector/J failover support \- case Amazon Aurora](https://mariadb.org/mariadb-connectorj-failover-support-case-amazon-aurora/)\.   
+ The instance endpoint provides direct control over connections to the DB cluster, for scenarios where using the cluster endpoint or reader endpoint might not be appropriate\. For example, your client application might require more fine\-grained load balancing based on workload type\. In this case, you can configure multiple clients to connect to different Aurora Replicas in a DB cluster to distribute read workloads\. For an example that uses instance endpoints to improve connection speed after a failover for Aurora PostgreSQL, see [Fast failover with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md#AuroraPostgreSQL.BestPractices.FastFailover)\. For an example that uses instance endpoints to improve connection speed after a failover for Aurora MySQL, see [MariaDB Connector/J failover support \- case Amazon Aurora](https://mariadb.org/mariadb-connectorj-failover-support-case-amazon-aurora/)\.   
  The following example illustrates an instance endpoint for a DB instance in an Aurora MySQL DB cluster\.   
  `mydbinstance.123456789012.us-east-1.rds.amazonaws.com:3306` 
 
-## Viewing the Endpoints for an Aurora Cluster<a name="Aurora.Endpoints.Viewing"></a>
+## Viewing the endpoints for an Aurora cluster<a name="Aurora.Endpoints.Viewing"></a>
 
  In the AWS Management Console, you see the cluster endpoint, the reader endpoint, and any custom endpoints in the detail page for each cluster\. You see the instance endpoint in the detail page for each instance\. When you connect, you must append the associated port number, following a colon, to the endpoint name shown on this detail page\. 
 
@@ -65,7 +65,7 @@ aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:Read
 
  With the Amazon RDS API, you retrieve the endpoints by calling the [DescribeDbClusterEndpoints](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDbClusterEndpoints.html) function\. 
 
-## Using the Cluster Endpoint<a name="Aurora.Endpoints.Cluster"></a>
+## Using the cluster endpoint<a name="Aurora.Endpoints.Cluster"></a>
 
  Because each Aurora cluster has a single built\-in cluster endpoint, whose name and other attributes are managed by Aurora, you can't create, delete, or modify this kind of endpoint\. 
 
@@ -73,7 +73,7 @@ aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:Read
 
  The physical IP address pointed to by the cluster endpoint changes when the failover mechanism promotes a new DB instance to be the read/write primary instance for the cluster\. If you use any form of connection pooling or other multiplexing, be prepared to flush or reduce the time\-to\-live for any cached DNS information\. Doing so ensures that you don't try to establish a read/write connection to a DB instance that became unavailable or is now read\-only after a failover\. 
 
-## Using the Reader Endpoint<a name="Aurora.Endpoints.Reader"></a>
+## Using the reader endpoint<a name="Aurora.Endpoints.Reader"></a>
 
  You use the reader endpoint for read\-only connections for your Aurora cluster\. This endpoint uses a load\-balancing mechanism to help your cluster handle a query\-intensive workload\. The reader endpoint is the endpoint that you supply to applications that do reporting or other read\-only operations on the cluster\. 
 
@@ -83,7 +83,7 @@ aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:Read
 
  If your cluster contains only a primary instance and no Aurora Replicas, the reader endpoint connects to the primary instance\. In that case, you can perform write operations through this endpoint\. 
 
-## Using Custom Endpoints<a name="Aurora.Endpoints.Custom"></a>
+## Using custom endpoints<a name="Aurora.Endpoints.Custom"></a>
 
  You use custom endpoints to simplify connection management when your cluster contains DB instances with different capacities and configuration settings\. 
 
@@ -92,11 +92,11 @@ aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:Read
  Instead of using one DB instance for each specialized purpose and connecting to its instance endpoint, you can have multiple groups of specialized DB instances\. In this case, each group has its own custom endpoint\. This way, Aurora can perform load balancing among all the instances dedicated to tasks such as reporting or handling production or internal queries\. The custom endpoints provide load balancing and high availability for each group of DB instances within your cluster\. If one of the DB instances within a group becomes unavailable, Aurora directs subsequent custom endpoint connections to one of the other DB instances associated with the same endpoint\. 
 
 **Topics**
-+ [Specifying Properties for Custom Endpoints](#Aurora.Endpoints.Custom.Properties)
-+ [Membership Rules for Custom Endpoints](#Aurora.Endpoints.Custom.Membership)
-+ [Managing Custom Endpoints](#Aurora.Endpoints.Custom.Managing)
++ [Specifying properties for custom endpoints](#Aurora.Endpoints.Custom.Properties)
++ [Membership rules for custom endpoints](#Aurora.Endpoints.Custom.Membership)
++ [Managing custom endpoints](#Aurora.Endpoints.Custom.Managing)
 
-### Specifying Properties for Custom Endpoints<a name="Aurora.Endpoints.Custom.Properties"></a>
+### Specifying properties for custom endpoints<a name="Aurora.Endpoints.Custom.Properties"></a>
 
  The maximum length for a custom endpoint name is 63 characters\. You can see the name format following: 
 
@@ -110,7 +110,7 @@ aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:Read
 +  The `WRITER` type applies only to multi\-master clusters, because those clusters can include multiple read/write DB instances\. 
 +  If you try to create a custom endpoint with a type that isn't appropriate based on the replication configuration for a cluster, Aurora returns an error\. 
 
-### Membership Rules for Custom Endpoints<a name="Aurora.Endpoints.Custom.Membership"></a>
+### Membership rules for custom endpoints<a name="Aurora.Endpoints.Custom.Membership"></a>
 
  When you add a DB instance to a custom endpoint or remove it from a custom endpoint, any existing connections to that DB instance remain active\. 
 
@@ -124,7 +124,7 @@ aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:Read
 
  If an Aurora Replica becomes unavailable, it remains associated with any custom endpoints\. For example, it remains part of the custom endpoint when it is unhealthy, stopped, rebooting, and so on\. However, you can't connect to it through those endpoints until it becomes available again\. 
 
-### Managing Custom Endpoints<a name="Aurora.Endpoints.Custom.Managing"></a>
+### Managing custom endpoints<a name="Aurora.Endpoints.Custom.Managing"></a>
 
  Because newly created Aurora clusters have no custom endpoints, you must create and manage these objects yourself\. You do so using the AWS Management Console, AWS CLI, or Amazon RDS API\. 
 
@@ -145,7 +145,7 @@ aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:Read
 +  [ModifyDBClusterEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterEndpoint.html) 
 +  [DeleteDBClusterEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBClusterEndpoint.html) 
 
-## Creating a Custom Endpoint<a name="aurora-custom-endpoint-creating"></a>
+## Creating a custom endpoint<a name="aurora-custom-endpoint-creating"></a>
 
 ### Console<a name="aurora-create-endpoint.console"></a>
 
@@ -187,7 +187,7 @@ aws rds modify-db-cluster-endpoint --db-cluster-endpoint-identifier custom-endpo
 
  To create a custom endpoint with the RDS API, run the [CreateDBClusterEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterEndpoint.html) operation\. 
 
-## Viewing Custom Endpoints<a name="aurora-endpoint-viewing"></a>
+## Viewing custom endpoints<a name="aurora-endpoint-viewing"></a>
 
 ### Console<a name="aurora-view-endpoint.console"></a>
 
@@ -289,9 +289,9 @@ aws rds describe-db-cluster-endpoints --region region_name ^
 
  To view custom endpoints with the RDS API, run the [DescribeDBClusterEndpoints\.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterEndpoints.html.html) operation\. 
 
-## Editing a Custom Endpoint<a name="aurora-endpoint-editing"></a>
+## Editing a custom endpoint<a name="aurora-endpoint-editing"></a>
 
- You can edit the properties of a custom endpoint to change which DB instances are associated with the endpoint\. You can also change an endpoint between a static list and an exclusion list\. If you need more details about these endpoint properties, see [Membership Rules for Custom Endpoints](#Aurora.Endpoints.Custom.Membership)\. 
+ You can edit the properties of a custom endpoint to change which DB instances are associated with the endpoint\. You can also change an endpoint between a static list and an exclusion list\. If you need more details about these endpoint properties, see [Membership rules for custom endpoints](#Aurora.Endpoints.Custom.Membership)\. 
 
  You can't connect to or use a custom endpoint while the changes from an edit action are in progress\. It might take some minutes before the endpoint status returns to **Available** and you can connect again\. 
 
@@ -335,7 +335,7 @@ aws rds modify-db-cluster-endpoint --db-cluster-endpoint-identifier my-custom-en
 
  To edit a custom endpoint with the RDS API, run the [ModifyDBClusterEndpoint\.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterEndpoint.html.html) operation\. 
 
-## Deleting a Custom Endpoint<a name="aurora-endpoints-custom-deleting"></a>
+## Deleting a custom endpoint<a name="aurora-endpoints-custom-deleting"></a>
 
 ### Console<a name="aurora-delete-endpoint.console"></a>
 
@@ -367,7 +367,7 @@ aws rds delete-db-cluster-endpoint --db-cluster-endpoint-identifier custom-end-p
 
  To delete a custom endpoint with the RDS API, run the [DeleteDBClusterEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBClusterEndpoint.html) operation\. 
 
-## End\-to\-End AWS CLI Example for Custom Endpoints<a name="Aurora.Endpoint.Tutorial"></a>
+## End\-to\-end AWS CLI example for custom endpoints<a name="Aurora.Endpoint.Tutorial"></a>
 
  The following tutorial uses AWS CLI examples with Unix shell syntax to show you might define a cluster with several "small" DB instances and a few "big" DB instances, and create custom endpoints to connect to each set of DB instances\. To run similar commands on your own system, you should be familiar enough with the basics of working with Aurora clusters and AWS CLI usage to supply your own values for parameters such as region, subnet group, and VPC security group\. 
 
@@ -581,7 +581,7 @@ mysql> select @@aurora_server_id;
 +-------------------------+
 ```
 
-## Using the Instance Endpoints<a name="Aurora.Endpoints.Instance"></a>
+## Using the instance endpoints<a name="Aurora.Endpoints.Instance"></a>
 
  Each DB instance in an Aurora cluster has its own built\-in instance endpoint, whose name and other attributes are managed by Aurora\. You can't create, delete, or modify this kind of endpoint\. You might be familiar with instance endpoints if you use Amazon RDS\. However, with Aurora you typically use the writer and reader endpoints more often than the instance endpoints\. 
 
@@ -589,7 +589,7 @@ mysql> select @@aurora_server_id;
 
  In advanced use cases, you might configure some DB instances differently than others\. In this case, use the instance endpoint to connect directly to an instance that is smaller, larger, or otherwise has different characteristics than the others\. Also, set up failover priority so that this special DB instance is the last choice to take over as the primary instance\. We recommend that you use custom endpoints instead of the instance endpoint in such cases\. Doing so simplifies connection management and high availability as you add more DB instances to your cluster\. 
 
-## How Aurora Endpoints Work with High Availability<a name="Aurora.Overview.Endpoints.HA"></a>
+## How Aurora endpoints work with high availability<a name="Aurora.Overview.Endpoints.HA"></a>
 
  For clusters where high availability is important, use the writer endpoint for read/write or general\-purpose connections and the reader endpoint for read\-only connections\. The writer and reader endpoints manage DB instance failover better than instance endpoints do\. Unlike the instance endpoints, the writer and reader endpoints automatically change which DB instance they connect to if a DB instance in your cluster becomes unavailable\. 
 
@@ -597,4 +597,4 @@ mysql> select @@aurora_server_id;
 
  If you design your own application logic to manage connections to instance endpoints, you can manually or programmatically discover the resulting set of available DB instances in the DB cluster\. You can then confirm their instance classes after failover and connect to an appropriate instance endpoint\. 
 
- For more information about failovers, see [Fault Tolerance for an Aurora DB Cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\. 
+ For more information about failovers, see [Fault tolerance for an Aurora DB cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\. 

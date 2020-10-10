@@ -1,17 +1,17 @@
-# DB Instance Classes<a name="Concepts.DBInstanceClass"></a>
+# DB instance classes<a name="Concepts.DBInstanceClass"></a>
 
 The DB instance class determines the computation and memory capacity of an Amazon RDS DB instance\. The DB instance class you need depends on your processing power and memory requirements\. 
 
-For more information about instance class pricing, see [Amazon RDS Pricing](https://aws.amazon.com/rds/pricing/)\. 
+For more information about instance class pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\. 
 
 **Topics**
-+ [DB Instance Class Types](#Concepts.DBInstanceClass.Types)
-+ [Supported DB Engines for DB Instance Classes](#Concepts.DBInstanceClass.SupportAurora)
-+ [Hardware Specifications for DB Instance Classes for Aurora](#Concepts.DBInstanceClass.Summary)
++ [DB instance class types](#Concepts.DBInstanceClass.Types)
++ [Supported DB engines for DB instance classes](#Concepts.DBInstanceClass.SupportAurora)
++ [Hardware specifications for DB instance classes for Aurora](#Concepts.DBInstanceClass.Summary)
 
-## DB Instance Class Types<a name="Concepts.DBInstanceClass.Types"></a>
+## DB instance class types<a name="Concepts.DBInstanceClass.Types"></a>
 
-Amazon Aurora supports two types of instance classes: Memory Optimized and Burstable Performance\. For more information about Amazon EC2 instance types, see [Instance Type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
+Amazon Aurora supports two types of instance classes: Memory Optimized and Burstable Performance\. For more information about Amazon EC2 instance types, see [Instance type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
 
 The following are the Memory Optimized DB instance classes available:
 + **db\.r5** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
@@ -25,9 +25,9 @@ The following are the Burstable Performance DB instance classes available:
 **Note**  
 The DB instance classes that use the AWS Nitro System \(db\.r5, db\.t3\) are throttled on combined read plus write workload\.
 
-For DB instance class hardware specifications, see [Hardware Specifications for DB Instance Classes for Aurora ](#Concepts.DBInstanceClass.Summary)\.
+For DB instance class hardware specifications, see [Hardware specifications for DB instance classes for Aurora ](#Concepts.DBInstanceClass.Summary)\.
 
-## Supported DB Engines for DB Instance Classes<a name="Concepts.DBInstanceClass.SupportAurora"></a>
+## Supported DB engines for DB instance classes<a name="Concepts.DBInstanceClass.SupportAurora"></a>
 
 The following are DB engine considerations for DB instance classes:
 + **Aurora Support for db\.r5**
@@ -65,7 +65,7 @@ In the following table, you can find details about supported Amazon Aurora DB in
 
 ****  
 
-| Instance Class | Aurora MySQL | Aurora PostgreSQL | 
+| Instance class | Aurora MySQL | Aurora PostgreSQL | 
 | --- | --- | --- | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | 1\.22 and later, 2\.06 and later | Yes | 
@@ -100,7 +100,7 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.t2\.medium | Yes | No | 
 | db\.t2\.small | Yes | No | 
 
-## Hardware Specifications for DB Instance Classes for Aurora<a name="Concepts.DBInstanceClass.Summary"></a>
+## Hardware specifications for DB instance classes for Aurora<a name="Concepts.DBInstanceClass.Summary"></a>
 
 The following terminology is used to describe hardware specifications for DB instance classes:
 
@@ -122,12 +122,12 @@ The network speed relative to other DB instance classes\.
 
 In the following table, you can find hardware details about the Amazon RDS DB instance classes for Aurora\. 
 
-For information about Aurora DB engine support for each DB instance class, see [Supported DB Engines for DB Instance Classes](#Concepts.DBInstanceClass.SupportAurora)\. 
+For information about Aurora DB engine support for each DB instance class, see [Supported DB engines for DB instance classes](#Concepts.DBInstanceClass.SupportAurora)\. 
 
 
 ****  
 
-| Instance Class | vCPU | ECU | Memory \(GiB\) | Max\. Bandwidth \(Mbps\) of Local Storage | Network Performance | 
+| Instance class | vCPU | ECU | Memory \(GiB\) | Max\. bandwidth \(mbps\) of local storage | Network performance | 
 | --- | --- | --- | --- | --- | --- | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | 96 | 347 | 768 | 19,000 | 25 Gbps | 

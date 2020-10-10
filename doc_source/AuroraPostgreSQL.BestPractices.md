@@ -1,8 +1,8 @@
-# Best Practices with Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.BestPractices"></a>
+# Best practices with Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.BestPractices"></a>
 
 This topic includes information on best practices and options for using or migrating data to an Amazon Aurora PostgreSQL DB cluster\.
 
-## Fast Failover with Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.BestPractices.FastFailover"></a>
+## Fast failover with Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.BestPractices.FastFailover"></a>
 
 There are several things you can do to make a failover perform faster with Aurora PostgreSQL\. This section discusses each of the following ways:
 + Aggressively set TCP keepalives to ensure that longer running queries that are waiting for a server response will be stopped before the read timeout expires in the event of a failure\.
@@ -12,12 +12,12 @@ There are several things you can do to make a failover perform faster with Auror
 + Use RDS APIs to test application response on server side failures and use a packet dropping tool to test application response for client\-side failures\.
 
 **Topics**
-+ [Setting TCP Keepalives Parameters](#AuroraPostgreSQL.BestPractices.FastFailover.TCPKeepalives)
-+ [Configuring Your Application for Fast Failover](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring)
-+ [Testing Failover](#AuroraPostgreSQL.BestPracticesFastFailover.Testing)
-+ [Fast Failover Example](#AuroraPostgreSQL.BestPractices.FastFailover.Example)
++ [Setting TCP keepalives parameters](#AuroraPostgreSQL.BestPractices.FastFailover.TCPKeepalives)
++ [Configuring your application for fast failover](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring)
++ [Testing failover](#AuroraPostgreSQL.BestPracticesFastFailover.Testing)
++ [Fast failover example](#AuroraPostgreSQL.BestPractices.FastFailover.Example)
 
-### Setting TCP Keepalives Parameters<a name="AuroraPostgreSQL.BestPractices.FastFailover.TCPKeepalives"></a>
+### Setting TCP keepalives parameters<a name="AuroraPostgreSQL.BestPractices.FastFailover.TCPKeepalives"></a>
 
 The TCP keepalive process is simple: when you set up a TCP connection, you associate a set of timers\. When the keepalive timer reaches zero, you send a keepalive probe packet\. If you receive a reply to your keepalive probe, you can assume that the connection is still up and running\.
 
@@ -54,18 +54,18 @@ These settings should notify the application within five seconds when the databa
    tcp_keepalive_probes = 5
    ```
 
-For information on setting TCP keepalive parameters on Windows, see [ Things You May Want to Know About TCP Keepalive](https://blogs.technet.microsoft.com/nettracer/2010/06/03/things-that-you-may-want-to-know-about-tcp-keepalives/)\.
+For information on setting TCP keepalive parameters on Windows, see [ Things you May want to know about TCP keepalive](https://blogs.technet.microsoft.com/nettracer/2010/06/03/things-that-you-may-want-to-know-about-tcp-keepalives/)\.
 
-### Configuring Your Application for Fast Failover<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring"></a>
+### Configuring your application for fast failover<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring"></a>
 
 This section discusses several Aurora PostgreSQL specific configuration changes you can make\. Documentation for general setup and configuration of the JDBC driver is available from the [PostgreSQL JDBC site](https://jdbc.postgresql.org/documentation/documentation.html)\. 
 
 **Topics**
-+ [Reducing DNS Cache Timeouts](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.Timeouts)
-+ [Setting an Aurora PostgreSQL Connection String for Fast Failover](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.ConnectionString)
-+ [Other Options for Obtaining The Host String](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString)
++ [Reducing DNS cache timeouts](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.Timeouts)
++ [Setting an Aurora PostgreSQL connection string for fast failover](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.ConnectionString)
++ [Other options for obtaining the host string](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString)
 
-#### Reducing DNS Cache Timeouts<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.Timeouts"></a>
+#### Reducing DNS cache timeouts<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.Timeouts"></a>
 
 When your application tries to establish a connection after a failover, the new Aurora PostgreSQL writer will be a previous reader, which can be found using the Aurora **read only** endpoint before DNS updates have fully propagated\. Setting the java DNS TTL to a low value helps cycle between reader nodes on subsequent connection attempts\.
 
@@ -76,7 +76,7 @@ java.security.Security.setProperty("networkaddress.cache.ttl" , "1");
 java.security.Security.setProperty("networkaddress.cache.negative.ttl" , "3");
 ```
 
-#### Setting an Aurora PostgreSQL Connection String for Fast Failover<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.ConnectionString"></a>
+#### Setting an Aurora PostgreSQL connection string for fast failover<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.ConnectionString"></a>
 
 To make use of Aurora PostgreSQL fast failover, your application's connection string should have a list of hosts \(highlighted in bold in the following example\) instead of just a single host\. Here is an example connection string you could use to connect to an Aurora PostgreSQL cluster:
 
@@ -88,7 +88,7 @@ myauroracluster.cluster-ro-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432
 &tcpKeepAlive=true&targetServerType=primary&loadBalanceHosts=true
 ```
 
- For best availability and to avoid a dependency on the RDS API, the best option for connecting is to maintain a file with a host string that your application reads from when you establish a connection to the database\. This host string would have all the Aurora endpoints available for the cluster\. For more information about Aurora endpoints, see [Amazon Aurora Connection Management](Aurora.Overview.Endpoints.md)\. For example, you could store the endpoints in a file locally like the following: 
+ For best availability and to avoid a dependency on the RDS API, the best option for connecting is to maintain a file with a host string that your application reads from when you establish a connection to the database\. This host string would have all the Aurora endpoints available for the cluster\. For more information about Aurora endpoints, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\. For example, you could store the endpoints in a file locally like the following: 
 
 ```
 myauroracluster.cluster-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432,
@@ -121,7 +121,7 @@ You can modify other application parameters to speed up the connection process, 
 + `tcpKeepAlive` – Enable this parameter to ensure the TCP keepalive parameters that you set are respected\.
 + `loadBalanceHosts` – When set to `true`, this parameter has the application connect to a random host chosen from a list of candidate hosts\.
 
-#### Other Options for Obtaining The Host String<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString"></a>
+#### Other options for obtaining the host string<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString"></a>
 
 You can get the host string from several sources, including the `aurora_replica_status` function and by using the Amazon RDS API\.
 
@@ -200,9 +200,9 @@ The variable `endpointPostfix` can be a constant that your application sets, or 
 .cksc6xlmwcyw.us-east-1-beta.rds.amazonaws.com
 ```
 
-For availability purposes, a good practice is to default to using the [Aurora Endpoints](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Overview.html#Aurora.Overview.Endpoints) of your DB Cluster if the API is not responding, or is taking too long to respond\. The endpoints are guaranteed to be up to date within the time it takes to update the DNS record\. This is typically less than 30 seconds\. You can store this in a resource file that your application consumes\.
+For availability purposes, a good practice is to default to using the [Aurora endpoints](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Overview.html#Aurora.Overview.Endpoints) of your DB Cluster if the API is not responding, or is taking too long to respond\. The endpoints are guaranteed to be up to date within the time it takes to update the DNS record\. This is typically less than 30 seconds\. You can store this in a resource file that your application consumes\.
 
-### Testing Failover<a name="AuroraPostgreSQL.BestPracticesFastFailover.Testing"></a>
+### Testing failover<a name="AuroraPostgreSQL.BestPracticesFastFailover.Testing"></a>
 
 In all cases you must have a DB cluster with two or more DB instances in it\.
 
@@ -229,7 +229,7 @@ From the server side, certain APIs can cause an outage that can be used to test 
 
 From the application/client side, if using Linux, you can test how the application responds to sudden packet drops based on port, host, or if tcp keepalive packets are not sent or received by using iptables\.
 
-### Fast Failover Example<a name="AuroraPostgreSQL.BestPractices.FastFailover.Example"></a>
+### Fast failover example<a name="AuroraPostgreSQL.BestPractices.FastFailover.Example"></a>
 
 The following code sample shows how an application might set up an Aurora PostgreSQL driver manager\. The application would call `getConnection()` when it needs a connection\. A call to this function can fail to find a valid host, such as when no writer is found but the `targetServerType` parameter was set to `primary`\. The calling application should simply retry calling the function\. This can easily be wrapped into a connection pooler to avoid pushing the retry behavior onto the application\. Most connection poolers allow you to specify a JDBC connection string, so your application could call into `getJdbcConnectionString()` and pass that to the connection pooler to make use of faster failover on Aurora PostgreSQL\.
 
@@ -334,6 +334,6 @@ public class FastFailoverDriverManager {
 
 ## Troubleshooting storage issues<a name="AuroraPostgreSQL.BestPractices.TroubleshootingStorage"></a>
 
-If the amount of memory required by a sort or index creation operation exceeds the amount of memory available, Aurora PostgreSQL writes the excess data to storage\. When it writes the data it uses the same storage space it uses for storing error and message logs\. If your sorts or index creation functions exceed the memory available, you could develop a local storage shortage\. If you experience issues with Aurora PostgreSQL running out of storage space, you can either reconfigure your data sorts to use more memory, or reduce the data retention period for your PostgreSQL log files\. For more information about changing the log retention period see, [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\. 
+If the amount of memory required by a sort or index creation operation exceeds the amount of memory available, Aurora PostgreSQL writes the excess data to storage\. When it writes the data it uses the same storage space it uses for storing error and message logs\. If your sorts or index creation functions exceed the memory available, you could develop a local storage shortage\. If you experience issues with Aurora PostgreSQL running out of storage space, you can either reconfigure your data sorts to use more memory, or reduce the data retention period for your PostgreSQL log files\. For more information about changing the log retention period see, [PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)\. 
 
 If your Aurora cluster is larger than 40 TB, don't use db\.t2 or db\.t3 instance classes\.

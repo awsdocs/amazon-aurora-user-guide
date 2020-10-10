@@ -1,12 +1,15 @@
-# Scenarios for Accessing a DB Instance in a VPC<a name="USER_VPC.Scenarios"></a>
+# Scenarios for accessing a DB instance in a VPC<a name="USER_VPC.Scenarios"></a>
 
 Amazon Aurora supports the following scenarios for accessing a DB instance:
-+ [An EC2 Instance in the Same VPC](#USER_VPC.Scenario1)
-+ [An EC2 Instance in a Different VPC](#USER_VPC.Scenario3)
-+ [An EC2 Instance Not in a VPC](#USER_VPC.ClassicLink)
-+ [A Client Application Through the Internet](#USER_VPC.Scenario4)
++ [An EC2 instance in the same VPC](#USER_VPC.Scenario1)
++ [An EC2 instance in a different VPC](#USER_VPC.Scenario3)
++ [An EC2 instance not in a VPC](#USER_VPC.ClassicLink)
++ [A client application through the internet](#USER_VPC.Scenario4)
 
-## A DB Instance in a VPC Accessed by an EC2 Instance in the Same VPC<a name="USER_VPC.Scenario1"></a>
+**Note**  
+If your DB cluster is in a VPC but isn't publicly accessible, you can also use an AWS Site\-to\-Site VPN connection or an AWS Direct Connect connection to access it from a private network\. For more information, see [Internetwork traffic privacy](inter-network-traffic-privacy.md)\.
+
+## A DB instance in a VPC accessed by an EC2 instance in the same VPC<a name="USER_VPC.Scenario1"></a>
 
 A common use of a DB instance in a VPC is to share data with an application server that is running in an EC2 instance in the same VPC\. This is the user scenario created if you use AWS Elastic Beanstalk to create an EC2 instance and a DB instance in the same VPC\. 
 
@@ -19,7 +22,7 @@ The simplest way to manage access between EC2 instances and DB instances in the 
 + Create a VPC security group for your EC2 instances \(web servers and clients\) to be in\. This security group can, if needed, allow access to the EC2 instance from the internet by using the VPC's routing table\. For example, you can set rules on this security group to allow TCP access to the EC2 instance over port 22\.
 + Create custom rules in the security group for your DB instances that allow connections from the security group you created for your EC2 instances\. This would allow any member of the security group to access the DB instances\.
 
-For a tutorial that shows you how to create a VPC with both public and private subnets for this scenario, see [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. 
+For a tutorial that shows you how to create a VPC with both public and private subnets for this scenario, see [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. 
 
 **To create a rule in a VPC security group that allows connections from another security group, do the following:**
 
@@ -43,7 +46,7 @@ The following screen shows several inbound rules\.
 
 ![\[adding a security group to another security group's rules\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/con-vpc-add-sg-rule.png)
 
-## A DB Instance in a VPC Accessed by an EC2 Instance in a Different VPC<a name="USER_VPC.Scenario3"></a>
+## A DB instance in a VPC accessed by an EC2 instance in a different VPC<a name="USER_VPC.Scenario3"></a>
 
  When your DB instance is in a different VPC from the EC2 instance you are using to access it, you can use VPC peering to access the DB instance\.
 
@@ -51,9 +54,9 @@ The following diagram shows this scenario\.
 
 ![\[A DB Instance in a VPC Accessed by an EC2 Instance in a Different VPC\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/RDSVPC2EC2VPC.png)
 
-A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses\. Instances in either VPC can communicate with each other as if they are within the same network\. You can create a VPC peering connection between your own VPCs, with a VPC in another AWS account, or with a VPC in a different AWS Region\. To learn more about VPC peering, see [VPC Peering](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-peering.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses\. Instances in either VPC can communicate with each other as if they are within the same network\. You can create a VPC peering connection between your own VPCs, with a VPC in another AWS account, or with a VPC in a different AWS Region\. To learn more about VPC peering, see [VPC peering](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-peering.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
-## A DB Instance in a VPC Accessed by an EC2 Instance Not in a VPC<a name="USER_VPC.ClassicLink"></a>
+## A DB instance in a VPC accessed by an EC2 instance not in a VPC<a name="USER_VPC.ClassicLink"></a>
 
 You can communicate between an Amazon Aurora DB instance that is in a VPC and an EC2 instance that is not in an Amazon VPC by using *ClassicLink*\. When you use Classic Link, an application on the EC2 instance can connect to the DB instance by using the endpoint for the DB instance\. ClassicLink is available at no charge\. 
 
@@ -82,7 +85,7 @@ Using ClassicLink, you can connect an EC2 instance to a logically isolated datab
 **Note**  
  The ClassicLink features are only visible in the consoles for accounts and regions that support EC2\-Classic\. For more information, see [ ClassicLink](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in the *Amazon EC2 User Guide for Linux Instances\.* 
 
-## A DB Instance in a VPC Accessed by a Client Application Through the Internet<a name="USER_VPC.Scenario4"></a>
+## A DB instance in a VPC accessed by a client application through the internet<a name="USER_VPC.Scenario4"></a>
 
 To access a DB instance in a VPC from a client application through the internet, you configure a VPC with a single public subnet, and an internet gateway to enable communication over the internet\. 
 
@@ -97,4 +100,4 @@ We recommend the following configuration:
 + An internet gateway which connects the VPC to the internet and to other AWS products\.
 + A security group associated with the DB instance\. The security group's inbound rules allow your client application to access to your DB instance\.
 
-For information about creating a DB instance in a VPC, see [Creating a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.InstanceInVPC)\.
+For information about creating a DB instance in a VPC, see [Creating a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.InstanceInVPC)\.

@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2020\-09\-17 \(Version 2\.09\.0\)<a name="AuroraMySQL.Updates.2090"></a>
+# Aurora MySQL database engine updates 2020\-09\-17 \(version 2\.09\.0\)<a name="AuroraMySQL.Updates.2090"></a>
 
 **Version:** 2\.09\.0
 
@@ -10,10 +10,10 @@ Aurora MySQL 2\.09\.0 is generally available\. Aurora MySQL 2\.x versions are co
 
  To create a cluster with an older version of Aurora MySQL, specify the engine version through the AWS Management Console, the AWS CLI, or the RDS API\. 
 
-If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 **Note**  
-For information on how to upgrade your Aurora MySQL database cluster, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+For information on how to upgrade your Aurora MySQL database cluster, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2090.Improvements"></a>
 
@@ -25,7 +25,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 
    Parallel query is now expanded to be available in all regions where Aurora MySQL is available\. 
 
-   There are a number of other functionality enhancements and changes to the procedures for upgrading and enabling parallel query in an Aurora cluster\. For more information, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\. 
+   There are a number of other functionality enhancements and changes to the procedures for upgrading and enabling parallel query in an Aurora cluster\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\. 
 
  **High priority fixes:** 
 +  Backport of Community Bug \#27659490: SELECT USING DYNAMIC RANGE AND INDEX MERGE USE TOO MUCH MEMORY \(OOM\) 

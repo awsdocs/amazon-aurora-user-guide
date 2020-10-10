@@ -1,14 +1,14 @@
-# DB Cluster Status<a name="Aurora.Status"></a>
+# DB cluster status<a name="Aurora.Status"></a>
 
 The status of a DB cluster indicates the health of the DB cluster\. You can view the status of a DB cluster by using the Amazon RDS console, the AWS CLI command [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html), or the API operation [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html)\.
 
 **Note**  
-Aurora also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB cluster\. Maintenance status is independent of DB cluster status\. For more information on *maintenance status*, see [Applying Updates for a DB Cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\.
+Aurora also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB cluster\. Maintenance status is independent of DB cluster status\. For more information on *maintenance status*, see [Applying updates for a DB cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\.
 
 Find the possible status values for DB clusters in the following table\.
 
 
-| DB Cluster Status | Billed | Description | 
+| DB cluster status | Billed | Description | 
 | --- | --- | --- | 
 | available | Billed |  The DB cluster is healthy and available\. When an Aurora Serverless cluster is available and paused, you're billed for storage only\.  | 
 | backing\-up | Billed |  The DB cluster is currently being backed up\.  | 

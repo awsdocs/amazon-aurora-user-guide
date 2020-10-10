@@ -1,4 +1,4 @@
-# Using Machine Learning \(ML\) Capabilities with Amazon Aurora<a name="aurora-ml"></a>
+# Using machine learning \(ML\) capabilities with Amazon Aurora<a name="aurora-ml"></a>
 
  Following, you can find a description of how to use machine learning \(ML\) capabilities in your Aurora database applications\. This feature simplifies developing database applications that use the Amazon SageMaker and Amazon Comprehend services to perform predictions\. In ML terminology, these predictions are known as *inferences*\. 
 
@@ -7,5 +7,5 @@
  To use this feature, it helps for your organization to already have the appropriate ML models, notebooks, and so on available in the Amazon machine learning services\. You can divide the database knowledge and ML knowledge among the members of your team\. The database developers can focus on the SQL and database side of your application\. The Aurora Machine Learning feature enables the application to use ML processing through the familiar database interface of stored function calls\. 
 
 **Topics**
-+ [Using Machine Learning \(ML\) with Aurora MySQL](mysql-ml.md)
-+ [Using Machine Learning \(ML\) with Aurora PostgreSQL](postgresql-ml.md)
++ [Using machine learning \(ML\) with Aurora MySQL](mysql-ml.md)
++ [Using machine learning \(ML\) with Aurora PostgreSQL](postgresql-ml.md)

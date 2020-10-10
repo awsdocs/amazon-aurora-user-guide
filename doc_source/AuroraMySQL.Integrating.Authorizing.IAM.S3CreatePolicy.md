@@ -1,11 +1,11 @@
-# Creating an IAM Policy to Access Amazon S3 Resources<a name="AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy"></a>
+# Creating an IAM policy to access Amazon S3 resources<a name="AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy"></a>
 
 Aurora can access Amazon S3 resources to either load data to or save data from an Aurora DB cluster\. However, you must first create an IAM policy that provides the bucket and object permissions that allow Aurora to access Amazon S3\.
 
 The following table lists the Aurora features that can access an Amazon S3 bucket on your behalf, and the minimum required bucket and object permissions required by each feature\.
 
 
-| Feature | Bucket Permissions | Object Permissions | 
+| Feature | Bucket permissions | Object permissions | 
 | --- | --- | --- | 
 |  `LOAD DATA FROM S3`  |  `ListBucket`  |  `GetObject` `GetObjectVersion`  | 
 | LOAD XML FROM S3 |  `ListBucket`  |  `GetObject` `GetObjectVersion`  | 
@@ -28,7 +28,7 @@ You can use the following steps to create an IAM policy that provides the minimu
 
 1. For **Actions**, choose **Expand all**, and then choose the bucket permissions and object permissions needed for the IAM policy\.
 
-   Object permissions are permissions for object operations in Amazon S3, and need to be granted for objects in a bucket, not the bucket itself\. For more information about permissions for object operations in Amazon S3, see [Permissions for Object Operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-objects)\.
+   Object permissions are permissions for object operations in Amazon S3, and need to be granted for objects in a bucket, not the bucket itself\. For more information about permissions for object operations in Amazon S3, see [Permissions for object operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-objects)\.
 
 1. Choose **Resources**, and choose **Add ARN** for **bucket**\.
 
@@ -42,7 +42,7 @@ You can use the following steps to create an IAM policy that provides the minimu
 
    For the Amazon S3 bucket, specify the Amazon S3 bucket to allow access to\. For the object, you can choose **Any** to grant permissions to any object in the bucket\.
 **Note**  
-You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value in order to allow Aurora to access only specific files or folders in an Amazon S3 bucket\. For more information about how to define an access policy for Amazon S3, see [Managing Access Permissions to Your Amazon S3 Resources](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)\.
+You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value in order to allow Aurora to access only specific files or folders in an Amazon S3 bucket\. For more information about how to define an access policy for Amazon S3, see [Managing access permissions to your Amazon S3 resources](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)\.
 
 1. \(Optional\) Choose **Add ARN** for **bucket** to add another Amazon S3 bucket to the policy, and repeat the previous steps for the bucket\.
 **Note**  
@@ -54,4 +54,4 @@ You can repeat this to add corresponding bucket permission statements to your po
 
 1. Choose **Create policy**\.
 
-1. Complete the steps in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.
+1. Complete the steps in [Creating an IAM role to allow Amazon Aurora to access AWS services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.

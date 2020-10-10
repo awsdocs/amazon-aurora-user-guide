@@ -1,11 +1,11 @@
-# Quotas and Constraints for Amazon Aurora<a name="CHAP_Limits"></a>
+# Quotas and constraints for Amazon Aurora<a name="CHAP_Limits"></a>
 
 Following, you can find a description of the resource quotas and naming constraints for Amazon Aurora\.
 
 **Topics**
 + [Quotas in Amazon Aurora](#RDS_Limits.Limits)
-+ [Naming Constraints in Amazon Aurora](#RDS_Limits.Constraints)
-+ [Amazon Aurora Size Limits](#RDS_Limits.FileSize.Aurora)
++ [Naming constraints in Amazon Aurora](#RDS_Limits.Constraints)
++ [Amazon Aurora size limits](#RDS_Limits.FileSize.Aurora)
 
 ## Quotas in Amazon Aurora<a name="RDS_Limits.Limits"></a>
 
@@ -14,7 +14,7 @@ Each AWS account has quotas, for each AWS Region, on the number of Amazon Aurora
 The following table lists the resources and their quotas per AWS Region\.
 
 
-| Resource | Default Quota | 
+| Resource | Default quota | 
 | --- | --- | 
 | Authorizations per DB security group | 20 | 
 | Burst balance \(for instances <1 TiB\) | 3000 IOPS | 
@@ -40,17 +40,17 @@ The following table lists the resources and their quotas per AWS Region\.
 
 **Note**  
 By default, you can have up to a total of 40 DB instances\. RDS DB instances, Aurora DB instances, Amazon Neptune instances, and Amazon DocumentDB instances apply to this quota\.  
-If your application requires more DB instances, you can request additional DB instances by opening the [Service Quotas console](https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/dashboard)\. In the navigation pane, choose **AWS services**\. Choose **Amazon Relational Database Service \(Amazon RDS\)**, choose a quota, and follow the directions to request a quota increase\. For more information, see [Requesting a Quota Increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-increase.html) in the *Service Quotas User Guide*\.  
+If your application requires more DB instances, you can request additional DB instances by opening the [Service Quotas console](https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/dashboard)\. In the navigation pane, choose **AWS services**\. Choose **Amazon Relational Database Service \(Amazon RDS\)**, choose a quota, and follow the directions to request a quota increase\. For more information, see [Requesting a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-increase.html) in the *Service Quotas User Guide*\.  
 Backups managed by AWS Backup are considered manual cluster snapshots for the manual cluster snapshots quota\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
-## Naming Constraints in Amazon Aurora<a name="RDS_Limits.Constraints"></a>
+## Naming constraints in Amazon Aurora<a name="RDS_Limits.Constraints"></a>
 
 The following table describes naming constraints in Amazon Aurora\. 
 
 
 ****  
 
-| Resource or Item | Constraints | 
+| Resource or item | Constraints | 
 | --- | --- | 
 | DB cluster identifier |  Identifiers have these naming constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)  | 
 |  Initial database name  |  Database name constraints differ between Aurora MySQL and PostgreSQL\. For more information, see the available settings when creating each DB cluster\.  | 
@@ -59,6 +59,6 @@ The following table describes naming constraints in Amazon Aurora\.
 | DB parameter group name |  These names have these constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)  | 
 |  DB subnet group name  |  These names have these constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)  | 
 
-## Amazon Aurora Size Limits<a name="RDS_Limits.FileSize.Aurora"></a>
+## Amazon Aurora size limits<a name="RDS_Limits.FileSize.Aurora"></a>
 
 For Aurora MySQL, the maximum table size is only constrained by the size of the Aurora cluster volume\. An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\)\. For an Aurora PostgreSQL DB cluster, the maximum table size is 32 terabytes \(TB\)\. We recommend that you follow table design best practices, such as partitioning of large tables\.

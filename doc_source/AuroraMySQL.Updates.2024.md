@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2018\-09\-21<a name="AuroraMySQL.Updates.2024"></a>
+# Aurora MySQL database engine updates 2018\-09\-21<a name="AuroraMySQL.Updates.2024"></a>
 
 **Version:** 2\.02\.4
 
@@ -12,7 +12,7 @@ We don't allow in\-place upgrade of Aurora MySQL 1\.\* clusters into Aurora MySQ
 
 The performance schema is disabled for this release of Aurora MySQL 5\.7\. Upgrade to Aurora 2\.03 for performance schema support\.
 
-If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2024.Improvements"></a>
 + Fixed a stability issue related to Full Text Search indexes on tables restored from an Aurora MySQL 5\.6 snapshot\.

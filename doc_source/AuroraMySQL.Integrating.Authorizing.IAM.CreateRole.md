@@ -1,4 +1,4 @@
-# Creating an IAM Role to Allow Amazon Aurora to Access AWS Services<a name="AuroraMySQL.Integrating.Authorizing.IAM.CreateRole"></a>
+# Creating an IAM role to allow Amazon Aurora to access AWS services<a name="AuroraMySQL.Integrating.Authorizing.IAM.CreateRole"></a>
 
 After creating an IAM policy to allow Aurora to access AWS resources, you must create an IAM role and attach the IAM policy to the new IAM role\.
 
@@ -21,10 +21,10 @@ To create an IAM role to permit your Amazon RDS cluster to communicate with othe
 1. On the **Attach permissions policies** page, enter the name of your policy in the **Search** field\.
 
 1. When it appears in the list, select the policy that you defined earlier using the instructions in one of the following sections:
-   + [Creating an IAM Policy to Access Amazon S3 Resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md)
-   + [Creating an IAM Policy to Access AWS Lambda Resources](AuroraMySQL.Integrating.Authorizing.IAM.LambdaCreatePolicy.md)
-   + [Creating an IAM Policy to Access CloudWatch Logs Resources](AuroraMySQL.Integrating.Authorizing.IAM.CWCreatePolicy.md)
-   + [Creating an IAM Policy to Access AWS KMS Resources](AuroraMySQL.Integrating.Authorizing.IAM.KMSCreatePolicy.md)
+   + [Creating an IAM policy to access Amazon S3 resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md)
+   + [Creating an IAM policy to access AWS Lambda resources](AuroraMySQL.Integrating.Authorizing.IAM.LambdaCreatePolicy.md)
+   + [Creating an IAM policy to access CloudWatch Logs resources](AuroraMySQL.Integrating.Authorizing.IAM.CWCreatePolicy.md)
+   + [Creating an IAM policy to access AWS KMS resources](AuroraMySQL.Integrating.Authorizing.IAM.KMSCreatePolicy.md)
 
 1. Choose **Next: Tags**, and then choose **Next: Review**\.
 
@@ -32,4 +32,4 @@ To create an IAM role to permit your Amazon RDS cluster to communicate with othe
 
 1. Choose **Create Role**\.
 
-1. Complete the steps in [Associating an IAM Role with an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.
+1. Complete the steps in [Associating an IAM role with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.

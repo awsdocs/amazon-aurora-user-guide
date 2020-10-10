@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2019\-01\-18<a name="AuroraMySQL.Updates.2033"></a>
+# Aurora MySQL database engine updates 2019\-01\-18<a name="AuroraMySQL.Updates.2033"></a>
 
 **Version:** 2\.03\.3
 
@@ -8,13 +8,13 @@ When creating a new Aurora MySQL DB cluster \(including restoring a snapshot\), 
 
 We don't allow in\-place upgrade of Aurora MySQL 1\.\* clusters into Aurora MySQL 2\.03\.3 or restore to Aurora MySQL 2\.03\.3 from an Amazon S3 backup\. We plan to remove these restrictions in a later Aurora MySQL 2\.\* release\.
 
-If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 **Note**  
  This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] and China \(Beijing\) \[cn\-north\-1\] regions\. There will be a separate announcement once it is made available\. 
 
 **Note**  
-The procedure to upgrade your DB cluster has changed\. For more information, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+The procedure to upgrade your DB cluster has changed\. For more information, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2033.Improvements"></a>
 +  Fixed an issue where an Aurora Replica might become dead\-latched when running a backward scan on an index\. 
@@ -29,7 +29,7 @@ The procedure to upgrade your DB cluster has changed\. For more information, see
 +  Fixed an issue where the CPU usage is 100% caused by the dictionary stats thread\. 
 +  Fixed an issue where an Aurora Replica might restart when running a `CHECK TABLE` statement\. 
 
-## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.2033.BugFixes"></a>
+## Integration of MySQL bug fixes<a name="AuroraMySQL.Updates.2033.BugFixes"></a>
 +  Bug \#25361251: INCORRECT BEHAVIOR WITH INSERT ON DUPLICATE KEY IN SP 
 +  Bug \#26734162: INCORRECT BEHAVIOR WITH INSERT OF BLOB \+ ON DUPLICATE KEY UPDATE 
 +  Bug \#27460607: INCORRECT BEHAVIOR OF IODKU WHEN INSERT SELECT's SOURCE TABLE IS EMPTY 

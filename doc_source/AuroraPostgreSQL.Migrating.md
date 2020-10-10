@@ -1,24 +1,24 @@
-# Migrating Data to Amazon Aurora with PostgreSQL Compatibility<a name="AuroraPostgreSQL.Migrating"></a>
+# Migrating data to Amazon Aurora with PostgreSQL compatibility<a name="AuroraPostgreSQL.Migrating"></a>
 
 You have several options for migrating data from your existing database to an Amazon Aurora with PostgreSQL compatibility DB cluster\. Your migration options also depend on the database that you are migrating from and the size of the data that you are migrating\. Following are your options:
 
 **Migrating from an RDS PostgreSQL DB instance**  
-You can migrate data directly from an Amazon RDS PostgreSQL DB snapshot to an Aurora PostgreSQL DB cluster\. For more information, see [Migrating an RDS PostgreSQL DB Snapshot to an Aurora PostgreSQL DB Cluster](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Import.Console)\.  
-You can also migrate from an RDS PostgreSQL DB instance by creating an Aurora PostgreSQL Read Replica of a PostgreSQL DB instance\. When the replica lag between the PostgreSQL DB instance and the Aurora PostgreSQL Read Replica is zero, you can stop replication\. At this point, you can make the Aurora Read Replica a standalone Aurora PostgreSQL DB cluster for reading and writing\. For more information, see [Migrating Data from an RDS PostgreSQL DB Instance to an Aurora PostgreSQL DB Cluster by Using an Aurora Read Replica](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica)\.
+You can migrate data directly from an Amazon RDS PostgreSQL DB snapshot to an Aurora PostgreSQL DB cluster\. For more information, see [Migrating an RDS PostgreSQL DB snapshot to an Aurora PostgreSQL DB cluster](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Import.Console)\.  
+You can also migrate from an RDS PostgreSQL DB instance by creating an Aurora PostgreSQL Read Replica of a PostgreSQL DB instance\. When the replica lag between the PostgreSQL DB instance and the Aurora PostgreSQL Read Replica is zero, you can stop replication\. At this point, you can make the Aurora Read Replica a standalone Aurora PostgreSQL DB cluster for reading and writing\. For more information, see [Migrating data from an RDS PostgreSQL DB instance to an Aurora PostgreSQL DB cluster by using an Aurora read replica](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica)\.
 
 **Migrating from a database that is not PostgreSQL\-compatible**  
-You can use AWS Database Migration Service \(AWS DMS\) to migrate data from a database that is not PostgreSQL\-compatible\. For more information on AWS DMS, see [What Is AWS Database Migration Service?](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html)
+You can use AWS Database Migration Service \(AWS DMS\) to migrate data from a database that is not PostgreSQL\-compatible\. For more information on AWS DMS, see [What is AWS Database Migration Service?](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html)
 
 **Importing Amazon S3 data**  
-You can migrate by importing data from Amazon S3 into a table belonging to an Aurora PostgreSQL DB cluster for an RDS PostgreSQL DB instance\. For more information, see [Importing Amazon S3 Data into an Aurora PostgreSQL DB Cluster](#USER_PostgreSQL.S3Import)\.
+You can migrate by importing data from Amazon S3 into a table belonging to an Aurora PostgreSQL DB cluster for an RDS PostgreSQL DB instance\. For more information, see [Importing Amazon S3 data into an Aurora PostgreSQL DB cluster](#USER_PostgreSQL.S3Import)\.
 
 For a list of AWS Regions where Aurora is available, see [Amazon Aurora](https://docs.aws.amazon.com/general/latest/gr/rande.html#aurora) in the *AWS General Reference*\.
 
-## Migrating an RDS PostgreSQL DB Snapshot to an Aurora PostgreSQL DB Cluster<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Import.Console"></a>
+## Migrating an RDS PostgreSQL DB snapshot to an Aurora PostgreSQL DB cluster<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Import.Console"></a>
 
-To create an Aurora PostgreSQL DB cluster, you can migrate a DB snapshot of an RDS PostgreSQL DB instance\. The new Aurora PostgreSQL DB cluster is populated with the data from the original RDS PostgreSQL DB instance\. The DB snapshot must be from an RDS DB instance running PostgreSQL 9\.6\.1 or 9\.6\.3\. For information about creating a DB snapshot, see [Creating a DB Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
+To create an Aurora PostgreSQL DB cluster, you can migrate a DB snapshot of an RDS PostgreSQL DB instance\. The new Aurora PostgreSQL DB cluster is populated with the data from the original RDS PostgreSQL DB instance\. The DB snapshot must be from an RDS DB instance running PostgreSQL 9\.6\.1 or 9\.6\.3\. For information about creating a DB snapshot, see [Creating a DB snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
 
-In some cases, the DB snapshot might not be in the AWS Region where you want to locate your data\. If so, use the Amazon RDS console to copy the DB snapshot to that AWS Region\. For information about copying a DB snapshot, see [Copying a DB Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
+In some cases, the DB snapshot might not be in the AWS Region where you want to locate your data\. If so, use the Amazon RDS console to copy the DB snapshot to that AWS Region\. For information about copying a DB snapshot, see [Copying a DB snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
 
 When you migrate the DB snapshot by using the console, the console takes the actions necessary to create both the DB cluster and the primary instance\.
 
@@ -35,7 +35,7 @@ You can also choose for your new Aurora PostgreSQL DB cluster to be encrypted at
 1. Choose **Migrate Database**\.
 
 1. Set the following values on the **Migrate Database** page:
-   + **DB Instance Class**: Choose a DB instance class that has the required storage and capacity for your database, for example `db.r3.large`\. Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\)\. So you only need to choose a DB instance class that meets your current storage requirements\. For more information, see [Overview of Aurora Storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\.
+   + **DB Instance Class**: Choose a DB instance class that has the required storage and capacity for your database, for example `db.r3.large`\. Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\)\. So you only need to choose a DB instance class that meets your current storage requirements\. For more information, see [Overview of Aurora storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\.
    + **DB Instance Identifier**: Enter a name for the DB cluster that is unique for your account in the AWS Region that you chose\. This identifier is used in the endpoint addresses for the instances in your DB cluster\. You might choose to add some intelligence to the name, such as including the AWS Region and DB engine that you chose, for example **aurora\-cluster1**\.
 
      The DB instance identifier has the following constraints:
@@ -43,7 +43,7 @@ You can also choose for your new Aurora PostgreSQL DB cluster to be encrypted at
      + Its first character must be a letter\.
      + It can't end with a hyphen or contain two consecutive hyphens\.
      + It must be unique for all DB instances per AWS account, per AWS Region\.
-   + **VPC**: If you have an existing VPC, then you can use that VPC with your Aurora PostgreSQL DB cluster by choosing your VPC identifier, for example `vpc-a464d1c1`\. For information on using an existing VPC, see [How to Create a VPC for Use with Amazon Aurora](Aurora.CreateVPC.md)\.
+   + **VPC**: If you have an existing VPC, then you can use that VPC with your Aurora PostgreSQL DB cluster by choosing your VPC identifier, for example `vpc-a464d1c1`\. For information on using an existing VPC, see [How to create a VPC for use with Amazon Aurora](Aurora.CreateVPC.md)\.
 
      Otherwise, you can choose to have Amazon RDS create a VPC for you by choosing **Create a new VPC**\. 
    + **Subnet Group**: If you have an existing subnet group, then you can use that subnet group with your Aurora PostgreSQL DB cluster by choosing your subnet group identifier, for example `gs-subnet-group1`\.
@@ -63,21 +63,21 @@ You might be behind a corporate firewall that doesn't allow access to default po
 
 1. Choose **Migrate** to migrate your DB snapshot\. 
 
-1. Choose **Instances**, and then choose the arrow icon to show the DB cluster details and monitor the progress of the migration\. On the details page, you can find the cluster endpoint used to connect to the primary instance of the DB cluster\. For more information on connecting to an Aurora PostgreSQL DB cluster, see [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\. 
+1. Choose **Instances**, and then choose the arrow icon to show the DB cluster details and monitor the progress of the migration\. On the details page, you can find the cluster endpoint used to connect to the primary instance of the DB cluster\. For more information on connecting to an Aurora PostgreSQL DB cluster, see [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\. 
 
-## Migrating Data from an RDS PostgreSQL DB Instance to an Aurora PostgreSQL DB Cluster by Using an Aurora Read Replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica"></a>
+## Migrating data from an RDS PostgreSQL DB instance to an Aurora PostgreSQL DB cluster by using an Aurora read replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica"></a>
 
 You can migrate from a PostgreSQL DB instance to an Aurora PostgreSQL DB cluster by using an Aurora Read Replica\. When you need to migrate from an RDS PostgreSQL DB instance to an Aurora PostgreSQL DB cluster, we recommend using this approach\. 
 
 In this case, Amazon RDS uses the PostgreSQL DB engine's streaming replication functionality to create a special type of DB cluster for the source PostgreSQL DB instance\. This type of DB cluster is called an Aurora Read Replica\. Updates made to the source PostgreSQL DB instance are asynchronously replicated to the Aurora Read Replica\. 
 
 **Topics**
-+ [Overview of Migrating Data by Using an Aurora Read Replica](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Intro)
-+ [Preparing to Migrate Data by Using an Aurora Read Replica](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Prepare)
-+ [Creating an Aurora Read Replica](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Create)
-+ [Promoting an Aurora Read Replica](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote)
++ [Overview of migrating data by using an Aurora read replica](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Intro)
++ [Preparing to migrate data by using an Aurora read replica](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Prepare)
++ [Creating an Aurora read replica](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Create)
++ [Promoting an Aurora read replica](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote)
 
-### Overview of Migrating Data by Using an Aurora Read Replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Intro"></a>
+### Overview of migrating data by using an Aurora read replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Intro"></a>
 
 To migrate from an RDS PostgreSQL DB instance to an Aurora PostgreSQL DB cluster, we recommend creating an Aurora Read Replica of your source PostgreSQL DB instance\. When the replica lag between the PostgreSQL DB instance and the Aurora PostgreSQL Read Replica is zero, you can stop replication\. At this point, you can promote the Aurora Read Replica to be a standalone Aurora PostgreSQL DB cluster\. This standalone DB cluster can then accept write loads\. 
 
@@ -88,11 +88,11 @@ When you create an Aurora Read Replica of a PostgreSQL DB instance, Amazon RDS c
 You can only have one Aurora Read Replica for a PostgreSQL DB instance\. If you try to create an Aurora Read Replica for your Amazon RDS PostgreSQL instance and you already have a read replica, the request is rejected\. 
 
 **Note**  
-Replication issues can arise due to feature differences between Aurora PostgreSQL and the PostgreSQL engine version of your RDS PostgreSQL DB instance that is the replication source\. You can replicate only from an Amazon RDS PostgreSQL instance that is compatible with the Aurora PostgreSQL version in question\. For example, if the supported Aurora PostgreSQL version is 9\.6\.3, the Amazon RDS PostgreSQL DB instance must be running version 9\.6\.1 or greater\. If you encounter an error, you can find help in the [Amazon RDS Community Forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
+Replication issues can arise due to feature differences between Aurora PostgreSQL and the PostgreSQL engine version of your RDS PostgreSQL DB instance that is the replication source\. You can replicate only from an Amazon RDS PostgreSQL instance that is compatible with the Aurora PostgreSQL version in question\. For example, if the supported Aurora PostgreSQL version is 9\.6\.3, the Amazon RDS PostgreSQL DB instance must be running version 9\.6\.1 or greater\. If you encounter an error, you can find help in the [Amazon RDS community forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
 
-For more information on PostgreSQL read replicas, see [Working with Read Replicas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html) in the *Amazon RDS User Guide*\.
+For more information on PostgreSQL read replicas, see [Working with read replicas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html) in the *Amazon RDS User Guide*\.
 
-### Preparing to Migrate Data by Using an Aurora Read Replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Prepare"></a>
+### Preparing to migrate data by using an Aurora read replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Prepare"></a>
 
 Before you migrate data from your RDS PostgreSQL instance to an Aurora PostgreSQL cluster, make sure that your instance has sufficient storage capacity\. This storage capacity is for the write ahead log \(WAL\) segments that accumulate during the migration\. There are several metrics to check for this, described following\. 
 
@@ -106,13 +106,13 @@ Before you migrate data from your RDS PostgreSQL instance to an Aurora PostgreSQ
 
 For more information about monitoring your RDS instance, see [Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Monitoring.html) in the *Amazon RDS User Guide*\.
 
-### Creating an Aurora Read Replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Create"></a>
+### Creating an Aurora read replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Create"></a>
 
 You can create an Aurora Read Replica for a PostgreSQL DB instance by using the console or the AWS CLI\.
 
 #### Console<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Create.Console"></a>
 
-**To create an Aurora Read Replica from a source PostgreSQL DB instance**
+**To create an Aurora read replica from a source PostgreSQL DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -266,9 +266,9 @@ https://rds.us-east-1.amazonaws.com/
     &X-Amz-Signature=bee4aabc750bf7dad0cd9e22b952bd6089d91e2a16592c2293e532eeaab8bc77
 ```
 
-### Promoting an Aurora Read Replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote"></a>
+### Promoting an Aurora read replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote"></a>
 
-After migration completes, you can promote the Aurora Read Replica to a standalone DB cluster\. You then direct your client applications to the endpoint for the Aurora Read Replica\. For more information on the Aurora endpoints, see [Amazon Aurora Connection Management](Aurora.Overview.Endpoints.md)\. Promotion should complete fairly quickly\. You can't delete the primary PostgreSQL DB instance or unlink the DB instance and the Aurora Read Replica until the promotion is complete\.
+After migration completes, you can promote the Aurora Read Replica to a standalone DB cluster\. You then direct your client applications to the endpoint for the Aurora Read Replica\. For more information on the Aurora endpoints, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\. Promotion should complete fairly quickly\. You can't delete the primary PostgreSQL DB instance or unlink the DB instance and the Aurora Read Replica until the promotion is complete\.
 
 Before you promote your Aurora Read Replica, stop any transactions from being written to the source PostgreSQL DB instance\. Then wait for the replica lag on the Aurora Read Replica to reach zero\. 
 
@@ -276,7 +276,7 @@ After you promote your read replica, confirm that the promotion has completed\. 
 
 #### Console<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote.Console"></a>
 
-**To promote an Aurora Read Replica to an Aurora DB cluster**
+**To promote an Aurora read replica to an Aurora DB cluster**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -304,22 +304,22 @@ aws rds promote-read-replica-db-cluster ^
     --db-cluster-identifier myreadreplicacluster
 ```
 
-## Importing Amazon S3 Data into an Aurora PostgreSQL DB Cluster<a name="USER_PostgreSQL.S3Import"></a>
+## Importing Amazon S3 data into an Aurora PostgreSQL DB cluster<a name="USER_PostgreSQL.S3Import"></a>
 
 You can import data from Amazon S3 into a table belonging to an Aurora PostgreSQL DB cluster\. To do this, you use the `aws_s3` PostgreSQL extension that Aurora PostgreSQL provides\. 
 
 **Note**  
 To import from Amazon S3 into Aurora PostgreSQL, your database must be running PostgreSQL version 10\.7 or later\. 
 
-For more information on storing data with Amazon S3, see [Create a Bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\. For instructions on how to upload a file to an Amazon S3 bucket, see [Add an Object to a Bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\.
+For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\. For instructions on how to upload a file to an Amazon S3 bucket, see [Add an object to a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\.
 
 **Topics**
-+ [Overview of Importing Amazon S3 Data](#USER_PostgreSQL.S3Import.Overview)
-+ [Setting Up Access to an Amazon S3 Bucket](#USER_PostgreSQL.S3Import.AccessPermission)
-+ [Using the aws\_s3\.table\_import\_from\_s3 Function to Import Amazon S3 Data](#USER_PostgreSQL.S3Import.FileFormats)
-+ [Function Reference](#USER_PostgreSQL.S3Import.Reference)
++ [Overview of importing Amazon S3 data](#USER_PostgreSQL.S3Import.Overview)
++ [Setting up access to an Amazon S3 bucket](#USER_PostgreSQL.S3Import.AccessPermission)
++ [Using the aws\_s3\.table\_import\_from\_s3 function to import Amazon S3 data](#USER_PostgreSQL.S3Import.FileFormats)
++ [Function reference](#USER_PostgreSQL.S3Import.Reference)
 
-### Overview of Importing Amazon S3 Data<a name="USER_PostgreSQL.S3Import.Overview"></a>
+### Overview of importing Amazon S3 data<a name="USER_PostgreSQL.S3Import.Overview"></a>
 
 To import data stored in an Amazon S3 bucket to a PostgreSQL database table, follow these steps\. 
 
@@ -349,7 +349,7 @@ To import data stored in an Amazon S3 bucket to a PostgreSQL database table, fol
       + File path – The file path locates the file in the Amazon S3 bucket\.
       + AWS Region – The AWS Region is the location of the Amazon S3 bucket\. For example, if the S3 bucket is in the US East \(N\. Virginia\) Region, use `us-east-1`\. For a listing of AWS Region names and associated values, see [ Regions and Availability Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
 
-      To find how to get this information, see [View an Object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service Getting Started Guide*\. You can confirm the information by using the AWS CLI command `aws s3 cp`\. If the information is correct, this command downloads a copy of the Amazon S3 file\. 
+      To find how to get this information, see [View an object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service Getting Started Guide*\. You can confirm the information by using the AWS CLI command `aws s3 cp`\. If the information is correct, this command downloads a copy of the Amazon S3 file\. 
 
       ```
       aws s3 cp s3://sample_s3_bucket/sample_file_path ./ 
@@ -369,22 +369,22 @@ To import data stored in an Amazon S3 bucket to a PostgreSQL database table, fol
 
 1. Provide permission to access the Amazon S3 file\.
 
-   To import data from an Amazon S3 file, give the Aurora PostgreSQL DB cluster permission to access the Amazon S3 bucket the file is in\. To do this, you use either an AWS Identity and Access Management \(IAM\) role or security credentials\. For more information, see [Setting Up Access to an Amazon S3 Bucket](#USER_PostgreSQL.S3Import.AccessPermission)\.
+   To import data from an Amazon S3 file, give the Aurora PostgreSQL DB cluster permission to access the Amazon S3 bucket the file is in\. To do this, you use either an AWS Identity and Access Management \(IAM\) role or security credentials\. For more information, see [Setting up access to an Amazon S3 bucket](#USER_PostgreSQL.S3Import.AccessPermission)\.
 
 1. Import the Amazon S3 data by calling the `aws_s3.table_import_from_s3` function\.
 
-   After you complete the previous preparation tasks, use the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function to import the Amazon S3 data\. For more information, see [Using the aws\_s3\.table\_import\_from\_s3 Function to Import Amazon S3 Data](#USER_PostgreSQL.S3Import.FileFormats)\.
+   After you complete the previous preparation tasks, use the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function to import the Amazon S3 data\. For more information, see [Using the aws\_s3\.table\_import\_from\_s3 function to import Amazon S3 data](#USER_PostgreSQL.S3Import.FileFormats)\.
 
-### Setting Up Access to an Amazon S3 Bucket<a name="USER_PostgreSQL.S3Import.AccessPermission"></a>
+### Setting up access to an Amazon S3 bucket<a name="USER_PostgreSQL.S3Import.AccessPermission"></a>
 
 To import data from an Amazon S3 file, give the Aurora PostgreSQL DB cluster permission to access the Amazon S3 bucket the file is in\. You provide access to an Amazon S3 bucket in one of two ways, as described in the following topics\.
 
 **Topics**
-+ [Using an IAM Role to Access an Amazon S3 Bucket](#USER_PostgreSQL.S3Import.ARNRole)
-+ [Using Security Credentials to Access an Amazon S3 Bucket](#USER_PostgreSQL.S3Import.Credentials)
-+ [Troubleshooting Access to Amazon S3](#USER_PostgreSQL.S3Import.troubleshooting)
++ [Using an IAM role to access an Amazon S3 bucket](#USER_PostgreSQL.S3Import.ARNRole)
++ [Using security credentials to access an Amazon S3 bucket](#USER_PostgreSQL.S3Import.Credentials)
++ [Troubleshooting access to Amazon S3](#USER_PostgreSQL.S3Import.troubleshooting)
 
-#### Using an IAM Role to Access an Amazon S3 Bucket<a name="USER_PostgreSQL.S3Import.ARNRole"></a>
+#### Using an IAM role to access an Amazon S3 bucket<a name="USER_PostgreSQL.S3Import.ARNRole"></a>
 
 Before you load data from an Amazon S3 file, give your Aurora PostgreSQL DB cluster permission to access the Amazon S3 bucket the file is in\. This way, you don't have to manage additional credential information or provide it in the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function call\.
 
@@ -402,7 +402,7 @@ To do this, create an IAM policy that provides access to the Amazon S3 bucket\. 
    + arn:aws:s3:::*your\-s3\-bucket*
    + arn:aws:s3:::*your\-s3\-bucket*/\*
 
-   For more information on creating an IAM policy for Aurora PostgreSQL, see [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. See also [Tutorial: Create and Attach Your First Customer Managed Policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html) in the *IAM User Guide*\.
+   For more information on creating an IAM policy for Aurora PostgreSQL, see [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. See also [Tutorial: Create and attach your first customer managed policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html) in the *IAM User Guide*\.
 
    The following AWS CLI command creates an IAM policy named `rds-s3-import-policy` with these options\. It grants access to a bucket named `your-s3-bucket`\. 
 **Note**  
@@ -457,7 +457,7 @@ After you create the policy, note the Amazon Resource Name \(ARN\) of the policy
       }'
    ```
 
-1. Create an IAM role\. You do this so Aurora PostgreSQL can assume this IAM role on your behalf to access your Amazon S3 buckets\. For more information, see [Creating a Role to Delegate Permissions to an IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
+1. Create an IAM role\. You do this so Aurora PostgreSQL can assume this IAM role on your behalf to access your Amazon S3 buckets\. For more information, see [Creating a role to delegate permissions to an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
 
    The following example shows using the AWS CLI command to create a role named `rds-s3-import-role`\.   
 **Example**  
@@ -563,7 +563,7 @@ After you create the policy, note the Amazon Resource Name \(ARN\) of the policy
      --region your-region
   ```
 
-#### Using Security Credentials to Access an Amazon S3 Bucket<a name="USER_PostgreSQL.S3Import.Credentials"></a>
+#### Using security credentials to access an Amazon S3 bucket<a name="USER_PostgreSQL.S3Import.Credentials"></a>
 
 If you prefer, you can use security credentials to provide access to an Amazon S3 bucket instead of providing access with an IAM role\. To do this, use the `credentials` parameter in the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function call\. 
 
@@ -595,14 +595,14 @@ psql=> SELECT aws_s3.table_import_from_s3(
 );
 ```
 
-#### Troubleshooting Access to Amazon S3<a name="USER_PostgreSQL.S3Import.troubleshooting"></a>
+#### Troubleshooting access to Amazon S3<a name="USER_PostgreSQL.S3Import.troubleshooting"></a>
 
 If you encounter connection problems when attempting to import Amazon S3 file data, see the following for recommendations:
-+ [Troubleshooting Amazon Aurora Identity and Access](security_iam_troubleshoot.md) 
++ [Troubleshooting Amazon Aurora identity and access](security_iam_troubleshoot.md) 
 + [Troubleshooting Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html)
 + [Troubleshooting Amazon S3 and IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_iam-s3.html)
 
-### Using the aws\_s3\.table\_import\_from\_s3 Function to Import Amazon S3 Data<a name="USER_PostgreSQL.S3Import.FileFormats"></a>
+### Using the aws\_s3\.table\_import\_from\_s3 function to import Amazon S3 data<a name="USER_PostgreSQL.S3Import.FileFormats"></a>
 
 Import your Amazon S3 data by calling the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function\. 
 
@@ -622,20 +622,20 @@ psql=> SELECT aws_s3.table_import_from_s3(
 
 The parameters are the following:
 + `t1` – The name for the table in the PostgreSQL DB cluster to copy the data into\. 
-+ `''` – An optional list of columns in the database table\. You can use this parameter to indicate which columns of the S3 data go in which table columns\. If no columns are specified, all the columns are copied to the table\. For an example of using a column list, see [Importing an Amazon S3 File That Uses a Custom Delimiter](#USER_PostgreSQL.S3Import.FileFormats.CustomDelimiter)\.
++ `''` – An optional list of columns in the database table\. You can use this parameter to indicate which columns of the S3 data go in which table columns\. If no columns are specified, all the columns are copied to the table\. For an example of using a column list, see [Importing an Amazon S3 file that uses a custom delimiter](#USER_PostgreSQL.S3Import.FileFormats.CustomDelimiter)\.
 + `(format csv)` – PostgreSQL COPY arguments\. The copy process uses the arguments and format of the [PostgreSQL COPY](https://www.postgresql.org/docs/current/sql-copy.html) command\. In the preceding example, the `COPY` command uses the comma\-separated value \(CSV\) file format to copy the data\. 
-+  `s3_uri` – A structure that contains the information identifying the Amazon S3 file\. For an example of using the [aws\_commons\.create\_s3\_uri](#USER_PostgreSQL.S3Import.create_s3_uri) function to create an `s3_uri` structure, see [Overview of Importing Amazon S3 Data](#USER_PostgreSQL.S3Import.Overview)\.
++  `s3_uri` – A structure that contains the information identifying the Amazon S3 file\. For an example of using the [aws\_commons\.create\_s3\_uri](#USER_PostgreSQL.S3Import.create_s3_uri) function to create an `s3_uri` structure, see [Overview of importing Amazon S3 data](#USER_PostgreSQL.S3Import.Overview)\.
 
 For the full reference of this function, see [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3)\.
 
 The following examples show how to specify different kinds of files when importing Amazon S3 data\.
 
 **Topics**
-+ [Importing an Amazon S3 File That Uses a Custom Delimiter](#USER_PostgreSQL.S3Import.FileFormats.CustomDelimiter)
-+ [Importing an Amazon S3 Compressed \(gzip\) File](#USER_PostgreSQL.S3Import.FileFormats.gzip)
-+ [Importing an Encoded Amazon S3 File](#USER_PostgreSQL.S3Import.FileFormats.Encoded)
++ [Importing an Amazon S3 file that uses a custom delimiter](#USER_PostgreSQL.S3Import.FileFormats.CustomDelimiter)
++ [Importing an Amazon S3 compressed \(gzip\) file](#USER_PostgreSQL.S3Import.FileFormats.gzip)
++ [Importing an encoded Amazon S3 file](#USER_PostgreSQL.S3Import.FileFormats.Encoded)
 
-#### Importing an Amazon S3 File That Uses a Custom Delimiter<a name="USER_PostgreSQL.S3Import.FileFormats.CustomDelimiter"></a>
+#### Importing an Amazon S3 file that uses a custom delimiter<a name="USER_PostgreSQL.S3Import.FileFormats.CustomDelimiter"></a>
 
 The following example shows how to import a file that uses a custom delimiter\. It also shows how to control where to put the data in the database table using the `column_list` parameter of the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function\. 
 
@@ -683,7 +683,7 @@ a | b | c | d | e
 4 | foo4 | | bar4 | elephant4
 ```
 
-#### Importing an Amazon S3 Compressed \(gzip\) File<a name="USER_PostgreSQL.S3Import.FileFormats.gzip"></a>
+#### Importing an Amazon S3 compressed \(gzip\) file<a name="USER_PostgreSQL.S3Import.FileFormats.gzip"></a>
 
 The following example shows how to import a file from Amazon S3 that is compressed with gzip\. 
 
@@ -691,7 +691,7 @@ Ensure that the file contains the following Amazon S3 metadata:
 + Key: `Content-Encoding`
 + Value: `gzip`
 
-For more about adding these values to Amazon S3 metadata, see [How Do I Add Metadata to an S3 Object?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-object-metadata.html) in the *Amazon Simple Storage Service Console User Guide*\.
+For more about adding these values to Amazon S3 metadata, see [How do I add metadata to an S3 object?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-object-metadata.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 Import the gzip file into your Aurora PostgreSQL DB cluster as shown following\.
 
@@ -704,7 +704,7 @@ psql=> SELECT aws_s3.table_import_from_s3(
 );
 ```
 
-#### Importing an Encoded Amazon S3 File<a name="USER_PostgreSQL.S3Import.FileFormats.Encoded"></a>
+#### Importing an encoded Amazon S3 file<a name="USER_PostgreSQL.S3Import.FileFormats.Encoded"></a>
 
 The following example shows how to import a file from Amazon S3 that has Windows\-1252 encoding\.
 
@@ -715,7 +715,7 @@ psql=> SELECT aws_s3.table_import_from_s3(
 );
 ```
 
-### Function Reference<a name="USER_PostgreSQL.S3Import.Reference"></a>
+### Function reference<a name="USER_PostgreSQL.S3Import.Reference"></a>
 
 **Topics**
 + [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3)
@@ -759,7 +759,7 @@ You can also use these parameters:
 A required text string containing the name of the PostgreSQL database table to import the data into\. 
 
  *column\_list*   
-A required text string containing an optional list of the PostgreSQL database table columns in which to copy the data\. If the string is empty, all columns of the table are used\. For an example, see [Importing an Amazon S3 File That Uses a Custom Delimiter](#USER_PostgreSQL.S3Import.FileFormats.CustomDelimiter)\.
+A required text string containing an optional list of the PostgreSQL database table columns in which to copy the data\. If the string is empty, all columns of the table are used\. For an example, see [Importing an Amazon S3 file that uses a custom delimiter](#USER_PostgreSQL.S3Import.FileFormats.CustomDelimiter)\.
 
  *options*   
 A required text string containing arguments for the PostgreSQL `COPY` command\. These arguments specify how the data is to be copied into the PostgreSQL table\. For more details, see the [PostgreSQL COPY documentation](https://www.postgresql.org/docs/current/sql-copy.html)\.
@@ -777,7 +777,7 @@ An `aws_commons._aws_credentials_1` composite type containing the following cred
 + Session token
 For information about creating an `aws_commons._aws_credentials_1` composite structure, see [aws\_commons\.create\_aws\_credentials](#USER_PostgreSQL.S3Import.create_aws_credentials)\.
 
-##### Alternate Syntax<a name="aws_s3.table_import_from_s3-alternative-syntax"></a>
+##### Alternate syntax<a name="aws_s3.table_import_from_s3-alternative-syntax"></a>
 
 To help with testing, you can use an expanded set of parameters instead of the `s3_info` and `credentials` parameters\. Following are additional syntax variations for the `aws_s3.table_import_from_s3` function: 
 + Instead of using the `s3_info` parameter to identify an Amazon S3 file, use the combination of the `bucket`, `file_path`, and `region` parameters\. With this form of the function, access to Amazon S3 is provided by an IAM role on the PostgreSQL DB instance\.
@@ -808,7 +808,7 @@ To help with testing, you can use an expanded set of parameters instead of the `
   )
   ```
 
-##### Alternate Parameters<a name="aws_s3.table_import_from_s3-alternative-parameters"></a>
+##### Alternate parameters<a name="aws_s3.table_import_from_s3-alternative-parameters"></a>
 
 *bucket*  
 A text string containing the name of the Amazon S3 bucket that contains the file\. 

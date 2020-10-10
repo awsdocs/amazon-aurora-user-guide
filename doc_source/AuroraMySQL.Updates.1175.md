@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2018\-08\-14<a name="AuroraMySQL.Updates.1175"></a>
+# Aurora MySQL database engine updates 2018\-08\-14<a name="AuroraMySQL.Updates.1175"></a>
 
 **Version:** 1\.17\.5
 
@@ -9,7 +9,7 @@ With version 1\.17\.5 of Aurora MySQL, we are using a cluster patching model whe
 **Note**  
  This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] and China \(Beijing\) \[cn\-north\-1\] regions\. There will be a separate announcement once it is made available\. 
 
-If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.1175.Improvements"></a>
 +  Fixed an issue where an Aurora Writer might experience a restart after an Aurora cluster is patched using the Zero\-Downtime Patching feature\. 

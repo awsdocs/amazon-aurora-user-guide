@@ -1,21 +1,21 @@
-# Adding Aurora Replicas to a DB Cluster<a name="aurora-replicas-adding"></a>
+# Adding Aurora replicas to a DB cluster<a name="aurora-replicas-adding"></a>
 
 In an Aurora DB cluster with single\-master replication, there is one primary DB instance and up to 15 Aurora Replicas\. The primary DB instance supports read and write operations, and performs all of the data modifications to the cluster volume\. Aurora Replicas connect to the same storage volume as the primary DB instance and support only read operations\. Aurora Replicas can offload read workloads from the primary DB instance\. 
 
-We recommend that you distribute the primary instance and Aurora Replicas in your DB cluster over multiple Availability Zones to improve the availability of your DB cluster\. For more information, see [Region Availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
+We recommend that you distribute the primary instance and Aurora Replicas in your DB cluster over multiple Availability Zones to improve the availability of your DB cluster\. For more information, see [Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
 
 You can add Aurora Replicas to a DB cluster using the AWS Management Console, the AWS CLI, or the RDS API\.
 
-To remove an Aurora Replica from a DB cluster, delete the Aurora Replica DB instance by following the instructions in [Deleting a DB Instance in an Aurora DB Cluster](USER_DeleteInstance.md)\.
+To remove an Aurora Replica from a DB cluster, delete the Aurora Replica DB instance by following the instructions in [Deleting a DB instance in an Aurora DB cluster](USER_DeleteInstance.md)\.
 
- For more information about Aurora Replicas, see [Aurora Replicas](Aurora.Replication.md#Aurora.Replication.Replicas)\. 
+ For more information about Aurora Replicas, see [Aurora replicas](Aurora.Replication.md#Aurora.Replication.Replicas)\. 
 
 **Note**  
 Amazon Aurora also supports replication with an external database, or an RDS DB instance\. When using Amazon Aurora, your RDS DB instance must be in the same AWS Region\. For more information, see [Replication with Amazon Aurora](Aurora.Replication.md)\.
 
 ## Console<a name="aurora-replicas-adding.Console"></a>
 
-**To add an Aurora Replica to a DB cluster**
+**To add an Aurora replica to a DB cluster**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 

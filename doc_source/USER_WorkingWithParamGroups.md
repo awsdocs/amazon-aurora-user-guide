@@ -1,10 +1,10 @@
-# Working with DB Parameter Groups and DB Cluster Parameter Groups<a name="USER_WorkingWithParamGroups"></a>
+# Working with DB parameter groups and DB cluster parameter groups<a name="USER_WorkingWithParamGroups"></a>
 
  You manage your DB engine configuration by associating your DB instances and Aurora DB clusters with parameter groups\. Amazon RDS defines parameter groups with default settings that apply to newly created DB instances and Aurora DB clusters\. 
 
 **Important**  
 You can define your own parameter groups with customized settings\. Then you can modify your DB instances and Aurora clusters to use your own parameter groups\.  
-For information about modifying a DB cluster or DB instance, see [Modifying an Amazon Aurora DB Cluster](Aurora.Modifying.md)\.
+For information about modifying a DB cluster or DB instance, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
  A *DB parameter group* acts as a container for engine configuration values that are applied to one or more DB instances\. DB parameter groups apply to DB instances in both Amazon RDS and Aurora\. These configuration settings apply to properties that can vary among the DB instances within an Aurora cluster, such as the sizes for memory buffers\. 
 
@@ -20,10 +20,10 @@ Here are some important points about working with parameters in a parameter grou
 + When you change a dynamic parameter and save the parameter group, the change is applied immediately regardless of the **Apply Immediately** setting\. When you change a static parameter and save the DB parameter group, the parameter change takes effect after you manually reboot the DB instance\. You can reboot a DB instance using the RDS console or by explicitly calling the `RebootDbInstance` API operation \(without failover, if the DB instance is in a Multi\-AZ deployment\)\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call, such as calling `ModifyDBInstance` to change DB instance class or scale storage\.
 
   If a DB instance isn't using the latest changes to its associated DB parameter group, the AWS Management Console shows the DB parameter group with a status of **pending\-reboot**\. The **pending\-reboot** parameter groups status doesn't result in an automatic reboot during the next maintenance window\. To apply the latest parameter changes to that DB instance, manually reboot the DB instance\.
-+ When you change the DB parameter group associated with a DB instance, you must manually reboot the instance before the DB instance can use the new DB parameter group\. For more information about changing the DB parameter group, see [Modifying an Amazon Aurora DB Cluster](Aurora.Modifying.md)\.
++ When you change the DB parameter group associated with a DB instance, you must manually reboot the instance before the DB instance can use the new DB parameter group\. For more information about changing the DB parameter group, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 **Note**  
 After you change the DB cluster parameter group associated with a DB cluster, reboot the primary DB instance in the cluster to apply the changes to all of the DB instances in the cluster\.
-+ You can specify the value for a parameter as an integer or as an integer expression built from formulas, variables, functions, and operators\. Functions can include a mathematical log expression\. For more information, see [DB Parameter Values](#USER_ParamValuesRef)\.
++ You can specify the value for a parameter as an integer or as an integer expression built from formulas, variables, functions, and operators\. Functions can include a mathematical log expression\. For more information, see [DB parameter values](#USER_ParamValuesRef)\.
 + Set any parameters that relate to the character set or collation of your database in your parameter group before creating the DB instance and before you create a database in your DB instance\. This ensures that the default database and new databases in your DB instance use the character set and collation values that you specify\. If you change character set or collation parameters for your DB instance, the parameter changes are not applied to existing databases\.
 
   You can change character set or collation values for an existing database using the `ALTER DATABASE` command, for example:
@@ -33,24 +33,24 @@ After you change the DB cluster parameter group associated with a DB cluster, re
   ```
 + Improperly setting parameters in a parameter group can have unintended adverse effects, including degraded performance and system instability\. Always exercise caution when modifying database parameters and back up your data before modifying a parameter group\. Try out parameter group setting changes on a test DB instance before applying those parameter group changes to a production DB instance\.
 +  For an Aurora global database, you can specify different configuration settings for the individual Aurora clusters\. Make sure that the settings are similar enough to produce consistent behavior if you promote a secondary cluster to be the primary cluster\. For example, use the same settings for time zones and character sets across all the clusters of an Aurora global database\. 
-+ To determine the supported parameters for your DB engine, you can view the parameters in the DB parameter group  and DB cluster parameter group used by the DB cluster\. For more information, see [Viewing Parameter Values for a DB Parameter Group](#USER_WorkingWithParamGroups.Viewing) and [Viewing Parameter Values for a DB Cluster Parameter Group](#USER_WorkingWithParamGroups.ViewingCluster)\.
++ To determine the supported parameters for your DB engine, you can view the parameters in the DB parameter group  and DB cluster parameter group used by the DB cluster\. For more information, see [Viewing parameter values for a DB parameter group](#USER_WorkingWithParamGroups.Viewing) and [Viewing parameter values for a DB cluster parameter group](#USER_WorkingWithParamGroups.ViewingCluster)\.
 
 **Topics**
-+ [Amazon Aurora DB Cluster and DB Instance Parameters](#Aurora.Managing.ParameterGroups)
-+ [Creating a DB Parameter Group](#USER_WorkingWithParamGroups.Creating)
-+ [Creating a DB Cluster Parameter Group](#USER_WorkingWithParamGroups.CreatingCluster)
-+ [Modifying Parameters in a DB Parameter Group](#USER_WorkingWithParamGroups.Modifying)
-+ [Modifying Parameters in a DB Cluster Parameter Group](#USER_WorkingWithParamGroups.ModifyingCluster)
-+ [Copying a DB Parameter Group](#USER_WorkingWithParamGroups.Copying)
-+ [Copying a DB Cluster Parameter Group](#USER_WorkingWithParamGroups.CopyingCluster)
-+ [Listing DB Parameter Groups](#USER_WorkingWithParamGroups.Listing)
-+ [Listing DB Cluster Parameter Groups](#USER_WorkingWithParamGroups.ListingCluster)
-+ [Viewing Parameter Values for a DB Parameter Group](#USER_WorkingWithParamGroups.Viewing)
-+ [Viewing Parameter Values for a DB Cluster Parameter Group](#USER_WorkingWithParamGroups.ViewingCluster)
-+ [Comparing Parameter Groups](#USER_WorkingWithParamGroups.Comparing)
-+ [DB Parameter Values](#USER_ParamValuesRef)
++ [Amazon Aurora DB cluster and DB instance parameters](#Aurora.Managing.ParameterGroups)
++ [Creating a DB parameter group](#USER_WorkingWithParamGroups.Creating)
++ [Creating a DB cluster parameter group](#USER_WorkingWithParamGroups.CreatingCluster)
++ [Modifying parameters in a DB parameter group](#USER_WorkingWithParamGroups.Modifying)
++ [Modifying parameters in a DB cluster parameter group](#USER_WorkingWithParamGroups.ModifyingCluster)
++ [Copying a DB parameter group](#USER_WorkingWithParamGroups.Copying)
++ [Copying a DB cluster parameter group](#USER_WorkingWithParamGroups.CopyingCluster)
++ [Listing DB parameter groups](#USER_WorkingWithParamGroups.Listing)
++ [Listing DB cluster parameter groups](#USER_WorkingWithParamGroups.ListingCluster)
++ [Viewing parameter values for a DB parameter group](#USER_WorkingWithParamGroups.Viewing)
++ [Viewing parameter values for a DB cluster parameter group](#USER_WorkingWithParamGroups.ViewingCluster)
++ [Comparing parameter groups](#USER_WorkingWithParamGroups.Comparing)
++ [DB parameter values](#USER_ParamValuesRef)
 
-## Amazon Aurora DB Cluster and DB Instance Parameters<a name="Aurora.Managing.ParameterGroups"></a>
+## Amazon Aurora DB cluster and DB instance parameters<a name="Aurora.Managing.ParameterGroups"></a>
 
  Aurora uses a two\-level system of configuration settings, as follows: 
 +  Parameters in a *DB cluster parameter group* apply to every DB instance in a DB cluster\. Your data is stored in the Aurora shared storage subsystem\. Because of this, all parameters related to physical layout of table data must be the same for all DB instances in an Aurora cluster\. Likewise, because Aurora DB instances are connected by replication, all the parameters for replication settings must be identical throughout an Aurora cluster\. 
@@ -58,7 +58,7 @@ After you change the DB cluster parameter group associated with a DB cluster, re
 
  Every Aurora cluster is associated with a DB cluster parameter group\. Each DB instance within the cluster inherits the settings from that DB cluster parameter group, and is associated with a DB parameter group\. Aurora assigns default parameter groups when you create a cluster or a new DB instance, based on the specified database engine and version\. You can change the parameter groups later to ones that you create, where you can edit the parameter values\. 
 
- The DB cluster parameter groups also include default values for all the instance\-level parameters from the DB parameter group\. These defaults are mainly intended for configuring Aurora Serverless clusters, which are only associated with DB cluster parameter groups, not DB parameter groups\. You can modify the instance\-level parameter settings in the DB cluster parameter group\. Then, Aurora applies those settings to each new DB instance that's added to a Serverless cluster\. To learn more about configuration settings for Aurora Serverless clusters and which settings you can modify, see [Aurora Serverless and Parameter Groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\. 
+ The DB cluster parameter groups also include default values for all the instance\-level parameters from the DB parameter group\. These defaults are mainly intended for configuring Aurora Serverless clusters, which are only associated with DB cluster parameter groups, not DB parameter groups\. You can modify the instance\-level parameter settings in the DB cluster parameter group\. Then, Aurora applies those settings to each new DB instance that's added to a Serverless cluster\. To learn more about configuration settings for Aurora Serverless clusters and which settings you can modify, see [Aurora Serverless and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\. 
 
  For non\-Serverless clusters, any configuration values that you modify in the DB cluster parameter group override default values in the DB parameter group\. If you edit the corresponding values in the DB parameter group, those values override the settings from the DB cluster parameter group\. 
 
@@ -67,12 +67,12 @@ After you change the DB cluster parameter group associated with a DB cluster, re
 The DB cluster and DB instance parameters available to you in Aurora vary depending on database engine compatibility\.
 
 
-| Database Engine | Parameters | 
+| Database engine | Parameters | 
 | --- | --- | 
-|  Aurora MySQL  |  See [Aurora MySQL Parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.  For Aurora Serverless clusters, see additional details in [Aurora Serverless and Parameter Groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.   | 
-|  Aurora PostgreSQL  |  See [Amazon Aurora PostgreSQL Parameters](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.ParameterGroups)\.  | 
+|  Aurora MySQL  |  See [Aurora MySQL parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.  For Aurora Serverless clusters, see additional details in [Aurora Serverless and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.   | 
+|  Aurora PostgreSQL  |  See [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.ParameterGroups)\.  | 
 
-## Creating a DB Parameter Group<a name="USER_WorkingWithParamGroups.Creating"></a>
+## Creating a DB parameter group<a name="USER_WorkingWithParamGroups.Creating"></a>
 
 You can create a new DB parameter group using the AWS Management Console, the AWS CLI, or the RDS API\.
 
@@ -148,7 +148,7 @@ Include the following required parameters:
 + `DBParameterGroupFamily`
 + `Description`
 
-## Creating a DB Cluster Parameter Group<a name="USER_WorkingWithParamGroups.CreatingCluster"></a>
+## Creating a DB cluster parameter group<a name="USER_WorkingWithParamGroups.CreatingCluster"></a>
 
 You can create a new DB cluster parameter group using the AWS Management Console, the AWS CLI, or the RDS API\.
 
@@ -224,7 +224,7 @@ Include the following required parameters:
 + `DBParameterGroupFamily`
 + `Description`
 
-## Modifying Parameters in a DB Parameter Group<a name="USER_WorkingWithParamGroups.Modifying"></a>
+## Modifying parameters in a DB parameter group<a name="USER_WorkingWithParamGroups.Modifying"></a>
 
 You can modify parameter values in a customer\-created DB parameter group; you can't change the parameter values in a default DB parameter group\. Changes to parameters in a customer\-created DB parameter group are applied to all DB instances that are associated with the DB parameter group\. 
 
@@ -287,7 +287,7 @@ To modify a DB parameter group, use the RDS API [https://docs.aws.amazon.com/Ama
 + `DBParameterGroupName`
 + `Parameters`
 
-## Modifying Parameters in a DB Cluster Parameter Group<a name="USER_WorkingWithParamGroups.ModifyingCluster"></a>
+## Modifying parameters in a DB cluster parameter group<a name="USER_WorkingWithParamGroups.ModifyingCluster"></a>
 
 You can modify parameter values in a customer\-created DB cluster parameter group\. You can't change the parameter values in a default DB cluster parameter group\. Changes to parameters in a customer\-created DB cluster parameter group are applied to all DB clusters that are associated with the DB cluster parameter group\.
 
@@ -348,14 +348,15 @@ To modify a DB cluster parameter group, use the RDS API [ `ModifyDBClusterParame
 + `DBClusterParameterGroupName`
 + `Parameters`
 
-## Copying a DB Parameter Group<a name="USER_WorkingWithParamGroups.Copying"></a>
+## Copying a DB parameter group<a name="USER_WorkingWithParamGroups.Copying"></a>
 
-You can copy custom DB parameter groups that you create\. Copying a parameter group is a convenient solution when you have already created a DB parameter group and you want to include most of the custom parameters and values from that group in a new DB parameter group\. You can copy a DB parameter group by using the AWS CLI [copy\-db\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-parameter-group.html) command or the RDS API [CopyDBParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBParameterGroup.html) operation\.
+You can copy custom DB parameter groups that you create\. Copying a parameter group is a convenient solution when you have already created a DB parameter group and you want to include most of the custom parameters and values from that group in a new DB parameter group\. You can copy a DB parameter group by using the AWS Management Console, the AWS CLI [copy\-db\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-parameter-group.html) command, or the RDS API [CopyDBParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBParameterGroup.html) operation\.
 
 After you copy a DB parameter group, wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group\. Doing this allows Amazon RDS to fully complete the copy action before the parameter group is used\. This is especially important for parameters that are critical when creating the default database for a DB instance\. An example is the character set for the default database defined by the `character_set_database` parameter\. Use the **Parameter Groups** option of the [Amazon RDS console](https://console.aws.amazon.com/rds/) or the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command to verify that your DB parameter group is created\.
 
 **Note**  
-You can't copy a default parameter group\. However, you can create a new parameter group that is based on a default parameter group\.
+You can't copy a default parameter group\. However, you can create a new parameter group that is based on a default parameter group\.  
+Currently, you can't copy a parameter group to a different AWS Region\.
 
 ### Console<a name="USER_WorkingWithParamGroups.Copying.CON"></a>
 
@@ -377,7 +378,7 @@ You can't copy a default parameter group\. However, you can create a new paramet
 
 ### AWS CLI<a name="USER_WorkingWithParamGroups.Copying.CLI"></a>
 
-To copy a DB parameter group, use the AWS CLI [ `copy-db-parameter-group`](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-parameter-group.html) command with the following required parameters:
+To copy a DB parameter group, use the AWS CLI [ `copy-db-parameter-group`](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-parameter-group.html) command with the following required options:
 + `--source-db-parameter-group-identifier`
 + `--target-db-parameter-group-identifier`
 + `--target-db-parameter-group-description`
@@ -409,7 +410,7 @@ To copy a DB parameter group, use the RDS API [https://docs.aws.amazon.com/Amazo
 + `TargetDBParameterGroupIdentifier`
 + `TargetDBParameterGroupDescription`
 
-## Copying a DB Cluster Parameter Group<a name="USER_WorkingWithParamGroups.CopyingCluster"></a>
+## Copying a DB cluster parameter group<a name="USER_WorkingWithParamGroups.CopyingCluster"></a>
 
 You can copy custom DB cluster parameter groups that you create\. Copying a parameter group is a convenient solution when you have already created a DB cluster parameter group and you want to include most of the custom parameters and values from that group in a new DB cluster parameter group\. You can copy a DB cluster parameter group by using the AWS CLI [copy\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-parameter-group.html) command or the RDS API [CopyDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBParameterGroup.html) operation\.
 
@@ -470,7 +471,7 @@ To copy a DB cluster parameter group, use the RDS API [https://docs.aws.amazon.c
 + `TargetDBClusterParameterGroupIdentifier`
 + `TargetDBClusterParameterGroupDescription`
 
-## Listing DB Parameter Groups<a name="USER_WorkingWithParamGroups.Listing"></a>
+## Listing DB parameter groups<a name="USER_WorkingWithParamGroups.Listing"></a>
 
 You can list the DB parameter groups you've created for your AWS account\.
 
@@ -527,7 +528,7 @@ DBPARAMETERGROUP  mydbparametergroup1  mysql5.5  My new parameter group
 
 To list all DB parameter groups for an AWS account, use the RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBParameterGroups.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBParameterGroups.html) operation\.
 
-## Listing DB Cluster Parameter Groups<a name="USER_WorkingWithParamGroups.ListingCluster"></a>
+## Listing DB cluster parameter groups<a name="USER_WorkingWithParamGroups.ListingCluster"></a>
 
 You can list the DB cluster parameter groups you've created for your AWS account\.
 
@@ -583,7 +584,7 @@ DBCLUSTERPARAMETERGROUPS        arn:aws:rds:us-west-2:1234567890:cluster-pg:mydb
 
 To list all DB cluster parameter groups for an AWS account, use the RDS API [ `DescribeDBClusterParameterGroups`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterParameterGroups.html) action\.
 
-## Viewing Parameter Values for a DB Parameter Group<a name="USER_WorkingWithParamGroups.Viewing"></a>
+## Viewing parameter values for a DB parameter group<a name="USER_WorkingWithParamGroups.Viewing"></a>
 
 You can get a list of all parameters in a DB parameter group and their values\.
 
@@ -626,7 +627,7 @@ DBPARAMETER  socket                    /tmp/mysql.sock  system           string 
 To view the parameter values for a DB parameter group, use the RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBParameters.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBParameters.html) command with the following required parameter\.
 + `DBParameterGroupName`
 
-## Viewing Parameter Values for a DB Cluster Parameter Group<a name="USER_WorkingWithParamGroups.ViewingCluster"></a>
+## Viewing parameter values for a DB cluster parameter group<a name="USER_WorkingWithParamGroups.ViewingCluster"></a>
 
 You can get a list of all parameters in a DB cluster parameter group and their values\.
 
@@ -705,7 +706,7 @@ PARAMETERS  0,1  pending-reboot  static  boolean  Enables new features in the Au
 To view the parameter values for a DB cluster parameter group, use the RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBParameters.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBParameters.html) command with the following required parameter\.
 + `DBClusterParameterGroupName`
 
-## Comparing Parameter Groups<a name="USER_WorkingWithParamGroups.Comparing"></a>
+## Comparing parameter groups<a name="USER_WorkingWithParamGroups.Comparing"></a>
 
 You can use the AWS Management Console to view the differences between two parameter groups for the same DB engine and version\.
 
@@ -721,7 +722,7 @@ You can use the AWS Management Console to view the differences between two param
 **Note**  
 If the items you selected aren't equivalent, you can't choose **Compare**\. For example, you can't compare a MySQL 5\.6 and a MySQL 5\.7 parameter group\. You can't compare a DB parameter group and an Aurora DB cluster parameter group\.
 
-## DB Parameter Values<a name="USER_ParamValuesRef"></a>
+## DB parameter values<a name="USER_ParamValuesRef"></a>
 
 You can specify the value for a DB parameter as any of the following:
 + An integer constant
@@ -730,7 +731,7 @@ You can specify the value for a DB parameter as any of the following:
 + A character string constant
 + A log expression \(the log function represents log base 2\), such as `value={log(DBInstanceClassMemory/8187281418)*1000}` 
 
-### DB Parameter Formulas<a name="USER_ParamFormulas"></a>
+### DB parameter formulas<a name="USER_ParamFormulas"></a>
 
 A DB parameter formula is an expression that resolves to an integer value or a Boolean value, and is enclosed in braces: \{\}\. You can specify formulas for either a DB parameter value or as an argument to a DB parameter function\.
 
@@ -743,7 +744,7 @@ A DB parameter formula is an expression that resolves to an integer value or a B
 {FormulaVariable/Integer}
 ```
 
-### DB Parameter Formula Variables<a name="USER_FormulaVariables"></a>
+### DB parameter formula variables<a name="USER_FormulaVariables"></a>
 
 Each formula variable returns integer or a Boolean value\. The names of the variables are case\-sensitive\.
 
@@ -756,7 +757,7 @@ Returns the number of bytes of memory allocated to the DB instance class associa
 *EndPointPort*  
 Returns the number of the port used when connecting to the DB instance\.
 
-### DB Parameter Formula Operators<a name="USER_FormulaOperators"></a>
+### DB parameter formula operators<a name="USER_FormulaOperators"></a>
 
 DB parameter formulas support two operators: division and multiplication\.
 
@@ -778,7 +779,7 @@ expression * expression
 ```
 Both expressions must be integers\.
 
-### DB Parameter Functions<a name="USER_ParamFunctions"></a>
+### DB parameter functions<a name="USER_ParamFunctions"></a>
 
 The parameter arguments can be specified as either integers or formulas\. Each function must have at least one argument\. Multiple arguments can be specified as a comma\-separated list\. The list can't have any empty members, such as *argument1*,,*argument3*\. Function names are case\-insensitive\.
 
@@ -821,7 +822,7 @@ SUM(argument1, argument2,...argumentn)
 ```
 Returns an integer\.
 
-### DB Parameter Value Examples<a name="USER_ParamValueExamples"></a>
+### DB parameter value examples<a name="USER_ParamValueExamples"></a>
 
 These examples show using formulas and functions in the values for DB parameters\.
 

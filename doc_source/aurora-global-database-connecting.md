@@ -1,4 +1,4 @@
-# Connecting to an Aurora Global Database<a name="aurora-global-database-connecting"></a>
+# Connecting to an Aurora global database<a name="aurora-global-database-connecting"></a>
 
  For read\-only query traffic, you connect to the reader endpoint for the Aurora cluster in your AWS Region\. 
 

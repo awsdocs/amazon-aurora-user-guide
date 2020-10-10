@@ -1,4 +1,4 @@
-# Write Forwarding for Secondary AWS Regions with an Aurora Global Database<a name="aurora-global-database-write-forwarding"></a>
+# Write forwarding for secondary AWS Regions with an Aurora global database<a name="aurora-global-database-write-forwarding"></a>
 
  You can enable read/write capability for one or more of the secondary clusters in an Aurora global database\. In this configuration, Aurora forwards SQL statements that perform write operations to the primary cluster\. Then Aurora propagates the resulting changes to all the secondary AWS Regions\. This way, you submit both read and write SQL statements while you are connected to the secondary cluster\. By using this approach, you can reduce the number of endpoints to manage for an application that uses an Aurora global database\. 
 
@@ -7,16 +7,16 @@
  Write forwarding requires Aurora MySQL version 2\.08\.1 or later\. 
 
 **Topics**
-+ [Enabling Write Forwarding](#aurora-global-database-write-forwarding-enabling)
-+ [Checking if a Secondary Cluster Has Write Forwarding Enabled](#aurora-global-database-write-forwarding-describing)
-+ [Application Compatibility with Write Forwarding](#aurora-global-database-write-forwarding-compatibility)
-+ [Isolation and Consistency for Write Forwarding](#aurora-global-database-write-forwarding-isolation)
-+ [Running Multipart Statements with Write Forwarding](#aurora-global-database-write-forwarding-multipart)
-+ [Transactions with Write Forwarding](#aurora-global-database-write-forwarding-txns)
-+ [Configuration Parameters for Write Forwarding](#aurora-global-database-write-forwarding-params)
-+ [Amazon CloudWatch Metrics for Write Forwarding](#aurora-global-database-write-forwarding-cloudwatch)
++ [Enabling write forwarding](#aurora-global-database-write-forwarding-enabling)
++ [Checking if a secondary cluster has write forwarding enabled](#aurora-global-database-write-forwarding-describing)
++ [Application compatibility with write forwarding](#aurora-global-database-write-forwarding-compatibility)
++ [Isolation and consistency for write forwarding](#aurora-global-database-write-forwarding-isolation)
++ [Running multipart statements with write forwarding](#aurora-global-database-write-forwarding-multipart)
++ [Transactions with write forwarding](#aurora-global-database-write-forwarding-txns)
++ [Configuration parameters for write forwarding](#aurora-global-database-write-forwarding-params)
++ [Amazon CloudWatch metrics for write forwarding](#aurora-global-database-write-forwarding-cloudwatch)
 
-## Enabling Write Forwarding<a name="aurora-global-database-write-forwarding-enabling"></a>
+## Enabling write forwarding<a name="aurora-global-database-write-forwarding-enabling"></a>
 
  By default, write forwarding isn't enabled when you add a secondary cluster to an Aurora global database\. 
 
@@ -27,7 +27,7 @@
  To enable write forwarding using the Amazon RDS API, set the `EnableGlobalWriteForwarding` parameter to `true`\. This parameter works when you create a new secondary cluster using the `CreateDBCluster` operation\. It also works when you modify an existing secondary cluster using the `ModifyDBCluster` operation\. It requires that the global database uses an Aurora version that supports write forwarding\. You can turn write forwarding off by setting the `EnableGlobalWriteForwarding` parameter to `false`\. 
 
 **Note**  
- For a database session to take advantage of write forwarding, make sure that you also specify a setting for the `aurora_replica_read_consistency` configuration parameter\. Do this in every session that uses the write forwarding feature\. For information about this parameter, see [Isolation and Consistency for Write Forwarding](#aurora-global-database-write-forwarding-isolation)\. 
+ For a database session to take advantage of write forwarding, make sure that you also specify a setting for the `aurora_replica_read_consistency` configuration parameter\. Do this in every session that uses the write forwarding feature\. For information about this parameter, see [Isolation and consistency for write forwarding](#aurora-global-database-write-forwarding-isolation)\. 
 
  The following CLI examples show how you can set up an Aurora global database with write forwarding enabled or disabled\. The highlighted items represent the commands and options that are important to specify and keep consistent when setting up the infrastructure for an Aurora global database\. 
 
@@ -106,7 +106,7 @@ aws rds modify-db-cluster --db-cluster-identifier write-forwarding-test-cluster-
   --enable-global-write-forwarding
 ```
 
-## Checking if a Secondary Cluster Has Write Forwarding Enabled<a name="aurora-global-database-write-forwarding-describing"></a>
+## Checking if a secondary cluster has write forwarding enabled<a name="aurora-global-database-write-forwarding-describing"></a>
 
  To determine whether you can use write forwarding from a secondary cluster, you can check whether the cluster has the attribute `"GlobalWriteForwardingStatus": "enabled"`\. 
 
@@ -149,7 +149,7 @@ aws rds describe-db-clusters --query 'DBClusters[].{DBClusterIdentifier:DBCluste
 ]
 ```
 
-## Application Compatibility with Write Forwarding<a name="aurora-global-database-write-forwarding-compatibility"></a>
+## Application compatibility with write forwarding<a name="aurora-global-database-write-forwarding-compatibility"></a>
 
  Certain statements aren't allowed or can produce stale results when you use them in a global database with write forwarding\. Thus, the `EnableGlobalWriteForwarding` setting is turned off by default for secondary clusters\. Before turning it on, check to make sure that your application code isn't affected by any of these restrictions\. 
 
@@ -217,9 +217,9 @@ ROLLBACK TO SAVEPOINT t1_save;
 RELEASE SAVEPOINT t1_save;
 ```
 
-## Isolation and Consistency for Write Forwarding<a name="aurora-global-database-write-forwarding-isolation"></a>
+## Isolation and consistency for write forwarding<a name="aurora-global-database-write-forwarding-isolation"></a>
 
- In sessions that use write forwarding, you can only use the `REPEATABLE READ` isolation level\. Although you can also use the `READ COMMITTED` isolation level with read\-only clusters in secondary AWS Regions, that isolation level doesn't work with write forwarding\. For information about the `REPEATABLE READ` and `READ COMMITTED` isolation levels, see [Aurora MySQL Isolation Levels](AuroraMySQL.Reference.md#AuroraMySQL.Reference.IsolationLevels)\. 
+ In sessions that use write forwarding, you can only use the `REPEATABLE READ` isolation level\. Although you can also use the `READ COMMITTED` isolation level with read\-only clusters in secondary AWS Regions, that isolation level doesn't work with write forwarding\. For information about the `REPEATABLE READ` and `READ COMMITTED` isolation levels, see [Aurora MySQL isolation levels](AuroraMySQL.Reference.md#AuroraMySQL.Reference.IsolationLevels)\. 
 
  You can control the degree of read consistency on a secondary cluster\. The read consistency level determines how much waiting the secondary cluster does before each read operation to ensure that some or all changes are replicated from the primary cluster\. You can adjust the read consistency level to ensure that all forwarded write operations from your session are visible in the secondary cluster before any subsequent queries\. You can also use this setting to ensure that queries on the secondary cluster always see the most current updates from the primary cluster, even those submitted by other sessions or other clusters\. To specify this type of behavior for your application, you choose a value for the session\-level parameter `aurora_replica_read_consistency`\. 
 
@@ -236,9 +236,9 @@ RELEASE SAVEPOINT t1_save;
 
  With the read consistency set to `GLOBAL`, a session in a secondary AWS Region sees changes made by that session\. It also sees all committed changes from both the primary AWS Region and other secondary AWS Regions\. Each query might wait for a period that varies depending on the amount of session lag\. The query proceeds when the secondary cluster is up\-to\-date with all committed data from the primary cluster, as of the time that the query began\. 
 
- For more information about all the parameters involved with write forwarding, see [Configuration Parameters for Write Forwarding](#aurora-global-database-write-forwarding-params)\. 
+ For more information about all the parameters involved with write forwarding, see [Configuration parameters for write forwarding](#aurora-global-database-write-forwarding-params)\. 
 
-### Examples of Using Write Forwarding<a name="aurora-global-database-write-forwarding-examples"></a>
+### Examples of using write forwarding<a name="aurora-global-database-write-forwarding-examples"></a>
 
  In this example, the primary cluster is in the AWS Region US East \(N\. Virginia\)\. The secondary cluster is in the AWS Region US East \(Ohio\)\. The example shows the effects of running `INSERT` statements followed by `SELECT` statements\. Depending on the value of the `aurora_replica_read_consistency` setting, the results might differ depending on the timing of the statements\. To achieve higher consistency, you might wait briefly before issuing the `SELECT` statement, or Aurora can automatically wait until the results finish replicating before proceeding with the `SELECT`\. 
 
@@ -342,11 +342,11 @@ mysql> select count(*) from t1;
 1 row in set (0.66 sec)
 ```
 
-## Running Multipart Statements with Write Forwarding<a name="aurora-global-database-write-forwarding-multipart"></a>
+## Running multipart statements with write forwarding<a name="aurora-global-database-write-forwarding-multipart"></a>
 
  A DML statement might consist of multiple parts, such as a `INSERT ... SELECT` statement or a `DELETE ... WHERE` statement\. In this case, the entire statement is forwarded to the primary cluster and run there\. 
 
-## Transactions with Write Forwarding<a name="aurora-global-database-write-forwarding-txns"></a>
+## Transactions with write forwarding<a name="aurora-global-database-write-forwarding-txns"></a>
 
  Whether the transaction is forwarded to the primary cluster depends on the access mode of the transaction\. You can specify the access mode for the transaction by using the `SET TRANSACTION` statement or the `START TRANSACTION` statement\. You can also specify the transaction access mode by changing the value of the Aurora MySQL session variable `tx_read_only`\. You can only change this session value while you're connected to a secondary cluster that has write forwarding enabled\. 
 
@@ -354,7 +354,7 @@ mysql> select count(*) from t1;
 
  This type of error can occur in other cases when write forwarding becomes unavailable\. For example, Aurora cancels any transactions that use write forwarding if you restart the primary cluster or if you turn off the write forwarding configuration setting\. 
 
-## Configuration Parameters for Write Forwarding<a name="aurora-global-database-write-forwarding-params"></a>
+## Configuration parameters for write forwarding<a name="aurora-global-database-write-forwarding-params"></a>
 
  The Aurora cluster parameter groups contain some new settings for the write forwarding feature\. Because these are cluster parameters, all DB instances in each cluster have the same values for these variables\. To control the incoming write requests from secondary clusters, use these settings on the primary cluster: 
 +  `aurora_fwd_master_max_connections_pct`: The upper limit on database connections that can be used on a writer DB instance to handle queries forwarded from readers\. It's expressed as a percentage of the `max_connections` setting for the writer DB instance in the primary cluster\. For example, if `max_connections` is 800 and `aurora_fwd_master_max_connections_pct` is 10, then the writer allows a maximum of 80 simultaneous forwarded sessions\. These connections come from the same connection pool managed by the `max_connections` setting\. 
@@ -363,14 +363,14 @@ mysql> select count(*) from t1;
 +  `aurora_fwd_master_idle_timeout`: The number of seconds the primary cluster waits for activity on a connection that's forwarded from a secondary cluster before closing it\. If the session remains idle beyond this period, Aurora cancels the session\. 
 
  The following new parameter is a session\-level parameter: 
-+  `aurora_replica_read_consistency`: A value that enables write forwarding\. For write forwarding to happen, set it in each session\. For more details, see [Isolation and Consistency for Write Forwarding](#aurora-global-database-write-forwarding-isolation)\. 
++  `aurora_replica_read_consistency`: A value that enables write forwarding\. For write forwarding to happen, set it in each session\. For more details, see [Isolation and consistency for write forwarding](#aurora-global-database-write-forwarding-isolation)\. 
 
    Specifies the level of read consistency\. You can specify one of the following values: 
   +  `EVENTUAL` 
   +  `SESSION` 
   +  `GLOBAL` 
 
-   For information about the meaning of the consistency levels, see [Isolation and Consistency for Write Forwarding](#aurora-global-database-write-forwarding-isolation)\. 
+   For information about the meaning of the consistency levels, see [Isolation and consistency for write forwarding](#aurora-global-database-write-forwarding-isolation)\. 
 
    The following rules apply to this parameter: 
   +  This is a session\-level parameter\. The default value is '' \(empty\)\. 
@@ -382,13 +382,13 @@ mysql> select count(*) from t1;
  The following table shows details for these parameters\. 
 
 
-|  Name  |  Scope  |  Type  |  Default Value  |  Valid Values  | 
+|  Name  |  Scope  |  Type  |  Default value  |  Valid values  | 
 | --- | --- | --- | --- | --- | 
 |  aurora\_replica\_read\_consistency  |  Session  |  Enum  |  ''  |  EVENTUAL, SESSION, GLOBAL  | 
 |  aurora\_fwd\_master\_max\_connections\_pct  |  Global  |  unsigned long integer  |  10  |  0–90  | 
 |  aurora\_fwd\_master\_idle\_timeout  |  Global  |  unsigned integer  |  60  |  1–86,400  | 
 
-## Amazon CloudWatch Metrics for Write Forwarding<a name="aurora-global-database-write-forwarding-cloudwatch"></a>
+## Amazon CloudWatch metrics for write forwarding<a name="aurora-global-database-write-forwarding-cloudwatch"></a>
 
  The following Amazon CloudWatch metrics apply to the primary cluster when you use write forwarding on one or more secondary clusters\. These metrics are all measured on the writer DB instance in the primary cluster\. 
 

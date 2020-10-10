@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2018\-10\-11<a name="AuroraMySQL.Updates.203"></a>
+# Aurora MySQL database engine updates 2018\-10\-11<a name="AuroraMySQL.Updates.203"></a>
 
 **Version:** 2\.03
 
@@ -13,7 +13,7 @@ We don't allow in\-place upgrade of Aurora MySQL 1\.\* clusters into Aurora MySQ
 **Note**  
  This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] and China \(Beijing\) \[cn\-north\-1\] regions\. There will be a separate announcement once it is made available\. 
 
-If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.203.Improvements"></a>
 +  Performance schema is available\. 

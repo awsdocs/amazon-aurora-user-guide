@@ -1,4 +1,4 @@
-# Publishing Aurora PostgreSQL Logs to Amazon CloudWatch Logs<a name="AuroraPostgreSQL.CloudWatch"></a>
+# Publishing Aurora PostgreSQL logs to Amazon CloudWatch Logs<a name="AuroraPostgreSQL.CloudWatch"></a>
 
 You can configure your Aurora PostgreSQL DB cluster to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\.
 
@@ -120,9 +120,9 @@ Run the RDS API action with the following parameters:
 
 Other parameters might be required depending on the AWS CLI command that you run\.
 
-## Monitoring Log Events in Amazon CloudWatch<a name="AuroraPostgreSQL.CloudWatch.Monitor"></a>
+## Monitoring log events in Amazon CloudWatch<a name="AuroraPostgreSQL.CloudWatch.Monitor"></a>
 
-After enabling Aurora PostgreSQL log events, you can monitor the events in Amazon CloudWatch Logs\. For more information about monitoring, see [View Log Data Sent to CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#ViewingLogData)\.
+After enabling Aurora PostgreSQL log events, you can monitor the events in Amazon CloudWatch Logs\. For more information about monitoring, see [View log data sent to CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#ViewingLogData)\.
 
 A new log group is automatically created for the Aurora DB cluster under the following prefix, in which `cluster-name` represents the DB cluster name, and `log_type` represents the log type\.
 
@@ -134,6 +134,6 @@ For example, if you configure the export function to include the postgresql log 
 
 All of the events from all of the DB instances in a DB cluster are pushed to a log group using different log streams\.
 
-If a log group with the specified name exists, Aurora uses that log group to export log data for the Aurora DB cluster\. You can use automated configuration, such as AWS CloudFormation, to create log groups with predefined log retention periods, metric filters, and customer access\. Otherwise, a new log group is automatically created using the default log retention period, **Never Expire**, in CloudWatch Logs\. You can use the CloudWatch Logs console, the AWS CLI, or the CloudWatch Logs API to change the log retention period\. For more information about changing log retention periods in CloudWatch Logs, see [Change Log Data Retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\.
+If a log group with the specified name exists, Aurora uses that log group to export log data for the Aurora DB cluster\. You can use automated configuration, such as AWS CloudFormation, to create log groups with predefined log retention periods, metric filters, and customer access\. Otherwise, a new log group is automatically created using the default log retention period, **Never Expire**, in CloudWatch Logs\. You can use the CloudWatch Logs console, the AWS CLI, or the CloudWatch Logs API to change the log retention period\. For more information about changing log retention periods in CloudWatch Logs, see [Change log data retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\.
 
-You can use the CloudWatch Logs console, the AWS CLI, or the CloudWatch Logs API to search for information within the log events for a DB cluster\. For more information about searching and filtering log data, see [Searching and Filtering Log Data](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/MonitoringLogData.html)\.
+You can use the CloudWatch Logs console, the AWS CLI, or the CloudWatch Logs API to search for information within the log events for a DB cluster\. For more information about searching and filtering log data, see [Searching and filtering log data](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/MonitoringLogData.html)\.

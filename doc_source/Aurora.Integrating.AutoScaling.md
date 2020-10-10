@@ -1,4 +1,4 @@
-# Using Amazon Aurora Auto Scaling with Aurora Replicas<a name="Aurora.Integrating.AutoScaling"></a>
+# Using Amazon Aurora Auto Scaling with Aurora replicas<a name="Aurora.Integrating.AutoScaling"></a>
 
 To meet your connectivity and workload requirements, Aurora Auto Scaling dynamically adjusts the number of Aurora Replicas provisioned for an Aurora DB cluster using single\-master replication\. Aurora Auto Scaling is available for both Aurora MySQL and Aurora PostgreSQL\. Aurora Auto Scaling enables your Aurora DB cluster to handle sudden increases in connectivity or workload\. When the connectivity or workload decreases, Aurora Auto Scaling removes unnecessary Aurora Replicas so that you don't pay for unused provisioned DB instances\.
 
@@ -7,26 +7,26 @@ You define and apply a scaling policy to an Aurora DB cluster\. The *scaling pol
 You can use the AWS Management Console to apply a scaling policy based on a predefined metric\. Alternatively, you can use either the AWS CLI or Aurora Auto Scaling API to apply a scaling policy based on a predefined or custom metric\.
 
 **Topics**
-+ [Before You Begin](#Aurora.Integrating.AutoScaling.BYB)
-+ [Aurora Auto Scaling Policies](#Aurora.Integrating.AutoScaling.Concepts)
-+ [Adding a Scaling Policy](#Aurora.Integrating.AutoScaling.Add)
-+ [Editing a Scaling Policy](#Aurora.Integrating.AutoScaling.Edit)
-+ [Deleting a Scaling Policy](#Aurora.Integrating.AutoScaling.Delete)
-+ [Related Topics](#Aurora.Integrating.AutoScaling.RelatedItems)
++ [Before you begin](#Aurora.Integrating.AutoScaling.BYB)
++ [Aurora Auto Scaling policies](#Aurora.Integrating.AutoScaling.Concepts)
++ [Adding a scaling policy](#Aurora.Integrating.AutoScaling.Add)
++ [Editing a scaling policy](#Aurora.Integrating.AutoScaling.Edit)
++ [Deleting a scaling policy](#Aurora.Integrating.AutoScaling.Delete)
++ [Related topics](#Aurora.Integrating.AutoScaling.RelatedItems)
 
-## Before You Begin<a name="Aurora.Integrating.AutoScaling.BYB"></a>
+## Before you begin<a name="Aurora.Integrating.AutoScaling.BYB"></a>
 
-Before you can use Aurora Auto Scaling with an Aurora DB cluster, you must first create an Aurora DB cluster with a primary instance and at least one Aurora Replica\. Although Aurora Auto Scaling manages Aurora Replicas, the Aurora DB cluster must start with at least one Aurora Replica\. For more information about creating an Aurora DB cluster, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
+Before you can use Aurora Auto Scaling with an Aurora DB cluster, you must first create an Aurora DB cluster with a primary instance and at least one Aurora Replica\. Although Aurora Auto Scaling manages Aurora Replicas, the Aurora DB cluster must start with at least one Aurora Replica\. For more information about creating an Aurora DB cluster, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.
 
 Aurora Auto Scaling only scales a DB cluster if all Aurora Replicas in a DB cluster are in the available state\. If any of the Aurora Replicas are in a state other than available, Aurora Auto Scaling waits until the whole DB cluster becomes available for scaling\. 
 
-When Aurora Auto Scaling adds a new Aurora Replica, the new Aurora Replica is the same DB instance class as the one used by the primary instance\. For more information about DB instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\. Also, the promotion tier for new Aurora Replicas is set to the last priority, which is 15 by default\. This means that during a failover, a replica with a better priority, such as one created manually, would be promoted first\. For more information, see [Fault Tolerance for an Aurora DB Cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\.
+When Aurora Auto Scaling adds a new Aurora Replica, the new Aurora Replica is the same DB instance class as the one used by the primary instance\. For more information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. Also, the promotion tier for new Aurora Replicas is set to the last priority, which is 15 by default\. This means that during a failover, a replica with a better priority, such as one created manually, would be promoted first\. For more information, see [Fault tolerance for an Aurora DB cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\.
 
 Aurora Auto Scaling only removes Aurora Replicas that it created\.
 
-To benefit from Aurora Auto Scaling, your applications must support connections to new Aurora Replicas\. To do so, we recommend using the Aurora reader endpoint\. For Aurora MySQL you can use a driver such as the MariaDB Connector/J utility\. For more information, see [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md)\.
+To benefit from Aurora Auto Scaling, your applications must support connections to new Aurora Replicas\. To do so, we recommend using the Aurora reader endpoint\. For Aurora MySQL you can use a driver such as the MariaDB Connector/J utility\. For more information, see [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\.
 
-## Aurora Auto Scaling Policies<a name="Aurora.Integrating.AutoScaling.Concepts"></a>
+## Aurora Auto Scaling policies<a name="Aurora.Integrating.AutoScaling.Concepts"></a>
 
 Aurora Auto Scaling uses a scaling policy to adjust the number of Aurora Replicas in an Aurora DB cluster\. Aurora Auto Scaling has the following components:
 + A service\-linked role
@@ -34,11 +34,11 @@ Aurora Auto Scaling uses a scaling policy to adjust the number of Aurora Replica
 + Minimum and maximum capacity
 + A cooldown period
 
-### Service Linked Role<a name="Aurora.Integrating.AutoScaling.Concepts.SLR"></a>
+### Service linked role<a name="Aurora.Integrating.AutoScaling.Concepts.SLR"></a>
 
-Aurora Auto Scaling uses the `AWSServiceRoleForApplicationAutoScaling_RDSCluster` service\-linked role\. For more information, see [Service\-Linked Roles for Application Auto Scaling](https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html) in the *Application Auto Scaling User Guide*\.
+Aurora Auto Scaling uses the `AWSServiceRoleForApplicationAutoScaling_RDSCluster` service\-linked role\. For more information, see [Service\-linked roles for Application Auto Scaling](https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html) in the *Application Auto Scaling User Guide*\.
 
-### Target Metric<a name="Aurora.Integrating.AutoScaling.Concepts.TargetMetric"></a>
+### Target metric<a name="Aurora.Integrating.AutoScaling.Concepts.TargetMetric"></a>
 
 In this type of policy, a predefined or custom metric and a target value for the metric is specified in a target\-tracking scaling policy configuration\. Aurora Auto Scaling creates and manages CloudWatch alarms that trigger the scaling policy and calculates the scaling adjustment based on the metric and target value\. The scaling policy adds or removes Aurora Replicas as required to keep the metric at, or close to, the specified target value\. In addition to keeping the metric close to the target value, a target\-tracking scaling policy also adjusts to fluctuations in the metric due to a changing workload\. Such a policy also minimizes rapid fluctuations in the number of available Aurora Replicas for your DB cluster\.
 
@@ -47,7 +47,7 @@ For example, take a scaling policy that uses the predefined average CPU utilizat
 **Note**  
  For each Aurora DB cluster, you can create only one Auto Scaling policy for each target metric\. 
 
-### Minimum and Maximum Capacity<a name="Aurora.Integrating.AutoScaling.Concepts.Capacity"></a>
+### Minimum and maximum capacity<a name="Aurora.Integrating.AutoScaling.Concepts.Capacity"></a>
 
 You can specify the maximum number of Aurora Replicas to be managed by Application Auto Scaling\. This value must be set to 0–15, and must be equal to or greater than the value specified for the minimum number of Aurora Replicas\.
 
@@ -56,7 +56,7 @@ You can also specify the minimum number of Aurora Replicas to be managed by Appl
 **Note**  
 The minimum and maximum capacity are set for an Aurora DB cluster\. The specified values apply to all of the policies associated with that Aurora DB cluster\. 
 
-### Cooldown Period<a name="Aurora.Integrating.AutoScaling.Concepts.Cooldown"></a>
+### Cooldown period<a name="Aurora.Integrating.AutoScaling.Concepts.Cooldown"></a>
 
 You can tune the responsiveness of a target\-tracking scaling policy by adding cooldown periods that affect scaling your Aurora DB cluster in and out\. A cooldown period blocks subsequent scale\-in or scale\-out requests until the period expires\. These blocks slow the deletions of Aurora Replicas in your Aurora DB cluster for scale\-in requests, and the creation of Aurora Replicas for scale\-out requests\.
 
@@ -66,14 +66,14 @@ You can specify the following cooldown periods:
 
 When a scale\-in or a scale\-out cooldown period is not specified, the default for each is 300 seconds\.
 
-### Enable or Disable Scale\-In Activities<a name="Aurora.Integrating.AutoScaling.Concepts.ScaleIn"></a>
+### Enable or disable scale\-in activities<a name="Aurora.Integrating.AutoScaling.Concepts.ScaleIn"></a>
 
 You can enable or disable scale\-in activities for a policy\. Enabling scale\-in activities allows the scaling policy to delete Aurora Replicas\. When scale\-in activities are enabled, the scale\-in cooldown period in the scaling policy applies to scale\-in activities\. Disabling scale\-in activities prevents the scaling policy from deleting Aurora Replicas\.
 
 **Note**  
 Scale\-out activities are always enabled so that the scaling policy can create Aurora Replicas as needed\.
 
-## Adding a Scaling Policy<a name="Aurora.Integrating.AutoScaling.Add"></a>
+## Adding a scaling policy<a name="Aurora.Integrating.AutoScaling.Add"></a>
 
 You can add a scaling policy using the AWS Management Console, the AWS CLI, or the Application Auto Scaling API\.
 
@@ -81,10 +81,10 @@ You can add a scaling policy using the AWS Management Console, the AWS CLI, or t
 For an example that adds a scaling policy using AWS CloudFormation, see [Declaring a scaling policy for an Aurora DB cluster](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html#w2ab1c19c22c15c21c11) in the *AWS CloudFormation User Guide\.*
 
 **Topics**
-+ [Adding a Scaling Policy Using the AWS Management Console](#Aurora.Integrating.AutoScaling.AddConsole)
-+ [Adding a Scaling Policy Using the AWS CLI or the Application Auto Scaling API](#Aurora.Integrating.AutoScaling.AddCode)
++ [Adding a scaling policy using the AWS Management Console](#Aurora.Integrating.AutoScaling.AddConsole)
++ [Adding a scaling policy using the AWS CLI or the Application Auto Scaling API](#Aurora.Integrating.AutoScaling.AddCode)
 
-### Adding a Scaling Policy Using the AWS Management Console<a name="Aurora.Integrating.AutoScaling.AddConsole"></a>
+### Adding a scaling policy using the AWS Management Console<a name="Aurora.Integrating.AutoScaling.AddConsole"></a>
 
 You can add a scaling policy to an Aurora DB cluster by using the AWS Management Console\.
 
@@ -130,11 +130,11 @@ The following dialog box creates an auto scaling policy based an average number 
 
 ![\[Creating an Auto Scaling policy based on average connections\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-autoscaling-connections.png)
 
-### Adding a Scaling Policy Using the AWS CLI or the Application Auto Scaling API<a name="Aurora.Integrating.AutoScaling.AddCode"></a>
+### Adding a scaling policy using the AWS CLI or the Application Auto Scaling API<a name="Aurora.Integrating.AutoScaling.AddCode"></a>
 
 You can apply a scaling policy based on either a predefined or custom metric\. To do so, you can use the AWS CLI or the Application Auto Scaling API\. The first step is to register your Aurora DB cluster with Application Auto Scaling\.
 
-#### Registering an Aurora DB Cluster<a name="Aurora.Integrating.AutoScaling.AddCode.Register"></a>
+#### Registering an Aurora DB cluster<a name="Aurora.Integrating.AutoScaling.AddCode.Register"></a>
 
 Before you can use Aurora Auto Scaling with an Aurora DB cluster, you register your Aurora DB cluster with Application Auto Scaling\. You do so to define the scaling dimension and limits to be applied to that cluster\. Application Auto Scaling dynamically scales the Aurora DB cluster along the `rds:cluster:ReadReplicaCount` scalable dimension, which represents the number of Aurora Replicas\. 
 
@@ -146,8 +146,8 @@ To register your Aurora DB cluster, use the [https://docs.aws.amazon.com/cli/lat
 + `--service-namespace` – Set this value to `rds`\.
 + `--resource-id` – The resource identifier for the Aurora DB cluster\. For this parameter, the resource type is `cluster` and the unique identifier is the name of the Aurora DB cluster, for example `cluster:myscalablecluster`\.
 + `--scalable-dimension` – Set this value to `rds:cluster:ReadReplicaCount`\.
-+ `--min-capacity` – The minimum number of reader DB instances to be managed by Application Auto Scaling\. For information about the relationship between `--min-capacity`, `--max-capacity`, and the number of DB instances in your cluster, see [Minimum and Maximum Capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity)\.
-+ `--max-capacity` – The maximum number of reader DB instances to be managed by Application Auto Scaling\. For information about the relationship between `--min-capacity`, `--max-capacity`, and the number of DB instances in your cluster, see [Minimum and Maximum Capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity)\.
++ `--min-capacity` – The minimum number of reader DB instances to be managed by Application Auto Scaling\. For information about the relationship between `--min-capacity`, `--max-capacity`, and the number of DB instances in your cluster, see [Minimum and maximum capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity)\.
++ `--max-capacity` – The maximum number of reader DB instances to be managed by Application Auto Scaling\. For information about the relationship between `--min-capacity`, `--max-capacity`, and the number of DB instances in your cluster, see [Minimum and maximum capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity)\.
 
 **Example**  
 In the following example, you register an Aurora DB cluster named `myscalablecluster`\. The registration indicates that the DB cluster should be dynamically scaled to have from one to eight Aurora Replicas\.  
@@ -178,8 +178,8 @@ To register your Aurora DB cluster with Application Auto Scaling, use the [https
 + `ServiceNamespace` – Set this value to `rds`\.
 + `ResourceID` – The resource identifier for the Aurora DB cluster\. For this parameter, the resource type is `cluster` and the unique identifier is the name of the Aurora DB cluster, for example `cluster:myscalablecluster`\.
 + `ScalableDimension` – Set this value to `rds:cluster:ReadReplicaCount`\.
-+ `MinCapacity` – The minimum number of reader DB instances to be managed by Application Auto Scaling\. For information about the relationship between `MinCapacity`, `MaxCapacity`, and the number of DB instances in your cluster, see [Minimum and Maximum Capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity)\.
-+ `MaxCapacity` – The maximum number of reader DB instances to be managed by Application Auto Scaling\. For information about the relationship between `MinCapacity`, `MaxCapacity`, and the number of DB instances in your cluster, see [Minimum and Maximum Capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity)\.
++ `MinCapacity` – The minimum number of reader DB instances to be managed by Application Auto Scaling\. For information about the relationship between `MinCapacity`, `MaxCapacity`, and the number of DB instances in your cluster, see [Minimum and maximum capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity)\.
++ `MaxCapacity` – The maximum number of reader DB instances to be managed by Application Auto Scaling\. For information about the relationship between `MinCapacity`, `MaxCapacity`, and the number of DB instances in your cluster, see [Minimum and maximum capacity](#Aurora.Integrating.AutoScaling.Concepts.Capacity)\.
 
 **Example**  
 In the following example, you register an Aurora DB cluster named `myscalablecluster` with the Application Auto Scaling API\. This registration indicates that the DB cluster should be dynamically scaled to have from one to eight Aurora Replicas\.  
@@ -204,19 +204,19 @@ Authorization: AUTHPARAMS
 }
 ```
 
-#### Defining a Scaling Policy for an Aurora DB Cluster<a name="Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy"></a>
+#### Defining a scaling policy for an Aurora DB cluster<a name="Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy"></a>
 
 A target\-tracking scaling policy configuration is represented by a JSON block that the metrics and target values are defined in\. You can save a scaling policy configuration as a JSON block in a text file\. You use that text file when invoking the AWS CLI or the Application Auto Scaling API\. For more information about policy configuration syntax, see [https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_TargetTrackingScalingPolicyConfiguration.html](https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_TargetTrackingScalingPolicyConfiguration.html) in the *Application Auto Scaling API Reference*\.
 
  The following options are available for defining a target\-tracking scaling policy configuration\.
 
 **Topics**
-+ [Using a Predefined Metric](#Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.Predefined)
-+ [Using a Custom Metric](#Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.Custom)
-+ [Using Cooldown Periods](#Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.Cooldown)
-+ [Disabling Scale\-in Activity](#Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.ScaleIn)
++ [Using a predefined metric](#Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.Predefined)
++ [Using a custom metric](#Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.Custom)
++ [Using cooldown periods](#Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.Cooldown)
++ [Disabling scale\-in activity](#Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.ScaleIn)
 
-##### Using a Predefined Metric<a name="Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.Predefined"></a>
+##### Using a predefined metric<a name="Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.Predefined"></a>
 
 By using predefined metrics, you can quickly define a target\-tracking scaling policy for an Aurora DB cluster that works well with both target tracking and dynamic scaling in Aurora Auto Scaling\. 
 
@@ -224,7 +224,7 @@ Currently, Aurora supports the following predefined metrics in Aurora Auto Scali
 + **RDSReaderAverageCPUUtilization** – The average value of the `CPUUtilization` metric in CloudWatch across all Aurora Replicas in the Aurora DB cluster\.
 + **RDSReaderAverageDatabaseConnections** – The average value of the `DatabaseConnections` metric in CloudWatch across all Aurora Replicas in the Aurora DB cluster\.
 
-For more information about the `CPUUtilization` and `DatabaseConnections` metrics, see [Amazon Aurora Metrics](Aurora.Monitoring.md#Aurora.AuroraMySQL.Monitoring.Metrics)\.
+For more information about the `CPUUtilization` and `DatabaseConnections` metrics, see [Amazon Aurora metrics](Aurora.Monitoring.md#Aurora.AuroraMySQL.Monitoring.Metrics)\.
 
 To use a predefined metric in your scaling policy, you create a target tracking configuration for your scaling policy\. This configuration must include a `PredefinedMetricSpecification` for the predefined metric and a `TargetValue` for the target value of that metric\.
 
@@ -241,7 +241,7 @@ The following example describes a typical policy configuration for target\-track
 }
 ```
 
-##### Using a Custom Metric<a name="Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.Custom"></a>
+##### Using a custom metric<a name="Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.Custom"></a>
 
 By using custom metrics, you can define a target\-tracking scaling policy that meets your custom requirements\. You can define a custom metric based on any Aurora metric that changes in proportion to scaling\. 
 
@@ -267,7 +267,7 @@ The following example describes a target\-tracking configuration for a scaling p
 }
 ```
 
-##### Using Cooldown Periods<a name="Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.Cooldown"></a>
+##### Using cooldown periods<a name="Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.Cooldown"></a>
 
 You can specify a value, in seconds, for `ScaleOutCooldown` to add a cooldown period for scaling out your Aurora DB cluster\. Similarly, you can add a value, in seconds, for `ScaleInCooldown` to add a cooldown period for scaling in your Aurora DB cluster\. For more information about `ScaleInCooldown` and `ScaleOutCooldown`, see [https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_TargetTrackingScalingPolicyConfiguration.html](https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_TargetTrackingScalingPolicyConfiguration.html) in the *Application Auto Scaling API Reference*\. 
 
@@ -286,7 +286,7 @@ The following example describes a target\-tracking configuration for a scaling p
 }
 ```
 
-##### Disabling Scale\-in Activity<a name="Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.ScaleIn"></a>
+##### Disabling scale\-in activity<a name="Aurora.Integrating.AutoScaling.AddCode.DefineScalingPolicy.ScaleIn"></a>
 
 You can prevent the target\-tracking scaling policy configuration from scaling in your Aurora DB cluster by disabling scale\-in activity\. Disabling scale\-in activity prevents the scaling policy from deleting Aurora Replicas, while still allowing the scaling policy to create them as needed\.
 
@@ -306,7 +306,7 @@ The following example describes a target\-tracking configuration for a scaling p
 }
 ```
 
-#### Applying a Scaling Policy to an Aurora DB Cluster<a name="Aurora.Integrating.AutoScaling.AddCode.ApplyScalingPolicy"></a>
+#### Applying a scaling policy to an Aurora DB cluster<a name="Aurora.Integrating.AutoScaling.AddCode.ApplyScalingPolicy"></a>
 
 After registering your Aurora DB cluster with Application Auto Scaling and defining a scaling policy, you apply the scaling policy to the registered Aurora DB cluster\. To apply a scaling policy to an Aurora DB cluster, you can use the AWS CLI or the Application Auto Scaling API\. 
 
@@ -385,11 +385,11 @@ Authorization: AUTHPARAMS
 }
 ```
 
-## Editing a Scaling Policy<a name="Aurora.Integrating.AutoScaling.Edit"></a>
+## Editing a scaling policy<a name="Aurora.Integrating.AutoScaling.Edit"></a>
 
 You can edit a scaling policy using the AWS Management Console, the AWS CLI, or the Application Auto Scaling API\.
 
-### Editing a Scaling Policy Using the AWS Management Console<a name="Aurora.Integrating.AutoScaling.EditConsole"></a>
+### Editing a scaling policy using the AWS Management Console<a name="Aurora.Integrating.AutoScaling.EditConsole"></a>
 
 You can edit a scaling policy by using the AWS Management Console\.
 
@@ -413,19 +413,19 @@ The following is a sample **Edit Auto Scaling policy** dialog box\.
 
 ![\[Editing an auto scaling policy based on average CPU utilization\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-autoscaling-edit-cpu.png)
 
-### Editing a Scaling Policy Using the AWS CLI or the Application Auto Scaling API<a name="Aurora.Integrating.AutoScaling.EditCode"></a>
+### Editing a scaling policy using the AWS CLI or the Application Auto Scaling API<a name="Aurora.Integrating.AutoScaling.EditCode"></a>
 
 You can use the AWS CLI or the Application Auto Scaling API to edit a scaling policy in the same way that you apply a scaling policy:
 + When using the AWS CLI, specify the name of the policy you want to edit in the `--policy-name` parameter\. Specify new values for the parameters you want to change\.
 + When using the Application Auto Scaling API, specify the name of the policy you want to edit in the `PolicyName` parameter\. Specify new values for the parameters you want to change\.
 
-For more information, see [Applying a Scaling Policy to an Aurora DB Cluster](#Aurora.Integrating.AutoScaling.AddCode.ApplyScalingPolicy)\.
+For more information, see [Applying a scaling policy to an Aurora DB cluster](#Aurora.Integrating.AutoScaling.AddCode.ApplyScalingPolicy)\.
 
-## Deleting a Scaling Policy<a name="Aurora.Integrating.AutoScaling.Delete"></a>
+## Deleting a scaling policy<a name="Aurora.Integrating.AutoScaling.Delete"></a>
 
 You can delete a scaling policy using the AWS Management Console, the AWS CLI, or the Application Auto Scaling API\.
 
-### Deleting a Scaling Policy Using the AWS Management Console<a name="Aurora.Integrating.AutoScaling.DeleteConsole"></a>
+### Deleting a scaling policy using the AWS Management Console<a name="Aurora.Integrating.AutoScaling.DeleteConsole"></a>
 
 You can delete a scaling policy by using the AWS Management Console\.
 
@@ -441,7 +441,7 @@ You can delete a scaling policy by using the AWS Management Console\.
 
 1. In the **Auto scaling policies** section, choose the auto scaling policy, and then choose **Delete**\.
 
-### Deleting a Scaling Policy Using the AWS CLI or the Application Auto Scaling API<a name="Aurora.Integrating.AutoScaling.DeleteCode"></a>
+### Deleting a scaling policy using the AWS CLI or the Application Auto Scaling API<a name="Aurora.Integrating.AutoScaling.DeleteCode"></a>
 
 You can use the AWS CLI or the Application Auto Scaling API to delete a scaling policy from an Aurora DB cluster\.
 
@@ -504,6 +504,6 @@ Authorization: AUTHPARAMS
 }
 ```
 
-## Related Topics<a name="Aurora.Integrating.AutoScaling.RelatedItems"></a>
-+ [Integrating Aurora with Other AWS Services](Aurora.Integrating.md)
-+ [Managing an Amazon Aurora DB Cluster](CHAP_Aurora.md)
+## Related topics<a name="Aurora.Integrating.AutoScaling.RelatedItems"></a>
++ [Integrating Aurora with other AWS services](Aurora.Integrating.md)
++ [Managing an Amazon Aurora DB cluster](CHAP_Aurora.md)

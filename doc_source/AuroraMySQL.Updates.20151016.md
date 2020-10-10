@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates: 2015\-10\-16<a name="AuroraMySQL.Updates.20151016"></a>
+# Aurora MySQL database engine updates: 2015\-10\-16<a name="AuroraMySQL.Updates.20151016"></a>
 
 **Versions:** 1\.2, 1\.3
 
@@ -18,7 +18,7 @@ This update includes the following improvements:
 + Improved concurrency in dictionary statistics
 + Better stability for the new query cache resource manager, extent management, files stored in Amazon Aurora smart storage, and batch writes of log records
 
-## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.20151016.BugFixes"></a>
+## Integration of MySQL bug fixes<a name="AuroraMySQL.Updates.20151016.BugFixes"></a>
 + Killing a query inside innodb causes it to eventually crash with an assertion\. \(Bug \#1608883\)
 + For failure to create a new thread for the event scheduler, event execution, or new connection, no message was written to the error log\. \(Bug \#16865959\)
 + If one connection changed its default database and simultaneously another connection executed SHOW PROCESSLIST, the second connection could access invalid memory when attempting to display the first connection's default database memory\. \(Bug \#11765252\)

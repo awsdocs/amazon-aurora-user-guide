@@ -1,4 +1,4 @@
-# Altering Tables in Amazon Aurora Using Fast DDL<a name="AuroraMySQL.Managing.FastDDL"></a>
+# Altering tables in Amazon Aurora using fast DDL<a name="AuroraMySQL.Managing.FastDDL"></a>
 
 In MySQL, many data definition language \(DDL\) operations have a significant performance impact\. Performance impacts occur even with recent online DDL improvements\.
 
@@ -12,10 +12,10 @@ For example, suppose that you use an `ALTER TABLE` operation to add a column to 
 In Amazon Aurora, you can use fast DDL to run an `ALTER TABLE` operation in place, nearly instantaneously\. The operation completes without requiring the table to be copied and without having a material impact on other DML statements\. Because the operation doesn't consume temporary storage for a table copy, it makes DDL statements practical even for large tables on small instance classes\.
 
 **Important**  
-Currently, Aurora lab mode must be enabled to use fast DDL for Aurora MySQL\. We don't recommended using fast DDL for production DB clusters\. For information about enabling Aurora lab mode, see [Amazon Aurora MySQL Lab Mode](AuroraMySQL.Updates.LabMode.md)\.
+Currently, Aurora lab mode must be enabled to use fast DDL for Aurora MySQL\. We don't recommended using fast DDL for production DB clusters\. For information about enabling Aurora lab mode, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\.
 
 **Note**  
-Fast DDL is available for Aurora version 1\.12 and later\. For more information about Aurora versions, see [Database Engine Updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)
+Fast DDL is available for Aurora version 1\.12 and later\. For more information about Aurora versions, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)
 
 ## Limitations<a name="AuroraMySQL.Managing.FastDDL.Limitations"></a>
 

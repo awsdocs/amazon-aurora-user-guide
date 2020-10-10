@@ -1,4 +1,4 @@
-# Function Reference for Query Plan Management<a name="AuroraPostgreSQL.Optimize.Functions"></a>
+# Function reference for query plan management<a name="AuroraPostgreSQL.Optimize.Functions"></a>
 
 The `apg_plan_mgmt` extension provides the following functions\.
 
@@ -186,7 +186,7 @@ Returns 0 if the setting was successful or \-1 if the setting failed\.
 | --- | --- | 
 | sql\_hash | The sql\_hash ID of the plan's managed SQL statement\. | 
 | plan\_hash | The managed plan's plan\_hash ID\. | 
-| status |  A string with one of the following values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.Functions.html) The case you use does not matter, however the status value is set to initial uppercase in the `apg_plan_mgmt.dba_plans` view\. For more information about these values, see `status` in [Reference for the apg\_plan\_mgmt\.dba\_plans View](AuroraPostgreSQL.Optimize.ViewPlans.md#AuroraPostgreSQL.Optimize.ViewPlans.dba_plans)\.   | 
+| status |  A string with one of the following values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.Functions.html) The case you use does not matter, however the status value is set to initial uppercase in the `apg_plan_mgmt.dba_plans` view\. For more information about these values, see `status` in [Reference for the apg\_plan\_mgmt\.dba\_plans view](AuroraPostgreSQL.Optimize.ViewPlans.md#AuroraPostgreSQL.Optimize.ViewPlans.dba_plans)\.   | 
 
 ## apg\_plan\_mgmt\.validate\_plans<a name="AuroraPostgreSQL.Optimize.Functions.validate_plans"></a>
 

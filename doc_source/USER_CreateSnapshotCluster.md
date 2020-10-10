@@ -1,13 +1,13 @@
-# Creating a DB Cluster Snapshot<a name="USER_CreateSnapshotCluster"></a>
+# Creating a DB cluster snapshot<a name="USER_CreateSnapshotCluster"></a>
 
 Amazon RDS creates a storage volume snapshot of your DB cluster, backing up the entire DB cluster and not just individual databases\. When you create a DB cluster snapshot, you need to identify which DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\. The amount of time it takes to create a DB cluster snapshot varies with the size your databases\. Since the snapshot includes the entire storage volume, the size of files, such as temporary files, also affects the amount of time it takes to create the snapshot\.
 
 Unlike automated backups, manual snapshots aren't subject to the backup retention period\. Snapshots don't expire\.
 
-For very long\-term backups, we recommend exporting snapshot data to Amazon S3\. If the major version of your DB engine is no longer supported, you can't restore to that version from a snapshot\. For more information, see [Exporting DB Snapshot Data to Amazon S3](USER_ExportSnapshot.md)\.
+For very long\-term backups, we recommend exporting snapshot data to Amazon S3\. If the major version of your DB engine is no longer supported, you can't restore to that version from a snapshot\. For more information, see [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)\.
 
 **Note**  
- Amazon bills you based upon the amount of Aurora backup and snapshot data you keep and the period of time that you keep it\. For information about the storage associated with Aurora backups and snapshots, see [Understanding Aurora Backup Storage Usage](aurora-storage-backup.md)\. For pricing information about Aurora storage, see [Amazon RDS for Aurora Pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
+ Amazon bills you based upon the amount of Aurora backup and snapshot data you keep and the period of time that you keep it\. For information about the storage associated with Aurora backups and snapshots, see [Understanding Aurora backup storage usage](aurora-storage-backup.md)\. For pricing information about Aurora storage, see [Amazon RDS for Aurora pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
 
 You can create a DB cluster snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 
@@ -60,7 +60,7 @@ When you create a DB cluster snapshot using the Amazon RDS API, you need to iden
 + DBClusterIdentifier
 + DBClusterSnapshotIdentifier
 
-## Determining Whether the DB Cluster Snapshot Is Available<a name="USER_CreateSnapshotCluster.Available"></a>
+## Determining whether the DB cluster snapshot is available<a name="USER_CreateSnapshotCluster.Available"></a>
 
 You can check that the DB cluster snapshot is available by looking under **Snapshots** on the **Maintenance & backups** tab on the detail page for the cluster in the AWS Management Console, by using the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-snapshots](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-snapshots) CLI command, or by using the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterSnapshots.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterSnapshots.html) API action\.
 

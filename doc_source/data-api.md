@@ -4,10 +4,10 @@ You can access your Aurora Serverless DB cluster using the built\-in Data API\. 
 
 The Data API doesn't require a persistent connection to the DB cluster\. Instead, it provides a secure HTTP endpoint and integration with AWS SDKs\. You can use the endpoint to run SQL statements without managing connections\. All calls to the Data API are synchronous\. By default, a call times out and is terminated in 45 seconds if it's not finished processing\. You can use the `continueAfterTimeout` parameter to continue running the SQL statement after the call times out\.
 
-The API uses database credentials stored in AWS Secrets Manager, so you don't need to pass credentials in the API calls\. The API also provides a more secure way to use AWS Lambda\. It enables you to access your DB cluster without your needing to configure a Lambda function to access resources in a virtual private cloud \(VPC\)\. For more information about AWS Secrets Manager, see [What Is AWS Secrets Manager?](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the *AWS Secrets Manager User Guide*\.
+The API uses database credentials stored in AWS Secrets Manager, so you don't need to pass credentials in the API calls\. The API also provides a more secure way to use AWS Lambda\. It enables you to access your DB cluster without your needing to configure a Lambda function to access resources in a virtual private cloud \(VPC\)\. For more information about AWS Secrets Manager, see [What is AWS secrets manager?](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the *AWS Secrets Manager User Guide*\.
 
 **Note**  
-When you enable the Data API, you can also use the query editor for Aurora Serverless\. For more information, see [Using the Query Editor for Aurora Serverless](query-editor.md)\.
+When you enable the Data API, you can also use the query editor for Aurora Serverless\. For more information, see [Using the query editor for Aurora Serverless](query-editor.md)\.
 
 ## Availability of the Data API<a name="data-api.regions"></a>
 
@@ -34,7 +34,7 @@ The following table shows the AWS Regions where the Data API is currently availa
 | US West \(N\. California\) | rds\-data\.us\-west\-1\.amazonaws\.com | 
 | US West \(Oregon\) | rds\-data\.us\-west\-2\.amazonaws\.com | 
 
-## Authorizing Access to the Data API<a name="data-api.access"></a>
+## Authorizing access to the Data API<a name="data-api.access"></a>
 
 A user must be authorized to access the Data API\. You can authorize a user to access the Data API by adding the `AmazonRDSDataFullAccess` policy, a predefined AWS Identity and Access Management \(IAM\) policy, to that user\.
 
@@ -79,9 +79,9 @@ The following policy provides the minimum required permissions for a user to acc
 }
 ```
 
-For information about creating an IAM policy, see [Creating IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) in the *IAM User Guide*\.
+For information about creating an IAM policy, see [Creating IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) in the *IAM User Guide*\.
 
-For information about adding an IAM policy to a user, see [Adding and Removing IAM Identity Permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) in the *IAM User Guide*\.
+For information about adding an IAM policy to a user, see [Adding and removing IAM identity permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) in the *IAM User Guide*\.
 
 ## Enabling the Data API<a name="data-api.enabling"></a>
 
@@ -95,7 +95,7 @@ The following screenshot shows the enabled **Data API** when modifying an Aurora
 
 ![\[Enabling the Data API for an Aurora Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/web-server-api-endpoint.png)
 
-For instructions, see [Creating an Aurora Serverless DB Cluster](aurora-serverless.create.md) and [Modifying an Aurora Serverless DB Cluster](aurora-serverless.modifying.md)\.
+For instructions, see [Creating an Aurora Serverless DB cluster](aurora-serverless.create.md) and [Modifying an Aurora Serverless DB cluster](aurora-serverless.modifying.md)\.
 
 ### AWS CLI<a name="data-api.enabling.cli"></a>
 
@@ -131,7 +131,7 @@ You can set the `EnableHttpEndpoint` value using the following API operations:
 +  [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) 
 +  [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) 
 
-## Storing Database Credentials in AWS Secrets Manager<a name="data-api.secrets"></a>
+## Storing database credentials in AWS Secrets Manager<a name="data-api.secrets"></a>
 
 When you call the Data API, you can pass credentials for the Aurora Serverless DB cluster by using a secret in AWS Secrets Manager\. To pass credentials in this way, you specify the name of the secret or the Amazon Resource Name \(ARN\) of the secret\.
 
@@ -139,15 +139,15 @@ When you call the Data API, you can pass credentials for the Aurora Serverless D
 
 1. Use AWS Secrets Manager to create a secret that contains credentials for the Aurora DB cluster\.
 
-   For instructions, see [Creating a Basic Secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html) in the *AWS Secrets Manager User Guide*\.
+   For instructions, see [Creating a basic secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html) in the *AWS Secrets Manager User Guide*\.
 
 1. Use the AWS Secrets Manager console to view the details for the secret you created, or run the `aws secretsmanager describe-secret` AWS CLI command\.
 
    Note the name and ARN of the secret\. You can use them in calls to the Data API\.
 
-## Creating an Amazon VPC Endpoint \(AWS PrivateLink\) for the Data API<a name="data-api.vpc-endpoint"></a>
+## Creating an Amazon VPC endpoint \(AWS PrivateLink\) for the Data API<a name="data-api.vpc-endpoint"></a>
 
-Amazon Virtual Private Cloud \(Amazon VPC\) enables you to launch AWS resources, such as Aurora DB clusters and applications, into a virtual private cloud \(VPC\)\. AWS PrivateLink provides private connectivity between Amazon VPCs and AWS services securely on the Amazon network\. Using AWS PrivateLink, you can create Amazon VPC endpoints, which enable you to connect to services across different accounts and VPCs based on Amazon VPC\. For more information about AWS PrivateLink, see [VPC Endpoint Services \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html) in the *Amazon Virtual Private Cloud User Guide*\.
+Amazon Virtual Private Cloud \(Amazon VPC\) enables you to launch AWS resources, such as Aurora DB clusters and applications, into a virtual private cloud \(VPC\)\. AWS PrivateLink provides private connectivity between Amazon VPCs and AWS services securely on the Amazon network\. Using AWS PrivateLink, you can create Amazon VPC endpoints, which enable you to connect to services across different accounts and VPCs based on Amazon VPC\. For more information about AWS PrivateLink, see [VPC endpoint services \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html) in the *Amazon Virtual Private Cloud User Guide*\.
 
 You can call the Data API with Amazon VPC endpoints\. Using an Amazon VPC endpoint keeps traffic between applications in your Amazon VPC and the Data API in the AWS network, without using public IP addresses\. Amazon VPC endpoints can help you meet compliance and regulatory requirements related to limiting public internet connectivity\. For example, if you use an Amazon VPC endpoint, you can keep traffic between an application running on an Amazon EC2 instance and the Data API in the VPCs that contain them\.
 
@@ -200,7 +200,7 @@ When you use an Amazon VPC endpoint in a Data API call, all traffic between your
 
 ## Calling the Data API<a name="data-api.calling"></a>
 
-After you enable the Data API for an Aurora Serverless DB cluster, you can call the Data API or the AWS CLI to run SQL statements on the DB cluster\. The Data API supports the programming languages supported by the AWS SDK\. For more information, see [ Tools to Build on AWS](https://aws.amazon.com/tools/)\.
+After you enable the Data API for an Aurora Serverless DB cluster, you can call the Data API or the AWS CLI to run SQL statements on the DB cluster\. The Data API supports the programming languages supported by the AWS SDK\. For more information, see [ Tools to build on AWS](https://aws.amazon.com/tools/)\.
 
 **Note**  
 Currently, the Data API doesn't support arrays of Universal Unique Identifiers \(UUIDs\)\.
@@ -210,7 +210,7 @@ The Data API provides the following operations to perform SQL statements\.
 
 ****  
 
-|  Data API Operation  |  AWS CLI Command  |  Description  | 
+|  Data API operation  |  AWS CLI command  |  Description  | 
 | --- | --- | --- | 
 |  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/execute-statement.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/execute-statement.html)  |  Runs a SQL statement against a database\.  | 
 |  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BatchExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BatchExecuteStatement.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/batch-execute-statement.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/batch-execute-statement.html)  |  Runs a batch SQL statement over an array of data for bulk update and insert operations\. You can run a DML statement with array of parameter sets\. A batch SQL statement can provide a significant performance improvement over individual insert and update statements\.  | 
@@ -220,7 +220,7 @@ You can run both operations for performing a SQL statement independently, or you
 
 ****  
 
-|  Data API Operation  |  AWS CLI Command  |  Description  | 
+|  Data API operation  |  AWS CLI command  |  Description  | 
 | --- | --- | --- | 
 |  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BeginTransaction.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BeginTransaction.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/begin-transaction.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/begin-transaction.html)  |  Starts a SQL transaction\.  | 
 |  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_CommitTransaction.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_CommitTransaction.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/commit-transaction.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/commit-transaction.html)  |  Ends a SQL transaction and commits the changes\.  | 
@@ -231,7 +231,7 @@ The operations for performing SQL statements and supporting transactions have th
 
 ****  
 
-|  Data API Operation Parameter  |  AWS CLI Command Option  |  Required  |  Description  | 
+|  Data API operation parameter  |  AWS CLI command option  |  Required  |  Description  | 
 | --- | --- | --- | --- | 
 |  `resourceArn`  |  `--resource-arn`  |  Yes  |  The Amazon Resource Name \(ARN\) of the Aurora Serverless DB cluster\.  | 
 |  `secretArn`  |  `--secret-arn`  |  Yes  |  The name or ARN of the secret that enables access to the DB cluster\.  | 
@@ -241,7 +241,7 @@ You can use parameters in Data API calls to `ExecuteStatement` and `BatchExecute
 
 ****  
 
-|  JDBC Data Type  |  Data API Data Type  | 
+|  JDBC data type  |  Data API data type  | 
 | --- | --- | 
 |  `INTEGER, TINYINT, SMALLINT, BIGINT`  |  `LONG`  | 
 |  `FLOAT, REAL, DOUBLE`  |  `DOUBLE`  | 
@@ -262,8 +262,8 @@ For some specific types, such as `DECIMAL` or `TIME`, a hint might be required t
 
 **Topics**
 + [Calling the Data API with the AWS CLI](#data-api.calling.cli)
-+ [Calling the Data API from a Python Application](#data-api.calling.python)
-+ [Calling the Data API from a Java Application](#data-api.calling.java)
++ [Calling the Data API from a Python application](#data-api.calling.python)
++ [Calling the Data API from a Java application](#data-api.calling.java)
 
 **Note**  
 These examples are not exhaustive\.
@@ -272,7 +272,7 @@ These examples are not exhaustive\.
 
 You can call the Data API using the AWS Command Line Interface \(AWS CLI\)\.
 
-The following examples use the AWS CLI for the Data API\. For more information, see [AWS Command Line Interface Reference for the Data API](https://docs.aws.amazon.com/cli/latest/reference/rds-data/index.html)\.
+The following examples use the AWS CLI for the Data API\. For more information, see [AWS Command Line Interface reference for the Data API](https://docs.aws.amazon.com/cli/latest/reference/rds-data/index.html)\.
 
 In each example, replace the DB cluster ARN with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in AWS Secrets Manager that allows access to the DB cluster\.
 
@@ -280,13 +280,13 @@ In each example, replace the DB cluster ARN with the ARN for your Aurora Serverl
 The AWS CLI can format responses in JSON\.
 
 **Topics**
-+ [Starting a SQL Transaction](#data-api.calling.cli.begin-transaction)
-+ [Running a SQL Statement](#data-api.calling.cli.execute-statment)
-+ [Running a Batch SQL Statement Over an Array of Data](#data-api.calling.cli.batch-execute-statement)
-+ [Committing a SQL Transaction](#data-api.calling.cli.commit-transaction)
-+ [Rolling Back a SQL Transaction](#data-api.calling.cli.rollback-transaction)
++ [Starting a SQL transaction](#data-api.calling.cli.begin-transaction)
++ [Running a SQL statement](#data-api.calling.cli.execute-statment)
++ [Running a batch SQL statement over an array of data](#data-api.calling.cli.batch-execute-statement)
++ [Committing a SQL transaction](#data-api.calling.cli.commit-transaction)
++ [Rolling back a SQL transaction](#data-api.calling.cli.rollback-transaction)
 
-#### Starting a SQL Transaction<a name="data-api.calling.cli.begin-transaction"></a>
+#### Starting a SQL transaction<a name="data-api.calling.cli.begin-transaction"></a>
 
 You can start a SQL transaction using the `aws rds-data begin-transaction` CLI command\. The call returns a transaction identifier\.
 
@@ -321,7 +321,7 @@ The following is an example of the response\.
 }
 ```
 
-#### Running a SQL Statement<a name="data-api.calling.cli.execute-statment"></a>
+#### Running a SQL statement<a name="data-api.calling.cli.execute-statment"></a>
 
 You can run a SQL statement using the `aws rds-data execute-statement` CLI command\.
 
@@ -481,9 +481,9 @@ The following is an example of the response\.
 ```
 
 **Note**  
-The `generatedFields` data isn't supported by Aurora PostgreSQL\. To get the values of generated fields, use the `RETURNING` clause\. For more information, see [ Returning Data From Modified Rows](https://www.postgresql.org/docs/10/dml-returning.html) in the PostgreSQL documentation\.
+The `generatedFields` data isn't supported by Aurora PostgreSQL\. To get the values of generated fields, use the `RETURNING` clause\. For more information, see [ Returning data from modified rows](https://www.postgresql.org/docs/10/dml-returning.html) in the PostgreSQL documentation\.
 
-#### Running a Batch SQL Statement Over an Array of Data<a name="data-api.calling.cli.batch-execute-statement"></a>
+#### Running a batch SQL statement over an array of data<a name="data-api.calling.cli.batch-execute-statement"></a>
 
 You can run a batch SQL statement over an array of data by using the `aws rds-data batch-execute-statement` CLI command\. You can use this command to perform a bulk import or update operation\.
 
@@ -531,7 +531,7 @@ aws rds-data batch-execute-statement --resource-arn "arn:aws:rds:us-east-1:12345
 **Note**  
 Don't include line breaks in the `--parameter-sets` option\.
 
-#### Committing a SQL Transaction<a name="data-api.calling.cli.commit-transaction"></a>
+#### Committing a SQL transaction<a name="data-api.calling.cli.commit-transaction"></a>
 
 Using the `aws rds-data commit-transaction` CLI command, you can end a SQL transaction that you started with `aws rds-data begin-transaction` and commit the changes\.
 
@@ -564,7 +564,7 @@ The following is an example of the response\.
 }
 ```
 
-#### Rolling Back a SQL Transaction<a name="data-api.calling.cli.rollback-transaction"></a>
+#### Rolling back a SQL transaction<a name="data-api.calling.cli.rollback-transaction"></a>
 
 Using the `aws rds-data rollback-transaction` CLI command, you can roll back a SQL transaction that you started with `aws rds-data begin-transaction`\. Rolling back a transaction cancels its changes\.
 
@@ -600,20 +600,20 @@ The following is an example of the response\.
 }
 ```
 
-### Calling the Data API from a Python Application<a name="data-api.calling.python"></a>
+### Calling the Data API from a Python application<a name="data-api.calling.python"></a>
 
 You can call the Data API from a Python application\.
 
-The following examples use the AWS SDK for Python \(Boto\)\. For more information about Boto, see the [AWS SDK for Python \(Boto 3\) Documentation](http://boto3.amazonaws.com/v1/documentation/api/latest/index.html)\.
+The following examples use the AWS SDK for Python \(Boto\)\. For more information about Boto, see the [AWS SDK for Python \(Boto 3\) documentation](http://boto3.amazonaws.com/v1/documentation/api/latest/index.html)\.
 
 In each example, replace the DB cluster's Amazon Resource Name \(ARN\) with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in AWS Secrets Manager that allows access to the DB cluster\.
 
 **Topics**
-+ [Running a SQL Query](#data-api.calling.python.run-query)
-+ [Running a DML SQL Statement](#data-api.calling.python.run-inert)
-+ [Running a SQL Transaction](#data-api.calling.python.run-transaction)
++ [Running a SQL query](#data-api.calling.python.run-query)
++ [Running a DML SQL statement](#data-api.calling.python.run-inert)
++ [Running a SQL transaction](#data-api.calling.python.run-transaction)
 
-#### Running a SQL Query<a name="data-api.calling.python.run-query"></a>
+#### Running a SQL query<a name="data-api.calling.python.run-query"></a>
 
 You can run a `SELECT` statement and fetch the results with a Python application\.
 
@@ -680,7 +680,7 @@ print (response1['records'])
 ]
 ```
 
-#### Running a DML SQL Statement<a name="data-api.calling.python.run-inert"></a>
+#### Running a DML SQL statement<a name="data-api.calling.python.run-inert"></a>
 
 You can run a data manipulation language \(DML\) statement to insert, update, or delete data in your database\. You can also use parameters in DML statements\.
 
@@ -711,7 +711,7 @@ response2 = rdsData.execute_statement(resourceArn=cluster_arn,
 print (response2["numberOfRecordsUpdated"])
 ```
 
-#### Running a SQL Transaction<a name="data-api.calling.python.run-transaction"></a>
+#### Running a SQL transaction<a name="data-api.calling.python.run-transaction"></a>
 
 You can start a SQL transaction, run one or more SQL statements, and then commit the changes with a Python application\.
 
@@ -756,7 +756,7 @@ response3['numberOfRecordsUpdated']
 **Note**  
 If you run a data definition language \(DDL\) statement, we recommend continuing to run the statement after the call times out\. When a DDL statement terminates before it is finished running, it can result in errors and possibly corrupted data structures\. To continue running a statement after a call times out, set the `continueAfterTimeout` parameter to `true`\.
 
-### Calling the Data API from a Java Application<a name="data-api.calling.java"></a>
+### Calling the Data API from a Java application<a name="data-api.calling.java"></a>
 
 You can call the Data API from a Java application\.
 
@@ -765,11 +765,11 @@ The following examples use the AWS SDK for Java\. For more information, see the 
 In each example, replace the DB cluster's Amazon Resource Name \(ARN\) with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in AWS Secrets Manager that allows access to the DB cluster\.
 
 **Topics**
-+ [Running a SQL Query](#data-api.calling.java.run-query)
-+ [Running a SQL Transaction](#data-api.calling.java.run-transaction)
-+ [Running a Batch SQL Operation](#data-api.calling.java.run-batch)
++ [Running a SQL query](#data-api.calling.java.run-query)
++ [Running a SQL transaction](#data-api.calling.java.run-transaction)
++ [Running a batch SQL operation](#data-api.calling.java.run-batch)
 
-#### Running a SQL Query<a name="data-api.calling.java.run-query"></a>
+#### Running a SQL query<a name="data-api.calling.java.run-query"></a>
 
 You can run a `SELECT` statement and fetch the results with a Java application\.
 
@@ -811,7 +811,7 @@ public class FetchResultsExample {
 }
 ```
 
-#### Running a SQL Transaction<a name="data-api.calling.java.run-transaction"></a>
+#### Running a SQL transaction<a name="data-api.calling.java.run-transaction"></a>
 
 You can start a SQL transaction, run one or more SQL statements, and then commit the changes with a Java application\.
 
@@ -864,7 +864,7 @@ public class TransactionExample {
 **Note**  
 If you run a data definition language \(DDL\) statement, we recommend continuing to run the statement after the call times out\. When a DDL statement terminates before it is finished running, it can result in errors and possibly corrupted data structures\. To continue running a statement after a call times out, set the `continueAfterTimeout` parameter to `true`\.
 
-#### Running a Batch SQL Operation<a name="data-api.calling.java.run-batch"></a>
+#### Running a batch SQL operation<a name="data-api.calling.java.run-batch"></a>
 
 You can run bulk insert and update operations over an array of data with a Java application\. You can run a DML statement with array of parameter sets\.
 
@@ -912,11 +912,11 @@ public class BatchExecuteExample {
 }
 ```
 
-## Using the Java Client Library for Data API<a name="data-api.java-client-library"></a>
+## Using the Java client library for Data API<a name="data-api.java-client-library"></a>
 
 You can download and use a Java client library for the Data API\. The Java client library provides an alternative way to use the Data API\. Using this library, you can map your client\-side classes to requests and responses of the Data API\. This mapping support can ease integration with some specific Java types, such as `Date`, `Time`, and `BigDecimal`\.
 
-### Downloading the Java Client Library for Data API<a name="data-api.java-client-library.downloading"></a>
+### Downloading the Java client library for Data API<a name="data-api.java-client-library.downloading"></a>
 
 The Data API Java client library is open source in GitHub at the following location:
 
@@ -932,7 +932,7 @@ You can build the library manually from the source files, but the best practice 
 </dependency>
 ```
 
-### Java Client Library Examples<a name="data-api.java-client-library.examples"></a>
+### Java client library examples<a name="data-api.java-client-library.examples"></a>
 
 Following, you can find some common examples of using the Data API Java client library\. These examples assume that you have a table `accounts` with two columns: `accountId` and `name`\. You also have the following data transfer object \(DTO\)\.
 
@@ -982,17 +982,17 @@ Account result = client.forSql("SELECT * FROM accounts WHERE account_id = 1")
           .mapToSingle(Account.class);
 ```
 
-## Troubleshooting Data API Issues<a name="data-api.troubleshooting"></a>
+## Troubleshooting Data API issues<a name="data-api.troubleshooting"></a>
 
 Use the following sections, titled with common error messages, to help troubleshoot problems that you have with the Data API\. 
 
 **Topics**
-+ [Transaction <transaction\_ID> Is Not Found](#data-api.troubleshooting.tran-id-not-found)
-+ [Packet for Query Is Too Large](#data-api.troubleshooting.packet-too-large)
-+ [Database Response Exceeded Size Limit](#data-api.troubleshooting.response-size-too-large)
-+ [HttpEndpoint Is Not Enabled for Cluster <cluster\_ID>](#data-api.troubleshooting.http-endpoint-not-enabled)
++ [Transaction <transaction\_ID> is not found](#data-api.troubleshooting.tran-id-not-found)
++ [Packet for query is too large](#data-api.troubleshooting.packet-too-large)
++ [Database response exceeded size limit](#data-api.troubleshooting.response-size-too-large)
++ [HttpEndpoint is not enabled for cluster <cluster\_ID>](#data-api.troubleshooting.http-endpoint-not-enabled)
 
-### Transaction <transaction\_ID> Is Not Found<a name="data-api.troubleshooting.tran-id-not-found"></a>
+### Transaction <transaction\_ID> is not found<a name="data-api.troubleshooting.tran-id-not-found"></a>
 
 In this case, the transaction ID specified in a Data API call wasn't found\. The cause for this issue is almost always one of the following:
 + The specified transaction ID wasn't created by a [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BeginTransaction.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BeginTransaction.html) call\.
@@ -1004,21 +1004,21 @@ To solve the issue, make sure that your call has a valid transaction ID\. Also m
 
 For information about running transactions, see [Calling the Data API](#data-api.calling)\.
 
-### Packet for Query Is Too Large<a name="data-api.troubleshooting.packet-too-large"></a>
+### Packet for query is too large<a name="data-api.troubleshooting.packet-too-large"></a>
 
 In this case, the result set returned for a row was too large\. The Data API size limit is 64 KB per row in the result set returned by the database\.
 
 To solve this issue, make sure that each row in a result set is 64 KB or less\.
 
-### Database Response Exceeded Size Limit<a name="data-api.troubleshooting.response-size-too-large"></a>
+### Database response exceeded size limit<a name="data-api.troubleshooting.response-size-too-large"></a>
 
 In this case, the size of the result set returned by the database was too large\. The Data API limit is 1 MB in the result set returned by the database\.
 
 To solve this issue, make sure that calls to the Data API return 1 MB of data or less\. If you need to return more than 1 MB, you can use multiple [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html) calls with the `LIMIT` clause in your query\.
 
-For more information about the `LIMIT` clause, see [SELECT Syntax](https://dev.mysql.com/doc/refman/5.7/en/select.html) in the MySQL documentation\.
+For more information about the `LIMIT` clause, see [SELECT syntax](https://dev.mysql.com/doc/refman/5.7/en/select.html) in the MySQL documentation\.
 
-### HttpEndpoint Is Not Enabled for Cluster <cluster\_ID><a name="data-api.troubleshooting.http-endpoint-not-enabled"></a>
+### HttpEndpoint is not enabled for cluster <cluster\_ID><a name="data-api.troubleshooting.http-endpoint-not-enabled"></a>
 
 The cause for this issue is almost always one of the following:
 + The Data API isn't enabled for the Aurora Serverless DB cluster\. To use the Data API with an Aurora Serverless DB cluster, the Data API must be enabled for the DB cluster\.

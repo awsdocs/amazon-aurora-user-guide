@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2019\-07\-08 \(Version 2\.04\.5\)<a name="AuroraMySQL.Updates.2045"></a>
+# Aurora MySQL database engine updates 2019\-07\-08 \(version 2\.04\.5\)<a name="AuroraMySQL.Updates.2045"></a>
 
 **Version:** 2\.04\.5
 
@@ -6,10 +6,10 @@ Aurora MySQL 2\.04\.5 is generally available\. Aurora MySQL 2\.x versions are co
 
  You have the option to upgrade existing Aurora MySQL 2\.\* database clusters to Aurora MySQL 2\.04\.5\. We do not allow in\-place upgrade of Aurora MySQL 1\.\* clusters\. This restriction will be lifted in a later Aurora MySQL 2\.\* release\. You can restore snapshots of Aurora MySQL 1\.14\.\*, 1\.15\.\*, 1\.16\.\*, 1\.17\.\*, 1\.18\.\*, 1\.19\.\*, 2\.01\.\*, 2\.02\.\*, 2\.03\.\* and 2\.04\.\* into Aurora MySQL 2\.04\.5\. 
 
-If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 **Note**  
-For information on how to upgrade your Aurora MySQL database cluster, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+For information on how to upgrade your Aurora MySQL database cluster, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2045.Improvements"></a>
 +  Fixed a race condition during storage volume growth that caused the database to restart\. 
@@ -24,14 +24,14 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 +  Fixed a race condition in the Performance Schema feature that caused the database to restart\. 
 +  Fixed an issue that caused aborted connections when handling an error in network protocol management\. 
 
-## Comparison with Aurora MySQL Version 1<a name="AuroraMySQL.Updates.2045.Compare56"></a>
+## Comparison with Aurora MySQL version 1<a name="AuroraMySQL.Updates.2045.Compare56"></a>
 
 The following Amazon Aurora MySQL features are supported in Aurora MySQL Version 1 \(compatible with MySQL 5\.6\), but these features are currently not supported in Aurora MySQL Version 2 \(compatible with MySQL 5\.7\)\.
-+ Asynchronous key prefetch \(AKP\)\. For more information, see [Working with Asynchronous Key Prefetch in Amazon Aurora](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
-+ Hash joins\. For more information, see [Working with Hash Joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
-+ Native functions for synchronously invoking AWS Lambda functions\. For more information, see [Invoking a Lambda Function with an Aurora MySQL Native Function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)\.
-+ Scan batching\. For more information, see [Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
-+ Migrating data from MySQL using an Amazon S3 bucket\. For more information, see [Migrating Data from MySQL by Using an Amazon S3 Bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.
++ Asynchronous key prefetch \(AKP\)\. For more information, see [Working with asynchronous key prefetch in Amazon Aurora](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
++ Hash joins\. For more information, see [Working with hash joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
++ Native functions for synchronously invoking AWS Lambda functions\. For more information, see [Invoking a Lambda function with an Aurora MySQL native function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)\.
++ Scan batching\. For more information, see [Aurora MySQL database engine updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
++ Migrating data from MySQL using an Amazon S3 bucket\. For more information, see [Migrating data from MySQL by using an Amazon S3 bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.
 
 ## MySQL 5\.7 compatibility<a name="AuroraMySQL.Updates.2045.Compatibility"></a>
 

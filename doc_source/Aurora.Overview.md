@@ -1,4 +1,4 @@
-# Amazon Aurora DB Clusters<a name="Aurora.Overview"></a>
+# Amazon Aurora DB clusters<a name="Aurora.Overview"></a>
 
  An Amazon Aurora *DB cluster* consists of one or more DB instances and a cluster volume that manages the data for those DB instances\. An Aurora *cluster volume* is a virtual database storage volume that spans multiple Availability Zones, with each Availability Zone having a copy of the DB cluster data\. Two types of DB instances make up an Aurora DB cluster: 
 +  **Primary DB instance** – Supports read and write operations, and performs all of the data modifications to the cluster volume\. Each Aurora DB cluster has one primary DB instance\. 

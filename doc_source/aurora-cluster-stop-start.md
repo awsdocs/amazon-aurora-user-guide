@@ -1,15 +1,15 @@
-# Stopping and Starting an Amazon Aurora DB Cluster<a name="aurora-cluster-stop-start"></a>
+# Stopping and starting an Amazon Aurora DB cluster<a name="aurora-cluster-stop-start"></a>
 
  Stopping and starting Amazon Aurora clusters helps you manage costs for development and test environments\. You can temporarily stop all the DB instances in your cluster, instead of setting up and tearing down all the DB instances each time that you use the cluster\. 
 
 **Topics**
-+ [Overview of Stopping and Starting an Aurora DB Cluster](#aurora-cluster-start-stop-overview)
-+ [Limitations for Stopping and Starting Aurora DB Clusters](#aurora-cluster-stop-limitations)
-+ [Stopping an Aurora DB Cluster](#aurora-cluster-stop)
-+ [Possible Operations While an Aurora DB Cluster Is Stopped](#aurora-cluster-stopped)
-+ [Starting an Aurora DB Cluster](#aurora-cluster-start)
++ [Overview of stopping and starting an Aurora DB cluster](#aurora-cluster-start-stop-overview)
++ [Limitations for stopping and starting Aurora DB clusters](#aurora-cluster-stop-limitations)
++ [Stopping an Aurora DB cluster](#aurora-cluster-stop)
++ [Possible operations while an Aurora DB cluster is stopped](#aurora-cluster-stopped)
++ [Starting an Aurora DB cluster](#aurora-cluster-start)
 
-## Overview of Stopping and Starting an Aurora DB Cluster<a name="aurora-cluster-start-stop-overview"></a>
+## Overview of stopping and starting an Aurora DB cluster<a name="aurora-cluster-start-stop-overview"></a>
 
  During periods where you don't need an Aurora cluster, you can stop all instances in that cluster at once\. You can start the cluster again anytime you need to use it\. Starting and stopping simplifies the setup and teardown processes for clusters used for development, testing, or similar activities that don't require continuous availability\. You can perform all the AWS Management Console procedures involved with only a single action, regardless of how many instances are in the cluster\. 
 
@@ -19,7 +19,7 @@
 
  Don't use starting and stopping if you need to keep your DB cluster running but it has more capacity than you need\. If your cluster is too costly or not very busy, delete one or more DB instances or change all your DB instances to a small instance class\. You can't stop an individual Aurora DB instance\. 
 
-## Limitations for Stopping and Starting Aurora DB Clusters<a name="aurora-cluster-stop-limitations"></a>
+## Limitations for stopping and starting Aurora DB clusters<a name="aurora-cluster-stop-limitations"></a>
 
  Some Aurora clusters can't be stopped and started: 
 +  You can't stop and start a cluster that's part of an [Aurora global database](aurora-global-database.md)\. 
@@ -29,7 +29,7 @@
 
  If an existing cluster can't be stopped and started, the **Stop** action isn't available from the **Actions** menu on the **Databases** page or the details page\. 
 
-## Stopping an Aurora DB Cluster<a name="aurora-cluster-stop"></a>
+## Stopping an Aurora DB cluster<a name="aurora-cluster-stop"></a>
 
 To use an Aurora DB cluster or perform administration, you always begin with a running Aurora DB cluster, then stop the cluster, and then start the cluster again\. While your cluster is stopped, you are charged for cluster storage, manual snapshots, and automated backup storage within your specified retention window, but not for DB instance hours\. 
 
@@ -47,7 +47,7 @@ To use an Aurora DB cluster or perform administration, you always begin with a r
 
 1.  In the navigation pane, choose **Databases**, and then choose a cluster\. You can perform the stop operation from this page, or navigate to the details page for the DB cluster that you want to stop\. 
 
-    If an existing cluster can't be stopped and started, the **Stop** action isn't available from the **Actions** menu on the **Databases** page or the details page\. For the kinds of clusters that you can't start and stop, see [Limitations for Stopping and Starting Aurora DB Clusters](#aurora-cluster-stop-limitations)\. 
+    If an existing cluster can't be stopped and started, the **Stop** action isn't available from the **Actions** menu on the **Databases** page or the details page\. For the kinds of clusters that you can't start and stop, see [Limitations for stopping and starting Aurora DB clusters](#aurora-cluster-stop-limitations)\. 
 
 1. For **Actions**, choose **Stop**\. 
 
@@ -67,9 +67,9 @@ aws rds stop-db-cluster --db-cluster-identifier mydbcluster
 To stop a DB instance by using the Amazon RDS API, call the [StopDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDBCluster.html) operation with the following parameter: 
 + `DBClusterIdentifier` – the name of the Aurora cluster\. 
 
-## Possible Operations While an Aurora DB Cluster Is Stopped<a name="aurora-cluster-stopped"></a>
+## Possible operations while an Aurora DB cluster is stopped<a name="aurora-cluster-stopped"></a>
 
- While an Aurora cluster is stopped, you can do a point\-in\-time restore to any point within your specified automated backup retention window\. For details about doing a point\-in\-time restore, see [Restoring Data](Aurora.Managing.Backups.md#Aurora.Managing.Backups.Restore)\. 
+ While an Aurora cluster is stopped, you can do a point\-in\-time restore to any point within your specified automated backup retention window\. For details about doing a point\-in\-time restore, see [Restoring data](Aurora.Managing.Backups.md#Aurora.Managing.Backups.Restore)\. 
 
  You can't modify the configuration of an Aurora DB cluster, or any of its DB instances, while the cluster is stopped\. You also can't add or remove DB instances from the cluster, or delete the cluster if it still has any associated DB instances\. You must start the cluster before performing any such administrative actions\. 
 
@@ -77,7 +77,7 @@ To stop a DB instance by using the Amazon RDS API, call the [StopDBCluster](http
 
  Aurora also doesn't perform any automated backups, because the underlying data can't change while the cluster is stopped\. Aurora doesn't extend the backup retention period while the cluster is stopped\. 
 
-## Starting an Aurora DB Cluster<a name="aurora-cluster-start"></a>
+## Starting an Aurora DB cluster<a name="aurora-cluster-start"></a>
 
 You always start an Aurora DB cluster beginning with an Aurora cluster that is already in the stopped state\. When you start the cluster, all its DB instances become available again\. The cluster keeps its configuration settings such as endpoints, parameter groups, and VPC security groups\. 
 

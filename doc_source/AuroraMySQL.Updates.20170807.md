@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates: 2017\-08\-07<a name="AuroraMySQL.Updates.20170807"></a>
+# Aurora MySQL database engine updates: 2017\-08\-07<a name="AuroraMySQL.Updates.20170807"></a>
 
 **Version:** 1\.14
 
@@ -8,9 +8,9 @@ With version 1\.14 of Aurora MySQL, we are using a cluster patching model where 
 
 If you have any questions or concerns, AWS Support is available on the community forums and through AWS Premium Support at [http://aws\.amazon\.com/support](http://aws.amazon.com/support)\.
 
-## Zero\-Downtime Patching<a name="AuroraMySQL.Updates.20170807.ZDP"></a>
+## Zero\-downtime patching<a name="AuroraMySQL.Updates.20170807.ZDP"></a>
 
-The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-Downtime Patching](AuroraMySQL.Updates.md#AuroraMySQL.Updates.ZDP)\. 
+The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-downtime patching](AuroraMySQL.Updates.md#AuroraMySQL.Updates.ZDP)\. 
 
 ## Improvements<a name="AuroraMySQL.Updates.20170807.Improvements"></a>
 + Fixed an incorrect "record not found" error when a record is found in the secondary index but not in the primary index\.
@@ -39,5 +39,5 @@ The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis,
 + Fixed an issue where `ANALYZE TABLE` was incorrectly allowed on Aurora Replicas\. This has now been blocked\.
 + Fixed a stability issue caused by a rare deadlock as a result of a race condition between logical read\-ahead and purge\.
 
-## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.20170807.BugFixes"></a>
+## Integration of MySQL bug fixes<a name="AuroraMySQL.Updates.20170807.BugFixes"></a>
 + A full\-text search combined with derived tables \(subqueries in the `FROM` clause\) caused a server exit\. Now, if a full\-text operation depends on a derived table, the server produces an error indicating that a full\-text search cannot be done on a materialized table\. \(Bug \#68751, Bug \#16539903\)

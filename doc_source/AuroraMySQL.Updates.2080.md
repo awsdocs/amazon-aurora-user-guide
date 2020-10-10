@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2020\-06\-02 \(Version 2\.08\.0\)<a name="AuroraMySQL.Updates.2080"></a>
+# Aurora MySQL database engine updates 2020\-06\-02 \(version 2\.08\.0\)<a name="AuroraMySQL.Updates.2080"></a>
 
 **Version:** 2\.08\.0
 
@@ -10,10 +10,10 @@ Aurora MySQL 2\.08\.0 is generally available\. Aurora MySQL 2\.x versions are co
 
  To create a cluster with an older version of Aurora MySQL, specify the engine version through the AWS Management Console, the AWS CLI, or the RDS API\. 
 
-If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 **Note**  
-For information on how to upgrade your Aurora MySQL database cluster, see [Database Upgrades and Patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+For information on how to upgrade your Aurora MySQL database cluster, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2080.Improvements"></a>
 
@@ -21,8 +21,8 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Datab
 +  Improved binary log \(binlog\) processing to reduce crash recovery time and commit time latency when very large transactions are involved\.  
 +  Launching Database Activity Streams \(DAS\) feature for Aurora MySQL\. This feature provides a near real\-time data stream of the database activity in your relational database to help you monitor activity\. For more information, see [Using Database Activity Streams with Amazon Aurora](DBActivityStreams.md)\. 
 +  Updated timezone files to support the latest Brazil timezone change\. 
-+  Introduced new keywords in SQL to exercise the hash join functionality for a specific table and/or inner table: `HASH_JOIN`, `HASH_JOIN_PROBING`, and `HASH_JOIN_BUILDING`\. For additional details, see [Aurora MySQL Hints](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Hints)\. 
-+  Introduced join order hint support in Aurora MySQL 5\.7 by backporting [a MySQL 8\.0 feature](https://github.com/mysql/mysql-server/commit/d2d91c3286b9ac3b95ef0e5036c5319aa4ffeda2#diff-4d30ba39ad1958c6f8148f67c94a896b)\. The new hints are `JOIN_FIXED_ORDER`, `JOIN_ORDER`, `JOIN_PREFIX`, and `JOIN_SUFFIX`\. For detailed documentation of join order hint support, see [WL\#9158: Join Order Hints](https://dev.mysql.com/worklog/task/?id=9158)\. 
++  Introduced new keywords in SQL to exercise the hash join functionality for a specific table and/or inner table: `HASH_JOIN`, `HASH_JOIN_PROBING`, and `HASH_JOIN_BUILDING`\. For additional details, see [Aurora MySQL hints](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Hints)\. 
++  Introduced join order hint support in Aurora MySQL 5\.7 by backporting [a MySQL 8\.0 feature](https://github.com/mysql/mysql-server/commit/d2d91c3286b9ac3b95ef0e5036c5319aa4ffeda2#diff-4d30ba39ad1958c6f8148f67c94a896b)\. The new hints are `JOIN_FIXED_ORDER`, `JOIN_ORDER`, `JOIN_PREFIX`, and `JOIN_SUFFIX`\. For detailed documentation of join order hint support, see [WL\#9158: Join order hints](https://dev.mysql.com/worklog/task/?id=9158)\. 
 +  Aurora Machine Learning now supports user\-defined functions with `MEDIUMINT` as the return type\. 
 +  The `lambda_async()` stored procedure now supports all MySQL `utf8` characters\. 
 

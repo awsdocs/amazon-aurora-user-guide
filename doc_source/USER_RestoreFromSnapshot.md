@@ -1,15 +1,15 @@
-# Restoring from a DB Cluster Snapshot<a name="USER_RestoreFromSnapshot"></a>
+# Restoring from a DB cluster snapshot<a name="USER_RestoreFromSnapshot"></a>
 
 Amazon RDS creates a storage volume snapshot of your DB cluster, backing up the entire DB instance and not just individual databases\. You can create a DB cluster by restoring from this DB cluster snapshot\. When you restore the DB cluster, you provide the name of the DB cluster snapshot to restore from, and then provide a name for the new DB cluster that is created from the restore\. You can't restore from a DB cluster snapshot to an existing DB cluster; a new DB cluster is created when you restore\. 
 
 **Note**  
 You can't restore a DB cluster from a DB cluster snapshot that is both shared and encrypted\. Instead, you can make a copy of the DB cluster snapshot and restore the DB cluster from the copy\.
 
-## Parameter Group Considerations<a name="USER_RestoreFromSnapshot.Parameters"></a>
+## Parameter group considerations<a name="USER_RestoreFromSnapshot.Parameters"></a>
 
 We recommend that you retain the parameter group for any DB cluster snapshots you create, so that you can associate your restored DB cluster with the correct parameter group\. You can specify the parameter group when you restore the DB cluster\. 
 
-## Security Group Considerations<a name="USER_RestoreFromSnapshot.Security"></a>
+## Security group considerations<a name="USER_RestoreFromSnapshot.Security"></a>
 
 When you restore a DB cluster, the default security group is associated with the restored cluster by default\.
 
@@ -18,17 +18,17 @@ If you're using the Amazon RDS console, you can specify a custom security group 
 If you're using the AWS CLI, you can specify a custom security group to associate with the cluster by including the `--vpc-security-group-ids` option in the `restore-db-cluster-from-snapshot` command\.
 If you're using the Amazon RDS API, you can include the `VpcSecurityGroupIds.VpcSecurityGroupId.N` parameter in the `RestoreDBClusterFromSnapshot` action\.
 
-As soon as the restore is complete and your new DB cluster is available, you can associate any custom security groups used by the snapshot you restored from\. You must apply these changes by modifying the DB cluster with the RDS console, the AWS CLI `modify-db-cluster` command, or the `ModifyDBCluster` Amazon RDS API operation\. For more information, see [Modifying an Amazon Aurora DB Cluster](Aurora.Modifying.md)\.
+As soon as the restore is complete and your new DB cluster is available, you can associate any custom security groups used by the snapshot you restored from\. You must apply these changes by modifying the DB cluster with the RDS console, the AWS CLI `modify-db-cluster` command, or the `ModifyDBCluster` Amazon RDS API operation\. For more information, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
-## Amazon Aurora Considerations<a name="USER_RestoreFromSnapshot.Aurora"></a>
+## Amazon Aurora considerations<a name="USER_RestoreFromSnapshot.Aurora"></a>
 
 With Aurora, you restore a DB cluster snapshot to a DB cluster\.
 
-With Aurora MySQL, you can also restore a DB cluster snapshot to an Aurora Serverless DB cluster\. For more information, see [Restoring an Aurora Serverless DB Cluster](aurora-serverless.restorefromsnapshot.md)\.
+With Aurora MySQL, you can also restore a DB cluster snapshot to an Aurora Serverless DB cluster\. For more information, see [Restoring an Aurora Serverless DB cluster](aurora-serverless.restorefromsnapshot.md)\.
 
-With Aurora MySQL, you can restore a DB cluster snapshot from a cluster without parallel query to a cluster with parallel query\. Because parallel query is typically used with very large tables, the snapshot mechanism is the fastest way to ingest large volumes of data to an Aurora MySQL parallel query\-enabled cluster\. For more information, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.
+With Aurora MySQL, you can restore a DB cluster snapshot from a cluster without parallel query to a cluster with parallel query\. Because parallel query is typically used with very large tables, the snapshot mechanism is the fastest way to ingest large volumes of data to an Aurora MySQL parallel query\-enabled cluster\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.
 
-## Restoring from a Snapshot<a name="USER_RestoreFromSnapshot.Restoring"></a>
+## Restoring from a snapshot<a name="USER_RestoreFromSnapshot.Restoring"></a>
 
 You can restore a DB cluster from a DB cluster snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 

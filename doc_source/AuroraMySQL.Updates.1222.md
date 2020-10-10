@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2020\-03\-05 \(Version 1\.22\.2\)<a name="AuroraMySQL.Updates.1222"></a>
+# Aurora MySQL database engine updates 2020\-03\-05 \(version 1\.22\.2\)<a name="AuroraMySQL.Updates.1222"></a>
 
 **Version:** 1\.22\.2
 
@@ -11,7 +11,7 @@ Aurora MySQL 1\.22\.2 is generally available\. Aurora MySQL 1\.\* versions are c
 **Note**  
  This version is currently not available in the following regions: AWS GovCloud \(US\-East\) \[us\-gov\-east\-1\], AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\]\. There will be a separate announcement once it is made available\. 
 
-If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\.
+If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.1222.Improvements"></a>
 

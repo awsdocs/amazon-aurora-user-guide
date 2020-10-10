@@ -1,4 +1,4 @@
-# Using Machine Learning \(ML\) with Aurora PostgreSQL<a name="postgresql-ml"></a>
+# Using machine learning \(ML\) with Aurora PostgreSQL<a name="postgresql-ml"></a>
 
 Amazon Aurora machine learning enables you to add machine learning–based predictions to database applications using the SQL language\. Aurora machine learning uses a highly optimized integration between the Aurora database and the AWS machine learning \(ML\) services SageMaker and Amazon Comprehend\. 
 
@@ -9,22 +9,22 @@ Amazon Aurora machine learning enables you to add machine learning–based predi
 
 AWS machine learning services are managed services that you set up and run in their own production environments\. Currently, Aurora Machine Learning integrates with Amazon Comprehend for sentiment analysis and SageMaker for a wide variety of ML algorithms\. 
 
- For general information about Amazon Comprehend, see [Amazon Comprehend](https://aws.amazon.com/comprehend)\. For details about using Aurora and Amazon Comprehend together, see [Using Amazon Comprehend for Natural Language Processing](#postgresql-using-comprehend)\. 
+ For general information about Amazon Comprehend, see [Amazon Comprehend](https://aws.amazon.com/comprehend)\. For details about using Aurora and Amazon Comprehend together, see [Using Amazon Comprehend for natural language processing](#postgresql-using-comprehend)\. 
 
-For general information about SageMaker, see [SageMaker](https://aws.amazon.com/sagemaker)\. For details about using Aurora and SageMaker together, see [Using SageMaker to Run Your Own ML Models](#postgresql-using-sagemaker)\. 
+For general information about SageMaker, see [SageMaker](https://aws.amazon.com/sagemaker)\. For details about using Aurora and SageMaker together, see [Using SageMaker to run your own ML models](#postgresql-using-sagemaker)\. 
 
 **Note**  
 Aurora machine learning for PostgreSQL connects an Aurora cluster to SageMaker or Amazon Comprehend services only within the same AWS Region\. 
 
 **Topics**
 + [Enabling Aurora Machine Learning](#postgresql-ml-enabling)
-+ [Using Amazon Comprehend for Natural Language Processing](#postgresql-using-comprehend)
-+ [Exporting Data to Amazon S3 for SageMaker Model Training](#postgresql-export-to-s3)
-+ [Using SageMaker to Run Your Own ML Models](#postgresql-using-sagemaker)
-+ [Best Practices with Aurora Machine Learning](#postgresql-ml-best-practice)
++ [Using Amazon Comprehend for natural language processing](#postgresql-using-comprehend)
++ [Exporting data to Amazon S3 for SageMaker model training](#postgresql-export-to-s3)
++ [Using SageMaker to run your own ML models](#postgresql-using-sagemaker)
++ [Best practices with Aurora Machine Learning](#postgresql-ml-best-practice)
 + [Monitoring Aurora Machine Learning](#postgresql-ml-monitoring)
-+ [PostgreSQL Function Reference for Aurora Machine Learning](#postgresql-ml-functions)
-+ [Manually Setting up IAM Roles for SageMaker and Amazon Comprehend Using the AWS CLI](#postgresql-ml-connect-cli)
++ [PostgreSQL function reference for Aurora Machine Learning](#postgresql-ml-functions)
++ [Manually setting up IAM roles for SageMaker and Amazon Comprehend using the AWS CLI](#postgresql-ml-connect-cli)
 
 ## Enabling Aurora Machine Learning<a name="postgresql-ml-enabling"></a>
 
@@ -32,21 +32,21 @@ Aurora machine learning is available for the following Aurora PostgreSQL version
 + Version 2\.4 of Aurora with PostgreSQL compatibility running the PostgreSQL engine version 10\.11\.
 + Version 3\.1 and higher of Aurora with PostgreSQL compatibility running the PostgreSQL engine version 11\.6 and higher
 
-For information about upgrading an older Aurora cluster, see [Upgrading the PostgreSQL DB Engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
+For information about upgrading an older Aurora cluster, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
 Enabling the ML capabilities involves the following steps\. 
 
 **Topics**
-+ [Setting Up IAM Access to AWS Machine Learning Services](#postgresql-iam-access-ml)
-+ [Installing the aws\_ml Extension for Model Inference](#postgresql-ml-aws_ml-install)
++ [Setting up IAM access to AWS machine learning services](#postgresql-iam-access-ml)
++ [Installing the aws\_ml extension for model inference](#postgresql-ml-aws_ml-install)
 
-### Setting Up IAM Access to AWS Machine Learning Services<a name="postgresql-iam-access-ml"></a>
+### Setting up IAM access to AWS machine learning services<a name="postgresql-iam-access-ml"></a>
 
  Before you can access SageMaker and Amazon Comprehend services, you set up AWS Identity and Access Management \(IAM\) roles\. You then add the IAM roles to the Aurora PostgreSQL cluster\. These roles authorize the users of your Aurora PostgreSQL database to access AWS ML services\. 
 
-You can do IAM setup automatically by using the AWS Management Console as shown here\. To use the AWS CLI to set up IAM access, see [Manually Setting up IAM Roles for SageMaker and Amazon Comprehend Using the AWS CLI](#postgresql-ml-connect-cli)\.
+You can do IAM setup automatically by using the AWS Management Console as shown here\. To use the AWS CLI to set up IAM access, see [Manually setting up IAM roles for SageMaker and Amazon Comprehend using the AWS CLI](#postgresql-ml-connect-cli)\.
 
-#### Automatically Connecting an Aurora DB Cluster to AWS Services Using the Console<a name="postgresql-ml-connect-console"></a>
+#### Automatically connecting an Aurora DB cluster to AWS services using the console<a name="postgresql-ml-connect-console"></a>
 
  Aurora machine learning requires that your DB cluster use some combination of Amazon S3, SageMaker, and Amazon Comprehend\. Amazon Comprehend is for sentiment analysis\. SageMaker is for a wide variety of machine learning algorithms\. 
 
@@ -76,13 +76,13 @@ To connect a DB cluster to these services requires that you set up an AWS Identi
 1.  Enter the required information for the specific service on the **Connect cluster** window: 
    +  For SageMaker, enter the Amazon Resource Name \(ARN\) of a SageMaker endpoint\. 
 
-      From the navigation pane of the [SageMaker console](https://console.aws.amazon.com/sagemaker/home), choose **Endpoints** and copy the ARN of the endpoint you want to use\. For details about what the endpoint represents, see [Deploy a Model on Amazon SageMaker Hosting Services](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-hosting.html)\. 
+      From the navigation pane of the [SageMaker console](https://console.aws.amazon.com/sagemaker/home), choose **Endpoints** and copy the ARN of the endpoint you want to use\. For details about what the endpoint represents, see [Deploy a model on Amazon SageMaker hosting services](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-hosting.html)\. 
    +  For Amazon Comprehend, you don't specify any additional parameters\. 
    +  For Amazon S3, enter the ARN of an Amazon S3 bucket to use\. 
 
       The format of an Amazon S3 bucket ARN is `arn:aws:s3:::bucket_name`\. Ensure that the Amazon S3 bucket you use is set up with the requirements for training SageMaker models\. When you train a model, your Aurora DB cluster requires permission to export data to the Amazon S3 bucket, and also to import data from the bucket\. 
 
-      For more about an Amazon S3 bucket ARN, see [Specifying Resources in a Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html) in the *Amazon Simple Storage Service Developer Guide\.* For more about using an Amazon S3 bucket with SageMaker, see [Step 1: Create an Amazon S3 Bucket](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-config-permissions.html) in the *Amazon SageMaker Developer Guide\. *
+      For more about an Amazon S3 bucket ARN, see [Specifying resources in a policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html) in the *Amazon Simple Storage Service Developer Guide\.* For more about using an Amazon S3 bucket with SageMaker, see [Step 1: Create an Amazon S3 bucket](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-config-permissions.html) in the *Amazon SageMaker Developer Guide\. *
 
 1.  Choose **Connect service**\. 
 
@@ -93,7 +93,7 @@ To connect a DB cluster to these services requires that you set up an AWS Identi
 
     Aurora also creates a new IAM policy and attaches it to the role\. The policy name follows a similar naming convention and also has a timestamp\. 
 
-### Installing the aws\_ml Extension for Model Inference<a name="postgresql-ml-aws_ml-install"></a>
+### Installing the aws\_ml extension for model inference<a name="postgresql-ml-aws_ml-install"></a>
 
 After you create the required IAM roles and associate them with the Aurora PostgreSQL DB cluster, install the functions that use the SageMaker and Amazon Comprehend functionality\. The `aws_ml` Aurora PostgreSQL extension provides the `aws_sagemaker.invoke_endpoint` function that communicates directly with SageMaker\. The `aws_ml` extension also provides the `aws_comprehend.detect_sentiment` function that communicates directly with Amazon Comprehend\.
 
@@ -121,16 +121,16 @@ When you install the `aws_ml` extension, the `aws_ml` administrative role is cre
 
 For users or roles to obtain access to the functions in the `aws_ml` extension, grant `EXECUTE` privilege on those functions\. You can subsequently REVOKE the privileges, if needed\. `EXECUTE` privileges are revoked from PUBLIC on the functions of these schemas by default\. In a multi\-tenant database configuration, to prevent tenants from accessing the functions use `REVOKE USAGE` on one or more of the ML service schemas\.
 
-For a reference to the installed functions of the `aws_ml` extension, see [PostgreSQL Function Reference for Aurora Machine Learning](#postgresql-ml-functions)\. 
+For a reference to the installed functions of the `aws_ml` extension, see [PostgreSQL function reference for Aurora Machine Learning](#postgresql-ml-functions)\. 
 
-## Using Amazon Comprehend for Natural Language Processing<a name="postgresql-using-comprehend"></a>
+## Using Amazon Comprehend for natural language processing<a name="postgresql-using-comprehend"></a>
 
 Amazon Comprehend uses machine learning to find insights and relationships in text\. Amazon Comprehend uses natural language processing to extract insights about the content of documents\. It develops insights by recognizing the entities, key phrases, language, sentiments, and other common elements in a document\. You can use this Aurora machine learning service with very little machine learning experience\.
 
 Aurora machine learning uses Amazon Comprehend for sentiment analysis of text that is stored in your database\. A *sentiment* is an opinion expressed in text\. Sentiment analysis identifies and categorizes sentiments to determine if the attitude towards something \(such as a topic or product\) is positive, negative, or neutral\.
 
 **Note**  
- Amazon Comprehend is currently available only in some AWS Regions\. To check in which AWS Regions you can use Amazon Comprehend, see [the AWS Region Table](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/) page on the AWS site\. 
+ Amazon Comprehend is currently available only in some AWS Regions\. To check in which AWS Regions you can use Amazon Comprehend, see [the AWS Region table](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/) page on the AWS site\. 
 
 For example, using Amazon Comprehend you can analyze contact center call\-in documents to detect caller sentiment and better understand caller\-agent dynamics\. You can find a further description in the post [Analyzing contact center calls](http://aws.amazon.com/blogs/machine-learning/analyzing-contact-center-calls-part-1-use-amazon-transcribe-and-amazon-comprehend-to-analyze-customer-sentiment/) on the AWS Machine Learning blog\. 
 
@@ -139,7 +139,7 @@ You can also combine sentiment analysis with the analysis of other information i
 +  About a specific product or feature\. 
 +  Made by the customers who have the greatest social media influence\. 
 
-Using Amazon Comprehend from Aurora Machine Learning is as easy as calling a SQL function\. When you installed the `aws_ml` extension \([Installing the aws\_ml Extension for Model Inference](#postgresql-ml-aws_ml-install)\), it provides the [aws\_comprehend\.detect\_sentiment](#aws_comprehend.detect_sentiment) function to perform sentiment analysis through Amazon Comprehend\. 
+Using Amazon Comprehend from Aurora Machine Learning is as easy as calling a SQL function\. When you installed the `aws_ml` extension \([Installing the aws\_ml extension for model inference](#postgresql-ml-aws_ml-install)\), it provides the [aws\_comprehend\.detect\_sentiment](#aws_comprehend.detect_sentiment) function to perform sentiment analysis through Amazon Comprehend\. 
 
 For each text fragment that you analyze, this function helps you determine the sentiment and the confidence level\. A typical Amazon Comprehend query looks for table rows where the sentiment has a certain value \(POSITIVE or NEGATIVE\), with a confidence level greater than a certain percent\. 
 
@@ -168,22 +168,22 @@ WHERE
     clinician_notes.sentiment IS NULL;
 ```
 
-For more information on optimizing your function calls, see [Best Practices with Aurora Machine Learning](#postgresql-ml-best-practice)\.
+For more information on optimizing your function calls, see [Best practices with Aurora Machine Learning](#postgresql-ml-best-practice)\.
 
 For information about parameters and return types for the sentiment detection function, see [aws\_comprehend\.detect\_sentiment](#aws_comprehend.detect_sentiment)\.
 
-## Exporting Data to Amazon S3 for SageMaker Model Training<a name="postgresql-export-to-s3"></a>
+## Exporting data to Amazon S3 for SageMaker model training<a name="postgresql-export-to-s3"></a>
 
 Depending on how your team divides the machine learning tasks, you might not perform model training\. If someone else provides the SageMaker model for you, you can skip this section\.
 
-To train SageMaker models, you export data to an Amazon S3 bucket\. The Amazon S3 bucket is used by SageMaker to train your model before it is deployed\. You can query data from an Aurora PostgreSQL DB cluster and save it directly into text files stored in an Amazon S3 bucket\. Then SageMaker consumes the data from the Amazon S3 bucket for training\. For more about SageMaker model training, see [ Train a Model with Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-training.html)\.
+To train SageMaker models, you export data to an Amazon S3 bucket\. The Amazon S3 bucket is used by SageMaker to train your model before it is deployed\. You can query data from an Aurora PostgreSQL DB cluster and save it directly into text files stored in an Amazon S3 bucket\. Then SageMaker consumes the data from the Amazon S3 bucket for training\. For more about SageMaker model training, see [ Train a model with Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-training.html)\.
 
 **Note**  
-When you create an S3 bucket for SageMaker model training or batch scoring, always include the text `sagemaker` in the S3 bucket name\. For more information about creating an S3 bucket for SageMaker, see [Step 1: Create an Amazon S3 Bucket](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-config-permissions.html)\.
+When you create an S3 bucket for SageMaker model training or batch scoring, always include the text `sagemaker` in the S3 bucket name\. For more information about creating an S3 bucket for SageMaker, see [Step 1: Create an Amazon S3 bucket](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-config-permissions.html)\.
 
-For more information about exporting your data, see [Exporting Data from an Aurora PostgreSQL DB Cluster to Amazon S3](postgresql-s3-export.md)\.
+For more information about exporting your data, see [Exporting data from an Aurora PostgreSQL DB cluster to Amazon S3](postgresql-s3-export.md)\.
 
-## Using SageMaker to Run Your Own ML Models<a name="postgresql-using-sagemaker"></a>
+## Using SageMaker to run your own ML models<a name="postgresql-using-sagemaker"></a>
 
 SageMaker is a fully managed machine learning service\. With SageMaker, data scientists and developers build and train machine learning models\. Then they can directly deploy the models into a production\-ready hosted environment\. 
 
@@ -194,15 +194,15 @@ Currently, Aurora machine learning supports any SageMaker endpoint that can read
 
 Be sure to deploy the model you are using in the same AWS Region as your Aurora PostgreSQL cluster\. Aurora machine learning always invokes SageMaker endpoints in the same AWS Region as your Aurora cluster\.
 
-When you install the `aws_ml` extension \(as described in [Installing the aws\_ml Extension for Model Inference](#postgresql-ml-aws_ml-install)\), it provides the [aws\_sagemaker\.invoke\_endpoint](#aws_sagemaker.invoke_endpoint) function\. You use this function to invoke your SageMaker model and perform model inference directly from within your SQL database application\. 
+When you install the `aws_ml` extension \(as described in [Installing the aws\_ml extension for model inference](#postgresql-ml-aws_ml-install)\), it provides the [aws\_sagemaker\.invoke\_endpoint](#aws_sagemaker.invoke_endpoint) function\. You use this function to invoke your SageMaker model and perform model inference directly from within your SQL database application\. 
 
 **Topics**
-+ [Creating a User\-Defined Function to Invoke a SageMaker Model](#postgresql-using-sagemaker-example1)
-+ [Passing an Array as Input to a SageMaker Model](#postgresql-using-sagemaker-example-array)
-+ [Specifying Batch Size When Invoking a SageMaker Model](#postgresql-using-sagemaker-example3)
-+ [Invoking a SageMaker Model that has Multiple Outputs](#postgresql-using-sagemaker-example4)
++ [Creating a user\-defined function to invoke a SageMaker model](#postgresql-using-sagemaker-example1)
++ [Passing an array as input to a SageMaker model](#postgresql-using-sagemaker-example-array)
++ [Specifying batch size when invoking a SageMaker model](#postgresql-using-sagemaker-example3)
++ [Invoking a SageMaker model that has multiple outputs](#postgresql-using-sagemaker-example4)
 
-### Creating a User\-Defined Function to Invoke a SageMaker Model<a name="postgresql-using-sagemaker-example1"></a>
+### Creating a user\-defined function to invoke a SageMaker model<a name="postgresql-using-sagemaker-example1"></a>
 
 Create a separate user\-defined function to call `aws_sagemaker.invoke_endpoint` for each of your SageMaker models\. Your user\-defined function represents the SageMaker endpoint hosting the model\. The `aws_sagemaker.invoke_endpoint` function runs within the user\-defined function\. User\-defined functions provide many advantages:
 + You can give your ML model its own name instead of only calling `aws_sagemaker.invoke_endpoint` for all of your ML models\. 
@@ -232,11 +232,11 @@ Note the following:
 + The `aws_sagemaker.invoke_endpoint` function input can be one or more parameters of any data type\. 
 
   For more details about parameters, see the [aws\_sagemaker\.invoke\_endpoint](#aws_sagemaker.invoke_endpoint) function reference\.
-+ This example uses an INT output type\. If you cast the output from a `varchar` type to a different type, then it must be cast to a PostgreSQL builtin scalar type such as `INTEGER`, `REAL`, `FLOAT`, or `NUMERIC`\. For more information about these types, see [Data Types](https://www.postgresql.org/docs/current/datatype.html) in the PostgreSQL documentation\.
-+ Specify `PARALLEL SAFE` to enable parallel query processing\. For more information, see [Exploiting Parallel Query Processing](#postgresql-using-sagemaker-example-parallel)\.
++ This example uses an INT output type\. If you cast the output from a `varchar` type to a different type, then it must be cast to a PostgreSQL builtin scalar type such as `INTEGER`, `REAL`, `FLOAT`, or `NUMERIC`\. For more information about these types, see [Data types](https://www.postgresql.org/docs/current/datatype.html) in the PostgreSQL documentation\.
++ Specify `PARALLEL SAFE` to enable parallel query processing\. For more information, see [Exploiting parallel query processing](#postgresql-using-sagemaker-example-parallel)\.
 + Specify `COST 5000` to estimate the cost of running the function\. Use a positive number giving the estimated run cost for the function, in units of `cpu_operator_cost`\.
 
-### Passing an Array as Input to a SageMaker Model<a name="postgresql-using-sagemaker-example-array"></a>
+### Passing an array as input to a SageMaker model<a name="postgresql-using-sagemaker-example-array"></a>
 
 The [aws\_sagemaker\.invoke\_endpoint](#aws_sagemaker.invoke_endpoint) function can have up to 100 input parameters, which is the limit for PostgreSQL functions\. If the SageMaker model requires more than 100 parameters of the same type, pass the model parameters as an array\. 
 
@@ -252,7 +252,7 @@ AS $$
 $$ LANGUAGE SQL PARALLEL SAFE COST 5000;
 ```
 
-### Specifying Batch Size When Invoking a SageMaker Model<a name="postgresql-using-sagemaker-example3"></a>
+### Specifying batch size when invoking a SageMaker model<a name="postgresql-using-sagemaker-example3"></a>
 
 The following example creates a user\-defined function for a SageMaker model that sets the batch size default to NULL\. The function also allows you to provide a different batch size when you invoke it\.
 
@@ -270,11 +270,11 @@ $$ LANGUAGE SQL PARALLEL SAFE COST 5000;
 ```
 
 Note the following:
-+ Use the optional `max_rows_per_batch` parameter to provide control of the number of rows for a batch\-mode function invocation\. If you use a value of NULL, then the query optimizer automatically chooses the maximum batch size\. For more information, see [Optimizing Batch\-Mode Execution for Aurora Machine Learning Function Calls](#postgresql-ml-batch-mode)\.
++ Use the optional `max_rows_per_batch` parameter to provide control of the number of rows for a batch\-mode function invocation\. If you use a value of NULL, then the query optimizer automatically chooses the maximum batch size\. For more information, see [Optimizing batch\-mode execution for Aurora Machine Learning function calls](#postgresql-ml-batch-mode)\.
 + By default, passing NULL as a parameter's value is translated to an empty string before passing to SageMaker\. For this example the inputs have different types\.
 + If you have a non\-text input, or text input that needs to default to some value other than an empty string, use the `COALESCE` statement\. Use `COALESCE` to translate NULL to the desired null replacement value in the call to `aws_sagemaker.invoke_endpoint`\. For the `amount` parameter in this example, a NULL value is converted to 0\.0\. 
 
-### Invoking a SageMaker Model that has Multiple Outputs<a name="postgresql-using-sagemaker-example4"></a>
+### Invoking a SageMaker model that has multiple outputs<a name="postgresql-using-sagemaker-example4"></a>
 
 The following example creates a user\-defined function for a SageMaker model that returns multiple outputs\. Your function needs to cast the output of the `aws_sagemaker.invoke_endpoint` function to a corresponding data type\. For example, you could use the built\-in PostgreSQL point type for \(x,y\) pairs or a user\-defined composite type\. 
 
@@ -298,7 +298,7 @@ $$ LANGUAGE SQL PARALLEL SAFE COST 5000;
 
 For the composite type, use fields in the same order as they appear in the model output and cast the output of `aws_sagemaker.invoke_endpoint` to your composite type\. The caller can extract the individual fields either by name or with PostgreSQL "\.\*" notation\.
 
-## Best Practices with Aurora Machine Learning<a name="postgresql-ml-best-practice"></a>
+## Best practices with Aurora Machine Learning<a name="postgresql-ml-best-practice"></a>
 
  Most of the work in an `aws_ml` function call happens within the external Aurora Machine Learning service\. This separation allows you to scale the resources for the machine learning service independent of your Aurora cluster\. Within Aurora, you mostly focus on making the user\-defined function calls themselves as efficient as possible\. Some aspects that you can influence from your Aurora cluster include:
 + The `max_rows_per_batch` setting for calls to the `aws_ml` functions\.
@@ -306,11 +306,11 @@ For the composite type, use fields in the same order as they appear in the model
 + the PostgreSQL parameters that control parallel query processing\.
 
 **Topics**
-+ [Optimizing Batch\-Mode Execution for Aurora Machine Learning Function Calls](#postgresql-ml-batch-mode)
-+ [Exploiting Parallel Query Processing](#postgresql-using-sagemaker-example-parallel)
-+ [Using Materialized Views and Materialized Columns](#postgresql-using-sagemaker-example-materialized)
++ [Optimizing batch\-mode execution for Aurora Machine Learning function calls](#postgresql-ml-batch-mode)
++ [Exploiting parallel query processing](#postgresql-using-sagemaker-example-parallel)
++ [Using materialized views and materialized columns](#postgresql-using-sagemaker-example-materialized)
 
-### Optimizing Batch\-Mode Execution for Aurora Machine Learning Function Calls<a name="postgresql-ml-batch-mode"></a>
+### Optimizing batch\-mode execution for Aurora Machine Learning function calls<a name="postgresql-ml-batch-mode"></a>
 
 Typically PostgreSQL runs functions one row at a time\. Aurora Machine Learning can minimize this overhead by combining the calls to the external Aurora Machine Learning service for many rows into batches with an approach called *batch\-mode execution*\. In batch mode, Aurora Machine Learning receives the responses for a batch of input rows, and then delivers the responses back to the running query one row at a time\. This optimization improves the throughput of your Aurora queries without limiting the PostgreSQL query optimizer\. 
 
@@ -319,11 +319,11 @@ Aurora automatically uses batch mode if the function is referenced from the `SEL
 Your user\-defined function must be a `LANGUAGE SQL` function and should specify `PARALLEL SAFE` and `COST 5000`\. 
 
 **Topics**
-+ [Function Migration from the SELECT Statement to the FROM Clause](#postgresql-ml-batch-mode-function-migration)
-+ [Using the max\_rows\_per\_batch Parameter](#postgresql-ml-batch-mode-max_rows_per_batch)
-+ [Verifying Batch\-Mode Execution](#postgresql-ml-batch-mode-verify)
++ [Function migration from the SELECT statement to the FROM clause](#postgresql-ml-batch-mode-function-migration)
++ [Using the max\_rows\_per\_batch parameter](#postgresql-ml-batch-mode-max_rows_per_batch)
++ [Verifying batch\-mode execution](#postgresql-ml-batch-mode-verify)
 
-#### Function Migration from the SELECT Statement to the FROM Clause<a name="postgresql-ml-batch-mode-function-migration"></a>
+#### Function migration from the SELECT statement to the FROM clause<a name="postgresql-ml-batch-mode-function-migration"></a>
 
 Usually, an `aws_ml` function that is eligible for batch\-mode execution is automatically migrated by Aurora to the `FROM` clause\. 
 
@@ -351,9 +351,9 @@ To disable batch\-mode execution, set the `apg_enable_function_migration` parame
 SET apg_enable_function_migration = false;
 ```
 
-The `apg_enable_function_migration` parameter is a Grand Unified Configuration \(GUC\) parameter that is recognized by the Aurora PostgreSQL `apg_plan_mgmt` extension for query plan management\. To disable function migration in a session, use query plan management to save the resulting plan as an `approved` plan\. At runtime, query plan management enforces the `approved` plan with its `apg_enable_function_migration` setting\. This enforcement occurs regardless of the `apg_enable_function_migration` GUC parameter setting\. For more information, see [Managing Query Execution Plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)\.
+The `apg_enable_function_migration` parameter is a Grand Unified Configuration \(GUC\) parameter that is recognized by the Aurora PostgreSQL `apg_plan_mgmt` extension for query plan management\. To disable function migration in a session, use query plan management to save the resulting plan as an `approved` plan\. At runtime, query plan management enforces the `approved` plan with its `apg_enable_function_migration` setting\. This enforcement occurs regardless of the `apg_enable_function_migration` GUC parameter setting\. For more information, see [Managing query execution plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)\.
 
-#### Using the max\_rows\_per\_batch Parameter<a name="postgresql-ml-batch-mode-max_rows_per_batch"></a>
+#### Using the max\_rows\_per\_batch parameter<a name="postgresql-ml-batch-mode-max_rows_per_batch"></a>
 
 The `max_rows_per_batch` parameter of the [aws\_sagemaker\.invoke\_endpoint](#aws_sagemaker.invoke_endpoint) and [aws\_comprehend\.detect\_sentiment](#aws_comprehend.detect_sentiment) functions influences how many rows are transferred to the Aurora Machine Learning service\. The larger the dataset processed by the user\-defined function, the larger you can make the batch size\.
 
@@ -361,7 +361,7 @@ Batch\-mode functions improve efficiency by building batches of rows that spread
 
 If you do an `EXPLAIN` \(`VERBOSE`, `ANALYZE`\) of a query that uses batch\-mode execution, you see a `FunctionScan` operator that is below a nested loop join\. The number of loops reported by `EXPLAIN` tells you the number of times a row was fetched from the `FunctionScan` operator\. If a statement uses a LIMIT clause, the number of fetches is consistent\. To optimize the size of the batch, set the `max_rows_per_batch` parameter to this value\. However, if the batch\-mode function is referenced in a predicate in the `WHERE` clause or `HAVING` clause, then you probably can't know the number of fetches in advance\. In this case, use the loops as a guideline and experiment with `max_rows_per_batch` to find a setting that optimizes performance\.
 
-#### Verifying Batch\-Mode Execution<a name="postgresql-ml-batch-mode-verify"></a>
+#### Verifying batch\-mode execution<a name="postgresql-ml-batch-mode-verify"></a>
 
 To see if a function ran in batch mode, use `EXPLAIN ANALYZE`\. If batch\-mode execution was used, then the query plan will include the information in a "Batch Processing" section\.
 
@@ -382,7 +382,7 @@ To return the first few rows more quickly, set the `max_rows_per_batch` paramete
 
 To reduce the number of batch mode calls to the ML service when you use a `LIMIT` in your user\-defined function, set the `max_rows_per_batch` parameter to a smaller value\. 
 
-### Exploiting Parallel Query Processing<a name="postgresql-using-sagemaker-example-parallel"></a>
+### Exploiting parallel query processing<a name="postgresql-using-sagemaker-example-parallel"></a>
 
 To dramatically increase performance when processing a large number of rows, you can combine parallel query processing with batch mode processing\. You can use parallel query processing for `SELECT`, `CREATE TABLE AS SELECT`, and `CREATE MATERIALIZED VIEW` statements\.
 
@@ -419,9 +419,9 @@ FROM yourTable
 WHERE id < 100;
 ```
 
-For more about controlling parallel query, see [Parallel Plans](https://www.postgresql.org/docs/current/parallel-plans.html) in the PostgreSQL documentation\.
+For more about controlling parallel query, see [Parallel plans](https://www.postgresql.org/docs/current/parallel-plans.html) in the PostgreSQL documentation\.
 
-### Using Materialized Views and Materialized Columns<a name="postgresql-using-sagemaker-example-materialized"></a>
+### Using materialized views and materialized columns<a name="postgresql-using-sagemaker-example-materialized"></a>
 
 When you invoke an AWS service such as SageMaker or Amazon Comprehend from your database, your account is charged according to the pricing policy of that service\. To minimize charges to your account, you can materialize the result of calling the AWS service into a materialized column so that the AWS service is not called more than once per input row\. If desired, you can add a `materializedAt` timestamp column to record the time at which the columns were materialized\. 
 
@@ -466,11 +466,11 @@ To find the names of your SQL functions that call the `aws_sagemaker.invoke_endp
 SELECT proname FROM pg_proc WHERE prosrc LIKE '%invoke_endpoint%';
 ```
 
-### Using Query Plan Management to Monitor ML Functions<a name="postgresql-ml-monitoring-query-plan"></a>
+### Using query plan management to monitor ML functions<a name="postgresql-ml-monitoring-query-plan"></a>
 
 If you captured plans using the `apg_plan_mgmt` extension of query plan management, you can then search through all the statements in your workload that refer to these function names\. In your search, you can check `plan_outline` to see if batch\-mode execution was used\. You can also list statement statistics such as execution time and plan cost\. Plans that use batch\-mode function scans contain a `FuncScan` operator in the plan outline\. Functions that aren't run as a join don't contain a `FuncScan` operator\. 
 
-For more about query plan management, see [Managing Query Execution Plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)\.
+For more about query plan management, see [Managing query execution plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)\.
 
 To find calls to the `aws_sagemaker.invoke_endpoint` function that don't use batch mode, use the following statement\.
 
@@ -499,7 +499,7 @@ WHERE
     plan_outline NOT LIKE '%"FuncScan"%';
 ```
 
-## PostgreSQL Function Reference for Aurora Machine Learning<a name="postgresql-ml-functions"></a>
+## PostgreSQL function reference for Aurora Machine Learning<a name="postgresql-ml-functions"></a>
 
 **Topics**
 + [aws\_comprehend\.detect\_sentiment](#aws_comprehend.detect_sentiment)
@@ -507,7 +507,7 @@ WHERE
 
 ### aws\_comprehend\.detect\_sentiment<a name="aws_comprehend.detect_sentiment"></a>
 
- Performs sentiment analysis using Amazon Comprehend\. For more about usage, see [Using Amazon Comprehend for Natural Language Processing](#postgresql-using-comprehend)\.
+ Performs sentiment analysis using Amazon Comprehend\. For more about usage, see [Using Amazon Comprehend for natural language processing](#postgresql-using-comprehend)\.
 
 **Syntax**
 
@@ -525,10 +525,10 @@ aws_comprehend.detect_sentiment (
 The text to detect sentiment on\.
 
 **language\_code**  
-The language of the `input_text`\. For valid values, see [ Languages Supported in Amazon Comprehend](https://docs.aws.amazon.com/comprehend/latest/dg/supported-languages.html#supported-languages-1)\. 
+The language of the `input_text`\. For valid values, see [ Languages supported in Amazon Comprehend](https://docs.aws.amazon.com/comprehend/latest/dg/supported-languages.html#supported-languages-1)\. 
 
 **max\_rows\_per\_batch**  
-The maximum number of rows per batch for batch\-mode processing\. For more information, see [Optimizing Batch\-Mode Execution for Aurora Machine Learning Function Calls](#postgresql-ml-batch-mode)\. Output Parameters
+The maximum number of rows per batch for batch\-mode processing\. For more information, see [Optimizing batch\-mode execution for Aurora Machine Learning function calls](#postgresql-ml-batch-mode)\. Output Parameters
 
 **sentiment**  
 The sentiment of the text\. Valid values are POSITIVE, NEGATIVE, NEUTRAL, or MIXED\.
@@ -538,7 +538,7 @@ The degree of confidence in the `sentiment` value\. Values range between 1\.0 fo
 
 ### aws\_sagemaker\.invoke\_endpoint<a name="aws_sagemaker.invoke_endpoint"></a>
 
-After you train a model and deploy it into production using SageMaker services, your client applications use the `aws_sagemaker.invoke_endpoint` function to get inferences from the model\. The model must be hosted at the specified endpoint and must be in the same AWS Region as the database instance\. For more about usage, see [Using SageMaker to Run Your Own ML Models](#postgresql-using-sagemaker)\.
+After you train a model and deploy it into production using SageMaker services, your client applications use the `aws_sagemaker.invoke_endpoint` function to get inferences from the model\. The model must be hosted at the specified endpoint and must be in the same AWS Region as the database instance\. For more about usage, see [Using SageMaker to run your own ML models](#postgresql-using-sagemaker)\.
 
 **Syntax**
 
@@ -555,7 +555,7 @@ aws_sagemaker.invoke_endpoint(
 An endpoint URL that is AWS Region–independent\. 
 
 **max\_rows\_per\_batch**  
-The maximum number of rows per batch for batch\-mode processing\. For more information, see [Optimizing Batch\-Mode Execution for Aurora Machine Learning Function Calls](#postgresql-ml-batch-mode)\. 
+The maximum number of rows per batch for batch\-mode processing\. For more information, see [Optimizing batch\-mode execution for Aurora Machine Learning function calls](#postgresql-ml-batch-mode)\. 
 
 **model\_input**  
 One or more input parameters for the ML model\. These can be any data type\.  
@@ -572,10 +572,10 @@ Calls to `aws_sagemaker.invoke_endpoint` are authenticated using the SageMaker I
 
 SageMaker model endpoints are scoped to an individual account and are not public\. The `endpoint_name` URL doesn't contain the account ID\. SageMaker determines the account ID from the authentication token that is supplied by the SageMaker IAM role of the database instance\.
 
-## Manually Setting up IAM Roles for SageMaker and Amazon Comprehend Using the AWS CLI<a name="postgresql-ml-connect-cli"></a>
+## Manually setting up IAM roles for SageMaker and Amazon Comprehend using the AWS CLI<a name="postgresql-ml-connect-cli"></a>
 
 **Note**  
-If you use the AWS Management Console, AWS does the IAM setup for you automatically\. In this case, you can skip the following information and follow the procedure in [Automatically Connecting an Aurora DB Cluster to AWS Services Using the Console](#postgresql-ml-connect-console)\. 
+If you use the AWS Management Console, AWS does the IAM setup for you automatically\. In this case, you can skip the following information and follow the procedure in [Automatically connecting an Aurora DB cluster to AWS services using the console](#postgresql-ml-connect-console)\. 
 
 Setting up the IAM roles for SageMaker or Amazon Comprehend using the AWS CLI or the RDS API consists of the following steps: 
 
@@ -586,15 +586,15 @@ Setting up the IAM roles for SageMaker or Amazon Comprehend using the AWS CLI or
 1. Associate the IAM role that you created preceding to the Aurora PostgreSQL database cluster to permit access to AWS ML services\.
 
 **Topics**
-+ [Creating an IAM Policy to Access SageMaker using the AWS CLI](#postgresql-ml-sagemaker-policy)
-+ [Creating an IAM Policy to Access Amazon Comprehend using the AWS CLI](#postgresql-ml-comprehend-policy)
-+ [Creating an IAM Role to Access SageMaker and Amazon Comprehend](#postgresql-ml-creating-iam-role)
-+ [Associating an IAM Role with an Aurora PostgreSQL DB Cluster Using the AWS CLI](#postgresql-ml-associating-iam-role)
++ [Creating an IAM policy to access SageMaker using the AWS CLI](#postgresql-ml-sagemaker-policy)
++ [Creating an IAM policy to access Amazon Comprehend using the AWS CLI](#postgresql-ml-comprehend-policy)
++ [Creating an IAM role to access SageMaker and Amazon Comprehend](#postgresql-ml-creating-iam-role)
++ [Associating an IAM role with an Aurora PostgreSQL DB cluster using the AWS CLI](#postgresql-ml-associating-iam-role)
 
-### Creating an IAM Policy to Access SageMaker using the AWS CLI<a name="postgresql-ml-sagemaker-policy"></a>
+### Creating an IAM policy to access SageMaker using the AWS CLI<a name="postgresql-ml-sagemaker-policy"></a>
 
 **Note**  
- Aurora can create the IAM policy for you automatically\. You can skip the following information and use the procedure in [Automatically Connecting an Aurora DB Cluster to AWS Services Using the Console](#postgresql-ml-connect-console)\. 
+ Aurora can create the IAM policy for you automatically\. You can skip the following information and use the procedure in [Automatically connecting an Aurora DB cluster to AWS services using the console](#postgresql-ml-connect-console)\. 
 
  The following policy adds the permissions required by Aurora PostgreSQL to invoke a SageMaker function on your behalf\. You can specify all of your SageMaker endpoints that you need your database applications to access from your Aurora PostgreSQL cluster in a single policy\. 
 
@@ -619,12 +619,12 @@ aws iam create-policy  --policy-name policy_name --policy-document '{
 }'
 ```
 
-For the next step, see [Creating an IAM Role to Access SageMaker and Amazon Comprehend](#postgresql-ml-creating-iam-role)\. 
+For the next step, see [Creating an IAM role to access SageMaker and Amazon Comprehend](#postgresql-ml-creating-iam-role)\. 
 
-### Creating an IAM Policy to Access Amazon Comprehend using the AWS CLI<a name="postgresql-ml-comprehend-policy"></a>
+### Creating an IAM policy to access Amazon Comprehend using the AWS CLI<a name="postgresql-ml-comprehend-policy"></a>
 
 **Note**  
- Aurora can create the IAM policy for you automatically\. You can skip the following information and use the procedure in [Automatically Connecting an Aurora DB Cluster to AWS Services Using the Console](#postgresql-ml-connect-console)\. 
+ Aurora can create the IAM policy for you automatically\. You can skip the following information and use the procedure in [Automatically connecting an Aurora DB cluster to AWS services using the console](#postgresql-ml-connect-console)\. 
 
  The following policy adds the permissions required by Aurora PostgreSQL to invoke AWS Amazon Comprehend on your behalf\. 
 
@@ -647,7 +647,7 @@ For the next step, see [Creating an IAM Role to Access SageMaker and Amazon Comp
 
 **To create an IAM policy to grant access to Amazon Comprehend**
 
-1.  Open the [IAM Management Console](https://console.aws.amazon.com/iam/home?#home)\. 
+1.  Open the [IAM management console](https://console.aws.amazon.com/iam/home?#home)\. 
 
 1.  In the navigation pane, choose **Policies**\. 
 
@@ -663,25 +663,25 @@ For the next step, see [Creating an IAM Role to Access SageMaker and Amazon Comp
 
 1.  Choose **Create policy**\. 
 
-For the net step, see [Creating an IAM Role to Access SageMaker and Amazon Comprehend](#postgresql-ml-creating-iam-role)\. 
+For the net step, see [Creating an IAM role to access SageMaker and Amazon Comprehend](#postgresql-ml-creating-iam-role)\. 
 
-### Creating an IAM Role to Access SageMaker and Amazon Comprehend<a name="postgresql-ml-creating-iam-role"></a>
-
-**Note**  
- Aurora can create the IAM role for you automatically\. You can skip the following information and use the procedure in [Automatically Connecting an Aurora DB Cluster to AWS Services Using the Console](#postgresql-ml-connect-console)\. 
-
- After you create the IAM policies, create an IAM role that the Aurora PostgreSQL DB cluster can assume for your database users to access ML services\. To create an IAM role, follow the steps described in [ Creating a Role to Delegate Permissions to an IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html)\.
-
-Attach the preceding policies to the IAM role you create\. For more information, see [Attaching an IAM Policy to an IAM User or Role](UsingWithRDS.IAMDBAuth.IAMPolicy.md#UsingWithRDS.IAMDBAuth.IAMPolicy.Attaching)\. 
-
-For more information about IAM roles, see [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *AWS Identity and Access Management User Guide*\. 
-
-For the next step, see [Associating an IAM Role with an Aurora PostgreSQL DB Cluster Using the AWS CLI](#postgresql-ml-associating-iam-role)\. 
-
-### Associating an IAM Role with an Aurora PostgreSQL DB Cluster Using the AWS CLI<a name="postgresql-ml-associating-iam-role"></a>
+### Creating an IAM role to access SageMaker and Amazon Comprehend<a name="postgresql-ml-creating-iam-role"></a>
 
 **Note**  
- Aurora can associate an IAM role with your DB cluster for you automatically\. You can skip the following information and use the procedure in [Automatically Connecting an Aurora DB Cluster to AWS Services Using the Console](#postgresql-ml-connect-console)\. 
+ Aurora can create the IAM role for you automatically\. You can skip the following information and use the procedure in [Automatically connecting an Aurora DB cluster to AWS services using the console](#postgresql-ml-connect-console)\. 
+
+ After you create the IAM policies, create an IAM role that the Aurora PostgreSQL DB cluster can assume for your database users to access ML services\. To create an IAM role, follow the steps described in [ Creating a role to delegate permissions to an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html)\.
+
+Attach the preceding policies to the IAM role you create\. For more information, see [Attaching an IAM policy to an IAM user or role](UsingWithRDS.IAMDBAuth.IAMPolicy.md#UsingWithRDS.IAMDBAuth.IAMPolicy.Attaching)\. 
+
+For more information about IAM roles, see [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *AWS Identity and Access Management User Guide*\. 
+
+For the next step, see [Associating an IAM role with an Aurora PostgreSQL DB cluster using the AWS CLI](#postgresql-ml-associating-iam-role)\. 
+
+### Associating an IAM role with an Aurora PostgreSQL DB cluster using the AWS CLI<a name="postgresql-ml-associating-iam-role"></a>
+
+**Note**  
+ Aurora can associate an IAM role with your DB cluster for you automatically\. You can skip the following information and use the procedure in [Automatically connecting an Aurora DB cluster to AWS services using the console](#postgresql-ml-connect-console)\. 
 
 The last process in setting up IAM access is to associate the IAM role and its IAM policy with your Aurora PostgreSQL DB cluster\. Do the following: 
 

@@ -1,8 +1,8 @@
-# Backtracking an Aurora DB Cluster<a name="AuroraMySQL.Managing.Backtrack"></a>
+# Backtracking an Aurora DB cluster<a name="AuroraMySQL.Managing.Backtrack"></a>
 
 With Amazon Aurora with MySQL compatibility, you can backtrack a DB cluster to a specific time, without restoring data from a backup\.
 
-## Overview of Backtracking<a name="AuroraMySQL.Managing.Backtrack.Overview"></a>
+## Overview of backtracking<a name="AuroraMySQL.Managing.Backtrack.Overview"></a>
 
 Backtracking "rewinds" the DB cluster to the time you specify\. Backtracking is not a replacement for backing up your DB cluster so that you can restore it to a point in time\. However, backtracking provides the following advantages over traditional backup and restore:
 + You can easily undo mistakes\. If you mistakenly perform a destructive action, such as a DELETE without a WHERE clause, you can backtrack the DB cluster to a time before the destructive action with minimal interruption of service\.
@@ -10,9 +10,9 @@ Backtracking "rewinds" the DB cluster to the time you specify\. Backtracking is 
 + You can explore earlier data changes\. You can repeatedly backtrack a DB cluster back and forth in time to help determine when a particular data change occurred\. For example, you can backtrack a DB cluster three hours and then backtrack forward in time one hour\. In this case, the backtrack time is two hours before the original time\.
 
 **Note**  
-For information about restoring a DB cluster to a point in time, see [Overview of Backing Up and Restoring an Aurora DB Cluster](Aurora.Managing.Backups.md)\.
+For information about restoring a DB cluster to a point in time, see [Overview of backing up and restoring an Aurora DB cluster](Aurora.Managing.Backups.md)\.
 
-### Backtrack Window<a name="AuroraMySQL.Managing.Backtrack.Overview.BacktrackWindow"></a>
+### Backtrack window<a name="AuroraMySQL.Managing.Backtrack.Overview.BacktrackWindow"></a>
 
 With backtracking, there is a target backtrack window and an actual backtrack window:
 + The *target backtrack window* is the amount of time you want to be able to backtrack your DB cluster\. When you enable backtracking, you specify a *target backtrack window*\. For example, you might specify a target backtrack window of 24 hours if you want to be able to backtrack the DB cluster one day\.
@@ -24,18 +24,18 @@ You can think of your target backtrack window as the goal for the maximum amount
 
 When backtracking is enabled for a DB cluster, and you delete a table stored in the DB cluster, Aurora keeps that table in the backtrack change records\. It does this so that you can revert back to a time before you deleted the table\. If you don't have enough space in your backtrack window to store the table, the table might be removed from the backtrack change records eventually\.
 
-### Backtrack Time<a name="AuroraMySQL.Managing.Backtrack.Overview.BacktrackTime"></a>
+### Backtrack time<a name="AuroraMySQL.Managing.Backtrack.Overview.BacktrackTime"></a>
 
-Aurora always backtracks to a time that is consistent for the DB cluster\. Doing so eliminates the possibility of uncommitted transactions when the backtrack is complete\. When you specify a time for a backtrack, Aurora automatically chooses the nearest possible consistent time\. This approach means that the completed backtrack might not exactly match the time you specify, but you can determine the exact time for a backtrack by using the [describe\-db\-cluster\-backtracks ](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-backtracks.html) AWS CLI command\. For more information, see [Retrieving Existing Backtracks](#AuroraMySQL.Managing.Backtrack.Retrieving)\.
+Aurora always backtracks to a time that is consistent for the DB cluster\. Doing so eliminates the possibility of uncommitted transactions when the backtrack is complete\. When you specify a time for a backtrack, Aurora automatically chooses the nearest possible consistent time\. This approach means that the completed backtrack might not exactly match the time you specify, but you can determine the exact time for a backtrack by using the [describe\-db\-cluster\-backtracks ](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-backtracks.html) AWS CLI command\. For more information, see [Retrieving existing backtracks](#AuroraMySQL.Managing.Backtrack.Retrieving)\.
 
-### Backtrack Limitations<a name="AuroraMySQL.Managing.Backtrack.Limitations"></a>
+### Backtrack limitations<a name="AuroraMySQL.Managing.Backtrack.Limitations"></a>
 
 The following limitations apply to backtracking:
 + Backtracking is only available on DB clusters that were created with the Backtrack feature enabled\. You can enable the Backtrack feature when you create a new DB cluster or restore a snapshot of a DB cluster\. For DB clusters that were created with the Backtrack feature enabled, you can create a clone DB cluster with the Backtrack feature enabled\. Currently, backtracking is not possible on DB clusters that were created with the Backtrack feature disabled\.
 + The limit for a backtrack window is 72 hours\.
 + Backtracking affects the entire DB cluster\. For example, you can't selectively backtrack a single table or a single data update\.
 + Backtracking is not supported with binary log \(binlog\) replication\. Cross\-region replication must be disabled before you can configure or use backtracking\.
-+ You can't backtrack a database clone to a time before that database clone was created\. However, you can use the original database to backtrack to a time before the clone was created\. For more information about database cloning, see [Cloning an Aurora DB Cluster Volume](Aurora.Managing.Clone.md)\.
++ You can't backtrack a database clone to a time before that database clone was created\. However, you can use the original database to backtrack to a time before the clone was created\. For more information about database cloning, see [Cloning an Aurora DB cluster volume](Aurora.Managing.Clone.md)\.
 + Backtracking causes a brief DB instance disruption\. You must stop or pause your applications before starting a backtrack operation to ensure that there are no new read or write requests\. During the backtrack operation, Aurora pauses the database, closes any open connections, and drops any uncommitted reads and writes\. It then waits for the backtrack operation to complete\.
 + Backtracking isn't supported for the following AWS Regions:
   + Africa \(Cape Town\)
@@ -56,7 +56,7 @@ The following limitations apply to backtracking:
 
  These upgrade requirements still apply even if you turn off Backtrack for the Aurora MySQL 1\.\* cluster\. 
 
-## Configuring Backtracking<a name="AuroraMySQL.Managing.Backtrack.Configuring"></a>
+## Configuring backtracking<a name="AuroraMySQL.Managing.Backtrack.Configuring"></a>
 
 To use the Backtrack feature, you must enable backtracking and specify a target backtrack window\. Otherwise, backtracking is disabled\.
 
@@ -67,14 +67,14 @@ For the target backtrack window, specify the amount of time that you want to be 
 You can use the console to configure backtracking when you create a new DB cluster\. You can also modify a DB cluster to enable backtracking\.
 
 **Topics**
-+ [Configuring Backtracking with the Console When Creating a DB Cluster](#AuroraMySQL.Managing.Backtrack.Configuring.Console.Creating)
-+ [Configuring Backtrack with the Console When Modifying a DB Cluster](#AuroraMySQL.Managing.Backtrack.Configuring.Console.Modifying)
++ [Configuring backtracking with the console when creating a DB cluster](#AuroraMySQL.Managing.Backtrack.Configuring.Console.Creating)
++ [Configuring backtrack with the console when modifying a DB cluster](#AuroraMySQL.Managing.Backtrack.Configuring.Console.Modifying)
 
-#### Configuring Backtracking with the Console When Creating a DB Cluster<a name="AuroraMySQL.Managing.Backtrack.Configuring.Console.Creating"></a>
+#### Configuring backtracking with the console when creating a DB cluster<a name="AuroraMySQL.Managing.Backtrack.Configuring.Console.Creating"></a>
 
 When you create a new Aurora MySQL DB cluster, backtracking is configured when you choose **Enable Backtrack** and specify a **Target Backtrack window** value that is greater than zero in the **Backtrack** section\.
 
-To create a DB cluster, follow the instructions in [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\. The following image shows the **Backtrack** section\.
+To create a DB cluster, follow the instructions in [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\. The following image shows the **Backtrack** section\.
 
 ![\[Enable Backtrack during DB cluster creation with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-backtrack-create.png)
 
@@ -83,7 +83,7 @@ When you create a new DB cluster, Aurora has no data for the DB cluster's worklo
 **Important**  
 Your actual cost might not match the typical cost, because your actual cost is based on your DB cluster's workload\.
 
-#### Configuring Backtrack with the Console When Modifying a DB Cluster<a name="AuroraMySQL.Managing.Backtrack.Configuring.Console.Modifying"></a>
+#### Configuring backtrack with the console when modifying a DB cluster<a name="AuroraMySQL.Managing.Backtrack.Configuring.Console.Modifying"></a>
 
 You can modify backtracking for a DB cluster using the console\.
 
@@ -115,7 +115,7 @@ Currently, you can modify backtracking only for a DB cluster that has the Backtr
 
 ### AWS CLI<a name="AuroraMySQL.Managing.Backtrack.Configuring.CLI"></a>
 
-When you create a new Aurora MySQL DB cluster using the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command, backtracking is configured when you specify a `--backtrack-window` value that is greater than zero\. The `--backtrack-window` value specifies the target backtrack window\. For more information, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
+When you create a new Aurora MySQL DB cluster using the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command, backtracking is configured when you specify a `--backtrack-window` value that is greater than zero\. The `--backtrack-window` value specifies the target backtrack window\. For more information, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.
 
 You can also specify the `--backtrack-window` value using the following AWS CLI commands:
 +  [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) 
@@ -153,7 +153,7 @@ Currently, you can enable backtracking only for a DB cluster that was created wi
 
 ### RDS API<a name="AuroraMySQL.Managing.Backtrack.Configuring.API"></a>
 
-When you create a new Aurora MySQL DB cluster using the [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) Amazon RDS API operation, backtracking is configured when you specify a `BacktrackWindow` value that is greater than zero\. The `BacktrackWindow` value specifies the target backtrack window for the DB cluster specified in the `DBClusterIdentifier` value\. For more information, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
+When you create a new Aurora MySQL DB cluster using the [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) Amazon RDS API operation, backtracking is configured when you specify a `BacktrackWindow` value that is greater than zero\. The `BacktrackWindow` value specifies the target backtrack window for the DB cluster specified in the `DBClusterIdentifier` value\. For more information, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.
 
 You can also specify the `BacktrackWindow` value using the following API operations:
 +  [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) 
@@ -164,7 +164,7 @@ You can also specify the `BacktrackWindow` value using the following API operati
 **Note**  
 Currently, you can enable backtracking only for a DB cluster that was created with the Backtrack feature enabled\.
 
-## Performing a Backtrack<a name="AuroraMySQL.Managing.Backtrack.Performing"></a>
+## Performing a backtrack<a name="AuroraMySQL.Managing.Backtrack.Performing"></a>
 
 You can backtrack a DB cluster to a specified backtrack time stamp\. If the backtrack time stamp isn't earlier than the earliest possible backtrack time, and isn't in the future, the DB cluster is backtracked to that time stamp\. 
 
@@ -174,7 +174,7 @@ Otherwise, an error typically occurs\. Also, if you try to backtrack a DB cluste
 Backtracking doesn't generate binlog entries for the changes that it makes\. If you have binary logging enabled for the DB cluster, backtracking might not be compatible with your binlog implementation\.
 
 **Note**  
-For database clones, you can't backtrack the DB cluster earlier than the date and time when the clone was created\. For more information about database cloning, see [Cloning an Aurora DB Cluster Volume](Aurora.Managing.Clone.md)\.
+For database clones, you can't backtrack the DB cluster earlier than the date and time when the clone was created\. For more information about database cloning, see [Cloning an Aurora DB cluster volume](Aurora.Managing.Clone.md)\.
 
 ### Console<a name="AuroraMySQL.Managing.Backtrack.Performing.Console"></a>
 
@@ -226,7 +226,7 @@ The following procedure describes how to backtrack a DB cluster using the AWS CL
 
 To backtrack a DB cluster using the Amazon RDS API, use the [BacktrackDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_BacktrackDBCluster.html) action\. This action backtracks the DB cluster specified in the `DBClusterIdentifier` value to the specified time\.
 
-## Monitoring Backtracking<a name="AuroraMySQL.Managing.Backtrack.Monitoring"></a>
+## Monitoring backtracking<a name="AuroraMySQL.Managing.Backtrack.Monitoring"></a>
 
 You can view backtracking information and monitor backtracking metrics for a DB cluster\.
 
@@ -295,7 +295,7 @@ The following procedure describes how to view backtrack information for a DB clu
 
 To view backtrack information for a DB cluster using the Amazon RDS API, use the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) operation\. This action returns backtrack information for the DB cluster specified in the `DBClusterIdentifier` value\.
 
-## Subscribing to a Backtrack Event with the Console<a name="AuroraMySQL.Managing.Backtrack.Event.Console"></a>
+## Subscribing to a backtrack event with the console<a name="AuroraMySQL.Managing.Backtrack.Event.Console"></a>
 
 The following procedure describes how to subscribe to a backtrack event using the console\. The event sends you an email or text notification when your actual backtrack window is smaller than your target backtrack window\.
 
@@ -324,7 +324,7 @@ The following procedure describes how to subscribe to a backtrack event using th
 
 1. Choose **Create**\.
 
-## Retrieving Existing Backtracks<a name="AuroraMySQL.Managing.Backtrack.Retrieving"></a>
+## Retrieving existing backtracks<a name="AuroraMySQL.Managing.Backtrack.Retrieving"></a>
 
 You can retrieve information about existing backtracks for a DB cluster\. This information includes the unique identifier of the backtrack, the date and time backtracked to and from, the date and time the backtrack was requested, and the current status of the backtrack\.
 
@@ -359,7 +359,7 @@ The following procedure describes how to retrieve existing backtracks for a DB c
 
 To retrieve information about the backtracks for a DB cluster using the Amazon RDS API, use the [DescribeDBClusterBacktracks](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterBacktracks.html) operation\. This action returns information about backtracks for the DB cluster specified in the `DBClusterIdentifier` value\.
 
-## Disabling Backtracking for a DB Cluster<a name="AuroraMySQL.Managing.Backtrack.Disabling"></a>
+## Disabling backtracking for a DB cluster<a name="AuroraMySQL.Managing.Backtrack.Disabling"></a>
 
 You can disable the Backtrack feature for a DB cluster\.
 
@@ -367,7 +367,7 @@ You can disable the Backtrack feature for a DB cluster\.
 
 You can disable backtracking for a DB cluster using the console\.
 
-**To disable the Backtrack feature for a DB cluster using the console**
+**To disable the backtrack feature for a DB cluster using the console**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 

@@ -1,4 +1,4 @@
-# Aurora MySQL Database Engine Updates 2020\-09\-02 \(Version 1\.23\.0\)<a name="AuroraMySQL.Updates.1230"></a>
+# Aurora MySQL database engine updates 2020\-09\-02 \(version 1\.23\.0\)<a name="AuroraMySQL.Updates.1230"></a>
 
 **Version:** 1\.23\.0
 
@@ -11,7 +11,7 @@ Aurora MySQL 1\.23\.0 is generally available\. Aurora MySQL 1\.\* versions are c
 **Note**  
  This version is currently not available in the following regions: AWS GovCloud \(US\-East\) \[us\-gov\-east\-1\], AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\]\. There will be a separate announcement once it is made available\. 
 
- If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB Cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
+ If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
 
 ## Improvements<a name="AuroraMySQL.Updates.1230.Improvements"></a>
 
@@ -20,7 +20,7 @@ Aurora MySQL 1\.23\.0 is generally available\. Aurora MySQL 1\.\* versions are c
 
    Parallel query is now expanded to be available in all regions where Aurora MySQL is available\. 
 
-   There are a number of other functionality enhancements and changes to the procedures for upgrading and enabling parallel query in an Aurora cluster\. For more information, see [Working with Parallel Query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\. 
+   There are a number of other functionality enhancements and changes to the procedures for upgrading and enabling parallel query in an Aurora cluster\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\. 
 +  With this release, you can create Amazon Aurora MySQL database instances with up to 128 tebibytes \(TiB\) of storage\. The new storage limit is an increase from the prior 64 TiB\. The 128 TiB storage size supports larger databases\. This capability is not supported on small instances sizes \(db\.t2 or db\.t3\)\. A single tablespace cannot grow beyond 64 TiB due to [InnoDB limitations with 16 KB page size](https://dev.mysql.com/doc/refman/5.7/en/innodb-limits.html)\. 
 
    Aurora alerts you when the cluster volume size is near 128 TiB, so that you can take action prior to hitting the size limit\. The alerts appear in the mysql log and RDS Events in the AWS Management Console\. 
