@@ -83,7 +83,7 @@ SET apg_plan_mgmt.pgss_min_calls = integer-value;
 | --- | --- | --- | 
 | Positive integer | 2 | A positive integer value greater or equal to 2\. | 
 
-**Usage Notes**  
+**Usage notes**  
 Requires installation of the `pg_stat_statements` extension\. For more information, see the [PostgreSQL pg\_stats\_statements documentation](https://www.postgresql.org/docs/current/pgstatstatements.html)\.
 
 ## apg\_plan\_mgmt\.pgss\_min\_mean\_time\_ms<a name="AuroraPostgreSQL.Optimize.Parameters.pgss_min_mean_time_ms"></a>
@@ -103,7 +103,7 @@ SET apg_plan_mgmt.pgss_min_mean_time_ms = double-value;
 | --- | --- | --- | 
 | Positive number | 0\.0 | A positive number value greater or equal to 0\.0\. | 
 
-**Usage Notes**  
+**Usage notes**  
 Requires installation of the `pg_stat_statements `extension\. For more information, see the [PostgreSQL pg\_stats\_statements documentation](https://www.postgresql.org/docs/current/pgstatstatements.html)\.
 
 ## apg\_plan\_mgmt\.pgss\_min\_stddev\_time\_ms<a name="AuroraPostgreSQL.Optimize.Parameters.pgss_min_stddev_time_ms"></a>
@@ -123,7 +123,7 @@ SET apg_plan_mgmt.pgss_min_stddev_time_ms = double-value;
 | --- | --- | --- | 
 | Positive number | 0\.0 | A positive number value greater or equal to 0\.0\. | 
 
-**Usage Notes**  
+**Usage notes**  
 Requires installation of the `pg_stat_statements` extension\. For more information, see the [PostgreSQL pg\_stats\_statements documentation](https://www.postgresql.org/docs/current/pgstatstatements.html)\.
 
 ## apg\_plan\_mgmt\.pgss\_min\_total\_time\_ms<a name="AuroraPostgreSQL.Optimize.Parameters.pgss_min_total_time_ms"></a>
@@ -143,7 +143,7 @@ SET apg_plan_mgmt.pgss_min_total_time_ms = double-value;
 | --- | --- | --- | 
 | Positive number | 0\.0 | A positive number value greater or equal to 0\.0\. | 
 
-**Usage Notes**  
+**Usage notes**  
 Requires installation of the `pg_stat_statements` extension\. For more information, see the [PostgreSQL pg\_stats\_statements documentation](https://www.postgresql.org/docs/current/pgstatstatements.html)\.
 
 ## apg\_plan\_mgmt\.plan\_retention\_period<a name="AuroraPostgreSQL.Optimize.Parameters.plan_retention_period"></a>
@@ -198,7 +198,7 @@ SET apg_plan_mgmt.use_plan_baselines = [true | false];
 | true |  Enforce the use of managed plans\. When a SQL statement runs and it is a managed statement in the `apg_plan_mgmt.dba_plans` view, the optimizer chooses a managed plan in the following order\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.Parameters.html)  | 
 | false | \(Default\) Do not use managed plans\. The optimizer uses its generated minimum\-cost plan\. | 
 
-**Usage Notes**
+** Usage notes**
 
 When `use_plan_baselines` is `true`, then the optimizer makes the following execution decisions:
 

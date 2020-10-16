@@ -49,7 +49,7 @@
 
 **Instance endpoint**  
  An *instance endpoint* connects to a specific DB instance within an Aurora cluster\. Each DB instance in a DB cluster has its own unique instance endpoint\. So there is one instance endpoint for the current primary DB instance of the DB cluster, and there is one instance endpoint for each of the Aurora Replicas in the DB cluster\.   
- The instance endpoint provides direct control over connections to the DB cluster, for scenarios where using the cluster endpoint or reader endpoint might not be appropriate\. For example, your client application might require more fine\-grained load balancing based on workload type\. In this case, you can configure multiple clients to connect to different Aurora Replicas in a DB cluster to distribute read workloads\. For an example that uses instance endpoints to improve connection speed after a failover for Aurora PostgreSQL, see [Fast failover with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md#AuroraPostgreSQL.BestPractices.FastFailover)\. For an example that uses instance endpoints to improve connection speed after a failover for Aurora MySQL, see [MariaDB Connector/J failover support \- case Amazon Aurora](https://mariadb.org/mariadb-connectorj-failover-support-case-amazon-aurora/)\.   
+ The instance endpoint provides direct control over connections to the DB cluster, for scenarios where using the cluster endpoint or reader endpoint might not be appropriate\. For example, your client application might require more fine\-grained load balancing based on workload type\. In this case, you can configure multiple clients to connect to different Aurora Replicas in a DB cluster to distribute read workloads\. For an example that uses instance endpoints to improve connection speed after a failover for Aurora PostgreSQL, see [Fast failover with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md#AuroraPostgreSQL.BestPractices.FastFailover)\. For an example that uses instance endpoints to improve connection speed after a failover for Aurora MySQL, see [MariaDB Connector/J failover support – case Amazon Aurora](https://mariadb.org/mariadb-connectorj-failover-support-case-amazon-aurora/)\.   
  The following example illustrates an instance endpoint for a DB instance in an Aurora MySQL DB cluster\.   
  `mydbinstance.123456789012.us-east-1.rds.amazonaws.com:3306` 
 
@@ -406,7 +406,9 @@ do
 done
 ```
 
- Suppose you want to use the two "bigger" instances only for the most resource\-intensive queries\. You can create a custom read\-only endpoint, and then add a static list of members so that the endpoint connects only to those DB instances\. Those instances are already in the lowest promotion tier, making it unlikely either of them would ever be promoted to the primary instance\. If one of them was promoted to the primary instance, it would become unreachable through this endpoint because we specified the `READER` type instead of the `ANY` type\. The following example demonstrates the create and modify endpoint commands, and sample JSON output showing the initial and modified state of the custom endpoint\. 
+ Suppose that you want to use the two "bigger" instances only for the most resource\-intensive queries\. To do this, you can first create a custom read\-only endpoint\. Then you can add a static list of members so that the endpoint connects only to those DB instances\. Those instances are already in the lowest promotion tier, making it unlikely either of them will be promoted to the primary instance\. If one of them is promoted to the primary instance, it becomes unreachable through this endpoint because we specified the `READER` type instead of the `ANY` type\. 
+
+ The following example demonstrates the create and modify endpoint commands, and sample JSON output showing the initial and modified state of the custom endpoint\. 
 
 ```
 $ aws rds create-db-cluster-endpoint --region $REGION \

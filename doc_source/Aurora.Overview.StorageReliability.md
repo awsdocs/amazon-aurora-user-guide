@@ -5,7 +5,7 @@
 **Topics**
 + [Overview of Aurora storage](#Aurora.Overview.Storage)
 + [What the cluster volume contains](#aurora-storage-contents)
-+ [How Aurora storage grows](#aurora-storage-growth)
++ [How Aurora storage automatically resizes](#aurora-storage-growth)
 + [How Aurora data storage is billed](#aurora-storage-data-billing)
 + [Amazon Aurora reliability](#Aurora.Overview.Reliability)
 
@@ -19,22 +19,29 @@
 
  The Aurora shared storage architecture makes your data independent from the DB instances in the cluster\. For example, you can add a DB instance quickly because Aurora doesn't make a new copy of the table data\. Instead, the DB instance connects to the shared volume that already contains all your data\. You can remove a DB instance from a cluster without removing any of the underlying data from the cluster\. Only when you delete the entire cluster does Aurora remove the data\. 
 
-## How Aurora storage grows<a name="aurora-storage-growth"></a>
+## How Aurora storage automatically resizes<a name="aurora-storage-growth"></a>
 
- Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\)\. 
+ Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\)\.\. 
 
- This automatic storage scaling, combined with the high\-performance and highly distributed storage subsystem, makes Aurora a good choice for your important enterprise data when your main objectives are reliability and high availability\. For ways to balance storage costs against these other priorities, see the following sections\. 
+ This automatic storage scaling is combined with a high\-performance and highly distributed storage subsystem\. These make Aurora a good choice for your important enterprise data when your main objectives are reliability and high availability\. For ways to balance storage costs against these other priorities, see the following 
+
+ When Aurora data is removed, the space allocated for that data is freed\. Examples of removing data include dropping or truncating a table\. This automatic reduction in storage usage helps you to minimize storage charges\. 
+
+**Note**  
+ The storage limits and dynamic resizing behavior discussed here applies to persistent tables and other data stored in the cluster volume\. Data for temporary tables is stored in the local DB instance and it's maximum size depends on the instance class that you use\. 
+
+ Some storage features, such as the maximum size of a cluster volume and automatic resizing when data is deleted, depend on the Aurora version of your cluster\. For more information, see [Storage scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.StorageScaling)\. You can also learn how to avoid storage issues and how to monitor the allocated storage and free space in your cluster\. 
 
 ## How Aurora data storage is billed<a name="aurora-storage-data-billing"></a>
 
- Even though an Aurora cluster volume can grow to up to 128 TiB, you are only charged for the space that you use in an Aurora cluster volume\. When Aurora data is removed, such as by dropping a table or partition, the overall allocated space remains the same\. The free space is reused automatically when data volume increases in the future\. 
+ Even though an Aurora cluster volume can grow to up to 128 TiB, you are only charged for the space that you use in an Aurora cluster volume\. In earlier Aurora versions, the cluster volume could reuse space that was freed up when you deleted data, but the allocated storage space would never decrease\. Starting in Aurora MySQL 2\.09\.0 and 1\.23\.0, and Aurora PostgreSQL 3\.3\.0 and 2\.6\.0, when Aurora data is removed, such as by dropping a table or database, the overall allocated space decreases by a comparable amount\. Thus, you can reduce storage charges by deleting tables, indexes, databases, and so on that you no longer need\. 
 
-**Note**  
- Because storage costs are based on the storage "high water mark" \(the maximum amount that was allocated for the Aurora cluster at any point in time\), you can manage costs by avoiding ETL practices that create large volumes of temporary information, or that load large volumes of new data prior to removing unneeded older data\. 
+**Tip**  
+ For earlier versions without the dynamic resizing feature, resetting the storage usage for a cluster involved doing a logical dump and restoring to a new cluster\. That operation can take a long time for a substantial volume of data\. If you encounter this situation, consider upgrading your cluster to a version that supports volume shrinking\. 
 
- If removing data from an Aurora cluster results in a substantial amount of allocated but unused space, resetting the high water mark requires doing a logical data dump and restore to a new cluster, using a tool such as `mysqldump`\. Creating and restoring a snapshot does *not* reduce the allocated storage because the physical layout of the underlying storage remains the same in the restored snapshot\. 
+ For pricing information about Aurora data storage, see [Amazon RDS for Aurora Pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
 
- For pricing information about Aurora data storage, see [Amazon RDS for Aurora pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
+ For information about how to minimize storage charges by monitoring storage usage for your cluster, see [Storage scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.StorageScaling)\. For pricing information about Aurora data storage, see [Amazon RDS for Aurora pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
 
 ## Amazon Aurora reliability<a name="Aurora.Overview.Reliability"></a>
 

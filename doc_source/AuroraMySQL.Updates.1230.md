@@ -25,6 +25,9 @@ Aurora MySQL 1\.23\.0 is generally available\. Aurora MySQL 1\.\* versions are c
 
    Aurora alerts you when the cluster volume size is near 128 TiB, so that you can take action prior to hitting the size limit\. The alerts appear in the mysql log and RDS Events in the AWS Management Console\. 
 +  Improved binary log \(binlog\) processing to reduce crash recovery time and commit time latency when very large transactions are involved\. 
++  Aurora dynamically resizes your cluster storage space\. With dynamic resizing, the storage space for your Aurora DB cluster automatically decreases when you remove data from the DB cluster\. For more information, see [Storage scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.StorageScaling)\. 
+**Note**  
+ The dynamic resizing feature is being deployed in phases to the AWS Regions where Aurora is available\. Depending on the Region where your cluster is, this feature might not be available yet\. For more information, see [the What's New announcement](https://aws.amazon.com/about-aws/whats-new/2020/10/amazon-aurora-enables-dynamic-resizing-database-storage-space/)\. 
 
  **High priority fixes:** 
 + [CVE\-2019\-2911](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2911)

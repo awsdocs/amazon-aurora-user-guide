@@ -24,7 +24,7 @@ apg_plan_mgmt.delete_plan(
 )
 ```
 
-**Return Value**  
+**Return value**  
 Returns 0 if the delete was successful or \-1 if the delete failed\.
 
 **Parameters**
@@ -52,7 +52,7 @@ apg_plan_mgmt.evolve_plan_baselines(
 )
 ```
 
-**Return Value**
+**Return value**
 
 The number of plans that were not faster than the best approved plan\. 
 
@@ -68,7 +68,7 @@ The number of plans that were not faster than the best approved plan\.
 | min\_speedup\_factor |  The *minimum speedup factor* can be the number of times faster that a plan must be than the best of the already approved plans to approve it\. Alternatively, this factor can be the number of times slower that a plan must be to reject or disable it\. This is a positive float value\.  | 
 | action |  The action the function is to perform\. Valid values include the following\. Case does not matter\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.Functions.html)  | 
 
-**Usage Notes**
+** Usage notes**
 
 Set specified plans to approved, rejected, or disabled based on whether the planning plus execution time is faster than the best approved plan by a factor that you can set\. The action parameter might be set to `'approve'` or `'reject'` to automatically approve or reject a plan that meets the performance criteria\. Alternatively, it might be set to '' \(empty string\) to do the performance experiment and produce a report, but take no action\.
 
@@ -93,7 +93,7 @@ apg_plan_mgmt.plan_last_used(
 )
 ```
 
-**Return Value**  
+**Return value**  
 Returns the `last_used` date\.
 
 **Parameters**
@@ -116,7 +116,7 @@ Reload plans into shared memory from the `apg_plan_mgmt.dba_plans` view\.
 apg_plan_mgmt.reload()
 ```
 
-**Return Value**
+**Return value**
 
 None\.
 
@@ -124,7 +124,7 @@ None\.
 
 None\.
 
-**Usage Notes**
+** Usage notes**
 
 Call `reload` for the following situations:
 + Use it to refresh the shared memory of a read\-only replica immediately, rather than wait for new plans to propagate to the replica\.
@@ -144,7 +144,7 @@ apg_plan_mgmt.set_plan_enabled(
 )
 ```
 
-**Return Value**
+**Return value**
 
 Returns 0 if the setting was successful or \-1 if the setting failed\.
 
@@ -173,7 +173,7 @@ apg_plan_mgmt.set_plan_status(
 )
 ```
 
-**Return Value**
+**Return value**
 
 Returns 0 if the setting was successful or \-1 if the setting failed\.
 
@@ -204,7 +204,7 @@ apg_plan_mgmt.validate_plans(
     action)
 ```
 
-**Return Value**
+**Return value**
 
 The number of invalid plans\.
 
@@ -219,7 +219,7 @@ The number of invalid plans\.
 | plan\_hash | The managed plan's plan\_hash ID\. Use NULL to mean all plans for the same sql\_hash ID value\. | 
 | action |  The action the function is to perform for invalid plans\. Valid string values include the following\. Case does not matter\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.Functions.html) Any other value is treated like the empty string\.  | 
 
-**Usage Notes**
+** Usage notes**
 
 Use the form `validate_plans(action)` to validate all the managed plans for all the managed statements in the entire `apg_plan_mgmt.dba_plans` view\.
 

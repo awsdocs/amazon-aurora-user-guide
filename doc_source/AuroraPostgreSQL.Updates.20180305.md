@@ -48,7 +48,7 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.8\. For more
 
 You can find the following improvements in this engine update\.
 
-**Critical Stability Enhancements**
+**Critical stability enhancements**
 
 1. Fixed a bug which materializes when the `NOT EXISTS` operator incorrectly returns TRUE which can only happen under the following unusual set of circumstances:
    + A query is using the `NOT EXISTS` operator\.
@@ -72,6 +72,10 @@ You can find the following improvements in this engine update\.
 1. Added support for the `pglogical` extension version 2\.2\.2\.
 
    The `pglogical` extension is a logical streaming replication system that provides additional features beyond what's available in PostgreSQL native logical replication\. Features include conflict handling, row filtering, DDL/sequence replication and delayed apply\. You can use the `pglogical` extension to set up replication between Aurora PostgreSQL clusters, between RDS PostgreSQL and Aurora PostgreSQL, and with PostgreSQL databases running outside of RDS\.
+
+1.  Aurora dynamically resizes your cluster storage space\. With dynamic resizing, the storage space for your Aurora DB cluster automatically decreases when you remove data from the DB cluster\. For more information, see [Storage scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.StorageScaling)\. 
+**Note**  
+ The dynamic resizing feature is being deployed in phases to the AWS Regions where Aurora is available\. Depending on the Region where your cluster is, this feature might not be available yet\. For more information, see [the What's New announcement](https://aws.amazon.com/about-aws/whats-new/2020/10/amazon-aurora-enables-dynamic-resizing-database-storage-space/)\. 
 
 **Critical stability enhancements**
 
@@ -117,7 +121,7 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.7\. For more
 
 You can find the following improvements in this engine update\.
 
-**Critical Stability Enhancements**
+**Critical stability enhancements**
 
 1. Fixed a bug which materializes when the `NOT EXISTS` operator incorrectly returns TRUE which can only happen under the following unusual set of circumstances:
    + A query is using the `NOT EXISTS` operator\.
@@ -174,7 +178,7 @@ You can find the following improvements in this engine update\.
 
 You can find the following improvements in this engine update\.
 
-**Critical Stability Enhancements**  
+**Critical stability enhancements**  
 None\.
 
 **High priority stability enhancements**
@@ -429,7 +433,7 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.13\. For mor
 
 You can find the following improvements in this engine update\.
 
-**Critical Stability Enhancements**
+**Critical stability enhancements**
 
 1. Fixed a bug which materializes when the `NOT EXISTS` operator incorrectly returns TRUE which can only happen under the following unusual set of circumstances:
    + A query is using the `NOT EXISTS` operator\.
@@ -451,6 +455,10 @@ You can find the following improvements in this engine update\.
 1. Added support for the `pglogical` extension version 2\.2\.2\.
 
    The `pglogical` extension is a logical streaming replication system that provides additional features beyond what's available in PostgreSQL native logical replication\. Features include conflict handling, row filtering, DDL/sequence replication and delayed apply\. You can use the `pglogical` extension to set up replication between Aurora PostgreSQL clusters, between RDS PostgreSQL and Aurora PostgreSQL, and with PostgreSQL databases running outside of RDS\.
+
+1.  Aurora dynamically resizes your cluster storage space\. With dynamic resizing, the storage space for your Aurora DB cluster automatically decreases when you remove data from the DB cluster\. For more information, see [Storage scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.StorageScaling)\. 
+**Note**  
+ The dynamic resizing feature is being deployed in phases to the AWS Regions where Aurora is available\. Depending on the Region where your cluster is, this feature might not be available yet\. For more information, see [the What's New announcement](https://aws.amazon.com/about-aws/whats-new/2020/10/amazon-aurora-enables-dynamic-resizing-database-storage-space/)\. 
 
 **Critical stability enhancements**
 
@@ -498,7 +506,7 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.12\. For mor
 
 You can find the following improvements in this engine update\.
 
-**Critical Stability Enhancements**
+**Critical stability enhancements**
 
 1. Fixed a bug which materializes when the `NOT EXISTS` operator incorrectly returns TRUE which can only happen under the following unusual set of circumstances:
    + A query is using the `NOT EXISTS` operator\.
@@ -557,7 +565,7 @@ You can find the following improvements in this engine update\.
 
 You can find the following improvements in this engine update\.
 
-**Critical Stability Enhancements**  
+**Critical stability enhancements**  
 None\.
 
 **High priority stability enhancements**
@@ -1097,7 +1105,7 @@ None
 
 You can find the following improvements in this engine update\.
 
-**Critical Stability Enhancements**  
+**Critical stability enhancements**  
 None\.
 
 **High priority stability enhancements**

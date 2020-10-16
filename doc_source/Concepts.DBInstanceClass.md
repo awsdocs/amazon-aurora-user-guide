@@ -129,7 +129,7 @@ For information about Aurora DB engine support for each DB instance class, see [
 
 | Instance class | vCPU | ECU | Memory \(GiB\) | Max\. bandwidth \(mbps\) of local storage | Network performance | 
 | --- | --- | --- | --- | --- | --- | 
-| db\.r5 – Latest Generation Memory Optimized Instance Classes | 
+| db\.r5 – Latest generation memory optimized instance classes | 
 | db\.r5\.24xlarge | 96 | 347 | 768 | 19,000 | 25 Gbps | 
 | db\.r5\.16xlarge | 64 | 264 | 512 | 13,600 | 20 Gbps | 
 | db\.r5\.12xlarge | 48 | 173 | 384 | 9,500 | 10 Gbps | 
@@ -138,26 +138,26 @@ For information about Aurora DB engine support for each DB instance class, see [
 | db\.r5\.2xlarge | 8 | 38 | 64 | Up to 4,750 | Up to 10 Gbps | 
 | db\.r5\.xlarge | 4 | 19 | 32 | Up to 4,750 | Up to 10 Gbps | 
 | db\.r5\.large | 2 | 10 | 16 | Up to 4,750 | Up to 10 Gbps | 
-| db\.r4 – Current Generation Memory Optimized Instance Classes | 
+| db\.r4 – Current generation memory optimized instance classes | 
 | db\.r4\.16xlarge | 64 | 195 | 488 | 14,000 | 25 Gbps | 
 | db\.r4\.8xlarge | 32 | 99 | 244 | 7,000 | 10 Gbps | 
 | db\.r4\.4xlarge | 16 | 53 | 122 | 3,500 | Up to 10 Gbps | 
 | db\.r4\.2xlarge | 8 | 27 | 61 | 1,700 | Up to 10 Gbps | 
 | db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | 850 | Up to 10 Gbps | 
 | db\.r4\.large | 2 | 7 | 15\.25 | 425 | Up to 10 Gbps | 
-| db\.r3 – Previous Generation Memory Optimized Instance Classes | 
+| db\.r3 – Previous generation memory optimized instance classes | 
 | db\.r3\.8xlarge | 32 | 104 | 244 | — | 10 Gbps | 
 | db\.r3\.4xlarge | 16 | 52 | 122 | 2,000 | High | 
 | db\.r3\.2xlarge | 8 | 26 | 61 | 1,000 | High | 
 | db\.r3\.xlarge | 4 | 13 | 30\.5 | 500 | Moderate | 
 | db\.r3\.large | 2 | 6\.5 | 15\.25 | — | Moderate | 
-| db\.t3 – Latest Generation Burstable Performance Instance Classes | 
+| db\.t3 – Latest generation burstable performance instance classes | 
 | db\.t3\.2xlarge | 8 | Variable | 32 | Up to 2,048 | Up to 5 Gbps | 
 | db\.t3\.xlarge | 4 | Variable | 16 | Up to 2,048 | Up to 5 Gbps | 
 | db\.t3\.large | 2 | Variable | 8 | Up to 2,048 | Up to 5 Gbps | 
 | db\.t3\.medium | 2 | Variable | 4 | Up to 1,536 | Up to 5 Gbps | 
 | db\.t3\.small | 2 | Variable | 2 | Up to 1,536 | Up to 5 Gbps | 
 | db\.t3\.micro | 2 | Variable | 1 | Up to 1,536 | Up to 5 Gbps | 
-| db\.t2 – Current Generation Burstable Performance Instance Classes | 
+| db\.t2 – Current generation burstable performance instance classes | 
 | db\.t2\.medium | 2 | Variable | 4 | — | Moderate | 
 | db\.t2\.small | 1 | Variable | 2 | — | Low | 
