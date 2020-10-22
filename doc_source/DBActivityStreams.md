@@ -1078,12 +1078,16 @@ import aws_encryption_sdk
 from aws_encryption_sdk.internal.crypto import WrappingKey
 from aws_encryption_sdk.key_providers.raw import RawMasterKeyProvider
 from aws_encryption_sdk.identifiers import WrappingAlgorithm, EncryptionKeyType
+from aws_encryption_sdk.identifiers import CommitmentPolicy
 import boto3
 
 REGION_NAME = '<region>'                    # us-east-1
 RESOURCE_ID = '<external-resource-id>'      # cluster-ABCD123456
 STREAM_NAME = 'aws-rds-das-' + RESOURCE_ID  # aws-rds-das-cluster-ABCD123456
 
+client_encryp = aws_encryption_sdk.EncryptionSDKClient(
+    commitment_policy=CommitmentPolicy.FORBID_ENCRYPT_ALLOW_DECRYPT
+)
 
 class MyRawMasterKeyProvider(RawMasterKeyProvider):
     provider_id = "BC"
@@ -1104,7 +1108,7 @@ class MyRawMasterKeyProvider(RawMasterKeyProvider):
 def decrypt_payload(payload, data_key):
     my_key_provider = MyRawMasterKeyProvider(data_key)
     my_key_provider.add_master_key("DataKey")
-    decrypted_plaintext, header = aws_encryption_sdk.decrypt(
+    decrypted_plaintext, header = client_encryp.decrypt(
         source=payload,
         materials_manager=aws_encryption_sdk.DefaultCryptoMaterialsManager(master_key_provider=my_key_provider))
     return decrypted_plaintext
@@ -1138,7 +1142,7 @@ def main():
                 data_key_decoded = base64.b64decode(record_data['key'])
                 data_key_decrypt_result = kms.decrypt(CiphertextBlob=data_key_decoded,
                                                       EncryptionContext={'aws:rds:dbc-id': RESOURCE_ID})
-                print decrypt_decompress(payload_decoded, data_key_decrypt_result['Plaintext'])
+                print (decrypt_decompress(payload_decoded, data_key_decrypt_result['Plaintext']))
             if 'NextShardIterator' in response:
                 next_shard_iters.append(response['NextShardIterator'])
         shard_iters = next_shard_iters
