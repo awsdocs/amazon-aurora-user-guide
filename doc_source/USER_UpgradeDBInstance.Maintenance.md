@@ -152,7 +152,7 @@ The Aurora DB cluster maintenance window should fall at the time of lowest usage
 
 1. Choose the DB cluster for which you want to change the maintenance window\.
 
-1. For **Actions**, choose **Modify cluster**\.
+1. Choose **Modify**\.
 
 1. In the **Maintenance** section, update the maintenance window\.
 
@@ -160,9 +160,9 @@ The Aurora DB cluster maintenance window should fall at the time of lowest usage
 
    On the confirmation page, review your changes\.
 
-1. To apply the changes to the maintenance window immediately, choose **Apply immediately**\. 
+1. To apply the changes to the maintenance window immediately, choose **Immediately** in the **Schedule of modifications** section\. 
 
-1.  Choose **Modify cluster** to save your changes\. 
+1. Choose **Modify cluster** to save your changes\.
 
    Alternatively, choose **Back** to edit your changes, or choose **Cancel** to cancel your changes\. 
 
@@ -213,9 +213,22 @@ The following code example sets the maintenance window to Tuesdays from 4:00–4
 12. &X-Amz-Signature=d6d1c65c2e94f5800ab411a3f7336625820b103713b6c063430900514e21d784
 ```
 
+## Automatic minor version upgrades for Aurora DB clusters<a name="Aurora.Maintenance.AMVU"></a>
+
+ The **Auto minor version upgrade** setting specifies whether Aurora automatically applies upgrades to your cluster\. These upgrades include patch levels containing bug fixes, and new minor versions containing additional features\. They don't include any incompatible changes\. 
+
+**Note**  
+ This setting is enabled by default\. For each new cluster, choose the appropriate value for this setting based on its importance, expected lifetime, and the amount of verification testing that you do after each upgrade\. 
+
+ For instructions about turning this setting on or off, see [Settings for Amazon Aurora](Aurora.Modifying.md#Aurora.Modifying.Settings)\. In particular, make sure to apply the same setting to all DB instances in the cluster\. If any DB instance in your cluster has this setting turned off, the cluster isn't automatically upgraded\. 
+
+For more information about engine updates for Aurora PostgreSQL, see [Database engine updates for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.md)\.
+
+ For more information about the **Auto minor version upgrade** setting for Aurora MySQL, see [Enabling automatic upgrades between minor Aurora MySQL versions](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.AMVU)\. For general information about engine updates for Aurora MySQL, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\. 
+
 ## Choosing the frequency of Aurora MySQL maintenance updates<a name="Aurora.Maintenance.LTS"></a>
 
- You can control whether Aurora MySQL upgrades happen frequently or rarely for each DB cluster\. The best choice depends on your usage of Aurora MySQL and the priorities for your applications that run on Aurora, For information about the Aurora MySQL long\-term stability \(LTS\) releases that require less frequent upgrades, see [Aurora MySQL long\-term support \(LTS\) releases](AuroraMySQL.Updates.md#AuroraMySQL.Updates.LTS)\. 
+ You can control whether Aurora MySQL upgrades happen frequently or rarely for each DB cluster\. The best choice depends on your usage of Aurora MySQL and the priorities for your applications that run on Aurora, For information about the Aurora MySQL long\-term stability \(LTS\) releases that require less frequent upgrades, see [Aurora MySQL long\-term support \(LTS\) releases](AuroraMySQL.Updates.Versions.md#AuroraMySQL.Updates.LTS)\. 
 
  You might choose to upgrade an Aurora MySQL cluster rarely if some or all of the following conditions apply: 
 +  Your testing cycle for your application takes a long time for each update to the Aurora MySQL database engine\. 

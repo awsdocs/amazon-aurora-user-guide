@@ -14,7 +14,7 @@ If you have any questions or concerns, AWS Support is available on the community
  This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] region\. There will be a separate announcement once it is made available\. 
 
 **Note**  
-The procedure to upgrade your DB cluster has changed\. For more information, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+The procedure to upgrade your DB cluster has changed\. For more information, see [Upgrading and patching Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Patching.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2041.Improvements"></a>
 +  Fixed an issue where an Aurora MySQL 5\.6 snapshot for versions lower than 1\.16 could not be restored to the latest Aurora MySQL 5\.7 cluster\. 

@@ -14,7 +14,7 @@ If you have any questions or concerns, AWS Support is available on the community
  This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] and China \(Ningxia\) \[cn\-northwest\-1\] AWS Regions\. There will be a separate announcement once it is made available\. 
 
 **Note**  
-For information on how to upgrade your Aurora MySQL database cluster, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+For information on how to upgrade your Aurora MySQL database cluster, see [Upgrading and patching Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Patching.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2042.Improvements"></a>
 +  Added support for SSL binlog replication using custom certificates\. For information on using SSL binlog replication in Aurora MySQL, see [mysql\_rds\_import\_binlog\_ssl\_material](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_import_binlog_ssl_material.html)\. 

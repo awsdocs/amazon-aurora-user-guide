@@ -21,7 +21,7 @@
 
 ## How Aurora storage automatically resizes<a name="aurora-storage-growth"></a>
 
- Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\)\.\. 
+ Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\)\. 
 
  This automatic storage scaling is combined with a high\-performance and highly distributed storage subsystem\. These make Aurora a good choice for your important enterprise data when your main objectives are reliability and high availability\. For ways to balance storage costs against these other priorities, see the following 
 
@@ -34,7 +34,7 @@
 
 ## How Aurora data storage is billed<a name="aurora-storage-data-billing"></a>
 
- Even though an Aurora cluster volume can grow to up to 128 TiB, you are only charged for the space that you use in an Aurora cluster volume\. In earlier Aurora versions, the cluster volume could reuse space that was freed up when you deleted data, but the allocated storage space would never decrease\. Starting in Aurora MySQL 2\.09\.0 and 1\.23\.0, and Aurora PostgreSQL 3\.3\.0 and 2\.6\.0, when Aurora data is removed, such as by dropping a table or database, the overall allocated space decreases by a comparable amount\. Thus, you can reduce storage charges by deleting tables, indexes, databases, and so on that you no longer need\. 
+ Even though an Aurora cluster volume can grow up to128 tebibytes \(TiB\), you are only charged for the space that you use in an Aurora cluster volume\. In earlier Aurora versions, the cluster volume could reuse space that was freed up when you deleted data, but the allocated storage space would never decrease\. Starting in Aurora MySQL 2\.09\.0 and 1\.23\.0, and Aurora PostgreSQL 3\.3\.0 and 2\.6\.0, when Aurora data is removed, such as by dropping a table or database, the overall allocated space decreases by a comparable amount\. Thus, you can reduce storage charges by deleting tables, indexes, databases, and so on that you no longer need\. 
 
 **Tip**  
  For earlier versions without the dynamic resizing feature, resetting the storage usage for a cluster involved doing a logical dump and restoring to a new cluster\. That operation can take a long time for a substantial volume of data\. If you encounter this situation, consider upgrading your cluster to a version that supports volume shrinking\. 
@@ -66,7 +66,7 @@
 
  Aurora is designed to recover from a crash almost instantaneously and continue to serve your application data without the binary log\. Aurora performs crash recovery asynchronously on parallel threads, so that your database is open and available immediately after a crash\. 
 
- For more information about crash recovery, see [Fault tolerance for an Aurora DB cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\. 
+ For more information about crash recovery, see [Fault tolerance for an Aurora DB cluster](Concepts.AuroraHighAvailability.md#Aurora.Managing.FaultTolerance)\. 
 
  The following are considerations for binary logging and crash recovery on Aurora MySQL: 
 +  Enabling binary logging on Aurora directly affects the recovery time after a crash, because it forces the DB instance to perform binary log recovery\. 

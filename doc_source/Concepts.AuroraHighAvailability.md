@@ -6,6 +6,7 @@
 + [High availability for Aurora data](#Concepts.AuroraHighAvailability.Data)
 + [High availability for Aurora DB instances](#Concepts.AuroraHighAvailability.Instances)
 + [High availability across AWS Regions with Aurora global databases](#Concepts.AuroraHighAvailability.GlobalDB)
++ [Fault tolerance for an Aurora DB cluster](#Aurora.Managing.FaultTolerance)
 
 ## High availability for Aurora data<a name="Concepts.AuroraHighAvailability.Data"></a>
 
@@ -28,3 +29,22 @@ You can set up a Multi\-AZ cluster by making a simple choice when you create the
 ## High availability across AWS Regions with Aurora global databases<a name="Concepts.AuroraHighAvailability.GlobalDB"></a>
 
  For high availability across multiple AWS Regions, you can set up Aurora global databases\. Each Aurora global database spans multiple AWS Regions, enabling low latency global reads and disaster recovery from outages across an AWS Region\. Aurora automatically handles replicating all data and updates from the primary AWS Region to each of the secondary Regions\. For more information, see [Using Amazon Aurora global databases](aurora-global-database.md)\. 
+
+## Fault tolerance for an Aurora DB cluster<a name="Aurora.Managing.FaultTolerance"></a>
+
+An Aurora DB cluster is fault tolerant by design\. The cluster volume spans multiple Availability Zones in a single AWS Region, and each Availability Zone contains a copy of the cluster volume data\. This functionality means that your DB cluster can tolerate a failure of an Availability Zone without any loss of data and only a brief interruption of service\.
+
+If the primary instance in a DB cluster using single\-master replication fails, Aurora automatically fails over to a new primary instance in one of two ways:
++ By promoting an existing Aurora Replica to the new primary instance
++ By creating a new primary instance
+
+If the DB cluster has one or more Aurora Replicas, then an Aurora Replica is promoted to the primary instance during a failure event\. A failure event results in a brief interruption, during which read and write operations fail with an exception\. However, service is typically restored in less than 120 seconds, and often less than 60 seconds\. To increase the availability of your DB cluster, we recommend that you create at least one or more Aurora Replicas in two or more different Availability Zones\. 
+
+You can customize the order in which your Aurora Replicas are promoted to the primary instance after a failure by assigning each replica a priority\. Priorities range from 0 for the first priority to 15 for the last priority\. If the primary instance fails, Amazon RDS promotes the Aurora Replica with the better priority to the new primary instance\. You can modify the priority of an Aurora Replica at any time\. Modifying the priority doesn't trigger a failover\. 
+
+More than one Aurora Replica can share the same priority, resulting in promotion tiers\. If two or more Aurora Replicas share the same priority, then Amazon RDS promotes the replica that is largest in size\. If two or more Aurora Replicas share the same priority and size, then Amazon RDS promotes an arbitrary replica in the same promotion tier\. 
+
+If the DB cluster doesn't contain any Aurora Replicas, then the primary instance is recreated during a failure event\. A failure event results in an interruption during which read and write operations fail with an exception\. Service is restored when the new primary instance is created, which typically takes less than 10 minutes\. Promoting an Aurora Replica to the primary instance is much faster than creating a new primary instance\.
+
+**Note**  
+Amazon Aurora also supports replication with an external MySQL database, or an RDS MySQL DB instance\. For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)](AuroraMySQL.Replication.MySQL.md)\.

@@ -2,6 +2,9 @@
 
 To permit database users in an Amazon Aurora DB cluster to access other AWS services, you associate the role that you created in [Creating an IAM role to allow Amazon Aurora to access AWS services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md) with that DB cluster\.
 
+**Note**  
+You can't associate an IAM role with an Aurora Serverless DB cluster\. For more information, see [Using Amazon Aurora Serverless](aurora-serverless.md)\.
+
 To associate an IAM role with a DB cluster you do two things:
 + Add the role to the list of associated roles for a DB cluster by using the RDS console, the [add\-role\-to\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/add-role-to-db-cluster.html) AWS CLI command, or the [AddRoleToDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddRoleToDBCluster.html) RDS API operation\.
 

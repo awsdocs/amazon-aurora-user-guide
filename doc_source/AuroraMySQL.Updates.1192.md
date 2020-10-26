@@ -10,7 +10,7 @@
  This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\], Europe \(Stockholm\) \[eu\-north\-1\], China \(Ningxia\) \[cn\-northwest\-1\], and Asia Pacific \(Hong Kong\) \[ap\-east\-1\] AWS Regions\. There will be a separate announcement once it is made available\. 
 
 **Note**  
-The procedure to upgrade your DB cluster has changed\. For more information, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+The procedure to upgrade your DB cluster has changed\. For more information, see [Upgrading and patching Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Patching.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.1192.Improvements"></a>
 +  Fixed an issue that could cause failures when loading data into Aurora from Amazon S3\. 

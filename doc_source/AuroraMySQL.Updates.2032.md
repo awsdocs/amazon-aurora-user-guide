@@ -14,7 +14,7 @@ If you have any questions or concerns, AWS Support is available on the community
  This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] and China \(Beijing\) \[cn\-north\-1\] regions\. There will be a separate announcement once it is made available\. 
 
 **Note**  
-The procedure to upgrade your DB cluster has changed\. For more information, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+The procedure to upgrade your DB cluster has changed\. For more information, see [Upgrading and patching Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Patching.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2032.Improvements"></a>
-+  **Aurora Version Selector** – Starting with Aurora MySQL 2\.03\.2, you can choose from among multiple versions of MySQL 5\.7\-compatible Aurora on the AWS Management Console\. For more information, see [Aurora MySQL engine versions](AuroraMySQL.Updates.md#AuroraMySQL.Updates.EngineVersions)\. 
++  **Aurora Version Selector** – Starting with Aurora MySQL 2\.03\.2, you can choose from among multiple versions of MySQL 5\.7\-compatible Aurora on the AWS Management Console\. For more information, see [Checking or specifying Aurora MySQL engine versions through AWS](AuroraMySQL.Updates.Versions.md#AuroraMySQL.Updates.EngineVersions)\. 

@@ -34,6 +34,7 @@ There are some limitations involved with Aurora cloning, described following:
 + You cannot create clones across AWS Regions\. Each clone must be created in the same Region as the source cluster\.
 + Currently, you are limited to 15 clones based on a copy, including clones based on other clones\. After that, only copies can be created\. However, each copy can also have up to 15 clones\. 
 + Currently, you cannot clone from a cluster without the parallel query feature, to a cluster where parallel query is enabled\. To bring data into a cluster that uses parallel query, create a snapshot of the original cluster and restore it to a cluster where the parallel query option is enabled\.
++ You can't create clones from clusters that have no DB instances\. Cloning works only for clusters that have at least one database instance\. 
 + You can provide a different virtual private cloud \(VPC\) for your clone\. However, the subnets in those VPCs must map to the same set of Availability Zones\.
 
 ## Copy\-on\-write protocol for Aurora cloning<a name="Aurora.Managing.Clone.Protocol"></a>
@@ -153,7 +154,6 @@ The [restore\-db\-cluster\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/
 
  Aurora cross\-account cloning has the following limitations: 
 +  You can't clone an Aurora Serverless cluster across AWS accounts\. 
-+  You can't clone an Aurora global database cluster across AWS accounts\. 
 +  Viewing and accepting sharing invitations requires using the AWS CLI the Amazon RDS API, or the AWS RAM console\. Currently, you can't perform this procedure using the Amazon RDS console\. 
 +  When you make a cross\-account cluster, you can't make additional clones of that new cluster or share the cloned cluster with other AWS accounts\. 
 +  The maximum number of cross\-account clones that you can have for any Aurora cluster is 15\. 

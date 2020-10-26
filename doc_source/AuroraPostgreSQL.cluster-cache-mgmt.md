@@ -71,7 +71,7 @@ aws rds modify-db-cluster-parameter-group ^
 
 ### Setting the promotion tier priority for the writer DB instance<a name="AuroraPostgreSQL.cluster-cache-mgmt.Writer"></a>
 
-For cluster cache management, make sure that the promotion priority is **tier\-0** for the writer DB instance of the Aurora PostgreSQL DB cluster\. The *promotion tier priority* is a value that specifies the order in which an Aurora reader is promoted to the writer DB instance after a failure\. Valid values are 0–15, where 0 is the first priority and 15 is the last priority\. For more information about the promotion tier, see [Fault tolerance for an Aurora DB cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\. 
+For cluster cache management, make sure that the promotion priority is **tier\-0** for the writer DB instance of the Aurora PostgreSQL DB cluster\. The *promotion tier priority* is a value that specifies the order in which an Aurora reader is promoted to the writer DB instance after a failure\. Valid values are 0–15, where 0 is the first priority and 15 is the last priority\. For more information about the promotion tier, see [Fault tolerance for an Aurora DB cluster](Concepts.AuroraHighAvailability.md#Aurora.Managing.FaultTolerance)\. 
 
 #### Console<a name="AuroraPostgreSQL.cluster-cache-mgmt.Writer.Console"></a>
 

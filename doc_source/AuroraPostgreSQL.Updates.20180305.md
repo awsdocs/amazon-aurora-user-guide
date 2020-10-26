@@ -63,7 +63,7 @@ You can find the following improvements in this engine update\.
 
 1. Added support for the RDKit extension version 3\.8\. 
 
-   The RDKit extension provides modeling functions for cheminformatics\. Cheminformatics is storing, indexing, searching, retrieving, and applying information about chemical compounds\. For example, with the RDKit extension you can construct models of molecules, search for molecular structures, and read or create molecules in various notations\. You can also perform research on data loaded from the [ChEMBL website](https://www.ebi.ac.uk/chembl/) or a SMILES file\. The Simplified Molecular Input Line Entry System \(SMILES\) is a typographical notation for representing molecules and reactions\. For more information, see [The RDKit database cartridge](http://rdkit.org/docs_temp/Cartridge.html) in the RDKit documentation\. 
+   The RDKit extension provides modeling functions for cheminformatics\. Cheminformatics is storing, indexing, searching, retrieving, and applying information about chemical compounds\. For example, with the RDKit extension you can construct models of molecules, search for molecular structures, and read or create molecules in various notations\. You can also perform research on data loaded from the [ChEMBL website](https://www.ebi.ac.uk/chembl/) or a SMILES file\. The Simplified Molecular Input Line Entry System \(SMILES\) is a typographical notation for representing molecules and reactions\. For more information, see [The RDKit database cartridge](https://rdkit.org/docs/Cartridge.html) in the RDKit documentation\. 
 
 1. Added support for a minimum TLS version
 
@@ -450,7 +450,7 @@ You can find the following improvements in this engine update\.
 
 1. Added support for the RDKit extension version 3\.8\. 
 
-   The RDKit extension provides modeling functions for cheminformatics\. Cheminformatics is storing, indexing, searching, retrieving, and applying information about chemical compounds\. For example, with the RDKit extension you can construct models of molecules, search for molecular structures, and read or create molecules in various notations\. You can also perform research on data loaded from the [ChEMBL website](https://www.ebi.ac.uk/chembl/) or a SMILES file\. The Simplified Molecular Input Line Entry System \(SMILES\) is a typographical notation for representing molecules and reactions\. For more information, see [The RDKit database cartridge](http://rdkit.org/docs_temp/Cartridge.html) in the RDKit documentation\. 
+   The RDKit extension provides modeling functions for cheminformatics\. Cheminformatics is storing, indexing, searching, retrieving, and applying information about chemical compounds\. For example, with the RDKit extension you can construct models of molecules, search for molecular structures, and read or create molecules in various notations\. You can also perform research on data loaded from the [ChEMBL website](https://www.ebi.ac.uk/chembl/) or a SMILES file\. The Simplified Molecular Input Line Entry System \(SMILES\) is a typographical notation for representing molecules and reactions\. For more information, see [The RDKit database cartridge](https://rdkit.org/docs/Cartridge.html) in the RDKit documentation\. 
 
 1. Added support for the `pglogical` extension version 2\.2\.2\.
 

@@ -599,4 +599,4 @@ mysql> select @@aurora_server_id;
 
  If you design your own application logic to manage connections to instance endpoints, you can manually or programmatically discover the resulting set of available DB instances in the DB cluster\. You can then confirm their instance classes after failover and connect to an appropriate instance endpoint\. 
 
- For more information about failovers, see [Fault tolerance for an Aurora DB cluster](Aurora.Managing.Backups.md#Aurora.Managing.FaultTolerance)\. 
+ For more information about failovers, see [Fault tolerance for an Aurora DB cluster](Concepts.AuroraHighAvailability.md#Aurora.Managing.FaultTolerance)\. 

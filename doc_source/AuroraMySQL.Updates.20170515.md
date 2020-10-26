@@ -9,7 +9,7 @@ Aurora MySQL 1\.13 is generally available\. All new database clusters, including
 
 ## Zero\-downtime patching<a name="AuroraMySQL.Updates.20170515.ZDP"></a>
 
-The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-downtime patching](AuroraMySQL.Updates.md#AuroraMySQL.Updates.ZDP)\. 
+The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-downtime patching](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.ZDP)\. 
 
 ## New features:<a name="AuroraMySQL.Updates.20170515.NewFeatures"></a>
 + **SELECT INTO OUTFILE S3** – Aurora MySQL now allows you to upload the results of a query to one or more files in an Amazon S3 bucket\. For more information, see [Saving data from an Amazon Aurora MySQL DB cluster into text files in an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\.

@@ -10,7 +10,7 @@ If you have any questions or concerns, AWS Support is available on the community
  This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] and China \(Beijing\) \[cn\-north\-1\] regions\. There will be a separate announcement once it is made available\. 
 
 **Note**  
-The procedure to upgrade your DB cluster has changed\. For more information, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+The procedure to upgrade your DB cluster has changed\. For more information, see [Upgrading and patching Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Patching.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.1191.Improvements"></a>
 +  Fixed a bug in binlog replication that can cause an issue on Aurora instances configured as binlog worker\. 

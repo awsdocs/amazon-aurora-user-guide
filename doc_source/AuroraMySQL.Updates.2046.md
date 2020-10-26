@@ -14,7 +14,7 @@ If you have any questions or concerns, AWS Support is available on the community
  This version is currently not available in the following AWS Regions: Europe \(London\) \[eu\-west\-2\], AWS GovCloud \(US\-East\) \[us\-gov\-east\-1\], AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\], China \(Ningxia\) \[cn\-northwest\-1\], and Asia Pacific \(Hong Kong\) \[ap\-east\-1\]\. There will be a separate announcement once it is made available\. 
 
 **Note**  
-For information on how to upgrade your Aurora MySQL database cluster, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+For information on how to upgrade your Aurora MySQL database cluster, see [Upgrading and patching Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Patching.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2046.Improvements"></a>
 +  Fixed an issue where the events in current binlog file on the master were not replicated on the worker if the value of the parameter `sync_binlog` was not set to 1\. 

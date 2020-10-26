@@ -14,7 +14,7 @@ If you have any questions or concerns, AWS Support is available on the community
  This version is currently not available in the AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\] and China \(Ningxia\) \[cn\-northwest\-1\] AWS Regions\. There will be a separate announcement once it is made available\. 
 
 **Note**  
-For information on how to upgrade your Aurora MySQL database cluster, see [Database upgrades and patches for Amazon Aurora MySQL](AuroraMySQL.Updates.md#AuroraMySQL.Updates.Patching)\.
+For information on how to upgrade your Aurora MySQL database cluster, see [Upgrading and patching Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Patching.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2043.Improvements"></a>
 +  Fixed a bug in binlog replication that can cause an issue on Aurora instances configured as binlog worker\. 
