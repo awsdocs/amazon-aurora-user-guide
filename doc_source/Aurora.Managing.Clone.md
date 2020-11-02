@@ -31,6 +31,7 @@ You can use cloning in a variety of use cases, especially where you don't want t
 ## Limitations of Aurora cloning<a name="Aurora.Managing.Clone.Limitations"></a>
 
 There are some limitations involved with Aurora cloning, described following:
++ Cloning isn't currently supported for Aurora Serverless DB clusters\. 
 + You cannot create clones across AWS Regions\. Each clone must be created in the same Region as the source cluster\.
 + Currently, you are limited to 15 clones based on a copy, including clones based on other clones\. After that, only copies can be created\. However, each copy can also have up to 15 clones\. 
 + Currently, you cannot clone from a cluster without the parallel query feature, to a cluster where parallel query is enabled\. To bring data into a cluster that uses parallel query, create a snapshot of the original cluster and restore it to a cluster where the parallel query option is enabled\.

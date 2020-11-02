@@ -1,22 +1,31 @@
 # Using the Data API for Aurora Serverless<a name="data-api"></a>
 
-You can access your Aurora Serverless DB cluster using the built\-in Data API\. Using this API, you can access Aurora Serverless with web services–based applications, including AWS Lambda, AWS AppSync, and AWS Cloud9\. For more information on these applications, see details at [AWS Lambda](https://aws.amazon.com/lambda/), [AWS AppSync](https://aws.amazon.com/appsync/), and [AWS Cloud9](https://aws.amazon.com/cloud9/)\. 
+By using the Data API for Aurora Serverless, you can work with a web\-services interface to your Aurora Serverless DB cluster\. The Data API doesn't require a persistent connection to the DB cluster\. Instead, it provides a secure HTTP endpoint and integration with AWS SDKs\. You can use the endpoint to run SQL statements without managing connections\.
 
-The Data API doesn't require a persistent connection to the DB cluster\. Instead, it provides a secure HTTP endpoint and integration with AWS SDKs\. You can use the endpoint to run SQL statements without managing connections\. All calls to the Data API are synchronous\. By default, a call times out and is terminated in 45 seconds if it's not finished processing\. You can use the `continueAfterTimeout` parameter to continue running the SQL statement after the call times out\.
+All calls to the Data API are synchronous\. By default, a call times out if it's not finished processing within 45 seconds\. However, you can continue running a SQL statement if the call times out by using the `continueAfterTimeout` parameter\. For an example, see [Running a SQL transaction](#data-api.calling.java.run-transaction)\. 
 
-The API uses database credentials stored in AWS Secrets Manager, so you don't need to pass credentials in the API calls\. The API also provides a more secure way to use AWS Lambda\. It enables you to access your DB cluster without your needing to configure a Lambda function to access resources in a virtual private cloud \(VPC\)\. For more information about AWS Secrets Manager, see [What is AWS secrets manager?](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the *AWS Secrets Manager User Guide*\.
+Users don't need to pass credentials with calls to the Data API, because the Data API uses database credentials stored in AWS Secrets Manager\. To store credentials in Secrets Manager, users must be granted the appropriate permissions to use Secrets Manager, and also the Data API\. For more information about authorizing users, see [Authorizing access to the Data API](#data-api.access)\. 
 
-**Note**  
-When you enable the Data API, you can also use the query editor for Aurora Serverless\. For more information, see [Using the query editor for Aurora Serverless](query-editor.md)\.
+You can also use Data API to integrate Aurora Serverless with other AWS applications such as AWS Lambda, AWS AppSync, and AWS Cloud9\.  The API provides a more secure way to use AWS Lambda\. It enables you to access your DB cluster without your needing to configure a Lambda function to access resources in a virtual private cloud \(VPC\)\. For more information, see [AWS Lambda](https://aws.amazon.com/lambda/), [AWS AppSync](https://aws.amazon.com/appsync/), and [AWS Cloud9](https://aws.amazon.com/cloud9/)\. 
 
-## Availability of the Data API<a name="data-api.regions"></a>
+You can enable the Data API when you create the Aurora Serverless cluster\. You can also modify the configuration later\. For more information, see [Enabling the Data API](#data-api.enabling)\. 
 
-The Data API is only available for the following Aurora Serverless DB clusters:
-+ Aurora with MySQL version 5\.6 compatibility
-+ Aurora with MySQL version 5\.7 compatibility
-+ Aurora with PostgreSQL version 10\.7 compatibility
+After you enable the Data API, you can also use the query editor for Aurora Serverless\. For more information, see [Using the query editor for Aurora Serverless](query-editor.md)\.
 
-The following table shows the AWS Regions where the Data API is currently available for Aurora Serverless\. Use the HTTPS protocol to access the Data API in these AWS Regions\.
+**Topics**
++ [Data API availability](#data-api.regions)
++ [Authorizing access to the Data API](#data-api.access)
++ [Enabling the Data API](#data-api.enabling)
++ [Creating an Amazon VPC endpoint for the Data API \(AWS PrivateLink\)](#data-api.vpc-endpoint)
++ [Calling the Data API](#data-api.calling)
++ [Using the Java client library for Data API](#data-api.java-client-library)
++ [Troubleshooting Data API issues](#data-api.troubleshooting)
+
+## Data API availability<a name="data-api.regions"></a>
+
+The Data API can be enabled for Aurora Serverless DB clusters using specific Aurora MySQL and Aurora PostgreSQL versions only\. For more information, see [Data API for Aurora Serverless](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API)\. 
+
+The following table shows the AWS Regions where the Data API is currently available for Aurora Serverless\. To access the Data API in these Regions, use the HTTPS protocol\.
 
 
 | Region | Link | 
@@ -36,11 +45,13 @@ The following table shows the AWS Regions where the Data API is currently availa
 
 ## Authorizing access to the Data API<a name="data-api.access"></a>
 
-A user must be authorized to access the Data API\. You can authorize a user to access the Data API by adding the `AmazonRDSDataFullAccess` policy, a predefined AWS Identity and Access Management \(IAM\) policy, to that user\.
+Users can invoke Data API operations only if they are authorized to do so\. You can give a user permission to use the Data API by attaching an AWS Identity and Access Management \(IAM\) policy that defines their privileges\. You can also attach the policy to a role if you're using IAM roles\. An AWS managed policy, `AmazonRDSDataFullAccess`, includes permissions for the RDS Data API\. 
 
-You can also create an IAM policy that grants access to the Data API\. After you create the policy, add it to each user that requires access to the Data API\.
+ The `AmazonRDSDataFullAccess` policy also includes permissions for the user to get the value of a secret from AWS Secrets Manager\. Users need to use Secrets Manager to store secrets that they can use in their calls to the Data API\. Using secrets means that users don't need to include database credentials for the resources that they target in their calls to the Data API\. The Data API transparently calls Secrets Manager, which allows \(or denies\) the user's request for the secret\. For information about setting up secrets to use with the Data API, see [Storing database credentials in AWS Secrets Manager](#data-api.secrets)\. 
 
-The following policy provides the minimum required permissions for a user to access the Data API\.
+ The `AmazonRDSDataFullAccess` policy provides complete access \(through the Data API\) to resources\. You can narrow the scope by defining your own policies that specify the Amazon Resource Name \(ARN\) of a resource\. 
+
+For example, the following policy shows an example of the minimum required permissions for a user to access the Data API for the DB cluster identified by its ARN\. The policy includes the needed permissions to access Secrets Manager and get authorization to the DB instance for the user\. 
 
 ```
 {
@@ -50,12 +61,7 @@ The following policy provides the minimum required permissions for a user to acc
             "Sid": "SecretsManagerDbCredentialsAccess",
             "Effect": "Allow",
             "Action": [
-                "secretsmanager:GetSecretValue",
-                "secretsmanager:PutResourcePolicy",
-                "secretsmanager:PutSecretValue",
-                "secretsmanager:DeleteSecret",
-                "secretsmanager:DescribeSecret",
-                "secretsmanager:TagResource"
+                "secretsmanager:GetSecretValue"
             ],
             "Resource": "arn:aws:secretsmanager:*:*:secret:rds-db-credentials/*"
         },
@@ -63,25 +69,93 @@ The following policy provides the minimum required permissions for a user to acc
             "Sid": "RDSDataServiceAccess",
             "Effect": "Allow",
             "Action": [
-                "secretsmanager:CreateSecret",
-                "secretsmanager:ListSecrets",
-                "secretsmanager:GetRandomPassword",
-                "tag:GetResources",
                 "rds-data:BatchExecuteStatement",
                 "rds-data:BeginTransaction",
                 "rds-data:CommitTransaction",
                 "rds-data:ExecuteStatement",
                 "rds-data:RollbackTransaction"
             ],
-            "Resource": "*"
+            "Resource": "arn:aws:rds:us-east-2:111122223333:cluster:prod"
         }
     ]
 }
 ```
 
-For information about creating an IAM policy, see [Creating IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) in the *IAM User Guide*\.
+We recommend that you use a specific ARN for the "Resources" element in your policy statements \(as shown in the example\) rather than a wildcard \(\*\)\.
 
-For information about adding an IAM policy to a user, see [Adding and removing IAM identity permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) in the *IAM User Guide*\.
+### Working with tag\-based authorization<a name="data-api.access.tag-based-access"></a>
+
+The Data API and Secrets Manager both support tag\-based authorization\. *Tags* are key\-value pairs that label a resource, such as an RDS cluster, with an additional string value, for example: 
++ `environment:production`
++ `environment:development`
+
+You can apply tags to your resources for cost allocation, operations support, access control, and many other reasons\. \(If you don't already have tags on your resources and you want to apply them, you can learn more at [Tagging Amazon RDS resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html)\.\) You can use the tags in your policy statements to limit access to the RDS clusters that are labeled with these tags\. As an example, an Aurora DB cluster might have tags that identify its environment as either production or development\. 
+
+The following example shows how you can use tags in your policy statements\. This statement requires that both the cluster and the secret passed in the Data API request have an `environment:production` tag\. 
+
+Here's how the policy gets applied: When a user makes a call using the Data API, the request is sent to the service\. The Data API first verifies that the cluster ARN passed in the request is tagged with `environment:production`\. It then calls Secrets Manager to retrieve the value of the user's secret in the request\. Secrets Manager also verifies that the user's secret is tagged with `environment:production`\. If so, Data API then uses the retrieved value for the user's DB password\. Finally, if that's also correct, the Data API request is invoked successfully for the user\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "SecretsManagerDbCredentialsAccess",
+            "Effect": "Allow",
+            "Action": [
+                 "secretsmanager:GetSecretValue"
+               ],
+            "Resource": "arn:aws:secretsmanager:*:*:secret:rds-db-credentials/*"
+        },
+        {
+            "Sid": "RDSDataServiceAccess",
+            "Effect": "Allow",
+            "Action": [
+                  "rds-data:*"
+               ],
+            "Resource": "arn:aws:rds:us-east-2:111122223333:cluster:*",
+            "Condition": {
+                    "StringEquals": {
+                        "aws:ResourceTag/environment": [
+                                         "production"
+                                        ]
+                     }
+             }
+         }
+     ]
+}
+```
+
+The example shows separate actions for `rds-data` and `secretsmanager` for the Data API and Secrets Manager\. However, you can combine actions and define tag conditions in many different ways to support your specific use cases\. For more information, see [Using identity\-based policies \(IAM policies\) for Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_identity-based-policies.html#permissions_grant-limited-condition)\. 
+
+ In the "Condition" element of the policy, you can choose tag keys from among the following: 
++  `aws:TagKeys` 
++  `aws:ResourceTag/${TagKey}` 
+
+To learn more about resource tags and how to use `aws:TagKeys`, see [Controlling access to AWS resources using resource tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html#access_tags_control-tag-keys)\.
+
+**Note**  
+ Both the Data API and AWS Secrets Manager authorize users\. If you don't have permissions for all actions defined in a policy, you get an `AccessDeniedException` error\.
+
+### Storing database credentials in AWS Secrets Manager<a name="data-api.secrets"></a>
+
+When you call the Data API, you can pass credentials for the Aurora Serverless DB cluster by using a secret in Secrets Manager\. To pass credentials in this way, you specify the name of the secret or the Amazon Resource Name \(ARN\) of the secret\.
+
+**To store DB cluster credentials in a secret**
+
+1. Use Secrets Manager to create a secret that contains credentials for the Aurora DB cluster\.
+
+   For instructions, see [Creating a Basic Secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html) in the *AWS Secrets Manager User Guide*\.
+
+1. Use the Secrets Manager console to view the details for the secret you created, or run the `aws secretsmanager describe-secret` AWS CLI command\.
+
+   Note the name and ARN of the secret\. You can use them in calls to the Data API\.
+
+For more information about using Secrets Manager, see the [AWS Secrets Manager User Guide](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)\.
+
+To understand how Amazon Aurora manages identity and access management, see [How Amazon Aurora works with IAM](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/security_iam_service-with-iam.html)\. 
+
+For more information about creating an IAM policy, see [Creating IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) in the *IAM User Guide*\. For information about adding an IAM policy to a user, see [Adding and Removing IAM Identity Permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) in the *IAM User Guide*\.
 
 ## Enabling the Data API<a name="data-api.enabling"></a>
 
@@ -131,23 +205,9 @@ You can set the `EnableHttpEndpoint` value using the following API operations:
 +  [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) 
 +  [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) 
 
-## Storing database credentials in AWS Secrets Manager<a name="data-api.secrets"></a>
+## Creating an Amazon VPC endpoint for the Data API \(AWS PrivateLink\)<a name="data-api.vpc-endpoint"></a>
 
-When you call the Data API, you can pass credentials for the Aurora Serverless DB cluster by using a secret in AWS Secrets Manager\. To pass credentials in this way, you specify the name of the secret or the Amazon Resource Name \(ARN\) of the secret\.
-
-**To store DB cluster credentials in a secret**
-
-1. Use AWS Secrets Manager to create a secret that contains credentials for the Aurora DB cluster\.
-
-   For instructions, see [Creating a basic secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html) in the *AWS Secrets Manager User Guide*\.
-
-1. Use the AWS Secrets Manager console to view the details for the secret you created, or run the `aws secretsmanager describe-secret` AWS CLI command\.
-
-   Note the name and ARN of the secret\. You can use them in calls to the Data API\.
-
-## Creating an Amazon VPC endpoint \(AWS PrivateLink\) for the Data API<a name="data-api.vpc-endpoint"></a>
-
-Amazon Virtual Private Cloud \(Amazon VPC\) enables you to launch AWS resources, such as Aurora DB clusters and applications, into a virtual private cloud \(VPC\)\. AWS PrivateLink provides private connectivity between Amazon VPCs and AWS services securely on the Amazon network\. Using AWS PrivateLink, you can create Amazon VPC endpoints, which enable you to connect to services across different accounts and VPCs based on Amazon VPC\. For more information about AWS PrivateLink, see [VPC endpoint services \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html) in the *Amazon Virtual Private Cloud User Guide*\.
+Amazon VPC enables you to launch AWS resources, such as Aurora DB clusters and applications, into a virtual private cloud \(VPC\)\. AWS PrivateLink provides private connectivity between VPCs and AWS services with high security on the Amazon network\. Using AWS PrivateLink, you can create Amazon VPC endpoints, which enable you to connect to services across different accounts and VPCs based on Amazon VPC\. For more information about AWS PrivateLink, see [VPC Endpoint Services \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html) in the *Amazon Virtual Private Cloud User Guide*\.
 
 You can call the Data API with Amazon VPC endpoints\. Using an Amazon VPC endpoint keeps traffic between applications in your Amazon VPC and the Data API in the AWS network, without using public IP addresses\. Amazon VPC endpoints can help you meet compliance and regulatory requirements related to limiting public internet connectivity\. For example, if you use an Amazon VPC endpoint, you can keep traffic between an application running on an Amazon EC2 instance and the Data API in the VPCs that contain them\.
 
@@ -274,7 +334,7 @@ You can call the Data API using the AWS Command Line Interface \(AWS CLI\)\.
 
 The following examples use the AWS CLI for the Data API\. For more information, see [AWS Command Line Interface reference for the Data API](https://docs.aws.amazon.com/cli/latest/reference/rds-data/index.html)\.
 
-In each example, replace the DB cluster ARN with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in AWS Secrets Manager that allows access to the DB cluster\.
+In each example, replace the DB cluster ARN with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in Secrets Manager that allows access to the DB cluster\.
 
 **Note**  
 The AWS CLI can format responses in JSON\.
@@ -606,7 +666,7 @@ You can call the Data API from a Python application\.
 
 The following examples use the AWS SDK for Python \(Boto\)\. For more information about Boto, see the [AWS SDK for Python \(Boto 3\) documentation](http://boto3.amazonaws.com/v1/documentation/api/latest/index.html)\.
 
-In each example, replace the DB cluster's Amazon Resource Name \(ARN\) with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in AWS Secrets Manager that allows access to the DB cluster\.
+In each example, replace the DB cluster's Amazon Resource Name \(ARN\) with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in Secrets Manager that allows access to the DB cluster\.
 
 **Topics**
 + [Running a SQL query](#data-api.calling.python.run-query)
@@ -762,7 +822,7 @@ You can call the Data API from a Java application\.
 
 The following examples use the AWS SDK for Java\. For more information, see the [AWS SDK for Java Developer Guide](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/welcome.html)\.
 
-In each example, replace the DB cluster's Amazon Resource Name \(ARN\) with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in AWS Secrets Manager that allows access to the DB cluster\.
+In each example, replace the DB cluster's Amazon Resource Name \(ARN\) with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in Secrets Manager that allows access to the DB cluster\.
 
 **Topics**
 + [Running a SQL query](#data-api.calling.java.run-query)
@@ -914,7 +974,7 @@ public class BatchExecuteExample {
 
 ## Using the Java client library for Data API<a name="data-api.java-client-library"></a>
 
-You can download and use a Java client library for the Data API\. The Java client library provides an alternative way to use the Data API\. Using this library, you can map your client\-side classes to requests and responses of the Data API\. This mapping support can ease integration with some specific Java types, such as `Date`, `Time`, and `BigDecimal`\.
+You can download and use a Java client library for the Data API\. This Java client library provides an alternative way to use the Data API\. Using this library, you can map your client\-side classes to requests and responses of the Data API\. This mapping support can ease integration with some specific Java types, such as `Date`, `Time`, and `BigDecimal`\.
 
 ### Downloading the Java client library for Data API<a name="data-api.java-client-library.downloading"></a>
 
@@ -988,7 +1048,7 @@ Use the following sections, titled with common error messages, to help troublesh
 
 **Topics**
 + [Transaction <transaction\_ID> is not found](#data-api.troubleshooting.tran-id-not-found)
-+ [Packet for query is too large](#data-api.troubleshooting.packet-too-large)
++ [Packet for query is to large](#data-api.troubleshooting.packet-too-large)
 + [Database response exceeded size limit](#data-api.troubleshooting.response-size-too-large)
 + [HttpEndpoint is not enabled for cluster <cluster\_ID>](#data-api.troubleshooting.http-endpoint-not-enabled)
 
@@ -1004,7 +1064,7 @@ To solve the issue, make sure that your call has a valid transaction ID\. Also m
 
 For information about running transactions, see [Calling the Data API](#data-api.calling)\.
 
-### Packet for query is too large<a name="data-api.troubleshooting.packet-too-large"></a>
+### Packet for query is to large<a name="data-api.troubleshooting.packet-too-large"></a>
 
 In this case, the result set returned for a row was too large\. The Data API size limit is 64 KB per row in the result set returned by the database\.
 

@@ -2,7 +2,7 @@
 
  Amazon Aurora Serverless is an on\-demand, autoscaling configuration for Amazon Aurora\. Unlike Aurora *provisioned DB clusters* for which you manually manage capacity, an *Aurora Serverless DB cluster* is a DB cluster that scales compute capacity up and down based on your application's needs\. Aurora Serverless provides a relatively simple, cost\-effective option for infrequent, intermittent, or unpredictable workloads\. It is cost\-effective because it automatically starts up, scales compute capacity to match your application's usage, and shuts down when it's not in use\. To learn more about pricing, see [Serverless Pricing](https://aws.amazon.com/rds/aurora/pricing/) under **MySQL\-Compatible Edition** or **PostgreSQL\-Compatible Edition** on the Amazon Aurora Pricing page\. 
 
- Aurora Serverless clusters have the same kind of high\-capacity, distributed, and highly available storage volume that is used by provisioned DB clusters\. For more information about Amazon Aurora storage, see [Introducing the Aurora Storage Engine](http://aws.amazon.com/blogs/database/introducing-the-aurora-storage-engine/)\. The cluster volume for an Aurora Serverless cluster is always encrypted\. You can choose the encryption key, but you can't disable encryption\. That means that you can perform the same operations on an Aurora Serverless that are allowed for encrypted snapshots, but you can't perform operations that aren't allowed on such snapshots\. For more information, see [Aurora Serverless and snapshots](aurora-serverless.how-it-works.md#aurora-serverless.snapshots)\. 
+ Aurora Serverless clusters have the same kind of high\-capacity, distributed, and highly available storage volume that is used by provisioned DB clusters\. The cluster volume for an Aurora Serverless cluster is always encrypted\. You can choose the encryption key, but you can't disable encryption\. That means that you can perform the same operations on an Aurora Serverless that are allowed for encrypted snapshots, but you can't perform operations that aren't allowed on such snapshots\. For more information, see [Aurora Serverless and snapshots](aurora-serverless.how-it-works.md#aurora-serverless.snapshots)\. 
 
 **Topics**
 + [Advantages of Aurora Serverless](#aurora-serverless.advantages)
@@ -61,10 +61,7 @@ With Aurora Serverless, you don't have to individually manage database capacity 
 ## Limitations of Aurora Serverless<a name="aurora-serverless.limitations"></a>
 
 The following limitations apply to Aurora Serverless:
-+ Aurora Serverless is currently available only for the following: 
-  + Aurora MySQL version 1, compatible with MySQL version 5\.6\.
-  + Aurora MySQL version 2, compatible with MySQL version 5\.7\. Select Aurora MySQL version 2\.07\.1 to be able to use Aurora Serverless with MySQL 5\.7 compatibility\.
-  + Aurora with PostgreSQL version 10\.7 compatibility\.
++ Aurora Serverless is available in certain AWS Regions and for specific Aurora MySQL and Aurora PostgreSQL versions only\. For more information, see [Aurora Serverless](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless)\. 
 + The port number for connections must be:
   + `3306` for Aurora MySQL
   + `5432` for Aurora PostgreSQL
@@ -73,7 +70,8 @@ The following limitations apply to Aurora Serverless:
 + A DB subnet group used by Aurora Serverless can't have more than one subnet in the same Availability Zone\.
 + Changes to a subnet group used by an Aurora Serverless DB cluster are not applied to the cluster\.
 + A connection to an Aurora Serverless DB cluster is closed automatically if it stays open for longer than one day\.
-+ Binlog\-based replication isn't supported for Aurora Serverless DB clusters\. 
++ Binlog\-based replication isn't supported for Aurora Serverless DB clusters regardless of whether the Aurora MySQL\-based Aurora Serverless DB cluster is the source or the target of the replication\. To replicate data into an Aurora Serverless DB cluster from a MySQL DB instance outside Amazon Aurora such as one running on Amazon EC2, we recommend that you consider using AWS Database Migration Service\. For more information, see [AWS Database Migration Service User Guide](https://docs.aws.amazon.com/dms/latest/userguide/)\. 
++ Aurora Serverless DB clusters using Aurora PostgreSQL don't support outbound communications such as those enabled by Amazon RDS PostgreSQL extensions\. For example, you can't access external data with the `postgres_fdw/dblink` extension\. For more information about Amazon RDS PostgreSQL extensions, see [PostgreSQL on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x)\. 
 + Aurora Serverless doesn't support the following features:
   + Aurora Backtrack
   + Aurora Multi\-Master

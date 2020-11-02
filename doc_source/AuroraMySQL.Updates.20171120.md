@@ -10,7 +10,7 @@ If you have any questions or concerns, AWS Support is available on the community
 
 ## Zero\-downtime patching<a name="AuroraMySQL.Updates.20171120.ZDP"></a>
 
-The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Zero\-downtime patching](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.ZDP)\. 
+The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. For more information about ZDP, see [Using zero\-downtime patching](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.ZDP)\. 
 
 ## Improvements<a name="AuroraMySQL.Updates.20171120.Improvements"></a>
 + Fixed an issue in the adaptive segment selector for a read request that would cause it to choose the same segment twice causing a spike in read latency under certain conditions\.

@@ -3,7 +3,7 @@
 In the following sections, you can find information about Aurora backups and how to restore your Aurora DB cluster using the AWS Management Console\.
 
 **Tip**  
- The Aurora high availability features and automatic backup capabilities help to keep your data safe without requiring extensive setup from you\. Before you implement a backup strategy, learn about the ways that Aurora maintains multiple copies of your data and helps you to access them across multiple DB instances and AWS REgions\. For details, see [High availability for Amazon Aurora](Concepts.AuroraHighAvailability.md)\. 
+ The Aurora high availability features and automatic backup capabilities help to keep your data safe without requiring extensive setup from you\. Before you implement a backup strategy, learn about the ways that Aurora maintains multiple copies of your data and helps you to access them across multiple DB instances and AWS Regions\. For details, see [High availability for Amazon Aurora](Concepts.AuroraHighAvailability.md)\.
 
 ## Backups<a name="Aurora.Managing.Backups.Backup"></a>
 
@@ -13,9 +13,12 @@ If you want to retain a backup beyond the backup retention period, you can also 
 
 **Note**  
 For Amazon Aurora DB clusters, the default backup retention period is one day regardless of how the DB cluster is created\.
-You cannot disable automated backups on Aurora\. The backup retention period for Aurora is managed by the DB cluster\. 
+You can't disable automated backups on Aurora\. The backup retention period for Aurora is managed by the DB cluster\.
 
  Your costs for backup storage depend upon the amount of Aurora backup and snapshot data you keep and how long you keep it\. For information about the storage associated with Aurora backups and snapshots, see [Understanding Aurora backup storage usage](aurora-storage-backup.md)\. For pricing information about Aurora backup storage, see [Amazon RDS for Aurora pricing](https://aws.amazon.com/rds/aurora/pricing)\. After the Aurora cluster associated with a snapshot is deleted, storing that snapshot incurs the standard backup storage charges for Aurora\. 
+
+**Note**  
+You can also use AWS Backup to manage backups of Amazon Aurora DB clusters\. Backups managed by AWS Backup are considered manual DB cluster snapshots, but don't count toward the DB cluster snapshot quota for Aurora\. Backups that were created with AWS Backup have names ending in `awsbackup:AWS-Backup-job-number`\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
 ## Restoring data<a name="Aurora.Managing.Backups.Restore"></a>
 

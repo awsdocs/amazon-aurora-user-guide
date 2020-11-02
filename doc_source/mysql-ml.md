@@ -1,17 +1,17 @@
 # Using machine learning \(ML\) with Aurora MySQL<a name="mysql-ml"></a>
 
- Aurora machine learning enables you to add machine learning\-based predictions to database applications using the SQL language\. Aurora machine learning makes use of a highly optimized integration between the Aurora database and the AWS machine learning \(ML\) services SageMaker and Amazon Comprehend\. 
+Aurora machine learning enables you to add machine learning\-based predictions to database applications using the SQL language\. Aurora machine learning makes use of a highly optimized integration between the Aurora database and AWS machine learning \(ML\) services SageMaker and Amazon Comprehend\. 
 
  Benefits of Aurora Machine Learning include the following: 
 +  You can add ML\-based predictions to your existing database applications\. You don't need to build custom integrations or learn separate tools\. You can embed machine learning processing directly into your SQL query as calls to stored functions\. 
 +  The ML integration is a fast way to enable ML services to work with transactional data\. You don't have to move the data out of the database to perform the machine learning operations\. You don't have to convert or reimport the results of the machine learning operations to use them in your database application\. 
 +  You can use your existing governance policies to control who has access to the underlying data and to the generated insights\. 
 
- AWS ML Services are managed services that are set up and run in their own production environments\. Currently, Aurora Machine Learning integrates with Amazon Comprehend for sentiment analysis and SageMaker for a wide variety of ML algorithms\. 
+AWS ML Services are managed services that are set up and run in their own production environments\. Currently, Aurora Machine Learning integrates with Amazon Comprehend for sentiment analysis and SageMaker for a wide variety of ML algorithms\. 
 
- For general information about Amazon Comprehend, see [Amazon Comprehend](https://aws.amazon.com/comprehend)\. For details about using Aurora and Amazon Comprehend together, see [Using Amazon Comprehend for sentiment detection](#using-amazon-comprehend-for-sentiment-detection)\. 
+For details about using Aurora and Amazon Comprehend together, see [Using Amazon Comprehend for sentiment detection](#using-amazon-comprehend-for-sentiment-detection)\. For general information about Amazon Comprehend, see [Amazon Comprehend](https://aws.amazon.com/comprehend)\. 
 
- For general information about SageMaker, see [SageMaker](https://aws.amazon.com/sagemaker)\. For details about using Aurora and SageMaker together, see [Using SageMaker to run your own ML models](#using-amazon-sagemaker-to-run-your-own-ml-models)\. 
+For details about using Aurora and SageMaker together, see [Using SageMaker to run your own ML models](#using-amazon-sagemaker-to-run-your-own-ml-models)\. For general information about SageMaker, see [SageMaker](https://aws.amazon.com/sagemaker)\. 
 
 **Topics**
 + [Prerequisites for Aurora Machine Learning](#aurora-ml-prereqs)
@@ -25,7 +25,9 @@
 
 ## Prerequisites for Aurora Machine Learning<a name="aurora-ml-prereqs"></a>
 
- Currently, Aurora machine learning requires that the cluster use the Aurora MySQL database engine\. This feature is available on any Aurora cluster running Aurora MySQL 2\.07\.0 and higher\. You can upgrade an older Aurora cluster to one of these releases and use this feature with that cluster\. 
+Aurora machine learning is available for any Aurora cluster running Aurora MySQL 2\.07\.0 and newer versions in AWS Regions that support Aurora machine learning\. You can upgrade an Aurora cluster running an older version of Aurora MySQL to a newer version if you want to use Aurora machine learning with that cluster\. For more information, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\. 
+
+For more information about Regions and Aurora version availability, see [Aurora machine learning](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML)\. 
 
 ## Enabling Aurora Machine Learning<a name="aurora-ml-enabling"></a>
 
@@ -42,7 +44,7 @@
 
 ### Setting up IAM access to Amazon Comprehend and SageMaker<a name="setting-up-access-to-amazon-comprehend-and-amazon-sagemaker"></a>
 
- Before you can access SageMaker and Amazon Comprehend services, enable the Aurora MySQL cluster to access the AWS ML services\. For your Aurora MySQL DB cluster to access AWS ML services on your behalf, create and configure AWS Identity and Access Management \(IAM\) roles\. These roles authorize the users of your Aurora MySQL database to access AWS ML services\. 
+ Before you can access SageMaker and Amazon Comprehend services, enable the Aurora MySQL cluster to access AWS ML services\. For your Aurora MySQL DB cluster to access AWS ML services on your behalf, create and configure AWS Identity and Access Management \(IAM\) roles\. These roles authorize the users of your Aurora MySQL database to access AWS ML services\. 
 
  When you use the AWS Management Console, AWS does the IAM setup for you automatically\. You can skip the following information and follow the procedure in [Connecting an Aurora DB cluster to Amazon S3, SageMaker, or Amazon Comprehend using the console](#aurora-ml-console)\. 
 
@@ -50,7 +52,7 @@
 
 1.  Create an IAM policy to specify which SageMaker endpoints tan be invoked by your Aurora MySQL cluster or to enable access to Amazon Comprehend\. 
 
-1.  Create an IAM role to permit your Aurora MySQL database cluster to access AWS ML services\. The IAM Policy created above is attached to the IAM role\. 
+1.  Create an IAM role to permit your Aurora MySQL database cluster to access AWS ML services\. The IAM policy created above is attached to the IAM role\. 
 
 1.  To permit the Aurora MySQL database cluster to access AWS ML services, you associate the IAM role that you created above to the database cluster\. 
 
@@ -72,9 +74,7 @@
 
 1.  Choose the **Connectivity & security** tab\. 
 
-1.  Choose **Select a service to connect to this cluster** in the **Manage IAM roles** section\. 
-
-1.  Choose the service that you want to connect to from the dropdown list\. 
+1.  Choose **Select a service to connect to this cluster** in the **Manage IAM roles** section\., and choose the service that you want to connect to: 
    +  **Amazon S3** 
    +  **Amazon Comprehend** 
    +  **SageMaker** 
@@ -85,12 +85,12 @@
    +  For SageMaker, enter the Amazon Resource Name \(ARN\) of an SageMaker endpoint\. For details about what the endpoint represents, see [Deploy a model on Amazon SageMaker hosting services](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-hosting.html)\. 
 
       In the navigation pane of the [SageMaker console](https://console.aws.amazon.com/sagemaker/home), choose **Endpoints** and copy the ARN of the endpoint you want to use\. 
-   +  For Amazon Comprehend, you don't specify any additional parameter\. 
+   +  For Amazon Comprehend, don't specify any additional parameter\. 
    +  For Amazon S3, enter the ARN of an Amazon S3 bucket to use\. 
 
-      The format of an Amazon S3 bucket ARN is `arn:aws:s3:::bucket_name`\. Ensure that the Amazon S3 bucket you use is set up with the requirements for training SageMaker models\. When you train a model, your Aurora DB cluster requires permission to export data to the Amazon S3 bucket, and also to import data from the bucket\. 
+      The format of an Amazon S3 bucket ARN is `arn:aws:s3:::bucket_name`\. Ensure that the Amazon S3 bucket that you use is set up with the requirements for training SageMaker models\. When you train a model, your Aurora DB cluster requires permission to export data to the Amazon S3 bucket, and also to import data from the bucket\. 
 
-      For more about an Amazon S3 bucket ARN, see [Specifying resources in a policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html) in the Amazon Simple Storage Service Developer Guide\. For more about using an Amazon S3 bucket with SageMaker, see [Step 1: Create an Amazon Amazon S3 bucket](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-config-permissions.html) in the Amazon SageMaker Developer Guide\. 
+      To learn more about Amazon S3 bucket ARNs, see [Specifying resources in a policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html) in the *Amazon Simple Storage Service Developer Guide*\. For more about using an Amazon S3 bucket with SageMaker, see [Step 1: Create an Amazon Amazon S3 bucket](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-config-permissions.html) in the *Amazon SageMaker Developer Guide*\. 
 
 1.  Choose **Connect service**\. 
 

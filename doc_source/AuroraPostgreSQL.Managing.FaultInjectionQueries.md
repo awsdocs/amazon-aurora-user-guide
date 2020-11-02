@@ -90,7 +90,7 @@ During a disk failure simulation, the Aurora PostgreSQL DB cluster randomly mark
 
 This fault injection query takes the following parameters:
 + **`percentage_of_failure`** — The percentage of the disk to mark as faulting during the failure event\. This value can be a double between 0 and 100\. If you specify 0, then none of the disk is marked as faulting\. If you specify 100, then the entire disk is marked as faulting\.
-+ **`index`** — A specific logical block of data in which to simulate the failure event\. If you exceed the range of available logical blocks or starage nodes data, you will receive an error that tells you the maximum index value that you can specify\. To avoid this error, see [Displaying volume status for an Aurora DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)\.
++ **`index`** — A specific logical block of data in which to simulate the failure event\. If you exceed the range of available logical blocks or storage nodes data, you will receive an error that tells you the maximum index value that you can specify\. To avoid this error, see [Displaying volume status for an Aurora DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)\.
 + **`is_disk`** — Indicates whether the injection failure is to a logical block or a storage node\. Specifying true means injection failures are to a logical block\. Specifying false means injection failures are to a storage node\.
 + **`quantity`** — The amount of time to simulate the Aurora Replica failure\. The interval is in seconds\. For example, if the value is 20 the simulation will run for 20 seconds\.
 

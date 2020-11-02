@@ -9,33 +9,30 @@ The following policy adds the permissions required by Aurora to access Amazon Cl
     "Version": "2012-10-17",
     "Statement": [
         {
+            "Sid": "EnableCreationAndManagementOfRDSCloudwatchLogGroupsAndStreams",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
+                "logs:PutRetentionPolicy",
+                "logs:CreateLogGroup"
+            ],
+            "Resource": "arn:aws:logs:*:*:log-group:log-group:/aws/rds/*"
+        },
+        {
             "Sid": "EnableCreationAndManagementOfRDSCloudwatchLogEvents",
             "Effect": "Allow",
             "Action": [
                 "logs:GetLogEvents",
                 "logs:PutLogEvents"
             ],
-            "Resource": "arn:aws:logs:*:*:log-group:/aws/rds/*:log-stream:*"
-        },
-        {
-            "Sid": "EnableCreationAndManagementOfRDSCloudwatchLogStreams",
-            "Effect": "Allow",
-            "Action": [
-                "logs:CreateLogStream",
-                "logs:DescribeLogStreams",
-                "logs:PutRetentionPolicy"
-            ],
-            "Resource": "arn:aws:logs:*:*:log-group:/aws/rds/*"
-        },
-        {
-            "Sid": "EnableCreationAndManagementOfRDSCloudwatchLogGroups",
-            "Effect": "Allow",
-            "Action": "logs:CreateLogGroup",
-            "Resource": "*"
+            "Resource": "arn:aws:logs:*:*:log-group:log-group:/aws/rds/*:log-stream:*"
         }
     ]
 }
 ```
+
+You can modify the ARNs in the policy to restrict access to a specific AWS Region and account\.
 
 You can use the following steps to create an IAM policy that provides the minimum required permissions for Aurora to access CloudWatch Logs on your behalf\. To allow Aurora full access to CloudWatch Logs, you can skip these steps and use the `CloudWatchLogsFullAccess` predefined IAM policy instead of creating your own\. For more information, see [Using identity\-based policies \(IAM policies\) for CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-identity-based-access-control-cwl.html#managed-policies-cwl) in the* Amazon CloudWatch User Guide\.*
 

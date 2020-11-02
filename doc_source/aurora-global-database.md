@@ -36,26 +36,8 @@ Aurora global databases can provide you with the following advantages:
 ## Limitations of Aurora global databases<a name="aurora-global-database.limitations"></a>
 
  The following limitations currently apply to Aurora global databases:
-+  You can use Aurora global databases with the following Aurora versions:
-  + **Aurora MySQL with MySQL 5\.6 compatibility** – Version 5\.6\.10a or version 1\.22 or later
-  + **Aurora MySQL with MySQL 5\.7 compatibility** – Version 2\.07 or later\.
-  + **Aurora PostgreSQL with PostgreSQL compatibility** – Versions 10\.11, 10\.12, 11\.7 and later\. 
++ Aurora global databases are available in certain AWS Regions and for specific Aurora MySQL and Aurora PostgreSQL versions only\. For more information, see [Aurora global databases](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.GlobalDatabase)\. 
 +  You have a choice of using `db.r4` or `db.r5` instance classes for an Aurora global database\. You can't use `db.t2` or `db.t3` instance classes\.
-+ Aurora global databases are available in the following AWS Regions:
-  + US East \(N\. Virginia\)
-  + US East \(Ohio\)
-  + US West \(N\. California\)
-  + US West \(Oregon\)
-  + Europe \(Ireland\)
-  + Europe \(London\)
-  + Europe \(Paris\)
-  + Europe \(Frankfurt\)
-  + Asia Pacific \(Mumbai\)
-  + Asia Pacific \(Singapore\)
-  + Asia Pacific \(Sydney\)
-  + Asia Pacific \(Tokyo\)
-  + Asia Pacific \(Seoul\)
-  + Canada \(Central\)
 +  A secondary cluster must be in a different AWS Region than the primary cluster\. 
 + To upgrade your global database clusters, make sure to upgrade the secondary clusters before the primary cluster\. For more information about upgrading, see [Upgrading and patching Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Patching.md) or [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\. 
 + If the primary AWS Region's DB instance restarts or fails over, any Aurora Replicas in that Region also restart\. The cluster is then unavailable until all replicas are back in sync with the writer of the primary DB cluster\. This behavior is documented more fully in [Replication with Amazon Aurora](Aurora.Replication.md) and [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)\. Be sure you understand the possible impacts discussed in those sections before making changes to your primary DB cluster\. For more information about Aurora global database failover in general and how to plan for and recover from outages, see [Managing an Aurora global database](aurora-global-database-managing.md)\. 

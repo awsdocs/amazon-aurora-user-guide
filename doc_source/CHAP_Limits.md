@@ -29,7 +29,7 @@ The following table lists the resources and their quotas per AWS Region\.
 | Event subscriptions | 20 | 
 | AWS Identity and Access Management \(IAM\) roles per DB cluster | 5 | 
 | IAM roles per DB instance | 5 | 
-| Manual cluster snapshots | 100 | 
+| Manual DB cluster snapshots | 100 | 
 | Parameter groups | 50 | 
 | Proxies | 20 | 
 | Reserved DB instances | 40 | 
@@ -41,7 +41,7 @@ The following table lists the resources and their quotas per AWS Region\.
 **Note**  
 By default, you can have up to a total of 40 DB instances\. RDS DB instances, Aurora DB instances, Amazon Neptune instances, and Amazon DocumentDB instances apply to this quota\.  
 If your application requires more DB instances, you can request additional DB instances by opening the [Service Quotas console](https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/dashboard)\. In the navigation pane, choose **AWS services**\. Choose **Amazon Relational Database Service \(Amazon RDS\)**, choose a quota, and follow the directions to request a quota increase\. For more information, see [Requesting a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-increase.html) in the *Service Quotas User Guide*\.  
-Backups managed by AWS Backup are considered manual cluster snapshots for the manual cluster snapshots quota\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
+Backups managed by AWS Backup are considered manual DB cluster snapshots, but don't count toward the manual cluster snapshot quota\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
 ## Naming constraints in Amazon Aurora<a name="RDS_Limits.Constraints"></a>
 

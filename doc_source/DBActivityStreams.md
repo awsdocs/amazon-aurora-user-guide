@@ -1075,6 +1075,7 @@ import base64
 import json
 import zlib
 import aws_encryption_sdk
+from aws_encryption_sdk import CommitmentPolicy
 from aws_encryption_sdk.internal.crypto import WrappingKey
 from aws_encryption_sdk.key_providers.raw import RawMasterKeyProvider
 from aws_encryption_sdk.identifiers import WrappingAlgorithm, EncryptionKeyType
@@ -1084,6 +1085,7 @@ REGION_NAME = '<region>'                    # us-east-1
 RESOURCE_ID = '<external-resource-id>'      # cluster-ABCD123456
 STREAM_NAME = 'aws-rds-das-' + RESOURCE_ID  # aws-rds-das-cluster-ABCD123456
 
+enc_client = aws_encryption_sdk.EncryptionSDKClient(commitment_policy=CommitmentPolicy.REQUIRE_ENCRYPT_ALLOW_DECRYPT)
 
 class MyRawMasterKeyProvider(RawMasterKeyProvider):
     provider_id = "BC"
@@ -1104,9 +1106,9 @@ class MyRawMasterKeyProvider(RawMasterKeyProvider):
 def decrypt_payload(payload, data_key):
     my_key_provider = MyRawMasterKeyProvider(data_key)
     my_key_provider.add_master_key("DataKey")
-    decrypted_plaintext, header = aws_encryption_sdk.decrypt(
+    decrypted_plaintext, header = enc_client.decrypt(
         source=payload,
-        materials_manager=aws_encryption_sdk.DefaultCryptoMaterialsManager(master_key_provider=my_key_provider))
+        materials_manager=aws_encryption_sdk.materials_managers.default.DefaultCryptoMaterialsManager(master_key_provider=my_key_provider))
     return decrypted_plaintext
 
 

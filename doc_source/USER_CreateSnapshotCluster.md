@@ -6,10 +6,6 @@ Unlike automated backups, manual snapshots aren't subject to the backup retentio
 
 For very long\-term backups, we recommend exporting snapshot data to Amazon S3\. If the major version of your DB engine is no longer supported, you can't restore to that version from a snapshot\. For more information, see [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)\.
 
-**Note**  
- Amazon bills you based upon the amount of Aurora backup and snapshot data you keep and the period of time that you keep it\. For information about the storage associated with Aurora backups and snapshots, see [Understanding Aurora backup storage usage](aurora-storage-backup.md)\. For pricing information about Aurora storage, see [Amazon RDS for Aurora pricing](https://aws.amazon.com/rds/aurora/pricing)\.   
-You can also use AWS Backup to manage backups of Aurora DB clusters\. Backups managed by AWS Backup are considered manual cluster snapshots for the manual cluster snapshots quota\. Backups that were created with AWS Backup have names ending in `awsbackup:AWS-Backup-job-number`\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
-
 You can create a DB cluster snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 
 ## Console<a name="USER_CreateSnapshotCluster.CON"></a>

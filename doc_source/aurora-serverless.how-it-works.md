@@ -45,7 +45,7 @@ A *scaling point* is a point in time at which the database can safely initiate t
 + Long\-running queries or transactions are in progress
 + Temporary tables or table locks are in use
 
-In these cases, Aurora Serverless continues to try to find a scaling point so that it can initiate the scaling operation\. It does this for as long as it determines that the DB cluster should be scaled\. 
+If Aurora Serverless can't find a scaling point, its behavior depends on the DB cluster's timeout action setting\. Aurora Serverless can force the change, or it can keep its original capacity if Aurora Serverless can't find a scaling point before timing out\. For more information, see [Timeout action for capacity changes](#aurora-serverless.how-it-works.timeout-action)\. 
 
 You can see scaling events in the details for a DB cluster in the AWS Management Console\. You can also monitor the current capacity allocated to the DB cluster by using the `ServerlessDatabaseCapacity` metric for Amazon CloudWatch\. 
 
@@ -53,7 +53,7 @@ During autoscaling, Aurora Serverless resets the `EngineUptime` metric\. The res
 
 ## Automatic pause and resume for Aurora Serverless<a name="aurora-serverless.how-it-works.pause-resume"></a>
 
-You can choose to pause your Aurora Serverless DB cluster after a given amount of time with no activity\. You specify the amount of time with no activity before the DB cluster is paused\. The default is five minutes\. You can also disable pausing the DB cluster\.
+You can choose to pause your Aurora Serverless DB cluster after a given amount of time with no activity\. You specify the amount of time with no activity before the DB cluster is paused\. When you select this option, the default inactivity time is five minutes, but you can change this value\. This is an optional setting\. 
 
 When the DB cluster is paused, no compute or memory activity occurs, and you are charged only for storage\. If database connections are requested when an Aurora Serverless DB cluster is paused, the DB cluster automatically resumes and services the connection requests\.
 
@@ -64,14 +64,44 @@ If a DB cluster is paused for more than seven days, the DB cluster might be back
 
 ## Timeout action for capacity changes<a name="aurora-serverless.how-it-works.timeout-action"></a>
 
-You can change the capacity of an Aurora Serverless DB cluster\. When you change the capacity, Aurora Serverless tries to find a scaling point for the change\. If Aurora Serverless can't find a scaling point, it times out\. You can specify one of the following actions to take when a capacity change times out:
-+ **Force the capacity change** – Set the capacity to the specified value as soon as possible\.
-+ **Roll back the capacity change** – Cancel the capacity change\.
+When your Aurora Serverless DB cluster needs to scale its capacity for the current workload, it first tries to find a scaling point for making the change\. The scaling point is the point at which your Aurora Serverless DB cluster can safely start scaling to the resized capacity, without disrupting processing\. To learn more about how Aurora Serverless finds a scaling point, see [Autoscaling for Aurora Serverless](#aurora-serverless.how-it-works.auto-scaling)\.
+
+ If your Aurora Serverless DB cluster can't find a scaling point within 5 minutes, it times out\. Aurora Serverless then takes the appropriate action based on your Aurora Serverless DB cluster's `TimeoutAction` setting, as follows: 
++ **Force the capacity change** – If your Aurora Serverless DB cluster can't find a scaling point before timing out, the `TimeoutAction` value of `ForceApplyCapacityChange` causes Aurora Serverless to force the change\. If Aurora Serverless is processing a transaction, the transaction is interrupted and displays the following message:
+
+  `ERROR 1105 (HY000): The last transaction was aborted due to Seamless Scaling. Please retry.`
+
+  You can resubmit the transaction as soon as your Aurora Serverless DB cluster is available\.
++ **Roll back the capacity change** – If your Aurora Serverless DB cluster can't find the scaling point before timing out, the `TimeoutAction` value of `RollbackCapacityChange` causes Aurora Serverless to stop looking for a scaling point\. Instead, your Aurora Serverless DB cluster remains at its original capacity\. 
+
+You choose the timeout action when you create your Aurora Serverless DB using the AWS Management Console or the AWS CLI\. For more information, see [Creating an Aurora Serverless DB cluster](aurora-serverless.create.md)\. 
 
 **Important**  
-Note that for clusters with many concurrent connections, specifying **Force the capacity change** can result in dropping any connection—not only those with long\-running transactions\.
+ For clusters with many concurrent connections, the `ForceApplyCapacityChange` setting can result in dropped connections for long\-running queries and temporary tables\. We recommend you choose `ForceApplyCapacityChange` only if appropriate for your use case\. 
 
-For information about changing the capacity, see [Modifying an Aurora Serverless DB cluster](aurora-serverless.modifying.md)\.
+You can also modify the timeout action and other capacity settings at any time\. For more information, see [Modifying an Aurora Serverless DB cluster](aurora-serverless.modifying.md)\. 
+
+For an Aurora Serverless DB cluster that's already been configured, you can quickly obtain the settings by using the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) AWS CLI command\. For example, if you have an Aurora Serverless DB cluster running in the US\-East \(Northern Virginia\) Region, you could run the following command:
+
+```
+$ aws rds describe-db-clusters --region us-east-1
+```
+
+You'll see all details for the DB clusters associated with your AWS account displayed, including the `ScalingConfigurationInfo` as shown in the following output extract:
+
+```
+...
+"ScalingConfigurationInfo": {
+   "MinCapacity": 2,
+   "MaxCapacity": 32,
+   "AutoPause": true,
+   "SecondsUntilAutoPause": 1200,
+   "TimeoutAction": "RollbackCapacityChange"
+ },
+...
+```
+
+ As shown in the example, the Aurora Serverless DB cluster as configured won't force the cluster to a new scaling point\. 
 
 ## Aurora Serverless and parameter groups<a name="aurora-serverless.parameter-groups"></a>
 
@@ -166,9 +196,9 @@ With an Aurora MySQL Serverless DB cluster, modifications to parameter values on
 
 Aurora Serverless performs regular maintenance so that your DB cluster has the latest features, fixes, and security updates\. Aurora Serverless performs maintenance in a non\-disruptive manner whenever possible\.
 
-To apply maintenance, Aurora Serverless must find a scaling point\. For more information about scaling points, see [Autoscaling for Aurora Serverless](#aurora-serverless.how-it-works.auto-scaling)\.
+To apply maintenance, Aurora Serverless looks for a scaling point\. For more information about scaling points, see [Autoscaling for Aurora Serverless](#aurora-serverless.how-it-works.auto-scaling)\.
 
-If there is maintenance required for an Aurora Serverless DB cluster, the DB cluster attempts to find a scaling point to apply the maintenance for seven days\. After each day that no scaling point can be found, Aurora Serverless creates a cluster event to notify you that it must scale to apply maintenance\. The notification includes the date at which scaling will be applied with the `ForceApplyCapacityChange` timeout action to apply the maintenance, regardless of the `ScalingConfiguration` settings\. If your DB cluster has `RollbackCapacityChange` set as the `TimeoutAction` for its `ScalingConfiguration`, Aurora Serverless tries to apply maintenance using the `RollbackCapacityChange` timeout action prior to the time included in the event\. If your DB cluster has `ForceApplyCapacityChange` set as the `TimeoutAction` for its `ScalingConfiguration`, then scaling to apply maintenance uses it for all attempts\. When `ForceApplyCapacityChange` is used, it might interrupt your workload\. For more information, see [Timeout action for capacity changes](#aurora-serverless.how-it-works.timeout-action)\.
+If maintenance is required for your Aurora Serverless DB cluster, the DB cluster attempts to find a scaling point for up to seven days\. After each day that your Aurora Serverless DB cluster can't find a scaling point, it creates a cluster event notify you that it must scale to apply maintenance\.  The notification includes the date when scaling will be applied with the `ForceApplyCapacityChange` timeout action to apply the maintenance, regardless of the `ScalingConfiguration` settings\. If your DB cluster has `RollbackCapacityChange` set as the `TimeoutAction` for its `ScalingConfiguration`, Aurora Serverless tries to apply maintenance using the `RollbackCapacityChange` timeout action prior to the time included in the event\. If your DB cluster has `ForceApplyCapacityChange` set as the `TimeoutAction` for its `ScalingConfiguration`, then scaling to apply maintenance uses it for all attempts\. When `ForceApplyCapacityChange` is used, it might interrupt your workload\.  For more information, see [Timeout action for capacity changes](#aurora-serverless.how-it-works.timeout-action)\.
 
 **Note**  
 Maintenance windows don't apply to Aurora Serverless\.

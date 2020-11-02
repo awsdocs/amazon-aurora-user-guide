@@ -17,6 +17,7 @@ For general information about SageMaker, see [SageMaker](https://aws.amazon.com/
 Aurora machine learning for PostgreSQL connects an Aurora cluster to SageMaker or Amazon Comprehend services only within the same AWS Region\. 
 
 **Topics**
++ [Prerequisites for Aurora machine learning](#postgresql-ml-prereqs)
 + [Enabling Aurora Machine Learning](#postgresql-ml-enabling)
 + [Using Amazon Comprehend for natural language processing](#postgresql-using-comprehend)
 + [Exporting data to Amazon S3 for SageMaker model training](#postgresql-export-to-s3)
@@ -26,13 +27,13 @@ Aurora machine learning for PostgreSQL connects an Aurora cluster to SageMaker o
 + [PostgreSQL function reference for Aurora Machine Learning](#postgresql-ml-functions)
 + [Manually setting up IAM roles for SageMaker and Amazon Comprehend using the AWS CLI](#postgresql-ml-connect-cli)
 
+## Prerequisites for Aurora machine learning<a name="postgresql-ml-prereqs"></a>
+
+Aurora machine learning is available on any Aurora cluster running Aurora PostgreSQL 10\.11, 11\.6, and newer versions in AWS Regions that support Aurora machine learning\. You can upgrade an Aurora cluster running to an older version of Aurora PostgreSQL to a newer version if you want to use Aurora machine learning with that cluster\. For more information, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
+
+For more information about Regions and Aurora version availability, see [Aurora machine learning](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML)\. 
+
 ## Enabling Aurora Machine Learning<a name="postgresql-ml-enabling"></a>
-
-Aurora machine learning is available for the following Aurora PostgreSQL versions:
-+ Version 2\.4 of Aurora with PostgreSQL compatibility running the PostgreSQL engine version 10\.11\.
-+ Version 3\.1 and higher of Aurora with PostgreSQL compatibility running the PostgreSQL engine version 11\.6 and higher
-
-For information about upgrading an older Aurora cluster, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
 Enabling the ML capabilities involves the following steps\. 
 

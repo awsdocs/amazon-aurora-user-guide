@@ -5,7 +5,7 @@ You can configure an Aurora Serverless DB cluster when you restore a provisioned
 When you restore a snapshot to an Aurora Serverless DB cluster, you can set the following specific values:
 + **Minimum Aurora capacity unit** – Aurora Serverless can reduce capacity down to this capacity unit\.
 + **Maximum Aurora capacity unit** – Aurora Serverless can increase capacity up to this capacity unit\.
-+ **Timeout action** – The action to take when a capacity modification times out because it can't find a scaling point\. Aurora can force the capacity change to set the capacity to the specified value as soon as possible\. Or, it can roll back the capacity change to cancel it\. For more information, see [Timeout action for capacity changes](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.timeout-action)\.
++ **Timeout action** – The action to take when a capacity modification times out because it can't find a scaling point\. Aurora Serverless DB cluster can force your DB cluster to the new capacity settings if set the **Force scaling the capacity to the specified values\.\.\. ** option\. Or, it can roll back the capacity change to cancel it if you don't choose the option\. For more information, see [Timeout action for capacity changes](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.timeout-action)\.
 + **Pause after inactivity** – The amount of time with no database traffic to scale to zero processing capacity\. When database traffic resumes, Aurora automatically resumes processing capacity and scales to handle the traffic\.
 
 For general information about restoring a DB cluster from a snapshot, see [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md)\.

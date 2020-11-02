@@ -1,17 +1,21 @@
 # Creating an Aurora Serverless DB cluster<a name="aurora-serverless.create"></a>
 
-When you create an Aurora Serverless DB cluster, you can set the minimum and maximum capacity for the cluster\. Each capacity unit is equivalent to a specific compute and memory configuration\. Aurora Serverless automatically creates scaling rules for thresholds for CPU utilization, connections, and available memory\. You can also set whether Aurora Serverless pauses the database when there's no activity and then resumes when activity begins again\.
+When you create an Aurora Serverless DB cluster, you can set the minimum and maximum capacity for the cluster\. A capacity unit is equivalent to a specific compute and memory configuration\. Aurora Serverless creates scaling rules for thresholds for CPU utilization, connections, and available memory and seamlessly scales to a range of capacity units as needed for your applications\. For more information see [Aurora Serverless architecture](aurora-serverless.how-it-works.md#aurora-serverless.architecture)\.
 
-You can set the following specific values:
+You can set the following specific values for your Aurora Serverless DB cluster:
 + **Minimum Aurora capacity unit** – Aurora Serverless can reduce capacity down to this capacity unit\.
 + **Maximum Aurora capacity unit** – Aurora Serverless can increase capacity up to this capacity unit\.
-+ **Timeout action** – The action to take when a capacity modification times out because it can't find a scaling point\. Aurora can force the capacity change to set the capacity to the specified value as soon as possible\. Or, it can roll back the capacity change to cancel it\. For more information, see [Timeout action for capacity changes](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.timeout-action)\.
-+ **Pause after inactivity** – The amount of time with no database traffic to scale to zero processing capacity\. When database traffic resumes, Aurora automatically resumes processing capacity and scales to handle the traffic\.
 
-Before you can create an Aurora Serverless DB cluster, you need to have an AWS account and you need to have completed the setup tasks for working with Amazon Aurora\. For more information, see [Setting up your environment for Amazon Aurora](CHAP_SettingUp_Aurora.md)\. You also need to complete other preliminary steps for creating any Aurora DB cluster\. To learn more, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\. 
+You can also choose the following optional scaling configuration options: 
++ **Force scaling the capacity to the specified values when the timeout is reached** – You can choose this setting if you want Aurora Serverless to force Aurora Serverless to scale even if it can't find a scaling point before it times out\. If you want Aurora Serverless to cancel \(roll back\) capacity changes if it's unable to find a scaling point, don't choose this setting\. For more information, see [Timeout action for capacity changes](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.timeout-action)\.
++ **Pause compute capacity after consecutive minutes of inactivity** – You can choose this setting if you want Aurora Serverless to scale to zero when there's no activity on your DB cluster for an amount of time you specify\. With this setting enabled, your Aurora Serverless DB cluster automatically resumes processing and scales to the necessary capacity to handle the workload when database traffic resumes\. 
+
+Before you can create an Aurora Serverless DB cluster, you need an AWS account\. You also need to have completed the setup tasks for working with Amazon Aurora\. For more information, see [Setting up your environment for Amazon Aurora](CHAP_SettingUp_Aurora.md)\. You also need to complete other preliminary steps for creating any Aurora DB cluster\. To learn more, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\. 
+
+ Aurora Serverless is available in certain AWS Regions only\. Currently, Aurora Serverless requires Aurora\(MySQL\)\-5\.6\.10a, Aurora \(MySQL 5\.7\) 2\.07\.1, or Aurora PostgreSQL \(compatible with PostgreSQL 10\.7\)\. 
 
 **Note**  
- Aurora Serverless is available in certain AWS Regions only\. Currently, Aurora Serverless requires Aurora \(MySQL\) 5\.6\.10a, Aurora \(MySQL 5\.7\) 2\.07\.1, or Aurora PostgreSQL \(compatible with PostgreSQL 10\.7\)\. 
+The cluster volume for an Aurora Serverless cluster is always encrypted\. That means that when you create your Aurora Serverless DB cluster, you can't turn off encryption\. However, you can choose your own encryption key during the process of creating your Aurora Serverless DB cluster as outlined in the following steps\. If you don't want to use your own key, one is generated for you\. 
 
 You can create an Aurora Serverless DB cluster with the AWS Management Console, the AWS CLI, or the RDS API\.
 
@@ -37,7 +41,7 @@ You can configure the scaling configuration of the Aurora Serverless DB cluster 
 
 ![\[Setting capacity for an Aurora MySQL Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-capacity.png)
 
-You can also enable the Data API for your Aurora MySQL Serverless DB cluster\. Select the **Data API** checkbox in the **Connectivity** section of the Create database page\. See [Using the Data API for Aurora Serverless](data-api.md) for more information about the Data API\. 
+You can also enable the Data API for your Aurora MySQL Serverless DB cluster\. Select the **Data API** checkbox in the **Connectivity** section of the Create database page\. To learn more about the Data API, see [Using the Data API for Aurora Serverless](data-api.md)\. 
 
 ### Example for Aurora PostgreSQL<a name="aurora-serverless.create.console.PostgreSQL"></a>
 
