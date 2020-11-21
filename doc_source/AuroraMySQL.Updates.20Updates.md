@@ -2,9 +2,11 @@
 
 The following are Amazon Aurora 2\.0 database engine updates:<a name="aurora_2x_updates"></a>
 + [Aurora MySQL database engine updates 2020\-09\-17 \(version 2\.09\.0\)](AuroraMySQL.Updates.2090.md)
++ [Aurora MySQL database engine updates 2020\-11\-12 \(version 2\.08\.3\)](AuroraMySQL.Updates.2083.md)
 + [Aurora MySQL database engine updates 2020\-08\-28 \(version 2\.08\.2\)](AuroraMySQL.Updates.2082.md)
 + [Aurora MySQL database engine updates 2020\-06\-18 \(version 2\.08\.1\)](AuroraMySQL.Updates.2081.md)
 + [Aurora MySQL database engine updates 2020\-06\-02 \(version 2\.08\.0\)](AuroraMySQL.Updates.2080.md)
++ [Aurora MySQL database engine updates 2020\-11\-10 \(version 2\.07\.3\)](AuroraMySQL.Updates.2073.md)
 + [Aurora MySQL database engine updates 2020\-04\-17 \(version 2\.07\.2\)](AuroraMySQL.Updates.2072.md)
 + [Aurora MySQL database engine updates 2019\-12\-23 \(version 2\.07\.1\)](AuroraMySQL.Updates.2071.md)
 + [Aurora MySQL database engine updates 2019\-11\-25 \(version 2\.07\.0\)](AuroraMySQL.Updates.2070.md)

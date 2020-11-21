@@ -2,6 +2,9 @@
 
 In an Aurora DB cluster with single\-master replication, there is one primary DB instance and up to 15 Aurora Replicas\. The primary DB instance supports read and write operations, and performs all of the data modifications to the cluster volume\. Aurora Replicas connect to the same storage volume as the primary DB instance and support only read operations\. Aurora Replicas can offload read workloads from the primary DB instance\. 
 
+**Tip**  
+ This section doesn't apply to Aurora Serverless or Aurora multi\-master clusters\. An Aurora Serverless cluster only has a single DB instance that scales up or down automatically\. Aurora multi\-master clusters only have read\-write DB instances, not Aurora Replicas\. 
+
 We recommend that you distribute the primary instance and Aurora Replicas in your DB cluster over multiple Availability Zones to improve the availability of your DB cluster\. For more information, see [Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
 
 You can add Aurora Replicas to a DB cluster using the AWS Management Console, the AWS CLI, or the RDS API\.

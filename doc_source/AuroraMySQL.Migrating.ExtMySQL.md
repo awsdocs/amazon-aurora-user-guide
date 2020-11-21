@@ -198,30 +198,47 @@ You can restore your backup files from your Amazon S3 bucket to create a new Ama
 
 1. In the navigation pane, choose **Databases**, and then choose **Restore from S3**\.
 
-1. On the **Select engine** page, choose **Amazon Aurora,** choose the MySQL\-compatible edition, and then choose **Next**\.
+1. Choose **Restore from S3**\.
 
-   The **Specify source backup details** page appears\.   
-![\[Amazon Aurora migration from an Amazon S3 bucket\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraMigrateS3_01.png)
+   The **Create database by restoring from S3** page appears\.  
+![\[The page where you specify the details for restoring a DB cluster from S3\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraMigrateS3_01.png)
 
-1. In **Specify source backup details**, specify the following\.    
-<a name="source_backup_details_advice"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
+1. Under **S3 destination**:
 
-1. Choose **Next**\.
+   1. Choose the **S3 bucket** where to write audit logs\.
 
-1. On the **Specify DB details** page, specify your DB cluster information\.
+   1. \(Optional\) For **S3 folder path prefix**, enter a file path prefix for the files stored in your Amazon S3 bucket\.
 
-   A typical **Specify DB details** page looks like the following\.   
-![\[Amazon Aurora Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunchMySQL56.png)
+      If you don't specify a prefix, then RDS creates your DB instance using all of the files and folders in the root folder of the S3 bucket\. If you do specify a prefix, then RDS creates your DB instance using the files and folders in the S3 bucket where the path for the file begins with the specified prefix\.
 
-   The following table shows settings for a DB instance\.    
-<a name="aurora_migration_cluster_param_advice"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
+      For example, suppose that you store your backup files on S3 in a subfolder named backups, and you have multiple sets of backup files, each in its own directory \(gzip\_backup1, gzip\_backup2, and so on\)\. In this case, you specify a prefix of backups/gzip\_backup1 to restore from the files in the gzip\_backup1 folder\. 
 
-1. Choose **Next**\.
+1. Under **Engine options**:
 
-1. On the **Configure advanced settings** page, you can customize additional settings for your Aurora MySQL DB cluster\. The following table shows the advanced settings for a DB cluster\.     
-<a name="aurora_migration_advanced_settings_advice"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
+   1. For **Engine type**, choose **Amazon Aurora**\.
 
-1. Choose **Create database** to launch your Aurora DB instance, and then choose **Close** to close the wizard\. 
+   1. For **Version**, choose the Aurora MySQL engine version for your restored DB instance\.
+
+1. For **IAM role**, you can choose an existing IAM role\.
+
+1. \(Optional\) You can also have a new IAM role created for you by choosing **Create a new role**\. If so:
+
+   1. Enter the **IAM role name**\.
+
+   1.  Choose whether to **Allow access to KMS key**:
+      + If you didn't encrypt the backup files, choose **No**\.
+      + If you encrypted the backup files with AES\-256 \(SSE\-S3\) when you uploaded them to Amazon S3, choose **No**\. In this case, the data is decrypted automatically\.
+      + If you encrypted the backup files with AWS\-KMS \(SSE\-KMS\) server\-side encryption when you uploaded them to Amazon S3, choose **Yes**\. Next, choose the correct master key for **Master key**\.
+
+        The AWS Management Console creates an IAM policy that enables Aurora to decrypt the data\.
+
+      For more information, see [Protecting data using server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) in the *Amazon S3 Developer Guide*\.
+
+1. Choose settings for your DB cluster, such as the DB cluster identifier and the login credentials\. For information about each setting, see [Settings for Aurora DB clusters](Aurora.CreateInstance.md#Aurora.CreateInstance.Settings)\.
+
+1. Customize additional settings for your Aurora MySQL DB cluster as needed\.
+
+1. Choose **Create database** to launch your Aurora DB instance\.
 
 On the Amazon RDS console, the new DB instance appears in the list of DB instances\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the primary instance for your DB cluster\. Depending on the DB instance class and store allocated, it can take several minutes for the new instance to be available\.
 

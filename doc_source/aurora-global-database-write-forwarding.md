@@ -1,8 +1,8 @@
 # Write forwarding for secondary AWS Regions with an Aurora global database<a name="aurora-global-database-write-forwarding"></a>
 
- You can enable read/write capability for one or more of the secondary clusters in an Aurora global database\. In this configuration, Aurora forwards SQL statements that perform write operations to the primary cluster\. Then Aurora propagates the resulting changes to all the secondary AWS Regions\. This way, you submit both read and write SQL statements while you are connected to the secondary cluster\. By using this approach, you can reduce the number of endpoints to manage for an application that uses an Aurora global database\. 
+ You can enable read/write capability for one or more of the secondary clusters in an Aurora global database\. In this configuration, Aurora forwards SQL statements that perform write operations to the primary cluster\. Aurora then propagates the resulting changes to all the secondary AWS Regions\. By doing so, both read and write SQL statements are submitted from connections on the secondary cluster\. By using this approach, you can reduce the number of endpoints you need to manage for the applications that use your Aurora global database\. 
 
- This feature, called *write forwarding, *helps you to avoid implementing your own mechanism to send write operations from a secondary AWS Region to the primary AWS Region\. Aurora handles the cross\-Region networking setup\. Aurora also transmits all necessary session and transactional context for each statement\. The data is always changed first on the primary cluster and then replicated back to the secondary clusters\. This way, the primary cluster is always the source of truth with the most up\-to\-date copy of all your data\. 
+ This feature, called *write forwarding, *helps you to avoid implementing your own mechanism to send write operations from a secondary AWS Region to the primary AWS Region\. Aurora handles the cross\-Region networking setup\. Aurora also transmits all necessary session and transactional context for each statement\. The data is always changed first on the primary cluster and then replicated to the secondary clusters\. This way, the primary cluster is the source of truth and always has an up\-to\-date copy of all your data\. 
 
  Write forwarding requires Aurora MySQL version 2\.08\.1 or later\. 
 
@@ -166,15 +166,6 @@ ERROR 1235 (42000): This version of MySQL doesn't yet support 'operation with wr
 
 **Data definition language \(DDL\)**  
  Connect to the primary cluster to run such statements\. 
-
-**Table locking statements**  
- You can't use the `LOCK TABLES` and `FLUSH TABLES` statements on secondary clusters with write forwarding turned on within the session\.   
-
-```
-LOCK TABLES t1 WRITE / READ;
-FLUSH TABLES WITH READ LOCK;
-```
- You can use these statements on secondary clusters that don't have write forwarding enabled, or within sessions where the `aurora_replica_read_consistency` setting is empty\. Before turning on write forwarding within a session, check if your code uses these statements\. 
 
 **Updating a permanent table using data from a temporary table**  
  You can use temporary tables on secondary clusters with write forwarding enabled\. However, you can't use a DML statement to modify a permanent table if the statement refers to a temporary table\. For example, you can't use an `INSERT ... SELECT` statement that takes the data from a temporary table\. The temporary table exists on the secondary cluster and isn't available when the statement runs on the primary cluster\. 
@@ -375,7 +366,7 @@ mysql> select count(*) from t1;
    The following rules apply to this parameter: 
   +  This is a session\-level parameter\. The default value is '' \(empty\)\. 
   +  Write forwarding is available in a session only if `aurora_replica_read_consistency` is set to `EVENTUAL` or `SESSION` or `GLOBAL`\. This parameter is relevant only in reader instances of secondary clusters that have write forwarding enabled and that are in an Aurora global database\. 
-  +  You can't modify this variable from '' to a valid value or a valid value to '' while the session is in a multistatement transaction mode\. However, you can modify it from one valid value to another during such a transaction\. 
+  +  You can't set this variable \(when empty\) or unset \(when already set\) inside a multistatement transaction\. However, you can change it from one valid value \(`EVENTUAL`, `SESSION`, or `GLOBAL`\) to another valid value \(`EVENTUAL`, `SESSION`, or `GLOBAL`\) during such a transaction\. 
   +  The variable can't be `SET` when write forwarding isn't enabled on the secondary cluster\. 
   +  Setting the session variable on a primary cluster doesn't have any effect\. If you try to modify this variable on a primary cluster, you receive an error\. 
 

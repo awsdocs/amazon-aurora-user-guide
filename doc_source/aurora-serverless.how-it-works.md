@@ -1,12 +1,10 @@
 # How Aurora Serverless works<a name="aurora-serverless.how-it-works"></a>
 
-When you work with Amazon Aurora without Aurora Serverless \(provisioned DB clusters\), you can choose your DB instance class size and create Aurora Replicas to increase read throughput\. If your workload changes, you can modify the DB instance class size and change the number of Aurora Replicas\. This model works well when the database workload is predictable, because you can adjust capacity manually based on the expected workload\.
+Amazon Aurora offers two different DB engine modes aimed at two broadly different usage models\. The *provisioned* DB engine mode is designed for predictable workloads\. When you work with Aurora `provisioned` DB clusters, you choose your DB instance class size and several other configuration options\. For example, you can create one or more Aurora Replicas to increase read throughput\. If your workload changes, you can modify the DB instance class size and change the number of Aurora Replicas\. The provisioned model works well when you can adjust capacity in advance of expected consumption patterns\. 
 
-However, in some environments, workloads can be intermittent and unpredictable\. There can be periods of heavy workloads that might last only a few minutes or hours, and also long periods of light activity, or even no activity\. Some examples are retail websites with intermittent sales events, reporting databases that produce reports when needed, development and testing environments, and new applications with uncertain requirements\. In these cases and many others, it can be difficult to configure the correct capacity at the right times\. It can also result in higher costs when you pay for capacity that isn't used\.
+The *serverless* DB engine mode is designed for a different usage pattern entirely\. For example, your database usage might be heavy for a short period of time, followed by long periods of light activity or no activity at all\. Some examples are retail websites with intermittent sales events, databases that produce reports when needed, development and testing environments, and new applications with uncertain requirements\. For cases such as these and many others, configuring capacity correctly in advance isn't always possible with the provisioned model\. It can also result in higher costs if you overprovision and have capacity that you don't use\.
 
-With Aurora Serverless, you can create a database endpoint without specifying the DB instance class size\. You set the minimum and maximum capacity\. With Aurora Serverless, the database endpoint connects to a *router fleet * that sends the workload to a fleet of resources that are automatically scaled\. Because of the router fleet, connections are continuous as Aurora Serverless scales the resources automatically based on the minimum and maximum capacity specifications\. Database client applications don't need to change to use the router fleet\. Aurora Serverless manages the connections automatically\. Scaling is rapid because it uses a pool of "warm" resources that are always ready to service requests\. Storage and processing are separate, so you can scale down to zero processing and pay only for storage\.
-
-Aurora Serverless introduces a new `serverless` DB engine mode for Aurora DB clusters\. Non\-Serverless DB clusters use the `provisioned` DB engine mode\.
+By using Aurora Serverless, you can create a database endpoint without specifying the DB instance class size\. You specify only the minimum and maximum range for the Aurora Serverless DB cluster's capacity\. The Aurora Serverless database endpoint comprises a *router fleet* that supports continuous connections and distributes the workload among resources\. Aurora Serverless scales the resources automatically based on your minimum and maximum capacity specifications\. You don't need to change your database client application code to use the router fleet: Aurora Serverless manages the connections automatically\. Scaling is fast thanks to a "warm" resources pool that's always ready to service requests\. Storage and processing are separate, so your Aurora Serverless DB cluster can scale down to zero when it's finished processing workloads\. When your Aurora Serverless DB cluster scales to zero, you're charged only for storage\.
 
 **Topics**
 + [Aurora Serverless architecture](#aurora-serverless.architecture)
@@ -105,26 +103,80 @@ You'll see all details for the DB clusters associated with your AWS account disp
 
 ## Aurora Serverless and parameter groups<a name="aurora-serverless.parameter-groups"></a>
 
-Parameter groups work differently for Aurora Serverless DB clusters than for provisioned DB clusters\. Aurora manages the capacity settings for you\. Some of the configuration procedures, default parameter values, and so on that you use with other kinds of Aurora clusters don't apply for Aurora Serverless clusters\.
+When you create your Aurora Serverless DB cluster, you can create a single database instance using your chosen DB engine\. Unlike Aurora provisioned DB clusters which can have multiple DB instances, Aurora Serverless has a single read/write DB instance that seamlessly scales as needed for the workload\. In a provisioned Aurora DB cluster, each DB instance has an associated *DB parameter group* that can be configured differently from instance to instance\. An Aurora DB cluster has its own set of parameters in its associated *DB cluster parameter group*\. These two general types of parameter groups control different operational aspects, some cluster\-wide, some per instance, for a provisioned Aurora DB clusters\. 
 
-The DB instances in an Aurora Serverless cluster only have associated DB cluster parameter groups, not DB parameter groups\. Serverless clusters rely on DB cluster parameter groups because DB instances are not permanently associated with Aurora Serverless clusters\. Aurora scales the associated DB instance automatically as needed\. The scaling operation involves modifying parameter values to be suitable for the larger or smaller capacity\.
+Because Aurora Serverless handles the DB instance capacity for you, parameter groups work differently for Aurora Serverless DB clusters\. As it's processing your workloads and seamlessly scaling capacity, Aurora Serverless changes various parameters in its DB cluster parameter group as needed to work best for the increased or decreased capacity\. That's why some of the default parameter values and other configuration details that you might use with other kinds of Aurora clusters don't apply for Aurora Serverless clusters\.
 
- To customize configuration settings for an Aurora Serverless cluster, you can define your own DB cluster parameter group and modify the parameters it contains\. You can modify both cluster\-level parameters, and parameters that apply at the instance level in other kinds of Aurora clusters\. However, when you modify a DB cluster parameter group that's associated with an Aurora Serverless DB cluster, modifications apply differently than for other DB cluster parameter groups\. 
+Your Aurora Serverless DB cluster has an associated DB cluster parameter group only\. Its DB cluster parameter group contains default values for any parameters that would typically be held in the DB parameter group of an Aurora provisioned DB cluster\. You can't change the values of the default parameter groups of either type, nor can you change the values of the parameter group\. However, you can create your own custom version of an Aurora DB cluster parameter group based on one of the provided DB cluster parameter groups and configure parameters as needed\. You can do so as follows:
 
- When you save changes to a DB cluster parameter group for an Aurora Serverless DB cluster, changes are applied immediately\. In doing so, Aurora Serverless ignores the following settings: 
-+ When modifying the DB cluster as a whole, Aurora Serverless ignores the following:
-  + The **Apply Immediately** setting in the AWS Management Console
-  + The `--apply-immediately|--no-apply-immediately` option in the AWS CLI command [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html)
-  + The `ApplyImmediately` parameter in the RDS API operation [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html)
-+ When modifying parameters, Aurora Serverless ignores the `ApplyMethod` value in the parameter list in the AWS CLI commands [modify\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) and [reset\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/reset-db-cluster-parameter-group.html)\.
-+ When modifying parameters, Aurora Serverless ignores the `ApplyMethod` value in the parameter list in the RDS API operations [ModifyDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterParameterGroup.html) and [ResetDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ResetDBClusterParameterGroup.html)\.
+1. Sign in to the AWS Management Console and then open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-To apply a change to a DB cluster parameter group, Aurora Serverless starts a seamless scale with the current capacity if the DB cluster is active\. It resumes the DB cluster if it's paused\.
+1. Choose the **Parameter groups** menu\.
 
-**Important**  
-Aurora performs the seamless scaling operation for a parameter group change with the `force-apply-capacity-change` option\. If a scaling point can't be found, connections that prevent Aurora Serverless from finding a scaling point might be dropped\.
+1. Choose **Create parameter group** to open the Parameter group details pane\.
 
- To view the supported engine mode for cluster\-level parameters, run the [describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) command or the RDS API operation [DescribeEngineDefaultClusterParameters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEngineDefaultClusterParameters.html)\. For example, the following Linux command extracts the names of parameters that you can set for Aurora MySQL Serverless clusters, from an `aurora5.6` default DB cluster parameter group\. 
+1. Choose the appropriate default DB cluster group for the DB engine you want to use for your Aurora Serverless DB cluster\. Be sure you choose the following options: 
+
+   1. For **Parameter group family**, choose the appropriate family for your chosen DB engine\. Be sure your selection has the prefix `aurora-` in its name\. 
+
+   1. For **Type**, choose **DB Cluster Parameter Group**\.
+
+   1. For **Group name** and **Description**, enter meaningful names for you or others who might need to work with your Aurora Serverless DB cluster and its parameters\.
+
+   1. Click **Create**\. Your custom DB cluster parameter group is added to the list of Parameter groups available to your account in your AWS Region\.
+
+For example, the following screenshot shows an example of a DB cluster parameter group created for an Aurora PostgreSQL Serverless running any minor release in the Aurora PostgreSQL10\.*n* family\. 
+
+![\[Creating a new DB cluster parameter group\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-parameter-groups-create.png)
+
+You can now change values for the parameters contained in this custom DB cluster parameter group\. After you're finished customizing, you can apply the parameter group to your existing Aurora Serverless DB clusters or use it when you're creating new Aurora Serverless DB clusters in the same Region\. 
+
+With an Aurora MySQL Serverless DB cluster, changes to parameter values take effect for the following parameters\. For all other configuration parameters, Aurora Serverless DB clusters use default values\. 
+
+
+| Parameter | Description | 
+| --- | --- | 
+| character\_set\_server | The server's default character set\. | 
+| collation\_server | The server's default collation\.  | 
+| general\_log | Whether the general query log is enabled\.  | 
+| innodb\_file\_format | Sets InnoDB Plug\-in default file format\. Allowed values Antelope, Barracuda\. | 
+| innodb\_file\_per\_table | Use tablespaces or files for Innodb\.  | 
+| innodb\_large\_prefix | Enables or disables Innodb Large Prefix for Keys\. | 
+| innodb\_lock\_wait\_timeout | Timeout in seconds an innodb transaction may wait for a row lock before giving up\. | 
+| innodb\_monitor\_disable | Turns off one or more counters in the information\_schema\.innodb\_metrics table\. | 
+| innodb\_monitor\_enable | Turns on one or more counters in the information\_schema\.innodb\_metrics table\. | 
+| innodb\_monitor\_reset | Resets to zero the count value for one or more counters in the information\_schema\.innodb\_metrics table\. | 
+| innodb\_monitor\_reset\_all | Resets all values \(minimum, maximum, and so on\) for one or more counters in the information\_schema\.innodb\_metrics table\. | 
+| innodb\_print\_all\_deadlocks | Records information about all InnoDB deadlocks in Aurora error log\. | 
+| lc\_time\_names | Specifies the locale that controls the language used to display day and month names and abbreviations\. | 
+| log\_output | Controls where to store query logs\. Default is FILE\. You can't change this value\. | 
+| log\_queries\_not\_using\_indexes | Logs queries that are expected to retrieve all rows to slow query log | 
+| log\_warnings | Controls whether to produce additional warning messages\. | 
+| long\_query\_time | Defines what MySQL considers long queries | 
+| lower\_case\_table\_names | Affects how the server handles identifier case sensitivity\. | 
+| net\_read\_timeout | The number of seconds to wait for more data from a TCP/IP connection before abandoning the read\. | 
+| net\_retry\_count | If a read on a communication port is interrupted, retry this many times before giving up\. | 
+| net\_write\_timeout | The number of seconds to wait on TCP/IP connections for a block to be written before abandoing the write\.  | 
+| server\_audit\_events | If set it specifies the set of types of events to log\.  | 
+| server\_audit\_excl\_users | If not empty, it contains the list of users whose activity will not be logged\.  | 
+| server\_audit\_incl\_users | If not empty, it contains a comma\-delimited list of users whose activity will be logged\. | 
+| server\_audit\_logging | Enables audit logging\. | 
+| slow\_query\_log | Enable or disable the slow query log\. | 
+| sql\_mode | Current SQL Server Mode\. | 
+| time\_zone | For changing time zone of db server locally\. | 
+| tx\_isolation | Sets the default transaction isolation level\. | 
+
+For more information about Aurora parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
+
+To apply a change to a DB cluster parameter group on an active DB cluster, Aurora Serverless starts a seamless scale from its current capacity\. If the Aurora Serverless DB cluster is paused, it resumes activity and starts scaling to apply the parameter changes\. The scaling operation for a parameter group change uses the `ForceApplyCapacityChange` setting for its timeout action, which means that if the DB cluster can't find a scaling point before timing out, connections might be dropped\. For more information, see [Timeout action for capacity changes](#aurora-serverless.how-it-works.timeout-action)\. 
+
+### Obtaining Aurora Serverless parameter names and supported DB engines<a name="aurora-serverless.parameter-groups.obtain-params-for-db-eng"></a>
+
+You can obtain the parameter names and the supported engine mode for cluster\-level parameters using the AWS CLI with the [describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) command\. Or you can invoke the [DescribeEngineDefaultClusterParameters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEngineDefaultClusterParameters.html) API operation\. Following are examples of using the AWS CLI to obtain parameters from your Aurora MySQL Serverless or for your Aurora PostgreSQL Serverless DB clusters\. 
+
+**Example Aurora MySQL Serverless DB cluster**  
+You can obtain the names of parameters available for your Aurora MySQL Serverless cluster with the following command\. For Aurora MySQL 5\.7, the default DB cluster parameter group is `aurora5.6`\.  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds describe-engine-default-cluster-parameters \
@@ -136,78 +188,38 @@ aws rds describe-engine-default-cluster-parameters \
     --output text
 ```
 
-The following Linux command extracts the names of parameters that you can set for Aurora PostgreSQL Serverless clusters, from an `aurora-postgresql10` default DB cluster parameter group\. 
+**Example Aurora PostgreSQL Serverless DB cluster**  
+You can obtain the names of parameters available for your Aurora PostgreSQL Serverless cluster with the following AWS CLI command\. In this example, the default DB cluster parameter group being queried is `aurora-postgresql10`\.  
+For Linux, macOS, or Unix:  
 
 ```
-aws rds describe-engine-default-cluster-parameters \
-  --db-parameter-group-family aurora-postgresql10 \
-  --query 'EngineDefaults.Parameters[*].{ParameterName:ParameterName, \
-    SupportedEngineModes:SupportedEngineModes} \
-  | [?contains(SupportedEngineModes, `serverless`) == `true`] \
-  | [*].{param:ParameterName}' \
-    --output text
-```
-
- The following Linux command extracts the names of parameters that you can set for Serverless clusters from a DB cluster parameter group that you created\. 
-
-```
-aws rds describe-db-cluster-parameters \
-  --db-cluster-parameter-group-name my_cluster_param_group_name \
-  --query 'Parameters[*].{ParameterName:ParameterName, SupportedEngineModes:SupportedEngineModes}
-    | [?contains(SupportedEngineModes, `serverless`) == `true`]
-    | [*].{param:ParameterName}' \
-  --output text
+aws rds describe-engine-default-cluster-parameters --db-parameter-group-family aurora-postgresql10 \
+  --query 'EngineDefaults.Parameters[*].{ParameterName:ParameterName,SupportedEngineModes:SupportedEngineModes} | \
+  [?contains(SupportedEngineModes, `serverless`) == `true`] | [*].{param:ParameterName}' \
+   --output text
 ```
 
 For more information about parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
 
-With an Aurora MySQL Serverless DB cluster, modifications to parameter values only take effect for the following parameters\. You can modify other parameters, but Aurora doesn't use the changed values\. For all other configuration parameters, Aurora MySQL Serverless clusters use default values\. These default values might be different than for other kinds of Aurora clusters\. These values might also change as Aurora scales the Aurora Serverless cluster up or down\.
-+ `character_set_server`\.
-+ `collation_server`\.
-+  `general_log`\. This setting was formerly only in the DB instance parameter group\. 
-+ `innodb_file_format`\. This setting was formerly only in the DB instance parameter group\.
-+ `innodb_file_per_table`\.
-+ `innodb_large_prefix`\. This setting was formerly only in the DB instance parameter group\.
-+ `innodb_lock_wait_timeout`\. This setting was formerly only in the DB instance parameter group\.
-+ `innodb_monitor_disable`\. This setting was formerly only in the DB instance parameter group\.
-+ `innodb_monitor_enable`\. This setting was formerly only in the DB instance parameter group\.
-+ `innodb_monitor_reset`\. This setting was formerly only in the DB instance parameter group\.
-+ `innodb_monitor_reset_all`\. This setting was formerly only in the DB instance parameter group\.
-+ `innodb_print_all_deadlocks`\. This setting was formerly only in the DB instance parameter group\.
-+ `lc_time_names`\.
-+ `log_output`\. This setting was formerly only in the DB instance parameter group\. This setting has a default value of `FILE`\. You can't change this value\. 
-+ `log_queries_not_using_indexes`\. This setting was formerly only in the DB instance parameter group\. 
-+ `log_warnings`\. This setting was formerly only in the DB instance parameter group\.
-+ `long_query_time`\. This setting was formerly only in the DB instance parameter group\. 
-+ `lower_case_table_names`\.
-+ `net_read_timeout`\. This setting was formerly only in the DB instance parameter group\.
-+ `net_retry_count`\. This setting was formerly only in the DB instance parameter group\.
-+ `net_write_timeout`\. This setting was formerly only in the DB instance parameter group\.
-+  `server_audit_logging`\.
-+ `server_audit_events`\.
-+ `server_audit_excl_users`\.
-+ `server_audit_incl_users`\.
-+  `slow_query_log`\. This setting was formerly only in the DB instance parameter group\. 
-+ `sql_mode`\. This setting was formerly only in the DB instance parameter group\.
-+ `time_zone`\.
-+ `tx_isolation`\. This setting was formerly only in the DB instance parameter group\.
-
 ## Aurora Serverless and maintenance<a name="aurora-serverless.maintenance"></a>
 
-Aurora Serverless performs regular maintenance so that your DB cluster has the latest features, fixes, and security updates\. Aurora Serverless performs maintenance in a non\-disruptive manner whenever possible\.
+Maintenance for Aurora Serverless DB cluster, such as applying the latest features, fixes, and security updates, is performed automatically for you\. Unlike provisioned Aurora DB clusters, Aurora Serverless doesn't have user\-settable maintenance windows\. However, it does have a maintenance window that you can view in the AWS Management Console in **Maintenance & backups** for your Aurora Serverless DB cluster\. You'll find the date and time that maintenance might be performed and if any maintenance is pending for your Aurora Serverless DB cluster\. For example:
 
-To apply maintenance, Aurora Serverless looks for a scaling point\. For more information about scaling points, see [Autoscaling for Aurora Serverless](#aurora-serverless.how-it-works.auto-scaling)\.
+![\[Maintenance window for an example Aurora Serverless DB cluster, not user settable, no pending maintenance\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-maintenance-window.png)
 
-If maintenance is required for your Aurora Serverless DB cluster, the DB cluster attempts to find a scaling point for up to seven days\. After each day that your Aurora Serverless DB cluster can't find a scaling point, it creates a cluster event notify you that it must scale to apply maintenance\.  The notification includes the date when scaling will be applied with the `ForceApplyCapacityChange` timeout action to apply the maintenance, regardless of the `ScalingConfiguration` settings\. If your DB cluster has `RollbackCapacityChange` set as the `TimeoutAction` for its `ScalingConfiguration`, Aurora Serverless tries to apply maintenance using the `RollbackCapacityChange` timeout action prior to the time included in the event\. If your DB cluster has `ForceApplyCapacityChange` set as the `TimeoutAction` for its `ScalingConfiguration`, then scaling to apply maintenance uses it for all attempts\. When `ForceApplyCapacityChange` is used, it might interrupt your workload\.  For more information, see [Timeout action for capacity changes](#aurora-serverless.how-it-works.timeout-action)\.
+Whenever possible, Aurora Serverless performs maintenance in a non\-disruptive manner\. When maintenance is required, your Aurora Serverless DB cluster scales its capacity to handle the necessary operations\. Before scaling, Aurora Serverless looks for a scaling point and it does so for up to seven days if necessary\.
 
-**Note**  
-Maintenance windows don't apply to Aurora Serverless\.
+At the end of each day that Aurora Serverless can't find a scaling point, it creates a cluster event that notifies you of the pending maintenance and its need to scale to perform maintenance\. The notification includes the date when the Aurora Serverless can force the DB cluster to scale\.
+
+Until that time, your Aurora Serverless DB cluster continues looking for a scaling point and behaves according to its `TimeoutAction` setting\. That is, if it can't find a scaling point before timing out, it abandons the capacity change if it's configured to `RollbackCapacityChange`\. Or it forces the change if it's set to `ForceApplyCapacityChange`\. As with any change that's forced without an appropriate scaling point, this might interrupt your workload\.
+
+For more information, see [Timeout action for capacity changes](#aurora-serverless.how-it-works.timeout-action)\.
 
 ## Aurora Serverless and failover<a name="aurora-serverless.failover"></a>
 
  If the DB instance for an Aurora Serverless DB cluster becomes unavailable or the Availability Zone \(AZ\) it is in fails, Aurora recreates the DB instance in a different AZ\. We refer to this capability as automatic multi\-AZ failover\. 
 
- This failover mechanism takes longer than for an Aurora Provisioned cluster\. The Aurora Serverless failover time is currently undefined because it depends on demand and capacity availability in other AZs within the given AWS Region\. 
+ This failover mechanism takes longer than for an Aurora provisioned cluster\. The Aurora Serverless failover time is currently undefined because it depends on demand and capacity availability in other AZs within the given AWS Region\. 
 
  Because Aurora separates computation capacity and storage, the storage volume for the cluster is spread across multiple AZs\. Your data remains available even if outages affect the DB instance or the associated AZ\. 
 

@@ -47,8 +47,8 @@ Aurora backtracking is available for Aurora MySQL only\. It's not available for 
 | Europe \(Stockholm\) | \- | \- | 
 | Middle East \(Bahrain\) | \- | \- | 
 | South America \(São Paulo\) | \- | \- | 
-| AWS GovCloud \(US\-East\) | Version 5\.6\.10a | Version 2\.06 and later | 
-| AWS GovCloud \(US\-West\) | Version 5\.6\.10a | Version 2\.06 and later | 
+| AWS GovCloud \(US\-East\) | \- | \- | 
+| AWS GovCloud \(US\-West\) | \- | \- | 
 
 ## Aurora global databases<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.GlobalDatabase"></a>
 
@@ -129,8 +129,8 @@ Aurora parallel queries are available for Aurora MySQL only\. However, PostgreSQ
 | US East \(N\. Virginia\) | Version 5\.6\.10a; Version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
 | US West \(N\. California\) | Version 1\.23 | Version 2\.09 | 
 | US West \(Oregon\) | Version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
-| Africa \(Cape Town\) | \- | \- | 
-| Asia Pacific \(Hong Kong\) | Version 1\.23 | \- | 
+| Africa \(Cape Town\) | Version 1\.23 | Version 2\.09 | 
+| Asia Pacific \(Hong Kong\) | Version 1\.23 | Version 2\.09 | 
 | Asia Pacific \(Mumbai\) | Version 1\.23 | Version 2\.09 | 
 | Asia Pacific \(Seoul\) | Version 1\.23 | Version 2\.09 | 
 | Asia Pacific \(Singapore\) | Version 1\.23 | Version 2\.09 | 
@@ -142,10 +142,10 @@ Aurora parallel queries are available for Aurora MySQL only\. However, PostgreSQ
 | Europe \(Frankfurt\) | Version 1\.23 | Version 2\.09 | 
 | Europe \(Ireland\) | Version 5\.6\.10a; Version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
 | Europe \(London\) | Version 1\.23 | Version 2\.09 | 
-| Europe \(Milan\) | \- | \- | 
+| Europe \(Milan\) | Version 1\.23 | Version 2\.09 | 
 | Europe \(Paris\) | Version 1\.23 | Version 2\.09 | 
 | Europe \(Stockholm\) | Version 1\.23 | Version 2\.09 | 
-| Middle East \(Bahrain\) | Version 1\.23 | \- | 
+| Middle East \(Bahrain\) | Version 1\.23 | Version 2\.09 | 
 | South America \(São Paulo\) | Version 1\.23 | Version 2\.09 | 
 | AWS GovCloud \(US\-East\) | \- | \- | 
 | AWS GovCloud \(US\-West\) | \- | \- | 
@@ -189,22 +189,22 @@ Aurora Serverless is an on\-demand, auto\-scaling feature designed to be a cost\
 
 | Region | Aurora MySQL 5\.6 | Aurora MySQL 5\.7 | Aurora PostgreSQL 10 | Aurora PostgreSQL 11 | 
 | --- | --- | --- | --- | --- | 
-| US East \(Ohio\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.7 | \- | 
-| US East \(N\. Virginia\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.7 | \- | 
+| US East \(Ohio\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
+| US East \(N\. Virginia\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | US West \(N\. California\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
-| US West \(Oregon\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.7 | \- | 
+| US West \(Oregon\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Africa \(Cape Town\) | \- | \- | \- | \- | 
 | Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | 
 | Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
-| Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.7 | \- | 
+| Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
 | Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
-| Asia Pacific \(Tokyo\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.7 | \- | 
+| Asia Pacific \(Tokyo\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Canada \(Central\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
 | China \(Beijing\) | \- | \- | \- | \- | 
 | China \(Ningxia\) | \- | \- | \- | \- | 
-| Europe \(Frankfurt\) | Version 5\.6\.10a | Version 2\.07\.1 |  | \- | 
-| Europe \(Ireland\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.7 | \- | 
+| Europe \(Frankfurt\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
+| Europe \(Ireland\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Europe \(London\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
 | Europe \(Milan\) | \- | \- | \- | \- | 
 | Europe \(Paris\) | \- | Version 2\.07\.1 | \- | \- | 
@@ -221,22 +221,22 @@ The Data API for Aurora Serverless provides a web\-services interface to an Auro
 
 | Region | Aurora MySQL 5\.6 | Aurora MySQL 5\.7 | Aurora PostgreSQL 10 | Aurora PostgreSQL 11 | 
 | --- | --- | --- | --- | --- | 
-| US East \(Ohio\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.7 | \- | 
-| US East \(N\. Virginia\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.7 | \- | 
+| US East \(Ohio\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
+| US East \(N\. Virginia\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | US West \(N\. California\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
-| US West \(Oregon\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.7 | \- | 
+| US West \(Oregon\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Africa \(Cape Town\) | \- | \- | \- | \- | 
 | Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | 
 | Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
-| Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.7 | \- | 
+| Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
 | Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
-| Asia Pacific \(Tokyo\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.7 | \- | 
+| Asia Pacific \(Tokyo\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Canada \(Central\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
 | China \(Beijing\) | \- | \- | \- | \- | 
 | China \(Ningxia\) | \- | \- | \- | \- | 
-| Europe \(Frankfurt\) | Version 5\.6\.10a | Version 2\.07\.1 |  | \- | 
-| Europe \(Ireland\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.7 | \- | 
+| Europe \(Frankfurt\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
+| Europe \(Ireland\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Europe \(London\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
 | Europe \(Milan\) | \- | \- | \- | \- | 
 | Europe \(Paris\) | \- | Version 2\.07\.1 | \- | \- | 

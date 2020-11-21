@@ -134,6 +134,10 @@ For example, in the dashboard following, **log file sync** waits account for mos
 
 In Amazon RDS Performance Insights, you can find statistics on running queries in the **Top SQL** section\. Performance Insights collects statistics only for the most common queries\. Typically, these match the top queries by load shown in the Performance Insights dashboard\.
 
+**Topics**
++ [Statistics for Aurora MySQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL)
++ [Statistics for Aurora PostgreSQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL)
+
 ### Statistics for Aurora MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL"></a>
 
 Performance Insights collects SQL digest statistics from the `events_statements_summary_by_digest` table\. This table is managed by the database and doesn't have an eviction policy\. If the table becomes full, new SQL queries aren't tracked\. To address this issue, Performance Insights automatically truncates the table when it's nearly full\.
@@ -200,10 +204,10 @@ The following screenshot shows the preferences for Aurora MySQL DB instances\.
 
 ### Statistics for Aurora PostgreSQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL"></a>
 
-To view SQL Digest statistics, the `pg_stat_statements` library must be loaded\. This library is loaded by default for Aurora PostgreSQL DB clusters that are compatible with PostgreSQL 10\. However, you must enable this library manually for Aurora PostgreSQL DB clusters that are compatible with PostgreSQL 9\.6\. To enable it manually, add `pg_stat_statements` to `shared_preload_libraries` in the DB parameter group associated with the DB instance\. Then reboot your DB instance\. For more information, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
+To view SQL Digest statistics, the `pg_stat_statements` library must be loaded\. For Aurora PostgreSQL DB clusters that are compatible with PostgreSQL 10, this library is loaded by default\. For Aurora PostgreSQL DB clusters that are compatible with PostgreSQL 9\.6, you enable this library manually\. To enable it manually, add `pg_stat_statements` to `shared_preload_libraries` in the DB parameter group associated with the DB instance\. Then reboot your DB instance\. For more information, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
 
 **Note**  
-Performance Insights can only collect statistics for non\-truncated queries in `pg_stat_activity`\. By default, Aurora PostgreSQL databases truncate queries longer than 1,024 bytes\. You can increase the query size by changing the `track_activity_query_size` parameter in the DB parameter group associated to your DB instance\. When you change this parameter, a DB instance reboot is required\. Performance Insights also has a limit of 5,120 bytes when collecting queries, which also impacts statistics collection\. The limit of 5,120 bytes is required due to memory limitations\.
+Performance Insights can only collect statistics for queries in `pg_stat_activity` that aren't truncated\. By default, PostgreSQL databases truncate queries longer than 1,024 bytes\. To increase the query size, change the `track_activity_query_size` parameter in the DB parameter group associated with your DB instance\. When you change this parameter, a DB instance reboot is required\.
 
 The following SQL Digest statistics are available for Aurora PostgreSQL DB instances\.
 

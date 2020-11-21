@@ -47,14 +47,16 @@ You can set up replication between any of the following options:
   For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)](AuroraMySQL.Replication.MySQL.md)\.
 + An Amazon RDS MySQL DB instance as the source and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an Amazon RDS MySQL DB instance\.
 
-   Typically, this approach is used for migration to Aurora MySQL, rather than for ongoing replication\. For more information, see [Migrating data from a MySQL DB instance to an Amazon Aurora MySQL DB cluster by using a DB snapshot](AuroraMySQL.Migrating.RDSMySQL.md)\.
+  You can use this approach to bring existing and ongoing data changes into Aurora MySQL during migration to Aurora\. For more information, see [Migrating data from a MySQL DB instance to an Amazon Aurora MySQL DB cluster by using a DB snapshot](AuroraMySQL.Migrating.RDSMySQL.md)\.
+
+  You can also use this approach to increase the scalability of read queries for your data\. You do so by querying the data using one or more DB instances within a read\-only Aurora MySQL cluster\. For more information, see [Using Amazon Aurora to scale reads for your MySQL database](AuroraMySQL.Replication.MySQL.md#AuroraMySQL.Replication.ReadScaling)\.
 
 **Note**  
 Rebooting the primary instance of an Amazon Aurora DB cluster also automatically reboots the Aurora Replicas for that DB cluster, in order to re\-establish an entry point that guarantees read/write consistency across the DB cluster\.
 
 ## Performance considerations for Amazon Aurora MySQL replication<a name="AuroraMySQL.Replication.Performance"></a>
 
- the following features help you to fine\-tune the performance of Aurora MySQL replication\. 
+ The following features help you to fine\-tune the performance of Aurora MySQL replication\. 
 
  Starting in Aurora MySQL 1\.17\.4, the replica log compression feature automatically reduces network bandwidth for replication messages\. Because each message is transmitted to all Aurora Replicas, the benefits are greater for larger clusters\. This feature involves some CPU overhead on the writer node to perform the compression\. Thus, the feature is only available on the `8xlarge` and `16xlarge` instance classes, which have high CPU capacity\. It is enabled by default on these instance classes\. You can control this feature by turning off the `aurora_enable_replica_log_compression` parameter\. For example, you might turn off replica log compression for larger instance classes if your writer node is near its maximum CPU capacity\. 
 

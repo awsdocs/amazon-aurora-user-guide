@@ -1,8 +1,14 @@
 # Aurora MySQL Serverless 5\.7 engine updates 2020\-06\-18 \(version 2\.07\.1\)<a name="AuroraMySQL.Updates.serverless_2_07_01"></a>
 
- Aurora Serverless 5\.7 is generally available\. It has the same features and bug fixes as Aurora MySQL 2\.07\.1\. You can restore a snapshot from a currently supported Aurora MySQL release into Aurora MySQL Serverless 5\.7\. 
+ Aurora Serverless 5\.7 is generally available\. It has the same features and bug fixes as Aurora MySQL 2\.07\.1\. 
 
- For general information about Aurora Serverless, see [Using Amazon Aurora Serverless](aurora-serverless.md)\. 
+You can restore a snapshot from a currently supported Aurora MySQL release into Aurora MySQL Serverless 5\.7\. By using a snapshot, you can also upgrade an Aurora MySQL\-5\.6 compatible Aurora Serverless DB cluster to an Aurora MySQL\-5\.7 compatible Aurora Serverless DB cluster\. To do so:
++ Create a snapshot from the Aurora MySQL 5\.6 Serverless  DB cluster\. To learn how, see [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\. 
++ Restore the snapshot to a new Aurora MySQL 5\.7 Serverless cluster\. For more information, see [Restoring an Aurora Serverless DB cluster](aurora-serverless.restorefromsnapshot.md)\. 
+
+Aurora Serverless doesn't have its own version number\. It uses the number of Aurora MySQL version that supports it to distinguish between Aurora MySQL 5\.7 and Aurora MySQL 5\.6 updates\. For more information, see [Aurora Serverless versions](aurora-serverless.relnotes.md)\.
+
+For general information about Aurora Serverless, see [Using Amazon Aurora Serverless](aurora-serverless.md)\.
 
  If you have any questions or concerns, AWS Support is available on the community forums and through AWS Premium Support at [http://aws\.amazon\.com/support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Aurora DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html)\. 
 

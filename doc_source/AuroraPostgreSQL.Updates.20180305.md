@@ -112,10 +112,48 @@ You can find the following improvements in this engine update\.
 This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.7\. For more information about the improvements in release 11\.7, see [PostgreSQL release 11\.7](https://www.postgresql.org/docs/11/release-11-7.html)\.
 
 **Topics**
++ [Version 3\.2\.6](#AuroraPostgreSQL.Updates.20180305.326)
 + [Version 3\.2\.4](#AuroraPostgreSQL.Updates.20180305.324)
 + [Version 3\.2\.3](#AuroraPostgreSQL.Updates.20180305.323)
 + [Version 3\.2\.2](#AuroraPostgreSQL.Updates.20180305.322)
 + [Version 3\.2\.1](#AuroraPostgreSQL.Updates.20180305.321)
+
+### Version 3\.2\.6<a name="AuroraPostgreSQL.Updates.20180305.326"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical stability enhancements**
++ None
+
+**High priority stability enhancements**
+
+1. Fixed a bug in Aurora PostgreSQL replication that might result in the error message, ERROR: MultiXactId nnnn has not been created yet \-\- apparent wraparound\.
+
+**Additional improvements and enhancements**
+
+1. Fixed a bug that in rare cases caused brief read replica unavailability when storage volume grew\.
+
+1. Aurora PostgreSQL Serverless now supports execution of queries on all connections during a scale event\.
+
+1. Fixed a bug in Aurora PostgreSQL Serverless where a leaked lock resulted in a prolonged scale event\.
+
+1. Fixed a bug where the `aurora_replica_status` function showed truncated server identifiers\.
+
+1. Fixed a bug in Aurora PostgreSQL Serverless where connections being migrated during a scale event would disconnect with the message: "ERROR: could not open relation with OID \.\.\.\.
+
+1. Fixed a small memory leak in a b\-tree index that could lead to an out of memory condition\.
+
+1. Fixed a bug in a GiST index that might result in an out of memory condition after promoting an Aurora Read Replica\.
+
+1. Improved performance for Database Activity Streams\.
+
+1. Fixed a bug in Database Activity Streams where customers were not notified when an outage ended\.
+
+1. Fixed a bug in the `aws_s3` extension for pre\-signed URL handling that might have resulted in the error message S3 bucket names with a period \(\.\) are not supported\.
+
+1. Fixed a bug in the `aws_s3` extension where incorrect error handling could lead to failures during the import process\.
+
+1. Fixed a bug in the `aws_s3` extension where an import may be blocked indefinitely if an exclusive lock was taken on the relation prior to beginning the operation\.
 
 ### Version 3\.2\.4<a name="AuroraPostgreSQL.Updates.20180305.324"></a>
 
@@ -497,10 +535,46 @@ You can find the following improvements in this engine update\.
 This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.12\. For more information about the improvements in release 10\.12, see [ PostgreSQL release 10\.12](https://www.postgresql.org/docs/10/release-10-12.html)\.
 
 **Topics**
++ [Version 2\.5\.6](#AuroraPostgreSQL.Updates.20180305.256)
 + [Version 2\.5\.4](#AuroraPostgreSQL.Updates.20180305.254)
 + [Version 2\.5\.3](#AuroraPostgreSQL.Updates.20180305.253)
 + [Version 2\.5\.2](#AuroraPostgreSQL.Updates.20180305.252)
 + [Version 2\.5\.1](#AuroraPostgreSQL.Updates.20180305.251)
+
+### Version 2\.5\.6<a name="AuroraPostgreSQL.Updates.20180305.256"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical stability enhancements**
++ None
+
+**High priority stability enhancements**
+
+1. Fixed a bug in Aurora PostgreSQL replication that might result in the error message, ERROR: MultiXactId nnnn has not been created yet \-\- apparent wraparound\.
+
+**Additional improvements and enhancements**
+
+1. Fixed a bug that in rare cases caused brief read replica unavailability when storage volume grew\.
+
+1. Aurora PostgreSQL Serverless now supports execution of queries on all connections during a scale event\.
+
+1. Fixed a bug in Aurora PostgreSQL Serverless where a leaked lock resulted in a prolonged scale event\.
+
+1. Fixed a bug where the `aurora_replica_status` function showed truncated server identifiers\.
+
+1. Fixed a bug in Aurora PostgreSQL Serverless where connections being migrated during a scale event would disconnect with the message: "ERROR: could not open relation with OID \.\.\.\.
+
+1. Fixed a bug in a GiST index that might result in an out of memory condition after promoting an Aurora Read Replica\.
+
+1. Improved performance for Database Activity Streams\.
+
+1. Fixed a bug in Database Activity Streams where customers were not notified when an outage ended\.
+
+1. Fixed a bug in the `aws_s3` extension for pre\-signed URL handling that might have resulted in the error message S3 bucket names with a period \(\.\) are not supported\.
+
+1. Fixed a bug in the `aws_s3` extension where incorrect error handling could lead to failures during the import process\.
+
+1. Fixed a bug in the `aws_s3` extension where an import may be blocked indefinitely if an exclusive lock was taken on the relation prior to beginning the operation\.
 
 ### Version 2\.5\.4<a name="AuroraPostgreSQL.Updates.20180305.254"></a>
 
@@ -1064,9 +1138,29 @@ You can find the following improvements in this engine update\.
 This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.17\. For more information about the improvements in release 9\.6\.17, see [ PostgreSQL release 9\.6\.17](https://www.postgresql.org/docs/9.6/release-9-6-17.html)\.
 
 **Topics**
++ [Version 1\.7\.6](#AuroraPostgreSQL.Updates.20180305.176)
 + [Version 1\.7\.3](#AuroraPostgreSQL.Updates.20180305.173)
 + [Version 1\.7\.2](#AuroraPostgreSQL.Updates.20180305.172)
 + [Version 1\.7\.1](#AuroraPostgreSQL.Updates.20180305.171)
+
+### Version 1\.7\.6<a name="AuroraPostgreSQL.Updates.20180305.176"></a>
+
+You can find the following improvements in this engine update\.
+
+**Critical stability enhancements**
++ None
+
+**High priority stability enhancements**
+
+1. Fixed a bug in Aurora PostgreSQL replication that might result in the error message, ERROR: MultiXactId nnnn has not been created yet \-\- apparent wraparound\.
+
+**Additional improvements and enhancements**
+
+1. Fixed a bug that in rare cases caused brief read replica unavailability when storage volume grew\.
+
+1. Fixed a bug in a b\-tree index read optimization that might have caused a brief period of unavailability\.
+
+1. Fixed a bug in a GiST index that might result in an out of memory condition after promoting an Aurora Read Replica\.
 
 ### Version 1\.7\.3<a name="AuroraPostgreSQL.Updates.20180305.173"></a>
 

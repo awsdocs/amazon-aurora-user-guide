@@ -1,8 +1,8 @@
-# Setting the capacity of an Aurora Serverless DB cluster<a name="aurora-serverless.setting-capacity"></a>
+# Scaling Aurora Serverless DB cluster capacity manually<a name="aurora-serverless.setting-capacity"></a>
 
-Set the capacity of an Aurora Serverless DB cluster to a specific value with the AWS Management Console, the AWS CLI, or the RDS API\.
+Typically, Aurora Serverless DB clusters scale seamlessly based on the workload\. However, capacity might not always scale fast enough to meet sudden extremes, such as an exponential increase in transactions\. In such cases you can initiate the scaling operation manually by setting a new capacity value\. After you set the capacity explicitly, Aurora Serverless automatically scales the DB cluster\. It does so based on the cooldown period for scaling down\. 
 
-Aurora Serverless scales seamlessly based on the workload on the DB cluster\. In some cases, the capacity might not scale fast enough to meet a sudden change in workload, such as a large number of new transactions\. In these cases, you can set the capacity explicitly\. After you set the capacity explicitly, Aurora Serverless can automatically scale the DB cluster\. It does so based on the cooldown period for scaling down\.
+You can explicitly set the capacity of an Aurora Serverless DB cluster to a specific value with the AWS Management Console, the AWS CLI, or the RDS API\.
 
 ## Console<a name="aurora-serverless.setting-capacity.console"></a>
 
@@ -18,16 +18,20 @@ You can set the capacity of an Aurora DB cluster with the AWS Management Console
 
 1. For **Actions**, choose **Set capacity**\.
 
-1. In the **Scale database capacity** window, set the capacity, the capacity that the DB cluster should scale to\.  
+1. In the **Scale database capacity** window, choose the following: 
+
+   1. For the **Scale DB cluster to** drop\-down selector, choose the new capacity that you want for your DB cluster\.
+
+   1. For the **If a seamless scaling point cannot be found\.\.\.** checkbox, choose the behavior you want for your Aurora Serverless DB cluster's `TimeoutAction` setting, as follows: 
+      + Uncheck this option if you want your capacity to remain unchanged if Aurora Serverless can't find a scaling point before timing out\.
+      + Check this option if you want to force your Aurora Serverless DB cluster change its capacity even if it can't find a scaling point before timing out\. This option can result Aurora Serverless dropping connections that prevent it from finding a scaling point\.
+
+   1. In the **seconds** field, enter the amount of time you want to allow your Aurora Serverless DB cluster to look for a scaling point before timing out\. You can specify anywhere from 10 seconds to 600 seconds \(10 minutes\)\. The default is five minutes \(300 seconds\)\. This following example forces the Aurora Serverless DB cluster to scale to the 2 ACUs even if it can't find a scaling point within five minutes\.   
 ![\[Setting capacity for an Aurora Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-set-capacity.png)
 
-1. Enable or disable the option to forcibly scale capacity\. If you enable it, specify the amount of time to find a scaling point\. Aurora Serverless attempts to find a scaling point before timing out\. If the timeout is reached, Aurora Serverless performs one of the following actions:
-   + If checked, Aurora Serverless will force the scaling capacity change to proceed after the timeout\. 
-   + If unchecked, Aurora Serverless will not perform the scaling capacity change after the timeout\.
-**Important**  
-When the option is enabled, connections that prevent Aurora Serverless from finding a scaling point might be dropped\. For more information about scaling points and cooldown periods, see [Autoscaling for Aurora Serverless](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\.
-
 1. Choose **Apply**\.
+
+To learn more about scaling points, `TimeoutAction`, and cooldown periods, see [Autoscaling for Aurora Serverless](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\.
 
 ## AWS CLI<a name="aurora-serverless.setting-capacity.cli"></a>
 

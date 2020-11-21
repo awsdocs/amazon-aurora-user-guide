@@ -21,7 +21,9 @@
 
 ## How Aurora storage automatically resizes<a name="aurora-storage-growth"></a>
 
- Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\)\. 
+ Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\) for the following engine versions:
++ Aurora MySQL engine versions 1\.23 compatible with MySQL 5\.6 and 2\.09 compatible with MySQL 5\.70
++ Aurora PostgreSQL engine versions 9\.6\.17 or higher, 10\.12 or higher, and 11\.7 or higher\.
 
  This automatic storage scaling is combined with a high\-performance and highly distributed storage subsystem\. These make Aurora a good choice for your important enterprise data when your main objectives are reliability and high availability\. For ways to balance storage costs against these other priorities, see the following 
 

@@ -50,7 +50,7 @@ The following are DB engine considerations for DB instance classes:
         --region your-cluster-AWS-Region
     ```
 + **Aurora Support for db\.t3** 
-  + Aurora MySQL supports the db\.t3\.medium and db\.t3\.small instance classes for Aurora MySQL 1\.15 and higher, and all Aurora MySQL 2\.x versions\. These instance classes are available for Aurora MySQL in all Aurora regions except AWS GovCloud \(US\-West\), AWS GovCloud \(US\-East\), and China \(Beijing\)\. 
+  + Aurora MySQL supports the db\.t3\.medium and db\.t3\.small instance classes for Aurora MySQL 1\.15 and higher, and all Aurora MySQL 2\.x versions\. These instance classes are available for Aurora MySQL in all Aurora regions except China \(Beijing\)\. 
   + For Aurora MySQL db\.r5, db\.r4, and db\.t3 DB instance classes, no instances in the cluster can have pending instance\-level system updates\. To see pending system updates, use the following AWS CLI command\.
 
     ```

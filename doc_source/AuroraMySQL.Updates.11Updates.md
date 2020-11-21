@@ -2,6 +2,7 @@
 
 The following are Amazon Aurora 1\.1 database engine updates:<a name="aurora_1x_updates"></a>
 + [Aurora MySQL database engine updates 2020\-09\-02 \(version 1\.23\.0\)](AuroraMySQL.Updates.1230.md)
++ [Aurora MySQL database engine updates 2020\-11\-09 \(version 1\.22\.3\)](AuroraMySQL.Updates.1223.md)
 + [Aurora MySQL database engine updates 2020\-03\-05 \(version 1\.22\.2\)](AuroraMySQL.Updates.1222.md)
 + [Aurora MySQL database engine updates 2019\-12\-23 \(version 1\.22\.1\)](AuroraMySQL.Updates.1221.md)
 + [Aurora MySQL database engine updates 2019\-11\-25 \(version 1\.22\.0\)](AuroraMySQL.Updates.1220.md)

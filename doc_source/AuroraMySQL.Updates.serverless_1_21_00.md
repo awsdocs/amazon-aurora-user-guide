@@ -2,7 +2,7 @@
 
  Aurora Serverless 5\.6 is generally available\. It has the same features and bug fixes as Aurora MySQL 1\.21\.0\. 
 
- For general information about Aurora Serverless, see [Using Amazon Aurora Serverless](aurora-serverless.md)\. 
+Aurora Serverless doesn't have its own version number\. It uses the number of Aurora MySQL version that supports it to distinguish between Aurora MySQL 5\.6 and Aurora MySQL 5\.7 updates\. For more information, see [Aurora Serverless versions](aurora-serverless.relnotes.md)\. For general information about Aurora Serverless, see [Using Amazon Aurora Serverless](aurora-serverless.md)\. 
 
  If you have any questions or concerns, AWS Support is available on the community forums and through AWS Premium Support at [http://aws\.amazon\.com/support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Aurora DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html)\. 
 

@@ -13,7 +13,7 @@ To set logging parameters for a DB instance, set the parameters in a DB paramete
 
 To set the retention period for system logs, use the `rds.log_retention_period` parameter\. You can find `rds.log_retention_period` in the DB parameter group associated with your DB instance\. The unit for this parameter is minutes\. For example, a setting of 1,440 retains logs for one day\. The default value is 4,320 \(three days\)\. The maximum value is 10,080 \(seven days\)\. Your instance must have enough allocated storage to contain the retained log files\. 
 
-Amazon Aurora compresses older PostgreSQL logs when storage for the DB instance reaches a threshold\. Aurora compresses the files using the gzip compression utility; for information on gzip, see the [gzip](https://www.gzip.org/) website\. When storage for the DB instance is low and all available logs are compressed, you get a warning like the following\.
+Amazon Aurora compresses older PostgreSQL logs when storage for the DB instance reaches a threshold\. Aurora compresses the files using the gzip compression utility; for information on gzip, see the [gzip](https://www.gzip.org) website\. When storage for the DB instance is low and all available logs are compressed, you get a warning like the following\.
 
 ```
 Warning: local storage for PostgreSQL log files is critically low for 

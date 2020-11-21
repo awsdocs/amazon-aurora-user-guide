@@ -783,9 +783,6 @@ Both expressions must be integers\.
 
 The parameter arguments can be specified as either integers or formulas\. Each function must have at least one argument\. Multiple arguments can be specified as a comma\-separated list\. The list can't have any empty members, such as *argument1*,,*argument3*\. Function names are case\-insensitive\.
 
-**Note**  
-DB Parameter functions are not currently supported in the AWS CLI\.
-
 *IF\(\)*  
 Returns an argument\.  
 Syntax  
