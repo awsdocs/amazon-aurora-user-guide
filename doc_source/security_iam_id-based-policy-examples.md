@@ -123,7 +123,7 @@ The policy includes a single statement that specifies the following permissions 
 
 The policy doesn't specify the `Principal` element because in an identity\-based policy you don't specify the principal who gets the permission\. When you attach policy to a user, the user is the implicit principal\. When you attach a permission policy to an IAM role, the principal identified in the role's trust policy gets the permissions\.
 
-To see a list of Aurora actions, see [Actions Defined by Amazon RDS](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonrds.html#amazonrds-actions-as-permissions) in the *IAM User Guide*\.
+To see a list of Aurora actions, see [Actions Defined by Amazon RDS](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonrds.html#amazonrds-actions-as-permissions) in the *Service Authorization Reference*\.
 
 ## Permissions required to use the console<a name="UsingWithRDS.IAM.RequiredPermissions.Console"></a>
 
@@ -377,7 +377,7 @@ If you manage access to your RDS resources using tagging, we recommend that you 
 14. }
 ```
 
-To see a list of Aurora actions, see [Actions Defined by Amazon RDS](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonrds.html#amazonrds-actions-as-permissions) in the *IAM User Guide*\.
+To see a list of Aurora actions, see [Actions Defined by Amazon RDS](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonrds.html#amazonrds-actions-as-permissions) in the *Service Authorization Reference*\.
 
 ### Example policies: Using custom tags<a name="UsingWithRDS.IAM.Conditions.Tags.Examples"></a>
 

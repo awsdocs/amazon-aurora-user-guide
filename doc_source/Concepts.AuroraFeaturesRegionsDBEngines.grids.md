@@ -191,28 +191,28 @@ Aurora Serverless is an on\-demand, auto\-scaling feature designed to be a cost\
 | --- | --- | --- | --- | --- | 
 | US East \(Ohio\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | US East \(N\. Virginia\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
-| US West \(N\. California\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
+| US West \(N\. California\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | US West \(Oregon\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Africa \(Cape Town\) | \- | \- | \- | \- | 
 | Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | 
-| Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
+| Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
-| Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
-| Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
+| Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
+| Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Asia Pacific \(Tokyo\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
-| Canada \(Central\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
+| Canada \(Central\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | China \(Beijing\) | \- | \- | \- | \- | 
 | China \(Ningxia\) | \- | \- | \- | \- | 
 | Europe \(Frankfurt\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Europe \(Ireland\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
-| Europe \(London\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
+| Europe \(London\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Europe \(Milan\) | \- | \- | \- | \- | 
-| Europe \(Paris\) | \- | Version 2\.07\.1 | \- | \- | 
-| Europe \(Stockholm\) | Version 5\.6\.10a | \- | \- | \- | 
-| Middle East \(Bahrain\) | Version 5\.6\.10a | \- | \- | \- | 
-| South America \(São Paulo\) | Version 5\.6\.10a | \- | \- | \- | 
-| AWS GovCloud \(US\-East\) | Version 5\.6\.10a | \- | \- | \- | 
-| AWS GovCloud \(US\-West\) | Version 5\.6\.10a | \- | \- | \- | 
+| Europe \(Paris\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
+| Europe \(Stockholm\) | \- | \- | \- | \- | 
+| Middle East \(Bahrain\) | \- | \- | \- | \- | 
+| South America \(São Paulo\) | \- | \- | \- | \- | 
+| AWS GovCloud \(US\-East\) | \- | \- | \- | \- | 
+| AWS GovCloud \(US\-West\) | \- | \- | \- | \- | 
 
 ## Data API for Aurora Serverless<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API"></a>
 
@@ -223,25 +223,25 @@ The Data API for Aurora Serverless provides a web\-services interface to an Auro
 | --- | --- | --- | --- | --- | 
 | US East \(Ohio\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | US East \(N\. Virginia\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
-| US West \(N\. California\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
+| US West \(N\. California\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | US West \(Oregon\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Africa \(Cape Town\) | \- | \- | \- | \- | 
 | Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | 
-| Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
+| Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
-| Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
-| Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
+| Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
+| Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Asia Pacific \(Tokyo\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
-| Canada \(Central\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
+| Canada \(Central\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | China \(Beijing\) | \- | \- | \- | \- | 
 | China \(Ningxia\) | \- | \- | \- | \- | 
 | Europe \(Frankfurt\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Europe \(Ireland\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
-| Europe \(London\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | \- | 
+| Europe \(London\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Europe \(Milan\) | \- | \- | \- | \- | 
-| Europe \(Paris\) | \- | Version 2\.07\.1 | \- | \- | 
-| Europe \(Stockholm\) | Version 5\.6\.10a | \- | \- | \- | 
-| Middle East \(Bahrain\) | Version 5\.6\.10a | \- | \- | \- | 
-| South America \(São Paulo\) | Version 5\.6\.10a | \- | \- | \- | 
-| AWS GovCloud \(US\-East\) | Version 5\.6\.10a | \- | \- | \- | 
-| AWS GovCloud \(US\-West\) | Version 5\.6\.10a | \- | \- | \- | 
+| Europe \(Paris\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
+| Europe \(Stockholm\) | \- | \- | \- | \- | 
+| Middle East \(Bahrain\) | \- | \- | \- | \- | 
+| South America \(São Paulo\) | \- | \- | \- | \- | 
+| AWS GovCloud \(US\-East\) | \- | \- | \- | \- | 
+| AWS GovCloud \(US\-West\) | \- | \- | \- | \- | 

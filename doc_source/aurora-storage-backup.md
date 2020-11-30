@@ -10,7 +10,7 @@
 + `TotalBackupStorageBilled` represents the sum, in bytes, of `BackupRetentionPeriodStorageUsed` and `SnapshotStorageUsed`, minus an amount of free backup storage, which equals the size of the cluster volume for one day\. The free backup storage is equal to the latest volume size\. For example if your cluster's `VolumeBytesUsed` size is 100 GiB, your retention period is two days, and you have one manual snapshot outside the retention period, the `TotalBackupStorageBilled` is 214,748,364,800 bytes \(200 GiB \+ 100 GiB \- 100 GiB\)\.
 + These metrics are computed independently for each Aurora DB cluster\.
 
- You can monitor your Aurora clusters and build reports using CloudWatch metrics through the [CloudWatch console](https://console.aws.amazon.com/cloudwatch/ )\. For more information about how to use CloudWatch metrics, see [Overview of monitoring Amazon Aurora](MonitoringOverview.md) and the table of metrics in [Amazon RDS metrics](MonitoringOverview.md#rds-metrics)\. 
+ You can monitor your Aurora clusters and build reports using CloudWatch metrics through the [CloudWatch console](https://console.aws.amazon.com/cloudwatch/ )\. For more information about how to use CloudWatch metrics, see [Overview of monitoring Amazon Aurora](MonitoringOverview.md) and the table of metrics in [Amazon Aurora Metrics](MonitoringOverview.md#rds-metrics)\. 
 
  The backtrack setting for an Aurora DB cluster doesn't affect the volume of backup data for that cluster\. Amazon bills the storage for backtrack data separately\. You can also find the backtrack pricing information on the [Amazon Aurora pricing](https://aws.amazon.com/rds/aurora/pricing) web page\. 
 

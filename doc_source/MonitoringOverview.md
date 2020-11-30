@@ -124,7 +124,7 @@ Metrics are grouped first by the service namespace, and then by the various dime
   1. aws cloudwatch list-metrics --namespace AWS/RDS
   ```
 
-#### Amazon RDS metrics<a name="rds-metrics"></a>
+#### Amazon Aurora Metrics<a name="rds-metrics"></a>
 
 The `AWS/RDS` namespace includes the following metrics\.
 
@@ -160,9 +160,9 @@ The Amazon RDS console might display metrics in units that are different from th
 | WriteLatency |   **Write Latency \(Milliseconds\)**   |  The average amount of time taken per disk I/O operation\. Units: Seconds  | 
 | WriteThroughput |   **Write Throughput \(MB/Second\)**   |  The average number of bytes written to disk per second\. Units: Bytes/Second  | 
 
-#### Amazon RDS dimensions<a name="dimensions"></a>
+#### Aurora Dimensions<a name="dimensions"></a>
 
-Amazon RDS metrics data can be filtered by using any of the dimensions in the following table:
+You can filter Aurora metrics data by using any dimension in the following table\.
 
 
 |  Dimension  |  Description  | 
@@ -176,7 +176,7 @@ Amazon RDS metrics data can be filtered by using any of the dimensions in the fo
 
 #### Creating CloudWatch alarms to monitor Amazon RDS<a name="creating_alarms"></a>
 
-You can create a CloudWatch alarm that sends an Amazon SNS message when the alarm changes state\. An alarm watches a single metric over a time period that you specify\. The alarm can also perform one or more actions based on the value of the metric relative to a given threshold over a number of time periods\. The action is a notification sent to an Amazon SNS topic or Amazon EC2 Auto Scaling policy\.
+You can create a CloudWatch alarm that sends an Amazon SNS message when the alarm changes state\. An alarm watches a single metric over a time period that you secify\. The alarm can also perform one or more actions based on the value of the metric relative to a given threshold over a number of time periods\. The action is a notification sent to an Amazon SNS topic or Amazon EC2 Auto Scaling policy\.
 
 Alarms invoke actions for sustained state changes only\. CloudWatch alarms don't invoke actions simply because they are in a particular state\. The state must have changed and have been maintained for a specified number of time periods\. The following procedures show how to create alarms for Amazon RDS\.
 
