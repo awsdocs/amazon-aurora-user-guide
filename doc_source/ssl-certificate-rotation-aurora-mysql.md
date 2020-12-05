@@ -23,9 +23,9 @@ For more information about certificate rotation, see [Rotating your SSL/TLS cert
 If you are using Aurora MySQL version 2 \(compatible with MySQL 5\.7\) and the Performance Schema is enabled, run the following query to check if connections are using SSL/TLS\. For information about enabling the Performance Schema, see [ Performance Schema quick start](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html) in the MySQL documentation\.
 
 ```
-mysql> SELECT id, user, host, connection_type 
-       FROM performance_schema.threads pst 
-       INNER JOIN information_schema.processlist isp 
+mysql> SELECT id, user, host, connection_type
+       FROM performance_schema.threads pst
+       INNER JOIN information_schema.processlist isp
        ON pst.processlist_id = isp.id;
 ```
 
@@ -71,13 +71,13 @@ The following examples with the MySQL Client show two ways to check a script's M
 When using the MySQL 5\.7 or MySQL 8\.0 Client, an SSL connection requires verification against the server CA certificate if for the `--ssl-mode` option you specify `VERIFY_CA` or `VERIFY_IDENTITY`, as in the following example\.
 
 ```
-mysql -h mysql-database.rds.amazonaws.com -uadmin -ppassword --ssl-ca=/tmp/ssl-cert.pem --ssl-mode=VERIFY_CA                
+mysql -h mysql-database.rds.amazonaws.com -uadmin -ppassword --ssl-ca=/tmp/ssl-cert.pem --ssl-mode=VERIFY_CA
 ```
 
 When using the MySQL 5\.6 Client, an SSL connection requires verification against the server CA certificate if you specify the `--ssl-verify-server-cert` option, as in the following example\.
 
 ```
-mysql -h mysql-database.rds.amazonaws.com -uadmin -ppassword --ssl-ca=/tmp/ssl-cert.pem --ssl-verify-server-cert            
+mysql -h mysql-database.rds.amazonaws.com -uadmin -ppassword --ssl-ca=/tmp/ssl-cert.pem --ssl-verify-server-cert
 ```
 
 ## Updating your application trust store<a name="ssl-certificate-rotation-aurora-mysql.updating-trust-store"></a>
@@ -100,7 +100,7 @@ You can update the trust store for applications that use JDBC for SSL/TLS connec
 1. Convert the certificate to \.der format using the following command\.
 
    ```
-   openssl x509 -outform der -in rds-ca-2019-root.pem -out rds-ca-2019-root.der                    
+   openssl x509 -outform der -in rds-ca-2019-root.pem -out rds-ca-2019-root.der
    ```
 
    Replace the file name with the one that you downloaded\.
@@ -108,13 +108,13 @@ You can update the trust store for applications that use JDBC for SSL/TLS connec
 1. Import the certificate into the key store using the following command\. 
 
    ```
-   keytool -import -alias rds-root -keystore clientkeystore -file rds-ca-2019-root.der                    
+   keytool -import -alias rds-root -keystore clientkeystore -file rds-ca-2019-root.der
    ```
 
 1. Confirm that the key store was updated successfully\.
 
    ```
-   keytool -list -v -keystore clientkeystore.jks                        
+   keytool -list -v -keystore clientkeystore.jks
    ```
 
    Enter the metastore password when you are prompted for it\.
@@ -122,7 +122,7 @@ You can update the trust store for applications that use JDBC for SSL/TLS connec
    Your output should contain the following\.
 
    ```
-   rds-root,date, trustedCertEntry, 
+   rds-root,date, trustedCertEntry,
    Certificate fingerprint (SHA1): D4:0D:DB:29:E3:75:0D:FF:A6:71:C3:14:0B:BF:5F:47:8D:1C:80:96
    # This fingerprint should match the output from the below command
    openssl x509 -fingerprint -in rds-ca-2019-root.pem -noout
@@ -138,7 +138,7 @@ System.setProperty("javax.net.ssl.trustStorePassword", "password");
 When you start the application, set the following properties\.
 
 ```
-java -Djavax.net.ssl.trustStore=/path_to_truststore/MyTruststore.jks -Djavax.net.ssl.trustStorePassword=my_truststore_password com.companyName.MyApplication        
+java -Djavax.net.ssl.trustStore=/path_to_truststore/MyTruststore.jks -Djavax.net.ssl.trustStorePassword=my_truststore_password com.companyName.MyApplication
 ```
 
 ## Example Java code for establishing SSL connections<a name="ssl-certificate-rotation-aurora-mysql.java-example"></a>
@@ -153,23 +153,22 @@ public class MySQLSSLTest {
         // This key store has only the prod root ca.
         private static final String KEY_STORE_FILE_PATH = "file-path-to-keystore";
         private static final String KEY_STORE_PASS = "keystore-password";
-        
+
     public static void test(String[] args) throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
-        
-        
+
+
         System.setProperty("javax.net.ssl.trustStore", KEY_STORE_FILE_PATH);
         System.setProperty("javax.net.ssl.trustStorePassword", KEY_STORE_PASS);
-        
+
         Properties properties = new Properties();
         properties.setProperty("sslMode", "VERIFY_IDENTITY");
         properties.put("user", DB_USER);
         properties.put("password", DB_PASSWORD);
-        
 
         Connection connection = DriverManager.getConnection("jdbc:mysql://jagdeeps-ssl-test.cni62e2e7kwh.us-east-1.rds.amazonaws.com:3306",properties);
         Statement stmt=connection.createStatement();
-        
+
         ResultSet rs=stmt.executeQuery("SELECT 1 from dual");
 
         return;

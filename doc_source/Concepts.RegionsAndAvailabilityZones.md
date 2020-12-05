@@ -9,7 +9,7 @@ Amazon operates state\-of\-the\-art, highly\-available data centers\. Although r
 
 ![\[AWS Region\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Con-AZ.png)
 
-It is important to remember that each AWS Region is completely independent\. Any Amazon RDS activity you initiate \(for example, creating database instances or listing available database instances\) runs only in your current default AWS Region\. The default AWS Region can be changed in the console, by setting the EC2\_REGION environment variable, or it can be overridden by using the `--region` parameter with the AWS Command Line Interface \(AWS CLI\)\. For more information, see [Configuring the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), specifically the sections about environment variables and command line options\. 
+It is important to remember that each AWS Region is completely independent\. Any Amazon RDS activity you initiate \(for example, creating database instances or listing available database instances\) runs only in your current default AWS Region\. The default AWS Region can be changed in the console, by setting the [AWS\_DEFAULT\_REGION](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-region) environment variable, or it can be overridden by using the `--region` parameter with the AWS Command Line Interface \(AWS CLI\)\. For more information, see [Configuring the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), specifically the sections about environment variables and command line options\. 
 
 Amazon RDS supports a special AWS Region called AWS GovCloud \(US\-West\) that is designed to allow US government agencies and customers to move more sensitive workloads into the cloud\. AWS GovCloud \(US\-West\) addresses the US government's specific regulatory and compliance requirements\. For more information about AWS GovCloud \(US\-West\), see [What is AWS GovCloud \(US\-West\)?](https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/whatis.html) 
 
@@ -24,11 +24,7 @@ Each AWS Region is designed to be isolated from the other AWS Regions\. This des
 
 When you view your resources, you see only the resources that are tied to the AWS Region that you specified\. This is because AWS Regions are isolated from each other, and we don't automatically replicate resources across AWS Regions\.
 
-## Availability Zones<a name="Concepts.RegionsAndAvailabilityZones.AvailabilityZones"></a>
-
-When you create a DB instance, you can choose an Availability Zone or have AWS choose one for you\. An Availability Zone is represented by an AWS Region code followed by a letter identifier \(for example, `us-east-1a`\)\.
-
-## Region availability<a name="Aurora.Overview.Availability"></a>
+### Region availability<a name="Aurora.Overview.Availability"></a>
 
 **Note**  
 Aurora MySQL version 5\.7 and Aurora PostgreSQL version 10\.7 don't have time zone data that reflect recent changes to Daylight Saving Time \(DST\) in Brazil\. For a workaround until updated versions are available, reset the DB cluster's time zone parameter if the expected time doesn't show correctly for the recently changed Brazil time zone\. Do the following:  
@@ -42,17 +38,21 @@ When you work with an Aurora DB cluster using the command line interface or API 
 + [Aurora MySQL Region availability](#Aurora.Overview.Availability.MySQL)
 + [Aurora PostgreSQL Region availability](#Aurora.Overview.Availability.PostgreSQL)
 
-### Aurora MySQL Region availability<a name="Aurora.Overview.Availability.MySQL"></a>
+#### Aurora MySQL Region availability<a name="Aurora.Overview.Availability.MySQL"></a>
 
 The following table shows the AWS Regions where Aurora MySQL is currently available and the endpoint for each Region\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html)
 
-### Aurora PostgreSQL Region availability<a name="Aurora.Overview.Availability.PostgreSQL"></a>
+#### Aurora PostgreSQL Region availability<a name="Aurora.Overview.Availability.PostgreSQL"></a>
 
 The following table shows the AWS Regions where Aurora PostgreSQL is currently available and the endpoint for each Region\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html)
+
+## Availability Zones<a name="Concepts.RegionsAndAvailabilityZones.AvailabilityZones"></a>
+
+When you create a DB instance, you can choose an Availability Zone or have AWS choose one for you\. An Availability Zone is represented by an AWS Region code followed by a letter identifier \(for example, `us-east-1a`\)\.
 
 ## Local time zone for Amazon Aurora DB clusters<a name="Aurora.Overview.LocalTimeZone"></a>
 

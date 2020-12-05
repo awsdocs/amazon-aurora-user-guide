@@ -419,8 +419,8 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
  Aurora multi\-master clusters support locking reads in the following forms\. 
 
 ```
-      SELECT ... FOR UPDATE
-      SELECT ... LOCK IN SHARE MODE
+SELECT ... FOR UPDATE
+SELECT ... LOCK IN SHARE MODE
 ```
 
  For more information about locking reads, see the [MySQL reference manual](https://dev.mysql.com/doc/refman/5.6/en/innodb-locking-reads.html)\. 

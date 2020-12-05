@@ -53,4 +53,4 @@ Following, you can find the DB engines that support Performance Insights\.
 |  Amazon RDS for Oracle  |  All versions\.   | 
 
 **Note**  
-Amazon RDS Performance Insights is not supported in the Middle East \(Bahrain\) Region or in AWS GovCloud \(US\) Regions\. 
+Amazon RDS Performance Insights isn't supported in the Middle East \(Bahrain\) Region, Africa \(Cape Town\) Region, or in AWS GovCloud \(US\) Regions\. 

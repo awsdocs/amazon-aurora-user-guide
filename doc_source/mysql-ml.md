@@ -125,7 +125,8 @@ For more information about Regions and Aurora version availability, see [Aurora 
  The following command performs the same operation through the AWS CLI\. 
 
 ```
-aws iam put-role-policy --role-name role_name --policy-name policy_name --policy-document '{"Version": "2012-10-17", "Statement": [ { "Sid": "AllowAuroraToInvokeRCFEndPoint", "Effect": "Allow", "Action": "sagemaker:InvokeEndpoint", "Resource": "arn:aws:sagemaker:region:123456789012:endpoint/endpointName" }]}'
+aws iam put-role-policy --role-name role_name --policy-name policy_name
+  --policy-document '{"Version": "2012-10-17", "Statement": [ { "Sid": "AllowAuroraToInvokeRCFEndPoint", "Effect": "Allow", "Action": "sagemaker:InvokeEndpoint", "Resource": "arn:aws:sagemaker:region:123456789012:endpoint/endpointName" }]}'
 ```
 
 #### Creating an IAM policy to access Amazon Comprehend \(AWS CLI only\)<a name="aurora-ml-creating-iam-policy-comprehend"></a>
@@ -155,7 +156,8 @@ aws iam put-role-policy --role-name role_name --policy-name policy_name --policy
  The following command performs the same operation through the AWS CLI\. 
 
 ```
-aws iam put-role-policy --role-name role_name --policy-name policy_name --policy-document '{ "Version": "2012-10-17", "Statement": [ { "Sid": "AllowAuroraToInvokeComprehendDetectSentiment", "Effect": "Allow", "Action": [ "comprehend:DetectSentiment", "comprehend:BatchDetectSentiment" ], "Resource": "*" }]}'
+aws iam put-role-policy --role-name role_name --policy-name policy_name
+  --policy-document '{ "Version": "2012-10-17", "Statement": [ { "Sid": "AllowAuroraToInvokeComprehendDetectSentiment", "Effect": "Allow", "Action": [ "comprehend:DetectSentiment", "comprehend:BatchDetectSentiment" ], "Resource": "*" }]}'
 ```
 
 **To create an IAM policy to grant access to Amazon Comprehend**
@@ -319,7 +321,7 @@ CREATE FUNCTION function_name (arg1 type1, arg2 type2, ...) -- variable number o
 ```
 create function anomaly_score(value real) returns real
   alias aws_sagemaker_invoke_endpoint endpoint name 'random-cut-forest-model-demo';
-  
+
 set @score_cutoff = (select avg(anomaly_score(value)) + 3 * std(anomaly_score(value)) from nyc_taxi);
 
 select *, anomaly_detection(value) score from nyc_taxi
@@ -350,7 +352,7 @@ CREATE FUNCTION my_ml_func(...) RETURNS VARCHAR(5) CHARSET utf8mb4 ALIAS ...
 ```
 -- Returns one of 'POSITIVE', 'NEGATIVE', 'NEUTRAL', 'MIXED'
 aws_comprehend_detect_sentiment(
-  input_text 
+  input_text
   ,language_code
   [,max_batch_size]  -- default is 25. should be greater than 0
 )

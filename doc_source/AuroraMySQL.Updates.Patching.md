@@ -2,7 +2,7 @@
 
  You can use the following methods to upgrade the minor version of a DB cluster or to patch a DB cluster: 
 +  [Upgrading Aurora MySQL by modifying the engine version](#AuroraMySQL.Updates.Patching.ModifyEngineVersion) \(for Aurora MySQL 1\.19\.0 and higher, or 2\.03\.2 and higher\) 
-+  [Enabling automatic upgrades between minor Aurora MySQL versions](#AuroraMySQL.Updates.AMVU) \(for Aurora MySQL 2\.x\) 
++  [Enabling automatic upgrades between minor Aurora MySQL versions](#AuroraMySQL.Updates.AMVU) 
 +  [Upgrading Aurora MySQL by applying pending maintenance to an Aurora MySQL DB cluster](#AuroraMySQL.Updates.PendingMaintenance) \(before Aurora MySQL 1\.19\.0 or 2\.03\.2\) 
 
  For information about how zero\-downtime patching can reduce interruptions during the upgrade process, see [Using zero\-downtime patching](#AuroraMySQL.Updates.ZDP)\. 
@@ -24,14 +24,12 @@
 
 ## Enabling automatic upgrades between minor Aurora MySQL versions<a name="AuroraMySQL.Updates.AMVU"></a>
 
- For an Amazon Aurora MySQL DB cluster that's running Aurora MySQL version 2, you can specify that Aurora upgrades the DB cluster automatically to new minor versions as those versions are released\. You do so by enabling the automatic minor version upgrade property of the DB cluster using the AWS Management Console, AWS CLI, or the RDS API\. 
+ For an Amazon Aurora MySQL DB cluster, you can specify that Aurora upgrades the DB cluster automatically to new minor versions as those versions are released\. You do so by enabling the automatic minor version upgrade property of the DB cluster using the AWS Management Console, AWS CLI, or the RDS API\. 
 
  The automatic upgrades occur during the maintenance window for the database\. 
 
 **Important**  
  Until August 2020, you could specify this setting for a DB instance that was part of an Aurora MySQL DB cluster, but the setting had no effect\. Now, the setting does apply to Aurora MySQL\. If you have clusters created before August 2020, check whether the DB instances in the cluster already had the **Enable auto minor version upgrade** setting enabled\. If so, confirm that this setting is still appropriate and change it if not\. Aurora only performs the automatic upgrade if all DB instances in your cluster have this setting enabled\. 
-
- Currently, automatic minor version upgrades change the engine version for Aurora MySQL 1\.x clusters to 1\.22\.2, and for Aurora MySQL 2\.x clusters to 2\.07\.2\. 
 
  Automatic minor version upgrade doesn't apply to clusters running the LTS version for Aurora MySQL 1\.x or 2\.x\. Aurora won't automatically upgrade clusters running 2\.04\.9, 1\.19\.6, or other patch levels of those minor versions\. 
 
@@ -71,33 +69,28 @@
 
 ```
 aws rds describe-db-instances \
---query '*[].{DBClusterIdentifier:DBClusterIdentifier,DBInstanceIdentifier:DBInstanceIdentifier,AutoMinorVersionUpgrade:AutoMinorVersionUpgrade}'
+  --query '*[].{DBClusterIdentifier:DBClusterIdentifier,DBInstanceIdentifier:DBInstanceIdentifier,AutoMinorVersionUpgrade:AutoMinorVersionUpgrade}'
 ```
 
  That command produces output similar to the following\. 
 
 ```
 [
-{
-    "DBInstanceIdentifier": "db-t2-medium-instance",
-    "DBClusterIdentifier": "cluster-57-2020-06-03-6411",
-    "AutoMinorVersionUpgrade": true
-},
-{
-    "DBInstanceIdentifier": "db-t2-small-original-size",
-    "DBClusterIdentifier": "cluster-57-2020-06-03-6411",
-    "AutoMinorVersionUpgrade": false
-},
-{
-    "DBInstanceIdentifier": "instance-2020-04-11-5110",
-    "DBClusterIdentifier": "tpch100g",
-    "AutoMinorVersionUpgrade": false
-},
-{
-    "DBInstanceIdentifier": "instance-2020-05-01-2332",
-    "DBClusterIdentifier": "cluster-57-2020-05-01-4615",
-    "AutoMinorVersionUpgrade": true
-},
+  {
+      "DBInstanceIdentifier": "db-t2-medium-instance",
+      "DBClusterIdentifier": "cluster-57-2020-06-03-6411",
+      "AutoMinorVersionUpgrade": true
+  },
+  {
+      "DBInstanceIdentifier": "db-t2-small-original-size",
+      "DBClusterIdentifier": "cluster-57-2020-06-03-6411",
+      "AutoMinorVersionUpgrade": false
+  },
+  {
+      "DBInstanceIdentifier": "instance-2020-05-01-2332",
+      "DBClusterIdentifier": "cluster-57-2020-05-01-4615",
+      "AutoMinorVersionUpgrade": true
+  },
 ... output omitted ...
 ```
 

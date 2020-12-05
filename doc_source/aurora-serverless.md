@@ -50,6 +50,7 @@ The following limitations apply to Aurora Serverless:
   + Aurora Replicas
   + AWS Identity and Access Management \(IAM\) database authentication
   + Backtracking in Aurora 
+  + Database Activity Streams \(DAS\)
   + Performance Insights
 + Connections to an Aurora Serverless DB cluster are closed automatically if held open for longer than one day\.
 + Aurora MySQL\-compatible and Aurora PostgreSQL\-compatible Serverless DB clusters have the following limitations:
@@ -57,7 +58,7 @@ The following limitations apply to Aurora Serverless:
   + Saving data to text files in Amazon S3\.
   + Loading text file data to Aurora MySQL Serverless from Amazon S3\. However, you can load data to Aurora PostgreSQL Serverless from Amazon S3 by using the `aws_s3` extension with the `aws_s3.table_import_from_s3` function and the `credentials` parameter\. For more information, see [Importing Amazon S3 data into an Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Migrating.md#USER_PostgreSQL.S3Import)\.
 + Aurora MySQL\-compatible Aurora Serverless DB clusters don't support the following:
-  + Invoking an AWS Lambda function with an Aurora MySQL native function\.
+  + Invoking AWS Lambda functions from within your Aurora MySQL DB cluster\. However, AWS Lambda functions can make calls to your Aurora MySQL Serverless DB cluster\.
   + Restoring a snapshot from a non\-Aurora MySQL or non\-Amazon RDS MySQL DB instance\.
   + Replicating data using binlog\-based replication, regardless of whether the Aurora MySQL\-based Aurora Serverless DB cluster is the source or the target of the replication\. To replicate data into an Aurora Serverless DB cluster from a MySQL DB instance outside Amazon Aurora such as one running on Amazon EC2, we recommend that you consider using AWS Database Migration Service\. For more information, see [AWS Database Migration Service User Guide](https://docs.aws.amazon.com/dms/latest/userguide/)\. 
 + Aurora PostgreSQL\-compatible Aurora Serverless DB clusters have the following limitations:
