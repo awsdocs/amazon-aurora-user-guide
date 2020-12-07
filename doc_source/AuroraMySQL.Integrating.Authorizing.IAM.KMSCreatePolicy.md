@@ -11,7 +11,7 @@ The following policy adds the permissions required by Aurora to access AWS KMS C
         {
             "Effect": "Allow",
             "Action": [
-                "kms:Decrypt",
+                "kms:Decrypt"
             ],
             "Resource": "arn:aws:kms:<region>:<123456789012>:key/<key-ID>"
         }
