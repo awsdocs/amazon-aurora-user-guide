@@ -152,6 +152,8 @@ We recommend the following process when upgrading an Aurora PostgreSQL DB cluste
 1. Upgrade your production instance\.
 
    When your dry\-run major version upgrade is successful, you should be able to upgrade your production database with confidence\. For more information, see [Manually upgrading the Aurora PostgreSQL engine](#USER_UpgradeDBInstance.Upgrading.Manual)\. 
+
+   
 **Note**  
 During the upgrade process, you can't do a point\-in\-time restore of your cluster\. Aurora PostgreSQL takes a DB cluster snapshot during the upgrade process if your backup retention period is greater than 0\. You can perform a point\-in\-time restore to times before the upgrade began and after the automatic snapshot of your instance has completed\. 
 

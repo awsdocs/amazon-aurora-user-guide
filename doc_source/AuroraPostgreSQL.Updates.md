@@ -2,6 +2,8 @@
 
 In the following topic, you can find version and update information specific to Amazon Aurora with PostgreSQL compatibility\. For more information about updates that apply generally to Aurora, see [Amazon Aurora updates](Aurora.Updates.md)\.
 
+
+
 **Note**  
 For how to upgrade the Amazon Aurora PostgreSQL engine version, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 

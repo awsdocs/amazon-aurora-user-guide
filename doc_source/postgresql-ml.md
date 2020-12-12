@@ -537,6 +537,8 @@ The sentiment of the text\. Valid values are POSITIVE, NEGATIVE, NEUTRAL, or MIX
 **confidence**  
 The degree of confidence in the `sentiment` value\. Values range between 1\.0 for 100% to 0\.0 for 0%\.
 
+
+
 ### aws\_sagemaker\.invoke\_endpoint<a name="aws_sagemaker.invoke_endpoint"></a>
 
 After you train a model and deploy it into production using SageMaker services, your client applications use the `aws_sagemaker.invoke_endpoint` function to get inferences from the model\. The model must be hosted at the specified endpoint and must be in the same AWS Region as the database instance\. For more about usage, see [Using SageMaker to run your own ML models](#postgresql-using-sagemaker)\.

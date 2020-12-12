@@ -14,6 +14,8 @@ The cost of an execution plan is an estimate that the optimizer makes to compare
 
 The following flowchart shows how the query plan management optimizer chooses which plan to run\. 
 
+
+
 ![\[Query Plan Management Workflow\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-QPM-workflow.png)
 
 The flow is as follows:

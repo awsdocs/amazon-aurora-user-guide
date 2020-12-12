@@ -77,6 +77,8 @@ Add all of these options \($138\.70 \+ $45\.60 \+ $20 \+ $30\) with the reserved
 
 If you chose to use an on\-demand DB instance instead of a reserved DB instance, an Aurora MySQL Single\-AZ db\.r4\.large DB instance class in US East \(N\. Virginia\) costs $0\.29 per hour, or $217\.50 per month\. So, for an on\-demand DB instance, add all of these options \($217\.50 \+ $45\.60 \+ $20 \+ $30\), and the total cost per month is $313\.10\.
 
+
+
 **Note**  
 The prices in this example are sample prices and might not match actual prices\.  
 For Aurora pricing information, see the [Aurora pricing page](https://aws.amazon.com/rds/aurora/pricing)\.

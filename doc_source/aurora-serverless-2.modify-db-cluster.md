@@ -5,12 +5,13 @@
 
 |  | 
 | --- |
-| Amazon Aurora Serverless v2 with MySQL compatibility is in preview release and is subject to change\. Aurora Serverless v2 \(preview\) is not covered by the Amazon RDS service level agreement \(SLA\)\. Don't use Aurora Serverless v2 \(preview\) for production databases\. | 
+| Amazon Aurora Serverless v2 with MySQL compatibility is in preview release and is subject to change\. Aurora Serverless v2 \(preview\) is not covered by the Amazon RDS service level agreement \(SLA\)\. Don't use Aurora Serverless v2 \(preview\) for production databases\. All resources and data will be deleted when the preview ends\.  | 
 
 You can change configuration settings for your Aurora Serverless v2 \(preview\) DB cluster at any time, such as to do the following: 
 + Change your Aurora Serverless v2 \(preview\) DB cluster name\. 
 + Enable \(or disable\) deletion protection for your Aurora Serverless v2 \(preview\) DB cluster\. 
 + Modify your Aurora Serverless v2 \(preview\) DB cluster's capacity settings\. 
++ Modify **Additional configuration** settings, such as choosing a custom DB cluster parameter group\. 
 
 The only configuration option you can't change for Aurora Serverless v2 \(preview\) DB cluster is its virtual private cloud \(VPC\) that you chose when you created it\. 
 
@@ -48,3 +49,26 @@ Currently, you can modify the capacity of your Aurora Serverless v2 \(preview\) 
 1. Choose **Modify cluster** to accept the summary of modifications\. You can also choose **Back** to modify your changes or **Cancel** to discard your changes\.
 
 To learn more about ACUs and scaling for Aurora Serverless v2 \(preview\), see [Instant autoscaling](aurora-serverless-2.how-it-works.md#aurora-serverless-2.how-it-works.autoscaling)\.
+
+## Modifying your DB cluster to use a custom DB cluster parameter group<a name="aurora-serverless-2.modify-db-cluster.custom-db-cluster-parameters"></a>
+
+To use a custom DB cluster parameter group after your Aurora Serverless v2 \(preview\) is running, modify your existing Aurora Serverless v2 \(preview\) DB cluster\. 
+
+Before you can use the following procedure, your custom DB cluster parameter group must exist\. To learn how to create a custom DB cluster parameter group, see [Aurora Serverless and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\. 
+
+**To modify your Aurora Serverless v2 \(preview\) DB cluster to use a custom DB cluster parameter group**
+
+1. Sign in to the preview using the AWS Management Console and open the Amazon RDS console\. 
+
+1. In the navigation pane, choose **DB Clusters**\.
+
+1. Choose your Aurora Serverless v2 \(preview\) DB cluster from the list, and then choose **Modify**\.
+
+1. Under **Additional configuration**, choose your custom DB cluster parameter group\.  
+![\[Using a custom DB cluster parameter group\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-sles2-custom-parameter-for-logging.png)
+
+1. Choose **Continue**\. The **Summary of modifications** page appears\.
+
+1. Choose **Modify cluster** to accept the summary of modifications\. Or choose **Back** to modify your changes or **Cancel** to discard your changes\.
+
+To learn more about creating custom DB cluster parameter groups, see [Aurora Serverless and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.

@@ -16,7 +16,7 @@
 + [High availability considerations for Amazon Aurora MySQL replication](#AuroraMySQL.Replication.Availability)
 + [Monitoring Amazon Aurora MySQL replication](#AuroraMySQL.Replication.Monitoring)
 + [Replicating Amazon Aurora MySQL DB clusters across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)
-+ [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)](AuroraMySQL.Replication.MySQL.md)
++ [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)
 + [Using GTID\-based replication for Aurora MySQL](mysql-replication-gtid.md)
 
 ## Using Aurora replicas<a name="AuroraMySQL.Replication.Replicas"></a>
@@ -44,7 +44,7 @@ You can set up replication between any of the following options:
   For more information, see [Replicating Amazon Aurora MySQL DB clusters across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\.
 + Two Aurora MySQL DB clusters in the same AWS Region, by using MySQL binary log \(binlog\) replication\.
 
-  For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)](AuroraMySQL.Replication.MySQL.md)\.
+  For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.
 + An Amazon RDS MySQL DB instance as the source and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an Amazon RDS MySQL DB instance\.
 
   You can use this approach to bring existing and ongoing data changes into Aurora MySQL during migration to Aurora\. For more information, see [Migrating data from a MySQL DB instance to an Amazon Aurora MySQL DB cluster by using a DB snapshot](AuroraMySQL.Migrating.RDSMySQL.md)\.

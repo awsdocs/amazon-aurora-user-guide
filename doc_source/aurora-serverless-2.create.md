@@ -5,7 +5,7 @@
 
 |  | 
 | --- |
-| Amazon Aurora Serverless v2 with MySQL compatibility is in preview release and is subject to change\. Aurora Serverless v2 \(preview\) is not covered by the Amazon RDS service level agreement \(SLA\)\. Don't use Aurora Serverless v2 \(preview\) for production databases\. | 
+| Amazon Aurora Serverless v2 with MySQL compatibility is in preview release and is subject to change\. Aurora Serverless v2 \(preview\) is not covered by the Amazon RDS service level agreement \(SLA\)\. Don't use Aurora Serverless v2 \(preview\) for production databases\. All resources and data will be deleted when the preview ends\.  | 
 
 To work with Amazon Aurora Serverless v2 \(preview\), you must apply for access\. For more information, see the [Aurora Serverless v2 \(preview\) page](https://pages.awscloud.com/AmazonAuroraServerlessv2Preview.html)\. 
 
@@ -41,7 +41,9 @@ After you've been approved for access, you can sign in to the preview using the 
    To learn how, see [How to create a VPC for use with Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateVPC.html)\.  
 ![\[Screenshot of creating DB cluster with console, Connectivity options.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-sles2-create-db-4.png)
 
-1. For **Additional configuration**, enter a name for **Initial database name** to create a database for your Aurora Serverless v2 \(preview\) cluster\.   
+1. For **Additional configuration**, enter a name for **Initial database name** to create a database for your Aurora Serverless v2 \(preview\) cluster\. 
+
+   If you created a custom DB cluster parameter group, choose it for **DB cluster parameter group**\. If you want to view your Aurora MySQL logs in Amazon CloudWatch, make sure to use a custom DB cluster parameter group\. For more information, see [Logging with Amazon CloudWatch](aurora-serverless-2.how-it-works.md#aurora-serverless-2.how-it-works.logging)\.   
 ![\[Screenshot of creating DB cluster with console, additional configuration options.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-sles2-create-db-5.png)
 
    The Aurora Serverless v2 \(preview\) cluster volume is always encrypted\. You can't disable encryption, but you can choose your own encryption key\. For more information, see [Encrypting Amazon Aurora resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Overview.Encryption.html#Overview.Encryption.Enabling)\. 
@@ -51,4 +53,20 @@ After you've been approved for access, you can sign in to the preview using the 
 
 1. Choose **Create database** to create your Aurora Serverless v2 \(preview\) DB cluster\. 
 
-You can connect to your Aurora Serverless v2 \(preview\) DB cluster by using its endpoint\. The endpoint is listed in the **Connectivity & security** tab of the console\. For more information, see [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\.
+You can connect to your Aurora Serverless v2 \(preview\) DB cluster by using its endpoint\. The endpoint is listed on the **Connectivity & security** tab of the console, under **Endpoint & Port**\. For more information about how to connect to Aurora DB clusters, see [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\.
+
+Aurora Serverless v2 \(preview\) creates your DB instance using port 3306\. Make sure to configure the security group for your Aurora Serverless v2 \(preview\) DB cluster to allow access to the `MySQL/Aurora` port \(`3306`\)\. 
+
+However, you can't access the Amazon VPC configurations directly from the preview console\. 
+
+**To modify your security group settings**
+
+1. Sign in to your [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
+
+1. Choose the US East \(N\. Virginia\) Region\.
+
+1. For **Security Group**, choose the security group associated with your Aurora Serverless v2 \(preview\) DB cluster\.
+
+1. Edit values for **Inbound rules** and **Outbound rules** as needed\.
+
+To learn more about configuring your VPC for Aurora, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.html)\. 

@@ -1,6 +1,6 @@
-# Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)<a name="AuroraMySQL.Replication.MySQL"></a>
+# Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)<a name="AuroraMySQL.Replication.MySQL"></a>
 
-Because Amazon Aurora MySQL is compatible with MySQL, you can set up replication between a MySQL database and an Amazon Aurora MySQL DB cluster\. This type of replication uses the MySQL binary log replication, and is commonly referred to as *binlog replication*\. If you use binlog replication with Aurora, we recommend that your MySQL database run MySQL version 5\.5 or later\. You can set up replication where your Aurora MySQL DB cluster is the replication source or the replica\. You can replicate with an Amazon RDS MySQL DB instance, a MySQL database external to Amazon RDS, or another Aurora MySQL DB cluster\. 
+Because Amazon Aurora MySQL is compatible with MySQL, you can set up replication between a MySQL database and an Amazon Aurora MySQL DB cluster\. This type of replication uses the MySQL binary log replication, also referred to as *binlog replication*\. If you use binary log replication with Aurora, we recommend that your MySQL database run MySQL version 5\.5 or later\. You can set up replication where your Aurora MySQL DB cluster is the replication source or the replica\. You can replicate with an Amazon RDS MySQL DB instance, a MySQL database external to Amazon RDS, or another Aurora MySQL DB cluster\. 
 
 You can also replicate with an Amazon RDS MySQL DB instance or Aurora MySQL DB cluster in another AWS Region\. When you're performing replication across AWS Regions, ensure that your DB clusters and DB instances are publicly accessible\. Aurora MySQL DB clusters must be part of a public subnet in your VPC\.
 
@@ -46,15 +46,15 @@ Find instructions on how to enable binary logging on the replication source for 
 
 ### 2\. Retain binary logs on the replication source until no longer needed<a name="AuroraMySQL.Replication.MySQL.RetainBinlogs"></a>
 
-When you use MySQL binlog replication, Amazon RDS doesn't manage the replication process\. As a result, you need to ensure that the binlog files on your replication source are retained until after the changes have been applied to the replica\. This maintenance helps ensure that you can restore your source database in the event of a failure\.
+When you use MySQL binary log replication, Amazon RDS doesn't manage the replication process\. As a result, you need to ensure that the binlog files on your replication source are retained until after the changes have been applied to the replica\. This maintenance helps ensure that you can restore your source database in the event of a failure\.
 
 Find instructions on how to retain binary logs for your database engine following\.
 
 
 | Database engine | Instructions | 
 | --- | --- | 
-|  Aurora  |  **To retain binary logs on an Aurora MySQL DB cluster** You do not have access to the binlog files for an Aurora MySQL DB cluster\. As a result, you must choose a time frame to retain the binlog files on your replication source long enough to ensure that the changes have been applied to your replica before the binlog file is deleted by Amazon RDS\. You can retain binlog files on an Aurora MySQL DB cluster for up to 90 days\. If you are setting up replication with a MySQL database or RDS MySQL DB instance as the replica, and the database that you are creating a replica for is very large, choose a large time frame to retain binlog files until the initial copy of the database to the replica is complete and the replica lag has reached 0\. To set the binlog retention time frame, use the [ mysql\_rds\_set\_configuration](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_configuration.html) procedure and specify a configuration parameter of `'binlog retention hours'` along with the number of hours to retain binlog files on the DB cluster, up to 2160 \(90 days\)\. The following example that sets the retention period for binlog files to 6 days: <pre>CALL mysql.rds_set_configuration('binlog retention hours', 144);</pre> After replication has been started, you can verify that changes have been applied to your replica by running the `SHOW SLAVE STATUS` command on your replica and checking the `Seconds behind master` field\. If the `Seconds behind master` field is 0, then there is no replica lag\. When there is no replica lag, reduce the length of time that binlog files are retained by setting the `binlog retention hours` configuration parameter to a smaller time frame\. If you specify a value for `'binlog retention hours'` that is higher than 2160, then 2160 is used\.  | 
-|  RDS MySQL  |  **To retain binary logs on an Amazon RDS DB instance** You can retain binlog files on an Amazon RDS DB instance by setting the binlog retention hours just as with an Aurora MySQL DB cluster, described in the previous section\. You can also retain binlog files on an Amazon RDS DB instance by creating a read replica for the DB instance\. This read replica is temporary and solely for the purpose of retaining binlog files\. After the read replica has been created, call the [ mysql\_rds\_stop\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_stop_replication.html) procedure on the read replica \(the `mysql.rds_stop_replication` procedure is only available for MySQL versions 5\.5, 5\.6 and later, and 5\.7 and later\)\. While replication is stopped, Amazon RDS doesn't delete any of the binlog files on the replication source\. After you have set up replication with your permanent replica, you can delete the read replica when the replica lag \(`Seconds behind master` field\) between your replication source and your permanent replica reaches 0\.  | 
+|  Aurora  |  **To retain binary logs on an Aurora MySQL DB cluster** You do not have access to the binlog files for an Aurora MySQL DB cluster\. As a result, you must choose a time frame to retain the binlog files on your replication source long enough to ensure that the changes have been applied to your replica before the binlog file is deleted by Amazon RDS\. You can retain binlog files on an Aurora MySQL DB cluster for up to 90 days\. If you are setting up replication with a MySQL database or RDS MySQL DB instance as the replica, and the database that you are creating a replica for is very large, choose a large time frame to retain binlog files until the initial copy of the database to the replica is complete and the replica lag has reached 0\. To set the binary log retention time frame, use the [ mysql\_rds\_set\_configuration](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_configuration.html) procedure and specify a configuration parameter of `'binlog retention hours'` along with the number of hours to retain binlog files on the DB cluster, up to 2160 \(90 days\)\. The following example that sets the retention period for binlog files to 6 days: <pre>CALL mysql.rds_set_configuration('binlog retention hours', 144);</pre> After replication has been started, you can verify that changes have been applied to your replica by running the `SHOW SLAVE STATUS` command on your replica and checking the `Seconds behind master` field\. If the `Seconds behind master` field is 0, then there is no replica lag\. When there is no replica lag, reduce the length of time that binlog files are retained by setting the `binlog retention hours` configuration parameter to a smaller time frame\. If you specify a value for `'binlog retention hours'` that is higher than 2160, then 2160 is used\.  | 
+|  RDS MySQL  |  **To retain binary logs on an Amazon RDS DB instance** You can retain binary log files on an Amazon RDS DB instance by setting the binlog retention hours just as with an Aurora MySQL DB cluster, described in the previous section\. You can also retain binlog files on an Amazon RDS DB instance by creating a read replica for the DB instance\. This read replica is temporary and solely for the purpose of retaining binlog files\. After the read replica has been created, call the [ mysql\_rds\_stop\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_stop_replication.html) procedure on the read replica \(the `mysql.rds_stop_replication` procedure is only available for MySQL versions 5\.5, 5\.6 and later, and 5\.7 and later\)\. While replication is stopped, Amazon RDS doesn't delete any of the binlog files on the replication source\. After you have set up replication with your permanent replica, you can delete the read replica when the replica lag \(`Seconds behind master` field\) between your replication source and your permanent replica reaches 0\.  | 
 |  MySQL \(external\)  |  **To retain binary logs on an external MySQL database** Because binlog files on an external MySQL database are not managed by Amazon RDS, they are retained until you delete them\. After replication has been started, you can verify that changes have been applied to your replica by running the `SHOW SLAVE STATUS` command on your replica and checking the `Seconds behind master` field\. If the `Seconds behind master` field is 0, then there is no replica lag\. When there is no replica lag, you can delete old binlog files\.  | 
 
 ### 3\. Create a snapshot of your replication source<a name="AuroraMySQL.Replication.MySQL.CreateSnapshot"></a>
@@ -102,7 +102,7 @@ GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'<domain_name>
 If you need to use encrypted replication, require SSL connections for the replication user\. For example, you can use one of the following statement to require SSL connections on the user account `repl_user`\.
 
 ```
-GRANT USAGE ON *.* TO 'repl_user'@'<domain_name>' REQUIRE SSL;            
+GRANT USAGE ON *.* TO 'repl_user'@'<domain_name>' REQUIRE SSL;
 ```
 
 **Note**  
@@ -125,22 +125,22 @@ You can also monitor how far the replica target is behind the replication source
 
 ## Stopping replication between Aurora and MySQL or between Aurora and another Aurora DB cluster<a name="AuroraMySQL.Replication.MySQL.Stopping"></a>
 
-To stop binlog replication with a MySQL DB instance, external MySQL database, or another Aurora DB cluster, follow these steps, discussed in detail following in this topic\.
+To stop binary log replication with a MySQL DB instance, external MySQL database, or another Aurora DB cluster, follow these steps, discussed in detail following in this topic\.
 
-[1\. Stop binlog replication on the replica target](#AuroraMySQL.Replication.MySQL.Stopping.StopReplication)
+[1\. Stop binary log replication on the replica target](#AuroraMySQL.Replication.MySQL.Stopping.StopReplication)
 
 [2\. Disable binary logging on the replication source](#AuroraMySQL.Replication.MySQL.Stopping.DisableBinaryLogging)
 
-### 1\. Stop binlog replication on the replica target<a name="AuroraMySQL.Replication.MySQL.Stopping.StopReplication"></a>
+### 1\. Stop binary log replication on the replica target<a name="AuroraMySQL.Replication.MySQL.Stopping.StopReplication"></a>
 
-Find instructions on how to stop binlog replication for your database engine following\.
+Find instructions on how to stop binary log replication for your database engine following\.
 
 
 | Database engine | Instructions | 
 | --- | --- | 
-|  Aurora  |  **To stop binlog replication on an Aurora MySQL DB cluster replica target** Connect to the Aurora DB cluster that is the replica target, and call the [ mysql\_rds\_stop\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_stop_replication.html) procedure\. The `mysql.rds_stop_replication` procedure is only available for MySQL versions 5\.5 and later, 5\.6 and later, and 5\.7 and later\.  | 
-|  RDS MySQL  |  **To stop binlog replication on an Amazon RDS DB instance** Connect to the RDS DB instance that is the replica target and call the [ mysql\_rds\_stop\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_stop_replication.html) procedure\. The `mysql.rds_stop_replication` procedure is only available for MySQL versions 5\.5 and later, 5\.6 and later, and 5\.7 and later\.  | 
-|  MySQL \(external\)  |  **To stop binlog replication on an external MySQL database** Connect to the MySQL database and call the `STOP REPLICATION` command\.  | 
+|  Aurora  |  **To stop binary log replication on an Aurora MySQL DB cluster replica target** Connect to the Aurora DB cluster that is the replica target, and call the [ mysql\_rds\_stop\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_stop_replication.html) procedure\. The `mysql.rds_stop_replication` procedure is only available for MySQL versions 5\.5 and later, 5\.6 and later, and 5\.7 and later\.  | 
+|  RDS MySQL  |  **To stop binary log replication on an Amazon RDS DB instance** Connect to the RDS DB instance that is the replica target and call the [ mysql\_rds\_stop\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_stop_replication.html) procedure\. The `mysql.rds_stop_replication` procedure is only available for MySQL versions 5\.5 and later, 5\.6 and later, and 5\.7 and later\.  | 
+|  MySQL \(external\)  |  **To stop binary log replication on an external MySQL database** Connect to the MySQL database and call the `STOP REPLICATION` command\.  | 
 
 ### 2\. Disable binary logging on the replication source<a name="AuroraMySQL.Replication.MySQL.Stopping.DisableBinaryLogging"></a>
 
@@ -273,3 +273,151 @@ Make sure that there is not a space between the `-p` option and the entered pass
    ```
 
 After you have established replication between your source MySQL DB instance and your Amazon Aurora DB cluster, you can add Aurora Replicas to your Amazon Aurora DB cluster\. You can then connect to the Aurora Replicas to read scale your data\. For information on creating an Aurora Replica, see [Adding Aurora replicas to a DB cluster](aurora-replicas-adding.md)\.
+
+## Optimizing binary log replication<a name="binlog-optimization"></a>
+
+ Following, you can learn how to optimize binary log replication performance and troubleshoot related issues in Aurora MySQL\. 
+
+**Tip**  
+ This discussion presumes that you are familiar with the MySQL binary log replication mechanism and how it works\. For background information, see [Replication Implementation](https://dev.mysql.com/doc/refman/5.7/en/replication-implementation.html) in the MySQL documentation\. 
+
+ To optimize binary log replication for Aurora MySQL, you adjust the following cluster\-level optimization parameters\. These parameters help you to specify the right balance between latency on the binlog source instance and replication lag\. 
++  `aurora_binlog_use_large_read_buffer` 
++  `aurora_binlog_read_buffer_size` 
++  `aurora_binlog_replication_max_yield_seconds` 
+
+**Note**  
+ For MySQL 5\.7\-compatible clusters, you can use these parameters in Aurora MySQL version 2\.04\.5 and later\.   
+ For MySQL 5\.6\-compatible clusters, you can use these parameters in Aurora MySQL version 1\.17\.6 and later\. 
+
+**Topics**
++ [Overview of the large read buffer and max\-yield optimizations](#aurora_mysql_max_yield_overview)
++ [Related parameters](#aurora_mysql_max_yield_reference)
++ [Enabling binary log replication max\-yield mechanism](#aurora_mysql_max_yield_enabling)
++ [Turning off the binary log replication max\-yield optimization](#aurora_mysql_max_yield_disabling)
++ [Turning off the large read buffer](#aurora_mysql_large_read_buffer_disabling)
+
+### Overview of the large read buffer and max\-yield optimizations<a name="aurora_mysql_max_yield_overview"></a>
+
+ You might experience reduced binary log replication performance when the binary log dump thread accesses the Aurora cluster volume while the cluster processes a high number of transactions\. You can use the parameters `aurora_binlog_use_large_read_buffer`, `aurora_binlog_replication_max_yield_seconds`, and `aurora_binlog_read_buffer_size` to help minimize this type of contention\. 
+
+ When `aurora_binlog_replication_max_yield_seconds` is set to greater than 0, and the current binlog file of the dump thread is active, binary log dump thread waits up to a specified number of seconds for the current binlog file to be filled by transactions\. This wait period avoids contention that can arise from replicating each binlog event individually\. However, doing so increases the replica lag for binary log replicas\. Those replicas can fall behind the source by the same number of seconds as the `aurora_binlog_replication_max_yield_seconds` setting\. 
+
+ The current binlog file means the binlog file that the dump thread is currently reading to perform replication\. We consider that a binlog file is active when the binlog file is updating or open to be updated by incoming transactions\. After Aurora MySQL fills up the active binlog file, MySQL creates and switches to a new binlog file\. The old binlog file becomes inactive\. It isn't updated by incoming transactions any longer\. 
+
+**Note**  
+ Before adjusting these parameters, measure your transaction latency and throughput over time\. You might find that binary log replication performance is stable and has low latency even if there is occasional contention\. 
+
+`aurora_binlog_use_large_read_buffer`  
+ If this parameter is set to 1, Aurora MySQL optimizes binary log replication based on the settings of the parameters `aurora_binlog_read_buffer_size` and `aurora_binlog_replication_max_yield_seconds`\. If `aurora_binlog_use_large_read_buffer` is 0, Aurora MySQL ignores the values of the `aurora_binlog_read_buffer_size` and `aurora_binlog_replication_max_yield_seconds` parameters\. 
+
+`aurora_binlog_read_buffer_size`  
+ Binary log dump threads with larger read buffer minimize the number of read I/O operations by reading more events for each I/O\. The parameter `aurora_binlog_read_buffer_size` sets the read buffer size\. The large read buffer effectively reduces binlog contentions when updating transactions generate binlog events fast enough to fill up the read buffer size before the dump threads start to read them\.   
+ This parameter only has an effect when the cluster also has the setting `aurora_binlog_use_large_read_buffer=1`\.   
+ Increasing the size of the read buffer doesn't affect the performance of binary log replication\. Binary log dump threads don't wait for updating transactions to fill up the read buffer\. 
+
+`aurora_binlog_replication_max_yield_seconds`  
+ If your workload requires low transaction latency, and you can tolerate some replication lag, you can increase the `aurora_binlog_replication_max_yield_seconds` parameter\. This parameter controls the maximum yield property of binary log replication in your cluster\.   
+ This parameter only has an effect when the cluster also has the setting `aurora_binlog_use_large_read_buffer=1`\. 
+
+ Aurora MySQL recognizes any change to the `aurora_binlog_replication_max_yield_seconds` parameter value immediately\. You don't need to restart the DB instance\. However, when you enable this setting, the dump thread only starts to yield when the current binlog file reaches its maximum size of 128 MB and is rotated to a new file\. 
+
+### Related parameters<a name="aurora_mysql_max_yield_reference"></a>
+
+ Use the following DB cluster parameters to enable the binlog optimization\.  
+
+
+**Binlog optimization parameters for Aurora MySQL version 2\.04\.5 and later**  
+
+| Parameter | Default | Valid Values | Description | 
+| --- | --- | --- | --- | 
+| aurora\_binlog\_use\_large\_read\_buffer | 1 | 0, 1 |  Switch for turning on the feature of replication improvement\. When it is 1, the binary log dump thread uses aurora\_binlog\_read\_buffer\_size for binary log replication; otherwise default buffer size \(8K\) is used\.  | 
+| aurora\_binlog\_read\_buffer\_size | 5242880 | 8192\-536870912 | Read buffer size used by binary log dump thread when the parameter aurora\_binlog\_use\_large\_read\_buffer is set to 1\. | 
+| aurora\_binlog\_replication\_max\_yield\_seconds | 0 | 0\-36000 | For Aurora MySQL versions between 2\.04\.5 \- 2\.04\.8 and between 2\.05 \- 2\.08\.\* \(inclusive\), the maximum accepted value is 45\. You can tune it to a higher value on 2\.04\.9 and later versions of 2\.04\.\*, and on 2\.09 and later versions\. This parameter works only when the parameter aurora\_binlog\_use\_large\_read\_buffer is set to 1\. | 
+
+
+**Binlog optimization parameters for Aurora MySQL version 1\.17\.6 and later**  
+
+| Parameter | Default | Valid Values | Description | 
+| --- | --- | --- | --- | 
+| aurora\_binlog\_use\_large\_read\_buffer | 0 | 0, 1 | Switch for turning on the feature of replication improvement\. When it is 1, the binary log dump thread uses aurora\_binlog\_read\_buffer\_size for binary log replication\. Otherwise, the default buffer size \(8 KB\) is used\. | 
+| aurora\_binlog\_read\_buffer\_size | 5242880 | 8192\-536870912 | Read buffer size used by binary log dump thread when the parameter aurora\_binlog\_use\_large\_read\_buffer is set to 1\. | 
+| aurora\_binlog\_replication\_max\_yield\_seconds | 0 | 0\-36000 | Maximum seconds to yield when the binary log dump thread replicates the current binlog file \(the file used by foreground queries\) to replicas\. This parameter works only when the parameter aurora\_binlog\_use\_large\_read\_buffer is set to 1\. | 
+
+### Enabling binary log replication max\-yield mechanism<a name="aurora_mysql_max_yield_enabling"></a>
+
+ You can turn on the binary log replication max\-yield optimization as follows\. Doing so minimizes latency for transactions on the binlog source instance\. However, you might experience higher replication lag\. 
+
+**To enable the max\-yield binlog optimization for an Aurora MySQL cluster**
+
+1.  Create or edit a DB cluster parameter group using the following parameter settings: 
+   +  `aurora_binlog_use_large_read_buffer`: turn on with a value of `ON` or 1\. 
+   +  `aurora_binlog_replication_max_yield_seconds`: specify a value greater than 0\. 
+
+1.  Associate the DB cluster parameter group with the Aurora MySQL cluster that works as the binlog source\. To do so, follow the procedures in [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
+
+1.  Confirm that the parameter change takes effect\. To do do, run the following query on the binlog source instance\. 
+
+   ```
+   SELECT @@aurora_binlog_use_large_read_buffer, @@aurora_binlog_replication_max_yield_seconds;
+   ```
+
+    Your output should be similar to the following\. 
+
+   ```
+   +---------------------------------------+-----------------------------------------------+
+   | @@aurora_binlog_use_large_read_buffer | @@aurora_binlog_replication_max_yield_seconds |
+   +---------------------------------------+-----------------------------------------------+
+   |                                     1 |                                            45 |
+   +---------------------------------------+-----------------------------------------------+
+   ```
+
+### Turning off the binary log replication max\-yield optimization<a name="aurora_mysql_max_yield_disabling"></a>
+
+ You can turn off the binary log replication max\-yield optimization as follows\. Doing so minimizes replication lag\. However, you might experience higher latency for transactions on the binlog source instance\. 
+
+**To turn off the max\-yield optimization for an Aurora MySQL cluster**
+
+1.  Make sure that the DB cluster parameter group associated with the Aurora MySQL cluster has `aurora_binlog_replication_max_yield_seconds` set to 0\. For more information about setting configuration parameters using parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
+
+1. Confirm that the parameter change takes effect\. To do do, run the following query on the binlog source instance\.
+
+   ```
+   SELECT @@aurora_binlog_replication_max_yield_seconds;
+   ```
+
+    Your output should be similar to the following\. 
+
+   ```
+   +-----------------------------------------------+
+   | @@aurora_binlog_replication_max_yield_seconds |
+   +-----------------------------------------------+
+   |                                             0 |
+   +-----------------------------------------------+
+   ```
+
+### Turning off the large read buffer<a name="aurora_mysql_large_read_buffer_disabling"></a>
+
+ You can disable the entire large read buffer feature as follows\. 
+
+**To turn off the large binary log read buffer for an Aurora MySQL cluster**
+
+1. Reset the `aurora_binlog_use_large_read_buffer` to `OFF` or 0\.
+
+    Make sure that the DB cluster parameter group associated with the Aurora MySQL cluster has `aurora_binlog_use_large_read_buffer` set to 0\. For more information about setting configuration parameters using parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
+
+1. On the binlog source instance, run the following query\.
+
+   ```
+   SELECT @@ aurora_binlog_use_large_read_buffer;
+   ```
+
+    Your output should be similar to the following\. 
+
+   ```
+   +---------------------------------------+
+   | @@aurora_binlog_use_large_read_buffer |
+   +---------------------------------------+
+   |                                     0 |
+   +---------------------------------------+
+   ```

@@ -56,6 +56,7 @@ In this example, you restore from a previously created DB cluster snapshot named
 
 **Example**  
 For Linux, macOS, or Unix:  
+   
 
 ```
 1. aws rds restore-db-cluster-from-snapshot \
@@ -64,6 +65,7 @@ For Linux, macOS, or Unix:
 4.     --engine aurora|aurora-postgresql
 ```
 For Windows:  
+   
 
 ```
 1. aws rds restore-db-cluster-from-snapshot ^

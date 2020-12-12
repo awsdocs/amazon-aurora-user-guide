@@ -9,6 +9,15 @@ The following policy adds the permissions required by Aurora to access Amazon Cl
     "Version": "2012-10-17",
     "Statement": [
         {
+            "Sid": "EnableCreationAndManagementOfRDSCloudwatchLogEvents",
+            "Effect": "Allow",
+            "Action": [
+                "logs:GetLogEvents",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:log-group:/aws/rds/*:log-stream:*"
+        },
+        {
             "Sid": "EnableCreationAndManagementOfRDSCloudwatchLogGroupsAndStreams",
             "Effect": "Allow",
             "Action": [
@@ -17,16 +26,7 @@ The following policy adds the permissions required by Aurora to access Amazon Cl
                 "logs:PutRetentionPolicy",
                 "logs:CreateLogGroup"
             ],
-            "Resource": "arn:aws:logs:*:*:log-group:log-group:/aws/rds/*"
-        },
-        {
-            "Sid": "EnableCreationAndManagementOfRDSCloudwatchLogEvents",
-            "Effect": "Allow",
-            "Action": [
-                "logs:GetLogEvents",
-                "logs:PutLogEvents"
-            ],
-            "Resource": "arn:aws:logs:*:*:log-group:log-group:/aws/rds/*:log-stream:*"
+            "Resource": "arn:aws:logs:*:*:log-group:/aws/rds/*"
         }
     ]
 }
@@ -61,7 +61,7 @@ You can use the following steps to create an IAM policy that provides the minimu
 1. In the **Add ARN\(s\)** dialog box, enter the following values:
    + **Region** – An AWS Region or `*`
    + **Account** – An account number or `*`
-   + **Log Group Name** – `log-group:/aws/rds/*`
+   + **Log Group Name** – `/aws/rds/*`
 
 1. In the **Add ARN\(s\)** dialog box, choose **Add**\.
 
@@ -70,7 +70,7 @@ You can use the following steps to create an IAM policy that provides the minimu
 1. In the **Add ARN\(s\)** dialog box, enter the following values:
    + **Region** – An AWS Region or `*`
    + **Account** – An account number or `*`
-   + **Log Group Name** – `log-group:/aws/rds/*`
+   + **Log Group Name** – `/aws/rds/*`
    + **Log Stream Name** – `*`
 
 1. In the **Add ARN\(s\)** dialog box, choose **Add**\.

@@ -120,7 +120,7 @@ You can set up cross\-Region replication from an unencrypted DB cluster to an en
 1. Check that the DB cluster has become available to use by using the AWS CLI `[describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html)` command, as shown in the following example\.
 
    ```
-   aws rds describe-db-clusters --db-cluster-identifier sample-replica-cluster                                
+   aws rds describe-db-clusters --db-cluster-identifier sample-replica-cluster
    ```
 
    When the `describe-db-clusters` results show a status of `available`, create the primary instance for the DB cluster so that replication can begin\. To do so, use the AWS CLI `[create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)` command as shown in the following example\.
@@ -234,7 +234,7 @@ You can set up cross\-Region replication from an unencrypted DB cluster to an en
      ?Action=CreateDBInstance
      &DBClusterIdentifier=sample-replica-cluster
      &DBInstanceClass=db.r3.large
-     &DBInstanceIdentifier=sample-replica-instance  
+     &DBInstanceIdentifier=sample-replica-instance
      &Engine=aurora
      &SignatureMethod=HmacSHA256
      &SignatureVersion=4

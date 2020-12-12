@@ -52,6 +52,8 @@ Set `apg_plan_mgmt.max_databases` at the cluster or DB instance level\. It requi
 | --- | --- | --- | 
 | Positive integer  | 10 | A positive integer value\.  | 
 
+ 
+
 ## apg\_plan\_mgmt\.max\_plans<a name="AuroraPostgreSQL.Optimize.Parameters.max_plans"></a>
 
 Sets the maximum number of plans that might be captured in the `apg_plan_mgmt.dba_plans` view\. 
@@ -65,6 +67,8 @@ Set `apg_plan_mgmt.max_plans` at the cluster or DB instance level\. It requires 
 | Value | Default | Description | 
 | --- | --- | --- | 
 | integer | 1000 | A positive integer value greater or equal to 10\.  | 
+
+ 
 
 ## apg\_plan\_mgmt\.pgss\_min\_calls<a name="AuroraPostgreSQL.Optimize.Parameters.pgss_min_calls"></a>
 
@@ -175,6 +179,8 @@ SET apg_plan_mgmt.unapproved_plan_execution_threshold = integer-value;
 | Value | Default | Description | 
 | --- | --- | --- | 
 | Positive integer | 0 | A positive integer value greater or equal to 0\. A value of 0 means no unapproved plans run when use\_plan\_baselines is true\. | 
+
+
 
 With the following example, the optimizer runs an unapproved plan if the estimated cost is less than 550, even if `use_plan_baselines` is `true`\.
 

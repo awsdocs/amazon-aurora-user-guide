@@ -20,6 +20,8 @@ To see the Performance Insights dashboard, use the following procedure\.
    The following screenshot shows the dashboard for a DB instance\. By default, the Performance Insights dashboard shows data for the last hour\.  
 ![\[Enable Performance Insights during DB instance creation with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora_perf_insights_enabling.png)
 
+   
+
 1. \(Optional\) Choose a different time interval by selecting a button in the upper right\. For example, to change the interval to 5 hours, select **5h**\.  
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/perf_insights_0c.png)
 

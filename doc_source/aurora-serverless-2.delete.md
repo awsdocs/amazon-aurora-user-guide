@@ -5,9 +5,9 @@
 
 |  | 
 | --- |
-| Amazon Aurora Serverless v2 with MySQL compatibility is in preview release and is subject to change\. Aurora Serverless v2 \(preview\) is not covered by the Amazon RDS service level agreement \(SLA\)\. Don't use Aurora Serverless v2 \(preview\) for production databases\. | 
+| Amazon Aurora Serverless v2 with MySQL compatibility is in preview release and is subject to change\. Aurora Serverless v2 \(preview\) is not covered by the Amazon RDS service level agreement \(SLA\)\. Don't use Aurora Serverless v2 \(preview\) for production databases\. All resources and data will be deleted when the preview ends\.  | 
 
-When you create your Aurora Serverless v2 \(preview\) DB clusters, you can choose to disable deletion protection or keep it as is\. If the Aurora Serverless v2 \(preview\) DB cluster that you want to delete was created with deletion protection, make sure to modify your DB cluster to remove deletion protection or you can't delete it\. To learn how do this, see [](aurora-serverless-2.modify-db-cluster.md)\. 
+When you create your Aurora Serverless v2 \(preview\) DB clusters, you can choose to disable deletion protection or keep it as is\. If the Aurora Serverless v2 \(preview\) DB cluster that you want to delete was created with deletion protection, make sure to modify your DB cluster to remove deletion protection or you can't delete it\. To learn how do this, see [Modifying an Aurora Serverless v2 \(preview\) DB cluster](aurora-serverless-2.modify-db-cluster.md)\. 
 
 Currently, you can delete an Amazon Aurora Serverless v2 \(preview\) DB cluster with the console only\.
 

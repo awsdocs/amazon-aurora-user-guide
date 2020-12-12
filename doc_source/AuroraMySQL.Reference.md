@@ -33,9 +33,9 @@ The following table shows all of the parameters that apply to the entire Aurora 
 
 | Parameter name | Modifiable | Notes | 
 | --- | --- | --- | 
-|  `aurora_binlog_read_buffer_size`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
-|  `aurora_binlog_replication_max_yield_seconds`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
-|  `aurora_binlog_use_large_read_buffer`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
+|  `aurora_binlog_read_buffer_size`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
+|  `aurora_binlog_replication_max_yield_seconds`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
+|  `aurora_binlog_use_large_read_buffer`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
 |  `aurora_enable_replica_log_compression`  |  Yes  |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\.   | 
 |  `aurora_enable_repl_bin_log_filtering`  |  Yes  |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\.   | 
 |  `aurora_enable_zdr`  |  Yes  |   For more information, see [High availability considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Availability)\.   | 
@@ -45,8 +45,8 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `auto_increment_offset`  |  Yes  |  | 
 |  `aws_default_lambda_role`  |  Yes  |   For more information, see [Invoking a Lambda function from an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Lambda.md)\.   | 
 |  `aws_default_s3_role`  |  Yes  |  | 
-|  `binlog_checksum`  |  Yes  |  | 
-|  `binlog_format`  |  Yes  | For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)](AuroraMySQL.Replication.MySQL.md)\. | 
+|  `binlog_checksum`  |  Yes  | The AWS CLI and RDS API report a value of `None` if this parameter isn't set\. In that case, Aurora MySQL uses the engine default value, which is `CRC32`\. This is different than the explicit setting of `NONE`, which turns off the checksum\. See [Aurora MySQL database engine updates 2020\-09\-02 \(version 1\.23\.0\)](AuroraMySQL.Updates.1230.md) and [Aurora MySQL database engine updates 2020\-03\-05 \(version 1\.22\.2\)](AuroraMySQL.Updates.1222.md) for a bug fix related to this parameter\.  | 
+|  `binlog_format`  |  Yes  | For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. | 
 |  `binlog_row_image`  |  No  |  | 
 |  `binlog_rows_query_log_events`  |  Yes  |  | 
 |  `character-set-client-handshake`  |  Yes  |  | 
@@ -215,7 +215,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `key_cache_division_limit` | Yes |  | 
 | `local_infile` | Yes |  | 
 | `lock_wait_timeout` | Yes |  | 
-| `log-bin` | No | Setting `binlog_format` to `STATEMENT`, `MIXED`, or `ROW` automatically sets `log-bin` to `ON`\. Setting `binlog_format` to `OFF` automatically sets `log-bin` to `OFF`\. For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binlog replication\)](AuroraMySQL.Replication.MySQL.md)\. | 
+| `log-bin` | No | Setting `binlog_format` to `STATEMENT`, `MIXED`, or `ROW` automatically sets `log-bin` to `ON`\. Setting `binlog_format` to `OFF` automatically sets `log-bin` to `OFF`\. For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. | 
 | `log_bin_trust_function_creators` | Yes |  | 
 | `log_bin_use_v1_row_events` | Yes |  | 
 | `log_error` | No |  | 

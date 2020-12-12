@@ -37,6 +37,8 @@ Returns 0 if the delete was successful or \-1 if the delete failed\.
 | sql\_hash  | The sql\_hash ID of the plan's managed SQL statement\. | 
 | plan\_hash | The managed plan's plan\_hash ID\. | 
 
+ 
+
 ## apg\_plan\_mgmt\.evolve\_plan\_baselines<a name="AuroraPostgreSQL.Optimize.Functions.evolve_plan_baselines"></a>
 
 Verifies whether an already approved plan is faster or whether a plan identified by the query optimizer as a minimum cost plan is faster\.
@@ -106,6 +108,8 @@ Returns the `last_used` date\.
 | sql\_hash  | The sql\_hash ID of the plan's managed SQL statement\. | 
 | plan\_hash | The managed plan's plan\_hash ID\. | 
 
+ 
+
 ## apg\_plan\_mgmt\.reload<a name="AuroraPostgreSQL.Optimize.Functions.reload"></a>
 
 Reload plans into shared memory from the `apg_plan_mgmt.dba_plans` view\. 
@@ -129,6 +133,8 @@ None\.
 Call `reload` for the following situations:
 + Use it to refresh the shared memory of a read\-only replica immediately, rather than wait for new plans to propagate to the replica\.
 + Use it after importing managed plans\.
+
+
 
 ## apg\_plan\_mgmt\.set\_plan\_enabled<a name="AuroraPostgreSQL.Optimize.Functions.set_plan_enabled"></a>
 
@@ -159,6 +165,8 @@ Returns 0 if the setting was successful or \-1 if the setting failed\.
 | plan\_hash | The managed plan's plan\_hash ID\. | 
 | enabled |  Boolean value of true or false: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.Functions.html)  | 
 
+ 
+
 ## apg\_plan\_mgmt\.set\_plan\_status<a name="AuroraPostgreSQL.Optimize.Functions.set_plan_status"></a>
 
 Set a managed plan's status to `Approved`, `Unapproved`, `Rejected`, or `Preferred`\.
@@ -187,6 +195,8 @@ Returns 0 if the setting was successful or \-1 if the setting failed\.
 | sql\_hash | The sql\_hash ID of the plan's managed SQL statement\. | 
 | plan\_hash | The managed plan's plan\_hash ID\. | 
 | status |  A string with one of the following values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.Functions.html) The case you use does not matter, however the status value is set to initial uppercase in the `apg_plan_mgmt.dba_plans` view\. For more information about these values, see `status` in [Reference for the apg\_plan\_mgmt\.dba\_plans view](AuroraPostgreSQL.Optimize.ViewPlans.md#AuroraPostgreSQL.Optimize.ViewPlans.dba_plans)\.   | 
+
+ 
 
 ## apg\_plan\_mgmt\.validate\_plans<a name="AuroraPostgreSQL.Optimize.Functions.validate_plans"></a>
 

@@ -5,7 +5,7 @@
 
 |  | 
 | --- |
-| Amazon Aurora Serverless v2 with MySQL compatibility is in preview release and is subject to change\. Aurora Serverless v2 \(preview\) is not covered by the Amazon RDS service level agreement \(SLA\)\. Don't use Aurora Serverless v2 \(preview\) for production databases\. | 
+| Amazon Aurora Serverless v2 with MySQL compatibility is in preview release and is subject to change\. Aurora Serverless v2 \(preview\) is not covered by the Amazon RDS service level agreement \(SLA\)\. Don't use Aurora Serverless v2 \(preview\) for production databases\. All resources and data will be deleted when the preview ends\.  | 
 
 You can create a new Aurora Serverless v2 \(preview\) DB cluster by restoring an existing DB cluster to a specific point in time\. You can also use this approach to recover from a failure by recreating your Aurora Serverless v2 \(preview\) DB cluster from its most recent log files\. 
 

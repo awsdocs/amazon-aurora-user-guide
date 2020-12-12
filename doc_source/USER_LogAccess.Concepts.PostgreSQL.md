@@ -95,3 +95,5 @@ To set up query logging, take the following steps:
    2013-11-05 16:51:18 UTC:[local]:master@postgres:[9193]:LOG:  statement: select proname from pg_proc;
    2013-11-05 16:51:18 UTC:[local]:master@postgres:[9193]:LOG:  duration: 3.469 ms
    ```
+
+ 

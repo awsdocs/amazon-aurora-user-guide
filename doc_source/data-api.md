@@ -91,6 +91,8 @@ The Data API and Secrets Manager both support tag\-based authorization\. *Tags* 
 
 You can apply tags to your resources for cost allocation, operations support, access control, and many other reasons\. \(If you don't already have tags on your resources and you want to apply them, you can learn more at [Tagging Amazon RDS resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html)\.\) You can use the tags in your policy statements to limit access to the RDS clusters that are labeled with these tags\. As an example, an Aurora DB cluster might have tags that identify its environment as either production or development\. 
 
+
+
 The following example shows how you can use tags in your policy statements\. This statement requires that both the cluster and the secret passed in the Data API request have an `environment:production` tag\. 
 
 Here's how the policy gets applied: When a user makes a call using the Data API, the request is sent to the service\. The Data API first verifies that the cluster ARN passed in the request is tagged with `environment:production`\. It then calls Secrets Manager to retrieve the value of the user's secret in the request\. Secrets Manager also verifies that the user's secret is tagged with `environment:production`\. If so, Data API then uses the retrieved value for the user's DB password\. Finally, if that's also correct, the Data API request is invoked successfully for the user\.

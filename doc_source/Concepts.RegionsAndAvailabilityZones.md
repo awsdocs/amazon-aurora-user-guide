@@ -72,41 +72,41 @@ You can set your local time zone to one of the values listed in the following ta
 |  Time zone  |  Notes  | 
 | --- | --- | 
 |  `Africa/Harare`  |  This time zone setting can return incorrect values from 28 Feb 1903 21:49:40 GMT to 28 Feb 1903 21:55:48 GMT\.  | 
-|  `Africa/Monrovia`  |   | 
+|  `Africa/Monrovia`  |    | 
 |  `Africa/Nairobi`  |  This time zone setting can return incorrect values from 31 Dec 1939 21:30:00 GMT to 31 Dec 1959 21:15:15 GMT\.  | 
-|  `Africa/Windhoek`  |   | 
+|  `Africa/Windhoek`  |    | 
 |  `America/Bogota `  |  This time zone setting can return incorrect values from 23 Nov 1914 04:56:16 GMT to 23 Nov 1914 04:56:20 GMT\.  | 
-|  `America/Caracas`  |   | 
-|  `America/Chihuahua`  |   | 
-|  `America/Cuiaba`  |   | 
-|  `America/Denver`  |   | 
+|  `America/Caracas`  |    | 
+|  `America/Chihuahua`  |    | 
+|  `America/Cuiaba`  |    | 
+|  `America/Denver`  |    | 
 |  `America/Fortaleza`  |  If your DB cluster is in the South America \(Sao Paulo\) Region and the expected time doesn't show correctly for the recently changed Brazil time zone, reset the DB cluster's time zone parameter to `America/Fortaleza`\.  | 
-|  `America/Guatemala`  |   | 
+|  `America/Guatemala`  |    | 
 |  `America/Halifax`  |  This time zone setting can return incorrect values from 27 Oct 1918 05:00:00 GMT to 31 Oct 1918 05:00:00 GMT\.  | 
 |  `America/Manaus`  |  If your DB cluster is in the South America \(Cuiaba\) Region and the expected time doesn't show correctly for the recently changed Brazil time zone, reset the DB cluster's time zone parameter to `America/Manaus`\.  | 
-|  `America/Matamoros`  |   | 
-|  `America/Monterrey`  |   | 
-|  `America/Montevideo`  |   | 
-|  `America/Phoenix`  |   | 
-|  `America/Tijuana`  |   | 
-|  `Asia/Ashgabat`  |   | 
-|  `Asia/Baghdad`  |   | 
-|  `Asia/Baku`  |   | 
-|  `Asia/Bangkok`  |   | 
-|  `Asia/Beirut`  |   | 
-|  `Asia/Calcutta`  |   | 
-|  `Asia/Kabul`  |   | 
-|  `Asia/Karachi`  |   | 
-|  `Asia/Kathmandu`  |   | 
+|  `America/Matamoros`  |    | 
+|  `America/Monterrey`  |    | 
+|  `America/Montevideo`  |    | 
+|  `America/Phoenix`  |    | 
+|  `America/Tijuana`  |    | 
+|  `Asia/Ashgabat`  |    | 
+|  `Asia/Baghdad`  |    | 
+|  `Asia/Baku`  |    | 
+|  `Asia/Bangkok`  |    | 
+|  `Asia/Beirut`  |    | 
+|  `Asia/Calcutta`  |    | 
+|  `Asia/Kabul`  |    | 
+|  `Asia/Karachi`  |    | 
+|  `Asia/Kathmandu`  |    | 
 |  `Asia/Muscat `  |  This time zone setting can return incorrect values from 31 Dec 1919 20:05:36 GMT to 31 Dec 1919 20:05:40 GMT\.  | 
 |  `Asia/Riyadh `  |  This time zone setting can return incorrect values from 13 Mar 1947 20:53:08 GMT to 31 Dec 1949 20:53:08 GMT\.  | 
 |  `Asia/Seoul`  |  This time zone setting can return incorrect values from 30 Nov 1904 15:30:00 GMT to 07 Sep 1945 15:00:00 GMT\.  | 
 |  `Asia/Shanghai`  |  This time zone setting can return incorrect values from 31 Dec 1927 15:54:08 GMT to 02 Jun 1940 16:00:00 GMT\.  | 
-|  `Asia/Singapore`  |   | 
+|  `Asia/Singapore`  |    | 
 |  `Asia/Taipei`  |  This time zone setting can return incorrect values from 30 Sep 1937 16:00:00 GMT to 29 Sep 1979 15:00:00 GMT\.  | 
-|  `Asia/Tehran`  |   | 
+|  `Asia/Tehran`  |    | 
 |  `Asia/Tokyo`  |  This time zone setting can return incorrect values from 30 Sep 1937 15:00:00 GMT to 31 Dec 1937 15:00:00 GMT\.  | 
-|  `Asia/Ulaanbaatar`  |   | 
+|  `Asia/Ulaanbaatar`  |    | 
 |  `Atlantic/Azores`  |  This time zone setting can return incorrect values from 24 May 1911 01:54:32 GMT to 01 Jan 1912 01:54:32 GMT\.  | 
 |  `Australia/Adelaide`  |  The abbreviation for this time zone is returned as CST instead of ACDT/ACST\.  | 
 |  `Australia/Brisbane`  |  The abbreviation for this time zone is returned as EST instead of AEDT/AEST\.  | 
@@ -114,22 +114,22 @@ You can set your local time zone to one of the values listed in the following ta
 |  `Australia/Hobart`  |  The abbreviation for this time zone is returned as EST instead of AEDT/AEST\.  | 
 |  `Australia/Perth`  |  The abbreviation for this time zone is returned as WST instead of AWDT/AWST\.  | 
 |  `Australia/Sydney `  |  The abbreviation for this time zone is returned as EST instead of AEDT/AEST\.  | 
-|  `Brazil/East`  |   | 
+|  `Brazil/East`  |    | 
 |  `Canada/Saskatchewan`  |  This time zone setting can return incorrect values from 27 Oct 1918 08:00:00 GMT to 31 Oct 1918 08:00:00 GMT\.  | 
-|  `Europe/Amsterdam`  |   | 
-|  `Europe/Athens`  |   | 
-|  `Europe/Dublin`  |   | 
+|  `Europe/Amsterdam`  |    | 
+|  `Europe/Athens`  |    | 
+|  `Europe/Dublin`  |    | 
 |  `Europe/Helsinki`  |  This time zone setting can return incorrect values from 30 Apr 1921 22:20:08 GMT to 30 Apr 1921 22:20:11 GMT\.  | 
-|  `Europe/Paris`  |   | 
-|  `Europe/Prague`  |   | 
-|  `Europe/Sarajevo`  |   | 
-|  `Pacific/Auckland`  |   | 
-|  `Pacific/Guam`  |   | 
+|  `Europe/Paris`  |    | 
+|  `Europe/Prague`  |    | 
+|  `Europe/Sarajevo`  |    | 
+|  `Pacific/Auckland`  |    | 
+|  `Pacific/Guam`  |    | 
 |  `Pacific/Honolulu`  |  This time zone setting can return incorrect values from 21 May 1933 11:30:00 GMT to 30 Sep 1945 11:30:00 GMT\.  | 
 |  `Pacific/Samoa`  |  This time zone setting can return incorrect values from 01 Jan 1911 11:22:48 GMT to 01 Jan 1950 11:30:00 GMT\.  | 
-|  `US/Alaska`  |   | 
-|  `US/Central`  |   | 
-|  `US/Eastern`  |   | 
-|  `US/East-Indiana`  |   | 
-|  `US/Pacific`  |   | 
-|  `UTC`  |   | 
+|  `US/Alaska`  |    | 
+|  `US/Central`  |    | 
+|  `US/Eastern`  |    | 
+|  `US/East-Indiana`  |    | 
+|  `US/Pacific`  |    | 
+|  `UTC`  |    | 

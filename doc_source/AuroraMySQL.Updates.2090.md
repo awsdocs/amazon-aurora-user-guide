@@ -91,6 +91,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Upgra
  **Global databases:** 
 +  MySQL `INFORMATION_SCHEMA.REPLICA_HOST_STATUS` view in a secondary Region now shows the entries for the replicas belonging to that Region\. 
 +  Fixed unexpected query failures that could occur in a Global DB secondary Region after temporary network connectivity issues between the primary and secondary Regions\. 
++  
 
  **Parallel query:** 
 +  Fixed the `EXPLAIN` plan for a Parallel Query query, which is incorrect for a simple single\-table query\. 

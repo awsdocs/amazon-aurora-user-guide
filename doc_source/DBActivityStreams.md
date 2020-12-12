@@ -744,7 +744,7 @@ The audit log payload is an encrypted `databaseActivityEventList` JSON array\. T
 | pid | int | The process ID of the backend process that is allocated for serving the client connection\. | 
 | remoteHost | string | Either the client IP address or hostname\. For Aurora PostgreSQL, which one is used depends on the database's log\_hostname parameter setting\. | 
 | remotePort | string | The client port number\. | 
-| rowCount | int | The number of table rows affected or retrieved by the SQL statement\. This field is used only for SQL statements that are data manipulation language \(DML\) statements\. If the SQL statement is not a DML statement, this value is null\. | 
+| rowCount | int | The number of rows returned by the SQL statement\. For example, if a SELECT statement returns 10 rows, rowCount is 10\. For INSERT or UPDATE statements, rowCount is 0\. | 
 | serverHost | string | The database server host IP address\. | 
 | serverType | string | The database server type, for example PostgreSQL\. | 
 | serverVersion | string | The database server version, for example 2\.3\.1 for Aurora PostgreSQL\. | 

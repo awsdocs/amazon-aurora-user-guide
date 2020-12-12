@@ -100,6 +100,8 @@ To set the promotion tier priority to 0 for the writer DB instance using the AWS
 + `--promotion-tier`
 + `--apply-immediately`
 
+
+
 **Example**  
 For Linux, macOS, or Unix:  
 
@@ -117,6 +119,8 @@ aws rds modify-db-instance ^
     ---promotion-tier 0  ^
     --apply-immediately
 ```
+
+ 
 
 ### Setting the promotion tier priority for a reader DB instance<a name="AuroraPostgreSQL.cluster-cache-mgmt.Reader"></a>
 
@@ -151,6 +155,8 @@ To set the promotion tier priority to 0 for the reader DB instance using the AWS
 + `--promotion-tier`
 + `--apply-immediately`
 
+
+
 **Example**  
 For Linux, macOS, or Unix:  
 
@@ -168,6 +174,8 @@ aws rds modify-db-instance ^
     ---promotion-tier 0  ^
     --apply-immediately
 ```
+
+ 
 
 ## Monitoring the buffer cache<a name="AuroraPostgreSQL.cluster-cache-mgmt.Monitoring"></a>
 

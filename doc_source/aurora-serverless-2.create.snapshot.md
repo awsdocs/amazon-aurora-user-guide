@@ -5,7 +5,7 @@
 
 |  | 
 | --- |
-| Amazon Aurora Serverless v2 with MySQL compatibility is in preview release and is subject to change\. Aurora Serverless v2 \(preview\) is not covered by the Amazon RDS service level agreement \(SLA\)\. Don't use Aurora Serverless v2 \(preview\) for production databases\. | 
+| Amazon Aurora Serverless v2 with MySQL compatibility is in preview release and is subject to change\. Aurora Serverless v2 \(preview\) is not covered by the Amazon RDS service level agreement \(SLA\)\. Don't use Aurora Serverless v2 \(preview\) for production databases\. All resources and data will be deleted when the preview ends\.  | 
 
 Amazon Aurora Serverless v2 \(preview\) routinely creates snapshots of your DB cluster as backups\. Unlike automated backups, manual snapshots aren't subject to the backup retention period\. Snapshots don't expire\. For more information about snapshots in general, see [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\. 
 

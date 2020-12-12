@@ -16,6 +16,7 @@ You can submit a fault injection query to one of your Aurora Replica instances b
 Fault injection queries for Aurora PostgreSQL are currently supported for the following versions:  
 Version 2\.4, which is compatible with PostgreSQL version 10\.11\.
 Version 3\.2, which is compatible with PostgreSQL version 11\.7\.
+ 
 
 ## Testing an instance crash<a name="AuroraPostgreSQL.Managing.FaultInjectionQueries.Crash"></a>
 

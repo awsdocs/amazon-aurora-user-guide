@@ -18,6 +18,7 @@ Aurora PostgreSQL is FedRAMP HIGH eligible\. For details about AWS and complianc
 + [Publishing Aurora PostgreSQL logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)
 + [Using machine learning \(ML\) with Aurora PostgreSQL](postgresql-ml.md)
 + [Fast recovery after failover with cluster cache management for Aurora PostgreSQL](AuroraPostgreSQL.cluster-cache-mgmt.md)
++ [Invoking a Lambda function from an Aurora PostgreSQL DB cluster](AuroraPostgreSQL-Lambda.md)
 + [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)
 + [Best practices with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md)
 + [Using Kerberos authentication with Aurora PostgreSQL](postgresql-kerberos.md)

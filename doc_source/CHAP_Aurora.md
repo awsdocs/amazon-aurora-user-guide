@@ -11,7 +11,7 @@
 + [Integrating Aurora with other AWS services](Aurora.Integrating.md)
 + [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)
 + [Rebooting a DB instance in a DB cluster](USER_RebootInstance.md)
-+ [Deleting a DB instance or an Aurora DB cluster](USER_DeleteInstance.md)
++ [Deleting an Aurora DB cluster or a DB instance](USER_DeleteInstance.md)
 + [Tagging Amazon RDS resources](USER_Tagging.md)
 + [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)
 + [Amazon Aurora updates](Aurora.Updates.md)

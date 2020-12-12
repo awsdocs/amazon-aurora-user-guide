@@ -99,6 +99,8 @@ For more information about Regions and Aurora version availability, see [Aurora 
    +  The SageMaker IAM role name pattern is `rds-cluster_ID-SageMaker-policy-timestamp`\. 
    +  The Amazon Comprehend IAM role name pattern is `rds-cluster_ID-Comprehend-policy-timestamp`\. 
 
+   
+
     Aurora also creates a new IAM policy and attaches it to the role\. The policy name follows a similar naming convention and also has a timestamp\. 
 
 #### Creating an IAM policy to access SageMaker \(AWS CLI only\)<a name="aurora-ml-creating-iam-policy-sagemaker"></a>
