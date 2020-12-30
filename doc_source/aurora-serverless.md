@@ -16,6 +16,7 @@
 + [Modifying an Aurora Serverless DB cluster](aurora-serverless.modifying.md)
 + [Scaling Aurora Serverless DB cluster capacity manually](aurora-serverless.setting-capacity.md)
 + [Viewing Aurora Serverless DB clusters](aurora-serverless.viewing.md)
++ [Deleting an Aurora Serverless DB cluster](aurora-serverless.delete.md)
 + [Aurora Serverless versions](aurora-serverless.relnotes.md)
 + [Using the Data API for Aurora Serverless](data-api.md)
 + [Logging Data API calls with AWS CloudTrail](logging-using-cloudtrail-data-api.md)

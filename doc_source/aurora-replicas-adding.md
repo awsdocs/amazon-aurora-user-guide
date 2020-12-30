@@ -97,4 +97,4 @@ aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a ^
 
 ## RDS API<a name="aurora-replicas-adding.API"></a>
 
-To create an Aurora Replica in your DB cluster, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation\. Include the name of the DB cluster as the `DBClusterIdentifier` parameter\. You can optionally specify an Availability Zone for the Aurora Replica using the `AvailabilityZone` parameter\.
+To create an Aurora Replica in your DB cluster, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation\. Include the name of the DB cluster as the `DBClusterIdentifier` parameter\. You can optionally specify an Availability Zone for the Aurora Replica using the `AvailabilityZone` parameter\.

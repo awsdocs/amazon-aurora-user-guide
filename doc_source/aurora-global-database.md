@@ -1,6 +1,6 @@
 # Using Amazon Aurora global databases<a name="aurora-global-database"></a>
 
-Following, you can find a description of the Amazon Aurora Global Database feature, used to create Aurora global databases\. Each Aurora global database spans multiple AWS Regions, enabling low latency global reads and disaster recovery from outages across an AWS Region\. 
+An Amazon Aurora global database is an Aurora DB cluster that spans multiple AWS Regions, enabling low latency global reads and disaster recovery from outages across an AWS Region\. By using Aurora global databases, you can build globally distributed applications that provide fast read capability\. The following sections describe Aurora global databases in more detail\.
 
 **Topics**
 + [Overview of Aurora global databases](#aurora-global-database-overview)
@@ -14,13 +14,17 @@ Following, you can find a description of the Amazon Aurora Global Database featu
 
 ## Overview of Aurora global databases<a name="aurora-global-database-overview"></a>
 
- An Aurora global database consists of one primary AWS Region where your data is maintained, and up to five read\-only, secondary AWS Regions\. Aurora replicates data to the secondary AWS Regions with typical latency of under a second\. You issue write operations directly to the primary DB instance in the primary AWS Region\. 
+An Aurora global database consists of one *primary* AWS Region where your data is mastered, and up to five read\-only *secondary* AWS Regions\. Aurora replicates data to the secondary AWS Regions with typical latency of under a second\. You issue write operations directly to the primary DB instance in the primary AWS Region\.
 
-An Aurora global database uses dedicated infrastructure to replicate your data, leaving database resources available entirely to serve application workloads\. Applications with a worldwide footprint can use reader instances in the secondary AWS Regions for low\-latency reads\. In some unlikely cases, your database might become degraded or isolated in an AWS Region\. If this happens, with a global database you can promote one of the secondary AWS Regions to take full read/write workloads in under a minute\. 
+An Aurora global database uses dedicated infrastructure to replicate your data, leaving database resources available entirely to serve application workloads\. Applications with a worldwide footprint can use reader instances in the secondary AWS Regions for low\-latency reads\. In some unlikely cases, your database might become degraded or isolated in an AWS Region\. If this happens, with an Aurora global database you can promote one of the secondary AWS Regions to take full read/write workloads in under a minute\.
 
- The Aurora cluster in the primary AWS Region where your data is mastered performs both read and write operations\. The clusters in the secondary Regions enable low\-latency reads\. You can scale up the secondary clusters independently by adding one of more DB instances \(Aurora Replicas\) to serve read\-only workloads\. For disaster recovery, you can remove a secondary cluster from the Aurora global database and promote it to allow full read and write operations\. 
+The Aurora cluster in the primary AWS Region where your data is mastered performs both read and write operations\. The clusters in the secondary Regions enable low\-latency reads\. The following diagram shows an example Aurora global database that spans two AWS Regions\.
 
- Only the primary cluster performs write operations\. Clients that perform write operations connect to the DB cluster endpoint of the primary cluster\. 
+![\[An Aurora global database has a single primary and at least one secondary Aurora DB clusters.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-conceptual-illo.png)
+
+You can scale up the secondary clusters independently by adding one of more DB instances \(Aurora Replicas\) to serve read\-only workloads\. For disaster recovery, you can remove a secondary cluster from the Aurora global database and promote it to allow full read and write operations\. 
+
+Only the primary cluster performs write operations\. Clients that perform write operations connect to the DB cluster endpoint of the primary cluster\. 
 
 ## Advantages of Aurora global databases<a name="aurora-global-database.advantages"></a>
 

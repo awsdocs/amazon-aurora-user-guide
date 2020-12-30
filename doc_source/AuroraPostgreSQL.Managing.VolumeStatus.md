@@ -13,15 +13,13 @@ You can use the `aurora_show_volume_status()` function to help avoid an error wh
 **Note**  
 The `aurora_show_volume_status()` function is available for Aurora PostgreSQL version 10\.11\. For more information about Aurora PostgreSQL versions, see [Engine versions for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.20180305.md)\.
 
-## Syntax<a name="AuroraPostgreSQL.Managing.VolumeStatus.Syntax"></a>
+**Syntax**
 
 ```
-SELECT * FROM aurora_show_volume_status();
+1. SELECT * FROM aurora_show_volume_status();
 ```
 
-## Example<a name="AuroraPostgreSQL.Managing.VolumeStatus.Example"></a>
-
-The following example illustrates a typical result\.
+**Example**
 
 ```
 customer_database=> SELECT * FROM aurora_show_volume_status();

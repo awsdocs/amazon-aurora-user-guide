@@ -1,4 +1,4 @@
-# Aurora MySQL database engine updates 2020\-10\-19 \(version 2\.09\.1\)<a name="AuroraMySQL.Updates.2091"></a>
+# Aurora MySQL database engine updates 2020\-12\-11 \(version 2\.09\.1\)<a name="AuroraMySQL.Updates.2091"></a>
 
  **Version:** 2\.09\.1 
 

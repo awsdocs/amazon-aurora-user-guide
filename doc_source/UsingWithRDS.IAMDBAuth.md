@@ -36,7 +36,6 @@ When using IAM database authentication, the following limitations apply:
 
   For more information about global condition context keys, see [ AWS global condition context keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\.
 + Currently, IAM database authentication isn't supported for CNAMEs\.
-+ Currently, Aurora MySQL parallel query doesn't support IAM database authentication\.
 
 ## Aurora MySQL recommendations for IAM database authentication<a name="UsingWithRDS.IAMDBAuth.ConnectionsPerSecond"></a>
 
