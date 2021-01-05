@@ -204,7 +204,7 @@ psql=> SELECT * FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello fro
 You can request to include the last 4 KB of the execution log in the function response, as shown following\.
 
 ```
-psql=> SELECT *, select convert_from(decode(log_result, 'base64'), 'utf-8') as log FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json, 'RequestResponse', 'Tail');
+psql=> SELECT *, convert_from(decode(log_result, 'base64'), 'utf-8') as log FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json, 'RequestResponse', 'Tail');
 ```
 
 Set the [aws\_lambda\.invoke](#aws_lambda.invoke) function's `log_type` parameter to `Tail` to include the execution log in the response\. The default value for the `log_type` parameter is `None`\.
@@ -216,7 +216,7 @@ The `log_result` that's returned is a `base64` encoded string\. You can decode t
 You can pass in client context information that is separate from the payload, as shown following\.
 
 ```
-psql=> SELECT *, convert_from(decode(log_result, 'base64'), 'utf-8') as log FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json, 'RequestResponse', 'Tail');
+psql=> SELECT * FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json, 'RequestResponse', 'None', '{"env": {"locale": "es_MX.utf8"}}'::json);
 ```
 
 To include client context, use a JSON object for the [aws\_lambda\.invoke](#aws_lambda.invoke) function's `context` parameter\.
@@ -353,7 +353,7 @@ The type of Lambda log to return in the `log_result` output parameter\. The valu
 + None – No Lambda log information is returned\.
 
 *context*  
-Client context in JSON or JSONB format\. Fields to use include than `custom` and `env`\.
+Client context in JSON or JSONB format\. Fields to use include `custom` and `env`\.
 
 *qualifier*  
 A qualifier that identifies a Lambda function's version to be invoked\. If this value conflicts with one provided in the `function_name` ARN, an error is raised\.Output parameters
@@ -380,8 +380,8 @@ Creates an `aws_commons._lambda_function_arn_1` structure to hold Lambda functio
 aws_commons.create_lambda_function_arn(
     function_name TEXT,
     region TEXT DEFAULT NULL
-    )
-    RETURNS aws_commons._lambda_function_arn_1
+)
+RETURNS aws_commons._lambda_function_arn_1
 ```Input parameters
 
 *function\_name*  
