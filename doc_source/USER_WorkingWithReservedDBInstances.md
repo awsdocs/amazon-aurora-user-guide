@@ -1,4 +1,4 @@
-# reserved DB instances for Aurora<a name="USER_WorkingWithReservedDBInstances"></a>
+# Reserved DB instances for Aurora<a name="USER_WorkingWithReservedDBInstances"></a>
 
 Using reserved DB instances, you can reserve a DB instance for a one\- or three\-year term\. Reserved DB instances provide you with a significant discount compared to on\-demand DB instance pricing\. Reserved DB instances are not physical instances, but rather a billing discount applied to the use of certain on\-demand DB instances in your account\. Discounts for reserved DB instances are tied to instance type and AWS Region\. 
 

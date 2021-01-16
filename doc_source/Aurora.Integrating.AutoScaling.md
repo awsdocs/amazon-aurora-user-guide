@@ -12,7 +12,7 @@ You can use the AWS Management Console to apply a scaling policy based on a pred
 + [Adding a scaling policy](#Aurora.Integrating.AutoScaling.Add)
 + [Editing a scaling policy](#Aurora.Integrating.AutoScaling.Edit)
 + [Deleting a scaling policy](#Aurora.Integrating.AutoScaling.Delete)
-+ [Related topics](#Aurora.Integrating.AutoScaling.RelatedItems)
++ [DB instance IDs and tagging](#Aurora.Integrating.AutoScaling.Concepts.Tagging)
 
 ## Before you begin<a name="Aurora.Integrating.AutoScaling.BYB"></a>
 
@@ -504,6 +504,15 @@ Authorization: AUTHPARAMS
 }
 ```
 
-## Related topics<a name="Aurora.Integrating.AutoScaling.RelatedItems"></a>
-+ [Integrating Aurora with other AWS services](Aurora.Integrating.md)
-+ [Managing an Amazon Aurora DB cluster](CHAP_Aurora.md)
+## DB instance IDs and tagging<a name="Aurora.Integrating.AutoScaling.Concepts.Tagging"></a>
+
+When a replica is added by Aurora Auto Scaling, its DB instance ID is prefixed by `application-autoscaling-`, for example, `application-autoscaling-61aabbcc-4e2f-4c65-b620-ab7421abc123`\.
+
+The following tag is automatically added to the DB instance\. You can view it on the **Tags** tab of the DB instance detail page\.
+
+
+| Tag | Value | 
+| --- | --- | 
+| application\-autoscaling:resourceId | cluster:mynewcluster\-cluster | 
+
+For more information on Amazon RDS resource tags, see [Tagging Amazon RDS resources](USER_Tagging.md)\.

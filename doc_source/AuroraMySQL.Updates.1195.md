@@ -14,7 +14,7 @@
  This version is currently not available in the following AWS Regions: Europe \(London\) \[eu\-west\-2\], AWS GovCloud \(US\-East\) \[us\-gov\-east\-1\], AWS GovCloud \(US\-West\) \[us\-gov\-west\-1\], China \(Ningxia\) \[cn\-northwest\-1\], and Asia Pacific \(Hong Kong\) \[ap\-east\-1\]\. There will be a separate announcement once it is made available\. 
 
 **Note**  
-The procedure to upgrade your DB cluster has changed\. For more information, see [Upgrading and patching Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Patching.md)\.
+The procedure to upgrade your DB cluster has changed\. For more information, see [Upgrading the minor version or patch level of an Aurora MySQL DB cluster](AuroraMySQL.Updates.Patching.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.1195.Improvements"></a>
 +  Fixed an issue on Aurora reader instances that reduced free memory during long\-running transactions while there is a heavy transaction commit traffic on the writer instance\. 

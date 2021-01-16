@@ -1,6 +1,6 @@
 # Examining plans in the apg\_plan\_mgmt\.dba\_plans view<a name="AuroraPostgreSQL.Optimize.ViewPlans"></a>
 
-Query plan management provides a new SQL view for database administrators \(DBAs\) to use called `apg_plan_mgmt.dba_plans`\. Each database in a DB instance has its own `apg_plan_mgmt.dba_plans` view\. 
+Query plan management provides a new SQL view for database administrators \(DBAs\) to use called `apg_plan_mgmt.dba_plans`\. This one view contains the plan history for all of the databases in the DB instance\.
 
 This view contains the plan history for all of your managed statements\. Each managed plan is identified by the combination of a SQL hash value and a plan hash value\. With these identifiers, you can use tools such as Amazon RDS Performance Insights to track individual plan performance\. For more information on Performance Insights, see [Using Amazon RDS performance insights]( https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)\. 
 

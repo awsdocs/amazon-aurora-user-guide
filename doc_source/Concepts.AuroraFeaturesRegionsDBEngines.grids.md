@@ -6,7 +6,7 @@ Aurora MySQL\- and PostgreSQL\-compatible database engines support several Amazo
 + [Aurora machine learning](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML)
 + [Aurora parallel queries](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ParallelQuery)
 + [Amazon RDS Proxy](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy)
-+ [Aurora Serverless](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless)
++ [Aurora Serverless v1](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless)
 + [Data API for Aurora Serverless](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API)
 
 Some of these features are Aurora\-only capabilities\. For example, Aurora Serverless, Aurora global databases, and support for integration with AWS machine learning services aren't supported by Amazon RDS\. Other features, such as Amazon RDS Proxy, are supported by both Amazon Aurora and Amazon RDS\.  
@@ -182,9 +182,9 @@ Amazon RDS Proxy is a fully managed, highly available database proxy that makes 
 | AWS GovCloud \(US\-East\) | \- | \- | \- | \- | 
 | AWS GovCloud \(US\-West\) | \- | \- | \- | \- | 
 
-## Aurora Serverless<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless"></a>
+## Aurora Serverless v1<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless"></a>
 
-Aurora Serverless is an on\-demand, auto\-scaling feature designed to be a cost\-effective approach to running intermittent or unpredictable workloads on Amazon Aurora\. It automatically starts up, shuts down, and scales capacity up or down, as needed by your applications\. For more information, see [Using Amazon Aurora Serverless](aurora-serverless.md)\.
+Aurora Serverless v1 is an on\-demand, auto\-scaling feature designed to be a cost\-effective approach to running intermittent or unpredictable workloads on Amazon Aurora\. It automatically starts up, shuts down, and scales capacity up or down, as needed by your applications\. For more information, see [Using Amazon Aurora Serverless v1](aurora-serverless.md)\.
 
 
 | Region | Aurora MySQL 5\.6 | Aurora MySQL 5\.7 | Aurora PostgreSQL 10 | Aurora PostgreSQL 11 | 

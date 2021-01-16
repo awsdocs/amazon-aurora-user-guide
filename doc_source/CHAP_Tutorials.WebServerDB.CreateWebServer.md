@@ -346,5 +346,5 @@ You can use `SamplePage.php` to add data to your DB cluster\. The data that you 
 To make sure that your DB cluster is as secure as possible, verify that sources outside of the VPC can't connect to your DB cluster\. 
 
 After you have finished testing your web server and your database, you should delete your DB cluster and your Amazon EC2 instance\.
-+ To delete a DB cluster, follow the instructions in [Deleting an Aurora DB cluster or a DB instance](USER_DeleteInstance.md)\. You don't need to create a final snapshot\.
++ To delete a DB cluster, follow the instructions in [Deleting Aurora DB clusters and DB instances](USER_DeleteCluster.md)\. You don't need to create a final snapshot\.
 + To terminate an Amazon EC2 instance\. follow the instruction in [Terminate your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html) in the *Amazon EC2 User Guide*\.

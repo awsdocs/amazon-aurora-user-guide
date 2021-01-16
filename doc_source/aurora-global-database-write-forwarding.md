@@ -1,15 +1,16 @@
-# Write forwarding for secondary AWS Regions with an Aurora global database<a name="aurora-global-database-write-forwarding"></a>
+# Using write forwarding in an Amazon Aurora global database<a name="aurora-global-database-write-forwarding"></a>
 
- You can enable read/write capability for one or more of the secondary clusters in an Aurora global database\. In this configuration, Aurora forwards SQL statements that perform write operations to the primary cluster\. Aurora then propagates the resulting changes to all the secondary AWS Regions\. By doing so, both read and write SQL statements are submitted from connections on the secondary cluster\. By using this approach, you can reduce the number of endpoints you need to manage for the applications that use your Aurora global database\. 
+You can reduce the number of endpoints that you need to manage for applications running on your Aurora global database, by using *write forwarding*\. This feature of Aurora MySQL lets secondary clusters in an Aurora global database forward SQL statements that perform write operations to the primary cluster\. The primary cluster updates the source and then propagates resulting changes back to all secondary AWS Regions\. 
 
- This feature, called *write forwarding, *helps you to avoid implementing your own mechanism to send write operations from a secondary AWS Region to the primary AWS Region\. Aurora handles the cross\-Region networking setup\. Aurora also transmits all necessary session and transactional context for each statement\. The data is always changed first on the primary cluster and then replicated to the secondary clusters\. This way, the primary cluster is the source of truth and always has an up\-to\-date copy of all your data\. 
+The write forwarding configuration saves you from implementing your own mechanism to send write operations from a secondary AWS Region to the primary Region\. Aurora handles the cross\-Region networking setup\. Aurora also transmits all necessary session and transactional context for each statement\. The data is always changed first on the primary cluster and then replicated to the secondary clusters in the Aurora global database\. This way, the primary cluster is the source of truth and always has an up\-to\-date copy of all your data\. 
 
+**Note**  
  Write forwarding requires Aurora MySQL version 2\.08\.1 or later\. 
 
 **Topics**
 + [Enabling write forwarding](#aurora-global-database-write-forwarding-enabling)
 + [Checking if a secondary cluster has write forwarding enabled](#aurora-global-database-write-forwarding-describing)
-+ [Application compatibility with write forwarding](#aurora-global-database-write-forwarding-compatibility)
++ [Application and SQL compatibility with write forwarding](#aurora-global-database-write-forwarding-compatibility)
 + [Isolation and consistency for write forwarding](#aurora-global-database-write-forwarding-isolation)
 + [Running multipart statements with write forwarding](#aurora-global-database-write-forwarding-multipart)
 + [Transactions with write forwarding](#aurora-global-database-write-forwarding-txns)
@@ -134,7 +135,7 @@ aws rds describe-db-clusters --query '*[].{DBClusterIdentifier:DBClusterIdentifi
 ]
 ```
 
- To find only the secondary clusters that have global write forwarding enabled, run the following command\. This command also retrieves the reader endpoint for the cluster, because that's the endpoint that you connect to for the secondary cluster when you use write forwarding\. 
+ To find all secondary clusters that have global write forwarding enabled, run the following command\. This command also returns the cluster's reader endpoint\. You use the secondary cluster's reader endpoint to when you use write forwarding from the secondary to the primary in your Aurora global database\. 
 
 **Example**  
 
@@ -149,7 +150,7 @@ aws rds describe-db-clusters --query 'DBClusters[].{DBClusterIdentifier:DBCluste
 ]
 ```
 
-## Application compatibility with write forwarding<a name="aurora-global-database-write-forwarding-compatibility"></a>
+## Application and SQL compatibility with write forwarding<a name="aurora-global-database-write-forwarding-compatibility"></a>
 
  Certain statements aren't allowed or can produce stale results when you use them in a global database with write forwarding\. Thus, the `EnableGlobalWriteForwarding` setting is turned off by default for secondary clusters\. Before turning it on, check to make sure that your application code isn't affected by any of these restrictions\. 
 

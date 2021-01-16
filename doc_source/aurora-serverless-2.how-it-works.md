@@ -17,7 +17,7 @@ When you create your Aurora Serverless v2 \(preview\) DB cluster, you define its
 
 Each ACU provides 2 GiB \(gibibytes\) of memory \(RAM\) and associated virtual processor \(vCPU\) with networking\. 
 
-Unlike Aurora Serverless, which scales by doubling ACUs each time the DB cluster reaches a threshold, Aurora Serverless v2 \(preview\) can increase ACUs incrementally\. When your workload demand begins to reach the current resource capacity, your Aurora Serverless v2 \(preview\) DB cluster scales the number of ACUs\. Your cluster scales ACUs in the increments required to provide the best performance for the resources consumed\. 
+Unlike Aurora Serverless v1, which scales by doubling ACUs each time the DB cluster reaches a threshold, Aurora Serverless v2 \(preview\) can increase ACUs incrementally\. When your workload demand begins to reach the current resource capacity, your Aurora Serverless v2 \(preview\) DB cluster scales the number of ACUs\. Your cluster scales ACUs in the increments required to provide the best performance for the resources consumed\. 
 
 The following screenshot shows instant autoscaling in action\. It's an extract from Amazon CloudWatch comparing processing load to the number of ACUs consumed by an Aurora Serverless v2 \(preview\) DB cluster over time for a simulated "flash sale" scenario\. The simulation models an order system that processes about 10 orders per second \(using 4 ACUs\) during regular operations\. A load testing tool generates various increases in orders mimicking a "flash sale," until the system is processing 275 orders per second \(and 22 ACUs\) at its peak\. 
 
@@ -35,7 +35,7 @@ An ACU is made up of both memory \(RAM\) and processor \(CPU\)\. Increases in CP
 
 As with all Aurora DB clusters, error logs for Aurora Serverless v2 \(preview\) are enabled by default\. However, unlike with provisioned Aurora DB clusters, you can't view the logs for Aurora Serverless v2 \(preview\) in the Amazon RDS console\. Aurora Serverless v2 \(preview\) automatically uploads the error logs to Amazon CloudWatch\. 
 
-Aurora Serverless v2 \(preview\) also uploads your Aurora MySQL log data to CloudWatch for the types of logs that you specify\. You choose the logs for uploading by changing values for several log\-related DB cluster parameters for your Aurora Serverless v2 \(preview\) DB cluster\. As with any type of Aurora DB cluster, you can't modify the default DB cluster parameter group\. Instead, create your own DB cluster parameter group based on a default parameter for your DB cluster and engine type\. For Aurora Serverless v2 \(preview\) and Aurora Serverless, you use a DB cluster parameter group only\.
+Aurora Serverless v2 \(preview\) also uploads your Aurora MySQL log data to CloudWatch for the types of logs that you specify\. You choose the logs for uploading by changing values for several log\-related DB cluster parameters for your Aurora Serverless v2 \(preview\) DB cluster\. As with any type of Aurora DB cluster, you can't modify the default DB cluster parameter group\. Instead, create your own DB cluster parameter group based on a default parameter for your DB cluster and engine type\. For Aurora Serverless v2 \(preview\) and Aurora Serverless v1, you use a DB cluster parameter group only\.
 
 We recommend that you create your custom DB cluster parameter group before creating your Aurora Serverless v2 \(preview\) DB cluster, so that it's available to choose when you create a database on the console\. 
 

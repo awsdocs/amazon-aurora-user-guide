@@ -11,7 +11,7 @@ Physical migration has the following advantages:
 
 Physical migration has the following limitations:
 + The `innodb_page_size` parameter must be set to its default value \(`16KB`\)\.
-+ The `innodb_data_file_path` parameter must be configured with only one data file that uses the default data file name `"ibdata1"`\. Databases with two data files, or with a data file with a different name, can't be migrated using this method\.
++ The `innodb_data_file_path` parameter must be configured with only one data file that uses the default data file name `"ibdata1:12M:autoextend"`\. Databases with two data files, or with a data file with a different name, can't be migrated using this method\.
 
   The following are examples of file names that are not allowed: `"innodb_data_file_path=ibdata1:50M; ibdata2:50M:autoextend"` and `"innodb_data_file_path=ibdata01:50M:autoextend"`\.
 + The `innodb_log_files_in_group` parameter must be set to its default value \(`2`\)\.
@@ -29,7 +29,7 @@ The following table describes your options and the type of migration for each op
 
 | Migrating from | Migration type | Solution | 
 | --- | --- | --- | 
-| An Amazon RDS MySQL DB instance | Physical |  You can migrate from an RDS MySQL DB instance by first creating an Aurora MySQL Read Replica of a MySQL DB instance\. When the replica lag between the MySQL DB instance and the Aurora MySQL Read Replica is 0, you can direct your client applications to read from the Aurora Read Replica and then stop replication to make the Aurora MySQL Read Replica a standalone Aurora MySQL DB cluster for reading and writing\. For details, see [Migrating data from a MySQL DB instance to an Amazon Aurora MySQL DB cluster by using an Aurora read replica](AuroraMySQL.Migrating.RDSMySQL.Replica.md)\.  | 
+| An Amazon RDS MySQL DB instance | Physical |  You can migrate from an RDS MySQL DB instance by first creating an Aurora MySQL read replica of a MySQL DB instance\. When the replica lag between the MySQL DB instance and the Aurora MySQL read replica is 0, you can direct your client applications to read from the Aurora read replica and then stop replication to make the Aurora MySQL read replica a standalone Aurora MySQL DB cluster for reading and writing\. For details, see [Migrating data from a MySQL DB instance to an Amazon Aurora MySQL DB cluster by using an Aurora read replica](AuroraMySQL.Migrating.RDSMySQL.Replica.md)\.  | 
 | An RDS MySQL DB snapshot | Physical |  You can migrate data directly from an Amazon RDS MySQL DB snapshot to an Amazon Aurora MySQL DB cluster\. For details, see [Migrating data from a MySQL DB instance to an Amazon Aurora MySQL DB cluster by using a DB snapshot](AuroraMySQL.Migrating.RDSMySQL.md)\.  | 
 | A MySQL database external to Amazon RDS | Logical |  You can create a dump of your data using the `mysqldump` utility, and then import that data into an existing Amazon Aurora MySQL DB cluster\. For details, see [Migrating from MySQL to Amazon Aurora by using mysqldump](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.mysqldump)\.  | 
 | A MySQL database external to Amazon RDS | Physical |  You can copy the backup files from your database to an Amazon Simple Storage Service \(Amazon S3\) bucket, and then restore an Amazon Aurora MySQL DB cluster from those files\. This option can be considerably faster than migrating data using `mysqldump`\. For details, see [Migrating data from MySQL by using an Amazon S3 bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.  | 

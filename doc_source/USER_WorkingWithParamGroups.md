@@ -60,7 +60,7 @@ After you change the DB cluster parameter group associated with a DB cluster, re
 
  Every Aurora cluster is associated with a DB cluster parameter group\. Each DB instance within the cluster inherits the settings from that DB cluster parameter group, and is associated with a DB parameter group\. Aurora assigns default parameter groups when you create a cluster or a new DB instance, based on the specified database engine and version\. You can change the parameter groups later to ones that you create, where you can edit the parameter values\. 
 
- The DB cluster parameter groups also include default values for all the instance\-level parameters from the DB parameter group\. These defaults are mainly intended for configuring Aurora Serverless clusters, which are only associated with DB cluster parameter groups, not DB parameter groups\. You can modify the instance\-level parameter settings in the DB cluster parameter group\. Then, Aurora applies those settings to each new DB instance that's added to a Serverless cluster\. To learn more about configuration settings for Aurora Serverless clusters and which settings you can modify, see [Aurora Serverless and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\. 
+ The DB cluster parameter groups also include default values for all the instance\-level parameters from the DB parameter group\. These defaults are mainly intended for configuring Aurora Serverless clusters, which are only associated with DB cluster parameter groups, not DB parameter groups\. You can modify the instance\-level parameter settings in the DB cluster parameter group\. Then, Aurora applies those settings to each new DB instance that's added to a Serverless cluster\. To learn more about configuration settings for Aurora Serverless clusters and which settings you can modify, see [Aurora Serverless v1 and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\. 
 
  For non\-Serverless clusters, any configuration values that you modify in the DB cluster parameter group override default values in the DB parameter group\. If you edit the corresponding values in the DB parameter group, those values override the settings from the DB cluster parameter group\. 
 
@@ -71,7 +71,7 @@ The DB cluster and DB instance parameters available to you in Aurora vary depend
 
 | Database engine | Parameters | 
 | --- | --- | 
-|  Aurora MySQL  |  See [Aurora MySQL parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.  For Aurora Serverless clusters, see additional details in [Aurora Serverless and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.   | 
+|  Aurora MySQL  |  See [Aurora MySQL parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.  For Aurora Serverless clusters, see additional details in [Aurora Serverless v1 and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.   | 
 |  Aurora PostgreSQL  |  See [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.ParameterGroups)\.  | 
 
 ## Creating a DB parameter group<a name="USER_WorkingWithParamGroups.Creating"></a>

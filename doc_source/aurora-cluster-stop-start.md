@@ -73,6 +73,8 @@ To stop a DB instance by using the Amazon RDS API, call the [StopDBCluster](http
 
  You can't modify the configuration of an Aurora DB cluster, or any of its DB instances, while the cluster is stopped\. You also can't add or remove DB instances from the cluster, or delete the cluster if it still has any associated DB instances\. You must start the cluster before performing any such administrative actions\. 
 
+Stopping a DB cluster removes pending actions, except for the DB cluster parameter group or for the DB parameter groups of the DB cluster instances\.
+
  Aurora applies any scheduled maintenance to your stopped cluster after it's started again\. Remember that after seven days, Aurora automatically starts any stopped clusters so that they don't fall too far behind in their maintenance status\. 
 
  Aurora also doesn't perform any automated backups, because the underlying data can't change while the cluster is stopped\. Aurora doesn't extend the backup retention period while the cluster is stopped\. 

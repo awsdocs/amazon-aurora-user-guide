@@ -274,7 +274,7 @@ You can find the following improvements in this engine update\.
 
 1. Added support for Amazon Aurora PostgreSQL Global Database\. For more information, see [Using Amazon Aurora global databases](aurora-global-database.md)\.
 
-1. Added the ability to configure the recovery point objective \(RPO\) of a global database for Aurora PostgreSQL\. For more information, see [Managing recovery for Aurora global databases](aurora-global-database-managing.md#aurora-global-database-manage-recovery)\.
+1. Added the ability to configure the recovery point objective \(RPO\) of a global database for Aurora PostgreSQL\. For more information, see [Managing recovery for Aurora global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
 
 You can find the following improvements in this engine update\.
 
@@ -342,6 +342,10 @@ This release contains multiple critical stability enhancements\. Amazon highly r
 + [Version 3\.1\.0](#AuroraPostgreSQL.Updates.20180305.310)
 
 ### Version 3\.1\.3<a name="AuroraPostgreSQL.Updates.20180305.313"></a>
+
+**New features**
+
+1. Aurora PostgreSQL now supports the PostgreSQL [vacuum\_truncate](https://www.postgresql.org/docs/current/sql-createtable.html#RELOPTION-VACUUM-TRUNCATE) storage parameter to manage vacuum truncation for specific tables\. Set this [storage parameter](https://www.postgresql.org/docs/current/sql-createtable.html#SQL-CREATETABLE-STORAGE-PARAMETERS) to false for a table to prevent the [VACUUM](https://www.postgresql.org/docs/current/sql-vacuum.html) SQL command from truncating the table's trailing empty pages\.
 
 **Critical stability enhancements**
 + None 
@@ -544,15 +548,15 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.14\. For mor
 
 1. Improved the asynchronous mode performance of database activity streams\.
 
-1. Aurora Serverless for PostgreSQL now supports query execution on all connections during a scale event\.
+1. Aurora Serverless v1 for PostgreSQL now supports query execution on all connections during a scale event\.
 
 1. Reduced the delay of the `rpo_lag_in_msec` metric when publishing to CloudWatch for Aurora global database clusters\.
 
 1. Fixed a bug in Serverless clusters where transaction processing was unnecessarily suspended for long periods when creating a scale point\.
 
-1. Fixed a bug in Aurora Serverless for PostgreSQL where a leaked lock resulted in a prolonged scale event\.
+1. Fixed a bug in Aurora Serverless v1 for PostgreSQL where a leaked lock resulted in a prolonged scale event\.
 
-1. Fixed a bug in Aurora Serverless for PostgreSQL where connections being migrated during a scale event would be disconnected with the following message: ERROR: could not open relation with OID \.\.\.
+1. Fixed a bug in Aurora Serverless v1 for PostgreSQL where connections being migrated during a scale event would be disconnected with the following message: ERROR: could not open relation with OID \.\.\.
 
 1. Aurora PostgreSQL now avoids falling behind on a read node that occurred when the backend blocked writing to the database client\.
 
@@ -754,7 +758,7 @@ You can find the following improvements in this engine update\.
 
 1. Added support for Amazon Aurora PostgreSQL Global Database\. For more information, see [Using Amazon Aurora global databases](aurora-global-database.md)\.
 
-1. Added the ability to configure the recovery point objective \(RPO\) of a global database for Aurora PostgreSQL\. For more information, see [Managing recovery for Aurora global databases](aurora-global-database-managing.md#aurora-global-database-manage-recovery)\.
+1. Added the ability to configure the recovery point objective \(RPO\) of a global database for Aurora PostgreSQL\. For more information, see [Managing recovery for Aurora global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
 
 You can find the following improvements in this engine update\.
 
@@ -817,6 +821,10 @@ This release contains multiple critical stability enhancements\. Amazon highly r
 + [Version 2\.4\.0](#AuroraPostgreSQL.Updates.20180305.240)
 
 ### Version 2\.4\.3<a name="AuroraPostgreSQL.Updates.20180305.243"></a>
+
+**New features**
+
+1. Aurora PostgreSQL now supports the PostgreSQL [vacuum\_truncate](https://www.postgresql.org/docs/current/sql-createtable.html#RELOPTION-VACUUM-TRUNCATE) storage parameter to manage vacuum truncation for specific tables\. Set this [storage parameter](https://www.postgresql.org/docs/current/sql-createtable.html#SQL-CREATETABLE-STORAGE-PARAMETERS) to false for a table to prevent the [VACUUM](https://www.postgresql.org/docs/current/sql-vacuum.html) SQL command from truncating the table's trailing empty pages\.
 
 **Critical stability enhancements**
 + None 
@@ -1386,6 +1394,10 @@ This release contains multiple critical stability enhancements\. Amazon highly r
 + [Version 1\.6\.0](#AuroraPostgreSQL.Updates.20180305.160)
 
 ### Version 1\.6\.3<a name="AuroraPostgreSQL.Updates.20180305.163"></a>
+
+**New features**
+
+1. Aurora PostgreSQL now supports the PostgreSQL [vacuum\_truncate](https://www.postgresql.org/docs/current/sql-createtable.html#RELOPTION-VACUUM-TRUNCATE) storage parameter to manage vacuum truncation for specific tables\. Set this [storage parameter](https://www.postgresql.org/docs/current/sql-createtable.html#SQL-CREATETABLE-STORAGE-PARAMETERS) to false when creating or altering a table to prevent the [VACUUM](https://www.postgresql.org/docs/current/sql-vacuum.html) SQL command from truncating the table's trailing empty pages\.
 
 **Critical stability enhancements**
 + None 

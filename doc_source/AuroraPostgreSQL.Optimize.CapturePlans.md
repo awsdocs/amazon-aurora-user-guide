@@ -1,6 +1,6 @@
 # Capturing execution plans<a name="AuroraPostgreSQL.Optimize.CapturePlans"></a>
 
-You can capture execution plans for specific SQL statements by using manual plan capture\. Alternatively, you can capture all \(or the slowest, or the most volatile\) plans that are executed two or more times as your application runs by using automatic plan capture\.
+You can capture execution plans for specific SQL statements by using manual plan capture\. Alternatively, you can capture all \(or the slowest\) plans that are executed two or more times as your application runs by using automatic plan capture\.
 
 When capturing plans, the optimizer sets the status of a managed statement's first captured plan to `approved`\. The optimizer sets the status of any additional plans captured for a managed statement to `unapproved`\. However, more than one plan might occasionally be saved with the `approved` status\. This can happen when multiple plans are created for a statement in parallel and before the first plan for the statement is committed\.
 

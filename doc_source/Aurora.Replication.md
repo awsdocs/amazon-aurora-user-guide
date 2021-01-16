@@ -1,33 +1,52 @@
 # Replication with Amazon Aurora<a name="Aurora.Replication"></a>
 
-There are several replication options with Aurora\. The following sections explain how and when to choose each technique\.
+There are several replication options with Aurora\. Each Aurora DB cluster has built\-in replication between multiple DB instances in the same cluster\. You can also set up replication with your Aurora cluster as the source or the target\. When you replicate data into or out of an Aurora cluster, you can choose between built\-in features such as Aurora global databases or the traditional replication mechanisms for the MySQL or PostgreSQL DB engines\. You can choose the appropriate options based on which one provides the right combination of high availability, convenience, and performance for your needs\. The following sections explain how and when to choose each technique\.
 
-## Aurora replicas<a name="Aurora.Replication.Replicas"></a>
+**Topics**
++ [Aurora Replicas](#Aurora.Replication.Replicas)
++ [Replication with Aurora MySQL](#Aurora.Replication.AuroraMySQL)
++ [Replication with Aurora PostgreSQL](#Aurora.Replication.AuroraPostgreSQL)
 
-Aurora Replicas are independent endpoints in an Aurora DB cluster, best used for scaling read operations and increasing availability\. Up to 15 Aurora Replicas can be distributed across the Availability Zones that a DB cluster spans within an AWS Region\. The DB cluster volume is made up of multiple copies of the data for the DB cluster\. However, the data in the cluster volume is represented as a single, logical volume to the primary instance and to Aurora Replicas in the DB cluster\.
+## Aurora Replicas<a name="Aurora.Replication.Replicas"></a>
+
+When you create a second, third, and so on DB instance in an Aurora provisioned DB cluster, Aurora automatically sets up replication from the writer DB instance to all the other DB instances\. These other DB instances are read\-only and are known as Aurora Replicas\. We also refer to them as reader instances when discussing the ways that you can combine writer and reader DB instances within a cluster\.
+
+Aurora Replicas have two main purposes\. You can issue queries to them to scale the read operations for your application\. You typically do so by connecting to the reader endpoint of the cluster\. That way, Aurora can spread the load for read\-only connections across as many Aurora Replicas as you have in the cluster\. Aurora Replicas also help to increase availability\. If the writer instance in a cluster becomes unavailable, Aurora automatically promotes one of the reader instances to take its place as the new writer\.
+
+An Aurora DB cluster can contain up to 15 Aurora Replicas\. The Aurora Replicas can be distributed across the Availability Zones that a DB cluster spans within an AWS Region\.
+
+The data in your DB cluster has its own high availability and reliability features, independent of the DB instances in the cluster\. If you aren't familiar with Aurora storage features, see [Overview of Aurora storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\. The DB cluster volume is physically made up of multiple copies of the data for the DB cluster\. The primary instance and the Aurora Replicas in the DB cluster all see the data in the cluster volume as a single logical volume\. 
 
 As a result, all Aurora Replicas return the same data for query results with minimal replica lag\. This lag is usually much less than 100 milliseconds after the primary instance has written an update\. Replica lag varies depending on the rate of database change\. That is, during periods where a large amount of write operations occur for the database, you might see an increase in replica lag\.
 
 Aurora Replicas work well for read scaling because they are fully dedicated to read operations on your cluster volume\. Write operations are managed by the primary instance\. Because the cluster volume is shared among all DB instances in your DB cluster, minimal additional work is required to replicate a copy of the data for each Aurora Replica\.
 
-To increase availability, you can use Aurora Replicas as failover targets\. That is, if the primary instance fails, an Aurora Replica is promoted to the primary instance\. There is a brief interruption during which read and write requests made to the primary instance fail with an exception, and the Aurora Replicas are rebooted\. If your Aurora DB cluster doesn't include any Aurora Replicas, then your DB cluster will be unavailable for the duration it takes your DB instance to recover from the failure event\. However, promoting an Aurora Replica is much faster than recreating the primary instance\. For high\-availability scenarios, we recommend that you create one or more Aurora Replicas\. These should be of the same DB instance class as the primary instance and in different Availability Zones for your Aurora DB cluster\. For more information on Aurora Replicas as failover targets, see [Fault tolerance for an Aurora DB cluster](Concepts.AuroraHighAvailability.md#Aurora.Managing.FaultTolerance)\.
+To increase availability, you can use Aurora Replicas as failover targets\. That is, if the primary instance fails, an Aurora Replica is promoted to the primary instance\. There is a brief interruption during which read and write requests made to the primary instance fail with an exception, and the Aurora Replicas are rebooted\. Promoting an Aurora Replica this way is much faster than recreating the primary instance\. If your Aurora DB cluster doesn't include any Aurora Replicas, then your DB cluster will be unavailable for the duration it takes your DB instance to recover from the failure event\. For high\-availability scenarios, we recommend that you create one or more Aurora Replicas\. These should be of the same DB instance class as the primary instance and in different Availability Zones for your Aurora DB cluster\. For more information on Aurora Replicas as failover targets, see [Fault tolerance for an Aurora DB cluster](Concepts.AuroraHighAvailability.md#Aurora.Managing.FaultTolerance)\.
 
 **Note**  
 You can't create an encrypted Aurora Replica for an unencrypted Aurora DB cluster\. You can't create an unencrypted Aurora Replica for an encrypted Aurora DB cluster\.
+
+**Tip**  
+ You can use Aurora Replicas within an Aurora cluster as your only form of replication to keep your data highly available\. You can also combine the built\-in Aurora replication with the other types of replication\. Doing so can help to provide an extra level of high availability and geographic distribution of your data\. 
 
 For details on how to create an Aurora Replica, see [Adding Aurora replicas to a DB cluster](aurora-replicas-adding.md)\.
 
 ## Replication with Aurora MySQL<a name="Aurora.Replication.AuroraMySQL"></a>
 
 In addition to Aurora Replicas, you have the following options for replication with Aurora MySQL:
-+ Two Aurora MySQL DB clusters in different AWS Regions, by creating an Aurora Read Replica of an Aurora MySQL DB cluster in a different AWS Region\.
++ Aurora MySQL DB clusters in different AWS Regions\.
+  +  You can replicate data across multiple Regions by using an Aurora global database\. For details, see [High availability across AWS Regions with Aurora global databases](Concepts.AuroraHighAvailability.md#Concepts.AuroraHighAvailability.GlobalDB) 
+  +  You can create a single Aurora Read Replica of an Aurora MySQL DB cluster in a different AWS Region, by using MySQL binary log \(binlog\) replication\. 
 + Two Aurora MySQL DB clusters in the same region, by using MySQL binary log \(binlog\) replication\.
-+ An Amazon RDS MySQL DB instance as the master and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an Amazon RDS MySQL DB instance\. Typically, this approach is used for migration to Aurora MySQL, rather than for ongoing replication\.
++ An Amazon RDS MySQL DB instance as the master and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an Amazon RDS MySQL DB instance\. Typically, you use this approach for migration to Aurora MySQL, rather than for ongoing replication\.
 
 For more information about replication with Aurora MySQL, see [Single\-master replication with Amazon Aurora MySQL](AuroraMySQL.Replication.md)\.
 
 ## Replication with Aurora PostgreSQL<a name="Aurora.Replication.AuroraPostgreSQL"></a>
 
-In addition to Aurora Replicas, you can set up replication between an Amazon RDS PostgreSQL DB instance as the master and an Aurora PostgreSQL DB cluster\. You do so by creating an Aurora Read Replica of an Amazon RDS PostgreSQL DB instance\.
+In addition to Aurora Replicas, you have the following options for replication with Aurora PostgreSQL:
++ An Amazon RDS PostgreSQL DB instance as the source of data and an Aurora PostgreSQL DB cluster, by creating an Aurora Replica of an Amazon RDS PostgreSQL DB instance\. 
++ Two Aurora PostgreSQL DB clusters in the same region, by using PostgreSQL's logical replication feature\.
++ An Aurora primary DB cluster in one Region and up to five read\-only secondary DB clusters in different Regions by using an Aurora global database\. Aurora PostgreSQL doesn't support cross\-region Aurora Replicas\. However, you can use Aurora global database to scale your Aurora PostgreSQL DB cluster's Read capabilities to more than one AWS Region and to meet availability goals\. For more information, see [Using Amazon Aurora global databases](aurora-global-database.md)\. 
 
 For more information about replication with Aurora PostgreSQL, see [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)\.

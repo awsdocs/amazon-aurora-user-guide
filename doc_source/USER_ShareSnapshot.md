@@ -183,7 +183,7 @@ For Linux, macOS, or Unix:
 aws rds modify-db-cluster-snapshot-attribute \
 --db-cluster-snapshot-identifier manual-cluster-snapshot1 \
 --attribute-name restore \
---values-to-add "{111122223333","444455556666"}
+--values-to-add {"111122223333","444455556666"}
 ```
 For Windows:  
 

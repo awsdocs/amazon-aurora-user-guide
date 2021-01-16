@@ -2,9 +2,16 @@
 
 You can connect to an Aurora DB cluster using the same tools that you use to connect to a MySQL or PostgreSQL database\. You specify a connection string with any script, utility, or application that connects to a MySQL or PostgreSQL DB instance\. You use the same public key for Secure Sockets Layer \(SSL\) connections\. 
 
-In the connection string, you typically use the host and port information from special endpoints associated with the DB cluster\. With these endpoints, you can use the same connection parameters regardless of how many DB instances are in the cluster\. 
+In the connection string, you typically use the host and port information from special endpoints associated with the DB cluster\. With these endpoints, you can use the same connection parameters regardless of how many DB instances are in the cluster\. You also use the host and port information from a specific DB instance in your Aurora DB cluster for specialized tasks, such as troubleshooting\. 
 
-For specialized tasks such as troubleshooting, you can use the host and port information from a specific DB instance in your Aurora DB cluster\. 
+**Note**  
+For Aurora Serverless v1 DB clusters, you connect to the database endpoint rather than to the DB instance\. You can find the database endpoint for an Aurora Serverless v1 DB cluster on the **Connectivity & security** tab of the AWS Management Console\. For more information, see [Using Amazon Aurora Serverless v1](aurora-serverless.md)\. 
+
+Regardless of the Aurora DB engine and specific tools you use to work with the DB cluster or instance, the endpoint must be accessible\. An Amazon Aurora DB cluster can be created only in a virtual private cloud \(VPC\) based on the Amazon VPC service\. That means that you access the endpoint from either inside the VPC or outside the VPC using one of the following approaches\.
++ **Access the Amazon Aurora DB cluster inside the VPC** – Enable access to the Amazon Aurora DB cluster through the VPC\. You do so by editing the Inbound rules on the Security group for the VPC to allow access to your specific Aurora DB cluster\. To learn more, including how to configure your VPC for different Aurora DB cluster scenarios, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](https://docs.aws.amazon.com/en_us/AmazonRDS/latest/AuroraUserGuide/USER_VPC.html)\. 
++ **Access the Amazon Aurora DB cluster outside the VPC** – To access an Amazon Aurora DB cluster from outside the VPC, use the public endpoint address of the Amazon Aurora DB cluster\. You can also connect to an Amazon Aurora DB cluster that's inside a VPC from an Amazon EC2 instance that't not in the VPC by using ClassicLink\. For more information, see [A DB instance in a VPC accessed by an EC2 instance not in a VPC](USER_VPC.Scenarios.md#USER_VPC.ClassicLink)\. 
+
+For more information, see [Troubleshooting Aurora connection failures](#Aurora.Connecting.Troubleshooting)\. 
 
 **Topics**
 + [Connecting to an Amazon Aurora MySQL DB cluster](#Aurora.Connecting.AuroraMySQL)
@@ -29,9 +36,6 @@ In the details view for your DB cluster, you can find the cluster endpoint, whic
 
 The cluster endpoint connects you to the primary instance for the DB cluster\. You can perform both read and write operations using the cluster endpoint\. Your DB cluster can also have up to 15 Aurora Replicas that support read\-only access to the data in your DB cluster\. The primary instance and each Aurora Replica has a unique endpoint that is independent of the cluster endpoint and allows you to connect to a specific DB instance in the cluster directly\. The cluster endpoint always points to the primary instance\. If the primary instance fails and is replaced, then the cluster endpoint points to the new primary instance\.
 
-**Note**  
-If the cluster is an Aurora Serverless DB cluster, you can only connect to its database endpoint\. For more information, see [Using Amazon Aurora Serverless](aurora-serverless.md)\.
-
 To view the cluster endpoint \(writer endpoint\), choose **Databases** on the Amazon RDS console and choose the name of the DB cluster to show the DB cluster details\.
 
 ![\[Amazon Aurora details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraMySQLConnect.png)
@@ -43,19 +47,16 @@ Some connection utilities you can use are the following:
 + **GUI** – You can use the MySQL Workbench utility to connect by using a UI interface\. For more information, see the [Download MySQL workbench](http://dev.mysql.com/downloads/workbench/) page\.
 + **Applications** – You can use the MariaDB Connector/J utility to connect your applications to your Aurora DB cluster\. For more information, see the [MariaDB Connector/J download](https://downloads.mariadb.org/connector-java/) page\.
 **Note**  
- If you use the MariaDB Connector/J utility with an Aurora Serverless cluster, use the prefix `jdbc:mariadb:aurora//` in your connection string\. The `mariadb:aurora` parameter avoids the automatic DNS scan for failover targets\. That scanning is not needed with Aurora Serverless clusters and causes a delay in establishing the connection\. 
+ If you use the MariaDB Connector/J utility with an Aurora Serverless v1 DB cluster, use the prefix `jdbc:mariadb:aurora//` in your connection string\. The `mariadb:aurora` parameter avoids the automatic DNS scan for failover targets\. That scanning is not needed with Aurora Serverless v1 DB clusters and causes a delay in establishing the connection\. 
 
 You can use SSL encryption on connections to an Amazon Aurora DB instance\. For information, see [Using SSL with a MySQL DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Concepts.SSLSupport.html)\.
-
-**Note**  
-Because you can create Amazon Aurora DB cluster only in an Amazon Virtual Private Cloud \(VPC\), connections to an Amazon Aurora DB cluster from AWS instances that are not in a VPC have been required to use the public endpoint address of the Amazon Aurora DB cluster\. However, you can now communicate with an Amazon EC2 instance that is not in a VPC and an Amazon Aurora DB cluster using ClassicLink\. For more information, see [A DB instance in a VPC accessed by an EC2 instance not in a VPC](USER_VPC.Scenarios.md#USER_VPC.ClassicLink)\.
 
 ### Connecting with SSL for Aurora MySQL<a name="Aurora.Connecting.SSL"></a>
 
 To connect using SSL, use the MySQL utility as described in the following procedure\. If you are using IAM database authentication, you must use an SSL connection\. For information, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\. 
 
 **Note**  
-In order to connect to the cluster endpoint using SSL, your client connection utility must support Subject Alternative Names \(SAN\)\. If your client connection utility doesn't support SAN, you can connect directly to the instances in your Aurora DB cluster\. For more information on Aurora endpoints, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\.
+To connect to the cluster endpoint using SSL, your client connection utility must support Subject Alternative Names \(SAN\)\. If your client connection utility doesn't support SAN, you can connect directly to the instances in your Aurora DB cluster\. For more information on Aurora endpoints, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\.
 
 **To connect to a DB cluster with SSL using the MySQL utility**
 
@@ -81,6 +82,19 @@ mysql>
 
 For general instructions on constructing Amazon RDS MySQL connection strings and finding the public key for SSL connections, see [ Connecting to a DB instance running the MySQL database engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToInstance.html)\.
 
+### Connecting with the Amazon Web Services JDBC Driver for MySQL \(preview\)<a name="Aurora.Connecting.JDBCDriverMySQL"></a>
+
+
+|  | 
+| --- |
+| This is preview documentation for Amazon Web Services JDBC Driver for MySQL\. It is subject to change\. | 
+
+The AWS JDBC Driver for MySQL \(preview\) is a client driver designed for the high availability of Aurora MySQL\. The AWS JDBC Driver for MySQL is drop\-in compatible with the MySQL Connector/J driver\.
+
+The AWS JDBC Driver for MySQL takes full advantage of the failover capabilities of Aurora MySQL\. The AWS JDBC Driver for MySQL fully maintains a cache of the DB cluster topology and each DB instance's role, either primary DB instance or Aurora Replica\. It uses this topology to bypass the delays caused by DNS resolution so that a connection to the new primary DB instance is established as fast as possible\.
+
+For more information about the AWS JDBC Driver for MySQL and complete instructions for using it, see [the AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
+
 ## Connecting to an Amazon Aurora PostgreSQL DB cluster<a name="Aurora.Connecting.AuroraPostgreSQL"></a>
 
 You can connect to a DB instance in your Amazon Aurora PostgreSQL DB cluster using the same tools that you use to connect to a PostgreSQL database\. As part of this, you use the same public key for Secure Sockets Layer \(SSL\) connections\. You can use the endpoint and port information from the primary instance or Aurora Replicas in your Aurora PostgreSQL DB cluster in the connection string of any script, utility, or application that connects to a PostgreSQL DB instance\. In the connection string, specify the DNS address from the primary instance or Aurora Replica endpoint as the host parameter\. Specify the port number from the endpoint as the port parameter\.
@@ -104,15 +118,11 @@ Some connection utilities you can use are the following:
 + **GUI** – You can use the pgAdmin utility to connect to a PostgreSQL DB instance by using a UI interface\. For more information, see the [Download](https://www.pgadmin.org/download/) page from the pgAdmin website\.
 + **Applications** – You can use the PostgreSQL JDBC driver to connect your applications to your PostgreSQL DB instance\. For more information, see the [Download](https://jdbc.postgresql.org/download.html) page from the PostgreSQL JDBC driver website\.
 
-**Note**  
-Because you can create an Amazon Aurora PostgreSQL DB cluster only in an Amazon Virtual Private Cloud \(VPC\), connections to an Aurora PostgreSQL DB cluster from AWS instances that are not in a VPC have been required to use the public endpoint address of the Aurora PostgreSQL DB cluster\. However, you can now communicate with an Amazon EC2 instance that is not in a VPC and an Aurora PostgreSQL DB cluster using ClassicLink\. For more information, see [A DB instance in a VPC accessed by an EC2 instance not in a VPC](USER_VPC.Scenarios.md#USER_VPC.ClassicLink)\.
-
 ## Troubleshooting Aurora connection failures<a name="Aurora.Connecting.Troubleshooting"></a>
 
-Common causes of connection failures to a new Aurora DB cluster are as follows:
-+ The DB cluster was created using a VPC that does not allow connections from your device\. To fix this failure, modify the VPC to allow connections from your device, or create a new VPC for your DB cluster that allows connections from your device\. For an example, see [Create a VPC and subnets](Aurora.CreateVPC.md#CHAP_Aurora.CreateVPC)\.
-+ The DB cluster was created using the default port, and your company has firewall rules blocking connections to that port from devices in your company network\. To fix this failure, recreate the instance with a different port\.
-+ If you are using IAM database authentication, you might need to configure IAM database authentication\. For information, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\.
+Common causes of connection failures to a new Aurora DB cluster include the following:
++ **Security group in the VPC doesn't allow access** – Your VPC needs to allow connections from your device or from an Amazon EC2 instance by proper configuration of the Security group in the VPC\. To resolve, modify your VPC's Security group Inbound rules to allow connections\. For an example, see [Create a VPC and subnets](Aurora.CreateVPC.md#CHAP_Aurora.CreateVPC)\.
++ **Port blocked by firewall rules** – Check the value of the port configured for your Aurora DB cluster\. If a firewall rule blocks that port, you can re\-create the instance using a different port\. 
++ **Incomplete or incorrect IAM configuration** – If you created your Aurora DB instance to use IAM–based authentication, make sure that it's properly configured\. For more information, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\.
 
-**Note**  
-For a helpful and detailed guide on connecting to an Amazon Aurora MySQL DB cluster, you can see the [Aurora connection management](https://d1.awsstatic.com/whitepapers/RDS/amazon-aurora-connection-management-handbook.pdf) handbook\.
+For more information about troubleshooting Aurora DB connection issues, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\. 

@@ -21,7 +21,7 @@ AWS Directory Service creates a fully managed Active Directory in the AWS Cloud\
 +  Creates a directory administrator account with the user name `Admin` and the specified password\. You use this account to manage your directory\. 
 **Important**  
 Make sure to save this password\. AWS Directory Service doesn't store this password, and it can't be retrieved or reset\.
-+ Creates a security group for the directory controllers\.
++ Creates a security group for the directory controllers\. The security group must permit communication with the PostgreSQL DB cluster\.
 
 When you launch AWS Directory Service for Microsoft Active Directory, AWS creates an Organizational Unit \(OU\) that contains all of your directory's objects\. This OU, which has the NetBIOS name that you entered when you created your directory, is located in the domain root\. The domain root is owned and managed by AWS\. 
 
@@ -92,7 +92,7 @@ If you don't plan to use your own on\-premises Microsoft Active Directory, skip 
 To get Kerberos authentication using your on\-premises Active Directory, you need to create a trusting domain relationship using a forest trust between your on\-premises Microsoft Active Directory and the AWS Managed Microsoft AD directory \(created in [Step 1: Create a directory using AWS Managed Microsoft AD](#postgresql-kerberos-setting-up.create-directory)\)\. The trust can be one\-way, where the AWS Managed Microsoft AD directory trusts the on\-premises Microsoft Active Directory\. The trust can also be two\-way, where both Active Directories trust each other\. For more information about setting up trusts using AWS Directory Service, see [When to create a trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_setup_trust.html) in the *AWS Directory Service Administration Guide*\.
 
 **Note**  
-If you use an on\-premises Microsoft Active Directory, DB cluster endpoints can't be used by Windows clients for global databases or custom endpoints\. For more information, see [Using Amazon Aurora global databases](aurora-global-database.md) and [Using custom endpoints](Aurora.Overview.Endpoints.md#Aurora.Endpoints.Custom)\. 
+If you use an on\-premises Microsoft Active Directory with [global databases](aurora-global-database.md), then DB cluster endpoints can't be used by Windows clients for clusters in secondary AWS Regions\. Windows clients must connect using special endpoints as described in [Connecting to PostgreSQL with Kerberos authentication](postgresql-kerberos-connecting.md)\. Windows clients can't connect with [custom endpoints](Aurora.Overview.Endpoints.md#Aurora.Endpoints.Custom) if you use an on\-premises Microsoft Active Directory\. 
 
 Make sure that your on\-premises Microsoft Active Directory domain name includes a DNS suffix routing that corresponds to the newly created trust relationship\. The following screenshot shows an example\.
 
@@ -102,7 +102,7 @@ Make sure that your on\-premises Microsoft Active Directory domain name includes
 
 For Amazon Aurora to call AWS Directory Service for you, an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess` is required\. This role allows Amazon Aurora to make calls to AWS Directory Service\.
 
-When a DB instance is created using the AWS Management Console and the console user has the `iam:CreateRole` permission, the console creates this role automatically\. In this case, the role name is `rds-directoryservice-kerberos-access-role`\. Otherwise, create the IAM role manually\. When you create this IAM role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\.
+When a DB instance is created using the AWS Management Console and the console user has the `iam:CreateRole` permission, the console creates this role automatically\. In this case, the role name is `rds-directoryservice-kerberos-access-role`\. Otherwise, create the IAM role manually\. Choose **RDS** and then **RDS \- Directory Service**\. Attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to this role\.
 
 For more information about creating IAM roles for a service, see [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
 
@@ -152,7 +152,7 @@ The role must also have the following IAM role policy\.
 
 ## Step 4: Create and configure users<a name="postgresql-kerberos-setting-up.create-users"></a>
 
- You can create users by using the Active Directory Users and Computers tool, which is one of the Active Directory Domain Services and Active Directory Lightweight Directory Services tools\. In this case, *users* are individual people or entities that have access to your directory\. 
+ You can create users by using the Active Directory Users and Computers tool\. This is one of the Active Directory Domain Services and Active Directory Lightweight Directory Services tools\. In this case, *users* are individual people or entities who have access to your directory\.
 
 To create users in an AWS Directory Service directory, you must be connected to a Windows\-based Amazon EC2 instance\. Also, this EC2 instance must be a member of the AWS Directory Service directory\. At the same time, you must be logged in as a user that has privileges to create users\. For more information, see [Create a user](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups_create_user.html) in the *AWS Directory Service Administration Guide*\.
 
@@ -168,7 +168,7 @@ The following procedure enables traffic between VPCs using VPC peering\. Follow 
 
 1. Set up appropriate VPC routing rules to ensure that network traffic can flow both ways\.
 
-1. Ensure that the DB instance's security group can receive inbound traffic from the directory's security group\.
+1. Ensure that the DB instance security group can receive inbound traffic from the directory security group\.
 
 1. Ensure that there is no network access control list \(ACL\) rule to block traffic\.
 
@@ -190,7 +190,7 @@ Create or modify a PostgreSQL DB cluster for use with your directory\. You can u
 +   Restore a PostgreSQL DB cluster from a DB snapshot using the console, the [restore\-db\-cluster\-from\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) CLI command, or the [ RestoreDBClusterFromDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromSnapshot.html) RDS API operation\. For instructions, see [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md)\. 
 +   Restore a PostgreSQL DB cluster to a point\-in\-time using the console, the [ restore\-db\-instance\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) CLI command, or the [ RestoreDBClusterToPointInTime](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterToPointInTime.html) RDS API operation\. For instructions, see [Restoring a DB cluster to a specified time](USER_PIT.md)\. 
 
-Kerberos authentication is only supported for PostgreSQL DB clustersin a VPC\. The DB cluster can be in the same VPC as the directory, or in a different VPC\. The DB cluster must use a security group that allows egress within the directory's VPC so the DB cluster can communicate with the directory\.
+Kerberos authentication is only supported for PostgreSQL DB clustersin a VPC\. The DB cluster can be in the same VPC as the directory, or in a different VPC\. The DB cluster must use a security group that allows ingress and egress within the directory's VPC so the DB cluster can communicate with the directory\.
 
 When you use the console to create a DB cluster , choose **Password and Kerberos authentication** in the **Database authentication** section\. Choose **Browse Directory** and then select the directory, or choose **Create a new directory**\.
 
@@ -215,7 +215,7 @@ If you modify a DB cluster to enable Kerberos authentication, reboot the DB clus
 
 ## Step 7: Create Kerberos authentication PostgreSQL logins<a name="postgresql-kerberos-setting-up.create-logins"></a>
 
-Next, use the RDS master user credentials to connect to the PostgreSQL DB cluster as you do with any other DB cluster \. The DB instance is joined to the AWS Managed Microsoft AD domain\. Thus, you can provision PostgreSQL logins and users from the Microsoft Active Directory users and groups in your domain\. To manage database permissions, you grant and revoke standard PostgreSQL permissions to these logins\. 
+Use the RDS master user credentials to connect to the PostgreSQL DB cluster as you do with any other DB cluster \. The DB instance is joined to the AWS Managed Microsoft AD domain\. Thus, you can provision PostgreSQL logins and users from the Microsoft Active Directory users and groups in your domain\. To manage database permissions, you grant and revoke standard PostgreSQL permissions to these logins\. 
 
 To allow an Active Directory user to authenticate with PostgreSQL, use the RDS master user credentials\. You use these credentials to connect to the PostgreSQL DB cluster as you do with any other DB cluster \. After you're logged in, create an externally authenticated user in PostgreSQL and grant the `rds_ad` role to this user\.
 
@@ -240,7 +240,6 @@ The following is sample krb5\.conf content for AWS Managed Microsoft AD\.
 ```
 [libdefaults]
  default_realm = EXAMPLE.COM
- default_ccache_name = /tmp/kerbcache
 [realms]
  EXAMPLE.COM = {
   kdc = example.com
@@ -256,7 +255,6 @@ The following is sample krb5\.conf content for an on\-premises Microsoft Active 
 ```
 [libdefaults]
  default_realm = EXAMPLE.COM
- default_ccache_name = /tmp/kerbcache
 [realms]
  EXAMPLE.COM = {
   kdc = example.com

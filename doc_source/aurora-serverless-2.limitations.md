@@ -24,9 +24,9 @@ The following limitations apply to Amazon Aurora Serverless v2 \(preview\):
   + Aurora multi\-master
   + Aurora Replicas
   + AWS Identity and Access Management \(IAM\) database authentication
-  + Data API for Aurora Serverless
+  + Data API for Aurora Serverless v1
   + Exporting snapshots created from Aurora Serverless v2 \(preview\) DB clusters to Amazon S3 buckets
   + Importing data from Amazon S3 into Aurora Serverless v2 \(preview\) DB cluster tables
   + Invoking AWS Lambda functions from within your Aurora Serverless v2 \(preview\) database
-  + Query editor for Aurora Serverless 
+  + Query editor for Aurora Serverless v1 
   + Restoring snapshots from Aurora provisioned DB clusters

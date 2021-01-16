@@ -11,8 +11,35 @@ The following table lists the Aurora features that can access an Amazon S3 bucke
 | LOAD XML FROM S3 |  `ListBucket`  |  `GetObject` `GetObjectVersion`  | 
 |  `SELECT INTO OUTFILE S3`  |  `ListBucket`  |  `AbortMultipartUpload` `DeleteObject` `GetObject` `ListMultipartUploadParts` `PutObject`  | 
 
+The following policy adds the permissions that might be required by Aurora to access an Amazon S3 bucket on your behalf\. 
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAuroraToExampleBucket",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:AbortMultipartUpload",
+                "s3:ListBucket",
+                "s3:DeleteObject",
+                "s3:GetObjectVersion",
+                "s3:ListMultipartUploadParts"
+            ],
+            "Resource": [
+                "arn:aws:s3:::example-bucket/*",
+                "arn:aws:s3:::example-bucket"
+            ]
+        }
+    ]
+}
+```
+
 **Note**  
-Other permissions might be required\. For example, if your Amazon S3 bucket is encrypted, you need to add `kms:Decrypt` permissions\.
+Based on your use case, you might not need to add all of the permissions in the sample policy\. Also, other permissions might be required\. For example, if your Amazon S3 bucket is encrypted, you need to add `kms:Decrypt` permissions\.
 
 You can use the following steps to create an IAM policy that provides the minimum required permissions for Aurora to access an Amazon S3 bucket on your behalf\. To allow Aurora to access all of your Amazon S3 buckets, you can skip these steps and use either the `AmazonS3ReadOnlyAccess` or `AmazonS3FullAccess` predefined IAM policy instead of creating your own\.
 

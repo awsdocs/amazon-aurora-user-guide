@@ -264,7 +264,7 @@ To replicate data securely, you can use encrypted replication\.
 If you don't need to use encrypted replication, you can skip these steps and move on to the instructions in [Synchronizing the Amazon Aurora MySQL DB cluster with the external MySQL database](#AuroraMySQL.Migrating.ExtMySQL.S3.RepSync.Synchronizing)\.
 
 The following are prerequisites for using encrypted replication:
-+ Secure Sockets Layer \(SSL\) must be enabled on the external MySQL master database\.
++ Secure Sockets Layer \(SSL\) must be enabled on the external MySQL primary database\.
 + A client key and client certificate must be prepared for the Aurora MySQL DB cluster\.
 
 During encrypted replication, the Aurora MySQL DB cluster acts a client to the MySQL database server\. The certificates and keys for the Aurora MySQL client are in files in \.pem format\.
@@ -272,14 +272,14 @@ During encrypted replication, the Aurora MySQL DB cluster acts a client to the M
 **To configure your external MySQL database and your Aurora MySQL DB cluster for encrypted replication**
 
 1. Ensure that you are prepared for encrypted replication:
-   + If you don't have SSL enabled on the external MySQL master database and don't have a client key and client certificate prepared, enable SSL on the MySQL database server and generate the required client key and client certificate\.
-   + If SSL is enabled on the external master, supply a client key and certificate for the Aurora MySQL DB cluster\. If you don't have these, generate a new key and certificate for the Aurora MySQL DB cluster\. To sign the client certificate, you must have the certificate authority key that you used to configure SSL on the external MySQL master database\.
+   + If you don't have SSL enabled on the external MySQL primary database and don't have a client key and client certificate prepared, enable SSL on the MySQL database server and generate the required client key and client certificate\.
+   + If SSL is enabled on the external primary, supply a client key and certificate for the Aurora MySQL DB cluster\. If you don't have these, generate a new key and certificate for the Aurora MySQL DB cluster\. To sign the client certificate, you must have the certificate authority key that you used to configure SSL on the external MySQL primary database\.
 
    For more information, see [ Creating SSL certificates and keys using openssl](https://dev.mysql.com/doc/refman/5.6/en/creating-ssl-files-using-openssl.html) in the MySQL documentation\.
 
    You need the certificate authority certificate, the client key, and the client certificate\.
 
-1. Connect to the Aurora MySQL DB cluster as the master user using SSL\.
+1. Connect to the Aurora MySQL DB cluster as the primary user using SSL\.
 
    For information about connecting to an Aurora MySQL DB cluster with SSL, see [Using SSL/TLS with Aurora MySQL DB clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
 
@@ -371,7 +371,7 @@ You can synchronize your Amazon Aurora MySQL DB cluster with the MySQL database 
    1. In the navigation pane, choose **Events**\.
 
    1. In the **Events** list, note the position in the **Recovered from Binary log filename** event\.  
-![\[View MySQL master\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-mysql-rep-binary-log-position.png)
+![\[View MySQL primary\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-mysql-rep-binary-log-position.png)
 
       You specify the position to start replication in a later step\.
 
@@ -446,15 +446,15 @@ If `REQUIRE SSL` is not included, the replication connection might silently fall
    CALL mysql.rds_start_replication;
    ```
 
-1. Monitor how far the Aurora MySQL DB cluster is behind the MySQL replication master database\. To do so, connect to the Aurora MySQL DB cluster and run the following command\.
+1. Monitor how far the Aurora MySQL DB cluster is behind the MySQL replication primary database\. To do so, connect to the Aurora MySQL DB cluster and run the following command\.
 
    ```
    SHOW SLAVE STATUS;
    ```
 
-   In the command output, the `Seconds Behind Master` field shows how far the Aurora MySQL DB cluster is behind the MySQL master\. When this value is `0` \(zero\), the Aurora MySQL DB cluster has caught up to the master, and you can move on to the next step to stop replication\.
+   In the command output, the `Seconds Behind Master` field shows how far the Aurora MySQL DB cluster is behind the MySQL primary\. When this value is `0` \(zero\), the Aurora MySQL DB cluster has caught up to the primary, and you can move on to the next step to stop replication\.
 
-1. Connect to the MySQL replication master database and stop replication\. To do so, run the following command\.
+1. Connect to the MySQL replication primary database and stop replication\. To do so, run the following command\.
 
    ```
    CALL mysql.rds_stop_replication;

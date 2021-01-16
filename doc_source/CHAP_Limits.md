@@ -17,8 +17,8 @@ The following table lists the resources and their quotas per AWS Region\.
 | Resource | Default quota | 
 | --- | --- | 
 | Authorizations per DB security group | 20 | 
-| Burst balance for instances <1 tebibyte \(TiB\) | 3000 IOPS | 
-| Cross\-region snapshot copy requests | 5 | 
+| Concurrent DB snapshot export tasks | 5 | 
+| Cross\-Region DB snapshot copy requests | 5 | 
 | Custom endpoints per DB cluster | 5 | 
 | Data API maximum result set size | 1 MB | 
 | Data API requests per second | 1000 | 
@@ -61,4 +61,4 @@ The following table describes naming constraints in Amazon Aurora\.
 
 ## Amazon Aurora table size limits<a name="RDS_Limits.FileSize.Aurora"></a>
 
-For Aurora MySQL, the maximum table size is 64 tebibytes \(TiB\)\. For an Aurora PostgreSQL DB cluster, the maximum table size is 32 terabytes \(TB\)\. We recommend that you follow table design best practices, such as partitioning of large tables\.
+For Aurora MySQL, the maximum table size is 64 tebibytes \(TiB\)\. For an Aurora PostgreSQL DB cluster, the maximum table size is 32 tebibytes \(TiB\)\. We recommend that you follow table design best practices, such as partitioning of large tables\.

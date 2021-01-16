@@ -19,4 +19,4 @@
 
 ## Using SSL with Aurora DB clusters<a name="Aurora.Overview.Security.SSL"></a>
 
- Amazon Aurora DB clusters support Secure Sockets Layer \(SSL\) connections from applications using the same process and public key as Amazon RDS DB instances\. For more information, see [Security with Amazon Aurora MySQL](AuroraMySQL.Security.md), [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md), or [Using TLS/SSL with Aurora Serverless](aurora-serverless.md#aurora-serverless.tls)\. 
+ Amazon Aurora DB clusters support Secure Sockets Layer \(SSL\) connections from applications using the same process and public key as Amazon RDS DB instances\. For more information, see [Security with Amazon Aurora MySQL](AuroraMySQL.Security.md), [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md), or [Using TLS/SSL with Aurora Serverless v1](aurora-serverless.md#aurora-serverless.tls)\. 

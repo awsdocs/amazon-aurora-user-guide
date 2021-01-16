@@ -20,7 +20,7 @@ If your application is on Microsoft Windows and requires a PKCS7 file, you can d
 
 **Note**  
 Amazon RDS Proxy and Aurora Serverless use certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, you don't need to download Amazon RDS certificates or update applications that use RDS Proxy connections\. For more information about using TLS/SSL with RDS Proxy, see [Using TLS/SSL with RDS Proxy](rds-proxy.md#rds-proxy-security.tls)\.  
-If you are Aurora Serverless, downloading Amazon RDS certificates isn't required\. For more information about using TLS/SSL with Aurora Serverless, see [Using TLS/SSL with Aurora Serverless](aurora-serverless.md#aurora-serverless.tls)\.
+If you are Aurora Serverless, downloading Amazon RDS certificates isn't required\. For more information about using TLS/SSL with Aurora Serverless, see [Using TLS/SSL with Aurora Serverless v1](aurora-serverless.md#aurora-serverless.tls)\.
 
 ## Root certificates for opt\-in AWS Regions<a name="UsingWithRDS.SSL.RootCertificatesOptIn"></a>
 

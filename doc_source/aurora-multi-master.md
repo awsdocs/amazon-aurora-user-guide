@@ -74,7 +74,7 @@
 
  Your application controls which write requests are handled by which DB instance\. Thus, with a multi\-master cluster, you connect to individual instance endpoints to issue DML and DDL statements\. That's different than other kinds of Aurora clusters, where you typically direct all write operations to the single cluster endpoint and all read operations to the single reader endpoint\. 
 
- The underlying storage for Aurora multi\-master clusters is similar to storage for single\-master clusters\. Your data is still stored in a highly reliable, shared storage volume that grows automatically\. The core difference lies in the number and type of DB instances\. In multi\-master clusters, there are *N* read/write nodes\. Currently, the maximum for *N* is 2\. 
+ The underlying storage for Aurora multi\-master clusters is similar to storage for single\-master clusters\. Your data is still stored in a highly reliable, shared storage volume that grows automatically\. The core difference lies in the number and type of DB instances\. In multi\-master clusters, there are *N* read/write nodes\. Currently, the maximum for *N* is 4\. 
 
  Multi\-master clusters have no dedicated read\-only nodes\. Thus, the Aurora procedures and guidelines about Aurora Replicas don't apply to multi\-master clusters\. You can temporarily make a DB instance read\-only to place read and write workloads on different DB instances\. To do so, see [Using instance read\-only mode](#using-instance-read-only-mode)\. 
 
@@ -119,7 +119,7 @@
 #### AWS and Aurora limitations<a name="aurora-multi-master-limitations-aws"></a>
 
  The following limitations currently apply to the AWS and Aurora features that you can use with multi\-master clusters: 
-+  Currently, you can have a maximum of two DB instances in a multi\-master cluster\. 
++  Currently, you can have a maximum of four DB instances in a multi\-master cluster\. 
 +  Currently, all DB instances in a multi\-master cluster must be in the same AWS Region\. 
 +  You can't enable cross\-Region replicas from multi\-master clusters\. 
 + Multi\-master clusters are available in the following AWS Regions:
@@ -216,7 +216,7 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
 
 ### Adding a DB instance to a multi\-master cluster<a name="aurora-multi-master-add-instance"></a>
 
- You need more than one DB instance to see the benefits of a multi\-master cluster\.  You can create another DB instance afterward using the procedures from [Adding Aurora replicas to a DB cluster](aurora-replicas-adding.md)\. The difference for multi\-master clusters is that the new DB instance has read/write capability instead of a read\-only Aurora Replica\. Use the same AWS instance class for all DB instances within the multi\-master cluster\. 
+ You need more than one DB instance to see the benefits of a multi\-master cluster\. After you create the first instance, you can create other DB instances, up to a maximum of four DB instances, using the procedures from [Adding Aurora replicas to a DB cluster](aurora-replicas-adding.md)\. The difference for multi\-master clusters is that the new DB instances all have read/write capability instead of being read\-only Aurora Replicas\. Use the same AWS instance class for all DB instances within the multi\-master cluster\. 
 
 ## Managing Aurora multi\-master clusters<a name="aurora-multi-master-managing"></a>
 
@@ -692,11 +692,13 @@ mysql> select @@read_only;
 
  You map shards or tenants to DB instances in a one\-to\-one or many\-to\-one fashion\. Each DB instance handles one or more shards\. The sharded design primarily applies to write operations\. You can issue `SELECT` queries for any shard from any DB instance with equivalent performance\. 
 
+ Suppose you used a multi\-master cluster for a sharded gaming application\. You might distribute the work so that database updates are performed by specific DB instances, depending on the player's user name\. Your application handles the logic of mapping each player to the appropriate DB instance and connecting to the endpoint for that instance\. Each DB instance can handle write operations for many different shards\. You can submit queries to any DB instance, because conflicts can only arise during write operations\. You might designate one DB instance to perform all `SELECT` queries to minimize the overhead on the DB instances that perform write operations\. 
+
  Suppose that as time goes on, one of the shards becomes much more active\. To rebalance the workload, you can switch which DB instance is responsible for that shard\. In a non\-Aurora system, you might have to physically move the data to a different server\. With an Aurora multi\-master cluster, you can reshard like this by directing all write operations for the shard to some other DB instance that has unused compute capacity\. The Aurora shared storage model avoids the need to physically reorganize the data\. 
 
 ### Using a multi\-master cluster without sharding<a name="aurora-multi-master-ranges"></a>
 
- If your schema design doesn't subdivide the data into physically separate containers such as databases, tables, or partitions, you can still use it with a multi\-master cluster\. 
+ If your schema design doesn't subdivide the data into physically separate containers such as databases, tables, or partitions, you can still divide write operations such as DML statements among the DB instances in a multi\-master cluster\. 
 
  You might see some performance overhead, and your application might have to deal with occasional transaction rollbacks when write conflicts are treated as deadlock conditions\. Write conflicts are more likely during write operations for small tables\. If a table contains few data pages, rows from different parts of the primary key range might be in the same data page\. This overlap might lead to write conflicts if those rows are changed simultaneously by different DB instances\. 
 

@@ -11,11 +11,8 @@ If you want to migrate a MySQL version 5\.6 snapshot to Aurora MySQL version 5\.
 + Upgrade the MySQL version 5\.6 snapshot to MySQL version 5\.7, take a snapshot of the MySQL version 5\.7 DB instance, and then restore the MySQL version 5\.7 snapshot to Aurora MySQL version 5\.7\.
 
 **Note**  
- You can also migrate a MySQL DB instance to an Aurora MySQL DB cluster by creating an Aurora Read Replica of your source MySQL DB instance\. For more information, see [Migrating data from a MySQL DB instance to an Amazon Aurora MySQL DB cluster by using an Aurora read replica](AuroraMySQL.Migrating.RDSMySQL.Replica.md)\. 
-
-Incompatibilities between MySQL and Aurora MySQL include the following:
-+ You can't migrate a MySQL version 5\.7 snapshot to Aurora MySQL version 5\.6\.
-+ You can't migrate a DB snapshot created with MySQL 5\.6\.40 or 5\.7\.22 to Aurora MySQL\.
+ You can also migrate a MySQL DB instance to an Aurora MySQL DB cluster by creating an Aurora read replica of your source MySQL DB instance\. For more information, see [Migrating data from a MySQL DB instance to an Amazon Aurora MySQL DB cluster by using an Aurora read replica](AuroraMySQL.Migrating.RDSMySQL.Replica.md)\.   
+You can't migrate a MySQL version 5\.7 snapshot to Aurora MySQL version 5\.6\.
 
 The general steps you must take are as follows:
 

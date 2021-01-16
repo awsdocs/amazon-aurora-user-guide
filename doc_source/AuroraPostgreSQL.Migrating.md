@@ -85,7 +85,7 @@ Be prepared for migration to take a while, roughly several hours per tebibyte \(
 
 When you create an Aurora Read Replica of a PostgreSQL DB instance, Amazon RDS creates a DB snapshot of your source PostgreSQL DB instance\. This snapshot is private to Amazon RDS and incurs no charges\. Amazon RDS then migrates the data from the DB snapshot to the Aurora Read Replica\. After the DB snapshot data is migrated to the new Aurora PostgreSQL DB cluster, RDS starts replication between your PostgreSQL DB instance and the Aurora PostgreSQL DB cluster\. 
 
-You can only have one Aurora Read Replica for a PostgreSQL DB instance\. If you try to create an Aurora Read Replica for your Amazon RDS PostgreSQL instance and you already have a read replica, the request is rejected\. 
+You can only have one Aurora Read Replica for a PostgreSQL DB instance\. If you try to create an Aurora Read Replica for your Amazon RDS PostgreSQL instance and you already have an Aurora Read Replica or a cross\-region Read Replica, the request is rejected\. 
 
 **Note**  
 Replication issues can arise due to feature differences between Aurora PostgreSQL and the PostgreSQL engine version of your RDS PostgreSQL DB instance that is the replication source\. You can replicate only from an Amazon RDS PostgreSQL instance that is compatible with the Aurora PostgreSQL version in question\. For example, if the supported Aurora PostgreSQL version is 9\.6\.3, the Amazon RDS PostgreSQL DB instance must be running version 9\.6\.1 or greater\. If you encounter an error, you can find help in the [Amazon RDS community forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
@@ -529,7 +529,7 @@ After you create the policy, note the Amazon Resource Name \(ARN\) of the policy
 
    You do so by using the AWS Management Console or AWS CLI, as described following\. 
 **Note**  
-You can't associate an IAM role with an Aurora Serverless DB cluster\. For more information, see [Using Amazon Aurora Serverless](aurora-serverless.md)\.  
+You can't associate an IAM role with an Aurora Serverless DB cluster\. For more information, see [Using Amazon Aurora Serverless v1](aurora-serverless.md)\.  
 Also, be sure the database you use doesn't have any restrictions noted in [Importing Amazon S3 data into an Aurora PostgreSQL DB cluster](#USER_PostgreSQL.S3Import)\. 
 
 ##### Console<a name="collapsible-section-1"></a>
@@ -616,7 +616,7 @@ If you encounter connection problems when attempting to import Amazon S3 file da
 Import your Amazon S3 data by calling the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function\. 
 
 **Note**  
-The following examples use the IAM role method for providing access to the Amazon S3 bucket\. Thus, there are no credential parameters in the `aws_s3.table_import_from_s3` function calls\.
+The following examples use the IAM role method for providing access to the Amazon S3 bucket\. Thus, the `aws_s3.table_import_from_s3` function calls don't include credential parameters\.
 
 The following shows a typical PostgreSQL example using psql\.
 
@@ -635,7 +635,7 @@ The parameters are the following:
 + `(format csv)` – PostgreSQL COPY arguments\. The copy process uses the arguments and format of the [PostgreSQL COPY](https://www.postgresql.org/docs/current/sql-copy.html) command\. In the preceding example, the `COPY` command uses the comma\-separated value \(CSV\) file format to copy the data\. 
 +  `s3_uri` – A structure that contains the information identifying the Amazon S3 file\. For an example of using the [aws\_commons\.create\_s3\_uri](#USER_PostgreSQL.S3Import.create_s3_uri) function to create an `s3_uri` structure, see [Overview of importing Amazon S3 data](#USER_PostgreSQL.S3Import.Overview)\.
 
-For the full reference of this function, see [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3)\.
+The return value is text\. For the full reference of this function, see [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3)\.
 
 The following examples show how to specify different kinds of files when importing Amazon S3 data\.
 
@@ -733,13 +733,13 @@ psql=> SELECT aws_s3.table_import_from_s3(
 
 #### aws\_s3\.table\_import\_from\_s3<a name="aws_s3.table_import_from_s3"></a>
 
-Imports Amazon S3 data into an Aurora PostgreSQL table\. The `aws_s3` extension provides the `aws_s3.table_import_from_s3` function\. 
+Imports Amazon S3 data into an Aurora PostgreSQL table\. The `aws_s3` extension provides the `aws_s3.table_import_from_s3` function\. The return value is text\.
 
 ##### Syntax<a name="aws_s3.table_import_from_s3-syntax"></a>
 
-The three required parameters are `table_name`, `column_list` and `options`\. These identify the database table and specify how the data is copied into the table\. 
+The required parameters are `table_name`, `column_list` and `options`\. These identify the database table and specify how the data is copied into the table\. 
 
-You can also use these parameters: 
+You can also use the following parameters: 
 + The `s3_info` parameter specifies the Amazon S3 file to import\. When you use this parameter, access to Amazon S3 is provided by an IAM role for the PostgreSQL DB cluster\.
 
   ```

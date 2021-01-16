@@ -1,11 +1,11 @@
-# Restoring an Aurora Serverless DB cluster<a name="aurora-serverless.restorefromsnapshot"></a>
+# Restoring an Aurora Serverless v1 DB cluster<a name="aurora-serverless.restorefromsnapshot"></a>
 
-You can configure an Aurora Serverless DB cluster when you restore a provisioned DB cluster snapshot with the AWS Management Console, the AWS CLI, or the RDS API\.
+You can configure an Aurora Serverless v1 DB cluster when you restore a provisioned DB cluster snapshot with the AWS Management Console, the AWS CLI, or the RDS API\.
 
-When you restore a snapshot to an Aurora Serverless DB cluster, you can set the following specific values:
-+ **Minimum Aurora capacity unit** – Aurora Serverless can reduce capacity down to this capacity unit\.
-+ **Maximum Aurora capacity unit** – Aurora Serverless can increase capacity up to this capacity unit\.
-+ **Timeout action** – The action to take when a capacity modification times out because it can't find a scaling point\. Aurora Serverless DB cluster can force your DB cluster to the new capacity settings if set the **Force scaling the capacity to the specified values\.\.\. ** option\. Or, it can roll back the capacity change to cancel it if you don't choose the option\. For more information, see [Timeout action for capacity changes](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.timeout-action)\.
+When you restore a snapshot to an Aurora Serverless v1 DB cluster, you can set the following specific values:
++ **Minimum Aurora capacity unit** – Aurora Serverless v1 can reduce capacity down to this capacity unit\.
++ **Maximum Aurora capacity unit** – Aurora Serverless v1 can increase capacity up to this capacity unit\.
++ **Timeout action** – The action to take when a capacity modification times out because it can't find a scaling point\. Aurora Serverless v1 DB cluster can force your DB cluster to the new capacity settings if set the **Force scaling the capacity to the specified values\.\.\. ** option\. Or, it can roll back the capacity change to cancel it if you don't choose the option\. For more information, see [Timeout action for capacity changes](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.timeout-action)\.
 + **Pause after inactivity** – The amount of time with no database traffic to scale to zero processing capacity\. When database traffic resumes, Aurora automatically resumes processing capacity and scales to handle the traffic\.
 
 For general information about restoring a DB cluster from a snapshot, see [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md)\.
@@ -25,16 +25,16 @@ You can restore a DB cluster snapshot to an Aurora DB cluster with the AWS Manag
 1. For **Actions**, choose **Restore Snapshot**\.
 
 1. On the **Restore DB Cluster** page, choose **Serverless** for **Capacity type**\.  
-![\[Restore Aurora Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-restore.png)
+![\[Restore Aurora Serverless v1 DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-restore.png)
 
 1. In the **DB cluster identifier** field, type the name for your restored DB cluster, and complete the other fields\. 
 
 1. In the **Capacity settings** section, modify the scaling configuration\.  
-![\[Setting minimum and maximum capacity for an Aurora Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-capacity.png)
+![\[Setting minimum and maximum capacity for an Aurora Serverless v1 DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-capacity.png)
 
 1. Choose **Restore DB Cluster**\.
 
-To connect to an Aurora Serverless DB cluster, use the database endpoint\. For details, see the instructions in [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\.
+To connect to an Aurora Serverless v1 DB cluster, use the database endpoint\. For details, see the instructions in [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\.
 
 **Note**  
 If you encounter the following error message, your account requires additional permissions:  
@@ -43,16 +43,16 @@ For more information, see [Using service\-linked roles for Amazon Aurora](UsingW
 
 ## AWS CLI<a name="aurora-serverless.restorefromsnapshot.cli"></a>
 
-You can configure an Aurora Serverless DB cluster when you restore from a snapshot of another DB cluster\. You can do so with the AWS CLI by using the [restore\-db\-cluster\-from\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) CLI command\. With your command, you include the following required parameters: 
+You can configure an Aurora Serverless v1 DB cluster when you restore from a snapshot of another DB cluster\. You can do so with the AWS CLI by using the [restore\-db\-cluster\-from\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) CLI command\. With your command, you include the following required parameters: 
 + `--db-cluster-identifier mynewdbcluster`
 + `--snapshot-identifier mydbclustersnapshot`
 + `--engine-mode serverless`
 
-To restore a snapshot to an Aurora Serverless cluster with MySQL 5\.7 compatibility, include the following additional parameters:
+To restore a snapshot to an Aurora Serverless v1 cluster with MySQL 5\.7 compatibility, include the following additional parameters:
 + `--engine aurora-mysql`
 + `--engine-version 5.7`
 
-The `--engine` and `--engine-version` parameters let you create a MySQL 5\.7\-compatible Aurora Serverless cluster from a MySQL 5\.6\-compatible Aurora or Aurora Serverless snapshot\. The following example restores a snapshot from a MySQL 5\.6\-compatible cluster named *mydbclustersnapshot* to a MySQL 5\.7\-compatible Aurora Serverless cluster named *mynewdbcluster*\. 
+The `--engine` and `--engine-version` parameters let you create a MySQL 5\.7\-compatible Aurora Serverless v1 cluster from a MySQL 5\.6\-compatible Aurora or Aurora Serverless v1 snapshot\. The following example restores a snapshot from a MySQL 5\.6\-compatible cluster named *mydbclustersnapshot* to a MySQL 5\.7\-compatible Aurora Serverless v1 cluster named *mynewdbcluster*\. 
 
 For Linux, macOS, or Unix:
 
@@ -101,7 +101,7 @@ aws rds restore-db-cluster-from-snapshot ^
 
 ## RDS API<a name="aurora-serverless.restorefromsnapshot.api"></a>
 
-To configure an Aurora Serverless DB cluster when you restore from a DB cluster using the RDS API, run the [RestoreDBClusterFromSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromSnapshot.html) operation and specify `serverless` for the `EngineMode` parameter\.
+To configure an Aurora Serverless v1 DB cluster when you restore from a DB cluster using the RDS API, run the [RestoreDBClusterFromSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromSnapshot.html) operation and specify `serverless` for the `EngineMode` parameter\.
 
 You can optionally specify the `ScalingConfiguration` parameter to configure the minimum capacity, maximum capacity, and automatic pause when there are no connections\. Valid capacity values include the following:
 + Aurora MySQL: `1`, `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`\.

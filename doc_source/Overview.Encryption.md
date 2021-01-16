@@ -48,9 +48,10 @@ Amazon Aurora encryption is not available for the db\.t2\.micro DB instance clas
 The following limitations exist for Amazon Aurora encrypted DB clusters:
 + You can't disable encryption on an encrypted DB cluster\.
 + You can't create an encrypted snapshot of an unencrypted DB cluster\.
-+ A snapshot of an encrypted cluster must be encrypted using the same CMK as the DB cluster\.
++ A snapshot of an encrypted DB cluster must be encrypted using the same CMK as the DB cluster\.
 + You can't convert an unencrypted DB cluster to an encrypted one\. However, you can restore an unencrypted snapshot to an encrypted Aurora DB cluster\. To do this, specify a CMK when you restore from the unencrypted snapshot\.
 + You can't create an encrypted Aurora Replica from an unencrypted Aurora DB cluster\. You can't create an unencrypted Aurora Replica from an encrypted Aurora DB cluster\.
 + To copy an encrypted snapshot from one AWS Region to another, you must specify the CMK in the destination AWS Region\. This is because CMKs are specific to the AWS Region that they are created in\.
 
   The source snapshot remains encrypted throughout the copy process\. Amazon Aurora uses envelope encryption to protect data during the copy process\. For more information about envelope encryption, see [ Envelope encryption](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#enveloping) in the *AWS Key Management Service Developer Guide*\.
++ You can't unencrypt an encrypted DB cluster\. However, you can export data from an encrypted DB cluster and import the data into an unencrypted DB cluster\.

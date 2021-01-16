@@ -21,7 +21,7 @@
 
 ## Using Aurora replicas<a name="AuroraMySQL.Replication.Replicas"></a>
 
-Aurora Replicas are independent endpoints in an Aurora DB cluster, best used for scaling read operations and increasing availability\. Up to 15 Aurora Replicas can be distributed across the Availability Zones that a DB cluster spans within an AWS Region\. Although the DB cluster volume is made up of multiple copies of the data for the DB cluster, the data in the cluster volume is represented as a single, logical volume to the primary instance and to Aurora Replicas in the DB cluster\. For more information about Aurora Replicas, see [Aurora replicas](Aurora.Replication.md#Aurora.Replication.Replicas)\.
+Aurora Replicas are independent endpoints in an Aurora DB cluster, best used for scaling read operations and increasing availability\. Up to 15 Aurora Replicas can be distributed across the Availability Zones that a DB cluster spans within an AWS Region\. Although the DB cluster volume is made up of multiple copies of the data for the DB cluster, the data in the cluster volume is represented as a single, logical volume to the primary instance and to Aurora Replicas in the DB cluster\. For more information about Aurora Replicas, see [Aurora Replicas](Aurora.Replication.md#Aurora.Replication.Replicas)\.
 
 Aurora Replicas work well for read scaling because they are fully dedicated to read operations on your cluster volume\. Write operations are managed by the primary instance\. Because the cluster volume is shared among all instances in your Aurora MySQL DB cluster, no additional work is required to replicate a copy of the data for each Aurora Replica\. In contrast, MySQL read replicas must replay, on a single thread, all write operations from the source DB instance to their local data store\. This limitation can affect the ability of MySQL read replicas to support large volumes of read traffic\.
 
@@ -39,20 +39,23 @@ The China \(Ningxia\) Region does not support cross\-Region read replicas\.
 ## Replication options for Amazon Aurora MySQL<a name="AuroraMySQL.Replication.Options"></a>
 
 You can set up replication between any of the following options:
-+ Two Aurora MySQL DB clusters in different AWS Regions, by creating an Aurora Read Replica of an Aurora MySQL DB cluster in a different AWS Region\.
++ Two Aurora MySQL DB clusters in different AWS Regions, by creating a cross\-Region read replica of an Aurora MySQL DB cluster\.
 
   For more information, see [Replicating Amazon Aurora MySQL DB clusters across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\.
 + Two Aurora MySQL DB clusters in the same AWS Region, by using MySQL binary log \(binlog\) replication\.
 
   For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.
-+ An Amazon RDS MySQL DB instance as the source and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an Amazon RDS MySQL DB instance\.
++ An Amazon RDS MySQL DB instance as the source and an Aurora MySQL DB cluster, by creating an Aurora read replica of an Amazon RDS MySQL DB instance\.
 
   You can use this approach to bring existing and ongoing data changes into Aurora MySQL during migration to Aurora\. For more information, see [Migrating data from a MySQL DB instance to an Amazon Aurora MySQL DB cluster by using a DB snapshot](AuroraMySQL.Migrating.RDSMySQL.md)\.
 
   You can also use this approach to increase the scalability of read queries for your data\. You do so by querying the data using one or more DB instances within a read\-only Aurora MySQL cluster\. For more information, see [Using Amazon Aurora to scale reads for your MySQL database](AuroraMySQL.Replication.MySQL.md#AuroraMySQL.Replication.ReadScaling)\.
++ An Aurora MySQL DB cluster in one AWS Region and up to five Aurora read\-only Aurora MySQL DB clusters in different Regions, by creating an Aurora global database\. 
+
+  You can use an Aurora global database to support applications with a world\-wide footprint\. The primary Aurora MySQL DB cluster has a Writer instance and up to 15 Aurora Replicas\. The read\-only secondary Aurora MySQL DB clusters can each be made up of as many as 16 Aurora Replicas\. For more information, see [Using Amazon Aurora global databases](aurora-global-database.md)\. 
 
 **Note**  
-Rebooting the primary instance of an Amazon Aurora DB cluster also automatically reboots the Aurora Replicas for that DB cluster, in order to re\-establish an entry point that guarantees read/write consistency across the DB cluster\.
+Rebooting the primary instance of an Amazon Aurora DB cluster also automatically reboots the Aurora Replicas for that DB cluster, to re\-establish an entry point that guarantees read/write consistency across the DB cluster\.
 
 ## Performance considerations for Amazon Aurora MySQL replication<a name="AuroraMySQL.Replication.Performance"></a>
 

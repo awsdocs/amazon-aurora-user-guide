@@ -1,4 +1,4 @@
-# Upgrading and patching Amazon Aurora MySQL DB clusters<a name="AuroraMySQL.Updates.Patching"></a>
+# Upgrading the minor version or patch level of an Aurora MySQL DB cluster<a name="AuroraMySQL.Updates.Patching"></a>
 
  You can use the following methods to upgrade the minor version of a DB cluster or to patch a DB cluster: 
 +  [Upgrading Aurora MySQL by modifying the engine version](#AuroraMySQL.Updates.Patching.ModifyEngineVersion) \(for Aurora MySQL 1\.19\.0 and higher, or 2\.03\.2 and higher\) 
@@ -132,3 +132,7 @@ aws rds describe-db-instances \
 **Note**  
  ZDP applies only to the primary instance of a DB cluster\. ZDP isn't applicable to Aurora Replicas\.   
  Prepared statements don't prevent ZDP, but they aren't preserved after ZDP completes\. 
+
+## Alternative blue\-green upgrade technique<a name="AuroraMySQL.Upgrading.BlueGreen"></a>
+
+ Blog post: [Performing major version upgrades for Amazon Aurora MySQL with minimum downtime](https://aws.amazon.com/blogs/database/performing-major-version-upgrades-for-amazon-aurora-mysql-with-minimum-downtime/)\. 

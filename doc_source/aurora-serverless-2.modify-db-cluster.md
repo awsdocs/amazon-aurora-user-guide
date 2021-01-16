@@ -54,7 +54,7 @@ To learn more about ACUs and scaling for Aurora Serverless v2 \(preview\), see [
 
 To use a custom DB cluster parameter group after your Aurora Serverless v2 \(preview\) is running, modify your existing Aurora Serverless v2 \(preview\) DB cluster\. 
 
-Before you can use the following procedure, your custom DB cluster parameter group must exist\. To learn how to create a custom DB cluster parameter group, see [Aurora Serverless and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\. 
+Before you can use the following procedure, your custom DB cluster parameter group must exist\. To learn how to create a custom DB cluster parameter group, see [Aurora Serverless v1 and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\. 
 
 **To modify your Aurora Serverless v2 \(preview\) DB cluster to use a custom DB cluster parameter group**
 
@@ -71,4 +71,4 @@ Before you can use the following procedure, your custom DB cluster parameter gro
 
 1. Choose **Modify cluster** to accept the summary of modifications\. Or choose **Back** to modify your changes or **Cancel** to discard your changes\.
 
-To learn more about creating custom DB cluster parameter groups, see [Aurora Serverless and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.
+To learn more about creating custom DB cluster parameter groups, see [Aurora Serverless v1 and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.

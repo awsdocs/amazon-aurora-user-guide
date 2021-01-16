@@ -356,7 +356,7 @@ After you have established replication between your source MySQL DB instance and
 
 1.  Associate the DB cluster parameter group with the Aurora MySQL cluster that works as the binlog source\. To do so, follow the procedures in [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
 
-1.  Confirm that the parameter change takes effect\. To do do, run the following query on the binlog source instance\. 
+1.  Confirm that the parameter change takes effect\. To do so, run the following query on the binlog source instance\. 
 
    ```
    SELECT @@aurora_binlog_use_large_read_buffer, @@aurora_binlog_replication_max_yield_seconds;
@@ -380,7 +380,7 @@ After you have established replication between your source MySQL DB instance and
 
 1.  Make sure that the DB cluster parameter group associated with the Aurora MySQL cluster has `aurora_binlog_replication_max_yield_seconds` set to 0\. For more information about setting configuration parameters using parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
 
-1. Confirm that the parameter change takes effect\. To do do, run the following query on the binlog source instance\.
+1. Confirm that the parameter change takes effect\. To do so, run the following query on the binlog source instance\.
 
    ```
    SELECT @@aurora_binlog_replication_max_yield_seconds;

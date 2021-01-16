@@ -16,4 +16,4 @@ For Aurora pricing information, see the [Aurora pricing page](https://aws.amazon
 
 **Topics**
 + [On\-Demand DB instances for Aurora](USER_OnDemandDBInstances.md)
-+ [reserved DB instances for Aurora](USER_WorkingWithReservedDBInstances.md)
++ [Reserved DB instances for Aurora](USER_WorkingWithReservedDBInstances.md)

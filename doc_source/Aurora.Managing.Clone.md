@@ -31,7 +31,7 @@ You can use cloning in a variety of use cases, especially where you don't want t
 ## Limitations of Aurora cloning<a name="Aurora.Managing.Clone.Limitations"></a>
 
 There are some limitations involved with Aurora cloning, described following:
-+ Cloning isn't currently supported for Aurora Serverless DB clusters\. 
++ Cloning isn't currently supported for Aurora Serverless v1 DB clusters\. 
 + You cannot create clones across AWS Regions\. Each clone must be created in the same Region as the source cluster\.
 + Currently, you are limited to 15 clones based on a copy, including clones based on other clones\. After that, only copies can be created\. However, each copy can also have up to 15 clones\. 
 + Currently, you cannot clone from a cluster without the parallel query feature, to a cluster where parallel query is enabled\. To bring data into a cluster that uses parallel query, create a snapshot of the original cluster and restore it to a cluster where the parallel query option is enabled\.
@@ -132,7 +132,29 @@ The following procedure describes how to create an Aurora clone using the AWS CL
   ```
 
 **Note**  
-The [restore\-db\-cluster\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) AWS CLI command only restores the DB cluster, not the DB instances for that DB cluster\. You must invoke the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in `--db-cluster-identifier`\. You can create DB instances only after the `restore-db-cluster-to-point-in-time` command has completed and the DB cluster is available\.
+ The [restore\-db\-cluster\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) AWS CLI command only restores the DB cluster, not the DB instances for that DB cluster\. You must invoke the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in `--db-cluster-identifier`\. You can create DB instances only after the `restore-db-cluster-to-point-in-time` command has completed and the DB cluster is available\. 
+
+ For example, suppose you have a cluster named `tpch100g` that you want to clone\. The following Linux example creates a cloned cluster named `tpch100g-clone` and a primary instance named `tpch100g-clone-instance` for the new cluster\. You don't need to supply some parameters, such as `--master-username reinvent` and `--master-user-password`\. Aurora automatically determines those from the original cluster\. You do need to specify the DB engine to use\. Thus, the example tests the new cluster to determine the right value to use for the `--engine` parameter\. 
+
+```
+$ aws rds restore-db-cluster-to-point-in-time \
+  --source-db-cluster-identifier tpch100g \
+  --db-cluster-identifier tpch100g-clone \
+  --restore-type copy-on-write \
+  --use-latest-restorable-time
+
+$ aws rds describe-db-clusters \
+  --db-cluster-id tpch100g-clone \
+    --query '*[].[Engine]' \
+    --output text
+aurora
+
+$ aws rds create-db-instance \
+  --db-instance-identifier tpch100g-clone-instance \
+  --db-cluster-identifier tpch100g-clone \
+  --db-instance-class db.r5.4xlarge \
+  --engine aurora
+```
 
 ## Cross\-account cloning<a name="Aurora.Managing.Clone.Cross-Account"></a>
 

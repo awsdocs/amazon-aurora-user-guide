@@ -11,7 +11,7 @@ Use the `aurora_show_volume_status()` function to return the following server st
 You can use the `aurora_show_volume_status()` function to help avoid an error when using the `aurora_inject_disk_failure()` fault injection function\. The `aurora_inject_disk_failure()` fault injection function simulates the failure of an entire storage node, or a single logical block of data within a storage node\. In the function, you specify the index value of a specific logical block of data or storage node\. However, the statement returns an error if you specify an index value greater than the number of logical blocks of data or storage nodes used by the DB cluster volume\. For more information about fault injection queries, see [Testing Amazon Aurora PostgreSQL using fault injection queries](AuroraPostgreSQL.Managing.FaultInjectionQueries.md)\.
 
 **Note**  
-The `aurora_show_volume_status()` function is available for Aurora PostgreSQL version 10\.11\. For more information about Aurora PostgreSQL versions, see [Engine versions for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.20180305.md)\.
+The `aurora_show_volume_status()` function is available for Aurora PostgreSQL version 10\.11\. For more information about Aurora PostgreSQL versions, see [Engine versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.20180305.md)\.
 
 **Syntax**
 

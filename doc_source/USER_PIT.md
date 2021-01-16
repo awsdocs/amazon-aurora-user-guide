@@ -2,8 +2,10 @@
 
 You can restore a DB cluster to a specific point in time, creating a new DB cluster\. When you restore a DB cluster to a point in time, the default DB security group is applied to the new DB cluster\. If you need custom DB security groups applied to your DB cluster, you must apply them explicitly using the AWS Management Console, the AWS CLI `modify-db-cluster` command, or the Amazon RDS API `ModifyDBCluster` operation after the DB instance is available\.
 
+![\[Auomated backups\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/automated-backups.png)
+
 **Note**  
-For more information about backing up and restoring an Aurora DB cluster, see [Overview of backing up and restoring an Aurora DB cluster](Aurora.Managing.Backups.md)\. For Aurora MySQL, you can restore a provisioned DB cluster to an Aurora Serverless DB cluster\. For more information, see [Restoring an Aurora Serverless DB cluster](aurora-serverless.restorefromsnapshot.md)\.
+For more information about backing up and restoring an Aurora DB cluster, see [Overview of backing up and restoring an Aurora DB cluster](Aurora.Managing.Backups.md)\. For Aurora MySQL, you can restore a provisioned DB cluster to an Aurora Serverless DB cluster\. For more information, see [Restoring an Aurora Serverless v1 DB cluster](aurora-serverless.restorefromsnapshot.md)\.
 
 You can restore a DB cluster to a point in time using the AWS Management Console, the AWS CLI, or the RDS API\.
 
@@ -19,7 +21,8 @@ You can restore a DB cluster to a point in time using the AWS Management Console
 
 1. For **Actions**, choose **Restore to point in time**\.
 
-   The **Launch DB Instance** window appears\.
+   The **Launch DB Instance** window appears\.  
+![\[Launch DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/pitr-launch-db-instance.png)
 
 1. Choose **Latest restorable time** to restore to the latest possible time, or choose **Custom** to choose a time\.
 

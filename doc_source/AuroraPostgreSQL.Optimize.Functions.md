@@ -86,6 +86,9 @@ In addition to collecting the planning and execution time of each candidate plan
 
 Returns the `last_used` date of the specified plan from shared memory\. 
 
+**Note**  
+The value in shared memory is always current on the read/write node\. The value is only periodically flushed to the last\_used column of the `apg_plan_mgmt.dba_plans` view\.
+
 **Syntax**
 
 ```

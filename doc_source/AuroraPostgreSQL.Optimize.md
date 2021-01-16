@@ -4,7 +4,7 @@ With query plan management for Amazon Aurora with PostgreSQL compatibility, you 
 + Preventing plan regressions when the database system changes
 + Controlling when the query optimizer can use new plans
 
-The quality and consistency of query optimization have a major impact on the performance and stability of any relational database management system \(RDBMS\)\. Query optimizers create a query execution plan for a SQL statement at a specific point in time\. As conditions change, the optimizer might pick a different plan that makes performance worse\. A number of changes can all cause the query optimizer to choose a different plan and lead to performance regression\. These changes include changes in statistics, constraints, environment settings, query parameter bindings, and software upgrades\. Regression is a major concern for high\-performance applications\.
+The quality and consistency of query optimization have a major impact on the performance and stability of any relational database management system \(RDBMS\)\. Query optimizers create a query execution plan for a SQL statement at a specific point in time\. As conditions change, the optimizer might pick a different plan that makes performance better or worse\. In some cases, a number of changes can all cause the query optimizer to choose a different plan and lead to performance regression\. These changes include changes in statistics, constraints, environment settings, query parameter bindings, and software upgrades\. Regression is a major concern for high\-performance applications\.
 
 With query plan management, you can control execution plans for a set of statements that you want to manage\. You can do the following:
 + Improve plan stability by forcing the optimizer to choose from a small number of known, good plans\.
@@ -141,11 +141,21 @@ SELECT /* Query 1 */ * FROM t WHERE x > CONST AND y = CONST;
 
 ### Working with automatic plan capture<a name="AuroraPostgreSQL.Optimize.Start.AutomaticCapture"></a>
 
-Use automatic plan capture if you want to capture plans for all SQL statements in your application, or if you can’t use manual capture\. With automatic plan capture, by default, the optimizer captures plans for statements that run at least two times\. Do the following to use automatic plan capture\.
+Use automatic plan capture if you want to capture plans for all SQL statements in your application, or if you can’t use manual capture\. With automatic plan capture, the optimizer captures plans for statements that run at least two times\. To use automatic plan capture, do the following\.
 
-1. Turn on automatic plan capture by setting `apg_plan_mgmt.capture_plan_baselines` to `automatic` in the parameter group for the DB instance\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
+1. Create a custom DB parameter group based on the default DB parameter group for the version of Aurora PostgreSQL that you're running\. 
 
-1. Restart your DB instance\.
+1. Edit the custom DB parameter group, by changing the `apg_plan_mgmt.capture_plan_baselines` setting to `automatic`\. 
+
+1. Save your customized DB parameter group\. 
+
+1. Apply your custom DB parameter group to an Aurora DB instance that is already running as follows:
+   + Choose your Aurora PostgreSQL DB instance from the list in the navigation pane, and then choose **Modify**\. 
+   + In the **Additional configuration** section of the Modify DB instance page, for the **DB parameter group**, choose your custom DB parameter group\.
+   + Choose **Continue**\. Confirm the Summary of modifications and choose **Apply immediately**\. 
+   + Choose **Modify DB instance** to apply your custom DB parameter group\.
+
+You can also use your custom DB parameter group when you create a new Aurora PostgreSQL DB instance\. For more information about parameter groups, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
 
 As your application runs, the optimizer captures plans for any statement that runs more than once\. The optimizer always sets the status of a managed statement's first captured plan to `approved`\. A managed statement's set of approved plans is known as its *plan baseline*\. 
 
@@ -153,7 +163,7 @@ As your application continues to run, the optimizer might find additional plans 
 
 The set of all captured plans for a managed statement is known as the *plan history*\. Later, you can decide if the `Unapproved` plans perform well and change them to `Approved`, `Rejected`, or `Preferred` by using the `apg_plan_mgmt.evolve_plan_baselines` function or the `apg_plan_mgmt.set_plan_status` function\.
 
-To turn off automatic plan capture, set `apg_plan_mgmt.capture_plan_baselines` to `off` in the parameter group for the DB instance\. Then restart the database for the setting to take effect\.
+To turn off automatic plan capture, set `apg_plan_mgmt.capture_plan_baselines` to `off` in the parameter group for the DB instance\. Follow the same general process as outlined above, modifying your custom DB parameter group value for `apg_plan_mgmt.capture_plan_baselines` and then applying the custom DB parameter group to your Aurora DB instance\.
 
 For more about plan capture, see [Capturing execution plans](AuroraPostgreSQL.Optimize.CapturePlans.md)\. 
 

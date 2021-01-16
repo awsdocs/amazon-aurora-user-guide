@@ -143,7 +143,7 @@ You can invoke an AWS Lambda function from an Aurora MySQL DB cluster by calling
 
  Starting in Aurora MySQL version 1\.8 and Aurora MySQL version 2\.06, you can use the native function method instead of these stored procedures to invoke a Lambda function\. For more information about the native functions, see [Working with native functions to invoke a Lambda function](#AuroraMySQL.Integrating.NativeLambda.lambda_functions)\. 
 
- Starting with Amazon Aurora version 1\.16, the stored procedure `mysql.lambda_async` is deprecated\. If you are using Aurora version 1\.16 or later, we strongly recommend that you work with native Lambda functions instead\. 
+ Starting with Amazon Aurora version 1\.16 and 2\.06, the stored procedure `mysql.lambda_async` is deprecated\. If you are using an Aurora version that's higher than 1\.16 or 2\.06, we strongly recommend that you work with native Lambda functions instead\. 
 
 ### Working with the mysql\.lambda\_async procedure to invoke a Lambda function<a name="AuroraMySQL.Integrating.Lambda.mysql_lambda_async"></a>
 

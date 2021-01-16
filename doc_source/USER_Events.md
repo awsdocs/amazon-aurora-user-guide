@@ -140,6 +140,9 @@ The following table shows the event category and a list of events when a DB secu
 
 The following table shows the event category and a list of events when an Aurora DB cluster is the source type\.
 
+**Note**  
+No event category exists for Aurora Serverless in the DB cluster event type\. The Aurora Serverless events range from RDS\-EVENT\-0144 to RDS\-EVENT\-0149\.
+
 
 |  Category  | RDS event ID |  Description  | 
 | --- | --- | --- | 

@@ -171,7 +171,7 @@ The following screenshot shows the enabled **Data API** when modifying an Aurora
 
 ![\[Enabling the Data API for an Aurora Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/web-server-api-endpoint.png)
 
-For instructions, see [Creating an Aurora Serverless DB cluster](aurora-serverless.create.md) and [Modifying an Aurora Serverless DB cluster](aurora-serverless.modifying.md)\.
+For instructions, see [Creating an Aurora Serverless v1 DB cluster](aurora-serverless.create.md) and [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\.
 
 ### AWS CLI<a name="data-api.enabling.cli"></a>
 

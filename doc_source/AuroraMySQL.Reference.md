@@ -20,7 +20,7 @@ You can manage both cluster\-level and instance\-level parameters using the AWS 
 
 You can view both cluster\-level and instance\-level parameters in the console, or by using the CLI or RDS API\. For example, you can use the [describe\-db\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) AWS CLI command to view cluster\-level parameters in a DB cluster parameter group\. You can use the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) CLI command to view instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
 
-For more information on DB parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. For rules and restrictions for Aurora Serverless clusters, see [Aurora Serverless and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.
+For more information on DB parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. For rules and restrictions for Aurora Serverless clusters, see [Aurora Serverless v1 and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.
 
 **Topics**
 + [Cluster\-level parameters](#AuroraMySQL.Reference.Parameters.Cluster)
@@ -206,7 +206,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `innodb_stats_transient_sample_pages` | Yes |  | 
 | `innodb_thread_concurrency` | No |  | 
 | `innodb_thread_sleep_delay` | Yes | Modifying this parameter has no effect, because `innodb_thread_concurrency` is always 0 for Aurora\. | 
-| `interactive_timeout` | Yes |  | 
+| `interactive_timeout` | Yes | Aurora evaluates the minimum value of `interactive_timeout` and `wait_timeout`, then uses that minimum as the timeout to end all idle sessions, both interactive and noninteractive\. | 
 | `join_buffer_size` | Yes |  | 
 | `keep_files_on_create` | Yes |  | 
 | `key_buffer_size` | Yes |  | 
@@ -386,7 +386,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `validate_password_number_count` | No |  | 
 | `validate_password_policy` | No |  | 
 | `validate_password_special_char_count` | No |  | 
-| `wait_timeout` | Yes |  | 
+| `wait_timeout` | Yes |  Aurora evaluates the minimum value of `interactive_timeout` and `wait_timeout`, then uses that minimum as the timeout to end all idle sessions, both interactive and noninteractive\.  | 
 
 ## Inapplicable MySQL parameters and status variables<a name="AuroraMySQL.Reference.Parameters.Inapplicable"></a>
 
@@ -508,7 +508,7 @@ In this wait event, there are threads holding locks on InnoDB data dictionary op
 
  We recommend making sure that you understand the specific Aurora MySQL behavior of the `READ COMMITTED` isolation before using this setting\. The Aurora Replica `READ COMMITTED` behavior complies with the ANSI SQL standard\. However, the isolation is less strict than typical MySQL `READ COMMITTED` behavior that you might be familiar with\. Thus, you might see different query results under `READ COMMITTED` on an Aurora MySQL read replica than for the same query under `READ COMMITTED` on the Aurora MySQL primary instance or on Amazon RDS MySQL\. You might use the `aurora_read_replica_read_committed` setting for such use cases as a comprehensive report that scans a very large database\. You might avoid it for short queries with small result sets, where precision and repeatability are important\. 
 
- The `READ COMMITTED` isolation level isn't available for sessions within a secondary cluster in an Aurora global database that use the write forwarding feature\. For information about write forwarding, see [Write forwarding for secondary AWS Regions with an Aurora global database](aurora-global-database-write-forwarding.md)\. 
+ The `READ COMMITTED` isolation level isn't available for sessions within a secondary cluster in an Aurora global database that use the write forwarding feature\. For information about write forwarding, see [Using write forwarding in an Amazon Aurora global database](aurora-global-database-write-forwarding.md)\. 
 
 #### Enabling READ COMMITTED for readers<a name="AuroraMySQL.Reference.IsolationLevels.relaxed.enabling"></a>
 

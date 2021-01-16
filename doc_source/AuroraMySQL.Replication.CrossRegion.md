@@ -4,7 +4,12 @@ You can create an Amazon Aurora MySQL DB cluster as a read replica in a differen
 
 You can create read replicas of both encrypted and unencrypted DB clusters\. The read replica must be encrypted if the source DB cluster is encrypted\.
 
-For each source DB cluster, you can have up to five cross\-Region DB clusters that are read replicas\. When you create an Aurora MySQL DB cluster read replica in another AWS Region, you should be aware of the following:
+For each source DB cluster, you can have up to five cross\-Region DB clusters that are read replicas\.
+
+**Note**  
+As an alternative to cross\-Region read replicas, you can scale read operations with mimimal lagtime by using an Aurora global database\. An Aurora global database has a primary Aurora DB cluster in one AWS Region and up to five secondary read\-only DB clusters in different Regions\. Each secondary DB cluster can include up to 16 \(rather than 15\) Aurora Replicas\. Replication from the primary DB cluster to all secondaries is handled by the Aurora storage layer rather than by the database engine, so lagtime for replicating changes is minimal—typically, less than 1 second\. Keeping the database engine out of the replication process means that the database engine is dedicated to processing workloads\. It also means that you don't need to configure or manage Aurora MySQL's binlog \(binary logging\) replication\. To learn more, see [Using Amazon Aurora global databases](aurora-global-database.md)\. 
+
+When you create an Aurora MySQL DB cluster read replica in another AWS Region, you should be aware of the following:
 + Both your source DB cluster and your cross\-Region read replica DB cluster can have up to 15 Aurora Replicas, along with the primary instance for the DB cluster\. By using this functionality, you can scale read operations for both your source AWS Region and your replication target AWS Region\.
 + In a cross\-Region scenario, there is more lag time between the source DB cluster and the read replica due to the longer network channels between AWS Regions\.
 + Data transferred for cross\-Region replication incurs Amazon RDS data transfer charges\. The following cross\-Region replication actions generate charges for the data transferred out of the source AWS Region:
@@ -254,9 +259,9 @@ You can view the cross\-Region replication relationships for your Amazon Aurora 
 
 ## Promoting a read replica to be a DB cluster<a name="AuroraMySQL.Replication.CrossRegion.Promote"></a>
 
-You can promote an Aurora MySQL Read Replica to a standalone DB cluster\. When you promote an Aurora MySQL Read Replica, its DB instances are rebooted before they become available\. 
+You can promote an Aurora MySQL read replica to a standalone DB cluster\. When you promote an Aurora MySQL read replica, its DB instances are rebooted before they become available\. 
 
-Typically, you promote an Aurora MySQL Read Replica to a standalone DB cluster as a data recovery scheme if the source DB cluster fails\. 
+Typically, you promote an Aurora MySQL read replica to a standalone DB cluster as a data recovery scheme if the source DB cluster fails\. 
 
 To do this, first create a read replica and then monitor the source DB cluster for failures\. In the event of a failure, do the following: 
 
@@ -296,7 +301,7 @@ The promotion process takes a few minutes to complete\. When you promote a read 
 
 1. For **Actions**, choose **Promote read replica**\. 
 
-1. On the acknowledgment page, choose **Promote Read Replica**\. 
+1. On the acknowledgment page, choose **Promote read replica**\. 
 
 ### AWS CLI<a name="AuroraMySQL.Replication.CrossRegion.Promote.CLI"></a>
 

@@ -8,7 +8,7 @@ Amazon Aurora releases updates regularly\. Updates are applied to Aurora DB clus
 
 **Topics**
 + [Aurora MySQL version numbers and special versions](AuroraMySQL.Updates.Versions.md)
-+ [Upgrading and patching Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Patching.md)
++ [Upgrading Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Upgrading.md)
 + [Database engine updates for Amazon Aurora MySQL 2\.0](AuroraMySQL.Updates.20Updates.md)
 + [Database engine updates for Amazon Aurora MySQL 1\.1](AuroraMySQL.Updates.11Updates.md)
 + [Database engine updates for Aurora MySQL Serverless clusters](AuroraMySQL.Updates.ServerlessUpdates.md)
