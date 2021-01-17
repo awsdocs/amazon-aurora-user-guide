@@ -1066,7 +1066,7 @@ To solve the issue, make sure that your call has a valid transaction ID\. Also m
 
 For information about running transactions, see [Calling the Data API](#data-api.calling)\.
 
-### Packet for query is to large<a name="data-api.troubleshooting.packet-too-large"></a>
+### Packet for query is too large<a name="data-api.troubleshooting.packet-too-large"></a>
 
 In this case, the result set returned for a row was too large\. The Data API size limit is 64 KB per row in the result set returned by the database\.
 
