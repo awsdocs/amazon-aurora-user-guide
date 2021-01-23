@@ -20,11 +20,26 @@ You can't disable automated backups on Aurora\. The backup retention period for 
 **Note**  
 You can also use AWS Backup to manage backups of Amazon Aurora DB clusters\. Backups managed by AWS Backup are considered manual DB cluster snapshots, but don't count toward the DB cluster snapshot quota for Aurora\. Backups that were created with AWS Backup have names ending in `awsbackup:AWS-Backup-job-number`\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
+## Backup window<a name="Aurora.Managing.Backups.BackupWindow"></a>
+
+Automated backups occur daily during the preferred backup window\. If the backup requires more time than allotted to the backup window, the backup continues after the window ends, until it finishes\. The backup window can't overlap with the weekly maintenance window for the DB cluster\. 
+
+Aurora backups are continuous and incremental, but the backup window is used to create a daily system backup that is preserved within the backup retention period\. You can copy it to preserve it outside of the retention period\.
+
+**Note**  
+When you create a DB cluster using the AWS Management Console, you can't specify a backup window\. However, you can specify a backup window when you create a DB cluster using the AWS CLI or RDS API\.
+
+If you don't specify a preferred backup window when you create the DB cluster, Aurora assigns a default 30\-minute backup window\. This window is selected at random from an 8\-hour block of time for each AWS Region\. The following table lists the time blocks for each AWS Region from which the default backup windows are assigned\. 
+
+
+****  
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html)
+
 ## Restoring data<a name="Aurora.Managing.Backups.Restore"></a>
 
 You can recover your data by creating a new Aurora DB cluster from the backup data that Aurora retains, or from a DB cluster snapshot that you have saved\. You can quickly restore a new copy of a DB cluster created from backup data to any point in time during your backup retention period\. The continuous and incremental nature of Aurora backups during the backup retention period means you don't need to take frequent snapshots of your data to improve restore times\.
 
-To determine the latest or earliest restorable time for a DB instance, look for the `Latest Restorable Time` or `Earliest Restorable Time` values on the RDS console\. For information about viewing these values, see [Viewing an Amazon Aurora DB cluster](Aurora.Viewing.md)\. The latest restorable time for a DB cluster is the most recent point at which you can restore your DB cluster, typically within 5 minutes of the current time\. The earliest restorable time specifies how far back within the backup retention period that you can restore your cluster volume\.
+To determine the latest or earliest restorable time for a DB cluster, look for the `Latest restore time` or `Earliest restorable time` values on the RDS console\. For information about viewing these values, see [Viewing an Amazon Aurora DB cluster](Aurora.Viewing.md)\. The latest restorable time for a DB cluster is the most recent point at which you can restore your DB cluster, typically within 5 minutes of the current time\. The earliest restorable time specifies how far back within the backup retention period that you can restore your cluster volume\.
 
 You can determine when the restore of a DB cluster is complete by checking the `Latest Restorable Time` and `Earliest Restorable Time` values\. The `Latest Restorable Time` and `Earliest Restorable Time` values return NULL until the restore operation is complete\. You can't request a backup or restore operation if `Latest Restorable Time` or `Earliest Restorable Time` returns NULL\.
 

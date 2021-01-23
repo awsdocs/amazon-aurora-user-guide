@@ -35,7 +35,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Upgra
 +  Fixed an issue that resulted in a database restart after a multi\-query statement that accesses multiple tables or databases is executed with the query cache enabled\. 
 +  Fixed a race condition in the lock manager that resulted in a database restart or failover during transaction rollback\. 
 +  Fixed an issue that triggered database restart or failover when multiple connections are trying to update the same table with a Full\-Text Search index\. 
-+  Fixed an issue that could trigger a database restart or failover during a `kill session` command\. 
++  Fixed an issue that could trigger a database restart or failover during a `kill session` command\. If you encounter this issue, contact AWS support to enable this fix on your instance\. 
 +  Fixed an issue that caused reader DB instance to restart during a multi\-statement transaction with multiple `SELECT` statements and a heavy write workload on the writer DB instance with `AUTOCOMMIT` enabled\. 
 +  Fixed an issue that caused reader DB instance to restart after executing long\-running queries while the writer DB instance is under a heavy OLTP write workload\. 
 

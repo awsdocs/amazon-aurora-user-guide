@@ -56,8 +56,8 @@ The following instance\-specific CloudWatch metrics apply to all Aurora MySQL an
 |  `BufferCacheHitRatio`  |  The percentage of requests that are served by the buffer cache\.  |  Aurora MySQL and Aurora PostgreSQL  |  Percentage  | 
 |  `CommitLatency`  |  The latency for commit operations\.  |  Aurora MySQL and Aurora PostgreSQL  |  Milliseconds  | 
 |  `CommitThroughput`  |  The average number of commit operations per second\.  |  Aurora MySQL and Aurora PostgreSQL  |  Count per second  | 
-|  `CPUCreditBalance`  |  The number of CPU credits that an instance has accumulated, reported at 5\-minute intervals\. This metric applies only to `db.t2.small` and `db.t2.medium` instances\. You can use this metric to determine how long an Aurora MySQL DB instance can burst beyond its baseline performance level at a given rate\.  |  Aurora MySQL  |  Count  | 
-|  `CPUCreditUsage`  |  The number of CPU credits consumed during the specified period, reported at 5\-minute intervals\. This metric applies only to `db.t2.small` and `db.t2.medium` instances\. This metric measures the amount of time during which physical CPUs have been used for processing instructions by virtual CPUs allocated to the Aurora MySQL DB instance\.   |  Aurora MySQL  |  Count  | 
+|  `CPUCreditBalance`  |  The number of CPU credits that an instance has accumulated, reported at 5\-minute intervals\. You can use this metric to determine how long a DB instance can burst beyond its baseline performance level at a given rate\. This metric applies only to `db.t2.small` and `db.t2.medium` instances for Aurora MySQL, and to `db.t3` instances for Aurora PostgreSQL\.  |  Aurora MySQL and Aurora PostgreSQL  |  Count  | 
+|  `CPUCreditUsage`  |  The number of CPU credits consumed during the specified period, reported at 5\-minute intervals\. This metric measures the amount of time during which physical CPUs have been used for processing instructions by virtual CPUs allocated to the DB instance\.  This metric applies only to `db.t2.small` and `db.t2.medium` instances for Aurora MySQL, and to `db.t3` instances for Aurora PostgreSQL\.  |  Aurora MySQL and Aurora PostgreSQL  |  Count  | 
 |  `CPUUtilization`  |  The percentage of CPU used by an Aurora DB instance\.  |  Aurora MySQL and Aurora PostgreSQL  |  Percentage  | 
 |  `DatabaseConnections`  |  The number of connections to an Aurora DB instance\.  |  Aurora MySQL and Aurora PostgreSQL  |  Count  | 
 |  `DDLLatency`  |  The latency for data definition language \(DDL\) requests such as example, create, alter, and drop requests\.  |  Aurora MySQL  |  Milliseconds  | 
@@ -136,7 +136,7 @@ The following Aurora metrics are not available in the Amazon RDS console:
 + `UpdateThroughput`
 
 In addition, some Aurora metrics are either shown only for specific instance classes, or only for DB instances, or with different names and different units of measurement:
-+ The `CPUCreditBalance` and `CPUCreditUsage` metrics are displayed only for `db.t2.small` and `db.t2.medium` instances
++ The `CPUCreditBalance` and `CPUCreditUsage` metrics are displayed only for Aurora MySQL `db.t2` instance classes and for Aurora PostgreSQL `db.t3` instance classes\.
 + The following metrics that are displayed with different names, as listed:    
 <a name="aurora_cloudwatch_metrics_renamed"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Monitoring.html)
 + The following metrics apply to an entire Aurora DB cluster, but are displayed only when viewing DB instances for an Aurora DB cluster in the Amazon RDS console:

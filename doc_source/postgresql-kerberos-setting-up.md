@@ -92,7 +92,12 @@ If you don't plan to use your own on\-premises Microsoft Active Directory, skip 
 To get Kerberos authentication using your on\-premises Active Directory, you need to create a trusting domain relationship using a forest trust between your on\-premises Microsoft Active Directory and the AWS Managed Microsoft AD directory \(created in [Step 1: Create a directory using AWS Managed Microsoft AD](#postgresql-kerberos-setting-up.create-directory)\)\. The trust can be one\-way, where the AWS Managed Microsoft AD directory trusts the on\-premises Microsoft Active Directory\. The trust can also be two\-way, where both Active Directories trust each other\. For more information about setting up trusts using AWS Directory Service, see [When to create a trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_setup_trust.html) in the *AWS Directory Service Administration Guide*\.
 
 **Note**  
-If you use an on\-premises Microsoft Active Directory with [global databases](aurora-global-database.md), then DB cluster endpoints can't be used by Windows clients for clusters in secondary AWS Regions\. Windows clients must connect using special endpoints as described in [Connecting to PostgreSQL with Kerberos authentication](postgresql-kerberos-connecting.md)\. Windows clients can't connect with [custom endpoints](Aurora.Overview.Endpoints.md#Aurora.Endpoints.Custom) if you use an on\-premises Microsoft Active Directory\. 
+If you use an on\-premises Microsoft Active Directory:  
+Windows clients must connect using specialized endpoints as described in [Connecting to PostgreSQL with Kerberos authentication](postgresql-kerberos-connecting.md)\.
+Windows clients can't connect with [custom endpoints](Aurora.Overview.Endpoints.md#Aurora.Endpoints.Custom)\.
+For [global databases](aurora-global-database.md):  
+Windows clients can connect using instance endpoints or cluster endpoints in the primary AWS Region of the global database\.
+Windows clients can't connect using cluster endpoints in secondary AWS Regions\.
 
 Make sure that your on\-premises Microsoft Active Directory domain name includes a DNS suffix routing that corresponds to the newly created trust relationship\. The following screenshot shows an example\.
 

@@ -6,8 +6,11 @@ In a typical failover situation, you might see a temporary but large performance
 
 With cluster cache management, you set a specific reader DB instance as the failover target\. Cluster cache management ensures that the data in the designated reader's cache is kept synchronized with the data in the writer DB instance's cache\. The designated reader's cache with prefilled values is known as a *warm cache*\. If a failover occurs, the designated reader uses values in its warm cache immediately when it's promoted to the new writer DB instance\. This approach provides your application much better recovery performance\.
 
-**Topics**
+**Contents**
 + [Configuring cluster cache management](#AuroraPostgreSQL.cluster-cache-mgmt.Configure)
+  + [Enabling cluster cache management](#AuroraPostgreSQL.cluster-cache-mgmt.Enable)
+  + [Setting the promotion tier priority for the writer DB instance](#AuroraPostgreSQL.cluster-cache-mgmt.Writer)
+  + [Setting the promotion tier priority for a reader DB instance](#AuroraPostgreSQL.cluster-cache-mgmt.Reader)
 + [Monitoring the buffer cache](#AuroraPostgreSQL.cluster-cache-mgmt.Monitoring)
 
 ## Configuring cluster cache management<a name="AuroraPostgreSQL.cluster-cache-mgmt.Configure"></a>

@@ -205,7 +205,7 @@ You can restore your backup files from your Amazon S3 bucket to create a new Ama
 
 1. Under **S3 destination**:
 
-   1. Choose the **S3 bucket** where to write audit logs\.
+   1. Choose the **S3 bucket** that contains the backup files\.
 
    1. \(Optional\) For **S3 folder path prefix**, enter a file path prefix for the files stored in your Amazon S3 bucket\.
 
@@ -364,7 +364,9 @@ You can synchronize your Amazon Aurora MySQL DB cluster with the MySQL database 
    1 row in set (0.00 sec)
    ```
 
-1. Determine the starting binary log position for replication:
+1. Determine the starting binary log position for replication\. You specify the position to start replication in a later step\.
+
+   **Using the AWS Management Console**
 
    1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -373,7 +375,15 @@ You can synchronize your Amazon Aurora MySQL DB cluster with the MySQL database 
    1. In the **Events** list, note the position in the **Recovered from Binary log filename** event\.  
 ![\[View MySQL primary\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-mysql-rep-binary-log-position.png)
 
-      You specify the position to start replication in a later step\.
+   **Using the AWS CLI**
+
+   You can also get the binlog file name and position by calling the [describe\-events](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-events.html) command from the AWS CLI\. The following shows an example `describe-events` command\.
+
+   ```
+   PROMPT> aws rds describe-events
+   ```
+
+   In the output, identify the event that shows the binlog position\.
 
 1. While connected to the external MySQL database, create a user to be used for replication\. This account is used solely for replication and must be restricted to your domain to improve security\. The following is an example\.
 

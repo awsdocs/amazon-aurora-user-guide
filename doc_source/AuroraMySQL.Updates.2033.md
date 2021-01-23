@@ -34,5 +34,5 @@ The procedure to upgrade your DB cluster has changed\. For more information, see
 +  Bug \#26734162: INCORRECT BEHAVIOR WITH INSERT OF BLOB \+ ON DUPLICATE KEY UPDATE 
 +  Bug \#27460607: INCORRECT BEHAVIOR OF IODKU WHEN INSERT SELECT's SOURCE TABLE IS EMPTY 
 +  SELECT DISTINCT NOT RETURNING DISTINCT ROWS IN 5\.7 \(Bug \#22343910\) 
-+  Delete from joined tables with where using derived table fails with error 1093 \(Bug \#23074801\)\. 
++  A `DELETE` from joined tables using a derived table in the `WHERE` clause fails with error 1093 \(Bug \#23074801\)\. 
 +  GCOLS: INCORRECT BEHAVIOR WITH CHARSET CHANGES \(Bug \#25287633\)\. 

@@ -48,7 +48,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Upgra
 + [CVE\-2018\-2813](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-2813)
 
  **Availability improvements:** 
-+  Fixed an issue that could cause a database restart or failover due to execution of a kill session command\. 
++  Fixed an issue that could cause a database restart or failover due to execution of a kill session command\. If you encounter this issue, contact AWS support to enable this fix on your instance\. 
 +  Fixed an issue that causes a database restart during execution of a complex query involving multi\-table joins and aggregation that use intermediate tables internally\. 
 +  Fixed an issue that causes database restarts due to an interrupted `DROP TABLE` on multiple tables\. 
 +  Fixed an issue that causes a database failover during database recovery\. 

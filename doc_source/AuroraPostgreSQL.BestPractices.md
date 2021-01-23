@@ -11,11 +11,15 @@ There are several things you can do to make a failover perform faster with Auror
 + Use the provided read and write Aurora endpoints to establish a connection to the cluster\.
 + Use RDS APIs to test application response on server side failures and use a packet dropping tool to test application response for client\-side failures\.
 
-**Topics**
+**Contents**
 + [Setting TCP keepalives parameters](#AuroraPostgreSQL.BestPractices.FastFailover.TCPKeepalives)
 + [Configuring your application for fast failover](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring)
+  + [Reducing DNS cache timeouts](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.Timeouts)
+  + [Setting an Aurora PostgreSQL connection string for fast failover](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.ConnectionString)
+  + [Other options for obtaining the host string](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString)
+    + [Java example to list instances using the DescribeDbClusters API](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString.API)
 + [Testing failover](#AuroraPostgreSQL.BestPracticesFastFailover.Testing)
-+ [Fast failover example](#AuroraPostgreSQL.BestPractices.FastFailover.Example)
++ [Fast failover Java example](#AuroraPostgreSQL.BestPractices.FastFailover.Example)
 
 ### Setting TCP keepalives parameters<a name="AuroraPostgreSQL.BestPractices.FastFailover.TCPKeepalives"></a>
 
@@ -166,7 +170,7 @@ If the return value of the query is `OFF`, then you've successfully connected to
 
 One thing to be aware of is when you connect to a replica that has stale data\. When this happens, the `aurora_replica_status` function may show out\-of\-date information\. A threshold for staleness can be set at the application level and examined by looking at the difference between the server time and the `last_update_time`\. In general, your application should avoid flipping between two hosts due to conflicting information returned by the `aurora_replica_status` function\. Your application should try all known hosts first instead of blindly following the data returned by the `aurora_replica_status` function\.
 
-##### RDS API<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString.API"></a>
+##### Java example to list instances using the DescribeDbClusters API<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString.API"></a>
 
 You can programmatically find the list of instances by using the [AWS Java SDK](https://aws.amazon.com/sdk-for-java/), specifically the [DescribeDbClusters ](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDS.html#describeDBClusters-com.amazonaws.services.rds.model.DescribeDBClustersRequest-)API\. Here's a small example of how you might do this in java 8:
 
@@ -187,7 +191,7 @@ singleClusterResult.getDBClusterMembers().stream()
    .collect(Collectors.joining(","));
 ```
 
-pgJDBCEndpointStr will contain a formatted list of endpoints, e\.g:
+pgJDBCEndpointStr will contain a formatted list of endpoints\. For example:
 
 ```
 my-node1.cksc6xlmwcyw.us-east-1-beta.rds.amazonaws.com:5432,
@@ -229,7 +233,7 @@ From the server side, certain APIs can cause an outage that can be used to test 
 
 From the application/client side, if using Linux, you can test how the application responds to sudden packet drops based on port, host, or if tcp keepalive packets are not sent or received by using iptables\.
 
-### Fast failover example<a name="AuroraPostgreSQL.BestPractices.FastFailover.Example"></a>
+### Fast failover Java example<a name="AuroraPostgreSQL.BestPractices.FastFailover.Example"></a>
 
 The following code sample shows how an application might set up an Aurora PostgreSQL driver manager\. The application would call `getConnection()` when it needs a connection\. A call to this function can fail to find a valid host, such as when no writer is found but the `targetServerType` parameter was set to `primary`\. The calling application should simply retry calling the function\. This can easily be wrapped into a connection pooler to avoid pushing the retry behavior onto the application\. Most connection poolers allow you to specify a JDBC connection string, so your application could call into `getJdbcConnectionString()` and pass that to the connection pooler to make use of faster failover on Aurora PostgreSQL\.
 
