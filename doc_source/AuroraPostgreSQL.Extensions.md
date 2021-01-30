@@ -48,10 +48,10 @@ The `apg_plan_mgmt` extension changes for version 1\.0\.1 include the following:
 
 **New extension features**
 
-1. A new `update_plan_hash` parameter is available for the `validate_plans` function\. This parameter updates the `plan_hash` for plans that can't be reproduced exactly\. The `update_plan_hash` parameter also enables you to fix a plan by rewriting the SQL\. You can then register the good plan as an `Approved` plan for the original SQL\. Following is an example of using `update_plan_hash`\.
+1. The `validate_plans` function has a new `action` value called `update_plan_hash`\. This action updates the `plan_hash` ID for plans that can't be reproduced exactly\. The `update_plan_hash` value also allows you to fix a plan by rewriting the SQL\. You can then register the good plan as an `Approved` plan for the original SQL\. Following is an example of using the `update_plan_hash` action\.
 
    ```
-   UPDATE apg_plan_mgmt.dba_plans SET plan_hash = new _plan_hash, plan_outline = good_plan_outline 
+   UPDATE apg_plan_mgmt.plans SET plan_hash = new _plan_hash, plan_outline = good_plan_outline 
       WHERE sql_hash = bad_plan_sql_hash AND plan_hash = bad_plan_plan_hash;
    SELECT apg_plan_mgmt.validate_plans(bad_plan_sql_hash, bad_plan_plan_hash, 'update_plan_hash');
    SELECT apg_plan_mgmt.reload();

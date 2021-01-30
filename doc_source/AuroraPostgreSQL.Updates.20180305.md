@@ -11,6 +11,7 @@ aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[].[Eng
 For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability.PostgreSQL)\.
 
 **Topics**
++ [Version 4\.0, compatible with PostgreSQL 12\.4](#AuroraPostgreSQL.Updates.20180305.40)
 + [Version 3\.4, compatible with PostgreSQL 11\.9](#AuroraPostgreSQL.Updates.20180305.34)
 + [Version 3\.3, compatible with PostgreSQL 11\.8](#AuroraPostgreSQL.Updates.20180305.33)
 + [Version 3\.2, compatible with PostgreSQL 11\.7](#AuroraPostgreSQL.Updates.20180305.32)
@@ -38,6 +39,45 @@ For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.
 For information on extensions and modules, see [Extensions and modules for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)\.
 
 The following Aurora PostgreSQL versions are supported\. 
+
+## Version 4\.0, compatible with PostgreSQL 12\.4<a name="AuroraPostgreSQL.Updates.20180305.40"></a>
+
+This version of Aurora PostgreSQL is compatible with PostgreSQL 12\.4\. For more information about the improvements in release 12\.4, see [PostgreSQL release 12\.4](https://www.postgresql.org/docs/12/release-12-4.html)\.
+
+### Version 4\.0\.0<a name="AuroraPostgreSQL.Updates.20180305.400"></a>
+
+**New features**
+
+1. This version supports a major version upgrade from [Version 3\.2, compatible with PostgreSQL 11\.7](#AuroraPostgreSQL.Updates.20180305.32) and later versions\.
+
+**Improvements and enhancements**
+
+1. Contains several improvements that were announced for PostgreSQL releases [12\.0](https://www.postgresql.org/docs/12/release-12.html), [12\.1](https://www.postgresql.org/docs/12/release-12-1.html), [12\.2](https://www.postgresql.org/docs/12/release-12-2.html), [12\.3](https://www.postgresql.org/docs/12/release-12-3.html), and [12\.4](https://www.postgresql.org/docs/12/release-12-4.html)\.
+
+1. Contains all fixes, features, and improvements present in [Version 3\.3, compatible with PostgreSQL 11\.8](#AuroraPostgreSQL.Updates.20180305.34)\.
+
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2020\-25694](https://nvd.nist.gov/vuln/detail/CVE-2020-25694)
+   + [CVE\-2020\-25695](https://nvd.nist.gov/vuln/detail/CVE-2020-25695)
+   + [CVE\-2020\-25696](https://nvd.nist.gov/vuln/detail/CVE-2020-25696)
+
+1. Updated the following extensions:
+   + `address_standardizer` to version 3\.0\.2 
+   + `address_standardizer_data_us` to version 3\.0\.2 
+   + `amcheck` to version 1\.2 
+   + `citext` to version 1\.6 
+   + `hll` to version 2\.14 
+   + `hstore` to version 1\.6 
+   + `ip4r` to version 2\.4 
+   + `pg_repack` to version 1\.4\.5 
+   + `pg_stat_statements` to version 1\.7 
+   + `pgaudit` to version 1\.4 
+   + `pglogical` to version 2\.3\.2 
+   + `pgrouting` to version 3\.0\.3 
+   + `plv8` to version 2\.3\.14 
+   + `postGIS` to version 3\.0\.2 
+   + `postgis_tiger_geocoder` to version 3\.0\.2 
+   + `postgis_topology` to version 3\.0\.2
 
 ## Version 3\.4, compatible with PostgreSQL 11\.9<a name="AuroraPostgreSQL.Updates.20180305.34"></a>
 
@@ -168,6 +208,8 @@ You can find the following improvements in this engine update\.
 1. Fixed a bug in Aurora PostgreSQL Serverless where queries that executed on previously idle connections got delayed until the scale operation completed\.
 
 1. Fixed a bug where an Aurora PostgreSQL DB cluster with Database Activity Streams enabled might report the beginning of a potential loss window for activity records, but does not report the restoration of connectivity\.
+
+1. Fixed a bug with the[aws\_s3\.table\_import\_from\_s3](AuroraPostgreSQL.Migrating.md#aws_s3.table_import_from_s3) function where a `COPY` from S3 failed with the error HTTP error code: 248\.
 
 ## Version 3\.2, compatible with PostgreSQL 11\.7<a name="AuroraPostgreSQL.Updates.20180305.32"></a>
 

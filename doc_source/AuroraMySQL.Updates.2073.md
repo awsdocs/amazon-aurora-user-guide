@@ -10,6 +10,9 @@ Aurora MySQL 2\.07\.3 is generally available\. Aurora MySQL 2\.\* versions are c
 
  To create a cluster with an older version of Aurora MySQL, please specify the engine version through the AWS Management Console, the AWS CLI, or the RDS API\. 
 
+**Note**  
+ This version is designated as a long\-term support \(LTS\) release\. For more information, see [Aurora MySQL long\-term support \(LTS\) releases](AuroraMySQL.Updates.Versions.md#AuroraMySQL.Updates.LTS)\. 
+
 If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.2073.Improvements"></a>

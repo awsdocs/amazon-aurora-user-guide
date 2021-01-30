@@ -22,7 +22,10 @@ Here are some important points about working with parameters in a parameter grou
   If a DB instance isn't using the latest changes to its associated DB parameter group, the AWS Management Console shows the DB parameter group with a status of **pending\-reboot**\. The **pending\-reboot** parameter groups status doesn't result in an automatic reboot during the next maintenance window\. To apply the latest parameter changes to that DB instance, manually reboot the DB instance\.
 + When you change the DB parameter group associated with a DB instance, you must manually reboot the instance before the DB instance can use the new DB parameter group\. For more information about changing the DB parameter group, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 **Note**  
-After you change the DB cluster parameter group associated with a DB cluster, reboot the primary DB instance in the cluster to apply the changes to all of the DB instances in the cluster\.
+After you change the DB cluster parameter group associated with a DB cluster, reboot the primary DB instance in the cluster to apply the changes to all of the DB instances in the cluster\.  
+To determine whether the primary DB instance of a DB cluster must be rebooted to apply changes, run the following AWS CLI command:  
+`aws rds describe-db-clusters --db-cluster-identifier db_cluster_identifier`  
+Check the `DBClusterParameterGroupStatus` value for the primary DB instance in the output\. If the value is `pending-reboot`, then reboot the primary DB instance of the DB cluster\.
 + You can specify the value for a parameter as an integer or as an integer expression built from formulas, variables, functions, and operators\. Functions can include a mathematical log expression\. For more information, see [DB parameter values](#USER_ParamValuesRef)\.
 + Set any parameters that relate to the character set or collation of your database in your parameter group before creating the DB instance and before you create a database in your DB instance\. This ensures that the default database and new databases in your DB instance use the character set and collation values that you specify\. If you change character set or collation parameters for your DB instance, the parameter changes are not applied to existing databases\.
 

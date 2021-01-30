@@ -182,3 +182,5 @@ For information about Aurora DB engine support for each DB instance class, see [
 | db\.t2 – Current generation burstable performance instance classes | 
 | db\.t2\.medium | 2 | Variable | 4 | — | Moderate | 
 | db\.t2\.small | 1 | Variable | 2 | — | Low | 
+
+\*\* The r3\.8xlarge instance doesn't have dedicated EBS bandwidth and therefore doesn't offer EBS optimization\. On this instance, network traffic and Amazon EBS traffic share the same 10\-gigabit network interface\.

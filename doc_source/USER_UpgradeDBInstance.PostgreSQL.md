@@ -8,10 +8,6 @@ In contrast, *minor version upgrades* include only changes that are backward\-co
 
 Aurora DB clusters that are configured as logical replication publishers or subscribers can't undergo a major version upgrade\. For more information, see [Using PostgreSQL logical replication with Aurora](AuroraPostgreSQL.Replication.Logical.md)\.
 
-You can do the following Aurora PostgreSQL major version upgrades:
-+ Upgrade from version 9\.6 minor versions 9\.6\.9 and greater, to version 10 minor versions 10\.11 or greater\. 
-+ Upgrade from version 10 minor versions 10\.7 and greater, to version 11 minor versions 11\.7 or greater\. 
-
 For how to determine valid upgrade targets, see [Determining which engine version to upgrade to](#USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion)\. 
 
 **Topics**
@@ -70,6 +66,11 @@ aws rds describe-db-engine-versions  --engine aurora-postgresql  --engine-versio
 ## How to perform a major version upgrade<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion"></a>
 
 Major version upgrades can contain database changes that are not backward\-compatible with previous versions of the database\. This functionality can cause your existing applications to stop working correctly\. As a result, Amazon Aurora doesn't apply major version upgrades automatically\. To perform a major version upgrade, you modify your DB cluster manually\. 
+
+You can do the following Aurora PostgreSQL major version upgrades:
++ Upgrade from version 9\.6 minor versions 9\.6\.9 and greater, to version 10 minor versions 10\.11 or greater\. 
++ Upgrade from version 10 minor versions 10\.7 and greater, to version 11 minor versions 11\.7 or greater\. 
++ Upgrade from version 11 minor versions 11\.7 and greater, to version 12 minor versions 12\.4 or greater\. 
 
 Before applying an upgrade to your production DB clusters, make sure that you thoroughly test any upgrade to verify that your applications work correctly\. 
 

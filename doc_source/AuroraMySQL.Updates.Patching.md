@@ -31,7 +31,7 @@
 **Important**  
  Until August 2020, you could specify this setting for a DB instance that was part of an Aurora MySQL DB cluster, but the setting had no effect\. Now, the setting does apply to Aurora MySQL\. If you have clusters created before August 2020, check whether the DB instances in the cluster already had the **Enable auto minor version upgrade** setting enabled\. If so, confirm that this setting is still appropriate and change it if not\. Aurora only performs the automatic upgrade if all DB instances in your cluster have this setting enabled\. 
 
- Automatic minor version upgrade doesn't apply to clusters running the LTS version for Aurora MySQL 1\.x or 2\.x\. Aurora won't automatically upgrade clusters running 2\.04\.9, 1\.19\.6, or other patch levels of those minor versions\. 
+ Automatic minor version upgrade doesn't apply to clusters running the LTS version for Aurora MySQL 1\.x or 2\.x\. Aurora won't automatically upgrade clusters running 2\.07\.\*, 1\.22\.\*, or other patch levels of those minor versions\. 
 
  Automatic minor version upgrade doesn't apply to the following kinds of Aurora MySQL clusters: 
 +  Multi\-master clusters\. 

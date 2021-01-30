@@ -2,7 +2,10 @@
 
 You can invoke AWS Lambda functions from an Aurora PostgreSQL DB cluster\. To do this, use the `aws_lambda` PostgreSQL extension provided with Aurora PostgreSQL\. 
 
-AWS Lambda is a compute service that you can use to run code\. For example, you can use Lambda functions to process event notifications from a DB instance\. For more information about Lambda, see [What is AWS Lambda?](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
+AWS Lambda is a compute service that you can use to run code\. For example, you can use Lambda functions to process event notifications from a DB instance\. For more information about Lambda, see [What is AWS Lambda?](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) in the AWS Lambda Developer Guide\.
+
+**Note**  
+Invoking an AWS Lambda function is supported in Aurora PostgreSQL version 3\.4 \(compatible with PostgreSQL 11\.9\) and later\.
 
 **Topics**
 + [Overview of using a Lambda function](#AuroraPostgreSQL-Lambda-overview)
