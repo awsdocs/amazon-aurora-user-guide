@@ -44,7 +44,7 @@ When you use a T2 instance as a DB instance in an Aurora MySQL DB cluster, we re
 
   If your CPU credit balance is not at a sustainable level, then we recommend that you modify your DB instance to use a one of the supported R3 DB instance classes \(scale compute\)\.
 
-  For more information on monitoring metrics, see [Monitoring Amazon Aurora DB cluster metrics](Aurora.Monitoring.md)\.
+  For more information on monitoring metrics, see [Monitoring Amazon Aurora metrics with Amazon CloudWatch](Aurora.Monitoring.md)\.
 + For your Aurora MySQL DB clusters using single\-master replication, monitor the replica lag \(`AuroraReplicaLag`\) between the primary instance and the Aurora Replicas\.
 
   If an Aurora Replica runs out of CPU credits before the primary instance, the lag behind the primary instance results in the Aurora Replica frequently restarting\. This result is common when an application has a heavy load of read operations distributed among Aurora Replicas in an Aurora MySQL DB cluster, at the same time that the primary instance has a minimal load of write operations\.

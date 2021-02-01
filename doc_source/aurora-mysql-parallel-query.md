@@ -410,7 +410,7 @@ mysql> select @@aurora_pq;
  In the upgraded cluster, the `EngineMode` attribute has the value `provisioned` instead of `parallelquery`\. To check whether parallel query is available for a specified engine version, now you check the value of the `SupportsParallelQuery` field in the output of the `describe-db-engine-versions` AWS CLI command\. In earlier Aurora MySQL versions, you checked for the presence of `parallelquery` in the `SupportedEngineModes` list\. 
 
  After you upgrade to Aurora MySQL 1\.23 or 2\.09 and higher, you can take advantage of the following features\. These features aren't available to parallel query clusters running older Aurora MySQL versions\. 
-+  Performance Insights\. For more information, see [Using Amazon RDS Performance Insights](USER_PerfInsights.md)\. 
++  Performance Insights\. For more information, see [Using Performance Insights on Amazon Aurora](USER_PerfInsights.md)\. 
 +  Backtracking\. For more information, see [Backtracking an Aurora DB cluster](AuroraMySQL.Managing.Backtrack.md)\. 
 +  Stopping and starting the cluster\. For more information, see [Stopping and starting an Amazon Aurora DB cluster](aurora-cluster-stop-start.md)\. 
 
@@ -567,7 +567,7 @@ SET optimizer_switch='hash_join=on';
 
 ## Monitoring parallel query<a name="aurora-mysql-parallel-query-monitoring"></a>
 
- In addition to the Amazon CloudWatch metrics described in [Monitoring Amazon Aurora DB cluster metrics](Aurora.Monitoring.md), Aurora provides other global status variables\. You can use these global status variables to help monitor parallel query execution\. They can give you insights into why the optimizer might use or not use parallel query in a given situation\. To access these variables, you can use the `[SHOW GLOBAL STATUS](https://dev.mysql.com/doc/refman/5.7/en/server-status-variables.html)` command\. You can also find these variables listed following\. 
+ In addition to the Amazon CloudWatch metrics described in [Monitoring Amazon Aurora metrics with Amazon CloudWatch](Aurora.Monitoring.md), Aurora provides other global status variables\. You can use these global status variables to help monitor parallel query execution\. They can give you insights into why the optimizer might use or not use parallel query in a given situation\. To access these variables, you can use the `[SHOW GLOBAL STATUS](https://dev.mysql.com/doc/refman/5.7/en/server-status-variables.html)` command\. You can also find these variables listed following\. 
 
  A parallel query session isn't necessarily a one\-to\-one mapping with the queries performed by the database\. For example, suppose that your query plan has two steps that use parallel query\. In that case, the query involves two parallel sessions and the counters for requests attempted and requests successful are incremented by two\. 
 

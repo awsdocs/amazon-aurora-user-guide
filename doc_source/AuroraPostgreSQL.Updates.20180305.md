@@ -54,7 +54,7 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 12\.4\. For more
 
 1. Contains several improvements that were announced for PostgreSQL releases [12\.0](https://www.postgresql.org/docs/12/release-12.html), [12\.1](https://www.postgresql.org/docs/12/release-12-1.html), [12\.2](https://www.postgresql.org/docs/12/release-12-2.html), [12\.3](https://www.postgresql.org/docs/12/release-12-3.html), and [12\.4](https://www.postgresql.org/docs/12/release-12-4.html)\.
 
-1. Contains all fixes, features, and improvements present in [Version 3\.3, compatible with PostgreSQL 11\.8](#AuroraPostgreSQL.Updates.20180305.34)\.
+1. Contains all fixes, features, and improvements present in [Version 3\.4, compatible with PostgreSQL 11\.9](#AuroraPostgreSQL.Updates.20180305.34)\.
 
 1. Backported fixes for the following PostgreSQL community security issues:
    + [CVE\-2020\-25694](https://nvd.nist.gov/vuln/detail/CVE-2020-25694)

@@ -1,6 +1,6 @@
-# Monitoring Amazon Aurora DB cluster metrics<a name="Aurora.Monitoring"></a>
+# Monitoring Amazon Aurora metrics with Amazon CloudWatch<a name="Aurora.Monitoring"></a>
 
-To determine the health and performance of your Aurora DB cluster, you can monitor Amazon CloudWatch metrics\. You can access metrics using the Amazon RDS Management Console, AWS CLI, and CloudWatch API\. For more information, see [Monitoring an Amazon Aurora DB cluster](MonitoringAurora.md)\.
+To determine the health and performance of your Aurora DB cluster, monitor Amazon CloudWatch metrics\. Access metrics using the Amazon RDS Management Console, AWS CLI, and CloudWatch API\. For more information, see [Monitoring an Amazon Aurora DB cluster](MonitoringAurora.md)\.
 
 **Note**  
 If you are using Amazon RDS Performance Insights, additional metrics are available\. For more information, see [Performance Insights metrics published to Amazon CloudWatch](USER_PerfInsights.Cloudwatch.md)\.
@@ -111,8 +111,8 @@ To monitor the health and performance of your Aurora DB cluster, you can view so
 1. Choose the name of the DB instance you want to monitor to see its details\. 
 
 1. In the Cloudwatch section, choose one of the following options from **Monitoring** for how you want to view your metrics:
-   + **Cloudwatch** – Shows a summary of CloudWatch metrics\. Each metric includes a graph showing the metric monitored over a specific time span\. For more information, see [Monitoring with Amazon CloudWatch](MonitoringOverview.md#monitoring-cloudwatch)\.
-   + **Enhanced monitoring** – Shows a summary of OS metrics available to an Aurora DB instance with Enhanced Monitoring enabled\. Each metric includes a graph showing the metric monitored over a specific time span\. For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.
+   + **Cloudwatch** – Shows a summary of CloudWatch metrics\. Each metric includes a graph showing the metric monitored over a specific time span\.
+   + **Enhanced monitoring** – Shows a summary of OS metrics available to an Aurora DB instance with Enhanced Monitoring enabled\. Each metric includes a graph showing the metric monitored over a specific time span\. For more information, see [Using Enhanced Monitoring](USER_Monitoring.OS.md)\.
    + **OS process list** – Shows the processes running on the DB instance or DB cluster and their related metrics including CPU percentage, memory usage, and so on\.   
 ![\[RDS metrics viewing options\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraMetrics01.png)
 

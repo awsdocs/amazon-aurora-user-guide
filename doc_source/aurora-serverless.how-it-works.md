@@ -51,7 +51,7 @@ If Aurora Serverless v1 can't find a scaling point, its behavior depends on the 
 
 You can see scaling events in the details for a DB cluster in the AWS Management Console\. You can also monitor the current capacity allocated to the DB cluster by using the `ServerlessDatabaseCapacity` metric for Amazon CloudWatch\. 
 
-During autoscaling, Aurora Serverless v1 resets the `EngineUptime` metric\. The reset metric value doesn't indicate any issues with seamless scaling and doesn't mean that any connections were dropped\. For more information about metrics, see [Monitoring Amazon Aurora DB cluster metrics](Aurora.Monitoring.md)\.
+During autoscaling, Aurora Serverless v1 resets the `EngineUptime` metric\. The reset metric value doesn't indicate any issues with seamless scaling and doesn't mean that any connections were dropped\. For more information about metrics, see [Monitoring Amazon Aurora metrics with Amazon CloudWatch](Aurora.Monitoring.md)\.
 
 ## Automatic pause and resume for Aurora Serverless v1<a name="aurora-serverless.how-it-works.pause-resume"></a>
 

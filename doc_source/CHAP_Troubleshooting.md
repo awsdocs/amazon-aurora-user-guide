@@ -250,7 +250,7 @@ You might encounter one of the following error messages\.
 
 Each DB instance in an Amazon Aurora DB cluster uses local solid state drive \(SSD\) storage to store temporary tables for a session\. This local storage for temporary tables doesn't automatically grow like the Aurora cluster volume\. Instead, the amount of local storage is limited\. The limit is based on the DB instance class for DB instances in your DB cluster\. 
 
-To show the amount of storage available for temporary tables and logs, you can use the CloudWatch metric `FreeLocalStorage`\. This metric is for per\-instance temporary volumes, not the cluster volume\. For more information on available metrics, see [Monitoring Amazon Aurora DB cluster metrics](Aurora.Monitoring.md)\.
+To show the amount of storage available for temporary tables and logs, you can use the CloudWatch metric `FreeLocalStorage`\. This metric is for per\-instance temporary volumes, not the cluster volume\. For more information on available metrics, see [Monitoring Amazon Aurora metrics with Amazon CloudWatch](Aurora.Monitoring.md)\.
 
 In some cases, you can't modify your workload to reduce the amount temporary storage required\. If so, modify your DB instances to use a DB instance class that has more local SSD storage\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
 
