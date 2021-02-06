@@ -262,7 +262,7 @@ When you use an Amazon VPC endpoint in a Data API call, all traffic between your
 
 ## Calling the Data API<a name="data-api.calling"></a>
 
-After you enable the Data API for an Aurora Serverless DB cluster, you can call the Data API or the AWS CLI to run SQL statements on the DB cluster\. The Data API supports the programming languages supported by the AWS SDK\. For more information, see [ Tools to build on AWS](https://aws.amazon.com/tools/)\.
+With the Data API enabled on your Aurora Serverless DB cluster, you can run SQL statements on the Aurora DB cluster by using the Data API or the AWS CLI\. The Data API supports the programming languages supported by the AWS SDKs\. For more information, see [Tools to build on AWS](https://aws.amazon.com/tools/)\.
 
 **Note**  
 Currently, the Data API doesn't support arrays of Universal Unique Identifiers \(UUIDs\)\.
@@ -274,10 +274,10 @@ The Data API provides the following operations to perform SQL statements\.
 
 |  Data API operation  |  AWS CLI command  |  Description  | 
 | --- | --- | --- | 
-|  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/execute-statement.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/execute-statement.html)  |  Runs a SQL statement against a database\.  | 
-|  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BatchExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BatchExecuteStatement.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/batch-execute-statement.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/batch-execute-statement.html)  |  Runs a batch SQL statement over an array of data for bulk update and insert operations\. You can run a DML statement with array of parameter sets\. A batch SQL statement can provide a significant performance improvement over individual insert and update statements\.  | 
+|  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/execute-statement.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/execute-statement.html)  |  Runs a SQL statement on a database\.  | 
+|  [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BatchExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_BatchExecuteStatement.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/rds-data/batch-execute-statement.html](https://docs.aws.amazon.com/cli/latest/reference/rds-data/batch-execute-statement.html)  |  Runs a batch SQL statement over an array of data for bulk update and insert operations\. You can run a data manipulation language \(DML\) statement with an array of parameter sets\. A batch SQL statement can provide a significant performance improvement over individual insert and update statements\.  | 
 
-You can run both operations for performing a SQL statement independently, or you can run them in a transaction\. The Data API provides the following operations to support transactions\.
+You can use either operation to run individual SQL statements or to run transactions\. For transactions, the Data API provides the following operations\.
 
 
 ****  
@@ -298,14 +298,14 @@ The operations for performing SQL statements and supporting transactions have th
 |  `resourceArn`  |  `--resource-arn`  |  Yes  |  The Amazon Resource Name \(ARN\) of the Aurora Serverless DB cluster\.  | 
 |  `secretArn`  |  `--secret-arn`  |  Yes  |  The name or ARN of the secret that enables access to the DB cluster\.  | 
 
-You can use parameters in Data API calls to `ExecuteStatement` and `BatchExecuteStatement`, and when you run the AWS CLI commands `execute-statement` and `batch-execute-statement`\. To use a parameter, you specify a name\-value pair in the `SqlParameter` data type\. You specify the value with the `Field` data type\. The following table maps Java Database Connectivity \(JDBC\) data types to the data types you specify in Data API calls\.
+You can use parameters in Data API calls to `ExecuteStatement` and `BatchExecuteStatement`, and when you run the AWS CLI commands `execute-statement` and `batch-execute-statement`\. To use a parameter, you specify a name\-value pair in the `SqlParameter` data type\. You specify the value with the `Field` data type\. The following table maps Java Database Connectivity \(JDBC\) data types to the data types that you specify in Data API calls\.
 
 
 ****  
 
 |  JDBC data type  |  Data API data type  | 
 | --- | --- | 
-|  `INTEGER, TINYINT, SMALLINT, BIGINT`  |  `LONG`  | 
+|  `INTEGER, TINYINT, SMALLINT, BIGINT`  |  `LONG` \(or `STRING`\)  | 
 |  `FLOAT, REAL, DOUBLE`  |  `DOUBLE`  | 
 |  `DECIMAL`  |  `STRING`  | 
 |  `BOOLEAN, BIT`  |  `BOOLEAN`  | 
@@ -313,30 +313,27 @@ You can use parameters in Data API calls to `ExecuteStatement` and `BatchExecute
 |  `CLOB`  |  `STRING`  | 
 |  Other types \(including types related to date and time\)  |  `STRING`  | 
 
-For some specific types, such as `DECIMAL` or `TIME`, a hint might be required to instruct the Data API that the `String` value should be passed to the database as a different type\. You can do this by including values in `typeHint` in the `SqlParameter` data type\. The possible values for `typeHint` are the following:
-+ `DECIMAL` – The corresponding `String` parameter value is sent as an object of `DECIMAL` type to the database\.
-+ `TIMESTAMP` – The corresponding `String` parameter value is sent as an object of `TIMESTAMP` type to the database\. The accepted format is `YYYY-MM-DD HH:MM:SS[.FFF]`\.
-+ `TIME` – The corresponding `String` parameter value is sent as an object of `TIME` type to the database\. The accepted format is `HH:MM:SS[.FFF]`\.
+**Note**  
+ You can specify the `LONG` or `STRING` data type in your Data API call for `LONG` values returned by the database\. We recommend that you do so to avoid losing precision for extremely large numbers, which can happen when you work with JavaScript\. 
+
+Certain types, such as `DECIMAL` and `TIME`, require a hint so that the Data API passes `String` values to the database as the correct type\. To use a hint, include values for `typeHint` in the `SqlParameter` data type\. The possible values for `typeHint` are the following:
 + `DATE` – The corresponding `String` parameter value is sent as an object of `DATE` type to the database\. The accepted format is `YYYY-MM-DD`\.
++ `DECIMAL` – The corresponding `String` parameter value is sent as an object of `DECIMAL` type to the database\.
++ `JSON` – The corresponding `String` parameter value is sent as an object of `JSON` type to the database\.
++ `TIME` – The corresponding `String` parameter value is sent as an object of `TIME` type to the database\. The accepted format is `HH:MM:SS[.FFF]`\.
++ `TIMESTAMP` – The corresponding `String` parameter value is sent as an object of `TIMESTAMP` type to the database\. The accepted format is `YYYY-MM-DD HH:MM:SS[.FFF]`\.
++ `UUID` – The corresponding `String` parameter value is sent as an object of `UUID` type to the database\.
 
 **Note**  
  For Amazon Aurora PostgreSQL, the Data API always returns the Aurora PostgreSQL datatype `TIMESTAMPTZ` in UTC timezone\.
 
-**Topics**
-+ [Calling the Data API with the AWS CLI](#data-api.calling.cli)
-+ [Calling the Data API from a Python application](#data-api.calling.python)
-+ [Calling the Data API from a Java application](#data-api.calling.java)
-
-**Note**  
-These examples are not exhaustive\.
-
 ### Calling the Data API with the AWS CLI<a name="data-api.calling.cli"></a>
 
-You can call the Data API using the AWS Command Line Interface \(AWS CLI\)\.
+You can call the Data API using the AWS CLI\.
 
-The following examples use the AWS CLI for the Data API\. For more information, see [AWS Command Line Interface reference for the Data API](https://docs.aws.amazon.com/cli/latest/reference/rds-data/index.html)\.
+The following examples use the AWS CLI for the Data API\. For more information, see [AWS CLI reference for the Data API](https://docs.aws.amazon.com/cli/latest/reference/rds-data/index.html)\.
 
-In each example, replace the DB cluster ARN with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in Secrets Manager that allows access to the DB cluster\.
+In each example, replace the Amazon Resource Name \(ARN\) for the DB cluster with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in Secrets Manager that allows access to the DB cluster\.
 
 **Note**  
 The AWS CLI can format responses in JSON\.
@@ -354,10 +351,9 @@ You can start a SQL transaction using the `aws rds-data begin-transaction` CLI c
 
 **Important**  
 A transaction times out if there are no calls that use its transaction ID in three minutes\. If a transaction times out before it's committed, it's rolled back automatically\.  
-DDL statements inside a transaction cause an implicit commit\. We recommend that you run each DDL statement in a separate `execute-statement` command with the `--continue-after-timeout` option\.
+Data definition language \(DDL\) statements inside a transaction cause an implicit commit\. We recommend that you run each DDL statement in a separate `execute-statement` command with the `--continue-after-timeout` option\.
 
-In addition to the common options, specify the following option:
-+ `--database` \(optional\) – The name of the database\.
+In addition to the common options, specify the `--database` option, which provides the name of the database\.
 
 For example, the following CLI command starts a SQL transaction\.
 
@@ -659,7 +655,7 @@ The following is an example of the response\.
 ```
 {
     "transactionStatus": "Rollback Complete"
-}
+    }
 ```
 
 ### Calling the Data API from a Python application<a name="data-api.calling.python"></a>

@@ -228,7 +228,7 @@ If you need to skip a large number of errors, the replication lag can increase b
 
 You can mitigate this issue by increasing the number of hours that binary log files are retained on your replication source\. After you have increased the binlog retention time, you can restart replication and call the `mysql.rds_skip_repl_error` command as needed\.
 
-To set the binlog retention time, use the [mysql\_rds\_set\_configuration](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.Troubleshooting.html) procedure\. Specify a configuration parameter of 'binlog retention hours' along with the number of hours to retain binlog files on the DB cluster, up to 720 \(30 days\)\. The following example sets the retention period for binlog files to 48 hours\.
+To set the binlog retention time, use the [mysql\_rds\_set\_configuration](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.Troubleshooting.html) procedure\. Specify a configuration parameter of 'binlog retention hours' along with the number of hours to retain binlog files on the DB cluster, up to 2160 \(90 days\)\. The default for Aurora MySQL is 24 \(1 day\)\. The following example sets the retention period for binlog files to 48 hours\.
 
 ```
 CALL mysql.rds_set_configuration('binlog retention hours', 48);

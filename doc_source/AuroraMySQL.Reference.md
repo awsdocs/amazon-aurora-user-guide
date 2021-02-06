@@ -60,6 +60,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `collation_server`  |  Yes  |  | 
 |  `completion_type`  |  Yes  |  | 
 |  `default_storage_engine`  |  No  |   Aurora MySQL clusters use the InnoDB storage engine for all of your data\.   | 
+| `gtid-mode` | Sometimes | Modifiable in Aurora MySQL version 2\.04 and later\. | 
 |  `innodb_autoinc_lock_mode`  |  Yes  |  | 
 |  `innodb_checksums`  |  No  |  | 
 |  `innodb_cmp_per_index_enabled`  |  Yes  |  | 
@@ -151,7 +152,6 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `general_log` | Yes | For instructions on uploading the logs to CloudWatch Logs, see [Publishing Amazon Aurora MySQL logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. | 
 | `general_log_file` | No | Aurora MySQL uses managed instances where you don't access the filesystem directly\. | 
 | `group_concat_max_len` | Yes |  | 
-| `gtid-mode` | Sometimes | Modifiable in Aurora MySQL version 2\.04 and later\. | 
 | `host_cache_size` | Yes |  | 
 | `init_connect` | Yes |  | 
 | `innodb_adaptive_hash_index` | Yes |  | 

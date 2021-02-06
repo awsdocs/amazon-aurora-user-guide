@@ -9,7 +9,7 @@ Security for Amazon Aurora PostgreSQL is managed at three levels:
   Aurora PostgreSQL supports db\.r4 and db\.t3 instance classes with default VPC only\. With default VPC tenancy, the VPC runs on shared hardware\. With dedicated VPC tenancy, the VPC runs on a dedicated hardware instance\. For more information about instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. For more information about default and dedicated VPC tenancy, see [Dedicated instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html) in the [Amazon EC2 User Guide for Linux Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/)\.
 + To authenticate login and permissions for an Amazon Aurora DB cluster, you can take the same approach as with a stand\-alone instance of PostgreSQL\.
 
-  Commands such as `CREATE ROLE`, `ALTER ROLE`, `GRANT`, and `REVOKE` work just as they do in on\-premises databases, as does directly modifying database schema tables\. For more information, see [Client authentication](https://www.postgresql.org/docs/9.6/static/client-authentication.html) in the PostgreSQL documentation\.
+  Commands such as `CREATE ROLE`, `ALTER ROLE`, `GRANT`, and `REVOKE` work just as they do in on\-premises databases, as does directly modifying database schema tables\. For more information, see [Client authentication](https://www.postgresql.org/docs/current/client-authentication.html) in the PostgreSQL documentation\.
 **Note**  
 The Salted Challenge Response Authentication Mechanism \(SCRAM\) is not supported with Aurora PostgreSQL\.
 
@@ -55,7 +55,7 @@ Make sure that you verify password requirements such as expiration and needed co
 
 Amazon RDS supports Secure Socket Layer \(SSL\) encryption for Aurora PostgreSQL DB clusters\. Using SSL, you can encrypt a connection between your applications and your Aurora PostgreSQL DB clusters\. You can also force all connections to your Aurora PostgreSQL DB cluster to use SSL\. 
 
-For general information about SSL support and PostgreSQL databases, see [SSL support](https://www.postgresql.org/docs/11/libpq-ssl.html) in the PostgreSQL documentation\. For information about using an SSL connection over JDBC, see [Configuring the client](https://jdbc.postgresql.org/documentation/head/ssl-client.html) in the PostgreSQL documentation\.
+For general information about SSL support and PostgreSQL databases, see [SSL support](https://www.postgresql.org/docs/current/libpq-ssl.html) in the PostgreSQL documentation\. For information about using an SSL connection over JDBC, see [Configuring the client](https://jdbc.postgresql.org/documentation/head/ssl-client.html) in the PostgreSQL documentation\.
 
 **Topics**
 + [Requiring an SSL connection to an Aurora PostgreSQL DB cluster](#AuroraPostgreSQL.Security.SSL.Requiring)
@@ -150,4 +150,4 @@ psql: FATAL: no pg_hba.conf entry for host "host.ip", user "someuser", database 
 $
 ```
 
-For information about the `sslmode` option, see [Database connection control functions](https://www.postgresql.org/docs/11/libpq-connect.html#LIBPQ-CONNECT-SSLMODE) in the PostgreSQL documentation\.
+For information about the `sslmode` option, see [Database connection control functions](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE) in the PostgreSQL documentation\.

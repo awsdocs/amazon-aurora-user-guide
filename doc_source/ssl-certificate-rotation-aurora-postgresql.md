@@ -64,7 +64,7 @@ psql: SSL error: certificate verify failed
 
 ## Updating your application trust store<a name="ssl-certificate-rotation-aurora-postgresql.updating-trust-store"></a>
 
-For information about updating the trust store for PostgreSQL applications, see [Secure TCP/IP connections with SSL](https://www.postgresql.org/docs/9.5/ssl-tcp.html) in the PostgreSQL documentation\.
+For information about updating the trust store for PostgreSQL applications, see [Secure TCP/IP connections with SSL](https://www.postgresql.org/docs/current/ssl-tcp.html) in the PostgreSQL documentation\.
 
 **Note**  
 When you update the trust store, you can retain older certificates in addition to adding the new certificates\.
@@ -117,7 +117,7 @@ The following provides information about using SSL/TLS connections for different
 
   The client is invoked from the command line by specifying options either as a connection string or as environment variables\. For SSL/TLS connections, the relevant options are `sslmode` \(environment variable `PGSSLMODE`\), `sslrootcert` \(environment variable `PGSSLROOTCERT`\)\.
 
-  For the complete list of options, see [Parameter key words](https://www.postgresql.org/docs/11/libpq-connect.html#LIBPQ-PARAMKEYWORDS) in the PostgreSQL documentation\. For the complete list of environment variables, see [Environment variables](https://www.postgresql.org/docs/11/libpq-envars.html) in the PostgreSQL documentation\.
+  For the complete list of options, see [Parameter key words](https://www.postgresql.org/docs/11/libpq-connect.html#LIBPQ-PARAMKEYWORDS) in the PostgreSQL documentation\. For the complete list of environment variables, see [Environment variables](https://www.postgresql.org/docs/current/libpq-envars.html) in the PostgreSQL documentation\.
 + **pgAdmin**
 
   This browser\-based client is a more user\-friendly interface for connecting to a PostgreSQL database\.

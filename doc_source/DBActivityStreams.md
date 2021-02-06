@@ -228,7 +228,6 @@ The stream of activity is collected and transmitted to Amazon Kinesis\. From Kin
 Aurora manages the Kinesis stream for you\.
 +  You don't use an existing Kinesis stream\. Aurora creates the Kinesis stream automatically with a 24\-hour retention period\. 
 +  Aurora scales the Kinesis stream if necessary\. 
-+  Aurora recreates the Kinesis stream if you delete it\. 
 +  If you stop the database activity stream or delete the DB cluster, Aurora deletes the Kinesis stream\. 
 
 The following categories of activity are monitored and put in the activity stream audit log:
@@ -1144,7 +1143,7 @@ def main():
                 data_key_decoded = base64.b64decode(record_data['key'])
                 data_key_decrypt_result = kms.decrypt(CiphertextBlob=data_key_decoded,
                                                       EncryptionContext={'aws:rds:dbc-id': RESOURCE_ID})
-                print decrypt_decompress(payload_decoded, data_key_decrypt_result['Plaintext'])
+                print decrypt_decompress((payload_decoded, data_key_decrypt_result['Plaintext']))
             if 'NextShardIterator' in response:
                 next_shard_iters.append(response['NextShardIterator'])
         shard_iters = next_shard_iters

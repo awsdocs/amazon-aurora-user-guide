@@ -79,7 +79,7 @@ You can require that all user connections to your Aurora MySQL DB cluster use SS
 You can set the `require_secure_transport` parameter value by updating the DB cluster parameter group for your DB cluster\. You don't need to reboot your DB cluster for the change to take effect\. For more information on parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
 
 **Note**  
-The `require_secure_transport` parameter is only available for Aurora MySQL version 5\.7\.
+The `require_secure_transport` parameter is only available for Aurora MySQL version 5\.7\. You can set this parameter in a custom DB cluster parameter group\. The parameter isn't available in DB instance parameter groups\.
 
 When the `require_secure_transport` parameter is set to `ON` for a DB cluster, a database client can connect to it if it can establish an encrypted connection\. Otherwise, an error message similar to the following is returned to the client:
 

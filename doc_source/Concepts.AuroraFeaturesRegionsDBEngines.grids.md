@@ -18,7 +18,7 @@ The tables use the following patterns to specify version numbers and level of su
 
 ## Backtracking in Aurora<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.Backtrack"></a>
 
-By using backtracking in Aurora, you return the state of an Aurora cluster to a specific point in time, without restoring data from a backup\. Backtrack enables you to move your database to a prior point in time without the need to restore from a backup\. It completes within seconds, even for large databases\. For more information, see [Backtracking an Aurora DB cluster](AuroraMySQL.Managing.Backtrack.md)\.
+By using backtracking in Aurora, you return the state of an Aurora cluster to a specific point in time, without restoring data from a backup\. It completes within seconds, even for large databases\. For more information, see [Backtracking an Aurora DB cluster](AuroraMySQL.Managing.Backtrack.md)\.
 
 Aurora backtracking is available for Aurora MySQL only\. It's not available for Aurora PostgreSQL\.  
 

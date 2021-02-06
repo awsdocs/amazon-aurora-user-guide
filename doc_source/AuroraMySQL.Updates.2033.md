@@ -33,6 +33,6 @@ The procedure to upgrade your DB cluster has changed\. For more information, see
 +  Bug \#25361251: INCORRECT BEHAVIOR WITH INSERT ON DUPLICATE KEY IN SP 
 +  Bug \#26734162: INCORRECT BEHAVIOR WITH INSERT OF BLOB \+ ON DUPLICATE KEY UPDATE 
 +  Bug \#27460607: INCORRECT BEHAVIOR OF IODKU WHEN INSERT SELECT's SOURCE TABLE IS EMPTY 
-+  SELECT DISTINCT NOT RETURNING DISTINCT ROWS IN 5\.7 \(Bug \#22343910\) 
++  A query using a `DISTINCT` or `GROUP BY` clause could return incorrect results\. \(MySQL 5\.7 Bug \#79591, Bug \#22343910\) 
 +  A `DELETE` from joined tables using a derived table in the `WHERE` clause fails with error 1093 \(Bug \#23074801\)\. 
 +  GCOLS: INCORRECT BEHAVIOR WITH CHARSET CHANGES \(Bug \#25287633\)\. 
