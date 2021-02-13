@@ -53,7 +53,7 @@ You can configure the scaling configuration of the Aurora Serverless v1 DB clust
 
 ![\[Setting capacity for an Aurora PostgreSQL Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-capacity-postgres.png)
 
-You can also enable the Data API for your Aurora MySQL Serverless DB cluster\. Select the **Data API** checkbox in the **Connectivity** section of the Create database page\. See [Using the Data API for Aurora Serverless](data-api.md) for more information about the Data API\. 
+You can also enable the Data API for your Aurora PostgreSQL Serverless DB cluster\. Select the **Data API** checkbox in the **Connectivity** section of the Create database page\. See [Using the Data API for Aurora Serverless](data-api.md) for more information about the Data API\. 
 
 For more information on creating an Aurora DB cluster using the AWS Management Console, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.
 
