@@ -11,6 +11,10 @@ The following limitations apply to Amazon Aurora Serverless v2 \(preview\):
 + You can work with Amazon Aurora Serverless v2 \(preview\) in the preview environment only\. You are limited to working with Aurora Serverless v2 \(preview\) in this environment\. To use any of your other existing AWS services, such as Amazon EC2 and Amazon CloudWatch, access them through the AWS Management Console in the US East \(N\. Virginia\) Region\.
 + You can work with Amazon Aurora Serverless v2 \(preview\) using the console only\. AWS CLI commands and Amazon RDS API operations for creating and working Aurora Serverless v2 \(preview\) DB clusters aren't currently available\. 
 + You can create only Aurora MySQL 5\.7 \(2\.07\) DB clusters using Aurora Serverless v2 \(preview\)\. Aurora PostgreSQL isn't currently available for Aurora Serverless v2 \(preview\)\. 
++ Aurora Serverless v2 \(preview\) clusters can be created in the Availability Zones with these zoneIds only:
+  + use1\-az2
+  + use1\-az4
+  + use1\-az6 
 + Your Aurora Serverless v2 \(preview\) DB clusters have a default capacity that ranges from a minimum of 4 Aurora capacity units \(ACUs\) to 32 ACUs\. Each ACU provides the equivalent of approximately 2 gibibytes \(GiB\) of RAM and associated CPU and networking\.
 + You can't give an Aurora Serverless v2 \(preview\) DB cluster a public IP address\. 
 + You must create your Aurora Serverless v2 \(preview\) DB cluster in a virtual private cloud \(VPC\) based on the Amazon VPC service\. You can access your Aurora Serverless v2 \(preview\) DB cluster only from within a VPC based on Amazon VPC\. 

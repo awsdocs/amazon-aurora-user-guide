@@ -39,7 +39,7 @@ For more information on managing access to Amazon Aurora resources and your data
 + [Compliance validation for Amazon Aurora](RDS-compliance.md)
 + [Resilience in Amazon Aurora](disaster-recovery-resiliency.md)
 + [Infrastructure security in Amazon Aurora](infrastructure-security.md)
-+ [Amazon Aurora and interface VPC endpoints \(AWS PrivateLink\)](vpc-interface-endpoints.md)
++ [Amazon RDS API and interface VPC endpoints \(AWS PrivateLink\)](vpc-interface-endpoints.md)
 + [Security best practices for Amazon Aurora](CHAP_BestPractices.Security.md)
 + [Controlling access with security groups](Overview.RDSSecurityGroups.md)
 + [Master user account privileges](UsingWithRDS.MasterAccounts.md)

@@ -277,9 +277,11 @@ aws rds describe-db-parameters --db-parameter-group-name default.aurora-mysql5.7
  This first example creates an Aurora DB cluster that's running a 1\.x version of Aurora MySQL\. The cluster includes a writer DB instance and a reader DB instance\. The `wait db-instance-available` command pauses until the the writer DB instance is available\. That's the point when the cluster is ready to be upgraded\. 
 
 ```
-$ aws rds create-db-cluster --db-cluster-identifier cluster-56-2020-11-17-3824 --engine aurora --db-cluster-version 5.6.mysql_aurora.1.22.3
+$ aws rds create-db-cluster --db-cluster-identifier cluster-56-2020-11-17-3824 --engine aurora \
+  --db-cluster-version 5.6.mysql_aurora.1.22.3
 ...
-$ aws rds create-db-instance --db-instance-identifier instance-2020-11-17-7832 --db-cluster-identifier cluster-56-2020-11-17-3824 --db-instance-class db.t2.medium --engine aurora
+$ aws rds create-db-instance --db-instance-identifier instance-2020-11-17-7832 \
+  --db-cluster-identifier cluster-56-2020-11-17-3824 --db-instance-class db.t2.medium --engine aurora
 ...
 $ aws rds wait db-instance-available --db-instance-id instance-2020-11-17-7832 --region us-east-1
 ```
@@ -287,10 +289,12 @@ $ aws rds wait db-instance-available --db-instance-id instance-2020-11-17-7832 -
  The Aurora MySQL 2\.x versions that you can upgrade the cluster to depend on the 1\.x version that the cluster is currently running and on the AWS Region where the cluster is located\. The first command, with `--output text`, just shows the available target version\. The second command shows the full JSON output of the response\. In that detailed response, you can see details such as the `aurora-mysql` value you use for the `engine` parameter, and the fact that upgrading to 2\.07\.3 represents a major version upgrade\. 
 
 ```
-$ aws rds describe-db-clusters --db-cluster-id cluster-56-2020-11-17-9355 --query '*[].{EngineVersion:EngineVersion}' --output text
+$ aws rds describe-db-clusters --db-cluster-id cluster-56-2020-11-17-9355 \
+  --query '*[].{EngineVersion:EngineVersion}' --output text
 5.6.mysql_aurora.1.22.3
 
-$ aws rds describe-db-engine-versions --engine aurora --engine-version 5.6.mysql_aurora.1.22.3 --query '*[].[ValidUpgradeTarget]'
+$ aws rds describe-db-engine-versions --engine aurora --engine-version 5.6.mysql_aurora.1.22.3 \
+  --query '*[].[ValidUpgradeTarget]'
 [
     [
         [
@@ -309,13 +313,16 @@ $ aws rds describe-db-engine-versions --engine aurora --engine-version 5.6.mysql
  This example shows how if you enter a target version number that isn't a valid upgrade target for the cluster, Aurora won't perform the upgrade\. Aurora also won't perform a major version upgrade unless you include the `--allow-major-version-upgrade` parameter\. That way, you can't accidentally perform an upgrade that has the potential to require extensive testing and changes to your application code\. 
 
 ```
-$ aws rds modify-db-cluster --db-cluster-id cluster-56-2020-11-17-9355 --engine-version 5.7.mysql_aurora.2.04.9 --region us-east-1 --apply-immediately
+$ aws rds modify-db-cluster --db-cluster-id cluster-56-2020-11-17-9355 \
+  --engine-version 5.7.mysql_aurora.2.04.9 --region us-east-1 --apply-immediately
 An error occurred (InvalidParameterCombination) when calling the ModifyDBCluster operation: Cannot find upgrade target from 5.6.mysql_aurora.1.22.3 with requested version 5.7.mysql_aurora.2.04.9.
 
-$ aws rds modify-db-cluster --db-cluster-id cluster-56-2020-11-17-9355 --engine-version 5.7.mysql_aurora.2.09.0 --region us-east-1 --apply-immediately
+$ aws rds modify-db-cluster --db-cluster-id cluster-56-2020-11-17-9355 \
+  --engine-version 5.7.mysql_aurora.2.09.0 --region us-east-1 --apply-immediately
 An error occurred (InvalidParameterCombination) when calling the ModifyDBCluster operation: The AllowMajorVersionUpgrade flag must be present when upgrading to a new major version.
 
-$ aws rds modify-db-cluster --db-cluster-id cluster-56-2020-11-17-9355 --engine-version 5.7.mysql_aurora.2.09.0 --region us-east-1 --apply-immediately --allow-major-version-upgrade
+$ aws rds modify-db-cluster --db-cluster-id cluster-56-2020-11-17-9355 \
+  --engine-version 5.7.mysql_aurora.2.09.0 --region us-east-1 --apply-immediately --allow-major-version-upgrade
 {
   "DBClusterIdentifier": "cluster-56-2020-11-17-9355",
   "Status": "available",
@@ -327,10 +334,12 @@ $ aws rds modify-db-cluster --db-cluster-id cluster-56-2020-11-17-9355 --engine-
  It takes a few moments for the status of the cluster and associated DB instances to change to `upgrading`\. The version numbers for the cluster and DB instances only change when the upgrade is finished\. Again, you can use the `wait db-instance-available` command for the writer DB instance to wait until the upgrade is finished before proceeding\. 
 
 ```
-$ aws rds describe-db-clusters --db-cluster-id cluster-56-2020-11-17-9355 --query '*[].[Status,EngineVersion]' --output text
+$ aws rds describe-db-clusters --db-cluster-id cluster-56-2020-11-17-9355 \
+  --query '*[].[Status,EngineVersion]' --output text
 upgrading 5.6.mysql_aurora.1.22.3
 
-$ aws rds describe-db-instances --db-instance-id instance-2020-11-17-5158 --query '*[].{DBInstanceIdentifier:DBInstanceIdentifier,DBInstanceStatus:DBInstanceStatus} | [0]'
+$ aws rds describe-db-instances --db-instance-id instance-2020-11-17-5158 \
+  --query '*[].{DBInstanceIdentifier:DBInstanceIdentifier,DBInstanceStatus:DBInstanceStatus} | [0]'
 {
     "DBInstanceIdentifier": "instance-2020-11-17-5158",
     "DBInstanceStatus": "upgrading"
@@ -342,30 +351,32 @@ $ aws rds wait db-instance-available --db-instance-id instance-2020-11-17-5158
  At this point, the version number for the cluster matches the one that was specified for the upgrade\. 
 
 ```
-$ aws rds describe-db-clusters --region us-east-1 --db-cluster-id cluster-56-2020-11-17-9355 --query '*[].[EngineVersion]' --output text
+$ aws rds describe-db-clusters --region us-east-1 --db-cluster-id cluster-56-2020-11-17-9355 \
+  --query '*[].[EngineVersion]' --output text
 5.7.mysql_aurora.2.09.0
 ```
 
  The preceding example did an immediate upgrade by specifying the `--apply-immediately` parameter\. To let the upgrade happen at a convenient time when the cluster isn't expected to be busy, you can specify the `--no-apply-immediately` parameter\. Doing so makes the upgrade start during the next maintenance window for the cluster\. The maintenance window defines the period during which maintenance operations can start\. A long\-running operation might not finish during the maintenance window\. Thus, you don't need to define a larger maintenance window even if you expect that the upgrade might take a long time\. 
 
- The following example upgrades a cluster that's initially running Aurora MySQL version 1\.22\.2\. This version has more potential other versions that you can upgrade to\. However, in\-place upgrade is only available to `5.7.mysql_aurora.2.09.0`\. The other version numbers shown in this output are available for upgrades using the snapshot restore technique\. 
+ The following example upgrades a cluster that's initially running Aurora MySQL version 1\.22\.2\. In the `describe-db-engine-versions` output, the `False` and `True` values represent the `IsMajorVersionUpgrade` property\. From version 1\.22\.2, you can upgrade to some other 1\.\* versions\. Those upgrades aren't considered major version upgrades and so don't require an in\-place upgrade\. In\-place upgrade is only available for upgrades to the 2\.07 and 2\.09 versions that are shown in the list\. 
 
 ```
-$ aws rds describe-db-clusters --region us-east-1 --db-cluster-id cluster-56-2020-11-17-3824 --query '*[].{EngineVersion:EngineVersion}' --output text
+$ aws rds describe-db-clusters --region us-east-1 --db-cluster-id cluster-56-2020-11-17-3824 \
+  --query '*[].{EngineVersion:EngineVersion}' --output text
 5.6.mysql_aurora.1.22.2
-$ aws rds describe-db-engine-versions --engine aurora --engine-version 5.6.mysql_aurora.1.22.2 --query '*[].[ValidUpgradeTarget]|[0][0]|[*].[EngineVersion,IsMajorVersionUpgrade]' --output text
+$ aws rds describe-db-engine-versions --engine aurora --engine-version 5.6.mysql_aurora.1.22.2 \
+  --query '*[].[ValidUpgradeTarget]|[0][0]|[*].[EngineVersion,IsMajorVersionUpgrade]' --output text
 5.6.mysql_aurora.1.22.3 False
 5.6.mysql_aurora.1.23.0 False
-5.7.mysql_aurora.2.04.6 True
-5.7.mysql_aurora.2.04.7 True
-5.7.mysql_aurora.2.04.8.3       True
-5.7.mysql_aurora.2.04.9 True
-5.7.mysql_aurora.2.05.0 True
-...
-5.7.mysql_aurora.2.08.2 True
-5.7.mysql_aurora.2.09.0 True
+5.6.mysql_aurora.1.23.1 False
+5.7.mysql_aurora.2.07.1 True
+5.7.mysql_aurora.2.07.1 True
+5.7.mysql_aurora.2.07.2 True
+5.7.mysql_aurora.2.07.3 True
+5.7.mysql_aurora.2.09.1 True
 
-$ aws rds modify-db-cluster --db-cluster-id cluster-56-2020-11-17-9355 --engine-version 5.7.mysql_aurora.2.09.0 --region us-east-1 --no-apply-immediately --allow-major-version-upgrade
+$ aws rds modify-db-cluster --db-cluster-id cluster-56-2020-11-17-9355 \
+  --engine-version 5.7.mysql_aurora.2.09.0 --region us-east-1 --no-apply-immediately --allow-major-version-upgrade
 ...
 ```
 
@@ -389,7 +400,8 @@ $ aws rds describe-db-clusters --db-cluster-id cluster-56-2020-11-17-3824 --regi
 ```
 
 ```
-$ aws rds create-db-cluster --engine aurora --db-cluster-identifier cluster-56-2020-11-17-9355 --region us-east-1 --master-username reinvent --master-user-password reinvent
+$ aws rds create-db-cluster --engine aurora --db-cluster-identifier cluster-56-2020-11-17-9355 \
+  --region us-east-1 --master-username my_username --master-user-password my_password
 {
   "DBClusterIdentifier": "cluster-56-2020-11-17-9355",
   "DBClusterArn": "arn:aws:rds:us-east-1:123456789012:cluster:cluster-56-2020-11-17-9355",
@@ -400,7 +412,8 @@ $ aws rds create-db-cluster --engine aurora --db-cluster-identifier cluster-56-2
   "ReaderEndpoint": "cluster-56-2020-11-17-9355.cluster-ro-ccfbt21ixr91.us-east-1-integ.rds.amazonaws.com"
 }
 
-$ aws rds create-db-instance --db-instance-identifier instance-2020-11-17-5158 --db-cluster-identifier cluster-56-2020-11-17-9355 --db-instance-class db.r5.large --region us-east-1 --engine aurora
+$ aws rds create-db-instance --db-instance-identifier instance-2020-11-17-5158 \
+  --db-cluster-identifier cluster-56-2020-11-17-9355 --db-instance-class db.r5.large --region us-east-1 --engine aurora
 {
   "DBInstanceIdentifier": "instance-2020-11-17-5158",
   "DBClusterIdentifier": "cluster-56-2020-11-17-9355",

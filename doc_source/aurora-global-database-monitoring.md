@@ -6,7 +6,7 @@ When you create the Aurora DB clusters that make up your Aurora global database,
 + Amazon CloudWatch Logs – Publishes specified log types to CloudWatch Logs\. Error logs are published by default, but you can choose other logs specific to your Aurora database engine\.
   + For Aurora MySQL–based Aurora DB clusters, you can export the audit log, general log, and slow query log\.
   + For Aurora PostgreSQL–based Aurora DB clusters, you can export the Postgresql log\.
-+ For Aurora PostgreSQL–based global databases, you can use certain functions to check status of your Aurora global database and its instances\. To learn how, see [Monitoring Aurora PostgreSQL\-based Amazon Aurora global databases](#aurora-global-database-monitoring.postgres)\. 
++ For Aurora PostgreSQL–based global databases, you can use certain functions to check status of your Aurora global database and its instances\. To learn how, see [Monitoring Aurora PostgreSQL\-based Aurora global databases](#aurora-global-database-monitoring.postgres)\. 
 
 The following screenshot shows some of the options available on the Monitoring tab of a primary Aurora DB cluster in an Aurora global database\.
 
@@ -16,7 +16,7 @@ For more information, see [Monitoring an Amazon Aurora DB cluster](MonitoringAur
 
 ## Monitoring an Amazon Aurora global database with Amazon RDS Performance Insights<a name="aurora-global-database-pi"></a>
 
-You can use Amazon RDS Performance Insights for your Aurora global databases\. You enable this feature individually, for each Aurora DB cluster in your Aurora global database\. To do so, you choose **Enable Performance Insights** in the **Additional configuration** section of the Create database page\. Or, you can Modify your Aurora DB clusters to use this feature after they are up and running\. You can enable or turn off Performance Insights for each cluster that's part of your Aurora global database\. 
+You can use Amazon RDS Performance Insights for your Aurora global databases\. You enable this feature individually, for each Aurora DB cluster in your Aurora global database\. To do so, you choose **Enable Performance Insights** in the **Additional configuration** section of the Create database page\. Or you can modify your Aurora DB clusters to use this feature after they are up and running\. You can enable or turn off Performance Insights for each cluster that's part of your Aurora global database\. 
 
 The reports created by Performance Insights apply to each cluster in the global database\. When you add a new secondary AWS Region to an Aurora global database that's already using Performance Insights, be sure that you enable Performance Insights in the newly added cluster\. It doesn't inherit the Performance Insights setting from the existing global database\. 
 
@@ -26,7 +26,7 @@ For DB instances associated with a global database, the factors affecting perfor
 
 To learn more about using Performance Insights, see [Using Performance Insights on Amazon Aurora](USER_PerfInsights.md)\. 
 
-## Monitoring Aurora PostgreSQL\-based Amazon Aurora global databases<a name="aurora-global-database-monitoring.postgres"></a>
+## Monitoring Aurora PostgreSQL\-based Aurora global databases<a name="aurora-global-database-monitoring.postgres"></a>
 
 To view the status of a global database, use the `aurora_global_db_status` and `aurora_global_db_instance_status` functions\. 
 

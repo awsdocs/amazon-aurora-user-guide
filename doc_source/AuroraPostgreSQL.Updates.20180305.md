@@ -11,50 +11,50 @@ aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[].[Eng
 For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability.PostgreSQL)\.
 
 **Topics**
-+ [Version 4\.0, compatible with PostgreSQL 12\.4](#AuroraPostgreSQL.Updates.20180305.40)
-+ [Version 3\.4, compatible with PostgreSQL 11\.9](#AuroraPostgreSQL.Updates.20180305.34)
-+ [Version 3\.3, compatible with PostgreSQL 11\.8](#AuroraPostgreSQL.Updates.20180305.33)
-+ [Version 3\.2, compatible with PostgreSQL 11\.7](#AuroraPostgreSQL.Updates.20180305.32)
-+ [Version 3\.1, compatible with PostgreSQL 11\.6](#AuroraPostgreSQL.Updates.20180305.31)
-+ [Version 3\.0, compatible with PostgreSQL 11\.4 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.30)
-+ [Version 2\.7, compatible with PostgreSQL 10\.14](#AuroraPostgreSQL.Updates.20180305.27)
-+ [Version 2\.6, compatible with PostgreSQL 10\.13](#AuroraPostgreSQL.Updates.20180305.26)
-+ [Version 2\.5, compatible with PostgreSQL 10\.12](#AuroraPostgreSQL.Updates.20180305.25)
-+ [Version 2\.4, compatible with PostgreSQL 10\.11](#AuroraPostgreSQL.Updates.20180305.24)
-+ [Version 2\.3, compatible with PostgreSQL 10\.7 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.23)
-+ [Version 2\.2, compatible with PostgreSQL 10\.6 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.22)
-+ [Version 2\.1, compatible with PostgreSQL 10\.5 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.21)
-+ [Version 2\.0, compatible with PostgreSQL 10\.4 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.20)
-+ [Version 1\.9, compatible with PostgreSQL 9\.6\.19](#AuroraPostgreSQL.Updates.20180305.19)
-+ [Version 1\.8, compatible with PostgreSQL 9\.6\.18](#AuroraPostgreSQL.Updates.20180305.18)
-+ [Version 1\.7, compatible with PostgreSQL 9\.6\.17](#AuroraPostgreSQL.Updates.20180305.17)
-+ [Version 1\.6, compatible with PostgreSQL 9\.6\.16](#AuroraPostgreSQL.Updates.20180305.16)
-+ [Version 1\.5, compatible with PostgreSQL 9\.6\.12 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.15)
-+ [Version 1\.4, compatible with PostgreSQL 9\.6\.11 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.14)
-+ [Version 1\.3, compatible with PostgreSQL 9\.6\.9 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.13)
-+ [Version 1\.2, compatible with PostgreSQL 9\.6\.8 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.12)
-+ [Version 1\.1, compatible with PostgreSQL 9\.6\.6 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.11)
-+ [Version 1\.0, compatible with PostgreSQL 9\.6\.3 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.10)
++ [PostgreSQL engine 12\.4, Aurora PostgreSQL release 4\.0](#AuroraPostgreSQL.Updates.20180305.40)
++ [PostgreSQL engine 11\.9, Aurora PostgreSQL release 3\.4](#AuroraPostgreSQL.Updates.20180305.34)
++ [PostgreSQL engine 11\.8, Aurora PostgreSQL release 3\.3](#AuroraPostgreSQL.Updates.20180305.33)
++ [PostgreSQL engine 11\.7, Aurora PostgreSQL release 3\.2](#AuroraPostgreSQL.Updates.20180305.32)
++ [PostgreSQL engine 11\.6, Aurora PostgreSQL release 3\.1](#AuroraPostgreSQL.Updates.20180305.31)
++ [PostgreSQL engine 11\.4, Aurora PostgreSQL release 3\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.30)
++ [PostgreSQL engine 10\.14, Aurora PostgreSQL release 2\.7](#AuroraPostgreSQL.Updates.20180305.27)
++ [PostgreSQL engine 10\.13, Aurora PostgreSQL release 2\.6](#AuroraPostgreSQL.Updates.20180305.26)
++ [PostgreSQL engine 10\.12, Aurora PostgreSQL release 2\.5](#AuroraPostgreSQL.Updates.20180305.25)
++ [PostgreSQL engine 10\.11, Aurora PostgreSQL release 2\.4](#AuroraPostgreSQL.Updates.20180305.24)
++ [PostgreSQL engine 10\.7, Aurora PostgreSQL release 2\.3 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.23)
++ [PostgreSQL engine 10\.6, Aurora PostgreSQL release 2\.2 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.22)
++ [PostgreSQL engine 10\.5, Aurora PostgreSQL release 2\.1 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.21)
++ [PostgreSQL engine 10\.4, Aurora PostgreSQL release 2\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.20)
++ [PostgreSQL engine 9\.6\.19, Aurora PostgreSQL release 1\.9](#AuroraPostgreSQL.Updates.20180305.19)
++ [PostgreSQL engine 9\.6\.18, Aurora PostgreSQL release 1\.8](#AuroraPostgreSQL.Updates.20180305.18)
++ [PostgreSQL engine 9\.6\.17, Aurora PostgreSQL release 1\.7](#AuroraPostgreSQL.Updates.20180305.17)
++ [PostgreSQL engine 9\.6\.16, Aurora PostgreSQL release 1\.6](#AuroraPostgreSQL.Updates.20180305.16)
++ [PostgreSQL engine 9\.6\.12, Aurora PostgreSQL release 1\.5 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.15)
++ [PostgreSQL engine 9\.6\.11, Aurora PostgreSQL release 1\.4 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.14)
++ [PostgreSQL engine 9\.6\.9, Aurora PostgreSQL release 1\.3 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.13)
++ [PostgreSQL engine 9\.6\.8, Aurora PostgreSQL release 1\.2 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.12)
++ [PostgreSQL engine 9\.6\.6 Aurora PostgreSQL release 1\.1 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.11)
++ [PostgreSQL engine 9\.6\.3, Aurora PostgreSQL release 1\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.10)
 
 For information on extensions and modules, see [Extensions and modules for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)\.
 
 The following Aurora PostgreSQL versions are supported\. 
 
-## Version 4\.0, compatible with PostgreSQL 12\.4<a name="AuroraPostgreSQL.Updates.20180305.40"></a>
+## PostgreSQL engine 12\.4, Aurora PostgreSQL release 4\.0<a name="AuroraPostgreSQL.Updates.20180305.40"></a>
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 12\.4\. For more information about the improvements in release 12\.4, see [PostgreSQL release 12\.4](https://www.postgresql.org/docs/12/release-12-4.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.4\. For more information about the improvements in PostgreSQL 12\.4, see [PostgreSQL release 12\.4](https://www.postgresql.org/docs/12/release-12-4.html)\.
 
-### Version 4\.0\.0<a name="AuroraPostgreSQL.Updates.20180305.400"></a>
+### Aurora PostgreSQL release 4\.0\.0<a name="AuroraPostgreSQL.Updates.20180305.400"></a>
 
 **New features**
 
-1. This version supports a major version upgrade from [Version 3\.2, compatible with PostgreSQL 11\.7](#AuroraPostgreSQL.Updates.20180305.32) and later versions\.
+1. This version supports a major version upgrade from [PostgreSQL engine 11\.7, Aurora PostgreSQL release 3\.2 ](#AuroraPostgreSQL.Updates.20180305.32) and later versions\.
 
 **Improvements and enhancements**
 
 1. Contains several improvements that were announced for PostgreSQL releases [12\.0](https://www.postgresql.org/docs/12/release-12.html), [12\.1](https://www.postgresql.org/docs/12/release-12-1.html), [12\.2](https://www.postgresql.org/docs/12/release-12-2.html), [12\.3](https://www.postgresql.org/docs/12/release-12-3.html), and [12\.4](https://www.postgresql.org/docs/12/release-12-4.html)\.
 
-1. Contains all fixes, features, and improvements present in [Version 3\.4, compatible with PostgreSQL 11\.9](#AuroraPostgreSQL.Updates.20180305.34)\.
+1. Contains all fixes, features, and improvements present in [PostgreSQL engine 11\.9, Aurora PostgreSQL release 3\.4 ](#AuroraPostgreSQL.Updates.20180305.34)\.
 
 1. Backported fixes for the following PostgreSQL community security issues:
    + [CVE\-2020\-25694](https://nvd.nist.gov/vuln/detail/CVE-2020-25694)
@@ -79,11 +79,11 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 12\.4\. For more
    + `postgis_tiger_geocoder` to version 3\.0\.2 
    + `postgis_topology` to version 3\.0\.2
 
-## Version 3\.4, compatible with PostgreSQL 11\.9<a name="AuroraPostgreSQL.Updates.20180305.34"></a>
+## PostgreSQL engine 11\.9, Aurora PostgreSQL release 3\.4<a name="AuroraPostgreSQL.Updates.20180305.34"></a>
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more information about the improvements in release 11\.9, see [PostgreSQL release 11\.9](https://www.postgresql.org/docs/11/release-11-9.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more information about the improvements in PostgreSQL 11\.9, see [PostgreSQL release 11\.9](https://www.postgresql.org/docs/11/release-11-9.html)\.
 
-### Version 3\.4\.0<a name="AuroraPostgreSQL.Updates.20180305.340"></a>
+### Aurora PostgreSQL release 3\.4\.0<a name="AuroraPostgreSQL.Updates.20180305.340"></a>
 
 **New features**
 
@@ -96,13 +96,16 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more
 
 **High priority stability enhancements**
 
-1. Backported a fix for the PostgreSQL community security issues CVE\-2020\-25694, CVE\-2020\-25695, and CVE\-2020\-25696\.
+1. Fixed a bug in Aurora PostgreSQL replication that could result in the error message ERROR: MultiXactId nnnn has not been created yet \-\- apparent wraparound\.
 
-1. Fixed a bug in Aurora PostgreSQL replication that might result in the following error message: ERROR: MultiXactId nnnn has not been created yet \-\- apparent wraparound
+1. Fixed a bug where in some cases, DB clusters that have logical replication enabled did not remove truncated WAL segment files from storage\. This resulted in volume size growth\.
 
-1. Fixed a bug where in some cases, clusters with logical replication enabled might not remove truncated WAL segment files from storage\. This could result in volume size growth\.
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2020\-25694](https://nvd.nist.gov/vuln/detail/CVE-2020-25694)
+   + [CVE\-2020\-25695](https://nvd.nist.gov/vuln/detail/CVE-2020-25695)
+   + [CVE\-2020\-25696](https://nvd.nist.gov/vuln/detail/CVE-2020-25696)
 
-1. Fixed a bug that caused excessive CPU consumption in the `pg_stat_statements` extension\.
+1. Fixed a bug in the `pg_stat_statements` extension that caused excessive CPU consumption\.
 
 **Additional improvements and enhancements**
 
@@ -110,9 +113,9 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more
 
 1. Improved the asynchronous mode performance of database activity streams\.
 
-1. Reduced the delay of the `rpo_lag_in_msec` metric when publishing to CloudWatch in Aurora global database clusters\.
+1. Reduced the delay when publishing to CloudWatch the `rpo_lag_in_msec` metric for Aurora global database clusters\.
 
-1. Aurora PostgreSQL now avoids falling behind on a read node that occurred when the backend blocked writing to the database client\.
+1. Aurora PostgreSQL no longer falls behind on a read node when the backend is blocked writing to the database client\.
 
 1. Fixed a bug that in rare cases caused a brief period of unavailability on a read replica when the storage volume grew\.
 
@@ -122,13 +125,13 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more
 
 1. Fixed a bug where in some cases replaying `XLOG_BTREE_REUSE_PAGE` records on Aurora reader instances caused unnecessary replay lag\.
 
-1. Fixed a small memory leak in the b\-tree index that could lead to an out of memory condition\.
+1. Fixed a small memory leak in a b\-tree index that could lead to an out of memory condition\.
 
 1. Fixed a bug in the `GiST` index that could result in an out of memory condition after promoting an Aurora read replica\.
 
-1. Fixed an S3 export bug that reported the error ERROR: HTTP 403\. Permission denied when importing data from a file inside an S3 subfolder\.
+1. Fixed an S3 import bug that reported ERROR: HTTP 403\. Permission denied when importing data from a file inside an S3 subfolder\.
 
-1. Fixed a bug in the `aws_s3` extension for pre\-signed URL handling that might result in the error message S3 bucket names with a period \(\.\) are not supported\.
+1. Fixed a bug in the `aws_s3` extension for pre\-signed URL handling that could result in the error message S3 bucket names with a period \(\.\) are not supported\.
 
 1. Fixed a bug in the `aws_s3` extension where an import might be blocked indefinitely if an exclusive lock was taken on the relation prior to beginning the operation\.
 
@@ -138,17 +141,69 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more
 
 1. Updated the `pg_audit` extension to version 1\.3\.1\.
 
-## Version 3\.3, compatible with PostgreSQL 11\.8<a name="AuroraPostgreSQL.Updates.20180305.33"></a>
+## PostgreSQL engine 11\.8, Aurora PostgreSQL release 3\.3<a name="AuroraPostgreSQL.Updates.20180305.33"></a>
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.8\. For more information about the improvements in release 11\.8, see [PostgreSQL release 11\.8](https://www.postgresql.org/docs/11/release-11-8.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.8\. For more information about the improvements in PostgreSQL 11\.8, see [PostgreSQL release 11\.8](https://www.postgresql.org/docs/11/release-11-8.html)\.
 
 **Topics**
-+ [Version 3\.3\.1](#AuroraPostgreSQL.Updates.20180305.331)
-+ [Version 3\.3\.0](#AuroraPostgreSQL.Updates.20180305.330)
++ [Aurora PostgreSQL release 3\.3\.2](#AuroraPostgreSQL.Updates.20180305.332)
++ [Aurora PostgreSQL release 3\.3\.1](#AuroraPostgreSQL.Updates.20180305.331)
++ [Aurora PostgreSQL release 3\.3\.0](#AuroraPostgreSQL.Updates.20180305.330)
 
-### Version 3\.3\.1<a name="AuroraPostgreSQL.Updates.20180305.331"></a>
+### Aurora PostgreSQL release 3\.3\.2<a name="AuroraPostgreSQL.Updates.20180305.332"></a>
 
-You can find the following improvements in this engine update\.
+**Critical stability enhancements**
+
+1. None
+
+**High priority stability enhancements**
+
+1. Fixed a bug in Aurora PostgreSQL replication that could result in the error message ERROR: MultiXactId nnnn has not been created yet \-\- apparent wraparound\.
+
+1. Fixed a bug where in some cases, DB clusters that have logical replication enabled did not remove truncated WAL segment files from storage\. This resulted in volume size growth\.
+
+1. Fixed an issue with creating a global database cluster in a secondary region\.
+
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2020\-25694](https://nvd.nist.gov/vuln/detail/CVE-2020-25694)
+   + [CVE\-2020\-25695](https://nvd.nist.gov/vuln/detail/CVE-2020-25695)
+   + [CVE\-2020\-25696](https://nvd.nist.gov/vuln/detail/CVE-2020-25696)
+
+1. Fixed a bug in the `pg_stat_statements` extension that caused excessive CPU consumption\.
+
+**Additional improvements and enhancements**
+
+1. Aurora PostgreSQL no longer falls behind on a read node when the backend is blocked writing to the database client\.
+
+1. Reduced the delay when publishing to CloudWatch the `rpo_lag_in_msec` metric for Aurora global database clusters\.
+
+1. Fixed a bug where a `DROP DATABASE` statement didn't remove any relation files\.
+
+1. Fixed a bug where in some cases replaying `XLOG_BTREE_REUSE_PAGE` records on Aurora reader instances caused unnecessary replay lag\.
+
+1. Fixed a small memory leak in a b\-tree index that could lead to an out of memory condition\.
+
+1. Fixed a bug in the `aurora_replica_status()` function where the `server_id` field was sometimes truncated\.
+
+1. Fixed a bug where a log record was incorrectly processed causing the Aurora replica to crash\.
+
+1. Fixed an S3 import bug that reported ERROR: HTTP 403\. Permission denied when importing data from a file inside an S3 subfolder\.
+
+1. You can now use `ps_replication_slot_advance` to advance a logical replication slot for the roles `rds_replication` and `rds_superuser`\.
+
+1. Improved performance of the asynchronous mode for database activity streams\.
+
+1. Fixed a bug in the `aws_s3` extension that could result in the error message S3 bucket names with a period \(\.\) are not supported\.
+
+1. Fixed a race condition that caused valid imports to intermittently fail\.
+
+1. Fixed a bug related to replication when Aurora PostgreSQL is acting as a physical replica of an RDS PostgreSQL instance that uses GiST indexes\. In rare cases, this bug caused a brief period of unavailability after promoting the Aurora DB cluster\.
+
+1. Fixed a bug in the `aws_s3` extension where an import may be blocked indefinitely if an exclusive lock was taken on the relation prior to beginning the operation\.
+
+### Aurora PostgreSQL release 3\.3\.1<a name="AuroraPostgreSQL.Updates.20180305.331"></a>
+
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 
@@ -159,7 +214,7 @@ You can find the following improvements in this engine update\.
    + The filter used in the subquery does not use an index seek for its execution\.
    + The operator is not converted to a join by the query optimizer\.
 
-### Version 3\.3\.0<a name="AuroraPostgreSQL.Updates.20180305.330"></a>
+### Aurora PostgreSQL release 3\.3\.0<a name="AuroraPostgreSQL.Updates.20180305.330"></a>
 
 **New features**
 
@@ -211,20 +266,20 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug with the[aws\_s3\.table\_import\_from\_s3](AuroraPostgreSQL.Migrating.md#aws_s3.table_import_from_s3) function where a `COPY` from S3 failed with the error HTTP error code: 248\.
 
-## Version 3\.2, compatible with PostgreSQL 11\.7<a name="AuroraPostgreSQL.Updates.20180305.32"></a>
+## PostgreSQL engine 11\.7, Aurora PostgreSQL release 3\.2<a name="AuroraPostgreSQL.Updates.20180305.32"></a>
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.7\. For more information about the improvements in release 11\.7, see [PostgreSQL release 11\.7](https://www.postgresql.org/docs/11/release-11-7.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.7\. For more information about the improvements in PostgreSQL 11\.7, see [PostgreSQL release 11\.7](https://www.postgresql.org/docs/11/release-11-7.html)\.
 
 **Topics**
-+ [Version 3\.2\.6](#AuroraPostgreSQL.Updates.20180305.326)
-+ [Version 3\.2\.4](#AuroraPostgreSQL.Updates.20180305.324)
-+ [Version 3\.2\.3](#AuroraPostgreSQL.Updates.20180305.323)
-+ [Version 3\.2\.2](#AuroraPostgreSQL.Updates.20180305.322)
-+ [Version 3\.2\.1](#AuroraPostgreSQL.Updates.20180305.321)
++ [Aurora PostgreSQL release 3\.2\.6](#AuroraPostgreSQL.Updates.20180305.326)
++ [Aurora PostgreSQL release 3\.2\.4](#AuroraPostgreSQL.Updates.20180305.324)
++ [Aurora PostgreSQL release 3\.2\.3](#AuroraPostgreSQL.Updates.20180305.323)
++ [Aurora PostgreSQL release 3\.2\.2](#AuroraPostgreSQL.Updates.20180305.322)
++ [Aurora PostgreSQL release 3\.2\.1](#AuroraPostgreSQL.Updates.20180305.321)
 
-### Version 3\.2\.6<a name="AuroraPostgreSQL.Updates.20180305.326"></a>
+### Aurora PostgreSQL release 3\.2\.6<a name="AuroraPostgreSQL.Updates.20180305.326"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 + None
@@ -253,15 +308,15 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug in Database Activity Streams where customers were not notified when an outage ended\.
 
-1. Fixed a bug in the `aws_s3` extension for pre\-signed URL handling that might have resulted in the error message S3 bucket names with a period \(\.\) are not supported\.
+1. Fixed a bug in the `aws_s3` extension for pre\-signed URL handling that could have resulted in the error message S3 bucket names with a period \(\.\) are not supported\.
 
 1. Fixed a bug in the `aws_s3` extension where incorrect error handling could lead to failures during the import process\.
 
 1. Fixed a bug in the `aws_s3` extension where an import may be blocked indefinitely if an exclusive lock was taken on the relation prior to beginning the operation\.
 
-### Version 3\.2\.4<a name="AuroraPostgreSQL.Updates.20180305.324"></a>
+### Aurora PostgreSQL release 3\.2\.4<a name="AuroraPostgreSQL.Updates.20180305.324"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 
@@ -272,9 +327,9 @@ You can find the following improvements in this engine update\.
    + The filter used in the subquery does not use an index seek for its execution\.
    + The operator is not converted to a join by the query optimizer\.
 
-### Version 3\.2\.3<a name="AuroraPostgreSQL.Updates.20180305.323"></a>
+### Aurora PostgreSQL release 3\.2\.3<a name="AuroraPostgreSQL.Updates.20180305.323"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 + None
@@ -288,9 +343,9 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug that might cause brief unavailability for heavy subtransaction workloads when multiple reader instances restart or rejoin the cluster\.
 
-### Version 3\.2\.2<a name="AuroraPostgreSQL.Updates.20180305.322"></a>
+### Aurora PostgreSQL release 3\.2\.2<a name="AuroraPostgreSQL.Updates.20180305.322"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 
@@ -310,15 +365,15 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug where an Aurora PostgreSQL Serverless DB cluster might return the following error after a scaling event: ERROR: prepared statement "S\_6" already exists\.
 
-### Version 3\.2\.1<a name="AuroraPostgreSQL.Updates.20180305.321"></a>
+### Aurora PostgreSQL release 3\.2\.1<a name="AuroraPostgreSQL.Updates.20180305.321"></a>
 
 **New features**
 
 1. Added support for Amazon Aurora PostgreSQL Global Database\. For more information, see [Using Amazon Aurora global databases](aurora-global-database.md)\.
 
-1. Added the ability to configure the recovery point objective \(RPO\) of a global database for Aurora PostgreSQL\. For more information, see [Managing recovery for Aurora global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
+1. Added the ability to configure the recovery point objective \(RPO\) of a global database for Aurora PostgreSQL\. For more information, see [Managing RPOs for Aurora PostgreSQL–based global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**  
 None\.
@@ -371,19 +426,19 @@ None\.
 
 1. Provided support for fault injection queries\.
 
-## Version 3\.1, compatible with PostgreSQL 11\.6<a name="AuroraPostgreSQL.Updates.20180305.31"></a>
+## PostgreSQL engine 11\.6, Aurora PostgreSQL release 3\.1<a name="AuroraPostgreSQL.Updates.20180305.31"></a>
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.6\. For more information about the improvements in release 11\.6, see [PostgreSQL release 11\.6](https://www.postgresql.org/docs/11/release-11-6.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.6\. For more information about the improvements in PostgreSQL 11\.6, see [PostgreSQL release 11\.6](https://www.postgresql.org/docs/11/release-11-6.html)\.
 
 This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 11 engines to this release\.
 
 **Topics**
-+ [Version 3\.1\.3](#AuroraPostgreSQL.Updates.20180305.313)
-+ [Version 3\.1\.2](#AuroraPostgreSQL.Updates.20180305.312)
-+ [Version 3\.1\.1](#AuroraPostgreSQL.Updates.20180305.311)
-+ [Version 3\.1\.0](#AuroraPostgreSQL.Updates.20180305.310)
++ [Aurora PostgreSQL release 3\.1\.3](#AuroraPostgreSQL.Updates.20180305.313)
++ [Aurora PostgreSQL release 3\.1\.2](#AuroraPostgreSQL.Updates.20180305.312)
++ [Aurora PostgreSQL release 3\.1\.1](#AuroraPostgreSQL.Updates.20180305.311)
++ [Aurora PostgreSQL release 3\.1\.0](#AuroraPostgreSQL.Updates.20180305.310)
 
-### Version 3\.1\.3<a name="AuroraPostgreSQL.Updates.20180305.313"></a>
+### Aurora PostgreSQL release 3\.1\.3<a name="AuroraPostgreSQL.Updates.20180305.313"></a>
 
 **New features**
 
@@ -399,7 +454,7 @@ This release contains multiple critical stability enhancements\. Amazon highly r
 **Additional improvements and enhancements**
 + None
 
-### Version 3\.1\.2<a name="AuroraPostgreSQL.Updates.20180305.312"></a>
+### Aurora PostgreSQL release 3\.1\.2<a name="AuroraPostgreSQL.Updates.20180305.312"></a>
 
 This release contains a critical stability enhancement\. Amazon highly recommends updating your older Aurora PostgreSQL 11\-compatible clusters to this release\.
 
@@ -412,9 +467,9 @@ This release contains a critical stability enhancement\. Amazon highly recommend
 **Additional improvements and enhancements**
 + Fixed a bug that prevented Performance Insights from determining the query ID of a running statement\.
 
-### Version 3\.1\.1<a name="AuroraPostgreSQL.Updates.20180305.311"></a>
+### Aurora PostgreSQL release 3\.1\.1<a name="AuroraPostgreSQL.Updates.20180305.311"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 
@@ -438,7 +493,7 @@ You can find the following improvements in this engine update\.
 
 1. Improved the performance of in\-memory B\-Tree index scans\.
 
-### Version 3\.1\.0<a name="AuroraPostgreSQL.Updates.20180305.310"></a>
+### Aurora PostgreSQL release 3\.1\.0<a name="AuroraPostgreSQL.Updates.20180305.310"></a>
 
 You can find the following new features and improvements in this engine version\.
 
@@ -518,18 +573,18 @@ You can find the following new features and improvements in this engine version\
    + Added `plprofiler` version 4\.1\.
    + Added `pgTAP` version 1\.0\.0\.
 
-## Version 3\.0, compatible with PostgreSQL 11\.4 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.30"></a>
+## PostgreSQL engine 11\.4, Aurora PostgreSQL release 3\.0 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.30"></a>
 
 **Note**  
 The PostgreSQL engine version 11\.4 with the Aurora PostgreSQL release 3\.0 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 11\.4\. For more information about the improvements in release 11\.4, see [PostgreSQL release 11\.4](https://www.postgresql.org/docs/11/release-11-4.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.4\. For more information about the improvements in PostgreSQL 11\.4, see [PostgreSQL release 11\.4](https://www.postgresql.org/docs/11/release-11-4.html)\.
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Improvements**
 
-1. This release contains all fixes, features, and improvements present in [Version 2\.3\.5](#AuroraPostgreSQL.Updates.20180305.235)\.
+1. This release contains all fixes, features, and improvements present in [Aurora PostgreSQL release 2\.3\.5](#AuroraPostgreSQL.Updates.20180305.235)\.
 
 1. Partitioning – Partitioning improvements include support for hash partitioning, enabling creation of a default partition, and dynamic row movement to another partition based on the key column update\.
 
@@ -570,24 +625,27 @@ You can find the following improvements in this engine update\.
    +  `postgis_topology` to version 2\.5\.1
    +  `rds_activity_stream` to version 1\.3
 
-## Version 2\.7, compatible with PostgreSQL 10\.14<a name="AuroraPostgreSQL.Updates.20180305.27"></a>
+## PostgreSQL engine 10\.14, Aurora PostgreSQL release 2\.7<a name="AuroraPostgreSQL.Updates.20180305.27"></a>
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.14\. For more information about the improvements in release 10\.14, see [ PostgreSQL release 10\.14](https://www.postgresql.org/docs/10/release-10-14.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.14\. For more information about the improvements in PostgreSQL 10\.14, see [ PostgreSQL release 10\.14](https://www.postgresql.org/docs/10/release-10-14.html)\.
 
-### Version 2\.7\.0<a name="AuroraPostgreSQL.Updates.20180305.270"></a>
+### Aurora PostgreSQL release 2\.7\.0<a name="AuroraPostgreSQL.Updates.20180305.270"></a>
 
 **Critical stability enhancements**
 + None
 
 **High priority stability enhancements**
 
-1. Backported a fix for the PostgreSQL community security issues CVE\-2020\-25694, CVE\-2020\-25695, and CVE\-2020\-25696\.
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2020\-25694](https://nvd.nist.gov/vuln/detail/CVE-2020-25694)
+   + [CVE\-2020\-25695](https://nvd.nist.gov/vuln/detail/CVE-2020-25695)
+   + [CVE\-2020\-25696](https://nvd.nist.gov/vuln/detail/CVE-2020-25696)
 
-1. Fixed a bug in Aurora PostgreSQL replication that might result in the following error message: ERROR: MultiXactId nnnn has not been created yet \-\- apparent wraparound
+1. Fixed a bug in Aurora PostgreSQL replication that could result in the error message ERROR: MultiXactId nnnn has not been created yet \-\- apparent wraparound\.
 
-1. Fixed a bug where in some cases, clusters with logical replication enabled might not remove truncated WAL segment files from storage\. This could result in volume size growth\.
+1. Fixed a bug where in some cases, DB clusters that have logical replication enabled did not remove truncated WAL segment files from storage\. This resulted in volume size growth\.
 
-1. Fixed a bug that caused excessive CPU consumption in the `pg_stat_statements` extension\.
+1. Fixed a bug in the `pg_stat_statements` extension that caused excessive CPU consumption\.
 
 **Additional improvements and enhancements**
 
@@ -595,7 +653,7 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.14\. For mor
 
 1. Aurora Serverless v1 for PostgreSQL now supports query execution on all connections during a scale event\.
 
-1. Reduced the delay of the `rpo_lag_in_msec` metric when publishing to CloudWatch for Aurora global database clusters\.
+1. Reduced the delay when publishing to CloudWatch the `rpo_lag_in_msec` metric for Aurora global database clusters\.
 
 1. Fixed a bug in Serverless clusters where transaction processing was unnecessarily suspended for long periods when creating a scale point\.
 
@@ -603,7 +661,7 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.14\. For mor
 
 1. Fixed a bug in Aurora Serverless v1 for PostgreSQL where connections being migrated during a scale event would be disconnected with the following message: ERROR: could not open relation with OID \.\.\.
 
-1. Aurora PostgreSQL now avoids falling behind on a read node that occurred when the backend blocked writing to the database client\.
+1. Aurora PostgreSQL no longer falls behind on a read node when the backend is blocked writing to the database client\.
 
 1. Fixed a bug that in rare cases caused a brief period of unavailability on a read replica when the storage volume grew\.
 
@@ -615,9 +673,9 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.14\. For mor
 
 1. Fixed a bug where the `aurora_replica_status` function showed truncated server identifiers\.
 
-1. Fixed an S3 export bug that reported the error ERROR: HTTP 403\. Permission denied when importing data from a file inside an S3 subfolder\.
+1. Fixed an S3 import bug that reported ERROR: HTTP 403\. Permission denied when importing data from a file inside an S3 subfolder\.
 
-1. Fixed a bug in the `aws_s3` extension for pre\-signed URL handling that might result in the error message S3 bucket names with a period \(\.\) are not supported\.
+1. Fixed a bug in the `aws_s3` extension for pre\-signed URL handling that could result in the error message S3 bucket names with a period \(\.\) are not supported\.
 
 1. Fixed a bug in the `aws_s3` extension where an import might be blocked indefinitely if an exclusive lock was taken on the relation prior to beginning the operation\.
 
@@ -625,17 +683,67 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.14\. For mor
 
 1. Fixed a bug in database activity streams where customers were not notified of the end of an outage\.
 
-## Version 2\.6, compatible with PostgreSQL 10\.13<a name="AuroraPostgreSQL.Updates.20180305.26"></a>
+## PostgreSQL engine 10\.13, Aurora PostgreSQL release 2\.6<a name="AuroraPostgreSQL.Updates.20180305.26"></a>
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.13\. For more information about the improvements in release 10\.13, see [ PostgreSQL release 10\.13](https://www.postgresql.org/docs/10/release-10-13.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.13\. For more information about the improvements in PostgreSQL 10\.13, see [ PostgreSQL release 10\.13](https://www.postgresql.org/docs/10/release-10-13.html)\.
 
 **Topics**
-+ [Version 2\.6\.1](#AuroraPostgreSQL.Updates.20180305.261)
-+ [Version 2\.6\.0](#AuroraPostgreSQL.Updates.20180305.260)
++ [Aurora PostgreSQL release 2\.6\.2](#AuroraPostgreSQL.Updates.20180305.262)
++ [Aurora PostgreSQL release 2\.6\.1](#AuroraPostgreSQL.Updates.20180305.261)
++ [Aurora PostgreSQL release 2\.6\.0](#AuroraPostgreSQL.Updates.20180305.260)
 
-### Version 2\.6\.1<a name="AuroraPostgreSQL.Updates.20180305.261"></a>
+### Aurora PostgreSQL release 2\.6\.2<a name="AuroraPostgreSQL.Updates.20180305.262"></a>
 
-You can find the following improvements in this engine update\.
+**Critical stability enhancements**
+
+1. None
+
+**High priority stability enhancements**
+
+1. Fixed a bug in Aurora PostgreSQL replication that could result in the error message ERROR: MultiXactId nnnn has not been created yet \-\- apparent wraparound\.
+
+1. Fixed a bug where in some cases, DB clusters that have logical replication enabled did not remove truncated WAL segment files from storage\. This resulted in volume size growth\.
+
+1. Fixed an issue with creating a global database cluster in a secondary region\.
+
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2020\-25694](https://nvd.nist.gov/vuln/detail/CVE-2020-25694)
+   + [CVE\-2020\-25695](https://nvd.nist.gov/vuln/detail/CVE-2020-25695)
+   + [CVE\-2020\-25696](https://nvd.nist.gov/vuln/detail/CVE-2020-25696)
+
+1. Fixed a bug in the `pg_stat_statements` extension that caused excessive CPU consumption\.
+
+**Additional improvements and enhancements**
+
+1. Aurora PostgreSQL no longer falls behind on a read node when the backend is blocked writing to the database client\.
+
+1. Reduced the delay when publishing to CloudWatch the `rpo_lag_in_msec` metric for Aurora global database clusters\.
+
+1. Fixed a bug where a `DROP DATABASE` statement didn't remove any relation files\.
+
+1. Fixed a bug where in some cases replaying `XLOG_BTREE_REUSE_PAGE` records on Aurora reader instances caused unnecessary replay lag\.
+
+1. Fixed a small memory leak in a b\-tree index that could lead to an out of memory condition\.
+
+1. Fixed a bug in the `aurora_replica_status()` function where the `server_id` field was sometimes truncated\.
+
+1. Fixed a bug where a log record was incorrectly processed causing the Aurora replica to crash\.
+
+1. Fixed an S3 import bug that reported ERROR: HTTP 403\. Permission denied when importing data from a file inside an S3 subfolder\.
+
+1. Improved performance of the asynchronous mode for database activity streams\.
+
+1. Fixed a bug in the `aws_s3` extension that could result in the error message S3 bucket names with a period \(\.\) are not supported\.
+
+1. Fixed a race condition that caused valid imports to intermittently fail\.
+
+1. Fixed a bug related to replication when Aurora PostgreSQL is acting as a physical replica of an RDS PostgreSQL instance that uses GiST indexes\. In rare cases, this bug caused a brief period of unavailability after promoting the Aurora DB cluster\.
+
+1. Fixed a bug in the `aws_s3` extension where an import may be blocked indefinitely if an exclusive lock was taken on the relation prior to beginning the operation\.
+
+### Aurora PostgreSQL release 2\.6\.1<a name="AuroraPostgreSQL.Updates.20180305.261"></a>
+
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 
@@ -646,9 +754,9 @@ You can find the following improvements in this engine update\.
    + The filter used in the subquery does not use an index seek for its execution\.
    + The operator is not converted to a join by the query optimizer\.
 
-### Version 2\.6\.0<a name="AuroraPostgreSQL.Updates.20180305.260"></a>
+### Aurora PostgreSQL release 2\.6\.0<a name="AuroraPostgreSQL.Updates.20180305.260"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 
 
@@ -698,20 +806,20 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug where an Aurora PostgreSQL DB cluster with Database Activity Streams enabled might report the beginning of a potential loss window for activity records, but does not report the restoration of connectivity\.
 
-## Version 2\.5, compatible with PostgreSQL 10\.12<a name="AuroraPostgreSQL.Updates.20180305.25"></a>
+## PostgreSQL engine 10\.12, Aurora PostgreSQL release 2\.5<a name="AuroraPostgreSQL.Updates.20180305.25"></a>
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.12\. For more information about the improvements in release 10\.12, see [ PostgreSQL release 10\.12](https://www.postgresql.org/docs/10/release-10-12.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.12\. For more information about the improvements in PostgreSQL 10\.12, see [ PostgreSQL release 10\.12](https://www.postgresql.org/docs/10/release-10-12.html)\.
 
 **Topics**
-+ [Version 2\.5\.6](#AuroraPostgreSQL.Updates.20180305.256)
-+ [Version 2\.5\.4](#AuroraPostgreSQL.Updates.20180305.254)
-+ [Version 2\.5\.3](#AuroraPostgreSQL.Updates.20180305.253)
-+ [Version 2\.5\.2](#AuroraPostgreSQL.Updates.20180305.252)
-+ [Version 2\.5\.1](#AuroraPostgreSQL.Updates.20180305.251)
++ [Aurora PostgreSQL release 2\.5\.6](#AuroraPostgreSQL.Updates.20180305.256)
++ [Aurora PostgreSQL release 2\.5\.4](#AuroraPostgreSQL.Updates.20180305.254)
++ [Aurora PostgreSQL release 2\.5\.3](#AuroraPostgreSQL.Updates.20180305.253)
++ [Aurora PostgreSQL release 2\.5\.2](#AuroraPostgreSQL.Updates.20180305.252)
++ [Aurora PostgreSQL release 2\.5\.1](#AuroraPostgreSQL.Updates.20180305.251)
 
-### Version 2\.5\.6<a name="AuroraPostgreSQL.Updates.20180305.256"></a>
+### Aurora PostgreSQL release 2\.5\.6<a name="AuroraPostgreSQL.Updates.20180305.256"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 + None
@@ -738,15 +846,15 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug in Database Activity Streams where customers were not notified when an outage ended\.
 
-1. Fixed a bug in the `aws_s3` extension for pre\-signed URL handling that might have resulted in the error message S3 bucket names with a period \(\.\) are not supported\.
+1. Fixed a bug in the `aws_s3` extension for pre\-signed URL handling that could have resulted in the error message S3 bucket names with a period \(\.\) are not supported\.
 
 1. Fixed a bug in the `aws_s3` extension where incorrect error handling could lead to failures during the import process\.
 
 1. Fixed a bug in the `aws_s3` extension where an import may be blocked indefinitely if an exclusive lock was taken on the relation prior to beginning the operation\.
 
-### Version 2\.5\.4<a name="AuroraPostgreSQL.Updates.20180305.254"></a>
+### Aurora PostgreSQL release 2\.5\.4<a name="AuroraPostgreSQL.Updates.20180305.254"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 
@@ -757,9 +865,9 @@ You can find the following improvements in this engine update\.
    + The filter used in the subquery does not use an index seek for its execution\.
    + The operator is not converted to a join by the query optimizer\.
 
-### Version 2\.5\.3<a name="AuroraPostgreSQL.Updates.20180305.253"></a>
+### Aurora PostgreSQL release 2\.5\.3<a name="AuroraPostgreSQL.Updates.20180305.253"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 + None
@@ -775,9 +883,9 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug in Aurora PostgreSQL Global Database where upgrading a secondary cluster might result in failure due to incorrect checksum versioning\. This might have required re\-creating the secondary clusters\.
 
-### Version 2\.5\.2<a name="AuroraPostgreSQL.Updates.20180305.252"></a>
+### Aurora PostgreSQL release 2\.5\.2<a name="AuroraPostgreSQL.Updates.20180305.252"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 
@@ -797,15 +905,15 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug where an Aurora PostgreSQL Serverless DB cluster might return the following error after a scaling event: ERROR: prepared statement "S\_6" already exists\.
 
-### Version 2\.5\.1<a name="AuroraPostgreSQL.Updates.20180305.251"></a>
+### Aurora PostgreSQL release 2\.5\.1<a name="AuroraPostgreSQL.Updates.20180305.251"></a>
 
 **New features**
 
 1. Added support for Amazon Aurora PostgreSQL Global Database\. For more information, see [Using Amazon Aurora global databases](aurora-global-database.md)\.
 
-1. Added the ability to configure the recovery point objective \(RPO\) of a global database for Aurora PostgreSQL\. For more information, see [Managing recovery for Aurora global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
+1. Added the ability to configure the recovery point objective \(RPO\) of a global database for Aurora PostgreSQL\. For more information, see [Managing RPOs for Aurora PostgreSQL–based global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**  
 None\.
@@ -853,19 +961,19 @@ None\.
 1. Changed the following extensions:
    + Updated `orafce` to version 3\.8
 
-## Version 2\.4, compatible with PostgreSQL 10\.11<a name="AuroraPostgreSQL.Updates.20180305.24"></a>
+## PostgreSQL engine 10\.11, Aurora PostgreSQL release 2\.4<a name="AuroraPostgreSQL.Updates.20180305.24"></a>
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.11\. For more information about the improvements in release 10\.11, see [PostgreSQL release 10\.11](https://www.postgresql.org/docs/10/release-10-11.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.11\. For more information about the improvements in PostgreSQL 10\.11, see [PostgreSQL release 10\.11](https://www.postgresql.org/docs/10/release-10-11.html)\.
 
 This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 10 engines to this release\.
 
 **Topics**
-+ [Version 2\.4\.3](#AuroraPostgreSQL.Updates.20180305.243)
-+ [Version 2\.4\.2](#AuroraPostgreSQL.Updates.20180305.242)
-+ [Version 2\.4\.1](#AuroraPostgreSQL.Updates.20180305.241)
-+ [Version 2\.4\.0](#AuroraPostgreSQL.Updates.20180305.240)
++ [Aurora PostgreSQL release 2\.4\.3](#AuroraPostgreSQL.Updates.20180305.243)
++ [Aurora PostgreSQL release 2\.4\.2](#AuroraPostgreSQL.Updates.20180305.242)
++ [Aurora PostgreSQL release 2\.4\.1](#AuroraPostgreSQL.Updates.20180305.241)
++ [Aurora PostgreSQL release 2\.4\.0](#AuroraPostgreSQL.Updates.20180305.240)
 
-### Version 2\.4\.3<a name="AuroraPostgreSQL.Updates.20180305.243"></a>
+### Aurora PostgreSQL release 2\.4\.3<a name="AuroraPostgreSQL.Updates.20180305.243"></a>
 
 **New features**
 
@@ -881,9 +989,9 @@ This release contains multiple critical stability enhancements\. Amazon highly r
 **Additional improvements and enhancements**
 + None
 
-### Version 2\.4\.2<a name="AuroraPostgreSQL.Updates.20180305.242"></a>
+### Aurora PostgreSQL release 2\.4\.2<a name="AuroraPostgreSQL.Updates.20180305.242"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 
@@ -897,9 +1005,9 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug that prevented Performance Insights from determining the query ID of a running statement\.
 
-### Version 2\.4\.1<a name="AuroraPostgreSQL.Updates.20180305.241"></a>
+### Aurora PostgreSQL release 2\.4\.1<a name="AuroraPostgreSQL.Updates.20180305.241"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 
@@ -923,7 +1031,7 @@ You can find the following improvements in this engine update\.
 
 1. Additional general improvements to the stability and availability of Aurora PostgreSQL\.
 
-### Version 2\.4\.0<a name="AuroraPostgreSQL.Updates.20180305.240"></a>
+### Aurora PostgreSQL release 2\.4\.0<a name="AuroraPostgreSQL.Updates.20180305.240"></a>
 
 You can find the following new features and improvements in this engine version\.
 
@@ -1010,22 +1118,22 @@ You can find the following new features and improvements in this engine version\
    + Updated `pg_hint_plan` to version 1\.3\.3\.
    + Added `plprofiler` version 4\.1\.
 
-## Version 2\.3, compatible with PostgreSQL 10\.7 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.23"></a>
+## PostgreSQL engine 10\.7, Aurora PostgreSQL release 2\.3 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.23"></a>
 
 **Note**  
 The PostgreSQL engine version 10\.7 with the Aurora PostgreSQL release 2\.3 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.7\. For more information about the improvements in release 10\.7, see [PostgreSQL release 10\.7](https://www.postgresql.org/docs/10/release-10-7.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.7\. For more information about the improvements in PostgreSQL 10\.7, see [PostgreSQL release 10\.7](https://www.postgresql.org/docs/10/release-10-7.html)\.
 
 **Topics**
-+ [Version 2\.3\.5](#AuroraPostgreSQL.Updates.20180305.235)
-+ [Version 2\.3\.3](#AuroraPostgreSQL.Updates.20180305.233)
-+ [Version 2\.3\.1](#AuroraPostgreSQL.Updates.20180305.231)
-+ [Version 2\.3\.0](#AuroraPostgreSQL.Updates.20180305.230)
++ [Aurora PostgreSQL release 2\.3\.5](#AuroraPostgreSQL.Updates.20180305.235)
++ [Aurora PostgreSQL release 2\.3\.3](#AuroraPostgreSQL.Updates.20180305.233)
++ [Aurora PostgreSQL release 2\.3\.1](#AuroraPostgreSQL.Updates.20180305.231)
++ [Aurora PostgreSQL release 2\.3\.0](#AuroraPostgreSQL.Updates.20180305.230)
 
-### Version 2\.3\.5<a name="AuroraPostgreSQL.Updates.20180305.235"></a>
+### Aurora PostgreSQL release 2\.3\.5<a name="AuroraPostgreSQL.Updates.20180305.235"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Improvements**
 
@@ -1039,9 +1147,9 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug that could result in inconsistent metadata\.
 
-### Version 2\.3\.3<a name="AuroraPostgreSQL.Updates.20180305.233"></a>
+### Aurora PostgreSQL release 2\.3\.3<a name="AuroraPostgreSQL.Updates.20180305.233"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Improvements**
 
@@ -1075,17 +1183,17 @@ You can find the following improvements in this engine update\.
 
 1. Provided a backport fix for the PostgreSQL community bug \#15677, where a crash could occur while deleting from a partitioned table\.
 
-### Version 2\.3\.1<a name="AuroraPostgreSQL.Updates.20180305.231"></a>
+### Aurora PostgreSQL release 2\.3\.1<a name="AuroraPostgreSQL.Updates.20180305.231"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Improvements**
 
 1. Fixed multiple bugs related to I/O prefetching that caused engine crashes\.
 
-### Version 2\.3\.0<a name="AuroraPostgreSQL.Updates.20180305.230"></a>
+### Aurora PostgreSQL release 2\.3\.0<a name="AuroraPostgreSQL.Updates.20180305.230"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **New features**
 
@@ -1101,20 +1209,20 @@ You can find the following improvements in this engine update\.
 
 1. Improved the cache replacement strategy used by table scans to minimize thrashing of the buffer cache\.
 
-## Version 2\.2, compatible with PostgreSQL 10\.6 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.22"></a>
+## PostgreSQL engine 10\.6, Aurora PostgreSQL release 2\.2 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.22"></a>
 
 **Note**  
 The PostgreSQL engine version 10\.6 with the Aurora PostgreSQL release 2\.2 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.6\. For more information about the improvements in release 10\.6, see [PostgreSQL release 10\.6](https://www.postgresql.org/docs/10/release-10-6.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.6\. For more information about the improvements in PostgreSQL 10\.6, see [PostgreSQL release 10\.6](https://www.postgresql.org/docs/10/release-10-6.html)\.
 
 **Topics**
-+ [Version 2\.2\.1](#AuroraPostgreSQL.Updates.20180305.221)
-+ [Version 2\.2\.0](#AuroraPostgreSQL.Updates.20180305.220)
++ [Aurora PostgreSQL release 2\.2\.1](#AuroraPostgreSQL.Updates.20180305.221)
++ [Aurora PostgreSQL release 2\.2\.0](#AuroraPostgreSQL.Updates.20180305.220)
 
-### Version 2\.2\.1<a name="AuroraPostgreSQL.Updates.20180305.221"></a>
+### Aurora PostgreSQL release 2\.2\.1<a name="AuroraPostgreSQL.Updates.20180305.221"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Improvements**
 
@@ -1138,28 +1246,28 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug which could cause a snapshot import from RDS for PostgreSQL to fail\.
 
-### Version 2\.2\.0<a name="AuroraPostgreSQL.Updates.20180305.220"></a>
+### Aurora PostgreSQL release 2\.2\.0<a name="AuroraPostgreSQL.Updates.20180305.220"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **New features**
 
 1. Added the restricted password management feature\. Restricted password management enables you to restrict who can manage user passwords and password expiration changes by using the parameter `rds.restrict_password_commands` and the role `rds_password`\. For more information, see [Restricting password management](AuroraPostgreSQL.Security.md#RestrictPasswordMgmt)\. 
 
-## Version 2\.1, compatible with PostgreSQL 10\.5 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.21"></a>
+## PostgreSQL engine 10\.5, Aurora PostgreSQL release 2\.1 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.21"></a>
 
 **Note**  
 The PostgreSQL engine version 10\.5 with the Aurora PostgreSQL release 2\.1 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.5\. For more information about the improvements in release 10\.5, see [PostgreSQL release 10\.5](https://www.postgresql.org/docs/current/static/release-10-5.html)\. 
+This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.5\. For more information about the improvements in PostgreSQL 10\.5, see [PostgreSQL release 10\.5](https://www.postgresql.org/docs/current/static/release-10-5.html)\. 
 
 **Topics**
-+ [Version 2\.1\.1](#AuroraPostgreSQL.Updates.20180305.211)
-+ [Version 2\.1\.0](#AuroraPostgreSQL.Updates.20180305.210)
++ [Aurora PostgreSQL release 2\.1\.1](#AuroraPostgreSQL.Updates.20180305.211)
++ [Aurora PostgreSQL release 2\.1\.0](#AuroraPostgreSQL.Updates.20180305.210)
 
-### Version 2\.1\.1<a name="AuroraPostgreSQL.Updates.20180305.211"></a>
+### Aurora PostgreSQL release 2\.1\.1<a name="AuroraPostgreSQL.Updates.20180305.211"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Improvements**
 
@@ -1181,9 +1289,9 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug which could cause a snapshot import from RDS for PostgreSQL to fail\.
 
-### Version 2\.1\.0<a name="AuroraPostgreSQL.Updates.20180305.210"></a>
+### Aurora PostgreSQL release 2\.1\.0<a name="AuroraPostgreSQL.Updates.20180305.210"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **New features**
 
@@ -1231,20 +1339,20 @@ You can find the following improvements in this engine update\.
 
 1. The `pageinspect` extension is not supported in Aurora PostgreSQL\.
 
-## Version 2\.0, compatible with PostgreSQL 10\.4 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.20"></a>
+## PostgreSQL engine 10\.4, Aurora PostgreSQL release 2\.0 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.20"></a>
 
 **Note**  
 The PostgreSQL engine version 10\.4 with the Aurora PostgreSQL release 2\.0 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 10\.4\. For more information about the improvements in release 10\.4, see [PostgreSQL release 10\.4](https://www.postgresql.org/docs/10/release-10-4.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.4\. For more information about the improvements in PostgreSQL 10\.4, see [PostgreSQL release 10\.4](https://www.postgresql.org/docs/10/release-10-4.html)\.
 
 **Topics**
-+ [Version 2\.0\.1](#AuroraPostgreSQL.Updates.20180305.201)
-+ [Version 2\.0\.0](#AuroraPostgreSQL.Updates.20180305.200)
++ [Aurora PostgreSQL release 2\.0\.1](#AuroraPostgreSQL.Updates.20180305.201)
++ [Aurora PostgreSQL release 2\.0\.0](#AuroraPostgreSQL.Updates.20180305.200)
 
-### Version 2\.0\.1<a name="AuroraPostgreSQL.Updates.20180305.201"></a>
+### Aurora PostgreSQL release 2\.0\.1<a name="AuroraPostgreSQL.Updates.20180305.201"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Improvements**
 
@@ -1266,13 +1374,13 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug which could cause a snapshot import from RDS for PostgreSQL to fail\.
 
-### Version 2\.0\.0<a name="AuroraPostgreSQL.Updates.20180305.200"></a>
+### Aurora PostgreSQL release 2\.0\.0<a name="AuroraPostgreSQL.Updates.20180305.200"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Improvements**
 
-1. This release contains all fixes, features, and improvements present in [Version 1\.3, compatible with PostgreSQL 9\.6\.9 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.13)\.
+1. This release contains all fixes, features, and improvements present in [PostgreSQL engine 9\.6\.9, Aurora PostgreSQL release 1\.3 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.13)\.
 
 1. The temporary file size limitation is user\-configurable\. You require the **rds\_superuser** role to modify the `temp_file_limit` parameter\.
 
@@ -1288,11 +1396,11 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug whereby read nodes may crash following a specific type of free space change from the write node\.
 
-## Version 1\.9, compatible with PostgreSQL 9\.6\.19<a name="AuroraPostgreSQL.Updates.20180305.19"></a>
+## PostgreSQL engine 9\.6\.19, Aurora PostgreSQL release 1\.9<a name="AuroraPostgreSQL.Updates.20180305.19"></a>
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.19\. For more information about the improvements in release 9\.6\.19, see [ PostgreSQL release 9\.6\.19](https://www.postgresql.org/docs/9.6/release-9-6-19.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.19\. For more information about the improvements in PostgreSQL 9\.6\.19, see [ PostgreSQL release 9\.6\.19](https://www.postgresql.org/docs/9.6/release-9-6-19.html)\.
 
-### Version 1\.9\.0<a name="AuroraPostgreSQL.Updates.20180305.190"></a>
+### Aurora PostgreSQL release 1\.9\.0<a name="AuroraPostgreSQL.Updates.20180305.190"></a>
 
 **Critical stability enhancements**
 + None
@@ -1305,7 +1413,7 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.19\. For m
 
 **Additional improvements and enhancements**
 
-1. Aurora PostgreSQL now avoids falling behind on a read node that occurred when the backend blocked writing to the database client\.
+1. Aurora PostgreSQL no longer falls behind on a read node when the backend is blocked writing to the database client\.
 
 1. Fixed a bug that in rare cases caused a brief period of unavailability on a read replica when the storage volume grew\.
 
@@ -1315,16 +1423,46 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.19\. For m
 
 1. Fixed a bug related to replication when Aurora PostgreSQL is acting as a physical replica of an RDS PostgreSQL instance that uses `GiST` indexes\. In rare cases, this bug caused a brief period of unavailability after promoting the Aurora cluster\.
 
-## Version 1\.8, compatible with PostgreSQL 9\.6\.18<a name="AuroraPostgreSQL.Updates.20180305.18"></a>
+## PostgreSQL engine 9\.6\.18, Aurora PostgreSQL release 1\.8<a name="AuroraPostgreSQL.Updates.20180305.18"></a>
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.18\. For more information about the improvements in release 9\.6\.18, see [ PostgreSQL release 9\.6\.18](https://www.postgresql.org/docs/9.6/release-9-6-18.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.18\. For more information about the improvements in PostgreSQL 9\.6\.18, see [ PostgreSQL release 9\.6\.18](https://www.postgresql.org/docs/9.6/release-9-6-18.html)\.
 
 **Topics**
-+ [Version 1\.8\.0](#AuroraPostgreSQL.Updates.20180305.180)
++ [Aurora PostgreSQL release 1\.8\.2](#AuroraPostgreSQL.Updates.20180305.182)
++ [Aurora PostgreSQL release 1\.8\.0](#AuroraPostgreSQL.Updates.20180305.180)
 
-### Version 1\.8\.0<a name="AuroraPostgreSQL.Updates.20180305.180"></a>
+There is no version 1\.8\.1\.
 
-You can find the following improvements in this engine update\.
+### Aurora PostgreSQL release 1\.8\.2<a name="AuroraPostgreSQL.Updates.20180305.182"></a>
+
+**Critical stability enhancements**
+
+1. None
+
+**High priority stability enhancements**
+
+1. Fixed a bug in Aurora PostgreSQL replication that could result in the error message ERROR: MultiXactId nnnn has not been created yet \-\- apparent wraparound\.
+
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2020\-25694](https://nvd.nist.gov/vuln/detail/CVE-2020-25694)
+   + [CVE\-2020\-25695](https://nvd.nist.gov/vuln/detail/CVE-2020-25695)
+   + [CVE\-2020\-25696](https://nvd.nist.gov/vuln/detail/CVE-2020-25696)
+
+**Additional improvements and enhancements**
+
+1. Aurora PostgreSQL no longer falls behind on a read node when the backend is blocked writing to the database client\.
+
+1. Fixed a bug where a `DROP DATABASE` statement didn't remove any relation files\.
+
+1. Fixed a small memory leak in a b\-tree index that could lead to an out of memory condition\.
+
+1. Fixed a bug in the `aurora_replica_status()` function where the `server_id` field was sometimes truncated\.
+
+1. Fixed a bug related to replication when Aurora PostgreSQL is acting as a physical replica of an RDS PostgreSQL instance that uses GiST indexes\. In rare cases, this bug caused a brief period of unavailability after promoting the Aurora DB cluster\.
+
+### Aurora PostgreSQL release 1\.8\.0<a name="AuroraPostgreSQL.Updates.20180305.180"></a>
+
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 
@@ -1344,19 +1482,19 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug where the database might be unavailable briefly due to error handling in database storage growth\.
 
-## Version 1\.7, compatible with PostgreSQL 9\.6\.17<a name="AuroraPostgreSQL.Updates.20180305.17"></a>
+## PostgreSQL engine 9\.6\.17, Aurora PostgreSQL release 1\.7<a name="AuroraPostgreSQL.Updates.20180305.17"></a>
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.17\. For more information about the improvements in release 9\.6\.17, see [ PostgreSQL release 9\.6\.17](https://www.postgresql.org/docs/9.6/release-9-6-17.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.17\. For more information about the improvements in PostgreSQL 9\.6\.17, see [ PostgreSQL release 9\.6\.17](https://www.postgresql.org/docs/9.6/release-9-6-17.html)\.
 
 **Topics**
-+ [Version 1\.7\.6](#AuroraPostgreSQL.Updates.20180305.176)
-+ [Version 1\.7\.3](#AuroraPostgreSQL.Updates.20180305.173)
-+ [Version 1\.7\.2](#AuroraPostgreSQL.Updates.20180305.172)
-+ [Version 1\.7\.1](#AuroraPostgreSQL.Updates.20180305.171)
++ [Aurora PostgreSQL release 1\.7\.6](#AuroraPostgreSQL.Updates.20180305.176)
++ [Aurora PostgreSQL release 1\.7\.3](#AuroraPostgreSQL.Updates.20180305.173)
++ [Aurora PostgreSQL release 1\.7\.2](#AuroraPostgreSQL.Updates.20180305.172)
++ [Aurora PostgreSQL release 1\.7\.1](#AuroraPostgreSQL.Updates.20180305.171)
 
-### Version 1\.7\.6<a name="AuroraPostgreSQL.Updates.20180305.176"></a>
+### Aurora PostgreSQL release 1\.7\.6<a name="AuroraPostgreSQL.Updates.20180305.176"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 + None
@@ -1373,9 +1511,9 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug in a GiST index that might result in an out of memory condition after promoting an Aurora Read Replica\.
 
-### Version 1\.7\.3<a name="AuroraPostgreSQL.Updates.20180305.173"></a>
+### Aurora PostgreSQL release 1\.7\.3<a name="AuroraPostgreSQL.Updates.20180305.173"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 + None
@@ -1387,9 +1525,9 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug that might cause brief unavailability for heavy subtransaction workloads when multiple reader instances restart or rejoin the cluster\.
 
-### Version 1\.7\.2<a name="AuroraPostgreSQL.Updates.20180305.172"></a>
+### Aurora PostgreSQL release 1\.7\.2<a name="AuroraPostgreSQL.Updates.20180305.172"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**
 
@@ -1406,9 +1544,9 @@ None
 
 1. Fixed an issue with the internal metrics collector that could result in erratic CPU spikes on database instances\.
 
-### Version 1\.7\.1<a name="AuroraPostgreSQL.Updates.20180305.171"></a>
+### Aurora PostgreSQL release 1\.7\.1<a name="AuroraPostgreSQL.Updates.20180305.171"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Critical stability enhancements**  
 None\.
@@ -1438,141 +1576,24 @@ None\.
 1. Changed the following extensions:
    + Updated `orafce` to version 3\.8
 
-## Version 1\.6, compatible with PostgreSQL 9\.6\.16<a name="AuroraPostgreSQL.Updates.20180305.16"></a>
+## PostgreSQL engine 9\.6\.16, Aurora PostgreSQL release 1\.6<a name="AuroraPostgreSQL.Updates.20180305.16"></a>
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.16\. For more information about the improvements in release 9\.6\.16, see [PostgreSQL release 9\.6\.16](https://www.postgresql.org/docs/9.6/release-9-6-16.html)\.
-
-This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 9\.6 engines to this release\.
-
-**Topics**
-+ [Version 1\.6\.3](#AuroraPostgreSQL.Updates.20180305.163)
-+ [Version 1\.6\.2](#AuroraPostgreSQL.Updates.20180305.162)
-+ [Version 1\.6\.1](#AuroraPostgreSQL.Updates.20180305.161)
-+ [Version 1\.6\.0](#AuroraPostgreSQL.Updates.20180305.160)
-
-### Version 1\.6\.3<a name="AuroraPostgreSQL.Updates.20180305.163"></a>
-
-**New features**
-
-1. Aurora PostgreSQL now supports the PostgreSQL [vacuum\_truncate](https://www.postgresql.org/docs/current/sql-createtable.html#RELOPTION-VACUUM-TRUNCATE) storage parameter to manage vacuum truncation for specific tables\. Set this [storage parameter](https://www.postgresql.org/docs/current/sql-createtable.html#SQL-CREATETABLE-STORAGE-PARAMETERS) to false when creating or altering a table to prevent the [VACUUM](https://www.postgresql.org/docs/current/sql-vacuum.html) SQL command from truncating the table's trailing empty pages\.
-
-**Critical stability enhancements**
-+ None 
-
-**High priority stability enhancements**
-
-1. Fixed a bug where reads from storage might stop responding due to incorrect error handling\.
-
-**Additional improvements and enhancements**
-+ None
-
-### Version 1\.6\.2<a name="AuroraPostgreSQL.Updates.20180305.162"></a>
-
-You can find the following improvements in this engine update\.
-
-**Critical stability enhancements**
-
-1. Fixed a bug whereby a reader DB instance might temporarily use stale data\. This could lead to wrong results such as too few or too many rows\. This error is not persisted on storage, and will clear when the database page containing the row has been evicted from cache\. This can happen when the primary DB instance enters a transaction snapshot overflow due to having more than 64 subtransactions in a single transaction\. Applications susceptible to this bug include those that use SQL savepoints or PostgreSQL exception handlers with more than 64 subtransactions in the top transaction\. 
-
-**High priority stability enhancements**
-
-1. Fixed a bug that may cause a reader DB instance to crash causing unavailability while attempting to the join the DB cluster\. This can happen in some cases when the primary DB instance has a transaction snapshot overflow due to a high number of subtransactions\. In this situation the reader DB instance will be unable to join until the snapshot overflow has cleared\.
-
-**Additional improvements and enhancements**
-
-1. Fixed a bug that prevented Performance Insights from determining the query ID of a running statement\.
-
-### Version 1\.6\.1<a name="AuroraPostgreSQL.Updates.20180305.161"></a>
-
-You can find the following improvements in this engine update\.
-
-**Critical stability enhancements**
-
-1. None
-
-**High priority stability enhancements**
-
-1. Fixed a bug that might cause the database engine to crash causing unavailability\. This occurred if a newly established database connection encountered a resource exhaustion\-related error during initialization after successful authentication\.
-
-**Additional improvements and enhancements**
-
-1. Provided general improvements to the stability and availability of Aurora PostgreSQL\.
-
-### Version 1\.6\.0<a name="AuroraPostgreSQL.Updates.20180305.160"></a>
-
-You can find the following new features and improvements in this engine version\.
-
-**New features**
-
-1. Updates to the `apg_plan_mgmt` extension\. For more information, see [Managing query execution plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)
-
-**Critical stability enhancements**
-
-1. Fixed a bug related to creating B\-tree indexes on temporary tables that in rare cases may result in longer recovery time, and impact availability\.
-
-1. Fixed a bug related to replication when Aurora PostgreSQL is acting as a physical replica of an RDS PostgreSQL instance\. In rare cases, this bug causes a log write failure that may result in longer recovery time, and impact availability\. 
-
-1. Fixed a bug related to handling of reads with high I/O latency that in rare cases may result in longer recovery time, and impact availability\.
-
-**High priority stability enhancements**
-
-1. Fixed multiple bugs, which cause Aurora to crash during prefetch operations on Btree indexes\.
-
-1. Enhanced the validation checks performed on data blocks in the buffer cache\. This improves Aurora's detection of inconsistency\.
-
-**Additional improvements and enhancements**
-
-1. The query plan management extension `apg_plan_mgmt` has an improved algorithm for managing plan generation for highly partitioned tables\.
-
-1. Reduced startup time on instances with large caches via improvements in the buffer cache recovery algorithm\.
-
-1. Improved the performance of the read\-node\-apply process under high transaction rate workloads by using changes to PostgreSQL `LWLock` prioritization\. These changes prevent starvation of the read\-node\-apply process while the PostgreSQL `ProcArray` is under heavy contention\.
-
-1. Fixed a bug whereby a read node may crash during the replay of a PostgreSQL `SLRU`\-truncate operation\.
-
-1. Fixed a bug where in rare cases, database writes might stall following an error returned by one of the six copies of an Aurora log record\. 
-
-1. Fixed a memory leak on read nodes when cluster cache management is enabled\.
-
-1. Fixed a bug whereby importing an RDS PostgreSQL snapshot might stop responding if the source snapshot contains a large number of unlogged relations\.
-
-1. Fixed a bug related to `hot_standby_feedback` for read nodes whereby the read node may report the wrong transaction id epoch to the write node\. This can cause the write node to ignore the `hot_standby_feedback` and invalidate snapshots on the read node\.
-
-1. Fixed a bug whereby storage errors that occur during `CREATE DATABASE` statements are not properly handled\. The bug would leave the resulting database inaccessible\. The correct behavior is to fail the database creation and return the appropriate error to the user\.
-
-1. Improved handling of PostgreSQL snapshot overflow when a read node attempts to connect to a write node\. Prior to this change, if the write node was in a snapshot overflow state, the read node would be unable to join\. A message would appear in the PostgreSQL log file in the form, `DEBUG: recovery snapshot waiting for non-overflowed snapshot or until oldest active xid on standby is at least xxxxxxx (now yyyyyyy)`\. A snapshot overflow occurs when an individual transaction has created over 64 subtransactions\. 
-
-1. Fixed a bug related to common table expressions whereby an error is incorrectly raised when a NOT IN class exists in a CTE\. The error is `CTE with NOT IN fails with ERROR: could not find CTE CTE-Name`\.
-
-1. Fixed a bug related to an incorrect `last_error_timestamp` value in the `aurora_replica_status` table\.
-
-1. Fixed a bug to avoid populating shared buffers with blocks belonging to temporary objects\. These blocks correctly reside in PostgreSQL backend local buffers\. 
-
-1. Fixed a bug where in rare cases Aurora may exhibit 100% CPU utilization while acting as a replica of an RDS PostgreSQL instance even when the replication stream is idle\. 
-
-1. Backported a change from PostgreSQL 11 which improves the cleanup of orphaned temporary tables\. Without this change, it is possible that in rare cases orphaned temporary tables can to lead to transaction ID wraparound\. For more information, see this [PostgreSQL community commit](https://github.com/postgres/postgres/commit/246a6c8f7b237cc1943efbbb8a7417da9288f5c4)\. 
-
-1. Fixed a bug where a Writer instance may accept replication registration requests from Reader instances while having an uninitialized startup process\.
-
-1. Changed the following extensions:
-   + Updated `pg_hint_plan` to version 1\.2\.5\.
-
-## Version 1\.5, compatible with PostgreSQL 9\.6\.12 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.15"></a>
+## PostgreSQL engine 9\.6\.12, Aurora PostgreSQL release 1\.5 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.15"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.12 with the Aurora PostgreSQL release 1\.5 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.12\. For more information about the improvements in release 9\.6\.12, see [PostgreSQL release 9\.6\.12](https://www.postgresql.org/docs/9.6/release-9-6-12.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.12\. For more information about the improvements in PostgreSQL 9\.6\.12, see [PostgreSQL release 9\.6\.12](https://www.postgresql.org/docs/9.6/release-9-6-12.html)\.
 
 **Topics**
-+ [Version 1\.5\.3](#AuroraPostgreSQL.Updates.20180305.153)
-+ [Version 1\.5\.2](#AuroraPostgreSQL.Updates.20180305.152)
-+ [Version 1\.5\.1](#AuroraPostgreSQL.Updates.20180305.151)
-+ [Version 1\.5\.0](#AuroraPostgreSQL.Updates.20180305.150)
++ [Aurora PostgreSQL release 1\.5\.3](#AuroraPostgreSQL.Updates.20180305.153)
++ [Aurora PostgreSQL release 1\.5\.2](#AuroraPostgreSQL.Updates.20180305.152)
++ [Aurora PostgreSQL release 1\.5\.1](#AuroraPostgreSQL.Updates.20180305.151)
++ [Aurora PostgreSQL release 1\.5\.0](#AuroraPostgreSQL.Updates.20180305.150)
 
-### Version 1\.5\.3<a name="AuroraPostgreSQL.Updates.20180305.153"></a>
+### Aurora PostgreSQL release 1\.5\.3<a name="AuroraPostgreSQL.Updates.20180305.153"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Improvements**
 
@@ -1582,9 +1603,9 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug that could result in inconsistent metadata\.
 
-### Version 1\.5\.2<a name="AuroraPostgreSQL.Updates.20180305.152"></a>
+### Aurora PostgreSQL release 1\.5\.2<a name="AuroraPostgreSQL.Updates.20180305.152"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Improvements**
 
@@ -1608,17 +1629,17 @@ You can find the following improvements in this engine update\.
 
 1. Additional information is now logged on read nodes when active connections conflict with the relay process\.
 
-### Version 1\.5\.1<a name="AuroraPostgreSQL.Updates.20180305.151"></a>
+### Aurora PostgreSQL release 1\.5\.1<a name="AuroraPostgreSQL.Updates.20180305.151"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Improvements**
 
 1. Fixed multiple bugs related to I/O prefetching, which caused engine crashes\.
 
-### Version 1\.5\.0<a name="AuroraPostgreSQL.Updates.20180305.150"></a>
+### Aurora PostgreSQL release 1\.5\.0<a name="AuroraPostgreSQL.Updates.20180305.150"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **New features**
 
@@ -1632,14 +1653,14 @@ You can find the following improvements in this engine update\.
 
 1. Improved the cache replacement strategy used by table scans to minimize thrashing of the buffer cache\.
 
-## Version 1\.4, compatible with PostgreSQL 9\.6\.11 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.14"></a>
+## PostgreSQL engine 9\.6\.11, Aurora PostgreSQL release 1\.4 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.14"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.11 with the Aurora PostgreSQL release 1\.4 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.11\. For more information about the improvements in release 9\.6\.11, see [PostgreSQL release 9\.6\.11](https://www.postgresql.org/docs/9.6/release-9-6-11.html)\. 
+This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.11\. For more information about the improvements in PostgreSQL 9\.6\.11, see [PostgreSQL release 9\.6\.11](https://www.postgresql.org/docs/9.6/release-9-6-11.html)\. 
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **New features**
 
@@ -1649,7 +1670,7 @@ You can find the following improvements in this engine update\.
 
 **Improvements**
 
-1. This release contains all fixes, features, and improvements present in [Version 1\.3, compatible with PostgreSQL 9\.6\.9 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.13)\.
+1. This release contains all fixes, features, and improvements present in [PostgreSQL engine 9\.6\.9, Aurora PostgreSQL release 1\.3 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.13)\.
 
 1. Network traffic between the writer and reader nodes is now compressed to reduce network utilization\. This reduces the chance of read node unavailability due to network saturation\.
 
@@ -1665,20 +1686,20 @@ You can find the following improvements in this engine update\.
 
    The `apg_plan_mgmt` extension is used with query plan management\. For more about how to install, upgrade, and use the `apg_plan_mgmt` extension, see [Managing query execution plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)\.
 
-## Version 1\.3, compatible with PostgreSQL 9\.6\.9 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.13"></a>
+## PostgreSQL engine 9\.6\.9, Aurora PostgreSQL release 1\.3 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.13"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.9 with the Aurora PostgreSQL release 1\.3 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
-This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.9\. For more information about the improvements in version 9\.6\.9, see [PostgreSQL release 9\.6\.9](https://www.postgresql.org/docs/9.6/release-9-6-9.html)\.
+This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.9\. For more information about the improvements in PostgreSQL 9\.6\.9, see [PostgreSQL release 9\.6\.9](https://www.postgresql.org/docs/9.6/release-9-6-9.html)\.
 
 **Topics**
-+ [Version 1\.3\.2](#AuroraPostgreSQL.Updates.20180305.132)
-+ [Version 1\.3\.0](#AuroraPostgreSQL.Updates.20180305.130)
++ [Aurora PostgreSQL release 1\.3\.2](#AuroraPostgreSQL.Updates.20180305.132)
++ [Aurora PostgreSQL release 1\.3\.0](#AuroraPostgreSQL.Updates.20180305.130)
 
-### Version 1\.3\.2<a name="AuroraPostgreSQL.Updates.20180305.132"></a>
+### Aurora PostgreSQL release 1\.3\.2<a name="AuroraPostgreSQL.Updates.20180305.132"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **New features**
 
@@ -1704,13 +1725,13 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug which could cause a snapshot import from RDS for PostgreSQL to fail\.
 
-### Version 1\.3\.0<a name="AuroraPostgreSQL.Updates.20180305.130"></a>
+### Aurora PostgreSQL release 1\.3\.0<a name="AuroraPostgreSQL.Updates.20180305.130"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **Improvements**
 
-1. This release contains all fixes, features, and improvements present in [Version 1\.2, compatible with PostgreSQL 9\.6\.8 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.12)\.
+1. This release contains all fixes, features, and improvements present in [PostgreSQL engine 9\.6\.8, Aurora PostgreSQL release 1\.2 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.12)\.
 
 1. Updated the GDAL library, which is used by the `PostGIS` extension\. 
 
@@ -1750,7 +1771,7 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug whereby read nodes could crash following a specific type of free space change from the write node\.
 
-## Version 1\.2, compatible with PostgreSQL 9\.6\.8 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.12"></a>
+## PostgreSQL engine 9\.6\.8, Aurora PostgreSQL release 1\.2 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.12"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.8 with the Aurora PostgreSQL release 1\.2 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -1758,12 +1779,12 @@ The PostgreSQL engine version 9\.6\.8 with the Aurora PostgreSQL release 1\.2 is
 For more information about PostgreSQL 9\.6\.8, see [PostgreSQL release 9\.6\.8](https://www.postgresql.org/docs/9.6/release-9-6-8.html)\. 
 
 **Topics**
-+ [Version 1\.2\.2](#AuroraPostgreSQL.Updates.20180305.122)
-+ [Version 1\.2\.0](#AuroraPostgreSQL.Updates.20180305.120)
++ [Aurora PostgreSQL release 1\.2\.2](#AuroraPostgreSQL.Updates.20180305.122)
++ [Aurora PostgreSQL release 1\.2\.0](#AuroraPostgreSQL.Updates.20180305.120)
 
-### Version 1\.2\.2<a name="AuroraPostgreSQL.Updates.20180305.122"></a>
+### Aurora PostgreSQL release 1\.2\.2<a name="AuroraPostgreSQL.Updates.20180305.122"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **New features**
 
@@ -1789,9 +1810,9 @@ You can find the following improvements in this engine update\.
 
 1. Fixed a bug which could cause a snapshot import from RDS for PostgreSQL to fail\.
 
-### Version 1\.2\.0<a name="AuroraPostgreSQL.Updates.20180305.120"></a>
+### Aurora PostgreSQL release 1\.2\.0<a name="AuroraPostgreSQL.Updates.20180305.120"></a>
 
-You can find the following improvements in this engine update\.
+You can find the following improvements in this release\.
 
 **New features**
 
@@ -1799,7 +1820,7 @@ You can find the following improvements in this engine update\.
 
 **Improvements**
 
-1. This release contains all fixes, features, and improvements present in [Version 1\.1, compatible with PostgreSQL 9\.6\.6 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.11)\.
+1. This release contains all fixes, features, and improvements present in [PostgreSQL engine 9\.6\.6 Aurora PostgreSQL release 1\.1 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.11)\.
 
 1. Updates the following PostgreSQL extensions:
    + `pg_hint_plan` updated to version 1\.2\.2
@@ -1839,12 +1860,12 @@ You can find the following improvements in this engine update\.
 
 1. Fixes a bug in which a failure while extending a relation can cause Aurora to crash while scanning the partially extended relation\.
 
-## Version 1\.1, compatible with PostgreSQL 9\.6\.6 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.11"></a>
+## PostgreSQL engine 9\.6\.6 Aurora PostgreSQL release 1\.1 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.11"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.6 with the Aurora PostgreSQL release 1\.1 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
-For more information about the PostgreSQL 9\.6\.6 see, [PostgreSQL release 9\.6\.6](https://www.postgresql.org/docs/9.6/static/release-9-6-6.html)\.
+For more information about PostgreSQL 9\.6\.6 see, [PostgreSQL release 9\.6\.6](https://www.postgresql.org/docs/9.6/static/release-9-6-6.html)\.
 
 You can find the following improvements in this engine update:
 
@@ -1862,7 +1883,7 @@ You can find the following improvements in this engine update:
 
 **Improvements**
 
-1. This release contains all fixes, features, and improvements present in [Version 1\.0\.11](#AuroraPostgreSQL.Updates.20180305.1011)
+1. This release contains all fixes, features, and improvements present in [Aurora PostgreSQL release 1\.0\.11](#AuroraPostgreSQL.Updates.20180305.1011)
 
 1. Updates for the following PostgreSQL extensions:
    + postgis extension updated to version 2\.3\.4
@@ -1905,23 +1926,23 @@ You can find the following improvements in this engine update:
 
 1. Multiple improvements to the reliability of importing snapshots from RDS PostgreSQL to Aurora PostgreSQL\.
 
-## Version 1\.0, compatible with PostgreSQL 9\.6\.3 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.10"></a>
+## PostgreSQL engine 9\.6\.3, Aurora PostgreSQL release 1\.0 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.10"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.3 with the Aurora PostgreSQL release 1\.0 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
 For more information about PostgreSQL 9\.6\.3 see, [PostgreSQL release 9\.6\.3](https://www.postgresql.org/docs/9.6/release-9-6-3.html)\.
 
-This version includes the following patch versions:
+This version includes the following patch releases:
 
 **Topics**
-+ [Version 1\.0\.11](#AuroraPostgreSQL.Updates.20180305.1011)
-+ [Version 1\.0\.10](#AuroraPostgreSQL.Updates.20180305.1010)
-+ [Version 1\.0\.9](#AuroraPostgreSQL.Updates.20180305.109)
-+ [Version 1\.0\.8](#AuroraPostgreSQL.Updates.20180305.108)
-+ [Version 1\.0\.7](#AuroraPostgreSQL.Updates.20180305.107)
++ [Aurora PostgreSQL release 1\.0\.11](#AuroraPostgreSQL.Updates.20180305.1011)
++ [Aurora PostgreSQL release 1\.0\.10](#AuroraPostgreSQL.Updates.20180305.1010)
++ [Aurora PostgreSQL release 1\.0\.9](#AuroraPostgreSQL.Updates.20180305.109)
++ [Aurora PostgreSQL release 1\.0\.8](#AuroraPostgreSQL.Updates.20180305.108)
++ [Aurora PostgreSQL release 1\.0\.7](#AuroraPostgreSQL.Updates.20180305.107)
 
-### Version 1\.0\.11<a name="AuroraPostgreSQL.Updates.20180305.1011"></a>
+### Aurora PostgreSQL release 1\.0\.11<a name="AuroraPostgreSQL.Updates.20180305.1011"></a>
 
 You can find the following improvements in this engine update:
 
@@ -1935,7 +1956,7 @@ You can find the following improvements in this engine update:
 
 1. Fixes issues that can lead to an engine crash\.
 
-### Version 1\.0\.10<a name="AuroraPostgreSQL.Updates.20180305.1010"></a>
+### Aurora PostgreSQL release 1\.0\.10<a name="AuroraPostgreSQL.Updates.20180305.1010"></a>
 
 This update includes a new feature\. You can now replicate an Amazon RDS PostgreSQL DB instance to Aurora PostgreSQL\. For more information, see [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)\.
 
@@ -1961,11 +1982,11 @@ You can find the following improvements in this engine update:
 
 1. Fixes issues that can cause an engine crash\.
 
-### Version 1\.0\.9<a name="AuroraPostgreSQL.Updates.20180305.109"></a>
+### Aurora PostgreSQL release 1\.0\.9<a name="AuroraPostgreSQL.Updates.20180305.109"></a>
 
 In this engine update, we fix an issue that can cause the Aurora storage volume to become unavailable when importing a snapshot from RDS PostgreSQL that contained uninitialized pages\.
 
-### Version 1\.0\.8<a name="AuroraPostgreSQL.Updates.20180305.108"></a>
+### Aurora PostgreSQL release 1\.0\.8<a name="AuroraPostgreSQL.Updates.20180305.108"></a>
 
 You can find the following improvements in this engine update:
 
@@ -1979,6 +2000,6 @@ You can find the following improvements in this engine update:
 
 1. Fixes an issue that can cause a read node to crash with the message "aurora wal replay process \(PID XXX\) was terminated by signal 11: Segmentation fault"\. This issue occurs when the reader applied a visibility map change for an uncached visibility map page\.
 
-### Version 1\.0\.7<a name="AuroraPostgreSQL.Updates.20180305.107"></a>
+### Aurora PostgreSQL release 1\.0\.7<a name="AuroraPostgreSQL.Updates.20180305.107"></a>
 
 This is the first generally available release of Amazon Aurora with PostgreSQL compatibility\.

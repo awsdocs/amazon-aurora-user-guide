@@ -42,6 +42,8 @@ Check the `DBClusterParameterGroupStatus` value for the primary DB instance in t
 + [Amazon Aurora DB cluster and DB instance parameters](#Aurora.Managing.ParameterGroups)
 + [Creating a DB parameter group](#USER_WorkingWithParamGroups.Creating)
 + [Creating a DB cluster parameter group](#USER_WorkingWithParamGroups.CreatingCluster)
++ [Associating a DB parameter group with a DB instance](#USER_WorkingWithParamGroups.Associating)
++ [Associating a DB cluster parameter group with a DB cluster](#USER_WorkingWithParamGroups.AssociatingCluster)
 + [Modifying parameters in a DB parameter group](#USER_WorkingWithParamGroups.Modifying)
 + [Modifying parameters in a DB cluster parameter group](#USER_WorkingWithParamGroups.ModifyingCluster)
 + [Resetting parameters in a DB parameter group to their default values](#USER_WorkingWithParamGroups.Resetting)
@@ -229,6 +231,129 @@ Include the following required parameters:
 + `DBParameterGroupFamily`
 + `Description`
 
+## Associating a DB parameter group with a DB instance<a name="USER_WorkingWithParamGroups.Associating"></a>
+
+You can create your own DB parameter groups with customized settings\. You can associate a DB parameter group with a DB instance using the AWS Management Console, the AWS CLI, or the RDS API\. You can do so when you create or modify a DB instance\.
+
+For information about creating a DB parameter group, see [Creating a DB parameter group](#USER_WorkingWithParamGroups.Creating)\. For information about modifying a DB instance, see [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\.
+
+**Note**  
+When you change the DB parameter group associated with a DB instance, you must manually reboot the instance before the DB instance can use the new DB parameter group\.
+
+### Console<a name="USER_WorkingWithParamGroups.Associating.CON"></a>
+
+**To associate a DB parameter group with a DB instance**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\. 
+
+1. Choose **Modify**\. The **Modify DB Instance** page appears\.
+
+1. Change the **DB parameter group** setting\. 
+
+1. Choose **Continue** and check the summary of modifications\. 
+
+1. \(Optional\) Choose **Apply immediately** to apply the changes immediately\. Choosing this option can cause an outage in some cases\. 
+
+1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB instance** to save your changes\. 
+
+   Or choose **Back** to edit your changes or **Cancel** to cancel your changes\. 
+
+### AWS CLI<a name="USER_WorkingWithParamGroups.Associating.CLI"></a>
+
+To associate a DB parameter group with a DB instance, use the AWS CLI [ `modify-db-instance`](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following options:
++ `--db-instance-identifier`
++ `--db-parameter-group-name`
+
+The following example associates the `mydbpg` DB parameter group with the `database-1` DB instance\. The changes are applied immediately by using `--apply-immediately`\. Use `--no-apply-immediately` to apply the changes during the next maintenance window\. 
+
+**Example**  
+For Linux, macOS, or Unix:  
+
+```
+aws rds modify-db-instance \
+    --db-instance-identifier database-1 \
+    --db-parameter-group-name mydbpg \
+    --apply-immediately
+```
+For Windows:  
+
+```
+aws rds modify-db-instance ^
+    --db-instance-identifier database-1 ^
+    --db-parameter-group-name mydbpg ^
+    --apply-immediately
+```
+
+### RDS API<a name="USER_WorkingWithParamGroups.Associating.API"></a>
+
+To associate a DB parameter group with a DB instance, use the RDS API [ `ModifyDBInstance`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following parameters:
++ `DBInstanceName`
++ `DBParameterGroupName`
+
+## Associating a DB cluster parameter group with a DB cluster<a name="USER_WorkingWithParamGroups.AssociatingCluster"></a>
+
+You can create your own DB cluster parameter groups with customized settings\. You can associate a DB cluster parameter group with a DB cluster using the AWS Management Console, the AWS CLI, or the RDS API\. You can do so when you create or modify a DB cluster\.
+
+For information about creating a DB cluster parameter group, see [Creating a DB cluster parameter group](#USER_WorkingWithParamGroups.CreatingCluster)\. For information about creating a DB cluster, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\. For information about modifying a DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
+
+**Note**  
+After you change the DB cluster parameter group associated with a DB cluster, reboot the primary DB instance in the cluster to apply the changes to all of the DB instances in the cluster\.  
+To determine whether the primary DB instance of a DB cluster must be rebooted to apply changes, run the following AWS CLI command:  
+`aws rds describe-db-clusters --db-cluster-identifier db_cluster_identifier`  
+Check the `DBClusterParameterGroupStatus` value for the primary DB instance in the output\. If the value is `pending-reboot`, then reboot the primary DB instance of the DB cluster\.
+
+### Console<a name="USER_WorkingWithParamGroups.AssociatingCluster.CON"></a>
+
+**To associate a DB cluster parameter group with a DB cluster**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, and then select the DB cluster that you want to modify\. 
+
+1. Choose **Modify**\. The **Modify DB cluster** page appears\.
+
+1. Change the **DB cluster parameter group** setting\. 
+
+1. Choose **Continue** and check the summary of modifications\. 
+
+   The change is applied immediately regardless of the **Scheduling of modifications** setting\.
+
+1. On the confirmation page, review your changes\. If they are correct, choose **Modify cluster** to save your changes\. 
+
+   Alternatively, choose **Back** to edit your changes, or choose **Cancel** to cancel your changes\. 
+
+### AWS CLI<a name="USER_WorkingWithParamGroups.AssociatingCluster.CLI"></a>
+
+To associate a DB cluster parameter group with a DB cluster, use the AWS CLI [ `modify-db-cluster`](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) command with the following options:
++ `--db-cluster-name`
++ `--db-cluster-parameter-group-name`
+
+The following example associates the `mydbclpg` DB parameter group with the `mydbcluster` DB cluster\.
+
+**Example**  
+For Linux, macOS, or Unix:  
+
+```
+aws rds modify-db-cluster \
+    --db-cluster-identifier mydbcluster \
+    --db-cluster-parameter-group-name mydbclpg
+```
+For Windows:  
+
+```
+aws rds modify-db-cluster ^
+    --db-cluster-identifier mydbcluster ^
+    --db-cluster-parameter-group-name mydbclpg
+```
+
+### RDS API<a name="USER_WorkingWithParamGroups.AssociatingCluster.API"></a>
+
+To associate a DB cluster parameter group with a DB cluster, use the RDS API [ `ModifyDBCluster`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) operation with the following parameters:
++ `DBClusterIdentifier`
++ `DBClusterParameterGroupName`
+
 ## Modifying parameters in a DB parameter group<a name="USER_WorkingWithParamGroups.Modifying"></a>
 
 You can modify parameter values in a customer\-created DB parameter group; you can't change the parameter values in a default DB parameter group\. Changes to parameters in a customer\-created DB parameter group are applied to all DB instances that are associated with the DB parameter group\. 
@@ -257,7 +382,7 @@ Changes to some parameters are applied to the DB instance immediately without a 
 
 ### AWS CLI<a name="USER_WorkingWithParamGroups.Modifying.CLI"></a>
 
-To modify a DB parameter group, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) command with the following required parameters:
+To modify a DB parameter group, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) command with the following required options:
 + `--db-parameter-group-name`
 + `--parameters`
 
@@ -288,7 +413,7 @@ DBPARAMETERGROUP  mydbparametergroup
 
 ### RDS API<a name="USER_WorkingWithParamGroups.Modifying.API"></a>
 
-To modify a DB parameter group, use the RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBParameterGroup.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBParameterGroup.html) command with the following required parameters:
+To modify a DB parameter group, use the RDS API [ `ModifyDBParameterGroup`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBParameterGroup.html) operation with the following required parameters:
 + `DBParameterGroupName`
 + `Parameters`
 

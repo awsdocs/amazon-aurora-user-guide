@@ -27,7 +27,7 @@ With query plan management, you can control execution plans for a set of stateme
 
 ## Enabling query plan management for Aurora PostgreSQL<a name="AuroraPostgreSQL.Optimize.Enable"></a>
 
-Query plan management is available with Amazon Aurora PostgreSQL version 2\.1\.0 \(compatible with PostgreSQL 10\.5\) and greater versions\.
+Query plan management is available with Aurora PostgreSQL 12\.4, Aurora PostgreSQL 11\.6, Aurora PostgreSQL 10\.5, Aurora PostgreSQL 9\.6\.11 and later releases of these versions of Aurora with PostgreSQL compatibility\. 
 
 **To enable query plan management**
 

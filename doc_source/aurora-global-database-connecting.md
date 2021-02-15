@@ -1,6 +1,6 @@
 # Connecting to an Amazon Aurora global database<a name="aurora-global-database-connecting"></a>
 
-How you connect to an Aurora global database depends on whether you need to write to the database or read from the database\.
+How you connect to an Aurora global database depends on whether you need to write to the database or read from the database:
 + For read\-only requests or queries, you connect to the reader endpoint for the Aurora cluster in your AWS Region\. 
 + To run data manipulation language \(DML\) or data definition language \(DDL\) statements, you connect to the cluster endpoint for the primary cluster\. This endpoint might be in a different AWS Region than your application\. 
 

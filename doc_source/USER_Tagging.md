@@ -166,9 +166,9 @@ If you include a value for the `--tag-key` parameter of the [create\-db\-cluster
 
 ## Examples of using tags for Aurora automation<a name="Tagging.Examples"></a>
 
- The following AWS CLI examples demonstrate how you might assign tags to certain RDS resources and then use those tags to automate maintenance operations for those resources\.
+ The following AWS CLI examples demonstrate how you might assign tags to certain Aurora resources and then use those tags to automate maintenance operations for those resources\.
 
-### Specifying Which Aurora DB Clusters to Stop<a name="Tagging.Aurora.Autostop"></a>
+### Specifying which Aurora DB clusters to stop<a name="Tagging.Aurora.Autostop"></a>
 
  Suppose that you're creating a number of Aurora DB clusters in a development or test environment\. You need to keep all of these clusters for several days\. Some of the clusters run tests overnight\. Other clusters can be stopped overnight and started again the next day\. The following example shows how to assign a tag to those clusters that are suitable to stop overnight\. Then the example shows how a script can detect which clusters have that tag and then stop those clusters\. In this example, the value portion of the key\-value pair doesn't matter\. The presence of the `stoppable` tag signifies that the cluster has this user\-defined property\. 
 
@@ -176,7 +176,7 @@ If you include a value for the `--tag-key` parameter of the [create\-db\-cluster
 
 ```
 $ aws rds describe-db-clusters --db-cluster-id dev-test-cluster \
-  --query '*[].{DBClusterArn:DBClusterArn}' --output text
+  --query "*[].{DBClusterArn:DBClusterArn}" --output text
 arn:aws:rds:us-east-1:123456789:cluster:dev-test-cluster
 ```
 
@@ -210,7 +210,7 @@ TAGLIST stoppable
  To stop all the clusters that are designated as `stoppable`, prepare a list of all your clusters\. Loop through the list and check if each cluster is tagged with the relevant attribute\. This Linux example uses shell scripting to save the list of cluster ARNs to a temporary file and then perform CLI commands for each cluster\. 
 
 ```
-$ aws rds describe-db-clusters --query '*[].[DBClusterArn]' --output text >/tmp/cluster_arns.lst
+$ aws rds describe-db-clusters --query "*[].[DBClusterArn]" --output text >/tmp/cluster_arns.lst
 $ for arn in $(cat /tmp/cluster_arns.lst)
 do
   match="$(aws rds list-tags-for-resource --resource-name $arn --output text | grep 'TAGLIST\tstoppable')"
@@ -240,7 +240,7 @@ Cluster arn:aws:rds:us-east-1:123456789:cluster:dev-test-cluster is tagged as st
 
 ```
 $ aws rds describe-db-clusters \
-  --query '*[].{DBClusterArn:DBClusterArn,Status:Status}|[?Status == `available`]|[].{DBClusterArn:DBClusterArn}'
+  --query '*[].{DBClusterArn:DBClusterArn,Status:Status}|[?Status == `available`]|[].{DBClusterArn:DBClusterArn}' \
   --output text
 arn:aws:rds:us-east-1:123456789:cluster:cluster-2447
 arn:aws:rds:us-east-1:123456789:cluster:cluster-3395
@@ -249,4 +249,4 @@ arn:aws:rds:us-east-1:123456789:cluster:pg2-cluster
 ```
 
 **Tip**  
- Once you're familiar with the general procedure of assigning tags and finding clusters that have those tags, you can use the same technique to reduce costs in other ways\. For example, in this scenario with Aurora DB clusters used for development and testing, you might designate some clusters to be deleted at the end of each day, or to have only their reader DB instances deleted, or to have their DB instances changed to a small instance class during times of expected low usage\. 
+ Once you're familiar with the general procedure of assigning tags and finding clusters that have those tags, you can use the same technique to reduce costs in other ways\. For example, in this scenario with Aurora DB clusters used for development and testing, you might designate some clusters to be deleted at the end of each day, or to have only their reader DB instances deleted, or to have their DB instances changed to a small DB instance classes during times of expected low usage\. 
