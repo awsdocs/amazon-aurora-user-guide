@@ -228,7 +228,7 @@ The Data API for Aurora Serverless provides a web\-services interface to an Auro
 | Africa \(Cape Town\) | \- | \- | \- | \- | 
 | Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | 
 | Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
-| Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
+| Asia Pacific \(Seoul\) | \- | \- | \- | \- | 
 | Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Asia Pacific \(Tokyo\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 

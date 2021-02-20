@@ -20,6 +20,8 @@ To create an Aurora PostgreSQL DB cluster, you can migrate a DB snapshot of an R
 
 In some cases, the DB snapshot might not be in the AWS Region where you want to locate your data\. If so, use the Amazon RDS console to copy the DB snapshot to that AWS Region\. For information about copying a DB snapshot, see [Copying a DB snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
 
+You can migrate Amazon RDS PostgreSQL snapshots that are compatible with the Aurora PostgreSQL versions available in the given AWS Region\. For example, a snapshot from an RDS PostgreSQL 11\.1 DB instance can be migrated to Aurora PostgreSQL version 11\.4, 11\.7, 11\.8, or 11\.9 in the US West \(N\. California\) Region\. An RDS PostreSQL 10\.11 snapshot can be migrated to Aurora PostgreSQL 10\.11, 10\.12, 10\.13, and 10\.14\. In other words, the RDS PostgreSQL snapshot must use the same or a lower minor version as the Aurora PostgreSQL\. 
+
 When you migrate the DB snapshot by using the console, the console takes the actions necessary to create both the DB cluster and the primary instance\.
 
 You can also choose for your new Aurora PostgreSQL DB cluster to be encrypted at rest by using an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. This option is available only for unencrypted DB snapshots\.
@@ -88,7 +90,7 @@ When you create an Aurora Read Replica of a PostgreSQL DB instance, Amazon RDS c
 You can only have one Aurora Read Replica for a PostgreSQL DB instance\. If you try to create an Aurora Read Replica for your Amazon RDS PostgreSQL instance and you already have an Aurora Read Replica or a cross\-region Read Replica, the request is rejected\. 
 
 **Note**  
-Replication issues can arise due to feature differences between Aurora PostgreSQL and the PostgreSQL engine version of your RDS PostgreSQL DB instance that is the replication source\. You can replicate only from an Amazon RDS PostgreSQL instance that is compatible with the Aurora PostgreSQL version in question\. For example, if the supported Aurora PostgreSQL version is 9\.6\.3, the Amazon RDS PostgreSQL DB instance must be running version 9\.6\.1 or greater\. If you encounter an error, you can find help in the [Amazon RDS community forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
+Replication issues can arise due to feature differences between Aurora PostgreSQL and the PostgreSQL engine version of your RDS PostgreSQL DB instance that is the replication source\. You can replicate only from an Amazon RDS PostgreSQL instance that is compatible with the Aurora PostgreSQL version in question\. For example, if the supported Aurora PostgreSQL version is 12\.4, the Amazon RDS PostgreSQL DB instance must be running version 12\.2 or greater\. If you encounter an error, you can find help in the [Amazon RDS community forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
 
 For more information on PostgreSQL read replicas, see [Working with read replicas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html) in the *Amazon RDS User Guide*\.
 
@@ -207,27 +209,7 @@ You can create a new Aurora DB cluster for an Aurora Read Replica from a source 
 
   The list of Amazon EC2 VPC security groups to associate with this DB cluster\.
 
-In the following example, you create a DB cluster named *`myreadreplicacluster`* from a source PostgreSQL DB instance\. This cluster has an ARN set to *`mysqlARN`*\. The cluster is associated with a DB subnet group named *`mysubnetgroup`* and a VPC security group named *`mysecuritygroup`*\.
-
-**Example**  
-
-```
-https://rds.us-east-1.amazonaws.com/
-    ?Action=CreateDBCluster
-    &DBClusterIdentifier=myreadreplicacluster
-    &DBSubnetGroupName=mysubnetgroup
-    &Engine=aurora-postgresql
-    &ReplicationSourceIdentifier=mysqlARN
-    &SignatureMethod=HmacSHA256
-    &SignatureVersion=4
-    &Version=2014-10-31
-    &VpcSecurityGroupIds=mysecuritygroup
-    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-    &X-Amz-Credential=AKIADQKE4SARGYLE/20150927/us-east-1/rds/aws4_request
-    &X-Amz-Date=20150927T164851Z
-    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-    &X-Amz-Signature=6a8f4bd6a98f649c75ea04a6b3929ecc75ac09739588391cd7250f5280e716db
-```
+See an example with the RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html)\.
 
 If you use the console to create an Aurora Read Replica, then Amazon RDS automatically creates the primary instance for your DB cluster Aurora Read Replica\. If you use the CLI to create an Aurora Read Replica, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
 
@@ -245,26 +227,7 @@ You can create a primary instance for your DB cluster by using the RDS API opera
 
   The name of the engine to use\.
 
-In this example, you create a primary instance named *`myreadreplicainstance`* for the DB cluster named *`myreadreplicacluster`*\. You do this using the DB instance class specified in *`myinstanceclass`*\.
-
-**Example**  
-
-```
-https://rds.us-east-1.amazonaws.com/
-    ?Action=CreateDBInstance
-    &DBClusterIdentifier=myreadreplicacluster
-    &DBInstanceClass=myinstanceclass
-    &DBInstanceIdentifier=myreadreplicainstance
-    &Engine=aurora-postgresql
-    &SignatureMethod=HmacSHA256
-    &SignatureVersion=4
-    &Version=2014-09-01
-    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-    &X-Amz-Credential=AKIADQKE4SARGYLE/20140424/us-east-1/rds/aws4_request
-    &X-Amz-Date=20140424T194844Z
-    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-    &X-Amz-Signature=bee4aabc750bf7dad0cd9e22b952bd6089d91e2a16592c2293e532eeaab8bc77
-```
+See an example with the RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)\.
 
 ### Promoting an Aurora read replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote"></a>
 
@@ -303,6 +266,10 @@ For Windows:
 aws rds promote-read-replica-db-cluster ^
     --db-cluster-identifier myreadreplicacluster
 ```
+
+#### RDS API<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote.API"></a>
+
+To promote an Aurora Read Replica to a stand\-alone DB cluster, use the RDS API operation [PromoteReadReplicaDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplicaDBCluster.html)\. 
 
 ## Importing Amazon S3 data into an Aurora PostgreSQL DB cluster<a name="USER_PostgreSQL.S3Import"></a>
 
@@ -571,6 +538,10 @@ Also, be sure the database you use doesn't have any restrictions noted in [Impor
      --role-arn your-role-arn ^
      --region your-region
   ```
+
+##### RDS API<a name="collapsible-section-3"></a>
+
+To add an IAM role for a PostgreSQL DB cluster using the Amazon RDS API, call the [AddRoleToDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddRoleToDBCluster.html) operation\. 
 
 #### Using security credentials to access an Amazon S3 bucket<a name="USER_PostgreSQL.S3Import.Credentials"></a>
 

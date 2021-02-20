@@ -194,26 +194,8 @@ aws rds modify-db-cluster ^
 ### RDS API<a name="AdjustingTheMaintenanceWindow.Aurora.API"></a>
 
 To adjust the preferred DB cluster maintenance window, use the Amazon RDS [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) API operation with the following parameters:
-+ `DBClusterIdentifier = my-cluster`
-+ `PreferredMaintenanceWindow = Tue:04:00-Tue:04:30`
-
-**Example**  
-The following code example sets the maintenance window to Tuesdays from 4:00–4:30 AM UTC\.  
-
-```
- 1. https://rds.us-west-2.amazonaws.com/
- 2. ?Action=ModifyDBCluster
- 3. &DBClusterIdentifier=my-cluster
- 4. &PreferredMaintenanceWindow=Tue:04:00-Tue:04:30
- 5. &SignatureMethod=HmacSHA256
- 6. &SignatureVersion=4
- 7. &Version=2014-10-31
- 8. &X-Amz-Algorithm=AWS4-HMAC-SHA256
- 9. &X-Amz-Credential=AKIADQKE4SARGYLE/20140725/us-east-1/rds/aws4_request
-10. &X-Amz-Date=20161017T161457Z
-11. &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-12. &X-Amz-Signature=d6d1c65c2e94f5800ab411a3f7336625820b103713b6c063430900514e21d784
-```
++ `DBClusterIdentifier`
++ `PreferredMaintenanceWindow`
 
 ## Automatic minor version upgrades for Aurora DB clusters<a name="Aurora.Maintenance.AMVU"></a>
 

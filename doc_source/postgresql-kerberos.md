@@ -24,7 +24,7 @@ Amazon Aurora supports Kerberos authentication for PostgreSQL DB clusters in the
 | Asia Pacific \(Singapore\) | ap\-southeast\-1 | 
 | Asia Pacific \(Sydney\) | ap\-southeast\-2 | 
 | Asia Pacific \(Tokyo\) | ap\-northeast\-1 | 
-| Canada \(Central\) | ca\-central\-1; | 
+| Canada \(Central\) | ca\-central\-1 | 
 | China \(Beijing\) | cn\-north\-1  | 
 | China \(Ningxia\) | cn\-northwest\-1 | 
 | Europe \(Frankfurt\) | eu\-central\-1 | 

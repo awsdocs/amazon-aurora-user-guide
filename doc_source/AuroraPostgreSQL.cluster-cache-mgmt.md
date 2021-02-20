@@ -6,6 +6,8 @@ In a typical failover situation, you might see a temporary but large performance
 
 With cluster cache management, you set a specific reader DB instance as the failover target\. Cluster cache management ensures that the data in the designated reader's cache is kept synchronized with the data in the writer DB instance's cache\. The designated reader's cache with prefilled values is known as a *warm cache*\. If a failover occurs, the designated reader uses values in its warm cache immediately when it's promoted to the new writer DB instance\. This approach provides your application much better recovery performance\.
 
+Cluster cache management requires that the designated reader instance have the same instance class type and size \(`db.r5.2xlarge` or `db.r5.xlarge`, for example\) as the writer\. Keep this in mind when you create your Aurora PostgreSQL DB clusters so that your cluster can recover during a failover\. For a listing of instance class types and sizes, see [Hardware specifications for DB instance classes for Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html#Concepts.DBInstanceClass.Summary)\. 
+
 **Contents**
 + [Configuring cluster cache management](#AuroraPostgreSQL.cluster-cache-mgmt.Configure)
   + [Enabling cluster cache management](#AuroraPostgreSQL.cluster-cache-mgmt.Enable)
@@ -127,9 +129,9 @@ aws rds modify-db-instance ^
 
 ### Setting the promotion tier priority for a reader DB instance<a name="AuroraPostgreSQL.cluster-cache-mgmt.Reader"></a>
 
-You set one reader DB instance for cluster cache management\. To do so, choose a reader from the Aurora PostgreSQL cluster that is the same instance class as the writer DB instance\. Then set its promotion tier priority to 0\. 
+You set one reader DB instance for cluster cache management\. To do so, choose a reader from the Aurora PostgreSQL cluster that is the same instance class and size as the writer DB instance\. For example, if the writer uses `db.r5.xlarge`, choose a reader that uses this same instance class type and size\. Then set its promotion tier priority to 0\.
 
- The *promotion tier priority *is a value that specifies the order in which an Aurora reader is promoted to the writer DB instance after a failure\. Valid values are 0–15, where 0 is the first priority and 15 is the last priority\.
+The *promotion tier priority *is a value that specifies the order in which an Aurora reader is promoted to the writer DB instance after a failure\. Valid values are 0–15, where 0 is the first priority and 15 is the last priority\.
 
 #### Console<a name="AuroraPostgreSQL.cluster-cache-mgmt.Reader.Console"></a>
 

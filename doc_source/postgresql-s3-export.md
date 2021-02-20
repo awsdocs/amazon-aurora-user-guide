@@ -8,7 +8,10 @@ To export data to Amazon S3 from Aurora PostgreSQL, your database must be runnin
 11\.9 or higher
 12\.4 or higher
 
-For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\. 
+For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\.
+
+**Note**  
+You can save DB and DB cluster snapshot data to Amazon S3 using the AWS Management Console, AWS CLI, or Amazon RDS API\. For more information, see [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)\.
 
 **Topics**
 + [Overview of exporting data to Amazon S3](#postgresql-s3-export-overview)

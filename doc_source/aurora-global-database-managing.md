@@ -2,9 +2,9 @@
 
 With the exception of the managed planned failover process, you perform most management operations on the individual clusters that make up an Aurora global database\. When you choose **Group related resources** on the **Databases** page in the console, you see the primary cluster and secondary clusters grouped under the associated global database\. To find the AWS Regions where a global database's DB clusters are running, its Aurora DB engine and version, and its identifier, use its **Configuration** tab\.
 
-The managed planned failover process is available to Aurora global database objects only, not for a single Aurora DB cluster\. Don't use managed planned failover to try to recover from a Region\-wide outage\. It's not a disaster recovery solution\. To learn more, see [Managed planned failover for Amazon Aurora global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-disaster-recovery.managed-failover)\. 
+The managed planned failover process is available to Aurora global database objects only, not for a single Aurora DB cluster\. To learn more, see [Managed planned failover for Amazon Aurora global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-disaster-recovery.managed-failover)\. 
 
-To manually recover an Aurora global database from an unplanned outage in its primary Region, see [Disaster recovery and Amazon Aurora global databases](aurora-global-database-disaster-recovery.md)\. 
+To recover an Aurora global database from an unplanned outage in its primary Region, see [Disaster recovery and Amazon Aurora global databases](aurora-global-database-disaster-recovery.md)\. 
 
 **Topics**
 + [Modifying an Amazon Aurora global database](#aurora-global-database-modifying)
@@ -34,7 +34,7 @@ The `aurora_enable_repl_bin_log_filtering` and `aurora_enable_replica_log_compre
 
 ## Removing a cluster from an Amazon Aurora global database<a name="aurora-global-database-detaching"></a>
 
-You can remove Aurora DB clusters from your Aurora global database for several different reasons\. For example, you might want to remove an Aurora DB cluster from an Aurora global database if the primary cluster becomes degraded or isolated\. It then becomes a standalone provisioned Aurora DB cluster that could be used to create a new Aurora global database\. To learn more, see [Manually recovering an Amazon Aurora global database from an unplanned outage](aurora-global-database-disaster-recovery.md#aurora-global-database-failover)\. 
+You can remove Aurora DB clusters from your Aurora global database for several different reasons\. For example, you might want to remove an Aurora DB cluster from an Aurora global database if the primary cluster becomes degraded or isolated\. It then becomes a standalone provisioned Aurora DB cluster that could be used to create a new Aurora global database\. To learn more, see [Recovering an Amazon Aurora global database from an unplanned outage](aurora-global-database-disaster-recovery.md#aurora-global-database-failover)\. 
 
 You also might want to remove Aurora DB clusters because you want to delete an Aurora global database that you no longer need\. You can't delete the Aurora global database until after you remove \(detach\) all associated Aurora DB clusters, leaving the primary for last\. For more information, see [Deleting an Amazon Aurora global database](#aurora-global-database-deleting)\.
 

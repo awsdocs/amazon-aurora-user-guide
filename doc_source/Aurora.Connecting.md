@@ -99,7 +99,7 @@ For more information about the AWS JDBC Driver for MySQL and complete instructio
 
 You can connect to a DB instance in your Amazon Aurora PostgreSQL DB cluster using the same tools that you use to connect to a PostgreSQL database\. As part of this, you use the same public key for Secure Sockets Layer \(SSL\) connections\. You can use the endpoint and port information from the primary instance or Aurora Replicas in your Aurora PostgreSQL DB cluster in the connection string of any script, utility, or application that connects to a PostgreSQL DB instance\. In the connection string, specify the DNS address from the primary instance or Aurora Replica endpoint as the host parameter\. Specify the port number from the endpoint as the port parameter\.
 
-When you have a connection to a DB instance in your Amazon Aurora PostgreSQL DB cluster, you can run any SQL command that is compatible with PostgreSQL version 9\.6\.3\. 
+When you have a connection to a DB instance in your Amazon Aurora PostgreSQL DB cluster, you can run any SQL command that is compatible with PostgreSQL\. 
 
 In the details view for your Aurora PostgreSQL DB cluster you can find the cluster endpoint\. You use this endpoint in your PostgreSQL connection string\. The endpoint is made up of the domain name and port for your DB cluster\. For example, if an endpoint value is `mycluster.cluster-123456789012.us-east-1.rds.amazonaws.com:5432`, then you specify the following values in a PostgreSQL connection string:
 + For host or host name, specify `mycluster.cluster-123456789012.us-east-1.rds.amazonaws.com`

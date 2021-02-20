@@ -78,9 +78,8 @@ When you create an Aurora Serverless v1 DB cluster, pay attention to the followi
 + Use these specific port numbers for each DB engine:
   + Aurora MySQL – `3306`
   + Aurora PostgreSQL – `5432` 
-+ Create your Aurora Serverless v1 DB cluster in a virtual private cloud \(VPC\) based on the Amazon VPC service\. Aurora Serverless v1 DB clusters are accessible only from a VPC and can't use a public IP address\. 
-+ You can't give an Aurora Serverless v1 DB cluster a public IP address\. You can access an Aurora Serverless v1 DB cluster only from within a VPC\.
-+ Create two AWS PrivateLink endpoints for each Aurora Serverless v1 DB cluster\. If you reach the limit for AWS PrivateLink endpoints within your VPC, you can't create any more Aurora Serverless v1 clusters in that VPC\. For information about checking and changing the limits on endpoints within a VPC, see [Amazon VPC limits](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)\. 
++ Create your Aurora Serverless v1 DB cluster in a virtual private cloud \(VPC\) based on the Amazon VPC service\. When you create an Aurora Serverless v1 DB cluster in your VPC, you consume two \(2\) of the fifty \(50\) Interface and Gateway Load Balancer endpoints alloted to your VPC\. These endpoints are created automatically for you\. To increase your quota, you can contact AWS Support\. For more information, see [Amazon VPC quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-endpoints)\. 
++ You can't give an Aurora Serverless v1 DB cluster a public IP address\. You can access an Aurora Serverless v1 DB cluster only from within a VPC\. 
 + Create subnets in different Availability Zones for the DB subnet group that you use for your Aurora Serverless v1 DB cluster\. In other words, you can't have more than one subnet in the same Availability Zone\.
 + Changes to a subnet group used by an Aurora Serverless v1 DB cluster aren't applied to the cluster\.
 + You can access an Aurora Serverless v1 DB cluster from AWS Lambda\. To do so, you must configure your Lambda function to run in the same VPC as your Aurora Serverless v1 DB cluster\. For more information about working with AWS Lambda, see [Configuring a Lambda function to access resources in an Amazon VPC](https://docs.aws.amazon.com/lambda/latest/dg/vpc.html) in the *AWS Lambda Developer Guide*\. 
