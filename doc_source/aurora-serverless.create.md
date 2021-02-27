@@ -8,7 +8,7 @@ You can set the following specific values for your Aurora Serverless v1 DB clust
 
 You can also choose the following optional scaling configuration options: 
 + **Force scaling the capacity to the specified values when the timeout is reached** – You can choose this setting if you want Aurora Serverless v1 to force Aurora Serverless v1 to scale even if it can't find a scaling point before it times out\. If you want Aurora Serverless v1 to cancel capacity changes if it can't find a scaling point, don't choose this setting\. For more information, see [Timeout action for capacity changes](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.timeout-action)\.
-+ **Pause compute capacity after consecutive minutes of inactivity** – You can choose this setting if you want Aurora Serverless v1 to scale to zero when there's no activity on your DB cluster for an amount of time you specify\. With this setting enabled, your Aurora Serverless v1 DB cluster automatically resumes processing and scales to the necessary capacity to handle the workload when database traffic resumes\. 
++ **Pause compute capacity after consecutive minutes of inactivity** – You can choose this setting if you want Aurora Serverless v1 to scale to zero when there's no activity on your DB cluster for an amount of time you specify\. With this setting enabled, your Aurora Serverless v1 DB cluster automatically resumes processing and scales to the necessary capacity to handle the workload when database traffic resumes\. To learn more, see [Pause and resume for Aurora Serverless v1](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.pause-resume)\. 
 
 Before you can create an Aurora Serverless v1 DB cluster, you need an AWS account\. You also need to have completed the setup tasks for working with Amazon Aurora\. For more information, see [Setting up your environment for Amazon Aurora](CHAP_SettingUp_Aurora.md)\. You also need to complete other preliminary steps for creating any Aurora DB cluster\. To learn more, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\. 
 
@@ -37,7 +37,7 @@ Choose **Amazon Aurora with MySQL Compatibility** for the Edition\. Choose the A
 
 Choose **Serverless** for the Capacity type\. 
 
-You can configure the scaling configuration of the Aurora Serverless v1 DB cluster by adjusting values in the **Capacity settings** section of the page\. To learn more about capacity settings, see [Autoscaling for Aurora Serverless](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\. The following image shows the **Capacity settings** you can adjust for an Aurora MySQL Serverless DB cluster\.
+You can configure the scaling configuration of the Aurora Serverless v1 DB cluster by adjusting values in the **Capacity settings** section of the page\. To learn more about capacity settings, see [Autoscaling for Aurora Serverless v1](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\. The following image shows the **Capacity settings** you can adjust for an Aurora MySQL Serverless DB cluster\.
 
 ![\[Setting capacity for an Aurora MySQL Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-capacity.png)
 
@@ -49,7 +49,7 @@ Choose **Amazon Aurora with Postgres; Compatibility** for the Edition and select
 
 ![\[Create Aurora PostgreSQL Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-select-postgres.png)
 
-You can configure the scaling configuration of the Aurora Serverless v1 DB cluster by adjusting values in the **Capacity settings** section of the page\. The following image shows the **Capacity settings** you can adjust for an Aurora PostgreSQL Serverless DB cluster\. To learn more about capacity settings, see [Autoscaling for Aurora Serverless](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\. 
+You can configure the scaling configuration of the Aurora Serverless v1 DB cluster by adjusting values in the **Capacity settings** section of the page\. The following image shows the **Capacity settings** you can adjust for an Aurora PostgreSQL Serverless DB cluster\. To learn more about capacity settings, see [Autoscaling for Aurora Serverless v1](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\. 
 
 ![\[Setting capacity for an Aurora PostgreSQL Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-capacity-postgres.png)
 

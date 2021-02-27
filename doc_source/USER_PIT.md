@@ -1,6 +1,10 @@
 # Restoring a DB cluster to a specified time<a name="USER_PIT"></a>
 
-You can restore a DB cluster to a specific point in time, creating a new DB cluster\. When you restore a DB cluster to a point in time, the default DB security group is applied to the new DB cluster\. If you need custom DB security groups applied to your DB cluster, you must apply them explicitly using the AWS Management Console, the AWS CLI `modify-db-cluster` command, or the Amazon RDS API `ModifyDBCluster` operation after the DB instance is available\.
+You can restore a DB cluster to a specific point in time, creating a new DB cluster\.
+
+When you restore a DB cluster to a point in time, the default DB security group is applied to the new DB cluster\. If you need custom DB security groups applied to your DB cluster, you must apply them explicitly using the AWS Management Console, the AWS CLI `modify-db-cluster` command, or the Amazon RDS API `ModifyDBCluster` operation after the DB instance is available\.
+
+Restored DB instances are automatically associated with the default parameter and option groups\. However, you can apply a custom parameter group and option group by specifying them during a restore\.
 
 **Note**  
 For more information about backing up and restoring an Aurora DB cluster, see [Overview of backing up and restoring an Aurora DB cluster](Aurora.Managing.Backups.md)\. For Aurora MySQL, you can restore a provisioned DB cluster to an Aurora Serverless DB cluster\. For more information, see [Restoring an Aurora Serverless v1 DB cluster](aurora-serverless.restorefromsnapshot.md)\.
@@ -13,25 +17,25 @@ You can restore a DB cluster to a point in time using the AWS Management Console
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Databases**\.
+1. In the navigation pane, choose **Automated backups**\.
 
 1. Choose the DB cluster that you want to restore\.
 
 1. For **Actions**, choose **Restore to point in time**\.
 
-   The **Launch DB Instance** window appears\.
+   The **Restore to point in time** window appears\.
 
 1. Choose **Latest restorable time** to restore to the latest possible time, or choose **Custom** to choose a time\.
 
    If you chose **Custom**, enter the date and time to which you want to restore the cluster\.
 **Note**  
-Times are shown in Coordinated Universal Time \(UTC\)\.
+Times are shown in your local time zone, which is indicated by an offset from Coordinated Universal Time \(UTC\)\. For example, UTC\-5 is Eastern Standard Time/Central Daylight Time\.
 
 1. For **DB instance identifier**, enter the name of the target restored DB cluster\.
 
-1. Choose other options as needed\.
+1. Choose other options as needed, such as DB instance class and storage\.
 
-1. Choose **Launch DB Instance**\.
+1. Choose **Restore to point in time**\.
 
 ## AWS CLI<a name="USER_PIT.CLI"></a>
 

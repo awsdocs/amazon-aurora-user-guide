@@ -22,13 +22,13 @@ If your DB cluster is in a VPC but isn't publicly accessible, you can also use a
 
 A common use of a DB instance in a VPC is to share data with an application server running in an Amazon EC2 instance in the same VPC, which is accessed by a client application outside the VPC\. For this scenario, you use the RDS and VPC pages on the AWS Management Console or the RDS and EC2 API operations to create the necessary instances and security groups: 
 
-1. Create a VPC security group \(for example, `sg-appsrv1`\) and define inbound rules that use the IP addresses of the client application as the source\. This security group allows your client application to connect to EC2 instances in a VPC that uses this security group\.
+1. Create a VPC security group \(for example, `sg-0123ec2example`\) and define inbound rules that use the IP addresses of the client application as the source\. This security group allows your client application to connect to EC2 instances in a VPC that uses this security group\.
 
-1. Create an EC2 instance for the application and add the EC2 instance to the VPC security group \(`sg-appsrv1`\) that you created in the previous step\. The EC2 instance in the VPC shares the VPC security group with the DB instance\.
+1. Create an EC2 instance for the application and add the EC2 instance to the VPC security group \(`sg-0123ec2example`\) that you created in the previous step\.
 
-1. Create a second VPC security group \(for example, `sg-dbsrv1`\) and create a new rule by specifying the VPC security group that you created in step 1 \(`sg-appsrv1`\) as the source\.
+1. Create a second VPC security group \(for example, `sg-6789rdsexample`\) and create a new rule by specifying the VPC security group that you created in step 1 \(`sg-0123ec2example`\) as the source\.
 
-1. Create a new DB instance and add the DB instance to the VPC security group \(`sg-dbsrv1`\) that you created in the previous step\. When you create the DB instance, use the same port number as the one specified for the VPC security group \(`sg-dbsrv1`\) rule that you created in step 3\.
+1. Create a new DB instance and add the DB instance to the VPC security group \(`sg-6789rdsexample`\) that you created in the previous step\. When you create the DB instance, use the same port number as the one specified for the VPC security group \(`sg-6789rdsexample`\) rule that you created in step 3\.
 
 The following diagram shows this scenario\.
 

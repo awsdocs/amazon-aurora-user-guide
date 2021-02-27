@@ -31,7 +31,7 @@ You can set the capacity of an Aurora DB cluster with the AWS Management Console
 
 1. Choose **Apply**\.
 
-To learn more about scaling points, `TimeoutAction`, and cooldown periods, see [Autoscaling for Aurora Serverless](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\.
+To learn more about scaling points, `TimeoutAction`, and cooldown periods, see [Autoscaling for Aurora Serverless v1](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\.
 
 ## AWS CLI<a name="aurora-serverless.setting-capacity.cli"></a>
 

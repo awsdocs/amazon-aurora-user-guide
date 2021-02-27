@@ -136,7 +136,7 @@ The following parameters are used to copy an unencrypted DB cluster snapshot:
 + `SourceDBClusterSnapshotIdentifier` – The identifier for the DB cluster snapshot to be copied\. If you are copying the snapshot to another AWS Region, this identifier must be in the ARN format for the source AWS Region\.
 + `TargetDBClusterSnapshotIdentifier` – The identifier for the new copy of the DB cluster snapshot\.
 
-The following code creates a copy of a snapshot `arn:aws:rds:us-east-1:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20130805` named `myclustersnapshotcopy` in the us\-west\-1 Region\. When the copy is made, all tags on the original snapshot are copied to the snapshot copy\.
+The following code creates a copy of a snapshot `arn:aws:rds:us-east-1:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20130805` named `myclustersnapshotcopy` in the US West \(N\. California\) Region\. When the copy is made, all tags on the original snapshot are copied to the snapshot copy\.
 
 **Example**  
 
@@ -178,7 +178,7 @@ The following options are used to copy an encrypted DB cluster snapshot:
 
   You must use this option if the DB cluster snapshot is encrypted and you are copying the snapshot to another AWS Region\. In that case, you must specify a AWS KMS CMK for the destination AWS Region\.
 
-The following code example copies the encrypted DB cluster snapshot from the us\-west\-2 Region to the us\-east\-1 Region\. The command is called in the us\-east\-1 Region\.
+The following code example copies the encrypted DB cluster snapshot from the US West \(Oregon\) Region to the US East \(N\. Virginia\) Region\. The command is called in the US East \(N\. Virginia\) Region\.
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -216,7 +216,7 @@ The following parameters are used to copy an encrypted DB cluster snapshot:
 
   To automatically rather than manually generate a presigned URL, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-snapshot.html) command with the `--source-region` option instead\.
 
-The following code example copies the encrypted DB cluster snapshot from the us\-west\-2 Region to the us\-east\-1 Region\. The action is called in the us\-east\-1 Region\. 
+The following code example copies the encrypted DB cluster snapshot from the US West \(Oregon\) Region to the US East \(N\. Virginia\) Region\. The action is called in the US East \(N\. Virginia\) Region\.
 
 **Example**  
 

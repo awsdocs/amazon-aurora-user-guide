@@ -11,6 +11,14 @@
 +  [Database engine updates for Amazon Aurora MySQL 1\.1](AuroraMySQL.Updates.11Updates.md) 
 
 **CVEs and minimum fixed Aurora MySQL versions**
++ [CVE\-2020\-14812](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14812): [2\.09\.2](AuroraMySQL.Updates.2092.md)
++ [CVE\-2020\-14793](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14793): [2\.09\.2](AuroraMySQL.Updates.2092.md)
++ [CVE\-2020\-14790](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14790): [2\.09\.2](AuroraMySQL.Updates.2092.md)
++ [CVE\-2020\-14775](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14775): [2\.09\.2](AuroraMySQL.Updates.2092.md)
++ [CVE\-2020\-14769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14769): [2\.09\.2](AuroraMySQL.Updates.2092.md)
++ [CVE\-2020\-14765](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14765): [2\.09\.2](AuroraMySQL.Updates.2092.md)
++ [CVE\-2020\-14760](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14760): [2\.09\.2](AuroraMySQL.Updates.2092.md)
++ [CVE\-2020\-14672](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14672): [2\.09\.2](AuroraMySQL.Updates.2092.md)
 + [CVE\-2020\-14567](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14567): [2\.09\.1](AuroraMySQL.Updates.2091.md), [2\.08\.3](AuroraMySQL.Updates.2083.md), [2\.07\.3](AuroraMySQL.Updates.2073.md)
 + [CVE\-2020\-14559](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14559): [2\.09\.1](AuroraMySQL.Updates.2091.md), [2\.08\.3](AuroraMySQL.Updates.2083.md), [2\.07\.3](AuroraMySQL.Updates.2073.md), [1\.23\.1](AuroraMySQL.Updates.1231.md), [1\.22\.3](AuroraMySQL.Updates.1223.md)
 + [CVE\-2020\-14553](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14553): [2\.09\.1](AuroraMySQL.Updates.2091.md), [2\.08\.3](AuroraMySQL.Updates.2083.md), [2\.07\.3](AuroraMySQL.Updates.2073.md)
@@ -25,6 +33,7 @@
 + [CVE\-2020\-2760](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-2760): [2\.09\.1](AuroraMySQL.Updates.2091.md), [2\.08\.3](AuroraMySQL.Updates.2083.md), [2\.07\.3](AuroraMySQL.Updates.2073.md), [2\.04\.9](AuroraMySQL.Updates.2049.md)
 + [CVE\-2019\-2740](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2740): [2\.07\.3](AuroraMySQL.Updates.2073.md)
 + [CVE\-2020\-2579](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-2579): [2\.09\.1](AuroraMySQL.Updates.2091.md), [2\.08\.3](AuroraMySQL.Updates.2083.md), [2\.07\.3](AuroraMySQL.Updates.2073.md), [1\.22\.3](AuroraMySQL.Updates.1223.md)
++ [CVE\-2020\-1971](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971): [2\.09\.2](AuroraMySQL.Updates.2092.md)
 + [CVE\-2019\-5443](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5443): [2\.08\.0](AuroraMySQL.Updates.2080.md), [2\.04\.9](AuroraMySQL.Updates.2049.md)
 + [CVE\-2019\-3822](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822): [2\.08\.0](AuroraMySQL.Updates.2080.md), [2\.04\.9](AuroraMySQL.Updates.2049.md)
 + [CVE\-2019\-2948](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2948): [2\.09\.0](AuroraMySQL.Updates.2090.md)

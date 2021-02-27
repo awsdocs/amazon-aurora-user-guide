@@ -105,7 +105,7 @@ Make sure that your on\-premises Microsoft Active Directory domain name includes
 
 ## Step 3: Create an IAM role for Amazon Aurora to access the AWS Directory Service<a name="postgresql-kerberos-setting-up.CreateIAMRole"></a>
 
-For Amazon Aurora to call AWS Directory Service for you, an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess` is required\. This role allows Amazon Aurora to make calls to AWS Directory Service\.
+For Amazon Aurora to call AWS Directory Service for you, an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess` is required\. This role allows Amazon Aurora to make calls to AWS Directory Service\. \(Note that this IAM role to access the AWS Directory Service is different than the IAM role used for [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\.\) 
 
 When a DB instance is created using the AWS Management Console and the console user has the `iam:CreateRole` permission, the console creates this role automatically\. In this case, the role name is `rds-directoryservice-kerberos-access-role`\. Otherwise, create the IAM role manually\. Choose **RDS** and then **RDS \- Directory Service**\. Attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to this role\.
 
@@ -195,15 +195,13 @@ Create or modify a PostgreSQL DB cluster for use with your directory\. You can u
 +   Restore a PostgreSQL DB cluster from a DB snapshot using the console, the [restore\-db\-cluster\-from\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) CLI command, or the [ RestoreDBClusterFromDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterFromSnapshot.html) RDS API operation\. For instructions, see [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md)\. 
 +   Restore a PostgreSQL DB cluster to a point\-in\-time using the console, the [ restore\-db\-instance\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) CLI command, or the [ RestoreDBClusterToPointInTime](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterToPointInTime.html) RDS API operation\. For instructions, see [Restoring a DB cluster to a specified time](USER_PIT.md)\. 
 
-Kerberos authentication is only supported for PostgreSQL DB clustersin a VPC\. The DB cluster can be in the same VPC as the directory, or in a different VPC\. The DB cluster must use a security group that allows ingress and egress within the directory's VPC so the DB cluster can communicate with the directory\.
+Kerberos authentication is only supported for PostgreSQL DB clusters in a VPC\. The DB cluster can be in the same VPC as the directory, or in a different VPC\. The DB cluster must use a security group that allows ingress and egress within the directory's VPC so the DB cluster can communicate with the directory\.
 
-When you use the console to create a DB cluster , choose **Password and Kerberos authentication** in the **Database authentication** section\. Choose **Browse Directory** and then select the directory, or choose **Create a new directory**\.
+### Console<a name="postgresql-kerberos-setting-up.create-modify.Console"></a>
 
-![\[Kerberos authentication setting when creating a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/kerberos-authentication.png)
+When you use the console to create, modify, or restore a DB cluster, choose **Kerberos authentication** in the **Database authentication** section\. Then choose **Browse Directory**\. Select the directory or choose **Create a new directory** to use the Directory Service\.
 
-When you use the console to modify or restore a DB cluster , choose the directory in the **Kerberos authentication** section, or choose **Create a new directory**\.
-
-![\[Kerberos authentication setting when modifying or restoring a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/kerberos-auth-modify-restore.png)
+### AWS CLI<a name="postgresql-kerberos-setting-up.create-modify.CLI"></a>
 
 When you use the AWS CLI, the following parameters are required for the DB cluster to be able to use the directory that you created:
 + For the `--domain` parameter, use the domain identifier \("d\-\*" identifier\) generated when you created the directory\.
@@ -222,7 +220,7 @@ If you modify a DB cluster to enable Kerberos authentication, reboot the DB clus
 
 Use the RDS master user credentials to connect to the PostgreSQL DB cluster as you do with any other DB cluster \. The DB instance is joined to the AWS Managed Microsoft AD domain\. Thus, you can provision PostgreSQL logins and users from the Microsoft Active Directory users and groups in your domain\. To manage database permissions, you grant and revoke standard PostgreSQL permissions to these logins\. 
 
-To allow an Active Directory user to authenticate with PostgreSQL, use the RDS master user credentials\. You use these credentials to connect to the PostgreSQL DB cluster as you do with any other DB cluster \. After you're logged in, create an externally authenticated user in PostgreSQL and grant the `rds_ad` role to this user\.
+To allow an Active Directory user to authenticate with PostgreSQL, use the RDS master user credentials\. You use these credentials to connect to the PostgreSQL DB cluster as you do with any other DB cluster \. After you're logged in, create an externally authenticated user in PostgreSQL and grant the `rds_ad` role to this user\. 
 
 ```
 CREATE USER "username@CORP.EXAMPLE.COM" WITH LOGIN; 
@@ -230,6 +228,8 @@ GRANT rds_ad TO "username@CORP.EXAMPLE.COM";
 ```
 
  Replace `username ` with the user name and include the domain name in uppercase\. Users \(both humans and applications\) from your domain can now connect to the RDS PostgreSQL cluster from a domain\-joined client machine using Kerberos authentication\. 
+
+Note that a database user can use either Kerberos or IAM authentication but not both, so this user can't also have the `rds_iam` role\. This also applies to nested memberships\. For more information, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\.
 
 ## Step 8: Configure a PostgreSQL client<a name="postgresql-kerberos-setting-up.configure-client"></a>
 

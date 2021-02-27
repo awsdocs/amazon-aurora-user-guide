@@ -40,7 +40,7 @@ By using Aurora global databases, you can get the following advantages:
 + **Global reads with local latency** – If you have offices around the world, you can use an Aurora global database to keep your main sources of information updated in the primary AWS Region\. Offices in your other Regions can access the information in their own Region, with local latency\. 
 + **Scalable secondary Aurora DB clusters** – You can scale your secondary clusters by adding more read\-only instances \(Aurora Replicas\) to a secondary AWS Region\. The secondary cluster is read\-only, so it can support up to 16 read\-only Aurora Replica instances rather than the usual limit of 15 for a single Aurora cluster\.
 + **Fast replication from primary to secondary Aurora DB clusters** – The replication performed by an Aurora global database has little performance impact on the primary DB cluster\. The resources of the DB instances are fully devoted to serve application read and write workloads\.
-+ **Recovery from Region\-wide outages** – The secondary clusters allow you to quickly recreate an Aurora global database with a new primary cluster, without data loss\.
++ **Recovery from Region\-wide outages** – The secondary clusters allow you to make an Aurora global database available in a new primary AWS Region more quickly \(lower RTO\) and with less data loss \(lower RPO\) than traditional replication solutions\. 
 
 ## Limitations of Amazon Aurora global databases<a name="aurora-global-database.limitations"></a>
 

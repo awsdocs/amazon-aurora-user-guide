@@ -2,6 +2,17 @@
 
 Amazon Aurora supports several ways to authenticate database users\.
 
+Password authentication is available by default for all DB clusters\. For Aurora MySQL, you can also add either IAM database authentication or Kerberos authentication for a DB cluster\. For Aurora PostgreSQL, you can also add either or both IAM database authentication and Kerberos authentication for the same DB cluster\. 
+
+Password, Kerberos, and IAM database authentication use different methods of authenticating to the database\. Therefore, a specific user can log in to a database using only one authentication method\. 
+
+For PostgreSQL, use only one of the following role settings for a user of a specific database: 
++ To use IAM database authentication, assign the `rds_iam` role to the user\.
++ To use Kerberos authentication, assign the `rds_ad` role to the user\. 
++ To use password authentication, don't assign either the `rds_iam` or `rds_ad` roles to the user\. 
+
+Don't assign both the `rds_iam` and `rds_ad` roles to a user of a PostgreSQL database either directly or indirectly by nested grant access\. If the `rds_iam` role is added to the master user, IAM authentication takes precedence over password authentication so the master user has to log in as an IAM user\.
+
 **Topics**
 + [Password authentication](#password-authentication)
 + [IAM database authentication](#iam-database-authentication)

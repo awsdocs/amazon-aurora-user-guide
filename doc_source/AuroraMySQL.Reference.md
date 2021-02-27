@@ -20,7 +20,10 @@ You can manage both cluster\-level and instance\-level parameters using the AWS 
 
 You can view both cluster\-level and instance\-level parameters in the console, or by using the CLI or RDS API\. For example, you can use the [describe\-db\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) AWS CLI command to view cluster\-level parameters in a DB cluster parameter group\. You can use the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) CLI command to view instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
 
-For more information on DB parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. For rules and restrictions for Aurora Serverless clusters, see [Aurora Serverless v1 and parameter groups](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.
+**Note**  
+Each [default parameter group](USER_WorkingWithParamGroups.md) contains the default values for all parameters in the parameter group\. If the parameter has "engine default" for this value, see the version\-specific MySQL or PostgreSQL documentation for the actual default value\. 
+
+For more information on DB parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. For rules and restrictions for Aurora Serverless clusters, see [Parameter groups and Aurora Serverless v1](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.
 
 **Topics**
 + [Cluster\-level parameters](#AuroraMySQL.Reference.Parameters.Cluster)

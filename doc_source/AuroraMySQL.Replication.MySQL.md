@@ -312,7 +312,7 @@ After you have established replication between your source MySQL DB instance and
  If this parameter is set to 1, Aurora MySQL optimizes binary log replication based on the settings of the parameters `aurora_binlog_read_buffer_size` and `aurora_binlog_replication_max_yield_seconds`\. If `aurora_binlog_use_large_read_buffer` is 0, Aurora MySQL ignores the values of the `aurora_binlog_read_buffer_size` and `aurora_binlog_replication_max_yield_seconds` parameters\. 
 
 `aurora_binlog_read_buffer_size`  
- Binary log dump threads with larger read buffer minimize the number of read I/O operations by reading more events for each I/O\. The parameter `aurora_binlog_read_buffer_size` sets the read buffer size\. The large read buffer effectively reduces binlog contentions when updating transactions generate binlog events fast enough to fill up the read buffer size before the dump threads start to read them\.   
+ Binary log dump threads with larger read buffer minimize the number of read I/O operations by reading more events for each I/O\. The parameter `aurora_binlog_read_buffer_size` sets the read buffer size\. The large read buffer effectively reduces binlog contention when updating transactions that generate binlog events fast enough to fill up the read buffer size before the dump threads start to read them\.   
  This parameter only has an effect when the cluster also has the setting `aurora_binlog_use_large_read_buffer=1`\.   
  Increasing the size of the read buffer doesn't affect the performance of binary log replication\. Binary log dump threads don't wait for updating transactions to fill up the read buffer\. 
 

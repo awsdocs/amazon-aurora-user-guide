@@ -29,9 +29,8 @@ IAM database authentication is available for the following database engines:
 
     For more information, see [Database engine updates for Amazon Aurora MySQL 1\.1](AuroraMySQL.Updates.11Updates.md)\.
 + **Aurora PostgreSQL**
-  + Aurora PostgreSQL version 3, all minor versions
-  + Aurora PostgreSQL version 2, all minor versions
-  + Aurora PostgreSQL version 1\.3 and higher 1 minor versions
+  + Aurora PostgreSQL 10\.4 and higher 10\.x versions \(Aurora release 2\.0 and higher 2\.x releases\)
+  + Aurora PostgreSQL 9\.6\.9 and higher 9\.6\.x versions \(Aurora release 1\.3 and higher 1\.x releases\)
 
   For more information, see [Engine versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.20180305.md)\.
 
@@ -45,6 +44,7 @@ When using IAM database authentication, the following limitations apply:
 
   For more information about global condition context keys, see [ AWS global condition context keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\.
 + Currently, IAM database authentication isn't supported for CNAMEs\.
++ For PostgreSQL, if the IAM role \(`rds_iam`\) is added to the master user, IAM authentication takes precedence over Password authentication so the master user has to log in as an IAM user\.
 
 ## Aurora MySQL recommendations for IAM database authentication<a name="UsingWithRDS.IAMDBAuth.ConnectionsPerSecond"></a>
 

@@ -66,11 +66,12 @@ The following limitations apply to Aurora Serverless v1:
   + Restoring a snapshot from a DB instance that isn't Aurora MySQL or RDS MySQL\.
   + Replicating data using replication based on binary logs \(binlogs\)\. This limitation is true regardless of whether your Aurora MySQL\-based DB cluster Aurora Serverless v1 is the source or the target of the replication\. To replicate data into an Aurora Serverless v1 DB cluster from a MySQL DB instance outside Aurora, such as one running on Amazon EC2, consider using AWS Database Migration Service\. For more information, see the [AWS Database Migration Service User Guide](https://docs.aws.amazon.com/dms/latest/userguide/)\. 
 + Aurora PostgreSQL–based DB clusters running Aurora Serverless v1 have the following limitations:
-  + The logical replication feature available in Amazon RDS PostgreSQL and Aurora PostgreSQL is not supported\. 
+  + Aurora PostgreSQL query plan management \(`apg_plan_management` extension\) isn't supported\.
+  + The logical replication feature available in Amazon RDS PostgreSQL and Aurora PostgreSQL isn' supported\. 
   + Outbound communications such as those enabled by Amazon RDS for PostgreSQL extensions aren't supported\. For example, you can't access external data with the `postgres_fdw/dblink` extension\. For more information about RDS PostgreSQL extensions, see [PostgreSQL on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x) in the *RDS User Guide*\.
   + Currently, certain SQL queries and commands aren't recommended\. These include session\-level advisory locks, temporary relations, asynchronous notifications \(`LISTEN`\), and cursors with hold \(`DECLARE name ... CURSOR WITH HOLD FOR query`\)\. Also, `NOTIFY` commands prevent scaling and aren't recommended\. 
 
-    For more information, see [Autoscaling for Aurora Serverless](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\.
+    For more information, see [Autoscaling for Aurora Serverless v1](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\.
 
 ## Configuration requirements for Aurora Serverless v1<a name="aurora-serverless.requirements"></a>
 
@@ -78,7 +79,7 @@ When you create an Aurora Serverless v1 DB cluster, pay attention to the followi
 + Use these specific port numbers for each DB engine:
   + Aurora MySQL – `3306`
   + Aurora PostgreSQL – `5432` 
-+ Create your Aurora Serverless v1 DB cluster in a virtual private cloud \(VPC\) based on the Amazon VPC service\. When you create an Aurora Serverless v1 DB cluster in your VPC, you consume two \(2\) of the fifty \(50\) Interface and Gateway Load Balancer endpoints alloted to your VPC\. These endpoints are created automatically for you\. To increase your quota, you can contact AWS Support\. For more information, see [Amazon VPC quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-endpoints)\. 
++ Create your Aurora Serverless v1 DB cluster in a virtual private cloud \(VPC\) based on the Amazon VPC service\. When you create an Aurora Serverless v1 DB cluster in your VPC, you consume two \(2\) of the fifty \(50\) Interface and Gateway Load Balancer endpoints allotted to your VPC\. These endpoints are created automatically for you\. To increase your quota, you can contact AWS Support\. For more information, see [Amazon VPC quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-endpoints)\. 
 + You can't give an Aurora Serverless v1 DB cluster a public IP address\. You can access an Aurora Serverless v1 DB cluster only from within a VPC\. 
 + Create subnets in different Availability Zones for the DB subnet group that you use for your Aurora Serverless v1 DB cluster\. In other words, you can't have more than one subnet in the same Availability Zone\.
 + Changes to a subnet group used by an Aurora Serverless v1 DB cluster aren't applied to the cluster\.

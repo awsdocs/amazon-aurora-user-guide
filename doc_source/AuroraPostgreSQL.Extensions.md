@@ -24,7 +24,7 @@ The `apg_plan_mgmt` extension changes for version 2\.0 include the following:
 
 **Extension improvements**
 
-1. You can now save planswith a size up to 8KB times the setting of the `max_worker_processes` parameter\. Previously the maximum plan size was 8KB\.
+1. You can now save plans with a size up to 8KB times the setting of the `max_worker_processes` parameter\. Previously the maximum plan size was 8KB\.
 
 1. Fixed bugs for unnamed prepared statements such as those from JDBC\.
 

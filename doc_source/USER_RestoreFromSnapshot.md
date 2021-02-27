@@ -52,7 +52,7 @@ You can restore a DB cluster from a DB cluster snapshot using the AWS Management
 
 To restore a DB cluster from a DB cluster snapshot, use the AWS CLI command [restore\-db\-cluster\-from\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html)\. 
 
-In this example, you restore from a previously created DB cluster snapshot named *mydbclustersnapshot*\. You restore to a new DB cluster named *mynewdbcluster*\. 
+In this example, you restore from a previously created DB cluster snapshot named `mydbclustersnapshot`\. You restore to a new DB cluster named `mynewdbcluster`\.
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -62,7 +62,7 @@ For Linux, macOS, or Unix:
 1. aws rds restore-db-cluster-from-snapshot \
 2.     --db-cluster-identifier mynewdbcluster \
 3.     --snapshot-identifier mydbclustersnapshot \
-4.     --engine aurora|aurora-postgresql
+4.     --engine aurora|aurora-mysql|aurora-postgresql
 ```
 For Windows:  
    
@@ -71,7 +71,7 @@ For Windows:
 1. aws rds restore-db-cluster-from-snapshot ^
 2.     --db-cluster-identifier mynewdbcluster ^
 3.     --snapshot-identifier mydbclustersnapshot ^
-4.     --engine aurora|aurora-postgresql
+4.     --engine aurora|aurora-mysql|aurora-postgresql
 ```
 
 After the DB cluster has been restored, you must add the DB cluster to the security group used by the DB cluster used to create the DB cluster snapshot if you want the same functionality as that of the previous DB cluster\.

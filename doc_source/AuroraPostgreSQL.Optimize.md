@@ -29,6 +29,8 @@ With query plan management, you can control execution plans for a set of stateme
 
 Query plan management is available with Aurora PostgreSQL 12\.4, Aurora PostgreSQL 11\.6, Aurora PostgreSQL 10\.5, Aurora PostgreSQL 9\.6\.11 and later releases of these versions of Aurora with PostgreSQL compatibility\. 
 
+Only users with the `rds_superuser` role can complete the following procedure\. The `rds_superuser` is required for creating the `apg_plan_mgmt` extension and its `apg_plan_mgmt` role\. Users must be granted the `apg_plan_mgmt` role to administer the `apg_plan_mgmt` extension\.
+
 **To enable query plan management**
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
@@ -51,8 +53,13 @@ Query plan management is available with Aurora PostgreSQL 12\.4, Aurora PostgreS
    ```
 
    If you create the `apg_plan_mgmt` extension in the `template1` default database, then the query plan management extension is available in each new database that you create\. 
-**Note**  
-To create the `apg_plan_mgmt` extension, you need the `rds_superuser` role\. When you create the `apg_plan_mgmt` extension, the `apg_plan_mgmt` role is created\. Users must be granted the `apg_plan_mgmt` role to administer the `apg_plan_mgmt` extension\. 
+
+You can disable query plan management at any time by turning off the `apg_plan_mgmt.use_plan_baselines` and `apg_plan_mgmt.capture_plan_baselines`:
+
+```
+my-database=> SET apg_plan_mgmt.use_plan_baselines = off;
+my-database=> SET apg_plan_mgmt.capture_plan_baselines = off;
+```
 
 ## Upgrading query plan management<a name="AuroraPostgreSQL.Optimize.Upgrade"></a>
 

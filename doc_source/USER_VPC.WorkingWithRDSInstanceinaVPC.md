@@ -21,7 +21,7 @@ To learn how to work with DB instances inside a VPC, see the following:
 Here are some tips on working with a DB instance in a VPC:
 + Your VPC must have at least two subnets\. These subnets must be in two different Availability Zones in the AWS Region where you want to deploy your DB instance\. A subnet is a segment of a VPC's IP address range that you can specify and that lets you group instances based on your security and operational needs\. 
 + If you want your DB instance in the VPC to be publicly accessible, you must enable the VPC attributes *DNS hostnames* and *DNS resolution*\. 
-+ Your VPC must have a DB subnet group that you create \(for more information, see the next section\)\. You create a DB subnet group by specifying the subnets you created\. Amazon Aurora uses that DB subnet group and your preferred Availability Zone to choose a subnet and an IP address within that subnet to assign to your DB instance\.
++ Your VPC must have a DB subnet group that you create \(for more information, see the next section\)\. You create a DB subnet group by specifying the subnets you created\. Amazon Aurora chooses a subnet and an IP address within that subnet to associate with your DB instance\. The DB instance uses the Availability Zone that contains the subnet\.
 + Your VPC must have a VPC security group that allows access to the DB instance\. 
 + The CIDR blocks in each of your subnets must be large enough to accommodate spare IP addresses for Amazon Aurora to use during maintenance activities, including failover and compute scaling\. 
 +  A VPC can have an *instance tenancy* attribute of either *default* or *dedicated*\. All default VPCs have the instance tenancy attribute set to default, and a default VPC can support any DB instance class\. 
@@ -36,7 +36,7 @@ When you set the instance tenancy attribute to dedicated for an Amazon RDS DB in
 
 Subnets are segments of a VPC's IP address range that you designate to group your resources based on security and operational needs\. A DB subnet group is a collection of subnets \(typically private\) that you create in a VPC and that you then designate for your DB instances\. A DB subnet group allows you to specify a particular VPC when creating DB instances using the CLI or API; if you use the console, you can just choose the VPC and subnets you want to use\. 
 
-Each DB subnet group should have subnets in at least two Availability Zones in a given AWS Region\. When creating a DB instance in a VPC, you must choose a DB subnet group\. Amazon Aurora uses that DB subnet group and your preferred Availability Zone to choose a subnet and an IP address within that subnet to associate with your DB instance\. If the primary DB instance of a Multi\-AZ deployment fails, Amazon Aurora can promote the corresponding standby and subsequently create a new standby using an IP address of the subnet in one of the other Availability Zones\. 
+Each DB subnet group should have subnets in at least two Availability Zones in a given AWS Region\. When creating a DB instance in a VPC, you must choose a DB subnet group\. From the DB subnet group, Amazon Aurora chooses a subnet and an IP address within that subnet to associate with your DB instance\. The DB instance uses the Availability Zone that contains the subnet\. If the primary DB instance of a Multi\-AZ deployment fails, Amazon Aurora can promote the corresponding standby and subsequently create a new standby using an IP address of the subnet in one of the other Availability Zones\.
 
 The subnets in a DB subnet group are either public or private\. They can't be a mix of both public and private subnets\. The subnets are public or private, depending on the configuration that you set for their network access control lists \(network ACLs\) and routing tables\.
 
@@ -58,9 +58,6 @@ The following illustration shows the **Public access** option in the **Additiona
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/VPC-example4.png)
 
 For information about modifying a DB instance to set the **Public access** option, see [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\.
-
-**Note**  
-If your DB instance is isn't publicly accessible, you can also use an AWS Site\-to\-Site VPN connection or an AWS Direct Connect connection to access it from a private network\. For more information, see [Internetwork traffic privacy](inter-network-traffic-privacy.md)\.
 
 ## Creating a DB instance in a VPC<a name="USER_VPC.InstanceInVPC"></a>
 
@@ -92,7 +89,7 @@ For instructions on how to create subnets in a VPC, see [Create a VPC with priva
 
  For a DB instance to be publicly accessible, the subnets in the DB subnet group must have an internet gateway\. For more information about internet gateways for subnets, see [ Internet gateways](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) in the Amazon VPC documentation\. 
 
-When you create a DB instance in a VPC, make sure to choose a DB subnet group\. Amazon Aurora then uses that DB subnet group and your preferred Availability Zone to choose a subnet and an IP address within that subnet\. Amazon Aurora creates and associates an Elastic Network Interface to your DB instance with that IP address\. For Multi\-AZ deployments, defining a subnet for two or more Availability Zones in an AWS Region allows Amazon Aurora to create a new standby in another Availability Zone should the need arise\. You need to do this even for Single\-AZ deployments, just in case you want to convert them to Multi\-AZ deployments at some point\. 
+When you create a DB instance in a VPC, make sure to choose a DB subnet group\. Amazon Aurora chooses a subnet and an IP address within that subnet to associate with your DB instance\. Amazon Aurora creates and associates an Elastic Network Interface to your DB instance with that IP address\. The DB instance uses the Availability Zone that contains the subnet\. For Multi\-AZ deployments, defining a subnet for two or more Availability Zones in an AWS Region allows Amazon Aurora to create a new standby in another Availability Zone should the need arise\. You need to do this even for Single\-AZ deployments, just in case you want to convert them to Multi\-AZ deployments at some point\. 
 
 In this step, you create a DB subnet group and add the subnets that you created for your VPC\. 
 

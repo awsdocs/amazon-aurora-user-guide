@@ -24,7 +24,7 @@ You can only enable IAM authentication if all DB instances in the DB cluster are
 
 1. Choose **Modify**\.
 
-1. In the **Database authentication** section, choose **Password and IAM database authentication** to enable IAM database authentication, or choose a different option to disable it\.
+1. In the **Database authentication** section, choose **Password and IAM database authentication** to enable IAM database authentication\.
 
 1. Choose **Continue**\.
 

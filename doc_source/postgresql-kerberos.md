@@ -8,7 +8,22 @@ Keeping all of your credentials in the same directory can save you time and effo
 
 You can also access credentials from your own on\-premises Microsoft Active Directory\. To do so you create a trusting domain relationship so that the AWS Managed Microsoft AD directory trusts your on\-premises Microsoft Active Directory\. In this way, your users can access your PostgreSQL clusters with the same Windows single sign\-on \(SSO\) experience as when they access workloads in your on\-premises network\.
 
-Kerberos provides a different authentication method than AWS Identity and Access Management \(IAM\)\. A database can use either Kerberos or IAM authentication but not both\. For more information about IAM authentication, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\. 
+A database can use Kerberos, AWS Identity and Access Management \(IAM\), or both Kerberos and IAM authentication\. However, since Kerberos and IAM authentication provide different authentication methods, a specific user can log in to a database using only one or the other authentication method but not both\. For more information about IAM authentication, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\. 
+
+**Topics**
++ [Availability of Kerberos authentication](#postgresql-kerberos-availability)
++ [Overview of Kerberos authentication for PostgreSQL DB clusters](#postgresql-kerberos-overview)
++ [Setting up Kerberos authentication for PostgreSQL DB clusters](postgresql-kerberos-setting-up.md)
++ [Managing a DB cluster in a Domain](postgresql-kerberos-managing.md)
++ [Connecting to PostgreSQL with Kerberos authentication](postgresql-kerberos-connecting.md)
+
+## Availability of Kerberos authentication<a name="postgresql-kerberos-availability"></a>
+
+Kerberos authentication is supported on the following engine versions:
++ Aurora PostgreSQL 11\.6 and higher 11\.x versions \(Aurora release 3\.1 and higher 3\.x releases\)
++ Aurora PostgreSQL 10\.11 and higher 10\.x versions \(Aurora release 2\.4 and higher 2\.x releases\)
+
+For more information, see [Engine versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.20180305.md)\.
 
 Amazon Aurora supports Kerberos authentication for PostgreSQL DB clusters in the following AWS Regions: 
 
@@ -33,12 +48,6 @@ Amazon Aurora supports Kerberos authentication for PostgreSQL DB clusters in the
 |  Europe \(Paris\)  |  eu\-west\-3  | 
 | Europe \(Stockholm\) | eu\-north\-1 | 
 | South America \(São Paulo\) | sa\-east\-1 | 
-
-**Topics**
-+ [Overview of Kerberos authentication for PostgreSQL DB clusters](#postgresql-kerberos-overview)
-+ [Setting up Kerberos authentication for PostgreSQL DB clusters](postgresql-kerberos-setting-up.md)
-+ [Managing a DB cluster in a Domain](postgresql-kerberos-managing.md)
-+ [Connecting to PostgreSQL with Kerberos authentication](postgresql-kerberos-connecting.md)
 
 ## Overview of Kerberos authentication for PostgreSQL DB clusters<a name="postgresql-kerberos-overview"></a>
 

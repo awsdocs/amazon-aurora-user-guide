@@ -5,6 +5,7 @@ The `apg_plan_mgmt` extension provides the following functions\.
 **Topics**
 + [apg\_plan\_mgmt\.delete\_plan](#AuroraPostgreSQL.Optimize.Functions.delete_plan)
 + [apg\_plan\_mgmt\.evolve\_plan\_baselines](#AuroraPostgreSQL.Optimize.Functions.evolve_plan_baselines)
++ [apg\_plan\_mgmt\.get\_explain\_stmt](#AuroraPostgreSQL.Optimize.Functions.get_explain_stmt)
 + [apg\_plan\_mgmt\.plan\_last\_used](#AuroraPostgreSQL.Optimize.Functions.plan_last_used)
 + [apg\_plan\_mgmt\.reload](#AuroraPostgreSQL.Optimize.Functions.reload)
 + [apg\_plan\_mgmt\.set\_plan\_enabled](#AuroraPostgreSQL.Optimize.Functions.set_plan_enabled)
@@ -81,6 +82,40 @@ Conduct a performance experiment to compare the planning plus execution time of 
 The incremental benefit \(or disadvantage\) of each plan is recorded in the `apg_plan_mgmt.dba_plans` view in the `total_time_benefit_ms` column\. When this value is positive, there is a measurable performance advantage to including this plan in the baseline\.
 
 In addition to collecting the planning and execution time of each candidate plan, the `last_verified` column of the `apg_plan_mgmt.dba_plans` view is updated with the `current_timestamp`\. The `last_verified` timestamp might be used to avoid running this function again on a plan that recently had its performance verified\.
+
+## apg\_plan\_mgmt\.get\_explain\_stmt<a name="AuroraPostgreSQL.Optimize.Functions.get_explain_stmt"></a>
+
+Generates the text of an `EXPLAIN` statement for the specified SQL statement\. 
+
+**Syntax**
+
+```
+apg_plan_mgmt.get_explain_stmt(
+    sql_hash,
+    plan_hash,
+    explain_option_list
+)
+```
+
+**Return value**  
+Returns runtime statistics for the specified SQL statements\. Use without `explain_options_list` to return a simple `EXPLAIN` plan\.
+
+**Parameters**
+
+
+****  
+
+| Parameter | Description | 
+| --- | --- | 
+| sql\_hash  | The sql\_hash ID of the plan's managed SQL statement\. | 
+| plan\_hash | The managed plan's plan\_hash ID\. | 
+| explain\_option\_list | A comma\-separated list of `explain_options`\. Valid values include `analyze`, `verbose`, `buffers`, `hashes`, and `format json`\. If the list of `explain_options` is NULL or an empty string \(''\), this function generates an `EXPLAIN` statement, without any statistics\.  | 
+
+ 
+
+** Usage notes**
+
+For the `explain_option_list`, you can use any of the same options that you would use with an `EXPLAIN` statement\. The Aurora PostgreSQL optimizer concatenates the list of options you provide to the `EXPLAIN` statement, so you can request any option that `EXPLAIN` supports\. 
 
 ## apg\_plan\_mgmt\.plan\_last\_used<a name="AuroraPostgreSQL.Optimize.Functions.plan_last_used"></a>
 

@@ -39,7 +39,7 @@ The following table describes metrics that are specific to Aurora clusters\.
 The following instance\-specific CloudWatch metrics apply to all Aurora MySQL and Aurora PostgreSQL instances unless noted otherwise\.
 
 
-**Instance\-specific metrics**  
+**Instance\-level metrics**  
 
 | Metric | Description | Applies to | Units | 
 | --- | --- | --- | --- | 
@@ -54,25 +54,25 @@ The following instance\-specific CloudWatch metrics apply to all Aurora MySQL an
 |  `BinLogDiskUsage`  |  The amount of disk space occupied by binary logs on the primary instance\.  |  Primary for Aurora MySQL  |  Bytes  | 
 |  `BlockedTransactions`  |  The average number of transactions in the database that are blocked per second\.  |  Aurora MySQL  |  Count per second  | 
 |  `BufferCacheHitRatio`  |  The percentage of requests that are served by the buffer cache\.  |  Aurora MySQL and Aurora PostgreSQL  |  Percentage  | 
-|  `CommitLatency`  |  The latency for commit operations\.  |  Aurora MySQL and Aurora PostgreSQL  |  Milliseconds  | 
+|  `CommitLatency`  |  The average duration of commit operations\.  |  Aurora MySQL and Aurora PostgreSQL  |  Milliseconds  | 
 |  `CommitThroughput`  |  The average number of commit operations per second\.  |  Aurora MySQL and Aurora PostgreSQL  |  Count per second  | 
 |  `CPUCreditBalance`  |  The number of CPU credits that an instance has accumulated, reported at 5\-minute intervals\. You can use this metric to determine how long a DB instance can burst beyond its baseline performance level at a given rate\. This metric applies only to `db.t2.small` and `db.t2.medium` instances for Aurora MySQL, and to `db.t3` instances for Aurora PostgreSQL\.  |  Aurora MySQL and Aurora PostgreSQL  |  Count  | 
 |  `CPUCreditUsage`  |  The number of CPU credits consumed during the specified period, reported at 5\-minute intervals\. This metric measures the amount of time during which physical CPUs have been used for processing instructions by virtual CPUs allocated to the DB instance\.  This metric applies only to `db.t2.small` and `db.t2.medium` instances for Aurora MySQL, and to `db.t3` instances for Aurora PostgreSQL\.  |  Aurora MySQL and Aurora PostgreSQL  |  Count  | 
 |  `CPUUtilization`  |  The percentage of CPU used by an Aurora DB instance\.  |  Aurora MySQL and Aurora PostgreSQL  |  Percentage  | 
-|  `DatabaseConnections`  |  The number of connections to an Aurora DB instance\.  |  Aurora MySQL and Aurora PostgreSQL  |  Count  | 
-|  `DDLLatency`  |  The latency for data definition language \(DDL\) requests such as example, create, alter, and drop requests\.  |  Aurora MySQL  |  Milliseconds  | 
+|  `DatabaseConnections`  |  The current number of connections to an Aurora DB instance\.  |  Aurora MySQL and Aurora PostgreSQL  |  Count  | 
+|  `DDLLatency`  |  The average duration of requests such as example, create, alter, and drop requests\.  |  Aurora MySQL  |  Milliseconds  | 
 |  `DDLThroughput`  |  The average number of DDL requests per second\.  |  Aurora MySQL  |  Count per second  | 
 |  `Deadlocks`  |  The average number of deadlocks in the database per second\.  |  Aurora MySQL and Aurora PostgreSQL  |  Count per second  | 
-|  `DeleteLatency`  |  The latency for delete queries\.  |  Aurora MySQL  |  Milliseconds  | 
+|  `DeleteLatency`  |  The average duration of delete operations\.  |  Aurora MySQL  |  Milliseconds  | 
 |  `DeleteThroughput`  |  The average number of delete queries per second\.  |  Aurora MySQL  |  Count per second  | 
 |  `DiskQueueDepth`  |  The number of outstanding read/write requests waiting to access the disk\.  |  Aurora PostgreSQL  |  Count  | 
-|  `DMLLatency`  |  The latency for inserts, updates, and deletes\.  |  Aurora MySQL  |  Milliseconds  | 
+|  `DMLLatency`  |  The average duration of inserts, updates, and deletes\.  |  Aurora MySQL  |  Milliseconds  | 
 |  `DMLThroughput`  |  The average number of inserts, updates, and deletes per second\.  |  Aurora MySQL  |  Count per second  | 
 |  `EngineUptime`  |  The amount of time that the instance has been running\.  |  Aurora MySQL and Aurora PostgreSQL  |  Seconds  | 
 |  `FreeableMemory`  |  The amount of available random access memory\.  |  Aurora MySQL and Aurora PostgreSQL  |  Megabytes  | 
 |  `FreeLocalStorage`  |  The amount of local storage available\. Unlike for other DB engines, for Aurora DB instances this metric reports the amount of storage available to each DB instance\. This value depends on the DB instance class \(for pricing information, see the [Amazon RDS product page](http://aws.amazon.com/rds/#pricing)\)\. You can increase the amount of free storage space for an instance by choosing a larger DB instance class for your instance\.  |  Aurora MySQL and Aurora PostgreSQL  |  Megabytes  | 
-|  `InsertLatency`  |  The latency for insert queries\.  |  Aurora MySQL  |  Milliseconds  | 
-|  `InsertThroughput`  |  The average number of insert queries per second\.  |  Aurora MySQL  |  Count per second  | 
+|  `InsertLatency`  |  The average duration of insert operations\.  |  Aurora MySQL  |  Milliseconds  | 
+|  `InsertThroughput`  |  The average number of insert operations per second\.  |  Aurora MySQL  |  Count per second  | 
 |  `LoginFailures`  |  The average number of failed login attempts per second\.  |  Aurora MySQL  |  Count per second  | 
 |  `MaximumUsedTransactionIDs`  |  The age of the oldest unvacuumed transaction ID, in transactions\. If this value reaches 2,146,483,648 \(2^31 \- 1,000,000\), the database is forced into read\-only mode, to avoid transaction ID wraparound\. For more information, see [Preventing transaction ID wraparound failures](https://www.postgresql.org/docs/current/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND) in the PostgreSQL documentation\.  |  Aurora PostgreSQL  |  Count  | 
 |  `NetworkReceiveThroughput`  |  The amount of network throughput received from clients by each instance in the Aurora MySQL DB cluster\. This throughput doesn't include network traffic between instances in the Aurora DB cluster and the cluster volume\.  |  Aurora MySQL and Aurora PostgreSQL   |  Bytes per second \(console shows Megabytes per second\)  | 
@@ -87,16 +87,16 @@ The following instance\-specific CloudWatch metrics apply to all Aurora MySQL an
 |  `ResultSetCacheHitRatio`  |  The percentage of requests that are served by the Resultset cache\.  |  Aurora MySQL  |  Percentage  | 
 |  `RollbackSegmentHistoryListLength`  |  The undo logs that record committed transactions with delete\-marked records\. These records are scheduled to be processed by the InnoDB purge operation\.  |  Aurora MySQL  |    | 
 |  `RowLockTime`  |  The total time spent acquiring row locks for InnoDB tables\.  |  Aurora MySQL  |  Milliseconds  | 
-|  `SelectLatency`  |  The latency for select queries\.  |  Aurora MySQL  |  Milliseconds  | 
+|  `SelectLatency`  |  The average amount of time for select operations\.  |  Aurora MySQL  |  Milliseconds  | 
 |  `SelectThroughput`  |  The average number of select queries per second\.  |  Aurora MySQL  |  Count per second  | 
 |  `SumBinaryLogSize`  |  The total size of the binlog files\.  |  Aurora MySQL  |  Bytes  | 
 |  `SwapUsage`  |  The amount of swap space used\. This metric is available for the Aurora PostgreSQL instance classes `db.t3.medium`, `db.r5.large`, `db.r5.xlarge`, `db.r4.large`, and `db.r4.xlarge`\. For Aurora MySQL, this metric applies only to `db.t*` instances\.  |  Aurora MySQL and Aurora PostgreSQL  |  Bytes  | 
 |  `TransactionLogsDiskUsage`  |  The amount of disk space consumed by transaction logs on the Aurora PostgreSQL DB instance\. This metric is only generated when Aurora PostgreSQL is using logical replication or AWS Database Migration Service\. By default, Aurora PostgreSQL uses log records, not transaction logs\. When transaction logs aren't in use, the value for this metric is `-1`\.  |  Primary for Aurora PostgreSQL  |  Bytes  | 
-|  `UpdateLatency`  |  The latency for update queries\.  |  Aurora MySQL  |  Milliseconds  | 
-|  `UpdateThroughput`  |  The average number of update queries per second\.  |  Aurora MySQL  |  Count per second  | 
+|  `UpdateLatency`  |  The average amount of taken taken for update operations\.  |  Aurora MySQL  |  Milliseconds  | 
+|  `UpdateThroughput`  |  The average number of updates per second\.  |  Aurora MySQL  |  Count per second  | 
 |  `WriteIOPS`  |  The average number of disk I/O operations per second\. Aurora PostgreSQL reports read and write IOPS separately, at 1\-minute intervals\.  |  Aurora PostgreSQL  |  Count per second  | 
 |  `WriteLatency`  |  The average amount of time taken per disk I/O operation\.  |  Aurora MySQL and Aurora PostgreSQL  |  Seconds  | 
-|  `WriteThroughput`  |  The average number of bytes written to disk\.  |  Aurora PostgreSQL  |  Bytes per second  | 
+|  `WriteThroughput`  |  The average number of bytes written to persistent storage every second\.  |  Aurora PostgreSQL  |  Bytes per second  | 
 
 ## Viewing Aurora metrics in the Amazon RDS console<a name="Aurora.Monitoring.Metrics.RDS"></a>
 
