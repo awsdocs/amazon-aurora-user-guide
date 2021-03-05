@@ -54,7 +54,7 @@ By default, if autoscaling doesn't find a scaling point before timing out, Auror
 
 ## Timeout action for capacity changes<a name="aurora-serverless.how-it-works.timeout-action"></a>
 
-If autoscaling times out with finding a scaling point, by default Aurora keeps the current capacity\. You can choose to have Aurora force the change by enabling the **Force the capacity change** option\. This option is available in the **Capacity settings** section of the Create database page, when you create the cluster\.
+If autoscaling times out without finding a scaling point, by default, Aurora keeps the current capacity\. You can choose to have Aurora force the change by enabling the **Force the capacity change** option\. This option is available in the **Capacity settings** section of the Create database page, when you create the cluster\.
 + **\[ \] Force the capacity change** – By default, this option is deselected\. Leave this option unchecked to have your Aurora Serverless DB cluster's capacity to remain unchanged if the scaling operation times out without finding a scaling point\.
 + **\[X\] Force the capacity change** – Choosing this option causes your Aurora Serverless DB cluster to enforce the capacity change, even without a scaling point\. Before enabling this option, be aware of the consequences of this choice\. 
   + Any in\-process transactions are interrupted, and the following error message appears\.
