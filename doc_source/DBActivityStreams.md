@@ -21,7 +21,7 @@ Database activity streams have the following limits and requirements:
 + Database activity streams aren't supported in the following AWS Regions:
   + China \(Beijing\) Region, `cn-north-1`
   + China \(Ningxia\) Region, `cn-northwest-1`
-  + Asia Pacific \(Osaka\-Local\), `ap-northeast-3`
+  + Asia Pacific \(Osaka\), `ap-northeast-3`
   + AWS GovCloud \(US\-East\), `us-gov-east-1`
   + AWS GovCloud \(US\-West\), `us-gov-west-1`
 + Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.

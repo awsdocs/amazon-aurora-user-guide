@@ -32,6 +32,7 @@ Aurora backtracking is available for Aurora MySQL only\. It's not available for 
 | Africa \(Cape Town\) | \- | \- | 
 | Asia Pacific \(Hong Kong\) | \- | \- | 
 | Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.06 and later | 
+| Asia Pacific \(Osaka\) | Version 5\.6\.10a; version 1\.22 and later | Version 2\.07\.3 and later | 
 | Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.06 and later | 
 | Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.06 and later | 
 | Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.06 and later | 
@@ -66,6 +67,7 @@ Support for this feature varies by Aurora database engine and version\. The foll
 | Africa \(Cape Town\) | \- | \- | \- | \- | \- | 
 | Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | \- | 
 | Asia Pacific \(Mumbai\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
+| Asia Pacific \(Osaka\) | Version 5\.6\.10a; version 1\.22 and later | Version 2\.07\.3 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
 | Asia Pacific \(Seoul\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
 | Asia Pacific \(Singapore\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
 | Asia Pacific \(Sydney\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
@@ -98,6 +100,7 @@ Aurora machine learning provides simple, optimized, and secure integration betwe
 | Africa \(Cape Town\) | \- | \- | \- | \- | \- | 
 | Asia Pacific \(Hong Kong\) | \- | Version 2\.07 and later \(SageMaker only\) | Version 10\.11 | Version 11\.6 and later | Version 12\.4 and later | 
 | Asia Pacific \(Mumbai\) | \- | Version 2\.07 and later | Version 10\.11 | Version 11\.6 and later | Version 12\.4 and later | 
+| Asia Pacific \(Osaka\) | \- | Version 2\.07\.3 and later | Version 10\.11 | Version 11\.6 and later | Version 12\.4 and later | 
 | Asia Pacific \(Seoul\) | \- | Version 2\.07 and later | Version 10\.11 | Version 11\.6 and later | Version 12\.4 and later | 
 | Asia Pacific \(Singapore\) | \- | Version 2\.07 and later | Version 10\.11 | Version 11\.6 and later | Version 12\.4 and later | 
 | Asia Pacific \(Sydney\) | \- | Version 2\.07 and later | Version 10\.11 | Version 11\.6 and later | Version 12\.4 and later | 
@@ -125,22 +128,23 @@ Aurora parallel queries are available for Aurora MySQL only\. However, PostgreSQ
 
 | Region | Aurora MySQL 5\.6 | Aurora MySQL 5\.7 | 
 | --- | --- | --- | 
-| US East \(Ohio\) | Version 5\.6\.10a; Version 1\.19, 1\.20, and 1\.23 | Version 2\.09 | 
-| US East \(N\. Virginia\) | Version 5\.6\.10a; Version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
+| US East \(Ohio\) | Version 5\.6\.10a; version 1\.19, 1\.20, and 1\.23 | Version 2\.09 | 
+| US East \(N\. Virginia\) | Version 5\.6\.10a; version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
 | US West \(N\. California\) | Version 1\.23 | Version 2\.09 | 
-| US West \(Oregon\) | Version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
+| US West \(Oregon\) | Version 5\.6\.10a; version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
 | Africa \(Cape Town\) | Version 1\.23 | Version 2\.09 | 
 | Asia Pacific \(Hong Kong\) | Version 1\.23 | Version 2\.09 | 
 | Asia Pacific \(Mumbai\) | Version 1\.23 | Version 2\.09 | 
+| Asia Pacific \(Osaka\) | Version 1\.23\.1 and later | Version 2\.09\.1 and later | 
 | Asia Pacific \(Seoul\) | Version 1\.23 | Version 2\.09 | 
 | Asia Pacific \(Singapore\) | Version 1\.23 | Version 2\.09 | 
 | Asia Pacific \(Sydney\) | Version 1\.23 | Version 2\.09 | 
-| Asia Pacific \(Tokyo\) | Version 5\.6\.10a; Version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
-| Canada \(Central\) | Version 1\.23 | Version 2\.09 | 
+| Asia Pacific \(Tokyo\) | Version 5\.6\.10a; version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
+| Canada \(Central\) | Version 5\.6\.10a; version 1\.23 | Version 2\.09 | 
 | China \(Beijing\) | \- | \- | 
 | China \(Ningxia\) | \- | \- | 
 | Europe \(Frankfurt\) | Version 1\.23 | Version 2\.09 | 
-| Europe \(Ireland\) | Version 5\.6\.10a; Version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
+| Europe \(Ireland\) | Version 5\.6\.10a; version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
 | Europe \(London\) | Version 1\.23 | Version 2\.09 | 
 | Europe \(Milan\) | Version 1\.23 | Version 2\.09 | 
 | Europe \(Paris\) | Version 1\.23 | Version 2\.09 | 
@@ -164,6 +168,7 @@ Amazon RDS Proxy is a fully managed, highly available database proxy that makes 
 | Africa \(Cape Town\) | \- | \- | \- | \- | 
 | Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | 
 | Asia Pacific \(Mumbai\) | Version 5\.6\.10a; version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.6 and later | 
+| Asia Pacific \(Osaka\) | \- | \- | \- | \- | 
 | Asia Pacific \(Seoul\) | Version 5\.6\.10a; version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.6 and later | 
 | Asia Pacific \(Singapore\) | Version 5\.6\.10a; version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.6 and later | 
 | Asia Pacific \(Sydney\) | Version 5\.6\.10a; version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.6 and later | 
@@ -196,6 +201,7 @@ Aurora Serverless v1 is an on\-demand, auto\-scaling feature designed to be a co
 | Africa \(Cape Town\) | \- | \- | \- | \- | 
 | Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | 
 | Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
+| Asia Pacific \(Osaka\) | \- | \- | \- | \- | 
 | Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
@@ -228,6 +234,7 @@ The Data API for Aurora Serverless provides a web\-services interface to an Auro
 | Africa \(Cape Town\) | \- | \- | \- | \- | 
 | Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | 
 | Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
+| Asia Pacific \(Osaka\) | \- | \- | \- | \- | 
 | Asia Pacific \(Seoul\) | \- | \- | \- | \- | 
 | Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 
 | Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.07\.1 | Version 10\.12 | \- | 

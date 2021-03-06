@@ -20,7 +20,7 @@ Graviton2 DB instance classes are now available in preview release\.
 Don't use the db\.r6g preview DB instance classes with production databases\. Your participation in this preview is governed by section 2 of the [AWS Service Terms](https://aws.amazon.com/service-terms/)\.
 + **db\.r5** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r4** – Instance classes optimized for memory\-intensive applications\. These offer improved networking performance\.
-+ **db\.r3** – Instance classes that provide memory optimization\. The db\.r3 instances classes aren't available in the Europe \(Paris\) region\. 
++ **db\.r3** – Instance classes that provide memory optimization\. The db\.r3 instances classes aren't available in the Europe \(Paris\) Region\. 
 
 The following are the Burstable Performance DB instance classes available:
 + **db\.t3** – Next\-generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
@@ -66,6 +66,9 @@ The following are DB engine considerations for DB instance classes:
   + Aurora PostgreSQL supports the following db\.t3 instance classes:
     + The db\.t3\.medium instance class is supported for versions compatible with PostgreSQL 10\.7 or later\.
     + The db\.t3\.large instance class is supported for versions compatible with PostgreSQL versions 10\.11 or later and 11\.6 or later\.
++ **Aurora support for DB instance classes in the Asia Pacific \(Osaka\) Region** 
+
+  Currently, Aurora DB engines only support db\.r5 and db\.t3 DB instance classes in Asia Pacific \(Osaka\) Region\.
 
 In the following table, you can find details about supported Amazon Aurora DB instance classes for the Aurora DB engines\. 
 
@@ -183,4 +186,4 @@ For information about Aurora DB engine support for each DB instance class, see [
 | db\.t2\.medium | 2 | Variable | 4 | — | Moderate | 
 | db\.t2\.small | 1 | Variable | 2 | — | Low | 
 
-\*\* The r3\.8xlarge instance doesn't have dedicated EBS bandwidth and therefore doesn't offer EBS optimization\. On this instance, network traffic and Amazon EBS traffic share the same 10\-gigabit network interface\.
+\*\*\* The r3\.8xlarge instance doesn't have dedicated EBS bandwidth and therefore doesn't offer EBS optimization\. On this instance, network traffic and Amazon EBS traffic share the same 10\-gigabit network interface\.

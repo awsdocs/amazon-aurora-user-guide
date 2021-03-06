@@ -14,9 +14,6 @@ In Amazon Aurora, you can use fast DDL to run an `ALTER TABLE` operation in plac
 **Important**  
 Currently, Aurora lab mode must be enabled to use fast DDL for Aurora MySQL\. We don't recommended using fast DDL for production DB clusters\. For information about enabling Aurora lab mode, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\.
 
-**Note**  
-Fast DDL is available for Aurora version 1\.12 and later\. For more information about Aurora versions, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)
-
 ## Fast DDL limitations<a name="AuroraMySQL.FastDDL.Limitations"></a>
 
 Currently, fast DDL has the following limitations:

@@ -9,6 +9,9 @@ Before August 31, 2018, Amazon Aurora was documented in the * Amazon Relational 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Aurora MySQL version 2\.07\.4](AuroraMySQL.Updates.2074.md) | Aurora MySQL version 2\.07\.4 is available\. | March 4, 2021 | 
+| [Aurora MySQL version 1\.22\.4](AuroraMySQL.Updates.1224.md) | Aurora MySQL version 1\.22\.4 is available\. | March 4, 2021 | 
+| [Amazon Aurora available in the Asia Pacific \(Osaka\) Region](#WhatsNew) | Aurora is now available in the Asia Pacific \(Osaka\) Region\. For more information, see [Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html)\. | March 1, 2021 | 
 | [Aurora MySQL version 2\.09\.2](AuroraMySQL.Updates.2092.md) |  Aurora MySQL version 2\.09\.2 is available\.  | February 26, 2021 | 
 | [Aurora PostgreSQL supports enabling both IAM and Kerberos authentication on the same DB cluster](#WhatsNew) | Aurora PostgreSQL now supports enabling both IAM authentication and Kerberos authentication on the same DB cluster\. For more information, see [ Database authentication with Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/database-authentication.html)\. | February 24, 2021 | 
 | [Aurora PostgreSQL patch releases 3\.3\.2, 2\.6\.2, 1\.8\.2 compatible with PostgreSQL 11\.8, 10\.13, 9\.6\.18](#WhatsNew) | New patch releases of Amazon Aurora with PostgreSQL compatibility include release 3\.3\.2 compatible with PostgreSQL 11\.8, release 2\.6\.2 compatible with PostgreSQL 10\.13, and release 1\.8\.2 compatible with PostgreSQL 9\.6\.18\. For more information, see [Engine versions for Amazon Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html)\.  | February 12, 2021 | 

@@ -52,7 +52,7 @@ The following table shows the AWS Regions where Aurora PostgreSQL is currently a
 
 ## Availability Zones<a name="Concepts.RegionsAndAvailabilityZones.AvailabilityZones"></a>
 
-When you create a DB instance, you can choose an Availability Zone or have AWS choose one for you\. An Availability Zone is represented by an AWS Region code followed by a letter identifier \(for example, `us-east-1a`\)\.
+When you create a DB instance, you can choose an Availability Zone or have Amazon RDS choose one for you randomly\. An Availability Zone is represented by an AWS Region code followed by a letter identifier \(for example, `us-east-1a`\)\.
 
 Each Aurora DB cluster hosts copies of its storage in three separate AZs\. Every DB instance in the cluster must be in one of these three AZs\. When you create a DB instance in your cluster, Aurora automatically chooses an appropriate AZ if you don't specify an AZ\. If an AWS Region has fewer than three AZs, Aurora isn't available in that Region\.
 
