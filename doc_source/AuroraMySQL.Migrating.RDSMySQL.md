@@ -1,9 +1,9 @@
 # Migrating data from a MySQL DB instance to an Amazon Aurora MySQL DB cluster by using a DB snapshot<a name="AuroraMySQL.Migrating.RDSMySQL"></a>
 
-You can migrate \(copy\) data to an Amazon Aurora MySQL DB cluster from an Amazon RDS MySQL DB snapshot, as described following\.
+You can migrate \(copy\) data to an Amazon Aurora MySQL DB cluster from an RDS for MySQL DB snapshot, as described following\.
 
 **Topics**
-+ [Migrating an RDS MySQL snapshot to Aurora](AuroraMySQL.Migrating.RDSMySQL.Import.md)
++ [Migrating an RDS for MySQL snapshot to Aurora](AuroraMySQL.Migrating.RDSMySQL.Import.md)
 + [Migrating data from a MySQL DB instance to an Amazon Aurora MySQL DB cluster by using an Aurora read replica](AuroraMySQL.Migrating.RDSMySQL.Replica.md)
 
 **Note**  

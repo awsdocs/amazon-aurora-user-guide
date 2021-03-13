@@ -217,7 +217,7 @@ For more information about engine updates for Aurora PostgreSQL, see [Database e
  You might choose to upgrade an Aurora MySQL cluster rarely if some or all of the following conditions apply: 
 +  Your testing cycle for your application takes a long time for each update to the Aurora MySQL database engine\. 
 +  You have many DB clusters or many applications all running on the same Aurora MySQL version\. You prefer to upgrade all of your DB clusters and associated applications at the same time\. 
-+  You use both Aurora MySQL and Amazon RDS MySQL, and you prefer to keep the Aurora MySQL clusters and RDS MySQL DB instances compatible with the same level of MySQL\. 
++  You use both Aurora MySQL and RDS for MySQL, and you prefer to keep the Aurora MySQL clusters and RDS for MySQL DB instances compatible with the same level of MySQL\. 
 +  Your Aurora MySQL application is in production or is otherwise business\-critical\. You can't afford downtime for upgrades outside of rare occurrences for critical patches\. 
 +  Your Aurora MySQL application isn't limited by performance issues or feature gaps that are addressed in subsequent Aurora MySQL versions\. 
 
@@ -226,7 +226,7 @@ For more information about engine updates for Aurora PostgreSQL, see [Database e
  You might choose to upgrade an Aurora MySQL cluster frequently if some or all of the following conditions apply: 
 +  The testing cycle for your application is straightforward and brief\. 
 +  Your application is still in the development stage\. 
-+  Your database environment uses a variety of Aurora MySQL versions, or Aurora MySQL and Amazon RDS MySQL versions\. Each Aurora MySQL cluster has its own upgrade cycle\. 
++  Your database environment uses a variety of Aurora MySQL versions, or Aurora MySQL and RDS for MySQL versions\. Each Aurora MySQL cluster has its own upgrade cycle\. 
 +  You are waiting for specific performance or feature improvements before you increase your usage of Aurora MySQL\. 
 
  If the preceding factors apply to your situation, you can enable Aurora to apply important upgrades more frequently by upgrading an Aurora MySQL DB cluster to a more recent Aurora MySQL version than the LTS version\. Doing so makes the latest performance enhancements, bug fixes, and features available to you more quickly\. 

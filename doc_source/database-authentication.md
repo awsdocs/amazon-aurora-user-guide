@@ -2,7 +2,7 @@
 
 Amazon Aurora supports several ways to authenticate database users\.
 
-Password authentication is available by default for all DB clusters\. For Aurora MySQL, you can also add either IAM database authentication or Kerberos authentication for a DB cluster\. For Aurora PostgreSQL, you can also add either or both IAM database authentication and Kerberos authentication for the same DB cluster\. 
+Password authentication is available by default for all DB clusters\. For Aurora MySQL, you can also add IAM database authentication\. For Aurora PostgreSQL, you can also add either or both IAM database authentication and Kerberos authentication for the same DB cluster\. 
 
 Password, Kerberos, and IAM database authentication use different methods of authenticating to the database\. Therefore, a specific user can log in to a database using only one authentication method\. 
 

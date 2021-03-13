@@ -83,6 +83,9 @@ aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:Read
 
  If your cluster contains only a primary instance and no Aurora Replicas, the reader endpoint connects to the primary instance\. In that case, you can perform write operations through this endpoint\. 
 
+**Tip**  
+ Through RDS Proxy, you can create additional read\-only endpoints for an Aurora cluster\. These endpoints perform the same kind of load\-balancing as the Aurora reader endpoint\. Applications can reconnect more quickly to the proxy endpoints than the Aurora reader endpoint if reader instances become unavailable\. The proxy endpoints can also take advantage of other proxy features such as multiplexing\. For more information, see [Using reader endpoints with Aurora clusters](rds-proxy.md#rds-proxy-endpoints-reader)\. 
+
 ## Using custom endpoints<a name="Aurora.Endpoints.Custom"></a>
 
  You use custom endpoints to simplify connection management when your cluster contains DB instances with different capacities and configuration settings\. 

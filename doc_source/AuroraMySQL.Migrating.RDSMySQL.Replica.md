@@ -11,7 +11,7 @@ When you create an Aurora read replica of a MySQL DB instance, Amazon RDS create
 You can only have one Aurora read replica for a MySQL DB instance\.
 
 **Note**  
-Replication issues can arise due to feature differences between Amazon Aurora MySQL and the MySQL database engine version of your RDS MySQL DB instance that is the replication primary\. If you encounter an error, you can find help in the [Amazon RDS community forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
+Replication issues can arise due to feature differences between Amazon Aurora MySQL and the MySQL database engine version of your RDS for MySQL DB instance that is the replication primary\. If you encounter an error, you can find help in the [Amazon RDS community forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
 
 For more information on MySQL read replicas, see [ Working with read replicas of MariaDB, MySQL, and PostgreSQL DB instances](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html)\.
 

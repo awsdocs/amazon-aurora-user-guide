@@ -2,7 +2,7 @@
 
  CVE \(Common Vulnerabilities and Exposures\) is a list of entries for publicly known cybersecurity vulnerabilities\. Each entry contains an identification number, a description, and at least one public reference\. 
 
- You can find on this page a list of security vulnerabilities fixed in Aurora MySQL\. For general information about security for Aurora, see [Security in Amazon Aurora](UsingWithRDS.md)\. For additional security information for Amazon Aurora MySQL, see [Security with Amazon Aurora MySQL](AuroraMySQL.Security.md)\. 
+ You can find on this page a list of security vulnerabilities fixed in Aurora MySQL\. For general information about security for Aurora, see [Security in Amazon Aurora](UsingWithRDS.md)\. For additional security information for Aurora MySQL, see [Security with Amazon Aurora MySQL](AuroraMySQL.Security.md)\. 
 
  We recommend that you always upgrade to the latest Aurora release to be protected against known vulnerabilities\. You can use this page to verify whether a particular version of Aurora MySQL has a fix for a specific security vulnerability\. If your cluster doesn't have the security fix, you can see which Aurora MySQL version you should upgrade to for that fix\. 
 

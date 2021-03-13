@@ -1,6 +1,8 @@
 # Supported features in Amazon Aurora by AWS Region and Aurora DB engine<a name="Concepts.AuroraFeaturesRegionsDBEngines.grids"></a>
 
 Aurora MySQL\- and PostgreSQL\-compatible database engines support several Amazon Aurora and Amazon RDS features and options\. The support varies across specific versions of each database engine, and across AWS Regions\. You can use the tables in this section to identify Aurora database engine version support and availability in a given AWS Region for the following features: 
+
+**Topics**
 + [Backtracking in Aurora](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Backtrack)
 + [Aurora global databases](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.GlobalDatabase)
 + [Aurora machine learning](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML)
@@ -67,7 +69,7 @@ Support for this feature varies by Aurora database engine and version\. The foll
 | Africa \(Cape Town\) | \- | \- | \- | \- | \- | 
 | Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | \- | 
 | Asia Pacific \(Mumbai\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
-| Asia Pacific \(Osaka\) | Version 5\.6\.10a; version 1\.22 and later | Version 2\.07\.3 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
+| Asia Pacific \(Osaka\) | Version 1\.22\.3 and later | Version 2\.07\.3 and later | Version 10\.12 and later | Version 11\.7 and later | Version 12\.4 and later | 
 | Asia Pacific \(Seoul\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
 | Asia Pacific \(Singapore\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
 | Asia Pacific \(Sydney\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
@@ -80,9 +82,9 @@ Support for this feature varies by Aurora database engine and version\. The foll
 | Europe \(London\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
 | Europe \(Milan\) | \- | \- | \- | \- | \- | 
 | Europe \(Paris\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
-| Europe \(Stockholm\) | \- | \- | \- | \- | \- | 
+| Europe \(Stockholm\) | Version 1\.22\.2 and later | Version 2\.07\.0 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
 | Middle East \(Bahrain\) | \- | \- | \- | \- | \- | 
-| South America \(São Paulo\) | \- | \- | \- | \- | \- | 
+| South America \(São Paulo\) | Version 1\.22\.2 and later | Version 2\.07\.1 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
 | AWS GovCloud \(US\-East\) | \- | \- | \- | \- | \- | 
 | AWS GovCloud \(US\-West\) | \- | \- | \- | \- | \- | 
 

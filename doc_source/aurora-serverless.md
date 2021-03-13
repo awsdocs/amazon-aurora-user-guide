@@ -63,7 +63,7 @@ The following limitations apply to Aurora Serverless v1:
   + You can't load text file data to Aurora MySQL Serverless from Amazon S3\. However, you can load data to Aurora PostgreSQL Serverless from Amazon S3 by using the `aws_s3` extension with the `aws_s3.table_import_from_s3` function and the `credentials` parameter\. For more information, see [Importing Amazon S3 data into an Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Migrating.md#USER_PostgreSQL.S3Import)\.
 + Aurora MySQL–based DB clusters running Aurora Serverless v1 don't support the following:
   + Invoking AWS Lambda functions from within your Aurora MySQL DB cluster\. However, AWS Lambda functions can make calls to your Aurora MySQL Serverless DB cluster\.
-  + Restoring a snapshot from a DB instance that isn't Aurora MySQL or RDS MySQL\.
+  + Restoring a snapshot from a DB instance that isn't Aurora MySQL or RDS for MySQL\.
   + Replicating data using replication based on binary logs \(binlogs\)\. This limitation is true regardless of whether your Aurora MySQL\-based DB cluster Aurora Serverless v1 is the source or the target of the replication\. To replicate data into an Aurora Serverless v1 DB cluster from a MySQL DB instance outside Aurora, such as one running on Amazon EC2, consider using AWS Database Migration Service\. For more information, see the [AWS Database Migration Service User Guide](https://docs.aws.amazon.com/dms/latest/userguide/)\. 
 + Aurora PostgreSQL–based DB clusters running Aurora Serverless v1 have the following limitations:
   + Aurora PostgreSQL query plan management \(`apg_plan_management` extension\) isn't supported\.

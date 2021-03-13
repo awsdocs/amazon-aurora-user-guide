@@ -23,7 +23,7 @@ The procedure to upgrade your DB cluster has changed\. For more information, see
 +  Fixed an issue where an Aurora Replica might restart during a `SELECT` query on a table while the Aurora primary instance runs truncation on that table\. 
 +  Fixed a wrong result issue with MyISAM temporary tables where only indexed columns are accessed\. 
 +  Fixed an issue in slow logs that generated incorrect large values for `query_time` and `lock_time` periodically after approximately 40,000 queries\. 
-+  Fixed an issue where a schema named "tmp" could cause migration from RDS MySQL to Aurora MySQL to become stuck\. 
++  Fixed an issue where a schema named "tmp" could cause migration from RDS for MySQL to Aurora MySQL to become stuck\. 
 +  Fixed an issue where the audit log might have missing events during log rotation\. 
 +  Fixed an issue where the Aurora primary instance restored from an Aurora 5\.6 snapshot might restart when the Fast DDL feature in the lab mode is enabled\. 
 +  Fixed an issue where the CPU usage is 100% caused by the dictionary stats thread\. 

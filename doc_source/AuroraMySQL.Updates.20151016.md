@@ -6,7 +6,7 @@ This update includes the following improvements:
 
 ## Fixes<a name="AuroraMySQL.Updates.20151016.Fixes"></a>
 + Resolved out\-of\-memory issue in the new lock manager with long\-running transactions
-+ Resolved security vulnerability when replicating with non\-RDS MySQL databases
++ Resolved security vulnerability when replicating with non\-RDS for MySQL databases
 + Updated to ensure that quorum writes retry correctly with storage failures
 + Updated to report replica lag more accurately
 + Improved performance by reducing contention when many concurrent transactions are trying to modify the same row

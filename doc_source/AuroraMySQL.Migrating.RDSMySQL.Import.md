@@ -1,6 +1,6 @@
-# Migrating an RDS MySQL snapshot to Aurora<a name="AuroraMySQL.Migrating.RDSMySQL.Import"></a>
+# Migrating an RDS for MySQL snapshot to Aurora<a name="AuroraMySQL.Migrating.RDSMySQL.Import"></a>
 
-You can migrate a DB snapshot of an Amazon RDS MySQL DB instance to create an Aurora MySQL DB cluster\. The new Aurora MySQL DB cluster is populated with the data from the original Amazon RDS MySQL DB instance\. The DB snapshot must have been made from an Amazon RDS DB instance running MySQL version 5\.6 or 5\.7\.
+You can migrate a DB snapshot of an RDS for MySQL DB instance to create an Aurora MySQL DB cluster\. The new Aurora MySQL DB cluster is populated with the data from the original RDS for MySQL DB instance\. The DB snapshot must have been made from an Amazon RDS DB instance running MySQL version 5\.6 or 5\.7\.
 
 You can migrate either a manual or automated DB snapshot\. After the DB cluster is created, you can then create optional Aurora Replicas\.
 
@@ -123,7 +123,7 @@ The script produces output similar to the output in the following example\. The 
 
 ## Console<a name="AuroraMySQL.Migrating.RDSMySQL.Import.Console"></a>
 
-You can migrate a DB snapshot of an Amazon RDS MySQL DB instance to create an Aurora MySQL DB cluster\. The new Aurora MySQL DB cluster is populated with the data from the original Amazon RDS MySQL DB instance\. The DB snapshot must have been made from an Amazon RDS DB instance running MySQL version 5\.6 or 5\.7\. For information about creating a DB snapshot, see [Creating a DB snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
+You can migrate a DB snapshot of an RDS for MySQL DB instance to create an Aurora MySQL DB cluster\. The new Aurora MySQL DB cluster is populated with the data from the original RDS for MySQL DB instance\. The DB snapshot must have been made from an Amazon RDS DB instance running MySQL version 5\.6 or 5\.7\. For information about creating a DB snapshot, see [Creating a DB snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
 
 If the DB snapshot is not in the AWS Region where you want to locate your data, use the Amazon RDS console to copy the DB snapshot to that AWS Region\. For information about copying a DB snapshot, see [Copying a DB snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
 
@@ -192,11 +192,11 @@ You might be behind a corporate firewall that doesn't allow access to default po
 
 ## AWS CLI<a name="USER_ImportAuroraCluster.CLI"></a>
 
-You can migrate a DB snapshot of an Amazon RDS MySQL DB instance to create an Aurora DB cluster\. The new DB cluster is then populated with the data from the DB snapshot\. The DB snapshot must come from an Amazon RDS DB instance running MySQL version 5\.6 or 5\.7\. For more information, see [Creating a DB snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
+You can migrate a DB snapshot of an RDS for MySQL DB instance to create an Aurora DB cluster\. The new DB cluster is then populated with the data from the DB snapshot\. The DB snapshot must come from an Amazon RDS DB instance running MySQL version 5\.6 or 5\.7\. For more information, see [Creating a DB snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html)\.
 
 If the DB snapshot is not in the AWS Region where you want to locate your data, copy the DB snapshot to that AWS Region\. For more information, see [Copying a DB snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
 
-You can create an Aurora DB cluster from a DB snapshot of an Amazon RDS MySQL DB instance by using the [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) command with the following parameters:
+You can create an Aurora DB cluster from a DB snapshot of an RDS for MySQL DB instance by using the [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) command with the following parameters:
 + `--db-cluster-identifier`
 
   The name of the DB cluster to create\.

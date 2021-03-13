@@ -45,7 +45,7 @@ You can set up replication between any of the following options:
 + Two Aurora MySQL DB clusters in the same AWS Region, by using MySQL binary log \(binlog\) replication\.
 
   For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.
-+ An Amazon RDS MySQL DB instance as the source and an Aurora MySQL DB cluster, by creating an Aurora read replica of an Amazon RDS MySQL DB instance\.
++ An RDS for MySQL DB instance as the source and an Aurora MySQL DB cluster, by creating an Aurora read replica of an RDS for MySQL DB instance\.
 
   You can use this approach to bring existing and ongoing data changes into Aurora MySQL during migration to Aurora\. For more information, see [Migrating data from a MySQL DB instance to an Amazon Aurora MySQL DB cluster by using a DB snapshot](AuroraMySQL.Migrating.RDSMySQL.md)\.
 

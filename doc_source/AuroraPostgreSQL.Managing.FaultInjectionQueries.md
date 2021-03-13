@@ -97,7 +97,7 @@ This fault injection query takes the following parameters:
 The percentage of the disk to mark as faulting during the failure event\. This value can be a double between 0 and 100\. If you specify 0, then none of the disk is marked as faulting\. If you specify 100, then the entire disk is marked as faulting\.
 
 *index*  
-A specific logical block of data in which to simulate the failure event\. If you exceed the range of available logical blocks or storage nodes data, you will receive an error that tells you the maximum index value that you can specify\. To avoid this error, see [Displaying volume status for an Aurora DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)\.
+A specific logical block of data in which to simulate the failure event\. If you exceed the range of available logical blocks or storage nodes data, you will receive an error that tells you the maximum index value that you can specify\. To avoid this error, see [Displaying volume status for an Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)\.
 
 *is\_disk*  
 Indicates whether the injection failure is to a logical block or a storage node\. Specifying true means injection failures are to a logical block\. Specifying false means injection failures are to a storage node\.
@@ -131,7 +131,7 @@ The percentage of the disk to mark as congested during the failure event\. This 
 
 *index*  
 A specific logical block of data or storage node to use to simulate the failure event\.  
-If you exceed the range of available logical blocks or storage nodes of data, you will receive an error that tells you the maximum index value that you can specify\. To avoid this error, see [Displaying volume status for an Aurora DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)\.
+If you exceed the range of available logical blocks or storage nodes of data, you will receive an error that tells you the maximum index value that you can specify\. To avoid this error, see [Displaying volume status for an Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)\.
 
 *is\_disk*  
 Indicates whether the injection failure is to a logical block or a storage node\. Specifying true means injection failures are to a logical block\. Specifying false means injection failures are to a storage node\.

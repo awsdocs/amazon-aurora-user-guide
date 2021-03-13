@@ -7,7 +7,7 @@ The following sections discuss managing performance and scaling for an Amazon Au
 + [Maximum connections to an Aurora PostgreSQL DB instance](#AuroraPostgreSQL.Managing.MaxConnections)
 + [Temporary storage limits for Aurora PostgreSQL](#AuroraPostgreSQL.Managing.TempStorage)
 + [Testing Amazon Aurora PostgreSQL using fault injection queries](AuroraPostgreSQL.Managing.FaultInjectionQueries.md)
-+ [Displaying volume status for an Aurora DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)
++ [Displaying volume status for an Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)
 
 ## Scaling Aurora PostgreSQL DB instances<a name="AuroraPostgreSQL.Managing.Performance.InstanceScaling"></a>
 

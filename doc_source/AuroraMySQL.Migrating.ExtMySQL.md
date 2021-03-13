@@ -474,6 +474,6 @@ If `REQUIRE SSL` is not included, the replication connection might silently fall
 
 Because Amazon Aurora MySQL is a MySQL\-compatible database, you can use the `mysqldump` utility to copy data from your MySQL or MariaDB database to an existing Aurora MySQL DB cluster\.
 
-For a discussion of how to do so with MySQL databases that are very large, see [ Importing data to an Amazon RDS MySQL or MariaDB DB instance with reduced downtime](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html)\. For MySQL databases that have smaller amounts of data, see [ Importing data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.SmallExisting.html)\.
+For a discussion of how to do so with MySQL databases that are very large, see [ Importing data to a MySQL or MariaDB DB instance with reduced downtime](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html)\. For MySQL databases that have smaller amounts of data, see [ Importing data from a MySQL or MariaDB DB to a MySQL or MariaDB DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.SmallExisting.html)\.
 
 ## <a name="AuroraMySQL.Migrating.ExtMySQL.RelatedTopics"></a>

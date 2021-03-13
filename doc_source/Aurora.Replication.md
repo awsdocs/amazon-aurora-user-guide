@@ -38,7 +38,7 @@ In addition to Aurora Replicas, you have the following options for replication w
   +  You can replicate data across multiple Regions by using an Aurora global database\. For details, see [High availability across AWS Regions with Aurora global databases](Concepts.AuroraHighAvailability.md#Concepts.AuroraHighAvailability.GlobalDB) 
   +  You can create a Aurora Read Replica of an Aurora MySQL DB cluster in a different AWS Region, by using MySQL binary log \(binlog\) replication\. Each cluster can have up to five Read Replicas created this way, each in a different Region\. 
 + Two Aurora MySQL DB clusters in the same region, by using MySQL binary log \(binlog\) replication\.
-+ An Amazon RDS MySQL DB instance as the master and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an Amazon RDS MySQL DB instance\. Typically, you use this approach for migration to Aurora MySQL, rather than for ongoing replication\.
++ An RDS for MySQL DB instance as the master and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an RDS for MySQL DB instance\. Typically, you use this approach for migration to Aurora MySQL, rather than for ongoing replication\.
 
 For more information about replication with Aurora MySQL, see [Single\-master replication with Amazon Aurora MySQL](AuroraMySQL.Replication.md)\.
 

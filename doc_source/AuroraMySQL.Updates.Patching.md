@@ -135,4 +135,4 @@ aws rds describe-db-instances \
 
 ## Alternative blue\-green upgrade technique<a name="AuroraMySQL.Upgrading.BlueGreen"></a>
 
- Blog post: [Performing major version upgrades for Amazon Aurora MySQL with minimum downtime](https://aws.amazon.com/blogs/database/performing-major-version-upgrades-for-amazon-aurora-mysql-with-minimum-downtime/)\. 
+ Blog post: [Performing major version upgrades for Aurora MySQL with minimum downtime](https://aws.amazon.com/blogs/database/performing-major-version-upgrades-for-amazon-aurora-mysql-with-minimum-downtime/)\. 

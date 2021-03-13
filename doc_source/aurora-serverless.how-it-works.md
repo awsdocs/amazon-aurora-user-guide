@@ -79,7 +79,7 @@ For Linux, macOS, or Unix:
 
 ```
 aws rds describe-db-clusters --region region \
-  --cluster-identifier your-cluster-name \
+  --db-cluster-identifier your-cluster-name \
   --query '*[].{ScalingConfigurationInfo:ScalingConfigurationInfo}'
 ```
 
@@ -87,14 +87,14 @@ For Windows:
 
 ```
 aws rds describe-db-clusters --region region ^
-  --cluster-identifier your-cluster-name ^
+  --db-cluster-identifier your-cluster-name ^
   --query "*[].{ScalingConfigurationInfo:ScalingConfigurationInfo}"
 ```
 
 As an example, the following shows the query and response for an Aurora Serverless v1 DB cluster named "west\-coast\-sles" in the US West \(N\. California\) Region\. 
 
 ```
-$ aws rds describe-db-clusters --region us-west-1 --cluster-identifier west-coast-sles 
+$ aws rds describe-db-clusters --region us-west-1 --db-cluster-identifier west-coast-sles 
 --query '*[].{ScalingConfigurationInfo:ScalingConfigurationInfo}'
 
 [

@@ -57,11 +57,9 @@ You can also get a list of the log files by using the [describe\-db\-log\-files]
 
 ## Audit log details<a name="AuroraMySQL.Auditing.Logs"></a>
 
-Log files are in UTF\-8 format\. Logs are written in multiple files, the number of which varies based on instance size\. To see the latest events, you might have to review all of the audit log files\. 
+Log files are in UTF\-8 format\. The audit log is stored separately on the local \(ephemeral\) storage of each instance\. Each Aurora instance distributes writes across four log files at a time\. The maximum size of the logs is 100 MB in aggregate\. When this non\-configurable limit is reached, Aurora rotates the files and generates four new files\. 
 
-Log entries are not in sequential order\. You can use the timestamp value for ordering\. 
-
-Log files are rotated when they reach 100 MB in aggregate\. This limit is not configurable\.
+Log file entries are not in sequential order\. To order the entries, use the timestamp value\. To see the latest events, you might have to review all log files\.
 
 The audit log files include the following comma\-delimited information in rows, in the specified order:
 

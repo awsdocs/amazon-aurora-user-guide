@@ -5,7 +5,7 @@ You have several options for migrating data from your existing database to an Am
 ## Migrating data to an Amazon Aurora MySQL DB cluster<a name="Aurora.Migrate.MySQL"></a>
 
 You can migrate data from one of the following sources to an Amazon Aurora MySQL DB cluster\.
-+ An Amazon RDS MySQL DB instance
++ An RDS for MySQL DB instance
 + A MySQL database external to Amazon RDS
 + A database that is not MySQL\-compatible
 

@@ -21,11 +21,9 @@
 
 ## How Aurora storage automatically resizes<a name="aurora-storage-growth"></a>
 
- Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\) for the following engine versions:
-+ Aurora MySQL engine versions 1\.23 compatible with MySQL 5\.6 and 2\.09 compatible with MySQL 5\.70
-+ Aurora PostgreSQL engine versions 9\.6\.17 or higher, 10\.12 or higher, and 11\.7 or higher\.
+ Aurora cluster volumes automatically grow as the amount of data in your database increases\. An Aurora cluster volume can grow to a maximum size of [128 tebibytes \(TiB\)](CHAP_Limits.md#RDS_Limits.FileSize.Aurora)\. This automatic storage scaling is combined with a high\-performance and highly distributed storage subsystem\. These make Aurora a good choice for your important enterprise data when your main objectives are reliability and high availability\. 
 
- This automatic storage scaling is combined with a high\-performance and highly distributed storage subsystem\. These make Aurora a good choice for your important enterprise data when your main objectives are reliability and high availability\. For ways to balance storage costs against these other priorities, see [Storage scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.StorageScaling)\. 
+To display the volume status, see [Displaying volume status for an Aurora MySQL DB cluster](AuroraMySQL.Managing.VolumeStatus.md) or [Displaying volume status for an Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)\. For ways to balance storage costs against other priorities, [Storage scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.StorageScaling) describes how to monitor the Amazon Aurora metrics `AuroraVolumeBytesLeftTotal` and `VolumeBytesUsed` in CloudWatch\.
 
  When Aurora data is removed, the space allocated for that data is freed\. Examples of removing data include dropping or truncating a table\. This automatic reduction in storage usage helps you to minimize storage charges\. 
 

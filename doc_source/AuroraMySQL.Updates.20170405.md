@@ -8,7 +8,7 @@ This is not a mandatory upgrade for existing clusters\. You will have the option
 
 ## New features<a name="AuroraMySQL.Updates.20170405.New"></a>
 + **Fast DDL** – Aurora MySQL now allows you to execute an ALTER TABLE *tbl\_name* ADD COLUMN *col\_name* *column\_definition* operation nearly instantaneously\. The operation completes without requiring the table to be copied and without materially impacting other DML statements\. Since it does not consume temporary storage for a table copy, it makes DDL statements practical even for large tables on small instance classes\. Fast DDL is currently only supported for adding a nullable column, without a default value, at the end of a table\. This feature is currently available in Aurora lab mode\. For more information, see [Altering tables in Amazon Aurora using fast DDL](AuroraMySQL.Managing.FastDDL.md)\.
-+ **Show volume status** – We have added a new monitoring command, SHOW VOLUME STATUS, to display the number of nodes and disks in a volume\. For more information, see [Displaying volume status for an Aurora DB cluster](AuroraMySQL.Managing.VolumeStatus.md)\.
++ **Show volume status** – We have added a new monitoring command, SHOW VOLUME STATUS, to display the number of nodes and disks in a volume\. For more information, see [Displaying volume status for an Aurora MySQL DB cluster](AuroraMySQL.Managing.VolumeStatus.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.20170405.Improvements"></a>
 + Implemented changes to lock compression to further reduce memory allocated per lock object\. This improvement is available in lab mode\.

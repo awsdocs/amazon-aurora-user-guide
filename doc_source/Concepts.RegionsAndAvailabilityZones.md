@@ -27,7 +27,7 @@ When you view your resources, you see only the resources that are tied to the AW
 ### Region availability<a name="Aurora.Overview.Availability"></a>
 
 **Note**  
-Aurora MySQL version 5\.7 and Aurora PostgreSQL version 10\.7 don't have time zone data that reflect recent changes to Daylight Saving Time \(DST\) in Brazil\. For a workaround until updated versions are available, reset the DB cluster's time zone parameter if the expected time doesn't show correctly for the recently changed Brazil time zone\. Do the following:  
+Aurora MySQL version 2 and Aurora PostgreSQL version 10\.7 don't have time zone data that reflect recent changes to Daylight Saving Time \(DST\) in Brazil\. For a workaround until updated versions are available, reset the DB cluster's time zone parameter if the expected time doesn't show correctly for the recently changed Brazil time zone\. Do the following:  
 South America \(Sao Paulo\) Region – set the time zone to `America/Fortaleza`\.
 South America \(Cuiaba\) Region – set the time zone to `America/Manaus`\.
 To change the time zone, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.

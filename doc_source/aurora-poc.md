@@ -124,7 +124,7 @@
 ## 7\. Port your SQL code<a name="Aurora.PoC.SQL"></a>
 
  Trying out SQL and associated applications requires different levels of effort depending on different cases\. In particular, the level of effort depends on whether you move from a MySQL\-compatible or PostgreSQL\-compatible system or another kind\. 
-+  If you're moving from RDS MySQL or PostgreSQL, the SQL changes are small enough that you can try the original SQL code with Aurora and manually incorporate needed changes\. 
++  If you're moving from RDS for MySQL or RDS for PostgreSQL, the SQL changes are small enough that you can try the original SQL code with Aurora and manually incorporate needed changes\. 
 +  Similarly, if you move from an on\-premises database compatible with MySQL or PostgreSQL, you can try the original SQL code and manually incorporate changes\. 
 +  If you're coming from a different commercial database, the required SQL changes are more extensive\. In this case, consider using the AWS SCT\. 
 

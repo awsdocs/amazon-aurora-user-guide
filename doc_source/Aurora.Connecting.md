@@ -80,7 +80,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
 mysql>
 ```
 
-For general instructions on constructing Amazon RDS MySQL connection strings and finding the public key for SSL connections, see [ Connecting to a DB instance running the MySQL database engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToInstance.html)\.
+For general instructions on constructing RDS for MySQL connection strings and finding the public key for SSL connections, see [ Connecting to a DB instance running the MySQL database engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToInstance.html)\.
 
 ### Connecting with the Amazon Web Services JDBC Driver for MySQL \(preview\)<a name="Aurora.Connecting.JDBCDriverMySQL"></a>
 

@@ -986,7 +986,7 @@ You can build the library manually from the source files, but the best practice 
 <dependency>
     <groupId>software.amazon.rdsdata</groupId>
     <artifactId>rds-data-api-client-library-java</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
 </dependency>
 ```
 
@@ -1008,7 +1008,7 @@ The client library enables you to pass DTOs as input parameters\. The following 
 var account1 = new Account(1, "John");
 var account2 = new Account(2, "Mary");
 client.forSql("INSERT INTO accounts(accountId, name) VALUES(:accountId, :name)")
-         .withParams(account1, account2)
+         .withParamSets(account1, account2)
          .execute();
 ```
 
@@ -1016,8 +1016,8 @@ In some cases, it's easier to work with simple values as input parameters\. You 
 
 ```
 client.forSql("INSERT INTO accounts(accountId, name) VALUES(:accountId, :name)")
-         .withParam("accountId", 3)
-         .withParam("name", "Zhang")
+         .withParameter("accountId", 3)
+         .withParameter("name", "Zhang")
          .execute();
 ```
 

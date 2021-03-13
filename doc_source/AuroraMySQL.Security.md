@@ -59,7 +59,7 @@ Encryption of a database instance and snapshots is not supported for the China \
 
 ## Using SSL/TLS with Aurora MySQL DB clusters<a name="AuroraMySQL.Security.SSL"></a>
 
-Amazon Aurora MySQL DB clusters support Secure Sockets Layer \(SSL\) and Transport Layer Security \(TLS\) connections from applications using the same process and public key as Amazon RDS MySQL DB instances\.
+Amazon Aurora MySQL DB clusters support Secure Sockets Layer \(SSL\) and Transport Layer Security \(TLS\) connections from applications using the same process and public key as RDS for MySQL DB instances\.
 
 Amazon RDS creates an SSL/TLS certificate and installs the certificate on the DB instance when Amazon RDS provisions the instance\. These certificates are signed by a certificate authority\. The SSL/TLS certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL/TLS certificate to guard against spoofing attacks\. As a result, you can only use the DB cluster endpoint to connect to a DB cluster using SSL/TLS if your client supports Subject Alternative Names \(SAN\)\. Otherwise, you must use the instance endpoint of a writer instance\. 
 
