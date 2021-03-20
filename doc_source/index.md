@@ -1,7 +1,7 @@
 # Amazon Aurora User Guide for Aurora
 
 -----
-*****Copyright &copy; 2021 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy;  Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -34,6 +34,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Tutorial: Create a web server and an Amazon Aurora DB cluster](TUT_WebAppWithRDS.md)
       + [Create an Amazon Aurora DB cluster](CHAP_Tutorials.WebServerDB.CreateDBCluster.md)
       + [Create an EC2 instance and install a web server](CHAP_Tutorials.WebServerDB.CreateWebServer.md)
++ [Amazon Aurora Tutorials](CHAP_Tutorials.md)
 + [Configuring your Amazon Aurora DB cluster](CHAP_AuroraSettingUp.md)
    + [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)
    + [Using Amazon Aurora Serverless v1](aurora-serverless.md)
@@ -202,6 +203,7 @@ Amazon's trademarks and trade dress may not be used in
          + [Aurora MySQL database engine updates 2018-03-13](AuroraMySQL.Updates.2011.md)
          + [Aurora MySQL database engine updates 2018-02-06](AuroraMySQL.Updates.20180206.md)
       + [Database engine updates for Amazon Aurora MySQL 1.1](AuroraMySQL.Updates.11Updates.md)
+         + [Aurora MySQL database engine updates 2021-03-18 (version 1.23.2)](AuroraMySQL.Updates.1232.md)
          + [Aurora MySQL database engine updates 2020-11-24 (version 1.23.1)](AuroraMySQL.Updates.1231.md)
          + [Aurora MySQL database engine updates 2020-09-02 (version 1.23.0)](AuroraMySQL.Updates.1230.md)
          + [Aurora MySQL database engine updates 2021-03-04 (version 1.22.4)](AuroraMySQL.Updates.1224.md)

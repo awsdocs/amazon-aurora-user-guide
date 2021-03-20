@@ -2,7 +2,7 @@
 
 In Amazon Aurora, a DB cluster volume consists of a collection of logical blocks\. Each of these represents 10 gigabytes of allocated storage\. These blocks are called *protection groups*\.
 
-The data in each protection group is replicated across six physical storage devices, called *storage nodes*\. These storage nodes are allocated across three Availability Zones \(AZs\) in the region where the DB cluster resides\. In turn, each storage node contains one or more logical blocks of data for the DB cluster volume\. For more information about protection groups and storage nodes, see [ Introducing the Aurora storage engine](https://aws.amazon.com/blogs/database/introducing-the-aurora-storage-engine/) on the AWS Database Blog\.
+The data in each protection group is replicated across six physical storage devices, called *storage nodes*\. These storage nodes are allocated across three Availability Zones \(AZs\) in the region where the DB cluster resides\. In turn, each storage node contains one or more logical blocks of data for the DB cluster volume\. For more information about protection groups and storage nodes, see [ Introducing the Aurora storage engine](http://aws.amazon.com/blogs/database/introducing-the-aurora-storage-engine/) on the AWS Database Blog\.
 
 Use the `aurora_show_volume_status()` function to return the following server status variables:
 + `Disks` — The total number of logical blocks of data for the DB cluster volume\.

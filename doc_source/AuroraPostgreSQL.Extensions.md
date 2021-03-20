@@ -28,7 +28,7 @@ The `apg_plan_mgmt` extension changes for version 2\.0 include the following:
 
 1. Fixed bugs for unnamed prepared statements such as those from JDBC\.
 
-1. Previously, when you tried to do `CREATE EXTENSION apg_plan_mgmt` when it is not loaded in the `shared_preload_libraries`, the PostgreSQL backend connection would be dropped\. Now, an error message prints and the connection is not dropped\.
+1. Previously, when you tried to do `CREATE EXTENSION apg_plan_mgmt` when it is not loaded in the `shared_preload_libraries`, the PostgreSQL backend connection was dropped\. Now, an error message prints and the connection is not dropped\.
 
 1. The default value of the `cardinality_error` in the `apg_plan_mgmt.plans table` is NULL, but it can be set to \-1 during the `apg_plan_mgmt.evolve_plan_baselines` function\. NULL is now used consistently\.
 

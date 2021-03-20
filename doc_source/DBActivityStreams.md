@@ -4,7 +4,7 @@ Monitoring your database activity can help you provide safeguards for your datab
 
 Beyond external security threats, managed databases need to provide protection against insider risks from database administrators \(DBAs\)\. Database activity streams help protect your databases from internal threats by controlling DBA access to the database activity streams\. Thus, the collection, transmission, storage, and subsequent processing of the stream of database activity is beyond the access of the DBAs that manage the database\. 
 
-A stream of database activity is pushed from Aurora to an Amazon Kinesis data stream that is created on behalf of your Aurora DB cluster\. From Kinesis, AWS services such as Amazon Kinesis Data Firehose and AWS Lambda can consume the activity stream\. Database Activity Streams is a free feature, but Amazon Kinesis charges for its streams\. For more information, see [Amazon Kinesis Data Streams pricing](https://aws.amazon.com/kinesis/data-streams/pricing/)\.
+A stream of database activity is pushed from Aurora to an Amazon Kinesis data stream that is created on behalf of your Aurora DB cluster\. From Kinesis, AWS services such as Amazon Kinesis Data Firehose and AWS Lambda can consume the activity stream\. Database Activity Streams is a free feature, but Amazon Kinesis charges for its streams\. For more information, see [Amazon Kinesis Data Streams pricing](http://aws.amazon.com/kinesis/data-streams/pricing/)\.
 
 An activity stream can also be consumed by applications for compliance management\. For database activity streams with Aurora PostgreSQL, compliance applications include IBM's Security Guardium, McAfee's Data Center Security Suite, and Imperva's SecureSphere Database Audit and Protection\. Such applications can use the stream to generate alerts and audit your Aurora DB clusters\.
 
@@ -270,7 +270,7 @@ When you enable an activity stream for a DB cluster, a Kinesis stream is created
 
 1. Choose **Monitoring** to begin observing the database activity\.
 
-For more information about using Amazon Kinesis, see [What is Amazon Kinesis Data Streams?](https://docs.aws.amazon.com/streams/latest/dev/introduction.html)\.
+For more information about using Amazon Kinesis, see [What Is Amazon Kinesis Data Streams?](https://docs.aws.amazon.com/streams/latest/dev/introduction.html)\.
 
 ### Audit log contents and examples<a name="DBActivityStreams.AuditLog"></a>
 

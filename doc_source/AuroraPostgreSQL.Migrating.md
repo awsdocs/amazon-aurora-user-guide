@@ -1,6 +1,6 @@
 # Migrating data to Amazon Aurora with PostgreSQL compatibility<a name="AuroraPostgreSQL.Migrating"></a>
 
-You have several options for migrating data from your existing database to an Amazon Aurora with PostgreSQL compatibility DB cluster\. Your migration options also depend on the database that you are migrating from and the size of the data that you are migrating\. Following are your options:
+You have several options for migrating data from your existing database to an Amazon Aurora PostgreSQL\-Compatible Edition DB cluster\. Your migration options also depend on the database that you are migrating from and the size of the data that you are migrating\. Following are your options:
 
 **Migrating from an RDS PostgreSQL DB instance**  
 You can migrate data directly from an Amazon RDS PostgreSQL DB snapshot to an Aurora PostgreSQL DB cluster\. For more information, see [Migrating an RDS PostgreSQL DB snapshot to an Aurora PostgreSQL DB cluster](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Import.Console)\.  

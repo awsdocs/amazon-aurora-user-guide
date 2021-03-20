@@ -1,6 +1,6 @@
 # Backtracking an Aurora DB cluster<a name="AuroraMySQL.Managing.Backtrack"></a>
 
-With Amazon Aurora with MySQL compatibility, you can backtrack a DB cluster to a specific time, without restoring data from a backup\.
+With Amazon Aurora MySQL\-Compatible Edition, you can backtrack a DB cluster to a specific time, without restoring data from a backup\.
 
 ## Overview of backtracking<a name="AuroraMySQL.Managing.Backtrack.Overview"></a>
 

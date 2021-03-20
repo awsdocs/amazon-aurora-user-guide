@@ -1,6 +1,6 @@
 # Engine versions for Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Updates.20180305"></a>
 
-Following, you can find information about supported versions of the Aurora with PostgreSQL compatibility database engine\. An Aurora database has two version numbers; the Aurora version number and the database engine version number\. To determine the version numbers of your Aurora PostgreSQL database, see [Identifying your version of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.md#AuroraPostgreSQL.Updates.Versions)\. 
+Following, you can find information about supported versions of the Aurora PostgreSQL\-Compatible Edition database engine\. An Aurora database has two version numbers; the Aurora version number and the database engine version number\. To determine the version numbers of your Aurora PostgreSQL database, see [Identifying your version of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.md#AuroraPostgreSQL.Updates.Versions)\. 
 
 To determine which PostgreSQL engine versions are available in an AWS Region, use the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\. For example:
 
@@ -62,7 +62,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.4\. For more
 
 **Additional improvements and enhancements**
 
-1. Fixed a bug that when under heavy load, snapshot import, COPY import, or S3 import would stop responding in rare cases\. 
+1. Fixed a bug that when under heavy load, snapshot import, COPY import, or Amazon S3 import stopped responding in rare cases\. 
 
 1. Fixed a bug where a read replica might not join the cluster when the writer was very busy with a write\-intensive workload\.
 
@@ -72,7 +72,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.4\. For more
 
 1. Fixed the Just\-in\-Time \(JIT\) compilation, which was incorrectly enabled by default in Aurora PostgreSQL release 4\.0\.0\. 
 
-1. Disallowed the use of both IAM and Kerberos authentication for the same user\.
+1. Disallowed the use of both AWS Identity and Access Management \(IAM\) and Kerberos authentication for the same user\.
 
 ### Aurora PostgreSQL release 4\.0\.0<a name="AuroraPostgreSQL.Updates.20180305.400"></a>
 
@@ -127,7 +127,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more
 
 **Additional improvements and enhancements**
 
-1. Fixed a bug that when under heavy load, snapshot import, COPY import, or S3 import would stop responding in rare cases\. 
+1. Fixed a bug that when under heavy load, snapshot import, COPY import, or S3 import stopped responding in rare cases\. 
 
 1. Fixed a bug where a read replica might not join the cluster when the writer was very busy with a write\-intensive workload\.
 
@@ -352,7 +352,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug where the `aurora_replica_status` function showed truncated server identifiers\.
 
-1. Fixed a bug in Aurora PostgreSQL Serverless where connections being migrated during a scale event would disconnect with the message: "ERROR: could not open relation with OID \.\.\.\.
+1. Fixed a bug in Aurora PostgreSQL Serverless where connections being migrated during a scale event disconnected with the message: "ERROR: could not open relation with OID \.\.\.\.
 
 1. Fixed a small memory leak in a b\-tree index that could lead to an out of memory condition\.
 
@@ -539,7 +539,7 @@ You can find the following improvements in this release\.
 
 1. Provided a fix for the `pg_hint_plan` extension that could lead the database engine to crash causing unavailability\. The open source issue can be tracked at [https://github.com/ossc-db/pg_hint_plan/pull/45](https://github.com/ossc-db/pg_hint_plan/pull/45)\.
 
-1. Fixed a bug where SQL of the form `ALTER FUNCTION ... OWNER TO ...` would incorrectly report `ERROR: improper qualified name (too many dotted names)`\.
+1. Fixed a bug where SQL of the form `ALTER FUNCTION ... OWNER TO ...` incorrectly reported `ERROR: improper qualified name (too many dotted names)`\.
 
 1. Improved the performance of `GIN` index vacuum via prefetching\.
 
@@ -612,9 +612,9 @@ You can find the following new features and improvements in this engine version\
 
 1. Fixed a bug related to `hot_standby_feedback` for read nodes whereby the read node might report the wrong transaction id epoch to the write node\. This can cause the write node to ignore the `hot_standby_feedback` and invalidate snapshots on the read node\.
 
-1. Fixed a bug whereby storage errors that occur during `CREATE DATABASE` statements are not properly handled\. The bug would leave the resulting database inaccessible\. The correct behavior is to fail the database creation and return the appropriate error to the user\.
+1. Fixed a bug whereby storage errors that occur during `CREATE DATABASE` statements are not properly handled\. The bug left the resulting database inaccessible\. The correct behavior is to fail the database creation and return the appropriate error to the user\.
 
-1. Improved handling of PostgreSQL snapshot overflow when a read node attempts to connect to a write node\. Prior to this change, if the write node was in a snapshot overflow state, the read node would be unable to join\. A message would appear in the PostgreSQL log file in the form, `DEBUG: recovery snapshot waiting for non-overflowed snapshot or until oldest active xid on standby is at least xxxxxxx (now yyyyyyy)`\. A snapshot overflow occurs when an individual transaction has created over 64 subtransactions\. 
+1. Improved handling of PostgreSQL snapshot overflow when a read node attempts to connect to a write node\. Prior to this change, if the write node was in a snapshot overflow state, the read node was unable to join\. A message appeared in the PostgreSQL log file in the form `DEBUG: recovery snapshot waiting for non-overflowed snapshot or until oldest active xid on standby is at least xxxxxxx (now yyyyyyy)`\. A snapshot overflow occurs when an individual transaction has created over 64 subtransactions\. 
 
 1. Fixed a bug related to common table expressions whereby an error is incorrectly raised when a NOT IN class exists in a CTE\. The error is `CTE with NOT IN fails with ERROR: could not find CTE CTE-Name`\.
 
@@ -697,7 +697,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.14\. For mor
 
 **Additional improvements and enhancements**
 
-1. Fixed a bug that when under heavy load, snapshot import, COPY import, or S3 import would stop responding in rare cases\. 
+1. Fixed a bug that when under heavy load, snapshot import, COPY import, or S3 import stopped responding in rare cases\. 
 
 1. Fixed a bug where a read replica might not join the cluster when the writer was very busy with a write\-intensive workload\.
 
@@ -735,7 +735,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.14\. For mor
 
 1. Fixed a bug in Aurora Serverless v1 for PostgreSQL where a leaked lock resulted in a prolonged scale event\.
 
-1. Fixed a bug in Aurora Serverless v1 for PostgreSQL where connections being migrated during a scale event would be disconnected with the following message: ERROR: could not open relation with OID \.\.\.
+1. Fixed a bug in Aurora Serverless v1 for PostgreSQL where connections being migrated during a scale event was disconnected with the following message: ERROR: could not open relation with OID \.\.\.
 
 1. Aurora PostgreSQL no longer falls behind on a read node when the backend is blocked writing to the database client\.
 
@@ -914,7 +914,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug where the `aurora_replica_status` function showed truncated server identifiers\.
 
-1. Fixed a bug in Aurora PostgreSQL Serverless where connections being migrated during a scale event would disconnect with the message: "ERROR: could not open relation with OID \.\.\.\.
+1. Fixed a bug in Aurora PostgreSQL Serverless where connections being migrated during a scale event disconnected with the message: "ERROR: could not open relation with OID \.\.\.\.
 
 1. Fixed a bug in a GiST index that might result in an out of memory condition after promoting an Aurora Read Replica\.
 
@@ -1097,7 +1097,7 @@ You can find the following improvements in this release\.
 
 1. Provided a fix for the `pg_hint_plan` extension that could lead the database engine to crash causing unavailability\. The open source issue can be tracked at [https://github.com/ossc-db/pg_hint_plan/pull/45](https://github.com/ossc-db/pg_hint_plan/pull/45)\.
 
-1. Fixed a bug where SQL of the form `ALTER FUNCTION ... OWNER TO ...` would incorrectly report `ERROR: improper qualified name (too many dotted names)`\.
+1. Fixed a bug where SQL of the form `ALTER FUNCTION ... OWNER TO ...` incorrectly reported `ERROR: improper qualified name (too many dotted names)`\.
 
 1. Improved the performance of `GIN` index vacuum via prefetching\.
 
@@ -1172,9 +1172,9 @@ You can find the following new features and improvements in this engine version\
 
 1. Fixed a bug related to `hot_standby_feedback` for read nodes whereby the read node may report the wrong transaction id epoch to the write node\. This can cause the write node to ignore the `hot_standby_feedback` and invalidate snapshots on the read node\.
 
-1. Fixed a bug whereby storage errors that occur during `CREATE DATABASE` statements are not properly handled\. The bug would leave the resulting database inaccessible\. The correct behavior is to fail the database creation and return the appropriate error to the user\.
+1. Fixed a bug whereby storage errors that occur during `CREATE DATABASE` statements are not properly handled\. The bug left the resulting database inaccessible\. The correct behavior is to fail the database creation and return the appropriate error to the user\.
 
-1. Improved handling of PostgreSQL snapshot overflow when a read node attempts to connect to a write node\. Prior to this change, if the write node was in a snapshot overflow state, the read node would be unable to join\. A message would appear in the PostgreSQL log file in the form, `DEBUG: recovery snapshot waiting for non-overflowed snapshot or until oldest active xid on standby is at least xxxxxxx (now yyyyyyy)`\. A snapshot overflow occurs when an individual transaction has created over 64 subtransactions\. 
+1. Improved handling of PostgreSQL snapshot overflow when a read node attempts to connect to a write node\. Prior to this change, if the write node was in a snapshot overflow state, the read node was unable to join\. A message appeared in the PostgreSQL log file in the form `DEBUG: recovery snapshot waiting for non-overflowed snapshot or until oldest active xid on standby is at least xxxxxxx (now yyyyyyy)`\. A snapshot overflow occurs when an individual transaction has created over 64 subtransactions\. 
 
 1. Fixed a bug related to common table expressions whereby an error is incorrectly raised when a NOT IN class exists in a CTE\. The error is `CTE with NOT IN fails with ERROR: could not find CTE CTE-Name`\.
 
@@ -1304,7 +1304,7 @@ You can find the following improvements in this release\.
 
 1. Improved stability of logical replication\.
 
-1. Fixed a bug which could cause an error running queries\. The message reported would be of the form "CLOG segment 123 does not exist: No such file or directory"\.
+1. Fixed a bug which could cause an error running queries\. The message reported was of the form "CLOG segment 123 does not exist: No such file or directory"\.
 
 1. Increased the supported size of IAM passwords to 8KB\.
 
@@ -1312,7 +1312,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug which could cause a read replica to crash during a restart\.
 
-1. Fixed a bug which could cause an error running queries\. The message reported would be of the form "SQL ERROR: Attempting to read past EOF of relation"\.
+1. Fixed a bug which could cause an error running queries\. The message reported was of the form "SQL ERROR: Attempting to read past EOF of relation"\.
 
 1. Fixed a bug which could cause an increase in memory usage after a restart\.
 
@@ -1347,7 +1347,7 @@ You can find the following improvements in this release\.
 
 **Improvements**
 
-1. Fixed a bug which could cause an error running queries\. The message reported would be of the form "CLOG segment 123 does not exist: No such file or directory"\.
+1. Fixed a bug which could cause an error running queries\. The message reported was of the form "CLOG segment 123 does not exist: No such file or directory"\.
 
 1. Increased the supported size of IAM passwords to 8KB\.
 
@@ -1355,7 +1355,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug which could cause a read replica to crash during a restart\.
 
-1. Fixed a bug which could cause an error running queries\. The message reported would be of the form "SQL ERROR: Attempting to read past EOF of relation"\.
+1. Fixed a bug which could cause an error running queries\. The message reported was of the form "SQL ERROR: Attempting to read past EOF of relation"\.
 
 1. Fixed a bug which could cause an increase in memory usage after a restart\.
 
@@ -1432,7 +1432,7 @@ You can find the following improvements in this release\.
 
 **Improvements**
 
-1. Fixed a bug which could cause an error running queries\. The message reported would be of the form "CLOG segment 123 does not exist: No such file or directory"\.
+1. Fixed a bug which could cause an error running queries\. The message reported was of the form "CLOG segment 123 does not exist: No such file or directory"\.
 
 1. Increased the supported size of IAM passwords to 8KB\.
 
@@ -1440,7 +1440,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug which could cause a read replica to crash during a restart\.
 
-1. Fixed a bug which could cause an error running queries\. The message reported would be of the form "SQL ERROR: Attempting to read past EOF of relation"\.
+1. Fixed a bug which could cause an error running queries\. The message reported was of the form "SQL ERROR: Attempting to read past EOF of relation"\.
 
 1. Fixed a bug which could cause an increase in memory usage after a restart\.
 
@@ -1488,7 +1488,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.19\. For m
 
 **Additional improvements and enhancements**
 
-1. Fixed a bug that when under heavy load, snapshot import, COPY import, or S3 import would stop responding in rare cases\. 
+1. Fixed a bug that when under heavy load, snapshot import, COPY import, or S3 import stopped responding in rare cases\. 
 
 1. Fixed a bug where a read replica might not join the cluster when the writer was very busy with a write\-intensive workload\.
 
@@ -1768,9 +1768,9 @@ You can find the following new features and improvements in this engine version\
 
 1. Fixed a bug related to `hot_standby_feedback` for read nodes whereby the read node may report the wrong transaction id epoch to the write node\. This can cause the write node to ignore the `hot_standby_feedback` and invalidate snapshots on the read node\.
 
-1. Fixed a bug whereby storage errors that occur during `CREATE DATABASE` statements are not properly handled\. The bug would leave the resulting database inaccessible\. The correct behavior is to fail the database creation and return the appropriate error to the user\.
+1. Fixed a bug whereby storage errors that occur during `CREATE DATABASE` statements are not properly handled\. The bug left the resulting database inaccessible\. The correct behavior is to fail the database creation and return the appropriate error to the user\.
 
-1. Improved handling of PostgreSQL snapshot overflow when a read node attempts to connect to a write node\. Prior to this change, if the write node was in a snapshot overflow state, the read node would be unable to join\. A message would appear in the PostgreSQL log file in the form, `DEBUG: recovery snapshot waiting for non-overflowed snapshot or until oldest active xid on standby is at least xxxxxxx (now yyyyyyy)`\. A snapshot overflow occurs when an individual transaction has created over 64 subtransactions\. 
+1. Improved handling of PostgreSQL snapshot overflow when a read node attempts to connect to a write node\. Prior to this change, if the write node was in a snapshot overflow state, the read node was unable to join\. A message appear in the PostgreSQL log file in the form `DEBUG: recovery snapshot waiting for non-overflowed snapshot or until oldest active xid on standby is at least xxxxxxx (now yyyyyyy)`\. A snapshot overflow occurs when an individual transaction has created over 64 subtransactions\. 
 
 1. Fixed a bug related to common table expressions whereby an error is incorrectly raised when a NOT IN class exists in a CTE\. The error is `CTE with NOT IN fails with ERROR: could not find CTE CTE-Name`\.
 
@@ -1916,7 +1916,7 @@ You can find the following improvements in this release\.
 
 **Improvements**
 
-1. Fixed a bug which could cause an error running queries\. The message reported would be of the form "CLOG segment 123 does not exist: No such file or directory"\.
+1. Fixed a bug which could cause an error running queries\. The message reported was of the form "CLOG segment 123 does not exist: No such file or directory"\.
 
 1. Increased the supported size of IAM passwords to 8KB\.
 
@@ -1924,7 +1924,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug which could cause a read replica to crash during a restart\.
 
-1. Fixed a bug which could cause an error running queries\. The message reported would be of the form "SQL ERROR: Attempting to read past EOF of relation"\.
+1. Fixed a bug which could cause an error running queries\. The message reported was of the form "SQL ERROR: Attempting to read past EOF of relation"\.
 
 1. Fixed a bug which could cause an increase in memory usage after a restart\.
 
@@ -2001,7 +2001,7 @@ You can find the following improvements in this release\.
 
 **Improvements**
 
-1. Fixed a bug which could cause an error running queries\. The message reported would be of the form "CLOG segment 123 does not exist: No such file or directory"\.
+1. Fixed a bug which could cause an error running queries\. The message reported was of the form "CLOG segment 123 does not exist: No such file or directory"\.
 
 1. Increased the supported size of IAM passwords to 8KB\.
 
@@ -2009,7 +2009,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug which could cause a read replica to crash during a restart\.
 
-1. Fixed a bug which could cause an error running queries\. The message reported would be of the form "SQL ERROR: Attempting to read past EOF of relation"\.
+1. Fixed a bug which could cause an error running queries\. The message reported was of the form "SQL ERROR: Attempting to read past EOF of relation"\.
 
 1. Fixed a bug which could cause an increase in memory usage after a restart\.
 
@@ -2041,7 +2041,7 @@ You can find the following improvements in this release\.
 
 1. Improve the diagnostic data provided in the PostgreSQL error log when an out\-of\-memory error is encountered\.
 
-1. Multiple fixes to improve the reliability and performance of snapshot import from Amazon RDS for PostgreSQL to Aurora with PostgreSQL compatibility\.
+1. Multiple fixes to improve the reliability and performance of snapshot import from Amazon RDS for PostgreSQL to Aurora PostgreSQL\-Compatible Edition\.
 
 1. Multiple fixes to improve the reliability and performance of Aurora PostgreSQL read nodes\.
 
@@ -2211,4 +2211,4 @@ You can find the following improvements in this engine update:
 
 ### Aurora PostgreSQL release 1\.0\.7<a name="AuroraPostgreSQL.Updates.20180305.107"></a>
 
-This is the first generally available release of Amazon Aurora with PostgreSQL compatibility\.
+This is the first generally available release of Amazon Aurora PostgreSQL\-Compatible Edition\.

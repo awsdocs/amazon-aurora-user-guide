@@ -105,9 +105,9 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.r3\.xlarge | Yes | No | 
 | db\.r3\.large | Yes | No | 
 | db\.t3 – Next generation burstable performance instance classes | 
-| db\.t3\.2xlarge | 2\.10\.0 and higher | No | 
-| db\.t3\.xlarge | 2\.10\.0 and higher | No | 
-| db\.t3\.large | 2\.10\.0 and higher | 11\.6 and higher, 10\.11 and higher | 
+| db\.t3\.2xlarge | No | No | 
+| db\.t3\.xlarge | No | No | 
+| db\.t3\.large | No | 11\.6 and higher, 10\.11 and higher | 
 | db\.t3\.medium | 1\.14\.4 and higher | 10\.7 and higher | 
 | db\.t3\.small | 1\.14\.4 and higher | No | 
 | db\.t3\.micro | No | No | 

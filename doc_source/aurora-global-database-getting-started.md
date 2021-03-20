@@ -59,7 +59,7 @@ For general information about creating an Aurora DB cluster, see [Creating an Am
    + Choose **Amazon Aurora** for the Engine type in the **Engine options** section\.   
 ![\[Screenshot of some of the Engine options on the Create database page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-db-create.png)
 
-Then choose **Amazon Aurora with MySQL compatibility** or **Amazon Aurora with PostgreSQL compatibility**, and continue creating your Aurora global database by using the steps from the following procedures\. 
+Then choose **Amazon Aurora MySQL\-Compatible Edition** or **Amazon Aurora PostgreSQL\-Compatible Edition**, and continue creating your Aurora global database by using the steps from the following procedures\. 
 
 **Topics**
 + [Creating a global database using Aurora MySQL](#aurora-global-database.create.console.MySQL)
@@ -75,7 +75,7 @@ Complete the **Create database** page\.
 
 1. For **Engine options**, choose the following:
 
-   1. Choose **Amazon Aurora with MySQL compatibility** for **Edition**\. 
+   1. Choose **Amazon Aurora MySQL\-Compatible Edition** for **Edition**\. 
 
    1. Choose **Provisioned** for **Capacity type**\. 
 
@@ -129,7 +129,7 @@ Complete the **Create database** page\.
 
 1. For **Engine options**, choose the following:
 
-   1. Choose **Amazon Aurora with MySQL compatibility** for **Edition**\. 
+   1. Choose **Amazon Aurora MySQL\-Compatible Edition** for **Edition**\. 
 
    1. Choose **Provisioned** for **Capacity type**\. 
 
@@ -188,7 +188,7 @@ Complete the **Create database** page\.
 
 1. For **Engine options**, choose the following:
 
-   1. Choose **Amazon Aurora with PostgreSQL compatibility** for **Edition**\. 
+   1. Choose **Amazon Aurora PostgreSQL\-Compatible Edition** for **Edition**\. 
 
    1. Choose **Provisioned** for **Capacity type**\. 
 

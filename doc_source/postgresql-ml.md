@@ -9,9 +9,9 @@ Amazon Aurora machine learning enables you to add machine learning–based predi
 
 AWS machine learning services are managed services that you set up and run in their own production environments\. Currently, Aurora Machine Learning integrates with Amazon Comprehend for sentiment analysis and SageMaker for a wide variety of ML algorithms\. 
 
- For general information about Amazon Comprehend, see [Amazon Comprehend](https://aws.amazon.com/comprehend)\. For details about using Aurora and Amazon Comprehend together, see [Using Amazon Comprehend for natural language processing](#postgresql-using-comprehend)\. 
+ For general information about Amazon Comprehend, see [Amazon Comprehend](http://aws.amazon.com/comprehend)\. For details about using Aurora and Amazon Comprehend together, see [Using Amazon Comprehend for natural language processing](#postgresql-using-comprehend)\. 
 
-For general information about SageMaker, see [SageMaker](https://aws.amazon.com/sagemaker)\. For details about using Aurora and SageMaker together, see [Using SageMaker to run your own ML models](#postgresql-using-sagemaker)\. 
+For general information about SageMaker, see [SageMaker](http://aws.amazon.com/sagemaker)\. For details about using Aurora and SageMaker together, see [Using SageMaker to run your own ML models](#postgresql-using-sagemaker)\. 
 
 **Note**  
 Aurora machine learning for PostgreSQL connects an Aurora cluster to SageMaker or Amazon Comprehend services only within the same AWS Region\. 
@@ -77,7 +77,7 @@ To connect a DB cluster to these services requires that you set up an AWS Identi
 1.  Enter the required information for the specific service on the **Connect cluster** window: 
    +  For SageMaker, enter the Amazon Resource Name \(ARN\) of a SageMaker endpoint\. 
 
-      From the navigation pane of the [SageMaker console](https://console.aws.amazon.com/sagemaker/home), choose **Endpoints** and copy the ARN of the endpoint you want to use\. For details about what the endpoint represents, see [Deploy a model on Amazon SageMaker hosting services](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-hosting.html)\. 
+      From the navigation pane of the [SageMaker console](https://console.aws.amazon.com/sagemaker/home), choose **Endpoints** and copy the ARN of the endpoint you want to use\. For details about what the endpoint represents, see [Deploy a Model in Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-deployment.html)\. 
    +  For Amazon Comprehend, you don't specify any additional parameters\. 
    +  For Amazon S3, enter the ARN of an Amazon S3 bucket to use\. 
 
@@ -131,7 +131,7 @@ Amazon Comprehend uses machine learning to find insights and relationships in te
 Aurora machine learning uses Amazon Comprehend for sentiment analysis of text that is stored in your database\. A *sentiment* is an opinion expressed in text\. Sentiment analysis identifies and categorizes sentiments to determine if the attitude towards something \(such as a topic or product\) is positive, negative, or neutral\.
 
 **Note**  
- Amazon Comprehend is currently available only in some AWS Regions\. To check in which AWS Regions you can use Amazon Comprehend, see [the AWS Region table](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/) page on the AWS site\. 
+ Amazon Comprehend is currently available only in some AWS Regions\. To check in which AWS Regions you can use Amazon Comprehend, see [the AWS Region table](http://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/) page on the AWS site\. 
 
 For example, using Amazon Comprehend you can analyze contact center call\-in documents to detect caller sentiment and better understand caller\-agent dynamics\. You can find a further description in the post [Analyzing contact center calls](http://aws.amazon.com/blogs/machine-learning/analyzing-contact-center-calls-part-1-use-amazon-transcribe-and-amazon-comprehend-to-analyze-customer-sentiment/) on the AWS Machine Learning blog\. 
 
@@ -677,7 +677,7 @@ For the net step, see [Creating an IAM role to access SageMaker and Amazon Compr
 
 Attach the preceding policies to the IAM role you create\. For more information, see [Attaching an IAM policy to an IAM user or role](UsingWithRDS.IAMDBAuth.IAMPolicy.md#UsingWithRDS.IAMDBAuth.IAMPolicy.Attaching)\. 
 
-For more information about IAM roles, see [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *AWS Identity and Access Management User Guide*\. 
+For more information about IAM roles, see [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. 
 
 For the next step, see [Associating an IAM role with an Aurora PostgreSQL DB cluster using the AWS CLI](#postgresql-ml-associating-iam-role)\. 
 

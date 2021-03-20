@@ -26,7 +26,7 @@ After you change the DB cluster parameter group associated with a DB cluster, re
 To determine whether the primary DB instance of a DB cluster must be rebooted to apply changes, run the following AWS CLI command:  
 `aws rds describe-db-clusters --db-cluster-identifier db_cluster_identifier`  
 Check the `DBClusterParameterGroupStatus` value for the primary DB instance in the output\. If the value is `pending-reboot`, then reboot the primary DB instance of the DB cluster\.
-+ You can specify the value for a parameter as an integer or as an integer expression built from formulas, variables, functions, and operators\. Functions can include a mathematical log expression\. For more information, see [DB parameter values](#USER_ParamValuesRef)\.
++ You can specify the value for a parameter as an integer or as an integer expression built from formulas, variables, functions, and operators\. Functions can include a mathematical log expression\. For more information, see [Specifying DB parameters](#USER_ParamValuesRef)\.
 + Set any parameters that relate to the character set or collation of your database in your parameter group before creating the DB instance and before you create a database in your DB instance\. This ensures that the default database and new databases in your DB instance use the character set and collation values that you specify\. If you change character set or collation parameters for your DB instance, the parameter changes are not applied to existing databases\.
 
   You can change character set or collation values for an existing database using the `ALTER DATABASE` command, for example:
@@ -55,7 +55,7 @@ Check the `DBClusterParameterGroupStatus` value for the primary DB instance in t
 + [Viewing parameter values for a DB parameter group](#USER_WorkingWithParamGroups.Viewing)
 + [Viewing parameter values for a DB cluster parameter group](#USER_WorkingWithParamGroups.ViewingCluster)
 + [Comparing parameter groups](#USER_WorkingWithParamGroups.Comparing)
-+ [DB parameter values](#USER_ParamValuesRef)
++ [Specifying DB parameters](#USER_ParamValuesRef)
 
 ## Amazon Aurora DB cluster and DB instance parameters<a name="Aurora.Managing.ParameterGroups"></a>
 
@@ -1020,20 +1020,33 @@ You can use the AWS Management Console to view the differences between two param
 **Note**  
 If the items you selected aren't equivalent, you can't choose **Compare**\. For example, you can't compare a MySQL 5\.6 and a MySQL 5\.7 parameter group\. You can't compare a DB parameter group and an Aurora DB cluster parameter group\.
 
-## DB parameter values<a name="USER_ParamValuesRef"></a>
+## Specifying DB parameters<a name="USER_ParamValuesRef"></a>
 
-You can specify the value for a DB parameter as any of the following:
-+ An integer constant
-+ A DB parameter formula
-+ A DB parameter function
-+ A character string constant
-+ A log expression \(the log function represents log base 2\), such as `value={log(DBInstanceClassMemory/8187281418)*1000}` 
+DB parameter types include the following:
++ integer
++ Boolean
++ string
++ long
++ double
++ timestamp
++ object of other defined data types
++ array of values of type integer, Boolean, string, long, double, timestamp, or object
+
+You can also specify integer and Boolean DB parameters using expressions, formulas, and functions\. 
+
+**Contents**
++ [DB parameter formulas](#USER_ParamFormulas)
+  + [DB parameter formula variables](#USER_FormulaVariables)
+  + [DB parameter formula operators](#USER_FormulaOperators)
++ [DB parameter functions](#USER_ParamFunctions)
++ [DB parameter log expressions](#USER_ParamLogExpressions)
++ [DB parameter value examples](#USER_ParamValueExamples)
 
 ### DB parameter formulas<a name="USER_ParamFormulas"></a>
 
-A DB parameter formula is an expression that resolves to an integer value or a Boolean value, and is enclosed in braces: \{\}\. You can specify formulas for either a DB parameter value or as an argument to a DB parameter function\.
+A DB parameter formula is an expression that resolves to an integer value or a Boolean value\. You enclose the expression in braces: \{\}\. You can use a formula for either a DB parameter value or as an argument to a DB parameter function\.
 
-#### Syntax<a name="USER_ParamFormulas.Syntax"></a>
+**Syntax**  
 
 ```
 {FormulaVariable}
@@ -1042,24 +1055,24 @@ A DB parameter formula is an expression that resolves to an integer value or a B
 {FormulaVariable/Integer}
 ```
 
-### DB parameter formula variables<a name="USER_FormulaVariables"></a>
+#### DB parameter formula variables<a name="USER_FormulaVariables"></a>
 
-Each formula variable returns integer or a Boolean value\. The names of the variables are case\-sensitive\.
+Each formula variable returns an integer or a Boolean value\. The names of the variables are case\-sensitive\.
 
 *AllocatedStorage*  
-Returns the size, in bytes, of the data volume\.
+Returns an integer representing the size, in bytes, of the data volume\.
 
 *DBInstanceClassMemory*  
-Returns the number of bytes of memory allocated to the DB instance class associated with the current DB instance, less the memory used by the Amazon RDS processes that manage the instance\.
+Returns an integer of the number of bytes of memory allocated to the DB instance class associated with the current DB instance, less the memory used by RDS processes that manage the instance\.
 
 *EndPointPort*  
-Returns the number of the port used when connecting to the DB instance\.
+Returns an integer representing the port used when connecting to the DB instance\.
 
-### DB parameter formula operators<a name="USER_FormulaOperators"></a>
+#### DB parameter formula operators<a name="USER_FormulaOperators"></a>
 
 DB parameter formulas support two operators: division and multiplication\.
 
-*Division Operator: /*  
+*Division operator: /*  
 Divides the dividend by the divisor, returning an integer quotient\. Decimals in the quotient are truncated, not rounded\.  
 Syntax  
 
@@ -1068,7 +1081,7 @@ dividend / divisor
 ```
 The dividend and divisor arguments must be integer expressions\.
 
-*Multiplication Operator: \**  
+*Multiplication operator: \**  
 Multiplies the expressions, returning the product of the expressions\. Decimals in the expressions are truncated, not rounded\.  
 Syntax  
 
@@ -1079,9 +1092,9 @@ Both expressions must be integers\.
 
 ### DB parameter functions<a name="USER_ParamFunctions"></a>
 
-The parameter arguments can be specified as either integers or formulas\. Each function must have at least one argument\. Multiple arguments can be specified as a comma\-separated list\. The list can't have any empty members, such as *argument1*,,*argument3*\. Function names are case\-insensitive\.
+You specify the arguments of DB parameter functions as either integers or formulas\. Each function must have at least one argument\. Specify multiple arguments as a comma\-separated list\. The list can't have any empty members, such as *argument1*,,*argument3*\. Function names are case\-insensitive\.
 
-*IF\(\)*  
+*IF*  
 Returns an argument\.  
 Syntax  
 
@@ -1090,7 +1103,7 @@ IF(argument1, argument2, argument3)
 ```
 Returns the second argument if the first argument evaluates to true\. Returns the third argument otherwise\.
 
-*GREATEST\(\)*  
+*GREATEST*  
 Returns the largest value from a list of integers or parameter formulas\.  
 Syntax  
 
@@ -1099,7 +1112,7 @@ GREATEST(argument1, argument2,...argumentn)
 ```
 Returns an integer\.
 
-*LEAST\(\)*  
+*LEAST*  
 Returns the smallest value from a list of integers or parameter formulas\.  
 Syntax  
 
@@ -1108,7 +1121,7 @@ LEAST(argument1, argument2,...argumentn)
 ```
 Returns an integer\.
 
-*SUM\(\)*  
+*SUM*  
 Adds the values of the specified integers or parameter formulas\.  
 Syntax  
 
@@ -1117,14 +1130,28 @@ SUM(argument1, argument2,...argumentn)
 ```
 Returns an integer\.
 
+### DB parameter log expressions<a name="USER_ParamLogExpressions"></a>
+
+You can set an integer DB parameter value to a log expression\. You enclose the expression in braces: \{\}\. For example:
+
+```
+{log(DBInstanceClassMemory/8187281418)*1000}
+```
+
+The `log` function represents log base 2\. This example also uses the `DBInstanceClassMemory` formula variable\. See [DB parameter formula variables](#USER_FormulaVariables)\. 
+
 ### DB parameter value examples<a name="USER_ParamValueExamples"></a>
 
-These examples show using formulas and functions in the values for DB parameters\.
+These examples show using formulas, functions, and expressions for the values of DB parameters\.
+
+**Note**  
+DB Parameter functions are currently supported only in the console and aren't supported in the AWS CLI\.
 
 **Warning**  
-Improperly setting parameters in a DB parameter group can have unintended adverse effects, including degraded performance and system instability\. Always exercise caution when modifying database parameters and back up your data before modifying your DB parameter group\. Try out parameter group changes on a test DB instances, created using point\-in\-time\-restores, before applying those parameter group changes to your production DB instances\. 
+Improperly setting parameters in a DB parameter group can have unintended adverse effects\. These might include degraded performance and system instability\. Use caution when modifying database parameters and back up your data before modifying your DB parameter group\. Try out parameter group changes on a test DB instance, created using point\-in\-time\-restores, before applying those parameter group changes to your production DB instances\. 
 
-You can specify the `LEAST()` function in an Aurora MySQL `table_definition_cache` parameter value to set the number of table definitions that can be stored in the definition cache to the lesser of `DBInstanceClassMemory`/393040 or 20,000\.
+**Example using the DB parameter function LEAST**  
+You can specify the `LEAST` function in an Aurora MySQL `table_definition_cache` parameter value\. Use it to set the number of table definitions that can be stored in the definition cache to the lesser of `DBInstanceClassMemory`/393040 or 20,000\.  
 
 ```
 LEAST({DBInstanceClassMemory/393040}, 20000)

@@ -95,7 +95,7 @@ However, the following limitations apply:
 + For both MySQL Client and PostgreSQL Client utilities, session variables that you might use in other environments have no effect when using TLS/SSL between client and Aurora Serverless v1\. 
 + For the MySQL Client, when connecting with TLS/SSL's `VERIFY_IDENTITY` mode, currently you need to use the MySQL 8\.0\-compatible `mysql` command\. For more information, see [Connecting to a DB instance running the MySQL database engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToInstance.html)\.
 
-Depending on the client that you use to connect to Aurora Serverless v1 DB cluster, you might not need to specify TLS/SSL to get an encrypted connection\. For example, to use the PostgreSQL Client to connect to an Aurora Serverless v1 DB cluster running Aurora with PostgreSQL compatibility, connect as you normally do\.
+Depending on the client that you use to connect to Aurora Serverless v1 DB cluster, you might not need to specify TLS/SSL to get an encrypted connection\. For example, to use the PostgreSQL Client to connect to an Aurora Serverless v1 DB cluster running Aurora PostgreSQL\-Compatible Edition, connect as you normally do\.
 
 ```
 psql -h endpoint -U user
@@ -109,7 +109,7 @@ SSL connection (protocol: TLSv1.2, cipher: ECDHE-RSA-AES256-GCM-SHA384, bits: 25
 Type "help" for help.
 ```
 
-To use the MySQL Client to connect to an Aurora Serverless v1 DB cluster running Aurora with MySQL compatibility, you specify TLS/SSL in your request\. The following example includes the [Amazon root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) downloaded from Amazon Trust Services, which is necessary for this connection to succeed\. 
+To use the MySQL Client to connect to an Aurora Serverless v1 DB cluster running Aurora MySQL\-Compatible Edition, you specify TLS/SSL in your request\. The following example includes the [Amazon root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) downloaded from Amazon Trust Services, which is necessary for this connection to succeed\. 
 
 ```
 mysql -h endpoint -P 3306 -u user -p --ssl-ca=amazon-root-CA-1.pem --ssl-mode=REQUIRED

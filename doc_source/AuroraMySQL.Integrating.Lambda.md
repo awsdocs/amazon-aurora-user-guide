@@ -1,6 +1,6 @@
 # Invoking a Lambda function from an Amazon Aurora MySQL DB cluster<a name="AuroraMySQL.Integrating.Lambda"></a>
 
-You can invoke an AWS Lambda function from an Amazon Aurora with MySQL compatibility DB cluster with a native function or a stored procedure\. Before invoking a Lambda function from an Aurora MySQL, the Aurora DB cluster must have access to Lambda\.
+You can invoke an AWS Lambda function from an Amazon Aurora MySQL\-Compatible Edition DB cluster with a native function or a stored procedure\. Before invoking a Lambda function from an Aurora MySQL, the Aurora DB cluster must have access to Lambda\.
 
  In recent Aurora MySQL versions, using a stored procedure is deprecated\. We strongly recommend using an Aurora MySQL native function if you are using one of the following Aurora MySQL versions: 
 +  Aurora MySQL version 1\.16 and later, for MySQL 5\.6\-compatible clusters\. 

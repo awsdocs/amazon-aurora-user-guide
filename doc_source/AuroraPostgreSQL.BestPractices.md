@@ -172,7 +172,7 @@ One thing to be aware of is when you connect to a replica that has stale data\. 
 
 ##### Java example to list instances using the DescribeDbClusters API<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString.API"></a>
 
-You can programmatically find the list of instances by using the [AWS Java SDK](https://aws.amazon.com/sdk-for-java/), specifically the [DescribeDbClusters ](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/rds/AmazonRDS.html#describeDBClusters-com.amazonaws.services.rds.model.DescribeDBClustersRequest-)API\. Here's a small example of how you might do this in java 8:
+You can programmatically find the list of instances by using the [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/), specifically the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) API\. Here's a small example of how you might do this in java 8:
 
 ```
 AmazonRDS client = AmazonRDSClientBuilder.defaultClient();
@@ -204,14 +204,14 @@ The variable `endpointPostfix` can be a constant that your application sets, or 
 .cksc6xlmwcyw.us-east-1-beta.rds.amazonaws.com
 ```
 
-For availability purposes, a good practice is to default to using the [Aurora endpoints](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Overview.html#Aurora.Overview.Endpoints) of your DB Cluster if the API is not responding, or is taking too long to respond\. The endpoints are guaranteed to be up to date within the time it takes to update the DNS record\. This is typically less than 30 seconds\. You can store this in a resource file that your application consumes\.
+For availability purposes, a good practice is to default to using the Aurora endpoints of your DB Cluster if the API is not responding, or is taking too long to respond\. The endpoints are guaranteed to be up to date within the time it takes to update the DNS record\. This is typically less than 30 seconds\. You can store this in a resource file that your application consumes\.
 
 ### Testing failover<a name="AuroraPostgreSQL.BestPracticesFastFailover.Testing"></a>
 
 In all cases you must have a DB cluster with two or more DB instances in it\.
 
 From the server side, certain APIs can cause an outage that can be used to test how your applications responds:
-+ [FailoverDBCluster ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html) \- Will attempt to promote a new DB Instance in your DB Cluster to writer
++ [FailoverDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html) \- Will attempt to promote a new DB Instance in your DB Cluster to writer
 
   ```
   public void causeFailover() {
@@ -226,10 +226,10 @@ From the server side, certain APIs can cause an outage that can be used to test 
       rdsClient.failoverDBCluster(request);
   }
   ```
-+ [RebootDBInstance ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html)\- Failover is not guaranteed in this API\. It will shutdown the database on the writer, though, and can be used to test how your application responds to connections dropping \(note that the **ForceFailover **parameter is not applicable for Aurora engines and instead should use the FailoverDBCluster API\)
-+ [ModifyDBCluster ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html)\- Modifying the **Port **will cause an outage when the nodes in the cluster begin listening on a new port\. In general your application can respond to this failure by ensuring that only your application controls port changes and can appropriately update the endpoints it depends on, by having someone manually update the port when they make modifications at the API level, or by querying the RDS API in your application to determine if the port has changed\.
-+ [ModifyDBInstance ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)\- Modifying the **DBInstanceClass** will cause an outage
-+ [DeleteDBInstance ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html)\- Deleting the primary/writer will cause a new DB Instance to be promoted to writer in your DB Cluster
++ [RebootDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) – Failover is not guaranteed in this API\. It will shutdown the database on the writer, though, and can be used to test how your application responds to connections dropping \(note that the **ForceFailover **parameter is not applicable for Aurora engines and instead should use the FailoverDBCluster API\)
++ [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) – Modifying the **Port **will cause an outage when the nodes in the cluster begin listening on a new port\. In general your application can respond to this failure by ensuring that only your application controls port changes and can appropriately update the endpoints it depends on, by having someone manually update the port when they make modifications at the API level, or by querying the RDS API in your application to determine if the port has changed\.
++ [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) – Modifying the **DBInstanceClass** will cause an outage\.
++ [DeleteDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) – Deleting the primary/writer will cause a new DB Instance to be promoted to writer in your DB Cluster\.
 
 From the application/client side, if using Linux, you can test how the application responds to sudden packet drops based on port, host, or if tcp keepalive packets are not sent or received by using iptables\.
 

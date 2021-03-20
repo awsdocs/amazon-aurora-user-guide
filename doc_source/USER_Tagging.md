@@ -25,7 +25,7 @@ You can tag the following Amazon RDS resources:
 + [Adding, listing, and removing tags](#Tagging.HowTo)
 + [Using the AWS Tag Editor](#Tagging.TagEditor)
 + [Copying tags to DB cluster snapshots](#USER_Tagging.CopyTagsCluster)
-+ [Examples of using tags for Aurora automation](#Tagging.Examples)
++ [Tutorial: Use tags to specify which Aurora DB clusters to stop](#Tagging.Aurora.Autostop)
 
 ## Overview of Amazon RDS resource tags<a name="Overview.Tagging"></a>
 
@@ -164,77 +164,83 @@ You can specify that tags are copied to DB snapshots for the following actions:
 **Note**  
 If you include a value for the `--tag-key` parameter of the [create\-db\-cluster\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster-snapshot.html) AWS CLI command \(or supply at least one tag to the [CreateDBClusterSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterSnapshot.html) API operation\) then RDS doesn't copy tags from the source DB cluster to the new DB snapshot\. This functionality applies even if the source DB cluster has the `--copy-tags-to-snapshot` \(`CopyTagsToSnapshot`\) option enabled\. If you take this approach, you can create a copy of a DB cluster from a DB cluster snapshot and avoid adding tags that don't apply to the new DB cluster\. Once you have created your DB cluster snapshot using the AWS CLI `create-db-cluster-snapshot` command \(or the `CreateDBSClusternapshot` Amazon RDS API operation\) you can then add tags as described later in this topic\.
 
-## Examples of using tags for Aurora automation<a name="Tagging.Examples"></a>
-
- The following AWS CLI examples demonstrate how you might assign tags to certain Aurora resources and then use those tags to automate maintenance operations for those resources\.
-
-### Specifying which Aurora DB clusters to stop<a name="Tagging.Aurora.Autostop"></a>
+## Tutorial: Use tags to specify which Aurora DB clusters to stop<a name="Tagging.Aurora.Autostop"></a>
 
  Suppose that you're creating a number of Aurora DB clusters in a development or test environment\. You need to keep all of these clusters for several days\. Some of the clusters run tests overnight\. Other clusters can be stopped overnight and started again the next day\. The following example shows how to assign a tag to those clusters that are suitable to stop overnight\. Then the example shows how a script can detect which clusters have that tag and then stop those clusters\. In this example, the value portion of the key\-value pair doesn't matter\. The presence of the `stoppable` tag signifies that the cluster has this user\-defined property\. 
 
- First, determine the ARN of a cluster that we want to designate as stoppable\. The commands and APIs for tagging work with ARNs\. That way, they can work seamlessly across AWS Regions, AWS accounts, and different types of resources that might have identical short names\. You can specify the ARN instead of the cluster ID in CLI commands that operate on clusters\. Substitute the name of your own cluster for *dev\-test\-cluster*\. In subsequent commands that use ARN parameters, substitute the ARN of your own cluster\. The ARN includes your own AWS account ID and the name of the AWS Region where your cluster is located\. 
+**To specify which Aurora DB clusters to stop**
 
-```
-$ aws rds describe-db-clusters --db-cluster-id dev-test-cluster \
-  --query "*[].{DBClusterArn:DBClusterArn}" --output text
-arn:aws:rds:us-east-1:123456789:cluster:dev-test-cluster
-```
+1. Determine the ARN of a cluster that you want to designate as stoppable\.
 
- Next, add the tag `stoppable` to this cluster\. The name for this tag is chosen by you\. Using a tag like this is an alternative to devising a naming convention that encodes all the relevant information in the name of the cluster, DB instance, and so on\. Because this example treats the tag as an attribute that is either present or absent, it omits the `Value=` part of the `--tags` parameter\. 
+   The commands and APIs for tagging work with ARNs\. That way, they can work seamlessly across AWS Regions, AWS accounts, and different types of resources that might have identical short names\. You can specify the ARN instead of the cluster ID in CLI commands that operate on clusters\. Substitute the name of your own cluster for *dev\-test\-cluster*\. In subsequent commands that use ARN parameters, substitute the ARN of your own cluster\. The ARN includes your own AWS account ID and the name of the AWS Region where your cluster is located\. 
 
-```
-$ aws rds add-tags-to-resource \
-  --resource-name arn:aws:rds:us-east-1:123456789:cluster:dev-test-cluster \
-  --tags Key=stoppable
-```
+   ```
+   $ aws rds describe-db-clusters --db-cluster-id dev-test-cluster \
+     --query "*[].{DBClusterArn:DBClusterArn}" --output text
+   arn:aws:rds:us-east-1:123456789:cluster:dev-test-cluster
+   ```
 
- Confirm that the tag is present in the cluster\. These commands retrieve the tag information for the cluster in JSON format and in plain tab\-separated text\. 
+1. Add the tag `stoppable` to this cluster\.
 
-```
-$ aws rds list-tags-for-resource \
-  --resource-name arn:aws:rds:us-east-1:123456789:cluster:dev-test-cluster 
-{
-    "TagList": [
-        {
-            "Key": "stoppable",
-            "Value": ""
+   The name for this tag is chosen by you\. Using a tag like this is an alternative to devising a naming convention that encodes all the relevant information in the name of the cluster, DB instance, and so on\. Because this example treats the tag as an attribute that is either present or absent, it omits the `Value=` part of the `--tags` parameter\. 
 
-        }
-    ]
-}
-$ aws rds list-tags-for-resource \
-  --resource-name arn:aws:rds:us-east-1:123456789:cluster:dev-test-cluster --output text
-TAGLIST stoppable
-```
+   ```
+   $ aws rds add-tags-to-resource \
+     --resource-name arn:aws:rds:us-east-1:123456789:cluster:dev-test-cluster \
+     --tags Key=stoppable
+   ```
 
- To stop all the clusters that are designated as `stoppable`, prepare a list of all your clusters\. Loop through the list and check if each cluster is tagged with the relevant attribute\. This Linux example uses shell scripting to save the list of cluster ARNs to a temporary file and then perform CLI commands for each cluster\. 
+1. Confirm that the tag is present in the cluster\.
 
-```
-$ aws rds describe-db-clusters --query "*[].[DBClusterArn]" --output text >/tmp/cluster_arns.lst
-$ for arn in $(cat /tmp/cluster_arns.lst)
-do
-  match="$(aws rds list-tags-for-resource --resource-name $arn --output text | grep 'TAGLIST\tstoppable')"
-  if [[ ! -z "$match" ]]
-  then
-      echo "Cluster $arn is tagged as stoppable. Stopping it now."
-# Note that we can specify the full ARN value as the parameter instead of the short ID 'dev-test-cluster'.
-      aws rds stop-db-cluster --db-cluster-id $arn
-  fi
-done
+   These commands retrieve the tag information for the cluster in JSON format and in plain tab\-separated text\. 
 
-Cluster arn:aws:rds:us-east-1:123456789:cluster:dev-test-cluster is tagged as stoppable. Stopping it now.
-{
-    "DBCluster": {
-        "AllocatedStorage": 1,
-        "AvailabilityZones": [
-            "us-east-1e",
-            "us-east-1c",
-            "us-east-1d"
-        ],
-        "BackupRetentionPeriod": 1,
-        "DBClusterIdentifier": "dev-test-cluster",
-        ...
-```
+   ```
+   $ aws rds list-tags-for-resource \
+     --resource-name arn:aws:rds:us-east-1:123456789:cluster:dev-test-cluster 
+   {
+       "TagList": [
+           {
+               "Key": "stoppable",
+               "Value": ""
+   
+           }
+       ]
+   }
+   $ aws rds list-tags-for-resource \
+     --resource-name arn:aws:rds:us-east-1:123456789:cluster:dev-test-cluster --output text
+   TAGLIST stoppable
+   ```
+
+1. To stop all the clusters that are designated as `stoppable`, prepare a list of all your clusters\. Loop through the list and check if each cluster is tagged with the relevant attribute\.
+
+   This Linux example uses shell scripting to save the list of cluster ARNs to a temporary file and then perform CLI commands for each cluster\.
+
+   ```
+   $ aws rds describe-db-clusters --query "*[].[DBClusterArn]" --output text >/tmp/cluster_arns.lst
+   $ for arn in $(cat /tmp/cluster_arns.lst)
+   do
+     match="$(aws rds list-tags-for-resource --resource-name $arn --output text | grep 'TAGLIST\tstoppable')"
+     if [[ ! -z "$match" ]]
+     then
+         echo "Cluster $arn is tagged as stoppable. Stopping it now."
+   # Note that you can specify the full ARN value as the parameter instead of the short ID 'dev-test-cluster'.
+         aws rds stop-db-cluster --db-cluster-id $arn
+     fi
+   done
+   
+   Cluster arn:aws:rds:us-east-1:123456789:cluster:dev-test-cluster is tagged as stoppable. Stopping it now.
+   {
+       "DBCluster": {
+           "AllocatedStorage": 1,
+           "AvailabilityZones": [
+               "us-east-1e",
+               "us-east-1c",
+               "us-east-1d"
+           ],
+           "BackupRetentionPeriod": 1,
+           "DBClusterIdentifier": "dev-test-cluster",
+           ...
+   ```
 
  You can run a script like this at the end of each day to make sure that nonessential clusters are stopped\. You might also schedule a job using a utility such as `cron` to perform such a check each night, in case some clusters were left running by mistake\. In that case, you might fine\-tune the command that prepares the list of clusters to check\. The following command produces a list of your clusters, but only the ones in `available` state\. The script can ignore clusters that are already stopped, because they will have different status values such as `stopped` or `stopping`\. 
 

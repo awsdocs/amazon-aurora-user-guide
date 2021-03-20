@@ -69,10 +69,10 @@ For this example, **Standard Create** is enabled, and **Easy Create** isn't enab
 ![\[Engine options\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch01.png)
 
 1. In **Edition**, choose one of the following:
-   + **Amazon Aurora with MySQL compatibility**
-   + **Amazon Aurora with PostgreSQL compatibility**
+   + **Amazon Aurora MySQL\-Compatible Edition**
+   + **Amazon Aurora PostgreSQL\-Compatible Edition**
 
-1. If you chose **Amazon Aurora with MySQL compatibility**, choose one of the following in **Database features**:
+1. If you chose **Amazon Aurora MySQL\-Compatible Edition**, choose one of the following in **Database features**:
    + **One writer and multiple readers**
 
      For more information, see [Amazon Aurora DB clusters](Aurora.Overview.md)\.

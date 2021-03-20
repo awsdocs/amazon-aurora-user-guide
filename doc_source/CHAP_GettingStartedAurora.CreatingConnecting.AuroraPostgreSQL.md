@@ -38,7 +38,7 @@ For this example, **Easy Create** is enabled\. For information about creating an
 
 1. For **Engine type**, choose **Amazon Aurora**\.
 
-1. For **Edition**, choose **Amazon Aurora with PostgreSQL compatibility**\.
+1. For **Edition**, choose **Amazon Aurora PostgreSQL\-Compatible Edition**\.
 
 1. For **DB instance size**, choose **Dev/Test**\.
 
