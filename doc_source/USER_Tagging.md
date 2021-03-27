@@ -255,4 +255,4 @@ arn:aws:rds:us-east-1:123456789:cluster:pg2-cluster
 ```
 
 **Tip**  
- Once you're familiar with the general procedure of assigning tags and finding clusters that have those tags, you can use the same technique to reduce costs in other ways\. For example, in this scenario with Aurora DB clusters used for development and testing, you might designate some clusters to be deleted at the end of each day, or to have only their reader DB instances deleted, or to have their DB instances changed to a small DB instance classes during times of expected low usage\. 
+ After you're familiar with the general procedure of assigning tags and finding clusters that have those tags, you can use the same technique to reduce costs in other ways\. For example, in this scenario with Aurora DB clusters used for development and testing, you might designate some clusters to be deleted at the end of each day, or to have only their reader DB instances deleted, or to have their DB instances changed to a small DB instance classes during times of expected low usage\. 

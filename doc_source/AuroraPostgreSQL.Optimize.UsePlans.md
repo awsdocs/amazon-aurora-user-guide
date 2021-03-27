@@ -56,6 +56,9 @@ When the `apg_plan_mgmt.use_plan_baselines` parameter is set to `true`, you can 
 
 ```
 EXPLAIN ANALYZE EXECUTE rangeQuery (1,10000);
+```
+
+```
                                                     QUERY PLAN           
 --------------------------------------------------------------------------
  Aggregate  (cost=393.29..393.30 rows=1 width=8) (actual time=7.251..7.251 rows=1 loops=1)

@@ -629,7 +629,7 @@ For the next step, see [Creating an IAM role to access SageMaker and Amazon Comp
 **Note**  
  Aurora can create the IAM policy for you automatically\. You can skip the following information and use the procedure in [Automatically connecting an Aurora DB cluster to AWS services using the console](#postgresql-ml-connect-console)\. 
 
- The following policy adds the permissions required by Aurora PostgreSQL to invoke AWS Amazon Comprehend on your behalf\. 
+ The following policy adds the permissions required by Aurora PostgreSQL to invoke Amazon Comprehend on your behalf\. 
 
 ```
 {

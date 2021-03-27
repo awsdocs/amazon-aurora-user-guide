@@ -136,7 +136,7 @@ aws iam put-role-policy --role-name role_name --policy-name policy_name
 **Note**  
  When you use the AWS Management Console, Aurora creates the IAM policy automatically\. In that case, you can skip this section\. 
 
- The following policy adds the permissions required by Aurora MySQL to invoke AWS Amazon Comprehend on your behalf\. 
+ The following policy adds the permissions required by Aurora MySQL to invoke Amazon Comprehend on your behalf\. 
 
 ```
 {

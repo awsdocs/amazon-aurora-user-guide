@@ -27,7 +27,7 @@ Aurora MySQL 1\.23\.2 is generally available\. Aurora MySQL 1\.\* versions are c
 
  **Availability improvements:** 
 +  Improved binary log \(binlog\) processing to reduce crash recovery time and commit time latency when very large transactions are involved\. 
-+  Fixed an issue in the dynamic resizing feature that could cause reader DB instances to restart\. 
++  Fixed an issue in the dynamic cluster storage resizing feature that could cause reader DB instances to restart\. 
 +  Fixed a failover issue due to a race condition in `RESET QUERY CACHE` statement\. 
 +  Fixed a crash in a nested stored procedure call with query cache\. 
 +  Fixed an issue to prevent repeated restart of `mysqld` when recovering from an incomplete truncation of partitioned or sub\-partitioned tables\. 

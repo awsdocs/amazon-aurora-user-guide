@@ -17,7 +17,7 @@ You can restore a DB cluster to a point in time using the AWS Management Console
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Automated backups**\.
+1. In the navigation pane, choose **Databases**\.
 
 1. Choose the DB cluster that you want to restore\.
 

@@ -29,7 +29,9 @@ SELECT apg_plan_mgmt.evolve_plan_baselines (
    action := 'approve'
 ) 
 FROM apg_plan_mgmt.dba_plans WHERE status = 'Unapproved';
-                
+```
+
+```
 NOTICE:     rangequery (1,10000)
 NOTICE:     Baseline   [ Planning time 0.761 ms, Execution time 13.261 ms]
 NOTICE:     Baseline+1 [ Planning time 0.204 ms, Execution time 8.956 ms]
@@ -46,7 +48,9 @@ The output shows a performance report for the `rangequery` statement with parame
 ```
 SELECT sql_hash, plan_hash, status, enabled, stmt_name 
 FROM apg_plan_mgmt.dba_plans;
-                
+```
+
+```
 sql_hash  | plan_hash |  status  | enabled | stmt_name  
 ------------+-----------+----------+---------+------------
 1984047223 | 512153379 | Approved | t       | rangequery
@@ -144,7 +148,7 @@ The following steps show how to use `pg_hint_plan`\.
 1. Set the status of the plan to `Preferred`\. Doing so makes sure that the optimizer chooses to run it, instead of selecting from the set of approved plans, when the minimum\-cost plan isn't already `Approved` or `Preferred`\.
 
    ```
-   SELECT apg_plan_mgmt.set_plan_status(<sql-hash>, <plan-hash>, 'preferred' ); 
+   SELECT apg_plan_mgmt.set_plan_status(sql-hash, plan-hash, 'preferred' ); 
    ```
 
 1. Turn off manual plan capture and enforce the use of managed plans\.
@@ -186,7 +190,13 @@ An authorized user can copy any subset of the `apg_plan_mgmt.plans` table to ano
 ```
 CREATE TABLE plans_copy AS SELECT * 
 FROM apg_plan_mgmt.plans [ WHERE predicates ] ;
+```
+
+```
 % pg_dump --table apg_plan_mgmt.plans_copy -Ft mysourcedatabase > plans_copy.tar
+```
+
+```
 DROP TABLE apg_plan_mgmt.plans_copy;
 ```
 

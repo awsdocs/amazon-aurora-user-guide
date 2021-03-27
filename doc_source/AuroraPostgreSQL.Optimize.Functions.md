@@ -109,7 +109,7 @@ Returns runtime statistics for the specified SQL statements\. Use without `expla
 | --- | --- | 
 | sql\_hash  | The sql\_hash ID of the plan's managed SQL statement\. | 
 | plan\_hash | The managed plan's plan\_hash ID\. | 
-| explain\_option\_list | A comma\-separated list of `explain_options`\. Valid values include `analyze`, `verbose`, `buffers`, `hashes`, and `format json`\. If the list of `explain_options` is NULL or an empty string \(''\), this function generates an `EXPLAIN` statement, without any statistics\.  | 
+| explain\_option\_list | A comma\-separated list of `explain_options`\. Valid values include `'analyze'`, `'verbose'`, `'buffers'`, `'hashes'`, and `'format json'`\. If the `explain_options_list` is NULL or an empty string \(''\), this function generates an `EXPLAIN` statement, without any statistics\.  | 
 
  
 

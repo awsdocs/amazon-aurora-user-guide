@@ -26,7 +26,7 @@ You must be set the parameters `apg_plan_mgmt.max_databases` and `apg_plan_mgmt.
 Enable execution plan capture for SQL statements\.
 
 ```
-SET apg_plan_mgmt.capture_plan_baselines = [off | automatic |manual]
+SET apg_plan_mgmt.capture_plan_baselines = [off | automatic |manual];
 ```
 
 
@@ -45,6 +45,10 @@ Sets the maximum number of database objects that might use query plan management
 **Important**  
 Set `apg_plan_mgmt.max_databases` at the cluster or DB instance level\. It requires a DB instance restart for a new value to take effect\.
 
+```
+SET apg_plan_mgmt.max_databases = integer-value;
+```
+
 
 ****  
 
@@ -60,6 +64,10 @@ Sets the maximum number of plans that might be captured in the `apg_plan_mgmt.db
 
 **Important**  
 Set `apg_plan_mgmt.max_plans` at the cluster or DB instance level\. It requires a DB instance restart for a new value to take effect\.
+
+```
+SET apg_plan_mgmt.max_plans = integer-value;
+```
 
 
 ****  

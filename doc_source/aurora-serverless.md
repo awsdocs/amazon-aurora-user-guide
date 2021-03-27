@@ -72,6 +72,7 @@ The following limitations apply to Aurora Serverless v1:
   + Currently, certain SQL queries and commands aren't recommended\. These include session\-level advisory locks, temporary relations, asynchronous notifications \(`LISTEN`\), and cursors with hold \(`DECLARE name ... CURSOR WITH HOLD FOR query`\)\. Also, `NOTIFY` commands prevent scaling and aren't recommended\. 
 
     For more information, see [Autoscaling for Aurora Serverless v1](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\.
++ You can't set the preferred backup window for an Aurora Serverless v1 DB cluster\.
 
 ## Configuration requirements for Aurora Serverless v1<a name="aurora-serverless.requirements"></a>
 
