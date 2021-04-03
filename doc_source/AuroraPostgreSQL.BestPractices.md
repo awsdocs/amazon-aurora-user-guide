@@ -17,7 +17,7 @@ There are several things you can do to make a failover perform faster with Auror
   + [Reducing DNS cache timeouts](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.Timeouts)
   + [Setting an Aurora PostgreSQL connection string for fast failover](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.ConnectionString)
   + [Other options for obtaining the host string](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString)
-    + [Java example to list instances using the DescribeDbClusters API](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString.API)
+    + [Java example to list instances using the DescribeDBClusters API](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString.API)
 + [Testing failover](#AuroraPostgreSQL.BestPracticesFastFailover.Testing)
 + [Fast failover Java example](#AuroraPostgreSQL.BestPractices.FastFailover.Example)
 
@@ -170,7 +170,7 @@ If the return value of the query is `OFF`, then you've successfully connected to
 
 One thing to be aware of is when you connect to a replica that has stale data\. When this happens, the `aurora_replica_status` function may show out\-of\-date information\. A threshold for staleness can be set at the application level and examined by looking at the difference between the server time and the `last_update_time`\. In general, your application should avoid flipping between two hosts due to conflicting information returned by the `aurora_replica_status` function\. Your application should try all known hosts first instead of blindly following the data returned by the `aurora_replica_status` function\.
 
-##### Java example to list instances using the DescribeDbClusters API<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString.API"></a>
+##### Java example to list instances using the DescribeDBClusters API<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString.API"></a>
 
 You can programmatically find the list of instances by using the [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/), specifically the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) API\. Here's a small example of how you might do this in java 8:
 

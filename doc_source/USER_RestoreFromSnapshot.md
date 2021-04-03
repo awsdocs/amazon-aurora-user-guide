@@ -40,17 +40,17 @@ You can restore a DB cluster from a DB cluster snapshot using the AWS Management
 
 1. In the navigation pane, choose **Snapshots**\.
 
-1. Choose the DB cluster snapshot that you want to restore from\. 
+1. Choose the DB cluster snapshot that you want to restore from\.
 
-1. For **Actions**, choose **Restore Snapshot**\. 
+1. For **Actions**, choose **Restore snapshot**\.
 
-1. On the **Restore DB Instance** page, for **DB Instance Identifier**, enter the name for your restored DB cluster\. 
+1. On the **Restore snapshot** page, for **DB instance identifier**, enter the name for your restored DB cluster\.
 
-1. Choose **Restore DB Instance**\. 
+1. Choose **Restore DB instance**\. 
 
 ### AWS CLI<a name="USER_RestoreFromSnapshot.CLI"></a>
 
-To restore a DB cluster from a DB cluster snapshot, use the AWS CLI command [restore\-db\-cluster\-from\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html)\. 
+To restore a DB cluster from a DB cluster snapshot, use the AWS CLI command [restore\-db\-cluster\-from\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html)\.
 
 In this example, you restore from a previously created DB cluster snapshot named `mydbclustersnapshot`\. You restore to a new DB cluster named `mynewdbcluster`\.
 

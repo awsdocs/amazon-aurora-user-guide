@@ -49,6 +49,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Using the Data API for Aurora Serverless](data-api.md)
       + [Logging Data API calls with AWS CloudTrail](logging-using-cloudtrail-data-api.md)
       + [Using the query editor for Aurora Serverless](query-editor.md)
+         + [Database Query Metadata Service (DBQMS) API reference](dbqms-api.md)
    + [Using Amazon Aurora Serverless v2 (preview)](aurora-serverless-2.md)
       + [How Aurora Serverless v2 (preview) works](aurora-serverless-2.how-it-works.md)
       + [Limitations of Aurora Serverless v2 (preview)](aurora-serverless-2.limitations.md)

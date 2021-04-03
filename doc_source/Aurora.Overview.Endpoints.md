@@ -63,7 +63,7 @@
 aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:ReaderEndpoint,CustomEndpoints:CustomEndpoints}'
 ```
 
- With the Amazon RDS API, you retrieve the endpoints by calling the [DescribeDbClusterEndpoints](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDbClusterEndpoints.html) function\. 
+ With the Amazon RDS API, you retrieve the endpoints by calling the [DescribeDBClusterEndpoints](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterEndpoints.html) function\. 
 
 ## Using the cluster endpoint<a name="Aurora.Endpoints.Cluster"></a>
 
