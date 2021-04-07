@@ -8,7 +8,7 @@ Restored DB instances are automatically associated with the default parameter an
 
 RDS uploads transaction logs for DB clusters to Amazon S3 every 5 minutes\. To see the latest restorable time for a DB cluster, use the AWS CLI [ describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusterss.html) command and look at the value returned in the `LatestRestorableTime` field for the DB cluster\.
 
-You can restore to any point in time within your backup retention period\. To see the earliest restorable time for a DB cluster, use the AWS CLI [ describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusterss.html) command and look at the value returned in the `LatestRestorableTime` field for the DB cluster\.
+You can restore to any point in time within your backup retention period\. To see the earliest restorable time for a DB cluster, use the AWS CLI [ describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusterss.html) command and look at the value returned in the `EarliestRestorableTime` field for the DB cluster\.
 
 **Note**  
 For more information about backing up and restoring an Aurora DB cluster, see [Overview of backing up and restoring an Aurora DB cluster](Aurora.Managing.Backups.md)\. For Aurora MySQL, you can restore a provisioned DB cluster to an Aurora Serverless DB cluster\. For more information, see [Restoring an Aurora Serverless v1 DB cluster](aurora-serverless.restorefromsnapshot.md)\.
