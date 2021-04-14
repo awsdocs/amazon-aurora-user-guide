@@ -32,8 +32,10 @@ The following table shows the AWS Regions where the Data API is currently availa
 | --- | --- | 
 | Asia Pacific \(Singapore\) | rds\-data\.ap\-southeast\-1\.amazonaws\.com | 
 | Asia Pacific \(Sydney\) | rds\-data\.ap\-southeast\-2\.amazonaws\.com | 
+| Asia Pacific \(Seoul\) | rds\-data\.ap\-northeast\-2\.amazonaws\.com | 
 | Asia Pacific \(Tokyo\) | rds\-data\.ap\-northeast\-1\.amazonaws\.com | 
 | Asia Pacific \(Mumbai\) | rds\-data\.ap\-south\-1\.amazonaws\.com | 
+| Canada \(Central\) | rds\-data\.ca\-central\-1\.amazonaws\.com | 
 | Europe \(Frankfurt\) | rds\-data\.eu\-central\-1\.amazonaws\.com | 
 | Europe \(Ireland\) | rds\-data\.eu\-west\-1\.amazonaws\.com | 
 | Europe \(London\) | rds\-data\.eu\-west\-2\.amazonaws\.com | 

@@ -29,3 +29,4 @@ Aurora MySQL 1\.22\.4 is generally available\. Aurora MySQL 1\.\* versions are c
  **Availability improvements:** 
 +  Fixed an issue that could trigger a database restart or failover during a `kill session` command\. If you encounter this issue, contact AWS support to enable this fix on your instance\. 
 +  Improved binary logging to reduce crash recovery time and commit latency when large transactions are involved\. 
++  Fixed an issue that caused a binlog replica to stop with an `HA_ERR_KEY_NOT_FOUND` error\. 

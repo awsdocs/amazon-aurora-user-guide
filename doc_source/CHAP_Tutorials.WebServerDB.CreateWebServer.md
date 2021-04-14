@@ -100,7 +100,7 @@ The `-y` option installs the updates without asking for confirmation\. To examin
 **Note**  
 The Apache test page appears only when there is no content in the document root directory, `/var/www/html`\. After you add content to the document root directory, your content appears at the public DNS address of your EC2 instance instead of the Apache test page\.
 
-1. Configure the web server to start with each system boot using the `chkconfig` command\.
+1. Configure the web server to start with each system boot using the `systemctl` command\.
 
    ```
    sudo systemctl enable httpd

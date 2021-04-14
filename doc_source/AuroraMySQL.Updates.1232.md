@@ -26,7 +26,6 @@ Aurora MySQL 1\.23\.2 is generally available\. Aurora MySQL 1\.\* versions are c
 + [CVE\-2018\-3143](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3143)
 
  **Availability improvements:** 
-+  Improved binary log \(binlog\) processing to reduce crash recovery time and commit time latency when very large transactions are involved\. 
 +  Fixed an issue in the dynamic cluster storage resizing feature that could cause reader DB instances to restart\. 
 +  Fixed a failover issue due to a race condition in `RESET QUERY CACHE` statement\. 
 +  Fixed a crash in a nested stored procedure call with query cache\. 
@@ -40,3 +39,4 @@ Aurora MySQL 1\.23\.2 is generally available\. Aurora MySQL 1\.\* versions are c
 +  Fixed multiple issues where the the engine might restart during zero\-downtime patching while checking for a quiesced point in database activity for patching\. 
 +  Fixed multiple issues related to repeated restarts due to interrupted DDL operations, such as `DROP TRIGGER`, `ALTER TABLE`, and specifically `ATLER TABLE` that modifies the type of partitioning or number of partitions in a table\. 
 +  Updated the default value of `table_open_cache` on 16XL and 24XL instances to avoid repeated restarts and high CPU utilization on large instances classes \(R4/R5\-16XL, R5\-12XL, R5\-24XL\)\. This impacted 1\.21\.x and 1\.22\.x releases\. 
++  Fixed an issue that caused a binlog replica to stop with an `HA_ERR_KEY_NOT_FOUND` error\. 
