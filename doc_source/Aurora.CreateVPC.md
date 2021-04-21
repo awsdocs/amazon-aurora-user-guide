@@ -9,7 +9,7 @@ For a helpful and detailed guide on connecting to an Amazon Aurora DB cluster, y
 
 You can only create an Amazon Aurora DB cluster in a Virtual Private Cloud \(VPC\) that spans two Availability Zones, and each zone must contain at least one subnet\. You can create an Aurora DB cluster in the default VPC for your AWS account, or you can create a user\-defined VPC\. For information, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
 
-Amazon Aurora optionally can create a VPC and subnet group for you to use with your DB cluster\. Doing this can be helpful if you have never created a VPC, or if you would like to create a new VPC that is separate from your other VPCs\. If you want Amazon Aurora to create a VPC and subnet group for you, then skip this procedure and see [Create an Aurora MySQL DB cluster](CHAP_GettingStartedAurora.CreatingConnecting.Aurora.md#CHAP_GettingStarted.Aurora.CreateDBCluster)\.
+Amazon Aurora optionally can create a VPC and subnet group for you to use with your DB cluster\. Doing this can be helpful if you have never created a VPC, or if you would like to create a new VPC that is separate from your other VPCs\. If you want Amazon Aurora to create a VPC and subnet group for you, then skip this procedure and see [Create an Aurora MySQL DB cluster](CHAP_GettingStartedAurora.CreatingConnecting.Aurora.md#CHAP_GettingStarted.Aurora.CreateDBCluster) or [Create an Aurora PostgreSQL DB cluster](CHAP_GettingStartedAurora.CreatingConnecting.AuroraPostgreSQL.md#CHAP_GettingStarted.AuroraPostgreSQL.CreateDBCluster)\.
 
 **Note**  
 All VPC and EC2 resources that you use with your Aurora DB cluster must be in one of the regions listed in [ Regions and Availability Zones ](Concepts.RegionsAndAvailabilityZones.md)\.

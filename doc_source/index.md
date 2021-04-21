@@ -73,7 +73,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Managing an Amazon Aurora DB cluster](CHAP_Aurora.md)
    + [Stopping and starting an Amazon Aurora DB cluster](aurora-cluster-stop-start.md)
    + [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)
-   + [Adding Aurora replicas to a DB cluster](aurora-replicas-adding.md)
+   + [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)
    + [Managing performance and scaling for Aurora DB clusters](Aurora.Managing.Performance.md)
    + [Cloning an Aurora DB cluster volume](Aurora.Managing.Clone.md)
    + [Integrating Aurora with other AWS services](Aurora.Integrating.md)

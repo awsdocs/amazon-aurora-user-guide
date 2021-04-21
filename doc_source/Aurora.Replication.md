@@ -29,7 +29,7 @@ You can't create an encrypted Aurora Replica for an unencrypted Aurora DB cluste
 **Tip**  
  You can use Aurora Replicas within an Aurora cluster as your only form of replication to keep your data highly available\. You can also combine the built\-in Aurora replication with the other types of replication\. Doing so can help to provide an extra level of high availability and geographic distribution of your data\. 
 
-For details on how to create an Aurora Replica, see [Adding Aurora replicas to a DB cluster](aurora-replicas-adding.md)\.
+For details on how to create an Aurora Replica, see [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)\.
 
 ## Replication with Aurora MySQL<a name="Aurora.Replication.AuroraMySQL"></a>
 

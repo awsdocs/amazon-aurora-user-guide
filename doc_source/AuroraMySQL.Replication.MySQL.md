@@ -272,7 +272,7 @@ Make sure that there is not a space between the `-p` option and the entered pass
    CALL mysql.rds_start_replication; 
    ```
 
-After you have established replication between your source MySQL DB instance and your Amazon Aurora DB cluster, you can add Aurora Replicas to your Amazon Aurora DB cluster\. You can then connect to the Aurora Replicas to read scale your data\. For information on creating an Aurora Replica, see [Adding Aurora replicas to a DB cluster](aurora-replicas-adding.md)\.
+After you have established replication between your source MySQL DB instance and your Amazon Aurora DB cluster, you can add Aurora Replicas to your Amazon Aurora DB cluster\. You can then connect to the Aurora Replicas to read scale your data\. For information on creating an Aurora Replica, see [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)\.
 
 ## Optimizing binary log replication<a name="binlog-optimization"></a>
 

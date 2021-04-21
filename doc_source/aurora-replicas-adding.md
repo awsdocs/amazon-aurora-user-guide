@@ -1,4 +1,4 @@
-# Adding Aurora replicas to a DB cluster<a name="aurora-replicas-adding"></a>
+# Adding Aurora Replicas to a DB cluster<a name="aurora-replicas-adding"></a>
 
 An Aurora DB cluster with single\-master replication has one primary DB instance and up to 15 Aurora Replicas\. The primary DB instance supports read and write operations, and performs all data modifications to the cluster volume\. Aurora Replicas connect to the same storage volume as the primary DB instance, but support read operations only\. You use Aurora Replicas to offload read workloads from the primary DB instance\. For more information, see [Aurora Replicas](Aurora.Replication.md#Aurora.Replication.Replicas)\. 
 

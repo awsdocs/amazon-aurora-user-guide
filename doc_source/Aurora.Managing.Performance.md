@@ -214,7 +214,7 @@ You can scale your Aurora DB cluster as needed by modifying the DB instance clas
 
 You can achieve read scaling for your Aurora DB cluster by creating up to 15 Aurora Replicas in a DB cluster that uses single\-master replication\. Each Aurora Replica returns the same data from the cluster volume with minimal replica lag—usually considerably less than 100 milliseconds after the primary instance has written an update\. As your read traffic increases, you can create additional Aurora Replicas and connect to them directly to distribute the read load for your DB cluster\. Aurora Replicas don't have to be of the same DB instance class as the primary instance\.
 
-For information about adding Aurora Replicas to a DB cluster, see [Adding Aurora replicas to a DB cluster](aurora-replicas-adding.md)\.
+For information about adding Aurora Replicas to a DB cluster, see [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)\.
 
 ## Managing connections<a name="Aurora.Managing.MaxConnections"></a>
 

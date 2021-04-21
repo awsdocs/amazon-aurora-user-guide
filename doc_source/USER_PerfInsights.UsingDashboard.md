@@ -286,7 +286,7 @@ By default, each row in the **Top sql** table shows 500 bytes of SQL text for ea
 + Aurora MySQL 5\.7 – 4,096 bytes
 + Aurora MySQL 5\.6 – 1,024 bytes
 
-You can copy the text that is displayed on the dashboard, or choose **Download**\.
+You can copy the text that is displayed on the dashboard\. If you view a child SQL statement, you can also choose **Download**\.
 
 Aurora PostgreSQL handles text differently\. Using the Performance Insights dashboard, you can view and download up to 500 bytes\. To access more than 500 bytes, set the size limit with the DB instance parameter `track_activity_query_size`\. The maximum value is 102,400 bytes\. To view or download text over 500 bytes, use the AWS Management Console, not the Performance Insights CLI or API\. For more information, see [Setting the SQL text limit for Aurora PostgreSQL DB instances](#USER_PerfInsights.UsingDashboard.SQLTextLimit)\.
 

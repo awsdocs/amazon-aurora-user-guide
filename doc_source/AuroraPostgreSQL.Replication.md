@@ -3,11 +3,11 @@
 Following, you can find a description of replication with Amazon Aurora PostgreSQL, including how to monitor replication\.
 
 **Topics**
-+ [Using Aurora replicas](#AuroraPostgreSQL.Replication.Replicas)
++ [Using Aurora Replicas](#AuroraPostgreSQL.Replication.Replicas)
 + [Monitoring Aurora PostgreSQL replication](#AuroraPostgreSQL.Replication.Monitoring)
 + [Using PostgreSQL logical replication with Aurora](AuroraPostgreSQL.Replication.Logical.md)
 
-## Using Aurora replicas<a name="AuroraPostgreSQL.Replication.Replicas"></a>
+## Using Aurora Replicas<a name="AuroraPostgreSQL.Replication.Replicas"></a>
 
 An *Aurora Replica* is an independent endpoint in an Aurora DB cluster, best used for scaling read operations and increasing availability\. An Aurora DB cluster can include up to 15 Aurora Replicas located throughout the Availability Zones of the Aurora DB cluster's AWS Region\.
 
