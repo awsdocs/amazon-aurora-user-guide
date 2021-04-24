@@ -18,7 +18,7 @@ The following table shows the Aurora MySQL engine versions that are supported fo
 | 2\.04\.4 and higher | 5\.7 | 
 | 1\.19\.2 and higher | 5\.6 | 
 
-The following table shows the Aurora PostgreSQL engine versions that are supported for exporting snapshot data to Amazon S3\. For more information about Aurora PostgreSQL engine versions, see [Engine versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.20180305.md)\. 
+The following table shows the Aurora PostgreSQL engine versions that are supported for exporting snapshot data to Amazon S3\. For more information about Aurora PostgreSQL engine versions, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\. 
 
 
 | Aurora PostgreSQL version | PostgreSQL\-compatible version | 

@@ -63,7 +63,7 @@ my-database=> SET apg_plan_mgmt.capture_plan_baselines = off;
 
 ## Upgrading query plan management<a name="AuroraPostgreSQL.Optimize.Upgrade"></a>
 
-The latest version of query plan management is 2\.0\. If you installed an earlier version of query plan management, we strongly recommend that you upgrade to version 2\.0\. For version details, see [PostgreSQL extensions supported on Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)\.
+The latest version of query plan management is 2\.0\. If you installed an earlier version of query plan management, we strongly recommend that you upgrade to version 2\.0\. For version details, see [Extension versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)\.
 
 To upgrade, run the following commands at the cluster or DB instance level\.
 

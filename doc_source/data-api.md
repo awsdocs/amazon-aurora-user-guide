@@ -109,7 +109,14 @@ Here's how the policy gets applied: When a user makes a call using the Data API,
             "Action": [
                  "secretsmanager:GetSecretValue"
                ],
-            "Resource": "arn:aws:secretsmanager:*:*:secret:rds-db-credentials/*"
+            "Resource": "arn:aws:secretsmanager:*:*:secret:rds-db-credentials/*",
+            "Condition": {
+                    "StringEquals": {
+                        "aws:ResourceTag/environment": [
+                                         "production"
+                                        ]
+                     }
+             }
         },
         {
             "Sid": "RDSDataServiceAccess",

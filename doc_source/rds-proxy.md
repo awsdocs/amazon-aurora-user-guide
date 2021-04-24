@@ -1754,9 +1754,9 @@ Resources:
  ProxyTargetGroup: 
    Type: AWS::RDS::DBProxyTargetGroup
    Properties:
-     DbProxyName: CanaryProxy
+     DBProxyName: CanaryProxy
      TargetGroupName: default
-     InstanceIdentifiers: 
+     DBInstanceIdentifiers: 
        - Fn::ImportValue: DBInstanceName
    DependsOn: DBProxy
 ```

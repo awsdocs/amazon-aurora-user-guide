@@ -32,7 +32,7 @@ IAM database authentication is available for the following database engines:
   + Aurora PostgreSQL 10\.4 and higher 10\.x versions \(Aurora release 2\.0 and higher 2\.x releases\)
   + Aurora PostgreSQL 9\.6\.9 and higher 9\.6\.x versions \(Aurora release 1\.3 and higher 1\.x releases\)
 
-  For more information, see [Engine versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.20180305.md)\.
+  For more information, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\.
 
 For Aurora MySQL, all supported DB instance classes support IAM database authentication, except for db\.t2\.small and db\.t3\.small\. For information about the supported DB instance classes, see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora)\.
 

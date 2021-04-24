@@ -1,13 +1,15 @@
-# PostgreSQL extensions supported on Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Extensions"></a>
+# Extension versions for Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Extensions"></a>
 
 **Topics**
-+ [Extensions supported on Aurora PostgreSQL 12\.x](#AuroraPostgreSQL.Extensions.12)
-+ [Extensions supported on Aurora PostgreSQL 11\.x](#AuroraPostgreSQL.Extensions.11)
-+ [Extensions supported on Aurora PostgreSQL 10\.x](#AuroraPostgreSQL.Extensions.10)
-+ [Extensions supported on Aurora PostgreSQL 9\.6\.x](#AuroraPostgreSQL.Extensions.96)
++ [Extensions supported for Aurora PostgreSQL 12\.x](#AuroraPostgreSQL.Extensions.12)
++ [Extensions supported for Aurora PostgreSQL 11\.x](#AuroraPostgreSQL.Extensions.11)
++ [Extensions supported for Aurora PostgreSQL 10\.x](#AuroraPostgreSQL.Extensions.10)
++ [Extensions supported for Aurora PostgreSQL 9\.6\.x](#AuroraPostgreSQL.Extensions.96)
 + [Aurora PostgreSQL apg\_plan\_mgmt extension versions](#AuroraPostgreSQL.Extensions.apg_plan_mgmt)
 
-## Extensions supported on Aurora PostgreSQL 12\.x<a name="AuroraPostgreSQL.Extensions.12"></a>
+To upgrade a PostgreSQL extension, see [Upgrading PostgreSQL extensions](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades)\.
+
+## Extensions supported for Aurora PostgreSQL 12\.x<a name="AuroraPostgreSQL.Extensions.12"></a>
 
 The following table shows the PostgreSQL extension versions that are currently supported on Aurora PostgreSQL versions 12\.x\. "NA" indicates that the extension isn't available for that PostgreSQL version\. For more information about PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/12/extend-extensions.html) in the PostgreSQL documentation\. 
 
@@ -17,7 +19,7 @@ The following table shows the PostgreSQL extension versions that are currently s
 | [address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.2 | 
 | [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.2 | 
 |  [amcheck](https://www.postgresql.org/docs/current/amcheck.html)  | 1\.2 | 
-|  [apg\_plan\_mgmt extension versions](#AuroraPostgreSQL.Extensions.apg_plan_mgmt)  | 2\.0 | 
+|  [apg\_plan\_mgmt](#AuroraPostgreSQL.Extensions.apg_plan_mgmt)  | 2\.0 | 
 | aurora\_stat\_utils | 1\.0 | 
 | aws\_commons | 1\.2 | 
 | aws\_lambda | 1\.0 | 
@@ -84,7 +86,7 @@ The following table shows the PostgreSQL extension versions that are currently s
 |  [unaccent](http://www.postgresql.org/docs/12/unaccent.html) | 1\.1 | 
 | [uuid\-ossp](http://www.postgresql.org/docs/12/uuid-ossp.html) | 1\.1 | 
 
-## Extensions supported on Aurora PostgreSQL 11\.x<a name="AuroraPostgreSQL.Extensions.11"></a>
+## Extensions supported for Aurora PostgreSQL 11\.x<a name="AuroraPostgreSQL.Extensions.11"></a>
 
 The following table shows PostgreSQL extension versions currently supported on Aurora PostgreSQL versions 11\.x\. "NA" indicates that the extension isn't available for that PostgreSQL version\. For more information about PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/11/extend-extensions.html)\. 
 
@@ -94,7 +96,7 @@ The following table shows PostgreSQL extension versions currently supported on A
 | [address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.5\.1 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 
 | [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.5\.1 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 
 |  [amcheck](https://www.postgresql.org/docs/current/amcheck.html)  | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-|  [apg\_plan\_mgmt extension versions](#AuroraPostgreSQL.Extensions.apg_plan_mgmt)  | 1\.0\.1 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 
+| [apg\_plan\_mgmt](#AuroraPostgreSQL.Extensions.apg_plan_mgmt) | 1\.0\.1 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 
 | aurora\_stat\_utils | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | aws\_commons | 1\.0 | 1\.1 | 1\.1 | 1\.1 | 1\.2 | 
 | aws\_lambda | NA | NA | NA | NA | 1\.0 | 
@@ -160,7 +162,7 @@ The following table shows PostgreSQL extension versions currently supported on A
 | [unaccent](http://www.postgresql.org/docs/11/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [uuid\-ossp](http://www.postgresql.org/docs/11/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 
-## Extensions supported on Aurora PostgreSQL 10\.x<a name="AuroraPostgreSQL.Extensions.10"></a>
+## Extensions supported for Aurora PostgreSQL 10\.x<a name="AuroraPostgreSQL.Extensions.10"></a>
 
 The following table shows PostgreSQL extension versions currently supported on Aurora PostgreSQL versions 10\.x\. "NA" indicates that the extension isn't available for that PostgreSQL version\. For more information about PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/11/extend-extensions.html)\. 
 
@@ -171,7 +173,7 @@ The following table shows PostgreSQL extension versions currently supported on A
 | [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 
 | [adminpack](https://www.postgresql.org/docs/current/adminpack.html) | 1\.1 | 1\.1 | 1\.1 | This extension is no longer supported because it accesses the file system\. | 
 | [amcheck](https://www.postgresql.org/docs/current/amcheck.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [apg\_plan\_mgmt extension versions](#AuroraPostgreSQL.Extensions.apg_plan_mgmt)  | 0\.1 | 1\.0\.1 | 1\.0\.1 | 1\.0\.1 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 
+| [apg\_plan\_mgmt](#AuroraPostgreSQL.Extensions.apg_plan_mgmt) | 0\.1 | 1\.0\.1 | 1\.0\.1 | 1\.0\.1 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 
 | aurora\_stat\_utils | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | aws\_commons | NA | NA | 1\.0 | 1\.0 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [aws\_ml](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/postgresql-ml.html#postgresql-ml-aws_ml-install)  | NA | NA | NA | NA | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
@@ -239,7 +241,7 @@ The following table shows PostgreSQL extension versions currently supported on A
 | [unaccent](http://www.postgresql.org/docs/10/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [uuid\-ossp](http://www.postgresql.org/docs/10/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 
-## Extensions supported on Aurora PostgreSQL 9\.6\.x<a name="AuroraPostgreSQL.Extensions.96"></a>
+## Extensions supported for Aurora PostgreSQL 9\.6\.x<a name="AuroraPostgreSQL.Extensions.96"></a>
 
 The following table shows PostgreSQL extension versions currently supported on Aurora PostgreSQL versions 9\.6\.x\. "NA" indicates that the extension isn't available for that PostgreSQL version\. For more information about PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/11/extend-extensions.html)\. 
 
@@ -248,7 +250,7 @@ The following table shows PostgreSQL extension versions currently supported on A
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 | [address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 
 | [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 
-| [apg\_plan\_mgmt extension versions](#AuroraPostgreSQL.Extensions.apg_plan_mgmt) | NA | NA | NA | 0\.1 | 1\.0\.1 | 1\.0\.1 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 
+| [apg\_plan\_mgmt](#AuroraPostgreSQL.Extensions.apg_plan_mgmt) | NA | NA | NA | 0\.1 | 1\.0\.1 | 1\.0\.1 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 
 | apgcc | 1\.0 | 1\.0 | This RDS for PostgreSQL internal extension is no longer supported\. | 
 | apgunit | 1\.0 | 1\.0 | This RDS for PostgreSQL internal extension is no longer supported\. | 
 | aurora\_stat\_utils | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
@@ -312,10 +314,10 @@ The following table shows PostgreSQL extension versions currently supported on A
 ## Aurora PostgreSQL apg\_plan\_mgmt extension versions<a name="AuroraPostgreSQL.Extensions.apg_plan_mgmt"></a>
 
 **Topics**
-+ [Aurora PostgreSQL apg\_plan\_mgmt extension version 2\.0](#AuroraPostgreSQL.Extensions.apg_plan_mgmt.20)
-+ [Aurora PostgreSQL apg\_plan\_mgmt extension version 1\.0\.1](#AuroraPostgreSQL.Extensions.apg_plan_mgmt.101)
++ [Version 2\.0 of the Aurora PostgreSQL apg\_plan\_mgmt extension](#AuroraPostgreSQL.Extensions.apg_plan_mgmt.20)
++ [Version 1\.0\.1 of the Aurora PostgreSQL apg\_plan\_mgmt extension](#AuroraPostgreSQL.Extensions.apg_plan_mgmt.101)
 
-### Aurora PostgreSQL apg\_plan\_mgmt extension version 2\.0<a name="AuroraPostgreSQL.Extensions.apg_plan_mgmt.20"></a>
+### Version 2\.0 of the Aurora PostgreSQL apg\_plan\_mgmt extension<a name="AuroraPostgreSQL.Extensions.apg_plan_mgmt.20"></a>
 
 You use the `apg_plan_mgmt` extension with query plan management\. For more about how to install, upgrade, and use the `apg_plan_mgmt` extension, see [Managing query execution plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)\.
 
@@ -351,7 +353,7 @@ The `apg_plan_mgmt` extension changes for version 2\.0 include the following:
    + `apg_plan_mgmt.pgss_min_stddev_time_ms`
    + `apg_plan_mgmt.pgss_min_total_time_ms`
 
-### Aurora PostgreSQL apg\_plan\_mgmt extension version 1\.0\.1<a name="AuroraPostgreSQL.Extensions.apg_plan_mgmt.101"></a>
+### Version 1\.0\.1 of the Aurora PostgreSQL apg\_plan\_mgmt extension<a name="AuroraPostgreSQL.Extensions.apg_plan_mgmt.101"></a>
 
 The `apg_plan_mgmt` extension changes for version 1\.0\.1 include the following:
 

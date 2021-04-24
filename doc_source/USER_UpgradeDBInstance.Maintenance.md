@@ -33,7 +33,7 @@ To take an action, choose the DB cluster to show its details, then choose **Main
 
 The maintenance window determines when pending operations start, but doesn't limit the total run time of these operations\. Maintenance operations aren't guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS maintenance window](#Concepts.DBMaintenance)\. 
 
-For information about updates to Amazon Aurora engines and instructions for upgrading and patching them, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md) and [Database engine updates for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.md)\.
+For information about updates to Amazon Aurora engines and instructions for upgrading and patching them, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md) and [Amazon Aurora PostgreSQL updates](AuroraPostgreSQL.Updates.md)\.
 
 ## Applying updates for a DB cluster<a name="USER_UpgradeDBInstance.OSUpgrades"></a>
 
@@ -206,7 +206,7 @@ To adjust the preferred DB cluster maintenance window, use the Amazon RDS [https
 
  For instructions about turning this setting on or off, see [Settings for Amazon Aurora](Aurora.Modifying.md#Aurora.Modifying.Settings)\. In particular, make sure to apply the same setting to all DB instances in the cluster\. If any DB instance in your cluster has this setting turned off, the cluster isn't automatically upgraded\. 
 
-For more information about engine updates for Aurora PostgreSQL, see [Database engine updates for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.md)\.
+For more information about engine updates for Aurora PostgreSQL, see [Amazon Aurora PostgreSQL updates](AuroraPostgreSQL.Updates.md)\.
 
  For more information about the **Auto minor version upgrade** setting for Aurora MySQL, see [Enabling automatic upgrades between minor Aurora MySQL versions](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.AMVU)\. For general information about engine updates for Aurora MySQL, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\. 
 

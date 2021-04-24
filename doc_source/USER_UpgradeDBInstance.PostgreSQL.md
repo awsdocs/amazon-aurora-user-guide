@@ -12,7 +12,6 @@ For how to determine valid upgrade targets, see [Determining which engine versio
 
 **Topics**
 + [Overview of upgrading Aurora PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Overview)
-+ [PostgreSQL version numbers](#USER_UpgradeDBInstance.PostgreSQL.VersionID)
 + [Determining which engine version to upgrade to](#USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion)
 + [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)
 + [Manually upgrading the Aurora PostgreSQL engine](#USER_UpgradeDBInstance.Upgrading.Manual)
@@ -30,18 +29,6 @@ Aurora PostgreSQL takes a DB cluster snapshot before the upgrade begins\. If you
 During the major version upgrade process, a cloned volume is allocated\. If the upgrade fails for some reason, such as due to a schema incompatibility, Aurora PostgreSQL uses this clone to roll back the upgrade\. Note, when more than 15 clones of a source volume are allocated, subsequent clones become full copies and will take longer\. This can cause the upgrade process to take longer as well\. If Aurora PostgreSQL rolls back the upgrade, be aware of the following:
 + You may see billing entries and metrics for both the original volume and the cloned volume allocated during the upgrade\. Aurora PostgreSQL will clean up the extra volume after the cluster backup retention window is beyond the time of the upgrade\.
 + The next cross region snapshot copy from this cluster will be a full copy instead of an incremental copy\.
-
-## PostgreSQL version numbers<a name="USER_UpgradeDBInstance.PostgreSQL.VersionID"></a>
-
-To determine the current Aurora PostgreSQL version and PostgreSQL database engine version of a DB cluster, see [Identifying your version of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.md#AuroraPostgreSQL.Updates.Versions)\.
-
-The version numbering sequence for the PostgreSQL database engine is as follows: 
-+ For PostgreSQL versions 10 and later, the engine version number is in the form *major\.minor*\. The major version number is the integer part of the version number\. The minor version number is the fractional part of the version number\. 
-
-  A major version upgrade increases the integer part of the version number, such as upgrading from 10\.*minor* to 11\.*minor*\.
-+ For PostgreSQL versions earlier than 10, the engine version number is in the form *major\.major\.minor*\. The major engine version number is both the integer and the first fractional part of the version number\. For example, 9\.6 is a major version\. The minor version number is the third part of the version number\. For example, for version 9\.6\.12, the 12 is the minor version number\.
-
-  A major version upgrade increases the major part of the version number\. For example, an upgrade from *9\.6*\.12 to *10*\.7 is a major version upgrade, where *9\.6* and *10* are the major version numbers\.
 
 ## Determining which engine version to upgrade to<a name="USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion"></a>
 

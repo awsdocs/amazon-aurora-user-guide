@@ -11,7 +11,7 @@ Following, you can find information on general updates to Amazon Aurora\. Some o
 | Database engine | Updates | 
 | --- | --- | 
 |  Amazon Aurora MySQL  |  See [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)  | 
-|  Amazon Aurora PostgreSQL  |  See [Database engine updates for Amazon Aurora PostgreSQL ](AuroraPostgreSQL.Updates.md)  | 
+|  Amazon Aurora PostgreSQL  |  See [Amazon Aurora PostgreSQL updates](AuroraPostgreSQL.Updates.md)  | 
 
 ## Identifying your Amazon Aurora version<a name="Aurora.Updates.Versions"></a>
 

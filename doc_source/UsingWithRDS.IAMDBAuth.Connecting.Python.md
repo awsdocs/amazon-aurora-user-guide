@@ -24,6 +24,7 @@ This code generates an IAM authentication token for an Aurora MySQL DB cluster\.
 ```
 import sys
 import boto3
+import os
 
 ENDPOINT="mysqlcluster.cluster-123456789012.us-east-1.rds.amazonaws.com"
 PORT="3306"
@@ -43,6 +44,7 @@ This code generates an IAM authentication token for an Aurora PostgreSQL DB clus
 ```
 import sys
 import boto3
+import os
 
 ENDPOINT="postgresmycluster.cluster-123456789012.us-east-1.rds.amazonaws.com"
 PORT="5432"
@@ -106,6 +108,7 @@ This code connects to an Aurora PostgreSQL DB cluster\.
 import psycopg2
 import sys
 import boto3
+import os
 
 ENDPOINT="postgresmycluster.cluster-123456789012.us-east-1.rds.amazonaws.com"
 PORT="5432"

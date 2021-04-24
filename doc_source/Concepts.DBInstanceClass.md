@@ -134,7 +134,7 @@ To use the AWS CLI examples in this section, make sure that you enter valid valu
 | --- | --- | --- | 
 |  MySQL 5\.6\-compatible Aurora  |  `aurora`  |  [Database engine updates for Amazon Aurora MySQL 1\.1](AuroraMySQL.Updates.11Updates.md)  | 
 |  MySQL 5\.7\-compatible Aurora  |  `aurora-mysql`  |  [Database engine updates for Amazon Aurora MySQL 2\.0](AuroraMySQL.Updates.20Updates.md)  | 
-|  Aurora PostgreSQL  |  `aurora-postgresql`  |  [Engine versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.20180305.md)  | 
+|  Aurora PostgreSQL  |  `aurora-postgresql`  |  [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)  | 
 
 For information about AWS Region names, see [AWS RegionsAvailability Zones](Concepts.RegionsAndAvailabilityZones.md#Concepts.RegionsAndAvailabilityZones.Regions)\.
 

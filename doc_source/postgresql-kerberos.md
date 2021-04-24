@@ -24,7 +24,7 @@ Kerberos authentication is supported on the following engine versions:
 + PostgreSQL 11\.6 and higher 11\.x versions
 + PostgreSQL 10\.11 and higher 10\.x versions
 
-For more information, see [Engine versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.20180305.md)\.
+For more information, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\.
 
 Amazon Aurora supports Kerberos authentication for PostgreSQL DB clusters in the following AWS Regions: 
 

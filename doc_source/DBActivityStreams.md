@@ -12,7 +12,7 @@ An activity stream can also be consumed by applications for compliance managemen
 Check the website for the particular application that you want to use with database activity streams\. Confirm support for the specific Aurora DB engine and engine version that you intend to use\. 
 
 Database activity streams have the following limits and requirements:
-+ For Aurora PostgreSQL, database activity streams are supported for version 2\.3 or higher and versions 3\.0 or higher\. For PostgreSQL version compatibility, see [Engine versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.20180305.md)\. 
++ For Aurora PostgreSQL, database activity streams are supported for version 2\.3 or higher and versions 3\.0 or higher\. For PostgreSQL version compatibility, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\. 
 + For Aurora MySQL, database activity streams are supported for version 2\.08 or higher, which is compatible with MySQL version 5\.7\.
 + You can start a database activity stream on the primary or secondary cluster of an Aurora global database\. For DB engine version requirements, see [Limitations of Amazon Aurora global databases](aurora-global-database.md#aurora-global-database.limitations)\.
 + Database activity streams support the DB instance classes listed for Aurora in [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora), with some exceptions:
