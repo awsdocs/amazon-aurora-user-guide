@@ -145,7 +145,7 @@ We recommend the following process when upgrading an Aurora PostgreSQL DB cluste
 **Note**  
 During the upgrade process, you can't do a point\-in\-time restore of your cluster\. Aurora PostgreSQL takes a DB cluster snapshot during the upgrade process if your backup retention period is greater than 0\. You can perform a point\-in\-time restore to times before the upgrade began and after the automatic snapshot of your instance has completed\. 
 
-   For information about an upgrade in progress, you can use Amazon RDS to view two logs that the pg\_upgrade utility produces\. These are `pg_upgrade_internal.log` and `pg_upgrade_server.log`\. Amazon Aurora appends a timestamp to the file name for these logs\. You can view these logs as you can any other log\. For more information, see [Accessing Amazon Aurora database log files](USER_LogAccess.md)\.
+   For information about an upgrade in progress, you can use Amazon RDS to view two logs that the pg\_upgrade utility produces\. These are `pg_upgrade_internal.log` and `pg_upgrade_server.log`\. Amazon Aurora appends a timestamp to the file name for these logs\. You can view these logs as you can any other log\. For more information, see [Working with Amazon Aurora database log files](USER_LogAccess.md)\.
 
 1. Upgrade PostgreSQL extensions\. The PostgreSQL upgrade process doesn't upgrade any PostgreSQL extensions\. For more information, see [Upgrading PostgreSQL extensions](#USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades)\.
 

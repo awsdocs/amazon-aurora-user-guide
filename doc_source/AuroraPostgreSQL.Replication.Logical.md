@@ -16,12 +16,14 @@ Following, you can find information about how to work with PostgreSQL logical re
 
 ## Configuring logical replication<a name="AuroraPostgreSQL.Replication.Logical.Configure"></a>
 
-To use logical replication, you first set the `rds.logical_replication` parameter for a cluster parameter group\. You then set up the publisher and subscriber\. 
+To use logical replication, you first set the `rds.logical_replication` parameter for a cluster parameter group\. You then set up the publisher and subscriber\.
 
 Logical replication uses a publish and subscribe model\. *Publishers* and *subscribers* are the nodes\. A *publication* is a set of changes generated from one or more database tables\. You specify a publication on a publisher\. A *subscription* defines the connection to another database and one or more publications to which it subscribes\. You specify a subscription on a subscriber\. The publication and subscription make the connection between the publisher and subscriber\.
 
 **Note**  
+Following are requirements for logical replication:  
 To perform logical replication for a PostgreSQL database, your AWS user account needs the `rds_superuser` role\.
+The PostgreSQL DB instance must have automated backups enabled\. For instructions on how to enable automated backups, see [Enabling automated backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.Enabling) in the *Amazon RDS User Guide*\.
 
 **To enable PostgreSQL logical replication with Aurora**
 

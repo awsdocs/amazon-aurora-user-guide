@@ -18,6 +18,10 @@ Aurora MySQL 1\.23\.1 is generally available\. Aurora MySQL 1\.\* versions are c
 + [CVE\-2020\-14559](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14559)
 + [CVE\-2020\-14539](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14539)
 
+ **Incompatible changes:** 
+
+ This version introduces a permission change that affects the behavior of the `mysqldump` command\. Users must have the `PROCESS` privilege to access the `INFORMATION_SCHEMA.FILES` table\. To run the `mysqldump` command without any changes, grant the `PROCESS` privilege to the database user that the `mysqldump` command connects to\. You can also run the `mysqldump` command with the `--no-tablespaces` option\. With that option, the `mysqldump `output doesn't include any `CREATE LOGFILE GROUP` or `CREATE TABLESPACE` statements\. In that case, the `mysqldump` command doesn't access the `INFORMATION_SCHEMA.FILES` table, and you don't need to grant the `PROCESS` permission\. 
+
  **Availability improvements:** 
 +  Fixed an issue that causes an Aurora reader instance in a global database secondary cluster running 1\.23\.0 to restart repeatedly\. 
 +  Fixed an issue where a global database secondary Region's replicas might restart when upgraded to release 1\.23\.0 while the primary Region writer was on an older release version\. 

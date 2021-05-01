@@ -33,6 +33,10 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Upgra
 + [CVE\-2020\-2760](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-2760)
 + [CVE\-2020\-2579](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-2579)
 
+ **Incompatible changes:** 
+
+ This version introduces a permission change that affects the behavior of the `mysqldump` command\. Users must have the `PROCESS` privilege to access the `INFORMATION_SCHEMA.FILES` table\. To run the `mysqldump` command without any changes, grant the `PROCESS` privilege to the database user that the `mysqldump` command connects to\. You can also run the `mysqldump` command with the `--no-tablespaces` option\. With that option, the `mysqldump `output doesn't include any `CREATE LOGFILE GROUP` or `CREATE TABLESPACE` statements\. In that case, the `mysqldump` command doesn't access the `INFORMATION_SCHEMA.FILES` table, and you don't need to grant the `PROCESS` permission\. 
+
 ## Integration of MySQL community edition bug fixes<a name="AuroraMySQL.Updates.2083.Patches"></a>
 +  Bug \#23762382 \- INSERT VALUES QUERY WITH JOIN IN A SELECT CAUSES INCORRECT BEHAVIOR\. 
 +  Bug \#25209512 \- CURRENT\_TIMESTAMP PRODUCES ZEROS IN TRIGGER\. 

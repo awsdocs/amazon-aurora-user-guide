@@ -11,7 +11,7 @@ Some of the best practices for Amazon Aurora are specific to a particular databa
 |  Amazon Aurora PostgreSQL  |  See [Best practices with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md)  | 
 
 **Note**  
-For common recommendations for Aurora, see [Using Amazon Aurora recommendations](USER_Recommendations.md)\.
+For common recommendations for Aurora, see [Viewing Amazon Aurora recommendations](accessing-monitoring.md#USER_Recommendations)\.
 
 **Topics**
 + [Basic operational guidelines for Amazon Aurora](#Aurora.BestPractices.OperationalGuidelines)

@@ -34,6 +34,10 @@ If you have any questions or concerns, AWS Support is available on the community
 + [CVE\-2020\-2579](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-2579)
 + [CVE\-2019\-2740](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2740)
 
+ **Incompatible changes:** 
+
+ This version introduces a permission change that affects the behavior of the `mysqldump` command\. Users must have the `PROCESS` privilege to access the `INFORMATION_SCHEMA.FILES` table\. To run the `mysqldump` command without any changes, grant the `PROCESS` privilege to the database user that the `mysqldump` command connects to\. You can also run the `mysqldump` command with the `--no-tablespaces` option\. With that option, the `mysqldump `output doesn't include any `CREATE LOGFILE GROUP` or `CREATE TABLESPACE` statements\. In that case, the `mysqldump` command doesn't access the `INFORMATION_SCHEMA.FILES` table, and you don't need to grant the `PROCESS` permission\. 
+
  **Availability improvements:** 
 +  Fixed a race condition in the lock manager between the killing of a connection/query and the termination of the session resulting in a database restart\. 
 +  Fixed an issue that results in a database restart after a multi\-query statement that accesses multiple tables or databases is executed with the query cache enabled\. 

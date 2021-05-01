@@ -9,7 +9,7 @@ For Aurora Serverless v1 DB clusters, you connect to the database endpoint rathe
 
 Regardless of the Aurora DB engine and specific tools you use to work with the DB cluster or instance, the endpoint must be accessible\. An Amazon Aurora DB cluster can be created only in a virtual private cloud \(VPC\) based on the Amazon VPC service\. That means that you access the endpoint from either inside the VPC or outside the VPC using one of the following approaches\.
 + **Access the Amazon Aurora DB cluster inside the VPC** – Enable access to the Amazon Aurora DB cluster through the VPC\. You do so by editing the Inbound rules on the Security group for the VPC to allow access to your specific Aurora DB cluster\. To learn more, including how to configure your VPC for different Aurora DB cluster scenarios, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](https://docs.aws.amazon.com/en_us/AmazonRDS/latest/AuroraUserGuide/USER_VPC.html)\. 
-+ **Access the Amazon Aurora DB cluster outside the VPC** – To access an Amazon Aurora DB cluster from outside the VPC, use the public endpoint address of the Amazon Aurora DB cluster\. You can also connect to an Amazon Aurora DB cluster that's inside a VPC from an Amazon EC2 instance that't not in the VPC by using ClassicLink\. For more information, see [A DB instance in a VPC accessed by an EC2 instance not in a VPC](USER_VPC.Scenarios.md#USER_VPC.ClassicLink)\. 
++ **Access the Amazon Aurora DB cluster outside the VPC** – To access an Amazon Aurora DB cluster from outside the VPC, use the public endpoint address of the Amazon Aurora DB cluster\. You can also connect to an Amazon Aurora DB cluster that's inside a VPC from an Amazon EC2 instance that's not in the VPC by using ClassicLink\. For more information, see [A DB instance in a VPC accessed by an EC2 instance not in a VPC](USER_VPC.Scenarios.md#USER_VPC.ClassicLink)\. 
 
 For more information, see [Troubleshooting Aurora connection failures](#Aurora.Connecting.Troubleshooting)\. 
 
@@ -117,6 +117,19 @@ Some connection utilities you can use are the following:
 + **Command line** – You can connect to an Amazon Aurora PostgreSQL DB instance by using tools like psql, the PostgreSQL interactive terminal\. For more information on using the PostgreSQL interactive terminal, see [psql](https://www.postgresql.org/docs/9.6/static/app-psql.html) in the PostgreSQL documentation\.
 + **GUI** – You can use the pgAdmin utility to connect to a PostgreSQL DB instance by using a UI interface\. For more information, see the [Download](https://www.pgadmin.org/download/) page from the pgAdmin website\.
 + **Applications** – You can use the PostgreSQL JDBC driver to connect your applications to your PostgreSQL DB instance\. For more information, see the [Download](https://jdbc.postgresql.org/download.html) page from the PostgreSQL JDBC driver website\.
+
+### Connecting with the Amazon Web Services JDBC Driver for PostgreSQL \(preview\)<a name="Aurora.Connecting.AuroraPostgreSQL.JDBCDriverPostgreSQL"></a>
+
+
+|  | 
+| --- |
+| This is preview documentation for Amazon Web Services JDBC Driver for PostgreSQL\. It is subject to change\. | 
+
+The AWS JDBC Driver for PostgreSQL \(preview\) is a client driver designed for the high availability of Aurora PostgreSQL\. The AWS JDBC Driver for PostgreSQL is drop\-in compatible with the PostgreSQL JDBC Driver\.
+
+The AWS JDBC Driver for PostgreSQL takes full advantage of the failover capabilities of Aurora PostgreSQL\. The AWS JDBC Driver for PostgreSQL fully maintains a cache of the DB cluster topology and each DB instance's role, either primary DB instance or Aurora Replica\. It uses this topology to bypass the delays caused by DNS resolution so that a connection to the new primary DB instance is established as fast as possible\.
+
+For more information about the AWS JDBC Driver for PostgreSQL and complete instructions for using it, see [the AWS JDBC Driver for PostgreSQL GitHub repository](https://awslabs.github.io/aws-postgresql-jdbc/)\.
 
 ## Troubleshooting Aurora connection failures<a name="Aurora.Connecting.Troubleshooting"></a>
 

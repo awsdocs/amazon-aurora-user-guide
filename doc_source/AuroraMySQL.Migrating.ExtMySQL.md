@@ -242,7 +242,7 @@ You can restore your backup files from your Amazon S3 bucket to create a new Ama
 
 On the Amazon RDS console, the new DB instance appears in the list of DB instances\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the primary instance for your DB cluster\. Depending on the DB instance class and store allocated, it can take several minutes for the new instance to be available\.
 
-To view the newly created cluster, choose the **Databases** view in the Amazon RDS console and choose the DB cluster\. For more information, see [Viewing an Amazon Aurora DB cluster](Aurora.Viewing.md)\.
+To view the newly created cluster, choose the **Databases** view in the Amazon RDS console and choose the DB cluster\. For more information, see [Viewing an Amazon Aurora DB cluster](accessing-monitoring.md#Aurora.Viewing)\.
 
 ![\[Amazon Aurora DB Instances List\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch04.png)
 

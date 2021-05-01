@@ -9,16 +9,16 @@ Using Amazon CloudWatch alarms, you watch a single metric over a time period tha
 CloudTrail provides a record of actions taken by a user, role, or an AWS service in Amazon Aurora\. CloudTrail captures all API calls for Amazon Aurora as events, including calls from the console and from code calls to Amazon RDS API operations\. Using the information collected by CloudTrail, you can determine the request that was made to Amazon Aurora, the IP address from which the request was made, who made the request, when it was made, and additional details\. For more information, see [Working with AWS CloudTrail and Amazon RDS](logging-using-cloudtrail.md)\.
 
 **Enhanced Monitoring**  
-Amazon Aurora provides metrics in real time for the operating system \(OS\) that your DB cluster runs on\. You can view the metrics for your DB cluster using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information, see [Using Enhanced Monitoring](USER_Monitoring.OS.md)\.
+Amazon Aurora provides metrics in real time for the operating system \(OS\) that your DB cluster runs on\. You can view the metrics for your DB cluster using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information, see [Monitoring OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
 **Amazon RDS Performance Insights**  
 Performance Insights expands on existing Amazon Aurora monitoring features to illustrate your database's performance and help you analyze any issues that affect it\. With the Performance Insights dashboard, you can visualize the database load and filter the load by waits, SQL statements, hosts, or users\. For more information, see [Using Performance Insights on Amazon Aurora](USER_PerfInsights.md)\.
 
 **Database Logs**  
-You can view, download, and watch database logs using the AWS Management Console, AWS CLI, or RDS API\. For more information, see [Accessing Amazon Aurora database log files](USER_LogAccess.md)\.
+You can view, download, and watch database logs using the AWS Management Console, AWS CLI, or RDS API\. For more information, see [Working with Amazon Aurora database log files](USER_LogAccess.md)\.
 
 **Amazon Aurora Recommendations**  
-Amazon Aurora provides automated recommendations for database resources\. These recommendations provide best practice guidance by analyzing DB cluster configuration, usage, and performance data\. For more information, see [Using Amazon Aurora recommendations](USER_Recommendations.md)\.
+Amazon Aurora provides automated recommendations for database resources\. These recommendations provide best practice guidance by analyzing DB cluster configuration, usage, and performance data\. For more information, see [Viewing Amazon Aurora recommendations](accessing-monitoring.md#USER_Recommendations)\.
 
 **Amazon Aurora Event Notification**  
 Amazon Aurora uses the Amazon Simple Notification Service \(Amazon SNS\) to provide notification when an Amazon Aurora event occurs\. These notifications can be in any notification form supported by Amazon SNS for an AWS Region, such as an email, a text message, or a call to an HTTP endpoint\. For more information, see [Using Amazon RDS event notification](USER_Events.md)\.
