@@ -44,11 +44,11 @@
  Suppose that the empty cluster `deleteme-zero-instances` was only used for development and testing and doesn't contain any important data\. In that case, you don't need to preserve a snapshot of the cluster volume when you delete the cluster\. The following example demonstrates that a cluster doesn't contain any DB instances, and then deletes the empty cluster without creating a final snapshot\. 
 
 ```
-$ aws rds describe-db-clusters --db-cluster-id deleteme-zero-instances --output text \
+$ aws rds describe-db-clusters --db-cluster-identifier deleteme-zero-instances --output text \
   --query '*[].["Cluster:",DBClusterIdentifier,DBClusterMembers[*].["Instance:",DBInstanceIdentifier,IsClusterWriter]]
 Cluster:        deleteme-zero-instances
 
-$ aws rds delete-db-cluster --db-cluster-id deleteme-zero-instances --skip-final-snapshot
+$ aws rds delete-db-cluster --db-cluster-identifier deleteme-zero-instances --skip-final-snapshot
 {
   "DBClusterIdentifier": "deleteme-zero-instances",
   "Status": "available",
@@ -63,11 +63,11 @@ $ aws rds delete-db-cluster --db-cluster-id deleteme-zero-instances --skip-final
  The following example shows how the `delete-db-cluster` command doesn't work when the cluster still has any associated DB instances\. This cluster has a single writer DB instance\. When we examine the DB instances in the cluster, we check the `IsClusterWriter` attribute of each one\. The cluster could have zero or one writer DB instance\. A value of `true` signifies a writer DB instance\. A value of `false` signifies a reader DB instance\. The cluster could have zero, one, or many reader DB instances\. In this case, we delete the writer DB instance using the `delete-db-instance` command\. As soon as the DB instance goes into `deleting` state, we can delete the cluster also\. For this example also, suppose that the cluster doesn't contain any data worth preserving and so we don't create a snapshot of the cluster volume\. 
 
 ```
-$ aws rds delete-db-cluster --db-cluster-id deleteme-writer-only --skip-final-snapshot
+$ aws rds delete-db-cluster --db-cluster-identifier deleteme-writer-only --skip-final-snapshot
 An error occurred (InvalidDBClusterStateFault) when calling the DeleteDBCluster operation:
   Cluster cannot be deleted, it still contains DB instances in non-deleting state.
 
-$ aws rds describe-db-clusters --db-cluster-id deleteme-writer-only \
+$ aws rds describe-db-clusters --db-cluster-identifier deleteme-writer-only \
   --query '*[].[DBClusterIdentifier,Status,DBClusterMembers[*].[DBInstanceIdentifier,IsClusterWriter]]'
 [
     [
@@ -82,14 +82,14 @@ $ aws rds describe-db-clusters --db-cluster-id deleteme-writer-only \
     ]
 ]
 
-$ aws rds delete-db-instance --db-instance-id instance-2130
+$ aws rds delete-db-instance --db-instance-identifier instance-2130
 {
   "DBInstanceIdentifier": "instance-2130",
   "DBInstanceStatus": "deleting",
   "Engine": "aurora-mysql"
 }
 
-$ aws rds delete-db-cluster --db-cluster-id deleteme-writer-only --skip-final-snapshot
+$ aws rds delete-db-cluster --db-cluster-identifier deleteme-writer-only --skip-final-snapshot
 {
   "DBClusterIdentifier": "deleteme-writer-only",
   "Status": "available",
@@ -109,32 +109,32 @@ $ aws rds delete-db-cluster --db-cluster-id deleteme-writer-only --skip-final-sn
  This example shows how to delete a cluster containing both a writer DB instance and a single reader DB instance\. The `describe-db-clusters` output shows that `instance-7384` is the writer instance and `instance-1039` is the reader instance\. The example deletes the reader instance first, because deleting the writer instance while a reader instance still existed would cause a failover operation\. It doesn't make sense to promote the reader instance to a writer if you plan to delete that instance also\. Again, suppose that these `db.t2.small` instances are only used for development and testing, and so the delete operation skips the final snapshot\. 
 
 ```
-$ aws rds delete-db-cluster --db-cluster-id deleteme-writer-and-reader --skip-final-snapshot
+$ aws rds delete-db-cluster --db-cluster-identifier deleteme-writer-and-reader --skip-final-snapshot
 
 An error occurred (InvalidDBClusterStateFault) when calling the DeleteDBCluster operation:
   Cluster cannot be deleted, it still contains DB instances in non-deleting state.
 
-$ aws rds describe-db-clusters --db-cluster-id deleteme-writer-and-reader --output text \
+$ aws rds describe-db-clusters --db-cluster-identifier deleteme-writer-and-reader --output text \
   --query '*[].["Cluster:",DBClusterIdentifier,DBClusterMembers[*].["Instance:",DBInstanceIdentifier,IsClusterWriter]]
 Cluster:        deleteme-writer-and-reader
 Instance:       instance-1039  False
 Instance:       instance-7384   True
 
-$ aws rds delete-db-instance --db-instance-id instance-1039
+$ aws rds delete-db-instance --db-instance-identifier instance-1039
 {
   "DBInstanceIdentifier": "instance-1039",
   "DBInstanceStatus": "deleting",
   "Engine": "aurora-mysql"
 }
 
-$ aws rds delete-db-instance --db-instance-id instance-7384
+$ aws rds delete-db-instance --db-instance-identifier instance-7384
 {
   "DBInstanceIdentifier": "instance-7384",
   "DBInstanceStatus": "deleting",
   "Engine": "aurora-mysql"
 }
 
-$ aws rds delete-db-cluster --db-cluster-id deleteme-writer-and-reader --skip-final-snapshot
+$ aws rds delete-db-cluster --db-cluster-identifier deleteme-writer-and-reader --skip-final-snapshot
 {
   "DBClusterIdentifier": "deleteme-writer-and-reader",
   "Status": "available",
@@ -145,7 +145,7 @@ $ aws rds delete-db-cluster --db-cluster-id deleteme-writer-and-reader --skip-fi
  The following example shows how to delete a DB cluster containing a writer DB instance and multiple reader DB instances\. It uses concise output from the `describe-db-clusters` command to get a report of the writer and reader instances\. Again, we delete all reader DB instances before deleting the writer DB instance\. It doesn't matter what order we delete the reader DB instances in\. Suppose that this cluster with several DB instances does contain data worth preserving\. Thus, the `delete-db-cluster` command in this example includes the `--no-skip-final-snapshot` and `--final-db-snapshot-identifier` parameters to specify the details of the snapshot to create\. 
 
 ```
-$ aws rds describe-db-clusters --db-cluster-id deleteme-multiple-readers --output text \
+$ aws rds describe-db-clusters --db-cluster-identifier deleteme-multiple-readers --output text \
   --query '*[].["Cluster:",DBClusterIdentifier,DBClusterMembers[*].["Instance:",DBInstanceIdentifier,IsClusterWriter]]
 Cluster:        deleteme-multiple-readers
 Instance:       instance-1010   False
@@ -153,35 +153,35 @@ Instance:       instance-5410   False
 Instance:       instance-9948   False
 Instance:       instance-8451   True
 
-$ aws rds delete-db-instance --db-instance-id instance-1010
+$ aws rds delete-db-instance --db-instance-identifier instance-1010
 {
   "DBInstanceIdentifier": "instance-1010",
   "DBInstanceStatus": "deleting",
   "Engine": "aurora-mysql"
 }
 
-$ aws rds delete-db-instance --db-instance-id instance-5410
+$ aws rds delete-db-instance --db-instance-identifier instance-5410
 {
   "DBInstanceIdentifier": "instance-5410",
   "DBInstanceStatus": "deleting",
   "Engine": "aurora-mysql"
 }
 
-$ aws rds delete-db-instance --db-instance-id instance-9948
+$ aws rds delete-db-instance --db-instance-identifier instance-9948
 {
   "DBInstanceIdentifier": "instance-9948",
   "DBInstanceStatus": "deleting",
   "Engine": "aurora-mysql"
 }
 
-$ aws rds delete-db-instance --db-instance-id instance-8451
+$ aws rds delete-db-instance --db-instance-identifier instance-8451
 {
   "DBInstanceIdentifier": "instance-8451",
   "DBInstanceStatus": "deleting",
   "Engine": "aurora-mysql"
 }
 
-$ aws rds delete-db-cluster --db-cluster-id deleteme-multiple-readers --no-skip-final-snapshot \
+$ aws rds delete-db-cluster --db-cluster-identifier deleteme-multiple-readers --no-skip-final-snapshot \
   --final-db-snapshot-identifier deleteme-multiple-readers-snapshot-11-7087
 {
   "DBClusterIdentifier": "deleteme-multiple-readers",
@@ -288,4 +288,4 @@ aws rds delete-db-instance ^
  To delete a DB instance by using the Amazon RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) operation and specify the `DBInstanceIdentifier` parameter\. 
 
 **Note**  
- When the status for a DB instance is `deleting`, its CA certificate value doesn't appear in the RDS console or in output for AWS CLI commands or RDS API operations\. For more information about CA certificates, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\. 
+ When the status for a DB instance is `deleting`, its CA certificate value doesn't appear in the RDS console or in output for AWS CLI commands or RDS API operations\. For more information about CA certificates, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\.
