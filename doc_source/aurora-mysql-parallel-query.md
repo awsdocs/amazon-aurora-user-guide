@@ -410,7 +410,7 @@ mysql> select @@aurora_pq;
  In the upgraded cluster, the `EngineMode` attribute has the value `provisioned` instead of `parallelquery`\. To check whether parallel query is available for a specified engine version, now you check the value of the `SupportsParallelQuery` field in the output of the `describe-db-engine-versions` AWS CLI command\. In earlier Aurora MySQL versions, you checked for the presence of `parallelquery` in the `SupportedEngineModes` list\. 
 
  After you upgrade to Aurora MySQL 1\.23 or 2\.09 and higher, you can take advantage of the following features\. These features aren't available to parallel query clusters running older Aurora MySQL versions\. 
-+  Performance Insights\. For more information, see [Using Performance Insights on Amazon Aurora](USER_PerfInsights.md)\. 
++  Performance Insights\. For more information, see [Monitoring with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\. 
 +  Backtracking\. For more information, see [Backtracking an Aurora DB cluster](AuroraMySQL.Managing.Backtrack.md)\. 
 +  Stopping and starting the cluster\. For more information, see [Stopping and starting an Amazon Aurora DB cluster](aurora-cluster-stop-start.md)\. 
 

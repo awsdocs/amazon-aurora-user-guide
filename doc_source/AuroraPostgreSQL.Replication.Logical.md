@@ -23,7 +23,7 @@ Logical replication uses a publish and subscribe model\. *Publishers* and *subsc
 **Note**  
 Following are requirements for logical replication:  
 To perform logical replication for a PostgreSQL database, your AWS user account needs the `rds_superuser` role\.
-The PostgreSQL DB instance must have automated backups enabled\. For instructions on how to enable automated backups, see [Enabling automated backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.Enabling) in the *Amazon RDS User Guide*\.
+The RDS for PostgreSQL DB instance that you use as the source must have automated backups enabled\. For instructions on how to enable automated backups for an RDS for PostgreSQL DB instance, see [Enabling automated backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.Enabling) in the *Amazon RDS User Guide*\.
 
 **To enable PostgreSQL logical replication with Aurora**
 

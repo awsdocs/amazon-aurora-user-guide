@@ -175,7 +175,7 @@ If you include a value for the `--tag-key` parameter of the [create\-db\-cluster
    The commands and APIs for tagging work with ARNs\. That way, they can work seamlessly across AWS Regions, AWS accounts, and different types of resources that might have identical short names\. You can specify the ARN instead of the cluster ID in CLI commands that operate on clusters\. Substitute the name of your own cluster for *dev\-test\-cluster*\. In subsequent commands that use ARN parameters, substitute the ARN of your own cluster\. The ARN includes your own AWS account ID and the name of the AWS Region where your cluster is located\. 
 
    ```
-   $ aws rds describe-db-clusters --db-cluster-id dev-test-cluster \
+   $ aws rds describe-db-clusters --db-cluster-identifier dev-test-cluster \
      --query "*[].{DBClusterArn:DBClusterArn}" --output text
    arn:aws:rds:us-east-1:123456789:cluster:dev-test-cluster
    ```
@@ -224,7 +224,7 @@ If you include a value for the `--tag-key` parameter of the [create\-db\-cluster
      then
          echo "Cluster $arn is tagged as stoppable. Stopping it now."
    # Note that you can specify the full ARN value as the parameter instead of the short ID 'dev-test-cluster'.
-         aws rds stop-db-cluster --db-cluster-id $arn
+         aws rds stop-db-cluster --db-cluster-identifier $arn
      fi
    done
    

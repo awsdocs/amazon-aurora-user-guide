@@ -1,6 +1,6 @@
 # Exporting data from an Aurora PostgreSQL DB cluster to Amazon S3<a name="postgresql-s3-export"></a>
 
-You can query data from an Aurora PostgreSQL DB cluster and export it directly into files stored in an Amazon S3 bucket\. To do this, you use the `aws_s3` PostgreSQL extension that Aurora PostgreSQL provides\. 
+You can query data from an Aurora PostgreSQL DB cluster and export it directly into files stored in an Amazon S3 bucket\. To do this, you use the `aws_s3` PostgreSQL extension that Aurora PostgreSQL provides\. The upload to S3 uses server\-side encryption by default\.
 
 **Note**  
 To export data to Amazon S3 from Aurora PostgreSQL, your database must be running one of the following PostgreSQL engine versions:  

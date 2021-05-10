@@ -97,7 +97,7 @@ Aurora MySQL supports Transport Layer Security \(TLS\) versions 1\.0, 1\.1, and 
 | Aurora MySQL version | TLS 1\.0 | TLS 1\.1 | TLS 1\.2 | 
 | --- | --- | --- | --- | 
 |  Aurora MySQL 5\.7  |  Supported  |  Supported  |  Supported  | 
-|  Aurora MySQL 5\.6  |  Supported  |  Not supported  |  Not supported  | 
+|  Aurora MySQL 5\.6  |  Supported  |  Supported for Aurora MySQL 1\.23\.1 and higher  |  Supported for Aurora MySQL 1\.23\.1 and higher  | 
 
 For an Aurora MySQL 5\.7 DB cluster, you can use the `tls_version` DB cluster parameter to indicate the permitted protocol versions\. Similar client parameters exist for most client tools or database drivers\. Some older clients might not support newer TLS versions\. By default, the DB cluster attempts to use the highest TLS protocol version allowed by both the server and client configuration\.
 

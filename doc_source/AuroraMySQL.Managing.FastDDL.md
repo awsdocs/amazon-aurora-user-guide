@@ -113,7 +113,7 @@ $ aws rds reboot-db-instance --db-instance-identifier instance-2020-12-22-5208
   "DBInstanceStatus": "rebooting"
 }
 
-$ aws rds describe-db-clusters --db-cluster-id tpch100g \
+$ aws rds describe-db-clusters --db-cluster-identifier tpch100g \
   --query '*[].[DBClusterParameterGroup]' --output text
 lab-mode-enabled-56
 

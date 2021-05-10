@@ -3,6 +3,6 @@
 Amazon Aurora integrates with other AWS services so that you can extend your Aurora PostgreSQL DB cluster to use additional capabilities in the AWS Cloud\. Your Aurora PostgreSQL DB cluster can use AWS services to do the following:
 + Quickly collect, view, and assess performance for your Aurora PostgreSQL DB instances with Amazon RDS Performance Insights\. Performance Insights expands on existing Amazon RDS monitoring features to illustrate your database's performance and help you analyze any issues that affect it\. With the Performance Insights dashboard, you can visualize the database load and filter the load by waits, SQL statements, hosts, or users\. 
 
-  For more information about Performance Insights, see [Using Performance Insights on Amazon Aurora](USER_PerfInsights.md)\. 
+  For more information about Performance Insights, see [Monitoring with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\. 
 + Automatically add or remove Aurora Replicas with Aurora Auto Scaling\. For more information, see [Using Amazon Aurora Auto Scaling with Aurora replicas](Aurora.Integrating.AutoScaling.md)\.
 + Configure your Aurora PostgreSQL DB cluster to publish log data to Amazon CloudWatch Logs\. CloudWatch Logs provide highly durable storage for your log records\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. For more information, see [Publishing Aurora PostgreSQL logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)\.

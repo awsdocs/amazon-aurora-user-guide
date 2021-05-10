@@ -18,7 +18,7 @@ You have several options for viewing information about your Amazon Aurora DB clu
 
 ### Console<a name="Aurora.Viewing.Console"></a>
 
-In the Amazon RDS, you can see details about a DB cluster by choosing **Databases** from the console's navigation pane\. You can also see details about DB instances that are members of an Amazon Aurora DB cluster on the **Databases** page\.
+In the Amazon RDS console, you can see details about a DB cluster by choosing **Databases** from the console's navigation pane\. You can also see details about DB instances that are members of an Amazon Aurora DB cluster on the **Databases** page\.
 
 The **Databases** list shows all of the DB clusters for your AWS account\. When you choose a DB cluster, you see both information about the DB cluster and also a list of the DB instances that are members of that DB cluster\. You can choose the identifier for a DB instance in the list to go directly to the details page for that DB instance in the RDS console\.
 

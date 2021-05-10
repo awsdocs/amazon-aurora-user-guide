@@ -51,6 +51,8 @@ The parameters are as follows:
 + `--port` – The port number used for connecting to your DB cluster
 + `--ssl-ca` – The SSL certificate file that contains the public key
 
+  For more information, see [Using SSL/TLS with Aurora MySQL DB clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
+
   For more information, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\.
 + `--enable-cleartext-plugin` – A value that specifies that `AWSAuthenticationPlugin` must be used for this connection
 

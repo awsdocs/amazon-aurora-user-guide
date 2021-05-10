@@ -49,7 +49,7 @@ Some connection utilities you can use are the following:
 **Note**  
  If you use the MariaDB Connector/J utility with an Aurora Serverless v1 DB cluster, use the prefix `jdbc:mariadb:aurora//` in your connection string\. The `mariadb:aurora` parameter avoids the automatic DNS scan for failover targets\. That scanning is not needed with Aurora Serverless v1 DB clusters and causes a delay in establishing the connection\. 
 
-You can use SSL encryption on connections to an Amazon Aurora DB instance\. For information, see [Using SSL with a MySQL DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Concepts.SSLSupport.html)\.
+You can use SSL encryption on connections to an Aurora MySQL DB instance\. For information, see [Using SSL/TLS with Aurora MySQL DB clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
 
 ### Connecting with SSL for Aurora MySQL<a name="Aurora.Connecting.SSL"></a>
 

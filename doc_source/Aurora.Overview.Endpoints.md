@@ -404,7 +404,7 @@ done
 ```
 for i in 09 10
 do
-  aws rds modify-db-instance --db-instance-id custom-endpoint-demo-${i} \
+  aws rds modify-db-instance --db-instance-identifier custom-endpoint-demo-${i} \
     --region $REGION --promotion-tier 15
 done
 ```

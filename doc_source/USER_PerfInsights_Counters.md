@@ -189,7 +189,7 @@ You can find definitions for these native metrics in [Viewing Statistics](https:
 
 ### Non\-native counters for Aurora PostgreSQL<a name="USER_PerfInsights_Counters.Aurora_PostgreSQL.NonNative"></a>
 
-Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native metric can be a metric that you get with a specific query\. A non\-native metric also can be a derived metric, where two or more native counters are used in calculations for ratios, hit rates, or latencies\.
+Non\-native counter metrics are counters defined by Amazon Aurora\. A non\-native metric can be a metric that you get with a specific query\. A non\-native metric also can be a derived metric, where two or more native counters are used in calculations for ratios, hit rates, or latencies\.
 
 
 | Counter | Type | Metric | Description | Definition | 

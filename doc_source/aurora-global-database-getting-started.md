@@ -661,7 +661,7 @@ Don't delete the read\-only instance from the secondary Aurora DB cluster until 
 1. Check the status of the secondary Aurora DB cluster and its Reader instance before continuing, by using the AWS Management Console or the AWS CLI\. For example:
 
    ```
-   $ aws rds describe-db-clusters --db-cluster-id secondary-cluster-id --query '*[].[Status]' --output text
+   $ aws rds describe-db-clusters --db-cluster-identifier secondary-cluster-id --query '*[].[Status]' --output text
    ```
 
    It can take several minutes for the status of a newly added secondary Aurora DB cluster to change from "creating" to "available\." When the Aurora DB cluster is available, you can delete the Reader instance\.

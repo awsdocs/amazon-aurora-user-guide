@@ -497,7 +497,7 @@ In this wait event, there are threads holding locks on InnoDB data dictionary op
 
 ### Available isolation levels for writer instances<a name="AuroraMySQL.Reference.IsolationLevels.writer"></a>
 
- You can use the isolation levels `REPEATABLE READ`, `READ COMMITTED`, `READ UNCOMMITTED`, and `SERIALIZABLE` on the primary instance of an Aurora MySQL single\-master cluster, or any DB instance in an Aurora MySQL multi\-master cluster\. These isolation levels work the same in Aurora MySQL as in RDS for MySQL\. 
+ You can use the isolation levels `REPEATABLE READ`, `READ COMMITTED`, `READ UNCOMMITTED`, and `SERIALIZABLE` on the primary instance of an Aurora MySQL single\-master cluster\. You can use the isolation levels `REPEATABLE READ`, `READ COMMITTED`, and `READ UNCOMMITTED` on any DB instance in an Aurora MySQL multi\-master cluster\. These isolation levels work the same in Aurora MySQL as in RDS for MySQL\. 
 
 ### REPEATABLE READ isolation level for reader instances<a name="AuroraMySQL.Reference.IsolationLevels.reader"></a>
 

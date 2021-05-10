@@ -144,7 +144,7 @@ $ aws rds restore-db-cluster-to-point-in-time \
   --use-latest-restorable-time
 
 $ aws rds describe-db-clusters \
-  --db-cluster-id tpch100g-clone \
+  --db-cluster-identifier tpch100g-clone \
     --query '*[].[Engine]' \
     --output text
 aurora
