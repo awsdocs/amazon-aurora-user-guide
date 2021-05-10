@@ -5,7 +5,7 @@ Amazon cloud computing resources are hosted in multiple locations world\-wide\. 
 **Note**  
 For information about finding the Availability Zones for an AWS Region, see [Describing your Regions, Availability Zones, and Local Zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#using-regions-availability-zones-describe) in the Amazon EC2 documentation\.
 
-Amazon operates state\-of\-the\-art, highly\-available data centers\. Although rare, failures can occur that affect the availability of instances that are in the same location\. If you host all your instances in a single location that is affected by such a failure, none of your instances is available\.
+Amazon operates state\-of\-the\-art, highly\-available data centers\. Although rare, failures can occur that affect the availability of instances that are in the same location\. If you host all your instances in a single location that is affected by such a failure, none of your instances will be available\.
 
 ![\[AWS Region\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Con-AZ.png)
 
