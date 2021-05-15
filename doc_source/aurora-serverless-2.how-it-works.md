@@ -7,7 +7,7 @@
 | --- |
 | Amazon Aurora Serverless v2 with MySQL compatibility is in preview release and is subject to change\. Aurora Serverless v2 \(preview\) is not covered by the Amazon RDS service level agreement \(SLA\)\. Don't use Aurora Serverless v2 \(preview\) for production databases\. All resources and data will be deleted when the preview ends\.  | 
 
-Amazon Aurora Serverless v2 \(preview\) has been architected from the ground up to support serverless DB clusters that are instantly scalable\. The Aurora Serverless v2 \(preview\) architecture rests on a lightweight foundation that's been engineered to provide the security and isolation needed in multi\-tenant serverless cloud environments\. This foundation has very little overhead so it can respond quickly\. It's also powerful enough to meet dramatic increases in processing demand\.
+Amazon Aurora Serverless v2 \(preview\) has been architected from the ground up to support serverless DB clusters that are instantly scalable\. The Aurora Serverless v2 \(preview\) architecture rests on a lightweight foundation that's engineered to provide the security and isolation needed in multitenant serverless cloud environments\. This foundation has very little overhead so it can respond quickly\. It's also powerful enough to meet dramatic increases in processing demand\.
 
 ## Instant autoscaling<a name="aurora-serverless-2.how-it-works.autoscaling"></a>
 

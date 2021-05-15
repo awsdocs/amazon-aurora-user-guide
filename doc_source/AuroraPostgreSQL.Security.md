@@ -13,6 +13,9 @@ Security for Amazon Aurora PostgreSQL is managed at three levels:
 **Note**  
 The Salted Challenge Response Authentication Mechanism \(SCRAM\) is not supported with Aurora PostgreSQL\.
 
+**Note**  
+For more information, see [Security in Amazon Aurora](UsingWithRDS.md)\.
+
 When you create an Amazon Aurora PostgreSQL DB instance, the master user has the following default privileges:
 +  `LOGIN` 
 +  `NOSUPERUSER` 

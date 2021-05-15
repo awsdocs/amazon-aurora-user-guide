@@ -40,7 +40,7 @@ Aurora backtracking is available for Aurora MySQL only\. It's not available for 
 | Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.06 and later | 
 | Asia Pacific \(Tokyo\) | Version 5\.6\.10a | Version 2\.06 and later | 
 | Canada \(Central\) | Version 5\.6\.10a | Version 2\.06 and later | 
-| China \(Beijing\) | Version 5\.6\.10a | Version 2\.06 and later | 
+| China \(Beijing\) | \- | \- | 
 | China \(Ningxia\) | \- | \- | 
 | Europe \(Frankfurt\) | Version 5\.6\.10a | Version 2\.06 and later | 
 | Europe \(Ireland\) | Version 5\.6\.10a | Version 2\.06 and later | 

@@ -35,7 +35,7 @@ This fault injection query takes one of the following crash types\. The crash ty
 *'instance'*  
 A crash of the PostgreSQL\-compatible database for the Amazon Aurora instance is simulated\.
 
-*'dispacher'*  
+*'dispatcher'*  
 A crash of the dispatcher on the primary instance for the Aurora DB cluster is simulated\. The *dispatcher* writes updates to the cluster volume for an Amazon Aurora DB cluster\.
 
 *'node'*  

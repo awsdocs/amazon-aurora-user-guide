@@ -9,7 +9,7 @@
 
 To work with Amazon Aurora Serverless v2 \(preview\), you must apply for access\. For more information, see the [Aurora Serverless v2 \(preview\) page](https://pages.awscloud.com/AmazonAuroraServerlessv2Preview.html)\. 
 
-After you've been approved for access, you can sign in to the preview using the console\. Currently, you can create an Amazon Aurora Serverless v2 \(preview\) DB cluster with the console only\.
+After you're approved for access, you can sign in to the preview using the console\. Currently, you can create an Amazon Aurora Serverless v2 \(preview\) DB cluster with the console only\.
 
 **To create an Aurora Serverless v2 \(preview\) DB cluster**
 

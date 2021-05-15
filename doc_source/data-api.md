@@ -45,6 +45,8 @@ The following table shows the AWS Regions where the Data API is currently availa
 | US West \(N\. California\) | rds\-data\.us\-west\-1\.amazonaws\.com | 
 | US West \(Oregon\) | rds\-data\.us\-west\-2\.amazonaws\.com | 
 
+If you require cryptographic modules validated by FIPS 140\-2 when accessing the Data API through a command line interface or an API, use a FIPS endpoint\. For more information about the available FIPS endpoints, see [Federal Information Processing Standard \(FIPS\) 140\-2](http://aws.amazon.com/compliance/fips/)\.
+
 ## Authorizing access to the Data API<a name="data-api.access"></a>
 
 Users can invoke Data API operations only if they are authorized to do so\. You can give a user permission to use the Data API by attaching an AWS Identity and Access Management \(IAM\) policy that defines their privileges\. You can also attach the policy to a role if you're using IAM roles\. An AWS managed policy, `AmazonRDSDataFullAccess`, includes permissions for the RDS Data API\. 
@@ -334,7 +336,7 @@ Certain types, such as `DECIMAL` and `TIME`, require a hint so that the Data API
 + `UUID` – The corresponding `String` parameter value is sent as an object of `UUID` type to the database\.
 
 **Note**  
- For Amazon Aurora PostgreSQL, the Data API always returns the Aurora PostgreSQL datatype `TIMESTAMPTZ` in UTC timezone\.
+ For Amazon Aurora PostgreSQL, the Data API always returns the Aurora PostgreSQL data type `TIMESTAMPTZ` in UTC time zone\.
 
 ### Calling the Data API with the AWS CLI<a name="data-api.calling.cli"></a>
 

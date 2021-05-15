@@ -133,27 +133,17 @@ Your application can connect to any DB instance in the DB Cluster and query the 
 
 A good way to ensure your application can find a node to connect to is to attempt to connect to the **cluster writer****endpoint ** and then the **cluster reader****endpoint **until you can establish a readable connection\. These endpoints do not change unless you rename your DB Cluster, and thus can generally be left as static members of your application or stored in a resource file that your application reads from\.
 
-Once you establish a connection using one of these endpoints, you can call the `aurora_replica_status` function to get information about the rest of the cluster\. For example, the following command retrieves information with the `aurora_replica_status` function\.
+After you establish a connection using one of these endpoints, you can call the `aurora_replica_status` function to get information about the rest of the cluster\. For example, the following command retrieves information with the `aurora_replica_status` function\.
 
 ```
-postgres=> SELECT server_id, session_id, highest_lsn_rcvd, 
-cur_replay_latency_in_usec, now(), last_update_timestamp FROM 
-aurora_replica_status();
-    server_id     |              session_id              |    
-vdl    | highest_lsn_rcvd | cur_replay_latency |              
-now              |    last_update_time    
------------------------------------+---------------------------
------------+-----------+------------------+--------------------+-
-------------------------------+-------
-         mynode-1 | 3e3c5044-02e2-11e7-b70d-95172646d6ca | 
-594220999 |        594221001 |             201421 | 2017-03-07 
-19:50:24.695322+00 | 2017-03-07 19:50:23+00
-         mynode-2 | 1efdd188-02e4-11e7-becd-f12d7c88a28a | 
-594220999 |        594221001 |             201350 | 2017-03-07 
-19:50:24.695322+00 | 2017-03-07 19:50:23+00
-         mynode-3 |                    MASTER_SESSION_ID | 
-594220999 |                  |                    | 2017-03-07 
-19:50:24.695322+00 | 2017-03-07 19:50:23+00
+postgres=> SELECT server_id, session_id, highest_lsn_rcvd, cur_replay_latency_in_usec, now(), last_update_timestamp
+FROM aurora_replica_status();
+
+server_id | session_id | highest_lsn_rcvd | cur_replay_latency_in_usec | now | last_update_timestamp
+-----------+--------------------------------------+------------------+----------------------------+-------------------------------+------------------------
+mynode-1 | 3e3c5044-02e2-11e7-b70d-95172646d6ca | 594221001 | 201421 | 2017-03-07 19:50:24.695322+00 | 2017-03-07 19:50:23+00
+mynode-2 | 1efdd188-02e4-11e7-becd-f12d7c88a28a | 594221001 | 201350 | 2017-03-07 19:50:24.695322+00 | 2017-03-07 19:50:23+00
+mynode-3 | MASTER_SESSION_ID | | | 2017-03-07 19:50:24.695322+00 | 2017-03-07 19:50:23+00
 (3 rows)
 ```
 
@@ -164,11 +154,11 @@ myauroracluster.cluster-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432,
 myauroracluster.cluster-ro-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432
 ```
 
-In this scenario, your application would attempt to establish a connection to any node type, primary or secondary\. Once connected, a good practice is to first examine the read/write status of the node by querying for the result of the command `SHOW transaction_read_only`\. 
+In this scenario, your application would attempt to establish a connection to any node type, primary or secondary\. When your application is connected, a good practice is to first examine the read/write status of the node by querying for the result of the command `SHOW transaction_read_only`\.
 
 If the return value of the query is `OFF`, then you've successfully connected to the primary node\. If the return value is `ON`, and your application requires a read/write connection, you can then call the `aurora_replica_status` function to determine the `server_id` that has `session_id='MASTER_SESSION_ID'`\. This function gives you the name of the primary node\. You can use this in conjunction with the 'endpointPostfix' described below\.
 
-One thing to be aware of is when you connect to a replica that has stale data\. When this happens, the `aurora_replica_status` function may show out\-of\-date information\. A threshold for staleness can be set at the application level and examined by looking at the difference between the server time and the `last_update_time`\. In general, your application should avoid flipping between two hosts due to conflicting information returned by the `aurora_replica_status` function\. Your application should try all known hosts first instead of blindly following the data returned by the `aurora_replica_status` function\.
+One thing to be aware of is when you connect to a replica that has stale data\. When this happens, the `aurora_replica_status` function might show out\-of\-date information\. A threshold for staleness can be set at the application level and examined by looking at the difference between the server time and the `last_update_timestamp`\. In general, your application should avoid flipping between two hosts due to conflicting information returned by the `aurora_replica_status` function\. Your application should try all known hosts first instead of blindly following the data returned by the `aurora_replica_status` function\.
 
 ##### Java example to list instances using the DescribeDBClusters API<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString.API"></a>
 

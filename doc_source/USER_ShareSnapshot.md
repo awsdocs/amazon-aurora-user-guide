@@ -16,20 +16,17 @@ You can share a manual snapshot with up to 20 other AWS accounts\. You can also 
 You can use the following AWS CLI command \(Unix only\) to find the public snapshots for your AWS account in a particular AWS Region:
 
 ```
-aws rds describe-db-snapshots --snapshot-type public --include-public | grep account_number
+aws rds describe-db-cluster-snapshots --snapshot-type public --include-public | grep account_number
 ```
 
 The output returned is similar to the following example if you have public snapshots:
 
 ```
-"DBSnapshotArn": "arn:aws:rds:us-east-1:123456789012:snapshot:mysnapshot1",
-"DBSnapshotArn": "arn:aws:rds:us-east-1:123456789012:snapshot:mysnapshot2",
+"DBClusterSnapshotArn": "arn:aws:rds:us-west-2:123456789012:cluster-snapshot:myclustersnapshot1",
+"DBClusterSnapshotArn": "arn:aws:rds:us-west-2:123456789012:cluster-snapshot:myclustersnapshot2",
 ```
 
-**Note**  
-You might see duplicate entries for `DBSnapshotIdentifier` or `SourceDBSnapshotIdentifier`\.
-
-The following limitations apply when sharing manual snapshots with other AWS accounts:
+The following limitation applies when sharing manual snapshots with other AWS accounts:
 + When you restore a DB cluster from a shared snapshot using the AWS Command Line Interface \(AWS CLI\) or Amazon RDS API, you must specify the Amazon Resource Name \(ARN\) of the shared snapshot as the snapshot identifier\.
 
 ## Sharing an encrypted snapshot<a name="USER_ShareSnapshot.Encrypted"></a>

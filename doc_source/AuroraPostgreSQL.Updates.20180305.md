@@ -371,11 +371,29 @@ You can find the following improvements in this release\.
 This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.7\. For more information about the improvements in PostgreSQL 11\.7, see [PostgreSQL release 11\.7](https://www.postgresql.org/docs/11/release-11-7.html)\.
 
 **Topics**
++ [Aurora PostgreSQL release 3\.2\.7](#AuroraPostgreSQL.Updates.20180305.327)
 + [Aurora PostgreSQL release 3\.2\.6](#AuroraPostgreSQL.Updates.20180305.326)
 + [Aurora PostgreSQL release 3\.2\.4](#AuroraPostgreSQL.Updates.20180305.324)
 + [Aurora PostgreSQL release 3\.2\.3](#AuroraPostgreSQL.Updates.20180305.323)
 + [Aurora PostgreSQL release 3\.2\.2](#AuroraPostgreSQL.Updates.20180305.322)
 + [Aurora PostgreSQL release 3\.2\.1](#AuroraPostgreSQL.Updates.20180305.321)
+
+### Aurora PostgreSQL release 3\.2\.7<a name="AuroraPostgreSQL.Updates.20180305.327"></a>
+
+You can find the following improvements in this release\.
+
+**Critical stability enhancements**
++ None
+
+**High priority stability enhancements**
+
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2020\-25694](https://nvd.nist.gov/vuln/detail/CVE-2020-25694)
+   + [CVE\-2020\-25695](https://nvd.nist.gov/vuln/detail/CVE-2020-25695)
+   + [CVE\-2020\-25696](https://nvd.nist.gov/vuln/detail/CVE-2020-25696)
+
+**Additional improvements and enhancements**
++ None
 
 ### Aurora PostgreSQL release 3\.2\.6<a name="AuroraPostgreSQL.Updates.20180305.326"></a>
 
@@ -533,10 +551,28 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.6\. For more
 This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 11 engines to this release\.
 
 **Topics**
++ [Aurora PostgreSQL release 3\.1\.4](#AuroraPostgreSQL.Updates.20180305.314)
 + [Aurora PostgreSQL release 3\.1\.3](#AuroraPostgreSQL.Updates.20180305.313)
 + [Aurora PostgreSQL release 3\.1\.2](#AuroraPostgreSQL.Updates.20180305.312)
 + [Aurora PostgreSQL release 3\.1\.1](#AuroraPostgreSQL.Updates.20180305.311)
 + [Aurora PostgreSQL release 3\.1\.0](#AuroraPostgreSQL.Updates.20180305.310)
+
+### Aurora PostgreSQL release 3\.1\.4<a name="AuroraPostgreSQL.Updates.20180305.314"></a>
+
+You can find the following improvements in this release\.
+
+**Critical stability enhancements**
++ None
+
+**High priority stability enhancements**
+
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2020\-25694](https://nvd.nist.gov/vuln/detail/CVE-2020-25694)
+   + [CVE\-2020\-25695](https://nvd.nist.gov/vuln/detail/CVE-2020-25695)
+   + [CVE\-2020\-25696](https://nvd.nist.gov/vuln/detail/CVE-2020-25696)
+
+**Additional improvements and enhancements**
++ None
 
 ### Aurora PostgreSQL release 3\.1\.3<a name="AuroraPostgreSQL.Updates.20180305.313"></a>
 
@@ -950,11 +986,29 @@ You can find the following improvements in this release\.
 This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.12\. For more information about the improvements in PostgreSQL 10\.12, see [ PostgreSQL release 10\.12](https://www.postgresql.org/docs/10/release-10-12.html)\.
 
 **Topics**
++ [Aurora PostgreSQL release 2\.5\.7](#AuroraPostgreSQL.Updates.20180305.257)
 + [Aurora PostgreSQL release 2\.5\.6](#AuroraPostgreSQL.Updates.20180305.256)
 + [Aurora PostgreSQL release 2\.5\.4](#AuroraPostgreSQL.Updates.20180305.254)
 + [Aurora PostgreSQL release 2\.5\.3](#AuroraPostgreSQL.Updates.20180305.253)
 + [Aurora PostgreSQL release 2\.5\.2](#AuroraPostgreSQL.Updates.20180305.252)
 + [Aurora PostgreSQL release 2\.5\.1](#AuroraPostgreSQL.Updates.20180305.251)
+
+### Aurora PostgreSQL release 2\.5\.7<a name="AuroraPostgreSQL.Updates.20180305.257"></a>
+
+You can find the following improvements in this release\.
+
+**Critical stability enhancements**
++ None
+
+**High priority stability enhancements**
+
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2020\-25694](https://nvd.nist.gov/vuln/detail/CVE-2020-25694)
+   + [CVE\-2020\-25695](https://nvd.nist.gov/vuln/detail/CVE-2020-25695)
+   + [CVE\-2020\-25696](https://nvd.nist.gov/vuln/detail/CVE-2020-25696)
+
+**Additional improvements and enhancements**
++ None
 
 ### Aurora PostgreSQL release 2\.5\.6<a name="AuroraPostgreSQL.Updates.20180305.256"></a>
 
@@ -1107,10 +1161,28 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.11\. For mor
 This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 10 engines to this release\.
 
 **Topics**
++ [Aurora PostgreSQL release 2\.4\.4](#AuroraPostgreSQL.Updates.20180305.244)
 + [Aurora PostgreSQL release 2\.4\.3](#AuroraPostgreSQL.Updates.20180305.243)
 + [Aurora PostgreSQL release 2\.4\.2](#AuroraPostgreSQL.Updates.20180305.242)
 + [Aurora PostgreSQL release 2\.4\.1](#AuroraPostgreSQL.Updates.20180305.241)
 + [Aurora PostgreSQL release 2\.4\.0](#AuroraPostgreSQL.Updates.20180305.240)
+
+### Aurora PostgreSQL release 2\.4\.4<a name="AuroraPostgreSQL.Updates.20180305.244"></a>
+
+You can find the following improvements in this release\.
+
+**Critical stability enhancements**
++ None
+
+**High priority stability enhancements**
+
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2020\-25694](https://nvd.nist.gov/vuln/detail/CVE-2020-25694)
+   + [CVE\-2020\-25695](https://nvd.nist.gov/vuln/detail/CVE-2020-25695)
+   + [CVE\-2020\-25696](https://nvd.nist.gov/vuln/detail/CVE-2020-25696)
+
+**Additional improvements and enhancements**
++ None
 
 ### Aurora PostgreSQL release 2\.4\.3<a name="AuroraPostgreSQL.Updates.20180305.243"></a>
 
@@ -1661,10 +1733,28 @@ You can find the following improvements in this release\.
 This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.17\. For more information about the improvements in PostgreSQL 9\.6\.17, see [ PostgreSQL release 9\.6\.17](https://www.postgresql.org/docs/9.6/release-9-6-17.html)\.
 
 **Topics**
++ [Aurora PostgreSQL release 1\.7\.7](#AuroraPostgreSQL.Updates.20180305.177)
 + [Aurora PostgreSQL release 1\.7\.6](#AuroraPostgreSQL.Updates.20180305.176)
 + [Aurora PostgreSQL release 1\.7\.3](#AuroraPostgreSQL.Updates.20180305.173)
 + [Aurora PostgreSQL release 1\.7\.2](#AuroraPostgreSQL.Updates.20180305.172)
 + [Aurora PostgreSQL release 1\.7\.1](#AuroraPostgreSQL.Updates.20180305.171)
+
+### Aurora PostgreSQL release 1\.7\.7<a name="AuroraPostgreSQL.Updates.20180305.177"></a>
+
+You can find the following improvements in this release\.
+
+**Critical stability enhancements**
++ None
+
+**High priority stability enhancements**
+
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2020\-25694](https://nvd.nist.gov/vuln/detail/CVE-2020-25694)
+   + [CVE\-2020\-25695](https://nvd.nist.gov/vuln/detail/CVE-2020-25695)
+   + [CVE\-2020\-25696](https://nvd.nist.gov/vuln/detail/CVE-2020-25696)
+
+**Additional improvements and enhancements**
++ None
 
 ### Aurora PostgreSQL release 1\.7\.6<a name="AuroraPostgreSQL.Updates.20180305.176"></a>
 
@@ -1759,10 +1849,28 @@ This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.16\. For m
 This release contains multiple critical stability enhancements\. Amazon highly recommends upgrading your Aurora PostgreSQL clusters that use older PostgreSQL 9\.6 engines to this release\.
 
 **Topics**
++ [Aurora PostgreSQL release 1\.6\.4](#AuroraPostgreSQL.Updates.20180305.164)
 + [Aurora PostgreSQL release 1\.6\.3](#AuroraPostgreSQL.Updates.20180305.163)
 + [Aurora PostgreSQL release 1\.6\.2](#AuroraPostgreSQL.Updates.20180305.162)
 + [Aurora PostgreSQL release 1\.6\.1](#AuroraPostgreSQL.Updates.20180305.161)
 + [Aurora PostgreSQL release 1\.6\.0](#AuroraPostgreSQL.Updates.20180305.160)
+
+### Aurora PostgreSQL release 1\.6\.4<a name="AuroraPostgreSQL.Updates.20180305.164"></a>
+
+You can find the following improvements in this release\.
+
+**Critical stability enhancements**
++ None
+
+**High priority stability enhancements**
+
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2020\-25694](https://nvd.nist.gov/vuln/detail/CVE-2020-25694)
+   + [CVE\-2020\-25695](https://nvd.nist.gov/vuln/detail/CVE-2020-25695)
+   + [CVE\-2020\-25696](https://nvd.nist.gov/vuln/detail/CVE-2020-25696)
+
+**Additional improvements and enhancements**
++ None
 
 ### Aurora PostgreSQL release 1\.6\.3<a name="AuroraPostgreSQL.Updates.20180305.163"></a>
 

@@ -20,6 +20,9 @@ Security for Amazon Aurora MySQL is managed at three levels:
 
     With IAM database authentication, you authenticate to your DB cluster by using an IAM user or IAM role and an authentication token\. An *authentication token* is a unique value that is generated using the Signature Version 4 signing process\. By using IAM database authentication, you can use the same credentials to control access to your AWS resources and your databases\. For more information, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\.
 
+**Note**  
+For more information, see [Security in Amazon Aurora](UsingWithRDS.md)\.
+
 ## Master user privileges with Amazon Aurora MySQL<a name="AuroraMySQL.Security.MasterUser"></a>
 
 When you create an Amazon Aurora MySQL DB instance, the master user has the following default privileges:
