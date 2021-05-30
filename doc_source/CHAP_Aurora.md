@@ -10,7 +10,7 @@
 + [Cloning an Aurora DB cluster volume](Aurora.Managing.Clone.md)
 + [Integrating Aurora with other AWS services](Aurora.Integrating.md)
 + [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)
-+ [Rebooting a DB instance in a DB cluster](USER_RebootInstance.md)
++ [Rebooting an Amazon Aurora DB cluster or Amazon Aurora DB instance](USER_RebootCluster.md)
 + [Deleting Aurora DB clusters and DB instances](USER_DeleteCluster.md)
 + [Tagging Amazon RDS resources](USER_Tagging.md)
 + [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)

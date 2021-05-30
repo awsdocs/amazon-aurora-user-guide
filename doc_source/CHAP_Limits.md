@@ -13,30 +13,7 @@ Each AWS account has quotas, for each AWS Region, on the number of Amazon Aurora
 
 The following table lists the resources and their quotas per AWS Region\.
 
-
-| Resource | Default quota | 
-| --- | --- | 
-| Authorizations per DB security group | 20 | 
-| Concurrent DB snapshot export tasks | 5 | 
-| Cross\-Region DB snapshot copy requests | 5 | 
-| Custom endpoints per DB cluster | 5 | 
-| Data API maximum result set size | 1 MB | 
-| Data API requests per second | 1000 | 
-| DB clusters | 40 | 
-| DB cluster parameter groups | 50 | 
-| DB instances | 40 | 
-| DB subnet groups | 50 | 
-| Event subscriptions | 20 | 
-| AWS Identity and Access Management \(IAM\) roles per DB cluster | 5 | 
-| IAM roles per DB instance | 5 | 
-| Manual DB cluster snapshots | 100 | 
-| Parameter groups | 50 | 
-| Proxies | 20 | 
-| Reserved DB instances | 40 | 
-| Rules per virtual private cloud \(VPC\) security group | 50 inbound, 50 outbound | 
-| Subnets per subnet group | 20 | 
-| Tags per resource | 50 | 
-| VPC security groups | 5 | 
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)
 
 **Note**  
 By default, you can have up to a total of 40 DB instances\. RDS DB instances, Aurora DB instances, Amazon Neptune instances, and Amazon DocumentDB instances apply to this quota\.  

@@ -225,7 +225,7 @@ Complete the **Create database** page\.
 
 1. Choose **Create database**\. 
 
-   It can take several minutes for Aurora to complete the process of creating the Aurora DB instance, its Aurora Replica, and the Aurora DB cluster\. When the cluster is ready to use, the Aurora DB cluster and its writer and Replica nodes display **Available** status\. This becomes the primary DB cluster of your Aurora global database, after you add a secondary\.  
+   It can take several minutes for Aurora to complete the process of creating the Aurora DB instance, its Aurora Replica, and the Aurora DB cluster\. When the cluster is ready to use, the Aurora DB cluster and its writer and replica nodes display **Available** status\. This becomes the primary DB cluster of your Aurora global database, after you add a secondary\.  
 ![\[Screenshot of Databases with an Aurora DB cluster ready to use for Aurora global database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-db-create-apg-5-add-region.png)
 
 When your primary DB cluster is available, create one or more secondary clusters by following the steps in [Adding an AWS Region to an Amazon Aurora global database](#aurora-global-database-attaching)\. 
@@ -630,12 +630,13 @@ aws rds --region secondary_region ^
 
 ## Creating a headless Aurora DB cluster in a secondary Region<a name="aurora-global-database-attach.console.headless"></a>
 
-Although an Aurora global database requires at least one secondary Aurora DB cluster in a different AWS Region than the primary, you can use a *headless* configuration for the secondary cluster\. A headless secondary Aurora DB cluster is one without a Reader DB instance\. This type of configuration can lower expenses for an Aurora global database\. In an Aurora DB cluster, compute and storage are de\-coupled\. Without the DB instance, you're not charged for compute, only for storage\. If it's set up correctly, a headless secondary's storage volume is kept in\-sync with the primary Aurora DB cluster\. 
+Although an Aurora global database requires at least one secondary Aurora DB cluster in a different AWS Region than the primary, you can use a *headless* configuration for the secondary cluster\. A headless secondary Aurora DB cluster is one without a DB instance\. This type of configuration can lower expenses for an Aurora global database\. In an Aurora DB cluster, compute and storage are decoupled\. Without the DB instance, you're not charged for compute, only for storage\. If it's set up correctly, a headless secondary's storage volume is kept in\-sync with the primary Aurora DB cluster\. 
 
-You add the secondary cluster as you normally do when creating an Aurora global database\. However, after the primary Aurora DB cluster begins replication to the secondary, you delete the Aurora DB \(the read\-only instance\) from the secondary Aurora DB cluster\. This secondary cluster is now considered "headless" because the writer instance no longer exists\. Yet, the storage volume is kept in sync with the primary Aurora DB cluster\. 
+You add the secondary cluster as you normally do when creating an Aurora global database\. However, after the primary Aurora DB cluster begins replication to the secondary, you delete the Aurora read\-only DB instance from the secondary Aurora DB cluster\. This secondary cluster is now considered "headless" because it no longer has a DB instance\. Yet, the storage volume is kept in sync with the primary Aurora DB cluster\. 
 
 **Warning**  
-Don't delete the read\-only instance from the secondary Aurora DB cluster until *after* the primary completes the initial replication process\.
+ With Aurora PostgreSQL, to create a headless cluster in a secondary AWS Region, use the AWS CLI or RDS API to add the secondary AWS Region\. Skip the step to create the reader DB instance for the secondary cluster\. Currently, creating a headless cluster isn't supported in the RDS Console\. For the CLI and API procedures to use, see [Adding an AWS Region to an Amazon Aurora global database](#aurora-global-database-attaching)\.   
+ Creating a reader DB instance in a secondary Region and subsequently deleting it could lead to an Aurora PostgreSQL vacuum issue on the primary Region's writer DB instance\. If you encounter this issue, restart the primary Region's writer DB instance after you delete the secondary Region's reader DB instance\. 
 
 **To add a headless secondary Aurora DB cluster to your Aurora global database**
 
@@ -658,18 +659,18 @@ Don't delete the read\-only instance from the secondary Aurora DB cluster until 
 1.  **Add region**\. After you finish adding the Region to your Aurora global database, you can see it in the list of **Databases** in the AWS Management Console as shown in the screenshot\.   
 ![\[Screenshot showing the secondary cluster with its reader instance is now part of the Aurora global database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-headless-stage-1.png)
 
-1. Check the status of the secondary Aurora DB cluster and its Reader instance before continuing, by using the AWS Management Console or the AWS CLI\. For example:
+1. Check the status of the secondary Aurora DB cluster and its reader instance before continuing, by using the AWS Management Console or the AWS CLI\. For example:
 
    ```
    $ aws rds describe-db-clusters --db-cluster-identifier secondary-cluster-id --query '*[].[Status]' --output text
    ```
 
-   It can take several minutes for the status of a newly added secondary Aurora DB cluster to change from "creating" to "available\." When the Aurora DB cluster is available, you can delete the Reader instance\.
+   It can take several minutes for the status of a newly added secondary Aurora DB cluster to change from `creating` to `available`\. When the Aurora DB cluster is available, you can delete the reader instance\.
 
-1. Select the Reader instance in the secondary Aurora DB cluster, and then choose **Delete**\.  
-![\[Screenshot showing the Reader instance selected and ready to delete.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-headless-stage-2.png)
+1. Select the reader instance in the secondary Aurora DB cluster, and then choose **Delete**\.  
+![\[Screenshot showing the reader instance selected and ready to delete.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-headless-stage-2.png)
 
-After deleting the Reader instance, the secondary cluster remains part of the Aurora global database\. It has no instance associated with it, as shown following\.
+After deleting the reader instance, the secondary cluster remains part of the Aurora global database\. It has no instance associated with it, as shown following\.
 
 ![\[Screenshot showing the headless secondary DB cluster.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-db-headless-secondary.png)
 

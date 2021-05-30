@@ -10,15 +10,19 @@ Before you use Amazon Aurora for the first time, complete the following tasks:
 
 1. [Provide access to the DB cluster in the VPC by creating a security group](#CHAP_SettingUp_Aurora.SecurityGroup)
 
+If you already have an AWS account, know your Aurora requirements, and prefer to use the defaults for IAM and VPC security groups, skip ahead to [Getting started with Amazon Aurora](CHAP_GettingStartedAurora.md)\.
+
 ## Sign up for AWS<a name="CHAP_SettingUp_Aurora.SignUp"></a>
 
-When you sign up for Amazon RDS \(AWS\), your AWS account is automatically signed up for all services in AWS, including Amazon RDS\. You are charged only for the services that you use\.
+When you sign up for AWS, your AWS account is automatically signed up for all services in AWS, including Amazon RDS\. You are charged only for the services that you use\.
 
-With Amazon RDS, you pay only for the resources you use\. The Amazon RDS DB cluster that you create is live \(not running in a sandbox\)\. You incur the standard Amazon RDS usage fees for the cluster until you terminate it\. For more information about Amazon RDS usage rates, see the [Amazon RDS product page](http://aws.amazon.com/rds)\. If you are a new AWS customer, you can get started with Amazon RDS for free; for more information, see [AWS free usage tier](http://aws.amazon.com/free/)\.
+With Amazon RDS, you pay only for the resources you use\. The Amazon RDS DB clusters that you create are live \(not running in a sandbox\)\. You incur the standard Amazon RDS usage fees for each DB cluster until you terminate it\. For more information about Amazon RDS usage rates, see the [Amazon RDS product page](http://aws.amazon.com/rds)\. If you are a new AWS customer, you can get started with Amazon RDS for free; for more information, see [AWS free tier](http://aws.amazon.com/free/)\.
 
-If you have an AWS account already, skip to the next task\. If you don't have an AWS account, use the following procedure to create one\.
+If you have an AWS account already, skip to the next section, [Create an IAM user](#CHAP_SettingUp_Aurora.IAM)\.
 
-**To create an AWS account**
+If you don't have an AWS account, you can use the following procedure to create one\.
+
+**To create a new AWS account**
 
 1. Open [https://portal\.aws\.amazon\.com/billing/signup](https://portal.aws.amazon.com/billing/signup)\.
 
@@ -30,7 +34,9 @@ Note your AWS account number, because you'll need it for the next task\.
 
 ## Create an IAM user<a name="CHAP_SettingUp_Aurora.IAM"></a>
 
-Services in AWS, such as Amazon RDS, require that you provide credentials when you access them, so that the service can determine whether you have permission to access its resources\. The console requires your password\. You can create access keys for your AWS account to access the command line interface or API\. However, we don't recommend that you access AWS using the credentials for your AWS account; we recommend that you use AWS Identity and Access Management \(IAM\) instead\. Create an IAM user, and then add the user to an IAM group with administrative permissions or grant this user administrative permissions\. You can then access AWS using a special URL and the credentials for the IAM user\.
+After you create an AWS account and successfully connect to the AWS Management Console, you can create an AWS Identity and Access Management \(IAM\) user\. Instead of signing in with your AWS root account, we recommend that you use an IAM administrative user with Amazon RDS\. 
+
+One way to do this is to create a new IAM user and grant it administrator permissions\. Alternatively, you can add an existing IAM user to an IAM group with Amazon RDS administrative permissions\. You can then access AWS from a special URL using the credentials for the IAM user\. 
 
 If you signed up for AWS but have not created an IAM user for yourself, you can create one using the IAM console\.
 
@@ -88,61 +94,70 @@ https://your_account_alias.signin.aws.amazon.com/console/
 
 To verify the sign\-in link for IAM users for your account, open the IAM console and check under **AWS Account Alias** on the dashboard\.
 
+You can also create access keys for your AWS account\. These access keys can be used to access AWS through the AWS Command Line Interface \(AWS CLI\) or through the Amazon RDS API\. For more information, see [Programmatic access](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html), [Installing, updating, and uninstalling the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html), and the *[Amazon RDS API reference\.](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/Welcome.html)*
+
 ## Determine requirements<a name="CHAP_SettingUp_Aurora.Requirements"></a>
 
-The basic building block of Aurora is the DB cluster\. One or more DB instances can belong to a DB cluster\. A DB cluster provides a network address called the **Cluster Endpoint**\. Your applications connect to the cluster endpoint exposed by the DB cluster whenever they need to access the databases created in that DB cluster\. The information you specify when you create the DB cluster controls configuration elements such as memory, database engine and version, network configuration, security, and maintenance periods\.
+The basic building block of Aurora is the DB cluster\. One or more DB instances can belong to a DB cluster\. A DB cluster provides a network address called the *cluster endpoint*\. Your applications connect to the cluster endpoint exposed by the DB cluster whenever they need to access the databases created in that DB cluster\. The information you specify when you create the DB cluster controls configuration elements such as memory, database engine and version, network configuration, security, and maintenance periods\.
 
-You must know your DB cluster and network needs before you create a security group and before you create a DB cluster\. For example, you must know the following:
-+ What are the memory and processor requirements for your application or service? You will use these settings when you determine what DB instance class you will use when you create your DB cluster\. For specifications about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
-+ Your DB cluster is in a virtual private cloud \(VPC\)\. Security group rules must be configured to connect to a DB cluster\. The following list describes the rules for each VPC option:
-  + **Default VPC** — If your AWS account has a default VPC in the region, that VPC is configured to support DB clusters\. If you specify the default VPC when you create the DB cluster:
-    + You must create a **VPC security group** that authorizes connections from the application or service to the Aurora DB cluster with the database\. Note that you must use the [Amazon EC2 API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC Console to create VPC security groups\. For information, see [Step 4: Create a VPC security group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\.
-    + You must specify the default DB subnet group\. If this is the first DB cluster you have created in the region, Amazon RDS will create the default DB subnet group when it creates the DB cluster\.
+Before you create a DB cluster and a security group, you must know your DB cluster and network needs\. Here are some important things to consider:
++ **Resource requirements **– What are the memory and processor requirements for your application or service? You will use these settings when you determine what DB instance class you will use when you create your DB cluster\. For specifications about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
++ **VPC, subnet, and security group – **Your DB cluster will be in a virtual private cloud \(VPC\)\. Security group rules must be configured to connect to a DB cluster\. The following list describes the rules for each VPC option:
+  + **Default VPC** — If your AWS account has a default VPC in the AWS Region, that VPC is configured to support DB clusters\. If you specify the default VPC when you create the DB cluster:
+    + Make sure to create a *VPC security group* that authorizes connections from the application or service to the Aurora DB cluster\. Use the **Security Group** option on the VPC console or the AWS CLI to create VPC security groups\. For information, see [Step 4: Create a VPC security group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\.
+    + You must specify the default DB subnet group\. If this is the first DB cluster you have created in the AWS Region, Amazon RDS will create the default DB subnet group when it creates the DB cluster\.
   + **User\-defined VPC** — If you want to specify a user\-defined VPC when you create a DB cluster:
-    + You must create a **VPC security group** that authorizes connections from the application or service to the Aurora DB cluster with the database\. Note that you must use the [Amazon EC2 API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC Console to create VPC security groups\. For information, see [Step 4: Create a VPC security group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\.\.
+    + Make sure to create a *VPC security group* that authorizes connections from the application or service to the Aurora DB cluster\. Use the **Security Group** option on the VPC console or the AWS CLI to create VPC security groups\. For information, see [Step 4: Create a VPC security group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\.
     + The VPC must meet certain requirements in order to host DB clusters, such as having at least two subnets, each in a separate availability zone\. For information, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
     + You must specify a DB subnet group that defines which subnets in that VPC can be used by the DB cluster\. For information, see the DB Subnet Group section in [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#Overview.RDSVPC.Create)\.
-+ Do you need failover support? On Aurora, a Multi\-AZ deployment creates a primary instance and Aurora Replicas\. You can configure the primary instance and Aurora Replicas to be in different Availability Zones for failover support\. We recommend Multi\-AZ deployments for production workloads to maintain high availability\. For development and test purposes, you can use a non\-Multi\-AZ deployment\. For more information, see [High availability for Amazon Aurora](Concepts.AuroraHighAvailability.md)\. 
-+ Does your AWS account have policies that grant the permissions needed to perform Amazon RDS operations? If you are connecting to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Identity and access management in Amazon Aurora](UsingWithRDS.IAM.md)\.
-+ What TCP/IP port will your database be listening on? The firewall at some companies may block connections to the default port for your database engine\. If your company firewall blocks the default port, choose another port for the new DB cluster\. Note that once you create a DB cluster that listens on a port you specify, you can change the port by modifying the DB cluster\.
-+ What region do you want your database in? Having the database close in proximity to the application or web service could reduce network latency\.
++ **High availability: **Do you need failover support? On Aurora, a Multi\-AZ deployment creates a primary instance and Aurora Replicas\. You can configure the primary instance and Aurora Replicas to be in different Availability Zones for failover support\. We recommend Multi\-AZ deployments for production workloads to maintain high availability\. For development and test purposes, you can use a non\-Multi\-AZ deployment\. For more information, see [High availability for Amazon Aurora](Concepts.AuroraHighAvailability.md)\. 
++ **IAM policies: **Does your AWS account have policies that grant the permissions needed to perform Amazon RDS operations? If you are connecting to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Identity and access management in Amazon Aurora](UsingWithRDS.IAM.md)\.
++ **Open ports: **What TCP/IP port will your database be listening on? The firewall at some companies might block connections to the default port for your database engine\. If your company firewall blocks the default port, choose another port for the new DB cluster\. Note that once you create a DB cluster that listens on a port you specify, you can change the port by modifying the DB cluster\.
++ **AWS Region: **What AWS Region do you want your database in? Having the database close in proximity to the application or web service could reduce network latency\. For more information, see [ Regions and Availability Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
 
 Once you have the information you need to create the security group and the DB cluster, continue to the next step\.
 
 ## Provide access to the DB cluster in the VPC by creating a security group<a name="CHAP_SettingUp_Aurora.SecurityGroup"></a>
 
-Your DB cluster will most likely be created in a VPC\. Security groups provide access to the DB cluster in the VPC\. They act as a firewall for the associated DB cluster, controlling both inbound and outbound traffic at the cluster level\. DB clusters are created by default with a firewall and a default security group that prevents access to the DB cluster\. You must therefore add rules to a security group that enable you to connect to your DB cluster\. Use the network and configuration information you determined in the previous step to create rules to allow access to your DB cluster\.
+Your DB cluster will be created in a VPC\. Security groups provide access to the DB cluster in the VPC\. They act as a firewall for the associated DB cluster, controlling both inbound and outbound traffic at the cluster level\. DB clusters are created by default with a firewall and a default security group that prevents access to the DB cluster\. You must therefore add rules to a security group that enable you to connect to your DB cluster\. Use the network and configuration information you determined in the previous step to create rules to allow access to your DB cluster\.
 
-The security group you need to create is a *VPC security group*, unless you have a legacy DB cluster not in a VPC that requires a* DB security group*\. If you created your AWS account after March 2013, chances are very good that you have a default VPC, and your DB cluster will be created in that VPC\. DB clusters in a VPC require that you add rules to a VPC security group to allow access to the cluster\.
+For example, if you have an application that will access a database on your DB cluster in a VPC, you must add a custom TCP rule that specifies the port range and IP addresses that application will use to access the database\. If you have an application on an Amazon EC2 cluster, you can use the VPC security group you set up for the Amazon EC2 cluster\.
 
-For example, if you have an application that will access a database on your DB cluster in a VPC, you must add a Custom TCP rule that specifies the port range and IP addresses that application will use to access the database\. If you have an application on an Amazon EC2 cluster, you can use the VPC security group you set up for the Amazon EC2 cluster\.
+For more information about creating a VPC for use with Aurora, see [How to create a VPC for use with Amazon Aurora](Aurora.CreateVPC.md)\. For information about common scenarios for accessing a DB instance, see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\.
 
 **To create a VPC security group**
 
 1. Sign in to the AWS Management Console and open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc](https://console.aws.amazon.com/vpc)\.
+**Note**  
+Make sure you are in the VPC console, not the RDS console\.
 
-1. In the top right corner of the AWS Management Console, select the region in which you want to create the VPC security group and the DB cluster\. In the list of Amazon VPC resources for that region, it should show that you have at least one VPC and several Subnets\. If it does not, you do not have a default VPC in that region\.
+1. In the top right corner of the AWS Management Console, choose the AWS Region where you want to create your VPC security group and DB cluster\. In the list of Amazon VPC resources for that AWS Region, you should see at least one VPC and several subnets\. If you don't, you don't have a default VPC in that AWS Region\.
 
 1. In the navigation pane, choose **Security Groups**\.
 
 1. Choose **Create security group**\.
 
-1. On the **Create Security Group** page, type the **Security group name** and **Description**\. Select the **VPC** that you want to create your DB cluster in\. Choose **Create**\.
+   The **Create security group** page appears\.
 
-1. Select the VPC security group that you created\. The details pane at the bottom of the console window displays the details for the security group, and tabs for working with inbound and outbound rules\. Choose the **Inbound Rules** tab\.
+1. In **Basic details**, enter the **Security group name** and **Description**\. For **VPC**, choose the VPC that you want to create your DB cluster in\.
 
-1. On the **Inbound Rules** tab, choose **Edit rules**, and then choose **Add rule**\. From the **Type** list, select **Custom TCP Rule**\. Type the port value you will use for your DB cluster in **Port Range**, and then type the IP address range \(CIDR value\) from where you will access the cluster, or select a security group name in **Source**\.
+1. In **Inbound rules**, choose **Add rule**\.
 
-1. If you need to add more IP addresses or different port ranges, choose **Add Rule**\.
+   1. For **Type**, choose **Custom TCP**\.
 
-1. Choose **Save rules**\.
+   1. For **Port range**, enter the port value to use for your DB cluster\.
 
-1. If necessary, you can use the **Outbound Rules** tab to add rules for outbound traffic\.
+   1. For **Source**, choose a security group name or type the IP address range \(CIDR value\) from where you access the DB cluster\. If you choose **My IP**, this allows access to the DB cluster from the IP address detected in your browser\.
 
-You will use the VPC security group you just created as the security group for your DB cluster when you create it\.
+1. If you need to add more IP addresses or different port ranges, choose **Add rule** and enter the information for the rule\.
 
-Finally, a quick note about VPC subnets: If you use a default VPC, a default subnet group spanning all of the VPC's subnets has already been created for you\. When you create a DB cluster, you can select the default VPC and use **default** for the **DB Subnet Group**\.
+1. \(Optional\) In **Outbound rules**, add rules for outbound traffic\. By default, all outbound traffic is allowed\.
 
-Once you have completed the setup requirements, you can use your requirements and the security group you created to launch a DB cluster\. For information on creating a DB cluster, see the relevant documentation in the following table: 
+1. Choose **Create security group**\.
 
-After setting up, you can create a test Amazon Aurora DB cluster\. For instructions, see [Getting started with Amazon Aurora](CHAP_GettingStartedAurora.md)\.
+You can use the VPC security group you just created as the security group for your DB cluster when you create it\.
+
+**Note**  
+If you use a default VPC, a default subnet group spanning all of the VPC's subnets is created for you\. When you create a DB cluster, you can select the default VPC and use **default** for **DB Subnet Group**\.
+
+Once you have completed the setup requirements, you can create a DB cluster using your requirements and security group by following the instructions in [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\. For information about getting started by creating a DB cluster that uses a specific DB engine, see [Getting started with Amazon Aurora](CHAP_GettingStartedAurora.md)\.

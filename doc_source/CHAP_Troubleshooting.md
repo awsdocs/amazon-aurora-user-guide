@@ -158,7 +158,7 @@ Some MySQL replication issues also apply to Aurora MySQL\. You can diagnose and 
 
 After you create a MySQL read replica and the replica is available, Amazon RDS first replicates the changes made to the source DB instance from the time the read replica create operation started\. During this phase, the replication lag time for the read replica is greater than 0\. You can monitor this lag time in Amazon CloudWatch by viewing the Amazon RDS `AuroraBinlogReplicaLag` metric\.
 
-The `AuroraBinlogReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the MySQL `SHOW SLAVE STATUS` command\. For more information, see [SHOW SLAVE STATUS](https://dev.mysql.com/doc/refman/8.0/en/show-slave-status.html)\. When the `AuroraBinlogReplicaLag` metric reaches 0, the replica has caught up to the source DB instance\. If the `AuroraBinlogReplicaLag` metric returns \-1, replication might not be active\. To troubleshoot a replication error, see [Diagnosing and resolving a MySQL read replication failure](#CHAP_Troubleshooting.MySQL.RR)\. A `AuroraBinlogReplicaLag` value of \-1 can also mean that the `Seconds_Behind_Master` value can't be determined or is `NULL`\.
+The `AuroraBinlogReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the MySQL `SHOW SLAVE STATUS` command\. For more information, see [SHOW SLAVE STATUS](https://dev.mysql.com/doc/refman/8.0/en/show-replica-status.html)\. When the `AuroraBinlogReplicaLag` metric reaches 0, the replica has caught up to the source DB instance\. If the `AuroraBinlogReplicaLag` metric returns \-1, replication might not be active\. To troubleshoot a replication error, see [Diagnosing and resolving a MySQL read replication failure](#CHAP_Troubleshooting.MySQL.RR)\. A `AuroraBinlogReplicaLag` value of \-1 can also mean that the `Seconds_Behind_Master` value can't be determined or is `NULL`\.
 
 The `AuroraBinlogReplicaLag` metric returns \-1 during a network outage or when a patch is applied during the maintenance window\. In this case, wait for network connectivity to be restored or for the maintenance window to end before you check the `AuroraBinlogReplicaLag` metric again\.
 
@@ -220,7 +220,7 @@ If a replication error is fixed, the **Replication State** changes to **replicat
 
 ### Replication stopped error<a name="CHAP_Troubleshooting.MySQL.ReplicationStopped"></a>
 
-When you call the `mysql.rds_skip_repl_error` command, you might receive the following error message: `Slave is down or disabled.`
+When you call the `mysql.rds_skip_repl_error` command, you might receive an error message stating that replication is down or disabled\.
 
 This error message appears because replication is stopped and can't be restarted\.
 

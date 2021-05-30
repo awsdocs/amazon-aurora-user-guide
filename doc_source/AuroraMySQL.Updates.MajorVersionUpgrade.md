@@ -1,4 +1,4 @@
-# Upgrading the major version of an Aurora MySQL DB cluster from 1\.x to 2\.x<a name="AuroraMySQL.Updates.MajorVersionUpgrade"></a>
+# Upgrading the major version of an Aurora MySQL DB cluster from 1\.x to 2\.x<a name="AuroraMySQL.Updates.MajorVersionUpgrade"></a><a name="mvu"></a>
 
  In an Aurora MySQL version number such as 2\.08\.1, the 2 represents the major version\. Aurora MySQL version 1 is compatible with MySQL 5\.6 and Aurora MySQL version 2 is compatible with MySQL 5\.7\. 
 

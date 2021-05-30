@@ -75,8 +75,8 @@ Support for this feature varies by Aurora database engine and version\. The foll
 | Asia Pacific \(Sydney\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
 | Asia Pacific \(Tokyo\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
 | Canada \(Central\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
-| China \(Beijing\) | \- | \- | \- | \- | \- | 
-| China \(Ningxia\) | \- | \- | \- | \- | \- | 
+| China \(Beijing\) | Version 1\.22\.2 and later | Version 2\.07\.2 and later | Version 10\.12 and later | Version 11\.7 and later | Version 12\.4 and later | 
+| China \(Ningxia\) | Version 1\.22\.2 and later | Version 2\.07\.2 and later | Version 10\.12 and later | Version 11\.7 and later | Version 12\.4 and later | 
 | Europe \(Frankfurt\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
 | Europe \(Ireland\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 
 | Europe \(London\) | Version 5\.6\.10a; Version 1\.22 and later | Version 2\.07 and later | Version 10\.11 and later | Version 11\.7 and later | Version 12\.4 and later | 

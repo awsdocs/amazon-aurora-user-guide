@@ -86,7 +86,7 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.t3 – Next generation burstable performance instance classes | 
 | db\.t3\.2xlarge | No | No | 
 | db\.t3\.xlarge | No | No | 
-| db\.t3\.large | No | 11\.6 and higher, 10\.11 and higher | 
+| db\.t3\.large | 2\.10 and higher | 11\.6 and higher, 10\.11 and higher | 
 | db\.t3\.medium | 1\.14\.4 and higher | 10\.7 and higher | 
 | db\.t3\.small | 1\.14\.4 and higher | No | 
 | db\.t3\.micro | No | No | 
@@ -302,4 +302,4 @@ For information about Aurora DB engine support for each DB instance class, see [
 | db\.t2\.medium | 2 | Variable | 4 | — | Moderate | 
 | db\.t2\.small | 1 | Variable | 2 | — | Low | 
 
-\*\*\* The r3\.8xlarge instance doesn't have dedicated EBS bandwidth and therefore doesn't offer EBS optimization\. On this instance, network traffic and Amazon EBS traffic share the same 10\-gigabit network interface\.
+\*\* The r3\.8xlarge instance doesn't have dedicated EBS bandwidth and therefore doesn't offer EBS optimization\. On this instance, network traffic and Amazon EBS traffic share the same 10\-gigabit network interface\.

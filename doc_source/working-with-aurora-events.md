@@ -5,4 +5,4 @@ An *event* indicates a change in an environment\. This can be an AWS environment
 **Topics**
 + [Viewing Amazon RDS events](USER_ListEvents.md)
 + [Using Amazon RDS event notification](USER_Events.md)
-+ [Getting CloudWatch Events and Amazon EventBridge events for Amazon Aurora](rds-cloud-watch-events.md)
++ [Creating a rule that triggers on an Amazon Aurora event](rds-cloud-watch-events.md)

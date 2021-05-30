@@ -22,7 +22,7 @@
    For example, to upgrade to Aurora MySQL version 2\.03\.2, set the `--engine-version` option to `5.7.mysql_aurora.2.03.2`\. Specify the `--apply-immediately` option to immediately update the engine version for your DB cluster\. 
 +  **By using the RDS API** – Call the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) API operation, and specify the name of your DB cluster for the `DBClusterIdentifier` parameter and the engine version for the `EngineVersion` parameter\. Set the `ApplyImmediately` parameter to `true` to immediately update the engine version for your DB cluster\. 
 
-## Enabling automatic upgrades between minor Aurora MySQL versions<a name="AuroraMySQL.Updates.AMVU"></a>
+## Enabling automatic upgrades between minor Aurora MySQL versions<a name="AuroraMySQL.Updates.AMVU"></a><a name="amvu"></a>
 
  For an Amazon Aurora MySQL DB cluster, you can specify that Aurora upgrades the DB cluster automatically to new minor versions as those versions are released\. You do so by enabling the automatic minor version upgrade property of the DB cluster using the AWS Management Console, AWS CLI, or the RDS API\. 
 
@@ -112,26 +112,54 @@ aws rds describe-db-instances \
 **Note**  
  If your current Aurora MySQL version is 1\.14\.x but lower than 1\.14\.4, you can upgrade only to 1\.14\.4 \(which supports db\.r4 instance classes\)\. Also, to upgrade from 1\.14\.x to a higher minor Aurora MySQL version, such as 1\.17, the 1\.14\.x version must be 1\.14\.4\. 
 
-## Using zero\-downtime patching<a name="AuroraMySQL.Updates.ZDP"></a>
+## Using zero\-downtime patching<a name="AuroraMySQL.Updates.ZDP"></a><a name="zdp"></a>
 
- The zero\-downtime patching \(ZDP\) feature attempts, on a best\-effort basis, to preserve client connections through an engine patch\. If ZDP completes successfully, application sessions are preserved and the database engine restarts while patching\. The database engine restart can cause a drop in throughput lasting approximately 5 seconds\. 
+ Performing upgrades for Aurora MySQL DB clusters involves the possibility of an outage when the database is shut down and while it's being upgraded\. By default, if you start the upgrade while the database is busy, you lose all the connections and transactions that the DB cluster is processing\. If you wait until the database is idle to perform the upgrade, you might have to wait a long time\. 
 
- ZDP is available in Aurora MySQL 1\.13 and later, compatible with MySQL 5\.6\. It's also available in Aurora MySQL 2\.07 and later, compatible with MySQL 5\.7\. 
+ The zero\-downtime patching \(ZDP\) feature attempts, on a best\-effort basis, to preserve client connections through an Aurora MySQL upgrade\. If ZDP completes successfully, application sessions are preserved and the database engine restarts while the upgrade is in progress\. The database engine restart can cause a drop in throughput lasting for a few seconds to approximately one minute\. 
+
+ ZDP is available in Aurora MySQL 2\.07\.2 through 2\.07\.4, and 2\.10\.0 and higher, compatible with MySQL 5\.7\.  
+
+ ZDP only applies to Aurora MySQL DB instances that use the `db.t2` or `db.t3` instance classes\. 
+
+ You can see metrics of important attributes during ZDP in the MySQL error log\. You can also see information about when Aurora MySQL uses ZDP or chooses not use use ZDP on the **Events** page in the AWS console\. 
+
+ In Aurora MySQL 2\.10 and higher, Aurora can perform a zero\-downtime patch when binary log replication is enabled\. Aurora MySQL automatically drops the connection to the binlog target during a ZDP operation\. Aurora MySQL automatically reconnects to the binlog target and resumes replication after the restart finishes\. 
+
+ ZDP also works in combination with the reboot enhancements in Aurora MySQL 2\.10 and higher\. Patching the writer DB instance automatically patches readers at the same time\. After performing the patch, Aurora restores the connections on both the writer and reader DB instances\. Before Aurora MySQL 2\.10, ZDP applies only to the writer DB instance of a cluster\. 
 
  ZDP might not complete successfully under the following conditions: 
 +  Long\-running queries or transactions are in progress\. If Aurora can perform ZDP in this case, any open transactions are canceled\. 
-+  Binary logging is enabled or binary log replication is in\-progress\. 
 +  Open Secure Socket Layer \(SSL\) connections exist\. 
 +  Temporary tables or table locks are in use, for example while data definition language \(DDL\) statements run\. If Aurora can perform ZDP in this case, any open transactions are canceled\. 
 +  Pending parameter changes exist\. 
 
- Starting in Aurora MySQL 1\.19 and 2\.07, the ZDP mechanism is improved\. These improvements make ZDP more likely to succeed when there are long\-running transactions, binary logging, table locks, or temporary tables\. 
+**Tip**  
+ To take full advantage of ZDP, upgrade your Aurora MySQL clusters to at least version 2\.10 or 1\.19\. Those versions have improvements to the ZDP mechanism\. The improvements make ZDP more likely to succeed when there are long\-running transactions, binary logging, table locks, or temporary tables\.   
+ You can see details of the ZDP enhancements for specific releases in [Aurora MySQL database engine updates 2021\-05\-25 \(version 2\.10\.0\)](AuroraMySQL.Updates.2100.md), [Aurora MySQL database engine updates 2019\-11\-25 \(version 2\.07\.0\)](AuroraMySQL.Updates.2070.md), and [Aurora MySQL database engine updates 2019\-02\-07 \(version 1\.19\.0\)](AuroraMySQL.Updates.1190.md) 
 
  If no suitable time window for performing ZDP becomes available because of one or more of these conditions, patching reverts to the standard behavior\. 
 
-**Note**  
- ZDP applies only to the primary instance of a DB cluster\. ZDP isn't applicable to Aurora Replicas\.   
- Prepared statements don't prevent ZDP, but they aren't preserved after ZDP completes\. 
+ Although connections remain intact following a successful ZDP operation, some variables and features are reinitialized\. The following kinds of information aren't preserved through a restart caused by zero\-downtime patching: 
++  Global variables\. Aurora restores session variables, but it doesn't restore global variables after the restart\. 
++  Status variables\. In particular, the uptime value reported by the engine status is reset after a restart that uses the ZDR or ZDP mechanisms\. 
++  `LAST_INSERT_ID`\.  
++  In\-memory `auto_increment` state for tables\. The in\-memory auto\-increment state is reinitialized\. For more information about auto\-increment values, see [MySQL Reference Manual](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html#innodb-auto-increment-initialization)\. 
++  Diagnostic information from `INFORMATION_SCHEMA` and `PERFORMANCE_SCHEMA` tables\. This diagnostic information also appears in the output of commands such as `SHOW PROFILE` and `SHOW PROFILES`\.  
+
+ The following activities related to zero\-downtime restart are reported on the **Events** page: 
++  Attempting to upgrade the database with zero downtime\. 
++  Attempt to upgrade the database with zero downtime finished\. The event reports how long the process took\. The event also reports how many connections were preserved during the restart and how many connections were dropped\. You can consult the database error log to see more details about what happened during the restart\. 
+
+ The following table summarizes how ZDP works for upgrading from and to specific Aurora MySQL versions\. The instance class of the DB instance also affects whether Aurora uses the ZDP mechanism\. 
+
+
+|  Original version  |  Upgraded version  |  Does ZDP apply?  | 
+| --- | --- | --- | 
+|   Aurora MySQL 1\.\*   |   Any   |   No   | 
+|   Aurora MySQL 2\.\*, before 2\.07\.2   |   Any   |   No   | 
+|   Aurora MySQL 2\.07\.2, 2\.07\.3   |   2\.07\.4, 2\.10\.\*   |   Yes, on the writer instance for T2 and T3 instance classes only\. Aurora only performs ZDP if a quiet point is found before a timeout occurs\. After the timeout, Aurora performs a regular restart\.   | 
+|   2\.07\.4   |   2\.10\.\*   |   Yes, on the writer instance for T2 and T3 instances only\. Aurora rolls back transactions for active and idle transactions\. Connections using SSL, temporary tables, table locks, or user locks are disconnected\. Aurora might restart the engine and drop all connections if the engine takes too long to start after ZDP finishes\.   | 
 
 ## Alternative blue\-green upgrade technique<a name="AuroraMySQL.Upgrading.BlueGreen"></a>
 

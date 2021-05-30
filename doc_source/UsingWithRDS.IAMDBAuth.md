@@ -54,3 +54,6 @@ We recommend the following when using the Aurora MySQL DB engine:
 + Use IAM database authentication when your application requires fewer than 200 new IAM database authentication connections per second\.
 
   The database engines that work with Amazon Aurora don't impose any limits on authentication attempts per second\. However, when you use IAM database authentication, your application must generate an authentication token\. Your application then uses that token to connect to the DB cluster\. If you exceed the limit of maximum new connections per second, then the extra overhead of IAM database authentication can cause connection throttling\. The extra overhead can cause even existing connections to drop\.   For information about the maximum total connections for Aurora MySQL, see [Maximum connections to an Aurora MySQL DB instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections)\. 
+
+**Note**  
+These recommendations don't apply to Aurora PostgreSQL DB clusters\.

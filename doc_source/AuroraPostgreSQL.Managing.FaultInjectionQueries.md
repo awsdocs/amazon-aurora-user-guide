@@ -1,10 +1,10 @@
-# Testing Amazon Aurora PostgreSQL using fault injection queries<a name="AuroraPostgreSQL.Managing.FaultInjectionQueries"></a>
+# Testing Amazon Aurora PostgreSQL by using fault injection queries<a name="AuroraPostgreSQL.Managing.FaultInjectionQueries"></a>
 
 You can test the fault tolerance of your Aurora PostgreSQL DB cluster by using fault injection queries\. Fault injection queries are issued as SQL commands to an Amazon Aurora instance\. Fault injection queries enable you to schedule simulated tests of the following events:
 
 **Topics**
 + [Testing an instance crash](#AuroraPostgreSQL.Managing.FaultInjectionQueries.Crash)
-+ [Testing an Aurora replica failure](#AuroraPostgreSQL.Managing.FaultInjectionQueries.ReplicaFailure)
++ [Testing an Aurora Replica failure](#AuroraPostgreSQL.Managing.FaultInjectionQueries.ReplicaFailure)
 + [Testing a disk failure](#AuroraPostgreSQL.Managing.FaultInjectionQueries.DiskFailure)
 + [Testing disk congestion](#AuroraPostgreSQL.Managing.FaultInjectionQueries.DiskCongestion)
 
@@ -20,9 +20,9 @@ Version 3\.2, which is compatible with PostgreSQL version 11\.7\.
 
 ## Testing an instance crash<a name="AuroraPostgreSQL.Managing.FaultInjectionQueries.Crash"></a>
 
-You can force a crash of an Aurora PostgreSQL instance using the fault injection query function `aurora_inject_crash()`\.
+You can force a crash of an Aurora PostgreSQL instance by using the fault injection query function `aurora_inject_crash()`\.
 
-For this fault injection query, a failover will not occur\. If you want to test a failover, then you can choose the **Failover** instance action for your DB cluster in the RDS console, or use the [failover\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html) AWS CLI command or the [FailoverDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html) RDS API operation\. 
+For this fault injection query, a failover does not occur\. If you want to test a failover, then you can choose the **Failover** instance action for your DB cluster in the RDS console, or use the [failover\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html) AWS CLI command or the [FailoverDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html) RDS API operation\. 
 
 **Syntax**
 
@@ -41,18 +41,18 @@ A crash of the dispatcher on the primary instance for the Aurora DB cluster is s
 *'node'*  
 A crash of both the PostgreSQL\-compatible database and the dispatcher for the Amazon Aurora instance is simulated\.
 
-## Testing an Aurora replica failure<a name="AuroraPostgreSQL.Managing.FaultInjectionQueries.ReplicaFailure"></a>
+## Testing an Aurora Replica failure<a name="AuroraPostgreSQL.Managing.FaultInjectionQueries.ReplicaFailure"></a>
 
-You can simulate the failure of an Aurora Replica using the fault injection query function `aurora_inject_replica_failure()`\.
+You can simulate the failure of an Aurora Replica by using the fault injection query function `aurora_inject_replica_failure()`\.
 
-An Aurora Replica failure will block all requests to an Aurora Replica or all Aurora Replicas in the DB cluster for a specified time interval\. When the time interval completes, the affected Aurora Replicas will be automatically synchronized with the primary instance\. 
+An Aurora Replica failure blocks replication to the Aurora Replica or all Aurora Replicas in the DB cluster by the specified percentage for the specified time interval\. When the time interval completes, the affected Aurora Replicas are automatically synchronized with the primary instance\.
 
 **Syntax**
 
 ```
 1. SELECT aurora_inject_replica_failure(
 2.    percentage_of_failure, 
-3.    quantity, 
+3.    time_interval, 
 4.    'replica_name'
 5. );
 ```Options
@@ -60,10 +60,10 @@ An Aurora Replica failure will block all requests to an Aurora Replica or all Au
 This fault injection query takes the following parameters:
 
 *percentage\_of\_failure*  
-The percentage of requests to block during the failure event\. This value can be a double between 0 and 100\. If you specify 0, then no requests are blocked\. If you specify 100, then all requests are blocked\.\.
+The percentage of replication to block during the failure event\. This value can be a double between 0 and 100\. If you specify 0, then no replication is blocked\. If you specify 100, then all replication is blocked\.
 
-*quantity*  
-The amount of time to simulate the Aurora Replica failure\. The interval is in seconds\. For example, if the value is 20 the simulation will run for 20 seconds\.  
+*time\_interval*  
+The amount of time to simulate the Aurora Replica failure\. The interval is in seconds\. For example, if the value is 20, the simulation runs for 20 seconds\.  
 Take care when specifying the time interval for your Aurora Replica failure event\. If you specify too long an interval, and your writer instance writes a large amount of data during the failure event, then your Aurora DB cluster might assume that your Aurora Replica has crashed and replace it\.
 
 *replica\_name*  
@@ -76,9 +76,9 @@ postgres=> SELECT server_id FROM aurora_replica_status();
 
 ## Testing a disk failure<a name="AuroraPostgreSQL.Managing.FaultInjectionQueries.DiskFailure"></a>
 
-You can simulate a disk failure for an Aurora PostgreSQL DB cluster using the fault injection query function `aurora_inject_disk_failure()`\.
+You can simulate a disk failure for an Aurora PostgreSQL DB cluster by using the fault injection query function `aurora_inject_disk_failure()`\.
 
-During a disk failure simulation, the Aurora PostgreSQL DB cluster randomly marks disk segments as faulting\. Requests to those segments will be blocked for the duration of the simulation\.
+During a disk failure simulation, the Aurora PostgreSQL DB cluster randomly marks disk segments as faulting\. Requests to those segments are blocked for the duration of the simulation\.
 
 **Syntax**
 
@@ -87,7 +87,7 @@ During a disk failure simulation, the Aurora PostgreSQL DB cluster randomly mark
 2.    percentage_of_failure, 
 3.    index, 
 4.    is_disk, 
-5.    quantity
+5.    time_interval
 6. );
 ```Options
 
@@ -97,19 +97,19 @@ This fault injection query takes the following parameters:
 The percentage of the disk to mark as faulting during the failure event\. This value can be a double between 0 and 100\. If you specify 0, then none of the disk is marked as faulting\. If you specify 100, then the entire disk is marked as faulting\.
 
 *index*  
-A specific logical block of data in which to simulate the failure event\. If you exceed the range of available logical blocks or storage nodes data, you will receive an error that tells you the maximum index value that you can specify\. To avoid this error, see [Displaying volume status for an Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)\.
+A specific logical block of data in which to simulate the failure event\. If you exceed the range of available logical blocks or storage nodes data, you receive an error that tells you the maximum index value that you can specify\. To avoid this error, see [Displaying volume status for an Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)\.
 
 *is\_disk*  
 Indicates whether the injection failure is to a logical block or a storage node\. Specifying true means injection failures are to a logical block\. Specifying false means injection failures are to a storage node\.
 
-*quantity*  
-The amount of time to simulate the Aurora Replica failure\. The interval is in seconds\. For example, if the value is 20 the simulation will run for 20 seconds\.
+*time\_interval*  
+The amount of time to simulate the Aurora Replica failure\. The interval is in seconds\. For example, if the value is 20, the simulation runs for 20 seconds\.
 
 ## Testing disk congestion<a name="AuroraPostgreSQL.Managing.FaultInjectionQueries.DiskCongestion"></a>
 
-You can simulate a disk failure for an Aurora PostgreSQL DB cluster using the fault injection query function `aurora_inject_disk_congestion()`\.
+You can simulate a disk failure for an Aurora PostgreSQL DB cluster by using the fault injection query function `aurora_inject_disk_congestion()`\.
 
-During a disk congestion simulation, the Aurora PostgreSQL DB cluster randomly marks disk segments as congested\. Requests to those segments will be delayed between the specified minimum and maximum delay time for the duration of the simulation\.
+During a disk congestion simulation, the Aurora PostgreSQL DB cluster randomly marks disk segments as congested\. Requests to those segments are delayed between the specified minimum and maximum delay time for the duration of the simulation\.
 
 **Syntax**
 
@@ -118,7 +118,7 @@ During a disk congestion simulation, the Aurora PostgreSQL DB cluster randomly m
 2.    percentage_of_failure, 
 3.    index, 
 4.    is_disk, 
-5.    quantity, 
+5.    time_interval, 
 6.    minimum, 
 7.    maximum
 8. );
@@ -131,13 +131,13 @@ The percentage of the disk to mark as congested during the failure event\. This 
 
 *index*  
 A specific logical block of data or storage node to use to simulate the failure event\.  
-If you exceed the range of available logical blocks or storage nodes of data, you will receive an error that tells you the maximum index value that you can specify\. To avoid this error, see [Displaying volume status for an Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)\.
+If you exceed the range of available logical blocks or storage nodes of data, you receive an error that tells you the maximum index value that you can specify\. To avoid this error, see [Displaying volume status for an Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)\.
 
 *is\_disk*  
 Indicates whether the injection failure is to a logical block or a storage node\. Specifying true means injection failures are to a logical block\. Specifying false means injection failures are to a storage node\.
 
-*quantity*  
-The amount of time to simulate the Aurora Replica failure\. The interval is in seconds\. For example, if the value is 20 the simulation will run for 20 seconds\.
+*time\_interval*  
+The amount of time to simulate the Aurora Replica failure\. The interval is in seconds\. For example, if the value is 20, the simulation runs for 20 seconds\.
 
 *minimum, maximum*  
-The minimum and maximum amount of congestion delay, in milliseconds\. Valid values range from 0\.0 to 100\.0 milliseconds\. Disk segments marked as congested will be delayed for a random amount of time within the minimum and maximum range for the duration of the simulation\. The maximum value must be greater than the minimum value\.
+The minimum and maximum amount of congestion delay, in milliseconds\. Valid values range from 0\.0 to 100\.0 milliseconds\. Disk segments marked as congested are delayed for a random amount of time within the minimum and maximum range for the duration of the simulation\. The maximum value must be greater than the minimum value\.
