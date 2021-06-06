@@ -1,4 +1,4 @@
-# Amazon Aurora MySQL lab mode<a name="AuroraMySQL.Updates.LabMode"></a>
+# Amazon Aurora MySQL lab mode<a name="AuroraMySQL.Updates.LabMode"></a><a name="labmode"></a>
 
 Aurora lab mode is used to enable Aurora features that are available in the current Aurora database version, but are not enabled by default\. While Aurora lab mode features are not recommended for use in production DB clusters, you can use Aurora lab mode to enable these features for DB clusters in your development and test environments\. For more information about Aurora features available when Aurora lab mode is enabled, see [Aurora lab mode features](#AuroraMySQL.Updates.LabModeFeatures)\.
 

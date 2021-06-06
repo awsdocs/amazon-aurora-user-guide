@@ -1,6 +1,6 @@
 # Amazon Aurora PostgreSQL releases and engine versions<a name="AuroraPostgreSQL.Updates.20180305"></a>
 
-Following, you can find information about supported released versions of the Aurora PostgreSQL\-Compatible Edition database engine\. An Aurora database has two version numbers; the Aurora version number and the database engine version number\. To determine the version numbers of your Aurora PostgreSQL database, see [Identifying your versions of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Versions.md)\. 
+Following, you can find information about supported released versions of the Amazon Aurora PostgreSQL\-Compatible Edition database engine\. An Aurora database has two version numbers; the Aurora version number and the database engine version number\. To determine the version numbers of your Aurora PostgreSQL database, see [Identifying your versions of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Versions.md)\. 
 
 To determine which PostgreSQL engine versions are available in an AWS Region, use the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\. For example:
 
@@ -209,7 +209,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more
 
 **Additional improvements and enhancements**
 
-1. You can now use `ps_replication_slot_advance` to advance a logical replication slot for the roles `rds_replication` and `rds_superuser`\.
+1. You can now use `pg_replication_slot_advance` to advance a logical replication slot for the roles `rds_replication` and `rds_superuser`\.
 
 1. Improved the asynchronous mode performance of database activity streams\.
 
@@ -289,7 +289,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.8\. For more
 
 1. Fixed an S3 import bug that reported ERROR: HTTP 403\. Permission denied when importing data from a file inside an S3 subfolder\.
 
-1. You can now use `ps_replication_slot_advance` to advance a logical replication slot for the roles `rds_replication` and `rds_superuser`\.
+1. You can now use `pg_replication_slot_advance` to advance a logical replication slot for the roles `rds_replication` and `rds_superuser`\.
 
 1. Improved performance of the asynchronous mode for database activity streams\.
 
@@ -332,7 +332,7 @@ You can find the following improvements in this release\.
 
 1.  Aurora dynamically resizes your cluster storage space\. With dynamic resizing, the storage space for your Aurora DB cluster automatically decreases when you remove data from the DB cluster\. For more information, see [Storage scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.StorageScaling)\. 
 **Note**  
- The dynamic resizing feature is being deployed in phases to the AWS Regions where Aurora is available\. Depending on the Region where your cluster is, this feature might not be available yet\. For more information, see [the What's New announcement](https://aws.amazon.com/about-aws/whats-new/2020/10/amazon-aurora-enables-dynamic-resizing-database-storage-space/)\. 
+ The dynamic resizing feature is being deployed in phases to the AWS Regions where Aurora is available\. Depending on the Region where your cluster is, this feature might not be available yet\. For more information, see [the What's New announcement](http://aws.amazon.com/about-aws/whats-new/2020/10/amazon-aurora-enables-dynamic-resizing-database-storage-space/)\. 
 
 **Critical stability enhancements**
 
@@ -947,7 +947,7 @@ You can find the following improvements in this release\.
 
 1.  Aurora dynamically resizes your cluster storage space\. With dynamic resizing, the storage space for your Aurora DB cluster automatically decreases when you remove data from the DB cluster\. For more information, see [Storage scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.StorageScaling)\. 
 **Note**  
- The dynamic resizing feature is being deployed in phases to the AWS Regions where Aurora is available\. Depending on the Region where your cluster is, this feature might not be available yet\. For more information, see [the What's New announcement](https://aws.amazon.com/about-aws/whats-new/2020/10/amazon-aurora-enables-dynamic-resizing-database-storage-space/)\. 
+ The dynamic resizing feature is being deployed in phases to the AWS Regions where Aurora is available\. Depending on the Region where your cluster is, this feature might not be available yet\. For more information, see [the What's New announcement](http://aws.amazon.com/about-aws/whats-new/2020/10/amazon-aurora-enables-dynamic-resizing-database-storage-space/)\. 
 
 **Critical stability enhancements**
 
@@ -2235,7 +2235,7 @@ You can find the following improvements in this release\.
 
 1. Improve the diagnostic data provided in the PostgreSQL error log when an out\-of\-memory error is encountered\.
 
-1. Multiple fixes to improve the reliability and performance of snapshot import from Amazon RDS for PostgreSQL to Aurora PostgreSQL\-Compatible Edition\.
+1. Multiple fixes to improve the reliability and performance of snapshot import from Amazon RDS for PostgreSQL to Amazon Aurora PostgreSQL\-Compatible Edition\.
 
 1. Multiple fixes to improve the reliability and performance of Aurora PostgreSQL read nodes\.
 
@@ -2409,4 +2409,4 @@ You can find the following improvements in this engine update:
 
 ### Aurora PostgreSQL release 1\.0\.7<a name="AuroraPostgreSQL.Updates.20180305.107"></a>
 
-This is the first generally available release of Amazon Aurora PostgreSQL\-Compatible Edition\.
+This is the first generally available release of Amazon Amazon Aurora PostgreSQL\-Compatible Edition\.

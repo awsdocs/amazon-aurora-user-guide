@@ -1,4 +1,4 @@
-# Amazon Aurora MySQL reference<a name="AuroraMySQL.Reference"></a>
+# Amazon Aurora MySQL reference<a name="AuroraMySQL.Reference"></a><a name="mysqlref"></a>
 
 This reference includes information about Aurora MySQL parameters, status variables, and general SQL extensions or differences from the community MySQL database engine\.
 
@@ -41,7 +41,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `aurora_binlog_use_large_read_buffer`  |  Yes  |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
 |  `aurora_enable_replica_log_compression`  |  Yes  |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\.   | 
 |  `aurora_enable_repl_bin_log_filtering`  |  Yes  |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\.   | 
-|  `aurora_enable_zdr`  |  Yes  |   This setting is turned on by default in Aurora MySQL 2\.10 and higher\. For more information, see [Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Availability)\.   | 
+|  `aurora_enable_zdr`  |  Yes  |   This setting is turned on by default in Aurora MySQL 2\.10 and higher\. For more information, see [Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Availability)\.   | 
 |  `aurora_load_from_s3_role`  |  Yes  |   For more information, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.   | 
 |  `aurora_select_into_s3_role`  |  Yes  |   For more information, see [Saving data from an Amazon Aurora MySQL DB cluster into text files in an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\.   | 
 |  `auto_increment_increment`  |  Yes  |  | 

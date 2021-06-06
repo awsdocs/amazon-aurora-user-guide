@@ -1,4 +1,4 @@
-# Database engine updates for Aurora MySQL Serverless clusters<a name="AuroraMySQL.Updates.ServerlessUpdates"></a>
+# Database engine updates for Aurora MySQL Serverless clusters<a name="AuroraMySQL.Updates.ServerlessUpdates"></a><a name="serverless_relnotes"></a>
 
 The following are Aurora MySQL database engine updates for Aurora MySQL Serverless DB clusters\. These release notes provide information about bug fixes, updates to the database engine, and other critical information\. Aurora Serverless v1 doesn't have its own version number\. It shares the version number \(and name\) of the Aurora database engine that supports Aurora Serverless v1\. For more information, see [Aurora Serverless v1 and Aurora database engine versions](aurora-serverless.relnotes.md)\. <a name="aurora_serverless_2x_updates"></a>
 +  [Aurora MySQL Serverless 5\.7 engine updates 2020\-06\-18 \(version 2\.07\.1\)](AuroraMySQL.Updates.serverless_2_07_01.md) <a name="aurora_serverless_1x_updates"></a>

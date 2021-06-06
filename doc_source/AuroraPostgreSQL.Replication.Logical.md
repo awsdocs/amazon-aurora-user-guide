@@ -151,7 +151,7 @@ Get the following information for the subscriber's DB instance:
 
    To do this, PostgreSQL 10\.x and later databases require that you apply AWS DMS wrapper functions to the publisher database\. For details on this and later steps, see the instructions in [Using PostgreSQL version 10\.x and later as a source for AWS DMS](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.v10) in the *AWS Database Migration Service User Guide\.*
 
-1. Sign in to the AWS Management Console and open the AWS DMS console at [https://console\.aws\.amazon\.com/dms](https://console.aws.amazon.com/dms)\. At top right, choose the same AWS Region in which the publisher and subscriber are located\.
+1. Sign in to the AWS Management Console and open the AWS DMS console at [https://console.aws.amazon.com/dms/v2](https://console.aws.amazon.com/dms/v2)\. At top right, choose the same AWS Region in which the publisher and subscriber are located\.
 
 1. Create an AWS DMS replication instance\.
 

@@ -10,7 +10,6 @@ Use the following sections to help troubleshoot problems you have with DB instan
 + [Amazon RDS DB parameter changes not taking effect](#CHAP_Troubleshooting.Parameters)
 + [Amazon Aurora MySQL out of memory issues](#CHAP_Troubleshooting.AuroraMySQLOOM)
 + [Amazon Aurora MySQL replication issues](#CHAP_Troubleshooting.MySQL)
-+ [No space left on device](#CHAP_Troubleshooting.Aurora.NoSpaceLeft)
 
  For information about debugging problems using the Amazon RDS API, see [Troubleshooting applications on Aurora](APITroubleshooting.md)\. 
 
@@ -233,25 +232,3 @@ To set the binlog retention time, use the [mysql\_rds\_set\_configuration](https
 ```
 CALL mysql.rds_set_configuration('binlog retention hours', 48);
 ```
-
-## No space left on device<a name="CHAP_Troubleshooting.Aurora.NoSpaceLeft"></a>
-
-You might encounter one of the following error messages\.
-+ From Amazon Aurora MySQL:
-
-  ```
-  ERROR 3 (HY000): Error writing file '/rdsdbdata/tmp/XXXXXXXX' (Errcode: 28 - No space left on device)
-  ```
-+ From Amazon Aurora PostgreSQL:
-
-  ```
-  ERROR: could not write block XXXXXXXX of temporary file: No space left on device.
-  ```
-
-Each DB instance in an Amazon Aurora DB cluster uses local solid state drive \(SSD\) storage to store temporary tables for a session\. This local storage for temporary tables doesn't automatically grow like the Aurora cluster volume\. Instead, the amount of local storage is limited\. The limit is based on the DB instance class for DB instances in your DB cluster\. 
-
-To show the amount of storage available for temporary tables and logs, you can use the CloudWatch metric `FreeLocalStorage`\. This metric is for per\-instance temporary volumes, not the cluster volume\. For more information on available metrics, see [Monitoring Amazon Aurora metrics with Amazon CloudWatch](Aurora.Monitoring.md)\.
-
-In some cases, you can't modify your workload to reduce the amount temporary storage required\. If so, modify your DB instances to use a DB instance class that has more local SSD storage\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
-
-For more troubleshooting information, see [ What is stored in Aurora for MySQL local storage, and how can I troubleshoot local storage issues?](https://aws.amazon.com/premiumsupport/knowledge-center/aurora-mysql-local-storage/) or [What is stored in Amazon Aurora for PostgreSQL storage, and how can I troubleshoot storage issues?](https://aws.amazon.com/premiumsupport/knowledge-center/postgresql-aurora-storage-issue/)\. 

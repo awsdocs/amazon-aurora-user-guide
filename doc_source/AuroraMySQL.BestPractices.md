@@ -1,4 +1,4 @@
-# Best practices with Amazon Aurora MySQL<a name="AuroraMySQL.BestPractices"></a>
+# Best practices with Amazon Aurora MySQL<a name="AuroraMySQL.BestPractices"></a><a name="best_practices"></a>
 
 This topic includes information on best practices and options for using or migrating data to an Amazon Aurora MySQL DB cluster\.
 

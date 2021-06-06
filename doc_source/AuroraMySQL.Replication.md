@@ -1,4 +1,4 @@
-# Single\-master replication with Amazon Aurora MySQL<a name="AuroraMySQL.Replication"></a>
+# Single\-master replication with Amazon Aurora MySQL<a name="AuroraMySQL.Replication"></a><a name="replication"></a>
 
  The Aurora MySQL replication features are key to the high availability and performance of your cluster\. Aurora makes it easy to create or resize clusters with up to 15 Aurora Replicas\. 
 
@@ -13,7 +13,7 @@
 + [Using Aurora replicas](#AuroraMySQL.Replication.Replicas)
 + [Replication options for Amazon Aurora MySQL](#AuroraMySQL.Replication.Options)
 + [Performance considerations for Amazon Aurora MySQL replication](#AuroraMySQL.Replication.Performance)
-+ [Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL replication](#AuroraMySQL.Replication.Availability)
++ [Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL](#AuroraMySQL.Replication.Availability)
 + [Monitoring Amazon Aurora MySQL replication](#AuroraMySQL.Replication.Monitoring)
 + [Replicating Amazon Aurora MySQL DB clusters across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)
 + [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)
@@ -65,24 +65,23 @@
 
  Starting in Aurora MySQL 1\.17\.4, the binlog filtering feature automatically reduces network bandwidth for replication messages\. Because the Aurora Replicas don't use the binlog information that is included in the replication messages, that data is omitted from the messages sent to those nodes\. You control this feature by changing the `aurora_enable_repl_bin_log_filtering` parameter\. This parameter is on by default\. Because this optimization is intended to be transparent, you might turn off this setting only during diagnosis or troubleshooting for issues related to replication\. For example, you can do so to match the behavior of an older Aurora MySQL cluster where this feature was not available\. 
 
-## Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL replication<a name="AuroraMySQL.Replication.Availability"></a><a name="zdr"></a>
+## Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL<a name="AuroraMySQL.Replication.Availability"></a><a name="zdr"></a>
 
- You can add multiple reader instances to your Aurora cluster to ensure that a full copy of your data is always available for you to query, even if one or more DB instances in the cluster become unavailable\. Aurora uses mechanisms known as *zero\-downtime restart* \(ZDR\) and *zero\-downtime patching* \(ZDP\) to improve high availability and minimize disruption when replicas are restarted\. 
+ The zero\-downtime restart \(ZDR\) feature can preserve some or all of the active connections to DB instances during certain kinds of restarts\. ZDR applies to restarts that Aurora performs automatically to resolve error conditions, for example when a replica begins to lag too far behind the source\. 
 
- The zero\-downtime restart \(ZDR\) feature applies to restarts that Aurora performs automatically during maintenance operations, or to resolve error conditions such as when a replica begins to lag too far behind the source\. When Aurora can use the ZDR mechanism, it preserves some or all of the active connections to the DB instance during the restart\. Any open transaction is rolled back, and your application must retry it\. 
-
- The zero\-downtime patching \(ZDP\) feature applies to restarts that you initiate during upgrade operations in your cluster\. When Aurora can use the ZDP mechanism, it preserves some or all of the active connections to the DB instance during the restart\. For information about how ZDP works with the upgrade process, see [Using zero\-downtime patching](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.ZDP)\. 
-
- Before Aurora MySQL version 2\.10, restarting the writer instance in an Aurora cluster caused all the reader instances to become unavailable at the same time\. In version 2\.10 and higher, the availability of readers is improved because reader instances don't automatically restart at the same time as the writer\. 
+**Important**  
+ The ZDR mechanism operates on a best\-effort basis\. The Aurora MySQL versions, instance classes, error conditions, compatible SQL operations, and other factors that determine where ZDR applies are subject to change at any time\. 
 
  In Aurora MySQL 1\.\* versions where ZDR is available, you enable this feature by turning on the `aurora_enable_zdr` parameter in the cluster parameter group\. ZDR for Aurora MySQL 2\.\* requires version 2\.10 and higher\. In these versions, the ZDR mechanism is turned on by default and Aurora doesn't use the `aurora_enable_zdr` parameter\. 
 
- The following activities related to zero\-downtime restart are reported on the Events page: 
-+  Attempting to restart the database with zero downtime\. 
-+  Attempting to restart the database with zero downtime because the log sequence number \(LSN\) couldn't advance\. 
-+  Attempting to restart the database with zero downtime because a read replica fell behind the primary instance\. 
-+  Attempting to restart the database with zero downtime because it's running out of memory\. 
-+  Attempt to restart the database with zero downtime finished\. The event reports how long the process took\. The event also reports how many connections were preserved during the restart and how many connections were dropped\. You can consult the database error log to see more details about what happened during the restart\. 
+ Aurora reports on the **Events** page activities related to zero\-downtime restart\. Aurora records an event when it attempts a restart using the ZDR mechanism\. This event states why Aurora performs the restart\. Then Aurora records another event when the restart finishes\. This final event reports how long the process took, and how many connections were preserved or dropped during the restart\. You can consult the database error log to see more details about what happened during the restart\. 
+
+ Although connections remain intact following a successful ZDR operation, some variables and features are reinitialized\. The following kinds of information aren't preserved through a restart caused by zero\-downtime restart: 
++  Global variables\. Aurora restores session variables, but it doesn't restore global variables after the restart\. 
++  Status variables\. In particular, the uptime value reported by the engine status is reset\. 
++  `LAST_INSERT_ID`\. 
++  In\-memory `auto_increment` state for tables\. The in\-memory auto\-increment state is reinitialized\. For more information about auto\-increment values, see [MySQL Reference Manual](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html#innodb-auto-increment-initialization)\. 
++  Diagnostic information from `INFORMATION_SCHEMA` and `PERFORMANCE_SCHEMA` tables\. This diagnostic information also appears in the output of commands such as `SHOW PROFILE` and `SHOW PROFILES`\.  
 
  The following table shows the versions, instance roles, instance classes, and other circumstances that determine whether Aurora can use the ZDR mechanism when restarting DB instances in your cluster\. 
 
@@ -92,7 +91,7 @@
 |   Aurora MySQL version 1\.\*, 1\.17\.3 and lower   |   No   |   No   |   ZDR isn't available for these versions\.   | 
 |   Aurora MySQL version 1\.\*, 1\.17\.4 and higher   |   No   |   Yes   |   In these Aurora MySQL versions, the following conditions apply to the ZDR mechanism:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  | 
 |   Aurora MySQL version 2\.\*, before 2\.10\.0   |   No   |   No   |   ZDR isn't available for these versions\. The `aurora_enable_zdr` parameter isn't available in the default cluster parameter group for Aurora MySQL version 2\.   | 
-|   Aurora MySQL version 2\.\*, 2\.10\.0 and higher   |   Yes   |   Yes   |   The ZDR mechanism is always enabled\. You don't need the `aurora_enable_zdr` parameter\.   In these Aurora MySQL versions, the following conditions apply to the ZDR mechanism:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  | 
+|   Aurora MySQL version 2\.\*, 2\.10\.0 and higher   |   Yes   |   Yes   |   The ZDR mechanism is always enabled\.   In these Aurora MySQL versions, the following conditions apply to the ZDR mechanism:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  | 
 
 ## Monitoring Amazon Aurora MySQL replication<a name="AuroraMySQL.Replication.Monitoring"></a>
 

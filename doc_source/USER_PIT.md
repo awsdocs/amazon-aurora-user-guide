@@ -6,7 +6,7 @@ When you restore a DB cluster to a point in time, the default DB security group 
 
 Restored DB instances are automatically associated with the default parameter and option groups\. However, you can apply a custom parameter group and option group by specifying them during a restore\.
 
-RDS uploads transaction logs for DB clusters to Amazon S3 every 5 minutes\. To see the latest restorable time for a DB cluster, use the AWS CLI [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command and look at the value returned in the `LatestRestorableTime` field for the DB cluster\.
+RDS uploads transaction logs for DB clusters to Amazon S3 continuously\. To see the latest restorable time for a DB cluster, use the AWS CLI [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command and look at the value returned in the `LatestRestorableTime` field for the DB cluster\.
 
 You can restore to any point in time within your backup retention period\. To see the earliest restorable time for a DB cluster, use the AWS CLI [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command and look at the value returned in the `EarliestRestorableTime` field for the DB cluster\.
 

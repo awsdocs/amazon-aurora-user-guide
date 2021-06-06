@@ -695,7 +695,7 @@ The last process in setting up IAM access is to associate the IAM role and its I
 
 **To add an IAM role for a PostgreSQL DB cluster using the console**
 
-     1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console.aws.amazon.com/rds/](https://console.aws.amazon.com/rds/)\. 
+     1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
      1. Choose the PostgreSQL DB cluster name to display its details\.
 

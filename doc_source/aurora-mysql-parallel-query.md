@@ -1,4 +1,4 @@
-# Working with parallel query for Amazon Aurora MySQL<a name="aurora-mysql-parallel-query"></a>
+# Working with parallel query for Amazon Aurora MySQL<a name="aurora-mysql-parallel-query"></a><a name="parallel_query"></a><a name="pq"></a>
 
  Following, you can find a description of the parallel query performance optimization for Amazon Aurora MySQL\-Compatible Edition\. This feature uses a special processing path for certain data\-intensive queries, taking advantage of the Aurora shared storage architecture\. Currently, Aurora MySQL versions that are compatible with MySQL 5\.6 or MySQL 5\.7 support parallel query\. Parallel query works best with Aurora MySQL DB clusters that have tables with millions of rows and analytic queries that take minutes or hours to complete\. 
 

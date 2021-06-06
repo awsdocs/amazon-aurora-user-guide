@@ -74,7 +74,7 @@ The following instance\-specific CloudWatch metrics apply to all Aurora MySQL an
 |  `NumBinaryLogFiles`  |  The number of binlog files generated\.  | Aurora MySQL |  Count  | 
 |  `Queries`  |  The average number of queries executed per second\.  |  Aurora MySQL  |  Count per second  | 
 |  `RDSToAuroraPostgreSQLReplicaLag`  |  The lag when replicating updates from the primary RDS PostgreSQL instance to other nodes in the cluster\.  |  Replica for Aurora PostgreSQL  |  Seconds  | 
-|  `ReadIOPS`  |  The average number of disk I/O operations per second\. Aurora PostgreSQL\-Compatible Edition reports read and write IOPS separately, in 1\-minute intervals\.  |  Aurora PostgreSQL  |  Count per second  | 
+|  `ReadIOPS`  |  The average number of disk I/O operations per second\. Amazon Aurora PostgreSQL\-Compatible Edition reports read and write IOPS separately, in 1\-minute intervals\.  |  Aurora PostgreSQL  |  Count per second  | 
 |  `ReadLatency`  |  The average amount of time taken per disk I/O operation\.  |  Aurora MySQL and Aurora PostgreSQL  |  Seconds  | 
 |  `ReadThroughput`  |  The average number of bytes read from disk per second\.  |  Aurora PostgreSQL  |  Bytes per second  | 
 |  `ResultSetCacheHitRatio`  |  The percentage of requests that are served by the Resultset cache\.  |  Aurora MySQL  |  Percentage  | 

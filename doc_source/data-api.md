@@ -273,7 +273,7 @@ When you use an Amazon VPC endpoint in a Data API call, all traffic between your
 
 ## Calling the Data API<a name="data-api.calling"></a>
 
-With the Data API enabled on your Aurora Serverless DB cluster, you can run SQL statements on the Aurora DB cluster by using the Data API or the AWS CLI\. The Data API supports the programming languages supported by the AWS SDKs\. For more information, see [Tools to build on AWS](https://aws.amazon.com/tools/)\.
+With the Data API enabled on your Aurora Serverless DB cluster, you can run SQL statements on the Aurora DB cluster by using the Data API or the AWS CLI\. The Data API supports the programming languages supported by the AWS SDKs\. For more information, see [Tools to build on AWS](http://aws.amazon.com/tools/)\.
 
 **Note**  
 Currently, the Data API doesn't support arrays of Universal Unique Identifiers \(UUIDs\)\.

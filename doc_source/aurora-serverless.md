@@ -96,7 +96,7 @@ However, the following limitations apply:
 + For both MySQL Client and PostgreSQL Client utilities, session variables that you might use in other environments have no effect when using TLS/SSL between client and Aurora Serverless v1\. 
 + For the MySQL Client, when connecting with TLS/SSL's `VERIFY_IDENTITY` mode, currently you need to use the MySQL 8\.0\-compatible `mysql` command\. For more information, see [Connecting to a DB instance running the MySQL database engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToInstance.html)\.
 
-Depending on the client that you use to connect to Aurora Serverless v1 DB cluster, you might not need to specify TLS/SSL to get an encrypted connection\. For example, to use the PostgreSQL Client to connect to an Aurora Serverless v1 DB cluster running Aurora PostgreSQL\-Compatible Edition, connect as you normally do\.
+Depending on the client that you use to connect to Aurora Serverless v1 DB cluster, you might not need to specify TLS/SSL to get an encrypted connection\. For example, to use the PostgreSQL Client to connect to an Aurora Serverless v1 DB cluster running Amazon Aurora PostgreSQL\-Compatible Edition, connect as you normally do\.
 
 ```
 psql -h endpoint -U user

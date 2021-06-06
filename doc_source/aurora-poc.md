@@ -1,4 +1,4 @@
-# Performing a proof of concept with Amazon Aurora<a name="aurora-poc"></a>
+# Performing a proof of concept with Amazon Aurora<a name="aurora-poc"></a><a name="proof_of_concept"></a><a name="poc"></a>
 
  Following, you can find an explanation of how to set up and run a proof of concept for Aurora\. A *proof of concept *is an investigation that you do to see if Aurora is a good fit with your application\. The proof of concept can help you understand Aurora features in the context of your own database applications and how Aurora compares with your current database environment\. It can also show what level of effort you need to move data, port SQL code, tune performance, and adapt your current management procedures\. 
 
@@ -195,7 +195,7 @@
 +  How many queries per second is Aurora processing? You can examine the **Throughput** metrics to see the figures for various kinds of operations\. 
 +  How long does it take, on average for Aurora to process a given query? You can examine the **Latency** metrics to see the figures for various kinds of operations\. 
 
- To do so, look at the **Monitoring** tab for a given Aurora cluster in the [RDS console](https://console.aws.amazon.com/rds/home) as illustrated following\. 
+ To do so, look at the **Monitoring** tab for a given Aurora cluster in the [Amazon RDS console](https://console.aws.amazon.com/rds/) as illustrated following\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraPoC01.png)
 

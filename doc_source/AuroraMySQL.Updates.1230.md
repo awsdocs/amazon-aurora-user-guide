@@ -1,4 +1,4 @@
-# Aurora MySQL database engine updates 2020\-09\-02 \(version 1\.23\.0\)<a name="AuroraMySQL.Updates.1230"></a>
+# Aurora MySQL database engine updates 2020\-09\-02 \(version 1\.23\.0\)<a name="AuroraMySQL.Updates.1230"></a><a name="1230"></a><a name="1.23.0"></a>
 
 **Version:** 1\.23\.0
 
@@ -30,7 +30,7 @@ Aurora MySQL 1\.23\.0 is generally available\. Aurora MySQL 1\.\* versions are c
 +  Improved binary log \(binlog\) processing to reduce crash recovery time and commit time latency when very large transactions are involved\. 
 +  Aurora dynamically resizes your cluster storage space\. With dynamic resizing, the storage space for your Aurora DB cluster automatically decreases when you remove data from the DB cluster\. For more information, see [Storage scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.StorageScaling)\. 
 **Note**  
- The dynamic resizing feature is being deployed in phases to the AWS Regions where Aurora is available\. Depending on the Region where your cluster is, this feature might not be available yet\. For more information, see [the What's New announcement](https://aws.amazon.com/about-aws/whats-new/2020/10/amazon-aurora-enables-dynamic-resizing-database-storage-space/)\. 
+ The dynamic resizing feature is being deployed in phases to the AWS Regions where Aurora is available\. Depending on the Region where your cluster is, this feature might not be available yet\. For more information, see [the What's New announcement](http://aws.amazon.com/about-aws/whats-new/2020/10/amazon-aurora-enables-dynamic-resizing-database-storage-space/)\. 
 
  **High priority fixes:** 
 + [CVE\-2019\-2911](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-2911)

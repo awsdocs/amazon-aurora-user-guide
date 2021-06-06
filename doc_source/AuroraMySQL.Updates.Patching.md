@@ -31,7 +31,7 @@
 **Important**  
  Until August 2020, you could specify this setting for a DB instance that was part of an Aurora MySQL DB cluster, but the setting had no effect\. Now, the setting does apply to Aurora MySQL\. If you have clusters created before August 2020, check whether the DB instances in the cluster already had the **Enable auto minor version upgrade** setting enabled\. If so, confirm that this setting is still appropriate and change it if not\. Aurora only performs the automatic upgrade if all DB instances in your cluster have this setting enabled\. 
 
- Automatic minor version upgrade doesn't apply to clusters running the LTS version for Aurora MySQL 1\.x or 2\.x\. Aurora won't automatically upgrade clusters running 2\.07\.\*, 1\.22\.\*, or other patch levels of those minor versions\. 
+ Automatic minor version upgrade applies also to clusters running the LTS version for Aurora MySQL 1\.x or 2\.x\. To prevent those clusters from being automatically upgraded, make sure to turn off the **Enable auto minor version upgrade** setting\. 
 
  Automatic minor version upgrade doesn't apply to the following kinds of Aurora MySQL clusters: 
 +  Multi\-master clusters\. 
@@ -122,7 +122,7 @@ aws rds describe-db-instances \
 
  ZDP only applies to Aurora MySQL DB instances that use the `db.t2` or `db.t3` instance classes\. 
 
- You can see metrics of important attributes during ZDP in the MySQL error log\. You can also see information about when Aurora MySQL uses ZDP or chooses not use use ZDP on the **Events** page in the AWS console\. 
+ You can see metrics of important attributes during ZDP in the MySQL error log\. You can also see information about when Aurora MySQL uses ZDP or chooses not use use ZDP on the **Events** page in the AWS Management Console\. 
 
  In Aurora MySQL 2\.10 and higher, Aurora can perform a zero\-downtime patch when binary log replication is enabled\. Aurora MySQL automatically drops the connection to the binlog target during a ZDP operation\. Aurora MySQL automatically reconnects to the binlog target and resumes replication after the restart finishes\. 
 
@@ -163,4 +163,4 @@ aws rds describe-db-instances \
 
 ## Alternative blue\-green upgrade technique<a name="AuroraMySQL.Upgrading.BlueGreen"></a>
 
- Blog post: [Performing major version upgrades for Aurora MySQL with minimum downtime](https://aws.amazon.com/blogs/database/performing-major-version-upgrades-for-amazon-aurora-mysql-with-minimum-downtime/)\. 
+ Blog post: [Performing major version upgrades for Aurora MySQL with minimum downtime](http://aws.amazon.com/blogs/database/performing-major-version-upgrades-for-amazon-aurora-mysql-with-minimum-downtime/)\. 

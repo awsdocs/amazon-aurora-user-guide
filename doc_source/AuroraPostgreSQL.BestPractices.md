@@ -99,7 +99,7 @@ myauroracluster.cluster-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432,
 myauroracluster.cluster-ro-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432
 ```
 
-Your application would read from this file to populate the host section of the JDBC connection string\. Renaming the DB Cluster causes these endpoints to change; ensure that your application handles that event should it occur\.
+Your application would read from this file to populate the host section of the JDBC connection string\. Renaming the DB cluster causes these endpoints to change; ensure that your application handles that event should it occur\.
 
 Another option is to use a list of DB instance nodes:
 
@@ -129,9 +129,9 @@ You can modify other application parameters to speed up the connection process, 
 
 You can get the host string from several sources, including the `aurora_replica_status` function and by using the Amazon RDS API\.
 
-Your application can connect to any DB instance in the DB Cluster and query the `aurora_replica_status` function to determine who the writer of the cluster is, or to find any other reader nodes in the cluster\. You can use this function to reduce the amount of time it takes to find a host to connect to, though in certain scenarios the `aurora_replica_status` function may show out of date or incomplete information in certain network failure scenarios\.
+Your application can connect to any DB instance in the DB cluster and query the `aurora_replica_status` function to determine who the writer of the cluster is, or to find any other reader nodes in the cluster\. You can use this function to reduce the amount of time it takes to find a host to connect to, though in certain scenarios the `aurora_replica_status` function may show out of date or incomplete information in certain network failure scenarios\.
 
-A good way to ensure your application can find a node to connect to is to attempt to connect to the **cluster writer****endpoint ** and then the **cluster reader****endpoint **until you can establish a readable connection\. These endpoints do not change unless you rename your DB Cluster, and thus can generally be left as static members of your application or stored in a resource file that your application reads from\.
+A good way to ensure your application can find a node to connect to is to attempt to connect to the **cluster writer****endpoint ** and then the **cluster reader****endpoint **until you can establish a readable connection\. These endpoints do not change unless you rename your DB cluster, and thus can generally be left as static members of your application or stored in a resource file that your application reads from\.
 
 After you establish a connection using one of these endpoints, you can call the `aurora_replica_status` function to get information about the rest of the cluster\. For example, the following command retrieves information with the `aurora_replica_status` function\.
 
@@ -194,20 +194,20 @@ The variable `endpointPostfix` can be a constant that your application sets, or 
 .cksc6xlmwcyw.us-east-1-beta.rds.amazonaws.com
 ```
 
-For availability purposes, a good practice is to default to using the Aurora endpoints of your DB Cluster if the API is not responding, or is taking too long to respond\. The endpoints are guaranteed to be up to date within the time it takes to update the DNS record\. This is typically less than 30 seconds\. You can store this in a resource file that your application consumes\.
+For availability purposes, a good practice is to default to using the Aurora endpoints of your DB cluster if the API is not responding, or is taking too long to respond\. The endpoints are guaranteed to be up to date within the time it takes to update the DNS record\. This is typically less than 30 seconds\. You can store this in a resource file that your application consumes\.
 
 ### Testing failover<a name="AuroraPostgreSQL.BestPracticesFastFailover.Testing"></a>
 
 In all cases you must have a DB cluster with two or more DB instances in it\.
 
 From the server side, certain APIs can cause an outage that can be used to test how your applications responds:
-+ [FailoverDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html) \- Will attempt to promote a new DB Instance in your DB Cluster to writer
++ [FailoverDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html) \- Will attempt to promote a new DB instance in your DB cluster to writer\.
+
+  The following code sample shows how you can use `failoverDBCluster` to cause an outage\. For more details about setting up an Amazon RDS client, see [Using the AWS SDK for Java](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/basics.html)\. 
 
   ```
   public void causeFailover() {
-      /*
-       * For more details about setting up an RDS client, see: http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/basics.html
-       */
+      
       final AmazonRDS rdsClient = AmazonRDSClientBuilder.defaultClient();
      
       FailoverDBClusterRequest request = new FailoverDBClusterRequest();
@@ -216,10 +216,10 @@ From the server side, certain APIs can cause an outage that can be used to test 
       rdsClient.failoverDBCluster(request);
   }
   ```
-+ [RebootDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) – Failover is not guaranteed in this API\. It will shutdown the database on the writer, though, and can be used to test how your application responds to connections dropping \(note that the **ForceFailover **parameter is not applicable for Aurora engines and instead should use the FailoverDBCluster API\)
++ [RebootDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) – Failover is not guaranteed in this API\. It will shutdown the database on the writer, though, and can be used to test how your application responds to connections dropping \(note that the **ForceFailover** parameter is not applicable for Aurora engines and instead should use the `FailoverDBCluster` API\)\.
 + [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) – Modifying the **Port **will cause an outage when the nodes in the cluster begin listening on a new port\. In general your application can respond to this failure by ensuring that only your application controls port changes and can appropriately update the endpoints it depends on, by having someone manually update the port when they make modifications at the API level, or by querying the RDS API in your application to determine if the port has changed\.
 + [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) – Modifying the **DBInstanceClass** will cause an outage\.
-+ [DeleteDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) – Deleting the primary/writer will cause a new DB Instance to be promoted to writer in your DB Cluster\.
++ [DeleteDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) – Deleting the primary/writer will cause a new DB instance to be promoted to writer in your DB cluster\.
 
 From the application/client side, if using Linux, you can test how the application responds to sudden packet drops based on port, host, or if tcp keepalive packets are not sent or received by using iptables\.
 

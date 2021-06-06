@@ -1,4 +1,4 @@
-# Cloning an Aurora DB cluster volume<a name="Aurora.Managing.Clone"></a>
+# Cloning an Aurora DB cluster volume<a name="Aurora.Managing.Clone"></a><a name="cloning"></a>
 
 Using the Aurora cloning feature, you can quickly and cost\-effectively create a new cluster containing a duplicate of an Aurora cluster volume and all its data\. We refer to the new cluster and its associated cluster volume as a *clone*\. Creating a clone is faster and more space\-efficient than physically copying the data using a different technique such as restoring a snapshot\.
 

@@ -1,4 +1,4 @@
-# Aurora MySQL database engine updates 2020\-11\-09 \(version 1\.22\.3\)<a name="AuroraMySQL.Updates.1223"></a>
+# Aurora MySQL database engine updates 2020\-11\-09 \(version 1\.22\.3\)<a name="AuroraMySQL.Updates.1223"></a><a name="1223"></a><a name="1.22.3"></a>
 
 **Version:** 1\.22\.3
 

@@ -228,7 +228,7 @@ You can restore your backup files from your Amazon S3 bucket to create a new Ama
    1.  Choose whether to **Allow access to KMS key**:
       + If you didn't encrypt the backup files, choose **No**\.
       + If you encrypted the backup files with AES\-256 \(SSE\-S3\) when you uploaded them to Amazon S3, choose **No**\. In this case, the data is decrypted automatically\.
-      + If you encrypted the backup files with AWS\-KMS \(SSE\-KMS\) server\-side encryption when you uploaded them to Amazon S3, choose **Yes**\. Next, choose the correct master key for **Master key**\.
+      + If you encrypted the backup files with AWS KMS \(SSE\-KMS\) server\-side encryption when you uploaded them to Amazon S3, choose **Yes**\. Next, choose the correct master key for **Master key**\.
 
         The AWS Management Console creates an IAM policy that enables Aurora to decrypt the data\.
 

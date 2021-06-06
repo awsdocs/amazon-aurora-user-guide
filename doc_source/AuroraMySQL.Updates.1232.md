@@ -1,4 +1,4 @@
-# Aurora MySQL database engine updates 2021\-03\-18 \(version 1\.23\.2\)<a name="AuroraMySQL.Updates.1232"></a>
+# Aurora MySQL database engine updates 2021\-03\-18 \(version 1\.23\.2\)<a name="AuroraMySQL.Updates.1232"></a><a name="1232"></a><a name="1.23.2"></a>
 
 **Version:** 1\.23\.2
 

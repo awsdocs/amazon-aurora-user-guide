@@ -57,7 +57,14 @@ The following table shows the maximum amount of temporary storage available for 
 
 | DB instance class | Maximum temporary storage available \(GiB\) | 
 | --- | --- | 
-| db\.r5\.24xlarge | 1500  | 
+| db\.r6g\.16xlarge | 1008 | 
+| db\.r6g\.12xlarge | 756 | 
+| db\.r6g\.8xlarge | 504 | 
+| db\.r6g\.4xlarge | 252 | 
+| db\.r6g\.2xlarge | 126 | 
+| db\.r6g\.xlarge | 63 | 
+| db\.r6g\.large | 32 | 
+| db\.r5\.24xlarge | 1500 | 
 | db\.r5\.12xlarge | 748 | 
 | db\.r5\.4xlarge | 249 | 
 | db\.r5\.2xlarge | 124 | 
@@ -69,6 +76,7 @@ The following table shows the maximum amount of temporary storage available for 
 | db\.r4\.2xlarge | 120 | 
 | db\.r4\.xlarge | 60 | 
 | db\.r4\.large | 30 | 
+| db\.t3\.large | 16 | 
 | db\.t3\.medium | 7\.5 | 
 
 You can monitor the temporary storage available for a DB instance with the `FreeLocalStorage` CloudWatch metric, described in [Amazon Aurora metrics](Aurora.AuroraMySQL.Monitoring.Metrics.md)\. 

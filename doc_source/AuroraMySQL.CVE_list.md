@@ -1,4 +1,4 @@
-# Security vulnerabilities fixed in Amazon Aurora MySQL<a name="AuroraMySQL.CVE_list"></a>
+# Security vulnerabilities fixed in Amazon Aurora MySQL<a name="AuroraMySQL.CVE_list"></a><a name="cve"></a>
 
  CVE \(Common Vulnerabilities and Exposures\) is a list of entries for publicly known cybersecurity vulnerabilities\. Each entry contains an identification number, a description, and at least one public reference\. 
 

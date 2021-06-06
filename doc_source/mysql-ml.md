@@ -1,4 +1,4 @@
-# Using machine learning \(ML\) with Aurora MySQL<a name="mysql-ml"></a>
+# Using machine learning \(ML\) with Aurora MySQL<a name="mysql-ml"></a><a name="ml"></a>
 
 Aurora machine learning enables you to add machine learning\-based predictions to database applications using the SQL language\. Aurora machine learning makes use of a highly optimized integration between the Aurora database and AWS machine learning \(ML\) services SageMaker and Amazon Comprehend\. 
 
@@ -9,9 +9,9 @@ Aurora machine learning enables you to add machine learning\-based predictions t
 
 AWS ML Services are managed services that are set up and run in their own production environments\. Currently, Aurora Machine Learning integrates with Amazon Comprehend for sentiment analysis and SageMaker for a wide variety of ML algorithms\. 
 
-For details about using Aurora and Amazon Comprehend together, see [Using Amazon Comprehend for sentiment detection](#using-amazon-comprehend-for-sentiment-detection)\. For general information about Amazon Comprehend, see [Amazon Comprehend](https://aws.amazon.com/comprehend)\. 
+For details about using Aurora and Amazon Comprehend together, see [Using Amazon Comprehend for sentiment detection](#using-amazon-comprehend-for-sentiment-detection)\. For general information about Amazon Comprehend, see [Amazon Comprehend](http://aws.amazon.com/comprehend)\. 
 
-For details about using Aurora and SageMaker together, see [Using SageMaker to run your own ML models](#using-amazon-sagemaker-to-run-your-own-ml-models)\. For general information about SageMaker, see [SageMaker](https://aws.amazon.com/sagemaker)\. 
+For details about using Aurora and SageMaker together, see [Using SageMaker to run your own ML models](#using-amazon-sagemaker-to-run-your-own-ml-models)\. For general information about SageMaker, see [SageMaker](http://aws.amazon.com/sagemaker)\. 
 
 **Topics**
 + [Prerequisites for Aurora Machine Learning](#aurora-ml-prereqs)
@@ -384,7 +384,7 @@ WHERE productTable.productCode = 1302 AND
 ```
 
 **Note**  
- Amazon Comprehend is currently available only in some AWS Regions\. To check in which AWS Regions you can use Amazon Comprehend, see [the AWS Region table page](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/)\. 
+ Amazon Comprehend is currently available only in some AWS Regions\. To check in which AWS Regions you can use Amazon Comprehend, see [the AWS Region table page](http://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/)\. 
 
 ## Performance considerations for Aurora Machine Learning<a name="aurora-ml-performance"></a>
 

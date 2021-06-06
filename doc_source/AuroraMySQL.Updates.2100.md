@@ -4,7 +4,7 @@
 
  Aurora MySQL 2\.10\.0 is generally available\. Aurora MySQL 2\.x versions are compatible with MySQL 5\.7 and Aurora MySQL 1\.x versions are compatible with MySQL 5\.6\. 
 
- Currently supported Aurora MySQL releases are 1\.14\.\*, 1\.15\.\*, 1\.16\.\*, 1\.17\.\*, 1\.18\.\*, 1\.19\.\*, 1\.20\.\*, 1\.21\.\*, 1\.22\.\*, 1\.23\.\*, 2\.01\.\*, 2\.02\.\*, 2\.03\.\*, 2\.04\.\*, 2\.05\.\*, 2\.06\.\*, 2\.07\.\*, 2\.08\.\*, and 2\.09\.\*\. 
+ Currently supported Aurora MySQL releases are 1\.14\.\*, 1\.15\.\*, 1\.16\.\*, 1\.17\.\*, 1\.18\.\*, 1\.19\.\*, 1\.20\.\*, 1\.21\.\*, 1\.22\.\*, 1\.23\.\*, 2\.01\.\*, 2\.02\.\*, 2\.03\.\*, 2\.04\.\*, 2\.05\.\*, 2\.06\.\*, 2\.07\.\*, 2\.08\.\*, 2\.09\.\*, and 2\.10\.\*\. 
 
  You can upgrade an existing Aurora MySQL 2\.\* database cluster to Aurora MySQL 2\.10\.0\. For clusters running Aurora MySQL version 1, you can upgrade an existing Aurora MySQL 1\.23 or higher cluster directly to 2\.10\.0\. You can also restore a snapshot from any currently supported Aurora MySQL release into Aurora MySQL 2\.10\.0\. 
 
@@ -41,7 +41,7 @@
  After you upgrade to Aurora MySQL 2\.10, rebooting the writer instance doesn't perform a reboot of the entire cluster\. If you want to reboot the entire cluster, now you reboot any reader instances in the cluster after rebooting the writer instance\. 
 +  Improved the performance of the read ahead page reads requested by logical read ahead \(LRA\)  technique\. This was done by batching the multiple page reads in a single request sent to Aurora storage\. As a result, the queries that use the LRA  optimization execute up to 3x faster\. 
 +  *Zero\-downtime restarts And patching:* 
-  +  Improved zero\-downtime restart \(ZDR\) and zero–downtime patching \(ZDP\) to enable ZDR and ZDP in a wider range of scenarios, including the added support for cases when binary logging is enabled\. Also, improved visibility into ZDR and ZDP events\. See documentation for details: [Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Availability) and [Using zero\-downtime patching](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.ZDP)\. 
+  +  Improved zero\-downtime restart \(ZDR\) and zero–downtime patching \(ZDP\) to enable ZDR and ZDP in a wider range of scenarios, including the added support for cases when binary logging is enabled\. Also, improved visibility into ZDR and ZDP events\. See documentation for details: [Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Availability) and [Using zero\-downtime patching](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.ZDP)\. 
 
  **Availability improvements:** 
 +  Improvements for faster startup when the database has a large number of temporary indexes and tables created during a prior interrupted DDL activity\. 
