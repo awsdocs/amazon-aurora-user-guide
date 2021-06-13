@@ -1,4 +1,4 @@
-# Upgrading the PostgreSQL DB engine for Aurora PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL"></a>
+# Upgrading the PostgreSQL DB engine for Aurora PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL"></a><a name="pgsql_upgrade"></a>
 
 When Aurora PostgreSQL supports a new version of a database engine, you can upgrade your DB clusters to the new version\. There are two kinds of upgrades for PostgreSQL DB clusters: major version upgrades and minor version upgrades\. 
 

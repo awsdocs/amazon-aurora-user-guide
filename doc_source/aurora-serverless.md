@@ -96,7 +96,7 @@ However, the following limitations apply:
 + For both MySQL Client and PostgreSQL Client utilities, session variables that you might use in other environments have no effect when using TLS/SSL between client and Aurora Serverless v1\. 
 + For the MySQL Client, when connecting with TLS/SSL's `VERIFY_IDENTITY` mode, currently you need to use the MySQL 8\.0\-compatible `mysql` command\. For more information, see [Connecting to a DB instance running the MySQL database engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToInstance.html)\.
 
-Depending on the client that you use to connect to Aurora Serverless v1 DB cluster, you might not need to specify TLS/SSL to get an encrypted connection\. For example, to use the PostgreSQL Client to connect to an Aurora Serverless v1 DB cluster running Amazon Aurora PostgreSQL\-Compatible Edition, connect as you normally do\.
+Depending on the client that you use to connect to Aurora Serverless v1 DB cluster, you might not need to specify TLS/SSL to get an encrypted connection\. For example, to use the PostgreSQL Client to connect to an Aurora Serverless v1 DB cluster running Aurora PostgreSQL\-Compatible Edition, connect as you normally do\.
 
 ```
 psql -h endpoint -U user
@@ -115,7 +115,7 @@ Type "help" for help.
  You can check the status of the client connection to examine whether the connection to Aurora Serverless v1 is TLS/SSL encrypted\. The PostgreSQL `pg_stat_ssl` and `pg_stat_activity` tables and its `ssl_is_used` function don't show the TLS/SSL state for the communication between the client application and Aurora Serverless v1\. Similarly, the TLS/SSL state can't be derived from the MySQL `status` statement\.   
  The Aurora cluster parameters `force_ssl` for PostgreSQL and `require_secure_transport` for MySQL aren't supported for Aurora Serverless v1\. For a complete list of parameters supported by Aurora Serverless v1, call the [DescribeEngineDefaultClusterParameters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEngineDefaultClusterParameters.html) API\. For more information on parameter groups and Aurora Serverless v1, see [Parameter groups and Aurora Serverless v1](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\. 
 
-To use the MySQL Client to connect to an Aurora Serverless v1 DB cluster running Aurora MySQL\-Compatible Edition, you specify TLS/SSL in your request\. The following example includes the [Amazon root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) downloaded from Amazon Trust Services, which is necessary for this connection to succeed\. 
+To use the MySQL Client to connect to an Aurora Serverless v1 DB cluster running Aurora MySQLCompatible Edition, you specify TLS/SSL in your request\. The following example includes the [Amazon root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) downloaded from Amazon Trust Services, which is necessary for this connection to succeed\. 
 
 ```
 mysql -h endpoint -P 3306 -u user -p --ssl-ca=amazon-root-CA-1.pem --ssl-mode=REQUIRED

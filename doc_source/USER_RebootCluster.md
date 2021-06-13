@@ -62,7 +62,7 @@ aws rds reboot-db-instance ^
 
 ## Rebooting an Aurora cluster \(Aurora PostgreSQL and Aurora MySQL before version 2\.10\)<a name="aurora-reboot-cluster"></a>
 
- In Amazon Aurora PostgreSQL\-Compatible Edition, in Aurora MySQL\-Compatible Edition version 1, and in Aurora MySQL before version 2\.10, you reboot an entire Aurora DB cluster by rebooting the writer DB instance of that cluster\. To do so, follow the procedure in [Rebooting a DB instance within an Aurora cluster](#aurora-reboot-db-instance)\. 
+ In Aurora PostgreSQL\-Compatible Edition, in Aurora MySQLCompatible Edition version 1, and in Aurora MySQL before version 2\.10, you reboot an entire Aurora DB cluster by rebooting the writer DB instance of that cluster\. To do so, follow the procedure in [Rebooting a DB instance within an Aurora cluster](#aurora-reboot-db-instance)\. 
 
  Rebooting the writer DB instance also initiates a reboot for each reader DB instance in the cluster\. That way, any cluster\-wide parameter changes are applied to all DB instances at the same time\. However, the reboot of all DB instances causes a brief outage for the cluster\. The reader DB instances remain unavailable until the writer DB instance finishes rebooting and becomes available\. 
 

@@ -1,4 +1,4 @@
-# Working with Amazon Aurora MySQL<a name="Aurora.AuroraMySQL"></a>
+# Working with Amazon Aurora MySQL<a name="Aurora.AuroraMySQL"></a><a name="mysql"></a>
 
 Amazon Aurora MySQL is a fully managed, MySQL\-compatible, relational database engine that combines the speed and reliability of high\-end commercial databases with the simplicity and cost\-effectiveness of open\-source databases\. Aurora MySQL is a drop\-in replacement for MySQL and makes it simple and cost\-effective to set up, operate, and scale your new and existing MySQL deployments, thus freeing you to focus on your business and applications\. Amazon RDS provides administration for Aurora by handling routine database tasks such as provisioning, patching, backup, recovery, failure detection, and repair\. Amazon RDS also provides push\-button migration tools to convert your existing Amazon RDS for MySQL applications to Aurora MySQL\.
 

@@ -1,4 +1,4 @@
-# Amazon Aurora PostgreSQL updates<a name="AuroraPostgreSQL.Updates"></a>
+# Amazon Aurora PostgreSQL updates<a name="AuroraPostgreSQL.Updates"></a><a name="pgsql_relnotes"></a>
 
 In this topic, you can find version and update information specific to Amazon Aurora PostgreSQL\-Compatible Edition\. You can also find out how to upgrade your Amazon Aurora PostgreSQL engine version\. For more information about updates that apply generally to Aurora, see [Amazon Aurora updates](Aurora.Updates.md)\.
 

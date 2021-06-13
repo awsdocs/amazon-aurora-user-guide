@@ -6,8 +6,6 @@ The central metric for Performance Insights is `DB Load`, which is collected eve
 + [Average active sessions](#USER_PerfInsights.Overview.ActiveSessions.AAS)
 + [Average active executions](#USER_PerfInsights.Overview.ActiveSessions.AAE)
 + [Dimensions](#USER_PerfInsights.Overview.ActiveSessions.dimensions)
-+ [Wait events](#USER_PerfInsights.Overview.ActiveSessions.waits)
-+ [Top SQL](#USER_PerfInsights.Overview.ActiveSessions.top-sql)
 
 ## Average active sessions<a name="USER_PerfInsights.Overview.ActiveSessions.AAS"></a>
 
@@ -27,9 +25,9 @@ In most cases, the AAS and AAE for a query are approximately the same\. However,
 
 ## Dimensions<a name="USER_PerfInsights.Overview.ActiveSessions.dimensions"></a>
 
-The `DB Load` metric has subcomponents called dimensions\. You can think of dimensions as categories or "group by" clauses for the different characteristics of the `DB Load` metric\. When you are diagnosing performance issues, the most useful dimensions are wait events and top SQL\.
+The `db.load` metric is different from the other time\-series metrics because you can break it into subcomponents called dimensions\. You can think of dimensions as categories or "group by" clauses for the different characteristics of the `DB Load` metric\. When you are diagnosing performance issues, the most useful dimensions are wait events and top SQL\.
 
-## Wait events<a name="USER_PerfInsights.Overview.ActiveSessions.waits"></a>
+### Wait events<a name="USER_PerfInsights.Overview.ActiveSessions.waits"></a>
 
 A *wait event* causes a SQL statement to wait for a specific event to happen before it can continue running\. For example, a SQL statement might wait until a locked resource is unlocked\. By combining `DB Load` with wait events, you can get a complete picture of the session state\. Wait events vary by DB engine: 
 + For a list of the most commonly used wait events for Aurora MySQL, see [Aurora MySQL events](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Waitevents)\.
@@ -37,7 +35,7 @@ A *wait event* causes a SQL statement to wait for a specific event to happen bef
 + For a list of the most commonly used wait events for Aurora PostgreSQL, see [Amazon Aurora PostgreSQL events](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.Waitevents)\.
 + For information about all PostgreSQL wait events, see [PostgreSQL Wait Events](https://www.postgresql.org/docs/10/static/monitoring-stats.html#WAIT-EVENT-TABLE) in the PostgreSQL documentation\.
 
-## Top SQL<a name="USER_PerfInsights.Overview.ActiveSessions.top-sql"></a>
+### Top SQL<a name="USER_PerfInsights.Overview.ActiveSessions.top-sql"></a>
 
 Whereas wait events show bottlenecks, top SQL shows which queries are contributing the most to DB load\. For example, many queries might be currently running on the database, but a single query might consume 99% of the DB load\. In this case, the high load might indicate a problem with the query\. 
 

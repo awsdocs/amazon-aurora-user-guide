@@ -1,6 +1,10 @@
 # Using SSL/TLS to encrypt a connection to a DB cluster<a name="UsingWithRDS.SSL"></a>
 
-You can use Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\) from your application to encrypt a connection to a DB cluster running Aurora MySQL or Aurora PostgreSQL\. Each DB engine has its own process for implementing SSL/TLS\. To learn how to implement SSL/TLS for your DB cluster, use the link following that corresponds to your DB engine: 
+You can use Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\) from your application to encrypt a connection to a DB cluster running Aurora MySQL or Aurora PostgreSQL\.
+
+SSL/TLS connections provide one layer of security by encrypting data that moves between your client and a DB cluster\. Using a server certificate provides an extra layer of security by validating that the connection is being made to an Amazon Aurora DB cluster\. It does so by checking the server certificate that is automatically installed on all DB clusters that you provision\.
+
+Each DB engine has its own process for implementing SSL/TLS\. To learn how to implement SSL/TLS for your DB cluster, use the link following that corresponds to your DB engine: 
 + [Security with Amazon Aurora MySQL](AuroraMySQL.Security.md)
 + [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md)
 

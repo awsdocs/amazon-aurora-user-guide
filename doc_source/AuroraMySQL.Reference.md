@@ -3,14 +3,14 @@
 This reference includes information about Aurora MySQL parameters, status variables, and general SQL extensions or differences from the community MySQL database engine\.
 
 **Topics**
-+ [Aurora MySQL parameters](#AuroraMySQL.Reference.ParameterGroups)
++ [Aurora MySQL configuration parameters](#AuroraMySQL.Reference.ParameterGroups)
 + [Inapplicable MySQL parameters and status variables](#AuroraMySQL.Reference.Parameters.Inapplicable)
 + [Aurora MySQL events](#AuroraMySQL.Reference.Waitevents)
 + [Aurora MySQL isolation levels](#AuroraMySQL.Reference.IsolationLevels)
 + [Aurora MySQL hints](#AuroraMySQL.Reference.Hints)
 + [Aurora MySQL stored procedures](#AuroraMySQL.Reference.StoredProcs)
 
-## Aurora MySQL parameters<a name="AuroraMySQL.Reference.ParameterGroups"></a>
+## Aurora MySQL configuration parameters<a name="AuroraMySQL.Reference.ParameterGroups"></a><a name="param_groups"></a>
 
 You manage your Amazon Aurora MySQL DB cluster in the same way that you manage other Amazon RDS DB instances, by using parameters in a DB parameter group\. Amazon Aurora differs from other DB engines in that you have a DB cluster that contains multiple DB instances\. As a result, some of the parameters that you use to manage your Aurora MySQL DB cluster apply to the entire cluster\. Other parameters apply only to a particular DB instance in the DB cluster\.
 
@@ -29,7 +29,7 @@ For more information on DB parameter groups, see [Working with DB parameter grou
 + [Cluster\-level parameters](#AuroraMySQL.Reference.Parameters.Cluster)
 + [Instance\-level parameters](#AuroraMySQL.Reference.Parameters.Instance)
 
-### Cluster\-level parameters<a name="AuroraMySQL.Reference.Parameters.Cluster"></a>
+### Cluster\-level parameters<a name="AuroraMySQL.Reference.Parameters.Cluster"></a><a name="cluster_params"></a>
 
 The following table shows all of the parameters that apply to the entire Aurora MySQL DB cluster\. 
 
@@ -103,11 +103,12 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `server_id`  |  No  |  | 
 |  `skip-character-set-client-handshake`  |  Yes  |  | 
 |  `skip_name_resolve`  |  No  |  | 
+|  `slave-skip-errors`  |  Yes  | Only applies to Aurora MySQL version 2 clusters, with MySQL 5\.7 compatibility\. | 
 |  `sync_frm`  |  Yes  |  | 
 |  `time_zone`  |  Yes  |  | 
 |  `tls_version`  |  Yes  | For more information, see [TLS versions for Aurora MySQL](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL.TLS_Version)\. | 
 
-### Instance\-level parameters<a name="AuroraMySQL.Reference.Parameters.Instance"></a>
+### Instance\-level parameters<a name="AuroraMySQL.Reference.Parameters.Instance"></a><a name="instance_params"></a><a name="db_params"></a>
 
 The following table shows all of the parameters that apply to a specific DB instance in an Aurora MySQL DB cluster\. 
 

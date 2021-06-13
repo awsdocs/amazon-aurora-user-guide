@@ -1,6 +1,6 @@
 # Amazon Aurora PostgreSQL releases and engine versions<a name="AuroraPostgreSQL.Updates.20180305"></a>
 
-Following, you can find information about supported released versions of the Amazon Aurora PostgreSQL\-Compatible Edition database engine\. An Aurora database has two version numbers; the Aurora version number and the database engine version number\. To determine the version numbers of your Aurora PostgreSQL database, see [Identifying your versions of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Versions.md)\. 
+Following, you can find information about supported released versions of the Aurora PostgreSQL\-Compatible Edition database engine\. An Aurora database has two version numbers; the Aurora version number and the database engine version number\. To determine the version numbers of your Aurora PostgreSQL database, see [Identifying your versions of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Versions.md)\. 
 
 To determine which PostgreSQL engine versions are available in an AWS Region, use the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\. For example:
 
@@ -2235,7 +2235,7 @@ You can find the following improvements in this release\.
 
 1. Improve the diagnostic data provided in the PostgreSQL error log when an out\-of\-memory error is encountered\.
 
-1. Multiple fixes to improve the reliability and performance of snapshot import from Amazon RDS for PostgreSQL to Amazon Aurora PostgreSQL\-Compatible Edition\.
+1. Multiple fixes to improve the reliability and performance of snapshot import from Amazon RDS for PostgreSQL to Aurora PostgreSQL\-Compatible Edition\.
 
 1. Multiple fixes to improve the reliability and performance of Aurora PostgreSQL read nodes\.
 
@@ -2409,4 +2409,4 @@ You can find the following improvements in this engine update:
 
 ### Aurora PostgreSQL release 1\.0\.7<a name="AuroraPostgreSQL.Updates.20180305.107"></a>
 
-This is the first generally available release of Amazon Amazon Aurora PostgreSQL\-Compatible Edition\.
+This is the first generally available release of Amazon Aurora PostgreSQL\-Compatible Edition\.

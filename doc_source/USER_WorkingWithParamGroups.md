@@ -76,7 +76,7 @@ The DB cluster and DB instance parameters available to you in Aurora vary depend
 
 | Database engine | Parameters | 
 | --- | --- | 
-|  Aurora MySQL  |  See [Aurora MySQL parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.  For Aurora Serverless clusters, see additional details in [Parameter groups and Aurora Serverless v1](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.   | 
+|  Aurora MySQL  |  See [Aurora MySQL configuration parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.  For Aurora Serverless clusters, see additional details in [Parameter groups and Aurora Serverless v1](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.   | 
 |  Aurora PostgreSQL  |  See [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.ParameterGroups)\.  | 
 
 ## Creating a DB parameter group<a name="USER_WorkingWithParamGroups.Creating"></a>
@@ -799,7 +799,6 @@ aws rds describe-db-parameter-groups
 The command returns a response like the following:  
 
 ```
-DBPARAMETERGROUP  default.mysql5.5     mysql5.5  Default parameter group for MySQL5.5
 DBPARAMETERGROUP  default.mysql5.6     mysql5.6  Default parameter group for MySQL5.6
 DBPARAMETERGROUP  mydbparametergroup   mysql5.6  My new parameter group
 ```
@@ -819,7 +818,7 @@ aws rds describe-db-parameter-groups ^
 The command returns a response like the following:  
 
 ```
-DBPARAMETERGROUP  mydbparametergroup1  mysql5.5  My new parameter group
+DBPARAMETERGROUP  mydbparametergroup1  mysql5.6  My new parameter group
 ```
 
 ### RDS API<a name="USER_WorkingWithParamGroups.Listing.API"></a>

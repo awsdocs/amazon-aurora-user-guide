@@ -1,4 +1,4 @@
-# Database engine updates for Amazon Aurora MySQL<a name="AuroraMySQL.Updates"></a>
+# Database engine updates for Amazon Aurora MySQL<a name="AuroraMySQL.Updates"></a><a name="mysql_relnotes"></a>
 
 Amazon Aurora releases updates regularly\. Updates are applied to Aurora DB clusters during system maintenance windows\. The timing when updates are applied depends on the region and maintenance window setting for the DB cluster, as well as the type of update\. 
 

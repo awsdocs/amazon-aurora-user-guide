@@ -74,7 +74,7 @@ To associate an IAM role to permit your Amazon RDS cluster to communicate with o
 
       When the instance has rebooted, your IAM role is associated with your DB cluster\.
 
-      For more information about cluster parameter groups, see [Aurora MySQL parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
+      For more information about cluster parameter groups, see [Aurora MySQL configuration parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
 
 **To associate an IAM role with a DB cluster by using the AWS CLI**
 
@@ -113,4 +113,4 @@ To associate an IAM role to permit your Amazon RDS cluster to communicate with o
 
    When the instance has rebooted, your IAM roles are associated with your DB cluster\.
 
-   For more information about cluster parameter groups, see [Aurora MySQL parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
+   For more information about cluster parameter groups, see [Aurora MySQL configuration parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.

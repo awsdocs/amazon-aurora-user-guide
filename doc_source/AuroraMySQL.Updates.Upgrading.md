@@ -1,4 +1,4 @@
-# Upgrading Amazon Aurora MySQL DB clusters<a name="AuroraMySQL.Updates.Upgrading"></a>
+# Upgrading Amazon Aurora MySQL DB clusters<a name="AuroraMySQL.Updates.Upgrading"></a><a name="mysql_upgrade"></a>
 
  You can upgrade an Aurora MySQL DB cluster to get bug fixes, new Aurora MySQL features, or to change to an entirely new version of the underlying database engine\. The following sections show how\. 
 
