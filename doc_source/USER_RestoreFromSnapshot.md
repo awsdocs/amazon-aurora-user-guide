@@ -2,6 +2,12 @@
 
 Amazon RDS creates a storage volume snapshot of your DB cluster, backing up the entire DB instance and not just individual databases\. You can create a DB cluster by restoring from this DB cluster snapshot\. When you restore the DB cluster, you provide the name of the DB cluster snapshot to restore from, and then provide a name for the new DB cluster that is created from the restore\. You can't restore from a DB cluster snapshot to an existing DB cluster; a new DB cluster is created when you restore\. 
 
+You can use the restored DB cluster as soon as its status is `available`\. The DB cluster continues to load data in the background\. This is known as *lazy loading*\.
+
+If you access data that hasn't been loaded yet, the DB cluster immediately downloads the requested data from Amazon S3, and then continues loading the rest of the data in the background\. For more information, see [Amazon EBS snapshots](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html)\.
+
+To help mitigate the effects of lazy loading on tables to which you require quick access, you can perform operations that involve full table scans, such as `SELECT *`\. This allows Amazon RDS to download the entirety of the backed\-up table data from S3\.
+
 **Note**  
 Sharing a manual DB cluster snapshot, whether encrypted or unencrypted, enables authorized AWS accounts to directly restore a DB cluster from the snapshot instead of taking a copy of it and restoring from that\. For more information, see [Sharing a DB cluster snapshot](USER_ShareSnapshot.md)\.
 

@@ -637,7 +637,7 @@ SET optimizer_switch='hash_join=on';
 + [Transactions and locking](#aurora-mysql-parallel-query-sql-transactions)
 + [B\-tree indexes](#aurora-mysql-parallel-query-sql-indexes)
 + [Full\-text search \(FTS\) indexes](#aurora-mysql-parallel-query-sql-fts)
-+ [Full\-text search \(FTS\) indexes](#aurora-mysql-parallel-query-sql-virtual-column)
++ [Virtual columns](#aurora-mysql-parallel-query-sql-virtual-column)
 + [Built\-in caching mechanisms](#aurora-mysql-parallel-query-sql-caching)
 + [MyISAM temporary tables](#aurora-mysql-parallel-query-sql-myisam)
 
@@ -1051,7 +1051,7 @@ mysql> explain select o_orderpriority, o_shippriority from orders where o_clerk 
 
  Currently, parallel query isn't used for tables that contain a full\-text search index, regardless of whether the query refers to such indexed columns or uses the `MATCH` operator\. 
 
-### Full\-text search \(FTS\) indexes<a name="aurora-mysql-parallel-query-sql-virtual-column"></a>
+### Virtual columns<a name="aurora-mysql-parallel-query-sql-virtual-column"></a>
 
  Currently, parallel query isn't used for tables that contain a virtual column, regardless of whether the query refers to any virtual columns\. 
 

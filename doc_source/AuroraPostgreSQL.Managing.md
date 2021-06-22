@@ -1,6 +1,6 @@
 # Managing Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Managing"></a>
 
-The following sections discuss managing performance and scaling for an Amazon Aurora PostgreSQL DB cluster\.
+The following sections discuss managing performance and scaling for an Amazon Aurora PostgreSQL DB cluster\. It also includes other maintenance tasks\.
 
 **Topics**
 + [Scaling Aurora PostgreSQL DB instances](#AuroraPostgreSQL.Managing.Performance.InstanceScaling)
@@ -8,6 +8,7 @@ The following sections discuss managing performance and scaling for an Amazon Au
 + [Temporary storage limits for Aurora PostgreSQL](#AuroraPostgreSQL.Managing.TempStorage)
 + [Testing Amazon Aurora PostgreSQL by using fault injection queries](AuroraPostgreSQL.Managing.FaultInjectionQueries.md)
 + [Displaying volume status for an Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)
++ [Scheduling maintenance with the PostgreSQL pg\_cron extension](PostgreSQL_pg_cron.md)
 
 ## Scaling Aurora PostgreSQL DB instances<a name="AuroraPostgreSQL.Managing.Performance.InstanceScaling"></a>
 

@@ -12,18 +12,20 @@ The query editor is only available for the following Aurora Serverless DB cluste
 + Aurora with PostgreSQL version 10\.7 compatibility
 
 The query editor is currently available for Aurora Serverless in the following AWS Regions:
++ US East \(Ohio\)
++ US East \(N\. Virginia\)
++ US West \(N\. California\)
++ US West \(Oregon\)
++ Asia Pacific \(Mumbai\)
++ Asia Pacific \(Seoul\)
 + Asia Pacific \(Singapore\)
 + Asia Pacific \(Sydney\)
 + Asia Pacific \(Tokyo\)
-+ Asia Pacific \(Mumbai\)
++ Canada \(Central\)
 + Europe \(Frankfurt\)
 + Europe \(Ireland\)
 + Europe \(London\)
 + Europe \(Paris\)
-+ US East \(N\. Virginia\)
-+ US East \(Ohio\)
-+ US West \(N\. California\)
-+ US West \(Oregon\)
 
 ## Authorizing access to the query editor<a name="query-editor.access"></a>
 

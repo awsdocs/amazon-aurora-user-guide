@@ -64,9 +64,9 @@ To connect to the cluster endpoint using SSL, your client connection utility mus
 
    For information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\.
 
-1. Type the following command at a command prompt to connect to the primary instance of a DB cluster with SSL using the MySQL utility\. For the \-h parameter, substitute the endpoint DNS name for your primary instance\. For the \-\-ssl\_ca parameter, substitute the SSL certificate file name as appropriate\. Type the master user password when prompted\.
+1. Type the following command at a command prompt to connect to the primary instance of a DB cluster with SSL using the MySQL utility\. For the `-h` parameter, substitute the endpoint DNS name for your primary instance\. For the `-u` parameter, substitute the user ID of a database user account\. For the `--ssl-ca` parameter, substitute the SSL certificate file name as appropriate\. Type the master user password when prompted\.
 
-   `mysql -h mycluster-primary.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-verify-server-cert`
+   `mysql -h mycluster-primary.123456789012.us-east-1.rds.amazonaws.com -u admin_user -p --ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-verify-server-cert`
 
 You should see output similar to the following\.
 

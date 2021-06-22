@@ -56,10 +56,14 @@ aws rds describe-db-engine-versions  --engine aurora-postgresql  --engine-versio
 
 Major version upgrades can contain database changes that are not backward\-compatible with previous versions of the database\. This functionality can cause your existing applications to stop working correctly\. As a result, Amazon Aurora doesn't apply major version upgrades automatically\. To perform a major version upgrade, you modify your DB cluster manually\. 
 
-You can do the following Aurora PostgreSQL major version upgrades:
-+ Upgrade from version 9\.6 minor versions 9\.6\.9 and greater, to version 10 minor versions 10\.11 or greater\. 
-+ Upgrade from version 10 minor versions 10\.7 and greater, to version 11 minor versions 11\.7 or greater\. 
-+ Upgrade from version 11 minor versions 11\.7 and greater, to version 12 minor versions 12\.4 or greater\. 
+You can do the following Aurora PostgreSQL major version upgrades\.
+
+
+| Current source version | Major upgrade targets | 
+| --- | --- | 
+|  9\.6\.9 and higher minor versions  |  10\.11 or higher minor versions  | 
+| 10\.7 and higher minor versions | 11\.7 or higher minor versions | 
+| 11\.7 and higher minor versions | 12\.4 or higher minor versions | 
 
 Before applying an upgrade to your production DB clusters, make sure that you thoroughly test any upgrade to verify that your applications work correctly\. 
 
@@ -135,7 +139,7 @@ We recommend the following process when upgrading an Aurora PostgreSQL DB cluste
 
 1. Perform a dry run upgrade\.
 
-   We highly recommend testing a major version upgrade on a duplicate of your production database before trying the upgrade on your production database\. To create a duplicate test instance, you can either restore your database from a recent snapshot or clone your database\. For more information, see [Restoring from a snapshot](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Restoring) or [Cloning an Aurora DB cluster volume](Aurora.Managing.Clone.md)\.
+   We highly recommend testing a major version upgrade on a duplicate of your production database before trying the upgrade on your production database\. To create a duplicate test instance, you can either restore your database from a recent snapshot or clone your database\. For more information, see [Restoring from a snapshot](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Restoring) or [Cloning a volume for an Aurora DB cluster](Aurora.Managing.Clone.md)\.
 
    For more information, see [Manually upgrading the Aurora PostgreSQL engine](#USER_UpgradeDBInstance.Upgrading.Manual)\. 
 

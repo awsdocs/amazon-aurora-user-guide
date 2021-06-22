@@ -11,12 +11,15 @@ aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[].[Eng
 For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability.PostgreSQL)\.
 
 **Topics**
++ [PostgreSQL 12\.6, Aurora PostgreSQL release 4\.1](#AuroraPostgreSQL.Updates.20180305.41)
 + [PostgreSQL 12\.4, Aurora PostgreSQL release 4\.0](#AuroraPostgreSQL.Updates.20180305.40)
++ [PostgreSQL 11\.11, Aurora PostgreSQL release 3\.5](#AuroraPostgreSQL.Updates.20180305.35)
 + [PostgreSQL 11\.9, Aurora PostgreSQL release 3\.4](#AuroraPostgreSQL.Updates.20180305.34)
 + [PostgreSQL 11\.8, Aurora PostgreSQL release 3\.3](#AuroraPostgreSQL.Updates.20180305.33)
 + [PostgreSQL 11\.7, Aurora PostgreSQL release 3\.2](#AuroraPostgreSQL.Updates.20180305.32)
 + [PostgreSQL 11\.6, Aurora PostgreSQL release 3\.1](#AuroraPostgreSQL.Updates.20180305.31)
 + [PostgreSQL 11\.4, Aurora PostgreSQL release 3\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.30)
++ [PostgreSQL 10\.16, Aurora PostgreSQL release 2\.8](#AuroraPostgreSQL.Updates.20180305.28)
 + [PostgreSQL 10\.14, Aurora PostgreSQL release 2\.7](#AuroraPostgreSQL.Updates.20180305.27)
 + [PostgreSQL 10\.13, Aurora PostgreSQL release 2\.6](#AuroraPostgreSQL.Updates.20180305.26)
 + [PostgreSQL 10\.12, Aurora PostgreSQL release 2\.5](#AuroraPostgreSQL.Updates.20180305.25)
@@ -25,6 +28,7 @@ For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.
 + [PostgreSQL 10\.6, Aurora PostgreSQL release 2\.2 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.22)
 + [PostgreSQL 10\.5, Aurora PostgreSQL release 2\.1 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.21)
 + [PostgreSQL 10\.4, Aurora PostgreSQL release 2\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.20)
++ [PostgreSQL 9\.6\.21, Aurora PostgreSQL release 1\.10](#AuroraPostgreSQL.Updates.20180305.110)
 + [PostgreSQL 9\.6\.19, Aurora PostgreSQL release 1\.9](#AuroraPostgreSQL.Updates.20180305.19)
 + [PostgreSQL 9\.6\.18, Aurora PostgreSQL release 1\.8](#AuroraPostgreSQL.Updates.20180305.18)
 + [PostgreSQL 9\.6\.17, Aurora PostgreSQL release 1\.7](#AuroraPostgreSQL.Updates.20180305.17)
@@ -39,6 +43,77 @@ For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.
 For information about extensions and modules, see [Extension versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)\.
 
 The following Aurora PostgreSQL versions are supported\. 
+
+## PostgreSQL 12\.6, Aurora PostgreSQL release 4\.1<a name="AuroraPostgreSQL.Updates.20180305.41"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.6\. For more information about the improvements in PostgreSQL 12\.6, see [PostgreSQL release 12\.6](https://www.postgresql.org/docs/12/release-12-6.html)\.
+
+### Aurora PostgreSQL release 4\.1\.0<a name="AuroraPostgreSQL.Updates.20180305.410"></a>
+
+**New features**
+
+1. Added support for the following extensions:
+   + The `pg_proctab` extension version 0\.0\.9
+   + The `pg_partman` extension version 4\.4\.0\. For more information, see [Managing PostgreSQL partitions with the pg\_partman extension](PostgreSQL_Partitions.md)\.
+   + The `pg_cron` extension version 1\.3\.0\. For more information, see [Scheduling maintenance with the PostgreSQL pg\_cron extension](PostgreSQL_pg_cron.md)\.
+   + The `pg_bigm` extension version 1\.2
+
+**High priority stability enhancements**
+
+1. Fixed a bug in the `pglogical` extension that could lead to data inconsistency for inbound replication\.
+
+1. Fixed a bug where in rare cases a reader had inconsistent results when it restarted while a transaction with more than 64 subtransactions was being processed\.
+
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2021\-32027](https://nvd.nist.gov/vuln/detail/CVE-2021-32027)
+   + [CVE\-2021\-32028](https://nvd.nist.gov/vuln/detail/CVE-2021-32028)
+   + [CVE\-2021\-32029](https://nvd.nist.gov/vuln/detail/CVE-2021-32029)
+
+**Additional improvements and enhancements**
+
+1. Fixed a bug where the database could not be started when there were many relations in memory\-constrained environments\.
+
+1. Fixed a bug in the `apg_plan_mgmt` extension that could cause brief periods of unavailability due to an internal buffer overflow\.
+
+1. Fixed a bug on reader nodes that could cause brief periods of unavailability during WAL replay\.
+
+1. Fixed a bug in the `rds_activity_stream` extension that caused an error during startup when attempting to log audit events\.
+
+1. Fixed bugs in the `aurora_replica_status` function where rows were sometimes partially populated and some values such as Replay Latency, and CPU usage were always 0\.
+
+1. Fixed a bug where the database engine would attempt to create shared memory segments larger than the instance total memory and fail repeatedly\. For example, attempts to create 128 GiB shared buffers on a db\.r5\.large instance would fail\. With this change, requests for total shared memory allocations larger than the instance memory allow setting the instance to incompatible parameters\.
+
+1. Added logic to clean up unnecessary `pg_wal` temporary files on a database startup\.
+
+1. Fixed a bug that could lead to outbound replication synchronization errors after a major version upgrade\.
+
+1. Fixed a bug that reported ERROR: rds\_activity\_stream stack item 2 not found on top \- cannot pop when attempting to create the `rds_activity_stream` extension\.
+
+1. Fixed a bug that could cause the error failed to build any 3\-way joins in a correlated `IN` subquery under an `EXISTS` subquery\.
+
+1. Backported the following performance improvement from the PostgreSQL community: [pg\_stat\_statements: add missing check for pgss\_enabled\(\)](https://github.com/postgres/postgres/commit/6f40ee4f837ec1ac59c8ddc73b67a04978a184d)\.
+
+1. Fixed a bug that could cause upgrades to Aurora PostgreSQL 12\.x to fail due to the inability to open the `pg_control` file\.
+
+1. Fixed a bug that could cause brief periods of unavailability due to running out of memory when creating the `postgis` extension with `pgAudit` enabled\.
+
+1. Backported the following bug fix from the PostgreSQL community: [Fix use\-after\-free bug with AfterTriggersTableData\.storeslot](https://github.com/postgres/postgres/commit/262eb990c72097bd804e5c747fe38bf9b3a1ded9)\.
+
+1. Fixed a bug when using outbound logical replication to synchronize changes to another database that could fail with an error message like ERROR: could not map filenode "base/16395/228486645" to relation OID\.
+
+1. Fixed a bug that could cause a brief period of unavailability when aborting a transaction\.
+
+1. Fixed a bug that caused no ICU collations to be shown in the `pg_collation` catalog table after creating a new Aurora PostgreSQL 12\.x instance\. This issue does not affect upgrading from an older version\.
+
+1. Fixed a bug where the `rds_ad` role wasn't created after upgrading from a version of Aurora PostgreSQL that doesn't support Microsoft Active Directory authentication\.
+
+1. Added btree page checks to detect tuple metadata inconsistency\.
+
+1. Fixed a bug in asynchronous buffer reads that could cause brief periods of unavailability on reader nodes during WAL replay\.
+
+1. Fixed a bug where reading a TOAST value from disk could cause a brief period of unavailability\.
+
+1. Fixed a bug that caused brief periods of unavailability when attempting to fetch a tuple from and index scan\.
 
 ## PostgreSQL 12\.4, Aurora PostgreSQL release 4\.0<a name="AuroraPostgreSQL.Updates.20180305.40"></a>
 
@@ -134,6 +209,61 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.4\. For more
    + `postgis_tiger_geocoder` to version 3\.0\.2 
    + `postgis_topology` to version 3\.0\.2
 
+## PostgreSQL 11\.11, Aurora PostgreSQL release 3\.5<a name="AuroraPostgreSQL.Updates.20180305.35"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.11\. For more information about the improvements in PostgreSQL 11\.11, see [PostgreSQL release 11\.11](https://www.postgresql.org/docs/11/release-11-11.html)\.
+
+### Aurora PostgreSQL release 3\.5\.0<a name="AuroraPostgreSQL.Updates.20180305.350"></a>
+
+**New features**
+
+1. Added support for the following extensions:
+   + The `pg_proctab` extension version 0\.0\.9
+   + The `pg_bigm` extension version 1\.2
+
+**High priority stability enhancements**
+
+1. Fixed a bug where in rare cases a reader had inconsistent results when it restarted while a transaction with more than 64 subtransactions was being processed\.
+
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2021\-32027](https://nvd.nist.gov/vuln/detail/CVE-2021-32027)
+   + [CVE\-2021\-32028](https://nvd.nist.gov/vuln/detail/CVE-2021-32028)
+   + [CVE\-2021\-32029](https://nvd.nist.gov/vuln/detail/CVE-2021-32029)
+
+**Additional improvements and enhancements**
+
+1. Fixed a bug where the database could not be started when there were many relations in memory\-constrained environments\.
+
+1. Fixed a bug in the `apg_plan_mgmt` extension that could cause brief periods of unavailability due to an internal buffer overflow\.
+
+1. Fixed a bug on reader nodes that could cause brief periods of unavailability during WAL replay\.
+
+1. Fixed a bug in the `rds_activity_stream` extension that caused an error during startup when attempting to log audit events\.
+
+1. Fixed bugs in the `aurora_replica_status` function where rows were sometimes partially populated and some values such as Replay Latency, and CPU usage were always 0\.
+
+1. Fixed a bug where the database engine would attempt to create shared memory segments larger than the instance total memory and fail repeatedly\. For example, attempts to create 128 GiB shared buffers on a db\.r5\.large instance would fail\. With this change, requests for total shared memory allocations larger than the instance memory allow setting the instance to incompatible parameters\.
+
+1. Added logic to clean up unnecessary `pg_wal` temporary files on a database startup\.
+
+1. Fixed a bug that reported ERROR: rds\_activity\_stream stack item 2 not found on top \- cannot pop when attempting to create the `rds_activity_stream` extension\.
+
+1. Fixed a bug that could cause the error failed to build any 3\-way joins in a correlated `IN` subquery under an `EXISTS` subquery\.
+
+1. Backported the following performance improvement from the PostgreSQL community: [pg\_stat\_statements: add missing check for pgss\_enabled\(\)](https://github.com/postgres/postgres/commit/6f40ee4f837ec1ac59c8ddc73b67a04978a184d)\.
+
+1. Fixed a bug that could cause brief periods of unavailability due to running out of memory when creating the `postgis` extension with `pgAudit` enabled\.
+
+1. Fixed a bug when using outbound logical replication to synchronize changes to another database that could fail with an error message like ERROR: could not map filenode "base/16395/228486645" to relation OID\.
+
+1. Fixed a bug that could cause a brief period of unavailability when aborting a transaction\.
+
+1. Fixed a bug where the `rds_ad` role wasn't created after upgrading from a version of Aurora PostgreSQL that doesn't support Microsoft Active Directory authentication\.
+
+1. Added btree page checks to detect tuple metadata inconsistency\.
+
+1. Fixed a bug in asynchronous buffer reads that could cause brief periods of unavailability on reader nodes during WAL replay\.
+
 ## PostgreSQL 11\.9, Aurora PostgreSQL release 3\.4<a name="AuroraPostgreSQL.Updates.20180305.34"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more information about the improvements in PostgreSQL 11\.9, see [PostgreSQL release 11\.9](https://www.postgresql.org/docs/11/release-11-9.html)\.
@@ -147,7 +277,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more
 
 **High priority stability enhancements**
 
-1. Fixed a bug where a reader node might render an extra or missing row if the reader restarted while the writer node is processing a long transaction with more than 64 subtransactions\.
+1. Fixed a bug where in rare cases a reader had inconsistent results when it restarted while a transaction with more than 64 subtransactions was being processed\.
 
 **Additional improvements and enhancements**
 
@@ -762,6 +892,53 @@ You can find the following improvements in this release\.
    +  `postgis_tiger_geocoder` to version 2\.5\.1
    +  `postgis_topology` to version 2\.5\.1
    +  `rds_activity_stream` to version 1\.3
+
+## PostgreSQL 10\.16, Aurora PostgreSQL release 2\.8<a name="AuroraPostgreSQL.Updates.20180305.28"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.16\. For more information about the improvements in PostgreSQL 10\.16, see [PostgreSQL release 10\.16](https://www.postgresql.org/docs/10/release-10-16.html)\.
+
+### Aurora PostgreSQL release 2\.8\.0<a name="AuroraPostgreSQL.Updates.20180305.280"></a>
+
+**High priority stability enhancements**
+
+1. Fixed a bug where in rare cases a reader had inconsistent results when it restarted while a transaction with more than 64 subtransactions was being processed\.
+
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2021\-32027](https://nvd.nist.gov/vuln/detail/CVE-2021-32027)
+   + [CVE\-2021\-32028](https://nvd.nist.gov/vuln/detail/CVE-2021-32028)
+   + [CVE\-2021\-32029](https://nvd.nist.gov/vuln/detail/CVE-2021-32029)
+
+**Additional improvements and enhancements**
+
+1. Fixed a bug where the database could not be started when there were many relations in memory\-constrained environments\.
+
+1. Fixed a bug in the `apg_plan_mgmt` extension that could cause brief periods of unavailability due to an internal buffer overflow\.
+
+1. Fixed a bug on reader nodes that could cause brief periods of unavailability during WAL replay\.
+
+1. Fixed a bug in the `rds_activity_stream` extension that caused an error during startup when attempting to log audit events\.
+
+1. Fixed a bug that prevented minor version updates of an Aurora global database cluster\.
+
+1. Fixed bugs in the `aurora_replica_status` function where rows were sometimes partially populated and some values such as Replay Latency, and CPU usage were always 0\.
+
+1. Fixed a bug where the database engine would attempt to create shared memory segments larger than the instance total memory and fail repeatedly\. For example, attempts to create 128 GiB shared buffers on a db\.r5\.large instance would fail\. With this change, requests for total shared memory allocations larger than the instance memory allow setting the instance to incompatible parameters\.
+
+1. Added logic to clean up unnecessary `pg_wal` temporary files on a database startup\.
+
+1. Fixed a bug that reported ERROR: rds\_activity\_stream stack item 2 not found on top \- cannot pop when attempting to create the `rds_activity_stream` extension\.
+
+1. Fixed a bug that could cause the error failed to build any 3\-way joins in a correlated `IN` subquery under an `EXISTS` subquery\.
+
+1. Fixed a bug that could cause brief periods of unavailability due to running out of memory when creating the `postgis` extension with `pgAudit` enabled\.
+
+1. Fixed a bug when using outbound logical replication to synchronize changes to another database that could fail with an error message like ERROR: could not map filenode "base/16395/228486645" to relation OID\.
+
+1. Fixed a bug where the `rds_ad` role wasn't created after upgrading from a version of Aurora PostgreSQL that doesn't support Microsoft Active Directory authentication\.
+
+1. Added btree page checks to detect tuple metadata inconsistency\.
+
+1. Fixed a bug in asynchronous buffer reads that could cause brief periods of unavailability on reader nodes during WAL replay\.
 
 ## PostgreSQL 10\.14, Aurora PostgreSQL release 2\.7<a name="AuroraPostgreSQL.Updates.20180305.27"></a>
 
@@ -1612,6 +1789,37 @@ You can find the following improvements in this release\.
 1. Parallel queries – When you create a new Aurora PostgreSQL version 2\.0 instance, parallel queries are enabled for the `default.postgres10` parameter group\. The parameter `max_parallel_workers_per_gather` is set to 2 by default, but you can modify it to support your specific workload requirements\.
 
 1. Fixed a bug in which read nodes may crash following a specific type of free space change from the write node\.
+
+## PostgreSQL 9\.6\.21, Aurora PostgreSQL release 1\.10<a name="AuroraPostgreSQL.Updates.20180305.110"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.21\. For more information about the improvements in PostgreSQL 9\.6\.21, see [PostgreSQL release 9\.6\.21](https://www.postgresql.org/docs/9.6/release-9-6-21.html)\.
+
+### Aurora PostgreSQL release 1\.10\.0<a name="AuroraPostgreSQL.Updates.20180305.1100"></a>
+
+**High priority stability enhancements**
+
+1. Fixed a bug where in rare cases a reader had inconsistent results when it restarted while a transaction with more than 64 subtransactions was being processed\.
+
+1. Backported fixes for the following PostgreSQL community security issues:
+   + [CVE\-2021\-32027](https://nvd.nist.gov/vuln/detail/CVE-2021-32027)
+   + [CVE\-2021\-32028](https://nvd.nist.gov/vuln/detail/CVE-2021-32028)
+   + [CVE\-2021\-32029](https://nvd.nist.gov/vuln/detail/CVE-2021-32029)
+
+**Additional improvements and enhancements**
+
+1. Fixed a bug where the database could not be started when there were many relations in memory\-constrained environments\.
+
+1. Fixed a bug in the `apg_plan_mgmt` extension that could cause brief periods of unavailability due to an internal buffer overflow\.
+
+1. Fixed a bug where the database engine would attempt to create shared memory segments larger than the instance total memory and fail repeatedly\. For example, attempts to create 128 GiB shared buffers on a db\.r5\.large instance would fail\. With this change, requests for total shared memory allocations larger than the instance memory allow setting the instance to incompatible parameters\.
+
+1. Added logic to clean up unnecessary `pg_wal` temporary files on a database startup\.
+
+1. Fixed a bug in Aurora PostgreSQL 9\.6 that sometimes prevented read/write nodes from starting up when inbound replication is used\.
+
+1. Fixed a bug that could cause brief periods of unavailability due to running out of memory when creating the `postgis` extension with `pgAudit` enabled\.
+
+1. Added btree page checks to detect tuple metadata inconsistency\.
 
 ## PostgreSQL 9\.6\.19, Aurora PostgreSQL release 1\.9<a name="AuroraPostgreSQL.Updates.20180305.19"></a>
 

@@ -7,7 +7,7 @@
 + [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)
 + [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)
 + [Managing performance and scaling for Aurora DB clusters](Aurora.Managing.Performance.md)
-+ [Cloning an Aurora DB cluster volume](Aurora.Managing.Clone.md)
++ [Cloning a volume for an Aurora DB cluster](Aurora.Managing.Clone.md)
 + [Integrating Aurora with other AWS services](Aurora.Integrating.md)
 + [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)
 + [Rebooting an Amazon Aurora DB cluster or Amazon Aurora DB instance](USER_RebootCluster.md)

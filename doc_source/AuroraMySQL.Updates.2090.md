@@ -132,3 +132,28 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Upgra
 +  Bug \#25082593: FOREIGN KEY VALIDATION DOESN'T NEED TO ACQUIRE GAP LOCK IN READ COMMITTED 
 +  Bug \#24764800: REPLICATION FAILING ON SLAVE WITH XAER\_RMFAIL ERROR\. 
 +  Bug \#81441: WARNING ABOUT LOCALHOST WHEN USING SKIP\-NAME\-RESOLVE\. 
+
+## Comparison with Aurora MySQL version 1<a name="AuroraMySQL.Updates.2090.Compare56"></a>
+
+The following Amazon Aurora MySQL features are supported in Aurora MySQL Version 1 \(compatible with MySQL 5\.6\), but these features are currently not supported in Aurora MySQL Version 2 \(compatible with MySQL 5\.7\)\.
++ Asynchronous key prefetch \(AKP\)\. For more information, see [Working with asynchronous key prefetch in Amazon Aurora](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
++ Hash joins\. For more information, see [Working with hash joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
++ Native functions for synchronously invoking AWS Lambda functions\. For more information, see [Invoking a Lambda function with an Aurora MySQL native function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)\.
++ Scan batching\. For more information, see [Aurora MySQL database engine updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
++ Migrating data from MySQL using an Amazon S3 bucket\. For more information, see [Migrating data from MySQL by using an Amazon S3 bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.
+
+## MySQL 5\.7 compatibility<a name="AuroraMySQL.Updates.2090.Compatibility"></a>
+
+This Aurora MySQL version is wire\-compatible with MySQL 5\.7 and includes features such as JSON support, spatial indexes, and generated columns\. Aurora MySQL uses a native implementation of spatial indexing using z\-order curves to deliver >20x better write performance and >10x better read performance than MySQL 5\.7 for spatial datasets\.
+
+This Aurora MySQL version does not currently support the following MySQL 5\.7 features:
++ Group replication plugin
++ Increased page size
++ InnoDB buffer pool loading at startup
++ InnoDB full\-text parser plugin
++ Multisource replication
++ Online buffer pool resizing
++ Password validation plugin
++ Query rewrite plugins
++ Replication filtering
++ The `CREATE TABLESPACE` SQL statement

@@ -2,9 +2,9 @@
 
 You can restore a DB cluster to a specific point in time, creating a new DB cluster\.
 
-When you restore a DB cluster to a point in time, the default DB security group is applied to the new DB cluster\. If you need custom DB security groups applied to your DB cluster, you must apply them explicitly using the AWS Management Console, the AWS CLI `modify-db-cluster` command, or the Amazon RDS API `ModifyDBCluster` operation after the DB instance is available\.
+When you restore a DB cluster to a point in time, you can choose the default VPC security group or apply a custom VPC security group to your DB cluster\.
 
-Restored DB instances are automatically associated with the default parameter and option groups\. However, you can apply a custom parameter group and option group by specifying them during a restore\.
+Restored DB clusters are automatically associated with the default DB cluster and DB parameter groups\. However, you can apply custom parameter groups by specifying them during a restore\.
 
 RDS uploads transaction logs for DB clusters to Amazon S3 continuously\. To see the latest restorable time for a DB cluster, use the AWS CLI [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command and look at the value returned in the `LatestRestorableTime` field for the DB cluster\.
 

@@ -165,7 +165,7 @@ SET sentiment = (aws_comprehend.detect_sentiment (french_notes, 'fr')).sentiment
     confidence = (aws_comprehend.detect_sentiment (french_notes, 'fr')).confidence
 WHERE
     clinician_notes.french_notes IS NOT NULL AND
-    LENGTH(TRIM(clinician_notes.french_nodes)) > 0 AND
+    LENGTH(TRIM(clinician_notes.french_notes)) > 0 AND
     clinician_notes.sentiment IS NULL;
 ```
 
