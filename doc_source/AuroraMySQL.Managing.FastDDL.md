@@ -18,8 +18,9 @@ Currently, Aurora lab mode must be enabled to use fast DDL for Aurora MySQL\. We
 
 Currently, fast DDL has the following limitations:
 + Fast DDL only supports adding nullable columns, without default values, to the end of an existing table\.
-+ Fast DDL does not support partitioned tables\.
-+ Fast DDL does not support InnoDB tables that use the REDUNDANT row format\.
++ Fast DDL doesn't work for partitioned tables\.
++ Fast DDL doesn't work for InnoDB tables that use the REDUNDANT row format\.
++  Fast DDL doesn't work for tables with full\-text search indexes\. 
 + If the maximum possible record size for the DDL operation is too large, fast DDL is not used\. A record size is too large if it is greater than half the page size\. The maximum size of a record is computed by adding the maximum sizes of all columns\. For variable sized columns, according to InnoDB standards, extern bytes are not included for computation\.
 **Note**  
 The maximum record size check was added in Aurora 1\.15\.

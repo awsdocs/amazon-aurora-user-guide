@@ -24,9 +24,6 @@ The following are the Burstable Performance DB instance classes available:
 + **db\.t3** – Next generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
 + **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\. 
 
-**Note**  
-The DB instance classes that use the AWS Nitro System \(db\.r5, db\.t3\) are throttled on combined read plus write workload\.
-
 For DB instance class hardware specifications, see [Hardware specifications for DB instance classes for Aurora](#Concepts.DBInstanceClass.Summary)\.
 
 ## Supported DB engines for DB instance classes<a name="Concepts.DBInstanceClass.SupportAurora"></a>

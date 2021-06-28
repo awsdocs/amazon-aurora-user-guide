@@ -117,7 +117,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | --- | --- | --- | 
 | `allow-suspicious-udfs` | No |  | 
 | `aurora_lab_mode` | Yes |   For more information, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\.   | 
-|  `aurora_oom_response`  |  Yes  |   For more information, see [ Amazon Aurora MySQL out of memory issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.   | 
+|  `aurora_oom_response`  |  Yes  |   This parameter only applies to Aurora MySQL version 1\.18 and higher\. It isn't used in Aurora MySQL version 2\. For more information, see [ Amazon Aurora MySQL out of memory issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.   | 
 |  `aurora_parallel_query`  |  Yes  |   Set to `ON` to enable parallel query in Aurora MySQL versions 1\.23 and 2\.09 or higher\. The old `aurora_pq` parameter isn't used in these versions\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.   | 
 |  `aurora_pq`  |  Yes  |   Set to `OFF` to turn off parallel query for specific DB instances in Aurora MySQL versions before 1\.23 and 2\.09\. In 1\.23 and 2\.09 or higher, turn parallel query on and off with `aurora_parallel_query` instead\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.   | 
 | `autocommit` | Yes |  | 

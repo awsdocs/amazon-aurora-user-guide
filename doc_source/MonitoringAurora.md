@@ -11,4 +11,4 @@ Amazon Aurora uses a cluster of replicated database servers\. Typically, monitor
 + [Working with Amazon RDS events](working-with-aurora-events.md)
 + [Working with Amazon Aurora database log files](USER_LogAccess.md)
 + [Working with AWS CloudTrail and Amazon RDS](logging-using-cloudtrail.md)
-+ [Using Database Activity Streams with Amazon Aurora](DBActivityStreams.md)
++ [Monitoring Amazon Aurora using Database Activity Streams](DBActivityStreams.md)

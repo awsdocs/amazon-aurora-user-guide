@@ -1,34 +1,29 @@
-# Using Database Activity Streams with Amazon Aurora<a name="DBActivityStreams"></a>
+# Monitoring Amazon Aurora using Database Activity Streams<a name="DBActivityStreams"></a>
 
-Monitoring your database activity can help you provide safeguards for your database and help to meet compliance and regulatory requirements\. To monitor database activity with Amazon Aurora, you can use the Database Activity Streams feature\. Database activity streams provide a near real\-time stream of the activity in your relational database\. When you integrate database activity streams with monitoring tools, you can monitor and audit database activity\. 
-
-Beyond external security threats, managed databases need to provide protection against insider risks from database administrators \(DBAs\)\. Database activity streams help protect your databases from internal threats by controlling DBA access to the database activity streams\. Thus, the collection, transmission, storage, and subsequent processing of the stream of database activity is beyond the access of the DBAs that manage the database\. 
-
-A stream of database activity is pushed from Aurora to an Amazon Kinesis data stream that is created on behalf of your Aurora DB cluster\. From Kinesis, AWS services such as Amazon Kinesis Data Firehose and AWS Lambda can consume the activity stream\. Database Activity Streams is a free feature, but Amazon Kinesis charges for its streams\. For more information, see [Amazon Kinesis Data Streams pricing](http://aws.amazon.com/kinesis/data-streams/pricing/)\.
-
-An activity stream can also be consumed by applications for compliance management\. For database activity streams with Aurora PostgreSQL, compliance applications include IBM's Security Guardium, McAfee's Data Center Security Suite, and Imperva's SecureSphere Database Audit and Protection\. Such applications can use the stream to generate alerts and audit your Aurora DB clusters\.
-
-Check the website for the particular application that you want to use with database activity streams\. Confirm support for the specific Aurora DB engine and engine version that you intend to use\. 
-
-Database activity streams have the following limits and requirements:
-+ For Aurora PostgreSQL, database activity streams are supported for version 2\.3 or higher and versions 3\.0 or higher\. For PostgreSQL version compatibility, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\. 
-+ For Aurora MySQL, database activity streams are supported for version 2\.08 or higher, which is compatible with MySQL version 5\.7\.
-+ You can start a database activity stream on the primary or secondary cluster of an Aurora global database\. For DB engine version requirements, see [Limitations of Amazon Aurora global databases](aurora-global-database.md#aurora-global-database.limitations)\.
-+ Database activity streams support the DB instance classes listed for Aurora in [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora), with some exceptions:
-  +  For Aurora PostgreSQL, you only use streams with the db\.r4 or db\.r5 instance classes\. 
-  +  For Aurora MySQL, you can't use streams with any of the db\.t2 or db\.t3 instance classes\.
-+ Database activity streams aren't supported in the following AWS Regions:
-  + China \(Beijing\) Region, `cn-north-1`
-  + China \(Ningxia\) Region, `cn-northwest-1`
-  + AWS GovCloud \(US\-East\), `us-gov-east-1`
-  + AWS GovCloud \(US\-West\), `us-gov-west-1`
-+ Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.
-+ Database activity streams aren't supported in Aurora Serverless\.
+The Database Activity Streams feature provides a near real\-time stream of database activity\.
 
 **Topics**
-+ [Network prerequisites for Aurora MySQL Database Activity Streams](DBActivityStreams.Prereqs.md)
++ [Overview of Database Activity Streams](DBActivityStreams.Overview.md)
++ [Network prerequisites for Aurora MySQL database activity streams](#DBActivityStreams.Prereqs)
 + [Starting a database activity stream](DBActivityStreams.Enabling.md)
-+ [Getting the status of an activity stream](DBActivityStreams.Status.md)
-+ [Stopping an activity stream](DBActivityStreams.Disabling.md)
++ [Getting the status of a database activity stream](DBActivityStreams.Status.md)
++ [Stopping a database activity stream](DBActivityStreams.Disabling.md)
 + [Monitoring database activity streams](DBActivityStreams.Monitoring.md)
 + [Managing access to database activity streams](DBActivityStreams.ManagingAccess.md)
+
+## Network prerequisites for Aurora MySQL database activity streams<a name="DBActivityStreams.Prereqs"></a>
+
+To use Database Activity Streams with Aurora MySQL, all the DB instances that use activity streams within a VPC must be able to access AWS KMS endpoints\. Before enabling database activity streams for your Aurora MySQL cluster, make sure this requirement is satisfied\.
+
+**Important**  
+ If the Aurora MySQL DB cluster can't access the AWS KMS endpoint, the activity stream stops\. In that case, Aurora notifies you about this issue using RDS Events\. 
+
+ If the Aurora cluster is publicly available, this requirement is satisfied automatically\.  
+
+If you receive a notification that your Aurora MySQL cluster can't use database activity streams because it can't access a AWS KMS endpoint, check if your Aurora DB cluster is public or private\. If your Aurora DB cluster is private, you must configure it to enable connections\.
+
+For an Aurora DB cluster to be public, it must be marked as publicly accessible\. If you look at the details for the DB cluster in the AWS Management Console, **Publicly Accessible** is **Yes** if this is the case\. The DB cluster must also be in an Amazon VPC public subnet\. For more information about publicly accessible DB instances, see [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\. For more information about public Amazon VPC subnets, see [Your VPC and Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)\.
+
+If your Aurora DB cluster isn't publicly accessible and in a VPC public subnet, it is private\. You might keep your Aurora MySQL cluster private and use it with database activity streams\. If so, configure the cluster so that it can connect to Internet addresses through Network Address Translation \(NAT\)\. For more information about configuring NAT in your VPC, see [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)\.
+
+For more information about configuring VPC endpoints, see [VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html)\.

@@ -9,6 +9,7 @@
 + [Deletion protection for Aurora clusters](#USER_DeletionProtection)
 + [Deleting a stopped Aurora cluster](#USER_Deletion_Stopped_Cluster)
 + [Deleting Aurora MySQL clusters that are read replicas](#USER_DeleteInstance.AuroraReplica)
++ [The final snapshot when deleting a cluster](#USER_Deletion_Final_Snapshot)
 + [Deleting a DB instance from an Aurora DB Cluster](#USER_DeleteInstance)
 
 ## Deleting an Aurora DB cluster<a name="USER_DeleteCluster.DeleteCluster"></a>
@@ -236,6 +237,10 @@ $ aws rds describe-db-cluster-snapshots --db-cluster-identifier deleteme-multipl
 +  The DB instance is the only instance in the DB cluster\. 
 
  To delete a DB instance in this case, first promote the DB cluster so that it's no longer a read replica\. After the promotion completes, you can delete the final DB instance in the DB cluster\. For more information, see [Replicating Amazon Aurora MySQL DB clusters across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\. 
+
+## The final snapshot when deleting a cluster<a name="USER_Deletion_Final_Snapshot"></a>
+
+ Throughout this section, the examples show how you can choose whether to take a final snapshot when you delete an Aurora cluster\. If you choose to take a final snapshot but the name you specify matches an existing snapshot, the operation stops with an error\. In this case, examine the snapshot details to confirm if it represents your current detail or if it is an older snapshot\. If the existing snapshot doesn't have the latest data that you want to preserve, rename the snapshot and try again, or specify a different name for the **final snapshot** parameter\. 
 
 ## Deleting a DB instance from an Aurora DB Cluster<a name="USER_DeleteInstance"></a>
 

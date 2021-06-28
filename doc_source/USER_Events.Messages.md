@@ -120,8 +120,8 @@ No event category exists for Aurora Serverless in the DB cluster event type\. Th
 
 |  Category  | RDS event ID |  Description  | 
 | --- | --- | --- | 
-|  configuration change  | RDS\-EVENT\-0179 |  Database Activity Streams is started on your database cluster\. For more information see [Using Database Activity Streams with Amazon Aurora](DBActivityStreams.md)\.  | 
-|  configuration change  | RDS\-EVENT\-0180 |  Database Activity Streams is stopped on your database cluster\. For more information see [Using Database Activity Streams with Amazon Aurora](DBActivityStreams.md)\.  | 
+|  configuration change  | RDS\-EVENT\-0179 |  Database Activity Streams is started on your database cluster\. For more information see [Monitoring Amazon Aurora using Database Activity Streams](DBActivityStreams.md)\.  | 
+|  configuration change  | RDS\-EVENT\-0180 |  Database Activity Streams is stopped on your database cluster\. For more information see [Monitoring Amazon Aurora using Database Activity Streams](DBActivityStreams.md)\.  | 
 |  failover  | RDS\-EVENT\-0069 |  A failover for the DB cluster has failed\.  | 
 |  failover  | RDS\-EVENT\-0070 |  A failover for the DB cluster has restarted\.  | 
 |  failover  | RDS\-EVENT\-0071 |  A failover for the DB cluster has finished\.  | 

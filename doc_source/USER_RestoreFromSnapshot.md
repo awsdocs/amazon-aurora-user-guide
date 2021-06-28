@@ -6,7 +6,7 @@ You can use the restored DB cluster as soon as its status is `available`\. The D
 
 If you access data that hasn't been loaded yet, the DB cluster immediately downloads the requested data from Amazon S3, and then continues loading the rest of the data in the background\. For more information, see [Amazon EBS snapshots](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html)\.
 
-To help mitigate the effects of lazy loading on tables to which you require quick access, you can perform operations that involve full table scans, such as `SELECT *`\. This allows Amazon RDS to download the entirety of the backed\-up table data from S3\.
+To help mitigate the effects of lazy loading on tables to which you require quick access, you can perform operations that involve full\-table scans, such as `SELECT *`\. This allows Amazon RDS to download all of the backed\-up table data from S3\.
 
 **Note**  
 Sharing a manual DB cluster snapshot, whether encrypted or unencrypted, enables authorized AWS accounts to directly restore a DB cluster from the snapshot instead of taking a copy of it and restoring from that\. For more information, see [Sharing a DB cluster snapshot](USER_ShareSnapshot.md)\.
