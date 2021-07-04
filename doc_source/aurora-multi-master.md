@@ -1,6 +1,6 @@
 # Working with Aurora multi\-master clusters<a name="aurora-multi-master"></a>
 
- Following, you can learn about Aurora multi\-master clusters\. In a multi\-master cluster, all DB instances have read/write capability\. Multi\-master clusters have different availability characteristics, support for database features, and procedures for monitoring and troubleshooting than single\-master clusters\. 
+ With the following topics, you can learn about Aurora multi\-master clusters\. In a multi\-master cluster, all DB instances have read/write capability\. Multi\-master clusters have different availability characteristics, support for database features, and procedures for monitoring and troubleshooting than single\-master clusters\. 
 
 **Topics**
 + [Overview of Aurora multi\-master clusters](#aurora-multi-master-overview)
