@@ -4,6 +4,10 @@ The `AWS/RDS` namespace includes the following metrics that apply to database en
 
 For Aurora global database metrics, see [Amazon CloudWatch metrics for write forwarding](aurora-global-database-write-forwarding.md#aurora-global-database-write-forwarding-cloudwatch)\. For Aurora parallel query metrics, see [Monitoring parallel query](aurora-mysql-parallel-query.md#aurora-mysql-parallel-query-monitoring)\.
 
+**Topics**
++ [Cluster\-level metrics for Amazon Aurora](#Aurora.AuroraMySQL.Monitoring.Metrics.clusters)
++ [Instance\-level metrics for Amazon Aurora](#Aurora.AuroraMySQL.Monitoring.Metrics.instances)
+
 ## Cluster\-level metrics for Amazon Aurora<a name="Aurora.AuroraMySQL.Monitoring.Metrics.clusters"></a>
 
 The following table describes metrics that are specific to Aurora clusters\.

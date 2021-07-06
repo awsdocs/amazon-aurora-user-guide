@@ -16,7 +16,7 @@ Database activity streams provide a near real\-time stream of the activity in yo
 **Important**  
 Database Activity Streams is a free feature, but Amazon Kinesis charges for a data stream\. For more information, see [Amazon Kinesis Data Streams pricing](https://aws.amazon.com/kinesis/data-streams/pricing/)\.
 
-Applications for compliance management can also consume activity streams\. For Aurora PostgreSQL, compliance applications include IBM's Security Guardium, McAfee's Data Center Security Suite, and Imperva's SecureSphere Database Audit and Protection\. These applications can use the stream to generate alerts and audit activity on your Aurora DB cluster\.
+Applications for compliance management can also consume activity streams\. For Aurora PostgreSQL, compliance applications include IBM's Security Guardium and Imperva's SecureSphere Database Audit and Protection\. These applications can use the stream to generate alerts and audit activity on your Aurora DB cluster\.
 
 The following graphic shows an Aurora cluster configured with Amazon Kinesis Data Firehose\.
 
@@ -42,6 +42,7 @@ In Aurora, database activity streams have the following requirements and limitat
 + For Aurora PostgreSQL, database activity streams are supported for version 2\.3 or higher and versions 3\.0 or higher\. For PostgreSQL version compatibility, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\. 
 + For Aurora MySQL, database activity streams are supported for version 2\.08 or higher, which is compatible with MySQL version 5\.7\.
 + Database activity streams support the DB instance classes listed for Aurora in [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora), with some exceptions:
+  +  The db\.r6g instance class isn't supported\.
   +  For Aurora PostgreSQL, you can't use streams with the db\.t3\.medium instance class\.
   +  For Aurora MySQL, you can't use streams with the db\.t2 or db\.t3 instance classes\.
 + Database activity streams aren't supported in the following AWS Regions:

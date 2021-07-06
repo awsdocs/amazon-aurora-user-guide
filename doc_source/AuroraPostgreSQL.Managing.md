@@ -20,31 +20,44 @@ You can scale your Aurora PostgreSQL DB cluster by modifying the DB instance cla
 
 The maximum number of connections allowed to an Aurora PostgreSQL DB instance is determined by the `max_connections` parameter in the instance\-level parameter group for the DB instance\. By default, this value is set to the following equation:
 
-`LEAST({DBInstanceClassMemory/9531392},5000)`\.
+`LEAST({DBInstanceClassMemory/9531392},5000)`
 
-Setting the `max_connections` parameter to this equation makes sure that the number of allowed connection scales well with the size of the instance\. For example, suppose your DB instance class is db\.r4\.large, which has 15\.25 gibibytes \(GiB\) of memory\. Then the maximum connections allowed is 1600, as shown in the following equation:
+Setting the `max_connections` parameter to this equation makes sure that the number of allowed connection scales well with the size of the instance\. For example, suppose your DB instance class is db\.r5\.large, which has 16 gibibytes \(GiB\) of memory\. Then the maximum connections allowed is around 1802, as shown in the following equation:
 
 ```
-LEAST((15.25*1000000000)/9531392,5000) = 1600
+LEAST((16*1073741824)/9531392,5000) = 1802
 ```
+
+**Note**  
+The `DBInstanceClassMemory` value represents the memory capacity, in bytes, available for the DB instance\. It's a number that Aurora computes internally and isn't directly available for you to query\. Aurora reserves some memory in each DB instance for the Aurora management components\. This adjustment to the available memory produces a lower `max_connections` value than if the formula used the full memory for the associated DB instance class\. You can tune the maximum number of connections to support your workload\. 
 
 The following table lists the resulting default value of `max_connections` for each DB instance class available to Aurora PostgreSQL\. You can increase the maximum number of connections to your Aurora PostgreSQL DB instance by scaling the instance up to a DB instance class with more memory, or by setting a larger value for the `max_connections` parameter, up to 262,143\.
 
 
 | Instance class | max\_connections default value | 
 | --- | --- | 
-| db\.r4\.large | 1600 | 
-| db\.r4\.xlarge | 3200 | 
-| db\.r4\.2xlarge | 5000 | 
-| db\.r4\.4xlarge | 5000 | 
-| db\.r4\.8xlarge | 5000 | 
-| db\.r4\.16xlarge | 5000 | 
-| db\.r5\.large | 1600 | 
-| db\.r5\.xlarge | 3300 | 
-| db\.r5\.2xlarge | 5000 | 
-| db\.r5\.4xlarge | 5000 | 
-| db\.r5\.12xlarge | 5000 | 
+| db\.r6g\.16xlarge | 5000 | 
+| db\.r6g\.12xlarge | 5000 | 
+| db\.r6g\.8xlarge | 5000 | 
+| db\.r6g\.4xlarge | 5000 | 
+| db\.r6g\.2xlarge | 5000 | 
+| db\.r6g\.xlarge | 3479 | 
+| db\.r6g\.large | 1722 | 
 | db\.r5\.24xlarge | 5000 | 
+| db\.r5\.16xlarge | 5000 | 
+| db\.r5\.12xlarge | 5000 | 
+| db\.r5\.8xlarge | 5000 | 
+| db\.r5\.4xlarge | 5000 | 
+| db\.r5\.2xlarge | 5000 | 
+| db\.r5\.xlarge | 3300 | 
+| db\.r5\.large | 1600 | 
+| db\.r4\.16xlarge | 5000 | 
+| db\.r4\.8xlarge | 5000 | 
+| db\.r4\.4xlarge | 5000 | 
+| db\.r4\.2xlarge | 5000 | 
+| db\.r4\.xlarge | 3200 | 
+| db\.r4\.large | 1600 | 
+| db\.t3\.large | 844 | 
 | db\.t3\.medium | 420 | 
 
 For the list of DB instance classes supported by Aurora PostgreSQL, see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora)\. For the amount of memory for each DB instance class, see [Hardware specifications for DB instance classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.
@@ -66,7 +79,9 @@ The following table shows the maximum amount of temporary storage available for 
 | db\.r6g\.xlarge | 63 | 
 | db\.r6g\.large | 32 | 
 | db\.r5\.24xlarge | 1500 | 
+| db\.r5\.16xlarge | 1008 | 
 | db\.r5\.12xlarge | 748 | 
+| db\.r5\.8xlarge | 504 | 
 | db\.r5\.4xlarge | 249 | 
 | db\.r5\.2xlarge | 124 | 
 | db\.r5\.xlarge | 62 | 

@@ -63,9 +63,15 @@ For Windows:
 4.     --restore-to-time 2017-10-14T23:45:00.000Z
 ```
 
+**Important**  
+If you use the console to restore a DB cluster to a specified time, then Amazon RDS automatically creates the primary instance \(writer\) for your DB cluster\. If you use the AWS CLI to restore a DB cluster to a specified time, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\. Call the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create the primary instance for your DB cluster\. Include the name of the DB cluster as the `--db-cluster-identifier` option value\.
+
 ## RDS API<a name="USER_PIT.API"></a>
 
 To restore a DB cluster to a specified time, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBClusterToPointInTime.html) operation with the following parameters:
 + `SourceDBClusterIdentifier`
 + `DBClusterIdentifier`
 + `RestoreToTime`
+
+**Important**  
+If you use the console to restore a DB cluster to a specified time, then Amazon RDS automatically creates the primary instance \(writer\) for your DB cluster\. If you use the RDS API to restore a DB cluster to a specified time, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\. Call the RDS API operation [ CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) to create the primary instance for your DB cluster\. Include the name of the DB cluster as the `DBClusterIdentifier` parameter value\.

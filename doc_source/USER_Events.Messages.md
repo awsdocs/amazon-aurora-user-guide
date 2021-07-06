@@ -6,7 +6,6 @@
 + [DB instance events](#USER_Events.Messages.instance)
 + [DB parameter group events](#USER_Events.Messages.parameter-group)
 + [DB security group events](#USER_Events.Messages.security-group)
-+ [DB snapshot events](#USER_Events.Messages.snapshot)
 + [DB cluster events](#USER_Events.Messages.cluster)
 + [DB cluster snapshot events](#USER_Events.Messages.cluster-snapshot)
 
@@ -107,8 +106,6 @@ The following table shows the event category and a list of events when a DB secu
 | --- | --- | --- | 
 |  configuration change  | RDS\-EVENT\-0038 |  The security group has been modified\.  | 
 |  failure  | RDS\-EVENT\-0039 |  The security group owned by \[user\] does not exist; authorization for the security group has been revoked\.  | 
-
-## DB snapshot events<a name="USER_Events.Messages.snapshot"></a>
 
 ## DB cluster events<a name="USER_Events.Messages.cluster"></a>
 

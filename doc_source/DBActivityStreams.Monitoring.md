@@ -27,7 +27,7 @@ If an activity stream has a failure while monitoring your DB instance, you are n
 
 ## Accessing an activity stream from Kinesis<a name="DBActivityStreams.KinesisAccess"></a>
 
-When you enable an activity stream for a DB cluster, a Kinesis stream is created for you\. From Kinesis, you can monitor your database activity in real time\. To further analyze database activity, you can connect your Kinesis stream to consumer applications\. You can also connect the stream to compliance management applications such as IBM's Security Guardium, McAfee's Data Center Security Suite, or Imperva's SecureSphere Database Audit and Protection\.
+When you enable an activity stream for a DB cluster, a Kinesis stream is created for you\. From Kinesis, you can monitor your database activity in real time\. To further analyze database activity, you can connect your Kinesis stream to consumer applications\. You can also connect the stream to compliance management applications such as IBM's Security Guardium or Imperva's SecureSphere Database Audit and Protection\.
 
 **To access an activity stream from Kinesis**
 
