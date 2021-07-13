@@ -206,6 +206,7 @@ Amazon's trademarks and trade dress may not be used in
          + [Aurora MySQL database engine updates 2020-08-28 (version 2.08.2)](AuroraMySQL.Updates.2082.md)
          + [Aurora MySQL database engine updates 2020-06-18 (version 2.08.1)](AuroraMySQL.Updates.2081.md)
          + [Aurora MySQL database engine updates 2020-06-02 (version 2.08.0)](AuroraMySQL.Updates.2080.md)
+         + [Aurora MySQL database engine updates 2021-07-06 (version 2.07.5)](AuroraMySQL.Updates.2075.md)
          + [Aurora MySQL database engine updates 2021-03-04 (version 2.07.4)](AuroraMySQL.Updates.2074.md)
          + [Aurora MySQL database engine updates 2020-11-10 (version 2.07.3)](AuroraMySQL.Updates.2073.md)
          + [Aurora MySQL database engine updates 2020-04-17 (version 2.07.2)](AuroraMySQL.Updates.2072.md)

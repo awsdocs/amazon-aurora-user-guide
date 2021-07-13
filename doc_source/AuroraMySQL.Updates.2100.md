@@ -18,6 +18,9 @@
 ## Improvements<a name="AuroraMySQL.Updates.2100.Improvements"></a>
 
  **Security fixes:** 
++ [CVE\-2021\-23841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23841)
++ [CVE\-2021\-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449)
++ [CVE\-2020\-28196](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28196)
 +  [CVE\-2020\-14790](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14790) 
 +  [CVE\-2020\-14776](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14776) 
 +  [CVE\-2020\-14567](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14567) 

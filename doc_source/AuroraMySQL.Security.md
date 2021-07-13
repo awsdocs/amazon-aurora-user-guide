@@ -111,6 +111,8 @@ Set the `tls_version` DB cluster parameter to one of the following values:
 
 If the parameter isn't set, then TLS version 1\.0, 1\.1, and 1\.2 protocols are permitted for encrypted connections\.
 
+For information about modifying parameters in a DB cluster parameter group, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. If you use the AWS CLI to modify the `tls_version` DB cluster parameter, the `ApplyMethod` must be set to `pending-reboot`\. When the application method is `pending-reboot`, changes to parameters are applied after you stop and restart the DB clusters associated with the parameter group\.
+
 **Note**  
 The `tls_version` DB cluster parameter isn't available for Aurora MySQL 5\.6\.
 

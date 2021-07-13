@@ -862,7 +862,7 @@ You can find the following improvements in this release\.
 
 1. Autovacuum improvements – To provide valuable logging, the parameter `rds.force_autovacuum_logging` is ON by default in conjunction with the `log_autovacuum_min_duration` parameter set to 10 seconds\. To increase autovacuum effectiveness, the values for the `autovacuum_max_workers` and `autovacuum_vacuum_cost_limit` parameters are computed based on host memory capacity to provide larger default values\.
 
-1. Improved transaction timeout – The parameter `idle_in_transaction_session_timeout` is set to 12 hours\. Any session that has been idle more than 12 hours is terminated\.
+1. Improved transaction timeout – The parameter `idle_in_transaction_session_timeout` is set to 24 hours\. Any session that has been idle more than 24 hours is terminated\.
 
 1. The `tsearch2` module is no longer supported – If your application uses `tsearch2` functions, update it to use the equivalent functions provided by the core PostgreSQL engine\. For more information about the tsearch2 module, see [ PostgreSQL tsearch2](https://www.postgresql.org/docs/9.6/tsearch2.html)\.
 

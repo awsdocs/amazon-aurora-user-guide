@@ -13,3 +13,8 @@ Aurora MySQL 1\.23\.3 is generally available\. Aurora MySQL 1\.\* versions are c
 ## Improvements<a name="AuroraMySQL.Updates.1233.Improvements"></a>
 
  General stability and availability enhancements\. 
+
+ **Security fixes:** 
++ [CVE\-2021\-23841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23841)
++ [CVE\-2021\-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449)
++ [CVE\-2020\-28196](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28196)
