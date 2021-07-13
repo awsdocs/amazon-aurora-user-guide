@@ -76,7 +76,7 @@
 
  The underlying storage for Aurora multi\-master clusters is similar to storage for single\-master clusters\. Your data is still stored in a highly reliable, shared storage volume that grows automatically\. The core difference lies in the number and type of DB instances\. In multi\-master clusters, there are *N* read/write nodes\. Currently, the maximum for *N* is 4\. 
 
- Multi\-master clusters have no dedicated read\-only nodes\. Thus, the Aurora procedures and guidelines about Aurora Replicas don't apply to multi\-master clusters\. You can temporarily make a DB instance read\-only to place read and write workloads on different DB instances\. To do so, see [Using instance read\-only mode](#using-instance-read-only-mode)\. 
+ Multi\-master clusters have no dedicated read\-only nodes\. Thus, the Aurora procedures and guidelines about Aurora Replicas don't apply to multi\-master clusters\. You can temporarily make a DB instance read\-only to place write workloads on different DB instances\. To do so, see [Using instance read\-only mode](#using-instance-read-only-mode)\. 
 
  Multi\-master cluster nodes are connected using low\-latency and low\-lag Aurora replication\. Multi\-master clusters use all\-to\-all peer\-to\-peer replication\. Replication works directly between writers\. Every writer replicates its changes to all other writers\. 
 
