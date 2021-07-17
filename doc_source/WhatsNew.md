@@ -11,6 +11,7 @@ You can filter new Amazon Aurora features on the [What's New with Database?](htt
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Aurora version policy page](#WhatsNew) | The *Amazon Aurora User Guide* now includes a section with general information about Aurora versions and associated policies\. For details, see [Amazon Aurora versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.VersionPolicy.html)\. | July 14, 2021 | 
 | [Aurora MySQL version 2\.07\.5](AuroraMySQL.Updates.2075.md) | Aurora MySQL version 2\.07\.5 is available\. | July 6, 2021 | 
 | [Exclude Data API events from an AWS CloudTrail trail](#WhatsNew) | You can exclude Data API events from a CloudTrail trail\. For more information, see [ Excluding Data API events from an AWS CloudTrail trail](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/logging-using-cloudtrail-data-api.html#logging-using-cloudtrail-data-api.excluding-cloudtrail-events)\. | July 2, 2021 | 
 | [Aurora MySQL version 1\.23\.3](AuroraMySQL.Updates.1233.md) | Aurora MySQL version 1\.23\.3 is available\. | June 28, 2021 | 

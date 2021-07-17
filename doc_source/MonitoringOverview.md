@@ -47,7 +47,7 @@ You can use the following automated tools to watch Amazon Aurora and report when
 + **Amazon Aurora cluster status** — View details about the current status of your cluster by using the Amazon RDS console, the AWS CLI command, or the RDS API\.
 + **Amazon Aurora recommendations** — Respond to automated recommendations for database resources, such as DB instances, DB clusters, and DB cluster parameter groups\. For more information, see [Viewing Amazon Aurora recommendations](accessing-monitoring.md#USER_Recommendations)\.
 + **Amazon RDS Performance Insights** — Assess the load on your database, and determine when and where to take action\. For more information, see [Monitoring with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\.
-+ **Amazon RDS Enhanced Monitoring** — Look at metrics in real time for the operating system\. For more information, see [Monitoring OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)\.
++ **Amazon RDS Enhanced Monitoring** — Look at metrics in real time for the operating system\. For more information, see [Tracking OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)\.
 + **Amazon RDS events** – Subscribe to Amazon RDS events to be notified when changes occur with a DB instance, DB cluster, DB cluster snapshot, DB parameter group, or DB security group\. For more information, see [Using Amazon RDS event notification](USER_Events.md)\.
 + **Amazon RDS database logs** – View, download, or watch database log files using the Amazon RDS console or Amazon RDS API operations\. You can also query some database log files that are loaded into database tables\. For more information, see [Working with Amazon Aurora database log files](USER_LogAccess.md)\.
 

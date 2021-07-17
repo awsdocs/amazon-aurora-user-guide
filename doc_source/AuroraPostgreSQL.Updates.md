@@ -7,3 +7,4 @@ In this topic, you can find version and update information specific to Amazon Au
 + [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)
 + [Extension versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)
 + [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)
++ [Aurora PostgreSQL long\-term support \(LTS\) releases](AuroraPostgreSQL.Updates.LTS.md)

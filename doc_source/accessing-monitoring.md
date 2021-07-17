@@ -347,7 +347,7 @@ When you choose **Apply now**, a brief DB instance outage might result\.
 
 Amazon RDS provides metrics so that you can monitor the health of your DB instances\. You can monitor both DB instance metrics and operating system \(OS\) metrics\.
 
-Following, you can find details about how to view metrics for your DB instance using the RDS console and CloudWatch\. For information on monitoring metrics for your DB instance's operating system in real time using CloudWatch Logs, see [Monitoring OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)\.
+Following, you can find details about how to view metrics for your DB instance using the RDS console and CloudWatch\. For information on monitoring metrics for your DB instance's operating system in real time using CloudWatch Logs, see [Tracking OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
 ### Viewing metrics by using the console<a name="USER_Monitoring.CON"></a>
 
