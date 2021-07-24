@@ -18,7 +18,7 @@
 ## Improvements<a name="AuroraMySQL.Updates.2092.Improvements"></a>
 
  **New features:** 
-+  Aurora MySQL clusters now support the following EC2 R6g instances powered by Arm\-based AWS Graviton2 processors: `r6g.large`, `r6g.xlarge`, `r6g.2xlarge`, `r6g.4xlarge`, `r6g.8xlarge`, `r6g.12xlarge`, `r6g.16xlarge`\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
++  Aurora MySQL clusters now support the following EC2 R6g instances powered by Arm\-based AWS Graviton2 processors: `r6g.large`, `r6g.xlarge`, `r6g.2xlarge`, `r6g.4xlarge`, `r6g.8xlarge`, `r6g.12xlarge`, `r6g.16xlarge`\. For more information, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\. 
 
  **Security fixes:** 
 

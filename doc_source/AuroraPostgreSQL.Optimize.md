@@ -98,7 +98,7 @@ SET apg_plan_mgmt.capture_plan_baselines = off;    -- turn off capture
 SET apg_plan_mgmt.use_plan_baselines =     true;   -- turn on plan usage
 ```
 
-You can either execute SELECT, INSERT, UPDATE, or DELETE statements, or you can include the EXPLAIN statement as shown above\. Use EXPLAIN to capture a plan without the overhead or potential side\-effects of executing the statement\. For more about manual capture, see [Manually capturing plans for specific SQL statements](AuroraPostgreSQL.Optimize.CapturePlans.md#AuroraPostgreSQL.Optimize.CapturePlans.Manual)\. Note that query plan management does't save the plans for statements that refer to system tables such as `pg_class`\. 
+You can either execute SELECT, INSERT, UPDATE, or DELETE statements, or you can include the EXPLAIN statement as shown above\. Use EXPLAIN to capture a plan without the overhead or potential side\-effects of executing the statement\. For more about manual capture, see [Manually capturing plans for specific SQL statements](AuroraPostgreSQL.Optimize.CapturePlans.md#AuroraPostgreSQL.Optimize.CapturePlans.Manual)\. Note that query plan management doesn't save the plans for statements that refer to system tables such as `pg_class`\. 
 
 ### Viewing captured plans<a name="AuroraPostgreSQL.Optimize.Start.View"></a>
 

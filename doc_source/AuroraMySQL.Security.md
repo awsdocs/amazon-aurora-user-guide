@@ -11,7 +11,7 @@ Security for Amazon Aurora MySQL is managed at three levels:
   + The db\.r4 instance classes support `default` and `dedicated` VPC tenancy only\.
   + The db\.t2 instance classes support `default` VPC tenancy only\.
 
-  For more information about instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. For more information about `default` and `dedicated` VPC tenancy, see [Dedicated instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html) in the *Amazon Elastic Compute Cloud User Guide*\.
+  For more information about instance classes, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\. For more information about `default` and `dedicated` VPC tenancy, see [Dedicated instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html) in the *Amazon Elastic Compute Cloud User Guide*\.
 + To authenticate login and permissions for an Amazon Aurora MySQL DB cluster, you can take either of the following approaches, or a combination of them:
   + You can take the same approach as with a standalone instance of MySQL\.
 

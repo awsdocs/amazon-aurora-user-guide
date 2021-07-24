@@ -163,7 +163,7 @@ Requires installation of the `pg_stat_statements` extension\. For more informati
 The number of days plans are kept in the `apg_plan_mgmt.dba_plans` view before being automatically deleted\. A plan is deleted when the current date is this many days since the plan's `last_used` date\.
 
 ```
-SET apg_plan_mgmt.plan_retention_period_ = integer-value;
+SET apg_plan_mgmt.plan_retention_period = integer-value;
 ```
 
 

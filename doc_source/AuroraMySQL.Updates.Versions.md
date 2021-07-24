@@ -1,6 +1,6 @@
 # Aurora MySQL version numbers and special versions<a name="AuroraMySQL.Updates.Versions"></a>
 
- Although Aurora MySQLCompatible Edition is compatible with the MySQL database engines, Aurora MySQL includes features and bug fixes that are specific to particular Aurora MySQL versions\. Application developers can check the Aurora MySQL version in their applications by using SQL\. Database administrators can check and specify Aurora MySQL versions when creating or upgrading Aurora MySQL DB clusters and DB instances\. 
+ Although Aurora MySQL\-Compatible Edition is compatible with the MySQL database engines, Aurora MySQL includes features and bug fixes that are specific to particular Aurora MySQL versions\. Application developers can check the Aurora MySQL version in their applications by using SQL\. Database administrators can check and specify Aurora MySQL versions when creating or upgrading Aurora MySQL DB clusters and DB instances\. 
 
 **Topics**
 + [Checking or specifying Aurora MySQL engine versions through AWS](#AuroraMySQL.Updates.EngineVersions)

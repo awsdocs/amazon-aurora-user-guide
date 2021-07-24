@@ -18,7 +18,7 @@ A new console interface is available for database creation\. Choose either the *
 
 ### New console<a name="CHAP_GettingStarted.Aurora.CreateDBCluster.Console"></a>
 
-You can create an Aurora MySQLCompatible Edition DB cluster with the AWS Management Console with **Easy Create** enabled or disabled\. With **Easy Create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy Create** uses the default setting for other configuration options\. With **Easy Create** disabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
+You can create an Aurora MySQL\-Compatible Edition DB cluster with the AWS Management Console with **Easy Create** enabled or disabled\. With **Easy Create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy Create** uses the default setting for other configuration options\. With **Easy Create** disabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
 **Note**  
 For this example, **Easy Create** is enabled\. For information about creating an Aurora MySQL DB cluster with **Easy Create** not enabled, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.

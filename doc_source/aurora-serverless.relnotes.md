@@ -10,7 +10,7 @@ When minor releases of the database engines become available for Aurora Serverle
 
 ## Aurora MySQL Serverless<a name="aurora-serverless.relnotes.aurmysql.serverless"></a>
 
-If you want to use Aurora MySQLCompatible Edition for your Aurora Serverless v1 DB cluster, you can choose between Aurora MySQL 5\.6\-compatible or Aurora MySQL 5\.7\-compatible versions\. These two editions of Aurora MySQL differ significantly\. We recommend that you compare their differences before creating your Aurora Serverless v1 DB cluster so that you make the right choice for your use case\. To learn about enhancements and bug fixes for Aurora MySQL Serverless 5\.6 and 5\.7, see [Database engine updates for Aurora MySQL Serverless clusters](AuroraMySQL.Updates.ServerlessUpdates.md)\.
+If you want to use Aurora MySQL\-Compatible Edition for your Aurora Serverless v1 DB cluster, you can choose between Aurora MySQL 5\.6\-compatible or Aurora MySQL 5\.7\-compatible versions\. These two editions of Aurora MySQL differ significantly\. We recommend that you compare their differences before creating your Aurora Serverless v1 DB cluster so that you make the right choice for your use case\. To learn about enhancements and bug fixes for Aurora MySQL Serverless 5\.6 and 5\.7, see [Database engine updates for Aurora MySQL Serverless clusters](AuroraMySQL.Updates.ServerlessUpdates.md)\.
 
 ## Aurora PostgreSQL Serverless<a name="aurora-serverless.relnotes.aurpostgres.serverless"></a>
 

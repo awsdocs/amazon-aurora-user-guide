@@ -46,6 +46,8 @@ For Amazon Aurora DB cluster snapshots, you can't encrypt an unencrypted DB clus
 
 ## Incremental snapshot copying<a name="USER_CopySnapshot.Incremental"></a>
 
+### <a name="incremental-aurora"></a>
+
 Aurora doesn't support incremental snapshot copying\. Aurora DB cluster snapshot copies are always full copies\. A full snapshot copy contains all of the data and metadata required to restore the DB cluster\.
 
 ## Cross\-Region snapshot copying<a name="USER_CopySnapshot.AcrossRegions"></a>

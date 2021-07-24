@@ -563,6 +563,8 @@ If you don't specify the `--transaction-id` option, changes that result from the
 
 In addition to the common options, specify the following options:
 + `--sql` \(required\) – A SQL statement to run on the DB cluster\.
+**Tip**  
+ For MySQL\-compatible statements, don't include a semicolon at the end of the `--sql` parameter\. A trailing semicolon might cause a syntax error\. 
 + `--transaction-id` \(optional\) – The identifier of a transaction that was started using the `begin-transaction` CLI command\. Specify the transaction ID of the transaction that you want to include the SQL statement in\.
 + `--parameter-set` \(optional\) – The parameter sets for the batch operation\.
 + `--database` \(optional\) – The name of the database\.
@@ -689,17 +691,17 @@ You can run a `SELECT` statement and fetch the results with a Python application
 The following example runs a SQL query\.
 
 ```
-import boto3 
+import boto3
 
 rdsData = boto3.client('rds-data')
 
-cluster_arn = 'arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster' 
-secret_arn = 'arn:aws:secretsmanager:us-east-1:123456789012:secret:mysecret' 
- 
+cluster_arn = 'arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster'
+secret_arn = 'arn:aws:secretsmanager:us-east-1:123456789012:secret:mysecret'
+
 response1 = rdsData.execute_statement(
-            resourceArn = cluster_arn, 
-            secretArn = secret_arn, 
-            database = 'mydb', 
+            resourceArn = cluster_arn,
+            secretArn = secret_arn,
+            database = 'mydb',
             sql = 'select * from employees limit 3')
 
 print (response1['records'])
@@ -707,7 +709,7 @@ print (response1['records'])
     [
         {
             'longValue': 1
-        }, 
+        },
         {
             'stringValue': 'ROSALEZ'
         },
@@ -717,11 +719,11 @@ print (response1['records'])
         {
             'stringValue': '2016-02-15 04:34:33.0'
         }
-    ], 
+    ],
     [
         {
             'longValue': 1
-        }, 
+        },
         {
             'stringValue': 'DOE'
         },
@@ -731,11 +733,11 @@ print (response1['records'])
         {
             'stringValue': '2014-05-09 04:34:33.0'
         }
-    ], 
+    ],
     [
         {
             'longValue': 1
-        }, 
+        },
         {
             'stringValue': 'STILES'
         },
@@ -761,8 +763,8 @@ The following example runs an insert SQL statement and uses parameters\.
 ```
 import boto3
 
-cluster_arn = 'arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster' 
-secret_arn = 'arn:aws:secretsmanager:us-east-1:123456789012:secret:mysecret' 
+cluster_arn = 'arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster'
+secret_arn = 'arn:aws:secretsmanager:us-east-1:123456789012:secret:mysecret'
 
 rdsData = boto3.client('rds-data')
 
@@ -771,7 +773,7 @@ param1 = {'name':'firstname', 'value':{'stringValue': 'JACKSON'}}
 param2 = {'name':'lastname', 'value':{'stringValue': 'MATEO'}}
 paramSet = [param1, param2]
 
-response2 = rdsData.execute_statement(resourceArn=cluster_arn, 
+response2 = rdsData.execute_statement(resourceArn=cluster_arn,
                                       secretArn=secret_arn,
                                       database='mydb',
                                       sql='insert into employees(first_name, last_name) VALUES(:firstname, :lastname)',
@@ -791,34 +793,34 @@ If you don't specify a transaction ID, changes that result from the call are com
 The following example runs a SQL transaction that inserts a row in a table\.
 
 ```
-import boto3 
+import boto3
 
 rdsData = boto3.client('rds-data')
 
-cluster_arn = 'arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster' 
-secret_arn = 'arn:aws:secretsmanager:us-east-1:123456789012:secret:mysecret' 
+cluster_arn = 'arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster'
+secret_arn = 'arn:aws:secretsmanager:us-east-1:123456789012:secret:mysecret'
 
 tr = rdsData.begin_transaction(
-     resourceArn = cluster_arn, 
-     secretArn = secret_arn, 
-     database = 'mydb') 
- 
+     resourceArn = cluster_arn,
+     secretArn = secret_arn,
+     database = 'mydb')
+
 response3 = rdsData.execute_statement(
-     resourceArn = cluster_arn, 
-     secretArn = secret_arn, 
-     database = 'mydb', 
-     sql = 'insert into employees(first_name, last_name) values('XIULAN', 'WANG')', 
-     transactionId = tr['transactionId']) 
- 
+     resourceArn = cluster_arn,
+     secretArn = secret_arn,
+     database = 'mydb',
+     sql = 'insert into employees(first_name, last_name) values('XIULAN', 'WANG')',
+     transactionId = tr['transactionId'])
+
 cr = rdsData.commit_transaction(
-     resourceArn = cluster_arn, 
-     secretArn = secret_arn, 
-     transactionId = tr['transactionId']) 
- 
-cr['transactionStatus'] 
-'Transaction Committed' 
- 
-response3['numberOfRecordsUpdated'] 
+     resourceArn = cluster_arn,
+     secretArn = secret_arn,
+     transactionId = tr['transactionId'])
+
+cr['transactionStatus']
+'Transaction Committed'
+
+response3['numberOfRecordsUpdated']
 1
 ```
 
@@ -1045,7 +1047,7 @@ The client library provides automatic mapping to DTOs when a result is returned\
 List<Account> result = client.forSql("SELECT * FROM accounts")
           .execute()
           .mapToList(Account.class);
-          
+
 Account result = client.forSql("SELECT * FROM accounts WHERE account_id = 1")
           .execute()
           .mapToSingle(Account.class);

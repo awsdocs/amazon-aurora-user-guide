@@ -20,7 +20,7 @@ Before you can use Aurora Auto Scaling with an Aurora DB cluster, you must first
 
 Aurora Auto Scaling only scales a DB cluster if all Aurora Replicas in a DB cluster are in the available state\. If any of the Aurora Replicas are in a state other than available, Aurora Auto Scaling waits until the whole DB cluster becomes available for scaling\. 
 
-When Aurora Auto Scaling adds a new Aurora Replica, the new Aurora Replica is the same DB instance class as the one used by the primary instance\. For more information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. Also, the promotion tier for new Aurora Replicas is set to the last priority, which is 15 by default\. This means that during a failover, a replica with a better priority, such as one created manually, would be promoted first\. For more information, see [Fault tolerance for an Aurora DB cluster](Concepts.AuroraHighAvailability.md#Aurora.Managing.FaultTolerance)\.
+When Aurora Auto Scaling adds a new Aurora Replica, the new Aurora Replica is the same DB instance class as the one used by the primary instance\. For more information about DB instance classes, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\. Also, the promotion tier for new Aurora Replicas is set to the last priority, which is 15 by default\. This means that during a failover, a replica with a better priority, such as one created manually, would be promoted first\. For more information, see [Fault tolerance for an Aurora DB cluster](Concepts.AuroraHighAvailability.md#Aurora.Managing.FaultTolerance)\.
 
 Aurora Auto Scaling only removes Aurora Replicas that it created\.
 

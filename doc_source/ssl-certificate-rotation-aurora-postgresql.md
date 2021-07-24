@@ -25,13 +25,13 @@ Check the DB cluster configuration for the value of the `rds.force_ssl` paramete
 If `rds.force_ssl` isn't set to `1` \(on\), query the `pg_stat_ssl` view to check connections using SSL\. For example, the following query returns only SSL connections and information about the clients using SSL\.
 
 ```
-select datname, usename, ssl, client_addr from pg_stat_ssl inner join pg_stat_activity on pg_stat_ssl.pid = pg_stat_activity.pid where ssl is true and usename<>'rdsadmin';                
+select datname, usename, ssl, client_addr from pg_stat_ssl inner join pg_stat_activity on pg_stat_ssl.pid = pg_stat_activity.pid where ssl is true and usename<>'rdsadmin';
 ```
 
 Only rows using SSL/TLS connections are displayed with information about the connection\. The following is sample output\.
 
 ```
- datname  | usename | ssl | client_addr 
+ datname  | usename | ssl | client_addr
 ----------+---------+-----+-------------
  benchdb  | pgadmin | t   | 53.95.6.13
  postgres | pgadmin | t   | 53.95.6.13
@@ -47,19 +47,19 @@ When a client, such as psql or JDBC, is configured with SSL support, the client 
 Use `PGSSLROOTCERT` to verify the certificate with the `PGSSLMODE` environment variable, with `PGSSLMODE` set to `require`, `verify-ca`, or `verify-full`\. 
 
 ```
-PGSSLMODE=require PGSSLROOTCERT=/fullpath/rds-ca-2019-root.pem psql -h pgdbidentifier.cxxxxxxxx.us-east-2.rds.amazonaws.com -U primaryuser -d postgres                
+PGSSLMODE=require PGSSLROOTCERT=/fullpath/rds-ca-2019-root.pem psql -h pgdbidentifier.cxxxxxxxx.us-east-2.rds.amazonaws.com -U primaryuser -d postgres
 ```
 
 Use the `sslrootcert` argument to verify the certificate with `sslmode` in connection string format, with `sslmode` set to `require`, `verify-ca`, or `verify-full`\. 
 
 ```
-psql "host=pgdbidentifier.cxxxxxxxx.us-east-2.rds.amazonaws.com sslmode=require sslrootcert=/full/path/rds-ca-2019-root.pem user=primaryuser dbname=postgres"                
+psql "host=pgdbidentifier.cxxxxxxxx.us-east-2.rds.amazonaws.com sslmode=require sslrootcert=/full/path/rds-ca-2019-root.pem user=primaryuser dbname=postgres"
 ```
 
 For example, in the preceding case, if you use an invalid root certificate, you see an error similar to the following on your client\.
 
 ```
-psql: SSL error: certificate verify failed               
+psql: SSL error: certificate verify failed
 ```
 
 ## Updating your application trust store<a name="ssl-certificate-rotation-aurora-postgresql.updating-trust-store"></a>
@@ -82,7 +82,7 @@ You can update the trust store for applications that use JDBC for SSL/TLS connec
 1.  Convert the certificate to \.der format using the following command\.
 
    ```
-   openssl x509 -outform der -in rds-ca-2019-root.pem -out rds-ca-2019-root.der                    
+   openssl x509 -outform der -in rds-ca-2019-root.pem -out rds-ca-2019-root.der
    ```
 
    Replace the file name with the one that you downloaded\.
@@ -90,13 +90,13 @@ You can update the trust store for applications that use JDBC for SSL/TLS connec
 1.  Import the certificate into the key store using the following command\. 
 
    ```
-   keytool -import -alias rds-root -keystore clientkeystore -file rds-ca-2019-root.der                    
+   keytool -import -alias rds-root -keystore clientkeystore -file rds-ca-2019-root.der
    ```
 
 1. Confirm that the key store was updated successfully\.
 
    ```
-   keytool -list -v -keystore clientkeystore.jks                        
+   keytool -list -v -keystore clientkeystore.jks
    ```
 
    Enter the key store password when you are prompted for it\.
@@ -104,7 +104,7 @@ You can update the trust store for applications that use JDBC for SSL/TLS connec
    Your output should contain the following\.
 
    ```
-   rds-root,date, trustedCertEntry, 
+   rds-root,date, trustedCertEntry,
    Certificate fingerprint (SHA1): D4:0D:DB:29:E3:75:0D:FF:A6:71:C3:14:0B:BF:5F:47:8D:1C:80:96
    # This fingerprint should match the output from the below command
    openssl x509 -fingerprint -in rds-ca-2019-root.pem -noout

@@ -1,6 +1,6 @@
-# DB instance classes<a name="Concepts.DBInstanceClass"></a>
+# Aurora DB instance classes<a name="Concepts.DBInstanceClass"></a>
 
-The DB instance class determines the computation and memory capacity of an Amazon RDS DB instance\. The DB instance class you need depends on your processing power and memory requirements\. 
+The DB instance class determines the computation and memory capacity of an Aurora DB instance\. The DB instance class you need depends on your processing power and memory requirements\. 
 
 For more information about instance class pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\. 
 

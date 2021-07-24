@@ -6,7 +6,7 @@ You can restore a snapshot from a currently supported Aurora MySQL release into 
 + Create a snapshot from the Aurora MySQL 5\.6 Serverless  DB cluster\. To learn how, see [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\. 
 + Restore the snapshot to a new Aurora MySQL 5\.7 Serverless cluster\. For more information, see [Restoring an Aurora Serverless v1 DB cluster](aurora-serverless.restorefromsnapshot.md)\. 
 
-Aurora Serverless v1 doesn't have its own version number\. It uses the number of Aurora MySQL version that supports it to distinguish between Aurora MySQL 5\.7 and Aurora MySQL 5\.6 updates\. For more information, see [Aurora Serverless v1 and Aurora database engine versions](aurora-serverless.relnotes.md)\.
+Aurora Serverless v1 doesn't have its own version number\. It uses the number of the Aurora MySQL version that supports it to distinguish between Aurora MySQL 5\.7 and Aurora MySQL 5\.6 updates\. For more information, see [Aurora Serverless v1 and Aurora database engine versions](aurora-serverless.relnotes.md)\.
 
 For general information about Aurora Serverless, see [Using Amazon Aurora Serverless v1](aurora-serverless.md)\.
 

@@ -20,7 +20,7 @@
 + [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)
 + [Supported features in Amazon Aurora by AWS Region and Aurora DB engine](Concepts.AuroraFeaturesRegionsDBEngines.grids.md)
 + [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)
-+ [DB instance classes](Concepts.DBInstanceClass.md)
++ [Aurora DB instance classes](Concepts.DBInstanceClass.md)
 + [Amazon Aurora storage and reliability](Aurora.Overview.StorageReliability.md)
 + [Amazon Aurora security](Aurora.Overview.Security.md)
 + [High availability for Amazon Aurora](Concepts.AuroraHighAvailability.md)

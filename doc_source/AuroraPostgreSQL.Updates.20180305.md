@@ -269,9 +269,34 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.11\. For mor
 This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more information about the improvements in PostgreSQL 11\.9, see [PostgreSQL release 11\.9](https://www.postgresql.org/docs/11/release-11-9.html)\.
 
 **Topics**
++ [Aurora PostgreSQL release 3\.4\.3](#AuroraPostgreSQL.Updates.20180305.343)
 + [Aurora PostgreSQL release 3\.4\.2](#AuroraPostgreSQL.Updates.20180305.342)
 + [Aurora PostgreSQL release 3\.4\.1](#AuroraPostgreSQL.Updates.20180305.341)
 + [Aurora PostgreSQL release 3\.4\.0](#AuroraPostgreSQL.Updates.20180305.340)
+
+**Topics**
++ [Aurora PostgreSQL release 3\.4\.3](#AuroraPostgreSQL.Updates.20180305.343)
++ [Aurora PostgreSQL release 3\.4\.2](#AuroraPostgreSQL.Updates.20180305.342)
++ [Aurora PostgreSQL release 3\.4\.1](#AuroraPostgreSQL.Updates.20180305.341)
++ [Aurora PostgreSQL release 3\.4\.0](#AuroraPostgreSQL.Updates.20180305.340)
+
+### Aurora PostgreSQL release 3\.4\.3<a name="AuroraPostgreSQL.Updates.20180305.343"></a>
+
+**High priority stability enhancements**
+
+1. Provided a patch for PostgreSQL community security issues CVE\-2021\-32027, CVE\-2021\-32028 and CVE\-2021\-32029\.
+
+**Additional improvements and enhancements**
+
+1. Fixed a bug in the aws\_s3 extension to allow import of objects with leading forward slashes in the object identifier\. 
+
+1. Fixed a bug in the `rds_activity_stream` extension that caused an error during startup when attempting to log audit events\.
+
+1. Fixed a bug that returned an `ERROR` when attempting to create the `rds_activity_stream` extension\.
+
+1. Fixed a bug that could cause brief periods of unavailability due to running out of memory when creating the `postgis` extension with `pgAudit` enabled\.
+
+1. Fixed multiple issues in the Aurora storage daemon that could lead to brief periods of unavailability when specific network configurations are used\.
 
 ### Aurora PostgreSQL release 3\.4\.2<a name="AuroraPostgreSQL.Updates.20180305.342"></a>
 
@@ -319,7 +344,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more
 
 1. Aurora PostgreSQL now supports invocation of AWS Lambda functions\. This includes the new `aws_lambda` extension\. For more information, see [Invoking an AWS Lambda function from an Aurora PostgreSQL DB cluster ](PostgreSQL-Lambda.md)\. 
 
-1. The db\.r6g instance classes are now available in preview for Aurora\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\.
+1. The db\.r6g instance classes are now available in preview for Aurora\. For more information, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
 
 **Critical stability enhancements**
 +  None
@@ -945,9 +970,28 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.16\. For mor
 This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.14\. For more information about the improvements in PostgreSQL 10\.14, see [ PostgreSQL release 10\.14](https://www.postgresql.org/docs/10/release-10-14.html)\.
 
 **Topics**
++ [Aurora PostgreSQL release 2\.7\.3](#AuroraPostgreSQL.Updates.20180305.273)
 + [Aurora PostgreSQL release 2\.7\.2](#AuroraPostgreSQL.Updates.20180305.272)
 + [Aurora PostgreSQL release 2\.7\.1](#AuroraPostgreSQL.Updates.20180305.271)
 + [Aurora PostgreSQL release 2\.7\.0](#AuroraPostgreSQL.Updates.20180305.270)
+
+### Aurora PostgreSQL release 2\.7\.3<a name="AuroraPostgreSQL.Updates.20180305.273"></a>
+
+**High priority stability enhancements**
+
+1. Provided a patch for PostgreSQL community security issues CVE\-2021\-32027, CVE\-2021\-32028 and CVE\-2021\-32029\.
+
+**Additional improvements and enhancements**
+
+1. Fixed a bug in the aws\_s3 extension to allow import of objects with leading forward slashes in the object identifier\. 
+
+1. Fixed a bug in the `rds_activity_stream` extension that caused an error during startup when attempting to log audit events\.
+
+1. Fixed a bug that returned an `ERROR` when attempting to create the `rds_activity_stream` extension\.
+
+1. Fixed a bug that could cause brief periods of unavailability due to running out of memory when creating the `postgis` extension with `pgAudit` enabled\.
+
+1. Fixed multiple issues in the Aurora storage daemon that could lead to brief periods of unavailability when specific network configurations are used\.
 
 ### Aurora PostgreSQL release 2\.7\.2<a name="AuroraPostgreSQL.Updates.20180305.272"></a>
 

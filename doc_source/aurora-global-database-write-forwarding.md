@@ -187,7 +187,7 @@ XA RECOVER [CONVERT XID]
  You can't use the following statements on a secondary cluster with write forwarding enabled\.   
 
 ```
-        LOAD DATA INFILE 'data.txt' INTO TABLE t1;
+LOAD DATA INFILE 'data.txt' INTO TABLE t1;
         LOAD XML LOCAL INFILE 'test.xml' INTO TABLE t1;
 ```
  You can load data into a temporary table on a secondary cluster\. However, make sure that you run any `LOAD` statements that refer to permanent tables only on the primary cluster\. 
