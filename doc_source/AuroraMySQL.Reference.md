@@ -52,7 +52,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `binlog_format`  |  Yes  | For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. | 
 |  `binlog_row_image`  |  No  |  | 
 |  `binlog_rows_query_log_events`  |  Yes  |  | 
-|  `character-set-client-handshake`  |  Yes  |  | 
+|  `character_set_client_handshake`  |  Yes  |  | 
 |  `character_set_client`  |  Yes  |  | 
 |  `character_set_connection`  |  Yes  |  | 
 |  `character_set_database`  |  Yes  |  | 
