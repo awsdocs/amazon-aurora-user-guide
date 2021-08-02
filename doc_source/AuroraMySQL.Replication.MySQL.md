@@ -2,6 +2,9 @@
 
  Because Amazon Aurora MySQL is compatible with MySQL, you can set up replication between a MySQL database and an Amazon Aurora MySQL DB cluster\. This type of replication uses the MySQL binary log replication, also referred to as *binlog replication*\. If you use binary log replication with Aurora, we recommend that your MySQL database run MySQL version 5\.5 or later\. You can set up replication where your Aurora MySQL DB cluster is the replication source or the replica\. You can replicate with an Amazon RDS MySQL DB instance, a MySQL database external to Amazon RDS, or another Aurora MySQL DB cluster\. 
 
+**Note**  
+ You can't use binlog replication to or from certain kinds of Aurora clusters\. In particular, binlog replication isn't available for Aurora Serverless v1 and multi\-master clusters\. If the `SHOW MASTER STATUS` and `SHOW SLAVE STATUS` statements return no output, check that the cluster you're using is one that supports binlog replication\. 
+
  You can also replicate with an RDS for MySQL DB instance or Aurora MySQL DB cluster in another AWS Region\. When you're performing replication across AWS Regions, ensure that your DB clusters and DB instances are publicly accessible\. Aurora MySQL DB clusters must be part of a public subnet in your VPC\. 
 
  If you want to configure replication between an Aurora MySQL DB cluster and an Aurora MySQL DB cluster in another region, you can create an Aurora MySQL DB cluster as a read replica in a different AWS Region than the source DB cluster\. For more information, see [Replicating Amazon Aurora MySQL DB clusters across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\. 

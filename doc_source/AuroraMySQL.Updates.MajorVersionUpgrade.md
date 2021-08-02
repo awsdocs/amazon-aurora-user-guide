@@ -197,6 +197,9 @@ aws rds modify-db-cluster ^
 
  Similarly, create any corresponding 5\.7\-compatible DB parameter group\. You associate that parameter group with all the DB instances in the cluster as part of the upgrade process\. 
 
+**Important**  
+ If you specify any custom parameter group during the upgrade process, you must manually reboot the cluster after the upgrade finishes\. Doing so makes the cluster begin using your custom parameter settings\. 
+
 ## Changes to cluster properties between Aurora MySQL version 1 and 2<a name="AuroraMySQL.Upgrading.Attrs"></a>
 
  For MySQL 5\.6\-compatible clusters, the value that you use for the `engine` parameter in AWS CLI commands or RDS API operations is `aurora`\. For MySQL 5\.7\-compatible clusters, the corresponding value is `aurora-mysql`\. When you upgrade from Aurora MySQL version 1 to version 2, make sure to change any applications or scripts you use to set up or manage Aurora MySQL clusters and DB instances\. 

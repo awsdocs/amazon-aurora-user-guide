@@ -351,7 +351,7 @@ The AWS CLI can format responses in JSON\.
 
 **Topics**
 + [Starting a SQL transaction](#data-api.calling.cli.begin-transaction)
-+ [Running a SQL statement](#data-api.calling.cli.execute-statment)
++ [Running a SQL statement](#data-api.calling.cli.execute-statement)
 + [Running a batch SQL statement over an array of data](#data-api.calling.cli.batch-execute-statement)
 + [Committing a SQL transaction](#data-api.calling.cli.commit-transaction)
 + [Rolling back a SQL transaction](#data-api.calling.cli.rollback-transaction)
@@ -390,7 +390,7 @@ The following is an example of the response\.
 }
 ```
 
-#### Running a SQL statement<a name="data-api.calling.cli.execute-statment"></a>
+#### Running a SQL statement<a name="data-api.calling.cli.execute-statement"></a>
 
 You can run a SQL statement using the `aws rds-data execute-statement` CLI command\.
 
@@ -412,7 +412,7 @@ In addition to the common options, specify the following options:
 The DB cluster returns a response for the call\.
 
 **Note**  
-The response size limit is 1 MB\. If the call returns more than 1 MB of response data, the call is terminated\.  
+The response size limit is 1 MiB\. If the call returns more than 1 MiB of response data, the call is terminated\.  
 The maximum number of requests per second is 1,000\.
 
 For example, the following CLI command runs a single SQL statement and omits the metadata in the results \(the default\)\.
@@ -572,7 +572,8 @@ In addition to the common options, specify the following options:
 The DB cluster returns a response to the call\.
 
 **Note**  
-The response size limit is 1 MB\. If the call returns more than 1 MB of response data, the call is terminated\.  
+There isn't a fixed upper limit on the number of parameter sets\. However, the maximum size of the HTTP request submitted through the Data API is 4 MiB\. If the request exceeds this limit, the Data API returns an error and doesn't process the request\. This 4 MiB limit includes the size of the HTTP headers and the JSON notation in the request\. Thus, the number of parameter sets that you can include depends on a combination of factors, such as the size of the SQL statement and the size of each parameter set\.  
+The response size limit is 1 MiB\. If the call returns more than 1 MiB of response data, the call is terminated\.  
 The maximum number of requests per second is 1,000\.
 
 For example, the following CLI command runs a batch SQL statement over an array of data with a parameter set\.
@@ -675,7 +676,7 @@ The following is an example of the response\.
 
 You can call the Data API from a Python application\.
 
-The following examples use the AWS SDK for Python \(Boto\)\. For more information about Boto, see the [AWS SDK for Python \(Boto 3\) documentation](http://boto3.amazonaws.com/v1/documentation/api/latest/index.html)\.
+The following examples use the AWS SDK for Python \(Boto\)\. For more information about Boto, see the [AWS SDK for Python \(Boto 3\) documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/index.htmlindex.html)\.
 
 In each example, replace the DB cluster's Amazon Resource Name \(ARN\) with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in Secrets Manager that allows access to the DB cluster\.
 
@@ -831,7 +832,7 @@ If you run a data definition language \(DDL\) statement, we recommend continuing
 
 You can call the Data API from a Java application\.
 
-The following examples use the AWS SDK for Java\. For more information, see the [AWS SDK for Java Developer Guide](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/welcome.html)\.
+The following examples use the AWS SDK for Java\. For more information, see the [AWS SDK for Java Developer Guide](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/welcome.html)\.
 
 In each example, replace the DB cluster's Amazon Resource Name \(ARN\) with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in Secrets Manager that allows access to the DB cluster\.
 
@@ -1083,9 +1084,9 @@ To solve this issue, make sure that each row in a result set is 64 KB or less\.
 
 ### Database response exceeded size limit<a name="data-api.troubleshooting.response-size-too-large"></a>
 
-In this case, the size of the result set returned by the database was too large\. The Data API limit is 1 MB in the result set returned by the database\.
+In this case, the size of the result set returned by the database was too large\. The Data API limit is 1 MiB in the result set returned by the database\.
 
-To solve this issue, make sure that calls to the Data API return 1 MB of data or less\. If you need to return more than 1 MB, you can use multiple [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html) calls with the `LIMIT` clause in your query\.
+To solve this issue, make sure that calls to the Data API return 1 MiB of data or less\. If you need to return more than 1 MiB, you can use multiple [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_ExecuteStatement.html) calls with the `LIMIT` clause in your query\.
 
 For more information about the `LIMIT` clause, see [SELECT syntax](https://dev.mysql.com/doc/refman/5.7/en/select.html) in the MySQL documentation\.
 
