@@ -12,15 +12,15 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 
 ## DB instance class types<a name="Concepts.DBInstanceClass.Types"></a>
 
-Amazon Aurora supports two types of instance classes: Memory Optimized and Burstable Performance\. For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
+Amazon Aurora supports two types of instance classes: memory optimized and burstable performance\. For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
 
-The following are the Memory Optimized DB instance classes available:
+The following are the memory optimized DB instance classes available:
 + **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
 + **db\.r5** – Latest generation instance classes optimized for memory\-intensive applications\. These offer improved networking performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r4** – Instance classes optimized for memory\-intensive applications\. These offer improved networking performance\.
 + **db\.r3** – Instance classes that provide memory optimization\.
 
-The following are the Burstable Performance DB instance classes available:
+The following are the burstable performance DB instance classes available:
 + **db\.t3** – Next generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
 + **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\. 
 
@@ -50,7 +50,7 @@ In the following table, you can find details about supported Amazon Aurora DB in
 
 | Instance class | Aurora MySQL | Aurora PostgreSQL | 
 | --- | --- | --- | 
-| db\.r6g – Memory\-optimized instance classes powered by AWS Graviton2 processors | 
+| db\.r6g – memory optimized instance classes powered by AWS Graviton2 processors | 
 | db\.r6g\.16xlarge | 2\.09\.2 and higher | 12\.4 and higher, 11\.9 and higher | 
 | db\.r6g\.12xlarge | 2\.09\.2 and higher | 12\.4 and higher, 11\.9 and higher | 
 | db\.r6g\.8xlarge | 2\.09\.2 and higher | 12\.4 and higher, 11\.9 and higher | 
@@ -58,7 +58,7 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.r6g\.2xlarge | 2\.09\.2 and higher | 12\.4 and higher, 11\.9 and higher | 
 | db\.r6g\.xlarge | 2\.09\.2 and higher | 12\.4 and higher, 11\.9 and higher | 
 | db\.r6g\.large | 2\.09\.2 and higher | 12\.4 and higher, 11\.9 and higher | 
-| db\.r5 – Latest generation memory\-optimized instance classes | 
+| db\.r5 – latest generation memory optimized instance classes | 
 | db\.r5\.24xlarge | 1\.22 and higher, 2\.06 and higher | Yes | 
 | db\.r5\.16xlarge | 1\.22 and higher, 2\.06 and higher | Yes | 
 | db\.r5\.12xlarge | 1\.14\.4 and higher | Yes | 
@@ -67,27 +67,27 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.r5\.2xlarge | 1\.14\.4 and higher | Yes | 
 | db\.r5\.xlarge | 1\.14\.4 and higher | Yes | 
 | db\.r5\.large | 1\.14\.4 and higher | Yes | 
-| db\.r4 – Memory\-optimized instance classes | 
+| db\.r4 – memory optimized instance classes | 
 | db\.r4\.16xlarge | 1\.14\.4 and higher | Yes | 
 | db\.r4\.8xlarge | 1\.14\.4 and higher | Yes | 
 | db\.r4\.4xlarge | 1\.14\.4 and higher | Yes | 
 | db\.r4\.2xlarge | 1\.14\.4 and higher | Yes | 
 | db\.r4\.xlarge | 1\.14\.4 and higher | Yes | 
 | db\.r4\.large | 1\.14\.4 and higher | Yes | 
-| db\.r3 – Memory\-optimized instance classes | 
+| db\.r3 – memory optimized instance classes | 
 | db\.r3\.8xlarge | Yes | No | 
 | db\.r3\.4xlarge | Yes | No | 
 | db\.r3\.2xlarge | Yes | No | 
 | db\.r3\.xlarge | Yes | No | 
 | db\.r3\.large | Yes | No | 
-| db\.t3 – Next generation burstable performance instance classes | 
+| db\.t3 – next generation burstable performance instance classes | 
 | db\.t3\.2xlarge | No | No | 
 | db\.t3\.xlarge | No | No | 
 | db\.t3\.large | 2\.10 and higher | 11\.6 and higher, 10\.11 and higher | 
 | db\.t3\.medium | 1\.14\.4 and higher | 10\.7 and higher | 
 | db\.t3\.small | 1\.14\.4 and higher | No | 
 | db\.t3\.micro | No | No | 
-| db\.t2 – Burstable performance instance classes | 
+| db\.t2 – burstable performance instance classes | 
 | db\.t2\.medium | Yes | No | 
 | db\.t2\.small | Yes | No | 
 
@@ -258,7 +258,7 @@ For information about Aurora DB engine support for each DB instance class, see [
 
 | Instance class | vCPU | ECU | Memory \(GiB\) | Max\. bandwidth \(mbps\) of local storage | Network performance | 
 | --- | --- | --- | --- | --- | --- | 
-| db\.r6g – Memory\-optimized instance classes powered by AWS Graviton2 processors | 
+| db\.r6g – memory optimized instance classes powered by AWS Graviton2 processors | 
 | db\.r6g\.16xlarge | 64 | – | 512 | 19,000 | 25 Gbps | 
 | db\.r6g\.12xlarge | 48 | – | 384 | 13,500 | 20 Gbps | 
 | db\.r6g\.8xlarge | 32 | – | 256 | 9,000 | 12 Gbps | 
@@ -266,7 +266,7 @@ For information about Aurora DB engine support for each DB instance class, see [
 | db\.r6g\.2xlarge | 8 | – | 64 | Up to 4,750 | Up to 10 Gbps  | 
 | db\.r6g\.xlarge | 4 | – | 32 | Up to 4,750 | Up to 10 Gbps  | 
 | db\.r6g\.large | 2 | – | 16 | Up to 4,750 | Up to 10 Gbps  | 
-| db\.r5 – Latest generation memory\-optimized instance classes | 
+| db\.r5 – latest generation memory optimized instance classes | 
 | db\.r5\.24xlarge | 96 | 347 | 768 | 19,000 | 25 Gbps | 
 | db\.r5\.16xlarge | 64 | 264 | 512 | 13,600 | 20 Gbps | 
 | db\.r5\.12xlarge | 48 | 173 | 384 | 9,500 | 10 Gbps | 
@@ -275,27 +275,27 @@ For information about Aurora DB engine support for each DB instance class, see [
 | db\.r5\.2xlarge | 8 | 38 | 64 | Up to 4,750 | Up to 10 Gbps | 
 | db\.r5\.xlarge | 4 | 19 | 32 | Up to 4,750 | Up to 10 Gbps | 
 | db\.r5\.large | 2 | 10 | 16 | Up to 4,750 | Up to 10 Gbps | 
-| db\.r4 – Memory\-optimized instance classes | 
+| db\.r4 – memory optimized instance classes | 
 | db\.r4\.16xlarge | 64 | 195 | 488 | 14,000 | 25 Gbps | 
 | db\.r4\.8xlarge | 32 | 99 | 244 | 7,000 | 10 Gbps | 
 | db\.r4\.4xlarge | 16 | 53 | 122 | 3,500 | Up to 10 Gbps | 
 | db\.r4\.2xlarge | 8 | 27 | 61 | 1,700 | Up to 10 Gbps | 
 | db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | 850 | Up to 10 Gbps | 
 | db\.r4\.large | 2 | 7 | 15\.25 | 425 | Up to 10 Gbps | 
-| db\.r3 – Memory\-optimized instance classes | 
+| db\.r3 – memory optimized instance classes | 
 | db\.r3\.8xlarge | 32 | 104 | 244 | — | 10 Gbps | 
 | db\.r3\.4xlarge | 16 | 52 | 122 | 2,000 | High | 
 | db\.r3\.2xlarge | 8 | 26 | 61 | 1,000 | High | 
 | db\.r3\.xlarge | 4 | 13 | 30\.5 | 500 | Moderate | 
 | db\.r3\.large | 2 | 6\.5 | 15\.25 | — | Moderate | 
-| db\.t3 – Next generation burstable performance instance classes | 
+| db\.t3 – next generation burstable performance instance classes | 
 | db\.t3\.2xlarge | 8 | Variable | 32 | Up to 2,048 | Up to 5 Gbps | 
 | db\.t3\.xlarge | 4 | Variable | 16 | Up to 2,048 | Up to 5 Gbps | 
 | db\.t3\.large | 2 | Variable | 8 | Up to 2,048 | Up to 5 Gbps | 
 | db\.t3\.medium | 2 | Variable | 4 | Up to 1,536 | Up to 5 Gbps | 
 | db\.t3\.small | 2 | Variable | 2 | Up to 1,536 | Up to 5 Gbps | 
 | db\.t3\.micro | 2 | Variable | 1 | Up to 1,536 | Up to 5 Gbps | 
-| db\.t2 – Burstable performance instance classes | 
+| db\.t2 – burstable performance instance classes | 
 | db\.t2\.medium | 2 | Variable | 4 | — | Moderate | 
 | db\.t2\.small | 1 | Variable | 2 | — | Low | 
 

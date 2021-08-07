@@ -107,7 +107,11 @@ We recommend the following process when upgrading an Aurora PostgreSQL DB cluste
 
 1. Upgrade certain extensions to the latest available version before performing the major version upgrade\. The extensions to update include the following:
    + `pgRouting`
-   + `postGIS`
+   + `postgis_raster`
+   + `postgis_tiger_geocoder`
+   + `postgis_topology`
+   + `address_standardizer`
+   + `address_standardizer_data_us`
 
    Run the following command for each extension that you are using\. 
 
@@ -254,7 +258,7 @@ A PostgreSQL DB instance is automatically upgraded during your maintenance windo
 
 ## Upgrading PostgreSQL extensions<a name="USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades"></a>
 
-A PostgreSQL engine upgrade doesn't upgrade any PostgreSQL extensions\. To update an extension after an engine upgrade, use the `ALTER EXTENSION UPDATE` command\. 
+A PostgreSQL engine upgrade doesn't automatically upgrade any PostgreSQL extensions\. To update an extension after an engine upgrade, use the `ALTER EXTENSION UPDATE` command\. 
 
 **Note**  
 If you are running the `PostGIS` extension in your Amazon RDS PostgreSQL DB instance, make sure that you follow the [PostGIS upgrade instructions](https://postgis.net/docs/postgis_installation.html#upgrading) in the PostGIS documentation before you upgrade the extension\. 

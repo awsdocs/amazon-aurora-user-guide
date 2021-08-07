@@ -11,6 +11,7 @@ You can filter new Amazon Aurora features on the [What's New with Database?](htt
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Amazon RDS supports RDS Proxy in a shared VPC](#WhatsNew) | You can now create an RDS Proxy in a shared VPC\. For more information about RDS Proxy, see "Managing Connections with Amazon RDS Proxy" in the [Amazon RDS User Guide](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html) or the [Aurora User Guide](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html)\. | August 6, 2021 | 
 | [Aurora MySQL Serverless version 1\.22\.3](AuroraMySQL.Updates.serverless_1_22_03.md) |  Aurora Serverless with MySQL 5\.6 compatibility is available\. The release includes features and bug fixes based on Aurora MySQL version 1\.22\.3\. For more information about Aurora Serverless, see [Using Amazon Aurora Serverless](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)\.  | July 16, 2021 | 
 | [Aurora version policy page](#WhatsNew) | The *Amazon Aurora User Guide* now includes a section with general information about Aurora versions and associated policies\. For details, see [Amazon Aurora versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.VersionPolicy.html)\. | July 14, 2021 | 
 | [Aurora MySQL version 2\.07\.5](AuroraMySQL.Updates.2075.md) | Aurora MySQL version 2\.07\.5 is available\. | July 6, 2021 | 

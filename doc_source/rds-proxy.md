@@ -206,7 +206,7 @@
 
 ### Setting up network prerequisites<a name="rds-proxy-network-prereqs"></a>
 
- Using RDS Proxy requires you to have a set of networking resources in place\. These include a virtual private cloud \(VPC\), two or more subnets, an Amazon EC2 instance within the same VPC, and an internet gateway\. If you've successfully connected to any RDS DB instances or Aurora DB clusters, you already have the required network resources\. 
+ Using RDS Proxy requires you to have a common virtual private cloud \(VPC\) between your Aurora DB cluster or RDS DB instance and RDS Proxy\. This VPC should have a minimum of two subnets that are in different Availability Zones\. Your account can either own these subnets or share them with other accounts\. For information about VPC sharing, see [Work with shared VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html)\. Your client application resources such as Amazon EC2, Lambda, or Amazon ECS can be in the same VPC or in a separate VPC from the proxy\. Note that if you've successfully connected to any RDS DB instances or Aurora DB clusters, you already have the required network resources\.
 
  If you're just getting started with RDS or Aurora, you can learn the basics of connecting to a database by following the procedures in [Setting up your environment for Amazon Aurora](CHAP_SettingUp_Aurora.md)\. You can also follow the tutorial in [Getting started with Amazon Aurora](CHAP_GettingStartedAurora.md)\. 
 
@@ -476,7 +476,8 @@ aws kms create-key --description "$PREFIX-test-key" --policy """
     Provide additional connectivity configuration: 
    +  **VPC security group**\. Choose an existing VPC security group\. You can also choose for the AWS Management Console to create a new security group for you and use that\. 
 **Note**  
- This security group must allow access to the database the proxy connects to\. The same security group is used for ingress from your applications to the proxy, and for egress from the proxy to the database\. For example, suppose that you use the same security group for your database and your proxy\. In this case, make sure that you specify that resources in that security group can communicate with other resources in the same security group\. 
+ This security group must allow access to the database the proxy connects to\. The same security group is used for ingress from your applications to the proxy, and for egress from the proxy to the database\. For example, suppose that you use the same security group for your database and your proxy\. In this case, make sure that you specify that resources in that security group can communicate with other resources in the same security group\.  
+When using a shared VPC, you can't use the default security group for the VPC, or one that belongs to another account\. Choose a security group that belongs to your account\. If one doesn't exist, create one\. For more information about this limitation, see [Work with shared VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html#vpc-share-limitations)\. 
 
     \(Optional\) Provide advanced configuration: 
    +  **Enable enhanced logging**\. You can enable this setting to troubleshoot proxy compatibility or performance issues\. 
@@ -525,6 +526,10 @@ aws rds create-db-proxy ^
 
 **Tip**  
  If you don't already know the subnet IDs to use for the `--vpc-subnet-ids` parameter, see [Setting up network prerequisites](#rds-proxy-network-prereqs) for examples of how to find the subnet IDs that you can use\. 
+
+**Note**  
+The security group must allow access to the database the proxy connects to\. The same security group is used for ingress from your applications to the proxy, and for egress from the proxy to the database\. For example, suppose that you use the same security group for your database and your proxy\. In this case, make sure that you specify that resources in that security group can communicate with other resources in the same security group\.  
+When using a shared VPC, you can't use the default security group for the VPC, or one that belongs to another account\. Choose a security group that belongs to your account\. If one doesn't exist, create one\. For more information about this limitation, see [Work with shared VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html#vpc-share-limitations)\. 
 
  To create the required information and associations for the proxy, you also use the [register\-db\-proxy\-targets](https://docs.aws.amazon.com/cli/latest/reference/rds/register-db-proxy-targets.html) command\. Specify the target group name `default`\. RDS Proxy automatically creates a target group with this name when you create each proxy\. 
 
@@ -1114,7 +1119,7 @@ aws rds deregister-db-proxy-targets
 **Tip**  
  When you create a proxy for an Aurora cluster using the AWS Management Console, you can choose for RDS Proxy to automatically create a reader endpoint\. For information about the benefits of a reader endpoint, see [Using reader endpoints with Aurora clusters](#rds-proxy-endpoints-reader)\. 
 
- For a proxy endpoint that you create, you can also associate the endpoint with a different virtual private cloud \(VPC\) than the proxy itself uses\. By doing so, you can connect to the proxy from a different VPC, for example a VPC used by a different application within your organization\. Both VPCs must be owned by the same AWS account\. 
+ For a proxy endpoint that you create, you can also associate the endpoint with a different virtual private cloud \(VPC\) than the proxy itself uses\. By doing so, you can connect to the proxy from a different VPC, for example a VPC used by a different application within your organization\.  
 
  For information about limits associated with proxy endpoints, see [Limits for proxy endpoints](#rds-proxy-endpoints-limits)\. 
 
@@ -1235,7 +1240,7 @@ mysql> select count(*) from information_schema.TABLES;
 
  By default, the components of your RDS and Aurora technology stack are all in the same Amazon VPC\. For example, suppose that an application running on an Amazon EC2 instance connects to an Amazon RDS DB instance or an Aurora DB cluster\. In this case, the application server and database must both be within the same VPC\. 
 
- With RDS Proxy, you can set up access to an Aurora cluster or RDS instance in one VPC from resources such as EC2 instances in another VPC\. For example, your organization might have multiple applications that access the same database resources\. Each application might be in its own VPC\. To use cross\-VPC capability with RDS Proxy, all the VPCs must be owned by the same AWS account\. 
+ With RDS Proxy, you can set up access to an Aurora cluster or RDS instance in one VPC from resources such as EC2 instances in another VPC\. For example, your organization might have multiple applications that access the same database resources\. Each application might be in its own VPC\.  
 
  To enable cross\-VPC access, you create a new endpoint for the proxy\. If you aren't familiar with creating proxy endpoints, see [Endpoints for Amazon RDS Proxy](#rds-proxy-endpoints) for details\. The proxy itself resides in the same VPC as the Aurora DB cluster or RDS instance\. However, the cross\-VPC endpoint resides in the other VPC, along with the other resources such as the EC2 instances\. The cross\-VPC endpoint is associated with subnets and security groups from the same VPC as the EC2 and other resources\. These associations let you connect to the endpoint from the applications that otherwise can't access the database due to the VPC restrictions\. 
 
@@ -1494,7 +1499,7 @@ aws rds delete-db-proxy-endpoint ^
 
  When you associate additional endpoints with a proxy, RDS Proxy automatically determines which DB instances in your cluster to use for each endpoint\. You can't choose specific instances the way that you can with Aurora custom endpoints\. 
 
- To use cross\-VPC capability with RDS Proxy, all the VPCs must be owned by the same AWS account\. 
+ 
 
  Reader endpoints aren't available for Aurora multi\-writer clusters\. 
 

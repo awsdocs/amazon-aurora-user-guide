@@ -1,10 +1,9 @@
 # Amazon Aurora PostgreSQL reference<a name="AuroraPostgreSQL.Reference"></a>
 
-**Contents**
+**Topics**
 + [Amazon Aurora PostgreSQL parameters](#AuroraPostgreSQL.Reference.ParameterGroups)
-  + [Aurora PostgreSQL cluster\-level parameters](#AuroraPostgreSQL.Reference.Parameters.Cluster)
-  + [Aurora PostgreSQL instance\-level parameters](#AuroraPostgreSQL.Reference.Parameters.Instance)
 + [Amazon Aurora PostgreSQL events](#AuroraPostgreSQL.Reference.Waitevents)
++ [Aurora PostgreSQL functions reference](Appendix.AuroraPostgreSQL.Functions.md)
 
 ## Amazon Aurora PostgreSQL parameters<a name="AuroraPostgreSQL.Reference.ParameterGroups"></a>
 
