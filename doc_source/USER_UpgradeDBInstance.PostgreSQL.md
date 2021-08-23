@@ -236,8 +236,6 @@ To upgrade the engine version of a DB cluster, use the [ModifyDBCluster](https:/
 
 ## Automatic minor version upgrades for PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.Minor"></a>
 
-If you enable the **Auto minor version upgrade** option when creating or modifying a DB cluster, you can have your cluster automatically upgraded\.
-
 For each PostgreSQL major version, one minor version is designated by Amazon Aurora as the automatic upgrade version\. After a minor version has been tested and approved by Amazon Aurora, the minor version upgrade occurs automatically during your maintenance window\. Aurora doesn't automatically set newer released minor versions as the automatic upgrade version\. Before Aurora designates a newer automatic upgrade version, several criteria are considered, such as the following:
 + Known security issues
 + Bugs in the PostgreSQL community version
@@ -249,12 +247,78 @@ You can use the following AWS CLI command and script to determine the current au
 aws rds describe-db-engine-versions --engine aurora-postgresql | grep -A 1 AutoUpgrade| grep -A 2 true |grep PostgreSQL | sort --unique | sed -e 's/"Description": "//g'
 ```
 
-**Note**  
 If no results are returned, there is no automatic minor version upgrade available and scheduled\.
 
 A PostgreSQL DB instance is automatically upgraded during your maintenance window if the following criteria are met:
-+ The DB cluster has the **Auto minor version upgrade** option enabled\.
++ The DB cluster has the **Auto minor version upgrade** option turned on\.
 + The DB cluster is running a minor DB engine version that is less than the current automatic upgrade minor version\.
+
+ If any of the DB instances in a cluster don't have the auto minor version upgrade setting turned on, Aurora doesn't automatically upgrade any of the instances in that cluster\. Make sure to keep that setting consistent for all the DB instances in the cluster\. 
+
+### Turning on automatic minor version upgrades<a name="USER_UpgradeDBInstance.MinorUpgrade"></a>
+
+To turn on automatic minor version upgrades for an Aurora PostgreSQL DB cluster, use the following instructions for the AWS Management Console, the AWS CLI, or the RDS API\. 
+
+#### Console<a name="USER_UpgradeDBInstance.MinorUpgrade.Console"></a>
+
+ Follow the general procedure to modify the DB instances in your cluster, as described in [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\. Repeat this procedure for each DB instance in your cluster\. 
+
+**To use the console to implement automatic minor version upgrades for your cluster**
+
+1.  Sign in to the Amazon RDS console, choose **Databases**, and find the DB cluster where you want to turn automatic minor version upgrade on or off\. 
+
+1.  Choose each DB instance in the DB cluster that you want to modify\. Apply the following change for each DB instance in sequence: 
+
+   1.  Choose **Modify**\. 
+
+   1. In the **Maintenance** section, select the **Enable auto minor version upgrade** box\. 
+
+   1.  Choose **Continue** and check the summary of modifications\. 
+
+   1.  \(Optional\) Choose **Apply immediately** to apply the changes immediately\. 
+
+   1.  On the confirmation page, choose **Modify DB instance**\. 
+
+#### AWS CLI<a name="USER_UpgradeDBInstance.MinorUpgrade.CLI"></a>
+
+To use the CLI to implement minor version upgrades, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) command\. 
+
+ When you call the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command, specify the name of your DB instance for the `--db-instance-identifier` option and `true` for the `--auto-minor-version-upgrade` option\. Optionally, specify the `--apply-immediately` option to immediately turn this setting on for your DB instance\. Run a separate `modify-db-instance` command for each DB instance in the cluster\. 
+
+ You can use a CLI command such as the following to check the status of **Enable auto minor version upgrade** for all of the DB instances in your Aurora PostgreSQL clusters\. 
+
+```
+aws rds describe-db-instances \
+  --query '*[].{DBClusterIdentifier:DBClusterIdentifier,DBInstanceIdentifier:DBInstanceIdentifier,AutoMinorVersionUpgrade:AutoMinorVersionUpgrade}'
+```
+
+ That command produces output similar to the following\. 
+
+```
+[
+  {
+      "DBInstanceIdentifier": "db-t2-medium-instance",
+      "DBClusterIdentifier": "cluster-57-2020-06-03-6411",
+      "AutoMinorVersionUpgrade": true
+  },
+  {
+      "DBInstanceIdentifier": "db-t2-small-original-size",
+      "DBClusterIdentifier": "cluster-57-2020-06-03-6411",
+      "AutoMinorVersionUpgrade": false
+  },
+  {
+      "DBInstanceIdentifier": "instance-2020-05-01-2332",
+      "DBClusterIdentifier": "cluster-57-2020-05-01-4615",
+      "AutoMinorVersionUpgrade": true
+  },
+... output omitted ...
+```
+
+#### RDS API<a name="USER_UpgradeDBInstance.MinorUpgrade.API"></a>
+
+To use the API to implement minor version upgrades, use the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) operation\. 
+
+ Call the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation, and specify the name of your DB cluster for the `DBInstanceIdentifier` parameter and `true` for the `AutoMinorVersionUpgrade` parameter\. Optionally, set the `ApplyImmediately` parameter to `true` to immediately turn this setting on for your DB instance\. Call a separate `ModifyDBInstance` operation for each DB instance in the cluster\. 
 
 ## Upgrading PostgreSQL extensions<a name="USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades"></a>
 

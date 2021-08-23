@@ -1,6 +1,6 @@
 # aurora\_stat\_dml\_activity<a name="aurora_stat_dml_activity"></a>
 
-Reports cummulative activity for each type of data manipulation language \(DML\) operation on a database in an Aurora PostgreSQL cluster\.
+Reports cumulative activity for each type of data manipulation language \(DML\) operation on a database in an Aurora PostgreSQL cluster\.
 
 ## Syntax<a name="aurora_stat_dml_activity-syntax"></a>
 
@@ -21,17 +21,17 @@ The object ID \(OID\) of the database in the Aurora PostgreSQL cluster\.
 
 ## Usage notes<a name="aurora_stat_dml_activity-usage-notes"></a>
 
-This function is only available with Aurora PostgreSQL release 3\.1 compatible with PostgreSQL engine 11\.6 and later\.
+The `aurora_stat_dml_activity` function is only available with Aurora PostgreSQL release 3\.1 compatible with PostgreSQL engine 11\.6 and later\.
 
-Use this function on Aurora PostgreSQL clusters with a large number of databases to identify which databases have more and/or slower DML activity\.
+Use this function on Aurora PostgreSQL clusters with a large number of databases to identify which databases have more or slower DML activity, or both\.
 
-The function returns the number of executions and the cummulative latency in microseconds for SELECT, INSERT, UPDATE, and DELETE operations\. The report includes only successful DML operations\.
+The `aurora_stat_dml_activity` function returns the number of times the operations ran and the cumulative latency in microseconds for SELECT, INSERT, UPDATE, and DELETE operations\. The report includes only successful DML operations\.
 
 You can reset this statistic by using the PostgreSQL statistics access function `pg_stat_reset`\. You can check the last time this statistic was reset by using the `pg_stat_get_db_stat_reset_time` function\. For more information about PostgreSQL statistics access functions, see [The Statistics Collector](https://www.postgresql.org/docs/9.1/monitoring-stats.html) in the PostgreSQL documentation\.
 
 ## Examples<a name="aurora_stat_dml_activity-examples"></a>
 
-This example shows how to report DML activity statistics for the connected database\.
+The following example shows how to report DML activity statistics for the connected database\.
 
 ```
 -- Define the oid variable from connected database by using \gset
@@ -62,10 +62,9 @@ delete_count             | 1
 delete_latency_microsecs | 53027
 ```
 
-This example shows DML activity statistics for all databases in the Aurora PostgreSQL cluster\. This cluster has two databases, `postgres` and `mydb`\. The comma\-separated list corresponds with the `select_count`, `select_latency_microsecs`, `insert_count`, `insert_latency_microsecs`, `update_count`, `update_latency_microsecs`, `delete_count`, and `delete_latency_microsecs` fields\.
+The following example shows DML activity statistics for all databases in the Aurora PostgreSQL cluster\. This cluster has two databases, `postgres` and `mydb`\. The comma\-separated list corresponds with the `select_count`, `select_latency_microsecs`, `insert_count`, `insert_latency_microsecs`, `update_count`, `update_latency_microsecs`, `delete_count`, and `delete_latency_microsecs` fields\.
 
-**Note**  
-Aurora PostgreSQL creates and uses a system database named "rdsadmin" to support administrative operations such as backups, restores, health checks, replication, and so on\. These DML operations have no impact on your Aurora PostgreSQL cluster\.
+Aurora PostgreSQL creates and uses a system database named `rdsadmin` to support administrative operations such as backups, restores, health checks, replication, and so on\. These DML operations have no impact on your Aurora PostgreSQL cluster\.
 
 ```
 => SELECT oid, 
@@ -81,7 +80,7 @@ Aurora PostgreSQL creates and uses a system database named "rdsadmin" to support
  16401 | mydb           | (200246,64302436,200036,107101855,600000,83659417514,0,0)
 ```
 
-This example shows DML activity statistics for all databases, organized in columns for better readability\.
+The following example shows DML activity statistics for all databases, organized in columns for better readability\.
 
 ```
 SELECT db.datname,
@@ -109,7 +108,7 @@ FROM  (SELECT datname,
  mydb           | 71           | 453514                   | 0            | 0                        | 1            | 190                      | 1            | 152
 ```
 
-This example shows the average cummulative latency \(cummulative latency divided by count\) for each DML operation for the database with the OID `16401`\.
+The following example shows the average cumulative latency \(cumulative latency divided by count\) for each DML operation for the database with the OID `16401`\.
 
 ```
 => SELECT select_count, 

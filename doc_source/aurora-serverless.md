@@ -68,7 +68,7 @@ The following limitations apply to Aurora Serverless v1:
   + Aurora PostgreSQL query plan management \(`apg_plan_management` extension\) isn't supported\.
   + The logical replication feature available in Amazon RDS PostgreSQL and Aurora PostgreSQL isn't supported\. 
   + Outbound communications such as those enabled by Amazon RDS for PostgreSQL extensions aren't supported\. For example, you can't access external data with the `postgres_fdw/dblink` extension\. For more information about RDS PostgreSQL extensions, see [PostgreSQL on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x) in the *RDS User Guide*\.
-  + Currently, certain SQL queries and commands aren't recommended\. These include session\-level advisory locks, temporary relations, asynchronous notifications \(`LISTEN`\), and cursors with hold \(`DECLARE name ... CURSOR WITH HOLD FOR query`\)\. Also, `NOTIFY` commands prevent scaling and aren't recommended\. 
+  + Currently, certain SQL queries and commands aren't recommended\. These include session\-level advisory locks, temporary relations, asynchronous notifications \(`LISTEN`\), and cursors with hold \(`DECLARE name ... CURSOR WITH HOLD FOR query`\)\. Also, `NOTIFY` and `COPY` commands prevent scaling and aren't recommended\. 
 
     For more information, see [Autoscaling for Aurora Serverless v1](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\.
 + You can't set the preferred backup window for an Aurora Serverless v1 DB cluster\.

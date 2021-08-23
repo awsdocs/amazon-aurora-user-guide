@@ -1,6 +1,6 @@
 # aurora\_list\_builtins<a name="aurora_list_builtins"></a>
 
-Lists all available Aurora PostgreSQL built\-in functions along with brief descriptions and function details\.
+Lists all available Aurora PostgreSQL built\-in functions, along with brief descriptions and function details\.
 
 ## Syntax<a name="aurora_list_builtins-syntax"></a>
 

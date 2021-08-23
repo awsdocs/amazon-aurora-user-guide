@@ -1,6 +1,6 @@
 # Aurora PostgreSQL functions reference<a name="Appendix.AuroraPostgreSQL.Functions"></a>
 
-Following, you can find a reference for functions that are available for Amazon RDS instances that run the Amazon Aurora PostgreSQL\-Compatible Edition DB engine\.  
+Following, you can find a reference for functions that are available for Amazon RDS instances that run the Amazon Aurora PostgreSQL\-Compatible Edition DB engine\. 
 
 ## Overview<a name="Appendix.AuroraPostgreSQL.Functions.Overview"></a>
 

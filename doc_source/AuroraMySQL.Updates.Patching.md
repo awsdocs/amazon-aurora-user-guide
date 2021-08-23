@@ -118,7 +118,7 @@ aws rds describe-db-instances \
 
  The zero\-downtime patching \(ZDP\) feature attempts, on a best\-effort basis, to preserve client connections through an Aurora MySQL upgrade\. If ZDP completes successfully, application sessions are preserved and the database engine restarts while the upgrade is in progress\. The database engine restart can cause a drop in throughput lasting for a few seconds to approximately one minute\. 
 
- ZDP is available in Aurora MySQL 2\.07\.2 through 2\.07\.4, and 2\.10\.0 and higher, compatible with MySQL 5\.7\.  
+ ZDP is available in Aurora MySQL 2\.07\.2 through 2\.07\.5, and 2\.10\.0 and higher, compatible with MySQL 5\.7\. 
 
  ZDP only applies to Aurora MySQL DB instances that use the `db.t2` or `db.t3` instance classes\. 
 

@@ -11,14 +11,17 @@ aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[].[Eng
 For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability.PostgreSQL)\.
 
 **Topics**
++ [PostgreSQL 12\.7, Aurora PostgreSQL release 4\.2](#AuroraPostgreSQL.Updates.20180305.42)
 + [PostgreSQL 12\.6, Aurora PostgreSQL release 4\.1](#AuroraPostgreSQL.Updates.20180305.41)
 + [PostgreSQL 12\.4, Aurora PostgreSQL release 4\.0](#AuroraPostgreSQL.Updates.20180305.40)
++ [PostgreSQL 11\.12, Aurora PostgreSQL release 3\.6](#AuroraPostgreSQL.Updates.20180305.36)
 + [PostgreSQL 11\.11, Aurora PostgreSQL release 3\.5](#AuroraPostgreSQL.Updates.20180305.35)
 + [PostgreSQL 11\.9, Aurora PostgreSQL release 3\.4](#AuroraPostgreSQL.Updates.20180305.34)
 + [PostgreSQL 11\.8, Aurora PostgreSQL release 3\.3](#AuroraPostgreSQL.Updates.20180305.33)
 + [PostgreSQL 11\.7, Aurora PostgreSQL release 3\.2](#AuroraPostgreSQL.Updates.20180305.32)
 + [PostgreSQL 11\.6, Aurora PostgreSQL release 3\.1](#AuroraPostgreSQL.Updates.20180305.31)
 + [PostgreSQL 11\.4, Aurora PostgreSQL release 3\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.30)
++ [PostgreSQL 10\.17, Aurora PostgreSQL release 2\.9](#AuroraPostgreSQL.Updates.20180305.29)
 + [PostgreSQL 10\.16, Aurora PostgreSQL release 2\.8](#AuroraPostgreSQL.Updates.20180305.28)
 + [PostgreSQL 10\.14, Aurora PostgreSQL release 2\.7](#AuroraPostgreSQL.Updates.20180305.27)
 + [PostgreSQL 10\.13, Aurora PostgreSQL release 2\.6](#AuroraPostgreSQL.Updates.20180305.26)
@@ -28,6 +31,7 @@ For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.
 + [PostgreSQL 10\.6, Aurora PostgreSQL release 2\.2 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.22)
 + [PostgreSQL 10\.5, Aurora PostgreSQL release 2\.1 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.21)
 + [PostgreSQL 10\.4, Aurora PostgreSQL release 2\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.20)
++ [PostgreSQL 9\.6\.22, Aurora PostgreSQL release 1\.11](#AuroraPostgreSQL.Updates.20180305.111)
 + [PostgreSQL 9\.6\.21, Aurora PostgreSQL release 1\.10](#AuroraPostgreSQL.Updates.20180305.110)
 + [PostgreSQL 9\.6\.19, Aurora PostgreSQL release 1\.9](#AuroraPostgreSQL.Updates.20180305.19)
 + [PostgreSQL 9\.6\.18, Aurora PostgreSQL release 1\.8](#AuroraPostgreSQL.Updates.20180305.18)
@@ -43,6 +47,52 @@ For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.
 For information about extensions and modules, see [Extension versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)\.
 
 The following Aurora PostgreSQL versions are supported\. 
+
+## PostgreSQL 12\.7, Aurora PostgreSQL release 4\.2<a name="AuroraPostgreSQL.Updates.20180305.42"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.7\. For more information about the improvements in PostgreSQL 12\.7, see [PostgreSQL release 12\.7](https://www.postgresql.org/docs/12/release-12-7.html)\.
+
+### Aurora PostgreSQL release 4\.2\.0<a name="AuroraPostgreSQL.Updates.20180305.420"></a>
+
+**New features**
+
+1. Added support for the `oracle_fdw` extension version 1\.2\.
+
+**High priority stability enhancements**
+
+1.  Fixed an issue where creating a database from an existing template database with tablespace resulted in an error with the message `ERROR: could not open file pg_tblspc/...: No such file or directory.`
+
+1.  Fixed an issue where, in rare cases, an Aurora replica may be unable to start when a large number of PostgreSQL subtransactions \(i\.e\. SQL savepoints\) have been used\.
+
+1.  Fixed an issue where, in rare circumstances, read results may be inconsistent for repeated read requests on replica nodes\.
+
+**Additional improvements and enhancements**
+
+1.  Upgraded OpenSSL to 1\.1\.1k\.
+
+1.  Reduced CPU usage and memory consumption of the WAL apply process on Aurora replicas for some workloads\. 
+
+1.  Improved safety checks in the write path to detect incorrect writes to metadata\. 
+
+1.  Improved security by removing 3DES and other older ciphers for SSL/TLS connections\. 
+
+1.  Fixed an issue where a duplicate file entry can prevent the Aurora PostgreSQL engine from starting up\. 
+
+1.  Fixed an issue that could cause temporary unavailability under heavy workloads\. 
+
+1.  Added back ability to use a leading forward slash in the S3 path during S3 import\. 
+
+1.  Added Graviton support for oracle\_fdw extension version 1\.2\. 
+
+1. Changed the following extensions:
+
+1.  Updated the `Orafce` extension to version 3\.16\. 
+
+1.  Updated the `pg_partman` extension to version 4\.5\.1\. 
+
+1.  Updated the `pg_cron` extension to version 1\.3\.1\. 
+
+1.  Updated the `postgis` extension to version 3\.0\.3\. 
 
 ## PostgreSQL 12\.6, Aurora PostgreSQL release 4\.1<a name="AuroraPostgreSQL.Updates.20180305.41"></a>
 
@@ -208,6 +258,38 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.4\. For more
    + `postGIS` to version 3\.0\.2 
    + `postgis_tiger_geocoder` to version 3\.0\.2 
    + `postgis_topology` to version 3\.0\.2
+
+## PostgreSQL 11\.12, Aurora PostgreSQL release 3\.6<a name="AuroraPostgreSQL.Updates.20180305.36"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.12\. For more information about the improvements in PostgreSQL 11\.12, see [PostgreSQL release 11\.12](https://www.postgresql.org/docs/11/release-11-12.html)\.
+
+### Aurora PostgreSQL release 3\.6\.0<a name="AuroraPostgreSQL.Updates.20180305.360"></a>
+
+**High priority stability enhancements**
+
+1.  Fixed an issue where creating a database from an existing template database with tablespace resulted in an error with the message `ERROR: could not open file pg_tblspc/...: No such file or directory.`
+
+1. Fixed an issue where, in rare cases, an Aurora replica may be unable to start when a large number of PostgreSQL subtransactions \(i\.e\. SQL savepoints\) have been used\. 
+
+1.  Fixed an issue where, in rare circumstances, read results may be inconsistent for repeated read requests on replica nodes\.
+
+**Additional improvements and enhancements**
+
+1. Upgraded OpenSSL to 1\.1\.1k\.
+
+1.  Reduced CPU usage and memory consumption of the WAL apply process on Aurora replicas for some workloads\. 
+
+1.  Improved metadata protection from accidental erasure\. 
+
+1.  Improved safety checks in the write path to detect incorrect writes to metadata\. 
+
+1.  Fixed an issue where a duplicate file entry can prevent the Aurora PostgreSQL engine from starting up\. 
+
+1.  Fixed an issue that could cause temporary unavailability under heavy workloads\. 
+
+1.  Added back ability to use a leading forward slash in the S3 path during S3 import\. 
+
+1.  Updated the `orafce` extension to version 3\.16\. 
 
 ## PostgreSQL 11\.11, Aurora PostgreSQL release 3\.5<a name="AuroraPostgreSQL.Updates.20180305.35"></a>
 
@@ -918,6 +1000,38 @@ You can find the following improvements in this release\.
    +  `postgis_topology` to version 2\.5\.1
    +  `rds_activity_stream` to version 1\.3
 
+## PostgreSQL 10\.17, Aurora PostgreSQL release 2\.9<a name="AuroraPostgreSQL.Updates.20180305.29"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.17\. For more information about the improvements in PostgreSQL 10\.17, see [PostgreSQL release 10\.17](https://www.postgresql.org/docs/11/release-10-17.html)\.
+
+### Aurora PostgreSQL release 2\.9<a name="AuroraPostgreSQL.Updates.20180305.290"></a>
+
+**High priority stability enhancements**
+
+1.  Fixed an issue where creating a database from an existing template database with tablespace resulted in an error with the message `ERROR: could not open file pg_tblspc/...: No such file or directory.` 
+
+1. Fixed an issue where, in rare cases, an Aurora replica may be unable to start when a large number of PostgreSQL subtransactions \(i\.e\. SQL savepoints\) have been used\.
+
+1. Fixed an issue where, in rare circumstances, read results may be inconsistent for repeated read requests on replica nodes\.
+
+**Additional improvements and enhancements**
+
+1. Upgraded OpenSSL to 1\.1\.1k\.
+
+1.  Reduced CPU usage and memory consumption of the WAL apply process on Aurora replicas for some workloads\. 
+
+1.  Improved safety checks in the write path to detect incorrect writes to metadata\. 
+
+1.  Fixed an issue where a duplicate file entry can prevent the Aurora PostgreSQL engine from starting up\. 
+
+1.  Fixed an issue that could cause temporary unavailability under heavy workloads\. 
+
+1.  Added back ability to use a leading forward slash in the S3 path during S3 import\. 
+
+1.  Updated the orafce extension to version 3\.16\. 
+
+1.  Updated the PostGIS extension to version 2\.4\.7\. 
+
 ## PostgreSQL 10\.16, Aurora PostgreSQL release 2\.8<a name="AuroraPostgreSQL.Updates.20180305.28"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.16\. For more information about the improvements in PostgreSQL 10\.16, see [PostgreSQL release 10\.16](https://www.postgresql.org/docs/10/release-10-16.html)\.
@@ -1518,7 +1632,7 @@ You can find the following new features and improvements in this engine version\
 
 1. Fixed a bug where in rare cases, database writes may stall following an error returned by one of the six copies of an Aurora log record\. 
 
-1. Fixed a bug related to logical replication where an individual transaction larger than 1 Gb in size may result in an engine crash\.
+1. Fixed a bug related to logical replication where an individual transaction larger than 1 GB in size may result in an engine crash\.
 
 1. Fixed a memory leak on read nodes when cluster cache management is enabled\.
 
@@ -1833,6 +1947,38 @@ You can find the following improvements in this release\.
 1. Parallel queries – When you create a new Aurora PostgreSQL version 2\.0 instance, parallel queries are enabled for the `default.postgres10` parameter group\. The parameter `max_parallel_workers_per_gather` is set to 2 by default, but you can modify it to support your specific workload requirements\.
 
 1. Fixed a bug in which read nodes may crash following a specific type of free space change from the write node\.
+
+## PostgreSQL 9\.6\.22, Aurora PostgreSQL release 1\.11<a name="AuroraPostgreSQL.Updates.20180305.111"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.22\. For more information about the improvements in PostgreSQL 9\.6\.22, see [PostgreSQL release 9\.6\.22](https://www.postgresql.org/docs/96/release-9-6.html)\.
+
+### Aurora PostgreSQL release 1\.11<a name="AuroraPostgreSQL.Updates.20180305.111"></a>
+
+**High priority stability enhancements**
+
+1.  Fixed an issue where creating a database from an existing template database with tablespace resulted in an error with the message `ERROR: could not open file pg_tblspc/...: No such file or directory`\.
+
+1.  Fixed an issue where, in rare cases, an Aurora replica may be unable to start when a large number of PostgreSQL subtransactions \(i\.e\. SQL savepoints\) have been used\.
+
+1.  Fixed an issue where, in rare circumstances, read results may be inconsistent for repeated read requests on replica nodes\.
+
+**Additional improvements and enhancements**
+
+1. Upgraded OpenSSL to 1\.1\.1k\.
+
+1.  Reduced CPU usage and memory consumption of the WAL apply process on Aurora replicas for some workloads\. 
+
+1.  Improve safety checks in the write path to detect incorrect writes to metadata\. 
+
+1.  Fixed an issue where a duplicate file entry can prevent the Aurora PostgreSQL engine from starting up\. 
+
+1.  Fixed an issue that could cause temporary unavailability under heavy workloads\. 
+
+1.  Added back ability to use a leading forward slash in the S3 path during S3 import\. 
+
+1.  Updated the PostGIS extension to version 2\.4\.7\. 
+
+1.  Updated the `Orafce` extension to version 3\.16\. 
 
 ## PostgreSQL 9\.6\.21, Aurora PostgreSQL release 1\.10<a name="AuroraPostgreSQL.Updates.20180305.110"></a>
 

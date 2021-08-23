@@ -676,7 +676,7 @@ The following is an example of the response\.
 
 You can call the Data API from a Python application\.
 
-The following examples use the AWS SDK for Python \(Boto\)\. For more information about Boto, see the [AWS SDK for Python \(Boto 3\) documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/index.htmlindex.html)\.
+The following examples use the AWS SDK for Python \(Boto\)\. For more information about Boto, see the [AWS SDK for Python \(Boto 3\) documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)\.
 
 In each example, replace the DB cluster's Amazon Resource Name \(ARN\) with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in Secrets Manager that allows access to the DB cluster\.
 

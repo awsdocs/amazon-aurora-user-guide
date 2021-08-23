@@ -33,7 +33,7 @@ For more information about backup storage costs, see [Amazon RDS pricing](https:
 
 You can copy snapshots shared to you by other AWS accounts\. In some cases, you might copy an encrypted snapshot that has been shared from another AWS account\. In these cases, you must have access to the AWS KMS customer master key \(CMK\) that was used to encrypt the snapshot\. 
 
-You can only copy a shared DB cluster snapshot, whether encrypted or not, in the same AWS Region\. For more information, see [Sharing an encrypted snapshot](USER_ShareSnapshot.md#USER_ShareSnapshot.Encrypted)\. 
+You can only copy a shared DB cluster snapshot, whether encrypted or not, in the same AWS Region\. For more information, see [Sharing encrypted snapshots](USER_ShareSnapshot.md#USER_ShareSnapshot.Encrypted)\. 
 
 ## Handling encryption<a name="USER_CopySnapshot.Encryption"></a>
 
