@@ -11,6 +11,7 @@ aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[].[Eng
 For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability.PostgreSQL)\.
 
 **Topics**
++ [PostgreSQL 13\.3](#AuroraPostgreSQL.Updates.20180305.133)
 + [PostgreSQL 12\.7, Aurora PostgreSQL release 4\.2](#AuroraPostgreSQL.Updates.20180305.42)
 + [PostgreSQL 12\.6, Aurora PostgreSQL release 4\.1](#AuroraPostgreSQL.Updates.20180305.41)
 + [PostgreSQL 12\.4, Aurora PostgreSQL release 4\.0](#AuroraPostgreSQL.Updates.20180305.40)
@@ -47,6 +48,47 @@ For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.
 For information about extensions and modules, see [Extension versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)\.
 
 The following Aurora PostgreSQL versions are supported\. 
+
+## PostgreSQL 13\.3<a name="AuroraPostgreSQL.Updates.20180305.133"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.3\. For more information about the improvements in PostgreSQL 13\.3, see [PostgreSQL release 13\.3](https://www.postgresql.org/docs/13/release-13-3.html)\.
+
+### Aurora PostgreSQL release 13\.3<a name="AuroraPostgreSQL.Updates.20180305.133"></a>
+
+**New features**
+
+1. This release contains all of the fixes, features, and improvements present in [ PostgreSQL 12\.7](https://www.postgresql.org/docs/12/release-12-7.html), with added support for the following new features:
+   + This release supports Intel based instance types R5 and T3\.
+   + This release adds support for [ Graviton2 db\.r6g instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora)\.
+   + This release supports multiple major version upgrade paths to version 13\.3 from Graviton2\-based instances \(R6g\) on 12\.4, 12\.6, 12\.7 or versions 11\.11, 11\.12\.
+   + This release supports multiple major version upgrade paths to version 13\.3 from Intel\-based instances \(R5, T3\) on 9\.6\.22, 10\.17, 11\.12, 12\.7\.
+   + This release supports bool\_plperl version 1\.0\.
+   + This release supports rds\_tools version 1\.0\.
+
+**High priority stability enhancements**
+
+1. Backported fixes for the following PostgreSQL community security issues: [CVE\-2021\-3677](https://nvd.nist.gov/vuln/detail/CVE-2021-3677)
+
+1. Instance type R4 is now deprecated\.
+
+**Additional improvements and enhancements**
+
+1. Updated the following extensions:
+   + `hll` to version 2\.15\.
+   + `hstore` to version 1\.7\.
+   + `intarray` to version 1\.3\.
+   + `log_fdw` to version 1\.2\.
+   + `ltree` to version 1\.2\.
+   + `pg_hint_plan` to version 1\.3\.7\.
+   + `pg_repack` to version 1\.4\.6\.
+   + `pg_stat_statements` to version 1\.8\.
+   + `pg_trgm` to version 1\.5\.
+   + `pgaudit` to version 1\.5\.
+   + `pglogical` to version 2\.3\.3\.
+   + `pgrouting` to version 3\.1\.0
+   + `plcoffee` to version 2\.3\.15\.
+   + `plls` to version 2\.3\.15\.
+   + `plv8` to version 2\.3\.15\.
 
 ## PostgreSQL 12\.7, Aurora PostgreSQL release 4\.2<a name="AuroraPostgreSQL.Updates.20180305.42"></a>
 
@@ -85,14 +127,10 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.7\. For more
 1.  Added Graviton support for oracle\_fdw extension version 1\.2\. 
 
 1. Changed the following extensions:
-
-1.  Updated the `Orafce` extension to version 3\.16\. 
-
-1.  Updated the `pg_partman` extension to version 4\.5\.1\. 
-
-1.  Updated the `pg_cron` extension to version 1\.3\.1\. 
-
-1.  Updated the `postgis` extension to version 3\.0\.3\. 
+   + Updated the `Orafce` extension to version 3\.16\.
+   + Updated the `pg_partman` extension to version 4\.5\.1\.
+   + Updated the `pg_cron` extension to version 1\.3\.1\.
+   + Updated the `postgis` extension to version 3\.0\.3\.
 
 ## PostgreSQL 12\.6, Aurora PostgreSQL release 4\.1<a name="AuroraPostgreSQL.Updates.20180305.41"></a>
 

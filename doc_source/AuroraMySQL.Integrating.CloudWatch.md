@@ -115,8 +115,14 @@ After enabling Aurora MySQL log events, you can monitor the events in Amazon Clo
 
 For example, if you configure the export function to include the slow query log for a DB cluster named `mydbcluster`, slow query data is stored in the `/aws/rds/cluster/mydbcluster/slowquery` log group\.
 
-All of the events from all of the DB instances in a DB cluster are pushed to a log group using different log streams\.
+The events from all instances in your cluster are pushed to a log group using different log streams\. The behavior depends on which of the following conditions is true:
++ A log group with the specified name exists\.
 
-If a log group with the specified name exists, Aurora uses that log group to export log data for the Aurora DB cluster\. You can use automated configuration, such as AWS CloudFormation, to create log groups with predefined log retention periods, metric filters, and customer access\. Otherwise, a new log group is automatically created using the default log retention period, **Never Expire**, in CloudWatch Logs\. You can use the CloudWatch Logs console, the AWS CLI, or the CloudWatch Logs API to change the log retention period\. For more information about changing log retention periods in CloudWatch Logs, see [Change log data retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\.
+  Aurora uses the existing log group to export log data for the cluster\. To create log groups with predefined log retention periods, metric filters, and customer access, you can use automated configuration, such as AWS CloudFormation\.
++ A log group with the specified name doesn't exist\.
 
-You can use the CloudWatch Logs console, the AWS CLI, or the CloudWatch Logs API to search for information within the log events for a DB cluster\. For more information about searching and filtering log data, see [Searching and filtering log data](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/MonitoringLogData.html)\.
+  When a matching log entry is detected in the log file for the instance, Aurora MySQL creates a new log group in CloudWatch Logs automatically\. The log group uses the default log retention period of **Never Expire**\.
+
+  To change the log retention period, use the CloudWatch Logs console, the AWS CLI, or the CloudWatch Logs API\. For more information about changing log retention periods in CloudWatch Logs, see [Change log data retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\.
+
+To search for information within the log events for a DB cluster, use the CloudWatch Logs console, the AWS CLI, or the CloudWatch Logs API\. For more information about searching and filtering log data, see [Searching and filtering log data](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/MonitoringLogData.html)\.

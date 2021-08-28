@@ -1,6 +1,7 @@
 # Extension versions for Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Extensions"></a>
 
 **Topics**
++ [Extensions supported for Aurora PostgreSQL 13\.x](#AuroraPostgreSQL.Extensions.13)
 + [Extensions supported for Aurora PostgreSQL 12\.x](#AuroraPostgreSQL.Extensions.12)
 + [Extensions supported for Aurora PostgreSQL 11\.x](#AuroraPostgreSQL.Extensions.11)
 + [Extensions supported for Aurora PostgreSQL 10\.x](#AuroraPostgreSQL.Extensions.10)
@@ -8,6 +9,90 @@
 + [Aurora PostgreSQL apg\_plan\_mgmt extension versions](#AuroraPostgreSQL.Extensions.apg_plan_mgmt)
 
 To upgrade a PostgreSQL extension, see [Upgrading PostgreSQL extensions](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades)\.
+
+## Extensions supported for Aurora PostgreSQL 13\.x<a name="AuroraPostgreSQL.Extensions.13"></a>
+
+The following table shows the PostgreSQL extension versions that are currently supported on Aurora PostgreSQL versions 13\.x\. "NA" indicates that the extension isn't available for that PostgreSQL version\. For more information about PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/13/extend-extensions.html) in the PostgreSQL documentation\. 
+
+
+| Extension | 13\.3 | 
+| --- | --- | 
+| [address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.3 | 
+| [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.3 | 
+|  [amcheck](https://www.postgresql.org/docs/current/amcheck.html) | 1\.2 | 
+|  [apg\_plan\_mgmt](#AuroraPostgreSQL.Extensions.apg_plan_mgmt) | 2\.1 | 
+| aurora\_stat\_utils | 1\.0 | 
+| aws\_commons | 1\.2 | 
+| aws\_lambda | 1\.0 | 
+| [aws\_ml](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/postgresql-ml.html#postgresql-ml-aws_ml-install)  | 1\.0 | 
+| aws\_s3 | 1\.1 | 
+| [bloom](https://www.postgresql.org/docs/12/bloom.html) | 1\.0 | 
+| bool\_plperl | 1\.3 | 
+| [btree\_gin](http://www.postgresql.org/docs/12/btree-gin.html) | 1\.3 | 
+| [btree\_gist](http://www.postgresql.org/docs/12/btree-gist.html) | 1\.5 | 
+| [citext](http://www.postgresql.org/docs/12/citext.html) | 1\.6 | 
+| [cube](http://www.postgresql.org/docs/12/cube.html) | 1\.4 | 
+| [dblink](http://www.postgresql.org/docs/12/dblink.html) | 1\.2 | 
+| [dict\_int](http://www.postgresql.org/docs/12/dict-int.html) | 1\.0 | 
+| [dict\_xsyn](https://www.postgresql.org/docs/12/dict-xsyn.html) | 1\.0 | 
+| [earthdistance](http://www.postgresql.org/docs/12/earthdistance.html) | 1\.1 | 
+| [fuzzystrmatch](http://www.postgresql.org/docs/12/fuzzystrmatch.html) | 1\.1 | 
+| hll | 2\.15 | 
+| [hstore](http://www.postgresql.org/docs/12/hstore.html) | 1\.7 | 
+| [hstore\_plperl](https://www.postgresql.org/docs/12/hstore.html) | 1\.0 | 
+| [intagg](http://www.postgresql.org/docs/12/intagg.html) | 1\.1 | 
+| [intarray](http://www.postgresql.org/docs/12/intarray.html) | 1\.3 | 
+| [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.4 | 
+| [isn](http://www.postgresql.org/docs/12/isn.html) | 1\.2 | 
+| jsonb\_plperl | 1\.0 | 
+| log\_fdw | 1\.2 | 
+| [ltree](http://www.postgresql.org/docs/12/ltree.html) | 1\.2 | 
+| oracle\_fdw | 1\.2 | 
+| [orafce](https://github.com/orafce/orafce) | 3\.16 | 
+| [pg\_bigm](https://pgbigm.osdn.jp/pg_bigm_en-1-2.html) | 1\.2 | 
+| [pg\_buffercache](http://www.postgresql.org/docs/12/pgbuffercache.html) | 1\.3 | 
+| pg\_cron | 1\.3 | 
+| [pg\_freespacemap](https://www.postgresql.org/docs/12/pgfreespacemap.html) | 1\.2 | 
+| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | 1\.3\.7 | 
+| pg\_partman | 4\.5\.1 | 
+| [pg\_prewarm](https://www.postgresql.org/docs/12/pgprewarm.html) | 1\.2 | 
+| pg\_proctab | 0\.0\.9 | 
+| [pg\_repack](http://reorg.github.io/pg_repack/) | 1\.4\.6 | 
+| pg\_similarity | 1\.0 | 
+| [pg\_stat\_statements](http://www.postgresql.org/docs/12/pgstatstatements.html) | 1\.8 | 
+| [pg\_trgm](http://www.postgresql.org/docs/12/pgtrgm.html) | 1\.5 | 
+| [pg\_visibility](https://www.postgresql.org/docs/12/pgvisibility.html) | 1\.2 | 
+| [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.5 | 
+| [pgcrypto](http://www.postgresql.org/docs/12/pgcrypto.html) | 1\.3 | 
+| [pglogical](https://github.com/2ndQuadrant/pglogical) | 2\.3\.3 | 
+|  pglogical\_origin  | 1\.0\.0 | 
+| [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | 3\.1\.0 | 
+| [pgrowlocks](http://www.postgresql.org/docs/12/pgrowlocks.html) | 1\.2 | 
+| [pgstattuple](http://www.postgresql.org/docs/12/pgstattuple.html) | 1\.5 | 
+|  [pgtap](https://pgtap.org/)  | 1\.1\.0 | 
+| plcoffee | 2\.3\.15 | 
+| plls | 2\.3\.15 | 
+| [plperl](https://www.postgresql.org/docs/12/plperl.html) | 1\.0 | 
+| [plpgsql](https://www.postgresql.org/docs/12/plpgsql.html) | 1\.0 | 
+| [plprofiler](https://github.com/bigsql/plprofiler) | 4\.1 | 
+| [pltcl](https://www.postgresql.org/docs/13/pltcl-overview.html) | 1\.0 | 
+| [plv8](https://github.com/plv8) | 2\.3\.15 | 
+| [PostGIS](http://www.postgis.net/) | 3\.0\.3 | 
+| postgis\_raster | 3\.0\.3 | 
+| [postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 3\.0\.3 | 
+| [postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 3\.0\.3 | 
+| [postgres\_fdw](http://www.postgresql.org/docs/13/postgres-fdw.html) | 1\.0 | 
+|  [ prefix](https://github.com/dimitri/prefix) | 1\.2\.0 | 
+| [rdkit](https://www.rdkit.org/) | 3\.8 | 
+| rds\_activity\_stream | 1\.3 | 
+| rds\_tools | 1\.0 | 
+| [sslinfo](http://www.postgresql.org/docs/12/sslinfo.html) | 1\.2 | 
+| [tablefunc](http://www.postgresql.org/docs/12/tablefunc.html) | 1\.0 | 
+| [test\_parser](https://www.postgresql.org/docs/9.4/test-parser.html) | 1\.0 | 
+| [tsm\_system\_rows](https://www.postgresql.org/docs/12/tsm-system-rows.html) | 1\.0 | 
+| [tsm\_system\_time](https://www.postgresql.org/docs/12/tsm-system-time.html) | 1\.0 | 
+|  [unaccent](http://www.postgresql.org/docs/12/unaccent.html) | 1\.1 | 
+| [uuid\-ossp](http://www.postgresql.org/docs/12/uuid-ossp.html) | 1\.1 | 
 
 ## Extensions supported for Aurora PostgreSQL 12\.x<a name="AuroraPostgreSQL.Extensions.12"></a>
 

@@ -6,7 +6,10 @@ In a typical failover situation, you might see a temporary but large performance
 
 With cluster cache management, you set a specific reader DB instance as the failover target\. Cluster cache management ensures that the data in the designated reader's cache is kept synchronized with the data in the writer DB instance's cache\. The designated reader's cache with prefilled values is known as a *warm cache*\. If a failover occurs, the designated reader uses values in its warm cache immediately when it's promoted to the new writer DB instance\. This approach provides your application much better recovery performance\.
 
-Cluster cache management requires that the designated reader instance have the same instance class type and size \(`db.r5.2xlarge` or `db.r5.xlarge`, for example\) as the writer\. Keep this in mind when you create your Aurora PostgreSQL DB clusters so that your cluster can recover during a failover\. For a listing of instance class types and sizes, see [Hardware specifications for DB instance classes for Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html#Concepts.DBInstanceClass.Summary)\. 
+Cluster cache management requires that the designated reader instance have the same instance class type and size \(`db.r5.2xlarge` or `db.r5.xlarge`, for example\) as the writer\. Keep this in mind when you create your Aurora PostgreSQL DB clusters so that your cluster can recover during a failover\. For a listing of instance class types and sizes, see [Hardware specifications for DB instance classes for Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html#Concepts.DBInstanceClass.Summary)\.
+
+**Note**  
+Cluster cache management is not supported for Aurora PostgreSQL DB clusters that are part of Aurora global databases\.
 
 **Contents**
 + [Configuring cluster cache management](#AuroraPostgreSQL.cluster-cache-mgmt.Configure)

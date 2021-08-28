@@ -27,7 +27,7 @@ An Aurora global database spans at least two AWS Regions\. The primary AWS Regio
 | Aurora DB clusters | 1 | 5 \(maximum\)  | 
 | Writer instances | 1 | 0 | 
 | Read\-only instances \(Aurora replicas\), per Aurora DB cluster | 15 \(max\) | 16 \(total\) | 
-| Read\-only instances \(max allowed, given actual number of secondary regions\) | 15 \- *s* | *s* = total number of secondary AWS Regions  | 
+| Read\-only instances \(max allowed, given actual number of secondary Regions\) | 15 \- *s* | *s* = total number of secondary AWS Regions  | 
 
 The Aurora DB clusters that make up an Aurora global database have the following specific requirements:
 + **DB instance class requirements** – An Aurora global database requires DB instance classes that are optimized for memory\-intensive applications\. For information about the memory optimized DB instance classes, see [DB instance classes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html#Concepts.DBInstanceClass.Types)\. We recommend that you use a db\.r5 or higher instance class\.

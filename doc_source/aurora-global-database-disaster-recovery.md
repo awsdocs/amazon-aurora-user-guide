@@ -118,7 +118,7 @@ The RPO is used when your database resumes operations in a new AWS Region after 
 + Commits the transaction if at least one secondary DB cluster has an RPO lag time less than the RPO\.
 + Blocks the transaction if all secondary DB clusters have RPO lag times that are larger than the RPO\. It also logs the event to the PostgreSQL log file and emits "wait" events that show the blocked sessions\.
 
-In other words, if all secondary clusters are behind the target RPO, Aurora pauses transactions on the primary cluster until at least one of the secondary clusters catches up\. Transactions are committed again as soon as the lag time of at least one secondary DB cluster becomes less than the RPO\. The result is that no transactions can commit until the RPO is met\. 
+In other words, if all secondary clusters are behind the target RPO, Aurora pauses transactions on the primary cluster until at least one of the secondary clusters catches up\. Paused transactions are resumed and committed as soon as the lag time of at least one secondary DB cluster becomes less than the RPO\. The result is that no transactions can commit until the RPO is met\.
 
 If you set this parameter as outlined in the following, you can then also monitor the metrics that it generates\. You can do so by using `psql` or another tool to query the Aurora global database's primary DB cluster and obtain detailed information about your Aurora PostgreSQL–based global database's operations\. To learn how, see [Monitoring Aurora PostgreSQL\-based Aurora global databases](aurora-global-database-monitoring.md#aurora-global-database-monitoring.postgres)\.
 

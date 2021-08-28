@@ -17,7 +17,6 @@ Amazon Aurora supports two types of instance classes: memory optimized and burst
 The following are the memory optimized DB instance classes available:
 + **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
 + **db\.r5** – Latest generation instance classes optimized for memory\-intensive applications\. These offer improved networking performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
-+ **db\.r4** – Instance classes optimized for memory\-intensive applications\. These offer improved networking performance\.
 + **db\.r3** – Instance classes that provide memory optimization\.
 
 The following are the burstable performance DB instance classes available:
@@ -31,7 +30,7 @@ For DB instance class hardware specifications, see [Hardware specifications for 
 The following are DB engine considerations for DB instance classes:
 + **Aurora support for db\.r6g**
   + Aurora MySQL versions 2\.09\.2 and higher support the db\.r6g instance classes\.
-  +  Aurora PostgreSQL versions 12\.4 and higher and versions 11\.9 and higher support the db\.r6g instance classes\.
+  +  Aurora PostgreSQL versions 13\.3, 12\.4 and higher and versions 11\.9 and higher support the db\.r6g instance classes\.
 + **Aurora support for db\.t3** 
   + Aurora MySQL supports the db\.t3\.medium and db\.t3\.small instance classes for Aurora MySQL 1\.15 and higher, and all Aurora MySQL 2\.x versions\.
   + For Aurora MySQL db\.r5, db\.r4, and db\.t3 DB instance classes, no instances in the cluster can have pending instance\-level system updates\. To see pending system updates, use the following AWS Command Line Interface \(AWS CLI\) command\.
@@ -39,9 +38,7 @@ The following are DB engine considerations for DB instance classes:
     ```
     aws rds describe-pending-maintenance-actions
     ```
-  + Aurora PostgreSQL supports the following db\.t3 instance classes:
-    + The db\.t3\.medium instance class is supported for versions compatible with PostgreSQL 10\.7 and higher\.
-    + The db\.t3\.large instance class is supported for versions compatible with PostgreSQL versions 10\.11 and higher and 11\.6 and higher\.
+  + Aurora PostgreSQL version 13\.3 supports db\.t3 instance classes\.
 
 In the following table, you can find details about supported Amazon Aurora DB instance classes for the Aurora DB engines\. 
 
@@ -51,13 +48,13 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | Instance class | Aurora MySQL | Aurora PostgreSQL | 
 | --- | --- | --- | 
 | db\.r6g – memory optimized instance classes powered by AWS Graviton2 processors | 
-| db\.r6g\.16xlarge | 2\.09\.2 and higher | 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.12xlarge | 2\.09\.2 and higher | 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.8xlarge | 2\.09\.2 and higher | 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.4xlarge | 2\.09\.2 and higher | 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.2xlarge | 2\.09\.2 and higher | 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.xlarge | 2\.09\.2 and higher | 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.large | 2\.09\.2 and higher | 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.16xlarge | 2\.09\.2 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.12xlarge | 2\.09\.2 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.8xlarge | 2\.09\.2 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.4xlarge | 2\.09\.2 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.2xlarge | 2\.09\.2 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.xlarge | 2\.09\.2 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.large | 2\.09\.2 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
 | db\.r5 – latest generation memory optimized instance classes | 
 | db\.r5\.24xlarge | 1\.22 and higher, 2\.06 and higher | Yes | 
 | db\.r5\.16xlarge | 1\.22 and higher, 2\.06 and higher | Yes | 
@@ -68,12 +65,12 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.r5\.xlarge | 1\.14\.4 and higher | Yes | 
 | db\.r5\.large | 1\.14\.4 and higher | Yes | 
 | db\.r4 – memory optimized instance classes | 
-| db\.r4\.16xlarge | 1\.14\.4 and higher | Yes | 
-| db\.r4\.8xlarge | 1\.14\.4 and higher | Yes | 
-| db\.r4\.4xlarge | 1\.14\.4 and higher | Yes | 
-| db\.r4\.2xlarge | 1\.14\.4 and higher | Yes | 
-| db\.r4\.xlarge | 1\.14\.4 and higher | Yes | 
-| db\.r4\.large | 1\.14\.4 and higher | Yes | 
+| db\.r4\.16xlarge | 1\.14\.4 and higher | No | 
+| db\.r4\.8xlarge | 1\.14\.4 and higher | No | 
+| db\.r4\.4xlarge | 1\.14\.4 and higher | No | 
+| db\.r4\.2xlarge | 1\.14\.4 and higher | No | 
+| db\.r4\.xlarge | 1\.14\.4 and higher | No | 
+| db\.r4\.large | 1\.14\.4 and higher | No | 
 | db\.r3 – memory optimized instance classes | 
 | db\.r3\.8xlarge | Yes | No | 
 | db\.r3\.4xlarge | Yes | No | 
@@ -81,12 +78,12 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.r3\.xlarge | Yes | No | 
 | db\.r3\.large | Yes | No | 
 | db\.t3 – next generation burstable performance instance classes | 
-| db\.t3\.2xlarge | No | No | 
-| db\.t3\.xlarge | No | No | 
-| db\.t3\.large | 2\.10 and higher | 11\.6 and higher, 10\.11 and higher | 
-| db\.t3\.medium | 1\.14\.4 and higher | 10\.7 and higher | 
-| db\.t3\.small | 1\.14\.4 and higher | No | 
-| db\.t3\.micro | No | No | 
+| db\.t3\.2xlarge | No | Yes | 
+| db\.t3\.xlarge | No | Yes | 
+| db\.t3\.large | 2\.10 and higher | 13\.3, 11\.6 and higher, 10\.11 and higher | 
+| db\.t3\.medium | 1\.14\.4 and higher | 13\.3, 10\.7 and higher | 
+| db\.t3\.small | 1\.14\.4 and higher | Yes | 
+| db\.t3\.micro | No | Yes | 
 | db\.t2 – burstable performance instance classes | 
 | db\.t2\.medium | Yes | No | 
 | db\.t2\.small | Yes | No | 
