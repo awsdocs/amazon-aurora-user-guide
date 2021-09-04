@@ -1,6 +1,11 @@
 # Creating a DB cluster and connecting to a database on an Aurora MySQL DB cluster<a name="CHAP_GettingStartedAurora.CreatingConnecting.Aurora"></a>
 
-The easiest way to create an Aurora MySQL DB cluster is to use the Amazon RDS console\. After you create the DB cluster, you can use standard MySQL utilities, such as MySQL Workbench, to connect to a database on the DB cluster\.
+The easiest way to create an Aurora MySQL DB cluster is to use the AWS Management Console\. After you create the DB cluster, you can use standard MySQL utilities, such as MySQL Workbench, to connect to a database on the DB cluster\.
+
+**Important**  
+Before you can create or connect to a DB cluster, you must complete the tasks in [Setting up your environment for Amazon Aurora](CHAP_SettingUp_Aurora.md)\.
+
+There's no charge for creating an AWS account\. However, by completing this tutorial, you might incur costs for the AWS resources that you use\. You can delete these resources after you complete the tutorial if they are no longer needed\.
 
 **Topics**
 + [Create an Aurora MySQL DB cluster](#CHAP_GettingStarted.Aurora.CreateDBCluster)
@@ -9,36 +14,33 @@ The easiest way to create an Aurora MySQL DB cluster is to use the Amazon RDS co
 
 ## Create an Aurora MySQL DB cluster<a name="CHAP_GettingStarted.Aurora.CreateDBCluster"></a>
 
-Before you create a DB cluster, you must first have a virtual private cloud \(VPC\) based on the Amazon VPC service and an Amazon RDS DB subnet group\. Your VPC must have at least one subnet in each of at least two Availability Zones\. You can use the default VPC for your AWS account, or you can create your own VPC\. The Amazon RDS console makes it easy for you to create your own VPC for use with Amazon Aurora or use an existing VPC with your Aurora DB cluster\.
+Before you create a DB cluster, you must first have a virtual private cloud \(VPC\) based on the Amazon VPC service and an Amazon RDS DB subnet group\. Your VPC must have at least one subnet in each of at least two Availability Zones\. You can use the default VPC for your AWS account, or you can create your own VPC\. The Amazon RDS console is designed to make it easy for you to create your own VPC for use with Amazon Aurora or use an existing VPC with your Aurora DB cluster\.
 
-If you want to create a VPC and DB subnet group for use with your Aurora DB cluster yourself, rather than having Amazon RDS create the VPC and DB subnet group for you, then follow the instructions in [How to create a VPC for use with Amazon Aurora](Aurora.CreateVPC.md)\. Otherwise, follow the instructions in this topic to create your DB cluster and have Amazon RDS create a VPC and DB subnet group for you\.
+In some cases, you might want to create a VPC and DB subnet group for use with your Aurora DB cluster yourself, rather than having Amazon RDS create them\. If so, follow the instructions in [How to create a VPC for use with Amazon Aurora](Aurora.CreateVPC.md)\. Otherwise, follow the instructions in this topic to create your DB cluster and have Amazon RDS create a VPC and DB subnet group for you\.
 
-**Note**  
-A new console interface is available for database creation\. Choose either the **New Console** or the **Original Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
+You can use **Easy create** to create an Aurora MySQL\-Compatible Edition DB cluster with the RDS console\. With **Easy create**, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default settings for the other configuration options\. When you use **Standard create** instead of **Easy create**, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
-### New console<a name="CHAP_GettingStarted.Aurora.CreateDBCluster.Console"></a>
-
-You can create an Aurora MySQL\-Compatible Edition DB cluster with the AWS Management Console with **Easy Create** enabled or disabled\. With **Easy Create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy Create** uses the default setting for other configuration options\. With **Easy Create** disabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
+In this tutorial, you use **Easy create** to create an Aurora MySQL\-Compatible Edition DB cluster\.
 
 **Note**  
-For this example, **Easy Create** is enabled\. For information about creating an Aurora MySQL DB cluster with **Easy Create** not enabled, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.
+For information about creating DB clusters with **Standard create**, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.
 
-**To create an Aurora MySQL DB cluster with Easy Create enabled**
+**To create an Aurora MySQL DB cluster with Easy create enabled**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region in which you want to create the DB instance\.
+1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region in which you want to create the DB cluster\.
 
    Aurora is not available in all AWS Regions\. For a list of AWS Regions where Aurora is available, see [Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
 
 1. In the navigation pane, choose **Databases**\.
 
 1. Choose **Create database** and make sure that **Easy Create** is chosen\.   
-![\[Easy Create option\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-option.png)
+![\[Easy create option\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-option.png)
 
 1. For **Engine type**, choose **Amazon Aurora**\.
 
-1. For **Edition**, choose **Amazon Aurora with MySQL 5\.6 compatibility**\.
+1. For **Edition**, choose **Amazon Aurora with MySQL compatibility**\.
 
 1. For **DB instance size**, choose **Dev/Test**\.
 
@@ -46,96 +48,67 @@ For this example, **Easy Create** is enabled\. For information about creating an
 
 1. For **Master username**, enter a name for the user, or leave the default name\.
 
-   The **Create database** page should look similar to the following image:  
+   The **Create database** page should look similar to the following image\.  
 ![\[Create database page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-aurora-mysql.png)
 
-1. To use an automatically generated password for the DB cluster, make sure that the **Auto generate a password** is chosen\.
+1. To use an automatically generated password for the DB cluster, make sure that the **Auto generate a password** box is selected\.
 
-   To enter your password, clear the **Auto generate a password** check box, and then enter the same password in **Master password** and **Confirm password**\.
+   To enter your password, clear the **Auto generate a password** box, and then enter the same password in **Master password** and **Confirm password**\.
 
 1. \(Optional\) Open **View default settings for Easy create**\.  
-![\[Easy Create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-view-default-settings.png)
+![\[Easy create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-view-default-settings.png)
 
-   You can examine the default settings used when **Easy Create** is enabled\. If you want to change one or more settings during database creation, choose **Standard Create** to set them\. The **Editable after database creation** column shows which options you can change after database creation\. To change a setting with **No** in that column, use **Standard Create**\. For settings with **Yes** in that column, you can either use **Standard Create** or modify the DB instance after it's created to change the setting\.
+   You can examine the default settings used with **Easy create**\. The **Editable after database is created** column shows which options you can change after database creation\.
+   + To change settings with **No** in that column, use **Standard create**\. 
+   + To change settings with **Yes** in that column, either use **Standard create**, or modify the DB cluster after it is created to change the settings\.
+
+   The following are important considerations for changing the default settings:
+   + If you want the DB cluster to use a specific VPC, subnet group, and security group, use **Standard create** to specify these resources\. You might have created these resources when you were setting up for Amazon RDS\. For more information, see [Setting up your environment for Amazon Aurora](CHAP_SettingUp_Aurora.md)\.
+   + If you want to be able to access the DB cluster from a client outside of its VPC, use **Standard create** to set **Public access** to **Yes**\.
+
+     If the DB cluster should be private, leave **Public access** set to **No**\.
 
 1. Choose **Create database**\.
 
    If you chose to use an automatically generated password, the **View credential details** button appears on the **Databases** page\.
 
-   To view the user name and password for the DB instance, choose **View credential details**\.  
+   To view the user name and password for the DB cluster, choose **View credential details**\.  
 ![\[User credentials after automatic password generation.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-credentials.png)
 
-   To connect to the DB instance as the master user, use the user name and password that appear\.
+   To connect to the DB cluster as the master user, use the user name and password that appear\.
 **Important**  
-You can't view the master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
+You can't view the master user password again\. If you don't record it, you might have to change it\.   
+If you need to change the master user password after the DB cluster is available, you can modify the DB cluster to do so\. For more information about modifying a DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
 1. For **Databases**, choose the name of the new Aurora MySQL DB cluster\.
 
-   On the RDS console, the details for new DB cluster appear\. The DB cluster and its DB instance have a status of **creating** until the DB cluster is ready to use\. When the state changes to **available** for both, you can connect to the DB cluster\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new DB cluster is available\.   
+   On the RDS console, the details for new DB cluster appear\. The DB cluster and its DB instance have a status of **Creating** until the DB cluster is ready to use\. When the state changes to **Available** for both, you can connect to the DB cluster\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new DB cluster is available\.   
 ![\[Summary during DB cluster creation\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/creating-status-aurora-mysql.png)
-
-### Original console<a name="CHAP_GettingStarted.Aurora.CreateDBCluster.CurrentConsole"></a>
-
-**To launch an Aurora MySQL DB cluster**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the top\-right corner of the AWS Management Console, choose the AWS Region that you want to create your DB cluster in\. For a list of AWS Regions where Aurora is available, see [Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
-
-1. In the navigation pane, choose **Databases**\.
-
-   If the navigation pane is closed, choose the menu icon at the top left to open it\.
-
-1. Choose **Create database** to open the **Select engine** page\.
-
-1. On the **Select engine** page, choose Amazon Aurora and choose the MySQL\-compatible edition\.  
-![\[Amazon Aurora Select engine page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/CURRENT-AuroraLaunch01.png)
-
-1. Choose **Next**\.
-
-1. Set the following values on the **Specify DB details** page: 
-   + **DB instance class:** `db.r4.large`
-   + **DB instance identifier:** `gs-db-instance1`
-   + **Master username:** Using alphanumeric characters, type a user name, used to log on to your DB instances in the DB cluster\.
-   + **Master password** and **Confirm password:** Type a password in the **Master Password** box that contains from 8 to 41 printable ASCII characters \(excluding /,", and @\) for your user password, used to log on to your database\. Then type the password again in the **Confirm Password** box\.  
-![\[Specify DB details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/CURRENT-AuroraLaunch02.png)
-
-1. Choose **Next** and set the following values on the **Configure Advanced Settings** page: 
-   + **Virtual Private Cloud \(VPC\):** If you have an existing VPC, then you can use that VPC with your Amazon Aurora DB cluster by choosing your VPC identifier, for example `vpc-a464d1c1`\. For information on using an existing VPC, see [How to create a VPC for use with Amazon Aurora](Aurora.CreateVPC.md)\.
-
-     Otherwise, you can choose to have Amazon RDS create a VPC for you by choosing **Create a new VPC**\. This example uses the **Create a new VPC** option\.
-   + **Subnet group:** If you have an existing subnet group, then you can use that subnet group with your Amazon Aurora DB cluster by choosing your subnet group identifier, for example, `gs-subnet-group1`\.
-
-     Otherwise, you can choose to have Amazon RDS create a subnet group for you by choosing **Create a new subnet group**\. This example uses the **Create a new subnet group** option\.
-   + **Public accessibility:** `Yes`
-**Note**  
-Your production DB cluster might not need to be in a public subnet, because only your application servers require access to your DB cluster\. If your DB cluster doesn't need to be in a public subnet, set **Publicly Accessible** to `No`\.
-   + **Availability zone:** `No Preference`
-   + **VPC security groups:** If you have one or more existing VPC security groups, then you can use one or more of those VPC security groups with your Amazon Aurora DB cluster by choosing your VPC security group identifiers, for example, `gs-security-group1`\.
-
-     Otherwise, you can choose to have Amazon RDS create a VPC security group for you by choosing **Create new VPC security group**\. This example uses the **Create new VPC security group** option\.
-   + **DB cluster identifier:** `gs-db-cluster1`
-   + **Database name:** `sampledb`
-**Note**  
-This creates the default database\. To create additional databases, connect to the DB cluster and use the SQL command `CREATE DATABASE`\. 
-   + **Database port:** `3306`
-**Note**  
-You might be behind a corporate firewall that does not allow access to default ports such as the Aurora MySQL default port, 3306\. In this case, provide a port value that your corporate firewall allows\. Remember that port value later when you connect to the Aurora DB cluster\.
-
-1. Leave the rest of the values as their defaults, and choose **Create database** to create the DB cluster and primary instance\.
 
 ## Connect to an instance in a DB cluster<a name="CHAP_GettingStartedAurora.Aurora.Connect"></a>
 
-Once Amazon RDS provisions your DB cluster and creates the primary instance, you can use any standard SQL client application to connect to a database on the DB cluster\. In this example, you connect to a database on the Aurora MySQL DB cluster using MySQL monitor commands\. One GUI\-based application that you can use to connect is MySQL Workbench\. For more information, go to the [ Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\.
+After Amazon RDS provisions your DB cluster and creates the primary instance, you can use any standard SQL client application to connect to a database on the DB cluster\. In the following procedure, you connect to a database on the Aurora MySQL DB cluster using MySQL monitor commands\.
 
 **To connect to a database on an Aurora MySQL DB cluster using the MySQL monitor**
 
+1. Install a SQL client that you can use to connect to the DB instance\.
+
+   You can connect to an Aurora MySQL DB cluster by using tools like the MySQL command line utility\. For more information on using the MySQL client, see [mysql \- the MySQL command\-line client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) in the MySQL documentation\. One GUI\-based application you can use to connect is MySQL Workbench\. For more information, see the [Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\.
+
+   For more information on using MySQL, see the [MySQL documentation](http://dev.mysql.com/doc/)\. For information about installing MySQL \(including the MySQL client\), see [Installing and upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)\.
+
+   If your DB instance is publicly accessible, you can install the SQL client outside of the VPC\. If your DB instance is private, you typically install the SQL client on a resource inside the VPC, such as an Amazon EC2 instance\.
+
+1. Make sure that your DB cluster is associated with a security group that provides access to it\. For more information, see [Setting up your environment for Amazon Aurora](CHAP_SettingUp_Aurora.md)\.
+
+   If you didn't specify the appropriate security group when you created the DB cluster, you can modify the DB cluster to change its security group\. For more information, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
+
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Choose **Databases** and then choose the DB cluster name to show its details\. On the **Connectivity & security** tab, copy the value for the **Endpoint name** of the **Writer** endpoint\. Also, note the port number for the endpoint\.  
+1. Choose **Databases** and then choose the DB cluster name to show its details\. On the **Connectivity & security** tab, copy the value for the **Endpoint name** of the **Writer instance** endpoint\. Also, note the port number for the endpoint\.  
 ![\[DB Cluster Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch04.png)
 
-1. Type the following command at a command prompt on a client computer to connect to a database on an Aurora MySQL DB cluster using the MySQL monitor\. Use the cluster endpoint to connect to the primary instance, and the master user name that you created previously\. \(You are prompted for a password\.\) If you supplied a port value other than 3306, use that for the `-P` parameter instead\.
+1. Enter the following command at a command prompt on a client computer to connect to a database on an Aurora MySQL DB cluster using the MySQL monitor\. Use the cluster endpoint to connect to the primary instance, and the master user name that you created previously\. \(You are prompted for a password\.\) If you supplied a port value other than 3306, use that for the `-P` parameter instead\.
 
    ```
    PROMPT> mysql -h <cluster endpoint> -P 3306 -u <myusername> -p						
@@ -153,11 +126,11 @@ Once Amazon RDS provisions your DB cluster and creates the primary instance, you
    mysql>
    ```
 
-For more information about connecting to the DB cluster, see [Connecting to an Amazon Aurora MySQL DB cluster](Aurora.Connecting.md#Aurora.Connecting.AuroraMySQL)\.
+For more information about connecting to the DB cluster, see [Connecting to an Amazon Aurora MySQL DB cluster](Aurora.Connecting.md#Aurora.Connecting.AuroraMySQL)\. If you can't connect to your DB cluster, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 
 ## Delete the sample DB cluster, DB subnet group, and VPC<a name="CHAP_GettingStartedAurora.Deleting.Aurora"></a>
 
-Once you have connected to the sample DB cluster that you created, you can delete the DB cluster, DB subnet group, and VPC \(if you created a VPC\)\. 
+After you have connected to the sample DB cluster that you created, you can delete the DB cluster, DB subnet group, and VPC \(if you created a VPC\)\. 
 
 **To delete a DB cluster**
 

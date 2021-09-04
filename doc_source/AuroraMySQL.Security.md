@@ -148,7 +148,7 @@ For MySQL 5\.6 and earlier:
 GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL;            
 ```
 
- When you use an RDS proxy, you connect to the proxy endpoint instead of the usual cluster endpoint\. You can make SSL/TLS required or optional for connections to the proxy, in the same way as for connections directly to the Aurora DB cluster\. For information about using the RDS Proxy, see [Managing connections with Amazon RDS Proxy](rds-proxy.md)\. 
+ When you use an RDS proxy, you connect to the proxy endpoint instead of the usual cluster endpoint\. You can make SSL/TLS required or optional for connections to the proxy, in the same way as for connections directly to the Aurora DB cluster\. For information about using the RDS Proxy, see [Using Amazon RDS Proxy](rds-proxy.md)\. 
 
 **Note**  
 For more information on SSL/TLS connections with MySQL, see the [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html)\.

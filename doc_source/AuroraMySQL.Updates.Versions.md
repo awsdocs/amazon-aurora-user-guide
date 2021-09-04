@@ -81,8 +81,8 @@ mysql> select aurora_version(), @@aurora_version;
 +  The database version for your Aurora MySQL cluster has all the DB engine features and bug fixes that your application needs\. 
 
  The current LTS releases for Aurora MySQL are the following: 
-+  Aurora MySQL version 2\.07\.\*\. For more details about this version, see [Aurora MySQL database engine updates 2020\-11\-10 \(version 2\.07\.3\)](AuroraMySQL.Updates.2073.md)\. 
-+  Aurora MySQL version 1\.22\.\*\. For more details about this version, see [Aurora MySQL database engine updates 2020\-11\-09 \(version 1\.22\.3\)](AuroraMySQL.Updates.1223.md)\. 
++  Aurora MySQL version 2\.07\.\*\. For more details about this version, see [Aurora MySQL database engine updates 2021\-07\-06 \(version 2\.07\.5\)](AuroraMySQL.Updates.2075.md)\. 
++  Aurora MySQL version 1\.22\.\*\. For more details about this version, see [Aurora MySQL database engine updates 2021\-06\-03 \(version 1\.22\.5\)](AuroraMySQL.Updates.1225.md)\. 
 
  These older versions are also designated as LTS releases: 
 +  Aurora MySQL version 2\.04\. 

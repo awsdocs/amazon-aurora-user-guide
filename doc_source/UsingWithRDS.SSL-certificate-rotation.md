@@ -7,7 +7,7 @@ Follow these instructions to complete your updates\. Before you update your DB i
 Amazon RDS provides new CA certificates as an AWS security best practice\. For information about the new certificates and the supported AWS Regions, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\.
 
 **Note**  
-Amazon RDS Proxy and Aurora Serverless use certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, when you rotate your SSL/TLS certificate, you don't need to update applications that use RDS Proxy connections\. For more information about using TLS/SSL with RDS Proxy, see [Using TLS/SSL with RDS Proxy](rds-proxy.md#rds-proxy-security.tls)\.  
+Amazon RDS Proxy and Aurora Serverless use certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, when you rotate your SSL/TLS certificate, you don't need to update applications that use RDS Proxy connections\. For more information about using TLS/SSL with RDS Proxy, see [Using TLS/SSL with RDS Proxy](rds-proxy.howitworks.md#rds-proxy-security.tls)\.  
 If you are Aurora Serverless, rotating your SSL/TLS certificate isn't required\. For more information about using TLS/SSL with Aurora Serverless, see [Using TLS/SSL with Aurora Serverless v1](aurora-serverless.md#aurora-serverless.tls)\.
 
 **Note**  

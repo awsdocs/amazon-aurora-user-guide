@@ -56,6 +56,7 @@ The following limitations currently apply to Aurora global databases:
   + Aurora Serverless v1
   + Backtracking in Aurora
   + Amazon RDS Proxy
++ Aurora global databases currently don't support Aurora Auto Scaling for secondary DB clusters\.
 + You can start database activity streams on Aurora global databases running the following Aurora MySQL and Aurora PostgreSQL versions only\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html)
 

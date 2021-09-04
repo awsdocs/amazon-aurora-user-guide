@@ -39,6 +39,7 @@ The following policy adds the permissions that might be required by Aurora to ac
 ```
 
 **Note**  
+ Make sure to include both entries for the `Resource` value\. Aurora needs the permissions on both the bucket itself and all the objects inside the bucket\.   
 Based on your use case, you might not need to add all of the permissions in the sample policy\. Also, other permissions might be required\. For example, if your Amazon S3 bucket is encrypted, you need to add `kms:Decrypt` permissions\.
 
 You can use the following steps to create an IAM policy that provides the minimum required permissions for Aurora to access an Amazon S3 bucket on your behalf\. To allow Aurora to access all of your Amazon S3 buckets, you can skip these steps and use either the `AmazonS3ReadOnlyAccess` or `AmazonS3FullAccess` predefined IAM policy instead of creating your own\.

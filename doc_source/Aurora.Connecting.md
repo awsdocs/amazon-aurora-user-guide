@@ -17,7 +17,6 @@ For more information, see [Troubleshooting Aurora connection failures](#Aurora.C
 + [Connecting to an Amazon Aurora MySQL DB cluster](#Aurora.Connecting.AuroraMySQL)
 + [Connecting to an Amazon Aurora PostgreSQL DB cluster](#Aurora.Connecting.AuroraPostgreSQL)
 + [Troubleshooting Aurora connection failures](#Aurora.Connecting.Troubleshooting)
-+ [Managing connections with Amazon RDS Proxy](rds-proxy.md)
 
 ## Connecting to an Amazon Aurora MySQL DB cluster<a name="Aurora.Connecting.AuroraMySQL"></a>
 

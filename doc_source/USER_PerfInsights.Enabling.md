@@ -3,7 +3,7 @@
 To use Performance Insights, enable it on your DB instance\. If needed, you can disable it later\. Enabling and disabling Performance Insights doesn't cause downtime, a reboot, or a failover\.
 
 **Note**  
-Changing Performance Schema, which an optional performance tool used by Aurora MySQL, does require a reboot\.
+Performance Schema is an optional performance tool used by Aurora MySQL\. If you turn Performance Schema on or off, you need to reboot\. If you turn Performance Insights on or off, however, you don't need to reboot\.
 
 If you use Performance Insights together with Aurora Global Database, enable Performance Insights individually for the DB instances in each AWS Region\. For details, see [Monitoring an Amazon Aurora global database with Amazon RDS Performance Insights](aurora-global-database-monitoring.md#aurora-global-database-pi)\. 
 

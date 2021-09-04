@@ -158,7 +158,7 @@ Aurora parallel queries are available for Aurora MySQL only\. However, PostgreSQ
 
 ## Amazon RDS Proxy<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy"></a>
 
-Amazon RDS Proxy is a fully managed, highly available database proxy that makes applications more scalable by pooling and sharing established database connections\. With RDS Proxy, failover times for Aurora are reduced by up to 66 percent\. For more information, see [Managing connections with Amazon RDS Proxy](rds-proxy.md)\. 
+Amazon RDS Proxy is a fully managed, highly available database proxy that makes applications more scalable by pooling and sharing established database connections\. With RDS Proxy, failover times for Aurora are reduced by up to 66 percent\. For more information, see [Using Amazon RDS Proxy](rds-proxy.md)\. 
 
 
 | Region | Aurora MySQL 5\.6 | Aurora MySQL 5\.7 | Aurora PostgreSQL 10 | Aurora PostgreSQL 11 | 

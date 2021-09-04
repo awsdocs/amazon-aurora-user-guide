@@ -9,5 +9,6 @@ This section shows how to set up your Aurora DB cluster\. Before creating an Aur
 + [Using Amazon Aurora Serverless v2 \(preview\)](aurora-serverless-2.md)
 + [Using Amazon Aurora global databases](aurora-global-database.md)
 + [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)
++ [Using Amazon RDS Proxy](rds-proxy.md)
 + [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)
 + [Migrating data to an Amazon Aurora DB cluster](Aurora.Migrate.md)
