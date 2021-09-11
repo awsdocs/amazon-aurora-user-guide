@@ -51,9 +51,9 @@ To migrate your MySQL data to an Amazon Aurora MySQL DB cluster, several permiss
 + Aurora requires permission to act on your behalf to access the Amazon S3 bucket where you store the files used to create your Amazon Aurora MySQL DB cluster\. You grant Aurora the required permissions using an IAM service role\. 
 + The user making the request must also have permission to list the IAM roles for your AWS account\.
 + If the user making the request is to create the IAM service role or request that Aurora create the IAM service role \(by using the console\), then the user must have permission to create an IAM role for your AWS account\.
-+ If you plan to encrypt the data during the migration process, update the IAM policy of the user who will perform the migration to grant RDS access to the AWS Key Management Service customer master keys \(CMKs\) used for encrypting the backups\. For instructions, see [Creating an IAM policy to access AWS KMS resources](AuroraMySQL.Integrating.Authorizing.IAM.KMSCreatePolicy.md)\.
++ If you plan to encrypt the data during the migration process, update the IAM policy of the user who will perform the migration to grant RDS access to the AWS KMS keys used for encrypting the backups\. For instructions, see [Creating an IAM policy to access AWS KMS resources](AuroraMySQL.Integrating.Authorizing.IAM.KMSCreatePolicy.md)\.
 
-For example, the following IAM policy grants a user the minimum required permissions to use the console to list IAM roles, create an IAM role, list the Amazon S3 buckets for your account, and list the AWS KMS CMKs\.
+For example, the following IAM policy grants a user the minimum required permissions to use the console to list IAM roles, create an IAM role, list the Amazon S3 buckets for your account, and list the KMS keys\.
 
 ```
 {
@@ -228,7 +228,7 @@ You can restore your backup files from your Amazon S3 bucket to create a new Ama
    1.  Choose whether to **Allow access to KMS key**:
       + If you didn't encrypt the backup files, choose **No**\.
       + If you encrypted the backup files with AES\-256 \(SSE\-S3\) when you uploaded them to Amazon S3, choose **No**\. In this case, the data is decrypted automatically\.
-      + If you encrypted the backup files with AWS KMS \(SSE\-KMS\) server\-side encryption when you uploaded them to Amazon S3, choose **Yes**\. Next, choose the correct master key for **Master key**\.
+      + If you encrypted the backup files with AWS KMS \(SSE\-KMS\) server\-side encryption when you uploaded them to Amazon S3, choose **Yes**\. Next, choose the correct KMS key for **AWS KMS key**\.
 
         The AWS Management Console creates an IAM policy that enables Aurora to decrypt the data\.
 

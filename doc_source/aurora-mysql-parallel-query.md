@@ -356,7 +356,7 @@ mysql> select @@aurora_pq;
 
  Parallel query is typically used for the kinds of resource\-intensive queries that benefit from the hash join optimization\. Thus, it's helpful to ensure that hash joins are enabled for clusters where you plan to use parallel query\. 
 +  For Aurora MySQL 5\.6\-compatible clusters before version 1\.23, hash joins are always available in parallel query\-enabled clusters\. In this case, you don't need to take any action for the hash join feature\. If you upgrade such clusters in the future, you do need to enable hash joins at that time\. 
-+  In Aurora MySQL 1\.23 or 2\.09 and higher, the parallel query and hash join settings are both turned off by default\. When you enable parallel query for such a cluster, enable hash joins also\. The simplest way to do so is to set the cluster configuration parameter `aurora_disable_hash_join=OFF`\. For information about how to enable hash joins and use them effectively, see [Working with hash joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
++  In Aurora MySQL 1\.23 or 2\.09 and higher, the parallel query and hash join settings are both turned off by default\. When you enable parallel query for such a cluster, enable hash joins also\. The simplest way to do so is to set the cluster configuration parameter `aurora_disable_hash_join=OFF`\. For information about how to enable hash joins and use them effectively, see [Optimizing large Aurora MySQL join queries with hash joins](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
 
 ### Enabling and disabling parallel query using the console<a name="aurora-mysql-parallel-query-enabling-console"></a>
 
@@ -486,7 +486,7 @@ ORDER BY revenue DESC,
 SET optimizer_switch='hash_join=on';
 ```
 
- For information about how to enable hash joins permanently and use them effectively, see [Working with hash joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
+ For information about how to enable hash joins permanently and use them effectively, see [Optimizing large Aurora MySQL join queries with hash joins](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
 
  With hash join enabled but parallel query disabled, the query might have a plan like the following, which uses hash join but not parallel query\. 
 
@@ -855,7 +855,7 @@ mysql> explain select * from part where p_type = 'LARGE BRUSHED BRASS';
  For example, when a join query includes `WHERE` predicates to filter the rows from one of the joined tables, that filtering option can use parallel query\. As another example, suppose that a join query uses the hash join mechanism, for example to join a big table with a small table\. In this case, the table scan to produce the Bloom filter data structure might be able to use parallel query\. 
 
 **Note**  
- Parallel query is typically used for the kinds of resource\-intensive queries that benefit from the hash join optimization\. Before Aurora MySQL 1\.23, hash joins are always available in parallel query\-enabled clusters\. In Aurora MySQL 1\.23 and 2\.09 or higher, the parallel query and hash join settings are both turned off by default\. When you enable parallel query for such a cluster, enable hash joins also\. For information about how to enable hash joins and use them effectively, see [Working with hash joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
+ Parallel query is typically used for the kinds of resource\-intensive queries that benefit from the hash join optimization\. Before Aurora MySQL 1\.23, hash joins are always available in parallel query\-enabled clusters\. In Aurora MySQL 1\.23 and 2\.09 or higher, the parallel query and hash join settings are both turned off by default\. When you enable parallel query for such a cluster, enable hash joins also\. For information about how to enable hash joins and use them effectively, see [Optimizing large Aurora MySQL join queries with hash joins](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
 
 ```
 mysql> explain select count(*) from orders join customer where o_custkey = c_custkey;

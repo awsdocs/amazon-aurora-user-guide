@@ -31,13 +31,13 @@ For more information about backup storage costs, see [Amazon RDS pricing](https:
 
 ## Copying shared snapshots<a name="USER_CopySnapshot.Shared"></a>
 
-You can copy snapshots shared to you by other AWS accounts\. In some cases, you might copy an encrypted snapshot that has been shared from another AWS account\. In these cases, you must have access to the AWS KMS customer master key \(CMK\) that was used to encrypt the snapshot\. 
+You can copy snapshots shared to you by other AWS accounts\. In some cases, you might copy an encrypted snapshot that has been shared from another AWS account\. In these cases, you must have access to the AWS KMS key that was used to encrypt the snapshot\. 
 
 You can only copy a shared DB cluster snapshot, whether encrypted or not, in the same AWS Region\. For more information, see [Sharing encrypted snapshots](USER_ShareSnapshot.md#USER_ShareSnapshot.Encrypted)\. 
 
 ## Handling encryption<a name="USER_CopySnapshot.Encryption"></a>
 
-You can copy a snapshot that has been encrypted using an AWS KMS customer master key \(CMK\)\. If you copy an encrypted snapshot, the copy of the snapshot must also be encrypted\. If you copy an encrypted snapshot within the same AWS Region, you can encrypt the copy with the same AWS KMS CMK as the original snapshot\. Or you can specify a different CMK\. If you copy an encrypted snapshot across Regions, you can't use the same AWS KMS CMK for the copy as used for the source snapshot\. This is because AWS KMS CMKs are Region\-specific\. Instead, you must specify an AWS KMS CMK valid in the destination AWS Region\.
+You can copy a snapshot that has been encrypted using a KMS key\. If you copy an encrypted snapshot, the copy of the snapshot must also be encrypted\. If you copy an encrypted snapshot within the same AWS Region, you can encrypt the copy with the same KMS key as the original snapshot\. Or you can specify a different KMS key\. If you copy an encrypted snapshot across Regions, you can't use the same KMS key for the copy as used for the source snapshot\. This is because KMS keys are Region\-specific\. Instead, you must specify a KMS key valid in the destination AWS Region\.
 
 The source snapshot remains encrypted throughout the copy process\. For more information, see [Limitations of Amazon Aurora encrypted DB clusters](Overview.Encryption.md#Overview.Encryption.Limitations)\.
 
@@ -189,11 +189,11 @@ The following options are used to copy an encrypted DB cluster snapshot:
   If you are copying the snapshot to another AWS Region and you don't specify `source-region`, you must specify the `pre-signed-url` option instead\. The `pre-signed-url` value must be a URL that contains a Signature Version 4 signed request for the `CopyDBClusterSnapshot` action to be called in the source AWS Region where the DB cluster snapshot is copied from\. To learn more about the `pre-signed-url`, see [https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-snapshot.html)\. 
 + `--source-db-cluster-snapshot-identifier` – The identifier for the encrypted DB cluster snapshot to be copied\. If you are copying the snapshot to another AWS Region, this identifier must be in the ARN format for the source AWS Region\. If that is the case, the AWS Region specified in `source-db-cluster-snapshot-identifier` must match the AWS Region specified for `--source-region`\. 
 + `--target-db-cluster-snapshot-identifier` – The identifier for the new copy of the encrypted DB cluster snapshot\.
-+ `--kms-key-id` – The AWS KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot\.
++ `--kms-key-id` – The KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot\.
 
-  You can optionally use this option if the DB cluster snapshot is encrypted, you copy the snapshot in the same AWS Region, and you want to specify a new AWS KMS CMK to encrypt the copy\. Otherwise, the copy of the DB cluster snapshot is encrypted with the same CMK as the source DB cluster snapshot\. 
+  You can optionally use this option if the DB cluster snapshot is encrypted, you copy the snapshot in the same AWS Region, and you want to specify a new KMS key to encrypt the copy\. Otherwise, the copy of the DB cluster snapshot is encrypted with the same KMS key as the source DB cluster snapshot\. 
 
-  You must use this option if the DB cluster snapshot is encrypted and you are copying the snapshot to another AWS Region\. In that case, you must specify an AWS KMS CMK for the destination AWS Region\.
+  You must use this option if the DB cluster snapshot is encrypted and you are copying the snapshot to another AWS Region\. In that case, you must specify a KMS key for the destination AWS Region\.
 
 The following code example copies the encrypted DB cluster snapshot from the US West \(Oregon\) Region to the US East \(N\. Virginia\) Region\. The command is called in the US East \(N\. Virginia\) Region\.
 
@@ -224,11 +224,11 @@ To copy a DB cluster snapshot, use the Amazon RDS API [https://docs.aws.amazon.c
 The following parameters are used to copy an encrypted DB cluster snapshot:
 + `SourceDBClusterSnapshotIdentifier` – The identifier for the encrypted DB cluster snapshot to be copied\. If you are copying the snapshot to another AWS Region, this identifier must be in the ARN format for the source AWS Region\. 
 + `TargetDBClusterSnapshotIdentifier` – The identifier for the new copy of the encrypted DB cluster snapshot\.
-+ `KmsKeyId` – The AWS KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot\.
++ `KmsKeyId` – The KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot\.
 
-  You can optionally use this parameter if the DB cluster snapshot is encrypted, you copy the snapshot in the same AWS Region, and you specify a new AWS KMS CMK to use to encrypt the copy\. Otherwise, the copy of the DB cluster snapshot is encrypted with the same CMK as the source DB cluster snapshot\. 
+  You can optionally use this parameter if the DB cluster snapshot is encrypted, you copy the snapshot in the same AWS Region, and you specify a new KMS key to use to encrypt the copy\. Otherwise, the copy of the DB cluster snapshot is encrypted with the same KMS key as the source DB cluster snapshot\. 
 
-  You must use this parameter if the DB cluster snapshot is encrypted and you are copying the snapshot to another AWS Region\. In that case, you must specify an AWS KMS CMK for the destination AWS Region\.
+  You must use this parameter if the DB cluster snapshot is encrypted and you are copying the snapshot to another AWS Region\. In that case, you must specify a KMS key for the destination AWS Region\.
 + `PreSignedUrl` – If you are copying the snapshot to another AWS Region, you must specify the `PreSignedUrl` parameter\. The `PreSignedUrl` value must be a URL that contains a Signature Version 4 signed request for the `CopyDBClusterSnapshot` action to be called in the source AWS Region where the DB cluster snapshot is copied from\. To learn more about using a presigned URL, see [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBClusterSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBClusterSnapshot.html)\. 
 
   To automatically rather than manually generate a presigned URL, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-snapshot.html) command with the `--source-region` option instead\.
@@ -273,9 +273,9 @@ You can enable other AWS accounts to copy DB cluster snapshots that you specify 
 
 1. Using Account A, call `ModifyDBClusterSnapshotAttribute`, specifying **restore** for the `AttributeName` parameter, and the ID for Account B for the `ValuesToAdd` parameter\.
 
-1. \(If the snapshot is encrypted\) Using Account A, update the key policy for the AWS KMS CMK, first adding the ARN of Account B as a `Principal`, and then allow the `kms:CreateGrant` action\.
+1. \(If the snapshot is encrypted\) Using Account A, update the key policy for the KMS key, first adding the ARN of Account B as a `Principal`, and then allow the `kms:CreateGrant` action\.
 
-1. \(If the snapshot is encrypted\) Using Account B, choose or create an IAM user and attach an IAM policy to that user that allows it to copy an encrypted DB cluster snapshot using your AWS KMS CMK\.
+1. \(If the snapshot is encrypted\) Using Account B, choose or create an IAM user and attach an IAM policy to that user that allows it to copy an encrypted DB cluster snapshot using your KMS key\.
 
 1. Using Account B, call `CopyDBClusterSnapshot` and use the `SourceDBClusterSnapshotIdentifier` parameter to specify the ARN of the DB cluster snapshot to be copied, which must include the ID for Account A\.
 
@@ -351,9 +351,9 @@ Use the following procedure to copy an encrypted DB cluster snapshot to another 
    	&X-Amz-Signature=ef38f1ce3dab4e1dbf113d8d2a265c67d17ece1999ffd36be85714ed36dddbb3
    ```
 
-1. In the source account for the DB cluster snapshot, update the key policy for the AWS KMS CMK, first adding the ARN of the target account as a `Principal`, and then allow the `kms:CreateGrant` action\. For more information, see [Allowing access to an AWS KMS customer master key \(CMK\)](USER_ShareSnapshot.md#USER_ShareSnapshot.Encrypted.KeyPolicy)\.
+1. In the source account for the DB cluster snapshot, update the key policy for the KMS key, first adding the ARN of the target account as a `Principal`, and then allow the `kms:CreateGrant` action\. For more information, see [Allowing access to an AWS KMS key](USER_ShareSnapshot.md#USER_ShareSnapshot.Encrypted.KeyPolicy)\.
 
-1. In the target account, choose or create an IAM user and attach an IAM policy to that user that allows it to copy an encrypted DB cluster snapshot using your AWS KMS CMK\. For more information, see [Creating an IAM policy to enable copying of the encrypted snapshot](USER_ShareSnapshot.md#USER_ShareSnapshot.Encrypted.KeyPolicy.IAM)\.
+1. In the target account, choose or create an IAM user and attach an IAM policy to that user that allows it to copy an encrypted DB cluster snapshot using your KMS key\. For more information, see [Creating an IAM policy to enable copying of the encrypted snapshot](USER_ShareSnapshot.md#USER_ShareSnapshot.Encrypted.KeyPolicy.IAM)\.
 
 1. In the target account, call `CopyDBClusterSnapshot` and use the `SourceDBClusterSnapshotIdentifier` parameter to specify the ARN of the DB cluster snapshot to be copied, which must include the ID for the source account\.
 

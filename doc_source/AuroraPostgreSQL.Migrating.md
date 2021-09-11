@@ -29,7 +29,7 @@ You can migrate RDS for PostgreSQL snapshots that are compatible with the Aurora
 
 When you migrate the DB snapshot by using the console, the console takes the actions necessary to create both the DB cluster and the primary instance\.
 
-You can also choose for your new Aurora PostgreSQL DB cluster to be encrypted at rest by using an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. This option is available only for unencrypted DB snapshots\.
+You can also choose for your new Aurora PostgreSQL DB cluster to be encrypted at rest by using an AWS KMS key\. This option is available only for unencrypted DB snapshots\.
 
 **To migrate a PostgreSQL DB snapshot by using the RDS console**
 
@@ -63,7 +63,7 @@ Your production DB cluster might not need to be in a public subnet, because only
    + **Database port**: Enter the default port to be used when connecting to instances in the Aurora PostgreSQL DB cluster\. The default is `5432`\.
 **Note**  
 You might be behind a corporate firewall that doesn't allow access to default ports such as the PostgreSQL default port, 5432\. In this case, provide a port value that your corporate firewall allows\. Remember that port value later when you connect to the Aurora PostgreSQL DB cluster\.
-   + **Enable Encryption**: Choose **Enable Encryption** for your new Aurora PostgreSQL DB cluster to be encrypted at rest\. Also choose an AWS KMS customer master key \(CMK\) as the **Master key** value\.
+   + **Enable Encryption**: Choose **Enable Encryption** for your new Aurora PostgreSQL DB cluster to be encrypted at rest\. Also choose a KMS key as the **AWS KMS key** value\.
    + **Auto minor version upgrade**: Choose **Enable auto minor version upgrade** to enable your Aurora PostgreSQL DB cluster to receive minor PostgreSQL DB engine version upgrades automatically when they become available\.
 
      The **Auto minor version upgrade** option only applies to upgrades to PostgreSQL minor engine versions for your Aurora PostgreSQL DB cluster\. It doesn't apply to regular patches applied to maintain system stability\.

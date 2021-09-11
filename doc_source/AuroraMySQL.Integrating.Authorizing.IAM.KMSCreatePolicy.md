@@ -1,8 +1,8 @@
 # Creating an IAM policy to access AWS KMS resources<a name="AuroraMySQL.Integrating.Authorizing.IAM.KMSCreatePolicy"></a>
 
-Aurora can access AWS Key Management Service customer master keys \(CMKs\) used for encrypting their database backups\. However, you must first create an IAM policy that provides the permissions that allow Aurora to access AWS KMS CMKs\.
+Aurora can access the AWS KMS keys used for encrypting their database backups\. However, you must first create an IAM policy that provides the permissions that allow Aurora to access KMS keys\.
 
-The following policy adds the permissions required by Aurora to access AWS KMS CMKs on your behalf\.
+The following policy adds the permissions required by Aurora to access KMS keys on your behalf\.
 
 ```
 {
@@ -19,9 +19,9 @@ The following policy adds the permissions required by Aurora to access AWS KMS C
 }
 ```
 
-You can use the following steps to create an IAM policy that provides the minimum required permissions for Aurora to access AWS KMS CMKs on your behalf\.
+You can use the following steps to create an IAM policy that provides the minimum required permissions for Aurora to access KMS keys on your behalf\.
 
-**To create an IAM policy to grant access to your AWS KMS CMKs**
+**To create an IAM policy to grant access to your KMS keys**
 
 1. Open the [IAM console](https://console.aws.amazon.com/iam/home?#home)\.
 
@@ -38,7 +38,7 @@ You can use the following steps to create an IAM policy that provides the minimu
 1. In the **Add ARN\(s\)** dialog box, enter the following values:
    + **Region** – Type the AWS Region, such as `us-west-2`\.
    + **Account** – Type the user account number\.
-   + **Log Stream Name** – Type the AWS KMS key identifier\.
+   + **Log Stream Name** – Type the KMS key identifier\.
 
 1. In the **Add ARN\(s\)** dialog box, choose **Add**
 

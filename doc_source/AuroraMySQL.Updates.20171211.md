@@ -14,7 +14,7 @@ The zero\-downtime patching \(ZDP\) feature attempts, on a *best\-effort* basis,
 
 ## New features<a name="AuroraMySQL.Updates.20171211.New"></a>
 + Aurora MySQL now supports synchronous AWS Lambda invocations via the native function `lambda_sync()`\. Also available is native function `lambda_async()`, which can be used as an alternative to the existing stored procedure for asynchronous Lambda invocation\. For more information, see [Invoking a Lambda function from an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Lambda.md)\.
-+ Aurora MySQL now supports hash joins to speed up equijoin queries\. Aurora's cost\-based optimizer can automatically decide when to use hash joins; you can also force their use in a query plan\. For more information, see [Working with hash joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
++ Aurora MySQL now supports hash joins to speed up equijoin queries\. Aurora's cost\-based optimizer can automatically decide when to use hash joins; you can also force their use in a query plan\. For more information, see [Optimizing large Aurora MySQL join queries with hash joins](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
 + Aurora MySQL now supports scan batching to speed up in\-memory scan\-oriented queries significantly\. The feature boosts the performance of table full scans, index full scans, and index range scans by batch processing\.
 
 ## Improvements<a name="AuroraMySQL.Updates.20171211.Improvements"></a>

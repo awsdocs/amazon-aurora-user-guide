@@ -92,7 +92,7 @@ aurora_version
 
  Each new Aurora version comes with release notes that list the new features, fixes, other enhancements, and so on that apply to each version\. 
 
- For Aurora MySQL release notes, see [Database engine updates for Amazon Aurora MySQL 2\.0](AuroraMySQL.Updates.20Updates.md) and [Database engine updates for Amazon Aurora MySQL 1\.1](AuroraMySQL.Updates.11Updates.md)\. For Aurora PostgreSQL release notes, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\. 
+ For Aurora MySQL release notes, see [Database engine updates for Amazon Aurora MySQL version 2](AuroraMySQL.Updates.20Updates.md) and [Database engine updates for Amazon Aurora MySQL version 1](AuroraMySQL.Updates.11Updates.md)\. For Aurora PostgreSQL release notes, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\. 
 
 ## Specifying the Amazon Aurora database version for your database cluster<a name="Aurora.VersionPolicy.ChoosingVersion"></a>
 

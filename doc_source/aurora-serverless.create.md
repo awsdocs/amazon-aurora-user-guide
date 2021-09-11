@@ -7,7 +7,11 @@ You can set the following specific values for your Aurora Serverless v1 DB clust
 + **Maximum Aurora capacity unit** – Aurora Serverless v1 can increase capacity up to this capacity unit\.
 
 You can also choose the following optional scaling configuration options: 
-+ **Force scaling the capacity to the specified values when the timeout is reached** – You can choose this setting if you want Aurora Serverless v1 to force Aurora Serverless v1 to scale even if it can't find a scaling point before it times out\. If you want Aurora Serverless v1 to cancel capacity changes if it can't find a scaling point, don't choose this setting\. For more information, see [Timeout action for capacity changes](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.timeout-action)\.
++ **Roll back the capacity change** – To cancel capacity changes if Aurora Serverless v1 can't find a scaling point, choose this setting\. 
+
+   **Force the capacity change** – To force Aurora Serverless v1 to scale even if it can't find a scaling point before it times out, choose this setting\. 
+
+   For more information, see [Timeout action for capacity changes](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.timeout-action)\.
 + **Pause compute capacity after consecutive minutes of inactivity** – You can choose this setting if you want Aurora Serverless v1 to scale to zero when there's no activity on your DB cluster for an amount of time you specify\. With this setting enabled, your Aurora Serverless v1 DB cluster automatically resumes processing and scales to the necessary capacity to handle the workload when database traffic resumes\. To learn more, see [Pause and resume for Aurora Serverless v1](aurora-serverless.how-it-works.md#aurora-serverless.how-it-works.pause-resume)\. 
 
 Before you can create an Aurora Serverless v1 DB cluster, you need an AWS account\. You also need to have completed the setup tasks for working with Amazon Aurora\. For more information, see [Setting up your environment for Amazon Aurora](CHAP_SettingUp_Aurora.md)\. You also need to complete other preliminary steps for creating any Aurora DB cluster\. To learn more, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\. 

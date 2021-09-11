@@ -403,7 +403,7 @@ As with cloning within the same AWS account, additional storage space is used on
 + You can't share an Aurora DB cluster with other AWS accounts unless the cluster is in an `ACTIVE` state\. 
 + You can't rename an Aurora DB cluster that's been shared with other AWS accounts\. 
 +  You can't create a cross\-account clone of a cluster that is encrypted with the default RDS key\. 
-+ You can't create non\-encrypted clones in one AWS account from encrypted Aurora DB clusters that have been shared by another AWS account\. The cluster owner must grant permission to access the source cluster's AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. However, you can use a different key when you create the clone\.  
++ You can't create nonencrypted clones in one AWS account from encrypted Aurora DB clusters that have been shared by another AWS account\. The cluster owner must grant permission to access the source cluster's AWS KMS key\. However, you can use a different key when you create the clone\.  
 
 ### Allowing other AWS accounts to clone your cluster<a name="Aurora.Managing.Clone.CrossAccount.yours"></a>
 
@@ -417,9 +417,9 @@ As with cloning within the same AWS account, additional storage space is used on
 
 #### Granting permission to other AWS accounts to clone your cluster<a name="Aurora.Managing.Clone.CrossAccount.granting"></a>
 
- If the cluster that you're sharing is encrypted, you also share the customer master key \(CMK\) for the cluster\. You can allow AWS Identity and Access Management \(IAM\) users or roles in one AWS account to use a CMK in a different account\. 
+ If the cluster that you're sharing is encrypted, you also share the AWS KMS key for the cluster\. You can allow AWS Identity and Access Management \(IAM\) users or roles in one AWS account to use a KMS key in a different account\. 
 
-To do this, you first add the external account \(root user\) to the CMK's key policy through AWS KMS\. You don't add the individual IAM users or roles to the key policy, only the external account that owns them\. You can only share a CMK that you create, not the default RDS service key\. For information about access control for CMKs, see [Authentication and access control for AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/control-access.html)\. 
+To do this, you first add the external account \(root user\) to the KMS key's key policy through AWS KMS\. You don't add the individual IAM users or roles to the key policy, only the external account that owns them\. You can only share a KMS key that you create, not the default RDS service key\. For information about access control for KMS keys, see [Authentication and access control for AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/control-access.html)\. 
 
 ##### Console<a name="Aurora.Managing.Clone.CrossAccount.granting.console"></a>
 
@@ -483,7 +483,7 @@ Be careful entering account numbers that are not in the same AWS organization as
 
 ##### Recreating a cluster that uses the default RDS key<a name="Aurora.Managing.Clone.CrossAccount.granting.defaultkey"></a>
 
-If the encrypted cluster that you plan to share uses the default RDS key, make sure to recreate the cluster\. To do this, create a manual snapshot of your DB cluster, use a customer master key \(CMK\), and then restore the cluster to a new cluster\. Then share the new cluster\. To perform this process, take the following steps\. 
+If the encrypted cluster that you plan to share uses the default RDS key, make sure to recreate the cluster\. To do this, create a manual snapshot of your DB cluster, use an AWS KMS key, and then restore the cluster to a new cluster\. Then share the new cluster\. To perform this process, take the following steps\.
 
 **To recreate an encrypted cluster that uses the default RDS key**
 
@@ -495,7 +495,7 @@ If the encrypted cluster that you plan to share uses the default RDS key, make s
 
 1.  For **Actions**, choose **Copy Snapshot**, and then choose **Enable encryption**\. 
 
-1.  For **Master key**, choose the new encryption key that you want to use\. 
+1.  For **AWS KMS key**, choose the new encryption key that you want to use\. 
 
 1.  Restore the copied snapshot\. To do so, follow the procedure in [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md)\. The new DB instance uses your new encryption key\. 
 
@@ -623,7 +623,7 @@ If the encrypted cluster that you plan to share uses the default RDS key, make s
 
 1.  Follow the procedure in [Console](#Aurora.Managing.Clone.Console) to finish setting up the cloned cluster\. 
 
-1. As needed, enable encryption for the cloned cluster\. If the cluster that you are cloning is encrypted, you must enable encryption for the cloned cluster\. The AWS account that shared the cluster with you must also share the AWS KMS CMK that was used to encrypt the cluster\. You can use the same CMK to encrypt the clone, or your own CMK\. You can't create a cross\-account clone for a cluster that is encrypted with the default RDS CMK\. 
+1. As needed, enable encryption for the cloned cluster\. If the cluster that you are cloning is encrypted, you must enable encryption for the cloned cluster\. The AWS account that shared the cluster with you must also share the KMS key that was used to encrypt the cluster\. You can use the same KMS key to encrypt the clone, or your own KMS key\. You can't create a cross\-account clone for a cluster that is encrypted with the default KMS key\. 
 
     The account that owns the encryption key must grant permission to use the key to the destination account by using a key policy\. This process is similar to how encrypted snapshots are shared, by using a key policy that grants permission to the destination account to use the key\. 
 
@@ -657,7 +657,7 @@ If the encrypted cluster that you plan to share uses the default RDS key, make s
      --use-latest-restorable-time
    ```
 
-1.  If the cluster that you are cloning is encrypted, encrypt your cloned cluster by including a `kms-key-id` parameter\. This `kms-key-id` value can be the same one used to encrypt the original DB cluster, or your own CMK\. Your account must have permission to use that encryption key\. 
+1.  If the cluster that you are cloning is encrypted, encrypt your cloned cluster by including a `kms-key-id` parameter\. This `kms-key-id` value can be the same one used to encrypt the original DB cluster, or your own KMS key\. Your account must have permission to use that encryption key\. 
 
    For Linux, macOS, or Unix:
 
@@ -738,7 +738,7 @@ You can create DB instances only after the `restore-db-cluster-to-point-in-time`
 
     If the ARN passed as the `SourceDBClusterIdentifier` hasn't been shared, then the same error is returned as if the specified cluster doesn't exist\. 
 
-1.  If the cluster that you are cloning is encrypted, include a `KmsKeyId` parameter to encrypt your cloned cluster\. This `kms-key-id` value can be the same one used to encrypt the original DB cluster, or your own CMK\. Your account must have permission to use that encryption key\. 
+1.  If the cluster that you are cloning is encrypted, include a `KmsKeyId` parameter to encrypt your cloned cluster\. This `kms-key-id` value can be the same one used to encrypt the original DB cluster, or your own KMS key\. Your account must have permission to use that encryption key\. 
 
     When you clone a volume, the destination account must have permission to use the encryption key used to encrypt the source cluster\. Aurora encrypts the new cloned cluster with the encryption key specified in `KmsKeyId`\. 
 

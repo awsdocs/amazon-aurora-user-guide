@@ -4,6 +4,6 @@ You can enable encryption for database resources\. You can also encrypt connecti
 
 **Topics**
 + [Encrypting Amazon Aurora resources](Overview.Encryption.md)
-+ [Customer master key \(CMK\) management](Overview.Encryption.Keys.md)
++ [AWS KMS key management](Overview.Encryption.Keys.md)
 + [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)
 + [Rotating your SSL/TLS certificate](UsingWithRDS.SSL-certificate-rotation.md)

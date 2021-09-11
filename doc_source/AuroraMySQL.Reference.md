@@ -652,7 +652,7 @@ EXPLAIN SELECT /*+ JOIN_ORDER (t1, t3) */ f1, f2
   FROM t1 JOIN t2 USING (id) JOIN t3 USING (id) JOIN t4 USING (id);
 ```
 
- For information about using hash join queries, see [Working with hash joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
+ For information about using hash join queries, see [Optimizing large Aurora MySQL join queries with hash joins](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
 
 ## Aurora MySQL stored procedures<a name="AuroraMySQL.Reference.StoredProcs"></a>
 

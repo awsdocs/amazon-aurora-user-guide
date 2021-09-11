@@ -22,7 +22,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Upgra
 
  **New features:** 
 +  Aurora MySQL clusters now support the instance types db\.r5\.8xlarge, db\.r5\.16xlarge, and db\.r5\.24xlarge\. For more information about instance types for Aurora MySQL clusters, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\. 
-+  The hash join feature is now generally available and does not require the Aurora lab mode setting to be ON\. This feature can improve query performance when you need to join a large amount of data by using an equi\-join\. For more information about using this feature, see [Working with hash joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
++  The hash join feature is now generally available and does not require the Aurora lab mode setting to be ON\. This feature can improve query performance when you need to join a large amount of data by using an equi\-join\. For more information about using this feature, see [Optimizing large Aurora MySQL join queries with hash joins](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
 +  The hot row contention feature is now generally available and does not require the Aurora lab mode setting to be ON\. This feature substantially improves throughput for workloads with many transactions contending for rows on the same page\. 
 +  Aurora MySQL 2\.06 and higher support "rewinding" a DB cluster to a specific time, without restoring data from a backup\. This feature, known as Backtrack, provides a quick way to recover from user errors, such as dropping the wrong table or deleting the wrong row\. Backtrack completes within seconds, even for large databases\. Read [the AWS blog](http://aws.amazon.com/blogs/aws/amazon-aurora-backtrack-turn-back-time/) for an overview, and refer to [Backtracking an Aurora DB cluster](AuroraMySQL.Managing.Backtrack.md) for more details\. 
 +  Aurora 2\.06 and higher support synchronous AWS Lambda invocations through the native function `lambda_sync()`\. Also available is native function `lambda_async()`, which can be used as an alternative to the existing stored procedure for asynchronous Lambda invocation\. For information about calling Lambda functions, see [Invoking a Lambda function from an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Lambda.md)\. 
@@ -68,7 +68,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Upgra
 ## Comparison with Aurora MySQL version 1<a name="AuroraMySQL.Updates.2060.Compare56"></a>
 
 The following Amazon Aurora MySQL features are supported in Aurora MySQL Version 1 \(compatible with MySQL 5\.6\), but these features are currently not supported in Aurora MySQL Version 2 \(compatible with MySQL 5\.7\)\.
-+ Asynchronous key prefetch \(AKP\)\. For more information, see [Working with asynchronous key prefetch in Amazon Aurora](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
++ Asynchronous key prefetch \(AKP\)\. For more information, see [Optimizing Amazon Aurora indexed join queries with asynchronous key prefetch](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
 + Scan batching\. For more information, see [Aurora MySQL database engine updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
 + Migrating data from MySQL using an Amazon S3 bucket\. For more information, see [Migrating data from MySQL by using an Amazon S3 bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.
 

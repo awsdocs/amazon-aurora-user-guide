@@ -225,7 +225,7 @@ Find the possible status values for DB clusters in the following table\.
 | creating | Not billed |  The DB cluster is being created\. The DB cluster is inaccessible while it is being created\.  | 
 | deleting | Not billed |  The DB cluster is being deleted\.  | 
 | failing\-over | Billed |  A failover from the primary instance to an Aurora Replica is being performed\.  | 
-| inaccessible\-encryption\-credentials | Not billed |  The AWS Key Management Service customer master key \(CMK\) used to encrypt or decrypt the DB cluster can't be accessed\.  | 
+| inaccessible\-encryption\-credentials | Not billed |  The AWS KMS key used to encrypt or decrypt the DB cluster can't be accessed\.  | 
 | maintenance | Billed |  Amazon RDS is applying a maintenance update to the DB cluster\. This status is used for DB cluster\-level maintenance that RDS schedules well in advance\.  | 
 | migrating | Billed |  A DB cluster snapshot is being restored to a DB cluster\.  | 
 | migration\-failed | Not billed |  A migration failed\.  | 
@@ -261,7 +261,7 @@ Find the possible status values for DB instances in the following table\. This t
 |  **creating**  | Not billed |  The DB instance is being created\. The DB instance is inaccessible while it is being created\.   | 
 |  **deleting**  | Not billed |  The DB instance is being deleted\.  | 
 |  **failed**  | Not billed |  The DB instance has failed and Amazon RDS can't recover it\. Perform a point\-in\-time restore to the latest restorable time of the DB instance to recover the data\.   | 
-|  **inaccessible\-encryption\-credentials**  | Not billed |  The AWS KMS customer master key \(CMK\) used to encrypt or decrypt the DB instance can't be accessed\.   | 
+|  **inaccessible\-encryption\-credentials**  | Not billed |  The AWS KMS key used to encrypt or decrypt the DB instance can't be accessed\.   | 
 |  **incompatible\-network**  | Not billed |  Amazon RDS is attempting to perform a recovery action on a DB instance but can't do so because the VPC is in a state that prevents the action from being completed\. This status can occur if, for example, all available IP addresses in a subnet are in use and Amazon RDS can't get an IP address for the DB instance\.   | 
 |  **incompatible\-option\-group**  | Billed |  Amazon RDS attempted to apply an option group change but can't do so, and Amazon RDS can't roll back to the previous option group state\. For more information, check the **Recent Events** list for the DB instance\. This status can occur if, for example, the option group contains an option such as TDE and the DB instance doesn't contain encrypted information\.   | 
 |  **incompatible\-parameters**  | Billed |  Amazon RDS can't start the DB instance because the parameters specified in the DB instance's DB parameter group aren't compatible with the DB instance\. Revert the parameter changes or make them compatible with the DB instance to regain access to your DB instance\. For more information about the incompatible parameters, check the **Recent Events** list for the DB instance\.   | 
@@ -347,7 +347,7 @@ When you choose **Apply now**, a brief DB instance outage might result\.
 
 Amazon RDS provides metrics so that you can monitor the health of your DB instances\. You can monitor both DB instance metrics and operating system \(OS\) metrics\.
 
-Following, you can find details about how to view metrics for your DB instance using the RDS console and CloudWatch\. For information on monitoring metrics for your DB instance's operating system in real time using CloudWatch Logs, see [Tracking OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)\.
+Following, you can find details about how to view metrics for your DB instance using the RDS console and CloudWatch\. For information on monitoring metrics for your DB instance's operating system in real time using CloudWatch Logs, see [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
 ### Viewing metrics by using the console<a name="USER_Monitoring.CON"></a>
 

@@ -48,13 +48,13 @@ When it does need to perform a scaling operation, Aurora Serverless v1 first tri
 
 To increase your Aurora Serverless DB cluster's success rate when finding a scaling point, we recommend that you avoid long\-running queries and long\-running transactions\. To learn more about scale\-blocking operations and how to avoid them, see [Best practices for working with Amazon Aurora Serverless](http://aws.amazon.com/blogs/database/best-practices-for-working-with-amazon-aurora-serverless/)\.
 
-Currently, Aurora Serverless v1 tries to find a scaling point for 5 minutes \(300 seconds\)\. If Aurora Serverless can't find a scaling point within 5 minutes, the autoscaling operation times out\.
+By default, Aurora Serverless v1 tries to find a scaling point for 5 minutes \(300 seconds\)\. You can specify a different timeout period when you create or modify the cluster\. The timeout period can be between 10 seconds and 10 minutes \(600 seconds\)\. If Aurora Serverless can't find a scaling point within the specified period, the autoscaling operation times out\.
 
-By default, if autoscaling doesn't find a scaling point before timing out, Aurora Serverless v1 keeps the cluster at the current capacity\. This default behavior can be changed when you create or modify your Aurora Serverless DB cluster by selecting the "Force capacity change\.\.\." option\. For more information, see [Timeout action for capacity changes](#aurora-serverless.how-it-works.timeout-action)\. 
+By default, if autoscaling doesn't find a scaling point before timing out, Aurora Serverless v1 keeps the cluster at the current capacity\. You can change this default behavior when you create or modify your Aurora Serverless DB cluster by selecting the **Force the capacity change** option\. For more information, see [Timeout action for capacity changes](#aurora-serverless.how-it-works.timeout-action)\. 
 
 ## Timeout action for capacity changes<a name="aurora-serverless.how-it-works.timeout-action"></a>
 
-If autoscaling times out with finding a scaling point, by default Aurora keeps the current capacity\. You can choose to have Aurora force the change by enabling the **Force the capacity change** option\. This option is available in the **Capacity settings** section of the Create database page, when you create the cluster\.
+If autoscaling times out without finding a scaling point, by default Aurora keeps the current capacity\. You can choose to have Aurora force the change by enabling the **Force the capacity change** option\. This option is available in the **Autoscaling timeout and action** section of the Create database page, when you create the cluster\.
 + **\[ \] Force the capacity change** – By default, this option is deselected\. Leave this option unchecked to have your Aurora Serverless DB cluster's capacity to remain unchanged if the scaling operation times out without finding a scaling point\.
 + **\[X\] Force the capacity change** – Choosing this option causes your Aurora Serverless DB cluster to enforce the capacity change, even without a scaling point\. Before enabling this option, be aware of the consequences of this choice\. 
   + Any in\-process transactions are interrupted, and the following error message appears\.
@@ -69,9 +69,9 @@ If autoscaling times out with finding a scaling point, by default Aurora keeps t
 **Note**  
 We recommend that you choose the "force" option only if your application can recover from dropped connections or incomplete transactions\. 
 
-The choices you make in the AWS Management Console when you create an Aurora Serverless DB cluster are stored in the `ScalingConfigurationInfo` object, in the `TimeoutAction` property\. The value of the `TimeoutAction` property is set to one of the following values when you create your cluster: 
-+ `RollbackCapacityChange` – This is the default behavior\. It's set by leaving the "Force" option deselected\.
-+ `ForceApplyCapacityChange` – This value is set when you choose the "Force" option\.
+The choices you make in the AWS Management Console when you create an Aurora Serverless DB cluster are stored in the `ScalingConfigurationInfo` object, in the `SecondsBeforeTimeout` and `TimeoutAction` properties\. The value of the `TimeoutAction` property is set to one of the following values when you create your cluster: 
++ `RollbackCapacityChange` – This value is set when you choose the **Roll back the capacity change** option\. This is the default behavior\.
++ `ForceApplyCapacityChange` – This value is set when you choose the **Force the capacity change** option\.
 
 You can get the value of this property on an existing Aurora Serverless DB cluster by using the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) AWS CLI command, as shown following\.
 
@@ -91,7 +91,7 @@ aws rds describe-db-clusters --region region ^
   --query "*[].{ScalingConfigurationInfo:ScalingConfigurationInfo}"
 ```
 
-As an example, the following shows the query and response for an Aurora Serverless v1 DB cluster named "west\-coast\-sles" in the US West \(N\. California\) Region\. 
+As an example, the following shows the query and response for an Aurora Serverless v1 DB cluster named `west-coast-sles` in the US West \(N\. California\) Region\. 
 
 ```
 $ aws rds describe-db-clusters --region us-west-1 --db-cluster-identifier west-coast-sles 
@@ -103,6 +103,7 @@ $ aws rds describe-db-clusters --region us-west-1 --db-cluster-identifier west-c
             "MinCapacity": 1,
             "MaxCapacity": 64,
             "AutoPause": false,
+            "SecondsBeforeTimeout": 300,
             "SecondsUntilAutoPause": 300,
             "TimeoutAction": "RollbackCapacityChange"
         }
@@ -273,4 +274,4 @@ For more information, see [Timeout action for capacity changes](#aurora-serverle
 
 ## Aurora Serverless v1 and snapshots<a name="aurora-serverless.snapshots"></a>
 
- The cluster volume for an Aurora Serverless v1 cluster is always encrypted\. You can choose the encryption key, but you can't disable encryption\. To copy or share a snapshot of an Aurora Serverless v1 cluster, you encrypt the snapshot using your own AWS Key Management Service customer master key \(CMK\)\. For more information, see [Copying a DB cluster snapshot ](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html)\. To learn more about encryption and Amazon Aurora, see [Encrypting Amazon Aurora resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Overview.Encryption.html#Overview.Encryption.Enabling)\. 
+ The cluster volume for an Aurora Serverless v1 cluster is always encrypted\. You can choose the encryption key, but you can't disable encryption\. To copy or share a snapshot of an Aurora Serverless v1 cluster, you encrypt the snapshot using your own AWS KMS key\. For more information, see [Copying a DB cluster snapshot ](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html)\. To learn more about encryption and Amazon Aurora, see [Encrypting Amazon Aurora resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Overview.Encryption.html#Overview.Encryption.Enabling)\. 

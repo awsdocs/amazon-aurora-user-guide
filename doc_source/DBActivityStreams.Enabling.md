@@ -4,9 +4,6 @@ To monitor database activity for all instances of the DB cluster, start an activ
 
 When you start an activity stream, each database activity event, such as a change or access, generates an activity stream event\. SQL commands such as `CONNECT` and `SELECT` generate access events\. SQL commands such as `CREATE` and `INSERT` generate change events\.
 
-**Important**  
-Turning on an activity stream clears existing audit data\. It also revokes audit trail privileges\. 
-
 ## Console<a name="DBActivityStreams.Enabling-collapsible-section-E1"></a>
 
 **To start a database activity stream**
@@ -19,14 +16,14 @@ Turning on an activity stream clears existing audit data\. It also revokes audit
 
 1. For **Actions**, choose **Start activity stream**\. 
 
-   The **Start database activity stream: *name*** window appears, where *name* is your \. 
+   The **Start database activity stream: *name*** window appears, where *name* is your DB cluster\.
 
 1. Enter the following settings:
-   + For **Master key**, choose a key from the list of AWS KMS customer master keys \(CMKs\)\.
+   + For **AWS KMS key**, choose a key from the list of AWS KMS keys\.
 **Note**  
- If your Aurora MySQL cluster can't access AWS KMS CMKs, follow the instructions in [Network prerequisites for Aurora MySQL database activity streams](DBActivityStreams.md#DBActivityStreams.Prereqs) to enable such access first\. 
+ If your Aurora MySQL cluster can't access KMS keys, follow the instructions in [Network prerequisites for Aurora MySQL database activity streams](DBActivityStreams.Prereqs.md) to enable such access first\. 
 
-     Aurora uses the master key to encrypt the key that in turn encrypts database activity\. Choose a master key other than the default key\. For more information about encryption keys and AWS KMS, see [What is AWS Key Management Service?](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide\.*
+     Aurora uses the KMS key to encrypt the key that in turn encrypts database activity\. Choose a KMS key other than the default key\. For more information about encryption keys and AWS KMS, see [What is AWS Key Management Service?](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide\.*
    + For **Database activity stream mode**, choose **Asynchronous** or **Synchronous**\.
 **Note**  
 This choice applies only to Aurora PostgreSQL\. For Aurora MySQL, you can use only asynchronous mode\. 
@@ -41,7 +38,7 @@ This choice applies only to Aurora PostgreSQL\. For Aurora MySQL, you can use on
 ## AWS CLI<a name="DBActivityStreams.Enabling-collapsible-section-E2"></a>
 
 To start database activity streams for a DB cluster , configure the DB cluster using the [start\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/start-activity-stream.html) AWS CLI command\.
-+ `--kms-key-id key` – Specifies the KMS key identifier for encrypting messages in the database activity stream\. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key \(CMK\)\.
++ `--kms-key-id key` – Specifies the KMS key identifier for encrypting messages in the database activity stream\. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS key\.
 + `--resource-arn arn` – Specifies the Amazon Resource Name \(ARN\) of the DB cluster\.
 + `--region` – Identifies the AWS Region for the DB instance\.
 + `--mode sync-or-async` – Specifies either synchronous \(`sync`\) or asynchronous \(`async`\) mode\. For Aurora PostgreSQL, you can choose either value\. For Aurora MySQL, specify `sync`\. 

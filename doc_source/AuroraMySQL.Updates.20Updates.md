@@ -1,6 +1,6 @@
-# Database engine updates for Amazon Aurora MySQL 2\.0<a name="AuroraMySQL.Updates.20Updates"></a>
+# Database engine updates for Amazon Aurora MySQL version 2<a name="AuroraMySQL.Updates.20Updates"></a>
 
-The following are Amazon Aurora 2\.0 database engine updates:<a name="aurora_2x_updates"></a>
+The following are Amazon Aurora version 2 database engine updates:<a name="aurora_2x_updates"></a>
 + [Aurora MySQL database engine updates 2021\-05\-25 \(version 2\.10\.0\)](AuroraMySQL.Updates.2100.md)
 + [Aurora MySQL database engine updates 2021\-02\-26 \(version 2\.09\.2\)](AuroraMySQL.Updates.2092.md)
 + [Aurora MySQL database engine updates 2020\-12\-11 \(version 2\.09\.1\)](AuroraMySQL.Updates.2091.md)
@@ -9,6 +9,7 @@ The following are Amazon Aurora 2\.0 database engine updates:<a name="aurora_2x_
 + [Aurora MySQL database engine updates 2020\-08\-28 \(version 2\.08\.2\)](AuroraMySQL.Updates.2082.md)
 + [Aurora MySQL database engine updates 2020\-06\-18 \(version 2\.08\.1\)](AuroraMySQL.Updates.2081.md)
 + [Aurora MySQL database engine updates 2020\-06\-02 \(version 2\.08\.0\)](AuroraMySQL.Updates.2080.md)
++ [Aurora MySQL database engine updates 2021\-09\-02 \(version 2\.07\.6\)](AuroraMySQL.Updates.2076.md)
 + [Aurora MySQL database engine updates 2021\-07\-06 \(version 2\.07\.5\)](AuroraMySQL.Updates.2075.md)
 + [Aurora MySQL database engine updates 2021\-03\-04 \(version 2\.07\.4\)](AuroraMySQL.Updates.2074.md)
 + [Aurora MySQL database engine updates 2020\-11\-10 \(version 2\.07\.3\)](AuroraMySQL.Updates.2073.md)
