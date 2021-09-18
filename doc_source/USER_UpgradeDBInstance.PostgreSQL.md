@@ -2,9 +2,12 @@
 
 When Aurora PostgreSQL supports a new version of a database engine, you can upgrade your DB clusters to the new version\. There are two kinds of upgrades for PostgreSQL DB clusters: major version upgrades and minor version upgrades\. 
 
-*Major version upgrades* can contain database changes that are not backward\-compatible with existing applications\. As a result, you must manually perform major version upgrades of your DB instances\. You can initiate a major version upgrade by modifying your DB cluster\. However, before you perform a major version upgrade, we recommend that you follow the steps described in [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. 
+*Major version upgrades* can contain database changes that are not backward\-compatible with existing applications\. As a result, you must manually perform major version upgrades of your DB instances\. You can initiate a major version upgrade by modifying your DB cluster\. However, before you perform a major version upgrade, we recommend that you follow the steps described in [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\.
 
 In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB cluster\. Or you can enable the **Auto minor version upgrade** option when creating or modifying a DB cluster\. Doing so means that your DB cluster is automatically upgraded after Aurora PostgreSQL tests and approves the new version\. For more details, see [Automatic minor version upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)\. For information about manually performing a minor version upgrade, see [Manually upgrading the Aurora PostgreSQL engine](#USER_UpgradeDBInstance.Upgrading.Manual)\.
+
+**Important**  
+Automatic minor version upgrade doesn't apply to Aurora PostgreSQL clusters that are part of an Aurora global database\. You can specify this setting for a DB instance that is part of an Aurora PostgreSQL DB cluster, but the setting has no effect\.
 
 Aurora DB clusters that are configured as logical replication publishers or subscribers can't undergo a major version upgrade\. For more information, see [Using PostgreSQL logical replication with Aurora](AuroraPostgreSQL.Replication.Logical.md)\.
 
@@ -199,7 +202,7 @@ To perform an upgrade of an Aurora PostgreSQL DB cluster, use the following inst
 
 1. Choose **Modify**\. The **Modify DB cluster** page appears\.
 
-1. For **DB engine version**, choose the new version\.
+1. For **Engine version**, choose the new version\.
 
 1. Choose **Continue** and check the summary of modifications\. 
 

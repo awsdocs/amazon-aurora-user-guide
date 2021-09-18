@@ -10,6 +10,7 @@ There are several things you can do to make a failover perform faster with Auror
 + Set the timeout variables used in the JDBC connection string as low as possible\. Use separate connection objects for short and long running queries\.
 + Use the provided read and write Aurora endpoints to establish a connection to the cluster\.
 + Use RDS APIs to test application response on server side failures and use a packet dropping tool to test application response for client\-side failures\.
++ Use the AWS JDBC Driver for PostgreSQL \(preview\) to take full advantage of the failover capabilities of Aurora PostgreSQL\. For more information about the AWS JDBC Driver for PostgreSQL and complete instructions for using it, see the [AWS JDBC Driver for PostgreSQL GitHub repository](https://awslabs.github.io/aws-postgresql-jdbc/)\.
 
 **Contents**
 + [Setting TCP keepalives parameters](#AuroraPostgreSQL.BestPractices.FastFailover.TCPKeepalives)

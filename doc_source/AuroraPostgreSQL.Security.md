@@ -56,9 +56,7 @@ Make sure that you verify password requirements such as expiration and needed co
 
 ## Securing Aurora PostgreSQL data with SSL<a name="AuroraPostgreSQL.Security.SSL"></a>
 
-Amazon RDS supports Secure Socket Layer \(SSL\) encryption for Aurora PostgreSQL DB clusters\. Using SSL, you can encrypt a connection between your applications and your Aurora PostgreSQL DB clusters\. You can also force all connections to your Aurora PostgreSQL DB cluster to use SSL\. 
-
-Amazon Aurora PostgreSQL supports Transport Layer Security \(TLS\) versions 1\.1 and 1\.2\. Aurora PostgreSQL doesn't enforce TLS connections so they must be enforced from your application\. 
+Amazon RDS supports Secure Socket Layer \(SSL\) encryption for Aurora PostgreSQL DB clusters\. Using SSL, you can encrypt a connection between your applications and your Aurora PostgreSQL DB clusters\. You can also force all connections to your Aurora PostgreSQL DB cluster to use SSL\. Amazon Aurora PostgreSQL supports Transport Layer Security \(TLS\) versions 1\.1 and 1\.2\.
 
 For general information about SSL support and PostgreSQL databases, see [SSL support](https://www.postgresql.org/docs/current/libpq-ssl.html) in the PostgreSQL documentation\. For information about using an SSL connection over JDBC, see [Configuring the client](https://jdbc.postgresql.org/documentation/head/ssl-client.html) in the PostgreSQL documentation\.
 

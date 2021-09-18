@@ -33,7 +33,7 @@
 
  To enable binary logging on an Aurora MySQL DB cluster, update the `binlog_format` parameter for your source DB cluster\. The `binlog_format` parameter is a cluster\-level parameter that is in the default cluster parameter group\. If your DB cluster uses the default DB cluster parameter group, create a new DB cluster parameter group to modify `binlog_format` settings\. We recommend that you set the `binlog_format` to `MIXED`\. However, you can also set `binlog_format` to `ROW` or `STATEMENT` if you need a specific binlog format\. Reboot your Aurora DB cluster for the change to take effect\. 
 
- For more information, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithParamGroups.md#Aurora.Managing.ParameterGroups) and [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
+ For more information about using binary logging with Aurora MySQL, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. For more information about modifying Aurora MySQL configuration parameters, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithParamGroups.md#Aurora.Managing.ParameterGroups) and [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 ## Creating an Amazon Aurora MySQL DB cluster that is a cross\-Region read replica<a name="AuroraMySQL.Replication.CrossRegion.Creating"></a>
 

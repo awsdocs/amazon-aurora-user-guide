@@ -95,7 +95,7 @@ When you create an Aurora read replica of an RDS for PostgreSQL DB instance, Ama
 You can only have one Aurora read replica for an RDS for PostgreSQL DB instance\. If you try to create an Aurora read replica for your RDS for PostgreSQL instance and you already have an Aurora read replica or a cross\-region read replica, the request is rejected\. 
 
 **Note**  
-Replication issues can arise due to feature differences between Aurora PostgreSQL and the PostgreSQL engine version of your RDS for PostgreSQL DB instance that is the replication source\. You can replicate only from an RDS for PostgreSQL instance that is compatible with the Aurora PostgreSQL version in question\. For example, if the supported Aurora PostgreSQL version is 12\.4, the RDS for PostgreSQL DB instance must be running version 12\.2 or greater\. If you encounter an error, you can find help in the [Amazon RDS community forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
+Replication issues can arise due to feature differences between Aurora PostgreSQL and the PostgreSQL engine version of your RDS for PostgreSQL DB instance that is the replication source\. You can replicate only from an RDS for PostgreSQL instance that is compatible with the Aurora PostgreSQL version\. The RDS for PostgreSQL version must be lower than or equal to a supported Aurora PostgreSQL version in the same major version\. For example, you can replicate data between an RDS for PostgreSQL version 11\.7 DB instance and an Aurora PostgreSQL version 11\.7 or higher 11 version DB cluster, but not an Aurora PostgreSQL version 11\.6 DB cluster\. For information about Aurora PostgreSQL versions, see [ Aurora PostgreSQL releases and engine versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html) in the *Aurora User Guide\.* If you encounter an error, you can find help in the [Amazon RDS community forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
 
 For more information on PostgreSQL read replicas, see [Working with read replicas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html) in the *Amazon RDS User Guide*\.
 
@@ -652,7 +652,6 @@ For this example, assume that the following information is organized into pipe\-
 
    ```
    psql=> CREATE TABLE test (a text, b text, c text, d text, e text);
-   CREATE TABLE
    ```
 
 1. Use the following form of the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function to import data from the Amazon S3 file\. 
@@ -694,7 +693,6 @@ Import the gzip file into your Aurora PostgreSQL DB cluster as shown following\.
 
 ```
 psql=> CREATE TABLE test_gzip(id int, a text, b text, c text, d text);
-CREATE TABLE
 psql=> SELECT aws_s3.table_import_from_s3(
  'test_gzip', '', '(format csv)',
  'myS3Bucket', 'test-data.gz', 'us-east-2'

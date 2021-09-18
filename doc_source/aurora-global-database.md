@@ -48,9 +48,9 @@ The following limitations currently apply to Aurora global databases:
 + Aurora global databases are available in certain AWS Regions and for specific Aurora MySQL and Aurora PostgreSQL versions only\. For more information, see [Aurora global databases](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.GlobalDatabase)\.
 + Aurora global databases have certain configuration requirements for supported Aurora DB instance classes, maximum number of AWS Regions, and so on\. For more information, see [Configuration requirements of an Amazon Aurora global database](aurora-global-database-getting-started.md#aurora-global-database.configuration.requirements)\. 
 + Managed planned failover for Aurora global databases requires one of the following Aurora database engines:
-  + Aurora MySQL 5\.6, version 1\.23\.1 \(and later\)
-  +  Aurora MySQL 5\.7, version 2\.09\.1 \(and later\) 
-  +  Aurora PostgreSQL versions 10\.14 \(and later\), 11\.9 \(and later\), and 12\.4 \(and later\) 
+  +  Aurora MySQL 5\.7, version 2\.09\.1 and higher
+  + Aurora MySQL 5\.6, version 1\.23\.1 and higher
+  +  Aurora PostgreSQL versions 13\.3 and higher, 12\.4 and higher, 11\.9 and higher, and 10\.14 and higher 
 + Aurora global databases currently don't support the following Aurora features: 
   + Aurora multi\-master clusters
   + Aurora Serverless v1
@@ -67,5 +67,6 @@ The following limitations currently apply to Aurora global databases:
 + Aurora PostgreSQL–based DB clusters running in an Aurora global database have the following limitations:
   + Cluster cache management is not supported for Aurora PostgreSQL DB clusters that are part of Aurora global databases\.
   + If the primary DB cluster of your Aurora global database is based on a replica of an Amazon RDS PostgreSQL instance, you can't create a secondary cluster\. Don't attempt to create a secondary from that cluster using the AWS Management Console, the AWS CLI, or the `CreateDBCluster` API operation\. Attempts to do so time out, and the secondary cluster is not created\.
+  + Automatic minor version upgrade doesn't apply to Aurora PostgreSQL clusters that are part of an Aurora global database\. Note that you can specify this setting for a DB instance that is part of an Aurora PostgreSQL DB cluster, but the setting has no effect\.
 
 We recommend that you create secondary DB clusters for your Aurora global databases by using the same version of the Aurora DB engine as the primary\. For more information, see [Creating an Amazon Aurora global database](aurora-global-database-getting-started.md#aurora-global-database-creating)\.

@@ -128,7 +128,7 @@ The AWS JDBC Driver for PostgreSQL \(preview\) is a client driver designed for t
 
 The AWS JDBC Driver for PostgreSQL takes full advantage of the failover capabilities of Aurora PostgreSQL\. The AWS JDBC Driver for PostgreSQL fully maintains a cache of the DB cluster topology and each DB instance's role, either primary DB instance or Aurora Replica\. It uses this topology to bypass the delays caused by DNS resolution so that a connection to the new primary DB instance is established as fast as possible\.
 
-For more information about the AWS JDBC Driver for PostgreSQL and complete instructions for using it, see [the AWS JDBC Driver for PostgreSQL GitHub repository](https://awslabs.github.io/aws-postgresql-jdbc/)\.
+For more information about the AWS JDBC Driver for PostgreSQL and complete instructions for using it, see the [AWS JDBC Driver for PostgreSQL GitHub repository](https://awslabs.github.io/aws-postgresql-jdbc/)\.
 
 ## Troubleshooting Aurora connection failures<a name="Aurora.Connecting.Troubleshooting"></a>
 

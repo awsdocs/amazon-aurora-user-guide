@@ -1,4 +1,4 @@
-# Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)<a name="AuroraMySQL.Replication.MySQL"></a>
+# Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)<a name="AuroraMySQL.Replication.MySQL"></a><a name="binlog"></a>
 
  Because Amazon Aurora MySQL is compatible with MySQL, you can set up replication between a MySQL database and an Amazon Aurora MySQL DB cluster\. This type of replication uses the MySQL binary log replication, also referred to as *binlog replication*\. If you use binary log replication with Aurora, we recommend that your MySQL database run MySQL version 5\.5 or later\. You can set up replication where your Aurora MySQL DB cluster is the replication source or the replica\. You can replicate with an Amazon RDS MySQL DB instance, a MySQL database external to Amazon RDS, or another Aurora MySQL DB cluster\. 
 
@@ -459,3 +459,9 @@ mysql> SELECT
    |                                     0 |
    +---------------------------------------+
    ```
+
+## Sychronizing passwords between replication source and target<a name="AuroraMySQL.Replication.passwords"></a>
+
+ When you change user accounts and passwords on the replication source using SQL statements, those changes are replicated to the replication target automatically\. 
+
+ If you use the AWS Management Console, the AWS CLI, or the RDS API to change the master password on the replication source, those changes are not automatically replicated to the replication target\. If you want to synchronize the master user and master password between the source and target systems, you must make the same change on the replication target yourself\. 

@@ -48,7 +48,7 @@ When it does need to perform a scaling operation, Aurora Serverless v1 first tri
 
 To increase your Aurora Serverless DB cluster's success rate when finding a scaling point, we recommend that you avoid long\-running queries and long\-running transactions\. To learn more about scale\-blocking operations and how to avoid them, see [Best practices for working with Amazon Aurora Serverless](http://aws.amazon.com/blogs/database/best-practices-for-working-with-amazon-aurora-serverless/)\.
 
-By default, Aurora Serverless v1 tries to find a scaling point for 5 minutes \(300 seconds\)\. You can specify a different timeout period when you create or modify the cluster\. The timeout period can be between 10 seconds and 10 minutes \(600 seconds\)\. If Aurora Serverless can't find a scaling point within the specified period, the autoscaling operation times out\.
+By default, Aurora Serverless v1 tries to find a scaling point for 5 minutes \(300 seconds\)\. You can specify a different timeout period when you create or modify the cluster\. The timeout period can be between 60 seconds and 10 minutes \(600 seconds\)\. If Aurora Serverless can't find a scaling point within the specified period, the autoscaling operation times out\.
 
 By default, if autoscaling doesn't find a scaling point before timing out, Aurora Serverless v1 keeps the cluster at the current capacity\. You can change this default behavior when you create or modify your Aurora Serverless DB cluster by selecting the **Force the capacity change** option\. For more information, see [Timeout action for capacity changes](#aurora-serverless.how-it-works.timeout-action)\. 
 

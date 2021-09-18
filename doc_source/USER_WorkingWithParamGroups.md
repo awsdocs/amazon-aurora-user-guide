@@ -31,11 +31,13 @@ Check the `DBClusterParameterGroupStatus` value for the primary DB instance in t
 + You can specify the value for a parameter as an integer or as an integer expression built from formulas, variables, functions, and operators\. Functions can include a mathematical log expression\. For more information, see [Specifying DB parameters](#USER_ParamValuesRef)\.
 + Set any parameters that relate to the character set or collation of your database in your parameter group before creating the DB instance and before you create a database in your DB instance\. This ensures that the default database and new databases in your DB instance use the character set and collation values that you specify\. If you change character set or collation parameters for your DB instance, the parameter changes are not applied to existing databases\.
 
-  You can change character set or collation values for an existing database using the `ALTER DATABASE` command, for example:
+  For some DB engines, you can change character set or collation values for an existing database using the `ALTER DATABASE` command, for example:
 
   ```
   ALTER DATABASE database_name CHARACTER SET character_set_name COLLATE collation;
   ```
+
+  For more information about changing the character set or collation values for a database, check the documentation for your DB engine\.
 + Improperly setting parameters in a parameter group can have unintended adverse effects, including degraded performance and system instability\. Always exercise caution when modifying database parameters and back up your data before modifying a parameter group\. Try out parameter group setting changes on a test DB instance before applying those parameter group changes to a production DB instance\.
 +  For an Aurora global database, you can specify different configuration settings for the individual Aurora clusters\. Make sure that the settings are similar enough to produce consistent behavior if you promote a secondary cluster to be the primary cluster\. For example, use the same settings for time zones and character sets across all the clusters of an Aurora global database\. 
 + To determine the supported parameters for your DB engine, you can view the parameters in the DB parameter group  and DB cluster parameter group used by the DB cluster\. For more information, see [Viewing parameter values for a DB parameter group](#USER_WorkingWithParamGroups.Viewing) and [Viewing parameter values for a DB cluster parameter group](#USER_WorkingWithParamGroups.ViewingCluster)\.

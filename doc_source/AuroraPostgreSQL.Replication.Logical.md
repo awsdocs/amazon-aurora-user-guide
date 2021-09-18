@@ -47,7 +47,7 @@ The RDS for PostgreSQL DB instance that you use as the source must have automate
 
      1. Choose the **Amazon Aurora** engine and choose the **PostgreSQL\-compatible** edition\.
 
-     1. For **DB engine version**, choose an Aurora PostgreSQL engine that is compatible with PostgreSQL 10\.6 or greater\.
+     1. For **Engine version**, choose an Aurora PostgreSQL engine that is compatible with PostgreSQL 10\.6 or greater\.
 
      1. For **DB cluster parameter group**, choose the group that you created when you enabled logical replication\.
 

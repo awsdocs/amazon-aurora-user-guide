@@ -53,7 +53,7 @@ Connect and disconnect events aren't affected by this variable; they are always 
 
 To download a log file, choose that file in the **Logs** section and then choose **Download**\.
 
-You can also get a list of the log files by using the [describe\-db\-log\-files](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-log-files.html) AWS CLI command\. You can download the contents of a log file by using the [download\-db\-log\-file\-portion](https://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html) AWS CLI command\. For more information, see [Viewing and listing database log files](USER_LogAccess.md#USER_LogAccess.Procedural.Viewing) and [Downloading a database log file](USER_LogAccess.md#USER_LogAccess.Procedural.Downloading)\.
+You can also get a list of the log files by using the [describe\-db\-log\-files](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-log-files.html) AWS CLI command\. You can download the contents of a log file by using the [download\-db\-log\-file\-portion](https://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html) AWS CLI command\. For more information, see [Viewing and listing database log files](USER_LogAccess.Procedural.Viewing.md) and [Downloading a database log file](USER_LogAccess.Procedural.Downloading.md)\.
 
 ## Audit log details<a name="AuroraMySQL.Auditing.Logs"></a>
 

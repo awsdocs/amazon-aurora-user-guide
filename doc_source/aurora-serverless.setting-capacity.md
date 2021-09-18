@@ -26,7 +26,7 @@ You can set the capacity of an Aurora DB cluster with the AWS Management Console
       + Uncheck this option if you want your capacity to remain unchanged if Aurora Serverless v1 can't find a scaling point before timing out\.
       + Check this option if you want to force your Aurora Serverless v1 DB cluster change its capacity even if it can't find a scaling point before timing out\. This option can result Aurora Serverless v1 dropping connections that prevent it from finding a scaling point\.
 
-   1. In the **seconds** field, enter the amount of time you want to allow your Aurora Serverless v1 DB cluster to look for a scaling point before timing out\. You can specify anywhere from 10 seconds to 600 seconds \(10 minutes\)\. The default is five minutes \(300 seconds\)\. This following example forces the Aurora Serverless v1 DB cluster to scale down to 2 ACUs even if it can't find a scaling point within five minutes\.   
+   1. In the **seconds** field, enter the amount of time you want to allow your Aurora Serverless v1 DB cluster to look for a scaling point before timing out\. You can specify anywhere from 60 seconds to 600 seconds \(10 minutes\)\. The default is five minutes \(300 seconds\)\. This following example forces the Aurora Serverless v1 DB cluster to scale down to 2 ACUs even if it can't find a scaling point within five minutes\.   
 ![\[Setting capacity for an Aurora Serverless v1 DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-set-capacity.png)
 
 1. Choose **Apply**\.
