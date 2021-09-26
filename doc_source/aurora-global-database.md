@@ -56,6 +56,7 @@ The following limitations currently apply to Aurora global databases:
   + Aurora Serverless v1
   + Backtracking in Aurora
   + Amazon RDS Proxy
++ Automatic minor version upgrade doesn't apply to Aurora MySQL and Aurora PostgreSQL clusters that are part of an Aurora global database\. Note that you can specify this setting for a DB instance that is part of a global database cluster, but the setting has no effect\.
 + Aurora global databases currently don't support Aurora Auto Scaling for secondary DB clusters\.
 + You can start database activity streams on Aurora global databases running the following Aurora MySQL and Aurora PostgreSQL versions only\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html)
@@ -67,6 +68,5 @@ The following limitations currently apply to Aurora global databases:
 + Aurora PostgreSQL–based DB clusters running in an Aurora global database have the following limitations:
   + Cluster cache management is not supported for Aurora PostgreSQL DB clusters that are part of Aurora global databases\.
   + If the primary DB cluster of your Aurora global database is based on a replica of an Amazon RDS PostgreSQL instance, you can't create a secondary cluster\. Don't attempt to create a secondary from that cluster using the AWS Management Console, the AWS CLI, or the `CreateDBCluster` API operation\. Attempts to do so time out, and the secondary cluster is not created\.
-  + Automatic minor version upgrade doesn't apply to Aurora PostgreSQL clusters that are part of an Aurora global database\. Note that you can specify this setting for a DB instance that is part of an Aurora PostgreSQL DB cluster, but the setting has no effect\.
 
 We recommend that you create secondary DB clusters for your Aurora global databases by using the same version of the Aurora DB engine as the primary\. For more information, see [Creating an Amazon Aurora global database](aurora-global-database-getting-started.md#aurora-global-database-creating)\.

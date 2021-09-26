@@ -305,7 +305,7 @@
 
 ### AWS CLI<a name="AuroraMySQL.Replication.CrossRegion.Promote.CLI"></a>
 
- To promote a read replica to a DB cluster, use the AWS CLI [ `promote-read-replica-db-cluster`](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html) command\. 
+ To promote a read replica to a DB cluster, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html) command\. 
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -323,7 +323,7 @@ aws rds promote-read-replica-db-cluster ^
 
 ### RDS API<a name="AuroraMySQL.Replication.CrossRegion.Promote.API"></a>
 
- To promote a read replica to a DB cluster, call [ `PromoteReadReplicaDBCluster`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplicaDBCluster.html)\. 
+ To promote a read replica to a DB cluster, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplicaDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplicaDBCluster.html)\. 
 
 ## Troubleshooting Amazon Aurora MySQL cross Region replicas<a name="AuroraMySQL.Replication.CrossRegion.Troubleshooting"></a>
 

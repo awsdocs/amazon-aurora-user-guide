@@ -149,6 +149,8 @@ aurora_version
 **Note**  
  If you want to remain on an LTS minor version for the duration of its lifecycle, make sure to turn off **Auto minor version upgrade** for your DB instances\. To avoid automatically upgrading your DB cluster from the LTS minor version, set **Auto minor version upgrade** to `No` on all DB instances in your Aurora cluster\. 
 
+ For the version numbers of all Aurora LTS versions, see [Aurora MySQL long\-term support \(LTS\) releases](AuroraMySQL.Updates.Versions.md#AuroraMySQL.Updates.LTS) and [Aurora PostgreSQL long\-term support \(LTS\) releases](AuroraPostgreSQL.Updates.LTS.md)\. 
+
 ## Manually controlling if and when your database cluster is upgraded to new versions<a name="Aurora.VersionPolicy.ManualUpgrades"></a>
 
  Auto minor version upgrades are performed to the default minor version\. We typically schedule automatic upgrades twice a year for DB clusters that have the **Auto minor version upgrade** setting set to `Yes`\. These upgrades are started during customer\-specified maintenance windows\. If you want to turn off automatic minor version upgrades, set **Auto minor version upgrade** to `No` on any DB instance within an Aurora cluster\. Aurora performs an automatic minor version upgrade only if all DB instances in your cluster have the setting turned on\. 

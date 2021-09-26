@@ -8,6 +8,7 @@ The following sections discuss managing performance and scaling for an Amazon Au
 + [Temporary storage limits for Aurora PostgreSQL](#AuroraPostgreSQL.Managing.TempStorage)
 + [Testing Amazon Aurora PostgreSQL by using fault injection queries](AuroraPostgreSQL.Managing.FaultInjectionQueries.md)
 + [Displaying volume status for an Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)
++ [Specifying the RAM disk for the stats\_temp\_directory](AuroraPostgreSQL.Managing..RamDisk.md)
 + [Scheduling maintenance with the PostgreSQL pg\_cron extension](PostgreSQL_pg_cron.md)
 
 ## Scaling Aurora PostgreSQL DB instances<a name="AuroraPostgreSQL.Managing.Performance.InstanceScaling"></a>

@@ -14,4 +14,4 @@ To remain on an LTS minor version for the duration of its lifecycle, make sure t
 +  The testing cycle for the cluster and associated applications takes a long time for each update to the Aurora PostgreSQL database engine\. 
 +  The database version for your Aurora PostgreSQL cluster has all the DB engine features and bug fixes that your application needs\. 
 
- The current LTS release for Aurora PostgreSQL is version 11\.9\. 
+ The current LTS release for Aurora PostgreSQL is release 3\.4 \(PostgreSQL 11\.9\)\. It was released on December 11, 2020\. For more information about this version, see [PostgreSQL 11\.9, Aurora PostgreSQL release 3\.4 ](AuroraPostgreSQL.Updates.20180305.md#AuroraPostgreSQL.Updates.20180305.34)\. 

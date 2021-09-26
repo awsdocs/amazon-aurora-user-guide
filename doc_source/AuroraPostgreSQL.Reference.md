@@ -68,6 +68,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  rds\.force\_ssl  |  Yes  | 
 | rds\.global\_db\_rpo | Yes | 
 | rds\.logical\_replication | Yes | 
+| rds\.pg\_stat\_ramdisk\_size | Yes | 
 | rds\.restrict\_password\_commands | Yes | 
 |  server\_encoding  |  No  | 
 |  ssl  |  Yes  | 

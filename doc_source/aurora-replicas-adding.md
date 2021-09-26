@@ -2,17 +2,16 @@
 
 An Aurora DB cluster with single\-master replication has one primary DB instance and up to 15 Aurora Replicas\. The primary DB instance supports read and write operations, and performs all data modifications to the cluster volume\. Aurora Replicas connect to the same storage volume as the primary DB instance, but support read operations only\. You use Aurora Replicas to offload read workloads from the primary DB instance\. For more information, see [Aurora Replicas](Aurora.Replication.md#Aurora.Replication.Replicas)\. 
 
-Amazon Aurora also supports replication with an external database, such as an RDS DB instance\. The RDS DB instance must be in the same AWS Region as Amazon Aurora\. For more information, see [Replication with Amazon Aurora](Aurora.Replication.md)\.
-
 Amazon Aurora Replicas have the following limitations:
 + You can't create an Aurora Replica for an Aurora Serverless v1 DB cluster\. Aurora Serverless v1 has a single DB instance that scales up and down automatically to support all database read and write operations\. 
 + You can't create Aurora Replicas for an Aurora multi\-master cluster\. By design, an Aurora multi\-master cluster has read\-write DB instances only\. 
-+ Aurora PostgreSQL–based DB clusters can have only one Aurora Read Replica\. If you try to create an Aurora Read Replica for an Aurora PostgreSQL DB cluster that already has an Aurora Read Replica, Aurora rejects your request\. For more information, see [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)\. 
-+ Aurora PostgreSQL–based DB clusters can't have Aurora Read Replicas in different AWS Regions\. In other words, Aurora PostgreSQL doesn't support cross\-region Aurora Read Replicas\. To scale reads for an Aurora PostgreSQL–based DB cluster beyond a single Region, use Aurora global database\. Aurora global database supports a primary Aurora DB cluster in one AWS Region with up to five secondary read\-only Aurora DB clusters in five different Regions\. For more information see [Using Amazon Aurora global databases](aurora-global-database.md)\. 
 
 We recommend that you distribute the primary instance and Aurora Replicas of your Aurora DB cluster over multiple Availability Zones to improve the availability of your DB cluster\. For more information, see [Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
 
 To remove an Aurora Replica from an Aurora DB cluster, delete the Aurora Replica by following the instructions in [Deleting a DB instance from an Aurora DB Cluster](USER_DeleteCluster.md#USER_DeleteInstance)\.
+
+**Note**  
+Amazon Aurora also supports replication with an external database, such as an RDS DB instance\. The RDS DB instance must be in the same AWS Region as Amazon Aurora\. For more information, see [Replication with Amazon Aurora](Aurora.Replication.md)\.
 
 You can add Aurora Replicas to a DB cluster using the AWS Management Console, the AWS CLI, or the RDS API\.
 

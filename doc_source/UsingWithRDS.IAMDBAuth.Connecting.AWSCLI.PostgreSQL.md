@@ -51,7 +51,7 @@ The parameters are as follows:
   When you use `sslmode=verify-full`, the SSL connection verifies the DB cluster endpoint against the endpoint in the SSL certificate\.
 + `sslrootcert` – The SSL certificate file that contains the public key
 
-  For more information, see [Securing Aurora PostgreSQL data with SSL](AuroraPostgreSQL.Security.md#AuroraPostgreSQL.Security.SSL)\.
+  For more information, see [Securing Aurora PostgreSQL data with SSL/TLS](AuroraPostgreSQL.Security.md#AuroraPostgreSQL.Security.SSL)\.
 
   For information about downloading the SSL certificate, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\.
 + `dbname` – The database that you want to access

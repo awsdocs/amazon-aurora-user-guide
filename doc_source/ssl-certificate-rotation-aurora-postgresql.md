@@ -10,7 +10,7 @@ For such applications, you must update your client application trust stores to i
 
 After you update your CA certificates in the client application trust stores, you can rotate the certificates on your DB clusters\. We strongly recommend testing these procedures in a development or staging environment before implementing them in your production environments\.
 
-For more information about certificate rotation, see [Rotating your SSL/TLS certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with PostgreSQL DB clusters, see [Securing Aurora PostgreSQL data with SSL](AuroraPostgreSQL.Security.md#AuroraPostgreSQL.Security.SSL)\.
+For more information about certificate rotation, see [Rotating your SSL/TLS certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with PostgreSQL DB clusters, see [Securing Aurora PostgreSQL data with SSL/TLS](AuroraPostgreSQL.Security.md#AuroraPostgreSQL.Security.SSL)\.
 
 **Topics**
 + [Determining whether applications are connecting to Aurora PostgreSQL DB clusters using SSL](#ssl-certificate-rotation-aurora-postgresql.determining-server)

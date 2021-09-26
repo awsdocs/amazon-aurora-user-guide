@@ -62,7 +62,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.3\. For more
 
 **Additional improvements and enhancements**
 + Contains all of the fixes, features, and improvements present in [PostgreSQL 12\.7, Aurora PostgreSQL release 4\.2](#AuroraPostgreSQL.Updates.20180305.42)
-+ Contains several improvements that were announced for PostgreSQL releases 13, 13\.1, 13\.2 and 13\.3
++ Contains several improvements that were announced for PostgreSQL releases [13\.0](https://www.postgresql.org/docs/13/release-13.html), [13\.1](https://www.postgresql.org/docs/13/release-13-1.html), [13\.2](https://www.postgresql.org/docs/13/release-13-2.html) and [13\.3](https://www.postgresql.org/docs/13/release-13-3.html) 
 + Backported fixes for the following PostgreSQL community security issues: [CVE\-2021\-3677](https://nvd.nist.gov/vuln/detail/CVE-2021-3677)
 + Instance type R4 was deprecated\.
 + Updated the following extensions:
@@ -312,6 +312,8 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.12\. For mor
 1.  Improved metadata protection from accidental erasure\. 
 
 1.  Improved safety checks in the write path to detect incorrect writes to metadata\. 
+
+1.  Improved security by removing 3DES and other older ciphers for SSL/TLS connections\. 
 
 1.  Fixed an issue where a duplicate file entry can prevent the Aurora PostgreSQL engine from starting up\. 
 
@@ -1051,6 +1053,8 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.17\. For mor
 1.  Reduced CPU usage and memory consumption of the WAL apply process on Aurora replicas for some workloads\. 
 
 1.  Improved safety checks in the write path to detect incorrect writes to metadata\. 
+
+1.  Improved security by removing 3DES and other older ciphers for SSL/TLS connections\. 
 
 1.  Fixed an issue where a duplicate file entry can prevent the Aurora PostgreSQL engine from starting up\. 
 
