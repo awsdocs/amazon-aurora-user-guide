@@ -86,7 +86,7 @@ When the failover completes, you can see the Aurora DB clusters and their curren
 Use the `[failover\-global\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/failover-global-cluster.html)` CLI command to fail over your Aurora global database\. With the command, pass values for the following parameters\. 
 + `--region` – Specify the AWS Region where the primary DB cluster of the Aurora global database is running\.
 + `--global-cluster-identifier` – Specify the name of your Aurora global database\. 
-+ `--target-db-cluster-identfier` – Specify the Amazon Resource Name \(ARN\) of the Aurora DB cluster that you want to promote to be the primary for the Aurora global database\. 
++ `--target-db-cluster-identifier` – Specify the Amazon Resource Name \(ARN\) of the Aurora DB cluster that you want to promote to be the primary for the Aurora global database\. 
 
 For Linux, macOS, or Unix:
 

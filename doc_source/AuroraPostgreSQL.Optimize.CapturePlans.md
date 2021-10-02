@@ -43,8 +43,6 @@ Use automatic plan capture for situations such as the following:
 
    As the application runs with default query plan management parameter settings, the optimizer captures plans for each SQL statement that runs at least twice\. Capturing all plans while using the defaults has very little run\-time overhead and can be enabled in production\.
 
-   You can modify some parameters to capture plans for statements that have the greatest impact on throughput\. However, this extended mode of automatic plan capture has a noticeable performance overhead\. 
-
 **To turn off automatic plan capture**
 + Set the `apg_plan_mgmt.capture_plan_baselines` parameter to `off` from the DB instance\-level parameter group\.
 

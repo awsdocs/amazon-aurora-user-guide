@@ -22,7 +22,7 @@ The following are the memory optimized DB instance classes available:
 
 The following are the burstable performance DB instance classes available:
 + **db\.t4g** – Newest\-generation burstable instance classes powered by Arm\-based AWS Graviton2 processors\. These deliver better price performance than previous\-generation burstable performance DB instance classes for a broad set of burstable workloads\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\.
-+ **db\.t3** – Next generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous `db.t2` instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\. 
++ **db\.t3** – Next generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\. 
 + **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\. 
 
 For DB instance class hardware specifications, see [Hardware specifications for DB instance classes for Aurora](#Concepts.DBInstanceClass.Summary)\.
@@ -37,8 +37,8 @@ The following are DB engine considerations for DB instance classes:
   + Aurora MySQL versions 2\.09\.2 and higher and 2\.10\.0 and higher support the db\.r6g instance classes\.
   +  Aurora PostgreSQL versions 13\.3, 12\.4 and higher and versions 11\.9 and higher support the db\.r6g instance classes\.
 + **Aurora support for db\.t4g**
-  + Aurora MySQL versions 2\.09\.2 and higher and 2\.10\.0 and higher support the db\.t4g instance classes, specifically `db.t4g.large` and `db.t4g.medium`\.
-  +  Aurora PostgreSQL versions 11\.9 and higher, 12\.4 and higher, and 13\.3 and higher support the db\.t4g instance classes, specifically `db.t4g.large` and `db.t4g.medium`\.
+  + Aurora MySQL versions 2\.09\.2 and higher and 2\.10\.0 and higher support the db\.t4g instance classes, specifically db\.t4g\.large and db\.t4g\.medium\.
+  +  Aurora PostgreSQL versions 11\.9 and higher, 12\.4 and higher, and 13\.3 and higher support the db\.t4g instance classes, specifically db\.t4g\.large and db\.t4g\.medium\.
 + **Aurora support for db\.t3** 
   + Aurora MySQL supports the db\.t3\.medium and db\.t3\.small instance classes for version 1\.15 and higher, and all 2\.x versions\. Aurora MySQL supports the db\.t3\.large class in version 2\.10 and higher\. 
   + For Aurora MySQL db\.r5, db\.r4, and db\.t3 DB instance classes, no instances in the cluster can have pending instance\-level system updates\. To see pending system updates, use the following AWS Command Line Interface \(AWS CLI\) command\.

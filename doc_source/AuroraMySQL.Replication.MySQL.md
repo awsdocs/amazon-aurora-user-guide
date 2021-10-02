@@ -460,7 +460,7 @@ mysql> SELECT
    +---------------------------------------+
    ```
 
-## Sychronizing passwords between replication source and target<a name="AuroraMySQL.Replication.passwords"></a>
+## Synchronizing passwords between replication source and target<a name="AuroraMySQL.Replication.passwords"></a>
 
  When you change user accounts and passwords on the replication source using SQL statements, those changes are replicated to the replication target automatically\. 
 

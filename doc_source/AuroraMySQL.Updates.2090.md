@@ -83,7 +83,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Upgra
 +  Fixed an issue where restoring a cluster from Amazon S3 to Aurora MySQL version 2\.08\.0 takes longer than expected when the S3 backup didn't include the `mysql.host` table\. 
 +  Fixed an issue which might cause repeated failovers due to updates of virtual columns with secondary indexes\. 
 +  Fixed an issue related to transaction lock memory management with long\-running write transactions resulting in a database restart\. 
-+  Fixed multiple issues where the the engine might crash during zero\-downtime patching while checking for safe point for patching\. 
++  Fixed multiple issues where the engine might crash during zero\-downtime patching while checking for safe point for patching\. 
 +  Fixed an issue to skip redo logging for temporary tables, which was previously causing a crash\. 
 +  Fixed a race condition in the lock manager between killing connection/query and the session killed\. 
 +  Fixed an issue where the database could crash if it is a binlog replica and receives a DDL event over the MySQL `time_zone` table\. 

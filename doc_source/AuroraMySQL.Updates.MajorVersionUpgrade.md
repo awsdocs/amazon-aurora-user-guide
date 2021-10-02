@@ -277,7 +277,7 @@ aws rds describe-db-parameters --db-parameter-group-name default.aurora-mysql5.7
 
  The following Linux examples show how you might perform the general steps of the in\-place upgrade procedure using the AWS CLI\. 
 
- This first example creates an Aurora DB cluster that's running a 1\.x version of Aurora MySQL\. The cluster includes a writer DB instance and a reader DB instance\. The `wait db-instance-available` command pauses until the the writer DB instance is available\. That's the point when the cluster is ready to be upgraded\. 
+ This first example creates an Aurora DB cluster that's running a 1\.x version of Aurora MySQL\. The cluster includes a writer DB instance and a reader DB instance\. The `wait db-instance-available` command pauses until the writer DB instance is available\. That's the point when the cluster is ready to be upgraded\. 
 
 ```
 $ aws rds create-db-cluster --db-cluster-identifier cluster-56-2020-11-17-3824 --engine aurora \

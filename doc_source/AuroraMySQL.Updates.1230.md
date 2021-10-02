@@ -45,7 +45,7 @@ Aurora MySQL 1\.23\.0 is generally available\. Aurora MySQL 1\.\* versions are c
 +  Fixed an issue related to transaction lock memory management with long\-running write transactions resulting in a database restart\. 
 +  Fixed a race condition in the lock manager that resulted in a database restart or failover during transaction rollback\. 
 +  Fixed an issue during upgrade from 5\.6 to 5\.7 when the `innodb_file_format` changed on a table that had Fast DDL enabled\. 
-+  Fixed multiple issues where the the engine might restart during zero\-downtime patching while checking for a quiesced point in database activity for patching\. 
++  Fixed multiple issues where the engine might restart during zero\-downtime patching while checking for a quiesced point in database activity for patching\. 
 +  Fixed an issue related to DDL recovery that impacts restart of the DB instance while recovering an interrupted `DROP TRIGGER` operation\. 
 +  Fixed a bug that might cause unavailability of the database if a crash occurs during the execution of certain partitioning operations\. Specifically, an interrupted `ALTER TABLE` operation that modifies the type of partitioning or the number of partitions in a table\. 
 +  Fix default value of `table_open_cache` on 16XL and 24XL instances which could cause repeated failovers and high CPU utilization on large instances classes \(R4/R5\-16XL, R5\-12XL, R5\-24XL\)\. This impacted 1\.21\.x and 1\.22\.x\. 
