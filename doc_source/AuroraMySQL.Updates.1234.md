@@ -13,7 +13,7 @@ Aurora MySQL 1\.23\.4 is generally available\. Aurora MySQL 2\.\* versions are c
 ## Improvements<a name="AuroraMySQL.Updates.1234.Improvements"></a>
 
  **General improvements:** 
-+  Fixed an issue with Aurora MySQL that can cause high CPU consumption on the reader instances due to excessive logging\. 
++  Fixed an issue that can cause high CPU consumption on the reader instances due to excessive logging of informational messages in internal diagnostic log files\. 
 
  **High\-priority fixes:** 
 + [CVE\-2021\-2307](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-2307)

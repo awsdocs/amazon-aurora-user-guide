@@ -24,7 +24,7 @@ You can switch AWS Regions while viewing the Performance Insights page for a DB 
 
 For DB instances associated with a global database, the factors affecting performance might be different in each AWS Region\. For example, the DB instances in each AWS Region might have different capacity\.
 
-To learn more about using Performance Insights, see [Monitoring with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\. 
+To learn more about using Performance Insights, see [Monitoring DB load with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\. 
 
 ## Monitoring Aurora PostgreSQL\-based Aurora global databases<a name="aurora-global-database-monitoring.postgres"></a>
 

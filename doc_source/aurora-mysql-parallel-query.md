@@ -308,7 +308,7 @@ mysql> select @@aurora_parallel_query;
 +------------------------+
 ```
 
- To toggle the `aurora_parallel_query` parameter at the session level, use the standard methods to change a client configuration setting\. For example, you can do so through the `mysql` command line or within a JDBC or ODBC application\. The command on the standard MySQL client is `set session aurora_pq = {'ON'/'OFF'}`\. You can also add the session\-level parameter to the JDBC configuration or within your application code to enable or disable parallel query dynamically\. 
+ To toggle the `aurora_parallel_query` parameter at the session level, use the standard methods to change a client configuration setting\. For example, you can do so through the `mysql` command line or within a JDBC or ODBC application\. The command on the standard MySQL client is `set session aurora_parallel_query = {'ON'/'OFF'}`\. You can also add the session\-level parameter to the JDBC configuration or within your application code to enable or disable parallel query dynamically\. 
 
  You can permanently change the setting for the `aurora_parallel_query` parameter, either for a specific DB instance or for your whole cluster\. If you specify the parameter value in a DB parameter group, that value only applies to specific DB instance in your cluster\. If you specify the parameter value in a DB cluster parameter group, all DB instances in the cluster inherit the same setting\. To toggle the `aurora_parallel_query` parameter, use the techniques for working with parameter groups, as described in [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. Follow these steps: 
 
@@ -410,7 +410,7 @@ mysql> select @@aurora_pq;
  In the upgraded cluster, the `EngineMode` attribute has the value `provisioned` instead of `parallelquery`\. To check whether parallel query is available for a specified engine version, now you check the value of the `SupportsParallelQuery` field in the output of the `describe-db-engine-versions` AWS CLI command\. In earlier Aurora MySQL versions, you checked for the presence of `parallelquery` in the `SupportedEngineModes` list\. 
 
  After you upgrade to Aurora MySQL 1\.23 or 2\.09 and higher, you can take advantage of the following features\. These features aren't available to parallel query clusters running older Aurora MySQL versions\. 
-+  Performance Insights\. For more information, see [Monitoring with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\. 
++  Performance Insights\. For more information, see [Monitoring DB load with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\. 
 +  Backtracking\. For more information, see [Backtracking an Aurora DB cluster](AuroraMySQL.Managing.Backtrack.md)\. 
 +  Stopping and starting the cluster\. For more information, see [Stopping and starting an Amazon Aurora DB cluster](aurora-cluster-stop-start.md)\. 
 
@@ -517,7 +517,7 @@ SET optimizer_switch='hash_join=on';
  The following example output shows the results of running the preceding query on a db\.r4\.2xlarge instance with a cold buffer pool\. The query runs substantially faster when using parallel query\. 
 
 **Note**  
- Because timings depend on many environmental factors, and this example query ran using an early version of parallel query, your results might be different\. Always conduct your own performance tests to confirm the findings with your own environment, workload, and so on\. 
+ Because timings depend on many environmental factors, your results might be different\. Always conduct your own performance tests to confirm the findings with your own environment, workload, and so on\. 
 
 ```
 -- Without parallel query
@@ -924,7 +924,6 @@ mysql> explain select p_partkey from part where p_name like '%choco_ate%'
 
 ```
 mysql> create view part_view as select * from part;
-
 mysql> explain select count(*) from part_view where p_partkey is not null;
 +----+...+----------+----------------------------------------------------------------------------+
 | id |...| rows     | Extra                                                                      |
@@ -938,6 +937,7 @@ mysql> explain select count(*) from part_view where p_partkey is not null;
  The `INSERT` statement can use parallel query for the `SELECT` phase of processing, if the `SELECT` part meets the other conditions for parallel query\. 
 
 ```
+mysql> create table part_subset like part;
 mysql> explain insert into part_subset select * from part where p_mfgr = 'Manufacturer#1';
 +----+...+----------+----------------------------------------------------------------------------+
 | id |...| rows     | Extra                                                                      |
@@ -981,14 +981,14 @@ mysql> explain delete from part where p_name is not null;
 ```
 mysql> set autocommit=0;
 
-mysql> explain select sql_no_cache count(*) from part_txn where p_retailprice > 10.0;
+mysql> explain select sql_no_cache count(*) from part where p_retailprice > 10.0;
 +----+...+---------+----------------------------------------------------------------------------+
 | id |...| rows    | Extra                                                                      |
 +----+...+---------+----------------------------------------------------------------------------+
 |  1 |...| 2976129 | Using where; Using parallel query (1 columns, 1 filters, 0 exprs; 0 extra) |
 +----+...+---------+----------------------------------------------------------------------------+
 
-mysql> select sleep(720); explain select sql_no_cache count(*) from part_txn where p_retailprice > 10.0;
+mysql> select sleep(720); explain select sql_no_cache count(*) from part where p_retailprice > 10.0;
 +------------+
 | sleep(720) |
 +------------+
@@ -1004,7 +1004,7 @@ mysql> select sleep(720); explain select sql_no_cache count(*) from part_txn whe
 
 mysql> commit;
 
-mysql> explain select sql_no_cache count(*) from part_txn where p_retailprice > 10.0;
+mysql> explain select sql_no_cache count(*) from part where p_retailprice > 10.0;
 +----+...+---------+----------------------------------------------------------------------------+
 | id |...| rows    | Extra                                                                      |
 +----+...+---------+----------------------------------------------------------------------------+
@@ -1012,14 +1012,14 @@ mysql> explain select sql_no_cache count(*) from part_txn where p_retailprice > 
 +----+...+---------+----------------------------------------------------------------------------+
 ```
 
- To see how many times queries weren't eligible for parallel query because they were inside long\-running transactions, check the status variable `Aurora_pq_not_chosen_long_trx`\. 
+ To see how many times queries weren't eligible for parallel query because they were inside long\-running transactions, check the status variable `Aurora_pq_request_not_chosen_long_trx`\. 
 
 ```
 mysql> show global status like '%pq%trx%';
-+-------------------------------+-------+
-| Variable_name                 | Value |
-+-------------------------------+-------+
-| Aurora_pq_not_chosen_long_trx | 4     |
++---------------------------------------+-------+
+| Variable_name                         | Value |
++---------------------------------------+-------+
+| Aurora_pq_request_not_chosen_long_trx | 4     |
 +-------------------------------+-------+
 ```
 

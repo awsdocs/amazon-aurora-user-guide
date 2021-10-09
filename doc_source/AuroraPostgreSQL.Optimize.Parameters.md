@@ -6,10 +6,6 @@ The `apg_plan_mgmt` extension provides the following parameters\.
 + [apg\_plan\_mgmt\.capture\_plan\_baselines](#AuroraPostgreSQL.Optimize.Parameters.capture_plan_baselines)
 + [apg\_plan\_mgmt\.max\_databases](#AuroraPostgreSQL.Optimize.Parameters.max_databases)
 + [apg\_plan\_mgmt\.max\_plans](#AuroraPostgreSQL.Optimize.Parameters.max_plans)
-+ [apg\_plan\_mgmt\.pgss\_min\_calls](#AuroraPostgreSQL.Optimize.Parameters.pgss_min_calls)
-+ [apg\_plan\_mgmt\.pgss\_min\_mean\_time\_ms](#AuroraPostgreSQL.Optimize.Parameters.pgss_min_mean_time_ms)
-+ [apg\_plan\_mgmt\.pgss\_min\_stddev\_time\_ms](#AuroraPostgreSQL.Optimize.Parameters.pgss_min_stddev_time_ms)
-+ [apg\_plan\_mgmt\.pgss\_min\_total\_time\_ms](#AuroraPostgreSQL.Optimize.Parameters.pgss_min_total_time_ms)
 + [apg\_plan\_mgmt\.plan\_retention\_period](#AuroraPostgreSQL.Optimize.Parameters.plan_retention_period)
 + [apg\_plan\_mgmt\.unapproved\_plan\_execution\_threshold](#AuroraPostgreSQL.Optimize.Parameters.unapproved_plan_execution_threshold)
 + [apg\_plan\_mgmt\.use\_plan\_baselines](#AuroraPostgreSQL.Optimize.Parameters.use_plan_baselines)
@@ -78,89 +74,9 @@ SET apg_plan_mgmt.max_plans = integer-value;
 
  
 
-## apg\_plan\_mgmt\.pgss\_min\_calls<a name="AuroraPostgreSQL.Optimize.Parameters.pgss_min_calls"></a>
-
-This parameter has been deprecated\.
-
-Sets the minimum number of `pg_stat_statements` calls that are eligible for plan capture\.
-
-```
-SET apg_plan_mgmt.pgss_min_calls = integer-value;
-```
-
-
-****  
-
-| Value | Default | Description | 
-| --- | --- | --- | 
-| Positive integer | 2 | A positive integer value greater or equal to 2\. | 
-
-**Usage notes**  
-Requires installation of the `pg_stat_statements` extension\. For more information, see the [PostgreSQL pg\_stats\_statements documentation](https://www.postgresql.org/docs/current/pgstatstatements.html)\.
-
-## apg\_plan\_mgmt\.pgss\_min\_mean\_time\_ms<a name="AuroraPostgreSQL.Optimize.Parameters.pgss_min_mean_time_ms"></a>
-
-This parameter has been deprecated\.
-
-Minimum value of the `pg_stat_statements mean_time` to be eligible for plan capture\.
-
-```
-SET apg_plan_mgmt.pgss_min_mean_time_ms = double-value;
-```
-
-
-****  
-
-| Value | Default | Description | 
-| --- | --- | --- | 
-| Positive number | 0\.0 | A positive number value greater or equal to 0\.0\. | 
-
-**Usage notes**  
-Requires installation of the `pg_stat_statements `extension\. For more information, see the [PostgreSQL pg\_stats\_statements documentation](https://www.postgresql.org/docs/current/pgstatstatements.html)\.
-
-## apg\_plan\_mgmt\.pgss\_min\_stddev\_time\_ms<a name="AuroraPostgreSQL.Optimize.Parameters.pgss_min_stddev_time_ms"></a>
-
-This parameter has been deprecated\.
-
-Minimum value of the `pg_stat_statements stddev_time` to be eligible for plan capture\.
-
-```
-SET apg_plan_mgmt.pgss_min_stddev_time_ms = double-value;
-```
-
-
-****  
-
-| Value | Default | Description | 
-| --- | --- | --- | 
-| Positive number | 0\.0 | A positive number value greater or equal to 0\.0\. | 
-
-**Usage notes**  
-Requires installation of the `pg_stat_statements` extension\. For more information, see the [PostgreSQL pg\_stats\_statements documentation](https://www.postgresql.org/docs/current/pgstatstatements.html)\.
-
-## apg\_plan\_mgmt\.pgss\_min\_total\_time\_ms<a name="AuroraPostgreSQL.Optimize.Parameters.pgss_min_total_time_ms"></a>
-
-This parameter has been deprecated\.
-
-Minimum value of the `pg_stat_statements total_time` to be eligible for plan capture\.
-
-```
-SET apg_plan_mgmt.pgss_min_total_time_ms = double-value;
-```
-
-
-****  
-
-| Value | Default | Description | 
-| --- | --- | --- | 
-| Positive number | 0\.0 | A positive number value greater or equal to 0\.0\. | 
-
-**Usage notes**  
-Requires installation of the `pg_stat_statements` extension\. For more information, see the [PostgreSQL pg\_stats\_statements documentation](https://www.postgresql.org/docs/current/pgstatstatements.html)\.
-
 ## apg\_plan\_mgmt\.plan\_retention\_period<a name="AuroraPostgreSQL.Optimize.Parameters.plan_retention_period"></a>
 
-The number of days plans are kept in the `apg_plan_mgmt.dba_plans` view before being automatically deleted\. A plan is deleted when the current date is this many days since the plan's `last_used` date\.
+The number of days plans are kept in the `apg_plan_mgmt.dba_plans` view before being automatically deleted\. A plan is deleted when the current date is this many days since the plan's `last_used` date\. The `last_used` date is the most recent date that either the optimizer chose a plan as the minimum cost plan or that the plan was executed\.
 
 ```
 SET apg_plan_mgmt.plan_retention_period = integer-value;

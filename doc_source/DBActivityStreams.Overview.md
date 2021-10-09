@@ -43,7 +43,7 @@ In Aurora, database activity streams have the following requirements and limitat
 + For Aurora MySQL, database activity streams are supported for version 2\.08 or higher, which is compatible with MySQL version 5\.7\.
 + Database activity streams support the DB instance classes listed for Aurora in [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora), with some exceptions:
   +  The db\.r6g instance class isn't supported\.
-  +  For Aurora PostgreSQL, you can't use streams with the db\.t3\.medium instance class\.
+  +  For Aurora PostgreSQL, you can't use streams with the db\.t2 or db\.t3 instance classes\.
   +  For Aurora MySQL, you can't use streams with the db\.t2 or db\.t3 instance classes\.
 + Database activity streams aren't supported in the following AWS Regions:
   + China \(Beijing\) Region, `cn-north-1`

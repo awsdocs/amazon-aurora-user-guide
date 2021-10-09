@@ -83,7 +83,7 @@ To connect a DB cluster to these services requires that you set up an AWS Identi
 
       The format of an Amazon S3 bucket ARN is `arn:aws:s3:::bucket_name`\. Ensure that the Amazon S3 bucket you use is set up with the requirements for training SageMaker models\. When you train a model, your Aurora DB cluster requires permission to export data to the Amazon S3 bucket, and also to import data from the bucket\. 
 
-      For more about an Amazon S3 bucket ARN, see [Specifying resources in a policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html) in the *Amazon Simple Storage Service Developer Guide\.* For more about using an Amazon S3 bucket with SageMaker, see [Step 1: Create an Amazon S3 bucket](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-config-permissions.html) in the *Amazon SageMaker Developer Guide\. *
+      For more about an Amazon S3 bucket ARN, see [Specifying resources in a policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html) in the *Amazon Simple Storage Service User Guide\.* For more about using an Amazon S3 bucket with SageMaker, see [Step 1: Create an Amazon S3 bucket](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-config-permissions.html) in the *Amazon SageMaker Developer Guide\. *
 
 1.  Choose **Connect service**\. 
 

@@ -62,6 +62,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  password\_encryption  |  No  | 
 |  max\_standby\_streaming\_delay  |  Yes for PostgreSQL 11, No for earlier PostgreSQL versions  | 
 |  port  |  No  | 
+| random\_page\_cost  | Yes | 
 | rds\.enable\_plan\_management  | Yes | 
 | rds\.extensions | No | 
 |  rds\.force\_autovacuum\_logging\_level  |  Yes  | 
@@ -102,10 +103,6 @@ The following table shows all of the parameters that apply to a specific DB inst
 | apg\_plan\_mgmt\.capture\_plan\_baselines | Yes | 
 | apg\_plan\_mgmt\.max\_databases | Yes | 
 | apg\_plan\_mgmt\.max\_plans | Yes | 
-| apg\_plan\_mgmt\.pgss\_min\_calls \(deprecated\) | Yes | 
-| apg\_plan\_mgmt\.pgss\_min\_mean\_time\_ms \(deprecated\) | Yes | 
-| apg\_plan\_mgmt\.pgss\_min\_stddev\_time\_ms \(deprecated\) | Yes | 
-| apg\_plan\_mgmt\.pgss\_min\_total\_time\_ms \(deprecated\) | Yes | 
 | apg\_plan\_mgmt\.plan\_retention\_period | Yes | 
 | apg\_plan\_mgmt\.unapproved\_plan\_execution\_threshold | Yes | 
 | apg\_plan\_mgmt\.use\_plan\_baselines | Yes | 

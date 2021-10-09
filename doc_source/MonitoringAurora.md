@@ -5,7 +5,7 @@ Amazon Aurora uses a cluster of replicated database servers\. Typically, monitor
 **Topics**
 + [Overview of monitoring Amazon Aurora](MonitoringOverview.md)
 + [Viewing key monitoring information](accessing-monitoring.md)
-+ [Monitoring with Performance Insights on Amazon Aurora](USER_PerfInsights.md)
++ [Monitoring DB load with Performance Insights on Amazon Aurora](USER_PerfInsights.md)
 + [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)
 + [Monitoring Amazon Aurora metrics with Amazon CloudWatch](Aurora.Monitoring.md)
 + [Working with Amazon RDS events](working-with-aurora-events.md)

@@ -5,11 +5,12 @@ The `apg_plan_mgmt` extension provides the following functions\.
 **Topics**
 + [apg\_plan\_mgmt\.delete\_plan](#AuroraPostgreSQL.Optimize.Functions.delete_plan)
 + [apg\_plan\_mgmt\.evolve\_plan\_baselines](#AuroraPostgreSQL.Optimize.Functions.evolve_plan_baselines)
-+ [apg\_plan\_mgmt\.get\_explain\_stmt](#AuroraPostgreSQL.Optimize.Functions.get_explain_stmt)
++ [apg\_plan\_mgmt\.get\_explain\_plan](#AuroraPostgreSQL.Optimize.Functions.get_explain_plan)
 + [apg\_plan\_mgmt\.plan\_last\_used](#AuroraPostgreSQL.Optimize.Functions.plan_last_used)
 + [apg\_plan\_mgmt\.reload](#AuroraPostgreSQL.Optimize.Functions.reload)
 + [apg\_plan\_mgmt\.set\_plan\_enabled](#AuroraPostgreSQL.Optimize.Functions.set_plan_enabled)
 + [apg\_plan\_mgmt\.set\_plan\_status](#AuroraPostgreSQL.Optimize.Functions.set_plan_status)
++ [apg\_plan\_mgmt\.update\_plans\_last\_used](#AuroraPostgreSQL.Optimize.Functions.update_plans_last_used)
 + [apg\_plan\_mgmt\.validate\_plans](#AuroraPostgreSQL.Optimize.Functions.validate_plans)
 
 ## apg\_plan\_mgmt\.delete\_plan<a name="AuroraPostgreSQL.Optimize.Functions.delete_plan"></a>
@@ -83,22 +84,22 @@ The incremental benefit \(or disadvantage\) of each plan is recorded in the `apg
 
 In addition to collecting the planning and execution time of each candidate plan, the `last_verified` column of the `apg_plan_mgmt.dba_plans` view is updated with the `current_timestamp`\. The `last_verified` timestamp might be used to avoid running this function again on a plan that recently had its performance verified\.
 
-## apg\_plan\_mgmt\.get\_explain\_stmt<a name="AuroraPostgreSQL.Optimize.Functions.get_explain_stmt"></a>
+## apg\_plan\_mgmt\.get\_explain\_plan<a name="AuroraPostgreSQL.Optimize.Functions.get_explain_plan"></a>
 
 Generates the text of an `EXPLAIN` statement for the specified SQL statement\. 
 
 **Syntax**
 
 ```
-apg_plan_mgmt.get_explain_stmt(
+apg_plan_mgmt.get_explain_plan(
     sql_hash,
     plan_hash,
-    explain_option_list
+    [explainOptionList]
 )
 ```
 
 **Return value**  
-Returns runtime statistics for the specified SQL statements\. Use without `explain_options_list` to return a simple `EXPLAIN` plan\.
+Returns runtime statistics for the specified SQL statements\. Use without `explainOptionList` to return a simple `EXPLAIN` plan\.
 
 **Parameters**
 
@@ -109,20 +110,20 @@ Returns runtime statistics for the specified SQL statements\. Use without `expla
 | --- | --- | 
 | sql\_hash  | The sql\_hash ID of the plan's managed SQL statement\. | 
 | plan\_hash | The managed plan's plan\_hash ID\. | 
-| explain\_option\_list | A comma\-separated list of `explain_options`\. Valid values include `'analyze'`, `'verbose'`, `'buffers'`, `'hashes'`, and `'format json'`\. If the `explain_options_list` is NULL or an empty string \(''\), this function generates an `EXPLAIN` statement, without any statistics\.  | 
+| explainOptionList | A comma\-separated list of explain options\. Valid values include `'analyze'`, `'verbose'`, `'buffers'`, `'hashes'`, and `'format json'`\. If the `explainOptionList` is NULL or an empty string \(''\), this function generates an `EXPLAIN` statement, without any statistics\.  | 
 
  
 
 ** Usage notes**
 
-For the `explain_option_list`, you can use any of the same options that you would use with an `EXPLAIN` statement\. The Aurora PostgreSQL optimizer concatenates the list of options you provide to the `EXPLAIN` statement, so you can request any option that `EXPLAIN` supports\. 
+For the `explainOptionList`, you can use any of the same options that you would use with an `EXPLAIN` statement\. The Aurora PostgreSQL optimizer concatenates the list of options you provide to the `EXPLAIN` statement, so you can request any option that `EXPLAIN` supports\. 
 
 ## apg\_plan\_mgmt\.plan\_last\_used<a name="AuroraPostgreSQL.Optimize.Functions.plan_last_used"></a>
 
 Returns the `last_used` date of the specified plan from shared memory\. 
 
 **Note**  
-The value in shared memory is always current on the read/write node\. The value is only periodically flushed to the last\_used column of the `apg_plan_mgmt.dba_plans` view\.
+The value in shared memory is always current on the primary DB instance in the DB cluster\. The value is only periodically flushed to the `last_used` column of the `apg_plan_mgmt.dba_plans` view\.
 
 **Syntax**
 
@@ -235,6 +236,32 @@ Returns 0 if the setting was successful or \-1 if the setting failed\.
 | status |  A string with one of the following values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.Functions.html) The case you use does not matter, however the status value is set to initial uppercase in the `apg_plan_mgmt.dba_plans` view\. For more information about these values, see `status` in [Reference for the apg\_plan\_mgmt\.dba\_plans view](AuroraPostgreSQL.Optimize.ViewPlans.md#AuroraPostgreSQL.Optimize.ViewPlans.dba_plans)\.   | 
 
  
+
+## apg\_plan\_mgmt\.update\_plans\_last\_used<a name="AuroraPostgreSQL.Optimize.Functions.update_plans_last_used"></a>
+
+Immediately updates the plans table with the `last_used` date stored in shared memory\.
+
+**Syntax**
+
+```
+apg_plan_mgmt.update_plans_last_used()
+```
+
+**Return value**
+
+None\.
+
+**Parameters**
+
+None\.
+
+** Usage notes**
+
+Call `update_plans_last_used` to make sure queries against the `dba_plans.last_used` column use the most current information\. If the `last_used` date isn't updated immediately, a background process updates the plans table with the `last_used` date once every hour \(by default\)\.
+
+For example, if a statement with a certain `sql_hash` begins to run slowly, you can determine which plans for that statement were executed since the performance regression began\. To do that, first flush the data in shared memory to disk so that the `last_used` dates are current, and then query for all plans of the `sql_hash` of the statement with the performance regression\. In the query, make sure the `last_used` date is greater than or equal to the date on which the performance regression began\. The query identifies the plan or set of plans that might be responsible for the performance regression\. You can use `apg_plan_mgmt.get_explain_plan` with `explainOptionList` set to `verbose, hashes`\. You can also use `apg_plan_mgmt.evolve_plan_baselines` to analyze the plan and any alternative plans that might perform better\.
+
+The `update_plans_last_used` function has an effect only on the primary DB instance of the DB cluster\.
 
 ## apg\_plan\_mgmt\.validate\_plans<a name="AuroraPostgreSQL.Optimize.Functions.validate_plans"></a>
 
