@@ -32,9 +32,9 @@ The `db.load` metric is different from the other time\-series metrics because yo
 ### Wait events<a name="USER_PerfInsights.Overview.ActiveSessions.waits"></a>
 
 A *wait event* causes a SQL statement to wait for a specific event to happen before it can continue running\. For example, a SQL statement might wait until a locked resource is unlocked\. By combining `DB Load` with wait events, you can get a complete picture of the session state\. Wait events vary by DB engine: 
-+ For a list of the most commonly used wait events for Aurora MySQL, see [Aurora MySQL events](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Waitevents)\.
++ For a list of the most commonly used wait events for Aurora MySQL, see [Aurora MySQL wait events](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Waitevents)\.
 + For information about all MySQL wait events, see [Wait Event Summary Tables](https://dev.mysql.com/doc/refman/5.7/en/wait-summary-tables.html) in the MySQL documentation\.
-+ For a list of the most commonly used wait events for Aurora PostgreSQL, see [Amazon Aurora PostgreSQL events](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.Waitevents)\.
++ For a list of the most commonly used wait events for Aurora PostgreSQL, see [Amazon Aurora PostgreSQL wait events](AuroraPostgreSQL.Reference.Waitevents.md)\.
 + For information about all PostgreSQL wait events, see [PostgreSQL Wait Events](https://www.postgresql.org/docs/10/static/monitoring-stats.html#WAIT-EVENT-TABLE) in the PostgreSQL documentation\.
 
 ### Top SQL<a name="USER_PerfInsights.Overview.ActiveSessions.top-sql"></a>

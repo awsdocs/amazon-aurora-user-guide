@@ -21,7 +21,7 @@ Cross\-account cloning currently doesn't support cloning Aurora Serverless v1 DB
 
 Aurora uses a *copy\-on\-write protocol* to create a clone\. This mechanism uses minimal additional space to create an initial clone\. When the clone is first created, Aurora keeps a single copy of the data that is used by the source Aurora DB cluster and the new \(cloned\) Aurora DB cluster\. Additional storage is allocated only when changes are made to data \(on the Aurora storage volume\) by the source Aurora DB cluster or the Aurora DB cluster clone\. To learn more about the copy\-on\-write protocol, see [How Aurora cloning works](#Aurora.Managing.Clone.Protocol)\. 
 
-Aurora cloning is especially useful for quickly setting up test environments using your production data, without risking data corruption\. You can use clones for many types of short\-lived applications, such as the following:
+Aurora cloning is especially useful for quickly setting up test environments using your production data, without risking data corruption\. You can use clones for many types of applications, such as the following:
 + Experiment with potential changes \(schema changes and parameter group changes, for example\) to assess all impacts\. 
 + Run workload\-intensive operations, such as exporting data or running analytical queries on the clone\. 
 + Create a copy of your production DB cluster for development, testing, or other purposes\.
@@ -50,7 +50,6 @@ Aurora cloning works at the storage layer of an Aurora DB cluster\. It uses a *c
 **Topics**
 + [Understanding the copy\-on\-write protocol](#Aurora.Managing.Clone.Protocol.Before)
 + [Deleting a source cluster volume](#Aurora.Managing.Clone.Deleting)
-+ [Recommendations for using Aurora cloning](#Aurora.Managing.Clone.recommendations)
 
 ### Understanding the copy\-on\-write protocol<a name="Aurora.Managing.Clone.Protocol.Before"></a>
 
@@ -75,17 +74,6 @@ As more changes occur over time in both the source Aurora DB cluster volume and 
 ### Deleting a source cluster volume<a name="Aurora.Managing.Clone.Deleting"></a>
 
 When you delete a source cluster volume that has one or more clones associated with it, the clones aren't affected\. The clones continue to point to the pages that were previously owned by the source cluster volume\. 
-
-### Recommendations for using Aurora cloning<a name="Aurora.Managing.Clone.recommendations"></a>
-
-We recommend that you use Aurora clones for short\-term use cases such as those described in [Overview of Aurora cloning](#Aurora.Clone.Overview)\. You can create Aurora clones fairly quickly and easily, and you can delete them after they serve their purpose\. 
-
-Avoid using clones for long\-term purposes, especially those involving many writes by the source Aurora DB cluster and the clone\. We recommend this given how the [copy\-on\-write protocol](#Aurora.Managing.Clone.Protocol.Before) manages changes\. 
-
-As changes are made to the source Aurora DB cluster and to the clone, Aurora uses the copy\-on\-write protocol to create and track changed pages\. That means that as more write operations occur on the Aurora DB cluster and the clone, incrementally more storage is needed on the Aurora storage volume\. The storage is needed to capture and store the changes\. It also means that internally, Aurora must track an ever\-growing list of different pages for the source Aurora DB cluster and the clone\. This associated overhead can eventually outweigh the benefits of a given clone\.
-
-**Note**  
-Cloning is a fairly fast operation, but the overall time it takes depends on the quantity of data stored by the source Aurora DB cluster\. An Aurora DB cluster with many terabytes of data can take considerable time to clone, given the work that underlying storage subsystem must do\.
 
 ## Creating an Amazon Aurora clone<a name="Aurora.Managing.Clone.create"></a>
 

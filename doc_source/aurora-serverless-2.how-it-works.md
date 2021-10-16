@@ -47,7 +47,7 @@
 +  `server_audit_logging` – Set to 1 to turn on server audit logging\. If you turn this on, you can specify the audit events to send to CloudWatch by listing them in the `server_audit_events` parameter\. 
 +  `server_audit_events` – The list of events to capture in the logs\. 
 
- For more information, see [Using advanced auditing with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Auditing.md)\. 
+ For more information, see [Using Advanced Auditing with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Auditing.md)\. 
 
  After you apply your modified DB cluster parameter group to your Aurora Serverless v2 \(preview\) DB cluster, you can view the logs in CloudWatch\. 
 

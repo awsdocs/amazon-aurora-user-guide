@@ -59,7 +59,7 @@ SET apg_plan_mgmt.max_databases = integer-value;
 Sets the maximum number of plans that might be captured in the `apg_plan_mgmt.dba_plans` view\. 
 
 **Important**  
-Set `apg_plan_mgmt.max_plans` at the cluster or DB instance level\. It requires a DB instance restart for a new value to take effect\.
+Set `apg_plan_mgmt.max_plans` at the cluster or DB instance level\. It requires a DB instance restart for a new value to take effect\. We recommend setting this parameter to `10000` or higher for all Aurora PostgreSQL versions\.
 
 ```
 SET apg_plan_mgmt.max_plans = integer-value;
@@ -70,7 +70,7 @@ SET apg_plan_mgmt.max_plans = integer-value;
 
 | Value | Default | Description | 
 | --- | --- | --- | 
-| integer | 1000 | A positive integer value greater or equal to 10\.  | 
+| integer |  10000 for Aurora PostgreSQL version 11 and higher 1000 for Aurora PostgreSQL version 10 and lower  | A positive integer value greater or equal to 10\.  | 
 
  
 

@@ -207,7 +207,7 @@ For Aurora MySQL, you can enable the following logs have them automatically uplo
 | `server_audit_logging` | Set to 1 to turn on server audit logging\. If you turn this on, you can specify the audit events to send to CloudWatch by listing them in the `server_audit_events` parameter\. | 
 | `slow_query_log` |  Creates a slow query log\. Set to 1 to turn on the slow query log\. Default is off \(0\)\.  | 
 
-For more information, see [Using advanced auditing with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Auditing.md)\. 
+For more information, see [Using Advanced Auditing with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Auditing.md)\. 
 
 For Aurora PostgreSQL, you can enable the following logs on your Aurora Serverless DB cluster and have them automatically uploaded to Amazon CloudWatch along with the regular error logs\.
 

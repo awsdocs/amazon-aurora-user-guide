@@ -5,7 +5,7 @@ This reference includes information about Aurora MySQL parameters, status variab
 **Topics**
 + [Aurora MySQL configuration parameters](#AuroraMySQL.Reference.ParameterGroups)
 + [Inapplicable MySQL parameters and status variables](#AuroraMySQL.Reference.Parameters.Inapplicable)
-+ [Aurora MySQL events](#AuroraMySQL.Reference.Waitevents)
++ [Aurora MySQL wait events](#AuroraMySQL.Reference.Waitevents)
 + [Aurora MySQL isolation levels](#AuroraMySQL.Reference.IsolationLevels)
 + [Aurora MySQL hints](#AuroraMySQL.Reference.Hints)
 + [Aurora MySQL stored procedures](#AuroraMySQL.Reference.StoredProcs)
@@ -422,7 +422,7 @@ The following MySQL status variables don't apply to Aurora MySQL:
 **Note**  
 These lists are not exhaustive\.
 
-## Aurora MySQL events<a name="AuroraMySQL.Reference.Waitevents"></a>
+## Aurora MySQL wait events<a name="AuroraMySQL.Reference.Waitevents"></a>
 
 The following are some common wait events for Aurora MySQL\.
 
@@ -445,13 +445,13 @@ In this wait event, there are threads waiting on I/O operations to storage\. Thi
 In this wait event, there is a thread waiting on a binlog file that is being written to disk\.
 
 **io/socket/sql/client\_connection**  
-In this wait event, a thread is in the process of handling a new connection\.
+In this wait event, a thread is in the process of handling a new connection\. To learn how to tune your database when this wait is prominent, see [io/socket/sql/client\_connection](ams-waits.client-connection.md)\.
 
 **io/table/sql/handler**  
-This is a table I/O wait event\. Typically, these types of events can be followed by a nested event such as a file I/O event\. For more information about 'atom' and 'molecule' events in the Performance Schema, see [ Performance Schema atom and molecule events](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\.
+This is a table I/O wait event\. Typically, these types of events can be followed by a nested event such as a file I/O event\. For more information about atom and molecule events in the Performance Schema, see [ Performance Schema atom and molecule events](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\. To learn how to tune your database when this wait is prominent, see [io/table/sql/handler](ams-waits.waitio.md)\.
 
 **lock/table/sql/handler**  
-This wait event is a table lock wait event handler\. For more information about 'atom' and 'molecule' events in the Performance Schema, see [ Performance Schema atom and molecule events](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\.
+This wait event is a table lock wait event handler\. For more information about atom and molecule events in the Performance Schema, see [ Performance Schema atom and molecule events](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\.
 
 **synch/cond/mysys/my\_thread\_var::suspend**  
 In this wait event, threads are suspended when they are waiting on a condition\. For example, this event occurs when threads are waiting for table level lock\. We recommend that you investigate your workload to see what threads might be acquiring table locks on your DB instance\. For more information about table locking in MySQL, see [Table locking issues](https://dev.mysql.com/doc/refman/5.6/en/table-locking.html) in the MySQL documentation\.
@@ -463,7 +463,7 @@ In this wait event, there are threads waiting on a table metadata lock\. For mor
 In this wait event, there is a thread waiting on a binlog file that is being written to disk\. Binary logging contention can occur on databases with a very high change rate\.
 
 **synch/mutex/innodb/aurora\_lock\_thread\_slot\_futex**  
-In this wait event, there is a thread that is waiting on an InnoDB record lock\. If you see this event, check your database for conflicting workloads\. For more information, see [InnoDB locking](https://dev.mysql.com/doc/refman/5.6/en/innodb-locking.html) in the MySQL documentation\.
+In this wait event, there is a thread that is waiting on an InnoDB record lock\. If you see this event, check your database for conflicting workloads\. For more information, see [InnoDB locking](https://dev.mysql.com/doc/refman/5.6/en/innodb-locking.html) in the MySQL documentation\. To learn how to tune your database when this event is prominent, see [synch/mutex/innodb/aurora\_lock\_thread\_slot\_futex](ams-waits.waitsynch.md)\.
 
 **synch/mutex/innodb/buf\_pool\_mutex**  
 In this wait event, a thread has acquired a lock on the InnoDB buffer pool\.

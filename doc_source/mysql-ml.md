@@ -1,35 +1,35 @@
 # Using machine learning \(ML\) with Aurora MySQL<a name="mysql-ml"></a><a name="ml"></a>
 
-Aurora machine learning enables you to add machine learning\-based predictions to database applications using the SQL language\. Aurora machine learning makes use of a highly optimized integration between the Aurora database and AWS machine learning \(ML\) services SageMaker and Amazon Comprehend\. 
+With Aurora machine learning, you can add machine learning–based predictions to database applications using the SQL language\. Aurora machine learning uses a highly optimized integration between the Aurora database and the AWS machine learning \(ML\) services SageMaker and Amazon Comprehend\. 
 
- Benefits of Aurora Machine Learning include the following: 
-+  You can add ML\-based predictions to your existing database applications\. You don't need to build custom integrations or learn separate tools\. You can embed machine learning processing directly into your SQL query as calls to stored functions\. 
+ Benefits of Aurora machine learning include the following: 
++  You can add ML–based predictions to your existing database applications\. You don't need to build custom integrations or learn separate tools\. You can embed machine learning processing directly into your SQL query as calls to stored functions\. 
 +  The ML integration is a fast way to enable ML services to work with transactional data\. You don't have to move the data out of the database to perform the machine learning operations\. You don't have to convert or reimport the results of the machine learning operations to use them in your database application\. 
 +  You can use your existing governance policies to control who has access to the underlying data and to the generated insights\. 
 
-AWS ML Services are managed services that are set up and run in their own production environments\. Currently, Aurora Machine Learning integrates with Amazon Comprehend for sentiment analysis and SageMaker for a wide variety of ML algorithms\. 
+AWS ML Services are managed services that are set up and run in their own production environments\. Currently, Aurora machine learning integrates with Amazon Comprehend for sentiment analysis and SageMaker for a wide variety of ML algorithms\. 
 
 For details about using Aurora and Amazon Comprehend together, see [Using Amazon Comprehend for sentiment detection](#using-amazon-comprehend-for-sentiment-detection)\. For general information about Amazon Comprehend, see [Amazon Comprehend](http://aws.amazon.com/comprehend)\. 
 
 For details about using Aurora and SageMaker together, see [Using SageMaker to run your own ML models](#using-amazon-sagemaker-to-run-your-own-ml-models)\. For general information about SageMaker, see [SageMaker](http://aws.amazon.com/sagemaker)\. 
 
 **Topics**
-+ [Prerequisites for Aurora Machine Learning](#aurora-ml-prereqs)
-+ [Enabling Aurora Machine Learning](#aurora-ml-enabling)
++ [Prerequisites for Aurora machine learning](#aurora-ml-prereqs)
++ [Enabling Aurora machine learning](#aurora-ml-enabling)
 + [Exporting data to Amazon S3 for SageMaker model training](#exporting-data-to-s3-for-model-training)
 + [Using SageMaker to run your own ML models](#using-amazon-sagemaker-to-run-your-own-ml-models)
 + [Using Amazon Comprehend for sentiment detection](#using-amazon-comprehend-for-sentiment-detection)
-+ [Performance considerations for Aurora Machine Learning](#aurora-ml-performance)
-+ [Monitoring Aurora Machine Learning](#aurora-ml-monitoring)
-+ [Limitations of Aurora Machine Learning](#aurora-ml-limitations)
++ [Performance considerations for Aurora machine learning](#aurora-ml-performance)
++ [Monitoring Aurora machine learning](#aurora-ml-monitoring)
++ [Limitations of Aurora machine learning](#aurora-ml-limitations)
 
-## Prerequisites for Aurora Machine Learning<a name="aurora-ml-prereqs"></a>
+## Prerequisites for Aurora machine learning<a name="aurora-ml-prereqs"></a>
 
-Aurora machine learning is available for any Aurora cluster running Aurora MySQL 2\.07\.0 and newer versions in AWS Regions that support Aurora machine learning\. You can upgrade an Aurora cluster running an older version of Aurora MySQL to a newer version if you want to use Aurora machine learning with that cluster\. For more information, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\. 
+Aurora machine learning is available for any Aurora cluster that's running an Aurora MySQL 2\.07\.0 or higher version in an AWS Region that supports Aurora machine learning\. You can upgrade an Aurora cluster that's running a lower version of Aurora MySQL to a supported higher version if you want to use Aurora machine learning with that cluster\. For more information, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\. 
 
 For more information about Regions and Aurora version availability, see [Aurora machine learning](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML)\. 
 
-## Enabling Aurora Machine Learning<a name="aurora-ml-enabling"></a>
+## Enabling Aurora machine learning<a name="aurora-ml-enabling"></a>
 
  Enabling the ML capabilities involves the following steps: 
 +  You enable the Aurora cluster to access the Amazon machine learning services SageMaker or Amazon Comprehend, depending the kinds of ML algorithms you want for your application\. 
@@ -39,7 +39,7 @@ For more information about Regions and Aurora version availability, see [Aurora 
 
 **Topics**
 + [Setting up IAM access to Amazon Comprehend and SageMaker](#setting-up-access-to-amazon-comprehend-and-amazon-sagemaker)
-+ [Granting SQL privileges for invoking Aurora Machine Learning services](#aurora-ml-sql-privileges)
++ [Granting SQL privileges for invoking Aurora machine learning services](#aurora-ml-sql-privileges)
 + [Enabling network communication from Aurora MySQL to other AWS services](#aurora-ml-enabling-interop)
 
 ### Setting up IAM access to Amazon Comprehend and SageMaker<a name="setting-up-access-to-amazon-comprehend-and-amazon-sagemaker"></a>
@@ -62,7 +62,7 @@ For more information about Regions and Aurora version availability, see [Aurora 
 
 #### Connecting an Aurora DB cluster to Amazon S3, SageMaker, or Amazon Comprehend using the console<a name="aurora-ml-console"></a>
 
- Aurora machine learning requires that your DB cluster use some combination of Amazon S3, SageMaker, and Amazon Comprehend\. Amazon Comprehend is for sentiment analysis\. SageMaker is for a wide variety of machine learning algorithms\. For Aurora Machine Learning, Amazon S3 is only for training SageMaker models\. You only need to use Amazon S3 with Aurora machine learning if you don't already have a trained model available and the training is your responsibility\. To connect a DB cluster to these services requires that you set up an AWS Identity and Access Management \(IAM\) role for each Amazon service\. The IAM role enables users of your DB cluster to authenticate with the corresponding service\. 
+ Aurora machine learning requires that your DB cluster use some combination of Amazon S3, SageMaker, and Amazon Comprehend\. Amazon Comprehend is for sentiment analysis\. SageMaker is for a wide variety of machine learning algorithms\. For Aurora machine learning, Amazon S3 is only for training SageMaker models\. You only need to use Amazon S3 with Aurora machine learning if you don't already have a trained model available and the training is your responsibility\. To connect a DB cluster to these services requires that you set up an AWS Identity and Access Management \(IAM\) role for each Amazon service\. The IAM role enables users of your DB cluster to authenticate with the corresponding service\. 
 
  To generate the IAM roles for Amazon S3, SageMaker, or Amazon Comprehend, repeat the following steps for each service that you need\. 
 
@@ -225,9 +225,9 @@ PROMPT> aws rds failover-db-cluster --db-cluster-identifier your_cluster_id
 
  When the instance has rebooted, your IAM roles are associated with your DB cluster\. 
 
-### Granting SQL privileges for invoking Aurora Machine Learning services<a name="aurora-ml-sql-privileges"></a>
+### Granting SQL privileges for invoking Aurora machine learning services<a name="aurora-ml-sql-privileges"></a>
 
- After you create the required IAM policies and roles and associating the role to the Aurora MySQL DB cluster, you authorize individual database users to invoke the Aurora Machine Learning stored functions for SageMaker and built\-in functions for Amazon Comprehend\. 
+ After you create the required IAM policies and roles and associating the role to the Aurora MySQL DB cluster, you authorize individual database users to invoke the Aurora machine learning stored functions for SageMaker and built\-in functions for Amazon Comprehend\. 
 
  The database user invoking a native function must be granted the `INVOKE SAGEMAKER` or `INVOKE COMPREHEND` privilege\. To grant this privilege to a user, connect to the DB instance as the master user, and run the following statements\. Substitute the appropriate details for the database user\. 
 
@@ -255,7 +255,7 @@ GRANT EXECUTE ON FUNCTION db2.company_forecasts TO user2@domain-or-ip-address2
 
   To train SageMaker models, you export data to an Amazon S3 bucket\. The Amazon S3 bucket is used by a Jupyter SageMaker notebook instance to train your model before it is deployed\. You can use the `SELECT INTO OUTFILE S3` statement to query data from an Aurora MySQL DB cluster and save it directly into text files stored in an Amazon S3 bucket\. Then the notebook instance consumes the data from the Amazon S3 bucket for training\. 
 
- Aurora Machine Learning extends the existing `SELECT INTO OUTFILE` syntax in Aurora MySQL to export data to CSV format\. The generated CSV file can be directly consumed by models that need this format for training purposes\. 
+ Aurora machine learning extends the existing `SELECT INTO OUTFILE` syntax in Aurora MySQL to export data to CSV format\. The generated CSV file can be directly consumed by models that need this format for training purposes\. 
 
 ```
 SELECT * INTO OUTFILE S3 's3_uri' [FORMAT {CSV|TEXT} [HEADER]] FROM table_name;
@@ -288,15 +288,15 @@ INTO OUTFILE S3 's3_uri'
 
  SageMaker is a fully managed machine learning service\. With SageMaker, data scientists and developers can quickly and easily build and train machine learning models\. Then they can directly deploy the models into a production\-ready hosted environment\. SageMaker provides an integrated Jupyter authoring notebook instance for easy access to your data sources\. That way, you can perform exploration and analysis without managing the hardware infrastructure for servers\. It also provides common machine learning algorithms that are optimized to run efficiently against extremely large datasets in a distributed environment\. With native support for bring\-your\-own\-algorithms and frameworks, SageMaker offers flexible distributed training options that adjust to your specific workflows\. 
 
- Currently, Aurora Machine Learning supports any SageMaker endpoint that can read and write comma\-separated value format, through a `ContentType` of `text/csv`\. The built\-in SageMaker algorithms that currently accept this format are Random Cut Forest, Linear Learner, 1P, XGBoost, and 3P\. If the algorithms return multiple outputs per item, the Aurora Machine Learning function returns only the first item\. This first item is expected to be a representative result\. 
+ Currently, Aurora machine learning supports any SageMaker endpoint that can read and write comma\-separated value format, through a `ContentType` of `text/csv`\. The built\-in SageMaker algorithms that currently accept this format are Random Cut Forest, Linear Learner, 1P, XGBoost, and 3P\. If the algorithms return multiple outputs per item, the Aurora machine learning function returns only the first item\. This first item is expected to be a representative result\. 
 
  Aurora machine learning always invokes SageMaker endpoints in the same AWS Region as your Aurora cluster\. Therefore, for a single\-region Aurora cluster, always deploy the model in the same AWS Region as your Aurora MySQL cluster\. 
 
  If you are using an Aurora global database, you set up the same integration between the services for each AWS Region that's part of the global database\. In particular, make sure the following conditions are satisfied for all AWS Regions in the global database: 
 +  Configure the appropriate IAM roles for accessing external services such as SageMaker, Amazon Comprehend, or Lambda for the global database cluster in each AWS Region\. 
-+  Ensure that all AWS Regions have the same trained SageMaker models deployed with the same endpoint names\. Do so before running the `CREATE FUNCTION` statement for your Aurora Machine Learning function in the primary AWS Region\. In a global database, all `CREATE FUNCTION` statements you run in the primary AWS Region are immediately run in all the secondary regions also\. 
++  Ensure that all AWS Regions have the same trained SageMaker models deployed with the same endpoint names\. Do so before running the `CREATE FUNCTION` statement for your Aurora machine learning function in the primary AWS Region\. In a global database, all `CREATE FUNCTION` statements you run in the primary AWS Region are immediately run in all the secondary regions also\. 
 
- To use models deployed in SageMaker for inference, you create user\-defined functions using the familiar MySQL data definition language \(DDL\) statements for stored functions\. Each stored function represents the SageMaker endpoint hosting the model\. When you define such a function, you specify the input parameters to the model, the specific SageMaker endpoint to invoke, and the return type\. The function returns the inference computed by the SageMaker endpoint after applying the model to the input parameters\. All Aurora Machine Learning stored functions return numeric types or `VARCHAR`\. You can use any numeric type except `BIT`\. Other types, such as `JSON`, `BLOB`, `TEXT`, and `DATE` are not allowed\. Use model input parameters that are the same as the input parameters that you exported to Amazon S3 for model training\. 
+ To use models deployed in SageMaker for inference, you create user\-defined functions using the familiar MySQL data definition language \(DDL\) statements for stored functions\. Each stored function represents the SageMaker endpoint hosting the model\. When you define such a function, you specify the input parameters to the model, the specific SageMaker endpoint to invoke, and the return type\. The function returns the inference computed by the SageMaker endpoint after applying the model to the input parameters\. All Aurora machine learning stored functions return numeric types or `VARCHAR`\. You can use any numeric type except `BIT`\. Other types, such as `JSON`, `BLOB`, `TEXT`, and `DATE` are not allowed\. Use model input parameters that are the same as the input parameters that you exported to Amazon S3 for model training\. 
 
 ```
 CREATE FUNCTION function_name (arg1 type1, arg2 type2, ...) -- variable number of arguments
@@ -308,13 +308,13 @@ CREATE FUNCTION function_name (arg1 type1, arg2 type2, ...) -- variable number o
   [MAX_BATCH_SIZE max_batch_size];     -- default is 10,000
 ```
 
- This is a variation of the existing `CREATE FUNCTION` DDL statement\. In the `CREATE FUNCTION` statement that defines the SageMaker function, you don't specify a function body\. Instead, you specify the new keyword `ALIAS` where the function body usually goes\. Currently, Aurora Machine Learning only supports `aws_sagemaker_invoke_endpoint` for this extended syntax\. You must specify the `endpoint_name` parameter\. The optional parameter `max_batch_size` restricts the maximum number of inputs processed in an actual batched request to SageMaker\. An SageMaker endpoint can have different characteristics for each model\. The `max_batch_size` parameter can help to avoid an error caused by inputs that are too large, or to make SageMaker return a response more quickly\. The max\_batch\_size parameter affects the size of an internal buffer used for ML request processing\. Specifying too large a value for `max_batch_size` might cause substantial memory overhead on your DB instance\. 
+ This is a variation of the existing `CREATE FUNCTION` DDL statement\. In the `CREATE FUNCTION` statement that defines the SageMaker function, you don't specify a function body\. Instead, you specify the new keyword `ALIAS` where the function body usually goes\. Currently, Aurora machine learning only supports `aws_sagemaker_invoke_endpoint` for this extended syntax\. You must specify the `endpoint_name` parameter\. The optional parameter `max_batch_size` restricts the maximum number of inputs processed in an actual batched request to SageMaker\. An SageMaker endpoint can have different characteristics for each model\. The `max_batch_size` parameter can help to avoid an error caused by inputs that are too large, or to make SageMaker return a response more quickly\. The max\_batch\_size parameter affects the size of an internal buffer used for ML request processing\. Specifying too large a value for `max_batch_size` might cause substantial memory overhead on your DB instance\. 
 
  We recommend leaving the `MANIFEST` setting at its default value of `OFF`\. Although you can use the `MANIFEST ON` option, some SageMaker features can't directly use the CSV exported with this option\. The manifest format is not compatible with the expected manifest format from SageMaker\. 
 
  You create a separate stored function for each of your SageMaker models\. This mapping of functions to models is required because an endpoint is associated with a specific model, and each model accepts different parameters\. Using SQL types for the model inputs and the model output type helps to avoid type conversion errors passing data back and forth between the AWS services\. You can control who can apply the model\. You can also control the runtime characteristics by specifying a parameter representing the maximum batch size\. 
 
- Currently, all Aurora Machine Learning functions have the `NOT DETERMINISTIC` property\. If you don't specify that property explicitly, Aurora sets `NOT DETERMINISTIC` automatically\. This requirement is because the ML model can be changed without any notification to the database\. If that happens, calls to an Aurora Machine Learning function might return different results for the same input within a single transaction\. 
+ Currently, all Aurora machine learning functions have the `NOT DETERMINISTIC` property\. If you don't specify that property explicitly, Aurora sets `NOT DETERMINISTIC` automatically\. This requirement is because the ML model can be changed without any notification to the database\. If that happens, calls to an Aurora machine learning function might return different results for the same input within a single transaction\. 
 
  You can't use the characteristics `CONTAINS SQL`, `NO SQL`, `READS SQL DATA`, or `MODIFIES SQL DATA` in your `CREATE FUNCTION` statement\. 
 
@@ -349,7 +349,7 @@ CREATE FUNCTION my_ml_func(...) RETURNS VARCHAR(5) CHARSET utf8mb4 ALIAS ...
 +  About a specific product or feature\. 
 +  Made by the customers who have the greatest social media influence\. 
 
- Using Amazon Comprehend from Aurora Machine Learning is as easy as calling a SQL function\. Aurora machine learning provides two built\-in Amazon Comprehend functions, `aws_comprehend_detect_sentiment()` and `aws_comprehend_detect_sentiment_confidence()` to perform sentiment analysis through Amazon Comprehend\. For each text fragment that you analyze, these functions help you to determine the sentiment and the confidence level\. 
+ Using Amazon Comprehend from Aurora machine learning is as easy as calling a SQL function\. Aurora machine learning provides two built\-in Amazon Comprehend functions, `aws_comprehend_detect_sentiment()` and `aws_comprehend_detect_sentiment_confidence()` to perform sentiment analysis through Amazon Comprehend\. For each text fragment that you analyze, these functions help you to determine the sentiment and the confidence level\. 
 
 ```
 -- Returns one of 'POSITIVE', 'NEGATIVE', 'NEUTRAL', 'MIXED'
@@ -367,7 +367,7 @@ aws_comprehend_detect_sentiment_confidence(
 )
 ```
 
- The `max_batch_size` helps you to tune the performance of the Amazon Comprehend function calls\. A large batch size trades off faster performance for greater memory usage on the Aurora cluster\. For more information, see [Performance considerations for Aurora Machine Learning](#aurora-ml-performance)\. 
+ The `max_batch_size` helps you to tune the performance of the Amazon Comprehend function calls\. A large batch size trades off faster performance for greater memory usage on the Aurora cluster\. For more information, see [Performance considerations for Aurora machine learning](#aurora-ml-performance)\. 
 
  For information about parameters and return types for the sentiment detection functions in Amazon Comprehend, see [DetectSentiment](https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectSentiment.html) 
 
@@ -386,17 +386,17 @@ WHERE productTable.productCode = 1302 AND
 **Note**  
  Amazon Comprehend is currently available only in some AWS Regions\. To check in which AWS Regions you can use Amazon Comprehend, see [the AWS Region table page](http://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/)\. 
 
-## Performance considerations for Aurora Machine Learning<a name="aurora-ml-performance"></a>
+## Performance considerations for Aurora machine learning<a name="aurora-ml-performance"></a>
 
- Most of the work in an Aurora Machine Learning function call happens within the external ML service\. This separation enables you to scale the resources for the machine learning service independent of your Aurora cluster\. Within Aurora, you mostly focus on making the function calls themselves as efficient as possible\. 
+ Most of the work in an Aurora machine learning function call happens within the external ML service\. This separation enables you to scale the resources for the machine learning service independent of your Aurora cluster\. Within Aurora, you mostly focus on making the function calls themselves as efficient as possible\. 
 
 ### Query cache<a name="query-cache"></a>
 
  The Aurora MySQL query cache doesn't work for ML functions\. Aurora MySQL doesn't store query results in the query cache for any SQL statements that call ML functions\. 
 
-### Batch optimization for Aurora Machine Learning function calls<a name="ml-batch-optimization"></a>
+### Batch optimization for Aurora machine learning function calls<a name="ml-batch-optimization"></a>
 
- The main Aurora Machine Learning performance aspect that you can influence from your Aurora cluster is the batch mode setting for calls to the Aurora Machine Learning stored functions\. Machine learning functions typically require substantial overhead, making it impractical to call an external service separately for each row\. Aurora Machine Learning can minimize this overhead by combining the calls to the external Aurora Machine Learning service for many rows into a single batch\. Aurora Machine Learning receives the responses for all the input rows, and delivers the responses, one row at a time, to the query as it runs\. This optimization improves the throughput and latency of your Aurora queries without changing the results\. 
+ The main Aurora machine learning performance aspect that you can influence from your Aurora cluster is the batch mode setting for calls to the Aurora machine learning stored functions\. Machine learning functions typically require substantial overhead, making it impractical to call an external service separately for each row\. Aurora machine learning can minimize this overhead by combining the calls to the external Aurora machine learning service for many rows into a single batch\. Aurora machine learning receives the responses for all the input rows, and delivers the responses, one row at a time, to the query as it runs\. This optimization improves the throughput and latency of your Aurora queries without changing the results\. 
 
  When you create an Aurora stored function that's connected to an SageMaker endpoint, you define the batch size parameter\. This parameter influences how many rows are transferred for every underlying call to SageMaker\. For queries that process large numbers of rows, the overhead to make a separate SageMaker call for each row can be substantial\. The larger the data set processed by the stored procedure, the larger you can make the batch size\. 
 
@@ -417,7 +417,7 @@ mysql> explain select timestamp, value, anomaly_score(value) from nyc_taxi;
 
  When you call one of the built\-in Amazon Comprehend functions, you can control the batch size by specifying the optional `max_batch_size` parameter\. his parameter restricts the maximum number of `input_text` values processed in each batch\. By sending multiple items at once, it reduces the number of round trips between Aurora and Amazon Comprehend\. Limiting the batch size is useful in situations such as a query with a `LIMIT` clause\. By using a small value for `max_batch_size`, you can avoid invoking Amazon Comprehend more times than you have input texts\. 
 
- The batch optimization for evaluating Aurora Machine Learning functions applies in the following cases: 
+ The batch optimization for evaluating Aurora machine learning functions applies in the following cases: 
 +  Function calls within the select list or the `WHERE` clause of `SELECT` statements\. There are some exceptions, as described following\. 
 +  Function calls in the `VALUES` list of `INSERT` and `REPLACE` statements\. 
 +  ML functions in `SET` values in `UPDATE` statements\. 
@@ -429,9 +429,9 @@ mysql> explain select timestamp, value, anomaly_score(value) from nyc_taxi;
   UPDATE MY_TABLE SET col1 = ML_FUNC(col2), SET col3 = ML_FUNC(col4) WHERE ...;
   ```
 
-## Monitoring Aurora Machine Learning<a name="aurora-ml-monitoring"></a>
+## Monitoring Aurora machine learning<a name="aurora-ml-monitoring"></a>
 
- To monitor the performance of Aurora Machine Learning batch operations, Aurora MySQL includes several global variables that you can query as follows\. 
+ To monitor the performance of Aurora machine learning batch operations, Aurora MySQL includes several global variables that you can query as follows\. 
 
 ```
 show status like 'Aurora_ml%';
@@ -454,12 +454,12 @@ show status like 'Aurora_ml%';
 `Aurora_ml_single_request_cnt`  
  The aggregate count of ML functions that are evaluated by non\-batch mode across all queries run by users of the DB instance\. 
 
- For information about monitoring the performance of the SageMaker operations called from Aurora Machine Learning functions, see [Monitor Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/monitoring-overview.html)\. 
+ For information about monitoring the performance of the SageMaker operations called from Aurora machine learning functions, see [Monitor Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/monitoring-overview.html)\. 
 
-## Limitations of Aurora Machine Learning<a name="aurora-ml-limitations"></a>
+## Limitations of Aurora machine learning<a name="aurora-ml-limitations"></a>
 
  The following limitations apply to Aurora machine learning\. 
 
  You can't use an Aurora machine learning function for a generated\-always column\. The same limitation applies to any Aurora MySQL stored function\. functions aren't compatible with this binary log \(binlog\) format\. for information about generated columns, see [the MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/create-table-generated-columns.html)\. 
 
- The setting `--binlog-format=STATEMENT` throws an exception for calls to Aurora machine learning functions\. The reason for the error is that Aurora Machine Learning considers all ML functions to be nondeterministic, and nondeterministic stored functions aren't compatible with this binlog format\. For information about this binlog format, see [the MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/binary-log-formats.html)\. 
+ The setting `--binlog-format=STATEMENT` throws an exception for calls to Aurora machine learning functions\. The reason for the error is that Aurora machine learning considers all ML functions to be nondeterministic, and nondeterministic stored functions aren't compatible with this binlog format\. For information about this binlog format, see [the MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/binary-log-formats.html)\. 

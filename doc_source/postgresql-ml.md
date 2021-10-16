@@ -1,13 +1,13 @@
 # Using machine learning \(ML\) with Aurora PostgreSQL<a name="postgresql-ml"></a>
 
-Amazon Aurora machine learning enables you to add machine learning–based predictions to database applications using the SQL language\. Aurora machine learning uses a highly optimized integration between the Aurora database and the AWS machine learning \(ML\) services SageMaker and Amazon Comprehend\. 
+With Aurora machine learning, you can add machine learning–based predictions to database applications using the SQL language\. Aurora machine learning uses a highly optimized integration between the Aurora database and the AWS machine learning \(ML\) services SageMaker and Amazon Comprehend\. 
 
  Benefits of Aurora machine learning include the following: 
-+  You can add ML\-based predictions to your existing database applications\. You don't need to build custom integrations or learn separate tools\. You can embed machine learning processing directly into your SQL query as calls to functions\. 
++  You can add ML–based predictions to your existing database applications\. You don't need to build custom integrations or learn separate tools\. You can embed machine learning processing directly into your SQL query as calls to functions\. 
 +  The ML integration is a fast way to enable ML services to work with transactional data\. You don't have to move the data out of the database to perform the machine learning operations\. You don't have to convert or reimport the results of the machine learning operations to use them in your database application\. 
 +  You can use your existing governance policies to control who has access to the underlying data and to the generated insights\. 
 
-AWS machine learning services are managed services that you set up and run in their own production environments\. Currently, Aurora Machine Learning integrates with Amazon Comprehend for sentiment analysis and SageMaker for a wide variety of ML algorithms\. 
+AWS machine learning services are managed services that you set up and run in their own production environments\. Currently, Aurora machine learning integrates with Amazon Comprehend for sentiment analysis and SageMaker for a wide variety of ML algorithms\. 
 
  For general information about Amazon Comprehend, see [Amazon Comprehend](http://aws.amazon.com/comprehend)\. For details about using Aurora and Amazon Comprehend together, see [Using Amazon Comprehend for natural language processing](#postgresql-using-comprehend)\. 
 
@@ -18,22 +18,22 @@ Aurora machine learning for PostgreSQL connects an Aurora cluster to SageMaker o
 
 **Topics**
 + [Prerequisites for Aurora machine learning](#postgresql-ml-prereqs)
-+ [Enabling Aurora Machine Learning](#postgresql-ml-enabling)
++ [Enabling Aurora machine learning](#postgresql-ml-enabling)
 + [Using Amazon Comprehend for natural language processing](#postgresql-using-comprehend)
 + [Exporting data to Amazon S3 for SageMaker model training](#postgresql-export-to-s3)
 + [Using SageMaker to run your own ML models](#postgresql-using-sagemaker)
-+ [Best practices with Aurora Machine Learning](#postgresql-ml-best-practice)
-+ [Monitoring Aurora Machine Learning](#postgresql-ml-monitoring)
-+ [PostgreSQL function reference for Aurora Machine Learning](#postgresql-ml-functions)
++ [Best practices with Aurora machine learning](#postgresql-ml-best-practice)
++ [Monitoring Aurora machine learning](#postgresql-ml-monitoring)
++ [PostgreSQL function reference for Aurora machine learning](#postgresql-ml-functions)
 + [Manually setting up IAM roles for SageMaker and Amazon Comprehend using the AWS CLI](#postgresql-ml-connect-cli)
 
 ## Prerequisites for Aurora machine learning<a name="postgresql-ml-prereqs"></a>
 
-Aurora machine learning is available on any Aurora cluster running Aurora PostgreSQL 10\.11, 11\.6, and newer versions in AWS Regions that support Aurora machine learning\. You can upgrade an Aurora cluster running to an older version of Aurora PostgreSQL to a newer version if you want to use Aurora machine learning with that cluster\. For more information, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
+Aurora machine learning is available on any Aurora cluster that's running a supported Aurora PostgreSQL 10 or higher major version in an AWS Region that supports Aurora machine learning\. You can upgrade an Aurora cluster that's running a lower version of Aurora PostgreSQL to a supported higher version if you want to use Aurora machine learning with that cluster\. For more information, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
 For more information about Regions and Aurora version availability, see [Aurora machine learning](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML)\. 
 
-## Enabling Aurora Machine Learning<a name="postgresql-ml-enabling"></a>
+## Enabling Aurora machine learning<a name="postgresql-ml-enabling"></a>
 
 Enabling the ML capabilities involves the following steps\. 
 
@@ -122,7 +122,7 @@ When you install the `aws_ml` extension, the `aws_ml` administrative role is cre
 
 For users or roles to obtain access to the functions in the `aws_ml` extension, grant `EXECUTE` privilege on those functions\. You can subsequently REVOKE the privileges, if needed\. `EXECUTE` privileges are revoked from PUBLIC on the functions of these schemas by default\. In a multi\-tenant database configuration, to prevent tenants from accessing the functions use `REVOKE USAGE` on one or more of the ML service schemas\.
 
-For a reference to the installed functions of the `aws_ml` extension, see [PostgreSQL function reference for Aurora Machine Learning](#postgresql-ml-functions)\. 
+For a reference to the installed functions of the `aws_ml` extension, see [PostgreSQL function reference for Aurora machine learning](#postgresql-ml-functions)\. 
 
 ## Using Amazon Comprehend for natural language processing<a name="postgresql-using-comprehend"></a>
 
@@ -140,7 +140,7 @@ You can also combine sentiment analysis with the analysis of other information i
 +  About a specific product or feature\. 
 +  Made by the customers who have the greatest social media influence\. 
 
-Using Amazon Comprehend from Aurora Machine Learning is as easy as calling a SQL function\. When you installed the `aws_ml` extension \([Installing the aws\_ml extension for model inference](#postgresql-ml-aws_ml-install)\), it provides the [aws\_comprehend\.detect\_sentiment](#aws_comprehend.detect_sentiment) function to perform sentiment analysis through Amazon Comprehend\. 
+Using Amazon Comprehend from Aurora machine learning is as easy as calling a SQL function\. When you installed the `aws_ml` extension \([Installing the aws\_ml extension for model inference](#postgresql-ml-aws_ml-install)\), it provides the [aws\_comprehend\.detect\_sentiment](#aws_comprehend.detect_sentiment) function to perform sentiment analysis through Amazon Comprehend\. 
 
 For each text fragment that you analyze, this function helps you determine the sentiment and the confidence level\. A typical Amazon Comprehend query looks for table rows where the sentiment has a certain value \(POSITIVE or NEGATIVE\), with a confidence level greater than a certain percent\. 
 
@@ -169,7 +169,7 @@ WHERE
     clinician_notes.sentiment IS NULL;
 ```
 
-For more information on optimizing your function calls, see [Best practices with Aurora Machine Learning](#postgresql-ml-best-practice)\.
+For more information on optimizing your function calls, see [Best practices with Aurora machine learning](#postgresql-ml-best-practice)\.
 
 For information about parameters and return types for the sentiment detection function, see [aws\_comprehend\.detect\_sentiment](#aws_comprehend.detect_sentiment)\.
 
@@ -271,7 +271,7 @@ $$ LANGUAGE SQL PARALLEL SAFE COST 5000;
 ```
 
 Note the following:
-+ Use the optional `max_rows_per_batch` parameter to provide control of the number of rows for a batch\-mode function invocation\. If you use a value of NULL, then the query optimizer automatically chooses the maximum batch size\. For more information, see [Optimizing batch\-mode execution for Aurora Machine Learning function calls](#postgresql-ml-batch-mode)\.
++ Use the optional `max_rows_per_batch` parameter to provide control of the number of rows for a batch\-mode function invocation\. If you use a value of NULL, then the query optimizer automatically chooses the maximum batch size\. For more information, see [Optimizing batch\-mode execution for Aurora machine learning function calls](#postgresql-ml-batch-mode)\.
 + By default, passing NULL as a parameter's value is translated to an empty string before passing to SageMaker\. For this example the inputs have different types\.
 + If you have a non\-text input, or text input that needs to default to some value other than an empty string, use the `COALESCE` statement\. Use `COALESCE` to translate NULL to the desired null replacement value in the call to `aws_sagemaker.invoke_endpoint`\. For the `amount` parameter in this example, a NULL value is converted to 0\.0\. 
 
@@ -299,21 +299,21 @@ $$ LANGUAGE SQL PARALLEL SAFE COST 5000;
 
 For the composite type, use fields in the same order as they appear in the model output and cast the output of `aws_sagemaker.invoke_endpoint` to your composite type\. The caller can extract the individual fields either by name or with PostgreSQL "\.\*" notation\.
 
-## Best practices with Aurora Machine Learning<a name="postgresql-ml-best-practice"></a>
+## Best practices with Aurora machine learning<a name="postgresql-ml-best-practice"></a>
 
- Most of the work in an `aws_ml` function call happens within the external Aurora Machine Learning service\. This separation allows you to scale the resources for the machine learning service independent of your Aurora cluster\. Within Aurora, you mostly focus on making the user\-defined function calls themselves as efficient as possible\. Some aspects that you can influence from your Aurora cluster include:
+ Most of the work in an `aws_ml` function call happens within the external Aurora machine learning service\. This separation allows you to scale the resources for the machine learning service independent of your Aurora cluster\. Within Aurora, you mostly focus on making the user\-defined function calls themselves as efficient as possible\. Some aspects that you can influence from your Aurora cluster include:
 + The `max_rows_per_batch` setting for calls to the `aws_ml` functions\.
 + The number of virtual CPUs of the database instance, which determines the maximum degree of parallelism that the database might use when running your ML functions\.
 + the PostgreSQL parameters that control parallel query processing\.
 
 **Topics**
-+ [Optimizing batch\-mode execution for Aurora Machine Learning function calls](#postgresql-ml-batch-mode)
++ [Optimizing batch\-mode execution for Aurora machine learning function calls](#postgresql-ml-batch-mode)
 + [Exploiting parallel query processing](#postgresql-using-sagemaker-example-parallel)
 + [Using materialized views and materialized columns](#postgresql-using-sagemaker-example-materialized)
 
-### Optimizing batch\-mode execution for Aurora Machine Learning function calls<a name="postgresql-ml-batch-mode"></a>
+### Optimizing batch\-mode execution for Aurora machine learning function calls<a name="postgresql-ml-batch-mode"></a>
 
-Typically PostgreSQL runs functions one row at a time\. Aurora Machine Learning can minimize this overhead by combining the calls to the external Aurora Machine Learning service for many rows into batches with an approach called *batch\-mode execution*\. In batch mode, Aurora Machine Learning receives the responses for a batch of input rows, and then delivers the responses back to the running query one row at a time\. This optimization improves the throughput of your Aurora queries without limiting the PostgreSQL query optimizer\. 
+Typically PostgreSQL runs functions one row at a time\. Aurora machine learning can minimize this overhead by combining the calls to the external Aurora machine learning service for many rows into batches with an approach called *batch\-mode execution*\. In batch mode, Aurora machine learning receives the responses for a batch of input rows, and then delivers the responses back to the running query one row at a time\. This optimization improves the throughput of your Aurora queries without limiting the PostgreSQL query optimizer\. 
 
 Aurora automatically uses batch mode if the function is referenced from the `SELECT` list, a `WHERE` clause, or a `HAVING` clause\. Note that top\-level simple `CASE` expressions are eligible for batch\-mode execution\. Top\-level searched `CASE` expressions are also eligible for batch\-mode execution provided that the first `WHEN` clause is a simple predicate with a batch\-mode function call\. 
 
@@ -356,9 +356,9 @@ The `apg_enable_function_migration` parameter is a Grand Unified Configuration \
 
 #### Using the max\_rows\_per\_batch parameter<a name="postgresql-ml-batch-mode-max_rows_per_batch"></a>
 
-The `max_rows_per_batch` parameter of the [aws\_sagemaker\.invoke\_endpoint](#aws_sagemaker.invoke_endpoint) and [aws\_comprehend\.detect\_sentiment](#aws_comprehend.detect_sentiment) functions influences how many rows are transferred to the Aurora Machine Learning service\. The larger the dataset processed by the user\-defined function, the larger you can make the batch size\.
+The `max_rows_per_batch` parameter of the [aws\_sagemaker\.invoke\_endpoint](#aws_sagemaker.invoke_endpoint) and [aws\_comprehend\.detect\_sentiment](#aws_comprehend.detect_sentiment) functions influences how many rows are transferred to the Aurora machine learning service\. The larger the dataset processed by the user\-defined function, the larger you can make the batch size\.
 
-Batch\-mode functions improve efficiency by building batches of rows that spread the cost of the Aurora Machine Learning function calls over a large number of rows\. However, if a `SELECT` statement finishes early due to a `LIMIT` clause, then the batch can be constructed over more rows than the query uses\. This approach can result in additional charges to your AWS account\. To gain the benefits of batch\-mode execution but avoid building batches that are too large, use a smaller value for the `max_rows_per_batch` parameter in your function calls\.
+Batch\-mode functions improve efficiency by building batches of rows that spread the cost of the Aurora machine learning function calls over a large number of rows\. However, if a `SELECT` statement finishes early due to a `LIMIT` clause, then the batch can be constructed over more rows than the query uses\. This approach can result in additional charges to your AWS account\. To gain the benefits of batch\-mode execution but avoid building batches that are too large, use a smaller value for the `max_rows_per_batch` parameter in your function calls\.
 
 If you do an `EXPLAIN` \(`VERBOSE`, `ANALYZE`\) of a query that uses batch\-mode execution, you see a `FunctionScan` operator that is below a nested loop join\. The number of loops reported by `EXPLAIN` tells you the number of times a row was fetched from the `FunctionScan` operator\. If a statement uses a LIMIT clause, the number of fetches is consistent\. To optimize the size of the batch, set the `max_rows_per_batch` parameter to this value\. However, if the batch\-mode function is referenced in a predicate in the `WHERE` clause or `HAVING` clause, then you probably can't know the number of fetches in advance\. In this case, use the loops as a guideline and experiment with `max_rows_per_batch` to find a setting that optimizes performance\.
 
@@ -436,11 +436,11 @@ You can use a materialized view to materialize the results of an arbitrary `SELE
 
 You can refresh materialized views with the `CONCURRENTLY` option, which updates the contents of the materialized view without taking an exclusive lock\. Doing this allows a SQL application to read from the materialized view while it's being refreshed\.
 
-## Monitoring Aurora Machine Learning<a name="postgresql-ml-monitoring"></a>
+## Monitoring Aurora machine learning<a name="postgresql-ml-monitoring"></a>
 
 To monitor the functions in the `aws_ml` package, set the `track_functions` parameter and then query the [PostgreSQL pg\_stat\_user\_functions view](https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-USER-FUNCTIONS-VIEW)\. 
 
- For information about monitoring the performance of the SageMaker operations called from Aurora Machine Learning functions, see [Monitor Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/monitoring-overview.html)\. 
+ For information about monitoring the performance of the SageMaker operations called from Aurora machine learning functions, see [Monitor Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/monitoring-overview.html)\. 
 
 To set `track_functions` at the session level, run the following\.
 
@@ -500,7 +500,7 @@ WHERE
     plan_outline NOT LIKE '%"FuncScan"%';
 ```
 
-## PostgreSQL function reference for Aurora Machine Learning<a name="postgresql-ml-functions"></a>
+## PostgreSQL function reference for Aurora machine learning<a name="postgresql-ml-functions"></a>
 
 **Topics**
 + [aws\_comprehend\.detect\_sentiment](#aws_comprehend.detect_sentiment)
@@ -529,7 +529,7 @@ The text to detect sentiment on\.
 The language of the `input_text`\. For valid values, see [ Languages supported in Amazon Comprehend](https://docs.aws.amazon.com/comprehend/latest/dg/supported-languages.html#supported-languages-1)\. 
 
 **max\_rows\_per\_batch**  
-The maximum number of rows per batch for batch\-mode processing\. For more information, see [Optimizing batch\-mode execution for Aurora Machine Learning function calls](#postgresql-ml-batch-mode)\. Output Parameters
+The maximum number of rows per batch for batch\-mode processing\. For more information, see [Optimizing batch\-mode execution for Aurora machine learning function calls](#postgresql-ml-batch-mode)\. Output Parameters
 
 **sentiment**  
 The sentiment of the text\. Valid values are POSITIVE, NEGATIVE, NEUTRAL, or MIXED\.
@@ -558,7 +558,7 @@ aws_sagemaker.invoke_endpoint(
 An endpoint URL that is AWS Region–independent\. 
 
 **max\_rows\_per\_batch**  
-The maximum number of rows per batch for batch\-mode processing\. For more information, see [Optimizing batch\-mode execution for Aurora Machine Learning function calls](#postgresql-ml-batch-mode)\. 
+The maximum number of rows per batch for batch\-mode processing\. For more information, see [Optimizing batch\-mode execution for Aurora machine learning function calls](#postgresql-ml-batch-mode)\. 
 
 **model\_input**  
 One or more input parameters for the ML model\. These can be any data type\.  

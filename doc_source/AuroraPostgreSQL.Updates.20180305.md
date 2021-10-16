@@ -916,7 +916,7 @@ You can find the following new features and improvements in this engine version\
    + Optimizations for redundant inner join removal with the `apg_enable_remove_redundant_inner_joins` parameter\.
    + Improved ANSI compatibility options with the `ansi_constraint_trigger_ordering`, `ansi_force_foreign_key_checks` and `ansi_qualified_update_set_target` parameters\.
 
-   For more information, see [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.ParameterGroups)\.
+   For more information, see [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.ParameterGroups.md)\.
 
 1. New and updated PostgreSQL extensions include:
    + The new `aws_ml` extension\. For more information, see [Using machine learning \(ML\) with Aurora PostgreSQL](postgresql-ml.md)\.
@@ -1627,7 +1627,7 @@ You can find the following new features and improvements in this engine version\
    + Optimizations for redundant inner join removal with the `apg_enable_remove_redundant_inner_joins` parameter\.
    + Improved ANSI compatibility options with the `ansi_constraint_trigger_ordering`, `ansi_force_foreign_key_checks` and `ansi_qualified_update_set_target` parameters\.
 
-   For more information, see [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.ParameterGroups)\.
+   For more information, see [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.ParameterGroups.md)\.
 
 1. New and updated PostgreSQL extensions include:
    + The new `aws_ml` extension\. For more information, see [Using machine learning \(ML\) with Aurora PostgreSQL](postgresql-ml.md)\.

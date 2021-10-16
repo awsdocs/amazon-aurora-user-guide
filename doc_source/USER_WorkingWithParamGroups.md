@@ -81,7 +81,7 @@ The DB cluster and DB instance parameters available to you in Aurora vary depend
 | Database engine | Parameters | 
 | --- | --- | 
 |  Aurora MySQL  |  See [Aurora MySQL configuration parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.  For Aurora Serverless clusters, see additional details in [Parameter groups and Aurora Serverless v1](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\.   | 
-|  Aurora PostgreSQL  |  See [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.ParameterGroups)\.  | 
+|  Aurora PostgreSQL  |  See [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.ParameterGroups.md)\.  | 
 
 ## Creating a DB parameter group<a name="USER_WorkingWithParamGroups.Creating"></a>
 

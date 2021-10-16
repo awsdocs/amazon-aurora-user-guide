@@ -28,21 +28,28 @@ The RDS for PostgreSQL DB instance that you use as the source must have automate
 **To enable PostgreSQL logical replication with Aurora**
 
 1. Create a new DB cluster parameter group to use for logical replication, as described in [Creating a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\. Use the following settings:
-   + For **Parameter group family**, choose **aurora\-postgres10** or later\. 
+   + For **Parameter group family**, choose your version of Aurora PostgreSQL, such as **aurora\-postgresql12**\. 
    + For **Type**, choose **DB Cluster Parameter Group**\. 
 
-1. Modify the cluster parameter group, as described in [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. Set the `rds.logical_replication` static parameter to 1\. 
+1. Modify the DB cluster parameter group, as described in [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. Set the `rds.logical_replication` static parameter to 1\. 
 
    Enabling the `rds.logical_replication` parameter affects the DB cluster's performance\. 
+
+1. Review the `max_replication_slots`, `max_wal_senders`, `max_logical_replication_workers`, and `max_worker_processes` parameters in your DB cluster parameter group based on your expected usage\. If necessary, modify the DB cluster parameter group to change the settings for these parameters, as described in [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
+
+   Follow these guidelines for setting the parameters:
+   + `max_replication_slots` – Ensure that `max_replication_slots` is at least as high as the combined number of logical replication publications and subscriptions you plan to create\. If you are using AWS DMS, make sure `max_replication_slots` is at least as high as the number of AWS DMS tasks you plan to use for change data capture from this DB cluster, plus any logical replication publications and subscriptions\.
+   + `max_wal_senders` and `max_logical_replication_workers` – Ensure that `max_wal_senders` and `max_logical_replication_workers` are each set at least as high as the number of logical replication slots that you intend to be active, or the number of active AWS DMS tasks for change data capture\. Leaving a logical replication slot inactive prevents vacuum from removing obsolete tuples from tables, so we recommend that you don't keep inactive replication slots for long periods of time\.
+   + `max_worker_processes` – Ensure that `max_worker_processes` is at least as high as the combined values of `max_logical_replication_workers`, `autovacuum_max_workers`, and `max_parallel_workers`\. Having a high number of background worker processes might affect application workloads on small DB instance classes, so monitor the performance of your database if you set `max_worker_processes` higher than the default value\.
 
 **To configure a publisher for logical replication**
 
 1. Set the publisher's cluster parameter group:
    + To use an existing Aurora PostgreSQL DB cluster for the publisher, the engine version must be 10\.6 or later\. Do the following:
 
-     1. Modify the cluster parameter group to set it to the group that you created when you enabled logical replication\. For details about modifying an Aurora PostgreSQL DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
+     1. Modify the DB cluster parameter group to set it to the group that you created when you enabled logical replication\. For details about modifying an Aurora PostgreSQL DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
-     1. Restart the DB cluster for static parameter changes to take effect\. The cluster parameter group includes a change to the static parameter `rds.logical_replication`\.
+     1. Restart the DB cluster for static parameter changes to take effect\. the DB cluster parameter group includes a change to the static parameter `rds.logical_replication`\.
    + To use a new Aurora PostgreSQL DB cluster for the publisher, create the DB cluster using the following settings\. For details about creating an Aurora PostgreSQL DB cluster, see [Creating a DB cluster](Aurora.CreateInstance.md#Aurora.CreateInstance.Creating)\.
 
      1. Choose the **Amazon Aurora** engine and choose the **PostgreSQL\-compatible** edition\.
