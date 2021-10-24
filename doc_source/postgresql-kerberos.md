@@ -20,9 +20,10 @@ A database can use Kerberos, AWS Identity and Access Management \(IAM\), or both
 ## Availability of Kerberos authentication<a name="postgresql-kerberos-availability"></a>
 
 Kerberos authentication is supported on the following engine versions:
-+ PostgreSQL 12\.4 and higher 12\.x versions
-+ PostgreSQL 11\.6 and higher 11\.x versions
-+ PostgreSQL 10\.11 and higher 10\.x versions
++ All PostgreSQL 13 versions
++ PostgreSQL 12\.4 and higher 12 versions
++ PostgreSQL 11\.6 and higher 11 versions
++ PostgreSQL 10\.11 and higher 10 versions
 
 For more information, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\.
 

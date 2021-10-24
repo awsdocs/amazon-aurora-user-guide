@@ -20,6 +20,8 @@ The following table lists the resulting default value of `max_connections` for e
 |  db\.t3\.small  |  45  | 
 |  db\.t3\.medium  |  90  | 
 |  db\.t3\.large  |  135  | 
+|  db\.t4g\.medium  |  90  | 
+|  db\.t4g\.large  |  135  | 
 |  db\.r3\.large  |  1000  | 
 |  db\.r3\.xlarge  |  2000  | 
 |  db\.r3\.2xlarge  |  3000  | 
@@ -46,6 +48,13 @@ The following table lists the resulting default value of `max_connections` for e
 | db\.r6g\.8xlarge | 5000 | 
 | db\.r6g\.12xlarge | 6000 | 
 | db\.r6g\.16xlarge | 6000 | 
+| db\.x2g\.large | 2000 | 
+| db\.x2g\.xlarge | 3000 | 
+| db\.x2g\.2xlarge | 4000 | 
+| db\.x2g\.4xlarge | 5000 | 
+| db\.x2g\.8xlarge | 6000 | 
+| db\.x2g\.12xlarge | 7000 | 
+| db\.x2g\.16xlarge | 7000 | 
 
  If you create a new parameter group to customize your own default for the connection limit, you'll see that the default connection limit is derived using a formula based on the `DBInstanceClassMemory` value\. As shown in the preceding table, the formula produces connection limits that increase by 1000 as the memory doubles between progressively larger R3, R4, and R5 instances, and by 45 for different memory sizes of T2 and T3 instances\. 
 
@@ -66,6 +75,13 @@ The following table lists the resulting default value of `max_connections` for e
 
 | DB instance class | Maximum temporary storage available \(GiB\) | 
 | --- | --- | 
+| db\.x2g\.16xlarge | 1280 | 
+| db\.x2g\.12xlarge | 960 | 
+| db\.x2g\.8xlarge | 640 | 
+| db\.x2g\.4xlarge | 320 | 
+| db\.x2g\.2xlarge | 160 | 
+| db\.x2g\.xlarge | 80 | 
+| db\.x2g\.large | 40 | 
 | db\.r6g\.16xlarge | 1280 | 
 | db\.r6g\.12xlarge | 960 | 
 | db\.r6g\.8xlarge | 640 | 
@@ -87,6 +103,8 @@ The following table lists the resulting default value of `max_connections` for e
 | db\.r4\.2xlarge | 160 | 
 | db\.r4\.xlarge | 80 | 
 | db\.r4\.large | 32 | 
+| db\.t4g\.large | 16 | 
+| db\.t4g\.medium | 16 | 
 | db\.t3\.large | 32 | 
 | db\.t3\.medium | 32 | 
 | db\.t3\.small | 32 | 

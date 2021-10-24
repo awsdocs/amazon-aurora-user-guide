@@ -130,29 +130,29 @@ Aurora parallel queries are available for Aurora MySQL only\. However, PostgreSQ
 
 | Region | Aurora MySQL 5\.6 | Aurora MySQL 5\.7 | 
 | --- | --- | --- | 
-| US East \(Ohio\) | Version 5\.6\.10a; version 1\.19, 1\.20, and 1\.23 | Version 2\.09 | 
-| US East \(N\. Virginia\) | Version 5\.6\.10a; version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
-| US West \(N\. California\) | Version 1\.23 | Version 2\.09 | 
-| US West \(Oregon\) | Version 5\.6\.10a; version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
-| Africa \(Cape Town\) | Version 1\.23 | Version 2\.09 | 
-| Asia Pacific \(Hong Kong\) | Version 1\.23 | Version 2\.09 | 
-| Asia Pacific \(Mumbai\) | Version 1\.23 | Version 2\.09 | 
-| Asia Pacific \(Osaka\) | Version 1\.23\.1 and higher | Version 2\.09\.1 and higher | 
-| Asia Pacific \(Seoul\) | Version 1\.23 | Version 2\.09 | 
-| Asia Pacific \(Singapore\) | Version 1\.23 | Version 2\.09 | 
-| Asia Pacific \(Sydney\) | Version 1\.23 | Version 2\.09 | 
-| Asia Pacific \(Tokyo\) | Version 5\.6\.10a; version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
-| Canada \(Central\) | Version 5\.6\.10a; version 1\.23 | Version 2\.09 | 
-| China \(Beijing\) | \- | \- | 
-| China \(Ningxia\) | \- | \- | 
-| Europe \(Frankfurt\) | Version 1\.23 | Version 2\.09 | 
-| Europe \(Ireland\) | Version 5\.6\.10a; version 1\.19, 1\.20, 1\.22, and 1\.23 | Version 2\.09 | 
-| Europe \(London\) | Version 1\.23 | Version 2\.09 | 
-| Europe \(Milan\) | Version 1\.23 | Version 2\.09 | 
-| Europe \(Paris\) | Version 1\.23 | Version 2\.09 | 
-| Europe \(Stockholm\) | Version 1\.23 | Version 2\.09 | 
-| Middle East \(Bahrain\) | Version 1\.23 | Version 2\.09 | 
-| South America \(São Paulo\) | Version 1\.23 | Version 2\.09 | 
+| US East \(Ohio\) | Version 1\.23 | Version 2\.09 and higher | 
+| US East \(N\. Virginia\) | Version 1\.23 | Version 2\.09 and higher | 
+| US West \(N\. California\) | Version 1\.23 | Version 2\.09 and higher | 
+| US West \(Oregon\) | Version 1\.23 | Version 2\.09 and higher | 
+| Africa \(Cape Town\) | Version 1\.23 | Version 2\.09 and higher | 
+| Asia Pacific \(Hong Kong\) | Version 1\.23 | Version 2\.09 and higher | 
+| Asia Pacific \(Mumbai\) | Version 1\.23 | Version 2\.09 and higher | 
+| Asia Pacific \(Osaka\) | Version 1\.23 | Version 2\.09 and higher | 
+| Asia Pacific \(Seoul\) | Version 1\.23 | Version 2\.09 and higher | 
+| Asia Pacific \(Singapore\) | Version 1\.23 | Version 2\.09 and higher | 
+| Asia Pacific \(Sydney\) | Version 1\.23 | Version 2\.09 and higher | 
+| Asia Pacific \(Tokyo\) | Version 1\.23 | Version 2\.09 and higher | 
+| Canada \(Central\) | Version 1\.23 | Version 2\.09 and higher | 
+| China \(Beijing\) | Version 1\.23 | Version 2\.09 and higher | 
+| China \(Ningxia\) | Version 1\.23 | Version 2\.09 and higher | 
+| Europe \(Frankfurt\) | Version 1\.23 | Version 2\.09 and higher | 
+| Europe \(Ireland\) | Version 1\.23 | Version 2\.09 and higher | 
+| Europe \(London\) | Version 1\.23 | Version 2\.09 and higher | 
+| Europe \(Milan\) | Version 1\.23 | Version 2\.09 and higher | 
+| Europe \(Paris\) | Version 1\.23 | Version 2\.09 and higher | 
+| Europe \(Stockholm\) | Version 1\.23 | Version 2\.09 and higher | 
+| Middle East \(Bahrain\) | Version 1\.23 | Version 2\.09 and higher | 
+| South America \(São Paulo\) | Version 1\.23 | Version 2\.09 and higher | 
 | AWS GovCloud \(US\-East\) | \- | \- | 
 | AWS GovCloud \(US\-West\) | \- | \- | 
 

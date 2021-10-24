@@ -11,6 +11,7 @@ You can filter new Amazon Aurora features on the [What's New with Database?](htt
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Aurora MySQL version 2\.10\.1](AuroraMySQL.Updates.2101.md) |  Aurora MySQL version 2\.10\.1 is available\.  | October 21, 2021 | 
 | [Amazon Aurora supports Performance Insights in additional AWS Regions](#WhatsNew) | Performance Insights is available in the Middle East \(Bahrain\), Africa \(Cape Town\), Europe \(Milan\), and Asia Pacific \(Osaka\) Regions\. For more information, see [AWS Region support for Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.Overview.Regions.html)\. | October 5, 2021 | 
 | [Aurora MySQL version 1\.23\.4](AuroraMySQL.Updates.1234.md) | Aurora MySQL version 1\.23\.4 is available\. | September 30, 2021 | 
 | [Configurable autoscaling timeout for Aurora Serverless](#WhatsNew) | You can choose how long Aurora Serverless waits to find an autoscaling point\. If no autoscaling point is found during that period, Aurora Serverless cancels the scaling event or forces the capacity change, depending on the timeout action that you selected\. For more information, see [Autoscaling for Aurora Serverless](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.auto-scaling.html)\. | September 10, 2021 | 

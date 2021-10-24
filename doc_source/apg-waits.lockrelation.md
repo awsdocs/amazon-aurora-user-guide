@@ -3,14 +3,14 @@
 The `Lock:Relation` event occurs when a query is waiting to acquire a lock on a table or view \(relation\) that's currently locked by another transaction\.
 
 **Topics**
-+ [Relevant engine versions](#apg-waits.lockrelation.context.supported)
++ [Supported engine versions](#apg-waits.lockrelation.context.supported)
 + [Context](#apg-waits.lockrelation.context)
-+ [Causes](#apg-waits.lockrelation.causes)
++ [Likely causes of increased waits](#apg-waits.lockrelation.causes)
 + [Actions](#apg-waits.lockrelation.actions)
 
-## Relevant engine versions<a name="apg-waits.lockrelation.context.supported"></a>
+## Supported engine versions<a name="apg-waits.lockrelation.context.supported"></a>
 
-This wait event information is relevant for all versions of Aurora PostgreSQL\.
+This wait event information is supported for all versions of Aurora PostgreSQL\.
 
 ## Context<a name="apg-waits.lockrelation.context"></a>
 
@@ -24,9 +24,9 @@ Blocking queries and transactions typically unblock in one of the following ways
 + Blocking query – The application can cancel the query or the user can end the process\. The engine can also force the query to end because of a session's statement\-timeout or a deadlock detection mechanism\.
 + Blocking transaction – A transaction stops blocking when it runs a `ROLLBACK` or `COMMIT` statement\. Rollbacks also happen automatically when sessions are disconnected by a client or by network issues, or are ended\. Sessions can be ended when the database engine is shut down, when the system is out of memory, and so forth\.
 
-## Causes<a name="apg-waits.lockrelation.causes"></a>
+## Likely causes of increased waits<a name="apg-waits.lockrelation.causes"></a>
 
-Common causes for the `Lock:Relation` event to appear in top waits include the following: 
+When the `Lock:Relation` event appears more than normal, possibly indicating a performance problem, typical causes include the following:
 
 **Increased concurrent sessions with conflicting table locks**  
 There might be an increase in the number of concurrent sessions with queries that lock the same table with conflicting locking modes\.
@@ -58,7 +58,7 @@ To reduce the impact of blocking SQL statements, modify your application code wh
 
 Maintenance operations such as `VACUUM` and `ANALYZE` are important\. We recommend that you don't turn them off because you find `Lock:Relation` wait events related to these maintenance operations\. The following approaches can minimize the effect of these operations:
 + Run maintenance operations manually during off\-peak hours\.
-+ To reduce `Lock:Relation` waits caused by autovacuum tasks, perform any needed autovacuum tuning\. For information about tuning autovacuum, see [Working with PostgreSQL autovacuum on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.Autovacuum.html) in the * Amazon RDS User Guide*\.
++ To reduce `Lock:Relation` waits caused by autovacuum tasks, perform any needed autovacuum tuning\. For information about tuning autovacuum, see [ Working with PostgreSQL autovacuum on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.Autovacuum.html) in the * Amazon RDS User Guide*\.
 
 ### Check for reader locks<a name="apg-waits.lockrelation.actions.readerlocks"></a>
 
@@ -68,7 +68,7 @@ You can see how concurrent sessions on a writer and readers might be holding loc
 | Writer session | Reader session | Description | 
 | --- | --- | --- | 
 |  <pre>export WRITER=aurorapg1.12345678910.us-west-1.rds.amazonaws.com<br /><br />psql -h $WRITER<br />psql (15devel, server 10.14) <br />Type "help" for help. </pre>  |  <pre>export READER=aurorapg2.12345678910.us-west-1.rds.amazonaws.com<br /><br />psql -h $READER<br />psql (15devel, server 10.14)<br />Type "help" for help.</pre>  |  This example shows two concurrent sessions\. The first column shows the writer session\. The second column shows the reader session\.  | 
-|  <pre>postgres=> CREATE TABLE t1(b integer);<br />CREATE TABLE</pre>  |  |  The writer session creates table `t1` on the writer instance and then drops it\.  | 
+|  <pre>postgres=> CREATE TABLE t1(b integer);<br />CREATE TABLE</pre>  |  |  The writer session creates table `t1` on the writer instance\.  | 
 |  |  <pre>postgres=> SET lock_timeout=100;<br />SET</pre>  |  The reader session sets a lock timeout interval of 100 milliseconds\.  | 
 |  |  <pre>postgres=> SELECT * FROM t1;<br /> b<br />---<br />(0 rows)</pre>  |  The reader session tries to read data from table `t1` on the reader instance\.  | 
 |  <pre>postgres=> BEGIN;<br />BEGIN<br />postgres=*> DROP TABLE t1;<br />DROP TABLE<br />postgres=*></pre>  |  |  The writer session drops `t1`\.  | 

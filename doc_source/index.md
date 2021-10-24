@@ -231,6 +231,7 @@ Amazon's trademarks and trade dress may not be used in
          + [Upgrading the minor version or patch level of an Aurora MySQL DB cluster](AuroraMySQL.Updates.Patching.md)
          + [Upgrading the major version of an Aurora MySQL DB cluster from 1.x to 2.x](AuroraMySQL.Updates.MajorVersionUpgrade.md)
       + [Database engine updates for Amazon Aurora MySQL version 2](AuroraMySQL.Updates.20Updates.md)
+         + [Aurora MySQL database engine updates 2021-10-21 (version 2.10.1)](AuroraMySQL.Updates.2101.md)
          + [Aurora MySQL database engine updates 2021-05-25 (version 2.10.0)](AuroraMySQL.Updates.2100.md)
          + [Aurora MySQL database engine updates 2021-02-26 (version 2.09.2)](AuroraMySQL.Updates.2092.md)
          + [Aurora MySQL database engine updates 2020-12-11 (version 2.09.1)](AuroraMySQL.Updates.2091.md)

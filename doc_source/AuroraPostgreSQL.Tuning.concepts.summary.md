@@ -9,6 +9,6 @@ The following table lists the wait events for Aurora PostgreSQL that most common
 |  [Client:ClientWrite](apg-waits.clientwrite.md)  |  This event occurs when Aurora PostgreSQL is waiting to write data to the client\.  | 
 |  [IO:DataFileRead](apg-waits.iodatafileread.md)  |  This event occurs when a connection waits on a backend process to read a required page from storage because the page isn't available in shared memory\.   | 
 |  [IO:BufFileRead and IO:BufFileWrite](apg-waits.iobuffile.md)  |  These events occur when Aurora PostgreSQL creates temporary files\.  | 
-|  [Lock:tuple](apg-waits.locktuple.md)  |  This event occurs when a backend process is waiting to acquire a lock on a tuple\.  | 
 | [Lock:Relation](apg-waits.lockrelation.md) |  This event occurs when a query is waiting to acquire a lock on a table or view that's currently locked by another transaction\.  | 
+|  [Lock:tuple](apg-waits.locktuple.md)  |  This event occurs when a backend process is waiting to acquire a lock on a tuple\.  | 
 |  [Timeout:PgSleep](apg-waits.timeoutpgsleep.md)  |  This event occurs when a server process has called the `pg_sleep` function and is waiting for the sleep timeout to expire\.   | 

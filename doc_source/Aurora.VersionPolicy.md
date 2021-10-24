@@ -126,6 +126,7 @@ aurora_version
 |  PostgreSQL 10  |  2  |  January 31, 2023  | 
 |  PostgreSQL 11  |  3  |  January 31, 2024  | 
 |  PostgreSQL 12  |  4  |  January 31, 2025  | 
+|  PostgreSQL 13  |  Not applicable  |  January 31, 2026  | 
 
  Before the Aurora major version end of life and to help you plan, we provide a reminder at least 12 months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. We always recommend that you thoroughly test your applications against new database versions before performing a major version upgrade\. After this 12\-month period, an automatic upgrade to the subsequent major version might be applied to any database cluster still running the older version\. If so, the upgrade is started during scheduled maintenance windows\. 
 

@@ -292,7 +292,7 @@ To turn on automatic minor version upgrades for an Aurora PostgreSQL DB cluster,
 
 #### AWS CLI<a name="USER_UpgradeDBInstance.MinorUpgrade.CLI"></a>
 
-To use the CLI to implement minor version upgrades, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) command\. 
+To use the CLI to implement minor version upgrades, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. 
 
  When you call the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command, specify the name of your DB instance for the `--db-instance-identifier` option and `true` for the `--auto-minor-version-upgrade` option\. Optionally, specify the `--apply-immediately` option to immediately turn this setting on for your DB instance\. Run a separate `modify-db-instance` command for each DB instance in the cluster\. 
 

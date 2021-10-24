@@ -27,7 +27,12 @@ With query plan management, you can control execution plans for a set of stateme
 
 ## Enabling query plan management for Aurora PostgreSQL<a name="AuroraPostgreSQL.Optimize.Enable"></a>
 
-Query plan management is available with Aurora PostgreSQL 12\.4, Aurora PostgreSQL 11\.6, Aurora PostgreSQL 10\.5, Aurora PostgreSQL 9\.6\.11 and later releases of these versions of Aurora PostgreSQL\-Compatible Edition\. 
+Query plan management is available with the following Aurora PostgreSQL versions: 
++ All Aurora PostgreSQL 13 versions
++ Aurora PostgreSQL version 12\.4 and higher
++ Aurora PostgreSQL version 11\.6 and higher
++ Aurora PostgreSQL version 10\.5 and higher
++ Aurora PostgreSQL version 9\.6\.11 and higher
 
 Only users with the `rds_superuser` role can complete the following procedure\. The `rds_superuser` is required for creating the `apg_plan_mgmt` extension and its `apg_plan_mgmt` role\. Users must be granted the `apg_plan_mgmt` role to administer the `apg_plan_mgmt` extension\.
 

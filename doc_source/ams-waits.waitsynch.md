@@ -5,8 +5,8 @@ The `synch/mutex/innodb/aurora_lock_thread_slot_futex` event occurs when one ses
 ## Supported engine versions<a name="ams-waits.waitsynch.versions"></a>
 
 This wait event information is supported for the following engine versions:
-+ Aurora MySQL version 2\.x up to 2\.09\.2
-+ Aurora MySQL version 1\.x up to 1\.23\.1
++ Aurora MySQL version 2, up to 2\.09\.2
++ Aurora MySQL version 1, up to 1\.23\.1
 
 ## Likely causes of increased waits<a name="ams-waits.waitsynch.causes"></a>
 

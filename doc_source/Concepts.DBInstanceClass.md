@@ -81,12 +81,12 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.r5\.xlarge | 1\.14\.4 and higher | Yes | 
 | db\.r5\.large | 1\.14\.4 and higher | Yes | 
 | db\.r4 – memory optimized instance classes | 
-| db\.r4\.16xlarge | 1\.14\.4 and higher | No | 
-| db\.r4\.8xlarge | 1\.14\.4 and higher | No | 
-| db\.r4\.4xlarge | 1\.14\.4 and higher | No | 
-| db\.r4\.2xlarge | 1\.14\.4 and higher | No | 
-| db\.r4\.xlarge | 1\.14\.4 and higher | No | 
-| db\.r4\.large | 1\.14\.4 and higher | No | 
+| db\.r4\.16xlarge | 1\.14\.4 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
+| db\.r4\.8xlarge | 1\.14\.4 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
+| db\.r4\.4xlarge | 1\.14\.4 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
+| db\.r4\.2xlarge | 1\.14\.4 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
+| db\.r4\.xlarge | 1\.14\.4 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
+| db\.r4\.large | 1\.14\.4 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
 | db\.r3 – memory optimized instance classes | 
 | db\.r3\.8xlarge | Yes | No | 
 | db\.r3\.4xlarge | Yes | No | 
