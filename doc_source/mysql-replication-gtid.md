@@ -7,8 +7,7 @@ For Aurora, you can only use this feature with Aurora MySQL clusters that use bi
 
 If you use binlog replication and aren't familiar with GTID\-based replication with MySQL, see [Replication with global transaction identifiers](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids.html) in the MySQL documentation for background\.
 
-**Note**  
-GTID\-based replication is supported for MySQL 5\.7\-compatible clusters in Aurora MySQL version 2\.04 and later\. GTID\-based replication isn't supported for MySQL 5\.6\-compatible clusters in Aurora MySQL version 1\.
+GTID\-based replication is supported for MySQL 5\.7\-compatible clusters in Aurora MySQL version 2\.04 and higher\. GTID\-based replication isn't supported for MySQL 5\.6\-compatible clusters in Aurora MySQL version 1\.
 
 **Topics**
 + [Overview of global transaction identifiers \(GTIDs\)](#mysql-replication-gtid.overview)

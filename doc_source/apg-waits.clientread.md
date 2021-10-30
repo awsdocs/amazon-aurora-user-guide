@@ -68,7 +68,7 @@ For information about DB instance classes, see [Aurora DB instance classes](Conc
 
 Use `NetworkReceiveThroughput` and `NetworkTransmitThroughput` Amazon CloudWatch metrics to monitor incoming and outgoing network traffic on the DB cluster\. These metrics can help you to determine if network bandwidth is sufficient for your workload\. 
 
-If your network bandwidth isn't enough, increase it\. If the AWS client or your DB instance reaching the network bandwidth limits, the only way to increase the bandwidth is to increase your DB instance size\.
+If your network bandwidth isn't enough, increase it\. If the AWS client or your DB instance is reaching the network bandwidth limits, the only way to increase the bandwidth is to increase your DB instance size\.
 
 For more information about CloudWatch metrics, see [Amazon Aurora metrics](Aurora.AuroraMySQL.Monitoring.Metrics.md)\.
 
@@ -84,7 +84,7 @@ Check whether you have an increasing number of `idle in transaction` connections
 
 ```
 select client_addr, state, count(1) from pg_stat_activity 
-where state ilike 'idle in transaction%' 
+where state like 'idle in transaction%' 
 group by 1,2 
 order by 3 desc
 ```

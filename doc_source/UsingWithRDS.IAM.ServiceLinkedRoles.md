@@ -10,7 +10,7 @@ For information about other services that support service\-linked roles, see [AW
 
 ## Service\-linked role permissions for Amazon Aurora<a name="service-linked-role-permissions"></a>
 
-Amazon Aurora uses the service\-linked role named **AWSServiceRoleForRDS** – to allow Amazon RDS to call AWS services on behalf of your DB clusters\.
+Amazon Aurora uses the service\-linked role named AWSServiceRoleForRDS to allow Amazon RDS to call AWS services on behalf of your DB clusters\.
 
 The AWSServiceRoleForRDS service\-linked role trusts the following services to assume the role:
 + `rds.amazonaws.com`
@@ -116,7 +116,7 @@ You must configure permissions to allow an IAM entity \(such as a user, group, o
 ```
  For more information, see [Service\-linked role permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#service-linked-role-permissions) in the *IAM User Guide*\.
 
-## Creating a service\-linked role for Amazon Aurora<a name="create-service-linked-role"></a>
+### Creating a service\-linked role for Amazon Aurora<a name="create-service-linked-role"></a>
 
 You don't need to manually create a service\-linked role\. When you create a DB cluster, Amazon Aurora creates the service\-linked role for you\. 
 
@@ -125,15 +125,15 @@ If you were using the Amazon Aurora service before December 1, 2017, when it beg
 
 If you delete this service\-linked role, and then need to create it again, you can use the same process to recreate the role in your account\. When you create a DB cluster, Amazon Aurora creates the service\-linked role for you again\.
 
-## Editing a service\-linked role for Amazon Aurora<a name="edit-service-linked-role"></a>
+### Editing a service\-linked role for Amazon Aurora<a name="edit-service-linked-role"></a>
 
 Amazon Aurora does not allow you to edit the AWSServiceRoleForRDS service\-linked role\. After you create a service\-linked role, you cannot change the name of the role because various entities might reference the role\. However, you can edit the description of the role using IAM\. For more information, see [Editing a service\-linked role](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#edit-service-linked-role) in the *IAM User Guide*\.
 
-## Deleting a service\-linked role for Amazon Aurora<a name="delete-service-linked-role"></a>
+### Deleting a service\-linked role for Amazon Aurora<a name="delete-service-linked-role"></a>
 
 If you no longer need to use a feature or service that requires a service\-linked role, we recommend that you delete that role\. That way you don't have an unused entity that is not actively monitored or maintained\. However, you must delete all of your DB clusters before you can delete the service\-linked role\.
 
-### Cleaning up a service\-linked role<a name="service-linked-role-review-before-delete"></a>
+#### Cleaning up a service\-linked role<a name="service-linked-role-review-before-delete"></a>
 
 Before you can use IAM to delete a service\-linked role, you must first confirm that the role has no active sessions and remove any resources used by the role\.
 
@@ -151,7 +151,7 @@ If you are unsure whether Amazon Aurora is using the AWSServiceRoleForRDS role, 
 
 If you want to remove the AWSServiceRoleForRDS role, you must first delete *all* of your DB clusters\.
 
-#### Deleting all of your clusters<a name="delete-service-linked-role.delete-rds-clusters"></a>
+##### Deleting all of your clusters<a name="delete-service-linked-role.delete-rds-clusters"></a>
 
 Use one of the following procedures to delete a single cluster\. Repeat the procedure for each of your clusters\.
 

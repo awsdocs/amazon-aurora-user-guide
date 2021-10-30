@@ -11,6 +11,8 @@ You can filter new Amazon Aurora features on the [What's New with Database?](htt
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Babelfish for Aurora PostgreSQL](#WhatsNew) | Babelfish for Aurora PostgreSQL extends your Amazon Aurora PostgreSQL\-Compatible Edition database with the ability to accept database connections from Microsoft SQL Server clients\. For more information, see [Working with Babelfish for Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/babelfish.html)\. | October 28, 2021 | 
+| [Aurora PostgreSQL releases 13\.4, 12\.8, 11\.13, and 10\.18](#WhatsNew) | New releases of Amazon Aurora PostgreSQL\-Compatible Edition support compatibility with PostgreSQL 13\.4, PostgreSQL 12\.8, PostgreSQL 11\.13, and PostgreSQL 10\.18\. For more information, see [Database engine versions for Amazon Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html)\.  | October 28, 2021 | 
 | [Aurora MySQL version 2\.10\.1](AuroraMySQL.Updates.2101.md) |  Aurora MySQL version 2\.10\.1 is available\.  | October 21, 2021 | 
 | [Amazon Aurora supports Performance Insights in additional AWS Regions](#WhatsNew) | Performance Insights is available in the Middle East \(Bahrain\), Africa \(Cape Town\), Europe \(Milan\), and Asia Pacific \(Osaka\) Regions\. For more information, see [AWS Region support for Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.Overview.Regions.html)\. | October 5, 2021 | 
 | [Aurora MySQL version 1\.23\.4](AuroraMySQL.Updates.1234.md) | Aurora MySQL version 1\.23\.4 is available\. | September 30, 2021 | 

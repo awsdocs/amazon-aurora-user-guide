@@ -395,6 +395,8 @@ The `aurora_replica_read_consistency` parameter is a session\-level parameter th
 |  `ForwardingReplicaDMLThroughput` \(–\) |  Count \(per second\)\. Number of forwarded DML statements processed each second\.  | 
 |  `ForwardingReplicaReadWaitThroughput` \(–\) |  Count \(SELECT statements per second\)\. Total number of SELECT statements processed each second in all sessions that are forwarding writes\.  | 
 |  `ForwardingReplicaOpenSessions` \(`Aurora_fwd_replica_open_sessions`  |  Count\. The number of sessions that are using write forwarding on a reader DB instance\.  | 
+|   `ForwardingReplicaSelectLatency`   `(–)`   | Milliseconds\. Forwarded SELECT latency, average over all forwarded SELECT statements within the monitoring period\. | 
+|   `ForwardingReplicaSelectThroughput`   `(–)`   | Count per second\. Forwarded SELECT throughput, per second average within the monitoring period\. | 
 | – \(`Aurora_fwd_replica_dml_stmt_count`\)  | Count\. Total number of DML statements forwarded from this reader DB instance\.  | 
 | – \(`Aurora_fwd_replica_dml_stmt_duration`\)  |  Microseconds\. Total duration of all DML statements forwarded from this reader DB instance\.  | 
 | – \(`Aurora_fwd_replica_select_stmt_duration`\) | Microseconds\. Total duration of SELECT statements forwarded from this reader DB instance\.  | 

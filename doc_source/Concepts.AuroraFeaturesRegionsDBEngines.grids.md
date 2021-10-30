@@ -153,8 +153,8 @@ Aurora parallel queries are available for Aurora MySQL only\. However, PostgreSQ
 | Europe \(Stockholm\) | Version 1\.23 | Version 2\.09 and higher | 
 | Middle East \(Bahrain\) | Version 1\.23 | Version 2\.09 and higher | 
 | South America \(São Paulo\) | Version 1\.23 | Version 2\.09 and higher | 
-| AWS GovCloud \(US\-East\) | \- | \- | 
-| AWS GovCloud \(US\-West\) | \- | \- | 
+| AWS GovCloud \(US\-East\) | Version 1\.23 | Version 2\.09 and higher | 
+| AWS GovCloud \(US\-West\) | Version 1\.23 | Version 2\.09 and higher | 
 
 ## Amazon RDS Proxy<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy"></a>
 

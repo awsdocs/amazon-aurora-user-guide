@@ -342,6 +342,8 @@ We recommend placing the user name and password information in a folder that isn
 
 You can use `SamplePage.php` to add data to your DB cluster\. The data that you add is then displayed on the page\. To verify that the data was inserted into the table, you can install MySQL on the Amazon EC2 instance, connect to the DB instance, and query the table\. 
 
+For information about connecting to a DB cluster, see [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\.
+
 To make sure that your DB cluster is as secure as possible, verify that sources outside of the VPC can't connect to your DB cluster\. 
 
 After you have finished testing your web server and your database, you should delete your DB cluster and your Amazon EC2 instance\.

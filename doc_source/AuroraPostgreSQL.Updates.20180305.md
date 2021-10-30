@@ -11,10 +11,13 @@ aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[].[Eng
 For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability.PostgreSQL)\.
 
 **Topics**
++ [PostgreSQL 13\.4](#AuroraPostgreSQL.Updates.20180305.134)
 + [PostgreSQL 13\.3](#AuroraPostgreSQL.Updates.20180305.133)
++ [PostgreSQL 12\.8](#AuroraPostgreSQL.Updates.20180305.128)
 + [PostgreSQL 12\.7, Aurora PostgreSQL release 4\.2](#AuroraPostgreSQL.Updates.20180305.42)
 + [PostgreSQL 12\.6, Aurora PostgreSQL release 4\.1](#AuroraPostgreSQL.Updates.20180305.41)
 + [PostgreSQL 12\.4, Aurora PostgreSQL release 4\.0](#AuroraPostgreSQL.Updates.20180305.40)
++ [PostgreSQL 11\.13](#AuroraPostgreSQL.Updates.20180305.1113)
 + [PostgreSQL 11\.12, Aurora PostgreSQL release 3\.6](#AuroraPostgreSQL.Updates.20180305.36)
 + [PostgreSQL 11\.11, Aurora PostgreSQL release 3\.5](#AuroraPostgreSQL.Updates.20180305.35)
 + [PostgreSQL 11\.9, Aurora PostgreSQL release 3\.4](#AuroraPostgreSQL.Updates.20180305.34)
@@ -22,6 +25,7 @@ For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.
 + [PostgreSQL 11\.7, Aurora PostgreSQL release 3\.2](#AuroraPostgreSQL.Updates.20180305.32)
 + [PostgreSQL 11\.6, Aurora PostgreSQL release 3\.1](#AuroraPostgreSQL.Updates.20180305.31)
 + [PostgreSQL 11\.4, Aurora PostgreSQL release 3\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.30)
++ [PostgreSQL 10\.18](#AuroraPostgreSQL.Updates.20180305.1018)
 + [PostgreSQL 10\.17, Aurora PostgreSQL release 2\.9](#AuroraPostgreSQL.Updates.20180305.29)
 + [PostgreSQL 10\.16, Aurora PostgreSQL release 2\.8](#AuroraPostgreSQL.Updates.20180305.28)
 + [PostgreSQL 10\.14, Aurora PostgreSQL release 2\.7](#AuroraPostgreSQL.Updates.20180305.27)
@@ -48,6 +52,44 @@ For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.
 For information about extensions and modules, see [Extension versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)\.
 
 The following Aurora PostgreSQL versions are supported\. 
+
+## PostgreSQL 13\.4<a name="AuroraPostgreSQL.Updates.20180305.134"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.4\. For more information about the improvements in PostgreSQL 13\.4, see [PostgreSQL release 13\.4](https://www.postgresql.org/docs/13/release-13-4.html)\.
+
+### Aurora PostgreSQL release 13\.4<a name="AuroraPostgreSQL.Updates.20180305.134"></a>
+
+**High priority stability enhancements**
+
+1.  Fixed an issue where queries may become unresponsive due to I/O resource exhaustion triggered by prefetch\. 
+
+1.  Fixed an issue where Aurora may panic following a major version update with the message: "PANIC: could not access status of next transaction id xxxxxxxx"\. 
+
+**Additional improvements and enhancements**
+
+1.  Fixed an issue where read nodes restart due to a replication origin cache lookup failure\. 
+
+1.  Fixed an issue where read queries may time out on read nodes during the replay of lazy truncation triggered by vacuum on the write node\. 
+
+1.  Fixed an issue that causes Performance Insights to incorrectly set the backend type of a database connection\. 
+
+1.  Fixed an issue where the aurora\_postgres\_replica\_status\(\) function returned stale or lagging CPU stats\. 
+
+1.  Fixed an issue where, in rare circumstances, a data cache of a read node may be inconsistent following a restart of that node\. 
+
+1.  Fixed an issue where the role rds\_superuser did not have permission to execute the pg\_stat\_statements\_reset\(\) function\. 
+
+1.  Fixed an issue with the apg\_plan\_mgmt extension where the planning and execution times were reported as 0\. 
+
+1.  Removed support for DES, 3DES and RC4 cipher suites\. 
+
+1.  Updated PostGIS extension to version 3\.1\.4\. 
+
+1. Added support for the following SPI module extensions: 
+   + autoinc version 1\.0
+   + insert\_username version 1\.0
+   + moddatetime version 1\.0
+   + refint version 1\.0
 
 ## PostgreSQL 13\.3<a name="AuroraPostgreSQL.Updates.20180305.133"></a>
 
@@ -81,6 +123,38 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.3\. For more
   + `plcoffee` to version 2\.3\.15\.
   + `plls` to version 2\.3\.15\.
   + `plv8` to version 2\.3\.15\.
+
+## PostgreSQL 12\.8<a name="AuroraPostgreSQL.Updates.20180305.128"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.8\. For more information about the improvements in PostgreSQL 12\.8, see [PostgreSQL release 12\.8](https://www.postgresql.org/docs/12/release-12-8.html)\.
+
+### <a name="AuroraPostgreSQL.Updates.20180305.128"></a>
+
+**High priority stability enhancements**
+
+1.  Fixed an issue where queries may become unresponsive due to I/O resource exhaustion triggered by prefetch\. 
+
+1.  Fixed an issue where Aurora may panic following a major version update with the message: "PANIC: could not access status of next transaction id xxxxxxxx"\. 
+
+**Additional improvements and enhancements**
+
+1.  Fixed an issue where read nodes restart due to a replication origin cache lookup failure\. 
+
+1.  Fixed an issue where read queries may time out on read nodes during the replay of lazy truncation triggered by vacuum on the write node\. 
+
+1.  Fixed an issue that causes Performance Insights to incorrectly set the backend type of a database connection\. 
+
+1.  Fixed an issue where the aurora\_postgres\_replica\_status\(\) function returned stale or lagging CPU stats\. 
+
+1.  Fixed an issue where, in rare circumstances, a data cache of a read node may be inconsistent following a restart of that node\. 
+
+1.  Fixed an issue where the role rds\_superuser did not have permission to execute the pg\_stat\_statements\_reset\(\) function\. 
+
+1.  Fixed an issue with the apg\_plan\_mgmt extension where the planning and execution times were reported as 0\. 
+
+1.  Removed support for DES, 3DES and RC4 cipher suites\. 
+
+1.  Updated PostGIS extension to version 3\.1\.4\. 
 
 ## PostgreSQL 12\.7, Aurora PostgreSQL release 4\.2<a name="AuroraPostgreSQL.Updates.20180305.42"></a>
 
@@ -288,6 +362,40 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.4\. For more
    + `postGIS` to version 3\.0\.2 
    + `postgis_tiger_geocoder` to version 3\.0\.2 
    + `postgis_topology` to version 3\.0\.2
+
+## PostgreSQL 11\.13<a name="AuroraPostgreSQL.Updates.20180305.1113"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.13\. For more information about the improvements in PostgreSQL 11\.13, see [PostgreSQL release 11\.13](https://www.postgresql.org/docs/12/release-11-13.html)\.
+
+### <a name="AuroraPostgreSQL.Updates.20180305.1113"></a>
+
+**High priority stability enhancements**
+
+1.  Fixed an issue where queries may become unresponsive due to I/O resource exhaustion triggered by prefetch\. 
+
+1.  Fixed an issue where Aurora may panic following a major version update with the message: "PANIC: could not access status of next transaction id xxxxxxxx"\. 
+
+**Additional improvements and enhancements**
+
+1.  Fixed an issue where read nodes restart due to a replication origin cache lookup failure\. 
+
+1.  Fixed an issue where read queries may time out on read nodes during the replay of lazy truncation triggered by vacuum on the write node\. 
+
+1.  Fixed an issue that causes Performance Insights to incorrectly set the backend type of a database connection\. 
+
+1.  Fixed an issue where the aurora\_postgres\_replica\_status\(\) function returned stale or lagging CPU stats\. 
+
+1.  Fixed an issue where, in rare circumstances, a data cache of a read node may be inconsistent following a restart of that node\. 
+
+1.  Fixed an issue where, in rare cases, an Aurora Global Database secondary mirror cluster may restart due to a stall in the log apply process\. 
+
+1.  Fixed an issue with the apg\_plan\_mgmt extension where the planning and execution times were reported as 0\. 
+
+1.  Removed support for DES, 3DES and RC4 cipher suites\. 
+
+1.  Updated PostGIS extension to version 3\.1\.4\. 
+
+1.  Added support for postgis\_raster extension version 3\.1\.4\. 
 
 ## PostgreSQL 11\.12, Aurora PostgreSQL release 3\.6<a name="AuroraPostgreSQL.Updates.20180305.36"></a>
 
@@ -1031,6 +1139,38 @@ You can find the following improvements in this release\.
    +  `postgis_tiger_geocoder` to version 2\.5\.1
    +  `postgis_topology` to version 2\.5\.1
    +  `rds_activity_stream` to version 1\.3
+
+## PostgreSQL 10\.18<a name="AuroraPostgreSQL.Updates.20180305.1018"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.18\. For more information about the improvements in PostgreSQL 10\.18, see [PostgreSQL release 10\.18](https://www.postgresql.org/docs/12/release-10-18.html)\.
+
+### <a name="AuroraPostgreSQL.Updates.20180305.1018"></a>
+
+**High priority stability enhancements**
+
+1.  Fixed an issue where queries may become unresponsive due to I/O resource exhaustion triggered by prefetch\. 
+
+1.  Fixed an issue where Aurora may panic following a major version update with the message: "PANIC: could not access status of next transaction id xxxxxxxx"\. 
+
+**Additional improvements and enhancements**
+
+1.  Fixed an issue where read nodes restart due to a replication origin cache lookup failure\. 
+
+1.  Fixed an issue where read queries may time out on read nodes during the replay of lazy truncation triggered by vacuum on the write node\. 
+
+1.  Fixed an issue that causes Performance Insights to incorrectly set the backend type of a database connection\. 
+
+1.  Fixed an issue where the aurora\_postgres\_replica\_status\(\) function returned stale or lagging CPU stats\. 
+
+1.  Fixed an issue where, in rare circumstances, a data cache of a read node may be inconsistent following a restart of that node\. 
+
+1.  Fixed an issue where, in rare cases, an Aurora Global Database secondary mirror cluster may restart due to a stall in the log apply process\. 
+
+1.  Removed support for DES, 3DES and RC4 cipher suites\. 
+
+1.  Updated PostGIS extension to version 3\.1\.4\. 
+
+1.  Added support for postgis\_raster extension version 3\.1\.4\. 
 
 ## PostgreSQL 10\.17, Aurora PostgreSQL release 2\.9<a name="AuroraPostgreSQL.Updates.20180305.29"></a>
 

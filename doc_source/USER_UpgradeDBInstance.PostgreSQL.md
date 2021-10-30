@@ -34,22 +34,28 @@ During the major version upgrade process, a cloned volume is allocated\. If the 
 
 ## Determining which engine version to upgrade to<a name="USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion"></a>
 
-To determine which major engine version that you can upgrade your database to, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) CLI command\. In the output, a `ValidUpgradeTarget` array contains the target versions\. If the `IsMajorVersionUpgrade` value is true, you can do a major version upgrade to the associated `EngineVersion`\. If the array is empty, you can't do a major version upgrade\. You first upgrade to a minor version that has a major version upgrade path\.
+To determine which major engine version that you can upgrade your database to, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) CLI command\. If you can't do a major version upgrade\. You first upgrade to a minor version that has a major version upgrade path\.
 
-For example, the following command displays the major engine versions available for upgrading a DB cluster currently running the Aurora PostgreSQL engine version 9\.6\.12\. 
+For example, the following command displays the major engine versions available for upgrading a DB cluster currently running the Aurora PostgreSQL engine version 10\.11\. 
 
 **Example**  
 For Linux, macOS, or Unix:  
 
 ```
-aws rds describe-db-engine-versions  --engine aurora-postgresql  --engine-version 9.6.12  \
-   --query 'DBEngineVersions[].ValidUpgradeTarget[?IsMajorVersionUpgrade == `true`]'
+aws rds describe-db-engine-versions \
+  --engine aurora-postgresql \
+  --engine-version 10.11 \
+  --query 'DBEngineVersions[].ValidUpgradeTarget[?IsMajorVersionUpgrade == `true`].{EngineVersion:EngineVersion}' \
+  --output text
 ```
 For Windows:  
 
 ```
-aws rds describe-db-engine-versions  --engine aurora-postgresql  --engine-version 9.6.12  ^
-   --query "DBEngineVersions[].ValidUpgradeTarget[?IsMajorVersionUpgrade == `true`]"
+aws rds describe-db-engine-versions ^
+  --engine aurora-postgresql ^
+  --engine-version 10.11 ^
+  --query "DBEngineVersions[].ValidUpgradeTarget[?IsMajorVersionUpgrade == `true`].{EngineVersion:EngineVersion}" ^
+  --output text
 ```
 
 ## How to perform a major version upgrade<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion"></a>

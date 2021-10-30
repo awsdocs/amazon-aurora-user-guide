@@ -10,7 +10,7 @@ The `io/table/sql/handler` event occurs when work has been delegated to a storag
 
 ## Supported engine versions<a name="ams-waits.waitio.context.supported"></a>
 
-This wait event information is supported for the following versions:
+This wait event information is supported for the following engine versions:
 + Aurora MySQL version 2, up to 2\.09\.2
 + Aurora MySQL version 1, up to 1\.23\.1
 

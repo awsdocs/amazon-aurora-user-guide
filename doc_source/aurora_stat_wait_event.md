@@ -1,6 +1,6 @@
 # aurora\_stat\_wait\_event<a name="aurora_stat_wait_event"></a>
 
-Lists all supported wait events for Aurora PostgreSQL\.
+Lists all supported wait events for Aurora PostgreSQL\. For information about Aurora PostgreSQL wait events, see [Amazon Aurora PostgreSQL wait events](AuroraPostgreSQL.Reference.Waitevents.md)\.
 
 ## Syntax<a name="aurora_stat_wait_event-syntax"></a>
 
