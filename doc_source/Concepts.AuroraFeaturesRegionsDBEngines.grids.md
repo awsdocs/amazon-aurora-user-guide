@@ -85,8 +85,8 @@ Support for this feature varies by Aurora database engine and version\. The foll
 | Europe \(Stockholm\) | Version 1\.22\.2 and higher | Version 2\.07\.0 and higher | Version 10\.11 and higher | Version 11\.7 and higher | Version 12\.4 and higher | Version 13\.3 and higher | 
 | Middle East \(Bahrain\) | \- | \- | \- | \- | \- | \- | 
 | South America \(São Paulo\) | Version 1\.22\.2 and higher | Version 2\.07\.1 and higher | Version 10\.11 and higher | Version 11\.7 and higher | Version 12\.4 and higher | Version 13\.3 and higher | 
-| AWS GovCloud \(US\-East\) | \- | \- | \- | \- | \- | \- | 
-| AWS GovCloud \(US\-West\) | \- | \- | \- | \- | \- | \- | 
+| AWS GovCloud \(US\-East\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 10\.11 and higher | Version 11\.7 and higher | Version 12\.4 and higher | Version 13\.3 and higher | 
+| AWS GovCloud \(US\-West\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 10\.11 and higher | Version 11\.7 and higher | Version 12\.4 and higher | Version 13\.3 and higher | 
 
 ## Aurora machine learning<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML"></a>
 

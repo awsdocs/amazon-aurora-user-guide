@@ -13,6 +13,7 @@ Following, you can find information about how to work with PostgreSQL logical re
 + [Configuring logical replication](#AuroraPostgreSQL.Replication.Logical.Configure)
 + [Example of logical replication of a database table](#AuroraPostgreSQL.Replication.Logical.PostgreSQL-Example)
 + [Logical replication using the AWS Database Migration Service](#AuroraPostgreSQL.Replication.Logical.DMS-Example)
++ [Stopping logical replication](#AuroraPostgreSQL.Replication.Logical.Stop)
 
 ## Configuring logical replication<a name="AuroraPostgreSQL.Replication.Logical.Configure"></a>
 
@@ -49,7 +50,7 @@ The RDS for PostgreSQL DB instance that you use as the source must have automate
 
      1. Modify the DB cluster parameter group to set it to the group that you created when you enabled logical replication\. For details about modifying an Aurora PostgreSQL DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
-     1. Restart the DB cluster for static parameter changes to take effect\. the DB cluster parameter group includes a change to the static parameter `rds.logical_replication`\.
+     1. Restart the DB cluster for static parameter changes to take effect\. The DB cluster parameter group includes a change to the static parameter `rds.logical_replication`\.
    + To use a new Aurora PostgreSQL DB cluster for the publisher, create the DB cluster using the following settings\. For details about creating an Aurora PostgreSQL DB cluster, see [Creating a DB cluster](Aurora.CreateInstance.md#Aurora.CreateInstance.Creating)\.
 
      1. Choose the **Amazon Aurora** engine and choose the **PostgreSQL\-compatible** edition\.
@@ -194,3 +195,24 @@ Get the following information for the subscriber's DB instance:
    The rest of the task details depend on your migration project\. For more information about specifying all the details for DMS tasks, see [Working with AWS DMS tasks](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html) in the *AWS Database Migration Service User Guide\.*
 
 After AWS DMS creates the task, it begins migrating data from the publisher to the subscriber\. 
+
+## Stopping logical replication<a name="AuroraPostgreSQL.Replication.Logical.Stop"></a>
+
+You can stop using logical replication\.
+
+**To stop using logical replication**
+
+1. Drop all replication slots\.
+
+   To drop all of the replication slots, connect to the publisher and run the following SQL command
+
+   ```
+   SELECT pg_drop_replication_slot(slot_name) FROM pg_replication_slots 
+      WHERE slot_name IN (SELECT slot_name FROM pg_replication_slots);
+   ```
+
+   The replication slots can't be active when you run this command\.
+
+1. Modify the DB cluster parameter group associated with the publisher, as described in [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. Set the `rds.logical_replication` static parameter to 0\. 
+
+1. Restart the publisher DB cluster for the change to the `rds.logical_replication` static parameter to take effect\.

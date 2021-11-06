@@ -20,9 +20,6 @@ Cluster cache management is not supported for Aurora PostgreSQL DB clusters that
 
 ## Configuring cluster cache management<a name="AuroraPostgreSQL.cluster-cache-mgmt.Configure"></a>
 
-**Note**  
-Cluster cache management is supported for Aurora PostgreSQL DB clusters of versions 9\.6\.11 and above, and versions 10\.5 and above\.
-
 To configure cluster cache management, do the following processes in order\.
 
 **Topics**

@@ -75,7 +75,7 @@ aurora_version
 |  PostgreSQL 10  |  Aurora PostgreSQL 2  | 
 |  PostgreSQL 11  |  Aurora PostgreSQL 3  | 
 |  PostgreSQL 12  |  Aurora PostgreSQL 4  | 
-|  PostgreSQL 13  |  Not applicable  | 
+|  PostgreSQL 13  |  Not applicable\. Aurora versions are no longer added to Aurora PostgreSQL version names\.  | 
 
 ## Amazon Aurora minor versions<a name="Aurora.VersionPolicy.MinorVersions"></a>
 

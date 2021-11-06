@@ -38,18 +38,52 @@ You can choose to have the database session handle activity events in either of 
 
 ## Requirements for database activity streams<a name="DBActivityStreams.Overview.requirements"></a>
 
-In Aurora, database activity streams have the following requirements and limitations:
-+ For Aurora PostgreSQL, database activity streams are supported for version 2\.3 or higher and versions 3\.0 or higher\. For PostgreSQL version compatibility, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\. 
-+ For Aurora MySQL, database activity streams are supported for version 2\.08 or higher, which is compatible with MySQL version 5\.7\.
-+ Database activity streams support the DB instance classes listed for Aurora in [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora), with some exceptions:
-  +  The db\.r6g instance class isn't supported\.
-  +  For Aurora PostgreSQL, you can't use streams with the db\.t2, db\.t3 or db\.t4g instance classes\.
-  +  For Aurora MySQL, you can't use streams with the db\.t2 or db\.t3 instance classes\.
-+ Database activity streams aren't supported in the following AWS Regions:
-  + China \(Beijing\) Region, `cn-north-1`
-  + China \(Ningxia\) Region, `cn-northwest-1`
-  + AWS GovCloud \(US\-East\), `us-gov-east-1`
-  + AWS GovCloud \(US\-West\), `us-gov-west-1`
+In Aurora, database activity streams have the following requirements and limitations\.
+
+**Topics**
++ [Supported Aurora engine versions](#DBActivityStreams.Overview.requirements.version)
++ [Supported DB instance classes](#DBActivityStreams.Overview.requirements.classes)
++ [AWS Region support](#DBActivityStreams.Overview.requirements.Regions)
++ [Miscellaneous requirements](#DBActivityStreams.Overview.requirements.misc)
+
+### Supported Aurora engine versions<a name="DBActivityStreams.Overview.requirements.version"></a>
+
+For Aurora PostgreSQL, database activity streams are supported for the following versions:
++ All 13 versions
++ All 12 versions
++ Version 11\.6 and higher 11 versions
++ Version 10\.11 and higher 10 versions
+
+For more information about Aurora PostgreSQL versions, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\.
+
+For Aurora MySQL, database activity streams are supported for version 2\.08 or higher, which is compatible with MySQL version 5\.7\.
+
+**Note**  
+Database activity streams aren't supported in Aurora Serverless\.
+
+### Supported DB instance classes<a name="DBActivityStreams.Overview.requirements.classes"></a>
+
+For Aurora MySQL, you can use database activity streams with the following DB instance classes:
++ db\.r6g
++ db\.r5
++ db\.r4
++ db\.r3
++ db\.x2g
+
+For Aurora PostgreSQL, you can use database activity streams with the following DB instance classes:
++ db\.r6g
++ db\.r5
++ db\.r4
++ db\.x2g
+
+### AWS Region support<a name="DBActivityStreams.Overview.requirements.Regions"></a>
+
+Database activity streams are supported in all AWS Regions except the following:
++ China \(Beijing\) Region, `cn-north-1`
++ China \(Ningxia\) Region, `cn-northwest-1`
++ AWS GovCloud \(US\-East\), `us-gov-east-1`
++ AWS GovCloud \(US\-West\), `us-gov-west-1`
+
+### Miscellaneous requirements<a name="DBActivityStreams.Overview.requirements.misc"></a>
 + Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.
 + Database activity streams require use of Amazon Kinesis\.
-+ Database activity streams aren't supported in Aurora Serverless\.

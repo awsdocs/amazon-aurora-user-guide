@@ -7,14 +7,16 @@ You can use a PostgreSQL client to connect to Babelfish on the PostgreSQL port\.
 You can query an Aurora PostgreSQL DB cluster that supports Babelfish with the `psql` command line client\. When connecting, use the PostgreSQL port\. Use the following command to connect to Babelfish with the psql client:
 
 ```
-psql "host=host_name port=port_number dbname=babelfish_db user=user_name"
+psql "host=hostName port=portNumber 
+					dbname=babelfish_db user=userName"
 ```
 
 The parameters are as follows:
-+ `host_name` – The host name of the DB cluster \(cluster endpoint\) that you want to access
-+ `port_number` – The PostgreSQL port number used to connect to your DB instance
++ `host` – The host name of the DB cluster \(cluster endpoint\) that you want to access
++ `port` – The PostgreSQL port number used to connect to your DB instance
 + `dbname` – `babelfish_db`
-+ `user_name` – The database user account that you want to access
++ `user` – The database user account that you want to access
++ `password` – The password of the database user
 
 When you run a SQL command on the psql client, you end the command with a semicolon\. For example, the following SQL command queries the [pg\_tables system view](https://www.postgresql.org/docs/current/view-pg-tables.html) to return information about each table in the database\.
 

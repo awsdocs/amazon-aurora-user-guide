@@ -1,6 +1,6 @@
 # Amazon Aurora PostgreSQL releases and engine versions<a name="AuroraPostgreSQL.Updates.20180305"></a>
 
-Following, you can find information about supported released version of the Aurora PostgreSQL\-Compatible Edition database engine\. Beginning with PostgreSQL 13\.3, Aurora version numbers are not used\. To determine the version numbers of your Aurora PostgreSQL database, see [Identifying your versions of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Versions.md)\.
+Following, you can find information about supported released versions of the Aurora PostgreSQL\-Compatible Edition database engine\. Starting with the release of PostgreSQL versions 13\.3, 12\.8, 11\.13, 10\.18, and for all other later versions, Aurora version numbers aren't used\. To determine the version numbers of your Aurora PostgreSQL database, see [Identifying your versions of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Versions.md)\.
 
 To determine which PostgreSQL engine versions are available in an AWS Region, use the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\. For example:
 
