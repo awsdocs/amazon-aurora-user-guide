@@ -101,7 +101,7 @@ To improve CPU usage in a database instance, follow these guidelines:
 
  If the `DBLoadCPU` metric is not very high, but the `CPUUtilization` metric is high, the cause of the high CPU utilization lies outside of the database engine\. A classic example is a connection storm\.
 
-Check whether there following conditions are true:
+Check whether the following conditions are true:
 + There is an increase in both the Performance Insights `CPUUtilization` metric and the Amazon CloudWatch `DatabaseConnections` metric\.
 + The number of threads in the CPU is greater than the number of vCPUs\.
 

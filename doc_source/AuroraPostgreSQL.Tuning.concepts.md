@@ -9,7 +9,7 @@ Before you tune your Aurora PostgreSQL database, make sure to learn what wait ev
 
 ## Aurora PostgreSQL wait events<a name="AuroraPostgreSQL.Tuning.concepts.waits"></a>
 
-A *wait event* indicates a resource for which a session is waiting\. For example, the wait event `io/socket/sql/client_connection` indicates that a thread is in the process of handling a new connection\. Typical resources that a session waits for include the following:
+A *wait event* indicates a resource for which a session is waiting\. For example, the wait event `Client:ClientRead` occurs when Aurora PostgreSQL is waiting to receive data from the client\. Typical resources that a session waits for include the following:
 + Single\-threaded access to a buffer, for example, when a session is attempting to modify a buffer
 + A row that is currently locked by another session
 + A data file read

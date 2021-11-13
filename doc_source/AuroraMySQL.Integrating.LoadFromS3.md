@@ -2,6 +2,8 @@
 
 You can use the `LOAD DATA FROM S3` or `LOAD XML FROM S3` statement to load data from files stored in an Amazon S3 bucket\. 
 
+If you are using encryption, the Amazon S3 bucket must be encrypted with an AWS managed key\. Currently, you can't load data from a bucket that is encrypted with a customer managed key\.
+
 **Note**  
 Loading data into a table from text files in an Amazon S3 bucket is available for Amazon Aurora MySQL version 1\.8 and later\. For more information about Aurora MySQL versions, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.  
  This feature currently isn't available for Aurora Serverless clusters\. 

@@ -2,6 +2,8 @@
 
 You can use the `SELECT INTO OUTFILE S3` statement to query data from an Amazon Aurora MySQL DB cluster and save it directly into text files stored in an Amazon S3 bucket\. You can use this functionality to skip bringing the data down to the client first, and then copying it from the client to Amazon S3\. The `LOAD DATA FROM S3` statement can use the files created by this statement to load data into an Aurora DB cluster\. For more information, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.
 
+If you are using encryption, the Amazon S3 bucket must be encrypted with an AWS managed key\. Currently, you can't save data to a bucket that is encrypted with a customer managed key\.
+
  This feature currently isn't available for Aurora Serverless clusters\.
 
 **Note**  

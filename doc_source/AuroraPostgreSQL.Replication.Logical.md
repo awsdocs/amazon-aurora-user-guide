@@ -165,7 +165,7 @@ Get the following information for the subscriber's DB instance:
 
    Choose values that are the same as for your publisher's writer DB instance\. These include the following settings:
    + For **VPC**, choose the same VPC as for the writer DB instance\.
-   + For **Replication Subnet Group**, choose the same subnet group as for the writer DB instance\.
+   + For **Replication Subnet Group**, choose a subnet group with the same values as the writer DB instance\. Create a new one if necessary\.
    + For **Availability zone**, choose the same zone as for the writer DB instance\.
    + For **VPC Security Group**, choose the same group as for the writer DB instance\.
 

@@ -7,7 +7,7 @@ Although Babelfish doesn't offer complete support for T\-SQL, you can use Aurora
 Aurora PostgreSQL offers functionality to replace many commonly used SQL Server features\. Some examples of SQL Server functionality that can be replaced by Aurora functionality follow:
 + If you use SQL Server bulk copy, you can use the Aurora PostgreSQL [ COPY statement\. COPY is optimized for fast data loading\.](https://www.postgresql.org/docs/14/populate.html)
 + If you use unsupported SQL Server GROUP BY clauses, you can use Aurora PostgreSQL [ GROUPING SETS](https://www.postgresql.org/docs/14/queries-table-expressions.html#QUERIES-GROUP)\.
-+ If you use SQL Server JSON support, you can use Aurora PostgreSQL [ JSON functions and operators\.](postgresql.org/docs/14/functions-json.html)
++ If you use SQL Server JSON support, you can use Aurora PostgreSQL [ JSON functions and operators\.](https://www.postgresql.org/docs/14/functions-json.html)
 + If you use SQL Server XML support, you can use Aurora PostgreSQL [ XML functions\.](https://www.postgresql.org/docs/14/functions-xml.html)
 + If you use SQL Server full\-text search, you can use Aurora PostgreSQL [full\-text search\.](https://www.postgresql.org/docs/14/textsearch.html)
 + If you use the SQL Server GEOGRAPHY data type, you can use [ PostGIS](https://postgis.net/) to provide support for geographical data and geographical data manipulation\.

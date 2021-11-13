@@ -11,6 +11,7 @@ You can filter new Amazon Aurora features on the [What's New with Database?](htt
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Aurora MySQL version 2\.09\.3](AuroraMySQL.Updates.2093.md) |  Aurora MySQL version 2\.09\.3 is available\.  | November 12, 2021 | 
 | [Aurora supports AWS Graviton2 instance classes for Database Activity Streams](#WhatsNew) | You can use database activity streams with the db\.r6g instance class for Aurora MySQL and Aurora PostgreSQL\. For more information, see [Supported DB instance classes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.Overview.html#DBActivityStreams.Overview.requirements.classes)\. | November 3, 2021 | 
 | [Amazon Aurora support for cross\-account AWS KMS keys](#WhatsNew) | You can use a KMS key from a different AWS account for encryption when exporting DB snapshots to Amazon S3\. For more information, see [Exporting DB snapshot data to Amazon S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)\. | November 3, 2021 | 
 | [Babelfish for Aurora PostgreSQL](#WhatsNew) | Babelfish for Aurora PostgreSQL extends your Amazon Aurora PostgreSQL\-Compatible Edition database with the ability to accept database connections from Microsoft SQL Server clients\. For more information, see [Working with Babelfish for Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/babelfish.html)\. | October 28, 2021 | 

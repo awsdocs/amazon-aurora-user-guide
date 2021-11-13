@@ -1,6 +1,6 @@
 # Copying a DB cluster snapshot<a name="USER_CopySnapshot"></a>
 
-With Amazon RDS, you can copy automated or manual DB cluster snapshots\. After you copy a snapshot, the copy is a manual snapshot\. 
+With Amazon RDS, you can copy automated backups or manual DB cluster snapshots\. After you copy a snapshot, the copy is a manual snapshot\. 
 
 You can copy a snapshot within the same AWS Region, you can copy a snapshot across AWS Regions, and you can copy shared snapshots\.
 
@@ -20,12 +20,12 @@ The following are some limitations when you copy snapshots:
 
 ## Snapshot retention<a name="USER_CopySnapshot.Retention"></a>
 
-Amazon RDS deletes automated snapshots in several situations:
+Amazon RDS deletes automated backups in several situations:
 + At the end of their retention period\.
-+ When you disable automated snapshots for a DB cluster\.
++ When you disable automated backups for a DB cluster\.
 + When you delete a DB cluster\.
 
-If you want to keep an automated snapshot for a longer period, copy it to create a manual snapshot, which is retained until you delete it\. Amazon RDS storage costs might apply to manual snapshots if they exceed your default storage space\.
+If you want to keep an automated backup for a longer period, copy it to create a manual snapshot, which is retained until you delete it\. Amazon RDS storage costs might apply to manual snapshots if they exceed your default storage space\.
 
 For more information about backup storage costs, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\. 
 

@@ -212,7 +212,7 @@ For more information about engine updates for Aurora PostgreSQL, see [Amazon Aur
 
 ## Choosing the frequency of Aurora MySQL maintenance updates<a name="Aurora.Maintenance.LTS"></a>
 
- You can control whether Aurora MySQL upgrades happen frequently or rarely for each DB cluster\. The best choice depends on your usage of Aurora MySQL and the priorities for your applications that run on Aurora, For information about the Aurora MySQL long\-term stability \(LTS\) releases that require less frequent upgrades, see [Aurora MySQL long\-term support \(LTS\) releases](AuroraMySQL.Updates.Versions.md#AuroraMySQL.Updates.LTS)\. 
+ You can control whether Aurora MySQL upgrades happen frequently or rarely for each DB cluster\. The best choice depends on your usage of Aurora MySQL and the priorities for your applications that run on Aurora\. For information about the Aurora MySQL long\-term stability \(LTS\) releases that require less frequent upgrades, see [Aurora MySQL long\-term support \(LTS\) releases](AuroraMySQL.Updates.Versions.md#AuroraMySQL.Updates.LTS)\. 
 
  You might choose to upgrade an Aurora MySQL cluster rarely if some or all of the following conditions apply: 
 +  Your testing cycle for your application takes a long time for each update to the Aurora MySQL database engine\. 
