@@ -22,9 +22,11 @@ For more information, see [Troubleshooting Aurora connection failures](#Aurora.C
 
 To authenticate to your Aurora MySQL DB cluster, you can use either MySQL user name and password authentication or AWS Identity and Access Management \(IAM\) database authentication\. For more information on using MySQL user name and password authentication, see [ Access control and account management](https://dev.mysql.com/doc/refman/5.7/en/access-control.html) in the MySQL documentation\. For more information on using IAM database authentication, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\.
 
-When you have a connection to your Amazon Aurora DB cluster with MySQL 5\.6 compatibility, you can run SQL commands that are compatible with MySQL version 5\.6\. For more information about MySQL 5\.6 SQL syntax, see the [MySQL 5\.6 reference manual](http://dev.mysql.com/doc/refman/5.6/en/index.html)\.
+When you have a connection to your Amazon Aurora DB cluster with MySQL 8\.0 compatibility, you can run SQL commands that are compatible with MySQL version 8\.0\. The minimum compatible version is MySQL 8\.0\.23\. For more information about MySQL 8\.0 SQL syntax, see the [MySQL 8\.0 reference manual](http://dev.mysql.com/doc/refman/8.0/en/index.html)\. For information about limitations that apply to Aurora MySQL version 3, see [Comparison of Aurora MySQL version 3 and community MySQL 8\.0](AuroraMySQL.MySQL80.md#Aurora.AuroraMySQL.Compare-80-v3)\. 
 
-When you have a connection to your Amazon Aurora DB cluster with MySQL 5\.7 compatibility, you can run SQL commands that are compatible with MySQL version 5\.7\. For more information about MySQL 5\.7 SQL syntax, see the [MySQL 5\.7 reference manual](http://dev.mysql.com/doc/refman/5.7/en/index.html)\. For information about limitations that apply to Aurora MySQL 5\.7, see [Comparison of Aurora MySQL 5\.7 and MySQL 5\.7](Aurora.AuroraMySQL.Overview.md#Aurora.AuroraMySQL.CompareMySQL57)\.
+When you have a connection to your Amazon Aurora DB cluster with MySQL 5\.7 compatibility, you can run SQL commands that are compatible with MySQL version 5\.7\. For more information about MySQL 5\.7 SQL syntax, see the [MySQL 5\.7 reference manual](http://dev.mysql.com/doc/refman/5.7/en/index.html)\. For information about limitations that apply to Aurora MySQL 5\.7, see [Aurora MySQL version 2 compatible with MySQL 5\.7](Aurora.AuroraMySQL.CompareMySQL57.md)\.
+
+When you have a connection to your Amazon Aurora DB cluster with MySQL 5\.6 compatibility, you can run SQL commands that are compatible with MySQL version 5\.6\. For more information about MySQL 5\.6 SQL syntax, see the [MySQL 5\.6 reference manual](http://dev.mysql.com/doc/refman/5.6/en/index.html)\.
 
 **Note**  
 For a helpful and detailed guide on connecting to an Amazon Aurora MySQL DB cluster, you can see the [Aurora connection management](https://d1.awsstatic.com/whitepapers/RDS/amazon-aurora-connection-management-handbook.pdf) handbook\.
@@ -100,7 +102,7 @@ You can connect to a DB instance in your Amazon Aurora PostgreSQL DB cluster usi
 
 When you have a connection to a DB instance in your Amazon Aurora PostgreSQL DB cluster, you can run any SQL command that is compatible with PostgreSQL\. 
 
-In the details view for your Aurora PostgreSQL DB cluster you can find the cluster endpoint\. You use this endpoint in your PostgreSQL connection string\. The endpoint is made up of the domain name and port for your DB cluster\. For example, if an endpoint value is `mycluster.cluster-123456789012.us-east-1.rds.amazonaws.com:5432`, then you specify the following values in a PostgreSQL connection string:
+In the details view for your Aurora PostgreSQL DB cluster you can find the cluster endpoint name, status, type, and port number\. You use the endpoint and port number in your PostgreSQL connection string\. For example, if an endpoint value is `mycluster.cluster-123456789012.us-east-1.rds.amazonaws.com`, then you specify the following values in a PostgreSQL connection string:
 + For host or host name, specify `mycluster.cluster-123456789012.us-east-1.rds.amazonaws.com`
 + For port, specify `5432` or the port value you used when you created the DB cluster
 

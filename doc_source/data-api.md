@@ -1000,7 +1000,7 @@ You can build the library manually from the source files, but the best practice 
 <dependency>
     <groupId>software.amazon.rdsdata</groupId>
     <artifactId>rds-data-api-client-library-java</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.7</version>
 </dependency>
 ```
 
@@ -1052,6 +1052,14 @@ List<Account> result = client.forSql("SELECT * FROM accounts")
 Account result = client.forSql("SELECT * FROM accounts WHERE account_id = 1")
           .execute()
           .mapToSingle(Account.class);
+```
+
+In many cases, the database result set contains only a single value\. In order to simplify retrieving such results, the client library offers the following API:
+
+```
+int numberOfAccounts = client.forSql("SELECT COUNT(*) FROM accounts")
+          .execute()
+          .singleValue(Integer.class);
 ```
 
 ## Troubleshooting Data API issues<a name="data-api.troubleshooting"></a>

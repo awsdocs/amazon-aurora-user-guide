@@ -9,7 +9,7 @@ The following diagram illustrates the relationship between the cluster volume, t
 ![\[Amazon Aurora Architecture\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraArch001.png)
 
 **Note**  
- The preceding information applies to all the Aurora clusters that use single\-master replication\. These include provisioned clusters, parallel query clusters, global database clusters, serverless clusters, and all MySQL 5\.7\-compatible and PostgreSQL\-compatible clusters\.   
+ The preceding information applies to all the Aurora clusters that use single\-master replication\. These include provisioned clusters, parallel query clusters, global database clusters, serverless clusters, and all MySQL 8\.0\-compatible, 5\.7\-compatible, and PostgreSQL\-compatible clusters\.   
  Aurora clusters that use multi\-master replication have a different arrangement of read/write and read\-only DB instances\. All DB instances in a multi\-master cluster can perform write operations\. There isn't a single DB instance that performs all the write operations, and there aren't any read\-only DB instances\. Therefore, the terms *primary instance* and *Aurora Replica* don't apply to multi\-master clusters\. When we discuss clusters that might use multi\-master replication, we refer to *writer* DB instances and *reader* DB instances\. 
 
  The Aurora cluster illustrates the separation of compute capacity and storage\. For example, an Aurora configuration with only a single DB instance is still a cluster, because the underlying storage volume involves multiple storage nodes distributed across multiple Availability Zones \(AZs\)\. 

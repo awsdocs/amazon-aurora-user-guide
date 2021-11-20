@@ -1,17 +1,12 @@
-# Upgrading the major version of an Aurora MySQL DB cluster from 1\.x to 2\.x<a name="AuroraMySQL.Updates.MajorVersionUpgrade"></a><a name="mvu"></a>
+# Upgrading the major version of an Aurora MySQL DB cluster<a name="AuroraMySQL.Updates.MajorVersionUpgrade"></a><a name="mvu"></a>
 
- In an Aurora MySQL version number such as 2\.08\.1, the 2 represents the major version\. Aurora MySQL version 1 is compatible with MySQL 5\.6 and Aurora MySQL version 2 is compatible with MySQL 5\.7\. 
+ In an Aurora MySQL version number such as 2\.08\.1, the 2 represents the major version\. Aurora MySQL version 1 is compatible with MySQL 5\.6\. Aurora MySQL version 2 is compatible with MySQL 5\.7\. Aurora MySQL version 3 is compatible with MySQL 8\.0\.23\. 
 
- Upgrading between major versions requires more extensive planning and testing than for a minor version\. The process can take substantial time\.  After the upgrade is finished, you also might have followup work to do\. For example, this might occur due to differences in SQL compatibility, the way certain MySQL\-related features work, or parameter settings between the old and new versions\. Upgrading the major version changes the `engine` attribute of the cluster from `aurora` to `aurora-mysql`\. Make sure to update any AWS CLI or API automation that you use with this cluster to account for the changed `engine` value\. 
-
- If you have a MySQL 5\.6\-compatible cluster and want to upgrade it to a MySQL\-5\.7 compatible cluster, you can do so by running an upgrade process on the cluster itself\. This kind of upgrade is an *in\-place upgrade*, in contrast to upgrades that you do by creating a new cluster\. This technique keeps the same endpoint and other characteristics of the cluster\. The upgrade is relatively fast because it doesn't require copying all your data to a new cluster volume\. This stability helps to minimize any configuration changes in your applications\. It also helps to reduce the amount of testing for the upgraded cluster, because the number of DB instances and their instance classes all stay the same\. 
-
- The in\-place upgrade mechanism involves shutting down your DB cluster while the operation takes place\. Aurora performs a clean shutdown and completes outstanding operations such as transaction rollback and undo purge\.  
-
-**Tip**  
-  The in\-place upgrade is convenient, because it is simple to perform and minimizes configuration changes to associated applications\. For example, an in\-place upgrade preserves the endpoints and set of DB instances for your cluster\. However, the time needed for an in\-place upgrade can vary depending on the properties of your schema and how busy the cluster is\. Thus, depending on the needs for your cluster, you can choose between in\-place upgrade, snapshot restore as described in [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md), or other upgrade techniques such as the one described in [Alternative blue\-green upgrade technique](#AuroraMySQL.Upgrading.BlueGreenBlog)\. 
+ Upgrading between major versions requires more extensive planning and testing than for a minor version\. The process can take substantial time\. After the upgrade is finished, you also might have followup work to do\. For example, this might occur due to differences in SQL compatibility, the way certain MySQL\-related features work, or parameter settings between the old and new versions\. 
 
 **Topics**
++ [Upgrading from Aurora MySQL 2\.x to 3\.x](#AuroraMySQL.Updates.MajorVersionUpgrade.2to3)
++ [Upgrading from Aurora MySQL 1\.x to 2\.x](#AuroraMySQL.Updates.MajorVersionUpgrade.1to2)
 + [Planning a major version upgrade for an Aurora MySQL cluster](#AuroraMySQL.Upgrading.Planning)
 + [Aurora MySQL major version upgrade paths](#AuroraMySQL.Upgrading.Compatibility)
 + [How the Aurora MySQL in\-place major version upgrade works](#AuroraMySQL.Upgrading.Sequence)
@@ -24,16 +19,35 @@
 + [Aurora MySQL in\-place upgrade tutorial](#AuroraMySQL.Upgrading.Tutorial)
 + [Alternative blue\-green upgrade technique](#AuroraMySQL.Upgrading.BlueGreenBlog)
 
-## Planning a major version upgrade for an Aurora MySQL cluster<a name="AuroraMySQL.Upgrading.Planning"></a>
+## Upgrading from Aurora MySQL 2\.x to 3\.x<a name="AuroraMySQL.Updates.MajorVersionUpgrade.2to3"></a>
 
- To make sure that your applications and administration procedures work smoothly after upgrading a cluster to Aurora MySQL version 2\.x, you can do some advance planning and preparation\. To see what sorts of management code to update for your AWS CLI scripts or RDS API–based applications, see [How in\-place upgrades affect the parameter groups for a cluster](#AuroraMySQL.Upgrading.ParamGroups) and [Changes to cluster properties between Aurora MySQL version 1 and 2](#AuroraMySQL.Upgrading.Attrs)\. 
+ Currently, upgrading to Aurora MySQL version 3 requires restoring a snapshot of an Aurora MySQL version 2 cluster to create a new version 3 cluster\. If your original cluster is running Aurora MySQL version 1, you first upgrade to version 2 and then use the snapshot restore technique to create the version 3 cluster\. For general information about Aurora MySQL version 3 and the new features that you can use after you upgrade, see [Aurora MySQL version 3 compatible with MySQL 8\.0](AuroraMySQL.MySQL80.md)\. For details and examples of performing this type of upgrade, see [Upgrade planning for Aurora MySQL version 3](AuroraMySQL.MySQL80.md#AuroraMySQL.mysql80-planning) and [Upgrading to Aurora MySQL version 3](AuroraMySQL.MySQL80.md#AuroraMySQL.mysql80-upgrade-procedure)\. 
 
 **Tip**  
+ When you upgrade the major version of your cluster from 2\.x to 3\.x, the original cluster and the upgraded one both use the same `aurora-mysql` value for the `engine` attribute\. 
+
+## Upgrading from Aurora MySQL 1\.x to 2\.x<a name="AuroraMySQL.Updates.MajorVersionUpgrade.1to2"></a>
+
+ Upgrading the major version from 1\.x to 2\.x changes the `engine` attribute of the cluster from `aurora` to `aurora-mysql`\. Make sure to update any AWS CLI or API automation that you use with this cluster to account for the changed `engine` value\. 
+
+ If you have a MySQL 5\.6\-compatible cluster and want to upgrade it to a MySQL\-5\.7 compatible cluster, you can do so by running an upgrade process on the cluster itself\. This kind of upgrade is an *in\-place upgrade*, in contrast to upgrades that you do by creating a new cluster\. This technique keeps the same endpoint and other characteristics of the cluster\. The upgrade is relatively fast because it doesn't require copying all your data to a new cluster volume\. This stability helps to minimize any configuration changes in your applications\. It also helps to reduce the amount of testing for the upgraded cluster, because the number of DB instances and their instance classes all stay the same\. 
+
+ The in\-place upgrade mechanism involves shutting down your DB cluster while the operation takes place\. Aurora performs a clean shutdown and completes outstanding operations such as transaction rollback and undo purge\. 
+
+ The in\-place upgrade is convenient, because it is simple to perform and minimizes configuration changes to associated applications\. For example, an in\-place upgrade preserves the endpoints and set of DB instances for your cluster\. However, the time needed for an in\-place upgrade can vary depending on the properties of your schema and how busy the cluster is\. Thus, depending on the needs for your cluster, you can choose between in\-place upgrade, snapshot restore as described in [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md), or other upgrade techniques such as the one described in [Alternative blue\-green upgrade technique](#AuroraMySQL.Upgrading.BlueGreenBlog)\. 
+
  If your cluster is running a version that's lower than 1\.22\.3, the upgrade might take longer because Aurora MySQL automatically performs an upgrade to 1\.22\.3 as a first step\. To minimize downtime during the major version upgrade, you can do an initial minor version upgrade to Aurora MySQL 1\.22\.3 in advance\. 
+
+## Planning a major version upgrade for an Aurora MySQL cluster<a name="AuroraMySQL.Upgrading.Planning"></a>
+
+ To make sure that your applications and administration procedures work smoothly after upgrading a cluster between major versions, you can do some advance planning and preparation\. To see what sorts of management code to update for your AWS CLI scripts or RDS API–based applications, see [How in\-place upgrades affect the parameter groups for a cluster](#AuroraMySQL.Upgrading.ParamGroups) and [Changes to cluster properties between Aurora MySQL version 1 and 2](#AuroraMySQL.Upgrading.Attrs)\. 
 
  You can learn the sorts of issues that you might encounter during the upgrade by reading [Troubleshooting for Aurora MySQL in\-place upgrade](#AuroraMySQL.Upgrading.Troubleshooting)\. For issues that might cause the upgrade to take a long time, you can test those conditions in advance and correct them\. 
 
  To verify application compatibility, performance, maintenance procedures, and similar considerations for the upgraded cluster, you can perform a simulation of the upgrade before doing the real upgrade\. This technique can be especially useful for production clusters\. Here, it's important to minimize downtime and have the upgraded cluster ready to go as soon as the upgrade as finished\. 
+
+**Note**  
+ This technique applies to upgrades from Aurora MySQL version 1 to version 2\. Currently, you can't upgrade from Aurora MySQL version 2 to 3 by using cloning\. 
 
  Use the following steps: 
 
@@ -45,9 +59,9 @@
 
 1.  Test application compatibility, performance, administration procedures, and so on, using the cloned cluster\. 
 
-1.  If you encounter any issues, adjust your upgrade plans to account for them\. For example, adapt any application code to be compatible with the MySQL 5\.7 feature set\. Estimate how long the upgrade is likely to take based on the amount of data in your cluster\. You might also choose to schedule the upgrade for a time when the cluster isn't busy\. 
+1.  If you encounter any issues, adjust your upgrade plans to account for them\. For example, adapt any application code to be compatible with the feature set of the higher version\. Estimate how long the upgrade is likely to take based on the amount of data in your cluster\. You might also choose to schedule the upgrade for a time when the cluster isn't busy\. 
 
-1.  After you are satisfied that your applications and workload work properly with the Aurora MySQL version 2\.x test cluster, you can perform the in\-place upgrade for your production cluster\. 
+1.  After you are satisfied that your applications and workload work properly with the test cluster, you can perform the in\-place upgrade for your production cluster\. 
 
 1.  To minimize the total downtime of your cluster during a major version upgrade, make sure that the workload on the cluster is low or zero at the time of the upgrade\. In particular, make sure that there are no long running transactions in progress when you start the upgrade\. 
 
@@ -60,11 +74,13 @@
 | --- | --- | --- | 
 |   Aurora MySQL provisioned cluster, 1\.22\.3 or higher   |   Yes   |   This is the fastest upgrade path\. Aurora doesn't need to perform an intermediate upgrade first\.   | 
 |   Aurora MySQL provisioned cluster, earlier than 1\.22\.3   |   Yes   |   The upgrade might take longer than if the cluster is already running Aurora MySQL 1\.22\.3 or higher\. During a major version upgrade, Aurora MySQL performs some database cleanup using a minimum Aurora MySQL version of 1\.22\.3\. Aurora MySQL automatically performs an upgrade to 1\.22\.3 as a first step before doing that cleanup\.   | 
-|   Aurora MySQL provisioned cluster, 2\.0 or higher   |   No   |   In\-place upgrade is only for 5\.6\-compatible Aurora MySQL clusters, to enable compatibility with MySQL 5\.7\. Aurora MySQL version 2 is already compatible with 5\.7\. Use the procedure for upgrading the minor version or patch level to change from one 5\.7\-compatible version to another\.   | 
+|   Aurora MySQL provisioned cluster, 2\.0 or higher   |   No   |   In\-place upgrade is only for 5\.6\-compatible Aurora MySQL clusters, to make possible compatibility with MySQL 5\.7\. Aurora MySQL version 2 is already compatible with 5\.7\. Use the procedure for upgrading the minor version or patch level to change from one 5\.7\-compatible version to another\.   | 
+|   Aurora MySQL provisioned cluster, 3\.1\.0 or higher   |   No   |   For information about upgrading to Aurora MySQL version 3, see [Upgrade planning for Aurora MySQL version 3](AuroraMySQL.MySQL80.md#AuroraMySQL.mysql80-planning) and [Upgrading to Aurora MySQL version 3](AuroraMySQL.MySQL80.md#AuroraMySQL.mysql80-upgrade-procedure)\.   | 
+|   Aurora MySQL provisioned cluster, 3\.1\.0 or higher   |   No   |   For information about upgrading to Aurora MySQL version 3, see [Upgrade planning for Aurora MySQL version 3](AuroraMySQL.MySQL80.md#AuroraMySQL.mysql80-planning) and [Upgrading to Aurora MySQL version 3](AuroraMySQL.MySQL80.md#AuroraMySQL.mysql80-upgrade-procedure)\.   | 
 |   Aurora Serverless cluster   |   No   |   Make a snapshot of the 5\.6\-compatible Aurora Serverless cluster\. Restore the snapshot to a 5\.7\-compatible cluster\. You can choose to make the new cluster Aurora Serverless or some other kind of 5\.7\-compatible cluster\.   | 
 |   Cluster in an Aurora global database   |   Yes   |   Follow the procedure for doing an in\-place upgrade for clusters in an Aurora global database\. Perform the upgrade on the primary cluster in the global database\. Aurora upgrades the primary cluster and all the secondary clusters in the global database at the same time\. If you use the AWS CLI or RDS API, call the `modify-global-cluster` command or `ModifyGlobalCluster` operation instead of `modify-db-cluster` or `ModifyDBCluster`\.   | 
 |   Multi\-master cluster   |   No   |   Currently, multi\-master replication isn't available for Aurora MySQL 5\.7\-compatible clusters\.   | 
-|   Parallel query cluster   |   Maybe   |   If you have an existing parallel query cluster using an older Aurora MySQL version, upgrade the cluster to Aurora MySQL 1\.23 first\. Follow the procedure in [Upgrade considerations for parallel query](aurora-mysql-parallel-query.md#aurora-mysql-parallel-query-upgrade)\. You make some changes to configuration parameters to re\-enable parallel query after this initial upgrade\. Then you can perform an in\-place upgrade\. In this case, choose 2\.09\.1 or higher for the Aurora MySQL version\.   | 
+|   Parallel query cluster   |   Maybe   |   If you have an existing parallel query cluster using an older Aurora MySQL version, upgrade the cluster to Aurora MySQL 1\.23 first\. Follow the procedure in [Upgrade considerations for parallel query](aurora-mysql-parallel-query.md#aurora-mysql-parallel-query-upgrade)\. You make some changes to configuration parameters to turn parallel query back on after this initial upgrade\. Then you can perform an in\-place upgrade\. In this case, choose 2\.09\.1 or higher for the Aurora MySQL version\.   | 
 |   Cluster that is the target of binary log replication   |   Maybe   |   If the binary log replication is from a 5\.6\-compatible Aurora MySQL cluster, you can perform an in\-place upgrade\. You can't perform the upgrade if the binary log replication is from an RDS MySQL or an on\-premises MySQL DB instance\. In that case, you can upgrade using the snapshot restore mechanism\.   | 
 |   Cluster with zero DB instances   |   No   |   Using the AWS CLI or the RDS API, you can create an Aurora MySQL cluster without any attached DB instances\. In the same way, you can also remove all DB instances from an Aurora MySQL cluster while leaving the data in the cluster volume intact\. While a cluster has zero DB instances, you can't perform an in\-place upgrade\.   The upgrade mechanism requires a writer instance in the cluster to perform conversions on the system tables, data files, and so on\. In this case, use the AWS CLI or the RDS API to create a writer instance for the cluster\. Then you can perform an in\-place upgrade\.   | 
 |   Cluster with backtrack enabled   |   Yes   |   You can perform an in\-place upgrade for an Aurora MySQL cluster that uses the backtrack feature\. However, after the upgrade, you can't backtrack the cluster to a time before the upgrade\.   | 
@@ -202,9 +218,9 @@ aws rds modify-db-cluster ^
 
 ## Changes to cluster properties between Aurora MySQL version 1 and 2<a name="AuroraMySQL.Upgrading.Attrs"></a>
 
- For MySQL 5\.6\-compatible clusters, the value that you use for the `engine` parameter in AWS CLI commands or RDS API operations is `aurora`\. For MySQL 5\.7\-compatible clusters, the corresponding value is `aurora-mysql`\. When you upgrade from Aurora MySQL version 1 to version 2, make sure to change any applications or scripts you use to set up or manage Aurora MySQL clusters and DB instances\. 
+ For MySQL 5\.6\-compatible clusters, the value that you use for the `engine` parameter in AWS CLI commands or RDS API operations is `aurora`\. For MySQL 5\.7\-compatible or MySQL 8\.0\-compatible clusters, the corresponding value is `aurora-mysql`\. When you upgrade from Aurora MySQL version 1 to version 2 or version 3, make sure to change any applications or scripts you use to set up or manage Aurora MySQL clusters and DB instances\. 
 
- Also, change your code that manipulates parameter groups to account for the fact that the default parameter group names are different for MySQL 5\.6\- and 5\.7\-compatible clusters\. The default parameter group name for Aurora MySQL version 1 clusters is `default.aurora5.6`\. The corresponding parameter group name for Aurora MySQL version 2 clusters is `default.aurora-mysql5.7`\. 
+ Also, change your code that manipulates parameter groups to account for the fact that the default parameter group names are different for MySQL 5\.6\-, 5\.7\-, and 8\.0\-compatible clusters\. The default parameter group name for Aurora MySQL version 1 clusters is `default.aurora5.6`\. The corresponding parameter group names for Aurora MySQL version 2 and 3 clusters are `default.aurora-mysql5.7` and `default.aurora-mysql8.0`\. 
 
  For example, you might have code like the following that applies to your cluster before an upgrade\. 
 

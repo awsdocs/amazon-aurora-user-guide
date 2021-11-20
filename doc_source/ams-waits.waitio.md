@@ -42,11 +42,6 @@ We recommend different actions depending on the other wait events that you see\.
 + [Identify the sessions and queries causing the events](#ams-waits.waitio.actions.identify)
 + [Check for a correlation with Performance Insights counter metrics](#ams-waits.waitio.actions.filters)
 + [Check for other correlated wait events](#ams-waits.waitio.actions.maintenance)
-+ [Check the top hosts and top users](#ams-waits.waitio.actions.pi)
-+ [Query the performance\_schema tables](#ams-waits.waitio.actions.performance-schema)
-+ [Check the thread states of your queries](#ams-waits.waitio.actions.thread-states)
-+ [Audit your requests and queries](#ams-waits.waitio.actions.auditing)
-+ [Pool your database connections](#ams-waits.waitio.actions.pooling)
 
 ### Identify the sessions and queries causing the events<a name="ams-waits.waitio.actions.identify"></a>
 
@@ -113,33 +108,3 @@ If the Adaptive Hash Index is turned off, and the situation warrants it, conside
 + The article [Contention in MySQL InnoDB: Useful Info From the Semaphores Section](https://www.percona.com/blog/2019/12/20/contention-in-mysql-innodb-useful-info-from-the-semaphores-section/) on the Percona website
 
 The Adaptive Hash Index isn't a viable option for Aurora reader nodes\. In some cases, performance might be poor on a reader node when `synch/sxlock/innodb/btr_search_latch` and `io/table/sql/handler` are dominant\. If so, consider redirecting the workload temporarily to the writer note and turning on the Adaptive Hash Index\.
-
-### Check the top hosts and top users<a name="ams-waits.waitio.actions.pi"></a>
-
-Use Performance Insights to check the top hosts and top users\. For more information, see [Analyzing metrics with the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.md)\.
-
-### Query the performance\_schema tables<a name="ams-waits.waitio.actions.performance-schema"></a>
-
-To get an accurate count of the current and total connections, query the `performance_schema` tables\. With this technique, you identify the source user or host that is responsible for creating a high number of connections\. For example, query the `performance_schema` tables as follows\.
-
-```
-SELECT * FROM performance_schema.accounts;
-SELECT * FROM performance_schema.users;
-SELECT * FROM performance_schema.hosts;
-```
-
-### Check the thread states of your queries<a name="ams-waits.waitio.actions.thread-states"></a>
-
-If your performance issue is ongoing, check the thread states of your queries\. In the `mysql` client, issue the following command\.
-
-```
-show processlist;
-```
-
-### Audit your requests and queries<a name="ams-waits.waitio.actions.auditing"></a>
-
-To check the nature of the requests and queries from user accounts, use AuroraAurora MySQL Advanced Auditing\. To learn how to turn on auditing, see [Using Advanced Auditing with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Auditing.md)\.
-
-### Pool your database connections<a name="ams-waits.waitio.actions.pooling"></a>
-
-Consider using Amazon RDS Proxy for connection management\. By using RDS Proxy, you can allow your applications to pool and share database connections to improve their ability to scale\. RDS Proxy makes applications more resilient to database failures by automatically connecting to a standby DB instance while preserving application connections\. For more information, see [Using Amazon RDS Proxy](rds-proxy.md)\.

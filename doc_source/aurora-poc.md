@@ -16,7 +16,7 @@
 
  When you evaluate Aurora as part of a proof of concept, you choose what measurements to make and how to evaluate the success of the exercise\. 
 
- You must ensure that all of the functionality of your application is compatible with Aurora\. Because Aurora is wire\-compatible with MySQL 5\.6 and MySQL 5\.7 and also PostgreSQL 9\.6 and PostgreSQL 10\.4, most applications developed for those engines are also compatible with Aurora\. However, you must still validate compatibility on a per\-application basis\. 
+ You must ensure that all of the functionality of your application is compatible with Aurora\. Because Aurora major versions are wire\-compatible with corresponding major versions of MySQL and PostgreSQL, most applications developed for those engines are also compatible with Aurora\. However, you must still validate compatibility on a per\-application basis\. 
 
  For example, some of the configuration choices that you make when you set up an Aurora cluster influence whether you can or should use particular database features\. You might start with the most general\-purpose kind of Aurora cluster, known as *provisioned*\. You might then decide if a specialized configuration such as serverless or parallel query offers benefits for your workload\. 
 
@@ -86,7 +86,7 @@
 
  Where practical, start with a cluster using the following settings\. Skip this step only if you have certain specific use cases in mind\. For example, you might skip this step if your use case requires a specialized kind of Aurora cluster\. Or you might skip it if you need a particular combination of database engine and version\. 
 +  Amazon Aurora\. 
-+  MySQL 5\.6 compatibility\. This combination of database engine and version has the widest compatibility with other Aurora features\.
++  MySQL 5\.7 compatibility\. This combination of database engine and version has wide compatibility with other Aurora features and substantial customer usage for production applications\.
 +  Turn off **Easy create**\. For the proof of concept, we recommend that you be aware of all the settings you choose so that you can create identical or slightly different clusters later\.
 +  Regional\. The **Global** setting is for specific high availability scenarios\. You can try it out later after your initial functional and performance experiments\. 
 +  One writer, multiple readers\. This is the most widely used, general purpose kind of cluster\. This setting persists for the life of the cluster\. Thus, if you later do experiments with other kinds of clusters such as serverless or parallel query, you create other clusters and compare and contrast the results on each\.

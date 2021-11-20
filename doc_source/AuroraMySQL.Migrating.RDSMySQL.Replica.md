@@ -228,7 +228,7 @@ aws rds describe-db-instances ^
 
 After migration completes, you can promote the Aurora read replica to a stand\-alone DB cluster and direct your client applications to the endpoint for the Aurora read replica\. For more information on the Aurora endpoints, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\. Promotion should complete fairly quickly, and you can read from and write to the Aurora read replica during promotion\. However, you can't delete the primary MySQL DB instance or unlink the DB Instance and the Aurora read replica during this time\.
 
-Before you promote your Aurora read replica, stop any transactions from being written to the source MySQL DB instance, and then wait for the replica lag on the Aurora read replica to reach 0\. You can view the replica lag for an Aurora read replica by calling the `SHOW SLAVE STATUS` command on your Aurora read replica and reading the **Seconds behind master** value\. 
+Before you promote your Aurora read replica, stop any transactions from being written to the source MySQL DB instance, and then wait for the replica lag on the Aurora read replica to reach 0\. You can view the replica lag for an Aurora read replica by calling the `SHOW SLAVE STATUS` \(Aurora MySQL version 1 and 2\) or `SHOW REPLICA STATUS` \(Aurora MySQL version 3\) command on your Aurora read replica\. Check the **Seconds behind master** value\. 
 
 You can start writing to the Aurora read replica after write transactions to the primary have stopped and replica lag is 0\. If you write to the Aurora read replica before this and you modify tables that are also being modified on the MySQL primary, you risk breaking replication to Aurora\. If this happens, you must delete and recreate your Aurora read replica\.
 

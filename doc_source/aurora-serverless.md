@@ -45,6 +45,7 @@ Aurora Serverless v1 is designed for the following use cases:
 ## Limitations of Aurora Serverless v1<a name="aurora-serverless.limitations"></a>
 
 The following limitations apply to Aurora Serverless v1:
++  You can't use Aurora MySQL version 3 for Aurora Serverless v1 clusters\. Aurora MySQL version 3 works with Aurora Serverless v2, which is currently in preview\. 
 + Aurora Serverless v1 is available in certain AWS Regions and for specific Aurora MySQL and Aurora PostgreSQL versions only\. For more information, see [Aurora Serverless v1](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless)\. 
 + Aurora Serverless v1 doesn't support the following features:
   + Aurora global databases

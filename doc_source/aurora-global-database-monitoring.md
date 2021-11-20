@@ -58,7 +58,7 @@ Only Aurora PostgreSQL supports the `aurora_global_db_status` and `aurora_global
      A *log sequence number \(LSN\)* is a unique sequential number that identifies a record in the database transaction log\. LSNs are ordered such that a larger LSN represents a later transaction\.
    + **durability\_lag\_in\_msec** – The timestamp difference between the highest log sequence number written on a secondary DB cluster \(`highest_lsn_written`\) and the `highest_lsn_written` on the primary DB cluster\.
    + **rpo\_lag\_in\_msec** – The recovery point objective \(RPO\) lag\. This lag is the time difference between the most recent user transaction commit stored on a secondary DB cluster and the most recent user transaction commit stored on the primary DB cluster\.
-   + **last\_lag\_calculation\_time** – The timestamp when values were last calculated for `replication_lag_in_msec` and `rpo_lag_in_msec`\.
+   + **last\_lag\_calculation\_time** – The timestamp when values were last calculated for `durability_lag_in_msec` and `rpo_lag_in_msec`\.
    + **feedback\_epoch** – The epoch the secondary DB cluster uses when it generates hot standby information\.
 
      *Hot standby *is when a DB cluster can connect and query while the server is in recovery or standby mode\. Hot standby feedback is information about the DB cluster when it's in hot standby\. For more information, see [Hot standby](https://www.postgresql.org/docs/current/hot-standby.html) in the PostgreSQL documentation\.

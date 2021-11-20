@@ -415,10 +415,20 @@ If `REQUIRE SSL` is not included, the replication connection might silently fall
 
    The host name is the DNS name from the Aurora MySQL DB cluster endpoint\.
 
-1. Enable binary log replication by running the `mysql.rds_set_external_master` stored procedure\. This stored procedure has the following syntax\.
+1. Enable binary log replication by running the `mysql.rds_set_external_master` \(Aurora MySQL version 1 and 2\) or `mysql.rds_set_external_source` \(Aurora MySQL version 3 and higher\) stored procedure\. This stored procedure has the following syntax\.
 
    ```
    CALL mysql.rds_set_external_master (
+     host_name
+     , host_port
+     , replication_user_name
+     , replication_user_password
+     , mysql_binary_log_file_name
+     , mysql_binary_log_file_location
+     , ssl_encryption
+   );
+   
+   CALL mysql.rds_set_external_source (
      host_name
      , host_port
      , replication_user_name
@@ -446,6 +456,15 @@ If `REQUIRE SSL` is not included, the replication connection might silently fall
      'mysql-bin.000010',
      120,
      1);
+   
+   CALL mysql.rds_set_external_source(
+     'Externaldb.some.com',
+     3306,
+     'repl_user'@'mydomain.com',
+     'password',
+     'mysql-bin.000010',
+     120,
+     1);
    ```
 
    This stored procedure sets the parameters that the Aurora MySQL DB cluster uses for connecting to the external MySQL database and reading its binary log\. If the data is encrypted, it also downloads the SSL certificate authority certificate, client certificate, and client key to the local disk\. 
@@ -459,7 +478,11 @@ If `REQUIRE SSL` is not included, the replication connection might silently fall
 1. Monitor how far the Aurora MySQL DB cluster is behind the MySQL replication primary database\. To do so, connect to the Aurora MySQL DB cluster and run the following command\.
 
    ```
+   Aurora MySQL version 1 and 2:
    SHOW SLAVE STATUS;
+   
+   Aurora MySQL version 3:
+   SHOW REPLICA STATUS;
    ```
 
    In the command output, the `Seconds Behind Master` field shows how far the Aurora MySQL DB cluster is behind the MySQL primary\. When this value is `0` \(zero\), the Aurora MySQL DB cluster has caught up to the primary, and you can move on to the next step to stop replication\.

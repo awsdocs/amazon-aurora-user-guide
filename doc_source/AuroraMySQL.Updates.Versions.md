@@ -18,21 +18,22 @@
 mysql-major-version.mysql_aurora.aurora-mysql-version
 ```
 
- The `mysql-major-version-` portion is `5.6` or `5.7`\. This value represents the version of the client protocol and general level of MySQL feature support for the corresponding Aurora MySQL version\. 
+ The `mysql-major-version-` portion is `5.6`, `5.7`, or `8.0`\. This value represents the version of the client protocol and general level of MySQL feature support for the corresponding Aurora MySQL version\. 
 
- The `aurora-mysql-version` is a dotted value with three parts: the Aurora MySQL major version, the Aurora MySQL minor version, and the patch level\. The major version is `1` or `2`, representing Aurora MySQL compatible with MySQL 5\.6 or 5\.7 respectively\. The minor version represents the feature release within the 1\.x or 2\.x series\. The patch level begins at `0` for each minor version, and represents the set of subsequent bug fixes that apply to the minor version\. Occasionally, a new feature is incorporated into a minor version but not made visible immediately\. In these cases, the feature undergoes fine\-tuning and is made public in a later patch level\. 
+ The `aurora-mysql-version` is a dotted value with three parts: the Aurora MySQL major version, the Aurora MySQL minor version, and the patch level\. The major version is `1`, `2`, or `3`\. Those values represent Aurora MySQL compatible with MySQL 5\.6, 5\.7, or 8\.0 respectively\. The minor version represents the feature release within the 1\.x, 2\.x, or 3\.x series\. The patch level begins at `0` for each minor version, and represents the set of subsequent bug fixes that apply to the minor version\. Occasionally, a new feature is incorporated into a minor version but not made visible immediately\. In these cases, the feature undergoes fine\-tuning and is made public in a later patch level\. 
 
- All 1\.x Aurora MySQL engine versions are wire\-compatible with Community MySQL 5\.6\.10a\. All 2\.x Aurora MySQL engine versions are wire\-compatible with Community MySQL 5\.7\.12\. 
+ All 1\.x Aurora MySQL engine versions are wire\-compatible with Community MySQL 5\.6\.10a\. All 2\.x Aurora MySQL engine versions are wire\-compatible with Community MySQL 5\.7\.12\. All 3\.x Aurora MySQL engine versions are wire\-compatible with MySQL 8\.0\.23\. 
 
- For example, the engine versions for Aurora MySQL 2\.03\.2 and 1\.19\.0 are the following\. 
+ For example, the engine versions for Aurora MySQL 3\.01\.0, 2\.03\.2, and 1\.19\.0 are the following\. 
 
 ```
+8.0.mysql_aurora.3.01.0
 5.7.mysql_aurora.2.03.2
 5.6.mysql_aurora.1.19.0
 ```
 
 **Note**  
- There isn't a one\-to\-one correspondence between community MySQL 5\.6 or 5\.7 versions and the Aurora MySQL 1\.x and 2\.x versions\. To check which bug fixes and new features are in a particular Aurora MySQL release, see [Database engine updates for Amazon Aurora MySQL version 2](AuroraMySQL.Updates.20Updates.md) and [Database engine updates for Amazon Aurora MySQL version 1](AuroraMySQL.Updates.11Updates.md)\. For a chronological list of new features and releases, see [Document history](WhatsNew.md)\. To check the minimum version required for a security\-related fix, see [Security vulnerabilities fixed in Amazon Aurora MySQL](AuroraMySQL.CVE_list.md)\. 
+ There isn't a one\-to\-one correspondence between community MySQL versions and the Aurora MySQL 1\.x and 2\.x versions\. For Aurora MySQL version 3, there is a more direct mapping\. To check which bug fixes and new features are in a particular Aurora MySQL release, see [Database engine updates for Amazon Aurora MySQL version 3](AuroraMySQL.Updates.30Updates.md), [Database engine updates for Amazon Aurora MySQL version 2](AuroraMySQL.Updates.20Updates.md) and [Database engine updates for Amazon Aurora MySQL version 1](AuroraMySQL.Updates.11Updates.md)\. For a chronological list of new features and releases, see [Document history](WhatsNew.md)\. To check the minimum version required for a security\-related fix, see [Security vulnerabilities fixed in Amazon Aurora MySQL](AuroraMySQL.CVE_list.md)\. 
 
  For Aurora MySQL 2\.x, all versions 2\.03\.1 and lower are represented by the engine version `5.7.12`\. In the same way, all versions before 1\.19\.0 are represented by the engine version `5.6.10a`\. These older version designations don't include the `5.7.mysql_aurora` prefix\. When you specified `5.7.12` or `5.6.10a` while creating or modifying a cluster, you got the highest version before the 2\.03\.2 and 1\.19\.0 versions where the version numbering changed\. To determine the exact version number for those older versions, you used the SQL technique explained in [Checking Aurora MySQL versions using SQL](#AuroraMySQL.Updates.DBVersions)\. 
 

@@ -229,7 +229,28 @@ PROMPT> aws rds failover-db-cluster --db-cluster-identifier your_cluster_id
 
  After you create the required IAM policies and roles and associating the role to the Aurora MySQL DB cluster, you authorize individual database users to invoke the Aurora machine learning stored functions for SageMaker and built\-in functions for Amazon Comprehend\. 
 
- The database user invoking a native function must be granted the `INVOKE SAGEMAKER` or `INVOKE COMPREHEND` privilege\. To grant this privilege to a user, connect to the DB instance as the master user, and run the following statements\. Substitute the appropriate details for the database user\. 
+ The database user invoking a native function must be granted a corresponding role or privilege\. For Aurora MySQL version 3, you grant the `AWS_SAGEMAKER_ACCESS` role or the `AWS_COMPREHEND_ACCESS` role\. For Aurora MySQL version 1 or 2, you grant the `INVOKE SAGEMAKER` or `INVOKE COMPREHEND` privilege\. To grant this privilege to a user, connect to the DB instance as the administrative user, and run the following statements\. Substitute the appropriate details for the database user\. 
+
+ Use the following statements for Aurora MySQL version 3: 
+
+```
+GRANT AWS_SAGEMAKER_ACCESS TO user@domain-or-ip-address
+GRANT AWS_COMPREHEND_ACCESS TO user@domain-or-ip-address
+```
+
+**Tip**  
+ When you use the role technique in Aurora MySQL version 3, you also activate the role by using the `SET ROLE role_name` or `SET ROLE ALL` statement\. If you aren't familiar with the MySQL 8\.0 role system, you can learn more in [Role\-based privilege model](AuroraMySQL.MySQL80.md#AuroraMySQL.privilege-model)\. You can also find more details in [Using Roles](https://dev.mysql.com/doc/refman/8.0/en/roles.html) in the *MySQL Reference Manual*\. 
+
+ Use the following statements for Aurora MySQL version 1 or 2: 
+
+ Use the following statements for Aurora MySQL version 3: 
+
+```
+GRANT AWS_SAGEMAKER_ACCESS TO user@domain-or-ip-address
+GRANT AWS_COMPREHEND_ACCESS TO user@domain-or-ip-address
+```
+
+ Use the following statements for Aurora MySQL version 1 or 2: 
 
 ```
 GRANT INVOKE SAGEMAKER ON *.* TO user@domain-or-ip-address

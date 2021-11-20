@@ -19,7 +19,7 @@ This topic includes information on best practices and options for using or migra
   + [Using Amazon Aurora for Disaster Recovery with your MySQL databases](#AuroraMySQL.BestPractices.DisasterRecovery)
   + [Migrating from MySQL to Amazon Aurora MySQL with reduced downtime](#AuroraMySQL.BestPractices.Migrating)
 + [Best practices for limiting certain MySQL features with Aurora MySQL](#AuroraMySQL.BestPractices.AvoidFeatures)
-  + [Avoiding multi\-threaded replication in Amazon Aurora MySQL](#AuroraMySQL.BestPractices.MTReplica)
+  + [Using multithreaded replication in Aurora MySQL version 3](#AuroraMySQL.BestPractices.MTReplica)
   + [Avoiding XA transactions with Amazon Aurora MySQL](#AuroraMySQL.BestPractices.XA)
   + [Keeping foreign keys turned on during DML statements](#Aurora.BestPractices.ForeignKeys)
 
@@ -196,10 +196,14 @@ Single\-table updates or deletes are supported\.
 
 #### Enabling hash joins<a name="Aurora.BestPractices.HashJoin.Enabling"></a>
 
-To enable hash joins, set the MySQL server variable `optimizer_switch` to `hash_join=on`\. The `optimizer_switch` parameter is set to `hash_join=off` by default\. The following example illustrates how to enable hash joins\.
+To enable hash joins, set the MySQL server variable `optimizer_switch` to `hash_join=on` \(Aurora MySQL version 1 and 2\) or ` block_nested_loop=on` \(Aurora MySQL version 3\)\. Hash joins are turned on by default in Aurora MySQL version 3\. This optimization is turned off by default in Aurora MySQL version 1 and 2\. The following example illustrates how to enable hash joins\. You can issue the statement `select @@optimizer_switch` first to see what other settings are present in the `SET` parameter string\. Updating one setting in the `optimizer_switch` parameter doesn't erase or modify the other settings\.
 
 ```
+For Aurora MySQL version 1 and 2:
 mysql> SET optimizer_switch='hash_join=on';
+
+For Aurora MySQL version 3:
+mysql> SET optimizer_switch='block_nested_loop=on';
 ```
 
 With this setting, the optimizer chooses to use a hash join based on cost, query characteristics, and resource availability\. If the cost estimation is incorrect, you can force the optimizer to choose a hash join\. You do so by setting `hash_join_cost_based`, a MySQL server variable, to `off`\. The following example illustrates how to force the optimizer to choose a hash join\.
@@ -209,8 +213,9 @@ mysql> SET optimizer_switch='hash_join_cost_based=off';
 ```
 
 **Note**  
- Prior to Aurora MySQL version 1\.22, the way to enable hash joins in Aurora MySQL version 1 is by enabling the `aurora_lab_mode` session\-level setting\. In those Aurora MySQL versions, the `optimizer_switch` setting for hash joins is enabled by default and you only need to enable `aurora_lab_mode`\.   
- For Aurora MySQL version 2, hash join support is available in version 2\.06 and higher\. In Aurora MySQL version 2, the hash join feature is always controlled by the `optimizer_switch` value\. 
+ For Aurora MySQL version 3, hash join support is available in all minor versions and is turned on by default\.   
+ For Aurora MySQL version 2, hash join support is available in version 2\.06 and higher\. In Aurora MySQL version 2, the hash join feature is always controlled by the `optimizer_switch` value\.   
+ Prior to Aurora MySQL version 1\.22, the way to enable hash joins in Aurora MySQL version 1 is by enabling the `aurora_lab_mode` session\-level setting\. In those Aurora MySQL versions, the `optimizer_switch` setting for hash joins is enabled by default and you only need to enable `aurora_lab_mode`\. 
 
 #### Optimizing queries for hash joins<a name="Aurora.BestPractices.HashJoin.Optimizing"></a>
 
@@ -243,7 +248,7 @@ For more information about the extended `EXPLAIN` output format, see [Extended E
 
 ### Using Amazon Aurora to scale reads for your MySQL database<a name="AuroraMySQL.BestPractices.ReadScaling"></a>
 
-You can use Amazon Aurora with your MySQL DB instance to take advantage of the read scaling capabilities of Amazon Aurora and expand the read workload for your MySQL DB instance\. To use Aurora to read scale your MySQL DB instance, create an Aurora MySQL DB cluster and make it a read replica of your MySQL DB instance\. Then connect to the Aurora MySQL cluster to process the read queries\. The source database can be an RDS for MySQL DB instance, or a MySQL database running external to Amazon RDS\. For more information, see [Using Amazon Aurora to scale reads for your MySQL database](AuroraMySQL.Replication.MySQL.md#AuroraMySQL.Replication.ReadScaling)\.
+You can use Amazon Aurora with your MySQL DB instance to take advantage of the read scaling capabilities of Amazon Aurora and expand the read workload for your MySQL DB instance\. To use Aurora to read scale your MySQL DB instance, create an Aurora MySQL DB cluster and make it a read replica of your MySQL DB instance\. Then connect to the Aurora MySQL cluster to process the read queries\. The source database can be an RDS for MySQL DB instance, or a MySQL database running external to Amazon RDS\. For more information, see [Using Amazon Aurora to scale reads for your MySQL database](AuroraMySQL.Replication.md#AuroraMySQL.Replication.ReadScaling)\.
 
 ## Best practices for Aurora MySQL high availability<a name="AuroraMySQL.BestPractices.HA"></a>
 
@@ -273,15 +278,21 @@ The procedure lists steps to transfer a copy of your database data to an Amazon 
 The following features are available in Aurora MySQL for MySQL compatibility\. However, they have performance, scalability, or stability issues in the Aurora environment\. Thus, we recommend that you limit your use of these features\. For example, we recommend that you don't use certain features for production Aurora deployments\.
 
 **Topics**
-+ [Avoiding multi\-threaded replication in Amazon Aurora MySQL](#AuroraMySQL.BestPractices.MTReplica)
++ [Using multithreaded replication in Aurora MySQL version 3](#AuroraMySQL.BestPractices.MTReplica)
 + [Avoiding XA transactions with Amazon Aurora MySQL](#AuroraMySQL.BestPractices.XA)
 + [Keeping foreign keys turned on during DML statements](#Aurora.BestPractices.ForeignKeys)
 
-### Avoiding multi\-threaded replication in Amazon Aurora MySQL<a name="AuroraMySQL.BestPractices.MTReplica"></a>
+### Using multithreaded replication in Aurora MySQL version 3<a name="AuroraMySQL.BestPractices.MTReplica"></a>
 
-By default, Aurora uses single\-threaded replication when an Aurora MySQL DB cluster is used as a read replica for binary log replication\. While Amazon Aurora doesn't prohibit multithreaded replication, Aurora MySQL has inherited several issues regarding multithreaded replication from MySQL\. We recommend that you do not use multithreaded replication in production\. If you do use multithreaded replication, we recommend that you test any use thoroughly\.
+By default, Aurora uses single\-threaded replication when an Aurora MySQL DB cluster is used as a read replica for binary log replication\. 
 
-For more information about using replication in Amazon Aurora, see [Replication with Amazon Aurora](Aurora.Replication.md)\.
+ Although Aurora MySQL doesn't prohibit multithreaded replication, this feature is only supported in Aurora MySQL version 3 and higher\. 
+
+ Aurora MySQL version 1 and 2 inherited several issues regarding multithreaded replication from MySQL\. For those versions, we recommend that you don't use multithreaded replication in production\. 
+
+ If you do use multithreaded replication, we recommend that you test any use thoroughly\.
+
+For more information about using replication in Amazon Aurora, see [Replication with Amazon Aurora](Aurora.Replication.md)\. For information about multithreaded replication in Aurora MySQL version 3, see [Multithreaded binary log replication \(Aurora MySQL version 3 and higher\)](AuroraMySQL.Replication.md#binlog-optimization-multithreading)\. 
 
 ### Avoiding XA transactions with Amazon Aurora MySQL<a name="AuroraMySQL.BestPractices.XA"></a>
 

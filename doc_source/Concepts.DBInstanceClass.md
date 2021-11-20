@@ -27,20 +27,25 @@ The following are the burstable performance DB instance classes available:
 
 For DB instance class hardware specifications, see [Hardware specifications for DB instance classes for Aurora](#Concepts.DBInstanceClass.Summary)\.
 
-## Supported DB engines for DB instance classes<a name="Concepts.DBInstanceClass.SupportAurora"></a>
+## Supported DB engines for DB instance classes<a name="Concepts.DBInstanceClass.SupportAurora"></a><a name="instance_classes"></a>
 
 The following are DB engine considerations for DB instance classes:
 + **Aurora support for db\.x2g**
-  + Aurora MySQL versions 2\.09\.2 and higher and 2\.10\.0 and higher support the db\.x2g instance classes\.
+  + Aurora MySQL versions 2\.09\.2 and higher, 2\.10\.0 and higher, and 3\.01\.0 and higher support the db\.x2g instance classes\.
   +  Aurora PostgreSQL versions 11\.9 and higher, 12\.4 and higher, and 13\.3 and higher support the db\.x2g instance classes\.
 + **Aurora support for db\.r6g**
   + Aurora MySQL versions 2\.09\.2 and higher and 2\.10\.0 and higher support the db\.r6g instance classes\.
   +  Aurora PostgreSQL versions 13\.3, 12\.4 and higher and versions 11\.9 and higher support the db\.r6g instance classes\.
 + **Aurora support for db\.t4g**
-  + Aurora MySQL versions 2\.09\.2 and higher and 2\.10\.0 and higher support the db\.t4g instance classes, specifically db\.t4g\.large and db\.t4g\.medium\.
+  + Aurora MySQL versions 2\.09\.2 and higher, 2\.10\.0 and higher, and 3\.01\.0 and higher support the db\.t4g instance classes, specifically db\.t4g\.large and db\.t4g\.medium\.
   +  Aurora PostgreSQL versions 11\.9 and higher, 12\.4 and higher, and 13\.3 and higher support the db\.t4g instance classes, specifically db\.t4g\.large and db\.t4g\.medium\.
 + **Aurora support for db\.t3** 
   + Aurora MySQL supports the db\.t3\.medium and db\.t3\.small instance classes for version 1\.15 and higher, and all 2\.x versions\. Aurora MySQL supports the db\.t3\.large class in version 2\.10 and higher\. 
+  +  Aurora MySQL version 3 includes some changes to instance class support\. 
+    +  With Aurora MySQL version 3, you can't use `db.r3`, `db.r4`, or `db.t2` instance classes\. 
+    +  With Aurora MySQL version 3, you can't use the `db.t3.small` instance class\. 
+
+       The smallest instance classes that you can use with version 3 are `t3.medium` and `t4g.medium`\. 
   + For Aurora MySQL db\.r5, db\.r4, and db\.t3 DB instance classes, no instances in the cluster can have pending instance\-level system updates\. To see pending system updates, use the following AWS Command Line Interface \(AWS CLI\) command\.
 
     ```
@@ -56,59 +61,59 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | Instance class | Aurora MySQL | Aurora PostgreSQL | 
 | --- | --- | --- | 
 | db\.x2g – memory optimized instance classes powered by AWS Graviton2 processors | 
-| db\.x2g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.x2g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.x2g\.8xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.x2g\.4xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.x2g\.2xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.x2g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.x2g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.x2g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.x2g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.x2g\.8xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.x2g\.4xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.x2g\.2xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.x2g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.x2g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
 | db\.r6g – Memory\-optimized instance classes powered by AWS Graviton2 processors | 
-| db\.r6g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.8xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.4xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.2xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.8xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.4xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.2xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
 | db\.r5 – latest generation memory optimized instance classes | 
-| db\.r5\.24xlarge | 1\.22 and higher, 2\.06 and higher | Yes | 
-| db\.r5\.16xlarge | 1\.22 and higher, 2\.06 and higher | Yes | 
-| db\.r5\.12xlarge | 1\.14\.4 and higher | Yes | 
-| db\.r5\.8xlarge | 1\.22 and higher, 2\.06 and higher | Yes | 
-| db\.r5\.4xlarge | 1\.14\.4 and higher | Yes | 
-| db\.r5\.2xlarge | 1\.14\.4 and higher | Yes | 
-| db\.r5\.xlarge | 1\.14\.4 and higher | Yes | 
-| db\.r5\.large | 1\.14\.4 and higher | Yes | 
+| db\.r5\.24xlarge | 1\.22 and higher, 2\.06 and higher, 3\.01\.0 and higher | Yes | 
+| db\.r5\.16xlarge | 1\.22 and higher, 2\.06 and higher, 3\.01\.0 and higher | Yes | 
+| db\.r5\.12xlarge | 1\.14\.4 and higher, 3\.01\.0 and higher | Yes | 
+| db\.r5\.8xlarge | 1\.22 and higher, 2\.06 and higher, 3\.01\.0 and higher | Yes | 
+| db\.r5\.4xlarge | 1\.14\.4 and higher, 3\.01\.0 and higher | Yes | 
+| db\.r5\.2xlarge | 1\.14\.4 and higher, 3\.01\.0 and higher | Yes | 
+| db\.r5\.xlarge | 1\.14\.4 and higher, 3\.01\.0 and higher | Yes | 
+| db\.r5\.large | 1\.14\.4 and higher, 3\.01\.0 and higher | Yes | 
 | db\.r4 – memory optimized instance classes | 
-| db\.r4\.16xlarge | 1\.14\.4 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
-| db\.r4\.8xlarge | 1\.14\.4 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
-| db\.r4\.4xlarge | 1\.14\.4 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
-| db\.r4\.2xlarge | 1\.14\.4 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
-| db\.r4\.xlarge | 1\.14\.4 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
-| db\.r4\.large | 1\.14\.4 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
+| db\.r4\.16xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
+| db\.r4\.8xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
+| db\.r4\.4xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
+| db\.r4\.2xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
+| db\.r4\.xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
+| db\.r4\.large | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | 12\.4 and higher, 11\.4 and higher, 10\.4 and higher, and 9\.6\.3 and higher | 
 | db\.r3 – memory optimized instance classes | 
-| db\.r3\.8xlarge | Yes | No | 
-| db\.r3\.4xlarge | Yes | No | 
-| db\.r3\.2xlarge | Yes | No | 
-| db\.r3\.xlarge | Yes | No | 
-| db\.r3\.large | Yes | No | 
+| db\.r3\.8xlarge | All 1\.x and 2\.x versions; not supported in 3\.01\.0 and higher | No | 
+| db\.r3\.4xlarge | All 1\.x and 2\.x versions; not supported in 3\.01\.0 and higher | No | 
+| db\.r3\.2xlarge | All 1\.x and 2\.x versions; not supported in 3\.01\.0 and higher | No | 
+| db\.r3\.xlarge | All 1\.x and 2\.x versions; not supported in 3\.01\.0 and higher | No | 
+| db\.r3\.large | All 1\.x and 2\.x versions; not supported in 3\.01\.0 and higher | No | 
 | db\.t4g – newest generation burstable performance instance classes powered by AWS Graviton2 processors | 
 | db\.t4g\.2xlarge | No | No | 
 | db\.t4g\.xlarge | No | No | 
-| db\.t4g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.t4g\.medium | 2\.09\.2 and higher, 2\.10\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.t4g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.t4g\.medium | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
 | db\.t4g\.small | No | No | 
 | db\.t3 – Next generation burstable performance instance classes | 
 | db\.t3\.2xlarge | No | No | 
 | db\.t3\.xlarge | No | No | 
-| db\.t3\.large | 2\.10 and higher | 13\.3, 11\.6 and higher, 10\.11 and higher | 
-| db\.t3\.medium | 1\.14\.4 and higher | 13\.3, 10\.7 and higher | 
-| db\.t3\.small | 1\.14\.4 and higher | No | 
+| db\.t3\.large | 2\.10 and higher, 3\.01\.0 and higher | 13\.3, 11\.6 and higher, 10\.11 and higher | 
+| db\.t3\.medium | 1\.14\.4 and higher, 3\.01\.0 and higher | 13\.3, 10\.7 and higher | 
+| db\.t3\.small | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | No | 
 | db\.t3\.micro | No | No | 
 | db\.t2 – burstable performance instance classes | 
-| db\.t2\.medium | Yes | No | 
-| db\.t2\.small | Yes | No | 
+| db\.t2\.medium | All 1\.x and 2\.x versions; not supported in 3\.01\.0 and higher | No | 
+| db\.t2\.small | All 1\.x and 2\.x versions; not supported in 3\.01\.0 and higher | No | 
 
 ## Determining DB instance class support in AWS Regions<a name="Concepts.DBInstanceClass.RegionSupportAurora"></a>
 
@@ -149,7 +154,7 @@ To use the AWS CLI examples in this section, make sure that you enter valid valu
 | Engine name | Engine value in CLI commands | More information about versions | 
 | --- | --- | --- | 
 |  MySQL 5\.6\-compatible Aurora  |  `aurora`  |  [Database engine updates for Amazon Aurora MySQL version 1](AuroraMySQL.Updates.11Updates.md)  | 
-|  MySQL 5\.7\-compatible Aurora  |  `aurora-mysql`  |  [Database engine updates for Amazon Aurora MySQL version 2](AuroraMySQL.Updates.20Updates.md)  | 
+|  MySQL 5\.7\-compatible and 8\.0\-compatible Aurora  |  `aurora-mysql`  |  [Database engine updates for Amazon Aurora MySQL version 2](AuroraMySQL.Updates.20Updates.md), [Database engine updates for Amazon Aurora MySQL version 3](AuroraMySQL.Updates.30Updates.md)  | 
 |  Aurora PostgreSQL  |  `aurora-postgresql`  |  [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)  | 
 
 For information about AWS Region names, see [AWS RegionsAvailability Zones](Concepts.RegionsAndAvailabilityZones.md#Concepts.RegionsAndAvailabilityZones.Regions)\.

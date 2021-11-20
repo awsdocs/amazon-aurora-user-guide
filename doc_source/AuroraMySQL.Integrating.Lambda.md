@@ -1,19 +1,20 @@
 # Invoking a Lambda function from an Amazon Aurora MySQL DB cluster<a name="AuroraMySQL.Integrating.Lambda"></a><a name="lambda"></a>
 
-You can invoke an AWS Lambda function from an Amazon Aurora MySQL\-Compatible Edition DB cluster with a native function or a stored procedure\. Before invoking a Lambda function from an Aurora MySQL, the Aurora DB cluster must have access to Lambda\.
+You can invoke an AWS Lambda function from an Amazon Aurora MySQL\-Compatible Edition DB cluster with the native function `lambda_sync` or `lambda_async`\. Before invoking a Lambda function from an Aurora MySQL, the Aurora DB cluster must have access to Lambda\. For details about granting access to Aurora MySQL, see [Giving Aurora access to Lambda](#AuroraMySQL.Integrating.LambdaAccess)\. For information about the `lambda_sync` and `lambda_async` stored functions, see [Invoking a Lambda function with an Aurora MySQL native function](#AuroraMySQL.Integrating.NativeLambda)\. 
 
- In recent Aurora MySQL versions, using a stored procedure is deprecated\. We strongly recommend using an Aurora MySQL native function if you are using one of the following Aurora MySQL versions: 
+ You can also call an AWS Lambda function by using a stored procedure\. However, using a stored procedure is deprecated\. We strongly recommend using an Aurora MySQL native function if you are using one of the following Aurora MySQL versions: 
 +  Aurora MySQL version 1\.16 and later, for MySQL 5\.6\-compatible clusters\. 
 +  Aurora MySQL version 2\.06 and later, for MySQL 5\.7\-compatible clusters\. 
++  Aurora MySQL version 3\.01 and higher, for MySQL 8\.0\-compatible clusters\. The stored procedure is not available in Aurora MySQL version 3\. 
 
 **Topics**
 + [Giving Aurora access to Lambda](#AuroraMySQL.Integrating.LambdaAccess)
 + [Invoking a Lambda function with an Aurora MySQL native function](#AuroraMySQL.Integrating.NativeLambda)
-+ [Invoking a Lambda function with an Aurora MySQL stored procedure](#AuroraMySQL.Integrating.ProcLambda)
++ [Invoking a Lambda function with an Aurora MySQL stored procedure \(deprecated\)](#AuroraMySQL.Integrating.ProcLambda)
 
 ## Giving Aurora access to Lambda<a name="AuroraMySQL.Integrating.LambdaAccess"></a>
 
-Before you can invoke Lambda functions from an Aurora MySQL, you must first give your Aurora MySQL DB cluster permission to access Lambda\.
+Before you can invoke Lambda functions from an Aurora MySQL DB cluster, make sure to first give your cluster permission to access Lambda\.
 
 **To give Aurora MySQL access to Lambda**
 
@@ -38,7 +39,7 @@ Before you can invoke Lambda functions from an Aurora MySQL, you must first give
 ## Invoking a Lambda function with an Aurora MySQL native function<a name="AuroraMySQL.Integrating.NativeLambda"></a>
 
 **Note**  
-You can call the native functions `lambda_sync` and `lambda_async` when you use Aurora MySQL version 1\.16 and later, or Aurora MySQL 2\.06 and later\. For more information about Aurora MySQL versions, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.
+You can call the native functions `lambda_sync` and `lambda_async` when you use Aurora MySQL version 1\.16 and later, Aurora MySQL 2\.06 and later, or Aurora MySQL version 3\.01 and higher\. For more information about Aurora MySQL versions, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.
 
 You can invoke an AWS Lambda function from an Aurora MySQL DB cluster by calling the native functions `lambda_sync` and `lambda_async`\. This approach can be useful when you want to integrate your database running on Aurora MySQL with other AWS services\. For example, you might want to send a notification using Amazon Simple Notification Service \(Amazon SNS\) whenever a row is inserted into a specific table in your database\.
 
@@ -46,7 +47,22 @@ You can invoke an AWS Lambda function from an Aurora MySQL DB cluster by calling
 
 The `lambda_sync` and `lambda_async` functions are built\-in, native functions that invoke a Lambda function synchronously or asynchronously\. When you must know the result of the Lambda function before moving on to another action, use the synchronous function `lambda_sync`\. When you don't need to know the result of the Lambda function before moving on to another action, use the asynchronous function `lambda_async`\.
 
-The user invoking a native function must be granted the `INVOKE LAMBDA` privilege\. To grant this privilege to a user, connect to the DB instance as the master user, and run the following statement\.
+In Aurora MySQL version 3, the user invoking a native function must be granted the `AWS_LAMBDA_ACCESS` role\. To grant this role to a user, connect to the DB instance as the administrative user, and run the following statement\.
+
+```
+GRANT AWS_LAMBDA_ACCESS TO user@domain-or-ip-address
+```
+
+You can revoke this role by running the following statement\.
+
+```
+REVOKE AWS_LAMBDA_ACCESS FROM user@domain-or-ip-address
+```
+
+**Tip**  
+ When you use the role technique in Aurora MySQL version 3, you also activate the role by using the `SET ROLE role_name` or `SET ROLE ALL` statement\. If you aren't familiar with the MySQL 8\.0 role system, you can learn more in [Role\-based privilege model](AuroraMySQL.MySQL80.md#AuroraMySQL.privilege-model)\. You can also find more details in [Using Roles](https://dev.mysql.com/doc/refman/8.0/en/roles.html) in the *MySQL Reference Manual*\. 
+
+In Aurora MySQL version 1 and 2, the user invoking a native function must be granted the `INVOKE LAMBDA` privilege\. To grant this privilege to a user, connect to the DB instance as the administrative user, and run the following statement\.
 
 ```
 GRANT INVOKE LAMBDA ON *.* TO user@domain-or-ip-address
@@ -84,7 +100,7 @@ The Amazon Resource Name \(ARN\) of the Lambda function to invoke\.
 The payload for the invoked Lambda function, in JSON format\.
 
 **Note**  
-Aurora MySQL doesn't support JSON parsing\. JSON parsing isn't required when a Lambda function returns an atomic value, such as a number or a string\.
+Aurora MySQL version 3 supports the JSON parsing functions from MySQL 8\.0\. However, Aurora MySQL versions 1 and 2 don't include those functions\. JSON parsing isn't required when a Lambda function returns an atomic value, such as a number or a string\.
 
 #### Example for the lambda\_sync function<a name="AuroraMySQL.Integrating.NativeLambda.lambda_functions.Sync.Example"></a>
 
@@ -118,7 +134,7 @@ The Amazon Resource Name \(ARN\) of the Lambda function to invoke\.
 The payload for the invoked Lambda function, in JSON format\.
 
 **Note**  
-Aurora MySQL doesn't support JSON parsing\. JSON parsing isn't required when a Lambda function returns an atomic value, such as a number or a string\.
+Aurora MySQL version 3 supports the JSON parsing functions from MySQL 8\.0\. However, Aurora MySQL versions 1 and 2 don't include those functions\. JSON parsing isn't required when a Lambda function returns an atomic value, such as a number or a string\.
 
 #### Example for the lambda\_async function<a name="AuroraMySQL.Integrating.NativeLambda.lambda_functions.Async.Example"></a>
 
@@ -130,12 +146,7 @@ SELECT lambda_async(
     '{"operation": "ping"}');
 ```
 
-### Related topics<a name="AuroraMySQL.Integrating.NativeLambda.RelatedTopics"></a>
-+ [Integrating Aurora with other AWS services](Aurora.Integrating.md)
-+ [Managing an Amazon Aurora DB cluster](CHAP_Aurora.md)
-+ [https://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html)
-
-## Invoking a Lambda function with an Aurora MySQL stored procedure<a name="AuroraMySQL.Integrating.ProcLambda"></a>
+## Invoking a Lambda function with an Aurora MySQL stored procedure \(deprecated\)<a name="AuroraMySQL.Integrating.ProcLambda"></a>
 
 You can invoke an AWS Lambda function from an Aurora MySQL DB cluster by calling the `mysql.lambda_async` procedure\. This approach can be useful when you want to integrate your database running on Aurora MySQL with other AWS services\. For example, you might want to send a notification using Amazon Simple Notification Service \(Amazon SNS\) whenever a row is inserted into a specific table in your database\. 
 
@@ -143,9 +154,9 @@ You can invoke an AWS Lambda function from an Aurora MySQL DB cluster by calling
 
  Starting in Aurora MySQL version 1\.8 and Aurora MySQL version 2\.06, you can use the native function method instead of these stored procedures to invoke a Lambda function\. For more information about the native functions, see [Working with native functions to invoke a Lambda function](#AuroraMySQL.Integrating.NativeLambda.lambda_functions)\. 
 
- Starting with Amazon Aurora version 1\.16 and 2\.06, the stored procedure `mysql.lambda_async` is deprecated\. If you are using an Aurora version that's higher than 1\.16 or 2\.06, we strongly recommend that you work with native Lambda functions instead\. 
+ Starting with Amazon Aurora version 1\.16 and 2\.06, the stored procedure `mysql.lambda_async` is no longer supported\. If you are using an Aurora version that's higher than 1\.16 or 2\.06, we strongly recommend that you work with native Lambda functions instead\. In Aurora MySQL version 3, the stored procedure isn't available\. 
 
-### Working with the mysql\.lambda\_async procedure to invoke a Lambda function<a name="AuroraMySQL.Integrating.Lambda.mysql_lambda_async"></a>
+### Working with the mysql\.lambda\_async procedure to invoke a Lambda function \(deprecated\)<a name="AuroraMySQL.Integrating.Lambda.mysql_lambda_async"></a>
 
 The `mysql.lambda_async` procedure is a built\-in stored procedure that invokes a Lambda function asynchronously\. To use this procedure, your database user must have `EXECUTE` privilege on the `mysql.lambda_async` stored procedure\.
 
@@ -299,8 +310,3 @@ DELIMITER ;
 ```
 mysql> insert into Customer_Feedback (customer_name, customer_feedback) VALUES ('Sample Customer', 'Good job guys!');
 ```
-
-### Related topics<a name="AuroraMySQL.Integrating.Lambda.RelatedTopics"></a>
-+ [Integrating Aurora with other AWS services](Aurora.Integrating.md)
-+ [Managing an Amazon Aurora DB cluster](CHAP_Aurora.md)
-+ [https://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html)

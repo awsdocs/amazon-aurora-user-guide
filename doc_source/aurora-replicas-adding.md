@@ -46,7 +46,7 @@ For Linux, macOS, or Unix:
 
 ```
 aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a \
-    --db-cluster-identifier sample-cluster --engine aurora-mysql --db-instance-class db.r4.large \
+    --db-cluster-identifier sample-cluster --engine aurora-mysql --db-instance-class db.r5.large \
     --availability-zone us-west-2a
 ```
 
@@ -54,7 +54,7 @@ For Windows:
 
 ```
 aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a ^
-    --db-cluster-identifier sample-cluster --engine aurora-mysql --db-instance-class db.r4.large ^
+    --db-cluster-identifier sample-cluster --engine aurora-mysql --db-instance-class db.r5.large ^
     --availability-zone us-west-2a
 ```
 
@@ -64,7 +64,7 @@ For Linux, macOS, or Unix:
 
 ```
 aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a \
-    --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r4.large \
+    --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r5.large \
     --availability-zone us-west-2a
 ```
 
@@ -72,7 +72,7 @@ For Windows:
 
 ```
 aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a ^
-    --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r4.large ^
+    --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r5.large ^
     --availability-zone us-west-2a
 ```
 
@@ -82,7 +82,7 @@ For Linux, macOS, or Unix:
 
 ```
 aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a \
-    --db-cluster-identifier sample-cluster --engine aurora-postgresql --db-instance-class db.r4.large \
+    --db-cluster-identifier sample-cluster --engine aurora-postgresql --db-instance-class db.r5.large \
     --availability-zone us-west-2a
 ```
 
@@ -90,7 +90,7 @@ For Windows:
 
 ```
 aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a ^
-    --db-cluster-identifier sample-cluster --engine aurora-postgresql --db-instance-class db.r4.large ^
+    --db-cluster-identifier sample-cluster --engine aurora-postgresql --db-instance-class db.r5.large ^
     --availability-zone us-west-2a
 ```
 

@@ -203,7 +203,7 @@ After publishing Aurora PostgreSQL logs to CloudWatch Logs, you can analyze logs
    1. In the query editor, delete the query that is currently shown, enter the following, and then choose **Run query**\.
 
       ```
-      ##Autovaccum tuples statistics per 5 min
+      ##Autovacuum tuples statistics per 5 min
       fields @timestamp, @message
       | parse @message "tuples: " as @tuples_temp
       | parse @tuples_temp "* removed," as @tuples_removed

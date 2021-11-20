@@ -7,7 +7,7 @@
  For each source DB cluster, you can have up to five cross\-Region DB clusters that are read replicas\. 
 
 **Note**  
- As an alternative to cross\-Region read replicas, you can scale read operations with minimal lagtime by using an Aurora global database\. An Aurora global database has a primary Aurora DB cluster in one AWS Region and up to five secondary read\-only DB clusters in different Regions\. Each secondary DB cluster can include up to 16 \(rather than 15\) Aurora Replicas\. Replication from the primary DB cluster to all secondaries is handled by the Aurora storage layer rather than by the database engine, so lagtime for replicating changes is minimal—typically, less than 1 second\. Keeping the database engine out of the replication process means that the database engine is dedicated to processing workloads\. It also means that you don't need to configure or manage Aurora MySQL's binlog \(binary logging\) replication\. To learn more, see [Using Amazon Aurora global databases](aurora-global-database.md)\. 
+ As an alternative to cross\-Region read replicas, you can scale read operations with minimal lag time by using an Aurora global database\. An Aurora global database has a primary Aurora DB cluster in one AWS Region and up to five secondary read\-only DB clusters in different Regions\. Each secondary DB cluster can include up to 16 \(rather than 15\) Aurora Replicas\. Replication from the primary DB cluster to all secondaries is handled by the Aurora storage layer rather than by the database engine, so ragtime for replicating changes is minimal—typically, less than 1 second\. Keeping the database engine out of the replication process means that the database engine is dedicated to processing workloads\. It also means that you don't need to configure or manage Aurora MySQL's binlog \(binary logging\) replication\. To learn more, see [Using Amazon Aurora global databases](aurora-global-database.md)\. 
 
  When you create an Aurora MySQL DB cluster read replica in another AWS Region, you should be aware of the following: 
 +  Both your source DB cluster and your cross\-Region read replica DB cluster can have up to 15 Aurora Replicas, along with the primary instance for the DB cluster\. By using this functionality, you can scale read operations for both your source AWS Region and your replication target AWS Region\. 
@@ -29,11 +29,11 @@
 
 ## Before you begin<a name="AuroraMySQL.Replication.CrossRegion.Prerequisites"></a>
 
- Before you can create an Aurora MySQL DB cluster that is a cross\-Region read replica, you must enable binary logging on your source Aurora MySQL DB cluster\. Cross\-region replication for Aurora MySQL uses MySQL binary replication to replay changes on the cross\-Region read replica DB cluster\. 
+ Before you can create an Aurora MySQL DB cluster that is a cross\-Region read replica, you must turn on binary logging on your source Aurora MySQL DB cluster\. Cross\-region replication for Aurora MySQL uses MySQL binary replication to replay changes on the cross\-Region read replica DB cluster\. 
 
- To enable binary logging on an Aurora MySQL DB cluster, update the `binlog_format` parameter for your source DB cluster\. The `binlog_format` parameter is a cluster\-level parameter that is in the default cluster parameter group\. If your DB cluster uses the default DB cluster parameter group, create a new DB cluster parameter group to modify `binlog_format` settings\. We recommend that you set the `binlog_format` to `MIXED`\. However, you can also set `binlog_format` to `ROW` or `STATEMENT` if you need a specific binlog format\. Reboot your Aurora DB cluster for the change to take effect\. 
+ To turn on binary logging on an Aurora MySQL DB cluster, update the `binlog_format` parameter for your source DB cluster\. The `binlog_format` parameter is a cluster\-level parameter that is in the default cluster parameter group\. If your DB cluster uses the default DB cluster parameter group, create a new DB cluster parameter group to modify `binlog_format` settings\. We recommend that you set the `binlog_format` to `MIXED`\. However, you can also set `binlog_format` to `ROW` or `STATEMENT` if you need a specific binlog format\. Reboot your Aurora DB cluster for the change to take effect\. 
 
- For more information about using binary logging with Aurora MySQL, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. For more information about modifying Aurora MySQL configuration parameters, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithParamGroups.md#Aurora.Managing.ParameterGroups) and [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
+ For more information about using binary logging with Aurora MySQL, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.md#AuroraMySQL.Replication.MySQL)\. For more information about modifying Aurora MySQL configuration parameters, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithParamGroups.md#Aurora.Managing.ParameterGroups) and [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 ## Creating an Amazon Aurora MySQL DB cluster that is a cross\-Region read replica<a name="AuroraMySQL.Replication.CrossRegion.Creating"></a>
 
@@ -331,7 +331,7 @@ aws rds promote-read-replica-db-cluster ^
 
 ### Source cluster \[DB cluster ARN\] doesn't have binlogs enabled<a name="AuroraMySQL.Replication.CrossRegion.Troubleshooting.1"></a>
 
- To resolve this issue, enable binary logging on the source DB cluster\. For more information, see [Before you begin](#AuroraMySQL.Replication.CrossRegion.Prerequisites)\. 
+ To resolve this issue, turn on binary logging on the source DB cluster\. For more information, see [Before you begin](#AuroraMySQL.Replication.CrossRegion.Prerequisites)\. 
 
 ### Source cluster \[DB cluster ARN\] doesn't have cluster parameter group in sync on writer<a name="AuroraMySQL.Replication.CrossRegion.Troubleshooting.2"></a>
 

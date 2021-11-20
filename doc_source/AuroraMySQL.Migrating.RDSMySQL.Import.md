@@ -200,7 +200,7 @@ You can create an Aurora DB cluster from a DB snapshot of an RDS for MySQL DB in
 + `--db-cluster-identifier`
 
   The name of the DB cluster to create\.
-+ Either `--engine aurora-mysql` for a MySQL 5\.7–compatible DB cluster, or `--engine aurora` for a MySQL 5\.6–compatible DB cluster
++ Either `--engine aurora-mysql` for a MySQL 5\.7–compatible or 8\.0–compatible DB cluster, or `--engine aurora` for a MySQL 5\.6–compatible DB cluster
 + `--kms-key-id`
 
   The AWS KMS key to optionally encrypt the DB cluster with, depending on whether your DB snapshot is encrypted\.

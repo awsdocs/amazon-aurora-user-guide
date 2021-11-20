@@ -1,14 +1,17 @@
 # Security vulnerabilities fixed in Amazon Aurora MySQL<a name="AuroraMySQL.CVE_list"></a><a name="cve"></a>
 
- CVE \(Common Vulnerabilities and Exposures\) is a list of entries for publicly known cybersecurity vulnerabilities\. Each entry contains an identification number, a description, and at least one public reference\. 
+ Common Vulnerabilities and Exposures \(CVE\) is a list of entries for publicly known cybersecurity vulnerabilities\. Each entry contains an identification number, a description, and at least one public reference\. 
 
  You can find on this page a list of security vulnerabilities fixed in Aurora MySQL\. For general information about security for Aurora, see [Security in Amazon Aurora](UsingWithRDS.md)\. For additional security information for Aurora MySQL, see [Security with Amazon Aurora MySQL](AuroraMySQL.Security.md)\. 
 
  We recommend that you always upgrade to the latest Aurora release to be protected against known vulnerabilities\. You can use this page to verify whether a particular version of Aurora MySQL has a fix for a specific security vulnerability\. If your cluster doesn't have the security fix, you can see which Aurora MySQL version you should upgrade to for that fix\. 
 
- Any CVEs fixed in a specific Aurora MySQL version are also listed in the release notes for that version: 
-+  [Database engine updates for Amazon Aurora MySQL version 2](AuroraMySQL.Updates.20Updates.md) 
+ Any CVEs fixed in Aurora MySQL version 1 and 2 are also listed in the release notes for that version: 
 +  [Database engine updates for Amazon Aurora MySQL version 1](AuroraMySQL.Updates.11Updates.md) 
++  [Database engine updates for Amazon Aurora MySQL version 2](AuroraMySQL.Updates.20Updates.md) 
+
+**Note**  
+ The initial release of Aurora MySQL version 3 includes all CVEs fixed up to community MySQL 8\.0\.23\. For future CVEs that are fixed, look for them listed here and in the Aurora MySQL version 3 release notes\. 
 
 **CVEs and minimum fixed Aurora MySQL versions**
 + [CVE\-2021\-23841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23841): [2\.10\.0](AuroraMySQL.Updates.2100.md), [2\.09\.3](AuroraMySQL.Updates.2093.md), [1\.23\.3](AuroraMySQL.Updates.1233.md)

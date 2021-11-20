@@ -353,15 +353,17 @@ mysql> select count(*) from t1;
 
 |  Name  |  Scope  |  Type  |  Default value  |  Valid values  | 
 | --- | --- | --- | --- | --- | 
-|  aurora\_fwd\_master\_idle\_timeout  |  Global  |  unsigned integer  |  60  |  1–86,400  | 
-|  aurora\_fwd\_master\_max\_connections\_pct  |  Global  |  unsigned long integer  |  10  |  0–90  | 
+|  aurora\_fwd\_master\_idle\_timeout \(Aurora MySQL version 2\)  |  Global  |  unsigned integer  |  60  |  1–86,400  | 
+|  aurora\_fwd\_master\_max\_connections\_pct \(Aurora MySQL version 2\)  |  Global  |  unsigned long integer  |  10  |  0–90  | 
+|  aurora\_fwd\_writer\_idle\_timeout \(Aurora MySQL version 3\)  |  Global  |  unsigned integer  |  60  |  1–86,400  | 
+|  aurora\_fwd\_writer\_max\_connections\_pct \(Aurora MySQL version 3\)  |  Global  |  unsigned long integer  |  10  |  0–90  | 
 |  aurora\_replica\_read\_consistency  |  Session  |  Enum  |  ''  |  EVENTUAL, SESSION, GLOBAL  | 
 
 To control incoming write requests from secondary clusters, use these settings on the primary cluster: 
-+  `aurora_fwd_master_idle_timeout`: The number of seconds the primary cluster waits for activity on a connection that's forwarded from a secondary cluster before closing it\. If the session remains idle beyond this period, Aurora cancels the session\. 
-+  `aurora_fwd_master_max_connections_pct`: The upper limit on database connections that can be used on a writer DB instance to handle queries forwarded from readers\. It's expressed as a percentage of the `max_connections` setting for the writer DB instance in the primary cluster\. For example, if `max_connections` is 800 and `aurora_fwd_master_max_connections_pct` is 10, then the writer allows a maximum of 80 simultaneous forwarded sessions\. These connections come from the same connection pool managed by the `max_connections` setting\. 
++  `aurora_fwd_master_idle_timeout`, `aurora_fwd_writer_idle_timeout`: The number of seconds the primary cluster waits for activity on a connection that's forwarded from a secondary cluster before closing it\. If the session remains idle beyond this period, Aurora cancels the session\. 
++  `aurora_fwd_master_max_connections_pct`, `aurora_fwd_writer_max_connections_pct`: The upper limit on database connections that can be used on a writer DB instance to handle queries forwarded from readers\. It's expressed as a percentage of the `max_connections` setting for the writer DB instance in the primary cluster\. For example, if `max_connections` is 800 and `aurora_fwd_master_max_connections_pct` or `aurora_fwd_writer_max_connections_pct` is 10, then the writer allows a maximum of 80 simultaneous forwarded sessions\. These connections come from the same connection pool managed by the `max_connections` setting\. 
 
-   This setting applies only on the primary cluster, when one or more secondary clusters have write forwarding enabled\. If you decrease the value, existing connections aren't affected\. Aurora takes the new value of the setting into account when attempting to create a new connection from a secondary cluster\. The default value is 10, representing 10% of the `max_connections` value\. If you enable query forwarding on any of the secondary clusters, this setting must have a nonzero value for write operations from secondary clusters to succeed\. If the value is zero, the write operations receive the error code `ER_CON_COUNT_ERROR` with the message `Not enough connections on master to handle your request`\. 
+   This setting applies only on the primary cluster, when one or more secondary clusters have write forwarding enabled\. If you decrease the value, existing connections aren't affected\. Aurora takes the new value of the setting into account when attempting to create a new connection from a secondary cluster\. The default value is 10, representing 10% of the `max_connections` value\. If you enable query forwarding on any of the secondary clusters, this setting must have a nonzero value for write operations from secondary clusters to succeed\. If the value is zero, the write operations receive the error code `ER_CON_COUNT_ERROR` with the message `Not enough connections on writer to handle your request`\. 
 
 The `aurora_replica_read_consistency` parameter is a session\-level parameter that enables write forwarding\. You use it in each session\. You can specify `EVENTUAL`, `SESSION`, or `GLOBAL` for read consistency level\. To learn more about consistency levels, see [Isolation and consistency for write forwarding](#aurora-global-database-write-forwarding-isolation)\. The following rules apply to this parameter:
 +  This is a session\-level parameter\. The default value is '' \(empty\)\. 
@@ -377,13 +379,20 @@ The `aurora_replica_read_consistency` parameter is a session\-level parameter th
 
 | CloudWatch Metric\(Aurora MySQL status variable\) | Units and description | 
 | --- | --- | 
-|  `ForwardingMasterDMLLatency` \(–\)  | Milliseconds\. Average time to process each forwarded DML statement on the writer DB instance\. It doesn't include the time for the secondary cluster to forward the write request\. It also doesn't include the time to replicate changes back to the secondary cluster\.   | 
-|  `ForwardingMasterOpenSessions` \(`Aurora_fwd_master_open_sessions`\)  | Count\. Number of forwarded sessions on the writer DB instance\.  | 
-| `ForwardingMasterDMLThroughput` \(–\)   | Count, per second\. Number of forwarded DML statements processed each second by this writer DB instance\.  | 
-| – \(`Aurora_fwd_master_dml_stmt_duration`\) | Microseconds\. Total duration of DML statements forwarded to this writer DB instance\.  | 
-| –\(`Aurora_fwd_master_dml_stmt_count`\) | Count\. Total number of DML statements forwarded to this writer DB instance\. | 
-| – \(`Aurora_fwd_master_select_stmt_duration`\) | Microseconds\. Total duration of SELECT statements forwarded to this writer DB instance\.  | 
-| – \(`Aurora_fwd_master_select_stmt_count`\) | Count\. Total number of SELECT statements forwarded to this writer DB instance\.  | 
+|  `ForwardingMasterDMLLatency` \(–\)  | Milliseconds\. Average time to process each forwarded DML statement on the writer DB instance\. It doesn't include the time for the secondary cluster to forward the write request\. It also doesn't include the time to replicate changes back to the secondary cluster\. For Aurora MySQL version 2\.   | 
+|  `ForwardingMasterOpenSessions` \(`Aurora_fwd_master_open_sessions`\)  | Count\. Number of forwarded sessions on the writer DB instance\. For Aurora MySQL version 2\.  | 
+| `ForwardingMasterDMLThroughput` \(–\)   | Count, per second\. Number of forwarded DML statements processed each second by this writer DB instance\. For Aurora MySQL version 2\.  | 
+| – \(`Aurora_fwd_master_dml_stmt_duration`\) | Microseconds\. Total duration of DML statements forwarded to this writer DB instance\. For Aurora MySQL version 2\.  | 
+| –\(`Aurora_fwd_master_dml_stmt_count`\) | Count\. Total number of DML statements forwarded to this writer DB instance\. For Aurora MySQL version 2\. | 
+| – \(`Aurora_fwd_master_select_stmt_duration`\) | Microseconds\. Total duration of SELECT statements forwarded to this writer DB instance\. For Aurora MySQL version 2\.  | 
+| – \(`Aurora_fwd_master_select_stmt_count`\) | Count\. Total number of SELECT statements forwarded to this writer DB instance\. For Aurora MySQL version 2\.  | 
+|  `ForwardingWriterDMLLatency` \(–\)  | Milliseconds\. Average time to process each forwarded DML statement on the writer DB instance\. It doesn't include the time for the secondary cluster to forward the write request\. It also doesn't include the time to replicate changes back to the secondary cluster\. For Aurora MySQL version 3 and higher\.   | 
+|  `ForwardingWriterOpenSessions` \(`Aurora_fwd_writer_open_sessions`\)  | Count\. Number of forwarded sessions on the writer DB instance\. For Aurora MySQL version 3 and higher\.  | 
+| `ForwardingWriterDMLThroughput` \(–\)   | Count, per second\. Number of forwarded DML statements processed each second by this writer DB instance\. For Aurora MySQL version 3 and higher\.  | 
+| – \(`Aurora_fwd_writer_dml_stmt_duration`\) | Microseconds\. Total duration of DML statements forwarded to this writer DB instance\.  | 
+| –\(`Aurora_fwd_writer_dml_stmt_count`\) | Count\. Total number of DML statements forwarded to this writer DB instance\. For Aurora MySQL version 3 and higher\. | 
+| – \(`Aurora_fwd_writer_select_stmt_duration`\) | Microseconds\. Total duration of SELECT statements forwarded to this writer DB instance\. For Aurora MySQL version 3 and higher\.  | 
+| – \(`Aurora_fwd_writer_select_stmt_count`\) | Count\. Total number of SELECT statements forwarded to this writer DB instance\. For Aurora MySQL version 3 and higher\.  | 
 
  The following CloudWatch metrics apply to each secondary cluster\. These metrics are measured on each reader DB instance in a secondary cluster with write forwarding enabled\. 
 
@@ -403,4 +412,4 @@ The `aurora_replica_read_consistency` parameter is a session\-level parameter th
 | – \(`Aurora_fwd_replica_select_stmt_count` | Count\. Total number of SELECT statements forwarded from this reader DB instance\.  | 
 | – \(`Aurora_fwd_replica_read_wait_duration`  |  Microseconds\. Total duration of waits due to the read consistency setting on this reader DB instance\.  | 
 | – \(`Aurora_fwd_replica_read_wait_count`\)  | Count\. Total number of read\-after\-write waits on this reader DB instance\.  | 
-| – \(`Aurora_fwd_replica_errors_session_limit`\) | Count\. Number of sessions rejected by the primary cluster due to the error conditions master full or Too many forwarded statements in progress\.  | 
+| – \(`Aurora_fwd_replica_errors_session_limit`\) | Count\. Number of sessions rejected by the primary cluster due to the error conditions writer full or Too many forwarded statements in progress\.  | 

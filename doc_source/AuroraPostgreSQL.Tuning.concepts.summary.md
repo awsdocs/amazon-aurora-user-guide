@@ -10,9 +10,12 @@ The following table lists the wait events for Aurora PostgreSQL that most common
 |  [CPU](apg-waits.cpu.md)  |  This event occurs when a thread is active in CPU or is waiting for CPU\.  | 
 |  [IO:BufFileRead and IO:BufFileWrite](apg-waits.iobuffile.md)  |  These events occur when Aurora PostgreSQL creates temporary files\.  | 
 |  [IO:DataFileRead](apg-waits.iodatafileread.md)  |  This event occurs when a connection waits on a backend process to read a required page from storage because the page isn't available in shared memory\.   | 
+|  [IO:XactSync](apg-waits.xactsync.md)  |  This event occurs when the database is waiting for the Aurora storage subsystem to acknowledge the commit of a regular transaction, or the commit or rollback of a prepared transaction\.   | 
 |  [ipc:damrecordtxack](apg-waits.ipcdamrecordtxac.md)  |  This event occurs when Aurora PostgreSQL in a session using database activity streams generates an activity stream event, then waits for that event to become durable\.  | 
 |  [Lock:advisory](apg-waits.lockadvisory.md)  |  This event occurs when a PostgreSQL application uses a lock to coordinate activity across multiple sessions\.  | 
+|  [Lock:extend](apg-waits.lockextend.md) |  This event occurs when a backend process is waiting to lock a relation to extend it while another process has a lock on that relation for the same purpose\.  | 
 |  [Lock:Relation](apg-waits.lockrelation.md)  |  This event occurs when a query is waiting to acquire a lock on a table or view that's currently locked by another transaction\.  | 
+|  [Lock:transactionid](apg-waits.locktransactionid.md)  | This event occurs when a transaction is waiting for a row\-level lock\. | 
 |  [Lock:tuple](apg-waits.locktuple.md)  |  This event occurs when a backend process is waiting to acquire a lock on a tuple\.  | 
 |  [lwlock:buffer\_content \(BufferContent\)](apg-waits.lockbuffercontent.md)  |  This event occurs when a session is waiting to read or write a data page in memory while another session has that page locked for writing\.  | 
 |  [LWLock:buffer\_mapping](apg-waits.lwl-buffer-mapping.md)  |  This event occurs when a session is waiting to associate a data block with a buffer in the shared buffer pool\.  | 

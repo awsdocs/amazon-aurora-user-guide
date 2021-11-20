@@ -17,7 +17,8 @@ The size of your cluster volume is evaluated on an hourly basis to determine you
 
  Even though an Aurora cluster volume can scale up in size to many tebibytes, you are only charged for the space that you use in the volume\. The mechanism for determining billed storage space depends on the version of your Aurora cluster\. 
 +  When Aurora data is removed from the cluster volume, the overall billed space decreases by a comparable amount\. This dynamic resizing behavior happens when underlying database files are deleted or reorganized to require less space\. Thus, you can reduce storage charges by deleting tables, indexes, databases, and so on that you no longer need\. Dynamic resizing applies to certain Aurora versions\. The following are the Aurora versions where the cluster volume dynamically resizes as you delete data: 
-  +  Aurora MySQL version 2\.09 \(compatible with MySQL 5\.7\) and higher
+  +  Aurora MySQL 3 \(compatible with MySQL 8\.0\), all minor versions
+  +  Aurora MySQL 2\.09 \(compatible with MySQL 5\.7\) and higher
   +  Aurora MySQL version 1\.23 \(compatible with MySQL 5\.6\) and higher
   +  All Aurora PostgreSQL 13 versions
   +  Aurora PostgreSQL version 12\.4 and higher

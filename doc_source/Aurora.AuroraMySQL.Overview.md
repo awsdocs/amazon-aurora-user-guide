@@ -5,8 +5,8 @@ The following sections provide an overview of Amazon Aurora MySQL\.
 **Topics**
 + [Amazon Aurora MySQL performance enhancements](#Aurora.AuroraMySQL.Performance)
 + [Amazon Aurora MySQL and spatial data](#Aurora.AuroraMySQL.Spatial)
-+ [Comparison of Aurora MySQL 5\.6 and Aurora MySQL 5\.7](#Aurora.AuroraMySQL.CompareReleases)
-+ [Comparison of Aurora MySQL 5\.7 and MySQL 5\.7](#Aurora.AuroraMySQL.CompareMySQL57)
++ [Aurora MySQL version 3 compatible with MySQL 8\.0](AuroraMySQL.MySQL80.md)
++ [Aurora MySQL version 2 compatible with MySQL 5\.7](Aurora.AuroraMySQL.CompareMySQL57.md)
 
 ## Amazon Aurora MySQL performance enhancements<a name="Aurora.AuroraMySQL.Performance"></a>
 
@@ -39,10 +39,11 @@ You will get output similar to the following:
 
 ## Amazon Aurora MySQL and spatial data<a name="Aurora.AuroraMySQL.Spatial"></a>
 
- The following list summarizes the main Aurora MySQL spatial features and explains how they correspond to spatial features in MySQL\. 
-+  Aurora MySQL 1\.x supports the same [spatial data types](https://dev.mysql.com/doc/refman/5.6/en/spatial-types.html) and [spatial relation functions](https://dev.mysql.com/doc/refman/5.6/en/spatial-relation-functions-object-shapes.html) as MySQL 5\.6\. 
-+  Aurora MySQL 2\.x supports the same [spatial data types](https://dev.mysql.com/doc/refman/5.7/en/spatial-types.html) and [spatial relation functions](https://dev.mysql.com/doc/refman/5.7/en/spatial-relation-functions-object-shapes.html) as MySQL 5\.7\. 
-+  Aurora MySQL 1\.x and 2\.x both support spatial indexing on InnoDB tables\. Spatial indexing improves query performance on large datasets for queries on spatial data\. In MySQL, spatial indexing for InnoDB tables isn't available in MySQL 5\.6, but is available in MySQL 5\.7\. Both Aurora MySQL 1\.x and 2\.x use a different spatial indexing strategy than MySQL for high performance with spatial queries\. The Aurora spatial index implementation uses a space\-filling curve on a B\-tree, which is intended to provide higher performance for spatial range scans than an R\-tree\. 
+ The following list summarizes the main Aurora MySQL spatial features and explains how they correspond to spatial features in MySQL: 
++  Aurora MySQL 1\.x supports the same spatial data types and spatial relation functions as MySQL 5\.6\. For more information about these data types and functions, see [Spatial Data Types](https://dev.mysql.com/doc/refman/5.6/en/spatial-types.html) and [Spatial Relation Functions](https://dev.mysql.com/doc/refman/5.6/en/spatial-relation-functions-object-shapes.html) in the MySQL 5\.6 documentation\. 
++  Aurora MySQL 2\.x supports the same spatial data types and spatial relation functions as MySQL 5\.7\. For more information about these data types and functions, see [Spatial Data Types](https://dev.mysql.com/doc/refman/5.7/en/spatial-types.html) and [Spatial Relation Functions](https://dev.mysql.com/doc/refman/5.7/en/spatial-relation-functions-object-shapes.html) in the MySQL 5\.7 documentation\. 
++  Aurora MySQL 3\.x supports the same spatial data types and spatial relation functions as MySQL 8\.0\. For more information about these data types and functions, see [Spatial Data Types](https://dev.mysql.com/doc/refman/8.0/en/spatial-types.html) and [Spatial Relation Functions](https://dev.mysql.com/doc/refman/8.0/en/spatial-relation-functions-object-shapes.html) in the MySQL 8\.0 documentation\. 
++  Aurora MySQL supports spatial indexing on InnoDB tables\. Spatial indexing improves query performance on large datasets for queries on spatial data\. In MySQL, spatial indexing for InnoDB tables isn't available in MySQL 5\.6, but is available in MySQL 5\.7 and 8\.0\. Aurora MySQL uses a different spatial indexing strategy than MySQL for high performance with spatial queries\. The Aurora spatial index implementation uses a space\-filling curve on a B\-tree, which is intended to provide higher performance for spatial range scans than an R\-tree\. 
 
 The following data definition language \(DDL\) statements are supported for creating indexes on columns that use spatial data types\.
 
@@ -69,32 +70,3 @@ You can use the `SPATIAL` keyword in a `CREATE INDEX` statement to add a spatial
 ```
 CREATE SPATIAL INDEX shape_index ON test (shape);
 ```
-
-## Comparison of Aurora MySQL 5\.6 and Aurora MySQL 5\.7<a name="Aurora.AuroraMySQL.CompareReleases"></a>
-
-The following Amazon Aurora MySQL features are supported in Aurora MySQL 5\.6, but these features are currently not supported in Aurora MySQL 5\.7\.
-+ Asynchronous key prefetch \(AKP\)\. For more information, see [Optimizing Amazon Aurora indexed join queries with asynchronous key prefetch](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
-+ Hash joins\. For more information, see [Optimizing large Aurora MySQL join queries with hash joins](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
-+ Native functions for synchronously invoking AWS Lambda functions\. You can asynchronously invoke AWS Lambda functions from Aurora MySQL 5\.7\. For more information, see [Invoking a Lambda function with an Aurora MySQL native function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)\.
-+ Scan batching\. For more information, see [Aurora MySQL database engine updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
-
-Currently, Aurora MySQL 5\.7 does not support features added in Aurora MySQL version 1\.16 and later\. For information about Aurora MySQL version 1\.16, see [Aurora MySQL database engine updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
-
-The performance schema isn't available for early release of Aurora MySQL 5\.7\. Upgrade to Aurora 2\.03 or higher for performance schema support\.
-
-## Comparison of Aurora MySQL 5\.7 and MySQL 5\.7<a name="Aurora.AuroraMySQL.CompareMySQL57"></a>
-
-The following features are supported in MySQL 5\.7\.12 but are currently not supported in Aurora MySQL 5\.7:
-+ Group replication plugin
-+ Increased page size
-+ InnoDB buffer pool loading at startup
-+ InnoDB full\-text parser plugin
-+ Multisource replication
-+ Online buffer pool resizing
-+ Password validation plugin
-+ Query rewrite plugins
-+ Replication filtering
-+ The `CREATE TABLESPACE` SQL statement
-+ X Protocol
-
-For more information about these features, see the [MySQL 5\.7 documentation](https://dev.mysql.com/doc/refman/5.7/en/)\.

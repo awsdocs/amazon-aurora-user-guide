@@ -71,6 +71,7 @@ aurora_version
 | --- | --- | 
 |  MySQL 5\.6  |  Aurora MySQL 1  | 
 |  MySQL 5\.7  |  Aurora MySQL 2  | 
+|  MySQL 8\.0  |  Aurora MySQL 3  | 
 |  PostgreSQL 9\.6  |  Aurora PostgreSQL 1  | 
 |  PostgreSQL 10  |  Aurora PostgreSQL 2  | 
 |  PostgreSQL 11  |  Aurora PostgreSQL 3  | 
@@ -122,6 +123,7 @@ aurora_version
 | --- | --- | --- | 
 |  MySQL 5\.6  |  1  |  September 30, 2022  | 
 |  MySQL 5\.7  |  2  |  February 29, 2024  | 
+|  MySQL 8\.0  |  3  |   | 
 |  PostgreSQL 9\.6  |  1  |  January 31, 2022  | 
 |  PostgreSQL 10  |  2  |  January 31, 2023  | 
 |  PostgreSQL 11  |  3  |  January 31, 2024  | 

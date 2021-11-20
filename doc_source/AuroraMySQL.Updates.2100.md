@@ -36,7 +36,7 @@
  **New features:** 
 +  The `db.t3.large` instance class is now supported for Aurora MySQL\. 
 +  *Binary log replication:* 
-  +  Introduced the binlog I/O cache to improve binlog performance by reducing contention between writer threads and dump threads\. For more information, see [Optimizing binary log replication](AuroraMySQL.Replication.MySQL.md#binlog-optimization)\. 
+  +  Introduced the binlog I/O cache to improve binlog performance by reducing contention between writer threads and dump threads\. For more information, see [Optimizing binary log replication](AuroraMySQL.Replication.md#binlog-optimization)\. 
   +  In [Aurora MySQL version 2\.08](AuroraMySQL.Updates.2080.md), we introduced improved binary log \(binlog\) processing to reduce crash recovery time and commit time latency when very large transactions are involved\. These improvements are now supported for clusters that have GTID enabled\. 
 +  *Improved reader instance availability:* 
   +  Previously, when a writer instance restarted, all reader instances in an Aurora MySQL cluster restarted as well\. With today's launch, in\-Region reader instances continue to serve read requests during a writer instance restart, improving read availability in the cluster\. For more information, see [Rebooting an Aurora MySQL cluster \(version 2\.10 and higher\)](USER_RebootCluster.md#aurora-mysql-survivable-replicas)\. 

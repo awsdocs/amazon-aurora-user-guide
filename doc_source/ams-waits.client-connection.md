@@ -32,6 +32,11 @@ If `io/socket/sql/client_connection` dominates database activity, it doesn't nec
 + [Identify the problematic sessions and queries](#ams-waits.client-connection.actions.identify-queries)
 + [Follow best practices for connection management](#ams-waits.client-connection.actions.manage-connections)
 + [Scale up your instance if resources are being throttled](#ams-waits.client-connection.upgrade)
++ [Check the top hosts and top users](#ams-waits.client-connection.top-hosts)
++ [Query the performance\_schema tables](#ams-waits.client-connection.perf-schema)
++ [Check the thread states of your queries](#ams-waits.client-connection.thread-states)
++ [Audit your requests and queries](#ams-waits.client-connection.auditing)
++ [Pool your database connections](#ams-waits.client-connection.pooling)
 
 ### Identify the problematic sessions and queries<a name="ams-waits.client-connection.actions.identify-queries"></a>
 
@@ -73,3 +78,33 @@ Look for examples of throttling in the following resources:
 + Freeable memory 
 
   Check for a drop in the CloudWatch metric `FreeableMemory`\. Also, consider turning on Enhanced Monitoring\. For more information, see [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)\.
+
+### Check the top hosts and top users<a name="ams-waits.client-connection.top-hosts"></a>
+
+Use Performance Insights to check the top hosts and top users\. For more information, see [Analyzing metrics with the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.md)\.
+
+### Query the performance\_schema tables<a name="ams-waits.client-connection.perf-schema"></a>
+
+To get an accurate count of the current and total connections, query the `performance_schema` tables\. With this technique, you identify the source user or host that is responsible for creating a high number of connections\. For example, query the `performance_schema` tables as follows\.
+
+```
+SELECT * FROM performance_schema.accounts;
+SELECT * FROM performance_schema.users;
+SELECT * FROM performance_schema.hosts;
+```
+
+### Check the thread states of your queries<a name="ams-waits.client-connection.thread-states"></a>
+
+If your performance issue is ongoing, check the thread states of your queries\. In the `mysql` client, issue the following command\.
+
+```
+show processlist;
+```
+
+### Audit your requests and queries<a name="ams-waits.client-connection.auditing"></a>
+
+To check the nature of the requests and queries from user accounts, use AuroraAurora MySQL Advanced Auditing\. To learn how to turn on auditing, see [Using Advanced Auditing with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Auditing.md)\.
+
+### Pool your database connections<a name="ams-waits.client-connection.pooling"></a>
+
+Consider using Amazon RDS Proxy for connection management\. By using RDS Proxy, you can allow your applications to pool and share database connections to improve their ability to scale\. RDS Proxy makes applications more resilient to database failures by automatically connecting to a standby DB instance while preserving application connections\. For more information, see [Using Amazon RDS Proxy](rds-proxy.md)\.

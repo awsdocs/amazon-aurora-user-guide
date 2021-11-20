@@ -1,6 +1,92 @@
 # Altering tables in Amazon Aurora using fast DDL<a name="AuroraMySQL.Managing.FastDDL"></a>
 
-In MySQL, many data definition language \(DDL\) operations have a significant performance impact\. Performance impacts occur even with recent online DDL improvements\.
+Amazon Aurora includes optimizations to run an `ALTER TABLE` operation in place, nearly instantaneously\. The operation completes without requiring the table to be copied and without having a material impact on other DML statements\. Because the operation doesn't consume temporary storage for a table copy, it makes DDL statements practical even for large tables on small instance classes\.
+
+ Aurora MySQL version 3 is compatible with the MySQL 8\.0 feature called instant DDL\. Aurora MySQL versions 1 and 2 use a different implementation called fast DDL\. 
+
+**Topics**
++ [Instant DDL \(Aurora MySQL version 3\)](#AuroraMySQL.mysql80-instant-ddl)
++ [Fast DDL \(Aurora MySQL version 1 and 2\)](#AuroraMySQL.Managing.FastDDL-v2)
+
+## Instant DDL \(Aurora MySQL version 3\)<a name="AuroraMySQL.mysql80-instant-ddl"></a><a name="instant_ddl"></a>
+
+ The optimization performed by Aurora MySQL version 3 to improve the efficiency of some DDL operations is called instant DDL\. 
+
+ Aurora MySQL version 3 is compatible with the instant DDL from community MySQL 8\.0\. You perform an instant DDL operation by using the clause `ALGORITHM=INSTANT` with the `ALTER TABLE` statement\. For syntax and usage details about instant DDL, see [ALTER TABLE](https://dev.mysql.com/doc/refman/8.0/en/alter-table.html) in the MySQL documentation\. 
+
+ The following examples demonstrate the instant DDL feature\. The `ALTER TABLE` statements create and drop indexes, add and drop columns, and change default columns values\. The examples include both regular and virtual columns, and both regular and partitioned tables\. At each step, you can see the results by issuing `SHOW CREATE TABLE` and `DESCRIBE` statements\. 
+
+```
+mysql> CREATE TABLE t1 (a INT, b INT, KEY(b)) PARTITION BY KEY(b) PARTITIONS 6;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> ALTER TABLE t1 DROP KEY b, ADD KEY b(b) USING BTREE, ALGORITHM = INSTANT;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE t1 RENAME TO t2, ALGORITHM = INSTANT;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE t2 ALTER COLUMN b SET DEFAULT 100, ALGORITHM = INSTANT;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ALTER TABLE t2 ALTER COLUMN b DROP DEFAULT, ALGORITHM = INSTANT;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE t2 ADD COLUMN c ENUM('a', 'b', 'c'), ALGORITHM = INSTANT;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE t2 MODIFY COLUMN c ENUM('a', 'b', 'c', 'd', 'e'), ALGORITHM = INSTANT;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE t2 ADD COLUMN (d INT GENERATED ALWAYS AS (a + 1) VIRTUAL), ALGORITHM = INSTANT;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> ALTER TABLE t2 DROP COLUMN d, ALGORITHM = INSTANT;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ALTER TABLE t2 ALTER COLUMN a SET DEFAULT 20,
+    ->   ALTER COLUMN b SET DEFAULT 200, ALGORITHM = INSTANT;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE t2 (a INT, b INT) PARTITION BY LIST(a)(
+    ->   PARTITION mypart1 VALUES IN (1,3,5),
+    ->   PARTITION MyPart2 VALUES IN (2,4,6)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> ALTER TABLE t3 ALTER COLUMN a SET DEFAULT 20, ALTER COLUMN b SET DEFAULT 200, ALGORITHM = INSTANT;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE t4 (a INT, b INT) PARTITION BY RANGE(a)
+    ->   (PARTITION p0 VALUES LESS THAN(100), PARTITION p1 VALUES LESS THAN(1000),
+    ->   PARTITION p2 VALUES LESS THAN MAXVALUE);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> ALTER TABLE t4 ALTER COLUMN a SET DEFAULT 20,
+    ->   ALTER COLUMN b SET DEFAULT 200, ALGORITHM = INSTANT;
+Query OK, 0 rows affected (0.01 sec)
+
+/* Sub-partitioning example */
+mysql> CREATE TABLE ts (id INT, purchased DATE, a INT, b INT)
+    ->   PARTITION BY RANGE( YEAR(purchased) )
+    ->     SUBPARTITION BY HASH( TO_DAYS(purchased) )
+    ->     SUBPARTITIONS 2 (
+    ->       PARTITION p0 VALUES LESS THAN (1990),
+    ->       PARTITION p1 VALUES LESS THAN (2000),
+    ->       PARTITION p2 VALUES LESS THAN MAXVALUE
+    ->    );
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> ALTER TABLE ts ALTER COLUMN a SET DEFAULT 20,
+    ->   ALTER COLUMN b SET DEFAULT 200, ALGORITHM = INSTANT;
+Query OK, 0 rows affected (0.01 sec)
+```
+
+## Fast DDL \(Aurora MySQL version 1 and 2\)<a name="AuroraMySQL.Managing.FastDDL-v2"></a>
+
+ <a name="fast_ddl"></a>
+
+In MySQL, many data definition language \(DDL\) operations have a significant performance impact\.
 
 For example, suppose that you use an `ALTER TABLE` operation to add a column to a table\. Depending on the algorithm specified for the operation, this operation can involve the following:
 + Creating a full copy of the table
@@ -9,12 +95,14 @@ For example, suppose that you use an `ALTER TABLE` operation to add a column to 
 + Applying table locks while applying concurrent DML changes
 + Slowing concurrent DML throughput
 
-In Amazon Aurora, you can use fast DDL to run an `ALTER TABLE` operation in place, nearly instantaneously\. The operation completes without requiring the table to be copied and without having a material impact on other DML statements\. Because the operation doesn't consume temporary storage for a table copy, it makes DDL statements practical even for large tables on small instance classes\.
+ The optimization performed by Aurora MySQL version 1 and 2 to improve the efficiency of some DDL operations is called fast DDL\. 
+
+ In Aurora MySQL version 3, Aurora uses the MySQL 8\.0 feature called instant DDL\. Aurora MySQL versions 1 and 2 use a different implementation called fast DDL\. 
 
 **Important**  
-Currently, Aurora lab mode must be enabled to use fast DDL for Aurora MySQL\. We don't recommended using fast DDL for production DB clusters\. For information about enabling Aurora lab mode, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\.
+Currently, Aurora lab mode must be enabled to use fast DDL for Aurora MySQL\. We don't recommend using fast DDL for production DB clusters\. For information about enabling Aurora lab mode, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\.
 
-## Fast DDL limitations<a name="AuroraMySQL.FastDDL.Limitations"></a>
+### Fast DDL limitations<a name="AuroraMySQL.FastDDL.Limitations"></a>
 
 Currently, fast DDL has the following limitations:
 + Fast DDL only supports adding nullable columns, without default values, to the end of an existing table\.
@@ -25,7 +113,7 @@ Currently, fast DDL has the following limitations:
 **Note**  
 The maximum record size check was added in Aurora 1\.15\.
 
-## Fast DDL syntax<a name="AuroraMySQL.FastDDL.Syntax"></a>
+### Fast DDL syntax<a name="AuroraMySQL.FastDDL.Syntax"></a>
 
 ```
 ALTER TABLE tbl_name ADD COLUMN col_name column_definition
@@ -38,7 +126,7 @@ This statement takes the following options:
 **Note**  
 You must specify a nullable column definition without a default value\. Otherwise, fast DDL isn't used\.
 
-## Fast DDL examples<a name="AuroraMySQL.FastDDL.Examples"></a>
+### Fast DDL examples<a name="AuroraMySQL.FastDDL.Examples"></a>
 
  The following examples demonstrate the speedup from fast DDL operations\. The first SQL example runs `ALTER TABLE` statements on a large table without using fast DDL\. This operation takes substantial time\. A CLI example shows how to enable fast DDL for the cluster\. Then another SQL example runs the same `ALTER TABLE` statements on an identical table\. With fast DDL enabled, the operation is very fast\. 
 

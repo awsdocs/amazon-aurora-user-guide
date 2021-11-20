@@ -56,7 +56,7 @@ To query `babelfish_db` the same way using the PostgreSQL port, connect to the `
 SELECT
 aurora_version() as aurora_version,
 version() as postgresql_version,
-sys.version() as Babelfish_compatibillity,
+sys.version() as Babelfish_compatibility,
 sys.SERVERPROPERTY('BabelfishVersion') as Babelfish_Version
 ```
 

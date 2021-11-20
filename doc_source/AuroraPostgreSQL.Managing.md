@@ -58,6 +58,8 @@ The following table lists the resulting default value of `max_connections` for e
 | db\.r4\.2xlarge | 5000 | 
 | db\.r4\.xlarge | 3200 | 
 | db\.r4\.large | 1600 | 
+| db\.t4g\.large | 844 | 
+| db\.t4g\.medium | 405 | 
 | db\.t3\.large | 844 | 
 | db\.t3\.medium | 420 | 
 
@@ -93,6 +95,8 @@ The following table shows the maximum amount of temporary storage available for 
 | db\.r4\.2xlarge | 120 | 
 | db\.r4\.xlarge | 60 | 
 | db\.r4\.large | 30 | 
+| db\.t4g\.large | 16\.5 | 
+| db\.t4g\.medium | 8\.13 | 
 | db\.t3\.large | 16 | 
 | db\.t3\.medium | 7\.5 | 
 

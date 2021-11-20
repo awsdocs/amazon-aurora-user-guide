@@ -63,7 +63,7 @@ For information on setting TCP keepalive parameters on Windows, see [ Things you
 
 ### Configuring your application for fast failover<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring"></a>
 
-This section discusses several Aurora PostgreSQL specific configuration changes you can make\. Documentation for general setup and configuration of the JDBC driver is available from the [PostgreSQL JDBC site](https://jdbc.postgresql.org/documentation/documentation.html)\. 
+This section discusses several Aurora PostgreSQL specific configuration changes you can make\. To learn more about PostgreSQL JDBC driver setup and configuration, see the [PostgreSQL JDBC Driver](https://jdbc.postgresql.org/documentation/head/index.html) documentation\. 
 
 **Topics**
 + [Reducing DNS cache timeouts](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.Timeouts)
@@ -90,8 +90,10 @@ jdbc:postgresql://myauroracluster.cluster-c9bfei4hjlrd.us-east-1-beta.rds.amazon
 myauroracluster.cluster-ro-c9bfei4hjlrd.us-east-1-beta.rds.amazonaws.com:5432
 /postgres?user=<primaryuser>&password=<primarypw>&loginTimeout=2
 &connectTimeout=2&cancelSignalTimeout=2&socketTimeout=60
-&tcpKeepAlive=true&targetServerType=primary&loadBalanceHosts=true
+&tcpKeepAlive=true&targetServerType=primary
 ```
+
+ For more information about PostgreSQL JDBC driver parameters, see [Connecting to the Database](https://jdbc.postgresql.org/documentation/head/connect.html)\. 
 
  For best availability and to avoid a dependency on the RDS API, the best option for connecting is to maintain a file with a host string that your application reads from when you establish a connection to the database\. This host string would have all the Aurora endpoints available for the cluster\. For more information about Aurora endpoints, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\. For example, you could store the endpoints in a file locally like the following: 
 

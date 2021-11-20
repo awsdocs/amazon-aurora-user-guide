@@ -1,6 +1,6 @@
 # Copying a DB cluster snapshot<a name="USER_CopySnapshot"></a>
 
-With Amazon RDS, you can copy automated backups or manual DB cluster snapshots\. After you copy a snapshot, the copy is a manual snapshot\. 
+With Amazon RDS, you can copy automated backups or manual DB cluster snapshots\. After you copy a snapshot, the copy is a manual snapshot\. You can make multiple copies of an automated backup or manual snapshot, but each copy must have a unique identifier\.
 
 You can copy a snapshot within the same AWS Region, you can copy a snapshot across AWS Regions, and you can copy shared snapshots\.
 

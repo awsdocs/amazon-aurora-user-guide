@@ -3,7 +3,7 @@
  Following, you can learn how to use global transaction identifiers \(GTIDs\) with binary log \(binlog\) replication between an Aurora MySQL cluster and an external source\. 
 
 **Note**  
-For Aurora, you can only use this feature with Aurora MySQL clusters that use binlog replication to or from an external MySQL database\. The other database might be an Amazon RDS MySQL instance, an on\-premises MySQL database, or an Aurora DB cluster in a different AWS Region\. To learn how to configure that kind of replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. 
+For Aurora, you can only use this feature with Aurora MySQL clusters that use binlog replication to or from an external MySQL database\. The other database might be an Amazon RDS MySQL instance, an on\-premises MySQL database, or an Aurora DB cluster in a different AWS Region\. To learn how to configure that kind of replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.md#AuroraMySQL.Replication.MySQL)\. 
 
 If you use binlog replication and aren't familiar with GTID\-based replication with MySQL, see [Replication with global transaction identifiers](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids.html) in the MySQL documentation for background\.
 
@@ -57,7 +57,7 @@ Incoming replication is the most common binlog replication scenario for Aurora M
 
 For more information about parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
 
-## Configuring GTID\-based replication for an Aurora MySQL cluster<a name="mysql-replication-gtid.configuring-aurora"></a>
+## Configuring GTID\-based replication for an Aurora MySQL cluster<a name="mysql-replication-gtid.configuring-aurora"></a><a name="gtid"></a>
 
 When GTID\-based replication is enabled for an Aurora MySQL DB cluster, the GTID settings apply to both inbound and outbound binlog replication\. 
 
@@ -68,6 +68,8 @@ When GTID\-based replication is enabled for an Aurora MySQL DB cluster, the GTID
    + `enforce_gtid_consistency` – `ON`
 
 1. Associate the DB cluster parameter group with the Aurora MySQL cluster\. To do so, follow the procedures in [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
+
+1. In Aurora MySQL version 3 and higher, optionally specify how to assign GTIDs to transactions that don't include them\. To do so, call the stored procedure in [mysql\.rds\_assign\_gtids\_to\_anonymous\_transactions \(Aurora MySQL version 3 and higher\)](AuroraMySQL.Reference.md#mysql_assign_gtids_to_anonymous_transactions)\.
 
 ## Disabling GTID\-based replication for an Aurora MySQL DB cluster<a name="mysql-replication-gtid.disabling"></a>
 
@@ -83,7 +85,8 @@ For more details about the stored procedures mentioned in this section, see [Aur
 1. On the Aurora primary instance, run the following procedure\.
 
    ```
-   CALL mysql.rds_set_master_auto_position(0);
+   CALL mysql.rds_set_master_auto_position(0); (Aurora MySQL version 1 and 2)
+   CALL mysql.rds_set_source_auto_position(0); (Aurora MySQL version 3 and higher)
    ```
 
 1. Reset the `gtid_mode` to `ON_PERMISSIVE`\.

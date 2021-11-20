@@ -1,4 +1,4 @@
-# Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket<a name="AuroraMySQL.Integrating.LoadFromS3"></a>
+# Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket<a name="AuroraMySQL.Integrating.LoadFromS3"></a><a name="load_from_s3"></a><a name="load_data"></a><a name="load_xml"></a>
 
 You can use the `LOAD DATA FROM S3` or `LOAD XML FROM S3` statement to load data from files stored in an Amazon S3 bucket\. 
 
@@ -36,13 +36,24 @@ Before you can load data from an Amazon S3 bucket, you must first give your Auro
 
 ## Granting privileges to load data in Amazon Aurora MySQL<a name="AuroraMySQL.Integrating.LoadFromS3.Grant"></a>
 
-The database user that issues the `LOAD DATA FROM S3` or `LOAD XML FROM S3` statement must be granted the `LOAD FROM S3` privilege to issue either statement\. The master user name for a DB cluster is granted the `LOAD FROM S3` privilege by default\. You can grant the privilege to another user by using the following statement\.
+The database user that issues the `LOAD DATA FROM S3` or `LOAD XML FROM S3` statement must have a specific role or privilege to issue either statement\. In Aurora MySQL version 3, you grant the `AWS_LOAD_S3_ACCESS` role\. In Aurora MySQL version 1 or 2, you grant the `LOAD FROM S3` privilege\. The administrative user for a DB cluster is granted the appropriate role or privilege by default\. You can grant the privilege to another user by using one of the following statements\.
+
+ Use the following statement for Aurora MySQL version 3: 
+
+```
+GRANT AWS_LOAD_S3_ACCESS TO 'user'@'domain-or-ip-address'
+```
+
+**Tip**  
+ When you use the role technique in Aurora MySQL version 3, you also activate the role by using the `SET ROLE role_name` or `SET ROLE ALL` statement\. If you aren't familiar with the MySQL 8\.0 role system, you can learn more in [Role\-based privilege model](AuroraMySQL.MySQL80.md#AuroraMySQL.privilege-model)\. You can also find more details in [Using Roles](https://dev.mysql.com/doc/refman/8.0/en/roles.html) in the *MySQL Reference Manual*\. 
+
+ Use the following statement for Aurora MySQL version 1 or 2: 
 
 ```
 GRANT LOAD FROM S3 ON *.* TO 'user'@'domain-or-ip-address'
 ```
 
-The `LOAD FROM S3` privilege is specific to Amazon Aurora and is not available for MySQL databases or RDS for MySQL DB instances\. If you have set up replication between an Aurora DB cluster as the replication master and a MySQL database as the replication client, then the `GRANT LOAD FROM S3` statement causes replication to stop with an error\. You can safely skip the error to resume replication\. To skip the error on an RDS for MySQL DB instance, use the [mysql\_rds\_skip\_repl\_error](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_skip_repl_error.html) procedure\. To skip the error on an external MySQL database, use the [SET GLOBAL sql\_slave\_skip\_counter ](http://dev.mysql.com/doc/refman/5.6/en/set-global-sql-slave-skip-counter.html) statement\.
+The `AWS_LOAD_S3_ACCESS` role and `LOAD FROM S3` privilege are specific to Amazon Aurora and are not available for MySQL databases or RDS for MySQL DB instances\. If you have set up replication between an Aurora DB cluster as the replication master and a MySQL database as the replication client, then the `GRANT` statement for the role or privilege causes replication to stop with an error\. You can safely skip the error to resume replication\. To skip the error on an RDS for MySQL DB instance, use the [mysql\_rds\_skip\_repl\_error](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_skip_repl_error.html) procedure\. To skip the error on an external MySQL database, use the [SET GLOBAL sql\_slave\_skip\_counter](http://dev.mysql.com/doc/refman/5.7/en/set-global-sql-slave-skip-counter.html) statement \(Aurora MySQL version 1 and 2\) or [SET GLOBAL sql\_replica\_skip\_counter](http://dev.mysql.com/doc/refman/8.0/en/set-global-sql-slave-skip-counter.html) statement \(Aurora MySQL version 3\)\.
 
 ## Specifying a path to an Amazon S3 bucket<a name="AuroraMySQL.Integrating.LoadFromS3.URI"></a>
 
