@@ -1,6 +1,6 @@
-# sort index<a name="ams-states.sort-index"></a>
+# creating sort index<a name="ams-states.sort-index"></a>
 
-The `sort index` thread state indicates that a thread is processing a `SELECT` statement that requires the use of an internal temporary table to sort the data\.
+The `creating sort index` thread state indicates that a thread is processing a `SELECT` statement that requires the use of an internal temporary table to sort the data\.
 
 **Topics**
 + [Supported engine versions](#ams-states.sort-index.context.supported)
@@ -16,15 +16,15 @@ This thread state information is supported for the following versions:
 
 ## Context<a name="ams-states.sort-index.context"></a>
 
-The `create sort index` state appears when a query with an `ORDER BY` or `GROUP BY` clause can't use an existing index to perform the operation\. In this case, MySQL needs to perform a more expensive `filesort` operation\. This operation is typically performed in memory if the result set isn't too large\. Otherwise, it involves creating a file on disk\.
+The `creating sort index` state appears when a query with an `ORDER BY` or `GROUP BY` clause can't use an existing index to perform the operation\. In this case, MySQL needs to perform a more expensive `filesort` operation\. This operation is typically performed in memory if the result set isn't too large\. Otherwise, it involves creating a file on disk\.
 
 ## Likely causes of increased waits<a name="ams-states.sort-index.causes"></a>
 
-The appearance of `sort index` doesn't by itself indicate a problem\. If performance is poor, and you see frequent instances of `sort index`, the most likely cause is slow queries with `ORDER BY` or `GROUP BY` operators\.
+The appearance of `creating sort index` doesn't by itself indicate a problem\. If performance is poor, and you see frequent instances of `creating sort index`, the most likely cause is slow queries with `ORDER BY` or `GROUP BY` operators\.
 
 ## Actions<a name="ams-states.sort-index.actions"></a>
 
-The general guideline is to find queries with `ORDER BY` or `GROUP BY` clauses that are associated with the increases in the `create sort index` state\. Then see whether adding an index or increasing the sort buffer size solves the problem\.
+The general guideline is to find queries with `ORDER BY` or `GROUP BY` clauses that are associated with the increases in the `creating sort index` state\. Then see whether adding an index or increasing the sort buffer size solves the problem\.
 
 **Topics**
 + [Turn on the Performance Schema if it isn't turned on](#ams-states.sort-index.actions.enable-pfs)
@@ -38,13 +38,13 @@ Performance Insights reports thread states only if Performance Schema instrument
 
 ### Identify the problem queries<a name="ams-states.sort-index.actions.identify"></a>
 
-To identify current queries that are causing increases in the `create sort index` state, run `show processlist` and see if any of the queries have `ORDER BY` or `GROUP BY`\. Optionally, run `explain for connection N`, where `N` is the process list ID of the query with `filesort`\.
+To identify current queries that are causing increases in the `creating sort index` state, run `show processlist` and see if any of the queries have `ORDER BY` or `GROUP BY`\. Optionally, run `explain for connection N`, where `N` is the process list ID of the query with `filesort`\.
 
 To identify past queries that are causing these increases, turn on the slow query log and find the queries with `ORDER BY`\. Run `EXPLAIN` on the slow queries and look for "using filesort\." For more information, see [Examine the explain plans for filesort usage](#ams-states.sort-index.actions.plan)\.
 
 ### Examine the explain plans for filesort usage<a name="ams-states.sort-index.actions.plan"></a>
 
-Identify the statements with `ORDER BY` or `GROUP BY` clauses that result in the `create sort index` state\. 
+Identify the statements with `ORDER BY` or `GROUP BY` clauses that result in the `creating sort index` state\. 
 
 The following example shows how to run `explain` on a query\. The `Extra` column shows that this query uses `filesort`\.
 
@@ -66,7 +66,7 @@ possible_keys: NULL
 1 row in set, 1 warning (0.01 sec)
 ```
 
-The following example shows the result of running `explain` on the same query after an index is created on column `c1`\.
+The following example shows the result of running `EXPLAIN` on the same query after an index is created on column `c1`\.
 
 ```
 mysql> alter table mytable add index (c1);

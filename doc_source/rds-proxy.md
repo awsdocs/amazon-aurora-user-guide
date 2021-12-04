@@ -12,7 +12,7 @@
  You can reduce the overhead to process credentials and establish a secure connection for each new connection\. RDS Proxy can handle some of that work on behalf of the database\. 
 
 **Topics**
-+ [Support and availability of RDS Proxy](#rds-proxy.support)
++ [Supported engines and Region availability for RDS Proxy](#rds-proxy.support)
 + [Quotas and limitations for RDS Proxy](#rds-proxy.limits)
 + [Planning where to use RDS Proxy](rds-proxy-planning.md)
 + [RDS Proxy concepts and terminology](rds-proxy.howitworks.md)
@@ -24,7 +24,7 @@
 + [Troubleshooting for RDS Proxy](rds-proxy.troubleshooting.md)
 + [Using RDS Proxy with AWS CloudFormation](rds-proxy-cfn.md)
 
-## Support and availability of RDS Proxy<a name="rds-proxy.support"></a>
+## Supported engines and Region availability for RDS Proxy<a name="rds-proxy.support"></a>
 
  For information about database engine version support and availability of RDS Proxy in a given AWS Region, see [Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraFeaturesRegionsDBEngines.grids.html#Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy)\. 
 

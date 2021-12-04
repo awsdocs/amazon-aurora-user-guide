@@ -27,7 +27,7 @@ The usage is as follows:
 The string identifying the hatch \(or hatches\) might contain SQL wildcards\. For example, the following sets all syntax escape hatches to `ignore` for the Aurora PostgreSQL cluster\.
 
 ```
-EXECUTE sp_babelfish_configure ‘%’, 'ignore', 'server'
+EXECUTE sp_babelfish_configure '%', 'ignore', 'server'
 ```
 
 The Babelfish predefined escape hatches are as follows\.
@@ -35,7 +35,7 @@ The Babelfish predefined escape hatches are as follows\.
 
 | Escape hatch | Description | Default | 
 | --- | --- | --- | 
-| escape\_hatch\_storage\_options |  Escape hatch on any storage option used in CREATE, ALTER DATABASE, TABLE, INDEX\. This includes clauses \(LOG\) ON, TEXTIMAGE\_ON, FILESTREAM\_ON that define storage locations \(partitions, filegroups\) for tables, indexes, and constraints, and also for a database\. This escape hatch setting applies to all of these clauses \(including ON \[PRIMARY\] and ON “DEFAULT”\)\. The exception is when a partition is specified for a table or index with ON partition\_scheme \(column\)\.  |  ignore  | 
+| escape\_hatch\_storage\_options |  Escape hatch on any storage option used in CREATE, ALTER DATABASE, TABLE, INDEX\. This includes clauses \(LOG\) ON, TEXTIMAGE\_ON, FILESTREAM\_ON that define storage locations \(partitions, filegroups\) for tables, indexes, and constraints, and also for a database\. This escape hatch setting applies to all of these clauses \(including ON \[PRIMARY\] and ON "DEFAULT"\)\. The exception is when a partition is specified for a table or index with ON partition\_scheme \(column\)\.  |  ignore  | 
 | escape\_hatch\_storage\_on\_partition |  Controls Babelfish behavior related to the `ON partition_scheme column `clause when defining partitioning\. Babelfish currently doesn't implement partitioning\.  |  strict  | 
 | escape\_hatch\_database\_misc\_options |  Controls Babelfish behavior related to the following options on CREATE or ALTER DATABASE: CONTAINMENT, DB\_CHAINING, TRUSTWORTHY, PERSISTENT\_LOG\_BUFFER\.  |  ignore  | 
 | escape\_hatch\_language\_non\_english |  Controls Babelfish behavior related to languages other than English for onscreen messages\. Babelfish currently supports only `us_english` for onscreen messages\. SET LANGUAGE might use a variable containing the language name, so the actual language being set can only be detected at run time\.  |  strict  | 

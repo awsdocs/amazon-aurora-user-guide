@@ -49,7 +49,7 @@ The following are DB engine considerations for DB instance classes:
   + For Aurora MySQL db\.r5, db\.r4, and db\.t3 DB instance classes, no instances in the cluster can have pending instance\-level system updates\. To see pending system updates, use the following AWS Command Line Interface \(AWS CLI\) command\.
 
     ```
-    rds describe-pending-maintenance-actions
+    aws rds describe-pending-maintenance-actions
     ```
   + Aurora PostgreSQL version 13\.3 supports db\.t3 instance classes\.
 
@@ -172,7 +172,7 @@ To list the DB instance classes that are supported by a specific DB engine versi
 For Linux, macOS, or Unix:
 
 ```
-rds describe-orderable-db-instance-options --engine engine --engine-version version \
+aws rds describe-orderable-db-instance-options --engine engine --engine-version version \
     --query "OrderableDBInstanceOptions[].{DBInstanceClass:DBInstanceClass,SupportedEngineModes:SupportedEngineModes[0]}" \
     --output table \
     --region region
@@ -181,7 +181,7 @@ rds describe-orderable-db-instance-options --engine engine --engine-version vers
 For Windows:
 
 ```
-rds describe-orderable-db-instance-options --engine engine --engine-version version ^
+aws rds describe-orderable-db-instance-options --engine engine --engine-version version ^
     --query "OrderableDBInstanceOptions[].{DBInstanceClass:DBInstanceClass,SupportedEngineModes:SupportedEngineModes[0]}" ^
     --output table ^
     --region region
@@ -194,7 +194,7 @@ For example, the following command lists the supported DB instance classes for v
 For Linux, macOS, or Unix:
 
 ```
-rds describe-orderable-db-instance-options --engine aurora-postgresql --engine-version 12.4 \
+aws rds describe-orderable-db-instance-options --engine aurora-postgresql --engine-version 12.4 \
     --query "OrderableDBInstanceOptions[].{DBInstanceClass:DBInstanceClass,SupportedEngineModes:SupportedEngineModes[0]}" \
     --output table \
     --region us-east-1
@@ -203,7 +203,7 @@ rds describe-orderable-db-instance-options --engine aurora-postgresql --engine-v
 For Windows:
 
 ```
-rds describe-orderable-db-instance-options --engine aurora-postgresql --engine-version 12.4 ^
+aws rds describe-orderable-db-instance-options --engine aurora-postgresql --engine-version 12.4 ^
     --query "OrderableDBInstanceOptions[].{DBInstanceClass:DBInstanceClass,SupportedEngineModes:SupportedEngineModes[0]}"  ^
     --output table ^
     --region us-east-1
@@ -216,7 +216,7 @@ To list the DB engine versions that support a specific DB instance class in an A
 For Linux, macOS, or Unix:
 
 ```
-rds describe-orderable-db-instance-options --engine engine --db-instance-class DB_instance_class \
+aws rds describe-orderable-db-instance-options --engine engine --db-instance-class DB_instance_class \
     --query "OrderableDBInstanceOptions[].{EngineVersion:EngineVersion,SupportedEngineModes:SupportedEngineModes[0]}" \
     --output table \
     --region region
@@ -225,7 +225,7 @@ rds describe-orderable-db-instance-options --engine engine --db-instance-class D
 For Windows:
 
 ```
-rds describe-orderable-db-instance-options --engine engine --db-instance-class DB_instance_class ^
+aws rds describe-orderable-db-instance-options --engine engine --db-instance-class DB_instance_class ^
     --query "OrderableDBInstanceOptions[].{EngineVersion:EngineVersion,SupportedEngineModes:SupportedEngineModes[0]}" ^
     --output table ^
     --region region
@@ -238,7 +238,7 @@ For example, the following command lists the DB engine versions of the Aurora Po
 For Linux, macOS, or Unix:
 
 ```
-rds describe-orderable-db-instance-options --engine aurora-postgresql --db-instance-class db.r5.large \
+aws rds describe-orderable-db-instance-options --engine aurora-postgresql --db-instance-class db.r5.large \
     --query "OrderableDBInstanceOptions[].{EngineVersion:EngineVersion,SupportedEngineModes:SupportedEngineModes[0]}" \
     --output table \
     --region us-east-1
@@ -247,7 +247,7 @@ rds describe-orderable-db-instance-options --engine aurora-postgresql --db-insta
 For Windows:
 
 ```
-rds describe-orderable-db-instance-options --engine aurora-postgresql --db-instance-class db.r5.large ^
+aws rds describe-orderable-db-instance-options --engine aurora-postgresql --db-instance-class db.r5.large ^
     --query "OrderableDBInstanceOptions[].{EngineVersion:EngineVersion,SupportedEngineModes:SupportedEngineModes[0]}" ^
     --output table ^
     --region us-east-1

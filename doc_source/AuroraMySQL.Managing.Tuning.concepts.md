@@ -7,7 +7,6 @@ Before you tune your Aurora MySQL database, make sure to learn what wait events 
 + [Aurora MySQL thread states](#AuroraMySQL.Managing.Tuning.concepts.thread-states)
 + [Aurora MySQL memory](#AuroraMySQL.Managing.Tuning.concepts.memory)
 + [Aurora MySQL processes](#AuroraMySQL.Managing.Tuning.concepts.processes)
-+ [Aurora MySQL doublewrite files](#AuroraMySQL.Managing.Tuning.concepts.files)
 
 ## Aurora MySQL wait events<a name="AuroraMySQL.Managing.Tuning.concepts.waits"></a>
 
@@ -81,9 +80,3 @@ The *thread cache* is the set of available threads\. When a connection ends, MyS
 ### Thread pool<a name="AuroraMySQL.Managing.Tuning.concepts.processes.pool"></a>
 
 The *thread pool* consists of a number of thread groups\. Each group manages a set of client connections\. When a client connects to the database, the thread pool assigns the connections to thread groups in round\-robin fashion\. The thread pool separates connections and threads\. There is no fixed relationship between connections and the threads that run statements received from those connections\.
-
-## Aurora MySQL doublewrite files<a name="AuroraMySQL.Managing.Tuning.concepts.files"></a>
-
-Aurora MySQL writes pages from the buffer cache to the doublewrite buffer\. The *doublewrite buffer* is a staging area where the database stores pages before writing them to the data files\. MySQL writes data to the doublewrite buffer in a large sequential chunk\.
-
-By default, Aurora MySQL creates two doublewrite files for each buffer pool instance: a flush list doublewrite file and an LRU list doublewrite file\. Doublewrite file names have the following format: `#ib_page_size_file_number.dblwr`\.

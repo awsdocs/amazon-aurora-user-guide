@@ -120,7 +120,7 @@ Because an Aurora global database typically holds business\-critical data, you c
 
 Deleting the writer instance from the newly standalone Aurora DB cluster also typically removes the Aurora DB cluster and the Aurora global database\. 
 
-For more general information, see [Deleting a DB instance from an Aurora DB Cluster](USER_DeleteCluster.md#USER_DeleteInstance)\.
+For more general information, see [Deleting a DB instance from an Aurora DB cluster](USER_DeleteCluster.md#USER_DeleteInstance)\.
 
 To delete an Aurora global database, you can use the AWS Management Console, the AWS CLI, or the RDS API\. 
 

@@ -41,7 +41,7 @@ To start database activity streams for a DB cluster , configure the DB cluster u
 + `--kms-key-id key` – Specifies the KMS key identifier for encrypting messages in the database activity stream\. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS key\.
 + `--resource-arn arn` – Specifies the Amazon Resource Name \(ARN\) of the DB cluster\.
 + `--region` – Identifies the AWS Region for the DB instance\.
-+ `--mode sync-or-async` – Specifies either synchronous \(`sync`\) or asynchronous \(`async`\) mode\. For Aurora PostgreSQL, you can choose either value\. For Aurora MySQL, specify `sync`\. 
++ `--mode sync-or-async` – Specifies either synchronous \(`sync`\) or asynchronous \(`async`\) mode\. For Aurora PostgreSQL, you can choose either value\. For Aurora MySQL, specify `async`\. 
 + `--apply-immediately` – Applies the change immediately\. This parameter is optional\. If you don't specify this parameter, the database activity stream starts at the next maintenance interval\.
 
 For Linux, macOS, or Unix:

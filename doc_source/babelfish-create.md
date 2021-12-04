@@ -107,24 +107,49 @@ Before you can use the AWS CLI to create an Aurora PostgreSQL cluster with Babel
 
 1. Create a parameter group\.
 
+   For Linux, macOS, or Unix:
+
    ```
-   aws rds create-db-cluster-parameter-group 
+   aws rds create-db-cluster-parameter-group \
    --endpoint-url my_endpoint_URL \
    --db-cluster-parameter-group-name my_parameter_group \
    --db-parameter-group-family aurora-postgresql13 \
    --description "parameter_group_description"
    ```
 
-1. Modify your parameter group to turn on Babelfish\.
+   For Windows:
 
    ```
-   aws rds modify-db-cluster-parameter-group 
+   aws rds create-db-cluster-parameter-group ^
+   --endpoint-url my_endpoint_URL ^
+   --db-cluster-parameter-group-name my_parameter_group ^
+   --db-parameter-group-family aurora-postgresql13 ^
+   --description "parameter_group_description"
+   ```
+
+1. Modify your parameter group to turn on Babelfish\.
+
+   For Linux, macOS, or Unix:
+
+   ```
+   aws rds modify-db-cluster-parameter-group \
    --endpoint-url my_endpoint_URL \
    --db-cluster-parameter-group-name my_parameter_group \
    --parameters "ParameterName=rds.babelfish_status,ParameterValue=on,ApplyMethod=pending-reboot"
    ```
 
+   For Windows:
+
+   ```
+   aws rds modify-db-cluster-parameter-group ^
+   --endpoint-url my_endpoint_URL ^
+   --db-cluster-parameter-group-name my_parameter_group ^
+   --parameters "ParameterName=rds.babelfish_status,ParameterValue=on,ApplyMethod=pending-reboot"
+   ```
+
 1. Identify your DB subnet group and the virtual private cloud \(VPC\) security group ID for your new DB cluster, and then call the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) command\.
+
+   For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-cluster \
@@ -133,12 +158,28 @@ Before you can use the AWS CLI to create an Aurora PostgreSQL cluster with Babel
    --master-user-password my_password \
    --engine aurora-postgresql \
    --engine-version 13.4 \
-   --vpc-security-group-ids my_security_group\
+   --vpc-security-group-ids my_security_group \
    --db-subnet-group-name my_subnet_group \
-   --db-cluster-parameter-group-name my_parameter_group \
+   --db-cluster-parameter-group-name my_parameter_group
+   ```
+
+   For Windows:
+
+   ```
+   aws rds create-db-cluster ^
+   --db-cluster-identifier my_cluster_name ^
+   --master-username user_name ^
+   --master-user-password my_password ^
+   --engine aurora-postgresql ^
+   --engine-version 13.4 ^
+   --vpc-security-group-ids my_security_group ^
+   --db-subnet-group-name my_subnet_group ^
+   --db-cluster-parameter-group-name my_parameter_group
    ```
 
 1. Explicitly create the primary instance\. Use the name of the cluster that you created preceding for the value of the `--db-cluster-identifier` option and run the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command as shown following\. 
+
+   For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-instance \
@@ -146,5 +187,16 @@ Before you can use the AWS CLI to create an Aurora PostgreSQL cluster with Babel
    --db-instance-class db.r5.4xlarge \
    --db-subnet-group-name my_subnet_group \
    --db-cluster-identifier my_cluster_name \
-   --engine aurora-postgresql \
+   --engine aurora-postgresql
+   ```
+
+   For Windows:
+
+   ```
+   aws rds create-db-instance ^
+   --db-instance-identifier my_instance_name ^
+   --db-instance-class db.r5.4xlarge ^
+   --db-subnet-group-name my_subnet_group ^
+   --db-cluster-identifier my_cluster_name ^
+   --engine aurora-postgresql
    ```

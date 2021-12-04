@@ -555,7 +555,7 @@ The engine is waiting for access to a table\. This event occurs regardless of wh
 This wait event is a table lock wait event handler\. For more information about atom and molecule events in the Performance Schema, see [ Performance Schema atom and molecule events](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\.
 
 **synch/cond/mysys/my\_thread\_var::suspend**  
-The thread is suspended while waiting on a table\-level lock because another thread issued `LOCK TABLES … READ`\.
+The thread is suspended while waiting on a table\-level lock because another thread issued `LOCK TABLES ... READ`\.
 
 **synch/cond/sql/MDL\_context::COND\_wait\_status**  
 Threads are waiting on a table metadata lock\. The engine uses this type of lock to manage concurrent access to a database schema and to ensure data consistency\. For more information, see [Optimizing locking operations](https://dev.mysql.com/doc/refman/5.6/en/locking-issues.html) in the MySQL documentation\. To learn how to tune your database when this event is prominent, see [synch/cond/sql/MDL\_context::COND\_wait\_status](ams-waits.cond-wait-status.md)\.
@@ -670,7 +670,7 @@ The thread is converting an internal temporary table from an in\-memory table to
 The thread is processing an `ALTER TABLE` statement\. This state occurs after the table with the new structure has been created but before rows are copied into it\. For a thread in this state, you can use the Performance Schema to obtain information about the progress of the copy operation\.
 
 **creating sort index**  
-Aurora MySQL is performing a sort because it can't use an existing index to satisfy the `ORDER BY` or `GROUP BY` clause of a query\. For more information, see [sort index](ams-states.sort-index.md)\.
+Aurora MySQL is performing a sort because it can't use an existing index to satisfy the `ORDER BY` or `GROUP BY` clause of a query\. For more information, see [creating sort index](ams-states.sort-index.md)\.
 
 **creating table**  
 The thread is creating a permanent or temporary table\.

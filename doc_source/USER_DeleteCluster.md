@@ -10,7 +10,7 @@
 + [Deleting a stopped Aurora cluster](#USER_Deletion_Stopped_Cluster)
 + [Deleting Aurora MySQL clusters that are read replicas](#USER_DeleteInstance.AuroraReplica)
 + [The final snapshot when deleting a cluster](#USER_Deletion_Final_Snapshot)
-+ [Deleting a DB instance from an Aurora DB Cluster](#USER_DeleteInstance)
++ [Deleting a DB instance from an Aurora DB cluster](#USER_DeleteInstance)
 
 ## Deleting an Aurora DB cluster<a name="USER_DeleteCluster.DeleteCluster"></a>
 
@@ -18,9 +18,9 @@
 
  Use the following general procedure to remove all the DB instances from a cluster and then delete the cluster itself\. 
 
-1.  Delete any reader instances in the cluster\. Use the procedure in [Deleting a DB instance from an Aurora DB Cluster](#USER_DeleteInstance)\. If the cluster has any reader instances, deleting one of the instances just reduces the computation capacity of the cluster\. Deleting the reader instances first ensures that the cluster remains available throughout the procedure and doesn't perform unnecessary failover operations\. 
+1.  Delete any reader instances in the cluster\. Use the procedure in [Deleting a DB instance from an Aurora DB cluster](#USER_DeleteInstance)\. If the cluster has any reader instances, deleting one of the instances just reduces the computation capacity of the cluster\. Deleting the reader instances first ensures that the cluster remains available throughout the procedure and doesn't perform unnecessary failover operations\. 
 
-1.  Delete the writer instance from the cluster\. Again, use the procedure in [Deleting a DB instance from an Aurora DB Cluster](#USER_DeleteInstance)\. 
+1.  Delete the writer instance from the cluster\. Again, use the procedure in [Deleting a DB instance from an Aurora DB cluster](#USER_DeleteInstance)\. 
 
     If you use the AWS Management Console, this is the final step\. Deleting the final DB instance in a DB cluster through the console automatically deletes the DB cluster and the data in the cluster volume\. At this point, Aurora prompts you to optionally create a snapshot before deleting the cluster\. Aurora also requires you to confirm that you intend to delete the cluster\. 
 
@@ -103,7 +103,7 @@ $ aws rds delete-db-cluster --db-cluster-identifier deleteme-writer-only --skip-
  If your cluster contains multiple DB instances, typically there is a single writer instance and one or more reader instances\. The reader instances help with high availability, by being on standby to take over if the writer instance encounters a problem\. You can also use reader instances to scale the cluster up to handle a read\-intensive workload without adding overhead to the writer instance\. 
 
  To delete a cluster with multiple reader DB instances, you delete the reader instances first and then the writer instance\. If you use the AWS Management Console, deleting the writer instance automatically deletes the cluster afterwards\. If you use the AWS CLI or RDS API, deleting the writer instance leaves the cluster and its data in place\. In that case, you delete the cluster through a separate command or API operation\. 
-+  For the procedure to delete an Aurora DB instance, see [Deleting a DB instance from an Aurora DB Cluster](#USER_DeleteInstance)\. 
++  For the procedure to delete an Aurora DB instance, see [Deleting a DB instance from an Aurora DB cluster](#USER_DeleteInstance)\. 
 +  For the procedure to delete the writer DB instance in an Aurora cluster, see [Deleting an Aurora cluster with a single DB instance](#USER_DeleteInstance.SingleInstance)\. 
 +  For the procedure to delete an empty Aurora cluster, see [Deleting an empty Aurora cluster](#USER_DeleteInstance.Empty)\. 
 
@@ -242,7 +242,7 @@ $ aws rds describe-db-cluster-snapshots --db-cluster-identifier deleteme-multipl
 
  Throughout this section, the examples show how you can choose whether to take a final snapshot when you delete an Aurora cluster\. If you choose to take a final snapshot but the name you specify matches an existing snapshot, the operation stops with an error\. In this case, examine the snapshot details to confirm if it represents your current detail or if it is an older snapshot\. If the existing snapshot doesn't have the latest data that you want to preserve, rename the snapshot and try again, or specify a different name for the **final snapshot** parameter\. 
 
-## Deleting a DB instance from an Aurora DB Cluster<a name="USER_DeleteInstance"></a>
+## Deleting a DB instance from an Aurora DB cluster<a name="USER_DeleteInstance"></a>
 
  You can delete a DB instance from an Aurora DB cluster as part of the process of deleting the entire cluster\. If your cluster contains a certain number of DB instances, then deleting the cluster requires deleting each of those DB instances\. You can also delete one or more reader instances from a cluster while leaving the cluster running\. You might do so to reduce compute capacity and associated charges if your cluster isn't busy\. 
 

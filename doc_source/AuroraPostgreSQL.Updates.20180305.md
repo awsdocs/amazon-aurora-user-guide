@@ -92,7 +92,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.3\. For more
 
 **Topics**
 + [Aurora PostgreSQL 13\.3\.1](#AuroraPostgreSQL.Updates.20180305.1331)
-+ [Aurora PostgreSQL release 13\.3](#AuroraPostgreSQL.Updates.20180305.133)
++ [Aurora PostgreSQL release 13\.3\.0](#AuroraPostgreSQL.Updates.20180305.1330)
 
 ### Aurora PostgreSQL 13\.3\.1<a name="AuroraPostgreSQL.Updates.20180305.1331"></a>
 
@@ -112,17 +112,19 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.3\. For more
 + Fixed multiple issues in the Aurora storage daemon that could lead to brief periods of unavailability when specific network configurations are used\.
 + Fixed an out of memory crash issue with Aurora storage daemon that leads to writer node restart\. This also reduces the overall system memory consumption\.
 
-### Aurora PostgreSQL release 13\.3<a name="AuroraPostgreSQL.Updates.20180305.133"></a>
+### Aurora PostgreSQL release 13\.3\.0<a name="AuroraPostgreSQL.Updates.20180305.1330"></a>
 
 **New features**
 + Supports a major version upgrade from [PostgreSQL 12\.4, Aurora PostgreSQL release 4\.0](#AuroraPostgreSQL.Updates.20180305.40) and later versions
 + Supports bool\_plperl version 1\.0
 + Supports rds\_tools version 1\.0
 
+**Critical stability enhancements**
++ Fixed an issue where, in rare circumstances, a data cache of a read node may be inconsistent following a restart of that node\.
+
 **Additional improvements and enhancements**
 + Contains all of the fixes, features, and improvements present in [PostgreSQL 12\.7, Aurora PostgreSQL release 4\.2](#AuroraPostgreSQL.Updates.20180305.42)
 + Contains several improvements that were announced for PostgreSQL releases [13\.0](https://www.postgresql.org/docs/13/release-13.html), [13\.1](https://www.postgresql.org/docs/13/release-13-1.html), [13\.2](https://www.postgresql.org/docs/13/release-13-2.html) and [13\.3](https://www.postgresql.org/docs/13/release-13-3.html) 
-+ Backported fixes for the following PostgreSQL community security issues: [CVE\-2021\-3677](https://nvd.nist.gov/vuln/detail/CVE-2021-3677)
 + Instance type R4 was deprecated\.
 + Updated the following extensions:
   + `hll` to version 2\.15\.

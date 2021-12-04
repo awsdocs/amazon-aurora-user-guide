@@ -57,7 +57,6 @@
 + Fixed an issue which, in rare conditions, can cause the database instance to restart when using XA transactions in READ COMMITTED isolation level\.
 + Fixed an issue where the value of a TIMESTAMP column of an existing row is updated to the latest timestamp when all of the following conditions are satisfied: 1\\ A trigger exists for the table; 2\\ an INSERT is performed on the table that has an ON DUPLICATE KEY UPDATE clause; 3\\ the inserted row can cause a duplicate value violation in a UNIQUE index or PRIMARY KEY; and, 4\\ one or more columns are of TIMESTAMP data type and have a default value of CURRENT\_TIMESTAMP\.
 + Fixed an issue which, in rare conditions, can cause a reader instance to restart due to an incorrect check processing\.
-+ Fixed an issue which, in rare conditions, can cause a writer instance to restart when an in\-memory data\-integrity check fails\.
 + Fixed an issue which can cause the reader instance to restart when the writer instance grows the database volume to cross specific volume size boundaries\.
 + Fixed an issue which can cause longer restart times for database instances using cloned cluster volumes\.
 + Fixed an issue where a database instance restart may fail one or more times after a TRUNCATE TABLE operation was performed on the writer instance\.

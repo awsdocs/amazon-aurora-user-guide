@@ -10,6 +10,7 @@ For encrypted and unencrypted DB clusters, data that is in transit between the s
 **Topics**
 + [Overview of encrypting Amazon Aurora resources](#Overview.Encryption.Overview)
 + [Enabling encryption for an Amazon Aurora DB cluster](#Overview.Encryption.Enabling)
++ [Determining whether encryption is turned on for a DB cluster](#Overview.Encryption.Determining)
 + [Availability of Amazon Aurora encryption](#Overview.Encryption.Availability)
 + [Limitations of Amazon Aurora encrypted DB clusters](#Overview.Encryption.Limitations)
 
@@ -35,6 +36,43 @@ If you use the AWS CLI `create-db-cluster` command to create an encrypted DB clu
 
 **Important**  
 In some cases, Amazon Aurora can lose access to the KMS key for a DB cluster\. For example, Aurora loses access when RDS access to a KMS key is revoked\. In these cases, the encrypted DB cluster goes into a terminal state, and you can only restore the DB cluster from a backup\. We strongly recommend that you always enable backups for encrypted DB clusters to guard against the loss of encrypted data in your databases\.
+
+## Determining whether encryption is turned on for a DB cluster<a name="Overview.Encryption.Determining"></a>
+
+You can use the AWS Management Console, AWS CLI, or RDS API to determine whether encryption at rest is turned on for a DB cluster\.
+
+### Console<a name="Overview.Encryption.Determining.CON"></a>
+
+**To determine whether encryption at rest is turned on for a DB cluster**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose the name of the DB cluster that you want to check to view its details\.
+
+1. Choose the **Configuration** tab and check the **Encryption** value\.
+
+   It shows either **Enabled** or **Not enabled**\.  
+![\[Checking encryption at rest for a DB cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/encryption-check-db-cluster.png)
+
+### AWS CLI<a name="Overview.Encryption.Determining.CLI"></a>
+
+To determine whether encryption at rest is turned on for a DB cluster by using the AWS CLI, call the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command with the following option: 
++ `--db-cluster-identifier` – The name of the DB cluster\.
+
+The following example uses a query to return either `TRUE` or `FALSE` regarding encryption at rest for the `mydb` DB cluster\.
+
+**Example**  
+
+```
+1. aws rds describe-db-clusters --db-cluster-identifier mydb --query "*[].{StorageEncrypted:StorageEncrypted}" --output text
+```
+
+### RDS API<a name="Overview.Encryption.Determining.API"></a>
+
+To determine whether encryption at rest is turned on for a DB cluster by using the Amazon RDS API, call the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) operation with the following parameter: 
++ `DBClusterIdentifier` – The name of the DB cluster\.
 
 ## Availability of Amazon Aurora encryption<a name="Overview.Encryption.Availability"></a>
 

@@ -158,36 +158,36 @@ Aurora parallel queries are available for Aurora MySQL only\. However, PostgreSQ
 
 ## Amazon RDS Proxy<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy"></a>
 
-Amazon RDS Proxy is a fully managed, highly available database proxy that makes applications more scalable by pooling and sharing established database connections\. With RDS Proxy, failover times for Aurora are reduced by up to 66 percent\. For more information, see [Using Amazon RDS Proxy](rds-proxy.md)\. 
+Amazon RDS Proxy is a fully managed, highly available database proxy that makes applications more scalable by pooling and sharing established database connections\. For more information, see [Using Amazon RDS Proxy](rds-proxy.md)\. 
 
 
-| Region | Aurora MySQL 5\.6 | Aurora MySQL 5\.7 | Aurora MySQL 8\.0 | Aurora PostgreSQL 10 | Aurora PostgreSQL 11 | 
-| --- | --- | --- | --- | --- | --- | 
-| US East \(Ohio\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | 
-| US East \(N\. Virginia\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | 
-| US West \(N\. California\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | 
-| US West \(Oregon\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | 
-| Africa \(Cape Town\) | \- | \- | \- | \- | \- | 
-| Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | \- | 
-| Asia Pacific \(Mumbai\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | 
-| Asia Pacific \(Osaka\) | \- | \- | \- | \- | \- | 
-| Asia Pacific \(Seoul\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | 
-| Asia Pacific \(Singapore\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | 
-| Asia Pacific \(Sydney\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | 
-| Asia Pacific \(Tokyo\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | 
-| Canada \(Central\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | 
-| China \(Beijing\) | \- | \- | \- | \- | \- | 
-| China \(Ningxia\) | \- | \- | \- | \- | \- | 
-| Europe \(Frankfurt\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | 
-| Europe \(Ireland\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | 
-| Europe \(London\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | 
-| Europe \(Milan\) | \- | \- | \- | \- | \- | 
-| Europe \(Paris\) | \- | \- | \- | \- | \- | 
-| Europe \(Stockholm\) | \- | \- | \- | \- | \- | 
-| Middle East \(Bahrain\) | \- | \- | \- | \- | \- | 
-| South America \(São Paulo\) | \- | \- | \- | \- | \- | 
-| AWS GovCloud \(US\-East\) | \- | \- | \- | \- | \- | 
-| AWS GovCloud \(US\-West\) | \- | \- | \- | \- | \- | 
+| Region | Aurora MySQL 5\.6 | Aurora MySQL 5\.7 | Aurora MySQL 8\.0 | Aurora PostgreSQL 10 | Aurora PostgreSQL 11 | Aurora PostgreSQL 12 | 
+| --- | --- | --- | --- | --- | --- | --- | 
+| US East \(Ohio\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| US East \(N\. Virginia\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| US West \(N\. California\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| US West \(Oregon\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| Africa \(Cape Town\) | \- | \- | \- | \- | \- | \- | 
+| Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | \- | \- | 
+| Asia Pacific \(Mumbai\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| Asia Pacific \(Osaka\) | \- | \- | \- | \- | \- | \- | 
+| Asia Pacific \(Seoul\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| Asia Pacific \(Singapore\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| Asia Pacific \(Sydney\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| Asia Pacific \(Tokyo\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| Canada \(Central\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| China \(Beijing\) | \- | \- | \- | \- | \- | \- | 
+| China \(Ningxia\) | \- | \- | \- | \- | \- | \- | 
+| Europe \(Frankfurt\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| Europe \(Ireland\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| Europe \(London\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| Europe \(Milan\) | \- | \- | \- | \- | \- | \- | 
+| Europe \(Paris\) | \- | \- | \- | \- | \- | \- | 
+| Europe \(Stockholm\) | \- | \- | \- | \- | \- | \- | 
+| Middle East \(Bahrain\) | \- | \- | \- | \- | \- | \- | 
+| South America \(São Paulo\) | \- | \- | \- | \- | \- | \- | 
+| AWS GovCloud \(US\-East\) | \- | \- | \- | \- | \- | \- | 
+| AWS GovCloud \(US\-West\) | \- | \- | \- | \- | \- | \- | 
 
 ## Aurora Serverless v1<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless"></a>
 

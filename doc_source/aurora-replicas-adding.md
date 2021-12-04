@@ -8,7 +8,7 @@ Amazon Aurora Replicas have the following limitations:
 
 We recommend that you distribute the primary instance and Aurora Replicas of your Aurora DB cluster over multiple Availability Zones to improve the availability of your DB cluster\. For more information, see [Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
 
-To remove an Aurora Replica from an Aurora DB cluster, delete the Aurora Replica by following the instructions in [Deleting a DB instance from an Aurora DB Cluster](USER_DeleteCluster.md#USER_DeleteInstance)\.
+To remove an Aurora Replica from an Aurora DB cluster, delete the Aurora Replica by following the instructions in [Deleting a DB instance from an Aurora DB cluster](USER_DeleteCluster.md#USER_DeleteInstance)\.
 
 **Note**  
 Amazon Aurora also supports replication with an external database, such as an RDS DB instance\. The RDS DB instance must be in the same AWS Region as Amazon Aurora\. For more information, see [Replication with Amazon Aurora](Aurora.Replication.md)\.
