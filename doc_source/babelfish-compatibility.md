@@ -85,7 +85,7 @@ The following table lists unsupported or partially supported T\-SQL syntax and u
 | CREATE, ALTER, DROP CRYPTOGRAPHIC PROVIDER | This syntax isn't supported\. | 
 | Cursor Options | SCROLL, KEYSET, DYNAMIC, FAST\_FORWARD, SCROLL\_LOCKS, OPTIMISTIC, TYPE\_WARNING, FOR UPDATE | 
 | DBCC commands  | DBCC commands aren't supported\. | 
-|  Database ID values are different on Babelfish  |  The master and tempdb databases will not be database IDs 1 and 2\.  | 
+|  Database ID values are different on Babelfish  |  The `master` and `tempdb` databases won't be database IDs 1 and 2\.  | 
 | CREATE DATABASE case\-sensitive collation  | Case\-sensitive collations aren't supported with the CREATE DATABASE statement\. | 
 | ALTER DATABASE, ALTER DATABASE SET | Functionality related to these commands isn't supported\. | 
 | CREATE, ALTER, DROP DATABASE ENCRYPTION KEY | Functionality related to these commands isn't supported\. | 

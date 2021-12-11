@@ -28,7 +28,7 @@ After you change the DB cluster parameter group associated with a DB cluster, re
 To determine whether the primary DB instance of a DB cluster must be rebooted to apply changes, run the following AWS CLI command:  
 `aws rds describe-db-clusters --db-cluster-identifier db_cluster_identifier`  
 Check the `DBClusterParameterGroupStatus` value for the primary DB instance in the output\. If the value is `pending-reboot`, then reboot the primary DB instance of the DB cluster\.
-+ You can specify the value for a parameter as an integer or as an integer expression built from formulas, variables, functions, and operators\. Functions can include a mathematical log expression\. For more information, see [Specifying DB parameters](#USER_ParamValuesRef)\.
++ You can specify integer and Boolean parameters using expressions, formulas, and functions\. Functions can include a mathematical log expression\. For more information, see [Specifying DB parameters](#USER_ParamValuesRef)\.
 + Set any parameters that relate to the character set or collation of your database in your parameter group before creating the DB instance and before you create a database in your DB instance\. This ensures that the default database and new databases in your DB instance use the character set and collation values that you specify\. If you change character set or collation parameters for your DB instance, the parameter changes are not applied to existing databases\.
 
   For some DB engines, you can change character set or collation values for an existing database using the `ALTER DATABASE` command, for example:
@@ -1035,7 +1035,7 @@ DB parameter types include the following:
 + Object of other defined data types
 + Array of values of type integer, Boolean, string, long, double, timestamp, or object
 
-You can also specify integer and Boolean DB parameters using expressions, formulas, and functions\. 
+You can also specify integer and Boolean parameters using expressions, formulas, and functions\. 
 
 **Contents**
 + [DB parameter formulas](#USER_ParamFormulas)

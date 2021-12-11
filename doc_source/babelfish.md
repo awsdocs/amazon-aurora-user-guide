@@ -16,6 +16,9 @@ Babelfish runs the Transact\-SQL \(T\-SQL\) language with the exceptions documen
 
 When you create an Aurora PostgreSQL cluster with Babelfish turned on, Aurora provisions the cluster with a PostgreSQL database named `babelfish_db`\. This database is where all migrated SQL Server objects and structures reside\. 
 
+**Note**  
+In an Aurora PostgreSQL cluster, the `babelfish_db` database name is reserved for Babelfish\. Creating your own "babelfish\_db" database on a Babelfish for Aurora PostgreSQL prevents Aurora from successfully provisioning Babelfish\. 
+
 When you connect to the TDS port, the session is placed in the `babelfish_db` database\. From T\-SQL, the structure looks similar to being connected to a SQL Server instance\. You can see the `master` and `tempdb` databases and the `sys.databases` catalog\. You can create additional user databases and switch between databases with the USE statement\. When you create a SQL Server user database, it's flattened into the `babelfish_db` PostgreSQL database\. Your database retains cross\-database syntax and semantics equal to or similar to those provided by SQL Server\.
 
 ### Using Babelfish with a single database or multiple databases<a name="babelfish-single_vs_multi_db"></a>

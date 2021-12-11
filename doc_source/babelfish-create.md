@@ -4,6 +4,9 @@ You can use Babelfish on Aurora PostgreSQL\. Babelfish is currently supported on
 
 You can use the AWS Management Console or the AWS CLI to create an Aurora PostgreSQL cluster with Babelfish\.
 
+**Note**  
+In an Aurora PostgreSQL cluster, the `babelfish_db` database name is reserved for Babelfish\. Creating your own "babelfish\_db" database on a Babelfish for Aurora PostgreSQL prevents Aurora from successfully provisioning Babelfish\. 
+
 ## Console<a name="babelfish-create-cluster.console"></a>
 
 **To create a cluster with Babelfish running with the AWS Management Console**
@@ -99,7 +102,7 @@ You can find your new database set up for Babelfish in the **Databases** listing
 Before you create an Aurora DB cluster with Babelfish running using the AWS CLI, make sure to fulfill the required prerequisites, such as creating a parameter group\. For more information, see [DB cluster prerequisites](Aurora.CreateInstance.md#Aurora.CreateInstance.Prerequisites)\.
 
 Before you can use the AWS CLI to create an Aurora PostgreSQL cluster with Babelfish, do the following:
-+ Choose your endpoint URL from the list of services at [ Amazon Aurora endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/aurora.html/)\.
++ Choose your endpoint URL from the list of services at [Amazon Aurora endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/aurora.html)\. 
 + Create a parameter group for the cluster\. For more information about parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
 + Modify the parameter group, adding the parameter that turns on Babelfish\.<a name="babelfish.CLI.Creating.DBCluster"></a>
 

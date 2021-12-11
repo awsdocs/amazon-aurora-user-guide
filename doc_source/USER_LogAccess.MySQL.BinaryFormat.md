@@ -1,6 +1,13 @@
-# Setting the binary logging format<a name="USER_LogAccess.MySQL.BinaryFormat"></a>
+# Configuring Aurora MySQL binary logging<a name="USER_LogAccess.MySQL.BinaryFormat"></a>
 
-MySQL on Amazon Aurora supports the *row\-based*, *statement\-based*, and *mixed* binary logging formats for MySQL version 5\.6 and later\. The default binary logging format is mixed\. For details on the different MySQL binary log formats, see [Binary logging formats](https://dev.mysql.com/doc/refman/8.0/en/binary-log-formats.html) in the MySQL documentation\.
+The *binary log* is a set of log files that contain information about data modifications made to an Aurora MySQL server instance\. The binary log contains information such as the following:
++ Events that describe database changes such as table creation or row modifications
++ Information about the duration of each statement that updated data
++ Events for statements that could have updated data but didn't
+
+The binary log records statements that are sent during replication\. It is also required for some recovery operations\. For more information, see [The Binary Log](https://dev.mysql.com/doc/refman/8.0/en/binary-log.html) and [Binary Log Overview](https://dev.mysql.com/doc/internals/en/binary-log-overview.html) in the MySQL documentation\.
+
+MySQL on Amazon Aurora supports the *row\-based*, *statement\-based*, and *mixed* binary logging formats for MySQL version 5\.6 and later\. The default binary logging format is mixed\. For details on the different Aurora MySQL binary log formats, see [Binary logging formats](https://dev.mysql.com/doc/refman/8.0/en/binary-log-formats.html) in the MySQL documentation\.
 
 If you plan to use replication, the binary logging format is important because it determines the record of data changes that is recorded in the source and sent to the replication targets\. For information about the advantages and disadvantages of different binary logging formats for replication, see [Advantages and disadvantages of statement\-based and row\-based replication](https://dev.mysql.com/doc/refman/8.0/en/replication-sbr-rbr.html) in the MySQL documentation\.
 

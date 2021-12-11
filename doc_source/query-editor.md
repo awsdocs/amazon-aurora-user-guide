@@ -1,4 +1,4 @@
-# Using the query editor for Aurora Serverless<a name="query-editor"></a>
+# Using the query editor for Aurora Serverless<a name="query-editor"></a><a name="query_editor"></a>
 
 With the query editor for Aurora Serverless, you can run SQL queries in the RDS console\. You can run any valid SQL statement on the Aurora Serverless DB cluster, including data manipulation and data definition statements\.
 

@@ -2,7 +2,7 @@
 
 Amazon DevOps Guru is a fully managed operations service that helps developers and operators improve the performance and availability of their applications\. DevOps Guru offloads the tasks associated with identifying operational issues so that you can quickly implement recommendations to improve your application\. To learn more, see [What is Amazon DevOps Guru?](https://docs.aws.amazon.com/devops-guru/latest/userguide/welcome.html) in the *Amazon DevOps Guru User Guide*\.
 
-DevOps Guru detects, analyzes, and makes recommendations for operational issues for all Amazon RDS DB engines\. DevOps Guru for RDS extends this capability by applying machine learning to Performance Insights metrics for Amazon Aurora databases\. These monitoring features allow DevOps Guru for RDS to detect and diagnose performance bottlenecks and recommend specific corrective actions\. To learn more, see [Overview of DevOps Guru for RDS](https://docs.aws.amazon.com/http://lascap-ug-rds/working-with-rds.overview.html) in the *Amazon DevOps Guru User Guide*\.
+DevOps Guru detects, analyzes, and makes recommendations for operational issues for all Amazon RDS DB engines\. DevOps Guru for RDS extends this capability by applying machine learning to Performance Insights metrics for Amazon Aurora databases\. These monitoring features allow DevOps Guru for RDS to detect and diagnose performance bottlenecks and recommend specific corrective actions\. To learn more, see [Overview of DevOps Guru for RDS](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-rds.overview.html) in the *Amazon DevOps Guru User Guide*\.
 
 **Topics**
 + [Benefits of DevOps Guru for RDS](#devops-guru-for-rds.benefits)

@@ -40,7 +40,6 @@ In Aurora MySQL, the most important memory areas are the buffer pool and log buf
 
 **Topics**
 + [Buffer pool](#AuroraMySQL.Managing.Tuning.concepts.memory.buffer-pool)
-+ [Log buffer](#AuroraMySQL.Managing.Tuning.concepts.memory.log-buffer)
 
 ### Buffer pool<a name="AuroraMySQL.Managing.Tuning.concepts.memory.buffer-pool"></a>
 
@@ -48,13 +47,7 @@ The *buffer pool* is the shared memory area where Aurora MySQL caches table and 
 
 The buffer pool is structured as a linked list of pages\. A *page* can hold multiple rows\. Aurora MySQL uses a least recently used \(LRU\) algorithm to age pages out of the pool\.
 
-In memory, part of the buffer pool is occupied by the change buffer\. The *change buffer* caches changes to secondary index pages when they aren't in the buffer pool\. When subsequent read operations load the pages into the buffer pool, Aurora MySQL merges the buffered changes into the pages\.
-
-For more information, see [Buffer Pool](https://dev.mysql.com/doc/refman/8.0/en/innodb-buffer-pool.html) and [Change Buffer](https://dev.mysql.com/doc/refman/8.0/en/innodb-change-buffer.html) in the *MySQL Reference Manual*\.
-
-### Log buffer<a name="AuroraMySQL.Managing.Tuning.concepts.memory.log-buffer"></a>
-
-The *log buffer* holds redo data that Aurora MySQL periodically writes to disk\. A large log buffer enables large transactions to run without writing to disk\. If transactions use data manipulation language \(DML\) to change large numbers of rows, increasing the size of the log buffer decreases disk I/O\.
+For more information, see [Buffer Pool](https://dev.mysql.com/doc/refman/8.0/en/innodb-buffer-pool.html) in the *MySQL Reference Manual*\.
 
 ## Aurora MySQL processes<a name="AuroraMySQL.Managing.Tuning.concepts.processes"></a>
 

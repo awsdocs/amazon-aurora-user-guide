@@ -3,10 +3,10 @@
 Following, you can find the Amazon Aurora DB engines that support Performance Insights\.
 
 
-|  Amazon Aurora DB engine  | Supported engine versions | Unsupported instance classes | 
-| --- | --- | --- | 
-|  Amazon Aurora MySQL\-Compatible Edition  |  Performance Insights is supported for the following engine versions: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.Overview.Engines.html) Performance Insights with parallel query enabled is supported for the following engine versions: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.Overview.Engines.html)  |  Performance Insights isn't supported for the following instance classes: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.Overview.Engines.html)  | 
-|  Amazon Aurora PostgreSQL\-Compatible Edition  |  Performance Insights is supported for all engine versions\.  |  N/A  | 
+|  Amazon Aurora DB engine  | Supported engine versions when parallel query isn't turned on | Supported engine versions when parallel query is turned on | Instance class restrictions | 
+| --- | --- | --- | --- | 
+|  Amazon Aurora MySQL\-Compatible Edition  |  Performance Insights is supported for the following engine versions: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.Overview.Engines.html)  |  Performance Insights with parallel query enabled is supported for the following engine versions: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.Overview.Engines.html)  |  Performance Insights has the following engine class restrictions: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.Overview.Engines.html)  | 
+|  Amazon Aurora PostgreSQL\-Compatible Edition  |  Performance Insights is supported for all engine versions\.  |  N/A  |  N/A  | 
 
 **Note**  
 Aurora Serverless doesn't support Performance Insights\.

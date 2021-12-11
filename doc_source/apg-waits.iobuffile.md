@@ -64,7 +64,7 @@ We recommend different actions depending on the causes of your wait event\.
 
 Assume a situation in which Performance Insights isn't turned on and you suspect that `IO:BufFileRead` and `IO:BufFileWrite` are occurring more frequently than is normal\. Do the following:
 
-1. Examine the `FreeStorageAvailable` metric in Amazon CloudWatch\.
+1. Examine the `FreeLocalStorage` metric in Amazon CloudWatch\.
 
 1. Look for a chainsaw pattern, which is a series of jagged spikes\.
 

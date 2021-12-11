@@ -11,3 +11,4 @@ You can find an overview of Performance Insights in the following video\.
 + [Maximum CPU](USER_PerfInsights.Overview.MaxCPU.md)
 + [Amazon Aurora DB engine support for Performance Insights](USER_PerfInsights.Overview.Engines.md)
 + [AWS Region support for Performance Insights](USER_PerfInsights.Overview.Regions.md)
++ [Cost of Performance Insights](USER_PerfInsights.Overview.cost.md)

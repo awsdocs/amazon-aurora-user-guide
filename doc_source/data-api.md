@@ -1,4 +1,4 @@
-# Using the Data API for Aurora Serverless<a name="data-api"></a>
+# Using the Data API for Aurora Serverless<a name="data-api"></a><a name="data_api"></a>
 
 By using the Data API for Aurora Serverless, you can work with a web\-services interface to your Aurora Serverless DB cluster\. The Data API doesn't require a persistent connection to the DB cluster\. Instead, it provides a secure HTTP endpoint and integration with AWS SDKs\. You can use the endpoint to run SQL statements without managing connections\.
 
