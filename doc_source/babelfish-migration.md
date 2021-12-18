@@ -36,11 +36,11 @@ The following high\-level overview lists the steps required to make your SQL Ser
 
    1. Save the script\.
 
-1. Run an assessment tool\.
+1. Run an assessment tool\. For example, you can run the [ Babelfish Compass tool](https://github.com/babelfish-for-postgresql/babelfish_compass/releases/latest)\. You run this tool on the DDL to determine to what extent the T\-SQL code is supported by Babelfish\. Identify T\-SQL code that might require modifications before running on Babelfish\.
+**Note**  
+Because Babelfish Compass is an open\-source tool, report any issues through GitHub\. Don't report issues with Babelfish Compass to AWS Support\.
 
-   For example, you can run the [ Babelfish Compass tool](https://github.com/babelfish-for-postgresql/babelfish_compass/releases/latest)\. You run this tool on the DDL to determine to what extent the T\-SQL code is supported by Babelfish\. Identify T\-SQL code that might require modifications before running on Babelfish\.
-
-   Because Babelfish Compass is an open\-source tool, report any issues through GitHub\. Don't report issues with Babelfish Compass to AWS Support\.
+   You can also use the AWS Schema Conversion Tool to help with your migration\. The AWS Schema Conversion Tool supports Babelfish as a virtual target\. To learn more, see [Using virtual targets](https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Mapping.VirtualTargets.html) in the *AWS Schema Conversion Tool User Guide*\.
 
 1. Run the DDL on your new Babelfish server to recreate your schemas on Babelfish using SSMS or `sqlcmd`\. Make code adjustments as needed\. This process might require multiple iterations\.
 

@@ -1,6 +1,6 @@
 # Managing Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Managing"></a>
 
-The following sections discuss managing performance and scaling for an Amazon Aurora PostgreSQL DB cluster\. It also includes other maintenance tasks\.
+The following section discusses managing performance and scaling for an Amazon Aurora PostgreSQL DB cluster\. It also includes information about other maintenance tasks\.
 
 **Topics**
 + [Scaling Aurora PostgreSQL DB instances](#AuroraPostgreSQL.Managing.Performance.InstanceScaling)
@@ -19,20 +19,21 @@ You can scale your Aurora PostgreSQL DB cluster by modifying the DB instance cla
 
 ## Maximum connections to an Aurora PostgreSQL DB instance<a name="AuroraPostgreSQL.Managing.MaxConnections"></a>
 
-The maximum number of connections allowed to an Aurora PostgreSQL DB instance is determined by the `max_connections` parameter in the instance\-level parameter group for the DB instance\. By default, this value is set to the following equation:
+An Aurora DB cluster allocates resources based on the DB instance class and its available memory\. The maximum number of connections allowed by an Aurora PostgreSQL DB instance is determined by the `max_connections` parameter value specified in the parameter group for that DB instance\. 
+
+Keep the following factors in mind before you try to change the `max_connections` parameter setting\.
++ If the `max_connections` value is too low, the Aurora PostgreSQL DB instance might not have sufficient connections available when clients attempt to connect\. 
++ If the `max_connections` value exceeds the number of connections that are actually needed, the unused connections can cause performance to degrade\. 
+
+The ideal setting for the `max_connections` parameter is one that supports all the client connections your application needs, without an excess of unused connections, plus at least 3 more connections to support AWS automation\. 
+
+The value of `max_connections` in the default DB parameter group for Aurora PostgreSQL is set to the lower of two values derived from the following Aurora PostgreSQL `LEAST` function:
 
 `LEAST({DBInstanceClassMemory/9531392},5000)`
 
-Setting the `max_connections` parameter to this equation makes sure that the number of allowed connection scales well with the size of the instance\. For example, suppose your DB instance class is db\.r5\.large, which has 16 gibibytes \(GiB\) of memory\. Then the maximum connections allowed is around 1802, as shown in the following equation:
+Although you can't change values in default parameter groups, you can create your own custom DB cluster parameter group and modify your Aurora PostgreSQL DB cluster to use it\. If you do this, be sure that you reboot the DB cluster after applying your custom parameter group\. For more information, see [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.ParameterGroups.md) and [Creating a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\. To learn more about Aurora DB cluster and DB parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
 
-```
-LEAST((16*1073741824)/9531392,5000) = 1802
-```
-
-**Note**  
-The `DBInstanceClassMemory` value represents the memory capacity, in bytes, available for the DB instance\. It's a number that Aurora computes internally and isn't directly available for you to query\. Aurora reserves some memory in each DB instance for the Aurora management components\. This adjustment to the available memory produces a lower `max_connections` value than if the formula used the full memory for the associated DB instance class\. You can tune the maximum number of connections to support your workload\. 
-
-The following table lists the resulting default value of `max_connections` for each DB instance class available to Aurora PostgreSQL\. You can increase the maximum number of connections to your Aurora PostgreSQL DB instance by scaling the instance up to a DB instance class with more memory, or by setting a larger value for the `max_connections` parameter, up to 262,143\.
+Following, you can find a table that lists the highest value that should ever be used for `max_connections` for each DB instance class that can be used with Aurora PostgreSQL\. 
 
 
 | Instance class | max\_connections default value | 
@@ -63,7 +64,9 @@ The following table lists the resulting default value of `max_connections` for e
 | db\.t3\.large | 844 | 
 | db\.t3\.medium | 420 | 
 
-For the list of DB instance classes supported by Aurora PostgreSQL, see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora)\. For the amount of memory for each DB instance class, see [Hardware specifications for DB instance classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.
+If your application needs more connections than the number listed for your DB instance class, consider the following alternatives\.
++ Choose a DB instance class that has more memory\. If your connection requirements are too high for the DB instance class supporting your Aurora PostgreSQL DB cluster, you can potentially overload your database and decrease performance\. For list of DB instance classes for Aurora PostgreSQL, see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora)\. For the amount of memory for each DB instance class, [Hardware specifications for DB instance classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.
++ Pool connections by using RDS Proxy with your Aurora PostgreSQL DB cluster\. For more information, see [Using Amazon RDS Proxy](rds-proxy.md)\. 
 
 ## Temporary storage limits for Aurora PostgreSQL<a name="AuroraPostgreSQL.Managing.TempStorage"></a>
 

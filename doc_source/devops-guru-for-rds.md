@@ -42,13 +42,7 @@ A *causal anomaly* is a top\-level anomaly within an insight\. **Database load \
 
 An anomaly measures performance impact by assigning a severity level of **High**, **Medium**, or **Low**\. To learn more, see [Key concepts for DevOps Guru for RDS](https://docs.aws.amazon.com/http://lashdown-cap-ug-rds/working-with-rds.overview.definitions.html) in the *Amazon DevOps Guru User Guide*\.
 
-If DevOps Guru detects an anomaly on your DB instance, you're alerted in the **Databases** page of the RDS console\. To go to the anomaly page from the RDS console, choose the link in the alert message\.
-
-![\[DevOps Guru for RDS anomaly reported in the Databases page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-devops-guru-dbpage-alert.png)
-
- The RDS console also alerts you in the page for your Amazon Aurora cluster\.
-
-![\[DevOps Guru for RDS anomaly reported in the page for your Amazon Aurora cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-devops-guru-alert.png)
+If DevOps Guru detects an anomaly on your DB instance, you're alerted in the **Databases** page of the RDS console\. To go to the anomaly page from the RDS console, choose the link in the alert message\. The RDS console also alerts you in the page for your Amazon Aurora cluster\.
 
 #### Contextual anomalies<a name="devops-guru-for-rds.how-it-works.anomalies.contextual"></a>
 

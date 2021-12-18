@@ -226,6 +226,8 @@ GRANT USAGE ON *.* TO 'repl_user'@'<domain_name>' REQUIRE SSL;
 |   RDS for MySQL   |   **To turn on replication from an Amazon RDS DB instance**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  | 
 |   MySQL \(external\)   |   **To turn on replication from an external MySQL database**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  | 
 
+If replication fails, it can result in a large increase in unintentional I/O on the replica, which can degrade performance\. If replication fails or is no longer needed, you can run the `mysql.rds_reset_external_master` stored procedure to remove the replication configuration\.
+
 #### 6\. Monitor your replica<a name="AuroraMySQL.Replication.MySQL.Monitor"></a>
 
  When you set up MySQL replication with an Aurora MySQL DB cluster, you must monitor failover events for the Aurora MySQL DB cluster when it is the replica target\. If a failover occurs, then the DB cluster that is your replica target might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS event notification](USER_Events.md)\. 
