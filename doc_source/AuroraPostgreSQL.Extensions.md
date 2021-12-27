@@ -17,8 +17,8 @@ The following table shows the PostgreSQL extension versions that are currently s
 
 | Extension | 13\.3 | 13\.4 | 
 | --- | --- | --- | 
-| [address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.3 | 3\.0\.3 | 
-| [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.3 | 3\.0\.3 | 
+| [address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.3 | 3\.1\.4 | 
+| [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.3 | 3\.1\.4 | 
 |  [amcheck](https://www.postgresql.org/docs/current/amcheck.html) | 1\.2 | 1\.2 | 
 |  [apg\_plan\_mgmt](#AuroraPostgreSQL.Extensions.apg_plan_mgmt) | 2\.1 | 2\.1 | 
 | aurora\_stat\_utils | 1\.0 | 1\.0 | 
@@ -67,9 +67,9 @@ The following table shows the PostgreSQL extension versions that are currently s
 | [pg\_visibility](https://www.postgresql.org/docs/12/pgvisibility.html) | 1\.2 | 1\.2 | 
 | [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.5 | 1\.5 | 
 | [pgcrypto](http://www.postgresql.org/docs/12/pgcrypto.html) | 1\.3 | 1\.3 | 
-| [pglogical](https://github.com/2ndQuadrant/pglogical) | 2\.3\.3 | 2\.3\.3 | 
+| [pglogical](https://github.com/2ndQuadrant/pglogical) | 2\.3\.3 | 2\.4\.0 | 
 |  pglogical\_origin  | 1\.0\.0 | 1\.0\.0 | 
-| [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | 3\.1\.0 | 3\.1\.0 | 
+| [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | 3\.1\.0 | 3\.1\.3 | 
 | [pgrowlocks](http://www.postgresql.org/docs/12/pgrowlocks.html) | 1\.2 | 1\.2 | 
 | [pgstattuple](http://www.postgresql.org/docs/12/pgstattuple.html) | 1\.5 | 1\.5 | 
 |  [pgtap](https://pgtap.org/)  | 1\.1\.0 | 1\.1\.0 | 
@@ -80,10 +80,10 @@ The following table shows the PostgreSQL extension versions that are currently s
 | [plprofiler](https://github.com/bigsql/plprofiler) | 4\.1 | 4\.1 | 
 | [pltcl](https://www.postgresql.org/docs/13/pltcl-overview.html) | 1\.0 | 1\.0 | 
 | [plv8](https://github.com/plv8) | 2\.3\.15 | 2\.3\.15 | 
-| [PostGIS](http://www.postgis.net/) | 3\.0\.3 | 3\.1 | 
-| postgis\_raster | 3\.0\.3 | 3\.1 | 
-| [postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 3\.0\.3 | 3\.1 | 
-| [postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 3\.0\.3 | 3\.1 | 
+| [PostGIS](http://www.postgis.net/) | 3\.0\.3 | 3\.1\.4 | 
+| postgis\_raster | 3\.0\.3 | 3\.1\.4 | 
+| [postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 3\.0\.3 | 3\.1\.4 | 
+| [postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 3\.0\.3 | 3\.1\.4 | 
 | [postgres\_fdw](http://www.postgresql.org/docs/13/postgres-fdw.html) | 1\.0 | 1\.0 | 
 |  [ prefix](https://github.com/dimitri/prefix) | 1\.2\.0 | 1\.2\.0 | 
 | [rdkit](https://www.rdkit.org/) | 3\.8 | 3\.8 | 
@@ -151,7 +151,7 @@ The following table shows the PostgreSQL extension versions that are currently s
 | [pg\_visibility](https://www.postgresql.org/docs/12/pgvisibility.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
 | [pgcrypto](http://www.postgresql.org/docs/12/pgcrypto.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
-| [pglogical](https://github.com/2ndQuadrant/pglogical) | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 
+| [pglogical](https://github.com/2ndQuadrant/pglogical) | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.4\.0 | 
 |  pglogical\_origin  | 1\.0\.0 | 1\.0\.0 | 1\.0\.0 | 1\.0\.0 | 
 | [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | 3\.0\.3 | 3\.0\.3 | 3\.0\.3 | 3\.0\.3 | 
 | [pgrowlocks](http://www.postgresql.org/docs/12/pgrowlocks.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 

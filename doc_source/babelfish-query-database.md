@@ -32,7 +32,7 @@ Use SQL Server *and* PostgreSQL views to return information about objects in you
 | `sys.all_views` | All views in all schemas | 
 | `sys.schemas` | All schemas | 
 | `sys.databases` | All databases in all schemas | 
-| `sys.server_principles` | All logins and roles | 
+| `sys.server_principals` | All logins and roles | 
 | `sys.all_objects` | All objects in all schemas | 
 | `sys.tables` | All tables in a schema | 
 | `sys.all_columns` | All columns in all tables and views | 

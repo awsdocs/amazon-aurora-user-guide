@@ -61,6 +61,7 @@
 + Fixed an issue which can cause longer restart times for database instances using cloned cluster volumes\.
 + Fixed an issue where a database instance restart may fail one or more times after a TRUNCATE TABLE operation was performed on the writer instance\.
 + Fixed an issue which, in rare conditions, can cause the database instance to restart\.
++ Fixed an issue which, in rare conditions, can cause the writer instance to restart when the database volume grows to a multiple of 160GB\.
 
 ## Integration of MySQL community edition bug fixes<a name="AuroraMySQL.Updates.2093.Patches"></a>
 + Bug \#23533396 \- When adding a new index, the server dropped an internally defined foreign key index and attempted to use a secondary index defined on a virtual generated column as the foreign key index, causing a server exit\. InnoDB now permits a foreign key constraint to reference a secondary index defined on a virtual generated column\.

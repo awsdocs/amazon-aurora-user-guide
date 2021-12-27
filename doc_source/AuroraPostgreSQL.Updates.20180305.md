@@ -77,12 +77,14 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.4\. For more
 +  Fixed an issue where the role rds\_superuser did not have permission to execute the pg\_stat\_statements\_reset\(\) function\. 
 +  Fixed an issue with the apg\_plan\_mgmt extension where the planning and execution times were reported as 0\. 
 +  Removed support for DES, 3DES and RC4 cipher suites\. 
-+  Updated PostGIS extension to version 3\.1\.4\. 
++  Updated the `PostGIS` extension to version 3\.1\.4\. 
++  Updated the `pgrouting` extension to 3\.1\.3\. 
++  Updated the `pglogical` extension to 2\.4\.0\. 
 + Added support for the following SPI module extensions: 
-  + autoinc version 1\.0
-  + insert\_username version 1\.0
-  + moddatetime version 1\.0
-  + refint version 1\.0
+  + `autoinc version 1.0`
+  + `insert_username version 1.0`
+  + `moddatetime version 1.0`
+  + `refint version 1.0`
 + Fixed multiple issues in the Aurora storage daemon that could lead to brief periods of unavailability when specific network configurations are used\.
 + Fixed an out of memory crash issue with Aurora storage daemon that leads to writer node restart\. This also reduces the overall system memory consumption\.
 

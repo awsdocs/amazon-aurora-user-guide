@@ -196,7 +196,7 @@
 |   `innodb_buffer_pool_load_abort`   |   No   |    | 
 |   `innodb_buffer_pool_load_at_startup`   |   No   |    | 
 |   `innodb_buffer_pool_load_now`   |   No   |    | 
-|   `innodb_buffer_pool_size`   |   Yes   |    | 
+|   `innodb_buffer_pool_size`   |   Yes   |  The default value is represented by a formula\. For details about how the `DBInstanceClassMemory` value in the formula is calculated, see [DB parameter formula variables](USER_WorkingWithParamGroups.md#USER_FormulaVariables)\.  | 
 |   `innodb_change_buffer_max_size`   |   No   |   Aurora MySQL doesn't use the InnoDB change buffer at all\.   | 
 |   `innodb_compression_failure_threshold_pct`   |   Yes   |    | 
 |   `innodb_compression_level`   |   Yes   |    | 
@@ -266,7 +266,7 @@
 |   `max_binlog_size`   |   No   |    | 
 |   `max_binlog_stmt_cache_size`   |   Yes   |    | 
 |   `max_connect_errors`   |   Yes   |    | 
-|   `max_connections`   |   Yes   |   For more information, see [Maximum connections to an Aurora MySQL DB instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections)\.   | 
+|   `max_connections`   |   Yes   |  The default value is represented by a formula\. For details about how the `DBInstanceClassMemory` value in the formula is calculated, see [DB parameter formula variables](USER_WorkingWithParamGroups.md#USER_FormulaVariables)\. For the default values depending on the instance class, see [Maximum connections to an Aurora MySQL DB instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections)\.   | 
 |   `max_delayed_threads`   |   Yes   |    | 
 |   `max_error_count`   |   Yes   |    | 
 |   `max_heap_table_size`   |   Yes   |    | 
@@ -365,7 +365,7 @@
 |   `query_alloc_block_size`   |   Yes   |    | 
 |   `query_cache_limit`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
 |   `query_cache_min_res_unit`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
-|   `query_cache_size`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
+|   `query_cache_size`   |   Yes   |  The default value is represented by a formula\. For details about how the `DBInstanceClassMemory` value in the formula is calculated, see [DB parameter formula variables](USER_WorkingWithParamGroups.md#USER_FormulaVariables)\.  Removed from Aurora MySQL version 3\.   | 
 |   `query_cache_type`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
 |   `query_cache_wlock_invalidate`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
 |   `query_prealloc_size`   |   Yes   |    | 
@@ -408,8 +408,8 @@
 |   `sync_relay_log_info`   |   Yes   |    | 
 |   `sysdate-is-now`   |   Yes   |    | 
 |   `table_cache_element_entry_ttl`   |   No   |    | 
-|   `table_definition_cache`   |   Yes   |    | 
-|   `table_open_cache`   |   Yes   |    | 
+|   `table_definition_cache`   |   Yes   |  The default value is represented by a formula\. For details about how the `DBInstanceClassMemory` value in the formula is calculated, see [DB parameter formula variables](USER_WorkingWithParamGroups.md#USER_FormulaVariables)\.  | 
+|   `table_open_cache`   |   Yes   |  The default value is represented by a formula\. For details about how the `DBInstanceClassMemory` value in the formula is calculated, see [DB parameter formula variables](USER_WorkingWithParamGroups.md#USER_FormulaVariables)\.  | 
 |   `table_open_cache_instances`   |   Yes   |    | 
 |   `temp-pool`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
 |   `temptable_max_mmap`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\. For details, see [Storage engine for internal temporary tables](AuroraMySQL.MySQL80.md#AuroraMySQL.mysql80-internal-temp-tables-engine)\.   | 

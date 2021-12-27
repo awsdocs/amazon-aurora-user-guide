@@ -339,12 +339,12 @@ To use the API to implement minor version upgrades, use the [ModifyDBInstance](h
 
 ## Upgrading PostgreSQL extensions<a name="USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades"></a>
 
-A PostgreSQL engine upgrade doesn't automatically upgrade any PostgreSQL extensions\. To update an extension after an engine upgrade, use the `ALTER EXTENSION UPDATE` command\. 
+A PostgreSQL engine upgrade doesn't automatically upgrade any PostgreSQL extensions\. Installing PostgreSQL extensions requires `rds_superuser` privileges, and the permissions are typically delegated to only those users \(roles\) that use the extension\. This means that upgrading all extensions in an Aurora PostgreSQL DB instance after a database engine upgrade might involve many different users \(roles\)\. Keep this in mind also if you want to automate the upgrade process by using scripts\. For more information about PostgreSQL privileges and roles, see [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md)\. 
 
 **Note**  
-If you are running the `PostGIS` extension in your Amazon RDS PostgreSQL DB instance, make sure that you follow the [PostGIS upgrade instructions](https://postgis.net/docs/postgis_installation.html#upgrading) in the PostGIS documentation before you upgrade the extension\. 
+If you are running the `PostGIS` extension in your Amazon RDS PostgreSQL DB instance, see [ PostGIS\_Extensions\_Upgrade](https://postgis.net/docs/PostGIS_Extensions_Upgrade.html) in the PostGIS documentation to upgrade the extension\. 
 
-To upgrade an extension, use the following command\. 
+To update an extension after an engine upgrade, use the `ALTER EXTENSION UPDATE` command\.
 
 ```
 ALTER EXTENSION extension_name UPDATE TO 'new_version';

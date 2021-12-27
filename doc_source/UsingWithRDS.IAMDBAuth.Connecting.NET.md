@@ -7,7 +7,7 @@ The following are prerequisites for connecting to your DB cluster using IAM auth
 + [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
 + [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
 
-The following code example shows how to generate an authentication token, and then use it to connect to a DB cluster\. 
+The following code examples show how to generate an authentication token, and then use it to connect to a DB cluster\. 
 
 To run this code example, you need the [AWS SDK for \.NET](http://aws.amazon.com/sdk-for-net/), found on the AWS site\. The `AWSSDK.CORE` and the `AWSSDK.RDS` packages are required\. To connect to a DB instance, use the \.NET database connector for the DB engine, such as MySqlConnector for MySQL or Npgsql for PostgreSQL\.
 
@@ -39,10 +39,10 @@ namespace ubuntu
   {
     static void Main(string[] args)
     {
-      var pwd = Amazon.RDS.Util.RDSAuthTokenGenerator.GenerateAuthToken(RegionEndpoint.USEast1, "mysqldb.123456789012.us-east-1.rds.amazonaws.com", 3306, "jane_doe");
+      var pwd = Amazon.RDS.Util.RDSAuthTokenGenerator.GenerateAuthToken(RegionEndpoint.USEast1, "mysqlcluster.cluster-123456789012.us-east-1.rds.amazonaws.com", 3306, "jane_doe");
       // for debug only Console.Write("{0}\n", pwd);  //this verifies the token is generated
 
-      MySqlConnection conn = new MySqlConnection($"server=mysqldb.123456789012.us-east-1.rds.amazonaws.com;user=jane_doe;database=mydB;port=3306;password=password;SslMode=Required;SslCa=full_path_to_ssl_certificate");
+      MySqlConnection conn = new MySqlConnection($"server=mysqlcluster.cluster-123456789012.us-east-1.rds.amazonaws.com;user=jane_doe;database=mydB;port=3306;password=password;SslMode=Required;SslCa=full_path_to_ssl_certificate");
       conn.Open();
 
       // Define a query
@@ -89,10 +89,10 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            var pwd = RDSAuthTokenGenerator.GenerateAuthToken("postgresqldb.123456789012.us-east-1.rds.amazonaws.com", 5432, "jane_doe");
+            var pwd = RDSAuthTokenGenerator.GenerateAuthToken("postgresmycluster.cluster-123456789012.us-east-1.rds.amazonaws.com", 5432, "jane_doe");
 // for debug only Console.Write("{0}\n", pwd);  //this verifies the token is generated
 
-            NpgsqlConnection conn = new NpgsqlConnection($"Server=postgresqldb.123456789012.us-east-1.rds.amazonaws.com;User Id=jane_doe;Password=password;Database=mydb;SSL Mode=Require;SSL Certificate=full_path_to_ssl_certificate");
+            NpgsqlConnection conn = new NpgsqlConnection($"Server=postgresmycluster.cluster-123456789012.us-east-1.rds.amazonaws.com;User Id=jane_doe;Password=password;Database=mydb;SSL Mode=Require;SSL Certificate=full_path_to_ssl_certificate");
             conn.Open();
 
             // Define a query
