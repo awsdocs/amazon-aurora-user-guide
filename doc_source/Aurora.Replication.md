@@ -38,17 +38,17 @@ For details on how to create an Aurora Replica, see [Adding Aurora Replicas to a
 In addition to Aurora Replicas, you have the following options for replication with Aurora MySQL:
 + Aurora MySQL DB clusters in different AWS Regions\.
   +  You can replicate data across multiple Regions by using an Aurora global database\. For details, see [High availability across AWS Regions with Aurora global databases](Concepts.AuroraHighAvailability.md#Concepts.AuroraHighAvailability.GlobalDB) 
-  +  You can create a Aurora Read Replica of an Aurora MySQL DB cluster in a different AWS Region, by using MySQL binary log \(binlog\) replication\. Each cluster can have up to five Read Replicas created this way, each in a different Region\. 
-+ Two Aurora MySQL DB clusters in the same region, by using MySQL binary log \(binlog\) replication\.
-+ An RDS for MySQL DB instance as the master and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an RDS for MySQL DB instance\. Typically, you use this approach for migration to Aurora MySQL, rather than for ongoing replication\.
+  +  You can create an Aurora read replica of an Aurora MySQL DB cluster in a different AWS Region, by using MySQL binary log \(binlog\) replication\. Each cluster can have up to five read replicas created this way, each in a different Region\. 
++ Two Aurora MySQL DB clusters in the same Region, by using MySQL binary log \(binlog\) replication\.
++ An RDS for MySQL DB instance as the source of data and an Aurora MySQL DB cluster, by creating an Aurora read replica of an RDS for MySQL DB instance\. Typically, you use this approach for migration to Aurora MySQL, rather than for ongoing replication\.
 
 For more information about replication with Aurora MySQL, see [Single\-master replication with Amazon Aurora MySQL](AuroraMySQL.Replication.md)\.
 
 ## Replication with Aurora PostgreSQL<a name="Aurora.Replication.AuroraPostgreSQL"></a>
 
 In addition to Aurora Replicas, you have the following options for replication with Aurora PostgreSQL:
-+ An Amazon RDS PostgreSQL DB instance as the source of data and an Aurora PostgreSQL DB cluster, by creating an Aurora Replica of an Amazon RDS PostgreSQL DB instance\. 
-+ Two Aurora PostgreSQL DB clusters in the same region, by using PostgreSQL's logical replication feature\.
-+ An Aurora primary DB cluster in one Region and up to five read\-only secondary DB clusters in different Regions by using an Aurora global database\. Aurora PostgreSQL doesn't support cross\-region Aurora Replicas\. However, you can use Aurora global database to scale your Aurora PostgreSQL DB cluster's Read capabilities to more than one AWS Region and to meet availability goals\. For more information, see [Using Amazon Aurora global databases](aurora-global-database.md)\. 
++ An Aurora primary DB cluster in one Region and up to five read\-only secondary DB clusters in different Regions by using an Aurora global database\. Aurora PostgreSQL doesn't support cross\-Region Aurora Replicas\. However, you can use Aurora global database to scale your Aurora PostgreSQL DB cluster's read capabilities to more than one AWS Region and to meet availability goals\. For more information, see [Using Amazon Aurora global databases](aurora-global-database.md)\. 
++ Two Aurora PostgreSQL DB clusters in the same Region, by using PostgreSQL's logical replication feature\.
++ An RDS for PostgreSQL DB instance as the source of data and an Aurora PostgreSQL DB cluster, by creating an Aurora read replica of an RDS for PostgreSQL DB instance\. Typically, you use this approach for migration to Aurora PostgreSQL, rather than for ongoing replication\.
 
 For more information about replication with Aurora PostgreSQL, see [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)\.

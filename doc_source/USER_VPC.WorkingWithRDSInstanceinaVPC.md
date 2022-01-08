@@ -127,7 +127,7 @@ If you want your DB instance in the VPC to be publicly accessible, you must enab
 
 For details on how to create a DB instance, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md) \.
 
-When prompted in the **Network & Security** section, enter the VPC name, the DB subnet group, and the VPC security group you created in the previous steps\.
+When prompted in the **Connectivity** section, enter the VPC name, the DB subnet group, and the VPC security group you created in the previous steps\.
 
 **Note**  
 Updating VPCs is not currently supported for Aurora clusters\.

@@ -176,7 +176,7 @@ To use the Data API, enable it for your Aurora Serverless DB cluster\. You can e
 
 ### Console<a name="data-api.enabling.console"></a>
 
-You can enable the Data API by using the RDS console when you create or modify an Aurora Serverless DB cluster\. When you create an Aurora Serverless DB cluster, you do so by enabling the Data API in the RDS console's **Connectivity** section\. When you modify an Aurora Serverless DB cluster, you do so by enabling the Data API in the RDS console's **Network & Security** section\.
+You can enable the Data API by using the RDS console when you create or modify an Aurora Serverless DB cluster\. When you create or modify an Aurora Serverless DB cluster, you do so by enabling the Data API in the RDS console's **Connectivity** section\.
 
 The following screenshot shows the enabled **Data API** when modifying an Aurora Serverless DB cluster\.
 

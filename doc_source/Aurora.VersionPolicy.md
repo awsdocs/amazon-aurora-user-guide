@@ -60,7 +60,7 @@ aurora_version
 3.2.2
 ```
 
- For more information, see [Checking Aurora MySQL versions using SQL](AuroraMySQL.Updates.Versions.md#AuroraMySQL.Updates.DBVersions) and [Identifying your versions of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Versions.md)\. 
+ For more information, see [Checking Aurora MySQL versions using SQL](AuroraMySQL.Updates.Versions.md#AuroraMySQL.Updates.DBVersions) and [Identifying versions of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Versions.md)\. 
 
 ## Amazon Aurora major versions<a name="Aurora.VersionPolicy.MajorVersions"></a>
 

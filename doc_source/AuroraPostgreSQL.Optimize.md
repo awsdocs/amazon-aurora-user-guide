@@ -32,7 +32,6 @@ Query plan management is available with the following Aurora PostgreSQL versions
 + Aurora PostgreSQL version 12\.4 and higher
 + Aurora PostgreSQL version 11\.6 and higher
 + Aurora PostgreSQL version 10\.5 and higher
-+ Aurora PostgreSQL version 9\.6\.11 and higher
 
 Only users with the `rds_superuser` role can complete the following procedure\. The `rds_superuser` is required for creating the `apg_plan_mgmt` extension and its `apg_plan_mgmt` role\. Users must be granted the `apg_plan_mgmt` role to administer the `apg_plan_mgmt` extension\.
 

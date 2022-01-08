@@ -321,7 +321,7 @@ When you create an Aurora PostgreSQL DB cluster or DB instance, specify `aurora-
 The following table contains details about settings that you choose when you create an Aurora DB cluster\. 
 
 **Note**  
-Additional settings are available if you are creating an Aurora Serverless DB cluster\. For information about these settings, see [Creating an Aurora Serverless v1 DB cluster](aurora-serverless.create.md)\.
+Additional settings are available if you are creating an Aurora Serverless DB cluster\. For information about these settings, see [Creating an Aurora Serverless v1 DB cluster](aurora-serverless.create.md)\. Also, some settings aren't available for Aurora Serverless because of Aurora Serverless limitations\. For more information, see [Limitations of Aurora Serverless v1](aurora-serverless.md#aurora-serverless.limitations)\.
 
 
 | Console setting | Setting description | CLI option and RDS API parameter | 

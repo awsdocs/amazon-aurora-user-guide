@@ -169,7 +169,7 @@ This procedure uses the AWS CLI to create the IAM policy, role, and associate th
           --region aws-region
    ```
 
-After you complete these tasks, you can invoke your Lambda functions\. For more information and examples of setting up AWS Lambda for Aurora PostgreSQL DB cluster with AWS Lambda, see [Giving Aurora access to Lambda](PostgreSQL-Lambda.md#PostgreSQL-Lambda-access)\. 
+After you complete these tasks, you can invoke your Lambda functions\. For more information and examples of setting up AWS Lambda for Aurora PostgreSQL DB cluster with AWS Lambda, see [Step 2: Configure IAM for your Aurora PostgreSQL DB cluster and AWS Lambda](PostgreSQL-Lambda.md#PostgreSQL-Lambda-access)\. 
 
 **To invoke a Lambda function from your Babelfish DB cluster**
 
@@ -239,4 +239,4 @@ Currently, Babelfish for Aurora PostgreSQL doesn't support JSON\. If your functi
       {"statusCode": 200, "body": "\"Hello from Lambda!\""}
       ```
 
-To learn more about using Lambda with Aurora PostgreSQL, see [Overview of using a Lambda function](PostgreSQL-Lambda.md#PostgreSQL-Lambda-overview)\. For more information about working with Lambda functions, see [Getting started with Lambda](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) in the *AWS Lambda Developer Guide\.*
+To learn more about using Lambda with Aurora PostgreSQL, see [Invoking an AWS Lambda function from an Aurora PostgreSQL DB cluster ](PostgreSQL-Lambda.md)\. For more information about working with Lambda functions, see [Getting started with Lambda](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) in the *AWS Lambda Developer Guide\.*

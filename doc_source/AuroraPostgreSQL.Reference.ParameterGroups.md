@@ -131,6 +131,17 @@ For a listing of the DB instance parameters for the same default Aurora paramete
 | autovacuum\_vacuum\_scale\_factor | Number of tuple updates or deletes prior to vacuum as a fraction of reltuples\. | 
 | autovacuum\_vacuum\_threshold | Minimum number of tuple updates or deletes prior to vacuum\. | 
 | autovacuum\_work\_mem | \(kB\) Sets the maximum memory to be used by each autovacuum worker process\. | 
+| babelfishpg\_tsql\.default\_locale | Static\. Default locale to be used for collations created by CREATE COLLATION\. | 
+| babelfishpg\_tds\.port | Static\. Sets the TDS TCP port the server listens on\. | 
+| babelfishpg\_tds\.tds\_debug\_log\_level | Sets logging level in TDS 0 disables logging | 
+| babelfishpg\_tds\.tds\_default\_numeric\_precision | Sets the default precision of numeric type to be sent in the TDS column metadata if the engine does not specify one\. | 
+| babelfishpg\_tds\.tds\_default\_numeric\_scale | Sets the default scale of numeric type to be sent in the TDS column metadata if the engine does not specify one\. | 
+| babelfishpg\_tds\.tds\_default\_packet\_size | Sets the default packet size for all the SQL Server clients being connected | 
+| babelfishpg\_tds\.tds\_default\_protocol\_version | Sets a default TDS protocol version for all the clients being connected | 
+| babelfishpg\_tds\.tds\_ssl\_encrypt | Sets the SSL Encryption option | 
+| babelfishpg\_tds\.tds\_ssl\_max\_protocol\_version | Sets the maximum SSL/TLS protocol version to use for tds session\. | 
+| babelfishpg\_tds\.tds\_ssl\_min\_protocol\_version | Sets the minimum SSL/TLS protocol version to use for tds session\. | 
+| babelfishpg\_tsql\.migration\_mode | Static\. Defines if multiple user databases are supported | 
 | backend\_flush\_after | \(8Kb\) Number of pages after which previously performed writes are flushed to disk\. | 
 | backslash\_quote | Sets whether \\\\ is allowed in string literals\. | 
 | bytea\_output | Sets the output format for bytea\. | 

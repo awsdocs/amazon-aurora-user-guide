@@ -29,7 +29,7 @@ Babelfish uses the ICU library for collation support\. The following section lis
   Because SQL collations sort nchar and nvarchar data types using Unicode rules, Babelfish encodes all strings on the server using UTF\-8\. Babelfish sorts nchar and nvarchar strings the same way it sorts char and varchar strings, using Unicode rules\.
 + **Supplementary character**
 
-  The SQL Server functions `NCHAR`, `UNICODE`, and `LEN` support characters for code\-points outside the Unicode Basic Multilingual Plane \(BMP\)\. In contrast, non\-SC collations use surrogate pair characters to handle supplementary characters\. For Unicode data types, SQL Server can represent up to 65,535 characters using UCS\-2, or the full Unicode range \(‭1,114,111‬ characters\) if supplementary characters are used\. 
+  The SQL Server functions `NCHAR`, `UNICODE`, and `LEN` support characters for code\-points outside the Unicode Basic Multilingual Plane \(BMP\)\. In contrast, non\-SC collations use surrogate pair characters to handle supplementary characters\. For Unicode data types, SQL Server can represent up to 65,535 characters using UCS\-2, or the full Unicode range \(1,114,114 characters\) if supplementary characters are used\. 
 + **Kana\-sensitive**
 
   When Japanese Kana characters `Hiragana` and `Katakana` are treated differently, the collation is called Kana\-sensitive \(KS\)\. ICU supports the Japanese collation standard `JIS X 4061`\. The now deprecated `colhiraganaQ [on | off]` locale modifier might provide the same functionality as KS collations\. However, KS collations of the same name as SQL Server aren't currently supported by Babelfish\.

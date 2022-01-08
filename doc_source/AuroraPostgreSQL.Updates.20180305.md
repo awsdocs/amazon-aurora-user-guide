@@ -1,11 +1,17 @@
 # Amazon Aurora PostgreSQL releases and engine versions<a name="AuroraPostgreSQL.Updates.20180305"></a>
 
-Following, you can find information about supported released versions of the Aurora PostgreSQL\-Compatible Edition database engine\. Starting with the release of PostgreSQL versions 13\.3, 12\.8, 11\.13, 10\.18, and for all other later versions, Aurora version numbers aren't used\. To determine the version numbers of your Aurora PostgreSQL database, see [Identifying your versions of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Versions.md)\.
+Following, you can find information about versions of the Aurora PostgreSQL\-Compatible Edition database engine that have been released for Amazon Aurora\. Many of the listed releases include both a PostgreSQL version number and an Amazon Aurora version number\. However, starting with the release of PostgreSQL versions 13\.3, 12\.8, 11\.13, 10\.18, and for all other later versions, Aurora version numbers aren't used\. To determine the version numbers of your Aurora PostgreSQL database, see [Identifying versions of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Versions.md)\.
 
-To determine which PostgreSQL engine versions are available in an AWS Region, use the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\. For example:
+For information about extensions and modules, see [Extension versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)\.
+
+Amazon Aurora for PostgreSQL 1\.X \(compatible with PostgreSQL 9\.6\.XX\) reaches end of life on January 31, 2022\. For more information, see [ Announcement: Amazon Aurora PostgreSQL 9\.6 End\-of\-Life date is January 31, 2022](http://forums.aws.amazon.com/ann.jspa?annID=8512)\. We recommend that you proactively upgrade your databases that are running Aurora PostgreSQL 9\.6 to Amazon Aurora PostgreSQL 10 or higher at your convenience before January 31, 2022\. To learn how, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\. 
+
+For more information about Amazon Aurora supported releases, policies, and timelines, see [How long Amazon Aurora major versions remain available](Aurora.VersionPolicy.md#Aurora.VersionPolicy.MajorVersionLifetime)\. For more information about support and other policies for Amazon Aurora see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\. 
+
+To determine which Aurora PostgreSQL DB engine versions are available in an AWS Region, use the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\. For example:
 
 ```
-aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[].[EngineVersion]' --output text --region your-AWS-Region
+aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[].[EngineVersion]' --output text --region aws-region
 ```
 
 For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability.PostgreSQL)\.
@@ -36,22 +42,18 @@ For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.
 + [PostgreSQL 10\.6, Aurora PostgreSQL release 2\.2 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.22)
 + [PostgreSQL 10\.5, Aurora PostgreSQL release 2\.1 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.21)
 + [PostgreSQL 10\.4, Aurora PostgreSQL release 2\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.20)
-+ [PostgreSQL 9\.6\.22, Aurora PostgreSQL release 1\.11](#AuroraPostgreSQL.Updates.20180305.111)
-+ [PostgreSQL 9\.6\.21, Aurora PostgreSQL release 1\.10](#AuroraPostgreSQL.Updates.20180305.110)
-+ [PostgreSQL 9\.6\.19, Aurora PostgreSQL release 1\.9](#AuroraPostgreSQL.Updates.20180305.19)
-+ [PostgreSQL 9\.6\.18, Aurora PostgreSQL release 1\.8](#AuroraPostgreSQL.Updates.20180305.18)
-+ [PostgreSQL 9\.6\.17, Aurora PostgreSQL release 1\.7](#AuroraPostgreSQL.Updates.20180305.17)
-+ [PostgreSQL 9\.6\.16, Aurora PostgreSQL release 1\.6](#AuroraPostgreSQL.Updates.20180305.16)
++ [PostgreSQL 9\.6\.22, Aurora PostgreSQL release 1\.11 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.111)
++ [PostgreSQL 9\.6\.21, Aurora PostgreSQL release 1\.10 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.110)
++ [PostgreSQL 9\.6\.19, Aurora PostgreSQL release 1\.9 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.19)
++ [PostgreSQL 9\.6\.18, Aurora PostgreSQL release 1\.8 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.18)
++ [PostgreSQL 9\.6\.17, Aurora PostgreSQL release 1\.7 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.17)
++ [PostgreSQL 9\.6\.16, Aurora PostgreSQL release 1\.6 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.16)
 + [PostgreSQL 9\.6\.12, Aurora PostgreSQL release 1\.5 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.15)
 + [PostgreSQL 9\.6\.11, Aurora PostgreSQL release 1\.4 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.14)
 + [PostgreSQL 9\.6\.9, Aurora PostgreSQL release 1\.3 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.13)
 + [PostgreSQL 9\.6\.8, Aurora PostgreSQL release 1\.2 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.12)
 + [PostgreSQL 9\.6\.6 Aurora PostgreSQL release 1\.1 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.11)
 + [PostgreSQL 9\.6\.3, Aurora PostgreSQL release 1\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.10)
-
-For information about extensions and modules, see [Extension versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)\.
-
-The following Aurora PostgreSQL versions are supported\. 
 
 ## PostgreSQL 13\.4<a name="AuroraPostgreSQL.Updates.20180305.134"></a>
 
@@ -1948,7 +1950,10 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug in which read nodes may crash following a specific type of free space change from the write node\.
 
-## PostgreSQL 9\.6\.22, Aurora PostgreSQL release 1\.11<a name="AuroraPostgreSQL.Updates.20180305.111"></a>
+## PostgreSQL 9\.6\.22, Aurora PostgreSQL release 1\.11 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.111"></a>
+
+**Note**  
+The PostgreSQL engine version 9\.6\.22 and Aurora PostgreSQL release 1\.10 are no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.22\. For more information about the improvements in PostgreSQL 9\.6\.22, see [PostgreSQL release 9\.6\.22](https://www.postgresql.org/docs/96/release-9-6.html)\.
 
@@ -1992,7 +1997,10 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.22\. For m
 
 1.  Updated the `Orafce` extension to version 3\.16\. 
 
-## PostgreSQL 9\.6\.21, Aurora PostgreSQL release 1\.10<a name="AuroraPostgreSQL.Updates.20180305.110"></a>
+## PostgreSQL 9\.6\.21, Aurora PostgreSQL release 1\.10 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.110"></a>
+
+**Note**  
+The PostgreSQL engine version 9\.6\.21 and Aurora PostgreSQL release 1\.10 are no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.21\. For more information about the improvements in PostgreSQL 9\.6\.21, see [PostgreSQL release 9\.6\.21](https://www.postgresql.org/docs/9.6/release-9-6-21.html)\.
 
@@ -2023,7 +2031,10 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.21\. For m
 
 1. Added btree page checks to detect tuple metadata inconsistency\.
 
-## PostgreSQL 9\.6\.19, Aurora PostgreSQL release 1\.9<a name="AuroraPostgreSQL.Updates.20180305.19"></a>
+## PostgreSQL 9\.6\.19, Aurora PostgreSQL release 1\.9 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.19"></a>
+
+**Note**  
+The PostgreSQL engine version 9\.6\.19 and Aurora PostgreSQL release 1\.9 are no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.19\. For more information about the improvements in PostgreSQL 9\.6\.19, see [ PostgreSQL release 9\.6\.19](https://www.postgresql.org/docs/9.6/release-9-6-19.html)\.
 
@@ -2079,7 +2090,10 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.19\. For m
 
 1. Fixed a bug related to replication when Aurora PostgreSQL is acting as a physical replica of an RDS PostgreSQL instance that uses `GiST` indexes\. In rare cases, this bug caused a brief period of unavailability after promoting the Aurora cluster\.
 
-## PostgreSQL 9\.6\.18, Aurora PostgreSQL release 1\.8<a name="AuroraPostgreSQL.Updates.20180305.18"></a>
+## PostgreSQL 9\.6\.18, Aurora PostgreSQL release 1\.8 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.18"></a>
+
+**Note**  
+The PostgreSQL engine version 9\.6\.18 and Aurora PostgreSQL release 1\.8 are no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.18\. For more information about the improvements in PostgreSQL 9\.6\.18, see [ PostgreSQL release 9\.6\.18](https://www.postgresql.org/docs/9.6/release-9-6-18.html)\.
 
@@ -2138,7 +2152,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug where the database might be unavailable briefly due to error handling in database storage growth\.
 
-## PostgreSQL 9\.6\.17, Aurora PostgreSQL release 1\.7<a name="AuroraPostgreSQL.Updates.20180305.17"></a>
+## PostgreSQL 9\.6\.17, Aurora PostgreSQL release 1\.7 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.17"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.17\. For more information about the improvements in PostgreSQL 9\.6\.17, see [ PostgreSQL release 9\.6\.17](https://www.postgresql.org/docs/9.6/release-9-6-17.html)\.
 
@@ -2250,9 +2264,7 @@ None\.
 1. Changed the following extensions:
    + Updated `orafce` to version 3\.8
 
-For information about extensions and modules, see [Extensions supported for Aurora PostgreSQL 9\.6\.x](AuroraPostgreSQL.Extensions.md#AuroraPostgreSQL.Extensions.96)\.
-
-## PostgreSQL 9\.6\.16, Aurora PostgreSQL release 1\.6<a name="AuroraPostgreSQL.Updates.20180305.16"></a>
+## PostgreSQL 9\.6\.16, Aurora PostgreSQL release 1\.6 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.16"></a>
 
 This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.16\. For more information about the improvements in release 9\.6\.16, see [PostgreSQL release 9\.6\.16](https://www.postgresql.org/docs/9.6/release-9-6-16.html)\.
 
@@ -2497,8 +2509,6 @@ You can find the following improvements in this release\.
 
    The `apg_plan_mgmt` extension is used with query plan management\. For more about how to install, upgrade, and use the `apg_plan_mgmt` extension, see [Managing query execution plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)\.
 
-For information about extensions and modules, see [Extensions supported for Aurora PostgreSQL 9\.6\.x](AuroraPostgreSQL.Extensions.md#AuroraPostgreSQL.Extensions.96)\.
-
 ## PostgreSQL 9\.6\.9, Aurora PostgreSQL release 1\.3 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.13"></a>
 
 **Note**  
@@ -2739,8 +2749,6 @@ You can find the following improvements in this engine update:
 
 1. Multiple improvements to the reliability of importing snapshots from RDS PostgreSQL to Aurora PostgreSQL\.
 
-For information about extensions and modules, see [Extensions supported for Aurora PostgreSQL 9\.6\.x](AuroraPostgreSQL.Extensions.md#AuroraPostgreSQL.Extensions.96)\.
-
 ## PostgreSQL 9\.6\.3, Aurora PostgreSQL release 1\.0 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.10"></a>
 
 **Note**  
@@ -2770,8 +2778,6 @@ You can find the following improvements in this engine update:
 1. Implements improvements to maintain fresh nodes\.
 
 1. Fixes issues that can lead to an engine crash\.
-
-For information about extensions and modules, see [Extensions supported for Aurora PostgreSQL 9\.6\.x](AuroraPostgreSQL.Extensions.md#AuroraPostgreSQL.Extensions.96)\.
 
 ### Aurora PostgreSQL release 1\.0\.10<a name="AuroraPostgreSQL.Updates.20180305.1010"></a>
 

@@ -74,7 +74,7 @@ Following, you can find a table of limitations or partially supported T\-SQL syn
 | EXECUTE AS USER clause | This clause isn't supported in functions, procedures, or triggers\. | 
 | EXECUTE with AS LOGIN or AT option | This syntax isn't supported\. | 
 | Foreign key constraints referencing database name | Foreign key constraints that reference the database name aren't supported\. | 
-| Full\-text search | Full\-text search built\-in Functions fnd statements aren't supported\. | 
+| Full\-text search | Full\-text search built\-in Functions and statements aren't supported\. | 
 | Function declarations with greater than 100 parameters | Function declarations that contain more than 100 parameters aren't supported\. | 
 | Function calls that include DEFAULT as a parameter value | DEFAULT isn't a supported parameter value for a function call\. | 
 | Function calls that include :: | Function calls that include :: aren't supported\. | 

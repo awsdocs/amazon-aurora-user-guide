@@ -9,7 +9,6 @@ Aurora PostgreSQL supports publishing logs to CloudWatch Logs for the following
 + 12\.4 and higher 12 versions
 + 11\.6 and higher 11 versions
 + 10\.11 and higher 10 versions
-+ 9\.6\.16 and higher 9 versions
 
 **Note**  
 Be aware of the following:  

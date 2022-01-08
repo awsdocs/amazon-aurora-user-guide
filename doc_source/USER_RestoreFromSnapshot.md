@@ -11,18 +11,22 @@ Sharing a manual DB cluster snapshot, whether encrypted or unencrypted, enables 
 
 ## Parameter group considerations<a name="USER_RestoreFromSnapshot.Parameters"></a>
 
-We recommend that you retain the parameter group for any DB cluster snapshots you create, so that you can associate your restored DB cluster with the correct parameter group\. You can specify the parameter group when you restore the DB cluster\. 
+We recommend that you retain the DB parameter group and DB cluster parameter group for any DB cluster snapshots you create, so that you can associate your restored DB cluster with the correct parameter groups\.
+
+The default DB parameter group and DB cluster parameter group are associated with the restored cluster, unless you choose different ones\. No custom parameter settings are available in the default parameter groups\.
+
+You can specify the parameter groups when you restore the DB cluster\.
+
+For more information about DB parameter groups and DB cluster parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
 
 ## Security group considerations<a name="USER_RestoreFromSnapshot.Security"></a>
 
-When you restore a DB cluster, the default security group is associated with the restored cluster by default\.
+When you restore a DB cluster, the default virtual private cloud \(VPC\), DB subnet group, and VPC security group are associated with the restored instance, unless you choose different ones\.
++ If you're using the Amazon RDS console, you can specify a custom VPC security group to associate with the cluster or create a new VPC security group\.
++ If you're using the AWS CLI, you can specify a custom VPC security group to associate with the cluster by including the `--vpc-security-group-ids` option in the `restore-db-cluster-from-snapshot` command\.
++ If you're using the Amazon RDS API, you can include the `VpcSecurityGroupIds.VpcSecurityGroupId.N` parameter in the `RestoreDBClusterFromSnapshot` action\.
 
-**Note**  
-If you're using the Amazon RDS console, you can specify a custom security group to associate with the cluster or create a new VPC security group\.
-If you're using the AWS CLI, you can specify a custom security group to associate with the cluster by including the `--vpc-security-group-ids` option in the `restore-db-cluster-from-snapshot` command\.
-If you're using the Amazon RDS API, you can include the `VpcSecurityGroupIds.VpcSecurityGroupId.N` parameter in the `RestoreDBClusterFromSnapshot` action\.
-
-As soon as the restore is complete and your new DB cluster is available, you can associate any custom security groups used by the snapshot you restored from\. You must apply these changes by modifying the DB cluster with the RDS console, the AWS CLI `modify-db-cluster` command, or the `ModifyDBCluster` Amazon RDS API operation\. For more information, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
+As soon as the restore is complete and your new DB cluster is available, you can also change the VPC settings by modifying the DB cluster\. For more information, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
 ## Amazon Aurora considerations<a name="USER_RestoreFromSnapshot.Aurora"></a>
 

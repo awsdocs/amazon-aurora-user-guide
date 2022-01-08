@@ -136,6 +136,9 @@ Some settings apply to the entire DB cluster\. To change those settings, follow 
 
 The following table contains details about which settings you can modify, the methods for modifying the setting, and the scope of the setting\. The scope determines whether the setting applies to the entire DB cluster or if it can be set only for specific DB instances\. 
 
+**Note**  
+Additional settings are available if you are modifying an Aurora Serverless DB cluster\. For information about these settings, see [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\. Also, some settings aren't available for Aurora Serverless because of Aurora Serverless limitations\. For more information, see [Limitations of Aurora Serverless v1](aurora-serverless.md#aurora-serverless.limitations)\.
+
 
 ****  
 

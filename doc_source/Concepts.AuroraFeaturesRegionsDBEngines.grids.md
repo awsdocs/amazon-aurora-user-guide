@@ -171,11 +171,11 @@ Amazon RDS Proxy is a fully managed, highly available database proxy that makes 
 | US East \(N\. Virginia\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
 | US West \(N\. California\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
 | US West \(Oregon\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
-| Africa \(Cape Town\) | \- | \- | \- | \- | \- | \- | 
-| Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | \- | \- | 
+| Africa \(Cape Town\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| Asia Pacific \(Hong Kong\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
 | Asia Pacific \(Jakarta\) | \- | \- | \- | \- | \- | \- | 
 | Asia Pacific \(Mumbai\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
-| Asia Pacific \(Osaka\) | \- | \- | \- | \- | \- | \- | 
+| Asia Pacific \(Osaka\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
 | Asia Pacific \(Seoul\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
 | Asia Pacific \(Singapore\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
 | Asia Pacific \(Sydney\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
@@ -186,11 +186,11 @@ Amazon RDS Proxy is a fully managed, highly available database proxy that makes 
 | Europe \(Frankfurt\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
 | Europe \(Ireland\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
 | Europe \(London\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
-| Europe \(Milan\) | \- | \- | \- | \- | \- | \- | 
-| Europe \(Paris\) | \- | \- | \- | \- | \- | \- | 
-| Europe \(Stockholm\) | \- | \- | \- | \- | \- | \- | 
-| Middle East \(Bahrain\) | \- | \- | \- | \- | \- | \- | 
-| South America \(São Paulo\) | \- | \- | \- | \- | \- | \- | 
+| Europe \(Milan\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| Europe \(Paris\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| Europe \(Stockholm\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| Middle East \(Bahrain\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
+| South America \(São Paulo\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | Version 10\.11 and higher | Version 11\.6 and higher | Version 12\.4 and higher | 
 | AWS GovCloud \(US\-East\) | \- | \- | \- | \- | \- | \- | 
 | AWS GovCloud \(US\-West\) | \- | \- | \- | \- | \- | \- | 
 
