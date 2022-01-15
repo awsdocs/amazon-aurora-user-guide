@@ -239,4 +239,4 @@ Currently, Babelfish for Aurora PostgreSQL doesn't support JSON\. If your functi
       {"statusCode": 200, "body": "\"Hello from Lambda!\""}
       ```
 
-To learn more about using Lambda with Aurora PostgreSQL, see [Invoking an AWS Lambda function from an Aurora PostgreSQL DB cluster ](PostgreSQL-Lambda.md)\. For more information about working with Lambda functions, see [Getting started with Lambda](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) in the *AWS Lambda Developer Guide\.*
+To learn more about using Lambda with Aurora PostgreSQL, see [Invoking an AWS Lambda function from an Aurora PostgreSQL DB cluster](PostgreSQL-Lambda.md)\. For more information about working with Lambda functions, see [Getting started with Lambda](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) in the *AWS Lambda Developer Guide\.*

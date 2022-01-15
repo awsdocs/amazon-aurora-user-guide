@@ -12,9 +12,9 @@ Amazon Aurora includes optimizations to run an `ALTER TABLE` operation in place,
 
  The optimization performed by Aurora MySQL version 3 to improve the efficiency of some DDL operations is called instant DDL\. 
 
- Aurora MySQL version 3 is compatible with the instant DDL from community MySQL 8\.0\. You perform an instant DDL operation by using the clause `ALGORITHM=INSTANT` with the `ALTER TABLE` statement\. For syntax and usage details about instant DDL, see [ALTER TABLE](https://dev.mysql.com/doc/refman/8.0/en/alter-table.html) in the MySQL documentation\. 
+ Aurora MySQL version 3 is compatible with the instant DDL from community MySQL 8\.0\. You perform an instant DDL operation by using the clause `ALGORITHM=INSTANT` with the `ALTER TABLE` statement\. For syntax and usage details about instant DDL, see [ALTER TABLE](https://dev.mysql.com/doc/refman/8.0/en/alter-table.html) and [Online DDL Operations](https://dev.mysql.com/doc/refman/8.0/en/innodb-online-ddl-operations.html) in the MySQL documentation\. 
 
- The following examples demonstrate the instant DDL feature\. The `ALTER TABLE` statements create and drop indexes, add and drop columns, and change default columns values\. The examples include both regular and virtual columns, and both regular and partitioned tables\. At each step, you can see the results by issuing `SHOW CREATE TABLE` and `DESCRIBE` statements\. 
+ The following examples demonstrate the instant DDL feature\. The `ALTER TABLE` statements create and drop indexes, add columns, and change default column values\. The examples include both regular and virtual columns, and both regular and partitioned tables\. At each step, you can see the results by issuing `SHOW CREATE TABLE` and `DESCRIBE` statements\. 
 
 ```
 mysql> CREATE TABLE t1 (a INT, b INT, KEY(b)) PARTITION BY KEY(b) PARTITIONS 6;
@@ -40,9 +40,6 @@ Query OK, 0 rows affected (0.01 sec)
 
 mysql> ALTER TABLE t2 ADD COLUMN (d INT GENERATED ALWAYS AS (a + 1) VIRTUAL), ALGORITHM = INSTANT;
 Query OK, 0 rows affected (0.02 sec)
-
-mysql> ALTER TABLE t2 DROP COLUMN d, ALGORITHM = INSTANT;
-Query OK, 0 rows affected (0.01 sec)
 
 mysql> ALTER TABLE t2 ALTER COLUMN a SET DEFAULT 20,
     ->   ALTER COLUMN b SET DEFAULT 200, ALGORITHM = INSTANT;

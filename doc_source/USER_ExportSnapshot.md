@@ -18,6 +18,7 @@ The following table shows the Aurora MySQL engine versions that are supported fo
 
 | Aurora MySQL version | MySQL\-compatible version | 
 | --- | --- | 
+| 3\.01\.0 and higher | 8\.0 | 
 | 2\.04\.4 and higher | 5\.7 | 
 | 1\.19\.2 and higher | 5\.6 | 
 

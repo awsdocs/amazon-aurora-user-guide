@@ -38,6 +38,13 @@ Following, you can find a table that lists the highest value that should ever be
 
 | Instance class | max\_connections default value | 
 | --- | --- | 
+| db\.x2g\.16xlarge | 5000 | 
+| db\.x2g\.12xlarge | 5000 | 
+| db\.x2g\.8xlarge | 5000 | 
+| db\.x2g\.4xlarge | 5000 | 
+| db\.x2g\.2xlarge | 5000 | 
+| db\.x2g\.xlarge | 5000 | 
+| db\.x2g\.large | 3479 | 
 | db\.r6g\.16xlarge | 5000 | 
 | db\.r6g\.12xlarge | 5000 | 
 | db\.r6g\.8xlarge | 5000 | 

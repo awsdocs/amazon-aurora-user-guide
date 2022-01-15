@@ -494,7 +494,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more
 ### Aurora PostgreSQL release 3\.4\.0<a name="AuroraPostgreSQL.Updates.20180305.340"></a>
 
 **New features**
-+ Aurora PostgreSQL now supports invocation of AWS Lambda functions\. This includes the new `aws_lambda` extension\. For more information, see [Invoking an AWS Lambda function from an Aurora PostgreSQL DB cluster ](PostgreSQL-Lambda.md)\. 
++ Aurora PostgreSQL now supports invocation of AWS Lambda functions\. This includes the new `aws_lambda` extension\. For more information, see [Invoking an AWS Lambda function from an Aurora PostgreSQL DB cluster](PostgreSQL-Lambda.md)\. 
 + The db\.r6g instance classes are now available in preview for Aurora\. For more information, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
 
 **Critical stability enhancements**

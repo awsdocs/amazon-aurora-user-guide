@@ -33,6 +33,7 @@ Following, you can find a table of limitations or partially supported T\-SQL syn
 | --- | --- | 
 | @@version | The format of the value returned by `@@version` is slightly different from the value returned by SQL Server\. Your code might not work correctly if it depends on the formatting of `@@version`\. | 
 | Aggregate functions \(partially supported\) | APPROX\_COUNT\_DISTINCT, CHECKSUM\_AGG, GROUPING\_ID, ROWCOUNT\_BIG, STDEV, STDEVP, VAR, and VARP aren't supported\. | 
+|  ALTER TABLE  | Supports adding or dropping a single column or constraint only\.  | 
 | Assembly modules and SQL Common Language Runtime \(CLR\) routines  | Functionality related to assembly modules and CLR routines isn't supported\. | 
 | BACKUP statement | Aurora PostgreSQL snapshots of a database are dissimilar to backup files created in SQL Server\. Also, the granularity of when a backup and restore occurs might be different between SQL Server and Aurora PostgreSQL\. | 
 | Blank column names with no column alias | The `sqlcmd` and `psql` utilities handle columns with blank names differently: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/babelfish-compatibility.html)  | 

@@ -61,4 +61,4 @@ The Babelfish predefined escape hatches are as follows\.
 | escape\_hatch\_query\_hints |  Controls Babelfish behavior related to query hints\. When this option is set to ignore, the server ignores hints that use the OPTION \(\.\.\.\) clause to specify query processing aspects\. Examples include SELECT FROM \.\.\. OPTION\(MERGE JOIN HASH, MAXRECURSION 10\)\)\.  |  ignore  | 
 | escape\_hatch\_join\_hints |  Controls the behavior of keywords in a JOIN operator: LOOP, HASH, MERGE, REMOTE, REDUCE, REDISTRIBUTE, REPLICATE\.  |  ignore  | 
 | escape\_hatch\_session\_settings |  Controls Babelfish behavior toward unsupported session\-level SET statements\.  |  ignore  | 
-| escape\_hatch\_unique\_constraint |  Controls Babelfish behavior toward unsupported session\-level SET statements\.  |  strict  | 
+| escape\_hatch\_unique\_constraint |  Controls Babelfish behavior when creating a unique index or constraint on a nullable column\.  |  strict  | 

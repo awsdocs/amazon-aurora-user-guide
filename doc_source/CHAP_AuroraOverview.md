@@ -4,7 +4,7 @@
 
  Aurora includes a high\-performance storage subsystem\. Its MySQL\- and PostgreSQL\-compatible database engines are customized to take advantage of that fast distributed storage\. The underlying storage grows automatically as needed\. An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\)\. Aurora also automates and standardizes database clustering and replication, which are typically among the most challenging aspects of database configuration and administration\. 
 
- Aurora is part of the managed database service Amazon Relational Database Service \(Amazon RDS\)\. Amazon RDS is a web service that makes it easier to set up, operate, and scale a relational database in the cloud\. If you are not already familiar with Amazon RDS, see the [ *Amazon Relational Database Service User Guide*](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html)\. 
+ Aurora is part of the managed database service Amazon Relational Database Service \(Amazon RDS\)\. Amazon RDS is a web service that makes it easier to set up, operate, and scale a relational database in the cloud\. If you are not already familiar with Amazon RDS, see the [https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html)\. 
 
  The following points illustrate how Aurora relates to the standard MySQL and PostgreSQL engines available in Amazon RDS: 
 +  You choose Aurora as a DB engine option when setting up new database servers through Amazon RDS\. 

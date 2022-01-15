@@ -43,7 +43,7 @@ Times are shown in your local time zone, which is indicated by an offset from Co
 
 ## AWS CLI<a name="USER_PIT.CLI"></a>
 
-To restore a DB cluster to a specified time, use the AWS CLI command [ `restore-db-cluster-to-point-in-time`](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) to create a new DB cluster\.
+To restore a DB cluster to a specified time, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) to create a new DB cluster\.
 
 **Example**  
 For Linux, macOS, or Unix:  

@@ -535,9 +535,9 @@ Your Aurora global database exists, but it has only its primary Region with an A
 
 An Aurora global database needs at least one secondary Aurora DB cluster in a different AWS Region than the primary Aurora DB cluster\. You can attach up to five secondary DB clusters to your Aurora global database\. For each secondary DB cluster that you add to your Aurora global database, reduce the number of Aurora Replicas allowed to the primary DB cluster by one\.
 
-For example, if your Aurora global database has 5 secondary Regions, your primary DB cluster can have only 10 \(rather than 15\) Replicas\. For more information, see [Configuration requirements of an Amazon Aurora global database](#aurora-global-database.configuration.requirements)\.
+For example, if your Aurora global database has 5 secondary Regions, your primary DB cluster can have only 10 \(rather than 15\) Aurora Replicas\. For more information, see [Configuration requirements of an Amazon Aurora global database](#aurora-global-database.configuration.requirements)\.
 
-If the combined total of reader instances in the primary cluster and all secondary clusters is 15, you can't add a secondary cluster to an Aurora global database\. 
+The number of Aurora Replicas \(reader instances\) in the primary DB cluster determines the number of secondary DB clusters you can add\. The total number of reader instances in the primary DB cluster plus the number of secondary clusters can't exceed 15\. For example, if you have 14 reader instances in the primary DB cluster and 1 secondary cluster, you can't add another secondary cluster to the global database\.
 
 ### Console<a name="aurora-global-database-attach.console"></a>
 

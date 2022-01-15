@@ -189,7 +189,7 @@ You can create a new DB cluster parameter group using the AWS Management Console
 
 ### AWS CLI<a name="USER_WorkingWithParamGroups.CreatingCluster.CLI"></a>
 
-To create a DB cluster parameter group, use the AWS CLI [ `create-db-cluster-parameter-group`](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster-parameter-group.html) command\. The following example creates a DB cluster parameter group named *mydbclusterparametergroup* for MySQL version 5\.6 with a description of "*My new cluster parameter group*\."
+To create a DB cluster parameter group, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster-parameter-group.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster-parameter-group.html) command\. The following example creates a DB cluster parameter group named *mydbclusterparametergroup* for MySQL version 5\.6 with a description of "*My new cluster parameter group*\."
 
 Include the following required parameters:
 + `--db-cluster-parameter-group-name`
@@ -230,7 +230,7 @@ DBCLUSTERPARAMETERGROUP  mydbclusterparametergroup  mysql5.6  My cluster new par
 
 ### RDS API<a name="USER_WorkingWithParamGroups.CreatingCluster.API"></a>
 
-To create a DB cluster parameter group, use the RDS API [ `CreateDBClusterParameterGroup`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterParameterGroup.html) action\.
+To create a DB cluster parameter group, use the RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterParameterGroup.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterParameterGroup.html) action\.
 
 Include the following required parameters:
 + `DBClusterParameterGroupName`
@@ -268,7 +268,7 @@ When you associate a new DB parameter group with a DB instance, the modified sta
 
 ### AWS CLI<a name="USER_WorkingWithParamGroups.Associating.CLI"></a>
 
-To associate a DB parameter group with a DB instance, use the AWS CLI [ `modify-db-instance`](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following options:
+To associate a DB parameter group with a DB instance, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following options:
 + `--db-instance-identifier`
 + `--db-parameter-group-name`
 
@@ -294,7 +294,7 @@ aws rds modify-db-instance ^
 
 ### RDS API<a name="USER_WorkingWithParamGroups.Associating.API"></a>
 
-To associate a DB parameter group with a DB instance, use the RDS API [ `ModifyDBInstance`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following parameters:
+To associate a DB parameter group with a DB instance, use the RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following parameters:
 + `DBInstanceName`
 + `DBParameterGroupName`
 
@@ -332,7 +332,7 @@ Check the `DBClusterParameterGroupStatus` value for the primary DB instance in t
 
 ### AWS CLI<a name="USER_WorkingWithParamGroups.AssociatingCluster.CLI"></a>
 
-To associate a DB cluster parameter group with a DB cluster, use the AWS CLI [ `modify-db-cluster`](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) command with the following options:
+To associate a DB cluster parameter group with a DB cluster, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) command with the following options:
 + `--db-cluster-name`
 + `--db-cluster-parameter-group-name`
 
@@ -356,7 +356,7 @@ aws rds modify-db-cluster ^
 
 ### RDS API<a name="USER_WorkingWithParamGroups.AssociatingCluster.API"></a>
 
-To associate a DB cluster parameter group with a DB cluster, use the RDS API [ `ModifyDBCluster`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) operation with the following parameters:
+To associate a DB cluster parameter group with a DB cluster, use the RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) operation with the following parameters:
 + `DBClusterIdentifier`
 + `DBClusterParameterGroupName`
 
@@ -419,7 +419,7 @@ DBPARAMETERGROUP  mydbparametergroup
 
 ### RDS API<a name="USER_WorkingWithParamGroups.Modifying.API"></a>
 
-To modify a DB parameter group, use the RDS API [ `ModifyDBParameterGroup`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBParameterGroup.html) operation with the following required parameters:
+To modify a DB parameter group, use the RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBParameterGroup.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBParameterGroup.html) operation with the following required parameters:
 + `DBParameterGroupName`
 + `Parameters`
 
@@ -449,7 +449,7 @@ You can modify parameter values in a customer\-created DB cluster parameter grou
 
 ### AWS CLI<a name="USER_WorkingWithParamGroups.ModifyingCluster.CLI"></a>
 
-To modify a DB cluster parameter group, use the AWS CLI [ `modify-db-cluster-parameter-group`](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) command with the following required parameters:
+To modify a DB cluster parameter group, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) command with the following required parameters:
 + `--db-cluster-parameter-group-name`
 + `--parameters`
 
@@ -480,7 +480,7 @@ DBCLUSTERPARAMETERGROUP  mydbclusterparametergroup
 
 ### RDS API<a name="USER_WorkingWithParamGroups.ModifyingCluster.API"></a>
 
-To modify a DB cluster parameter group, use the RDS API [ `ModifyDBClusterParameterGroup`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterParameterGroup.html) command with the following required parameters:
+To modify a DB cluster parameter group, use the RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterParameterGroup.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterParameterGroup.html) command with the following required parameters:
 + `DBClusterParameterGroupName`
 + `Parameters`
 
@@ -599,7 +599,7 @@ In a default DB cluster parameter group, parameters are always set to their defa
 
 ### AWS CLI<a name="USER_WorkingWithParamGroups.ResettingCluster.CLI"></a>
 
-To reset parameters in a DB cluster parameter group to their default values, use the AWS CLI [ `reset-db-cluster-parameter-group`](https://docs.aws.amazon.com/cli/latest/reference/rds/reset-db-cluster-parameter-group.html) command with the following required option: `--db-cluster-parameter-group-name`\.
+To reset parameters in a DB cluster parameter group to their default values, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/reset-db-cluster-parameter-group.html](https://docs.aws.amazon.com/cli/latest/reference/rds/reset-db-cluster-parameter-group.html) command with the following required option: `--db-cluster-parameter-group-name`\.
 
 To reset all of the parameters in the DB cluster parameter group, specify the `--reset-all-parameters` option\. To reset specific parameters, specify the `--parameters` option\.
 
@@ -682,7 +682,7 @@ Currently, you can't copy a parameter group to a different AWS Region\.
 
 ### AWS CLI<a name="USER_WorkingWithParamGroups.Copying.CLI"></a>
 
-To copy a DB parameter group, use the AWS CLI [ `copy-db-parameter-group`](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-parameter-group.html) command with the following required options:
+To copy a DB parameter group, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-parameter-group.html](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-parameter-group.html) command with the following required options:
 + `--source-db-parameter-group-identifier`
 + `--target-db-parameter-group-identifier`
 + `--target-db-parameter-group-description`
@@ -743,7 +743,7 @@ You can't copy a default parameter group\. However, you can create a new paramet
 
 ### AWS CLI<a name="USER_WorkingWithParamGroups.CopyingCluster.CLI"></a>
 
-To copy a DB cluster parameter group, use the AWS CLI [ `copy-db-cluster-parameter-group`](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-parameter-group.html) command with the following required parameters:
+To copy a DB cluster parameter group, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-parameter-group.html](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-parameter-group.html) command with the following required parameters:
 + `--source-db-cluster-parameter-group-identifier`
 + `--target-db-cluster-parameter-group-identifier`
 + `--target-db-cluster-parameter-group-description`
@@ -850,7 +850,7 @@ Default parameter groups are automatically created from a default parameter temp
 
 ### AWS CLI<a name="USER_WorkingWithParamGroups.ListingCluster.CLI"></a>
 
-To list all DB cluster parameter groups for an AWS account, use the AWS CLI [ `describe-db-cluster-parameter-groups`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusterparameter-groups.html) command\.
+To list all DB cluster parameter groups for an AWS account, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusterparameter-groups.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusterparameter-groups.html) command\.
 
 **Example**  
 The following example lists all available DB cluster parameter groups for an AWS account\.  
@@ -885,7 +885,7 @@ DBCLUSTERPARAMETERGROUPS        arn:aws:rds:us-west-2:1234567890:cluster-pg:mydb
 
 ### RDS API<a name="USER_WorkingWithParamGroups.ListingCluster.API"></a>
 
-To list all DB cluster parameter groups for an AWS account, use the RDS API [ `DescribeDBClusterParameterGroups`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterParameterGroups.html) action\.
+To list all DB cluster parameter groups for an AWS account, use the RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterParameterGroups.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterParameterGroups.html) action\.
 
 ## Viewing parameter values for a DB parameter group<a name="USER_WorkingWithParamGroups.Viewing"></a>
 
@@ -948,7 +948,7 @@ You can get a list of all parameters in a DB cluster parameter group and their v
 
 ### AWS CLI<a name="USER_WorkingWithParamGroups.ViewingCluster.CLI"></a>
 
-To view the parameter values for a DB cluster parameter group, use the AWS CLI [ `describe-db-cluster-parameters`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) command with the following required parameter\.
+To view the parameter values for a DB cluster parameter group, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) command with the following required parameter\.
 + `--db-cluster-parameter-group-name`
 
 **Example**  

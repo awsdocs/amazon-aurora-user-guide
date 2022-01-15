@@ -254,7 +254,7 @@ aws rds describe-db-parameters --db-parameter-group-name default.aurora-mysql5.7
 
 ## In\-place upgrades for global databases<a name="AuroraMySQL.Upgrading.GlobalDB"></a>
 
- For an Aurora global database, you upgrade the primary cluster as explained in [How the Aurora MySQL in\-place major version upgrade works](#AuroraMySQL.Upgrading.Sequence)\. Perform the upgrade on the primary cluster in the global database\. Aurora automatically upgrades all the secondary clusters at the same time\. All primary and secondary clusters must run the same Aurora MySQL major version\. This requirement is because any changes to system tables, data file formats, and so on, are automatically replicated to all the secondary clusters\. 
+ For an Aurora global database, you upgrade the primary cluster as explained in [How the Aurora MySQL in\-place major version upgrade works](#AuroraMySQL.Upgrading.Sequence)\. Perform the upgrade on the primary cluster in the global database\. Aurora automatically upgrades all the secondary clusters at the same time and makes sure that all of the clusters run the same engine version\. This requirement is because any changes to system tables, data file formats, and so on, are automatically replicated to all the secondary clusters\. 
 
  If you use the AWS CLI or RDS API, start the upgrade process by calling the `modify-global-cluster` command or `ModifyGlobalCluster` operation instead of `modify-db-cluster` or `ModifyDBCluster`\. 
 

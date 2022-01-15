@@ -6,7 +6,7 @@ When Aurora PostgreSQL supports a new version of a database engine, you can upgr
 
 In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB cluster\. Or you can enable the **Auto minor version upgrade** option when creating or modifying a DB cluster\. Doing so means that your DB cluster is automatically upgraded after Aurora PostgreSQL tests and approves the new version\. For more details, see [Automatic minor version upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)\. For information about manually performing a minor version upgrade, see [Manually upgrading the Aurora PostgreSQL engine](#USER_UpgradeDBInstance.Upgrading.Manual)\.
 
-Aurora DB clusters that are configured as logical replication publishers or subscribers can't undergo a major version upgrade\. For more information, see [Using PostgreSQL logical replication with Aurora](AuroraPostgreSQL.Replication.Logical.md)\.
+Aurora DB clusters that are configured as logical replication publishers or subscribers can't undergo a major version upgrade\. Before upgrading, you need to stop replication and drop any logical slots\. For more information, see [Stopping logical replication](AuroraPostgreSQL.Replication.Logical.md#AuroraPostgreSQL.Replication.Logical.Stop)\.
 
 For how to determine valid upgrade targets, see [Determining which engine version to upgrade to](#USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion)\. 
 
@@ -15,6 +15,7 @@ For how to determine valid upgrade targets, see [Determining which engine versio
 + [Determining which engine version to upgrade to](#USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion)
 + [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)
 + [Manually upgrading the Aurora PostgreSQL engine](#USER_UpgradeDBInstance.Upgrading.Manual)
++ [In\-place major upgrades for global databases](#USER_UpgradeDBInstance.PostgreSQL.GlobalDB)
 + [Automatic minor version upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)
 + [Upgrading PostgreSQL extensions](#USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades)
 
@@ -34,7 +35,7 @@ During the major version upgrade process, a cloned volume is allocated\. If the 
 
 ## Determining which engine version to upgrade to<a name="USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion"></a>
 
-To determine which major engine version that you can upgrade your database to, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) CLI command\. If you can't do a major version upgrade\. You first upgrade to a minor version that has a major version upgrade path\.
+To determine which major engine version that you can upgrade your database to, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) CLI command\. If you can't do a major version upgrade\. You first upgrade to a minor version that has a major version upgrade path\.
 
 For example, the following command displays the major engine versions available for upgrading a DB cluster currently running the Aurora PostgreSQL engine version 10\.11\. 
 
@@ -177,7 +178,7 @@ During the upgrade process, you can't do a point\-in\-time restore of your clust
 1. Upgrade PostgreSQL extensions\. The PostgreSQL upgrade process doesn't upgrade any PostgreSQL extensions\. For more information, see [Upgrading PostgreSQL extensions](#USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades)\.
 
 After you complete a major version upgrade, we recommend the following:
-+ Run the `ANALYZE` operation to refresh the `pg_statistic` table\.
++ Run the `ANALYZE` operation to refresh the `pg_statistic` table\. 
 + If you upgraded to PostgreSQL version 10, run `REINDEX` on any hash indexes you have\. Hash indexes were changed in version 10 and must be rebuilt\. To locate invalid hash indexes, run the following SQL for each database that contains hash indexes\.
 
   ```
@@ -250,6 +251,15 @@ To upgrade the engine version of a DB cluster, use the [ModifyDBCluster](https:/
 + `EngineVersion` – the version number of the database engine to upgrade to\. For information about valid engine versions, use the [ DescribeDBEngineVersions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBEngineVersions.html) operation\.
 + `AllowMajorVersionUpgrade` – a required flag when the `EngineVersion` parameter is a different major version than the DB cluster's current major version\.
 + `ApplyImmediately` – whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to `true`\. To apply changes during the next maintenance window, set the value to `false`\. 
+
+## In\-place major upgrades for global databases<a name="USER_UpgradeDBInstance.PostgreSQL.GlobalDB"></a>
+
+ For an Aurora global database, you upgrade the primary cluster as explained in [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. Perform the upgrade on the primary cluster in the global database\. Aurora automatically upgrades all the secondary clusters at the same time and makes sure that all of the clusters run the same engine version\. This requirement is because any changes to system tables, data file formats, and so on, are automatically replicated to all the secondary clusters\. 
+
+ If you use the AWS CLI or RDS API, start the upgrade process by calling the `modify-global-cluster` command or `ModifyGlobalCluster` operation instead of `modify-db-cluster` or `ModifyDBCluster`\. 
+
+**Note**  
+You can't perform a major version upgrade of the Aurora DB engine if the recovery point objective \(RPO\) feature is turned on\. Before you upgrade the DB engine, make sure that this feature is turned off\. For more information about the RPO feature, see [Managing RPOs for Aurora PostgreSQL–based global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
 
 ## Automatic minor version upgrades for PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.Minor"></a>
 

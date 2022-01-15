@@ -12,7 +12,7 @@
 
 Aurora stores copies of the data in a DB cluster across multiple Availability Zones in a single AWS Region\. Aurora stores these copies regardless of whether the instances in the DB cluster span multiple Availability Zones\. For more information on Aurora, see [Managing an Amazon Aurora DB cluster](CHAP_Aurora.md)\. 
 
-When data is written to the primary DB instance, Aurora synchronously replicates the data across Availability Zones to six storage nodes associated with your cluster volume\. Doing so provides data redundancy, eliminates I/O freezes, and minimizes latency spikes during system backups\. Running a DB instance with high availability can enhance availability during planned system maintenance, and help protect your databases against failure and Availability Zone disruption\. For more information on Availability Zones, see [ Regions and Availability Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
+When data is written to the primary DB instance, Aurora synchronously replicates the data across Availability Zones to six storage nodes associated with your cluster volume\. Doing so provides data redundancy, eliminates I/O freezes, and minimizes latency spikes during system backups\. Running a DB instance with high availability can enhance availability during planned system maintenance, and help protect your databases against failure and Availability Zone disruption\. For more information on Availability Zones, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.
 
 ## High availability for Aurora DB instances<a name="Concepts.AuroraHighAvailability.Instances"></a>
 

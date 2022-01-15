@@ -54,7 +54,7 @@ To enable cluster cache management, take the steps described following\.
 
 #### AWS CLI<a name="AuroraPostgreSQL.cluster-cache-mgmt.Enable.CLI"></a>
 
-To enable cluster cache management for an Aurora PostgreSQL DB cluster, use the AWS CLI [ `modify-db-cluster-parameter-group`](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) command with the following required parameters:
+To enable cluster cache management for an Aurora PostgreSQL DB cluster, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html) command with the following required parameters:
 + `--db-cluster-parameter-group-name`
 + `--parameters`
 

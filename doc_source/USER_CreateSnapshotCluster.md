@@ -29,7 +29,7 @@ You can create a DB cluster snapshot using the AWS Management Console, the AWS C
 
 ## AWS CLI<a name="USER_CreateSnapshotCluster.CLI"></a>
 
-When you create a DB cluster snapshot using the AWS CLI, you need to identify which DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\. You can do this by using the AWS CLI [ `create-db-cluster-snapshot`](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster-snapshot.html) command with the following parameters:
+When you create a DB cluster snapshot using the AWS CLI, you need to identify which DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\. You can do this by using the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster-snapshot.html) command with the following parameters:
 + `--db-cluster-identifier`
 + `--db-cluster-snapshot-identifier`
 
@@ -53,7 +53,7 @@ For Windows:
 
 ## RDS API<a name="USER_CreateSnapshotCluster.API"></a>
 
-When you create a DB cluster snapshot using the Amazon RDS API, you need to identify which DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\. You can do this by using the Amazon RDS API [ `CreateDBClusterSnapshot`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterSnapshot.html) command with the following parameters:
+When you create a DB cluster snapshot using the Amazon RDS API, you need to identify which DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\. You can do this by using the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterSnapshot.html) command with the following parameters:
 + DBClusterIdentifier
 + DBClusterSnapshotIdentifier
 
