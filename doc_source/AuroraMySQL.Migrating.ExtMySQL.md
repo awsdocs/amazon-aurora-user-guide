@@ -451,7 +451,7 @@ If `REQUIRE SSL` is not included, the replication connection might silently fall
    CALL mysql.rds_set_external_master(
      'Externaldb.some.com',
      3306,
-     'repl_user'@'mydomain.com',
+     'repl_user',
      'password',
      'mysql-bin.000010',
      120,
