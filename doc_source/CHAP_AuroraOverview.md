@@ -7,7 +7,7 @@
  Aurora is part of the managed database service Amazon Relational Database Service \(Amazon RDS\)\. Amazon RDS is a web service that makes it easier to set up, operate, and scale a relational database in the cloud\. If you are not already familiar with Amazon RDS, see the [https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html)\. 
 
  The following points illustrate how Aurora relates to the standard MySQL and PostgreSQL engines available in Amazon RDS: 
-+  You choose Aurora as a DB engine option when setting up new database servers through Amazon RDS\. 
++  You choose Aurora as the DB engine option when setting up new database servers through Amazon RDS\. 
 +  Aurora takes advantage of the familiar Amazon Relational Database Service \(Amazon RDS\) features for management and administration\. Aurora uses the Amazon RDS AWS Management Console interface, AWS CLI commands, and API operations to handle routine database tasks such as provisioning, patching, backup, recovery, failure detection, and repair\. 
 +  Aurora management operations typically involve entire clusters of database servers that are synchronized through replication, instead of individual database instances\. The automatic clustering, replication, and storage allocation make it simple and cost\-effective to set up, operate, and scale your largest MySQL and PostgreSQL deployments\. 
 +  You can bring data from Amazon RDS for MySQL and Amazon RDS for PostgreSQL into Aurora by creating and restoring snapshots, or by setting up one\-way replication\. You can use push\-button migration tools to convert your existing Amazon RDS for MySQL and Amazon RDS for PostgreSQL applications to Aurora\. 
