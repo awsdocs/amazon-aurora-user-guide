@@ -138,26 +138,25 @@ aws rds describe-db-engine-versions --region us-east-1 --engine aurora-mysql --q
 ```
 5.6.10a
 5.6.mysql_aurora.1.19.0
-5.6.mysql_aurora.1.19.1
 5.6.mysql_aurora.1.19.2
-5.6.mysql_aurora.1.19.3
-5.6.mysql_aurora.1.19.3.1
-5.6.mysql_aurora.1.19.3.90
-5.6.mysql_aurora.1.19.4
-5.6.mysql_aurora.1.19.4.1
-5.6.mysql_aurora.1.19.4.2
-5.6.mysql_aurora.1.19.4.3
-5.6.mysql_aurora.1.19.4.4
-5.6.mysql_aurora.1.19.4.5
 5.6.mysql_aurora.1.19.5
-5.6.mysql_aurora.1.19.5.90
 5.6.mysql_aurora.1.19.6
 5.6.mysql_aurora.1.20.1
-5.6.mysql_aurora.1.22.0
 5.6.mysql_aurora.1.22.2
+5.6.mysql_aurora.1.22.3
 5.6.mysql_aurora.1.23.0
+5.6.mysql_aurora.1.23.1
+5.6.mysql_aurora.1.23.2
+5.6.mysql_aurora.1.23.3
+5.6.mysql_aurora.1.23.4
 
 5.7.mysql_aurora.2.09.0
+5.7.mysql_aurora.2.09.1
+5.7.mysql_aurora.2.09.2
+5.7.mysql_aurora.2.09.3
+5.7.mysql_aurora.2.10.0
+5.7.mysql_aurora.2.10.1
+8.0.mysql_aurora.3.01.0
 ```
 
  After you start using parallel query with a cluster, you can monitor performance and remove obstacles to parallel query usage\. For those instructions, see [Performance tuning for parallel query](#aurora-mysql-parallel-query-performance)\. 
