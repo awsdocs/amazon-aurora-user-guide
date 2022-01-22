@@ -11,7 +11,7 @@ You can use the following options to manage performance and scaling for Aurora D
 
 ## Storage scaling<a name="Aurora.Managing.Performance.StorageScaling"></a>
 
-Aurora storage automatically scales with the data in your cluster volume\. As your data grows, your cluster volume storage expands up to a maximum of 128 tebibytes \(TiB\)\. To learn what kinds of data are included in the cluster volume, see [Amazon Aurora storage and reliability](Aurora.Overview.StorageReliability.md)\.
+Aurora storage automatically scales with the data in your cluster volume\. As your data grows, your cluster volume storage expands up to a maximum of 128 tebibytes \(TiB\) or 64 TiB\. The maximum size depends on the DB engine version\. To learn what kinds of data are included in the cluster volume, see [Amazon Aurora storage and reliability](Aurora.Overview.StorageReliability.md)\. For details about the maximum size for a specific version, see [Amazon Aurora size limits](CHAP_Limits.md#RDS_Limits.FileSize.Aurora)\.
 
 The size of your cluster volume is evaluated on an hourly basis to determine your storage costs\. For pricing information, see the [Aurora pricing page](https://aws.amazon.com/rds/aurora/pricing)\.
 

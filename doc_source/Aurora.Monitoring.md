@@ -7,5 +7,6 @@ If you are using Amazon RDS Performance Insights, additional metrics are availab
 
 **Topics**
 + [Amazon Aurora metrics](Aurora.AuroraMySQL.Monitoring.Metrics.md)
++ [Aurora dimensions](dimensions.md)
 + [Availability of Aurora metrics in the Amazon RDS console](Aurora.Monitoring.Metrics.RDSAvailability.md)
 + [Viewing Aurora metrics in the Amazon RDS console](Aurora.Monitoring.Metrics.RDS.md)

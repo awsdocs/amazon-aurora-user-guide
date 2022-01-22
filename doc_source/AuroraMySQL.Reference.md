@@ -371,7 +371,7 @@
 |   `query_prealloc_size`   |   Yes   |    | 
 |   `range_alloc_block_size`   |   Yes   |    | 
 |   `read_buffer_size`   |   Yes   |    | 
-|   `read_only`   |   No   |   Aurora MySQL manages the read\-only and read/write state of DB instances based on the type of cluster\. For example, a provisioned cluster has one read/write DB instance \(the *primary instance*\) and any other instances in the cluster are read\-only \(the Aurora Replicas\)\.   | 
+|   `read_only`   |   Yes   |   Aurora MySQL manages the read\-only and read/write state of DB instances based on the type of cluster\. For example, a provisioned cluster has one read/write DB instance \(the *primary instance*\) and any other instances in the cluster are read\-only \(the Aurora Replicas\)\. The writer instance can be switched to a read\-only state by changing this parameter\. Any reader instances are always in a read\-only state, regardless of the value of this parameter\.   | 
 |   `read_rnd_buffer_size`   |   Yes   |    | 
 |   `relay-log`   |   No   |    | 
 |   `relay_log_info_repository`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 

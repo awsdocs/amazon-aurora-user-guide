@@ -112,6 +112,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Viewing key monitoring information](accessing-monitoring.md)
    + [Monitoring Amazon Aurora metrics with Amazon CloudWatch](Aurora.Monitoring.md)
       + [Amazon Aurora metrics](Aurora.AuroraMySQL.Monitoring.Metrics.md)
+      + [Aurora dimensions](dimensions.md)
       + [Availability of Aurora metrics in the Amazon RDS console](Aurora.Monitoring.Metrics.RDSAvailability.md)
       + [Viewing Aurora metrics in the Amazon RDS console](Aurora.Monitoring.Metrics.RDS.md)
    + [Monitoring DB load with Performance Insights on Amazon Aurora](USER_PerfInsights.md)

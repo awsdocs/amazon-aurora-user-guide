@@ -26,12 +26,6 @@ When you view your resources, you see only the resources that are tied to the AW
 
 ### Region availability<a name="Aurora.Overview.Availability"></a>
 
-**Note**  
-Aurora MySQL version 2 and Aurora PostgreSQL version 10\.7 don't have time zone data that reflect recent changes to Daylight Saving Time \(DST\) in Brazil\. For a workaround until updated versions are available, reset the DB cluster's time zone parameter if the expected time doesn't show correctly for the recently changed Brazil time zone\. Do the following:  
-South America \(Sao Paulo\) Region – set the time zone to `America/Fortaleza`\.
-South America \(Cuiaba\) Region – set the time zone to `America/Manaus`\.
-To change the time zone, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
-
 When you work with an Aurora DB cluster using the command line interface or API operations, make sure that you specify its regional endpoint\.
 
 **Topics**
@@ -85,7 +79,7 @@ You can set your local time zone to one of the values listed in the following ta
 |  `America/Fortaleza`  |  If your DB cluster is in the South America \(Sao Paulo\) Region and the expected time doesn't show correctly for the recently changed Brazil time zone, reset the DB cluster's time zone parameter to `America/Fortaleza`\.  | 
 |  `America/Guatemala`  |    | 
 |  `America/Halifax`  |  This time zone setting can return incorrect values from 27 Oct 1918 05:00:00 GMT to 31 Oct 1918 05:00:00 GMT\.  | 
-|  `America/Manaus`  |  If your DB cluster is in the South America \(Cuiaba\) Region and the expected time doesn't show correctly for the recently changed Brazil time zone, reset the DB cluster's time zone parameter to `America/Manaus`\.  | 
+|  `America/Manaus`  |  If your DB cluster is in the South America \(Cuiaba\) time zone and the expected time doesn't show correctly for the recently changed Brazil time zone, reset the DB cluster's time zone parameter to `America/Manaus`\.  | 
 |  `America/Matamoros`  |    | 
 |  `America/Monterrey`  |    | 
 |  `America/Montevideo`  |    | 

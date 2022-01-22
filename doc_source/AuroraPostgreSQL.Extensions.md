@@ -96,6 +96,7 @@ The following table shows the PostgreSQL extension versions that are currently s
 | [tsm\_system\_time](https://www.postgresql.org/docs/12/tsm-system-time.html) | 1\.0 | 1\.0 | 
 |  [unaccent](http://www.postgresql.org/docs/12/unaccent.html) | 1\.1 | 1\.1 | 
 | [uuid\-ossp](http://www.postgresql.org/docs/12/uuid-ossp.html) | 1\.1 | 1\.1 | 
+| [wal2json](https://github.com/eulerto/wal2json) | 2\.3 | 2\.3 | 
 
 ## Extensions supported for Aurora PostgreSQL 12\.x<a name="AuroraPostgreSQL.Extensions.12"></a>
 
@@ -178,6 +179,7 @@ The following table shows the PostgreSQL extension versions that are currently s
 | [tsm\_system\_time](https://www.postgresql.org/docs/12/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 |  [unaccent](http://www.postgresql.org/docs/12/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [uuid\-ossp](http://www.postgresql.org/docs/12/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [wal2json](https://github.com/eulerto/wal2json) | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 
 
 ## Extensions supported for Aurora PostgreSQL 11\.x<a name="AuroraPostgreSQL.Extensions.11"></a>
 
@@ -256,6 +258,7 @@ The following table shows PostgreSQL extension versions currently supported on A
 | [tsm\_system\_time](https://www.postgresql.org/docs/11/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [unaccent](http://www.postgresql.org/docs/11/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [uuid\-ossp](http://www.postgresql.org/docs/11/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [wal2json](https://github.com/eulerto/wal2json) | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 
 
 ## Extensions supported for Aurora PostgreSQL 10\.x<a name="AuroraPostgreSQL.Extensions.10"></a>
 
@@ -340,6 +343,7 @@ The `pltclu` extension is no longer supported because it is an untrusted languag
 | [tsm\_system\_time](https://www.postgresql.org/docs/10/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [unaccent](http://www.postgresql.org/docs/10/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [uuid\-ossp](http://www.postgresql.org/docs/10/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [wal2json](https://github.com/eulerto/wal2json) | NA | NA | NA | 2\.1 | 2\.1 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 
 
 ## Aurora PostgreSQL apg\_plan\_mgmt extension versions<a name="AuroraPostgreSQL.Extensions.apg_plan_mgmt"></a>
 

@@ -17,7 +17,7 @@ Aurora Replicas work well for read scaling because they're fully dedicated to re
 
 With Aurora PostgreSQL, when an Aurora Replica is deleted, its instance endpoint is removed immediately, and the Aurora Replica is removed from the reader endpoint\. If there are statements running on the Aurora Replica that is being deleted, there is a three minute grace period\. Existing statements can finish gracefully during the grace period\. When the grace period ends, the Aurora Replica is shut down and deleted\.
 
-Aurora PostgreSQL DB clusters don't support Aurora Replicas in different AWS Regions\. That means you can't use Aurora Replicas for cross\-Region replication\. However, you can scale reads and achieve high availability for an Aurora PostgreSQL DB cluster by using the Aurora global database feature\. Aurora global databases have a single read/write primary DB cluster in one AWS Region and up to five read\-only secondary DB clusters in different Regions\. For more information, see [Using Amazon Aurora global databases](aurora-global-database.md)\. 
+Aurora PostgreSQL DB clusters don't support Aurora Replicas in different AWS Regions, so you can't use Aurora Replicas for cross\-Region replication\.  
 
 **Note**  
 Rebooting the writer DB instance of an Amazon Aurora DB cluster also automatically reboots the Aurora Replicas for that DB cluster\. The automatic reboot re\-establishes an entry point that guarantees read/write consistency across the DB cluster\.
