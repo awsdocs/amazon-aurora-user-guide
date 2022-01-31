@@ -16,7 +16,7 @@ A session is active when it's either running on CPU or waiting for a resource to
 
 ## Average active sessions<a name="USER_PerfInsights.Overview.ActiveSessions.AAS"></a>
 
-The *average active sessions \(AAS\)* is the unit for the `DBLoad` metric in Performance Insights\. To get the average active sessions, Performance Insights samples the number of sessions concurrently running a query\. The AAS is the total number of sessions divided by the total number of samples for a specific time period\. The following table shows 5 consecutive samples of a running query\. 
+The *average active sessions \(AAS\)* is the unit for the `DBLoad` metric in Performance Insights\. To get the average active sessions, Performance Insights samples the number of sessions concurrently running a query\. The AAS is the total number of sessions divided by the total number of samples for a specific time period\. The following table shows 5 consecutive samples of a running query\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.Overview.ActiveSessions.html)
 
@@ -34,7 +34,15 @@ In most cases, the AAS and AAE for a query are approximately the same\. However,
 
 ## Dimensions<a name="USER_PerfInsights.Overview.ActiveSessions.dimensions"></a>
 
-The `db.load` metric is different from the other time\-series metrics because you can break it into subcomponents called dimensions\. You can think of dimensions as categories or "group by" clauses for the different characteristics of the `DBLoad` metric\. When you are diagnosing performance issues, the most useful dimensions are wait events and top SQL\.
+The `db.load` metric is different from the other time\-series metrics because you can break it into subcomponents called dimensions\. You can think of dimensions as "slice by" categories for the different characteristics of the `DBLoad` metric\.
+
+When you are diagnosing performance issues, the following dimensions are often the most useful:
+
+**Topics**
++ [Wait events](#USER_PerfInsights.Overview.ActiveSessions.waits)
++ [Top SQL](#USER_PerfInsights.Overview.ActiveSessions.top-sql)
+
+For a complete list of dimensions for the Aurora engines, see [DB load sliced by dimensions](USER_PerfInsights.UsingDashboard.Components.md#USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.dims)\.
 
 ### Wait events<a name="USER_PerfInsights.Overview.ActiveSessions.waits"></a>
 
@@ -54,6 +62,6 @@ Wait events vary by DB engine:
 
 ### Top SQL<a name="USER_PerfInsights.Overview.ActiveSessions.top-sql"></a>
 
-Where wait events show bottlenecks, top SQL shows which queries are contributing the most to DB load\. For example, many queries might be currently running on the database, but a single query might consume 99 percent of the DB load\. In this case, the high load might indicate a problem with the query\. 
+Where wait events show bottlenecks, top SQL shows which queries are contributing the most to DB load\. For example, many queries might be currently running on the database, but a single query might consume 99 percent of the DB load\. In this case, the high load might indicate a problem with the query\.
 
 By default, the Performance Insights console displays top SQL queries that are contributing to the database load\. The console also shows relevant statistics for each statement\. To diagnose performance problems for a specific statement, you can examine its execution plan\.

@@ -11,6 +11,7 @@ You can filter new Amazon Aurora features on the [What's New with Database?](htt
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Aurora MySQL version 2\.10\.2](AuroraMySQL.Updates.2102.md) |  Aurora MySQL version 2\.10\.2 is available\.  | January 26, 2022 | 
 | [Performance Insights supports new APIs](#WhatsNew) | Performance Insights supports the following APIs: `GetResourceMetadata`, `ListAvailableResourceDimensions`, and `ListAvailableResourceMetrics`\. For more information, see [Retrieving metrics with the Performance Insights API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.API.html) in this manual and the [https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetadata.html](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetadata.html)\. | January 12, 2022 | 
 | [RDS Proxy supports events](#WhatsNew) | RDS Proxy now generates events that you can subscribe to and view in CloudWatch Events or configure to send to Amazon EventBridge\. For more information, see [Working with RDS Proxy events](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.events.html)\. | January 11, 2022 | 
 | [Aurora MySQL version 2\.08\.4](AuroraMySQL.Updates.2084.md) | Aurora MySQL version 2\.08\.4 is available\. | January 6, 2022 | 

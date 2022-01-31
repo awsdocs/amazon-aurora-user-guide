@@ -8,6 +8,7 @@ AWS Identity and Access Management \(IAM\) is an AWS service that helps an admin
 + [Managing access using policies](#security_iam_access-manage)
 + [How Amazon Aurora works with IAM](security_iam_service-with-iam.md)
 + [Amazon Aurora identity\-based policy examples](security_iam_id-based-policy-examples.md)
++ [Preventing cross\-service confused deputy problems](cross-service-confused-deputy-prevention.md)
 + [IAM database authentication](UsingWithRDS.IAMDBAuth.md)
 + [Troubleshooting Amazon Aurora identity and access](security_iam_troubleshoot.md)
 

@@ -40,7 +40,7 @@ In DevOps Guru for RDS, an *anomaly* is a pattern that deviates from what is co
 
 A *causal anomaly* is a top\-level anomaly within an insight\. **Database load \(DB load\)** is the causal anomaly for DevOps Guru for RDS\. 
 
-An anomaly measures performance impact by assigning a severity level of **High**, **Medium**, or **Low**\. To learn more, see [Key concepts for DevOps Guru for RDS](https://docs.aws.amazon.com/http://lashdown-cap-ug-rds/working-with-rds.overview.definitions.html) in the *Amazon DevOps Guru User Guide*\.
+An anomaly measures performance impact by assigning a severity level of **High**, **Medium**, or **Low**\. To learn more, see [Key concepts for DevOps Guru for RDS](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-rds.overview.definitions.html) in the *Amazon DevOps Guru User Guide*\.
 
 If DevOps Guru detects an anomaly on your DB instance, you're alerted in the **Databases** page of the RDS console\. To go to the anomaly page from the RDS console, choose the link in the alert message\. The RDS console also alerts you in the page for your Amazon Aurora cluster\.
 
@@ -51,7 +51,7 @@ A *contextual anomaly* is a finding within **Database load \(DB load\)**\. Each 
 **Important**  
 We recommend that you test any changes on a test instance before modifying a production instance\. In this way, you understand the impact of the change\.
 
-To learn more, see [Analyzing anomalies in Amazon Aurora clusters](https://docs.aws.amazon.com/cap-ug-rds/working-with-rds.analyzing.html) in the *Amazon DevOps Guru User Guide*\.
+To learn more, see [Analyzing anomalies in Amazon Aurora clusters](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-rds.analyzing.html) in the *Amazon DevOps Guru User Guide*\.
 
 ## Setting up DevOps Guru for RDS<a name="devops-guru-for-rds.configuring"></a>
 

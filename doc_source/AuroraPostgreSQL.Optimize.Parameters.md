@@ -15,7 +15,7 @@ Set the query plan management parameters at the appropriate level:
 + Set at the DB instance level to isolate the settings to an individual DB instance\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 + Set in a specific client session such as in psql, to isolate the values to only that session\.
 
-You must be set the parameters `apg_plan_mgmt.max_databases` and `apg_plan_mgmt.max_plans` at the cluster or DB instance level\. 
+You can set the `apg_plan_mgmt.max_databases` parameter and the `apg_plan_mgmt.max_plans` parameter at the Aurora DB cluster level or at the DB instance level\. 
 
 ## apg\_plan\_mgmt\.capture\_plan\_baselines<a name="AuroraPostgreSQL.Optimize.Parameters.capture_plan_baselines"></a>
 
@@ -36,10 +36,10 @@ SET apg_plan_mgmt.capture_plan_baselines = [off | automatic |manual];
 
 ## apg\_plan\_mgmt\.max\_databases<a name="AuroraPostgreSQL.Optimize.Parameters.max_databases"></a>
 
-Sets the maximum number of database objects that might use query plan management\. A database object is what gets created with the CREATE DATABASE SQL statement\. 
+Sets the maximum number of databases that can use query plan management\. You can use the `psq1` meta\-command \(`\l`\) to find out how many databases are on the DB instance in the Aurora PostgreSQL DB cluster\. By default, query plan management can support 10 databases\. You can change the value of this parameter at the DB cluster level or at the DB instance level\. 
 
 **Important**  
-Set `apg_plan_mgmt.max_databases` at the cluster or DB instance level\. It requires a DB instance restart for a new value to take effect\.
+If you change the value of `apg_plan_mgmt.max_databases`, be sure to reboot the DB instance so that the new value takes effect\.
 
 ```
 SET apg_plan_mgmt.max_databases = integer-value;
@@ -56,10 +56,10 @@ SET apg_plan_mgmt.max_databases = integer-value;
 
 ## apg\_plan\_mgmt\.max\_plans<a name="AuroraPostgreSQL.Optimize.Parameters.max_plans"></a>
 
-Sets the maximum number of plans that might be captured in the `apg_plan_mgmt.dba_plans` view\. 
+Sets the maximum number of SQL statements that the query plan manager can maintain in the `apg_plan_mgmt.dba_plans` view\. We recommend setting this parameter to `10000` or higher for all Aurora PostgreSQL versions\. 
 
 **Important**  
-Set `apg_plan_mgmt.max_plans` at the cluster or DB instance level\. It requires a DB instance restart for a new value to take effect\. We recommend setting this parameter to `10000` or higher for all Aurora PostgreSQL versions\.
+You can set the `apg_plan_mgmt.max_plans` parameter at the cluster level or at the DB instance level\. Be sure to reboot the DB instance so that the new value can take effect\. 
 
 ```
 SET apg_plan_mgmt.max_plans = integer-value;
@@ -67,16 +67,13 @@ SET apg_plan_mgmt.max_plans = integer-value;
 
 
 ****  
-
-| Value | Default | Description | 
-| --- | --- | --- | 
-| integer |  10000 for Aurora PostgreSQL version 11 and higher 1000 for Aurora PostgreSQL version 10 and lower  | A positive integer value greater or equal to 10\.  | 
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.Parameters.html)
 
  
 
 ## apg\_plan\_mgmt\.plan\_retention\_period<a name="AuroraPostgreSQL.Optimize.Parameters.plan_retention_period"></a>
 
-The number of days plans are kept in the `apg_plan_mgmt.dba_plans` view before being automatically deleted\. A plan is deleted when the current date is this many days since the plan's `last_used` date\. The `last_used` date is the most recent date that either the optimizer chose a plan as the minimum cost plan or that the plan was executed\.
+The number of days that plans are kept in the `apg_plan_mgmt.dba_plans` view before being automatically deleted\. A plan is deleted when the current date is the specified number of days since the plan's `last_used` date\. The default is 32 days\. The `last_used` date is the most recent date that either the optimizer chose a plan as the minimum cost plan or that the plan was executed\.
 
 ```
 SET apg_plan_mgmt.plan_retention_period = integer-value;

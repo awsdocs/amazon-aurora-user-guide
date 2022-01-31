@@ -4,7 +4,7 @@ You can capture execution plans for specific SQL statements by using manual plan
 
 When capturing plans, the optimizer sets the status of a managed statement's first captured plan to `approved`\. The optimizer sets the status of any additional plans captured for a managed statement to `unapproved`\. However, more than one plan might occasionally be saved with the `approved` status\. This can happen when multiple plans are created for a statement in parallel and before the first plan for the statement is committed\.
 
-To control the maximum number of plans that can be captured and stored in the `dba_plans` view, set the `apg_plan_mgmt.max_plans` parameter in your DB instance\-level parameter group\. A change to the `apg_plan_mgmt.max_plans` parameter requires a DB instance restart for a new value to take effect\. For more information, see the [apg\_plan\_mgmt\.max\_plans](AuroraPostgreSQL.Optimize.Parameters.md#AuroraPostgreSQL.Optimize.Parameters.max_plans) parameter\. 
+To control the maximum number of plans that can be captured and stored in the `dba_plans` view, set the `apg_plan_mgmt.max_plans` parameter in your DB instance\-level parameter group\. A change to the `apg_plan_mgmt.max_plans` parameter requires a DB instance reboot for a new value to take effect\. For more information, see the [apg\_plan\_mgmt\.max\_plans](AuroraPostgreSQL.Optimize.Parameters.md#AuroraPostgreSQL.Optimize.Parameters.max_plans) parameter\. 
 
 **Topics**
 + [Manually capturing plans for specific SQL statements](#AuroraPostgreSQL.Optimize.CapturePlans.Manual)
@@ -37,7 +37,7 @@ Use automatic plan capture for situations such as the following:
 
 1. Turn on automatic plan capture by setting `apg_plan_mgmt.capture_plan_baselines` to `automatic` in the DB instance\-level parameter group\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
 
-1. Restart your DB instance\.
+1. Reboot your DB instance\.
 
 1. As the application runs, the optimizer captures plans for each SQL statement that runs at least twice\.
 

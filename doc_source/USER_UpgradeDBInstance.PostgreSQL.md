@@ -145,7 +145,7 @@ We recommend the following process when upgrading an Aurora PostgreSQL DB cluste
 
 1. Drop `unknown` data types, depending on your target version\.
 
-   PostgreSQL version 10 stopped supporting the `unknown` data type\. If a version 9\.6 database uses the `unknown` data type, an upgrade to a version 10 shows an error message such as the following\. 
+   PostgreSQL version 10 doesn't support the `unknown` data type\. If a version 9\.6 database uses the `unknown` data type, an upgrade to version 10 shows an error message such as the following\. 
 
    ```
    Database instance is in a state that cannot be upgraded: PreUpgrade checks failed: 
@@ -153,10 +153,19 @@ We recommend the following process when upgrading an Aurora PostgreSQL DB cluste
    Please remove all usages of the 'unknown' data type and try again."
    ```
 
-   To find the `unknown` data type in your database so you can remove the offending column or change it to a supported data type, use the following SQL code\.
+   To find the `unknown` data type in your database so that you can remove such columns or change them to supported data types, use the following SQL code for each database\.
 
    ```
-   SELECT DISTINCT data_type FROM information_schema.columns WHERE data_type ILIKE 'unknown';
+   SELECT n.nspname, c.relname, a.attname
+       FROM pg_catalog.pg_class c,
+       pg_catalog.pg_namespace n,
+       pg_catalog.pg_attribute a
+       WHERE c.oid = a.attrelid AND NOT a.attisdropped AND
+       a.atttypid = 'pg_catalog.unknown'::pg_catalog.regtype AND
+       c.relkind IN ('r','m','c') AND
+       c.relnamespace = n.oid AND
+       n.nspname !~ '^pg_temp_' AND
+       n.nspname !~ '^pg_toast_temp_' AND n.nspname NOT IN ('pg_catalog', 'information_schema');
    ```
 
 1. Perform a dry run upgrade\.

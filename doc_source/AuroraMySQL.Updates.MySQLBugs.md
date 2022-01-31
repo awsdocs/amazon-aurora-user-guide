@@ -13,10 +13,10 @@ MySQL 5\.7\-compatible version Aurora contains all MySQL bug fixes through MySQL
 
 | Database engine update | Version | MySQL bugs fixed | 
 | --- | --- | --- | 
+| [Aurora MySQL database engine updates 2022\-01\-26 \(version 2\.10\.2\)](AuroraMySQL.Updates.2102.md) |  2\.10\.2  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL database engine updates 2021\-10\-21 \(version 2\.10\.1\)](AuroraMySQL.Updates.2101.md) |  2\.10\.1  |   CURRENT\_TIMESTAMP PRODUCES ZEROS IN TRIGGER\. \(Bug \#25209512\)   | 
 | [Aurora MySQL database engine updates 2021\-05\-25 \(version 2\.10\.0\)](AuroraMySQL.Updates.2100.md) |  2\.10\.0  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
-| [Aurora MySQL database engine updates 2021\-11\-12 \(version 2\.09\.3\)](AuroraMySQL.Updates.2093.md) |  2\.09\.3  |   ASSERTION \!M\_PREBUILT\->TRX\->CHECK\_FOREIGNS\. \(Bug \#23533396\)   | 
-| [Aurora MySQL database engine updates 2021\-11\-12 \(version 2\.09\.3\)](AuroraMySQL.Updates.2093.md) |  2\.09\.3  |   Replication:\* A locking issue in the WAIT\_FOR\_EXECUTED\_GTID\_SET\(\) function could cause the server to hang in certain circumstances\. The issue has now been corrected\. \(Bug \#29550513\)   | 
+| [Aurora MySQL database engine updates 2021\-11\-12 \(version 2\.09\.3\)](AuroraMySQL.Updates.2093.md) |  2\.09\.3  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL database engine updates 2020\-12\-11 \(version 2\.09\.1\)](AuroraMySQL.Updates.2091.md) |  2\.09\.1  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL database engine updates 2020\-11\-12 \(version 2\.08\.3\)](AuroraMySQL.Updates.2083.md) |  2\.08\.3  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 
 | [Aurora MySQL database engine updates 2020\-06\-02 \(version 2\.08\.0\)](AuroraMySQL.Updates.2080.md) |  2\.08\.0  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.MySQLBugs.html)  | 

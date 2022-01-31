@@ -45,7 +45,7 @@ Only users with the `rds_superuser` role can complete the following procedure\. 
 
 1. Open your cluster\-level parameter group and set the `rds.enable_plan_management` parameter to `1`\. For more information, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
 
-1. Restart your DB instance to enable this new setting\.
+1. Reboot your DB instance to enable this new setting\.
 
 1. Connect to your DB instance with a SQL client such as psql\.
 

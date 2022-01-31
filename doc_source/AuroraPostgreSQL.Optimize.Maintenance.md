@@ -178,7 +178,7 @@ To delete any plan that is no longer valid and that you expect not to become val
 You can implement your own policy for deleting plans\. Plans are automatically deleted when the current date `last_used` is greater than the value of the `apg_plan_mgmt.plan_retention_period` parameter, which defaults to 32 days\. You can specify a longer interval, or you can implement your own plan retention policy by calling the `delete_plan` function directly\. The `last_used` date is the most recent date that either the optimizer chose a plan as the minimum cost plan or that the plan was executed\.
 
 **Important**  
-If you don't clean up plans, you might eventually run out of shared memory that is set aside for query plan management\. To control how much memory is available for managed plans, use the `apg_plan_mgmt.max_plans` parameter\. Set this parameter in your DB instance\-level parameter group and restart your DB instance for changes to take effect\. For more information, see the [apg\_plan\_mgmt\.max\_plans](AuroraPostgreSQL.Optimize.Parameters.md#AuroraPostgreSQL.Optimize.Parameters.max_plans) parameter\. 
+If you don't clean up plans, you might eventually run out of shared memory that is set aside for query plan management\. To control how much memory is available for managed plans, use the `apg_plan_mgmt.max_plans` parameter\. Set this parameter in your DB instance\-level parameter group and reboot your DB instance for changes to take effect\. For more information, see the [apg\_plan\_mgmt\.max\_plans](AuroraPostgreSQL.Optimize.Parameters.md#AuroraPostgreSQL.Optimize.Parameters.max_plans) parameter\. 
 
 ## Exporting and importing plans<a name="AuroraPostgreSQL.Optimize.Maintenance.ExportingImporting"></a>
 

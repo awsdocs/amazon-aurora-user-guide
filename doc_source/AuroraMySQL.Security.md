@@ -120,29 +120,31 @@ The `tls_version` DB cluster parameter isn't available for Aurora MySQL 5\.6\.
 
 To encrypt connections using the default `mysql` client, launch the mysql client using the `--ssl-ca parameter` to reference the public key, for example: 
 
-For MySQL 5\.7, MySQL 8\.0, and later:
+For MySQL 5\.7 and 8\.0:
 
 ```
-mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
---ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-mode=VERIFY_IDENTITY
+mysql -h myinstance.123456789012.rds-us-east-1.amazonaws.com
+--ssl-ca=full_path_to_CA_certificate --ssl-mode=VERIFY_IDENTITY
 ```
 
-For MySQL 5\.6 and earlier:
+For MySQL 5\.6:
 
 ```
-mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
---ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-verify-server-cert
+mysql -h myinstance.123456789012.rds-us-east-1.amazonaws.com
+--ssl-ca=full_path_to_CA_certificate --ssl-verify-server-cert
 ```
+
+Replace *full\_path\_to\_CA\_certificate* with the full path to your Certificate Authority \(CA\) certificate\. For information about downloading a certificate, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\.
 
 You can require SSL/TLS connections for specific users accounts\. For example, you can use one of the following statements, depending on your MySQL version, to require SSL/TLS connections on the user account `encrypted_user`\.
 
-For MySQL 5\.7 and later:
+For MySQL 5\.7 and 8\.0:
 
 ```
 ALTER USER 'encrypted_user'@'%' REQUIRE SSL;            
 ```
 
-For MySQL 5\.6 and earlier:
+For MySQL 5\.6:
 
 ```
 GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL;            
