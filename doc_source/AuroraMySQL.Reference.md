@@ -421,8 +421,9 @@
 |   `tmp_table_size`   |   Yes   |    | 
 |   `tmpdir`   |   No   |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
 |   `transaction_alloc_block_size`   |   Yes   |    | 
+|   `transaction_isolation`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\. It replaces `tx_isolation`\.   | 
 |   `transaction_prealloc_size`   |   Yes   |    | 
-|   `tx_isolation`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
+|   `tx_isolation`   |   Yes   |   Removed from Aurora MySQL version 3\. It is replaced by `transaction_isolation`\.   | 
 |   `updatable_views_with_limit`   |   Yes   |    | 
 |   `validate-password`   |   No   |    | 
 |   `validate_password_dictionary_file`   |   No   |    | 

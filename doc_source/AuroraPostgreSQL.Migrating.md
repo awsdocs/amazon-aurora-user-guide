@@ -76,7 +76,7 @@ You might be behind a corporate firewall that doesn't allow access to default po
 
 ### AWS CLI<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Import.Console.CLI"></a>
 
-Using the AWS CLI to migrate an RDS for PostgreSQL DB snapshot to an Aurora PostgreSQL involves two separate AWS CLI commands\. First, you use the `restore-db-cluster-from-snapshot` AWS CLI command create a new Aurora PostgreSQL DB cluster\. You then use the `create-db-instance` command to create the primary DB instance instance in the new cluster to complete the migration\. The following procedure creates an Aurora PostgreSQL DB cluster with primary DB instance that has the same configuration as the DB instance used to create the snapshot\. 
+Using the AWS CLI to migrate an RDS for PostgreSQL DB snapshot to an Aurora PostgreSQL involves two separate AWS CLI commands\. First, you use the `restore-db-cluster-from-snapshot` AWS CLI command create a new Aurora PostgreSQL DB cluster\. You then use the `create-db-instance` command to create the primary DB instance in the new cluster to complete the migration\. The following procedure creates an Aurora PostgreSQL DB cluster with primary DB instance that has the same configuration as the DB instance used to create the snapshot\. 
 
 **To migrate an RDS for PostgreSQL DB snapshot to an Aurora PostgreSQL DB cluster**
 
@@ -209,7 +209,7 @@ You can create an Aurora read replica for an RDS for PostgreSQL DB instance by u
 
 1. In the navigation pane, choose **Databases**\. 
 
-1. Choose the RDS for PostgreSQL DB instance that you want to use as the source for your Aurora read replica, and choose **Create Aurora read replica** for **Actions**\.  
+1. Choose the RDS for PostgreSQL DB instance that you want to use as the source for your Aurora read replica\. For **Actions**, choose **Create Aurora read replica**\.  
 ![\[Create Aurora read replica\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Aurorapgres-migrate.png)
 
 1. Choose the DB cluster specifications that you want to use for the Aurora read replica, as described in the following table\.     

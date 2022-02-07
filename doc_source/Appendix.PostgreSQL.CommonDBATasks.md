@@ -2,7 +2,7 @@
 
 For easy and efficient access to Oracle databases for Aurora PostgreSQL, you can use the PostgreSQL oracle\_fdw extension, which provides a foreign data wrapper\. For a complete description of this extension, see the [oracle\_fdw](https://github.com/laurenz/oracle_fdw) documentation\.  
 
-The oracle\_fdw extension is supported on Amazon RDS for PostgreSQL versions 12\.7, 13\.3, and higher that use x86\-based DB instance classes\.
+The oracle\_fdw extension is supported on Amazon RDS for PostgreSQL versions 12\.7, 13\.3, and higher\.
 
 ## Turning on the oracle\_fdw extension<a name="postgresql-oracle-fdw.enabling"></a>
 
@@ -70,19 +70,6 @@ If the query reports the following error, check your security group and access c
 ERROR: connection for foreign table "mytab" cannot be established
 DETAIL: ORA-12170: TNS:Connect timeout occurred
 ```
-
-## Considerations for DB instances from non–Intel\-based classes<a name="postgresql-oracle-fdw.consider"></a>
-
-The oracle\_fdw foreign data wrapper relies on the Oracle client\. The Oracle client isn't supported on Graviton2\-based DB instances, such as the `db.m6g` instance class\. Any calls to Graviton2\-based DB instances result in the following error\.
-
-```
-ERROR: oracle_fdw is not supported on this instance type, please refer to the documentation for more details
-```
-
-The following considerations apply to DB instances from non–Intel\-based DB classes:
-+ Migrating from an x86\-based DB instance to a Graviton2\-based one succeeds, but produces the previous error message when oracle\_fdw uses the Oracle client\.
-+ Reverting to an x86\-based instance makes oracle\_fdw work again\.
-+ If you have a read replica on x86 and the primary DB instance is on Graviton2, calls that require the Oracle client succeed on the read replica if they don't generate write activity\. Any calls that don't require the Oracle client succeed on the primary\. Therefore, you can successfully perform the steps in the previous example \(except the query\) on the primary DB instance and run the query on the read replica\.
 
 ## Working with encryption in transit<a name="postgresql-oracle-fdw.encryption"></a>
 

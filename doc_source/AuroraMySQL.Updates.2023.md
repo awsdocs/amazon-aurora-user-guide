@@ -1,4 +1,4 @@
-# Aurora MySQL database engine updates 2018\-08\-23<a name="AuroraMySQL.Updates.2023"></a>
+# Aurora MySQL database engine updates 2018\-08\-23 \(version 2\.02\.3\) \(deprecated\)<a name="AuroraMySQL.Updates.2023"></a>
 
 **Version:** 2\.02\.3
 
@@ -17,9 +17,9 @@ The performance schema is disabled for this release of Aurora MySQL 5\.7\. Upgra
 
 If you have any questions or concerns, AWS Support is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.
 
-## Comparison with Aurora MySQL 5\.6<a name="AuroraMySQL.Updates.2023.Compare56"></a>
+## Comparison with Aurora MySQL version 1<a name="AuroraMySQL.Updates.2023.Compare56"></a>
 
-The following Amazon Aurora MySQL features are supported in Aurora MySQL 5\.6, but these features are currently not supported in Aurora MySQL 5\.7\.
+The following Amazon Aurora MySQL features are supported in Aurora MySQL version 1 \(compatible with MySQL 5\.6\), but these features are currently not supported in Aurora MySQL version 2 \(compatible with MySQL 5\.7\)\.
 + Asynchronous key prefetch \(AKP\)\. For more information, see [Optimizing Amazon Aurora indexed join queries with asynchronous key prefetch](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
 + Hash joins\. For more information, see [Optimizing large Aurora MySQL join queries with hash joins](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
 + Native functions for synchronously invoking AWS Lambda functions\. These functions are available for MySQL 5\.7\-compatible clusters in Aurora MySQL 2\.06 and higher\. For more information, see [Invoking a Lambda function with an Aurora MySQL native function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)\.

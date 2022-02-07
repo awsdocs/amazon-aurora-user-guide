@@ -49,7 +49,7 @@ The following table shows the PostgreSQL extension versions that are currently s
 | log\_fdw | 1\.2 | 1\.2 | 
 | [ltree](http://www.postgresql.org/docs/12/ltree.html) | 1\.2 | 1\.2 | 
 |  [moddatetime \(contrib\-spi\)](https://www.postgresql.org/docs/13/contrib-spi.html) | N/A | 1\.0 | 
-| oracle\_fdw | 1\.2 | 1\.2 | 
+| oracle\_fdw | 2\.3\.0 | 2\.3\.0 | 
 | [orafce](https://github.com/orafce/orafce) | 3\.16 | 3\.16 | 
 | [pg\_bigm](https://pgbigm.osdn.jp/pg_bigm_en-1-2.html) | 1\.2 | 1\.2 | 
 | [pg\_buffercache](http://www.postgresql.org/docs/12/pgbuffercache.html) | 1\.3 | 1\.3 | 
@@ -134,7 +134,7 @@ The following table shows the PostgreSQL extension versions that are currently s
 | jsonb\_plperl | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | log\_fdw | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [ltree](http://www.postgresql.org/docs/12/ltree.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| oracle\_fdw | NA | NA | 1\.0 | 1\.0 | 
+| oracle\_fdw | NA | NA | 2\.3\.0 | 2\.3\.0 | 
 | [orafce](https://github.com/orafce/orafce) | 3\.8 | 3\.8 | 3\.16 | 3\.16 | 
 | [pg\_bigm](https://pgbigm.osdn.jp/pg_bigm_en-1-2.html) | NA | 1\.2 | 1\.2 | 1\.2 | 
 | [pg\_buffercache](http://www.postgresql.org/docs/12/pgbuffercache.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 

@@ -1,6 +1,6 @@
 # IAM database authentication<a name="UsingWithRDS.IAMDBAuth"></a>
 
-You can authenticate to your DB cluster using AWS Identity and Access Management \(IAM\) database authentication\. IAM database authentication works with Aurora MySQL and Aurora PostgreSQL\. With this authentication method, you don't need to use a password when you connect to a DB cluster\. Instead, you use an authentication token\.
+You can authenticate to your DB cluster using AWS Identity and Access Management \(IAM\) database authentication\. IAM database authentication works with MariaDB, Aurora MySQL and Aurora PostgreSQL\. With this authentication method, you don't need to use a password when you connect to a DB cluster\. Instead, you use an authentication token\.
 
 An *authentication token* is a unique string of characters that Amazon Aurora generates on request\. Authentication tokens are generated using AWS Signature Version 4\. Each token has a lifetime of 15 minutes\. You don't need to store user credentials in the database, because authentication is managed externally using IAM\. You can also still use standard database authentication\. The token is only used for authentication and doesn't affect the session after it is established\.
 
@@ -12,7 +12,7 @@ IAM database authentication provides the following benefits:
 **Topics**
 + [Availability for IAM database authentication](#UsingWithRDS.IAMDBAuth.Availability)
 + [Limitations for IAM database authentication](#UsingWithRDS.IAMDBAuth.Limitations)
-+ [Aurora MySQL recommendations for IAM database authentication](#UsingWithRDS.IAMDBAuth.ConnectionsPerSecond)
++ [MariaDB and Aurora MySQL recommendations for IAM database authentication](#UsingWithRDS.IAMDBAuth.ConnectionsPerSecond)
 + [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
 + [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
 + [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
@@ -46,9 +46,9 @@ When using IAM database authentication, the following limitations apply:
 + Currently, IAM database authentication isn't supported for CNAMEs\.
 + For PostgreSQL, if the IAM role \(`rds_iam`\) is added to the master user, IAM authentication takes precedence over Password authentication so the master user has to log in as an IAM user\.
 
-## Aurora MySQL recommendations for IAM database authentication<a name="UsingWithRDS.IAMDBAuth.ConnectionsPerSecond"></a>
+## MariaDB and Aurora MySQL recommendations for IAM database authentication<a name="UsingWithRDS.IAMDBAuth.ConnectionsPerSecond"></a>
 
-We recommend the following when using the Aurora MySQL DB engine:
+We recommend the following when using the MariaDB or Aurora MySQL DB engine:
 + Use IAM database authentication as a mechanism for temporary, personal access to databases\.
 + Use IAM database authentication only for workloads that can be easily retried\.
 + Use IAM database authentication when your application requires fewer than 200 new IAM database authentication connections per second\.

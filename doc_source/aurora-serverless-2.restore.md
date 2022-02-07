@@ -9,7 +9,7 @@
 
  You can create a new Aurora Serverless v2 \(preview\) DB cluster by restoring an existing DB cluster to a specific point in time\. You can also use this approach to recover from a failure by recreating your Aurora Serverless v2 \(preview\) DB cluster from its most recent log files\. 
 
- To restore your DB cluster to a specific point in time, Aurora creates a new DB cluster\. It then applies all transactions from the logs of the existing DB cluster to the new cluster\. Depending on the quantity and scope of transactions contained in the logs, this operation might take several hours to complete\. For more information about point\-in\-time restore, see [Restoring a DB cluster to a specified time](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PIT.html)\. 
+To restore your DB cluster to a specific point in time, Aurora creates a new DB cluster\. It then applies all transactions from the logs of the existing DB cluster to the new cluster\. Depending on the quantity and scope of transactions contained in the logs, this operation might take several hours to complete\. For more information about point\-in\-time recovery, see [Restoring a DB cluster to a specified time](aurora-pitr.md)\.
 
  Currently, you can restore your Aurora Serverless v2 \(preview\) DB cluster using the console only\. 
 

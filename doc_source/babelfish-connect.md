@@ -13,6 +13,9 @@ With Babelfish, you run the following:
 + SQL Server tools, applications, and syntax on the TDS port, by default port 1433\.
 + PostgreSQL tools, applications, and syntax on the PostgreSQL port, by default port 5432\.
 
+**Note**  
+Babelfish for Aurora PostgreSQL doesn't support MARS \(Multiple Active Result Sets\)\. Be sure that any client applications that you use to connect to Babelfish aren't set to use MARS\. 
+
 If you're new to connecting to an Amazon Aurora PostgreSQL database, see also [Connecting to an Amazon Aurora PostgreSQL DB cluster](Aurora.Connecting.md#Aurora.Connecting.AuroraPostgreSQL)\.
 
 ## Finding the DNS writer endpoint and port number<a name="babelfish-connect-endpoint"></a>

@@ -43,7 +43,7 @@ To determine the latest or earliest restorable time for a DB cluster, look for t
 
 You can determine when the restore of a DB cluster is complete by checking the `Latest Restorable Time` and `Earliest Restorable Time` values\. The `Latest Restorable Time` and `Earliest Restorable Time` values return NULL until the restore operation is complete\. You can't request a backup or restore operation if `Latest Restorable Time` or `Earliest Restorable Time` returns NULL\.
 
-For information about restoring a DB cluster to a specified time, see [Restoring a DB cluster to a specified time](USER_PIT.md)\.
+For information about restoring a DB cluster to a specified time, see [Restoring a DB cluster to a specified time](aurora-pitr.md)\.
 
 ### Database cloning for Aurora<a name="Aurora.Managing.Backups.Restore.Cloning"></a>
 

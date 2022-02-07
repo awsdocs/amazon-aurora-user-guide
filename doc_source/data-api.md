@@ -994,13 +994,25 @@ The Data API Java client library is open source in GitHub at the following locat
 
 [ https://github\.com/awslabs/rds\-data\-api\-client\-library\-java](https://github.com/awslabs/rds-data-api-client-library-java)
 
-You can build the library manually from the source files, but the best practice is to consume the library using Apache Maven dependency management\. Add the following dependency to your Maven POM file:
+You can build the library manually from the source files, but the best practice is to consume the library using Apache Maven dependency management\. Add the following dependency to your Maven POM file\.
+
+ For version 2\.x, which is compatible with AWS SDK 2\.x, use the following: 
+
+```
+<dependency>
+   <groupId>software.amazon.rdsdata</groupId>
+   <artifactId>rds-data-api-client-library-java</artifactId>
+   <version>2.0.0</version>
+</dependency>
+```
+
+ For version 1\.x, which is compatible with AWS SDK 1\.x, use the following: 
 
 ```
 <dependency>
     <groupId>software.amazon.rdsdata</groupId>
     <artifactId>rds-data-api-client-library-java</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
 </dependency>
 ```
 

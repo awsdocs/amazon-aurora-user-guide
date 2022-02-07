@@ -6,7 +6,9 @@ Some maintenance items require that Amazon RDS take your DB cluster offline for 
 
 Deferred DB cluster and instance modifications that you have chosen not to apply immediately are also applied during the maintenance window\. For example, you might choose to change DB instance classes or cluster or DB parameter groups during the maintenance window\. Such modifications that you specify using the **pending reboot** setting don't show up in the **Pending maintenance** list\. For information about modifying a DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
-You can view whether a maintenance update is available for your DB cluster by using the RDS console, the AWS CLI, or the Amazon RDS API\. If an update is available, it is indicated in the **Maintenance** column for the DB cluster on the Amazon RDS console, as shown following\. 
+## Viewing pending maintenence<a name="USER_UpgradeDBInstance.Maintenance.Viewing"></a>
+
+You can view whether a maintenance update is available for your DB cluster by using the RDS console, the AWS CLI, or the Amazon RDS API\. If an update is available, it is indicated in the **Maintenance** column for the DB cluster on the Amazon RDS console, as shown following\.
 
 ![\[Offline patch available\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/offlinepatchavailable.png)
 
@@ -34,6 +36,8 @@ To take an action, choose the DB cluster to show its details, then choose **Main
 The maintenance window determines when pending operations start, but doesn't limit the total run time of these operations\. Maintenance operations aren't guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS maintenance window](#Concepts.DBMaintenance)\. 
 
 For information about updates to Amazon Aurora engines and instructions for upgrading and patching them, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md) and [Amazon Aurora PostgreSQL updates](AuroraPostgreSQL.Updates.md)\.
+
+You can also view whether a maintenance update is available for your DB cluster by running the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html) AWS CLI command\.
 
 ## Applying updates for a DB cluster<a name="USER_UpgradeDBInstance.OSUpgrades"></a>
 

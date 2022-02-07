@@ -199,7 +199,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.7\. For more
 ### Aurora PostgreSQL release 4\.2\.0<a name="AuroraPostgreSQL.Updates.20180305.420"></a>
 
 **New features**
-+ Added support for the `oracle_fdw` extension version 1\.2\.
++ Added support for the `oracle_fdw` extension version 2\.3\.0\.
 
 **High priority stability enhancements**
 +  Fixed an issue where creating a database from an existing template database with tablespace resulted in an error with the message `ERROR: could not open file pg_tblspc/...: No such file or directory.`
@@ -214,7 +214,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.7\. For more
 +  Fixed an issue where a duplicate file entry can prevent the Aurora PostgreSQL engine from starting up\. 
 +  Fixed an issue that could cause temporary unavailability under heavy workloads\. 
 +  Added back ability to use a leading forward slash in the S3 path during S3 import\. 
-+  Added Graviton support for oracle\_fdw extension version 1\.2\. 
++  Added Graviton support for oracle\_fdw extension version 2\.3\.0\. 
 + Changed the following extensions:
   + Updated the `Orafce` extension to version 3\.16\.
   + Updated the `pg_partman` extension to version 4\.5\.1\.
