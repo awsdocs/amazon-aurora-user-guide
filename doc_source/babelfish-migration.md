@@ -10,7 +10,7 @@ The following high\-level overview lists the steps required to make your SQL Ser
 
 1. Export the data definition language \(DDL\) for your SQL Server databases that you want to migrate\. The DDL is SQL code that describes database objects that contain user data \(such as tables, indexes, and views\) and user\-written database code \(such as stored procedures, user\-defined functions, and triggers\)\.
 
-   You can use SQL Studio Management Studio \(SSMS\) to export the DDL\. After connecting to your existing SQL Server instance, complete the following steps:
+   You can use SQL Server Management Studio \(SSMS\) to export the DDL\. After connecting to your existing SQL Server instance, complete the following steps:
 
    1. Open the context menu \(right\-click\) for a database name\.
 
