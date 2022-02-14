@@ -1,13 +1,12 @@
-# Viewing key monitoring information<a name="accessing-monitoring"></a>
+# Viewing cluster status and recommendations<a name="accessing-monitoring"></a>
 
-The Amazon RDS console provides quick access to key monitoring features\.
+Using the Amazon RDS console, you can quickly access the status of your DB cluster and respond to Amazon Aurora recommendations\.
 
 **Topics**
 + [Viewing an Amazon Aurora DB cluster](#Aurora.Viewing)
 + [Viewing DB cluster status](#Aurora.Status)
-+ [Viewing DB instance status](#Overview.DBInstance.Status)
++ [Viewing DB instance status in an Aurora cluster](#Overview.DBInstance.Status)
 + [Viewing Amazon Aurora recommendations](#USER_Recommendations)
-+ [Viewing DB instance metrics](#USER_Monitoring)
 
 ## Viewing an Amazon Aurora DB cluster<a name="Aurora.Viewing"></a>
 
@@ -239,9 +238,9 @@ Find the possible status values for DB clusters in the following table\.
 | update\-iam\-db\-auth | Billed |  IAM authorization for the DB cluster is being updated\.  | 
 | upgrading | Billed |  The DB cluster engine version is being upgraded\.  | 
 
-## Viewing DB instance status<a name="Overview.DBInstance.Status"></a>
+## Viewing DB instance status in an Aurora cluster<a name="Overview.DBInstance.Status"></a>
 
-The status of a DB instance in an Aurora cluster indicates the health of the DB instance\. You can view the status of a DB instance in a cluster by using the Amazon RDS console, the AWS CLI command [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html), or the API operation [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\. 
+The status of a DB instance in an Aurora cluster indicates the health of the DB instance\. You can view the status of a DB instance in a cluster by using the Amazon RDS console, the AWS CLI command [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html), or the API operation [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\.
 
 **Note**  
 Amazon RDS also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB instance\. Maintenance status is independent of DB instance status\. For more information on *maintenance status*, see [Applying updates for a DB cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\. 
@@ -342,65 +341,3 @@ You can find recommendations in the AWS Management Console\. You can perform the
       For more information about modifying a DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 **Note**  
 When you choose **Apply now**, a brief DB instance outage might result\.
-
-## Viewing DB instance metrics<a name="USER_Monitoring"></a>
-
-Amazon RDS provides metrics so that you can monitor the health of your DB instances\. You can monitor both DB instance metrics and operating system \(OS\) metrics\.
-
-Following, you can find details about how to view metrics for your DB instance using the RDS console and CloudWatch\. For information on monitoring metrics for your DB instance's operating system in real time using CloudWatch Logs, see [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)\.
-
-### Viewing metrics by using the console<a name="USER_Monitoring.CON"></a>
-
-**To view DB and OS metrics for a DB instance**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the navigation pane, choose **Databases**\.
-
-1. Choose the name of the DB instance that you need information about to show its details\.
-
-1. Choose the **Monitoring** tab\.
-
-1. For **Monitoring**, choose the option for how you want to view your metrics from these:
-   + **CloudWatch** – Shows a summary of DB instance metrics available from Amazon CloudWatch\. Each metric includes a graph showing the metric monitored over a specific time span\.
-   + **Enhanced monitoring** – Shows a summary of OS metrics available for a DB instance with Enhanced Monitoring enabled\. Each metric includes a graph showing the metric monitored over a specific time span\.
-   + **OS Process list** – Shows details for each process running in the selected instance\.
-   + **Performance Insights** – Opens the Amazon RDS Performance Insights console for your DB instance\.
-
-     
-![\[RDS metrics viewing options\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/metrics0-aurora.png)
-**Tip**  
-To choose the time range of the metrics represented by the graphs, you can use the time range list\.  
-To bring up a more detailed view, you can choose any graph\. You can also apply metric\-specific filters to the data\. 
-
-### Viewing DB instance metrics with the CLI or API<a name="USER_Monitoring.DB"></a>
-
-Amazon RDS integrates with CloudWatch metrics to provide a variety of DB instance metrics\. You can view CloudWatch metrics using the RDS console, AWS CLI, or API\.
-
- For a complete list of Amazon RDS metrics, go to [ Amazon RDS dimensions and metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/rds-metricscollected.html) in the *Amazon CloudWatch User Guide*\. 
-
-#### Viewing DB metrics by using the CloudWatch CLI<a name="USER_Monitoring.CLI"></a>
-
-**Note**  
-The following CLI example requires the CloudWatch command line tools\. For more information on CloudWatch and to download the developer tools, see [Amazon CloudWatch](https://aws.amazon.com/cloudwatch) on the AWS website\. The `StartTime` and `EndTime` values supplied in this example are for illustration only\. Substitute appropriate start and end time values for your DB instance\.
-
-**To view usage and performance statistics for a DB instance**
-+ Use the CloudWatch command `mon-get-stats` with the following parameters\.
-
-  ```
-  1. PROMPT>mon-get-stats FreeStorageSpace --dimensions="DBInstanceIdentifier=mydbinstance" --statistics= Average 
-  2.   --namespace="AWS/RDS" --start-time 2009-10-16T00:00:00 --end-time 2009-10-16T00:02:00
-  ```
-
-#### Viewing DB metrics by using the CloudWatch API<a name="USER_Monitoring.API"></a>
-
-The `StartTime` and `EndTime` values supplied in this example are for illustration only\. Substitute appropriate start and end time values for your DB instance\.
-
-**To view usage and performance statistics for a DB instance**
-+ Call the CloudWatch API `GetMetricStatistics` with the following parameters:
-  + `Statistics.member.1` = `Average`
-  + `Namespace` = `AWS/RDS`
-  + `StartTime` = `2009-10-16T00:00:00`
-  + `EndTime` = `2009-10-16T00:02:00`
-  + `Period` = `60`
-  + `MeasureName` = `FreeStorageSpace`

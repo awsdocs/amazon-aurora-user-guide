@@ -1,6 +1,6 @@
 # Overview of events for Aurora<a name="rds-cloudwatch-events.sample"></a>
 
-An *RDS event* indicates a change in the Amazon RDS environment\. For example, Amazon Aurora generates an event when a DB cluster is patched\. Amazon Aurora delivers events to CloudWatch Events and EventBridge in near\-real time\.
+An *RDS event* indicates a change in the Aurora environment\. For example, Amazon Aurora generates an event when a DB cluster is patched\. Amazon Aurora delivers events to CloudWatch Events and EventBridge in near\-real time\.
 
 **Note**  
 Amazon RDS emits events on a best effort basis\. We recommend that you avoid writing programs that depend on the order or existence of notification events, because they might be out of sequence or missing\. 
@@ -10,6 +10,8 @@ Amazon RDS records events that relate to your DB clusters, DB instances, DB clus
 + The source name and source type of the event
 + A message associated with the event\.
 
+The following examples illustrate different types of Aurora events\.
+
 **Topics**
 + [Example of a DB cluster event](#rds-cloudwatch-events.db-clusters)
 + [Example of a DB instance event](#rds-cloudwatch-events.db-instances)
@@ -18,7 +20,7 @@ Amazon RDS records events that relate to your DB clusters, DB instances, DB clus
 
 ## Example of a DB cluster event<a name="rds-cloudwatch-events.db-clusters"></a>
 
-The following is an example of a DB cluster event in JSON format\. The event shows that the cluster named `my-db-cluster` was patched\. The event ID is RDS\-EVENT\-0173\.
+The following is an example of a DB cluster event in JSON format\. The event shows that the cluster named `my-db-cluster` was patched\. The event ID is `RDS-EVENT-0173`\.
 
 ```
 {

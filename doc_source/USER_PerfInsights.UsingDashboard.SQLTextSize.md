@@ -1,12 +1,48 @@
-# Viewing more SQL text in the Performance Insights dashboard<a name="USER_PerfInsights.UsingDashboard.SQLTextSize"></a>
+# Accessing the text of SQL statements<a name="USER_PerfInsights.UsingDashboard.SQLTextSize"></a>
 
-By default, each row in the **Top SQL** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement is larger than 500 bytes, you can view more of the SQL statement by opening the statement in the Performance Insights dashboard\. The dashboard displays text up to the following per\-engine limits:
+By default, each row in the **Top SQL** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement exceeds 500 bytes, you can view more text by opening the statement in the Performance Insights dashboard\. In this case, the maximum length for the displayed query is 4 KB\. This limit is introduced by the console and is subject to the limits set by the database engine\. If you view a child SQL statement, you can also choose **Download**\.
+
+**Topics**
++ [Text size limits for Aurora MySQL](#sql-text-engine-limits)
++ [Setting the SQL text limit for Aurora PostgreSQL DB instances](#USER_PerfInsights.UsingDashboard.SQLTextLimit)
++ [Viewing and downloading SQL text in the Performance Insights dashboard](#view-download-text)
+
+## Text size limits for Aurora MySQL<a name="sql-text-engine-limits"></a>
+
+When you download a SQL statement, the database engine determines the maximum length of the text\. You can download text up to the following per\-engine limits:
 + Aurora MySQL 5\.7 – 4,096 bytes
 + Aurora MySQL 5\.6 – 1,024 bytes
 
-You can copy the text that is displayed on the dashboard\. If you view a child SQL statement, you can also choose **Download**\.
+The Performance Insights console displays up to the maximum that the engine returns\. For example, if Aurora MySQL returns at most 1 KB to Performance Insights, it can only collect and show 1 KB, even if the original query is larger\. Thus, when you view or download the query, Performance Insights returns the same number of bytes\.
 
-Aurora PostgreSQL handles text differently\. Using the Performance Insights dashboard, you can view and download up to 500 bytes\. To access more than 500 bytes, set the size limit with the DB instance parameter `track_activity_query_size`\. The maximum value is 102,400 bytes\. To view or download text over 500 bytes, use the AWS Management Console, not the Performance Insights CLI or API\. For more information, see [Setting the SQL text limit for Aurora PostgreSQL DB instances](#USER_PerfInsights.UsingDashboard.SQLTextLimit)\.
+If you use the AWS CLI or API, Performance Insights doesn't have the 4 KB limit enforced by the console\. `DescribeDimensionKeys` and `GetResourceMetrics` return at most 500 bytes\. `GetDimensionKeyDetails` returns the full query, but the size is subject to the engine limit\. 
+
+## Setting the SQL text limit for Aurora PostgreSQL DB instances<a name="USER_PerfInsights.UsingDashboard.SQLTextLimit"></a>
+
+Aurora PostgreSQL handles text differently\. You can set the text size limit with the DB instance parameter `track_activity_query_size`\. This parameter has the following characteristics:
+
+Default text size  
+On Aurora PostgreSQL version 9\.6, the default setting for the `track_activity_query_size` parameter is 1,024 bytes\. On Aurora PostgreSQL version 10 or higher, the default is 4,096 bytes\.
+
+Maximum text size  
+The limit for `track_activity_query_size` is 102,400 bytes for Aurora PostgreSQL version 12 and lower\. The maximum is 1 MB for version 13 and higher\.   
+If the engine returns 1 MB to Performance Insights, the console displays only the first 4 KB\. If you download the query, you get the full 1 MB\. In this case, viewing and downloading return different numbers of bytes\. For more information about the `track_activity_query_size` DB instance parameter, see [Run\-time Statistics](https://www.postgresql.org/docs/current/runtime-config-statistics.html) in the PostgreSQL documentation\.
+
+To increase the SQL text size, increase the `track_activity_query_size` limit\. To modify the parameter, change the parameter setting in the parameter group that is associated with the Aurora PostgreSQL DB instance\.
+
+**To change the setting when the instance uses the default parameter group**
+
+1. Create a new DB instance parameter group for the appropriate DB engine and DB engine version\.
+
+1. Set the parameter in the new parameter group\.
+
+1. Associate the new parameter group with the DB instance\.
+
+For information about setting a DB instance parameter, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+
+## Viewing and downloading SQL text in the Performance Insights dashboard<a name="view-download-text"></a>
+
+In the Performance Insights dashboard, you can view or download SQL text\.
 
 **To view more SQL text in the Performance Insights dashboard**
 
@@ -27,23 +63,3 @@ Aurora PostgreSQL handles text differently\. Using the Performance Insights dash
 1. \(Optional\) Choose **Copy** to copy the displayed SQL statement, or choose **Download** to download the SQL statement to view the SQL text up to the DB engine limit\.
 **Note**  
 To copy or download the SQL statement, disable pop\-up blockers\. 
-
-## Setting the SQL text limit for Aurora PostgreSQL DB instances<a name="USER_PerfInsights.UsingDashboard.SQLTextLimit"></a>
-
-For Aurora PostgreSQL DB instances, you can control the limit for the SQL text that can be shown on the Performance Insights dashboard\. 
-
-To do so, modify the `track_activity_query_size` DB instance parameter\. On Aurora PostgreSQL version 9\.6, the default setting for the `track_activity_query_size` parameter is 1,024 bytes\. On Aurora PostgreSQL version 10 or higher, the default setting for the `track_activity_query_size` parameter is 4,096 bytes\. 
-
-You can increase the number of bytes to increase the SQL text size visible in the Performance Insights dashboard\. The limit for the parameter is 102,400 bytes\. For more information about the `track_activity_query_size` DB instance parameter, see [Run\-time Statistics](https://www.postgresql.org/docs/current/runtime-config-statistics.html) in the PostgreSQL documentation\.
-
-To modify the parameter, change the parameter setting in the parameter group that is associated with the Aurora PostgreSQL DB instance\.
-
-If the Aurora PostgreSQL DB instance is using the default parameter group, complete the following steps:
-
-1. Create a new DB instance parameter group for the appropriate DB engine and DB engine version\.
-
-1. Set the parameter in the new parameter group\.
-
-1. Associate the new parameter group with the DB instance\.
-
-For information about setting a DB instance parameter, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.

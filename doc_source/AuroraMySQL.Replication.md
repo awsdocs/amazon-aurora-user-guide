@@ -102,7 +102,7 @@
 
  If you need the most current value for Aurora Replica lag, you can query the `recrystallisations` table on the primary instance in your Aurora MySQL DB cluster and check the value in the `Replica_lag_in_msec` column\. This column value is provided to Amazon CloudWatch as the value for the `AuroraReplicaLag` metric\. The Aurora Replica lag is also recorded on each Aurora Replica in the `INFORMATION_SCHEMA.REPLICA_HOST_STATUS` table in your Aurora MySQL DB cluster\. 
 
- For more information on monitoring RDS instances and CloudWatch metrics, see [Monitoring an Amazon Aurora DB cluster](MonitoringAurora.md)\. 
+ For more information on monitoring RDS instances and CloudWatch metrics, see [Monitoring metrics in an Amazon Aurora cluster](MonitoringAurora.md)\. 
 
 ## Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)<a name="AuroraMySQL.Replication.MySQL"></a><a name="binlog_replication"></a><a name="binlog"></a>
 

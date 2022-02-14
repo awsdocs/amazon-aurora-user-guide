@@ -1,46 +1,77 @@
-# Disaster recovery and Amazon Aurora global databases<a name="aurora-global-database-disaster-recovery"></a>
+# Using failover in an Amazon Aurora global database<a name="aurora-global-database-disaster-recovery"></a>
 
 An Aurora global database provides more comprehensive failover capabilities than the [failover provided by a default Aurora DB cluster](Concepts.AuroraHighAvailability.md)\. By using an Aurora global database, you can plan for and recover from disaster fairly quickly\. Recovery from disaster is typically measured using values for RTO and RPO\.
 + **Recovery time objective \(RTO\)** – The time it takes a system to return to a working state after a disaster\. In other words, RTO measures downtime\. For an Aurora global database, RTO can be in the order of minutes\. 
 + **Recovery point objective \(RPO\)** – The amount of data that can be lost \(measured in time\)\. For an Aurora global database, RPO is typically measured in seconds\. With an Aurora PostgreSQL–based global database, you can use the `rds.global_db_rpo` parameter to set and track the upper bound on RPO, but doing so might affect transaction processing on the primary cluster's writer node\. For more information, see [Managing RPOs for Aurora PostgreSQL–based global databases](#aurora-global-database-manage-recovery)\. 
 
-With an Aurora global database, you can choose from two different approaches to failover\. 
-+ **Managed planned failover** – This feature is intended for controlled environments, such as operational maintenance and other planned operational procedures\. Managed planned failover allows you to relocate the primary DB cluster of your Aurora global database to one of the secondary Regions\. Because this feature synchronizes secondary DB clusters with the primary before making any other changes, RPO is 0 \(no data loss\)\. RTO for this automated process is typically less than that of the "detach and promote" failover process because the demotion, promotion, and all synchronization are handled for you\. To learn more, see [Managed planned failover for Amazon Aurora global databases](#aurora-global-database-disaster-recovery.managed-failover)\. 
-+ **Unplanned failover** \("detach and promote"\) – To recover from an unplanned outage or to do disaster recovery \(DR\) testing, perform a cross\-Region failover to one of the secondaries in your Aurora global database\. The RTO for this manual process depends on how quickly you can perform the tasks listed in [Recovering an Amazon Aurora global database from an unplanned outage](#aurora-global-database-failover)\. The RPO is typically measured in seconds, but this depends on the Aurora storage replication lag across the network at the time of the failure\.
+With an Aurora global database, there are two different approaches to failover depending on the scenario\. 
++ **Manual unplanned failover** \("detach and promote"\) – To recover from an unplanned outage or to do disaster recovery \(DR\) testing, perform a cross\-Region failover to one of the secondaries in your Aurora global database\. The RTO for this manual process depends on how quickly you can perform the tasks listed in [Recovering an Amazon Aurora global database from an unplanned outage](#aurora-global-database-failover)\. The RPO is typically measured in seconds, but this depends on the Aurora storage replication lag across the network at the time of the failure\.
++ **Managed planned failover** – This feature is intended for controlled environments, such as operational maintenance and other planned operational procedures\. By using managed planned failover, you can relocate the primary DB cluster of your Aurora global database to one of the secondary Regions\. Because this feature synchronizes secondary DB clusters with the primary before making any other changes, RPO is 0 \(no data loss\)\. To learn more, see [Performing managed planned failovers for Amazon Aurora global databases](#aurora-global-database-disaster-recovery.managed-failover)\. 
 
 **Topics**
-+ [Managed planned failover for Amazon Aurora global databases](#aurora-global-database-disaster-recovery.managed-failover)
-+ [Managing RPOs for Aurora PostgreSQL–based global databases](#aurora-global-database-manage-recovery)
 + [Recovering an Amazon Aurora global database from an unplanned outage](#aurora-global-database-failover)
++ [Performing managed planned failovers for Amazon Aurora global databases](#aurora-global-database-disaster-recovery.managed-failover)
++ [Managing RPOs for Aurora PostgreSQL–based global databases](#aurora-global-database-manage-recovery)
 
-## Managed planned failover for Amazon Aurora global databases<a name="aurora-global-database-disaster-recovery.managed-failover"></a>
+## Recovering an Amazon Aurora global database from an unplanned outage<a name="aurora-global-database-failover"></a>
+
+On very rare occasions, your Aurora global database might experience an unexpected outage in its primary AWS Region\. If this happens, your primary Aurora DB cluster and its writer node aren't available, and the replication between the primary cluster and the secondaries ceases\. To minimize both downtime \(RTO\) and data loss \(RPO\), you can work quickly to perform a cross\-Region failover and reconstruct your Aurora global database\. 
+
+**Tip**  
+We recommend that you understand this process before using it\. Have a plan ready to quickly proceed at the first sign of a Region\-wide issue\. Be ready to identify the secondary Region with the least lag time\. Use Amazon CloudWatch regularly to track lag times for the secondary clusters\. Make sure to test your plan to check that your procedures are complete and accurate, and that staff are trained to perform a DR failover before it really happens\.
+
+**To fail over to a secondary cluster after an unplanned outage in the primary Region**
+
+1. Stop issuing DML statements and other write operations to the primary Aurora DB cluster in the AWS Region with the outage\. 
+
+1. Identify an Aurora DB cluster from a secondary AWS Region to use as a new primary DB cluster\. If you have two or more secondary AWS Regions in your Aurora global database, choose the secondary cluster that has the least lag time\.
+
+1. Detach your chosen secondary DB cluster from the Aurora global database\.
+
+   Removing a secondary DB cluster from an Aurora global database immediately stops the replication from the primary to this secondary and promotes it to a standalone provisioned Aurora DB cluster with full read/write capabilities\. Any other secondary Aurora DB clusters associated with the primary cluster in the Region with the outage are still available and can accept calls from your application\. They also consume resources\. Because you're recreating the Aurora global database, remove the other secondary DB clusters before creating the new Aurora global database in the following steps\. Doing this avoids data inconsistencies among the DB clusters in the Aurora global database \(*split\-brain* issues\)\.
+
+   For detailed steps for detaching, see [Removing a cluster from an Amazon Aurora global database](aurora-global-database-managing.md#aurora-global-database-detaching)\. 
+
+1. Reconfigure your application to send all write operations to this now standalone Aurora DB cluster using its new endpoint\. If you accepted the provided names when you created the Aurora global database, you can change the endpoint by removing the `-ro` from the cluster's endpoint string in your application\.
+
+   For example, the secondary cluster's endpoint `my-global.cluster-ro-aaaaaabbbbbb.us-west-1.rds.amazonaws.com` becomes `my-global.cluster-aaaaaabbbbbb.us-west-1.rds.amazonaws.com` when that cluster is detached from the Aurora global database\. 
+
+   This Aurora DB cluster becomes the primary cluster of a new Aurora global database when you start adding Regions to it in the next step\. 
+
+1. Add an AWS Region to the DB cluster\. When you do this, the replication process from primary to secondary begins\. For detailed steps to add a Region, see [Adding an AWS Region to an Amazon Aurora global database](aurora-global-database-getting-started.md#aurora-global-database-attaching)\. 
+
+1. Add more AWS Regions as needed to recreate the topology needed to support your application\. 
+
+Make sure that application writes are sent to the correct Aurora DB cluster before, during, and after making these changes\. Doing this avoids data inconsistencies among the DB clusters in the Aurora global database \(*split\-brain* issues\)\.
+
+If you reconfigured in response to an outage in an AWS Region, you might be able to return your Aurora global database to its original primary AWS Region after the outage is resolved\. In this case, you use the managed planned failover process\. Your Aurora global database must use a version of Aurora PostgreSQL or Aurora MySQL that supports managed planned failovers\. For more information, see [Performing managed planned failovers for Amazon Aurora global databases](#aurora-global-database-disaster-recovery.managed-failover)\. 
+
+## Performing managed planned failovers for Amazon Aurora global databases<a name="aurora-global-database-disaster-recovery.managed-failover"></a>
 
 
 
-By using managed planned failover, you can relocate the primary cluster of your Aurora global database to a different AWS Region on a routine basis\. Being able to demonstrate this capability with your production systems is a legal requirement for government agencies, financial institutions, and many other regulated industries\. This feature is intended for controlled environments, such as operational maintenance and other planned operational procedures\. 
+By using managed planned failovers, you can relocate the primary cluster of your Aurora global database to a different AWS Region on a routine basis\.  This approach is intended for controlled environments, such as operational maintenance and other planned operational procedures\. 
 
-As an example, say a financial institution headquartered in New York has branch offices located in San Francisco, in the UK, and in Europe\. The organization's core business applications use an Aurora global database\. Its primary cluster runs in the US East \(Ohio\) Region, with secondary clusters running in the US West \(N\. California\) Region, Europe \(London\) Region, and the Europe \(Frankfurt\) Region\. Every quarter, it relocates the primary cluster from the \(current\) primary AWS Region to the secondary Region designated for that rotation\. 
-
-Not every organization needs to rotate their Aurora global database's primary cluster on a regular basis\. However, the ability to do so during an audit by regulators is a key requirement to meeting disaster recovery requirements\. We recommend managed planned failover for organizations of all types, as a best practice for DR preparedness\. This not only ensures that your procedures are complete and accurate, but more importantly, that staff are trained to perform a DR failover before it really happens\. 
+As an example, say a financial institution headquartered in New York has branch offices located in San Francisco, the UK, and Europe\. The organization's core business applications use an Aurora global database\. Its primary cluster runs in the US East \(Ohio\) Region\. It has secondary clusters running in the US West \(N\. California\) Region, Europe \(London\) Region, and the Europe \(Frankfurt\) Region\. Every quarter, it relocates the primary cluster from the \(current\) primary AWS Region to the secondary Region designated for that rotation\. 
 
 **Note**  
-Managed *planned* failover is designed to be used on a healthy Aurora global database\. To recover from an unplanned outage, follow the "detach and promote" process detailed in [Recovering an Amazon Aurora global database from an unplanned outage](#aurora-global-database-failover)\. 
+Managed *planned* failover is designed to be used on a healthy Aurora global database\. To recover from an unplanned outage or to do disaster recovery \(DR\) testing, follow the "detach and promote" process detailed in [Recovering an Amazon Aurora global database from an unplanned outage](#aurora-global-database-failover)\. 
 
-During a managed planned failover, your primary cluster is failed over to your choice of secondary Region while your Aurora global database's existing replication topology is maintained\. Before the managed planned failover process begins, Aurora global database synchronizes all secondary clusters with its primary cluster\. After ensuring that all clusters are synchronized, the managed failover begins\. The DB cluster in the primary Region becomes read\-only\. The chosen secondary cluster promotes one of its read\-only nodes to full writer status, thus allowing the cluster to assume the role of primary cluster\. Because all secondary clusters were synchronized with the primary at the beginning of the process, the new primary continues operations for the Aurora global database without losing any data\. Your application is unavailable for a short time, as the primary and selected secondary clusters assume their new roles\. 
+During a managed planned failover, your primary cluster is failed over to your choice of secondary Region while your Aurora global database's existing replication topology is maintained\. Before the managed planned failover process begins, Aurora global database synchronizes all secondary clusters with its primary cluster\. After ensuring that all clusters are synchronized, the managed planned failover begins\. The DB cluster in the primary Region becomes read\-only\. The chosen secondary cluster promotes one of its read\-only nodes to full writer status, thus allowing the cluster to assume the role of primary cluster\. Because all secondary clusters were synchronized with the primary at the beginning of the process, the new primary continues operations for the Aurora global database without losing any data\. Your database is unavailable for a short time while the primary and selected secondary clusters are assuming their new roles\. 
 
 To optimize application availability, we recommend that you do the following before using this feature: 
-+ Perform this operation during non\-peak hours or at another time when writes to the primary DB cluster are minimal\. 
++ Perform this operation during nonpeak hours or at another time when writes to the primary DB cluster are minimal\. 
 + Take applications offline to prevent writes from being sent to the primary cluster of Aurora global database\. 
-+ Check lag times for all secondary Aurora DB clusters in the Aurora global database\. Choose the time with the least overall lag time for the managed planned failover\. Use Amazon CloudWatch to view the `AuroraGlobalDBReplicationLag` metric for all secondaries\. This metric tells you how far behind \(in milliseconds\) a secondary is to the primary DB cluster\. Its value is directly proportional to the time it'll take for Aurora to complete failover\. In other words, the larger the lag value, the longer the outage, so choose the Region with the least lag\.
++ Check lag times for all secondary Aurora DB clusters in the Aurora global database\. Choose the secondary with the least overall lag time for the managed planned failover\. Use Amazon CloudWatch to view the `AuroraGlobalDBReplicationLag` metric for all secondaries\. This metric tells you how far behind \(in milliseconds\) a secondary is to the primary DB cluster\. Its value is directly proportional to the time it'll take for Aurora to complete failover\. In other words, the larger the lag value, the longer the outage, so choose the Region with the least lag\.
 
   For more information about CloudWatch metrics for Aurora, see [Cluster\-level metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md#Aurora.AuroraMySQL.Monitoring.Metrics.clusters)\. 
 
 During a managed planned failover, the chosen secondary DB cluster is promoted to its new role as primary\. However, it doesn't inherit the various configuration options of the primary DB cluster\. A mismatch in configuration can lead to performance issues, workload incompatibilities, and other anomalous behavior\. To avoid such issues, we recommend that you resolve differences between your Aurora global database clusters for the following: 
 + **Configure Aurora DB cluster parameter group for the new primary, if necessary** – You can configure your Aurora DB cluster parameter groups independently for each Aurora cluster in your Aurora global database\. That means that when you promote a secondary DB cluster to take over the primary role, the parameter group from the secondary might be configured differently than for the primary\. If so, modify the promoted secondary DB cluster's parameter group to conform to your primary cluster's settings\. To learn how, see [Modifying parameters for an Aurora global database](aurora-global-database-managing.md#aurora-global-database-modifying.parameters)\. 
 + **Configure monitoring tools and options, such as Amazon CloudWatch Events and alarms** – Configure the promoted DB cluster with the same logging ability, alarms, and so on as needed for the global database\. As with parameter groups, configuration for these features isn't inherited from the primary during the failover process\. For more information about Aurora DB clusters and monitoring, see [Overview of monitoring Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/MonitoringOverview.html#monitoring-cloudwatch)\.
-+ **Configure integrations with other AWS services** – If your Aurora global database integrates with AWS services, such as AWS Secrets Manager, AWS Identity and Access Management, Amazon S3, and AWS Lambda, you need to make sure these are configured as needed\. For more information about integrating Aurora global database with IAM, Amazon S3 and Lambda, see [Using Amazon Aurora global databases with other AWS services](aurora-global-database-interop.md)\. To learn more about Secrets Manager, see [How to automate replication of secrets in AWS Secrets Manager across AWS Regions ](http://aws.amazon.com/blogs/security/how-to-automate-replication-of-secrets-in-aws-secrets-manager-across-aws-regions/)\. 
++ **Configure integrations with other AWS services** – If your Aurora global database integrates with AWS services, such as AWS Secrets Manager, AWS Identity and Access Management, Amazon S3, and AWS Lambda, you need to make sure these are configured as needed\. For more information about integrating Aurora global databases with IAM, Amazon S3 and Lambda, see [Using Amazon Aurora global databases with other AWS services](aurora-global-database-interop.md)\. To learn more about Secrets Manager, see [How to automate replication of secrets in AWS Secrets Manager across AWS Regions](http://aws.amazon.com/blogs/security/how-to-automate-replication-of-secrets-in-aws-secrets-manager-across-aws-regions/)\. 
 
-When the failover process completes, the promoted Aurora DB cluster can handle write operations for the Aurora global database\. You can change the endpoint for your application to use the new endpoint\. If you accepted the provided names when you created the Aurora global database, you can change the endpoint by removing the `-ro` from the promoted cluster's endpoint string in your application\.
+When the failover process completes, the promoted Aurora DB cluster can handle write operations for the Aurora global database\. Make sure to change the endpoint for your application to use the new endpoint\. If you accepted the provided names when you created the Aurora global database, you can change the endpoint by removing the `-ro` from the promoted cluster's endpoint string in your application\.
 
 For example, the secondary cluster's endpoint `my-global.cluster-ro-aaaaaabbbbbb.us-west-1.rds.amazonaws.com` becomes `my-global.cluster-aaaaaabbbbbb.us-west-1.rds.amazonaws.com` when that cluster is promoted to primary\. 
 
@@ -290,36 +321,3 @@ aws rds reset-db-cluster-parameter-group ^
 #### RDS API<a name="aurora-global-database-set-rpo.API"></a>
 
 To reset the `rds.global_db_rpo` parameter, use the Amazon RDS API [ ResetDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ResetDBClusterParameterGroup.html) operation\.
-
-## Recovering an Amazon Aurora global database from an unplanned outage<a name="aurora-global-database-failover"></a>
-
-On very rare occasions, your Aurora global database might experience an unexpected outage in its primary AWS Region\. If this happens, your primary Aurora DB cluster and its writer node aren't available, and the replication between the primary cluster and the secondaries ceases\. To minimize both downtime \(RTO\) and data loss \(RPO\), you can work quickly to perform a cross\-Region failover and reconstruct your Aurora global database\. 
-
-**Tip**  
-We recommend that you understand this process before using it\. Have a plan ready to quickly proceed at the first sign of a Region\-wide issue\. Be ready to identify the secondary Region with the least lag time\. Use Amazon CloudWatch regularly to track lag times for the secondary clusters\. 
-
-**To failover to a secondary cluster after an unplanned outage in the primary Region**
-
-1. Stop issuing DML statements and other write operations to the primary Aurora DB cluster in the AWS Region with the outage\. 
-
-1. Identify an Aurora DB cluster from a secondary AWS Region to use as a new primary DB cluster\. If you have two \(or more\) secondary AWS Regions in your Aurora global database, choose the secondary cluster that has the least lag time\.
-
-1. Detach your chosen secondary DB cluster from the Aurora global database\.
-
-   Removing a secondary DB cluster from an Aurora global database immediately stops the replication from the primary to this secondary and promotes it to standalone provisioned Aurora DB cluster with full read/write capabilities\. Any other secondary Aurora DB clusters associated with the primary cluster in the Region with the outage are still available and can accept calls from your application\. They also consume resources\. Since you are recreating the Aurora global database, to avoid *split\-brain* and other issues, remove the other secondary DB clusters before creating the new Aurora global database in the steps that follow\. 
-
-   For detailed steps for detaching, see [Removing a cluster from an Amazon Aurora global database](aurora-global-database-managing.md#aurora-global-database-detaching)\.
-
-1. Reconfigure your application to send all write operations to this now standalone Aurora DB cluster using its new endpoint\. If you accepted the provided names when you created the Aurora global database, you can change the endpoint by removing the `-ro` from the cluster's endpoint string in your application\.
-
-   For example, the secondary cluster's endpoint `my-global.cluster-ro-aaaaaabbbbbb.us-west-1.rds.amazonaws.com` becomes `my-global.cluster-aaaaaabbbbbb.us-west-1.rds.amazonaws.com` when that cluster is detached from the Aurora global database\. 
-
-   This Aurora DB cluster becomes the primary cluster of a new Aurora global database when you start adding Regions to it, in the next step\. 
-
-1. Add an AWS Region to the DB cluster\. When you do this, the replication process from primary to secondary begins\. For detailed steps to add a Region, see [Adding an AWS Region to an Amazon Aurora global database](aurora-global-database-getting-started.md#aurora-global-database-attaching)\. 
-
-1. Add more AWS Regions as needed to re\-create the topology needed to support your application\. 
-
-Make sure that application writes are sent to the correct Aurora DB cluster before, during, and after making changes such as these, to avoid data inconsistencies among the DB clusters in the Aurora global database \(*split\-brain* issues\)\.
-
-If you performed this reconfiguration in response to an outage in an AWS Region, you might be able to return your Aurora global database to its original primary AWS Region after the outage is resolved by using the managed planned failover process\. Your Aurora global database must use a version of Aurora PostgreSQL or Aurora MySQL that supports the managed planned failover feature\. For more information, see [Managed planned failover for Amazon Aurora global databases](#aurora-global-database-disaster-recovery.managed-failover)\. 

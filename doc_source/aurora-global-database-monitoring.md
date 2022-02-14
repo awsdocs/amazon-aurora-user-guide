@@ -12,7 +12,7 @@ The following screenshot shows some of the options available on the Monitoring t
 
 ![\[Screenshot showing the Monitoring page for a selected Aurora DB cluster that's part of an Aurora global database\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-db-monitoring-options.png)
 
-For more information, see [Monitoring an Amazon Aurora DB cluster](MonitoringAurora.md)\.
+For more information, see [Monitoring metrics in an Amazon Aurora cluster](MonitoringAurora.md)\.
 
 ## Monitoring an Amazon Aurora global database with Amazon RDS Performance Insights<a name="aurora-global-database-pi"></a>
 

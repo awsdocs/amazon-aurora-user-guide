@@ -77,7 +77,7 @@ Look for examples of throttling in the following resources:
   Check for an increase in the value of the CloudWatch metrics `network receive throughput` and `network transmit throughput`\. If your instance has reached the network bandwidth limit for your instance class, consider scaling up your RDS instance to a higher instance class type\. For more information, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
 + Freeable memory 
 
-  Check for a drop in the CloudWatch metric `FreeableMemory`\. Also, consider turning on Enhanced Monitoring\. For more information, see [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)\.
+  Check for a drop in the CloudWatch metric `FreeableMemory`\. Also, consider turning on Enhanced Monitoring\. For more information, see [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
 ### Check the top hosts and top users<a name="ams-waits.client-connection.top-hosts"></a>
 

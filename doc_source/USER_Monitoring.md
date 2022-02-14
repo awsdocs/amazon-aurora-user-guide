@@ -1,16 +1,89 @@
-# Amazon CloudWatch metrics for Amazon Aurora<a name="Aurora.AuroraMySQL.Monitoring.Metrics"></a>
+# Viewing metrics in the Amazon RDS console<a name="USER_Monitoring"></a>
 
-The `AWS/RDS` namespace includes the following metrics that apply to database entities running on Amazon Aurora\. Some metrics apply to either Aurora MySQL, Aurora PostgreSQL, or both\. Furthermore, some metrics are specific to a DB cluster, primary DB instance, replica DB instance, or all DB instances\.
+Amazon RDS integrates with Amazon CloudWatch to display a variety of Aurora DB cluster metrics in the RDS console\. Some metrics are apply at the cluster level, whereas others apply at the instance level\. For descriptions of the instance\-level and cluster\-level metrics, see [Metrics reference for Amazon Aurora](metrics-reference.md)\.
 
-For Aurora global database metrics, see [Amazon CloudWatch metrics for write forwarding](aurora-global-database-write-forwarding.md#aurora-global-database-write-forwarding-cloudwatch)\. For Aurora parallel query metrics, see [Monitoring parallel query](aurora-mysql-parallel-query.md#aurora-mysql-parallel-query-monitoring)\.
+The **Monitoring** tab for your Aurora DB cluster shows the following categories of metrics:
++ **CloudWatch** – Shows the Amazon CloudWatch metrics for Aurora that you can access in the RDS console\. You can also access these metrics in the CloudWatch console\. Each metric includes a graph that shows the metric monitored over a specific time span\. For a list of CloudWatch metrics, see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md)\.
++ **Enhanced monitoring** – Shows a summary of operating\-system metrics when your Aurora DB cluster has turned on Enhanced Monitoring\. RDS delivers the metrics from Enhanced Monitoring to your Amazon CloudWatch Logs account\. Each OS metric includes a graph showing the metric monitored over a specific time span\. For an overview, see [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)\. For a list of Enhanced Monitoring metrics, see [OS metrics in Enhanced Monitoring](USER_Monitoring-Available-OS-Metrics.md)\.
++ **OS Process list** – Shows details for each process running in your DB cluster\.
++ **Performance Insights** – Opens the Amazon RDS Performance Insights dashboard for a DB instance in your Aurora DB cluster\. Performance Insights isn't supported at the cluster level\. For an overview of Performance Insights, see [Monitoring DB load with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\. For a list of Performance Insights metrics, see [ Amazon CloudWatch metrics for Performance InsightsCloudWatch metrics for Performance Insights  Performance Insights automatically publishes metrics to Amazon CloudWatch\. The same data can be queried from Performance Insights, but having the metrics in CloudWatch makes it easy to add CloudWatch alarms\. It also makes it easy to add the metrics to existing CloudWatch Dashboards\. 
 
-**Topics**
-+ [Cluster\-level metrics for Amazon Aurora](#Aurora.AuroraMySQL.Monitoring.Metrics.clusters)
-+ [Instance\-level metrics for Amazon Aurora](#Aurora.AuroraMySQL.Monitoring.Metrics.instances)
 
-## Cluster\-level metrics for Amazon Aurora<a name="Aurora.AuroraMySQL.Monitoring.Metrics.clusters"></a>
+| Metric | Description | 
+| --- | --- | 
+|  DBLoad  |  The number of active sessions for the DB engine\. Typically, you want the data for the average number of active sessions\. In Performance Insights, this data is queried as `db.load.avg`\.  | 
+|  DBLoadCPU  |  The number of active sessions where the wait event type is CPU\. In Performance Insights, this data is queried as `db.load.avg`, filtered by the wait event type `CPU`\.  | 
+|  DBLoadNonCPU  |  The number of active sessions where the wait event type is not CPU\.  |   These metrics are published to CloudWatch only if there is load on the DB instance\.  You can examine these metrics using the CloudWatch console, the AWS CLI, or the CloudWatch API\. For example, you can get the statistics for the `DBLoad` metric by running the [get\-metric\-statistics](https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/get-metric-statistics.html) command\. 
 
-The following table describes metrics that are specific to Aurora clusters\.
+```
+aws cloudwatch get-metric-statistics \
+    --region us-west-2 \
+    --namespace AWS/RDS \
+    --metric-name DBLoad  \
+    --period 60 \
+    --statistics Average \
+    --start-time 1532035185 \
+    --end-time 1532036185 \
+    --dimensions Name=DBInstanceIdentifier,Value=db-loadtest-0
+``` This example generates output similar to the following\. 
+
+```
+{
+		"Datapoints": [
+		{
+		"Timestamp": "2021-07-19T21:30:00Z",
+		"Unit": "None",
+		"Average": 2.1
+		},
+		{
+		"Timestamp": "2021-07-19T21:34:00Z",
+		"Unit": "None",
+		"Average": 1.7
+		},
+		{
+		"Timestamp": "2021-07-19T21:35:00Z",
+		"Unit": "None",
+		"Average": 2.8
+		},
+		{
+		"Timestamp": "2021-07-19T21:31:00Z",
+		"Unit": "None",
+		"Average": 1.5
+		},
+		{
+		"Timestamp": "2021-07-19T21:32:00Z",
+		"Unit": "None",
+		"Average": 1.8
+		},
+		{
+		"Timestamp": "2021-07-19T21:29:00Z",
+		"Unit": "None",
+		"Average": 3.0
+		},
+		{
+		"Timestamp": "2021-07-19T21:33:00Z",
+		"Unit": "None",
+		"Average": 2.4
+		}
+		],
+		"Label": "DBLoad"
+		}
+``` For more information about CloudWatch, see [What is Amazon CloudWatch?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.  ](USER_PerfInsights.Cloudwatch.md)\.
+
+**To view metrics for your Aurora DB cluster in the RDS console**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose the name of the Aurora DB cluster that you want to monitor\.
+
+   The database page appears\. The following example shows an Amazon Aurora PostgreSQL database named `apga`\.  
+![\[Database page with monitoring tab shown\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/cluster-with-monitoring-tab.png)
+
+1. Scroll down and choose **Monitoring**\.
+
+   The monitoring section appears\. By default, CloudWatch metrics are shown\. For descriptions of these metrics, see [ Amazon CloudWatch metrics for Amazon AuroraCloudWatch metrics for Aurora  The `AWS/RDS` namespace includes the following metrics that apply to database entities running on Amazon Aurora\. Some metrics apply to either Aurora MySQL, Aurora PostgreSQL, or both\. Furthermore, some metrics are specific to a DB cluster, primary DB instance, replica DB instance, or all DB instances\. For Aurora global database metrics, see [Amazon CloudWatch metrics for write forwarding](aurora-global-database-write-forwarding.md#aurora-global-database-write-forwarding-cloudwatch)\. For Aurora parallel query metrics, see [Monitoring parallel query](aurora-mysql-parallel-query.md#aurora-mysql-parallel-query-monitoring)\.    Cluster\-level metrics for Amazon Aurora  The following table describes metrics that are specific to Aurora clusters\. 
 
 
 **Amazon Aurora cluster\-level metrics**  
@@ -31,11 +104,7 @@ The following table describes metrics that are specific to Aurora clusters\.
 |  `TotalBackupStorageBilled`  |  **Total Backup Storage Used \(GiB\)**  |  The total amount of backup storage in bytes for which you are billed for a given Aurora DB cluster\. The metric includes the backup storage measured by the `BackupRetentionPeriodStorageUsed` and `SnapshotStorageUsed` metrics\. This metric is computed separately for each Aurora cluster\. For instructions, see [Understanding Aurora backup storage usage](aurora-storage-backup.md)\.   |  Aurora MySQL and Aurora PostgreSQL  |  Bytes  | 
 |  `VolumeBytesUsed`  |  **Volume Bytes Used \(GiB\)**  |  The amount of storage used by your Aurora DB instance\. This value affects the cost of the Aurora DB cluster \(for pricing information, see the [Amazon RDS product page](http://aws.amazon.com/rds/#pricing)\)\.  This value doesn't reflect some internal storage allocations that don't affect storage billing\. Thus, you can anticipate out\-of\-space issues more accurately by testing whether `AuroraVolumeBytesLeftTotal` is approaching zero instead of comparing `VolumeBytesUsed` against the storage limit of 128 TiB\.  |  Aurora MySQL and Aurora PostgreSQL  |  Bytes  | 
 |  `VolumeReadIOPs`  |  **Volume Read IOPS \(Count\)**  |  The number of billed read I/O operations from a cluster volume within a 5\-minute interval\. Billed read operations are calculated at the cluster volume level, aggregated from all instances in the Aurora DB cluster, and then reported at 5\-minute intervals\. The value is calculated by taking the value of the **Read operations** metric over a 5\-minute period\. You can determine the amount of billed read operations per second by taking the value of the **Billed read operations** metric and dividing by 300 seconds\. For example, if the **Billed read operations** returns 13,686, then the billed read operations per second is 45 \(13,686 / 300 = 45\.62\)\.  You accrue billed read operations for queries that request database pages that aren't in the buffer cache and must be loaded from storage\. You might see spikes in billed read operations as query results are read from storage and then loaded into the buffer cache\.   If your Aurora MySQL cluster uses parallel query, you might see an increase in `VolumeReadIOPS` values\. Parallel queries don't use the buffer pool\. Thus, although the queries are fast, this optimized processing can result in an increase in read operations and associated charges\.    |  Aurora MySQL and Aurora PostgreSQL  |  Count per 5 minutes  | 
-|  `VolumeWriteIOPs`  |  **Volume Write IOPS \(Count\)**  |  The number of write disk I/O operations to the cluster volume, reported at 5\-minute intervals\. For a detailed description of how billed write operations are calculated, see `VolumeReadIOPs`\.  |  Aurora MySQL and Aurora PostgreSQL  |  Count per 5 minutes  | 
-
-## Instance\-level metrics for Amazon Aurora<a name="Aurora.AuroraMySQL.Monitoring.Metrics.instances"></a>
-
-The following instance\-specific CloudWatch metrics apply to all Aurora MySQL and Aurora PostgreSQL instances unless noted otherwise\.
+|  `VolumeWriteIOPs`  |  **Volume Write IOPS \(Count\)**  |  The number of write disk I/O operations to the cluster volume, reported at 5\-minute intervals\. For a detailed description of how billed write operations are calculated, see `VolumeReadIOPs`\.  |  Aurora MySQL and Aurora PostgreSQL  |  Count per 5 minutes  |    Instance\-level metrics for Amazon Aurora  The following instance\-specific CloudWatch metrics apply to all Aurora MySQL and Aurora PostgreSQL instances unless noted otherwise\. 
 
 
 **Amazon Aurora instance\-level metrics**  
@@ -100,4 +169,16 @@ The following instance\-specific CloudWatch metrics apply to all Aurora MySQL an
 |  `UpdateThroughput`  |  **Update Throughput \(Count/Second\)**  |  The average number of updates per second\.  |  Aurora MySQL  |  Count per second  | 
 |  `WriteIOPS`  |  **Volume Write IOPS \(Count\)**  |  The number of Aurora storage write records generated per second\. This is more or less the number of log records generated by the database\. These do not correspond to 8K page writes, and do not correspond to network packets sent\.  |  Aurora PostgreSQL  |  Count per second  | 
 |  `WriteLatency`  |  **Write Latency \(Milliseconds\)**  |  The average amount of time taken per disk I/O operation\.  |  Aurora MySQL and Aurora PostgreSQL  |  Seconds  | 
-|  `WriteThroughput`  |  **Write Throughput \(MB/Second\)**  |  The average number of bytes written to persistent storage every second\.  |  Aurora PostgreSQL  |  Bytes per second  | 
+|  `WriteThroughput`  |  **Write Throughput \(MB/Second\)**  |  The average number of bytes written to persistent storage every second\.  |  Aurora PostgreSQL  |  Bytes per second  |   ](Aurora.AuroraMySQL.Monitoring.Metrics.md)\.  
+![\[Database page with monitoring tab shown\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/cluster-monitoring-subpage.png)
+
+1. Choose **Monitoring** to see the metric categories\.  
+![\[Monitoring options\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/monitoring-options.png)
+
+1. Choose the category of metrics that you want to see\.
+
+   The following example shows Enhanced Monitoring metrics\. For descriptions of these metrics, see [OS metrics in Enhanced Monitoring](USER_Monitoring-Available-OS-Metrics.md)\.  
+![\[Enhanced Monitoring\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/cluster-em-metrics.png)
+**Tip**  
+To choose the time range of the metrics represented by the graphs, you can use the time range list\.  
+To bring up a more detailed view, you can choose any graph\. You can also apply metric\-specific filters to the data\. 

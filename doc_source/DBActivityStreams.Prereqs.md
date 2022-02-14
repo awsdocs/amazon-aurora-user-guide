@@ -1,6 +1,6 @@
 # Network prerequisites for Aurora MySQL database activity streams<a name="DBActivityStreams.Prereqs"></a>
 
-This section explains how to configure your VPC for use with database activity streams\.
+In the following section, you can find how to configure your virtual private cloud \(VPC\) for use with database activity streams\.
 
 **Topics**
 + [Prerequisites for AWS KMS endpoints](#DBActivityStreams.Prereqs.KMS)
@@ -38,7 +38,7 @@ If your Aurora DB cluster isn't publicly accessible, and it's in a VPC public su
 
 1. Do the following:
    + In **Service category**, choose **AWS services**\.
-   + In **Service Name**, choose **com\.amazonaws\.*region*\.kms**, where *region* is the Region where your cluster is located\.
+   + In **Service Name**, choose **com\.amazonaws\.*region*\.kms**, where *region* is the AWS Region where your cluster is located\.
    + For **VPC**, choose the VPC where your cluster is located\.
 
 1. Choose **Create Endpoint**\.

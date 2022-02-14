@@ -2,9 +2,9 @@
 
 With the exception of the managed planned failover process, you perform most management operations on the individual clusters that make up an Aurora global database\. When you choose **Group related resources** on the **Databases** page in the console, you see the primary cluster and secondary clusters grouped under the associated global database\. To find the AWS Regions where a global database's DB clusters are running, its Aurora DB engine and version, and its identifier, use its **Configuration** tab\.
 
-The managed planned failover process is available to Aurora global database objects only, not for a single Aurora DB cluster\. To learn more, see [Managed planned failover for Amazon Aurora global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-disaster-recovery.managed-failover)\. 
+The managed planned failover process is available to Aurora global database objects only, not for a single Aurora DB cluster\. To learn more, see [Performing managed planned failovers for Amazon Aurora global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-disaster-recovery.managed-failover)\. 
 
-To recover an Aurora global database from an unplanned outage in its primary Region, see [Disaster recovery and Amazon Aurora global databases](aurora-global-database-disaster-recovery.md)\. 
+To recover an Aurora global database from an unplanned outage in its primary Region, see [Using failover in an Amazon Aurora global database](aurora-global-database-disaster-recovery.md)\. 
 
 **Topics**
 + [Modifying an Amazon Aurora global database](#aurora-global-database-modifying)

@@ -19,6 +19,8 @@ The dashboard is divided into the following parts:
 
 ## Counter metrics chart<a name="USER_PerfInsights.UsingDashboard.Components.Countermetrics"></a>
 
+With counter metrics, you can customize the Performance Insights dashboard to include up to 10 additional graphs\. These graphs show a selection of dozens of operating system and database performance metrics\. You can correlate this information with DB load to help identify and analyze performance problems\.
+
  The **Counter metrics** chart displays data for performance counters\. The default metrics depend on the DB engine:
 + Aurora MySQL– `db.SQL.Innodb_rows_read.avg`
 + Aurora PostgreSQL – `db.Transactions.xact_commit.avg`
@@ -29,7 +31,7 @@ To change the performance counters, choose **Manage Metrics**\. You can select m
 
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/./images/perf_insights_select_metrics.png)
 
-For more information, see [Adding counter metrics to the Performance Insights dashboard](USER_PerfInsights_Counters.md)\.
+For descriptions of the counter metrics that you can add for each DB engine, see [Performance Insights counter metrics](USER_PerfInsights_Counters.md)\.
 
 ## Database load chart<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions"></a>
 

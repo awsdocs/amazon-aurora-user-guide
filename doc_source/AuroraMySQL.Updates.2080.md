@@ -19,7 +19,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Upgra
 
  **New features:** 
 +  Improved binary log \(binlog\) processing to reduce crash recovery time and commit time latency when very large transactions are involved\.  
-+  Launching Database Activity Streams \(DAS\) feature for Aurora MySQL\. This feature provides a near\-real\-time data stream of the database activity in your relational database to help you monitor activity\. For more information, see [Monitoring Amazon Aurora using Database Activity Streams](DBActivityStreams.md)\. 
++  Launching Database Activity Streams \(DAS\) feature for Aurora MySQL\. This feature provides a near\-real\-time data stream of the database activity in your relational database to help you monitor activity\. For more information, see [Monitoring Amazon Aurora with Database Activity Streams](DBActivityStreams.md)\. 
 +  Updated timezone files to support the latest Brazil timezone change\. 
 +  Introduced new keywords in SQL to exercise the hash join functionality for a specific table and/or inner table: `HASH_JOIN`, `HASH_JOIN_PROBING`, and `HASH_JOIN_BUILDING`\. For additional details, see [Aurora MySQL hints](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Hints)\. 
 +  Introduced join order hint support in Aurora MySQL 5\.7 by backporting [a MySQL 8\.0 feature](https://github.com/mysql/mysql-server/commit/d2d91c3286b9ac3b95ef0e5036c5319aa4ffeda2#diff-4d30ba39ad1958c6f8148f67c94a896b)\. The new hints are `JOIN_FIXED_ORDER`, `JOIN_ORDER`, `JOIN_PREFIX`, and `JOIN_SUFFIX`\. For detailed documentation of join order hint support, see [WL\#9158: Join order hints](https://dev.mysql.com/worklog/task/?id=9158)\. 

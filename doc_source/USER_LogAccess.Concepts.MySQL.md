@@ -2,7 +2,7 @@
 
 You can monitor the Aurora MySQL logs directly through the Amazon RDS console, Amazon RDS API, AWS CLI, or AWS SDKs\. You can also access MySQL logs by directing the logs to a database table in the main database and querying that table\. You can use the mysqlbinlog utility to download a binary log\. 
 
-For more information about viewing, downloading, and watching file\-based database logs, see [Working with Amazon Aurora database log files](USER_LogAccess.md)\.
+For more information about viewing, downloading, and watching file\-based database logs, see [Monitoring Amazon Aurora log files](USER_LogAccess.md)\.
 
 **Topics**
 + [Overview of Aurora MySQL database logs](USER_LogAccess.MySQL.LogFileSize.md)

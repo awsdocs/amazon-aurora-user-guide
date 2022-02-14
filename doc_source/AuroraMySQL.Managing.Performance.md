@@ -103,8 +103,8 @@ The following table lists the resulting default value of `max_connections` for e
 | db\.r4\.2xlarge | 160 | 
 | db\.r4\.xlarge | 80 | 
 | db\.r4\.large | 32 | 
-| db\.t4g\.large | 16 | 
-| db\.t4g\.medium | 16 | 
+| db\.t4g\.large | 32 | 
+| db\.t4g\.medium | 32 | 
 | db\.t3\.large | 32 | 
 | db\.t3\.medium | 32 | 
 | db\.t3\.small | 32 | 
@@ -112,4 +112,4 @@ The following table lists the resulting default value of `max_connections` for e
 | db\.t2\.small | 32 | 
 
 **Important**  
- These values represent the theoretical maximum amount of free storage on each DB instance\. The actual local storage available to you might be lower\. Aurora uses some local storage for its management processes, and the DB instance uses some local storage even before you load any data\. You can monitor the temporary storage available for a specific DB instance with the `FreeLocalStorage` CloudWatch metric, described in [Amazon Aurora metrics](Aurora.AuroraMySQL.Monitoring.Metrics.md)\. You can check the amount of free storage at the present time\. You can also chart the amount of free storage over time\. Monitoring the free storage over time helps you to determine whether the value is increasing or decreasing, or to find the minimum, maximum, or average values\. 
+ These values represent the theoretical maximum amount of free storage on each DB instance\. The actual local storage available to you might be lower\. Aurora uses some local storage for its management processes, and the DB instance uses some local storage even before you load any data\. You can monitor the temporary storage available for a specific DB instance with the `FreeLocalStorage` CloudWatch metric, described in [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md)\. You can check the amount of free storage at the present time\. You can also chart the amount of free storage over time\. Monitoring the free storage over time helps you to determine whether the value is increasing or decreasing, or to find the minimum, maximum, or average values\. 

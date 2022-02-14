@@ -10,7 +10,7 @@ Amazon Aurora global databases span multiple AWS Regions, enabling low latency g
 + [Managing an Amazon Aurora global database](aurora-global-database-managing.md)
 + [Connecting to an Amazon Aurora global database](aurora-global-database-connecting.md)
 + [Using write forwarding in an Amazon Aurora global database](aurora-global-database-write-forwarding.md)
-+ [Disaster recovery and Amazon Aurora global databases](aurora-global-database-disaster-recovery.md)
++ [Using failover in an Amazon Aurora global database](aurora-global-database-disaster-recovery.md)
 + [Monitoring an Amazon Aurora global database](aurora-global-database-monitoring.md)
 + [Using Amazon Aurora global databases with other AWS services](aurora-global-database-interop.md)
 
@@ -18,7 +18,7 @@ Amazon Aurora global databases span multiple AWS Regions, enabling low latency g
 
 By using an Amazon Aurora global database, you can run your globally distributed applications using a single Aurora database that spans multiple AWS Regions\.
 
-An Aurora global database consists of one *primary* AWS Region where your data is mastered, and up to five read\-only *secondary* AWS Regions\. You issue write operations directly to the primary DB cluster in the primary AWS Region\. Aurora replicates data to the secondary AWS Regions using dedicated infrastructure, with latency typically under a second\. 
+An Aurora global database consists of one *primary* AWS Region where your data is written, and up to five read\-only *secondary* AWS Regions\. You issue write operations directly to the primary DB cluster in the primary AWS Region\. Aurora replicates data to the secondary AWS Regions using dedicated infrastructure, with latency typically under a second\. 
 
 In the following diagram, you can find an example Aurora global database that spans two AWS Regions\.
 
@@ -30,9 +30,9 @@ Only the primary cluster performs write operations\. Clients that perform write 
 
 Aurora global databases are designed for applications with a worldwide footprint\. The read\-only secondary DB clusters \(AWS Regions\) allow you to support read operations closer to application users\. By using features such as write forwarding, you can also configure an Aurora MySQL–based global database so that secondary clusters send data to the primary\. For more information, see [Using write forwarding in an Amazon Aurora global database](aurora-global-database-write-forwarding.md)\. 
 
-An Aurora global database can support two different approaches to failover\. The *unplanned failover process* allows you to recover your Aurora global database after an outage in the primary Region, by failing over to another Region \(cross\-Region failover\)\. For more information about this manual process, see [Recovering an Amazon Aurora global database from an unplanned outage](aurora-global-database-disaster-recovery.md#aurora-global-database-failover)\.
+An Aurora global database supports two different approaches to failover\. To recover your Aurora global database after an outage in the primary Region, you use the *manual unplanned failover* process\. With this process, you fail over your primary to another Region \(cross\-Region failover\)\. For more information about this process, see [Recovering an Amazon Aurora global database from an unplanned outage](aurora-global-database-disaster-recovery.md#aurora-global-database-failover)\.
 
-For disaster preparedness, *planned managed failover* allows you to relocate the primary cluster of a healthy Aurora global database to one of its secondary Regions with no data loss\. To learn more, see [Managed planned failover for Amazon Aurora global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-disaster-recovery.managed-failover)\. 
+For planned operational procedures such as maintenance, you use *managed planned failover*\. With this feature, you can relocate the primary cluster of a healthy Aurora global database to one of its secondary Regions with no data loss\. To learn more, see [Performing managed planned failovers for Amazon Aurora global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-disaster-recovery.managed-failover)\. 
 
 ## Advantages of Amazon Aurora global databases<a name="aurora-global-database.advantages"></a>
 
@@ -62,7 +62,7 @@ The following limitations currently apply to Aurora global databases:
 + You can start database activity streams on Aurora global databases running the following Aurora MySQL and Aurora PostgreSQL versions only\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html)
 
-  For information about database activity streams, see [Monitoring Amazon Aurora using Database Activity Streams](DBActivityStreams.md)\.
+  For information about database activity streams, see [Monitoring Amazon Aurora with Database Activity Streams](DBActivityStreams.md)\.
 + With an Aurora global database based on Aurora PostgreSQL, you can't perform a major version upgrade of the Aurora DB engine if the recovery point objective \(RPO\) feature is turned on\. For information about the RPO feature, see [Managing RPOs for Aurora PostgreSQL–based global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\. For information about upgrading an Aurora PostgreSQL–based Aurora global database, see [In\-place major upgrades for global databases](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.GlobalDB)\. For information about upgrading an Aurora MySQL–based Aurora global database, see [In\-place upgrades for global databases](AuroraMySQL.Updates.MajorVersionUpgrade.md#AuroraMySQL.Upgrading.GlobalDB)\. 
 + You can't stop or start the Aurora DB clusters in your Aurora global database individually\. To learn more, see [Stopping and starting an Amazon Aurora DB cluster](aurora-cluster-stop-start.md)\. 
 + Aurora Replicas attached to the secondary Aurora DB cluster can restart under certain circumstances\. If the primary AWS Region's writer DB instance restarts or fails over, Aurora Replicas in secondary Regions also restart\. The secondary cluster is then unavailable until all replicas are back in sync with the primary DB cluster's writer instance\. This behavior is expected, as documented in [Replication with Amazon Aurora](Aurora.Replication.md)\. Be sure that you understand the impacts to your Aurora global database before making changes to your primary DB cluster\. To learn more, see [Recovering an Amazon Aurora global database from an unplanned outage](aurora-global-database-disaster-recovery.md#aurora-global-database-failover)\. 

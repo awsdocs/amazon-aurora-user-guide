@@ -1,13 +1,13 @@
-# Adding counter metrics to the Performance Insights dashboard<a name="USER_PerfInsights_Counters"></a>
+# Performance Insights counter metrics<a name="USER_PerfInsights_Counters"></a>
 
-With counter metrics, you can customize the Performance Insights dashboard to include up to 10 additional graphs\. These graphs show a selection of dozens of operating system and database performance metrics\. You can correlate this information with DB load to help identify and analyze performance problems\.
+Counter metrics are operating system and database performance metrics in the Performance Insights dashboard\. To help identify and analyze performance problems, you can correlate counter metrics with DB load\.
 
 **Topics**
-+ [Performance Insights operating system counters](#USER_PerfInsights_Counters.OS)
++ [Performance Insights counters for Aurora PostgreSQL](#USER_PerfInsights_Counters.OS)
 + [Performance Insights counters for Aurora MySQL](#USER_PerfInsights_Counters.Aurora_MySQL)
 + [Performance Insights counters for Aurora PostgreSQL](#USER_PerfInsights_Counters.Aurora_PostgreSQL)
 
-## Performance Insights operating system counters<a name="USER_PerfInsights_Counters.OS"></a>
+## Performance Insights counters for Aurora PostgreSQL<a name="USER_PerfInsights_Counters.OS"></a>
 
 The following operating system counters are available with Performance Insights for Aurora PostgreSQL\. You can find definitions for these metrics in [Viewing OS metrics using CloudWatch Logs](USER_Monitoring.OS.CloudWatchLogs.md)\. 
 

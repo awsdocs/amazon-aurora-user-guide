@@ -1,27 +1,29 @@
-# Working with AWS CloudTrail and Amazon RDS<a name="logging-using-cloudtrail"></a>
+# Monitoring Amazon Aurora API calls in AWS CloudTrail<a name="logging-using-cloudtrail"></a>
 
-AWS CloudTrail is an AWS service that helps you audit your AWS account\. CloudTrail is enabled on your AWS account when you create it\.
+AWS CloudTrail is an AWS service that helps you audit your AWS account\. AWS CloudTrail is turned on for your AWS account when you create it\. For more information about CloudTrail, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\.
 
-For complete information about CloudTrail, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\.
+**Topics**
++ [CloudTrail integration with Amazon Aurora](#service-name-info-in-cloudtrail)
++ [Amazon Aurora log file entries](#understanding-service-name-entries)
 
-## CloudTrail integration with Amazon RDS<a name="service-name-info-in-cloudtrail"></a>
+## CloudTrail integration with Amazon Aurora<a name="service-name-info-in-cloudtrail"></a>
 
-All Amazon RDS actions are logged by CloudTrail\. CloudTrail provides a record of actions taken by a user, role, or an AWS service in Amazon RDS\. 
+All Amazon Aurora actions are logged by CloudTrail\. CloudTrail provides a record of actions taken by a user, role, or an AWS service in Amazon Aurora\.
 
 ### CloudTrail events<a name="service-name-info-in-cloudtrail.events"></a>
 
-CloudTrail captures API calls for Amazon RDS as events\. An event represents a single request from any source and includes information about the requested action, the date and time of the action, request parameters, and so on\. Events include calls from the Amazon RDS console and from code calls to the Amazon RDS APIs\. 
+CloudTrail captures API calls for Amazon Aurora as events\. An event represents a single request from any source and includes information about the requested action, the date and time of the action, request parameters, and so on\. Events include calls from the Amazon RDS console and from code calls to the Amazon RDS API operations\. 
 
-Amazon RDS activity is recorded in a CloudTrail event in **Event history**\. You can use the CloudTrail console to view the last 90 days of recorded API activity and events in an AWS Region\. For more information, see [Viewing events with CloudTrail event history](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html)\. 
+Amazon Aurora activity is recorded in a CloudTrail event in **Event history**\. You can use the CloudTrail console to view the last 90 days of recorded API activity and events in an AWS Region\. For more information, see [Viewing events with CloudTrail event history](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html)\. 
 
 ### CloudTrail trails<a name="service-name-info-in-cloudtrail.trails"></a>
 
-For an ongoing record of events in your AWS account, including events for Amazon RDS, create a trail\. A trail is a configuration that enables delivery of events to a specified Amazon S3 bucket\. CloudTrail typically delivers log files within 15 minutes of account activity\.
+For an ongoing record of events in your AWS account, including events for Amazon Aurora, create a trail\. A trail is a configuration that enables delivery of events to a specified Amazon S3 bucket\. CloudTrail typically delivers log files within 15 minutes of account activity\.
 
 **Note**  
 If you don't configure a trail, you can still view the most recent events in the CloudTrail console in **Event history**\.
 
-You can create two types of trails for an AWS account: a trail that applies to all regions, or a trail that applies to one region\. By default, when you create a trail in the console, the trail applies to all regions\. 
+You can create two types of trails for an AWS account: a trail that applies to all Regions, or a trail that applies to one Region\. By default, when you create a trail in the console, the trail applies to all Regions\. 
 
 Additionally, you can configure other AWS services to further analyze and act upon the event data collected in CloudTrail logs\. For more information, see: 
 + [Overview for creating a trail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html)
@@ -29,7 +31,7 @@ Additionally, you can configure other AWS services to further analyze and act up
 + [Configuring Amazon SNS notifications for CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/getting_notifications_top_level.html)
 + [Receiving CloudTrail log files from multiple Regions](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html) and [Receiving CloudTrail log files from multiple accounts](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-receive-logs-from-multiple-accounts.html)
 
-## Amazon RDS log file entries<a name="understanding-service-name-entries"></a>
+## Amazon Aurora log file entries<a name="understanding-service-name-entries"></a>
 
 CloudTrail log files contain one or more log entries\. CloudTrail log files are not an ordered stack trace of the public API calls, so they do not appear in any specific order\. 
 
@@ -174,4 +176,4 @@ As shown in the `userIdentity` element in the preceding example, every event or 
 + Whether the request was made with temporary security credentials for a role or federated user\.
 + Whether the request was made by another AWS service\.
 
-For more information about the `userIdentity`, see the [CloudTrail userIdentity element](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)\. For more information about `CreateDBInstance` and other Amazon RDS actions, see the [Amazon RDS API Reference](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/)\.
+For more information about the `userIdentity`, see the [CloudTrail userIdentity element](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)\. For more information about `CreateDBInstance` and other Amazon Aurora actions, see the [Amazon RDS API Reference](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/)\.

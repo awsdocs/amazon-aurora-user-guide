@@ -5,21 +5,9 @@ Amazon RDS provides metrics in real time for the operating system \(OS\) that yo
 RDS delivers the metrics from Enhanced Monitoring into your Amazon CloudWatch Logs account\. You can create metrics filters in CloudWatch from CloudWatch Logs and display the graphs on the CloudWatch dashboard\. You can consume the Enhanced Monitoring JSON output from CloudWatch Logs in a monitoring system of your choice\. For more information, see [Enhanced Monitoring](https://aws.amazon.com/rds/faqs/#Enhanced_Monitoring) in the Amazon RDS FAQs\.
 
 **Topics**
-+ [Enhanced Monitoring metric descriptions](#USER_Monitoring-Available-OS-Metrics)
 + [Differences between CloudWatch and Enhanced Monitoring metrics](#USER_Monitoring.OS.CloudWatchComparison)
 + [Retention of Enhanced Monitoring metrics](#USER_Monitoring.OS.retention)
 + [Cost of Enhanced Monitoring](#USER_Monitoring.OS.cost)
-
-## Enhanced Monitoring metric descriptions<a name="USER_Monitoring-Available-OS-Metrics"></a>
-
-The following tables list the OS metrics available using Amazon CloudWatch Logs\.
-
-**Topics**
-+ [Metrics for Aurora](#USER_Monitoring-Available-OS-Metrics-RDS)
-
-### Metrics for Aurora<a name="USER_Monitoring-Available-OS-Metrics-RDS"></a>
-
-<a name="cloudwatch-os-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Monitoring.OS.overview.html)
 
 ## Differences between CloudWatch and Enhanced Monitoring metrics<a name="USER_Monitoring.OS.CloudWatchComparison"></a>
 

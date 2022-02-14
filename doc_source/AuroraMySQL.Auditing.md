@@ -2,7 +2,7 @@
 
 You can use the high\-performance Advanced Auditing feature in Amazon Aurora MySQL to audit database activity\. To do so, you enable the collection of audit logs by setting several DB cluster parameters\. When Advanced Auditing is enabled, you can use it to log any combination of supported events\. 
 
- You can view or download the audit logs to review the audit information for one DB instance at a time\. To do so, you can use the procedures in [Working with Amazon Aurora database log files](USER_LogAccess.md)\. 
+ You can view or download the audit logs to review the audit information for one DB instance at a time\. To do so, you can use the procedures in [Monitoring Amazon Aurora log files](USER_LogAccess.md)\. 
 
 **Tip**  
  For an Aurora DB cluster containing multiple DB instances, you might find it more convenient to examine the audit logs for all instances in the cluster\. To do so, you can use CloudWatch Logs\. You can turn on a setting at the cluster level to publish the Aurora MySQL audit log data to a log group in CloudWatch\. Then you can view, filter, and search the audit logs through the CloudWatch interface\. For more information, see [Publishing Amazon Aurora MySQL logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. 
@@ -89,7 +89,7 @@ Log files are represented as comma\-separated variable \(CSV\) files in UTF\-8 f
 
 **Tip**  
 Log file entries are not in sequential order\. To order the entries, use the timestamp value\. To see the latest events, you might have to review all log files\. For more flexibility in sorting and searching the log data, turn on the setting to upload the audit logs to CloudWatch and view them using the CloudWatch interface\.  
- To view audit data with more types of fields and with output in JSON format, you can also use the Database Activity Streams feature\. For more information, see [Monitoring Amazon Aurora using Database Activity Streams](DBActivityStreams.md)\. 
+ To view audit data with more types of fields and with output in JSON format, you can also use the Database Activity Streams feature\. For more information, see [Monitoring Amazon Aurora with Database Activity Streams](DBActivityStreams.md)\. 
 
 The audit log files include the following comma\-delimited information in rows, in the specified order:
 

@@ -227,7 +227,7 @@ Currently, Aurora supports the following predefined metrics in Aurora Auto Scali
 + **RDSReaderAverageCPUUtilization** – The average value of the `CPUUtilization` metric in CloudWatch across all Aurora Replicas in the Aurora DB cluster\.
 + **RDSReaderAverageDatabaseConnections** – The average value of the `DatabaseConnections` metric in CloudWatch across all Aurora Replicas in the Aurora DB cluster\.
 
-For more information about the `CPUUtilization` and `DatabaseConnections` metrics, see [Amazon Aurora metrics](Aurora.AuroraMySQL.Monitoring.Metrics.md)\.
+For more information about the `CPUUtilization` and `DatabaseConnections` metrics, see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md)\.
 
 To use a predefined metric in your scaling policy, you create a target tracking configuration for your scaling policy\. This configuration must include a `PredefinedMetricSpecification` for the predefined metric and a `TargetValue` for the target value of that metric\.
 

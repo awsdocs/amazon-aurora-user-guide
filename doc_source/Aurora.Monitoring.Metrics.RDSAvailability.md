@@ -1,15 +1,15 @@
 # Availability of Aurora metrics in the Amazon RDS console<a name="Aurora.Monitoring.Metrics.RDSAvailability"></a>
 
-Not all of the metrics provided by Amazon Aurora are available to you in the Amazon RDS console\. You can view them using other tools, however, such as the AWS CLI and CloudWatch API\. In addition, some of the metrics that are available in the Amazon RDS console are either shown only for specific instance classes, or with different names and different units of measurement\. 
+Not all metrics provided by Amazon Aurora are available in the Amazon RDS console\. You can view these metrics using tools such as the AWS CLI and CloudWatch API\. Also, some metrics in the Amazon RDS console are either shown only for specific instance classes, or with different names and units of measurement\. 
 
 **Topics**
-+ [Latest Metrics view](#Aurora.Monitoring.Metrics.RDSAvailability.LMV)
++ [Aurora metrics available in the Last Hour view](#Aurora.Monitoring.Metrics.RDSAvailability.LMV)
 + [Aurora metrics available in specific cases](#Aurora.Monitoring.Metrics.RDSAvailability.specific-cases)
-+ [Aurora metrics that aren't available](#Aurora.Monitoring.Metrics.RDSAvailability.unavailable)
++ [Aurora metrics that aren't available in the console](#Aurora.Monitoring.Metrics.RDSAvailability.unavailable)
 
-## Latest Metrics view<a name="Aurora.Monitoring.Metrics.RDSAvailability.LMV"></a>
+## Aurora metrics available in the Last Hour view<a name="Aurora.Monitoring.Metrics.RDSAvailability.LMV"></a>
 
-You can view a subset of categorized Aurora metrics in the Latest Metrics view of the Amazon RDS console\. The following table lists the categories and associated metrics displayed in the Amazon RDS console for an Aurora instance\.
+You can view a subset of categorized Aurora metrics in the default Last Hour view in the Amazon RDS console\. The following table lists the categories and associated metrics displayed in the Amazon RDS console for an Aurora instance\.
 
 
 | Category | Metrics | 
@@ -34,7 +34,7 @@ In addition, some Aurora metrics are either shown only for specific instance cla
   + `NetworkReceiveThroughput`
   + `NetworkTransmitThroughput`
 
-## Aurora metrics that aren't available<a name="Aurora.Monitoring.Metrics.RDSAvailability.unavailable"></a>
+## Aurora metrics that aren't available in the console<a name="Aurora.Monitoring.Metrics.RDSAvailability.unavailable"></a>
 
 The following Aurora metrics aren't available in the Amazon RDS console:
 + `AuroraBinlogReplicaLag`

@@ -17,7 +17,8 @@ You can use AWS Database Migration Service \(AWS DMS\) to migrate data from a da
 For a list of AWS Regions where Aurora is available, see [Amazon Aurora](https://docs.aws.amazon.com/general/latest/gr/rande.html#aurora) in the *AWS General Reference*\.
 
 **Important**  
-If you plan to migrate an RDS for PostgreSQL DB instance to an Aurora PostgreSQL DB cluster in the near future, we strongly recommend that you disable auto minor version upgrades for the DB instance early in the migration planning phase\. Migration to Aurora PostgreSQL might be delayed if the RDS for PostgreSQL version isn't yet supported by Aurora PostgreSQL\. For information about Aurora PostgreSQL versions, see [ Engine versions for Amazon Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html)\.
+If you plan to migrate an RDS for PostgreSQL DB instance to an Aurora PostgreSQL DB cluster in the near future, we strongly recommend that you turn off auto minor version upgrades for the DB instance early in the migration planning phase\. Migration to Aurora PostgreSQL might be delayed if the RDS for PostgreSQL version isn't yet supported by Aurora PostgreSQL\.   
+For information about Aurora PostgreSQL versions, see [ Engine versions for Amazon Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html)\.
 
 ## Migrating a snapshot of an RDS for PostgreSQL DB instance to an Aurora PostgreSQL DB cluster<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Import.Console"></a>
 
@@ -25,7 +26,7 @@ To create an Aurora PostgreSQL DB cluster, you can migrate a DB snapshot of an R
 
 In some cases, the DB snapshot might not be in the AWS Region where you want to locate your data\. If so, use the Amazon RDS console to copy the DB snapshot to that AWS Region\. For information about copying a DB snapshot, see [Copying a DB snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
 
-You can migrate RDS for PostgreSQL snapshots that are compatible with the Aurora PostgreSQL versions available in the given AWS Region\. For example, a snapshot from an RDS for PostgreSQL 11\.1 DB instance can be migrated to Aurora PostgreSQL version 11\.4, 11\.7, 11\.8, or 11\.9 in the US West \(N\. California\) Region\. An RDS PostgreSQL 10\.11 snapshot can be migrated to Aurora PostgreSQL 10\.11, 10\.12, 10\.13, and 10\.14\. In other words, the RDS for PostgreSQL snapshot must use the same or a lower minor version as the Aurora PostgreSQL\. 
+You can migrate RDS for PostgreSQL snapshots that are compatible with the Aurora PostgreSQL versions available in the given AWS Region\. For example, you can migrate a snapshot from an RDS for PostgreSQL 11\.1 DB instance to Aurora PostgreSQL version 11\.4, 11\.7, 11\.8, or 11\.9 in the US West \(N\. California\) Region\. You can migrate RDS for PostgreSQL 10\.11 snapshot to Aurora PostgreSQL 10\.11, 10\.12, 10\.13, and 10\.14\. In other words, the RDS for PostgreSQL snapshot must use the same or a lower minor version as the Aurora PostgreSQL\. 
 
 You can also choose for your new Aurora PostgreSQL DB cluster to be encrypted at rest by using an AWS KMS key\. This option is available only for unencrypted DB snapshots\.
 
@@ -52,7 +53,7 @@ To migrate an RDS for PostgreSQL DB snapshot to an Aurora PostgreSQL DB cluster,
      + Its first character must be a letter\.
      + It can't end with a hyphen or contain two consecutive hyphens\.
      + It must be unique for all DB instances per AWS account, per AWS Region\.
-   + **DB instance class**: Choose a DB instance class that has the required storage and capacity for your database, for example `db.r3.large`\. Aurora cluster volumes automatically grow as the amount of data in your database increases\. 128 tebibytes \(TiB\) So you only need to choose a DB instance class that meets your current storage requirements\. For more information, see [Overview of Aurora storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\.
+   + **DB instance class**: Choose a DB instance class that has the required storage and capacity for your database, for example `db.r6g.large`\. Aurora cluster volumes automatically grow as the amount of data in your database increases\. So you only need to choose a DB instance class that meets your current storage requirements\. For more information, see [Overview of Aurora storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\.
    + **Virtual private cloud \(VPC\)**: If you have an existing VPC, then you can use that VPC with your Aurora PostgreSQL DB cluster by choosing your VPC identifier, for example `vpc-a464d1c1`\. For information on using an existing VPC, see [How to create a VPC for use with Amazon Aurora](Aurora.CreateVPC.md)\.
 
      Otherwise, you can choose to have Amazon RDS create a VPC for you by choosing **Create new VPC**\. 
@@ -158,9 +159,9 @@ When the migration process completes, the Aurora PostgreSQL cluster has a popula
 
 ## Migrating data from an RDS for PostgreSQL DB instance to an Aurora PostgreSQL DB cluster using an Aurora read replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica"></a>
 
-You can migrate from an RDS for PostgreSQL DB instance to an Aurora PostgreSQL DB cluster by using an Aurora read replica\. When you need to migrate from an RDS for PostgreSQL DB instance to an Aurora PostgreSQL DB cluster, we recommend using this approach\. 
+You can use an RDS for PostgreSQL DB instance as the basis for a new Aurora PostgreSQL DB cluster by using an Aurora read replica for the migration process\. The Aurora read replica option is available only for migrating within the same AWS Region and account\. This option is available only to an RDS for PostgreSQL DB instance for which the Region offers a compatible version of Aurora PostgreSQL\. In this case, *compatible* means that the Aurora PostgreSQL version is the same as the RDS for PostgreSQL version, or that it is a higher minor version in the same major version family\.
 
-In this case, Amazon RDS uses the PostgreSQL DB engine's streaming replication functionality to create a special type of DB cluster for the source PostgreSQL DB instance\. This type of DB cluster is called an Aurora read replica\. Updates made to the source RDS for PostgreSQL DB instance are asynchronously replicated to the Aurora read replica\. 
+For example, to use this technique to migrate an RDS for PostgreSQL 11\.14 DB instance, the Region must offer Aurora PostgreSQL version 11\.14 or a higher minor version in the PostgreSQL version 11 family\. 
 
 **Topics**
 + [Overview of migrating data by using an Aurora read replica](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Intro)
@@ -170,22 +171,18 @@ In this case, Amazon RDS uses the PostgreSQL DB engine's streaming replication f
 
 ### Overview of migrating data by using an Aurora read replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Intro"></a>
 
-To migrate from an RDS for PostgreSQL DB instance to an Aurora PostgreSQL DB cluster, we recommend creating an Aurora read replica of your source RDS for PostgreSQL DB instance\. When the replica lag between the RDS for PostgreSQL DB instance and the Aurora PostgreSQL Read Replica is zero, you can stop replication\. At this point, you can promote the Aurora read replica to be a standalone Aurora PostgreSQL DB cluster\. This standalone DB cluster can then accept write loads\. 
+Migrating from an RDS for PostgreSQL DB instance to an Aurora PostgreSQL DB cluster is a multistep procedure\. First, you create an Aurora read replica of your source RDS for PostgreSQL DB instance\. That starts a replication process from your RDS for PostgreSQL DB instance to a special\-purpose DB cluster known as a **Replica* cluster*\. The Replica cluster consists solely of an Aurora read replica \(a reader instance\)\. 
 
-Be prepared for migration to take a while, roughly several hours per tebibyte \(TiB\) of data\. While the migration is in progress, your RDS for PostgreSQL instance accumulates write ahead log \(WAL\) segments\. Make sure that your Amazon RDS instance has sufficient storage capacity for these segments\. 
-
-When you create an Aurora read replica of an RDS for PostgreSQL DB instance, Amazon RDS creates a DB snapshot of your source RDS for PostgreSQL DB instance\. This snapshot is private to Amazon RDS and incurs no charges\. Amazon RDS then migrates the data from the DB snapshot to the Aurora read replica\. After the DB snapshot data is migrated to the new Aurora PostgreSQL DB cluster, RDS starts replication between your RDS for PostgreSQL DB instance and the Aurora PostgreSQL DB cluster\. 
-
-You can only have one Aurora read replica for an RDS for PostgreSQL DB instance\. If you try to create an Aurora read replica for your RDS for PostgreSQL instance and you already have an Aurora read replica or a cross\-region read replica, the request is rejected\. 
+Once the Replica cluster exists, you monitor the lag between it and the source RDS for PostgreSQL DB instance\. When the replica lag is zero \(0\), you can promote the Replica cluster\. Replication stops, the Replica cluster is promoted to a standalone Aurora DB cluster, and the reader is promoted to writer instance for the cluster\. You can then add instances to the Aurora PostgreSQL DB cluster to size your Aurora PostgreSQL DB cluster for your use case\. You can also delete the RDS for PostgreSQL DB instance if you have no further need of it\. 
 
 **Note**  
-Replication issues can arise due to feature differences between Aurora PostgreSQL and the PostgreSQL engine version of your RDS for PostgreSQL DB instance that is the replication source\. You can replicate only from an RDS for PostgreSQL instance that is compatible with the Aurora PostgreSQL version\. The RDS for PostgreSQL version must be lower than or equal to a supported Aurora PostgreSQL version in the same major version\. For example, you can replicate data between an RDS for PostgreSQL version 11\.7 DB instance and an Aurora PostgreSQL version 11\.7 or higher 11 version DB cluster, but not an Aurora PostgreSQL version 11\.6 DB cluster\. For information about Aurora PostgreSQL versions, see [ Aurora PostgreSQL releases and engine versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html) in the *Aurora User Guide\.* If you encounter an error, you can find help in the [Amazon RDS community forum](https://forums.aws.amazon.com/forum.jspa?forumID=60) or by contacting AWS Support\.
+It can take several hours per tebitype \(TiB\) of data for the migration to complete\. 
 
-For more information on PostgreSQL read replicas, see [Working with read replicas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html) in the *Amazon RDS User Guide*\.
+You can't create an Aurora read replica if your RDS for PostgreSQL DB instance already has an Aurora read replica or if it has a cross\-Region read replica\. 
 
 ### Preparing to migrate data by using an Aurora read replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Prepare"></a>
 
-Before you migrate data from your RDS for PostgreSQL instance to an Aurora PostgreSQL cluster, make sure that your instance has sufficient storage capacity\. This storage capacity is for the write ahead log \(WAL\) segments that accumulate during the migration\. There are several metrics to check for this, described following\. 
+During the migration process using Aurora read replica, updates made to the source RDS for PostgreSQL DB instance are asynchronously replicated to the Aurora read replica of the Replica cluster\. The process uses PostgreSQL's native streaming replication functionality which stores write\-ahead logs \(WAL\) segments on the source instance\. Before starting this migration process, make sure that your instance has sufficient storage capacity by checking values for the metrics listed in the table\. 
 
 
 | Metric | Description | 
@@ -199,7 +196,7 @@ For more information about monitoring your RDS instance, see [Monitoring](https:
 
 ### Creating an Aurora read replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Create"></a>
 
-You can create an Aurora read replica for an RDS for PostgreSQL DB instance by using the console or the AWS CLI\.
+You can create an Aurora read replica for an RDS for PostgreSQL DB instance by using the console or the AWS CLI\. The option to create an Aurora read replica is available only if the AWS Region offers a compatible Aurora PostgreSQL version\. That is, it's available only if there's an Aurora PostgreSQL version that is the same as the RDS for PostgreSQL version or a higher minor version in the same major version family\.
 
 #### Console<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Create.Console"></a>
 
@@ -209,10 +206,10 @@ You can create an Aurora read replica for an RDS for PostgreSQL DB instance by u
 
 1. In the navigation pane, choose **Databases**\. 
 
-1. Choose the RDS for PostgreSQL DB instance that you want to use as the source for your Aurora read replica\. For **Actions**, choose **Create Aurora read replica**\.  
+1. Choose the RDS for PostgreSQL DB instance that you want to use as the source for your Aurora read replica\. For **Actions**, choose **Create Aurora read replica**\. If this choice doesn't display, it means that a compatible Aurora PostgreSQL version isn't available in the Region\.   
 ![\[Create Aurora read replica\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Aurorapgres-migrate.png)
 
-1. Choose the DB cluster specifications that you want to use for the Aurora read replica, as described in the following table\.     
+1. On the Create Aurora read replica settings page, you configure the properties for the Aurora PostgreSQL DB cluster as shown in the following table\. The Replica DB cluster is created from a snapshot of the source DB instance using the same 'master' user name and password as the source, so you can't change these at this time\.     
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Migrating.html)
 
 1. Choose **Create read replica**\.
@@ -320,54 +317,6 @@ See an example with the RDS API operation [https://docs.aws.amazon.com/AmazonRDS
 
 ### Promoting an Aurora read replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote"></a>
 
-After migration completes, you can promote the Aurora read replica to a standalone DB cluster\. You then direct your client applications to the endpoint for the Aurora read replica\. For more information on the Aurora endpoints, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\. Promotion should complete fairly quickly\. You can't delete the primary PostgreSQL DB instance or unlink the DB instance and the Aurora read replica until the promotion is complete\.
+The migration to Aurora PostgreSQL isn't complete until you promote the Replica cluster, so don't delete the RDS for PostgreSQL source DB instance just yet\. 
 
-Before you promote your Aurora read replica, stop any transactions from being written to the source RDS for PostgreSQL DB instance\. Then wait for the replica lag on the Aurora read replica to reach zero\. For more information, see [Monitoring Aurora PostgreSQL replication](AuroraPostgreSQL.Replication.md#AuroraPostgreSQL.Replication.Monitoring) and [Monitoring Amazon Aurora metrics with Amazon CloudWatch](Aurora.Monitoring.md)\.
-
-#### Console<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote.Console"></a>
-
-**To promote an Aurora read replica to an Aurora DB cluster**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the navigation pane, choose **Databases**\. 
-
-1. Choose the DB instance for the Aurora read replica\. 
-
-1. For **Actions**, choose **Promote**\. 
-
-1. Choose **Promote read replica**\.
-
-#### AWS CLI<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote.CLI"></a>
-
-To promote an Aurora read replica to a stand\-alone DB cluster, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html) AWS CLI command\. 
-
-**Example**  
-For Linux, macOS, or Unix:  
-
-```
-aws rds promote-read-replica-db-cluster \
-    --db-cluster-identifier myreadreplicacluster
-```
-For Windows:  
-
-```
-aws rds promote-read-replica-db-cluster ^
-    --db-cluster-identifier myreadreplicacluster
-```
-
-#### RDS API<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote.API"></a>
-
-To promote an Aurora read replica to a stand\-alone DB cluster, use the RDS API operation [PromoteReadReplicaDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplicaDBCluster.html)\. 
-
-After you promote your read replica, confirm that the promotion has completed by using the following procedure\.
-
-**To confirm that the Aurora read replica was promoted**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the navigation pane, choose **Events**\.
-
-1. On the **Events** page, verify that there is an event, `Promoted read replica cluster to a stand-alone database cluster` for the cluster that you promoted\.
-
-After promotion is complete, the primary RDS for PostgreSQL DB instance and the Aurora Read Replica are unlinked\. At this point, you can safely delete the DB instance if you want to\.
+Before promoting the Replica cluster, make sure that the RDS for PostgreSQL DB instance doesn't have any in\-process transactions or other activity writing to the database\. When the replica lag on the Aurora read replica reaches zero \(0\), you can promote the Replica cluster\. For more information about monitoring replica lag, see [Monitoring Aurora PostgreSQL replication](AuroraPostgreSQL.Replication.md#AuroraPostgreSQL.Replication.Monitoring) and 

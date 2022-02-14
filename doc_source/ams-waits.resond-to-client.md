@@ -73,11 +73,11 @@ For a useful overview of troubleshooting using Performance Insights, see the AWS
 
 Check for the increase in the value of the Amazon CloudWatch metrics related to network throughput, such as `NetworkReceiveThroughput` and `NetworkTransmitThroughput`\. If the DB instance class network bandwidth is being reached, you can scale the DB instance class used by the DB cluster by modifying the DB cluster\. A DB instance class with larger network bandwidth returns data to clients more efficiently\.
 
-For information about monitoring Amazon CloudWatch metrics, see [Monitoring Amazon Aurora metrics with Amazon CloudWatch](Aurora.Monitoring.md)\. For information about DB instance classes, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\. For information about modifying a DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
+For information about monitoring Amazon CloudWatch metrics, see [Viewing metrics in the Amazon RDS console](USER_Monitoring.md)\. For information about DB instance classes, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\. For information about modifying a DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
 ### Check workload for unexpected results<a name="ams-waits.resond-to-client.actions.workload"></a>
 
-Check the workload on the DB cluster and make sure that it isn't producing unexpected results\. For example, there might be queries that are returning a higher number of rows than expected\. In this case, you can use Performance Insights counter metrics such as `Innodb_rows_read`\. For more information, see [Adding counter metrics to the Performance Insights dashboard](USER_PerfInsights_Counters.md)\.
+Check the workload on the DB cluster and make sure that it isn't producing unexpected results\. For example, there might be queries that are returning a higher number of rows than expected\. In this case, you can use Performance Insights counter metrics such as `Innodb_rows_read`\. For more information, see [Performance Insights counter metrics](USER_PerfInsights_Counters.md)\.
 
 ### Distribute workload with reader instances<a name="ams-waits.resond-to-client.actions.balance"></a>
 

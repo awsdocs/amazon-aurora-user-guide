@@ -1,6 +1,12 @@
-# Overview of monitoring Amazon Aurora<a name="MonitoringOverview"></a>
+# Overview of monitoring metrics in Amazon Aurora<a name="MonitoringOverview"></a>
 
 Monitoring is an important part of maintaining the reliability, availability, and performance of Amazon Aurora and your AWS solutions\. To more easily debug multi\-point failures, we recommend that you collect monitoring data from all parts of your AWS solution\.
+
+**Topics**
++ [Monitoring plan](#MonitoringOverview.plan)
++ [Performance baseline](#MonitoringOverview.baseline)
++ [Performance guidelines](#MonitoringOverview.guidelines)
++ [Monitoring tools](#MonitoringOverview.tools)
 
 ## Monitoring plan<a name="MonitoringOverview.plan"></a>
 
@@ -35,32 +41,49 @@ When performance falls outside your established baseline, you might need to make
 
 ## Monitoring tools<a name="MonitoringOverview.tools"></a>
 
-AWS provides various tools that you can use to monitor Amazon Aurora\. You can configure some of these tools to do the monitoring for you, and other tools require manual intervention\. 
+Monitoring is an important part of maintaining the reliability, availability, and performance of Amazon Aurora and your other AWS solutions\. AWS provides various monitoring tools to watch Amazon Aurora, report when something is wrong, and take automatic actions when appropriate\.
+
+**Topics**
++ [Automated monitoring tools](#MonitoringOverview.tools.automated)
++ [Manual monitoring tools](#monitoring_manual_tools)
 
 ### Automated monitoring tools<a name="MonitoringOverview.tools.automated"></a>
 
 We recommend that you automate monitoring tasks as much as possible\. 
 
-#### Amazon Aurora reporting tools<a name="MonitoringOverview.tools.automated.rds"></a>
+**Topics**
++ [Amazon Aurora cluster status and recommendations](#MonitoringOverview.tools.automated.rds)
++ [Amazon CloudWatch metrics for Amazon Aurora](#MonitoringOverview.tools.automated.integrated)
++ [Amazon RDS Performance Insights and operating\-system monitoring](#MonitoringOverview.tools.automated.metrics.rds)
++ [Integrated services](#MonitoringOverview.tools.automated.integrated.events-logs-streams)
+
+#### Amazon Aurora cluster status and recommendations<a name="MonitoringOverview.tools.automated.rds"></a>
 
 You can use the following automated tools to watch Amazon Aurora and report when something is wrong:
-+ **Amazon Aurora cluster status** — View details about the current status of your cluster by using the Amazon RDS console, the AWS CLI command, or the RDS API\.
++ **Amazon Aurora cluster status** — View details about the current status of your cluster by using the Amazon RDS console, the AWS CLI, or the RDS API\.
 + **Amazon Aurora recommendations** — Respond to automated recommendations for database resources, such as DB instances, DB clusters, and DB cluster parameter groups\. For more information, see [Viewing Amazon Aurora recommendations](accessing-monitoring.md#USER_Recommendations)\.
-+ **Amazon RDS Performance Insights** — Assess the load on your database, and determine when and where to take action\. For more information, see [Monitoring DB load with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\.
-+ **Amazon RDS Enhanced Monitoring** — Look at metrics in real time for the operating system\. For more information, see [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)\.
-+ **Amazon RDS events** – Subscribe to Amazon RDS events to be notified when changes occur with a DB instance, DB cluster, DB cluster snapshot, DB parameter group, or DB security group\. For more information, see [Using Amazon RDS event notification](USER_Events.md)\.
-+ **Amazon RDS database logs** – View, download, or watch database log files using the Amazon RDS console or Amazon RDS API operations\. You can also query some database log files that are loaded into database tables\. For more information, see [Working with Amazon Aurora database log files](USER_LogAccess.md)\.
 
-#### Integrated monitoring tools<a name="MonitoringOverview.tools.automated.integrated"></a>
+#### Amazon CloudWatch metrics for Amazon Aurora<a name="MonitoringOverview.tools.automated.integrated"></a>
 
-Amazon Aurora integrates with Amazon CloudWatch, Amazon EventBridge, and AWS CloudTrail for additional monitoring capabilities\. 
+Amazon Aurora integrates with Amazon CloudWatch for additional monitoring capabilities\.
 + **Amazon CloudWatch** – This service monitors your AWS resources and the applications you run on AWS in real time\. You can use the following Amazon CloudWatch features with Amazon Aurora:
-  + **Amazon CloudWatch metrics** – Amazon Aurora automatically sends metrics to CloudWatch every minute for each active database\. You don't get additional charges for Amazon RDS metrics in CloudWatch\. For more information, see [Amazon Aurora metrics](Aurora.AuroraMySQL.Monitoring.Metrics.md) 
+  + **Amazon CloudWatch metrics** – Amazon Aurora automatically sends metrics to CloudWatch every minute for each active database\. You don't get additional charges for Amazon RDS metrics in CloudWatch\. For more information, see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md) 
   + **Amazon CloudWatch alarms** – You can watch a single Amazon Aurora metric over a specific time period\. You can then perform one or more actions based on the value of the metric relative to a threshold that you set\. 
-+ **Amazon CloudWatch Logs** – Most DB engines enable you to monitor, store, and access your database log files in CloudWatch Logs\. For more information, see [Amazon CloudWatch Logs User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/)\.
-+ **Amazon EventBridge** – is a serverless event bus service that makes it easy to connect your applications with data from a variety of sources\. EventBridge delivers a stream of real\-time data from your own applications, Software\-as\-a\-Service \(SaaS\) applications, and AWS services and routes that data to targets such as Lambda\. This enables you to monitor events that happen in services, and build event\-driven architectures\. For more information, see [Creating a rule that triggers on an Amazon Aurora event](rds-cloud-watch-events.md)\.
-+ **AWS CloudTrail** – You can view a record of actions taken by a user, role, or an AWS service in Amazon Aurora\. CloudTrail captures all API calls for Amazon Aurora as events\. These captures include calls from the Amazon RDS console and from code calls to the Amazon RDS API operations\. If you create a trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for Amazon Aurora\. If you don't configure a trail, you can still view the most recent events in the CloudTrail console in **Event history**\. For more information, see [Working with AWS CloudTrail and Amazon RDS](logging-using-cloudtrail.md)\.
-+ **Database Activity Streams** – A stream of database activity is pushed from Amazon Aurora to an Amazon Kinesis data stream that is created on behalf of your Amazon Aurora DB cluster\. When you integrate database activity streams with monitoring tools, you can monitor and audit database activity\.
+
+#### Amazon RDS Performance Insights and operating\-system monitoring<a name="MonitoringOverview.tools.automated.metrics.rds"></a>
+
+You can use the following automated tools to monitor Amazon Aurora performance:
++ **Amazon RDS Performance Insights** – Assess the load on your database, and determine when and where to take action\. For more information, see [Monitoring DB load with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\.
++ **Amazon RDS Enhanced Monitoring** – Look at metrics in real time for the operating system\. For more information, see [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)\.
+
+#### Integrated services<a name="MonitoringOverview.tools.automated.integrated.events-logs-streams"></a>
+
+The following AWS services are integrated with Amazon Aurora:
++ *Amazon EventBridge* is a serverless event bus service that makes it easy to connect your applications with data from a variety of sources\. For more information, see [Monitoring Amazon Aurora events](working-with-events.md)\.
++ *Amazon CloudWatch Logs* lets you monitor, store, and access your log files from Amazon Aurora instances, CloudTrail, and other sources\. For more information, see [Monitoring Amazon Aurora log files](USER_LogAccess.md)\.
++ *AWS CloudTrail* captures API calls and related events made by or on behalf of your AWS account and delivers the log files to an Amazon S3 bucket that you specify\. For more information, see [Monitoring Amazon Aurora API calls in AWS CloudTrail](logging-using-cloudtrail.md)\.
++ *Database Activity Streams* is an Amazon Aurora feature that provides a near\-real\-time stream of the activity in your DB cluster\. For more information, see [Monitoring Amazon Aurora with Database Activity Streams](DBActivityStreams.md)\.
++ *DevOps Guru for RDS* is a capability of Amazon DevOps Guru that applies machine learning to Performance Insights metrics for Amazon Aurora databases\. For more information, see [Analyzing performance anomalies with DevOps Guru for RDS](devops-guru-for-rds.md)\.
 
 ### Manual monitoring tools<a name="monitoring_manual_tools"></a>
 
