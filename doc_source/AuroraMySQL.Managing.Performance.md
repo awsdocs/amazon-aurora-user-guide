@@ -62,7 +62,7 @@ The following table lists the resulting default value of `max_connections` for e
 
  Aurora MySQL and RDS for MySQL DB instances have different amounts of memory overhead\. Therefore, the `max_connections` value can be different for Aurora MySQL and RDS for MySQL DB instances that use the same instance class\. The values in the table only apply to Aurora MySQL DB instances\. 
 
- The much lower connectivity limits for T2 and T3 instances are because with Aurora, those instance classes are intended only for development and test scenarios, not for production workloads\. 
+ __The much lower connectivity limits for T2 and T3 instances are because with Aurora, those instance classes are intended only for development and test scenarios, not for production workloads\.__ 
 
  The default connection limits are tuned for systems that use the default values for other major memory consumers, such as the buffer pool and query cache\. If you change those other settings for your cluster, consider adjusting the connection limit to account for the increase or decrease in available memory on the DB instances\. 
 
