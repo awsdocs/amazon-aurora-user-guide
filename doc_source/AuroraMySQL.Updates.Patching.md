@@ -15,6 +15,9 @@
 
  You perform this kind of upgrade by modifying the engine version of the DB cluster using the AWS Management Console, AWS CLI, or the RDS API\. If your cluster is running Aurora MySQL 1\.x, choose a higher 1\.x version\. If your cluster is running Aurora MySQL 2\.x, choose a higher 2\.x version\. 
 
+**Note**  
+If you're performing a minor upgrade on an Aurora global database, upgrade all of the secondary clusters before you upgrade the primary cluster\.
+
  **To modify the engine version of a DB cluster** 
 +  **By using the console** – Modify the properties of your cluster\. In the **Modify DB cluster** window, change the Aurora MySQL engine version in the **DB engine version** box\. If you aren't familiar with the general procedure for modifying a cluster, follow the instructions at [Modifying the DB cluster by using the console, CLI, and API](Aurora.Modifying.md#Aurora.Modifying.Cluster)\. 
 +  **By using the AWS CLI** – Call the [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) AWS CLI command, and specify the name of your DB cluster for the `--db-cluster-identifier` option and the engine version for the `--engine-version` option\. 

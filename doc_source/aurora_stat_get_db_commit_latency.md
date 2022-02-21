@@ -21,7 +21,7 @@ The object ID \(OID\) of the Aurora PostgreSQL database\.
 
 ## Usage notes<a name="aurora_stat_get_db_commit_latency-usage-notes"></a>
 
-Amazon CloudWatch uses this function to calculate the average commit latency\. For more information about Amazon CloudWatch metrics and how to troubleshoot high commit latency, see [Monitoring Amazon Aurora metrics with Amazon CloudWatch](Aurora.Monitoring.md) and [Making better decisions about Amazon RDS with Amazon CloudWatch metrics](https://aws.amazon.com/blogs/database/making-better-decisions-about-amazon-rds-with-amazon-cloudwatch-metrics/)\.
+Amazon CloudWatch uses this function to calculate the average commit latency\. For more information about Amazon CloudWatch metrics and how to troubleshoot high commit latency, see [Viewing metrics in the Amazon RDS console](USER_Monitoring.md) and [Making better decisions about Amazon RDS with Amazon CloudWatch metrics](https://aws.amazon.com/blogs/database/making-better-decisions-about-amazon-rds-with-amazon-cloudwatch-metrics/)\.
 
 You can reset this statistic by using the PostgreSQL statistics access function `pg_stat_reset`\. You can check the last time this statistic was reset by using the `pg_stat_get_db_stat_reset_time` function\. For more information about PostgreSQL statistics access functions, see [The Statistics Collector](https://www.postgresql.org/docs/9.1/monitoring-stats.html) in the PostgreSQL documentation\.
 

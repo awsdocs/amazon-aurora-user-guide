@@ -45,7 +45,7 @@ Aurora Serverless v1 deletes your DB cluster\. If you chose to have a final snap
 
 ## AWS CLI<a name="aurora-serverless.delete.cli"></a>
 
-Before you begin, configure your AWS CLI with your AWS Access Key ID, AWS Secret Access Key, and the AWS Region where your Aurora Serverless v1 DB cluster For more information, see [Configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config) in the AWS Command Line Interface User Guide\.
+Before you begin, configure your AWS CLI with your AWS Access Key ID, AWS Secret Access Key, and the AWS Region where your Aurora Serverless v1 DB cluster resides\. For more information, see [Configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config) in the AWS Command Line Interface User Guide\.
 
 You can't delete an Aurora Serverless v1 DB cluster until after you first disable deletion protection for clusters configured with this option\. If you try to delete a cluster that has this protection option enabled, you see the following error message\.
 

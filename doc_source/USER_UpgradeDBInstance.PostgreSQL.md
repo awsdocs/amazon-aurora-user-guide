@@ -182,7 +182,7 @@ We recommend the following process when upgrading an Aurora PostgreSQL DB cluste
 **Note**  
 During the upgrade process, you can't do a point\-in\-time restore of your cluster\. Aurora PostgreSQL takes a DB cluster snapshot during the upgrade process if your backup retention period is greater than 0\. You can perform a point\-in\-time restore to times before the upgrade began and after the automatic snapshot of your instance has completed\. 
 
-   For information about an upgrade in progress, you can use Amazon RDS to view two logs that the pg\_upgrade utility produces\. These are `pg_upgrade_internal.log` and `pg_upgrade_server.log`\. Amazon Aurora appends a timestamp to the file name for these logs\. You can view these logs as you can any other log\. For more information, see [Working with Amazon Aurora database log files](USER_LogAccess.md)\.
+   For information about an upgrade in progress, you can use Amazon RDS to view two logs that the pg\_upgrade utility produces\. These are `pg_upgrade_internal.log` and `pg_upgrade_server.log`\. Amazon Aurora appends a timestamp to the file name for these logs\. You can view these logs as you can any other log\. For more information, see [Monitoring Amazon Aurora log files](USER_LogAccess.md)\.
 
 1. Upgrade PostgreSQL extensions\. The PostgreSQL upgrade process doesn't upgrade any PostgreSQL extensions\. For more information, see [Upgrading PostgreSQL extensions](#USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades)\.
 
@@ -204,6 +204,9 @@ After you complete a major version upgrade, we recommend the following:
 ## Manually upgrading the Aurora PostgreSQL engine<a name="USER_UpgradeDBInstance.Upgrading.Manual"></a>
 
 To perform an upgrade of an Aurora PostgreSQL DB cluster, use the following instructions for the AWS Management Console, the AWS CLI, or the RDS API\. 
+
+**Note**  
+If you're performing a minor upgrade on an Aurora global database, upgrade all of the secondary clusters before you upgrade the primary cluster\.
 
 ### Console<a name="USER_UpgradeDBInstance.Upgrading.Manual.Console"></a>
 
@@ -263,9 +266,15 @@ To upgrade the engine version of a DB cluster, use the [ModifyDBCluster](https:/
 
 ## In\-place major upgrades for global databases<a name="USER_UpgradeDBInstance.PostgreSQL.GlobalDB"></a>
 
- For an Aurora global database, you upgrade the primary cluster as explained in [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. Perform the upgrade on the primary cluster in the global database\. Aurora automatically upgrades all the secondary clusters at the same time and makes sure that all of the clusters run the same engine version\. This requirement is because any changes to system tables, data file formats, and so on, are automatically replicated to all the secondary clusters\. 
+ For an Aurora global database, you upgrade the global database cluster\. Aurora automatically upgrades all of the clusters at the same time and makes sure that they all run the same engine version\. This requirement is because any changes to system tables, data file formats, and so on, are automatically replicated to all the secondary clusters\. 
 
- If you use the AWS CLI or RDS API, start the upgrade process by calling the `modify-global-cluster` command or `ModifyGlobalCluster` operation instead of `modify-db-cluster` or `ModifyDBCluster`\. 
+Follow the instructions in [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. When you specify what to upgrade, make sure to choose the global database cluster instead of one of the clusters it contains\.
+
+If you use the AWS Management Console, choose the item with the role **Global database**\.
+
+![\[Upgrading global database cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-major-upgrade-global-cluster.png)
+
+ If you use the AWS CLI or RDS API, start the upgrade process by calling the [modify\-global\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-global-cluster.html) command or [ModifyGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyGlobalCluster.html) operation instead of `modify-db-cluster` or `ModifyDBCluster`\. 
 
 **Note**  
 You can't perform a major version upgrade of the Aurora DB engine if the recovery point objective \(RPO\) feature is turned on\. Before you upgrade the DB engine, make sure that this feature is turned off\. For more information about the RPO feature, see [Managing RPOs for Aurora PostgreSQL–based global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.

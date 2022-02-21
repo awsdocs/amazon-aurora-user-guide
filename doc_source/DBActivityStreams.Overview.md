@@ -6,8 +6,11 @@ Security threats are both external and internal\. To protect against internal th
 
 **Topics**
 + [How database activity streams work](#DBActivityStreams.Overview.how-they-work)
-+ [Asynchronous and synchronous mode](#DBActivityStreams.Overview.sync-mode)
++ [Asynchronous and synchronous mode for database activity streams](#DBActivityStreams.Overview.sync-mode)
 + [Requirements for database activity streams](#DBActivityStreams.Overview.requirements)
++ [Supported Aurora engine versions for database activity streams](#DBActivityStreams.Overview.requirements.version)
++ [Supported DB instance classes for database activity streams](#DBActivityStreams.Overview.requirements.classes)
++ [Supported AWS Regions for database activity streams](#DBActivityStreams.Overview.requirements.Regions)
 
 ## How database activity streams work<a name="DBActivityStreams.Overview.how-they-work"></a>
 
@@ -22,9 +25,9 @@ The following graphic shows an Aurora DB cluster configured with Amazon Kinesis 
 
 ![\[Database Activity Streams\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-das.png)
 
-## Asynchronous and synchronous mode<a name="DBActivityStreams.Overview.sync-mode"></a>
+## Asynchronous and synchronous mode for database activity streams<a name="DBActivityStreams.Overview.sync-mode"></a>
 
-You can choose to have the database session handle activity events in either of the following modes:
+You can choose to have the database session handle database activity events in either of the following modes:
 + **Asynchronous mode** – When a database session generates an activity stream event, the session returns to normal activities immediately\. In the background, the activity stream event is made a durable record\. If an error occurs in the background task, an RDS event is sent\. This event indicates the beginning and end of any time windows where activity stream event records might have been lost\.
 
   Asynchronous mode favors database performance over the accuracy of the activity stream\. 
@@ -41,12 +44,13 @@ You can choose to have the database session handle activity events in either of 
 In Aurora, database activity streams have the following requirements and limitations\.
 
 **Topics**
-+ [Supported Aurora engine versions](#DBActivityStreams.Overview.requirements.version)
-+ [Supported DB instance classes](#DBActivityStreams.Overview.requirements.classes)
-+ [AWS Region support](#DBActivityStreams.Overview.requirements.Regions)
 + [Miscellaneous requirements](#DBActivityStreams.Overview.requirements.misc)
 
-### Supported Aurora engine versions<a name="DBActivityStreams.Overview.requirements.version"></a>
+### Miscellaneous requirements<a name="DBActivityStreams.Overview.requirements.misc"></a>
++ Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.
++ Database activity streams require use of Amazon Kinesis\.
+
+## Supported Aurora engine versions for database activity streams<a name="DBActivityStreams.Overview.requirements.version"></a>
 
 For Aurora PostgreSQL, database activity streams are supported for the following versions:
 + All 13 versions
@@ -61,7 +65,7 @@ For Aurora MySQL, database activity streams are supported for version 2\.08 or h
 **Note**  
 Database activity streams aren't supported in Aurora Serverless\.
 
-### Supported DB instance classes<a name="DBActivityStreams.Overview.requirements.classes"></a>
+## Supported DB instance classes for database activity streams<a name="DBActivityStreams.Overview.requirements.classes"></a>
 
 For Aurora MySQL, you can use database activity streams with the following DB instance classes:
 + db\.r6g
@@ -76,15 +80,10 @@ For Aurora PostgreSQL, you can use database activity streams with the following 
 + db\.r4
 + db\.x2g
 
-### AWS Region support<a name="DBActivityStreams.Overview.requirements.Regions"></a>
+## Supported AWS Regions for database activity streams<a name="DBActivityStreams.Overview.requirements.Regions"></a>
 
 Database activity streams are supported in all AWS Regions except the following:
-+ Asia Pacific \(Jakarta\) Region, `ap-southeast-3`
 + China \(Beijing\) Region, `cn-north-1`
 + China \(Ningxia\) Region, `cn-northwest-1`
 + AWS GovCloud \(US\-East\), `us-gov-east-1`
 + AWS GovCloud \(US\-West\), `us-gov-west-1`
-
-### Miscellaneous requirements<a name="DBActivityStreams.Overview.requirements.misc"></a>
-+ Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.
-+ Database activity streams require use of Amazon Kinesis\.

@@ -13,7 +13,7 @@
 + [How to perform an in\-place upgrade](#AuroraMySQL.Upgrading.Procedure)
 + [How in\-place upgrades affect the parameter groups for a cluster](#AuroraMySQL.Upgrading.ParamGroups)
 + [Changes to cluster properties between Aurora MySQL version 1 and 2](#AuroraMySQL.Upgrading.Attrs)
-+ [In\-place upgrades for global databases](#AuroraMySQL.Upgrading.GlobalDB)
++ [In\-place major upgrades for global databases](#AuroraMySQL.Upgrading.GlobalDB)
 + [After the upgrade](#AuroraMySQL.Upgrading.PostUpgrade)
 + [Troubleshooting for Aurora MySQL in\-place upgrade](#AuroraMySQL.Upgrading.Troubleshooting)
 + [Aurora MySQL in\-place upgrade tutorial](#AuroraMySQL.Upgrading.Tutorial)
@@ -191,7 +191,7 @@ aws rds modify-db-cluster ^
  You can combine other CLI commands with `modify-db-cluster` to create an automated end\-to\-end process for performing and verifying upgrades\. For more information and examples, see [Aurora MySQL in\-place upgrade tutorial](#AuroraMySQL.Upgrading.Tutorial)\. 
 
 **Note**  
- If your cluster is part of an Aurora global database, the in\-place upgrade procedure is slightly different\. You call the [modify\-global\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-global-cluster.html) command operation instead of `modify-db-cluster`\. For more information, see [In\-place upgrades for global databases](#AuroraMySQL.Upgrading.GlobalDB)\. 
+ If your cluster is part of an Aurora global database, the in\-place upgrade procedure is slightly different\. You call the [modify\-global\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-global-cluster.html) command operation instead of `modify-db-cluster`\. For more information, see [In\-place major upgrades for global databases](#AuroraMySQL.Upgrading.GlobalDB)\. 
 
 ### RDS API<a name="AuroraMySQL.Upgrading.ModifyingDBCluster.API"></a>
 
@@ -203,7 +203,7 @@ aws rds modify-db-cluster ^
 +  `ApplyImmediately` \(set to `true` or `false`\) 
 
 **Note**  
- If your cluster is part of an Aurora global database, the in\-place upgrade procedure is slightly different\. You call the [ModifyGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyGlobalClusterParameterGroup.html) operation instead of `ModifyDBCluster`\. For more information, see [In\-place upgrades for global databases](#AuroraMySQL.Upgrading.GlobalDB)\. 
+ If your cluster is part of an Aurora global database, the in\-place upgrade procedure is slightly different\. You call the [ModifyGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyGlobalClusterParameterGroup.html) operation instead of `ModifyDBCluster`\. For more information, see [In\-place major upgrades for global databases](#AuroraMySQL.Upgrading.GlobalDB)\. 
 
 ## How in\-place upgrades affect the parameter groups for a cluster<a name="AuroraMySQL.Upgrading.ParamGroups"></a>
 
@@ -252,11 +252,17 @@ aws rds describe-orderable-db-instance-options --engine aurora-mysql --region us
 aws rds describe-db-parameters --db-parameter-group-name default.aurora-mysql5.7 --region us-east-1
 ```
 
-## In\-place upgrades for global databases<a name="AuroraMySQL.Upgrading.GlobalDB"></a>
+## In\-place major upgrades for global databases<a name="AuroraMySQL.Upgrading.GlobalDB"></a>
 
- For an Aurora global database, you upgrade the primary cluster as explained in [How the Aurora MySQL in\-place major version upgrade works](#AuroraMySQL.Upgrading.Sequence)\. Perform the upgrade on the primary cluster in the global database\. Aurora automatically upgrades all the secondary clusters at the same time and makes sure that all of the clusters run the same engine version\. This requirement is because any changes to system tables, data file formats, and so on, are automatically replicated to all the secondary clusters\. 
+ For an Aurora global database, you upgrade the global database cluster\. Aurora automatically upgrades all of the clusters at the same time and makes sure that they all run the same engine version\. This requirement is because any changes to system tables, data file formats, and so on, are automatically replicated to all the secondary clusters\. 
 
- If you use the AWS CLI or RDS API, start the upgrade process by calling the `modify-global-cluster` command or `ModifyGlobalCluster` operation instead of `modify-db-cluster` or `ModifyDBCluster`\. 
+Follow the instructions in [How the Aurora MySQL in\-place major version upgrade works](#AuroraMySQL.Upgrading.Sequence)\. When you specify what to upgrade, make sure to choose the global database cluster instead of one of the clusters it contains\.
+
+If you use the AWS Management Console, choose the item with the role **Global database**\.
+
+![\[Upgrading global database cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-major-upgrade-global-cluster.png)
+
+ If you use the AWS CLI or RDS API, start the upgrade process by calling the [modify\-global\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-global-cluster.html) command or [ModifyGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyGlobalCluster.html) operation instead of `modify-db-cluster` or `ModifyDBCluster`\. 
 
 ## After the upgrade<a name="AuroraMySQL.Upgrading.PostUpgrade"></a>
 
@@ -279,7 +285,7 @@ aws rds describe-db-parameters --db-parameter-group-name default.aurora-mysql5.7
 
  You can use the following steps to perform your own checks for some of the conditions in the preceding table\. That way, you can schedule the upgrade at a time when you know the database is in a state where the upgrade can complete successfully and quickly\. 
 +  You can check for open XA transactions by executing the `XA RECOVER` statement\. You can then commit or roll back the XA transactions before starting the upgrade\. 
-+  You can check for DDL statements by executing a `SHOW PROCESSLIST` statement and looking for `CREATE`, `DROP`, `ALTER`, `RENAME`, and `TRUNCATE` statements in the output\. Allow all DDLs to finish before starting the upgrade\. 
++  You can check for DDL statements by executing a `SHOW PROCESSLIST` statement and looking for `CREATE`, `DROP`, `ALTER`, `RENAME`, and `TRUNCATE` statements in the output\. Allow all DDL statements to finish before starting the upgrade\. 
 +  You can check the total number of uncommitted rows by querying the `INFORMATION_SCHEMA.INNODB_TRX` table\. The table contains one row for each transaction\. The `TRX_ROWS_MODIFIED` column contains the number of rows modified or inserted by the transaction\. 
 +  You can check the length of the InnoDB history list by executing the `SHOW ENGINE INNODB STATUS SQL` statement and looking for the `History list length` in the output\. You can also check the value directly by running the following query: 
 

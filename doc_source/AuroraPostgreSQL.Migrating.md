@@ -319,4 +319,57 @@ See an example with the RDS API operation [https://docs.aws.amazon.com/AmazonRDS
 
 The migration to Aurora PostgreSQL isn't complete until you promote the Replica cluster, so don't delete the RDS for PostgreSQL source DB instance just yet\. 
 
-Before promoting the Replica cluster, make sure that the RDS for PostgreSQL DB instance doesn't have any in\-process transactions or other activity writing to the database\. When the replica lag on the Aurora read replica reaches zero \(0\), you can promote the Replica cluster\. For more information about monitoring replica lag, see [Monitoring Aurora PostgreSQL replication](AuroraPostgreSQL.Replication.md#AuroraPostgreSQL.Replication.Monitoring) and 
+Before promoting the Replica cluster, make sure that the RDS for PostgreSQL DB instance doesn't have any in\-process transactions or other activity writing to the database\. When the replica lag on the Aurora read replica reaches zero \(0\), you can promote the Replica cluster\. For more information about monitoring replica lag, see [Monitoring Aurora PostgreSQL replication](AuroraPostgreSQL.Replication.md#AuroraPostgreSQL.Replication.Monitoring) and [Instance\-level metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md#Aurora.AuroraMySQL.Monitoring.Metrics.instances)\.
+
+#### Console<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote.Console"></a>
+
+**To promote an Aurora read replica to an Aurora DB cluster**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\. 
+
+1. Choose the Replica cluster\.   
+![\[Promote a Replica cluster to full Aurora PostgreSQL DB cluster status\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Aurorapgres-migrate-2.png)
+
+1. For **Actions**, choose **Promote**\. This may take a few minutes\. 
+
+When the process completes, the Aurora Replica cluster is a Regional Aurora PostgreSQL DB cluster, with a Writer instance containing the data from the RDS for PostgreSQL DB instance\.
+
+#### AWS CLI<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote.CLI"></a>
+
+To promote an Aurora read replica to a stand\-alone DB cluster, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica-db-cluster.html) AWS CLI command\. 
+
+**Example**  
+For Linux, macOS, or Unix:  
+
+```
+aws rds promote-read-replica-db-cluster \
+    --db-cluster-identifier myreadreplicacluster
+```
+For Windows:  
+
+```
+aws rds promote-read-replica-db-cluster ^
+    --db-cluster-identifier myreadreplicacluster
+```
+
+#### RDS API<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote.API"></a>
+
+To promote an Aurora read replica to a stand\-alone DB cluster, use the RDS API operation [PromoteReadReplicaDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplicaDBCluster.html)\. 
+
+After you promote the Replica cluster, you can confirm that the promotion has completed by checking the event log, as follows\.
+
+**To confirm that the Aurora Replica cluster was promoted**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Events**\.
+
+1. On the **Events** page, find the name of your cluster in the **Source** list\. Each event has a source, type, time, and message\. You can see all events that have occurred in your AWS Region for your account\. A successful promotion generates the following message\.  
+
+   ```
+   Promoted Read Replica cluster to a stand-alone database cluster.
+   ```
+
+After promotion is complete, the source RDS for PostgreSQL DB instance and the Aurora PostgreSQL DB cluster are unlinked\. You can direct your client applications to the endpoint for the Aurora read replica\. For more information on the Aurora endpoints, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\. At this point, you can safely delete the DB instance\.

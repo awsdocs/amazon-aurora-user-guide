@@ -24,7 +24,7 @@ The following high\-level overview lists the steps required to make your SQL Ser
 
 1. Export the data manipulation language \(DML\) for your SQL Server databases that you want to migrate\. The DML is SQL code that inserts rows into the tables in your database\.
 
-   You can use SQL Studio Management Studio \(SSMS\) to export the DML\. After connecting to your existing SQL Server instance, complete the following steps:
+   You can use SQL Server Management Studio \(SSMS\) to export the DML\. After connecting to your existing SQL Server instance, complete the following steps:
 
    1. Open the context menu \(right\-click\) for a database name\.
 
@@ -54,4 +54,4 @@ Because Babelfish Compass is an open\-source tool, report any issues through Git
 
    When you're ready, stop the original database and redirect live client applications to use the Babelfish TDS port\.
 
-1. \(Optional\) Capture client\-side SQL queries, and run these queries through an assessment tool \(such as Babelfish Compass\)\. A reverse\-engineered schema only converts server\-side SQL code\. For applications with complex client\-side SQL queries, We recommend that you also analyze these for Babelfish compatibility\. If the analysis indicates that the client\-side SQL statements contain unsupported SQL features, review the SQL aspects in the client application and make modifications if necessary\.
+1. \(Optional\) Capture client\-side SQL queries, and run these queries through an assessment tool \(such as Babelfish Compass\)\. A reverse\-engineered schema only converts server\-side SQL code\. For applications with complex client\-side SQL queries, we recommend that you also analyze these for Babelfish compatibility\. If the analysis indicates that the client\-side SQL statements contain unsupported SQL features, review the SQL aspects in the client application and make modifications if necessary\.

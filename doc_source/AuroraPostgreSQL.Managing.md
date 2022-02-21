@@ -17,7 +17,9 @@ You can scale Aurora PostgreSQL DB instances in two ways, instance scaling and r
 
 You can scale your Aurora PostgreSQL DB cluster by modifying the DB instance class for each DB instance in the DB cluster\. Aurora PostgreSQL supports several DB instance classes optimized for Aurora\. Don't use db\.t2 or db\.t3 instance classes for larger Aurora clusters of size greater than 40 terabytes \(TB\)\. 
 
-Scaling is not instantaneous\. It can take 15 minutes or more to complete the change to a different DB instance class\. We recommend that you choose to apply any modifications to the DB instance class during the next scheduled maintenance window to avoid affecting users\. 
+Scaling isn' instantaneous\. It can take 15 minutes or more to complete the change to a different DB instance class\. We recommend that if use this approach to modify the DB instance class, you apply the change during the next scheduled maintenance window \(rather than immediately\) to avoid affecting users\. 
+
+As an alternative to modifying the DB instance class directly, you can minimize downtime by using the high availability features of Amazon Aurora\. First, add an Aurora Replica to your cluster\. When creating the replica, choose the DB instance class size that you want to use for your cluster\. When the Aurora Replica is synchronized with the cluster, you then failover to the newly added Replica\. To learn more, see [Aurora Replicas](Aurora.Replication.md#Aurora.Replication.Replicas) and [Fast failover with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md#AuroraPostgreSQL.BestPractices.FastFailover)\. 
 
 For detailed specifications of the DB instance classes supported by Aurora PostgreSQL, see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora)\.
 
@@ -88,6 +90,13 @@ The following table shows the maximum amount of temporary storage available for 
 
 | DB instance class | Maximum temporary storage available \(GiB\) | 
 | --- | --- | 
+| db\-x2g\-16xlarge | 1829 | 
+| db\-x2g\-12xlarge | 1606 | 
+| db\-x2g\-8xlarge | 1071 | 
+| db\-x2g\-4xlarge | 535 | 
+| db\-x2g\-2xlarge | 268 | 
+| db\-x2g\-xlarge | 134 | 
+| db\-x2g\-large | 67 | 
 | db\.r6g\.16xlarge | 1008 | 
 | db\.r6g\.12xlarge | 756 | 
 | db\.r6g\.8xlarge | 504 | 
@@ -114,6 +123,6 @@ The following table shows the maximum amount of temporary storage available for 
 | db\.t3\.large | 16 | 
 | db\.t3\.medium | 7\.5 | 
 
-You can monitor the temporary storage available for a DB instance with the `FreeLocalStorage` CloudWatch metric, described in [Amazon Aurora metrics](Aurora.AuroraMySQL.Monitoring.Metrics.md)\. 
+You can monitor the temporary storage available for a DB instance with the `FreeLocalStorage` CloudWatch metric, described in [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md)\. 
 
 For some workloads, you can reduce the amount of temporary storage by allocating more memory to the processes that are performing the operation\. To increase the memory available to an operation, increasing the values of the [work\_mem](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-WORK-MEM) or [maintenance\_work\_mem](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) PostgreSQL parameters\.

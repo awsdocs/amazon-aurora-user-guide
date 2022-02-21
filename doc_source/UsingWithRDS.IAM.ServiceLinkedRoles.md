@@ -15,7 +15,7 @@ Amazon Aurora uses the service\-linked role named AWSServiceRoleForRDS to allow 
 The AWSServiceRoleForRDS service\-linked role trusts the following services to assume the role:
 + `rds.amazonaws.com`
 
-The role permissions policy allows Amazon Aurora to complete the following actions on the specified resources:
+This service\-linked role has a permissions policy attached to it called `AmazonRDSServiceRolePolicy` that grants it permissions to operate in your account\. The role permissions policy allows Amazon Aurora to complete the following actions on the specified resources:
 
 ```
 {

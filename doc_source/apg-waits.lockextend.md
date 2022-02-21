@@ -72,4 +72,4 @@ To see whether there's an increase in write latency, check the `WriteLatency` me
 
 If your network bandwidth isn't enough, increase it\. If your DB instance is reaching the network bandwidth limits, the only way to increase the bandwidth is to increase your DB instance size\.
 
-For more information about CloudWatch metrics, see [Amazon Aurora metrics](Aurora.AuroraMySQL.Monitoring.Metrics.md)\. For information about network performance for each DB instance class, see [Hardware specifications for DB instance classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.
+For more information about CloudWatch metrics, see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md)\. For information about network performance for each DB instance class, see [Hardware specifications for DB instance classes for Aurora](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.

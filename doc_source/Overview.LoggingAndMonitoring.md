@@ -6,16 +6,16 @@ Monitoring is an important part of maintaining the reliability, availability, an
 Using Amazon CloudWatch alarms, you watch a single metric over a time period that you specify\. If the metric exceeds a given threshold, a notification is sent to an Amazon SNS topic or AWS Auto Scaling policy\. CloudWatch alarms do not invoke actions because they are in a particular state\. Rather the state must have changed and been maintained for a specified number of periods\.
 
 **AWS CloudTrail Logs**  
-CloudTrail provides a record of actions taken by a user, role, or an AWS service in Amazon Aurora\. CloudTrail captures all API calls for Amazon Aurora as events, including calls from the console and from code calls to Amazon RDS API operations\. Using the information collected by CloudTrail, you can determine the request that was made to Amazon Aurora, the IP address from which the request was made, who made the request, when it was made, and additional details\. For more information, see [Working with AWS CloudTrail and Amazon RDS](logging-using-cloudtrail.md)\.
+CloudTrail provides a record of actions taken by a user, role, or an AWS service in Amazon Aurora\. CloudTrail captures all API calls for Amazon Aurora as events, including calls from the console and from code calls to Amazon RDS API operations\. Using the information collected by CloudTrail, you can determine the request that was made to Amazon Aurora, the IP address from which the request was made, who made the request, when it was made, and additional details\. For more information, see [Monitoring Amazon Aurora API calls in AWS CloudTrail](logging-using-cloudtrail.md)\.
 
 **Enhanced Monitoring**  
-Amazon Aurora provides metrics in real time for the operating system \(OS\) that your DB cluster runs on\. You can view the metrics for your DB cluster using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information, see [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)\.
+Amazon Aurora provides metrics in real time for the operating system \(OS\) that your DB cluster runs on\. You can view the metrics for your DB cluster using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information, see [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
 **Amazon RDS Performance Insights**  
 Performance Insights expands on existing Amazon Aurora monitoring features to illustrate your database's performance and help you analyze any issues that affect it\. With the Performance Insights dashboard, you can visualize the database load and filter the load by waits, SQL statements, hosts, or users\. For more information, see [Monitoring DB load with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\.
 
 **Database Logs**  
-You can view, download, and watch database logs using the AWS Management Console, AWS CLI, or RDS API\. For more information, see [Working with Amazon Aurora database log files](USER_LogAccess.md)\.
+You can view, download, and watch database logs using the AWS Management Console, AWS CLI, or RDS API\. For more information, see [Monitoring Amazon Aurora log files](USER_LogAccess.md)\.
 
 **Amazon Aurora Recommendations**  
 Amazon Aurora provides automated recommendations for database resources\. These recommendations provide best practice guidance by analyzing DB cluster configuration, usage, and performance data\. For more information, see [Viewing Amazon Aurora recommendations](accessing-monitoring.md#USER_Recommendations)\.
@@ -34,6 +34,6 @@ Trusted Advisor has the following Amazon Aurora\-related checks:
 For more information on these checks, see [Trusted Advisor best practices \(checks\)](https://aws.amazon.com/premiumsupport/trustedadvisor/best-practices/)\.
 
 **Database activity streams**  
-Database activity streams can protect your databases from internal threats by controlling DBA access to the database activity streams\. Thus, the collection, transmission, storage, and subsequent processing of the database activity stream is beyond the access of the DBAs that manage the database\. Database activity streams can provide safeguards for your database and meet compliance and regulatory requirements\. For more information, see [Monitoring Amazon Aurora using Database Activity Streams](DBActivityStreams.md)\.
+Database activity streams can protect your databases from internal threats by controlling DBA access to the database activity streams\. Thus, the collection, transmission, storage, and subsequent processing of the database activity stream is beyond the access of the DBAs that manage the database\. Database activity streams can provide safeguards for your database and meet compliance and regulatory requirements\. For more information, see [Monitoring Amazon Aurora with Database Activity Streams](DBActivityStreams.md)\.
 
-For more information about monitoring Aurora see [Monitoring an Amazon Aurora DB cluster](MonitoringAurora.md)\.
+For more information about monitoring Aurora see [Monitoring metrics in an Amazon Aurora cluster](MonitoringAurora.md)\.

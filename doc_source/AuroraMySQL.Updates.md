@@ -8,6 +8,7 @@ Amazon Aurora releases updates regularly\. Updates are applied to Aurora DB clus
 
 **Topics**
 + [Aurora MySQL version numbers and special versions](AuroraMySQL.Updates.Versions.md)
++ [Preparing for Amazon Aurora MySQL\-Compatible Edition version 1 end of life](Aurora.MySQL56.EOL.md)
 + [Upgrading Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Upgrading.md)
 + [Database engine updates for Amazon Aurora MySQL version 3](AuroraMySQL.Updates.30Updates.md)
 + [Database engine updates for Amazon Aurora MySQL version 2](AuroraMySQL.Updates.20Updates.md)

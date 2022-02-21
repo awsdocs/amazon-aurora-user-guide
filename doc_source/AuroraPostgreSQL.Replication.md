@@ -26,4 +26,4 @@ Rebooting the writer DB instance of an Amazon Aurora DB cluster also automatical
 
 Read scaling and high availability depend on minimal lag time\. You can monitor how far an Aurora Replica is lagging behind the writer DB instance of your Aurora PostgreSQL DB cluster by monitoring the Amazon CloudWatch `ReplicaLag` metric\. Because Aurora Replicas read from the same cluster volume as the writer DB instance, the `ReplicaLag` metric has a different meaning for an Aurora PostgreSQL DB cluster\. The `ReplicaLag` metric for an Aurora Replica indicates the lag for the page cache of the Aurora Replica compared to that of the writer DB instance\.
 
-For more information on monitoring RDS instances and CloudWatch metrics, see [Monitoring an Amazon Aurora DB cluster](MonitoringAurora.md)\.
+For more information on monitoring RDS instances and CloudWatch metrics, see [Monitoring metrics in an Amazon Aurora cluster](MonitoringAurora.md)\.
