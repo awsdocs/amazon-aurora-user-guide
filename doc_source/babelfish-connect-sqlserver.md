@@ -22,17 +22,17 @@ To review a list of exceptions, see [Differences between Aurora PostgreSQL with 
 
 ## Using SSMS to connect to the DB cluster<a name="babelfish-connect-SSMS"></a>
 
-In the following procedure, you connect to your Aurora PostgreSQL database by using Microsoft SQL Server Management Studio \(SSMS\)\. You can use the SSMS query editor to connect to a Babelfish database\.
-
-You can't currently connect using the SSMS Object Explorer\.
+You can connect to an Aurora PostgreSQL DB cluster that supports Babelfish by using Microsoft SQL Server Management Studio \(SSMS\)\. SSMS includes a variety of tools\. By default, SSMS might be configured to launch the SSMS Object Explorer\. For connecting to your Babelfish database with SSMS, you can use only the SSMS Query Editor\. Currently, only the Query Editor is supported\.
 
 **To connect to your Babelfish database with SSMS**
 
 1. Start SSMS\.
 
-1. Open the **Connect to Server** dialog box by doing one of the following:
+1. Open the **Connect to Server** dialog box\. Be sure that the Query Editor connection dialog opens, not the Object Explorer\. To continue with the connection, do one of the following:
    + Choose **New Query**\.
    + If the Query Editor is open, choose **Query**, **Connection**, **Connect**\.
+**Note**  
+If the Object Explorer's dialog opens, cancel the dialog and re\-open the Query Editor\.
 
 1. Provide the following information for your database:
 
@@ -41,7 +41,7 @@ You can't currently connect using the SSMS Object Explorer\.
    1. For **Server name**, enter the DNS name\. For example, your server name should look similar to the following\.
 
       ```
-      cluster-name.cluster-123abc456def.us-east-1-rds.amazonaws.com,1433
+      cluster-name.cluster-555555555555.aws-region.rds.amazonaws.com,1433
       ```
 
    1. For **Authentication**, choose **SQL Server Authentication**\.

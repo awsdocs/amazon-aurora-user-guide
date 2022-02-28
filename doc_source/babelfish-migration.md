@@ -18,7 +18,7 @@ The following high\-level overview lists the steps required to make your SQL Ser
 
    1. On the **Choose Objects** page, select the entire database or specific objects\.
 
-   1. On the **Set Scripting Options** page, choose **Advanced** and make sure you turn on triggers, logins, owners, and permissions\. These are turned off by default in SSMS\.
+   1. On the **Set Scripting Options** page, choose **Advanced** and make sure that you turn on triggers, logins, owners, and permissions\. These are turned off by default in SSMS\.
 
    1. Save the script\.
 
@@ -26,7 +26,7 @@ The following high\-level overview lists the steps required to make your SQL Ser
 
    You can use SQL Server Management Studio \(SSMS\) to export the DML\. After connecting to your existing SQL Server instance, complete the following steps:
 
-   1. Open the context menu \(right\-click\) for a database name\.
+   1. Open the context \(right\-click\) menu for a database name\.
 
    1. Choose **Tasks**, **Generate Scripts** from the context menu\.
 

@@ -4,13 +4,17 @@ Babelfish provides support for T\-SQL and Microsoft SQL Server behavior by suppo
 
 Although Babelfish doesn't offer complete support for T\-SQL, you can use Aurora PostgreSQL SQL commands to perform many of the tasks normally handled by these commands\. For example, suppose that you regularly use a specific T\-SQL command that isn't supported by Babelfish\. In this case, you can connect to the Aurora PostgreSQL port and use a PostgreSQL SQL command instead\. For more information, see [SQL Commands](https://www.postgresql.org/docs/14/sql-commands.html) in the PostgreSQL documentation\.
 
-Aurora PostgreSQL offers functionality to replace many commonly used SQL Server features\. Some examples of SQL Server functionality that can be replaced by the PostgreSQL functionality available in Aurora PostgreSQL follow\. In this list, references are to the PostgreSQL documentation\. 
-+ If you use SQL Server bulk copy, you can use the PostgreSQL [COPY](https://www.postgresql.org/docs/current/populate.html) statement available in Aurora PostgreSQL\. COPY is optimized for fast data loading\. 
-+ If you use unsupported SQL Server GROUP BY clauses, you can use PostgreSQL [GROUPING SETS](https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-GROUP)\.
-+ If you use SQL Server JSON support, you can use PostgreSQL [JSON functions and operators\.](https://www.postgresql.org/docs/current/functions-json.html)
-+ If you use SQL Server XML support, you can use PostgreSQL [XML functions\.](https://www.postgresql.org/docs/current/functions-xml.html)
-+ If you use SQL Server full\-text search, you can use PostgreSQL [full\-text search\.](https://www.postgresql.org/docs/current/textsearch.html)
-+ If you use the SQL Server GEOGRAPHY data type, you can use [PostGIS](https://postgis.net/) to provide support for geographical data and geographical data manipulation\.
+Aurora PostgreSQL offers functionality to replace many commonly used SQL Server features\. Some examples of SQL Server functionality that can be replaced by the PostgreSQL functionality available in Aurora PostgreSQL follow\. In the table, references are to the PostgreSQL documentation\. 
+
+
+| SQL Server functionality | Comparable PostgreSQL functionality | 
+| --- | --- | 
+|  SQL Server bulk copy  |  PostgreSQL [COPY](https://www.postgresql.org/docs/current/populate.html) \(optimized for fast data loading\)  | 
+|  SQL Server GROUP BY clauses \(not supported in Babelfish\)  |  PostgreSQL [GROUPING SETS](https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-GROUP)  | 
+|  SQL Server JSON support  |  PostgreSQL [JSON functions and operators](https://www.postgresql.org/docs/current/functions-json.html)  | 
+|  SQL Server XML support  |  PostgreSQL [XML functions](https://www.postgresql.org/docs/current/functions-xml.html)  | 
+|  SQL Server full\-text search  |  PostgreSQL [full\-text search](https://www.postgresql.org/docs/current/textsearch.html)  | 
+|  SQL Server GEOGRAPHY data type  |  [PostGIS](https://postgis.net/) extension \(for working with geographical data\)  | 
 
 To help with cluster management in Aurora PostgreSQL, you can use its scalability, high\-availability with failover support, and built\-in replication\. For more information about these capabilities, see [Managing performance and scaling for Aurora DB clusters](Aurora.Managing.Performance.md), [High availability for Amazon Aurora](Concepts.AuroraHighAvailability.md), and [Replication with Amazon Aurora](Aurora.Replication.md)\. You also have access to other AWS tools and utilities:
 + [ Amazon CloudWatch](http://aws.amazon.com/cloudwatch/) is a monitoring and observability service that provides you with data and actionable insights\.
@@ -26,7 +30,7 @@ To help with cluster management in Aurora PostgreSQL, you can use its scalabilit
 
 ## T\-SQL limitations and unsupported functionality<a name="babelfish-compatibility.tsql.limitations"></a>
 
-Following, you can find a table of limitations or partially supported T\-SQL syntax for Babelfish\. 
+Following, you can find a table of limitations or partially supported T\-SQL syntax for Babelfish\. Unless otherwise specified, these limitations apply to Babelfish 1\.0\.0\. For more information about Babelfish releases, see [Babelfish versions](babelfish-releases-updates.md)\. 
 
 
 | Functionality or syntax | Notes | 
@@ -37,7 +41,7 @@ Following, you can find a table of limitations or partially supported T\-SQL syn
 | Assembly modules and SQL Common Language Runtime \(CLR\) routines  | Functionality related to assembly modules and CLR routines isn't supported\. | 
 | BACKUP statement | Aurora PostgreSQL snapshots of a database are dissimilar to backup files created in SQL Server\. Also, the granularity of when a backup and restore occurs might be different between SQL Server and Aurora PostgreSQL\. | 
 | Blank column names with no column alias | The `sqlcmd` and `psql` utilities handle columns with blank names differently: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/babelfish-compatibility.html)  | 
-| Collation, index on type dependent on the ICU library | An index on a user\-defined type that depends on the ICU collation library \(the library used by Babelfish\) isn't invalidated when the version of the library is changed\. For more information about collations, see [Babelfish collation support](babelfish-collations.md)\. | 
+| Collation, index on type dependent on the ICU library | An index on a user\-defined type that depends on the International Components for Unicode \(ICU\) collation library \(the library used by Babelfish\) isn't invalidated when the version of the library is changed\. For more information about collations, see [Babelfish collation support](babelfish-collations.md)\. | 
 | COLLATIONPROPERTY function | Collation properties are implemented only for the supported Babelfish BBF collations\. For more information about collations, see [Babelfish collation support](babelfish-collations.md)\. | 
 | Column default | When creating a column default, the constraint name is ignored\. To drop a column default, use the following syntax: `ALTER TABLE...ALTER COLUMN..DROP DEFAULT...` | 
 | Column name case | Column names are stored as lowercase in the PostgreSQL catalogs and are returned to the client in lowercase if you run a `SELECT` statement\. In general, all schema identifiers are stored in lowercase in the PostgreSQL catalogs\. For more information, see [SQL\-SYNTAX\-IDENTIFIERS](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) in the PostgreSQL documentation\. | 
@@ -47,7 +51,7 @@ Following, you can find a table of limitations or partially supported T\-SQL syn
 | Constraints created with DESC \(descending\) columns | Constraints are created with ASC \(ascending\) columns\. | 
 | Constraints with IGNORE\_DUP\_KEY | Constraints are created without this property\. | 
 | Contained databases | Contained databases with logins authenticated at the database level rather than at the server level aren't supported\. | 
-| CREATE, ALTER, DROP SERVER ROLE |  ALTER SERVER ROLE is supported only for `sysadmin`\. All other syntax is unsupported\. Babelfish provides the T\-SQL user with an experience that is similar to SQL Server for the concepts of a login \(server principal\), a database, and a database user \(database principal\)\. In Babelfish, currently only the `dbo` user is available in user databases\. Currently, to operate as the `dbo` user, a login must be a member of the server\-level `sysadmin` role \(`ALTER SERVER ROLE sysadmin ADD MEMBER login`\)\. Logins without `sysadmin` role can currently access only `master` and `tempdb` as the `guest` user\. Currently, because Babelfish only supports the `dbo` user in user databases, all application users must use a login that is a `sysadmin` member\. You can't create a user with lesser privileges, such as read\-only on certain tables\.  | 
+| CREATE, ALTER, DROP SERVER ROLE |  ALTER SERVER ROLE is supported only for `sysadmin`\. All other syntax is unsupported\. The T\-SQL user in Babelfish has an experience that is similar to SQL Server for the concepts of a login \(server principal\), a database, and a database user \(database principal\)\. Only the `dbo` user is available in Babelfish user databases\. To operate as the `dbo` user, a login must be a member of the server\-level `sysadmin` role \(`ALTER SERVER ROLE sysadmin ADD MEMBER login`\)\. Logins without `sysadmin` role can currently access only `master` and `tempdb` as the `guest` user\. Currently, because Babelfish supports only the `dbo` user in user databases, all application users must use a login that is a `sysadmin` member\. You can't create a user with lesser privileges, such as read\-only on certain tables\.  | 
 | CREATE DATABASE case\-sensitive collation  | Case\-sensitive collations aren't supported with the CREATE DATABASE statement\. | 
 | CREATE DATABASE keywords and clauses | Options except COLLATE and CONTAINMENT=NONE aren't supported\. The COLLATE clause is accepted and is always set to the value of `babelfishpg_tsql.server_collation_name`\. | 
 | CREATE SCHEMA\.\.\. supporting clauses | You can use the CREATE SCHEMA command to create an empty schema\. Use additional commands to create schema objects\. | 
@@ -63,7 +67,7 @@ Following, you can find a table of limitations or partially supported T\-SQL syn
 | Cursor options | SCROLL, KEYSET, DYNAMIC, FAST\_FORWARD, SCROLL\_LOCKS, OPTIMISTIC, TYPE\_WARNING, and FOR UPDATE | 
 |  Database ID values are different on Babelfish  |  The master and tempdb databases will not be database IDs 1 and 2\.  | 
 | Data encryption | Data encryption isn't supported\. | 
-| DBCC commands  | DBCC commands aren't supported\. | 
+| DBCC commands  | Microsoft SQL Server Database Console Commands \(DBCC\) aren't supported\. | 
 | DROP IF EXISTS | This syntax isn't supported for USER and SCHEMA objects\. It's supported for the objects TABLE, VIEW, PROCEDURE, FUNCTION, and DATABASE\. | 
 | DROP INDEX | This syntax is supported only in the form `DROP index_name ON table_name`\. | 
 | DROP statements that drop multiple objects | This functionality is supported only for tables, views, functions, and procedures\. | 
@@ -88,20 +92,19 @@ Following, you can find a table of limitations or partially supported T\-SQL syn
 | HIERARCHYID | The data type and methods aren't supported\. | 
 | Hints | Hints aren't supported for joins, queries, or tables\. | 
 | Identifiers exceeding 63 characters | PostgreSQL supports a maximum of 63 characters for identifiers\. Babelfish converts identifiers longer than 63 characters to a name that includes a hash of the original name\. | 
-| Identifiers with leading dot characters | Identifiers that start with a `.` aren't supported\. | 
+| Identifiers with leading dot characters | Identifiers that start with a `.` aren't supported in version 1\.0\.0, but are supported in Babelfish 1\.1\.0\. | 
 | Identifiers \(variables or parameters\) with multiple leading @ characters | Identifiers that start with more than one leading `@` aren't supported\. | 
 | Identifiers, table or column names that contain @ or \]\] characters | Table or column names that contain an `@` sign or square brackets aren't supported\. | 
 | IDENTITY columns support | IDENTITY columns are supported for data types tinyint, smallint, int, bigint\. numeric, and decimal\. SQL Server supports precision to 38 places for data types `numeric` and `decimal` in IDENTITY columns\.PostgreSQL supports precision to 19 places for data types `numeric` and `decimal` in IDENTITY columns\. | 
 | Indexes with IGNORE\_DUP\_KEY | Syntax that creates an index that includes IGNORE\_DUP\_KEY creates an index as if this property is omitted\. | 
 | Indexes with more than 32 columns | An index can't include more than 32 columns\. Included index columns count toward the maximum in PostgreSQL but not in SQL Server\. | 
-| INFORMATION\_SCHEMA catalog | Information schema views aren't supported\. | 
+| INFORMATION\_SCHEMA catalog | Information schema views aren't supported\.   | 
 | Inline indexes | Inline indexes aren't supported\. | 
 | Indexes \(clustered\) | Clustered indexes are created as if NONCLUSTERED was specified\. | 
 | Index clauses | The following clauses are ignored: FILLFACTOR, ALLOW\_PAGE\_LOCKS, ALLOW\_ROW\_LOCKS, PAD\_INDEX, STATISTICS\_NORECOMPUTE, OPTIMIZE\_FOR\_SEQUENTIAL\_KEY, SORT\_IN\_TEMPDB, DROP\_EXISTING, ONLINE, COMPRESSION\_DELAY, MAXDOP, and DATA\_COMPRESSION | 
 | Invoking a procedure whose name is in a variable | Using a variable as a procedure name isn't supported\. | 
 | Materialized views | Materialized views aren't supported\. | 
-| NEWSEQUENTIALID function | Implemented as NEWID; sequential behavior isn't guaranteed\. | 
-| NEWSEQUENTIALID function | When calling `NEWSEQUENTIALID`, PostgreSQL generates a new GUID value\. | 
+| NEWSEQUENTIALID function | Implemented as NEWID; sequential behavior isn't guaranteed\. When calling `NEWSEQUENTIALID`, PostgreSQL generates a new GUID value\. | 
 | NEXT VALUE FOR sequence clause | This syntax isn't supported\. | 
 | NOT FOR REPLICATION clause | This syntax is accepted and ignored\.  | 
 | ODBC escape functions | ODBC escape functions aren't supported\. | 
@@ -134,9 +137,9 @@ Following, you can find a table of limitations or partially supported T\-SQL syn
 | SQL keyword SPARSE | The keyword SPARSE is accepted and ignored\. | 
 | SQL keyword clause `ON filegroup` | This clause is currently ignored\. | 
 | SQL keywords `CLUSTERED` and `NONCLUSTERED` for indexes and constraints | Babelfish accepts and ignores the `CLUSTERED` and `NONCLUSTERED` keywords\. | 
-| System\-defined @@ variables | Babelfish doesn't support system\-defined @@variables other than these: @@VERSION, @@SPID, @@ROWCOUNT, @@TRANCOUNT, @@IDENTITY, @@ERROR, @@FETCH\_STATUS, @@MAX\_PRECISION, @@SERVERNAME, @@DATEFIRST | 
+| System\-defined @@ variables | Version 1\.0\.0 supports the following system\-defined @@variables only: @@DATEFIRST, @@ERROR, @@FETCH\_STATUS, @@IDENTITY, @@MAX\_PRECISION, @@ROWCOUNT, @@SERVERNAME, @@SPID, @@TRANCOUNT, and @@VERSION\. Version 1\.1\.0 adds support for @@CURSOR\_ROWS, @@LOCK\_TIMEOUT, @@MAX\_CONNECTIONS, @@MICROSOFTVERSION, @@NESTLEVEL, and @@PROCID\.  | 
 | `sysdatabases.cmptlevel` | `sysdatabases.cmptlevel` are always NULL\. | 
-| System\-provided stored procedures are partially supported | SP\_HELPDB, SP\_GETAPPLOCK, and SP\_RELEASEAPPLOCK are supported\. All other stored procedures aren't supported\. | 
+| System\-provided stored procedures are partially supported | Babelfish version 1\.0\.0 supported these three stored procedures only: sp\_getapplock, sp\_helpdb, and sp\_releaseapplock\. Babelfish 1\.1\.0 adds support for the following: sp\_columns, sp\_columns\_100, sp\_columns\_managed, sp\_cursor, sp\_cursor\_list, sp\_cursorclose, sp\_cursorexecute, sp\_cursorfetch, sp\_cursoropen, sp\_cursoroption, sp\_cursorprepare, sp\_cursorprepexec, sp\_cursorunprepare, sp\_databases, sp\_datatype\_info, sp\_datatype\_info\_100, sp\_describe\_cursor, sp\_describe\_first\_result\_set, sp\_describe\_undeclared\_parameters, sp\_oledb\_ro\_usrname, sp\_pkeys, sp\_prepare, sp\_statistics, sp\_statistics\_100, sp\_tablecollations\_100, sp\_tables, sp\_unprepare, and sp\_updatestats\. | 
 | Table value constructor syntax \(FROM clause\) | The unsupported syntax is for a derived table constructed with the FROM clause\. | 
 | tempdb isn't reinitialized at restart | Permanent objects \(like tables and procedures\) created in tempdb aren't removed when the database is restarted\. | 
 | Temporal tables | Temporal tables aren't supported\. | 
@@ -146,7 +149,7 @@ Following, you can find a table of limitations or partially supported T\-SQL syn
 | Transaction isolation levels | READUNCOMMITTED is treated the same as READCOMMITTED\. REPEATABLEREAD, and SERIALIZABLE aren't supported\. | 
 | TIMESTAMP data type | This data type isn't supported\. The SQL Server TIMESTAMP type is unrelated to PostgreSQL TIMESTAMP\. | 
 | Triggers, externally defined | These triggers aren't supported, including SQL Common Language Runtime \(CLR\)\. | 
-| Trigger for multiple DML actions cannot reference transition tables | Triggers that reference multiple DML actions can't reference transition tables\. | 
+| Trigger for multiple DML actions cannot reference transition tables | Triggers that reference multiple DML actions can't reference transition tables in version 1\.0\.0 of Babelfish\. Version 1\.1\.0 provides support for this functionality\.  | 
 | Unquoted string values in stored procedure calls and default values | String parameters to stored procedure calls, and defaults for string parameters in CREATE PROCEDURE, are not supported\. | 
 | Virtual computed columns \(non\-persistent\) | Virtual computed columns are created as persistent\. | 
 | WITH ENCRYPTION clause | This syntax isn't supported for functions, procedures, triggers, or views\. | 
@@ -159,7 +162,19 @@ Following, you can find a table of limitations or partially supported T\-SQL syn
 
 ## Unsupported functionality in Babelfish<a name="babelfish-compatibility.tsql.limitations-unsupported"></a>
 
-In the following lists, you can find functionality that isn't currently supported in Babelfish\. 
+In the following lists, you can find functionality that isn't supported in Babelfish version 1\.0\.0\. For information about updates to Babelfish, see [Babelfish versions](babelfish-releases-updates.md)\. 
+
+### Settings that aren't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list8"></a>
+
+The following settings aren't supported:
++ SET ANSI\_NULL\_DFLT\_OFF ON
++  SET ANSI\_NULL\_DFLT\_ON OFF
++  SET ANSI\_PADDING OFF
++  SET ANSI\_WARNINGS OFF
++  SET ARITHABORT OFF
++  SET ARITHIGNORE ON
++  SET CURSOR\_CLOSE\_ON\_COMMIT ON
++ SET NUMERIC\_ROUNDABORT ON
 
 ### Commands for which certain functionality isn't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list1"></a>
 
@@ -176,29 +191,19 @@ Certain functionality for the following commands isn't supported:
 +  CREATE CONTRACT
 +  GRANT
 
-### Syntax for which certain functionality isn't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list2"></a>
+### Column names that aren't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list7"></a>
 
-Certain functionality for the following syntax isn't supported:  
-+ ALTER SERVICE, BACKUP/RESTORE SERVICE MASTER KEY clause
-+  BEGIN DISTRIBUTED TRANSACTION
-+  CREATE EXTERNAL TABLE
-+  CREATE TABLE\.\.\. GRANT clause
-+  CREATE TABLE\.\.\. IDENTITY clause
-+  CREATE, ALTER, DROP APPLICATION ROLE
-+  CREATE, ALTER, DROP ASSEMBLY
-+  CREATE, ALTER, DROP ASYMMETRIC KEY
-+  CREATE, ALTER, DROP EVENT SESSION
-+  CREATE, ALTER, DROP EXTERNAL RESOURCE POOL
-+  CREATE, ALTER, DROP FULLTEXT CATALOG
-+  CREATE, ALTER, DROP FULLTEXT INDEX
-+  CREATE, ALTER, DROP FULLTEXT STOPLIST
-+  CREATE, ALTER, DROP QUEUE
-+  CREATE, ALTER, DROP RESOURCE GOVERNOR
-+  CREATE, ALTER, DROP ROUTE
-+  CREATE, ALTER, DROP SERVICE
-+  CREATE, ALTER, DROP WORKLOAD GROUP
-+ CREATE, ALTER, DROP, OPEN/CLOSE, BACKUP/RESTORE MASTER KEY
-+ CREATE/DROP RULE
+The following column names aren't supported:
++ $IDENTITY
++ $ROWGUID
++ IDENTITYCOL
+
+### Data types that aren't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list6"></a>
+
+The following data types aren't supported:
++ ROWVERSION
++ ROWVERSION data type
++ TIMESTAMP data type\. The SQL Server TIMESTAMP date is unrelated to PostgreSQL TIMESTAMP\.
 
 ### Object types that aren't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list3"></a>
 
@@ -234,6 +239,30 @@ The following functions aren't supported:
 +  OBJECTPROPERTYEX
 +  OPENXML
 +  TYPEPROPERTY function
+
+### Syntax for which certain functionality isn't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list2"></a>
+
+Certain functionality for the following syntax isn't supported:
++ ALTER SERVICE, BACKUP/RESTORE SERVICE MASTER KEY clause
++  BEGIN DISTRIBUTED TRANSACTION
++  CREATE EXTERNAL TABLE
++  CREATE TABLE\.\.\. GRANT clause
++  CREATE TABLE\.\.\. IDENTITY clause
++  CREATE, ALTER, DROP APPLICATION ROLE
++  CREATE, ALTER, DROP ASSEMBLY
++  CREATE, ALTER, DROP ASYMMETRIC KEY
++  CREATE, ALTER, DROP EVENT SESSION
++  CREATE, ALTER, DROP EXTERNAL RESOURCE POOL
++  CREATE, ALTER, DROP FULLTEXT CATALOG
++  CREATE, ALTER, DROP FULLTEXT INDEX
++  CREATE, ALTER, DROP FULLTEXT STOPLIST
++  CREATE, ALTER, DROP QUEUE
++  CREATE, ALTER, DROP RESOURCE GOVERNOR
++  CREATE, ALTER, DROP ROUTE
++  CREATE, ALTER, DROP SERVICE
++  CREATE, ALTER, DROP WORKLOAD GROUP
++ CREATE, ALTER, DROP, OPEN/CLOSE, BACKUP/RESTORE MASTER KEY
++ CREATE/DROP RULE
 
 ### Syntax that isn't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list5"></a>
 
@@ -297,7 +326,7 @@ The following syntax isn't supported:
 +  SET DEADLOCK\_PRIORITY
 +  SET FMTONLY
 +  SET FORCEPLAN
-+  SET LOCK\_TIMEOUT
++  SET LOCK\_TIMEOUT  
 +  SET NUMERIC\_ROUNDABORT ON
 +  SET OFFSETS
 +  SET REMOTE\_PROC\_TRANSACTIONS
@@ -325,29 +354,3 @@ The following syntax isn't supported:
 +  WITH XMLNAMESPACES construct
 +  WRITETEXT
 +  XPATH expressions
-
-### Data types that aren't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list6"></a>
-
-The following data types aren't supported:
-+ ROWVERSION
-+ ROWVERSION data type
-+ TIMESTAMP data type\. The SQL Server TIMESTAMP date is unrelated to PostgreSQL TIMESTAMP\.
-
-### Column names that aren't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list7"></a>
-
-The following column names aren't supported:
-+ $IDENTITY
-+ $ROWGUID
-+ IDENTITYCOL
-
-### Settings that aren't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list8"></a>
-
-The following settings aren't supported:
-+ SET ANSI\_NULL\_DFLT\_OFF ON
-+  SET ANSI\_NULL\_DFLT\_ON OFF
-+  SET ANSI\_PADDING OFF
-+  SET ANSI\_WARNINGS OFF
-+  SET ARITHABORT OFF
-+  SET ARITHIGNORE ON
-+  SET CURSOR\_CLOSE\_ON\_COMMIT ON
-+ SET NUMERIC\_ROUNDABORT ON

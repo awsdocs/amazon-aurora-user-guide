@@ -33,7 +33,7 @@ In an Aurora PostgreSQL cluster, the `babelfish_db` database name is reserved fo
 
 1. For **Master username**, enter an administrator user name\.
 
-   Unlike SQL Server, Babelfish doesn't create an `sa` login\. To create a login named `sa`, enter the name in the **Master username** field\.
+   Unlike SQL Server, Babelfish doesn't create an `sa` login\. To create a login named `sa`, enter the name for **Master username**\.
 
    If you don't create a user named `sa` at this time, you can create one later with your choice of client\. After creating the user, use the `ALTER SERVER ROLE` command to add it to `sysadmin`\.
 

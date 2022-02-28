@@ -17,12 +17,15 @@ aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[].[Eng
 For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability.PostgreSQL)\.
 
 **Topics**
++ [PostgreSQL 13\.5](#AuroraPostgreSQL.Updates.20180305.135)
 + [PostgreSQL 13\.4](#AuroraPostgreSQL.Updates.20180305.134)
 + [PostgreSQL 13\.3](#AuroraPostgreSQL.Updates.20180305.133)
++ [PostgreSQL 12\.9](#AuroraPostgreSQL.Updates.20180305.1290)
 + [PostgreSQL 12\.8](#AuroraPostgreSQL.Updates.20180305.128)
 + [PostgreSQL 12\.7, Aurora PostgreSQL release 4\.2](#AuroraPostgreSQL.Updates.20180305.42)
 + [PostgreSQL 12\.6, Aurora PostgreSQL release 4\.1](#AuroraPostgreSQL.Updates.20180305.41)
 + [PostgreSQL 12\.4, Aurora PostgreSQL release 4\.0](#AuroraPostgreSQL.Updates.20180305.40)
++ [PostgreSQL 11\.14](#AuroraPostgreSQL.Updates.20180305.1114)
 + [PostgreSQL 11\.13](#AuroraPostgreSQL.Updates.20180305.1113)
 + [PostgreSQL 11\.12, Aurora PostgreSQL release 3\.6](#AuroraPostgreSQL.Updates.20180305.36)
 + [PostgreSQL 11\.11, Aurora PostgreSQL release 3\.5](#AuroraPostgreSQL.Updates.20180305.35)
@@ -31,6 +34,7 @@ For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.
 + [PostgreSQL 11\.7, Aurora PostgreSQL release 3\.2](#AuroraPostgreSQL.Updates.20180305.32)
 + [PostgreSQL 11\.6, Aurora PostgreSQL release 3\.1](#AuroraPostgreSQL.Updates.20180305.31)
 + [PostgreSQL 11\.4, Aurora PostgreSQL release 3\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.30)
++ [PostgreSQL 10\.19](#AuroraPostgreSQL.Updates.20180305.1019)
 + [PostgreSQL 10\.18](#AuroraPostgreSQL.Updates.20180305.1018)
 + [PostgreSQL 10\.17, Aurora PostgreSQL release 2\.9](#AuroraPostgreSQL.Updates.20180305.29)
 + [PostgreSQL 10\.16, Aurora PostgreSQL release 2\.8](#AuroraPostgreSQL.Updates.20180305.28)
@@ -54,6 +58,32 @@ For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.
 + [PostgreSQL 9\.6\.8, Aurora PostgreSQL release 1\.2 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.12)
 + [PostgreSQL 9\.6\.6 Aurora PostgreSQL release 1\.1 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.11)
 + [PostgreSQL 9\.6\.3, Aurora PostgreSQL release 1\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.10)
+
+## PostgreSQL 13\.5<a name="AuroraPostgreSQL.Updates.20180305.135"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.5\. For more information about the improvements in PostgreSQL 13\.5, see [PostgreSQL release 13\.5](https://www.postgresql.org/docs/13/release-13-5.html)\.
+
+### Aurora PostgreSQL release 13\.5<a name="AuroraPostgreSQL.Updates.20180305.135"></a>
+
+**High priority stability enhancements**
++  Fixed a bug where logical replication may hang resulting in the replay falling behind on the read node\. The instance may eventually restart\. 
+
+**Additional improvements and enhancements**
++  Added the `Buffers: shared hit` metric to the Explain output\. 
++  Fixed a buffer cache bug that could cause brief periods of unavailability\. 
++  Fixed a bug in the `apg_plan_mgmt` extension where an index based plan was not being enforced\. 
++  Fixed a bug in the `pg_logical` extension that could cause brief periods of unavailability due to improper handling of NULL arguments\. 
++  Fixed a bug that could cause brief periods of unavailability due to reading uninitialized pages\. 
++  Fixed an issue where orphaned files caused major version upgrades to fail\. 
++  Fixed incorrect Aurora Storage Daemon log write metrics\. 
++  Fixed multiple bugs that could result in WAL replay falling behind and eventually causing the reader instances to restart\. 
++  Improved the Aurora buffer cache page validation on reads\. 
++  Improved the Aurora storage metadata validation\. 
+
+This version also includes the following change:
++  The [pg\_cron](https://github.com/citusdata/pg_cron) extension is updated to 1\.4\.1
+
+For information about extensions and modules, see [Extensions supported for Aurora PostgreSQL 13\.x](AuroraPostgreSQL.Extensions.md#AuroraPostgreSQL.Extensions.13)\.
 
 ## PostgreSQL 13\.4<a name="AuroraPostgreSQL.Updates.20180305.134"></a>
 
@@ -146,6 +176,28 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.3\. For more
   + `plcoffee` to version 2\.3\.15\.
   + `plls` to version 2\.3\.15\.
   + `plv8` to version 2\.3\.15\.
+
+## PostgreSQL 12\.9<a name="AuroraPostgreSQL.Updates.20180305.1290"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.9\. For more information about the improvements in PostgreSQL 12\.9, see [PostgreSQL release 12\.9](https://www.postgresql.org/docs/12/release-12-9.html)\.
+
+### Aurora PostgreSQL release 12\.9<a name="AuroraPostgreSQL.Updates.20180305.129"></a>
+
+**Critical stability enhancements**
++  Fixed a bug where logical replication may hang resulting in the replay falling behind on the read node\. The instance may eventually restart\. 
+
+**Additional improvements and enhancements**
++  Fixed a buffer cache bug that could cause brief periods of unavailability\. 
++  Fixed a bug in the `apg_plan_mgmt` extension where an index based plan was not being enforced\. 
++  Fixed a bug in the `pg_logical` extension that could cause brief periods of unavailability due to improper handling of NULL arguments\. 
++  Fixed an issue where orphaned files caused major version upgrades to fail\. 
++  Fixed incorrect Aurora Storage Daemon log write metrics\. 
++  Fixed multiple bugs that could result in WAL replay falling behind and eventually causing the reader instances to restart\. 
++  Improved the Aurora buffer cache page validation on reads\. 
++  Improved the Aurora storage metadata validation\. 
++  Updated the `pg_cron extension` to v1\.4\. 
++  Updated the `pg_hint_pan` extension to v1\.3\.7\. 
++ For information about extensions and modules, see [Extensions supported for Aurora PostgreSQL 12\.x](AuroraPostgreSQL.Extensions.md#AuroraPostgreSQL.Extensions.12)\.
 
 ## PostgreSQL 12\.8<a name="AuroraPostgreSQL.Updates.20180305.128"></a>
 
@@ -336,6 +388,27 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.4\. For more
   + `postGIS` to version 3\.0\.2 
   + `postgis_tiger_geocoder` to version 3\.0\.2 
   + `postgis_topology` to version 3\.0\.2
+
+## PostgreSQL 11\.14<a name="AuroraPostgreSQL.Updates.20180305.1114"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.14\. For more information about the improvements in PostgreSQL 11\.14, see [PostgreSQL release 11\.14](https://www.postgresql.org/docs/11/release-11-14.html)\.
+
+### Aurora PostgreSQL release 11\.14<a name="AuroraPostgreSQL.Updates.20180305.1114"></a>
+
+**Critical stability enhancements**
++  Fixed a bug where logical replication may hang resulting in the replay falling behind on the read node\. The instance may eventually restart\. 
+
+**Additional improvements and enhancements**
++  Fixed a buffer cache bug that could cause brief periods of unavailability\. 
++  Fixed a bug in the `apg_plan_mgmt` extension where an index based plan was not being enforced\. 
++  Fixed a bug in the `pg_logical` extension that could cause brief periods of unavailability due to improper handling of NULL arguments\. 
++  Fixed an issue where orphaned files caused major version upgrades to fail\. 
++  Fixed incorrect Aurora Storage Daemon log write metrics\. 
++  Fixed multiple bugs that could result in WAL replay falling behind and eventually causing the reader instances to restart\. 
++  Improved the Aurora buffer cache page validation on reads\. 
++  Improved the Aurora storage metadata validation\. 
++  Updated the `pg_hint_pan` extension to v1\.3\.7\. 
++ For information about extensions and modules, see [Extensions supported for Aurora PostgreSQL 11\.x](AuroraPostgreSQL.Extensions.md#AuroraPostgreSQL.Extensions.11)\.
 
 ## PostgreSQL 11\.13<a name="AuroraPostgreSQL.Updates.20180305.1113"></a>
 
@@ -955,6 +1028,27 @@ You can find the following improvements in this release\.
    +  `postgis_tiger_geocoder` to version 2\.5\.1
    +  `postgis_topology` to version 2\.5\.1
    +  `rds_activity_stream` to version 1\.3
+
+## PostgreSQL 10\.19<a name="AuroraPostgreSQL.Updates.20180305.1019"></a>
+
+This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.19\. For more information about the improvements in PostgreSQL 10\.19, see [PostgreSQL release 10\.19](https://www.postgresql.org/docs/10/release-10-19.html)\.
+
+### Aurora PostgreSQL release 10\.19<a name="AuroraPostgreSQL.Updates.20180305.1019"></a>
+
+**Critical stability enhancements**
++  Fixed a bug where logical replication may hang resulting in the replay falling behind on the read node\. The instance may eventually restart\. 
+
+**Additional improvements and enhancements**
++  Fixed a buffer cache bug that could cause brief periods of unavailability\. 
++  Fixed a bug in the `apg_plan_mgmt` extension where an index based plan was not being enforced\. 
++  Fixed a bug in the `pg_logical` extension that could cause brief periods of unavailability due to improper handling of NULL arguments\. 
++  Fixed an issue where orphaned files caused major version upgrades to fail\. 
++  Fixed incorrect Aurora Storage Daemon log write metrics\. 
++  Fixed multiple bugs that could result in WAL replay falling behind and eventually causing the reader instances to restart\. 
++  Improved the Aurora buffer cache page validation on reads\. 
++  Improved the Aurora storage metadata validation\. 
++  Updated the `pg_hint_pan` extension to v1\.3\.6\. 
++ For information about extensions and modules, see [Extensions supported for Aurora PostgreSQL 10\.x](AuroraPostgreSQL.Extensions.md#AuroraPostgreSQL.Extensions.10)\.
 
 ## PostgreSQL 10\.18<a name="AuroraPostgreSQL.Updates.20180305.1018"></a>
 

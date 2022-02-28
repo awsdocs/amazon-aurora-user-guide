@@ -3,11 +3,11 @@
 Counter metrics are operating system and database performance metrics in the Performance Insights dashboard\. To help identify and analyze performance problems, you can correlate counter metrics with DB load\.
 
 **Topics**
-+ [Performance Insights counters for Aurora PostgreSQL](#USER_PerfInsights_Counters.OS)
++ [Performance Insights operating system counters](#USER_PerfInsights_Counters.OS)
 + [Performance Insights counters for Aurora MySQL](#USER_PerfInsights_Counters.Aurora_MySQL)
 + [Performance Insights counters for Aurora PostgreSQL](#USER_PerfInsights_Counters.Aurora_PostgreSQL)
 
-## Performance Insights counters for Aurora PostgreSQL<a name="USER_PerfInsights_Counters.OS"></a>
+## Performance Insights operating system counters<a name="USER_PerfInsights_Counters.OS"></a>
 
 The following operating system counters are available with Performance Insights for Aurora PostgreSQL\. You can find definitions for these metrics in [Viewing OS metrics using CloudWatch Logs](USER_Monitoring.OS.CloudWatchLogs.md)\. 
 

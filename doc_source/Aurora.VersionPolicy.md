@@ -73,10 +73,10 @@ aurora_version
 |  MySQL 5\.7  |  Aurora MySQL 2  | 
 |  MySQL 8\.0  |  Aurora MySQL 3  | 
 |  PostgreSQL 9\.6  |  Aurora PostgreSQL 1  | 
-|  PostgreSQL 10  |  Aurora PostgreSQL 2  | 
-|  PostgreSQL 11  |  Aurora PostgreSQL 3  | 
-|  PostgreSQL 12  |  Aurora PostgreSQL 4  | 
-|  PostgreSQL 13  |  Not applicable\. Aurora versions are no longer added to Aurora PostgreSQL version names\.  | 
+|  PostgreSQL 10  |  Aurora PostgreSQL 2\. Not applicable for version 10\.18 and higher versions\. For these versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version and a third digit in patch location\.  | 
+|  PostgreSQL 11  |  Aurora PostgreSQL 3\. Not applicable for version 11\.13 amd higher versions\. For these versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version and a third digit in patch location\.  | 
+|  PostgreSQL 12  |  Aurora PostgreSQL 4\. Not applicable for version 12\.8 and higher versions\. For these versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version and a third digit in patch location\. | 
+|  PostgreSQL 13  | Aurora PostgreSQL 4\. Not applicable for version 13\.3 and higher versions\. For these versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version and a third digit in patch location\.  | 
 
 ## Amazon Aurora minor versions<a name="Aurora.VersionPolicy.MinorVersions"></a>
 
@@ -118,17 +118,7 @@ aurora_version
 
  Amazon Aurora major versions are made available at least until community end of life for the corresponding community version\. You can use the following dates to plan your testing and upgrade cycles\. These dates represent the minimum support period for each Aurora version\. If Amazon extends support for an Aurora version for longer than originally planned, we plan to update this table to reflect the later date\. 
 
-
-|  Database community version  |  Aurora version  | Aurora version end of life no earlier than | 
-| --- | --- | --- | 
-|  MySQL 5\.6  |  1  |  February 28, 2023, 00:00:00 UTC  | 
-|  MySQL 5\.7  |  2  |  February 29, 2024  | 
-|  MySQL 8\.0  |  3  |   | 
-|  PostgreSQL 9\.6  |  1  |  January 31, 2022  | 
-|  PostgreSQL 10  |  2  |  January 31, 2023  | 
-|  PostgreSQL 11  |  3  |  January 31, 2024  | 
-|  PostgreSQL 12  |  4  |  January 31, 2025  | 
-|  PostgreSQL 13  |  Not applicable  |  January 31, 2026  | 
+<a name="aurora-version-minimum-eol"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.VersionPolicy.html)
 
 Before each Aurora major version end of life, we provide a reminder at least 12 months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. We always recommend that you thoroughly test your applications against new database versions before performing a major version upgrade\. 
 

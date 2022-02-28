@@ -1,6 +1,6 @@
-# synch/cond/mysys/thread\_var::suspend<a name="ams-waits.suspend"></a>
+# synch/cond/mysys/my\_thread\_var::suspend<a name="ams-waits.suspend"></a>
 
-The `synch/cond/mysys/thread_var::suspend` wait event indicates that threads are suspended because they are waiting on a condition\.
+The `synch/cond/mysys/my_thread_var::suspend` wait event indicates that threads are suspended because they are waiting on a condition\.
 
 **Topics**
 + [Supported engine versions](#ams-waits.suspend.context.supported)
@@ -16,11 +16,11 @@ This wait event information is supported for the following versions:
 
 ## Context<a name="ams-waits.suspend.context"></a>
 
-The event `synch/cond/mysys/thread_var::suspend` indicates that threads are suspended because they are waiting on a condition\. For example, this wait event occurs when threads are waiting for a table\-level lock\. In this case, we recommend that you investigate your workload to determine which threads might be acquiring table locks on your DB instance\.
+The event `synch/cond/mysys/my_thread_var::suspend` indicates that threads are suspended because they are waiting on a condition\. For example, this wait event occurs when threads are waiting for a table\-level lock\. In this case, we recommend that you investigate your workload to determine which threads might be acquiring table locks on your DB instance\.
 
 ## Likely causes of increased waits<a name="ams-waits.suspend.causes"></a>
 
-When the `synch/cond/mysys/thread_var::suspend` event appears more than normal, possibly indicating a performance problem, typical causes include the following:
+When the `synch/cond/mysys/my_thread_var::suspend` event appears more than normal, possibly indicating a performance problem, typical causes include the following:
 
 **Thread waiting on a table\-level lock**  
 One or more threads are waiting on a table\-level lock\. In this case, the thread state is `Waiting for table level lock`\.
