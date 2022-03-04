@@ -17,7 +17,7 @@ The default DB parameter group and DB cluster parameter group are associated wit
 
 You can specify the parameter groups when you restore the DB cluster\.
 
-For more information about DB parameter groups and DB cluster parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
+For more information about DB parameter groups and DB cluster parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 ## Security group considerations<a name="USER_RestoreFromSnapshot.Security"></a>
 

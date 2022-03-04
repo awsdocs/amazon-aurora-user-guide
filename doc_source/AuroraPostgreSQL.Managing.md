@@ -37,7 +37,7 @@ The value of `max_connections` in the default DB parameter group for Aurora Post
 
 `LEAST({DBInstanceClassMemory/9531392},5000)`
 
-Although you can't change values in default parameter groups, you can create your own custom DB cluster parameter group and modify your Aurora PostgreSQL DB cluster to use it\. If you do this, be sure that you reboot the DB cluster after applying your custom parameter group\. For more information, see [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.ParameterGroups.md) and [Creating a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\. To learn more about Aurora DB cluster and DB parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
+Although you can't change values in default parameter groups, you can create your own custom DB cluster parameter group and modify your Aurora PostgreSQL DB cluster to use it\. If you do this, be sure that you reboot the DB cluster after applying your custom parameter group\. For more information, see [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.ParameterGroups.md) and [Creating a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\. To learn more about Aurora DB cluster and DB parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 Following, you can find a table that lists the highest value that should ever be used for `max_connections` for each DB instance class that can be used with Aurora PostgreSQL\. 
 

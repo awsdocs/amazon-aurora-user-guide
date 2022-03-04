@@ -1,6 +1,6 @@
 # Amazon Aurora versions<a name="Aurora.VersionPolicy"></a>
 
- Amazon Aurora reuses code and maintains compatibility with the underlying MySQL and PostgreSQL DB engines\. However, Aurora has its own version numbers, release cycle, time line for version deprecation and end of life, and so on\. The following section explains the common points and differences\. This information can help you to decide such things as which version to choose and how to verify which features and fixes are available in each version\. It can also help you to decide how often to upgrade and how to plan your upgrade process\. 
+Amazon Aurora reuses code and maintains compatibility with the underlying MySQL and PostgreSQL DB engines\. However, Aurora has its own version numbers, release cycle, time line for version deprecation, and so on\. The following section explains the common points and differences\. This information can help you to decide such things as which version to choose and how to verify which features and fixes are available in each version\. It can also help you to decide how often to upgrade and how to plan your upgrade process\. 
 
 **Topics**
 + [Relational databases that are available on Aurora](#Aurora.VersionPolicy.Engines)
@@ -116,11 +116,11 @@ aurora_version
 
 ## How long Amazon Aurora major versions remain available<a name="Aurora.VersionPolicy.MajorVersionLifetime"></a>
 
- Amazon Aurora major versions are made available at least until community end of life for the corresponding community version\. You can use the following dates to plan your testing and upgrade cycles\. These dates represent the minimum support period for each Aurora version\. If Amazon extends support for an Aurora version for longer than originally planned, we plan to update this table to reflect the later date\. 
+Amazon Aurora major versions remain available at least until community end of life for the corresponding community version\. You can use the following dates to plan your testing and upgrade cycles\. These dates represent the earliest date that an upgrade to a newer version might be required\. If Amazon extends support for an Aurora version for longer than originally stated, we plan to update this table to reflect the later date\. 
 
 <a name="aurora-version-minimum-eol"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.VersionPolicy.html)
 
-Before each Aurora major version end of life, we provide a reminder at least 12 months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. We always recommend that you thoroughly test your applications against new database versions before performing a major version upgrade\. 
+Before we ask that you upgrade to a newer major version and to help you plan, we provide a reminder at least 12 months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. We always recommend that you thoroughly test your applications against new database versions before performing a major version upgrade\. 
 
 After this 12\-month period, an automatic upgrade to the subsequent major version might be applied to any database cluster still running the older version\. If so, the upgrade is started during scheduled maintenance windows\. 
 
@@ -132,9 +132,9 @@ After this 12\-month period, an automatic upgrade to the subsequent major versio
 
  We intend to make each Amazon Aurora minor version of a particular major version available for at least 12 months\. At the end of this period, Aurora might apply an auto minor version upgrade to the subsequent default minor version\. Such an upgrade is started during the scheduled maintenance window for any cluster that is still running the older minor version\. 
 
- We might replace a minor version of a particular major version sooner than the usual 12\-month period if there are critical matters such as security issues, or if the major version has reached end of life\. 
+ We might replace a minor version of a particular major version sooner than the usual 12\-month period if there are critical matters such as security issues, or if the major version has been deprecated\. 
 
- Before beginning automatic upgrades of minor versions that are approaching end of life, we generally provide a reminder three months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. 
+ Before beginning automatic upgrades of minor versions, we generally provide a reminder three months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. 
 
 ## Long\-term support for selected Amazon Aurora minor versions<a name="Aurora.VersionPolicy.LTS"></a>
 
@@ -151,7 +151,7 @@ After this 12\-month period, an automatic upgrade to the subsequent major versio
 
  Auto minor version upgrades are performed to the default minor version\. We typically schedule automatic upgrades twice a year for DB clusters that have the **Auto minor version upgrade** setting set to `Yes`\. These upgrades are started during customer\-specified maintenance windows\. If you want to turn off automatic minor version upgrades, set **Auto minor version upgrade** to `No` on any DB instance within an Aurora cluster\. Aurora performs an automatic minor version upgrade only if all DB instances in your cluster have the setting turned on\. 
 
- Because major version upgrades involve some compatibility risk, they don't occur automatically\. You must initiate these, except in the case of a major version upgrade due to end of life, as explained earlier\. We always recommend that you thoroughly test your applications with new database versions before performing a major version upgrade\. 
+ Because major version upgrades involve some compatibility risk, they don't occur automatically\. You must initiate these, except in the case of a major version deprecation, as explained earlier\. We always recommend that you thoroughly test your applications with new database versions before performing a major version upgrade\. 
 
  For more information about upgrading a DB cluster to a new Aurora major version, see [Upgrading Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Upgrading.md) and [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\. 
 

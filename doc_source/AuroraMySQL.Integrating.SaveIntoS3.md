@@ -23,7 +23,7 @@ Before you can save data into an Amazon S3 bucket, you must first give your Auro
 
    If the cluster is part of an Aurora global database, set this parameter for each Aurora cluster in the global database\.
 
-   For more information about DB cluster parameters, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithParamGroups.md#Aurora.Managing.ParameterGroups)\.
+   For more information about DB cluster parameters, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithDBClusterParamGroups.md#Aurora.Managing.ParameterGroups)\.
 
 1. To permit database users in an Aurora MySQL DB cluster to access Amazon S3, associate the role that you created in [Creating an IAM role to allow Amazon Aurora to access AWS services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md) with the DB cluster\.
 

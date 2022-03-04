@@ -39,6 +39,10 @@ The capacity allocated to your Aurora Serverless v1 DB cluster seamlessly scales
 
 You can view scaling events for your Aurora Serverless cluster in the AWS Management Console\. During autoscaling, Aurora Serverless v1 resets the `EngineUptime` metric\. The value of the reset metric value doesn't mean that seamless scaling had problems, nor does it mean Aurora Serverless dropped connections\. It's simply the starting point for uptime at the new capacity\. To learn more about metrics, see [Monitoring metrics in an Amazon Aurora cluster](MonitoringAurora.md)\. 
 
+ The following rules apply to the timing when multiple scaling events happen in succession: 
++ After scaling up or scaling down, Aurora Serverless v1 can scale up again as soon as necessary\. That way, your DB cluster can always respond quickly to increased load\.
++ After scaling up or scaling down, Aurora Serverless v1 waits for a time interval called the cooldown period before scaling down\. The length of the cooldown period depends on whether the DB cluster previously scaled up or scaled down\. After scaling up, Aurora doesn't scale down again for 15 minutes\. That way, a busy DB cluster doesn't reduce its capacity based on a brief drop in the database load\. After scaling down once, Aurora Serverless v1 doesn't scale down again for another 310 seconds\. That way, if the DB cluster becomes completely idle, it can automatically pause instead of scaling down if the autopause feature is set to its default of five minutes\. 
+
 When your Aurora Serverless v1 DB cluster has no active connections, it can scale down to zero capacity \(0 ACUs\)\. To learn more, see [Pause and resume for Aurora Serverless v1](#aurora-serverless.how-it-works.pause-resume)\.
 
 When it does need to perform a scaling operation, Aurora Serverless v1 first tries to identify a *scaling point*, a moment when no queries are being processed\. Aurora Serverless might not be able to find a scaling point for the following reasons:
@@ -165,7 +169,7 @@ aws rds describe-engine-default-cluster-parameters ^
 
 ### Modifying parameter values for Aurora Serverless v1<a name="aurora-serverless.parameter-groups.setting-values"></a>
 
-As explained in [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md), you can't directly change values in a default parameter group, regardless of its type \(DB cluster parameter group, DB parameter group\)\. Instead, you create a custom parameter group based on the default DB cluster parameter group for your Aurora DB engine and change settings as needed on that parameter group\. For example, you might want to change some of the settings for your Aurora Serverless DB cluster to [log queries or to upload DB engine specific logs](#aurora-serverless.logging) to Amazon CloudWatch\.
+As explained in [Working with parameter groups](USER_WorkingWithParamGroups.md), you can't directly change values in a default parameter group, regardless of its type \(DB cluster parameter group, DB parameter group\)\. Instead, you create a custom parameter group based on the default DB cluster parameter group for your Aurora DB engine and change settings as needed on that parameter group\. For example, you might want to change some of the settings for your Aurora Serverless DB cluster to [log queries or to upload DB engine specific logs](#aurora-serverless.logging) to Amazon CloudWatch\.
 
 **To create a custom DB cluster parameter group**
 

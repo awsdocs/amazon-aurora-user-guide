@@ -76,7 +76,7 @@ We recommend the MariaDB Connector/J client as a client that supports SAN with S
 
 You can require that all user connections to your Aurora MySQL DB cluster use SSL/TLS by using the `require_secure_transport` DB cluster parameter\. By default, the `require_secure_transport` parameter is set to `OFF`\. You can set the `require_secure_transport` parameter to `ON` to require SSL/TLS for connections to your DB cluster\.
 
-You can set the `require_secure_transport` parameter value by updating the DB cluster parameter group for your DB cluster\. You don't need to reboot your DB cluster for the change to take effect\. For more information on parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
+You can set the `require_secure_transport` parameter value by updating the DB cluster parameter group for your DB cluster\. You don't need to reboot your DB cluster for the change to take effect\. For more information on parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 **Note**  
 The `require_secure_transport` parameter is only available for Aurora MySQL version 5\.7\. You can set this parameter in a custom DB cluster parameter group\. The parameter isn't available in DB instance parameter groups\.
@@ -111,7 +111,7 @@ Set the `tls_version` DB cluster parameter to one of the following values:
 
 If the parameter isn't set, then TLS version 1\.0, 1\.1, and 1\.2 protocols are permitted for encrypted connections\.
 
-For information about modifying parameters in a DB cluster parameter group, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. If you use the AWS CLI to modify the `tls_version` DB cluster parameter, the `ApplyMethod` must be set to `pending-reboot`\. When the application method is `pending-reboot`, changes to parameters are applied after you stop and restart the DB clusters associated with the parameter group\.
+For information about modifying parameters in a DB cluster parameter group, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. If you use the AWS CLI to modify the `tls_version` DB cluster parameter, the `ApplyMethod` must be set to `pending-reboot`\. When the application method is `pending-reboot`, changes to parameters are applied after you stop and restart the DB clusters associated with the parameter group\.
 
 **Note**  
 The `tls_version` DB cluster parameter isn't available for Aurora MySQL 5\.6\.

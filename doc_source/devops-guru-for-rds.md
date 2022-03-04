@@ -66,16 +66,15 @@ To allow DevOps Guru for RDS to publish insights for an Amazon Aurora database,
 
 DevOps Guru for RDS relies on Performance Insights for its data\. Without Performance Insights, DevOps Guru publishes anomalies, but doesn't include the detailed analysis and recommendations\. 
 
-When you create or modify a DB instance, you can turn on Performance Insights\. For more information, see [Enabling and disabling Performance Insights](USER_PerfInsights.Enabling.md)\.
+When you create or modify a DB instance, you can turn on Performance Insights\. For more information, see [Turning Performance Insights on and off](USER_PerfInsights.Enabling.md)\.
 
 ### Configuring access policies for DevOps Guru for RDS<a name="devops-guru-for-rds.configuring.access"></a>
 
-For your IAM user or role to access DevOps Guru for RDS, it must have either of the following policies:
-+ The AWS managed policy `AmazonRDSFullAccess`
-+ A customer managed policy that allows the following actions:
-  + `pi:GetResourceMetrics`
-  + `pi:DescribeDimensionKeys`
-  + `pi:GetDimensionKeyDetails`
+To view alerts from DevOps Guru in the RDS console, your IAM user or role must have either of the following policies:
++ The AWS managed policy `AmazonDevOpsGuruConsoleFullAccess`
++ The AWS managed policy `AmazonDevOpsGuruConsoleReadOnlyAccess` and either of the following policies:
+  + The AWS managed policy `AmazonRDSFullAccess`
+  + A customer managed policy that includes `pi:GetResourceMetrics` and `pi:DescribeDimensionKeys`
 
 For more information, see [Configuring access policies for Performance Insights](USER_PerfInsights.access-control.md)\.
 

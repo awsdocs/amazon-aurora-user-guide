@@ -20,13 +20,13 @@ Before you can load data from an Amazon S3 bucket, you must first give your Auro
 
 1. Make sure the DB cluster is using a custom DB cluster parameter group\.
 
-   For more information about creating a custom DB cluster parameter group, see [Creating a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\.
+   For more information about creating a custom DB cluster parameter group, see [Creating a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\.
 
 1. Set either the `aurora_load_from_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aurora_load_from_s3_role`, Aurora uses the IAM role specified in `aws_default_s3_role`\.
 
    If the cluster is part of an Aurora global database, set this parameter for each Aurora cluster in the global database\. Although only the primary cluster in an Aurora global database can load data, another cluster might be promoted by the failover mechanism and become the primary cluster\.
 
-   For more information about DB cluster parameters, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithParamGroups.md#Aurora.Managing.ParameterGroups)\.
+   For more information about DB cluster parameters, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithDBClusterParamGroups.md#Aurora.Managing.ParameterGroups)\.
 
 1. To permit database users in an Aurora MySQL DB cluster to access Amazon S3, associate the role that you created in [Creating an IAM role to allow Amazon Aurora to access AWS services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md) with the DB cluster\. For an Aurora global database, associate the role with each Aurora cluster in the global database\. For information about associating an IAM role with a DB cluster, see [Associating an IAM role with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.
 

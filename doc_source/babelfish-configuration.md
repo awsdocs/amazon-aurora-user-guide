@@ -2,7 +2,7 @@
 
 When you create a Babelfish for Aurora PostgreSQL DB cluster, you can use a parameter group in one of two ways\. You can create a new parameter group that configures a cluster with Babelfish running\. Or you can use a pre\-existing Amazon Aurora parameter group\. 
 
-To use an existing parameter group, edit the group and set the `babelfish_status` parameter to `on`\. Specify any Babelfish options before creating your Aurora PostgreSQL cluster\. For information about modifying your parameter group, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
+To use an existing parameter group, edit the group and set the `babelfish_status` parameter to `on`\. Specify any Babelfish options before creating your Aurora PostgreSQL cluster\. For information about modifying your parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 The following parameters control Babelfish preferences\.
 

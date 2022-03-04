@@ -39,11 +39,11 @@ Only users with the `rds_superuser` role can complete the following procedure\. 
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Create a new instance\-level parameter group to use for query plan management parameters\. For more information, see [Creating a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Creating)\. Associate the new parameter group with the DB instances in which you want to use query plan management\. For more information, see [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\.
+1. Create a new instance\-level parameter group to use for query plan management parameters\. For more information, see [Creating a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Creating)\. Associate the new parameter group with the DB instances in which you want to use query plan management\. For more information, see [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\.
 
-1. Create a new cluster\-level parameter group to use for query plan management parameters\. For more information, see [Creating a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\. Associate the new cluster\-level parameter group with the DB clusters in which you want to use query plan management\. For more information, see [Modifying the DB cluster by using the console, CLI, and API](Aurora.Modifying.md#Aurora.Modifying.Cluster)\.
+1. Create a new cluster\-level parameter group to use for query plan management parameters\. For more information, see [Creating a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\. Associate the new cluster\-level parameter group with the DB clusters in which you want to use query plan management\. For more information, see [Modifying the DB cluster by using the console, CLI, and API](Aurora.Modifying.md#Aurora.Modifying.Cluster)\.
 
-1. Open your cluster\-level parameter group and set the `rds.enable_plan_management` parameter to `1`\. For more information, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
+1. Open your cluster\-level parameter group and set the `rds.enable_plan_management` parameter to `1`\. For more information, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
 
 1. Reboot your DB instance to enable this new setting\.
 
@@ -166,7 +166,7 @@ Use automatic plan capture if you want to capture plans for all SQL statements i
    + Choose **Continue**\. Confirm the Summary of modifications and choose **Apply immediately**\. 
    + Choose **Modify DB instance** to apply your custom DB parameter group\.
 
-You can also use your custom DB parameter group when you create a new Aurora PostgreSQL DB instance\. For more information about parameter groups, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
+You can also use your custom DB parameter group when you create a new Aurora PostgreSQL DB instance\. For more information about parameter groups, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
 
 As your application runs, the optimizer captures plans for any statement that runs more than once\. The optimizer always sets the status of a managed statement's first captured plan to `approved`\. A managed statement's set of approved plans is known as its *plan baseline*\. 
 

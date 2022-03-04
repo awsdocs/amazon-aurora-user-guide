@@ -28,8 +28,7 @@ The following example policy allows an IAM user to connect to a DB cluster using
 An IAM administrator user can access DB clusters without explicit permissions in an IAM policy\. The example in [Create an IAM user](CHAP_SettingUp_Aurora.md#CHAP_SettingUp_Aurora.IAM) creates an IAM administrator user\. If you want to restrict administrator access to DB clusters, you can create an IAM role with the appropriate, lesser privileged permissions and assign it to the administrator\. 
 
 **Note**  
-Don't confuse the `rds-db:` prefix with other RDS API operation prefixes that begin with `rds:`\. You use the `rds-db:` prefix and the `rds-db:connect` action only for IAM database authentication\. They aren't valid in any other context\.   
-Currently, the IAM console displays an error for policies with the `rds-db:connect` action\. You can ignore this error\.
+Don't confuse the `rds-db:` prefix with other RDS API operation prefixes that begin with `rds:`\. You use the `rds-db:` prefix and the `rds-db:connect` action only for IAM database authentication\. They aren't valid in any other context\. 
 
 The example policy includes a single statement with the following elements:
 + `Effect` – Specify `Allow` to grant access to the DB cluster\. If you don't explicitly allow access, then access is denied by default\.

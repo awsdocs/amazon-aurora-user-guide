@@ -63,25 +63,20 @@ aws rds describe-db-engine-versions ^
 
 Major version upgrades can contain database changes that are not backward\-compatible with previous versions of the database\. This functionality can cause your existing applications to stop working correctly\. As a result, Amazon Aurora doesn't apply major version upgrades automatically\. To perform a major version upgrade, you modify your DB cluster manually\. 
 
-The following Aurora PostgreSQL major version upgrades are available for Graviton2\-based instances\.
+The following Aurora PostgreSQL major version upgrades are available\.
 
 
 | Current source version | Major upgrade targets | 
 | --- | --- | 
-|  9\.6\.9 and higher minor versions  |  10\.11 or higher minor versions  | 
-|  10\.7 and higher minor versions  |  11\.7 or higher minor versions  | 
-|  11\.7 and higher minor versions  |  12\.4 or higher minor versions  | 
-|  12\.4 and higher minor versions  |  13\.3 or higher minor versions  | 
+|  9\.6\.9 and higher minor versions  |  10\.11 and higher minor versions  | 
+|  9\.6\.22 and higher minor versions  |  10\.11 and higher minor versions 11\.13 and higher minor versions 12\.8 and higher minor versions 13\.4 and higher minor versions  | 
+|  10\.7 and higher minor versions  |  11\.7 and higher minor versions  | 
+|  10\.18 and higher minor versions  |  11\.7 and higher minor versions 12\.8 and higher minor versions 13\.4 and higher minor versions  | 
+|  11\.7 and higher minor versions  |  12\.4 and higher minor versions  | 
+|  11\.13  |  12\.4 and higher minor versions 13\.4  | 
+|  12\.4 and higher minor versions \(Graviton2\-based DB instance classes\) 12\.7 and higher minor versions \(Intel\-based DB instance classes\)  |  13\.3 and higher minor versions  | 
 
-The following Aurora PostgreSQL major version upgrades are available for Intel\-based instances\.
-
-
-| Current source version | Major upgrade targets | 
-| --- | --- | 
-|  9\.6\.9 and higher minor versions  |  10\.11 or higher minor versions  | 
-|  10\.7 and higher minor versions  |  11\.7 or higher minor versions  | 
-|  11\.7 and higher minor versions  |  12\.4 or higher minor versions  | 
-|  12\.7 and higher minor versions  |  13\.3 or higher minor versions  | 
+For more information about DB instance classes, including which ones are Graviton2\-based and which ones are Intel\-based, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
 
 Before applying an upgrade to your production DB clusters, make sure that you thoroughly test any upgrade to verify that your applications work correctly\.
 
@@ -118,6 +113,7 @@ We recommend the following process when upgrading an Aurora PostgreSQL DB cluste
            AND c.relnamespace = n.oid 
            AND n.nspname NOT IN ('pg_catalog', 'information_schema');
      ```
+   + If you are upgrading from Aurora PostgreSQL version 10\.18, and you have the `pgRouting` extension installed, remove this extension before upgrading to version 12\.4 or higher\.
 
 1. Perform a backup\.
 

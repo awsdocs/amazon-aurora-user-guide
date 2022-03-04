@@ -28,15 +28,15 @@ The RDS for PostgreSQL DB instance that you use as the source must have automate
 
 **To enable PostgreSQL logical replication with Aurora**
 
-1. Create a new DB cluster parameter group to use for logical replication, as described in [Creating a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\. Use the following settings:
+1. Create a new DB cluster parameter group to use for logical replication, as described in [Creating a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\. Use the following settings:
    + For **Parameter group family**, choose your version of Aurora PostgreSQL, such as **aurora\-postgresql12**\. 
    + For **Type**, choose **DB Cluster Parameter Group**\. 
 
-1. Modify the DB cluster parameter group, as described in [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. Set the `rds.logical_replication` static parameter to 1\. 
+1. Modify the DB cluster parameter group, as described in [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. Set the `rds.logical_replication` static parameter to 1\. 
 
    Enabling the `rds.logical_replication` parameter affects the DB cluster's performance\. 
 
-1. Review the `max_replication_slots`, `max_wal_senders`, `max_logical_replication_workers`, and `max_worker_processes` parameters in your DB cluster parameter group based on your expected usage\. If necessary, modify the DB cluster parameter group to change the settings for these parameters, as described in [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
+1. Review the `max_replication_slots`, `max_wal_senders`, `max_logical_replication_workers`, and `max_worker_processes` parameters in your DB cluster parameter group based on your expected usage\. If necessary, modify the DB cluster parameter group to change the settings for these parameters, as described in [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
 
    Follow these guidelines for setting the parameters:
    + `max_replication_slots` – Ensure that `max_replication_slots` is at least as high as the combined number of logical replication publications and subscriptions you plan to create\. If you are using AWS DMS, make sure `max_replication_slots` is at least as high as the number of AWS DMS tasks you plan to use for change data capture from this DB cluster, plus any logical replication publications and subscriptions\.
@@ -213,6 +213,6 @@ You can stop using logical replication\.
 
    The replication slots can't be active when you run this command\.
 
-1. Modify the DB cluster parameter group associated with the publisher, as described in [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. Set the `rds.logical_replication` static parameter to 0\. 
+1. Modify the DB cluster parameter group associated with the publisher, as described in [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. Set the `rds.logical_replication` static parameter to 0\. 
 
 1. Restart the publisher DB cluster for the change to the `rds.logical_replication` static parameter to take effect\.

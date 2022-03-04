@@ -4,7 +4,7 @@ Performance Insights expands on existing Amazon Aurora monitoring features to il
 
 **Topics**
 + [Overview of Performance Insights](USER_PerfInsights.Overview.md)
-+ [Enabling and disabling Performance Insights](USER_PerfInsights.Enabling.md)
++ [Turning Performance Insights on and off](USER_PerfInsights.Enabling.md)
 + [Enabling the Performance Schema for Performance Insights on Aurora MySQL](USER_PerfInsights.EnableMySQL.md)
 + [Configuring access policies for Performance Insights](USER_PerfInsights.access-control.md)
 + [Analyzing metrics with the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.md)

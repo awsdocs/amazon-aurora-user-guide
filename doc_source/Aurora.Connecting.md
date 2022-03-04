@@ -46,9 +46,10 @@ To view the cluster endpoint \(writer endpoint\), choose **Databases** on the Am
 Some connection utilities you can use are the following:
 + **Command line** – You can connect to an Amazon Aurora DB cluster by using tools like the MySQL command line utility\. For more information on using the MySQL utility, see [mysql \- the MySQL command line tool](http://dev.mysql.com/doc/refman/5.6/en/mysql.html) in the MySQL documentation\.
 + **GUI** – You can use the MySQL Workbench utility to connect by using a UI interface\. For more information, see the [Download MySQL workbench](http://dev.mysql.com/downloads/workbench/) page\.
-+ **Applications** – You can use the MariaDB Connector/J utility to connect your applications to your Aurora DB cluster\. For more information, see the [MariaDB Connector/J download](https://downloads.mariadb.org/connector-java/) page\.
++ **Applications** – You can use the AWS JDBC Driver for MySQL to connect your client applications to an Aurora MySQL DB cluster\. For more information about the AWS JDBC Driver for MySQL and complete instructions for using it, see the [AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
 **Note**  
- If you use the MariaDB Connector/J utility with an Aurora Serverless v1 DB cluster, use the prefix `jdbc:mariadb:aurora//` in your connection string\. The `mariadb:aurora` parameter avoids the automatic DNS scan for failover targets\. That scanning is not needed with Aurora Serverless v1 DB clusters and causes a delay in establishing the connection\. 
+Version 3\.0\.3 of the MariaDB Connector/J utility drops support for Aurora DB clusters, so we highly recommend moving to the AWS JDBC Driver for MySQL\. The AWS JDBC Driver for MySQL offers improved failover speed for Aurora MySQL DB clusters by caching DNS connections for quick use\. When using the MariaDB Connector/J utility, use the `jdbc:mariadb:aurora//` in your connection string\.   
+If you are using an Aurora Serverless v1 DB cluster, the failover benefits don't apply, but you can disable the feature by setting the `failureDetectionEnabled` parameter to `false`\. To review a complete list of configuration options, see the [AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
 
 You can use SSL encryption on connections to an Aurora MySQL DB instance\. For information, see [Using SSL/TLS with Aurora MySQL DB clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
 
@@ -83,14 +84,9 @@ mysql>
 
 For general instructions on constructing RDS for MySQL connection strings and finding the public key for SSL connections, see [ Connecting to a DB instance running the MySQL database engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToInstance.html)\.
 
-### Connecting with the Amazon Web Services JDBC Driver for MySQL \(preview\)<a name="Aurora.Connecting.JDBCDriverMySQL"></a>
+### Connecting with the Amazon Web Services JDBC Driver for MySQL<a name="Aurora.Connecting.JDBCDriverMySQL"></a>
 
-
-|  | 
-| --- |
-| This is preview documentation for Amazon Web Services JDBC Driver for MySQL\. It is subject to change\. | 
-
-The AWS JDBC Driver for MySQL \(preview\) is a client driver designed for the high availability of Aurora MySQL\. The AWS JDBC Driver for MySQL is drop\-in compatible with the MySQL Connector/J driver\.
+The AWS JDBC Driver for MySQL is a client driver designed for the high availability of Aurora MySQL\. The AWS JDBC Driver for MySQL is drop\-in compatible with the MySQL Connector/J driver\. To install or upgrade your connector, replace the MySQL connector \.jar file \(located in the application CLASSPATH\) with the AWS JDBC Driver for MySQL \.jar file, and update the connection URL prefix from `jdbc:mysql://` to `jdbc:mysql:aws://`\.
 
 The AWS JDBC Driver for MySQL takes full advantage of the failover capabilities of Aurora MySQL\. The AWS JDBC Driver for MySQL fully maintains a cache of the DB cluster topology and each DB instance's role, either primary DB instance or Aurora Replica\. It uses this topology to bypass the delays caused by DNS resolution so that a connection to the new primary DB instance is established as fast as possible\.
 

@@ -16,7 +16,7 @@ For more information about Lambda functions, see [Getting started with Lambda](h
 + [Step 4: Use Lambda helper functions with your Aurora PostgreSQL DB cluster \(Optional\)](#PostgreSQL-Lambda-specify-function)
 + [Step 5: Invoke a Lambda function from your Aurora PostgreSQL DB cluster](#PostgreSQL-Lambda-invoke)
 + [Lambda function error messages](#PostgreSQL-Lambda-errors)
-+ [Function reference](PostgreSQL-Lambda-functions.md)
++ [AWS Lambda function reference](PostgreSQL-Lambda-functions.md)
 
 ## Step 1: Configure your Aurora PostgreSQL DB cluster for outbound connections to AWS Lambda<a name="PostgreSQL-Lambda-network"></a>
 
@@ -33,7 +33,7 @@ Lambda functions always run inside an Amazon VPC owned by the AWS Lambda service
 
 1. Configure your VPC with a VPC endpoint for AWS Lambda\. For details, see [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html) in the *Amazon VPC User Guide*\. The endpoint returns responses to calls made by your Aurora PostgreSQL DB cluster to your Lambda functions\. 
 
-1. Add the endpoint to your VPC's route table\. For more information, see [Work with route tables](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithRouteTables.html#AddRemoveRoutes) in the the *Amazon VPC User Guide*\. 
+1. Add the endpoint to your VPC's route table\. For more information, see [Work with route tables](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithRouteTables.html#AddRemoveRoutes) in the *Amazon VPC User Guide*\. 
 
 Your VPC can now interact with the AWS Lambda VPC at the network level\. However, you still need to configure the permissions using IAM\.  
 

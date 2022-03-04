@@ -11,8 +11,8 @@ The `apg_plan_mgmt` extension provides the following parameters\.
 + [apg\_plan\_mgmt\.use\_plan\_baselines](#AuroraPostgreSQL.Optimize.Parameters.use_plan_baselines)
 
 Set the query plan management parameters at the appropriate level:
-+ Set at the cluster\-level to provide the same settings for all DB instances\. For more information, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. 
-+ Set at the DB instance level to isolate the settings to an individual DB instance\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
++ Set at the cluster\-level to provide the same settings for all DB instances\. For more information, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. 
++ Set at the DB instance level to isolate the settings to an individual DB instance\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 + Set in a specific client session such as in psql, to isolate the values to only that session\.
 
 You can set the `apg_plan_mgmt.max_databases` parameter and the `apg_plan_mgmt.max_plans` parameter at the Aurora DB cluster level or at the DB instance level\. 

@@ -346,7 +346,7 @@ mysql> select @@aurora_parallel_query;
 
  To toggle the `aurora_parallel_query` parameter at the session level, use the standard methods to change a client configuration setting\. For example, you can do so through the `mysql` command line or within a JDBC or ODBC application\. The command on the standard MySQL client is `set session aurora_parallel_query = {'ON'/'OFF'}`\. You can also add the session\-level parameter to the JDBC configuration or within your application code to turn on or turn off parallel query dynamically\. 
 
- You can permanently change the setting for the `aurora_parallel_query` parameter, either for a specific DB instance or for your whole cluster\. If you specify the parameter value in a DB parameter group, that value only applies to specific DB instance in your cluster\. If you specify the parameter value in a DB cluster parameter group, all DB instances in the cluster inherit the same setting\. To toggle the `aurora_parallel_query` parameter, use the techniques for working with parameter groups, as described in [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. Follow these steps: 
+ You can permanently change the setting for the `aurora_parallel_query` parameter, either for a specific DB instance or for your whole cluster\. If you specify the parameter value in a DB parameter group, that value only applies to specific DB instance in your cluster\. If you specify the parameter value in a DB cluster parameter group, all DB instances in the cluster inherit the same setting\. To toggle the `aurora_parallel_query` parameter, use the techniques for working with parameter groups, as described in [Working with parameter groups](USER_WorkingWithParamGroups.md)\. Follow these steps: 
 
 1.  Create a custom cluster parameter group \(recommended\) or a custom DB parameter group\. 
 
@@ -373,7 +373,7 @@ mysql> select @@aurora_pq;
 
  To toggle the `aurora_pq` parameter at the session level, for example through the `mysql` command line or within a JDBC or ODBC application, use the standard methods to change a client configuration setting\. For example, the command on the standard MySQL client is `set session aurora_pq = {'ON'/'OFF'}`\. You can also add the session\-level parameter to the JDBC configuration or within your application code to turn on or turn off parallel query dynamically\. 
 
- To toggle the `aurora_pq` parameter permanently, use the techniques for working with parameter groups, as described in [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. Follow these steps: 
+ To toggle the `aurora_pq` parameter permanently, use the techniques for working with parameter groups, as described in [Working with parameter groups](USER_WorkingWithParamGroups.md)\. Follow these steps: 
 
 1.  Create a custom cluster parameter group or DB instance parameter group\. We recommend using a cluster parameter group, so that all DB instance in the cluster inherit the same settings\. 
 
@@ -403,7 +403,7 @@ mysql> select @@aurora_pq;
 
 **To turn on or turn off parallel query for a DB cluster with the AWS Management Console**
 
-1.  Create a custom parameter group, as described in [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
+1.  Create a custom parameter group, as described in [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 1.  For Aurora MySQL 1\.23 and 2\.09 or higher: Update **aurora\_parallel\_query** to **1** \(turned on\) or **0** \(turned off\)\. For clusters where the parallel query feature is available, **aurora\_parallel\_query** is turned off by default\. 
 

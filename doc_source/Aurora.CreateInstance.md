@@ -37,7 +37,7 @@ If you are connecting to AWS using AWS Identity and Access Management \(IAM\) cr
 
 If you are using IAM to access the Amazon RDS console, you must first sign on to the AWS Management Console with your IAM user credentials\. Then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-If you want to tailor the configuration parameters for your DB cluster, you must specify a DB cluster parameter group and DB parameter group with the required parameter settings\. For information about creating or modifying a DB cluster parameter group or DB parameter group, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
+If you want to tailor the configuration parameters for your DB cluster, you must specify a DB cluster parameter group and DB parameter group with the required parameter settings\. For information about creating or modifying a DB cluster parameter group or DB parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 You must determine the TCP/IP port number to specify for your DB cluster\. The firewalls at some companies block connections to the default ports \(3306 for MySQL, 5432 for PostgreSQL\) for Aurora\. If your company firewall blocks the default port, choose another port for your DB cluster\. All instances in a DB cluster use the same port\.
 
@@ -337,9 +337,9 @@ Additional settings are available if you are creating an Aurora Serverless DB cl
 |  Database authentication  |  The database authentication you want to use\. For MySQL: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html) For PostgreSQL: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html)  |  To use IAM database authentication with the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--enable-iam-database-authentication \| --no-enable-iam-database-authentication` option\. To use IAM database authentication with the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `EnableIAMDatabaseAuthentication` parameter\. To use Kerberos authentication with the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--domain` and `--domain-iam-role-name` options\. To use Kerberos authentication with the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `Domain` and `DomainIAMRoleName` parameters\.  | 
 |   **Database port**   |  Specify the port for applications and utilities to use to access the database\. Aurora MySQL DB clusters default to the default MySQL port, 3306, and Aurora PostgreSQL DB clusters default to the default PostgreSQL port, 5432\. The firewalls at some companies block connections to these default ports\. If your company firewall blocks the default port, choose another port for the new DB cluster\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--port` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `Port` parameter\.  | 
 |  **DB cluster identifier**  |  Enter a name for your DB cluster that is unique for your account in the AWS Region that you chose\. This identifier is used in the cluster endpoint address for your DB cluster\. For information on the cluster endpoint, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\. The DB cluster identifier has the following constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html)  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--db-cluster-identifier` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `DBClusterIdentifier` parameter\.  | 
-|   **DB cluster parameter group**   |  Choose a DB cluster parameter group\. Aurora has a default DB cluster parameter group you can use, or you can create your own DB cluster parameter group\. For more information about DB cluster parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--db-cluster-parameter-group-name` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `DBClusterParameterGroupName` parameter\.  | 
+|   **DB cluster parameter group**   |  Choose a DB cluster parameter group\. Aurora has a default DB cluster parameter group you can use, or you can create your own DB cluster parameter group\. For more information about DB cluster parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--db-cluster-parameter-group-name` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `DBClusterParameterGroupName` parameter\.  | 
 |   **DB instance class**   |  Applies only to the provisioned capacity type\. Choose a DB instance class that defines the processing and memory requirements for each instance in the DB cluster\. For more information about DB instance classes, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.  |   Set this value for every DB instance in your Aurora cluster\.  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) and set the `--db-instance-class` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) and set the `DBInstanceClass` parameter\.  | 
-|   **DB parameter group**   |  Choose a parameter group\. Aurora has a default parameter group you can use, or you can create your own parameter group\. For more information about parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.  |   Set this value for every DB instance in your Aurora cluster\.  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) and set the `--db-parameter-group-name` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) and set the `DBParameterGroupName` parameter\.  | 
+|   **DB parameter group**   |  Choose a parameter group\. Aurora has a default parameter group you can use, or you can create your own parameter group\. For more information about parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.  |   Set this value for every DB instance in your Aurora cluster\.  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) and set the `--db-parameter-group-name` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) and set the `DBParameterGroupName` parameter\.  | 
 | Enable deletion protection | Choose Enable deletion protection to prevent your DB cluster from being deleted\. If you create a production DB cluster with the console, deletion protection is enabled by default\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--deletion-protection \| --no-deletion-protection` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `DeletionProtection` parameter\.  | 
 |   **Enable encryption**   |  Choose `Enable encryption` to enable encryption at rest for this DB cluster\. For more information, see [Encrypting Amazon Aurora resources](Overview.Encryption.md)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--storage-encrypted \| --no-storage-encrypted` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `StorageEncrypted` parameter\.  | 
 |  **Enable Enhanced Monitoring**  |  Choose **Enable enhanced monitoring** to enable gathering metrics in real time for the operating system that your DB cluster runs on\. For more information, see [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)\.   |   Set these values for every DB instance in your Aurora cluster\.  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) and set the `--monitoring-interval` and `--monitoring-role-arn` options\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) and set the `MonitoringInterval` and `MonitoringRoleArn` parameters\.  | 
@@ -359,3 +359,73 @@ Additional settings are available if you are creating an Aurora Serverless DB cl
 |   **Subnet group**   |  Choose the DB subnet group to use for the DB cluster\. For more information, see [DB cluster prerequisites](#Aurora.CreateInstance.Prerequisites)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--db-subnet-group-name` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `DBSubnetGroupName` parameter\.  | 
 |   **Virtual Private Cloud \(VPC\)**   |  Choose the VPC to host the DB cluster\. Choose **Create a New VPC** to have Amazon RDS create a VPC for you\. For more information, see [DB cluster prerequisites](#Aurora.CreateInstance.Prerequisites)\.  |  For the AWS CLI and API, you specify the VPC security group IDs\.  | 
 |   **VPC security group**   |  Choose **Create new** to have Amazon RDS create a VPC security group for you\. Or choose **Choose existing** and specify one or more VPC security groups to secure network access to the DB cluster\. When you choose **Create new** in the RDS console, a new security group is created with an inbound rule that allows access to the DB instance from the IP address detected in your browser\. For more information, see [DB cluster prerequisites](#Aurora.CreateInstance.Prerequisites)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--vpc-security-group-ids` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `VpcSecurityGroupIds` parameter\.  | 
+
+## Settings that don't apply to Amazon Aurora for DB clusters<a name="Aurora.CreateDBCluster.SettingsNotApplicableDBClusters"></a>
+
+The following settings in the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and the RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) don't apply to Amazon Aurora DB clusters\.
+
+**Note**  
+The AWS Management Console doesn't show these settings for Aurora DB clusters\.
+
+
+****  
+
+| AWS CLI setting | RDS API setting | 
+| --- | --- | 
+|  `--allocated-storage`  |  `AllocatedStorage`  | 
+|  `--auto-minor-version-upgrade \| --no-auto-minor-version-upgrade`  |  `AutoMinorVersionUpgrade`  | 
+|  `--db-cluster-instance-class`  |  `DBClusterInstanceClass`  | 
+|  `--enable-performance-insights \| --no-enable-performance-insights`  |  `EnablePerformanceInsights`  | 
+|  `--iops`  |  `Iops`  | 
+|  `--monitoring-interval`  |  `MonitoringInterval`  | 
+|  `--monitoring-role-arn`  |  `MonitoringRoleArn`  | 
+|  `--option-group-name`  |  `OptionGroupName`  | 
+|  `--performance-insights-kms-key-id`  |  `PerformanceInsightsKMSKeyId`  | 
+|  `--performance-insights-retention-period`  |  `PerformanceInsightsRetentionPeriod`  | 
+|  `--publicly-accessible \| --no-publicly-accessible`  |  `PubliclyAccessible`  | 
+|  `--storage-type`  |  `StorageType`  | 
+
+## Settings that don't apply to Amazon Aurora DB instances<a name="Aurora.CreateInstance.SettingsNotApplicable"></a>
+
+The following settings in the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) and the RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) don't apply to DB instances Amazon Aurora DB cluster\.
+
+**Note**  
+The AWS Management Console doesn't show these settings for Aurora DB instances\.
+
+
+****  
+
+| AWS CLI setting | RDS API setting | 
+| --- | --- | 
+|  `--allocated-storage`  |  `AllocatedStorage`  | 
+|  `--availability-zone`  |  `AvailabilityZone`  | 
+|  `--backup-retention-period`  |  `BackupRetentionPeriod`  | 
+|  `--backup-target`  |  `BackupTarget`  | 
+|  `--character-set-name`  |  `CharacterSetName`  | 
+|  `--character-set-name`  |  `CharacterSetName`  | 
+|  `--custom-iam-instance-profile`  |  `CustomIamInstanceProfile`  | 
+|  `--db-security-groups`  |  `DBSecurityGroups`  | 
+|  `--deletion-protection \| --no-deletion-protection`  |  `DeletionProtection`  | 
+|  `--domain`  |  `Domain`  | 
+|  `--domain-iam-role-name`  |  `DomainIAMRoleName`  | 
+|  `--enable-cloudwatch-logs-exports`  |  `EnableCloudwatchLogsExports`  | 
+|  `--enable-customer-owned-ip \| --no-enable-customer-owned-ip`  |  `EnableCustomerOwnedIp`  | 
+|  `--enable-iam-database-authentication \| --no-enable-iam-database-authentication`  |  `EnableIAMDatabaseAuthentication`  | 
+|  `--engine-version`  |  `EngineVersion`  | 
+|  `--iops`  |  `Iops`  | 
+|  `--kms-key-id`  |  `KmsKeyId`  | 
+|  `--license-model`  |  `LicenseModel`  | 
+|  `--master-username`  |  `MasterUsername`  | 
+|  `--master-user-password`  |  `MasterUserPassword`  | 
+|  `--max-allocated-storage`  |  `MaxAllocatedStorage`  | 
+|  `--multi-az \| --no-multi-az`  |  `MultiAZ`  | 
+|  `--nchar-character-set-name`  |  `NcharCharacterSetName`  | 
+|  `--option-group-name`  |  `OptionGroupName`  | 
+|  `--preferred-backup-window`  |  `PreferredBackupWindow`  | 
+|  `--processor-features`  |  `ProcessorFeatures`  | 
+|  `--storage-encrypted \| --no-storage-encrypted`  |  `StorageEncrypted`  | 
+|  `--storage-type`  |  `StorageType`  | 
+|  `--tde-credential-arn`  |  `TdeCredentialArn`  | 
+|  `--tde-credential-password`  |  `TdeCredentialPassword`  | 
+|  `--timezone`  |  `Timezone`  | 
+|  `--vpc-security-group-ids`  |  `VpcSecurityGroupIds`  | 

@@ -14,7 +14,7 @@ The `pg_cron` extension is supported on Aurora PostgreSQL engine version 12\.6 a
 
 Enable the `pg_cron` extension as follows:
 
-1. Modify the parameter group associated with your PostgreSQL DB instance and add `pg_cron` to the `shared_preload_libraries` parameter value\. This change requires a PostgreSQL DB instance restart to take effect\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
+1. Modify the parameter group associated with your PostgreSQL DB instance and add `pg_cron` to the `shared_preload_libraries` parameter value\. This change requires a PostgreSQL DB instance restart to take effect\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
 
 1. After the PostgreSQL DB instance has restarted, run the following command using an account that has the `rds_superuser` permissions\. For example, if you used the default settings when you created your RDS for PostgreSQL DB instance, connect as user `postgres` and create the extension\. 
 
@@ -128,7 +128,7 @@ For more information, see [The pg\_cron tables](#PostgreSQL_pg_cron.tables)\.
 
 ### Disabling logging of pg\_cron history<a name="PostgreSQL_pg_cron.log_run"></a>
 
-To completely disable writing anything to the `cron.job_run_details` table, modify the parameter group associated with the PostgreSQL DB instance and set the `cron.log_run` parameter to off\. If you do this, the `pg_cron` extension no longer writes to the table and produces errors only in the `postgresql.log` file\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
+To completely disable writing anything to the `cron.job_run_details` table, modify the parameter group associated with the PostgreSQL DB instance and set the `cron.log_run` parameter to off\. If you do this, the `pg_cron` extension no longer writes to the table and produces errors only in the `postgresql.log` file\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
 
 Use the following command to check the value of the `cron.log_run` parameter\.
 

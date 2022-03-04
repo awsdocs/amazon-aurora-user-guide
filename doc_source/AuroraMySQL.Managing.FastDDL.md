@@ -14,14 +14,11 @@ Amazon Aurora includes optimizations to run an `ALTER TABLE` operation in place,
 
  Aurora MySQL version 3 is compatible with the instant DDL from community MySQL 8\.0\. You perform an instant DDL operation by using the clause `ALGORITHM=INSTANT` with the `ALTER TABLE` statement\. For syntax and usage details about instant DDL, see [ALTER TABLE](https://dev.mysql.com/doc/refman/8.0/en/alter-table.html) and [Online DDL Operations](https://dev.mysql.com/doc/refman/8.0/en/innodb-online-ddl-operations.html) in the MySQL documentation\. 
 
- The following examples demonstrate the instant DDL feature\. The `ALTER TABLE` statements create and drop indexes, add columns, and change default column values\. The examples include both regular and virtual columns, and both regular and partitioned tables\. At each step, you can see the results by issuing `SHOW CREATE TABLE` and `DESCRIBE` statements\. 
+ The following examples demonstrate the instant DDL feature\. The `ALTER TABLE` statements add columns and change default column values\. The examples include both regular and virtual columns, and both regular and partitioned tables\. At each step, you can see the results by issuing `SHOW CREATE TABLE` and `DESCRIBE` statements\. 
 
 ```
 mysql> CREATE TABLE t1 (a INT, b INT, KEY(b)) PARTITION BY KEY(b) PARTITIONS 6;
 Query OK, 0 rows affected (0.02 sec)
-
-mysql> ALTER TABLE t1 DROP KEY b, ADD KEY b(b) USING BTREE, ALGORITHM = INSTANT;
-Query OK, 0 rows affected (0.01 sec)
 
 mysql> ALTER TABLE t1 RENAME TO t2, ALGORITHM = INSTANT;
 Query OK, 0 rows affected (0.01 sec)

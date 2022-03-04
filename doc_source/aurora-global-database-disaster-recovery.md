@@ -177,7 +177,7 @@ The `rds.global_db_rpo` parameter controls the RPO setting for a PostgreSQL data
    + On your custom DB parameter group, set the value of the **rds\.global\_db\_rpo** parameter to meet your use case\. Valid values range from 20 seconds up to the maximum integer value of 2,147,483,647 \(68 years\)\.
    + Apply the modified DB cluster parameter group to your Aurora DB cluster\. 
 
-For more information, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
+For more information, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
 
 #### AWS CLI<a name="aurora-global-database-set-rpo.CLI"></a>
 
@@ -272,7 +272,7 @@ The command returns output similar to the following for all `user` parameters\. 
 }
 ```
 
-To learn more about viewing parameters of the cluster parameter group, see [Viewing parameter values for a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ViewingCluster)\.
+To learn more about viewing parameters of the cluster parameter group, see [Viewing parameter values for a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ViewingCluster)\.
 
 ### Disabling the recovery point objective<a name="aurora-global-database-disable-rpo"></a>
 
@@ -296,7 +296,7 @@ To disable the RPO, reset the `rds.global_db_rpo` parameter\. You can reset para
 
 1. When the screen shows **Reset parameters in DB parameter group**, choose **Reset parameters**\.
 
-For more information on how to reset a parameter with the console, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
+For more information on how to reset a parameter with the console, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
 
 #### AWS CLI<a name="aurora-global-database-set-rpo.CLI"></a>
 

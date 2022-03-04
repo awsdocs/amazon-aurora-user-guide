@@ -10,7 +10,7 @@ You manage cluster\-level parameters in DB cluster parameter groups\. You manage
 
 To learn more about the AWS CLI, see [Using the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html) in the *AWS Command Line Interface User Guide*\.
 
-For more information about parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
+For more information about parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 ## Viewing Aurora PostgreSQL DB cluster and DB parameters<a name="AuroraPostgreSQL.Reference.ParameterGroups-viewing-parameters"></a>
 
@@ -101,7 +101,7 @@ For a listing of the DB instance parameters for the same default Aurora paramete
 | apg\_enable\_remove\_redundant\_inner\_joins | Enables the planner to remove redundant inner joins\. | 
 | apg\_enable\_semijoin\_push\_down | Enables the use of semijoin filters for hash joins\. | 
 | apg\_plan\_mgmt\.capture\_plan\_baselines | Capture plan baseline mode\. manual \- enable plan capture for any SQL statement off \- disable plan capture automatic \- enable plan capture for statements in pg\_stat\_statements that satisfy the eligibility criteria\. | 
-| apg\_plan\_mgmt\.max\_databases | Static\. Sets the maximum number of databases that that may manage queries using apg\_plan\_mgmt\. | 
+| apg\_plan\_mgmt\.max\_databases | Static\. Sets the maximum number of databases that may manage queries using apg\_plan\_mgmt\. | 
 | apg\_plan\_mgmt\.max\_plans | Static\. Sets the maximum number of plans that may be cached by apg\_plan\_mgmt\. | 
 | apg\_plan\_mgmt\.plan\_retention\_period | Static\. Maximum number of days since a plan was last\_used before a plan will be automatically deleted\. | 
 | apg\_plan\_mgmt\.unapproved\_plan\_execution\_threshold | Estimated total plan cost below which an Unapproved plan will be executed\. | 

@@ -55,7 +55,7 @@ For GTID\-based replication, use these settings for the DB cluster parameter gro
 **Tip**  
 Incoming replication is the most common binlog replication scenario for Aurora MySQL clusters\. For incoming replication, we recommend that you set the GTID mode to `OFF_PERMISSIVE`\. That setting allows incoming replication from external databases regardless of the GTID settings at the replication source\. 
 
-For more information about parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
+For more information about parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 ## Configuring GTID\-based replication for an Aurora MySQL cluster<a name="mysql-replication-gtid.configuring-aurora"></a><a name="gtid"></a>
 
@@ -67,7 +67,7 @@ When GTID\-based replication is enabled for an Aurora MySQL DB cluster, the GTID
    + `gtid_mode` – `ON` or `ON_PERMISSIVE`
    + `enforce_gtid_consistency` – `ON`
 
-1. Associate the DB cluster parameter group with the Aurora MySQL cluster\. To do so, follow the procedures in [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
+1. Associate the DB cluster parameter group with the Aurora MySQL cluster\. To do so, follow the procedures in [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 1. In Aurora MySQL version 3 and higher, optionally specify how to assign GTIDs to transactions that don't include them\. To do so, call the stored procedure in [mysql\.rds\_assign\_gtids\_to\_anonymous\_transactions \(Aurora MySQL version 3 and higher\)](AuroraMySQL.Reference.md#mysql_assign_gtids_to_anonymous_transactions)\.
 
@@ -93,7 +93,7 @@ For more details about the stored procedures mentioned in this section, see [Aur
 
    1. Make sure that the DB cluster parameter group associated with the Aurora MySQL cluster has `gtid_mode` set to `ON_PERMISSIVE`\.
 
-      For more information about setting configuration parameters using parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
+      For more information about setting configuration parameters using parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
    1. Restart the Aurora MySQL DB cluster\.
 

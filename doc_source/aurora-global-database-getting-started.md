@@ -540,7 +540,7 @@ For example, if your Aurora global database has 5 secondary Regions, your primar
 The number of Aurora Replicas \(reader instances\) in the primary DB cluster determines the number of secondary DB clusters you can add\. The total number of reader instances in the primary DB cluster plus the number of secondary clusters can't exceed 15\. For example, if you have 14 reader instances in the primary DB cluster and 1 secondary cluster, you can't add another secondary cluster to the global database\.
 
 **Note**  
-For Aurora MySQL version 3, when you create a secondary cluster, make sure that the value of `lower_case_table_names` matches the value in the primary cluster\. This setting is a database parameter that affects how the server handles identifier case sensitivity\. For more information about database parameters, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
+For Aurora MySQL version 3, when you create a secondary cluster, make sure that the value of `lower_case_table_names` matches the value in the primary cluster\. This setting is a database parameter that affects how the server handles identifier case sensitivity\. For more information about database parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 ### Console<a name="aurora-global-database-attach.console"></a>
 

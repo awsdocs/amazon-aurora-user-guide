@@ -4,7 +4,7 @@ You can use the Aurora PostgreSQL parameter, `rds.pg_stat_ramdisk_size`, to spec
 
 Under certain workloads, setting this parameter can improve performance and decrease IO requirements\. For more information about the `stats_temp_directory`, see [the PostgreSQL documentation\.](https://www.postgresql.org/docs/current/static/runtime-config-statistics.html#GUC-STATS-TEMP-DIRECTORY)\.
 
-To enable a RAM disk for your `stats_temp_directory`, set the `rds.pg_stat_ramdisk_size` parameter to a non\-zero value in the DB cluster parameter group used by your DB cluster\. The parameter value is in MB\. You must restart the DB cluster before the change takes effect\. For information about setting parameters, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
+To enable a RAM disk for your `stats_temp_directory`, set the `rds.pg_stat_ramdisk_size` parameter to a non\-zero value in the DB cluster parameter group used by your DB cluster\. The parameter value is in MB\. You must restart the DB cluster before the change takes effect\. For information about setting parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 For example, the following AWS CLI command sets the RAM disk parameter to 256 MB\.
 

@@ -142,7 +142,7 @@
 
  Aurora makes it easy to reuse the optimal configuration settings for a particular application or use case\. Instead of editing a separate configuration file for each DB instance, you manage sets of parameters that you assign to entire clusters or specific DB instances\. For example, the time zone setting applies to all DB instances in the cluster, and you can adjust the page cache size setting for each DB instance\. 
 
- You start with one of the default parameter sets, and apply changes to only the parameters that you need to fine\-tune\. For details about working with parameter groups, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithParamGroups.md#Aurora.Managing.ParameterGroups)\. For the configuration settings that are or aren't applicable to Aurora clusters, see [Aurora MySQL configuration parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups) or [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.ParameterGroups.md) depending on your database engine\. 
+ You start with one of the default parameter sets, and apply changes to only the parameters that you need to fine\-tune\. For details about working with parameter groups, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithDBClusterParamGroups.md#Aurora.Managing.ParameterGroups)\. For the configuration settings that are or aren't applicable to Aurora clusters, see [Aurora MySQL configuration parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups) or [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.ParameterGroups.md) depending on your database engine\. 
 
 ## 9\. Connect to Aurora<a name="Aurora.PoC.Connections"></a>
 

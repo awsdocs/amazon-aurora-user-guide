@@ -6,7 +6,7 @@ For information about extensions and modules, see [Extension versions for Amazon
 
 Amazon Aurora for PostgreSQL 1\.X \(compatible with PostgreSQL 9\.6\.XX\) reaches end of life on January 31, 2022\. For more information, see [ Announcement: Amazon Aurora PostgreSQL 9\.6 End\-of\-Life date is January 31, 2022](http://forums.aws.amazon.com/ann.jspa?annID=8512)\. We recommend that you proactively upgrade your databases that are running Aurora PostgreSQL 9\.6 to Amazon Aurora PostgreSQL 10 or higher at your convenience before January 31, 2022\. To learn how, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\. 
 
-For more information about Amazon Aurora supported releases, policies, and timelines, see [How long Amazon Aurora major versions remain available](Aurora.VersionPolicy.md#Aurora.VersionPolicy.MajorVersionLifetime)\. For more information about support and other policies for Amazon Aurora see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\. 
+For more information about Amazon Aurora available releases, policies, and timelines, see [How long Amazon Aurora major versions remain available](Aurora.VersionPolicy.md#Aurora.VersionPolicy.MajorVersionLifetime)\. For more information about support and other policies for Amazon Aurora see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\. 
 
 To determine which Aurora PostgreSQL DB engine versions are available in an AWS Region, use the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\. For example:
 
@@ -17,11 +17,11 @@ aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[].[Eng
 For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability.PostgreSQL)\.
 
 **Topics**
-+ [PostgreSQL 13\.5](#AuroraPostgreSQL.Updates.20180305.135)
-+ [PostgreSQL 13\.4](#AuroraPostgreSQL.Updates.20180305.134)
-+ [PostgreSQL 13\.3](#AuroraPostgreSQL.Updates.20180305.133)
-+ [PostgreSQL 12\.9](#AuroraPostgreSQL.Updates.20180305.1290)
-+ [PostgreSQL 12\.8](#AuroraPostgreSQL.Updates.20180305.128)
++ [PostgreSQL 13\.5](#AuroraPostgreSQL.Updates.20180305.135X)
++ [PostgreSQL 13\.4](#AuroraPostgreSQL.Updates.20180305.134X)
++ [PostgreSQL 13\.3](#AuroraPostgreSQL.Updates.20180305.133X)
++ [PostgreSQL 12\.9](#AuroraPostgreSQL.Updates.20180305.129)
++ [PostgreSQL 12\.8](#AuroraPostgreSQL.Updates.20180305.128X)
 + [PostgreSQL 12\.7, Aurora PostgreSQL release 4\.2](#AuroraPostgreSQL.Updates.20180305.42)
 + [PostgreSQL 12\.6, Aurora PostgreSQL release 4\.1](#AuroraPostgreSQL.Updates.20180305.41)
 + [PostgreSQL 12\.4, Aurora PostgreSQL release 4\.0](#AuroraPostgreSQL.Updates.20180305.40)
@@ -30,40 +30,52 @@ For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.
 + [PostgreSQL 11\.12, Aurora PostgreSQL release 3\.6](#AuroraPostgreSQL.Updates.20180305.36)
 + [PostgreSQL 11\.11, Aurora PostgreSQL release 3\.5](#AuroraPostgreSQL.Updates.20180305.35)
 + [PostgreSQL 11\.9, Aurora PostgreSQL release 3\.4](#AuroraPostgreSQL.Updates.20180305.34)
-+ [PostgreSQL 11\.8, Aurora PostgreSQL release 3\.3](#AuroraPostgreSQL.Updates.20180305.33)
-+ [PostgreSQL 11\.7, Aurora PostgreSQL release 3\.2](#AuroraPostgreSQL.Updates.20180305.32)
-+ [PostgreSQL 11\.6, Aurora PostgreSQL release 3\.1](#AuroraPostgreSQL.Updates.20180305.31)
-+ [PostgreSQL 11\.4, Aurora PostgreSQL release 3\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.30)
++ [PostgreSQL 11\.8, Aurora PostgreSQL release 3\.3 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.33)
++ [PostgreSQL 11\.7, Aurora PostgreSQL release 3\.2 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.32)
++ [PostgreSQL 11\.6, Aurora PostgreSQL release 3\.1 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.31)
++ [PostgreSQL 11\.4, Aurora PostgreSQL release 3\.0 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.30)
 + [PostgreSQL 10\.19](#AuroraPostgreSQL.Updates.20180305.1019)
 + [PostgreSQL 10\.18](#AuroraPostgreSQL.Updates.20180305.1018)
 + [PostgreSQL 10\.17, Aurora PostgreSQL release 2\.9](#AuroraPostgreSQL.Updates.20180305.29)
 + [PostgreSQL 10\.16, Aurora PostgreSQL release 2\.8](#AuroraPostgreSQL.Updates.20180305.28)
 + [PostgreSQL 10\.14, Aurora PostgreSQL release 2\.7](#AuroraPostgreSQL.Updates.20180305.27)
-+ [PostgreSQL 10\.13, Aurora PostgreSQL release 2\.6](#AuroraPostgreSQL.Updates.20180305.26)
-+ [PostgreSQL 10\.12, Aurora PostgreSQL release 2\.5](#AuroraPostgreSQL.Updates.20180305.25)
-+ [PostgreSQL 10\.11, Aurora PostgreSQL release 2\.4](#AuroraPostgreSQL.Updates.20180305.24)
-+ [PostgreSQL 10\.7, Aurora PostgreSQL release 2\.3 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.23)
-+ [PostgreSQL 10\.6, Aurora PostgreSQL release 2\.2 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.22)
-+ [PostgreSQL 10\.5, Aurora PostgreSQL release 2\.1 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.21)
-+ [PostgreSQL 10\.4, Aurora PostgreSQL release 2\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.20)
-+ [PostgreSQL 9\.6\.22, Aurora PostgreSQL release 1\.11 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.111)
-+ [PostgreSQL 9\.6\.21, Aurora PostgreSQL release 1\.10 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.110)
-+ [PostgreSQL 9\.6\.19, Aurora PostgreSQL release 1\.9 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.19)
-+ [PostgreSQL 9\.6\.18, Aurora PostgreSQL release 1\.8 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.18)
-+ [PostgreSQL 9\.6\.17, Aurora PostgreSQL release 1\.7 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.17)
-+ [PostgreSQL 9\.6\.16, Aurora PostgreSQL release 1\.6 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.16)
-+ [PostgreSQL 9\.6\.12, Aurora PostgreSQL release 1\.5 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.15)
-+ [PostgreSQL 9\.6\.11, Aurora PostgreSQL release 1\.4 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.14)
-+ [PostgreSQL 9\.6\.9, Aurora PostgreSQL release 1\.3 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.13)
-+ [PostgreSQL 9\.6\.8, Aurora PostgreSQL release 1\.2 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.12)
-+ [PostgreSQL 9\.6\.6 Aurora PostgreSQL release 1\.1 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.11)
-+ [PostgreSQL 9\.6\.3, Aurora PostgreSQL release 1\.0 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.10)
++ [PostgreSQL 10\.13, Aurora PostgreSQL release 2\.6 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.26)
++ [PostgreSQL 10\.12, Aurora PostgreSQL release 2\.5 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.25)
++ [PostgreSQL 10\.11, Aurora PostgreSQL release 2\.4 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.24)
++ [PostgreSQL 10\.7, Aurora PostgreSQL release 2\.3 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.23)
++ [PostgreSQL 10\.6, Aurora PostgreSQL release 2\.2 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.22)
++ [PostgreSQL 10\.5, Aurora PostgreSQL release 2\.1 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.21)
++ [PostgreSQL 10\.4, Aurora PostgreSQL release 2\.0 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.20)
++ [PostgreSQL 9\.6\.22, Aurora PostgreSQL release 1\.11 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.111)
++ [PostgreSQL 9\.6\.21, Aurora PostgreSQL release 1\.10 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.110)
++ [PostgreSQL 9\.6\.19, Aurora PostgreSQL release 1\.9 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.19)
++ [PostgreSQL 9\.6\.18, Aurora PostgreSQL release 1\.8 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.18)
++ [PostgreSQL 9\.6\.17, Aurora PostgreSQL release 1\.7 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.17)
++ [PostgreSQL 9\.6\.16, Aurora PostgreSQL release 1\.6 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.16)
++ [PostgreSQL 9\.6\.12, Aurora PostgreSQL release 1\.5 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.15)
++ [PostgreSQL 9\.6\.11, Aurora PostgreSQL release 1\.4 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.14)
++ [PostgreSQL 9\.6\.9, Aurora PostgreSQL release 1\.3 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.13)
++ [PostgreSQL 9\.6\.8, Aurora PostgreSQL release 1\.2 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.12)
++ [PostgreSQL 9\.6\.6 Aurora PostgreSQL release 1\.1 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.11)
++ [PostgreSQL 9\.6\.3, Aurora PostgreSQL release 1\.0 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.10)
 
-## PostgreSQL 13\.5<a name="AuroraPostgreSQL.Updates.20180305.135"></a>
+## PostgreSQL 13\.5<a name="AuroraPostgreSQL.Updates.20180305.135X"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.5\. For more information about the improvements in PostgreSQL 13\.5, see [PostgreSQL release 13\.5](https://www.postgresql.org/docs/13/release-13-5.html)\.
 
-### Aurora PostgreSQL release 13\.5<a name="AuroraPostgreSQL.Updates.20180305.135"></a>
+**Topics**
++ [Aurora PostgreSQL release 13\.5\.1](#AuroraPostgreSQL.Updates.20180305.1351)
++ [Aurora PostgreSQL release 13\.5\.0](#AuroraPostgreSQL.Updates.20180305.1350)
+
+### Aurora PostgreSQL release 13\.5\.1<a name="AuroraPostgreSQL.Updates.20180305.1351"></a>
+
+**Security updates**
++ Updated the `PostGIS` extension from version 3\.1\.4 to 3\.1\.5\. This update contains a PostGIS fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `pg_bigm` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `pg_cron` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
+
+### Aurora PostgreSQL release 13\.5\.0<a name="AuroraPostgreSQL.Updates.20180305.1350"></a>
 
 **High priority stability enhancements**
 +  Fixed a bug where logical replication may hang resulting in the replay falling behind on the read node\. The instance may eventually restart\. 
@@ -85,11 +97,23 @@ This version also includes the following change:
 
 For information about extensions and modules, see [Extensions supported for Aurora PostgreSQL 13\.x](AuroraPostgreSQL.Extensions.md#AuroraPostgreSQL.Extensions.13)\.
 
-## PostgreSQL 13\.4<a name="AuroraPostgreSQL.Updates.20180305.134"></a>
+## PostgreSQL 13\.4<a name="AuroraPostgreSQL.Updates.20180305.134X"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.4\. For more information about the improvements in PostgreSQL 13\.4, see [PostgreSQL release 13\.4](https://www.postgresql.org/docs/13/release-13-4.html)\.
 
-### Aurora PostgreSQL release 13\.4<a name="AuroraPostgreSQL.Updates.20180305.134"></a>
+**Topics**
++ [Aurora PostgreSQL release 13\.4\.1](#AuroraPostgreSQL.Updates.20180305.1341)
++ [Aurora PostgreSQL release 13\.4\.0](#AuroraPostgreSQL.Updates.20180305.1340)
+
+### Aurora PostgreSQL release 13\.4\.1<a name="AuroraPostgreSQL.Updates.20180305.1341"></a>
+
+**Security updates**
++ Updated the `PostGIS` extension from version 3\.1\.4 to 3\.1\.5\. This update contains a PostGIS fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `pg_bigm` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `pg_cron` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
+
+### Aurora PostgreSQL release 13\.4\.0<a name="AuroraPostgreSQL.Updates.20180305.1340"></a>
 
 **New features**
 + This version supports Babelfish which extends your Amazon Aurora PostgreSQL database with the ability to accept database connections from Microsoft SQL Server clients\. For more information, see [Working with Babelfish for Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/babelfish.html)\.
@@ -120,15 +144,28 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.4\. For more
 + Fixed multiple issues in the Aurora storage daemon that could lead to brief periods of unavailability when specific network configurations are used\.
 + Fixed an out of memory crash issue with Aurora storage daemon that leads to writer node restart\. This also reduces the overall system memory consumption\.
 
-## PostgreSQL 13\.3<a name="AuroraPostgreSQL.Updates.20180305.133"></a>
+## PostgreSQL 13\.3<a name="AuroraPostgreSQL.Updates.20180305.133X"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.3\. For more information about the improvements in PostgreSQL 13\.3, see [PostgreSQL release 13\.3](https://www.postgresql.org/docs/13/release-13-3.html)\.
 
 **Topics**
-+ [Aurora PostgreSQL 13\.3\.1](#AuroraPostgreSQL.Updates.20180305.1331)
++ [Aurora PostgreSQL release 13\.3\.2](#AuroraPostgreSQL.Updates.20180305.1332)
++ [Aurora PostgreSQL release 13\.3\.1](#AuroraPostgreSQL.Updates.20180305.1331)
 + [Aurora PostgreSQL release 13\.3\.0](#AuroraPostgreSQL.Updates.20180305.1330)
 
-### Aurora PostgreSQL 13\.3\.1<a name="AuroraPostgreSQL.Updates.20180305.1331"></a>
+### Aurora PostgreSQL release 13\.3\.2<a name="AuroraPostgreSQL.Updates.20180305.1332"></a>
+
+**Security updates**
++ Modified the `pg_cron` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched [postgis](https://git.osgeo.org/gitea/postgis/postgis/pulls/79) to PostGIS 3\.0\.3\. This is a `PostGIS` fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
+
+### Aurora PostgreSQL release 13\.3\.1<a name="AuroraPostgreSQL.Updates.20180305.1331"></a>
+
+**Topics**
+
+**Security updates**
++ Modified the `pg_bigm` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
 
 **Critical stability enhancements**
 + Fixed an issue where, in rare circumstances, a data cache of a read node may be inconsistent following a restart of that node\.
@@ -177,11 +214,23 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.3\. For more
   + `plls` to version 2\.3\.15\.
   + `plv8` to version 2\.3\.15\.
 
-## PostgreSQL 12\.9<a name="AuroraPostgreSQL.Updates.20180305.1290"></a>
+## PostgreSQL 12\.9<a name="AuroraPostgreSQL.Updates.20180305.129"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.9\. For more information about the improvements in PostgreSQL 12\.9, see [PostgreSQL release 12\.9](https://www.postgresql.org/docs/12/release-12-9.html)\.
 
-### Aurora PostgreSQL release 12\.9<a name="AuroraPostgreSQL.Updates.20180305.129"></a>
+**Topics**
++ [Aurora PostgreSQL release 12\.9\.1](#AuroraPostgreSQL.Updates.20180305.1291)
++ [Aurora PostgreSQL release 12\.9\.0](#AuroraPostgreSQL.Updates.20180305.1290)
+
+### Aurora PostgreSQL release 12\.9\.1<a name="AuroraPostgreSQL.Updates.20180305.1291"></a>
+
+**Security updates**
++ Updated the `PostGIS` extension from version 3\.1\.4 to 3\.1\.5\. This update contains a PostGIS fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `pg_bigm` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `pg_cron` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
+
+### Aurora PostgreSQL release 12\.9\.0<a name="AuroraPostgreSQL.Updates.20180305.1290"></a>
 
 **Critical stability enhancements**
 +  Fixed a bug where logical replication may hang resulting in the replay falling behind on the read node\. The instance may eventually restart\. 
@@ -199,11 +248,23 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.9\. For more
 +  Updated the `pg_hint_pan` extension to v1\.3\.7\. 
 + For information about extensions and modules, see [Extensions supported for Aurora PostgreSQL 12\.x](AuroraPostgreSQL.Extensions.md#AuroraPostgreSQL.Extensions.12)\.
 
-## PostgreSQL 12\.8<a name="AuroraPostgreSQL.Updates.20180305.128"></a>
+## PostgreSQL 12\.8<a name="AuroraPostgreSQL.Updates.20180305.128X"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.8\. For more information about the improvements in PostgreSQL 12\.8, see [PostgreSQL release 12\.8](https://www.postgresql.org/docs/12/release-12-8.html)\.
 
-### <a name="AuroraPostgreSQL.Updates.20180305.128"></a>
+**Topics**
++ [Aurora PostgreSQL release 12\.8\.1](#AuroraPostgreSQL.Updates.20180305.1281)
++ [Aurora PostgreSQL release 12\.8\.0](#AuroraPostgreSQL.Updates.20180305.1280)
+
+### Aurora PostgreSQL release 12\.8\.1<a name="AuroraPostgreSQL.Updates.20180305.1281"></a>
+
+**Security updates**
++ Updated the `PostGIS` extension from version 3\.1\.4 to 3\.1\.5\. This update contains a PostGIS fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `pg_bigm` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `pg_cron` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
+
+### Aurora PostgreSQL release 12\.8\.0<a name="AuroraPostgreSQL.Updates.20180305.1280"></a>
 
 **Critical stability enhancements**
 + Fixed an issue where, in rare circumstances, a data cache of a read node may be inconsistent following a restart of that node\.
@@ -227,10 +288,20 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.8\. For more
 This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.7\. For more information about the improvements in PostgreSQL 12\.7, see [PostgreSQL release 12\.7](https://www.postgresql.org/docs/12/release-12-7.html)\.
 
 **Topics**
-+ [Aurora PostgreSQL 4\.2\.1](#AuroraPostgreSQL.Updates.20180305.127)
++ [Aurora PostgreSQL release 4\.2\.2](#AuroraPostgreSQL.Updates.20180305.422)
++ [Aurora PostgreSQL release 4\.2\.1](#AuroraPostgreSQL.Updates.20180305.127)
 + [Aurora PostgreSQL release 4\.2\.0](#AuroraPostgreSQL.Updates.20180305.420)
 
-### Aurora PostgreSQL 4\.2\.1<a name="AuroraPostgreSQL.Updates.20180305.127"></a>
+### Aurora PostgreSQL release 4\.2\.2<a name="AuroraPostgreSQL.Updates.20180305.422"></a>
+
+**Security updates**
++ Modified the `pg_cron` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `pg_bigm` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched the PostgreSQL community fix for CVE\-2021\-3677: “Memory disclosure in certain queries”\. For more information, see [CVE\-2021\-3677](https://www.postgresql.org/support/security/CVE-2021-3677)
++ Backpatched [postgis](https://git.osgeo.org/gitea/postgis/postgis/pulls/79) to PostGIS 3\.0\.3\. This is a `PostGIS` fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
+
+### Aurora PostgreSQL release 4\.2\.1<a name="AuroraPostgreSQL.Updates.20180305.127"></a>
 
 **Critical stability enhancements**
 + Fixed an issue where, in rare circumstances, a data cache of a read node may be inconsistent following a restart of that node\.
@@ -276,6 +347,21 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.7\. For more
 ## PostgreSQL 12\.6, Aurora PostgreSQL release 4\.1<a name="AuroraPostgreSQL.Updates.20180305.41"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.6\. For more information about the improvements in PostgreSQL 12\.6, see [PostgreSQL release 12\.6](https://www.postgresql.org/docs/12/release-12-6.html)\.
+
+**Topics**
++ [Aurora PostgreSQL release 4\.1\.1](#AuroraPostgreSQL.Updates.20180305.411)
++ [Aurora PostgreSQL release 4\.1\.0](#AuroraPostgreSQL.Updates.20180305.410)
+
+### Aurora PostgreSQL release 4\.1\.1<a name="AuroraPostgreSQL.Updates.20180305.411"></a>
+
+**Security updates**
++ Modified the `pg_cron` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `pg_bigm` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched the PostgreSQL community fix for CVE\-2021\-3677: “Memory disclosure in certain queries”\. For more information, see [CVE\-2021\-3677](https://www.postgresql.org/support/security/CVE-2021-3677)
++ Backpatched [pg\_partman](https://github.com/pgpartman/pg_partman/commit/0b6565ad378c358f8a6cd1d48ddc482eb7f854d3) to 4\.4\.0\. This is a `pg_partman` fix for the vulernability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched [postgis](https://git.osgeo.org/gitea/postgis/postgis/pulls/79) to PostGIS 3\.0\.2\. This is a `PostGIS` fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched an input validation error in the `log_fdw` extension function parameters\.
 
 ### Aurora PostgreSQL release 4\.1\.0<a name="AuroraPostgreSQL.Updates.20180305.410"></a>
 
@@ -323,9 +409,16 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.6\. For more
 This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.4\. For more information about the improvements in PostgreSQL 12\.4, see [PostgreSQL release 12\.4](https://www.postgresql.org/docs/12/release-12-4.html)\.
 
 **Topics**
++ [Aurora PostgreSQL release 4\.0\.5](#AuroraPostgreSQL.Updates.20180305.405)
 + [Aurora PostgreSQL release 4\.0\.2](#AuroraPostgreSQL.Updates.20180305.402)
 + [Aurora PostgreSQL release 4\.0\.1](#AuroraPostgreSQL.Updates.20180305.401)
 + [Aurora PostgreSQL release 4\.0\.0](#AuroraPostgreSQL.Updates.20180305.400)
+
+### Aurora PostgreSQL release 4\.0\.5<a name="AuroraPostgreSQL.Updates.20180305.405"></a>
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched the PostgreSQL community fix for CVE\-2021\-3677: “Memory disclosure in certain queries”\. For more information, see [CVE\-2021\-3677](https://www.postgresql.org/support/security/CVE-2021-3677)
++ Backpatched [postgis](https://git.osgeo.org/gitea/postgis/postgis/pulls/79) to PostGIS 3\.0\.2\. This is a `PostGIS` fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched an input validation error in the `log_fdw` extension function parameters\.
 
 ### Aurora PostgreSQL release 4\.0\.2<a name="AuroraPostgreSQL.Updates.20180305.402"></a>
 
@@ -362,7 +455,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.4\. For more
 ### Aurora PostgreSQL release 4\.0\.0<a name="AuroraPostgreSQL.Updates.20180305.400"></a>
 
 **New features**
-+ This version supports a major version upgrade from [PostgreSQL 11\.7, Aurora PostgreSQL release 3\.2 ](#AuroraPostgreSQL.Updates.20180305.32) and later versions\.
++ This version supports a major version upgrade from [PostgreSQL 11\.7, Aurora PostgreSQL release 3\.2 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.32) and later versions\.
 
 **Additional improvements and enhancements**
 + Contains several improvements that were announced for PostgreSQL releases [12\.0](https://www.postgresql.org/docs/12/release-12.html), [12\.1](https://www.postgresql.org/docs/12/release-12-1.html), [12\.2](https://www.postgresql.org/docs/12/release-12-2.html), [12\.3](https://www.postgresql.org/docs/12/release-12-3.html), and [12\.4](https://www.postgresql.org/docs/12/release-12-4.html)\.
@@ -393,7 +486,18 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 12\.4\. For more
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.14\. For more information about the improvements in PostgreSQL 11\.14, see [PostgreSQL release 11\.14](https://www.postgresql.org/docs/11/release-11-14.html)\.
 
-### Aurora PostgreSQL release 11\.14<a name="AuroraPostgreSQL.Updates.20180305.1114"></a>
+**Topics**
++ [Aurora PostgreSQL release 11\.14\.1](#AuroraPostgreSQL.Updates.20180305.11141)
++ [Aurora PostgreSQL release 11\.14\.0](#AuroraPostgreSQL.Updates.20180305.11140)
+
+### Aurora PostgreSQL release 11\.14\.1<a name="AuroraPostgreSQL.Updates.20180305.11141"></a>
+
+**Security updates**
++ Updated the `PostGIS` extension from version 3\.1\.4 to 3\.1\.5\. This update contains a PostGIS fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `pg_bigm` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
+
+### Aurora PostgreSQL release 11\.14\.0<a name="AuroraPostgreSQL.Updates.20180305.11140"></a>
 
 **Critical stability enhancements**
 +  Fixed a bug where logical replication may hang resulting in the replay falling behind on the read node\. The instance may eventually restart\. 
@@ -414,7 +518,18 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.14\. For mor
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.13\. For more information about the improvements in PostgreSQL 11\.13, see [PostgreSQL release 11\.13](https://www.postgresql.org/docs/12/release-11-13.html)\.
 
-### <a name="AuroraPostgreSQL.Updates.20180305.1113"></a>
+**Topics**
++ [Aurora PostgreSQL release 11\.13\.1](#AuroraPostgreSQL.Updates.20180305.11131)
++ [Aurora PostgreSQL release 11\.13\.0](#AuroraPostgreSQL.Updates.20180305.11130)
+
+### Aurora PostgreSQL release 11\.13\.1<a name="AuroraPostgreSQL.Updates.20180305.11131"></a>
+
+**Security updates**
++ Updated the `PostGIS` extension from version 3\.1\.4 to 3\.1\.5\. This update contains a PostGIS fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `pg_bigm` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
+
+### Aurora PostgreSQL release 11\.13\.0<a name="AuroraPostgreSQL.Updates.20180305.11130"></a>
 
 **Critical stability enhancements**
 + Fixed an issue where, in rare circumstances, a data cache of a read node may be inconsistent following a restart of that node\.
@@ -439,10 +554,19 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.13\. For mor
 This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.12\. For more information about the improvements in PostgreSQL 11\.12, see [PostgreSQL release 11\.12](https://www.postgresql.org/docs/11/release-11-12.html)\.
 
 **Topics**
-+ [Aurora PostgreSQL 3\.6\.1](#AuroraPostgreSQL.Updates.20180305.1112)
++ [Aurora PostgreSQL release 3\.6\.2](#AuroraPostgreSQL.Updates.20180305.362)
++ [Aurora PostgreSQL release 3\.6\.1](#AuroraPostgreSQL.Updates.20180305.1112)
 + [Aurora PostgreSQL release 3\.6\.0](#AuroraPostgreSQL.Updates.20180305.360)
 
-### Aurora PostgreSQL 3\.6\.1<a name="AuroraPostgreSQL.Updates.20180305.1112"></a>
+### Aurora PostgreSQL release 3\.6\.2<a name="AuroraPostgreSQL.Updates.20180305.362"></a>
+
+**Security updates**
++ Modified the `pg_bigm` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched the PostgreSQL community fix for CVE\-2021\-3677: “Memory disclosure in certain queries”\. For more information, see [CVE\-2021\-3677](https://www.postgresql.org/support/security/CVE-2021-3677)
++ Backpatched [postgis](https://git.osgeo.org/gitea/postgis/postgis/pulls/79) to PostGIS 2\.5\.2\. This is a `PostGIS` fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
+
+### Aurora PostgreSQL release 3\.6\.1<a name="AuroraPostgreSQL.Updates.20180305.1112"></a>
 
 **Critical stability enhancements**
 + Fixed an issue where, in rare circumstances, a data cache of a read node may be inconsistent following a restart of that node\.
@@ -484,6 +608,19 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.12\. For mor
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.11\. For more information about the improvements in PostgreSQL 11\.11, see [PostgreSQL release 11\.11](https://www.postgresql.org/docs/11/release-11-11.html)\.
 
+**Topics**
++ [Aurora PostgreSQL release 3\.5\.1](#AuroraPostgreSQL.Updates.20180305.351)
++ [Aurora PostgreSQL release 3\.5\.0](#AuroraPostgreSQL.Updates.20180305.350)
+
+### Aurora PostgreSQL release 3\.5\.1<a name="AuroraPostgreSQL.Updates.20180305.351"></a>
+
+**Security updates**
++ Modified the `pg_bigm` extension to mitigate a security issue during create extension\. The issue was addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched the PostgreSQL community fix for CVE\-2021\-3677: “Memory disclosure in certain queries”\. For more information, see [CVE\-2021\-3677](https://www.postgresql.org/support/security/CVE-2021-3677)
++ Backpatched [postgis](https://git.osgeo.org/gitea/postgis/postgis/pulls/79) to PostGIS 2\.5\.2\. This is a `PostGIS` fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched an input validation error in the `log_fdw` extension function parameters\.
+
 ### Aurora PostgreSQL release 3\.5\.0<a name="AuroraPostgreSQL.Updates.20180305.350"></a>
 
 **New features**
@@ -521,10 +658,20 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.11\. For mor
 This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more information about the improvements in PostgreSQL 11\.9, see [PostgreSQL release 11\.9](https://www.postgresql.org/docs/11/release-11-9.html)\.
 
 **Topics**
++ [Aurora PostgreSQL release 3\.4\.5](#AuroraPostgreSQL.Updates.20180305.345)
 + [Aurora PostgreSQL release 3\.4\.3](#AuroraPostgreSQL.Updates.20180305.343)
 + [Aurora PostgreSQL release 3\.4\.2](#AuroraPostgreSQL.Updates.20180305.342)
 + [Aurora PostgreSQL release 3\.4\.1](#AuroraPostgreSQL.Updates.20180305.341)
 + [Aurora PostgreSQL release 3\.4\.0](#AuroraPostgreSQL.Updates.20180305.340)
+
+### Aurora PostgreSQL release 3\.4\.5<a name="AuroraPostgreSQL.Updates.20180305.345"></a>
+
+**Security updates**
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched the PostgreSQL community fix for CVE\-2021\-3677: “Memory disclosure in certain queries”\. For more information, see [CVE\-2021\-3677](https://www.postgresql.org/support/security/CVE-2021-3677)
++ Backpatched the PostgreSQL community fix for CVE\-2021\-3393: "Partition constraint violation errors leak values of denied columns"\. For more information, see [CVE\-2021\-3393](https://www.postgresql.org/support/security/CVE-2021-3393)
++ Backpatched [postgis](https://git.osgeo.org/gitea/postgis/postgis/pulls/79) to PostGIS 2\.5\.2\. This is a `PostGIS` fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched an input validation error in the `log_fdw` extension function parameters\.
 
 ### Aurora PostgreSQL release 3\.4\.3<a name="AuroraPostgreSQL.Updates.20180305.343"></a>
 
@@ -600,7 +747,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.9\. For more
 + Fixed a bug in database activity streams where customers were not notified of the end of an outage\.
 + Updated the `pg_audit` extension to version 1\.3\.1\.
 
-## PostgreSQL 11\.8, Aurora PostgreSQL release 3\.3<a name="AuroraPostgreSQL.Updates.20180305.33"></a>
+## PostgreSQL 11\.8, Aurora PostgreSQL release 3\.3 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.33"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.8\. For more information about the improvements in PostgreSQL 11\.8, see [PostgreSQL release 11\.8](https://www.postgresql.org/docs/11/release-11-8.html)\.
 
@@ -688,7 +835,7 @@ You can find the following improvements in this release\.
 + Fixed a bug where an Aurora PostgreSQL DB cluster with Database Activity Streams enabled might report the beginning of a potential loss window for activity records, but does not report the restoration of connectivity\.
 + Fixed a bug with the[aws\_s3\.table\_import\_from\_s3](USER_PostgreSQL.S3Import.md#aws_s3.table_import_from_s3) function where a `COPY` from S3 failed with the error HTTP error code: 248\.
 
-## PostgreSQL 11\.7, Aurora PostgreSQL release 3\.2<a name="AuroraPostgreSQL.Updates.20180305.32"></a>
+## PostgreSQL 11\.7, Aurora PostgreSQL release 3\.2 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.32"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.7\. For more information about the improvements in PostgreSQL 11\.7, see [PostgreSQL release 11\.7](https://www.postgresql.org/docs/11/release-11-7.html)\.
 
@@ -821,7 +968,7 @@ None\.
   + Updated `pgTAP` to version 1\.1 
 + Provided support for fault injection queries\.
 
-## PostgreSQL 11\.6, Aurora PostgreSQL release 3\.1<a name="AuroraPostgreSQL.Updates.20180305.31"></a>
+## PostgreSQL 11\.6, Aurora PostgreSQL release 3\.1 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.31"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 11\.6\. For more information about the improvements in PostgreSQL 11\.6, see [PostgreSQL release 11\.6](https://www.postgresql.org/docs/11/release-11-6.html)\.
 
@@ -977,7 +1124,7 @@ You can find the following new features and improvements in this engine version\
    + Added `plprofiler` version 4\.1\.
    + Added `pgTAP` version 1\.0\.0\.
 
-## PostgreSQL 11\.4, Aurora PostgreSQL release 3\.0 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.30"></a>
+## PostgreSQL 11\.4, Aurora PostgreSQL release 3\.0 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.30"></a>
 
 **Note**  
 The PostgreSQL engine version 11\.4 with the Aurora PostgreSQL release 3\.0 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -1033,7 +1180,17 @@ You can find the following improvements in this release\.
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.19\. For more information about the improvements in PostgreSQL 10\.19, see [PostgreSQL release 10\.19](https://www.postgresql.org/docs/10/release-10-19.html)\.
 
-### Aurora PostgreSQL release 10\.19<a name="AuroraPostgreSQL.Updates.20180305.1019"></a>
+**Topics**
++ [Aurora PostgreSQL release 10\.19\.1](#AuroraPostgreSQL.Updates.20180305.10191)
++ [Aurora PostgreSQL release 10\.19\.0](#AuroraPostgreSQL.Updates.20180305.10190)
+
+### Aurora PostgreSQL release 10\.19\.1<a name="AuroraPostgreSQL.Updates.20180305.10191"></a>
+
+**Security updates**
++ Updated the `PostGIS` extension from version 3\.1\.4 to 3\.1\.5\. This update contains a PostGIS fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
+
+### Aurora PostgreSQL release 10\.19\.0<a name="AuroraPostgreSQL.Updates.20180305.10190"></a>
 
 **Critical stability enhancements**
 +  Fixed a bug where logical replication may hang resulting in the replay falling behind on the read node\. The instance may eventually restart\. 
@@ -1054,7 +1211,17 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.19\. For mor
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.18\. For more information about the improvements in PostgreSQL 10\.18, see [PostgreSQL release 10\.18](https://www.postgresql.org/docs/12/release-10-18.html)\.
 
-### <a name="AuroraPostgreSQL.Updates.20180305.1018"></a>
+**Topics**
++ [Aurora PostgreSQL release 10\.18\.1](#AuroraPostgreSQL.Updates.20180305.10181)
++ [Aurora PostgreSQL release 10\.18\.0](#AuroraPostgreSQL.Updates.20180305.10180)
+
+### Aurora PostgreSQL release 10\.18\.1<a name="AuroraPostgreSQL.Updates.20180305.10181"></a>
+
+**Security updates**
++ Updated the `PostGIS` extension from version 3\.1\.4 to 3\.1\.5\. This update contains a PostGIS fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
+
+### Aurora PostgreSQL release 10\.18\.0<a name="AuroraPostgreSQL.Updates.20180305.10180"></a>
 
 **Critical stability enhancements**
 + Fixed an issue where, in rare circumstances, a data cache of a read node may be inconsistent following a restart of that node\.
@@ -1078,10 +1245,18 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.18\. For mor
 This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.17\. For more information about the improvements in PostgreSQL 10\.17, see [PostgreSQL release 10\.17](https://www.postgresql.org/docs/11/release-10-17.html)\.
 
 **Topics**
-+ [Aurora PostgreSQL 2\.9\.1](#AuroraPostgreSQL.Updates.20180305.1017)
++ [Aurora PostgreSQL release 2\.9\.2](#AuroraPostgreSQL.Updates.20180305.10171)
++ [Aurora PostgreSQL 2\.9\.1](#AuroraPostgreSQL.Updates.20180305.10170)
 + [Aurora PostgreSQL release 2\.9](#AuroraPostgreSQL.Updates.20180305.290)
 
-### Aurora PostgreSQL 2\.9\.1<a name="AuroraPostgreSQL.Updates.20180305.1017"></a>
+### Aurora PostgreSQL release 2\.9\.2<a name="AuroraPostgreSQL.Updates.20180305.10171"></a>
+
+**Security updates**
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched [postgis](https://git.osgeo.org/gitea/postgis/postgis/pulls/79) to PostGIS 2\.4\.7\. This is a `PostGIS` fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
+
+### Aurora PostgreSQL 2\.9\.1<a name="AuroraPostgreSQL.Updates.20180305.10170"></a>
 
 **Critical stability enhancements**
 + Fixed an issue where, in rare circumstances, a data cache of a read node may be inconsistent following a restart of that node\.
@@ -1132,6 +1307,17 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.17\. For mor
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.16\. For more information about the improvements in PostgreSQL 10\.16, see [PostgreSQL release 10\.16](https://www.postgresql.org/docs/10/release-10-16.html)\.
 
+**Topics**
++ [Aurora PostgreSQL release 2\.8\.1](#AuroraPostgreSQL.Updates.20180305.281)
++ [Aurora PostgreSQL release 2\.8\.0](#AuroraPostgreSQL.Updates.20180305.280)
+
+### Aurora PostgreSQL release 2\.8\.1<a name="AuroraPostgreSQL.Updates.20180305.281"></a>
+
+**Security updates**
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched [postgis](https://git.osgeo.org/gitea/postgis/postgis/pulls/79) to PostGIS 2\.4\.4\. This is a `PostGIS` fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched an input validation error in the `log_fdw` extension function parameters\.
+
 ### Aurora PostgreSQL release 2\.8\.0<a name="AuroraPostgreSQL.Updates.20180305.280"></a>
 
 **High priority stability enhancements**
@@ -1180,10 +1366,18 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.16\. For mor
 This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.14\. For more information about the improvements in PostgreSQL 10\.14, see [ PostgreSQL release 10\.14](https://www.postgresql.org/docs/10/release-10-14.html)\.
 
 **Topics**
++ [Aurora PostgreSQL release 2\.7\.5](#AuroraPostgreSQL.Updates.20180305.275)
 + [Aurora PostgreSQL release 2\.7\.3](#AuroraPostgreSQL.Updates.20180305.273)
 + [Aurora PostgreSQL release 2\.7\.2](#AuroraPostgreSQL.Updates.20180305.272)
 + [Aurora PostgreSQL release 2\.7\.1](#AuroraPostgreSQL.Updates.20180305.271)
 + [Aurora PostgreSQL release 2\.7\.0](#AuroraPostgreSQL.Updates.20180305.270)
+
+### Aurora PostgreSQL release 2\.7\.5<a name="AuroraPostgreSQL.Updates.20180305.275"></a>
+
+**Security updates**
++ Modified the `ip4r` extension to mitigate a security issue during create extension\. The issue was originally disclosed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched [postgis](https://git.osgeo.org/gitea/postgis/postgis/pulls/79) to PostGIS 2\.4\.4\. This is a `PostGIS` fix for the vulnerability addressed in core PostgreSQL by CVE\-2020\-14350\. For more information, see [CVE\-2020\-14350](https://www.postgresql.org/support/security/CVE-2020-14350)\.
++ Backpatched an input validation error in the `log_fdw` extension function parameters\.
 
 ### Aurora PostgreSQL release 2\.7\.3<a name="AuroraPostgreSQL.Updates.20180305.273"></a>
 
@@ -1289,7 +1483,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.14\. For mor
 
 1. Fixed a bug in database activity streams where customers were not notified of the end of an outage\.
 
-## PostgreSQL 10\.13, Aurora PostgreSQL release 2\.6<a name="AuroraPostgreSQL.Updates.20180305.26"></a>
+## PostgreSQL 10\.13, Aurora PostgreSQL release 2\.6 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.26"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.13\. For more information about the improvements in PostgreSQL 10\.13, see [ PostgreSQL release 10\.13](https://www.postgresql.org/docs/10/release-10-13.html)\.
 
@@ -1412,7 +1606,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug where an Aurora PostgreSQL DB cluster with Database Activity Streams enabled might report the beginning of a potential loss window for activity records, but does not report the restoration of connectivity\.
 
-## PostgreSQL 10\.12, Aurora PostgreSQL release 2\.5<a name="AuroraPostgreSQL.Updates.20180305.25"></a>
+## PostgreSQL 10\.12, Aurora PostgreSQL release 2\.5 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.25"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.12\. For more information about the improvements in PostgreSQL 10\.12, see [ PostgreSQL release 10\.12](https://www.postgresql.org/docs/10/release-10-12.html)\.
 
@@ -1585,7 +1779,7 @@ None\.
 1. Changed the following extensions:
    + Updated `orafce` to version 3\.8
 
-## PostgreSQL 10\.11, Aurora PostgreSQL release 2\.4<a name="AuroraPostgreSQL.Updates.20180305.24"></a>
+## PostgreSQL 10\.11, Aurora PostgreSQL release 2\.4 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.24"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 10\.11\. For more information about the improvements in PostgreSQL 10\.11, see [PostgreSQL release 10\.11](https://www.postgresql.org/docs/10/release-10-11.html)\.
 
@@ -1762,7 +1956,7 @@ You can find the following new features and improvements in this engine version\
 
 For information about extensions and modules, see [Extensions supported for Aurora PostgreSQL 10\.x](AuroraPostgreSQL.Extensions.md#AuroraPostgreSQL.Extensions.10)\.
 
-## PostgreSQL 10\.7, Aurora PostgreSQL release 2\.3 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.23"></a>
+## PostgreSQL 10\.7, Aurora PostgreSQL release 2\.3 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.23"></a>
 
 **Note**  
 The PostgreSQL engine version 10\.7 with the Aurora PostgreSQL release 2\.3 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -1853,7 +2047,7 @@ You can find the following improvements in this release\.
 
 1. Improved the cache replacement strategy used by table scans to minimize thrashing of the buffer cache\.
 
-## PostgreSQL 10\.6, Aurora PostgreSQL release 2\.2 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.22"></a>
+## PostgreSQL 10\.6, Aurora PostgreSQL release 2\.2 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.22"></a>
 
 **Note**  
 The PostgreSQL engine version 10\.6 with the Aurora PostgreSQL release 2\.2 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -1886,7 +2080,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug which could cause a transaction with a large number of subtransactions to fail\.
 
-1. Merged a patch from community PostgreSQL which addresses potential failures when using GIN indexes\. For more information see [ https://git\.postgresql\.org/gitweb/?p=postgresql\.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18)\.
+1. Merged a patch from community PostgreSQL which addresses potential failures when using GIN indexes\. For more information, see [ https://git\.postgresql\.org/gitweb/?p=postgresql\.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18)\.
 
 1. Fixed a bug which could cause a snapshot import from RDS for PostgreSQL to fail\.
 
@@ -1898,7 +2092,7 @@ You can find the following improvements in this release\.
 
 1. Added the restricted password management feature\. Restricted password management enables you to restrict who can manage user passwords and password expiration changes by using the parameter `rds.restrict_password_commands` and the role `rds_password`\. For more information, see [Restricting password management](AuroraPostgreSQL.Security.md#RestrictPasswordMgmt)\. 
 
-## PostgreSQL 10\.5, Aurora PostgreSQL release 2\.1 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.21"></a>
+## PostgreSQL 10\.5, Aurora PostgreSQL release 2\.1 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.21"></a>
 
 **Note**  
 The PostgreSQL engine version 10\.5 with the Aurora PostgreSQL release 2\.1 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -1929,7 +2123,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug which could cause a transaction with a large number of subtransactions to fail\.
 
-1. Merged a patch from community PostgreSQL which addresses potential failures when using GIN indexes\. For more information see [ https://git\.postgresql\.org/gitweb/?p=postgresql\.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18)\.
+1. Merged a patch from community PostgreSQL which addresses potential failures when using GIN indexes\. For more information, see [ https://git\.postgresql\.org/gitweb/?p=postgresql\.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18)\.
 
 1. Fixed a bug which could cause a snapshot import from RDS for PostgreSQL to fail\.
 
@@ -1985,7 +2179,7 @@ You can find the following improvements in this release\.
 
 1. The `pageinspect` extension is not supported in Aurora PostgreSQL\.
 
-## PostgreSQL 10\.4, Aurora PostgreSQL release 2\.0 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.20"></a>
+## PostgreSQL 10\.4, Aurora PostgreSQL release 2\.0 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.20"></a>
 
 **Note**  
 The PostgreSQL engine version 10\.4 with the Aurora PostgreSQL release 2\.0 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -2016,7 +2210,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug which could cause a transaction with a large number of subtransactions to fail\.
 
-1. Merged a patch from community PostgreSQL which addresses potential failures when using GIN indexes\. For more information see [ https://git\.postgresql\.org/gitweb/?p=postgresql\.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18)\.
+1. Merged a patch from community PostgreSQL which addresses potential failures when using GIN indexes\. For more information, see [ https://git\.postgresql\.org/gitweb/?p=postgresql\.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18)\.
 
 1. Fixed a bug which could cause a snapshot import from RDS for PostgreSQL to fail\.
 
@@ -2028,7 +2222,7 @@ You can find the following improvements in this release\.
 
 **Improvements**
 
-1. This release contains all fixes, features, and improvements present in [PostgreSQL 9\.6\.9, Aurora PostgreSQL release 1\.3 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.13)\.
+1. This release contains all fixes, features, and improvements present in [PostgreSQL 9\.6\.9, Aurora PostgreSQL release 1\.3 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.13)\.
 
 1. The temporary file size limitation is user\-configurable\. You require the **rds\_superuser** role to modify the `temp_file_limit` parameter\.
 
@@ -2044,7 +2238,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug in which read nodes may crash following a specific type of free space change from the write node\.
 
-## PostgreSQL 9\.6\.22, Aurora PostgreSQL release 1\.11 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.111"></a>
+## PostgreSQL 9\.6\.22, Aurora PostgreSQL release 1\.11 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.111"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.22 and Aurora PostgreSQL release 1\.10 are no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -2091,7 +2285,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.22\. For m
 
 1.  Updated the `Orafce` extension to version 3\.16\. 
 
-## PostgreSQL 9\.6\.21, Aurora PostgreSQL release 1\.10 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.110"></a>
+## PostgreSQL 9\.6\.21, Aurora PostgreSQL release 1\.10 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.110"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.21 and Aurora PostgreSQL release 1\.10 are no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -2125,7 +2319,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.21\. For m
 
 1. Added btree page checks to detect tuple metadata inconsistency\.
 
-## PostgreSQL 9\.6\.19, Aurora PostgreSQL release 1\.9 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.19"></a>
+## PostgreSQL 9\.6\.19, Aurora PostgreSQL release 1\.9 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.19"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.19 and Aurora PostgreSQL release 1\.9 are no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -2184,7 +2378,7 @@ This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.19\. For m
 
 1. Fixed a bug related to replication when Aurora PostgreSQL is acting as a physical replica of an RDS PostgreSQL instance that uses `GiST` indexes\. In rare cases, this bug caused a brief period of unavailability after promoting the Aurora cluster\.
 
-## PostgreSQL 9\.6\.18, Aurora PostgreSQL release 1\.8 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.18"></a>
+## PostgreSQL 9\.6\.18, Aurora PostgreSQL release 1\.8 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.18"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.18 and Aurora PostgreSQL release 1\.8 are no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -2246,7 +2440,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug where the database might be unavailable briefly due to error handling in database storage growth\.
 
-## PostgreSQL 9\.6\.17, Aurora PostgreSQL release 1\.7 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.17"></a>
+## PostgreSQL 9\.6\.17, Aurora PostgreSQL release 1\.7 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.17"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.17\. For more information about the improvements in PostgreSQL 9\.6\.17, see [ PostgreSQL release 9\.6\.17](https://www.postgresql.org/docs/9.6/release-9-6-17.html)\.
 
@@ -2358,7 +2552,7 @@ None\.
 1. Changed the following extensions:
    + Updated `orafce` to version 3\.8
 
-## PostgreSQL 9\.6\.16, Aurora PostgreSQL release 1\.6 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.16"></a>
+## PostgreSQL 9\.6\.16, Aurora PostgreSQL release 1\.6 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.16"></a>
 
 This version of Aurora PostgreSQL is compatible with PostgreSQL 9\.6\.16\. For more information about the improvements in release 9\.6\.16, see [PostgreSQL release 9\.6\.16](https://www.postgresql.org/docs/9.6/release-9-6-16.html)\.
 
@@ -2495,7 +2689,7 @@ You can find the following new features and improvements in this engine version\
 1. Changed the following extensions:
    + Updated `pg_hint_plan` to version 1\.2\.5\.
 
-## PostgreSQL 9\.6\.12, Aurora PostgreSQL release 1\.5 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.15"></a>
+## PostgreSQL 9\.6\.12, Aurora PostgreSQL release 1\.5 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.15"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.12 with the Aurora PostgreSQL release 1\.5 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -2570,7 +2764,7 @@ You can find the following improvements in this release\.
 
 1. Improved the cache replacement strategy used by table scans to minimize thrashing of the buffer cache\.
 
-## PostgreSQL 9\.6\.11, Aurora PostgreSQL release 1\.4 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.14"></a>
+## PostgreSQL 9\.6\.11, Aurora PostgreSQL release 1\.4 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.14"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.11 with the Aurora PostgreSQL release 1\.4 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -2587,7 +2781,7 @@ You can find the following improvements in this release\.
 
 **Improvements**
 
-1. This release contains all fixes, features, and improvements present in [PostgreSQL 9\.6\.9, Aurora PostgreSQL release 1\.3 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.13)\.
+1. This release contains all fixes, features, and improvements present in [PostgreSQL 9\.6\.9, Aurora PostgreSQL release 1\.3 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.13)\.
 
 1. Network traffic between the writer and reader nodes is now compressed to reduce network utilization\. This reduces the chance of read node unavailability due to network saturation\.
 
@@ -2603,7 +2797,7 @@ You can find the following improvements in this release\.
 
    The `apg_plan_mgmt` extension is used with query plan management\. For more about how to install, upgrade, and use the `apg_plan_mgmt` extension, see [Managing query execution plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)\.
 
-## PostgreSQL 9\.6\.9, Aurora PostgreSQL release 1\.3 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.13"></a>
+## PostgreSQL 9\.6\.9, Aurora PostgreSQL release 1\.3 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.13"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.9 with the Aurora PostgreSQL release 1\.3 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -2638,7 +2832,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug which could cause a transaction with a large number of subtransactions to fail\.
 
-1. Merged a patch from community PostgreSQL which addresses potential failures when using GIN indexes\. For more information see [ https://git\.postgresql\.org/gitweb/?p=postgresql\.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18)\.
+1. Merged a patch from community PostgreSQL which addresses potential failures when using GIN indexes\. For more information, see [ https://git\.postgresql\.org/gitweb/?p=postgresql\.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18)\.
 
 1. Fixed a bug which could cause a snapshot import from RDS for PostgreSQL to fail\.
 
@@ -2648,7 +2842,7 @@ You can find the following improvements in this release\.
 
 **Improvements**
 
-1. This release contains all fixes, features, and improvements present in [PostgreSQL 9\.6\.8, Aurora PostgreSQL release 1\.2 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.12)\.
+1. This release contains all fixes, features, and improvements present in [PostgreSQL 9\.6\.8, Aurora PostgreSQL release 1\.2 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.12)\.
 
 1. Updated the GDAL library, which is used by the `PostGIS` extension\. 
 
@@ -2688,7 +2882,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug in which read nodes could crash following a specific type of free space change from the write node\.
 
-## PostgreSQL 9\.6\.8, Aurora PostgreSQL release 1\.2 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.12"></a>
+## PostgreSQL 9\.6\.8, Aurora PostgreSQL release 1\.2 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.12"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.8 with the Aurora PostgreSQL release 1\.2 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -2723,7 +2917,7 @@ You can find the following improvements in this release\.
 
 1. Fixed a bug which could cause a transaction with a large number of subtransactions to fail\.
 
-1. Merged a patch from community PostgreSQL which addresses potential failures when using GIN indexes\. For more information see [ https://git\.postgresql\.org/gitweb/?p=postgresql\.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18)\.
+1. Merged a patch from community PostgreSQL which addresses potential failures when using GIN indexes\. For more information, see [ https://git\.postgresql\.org/gitweb/?p=postgresql\.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=f9e66f2fbbb49a493045c8d8086a9b15d95b8f18)\.
 
 1. Fixed a bug which could cause a snapshot import from RDS for PostgreSQL to fail\.
 
@@ -2737,7 +2931,7 @@ You can find the following improvements in this release\.
 
 **Improvements**
 
-1. This release contains all fixes, features, and improvements present in [PostgreSQL 9\.6\.6 Aurora PostgreSQL release 1\.1 \(unsupported\)](#AuroraPostgreSQL.Updates.20180305.11)\.
+1. This release contains all fixes, features, and improvements present in [PostgreSQL 9\.6\.6 Aurora PostgreSQL release 1\.1 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.11)\.
 
 1. Updates the following PostgreSQL extensions:
    + `pg_hint_plan` updated to version 1\.2\.2
@@ -2777,7 +2971,7 @@ You can find the following improvements in this release\.
 
 1. Fixes a bug in which a failure while extending a relation can cause Aurora to crash while scanning the partially extended relation\.
 
-## PostgreSQL 9\.6\.6 Aurora PostgreSQL release 1\.1 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.11"></a>
+## PostgreSQL 9\.6\.6 Aurora PostgreSQL release 1\.1 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.11"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.6 with the Aurora PostgreSQL release 1\.1 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -2843,7 +3037,7 @@ You can find the following improvements in this engine update:
 
 1. Multiple improvements to the reliability of importing snapshots from RDS PostgreSQL to Aurora PostgreSQL\.
 
-## PostgreSQL 9\.6\.3, Aurora PostgreSQL release 1\.0 \(unsupported\)<a name="AuroraPostgreSQL.Updates.20180305.10"></a>
+## PostgreSQL 9\.6\.3, Aurora PostgreSQL release 1\.0 \(deprecated\)<a name="AuroraPostgreSQL.Updates.20180305.10"></a>
 
 **Note**  
 The PostgreSQL engine version 9\.6\.3 with the Aurora PostgreSQL release 1\.0 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.

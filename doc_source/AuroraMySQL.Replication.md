@@ -149,7 +149,7 @@ alter table <schema>.<table_name> engine=innodb, algorithm=copy;
 
 |  Database engine  |  Instructions  | 
 | --- | --- | 
-|   Aurora   |   **To turn on binary logging on an Aurora MySQL DB cluster**   Set the `binlog_format` parameter to `ROW`, `STATEMENT`, or `MIXED`\. `MIXED` is recommended unless you have a need for a specific binlog format\. The `binlog_format` parameter is a cluster\-level parameter that is in the default cluster parameter group\. If you are changing the `binlog_format` parameter from `OFF` to another value, then you need to reboot your Aurora DB cluster for the change to take effect\.   For more information, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithParamGroups.md#Aurora.Managing.ParameterGroups) and [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.   | 
+|   Aurora   |   **To turn on binary logging on an Aurora MySQL DB cluster**   Set the `binlog_format` parameter to `ROW`, `STATEMENT`, or `MIXED`\. `MIXED` is recommended unless you have a need for a specific binlog format\. The `binlog_format` parameter is a cluster\-level parameter that is in the default cluster parameter group\. If you are changing the `binlog_format` parameter from `OFF` to another value, then you need to reboot your Aurora DB cluster for the change to take effect\.   For more information, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithDBClusterParamGroups.md#Aurora.Managing.ParameterGroups) and [Working with parameter groups](USER_WorkingWithParamGroups.md)\.   | 
 |   RDS for MySQL   |   **To turn on binary logging on an Amazon RDS DB instance**   You can't turn on binary logging directly for an Amazon RDS DB instance, but you can turn it on by doing one of the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  | 
 |   MySQL \(external\)   |   **To set up encrypted replication**   To replicate data securely with Aurora MySQL version 5\.6, you can use encrypted replication\.   Currently, encrypted replication with an external MySQL database is only supported for Aurora MySQL version 5\.6\.    If you don't need to use encrypted replication, you can skip these steps\.    The following are prerequisites for using encrypted replication:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  During encrypted replication, the Aurora MySQL DB cluster acts a client to the MySQL database server\. The certificates and keys for the Aurora MySQL client are in files in \.pem format\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  **To turn on binary logging on an external MySQL database**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  | 
 
@@ -524,7 +524,7 @@ Suppose that you have a situation where `aurora_binlog_replication_max_yield_sec
    +  `aurora_binlog_use_large_read_buffer`: turn on with a value of `ON` or 1\. 
    +  `aurora_binlog_replication_max_yield_seconds`: specify a value greater than 0\. 
 
-1.  Associate the DB cluster parameter group with the Aurora MySQL cluster that works as the binlog source\. To do so, follow the procedures in [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
+1.  Associate the DB cluster parameter group with the Aurora MySQL cluster that works as the binlog source\. To do so, follow the procedures in [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 1.  Confirm that the parameter change takes effect\. To do so, run the following query on the binlog source instance\. 
 
@@ -548,7 +548,7 @@ Suppose that you have a situation where `aurora_binlog_replication_max_yield_sec
 
 **To turn off the max\-yield optimization for an Aurora MySQL cluster**
 
-1.  Make sure that the DB cluster parameter group associated with the Aurora MySQL cluster has `aurora_binlog_replication_max_yield_seconds` set to 0\. For more information about setting configuration parameters using parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
+1.  Make sure that the DB cluster parameter group associated with the Aurora MySQL cluster has `aurora_binlog_replication_max_yield_seconds` set to 0\. For more information about setting configuration parameters using parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 1.  Confirm that the parameter change takes effect\. To do so, run the following query on the binlog source instance\. 
 
@@ -574,7 +574,7 @@ Suppose that you have a situation where `aurora_binlog_replication_max_yield_sec
 
 1.  Reset the `aurora_binlog_use_large_read_buffer` to `OFF` or 0\. 
 
-    Make sure that the DB cluster parameter group associated with the Aurora MySQL cluster has `aurora_binlog_use_large_read_buffer` set to 0\. For more information about setting configuration parameters using parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\. 
+    Make sure that the DB cluster parameter group associated with the Aurora MySQL cluster has `aurora_binlog_use_large_read_buffer` set to 0\. For more information about setting configuration parameters using parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 1.  On the binlog source instance, run the following query\. 
 

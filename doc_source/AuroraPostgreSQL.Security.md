@@ -1,10 +1,10 @@
 # Security with Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Security"></a>
 
 Security for Amazon Aurora PostgreSQL is managed at three levels:
-+ To control who can perform Amazon RDS management actions on Aurora PostgreSQL DB clusters and DB instances, you use AWS Identity and Access Management \(IAM\)\. When you connect to AWS using IAM credentials, your AWS account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Identity and access management in Amazon Aurora](UsingWithRDS.IAM.md)\.
++ To control who can perform Amazon RDS management actions on Aurora PostgreSQL DB clusters and DB instances, use AWS Identity and Access Management \(IAM\)\. When you connect to AWS using IAM credentials, your AWS account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Identity and access management in Amazon Aurora](UsingWithRDS.IAM.md)\.
 
-  If you are using IAM to access the Amazon RDS console, you must first sign on to the AWS Management Console with your IAM user credentials\. Then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-+ Aurora DB clusters must be created in an Amazon Virtual Private Cloud \(VPC\)\. To control which devices and Amazon EC2 instances can open connections to the endpoint and port of the DB instance for Aurora DB clusters in a VPC, you use a VPC security group\. These endpoint and port connections can be made using Secure Sockets Layer \(SSL\) and Transport Layer Security \(TLS\)\. In addition, firewall rules at your company can control whether devices running at your company can open connections to a DB instance\. For more information on VPCs, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
+  If you are using IAM to access the Amazon RDS console, make sure to first sign in to the AWS Management Console with your IAM user credentials\. Then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
++ Make sure to create Aurora DB clusters in a virtual public cloud \(VPC\) based on the Amazon VPC service\. To control which devices and Amazon EC2 instances can open connections to the endpoint and port of the DB instance for Aurora DB clusters in a VPC, use a VPC security group\. You can make these endpoint and port connections by using Secure Sockets Layer \(SSL\)\. In addition, firewall rules at your company can control whether devices running at your company can open connections to a DB instance\. For more information on VPCs, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
 
   The supported VPC tenancy depends on the DB instance class used by your Aurora PostgreSQL DB clusters\. With `default` VPC tenancy, the VPC runs on shared hardware\. With `dedicated` VPC tenancy, the VPC runs on a dedicated hardware instance\. The burstable performance DB instance classes support default VPC tenancy only\. The burstable performance DB instance classes include the db\.t3 and db\.t4g DB instance classes\. All other Aurora PostgreSQL DB instance classes support both default and dedicated VPC tenancy\.
 
@@ -65,6 +65,7 @@ For general information about SSL/TLS support and PostgreSQL databases, see [SSL
 **Topics**
 + [Requiring an SSL/TLS connection to an Aurora PostgreSQL DB cluster](#AuroraPostgreSQL.Security.SSL.Requiring)
 + [Determining the SSL/TLS connection status](#AuroraPostgreSQL.Security.SSL.Status)
++ [Configuring cipher suites for connections to Aurora PostgreSQL DB clusters](#AuroraPostgreSQL.Security.SSL.ConfiguringCipherSuites)
 
 SSL/TLS support is available in all AWS Regions for Aurora PostgreSQL\. Amazon RDS creates an SSL/TLS certificate for your Aurora PostgreSQL DB cluster when the DB cluster is created\. If you enable SSL/TLS certificate verification, then the SSL/TLS certificate includes the DB cluster endpoint as the Common Name \(CN\) for the SSL/TLS certificate to guard against spoofing attacks\. 
 
@@ -95,7 +96,7 @@ $ psql -h testpg.cdhmuqifdpib.us-east-1.rds.amazonaws.com -p 5432 \
 
 You can require that connections to your Aurora PostgreSQL DB cluster use SSL/TLS by using the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to 0 \(off\)\. You can set the `rds.force_ssl` parameter to 1 \(on\) to require SSL/TLS for connections to your DB cluster\. Updating the `rds.force_ssl` parameter also sets the PostgreSQL `ssl` parameter to 1 \(on\) and modifies your DB cluster's `pg_hba.conf` file to support the new SSL/TLS configuration\.
 
-You can set the `rds.force_ssl` parameter value by updating the DB cluster parameter group for your DB cluster\. If the DB cluster parameter group isn't the default one, and the `ssl` parameter is already set to 1 when you set `rds.force_ssl` to 1, you don't need to reboot your DB cluster\. Otherwise, you must reboot your DB cluster for the change to take effect\. For more information on parameter groups, see [Working with DB parameter groups and DB cluster parameter groups](USER_WorkingWithParamGroups.md)\.
+You can set the `rds.force_ssl` parameter value by updating the DB cluster parameter group for your DB cluster\. If the DB cluster parameter group isn't the default one, and the `ssl` parameter is already set to 1 when you set `rds.force_ssl` to 1, you don't need to reboot your DB cluster\. Otherwise, you must reboot your DB cluster for the change to take effect\. For more information on parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 When the `rds.force_ssl` parameter is set to 1 for a DB cluster, you see output similar to the following when you connect, indicating that SSL/TLS is now required:
 
@@ -156,3 +157,49 @@ $
 ```
 
 For information about the `sslmode` option, see [Database connection control functions](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE) in the PostgreSQL documentation\.
+
+### Configuring cipher suites for connections to Aurora PostgreSQL DB clusters<a name="AuroraPostgreSQL.Security.SSL.ConfiguringCipherSuites"></a>
+
+By using configurable cipher suites, you can have more control over the security of your database connections\. You can specify a list of cipher suites that you want to allow to secure client SSL/TLS connections to your database\. With configurable cipher suites, you can control the connection encryption that your database server accepts\. Doing this helps prevent the use of insecure or deprecated ciphers\.
+
+Configurable cipher suites is supported in Aurora PostgreSQL versions 11\.8 and higher\.
+
+To specify the list of permissible ciphers for encrypting connections, modify the `ssl_ciphers` cluster parameter\. Set the `ssl_ciphers` parameter in a cluster parameter group using the AWS Management Console, the AWS CLI, or the RDS API\. To set cluster parameters, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
+
+Set the `ssl_ciphers` parameter to a string of comma\-separated cipher values\. The valid ciphers include the following:
++ `DHE-RSA-AES128-SHA`
++ `DHE-RSA-AES128-SHA256`
++ `DHE-RSA-AES128-GCM-SHA256`
++ `DHE-RSA-AES256-SHA`
++ `DHE-RSA-AES256-SHA256`
++ `DHE-RSA-AES256-GCM-SHA384`
++ `ECDHE-RSA-AES128-SHA`
++ `ECDHE-RSA-AES128-SHA256`
++ `ECDHE-RSA-AES128-GCM-SHA256`
++ `ECDHE-RSA-AES256-SHA`
++ `ECDHE-RSA-AES256-SHA384`
++ `ECDHE-RSA-AES256-GCM-SHA384`
+
+You can also use the [describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) CLI command to determine which cipher suites are currently supported for a specific parameter group family\. The following example shows how to get the allowed values for the `ssl_cipher` cluster parameter for Aurora PostgreSQL 11\.
+
+```
+aws rds describe-engine-default-cluster-parameters --db-parameter-group-family aurora-postgresql11
+                
+    ...some output truncated...
+	{
+		"ParameterName": "ssl_ciphers",
+		"Description": "Sets the list of allowed TLS ciphers to be used on secure connections.",
+		"Source": "engine-default",
+		"ApplyType": "dynamic",
+		"DataType": "list",
+		"AllowedValues": "ECDHE-RSA-AES256-GCM-SHA384,ECDHE-RSA-AES256-SHA384,AES256-SHA,AES128-SHA,DES-CBC3-SHA,ADH-DES-CBC3-SHA,EDH-RSA-DES-CBC3-SHA,EDH-DSS-DES-CBC3-SHA,ADH-AES256-SHA,DHE-RSA-AES256-SHA,DHE-DSS-AES256-SHA,ADH-AES128-SHA,DHE-RSA-AES128-SHA,DHE-DSS-AES128-SHA,HIGH",
+		"IsModifiable": true,
+		"MinimumEngineVersion": "11.8",
+		"SupportedEngineModes": [
+			"provisioned"
+		]
+	},
+    ...some output truncated...
+```
+
+The `ssl_ciphers` parameter has no default string of cipher suites\. For more information about ciphers, see the [ssl\_ciphers](https://www.postgresql.org/docs/current/runtime-config-connection.html#GUC-SSL-CIPHERS) variable in the PostgreSQL documentation\. For more information about cipher suite formats, see the [openssl\-ciphers list format](https://www.openssl.org/docs/manmaster/man1/openssl-ciphers.html#CIPHER-LIST-FORMAT) and [openssl\-ciphers string format](https://www.openssl.org/docs/manmaster/man1/openssl-ciphers.html#CIPHER-STRINGS) documentation on the OpenSSL website\.

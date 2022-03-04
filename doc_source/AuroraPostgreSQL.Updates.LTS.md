@@ -15,7 +15,7 @@ To remain on an LTS minor version for the duration of its lifecycle, make sure t
 +  The database version for your Aurora PostgreSQL cluster has all the DB engine features and bug fixes that your application needs\. 
 
  The current LTS releases for Aurora PostgreSQL are as follows: 
-+ PostgreSQL 12\.9 \(Aurora PostgreSQL version 12\.9\.1\)\. It was released on February 25, 2022\. For more information, see [ Aurora PostgreSQL release 12\.9](AuroraPostgreSQL.Updates.20180305.md#AuroraPostgreSQL.Updates.20180305.129)\. 
++ PostgreSQL 12\.9 \(Aurora PostgreSQL version 12\.9\.1\)\. It was released on February 25, 2022\. For more information, see [PostgreSQL 12\.9](AuroraPostgreSQL.Updates.20180305.md#AuroraPostgreSQL.Updates.20180305.129)\. 
 + PostgreSQL 11\.9 \(Aurora PostgreSQL release 3\.4\. It was released on December 11, 2020\. For more information about this version, see [PostgreSQL 11\.9, Aurora PostgreSQL release 3\.4 ](AuroraPostgreSQL.Updates.20180305.md#AuroraPostgreSQL.Updates.20180305.34)
 
 For information about how to identify Aurora and database engine versions, see [Identifying versions of Amazon Aurora PostgreSQL](AuroraPostgreSQL.Updates.Versions.md)\.

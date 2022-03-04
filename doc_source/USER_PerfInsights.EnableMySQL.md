@@ -69,8 +69,8 @@ The following table shows the difference in settings when Performance Insights i
 
 1. Select **Reset parameters**\.
 
-1. Restart the DB instance\.
+1. Reboot the DB instance\.
 **Important**  
-Whenever you enable or disable the Performance Schema, you must restart the DB instance\.
+Whenever you enable or disable the Performance Schema, you must reboot the DB instance\.
 
-For more information about modifying instance parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. For more information about the dashboard, see [Analyzing metrics with the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.md)\. For more information about the MySQL performance schema, see [MySQL 8\.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html)\.
+For more information about modifying instance parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. For more information about the dashboard, see [Analyzing metrics with the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.md)\. For more information about the MySQL performance schema, see [MySQL 8\.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html)\.

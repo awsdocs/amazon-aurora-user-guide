@@ -1,10 +1,12 @@
-# Using the oracle\_fdw extension to access foreign data in Aurora PostgreSQL<a name="Appendix.PostgreSQL.CommonDBATasks"></a>
+# Working with extensions and Amazon Aurora PostgreSQL<a name="Appendix.PostgreSQL.CommonDBATasks"></a>
 
-For easy and efficient access to Oracle databases for Aurora PostgreSQL, you can use the PostgreSQL oracle\_fdw extension, which provides a foreign data wrapper\. For a complete description of this extension, see the [oracle\_fdw](https://github.com/laurenz/oracle_fdw) documentation\.  
+## Using the oracle\_fdw extension to access foreign data in Aurora PostgreSQL<a name="Appendix.PostgreSQL.CommonDBATasks.oracle_fdw"></a>
+
+For easy and efficient access to Oracle databases for Aurora PostgreSQL, you can use the PostgreSQL oracle\_fdw extension, which provides a foreign data wrapper\. For a complete description of this extension, see the [oracle\_fdw](https://github.com/laurenz/oracle_fdw) documentation\. 
 
 The oracle\_fdw extension is supported on Amazon RDS for PostgreSQL versions 12\.7, 13\.3, and higher\.
 
-## Turning on the oracle\_fdw extension<a name="postgresql-oracle-fdw.enabling"></a>
+### Turning on the oracle\_fdw extension<a name="postgresql-oracle-fdw.enabling"></a>
 
 To use the oracle\_fdw extension, perform the following procedure\.
 
@@ -15,7 +17,7 @@ To use the oracle\_fdw extension, perform the following procedure\.
   CREATE EXTENSION oracle_fdw;
   ```
 
-## Example using a foreign server linked to an RDS for Oracle database<a name="postgresql-oracle-fdw.example"></a>
+### Example using a foreign server linked to an RDS for Oracle database<a name="postgresql-oracle-fdw.example"></a>
 
 The following example demonstrates using a foreign server linked to an RDS for Oracle database\.  
 
@@ -71,11 +73,11 @@ ERROR: connection for foreign table "mytab" cannot be established
 DETAIL: ORA-12170: TNS:Connect timeout occurred
 ```
 
-## Working with encryption in transit<a name="postgresql-oracle-fdw.encryption"></a>
+### Working with encryption in transit<a name="postgresql-oracle-fdw.encryption"></a>
 
 PostgreSQL\-to\-Oracle encryption in transit is based on a combination of client and server configuration parameters\. For an example using Oracle 21c, see [About the Values for Negotiating Encryption and Integrity](https://docs.oracle.com/en/database/oracle/oracle-database/21/dbseg/configuring-network-data-encryption-and-integrity.html#GUID-3A2AF4AA-AE3E-446B-8F64-31C48F27A2B5) in the Oracle documentation\. The client used for oracle\_fdw on RDS is configured with `ACCEPTED`, meaning that the encryption depends on the Oracle database server configuration\.
 
-## pg\_user\_mapping and pg\_user\_mappings permissions<a name="postgresql-oracle-fdw.permissions"></a>
+### pg\_user\_mapping and pg\_user\_mappings permissions<a name="postgresql-oracle-fdw.permissions"></a>
 
 In the following table, you can find an illustration of user mapping permissions using the example roles\. The `rdssu1` and `rdssu2` users have the `rds_superuser` role, and the `user1` user doesn't\.
 

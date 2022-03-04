@@ -1,8 +1,8 @@
 # Aurora DB instance classes<a name="Concepts.DBInstanceClass"></a>
 
-The DB instance class determines the computation and memory capacity of an Aurora DB instance\. The DB instance class you need depends on your processing power and memory requirements\. 
+The DB instance class determines the computation and memory capacity of an Aurora DB instance\. A DB instance class consists of both the DB instance type and the size\. The DB instance class you need depends on your processing power and memory requirements\. 
 
-For more information about instance class pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\. 
+For more information about instance class pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\.
 
 **Topics**
 + [DB instance class types](#Concepts.DBInstanceClass.Types)
@@ -14,13 +14,13 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 
 Amazon Aurora supports two types of instance classes: memory optimized and burstable performance\. For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
 
-The following are the memory optimized DB instance classes available:
+The following are the memory optimized DB instance types available:
 + **db\.x2g** – Instance classes optimized for memory\-intensive applications and powered by AWS Graviton2 processors\. These offer low cost per GiB of memory\.
 + **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
 + **db\.r5** – Latest generation instance classes optimized for memory\-intensive applications\. These offer improved networking performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r3** – Instance classes that provide memory optimization\.
 
-The following are the burstable performance DB instance classes available:
+The following are the burstable performance DB instance types available:
 + **db\.t4g** – Newest\-generation burstable instance classes powered by Arm\-based AWS Graviton2 processors\. These deliver better price performance than previous\-generation burstable performance DB instance classes for a broad set of burstable workloads\. T4g instances are configured for Unlimited mode, which means that they can burst beyond the baseline over a 24\-hour window for an additional charge\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\.
 + **db\.t3** – Next generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. T3 instances are configured for Unlimited mode\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\. 
 + **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. T2 instances can be configured for Unlimited mode\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\.
