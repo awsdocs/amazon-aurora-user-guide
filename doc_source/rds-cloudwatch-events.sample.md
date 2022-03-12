@@ -8,9 +8,9 @@ Amazon RDS emits events on a best effort basis\. We recommend that you avoid wri
 Amazon RDS records events that relate to your DB clusters, DB instances, DB cluster snapshots, and DB parameter groups\. This information includes the following: 
 + The date and time of the event
 + The source name and source type of the event
-+ A message associated with the event\.
++ A message associated with the event
 
-The following examples illustrate different types of Aurora events\.
+The following examples illustrate different types of Aurora events in JSON format\. For a tutorial that shows you how to capture and view events in JSON format, see [Tutorial: log the state of an instance using EventBridge](rds-cloud-watch-events.md#log-rds-instance-state)\.
 
 **Topics**
 + [Example of a DB cluster event](#rds-cloudwatch-events.db-clusters)

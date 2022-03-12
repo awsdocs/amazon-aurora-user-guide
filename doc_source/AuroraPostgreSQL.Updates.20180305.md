@@ -17,7 +17,7 @@ aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[].[Eng
 For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability.PostgreSQL)\.
 
 **Topics**
-+ [PostgreSQL 13\.5](#AuroraPostgreSQL.Updates.20180305.135X)
++ [PostgreSQL 13\.5, 2022\-02\-25](#AuroraPostgreSQL.Updates.20180305.135X)
 + [PostgreSQL 13\.4](#AuroraPostgreSQL.Updates.20180305.134X)
 + [PostgreSQL 13\.3](#AuroraPostgreSQL.Updates.20180305.133X)
 + [PostgreSQL 12\.9](#AuroraPostgreSQL.Updates.20180305.129)
@@ -59,7 +59,7 @@ For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.
 + [PostgreSQL 9\.6\.6 Aurora PostgreSQL release 1\.1 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.11)
 + [PostgreSQL 9\.6\.3, Aurora PostgreSQL release 1\.0 \(deprecated\)](#AuroraPostgreSQL.Updates.20180305.10)
 
-## PostgreSQL 13\.5<a name="AuroraPostgreSQL.Updates.20180305.135X"></a>
+## PostgreSQL 13\.5, 2022\-02\-25<a name="AuroraPostgreSQL.Updates.20180305.135X"></a>
 
 This release of Aurora PostgreSQL is compatible with PostgreSQL 13\.5\. For more information about the improvements in PostgreSQL 13\.5, see [PostgreSQL release 13\.5](https://www.postgresql.org/docs/13/release-13-5.html)\.
 

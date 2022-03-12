@@ -6,7 +6,7 @@ When you restore a DB cluster to a point in time, you can choose the default vir
 
 Restored DB clusters are automatically associated with the default DB cluster and DB parameter groups\. However, you can apply custom parameter groups by specifying them during a restore\.
 
-Amazon RDS uploads transaction logs for DB clusters to Amazon S3 continuously\. To see the latest restorable time for a DB cluster, use the AWS CLI [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command and look at the value returned in the `LatestRestorableTime` field for the DB cluster\.
+Amazon Aurora uploads log records for DB clusters to Amazon S3 continuously\. To see the latest restorable time for a DB cluster, use the AWS CLI [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command and look at the value returned in the `LatestRestorableTime` field for the DB cluster\.
 
 You can restore to any point in time within your backup retention period\. To see the earliest restorable time for a DB cluster, use the AWS CLI [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command and look at the value returned in the `EarliestRestorableTime` field for the DB cluster\.
 

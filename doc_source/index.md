@@ -469,6 +469,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Identity and access management in Amazon Aurora](UsingWithRDS.IAM.md)
       + [How Amazon Aurora works with IAM](security_iam_service-with-iam.md)
       + [Amazon Aurora identity-based policy examples](security_iam_id-based-policy-examples.md)
+      + [Amazon RDS updates to AWS managed policies](rds-manpol-updates.md)
       + [Preventing cross-service confused deputy problems](cross-service-confused-deputy-prevention.md)
       + [IAM database authentication](UsingWithRDS.IAMDBAuth.md)
          + [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)

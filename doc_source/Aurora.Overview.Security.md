@@ -9,11 +9,12 @@
   +  You can take the same approach as with a stand\-alone DB instance of MySQL or PostgreSQL\. 
 
      Techniques for authenticating logins and permissions for stand\-alone DB instances of MySQL or PostgreSQL, such as using SQL commands or modifying database schema tables, also work with Aurora\. For more information, see [Security with Amazon Aurora MySQL](AuroraMySQL.Security.md) or [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md)\. 
+  +  You can use IAM database authentication\. 
 
-    
-  +  You can also use IAM database authentication for Aurora MySQL\. 
+     With IAM database authentication, you authenticate to your Aurora DB cluster by using an IAM user or IAM role and an authentication token\. An *authentication token* is a unique value that is generated using the Signature Version 4 signing process\. By using IAM database authentication, you can use the same credentials to control access to your AWS resources and your databases\. For more information, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\. 
+  +  You can use Kerberos authentication for Aurora PostgreSQL\. 
 
-     With IAM database authentication, you authenticate to your Aurora MySQL DB cluster by using an IAM user or IAM role and an authentication token\. An *authentication token* is a unique value that is generated using the Signature Version 4 signing process\. By using IAM database authentication, you can use the same credentials to control access to your AWS resources and your databases\. For more information, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\. 
+     You can use Kerberos to authenticate users when they connect to your Aurora PostgreSQL DB cluster\. In this case, your DB cluster works with AWS Directory Service for Microsoft Active Directory to enable Kerberos authentication\. AWS Directory Service for Microsoft Active Directory is also called AWS Managed Microsoft AD\. Keeping all of your credentials in the same directory can save you time and effort\. You have a centralized place for storing and managing credentials for multiple DB clusters\. Using a directory can also improve your overall security profile\. For more information, see [Using Kerberos authentication with Aurora PostgreSQL](postgresql-kerberos.md) 
 
  For information about configuring security, see [Security in Amazon Aurora](UsingWithRDS.md)\. 
 
