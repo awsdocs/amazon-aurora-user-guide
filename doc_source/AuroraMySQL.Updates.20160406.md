@@ -1,11 +1,11 @@
-# Aurora MySQL database engine updates: 2016\-04\-06<a name="AuroraMySQL.Updates.20160406"></a>
+# Aurora MySQL database engine updates: 2016\-04\-06 \(version 1\.6\) \(deprecated\)<a name="AuroraMySQL.Updates.20160406"></a>
 
 **Version:** 1\.6
 
 This update includes the following improvements:
 
 ## New features<a name="AuroraMySQL.Updates.20160406.New"></a>
-+ **Parallel read\-ahead** – Parallel read\-ahead is now enabled by default for all Aurora MySQL DB clusters, and is not configurable\. Parallel read\-ahead was introduced in the December 2015 update\. For more information, see [Aurora MySQL database engine updates: 2015\-12\-03](AuroraMySQL.Updates.20151203.md)\.
++ **Parallel read\-ahead** – Parallel read\-ahead is now enabled by default for all Aurora MySQL DB clusters, and is not configurable\. Parallel read\-ahead was introduced in the December 2015 update\. For more information, see [Aurora MySQL database engine updates: 2015\-12\-03 \(version 1\.4\) \(deprecated\)](AuroraMySQL.Updates.20151203.md)\.
 
   In addition to enabling parallel read\-ahead by default, this release includes the following improvements to parallel read\-ahead:
   + Improved logic so that parallel read\-ahead is less aggressive, which is beneficial when your DB cluster encounters many parallel workloads\.

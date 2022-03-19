@@ -125,7 +125,7 @@ aws rds describe-db-instances \
 
  In Aurora MySQL version 2, ZDP only applies to Aurora MySQL DB instances that use the `db.t2` or `db.t3` instance classes\. In Aurora MySQL version 3, ZDP applies to all instance classes\. 
 
- You can see metrics of important attributes during ZDP in the MySQL error log\. You can also see information about when Aurora MySQL uses ZDP or chooses not use use ZDP on the **Events** page in the AWS Management Console\. 
+ You can see metrics of important attributes during ZDP in the MySQL error log\. You can also see information about when Aurora MySQL uses ZDP or chooses not to use ZDP on the **Events** page in the AWS Management Console\. 
 
  In Aurora MySQL 2\.10 and higher, Aurora can perform a zero\-downtime patch when binary log replication is enabled\. Aurora MySQL automatically drops the connection to the binlog target during a ZDP operation\. Aurora MySQL automatically reconnects to the binlog target and resumes replication after the restart finishes\. 
 

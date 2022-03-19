@@ -19,7 +19,7 @@ For general information about Aurora Serverless, see [Using Amazon Aurora Server
  **Features:** 
 
  This Aurora Serverless release includes all new features up to Aurora MySQL version 2\.07\.1\. For details, see [Aurora MySQL database engine updates 2019\-12\-23 \(version 2\.07\.1\)](AuroraMySQL.Updates.2071.md) and the release notes for previous Aurora MySQL versions\. The following features are of particular interest for users of Aurora Serverless or Aurora MySQL with MySQL 5\.7 compatibility: 
-+  Aurora MySQL Serverless now supports the hot row contention feature\. For more information, see [Aurora MySQL database engine updates: 2016\-12\-14](AuroraMySQL.Updates.20161214.md)\. 
++  Aurora MySQL Serverless now supports the hot row contention feature\. For more information, see [Aurora MySQL database engine updates: 2016\-12\-14 \(version 1\.10\) \(deprecated\)](AuroraMySQL.Updates.20161214.md)\. 
 +  Aurora MySQL Serverless now supports the hash join feature\. To use this feature, you must specify the configuration setting `optimizer_switch='hash_join=on'`\. For more information, see [Optimizing large Aurora MySQL join queries with hash joins](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
 +  Aurora Serverless 5\.7 can use the Data API\. For more information, see [Using the Data API for Aurora Serverless](data-api.md)\. 
 +  Aurora Serverless 5\.7 can use the query editor\. For more information, see [Using the query editor for Aurora Serverless](query-editor.md)\. 

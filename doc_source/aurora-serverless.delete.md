@@ -10,9 +10,9 @@ When you create an Aurora Serverless v1 DB cluster using the AWS Management Cons
 
 1. Choose your Aurora Serverless v1 DB cluster from the list\.
 
-1. Choose **Modify** to open your DB cluster's configuration\. The Modify DB cluster page opens the Settings, Capacity settings, and other configuration details for your Aurora Serverless v1 DB cluster\. Deletion protection is in the **Additional configuration** section\. 
+1. Choose **Modify** to open your DB cluster's configuration\. The **Modify DB cluster** page opens the Settings, Capacity settings, and other configuration details for your Aurora Serverless v1 DB cluster\. Deletion protection is in the **Additional configuration** section\. 
 
-1. Uncheck the **Enable deletion protection** option in the **Additional configuration** properties card\.
+1. Clear the **Enable deletion protection** option in the **Additional configuration** properties card\.
 
 1. Choose **Continue**\. The **Summary of modifications** appears\.
 

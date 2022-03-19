@@ -328,7 +328,7 @@ ERROR 1874 (HY000): InnoDB is in read only mode.
 
 ### Role\-based privilege model<a name="AuroraMySQL.privilege-model"></a>
 
- With Aurora MySQL version 3, you can't modify the tables in the `mysql` database directly\. In particular, you can't set up users by inserting into the `mysql.user` table\. Instead, you use SQL statements to grant role\-based privileges\. You also can't create other kinds of objects such as stored procedinres in the `mysql` database\. You can still query the `mysql` tables\. If you use binary log replication, changes made directly to the `mysql` tables on the source cluster aren't replicated to the target cluster\. 
+ With Aurora MySQL version 3, you can't modify the tables in the `mysql` database directly\. In particular, you can't set up users by inserting into the `mysql.user` table\. Instead, you use SQL statements to grant role\-based privileges\. You also can't create other kinds of objects such as stored procedures in the `mysql` database\. You can still query the `mysql` tables\. If you use binary log replication, changes made directly to the `mysql` tables on the source cluster aren't replicated to the target cluster\. 
 
  In some cases, your application might use shortcuts to create users or other objects by inserting into the `mysql` tables\. If so, change your application code to use the corresponding statements such as `CREATE USER`\. If your application creates stored procedures or other objects in the `mysql` database, use a different database instead\. 
 

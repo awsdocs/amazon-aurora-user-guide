@@ -1,4 +1,4 @@
-# Aurora MySQL database engine updates: 2016\-10\-18<a name="AuroraMySQL.Updates.20161018"></a>
+# Aurora MySQL database engine updates: 2016\-10\-18 \(version 1\.8\) \(deprecated\)<a name="AuroraMySQL.Updates.20161018"></a>
 
 **Version:** 1\.8
 

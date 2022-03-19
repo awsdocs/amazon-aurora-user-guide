@@ -90,7 +90,7 @@ For more information about Regions and Aurora version availability, see [Aurora 
 
       The format of an Amazon S3 bucket ARN is `arn:aws:s3:::bucket_name`\. Ensure that the Amazon S3 bucket that you use is set up with the requirements for training SageMaker models\. When you train a model, your Aurora DB cluster requires permission to export data to the Amazon S3 bucket, and also to import data from the bucket\. 
 
-      To learn more about Amazon S3 bucket ARNs, see [Specifying resources in a policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html) in the *Amazon Simple Storage Service User Guide*\. For more about using an Amazon S3 bucket with SageMaker, see [Step 1: Create an Amazon Amazon S3 bucket](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-config-permissions.html) in the *Amazon SageMaker Developer Guide*\. 
+      To learn more about Amazon S3 bucket ARNs, see [Specifying resources in a policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html) in the *Amazon Simple Storage Service User Guide*\. For more about using an Amazon S3 bucket with SageMaker, see [Step 1: Create an Amazon S3 bucket](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-config-permissions.html) in the *Amazon SageMaker Developer Guide*\. 
 
 1.  Choose **Connect service**\. 
 
@@ -353,7 +353,7 @@ select *, anomaly_detection(value) score from nyc_taxi
 
 ### Character set requirement for SageMaker functions that return strings<a name="note-character-set-of-ml-functions-return-type"></a>
 
- We recommend specifying a character set of `utf8mb4` as the return type type for your SageMaker functions that return string values\. If that isn't practical, use a large enough string length for the return type to hold a value represented in the `utf8mb4` character set\. The following example shows how to declare the `utf8mb4` character set for your function\. 
+ We recommend specifying a character set of `utf8mb4` as the return type for your SageMaker functions that return string values\. If that isn't practical, use a large enough string length for the return type to hold a value represented in the `utf8mb4` character set\. The following example shows how to declare the `utf8mb4` character set for your function\. 
 
 ```
 CREATE FUNCTION my_ml_func(...) RETURNS VARCHAR(5) CHARSET utf8mb4 ALIAS ...

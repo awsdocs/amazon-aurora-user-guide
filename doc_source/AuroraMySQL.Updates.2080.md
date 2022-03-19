@@ -50,7 +50,7 @@ For information on how to upgrade your Aurora MySQL database cluster, see [Upgra
 +  Fixed an error message in Zero\-Downtime Patch \(ZDP\) or Zero\-Downtime Restart \(ZDR\) operations wrongly stating that the last transaction was aborted if the auto\-commit flag is turned off\. 
 +  Fixed an issue in Zero\-Downtime Patch \(ZDP\) operations that could lead to a server failure error message when restoring user session variables in the new database process\. 
 +  Fixed an issue in Zero Downtime Patch \(ZDP\) operations that might cause intermittent database failures when there are long running queries during patching\. 
-+  Fixed an issue where queries including an Aurora Machine Learning function returned empty error messages due to an incorrectly handled error response from Machine Learning services such as Amazon Sagemaker and Amazon Comprehend\. 
++  Fixed an issue where queries including an Aurora Machine Learning function returned empty error messages due to an incorrectly handled error response from Machine Learning services such as Amazon SageMaker and Amazon Comprehend\. 
 +  Fixed an issue in the out\-of\-memory monitoring functionality that did not honor a custom value of the `table_definition_cache` parameter\. 
 +  The error message "Query execution was interrupted" is returned if an Aurora Machine Learning query is interrupted\. Previously, the generic message "Internal error in processing ML request" was returned instead\. 
 +  Fixed an issue that could cause a binlog worker to experience a connection timeout when the `slave_net_timeout` parameter is less than the `aurora_binlog_replication_max_yield_seconds` parameter and there is low workload on the binlog master cluster\. 
@@ -72,7 +72,7 @@ The following Amazon Aurora MySQL features are supported in Aurora MySQL Version
 + Asynchronous key prefetch \(AKP\)\. For more information, see [Optimizing Amazon Aurora indexed join queries with asynchronous key prefetch](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
 + Hash joins\. For more information, see [Optimizing large Aurora MySQL join queries with hash joins](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
 + Native functions for synchronously invoking AWS Lambda functions\. For more information, see [Invoking a Lambda function with an Aurora MySQL native function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)\.
-+ Scan batching\. For more information, see [Aurora MySQL database engine updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
++ Scan batching\. For more information, see [Aurora MySQL database engine updates 2017\-12\-11 \(version 1\.16\) \(deprecated\)](AuroraMySQL.Updates.20171211.md)\.
 + Migrating data from MySQL using an Amazon S3 bucket\. For more information, see [Migrating data from MySQL by using an Amazon S3 bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.
 
 ## MySQL 5\.7 compatibility<a name="AuroraMySQL.Updates.2080.Compatibility"></a>

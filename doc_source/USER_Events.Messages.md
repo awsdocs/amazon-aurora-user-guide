@@ -50,6 +50,8 @@ The following table shows the event category and a list of events when a DB inst
 |  Maintenance  | RDS\-EVENT\-0155 |  The DB instance has a DB engine minor version upgrade available\.  | 
 |  Notification  | RDS\-EVENT\-0044 | Operator\-issued notification\. For more information, see the event message\. | 
 |  Notification  | RDS\-EVENT\-0048 | Patching of the DB instance has been delayed\. | 
+|  Notification  | RDS\-EVENT\-0087 |  The DB instance has been stopped\.   | 
+|  Notification  | RDS\-EVENT\-0088 |  The DB instance has been started\.  | 
 |  Read replica  | RDS\-EVENT\-0045 |  An error has occurred in the read replication process\. For more information, see the event message\.    For information on troubleshooting read replica errors, see [ Troubleshooting a MySQL read replica problem](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_MySQL.Replication.ReadReplicas.html#USER_ReadRepl.Troubleshooting)\.  | 
 |  Read replica  | RDS\-EVENT\-0046 | The read replica has resumed replication\. This message appears when you first create a read replica, or as a monitoring message confirming that replication is functioning properly\. If this message follows an RDS\-EVENT\-0045 notification, then replication has resumed following an error or after replication was stopped\. | 
 |  Read replica  | RDS\-EVENT\-0057 |  Replication on the read replica was terminated\.  | 

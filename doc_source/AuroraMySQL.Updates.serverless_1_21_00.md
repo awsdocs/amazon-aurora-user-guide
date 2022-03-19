@@ -8,7 +8,7 @@ Aurora Serverless v1 doesn't have its own version number\. It uses the number of
 
  **Bug fixes:** 
 
- This Aurora Serverless release includes all bug fixes up to Aurora MySQL version 1\.21\.0\. For details, see [Aurora MySQL database engine updates 2019\-11\-25 \(version 1\.21\.0\)](AuroraMySQL.Updates.1210.md) and the release notes for previous Aurora MySQL versions\. 
+ This Aurora Serverless release includes all bug fixes up to Aurora MySQL version 1\.21\.0\. For details, see [Aurora MySQL database engine updates 2019\-11\-25 \(version 1\.21\.0\) \(deprecated\)](AuroraMySQL.Updates.1210.md) and the release notes for previous Aurora MySQL versions\. 
 
  **Features:** 
 
