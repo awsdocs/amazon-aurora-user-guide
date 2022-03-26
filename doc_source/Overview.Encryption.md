@@ -9,7 +9,7 @@ For encrypted and unencrypted DB clusters, data that is in transit between the s
 
 **Topics**
 + [Overview of encrypting Amazon Aurora resources](#Overview.Encryption.Overview)
-+ [Enabling encryption for an Amazon Aurora DB cluster](#Overview.Encryption.Enabling)
++ [Encrypting an Amazon Aurora DB cluster](#Overview.Encryption.Enabling)
 + [Determining whether encryption is turned on for a DB cluster](#Overview.Encryption.Determining)
 + [Availability of Amazon Aurora encryption](#Overview.Encryption.Availability)
 + [Limitations of Amazon Aurora encrypted DB clusters](#Overview.Encryption.Limitations)
@@ -22,9 +22,9 @@ For an Amazon Aurora encrypted DB cluster, all DB instances, logs, backups, and 
 
 You can use an AWS managed key, or you can create customer managed keys\. To manage the customer managed keys used for encrypting and decrypting your Amazon Aurora resources, you use the [AWS Key Management Service \(AWS KMS\)](https://docs.aws.amazon.com/kms/latest/developerguide/)\. AWS KMS combines secure, highly available hardware and software to provide a key management system scaled for the cloud\. Using AWS KMS, you can create customer managed keys and define the policies that control how these customer managed keys can be used\. AWS KMS supports CloudTrail, so you can audit KMS key usage to verify that customer managed keys are being used appropriately\. You can use your customer managed keys with Amazon Aurora and supported AWS services such as Amazon S3, Amazon EBS, and Amazon Redshift\. For a list of services that are integrated with AWS KMS, see [AWS Service Integration](http://aws.amazon.com/kms/features/#AWS_Service_Integration)\.
 
-## Enabling encryption for an Amazon Aurora DB cluster<a name="Overview.Encryption.Enabling"></a>
+## Encrypting an Amazon Aurora DB cluster<a name="Overview.Encryption.Enabling"></a>
 
-To enable encryption for a new DB cluster, choose **Enable encryption** on the console\. For information on creating a DB cluster, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.
+To encrypt a new DB cluster, choose **Enable encryption** on the console\. For information on creating a DB cluster, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.
 
 If you use the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command to create an encrypted DB cluster, set the `--storage-encrypted` parameter\. If you use the [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) API operation, set the `StorageEncrypted` parameter to true\.
 
@@ -36,7 +36,7 @@ If you use the AWS CLI `create-db-cluster` command to create an encrypted DB clu
 
 **Important**  
 Amazon Aurora can lose access to the KMS key for a DB cluster\. For example, RDS loses access when the KMS key is disabled, or when RDS access to a KMS key is revoked\. In these cases, the encrypted DB cluster goes into `inaccessible-encryption-credentials-recoverable` state\. The DB cluster remains in this state for seven days\. When you start the DB cluster during that time, it checks if the KMS key is active and recovers the DB cluster if it is\. Restart the DB cluster using the AWS CLI command [start\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/start-db-cluster.html)\. Currently, you can't start a DB cluster in this state using the AWS Management Console\.  
-If the DB cluster isn't recovered, then it goes into the terminal `inaccessible-encryption-credentials` state\. In this case, you can only restore the DB cluster from a backup\. We strongly recommend that you always enable backups for encrypted DB instances to guard against the loss of encrypted data in your databases\.
+If the DB cluster isn't recovered, then it goes into the terminal `inaccessible-encryption-credentials` state\. In this case, you can only restore the DB cluster from a backup\. We strongly recommend that you always turn on backups for encrypted DB instances to guard against the loss of encrypted data in your databases\.
 
 ## Determining whether encryption is turned on for a DB cluster<a name="Overview.Encryption.Determining"></a>
 

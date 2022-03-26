@@ -47,7 +47,7 @@ The following table shows the event category and a list of events when a DB inst
 |  Maintenance  | RDS\-EVENT\-0026 |  Offline maintenance of the DB instance is taking place\. The DB instance is currently unavailable\.  | 
 |  Maintenance  | RDS\-EVENT\-0027 |  Offline maintenance of the DB instance is complete\. The DB instance is now available\.  | 
 |  Maintenance  | RDS\-EVENT\-0047 |  Patching of the DB instance has completed\.  | 
-|  Maintenance  | RDS\-EVENT\-0155 |  The DB instance has a DB engine minor version upgrade available\.  | 
+|  Maintenance  | RDS\-EVENT\-0155 |  The DB instance has a DB engine minor version upgrade required\.  | 
 |  Notification  | RDS\-EVENT\-0044 | Operator\-issued notification\. For more information, see the event message\. | 
 |  Notification  | RDS\-EVENT\-0048 | Patching of the DB instance has been delayed\. | 
 |  Notification  | RDS\-EVENT\-0087 |  The DB instance has been stopped\.   | 

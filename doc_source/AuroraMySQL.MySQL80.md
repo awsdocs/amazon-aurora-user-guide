@@ -38,7 +38,7 @@
 
 ## Release notes for Aurora MySQL version 3<a name="AuroraMySQL.mysql80-bugs-fixed"></a>
 
- For the release notes for all Aurora MySQL version 3 releases, see [Database engine updates for Amazon Aurora MySQL version 3](AuroraMySQL.Updates.30Updates.md)\. 
+ For the release notes for all Aurora MySQL version 3 releases, see [ Database engine updates for Amazon Aurora MySQL version 3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.Updates.30Updates.html) in the *Release Notes for Aurora MySQL*\. 
 
 ## Comparison of Aurora MySQL version 2 and Aurora MySQL version 3<a name="Aurora.AuroraMySQL.Compare-v2-v3"></a>
 
@@ -305,7 +305,7 @@ ERROR 1874 (HY000): InnoDB is in read only mode.
 
  In general, Aurora MySQL version 3 supports the feature set of community MySQL 8\.0\.23\. Some new features from MySQL 8\.0 community edition don't apply to Aurora MySQL\. Some of those features aren't compatible with some aspect of Aurora, such as the Aurora storage architecture\. Other features aren't needed because the Amazon RDS management service provides equivalent functionality\. The following features in community MySQL 8\.0 aren't supported or work differently in Aurora MySQL version 3\. 
 
- For release notes for all Aurora MySQL version 3 releases, see [Database engine updates for Amazon Aurora MySQL version 3](AuroraMySQL.Updates.30Updates.md)\.  
+ For release notes for all Aurora MySQL version 3 releases, see [ Database engine updates for Amazon Aurora MySQL version 3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.Updates.30Updates.html) in the *Release Notes for Aurora MySQL*\. 
 
 **Topics**
 + [MySQL 8\.0 features not available in Aurora MySQL version 3](#Aurora.AuroraMySQL.Compare-80-v3-features)

@@ -58,7 +58,7 @@ The following table lists the resulting default value of `max_connections` for e
 
  If you create a new parameter group to customize your own default for the connection limit, you'll see that the default connection limit is derived using a formula based on the `DBInstanceClassMemory` value\. As shown in the preceding table, the formula produces connection limits that increase by 1000 as the memory doubles between progressively larger R3, R4, and R5 instances, and by 45 for different memory sizes of T2 and T3 instances\. 
 
- See [DB parameter formula variables](http://dbagansk-cdd.aka.corp.amazon.com/awsrds/src/AWSRDS/build/server-root/AmazonRDS/latest/AuroraUserGuide/USER_ParamValuesRef.html#USER_FormulaVariables) for more details on how `DBInstanceClassMemory` is calculated\. 
+ See [Specifying DB parameters](USER_ParamValuesRef.md) for more details on how `DBInstanceClassMemory` is calculated\. 
 
  Aurora MySQL and RDS for MySQL DB instances have different amounts of memory overhead\. Therefore, the `max_connections` value can be different for Aurora MySQL and RDS for MySQL DB instances that use the same instance class\. The values in the table only apply to Aurora MySQL DB instances\. 
 

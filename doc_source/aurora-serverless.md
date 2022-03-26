@@ -54,6 +54,7 @@ The following limitations apply to Aurora Serverless v1:
   + AWS Identity and Access Management \(IAM\) database authentication
   + Backtracking in Aurora 
   + Database activity streams
+  + Kerberos authentication
   + Performance Insights
 + Connections to an Aurora Serverless v1 DB cluster are closed automatically if held open for longer than one day\.
 + All Aurora Serverless v1 DB clusters have the following limitations: 

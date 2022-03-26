@@ -153,9 +153,9 @@ To use the AWS CLI examples in this section, make sure that you enter valid valu
 
 | Engine name | Engine value in CLI commands | More information about versions | 
 | --- | --- | --- | 
-|  MySQL 5\.6\-compatible Aurora  |  `aurora`  |  [Database engine updates for Amazon Aurora MySQL version 1](AuroraMySQL.Updates.11Updates.md)  | 
-|  MySQL 5\.7\-compatible and 8\.0\-compatible Aurora  |  `aurora-mysql`  |  [Database engine updates for Amazon Aurora MySQL version 2](AuroraMySQL.Updates.20Updates.md), [Database engine updates for Amazon Aurora MySQL version 3](AuroraMySQL.Updates.30Updates.md)  | 
-|  Aurora PostgreSQL  |  `aurora-postgresql`  |  [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)  | 
+|  MySQL 5\.6\-compatible Aurora  |  `aurora`  |  [ Database engine updates for Amazon Aurora MySQL version 1](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.Updates.11Updates.html) in the *Release Notes for Aurora MySQL*  | 
+|  MySQL 5\.7\-compatible and 8\.0\-compatible Aurora  |  `aurora-mysql`  |  [ Database engine updates for Amazon Aurora MySQL version 2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.Updates.20Updates.html) and [ Database engine updates for Amazon Aurora MySQL version 3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.Updates.30Updates.html) in the *Release Notes for Aurora MySQL*  | 
+|  Aurora PostgreSQL  |  `aurora-postgresql`  |  [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html)  | 
 
 For information about AWS Region names, see [AWS RegionsAvailability Zones](Concepts.RegionsAndAvailabilityZones.md#Concepts.RegionsAndAvailabilityZones.Regions)\.
 

@@ -125,7 +125,6 @@ SELECT
     [ORDER BY {col_name | expr | position}
          [ASC | DESC], ...]
     [LIMIT {[offset,] row_count | row_count OFFSET offset}]
-    [PROCEDURE procedure_name(argument_list)]
 INTO OUTFILE S3 's3_uri'
 [CHARACTER SET charset_name]
     [export_options]

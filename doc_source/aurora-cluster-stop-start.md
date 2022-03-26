@@ -13,7 +13,10 @@
 
  During periods where you don't need an Aurora cluster, you can stop all instances in that cluster at once\. You can start the cluster again anytime you need to use it\. Starting and stopping simplifies the setup and teardown processes for clusters used for development, testing, or similar activities that don't require continuous availability\. You can perform all the AWS Management Console procedures involved with only a single action, regardless of how many instances are in the cluster\. 
 
- While your DB cluster is stopped, you are charged only for cluster storage, manual snapshots, and automated backup storage within your specified retention window\. You aren't charged for any DB instance hours\. Aurora automatically starts your DB cluster after seven days so that it doesn't fall behind any required maintenance updates\. 
+ While your DB cluster is stopped, you are charged only for cluster storage, manual snapshots, and automated backup storage within your specified retention window\. You aren't charged for any DB instance hours\.
+
+**Important**  
+You can stop a DB cluster for up to seven days\. If you don't manually start your DB cluster after seven days, your DB cluster is automatically started so that it doesn't fall behind any required maintenance updates\.
 
  To minimize charges for a lightly loaded Aurora cluster, you can stop the cluster instead of deleting all of its Aurora Replicas\. For clusters with more than one or two instances, frequently deleting and recreating the DB instances is only practical using the AWS CLI or Amazon RDS API\. Such a sequence of operations can also be difficult to perform in the right order, for example to delete all Aurora Replicas before deleting the primary instance to avoid activating the failover mechanism\. 
 
