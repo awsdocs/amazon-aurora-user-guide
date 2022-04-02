@@ -58,4 +58,6 @@ If the Object Explorer's dialog opens, cancel the dialog and re\-open the Query 
 
    If a message appears indicating that SSMS can't apply connection strings, choose **OK**\.
 
-   If you are having trouble connecting, see [Troubleshooting connections to your SQL Server DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToMicrosoftSQLServerInstance.html#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting) in the *Amazon RDS User Guide*\.
+   If you are having trouble connecting to Babelfish, see [Connection failure](babelfish-troubleshooting.md#babelfish-troubleshooting-connectivity)\.
+
+   For more information about SQL Server connection issues, see [Troubleshooting connections to your SQL Server DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToMicrosoftSQLServerInstance.html#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting) in the *Amazon RDS User Guide*\.

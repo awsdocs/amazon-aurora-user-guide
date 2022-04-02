@@ -44,11 +44,12 @@ You can choose to have the database session handle database activity events in e
 In Aurora, database activity streams have the following requirements and limitations\.
 
 **Topics**
-+ [Miscellaneous requirements](#DBActivityStreams.Overview.requirements.misc)
++ [General requirements](#DBActivityStreams.Overview.requirements.misc)
 
-### Miscellaneous requirements<a name="DBActivityStreams.Overview.requirements.misc"></a>
-+ Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.
+### General requirements<a name="DBActivityStreams.Overview.requirements.misc"></a>
 + Database activity streams require use of Amazon Kinesis\.
++ Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.
++ Do not encrypt your Amazon Kinesis data stream\. This extra layer of encryption is incompatible with your database activity stream, which is already encrypted with your AWS KMS key\.
 
 ## Supported Aurora engine versions for database activity streams<a name="DBActivityStreams.Overview.requirements.version"></a>
 

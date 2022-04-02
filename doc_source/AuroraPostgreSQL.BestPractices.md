@@ -1,6 +1,8 @@
 # Best practices with Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.BestPractices"></a>
 
-This topic includes information on best practices and options for using or migrating data to an Amazon Aurora PostgreSQL DB cluster\.
+A fundamental best practice is learning how to manage performance and scaling for your Amazon Aurora PostgreSQL DB cluster, and to understand basic maintenance tasks\. For more information, see [Managing Amazon Aurora PostgreSQL](AuroraPostgreSQL.Managing.md)\. 
+
+Another important best practice is understanding how to use the key features of Aurora PostgreSQL, such as fast failover\. In the following, you can learn how to make sure that failover can occur as fast as possible\. To recover quickly after failover, you can use cluster cache management for your Aurora PostgreSQL DB cluster\. For more information, see [Fast recovery after failover with cluster cache management for Aurora PostgreSQL](AuroraPostgreSQL.cluster-cache-mgmt.md)\. 
 
 ## Fast failover with Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.BestPractices.FastFailover"></a>
 
@@ -12,13 +14,9 @@ There are several things you can do to make a failover perform faster with Auror
 + Use RDS APIs to test application response on server side failures and use a packet dropping tool to test application response for client\-side failures\.
 + Use the AWS JDBC Driver for PostgreSQL \(preview\) to take full advantage of the failover capabilities of Aurora PostgreSQL\. For more information about the AWS JDBC Driver for PostgreSQL and complete instructions for using it, see the [AWS JDBC Driver for PostgreSQL GitHub repository](https://awslabs.github.io/aws-postgresql-jdbc/)\.
 
-**Contents**
+**Topics**
 + [Setting TCP keepalives parameters](#AuroraPostgreSQL.BestPractices.FastFailover.TCPKeepalives)
 + [Configuring your application for fast failover](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring)
-  + [Reducing DNS cache timeouts](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.Timeouts)
-  + [Setting an Aurora PostgreSQL connection string for fast failover](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.ConnectionString)
-  + [Other options for obtaining the host string](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString)
-    + [Java example to list instances using the DescribeDBClusters API](#AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString.API)
 + [Testing failover](#AuroraPostgreSQL.BestPracticesFastFailover.Testing)
 + [Fast failover Java example](#AuroraPostgreSQL.BestPractices.FastFailover.Example)
 

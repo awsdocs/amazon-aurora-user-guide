@@ -16,4 +16,4 @@ aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[].[Eng
 
 For a list of AWS Regions, see [Aurora PostgreSQL Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability.PostgreSQL)\.
 
-For details about the PostgreSQL versions that are supported on Aurora PostgreSQL, see the [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html)\.
+For details about the PostgreSQL versions that are available on Aurora PostgreSQL, see the [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html)\.

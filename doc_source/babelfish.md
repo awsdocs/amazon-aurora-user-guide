@@ -18,17 +18,18 @@ Following, you can find information about how to work with Babelfish\.
 + [Babelfish architecture](#babelfish-architecture)
 + [Using Babelfish to migrate to PostgreSQL](babelfish-migration.md)
 + [Creating an Aurora PostgreSQL cluster with Babelfish](babelfish-create.md)
++ [Configuring a database for Babelfish](babelfish-configuration.md)
 + [Connecting to a DB cluster with Babelfish turned on](babelfish-connect.md)
 + [Querying a database for object information](babelfish-query-database.md)
-+ [Querying Babelfish to find Babelfish details](babelfish-information.md)
++ [Querying Babelfish to find version details](babelfish-information.md)
 + [Differences between Aurora PostgreSQL with Babelfish and SQL Server](babelfish-compatibility.md)
-+ [Using Aurora PostgreSQL extensions with Babelfish](babelfish-postgres-aws-extensions.md)
 + [Managing Babelfish error handling](babelfish-strict.md)
-+ [Configuring a database for Babelfish](babelfish-configuration.md)
 + [Babelfish collation support](babelfish-collations.md)
++ [Using Aurora PostgreSQL extensions with Babelfish](babelfish-postgres-aws-extensions.md)
 + [Troubleshooting for Babelfish](babelfish-troubleshooting.md)
 + [Turning off Babelfish](babelfish-remove.md)
 + [Babelfish versions](babelfish-releases-updates.md)
++ [Supported functionality in Babelfish by version](babelfish-compatibility.supported-functionality-table.md)
 
 ## Babelfish architecture<a name="babelfish-architecture"></a>
 

@@ -194,7 +194,7 @@ aws rds modify-db-cluster ^
 
 ### RDS API<a name="AuroraMySQL.Upgrading.ModifyingDBCluster.API"></a>
 
- To upgrade the major version of an Aurora MySQL DB cluster, use the RDS API [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterParameterGroup.html) operation with the following required parameters: 
+ To upgrade the major version of an Aurora MySQL DB cluster, use the RDS API [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) operation with the following required parameters: 
 +  `DBClusterIdentifier` 
 +  `Engine` 
 +  `EngineVersion` 

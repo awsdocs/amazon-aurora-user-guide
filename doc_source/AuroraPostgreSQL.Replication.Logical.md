@@ -19,12 +19,12 @@ Following, you can find information about how to work with PostgreSQL logical re
 
 To use logical replication, you first set the `rds.logical_replication` parameter for a cluster parameter group\. You then set up the publisher and subscriber\.
 
-Logical replication uses a publish and subscribe model\. *Publishers* and *subscribers* are the nodes\. A *publication* is a set of changes generated from one or more database tables\. You specify a publication on a publisher\. A *subscription* defines the connection to another database and one or more publications to which it subscribes\. You specify a subscription on a subscriber\. The publication and subscription make the connection between the publisher and subscriber\.
+Logical replication uses a publish and subscribe model\. *Publishers* and *subscribers* are the nodes\. A *publication* is a set of changes generated from one or more database tables\. You specify a publication on a publisher\. A *subscription* defines the connection to another database and one or more publications to which it subscribes\. You specify a subscription on a subscriber\. The publication and subscription make the connection between the publisher and subscriber\. The replication process uses a *replication slot* to track the progress of a subscription\.
 
 **Note**  
 Following are requirements for logical replication:  
 To perform logical replication for a PostgreSQL database, your AWS user account needs the `rds_superuser` role\.
-The RDS for PostgreSQL DB instance that you use as the source must have automated backups enabled\. For instructions on how to enable automated backups for an RDS for PostgreSQL DB instance, see [Enabling automated backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.Enabling) in the *Amazon RDS User Guide*\.
+An RDS for PostgreSQL DB instance used as the source for replication to Aurora PostgreSQL must have automated backups enabled\. For more information, see [Enabling automated backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.Enabling) in the *Amazon RDS User Guide*\.
 
 **To enable PostgreSQL logical replication with Aurora**
 
@@ -39,8 +39,8 @@ The RDS for PostgreSQL DB instance that you use as the source must have automate
 1. Review the `max_replication_slots`, `max_wal_senders`, `max_logical_replication_workers`, and `max_worker_processes` parameters in your DB cluster parameter group based on your expected usage\. If necessary, modify the DB cluster parameter group to change the settings for these parameters, as described in [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
 
    Follow these guidelines for setting the parameters:
-   + `max_replication_slots` – Ensure that `max_replication_slots` is at least as high as the combined number of logical replication publications and subscriptions you plan to create\. If you are using AWS DMS, make sure `max_replication_slots` is at least as high as the number of AWS DMS tasks you plan to use for change data capture from this DB cluster, plus any logical replication publications and subscriptions\.
-   + `max_wal_senders` and `max_logical_replication_workers` – Ensure that `max_wal_senders` and `max_logical_replication_workers` are each set at least as high as the number of logical replication slots that you intend to be active, or the number of active AWS DMS tasks for change data capture\. Leaving a logical replication slot inactive prevents vacuum from removing obsolete tuples from tables, so we recommend that you don't keep inactive replication slots for long periods of time\.
+   + `max_replication_slots` – A *replication slot* tracks the progress of a subscription\. Set the value of the `max_replication_slots` parameter to the total number of subscriptions that you plan to create\. If you are using AWS DMS, set this parameter to the number of AWS DMS tasks that you plan to use for change data capture from this DB cluster\.
+   + `max_wal_senders` and `max_logical_replication_workers` – Ensure that `max_wal_senders` and `max_logical_replication_workers` are each set at least as high as the number of logical replication slots that you intend to be active, or the number of active AWS DMS tasks for change data capture\. Leaving a logical replication slot inactive prevents the vacuum from removing obsolete tuples from tables, so we recommend that you don't keep inactive replication slots for long periods of time\.
    + `max_worker_processes` – Ensure that `max_worker_processes` is at least as high as the combined values of `max_logical_replication_workers`, `autovacuum_max_workers`, and `max_parallel_workers`\. Having a high number of background worker processes might affect application workloads on small DB instance classes, so monitor the performance of your database if you set `max_worker_processes` higher than the default value\.
 
 **To configure a publisher for logical replication**

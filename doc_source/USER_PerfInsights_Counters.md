@@ -9,7 +9,7 @@ Counter metrics are operating system and database performance metrics in the Per
 
 ## Performance Insights operating system counters<a name="USER_PerfInsights_Counters.OS"></a>
 
-The following operating system counters are available with Performance Insights for Aurora PostgreSQL\. You can find definitions for these metrics in [Viewing OS metrics using CloudWatch Logs](USER_Monitoring.OS.CloudWatchLogs.md)\. 
+The following operating system counters, which are prefixed with `os`, are available with Performance Insights for Aurora PostgreSQL\. You can find definitions for these metrics in [Viewing OS metrics using CloudWatch Logs](USER_Monitoring.OS.CloudWatchLogs.md)\. 
 
 
 | Counter | Type | Metric | 
@@ -86,7 +86,7 @@ The following database counters are available with Performance Insights for Auro
 
 ### Native counters for Aurora MySQL<a name="USER_PerfInsights_Counters.Aurora_MySQL.Native"></a>
 
-You can find definitions for these native metrics in [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.
+Native metrics are defined by the database engine and not by Amazon Aurora\. You can find definitions for these native metrics in [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.
 
 
 | Counter | Type | Unit | Metric | 
@@ -153,7 +153,7 @@ The following database counters are available with Performance Insights for Auro
 
 ### Native Counters for Aurora PostgreSQL<a name="USER_PerfInsights_Counters.Aurora_PostgreSQL.Native"></a>
 
-You can find definitions for these native metrics in [Viewing Statistics](https://www.postgresql.org/docs/10/monitoring-stats.html#MONITORING-STATS-VIEWS) in the PostgreSQL documentation\.
+Native metrics are defined by the database engine and not by Amazon Aurora\. You can find definitions for these native metrics in [Viewing Statistics](https://www.postgresql.org/docs/10/monitoring-stats.html#MONITORING-STATS-VIEWS) in the PostgreSQL documentation\.
 
 
 | Counter | Type | Unit | Metric | 
@@ -171,6 +171,7 @@ You can find definitions for these native metrics in [Viewing Statistics](https:
 | maxwritten\_clean | Checkpoint | Bgwriter clean stops per minute | db\.Checkpoint\.maxwritten\_clean | 
 | active\_transactions | Transactions | Transactions | db\.Transactions\.active\_transactions | 
 | blocked\_transactions | Transactions | Transactions | db\.Transactions\.blocked\_transactions | 
+| duration\_commits | Transactions | Milliseconds | db\.Transactions\.duration\_commits | 
 | max\_used\_xact\_ids | Transactions | Transactions | db\.Transactions\.max\_used\_xact\_ids | 
 | xact\_commit | Transactions | Commits per second | db\.Transactions\.xact\_commit | 
 | xaxt\_rollback | Transactions | Rollbacks per second | db\.Transactions\.xact\_rollback | 
@@ -181,8 +182,10 @@ You can find definitions for these native metrics in [Viewing Statistics](https:
 | buffers\_clean | I/O | Blocks per second | db\.IO\.buffers\_clean | 
 | blks\_hit | Cache | Blocks per second | db\.Cache\.blks\_hit | 
 | buffers\_alloc | Cache | Blocks per second | db\.Cache\.buffers\_alloc | 
+| temp\_bytes | Temp | Bytes per second | db\.Temp\.temp\_bytes | 
 | temp\_files | Temp | Files per minute | db\.Temp\.temp\_files | 
 | numbackends | User | Connections | db\.User\.numbackends | 
+| total\_auth\_attempts | User | Connections | db\.User\.total\_auth\_attempts | 
 | deadlocks | Concurrency | Deadlocks per minute | db\.Concurrency\.deadlocks | 
 | archived\_count | WAL | Files per minute | db\.WAL\.archived\_count | 
 | archive\_failed\_count | WAL | Files per minute | db\.WAL\.archive\_failed\_count | 
@@ -196,4 +199,5 @@ Non\-native counter metrics are counters defined by Amazon Aurora\. A non\-nativ
 | --- | --- | --- | --- | --- | 
 | checkpoint\_sync\_latency | Checkpoint | db\.Checkpoint\.checkpoint\_sync\_latency | The total amount of time that has been spent in the portion of checkpoint processing where files are synchronized to disk\. | checkpoint\_sync\_time / \(checkpoints\_timed \+ checkpoints\_req\) | 
 | checkpoint\_write\_latency | Checkpoint | db\.Checkpoint\.checkpoint\_write\_latency | The total amount of time that has been spent in the portion of checkpoint processing where files are written to disk\. | checkpoint\_write\_time / \(checkpoints\_timed \+ checkpoints\_req\) | 
+| commit\_latency | Transactions | db\.Transactions\.commit\_latency | The average duration of commit operations\. | db\.Transactions\.duration\_commits / db\.Transactions\.xact\_commit | 
 | read\_latency | I/O | db\.IO\.read\_latency | The time spent reading data file blocks by backends in this instance\. | blk\_read\_time / blks\_read | 

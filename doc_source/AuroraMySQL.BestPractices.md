@@ -267,6 +267,8 @@ When you set up replication between a MySQL DB instance and an Amazon Aurora MyS
 
 For instructions on how to create an Amazon Aurora MySQL DB cluster and make it a read replica of your MySQL DB instance, follow the procedure in [Using Amazon Aurora to scale reads for your MySQL database](#AuroraMySQL.BestPractices.ReadScaling)\.
 
+For more information on disaster recovery models, see [How to choose the best disaster recovery option for your Amazon Aurora MySQL cluster](http://aws.amazon.com/blogs/database/how-to-choose-the-best-disaster-recovery-option-for-your-amazon-aurora-mysql-cluster/)\.
+
 ### Migrating from MySQL to Amazon Aurora MySQL with reduced downtime<a name="AuroraMySQL.BestPractices.Migrating"></a>
 
 When importing data from a MySQL database that supports a live application to an Amazon Aurora MySQL DB cluster, you might want to reduce the time that service is interrupted while you migrate\. To do so, you can use the procedure documented in [Importing data to a MySQL or MariaDB DB instance with reduced downtime](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html) in the *Amazon Relational Database Service User Guide*\. This procedure can especially help if you are working with a very large database\. You can use the procedure to reduce the cost of the import by minimizing the amount of data that is passed across the network to AWS\.
