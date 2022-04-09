@@ -6,7 +6,7 @@ Some maintenance items require that Amazon RDS take your DB cluster offline for 
 
 Deferred DB cluster and instance modifications that you have chosen not to apply immediately are also applied during the maintenance window\. For example, you might choose to change DB instance classes or cluster or DB parameter groups during the maintenance window\. Such modifications that you specify using the **pending reboot** setting don't show up in the **Pending maintenance** list\. For information about modifying a DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
-## Viewing pending maintenence<a name="USER_UpgradeDBInstance.Maintenance.Viewing"></a>
+## Viewing pending maintenance<a name="USER_UpgradeDBInstance.Maintenance.Viewing"></a>
 
 You can view whether a maintenance update is available for your DB cluster by using the RDS console, the AWS CLI, or the Amazon RDS API\. If an update is available, it is indicated in the **Maintenance** column for the DB cluster on the Amazon RDS console, as shown following\.
 

@@ -41,7 +41,7 @@ Although you can't change values in default parameter groups, you can create you
 Following, you can find a table that lists the highest value that should ever be used for `max_connections` for each DB instance class that can be used with Aurora PostgreSQL\. 
 
 
-| Instance class | max\_connections default value | 
+| Instance class | Largest possible value for max\_connections | 
 | --- | --- | 
 | db\.x2g\.16xlarge | 5000 | 
 | db\.x2g\.12xlarge | 5000 | 

@@ -14,12 +14,16 @@ Security threats are both external and internal\. To protect against internal th
 
 ## How database activity streams work<a name="DBActivityStreams.Overview.how-they-work"></a>
 
-Amazon Aurora pushes activities to an Amazon Kinesis data stream in near real time\. The Kinesis stream is created automatically\. From Kinesis, you can configure AWS services such as Amazon Kinesis Data Firehose and AWS Lambda to consume the stream and store the data\.
+In Amazon Aurora, you start a database activity stream at the cluster level\. All DB instances within your cluster have database activity streams enabled\.
+
+Your Aurora DB cluster pushes activities to an Amazon Kinesis data stream in near real time\. The Kinesis stream is created automatically\. From Kinesis, you can configure AWS services such as Amazon Kinesis Data Firehose and AWS Lambda to consume the stream and store the data\.
 
 **Important**  
 Use of the Database Activity Streams feature in Amazon Aurora and Amazon RDS is free, but Amazon Kinesis charges for a data stream\. For more information, see [Amazon Kinesis Data Streams pricing](https://aws.amazon.com/kinesis/data-streams/pricing/)\.
 
-Applications for compliance management can also consume database activity streams\. For Aurora PostgreSQL, compliance applications include IBM's Security Guardium and Imperva's SecureSphere Database Audit and Protection\. These applications can use the stream to generate alerts and audit activity on your Aurora DB cluster\.
+If you use an Aurora global database, start a database activity stream on each DB cluster separately\. Each cluster delivers audit data to its own Kinesis stream within its own AWS Region\. The activity streams don't operate differently during a failover\. They continue to audit your global database as usual\.
+
+You can configure applications for compliance management to consume database activity streams\. For Aurora PostgreSQL, compliance applications include IBM's Security Guardium and Imperva's SecureSphere Database Audit and Protection\. These applications can use the stream to generate alerts and audit activity on your Aurora DB cluster\.
 
 The following graphic shows an Aurora DB cluster configured with Amazon Kinesis Data Firehose\.
 
@@ -42,14 +46,11 @@ You can choose to have the database session handle database activity events in e
 ## Requirements for database activity streams<a name="DBActivityStreams.Overview.requirements"></a>
 
 In Aurora, database activity streams have the following requirements and limitations\.
-
-**Topics**
-+ [General requirements](#DBActivityStreams.Overview.requirements.misc)
-
-### General requirements<a name="DBActivityStreams.Overview.requirements.misc"></a>
-+ Database activity streams require use of Amazon Kinesis\.
-+ Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.
-+ Do not encrypt your Amazon Kinesis data stream\. This extra layer of encryption is incompatible with your database activity stream, which is already encrypted with your AWS KMS key\.
++ Amazon Kinesis is required for database activity streams\.
++ AWS Key Management Service \(AWS KMS\) is required for database activity streams because they are always encrypted\.
++ Applying additional encryption to your Amazon Kinesis data stream is incompatible with database activity streams, which are already encrypted with your AWS KMS key\.
++ Start your database activity stream at the DB cluster level\. If you add a DB instance to your cluster, you don't need to start an activity stream on the instance: it is audited automatically\.
++ In an Aurora global database, make sure to start an activity stream on each DB cluster separately\. Each cluster delivers audit data to its own Kinesis stream within its own AWS Region\.
 
 ## Supported Aurora engine versions for database activity streams<a name="DBActivityStreams.Overview.requirements.version"></a>
 

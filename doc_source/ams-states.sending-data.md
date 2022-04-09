@@ -58,7 +58,7 @@ The general guideline is to find queries that return large numbers of rows by ch
 
 ### Turn on the Performance Schema if it isn't turned on<a name="ams-states.sending-data.actions.enable-pfs"></a>
 
-Performance Insights reports thread states only if Performance Schema instruments aren't turned on\. When Performance Schema instruments are turned on, Performance Insights reports wait events instead\. Performance Schema instruments provide additional insights and better tools when you investigate potential performance problems\. Therefore, we recommend that you turn on the Performance Schema\. For more information, see [Enabling the Performance Schema for Performance Insights on Aurora MySQL](USER_PerfInsights.EnableMySQL.md)\.
+Performance Insights reports thread states only if Performance Schema instruments aren't turned on\. When Performance Schema instruments are turned on, Performance Insights reports wait events instead\. Performance Schema instruments provide additional insights and better tools when you investigate potential performance problems\. Therefore, we recommend that you turn on the Performance Schema\. For more information, see [Turning on the Performance Schema for Performance Insights on Aurora MySQL](USER_PerfInsights.EnableMySQL.md)\.
 
 ### Examine memory settings<a name="ams-states.sending-data.actions.memory"></a>
 

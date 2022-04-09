@@ -11,6 +11,7 @@ You can filter new Amazon Aurora features on the [What's New with Database?](htt
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Aurora PostgreSQL supports RDS Proxy with PostgreSQL 13](#WhatsNew) | You can now create an RDS Proxy with an Aurora PostgreSQL 13 DB cluster\. For more information about RDS Proxy, see [Using Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html)\. | April 4, 2022 | 
 | [*Release Notes for Aurora PostgreSQL*](#WhatsNew) | There is now a separate guide for the Amazon Aurora PostgreSQL release notes\. For more information, see [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html)\. | March 22, 2022 | 
 | [*Release Notes for Aurora MySQL*](#WhatsNew) | There is now a separate guide for the Amazon Aurora MySQL release notes\. For more information, see [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html)\. | March 22, 2022 | 
 | [Aurora PostgreSQL supports multi\-major version upgrades](#WhatsNew) | You can now perform version upgrades of Aurora PostgreSQL DB clusters across multiple major versions\. For more information, see [ How to perform a major version upgrade](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. | March 4, 2022 | 

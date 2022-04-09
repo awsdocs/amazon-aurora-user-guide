@@ -26,7 +26,7 @@ Blocking queries and transactions typically unblock in one of the following ways
 
 ## Likely causes of increased waits<a name="apg-waits.lockrelation.causes"></a>
 
-When the `Lock:Relation` event appears more than normal, possibly indicating a performance problem, typical causes include the following:
+When the `Lock:Relation` event occurs more frequently than normal, it can indicate a performance issue\. Typical causes include the following:
 
 **Increased concurrent sessions with conflicting table locks**  
 There might be an increase in the number of concurrent sessions with queries that lock the same table with conflicting locking modes\.
@@ -35,7 +35,7 @@ There might be an increase in the number of concurrent sessions with queries tha
 Health maintenance operations such as `VACUUM` and `ANALYZE` can significantly increase the number of conflicting locks\. `VACUUM FULL` acquires an `ACCESS EXCLUSIVE` lock, and `ANALYSE` acquires a `SHARE UPDATE EXCLUSIVE` lock\. Both types of locks can cause a `Lock:Relation` wait event\. Application data maintenance operations such as refreshing a materialized view can also increase blocked queries and transactions\.
 
 **Locks on reader instances**  
-There might be an increase in locks acquired on reader instances\. From the standpoint of locking, Aurora PostgreSQL treats the writer and reader instances as a single unit\. Thus, locks acquired on a reader instance can block queries on the writer\. Similarly, locks on the writer can block reader queries\.
+There might be a conflict between the relation locks held by the writer and readers\. Currently, only `ACCESS EXCLUSIVE` relation locks are replicated to reader instances\. However, the `ACCESS EXLUSIVE` relation lock can conflict with an `ACCESS SHARE` lock held by the reader, causing an increase in lock relation wait events on the reader\. The replay process eventually detects the conflict in the replication stream and resolves the conflict\. 
 
 ## Actions<a name="apg-waits.lockrelation.actions"></a>
 

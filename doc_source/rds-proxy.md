@@ -49,8 +49,8 @@
 +  RDS Proxy is available for the MySQL and PostgreSQL engine families\. 
 +  Each proxy can be associated with a single target DB instance or cluster\. However, you can associate multiple proxies with the same DB instance or cluster\. 
 
- The following RDS Proxy limitations apply to MySQL: 
-+ RDS Proxy doesn't support the MySQL `sha256_password` and `caching_sha2_password` authentication plugins\. These plugins implement SHA\-256 hashing for user account passwords\. 
+ The following RDS Proxy limitations apply to MySQL:
++ RDS Proxy doesn't support the MySQL `sha256_password` and `caching_sha2_password` authentication plugins\. These plugins implement SHA\-256 hashing for user account passwords\.
 +  Currently, all proxies listen on port 3306 for MySQL\. The proxies still connect to your database using the port that you specified in the database settings\. 
 +  You can't use RDS Proxy with self\-managed MySQL databases in EC2 instances\.
 +  You can't use RDS Proxy with an RDS for MySQL DB instance that has the `read_only` parameter in its DB parameter group set to `1`\.
@@ -58,6 +58,7 @@
 +  Some SQL statements and functions can change the connection state without causing pinning\. For the most current pinning behavior, see [Avoiding pinning](rds-proxy-managing.md#rds-proxy-pinning)\.
 
  The following RDS Proxy limitations apply to PostgreSQL:
++ RDS Proxy doesn't support PostgreSQL SCRAM\-SHA\-256 authentication\.
 +  Currently, all proxies listen on port 5432 for PostgreSQL\.
 + For PostgreSQL, RDS Proxy doesn't currently support canceling a query from a client by issuing a `CancelRequest`\. This is the case for example, when you cancel a long\-running query in an interactive psql session by using Ctrl\+C\. 
 +  The results of the PostgreSQL function [lastval](https://www.postgresql.org/docs/current/functions-sequence.html) aren't always accurate\. As a work\-around, use the [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) statement with the `RETURNING` clause\.

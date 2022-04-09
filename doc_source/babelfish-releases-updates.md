@@ -48,7 +48,7 @@ This release of Babelfish for Aurora PostgreSQL is supported by Aurora PostgreSQ
   + SUSER\_SID
   + SUSER\_SNAME
   + IS\_SRVROLEMEMBER
-+ Full support for the CHECKSUM function\. This function now supports \* and multiple columns \(`CHECKSUM ( * | expression [ ,...n ] )`\. 
++ Full support for the CHECKSUM function\. This function now supports \* and multiple columns \(`CHECKSUM ( * | expression [ ,...n ] )`\)\. 
 + Full support for the SCHEMA\_ID function\. This function can now be used without any arguments \(`SCHEMA_ID ( [ schema_name ] )`\)\. 
 + Support for DROP IF EXISTS with SCHEMA, DATABASE, and USER objects\. 
 + Support for the following values for CONNECTIONPROPERTY: 

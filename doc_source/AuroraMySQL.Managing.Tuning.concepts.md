@@ -32,7 +32,7 @@ When you use Performance Insights, one of the following conditions is true:
 + Performance Schema is turned on – Aurora MySQL shows wait events rather than the thread state\.
 + Performance Schema isn't turned on – Aurora MySQL shows the thread state\.
 
-We recommend that you configure the Performance Schema for automatic management\. The Performance Schema provides additional insights and better tools to investigate potential performance problems\. For more information, see [Enabling the Performance Schema for Performance Insights on Aurora MySQL](USER_PerfInsights.EnableMySQL.md)\.
+We recommend that you configure the Performance Schema for automatic management\. The Performance Schema provides additional insights and better tools to investigate potential performance problems\. For more information, see [Turning on the Performance Schema for Performance Insights on Aurora MySQL](USER_PerfInsights.EnableMySQL.md)\.
 
 ## Aurora MySQL memory<a name="AuroraMySQL.Managing.Tuning.concepts.memory"></a>
 

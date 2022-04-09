@@ -2,6 +2,7 @@
 
 You can connect to an Aurora MySQL or Aurora PostgreSQL DB cluster with the AWS SDK for Python \(Boto3\) as described following\.
 
+**Prerequisites**  
 The following are prerequisites for connecting to your DB cluster using IAM authentication:
 + [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
 + [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
@@ -9,6 +10,7 @@ The following are prerequisites for connecting to your DB cluster using IAM auth
 
 In addition, make sure the imported libraries in the sample code exist on your system\.
 
+**Examples**  
 The code examples use profiles for shared credentials\. For information about the specifying credentials, see [Credentials](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html) in the AWS SDK for Python \(Boto3\) documentation\.
 
 The following code examples show how to generate an authentication token, and then use it to connect to a DB cluster\. 
@@ -27,7 +29,7 @@ Modify the values of the following variables as needed:
 
 This code connects to an Aurora MySQL DB cluster\.
 
-Before running this code, install Connector/Python by following the instructions in [ Connector/Python Installation](https://dev.mysql.com/doc/connector-python/en/connector-python-installation.html) in the MySQL documentation\.
+Before running this code, install Connector/Python version 8\.0 by following the instructions in [ Connector/Python Installation](https://dev.mysql.com/doc/connector-python/en/connector-python-installation.html) in the MySQL documentation\.
 
 ```
 import mysql.connector
