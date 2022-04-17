@@ -10,13 +10,13 @@ Lists all available Aurora PostgreSQL built\-in functions, along with brief desc
 aurora_list_builtins()
 ```
 
-## Return type<a name="aurora_list_builtins-return-type"></a>
-
-SETOF record
-
 ## Arguments<a name="aurora_list_builtins-arguments"></a>
 
 None
+
+## Return type<a name="aurora_list_builtins-return-type"></a>
+
+SETOF record
 
 ## Examples<a name="aurora_list_builtins-examples"></a>
 
@@ -24,7 +24,7 @@ The following example shows results from calling the `aurora_list_builtins` func
 
 ```
 => SELECT * 
-     FROM aurora_list_builtins();
+FROM aurora_list_builtins();
      
                Name                | Result data type |                   Argument data types                    | Type | Volatility |  Parallel  | Security |                             Description
 -----------------------------------+------------------+----------------------------------------------------------+------+------------+------------+----------+---------------------------------------------------------------------

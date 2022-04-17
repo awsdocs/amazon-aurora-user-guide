@@ -10,14 +10,14 @@ Reports cumulative activity for each type of data manipulation language \(DML\) 
 aurora_stat_dml_activity(database_oid)
 ```
 
-## Return type<a name="aurora_stat_dml_activity-return-type"></a>
-
-SETOF record
-
 ## Arguments<a name="aurora_stat_dml_activity-arguments"></a>
 
  *database\_oid*   
 The object ID \(OID\) of the database in the Aurora PostgreSQL cluster\.
+
+## Return type<a name="aurora_stat_dml_activity-return-type"></a>
+
+SETOF record
 
 ## Usage notes<a name="aurora_stat_dml_activity-usage-notes"></a>
 
@@ -34,21 +34,19 @@ You can reset this statistic by using the PostgreSQL statistics access function 
 The following example shows how to report DML activity statistics for the connected database\.
 
 ```
--- Define the oid variable from connected database by using \gset
+––Define the oid variable from connected database by using \gset
 => SELECT oid, 
           datname 
      FROM pg_database 
     WHERE datname=(select current_database()) \gset
-
 => SELECT * 
      FROM aurora_stat_dml_activity(:oid);
-     
- select_count | select_latency_microsecs | insert_count | insert_latency_microsecs | update_count | update_latency_microsecs | delete_count | delete_latency_microsecs
+select_count | select_latency_microsecs | insert_count | insert_latency_microsecs | update_count | update_latency_microsecs | delete_count | delete_latency_microsecs
 --------------+--------------------------+--------------+--------------------------+--------------+--------------------------+--------------+--------------------------
        178957 |                 66684115 |       171065 |                 28876649 |       519538 |            1454579206167 |            1 |                    53027
 
 
--- Showing the same results with expanded display on
+–– Showing the same results with expanded display on
 => SELECT * 
      FROM aurora_stat_dml_activity(:oid);
 -[ RECORD 1 ]------------+--------------
@@ -68,10 +66,10 @@ Aurora PostgreSQL creates and uses a system database named `rdsadmin` to support
 
 ```
 => SELECT oid, 
-          datname, 
-          aurora_stat_dml_activity(oid) 
-     FROM pg_database;
-  oid  |    datname     |                    aurora_stat_dml_activity
+    datname, 
+    aurora_stat_dml_activity(oid) 
+    FROM pg_database;
+oid  |    datname     |                    aurora_stat_dml_activity
 -------+----------------+-----------------------------------------------------------------
  14006 | template0      | (,,,,,,,)
  16384 | rdsadmin       | (2346623,1211703821,4297518,817184554,0,0,0,0)
@@ -124,7 +122,6 @@ The following example shows the average cumulative latency \(cumulative latency 
           delete_latency_microsecs, 
           delete_latency_microsecs/NULLIF(delete_count,0) delete_latency_per_exec
      FROM aurora_stat_dml_activity(16401);
-
 -[ RECORD 1 ]------------+-------------
 select_count             | 451312
 select_latency_microsecs | 80205857

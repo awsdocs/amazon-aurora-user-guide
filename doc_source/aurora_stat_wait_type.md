@@ -10,13 +10,13 @@ Lists all supported wait types for Aurora PostgreSQL\.
 aurora_stat_wait_type()
 ```
 
-## Return type<a name="aurora_stat_wait_type-return-type"></a>
-
-SETOF record
-
 ## Arguments<a name="aurora_stat_wait_type-arguments"></a>
 
 None
+
+## Return type<a name="aurora_stat_wait_type-return-type"></a>
+
+SETOF record
 
 ## Usage notes<a name="aurora_stat_wait_type-usage-notes"></a>
 
@@ -28,8 +28,7 @@ The following example shows results from calling the `aurora_stat_wait_type` fun
 
 ```
 => SELECT * 
-     FROM aurora_stat_wait_type();
-     
+     FROM aurora_stat_wait_type();     
  type_id | type_name
 ---------+-----------
        1 | LWLock

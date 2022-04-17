@@ -10,14 +10,14 @@ Gets the cumulative commit latency in microseconds for Aurora PostgreSQL databas
 aurora_stat_get_db_commit_latency(database_oid)
 ```
 
-## Return type<a name="aurora_stat_get_db_commit_latency-return-type"></a>
-
-SETOF record
-
 ## Arguments<a name="aurora_stat_get_db_commit_latency-arguments"></a>
 
  *database\_oid*   
 The object ID \(OID\) of the Aurora PostgreSQL database\.
+
+## Return type<a name="aurora_stat_get_db_commit_latency-return-type"></a>
+
+SETOF record
 
 ## Usage notes<a name="aurora_stat_get_db_commit_latency-usage-notes"></a>
 
@@ -31,9 +31,9 @@ The following example gets the cumulative commit latency for each database in th
 
 ```
 => SELECT oid, 
-          datname, 
-          aurora_stat_get_db_commit_latency(oid) 
-     FROM pg_database;
+    datname, 
+    aurora_stat_get_db_commit_latency(oid) 
+    FROM pg_database;
      
   oid  |    datname     | aurora_stat_get_db_commit_latency
 -------+----------------+-----------------------------------
@@ -47,15 +47,13 @@ The following example gets the cumulative commit latency for each database in th
 The following example gets the cumulative commit latency for the currently connected database\. Before calling the `aurora_stat_get_db_commit_latency` function, the example first uses `\gset` to define a variable for the `oid` argument and sets its value from the connected database\.
 
 ```
---Get the oid value from the connected database before calling aurora_stat_get_db_commit_latency
-
+––Get the oid value from the connected database before calling aurora_stat_get_db_commit_latency
 => SELECT oid
      FROM pg_database
     WHERE datname=(SELECT current_database()) \gset
-
 => SELECT * 
      FROM aurora_stat_get_db_commit_latency(:oid);
-     
+   
  aurora_stat_get_db_commit_latency
 -----------------------------------
                         1424279160
@@ -65,9 +63,9 @@ The following example gets the cumulative commit latency for the `mydb` database
 
 ```
 => SELECT oid,
-          datname,
-          aurora_stat_get_db_commit_latency(oid)
-     FROM pg_database
+    datname,
+    aurora_stat_get_db_commit_latency(oid)
+    FROM pg_database
     WHERE datname = 'mydb';
      
   oid  |  datname  | aurora_stat_get_db_commit_latency
@@ -76,22 +74,20 @@ The following example gets the cumulative commit latency for the `mydb` database
 
 
 => SELECT pg_stat_reset();
-
  pg_stat_reset
 ---------------
 
-
+    
 => SELECT oid,
           datname,
           aurora_stat_get_db_commit_latency(oid)
      FROM pg_database
-    WHERE datname = 'mydb';
-     
+    WHERE datname = 'mydb';    
   oid  |  datname  | aurora_stat_get_db_commit_latency
 -------+-----------+-----------------------------------
  16427 | mydb      |                                 6
- 
- 
+    
+    
 => SELECT * 
      FROM pg_stat_get_db_stat_reset_time(16427);
      

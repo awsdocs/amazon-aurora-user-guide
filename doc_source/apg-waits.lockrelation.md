@@ -35,7 +35,7 @@ There might be an increase in the number of concurrent sessions with queries tha
 Health maintenance operations such as `VACUUM` and `ANALYZE` can significantly increase the number of conflicting locks\. `VACUUM FULL` acquires an `ACCESS EXCLUSIVE` lock, and `ANALYSE` acquires a `SHARE UPDATE EXCLUSIVE` lock\. Both types of locks can cause a `Lock:Relation` wait event\. Application data maintenance operations such as refreshing a materialized view can also increase blocked queries and transactions\.
 
 **Locks on reader instances**  
-There might be a conflict between the relation locks held by the writer and readers\. Currently, only `ACCESS EXCLUSIVE` relation locks are replicated to reader instances\. However, the `ACCESS EXLUSIVE` relation lock can conflict with an `ACCESS SHARE` lock held by the reader, causing an increase in lock relation wait events on the reader\. The replay process eventually detects the conflict in the replication stream and resolves the conflict\. 
+There might be a conflict between the relation locks held by the writer and readers\. Currently, only `ACCESS EXCLUSIVE` relation locks are replicated to reader instances\. However, the `ACCESS EXLUSIVE` relation lock will conflict with any `ACCESS SHARE` relation locks held by the reader\. This can cause an increase in lock relation wait events on the reader\. 
 
 ## Actions<a name="apg-waits.lockrelation.actions"></a>
 
@@ -62,15 +62,29 @@ Maintenance operations such as `VACUUM` and `ANALYZE` are important\. We recomme
 
 ### Check for reader locks<a name="apg-waits.lockrelation.actions.readerlocks"></a>
 
-You can see how concurrent sessions on a writer and readers might be holding locks that block each other\. One way to do this is to run a query that returns the lock type and relation, as in the following example\.
+You can see how concurrent sessions on a writer and readers might be holding locks that block each other\. One way to do this is by running queries that return the lock type and relation\. In the table you can find a sequence of queries to two such concurrent sessions, a writer session \(left\-hand column\) and a reader session \(right\-hand column\)\.
+
+The replay process waits for the duration of `max_standby_streaming_delay` before cancelling the reader query\. As shown in the example, the lock timeout of 100ms is well below the default `max_standby_streaming_delay` of 30 seconds\. The lock times out before it's an issue\. 
 
 
-| Writer session | Reader session | Description | 
-| --- | --- | --- | 
-|  <pre>export WRITER=aurorapg1.12345678910.us-west-1.rds.amazonaws.com<br /><br />psql -h $WRITER<br />psql (15devel, server 10.14) <br />Type "help" for help. </pre>  |  <pre>export READER=aurorapg2.12345678910.us-west-1.rds.amazonaws.com<br /><br />psql -h $READER<br />psql (15devel, server 10.14)<br />Type "help" for help.</pre>  |  This example shows two concurrent sessions\. The first column shows the writer session\. The second column shows the reader session\.  | 
-|  <pre>postgres=> CREATE TABLE t1(b integer);<br />CREATE TABLE</pre>  |  |  The writer session creates table `t1` on the writer instance\.  | 
-|  |  <pre>postgres=> SET lock_timeout=100;<br />SET</pre>  |  The reader session sets a lock timeout interval of 100 milliseconds\.  | 
-|  |  <pre>postgres=> SELECT * FROM t1;<br /> b<br />---<br />(0 rows)</pre>  |  The reader session tries to read data from table `t1` on the reader instance\.  | 
-|  <pre>postgres=> BEGIN;<br />BEGIN<br />postgres=*> DROP TABLE t1;<br />DROP TABLE<br />postgres=*></pre>  |  |  The writer session drops `t1`\.  | 
-|  |  <pre>postgres=> SELECT * FROM t1;<br />ERROR:  canceling statement due to lock timeout<br />LINE 1: SELECT * FROM t1;<br />                      ^</pre>  |  The query times out and is canceled on the reader\.  | 
-|  |  <pre>postgres=> SELECT locktype, relation, mode, backend_type<br />postgres-> FROM pg_locks l, pg_stat_activity t1<br />postgres-> WHERE l.pid=t1.pid AND relation = 't1'::regclass::oid;<br /> locktype | relation |        mode         |   backend_type<br />----------+----------+---------------------+-------------------<br /> relation | 68628525 | AccessExclusiveLock | aurora wal replay<br />(1 row)</pre>  |  The reader session queries `pg_locks` and `pg_stat_activity` to determine the cause of the error\. The result indicates that the `aurora wal replay` process is holding an `ACCESS EXCLUSIVE` lock on table `t1`\.  | 
+| Writer session | Reader session | 
+| --- |--- |
+|  <pre>export WRITER=aurorapg1.12345678910.us-west-1.rds.amazonaws.com<br /><br />psql -h $WRITER<br />psql (15devel, server 10.14) <br />Type "help" for help. </pre>  |  <pre>export READER=aurorapg2.12345678910.us-west-1.rds.amazonaws.com<br /><br />psql -h $READER<br />psql (15devel, server 10.14)<br />Type "help" for help.</pre>  | 
+| The writer session creates table `t1` on the writer instance\. The `ACCESS EXCLUSIVE` lock is acquired on the writer immediately, assuming that there are no conflicting queries on the writer\. | 
+| --- |
+|  <pre>postgres=> CREATE TABLE t1(b integer);<br />CREATE TABLE</pre>  |  | 
+| The reader session sets a lock timeout interval of 100 milliseconds\. | 
+| --- |
+|  |  <pre>postgres=> SET lock_timeout=100;<br />SET</pre>  | 
+| The reader session tries to read data from table `t1` on the reader instance\. | 
+| --- |
+|  |  <pre>postgres=> SELECT * FROM t1;<br /> b<br />---<br />(0 rows)</pre>  | 
+| The writer session drops `t1`\. | 
+| --- |
+|  <pre>postgres=> BEGIN;<br />BEGIN<br />postgres=> DROP TABLE t1;<br />DROP TABLE<br />postgres=></pre>  |  | 
+| The query times out and is canceled on the reader\. | 
+| --- |
+|  |  <pre>postgres=> SELECT * FROM t1;<br />ERROR:  canceling statement due to lock timeout<br />LINE 1: SELECT * FROM t1;<br />                      ^</pre>  | 
+| The reader session queries `pg_locks` and `pg_stat_activity` to determine the cause of the error\. The result indicates that the `aurora wal replay` process is holding an `ACCESS EXCLUSIVE` lock on table `t1`\. | 
+| --- |
+|  |  <pre>postgres=> SELECT locktype, relation, mode, backend_type<br />postgres-> FROM pg_locks l, pg_stat_activity t1<br />postgres-> WHERE l.pid=t1.pid AND relation = 't1'::regclass::oid;<br /> locktype | relation |        mode         |   backend_type<br />----------+----------+---------------------+-------------------<br /> relation | 68628525 | AccessExclusiveLock | aurora wal replay<br />(1 row)</pre>  | 

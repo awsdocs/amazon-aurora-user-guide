@@ -3,18 +3,21 @@
 Using Amazon CloudWatch Events and Amazon EventBridge, you can automate AWS services and respond to system events such as application availability issues or resource changes\. 
 
 **Topics**
-+ [Tutorial: log the state of an instance using EventBridge](#log-rds-instance-state)
++ [Tutorial: Log DB instance stage changes using Amazon EventBridge](#log-rds-instance-state)
 
-## Tutorial: log the state of an instance using EventBridge<a name="log-rds-instance-state"></a>
+## Tutorial: Log DB instance stage changes using Amazon EventBridge<a name="log-rds-instance-state"></a>
 
-You can create an AWS Lambda function that logs the state changes for an instance\. You can choose to create a rule that runs the function whenever there is a state transition or a transition to one or more states that are of interest\.
-
-In this tutorial, you log any state change of an existing RDS DB instance\. The tutorial assumes that you have a small running test instance that you can shut down temporarily\.
+In this tutorial, you create an AWS Lambda function that logs the state changes for an instance\. You then create a rule that runs the function whenever there is a state change of an existing RDS DB instance\. The tutorial assumes that you have a small running test instance that you can shut down temporarily\.
 
 **Important**  
-Don't perform this tutorial on a running production instance\.
+Don't perform this tutorial on a running production DB instance\.
 
-### Step 1: Create an AWS Lambda Function<a name="rds-create-lambda-function"></a>
+**Topics**
++ [Step 1: Create an AWS Lambda function](#rds-create-lambda-function)
++ [Step 2: Create a rule](#rds-create-rule)
++ [Step 3: Test the rule](#rds-test-rule)
+
+### Step 1: Create an AWS Lambda function<a name="rds-create-lambda-function"></a>
 
 Create a Lambda function to log the state change events\. You specify this function when you create your rule\.
 
@@ -56,7 +59,7 @@ Create a Lambda function to log the state change events\. You specify this funct
 
    1. Choose **Deploy**\.
 
-### Step 2: Create a Rule<a name="rds-create-rule"></a>
+### Step 2: Create a rule<a name="rds-create-rule"></a>
 
 Create a rule to run your Lambda function whenever you launch an Amazon RDS instance\.
 
@@ -90,7 +93,7 @@ Create a rule to run your Lambda function whenever you launch an Amazon RDS inst
 
 1. Choose **Create**\.
 
-### Step 3: Test the Rule<a name="rds-test-rule"></a>
+### Step 3: Test the rule<a name="rds-test-rule"></a>
 
 To test your rule, shut down an RDS DB instance\. After waiting a few minutes for the instance to shut down, verify that your Lambda function was invoked\.
 

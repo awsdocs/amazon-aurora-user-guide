@@ -354,7 +354,7 @@ mysql> select @@aurora_parallel_query;
 
 1.  Depending on whether you created a DB cluster parameter group or a DB parameter group, attach the parameter group to your Aurora cluster or to the specific DB instances where you plan to use the parallel query feature\. 
 **Tip**  
- Because `aurora_parallel_query` is a dynamic parameter, you don't need to restart your cluster after changing this setting\. 
+Because `aurora_parallel_query` is a dynamic parameter, it doesn't require a cluster restart after changing this setting\. However, any connections that were using parallel query before toggling the option will continue to do so until the connection is closed, or the instance is rebooted\.
 
  You can modify the parallel query parameter by using the [ModifyDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterParameterGroup.html) or [ModifyDBParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBParameterGroup.html) API operation or the AWS Management Console\. 
 

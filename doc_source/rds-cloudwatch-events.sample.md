@@ -30,7 +30,7 @@ This information includes the following:
 + The source name and source type of the event
 + A message associated with the event
 
-The following examples illustrate different types of Aurora events in JSON format\. For a tutorial that shows you how to capture and view events in JSON format, see [Tutorial: log the state of an instance using EventBridge](rds-cloud-watch-events.md#log-rds-instance-state)\.
+The following examples illustrate different types of Aurora events in JSON format\. For a tutorial that shows you how to capture and view events in JSON format, see [Tutorial: Log DB instance stage changes using Amazon EventBridge](rds-cloud-watch-events.md#log-rds-instance-state)\.
 
 **Topics**
 + [Example of a DB cluster event](#rds-cloudwatch-events.db-clusters)

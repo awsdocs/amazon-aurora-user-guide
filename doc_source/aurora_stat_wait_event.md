@@ -10,13 +10,13 @@ Lists all supported wait events for Aurora PostgreSQL\. For information about Au
 aurora_stat_wait_event()
 ```
 
-## Return type<a name="aurora_stat_wait_event-return-type"></a>
-
-SETOF record
-
 ## Arguments<a name="aurora_stat_wait_event-arguments"></a>
 
 None
+
+## Return type<a name="aurora_stat_wait_event-return-type"></a>
+
+SETOF record
 
 ## Usage notes<a name="aurora_stat_wait_event-usage-notes"></a>
 
@@ -27,7 +27,7 @@ To see event names with event types instead of IDs, use this function together w
 The following example shows results from calling the `aurora_stat_wait_event` function\.
 
 ```
-=> SELECT * 
+=>  SELECT * 
     FROM aurora_stat_wait_event();
     
  type_id | event_id  |                event_name

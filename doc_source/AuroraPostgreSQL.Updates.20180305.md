@@ -4,7 +4,7 @@ Amazon Aurora PostgreSQL\-Compatible Edition releases update regularly\. Updates
 
 For information about extensions and modules, see [Extension versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)\.
 
-Amazon Aurora for PostgreSQL 1\.X \(compatible with PostgreSQL 9\.6\.XX\) reaches end of life on January 31, 2022\. For more information, see [ Announcement: Amazon Aurora PostgreSQL 9\.6 End\-of\-Life date is January 31, 2022](http://forums.aws.amazon.com/ann.jspa?annID=8512)\. We recommend that you proactively upgrade your databases that are running Aurora PostgreSQL 9\.6 to Amazon Aurora PostgreSQL 10 or higher at your convenience before January 31, 2022\. To learn how, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\. 
+Amazon Aurora for PostgreSQL 1\.X \(compatible with PostgreSQL 9\.6\.XX\) reaches end of life on January 31, 2022\. We recommend that you proactively upgrade your databases that are running Aurora PostgreSQL 9\.6 to Amazon Aurora PostgreSQL 10 or higher at your earliest convenience\. To learn how, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\. 
 
 For more information about Amazon Aurora available releases, policies, and timelines, see [How long Amazon Aurora major versions remain available](Aurora.VersionPolicy.md#Aurora.VersionPolicy.MajorVersionLifetime)\. For more information about support and other policies for Amazon Aurora see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\. 
 

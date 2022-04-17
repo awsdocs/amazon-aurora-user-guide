@@ -10,13 +10,13 @@ Reports wait event information for the Aurora PostgreSQL DB instance\.
 aurora_stat_system_waits()
 ```
 
-## Return type<a name="aurora_stat_system_waits-return-type"></a>
-
-SETOF record
-
 ## Arguments<a name="aurora_stat_system_waits-arguments"></a>
 
 None
+
+## Return type<a name="aurora_stat_system_waits-return-type"></a>
+
+SETOF record
 
 ## Usage notes<a name="aurora_stat_system_waits-usage-notes"></a>
 
@@ -36,8 +36,7 @@ The following example shows results from calling the `aurora_stat_system_waits` 
 
 ```
 => SELECT * 
-    FROM aurora_stat_system_waits();
-    
+    FROM aurora_stat_system_waits();    
  type_id | event_id  |   waits   |  wait_time
 ---------+-----------+-----------+--------------
        1 |  16777219 |        11 |        12864

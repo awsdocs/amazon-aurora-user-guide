@@ -3,8 +3,8 @@
 Security for Amazon Aurora MySQL is managed at three levels:
 + To control who can perform Amazon RDS management actions on Aurora MySQL DB clusters and DB instances, you use AWS Identity and Access Management \(IAM\)\. When you connect to AWS using IAM credentials, your AWS account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Identity and access management in Amazon Aurora](UsingWithRDS.IAM.md)\.
 
-  If you are using IAM to access the Amazon RDS console, you must first sign on to the AWS Management Console with your IAM user credentials\. Then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-+ Aurora MySQL DB clusters must be created in an Amazon Virtual Private Cloud \(VPC\)\. To control which devices and Amazon EC2 instances can open connections to the endpoint and port of the DB instance for Aurora MySQL DB clusters in a VPC, you use a VPC security group\. These endpoint and port connections can be made using Secure Sockets Layer \(SSL\)\. In addition, firewall rules at your company can control whether devices running at your company can open connections to a DB instance\. For more information on VPCs, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
+  If you are using IAM to access the Amazon RDS console, make sure to first sign in to the AWS Management Console with your IAM user credentials\. Then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
++ Make sure to create Aurora MySQL DB clusters in a virtual public cloud \(VPC\) based on the Amazon VPC service\. To control which devices and Amazon EC2 instances can open connections to the endpoint and port of the DB instance for Aurora MySQL DB clusters in a VPC, use a VPC security group\. You can make these endpoint and port connections by using Secure Sockets Layer \(SSL\)\. In addition, firewall rules at your company can control whether devices running at your company can open connections to a DB instance\. For more information on VPCs, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
 
   The supported VPC tenancy depends on the DB instance class used by your Aurora MySQL DB clusters\. With `default` VPC tenancy, the VPC runs on shared hardware\. With `dedicated` VPC tenancy, the VPC runs on a dedicated hardware instance\. The burstable performance DB instance classes support default VPC tenancy only\. The burstable performance DB instance classes include the db\.t2, db\.t3, and db\.t4g DB instance classes\. All other Aurora MySQL DB instance classes support both default and dedicated VPC tenancy\.
 
@@ -71,6 +71,7 @@ We recommend the MariaDB Connector/J client as a client that supports SAN with S
 + [Requiring an SSL/TLS connection to an Aurora MySQL DB cluster](#AuroraMySQL.Security.SSL.RequireSSL)
 + [TLS versions for Aurora MySQL](#AuroraMySQL.Security.SSL.TLS_Version)
 + [Encrypting connections to an Aurora MySQL DB cluster](#AuroraMySQL.Security.SSL.EncryptingConnections)
++ [Configuring cipher suites for connections to Aurora MySQL DB clusters](#AuroraMySQL.Security.SSL.ConfiguringCipherSuites)
 
 ### Requiring an SSL/TLS connection to an Aurora MySQL DB cluster<a name="AuroraMySQL.Security.SSL.RequireSSL"></a>
 
@@ -118,7 +119,7 @@ The `tls_version` DB cluster parameter isn't available for Aurora MySQL 5\.6\.
 
 ### Encrypting connections to an Aurora MySQL DB cluster<a name="AuroraMySQL.Security.SSL.EncryptingConnections"></a>
 
-To encrypt connections using the default `mysql` client, launch the mysql client using the `--ssl-ca parameter` to reference the public key, for example: 
+To encrypt connections using the default `mysql` client, launch the mysql client using the `--ssl-ca` parameter to reference the public key, for example: 
 
 For MySQL 5\.7 and 8\.0:
 
@@ -154,3 +155,57 @@ GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL;
 
 **Note**  
 For more information on SSL/TLS connections with MySQL, see the [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html)\.
+
+### Configuring cipher suites for connections to Aurora MySQL DB clusters<a name="AuroraMySQL.Security.SSL.ConfiguringCipherSuites"></a>
+
+By using configurable cipher suites, you can have more control over the security of your database connections\. You can specify a list of cipher suites that you want to allow to secure client SSL/TLS connections to your database\. With configurable cipher suites, you can control the connection encryption that your database server accepts\. Doing this prevents the use of insecure or deprecated ciphers\.
+
+Configurable cipher suites is supported in Aurora MySQL version 3 and Aurora MySQL version 2\.
+
+To specify the list of permissible ciphers for encrypting connections, modify the `ssl_cipher` cluster parameter\. Set the `ssl_cipher` parameter in a cluster parameter group using the AWS Management Console, the AWS CLI, or the RDS API\.
+
+For information about modifying parameters in a DB cluster parameter group, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. If you use the CLI to modify the `ssl_cipher` DB cluster parameter, make sure to set the `ApplyMethod` to `pending-reboot`\. When the application method is `pending-reboot`, changes to parameters are applied after you stop and restart the DB clusters associated with the parameter group\.
+
+For the client application, you can specify the ciphers to use for encrypted connections by using the `--ssl-cipher` option when connecting to the database\. For more about connecting to your database, see [Connecting to an Amazon Aurora MySQL DB cluster](Aurora.Connecting.md#Aurora.Connecting.AuroraMySQL)\.
+
+Set the `ssl_cipher` parameter to a string of comma\-separated cipher values\. The following table shows the supported ciphers along with the TLS encryption protocol and valid Aurora MySQL engine versions for each cipher\.
+
+
+| Cipher | Encryption protocol | Supported Aurora MySQL versions | 
+| --- | --- | --- | 
+| `DHE-RSA-AES128-SHA` | TLS 1\.0 | 3\.01\.0 and higher, 2\.10\.2, 2\.10\.1, 2\.09\.3, 2\.08\.4, 2\.07\.7, 2\.04\.9 | 
+| `DHE-RSA-AES128-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.10\.1, 2\.09\.3, 2\.08\.4, 2\.07\.7, 2\.04\.9 | 
+| `DHE-RSA-AES128-GCM-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.10\.1, 2\.09\.3, 2\.08\.4, 2\.07\.7, 2\.04\.9 | 
+| `DHE-RSA-AES256-SHA` | TLS 1\.0 | 3\.01\.0 and higher, 2\.10\.2, 2\.10\.1, 2\.09\.3, 2\.08\.4, 2\.07\.7, 2\.04\.9 | 
+| `DHE-RSA-AES256-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.10\.1, 2\.09\.3, 2\.08\.4, 2\.07\.7, 2\.04\.9 | 
+| `DHE-RSA-AES256-GCM-SHA384` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.10\.1, 2\.09\.3, 2\.08\.4, 2\.07\.7, 2\.04\.9 | 
+| `ECDHE-RSA-AES128-SHA` | TLS 1\.0 | 3\.01\.0 and higher, 2\.10\.2, 2\.09\.3 | 
+| `ECDHE-RSA-AES128-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.09\.3 | 
+| `ECDHE-RSA-AES128-GCM-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.09\.3 | 
+| `ECDHE-RSA-AES256-SHA` | TLS 1\.0 | 3\.01\.0 and higher, 2\.10\.2, 2\.09\.3 | 
+| `ECDHE-RSA-AES256-SHA384` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.09\.3 | 
+| `ECDHE-RSA-AES256-GCM-SHA384` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.09\.3 | 
+
+You can also use the [describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) CLI command to determine which cipher suites are currently supported for a specific parameter group family\. The following example shows how to get the allowed values for the `ssl_cipher` cluster parameter for Aurora MySQL 5\.7\.
+
+```
+aws rds describe-engine-default-cluster-parameters --db-parameter-group-family aurora-mysql5.7
+
+        ...some output truncated...
+	{
+		"ParameterName": "ssl_cipher",
+		"ParameterValue": "DHE-RSA-AES128-SHA,DHE-RSA-AES128-SHA256,DHE-RSA-AES128-GCM-SHA256,DHE-RSA-AES256-SHA,DHE-RSA-AES256-SHA256,DHE-RSA-AES256-GCM-SHA384,ECDHE-RSA-AES128-SHA,ECDHE-RSA-AES128-SHA256,ECDHE-RSA-AES128-GCM-SHA256,ECDHE-RSA-AES256-SHA,ECDHE-RSA-AES256-SHA384,ECDHE-RSA-AES256-GCM-SHA384",
+		"Description": "The list of permissible ciphers for connection encryption.",
+		"Source": "system",
+		"ApplyType": "static",
+		"DataType": "list",
+		"AllowedValues": "DHE-RSA-AES128-SHA,DHE-RSA-AES128-SHA256,DHE-RSA-AES128-GCM-SHA256,DHE-RSA-AES256-SHA,DHE-RSA-AES256-SHA256,DHE-RSA-AES256-GCM-SHA384,ECDHE-RSA-AES128-SHA,ECDHE-RSA-AES128-SHA256,ECDHE-RSA-AES128-GCM-SHA256,ECDHE-RSA-AES256-SHA,ECDHE-RSA-AES256-SHA384,ECDHE-RSA-AES256-GCM-SHA384",
+		"IsModifiable": true,
+		"SupportedEngineModes": [
+			"provisioned"
+		]
+	},
+       ...some output truncated...
+```
+
+For more information about ciphers, see the [ssl\_cipher](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_ssl_cipher) variable in the MySQL documentation\. For more information about cipher suite formats, see the [openssl\-ciphers list format](https://www.openssl.org/docs/manmaster/man1/openssl-ciphers.html#CIPHER-LIST-FORMAT) and [openssl\-ciphers string format](https://www.openssl.org/docs/manmaster/man1/openssl-ciphers.html#CIPHER-STRINGS) documentation on the OpenSSL website\.

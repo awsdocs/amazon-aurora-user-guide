@@ -387,7 +387,9 @@ As with cloning within the same AWS account, additional storage space is used on
 + You can't view or accept invitations to shared resources with the AWS Management Console\. Use the AWS CLI, the Amazon RDS API, or the AWS RAM console to view and accept invitations to shared resources\. 
 + You can't create new clones from a clone that's been shared with your AWS account\. 
 + You can't share resources \(clones or Aurora DB clusters\) that have been shared with your AWS account\.
-+ You can't create more than 15 cross\-account clones from any single Aurora DB cluster\. Each of these 15 clones must be owned by a different AWS account\. That is, you can only create one cross\-account clone of a cluster within any AWS account\. 
++ You can create a maximum of 15 cross\-account clones from any single Aurora DB cluster\. 
++  Each of the 15 cross\-account clones must be owned by a different AWS account\. That is, you can only create one cross\-account clone of a cluster within any AWS account\. 
++  After you clone a cluster, the original cluster and its clone are considered to be the same for purposes of enforcing limits on cross\-account clones\. You can't create cross\-account clones of both the original cluster and the cloned cluster within the same AWS account\. The total number of cross\-account clones for the original cluster and any of its clones can't exceed 15\. 
 + You can't share an Aurora DB cluster with other AWS accounts unless the cluster is in an `ACTIVE` state\. 
 + You can't rename an Aurora DB cluster that's been shared with other AWS accounts\. 
 +  You can't create a cross\-account clone of a cluster that is encrypted with the default RDS key\. 

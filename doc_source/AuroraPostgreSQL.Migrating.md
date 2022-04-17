@@ -176,7 +176,7 @@ Migrating from an RDS for PostgreSQL DB instance to an Aurora PostgreSQL DB clus
 Once the Replica cluster exists, you monitor the lag between it and the source RDS for PostgreSQL DB instance\. When the replica lag is zero \(0\), you can promote the Replica cluster\. Replication stops, the Replica cluster is promoted to a standalone Aurora DB cluster, and the reader is promoted to writer instance for the cluster\. You can then add instances to the Aurora PostgreSQL DB cluster to size your Aurora PostgreSQL DB cluster for your use case\. You can also delete the RDS for PostgreSQL DB instance if you have no further need of it\. 
 
 **Note**  
-It can take several hours per tebitype \(TiB\) of data for the migration to complete\. 
+It can take several hours per terabyte of data for the migration to complete\. 
 
 You can't create an Aurora read replica if your RDS for PostgreSQL DB instance already has an Aurora read replica or if it has a cross\-Region read replica\. 
 
@@ -196,7 +196,7 @@ For more information about monitoring your RDS instance, see [Monitoring](https:
 
 ### Creating an Aurora read replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Create"></a>
 
-You can create an Aurora read replica for an RDS for PostgreSQL DB instance by using the console or the AWS CLI\. The option to create an Aurora read replica is available only if the AWS Region offers a compatible Aurora PostgreSQL version\. That is, it's available only if there's an Aurora PostgreSQL version that is the same as the RDS for PostgreSQL version or a higher minor version in the same major version family\.
+You can create an Aurora read replica for an RDS for PostgreSQL DB instance by using the AWS Management Console or the AWS CLI\. The option to create an Aurora read replica using the AWS Management Console is available only if the AWS Region offers a compatible Aurora PostgreSQL version\. That is, it's available only if there's an Aurora PostgreSQL version that is the same as the RDS for PostgreSQL version or a higher minor version in the same major version family\.
 
 #### Console<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Create.Console"></a>
 
@@ -262,6 +262,7 @@ aws rds create-db-instance \
     --db-cluster-identifier myreadreplicacluster \
     --db-instance-class myinstanceclass \
     --db-instance-identifier myreadreplicainstance \
+    --engine-version same-as-your-rds-instance-version \
     --engine aurora-postgresql
 ```
 For Windows:  
@@ -271,6 +272,7 @@ aws rds create-db-instance ^
     --db-cluster-identifier myreadreplicacluster ^
     --db-instance-class myinstanceclass ^
     --db-instance-identifier myreadreplicainstance ^
+    --engine-version same-as-your-rds-instance-version ^
     --engine aurora-postgresql
 ```
 

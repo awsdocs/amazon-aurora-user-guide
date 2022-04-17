@@ -22,10 +22,16 @@ To apply changes to the current session and on the cluster level, include the `s
 The usage is as follows:
 + To list all escape hatches and their status, plus usage information, run `sp_babelfish_configure`\.
 + To list the named escape hatches and their values, for the current session or cluster\-wide, run the command `sp_babelfish_configure 'hatch_name'` where `hatch_name` is the identifier of one or more escape hatches\. *hatch\_name* can use SQL wildcards, such as '%'\.
-+ To set one or more escape hatches to the value specified, run `sp_babelfish_configure ['hatch_name' [, 'strict'|'ignore' [, 'server']]`\. To make the settings permanent on a cluster\-wide level, include the `server` keyword\. To set them for the current session only, don't use `server`\.
++ To set one or more escape hatches to the value specified, run `sp_babelfish_configure ['hatch_name' [, 'strict'|'ignore' [, 'server']]`\. To make the settings permanent on a cluster\-wide level, include the `server` keyword, such as shown in the following:
+
+  ```
+  EXECUTE sp_babelfish_configure 'escape_hatch_unique_constraint', 'ignore', 'server'
+  ```
+
+  To set them for the current session only, don't use `server`\.
 + To reset all escape hatches to their default values, run `sp_babelfish_configure 'default'` \(Babelfish 1\.2\.0 and higher\)\. 
 
-The string identifying the hatch \(or hatches\) might contain SQL wildcards\. For example, the following sets all syntax escape hatches to `ignore` for the Aurora PostgreSQL cluster\.
+The string identifying the hatch \(or hatches\) can include SQL wildcards\. For example, the following sets all syntax escape hatches to `ignore` for the Aurora PostgreSQL cluster\.
 
 ```
 EXECUTE sp_babelfish_configure '%', 'ignore', 'server'
@@ -62,4 +68,4 @@ In the following table you can find descriptions and default values for the Babe
 | escape\_hatch\_storage\_on\_partition |  Controls Babelfish behavior related to the `ON partition_scheme column `clause when defining partitioning\. Babelfish currently doesn't implement partitioning\.  |  strict  | 
 | escape\_hatch\_storage\_options |  Escape hatch on any storage option used in CREATE, ALTER DATABASE, TABLE, INDEX\. This includes clauses \(LOG\) ON, TEXTIMAGE\_ON, FILESTREAM\_ON that define storage locations \(partitions, file groups\) for tables, indexes, and constraints, and also for a database\. This escape hatch setting applies to all of these clauses \(including ON \[PRIMARY\] and ON "DEFAULT"\)\. The exception is when a partition is specified for a table or index with ON partition\_scheme \(column\)\.  |  ignore  | 
 | escape\_hatch\_table\_hints |  Controls the behavior of table hints specified using the WITH \(\.\.\.\) clause\.   |  ignore  | 
-| escape\_hatch\_unique\_constraint |  Controls Babelfish behavior when creating a unique index or constraint on a nullable column\.  |  strict  | 
+| escape\_hatch\_unique\_constraint |  When set to strict, an obscure semantic difference between SQL Server and PostgreSQL in handling NULL values on indexed columns can raise errors\. The semantic difference only emerges in unrealistic use cases, so you can set this escape hatch to 'ignore' to avoid seeing the error\.   |  strict  | 

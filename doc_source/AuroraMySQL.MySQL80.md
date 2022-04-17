@@ -242,6 +242,8 @@ mysql> CREATE TEMPORARY TABLE tt3 ENGINE=InnoDB AS SELECT * FROM t1;
 ERROR 1874 (HY000): InnoDB is in read only mode.
 ```
 
+ For more information about the storage aspects and performance implications of temporary tables in Aurora MySQL version 3, see the blog post [Use the TempTable storage engine on Amazon RDS for MySQL and Amazon Aurora MySQL](https://aws.amazon.com/blogs/database/use-the-temptable-storage-engine-on-amazon-rds-for-mysql-and-amazon-aurora-mysql/)\. 
+
 ### Storage engine for internal temporary tables<a name="AuroraMySQL.mysql80-internal-temp-tables-engine"></a>
 
  In Aurora MySQL version 3, the way internal temporary tables work is different from earlier Aurora MySQL versions\. Instead of choosing between the InnoDB and MyISAM storage engines for such temporary tables, now you choose between the `TempTable` and InnoDB storage engines\. 
@@ -270,6 +272,8 @@ ERROR 1874 (HY000): InnoDB is in read only mode.
 
 **Note**  
  The configuration parameters related to internal temporary tables apply differently to the writer and reader instances in your cluster\. For reader instances, Aurora MySQL always uses the `TempTable` storage engine and a value of 1 for `temptable_use_mmap`\. The size for `temptable_max_mmap` defaults to 1 GB, for both writer and reader instances, regardless of the DB instance memory size\. You can adjust this value the same way as on the writer instance, except that you can't specify a value of zero for `temptable_max_mmap` on reader instances\. 
+
+ For more information about the storage aspects and performance implications of temporary tables in Aurora MySQL version 3, see the blog post [Use the TempTable storage engine on Amazon RDS for MySQL and Amazon Aurora MySQL](https://aws.amazon.com/blogs/database/use-the-temptable-storage-engine-on-amazon-rds-for-mysql-and-amazon-aurora-mysql/)\. 
 
 ### Binary log replication<a name="AuroraMySQL.mysql80-binlog"></a>
 
