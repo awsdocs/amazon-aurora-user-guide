@@ -1,4 +1,4 @@
-# Creating a DB cluster snapshot<a name="USER_CreateSnapshotCluster"></a>
+# Creating a DB cluster snapshot<a name="USER_CreateSnapshotCluster"></a><a name="create_snapshot"></a>
 
 Amazon RDS creates a storage volume snapshot of your DB cluster, backing up the entire DB cluster and not just individual databases\. When you create a DB cluster snapshot, you need to identify which DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\. The amount of time it takes to create a DB cluster snapshot varies with the size of your databases\. Because the snapshot includes the entire storage volume, the size of files, such as temporary files, also affects the amount of time it takes to create the snapshot\.
 

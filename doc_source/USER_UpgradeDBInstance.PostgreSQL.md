@@ -181,7 +181,7 @@ We recommend the following process when upgrading an Aurora PostgreSQL DB cluste
 
 1. Perform a dry run upgrade\.
 
-   We highly recommend testing a major version upgrade on a duplicate of your production database before trying the upgrade on your production database\. To create a duplicate test instance, you can either restore your database from a recent snapshot or clone your database\. For more information, see [Restoring from a snapshot](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Restoring) or [Cloning a volume for an Aurora DB cluster](Aurora.Managing.Clone.md)\.
+   We highly recommend testing a major version upgrade on a duplicate of your production database before trying the upgrade on your production database\. To create a duplicate test instance, you can either restore your database from a recent snapshot or clone your database\. For more information, see [Restoring from a snapshot](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Restoring) or [Cloning a volume for an Amazon Aurora DB cluster](Aurora.Managing.Clone.md)\.
 
    For more information, see [Manually upgrading the Aurora PostgreSQL engine](#USER_UpgradeDBInstance.Upgrading.Manual)\. 
 

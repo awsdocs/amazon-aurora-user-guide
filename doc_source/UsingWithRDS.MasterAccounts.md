@@ -12,4 +12,4 @@ If you accidentally delete the permissions for the master user, you can restore 
 | Database engine | System privilege | Database role | 
 | --- | --- | --- | 
 | Amazon Aurora MySQL | `CREATE`, `DROP`, `GRANT OPTION`, `REFERENCES`, `EVENT`, `ALTER`, `DELETE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `TRIGGER`, `CREATE VIEW`, `SHOW VIEW`, `LOAD FROM S3`, `SELECT INTO S3`, `ALTER ROUTINE`, `CREATE ROUTINE`, `EXECUTE`, `CREATE USER`, `PROCESS`, `SHOW DATABASES `, `RELOAD`, `REPLICATION CLIENT`, `REPLICATION SLAVE` | — | 
-| Amazon Aurora PostgreSQL | `LOGIN`, `NOSUPERUSER`, `INHERIT`, `CREATEDB`, `CREATEROLE`, `NOREPLICATION`, `VALID UNTIL 'infinity'` | `RDS_SUPERUSER` | 
+| Amazon Aurora PostgreSQL | `LOGIN`, `NOSUPERUSER`, `INHERIT`, `CREATEDB`, `CREATEROLE`, `NOREPLICATION`, `VALID UNTIL 'infinity'` | `RDS_SUPERUSER` For more information about RDS\_SUPERUSER, see [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md)\. | 

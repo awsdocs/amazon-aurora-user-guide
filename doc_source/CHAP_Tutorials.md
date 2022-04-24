@@ -34,7 +34,7 @@ The following tutorials in other AWS guides show you how to perform common tasks
 Some of the tutorials use Amazon RDS DB instances, but they can be adapted to use Aurora DB clusters\.
 + [ Tutorial: Aurora Serverless](https://docs.aws.amazon.com/appsync/latest/devguide/tutorial-rds-resolvers.html) in the *AWS AppSync Developer Guide*
 
-  Learn how to use AWS AppSync to provide a data source for executing SQL commands against Aurora Serverless v1 DB clusters with the Data API enabled\. You can use AWS AppSync resolvers to execute SQL statements against the Data API with GraphQL queries, mutations, and subscriptions\.
+  Learn how to use AWS AppSync to provide a data source for executing SQL commands against Aurora Serverless DB clusters with the Data API enabled\. You can use AWS AppSync resolvers to execute SQL statements against the Data API with GraphQL queries, mutations, and subscriptions\.
 + [ Tutorial: Rotating a Secret for an AWS Database](https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_db-rotate.html) in the *AWS Secrets Manager User Guide*
 
   Learn how to create a secret for an AWS database and configure the secret to rotate on a schedule\. You trigger one rotation manually, and then confirm that the new version of the secret continues to provide access\.

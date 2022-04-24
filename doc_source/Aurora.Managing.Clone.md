@@ -1,8 +1,14 @@
-# Cloning a volume for an Aurora DB cluster<a name="Aurora.Managing.Clone"></a><a name="cloning"></a>
+# Cloning a volume for an Amazon Aurora DB cluster<a name="Aurora.Managing.Clone"></a><a name="cloning"></a>
 
-By using Aurora cloning, you can quickly and cost\-effectively create a new cluster that uses the same Aurora cluster volume and has the same data as the original\. The new cluster with its associated data volume is known as a *clone*\. Creating a clone is faster and more space\-efficient than physically copying the data using other techniques, such as restoring a snapshot\.
+By using Aurora cloning, you can create a new cluster that uses the same Aurora cluster volume and has the same data as the original\. The process is designed to be fast and cost\-effective\. The new cluster with its associated data volume is known as a *clone*\. Creating a clone is faster and more space\-efficient than physically copying the data using other techniques, such as restoring a snapshot\.
 
-Aurora supports many different types of cloning\. You can create an Aurora provisioned clone from a provisioned Aurora DB cluster\. You can create an Aurora Serverless v1 clone from an Aurora Serverless v1 DB cluster\. But you can also create Aurora Serverless v1 clones from Aurora provisioned DB clusters, and you can create provisioned clones from Aurora Serverless v1 DB clusters\. When you create a clone using a different deployment configuration than the source, the clone is created using the latest minor version of the source's Aurora DB engine\.
+Aurora supports many different types of cloning: 
++  You can create an Aurora provisioned clone from a provisioned Aurora DB cluster\. 
++  You can create an Aurora Serverless v1 clone from an Aurora Serverless v1 DB cluster\. 
++  You can also create Aurora Serverless v1 clones from Aurora provisioned DB clusters, and you can create provisioned clones from Aurora Serverless v1 DB clusters\. 
++  Clusters with Aurora Serverless v2 instances follow the same rules as provisioned clusters\. 
+
+ When you create a clone using a different deployment configuration than the source, the clone is created using the latest minor version of the source's Aurora DB engine\.
 
 A cloned Aurora Serverless DB cluster has the same behavior and limitations as any Aurora Serverless v1 DB cluster\. For more information, see [Using Amazon Aurora Serverless v1](aurora-serverless.md)\. 
 

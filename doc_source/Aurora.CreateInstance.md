@@ -1,4 +1,4 @@
-# Creating an Amazon Aurora DB cluster<a name="Aurora.CreateInstance"></a>
+# Creating an Amazon Aurora DB cluster<a name="Aurora.CreateInstance"></a><a name="create_cluster"></a>
 
 An Amazon Aurora DB cluster consists of a DB instance, compatible with either MySQL or PostgreSQL, and a cluster volume that holds the data for the DB cluster, copied across three Availability Zones as a single, virtual volume\. By default, an Aurora DB cluster contains a primary DB instance that performs reads and writes, and, optionally, up to 15 Aurora Replicas \(reader DB instances\)\. For more information about Aurora DB clusters, see [Amazon Aurora DB clusters](Aurora.Overview.md)\.
 
@@ -19,7 +19,7 @@ You can create an Amazon Aurora DB cluster only in a virtual private cloud \(VPC
 
 If you use the AWS Management Console to create your Aurora DB cluster, you can have Amazon RDS automatically create a VPC for you\. Or you can use an existing VPC or create a new VPC for your Aurora DB cluster\. Whichever approach you take, your VPC must have at least one subnet in each of at least two Availability Zones for you to use it with an Amazon Aurora DB cluster\. 
 
-By default, Amazon RDS creates the primary DB instance and the Aurora Replica in the AZs automatically for you\. To choose a specific AZ, you need to change the **Availability & durability** Multi\-AZ deployment setting to **Don't create an Aurora Replica**\. Doing so exposes a drop\-down selector that lets you choose from among the AZs in your VPC\. However, we strongly recommend that you keep the default setting and let Amazon RDS create a multi\-AZ deployment and choose AZs for you\. By doing so, your Aurora DB cluster is created with the fast failover and high availability features that are two of Aurora's key benefits\. 
+By default, Amazon RDS creates the primary DB instance and the Aurora Replica in the AZs automatically for you\. To choose a specific AZ, you need to change the **Availability & durability** Multi\-AZ deployment setting to **Don't create an Aurora Replica**\. Doing so exposes a drop\-down selector that lets you choose from among the AZs in your VPC\. However, we strongly recommend that you keep the default setting and let Amazon RDS create a Multi\-AZ deployment and choose AZs for you\. By doing so, your Aurora DB cluster is created with the fast failover and high availability features that are two of Aurora's key benefits\. 
 
 For more information, see [How to create a VPC for use with Amazon Aurora](Aurora.CreateVPC.md)\. For information on VPCs, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
 
@@ -82,7 +82,7 @@ For this example, **Standard create** is enabled, and **Easy create** isn't enab
      For more information, see [Amazon Aurora DB clusters](Aurora.Overview.md)\.
    + **Serverless**
 
-     For more information, see [Using Amazon Aurora Serverless v1](aurora-serverless.md)\.
+     For more information, see [Using Aurora Serverless v2](aurora-serverless-v2.md) and [Using Amazon Aurora Serverless v1](aurora-serverless.md)\.
 
 1. For **Version**, choose the engine version\.
 
@@ -325,7 +325,7 @@ When you create an Aurora PostgreSQL DB cluster or DB instance, specify `aurora-
 The following table contains details about settings that you choose when you create an Aurora DB cluster\. 
 
 **Note**  
-Additional settings are available if you are creating an Aurora Serverless DB cluster\. For information about these settings, see [Creating an Aurora Serverless v1 DB cluster](aurora-serverless.create.md)\. Also, some settings aren't available for Aurora Serverless because of Aurora Serverless limitations\. For more information, see [Limitations of Aurora Serverless v1](aurora-serverless.md#aurora-serverless.limitations)\.
+Additional settings are available if you are creating an Aurora Serverless v1 DB cluster\. For information about these settings, see [Creating an Aurora Serverless v1 DB cluster](aurora-serverless.create.md)\. Also, some settings aren't available for Aurora Serverless v1 because of Aurora Serverless v1 limitations\. For more information, see [Limitations of Aurora Serverless v1](aurora-serverless.md#aurora-serverless.limitations)\.
 
 
 | Console setting | Setting description | CLI option and RDS API parameter | 

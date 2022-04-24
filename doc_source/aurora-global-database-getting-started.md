@@ -689,7 +689,7 @@ The snapshot that you use can be from a `provisioned` or from a `serverless` Aur
 **Note**  
 You can't create a provisioned Aurora DB cluster from a snapshot made from an Aurora MySQL 5\.6\.10a–based global database\. A snapshot from an Aurora MySQL 5\.6\.10a–based global database can only be restored as an Aurora global database\. 
 
-During the restore process, choose the same DB engine type as the snapshot\. For example, suppose that you want to restore a snapshot that was made from an Aurora Serverless v1 DB cluster running Aurora PostgreSQL\. In this case, you create an Aurora PostgreSQL DB cluster using that same Aurora DB engine and version\. 
+During the restore process, choose the same DB engine type as the snapshot\. For example, suppose that you want to restore a snapshot that was made from an Aurora Serverless DB cluster running Aurora PostgreSQL\. In this case, you create an Aurora PostgreSQL DB cluster using that same Aurora DB engine and version\. 
 
 The restored DB cluster assumes the role of primary cluster for Aurora global database when you add an AWS Regions to it\. All data contained in this primary cluster is replicated to any secondary clusters that you add to your Aurora global database\.
 

@@ -1,4 +1,4 @@
-# Restoring from a DB cluster snapshot<a name="USER_RestoreFromSnapshot"></a>
+# Restoring from a DB cluster snapshot<a name="USER_RestoreFromSnapshot"></a><a name="restore_snapshot"></a>
 
 Amazon RDS creates a storage volume snapshot of your DB cluster, backing up the entire DB instance and not just individual databases\. You can create a new DB cluster by restoring from a DB snapshot\. You provide the name of the DB cluster snapshot to restore from, and then provide a name for the new DB cluster that is created from the restore\. You can't restore from a DB cluster snapshot to an existing DB cluster; a new DB cluster is created when you restore\. 
 

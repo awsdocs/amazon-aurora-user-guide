@@ -4,10 +4,8 @@ This topic includes information on best practices and options for using or migra
 
 **Contents**
 + [Determining which DB instance you are connected to](#AuroraMySQL.BestPractices.DeterminePrimaryInstanceConnection)
-+ [Best practices for using AWS features with Aurora MySQL](#AuroraMySQL.BestPractices.Amazon)
-  + [Using T instance classes for development and testing](#AuroraMySQL.BestPractices.T2Medium)
-  + [Invoking AWS Lambda functions using native functions](#AuroraMySQL.BestPractices.Lambda)
 + [Best practices for Aurora MySQL performance and scaling](#AuroraMySQL.BestPractices.Performance)
+  + [Using T instance classes for development and testing](#AuroraMySQL.BestPractices.T2Medium)
   + [Optimizing Amazon Aurora indexed join queries with asynchronous key prefetch](#Aurora.BestPractices.AKP)
     + [Enabling asynchronous key prefetch](#Aurora.BestPractices.AKP.Enabling)
     + [Optimizing queries for asynchronous key prefetch](#Aurora.BestPractices.AKP.Optimizing)
@@ -18,8 +16,9 @@ This topic includes information on best practices and options for using or migra
 + [Best practices for Aurora MySQL high availability](#AuroraMySQL.BestPractices.HA)
   + [Using Amazon Aurora for Disaster Recovery with your MySQL databases](#AuroraMySQL.BestPractices.DisasterRecovery)
   + [Migrating from MySQL to Amazon Aurora MySQL with reduced downtime](#AuroraMySQL.BestPractices.Migrating)
-+ [Best practices for limiting certain MySQL features with Aurora MySQL](#AuroraMySQL.BestPractices.AvoidFeatures)
++ [Recommendations for MySQL features](#AuroraMySQL.BestPractices.FeatureRecommendations)
   + [Using multithreaded replication in Aurora MySQL version 3](#AuroraMySQL.BestPractices.MTReplica)
+  + [Invoking AWS Lambda functions using native MySQL functions](#AuroraMySQL.BestPractices.Lambda)
   + [Avoiding XA transactions with Amazon Aurora MySQL](#AuroraMySQL.BestPractices.XA)
   + [Keeping foreign keys turned on during DML statements](#Aurora.BestPractices.ForeignKeys)
 
@@ -35,13 +34,15 @@ The `innodb_read_only` variable is set to `ON` if you are connected to a reader 
 
 This approach can be helpful if you want to add logic to your application code to balance the workload or to ensure that a write operation is using the correct connection\. This technique only applies to Aurora clusters using single\-master replication\. For multi\-master clusters, all the DB instances have the setting `innodb_read_only=OFF`\.
 
-## Best practices for using AWS features with Aurora MySQL<a name="AuroraMySQL.BestPractices.Amazon"></a>
+## Best practices for Aurora MySQL performance and scaling<a name="AuroraMySQL.BestPractices.Performance"></a>
 
-You can apply the following best practices to use Aurora MySQL in combination with AWS aspects such as instance classes and other AWS services\.
+You can apply the following best practices to improve the performance and scalability of your Aurora MySQL clusters\.
 
 **Topics**
 + [Using T instance classes for development and testing](#AuroraMySQL.BestPractices.T2Medium)
-+ [Invoking AWS Lambda functions using native functions](#AuroraMySQL.BestPractices.Lambda)
++ [Optimizing Amazon Aurora indexed join queries with asynchronous key prefetch](#Aurora.BestPractices.AKP)
++ [Optimizing large Aurora MySQL join queries with hash joins](#Aurora.BestPractices.HashJoin)
++ [Using Amazon Aurora to scale reads for your MySQL database](#AuroraMySQL.BestPractices.ReadScaling)
 
 ### Using T instance classes for development and testing<a name="AuroraMySQL.BestPractices.T2Medium"></a>
 
@@ -50,6 +51,9 @@ Amazon Aurora MySQL instances that use the `db.t2`, `db.t3`, or `db.t4g` DB inst
 If your Aurora cluster is larger than 40 TB, don't use the T instance classes\. When your database has a large volume of data, the memory overhead for managing schema objects can exceed the capacity of a T instance\.
 
 Don't enable the MySQL Performance Schema on Amazon Aurora MySQL T instances\. If the Performance Schema is enabled, the instance might run out of memory\.
+
+**Tip**  
+ If your database is sometimes idle but at other times has a substantial workload, you can use Aurora Serverless v2 as an alternative to T instances\. With Aurora Serverless v2, you define a capacity range and Aurora automatically scales your database up or down depending on the current workload\. For usage details, see [Using Aurora Serverless v2](aurora-serverless-v2.md)\. For the database engine versions that you can use with Aurora Serverless v2, see [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md)\. 
 
 When you use a T instance as a DB instance in an Aurora MySQL DB cluster, we recommend the following:
 + If you use a T instance as a DB instance class in your DB cluster, use the same DB instance class for all instances in your DB cluster\. For example, if you use `db.t2.medium` for your writer instance, then we recommend that you use `db.t2.medium` for your reader instances also\.
@@ -71,23 +75,6 @@ When you use a T instance as a DB instance in an Aurora MySQL DB cluster, we rec
 + Keep the number of inserts per transaction below 1 million for DB clusters that have binary logging enabled\.
 
   If the DB cluster parameter group for your DB cluster has the `binlog_format` parameter set to a value other than `OFF`, then your DB cluster might experience out\-of\-memory conditions if the DB cluster receives transactions that contain over 1 million rows to insert\. You can monitor the freeable memory \(`FreeableMemory`\) metric to determine if your DB cluster is running out of available memory\. You then check the write operations \(`VolumeWriteIOPS`\) metric to see if a writer instance is receiving a heavy load of write operations\. If this is the case, then we recommend that you update your application to limit the number of inserts in a transaction to less than 1 million\. Alternatively, you can modify your instance to use one of the supported R DB instance classes \(scale compute\)\.
-
-### Invoking AWS Lambda functions using native functions<a name="AuroraMySQL.BestPractices.Lambda"></a>
-
-If you are using Amazon Aurora version 1\.16 or later, we recommend using the native functions `lambda_sync` and `lambda_async` to invoke Lambda functions\.
-
-If you are using the deprecated `mysql.lambda_async` procedure, we recommend that you wrap calls to the `mysql.lambda_async` procedure in a stored procedure\. You can call this stored procedure from different sources, such as triggers or client code\. This approach can help to avoid impedance mismatch issues and make it easier for your database programmers to invoke Lambda functions\.
-
-For more information on invoking Lambda functions from Amazon Aurora, see [Invoking a Lambda function from an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Lambda.md)\.
-
-## Best practices for Aurora MySQL performance and scaling<a name="AuroraMySQL.BestPractices.Performance"></a>
-
-You can apply the following best practices to improve the performance and scalability of your Aurora MySQL clusters\.
-
-**Topics**
-+ [Optimizing Amazon Aurora indexed join queries with asynchronous key prefetch](#Aurora.BestPractices.AKP)
-+ [Optimizing large Aurora MySQL join queries with hash joins](#Aurora.BestPractices.HashJoin)
-+ [Using Amazon Aurora to scale reads for your MySQL database](#AuroraMySQL.BestPractices.ReadScaling)
 
 ### Optimizing Amazon Aurora indexed join queries with asynchronous key prefetch<a name="Aurora.BestPractices.AKP"></a>
 
@@ -275,12 +262,13 @@ When importing data from a MySQL database that supports a live application to an
 
 The procedure lists steps to transfer a copy of your database data to an Amazon EC2 instance and import the data into a new RDS for MySQL DB instance\. Because Amazon Aurora is compatible with MySQL, you can instead use an Amazon Aurora DB cluster for the target Amazon RDS MySQL DB instance\.
 
-## Best practices for limiting certain MySQL features with Aurora MySQL<a name="AuroraMySQL.BestPractices.AvoidFeatures"></a>
+## Recommendations for MySQL features<a name="AuroraMySQL.BestPractices.FeatureRecommendations"></a>
 
-The following features are available in Aurora MySQL for MySQL compatibility\. However, they have performance, scalability, or stability issues in the Aurora environment\. Thus, we recommend that you limit your use of these features\. For example, we recommend that you don't use certain features for production Aurora deployments\.
+The following features are available in Aurora MySQL for MySQL compatibility\. However, they have performance, scalability, stability, or compatibility issues in the Aurora environment\. Thus, we recommend that you follow certain guidelines in your use of these features\. For example, we recommend that you don't use certain features for production Aurora deployments\.
 
 **Topics**
 + [Using multithreaded replication in Aurora MySQL version 3](#AuroraMySQL.BestPractices.MTReplica)
++ [Invoking AWS Lambda functions using native MySQL functions](#AuroraMySQL.BestPractices.Lambda)
 + [Avoiding XA transactions with Amazon Aurora MySQL](#AuroraMySQL.BestPractices.XA)
 + [Keeping foreign keys turned on during DML statements](#Aurora.BestPractices.ForeignKeys)
 
@@ -295,6 +283,14 @@ By default, Aurora uses single\-threaded replication when an Aurora MySQL DB clu
  If you do use multithreaded replication, we recommend that you test any use thoroughly\.
 
 For more information about using replication in Amazon Aurora, see [Replication with Amazon Aurora](Aurora.Replication.md)\. For information about multithreaded replication in Aurora MySQL version 3, see [Multithreaded binary log replication \(Aurora MySQL version 3 and higher\)](AuroraMySQL.Replication.md#binlog-optimization-multithreading)\. 
+
+### Invoking AWS Lambda functions using native MySQL functions<a name="AuroraMySQL.BestPractices.Lambda"></a>
+
+If you are using Amazon Aurora version 1\.16 or later, we recommend using the native MySQL functions `lambda_sync` and `lambda_async` to invoke Lambda functions\.
+
+If you are using the deprecated `mysql.lambda_async` procedure, we recommend that you wrap calls to the `mysql.lambda_async` procedure in a stored procedure\. You can call this stored procedure from different sources, such as triggers or client code\. This approach can help to avoid impedance mismatch issues and make it easier for your database programmers to invoke Lambda functions\.
+
+For more information on invoking Lambda functions from Amazon Aurora, see [Invoking a Lambda function from an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Lambda.md)\.
 
 ### Avoiding XA transactions with Amazon Aurora MySQL<a name="AuroraMySQL.BestPractices.XA"></a>
 

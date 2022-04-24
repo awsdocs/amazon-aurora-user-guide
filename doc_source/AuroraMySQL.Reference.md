@@ -25,7 +25,7 @@
 **Note**  
  Each [default parameter group](USER_WorkingWithParamGroups.md) contains the default values for all parameters in the parameter group\. If the parameter has "engine default" for this value, see the version\-specific MySQL or PostgreSQL documentation for the actual default value\. 
 
- For more information on DB parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. For rules and restrictions for Aurora Serverless clusters, see [Parameter groups and Aurora Serverless v1](aurora-serverless.how-it-works.md#aurora-serverless.parameter-groups)\. 
+ For more information on DB parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. For rules and restrictions for Aurora Serverless clusters, see [Parameter groups for Aurora Serverless v1](aurora-serverless-v1.how-it-works.md#aurora-serverless.parameter-groups)\. 
 
 **Topics**
 + [Cluster\-level parameters](#AuroraMySQL.Reference.Parameters.Cluster)
@@ -941,7 +941,7 @@ EXPLAIN SELECT /*+ JOIN_ORDER (t1, t3) */ f1, f2
 
 ## Aurora MySQL stored procedures<a name="AuroraMySQL.Reference.StoredProcs"></a>
 
- You can call the following stored procedures while connected to the primary instance in an Aurora MySQL cluster\. These procedures control how transactions are replicated from an external database into Aurora MySQL, or from Aurora MySQL to an external database\. To learn how to use replication based on global transaction identifiers \(GTIDs\) with Aurora MySQL, see [Using GTID\-based replication for Aurora MySQL](mysql-replication-gtid.md)\. 
+ You can call the following stored procedures while connected to the primary instance in an Aurora MySQL cluster\. These procedures control how transactions are replicated from an external database into Aurora MySQL, or from Aurora MySQL to an external database\. To learn how to use replication based on global transaction identifiers \(GTIDs\) with Aurora MySQL, see [Using GTID\-based replication for Amazon Aurora MySQL](mysql-replication-gtid.md)\. 
 
 **Topics**
 + [mysql\.rds\_assign\_gtids\_to\_anonymous\_transactions \(Aurora MySQL version 3 and higher\)](#mysql_assign_gtids_to_anonymous_transactions)
@@ -1139,7 +1139,7 @@ CALL mysql.rds_set_external_master_with_auto_position (
 
  When you call `mysql.rds_set_external_master_with_auto_position`, Amazon RDS records certain information\. This information is the time, the user, and an action of `"set master"` in the `mysql.rds_history` and `mysql.rds_replication_status` tables\. 
 
- To skip a specific GTID\-based transaction that is known to cause a problem, you can use the [mysql\.rds\_skip\_transaction\_with\_gtid](#mysql_rds_skip_transaction_with_gtid) stored procedure\. For more information about working with GTID\-based replication, see [Using GTID\-based replication for Aurora MySQL](mysql-replication-gtid.md)\. 
+ To skip a specific GTID\-based transaction that is known to cause a problem, you can use the [mysql\.rds\_skip\_transaction\_with\_gtid](#mysql_rds_skip_transaction_with_gtid) stored procedure\. For more information about working with GTID\-based replication, see [Using GTID\-based replication for Amazon Aurora MySQL](mysql-replication-gtid.md)\. 
 
 #### Examples<a name="mysql_rds_set_external_master_with_auto_position-examples"></a>
 
@@ -1215,7 +1215,7 @@ CALL mysql.rds_set_external_source_with_auto_position (
 
  When you call `mysql.rds_set_external_source_with_auto_position`, Amazon RDS records certain information\. This information is the time, the user, and an action of `"set master"` in the `mysql.rds_history` and `mysql.rds_replication_status` tables\. 
 
- To skip a specific GTID\-based transaction that is known to cause a problem, you can use the [mysql\.rds\_skip\_transaction\_with\_gtid](#mysql_rds_skip_transaction_with_gtid) stored procedure\. For more information about working with GTID\-based replication, see [Using GTID\-based replication for Aurora MySQL](mysql-replication-gtid.md)\. 
+ To skip a specific GTID\-based transaction that is known to cause a problem, you can use the [mysql\.rds\_skip\_transaction\_with\_gtid](#mysql_rds_skip_transaction_with_gtid) stored procedure\. For more information about working with GTID\-based replication, see [Using GTID\-based replication for Amazon Aurora MySQL](mysql-replication-gtid.md)\. 
 
 #### Examples<a name="mysql_rds_set_external_source_with_auto_position-examples"></a>
 

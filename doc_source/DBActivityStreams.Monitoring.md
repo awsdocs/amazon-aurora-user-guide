@@ -921,7 +921,7 @@ def main():
                 data_key_decoded = base64.b64decode(record_data['key'])
                 data_key_decrypt_result = kms.decrypt(CiphertextBlob=data_key_decoded,
                                                       EncryptionContext={'aws:rds:dbc-id': RESOURCE_ID})
-                print decrypt_decompress((payload_decoded, data_key_decrypt_result['Plaintext']))
+                print (decrypt_decompress(payload_decoded, data_key_decrypt_result['Plaintext']))
             if 'NextShardIterator' in response:
                 next_shard_iters.append(response['NextShardIterator'])
         shard_iters = next_shard_iters

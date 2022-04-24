@@ -18,7 +18,7 @@ Before you create a DB cluster, you must first have a virtual private cloud \(VP
 
 In some cases, you might want to create a VPC and DB subnet group for use with your Aurora DB cluster yourself, rather than having Amazon RDS create them\. If so, follow the instructions in [How to create a VPC for use with Amazon Aurora](Aurora.CreateVPC.md)\. Otherwise, follow the instructions in this topic to create your DB cluster and have Amazon RDS create a VPC and DB subnet group for you\.
 
-You can use **Easy create** to create an Aurora MySQL\-Compatible Edition DB cluster with the RDS console\. With **Easy create**, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default settings for the other configuration options\. When you use **Standard create** instead of **Easy create**, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
+You can use **Easy create** to create an Aurora MySQL\-Compatible Edition DB cluster with the RDS console\. With **Easy create**, you specify only the DB engine type, size, and DB cluster identifier\. **Easy create** uses the default settings for the other configuration options\. When you use **Standard create** instead of **Easy create**, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
 In this tutorial, you use **Easy create** to create an Aurora MySQL\-Compatible Edition DB cluster\.
 
@@ -91,17 +91,19 @@ After Amazon RDS provisions your DB cluster and creates the primary instance, yo
 
 **To connect to a database on an Aurora MySQL DB cluster using the MySQL monitor**
 
-1. Install a SQL client that you can use to connect to the DB instance\.
+1. Install a SQL client that you can use to connect to the DB cluster\.
 
    You can connect to an Aurora MySQL DB cluster by using tools like the MySQL command line utility\. For more information on using the MySQL client, see [mysql \- the MySQL command\-line client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) in the MySQL documentation\. One GUI\-based application you can use to connect is MySQL Workbench\. For more information, see the [Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\.
 
    For more information on using MySQL, see the [MySQL documentation](http://dev.mysql.com/doc/)\. For information about installing MySQL \(including the MySQL client\), see [Installing and upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)\.
 
-   If your DB instance is publicly accessible, you can install the SQL client outside of the VPC\. If your DB instance is private, you typically install the SQL client on a resource inside the VPC, such as an Amazon EC2 instance\.
+   If your DB cluster is publicly accessible, you can install the SQL client outside of the VPC\. If your DB cluster is private, you typically install the SQL client on a resource inside the VPC, such as an Amazon EC2 instance\.
 
 1. Make sure that your DB cluster is associated with a security group that provides access to it\. For more information, see [Setting up your environment for Amazon Aurora](CHAP_SettingUp_Aurora.md)\.
 
    If you didn't specify the appropriate security group when you created the DB cluster, you can modify the DB cluster to change its security group\. For more information, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
+
+   If your DB cluster is publicly accessible, make sure its associated security group has inbound rules for the IP addresses that you want to access it\. If your DB cluster is private, make sure its associated security group has inbound rules for the security group of each resource that you want to access it, such as the security group of an Amazon EC2 instance\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 

@@ -185,7 +185,7 @@ def lambda_handler(event, context):
         'body': json.dumps('Hello from Lambda!')
 ```
 
-Currently, Babelfish for Aurora PostgreSQL doesn't support JSON\. If your function returns JSON, you use a wrapper to handle the JSON\. For example, say that the `lamdba_function.py` shown preceding is stored in Lambda as `my-function`\.
+Currently, Babelfish for Aurora PostgreSQL doesn't support JSON\. If your function returns JSON, you use a wrapper to handle the JSON\. For example, say that the `lambda_function.py` shown preceding is stored in Lambda as `my-function`\.
 
 1. Connect to your Babelfish DB cluster using the `psql` client \(or the pgAdmin client\)\. For more information, see [Using psql to connect to the DB cluster](babelfish-connect-PostgreSQL.md#babelfish-connect-psql)\. 
 

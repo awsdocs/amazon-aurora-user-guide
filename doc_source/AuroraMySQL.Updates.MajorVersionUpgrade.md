@@ -51,7 +51,7 @@
 
  Use the following steps: 
 
-1.  Create a clone of the original cluster\. Follow the procedure in [Cloning a volume for an Aurora DB cluster](Aurora.Managing.Clone.md)\. 
+1.  Create a clone of the original cluster\. Follow the procedure in [Cloning a volume for an Amazon Aurora DB cluster](Aurora.Managing.Clone.md)\. 
 
 1.  Set up a similar set of writer and reader DB instances as in the original cluster\. 
 

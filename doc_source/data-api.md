@@ -1,16 +1,16 @@
-# Using the Data API for Aurora Serverless<a name="data-api"></a><a name="data_api"></a>
+# Using the Data API for Aurora Serverless v1<a name="data-api"></a>
 
-By using the Data API for Aurora Serverless, you can work with a web\-services interface to your Aurora Serverless DB cluster\. The Data API doesn't require a persistent connection to the DB cluster\. Instead, it provides a secure HTTP endpoint and integration with AWS SDKs\. You can use the endpoint to run SQL statements without managing connections\.
+By using the Data API for Aurora Serverless v1, you can work with a web\-services interface to your Aurora Serverless v1 DB cluster\. The Data API doesn't require a persistent connection to the DB cluster\. Instead, it provides a secure HTTP endpoint and integration with AWS SDKs\. You can use the endpoint to run SQL statements without managing connections\.
 
 All calls to the Data API are synchronous\. By default, a call times out if it's not finished processing within 45 seconds\. However, you can continue running a SQL statement if the call times out by using the `continueAfterTimeout` parameter\. For an example, see [Running a SQL transaction](#data-api.calling.java.run-transaction)\. 
 
 Users don't need to pass credentials with calls to the Data API, because the Data API uses database credentials stored in AWS Secrets Manager\. To store credentials in Secrets Manager, users must be granted the appropriate permissions to use Secrets Manager, and also the Data API\. For more information about authorizing users, see [Authorizing access to the Data API](#data-api.access)\. 
 
-You can also use Data API to integrate Aurora Serverless with other AWS applications such as AWS Lambda, AWS AppSync, and AWS Cloud9\.  The API provides a more secure way to use AWS Lambda\. It enables you to access your DB cluster without your needing to configure a Lambda function to access resources in a virtual private cloud \(VPC\)\. For more information, see [AWS Lambda](https://aws.amazon.com/lambda/), [AWS AppSync](https://aws.amazon.com/appsync/), and [AWS Cloud9](https://aws.amazon.com/cloud9/)\. 
+You can also use Data API to integrate Aurora Serverless v1 with other AWS applications such as AWS Lambda, AWS AppSync, and AWS Cloud9\.  The API provides a more secure way to use AWS Lambda\. It enables you to access your DB cluster without your needing to configure a Lambda function to access resources in a virtual private cloud \(VPC\)\. For more information, see [AWS Lambda](https://aws.amazon.com/lambda/), [AWS AppSync](https://aws.amazon.com/appsync/), and [AWS Cloud9](https://aws.amazon.com/cloud9/)\. 
 
-You can enable the Data API when you create the Aurora Serverless cluster\. You can also modify the configuration later\. For more information, see [Enabling the Data API](#data-api.enabling)\. 
+You can enable the Data API when you create the Aurora Serverless v1 cluster\. You can also modify the configuration later\. For more information, see [Enabling the Data API](#data-api.enabling)\. 
 
-After you enable the Data API, you can also use the query editor for Aurora Serverless\. For more information, see [Using the query editor for Aurora Serverless](query-editor.md)\.
+After you enable the Data API, you can also use the query editor for Aurora Serverless v1\. For more information, see [Using the query editor for Aurora Serverless v1](query-editor.md)\.
 
 **Topics**
 + [Data API availability](#data-api.regions)
@@ -20,12 +20,13 @@ After you enable the Data API, you can also use the query editor for Aurora Serv
 + [Calling the Data API](#data-api.calling)
 + [Using the Java client library for Data API](#data-api.java-client-library)
 + [Troubleshooting Data API issues](#data-api.troubleshooting)
++ [Logging Data API calls with AWS CloudTrail](logging-using-cloudtrail-data-api.md)
 
 ## Data API availability<a name="data-api.regions"></a>
 
-The Data API can be enabled for Aurora Serverless DB clusters using specific Aurora MySQL and Aurora PostgreSQL versions only\. For more information, see [Data API for Aurora Serverless](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API)\. 
+The Data API can be enabled for Aurora Serverless v1 DB clusters using specific Aurora MySQL and Aurora PostgreSQL versions only\. For more information, see [Data API for Aurora Serverless v1](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API)\. 
 
-The following table shows the AWS Regions where the Data API is currently available for Aurora Serverless\. To access the Data API in these Regions, use the HTTPS protocol\.
+The following table shows the AWS Regions where the Data API is currently available for Aurora Serverless v1\. To access the Data API in these Regions, use the HTTPS protocol\.
 
 
 | Region | Link | 
@@ -152,7 +153,7 @@ To learn more about resource tags and how to use `aws:TagKeys`, see [Controlling
 
 ### Storing database credentials in AWS Secrets Manager<a name="data-api.secrets"></a>
 
-When you call the Data API, you can pass credentials for the Aurora Serverless DB cluster by using a secret in Secrets Manager\. To pass credentials in this way, you specify the name of the secret or the Amazon Resource Name \(ARN\) of the secret\.
+When you call the Data API, you can pass credentials for the Aurora Serverless v1 DB cluster by using a secret in Secrets Manager\. To pass credentials in this way, you specify the name of the secret or the Amazon Resource Name \(ARN\) of the secret\.
 
 **To store DB cluster credentials in a secret**
 
@@ -172,23 +173,26 @@ For more information about creating an IAM policy, see [Creating IAM Policies](h
 
 ## Enabling the Data API<a name="data-api.enabling"></a>
 
-To use the Data API, enable it for your Aurora Serverless DB cluster\. You can enable the Data API when you create or modify the DB cluster\.
+To use the Data API, enable it for your Aurora Serverless v1 DB cluster\. You can enable the Data API when you create or modify the DB cluster\.
+
+**Note**  
+ Currently, you can't use the Data API with Aurora Serverless v2 DB instances\. 
 
 ### Console<a name="data-api.enabling.console"></a>
 
-You can enable the Data API by using the RDS console when you create or modify an Aurora Serverless DB cluster\. When you create or modify an Aurora Serverless DB cluster, you do so by enabling the Data API in the RDS console's **Connectivity** section\.
+You can enable the Data API by using the RDS console when you create or modify an Aurora Serverless v1 DB cluster\. When you create an Aurora Serverless v1 DB cluster, you do so by enabling the Data API in the RDS console's **Connectivity** section\. When you modify an Aurora Serverless v1 DB cluster, you do so by enabling the Data API in the RDS console's **Network & Security** section\.
 
-The following screenshot shows the enabled **Data API** when modifying an Aurora Serverless DB cluster\.
+The following screenshot shows the enabled **Data API** when modifying an Aurora Serverless v1 DB cluster\.
 
-![\[Enabling the Data API for an Aurora Serverless DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/web-server-api-endpoint.png)
+![\[Enabling the Data API for an Aurora Serverless v1 DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/web-server-api-endpoint.png)
 
 For instructions, see [Creating an Aurora Serverless v1 DB cluster](aurora-serverless.create.md) and [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\.
 
 ### AWS CLI<a name="data-api.enabling.cli"></a>
 
-When you create or modify an Aurora Serverless DB cluster using AWS CLI commands, the Data API is enabled when you specify `-enable-http-endpoint`\.
+When you create or modify an Aurora Serverless v1 DB cluster using AWS CLI commands, the Data API is enabled when you specify `--enable-http-endpoint`\.
 
-You can specify the `-enable-http-endpoint` using the following AWS CLI commands:
+You can specify the `--enable-http-endpoint` using the following AWS CLI commands:
 +  [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) 
 +  [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) 
 
@@ -212,7 +216,7 @@ aws rds modify-db-cluster ^
 
 ### RDS API<a name="data-api.enabling.api"></a>
 
-When you create or modify an Aurora Serverless DB cluster using Amazon RDS API operations, you enable the Data API by setting the `EnableHttpEndpoint` value to `true`\.
+When you create or modify an Aurora Serverless v1 DB cluster using Amazon RDS API operations, you enable the Data API by setting the `EnableHttpEndpoint` value to `true`\.
 
 You can set the `EnableHttpEndpoint` value using the following API operations:
 +  [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) 
@@ -273,7 +277,7 @@ When you use an Amazon VPC endpoint in a Data API call, all traffic between your
 
 ## Calling the Data API<a name="data-api.calling"></a>
 
-With the Data API enabled on your Aurora Serverless DB cluster, you can run SQL statements on the Aurora DB cluster by using the Data API or the AWS CLI\. The Data API supports the programming languages supported by the AWS SDKs\. For more information, see [Tools to build on AWS](http://aws.amazon.com/tools/)\.
+With the Data API enabled on your Aurora Serverless v1 DB cluster, you can run SQL statements on the Aurora DB cluster by using the Data API or the AWS CLI\. The Data API supports the programming languages supported by the AWS SDKs\. For more information, see [Tools to build on AWS](http://aws.amazon.com/tools/)\.
 
 **Note**  
 Currently, the Data API doesn't support arrays of Universal Unique Identifiers \(UUIDs\)\.
@@ -306,7 +310,7 @@ The operations for performing SQL statements and supporting transactions have th
 
 |  Data API operation parameter  |  AWS CLI command option  |  Required  |  Description  | 
 | --- | --- | --- | --- | 
-|  `resourceArn`  |  `--resource-arn`  |  Yes  |  The Amazon Resource Name \(ARN\) of the Aurora Serverless DB cluster\.  | 
+|  `resourceArn`  |  `--resource-arn`  |  Yes  |  The Amazon Resource Name \(ARN\) of the Aurora Serverless v1 DB cluster\.  | 
 |  `secretArn`  |  `--secret-arn`  |  Yes  |  The name or ARN of the secret that enables access to the DB cluster\.  | 
 
 You can use parameters in Data API calls to `ExecuteStatement` and `BatchExecuteStatement`, and when you run the AWS CLI commands `execute-statement` and `batch-execute-statement`\. To use a parameter, you specify a name\-value pair in the `SqlParameter` data type\. You specify the value with the `Field` data type\. The following table maps Java Database Connectivity \(JDBC\) data types to the data types that you specify in Data API calls\.
@@ -344,7 +348,7 @@ You can call the Data API using the AWS CLI\.
 
 The following examples use the AWS CLI for the Data API\. For more information, see [AWS CLI reference for the Data API](https://docs.aws.amazon.com/cli/latest/reference/rds-data/index.html)\.
 
-In each example, replace the Amazon Resource Name \(ARN\) for the DB cluster with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in Secrets Manager that allows access to the DB cluster\.
+In each example, replace the Amazon Resource Name \(ARN\) for the DB cluster with the ARN for your Aurora Serverless v1 DB cluster\. Also, replace the secret ARN with the ARN of the secret in Secrets Manager that allows access to the DB cluster\.
 
 **Note**  
 The AWS CLI can format responses in JSON\.
@@ -678,7 +682,7 @@ You can call the Data API from a Python application\.
 
 The following examples use the AWS SDK for Python \(Boto\)\. For more information about Boto, see the [AWS SDK for Python \(Boto 3\) documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)\.
 
-In each example, replace the DB cluster's Amazon Resource Name \(ARN\) with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in Secrets Manager that allows access to the DB cluster\.
+In each example, replace the DB cluster's Amazon Resource Name \(ARN\) with the ARN for your Aurora Serverless v1 DB cluster\. Also, replace the secret ARN with the ARN of the secret in Secrets Manager that allows access to the DB cluster\.
 
 **Topics**
 + [Running a SQL query](#data-api.calling.python.run-query)
@@ -834,7 +838,7 @@ You can call the Data API from a Java application\.
 
 The following examples use the AWS SDK for Java\. For more information, see the [AWS SDK for Java Developer Guide](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/welcome.html)\.
 
-In each example, replace the DB cluster's Amazon Resource Name \(ARN\) with the ARN for your Aurora Serverless DB cluster\. Also, replace the secret ARN with the ARN of the secret in Secrets Manager that allows access to the DB cluster\.
+In each example, replace the DB cluster's Amazon Resource Name \(ARN\) with the ARN for your Aurora Serverless v1 DB cluster\. Also, replace the secret ARN with the ARN of the secret in Secrets Manager that allows access to the DB cluster\.
 
 **Topics**
 + [Running a SQL query](#data-api.calling.java.run-query)
@@ -1113,10 +1117,10 @@ For more information about the `LIMIT` clause, see [SELECT syntax](https://dev.m
 ### HttpEndpoint is not enabled for cluster <cluster\_ID><a name="data-api.troubleshooting.http-endpoint-not-enabled"></a>
 
 The cause for this issue is almost always one of the following:
-+ The Data API isn't enabled for the Aurora Serverless DB cluster\. To use the Data API with an Aurora Serverless DB cluster, the Data API must be enabled for the DB cluster\.
++ The Data API isn't enabled for the Aurora Serverless v1 DB cluster\. To use the Data API with an Aurora Serverless v1 DB cluster, the Data API must be enabled for the DB cluster\.
 + The DB cluster was renamed after the Data API was enabled for it\.
 
-If the Data API has not been enabled for the DB cluster, enable it\.
+If the Data API has not been enabled for the DB cluster, enable it\. Make sure that it's an Aurora Serverless v1 cluster\. Currently, you can't use the Data API with Aurora Serverless v2\.
 
 If the DB cluster was renamed after the Data API was enabled for the DB cluster, disable the Data API and then enable it again\.
 

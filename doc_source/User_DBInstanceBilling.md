@@ -1,6 +1,6 @@
 # DB instance billing for Aurora<a name="User_DBInstanceBilling"></a>
 
-Amazon RDS instances in an Aurora cluster are billed based on the following components:
+Amazon RDS provisioned instances in an Amazon Aurora cluster are billed based on the following components:
 + DB instance hours \(per hour\) – Based on the DB instance class of the DB instance \(for example, db\.t2\.small or db\.m4\.large\)\. Pricing is listed on a per\-hour basis, but bills are calculated down to the second and show times in decimal form\. RDS usage is billed in one second increments, with a minimum of 10 minutes\. For more information, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
 + Storage \(per GiB per month\) – Storage capacity that you have provisioned to your DB instance\. If you scale your provisioned storage capacity within the month, your bill is prorated\. For more information, see [Amazon Aurora storage and reliability](Aurora.Overview.StorageReliability.md)\.
 + I/O requests \(per 1 million requests per month\) – Total number of storage I/O requests that you have made in a billing cycle\.
@@ -12,6 +12,7 @@ Amazon RDS instances in an Aurora cluster are billed based on the following comp
 Amazon RDS provides the following purchasing options to enable you to optimize your costs based on your needs:
 + **On\-Demand Instances** – Pay by the hour for the DB instance hours that you use\. Pricing is listed on a per\-hour basis, but bills are calculated down to the second and show times in decimal form\. RDS usage is now billed in one second increments, with a minimum of 10 minutes\.
 + **Reserved Instances** – Reserve a DB instance for a one\-year or three\-year term and get a significant discount compared to the on\-demand DB instance pricing\. With Reserved Instance usage, you can launch, delete, start, or stop multiple instances within an hour and get the Reserved Instance benefit for all of the instances\.
++ **Aurora Serverless v2** – Aurora Serverless v2 provides on\-demand capacity where the billing unit is Aurora capacity unit \(ACU\) hours instead of DB instance hours\. Aurora Serverless v2 capacity increases and decreases, within a range that you specify, depending on the load on your database\. You can configure a cluster where all the capacity is Aurora Serverless v2, or a combination of Aurora Serverless v2 and on\-demand or reserved provisioned instances\. For information about how Aurora Serverless v2 ACUs work, see [How Aurora Serverless v2 works](aurora-serverless-v2.how-it-works.md)\. 
 
 For Aurora pricing information, see the [Aurora pricing page](https://aws.amazon.com/rds/aurora/pricing)\.
 

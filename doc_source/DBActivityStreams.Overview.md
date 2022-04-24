@@ -45,7 +45,7 @@ You can choose to have the database session handle database activity events in e
 
 ## Requirements for database activity streams<a name="DBActivityStreams.Overview.requirements"></a>
 
-In Aurora, database activity streams have the following requirements and limitations\.
+In Aurora, database activity streams have the following requirements and limitations:
 + Amazon Kinesis is required for database activity streams\.
 + AWS Key Management Service \(AWS KMS\) is required for database activity streams because they are always encrypted\.
 + Applying additional encryption to your Amazon Kinesis data stream is incompatible with database activity streams, which are already encrypted with your AWS KMS key\.
@@ -65,7 +65,7 @@ For more information about Aurora PostgreSQL versions, see [Amazon Aurora Postgr
 For Aurora MySQL, database activity streams are supported for version 2\.08 or higher, which is compatible with MySQL version 5\.7\.
 
 **Note**  
-Database activity streams aren't supported in Aurora Serverless\.
+Database activity streams aren't supported in Aurora Serverless v1 or Aurora Serverless v2\.
 
 ## Supported DB instance classes for database activity streams<a name="DBActivityStreams.Overview.requirements.classes"></a>
 

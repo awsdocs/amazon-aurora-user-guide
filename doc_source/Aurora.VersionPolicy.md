@@ -165,4 +165,4 @@ After this 12\-month period, an automatic upgrade to the subsequent major versio
 +  Clone your cluster using the Amazon Aurora fast database clone feature\. Perform the upgrade and any post\-upgrade testing on the new cluster\. 
 +  Restore from a cluster snapshot to create a new Aurora cluster\. You can create a cluster snapshot yourself from an existing Aurora cluster\. Aurora also automatically creates periodic snapshots for you for each of your clusters\. You can then initiate a version upgrade for the new cluster\. You can experiment on the upgraded copy of your cluster before deciding whether to upgrade your original cluster\. 
 
- For more information on these ways to create new clusters for testing, see [Cloning a volume for an Aurora DB cluster](Aurora.Managing.Clone.md) and [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\. 
+ For more information on these ways to create new clusters for testing, see [Cloning a volume for an Amazon Aurora DB cluster](Aurora.Managing.Clone.md) and [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\. 

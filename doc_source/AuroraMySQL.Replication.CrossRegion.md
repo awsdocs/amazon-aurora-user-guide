@@ -55,14 +55,16 @@
 
 1.  In the top\-right corner of the AWS Management Console, select the AWS Region that hosts your source DB cluster\. 
 
-1.  In the navigation pane, choose **Instances**\. 
+1.  In the navigation pane, choose **Databases**\.
 
-1.  Choose the check box for the DB instance that you want to create a cross\-Region read replica for\. For **Actions**, choose **Create cross region read replica**\. 
+1.  Choose the DB cluster for which you want to create a cross\-Region read replica\.
 
-1.  On the **Create cross region read replica** page, choose the option settings for your cross\-Region read replica DB cluster, as described in the following table\.     
+1. For **Actions**, choose **Create cross\-Region read replica**\.
+
+1.  On the **Create cross region read replica** page, choose the option settings for your cross\-Region read replica DB cluster, as described in the following table\.    
 <a name="cross-region-read-replica-settings"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.CrossRegion.html)
 
-1.  Choose **Create** to create your cross\-Region read replica for Aurora\. 
+1.  Choose **Create** to create your cross\-Region read replica for Aurora\.
 
 ### AWS CLI<a name="AuroraMySQL.Replication.CrossRegion.Creating.CLI"></a>
 

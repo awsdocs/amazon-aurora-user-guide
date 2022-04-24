@@ -6,9 +6,6 @@ To view, download, and watch file\-based database logs, see [Monitoring Amazon A
 
 **Topics**
 + [Overview of PostgreSQL logs](#USER_LogAccess.Concepts.PostgreSQL.overview)
-+ [Setting the log retention period](#USER_LogAccess.Concepts.PostgreSQL.log_retention_period)
-+ [Setting log file rotation](#USER_LogAccess.Concepts.PostgreSQL.log_rotation)
-+ [Setting the message format](#USER_LogAccess.Concepts.PostgreSQL.Log_Format)
 + [Enabling query logging](#USER_LogAccess.Concepts.PostgreSQL.Query_Logging)
 
 ## Overview of PostgreSQL logs<a name="USER_LogAccess.Concepts.PostgreSQL.overview"></a>
@@ -23,9 +20,9 @@ The default logging level captures errors that affect your server\. By default, 
 + Fatal server errors
 + Deadlocks
 
-To identify application issues, you can use the preceding error messages\. For example, if you converted a legacy application from Oracle to Aurora PostgreSQL, some queries may not convert correctly\. These incorrectly formatted queries generate error messages in the logs, which you can use to identify the problematic code\.
+To identify application issues, you can look for query failures, login failures, deadlocks, and fatal server errors in the log\. For example, if you converted a legacy application from Oracle to Aurora PostgreSQL, some queries may not convert correctly\. These incorrectly formatted queries generate error messages in the logs, which you can use to identify the problematic code\.
 
-You can modify PostgreSQL logging parameters to capture additional information, including the following:
+You can modify PostgreSQL logging parameters to capture additional information based on the following categories:
 + Connections and disconnections
 + Checkpoints
 + Schema modification queries
@@ -33,57 +30,67 @@ You can modify PostgreSQL logging parameters to capture additional information, 
 + Queries consuming temporary disk storage
 + Backend autovacuum process consuming resources
 
-The preceding log information can help troubleshoot potential performance and auditing issues\. For more information, see [Error reporting and logging](https://www.postgresql.org/docs/current/runtime-config-logging.html) in the PostgreSQL documentation\. For a useful AWS blog about PostgreSQL logging, see [Working with RDS and Aurora PostgreSQL logs: Part 1](http://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-1/) and [ Working with RDS and Aurora PostgreSQL logs: Part 2](http://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-2/)\.
+By logging information for various categories such as shown in the list, you can troubleshoot potential performance and auditing issues\. For more information, see [Error reporting and logging](https://www.postgresql.org/docs/current/runtime-config-logging.html) in the PostgreSQL documentation\. For a useful AWS blog about PostgreSQL logging, see [Working with RDS and Aurora PostgreSQL logs: Part 1](http://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-1/) and [ Working with RDS and Aurora PostgreSQL logs: Part 2](http://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-2/)\.
 
-### Parameter groups<a name="USER_LogAccess.Concepts.PostgreSQL.overview.parameter-groups"></a>
+### Parameters that affect logging behavior<a name="USER_LogAccess.Concepts.PostgreSQL.overview.parameter-groups"></a>
 
-Each Aurora PostgreSQL instance is associated with a *parameter group* that contains the engine specific configurations\. The engine configurations also include several parameters that control PostgreSQL logging behavior\. AWS provides the parameter groups with default configuration settings to use for your instances\. However, to change the default settings, you must create a clone of the default parameter group, modify it, and attach it to your instance\.
+Each Aurora PostgreSQL instance has a *parameter group* that specifies its configuration, including various aspects of logging\. The default parameter group settings apply to every Aurora PostgreSQL DB cluster in a given AWS Region\. You can't change the defaults because they apply to all instances of a given engine, even those that aren't yours\. To modify any parameter values, you create a custom parameter group and modify its settings\. For example, to set or change logging parameters, you make changes in the custom parameter group associated with your Aurora PostgreSQL DB cluster \. To learn how, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
-To set logging parameters for a DB instance, set the parameters in a DB parameter group and associate that parameter group with the DB instance\. For more information, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
+For an Aurora PostgreSQL DB cluster , the parameters that affect logging behavior include the following:
++ `rds.log_retention_period` – PostgreSQL logs that are older than the specified number of minutes are deleted\. The default value of 4320 minutes deletes log files after 3 days\. For more information, see [Setting the log retention period](#USER_LogAccess.Concepts.PostgreSQL.log_retention_period)\. 
++ `log_rotation_age` – Specifies number of minutes after which Amazon RDS automatically rotates the logs\. The default is 60 minutes, but you can specify anywhere from 1 to 1440 minutes\. For more information, see [Setting log file rotation](#USER_LogAccess.Concepts.PostgreSQL.log_rotation)\. 
++ `log_rotation_size` – Sets the size, in kilobytes, at which the Amazon RDS should automatically rotate the logs\. There is no value by default because the logs are rotated based on age alone, as specified by the `log_rotation_age` parameter\. For more information, see [Setting log file rotation](#USER_LogAccess.Concepts.PostgreSQL.log_rotation)\.
++ `log_line_prefix` – Specifies the information that gets prefixed in front of each line that gets logged\. The default string for this parameter is `%t:%r:%u@%d:[%p]:`, which notes the time \(%t\) and other distinguishing characteristics such as the database name \(%d\) for the log entry\. You can't change this parameter\. It applies to the `stderr` messages that get logged\. 
++ `log_destination` – Sets the output format for server logs\. The default value for this parameter is standard error \(stderr\), but csvlog \(comma\-separated value log files\) is also supported\. For more information, see [Setting the log destination](#USER_LogAccess.Concepts.PostgreSQL.Log_Format)\. 
 
-## Setting the log retention period<a name="USER_LogAccess.Concepts.PostgreSQL.log_retention_period"></a>
+### Setting the log retention period<a name="USER_LogAccess.Concepts.PostgreSQL.log_retention_period"></a>
 
-To set the retention period for system logs, use the `rds.log_retention_period` parameter\. You can find `rds.log_retention_period` in the DB parameter group associated with your DB instance\. The unit for this parameter is minutes\. For example, a setting of 1,440 retains logs for one day\. The default value is 4,320 \(three days\)\. The maximum value is 10,080 \(seven days\)\. Your instance must have enough allocated storage to contain the retained log files\. 
+To set the retention period for system logs, use the `rds.log_retention_period` parameter\. You can find `rds.log_retention_period` in the DB parameter group associated with your Aurora PostgreSQL DB cluser\. The unit for this parameter is minutes\. For example, a setting of 1,440 retains logs for one day\. The default value is 4,320 \(three days\)\. The maximum value is 10,080 \(seven days\)\. Your instance needs enough allocated storage to contain the retained log files\.
 
-Amazon Aurora compresses older PostgreSQL logs when storage for the DB instance reaches a threshold\. Aurora compresses the files using the gzip compression utility; for information on gzip, see the [gzip](https://www.gzip.org) website\. When storage for the DB instance is low and all available logs are compressed, you get a warning like the following\.
+Amazon Aurora compresses older PostgreSQL logs when storage for the DB instance reaches a threshold\. Aurora compresses the files using the gzip compression utility\. For more information, see the [gzip](https://www.gzip.org) website\.
+
+When storage for the DB instance is low and all available logs are compressed, you get a warning such as the following:
 
 ```
 Warning: local storage for PostgreSQL log files is critically low for 
 this Aurora PostgreSQL instance, and could lead to a database outage.
 ```
 
-**Note**  
-If storage gets too low, Aurora might delete compressed PostgreSQL logs before the retention period expires\. If logs are deleted early, you get a message like the following\.  
+If there's not enough storage, Aurora might delete compressed PostgreSQL logs before the end of specified retention period\. If that happens, you see a message similar to the following:
 
 ```
- The oldest PostgreSQL log files were deleted due to local storage constraints.
+The oldest PostgreSQL log files were deleted due to local storage constraints.
 ```
 
-To retain older logs, publish them to Amazon CloudWatch Logs\. For more information, see [Publishing Aurora PostgreSQL logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)\. After you set up CloudWatch publishing, Aurora doesn't delete a log until it's published to CloudWatch Logs\.  
+We recommend that you have your logs routinely published to Amazon CloudWatch Logs, so you can view and analyze system data long after the logs have been removed from your Aurora PostgreSQL DB cluster \. For more information, see [Publishing Aurora PostgreSQL logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)\. After you set up CloudWatch publishing, Aurora doesn't delete a log until after it's published to CloudWatch Logs\.  
 
-## Setting log file rotation<a name="USER_LogAccess.Concepts.PostgreSQL.log_rotation"></a>
+### Setting log file rotation<a name="USER_LogAccess.Concepts.PostgreSQL.log_rotation"></a>
 
-To control PostgreSQL log file rotation, set two parameters in the DB parameter group associated with your DB instance: [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE) and [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE) \. These two settings control when a new, distinct log file is created\. 
+New log files are created by Aurora every hour by default\. The timing is controlled by the `log_rotation_age` parameter\. This parameter has a default value of 60 \(minutes\), but you can set to anywhere from 1 minute to 24 hours \(1,440 minutes\)\. When it's time for rotation, a new distinct log file is created\. The file is named according to the pattern specified by the `log_filename` parameter\. 
 
-The log file names are based on the file name pattern of the [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-FILENAME](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-FILENAME) parameter\. For example, to provide log files names with a granularity of less than an hour, set `log_filename` to the minute format: `postgresql.log.%Y-%m-%d-%H%M`\. Granularity of less than an hour is only supported for PostgreSQL version 10 and higher\. To use a granularity in hours for log file names, set `log_filename` to the hour format: `postgresql.log.%Y-%m-%d-%H`\. 
+Log files can also be rotated according to their size, as specified in the `log_rotation_size` parameter\. This parameter specifies that the log should be rotated when it reaches the size \(in kilobytes\)\. The default `log_rotation_size` is 100000 kB \(kilobytes\) for an Aurora PostgreSQL DB cluster, but you can set this to anywhere from 50,000 to 1,000,000 kilobytes\. 
 
-To control log file rotation based on time, set the `log_rotation_age` parameter to anywhere from 1 minute to 1,440 minutes \(24 hours\)\. The `log_rotation_age` default is 60 minutes\. If you set the `log_rotation_age` parameter to less than 60 minutes, also set the `log_filename` parameter to the minute format\.
+The log file names are based on the file name pattern of the [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-FILENAME](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-FILENAME) parameter\. You can specify file names per hour or per minute, as follows:
++ `postgresql.log.%Y-%m-%d-%H%M` – Minute format for log file name\. Sets the granularity of the log to less than an hour\. Supported by PostgreSQL version and higher only\. 
++ `postgresql.log.%Y-%m-%d-%H` – Hour format for log file name\. Sets the granularity of log to hours\.
 
-To control log file rotation based on file size, set the `log_rotation_size` parameter to anywhere from 50,000 to 1,000,000 KB\. The default is 100,000 KB\. We recommend that you also set the `log_filename` parameter to the minute format\. Doing this makes sure that you can create a new log file in less than an hour if the `log_rotation_age` parameter is 60 minutes or greater\. 
+If you set `log_rotation_age` parameter to less than 60 minutes, be sure to also set the `log_filename` parameter to the minute format\.
 
-## Setting the message format<a name="USER_LogAccess.Concepts.PostgreSQL.Log_Format"></a>
+For more information, see [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE) and [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE) in the *PostgreSQL documentation*\.
 
-By default, Aurora PostgreSQL generates logs in standard error \(stderr\) format\. In this format, each log message is prefixed with the information specified by the parameter `log_line_prefix`\. Aurora only allows the following value for `log_line_prefix`:
+### Setting the log destination<a name="USER_LogAccess.Concepts.PostgreSQL.Log_Format"></a>
+
+By default, Aurora PostgreSQL generates logs in standard error \(stderr\) format\. This is the default setting for the `log_destination` parameter\. This format prefixes each log message with the time, database, and other details specified by the `log_line_prefix` parameter\. The `log_line_prefix` is set to the following text string, which can't be changed:
 
 ```
 %t:%r:%u@%d:[%p]:t
 ```
 
-The preceding value maps to the following code:
-
-```
-log-time : remote-host : user-name @ db-name : [ process-id ]
-```
+This parameter specifies the following details for each log entry:
++ `%t` – Time of log entry\. 
++  `%r` – Remote host address\. 
++  `%u@%d` – User name @ database name\. 
++  `[%p]` – Process ID if available\. 
 
 For example, the following error message results from querying a column using the wrong name\.
 
@@ -91,7 +98,15 @@ For example, the following error message results from querying a column using th
 2019-03-10 03:54:59 UTC:10.0.0.123(52834):postgres@tstdb:[20175]:ERROR: column "wrong" does not exist at character 8
 ```
 
-To specify the format for output logs, use the parameter `log_destination`\. To make the instance generate both standard and CSV output files, set `log_destination` to `csvlog` in your instance parameter group\. For a discussion of PostgreSQL logs, see [ Working with RDS and Aurora PostgreSQL logs: Part 1](http://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-1/)\.
+Aurora PostgreSQL can generate the logs in `csvlog` format in addition to the default `stderr` specified by the `log_destination` parameter\. The `csvlog` is useful for analyzing the log data as CSV data\. For example, say that you use the `log_fdw` extension to work with your logs as foreign tables\. The foreign table created on `stderr` log files contains a single column with log event data\. For the CSV formatted log file, the foreign table has multiple columns, so you can sort and analyze your logs much more easily\. 
+
+You must be using a custom parameter group so that you change the `log_destination` setting\. The `log_destination` parameter is dynamic, that is, the change takes effect immediately, without rebooting\. 
+
+If you do change this parameter, you need to be aware that `csvlog` files are generated in addition to the `stderr` logs\. We recommend that you pay attention to the storage consumed by the logs, taking into account the `rds.log_retention_period` and other settings that affect log storage and turnover\. Using both `stderr` and `csvlog` more than doubles the storage consumed by the logs\. 
+
+If you do set the `log_destination` to include `csvlog` and you later decide that you want to revert to the default only \(`stderr`\), you can open the custom parameter group for your instance using the AWS Management Console, choose the `log_destination` parameter from the list, choose **Edit parameter** and then choose **Reset**\. This reverts the `log_destination` parameter to its default setting, `stderr`\. 
+
+For more information about configuring logging, see [ Working with Amazon RDS and Aurora PostgreSQL logs: Part 1](http://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-1/)\.
 
 ## Enabling query logging<a name="USER_LogAccess.Concepts.PostgreSQL.Query_Logging"></a>
 

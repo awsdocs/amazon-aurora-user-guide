@@ -5,8 +5,6 @@ This section shows how to set up your Aurora DB cluster\. Before creating an Aur
 **Topics**
 + [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)
 + [Creating Amazon Aurora resources with AWS CloudFormation](creating-resources-with-cloudformation.md)
-+ [Using Amazon Aurora Serverless v1](aurora-serverless.md)
-+ [Using Amazon Aurora Serverless v2 \(preview\)](aurora-serverless-2.md)
 + [Using Amazon Aurora global databases](aurora-global-database.md)
 + [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)
 + [Using Amazon RDS Proxy](rds-proxy.md)

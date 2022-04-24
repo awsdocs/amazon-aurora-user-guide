@@ -18,7 +18,7 @@ Before you create a DB cluster, make sure first to have a virtual private cloud 
 
 In some cases, you might want to create a VPC and DB subnet group for use with your Amazon Aurora DB cluster yourself, rather than having Amazon RDS create them\. If so, follow the instructions in [How to create a VPC for use with Amazon Aurora](Aurora.CreateVPC.md)\. Otherwise, follow the instructions in this topic to create your DB cluster and have Amazon RDS create a VPC and DB subnet group for you\.
 
-You can use **Easy create** to create an Aurora PostgreSQL DB cluster with the AWS Management Console\. With **Easy create**, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default settings for the other configuration options\. When you use **Standard create** instead of **Easy create**, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
+You can use **Easy create** to create an Aurora PostgreSQL DB cluster with the AWS Management Console\. With **Easy create**, you specify only the DB engine type, size, and DB cluster identifier\. **Easy create** uses the default settings for the other configuration options\. When you use **Standard create** instead of **Easy create**, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
 In this example, you use **Easy create** to create an Aurora PostgreSQL DB cluster\.
 
@@ -94,20 +94,22 @@ After Amazon RDS provisions your DB cluster and creates the primary instance, yo
 
    If you didn't specify the appropriate security group when you created the DB cluster, you can modify the DB cluster to change its security group\. For more information, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
+   If your DB cluster is publicly accessible, make sure its associated security group has inbound rules for the IP addresses that you want to access it\. If your DB cluster is private, make sure its associated security group has inbound rules for the security group of each resource that you want to access it, such as the security group of an Amazon EC2 instance\.
+
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
 1. Choose **Databases** and then choose the DB cluster name to show its details\. On the **Connectivity & security** tab, copy the value for the **Endpoint name** of the **Writer instance** endpoint\. Also, note the port number for the endpoint\.  
 ![\[DB Cluster Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-postgresql-endpoint.png)
 
-1. If your client computer has PostgreSQL installed, you can use a local instance of psql to connect to a PostgreSQL DB instance\. To connect to your PostgreSQL DB instance using psql, provide host information and access credentials\.
+1. If your client computer has PostgreSQL installed, you can use a local instance of psql to connect to an Aurora PostgreSQL DB cluster\. To connect to your Aurora PostgreSQL DB cluster using psql, provide host information and access credentials\.
 
-   The following format is used to connect to a PostgreSQL DB instance on Amazon RDS\.
+   The following format is used to connect to an Aurora PostgreSQL DB cluster\.
 
    ```
    psql --host=DB_instance_endpoint --port=port --username=master_user_name --password --dbname=database_name
    ```
 
-    For example, the following command connects to a database called `mypgdb` on a PostgreSQL DB instance called `mypostgresql` using fictitious credentials\.
+   For example, the following command connects to a database called `mypgdb` on an Aurora PostgreSQL DB cluster called `mypostgresql` using fictitious credentials\.
 
    ```
    psql --host=database-1.123456789012.us-west-1.rds.amazonaws.com --port=5432 --username=awsuser --password --dbname=postgres

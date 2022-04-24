@@ -12,6 +12,8 @@ The maximum number of connections allowed to an Aurora MySQL DB instance is dete
 
 The following table lists the resulting default value of `max_connections` for each DB instance class available to Aurora MySQL\. You can increase the maximum number of connections to your Aurora MySQL DB instance by scaling the instance up to a DB instance class with more memory, or by setting a larger value for the `max_connections` parameter in the DB parameter group for your instance, up to 16,000\.
 
+ For details about how Aurora Serverless v2 instances handle this parameter, see [Parameters that Aurora computes based on Aurora Serverless v2 maximum capacity](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.parameters-based-on-max-capacity)\. 
+
 
 | Instance class | max\_connections default value | 
 | --- | --- | 

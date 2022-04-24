@@ -55,7 +55,7 @@ The following limitations currently apply to Aurora global databases:
   +  Aurora PostgreSQL versions 13\.3 and higher, 12\.4 and higher, 11\.9 and higher, and 10\.14 and higher 
 + Aurora global databases currently don't support the following Aurora features: 
   + Aurora multi\-master clusters
-  + Aurora Serverless v1
+  + Aurora Serverless
   + Backtracking in Aurora
   + Amazon RDS Proxy
 + Automatic minor version upgrade doesn't apply to Aurora MySQL and Aurora PostgreSQL clusters that are part of an Aurora global database\. Note that you can specify this setting for a DB instance that is part of a global database cluster, but the setting has no effect\.

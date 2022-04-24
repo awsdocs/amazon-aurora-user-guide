@@ -1,17 +1,17 @@
-# Using the query editor for Aurora Serverless<a name="query-editor"></a><a name="query_editor"></a>
+# Using the query editor for Aurora Serverless v1<a name="query-editor"></a><a name="query_editor"></a>
 
-With the query editor for Aurora Serverless, you can run SQL queries in the RDS console\. You can run any valid SQL statement on the Aurora Serverless DB cluster, including data manipulation and data definition statements\.
+With the query editor for Aurora Serverless v1, you can run SQL queries in the RDS console\. You can run any valid SQL statement on the Aurora Serverless v1 DB cluster, including data manipulation and data definition statements\.
 
-The query editor requires an Aurora Serverless DB cluster with the Data API enabled\. For information about creating an Aurora Serverless DB cluster with the Data API enabled, see [Using the Data API for Aurora Serverless](data-api.md)\.
+The query editor requires an Aurora Serverless v1 DB cluster with the Data API enabled\. For information about creating an Aurora Serverless v1 DB cluster with the Data API enabled, see [Using the Data API for Aurora Serverless v1](data-api.md)\.
 
 ## Availability of the query editor<a name="query-editor.regions"></a>
 
-The query editor is only available for the following Aurora Serverless DB clusters:
+The query editor is only available for the following Aurora Serverless v1 DB clusters:
 + Aurora with MySQL version 5\.6 compatibility
 + Aurora with MySQL version 5\.7 compatibility
 + Aurora with PostgreSQL version 10\.7 compatibility
 
-The query editor is currently available for Aurora Serverless in the following AWS Regions:
+The query editor is currently available for Aurora Serverless v1 in the following AWS Regions:
 + US East \(Ohio\)
 + US East \(N\. Virginia\)
 + US West \(N\. California\)
@@ -87,24 +87,24 @@ For information about adding an IAM policy to a user, see [Adding and removing I
 
 ## Running queries in the query editor<a name="query-editor.running"></a>
 
-You can run SQL statements on an Aurora Serverless DB cluster in the query editor\.
+You can run SQL statements on an Aurora Serverless v1 DB cluster in the query editor\.
 
 **To run a query in the query editor**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the upper\-right corner of the AWS Management Console, choose the AWS Region in which you created the Aurora Serverless DB clusters that you want to query\.
+1. In the upper\-right corner of the AWS Management Console, choose the AWS Region in which you created the Aurora Serverless v1 DB clusters that you want to query\.
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Choose the Aurora Serverless DB cluster that you want to run SQL queries against\.
+1. Choose the Aurora Serverless v1 DB cluster that you want to run SQL queries on\.
 
 1. For **Actions**, choose **Query**\. If you haven't connected to the database before, the **Connect to database** page opens\.  
 ![\[Query editor Connect to database page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/query-editor-connect.png)
 
 1. Enter the following information:
 
-   1. For **Database instance or cluster**, choose the Aurora Serverless DB cluster that you want to run SQL queries on\.
+   1. For **Database instance or cluster**, choose the Aurora Serverless v1 DB cluster that you want to run SQL queries on\.
 
    1. For **Database username**, choose the user name of the database user to connect with, or choose **Add new database credentials**\. If you choose **Add new database credentials**, enter the user name for the new database credentials in **Enter database username**\.
 

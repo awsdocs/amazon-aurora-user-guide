@@ -17,7 +17,7 @@
 + [Monitoring Amazon Aurora MySQL replication](#AuroraMySQL.Replication.Monitoring)
 + [Replicating Amazon Aurora MySQL DB clusters across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)
 + [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](#AuroraMySQL.Replication.MySQL)
-+ [Using GTID\-based replication for Aurora MySQL](mysql-replication-gtid.md)
++ [Using GTID\-based replication for Amazon Aurora MySQL](mysql-replication-gtid.md)
 
 ## Using Aurora replicas<a name="AuroraMySQL.Replication.Replicas"></a>
 
@@ -115,7 +115,7 @@
 
  If you want to configure replication between an Aurora MySQL DB cluster and an Aurora MySQL DB cluster in another region, you can create an Aurora MySQL DB cluster as a read replica in a different AWS Region than the source DB cluster\. For more information, see [Replicating Amazon Aurora MySQL DB clusters across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\. 
 
- With Aurora MySQL 2\.04 and higher, you can replicate between Aurora MySQL and an external source or target that uses global transaction identifiers \(GTIDs\) for replication\. Ensure that the GTID\-related parameters in the Aurora MySQL DB cluster have settings that are compatible with the GTID status of the external database\. To learn how to do this, see [Using GTID\-based replication for Aurora MySQL](mysql-replication-gtid.md)\. In Aurora MySQL version 3\.01 and higher, you can choose how to assign GTIDs to transactions that are replicated from a source that doesn't use GTIDs\. For information about the stored procedure that controls that setting, see [mysql\.rds\_assign\_gtids\_to\_anonymous\_transactions \(Aurora MySQL version 3 and higher\)](AuroraMySQL.Reference.md#mysql_assign_gtids_to_anonymous_transactions)\. 
+ With Aurora MySQL 2\.04 and higher, you can replicate between Aurora MySQL and an external source or target that uses global transaction identifiers \(GTIDs\) for replication\. Ensure that the GTID\-related parameters in the Aurora MySQL DB cluster have settings that are compatible with the GTID status of the external database\. To learn how to do this, see [Using GTID\-based replication for Amazon Aurora MySQL](mysql-replication-gtid.md)\. In Aurora MySQL version 3\.01 and higher, you can choose how to assign GTIDs to transactions that are replicated from a source that doesn't use GTIDs\. For information about the stored procedure that controls that setting, see [mysql\.rds\_assign\_gtids\_to\_anonymous\_transactions \(Aurora MySQL version 3 and higher\)](AuroraMySQL.Reference.md#mysql_assign_gtids_to_anonymous_transactions)\. 
 
 **Warning**  
  When you replicate between Aurora MySQL and MySQL, ensure that you use only InnoDB tables\. If you have MyISAM tables that you want to replicate, you can convert them to InnoDB before setting up replication with the following command\.   

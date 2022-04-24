@@ -2,9 +2,12 @@
 
  You can use Aurora MySQL version 3 to get the latest MySQL\-compatible features, performance enhancements, and bug fixes\. Following, you can learn about Aurora MySQL version 3, with MySQL 8\.0 compatibility\. You can learn how to upgrade your clusters and applications to Aurora MySQL version 3\. 
 
+ Some Aurora features, such as Aurora Serverless v2, require Aurora MySQL version 3\. 
+
 **Topics**
 + [Features from community MySQL 8\.0](#AuroraMySQL.8.0-features-community)
 + [New parallel query optimizations](#AuroraMySQL.8.0-features-pq)
++ [Aurora MySQL version 3 prerequisite for Aurora MySQL Serverless v2](#AuroraMySQL.serverless-v2-8.0-prereq)
 + [Release notes for Aurora MySQL version 3](#AuroraMySQL.mysql80-bugs-fixed)
 + [Comparison of Aurora MySQL version 2 and Aurora MySQL version 3](#Aurora.AuroraMySQL.Compare-v2-v3)
 + [Comparison of Aurora MySQL version 3 and community MySQL 8\.0](#Aurora.AuroraMySQL.Compare-80-v3)
@@ -36,6 +39,10 @@
 
  For more information about these enhancements, see [Upgrading parallel query clusters to Aurora MySQL version 3](aurora-mysql-parallel-query.md#aurora-mysql-parallel-query-upgrade-pqv2)\. For general information about Aurora parallel query, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\. 
 
+## Aurora MySQL version 3 prerequisite for Aurora MySQL Serverless v2<a name="AuroraMySQL.serverless-v2-8.0-prereq"></a>
+
+ Aurora MySQL version 3 is a prerequisite for all DB instances in an Aurora MySQL Serverless v2 cluster\. Aurora MySQL Serverless v2 includes support for reader instances in a DB cluster, and other Aurora features that aren't available for Aurora MySQL Serverless v1\. It also has faster and more granular scaling than Aurora MySQL Serverless v1\. 
+
 ## Release notes for Aurora MySQL version 3<a name="AuroraMySQL.mysql80-bugs-fixed"></a>
 
  For the release notes for all Aurora MySQL version 3 releases, see [ Database engine updates for Amazon Aurora MySQL version 3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.Updates.30Updates.html) in the *Release Notes for Aurora MySQL*\. 
@@ -61,7 +68,7 @@
 +  Backtrack currently isn't available for Aurora MySQL version 3 clusters\. We intend to make this feature available in a subsequent minor version\. 
 
    If you have an Aurora MySQL version 2 cluster that uses backtrack, currently you can't use the snapshot restore method to upgrade to Aurora MySQL version 3\. This limitation applies to all clusters that use backtrack clusters, regardless of whether the backtrack setting is turned on\. For details about upgrade procedures, see [Upgrading to Aurora MySQL version 3](#AuroraMySQL.mysql80-upgrade-procedure)\. 
-+  You can't use Aurora MySQL version 3 for Aurora Serverless v1 clusters\. Aurora MySQL version 3 works with Aurora Serverless v2, which is currently in preview\. 
++  You can't use Aurora MySQL version 3 for Aurora Serverless v1 clusters\. Aurora MySQL version 3 works with Aurora Serverless v2\. 
 +  Lab mode doesn't apply to Aurora MySQL version 3\. There aren't any lab mode features in Aurora MySQL version 3\. Instant DDL supersedes the fast online DDL feature that was formerly available in lab mode\. For an example, see [Instant DDL \(Aurora MySQL version 3\)](AuroraMySQL.Managing.FastDDL.md#AuroraMySQL.mysql80-instant-ddl)\. 
 +  The query cache is removed from community MySQL 8\.0 and also from Aurora MySQL version 3\. 
 +  Aurora MySQL version 3 is compatible with the community MySQL hash join feature\. The Aurora\-specific implementation of hash joins in Aurora MySQL version 2 isn't used\. For information about using hash joins with Aurora parallel query, see [Turning on hash join for parallel query clusters](aurora-mysql-parallel-query.md#aurora-mysql-parallel-query-enabling-hash-join) and [Aurora MySQL hints](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Hints)\. For general usage information about hash joins, see [Hash Join Optimization](https://dev.mysql.com/doc/refman/8.0/en/hash-joins.html) in the *MySQL Reference Manual*\. 

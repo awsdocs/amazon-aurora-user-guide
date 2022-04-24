@@ -8,8 +8,9 @@ Aurora MySQL\- and PostgreSQL\-compatible database engines support several Amazo
 + [Aurora machine learning](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML)
 + [Aurora parallel queries](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ParallelQuery)
 + [Amazon RDS Proxy](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy)
++ [Aurora Serverless v2](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2)
 + [Aurora Serverless v1](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless)
-+ [Data API for Aurora Serverless](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API)
++ [Data API for Aurora Serverless v1](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API)
 
 Some of these features are Aurora\-only capabilities\. For example, Aurora Serverless, Aurora global databases, and support for integration with AWS machine learning services aren't supported by Amazon RDS\. Other features, such as Amazon RDS Proxy, are supported by both Amazon Aurora and Amazon RDS\.  
 
@@ -236,9 +237,43 @@ Following are the supported engines and Region availability for RDS Proxy with A
 | AWS GovCloud \(US\-East\) | \- | \- | \- | \- | 
 | AWS GovCloud \(US\-West\) | \- | \- | \- | \- | 
 
+## Aurora Serverless v2<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2"></a>
+
+Aurora Serverless v2 is an on\-demand, auto\-scaling feature designed to be a cost\-effective approach to running intermittent or unpredictable workloads on Amazon Aurora\. It automatically starts up, shuts down, and scales capacity up or down, as needed by your applications\. The scaling is faster and more granular than with Aurora Serverless v1\. With Aurora Serverless v2, each cluster can contain a writer DB instance and multiple reader DB instances\. You can combine Aurora Serverless v2 and traditional provisioned DB instances within the same cluster\. For more information, see [Using Aurora Serverless v2](aurora-serverless-v2.md)\.
+
+
+| Region | Aurora MySQL version 3 | Aurora PostgreSQL 13 | 
+| --- | --- | --- | 
+| US East \(Ohio\) | Version 3\.02\.0 | Version 13\.6 | 
+| US East \(N\. Virginia\) | Version 3\.02\.0 | Version 13\.6 | 
+| US West \(N\. California\) | Version 3\.02\.0 | Version 13\.6 | 
+| US West \(Oregon\) | Version 3\.02\.0 | Version 13\.6 | 
+| Africa \(Cape Town\) | \- | \- | 
+| Asia Pacific \(Hong Kong\) | Version 3\.02\.0 | Version 13\.6 | 
+| Asia Pacific \(Mumbai\) | Version 3\.02\.0 | Version 13\.6 | 
+| Asia Pacific \(Mumbai\) | Version 3\.02\.0 | Version 13\.6 | 
+| Asia Pacific \(Osaka\) | \- | \- | 
+| Asia Pacific \(Seoul\) | Version 3\.02\.0 | Version 13\.6 | 
+| Asia Pacific \(Singapore\) | Version 3\.02\.0 | Version 13\.6 | 
+| Asia Pacific \(Sydney\) | Version 3\.02\.0 | Version 13\.6 | 
+| Asia Pacific \(Tokyo\) | Version 3\.02\.0 | Version 13\.6 | 
+| Canada \(Central\) | Version 3\.02\.0 | Version 13\.6 | 
+| China \(Beijing\) | \- | \- | 
+| China \(Ningxia\) | \- | \- | 
+| Europe \(Frankfurt\) | Version 3\.02\.0 | Version 13\.6 | 
+| Europe \(Ireland\) | Version 3\.02\.0 | Version 13\.6 | 
+| Europe \(London\) | Version 3\.02\.0 | Version 13\.6 | 
+| Europe \(Milan\) | \- | \- | 
+| Europe \(Paris\) | Version 3\.02\.0 | Version 13\.6 | 
+| Europe \(Stockholm\) | Version 3\.02\.0 | Version 13\.6 | 
+| Middle East \(Bahrain\) | \- | \- | 
+| South America \(São Paulo\) | Version 3\.02\.0 | Version 13\.6 | 
+| AWS GovCloud \(US\-East\) | \- | \- | 
+| AWS GovCloud \(US\-West\) | \- | \- | 
+
 ## Aurora Serverless v1<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless"></a>
 
-Aurora Serverless v1 is an on\-demand, auto\-scaling feature designed to be a cost\-effective approach to running intermittent or unpredictable workloads on Amazon Aurora\. It automatically starts up, shuts down, and scales capacity up or down, as needed by your applications\. For more information, see [Using Amazon Aurora Serverless v1](aurora-serverless.md)\.
+Aurora Serverless is an on\-demand, auto\-scaling feature designed to be a cost\-effective approach to running intermittent or unpredictable workloads on Amazon Aurora\. It automatically starts up, shuts down, and scales capacity up or down, as needed by your applications, using a single DB instance in each cluster\. For more information, see [Using Amazon Aurora Serverless v1](aurora-serverless.md)\.
 
 
 | Region | Aurora MySQL 5\.6 | Aurora MySQL 5\.7 | Aurora MySQL 8\.0 | Aurora PostgreSQL 10 | Aurora PostgreSQL 11 | 
@@ -270,9 +305,9 @@ Aurora Serverless v1 is an on\-demand, auto\-scaling feature designed to be a co
 | AWS GovCloud \(US\-East\) | \- | \- | \- | \- | \- | 
 | AWS GovCloud \(US\-West\) | \- | \- | \- | \- | \- | 
 
-## Data API for Aurora Serverless<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API"></a>
+## Data API for Aurora Serverless v1<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API"></a>
 
-The Data API for Aurora Serverless provides a web\-services interface to an Aurora Serverless cluster\. Rather than managing database connections from client applications, you can run SQL commands against an HTTPS endpoint\. For more information, see [Using the Data API for Aurora Serverless](data-api.md)\. 
+The Data API for Aurora Serverless provides a web\-services interface to an Aurora Serverless v1 cluster\. Instead of managing database connections from client applications, you can run SQL commands against an HTTPS endpoint\. For more information, see [Using the Data API for Aurora Serverless v1](data-api.md)\. 
 
 
 | Region | Aurora MySQL 5\.6 | Aurora MySQL 5\.7 | Aurora MySQL 8\.0 | Aurora PostgreSQL 10 | Aurora PostgreSQL 11 | 

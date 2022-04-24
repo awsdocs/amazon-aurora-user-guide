@@ -1,6 +1,6 @@
 # Viewing and listing database log files<a name="USER_LogAccess.Procedural.Viewing"></a>
 
-You can view database log files for your DB engine by using the AWS Management Console\. You can list what log files are available for download or monitoring by using the AWS CLI or Amazon RDS API\. 
+You can view database log files for your Amazon Aurora DB engine by using the AWS Management Console\. You can list what log files are available for download or monitoring by using the AWS CLI or Amazon RDS API\. 
 
 ## Console<a name="USER_LogAccess.CON"></a>
 
@@ -16,7 +16,12 @@ You can view database log files for your DB engine by using the AWS Management C
 
 1. Scroll down to the **Logs** section\. 
 
-1. In the **Logs** section, choose the log that you want to view, and then choose **View**\.
+1. \(Optional\) Enter a search term to filter your results\.
+
+   The following example lists events filtered by the text **error**\.  
+![\[List DB logs\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/ListEventsAMS.png)
+
+1. Choose the log that you want to view, and then choose **View**\.
 
 ## AWS CLI<a name="USER_LogAccess.CLI"></a>
 

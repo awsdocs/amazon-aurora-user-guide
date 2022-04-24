@@ -23,7 +23,7 @@ For a cluster using single\-master replication, after you create the primary ins
  To use a connection string that stays the same even when a failover promotes a new primary instance, you connect to the cluster endpoint\. The *cluster endpoint* always represents the current primary instance in the cluster\. For more information about the cluster endpoint, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\.  
 
 **Tip**  
-Within each AWS Region, Availability Zones represent locations that are distinct from each other to provide isolation in case of outages\. We recommend that you distribute the primary instance and reader instances in your DB cluster over multiple Availability Zones to improve the availability of your DB cluster\. That way, an issue that affects an entire Availability Zone doesn't cause an outage for your cluster\.   
+Within each AWS Region, Availability Zones \(AZs\) represent locations that are distinct from each other to provide isolation in case of outages\. We recommend that you distribute the primary instance and reader instances in your DB cluster over multiple Availability Zones to improve the availability of your DB cluster\. That way, an issue that affects an entire Availability Zone doesn't cause an outage for your cluster\.   
 You can set up a Multi\-AZ cluster by making a simple choice when you create the cluster\. The choice is simple whether you use the AWS Management Console, the AWS CLI, or the Amazon RDS API\. You can also make an existing Aurora cluster into a Multi\-AZ cluster by adding a new reader instance and specifying a different Availability Zone\. 
 
 ## High availability across AWS Regions with Aurora global databases<a name="Concepts.AuroraHighAvailability.GlobalDB"></a>
@@ -32,7 +32,7 @@ You can set up a Multi\-AZ cluster by making a simple choice when you create the
 
 ## Fault tolerance for an Aurora DB cluster<a name="Aurora.Managing.FaultTolerance"></a>
 
-An Aurora DB cluster is fault tolerant by design\. The cluster volume spans multiple Availability Zones in a single AWS Region, and each Availability Zone contains a copy of the cluster volume data\. This functionality means that your DB cluster can tolerate a failure of an Availability Zone without any loss of data and only a brief interruption of service\.
+An Aurora DB cluster is fault tolerant by design\. The cluster volume spans multiple Availability Zones \(AZs\) in a single AWS Region, and each Availability Zone contains a copy of the cluster volume data\. This functionality means that your DB cluster can tolerate a failure of an Availability Zone without any loss of data and only a brief interruption of service\.
 
 If the primary instance in a DB cluster using single\-master replication fails, Aurora automatically fails over to a new primary instance in one of two ways:
 + By promoting an existing Aurora Replica to the new primary instance
@@ -49,7 +49,10 @@ More than one Aurora Replica can share the same priority, resulting in promotion
 
 If the DB cluster doesn't contain any Aurora Replicas, then the primary instance is recreated in the same AZ during a failure event\. A failure event results in an interruption during which read and write operations fail with an exception\. Service is restored when the new primary instance is created, which typically takes less than 10 minutes\. Promoting an Aurora Replica to the primary instance is much faster than creating a new primary instance\.
 
- Suppose that the primary instance in your cluster is unavailable because of an outage that affects an entire AZ\. In this case, the way to bring a new primary instance online depends on whether your cluster uses a multi\-AZ configuration\. If the cluster contains any reader instances in other AZs, Aurora uses the failover mechanism to promote one of those reader instances to be the new primary instance\. If your provisioned cluster only contains a single DB instance, or if the primary instance and all reader instances are in the same AZ, you must manually create one or more new DB instances in another AZ\. If your cluster uses Aurora Serverless, Aurora automatically creates a new DB instance in another AZ\. However, this process involves a host replacement and thus takes longer than a failover\. 
+Suppose that the primary instance in your cluster is unavailable because of an outage that affects an entire AZ\. In this case, the way to bring a new primary instance online depends on whether your cluster uses a Multi\-AZ configuration: 
++  If your provisioned or Aurora Serverless v2 cluster contains any reader instances in other AZs, Aurora uses the failover mechanism to promote one of those reader instances to be the new primary instance\. 
++  If your provisioned or Aurora Serverless v2 cluster only contains a single DB instance, or if the primary instance and all reader instances are in the same AZ, make sure to manually create one or more new DB instances in another AZ\. 
++  If your cluster uses Aurora Serverless v1, Aurora automatically creates a new DB instance in another AZ\. However, this process involves a host replacement and thus takes longer than a failover\. 
 
 **Note**  
 Amazon Aurora also supports replication with an external MySQL database, or an RDS MySQL DB instance\. For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.md#AuroraMySQL.Replication.MySQL)\.

@@ -47,7 +47,7 @@ For information about restoring a DB cluster to a specified time, see [Restoring
 
 ### Database cloning for Aurora<a name="Aurora.Managing.Backups.Restore.Cloning"></a>
 
-You can also use database cloning to clone the databases of your Aurora DB cluster to a new DB cluster, instead of restoring a DB cluster snapshot\. The clone databases use only minimal additional space when first created\. Data is copied only as data changes, either on the source databases or the clone databases\. You can make multiple clones from the same DB cluster, or create additional clones even from other clones\. For more information, see [Cloning a volume for an Aurora DB cluster](Aurora.Managing.Clone.md)\.
+You can also use database cloning to clone the databases of your Aurora DB cluster to a new DB cluster, instead of restoring a DB cluster snapshot\. The clone databases use only minimal additional space when first created\. Data is copied only as data changes, either on the source databases or the clone databases\. You can make multiple clones from the same DB cluster, or create additional clones even from other clones\. For more information, see [Cloning a volume for an Amazon Aurora DB cluster](Aurora.Managing.Clone.md)\.
 
 ## Backtrack<a name="Aurora.Managing.Backups.Backtrack"></a>
 

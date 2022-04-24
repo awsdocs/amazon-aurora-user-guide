@@ -74,7 +74,11 @@ The following operating system counters, which are prefixed with `os`, are avail
 | total | fileSys | os\.fileSys\.total | 
 | rx | network | os\.network\.rx | 
 | tx | network | os\.network\.tx | 
+| acuUtilization | general | os\.general\.acuUtilization | 
+| maxConfiguredAcu | general | os\.general\.maxConfiguredAcu | 
+| minConfiguredAcu | general | os\.general\.minConfiguredAcu | 
 | numVCPUs | general | os\.general\.numVCPUs | 
+| serverlessDatabaseCapacity | general | os\.general\.serverlessDatabaseCapacity | 
 
 ## Performance Insights counters for Aurora MySQL<a name="USER_PerfInsights_Counters.Aurora_MySQL"></a>
 

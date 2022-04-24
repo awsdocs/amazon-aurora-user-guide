@@ -1,6 +1,6 @@
 # Aurora DB instance classes<a name="Concepts.DBInstanceClass"></a>
 
-The DB instance class determines the computation and memory capacity of an Aurora DB instance\. A DB instance class consists of both the DB instance type and the size\. The DB instance class you need depends on your processing power and memory requirements\. 
+The DB instance class determines the computation and memory capacity of an Amazon Aurora DB instance\. A DB instance class consists of both the DB instance type and the size\. The DB instance class that you need depends on your processing power and memory requirements\. 
 
 For more information about instance class pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\.
 
@@ -12,9 +12,12 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 
 ## DB instance class types<a name="Concepts.DBInstanceClass.Types"></a>
 
-Amazon Aurora supports two types of instance classes: memory optimized and burstable performance\. For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\.
+Amazon Aurora supports three types of instance classes: Aurora Serverless v2, memory optimized, and burstable performance\. For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
 
-The following are the memory\-optimized DB instance types available:
+The following is the Aurora Serverless v2 type available:
++  **db\.serverless** – A special DB instance class used by Aurora Serverless v2\. Aurora adjusts the compute, memory, and network resources dynamically as the workload changes\. For usage details, see [Using Aurora Serverless v2](aurora-serverless-v2.md)\. 
+
+The following are the memory optimized DB instance types available:
 + **db\.x2g** – Instance classes optimized for memory\-intensive applications and powered by AWS Graviton2 processors\. These offer low cost per GiB of memory\.
 + **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
 + **db\.r5** – Instance classes optimized for memory\-intensive applications\. These offer improved networking performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
@@ -30,6 +33,8 @@ For DB instance class hardware specifications, see [Hardware specifications for 
 ## Supported DB engines for DB instance classes<a name="Concepts.DBInstanceClass.SupportAurora"></a><a name="instance_classes"></a>
 
 The following are DB engine considerations for DB instance classes:
++ **Aurora support for db\.serverless**
+  +  For the DB engine, engine version, and other requirements, see [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md)\. 
 + **Aurora support for db\.x2g**
   + Aurora MySQL versions 2\.09\.2 and higher, 2\.10\.0 and higher, and 3\.01\.0 and higher support the db\.x2g instance classes\.
   +  Aurora PostgreSQL versions 11\.9 and higher, 12\.4 and higher, and 13\.3 and higher support the db\.x2g instance classes\.
@@ -60,6 +65,8 @@ In the following table, you can find details about supported Amazon Aurora DB in
 
 | Instance class | Aurora MySQL | Aurora PostgreSQL | 
 | --- | --- | --- | 
+| db\.serverless – Aurora Serverless v2 instance class with automatic capacity scaling | 
+| db\.serverless | See [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md) | See [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md) | 
 | db\.x2g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
 | db\.x2g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
 | db\.x2g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 

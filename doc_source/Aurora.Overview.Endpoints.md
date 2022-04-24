@@ -119,7 +119,7 @@ aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:Read
 
  You can define a list of DB instances to include in, or exclude from, a custom endpoint\. We refer to these lists as *static* and *exclusion* lists, respectively\. You can use the inclusion/exclusion mechanism to further subdivide the groups of DB instances, and to make sure that the set of custom endpoints covers all the DB instances in the cluster\. Each custom endpoint can contain only one of these list types\. 
 
- In the AWS Management Console, the choice is represented by the check box **Attach future instances added to this cluster**\. When you keep check box clear, the custom endpoint uses a static list containing only the DB instances specified in the dialog\. When you choose the check box, the custom endpoint uses an exclusion list\. In this case, the custom endpoint represents all DB instances in the cluster \(including any that you add in the future\) except the ones left unselected in the dialog\. The AWS CLI and Amazon RDS API have parameters representing each kind of list\. When you use the AWS CLI or Amazon RDS API, you can't add or remove individual members to the lists; you always specify the entire new list\. 
+ In the AWS Management Console, the choice is represented by the check box **Attach future instances added to this cluster**\. When you keep the check box clear, the custom endpoint uses a static list containing only the DB instances specified on the page\. When you choose the check box, the custom endpoint uses an exclusion list\. In this case, the custom endpoint represents all DB instances in the cluster \(including any that you add in the future\) except the ones not selected on the page\. The AWS CLI and Amazon RDS API have parameters representing each kind of list\. When you use the AWS CLI or Amazon RDS API, you can't add or remove individual members to the lists; you always specify the entire new list\. 
 
  Aurora doesn't change the DB instances specified in the static or exclusion lists when DB instances change roles between primary instance and Aurora Replica due to failover or promotion\. For example, a custom endpoint with type `READER` might include a DB instance that was an Aurora Replica and then was promoted to a primary instance\. The type of a custom endpoint \(`READER`, `WRITER`, or `ANY`\) determines what kinds of operations you can perform through that endpoint\. 
 
@@ -208,7 +208,7 @@ aws rds modify-db-cluster-endpoint --db-cluster-endpoint-identifier custom-endpo
 
 ![\[\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraCustomEndpointDetail.png)
 
- To see the additional detail of whether new DB instances added to the cluster are automatically added to the endpoint also, bring up the **Edit** dialog for the endpoint\. 
+ To see the additional detail of whether new DB instances added to the cluster are automatically added to the endpoint also, open the **Edit** page for the endpoint\. 
 
 ### AWS CLI<a name="aurora-view-endpoint.cli"></a>
 
