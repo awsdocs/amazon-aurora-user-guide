@@ -46,14 +46,14 @@ For information about creating DB clusters with **Standard create**, see [Creati
 
 1. For **DB cluster identifier**, enter a name for the DB cluster, or leave the default name\.
 
-1. For **Master username**, enter a name for the user, or leave the default name\.
-
    The **Create database** page should look similar to the following image\.  
 ![\[Create database page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-aurora-mysql.png)
 
-1. To use an automatically generated password for the DB cluster, make sure that the **Auto generate a password** box is selected\.
+1. For **Master username**, enter a name for the user, or leave the default name \(**admin**\)\. This user name and its password give you control over the Aurora MySQL DB cluster\. 
 
-   To enter your password, clear the **Auto generate a password** box, and then enter the same password in **Master password** and **Confirm password**\.
+   To use an automatically generated password for the DB cluster, make sure that the **Auto generate a password** box is selected\.
+
+   To choose your own password, clear the **Auto generate a password** box, and then enter the same password in **Master password** and **Confirm password**\.
 
 1. \(Optional\) Open **View default settings for Easy create**\.  
 ![\[Easy create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-view-default-settings.png)

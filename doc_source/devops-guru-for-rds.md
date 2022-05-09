@@ -4,6 +4,10 @@ Amazon DevOps Guru is a fully managed operations service that helps developers 
 
 DevOps Guru detects, analyzes, and makes recommendations for operational issues for all Amazon RDS DB engines\. DevOps Guru for RDS extends this capability by applying machine learning to Performance Insights metrics for Amazon Aurora databases\. These monitoring features allow DevOps Guru for RDS to detect and diagnose performance bottlenecks and recommend specific corrective actions\. To learn more, see [Overview of DevOps Guru for RDS](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-rds.overview.html) in the *Amazon DevOps Guru User Guide*\.
 
+The following video is an overview of DevOps Guru for RDS\.
+
+[![AWS Videos](http://img.youtube.com/vi/N3NNYgzYUDA/0.jpg)](http://www.youtube.com/watch?v=N3NNYgzYUDA)
+
 **Topics**
 + [Benefits of DevOps Guru for RDS](#devops-guru-for-rds.benefits)
 + [How DevOps Guru for RDS works](#devops-guru-for-rds.how-it-works)
@@ -46,7 +50,7 @@ If DevOps Guru detects an anomaly on your DB instance, you're alerted in the **
 
 #### Contextual anomalies<a name="devops-guru-for-rds.how-it-works.anomalies.contextual"></a>
 
-A *contextual anomaly* is a finding within **Database load \(DB load\)**\. Each contextual anomaly describes a specific Amazon Aurora performance issue that requires investigation\. For example, DevOps Guru for RDS might recommend that you consider increasing CPU capacity or investigate wait events that are contributing to DB load\. [Amazon Aurora versions](Aurora.VersionPolicy.md)
+A *contextual anomaly* is a finding within **Database load \(DB load\)**\. Each contextual anomaly describes a specific Amazon Aurora performance issue that requires investigation\. For example, DevOps Guru for RDS might recommend that you consider increasing CPU capacity or investigate wait events that are contributing to DB load\.
 
 **Important**  
 We recommend that you test any changes on a test instance before modifying a production instance\. In this way, you understand the impact of the change\.

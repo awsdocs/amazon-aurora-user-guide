@@ -162,3 +162,11 @@ psql 'host=endpoint user=user sslmode=require sslrootcert=amazon-root-CA-1.pem d
  To learn more about working with the Aurora PostgreSQL database using the Postgres Client, see [Connecting to a DB instance running the PostgreSQL database engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html)\. 
 
  For more information about connecting to Aurora DB clusters in general, see [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\. 
+
+### Supported cipher suites for connections to Aurora Serverless v1 DB clusters<a name="aurora-serverless.tls.cipher-suites"></a>
+
+By using configurable cipher suites, you can have more control over the security of your database connections\. You can specify a list of cipher suites that you want to allow to secure client TLS/SSL connections to your database\. With configurable cipher suites, you can control the connection encryption that your database server accepts\. Doing this prevents the use of ciphers that aren't secure or that are no longer used\.
+
+Aurora Serverless v1 DB clusters that are based on Aurora MySQL support the same cipher suites as Aurora MySQL provisioned DB clusters\. For information about these cipher suites, see [Configuring cipher suites for connections to Aurora MySQL DB clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL.ConfiguringCipherSuites)\.
+
+Aurora Serverless v1 DB clusters that are based on Aurora PostgreSQL don't support cipher suites\.

@@ -26,6 +26,7 @@ You can stop a DB cluster for up to seven days\. If you don't manually start you
 
  Some Aurora clusters can't be stopped and started: 
 +  You can't stop and start a cluster that's part of an [Aurora global database](aurora-global-database.md)\. 
++  You can't stop and start a cluster that has a cross\-Region read replica\. 
 +  For a cluster that uses the [Aurora parallel query](aurora-mysql-parallel-query.md) feature, the minimum Aurora MySQL versions are 1\.23\.0 and 2\.09\.0\. 
 +  You can't stop and start an [Aurora Serverless v1 cluster](aurora-serverless.md)\. With [Aurora Serverless v2](aurora-serverless-v2.md), you can stop and start the cluster\. 
 +  You can't stop and start an [Aurora multi\-master cluster](aurora-multi-master.md)\. 

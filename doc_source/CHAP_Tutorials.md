@@ -22,7 +22,7 @@ The following tutorials in this guide show you how to perform common tasks with 
 + [Tutorial: Use tags to specify which Aurora DB clusters to stop](USER_Tagging.md#Tagging.Aurora.Autostop)
 
   Learn how to use tags to specify which Aurora DB clusters to stop\.
-+ [Tutorial: Log DB instance stage changes using Amazon EventBridge](rds-cloud-watch-events.md#log-rds-instance-state)
++ [Tutorial: Log DB instance state changes using Amazon EventBridge](rds-cloud-watch-events.md#log-rds-instance-state)
 
   Learn how to log a DB instance state change using Amazon EventBridge and AWS Lambda\.
 

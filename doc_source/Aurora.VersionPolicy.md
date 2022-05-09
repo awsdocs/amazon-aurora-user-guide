@@ -80,13 +80,13 @@ aurora_version
 
 ## Amazon Aurora minor versions<a name="Aurora.VersionPolicy.MinorVersions"></a>
 
- Aurora versions use the `major.minor.patch` scheme\. An *Aurora minor version* provides incremental community and Aurora\-specific improvements to the service, for example new features and bug fixes\. 
+ Aurora versions use the `major.minor.patch` scheme\. An *Aurora minor version* provides incremental community and Aurora\-specific improvements to the service, for example new features and fixes\. 
 
  Aurora minor versions are always mapped to a specific community version\. However, some community versions might not have an Aurora equivalent\. 
 
 ## Amazon Aurora patch versions<a name="Aurora.VersionPolicy.PatchVersions"></a>
 
- Aurora versions use the `major.minor.patch` scheme\. An Aurora patch version includes important bug fixes added to a minor version after its initial release \(for example, Aurora MySQL 2\.04\.0, 2\.04\.1, \.\.\., 2\.04\.9\)\. While each new minor version provides new Aurora features, new patch versions within a specific minor version are primarily used to resolve important issues\. 
+ Aurora versions use the `major.minor.patch` scheme\. An Aurora patch version includes important fixes added to a minor version after its initial release \(for example, Aurora MySQL 2\.04\.0, 2\.04\.1, \.\.\., 2\.04\.9\)\. While each new minor version provides new Aurora features, new patch versions within a specific minor version are primarily used to resolve important issues\. 
 
  For more information on patching, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
 
@@ -140,7 +140,7 @@ After this 12\-month period, an automatic upgrade to the subsequent major versio
 
  For each Aurora major version, certain minor versions are designated as long\-term\-support \(LTS\) versions and made available for at least three years\. That is, at least one minor version per major version is made available for longer than the typical 12 months\. We generally provide a reminder six months before the end of this period\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. 
 
- LTS minor versions include only bug fixes \(through patch versions\)\. An LTS version doesn't include new features released after its introduction\. Once a year, DB clusters running on an LTS minor version are patched to the latest patch version of the LTS release\. We do this patching to help ensure that you benefit from cumulative security and stability fixes\. We might patch an LTS minor version more frequently if there are critical fixes, such as for security, that need to be applied\. 
+ LTS minor versions include only critical fixes \(through patch versions\)\. An LTS version doesn't include new features released after its introduction\. Once a year, DB clusters running on an LTS minor version are patched to the latest patch version of the LTS release\. We do this patching to help ensure that you benefit from cumulative security and stability fixes\. We might patch an LTS minor version more frequently if there are critical fixes, such as for security, that need to be applied\. 
 
 **Note**  
  If you want to remain on an LTS minor version for the duration of its lifecycle, make sure to turn off **Auto minor version upgrade** for your DB instances\. To avoid automatically upgrading your DB cluster from the LTS minor version, set **Auto minor version upgrade** to `No` on all DB instances in your Aurora cluster\. 

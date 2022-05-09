@@ -65,7 +65,7 @@ Amazon RDS creates an SSL/TLS certificate and installs the certificate on the DB
 
 For information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\.
 
-We recommend the MariaDB Connector/J client as a client that supports SAN with SSL\. For more information, see the [MariaDB Connector/J download](https://downloads.mariadb.org/connector-java/) page\.
+We recommend the AWS JDBC Driver for MySQL as a client that supports SAN with SSL/TLS\. For more information about the AWS JDBC Driver for MySQL and complete instructions for using it, see the [AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
 
 **Topics**
 + [Requiring an SSL/TLS connection to an Aurora MySQL DB cluster](#AuroraMySQL.Security.SSL.RequireSSL)

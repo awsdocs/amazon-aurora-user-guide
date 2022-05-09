@@ -28,6 +28,7 @@ To help with cluster management in Aurora PostgreSQL, you can use its scalabilit
 + [T\-SQL differences in Babelfish](#babelfish-compatibility.tsql.limitations)
 + [Features with limited implementation](#babelfish-compatibility.tsql.limited-implementation)
 + [Unsupported functionality in Babelfish](#babelfish-compatibility.tsql.limitations-unsupported)
++ [Supported functionality in Babelfish by version](babelfish-compatibility.supported-functionality-table.md)
 
 ## T\-SQL differences in Babelfish<a name="babelfish-compatibility.tsql.limitations"></a>
 
@@ -35,7 +36,7 @@ Following, you can find a table of T\-SQL functionality as supported in the curr
 
 For more information about support in various versions, see [Supported functionality in Babelfish by version](babelfish-compatibility.supported-functionality-table.md)\. For information about features that currently aren't supported, see [Unsupported functionality in Babelfish](#babelfish-compatibility.tsql.limitations-unsupported)\. 
 
-For more information about Babelfish releases, see [Babelfish versions](babelfish-releases-updates.md)\.
+Babelfish for Aurora PostgreSQL is available with Aurora PostgreSQL\-Compatible Edition\. For more information about Babelfish releases, see the [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html)\.
 
 
 | Functionality or syntax | Description of behavior or difference | 
@@ -141,7 +142,7 @@ These minor differences in ROWVERSION/TIMESTAMP datatypes shouldn't have an adve
 
 ## Unsupported functionality in Babelfish<a name="babelfish-compatibility.tsql.limitations-unsupported"></a>
 
-In the following table and lists, you can find functionality that isn't currently supported in Babelfish\. For information about updates to Babelfish, see [Babelfish versions](babelfish-releases-updates.md)\. 
+In the following table and lists, you can find functionality that isn't currently supported in Babelfish\. Updates to Babelfish are included in Aurora PostgreSQL versions\. For more information, see the [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html)\. 
 
 **Topics**
 + [Functionality that isn't currently supported](#babelfish-compatibility.tsql.limitations-unsupported-table)

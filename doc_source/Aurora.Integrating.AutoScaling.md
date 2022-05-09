@@ -24,7 +24,7 @@ When Aurora Auto Scaling adds a new Aurora Replica, the new Aurora Replica is th
 
 Aurora Auto Scaling only removes Aurora Replicas that it created\.
 
-To benefit from Aurora Auto Scaling, your applications must support connections to new Aurora Replicas\. To do so, we recommend using the Aurora reader endpoint\. For Aurora MySQL you can use a driver such as the MariaDB Connector/J utility\. For more information, see [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\.
+To benefit from Aurora Auto Scaling, your applications must support connections to new Aurora Replicas\. To do so, we recommend using the Aurora reader endpoint\. For Aurora MySQL you can use a driver such as the AWS JDBC Driver for MySQL\. For more information, see [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\.
 
 **Note**  
 Aurora global databases currently don't support Aurora Auto Scaling for secondary DB clusters\.

@@ -1,4 +1,4 @@
-# Using the Data API for Aurora Serverless v1<a name="data-api"></a>
+# Using the Data API for Aurora Serverless v1<a name="data-api"></a><a name="data_api"></a>
 
 By using the Data API for Aurora Serverless v1, you can work with a web\-services interface to your Aurora Serverless v1 DB cluster\. The Data API doesn't require a persistent connection to the DB cluster\. Instead, it provides a secure HTTP endpoint and integration with AWS SDKs\. You can use the endpoint to run SQL statements without managing connections\.
 
@@ -19,6 +19,7 @@ After you enable the Data API, you can also use the query editor for Aurora Serv
 + [Creating an Amazon VPC endpoint for the Data API \(AWS PrivateLink\)](#data-api.vpc-endpoint)
 + [Calling the Data API](#data-api.calling)
 + [Using the Java client library for Data API](#data-api.java-client-library)
++ [Processing query results in JSON format](#data-api-json)
 + [Troubleshooting Data API issues](#data-api.troubleshooting)
 + [Logging Data API calls with AWS CloudTrail](logging-using-cloudtrail-data-api.md)
 
@@ -412,6 +413,7 @@ In addition to the common options, specify the following options:
 + `--continue-after-timeout | --no-continue-after-timeout` \(optional\) – A value that indicates whether to continue running the statement after the call times out\. The default is `--no-continue-after-timeout`\.
 
   For data definition language \(DDL\) statements, we recommend continuing to run the statement after the call times out to avoid errors and the possibility of corrupted data structures\.
++  `--format-records-as "JSON"|"NONE"` – An optional value that specifies whether to format the result set as a JSON string\. The default is `"NONE"`\. For usage information about processing JSON result sets, see [Processing query results in JSON format](#data-api-json)\. 
 
 The DB cluster returns a response for the call\.
 
@@ -1078,6 +1080,236 @@ int numberOfAccounts = client.forSql("SELECT COUNT(*) FROM accounts")
           .singleValue(Integer.class);
 ```
 
+## Processing query results in JSON format<a name="data-api-json"></a>
+
+ When you call the `ExecuteStatement` operation, you can choose to have the query results returned as a string in JSON format\. That way, you can use your programming language's JSON parsing capabilities to interpret and reformat the result set\. Doing so can help to avoid writing extra code to loop through the result set and interpret each column value\. 
+
+ To request the result set in JSON format, you pass the optional `formatRecordsAs` parameter with a value of `JSON`\. The JSON\-formatted result set is returned in the `formattedRecords` field of the `ExecuteStatementResponse` structure\. 
+
+ The `BatchExecuteStatement` action doesn't return a result set\. Thus, the JSON option doesn't apply to that action\. 
+
+ To customize the keys in the JSON hash structure, define column aliases in the result set\. You can do so by using the `AS` clause in the column list of your SQL query\. 
+
+ You might use the JSON capability to make the result set easier to read and map its contents to language\-specific frameworks\. Because the volume of the ASCII\-encoded result set is larger than the default representation, you might choose the default representation for queries that return large numbers of rows or large column values that consume more memory than is available to your application\. 
+
+**Topics**
++ [Retrieving query results in JSON format](#data-api-json-querying)
++ [Data Type Mapping](#data-api-json-datatypes)
++ [Troubleshooting](#data-api-json-troubleshooting)
++ [Examples](#data-api-json-examples)
+
+### Retrieving query results in JSON format<a name="data-api-json-querying"></a>
+
+ To receive the the result set as a JSON string, include `.withFormatRecordsAs(RecordsFormatType.JSON)` in the `ExecuteStatement` call\. The return value comes back as a JSON string in the `formattedRecords` field\. In this case, the `columnMetadata` is `null`\. The column labels are the keys of the object that represents each row\. These column names are repeated for each row in the result set\. The column values are quoted strings, numeric values, or special values representing `true`, `false`, or `null`\. Column metadata such as length constraints and the precise type for numbers and strings isn't preserved in the JSON response\. 
+
+ If you omit the `.withFormatRecordsAs()` call or specify a parameter of `NONE`, the result set is returned in binary format using the `Records` and `columnMetadata` fields\. 
+
+### Data Type Mapping<a name="data-api-json-datatypes"></a>
+
+ The SQL values in the result set are mapped to a smaller set of JSON types\. The values are represented in JSON as strings, numbers, and some special constants such as `true`, `false`, and `null`\. You can convert these values into variables in your application, using strong or weak typing as appropriate for your programming language\. 
+
+
+****  
+
+|   JDBC data type   |   JSON data type   | 
+| --- | --- | 
+|   `INTEGER`, `TINYINT`, `SMALLINT`, `BIGINT`   |   Number by default\. String if the `LongReturnType` option is set to `STRING`\.   | 
+|   `FLOAT`, `REAL`, `DOUBLE`   |   Number   | 
+|   `DECIMAL`   |   String by default\. Number if the `DecimalReturnType` option is set to `DOUBLE_OR_LONG`\.   | 
+|   `STRING`   |   String   | 
+|   `BOOLEAN`, `BIT`   |   Boolean   | 
+|   `BLOB`, `BINARY`, `VARBINARY`, `LONGVARBINARY`   |   String in base64 encoding\.   | 
+|   `CLOB`   |   String   | 
+|   `ARRAY`   |   Array   | 
+|   `NULL`   |   `null`   | 
+|   Other types \(including types related to date and time\)   |   String   | 
+
+### Troubleshooting<a name="data-api-json-troubleshooting"></a>
+
+ The JSON response is limited to 10 megabytes\. If the response is larger than this limit, your program receives a `BadRequestException` error\. In this case, you can resolve the error using one of the following techniques: 
++  Reduce the number of rows in the result set\. To do so, add a `LIMIT` clause\. You might split a large result set into multiple smaller ones by submitting several queries with `LIMIT` and `OFFSET` clauses\. 
+
+   If the result set includes rows that are filtered out by application logic, you can remove those rows from the result set by adding more conditions in the `WHERE` clause\. 
++  Reduce the number of columns in the result set\. To do so, remove items from the select list of the query\. 
++  Shorten the column labels by using column aliases in the query\. Each column name is repeated in the JSON string for each row in the result set\. Thus, a query result with long column names and many rows could exceed the size limit\. In particular, use column aliases for complicated expressions to avoid having the entire expression repeated in the JSON string\. 
++  Although with SQL you can use column aliases to produce a result set having more than one column with the same name, duplicate key names aren't allowed in JSON\. The RDS Data API returns an error if you request the result set in JSON format and more than one column has the same name\. Thus, make sure that all the column labels have unique names\. 
+
+### Examples<a name="data-api-json-examples"></a>
+
+ The following Java examples show how to call `ExecuteStatement` with the response as a JSON\-formatted string, then interpret the result set\. Substitute the appropriate values for the *databaseName*, *secretStoreArn*, and *clusterArn* parameters\. 
+
+ The following Java example demonstrates a query that returns a decimal numeric value in the result set\. The `assertThat` calls test that the fields of the response have the expected properties based on the rules for JSON result sets\. 
+
+ This example works with the following schema and sample data: 
+
+```
+create table test_simplified_json (a float);
+insert into test_simplified_json values(10.0);
+```
+
+```
+public void JSON_result_set_demo() {
+    var sql = "select * from test_simplified_json";
+    var request = new ExecuteStatementRequest()
+      .withDatabase(databaseName)
+      .withSecretArn(secretStoreArn)
+      .withResourceArn(clusterArn)
+      .withSql(sql)
+      .withFormatRecordsAs(RecordsFormatType.JSON);
+    var result = rdsdataClient.executeStatement(request);
+}
+```
+
+ The value of the `formattedRecords` field from the preceding program is: 
+
+```
+[{"a":10.0}]
+```
+
+ The `Records` and `ColumnMetadata` fields in the response are both null, due to the presence of the JSON result set\. 
+
+ The following Java example demonstrates a query that returns an integer numeric value in the result set\. The example calls `getFormattedRecords` to return only the JSON\-formatted string and ignore the other response fields that are blank or null\. The example deserializes the result into a structure representing a list of records\. Each record has fields whose names correspond to the column aliases from the result set\. This technique simplifies the code that parses the result set\. Your application doesn't have to loop through the rows and columns of the result set and convert each value to the appropriate type\. 
+
+ This example works with the following schema and sample data: 
+
+```
+create table test_simplified_json (a int);
+insert into test_simplified_json values(17);
+```
+
+```
+public void JSON_deserialization_demo() {
+    var sql = "select * from test_simplified_json";
+    var request = new ExecuteStatementRequest()
+      .withDatabase(databaseName)
+      .withSecretArn(secretStoreArn)
+      .withResourceArn(clusterArn)
+      .withSql(sql)
+      .withFormatRecordsAs(RecordsFormatType.JSON);
+    var result = rdsdataClient.executeStatement(request)
+      .getFormattedRecords();
+
+/* Turn the result set into a Java object, a list of records.
+   Each record has a field 'a' corresponding to the column
+   labelled 'a' in the result set. */
+    private static class Record { public int a; }
+    var recordsList = new ObjectMapper().readValue(
+        response, new TypeReference<List<Record>>() {
+        });
+}
+```
+
+ The value of the `formattedRecords` field from the preceding program is: 
+
+```
+[{"a":17}]
+```
+
+ To retrieve the `a` column of result row 0, the application would refer to `recordsList.get(0).a`\. 
+
+ In contrast, the following Java example shows the kind of code that's required to construct a data structure holding the result set when you don't use the JSON format\. In this case, each row of the result set contains fields with information about a single user\. Building a data structure to represent the result set requires looping through the rows\. For each row, the code retrieves the value of each field, performs an appropriate type conversion, and assigns the result to the corresponding field in the object representing the row\. Then the code adds the object representing each user to the data structure representing the entire result set\. If the query was changed to reorder, add, or remove fields in the result set, the application code would have to change also\. 
+
+```
+/* Verbose result-parsing code that doesn't use the JSON result set format */
+for (var row: response.getRecords()) {
+    var user = User.builder()
+      .userId(row.get(0).getLongValue())
+      .firstName(row.get(1).getStringValue())
+      .lastName(row.get(2).getStringValue())
+      .dob(Instant.parse(row.get(3).getStringValue()))
+      .build();
+    result.add(user);
+  }
+```
+
+ The following sample values show the values of the `formattedRecords` field for result sets with different numbers of columns, column aliases, and column data types\. 
+
+ If the result set includes multiple rows, each row is represented as an object that is an array element\. Each column in the result set becomes a key in the object\. The keys are repeated for each row in the result set\. Thus, for result sets consisting of many rows and columns, you might need to define short column aliases to avoid exceeding the length limit for the entire response\. 
+
+ This example works with the following schema and sample data: 
+
+```
+create table sample_names (id int, name varchar(128));
+insert into sample_names values (0, "Jane"), (1, "Mohan"), (2, "Maria"), (3, "Bruce"), (4, "Jasmine");
+```
+
+```
+[{"id":0,"name":"Jane"},{"id":1,"name":"Mohan"},
+{"id":2,"name":"Maria"},{"id":3,"name":"Bruce"},{"id":4,"name":"Jasmine"}]
+```
+
+ If a column in the result set is defined as an expression, the text of the expression becomes the JSON key\. Thus, it's typically convenient to define a descriptive column alias for each expression in the select list of the query\. For example, the following query includes expressions such as function calls and arithmetic operations in its select list\. 
+
+```
+select count(*), max(id), 4+7 from sample_names;
+```
+
+ Those expressions are passed through to the JSON result set as keys\. 
+
+```
+[{"count(*)":5,"max(id)":4,"4+7":11}]
+```
+
+ Adding `AS` columns with descriptive labels makes the keys simpler to interpret in the JSON result set\. 
+
+```
+select count(*) as rows, max(id) as largest_id, 4+7 as addition_result from sample_names;
+```
+
+ With the revised SQL query, the column labels defined by the `AS` clauses are used as the key names\. 
+
+```
+[{"rows":5,"largest_id":4,"addition_result":11}]
+```
+
+ The value for each key\-value pair in the JSON string can be a quoted string\. The string might contain unicode characters\. If the string contains escape sequences or the `"` or `\` characters, those characters are preceded by backslash escape characters\. The following examples of JSON strings demonstrate these possibilities\. For example, the `string_with_escape_sequences` result contains the special characters backspace, newline, carriage return, tab, form feed, and `\`\. 
+
+```
+[{"quoted_string":"hello"}]
+[{"unicode_string":"邓不利多"}]
+[{"string_with_escape_sequences":"\b \n \r \t \f \\ '"}]
+```
+
+ The value for each key\-value pair in the JSON string can also represent a number\. The number might be an integer, a floating\-point value, a negative value, or a value represented as exponential notation\. The following examples of JSON strings demonstrate these possibilities\. 
+
+```
+[{"integer_value":17}]
+[{"float_value":10.0}]
+[{"negative_value":-9223372036854775808,"positive_value":9223372036854775807}]
+[{"very_small_floating_point_value":4.9E-324,"very_large_floating_point_value":1.7976931348623157E308}]
+```
+
+ Boolean and null values are represented with the unquoted special keywords `true`, `false`, and `null`\. The following examples of JSON strings demonstrate these possibilities\. 
+
+```
+[{"boolean_value_1":true,"boolean_value_2":false}]
+[{"unknown_value":null}]
+```
+
+ If you select a value of a BLOB type, the result is represented in the JSON string as a base64\-encoded value\. To convert the value back to its original representation, you can use the appropriate decoding function in your application's language\. For example, in Java you call the function `Base64.getDecoder().decode()`\. The following sample output shows the result of selecting a BLOB value of `hello world` and returning the result set as a JSON string\. 
+
+```
+[{"blob_column":"aGVsbG8gd29ybGQ="}]
+```
+
+ The following Python example shows how to access the values from the result of a call to the Python `execute_statement` function\. The result set is a string value in the field `response['formattedRecords']`\. The code turns the JSON string into a data structure by calling the `json.loads` function\. Then each row of the result set is a list element within the data structure, and within each row you can refer to each field of the result set by name\. 
+
+```
+import json
+
+result = json.loads(response['formattedRecords'])
+print (result[0]["id"])
+```
+
+ The following Javascript example shows how to access the values from the result of a call to the Javascript `executeStatement` function\. The result set is a string value in the field `response.formattedRecords`\. The code turns the JSON string into a data structure by calling the `JSON.parse` function\. Then each row of the result set is an array element within the data structure, and within each row you can refer to each field of the result set by name\. 
+
+```
+<script>
+    const result = JSON.parse(response.formattedRecords);
+    document.getElementById("display").innerHTML = result[0].id;
+</script>
+```
+
 ## Troubleshooting Data API issues<a name="data-api.troubleshooting"></a>
 
 Use the following sections, titled with common error messages, to help troubleshoot problems that you have with the Data API\. 
@@ -1116,9 +1348,10 @@ For more information about the `LIMIT` clause, see [SELECT syntax](https://dev.m
 
 ### HttpEndpoint is not enabled for cluster <cluster\_ID><a name="data-api.troubleshooting.http-endpoint-not-enabled"></a>
 
-The cause for this issue is almost always one of the following:
-+ The Data API isn't enabled for the Aurora Serverless v1 DB cluster\. To use the Data API with an Aurora Serverless v1 DB cluster, the Data API must be enabled for the DB cluster\.
-+ The DB cluster was renamed after the Data API was enabled for it\.
+Check the following potential causes for this issue:
++ The Data API isn't enabled for the Aurora Serverless v1 DB cluster\. To use the Data API with an Aurora Serverless v1 DB cluster, the Data API must be enabled for the DB cluster\. For information about enabling the Data API, see [Enabling the Data API](#data-api.enabling)\.
++ The DB cluster was renamed after the Data API was enabled for it\. In that case, turn off the Data API for that cluster and then enable it again\.
++ The ARN you specified doesn't precisely match the ARN of the cluster\. Check that the ARN returned from another source or constructed by program logic matches the ARN of the cluster exactly\. For example, make sure that the ARN you use has the correct letter case for all alphabetic characters\. 
 
 If the Data API has not been enabled for the DB cluster, enable it\. Make sure that it's an Aurora Serverless v1 cluster\. Currently, you can't use the Data API with Aurora Serverless v2\.
 

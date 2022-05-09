@@ -3,9 +3,9 @@
 Using Amazon CloudWatch Events and Amazon EventBridge, you can automate AWS services and respond to system events such as application availability issues or resource changes\. 
 
 **Topics**
-+ [Tutorial: Log DB instance stage changes using Amazon EventBridge](#log-rds-instance-state)
++ [Tutorial: Log DB instance state changes using Amazon EventBridge](#log-rds-instance-state)
 
-## Tutorial: Log DB instance stage changes using Amazon EventBridge<a name="log-rds-instance-state"></a>
+## Tutorial: Log DB instance state changes using Amazon EventBridge<a name="log-rds-instance-state"></a>
 
 In this tutorial, you create an AWS Lambda function that logs the state changes for an instance\. You then create a rule that runs the function whenever there is a state change of an existing RDS DB instance\. The tutorial assumes that you have a small running test instance that you can shut down temporarily\.
 

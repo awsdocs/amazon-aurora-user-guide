@@ -171,15 +171,15 @@ A hash join column can be any complex expression\. In a hash join column, you ca
 + You can compare items with date and timestamp data types if the types are the same\.
 
 **Note**  
-Data types in different categories cannot compare\.
+You can't compare data types in different categories\.
 
 The following restrictions apply to hash joins for Aurora MySQL:
-+ Left\-right outer joins are not supported\.
-+ Semijoins such as subqueries are not supported, unless the subqueries are materialized first\.
-+ Multiple\-table updates or deletes are not supported\.
++ Left\-right outer joins aren't supported for Aurora MySQL versions 1 and 2, but are supported for version 3\.
++ Semijoins such as subqueries aren't supported, unless the subqueries are materialized first\.
++ Multiple\-table updates or deletes aren't supported\.
 **Note**  
 Single\-table updates or deletes are supported\.
-+ BLOB and spatial data type columns cannot be join columns in a hash join\.
++ BLOB and spatial data type columns can't be join columns in a hash join\.
 
 #### Enabling hash joins<a name="Aurora.BestPractices.HashJoin.Enabling"></a>
 

@@ -1,60 +1,212 @@
 # Security with Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.Security"></a>
 
-Security for Amazon Aurora PostgreSQL is managed at three levels:
-+ To control who can perform Amazon RDS management actions on Aurora PostgreSQL DB clusters and DB instances, use AWS Identity and Access Management \(IAM\)\. When you connect to AWS using IAM credentials, your AWS account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Identity and access management in Amazon Aurora](UsingWithRDS.IAM.md)\.
+For a general overview of Aurora security, see [Security in Amazon Aurora](UsingWithRDS.md)\. You can manage security for Amazon Aurora PostgreSQL at a few different levels:
++ To control who can perform Amazon RDS management actions on Aurora PostgreSQL DB clusters and DB instances, use AWS Identity and Access Management \(IAM\)\. IAM handles the authentication of user identity before the user can access the service\. It also handles authorization, that is, whether the user is allowed to do what they're trying to do\. IAM database authentication is an additional authentication method that you can choose when you create your Aurora PostgreSQL DB cluster\. For more information, see [Identity and access management in Amazon Aurora](UsingWithRDS.IAM.md)\.
 
-  If you are using IAM to access the Amazon RDS console, make sure to first sign in to the AWS Management Console with your IAM user credentials\. Then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+  If you do use IAM with your Aurora PostgreSQL DB cluster, sign in to the AWS Management Console with your IAM credentials first, before opening the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 + Make sure to create Aurora DB clusters in a virtual public cloud \(VPC\) based on the Amazon VPC service\. To control which devices and Amazon EC2 instances can open connections to the endpoint and port of the DB instance for Aurora DB clusters in a VPC, use a VPC security group\. You can make these endpoint and port connections by using Secure Sockets Layer \(SSL\)\. In addition, firewall rules at your company can control whether devices running at your company can open connections to a DB instance\. For more information on VPCs, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
 
   The supported VPC tenancy depends on the DB instance class used by your Aurora PostgreSQL DB clusters\. With `default` VPC tenancy, the VPC runs on shared hardware\. With `dedicated` VPC tenancy, the VPC runs on a dedicated hardware instance\. The burstable performance DB instance classes support default VPC tenancy only\. The burstable performance DB instance classes include the db\.t3 and db\.t4g DB instance classes\. All other Aurora PostgreSQL DB instance classes support both default and dedicated VPC tenancy\.
 
   For more information about instance classes, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\. For more information about `default` and `dedicated` VPC tenancy, see [Dedicated instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html) in the *Amazon Elastic Compute Cloud User Guide*\.
-+ To authenticate login and permissions for an Amazon Aurora DB cluster, you can take the same approach as with a stand\-alone instance of PostgreSQL\.
++ To grant permissions to the PostgreSQL databases running on your Amazon Aurora DB cluster, you can take the same general approach as with stand\-alone instances of PostgreSQL\. Commands such as `CREATE ROLE`, `ALTER ROLE`, `GRANT`, and `REVOKE` work just as they do in on\-premises databases, as does directly modifying databases, schemas, and tables\.
 
-  Commands such as `CREATE ROLE`, `ALTER ROLE`, `GRANT`, and `REVOKE` work just as they do in on\-premises databases, as does directly modifying database schema tables\. For more information, see [Client authentication](https://www.postgresql.org/docs/current/client-authentication.html) in the PostgreSQL documentation\.
+  PostgreSQL manages privileges by using *roles*\. The `rds_superuser` role is the most privileged role on an Aurora PostgreSQL DB cluster\. This role is created automatically, and it's granted to the user that creates the DB cluster \(the master user account, `postgres` by default\)\. To learn more, see [Understanding PostgreSQL roles and permissions](#Appendix.PostgreSQL.CommonDBATasks.Roles)\. 
 **Note**  
-The Salted Challenge Response Authentication Mechanism \(SCRAM\) is not supported with Aurora PostgreSQL\.
+The Salted Challenge Response Authentication Mechanism \(SCRAM\), an alternative to PostgreSQL's default message digest \(MD5\) algorithm used by PostgreSQL for user authentication, isn't supported by Aurora PostgreSQL\.
+
+## Understanding PostgreSQL roles and permissions<a name="Appendix.PostgreSQL.CommonDBATasks.Roles"></a>
+
+When you create an Aurora PostgreSQL DB cluster using the AWS Management Console, an administrator account is created at the same time\. By default, its name is `postgres`, as shown in the following screenshot:
+
+![\[The default login identity for Credentials in the Create database page is postgres.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/default-login-identity-apg-rpg.png)
+
+You can choose another name rather than accept the default \(`postgres`\)\. If you do, the name you choose must start with a letter and be between 1 and 16 alphanumeric characters\. For simplicity's sake, we refer to this main user account by its default value \(`postgres`\) throughout this guide\.
+
+ If you use the `create-db-cluster` AWS CLI rather than the AWS Management Console, you create the user name by passing it with the `master-username` parameter\. For more information, see [Create an Aurora PostgreSQL DB cluster](CHAP_GettingStartedAurora.CreatingConnecting.AuroraPostgreSQL.md#CHAP_GettingStarted.AuroraPostgreSQL.CreateDBCluster)\.
+
+Whether you use the AWS Management Console, the AWS CLI, or the Amazon RDS API, and whether you use the default `postgres` name or choose a different name, this first database user account is a member of the `rds_superuser` group and has `rds_superuser` privileges\.
+
+**Topics**
++ [Understanding the rds\_superuser role](#Appendix.PostgreSQL.CommonDBATasks.Roles.rds_superuser)
++ [Controlling user access to the PostgreSQL database](#Appendix.PostgreSQL.CommonDBATasks.Access)
++ [Delegating and controlling user password management](#Appendix.PostgreSQL.CommonDBATasks.RestrictPasswordMgmt)
+
+### Understanding the rds\_superuser role<a name="Appendix.PostgreSQL.CommonDBATasks.Roles.rds_superuser"></a>
+
+In PostgreSQL, a *role* can define a user, a group, or a set of specific permissions granted to a group or user for various objects in the database\. PostgreSQL commands to `CREATE USER` and `CREATE GROUP` have been replaced by the more general, `CREATE ROLE` with specific properties to distinguish database users\. A database user can be thought of as a role with the LOGIN privilege\. 
 
 **Note**  
-For more information, see [Security in Amazon Aurora](UsingWithRDS.md)\.
+The `CREATE USER` and `CREATE GROUP` commands can still be used\. For more information, see [Database Roles](https://www.postgresql.org/docs/current/user-manag.html) in the PostgreSQL documentation\.
 
-When you create an Amazon Aurora PostgreSQL DB instance, the master user has the following default privileges:
-+  `LOGIN` 
-+  `NOSUPERUSER` 
-+  `INHERIT` 
-+  `CREATEDB` 
-+  `CREATEROLE` 
-+  `NOREPLICATION` 
-+  `VALID UNTIL 'infinity'` 
-
-To provide management services for each DB cluster, the `rdsadmin` user is created when the DB cluster is created\. Attempting to drop, rename, change the password, or change privileges for the `rdsadmin` account will result in an error\.
-
-## Restricting password management<a name="RestrictPasswordMgmt"></a>
-
-You can restrict who can manage database user passwords to a special role\. By doing this, you can have more control over password management on the client side\.
-
-You enable restricted password management with the static parameter `rds.restrict_password_commands` and use a role called `rds_password`\. When the parameter `rds.restrict_password_commands` is set to 1, only users that are members of the `rds_password` role can run certain SQL commands\. The restricted SQL commands are commands that modify database user passwords and password expiration time\. 
-
-To use restricted password management, your DB cluster must be running Amazon Aurora for PostgreSQL 10\.6 or higher\. Because the `rds.restrict_password_commands` parameter is static, changing this parameter requires a database restart\.
-
-When a database has restricted password management enabled, if you try to run restricted SQL commands you get the following error: ERROR: must be a member of rds\_password to alter passwords\.
-
-Following are some examples of SQL commands that are restricted when restricted password management is enabled\.
+The `postgres` user is the most highly privileged database user on your Aurora PostgreSQL DB cluster\. It has the characteristics defined by the following `CREATE ROLE` statement\. 
 
 ```
-postgres=> CREATE ROLE myrole WITH PASSWORD 'mypassword';
-postgres=> CREATE ROLE myrole WITH PASSWORD 'mypassword' VALID UNTIL '2020-01-01';
-postgres=> ALTER ROLE myrole WITH PASSWORD 'mypassword' VALID UNTIL '2020-01-01';
-postgres=> ALTER ROLE myrole WITH PASSWORD 'mypassword';
-postgres=> ALTER ROLE myrole VALID UNTIL '2020-01-01';
-postgres=> ALTER ROLE myrole RENAME TO myrole2;
+CREATE ROLE postgres WITH LOGIN NOSUPERUSER INHERIT CREATEDB CREATEROLE NOREPLICATION VALID UNTIL 'infinity'
 ```
 
-Some `ALTER ROLE` commands that include `RENAME TO` might also be restricted\. They might be restricted because renaming a PostgreSQL role that has an MD5 password clears the password\. 
+The properties `NOSUPERUSER`, `NOREPLICATION`, `INHERIT`, and `VALID UNTIL 'infinity'` are the default options for CREATE ROLE, unless otherwise specified\. 
 
-The `rds_superuser` role has membership for the `rds_password` role by default, and you can't change this\. You can give other roles membership for the `rds_password` role by using the `GRANT` SQL command\. We recommend that you give membership to `rds_password` to only a few roles that you use solely for password management\. These roles require the `CREATEROLE` attribute to modify other roles\.
+By default, `postgres` has privileges granted to the the `rds_superuser` role\. The `rds_superuser` role allows the `postgres` user to do the following: 
++ Add extensions that are available for use with Aurora PostgreSQL\. For more information, see [Working with extensions and foreign data wrappers](Appendix.PostgreSQL.CommonDBATasks.md)\. 
++ Create roles for users and grant privileges to users\. For more information, see [CREATE ROLE](https://www.postgresql.org/docs/current/sql-createrole.html) and [GRANT](https://www.postgresql.org/docs/14/sql-grant.html) in the PostgreSQL documentation\. 
++ Create databases\. For more information, see [CREATE DATABASE](https://www.postgresql.org/docs/14/sql-createdatabase.html) in the PostgreSQL documentation\.
++ Grant `rds_superuser` privileges to other user roles that don't have these privileges, and revoke such privileges as needed\. We recommend that can grant this role to others only as needed\. In other words, don't grant this role to users unless they are DBAs or system administrators\. 
++ Grant \(and revoke\) the `rds_replication` role to database users that don't have the `rds_superuser` role\. 
++ Grant \(and revoke\) the `rds_password` role to database users that don't have the `rds_superuser` role\. 
++ Obtain status information about all database connections by using the `pg_stat_activity` view\. When needed, `rds_superuser` can stop any connections by using `pg_terminate_backend` or `pg_cancel_backend`\. 
 
-Make sure that you verify password requirements such as expiration and needed complexity on the client side\. We recommend that you restrict password\-related changes by using your own client\-side utility\. This utility should have a role that is a member of `rds_password` and has the `CREATEROLE` role attribute\.
+In the `CREATE ROLE postgres...` statement, you can see that the `postgres` user role specifically disallows PostgreSQL `superuser` permissions\. Aurora PostgreSQL is a managed service, so you can't access the host OS, and you can't connect using the PostgreSQL `superuser` account\. Many of the tasks that require `superuser` access on a stand\-alone PostgreSQL are managed automatically by Aurora\. 
+
+For more information about granting privileges, see [GRANT](http://www.postgresql.org/docs/current/sql-grant.html) in the PostgreSQL documentation\.
+
+The `rds_superuser` role is one of several *predefined* roles in an Aurora PostgreSQL DB cluster\. 
+
+**Note**  
+In PostgreSQL 13 and earlier releases, *predefined* roles are known as *default* roles\.
+
+In the following list, you find some of the other predefined roles that are created automatically for a new Aurora PostgreSQL DB cluster\. Predefined roles and their privileges can't be changed\. You can't drop, rename, or modify privileges for these predefined roles\. Attempting to do so results in an error\. 
++ **rds\_password** – A role that can change passwords and set up password constraints for databaes users\. The `rds_superuser` role is granted this role by default, and can grant the role to database users\. `For more information, see [Controlling user access to the PostgreSQL databaseControlling user access to PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.Access)\. 
++ **rdsadmin** – A role that's created to handle many of the management tasks that the adminstrator with `superuser` privileges would perform on a standalone PostgreSQL database\. This role is used internally by Aurora PostgreSQL for many management tasks\. 
+
+To see all predefined roles, you can connect to the primary instance of your Aurora PostgreSQL DB cluster and use the `psq1 \du` metacommand\. The output looks as follows: 
+
+```
+List of roles
+  Role name   |      Attributes                   |      Member of      
+--------------+-----------------------------------+------------------------------------
+postgres      | Create role, Create DB           +| {rds_superuser}
+              | Password valid until infinity     |
+rds_superuser | Cannot login                      | {pg_monitor,pg_signal_backend,
+              |                                  +|   rds_replication,rds_password}
+...
+```
+
+In the output, you can see that `rds_superuser` isn't a database user role \(it can't login\), but it has the privileges of many other roles\. You can also see that database user `postgres` is a member of the `rds_superuser` role\. As mentioned previously, `postgres` is the default value in the Amazon RDS console's **Create database** page\. If you chose another name, that name is shown in the list of roles instead\. 
+
+### Controlling user access to the PostgreSQL database<a name="Appendix.PostgreSQL.CommonDBATasks.Access"></a>
+
+New databases in PostgreSQL are always created with a default set of privileges in the database's `public` schema that allow all database users and roles to create objects\. These privileges allow database users to connect to the database, for example, and create temporary tables while connected\.
+
+To better control user access to the databases instances that you create on your Aurora PostgreSQL DB cluster primary node , we recommend that you revoke these default `public` privileges\. After doing so, you then grant specific privileges for database users on a more granular basis, as shown in the following procedure\. 
+
+**To set up roles and privileges for a new database instance**
+
+Suppose you're setting up a database on a newly created Aurora PostgreSQL DB cluster for use by several researchers, all of whom need read\-write access to the database\. 
+
+1. Use `psql` \(or pgAdmin\) to connect to the primary DB instance on your Aurora PostgreSQL DB cluster: 
+
+   ```
+   psql --host=your-cluster-instance-1.666666666666.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password
+   ```
+
+   When prompted, enter your password\. The `psql` client connects and displays the default administrative connection database, `postgres=>`, as the prompt\.
+
+1. To prevent database users from creating objects in the `public` schema, do the following:
+
+   ```
+   postgres=> REVOKE CREATE ON SCHEMA public FROM PUBLIC;
+   REVOKE
+   ```
+
+1. Next, you create a new database instance:
+
+   ```
+   postgres=> CREATE DATABASE lab_db;
+   CREATE DATABASE
+   ```
+
+1. Revoke all privileges from the `PUBLIC` schema on this new database\.
+
+   ```
+   postgres=> REVOKE ALL ON DATABASE lab_db FROM public;
+   REVOKE
+   ```
+
+1. Create a role for database users\.
+
+   ```
+   postgres=> CREATE ROLE lab_tech;
+   CREATE ROLE
+   ```
+
+1. Give database users that have this role the ability to connect to the database\.
+
+   ```
+   postgres=> GRANT CONNECT ON DATABASE lab_db TO lab_tech;
+   GRANT
+   ```
+
+1. Grant all users with the `lab_tech` role all privileges on this database\.
+
+   ```
+   postgres=> GRANT ALL PRIVILEGES ON DATABASE lab_db TO lab_tech;
+   GRANT
+   ```
+
+1. Create database users, as follows:
+
+   ```
+   postgres=> CREATE ROLE lab_user1 LOGIN PASSWORD 'change_me';
+   CREATE ROLE
+   postgres=> CREATE ROLE lab_user2 LOGIN PASSWORD 'change_me';
+   CREATE ROLE
+   ```
+
+1. Grant these two users the privileges associated with the lab\_tech role:
+
+   ```
+   postgres=> GRANT lab_tech TO lab_user1;
+   GRANT ROLE
+   postgres=> GRANT lab_tech TO lab_user2;
+   GRANT ROLE
+   ```
+
+At this point, `lab_user1` and `lab_user2` can connect to the `lab_db` database\. This example doesn't follow best practices for enterprise usage, which might include creating multiple database instances, different schemas, and granting limited permissions\. For more complete information and additional scenarios, see [Managing PostgreSQL Users and Roles](http://aws.amazon.com/blogs/database/managing-postgresql-users-and-roles/)\. 
+
+For more information about privileges in PostgreSQL databases, see the [GRANT](https://www.postgresql.org/docs/current/static/sql-grant.html) command in the PostgreSQL documentation\.
+
+### Delegating and controlling user password management<a name="Appendix.PostgreSQL.CommonDBATasks.RestrictPasswordMgmt"></a>
+
+As a DBA, you might want to delegate the management of user passwords\. Or, you might want to prevent database users from changing their passwords or reconfiguring password constraints, such as password lifetime\. To ensure that only the database users that you choose can change password settings, you can turn on the restricted password management feature\. When you activate this feature, only those database users that have been granted the `rds_password` role can manage passwords\. 
+
+**Note**  
+To use restricted password management, your Aurora PostgreSQL DB cluster must be running Amazon Aurora PostgreSQL 10\.6 or higher\.
+
+By default, this feature is `off`, as shown in the following:
+
+```
+postgres=> SHOW rds.restrict_password_commands;
+  rds.restrict_password_commands
+--------------------------------
+ off
+(1 row)
+```
+
+To turn on this feature, you use a custom parameter group and change the setting for `rds.restrict_password_commands` to 1\. Be sure to reboot your Aurora PostgreSQL's primary DB instance so that the setting takes effect\. 
+
+With this feature active, `rds_password` privileges are needed for the following SQL commands:
+
+```
+CREATE ROLE myrole WITH PASSWORD 'mypassword';
+CREATE ROLE myrole WITH PASSWORD 'mypassword' VALID UNTIL '2023-01-01';
+ALTER ROLE myrole WITH PASSWORD 'mypassword' VALID UNTIL '2023-01-01';
+ALTER ROLE myrole WITH PASSWORD 'mypassword';
+ALTER ROLE myrole VALID UNTIL '2023-01-01';
+ALTER ROLE myrole RENAME TO myrole2;
+```
+
+Renaming a role \(`ALTER ROLE myrole RENAME TO newname`\) is also restricted if the password uses the MD5 hashing algorithm\. 
+
+With this feature active, attempting any of these SQL commands without the `rds_password` role permissions generates the following error: 
+
+```
+ERROR: must be a member of rds_password to alter passwords
+```
+
+We recommend that you grant the `rds_password` to only a few roles that you use solely for password management\. If you grant `rds_password` privileges to database users that don't have `rds_superuser` privileges, you need to also grant them the `CREATEROLE` attribute\.
+
+Make sure that you verify password requirements such as expiration and needed complexity on the client side\. If you use your own client\-side utility for password related changes, the utility needs to be a member of `rds_password` and have `CREATE ROLE` privileges\. 
 
 ## Securing Aurora PostgreSQL data with SSL/TLS<a name="AuroraPostgreSQL.Security.SSL"></a>
 

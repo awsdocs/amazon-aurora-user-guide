@@ -39,13 +39,17 @@ Times are shown in your local time zone, which is indicated by an offset from Co
 
 1. For **DB instance identifier**, enter the name of the target restored DB cluster\. The name must be unique\.
 
-1. Choose other options as needed, such as DB instance class and storage\.
+1. Choose other options as needed, such as DB instance class\.
+
+   For information about each setting, see [Settings for Aurora DB clusters](Aurora.CreateInstance.md#Aurora.CreateInstance.Settings)\.
 
 1. Choose **Restore to point in time**\.
 
 ## AWS CLI<a name="aurora-pitr.CLI"></a>
 
 To restore a DB cluster to a specified time, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) to create a new DB cluster\.
+
+You can specify other settings\. For information about each setting, see [Settings for Aurora DB clusters](Aurora.CreateInstance.md#Aurora.CreateInstance.Settings)\.
 
 **Example**  
 For Linux, macOS, or Unix:  

@@ -54,6 +54,10 @@ You can restore a DB cluster from a DB cluster snapshot using the AWS Management
 
 1. On the **Restore snapshot** page, for **DB instance identifier**, enter the name for your restored DB cluster\.
 
+1. Specify other settings\.
+
+   For information about each setting, see [Settings for Aurora DB clusters](Aurora.CreateInstance.md#Aurora.CreateInstance.Settings)\.
+
 1. Choose **Restore DB instance**\. 
 
 ### AWS CLI<a name="USER_RestoreFromSnapshot.CLI"></a>
@@ -61,6 +65,8 @@ You can restore a DB cluster from a DB cluster snapshot using the AWS Management
 To restore a DB cluster from a DB cluster snapshot, use the AWS CLI command [restore\-db\-cluster\-from\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html)\.
 
 In this example, you restore from a previously created DB cluster snapshot named `mydbclustersnapshot`\. You restore to a new DB cluster named `mynewdbcluster`\.
+
+You can specify other settings\. For information about each setting, see [Settings for Aurora DB clusters](Aurora.CreateInstance.md#Aurora.CreateInstance.Settings)\.
 
 **Example**  
 For Linux, macOS, or Unix:  

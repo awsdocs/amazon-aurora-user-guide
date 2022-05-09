@@ -6,8 +6,6 @@ Your default VPC has three subnets you can use to isolate resources inside the V
 
 For a list of scenarios involving Amazon Aurora DB instances in a VPC , see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\. 
 
-For a tutorial that shows you how to create a VPC that you can use with a common Amazon Aurora scenario, see [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. 
-
 To learn how to work with DB instances inside a VPC, see the following:
 
 **Topics**
@@ -15,6 +13,11 @@ To learn how to work with DB instances inside a VPC, see the following:
 + [Working with DB subnet groups](#USER_VPC.Subnets)
 + [Hiding a DB instance in a VPC from the internet](#USER_VPC.Hiding)
 + [Creating a DB instance in a VPC](#USER_VPC.InstanceInVPC)
+
+For a tutorial that shows you how to create a VPC that you can use with a common Amazon Aurora scenario, see [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. 
+
+**Note**  
+Currently, Aurora doesn't support dual\-stack mode\.
 
 ## Working with a DB instance in a VPC<a name="Overview.RDSVPC.Create"></a>
 
@@ -34,13 +37,13 @@ When you set the instance tenancy attribute to dedicated for an Amazon RDS DB in
 
 ## Working with DB subnet groups<a name="USER_VPC.Subnets"></a>
 
-Subnets are segments of a VPC's IP address range that you designate to group your resources based on security and operational needs\. A DB subnet group is a collection of subnets \(typically private\) that you create in a VPC and that you then designate for your DB instances\. A DB subnet group allows you to specify a particular VPC when creating DB instances using the CLI or API; if you use the console, you can just choose the VPC and subnets you want to use\. 
+*Subnets* are segments of a VPC's IP address range that you designate to group your resources based on security and operational needs\. A DB subnet group is a collection of subnets \(typically private\) that you create in a VPC and that you then designate for your DB instances\. By using a DB subnet group, you can specify a particular VPC when creating DB instances using the CLI or API\. If you use the console, you can just choose the VPC and subnets you want to use\. 
 
-Each DB subnet group should have subnets in at least two Availability Zones in a given AWS Region\. When creating a DB instance in a VPC, you must choose a DB subnet group\. From the DB subnet group, Amazon Aurora chooses a subnet and an IP address within that subnet to associate with your DB instance\. The DB instance uses the Availability Zone that contains the subnet\. If the primary DB instance of a Multi\-AZ deployment fails, Amazon Aurora can promote the corresponding standby and subsequently create a new standby using an IP address of the subnet in one of the other Availability Zones\.
+Each DB subnet group should have subnets in at least two Availability Zones in a given AWS Region\. When creating a DB instance in a VPC, make sure to choose a DB subnet group\. From the DB subnet group, Amazon Aurora chooses a subnet and an IP address within that subnet to associate with your DB instance\. The DB instance uses the Availability Zone that contains the subnet\. If the primary DB instance of a Multi\-AZ deployment fails, Amazon Aurora can promote the corresponding standby and later create a new standby using an IP address of the subnet in one of the other Availability Zones\.
 
-The subnets in a DB subnet group are either public or private\. The subnets are public or private, depending on the configuration that you set for their network access control lists \(network ACLs\) and routing tables\. For a DB instance to be publicly accessible, all of the subnets in its DB subnet group must be public\. If a subnet that is associated with a publicly accessible DB instance changes from public to private, it can affect DB instance availability\.
+The subnets in a DB subnet group are either public or private\. The subnets are public or private, depending on the configuration that you set for their network access control lists \(network ACLs\) and routing tables\. For a DB instance to be publicly accessible, all of the subnets in its DB subnet group must be public\. If a subnet that's associated with a publicly accessible DB instance changes from public to private, it can affect DB instance availability\.
 
-When Amazon Aurora creates a DB instance in a VPC, it assigns a network interface to your DB instance by using an IP address from your DB subnet group\. However, we strongly recommend that you use the DNS name to connect to your DB instance because the underlying IP address changes during failover\. 
+When Amazon Aurora creates a DB instance in a VPC, it assigns a network interface to your DB instance by using an IP address from your DB subnet group\. However, we strongly recommend that you use the Domain Name System \(DNS\) name to connect to your DB instance because the underlying IP address changes during failover\. 
 
 **Note**  
 For each DB instance that you run in a VPC, make sure to reserve at least one address in each subnet in the DB subnet group for use by Amazon Aurora for recovery actions\. 

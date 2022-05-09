@@ -93,9 +93,9 @@ The following Aurora PostgreSQL major version upgrades are available\.
 
 Before upgrading, be sure to check the availability of your cluster's DB instance class for the version being considered\. For more information about DB instance classes, including which ones are Graviton2\-based and which ones are Intel\-based, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
 
-Before applying an upgrade to your production DB clusters, make sure that you thoroughly test any upgrade to verify that your applications work correctly\.
+Each major version includes enhancements and changes to the query optimizer that are designed to improve performance\. However, your workload might include queries that result in a worse performing plan in the new version\. That's why we recommend that you test and review performance before upgrading in production\. You can manage query plan stability across versions by using the Query Plan Management \(QPM\) extension, as detailed in [Ensuring plan stability after a major version upgrade](AuroraPostgreSQL.Optimize.BestPractice.md#AuroraPostgreSQL.Optimize.BestPractice.MajorVersionUpgrade)\. 
 
-We recommend the following process when upgrading an Aurora PostgreSQL DB cluster:
+Before applying an upgrade to your production DB clusters, make sure that you thoroughly test any upgrade to verify that all your applications work correctly\. We recommend the following process when upgrading an Aurora PostgreSQL DB cluster:
 
 1. Have a version\-compatible parameter group ready\.
 
@@ -128,7 +128,7 @@ We recommend the following process when upgrading an Aurora PostgreSQL DB cluste
            AND c.relnamespace = n.oid 
            AND n.nspname NOT IN ('pg_catalog', 'information_schema');
      ```
-   + If you are upgrading an Aurora PostgreSQL version 10 DB cluster that has the `pgRouting` extension installed, drop the extension before upgrading to version 12\.4 or higher\.
+   + If you are upgrading an Aurora PostgreSQL version 10\.18 or higher DB cluster that has the `pgRouting` extension installed, drop the extension before upgrading to version 12\.4 or higher\.
 
 1. Perform a backup\.
 
@@ -210,7 +210,7 @@ After you complete a major version upgrade, we recommend the following:
   WHERE am.amname = 'hash' 
   AND NOT idx.indisvalid;
   ```
-+ Consider testing your application on the upgraded database with a similar workload to verify that everything works as expected\. After the upgrade is verified, you can delete this test instance\.
++ We recommend that you test your application on the upgraded database with a similar workload to verify that everything works as expected\. After the upgrade is verified, you can delete this test instance\.
 
 ## Manually upgrading the Aurora PostgreSQL engine<a name="USER_UpgradeDBInstance.Upgrading.Manual"></a>
 
@@ -288,6 +288,7 @@ If you use the AWS Management Console, choose the item with the role **Global da
  If you use the AWS CLI or RDS API, start the upgrade process by calling the [modify\-global\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-global-cluster.html) command or [ModifyGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyGlobalCluster.html) operation instead of `modify-db-cluster` or `ModifyDBCluster`\. 
 
 **Note**  
+You can't specify a custom parameter group for the global database cluster while you're performing a major version upgrade of that Aurora global database\. Create your custom parameter groups in each Region of the global cluster and then apply them manually to the Regional clusters after the upgrade\.  
 You can't perform a major version upgrade of the Aurora DB engine if the recovery point objective \(RPO\) feature is turned on\. Before you upgrade the DB engine, make sure that this feature is turned off\. For more information about the RPO feature, see [Managing RPOs for Aurora PostgreSQL–based global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
 
 ## Automatic minor version upgrades for PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.Minor"></a>

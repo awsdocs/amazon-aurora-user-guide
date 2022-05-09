@@ -1,5 +1,8 @@
 # Working with Aurora multi\-master clusters<a name="aurora-multi-master"></a><a name="multimaster"></a><a name="multiwriter"></a><a name="mm"></a>
 
+**Important**  
+ Amazon has announced an end\-of\-life policy for Amazon Aurora MySQL\-Compatible Edition v1\. For details about how long Aurora MySQL version 1 will remain available and how to migrate to a higher Aurora MySQL version, see [Preparing for Amazon Aurora MySQL\-Compatible Edition version 1 end of life](Aurora.MySQL56.EOL.md)\. 
+
  Following, you can learn about Aurora multi\-master clusters\. In a multi\-master cluster, all DB instances have read/write capability\. Multi\-master clusters have different availability characteristics, support for database features, and procedures for monitoring and troubleshooting than single\-master clusters\. 
 
 **Topics**
@@ -32,6 +35,7 @@
 + [Recommended workloads for multi\-master clusters](#aurora-multi-master-workloads)
 + [Advantages of multi\-master clusters](#aurora-multi-master-advantages)
 + [Limitations of multi\-master clusters](#aurora-multi-master-limitations)
++ [Migrating from multi\-master clusters](#aurora-multi-master-migrate)
 
 ### Multi\-master cluster terminology<a name="aurora-multi-master-terms"></a>
 
@@ -114,7 +118,8 @@
 ### Limitations of multi\-master clusters<a name="aurora-multi-master-limitations"></a>
 
 **Note**  
- Aurora multi\-master clusters are highly specialized for continuous availability use cases\. Thus, such clusters might not be generally applicable to all workloads\. Your requirements for performance, scalability, and availability might be satisfied by using a larger DB instance class with an Aurora single\-master cluster\. If so, consider using a provisioned or Aurora Serverless cluster\. 
+ Aurora multi\-master clusters are only available for Amazon Aurora MySQL\-Compatible Edition v1\. Amazon has announced an end\-of\-life policy for this major Aurora MySQL version\.  
+For details about how long Aurora MySQL version 1 will remain available and how to migrate to a higher Aurora MySQL version, see [Preparing for Amazon Aurora MySQL\-Compatible Edition version 1 end of life](Aurora.MySQL56.EOL.md)\.
 
 #### AWS and Aurora limitations<a name="aurora-multi-master-limitations-aws"></a>
 
@@ -134,10 +139,12 @@
 +  The `Stop` action isn't available for multi\-master clusters\. 
 +  The Aurora survivable page cache, also known as the survivable buffer pool, isn't supported for multi\-master clusters\. 
 +  A multi\-master cluster doesn't do any load balancing for connections\. Your application must implement its own connection management logic to distribute read and write operations among multiple DB instance endpoints\. Typically, in a bring\-your\-own\-shard \(BYOS\) application, you already have logic to map each shard to a specific connection\. To learn how to adapt the connection management logic in your application, see [Connection management for multi\-master clusters](#aurora-multi-master-connectivity)\. 
++  Aurora multi\-master clusters are highly specialized for continuous availability use cases\. Thus, such clusters might not be generally applicable to all workloads\. Your requirements for performance, scalability, and availability might be satisfied by using a larger DB instance class with an Aurora single\-master cluster\. If so, consider using a provisioned or Aurora Serverless cluster\. 
 +  Multi\-master clusters have some processing and network overhead for coordination between DB instances\. This overhead has the following consequences for write\-intensive and read\-intensive applications: 
   +  Throughput benefits are most obvious on busy clusters with multiple concurrent write operations\. In many cases, a traditional Aurora cluster with a single primary instance can handle the write traffic for a cluster\. In these cases, the benefits of multi\-master clusters are mostly for high availability rather than performance\. 
   +  Single\-query performance is generally lower than for an equivalent single\-master cluster\. 
 +  You can't take a snapshot created on a single\-master cluster and restore it on a multi\-master cluster, or the opposite\. Instead, to transfer all data from one kind of cluster to the other, use a logical dump produced by a tool such as AWS Database Migration Service \(AWS DMS\) or the mysqldump command\. 
++ When you restore a snapshot created on a multi\-master cluster, make sure to include the `--engine-mode multimaster` option\. If you don't use this option, you will receive an error\.
 +  You can't use the parallel query, Aurora Serverless, or Global Database features on a multi\-master cluster\. 
 
    The multi\-master aspect is a permanent choice for a cluster\. You can't switch an existing Aurora cluster between a multi\-master cluster and another kind such as Aurora Serverless or parallel query\. 
@@ -156,13 +163,17 @@
 +  The query cache isn't available on multi\-master clusters\. 
 +  You can't use certain SQL language features on multi\-master clusters\. For the full list of SQL differences, and instructions about adapting your SQL code to address these limitations, see [SQL considerations for multi\-master clusters](#aurora-multi-master-SQL)\. 
 
+### Migrating from multi\-master clusters<a name="aurora-multi-master-migrate"></a>
+
+Migration from an Aurora multi\-master cluster means changing back to an Aurora single\-master DB cluster\. Use a logical dump produced by a tool such as AWS Database Migration Service \(AWS DMS\) or the mysqldump command\.
+
 ## Creating an Aurora multi\-master cluster<a name="aurora-multi-master-creating"></a>
 
- You choose the multi\-master or single\-master architecture at the time you create an Aurora cluster\. The following procedures show where to make the multi\-master choice\. If you haven't created any Aurora clusters before, you can learn the general procedure in [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\. 
+ You choose the multi\-master or single\-master architecture at the time you create an Aurora cluster\. The following procedures show where to make the multi\-master choice\. If you haven't created any Aurora clusters before, you can learn the general procedure in [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.
 
 ### Console<a name="aurora-multi-master.console"></a>
 
- To create an Aurora multi\-master cluster from the AWS Management Console, you make the following choices\. On the first screen, you select an Aurora cluster: 
+ To create an Aurora multi\-master cluster from the AWS Management Console, you make the following choices\. On the first screen, you select an Aurora cluster:
 
 ![\[Creating an Aurora multi-master cluster: choosing Aurora database engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-multi-master-create-database-01.png)
 

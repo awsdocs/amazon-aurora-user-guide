@@ -10,7 +10,7 @@
  Following, you can learn about replication features for Aurora clusters using single\-master replication\. This kind of cluster is the default for Aurora\. For information about Aurora multi\-master clusters, see [Working with Aurora multi\-master clusters](aurora-multi-master.md)\. 
 
 **Topics**
-+ [Using Aurora replicas](#AuroraMySQL.Replication.Replicas)
++ [Using Aurora Replicas](#AuroraMySQL.Replication.Replicas)
 + [Replication options for Amazon Aurora MySQL](#AuroraMySQL.Replication.Options)
 + [Performance considerations for Amazon Aurora MySQL replication](#AuroraMySQL.Replication.Performance)
 + [Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL](#AuroraMySQL.Replication.Availability)
@@ -19,7 +19,7 @@
 + [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](#AuroraMySQL.Replication.MySQL)
 + [Using GTID\-based replication for Amazon Aurora MySQL](mysql-replication-gtid.md)
 
-## Using Aurora replicas<a name="AuroraMySQL.Replication.Replicas"></a>
+## Using Aurora Replicas<a name="AuroraMySQL.Replication.Replicas"></a>
 
  Aurora Replicas are independent endpoints in an Aurora DB cluster, best used for scaling read operations and increasing availability\. Up to 15 Aurora Replicas can be distributed across the Availability Zones that a DB cluster spans within an AWS Region\. Although the DB cluster volume is made up of multiple copies of the data for the DB cluster, the data in the cluster volume is represented as a single, logical volume to the primary instance and to Aurora Replicas in the DB cluster\. For more information about Aurora Replicas, see [Aurora Replicas](Aurora.Replication.md#Aurora.Replication.Replicas)\. 
 
@@ -230,7 +230,7 @@ If replication fails, it can result in a large increase in unintentional I/O on 
 
 #### 6\. Monitor your replica<a name="AuroraMySQL.Replication.MySQL.Monitor"></a>
 
- When you set up MySQL replication with an Aurora MySQL DB cluster, you must monitor failover events for the Aurora MySQL DB cluster when it is the replica target\. If a failover occurs, then the DB cluster that is your replica target might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS event notification](USER_Events.md)\. 
+ When you set up MySQL replication with an Aurora MySQL DB cluster, you must monitor failover events for the Aurora MySQL DB cluster when it is the replica target\. If a failover occurs, then the DB cluster that is your replica target might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Working with Amazon RDS event notification](USER_Events.md)\. 
 
  You can also monitor how far the replica target is behind the replication source by connecting to the replica target and running the `SHOW SLAVE STATUS` \(Aurora MySQL version 1 and 2\) or `SHOW REPLICA STATUS` \(Aurora MySQL version 3\) command\. In the command output, the `Seconds Behind Master` field tells you how far the replica target is behind the source\. 
 

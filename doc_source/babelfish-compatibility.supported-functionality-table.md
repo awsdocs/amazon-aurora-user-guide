@@ -1,6 +1,6 @@
 # Supported functionality in Babelfish by version<a name="babelfish-compatibility.supported-functionality-table"></a>
 
-In the following table you can find T\-SQL functionality supported by different Babelfish versions\. For lists of unsupported functionality, see [Unsupported functionality in Babelfish](babelfish-compatibility.md#babelfish-compatibility.tsql.limitations-unsupported)\.
+In the following table you can find T\-SQL functionality supported by different Babelfish versions\. For lists of unsupported functionality, see [Unsupported functionality in Babelfish](babelfish-compatibility.md#babelfish-compatibility.tsql.limitations-unsupported)\. For information about various Babelfish releases, see the [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html)\.
 
 
 | Functionality or syntax | 1\.2\.0 | 1\.1\.0 | 1\.0\.0 | 

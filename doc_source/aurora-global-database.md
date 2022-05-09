@@ -55,7 +55,7 @@ The following limitations currently apply to Aurora global databases:
   +  Aurora PostgreSQL versions 13\.3 and higher, 12\.4 and higher, 11\.9 and higher, and 10\.14 and higher 
 + Aurora global databases currently don't support the following Aurora features: 
   + Aurora multi\-master clusters
-  + Aurora Serverless
+  + Aurora Serverless v1
   + Backtracking in Aurora
   + Amazon RDS Proxy
 + Automatic minor version upgrade doesn't apply to Aurora MySQL and Aurora PostgreSQL clusters that are part of an Aurora global database\. Note that you can specify this setting for a DB instance that is part of a global database cluster, but the setting has no effect\.
@@ -64,7 +64,11 @@ The following limitations currently apply to Aurora global databases:
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html)
 
   For information about database activity streams, see [Monitoring Amazon Aurora with Database Activity Streams](DBActivityStreams.md)\.
-+ With an Aurora global database based on Aurora PostgreSQL, you can't perform a major version upgrade of the Aurora DB engine if the recovery point objective \(RPO\) feature is turned on\. For information about the RPO feature, see [Managing RPOs for Aurora PostgreSQL–based global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\. For information about upgrading an Aurora global database, see [Upgrading an Amazon Aurora global database](aurora-global-database-upgrade.md)\.
++ The following limitations currently apply to upgrading Aurora global databases:
+  + You can't apply a custom parameter group to the global database cluster while you're performing a major version upgrade of that Aurora global database\. You create your custom parameter groups in each Region of the global cluster and you apply them manually to the Regional clusters after the upgrade\.
+  + With an Aurora global database based on Aurora PostgreSQL, you can't perform a major version upgrade of the Aurora DB engine if the recovery point objective \(RPO\) feature is turned on\. For information about the RPO feature, see [Managing RPOs for Aurora PostgreSQL–based global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
+
+  For information about upgrading an Aurora global database, see [Upgrading an Amazon Aurora global database](aurora-global-database-upgrade.md)\.
 + You can't stop or start the Aurora DB clusters in your Aurora global database individually\. To learn more, see [Stopping and starting an Amazon Aurora DB cluster](aurora-cluster-stop-start.md)\. 
 + Aurora Replicas attached to the secondary Aurora DB cluster can restart under certain circumstances\. If the primary AWS Region's writer DB instance restarts or fails over, Aurora Replicas in secondary Regions also restart\. The secondary cluster is then unavailable until all replicas are back in sync with the primary DB cluster's writer instance\. This behavior is expected, as documented in [Replication with Amazon Aurora](Aurora.Replication.md)\. Be sure that you understand the impacts to your Aurora global database before making changes to your primary DB cluster\. To learn more, see [Recovering an Amazon Aurora global database from an unplanned outage](aurora-global-database-disaster-recovery.md#aurora-global-database-failover)\. 
 + Aurora PostgreSQL–based DB clusters running in an Aurora global database have the following limitations:

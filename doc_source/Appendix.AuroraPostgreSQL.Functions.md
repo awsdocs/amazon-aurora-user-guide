@@ -5,8 +5,12 @@ Following, you can find a list of Aurora PostgreSQL functions that are available
 ## Overview<a name="Appendix.AuroraPostgreSQL.Functions.Overview"></a>
 
 You can use the following functions for Amazon RDS DB instances running Aurora PostgreSQL:
++ [aurora\_ccm\_status](aurora_ccm_status.md)
++ [aurora\_global\_db\_instance\_status](aurora_global_db_instance_status.md)
++ [aurora\_global\_db\_status](aurora_global_db_status.md)
 + [aurora\_list\_builtins](aurora_list_builtins.md)
 + [aurora\_replica\_status](aurora_replica_status.md)
++ [aurora\_stat\_backend\_waits](aurora_stat_backend_waits.md)
 + [aurora\_stat\_dml\_activity](aurora_stat_dml_activity.md)
 + [aurora\_stat\_get\_db\_commit\_latency](aurora_stat_get_db_commit_latency.md)
 + [aurora\_stat\_system\_waits](aurora_stat_system_waits.md)

@@ -312,8 +312,9 @@ $ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-64-acu-clus
 
 ```
 $ aws rds describe-db-clusters --db-cluster-identifier promotion-tier-demo \
-  --query 'DBClusters[*].DBClusterMembers[*].[PromotionTier,DBInstanceIdentifier,IsClusterWriter]'
+  --query 'DBClusters[*].DBClusterMembers[*].[PromotionTier,DBInstanceIdentifier,IsClusterWriter]' \
   --output text
+
 1   instance-192  True
 1   tier-01-4840  False
 10  tier-10-7425  False
@@ -360,6 +361,14 @@ psql 'host=endpoint user=user sslmode=require sslrootcert=amazon-root-CA-1.pem d
  To learn more about working with the Aurora PostgreSQL database using the Postgres client, see [Connecting to a DB instance running the PostgreSQL database engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html)\. 
 
  For more information about connecting to Aurora DB clusters in general, see [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\. 
+
+### Supported cipher suites for connections to Aurora Serverless v2 DB clusters<a name="aurora-serverless-v2.tls.cipher-suites"></a>
+
+By using configurable cipher suites, you can have more control over the security of your database connections\. You can specify a list of cipher suites that you want to allow to secure client TLS/SSL connections to your database\. With configurable cipher suites, you can control the connection encryption that your database server accepts\. Doing this prevents the use of ciphers that aren't secure or that are no longer used\.
+
+Aurora Serverless v2 DB clusters that are based on Aurora MySQL support the same cipher suites as Aurora MySQL provisioned DB clusters\. For information about these cipher suites, see [Configuring cipher suites for connections to Aurora MySQL DB clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL.ConfiguringCipherSuites)\.
+
+Aurora Serverless v2 DB clusters that are based on Aurora PostgreSQL support the same cipher suites as Aurora PostgreSQL provisioned DB clusters\. For information about these cipher suites, see [Configuring cipher suites for connections to Aurora PostgreSQL DB clusters](AuroraPostgreSQL.Security.md#AuroraPostgreSQL.Security.SSL.ConfiguringCipherSuites)\.
 
 ## Viewing Aurora Serverless v2 writers and readers<a name="aurora-serverless-v2.viewing"></a>
 

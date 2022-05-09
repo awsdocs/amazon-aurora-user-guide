@@ -562,7 +562,7 @@ The maximum number of rows per batch for batch\-mode processing\. For more infor
 
 **model\_input**  
 One or more input parameters for the ML model\. These can be any data type\.  
-PostgreSQL allows you to specify up to 100 input parameters for a function\. Array data types must be one\-dimensional, but can contain as many elements as are expected by the SageMaker model\. The number of inputs to a SageMaker model is bounded only by the SageMaker 5 MB message size limit\.Output Parameters
+PostgreSQL allows you to specify up to 100 input parameters for a function\. Array data types must be one\-dimensional, but can contain as many elements as are expected by the SageMaker model\. The number of inputs to a SageMaker model is bounded only by the SageMaker 6 MB message size limit\.Output Parameters
 
 **model\_output**  
 The SageMaker model's output parameter, as text\.
