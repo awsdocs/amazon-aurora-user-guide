@@ -589,10 +589,10 @@ The engine acquires this mutex when opening or creating a table metadata file\. 
 The engine acquires this mutex while performing operations such as `reset_size`, `detach_contents`, or `add_contents` on the internal structure that keeps track of opened tables\. The mutex synchronizes access to the list contents\. When this wait event occurs with high frequency, it indicates a sudden change in the set of tables that were previously accessed\. The engine needs to access new tables or let go of the context related to previously accessed tables\. 
 
 **synch/mutex/sql/LOCK\_open**  
-The number of tables that your sessions are opening exceeds the size of the table definition cache or the table open cache\. Increase the size of these caches\.
+The number of tables that your sessions are opening exceeds the size of the table definition cache or the table open cache\. Increase the size of these caches\. For more information, see [How MySQL opens and closes tables](https://dev.mysql.com/doc/refman/8.0/en/table-cache.html)\.
 
 **synch/mutex/sql/LOCK\_table\_cache**  
-The number of tables that your sessions are opening exceeds the size of the table definition cache or the table open cache\. Increase the size of these caches\.
+The number of tables that your sessions are opening exceeds the size of the table definition cache or the table open cache\. Increase the size of these caches\. For more information, see [How MySQL opens and closes tables](https://dev.mysql.com/doc/refman/8.0/en/table-cache.html)\.
 
 **synch/mutex/sql/LOG**  
 In this wait event, there are threads waiting on a log lock\. For example, a thread might wait for a lock to write to the slow query log file\.
@@ -644,6 +644,8 @@ The session couldn't find pages in the buffer pool\. The engine either needs to 
 
 **synch/sxlock/innodb/index\_tree\_rw\_lock**  
 Many similar data manipulation language \(DML\) statements are accessing the same database object at the same time\. Try using multirow statements\. Also, spread the workload over different database objects\. For example, implement partitioning\.
+
+For more information on troubleshooting synch wait events, see [Why is my MySQL DB instance showing a high number of active sessions waiting on SYNCH wait events in Performance Insights?](https://aws.amazon.com/premiumsupport/knowledge-center/aurora-mysql-synch-wait-events/)\.
 
 ## Aurora MySQL thread states<a name="AuroraMySQL.Reference.thread-states"></a>
 

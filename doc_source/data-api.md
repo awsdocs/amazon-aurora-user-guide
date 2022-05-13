@@ -1080,6 +1080,9 @@ int numberOfAccounts = client.forSql("SELECT COUNT(*) FROM accounts")
           .singleValue(Integer.class);
 ```
 
+**Note**  
+The `mapToList` function converts a SQL result set into a user\-defined object list\. We don't support using the `.withFormatRecordsAs(RecordsFormatType.JSON)` statement in an `ExecuteStatement` call for the Java client library, because it serves the same purpose\. For more information, see [Processing query results in JSON format](#data-api-json)\.
+
 ## Processing query results in JSON format<a name="data-api-json"></a>
 
  When you call the `ExecuteStatement` operation, you can choose to have the query results returned as a string in JSON format\. That way, you can use your programming language's JSON parsing capabilities to interpret and reformat the result set\. Doing so can help to avoid writing extra code to loop through the result set and interpret each column value\. 

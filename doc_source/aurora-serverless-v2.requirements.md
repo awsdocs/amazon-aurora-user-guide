@@ -37,14 +37,15 @@ aws rds describe-orderable-db-instance-options --engine aurora-postgresql --db-i
 
 ## Some provisioned features aren't supported in Aurora Serverless v2<a name="aurora-serverless-v2.limitations"></a>
 
- The following features from Aurora provisioned DB instances currently aren't available for Amazon Aurora Serverless v2: 
-+  Database activity streams \(DAS\)\. 
-+  Backtracking for Aurora MySQL\. This feature currently isn't available for Aurora MySQL version 3\. For details of Aurora MySQL version 3 feature support, see [Aurora MySQL version 3 compatible with MySQL 8\.0](AuroraMySQL.MySQL80.md)\. 
-+  Cluster cache management for Aurora PostgreSQL\. The `apg_ccm_enabled` configuration parameter doesn't apply to Aurora Serverless v2 DB instances\. 
-+  In the AWS Billing and Cost Management console, filtering by custom tags added to Aurora Serverless v2 shows zero usage\. Use other filtering options, such as AWS Region, engine, and usageType, to get accurate billed values\. 
-+  Aurora Auto Scaling\. This is the type of scaling that adds entire new readers to handle additional read\-intensive workload\. As an alternative, you can create Aurora Serverless v2 reader DB instances in advance and leave them scaled down to low capacity\. That's a faster and less disruptive way to scale a cluster's read capacity than adding new DB instances dynamically\. 
+The following features from Aurora provisioned DB instances currently aren't available for Amazon Aurora Serverless v2:
++ Database activity streams \(DAS\)\.
++ Backtracking for Aurora MySQL\. This feature currently isn't available for Aurora MySQL version 3\. For details of Aurora MySQL version 3 feature support, see [Aurora MySQL version 3 compatible with MySQL 8\.0](AuroraMySQL.MySQL80.md)\.
++ Cluster cache management for Aurora PostgreSQL\. The `apg_ccm_enabled` configuration parameter doesn't apply to Aurora Serverless v2 DB instances\.
++ In the AWS Billing and Cost Management console, filtering by custom tags added to Aurora Serverless v2 shows zero usage\. Use other filtering options, such as AWS Region, engine, and usageType, to get accurate billed values\.
 
- Some Aurora features work with Aurora Serverless v2, but might cause issues if your capacity range is lower than needed for the memory requirements for those features with your specific workload\. In that case, your database might not perform as well as usual, or might encounter out\-of\-memory errors\. For recommendations about setting the appropriate capacity range, see [Choosing the Aurora Serverless v2 capacity range for an Aurora cluster](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2-examples-setting-capacity-range-for-cluster)\. For troubleshooting information if your database encounters out\-of\-memory errors due to a misconfigured capacity range, see [Avoiding out\-of\-memory errors](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.setting-capacity.incompatible_parameters)\. 
+Some Aurora features work with Aurora Serverless v2, but might cause issues if your capacity range is lower than needed for the memory requirements for those features with your specific workload\. In that case, your database might not perform as well as usual, or might encounter out\-of\-memory errors\. For recommendations about setting the appropriate capacity range, see [Choosing the Aurora Serverless v2 capacity range for an Aurora cluster](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2-examples-setting-capacity-range-for-cluster)\. For troubleshooting information if your database encounters out\-of\-memory errors due to a misconfigured capacity range, see [Avoiding out\-of\-memory errors](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.setting-capacity.incompatible_parameters)\.
+
+Aurora Auto Scaling isn't supported\. This type of scaling adds new readers to handle additional read\-intensive workload, based on CPU utilization\. However, scaling based on CPU utilization isn't meaningful for Aurora Serverless v2\. As an alternative, you can create Aurora Serverless v2 reader DB instances in advance and leave them scaled down to low capacity\. That's a faster and less disruptive way to scale a cluster's read capacity than adding new DB instances dynamically\.
 
 ## Some Aurora Serverless v2 aspects are different from Aurora Serverless v1<a name="aurora-serverless-v2.requirements.v1-v2-differences"></a>
 

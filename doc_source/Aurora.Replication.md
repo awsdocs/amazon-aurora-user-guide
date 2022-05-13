@@ -25,8 +25,6 @@ To increase availability, you can use Aurora Replicas as failover targets\. That
 
 For high\-availability scenarios, we recommend that you create one or more Aurora Replicas\. These should be of the same DB instance class as the primary instance and in different Availability Zones for your Aurora DB cluster\. For more information about Aurora Replicas as failover targets, see [Fault tolerance for an Aurora DB cluster](Concepts.AuroraHighAvailability.md#Aurora.Managing.FaultTolerance)\.
 
-When an Aurora Replica is deleted, its instance endpoint is removed immediately, and the Aurora Replica is removed from the reader endpoint\. If there are statements running on the Aurora Replica that is being deleted, there is a three minute grace period\. Existing statements can finish gracefully during the grace period\. When the grace period ends, the Aurora Replica is shut down and deleted\.
-
 You can't create an encrypted Aurora Replica for an unencrypted Aurora DB cluster\. You can't create an unencrypted Aurora Replica for an encrypted Aurora DB cluster\.
 
 **Tip**  
