@@ -44,7 +44,7 @@ You can create a VPC security group for a DB instance by using the VPC console\.
 
 You can associate a security group with a DB instance by using **Modify** on the RDS console, the `ModifyDBInstance` Amazon RDS API, or the `modify-db-instance` AWS CLI command\.
 
- For information about modifying a DB instance in a DB cluster, see [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\. For security group considerations when you restore a DB instance from a DB snapshot, see [Security group considerations](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Security)\.
+ For information about modifying a DB instance in a DB cluster, see [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\. For security group considerations when you restore a DB instance from a DB snapshot, see [Security group considerations](aurora-restore-snapshot.md#aurora-restore-snapshot.Security)\.
 
 ## Associating a security group with a DB cluster<a name="Overview.RDSSecurityGroups.AssociateWithCluster"></a>
 

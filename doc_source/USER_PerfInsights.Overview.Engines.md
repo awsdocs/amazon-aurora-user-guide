@@ -9,4 +9,4 @@ Following, you can find the Amazon Aurora DB engines that support Performance In
 |  Amazon Aurora PostgreSQL\-Compatible Edition  |  Performance Insights is supported for all engine versions\.  |  N/A  |  N/A  | 
 
 **Note**  
-Aurora Serverless doesn't support Performance Insights\.
+Aurora Serverless v1 doesn't support Performance Insights\.

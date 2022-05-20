@@ -58,7 +58,7 @@ Wait events vary by DB engine:
 + For a list of the common wait events for Aurora MySQL, see [Aurora MySQL wait events](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Waitevents)\. To learn how to tune using these wait events, see [Tuning Aurora MySQL with wait events and thread states](AuroraMySQL.Managing.Tuning.md)\.
 + For information about all MySQL wait events, see [Wait Event Summary Tables](https://dev.mysql.com/doc/refman/5.7/en/wait-summary-tables.html) in the MySQL documentation\.
 + For a list of common wait events for Aurora PostgreSQL, see [Amazon Aurora PostgreSQL wait events](AuroraPostgreSQL.Reference.Waitevents.md)\. To learn how to tune using these wait events, see [Tuning with wait events for Aurora PostgreSQL](AuroraPostgreSQL.Tuning.md)\.
-+ For information about all PostgreSQL wait events, see [PostgreSQL Wait Events](https://www.postgresql.org/docs/10/static/monitoring-stats.html#WAIT-EVENT-TABLE) in the PostgreSQL documentation\.
++ For information about all PostgreSQL wait events, see [The Statistics Collector > Wait Event tables](https://www.postgresql.org/docs/current/monitoring-stats.html#WAIT-EVENT-TABLE) in the PostgreSQL documentation\.
 
 ### Top SQL<a name="USER_PerfInsights.Overview.ActiveSessions.top-sql"></a>
 

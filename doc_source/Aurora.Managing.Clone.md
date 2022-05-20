@@ -493,9 +493,9 @@ If the encrypted cluster that you plan to share uses the default RDS key, make s
 
 1.  For **AWS KMS key**, choose the new encryption key that you want to use\. 
 
-1.  Restore the copied snapshot\. To do so, follow the procedure in [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md)\. The new DB instance uses your new encryption key\. 
+1.  Restore the copied snapshot\. To do so, follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\. The new DB instance uses your new encryption key\. 
 
-1.  \(Optional\) Delete the old DB cluster if you no longer need it\. To do so, follow the procedure in [Deleting a DB cluster snapshot](USER_DeleteSnapshot.md#USER_DeleteDBClusterSnapshot)\. Before you do, confirm that your new cluster has all necessary data and that your application can access it successfully\. 
+1.  \(Optional\) Delete the old DB cluster if you no longer need it\. To do so, follow the procedure in [Deleting a DB cluster snapshot](aurora-delete-snapshot.md#DeleteDBClusterSnapshot)\. Before you do, confirm that your new cluster has all necessary data and that your application can access it successfully\. 
 
 #### Checking if a cluster that you own is shared with other AWS accounts<a name="Aurora.Managing.Clone.CrossAccount.confirming"></a>
 

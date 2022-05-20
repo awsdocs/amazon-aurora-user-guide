@@ -24,10 +24,10 @@ mysql-major-version.mysql_aurora.aurora-mysql-version
 
  All 1\.x Aurora MySQL engine versions are wire\-compatible with Community MySQL 5\.6\.10a\. All 2\.x Aurora MySQL engine versions are wire\-compatible with Community MySQL 5\.7\.12\. All 3\.x Aurora MySQL engine versions are wire\-compatible with MySQL 8\.0\.23 onwards\. You may refer to release notes of specific 3\.x version to know the corresponding MySQL compatible version\. 
 
- For example, the engine versions for Aurora MySQL 3\.01\.0, 2\.03\.2, and 1\.19\.0 are the following\. 
+ For example, the engine versions for Aurora MySQL 3\.02\.0, 2\.03\.2, and 1\.19\.0 are the following\. 
 
 ```
-8.0.mysql_aurora.3.01.0
+8.0.mysql_aurora.3.02.0
 5.7.mysql_aurora.2.03.2
 5.6.mysql_aurora.1.19.0
 ```

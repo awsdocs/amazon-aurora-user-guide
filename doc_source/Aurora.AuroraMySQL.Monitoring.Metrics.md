@@ -112,14 +112,12 @@ For more information, see [CloudWatch usage metrics](https://docs.aws.amazon.com
 
 | Metric | Description | Units\* | 
 | --- | --- | --- | 
-| AllocatedStorage |  The total storage for all DB instances\. The sum excludes temporary migration instances\.  |  Gigabytes  | 
 | DBClusterParameterGroups |  The number of DB cluster parameter groups in your AWS account\. The count excludes default parameter groups\.  |  Count  | 
 | DBClusters |  The number of Amazon Aurora DB clusters in your AWS account\.  |  Count  | 
 | DBInstances |  The number of DB instances in your AWS account\.  |  Count  | 
 | DBParameterGroups |  The number of DB parameter groups in your AWS account\. The count excludes the default DB parameter groups\.  |  Count  | 
 | DBSubnetGroups  |  The number of DB subnet groups in your AWS account\. The count excludes the default subnet group\.  |  Count  | 
 | ManualClusterSnapshots |  The number of manually created DB cluster snapshots in your AWS account\. The count excludes invalid snapshots\.  |  Count  | 
-| ManualSnapshots |  The number of manually created DB snapshots in your AWS account\. The count excludes invalid snapshots\.  |  Count  | 
 | OptionGroups |  The number of option groups in your AWS account\. The count excludes the default option groups\.  |  Count  | 
 | ReservedDBInstances |  The number of reserved DB instances in your AWS account\. The count excludes retired or declined instances\.  |  Count  | 
 

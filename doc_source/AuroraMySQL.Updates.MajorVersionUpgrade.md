@@ -34,7 +34,7 @@
 
  The in\-place upgrade mechanism involves shutting down your DB cluster while the operation takes place\. Aurora performs a clean shutdown and completes outstanding operations such as transaction rollback and undo purge\. 
 
- The in\-place upgrade is convenient, because it is simple to perform and minimizes configuration changes to associated applications\. For example, an in\-place upgrade preserves the endpoints and set of DB instances for your cluster\. However, the time needed for an in\-place upgrade can vary depending on the properties of your schema and how busy the cluster is\. Thus, depending on the needs for your cluster, you can choose between in\-place upgrade, snapshot restore as described in [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md), or other upgrade techniques such as the one described in [Alternative blue\-green upgrade technique](#AuroraMySQL.Upgrading.BlueGreenBlog)\. 
+ The in\-place upgrade is convenient, because it is simple to perform and minimizes configuration changes to associated applications\. For example, an in\-place upgrade preserves the endpoints and set of DB instances for your cluster\. However, the time needed for an in\-place upgrade can vary depending on the properties of your schema and how busy the cluster is\. Thus, depending on the needs for your cluster, you can choose between in\-place upgrade, snapshot restore as described in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md), or other upgrade techniques such as the one described in [Alternative blue\-green upgrade technique](#AuroraMySQL.Upgrading.BlueGreenBlog)\. 
 
  If your cluster is running a version that's lower than 1\.22\.3, the upgrade might take longer because Aurora MySQL automatically performs an upgrade to 1\.22\.3 as a first step\. To minimize downtime during the major version upgrade, you can do an initial minor version upgrade to Aurora MySQL 1\.22\.3 in advance\. 
 
@@ -225,7 +225,7 @@ aws rds modify-db-cluster ^
 
 ```
 # Add a new DB instance to a MySQL 5.6-compatible cluster.
-create-db-instance --db-instance-identifier instance-2020-04-28-6889 --db-cluster-identifier cluster-2020-04-28-2690 \
+aws rds create-db-instance --db-instance-identifier instance-2020-04-28-6889 --db-cluster-identifier cluster-2020-04-28-2690 \
   --db-instance-class db.t2.small --engine aurora --region us-east-1
 
 # Find the Aurora MySQL v1.x versions available for minor version upgrades and patching.
@@ -240,7 +240,7 @@ aws rds describe-db-parameters --db-parameter-group-name default.aurora5.6 --reg
 
 ```
 # Add a new DB instance to a MySQL 5.7-compatible cluster.
-create-db-instance --db-instance-identifier instance-2020-04-28-3333 --db-cluster-identifier cluster-2020-04-28-2690 \
+aws rds create-db-instance --db-instance-identifier instance-2020-04-28-3333 --db-cluster-identifier cluster-2020-04-28-2690 \
   --db-instance-class db.t2.small --engine aurora-mysql --region us-east-1
 
 # Find the Aurora MySQL v2.x versions available for minor version upgrades and patching.

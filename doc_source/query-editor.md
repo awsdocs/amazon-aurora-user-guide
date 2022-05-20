@@ -4,6 +4,9 @@ With the query editor for Aurora Serverless v1, you can run SQL queries in the R
 
 The query editor requires an Aurora Serverless v1 DB cluster with the Data API enabled\. For information about creating an Aurora Serverless v1 DB cluster with the Data API enabled, see [Using the Data API for Aurora Serverless v1](data-api.md)\.
 
+**Note**  
+The Data API and query editor aren't supported for Aurora Serverless v2\.
+
 ## Availability of the query editor<a name="query-editor.regions"></a>
 
 The query editor is only available for the following Aurora Serverless v1 DB clusters:

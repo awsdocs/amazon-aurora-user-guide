@@ -8,7 +8,7 @@
 +  **Timeout action** – The action to take when a capacity modification times out because it can't find a scaling point\. Aurora Serverless v1 DB cluster can force your DB cluster to the new capacity settings if set the **Force scaling the capacity to the specified values\.\.\. ** option\. Or, it can roll back the capacity change to cancel it if you don't choose the option\. For more information, see [Timeout action for capacity changes](aurora-serverless-v1.how-it-works.md#aurora-serverless.how-it-works.timeout-action)\. 
 +  **Pause after inactivity** – The amount of time with no database traffic to scale to zero processing capacity\. When database traffic resumes, Aurora automatically resumes processing capacity and scales to handle the traffic\. 
 
- For general information about restoring a DB cluster from a snapshot, see [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md)\. 
+ For general information about restoring a DB cluster from a snapshot, see [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\. 
 
 ## Console<a name="aurora-serverless.restorefromsnapshot.console"></a>
 

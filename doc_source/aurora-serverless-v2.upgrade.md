@@ -390,7 +390,7 @@ mysql> select * from serverless_v2_demo.demo;
 
 1.  Create a cluster snapshot of the Aurora Serverless v1 cluster\. Follow the procedure in [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\. 
 
-1.  Restore the snapshot to create a new provisioned cluster\. Follow the procedure in [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md)\. Choose an engine version for the new cluster that's one major version higher than the Aurora Serverless v1 cluster\. That's because Aurora Serverless v1 isn't available for the same major Aurora MySQL and Aurora PostgreSQL versions as Aurora Serverless v2 is\. Thus, going from Aurora Serverless v1 to Aurora Serverless v2 always involves at least one major version upgrade\. 
+1.  Restore the snapshot to create a new provisioned cluster\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\. Choose an engine version for the new cluster that's one major version higher than the Aurora Serverless v1 cluster\. That's because Aurora Serverless v1 isn't available for the same major Aurora MySQL and Aurora PostgreSQL versions as Aurora Serverless v2 is\. Thus, going from Aurora Serverless v1 to Aurora Serverless v2 always involves at least one major version upgrade\. 
 
 1.  From this point on, follow the same procedure as for upgrading a provisioned cluster to use Aurora Serverless v2\. For details, see [Switching from a provisioned cluster to Aurora Serverless v2](#aurora-serverless-v2.switch-from-provisioned)\. 
 

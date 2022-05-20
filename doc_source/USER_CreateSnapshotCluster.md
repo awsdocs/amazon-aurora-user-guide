@@ -4,7 +4,7 @@ Amazon RDS creates a storage volume snapshot of your DB cluster, backing up the 
 
 Unlike automated backups, manual snapshots aren't subject to the backup retention period\. Snapshots don't expire\.
 
-For very long\-term backups, we recommend exporting snapshot data to Amazon S3\. If the major version of your DB engine is no longer supported, you can't restore to that version from a snapshot\. For more information, see [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)\.
+For very long\-term backups, we recommend exporting snapshot data to Amazon S3\. If the major version of your DB engine is no longer supported, you can't restore to that version from a snapshot\. For more information, see [Exporting DB cluster snapshot data to Amazon S3](aurora-export-snapshot.md)\.
 
 You can create a DB cluster snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 

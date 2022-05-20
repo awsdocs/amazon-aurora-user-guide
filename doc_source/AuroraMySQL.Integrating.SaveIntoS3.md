@@ -7,7 +7,7 @@ If you are using encryption, the Amazon S3 bucket must be encrypted with an AWS 
  This feature currently isn't available for Aurora Serverless clusters\.
 
 **Note**  
-You can save DB cluster snapshot data to Amazon S3 using the AWS Management Console, AWS CLI, or Amazon RDS API\. For more information, see [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)\.
+You can save DB cluster snapshot data to Amazon S3 using the AWS Management Console, AWS CLI, or Amazon RDS API\. For more information, see [Exporting DB cluster snapshot data to Amazon S3](aurora-export-snapshot.md)\.
 
 ## Giving Aurora MySQL access to Amazon S3<a name="AuroraMySQL.Integrating.SaveIntoS3.Authorize"></a>
 

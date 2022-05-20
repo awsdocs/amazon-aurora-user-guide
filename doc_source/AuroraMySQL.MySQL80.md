@@ -442,7 +442,7 @@ mysql> SELECT CURRENT_ROLE();
 ## Upgrading to Aurora MySQL version 3<a name="AuroraMySQL.mysql80-upgrade-procedure"></a>
 
  For specific upgrade paths to upgrade your database from Aurora MySQL version 1 or 2 to version 3, you can use one of the following approaches: 
-+  To upgrade an Aurora MySQL version 2 cluster to version 3, create a snapshot of the version 2 cluster and restore the snapshot to create a new version 3 cluster\. Follow the procedure in [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md)\. Currently, in\-place upgrade isn't available from Aurora MySQL version 2 to Aurora MySQL version 3\. 
++  To upgrade an Aurora MySQL version 2 cluster to version 3, create a snapshot of the version 2 cluster and restore the snapshot to create a new version 3 cluster\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\. Currently, in\-place upgrade isn't available from Aurora MySQL version 2 to Aurora MySQL version 3\. 
 +  To upgrade from Aurora MySQL version 1, first do an intermediate upgrade to Aurora MySQL version 2\. To do the upgrade to Aurora MySQL version 2, use any of the upgrade methods in [Upgrading Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Upgrading.md)\. Then use the snapshot restore technique to upgrade from Aurora MySQL version 2 to Aurora MySQL version 3\. Snapshot restore isn't available from Aurora MySQL version 1 clusters \(MySQL 5\.6–compatible\) to Aurora MySQL version 3\. 
 +  Currently, you can't clone a MySQL 5\.7–compatible Aurora cluster to a MySQL 8\.0–compatible one\. Use the snapshot restore technique instead\. 
 +  If you have an Aurora MySQL version 2 cluster that uses backtrack, currently you can't use the snapshot restore method to upgrade to Aurora MySQL version 3\. This limitation applies to all clusters that use backtrack, regardless of whether the backtrack setting is turned on\. In this case, perform a logical dump and restore by using a tool such as the `mysqldump` command\. For more information about using `mysqldump` for Aurora MySQL, see [Migrating from MySQL to Amazon Aurora by using mysqldump](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.mysqldump)\. 
@@ -497,9 +497,12 @@ $ aws rds describe-db-engine-versions --engine aurora-mysql \
   --engine-version 5.7.mysql_aurora.2.09.2 \
   --query 'DBEngineVersions[].ValidUpgradeTarget[].EngineVersion'
 [
+    "5.7.mysql_aurora.2.09.3",
     "5.7.mysql_aurora.2.10.0",
     "5.7.mysql_aurora.2.10.1",
-    "8.0.mysql_aurora.3.01.0"
+    "5.7.mysql_aurora.2.10.2",
+    "8.0.mysql_aurora.3.01.1",
+    "8.0.mysql_aurora.3.02.0"
 ]
 ```
 
@@ -521,12 +524,12 @@ aws rds create-db-cluster-snapshot --db-cluster-id cluster-57-upgrade-ok \
 $ aws rds restore-db-cluster-from-snapshot \
   --snapshot-id cluster-57-upgrade-ok-snapshot \
   --db-cluster-id cluster-80-restored --engine aurora-mysql \
-  --engine-version 8.0.mysql_aurora.3.01.0 \
+  --engine-version 8.0.mysql_aurora.3.02.0 \
   --enable-cloudwatch-logs-exports '["error","general","slowquery","audit"]'
 {
   "DBClusterIdentifier": "cluster-80-restored",
   "Engine": "aurora-mysql",
-  "EngineVersion": "8.0.mysql_aurora.3.01.0",
+  "EngineVersion": "8.0.mysql_aurora.3.02.0",
   "Status": "creating"
 }
 ```
@@ -544,7 +547,7 @@ $ aws rds create-db-instance --db-instance-identifier instance-running-version-3
   "DBInstanceIdentifier": "instance-running-version-3",
   "DBClusterIdentifier": "cluster-80-restored",
   "DBInstanceClass": "db.r5.xlarge",
-  "EngineVersion": "8.0.mysql_aurora.3.01.0",
+  "EngineVersion": "8.0.mysql_aurora.3.02.0",
   "DBInstanceStatus": "creating"
 }
 ```
@@ -554,7 +557,7 @@ $ aws rds create-db-instance --db-instance-identifier instance-running-version-3
 ```
 $ aws rds describe-db-clusters --db-cluster-id cluster-80-restored \
   --query '*[].EngineVersion' --output text
-8.0.mysql_aurora.3.01.0
+8.0.mysql_aurora.3.02.0
 ```
 
  You can also verify the MySQL\-specific version of the database engine by calling the `version` function\. 
@@ -574,12 +577,12 @@ mysql> select version();
 
  The Aurora MySQL version 1 cluster that we start with is named `aurora-mysql-v1-to-v2`\. It's running Aurora MySQL version 1\.23\.4\. It has at least one DB instance in the cluster\. 
 
- This example checks which Aurora MySQL version 2 versions can be upgraded to the `8.0.mysql_aurora.3.01.0` to use on the upgraded cluster\. For this example, we choose version 2\.10\.0 as the intermediate version\. 
+ This example checks which Aurora MySQL version 2 versions can be upgraded to the `8.0.mysql_aurora.3.02.0` version to use on the upgraded cluster\. For this example, we choose version 2\.10\.0 as the intermediate version\. 
 
 ```
 $ aws rds describe-db-engine-versions --engine aurora-mysql \
   --query '*[].{EngineVersion:EngineVersion,TargetVersions:ValidUpgradeTarget[*].EngineVersion} |
-    [?contains(TargetVersions, `'8.0.mysql_aurora.3.01.0'`) == `true`]|[].EngineVersion' \
+    [?contains(TargetVersions, `'8.0.mysql_aurora.3.02.0'`) == `true`]|[].EngineVersion' \
   --output text
 ...
 5.7.mysql_aurora.2.08.3
@@ -589,7 +592,7 @@ $ aws rds describe-db-engine-versions --engine aurora-mysql \
 ...
 ```
 
- The following example verifies that Aurora MySQL version 1\.23\.4 to 2\.10\.0 is an available upgrade path\. Thus, the Aurora MySQL version that we're running can be upgraded to 2\.10\.0\. Then that cluster can be upgraded to 3\.01\.0\. 
+ The following example verifies that Aurora MySQL version 1\.23\.4 to 2\.10\.0 is an available upgrade path\. Thus, the Aurora MySQL version that we're running can be upgraded to 2\.10\.0\. Then that cluster can be upgraded to 3\.02\.0\. 
 
 ```
 aws rds describe-db-engine-versions --engine aurora \
@@ -667,7 +670,7 @@ $ aws rds create-db-cluster-snapshot \
 $ aws rds restore-db-cluster-from-snapshot \
   --snapshot-id aurora-mysql-v2-to-v3-snapshot \
   --db-cluster-id aurora-mysql-v3-fully-upgraded \
-  --engine aurora-mysql --engine-version 8.0.mysql_aurora.3.01.0 \
+  --engine aurora-mysql --engine-version 8.0.mysql_aurora.3.02.0 \
   --enable-cloudwatch-logs-exports '["error","general","slowquery","audit"]'
 {
     "DBCluster": {
@@ -691,7 +694,7 @@ $ aws rds create-db-instance \
   "DBInstanceIdentifier": "instance-also-running-v3",
   "DBClusterIdentifier": "aurora-mysql-v3-fully-upgraded",
   "DBInstanceClass": "db.r5.xlarge",
-  "EngineVersion": "8.0.mysql_aurora.3.01.0",
+  "EngineVersion": "8.0.mysql_aurora.3.02.0",
   "DBInstanceStatus": "creating"
 }
 ```
@@ -774,12 +777,12 @@ $ aws rds wait db-cluster-snapshot-available \
 $ aws rds restore-db-cluster-from-snapshot \
   --snapshot-id problematic-57-80-upgrade-snapshot \
   --db-cluster-id cluster-80-attempt-1 --engine aurora-mysql \
-  --engine-version 8.0.mysql_aurora.3.01.0 \
+  --engine-version 8.0.mysql_aurora.3.02.0 \
   --enable-cloudwatch-logs-exports '["error","general","slowquery","audit"]'
 {
   "DBClusterIdentifier": "cluster-80-attempt-1",
   "Engine": "aurora-mysql",
-  "EngineVersion": "8.0.mysql_aurora.3.01.0",
+  "EngineVersion": "8.0.mysql_aurora.3.02.0",
   "Status": "creating"
 }
 
@@ -790,7 +793,7 @@ $ aws rds create-db-instance --db-instance-identifier instance-attempt-1 \
   "DBInstanceIdentifier": "instance-attempt-1",
   "DBClusterIdentifier": "cluster-80-attempt-1",
   "DBInstanceClass": "db.r5.xlarge",
-  "EngineVersion": "8.0.mysql_aurora.3.01.0",
+  "EngineVersion": "8.0.mysql_aurora.3.02.0",
   "DBInstanceStatus": "creating"
 }
 
@@ -886,7 +889,7 @@ $ cat upgrade-prechecks.log
     "serverVersion": "5.7.12",
     "targetVersion": "8.0.23",
     "auroraServerVersion": "2.10.0",
-    "auroraTargetVersion": "3.01.0",
+    "auroraTargetVersion": "3.02.0",
     "outfilePath": "/rdsdbdata/tmp/PreChecker.log",
     "checksPerformed": [
 ```
@@ -1065,12 +1068,12 @@ $ aws rds wait db-cluster-snapshot-available \
 $ aws rds restore-db-cluster-from-snapshot \
   --snapshot-id problematic-57-80-upgrade-snapshot-2 \
   --db-cluster-id cluster-80-attempt-2 --engine aurora-mysql \
-  --engine-version 8.0.mysql_aurora.3.01.0 \
+  --engine-version 8.0.mysql_aurora.3.02.0 \
   --enable-cloudwatch-logs-exports '["error","general","slowquery","audit"]'
 {
   "DBClusterIdentifier": "cluster-80-attempt-2",
   "Engine": "aurora-mysql",
-  "EngineVersion": "8.0.mysql_aurora.3.01.0",
+  "EngineVersion": "8.0.mysql_aurora.3.02.0",
   "Status": "creating"
 }
 
@@ -1081,7 +1084,7 @@ $ aws rds create-db-instance --db-instance-identifier instance-attempt-2 \
   "DBInstanceIdentifier": "instance-attempt-2",
   "DBClusterIdentifier": "cluster-80-attempt-2",
   "DBInstanceClass": "db.r5.xlarge",
-  "EngineVersion": "8.0.mysql_aurora.3.01.0",
+  "EngineVersion": "8.0.mysql_aurora.3.02.0",
   "DBInstanceStatus": "creating"
 }
 
@@ -1095,11 +1098,11 @@ $ aws rds wait db-instance-available \
 $ aws rds describe-db-clusters \
   --db-cluster-identifier cluster-80-attempt-2 \
   --query '*[].[EngineVersion]' --output text
-8.0.mysql_aurora.3.01.0
+8.0.mysql_aurora.3.02.0
 $ aws rds describe-db-instances \
   --db-instance-identifier instance-attempt-2 \
   --query '*[].[EngineVersion]' --output text
-8.0.mysql_aurora.3.01.0
+8.0.mysql_aurora.3.02.0
 
 $ mysql -h cluster-80-attempt-2.cluster-example123.us-east-1.rds.amazonaws.com \
   -u my_username -p

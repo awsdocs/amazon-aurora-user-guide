@@ -9,7 +9,7 @@ For more information on storing data with Amazon S3, see [Create a bucket](https
 The upload to Amazon S3 uses server\-side encryption by default\. If you are using encryption, the Amazon S3 bucket must be encrypted with an AWS managed key\. Currently, you can't export data to a bucket that is encrypted with a customer managed key\.
 
 **Note**  
-You can save DB and DB cluster snapshot data to Amazon S3 using the AWS Management Console, AWS CLI, or Amazon RDS API\. For more information, see [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)\.
+You can save DB and DB cluster snapshot data to Amazon S3 using the AWS Management Console, AWS CLI, or Amazon RDS API\. For more information, see [Exporting DB cluster snapshot data to Amazon S3](aurora-export-snapshot.md)\.
 
 **Topics**
 + [Overview of exporting data to Amazon S3](#postgresql-s3-export-overview)

@@ -308,7 +308,7 @@ aws rds describe-db-engine-versions --region us-east-1 --engine aurora-mysql --q
 
 1.  Locate an Aurora MySQL\-compatible cluster snapshot\. 
 
-1.  Follow the general AWS CLI procedure in [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md)\. 
+1.  Follow the general AWS CLI procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\. 
 
 1.  The value to use for the `--engine-mode` parameter depends on the engine version that you choose\. 
 

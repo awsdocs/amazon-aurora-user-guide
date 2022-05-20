@@ -920,4 +920,4 @@ A process is waiting during recovery when write\-ahead log \(WAL\) data is not a
 **Timeout:VacuumDelay**  
 A process is waiting in a cost\-based vacuum delay point\. 
 
-For a complete list of PostgreSQL wait events, see [PostgreSQL wait\-event table](https://www.postgresql.org/docs/10/static/monitoring-stats.html#WAIT-EVENT-TABLE) in the PostgreSQL documentation\.
+For a complete list of PostgreSQL wait events, see [The Statistics Collector > Wait Event tables](https://www.postgresql.org/docs/current/monitoring-stats.html#WAIT-EVENT-TABLE) in the PostgreSQL documentation\.

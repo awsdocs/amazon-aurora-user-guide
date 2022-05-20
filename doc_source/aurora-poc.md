@@ -179,7 +179,7 @@
 
  This stage is when you can see the effects of changing configuration settings such as memory limits and connection limits\. Revisit the procedures that you explored in [8\. Specify configuration settings](#Aurora.PoC.Config)\. 
 
- You can also experiment with mechanisms such as creating and restoring snapshots\. For example, you can create clusters with different AWS instance classes, numbers of AWS Replicas, and so on\. Then on each cluster, you can restore the same snapshot containing your schema and all your data\. For the details of that cycle, see [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md) and [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md)\. 
+ You can also experiment with mechanisms such as creating and restoring snapshots\. For example, you can create clusters with different AWS instance classes, numbers of AWS Replicas, and so on\. Then on each cluster, you can restore the same snapshot containing your schema and all your data\. For the details of that cycle, see [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md) and [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\. 
 
 ## 11\. Measure performance<a name="Aurora.PoC.Measurement"></a>
 

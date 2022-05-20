@@ -27,7 +27,7 @@ To safely upgrade your DB instances, Aurora PostgreSQL uses the pg\_upgrade util
 
 Aurora PostgreSQL takes a DB cluster snapshot before a major version upgrade begins\. It doesn't take a DB cluster snapshot before a minor version upgrade\.
 
-If you want to return to a previous version after a major version upgrade is complete, you can restore the DB cluster from this snapshot\. You can also restore the DB cluster to a specific point in time before either a major or minor version upgrade started\. For more information, see [Restoring from a DB cluster snapshot](USER_RestoreFromSnapshot.md) or [Restoring a DB cluster to a specified time](aurora-pitr.md)\.
+If you want to return to a previous version after a major version upgrade is complete, you can restore the DB cluster from this snapshot\. You can also restore the DB cluster to a specific point in time before either a major or minor version upgrade started\. For more information, see [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md) or [Restoring a DB cluster to a specified time](aurora-pitr.md)\.
 
 During the major version upgrade process, a cloned volume is allocated\. If the upgrade fails for some reason, such as due to a schema incompatibility, Aurora PostgreSQL uses this clone to roll back the upgrade\. Note, when more than 15 clones of a source volume are allocated, subsequent clones become full copies and will take longer\. This can cause the upgrade process to take longer as well\. If Aurora PostgreSQL rolls back the upgrade, be aware of the following:
 + You may see billing entries and metrics for both the original volume and the cloned volume allocated during the upgrade\. Aurora PostgreSQL will clean up the extra volume after the cluster backup retention window is beyond the time of the upgrade\.
@@ -181,7 +181,7 @@ Before applying an upgrade to your production DB clusters, make sure that you th
 
 1. Perform a dry run upgrade\.
 
-   We highly recommend testing a major version upgrade on a duplicate of your production database before trying the upgrade on your production database\. To create a duplicate test instance, you can either restore your database from a recent snapshot or clone your database\. For more information, see [Restoring from a snapshot](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Restoring) or [Cloning a volume for an Amazon Aurora DB cluster](Aurora.Managing.Clone.md)\.
+   We highly recommend testing a major version upgrade on a duplicate of your production database before trying the upgrade on your production database\. To create a duplicate test instance, you can either restore your database from a recent snapshot or clone your database\. For more information, see [Restoring from a snapshot](aurora-restore-snapshot.md#aurora-restore-snapshot.Restoring) or [Cloning a volume for an Amazon Aurora DB cluster](Aurora.Managing.Clone.md)\.
 
    For more information, see [Manually upgrading the Aurora PostgreSQL engine](#USER_UpgradeDBInstance.Upgrading.Manual)\. 
 

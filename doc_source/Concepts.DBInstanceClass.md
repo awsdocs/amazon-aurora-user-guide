@@ -196,12 +196,12 @@ aws rds describe-orderable-db-instance-options --engine engine --engine-version 
 
 The output also shows the engine modes that are supported for each DB instance class\.
 
-For example, the following command lists the supported DB instance classes for version 12\.4 of the Aurora PostgreSQL DB engine in US East \(N\. Virginia\)\.
+For example, the following command lists the supported DB instance classes for version 13\.6 of the Aurora PostgreSQL DB engine in US East \(N\. Virginia\)\.
 
 For Linux, macOS, or Unix:
 
 ```
-aws rds describe-orderable-db-instance-options --engine aurora-postgresql --engine-version 12.4 \
+aws rds describe-orderable-db-instance-options --engine aurora-postgresql --engine-version 13.6 \
     --query "OrderableDBInstanceOptions[].{DBInstanceClass:DBInstanceClass,SupportedEngineModes:SupportedEngineModes[0]}" \
     --output table \
     --region us-east-1
@@ -210,7 +210,7 @@ aws rds describe-orderable-db-instance-options --engine aurora-postgresql --engi
 For Windows:
 
 ```
-aws rds describe-orderable-db-instance-options --engine aurora-postgresql --engine-version 12.4 ^
+aws rds describe-orderable-db-instance-options --engine aurora-postgresql --engine-version 13.6 ^
     --query "OrderableDBInstanceOptions[].{DBInstanceClass:DBInstanceClass,SupportedEngineModes:SupportedEngineModes[0]}"  ^
     --output table ^
     --region us-east-1
