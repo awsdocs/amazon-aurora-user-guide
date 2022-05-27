@@ -10,6 +10,7 @@
 + [How Aurora Serverless v2 works](aurora-serverless-v2.how-it-works.md)
 + [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md)
 + [Getting started with Aurora Serverless v2](aurora-serverless-v2.upgrade.md)
++ [Creating a cluster that uses Aurora Serverless v2](aurora-serverless-v2.create-cluster.md)
 + [Managing Aurora Serverless v2](aurora-serverless-v2-administration.md)
 + [Performance and scaling for Aurora Serverless v2](aurora-serverless-v2.setting-capacity.md)
 

@@ -102,6 +102,7 @@ Native metrics are defined by the database engine and not by Amazon Aurora\. You
 | Innodb\_rows\_inserted | SQL | Rows per second | db\.SQL\.Innodb\_rows\_inserted | 
 | Innodb\_rows\_read | SQL | Rows per second | db\.SQL\.Innodb\_rows\_read | 
 | Innodb\_rows\_updated | SQL | Rows per second | db\.SQL\.Innodb\_rows\_updated | 
+| Queries | SQL | Queries per second | db\.SQL\.Queries | 
 | Questions | SQL | Queries per second | db\.SQL\.Questions | 
 | Select\_full\_join | SQL | Queries per second | db\.SQL\.Select\_full\_join | 
 | Select\_full\_range\_join | SQL | Queries per second | db\.SQL\.Select\_full\_range\_join | 
@@ -113,11 +114,15 @@ Native metrics are defined by the database engine and not by Amazon Aurora\. You
 | Sort\_range | SQL | Queries per second | db\.SQL\.Sort\_range | 
 | Sort\_rows | SQL | Queries per second | db\.SQL\.Sort\_rows | 
 | Sort\_scan | SQL | Queries per second | db\.SQL\.Sort\_scan | 
+| Total\_query\_time | SQL | Milliseconds | db\.SQL\.Total\_query\_time | 
 | Table\_locks\_immediate | Locks | Requests per second | db\.Locks\.Table\_locks\_immediate | 
 | Table\_locks\_waited | Locks | Requests per second | db\.Locks\.Table\_locks\_waited | 
 | Innodb\_row\_lock\_time | Locks | Milliseconds \(average\) | db\.Locks\.Innodb\_row\_lock\_time | 
 | Aborted\_clients | Users | Connections | db\.Users\.Aborted\_clients | 
 | Aborted\_connects | Users | Connections | db\.Users\.Aborted\_connects | 
+| Connections | Users | Connections | db\.Users\.Connections | 
+| External\_threads\_connected | Users | Connections | db\.Users\.External\_threads\_connected | 
+| Threads\_connected | Users | Connections | db\.Users\.Threads\_connected | 
 | Threads\_created | Users | Connections | db\.Users\.Threads\_created | 
 | Threads\_running | Users | Connections | db\.Users\.Threads\_running | 
 | Created\_tmp\_disk\_tables | Temp | Tables per second | db\.Temp\.Created\_tmp\_disk\_tables | 
@@ -162,7 +167,9 @@ Native metrics are defined by the database engine and not by Amazon Aurora\. You
 
 | Counter | Type | Unit | Metric | 
 | --- | --- | --- | --- | 
-|  tup\_deleted  |  SQL  | Tuples per second | db\.SQL\.tup\_deleted | 
+| queries\_started | SQL | Queries per second | db\.SQL\.Queries | 
+| total\_query\_time | SQL | Milliseconds | db\.SQL\.total\_query\_time | 
+| tup\_deleted | SQL | Tuples per second | db\.SQL\.tup\_deleted | 
 | tup\_fetched | SQL | Tuples per second | db\.SQL\.tup\_fetched | 
 | tup\_inserted | SQL | Tuples per second | db\.SQL\.tup\_inserted | 
 | tup\_returned | SQL | Tuples per second | db\.SQL\.tup\_returned | 
@@ -186,6 +193,9 @@ Native metrics are defined by the database engine and not by Amazon Aurora\. You
 | buffers\_clean | I/O | Blocks per second | db\.IO\.buffers\_clean | 
 | blks\_hit | Cache | Blocks per second | db\.Cache\.blks\_hit | 
 | buffers\_alloc | Cache | Blocks per second | db\.Cache\.buffers\_alloc | 
+| idle\_in\_transaction\_aborted\_count | State | Sessions | db\.state\.idle\_in\_transaction\_aborted\_count | 
+| idle\_in\_transaction\_count | State | Sessions | db\.state\.idle\_in\_transaction\_count | 
+| idle\_in\_transaction\_max\_time | State | Seconds | db\.state\.idle\_in\_transaction\_max\_time | 
 | temp\_bytes | Temp | Bytes per second | db\.Temp\.temp\_bytes | 
 | temp\_files | Temp | Files per minute | db\.Temp\.temp\_files | 
 | numbackends | User | Connections | db\.User\.numbackends | 
@@ -201,6 +211,7 @@ Non\-native counter metrics are counters defined by Amazon Aurora\. A non\-nativ
 
 | Counter | Type | Metric | Description | Definition | 
 | --- | --- | --- | --- | --- | 
+| logical\_reads | SQL | db\.SQL\.logical\_reads | The total number of blocks hit and read\. | blks\_hit \+ blks\_read | 
 | checkpoint\_sync\_latency | Checkpoint | db\.Checkpoint\.checkpoint\_sync\_latency | The total amount of time that has been spent in the portion of checkpoint processing where files are synchronized to disk\. | checkpoint\_sync\_time / \(checkpoints\_timed \+ checkpoints\_req\) | 
 | checkpoint\_write\_latency | Checkpoint | db\.Checkpoint\.checkpoint\_write\_latency | The total amount of time that has been spent in the portion of checkpoint processing where files are written to disk\. | checkpoint\_write\_time / \(checkpoints\_timed \+ checkpoints\_req\) | 
 | commit\_latency | Transactions | db\.Transactions\.commit\_latency | The average duration of commit operations\. | db\.Transactions\.duration\_commits / db\.Transactions\.xact\_commit | 

@@ -19,52 +19,86 @@
 **Note**  
  The cluster volume for an Aurora Serverless v1 cluster is always encrypted\. When you create your Aurora Serverless v1 DB cluster, you can't turn off encryption, but you can choose to use your own encryption key\. With Aurora Serverless v2, you can choose whether to encrypt the cluster volume\. 
 
- You can create an Aurora Serverless v1 DB cluster with the AWS Management Console, the AWS CLI, or the RDS API by following the steps below\. 
+ You can create an Aurora Serverless v1 DB cluster with the AWS Management Console, the AWS CLI, or the RDS API\.
+
+**Note**  
+If you receive the following error message when trying to create your cluster, your account needs additional permissions\.   
+`Unable to create the resource. Verify that you have permission to create service linked role. Otherwise wait and try again later.`  
+See [Using service\-linked roles for Amazon Aurora](UsingWithRDS.IAM.ServiceLinkedRoles.md) for more information\.
+
+You can't directly connect to the DB instance on your Aurora Serverless v1 DB cluster\. To connect to your Aurora Serverless v1 DB cluster, you use the database endpoint\. You can find the endpoint for your Aurora Serverless v1 DB cluster on the **Connectivity & security** tab for your cluster in the AWS Management Console\. For more information, see [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\.
 
 ## Console<a name="aurora-serverless.create.console"></a>
 
- To create a new Aurora Serverless v1 DB cluster, you sign in to the AWS Management Console and choose an AWS Region that supports Aurora Serverless v1\. Choose Amazon RDS from the AWS Services list, and then choose **Create database**\. 
+Use the following general procedure\. For more information on creating an Aurora DB cluster using the AWS Management Console, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.
 
- On the **Create database** page: 
-+  Choose **Standard Create** for the database creation method\. 
-+  Choose **Amazon Aurora** for the Engine type in the **Engine options** section\. 
+**To create a new Aurora Serverless v1 DB cluster**
 
- You then choose **Amazon Aurora with MySQL compatibility** or **Amazon Aurora with PostgreSQL compatibility** and continue creating the Aurora Serverless v1 DB cluster by using the steps from the following examples\. If you choose a version of the DB engine that doesn't support Aurora Serverless v1, the **Serverless** option doesn't display\. 
+1. Sign in to the AWS Management Console\.
+
+1. Choose an AWS Region that supports Aurora Serverless v1\.
+
+1. Choose Amazon RDS from the AWS Services list\.
+
+1. Choose **Create database**\. 
+
+1. On the **Create database** page:
+
+   1. Choose **Standard Create** for the database creation method\.
+
+   1. Choose **Amazon Aurora** for the Engine type in the **Engine options** section\.
+
+   1. Choose **Amazon Aurora with MySQL compatibility** or **Amazon Aurora with PostgreSQL compatibility**, and continue creating the Aurora Serverless v1 DB cluster by using the steps from the following examples\.
+
+      If you choose a version of the DB engine that doesn't support Aurora Serverless v1, the **Serverless** option doesn't display\.
 
 ### Example for Aurora MySQL<a name="aurora-serverless.create.console.MySQL"></a>
 
- Choose **Amazon Aurora with MySQL Compatibility** for the Edition\. Choose the Aurora MySQL engine you want for your cluster from the **Version** selector\. The following image shows an example\. 
+Use the following procedure\.
 
+**To create an Aurora Serverless v1 DB cluster for Aurora MySQL**
+
+1.  Choose **Amazon Aurora with MySQL Compatibility** for the Edition\.
+
+1. Choose the Aurora MySQL version you want for your DB cluster\. The supported versions are shown on the right side of the page\.  
 ![\[Create Aurora Serverless v1 DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-select.png)
 
- Choose **Serverless** for the Capacity type\. 
+1. For **DB instance class**, confirm that **Serverless** is chosen\.
 
- You can configure the scaling configuration of the Aurora Serverless v1 DB cluster by adjusting values in the **Capacity settings** section of the page\. To learn more about capacity settings, see [Autoscaling for Aurora Serverless v1](aurora-serverless-v1.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\. The following image shows the **Capacity settings** you can adjust for an Aurora Serverless v1 DB cluster\. 
+1. Set the **Capacity range** for the DB cluster\.
 
+1. Adjust values as needed in the **Additional scaling configuration** section of the page\. To learn more about capacity settings, see [Autoscaling for Aurora Serverless v1](aurora-serverless-v1.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\.  
 ![\[Setting capacity for an Aurora MySQL Serverless v1 DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-capacity.png)
 
- You can also enable the Data API for your Aurora Serverless v1 DB cluster\. Select the **Data API** check box in the **Connectivity** section of the **Create database** page\. To learn more about the Data API, see [Using the Data API for Aurora Serverless v1](data-api.md)\. 
+1. To enable the Data API for your Aurora Serverless v1 DB cluster, select the **Data API** check box under **Additional configuration** in the **Connectivity** section\.
+
+   To learn more about the Data API, see [Using the Data API for Aurora Serverless v1](data-api.md)\.
+
+1. Choose other database settings as needed, then choose **Create database\.**
 
 ### Example for Aurora PostgreSQL<a name="aurora-serverless.create.console.PostgreSQL"></a>
 
- Choose **Amazon Aurora with Postgres; Compatibility** for the Edition and select the **Version** of Aurora PostgreSQL available for Aurora Serverless v1\. For more information, see [Aurora Serverless v1](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless)\. 
+Use the following procedure\.
 
+**To create an Aurora Serverless v1 DB cluster for Aurora PostgreSQL**
+
+1.  Choose **Amazon Aurora with Postgres; Compatibility** for the Edition\.
+
+1. Choose the Aurora PostgreSQL version you want for your DB cluster\. The supported versions are shown on the right side of the page\.  
 ![\[Create Aurora PostgreSQL Serverless v1 DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-select-postgres.png)
 
- You can configure the scaling configuration of the Aurora Serverless v1 DB cluster by adjusting values in the **Capacity settings** section of the page\. The following image shows the **Capacity settings** you can adjust for an Aurora PostgreSQL Serverless v1 DB cluster\. To learn more about capacity settings, see [Autoscaling for Aurora Serverless v1](aurora-serverless-v1.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\. 
+1. For **DB instance class**, confirm that **Serverless** is chosen\.
 
+1. Set the **Capacity range** for the DB cluster\.
+
+1. Adjust values as needed in the **Additional scaling configuration** section of the page\. To learn more about capacity settings, see [Autoscaling for Aurora Serverless v1](aurora-serverless-v1.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\.  
 ![\[Setting capacity for an Aurora PostgreSQL Serverless v1 DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-capacity-postgres.png)
 
- You can also enable the Data API for your Aurora PostgreSQL Serverless v1 DB cluster\. Select the **Data API** check box in the **Connectivity** section of the **Create database** page\. See [Using the Data API for Aurora Serverless v1](data-api.md) for more information about the Data API\. 
+1. To enable the Data API for your Aurora Serverless v1 DB cluster, select the **Data API** check box under **Additional configuration** in the **Connectivity** section\.
 
- For more information on creating an Aurora DB cluster using the AWS Management Console, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\. 
+   To learn more about the Data API, see [Using the Data API for Aurora Serverless v1](data-api.md)\.
 
-**Note**  
- If you receive the following error message when trying to create your cluster, your account needs additional permissions\.   
- `Unable to create the resource. Verify that you have permission to create service linked role. Otherwise wait and try again later.`   
- See [Using service\-linked roles for Amazon Aurora](UsingWithRDS.IAM.ServiceLinkedRoles.md) for more information\. 
-
- You can't directly connect to the DB instance on your Aurora Serverless v1 DB cluster\. To connect to your Aurora Serverless v1 DB cluster, you use the database endpoint\. You can find the endpoint for your Aurora Serverless v1 DB cluster on the **Connectivity & security** tab for your cluster in the AWS Management Console\. For more information, see [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\. 
+1. Choose other database settings as needed, then choose **Create database\.**
 
 ## AWS CLI<a name="aurora-serverless.create.cli"></a>
 

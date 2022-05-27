@@ -36,7 +36,7 @@ Aurora backtracking is available for Aurora MySQL only\. It's not available for 
 | Asia Pacific \(Hong Kong\) | \- | \- | \- | 
 | Asia Pacific \(Jakarta\) | \- | \- | \- | 
 | Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.06 and higher | \- | 
-| Asia Pacific \(Osaka\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07\.3 and higher | \- | 
+| Asia Pacific \(Osaka\) | Version 1\.22 and higher | Version 2\.07\.3 and higher | \- | 
 | Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.06 and higher | \- | 
 | Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.06 and higher | \- | 
 | Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.06 and higher | \- | 
@@ -266,7 +266,7 @@ Following are the supported engines and Region availability for RDS Proxy with A
 | Asia Pacific \(Hong Kong\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | 
 | Asia Pacific \(Jakarta\) | \- | \- | \- | 
 | Asia Pacific \(Mumbai\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | 
-| Asia Pacific \(Osaka\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | 
+| Asia Pacific \(Osaka\) | Version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | 
 | Asia Pacific \(Seoul\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | 
 | Asia Pacific \(Singapore\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | 
 | Asia Pacific \(Sydney\) | Version 5\.6\.10a; version 1\.22 and higher | Version 2\.07 and higher | Version 3\.01\.0 and higher | 

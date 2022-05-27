@@ -1,9 +1,9 @@
 # Upgrading the minor version or patch level of an Aurora MySQL DB cluster<a name="AuroraMySQL.Updates.Patching"></a>
 
  You can use the following methods to upgrade the minor version of a DB cluster or to patch a DB cluster: 
-+  [Upgrading Aurora MySQL by modifying the engine version](#AuroraMySQL.Updates.Patching.ModifyEngineVersion) \(for Aurora MySQL 1\.19\.0 and higher, or 2\.03\.2 and higher\) 
-+  [Enabling automatic upgrades between minor Aurora MySQL versions](#AuroraMySQL.Updates.AMVU) 
-+  [Upgrading Aurora MySQL by applying pending maintenance to an Aurora MySQL DB cluster](#AuroraMySQL.Updates.PendingMaintenance) \(before Aurora MySQL 1\.19\.0 or 2\.03\.2\) 
++ [Upgrading Aurora MySQL by modifying the engine version](#AuroraMySQL.Updates.Patching.ModifyEngineVersion) \(for Aurora MySQL 1\.19\.0 and higher, or 2\.03\.2 and higher\)
++ [Enabling automatic upgrades between minor Aurora MySQL versions](#AuroraMySQL.Updates.AMVU)
++ [Upgrading Aurora MySQL by applying pending maintenance to an Aurora MySQL DB cluster](#AuroraMySQL.Updates.PendingMaintenance) \(before Aurora MySQL 1\.19\.0\)
 
  For information about how zero\-downtime patching can reduce interruptions during the upgrade process, see [Using zero\-downtime patching](#AuroraMySQL.Updates.ZDP)\. 
 

@@ -173,29 +173,43 @@ Migration from an Aurora multi\-master cluster means changing back to an Aurora 
 
 ### Console<a name="aurora-multi-master.console"></a>
 
- To create an Aurora multi\-master cluster from the AWS Management Console, you make the following choices\. On the first screen, you select an Aurora cluster:
+Use the following procedure\.
 
-![\[Creating an Aurora multi-master cluster: choosing Aurora database engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-multi-master-create-database-01.png)
+**To create an Aurora multi\-master cluster**
 
- You also choose MySQL 5\.6 compatibility and location **Regional**: 
+1. For **Engine type**, choose **Amazon Aurora**\.
 
-![\[Creating an Aurora multi-master cluster: choosing Aurora MySQL compatible with MySQL 5.6\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-multi-master-create-database-02.png)
+1. For **Edition**, choose **Amazon Aurora MySQL\-Compatible Edition**\.
 
- On the second screen, choose **Multiple writers** under **Database features**\. 
+1. Expand **Replication features**, then choose **Multi\-master**\.
 
-![\[Creating an Aurora multi-master cluster: choosing Multiple Writers\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-multi-master-create-database-03.png)
+   For **Available versions**, the only version supported for multi\-master clusters is **Aurora \(MySQL 5\.6\) multimaster\_10a**\.  
+![\[Creating an Aurora multi-master cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-multi-master-create-database-01.png)
 
- Fill in the other settings for the cluster\. This part of the procedure is the same as the general procedure for creating an Aurora cluster in [Creating a DB cluster](Aurora.CreateInstance.md#Aurora.CreateInstance.Creating)\. 
+1.  Fill in the other settings for the cluster\. This part of the procedure is the same as the general procedure for creating an Aurora cluster in [Creating a DB cluster](Aurora.CreateInstance.md#Aurora.CreateInstance.Creating)\.
 
- After you create the multi\-master cluster, add two DB instances to it by following the procedure in [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)\. Use the same AWS instance class for all DB instances within the multi\-master cluster\. 
+1. Choose **Create database**\.
 
- After you create the multi\-master cluster and associated DB instances, you see the cluster in the AWS Management Console **Databases** page as follows\. All DB instances show the role **Writer**\. 
+   The multi\-master cluster is created with one writer instance\.
+
+1.  After you create the multi\-master cluster, add a second writer instance to it by using the following procedure:
+
+   1. On the **Databases** page, choose the multi\-master cluster\.
+
+   1. For **Actions**, choose **Add DB instance**\.
+
+   1. Enter the DB instance identifier\.
+
+   1. Make other choices as needed, then choose **Add DB instance**\.  
+![\[Adding a writer instance to an Aurora multi-master cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-multi-master-create-database-02.png)
+
+ After you create the multi\-master cluster and associated DB instances, you see the cluster on the **Databases** page as follows\. All DB instances show the role **Writer instance**\.
 
 ![\[Databases page from RDS console showing a multi-master cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-multi-master-cluster-list-01.png)
 
 ### AWS CLI<a name="aurora-multi-master-creating.cli"></a>
 
- To create a multi\-master cluster with the AWS CLI, run the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command and include the option `--engine_mode=multimaster`\. 
+ To create a multi\-master cluster with the AWS CLI, run the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command and include the `--engine-mode` option with the value `multimaster`\.
 
  The following command shows the syntax for creating an Aurora cluster with multi\-master replication\. For the general procedure to create an Aurora cluster, see [Creating a DB cluster](Aurora.CreateInstance.md#Aurora.CreateInstance.Creating)\. 
 
@@ -217,17 +231,17 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
      --engine-mode multimaster
 ```
 
- After you create the multi\-master cluster, add a second DB instance to it by following the procedure in [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)\. Use the same AWS instance class for all DB instances within the multi\-master cluster\. 
+ After you create the multi\-master cluster, add a second DB instance to it by following the procedure in [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)\.
 
 ### RDS API<a name="aurora-multi-master-creating.api"></a>
 
  To create a multi\-master cluster with the RDS API, run the [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation\. Specify the value `multimaster` for the `EngineMode` parameter\. For the general procedure to create an Aurora cluster, see [Creating a DB cluster](Aurora.CreateInstance.md#Aurora.CreateInstance.Creating)\. 
 
- After you create the multi\-master cluster, add two DB instances to it by following the procedure in [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)\. Use the same AWS instance class for all DB instances within the multi\-master cluster\. 
+ After you create the multi\-master cluster, add two DB instances to it by following the procedure in [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)\.
 
 ### Adding a DB instance to a multi\-master cluster<a name="aurora-multi-master-add-instance"></a>
 
- You need more than one DB instance to see the benefits of a multi\-master cluster\. After you create the first instance, you can create other DB instances, up to a maximum of four DB instances, using the procedures from [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)\. The difference for multi\-master clusters is that the new DB instances all have read/write capability instead of being read\-only Aurora Replicas\. Use the same AWS instance class for all DB instances within the multi\-master cluster\. 
+ You need more than one DB instance to see the benefits of a multi\-master cluster\. After you create the first instance, you can create other DB instances, up to a maximum of four DB instances\. The difference for multi\-master clusters is that the new DB instances all have read/write capability instead of being read\-only Aurora Replicas\.
 
 ## Managing Aurora multi\-master clusters<a name="aurora-multi-master-managing"></a>
 

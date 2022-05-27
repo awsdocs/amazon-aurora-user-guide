@@ -35,7 +35,7 @@ The default crash type is `INSTANCE`\.
 
 You can simulate the failure of an Aurora Replica using the `ALTER SYSTEM SIMULATE READ REPLICA FAILURE` fault injection query\.
 
-An Aurora Replica failure will block all requests to an Aurora Replica or all Aurora Replicas in the DB cluster for a specified time interval\. When the time interval completes, the affected Aurora Replicas will be automatically synced up with master instance\. 
+An Aurora Replica failure blocks all requests from the writer instance to an Aurora Replica or all Aurora Replicas in the DB cluster for a specified time interval\. When the time interval completes, the affected Aurora Replicas will be automatically synced up with master instance\. 
 
 ### Syntax<a name="AuroraMySQL.Managing.FaultInjectionQueries.ReplicaFailure-Syntax"></a>
 

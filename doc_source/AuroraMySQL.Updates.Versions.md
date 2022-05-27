@@ -12,7 +12,7 @@
 
  When you perform administrative tasks using the AWS Management Console, AWS CLI, or RDS API, you specify the Aurora MySQL version in a descriptive alphanumeric format\. 
 
- Starting with Aurora MySQL 2\.03\.2 and 1\.19\.0, Aurora engine versions have the following syntax\. 
+ Starting with Aurora MySQL 2\.03\.2 and 1\.17\.9, Aurora engine versions have the following syntax\. 
 
 ```
 mysql-major-version.mysql_aurora.aurora-mysql-version
@@ -22,29 +22,29 @@ mysql-major-version.mysql_aurora.aurora-mysql-version
 
  The `aurora-mysql-version` is a dotted value with three parts: the Aurora MySQL major version, the Aurora MySQL minor version, and the patch level\. The major version is `1`, `2`, or `3`\. Those values represent Aurora MySQL compatible with MySQL 5\.6, 5\.7, or 8\.0 respectively\. The minor version represents the feature release within the 1\.x, 2\.x, or 3\.x series\. The patch level begins at `0` for each minor version, and represents the set of subsequent bug fixes that apply to the minor version\. Occasionally, a new feature is incorporated into a minor version but not made visible immediately\. In these cases, the feature undergoes fine\-tuning and is made public in a later patch level\. 
 
- All 1\.x Aurora MySQL engine versions are wire\-compatible with Community MySQL 5\.6\.10a\. All 2\.x Aurora MySQL engine versions are wire\-compatible with Community MySQL 5\.7\.12\. All 3\.x Aurora MySQL engine versions are wire\-compatible with MySQL 8\.0\.23 onwards\. You may refer to release notes of specific 3\.x version to know the corresponding MySQL compatible version\. 
+ All 1\.x Aurora MySQL engine versions are wire\-compatible with Community MySQL 5\.6\.10a\. All 2\.x Aurora MySQL engine versions are wire\-compatible with Community MySQL 5\.7\.12\. All 3\.x Aurora MySQL engine versions are wire\-compatible with MySQL 8\.0\.23 onwards\. You can refer to release notes of specific 3\.x version to find the corresponding MySQL compatible version\. 
 
- For example, the engine versions for Aurora MySQL 3\.02\.0, 2\.03\.2, and 1\.19\.0 are the following\. 
+ For example, the engine versions for Aurora MySQL 3\.02\.0, 2\.03\.2, and 1\.17\.9 are the following\. 
 
 ```
 8.0.mysql_aurora.3.02.0
 5.7.mysql_aurora.2.03.2
-5.6.mysql_aurora.1.19.0
+5.6.mysql_aurora.1.17.9
 ```
 
 **Note**  
  There isn't a one\-to\-one correspondence between community MySQL versions and the Aurora MySQL 1\.x and 2\.x versions\. For Aurora MySQL version 3, there is a more direct mapping\. To check which bug fixes and new features are in a particular Aurora MySQL release, see [ Database engine updates for Amazon Aurora MySQL version 3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.Updates.30Updates.html), [ Database engine updates for Amazon Aurora MySQL version 2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.Updates.20Updates.html) and [ Database engine updates for Amazon Aurora MySQL version 1](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.Updates.11Updates.html)in the *Release Notes for Aurora MySQL*\. For a chronological list of new features and releases, see [Document history](WhatsNew.md)\. To check the minimum version required for a security\-related fix, see [ Security vulnerabilities fixed in Aurora MySQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.CVE_list.html)in the *Release Notes for Aurora MySQL*\. 
 
- For Aurora MySQL 2\.x, all versions 2\.03\.1 and lower are represented by the engine version `5.7.12`\. In the same way, all versions before 1\.19\.0 are represented by the engine version `5.6.10a`\. These older version designations don't include the `5.7.mysql_aurora` prefix\. When you specified `5.7.12` or `5.6.10a` while creating or modifying a cluster, you got the highest version before the 2\.03\.2 and 1\.19\.0 versions where the version numbering changed\. To determine the exact version number for those older versions, you used the SQL technique explained in [Checking Aurora MySQL versions using SQL](#AuroraMySQL.Updates.DBVersions)\. 
+ For Aurora MySQL 2\.x, all versions 2\.03\.1 and lower are represented by the engine version `5.7.12`\. In the same way, all versions before 1\.17\.9 are represented by the engine version `5.6.10a`\. These older version designations don't include the `5.7.mysql_aurora` prefix\. When you specified `5.7.12` or `5.6.10a` while creating or modifying a cluster, you got the highest version before the 2\.03\.2 and 1\.17\.9 versions where the version numbering changed\. To determine the exact version number for those older versions, you used the SQL technique explained in [Checking Aurora MySQL versions using SQL](#AuroraMySQL.Updates.DBVersions)\. 
 
  You specify the Aurora MySQL engine version in some AWS CLI commands and RDS API operations\. For example, you specify the `--engine-version` option when you run the AWS CLI commands [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html)\. You specify the `EngineVersion` parameter when you run the RDS API operations [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html)\. 
 
- In Aurora MySQL 1\.19\.0 and higher or 2\.03\.2 and higher, the engine version in the AWS Management Console also includes the Aurora version\. Upgrading the cluster changes the displayed value\. This change helps you to specify and check the precise Aurora MySQL versions, without the need to connect to the cluster or run any SQL commands\. 
+ In Aurora MySQL 1\.17\.9 and higher or 2\.03\.2 and higher, the engine version in the AWS Management Console also includes the Aurora version\. Upgrading the cluster changes the displayed value\. This change helps you to specify and check the precise Aurora MySQL versions, without the need to connect to the cluster or run any SQL commands\. 
 
 **Tip**  
  For Aurora clusters managed through AWS CloudFormation, this change in the `EngineVersion` setting can trigger actions by AWS CloudFormation\. For information about how AWS CloudFormation treats changes to the `EngineVersion` setting, see [the AWS CloudFormation documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html)\. 
 
- Before Aurora MySQL 1\.19\.0 and 2\.03\.2, the process to update the engine version is to use the **Apply a Pending Maintenance Action** option for the cluster\. This process doesn't change the Aurora MySQL engine version that the console displays\. For example, suppose that you see an Aurora MySQL cluster with a reported engine version of `5.6.10a` or `5.7.12`\. To find out the specific version, connect to the cluster and query the `AURORA_VERSION` system variable as described previously\. 
+ Before Aurora MySQL 1\.17\.9 and 2\.03\.2, the process to update the engine version is to use the **Apply a Pending Maintenance Action** option for the cluster\. This process doesn't change the Aurora MySQL engine version that the console displays\. For example, suppose that you see an Aurora MySQL cluster with a reported engine version of `5.6.10a` or `5.7.12`\. To find out the specific version, connect to the cluster and query the `AURORA_VERSION` system variable as described previously\. 
 
 ## Checking Aurora MySQL versions using SQL<a name="AuroraMySQL.Updates.DBVersions"></a>
 

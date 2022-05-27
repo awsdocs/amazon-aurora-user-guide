@@ -9,6 +9,6 @@ You can find an overview of Performance Insights for Amazon Aurora in the follow
 **Topics**
 + [Database load](USER_PerfInsights.Overview.ActiveSessions.md)
 + [Maximum CPU](USER_PerfInsights.Overview.MaxCPU.md)
-+ [Amazon Aurora DB engine support for Performance Insights](USER_PerfInsights.Overview.Engines.md)
++ [Amazon Aurora DB engine and instance class support for Performance Insights](USER_PerfInsights.Overview.Engines.md)
 + [AWS Region support for Performance Insights](USER_PerfInsights.Overview.Regions.md)
 + [Cost of Performance Insights](USER_PerfInsights.Overview.cost.md)

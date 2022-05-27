@@ -239,16 +239,9 @@ GRANT AWS_COMPREHEND_ACCESS TO user@domain-or-ip-address
 ```
 
 **Tip**  
- When you use the role technique in Aurora MySQL version 3, you also activate the role by using the `SET ROLE role_name` or `SET ROLE ALL` statement\. If you aren't familiar with the MySQL 8\.0 role system, you can learn more in [Role\-based privilege model](AuroraMySQL.MySQL80.md#AuroraMySQL.privilege-model)\. You can also find more details in [Using Roles](https://dev.mysql.com/doc/refman/8.0/en/roles.html) in the *MySQL Reference Manual*\. 
-
- Use the following statements for Aurora MySQL version 1 or 2: 
-
- Use the following statements for Aurora MySQL version 3: 
-
-```
-GRANT AWS_SAGEMAKER_ACCESS TO user@domain-or-ip-address
-GRANT AWS_COMPREHEND_ACCESS TO user@domain-or-ip-address
-```
+When you use the role technique in Aurora MySQL version 3, you also activate the role by using the `SET ROLE role_name` or `SET ROLE ALL` statement\. If you aren't familiar with the MySQL 8\.0 role system, you can learn more in [Role\-based privilege model](AuroraMySQL.MySQL80.md#AuroraMySQL.privilege-model)\. You can also find more details in [Using Roles](https://dev.mysql.com/doc/refman/8.0/en/roles.html) in the *MySQL Reference Manual*\.  
+This only applies to the current active session\. When you reconnect, you have to run the `SET ROLE` statement again to grant privileges\. For more information, see [SET ROLE statement](https://dev.mysql.com/doc/refman/8.0/en/set-role.html) in the *MySQL Reference Manual*\.  
+You can also use the `activate_all_roles_on_login` DB cluster parameter to automatically activate all roles when a user connects to a DB instance\. When this parameter is set, you don't have to call the SET ROLE statement explicitly to activate a role\. For more information, see [activate\_all\_roles\_on\_login](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_activate_all_roles_on_login) in the *MySQL Reference Manual*\.
 
  Use the following statements for Aurora MySQL version 1 or 2: 
 

@@ -1,4 +1,4 @@
-# Amazon Aurora DB engine support for Performance Insights<a name="USER_PerfInsights.Overview.Engines"></a>
+# Amazon Aurora DB engine and instance class support for Performance Insights<a name="USER_PerfInsights.Overview.Engines"></a>
 
 Following, you can find the Amazon Aurora DB engines that support Performance Insights\.
 

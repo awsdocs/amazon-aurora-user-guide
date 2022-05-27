@@ -1,6 +1,8 @@
 # Aurora DB instance classes<a name="Concepts.DBInstanceClass"></a>
 
-The DB instance class determines the computation and memory capacity of an Amazon Aurora DB instance\. A DB instance class consists of both the DB instance type and the size\. The DB instance class that you need depends on your processing power and memory requirements\. 
+The DB instance class determines the computation and memory capacity of an Amazon Aurora DB instance\. The DB instance class that you need depends on your processing power and memory requirements\.
+
+A DB instance class consists of both the DB instance type and the size\. For example, db\.m6g is a general\-purpose DB instance type powered by AWS Graviton2 processors, while db\.m6g\.2xlarge is a DB instance class within the db\.m6g instance type\.
 
 For more information about instance class pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\.
 
@@ -31,32 +33,6 @@ The following are the burstable\-performance DB instance types available:
 For DB instance class hardware specifications, see [Hardware specifications for DB instance classes for Aurora](#Concepts.DBInstanceClass.Summary)\.
 
 ## Supported DB engines for DB instance classes<a name="Concepts.DBInstanceClass.SupportAurora"></a><a name="instance_classes"></a>
-
-The following are DB engine considerations for DB instance classes:
-+ **Aurora support for db\.serverless**
-  +  For the DB engine, engine version, and other requirements, see [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md)\. 
-+ **Aurora support for db\.x2g**
-  + Aurora MySQL versions 2\.09\.2 and higher, 2\.10\.0 and higher, and 3\.01\.0 and higher support the db\.x2g instance classes\.
-  +  Aurora PostgreSQL versions 11\.9 and higher, 12\.4 and higher, and 13\.3 and higher support the db\.x2g instance classes\.
-+ **Aurora support for db\.r6g**
-  + Aurora MySQL versions 2\.09\.2 and higher and 2\.10\.0 and higher support the db\.r6g instance classes\.
-  +  Aurora PostgreSQL versions 13\.3, 12\.4 and higher and versions 11\.9 and higher support the db\.r6g instance classes\.
-+ **Aurora support for db\.t4g**
-  + Aurora MySQL versions 2\.09\.2 and higher, 2\.10\.0 and higher, and 3\.01\.0 and higher support the db\.t4g instance classes, specifically db\.t4g\.large and db\.t4g\.medium\.
-  +  Aurora PostgreSQL versions 11\.9 and higher, 12\.4 and higher, and 13\.3 and higher support the db\.t4g instance classes, specifically db\.t4g\.large and db\.t4g\.medium\.
-+ **Aurora support for db\.t3** 
-  + Aurora MySQL supports the db\.t3\.medium and db\.t3\.small instance classes for version 1\.15 and higher, and all 2\.x versions\. Aurora MySQL supports the db\.t3\.large class in version 2\.10 and higher\. 
-  +  Aurora MySQL version 3 includes some changes to instance class support\. 
-    +  With Aurora MySQL version 3, you can't use `db.r3`, `db.r4`, or `db.t2` instance classes\. 
-    +  With Aurora MySQL version 3, you can't use the `db.t3.small` instance class\. 
-
-       The smallest instance classes that you can use with version 3 are `t3.medium` and `t4g.medium`\. 
-  + For Aurora MySQL db\.r5, db\.r4, and db\.t3 DB instance classes, no instances in the cluster can have pending instance\-level system updates\. To see pending system updates, use the following AWS Command Line Interface \(AWS CLI\) command\.
-
-    ```
-    aws rds describe-pending-maintenance-actions
-    ```
-  + Aurora PostgreSQL version 13\.3 supports db\.t3 instance classes\.
 
 In the following table, you can find details about supported Amazon Aurora DB instance classes for the Aurora DB engines\. 
 
