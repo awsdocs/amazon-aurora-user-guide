@@ -84,7 +84,7 @@ Following, you can find a table that lists the highest value that should ever be
 
 ## Temporary storage limits for Aurora PostgreSQL<a name="AuroraPostgreSQL.Managing.TempStorage"></a>
 
-Aurora PostgreSQL stores tables and indexes in the Aurora storage subsystem\. Aurora PostgreSQL uses separate temporary storage for non\-persistent temporary files\. This includes files that are used for such purposes as sorting large datasets during query processing or for index build operations\. For more about storage, see [Amazon Aurora storage and reliability](Aurora.Overview.StorageReliability.md)\. 
+Aurora PostgreSQL stores tables and indexes in the Aurora storage subsystem\. Aurora PostgreSQL uses separate temporary storage for non\-persistent temporary files\. This includes files that are used for such purposes as sorting large data sets during query processing or for index build operations\. These local storage volumes are backed by Amazon Elastic Block Store and can be extended\. For more information about storage, see [Amazon Aurora storage and reliability](Aurora.Overview.StorageReliability.md)\.
 
 The following table shows the maximum amount of temporary storage available for each Aurora PostgreSQL DB instance class\.
 

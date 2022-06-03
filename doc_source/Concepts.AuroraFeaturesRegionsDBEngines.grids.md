@@ -360,27 +360,27 @@ Aurora Serverless is an on\-demand, auto\-scaling feature designed to be a cost\
 
 | Region | Aurora MySQL 5\.6 | Aurora MySQL 5\.7 | Aurora MySQL 8\.0 | Aurora PostgreSQL 10 | Aurora PostgreSQL 11 | 
 | --- | --- | --- | --- | --- | --- | 
-| US East \(Ohio\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| US East \(N\. Virginia\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| US West \(N\. California\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| US West \(Oregon\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
+| US East \(Ohio\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| US East \(N\. Virginia\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| US West \(N\. California\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| US West \(Oregon\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
 | Africa \(Cape Town\) | \- | \- | \- | \- | \- | 
 | Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | \- | 
 | Asia Pacific \(Jakarta\) | \- | \- | \- | \- | \- | 
-| Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
+| Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
 | Asia Pacific \(Osaka\) | \- | \- | \- | \- | \- | 
-| Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| Asia Pacific \(Tokyo\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| Canada \(Central\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
+| Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| Asia Pacific \(Tokyo\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| Canada \(Central\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
 | China \(Beijing\) | \- | \- | \- | \- | \- | 
 | China \(Ningxia\) | \- | \- | \- | \- | \- | 
-| Europe \(Frankfurt\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| Europe \(Ireland\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| Europe \(London\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
+| Europe \(Frankfurt\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| Europe \(Ireland\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| Europe \(London\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
 | Europe \(Milan\) | \- | \- | \- | \- | \- | 
-| Europe \(Paris\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
+| Europe \(Paris\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
 | Europe \(Stockholm\) | \- | \- | \- | \- | \- | 
 | Middle East \(Bahrain\) | \- | \- | \- | \- | \- | 
 | South America \(São Paulo\) | \- | \- | \- | \- | \- | 
@@ -394,27 +394,27 @@ The Data API for Aurora Serverless provides a web\-services interface to an Auro
 
 | Region | Aurora MySQL 5\.6 | Aurora MySQL 5\.7 | Aurora MySQL 8\.0 | Aurora PostgreSQL 10 | Aurora PostgreSQL 11 | 
 | --- | --- | --- | --- | --- | --- | 
-| US East \(Ohio\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| US East \(N\. Virginia\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| US West \(N\. California\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| US West \(Oregon\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
+| US East \(Ohio\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| US East \(N\. Virginia\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| US West \(N\. California\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| US West \(Oregon\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
 | Africa \(Cape Town\) | \- | \- | \- | \- | \- | 
 | Asia Pacific \(Hong Kong\) | \- | \- | \- | \- | \- | 
 | Asia Pacific \(Jakarta\) | \- | \- | \- | \- | \- | 
-| Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
+| Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
 | Asia Pacific \(Osaka\) | \- | \- | \- | \- | \- | 
-| Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| Asia Pacific \(Tokyo\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| Canada \(Central\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
+| Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| Asia Pacific \(Tokyo\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| Canada \(Central\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
 | China \(Beijing\) | \- | \- | \- | \- | \- | 
 | China \(Ningxia\) | \- | \- | \- | \- | \- | 
-| Europe \(Frankfurt\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| Europe \(Ireland\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
-| Europe \(London\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
+| Europe \(Frankfurt\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| Europe \(Ireland\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
+| Europe \(London\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
 | Europe \(Milan\) | \- | \- | \- | \- | \- | 
-| Europe \(Paris\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.14 and 10\.18 | \- | 
+| Europe \(Paris\) | Version 5\.6\.10a | Version 2\.07\.1 | \- | Version 10\.18 | \- | 
 | Europe \(Stockholm\) | \- | \- | \- | \- | \- | 
 | Middle East \(Bahrain\) | \- | \- | \- | \- | \- | 
 | South America \(São Paulo\) | \- | \- | \- | \- | \- | 

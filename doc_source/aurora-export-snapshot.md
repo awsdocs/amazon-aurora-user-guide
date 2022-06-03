@@ -49,6 +49,11 @@ The following table shows the Aurora PostgreSQL engine versions that are support
 ## Limitations<a name="aurora-export-snapshot.Limits"></a>
 
 Exporting DB snapshot data to Amazon S3 has the following limitations:
++ The following characters in the S3 file path are converted to underscores \(\_\) during export:
+
+  ```
+  \ ` " (space)
+  ```
 + If a database, schema, or table has characters in its name other than the following, partial export isn't supported\. However, you can export the entire DB snapshot\.
   + Latin letters \(A–Z\)
   + Digits \(0–9\)
@@ -59,6 +64,7 @@ Exporting DB snapshot data to Amazon S3 has the following limitations:
   ```
   , ; { } ( ) \n \t = (space)
   ```
++ Tables with slashes \(/\) in their names are skipped during export\.
 + If the data contains a large object such as a BLOB or CLOB, close to or greater than 500 MB, the export fails\.
 + If a table contains a large row close to or greater than 2 GB, the table is skipped during export\.
 + We strongly recommend that you use a unique name for each export task\. If you don't use a unique task name, you might receive the following error message:

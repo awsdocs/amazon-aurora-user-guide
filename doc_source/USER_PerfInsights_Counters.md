@@ -167,40 +167,40 @@ Native metrics are defined by the database engine and not by Amazon Aurora\. You
 
 | Counter | Type | Unit | Metric | 
 | --- | --- | --- | --- | 
-| queries\_started | SQL | Queries per second | db\.SQL\.Queries | 
+| queries\_started | SQL | Queries per second | db\.SQL\.queries | 
 | total\_query\_time | SQL | Milliseconds | db\.SQL\.total\_query\_time | 
 | tup\_deleted | SQL | Tuples per second | db\.SQL\.tup\_deleted | 
 | tup\_fetched | SQL | Tuples per second | db\.SQL\.tup\_fetched | 
 | tup\_inserted | SQL | Tuples per second | db\.SQL\.tup\_inserted | 
 | tup\_returned | SQL | Tuples per second | db\.SQL\.tup\_returned | 
 | tup\_updated | SQL | Tuples per second | db\.SQL\.tup\_updated | 
+| blks\_hit | Cache | Blocks per second | db\.Cache\.blks\_hit | 
+| buffers\_alloc | Cache | Blocks per second | db\.Cache\.buffers\_alloc | 
 | buffers\_checkpoint | Checkpoint | Blocks per second | db\.Checkpoint\.buffers\_checkpoint | 
 | checkpoints\_req | Checkpoint | Checkpoints per minute | db\.Checkpoint\.checkpoints\_req | 
 | checkpoint\_sync\_time | Checkpoint | Milliseconds per checkpoint | db\.Checkpoint\.checkpoint\_sync\_time | 
 | checkpoints\_timed | Checkpoint | Checkpoints per minute | db\.Checkpoint\.checkpoints\_timed | 
 | checkpoint\_write\_time | Checkpoint | Milliseconds per checkpoint | db\.Checkpoint\.checkpoint\_write\_time | 
 | maxwritten\_clean | Checkpoint | Bgwriter clean stops per minute | db\.Checkpoint\.maxwritten\_clean | 
+| deadlocks | Concurrency | Deadlocks per minute | db\.Concurrency\.deadlocks | 
+| blk\_read\_time | I/O | Milliseconds | db\.IO\.blk\_read\_time | 
+| blks\_read | I/O | Blocks per second | db\.IO\.blks\_read | 
+| buffers\_backend | I/O | Blocks per second | db\.IO\.buffers\_backend | 
+| buffers\_backend\_fsync | I/O | Blocks per second | db\.IO\.buffers\_backend\_fsync | 
+| buffers\_clean | I/O | Blocks per second | db\.IO\.buffers\_clean | 
+| idle\_in\_transaction\_aborted\_count | State | Sessions | db\.State\.idle\_in\_transaction\_aborted\_count | 
+| idle\_in\_transaction\_count | State | Sessions | db\.State\.idle\_in\_transaction\_count | 
+| idle\_in\_transaction\_max\_time | State | Seconds | db\.State\.idle\_in\_transaction\_max\_time | 
+| temp\_bytes | Temp | Bytes per second | db\.Temp\.temp\_bytes | 
+| temp\_files | Temp | Files per minute | db\.Temp\.temp\_files | 
 | active\_transactions | Transactions | Transactions | db\.Transactions\.active\_transactions | 
 | blocked\_transactions | Transactions | Transactions | db\.Transactions\.blocked\_transactions | 
 | duration\_commits | Transactions | Milliseconds | db\.Transactions\.duration\_commits | 
 | max\_used\_xact\_ids | Transactions | Transactions | db\.Transactions\.max\_used\_xact\_ids | 
 | xact\_commit | Transactions | Commits per second | db\.Transactions\.xact\_commit | 
 | xaxt\_rollback | Transactions | Rollbacks per second | db\.Transactions\.xact\_rollback | 
-| blk\_read\_time | I/O | Milliseconds | db\.IO\.blk\_read\_time | 
-| blks\_read | I/O | Blocks per second | db\.IO\.blks\_read | 
-| buffers\_backend | I/O | Blocks per second | db\.IO\.buffers\_backend | 
-| buffers\_backend\_fsync | I/O | Blocks per second | db\.IO\.buffers\_backend\_fsync | 
-| buffers\_clean | I/O | Blocks per second | db\.IO\.buffers\_clean | 
-| blks\_hit | Cache | Blocks per second | db\.Cache\.blks\_hit | 
-| buffers\_alloc | Cache | Blocks per second | db\.Cache\.buffers\_alloc | 
-| idle\_in\_transaction\_aborted\_count | State | Sessions | db\.state\.idle\_in\_transaction\_aborted\_count | 
-| idle\_in\_transaction\_count | State | Sessions | db\.state\.idle\_in\_transaction\_count | 
-| idle\_in\_transaction\_max\_time | State | Seconds | db\.state\.idle\_in\_transaction\_max\_time | 
-| temp\_bytes | Temp | Bytes per second | db\.Temp\.temp\_bytes | 
-| temp\_files | Temp | Files per minute | db\.Temp\.temp\_files | 
 | numbackends | User | Connections | db\.User\.numbackends | 
 | total\_auth\_attempts | User | Connections | db\.User\.total\_auth\_attempts | 
-| deadlocks | Concurrency | Deadlocks per minute | db\.Concurrency\.deadlocks | 
 | archived\_count | WAL | Files per minute | db\.WAL\.archived\_count | 
 | archive\_failed\_count | WAL | Files per minute | db\.WAL\.archive\_failed\_count | 
 
@@ -214,5 +214,5 @@ Non\-native counter metrics are counters defined by Amazon Aurora\. A non\-nativ
 | logical\_reads | SQL | db\.SQL\.logical\_reads | The total number of blocks hit and read\. | blks\_hit \+ blks\_read | 
 | checkpoint\_sync\_latency | Checkpoint | db\.Checkpoint\.checkpoint\_sync\_latency | The total amount of time that has been spent in the portion of checkpoint processing where files are synchronized to disk\. | checkpoint\_sync\_time / \(checkpoints\_timed \+ checkpoints\_req\) | 
 | checkpoint\_write\_latency | Checkpoint | db\.Checkpoint\.checkpoint\_write\_latency | The total amount of time that has been spent in the portion of checkpoint processing where files are written to disk\. | checkpoint\_write\_time / \(checkpoints\_timed \+ checkpoints\_req\) | 
-| commit\_latency | Transactions | db\.Transactions\.commit\_latency | The average duration of commit operations\. | db\.Transactions\.duration\_commits / db\.Transactions\.xact\_commit | 
 | read\_latency | I/O | db\.IO\.read\_latency | The time spent reading data file blocks by backends in this instance\. | blk\_read\_time / blks\_read | 
+| commit\_latency | Transactions | db\.Transactions\.commit\_latency | The average duration of commit operations\. | db\.Transactions\.duration\_commits / db\.Transactions\.xact\_commit | 

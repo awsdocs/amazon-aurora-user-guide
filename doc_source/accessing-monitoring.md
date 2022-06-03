@@ -236,6 +236,7 @@ Find the possible status values for DB clusters in the following table\.
 | starting | Billed for storage |  The DB cluster is starting\.  | 
 | stopped | Billed for storage |  The DB cluster is stopped\.  | 
 | stopping | Billed for storage |  The DB cluster is being stopped\.  | 
+| storage\-optimization | Billed |  Your DB instance is being modified to change the storage size or type\. The DB instance is fully operational\. However, while the status of your DB instance is **storage\-optimization**, you can't request any changes to the storage of your DB instance\. The storage optimization process is usually short, but can sometimes take up to and even beyond 24 hours\.  | 
 | update\-iam\-db\-auth | Billed |  IAM authorization for the DB cluster is being updated\.  | 
 | upgrading | Billed |  The DB cluster engine version is being upgraded\.  | 
 

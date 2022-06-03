@@ -70,9 +70,12 @@ The following table lists the resulting default value of `max_connections` for e
 
 ## Temporary storage limits for Aurora MySQL<a name="AuroraMySQL.Managing.TempStorage"></a>
 
- Aurora MySQL stores tables and indexes in the Aurora storage subsystem\. Aurora MySQL uses separate temporary storage for non\-persistent temporary files\. This includes files that are used for such purposes as sorting large datasets during query processing or for index build operations\. For more about storage, see [Amazon Aurora storage and reliability](Aurora.Overview.StorageReliability.md)\. 
+Aurora MySQL stores tables and indexes in the Aurora storage subsystem\. Aurora MySQL uses separate temporary storage for non\-persistent temporary files\. This includes files that are used for such purposes as sorting large datasets during query processing or for index build operations\. These local storage volumes are backed by Amazon Elastic Block Store and can be extended\. For more information about storage, see [Amazon Aurora storage and reliability](Aurora.Overview.StorageReliability.md)\.
 
- The following table shows the maximum amount of temporary storage available for each Aurora MySQL DB instance class\. 
+**Note**  
+You might see `storage-optimization` events when scaling DB instances, for example, from db\.r5\.2xlarge to db\.r5\.4xlarge\. 
+
+The following table shows the maximum amount of temporary storage available for each Aurora MySQL DB instance class\.
 
 
 | DB instance class | Maximum temporary storage available \(GiB\) | 

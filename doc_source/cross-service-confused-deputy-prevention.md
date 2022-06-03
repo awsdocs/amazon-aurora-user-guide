@@ -37,5 +37,6 @@ The following example shows how you can use the `aws:SourceArn` and `aws:SourceA
 ```
 
 For more examples of policies that use the `aws:SourceArn` and `aws:SourceAccount` global condition context keys, see the following sections:
++ [Granting permissions to publish notifications to an Amazon SNS topic](USER_Events.GrantingPermissions.md)
 + [Setting up access to an Amazon S3 bucket](USER_PostgreSQL.S3Import.md#USER_PostgreSQL.S3Import.AccessPermission) \(PostgreSQL import\)
 + [Setting up access to an Amazon S3 bucket](postgresql-s3-export.md#postgresql-s3-export-access-bucket) \(PostgreSQL export\)

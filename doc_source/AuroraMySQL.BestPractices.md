@@ -193,6 +193,11 @@ For Aurora MySQL version 3:
 mysql> SET optimizer_switch='block_nested_loop=on';
 ```
 
+**Note**  
+ For Aurora MySQL version 3, hash join support is available in all minor versions and is turned on by default\.   
+ For Aurora MySQL version 2, hash join support is available in version 2\.06 and higher\. In Aurora MySQL version 2, the hash join feature is always controlled by the `optimizer_switch` value\.   
+ Prior to Aurora MySQL version 1\.22, the way to enable hash joins in Aurora MySQL version 1 is by enabling the `aurora_lab_mode` session\-level setting\. In those Aurora MySQL versions, the `optimizer_switch` setting for hash joins is enabled by default and you only need to enable `aurora_lab_mode`\. 
+
 With this setting, the optimizer chooses to use a hash join based on cost, query characteristics, and resource availability\. If the cost estimation is incorrect, you can force the optimizer to choose a hash join\. You do so by setting `hash_join_cost_based`, a MySQL server variable, to `off`\. The following example illustrates how to force the optimizer to choose a hash join\.
 
 ```
@@ -200,9 +205,7 @@ mysql> SET optimizer_switch='hash_join_cost_based=off';
 ```
 
 **Note**  
- For Aurora MySQL version 3, hash join support is available in all minor versions and is turned on by default\.   
- For Aurora MySQL version 2, hash join support is available in version 2\.06 and higher\. In Aurora MySQL version 2, the hash join feature is always controlled by the `optimizer_switch` value\.   
- Prior to Aurora MySQL version 1\.22, the way to enable hash joins in Aurora MySQL version 1 is by enabling the `aurora_lab_mode` session\-level setting\. In those Aurora MySQL versions, the `optimizer_switch` setting for hash joins is enabled by default and you only need to enable `aurora_lab_mode`\. 
+This setting overrides the decisions of the cost\-based optimizer\. While the setting can be useful for testing and development, we recommend that you not use it in production\.
 
 #### Optimizing queries for hash joins<a name="Aurora.BestPractices.HashJoin.Optimizing"></a>
 
