@@ -49,12 +49,23 @@
 
 ## CLI<a name="aurora-serverless-v2-create.cli"></a>
 
- To create a DB cluster that's compatible with Aurora Serverless v2 DB instances using the AWS CLI, you follow the CLI procedure in [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\. Choose the following settings\. Make sure that your `create-db-cluster` command includes the following parameters: 
+ To create a DB cluster that's compatible with Aurora Serverless v2 DB instances using the AWS CLI, you follow the CLI procedure in [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\. Include the following parameters in your `create-db-cluster` command:
++ \-\-region *AWS\_Region\_where\_Aurora Serverless v2\_instances\_are\_available*
++ \-\-engine\-version *serverless\_v2\_compatible\_engine\_version*
++ \-\-serverless\-v2\-scaling\-configuration MinCapacity=*minimum\_capacity*,MaxCapacity=*maximum\_capacity* 
+
+The following example shows the creation of an Aurora Serverless v2 DB cluster\.
 
 ```
---region AWS_Region_where_Aurora Serverless v2_instances_are_available
--engine-version serverless_v2_compatible_engine_version
---serverless-v2-scaling-configuration MinCapacity=minimum_capacity,MaxCapacity=maximum_capacity
+aws rds create-db-cluster \
+    --db-cluster-identifier my-serverless-v2-cluster \
+    --region eu-central-1 \
+    --engine aurora-mysql
+    --engine-version 8.0.mysql_aurora.3.02.0 \
+    --serverless-v2-scaling-configuration MinCapacity=1,MaxCapacity=4 \
+    --master-username myuser \
+    --master-user-password mypassword \
+    --backup-retention 1
 ```
 
  For information about the Aurora Serverless v2 version requirements, see [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md)\. For information about the allowed numbers for the capacity range and what those numbers represent, see [Aurora Serverless v2 capacity](aurora-serverless-v2.how-it-works.md#aurora-serverless-v2.how-it-works.capacity) and [Performance and scaling for Aurora Serverless v2](aurora-serverless-v2.setting-capacity.md)\. 

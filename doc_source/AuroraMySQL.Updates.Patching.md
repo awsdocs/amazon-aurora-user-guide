@@ -27,21 +27,14 @@ If you're performing a minor upgrade on an Aurora global database, upgrade all o
 
 ## Enabling automatic upgrades between minor Aurora MySQL versions<a name="AuroraMySQL.Updates.AMVU"></a><a name="amvu"></a>
 
- For an Amazon Aurora MySQL DB cluster, you can specify that Aurora upgrades the DB cluster automatically to new minor versions as those versions are released\. You do so by enabling the automatic minor version upgrade property of the DB cluster using the AWS Management Console, AWS CLI, or the RDS API\. 
+ For an Amazon Aurora MySQL DB cluster, you can specify that Aurora upgrades the DB cluster automatically to new minor versions\. You do so by using the automatic minor version upgrade property of the DB cluster using the AWS Management Console, AWS CLI, or the RDS API\. 
 
  The automatic upgrades occur during the maintenance window for the database\. 
-
-**Important**  
- Until August 2020, you could specify this setting for a DB instance that was part of an Aurora MySQL DB cluster, but the setting had no effect\. Now, the setting does apply to Aurora MySQL\. If you have clusters created before August 2020, check whether the DB instances in the cluster already had the **Enable auto minor version upgrade** setting enabled\. If so, confirm that this setting is still appropriate and change it if not\. Aurora only performs the automatic upgrade if all DB instances in your cluster have this setting enabled\. 
-
- Automatic minor version upgrade applies also to clusters running the LTS version for Aurora MySQL 1\.x or 2\.x\. To prevent those clusters from being automatically upgraded, make sure to turn off the **Enable auto minor version upgrade** setting\. 
 
  Automatic minor version upgrade doesn't apply to the following kinds of Aurora MySQL clusters: 
 +  Multi\-master clusters\. 
 +  Clusters that are part of an Aurora global database\. 
 +  Clusters that have cross\-Region replicas\. 
-
- If any of the DB instances in a cluster don't have the auto minor version upgrade setting turned on, Aurora doesn't automatically upgrade any of the instances in that cluster\. Make sure to keep that setting consistent for all the DB instances in the cluster\. 
 
  The outage duration varies depending on workload, cluster size, the amount of binary log data, and if Aurora can use the zero\-downtime patching \(ZDP\) feature\. Aurora restarts the database cluster, so you might experience a short period of unavailability before resuming use of your cluster\. In particular, the amount of binary log data affects recovery time\. The DB instance processes the binary log data during recovery\. Thus, a high volume of binary log data increases recovery time\. 
 
@@ -75,7 +68,7 @@ aws rds describe-db-instances \
   --query '*[].{DBClusterIdentifier:DBClusterIdentifier,DBInstanceIdentifier:DBInstanceIdentifier,AutoMinorVersionUpgrade:AutoMinorVersionUpgrade}'
 ```
 
- That command produces output similar to the following\. 
+That command produces output similar to the following:
 
 ```
 [

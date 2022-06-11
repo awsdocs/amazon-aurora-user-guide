@@ -51,18 +51,28 @@ To display the volume status, see [Displaying volume status for an Aurora MySQL 
 
 **Topics**
 + [Storage auto\-repair](#Aurora.Overview.AutoRepair)
-+ [Survivable cache warming](#Aurora.Overview.CacheWarming)
++ [Survivable page cache](#Aurora.Overview.CacheWarming)
 + [Crash recovery](#Aurora.Overview.CrashRecovery)
 
 ### Storage auto\-repair<a name="Aurora.Overview.AutoRepair"></a>
 
  Because Aurora maintains multiple copies of your data in three Availability Zones, the chance of losing data as a result of a disk failure is greatly minimized\. Aurora automatically detects failures in the disk volumes that make up the cluster volume\. When a segment of a disk volume fails, Aurora immediately repairs the segment\. When Aurora repairs the disk segment, it uses the data in the other volumes that make up the cluster volume to ensure that the data in the repaired segment is current\. As a result, Aurora avoids data loss and reduces the need to perform a point\-in\-time restore to recover from a disk failure\. 
 
-### Survivable cache warming<a name="Aurora.Overview.CacheWarming"></a>
+### Survivable page cache<a name="Aurora.Overview.CacheWarming"></a>
 
- Aurora "warms" the buffer pool cache when a database starts up after it has been shut down or restarted after a failure\. That is, Aurora preloads the buffer pool with the pages for known common queries that are stored in an in\-memory page cache\. This provides a performance gain by bypassing the need for the buffer pool to "warm up" from normal database use\. 
+In Aurora, each DB instance's page cache is managed in a separate process from the database, which allows the page cache to survive independently of the database\. \(The page cache is also called the InnoDB *buffer pool* on Aurora MySQL and the *buffer cache* on Aurora PostgreSQL\.\)
 
- The Aurora page cache is managed in a separate process from the database, which allows the page cache to survive independently of the database\. In the unlikely event of a database failure, the page cache remains in memory, which ensures that the buffer pool is warmed with the most current state when the database restarts\. 
+In the unlikely event of a database failure, the page cache remains in memory, which keeps current data pages "warm" in the page cache when the database restarts\. This provides a performance gain by bypassing the need for the initial queries to execute read I/O operations to "warm up" the page cache\.
+
+For Aurora MySQL, page cache behavior when rebooting and failing over is the following:
++ Versions earlier than 2\.10 – When the writer DB instance reboots, the page cache on the writer instance survives, but reader DB instances lose their page caches\.
++ Version 2\.10 and higher – You can reboot the writer instance without rebooting the reader instances\.
+  + If the reader instances don't reboot when the writer instance reboots, they don't lose their page caches\.
+  + If the reader instances reboot when the writer instance reboots, they do lose their page caches\.
++ When a reader instance reboots, the page caches on the writer and reader instances both survive\.
++ When the DB cluster fails over, the effect is similar to when a writer instance reboots\. On the new writer instance \(previously the reader instance\) the page cache survives, but on the reader instance \(previously the writer instance\), the page cache doesn't survive\.
+
+For Aurora PostgreSQL, you can use cluster cache management to preserve the page cache of a designated reader instance that becomes the writer instance after failover\. For more information, see [Fast recovery after failover with cluster cache management for Aurora PostgreSQL](AuroraPostgreSQL.cluster-cache-mgmt.md)\.
 
 ### Crash recovery<a name="Aurora.Overview.CrashRecovery"></a>
 

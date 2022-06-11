@@ -695,7 +695,7 @@ If the encrypted cluster that you plan to share uses the default RDS key, make s
            "kms:CreateGrant",
            "kms:Encrypt",
            "kms:Decrypt",
-           "kms:ReEncrypt",
+           "kms:ReEncrypt*",
            "kms:GenerateDataKey*",
            "kms:DescribeKey"
          ],
@@ -756,7 +756,7 @@ You can create DB instances only after the `restore-db-cluster-to-point-in-time`
            "kms:CreateGrant",
            "kms:Encrypt",
            "kms:Decrypt",
-           "kms:ReEncrypt",
+           "kms:ReEncrypt*",
            "kms:GenerateDataKey*",
            "kms:DescribeKey"
          ],

@@ -17,7 +17,7 @@ For more information on MySQL read replicas, see [ Working with read replicas of
 
 ## Creating an Aurora read replica<a name="AuroraMySQL.Migrating.RDSMySQL.Replica.Create"></a>
 
-You can create an Aurora read replica for a MySQL DB instance by using the console or the AWS CLI\.
+You can create an Aurora read replica for a MySQL DB instance by using the console, the AWS CLI, or the RDS API\.
 
 ### Console<a name="AuroraMySQL.Migrating.RDSMySQL.Replica.Create.Console"></a>
 
@@ -226,7 +226,9 @@ aws rds describe-db-instances ^
 
 ## Promoting an Aurora read replica<a name="AuroraMySQL.Migrating.RDSMySQL.Replica.Promote"></a>
 
-After migration completes, you can promote the Aurora read replica to a stand\-alone DB cluster and direct your client applications to the endpoint for the Aurora read replica\. For more information on the Aurora endpoints, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\. Promotion should complete fairly quickly, and you can read from and write to the Aurora read replica during promotion\. However, you can't delete the primary MySQL DB instance or unlink the DB Instance and the Aurora read replica during this time\.
+After migration completes, you can promote the Aurora read replica to a stand\-alone DB cluster using the AWS Management Console or AWS CLI\.
+
+Then you can direct your client applications to the endpoint for the Aurora read replica\. For more information on the Aurora endpoints, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\. Promotion should complete fairly quickly, and you can read from and write to the Aurora read replica during promotion\. However, you can't delete the primary MySQL DB instance or unlink the DB Instance and the Aurora read replica during this time\.
 
 Before you promote your Aurora read replica, stop any transactions from being written to the source MySQL DB instance, and then wait for the replica lag on the Aurora read replica to reach 0\. You can view the replica lag for an Aurora read replica by calling the `SHOW SLAVE STATUS` \(Aurora MySQL version 1 and 2\) or `SHOW REPLICA STATUS` \(Aurora MySQL version 3\) command on your Aurora read replica\. Check the **Seconds behind master** value\. 
 

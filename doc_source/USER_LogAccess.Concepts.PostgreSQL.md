@@ -34,9 +34,9 @@ By logging information for various categories such as shown in the list, you can
 
 ### Parameters that affect logging behavior<a name="USER_LogAccess.Concepts.PostgreSQL.overview.parameter-groups"></a>
 
-Each Aurora PostgreSQL instance has a *parameter group* that specifies its configuration, including various aspects of logging\. The default parameter group settings apply to every Aurora PostgreSQL DB cluster in a given AWS Region\. You can't change the defaults because they apply to all instances of a given engine, even those that aren't yours\. To modify any parameter values, you create a custom parameter group and modify its settings\. For example, to set or change logging parameters, you make changes in the custom parameter group associated with your Aurora PostgreSQL DB cluster \. To learn how, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
+Each Aurora PostgreSQL instance has a *parameter group* that specifies its configuration, including various aspects of logging\. The default parameter group settings apply to every Aurora PostgreSQL DB cluster in a given AWS Region\. You can't change the defaults because they apply to all instances of a given engine, even those that aren't yours\. To modify any parameter values, you create a custom parameter group and modify its settings\. For example, to set or change logging parameters, you make changes in the custom parameter group associated with your Aurora PostgreSQL DB cluster\. To learn how, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
-For an Aurora PostgreSQL DB cluster , the parameters that affect logging behavior include the following:
+For an Aurora PostgreSQL DB cluster, the parameters that affect logging behavior include the following:
 + `rds.log_retention_period` – PostgreSQL logs that are older than the specified number of minutes are deleted\. The default value of 4320 minutes deletes log files after 3 days\. For more information, see [Setting the log retention period](#USER_LogAccess.Concepts.PostgreSQL.log_retention_period)\. 
 + `log_rotation_age` – Specifies number of minutes after which Amazon RDS automatically rotates the logs\. The default is 60 minutes, but you can specify anywhere from 1 to 1440 minutes\. For more information, see [Setting log file rotation](#USER_LogAccess.Concepts.PostgreSQL.log_rotation)\. 
 + `log_rotation_size` – Sets the size, in kilobytes, at which the Amazon RDS should automatically rotate the logs\. There is no value by default because the logs are rotated based on age alone, as specified by the `log_rotation_age` parameter\. For more information, see [Setting log file rotation](#USER_LogAccess.Concepts.PostgreSQL.log_rotation)\.
@@ -62,7 +62,7 @@ If there's not enough storage, Aurora might delete compressed PostgreSQL logs be
 The oldest PostgreSQL log files were deleted due to local storage constraints.
 ```
 
-We recommend that you have your logs routinely published to Amazon CloudWatch Logs, so you can view and analyze system data long after the logs have been removed from your Aurora PostgreSQL DB cluster \. For more information, see [Publishing Aurora PostgreSQL logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)\. After you set up CloudWatch publishing, Aurora doesn't delete a log until after it's published to CloudWatch Logs\.  
+We recommend that you have your logs routinely published to Amazon CloudWatch Logs, so you can view and analyze system data long after the logs have been removed from your Aurora PostgreSQL DB cluster\. For more information, see [Publishing Aurora PostgreSQL logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)\. After you set up CloudWatch publishing, Aurora doesn't delete a log until after it's published to CloudWatch Logs\.  
 
 ### Setting log file rotation<a name="USER_LogAccess.Concepts.PostgreSQL.log_rotation"></a>
 
@@ -70,13 +70,14 @@ New log files are created by Aurora every hour by default\. The timing is contro
 
 Log files can also be rotated according to their size, as specified in the `log_rotation_size` parameter\. This parameter specifies that the log should be rotated when it reaches the size \(in kilobytes\)\. The default `log_rotation_size` is 100000 kB \(kilobytes\) for an Aurora PostgreSQL DB cluster, but you can set this to anywhere from 50,000 to 1,000,000 kilobytes\. 
 
-The log file names are based on the file name pattern of the [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-FILENAME](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-FILENAME) parameter\. You can specify file names per hour or per minute, as follows:
-+ `postgresql.log.%Y-%m-%d-%H%M` – Minute format for log file name\. Sets the granularity of the log to less than an hour\. Supported by PostgreSQL version and higher only\. 
+The log file names are based on the file name pattern specified in the `log_filename` parameter\. The available settings for this parameter are as follows:
++ `postgresql.log.%Y-%m-%d` – Default format for the log file name\. Includes the year, month, and date\.
 + `postgresql.log.%Y-%m-%d-%H` – Hour format for log file name\. Sets the granularity of log to hours\.
++ `postgresql.log.%Y-%m-%d-%H%M` – Minute format for log file name\. Sets the granularity of the log to less than an hour\.
 
 If you set `log_rotation_age` parameter to less than 60 minutes, be sure to also set the `log_filename` parameter to the minute format\.
 
-For more information, see [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE) and [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE) in the *PostgreSQL documentation*\.
+For more information, see [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE) and [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE) in the PostgreSQL documentation\.
 
 ### Setting the log destination<a name="USER_LogAccess.Concepts.PostgreSQL.Log_Format"></a>
 

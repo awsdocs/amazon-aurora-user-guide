@@ -2,6 +2,9 @@
 
 You can view database log files for your Amazon Aurora DB engine by using the AWS Management Console\. You can list what log files are available for download or monitoring by using the AWS CLI or Amazon RDS API\. 
 
+**Note**  
+You can't view the log files for Aurora Serverless v1 DB clusters in the RDS console\. However, you can view them in the Amazon CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
+
 ## Console<a name="USER_LogAccess.CON"></a>
 
 **To view a database log file**

@@ -44,8 +44,8 @@
 |   `aurora_enable_replica_log_compression`   |   Yes   |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\. Removed from Aurora MySQL version 3\.   | 
 |   `aurora_enable_repl_bin_log_filtering`   |   Yes   |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\. Removed from Aurora MySQL version 3\.   | 
 |   `aurora_enable_zdr`   |   Yes   |   This setting is turned on by default in Aurora MySQL 2\.10 and higher\. For more information, see [Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Availability)\.   | 
-|   `aurora_load_from_s3_role`   |   Yes   |   For more information, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\. Currently not available in Aurora MySQL version 3\.   | 
-|   `aurora_select_into_s3_role`   |   Yes   |   For more information, see [Saving data from an Amazon Aurora MySQL DB cluster into text files in an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\. Currently not available in Aurora MySQL version 3\.   | 
+|   `aurora_load_from_s3_role`   |   Yes   |   For more information, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\. Currently not available in Aurora MySQL version 3\. Use `aws_default_s3_role`\.  | 
+|   `aurora_select_into_s3_role`   |   Yes   |   For more information, see [Saving data from an Amazon Aurora MySQL DB cluster into text files in an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\. Currently not available in Aurora MySQL version 3\. Use `aws_default_s3_role`\.  | 
 |   `auto_increment_increment`   |   Yes   |    | 
 |   `auto_increment_offset`   |   Yes   |    | 
 |   `aws_default_lambda_role`   |   Yes   |   For more information, see [Invoking a Lambda function from an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Lambda.md)\.   | 
@@ -82,6 +82,7 @@
 |   `innodb_cmp_per_index_enabled`   |   Yes   |    | 
 |   `innodb_commit_concurrency`   |   Yes   |    | 
 |   `innodb_data_home_dir`   |   No   |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
+|   `innodb_deadlock_detect`   |  Yes  |  This option is used to disable deadlock detection on Aurora MySQL version 3\. On high\-concurrency systems, deadlock detection can cause a slowdown when numerous threads wait for the same lock\. Consult the MySQL documentation for more information on this parameter\.  | 
 |   `innodb_file_per_table`   |   Yes   |    | 
 |   `innodb_flush_log_at_trx_commit`   |   Yes \(Aurora MySQL version 1 and 2\), No \(Aurora MySQL version 3\)   |   For Aurora MySQL version 3, Aurora always uses the default value of 1\.   | 
 |   `innodb_ft_max_token_size`   |   Yes   |    | 
@@ -202,6 +203,7 @@
 |   `innodb_compression_level`   |   Yes   |    | 
 |   `innodb_compression_pad_pct_max`   |   Yes   |    | 
 |   `innodb_concurrency_tickets`   |   Yes   |   Modifying this parameter has no effect, because `innodb_thread_concurrency` is always 0 for Aurora\.   | 
+|   `innodb_deadlock_detect`   |  Yes  |  This option is used to disable deadlock detection on Aurora MySQL version 3\. On high\-concurrency systems, deadlock detection can cause a slowdown when numerous threads wait for the same lock\. Consult the MySQL documentation for more information on this parameter\.  | 
 |   `innodb_file_format`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
 |   `innodb_flush_log_at_timeout`   |   No   |    | 
 |   `innodb_flushing_avg_loops`   |   No   |    | 
@@ -439,7 +441,7 @@
  Because of architectural differences between Aurora MySQL and MySQL, some MySQL parameters don't apply to Aurora MySQL\. 
 
  The following MySQL parameters don't apply to Aurora MySQL\. This list is not exhaustive\. 
-+  `activate_all_roles_on_login`\. This parameter isn't applicable to Aurora MySQL version 1 and 2\. It is available in Aurora MySQL version 3\. 
++  `activate_all_roles_on_login`\. This parameter isn't applicable to Aurora MySQL version 1 and 2\. It is available in Aurora MySQL version 3\.
 +  `big_tables` 
 +  `bind_address` 
 +  `character_sets_dir` 
@@ -448,7 +450,7 @@
 +  `innodb_change_buffering` 
 +  `innodb_checksum_algorithm` 
 +  `innodb_data_file_path` 
-+  `innodb_deadlock_detect` 
++  `innodb_deadlock_detect`\. This parameter isn't applicable to Aurora MySQL version 1 and 2\. It is available in Aurora MySQL version 3\.
 +  `innodb_dedicated_server` 
 +  `innodb_doublewrite` 
 +  `innodb_flush_method` 

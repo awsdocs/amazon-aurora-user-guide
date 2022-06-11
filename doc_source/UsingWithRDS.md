@@ -34,7 +34,7 @@ For more information on managing access to Amazon Aurora resources and your data
 **Topics**
 + [Database authentication with Amazon Aurora](database-authentication.md)
 + [Data protection in Amazon RDS](DataDurability.md)
-+ [Identity and access management in Amazon Aurora](UsingWithRDS.IAM.md)
++ [Identity and access management for Amazon Aurora](UsingWithRDS.IAM.md)
 + [Logging and monitoring in Amazon Aurora](Overview.LoggingAndMonitoring.md)
 + [Compliance validation for Amazon Aurora](RDS-compliance.md)
 + [Resilience in Amazon Aurora](disaster-recovery-resiliency.md)

@@ -19,7 +19,9 @@ Before you can save data into an Amazon S3 bucket, you must first give your Auro
 
 1. Create an IAM role, and attach the IAM policy you created in [Creating an IAM policy to access Amazon S3 resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md) to the new IAM role\. For instructions, see [Creating an IAM role to allow Amazon Aurora to access AWS services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.
 
-1. Set either the `aurora_select_into_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aurora_select_into_s3_role`, Aurora uses the IAM role specified in `aws_default_s3_role`\.
+1. For Aurora MySQL version 1 or 2, set either the `aurora_select_into_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aurora_select_into_s3_role`, Aurora uses the IAM role specified in `aws_default_s3_role`\.
+
+   For Aurora MySQL version 3, use `aws_default_s3_role`\.
 
    If the cluster is part of an Aurora global database, set this parameter for each Aurora cluster in the global database\.
 

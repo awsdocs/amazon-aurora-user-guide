@@ -126,7 +126,7 @@ You can't create an unencrypted Aurora PostgreSQL DB cluster from an encrypted D
 1. The command returns details about the Aurora PostgreSQL DB cluster that's being created for the migration\. You can check the status of the Aurora PostgreSQL DB cluster by using the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clussters.html) AWS CLI command\.
 
    ```
-   aws rds describe-db-clusters --db-cluster-idenfifier cluster-name
+   aws rds describe-db-clusters --db-cluster-identifier cluster-name
    ```
 
 1. When the DB cluster becomes "available", you use [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command to populate the Aurora PostgreSQL DB cluster with the DB instance based on your Amazon RDS DB snapshot\. Specify the following parameters:

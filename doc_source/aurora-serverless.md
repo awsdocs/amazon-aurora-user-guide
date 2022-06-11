@@ -59,6 +59,7 @@
   +  Backtracking in Aurora 
   +  Database activity streams 
   +  Performance Insights 
+  + Viewing logs in the AWS Management Console
 +  Connections to an Aurora Serverless v1 DB cluster are closed automatically if held open for longer than one day\. 
 +  All Aurora Serverless v1 DB clusters have the following limitations: 
   +  You can't export Aurora Serverless v1 snapshots to Amazon S3 buckets\. 

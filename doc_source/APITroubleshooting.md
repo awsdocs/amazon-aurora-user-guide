@@ -6,7 +6,7 @@ Amazon RDS provides specific and descriptive errors to help you troubleshoot pro
 + [Retrieving errors](#RetrievingErrors)
 + [Troubleshooting tips](#TroubleshootingTipss)
 
- For information about troubleshooting for Amazon RDS DB instances, see [Troubleshooting for Aurora](CHAP_Troubleshooting.md)\. 
+ For information about troubleshooting for Amazon RDS DB instances, see [Troubleshooting for Amazon Aurora](CHAP_Troubleshooting.md)\. 
 
 ## Retrieving errors<a name="RetrievingErrors"></a>
 

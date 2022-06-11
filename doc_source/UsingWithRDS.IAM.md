@@ -1,13 +1,17 @@
-# Identity and access management in Amazon Aurora<a name="UsingWithRDS.IAM"></a>
+# Identity and access management for Amazon Aurora<a name="UsingWithRDS.IAM"></a>
 
-AWS Identity and Access Management \(IAM\) is an AWS service that helps an administrator securely control access to AWS resources\. IAM administrators control who can be *authenticated* \(signed in\) and *authorized* \(have permissions\) to use Aurora resources\. IAM is an AWS service that you can use with no additional charge\.
+
+
+
+
+AWS Identity and Access Management \(IAM\) is an AWS service that helps an administrator securely control access to AWS resources\. IAM administrators control who can be *authenticated* \(signed in\) and *authorized* \(have permissions\) to use Amazon RDS resources\. IAM is an AWS service that you can use with no additional charge\.
 
 **Topics**
 + [Audience](#security_iam_audience)
 + [Authenticating with identities](#security_iam_authentication)
 + [Managing access using policies](#security_iam_access-manage)
 + [How Amazon Aurora works with IAM](security_iam_service-with-iam.md)
-+ [Amazon Aurora identity\-based policy examples](security_iam_id-based-policy-examples.md)
++ [Identity\-based policy examples for Amazon Aurora](security_iam_id-based-policy-examples.md)
 + [AWS managed policies for Amazon RDS](rds-security-iam-awsmanpol.md)
 + [Amazon RDS updates to AWS managed policies](rds-manpol-updates.md)
 + [Preventing cross\-service confused deputy problems](cross-service-confused-deputy-prevention.md)
@@ -16,13 +20,13 @@ AWS Identity and Access Management \(IAM\) is an AWS service that helps an admin
 
 ## Audience<a name="security_iam_audience"></a>
 
-How you use AWS Identity and Access Management \(IAM\) differs, depending on the work you do in Aurora\.
+How you use AWS Identity and Access Management \(IAM\) differs, depending on the work you do in Amazon Aurora\.
 
 **Service user** – If you use the Aurora service to do your job, then your administrator provides you with the credentials and permissions that you need\. As you use more Aurora features to do your work, you might need additional permissions\. Understanding how access is managed can help you request the right permissions from your administrator\. If you cannot access a feature in Aurora, see [Troubleshooting Amazon Aurora identity and access](security_iam_troubleshoot.md)\.
 
 **Service administrator** – If you're in charge of Aurora resources at your company, you probably have full access to Aurora\. It's your job to determine which Aurora features and resources your employees should access\. You must then submit requests to your IAM administrator to change the permissions of your service users\. Review the information on this page to understand the basic concepts of IAM\. To learn more about how your company can use IAM with Aurora, see [How Amazon Aurora works with IAM](security_iam_service-with-iam.md)\.
 
-**IAM administrator** – If you're an IAM administrator, you might want to learn details about how you can write policies to manage access to Aurora\. To view example Aurora identity\-based policies that you can use in IAM, see [Amazon Aurora identity\-based policy examples](security_iam_id-based-policy-examples.md)\.
+**IAM administrator** – If you're an IAM administrator, you might want to learn details about how you can write policies to manage access to Aurora\. To view example Aurora identity\-based policies that you can use in IAM, see [Identity\-based policy examples for Amazon Aurora](security_iam_id-based-policy-examples.md)\.
 
 ## Authenticating with identities<a name="security_iam_authentication"></a>
 
@@ -58,7 +62,10 @@ IAM roles with temporary credentials are useful in the following situations:
 + **Temporary IAM user permissions** – An IAM user can assume an IAM role to temporarily take on different permissions for a specific task\. 
 + **Federated user access** –  Instead of creating an IAM user, you can use existing identities from AWS Directory Service, your enterprise user directory, or a web identity provider\. These are known as *federated users*\. AWS assigns a role to a federated user when access is requested through an [identity provider](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html)\. For more information about federated users, see [Federated users and roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_access-management.html#intro-access-roles) in the *IAM User Guide*\. 
 + **Cross\-account access** – You can use an IAM role to allow someone \(a trusted principal\) in a different account to access resources in your account\. Roles are the primary way to grant cross\-account access\. However, with some AWS services, you can attach a policy directly to a resource \(instead of using a role as a proxy\)\. To learn the difference between roles and resource\-based policies for cross\-account access, see [How IAM roles differ from resource\-based policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html) in the *IAM User Guide*\.
-+ **AWS service access** –  A service role is an [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) that a service assumes to perform actions on your behalf\. An IAM administrator can create, modify, and delete a service role from within IAM\. For more information, see [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\. 
++ **Cross\-service access** –  Some AWS services use features in other AWS services\. For example, when you make a call in a service, it's common for that service to run applications in Amazon EC2 or store objects in Amazon S3\. A service might do this using the calling principal's permissions, using a service role, or using a service\-linked role\. 
+  + **Principal permissions** –  When you use an IAM user or role to perform actions in AWS, you are considered a principal\. Policies grant permissions to a principal\. When you use some services, you might perform an action that then triggers another action in a different service\. In this case, you must have permissions to perform both actions\. To see whether an action requires additional dependent actions in a policy, see [Actions, Resources, and Condition Keys for Amazon RDS](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonrds.html.html) in the *Service Authorization Reference*\. 
+  + **Service role** –  A service role is an [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) that a service assumes to perform actions on your behalf\. An IAM administrator can create, modify, and delete a service role from within IAM\. For more information, see [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\. 
+  + **Service\-linked role** –  A service\-linked role is a type of service role that is linked to an AWS service\. The service can assume the role to perform an action on your behalf\. Service\-linked roles appear in your IAM account and are owned by the service\. An IAM administrator can view, but not edit the permissions for service\-linked roles\. 
 + **Applications running on Amazon EC2** –  You can use an IAM role to manage temporary credentials for applications that are running on an EC2 instance and making AWS CLI or AWS API requests\. This is preferable to storing access keys within the EC2 instance\. To assign an AWS role to an EC2 instance and make it available to all of its applications, you create an instance profile that is attached to the instance\. An instance profile contains the role and enables programs that are running on the EC2 instance to get temporary credentials\. For more information, see [Using an IAM role to grant permissions to applications running on Amazon EC2 instances](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) in the *IAM User Guide*\. 
 
 To learn whether to use IAM roles, see [When to create an IAM role \(instead of a user\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html#id_which-to-choose_role) in the *IAM User Guide*\.
@@ -77,9 +84,7 @@ Identity\-based policies are JSON permissions policy documents that you can atta
 
 Identity\-based policies can be further categorized as *inline policies* or *managed policies*\. Inline policies are embedded directly into a single user, group, or role\. Managed policies are standalone policies that you can attach to multiple users, groups, and roles in your AWS account\. Managed policies include AWS managed policies and customer managed policies\. To learn how to choose between a managed policy or an inline policy, see [Choosing between managed policies and inline policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#choosing-managed-or-inline) in the *IAM User Guide*\.
 
-The following AWS managed policies, which you can attach to users in your account, are specific to Amazon Aurora:
-+ **AmazonRDSReadOnlyAccess** – Grants read\-only access to all Amazon Aurora resources for the AWS account specified\.
-+ **AmazonRDSFullAccess** – Grants full access to all Amazon Aurora resources for the AWS account specified\.
+For information about AWS managed policies that are specific to Amazon Aurora, see [AWS managed policies for Amazon RDS](rds-security-iam-awsmanpol.md)\.
 
 ### Other policy types<a name="security_iam_access-manage-other-policies"></a>
 
@@ -91,7 +96,3 @@ AWS supports additional, less\-common policy types\. These policy types can set 
 ### Multiple policy types<a name="security_iam_access-manage-multiple-policies"></a>
 
 When multiple types of policies apply to a request, the resulting permissions are more complicated to understand\. To learn how AWS determines whether to allow a request when multiple policy types are involved, see [Policy evaluation logic](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html) in the *IAM User Guide*\.
-
-For more information about identity and access management for Aurora, continue to the following pages:
-+ [How Amazon Aurora works with IAM](security_iam_service-with-iam.md)
-+ [Troubleshooting Amazon Aurora identity and access](security_iam_troubleshoot.md)

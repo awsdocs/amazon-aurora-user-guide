@@ -2,6 +2,8 @@
 
 The `synch/mutex/innodb/aurora_lock_thread_slot_futex` event occurs when one session has locked a row for an update, and another session tries to update the same row\. For more information, see [InnoDB locking](https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html) in the *MySQL Reference*\.
 
+
+
 ## Supported engine versions<a name="ams-waits.waitsynch.versions"></a>
 
 This wait event information is supported for the following engine versions:

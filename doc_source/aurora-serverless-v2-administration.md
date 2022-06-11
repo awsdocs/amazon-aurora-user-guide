@@ -146,11 +146,28 @@ $ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-64-acu-clus
 
 ## Creating an Aurora Serverless v2 writer<a name="aurora-serverless-v2-adding-writer"></a>
 
+### Console<a name="aurora-serverless-v2-adding-writer.CON"></a>
+
  When you create a cluster using the AWS Management Console, you specify the properties of the writer DB instance at the same time\. To make the writer DB instance use Aurora Serverless v2, choose the **Serverless** DB instance class\. Then you set the capacity range for the cluster by specifying the minimum and maximum Aurora capacity unit \(ACU\) values\. These minimum and maximum values apply to each Aurora Serverless v2 DB instance in the cluster\. 
 
 ![\[User interface for instance configuration\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/serverless_v2_screencaps/serverless_v2_capacity_settings_settable_for_add_reader_modify_instance.png)
 
  If you don't create an Aurora Serverless v2 DB instance when you first create the cluster, you can add one or more Aurora Serverless v2 DB instances later\. To do so, follow the procedures in [Adding an Aurora Serverless v2 reader](#aurora-serverless-v2-adding-reader) and [Converting a provisioned writer or reader to Aurora Serverless v2](#aurora-serverless-v2-converting-from-provisioned)\. You specify the capacity range at the time that you add the first Aurora Serverless v2 DB instance to the cluster\. You can change the capacity range later by following the procedure in [Setting the Aurora Serverless v2 capacity range for a cluster](#aurora-serverless-v2-setting-acus)\. 
+
+### CLI<a name="aurora-serverless-v2-adding-writer.CLI"></a>
+
+When you create a Aurora Serverless v2 DB cluster using the AWS CLI, you explicitly add the writer DB instance using the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command\. Include the following parameter:
++ `--db-instance-class db.serverless`
+
+The following example shows the creation of an Aurora Serverless v2 writer DB instance\.
+
+```
+aws rds create-db-instance \
+    --db-cluster-identifier my-serverless-v2-cluster \
+    --db-instance-identifier my-serverless-v2-instance \
+    --db-instance-class db.serverless \
+    --engine aurora-mysql
+```
 
 ## Adding an Aurora Serverless v2 reader<a name="aurora-serverless-v2-adding-reader"></a>
 

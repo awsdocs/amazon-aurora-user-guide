@@ -22,7 +22,9 @@ Before you can load data from an Amazon S3 bucket, you must first give your Auro
 
    For more information about creating a custom DB cluster parameter group, see [Creating a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\.
 
-1. Set either the `aurora_load_from_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aurora_load_from_s3_role`, Aurora uses the IAM role specified in `aws_default_s3_role`\.
+1. For Aurora MySQL version 1 or 2, set either the `aurora_load_from_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aurora_load_from_s3_role`, Aurora uses the IAM role specified in `aws_default_s3_role`\.
+
+   For Aurora MySQL version 3, use `aws_default_s3_role`\.
 
    If the cluster is part of an Aurora global database, set this parameter for each Aurora cluster in the global database\. Although only the primary cluster in an Aurora global database can load data, another cluster might be promoted by the failover mechanism and become the primary cluster\.
 

@@ -7,14 +7,14 @@ Aurora PostgreSQL collects SQL statistics only at the digest level\. No statisti
 + [Per\-second digest statistics for Aurora PostgreSQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL.per-second)
 + [Per\-call digest statistics for Aurora PostgreSQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL.per-call)
 
-### Digest statistics for Aurora PostgreSQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL.digest"></a>
+## Digest statistics for Aurora PostgreSQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL.digest"></a>
 
 To view SQL digest statistics, the `pg_stat_statements` library must be loaded\. For Aurora PostgreSQL DB clusters that are compatible with PostgreSQL 10, this library is loaded by default\. For Aurora PostgreSQL DB clusters that are compatible with PostgreSQL 9\.6, you enable this library manually\. To enable it manually, add `pg_stat_statements` to `shared_preload_libraries` in the DB parameter group associated with the DB instance\. Then reboot your DB instance\. For more information, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 **Note**  
 Performance Insights can only collect statistics for queries in `pg_stat_activity` that aren't truncated\. By default, PostgreSQL databases truncate queries longer than 1,024 bytes\. To increase the query size, change the `track_activity_query_size` parameter in the DB parameter group associated with your DB instance\. When you change this parameter, a DB instance reboot is required\.
 
-### Per\-second digest statistics for Aurora PostgreSQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL.per-second"></a>
+## Per\-second digest statistics for Aurora PostgreSQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL.per-second"></a>
 
 The following SQL digest statistics are available for Aurora PostgreSQL DB instances\.
 
@@ -37,7 +37,7 @@ The following SQL digest statistics are available for Aurora PostgreSQL DB insta
 | db\.sql\_tokenized\.stats\.blk\_read\_time\_per\_sec | Average concurrent reads per second | 
 | db\.sql\_tokenized\.stats\.blk\_write\_time\_per\_sec | Average concurrent writes per second | 
 
-### Per\-call digest statistics for Aurora PostgreSQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL.per-call"></a>
+## Per\-call digest statistics for Aurora PostgreSQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL.per-call"></a>
 
 The following metrics provide per call statistics for a SQL statement\.
 

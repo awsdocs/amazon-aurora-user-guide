@@ -1,6 +1,6 @@
-# Troubleshooting for Aurora<a name="CHAP_Troubleshooting"></a>
+# Troubleshooting for Amazon Aurora<a name="CHAP_Troubleshooting"></a>
 
-Use the following sections to help troubleshoot problems you have with DB instances in Amazon RDS and Aurora\.
+Use the following sections to help troubleshoot problems you have with DB instances in Amazon RDS and Amazon Aurora\.
 
 **Topics**
 + [Can't connect to Amazon RDS DB instance](#CHAP_Troubleshooting.Connecting)
@@ -8,6 +8,7 @@ Use the following sections to help troubleshoot problems you have with DB instan
 + [Resetting the DB instance owner password](#CHAP_Troubleshooting.ResetPassword)
 + [Amazon RDS DB instance outage or reboot](#CHAP_Troubleshooting.Reboots)
 + [Amazon RDS DB parameter changes not taking effect](#CHAP_Troubleshooting.Parameters)
++ [Freeable memory issues in Amazon Aurora](#Troubleshooting.FreeableMemory)
 + [Amazon Aurora MySQL out of memory issues](#CHAP_Troubleshooting.AuroraMySQLOOM)
 + [Amazon Aurora MySQL replication issues](#CHAP_Troubleshooting.MySQL)
 
@@ -125,6 +126,24 @@ When you change a static parameter in a DB parameter group, the change doesn't t
 In some cases, you might change a parameter in a DB parameter group but don't see the changes take effect\. If so, you likely need to reboot the DB instance associated with the DB parameter group\. When you change a dynamic parameter, the change takes effect immediately\. When you change a static parameter, the change doesn't take effect until you reboot the DB instance associated with the parameter group\.
 
 You can reboot a DB instance using the RDS console or explicitly calling the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) API operation \(without failover, if the DB instance is in a Multi\-AZ deployment\)\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call\. An example of this might be calling `ModifyDBInstance` to change the DB instance class\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+
+## Freeable memory issues in Amazon Aurora<a name="Troubleshooting.FreeableMemory"></a>
+
+*Freeable memory* is the total random access memory \(RAM\) on a DB instance that can be made available to the database engine\. It's the sum of the free operating\-system \(OS\) memory and the available buffer and page cache memory\. The database engine uses most of the memory on the host, but OS processes also use some RAM\. Memory currently allocated to the database engine or used by OS processes isn't included in freeable memory\. When the database engine is running out of memory, the DB instance can use the temporary space that is normally used for buffering and caching\. As previously mentioned, this temporary space is included in freeable memory\.
+
+You use the `FreeableMemory` metric in Amazon CloudWatch to monitor the freeable memory\. For more information, see [Overview of monitoring metrics in Amazon Aurora](MonitoringOverview.md)\.
+
+If your DB instance consistently runs low on freeable memory or uses swap space, you might need to scale up to a larger DB instance class\. For more information, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
+
+You can also change the memory settings\. For example, on Aurora MySQL , you might adjust the size of the `innodb_buffer_pool_size` parameter\. This parameter is set by default to 75 percent of physical memory\. For more MySQL troubleshooting tips, see [How can I troubleshoot low freeable memory in an Amazon RDS for MySQL database?](https://aws.amazon.com/premiumsupport/knowledge-center/low-freeable-memory-rds-mysql-mariadb/)
+
+For Aurora Serverless v2, `FreeableMemory` represents the amount of unused memory that's available when the Aurora Serverless v2 DB instance is scaled to its maximum capacity\. You might have the instance scaled down to relatively low capacity, but it still reports a high value for `FreeableMemory`, because the instance can scale up\. That memory isn't available right now, but you can get it if you need it\.
+
+For every Aurora capacity unit \(ACU\) that the current capacity is below the maximum capacity, `FreeableMemory` increases by approximately 2 GiB\. Thus, this metric doesn't approach zero until the DB instance is scaled up as high as it can\.
+
+If this metric approaches a value of `0`, the DB instance has scaled up as much as it can and is nearing the limit of its available memory\. Consider increasing the maximum ACU setting for the cluster\. If this metric approaches a value of `0` on a reader DB instance, consider adding additional reader DB instances to the cluster\. That way, the read\-only part of the workload can be spread across more DB instances, reducing the memory usage on each reader DB instance\. For more information, see [Important Amazon CloudWatch metrics for Aurora Serverless v2](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.viewing.monitoring)\.
+
+For Aurora Serverless v1, you can change the capacity range to use more ACUs\. For more information, see [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\.
 
 ## Amazon Aurora MySQL out of memory issues<a name="CHAP_Troubleshooting.AuroraMySQLOOM"></a>
 

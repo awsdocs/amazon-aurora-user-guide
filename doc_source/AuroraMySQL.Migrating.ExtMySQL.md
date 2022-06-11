@@ -21,6 +21,8 @@ Aurora MySQL doesn't restore everything from your database\. You should save the
 
 You can't restore from an encrypted source database, but you can encrypt the data being migrated\. You can also leave the data unencrypted during the migration process\.
 
+You can't restore to an Aurora Serverless DB cluster\.
+
  You can't migrate from a source database that has tables defined outside of the default MySQL data directory\.
 
 Also, decide whether you want to minimize downtime by using binary log replication during the migration process\. If you use binary log replication, the external MySQL database remains open to transactions while the data is being migrated to the Aurora MySQL DB cluster\. After the Aurora MySQL DB cluster has been created, you use binary log replication to synchronize the Aurora MySQL DB cluster with the transactions that happened after the backup\. When the Aurora MySQL DB cluster is caught up with the MySQL database, you finish the migration by completely switching to the Aurora MySQL DB cluster for new transactions\.
@@ -166,25 +168,25 @@ For information on creating and uploading a file to an Amazon S3 bucket, see [Ge
 
 #### Backup considerations<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup.Considerations"></a>
 
-When you upload a file to an Amazon S3 bucket, you can use server\-side encryption to encrypt the data\. You can then restore an Amazon Aurora MySQL DB cluster from those encrypted files\. Amazon Aurora MySQL can restore a DB cluster with files encrypted using the following types of server\-side encryption:
-+ Server\-side encryption with Amazon S3–managed keys \(SSE\-S3\) – Each object is encrypted with a unique key employing strong multifactor encryption\.
-+ Server\-side encryption with AWS KMS–managed keys \(SSE\-KMS\) – Similar to SSE\-S3, but you have the option to create and manage encryption keys yourself, and also other differences\.
-
-For information about using server\-side encryption when uploading files to an Amazon S3 bucket, see [Protecting data using server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) in the *Amazon S3 Developer Guide*\.
-
-Amazon S3 limits the size of a file uploaded to an Amazon S3 bucket to 5 TB\. If the backup data for your database exceeds 5 TB, use the `split` command to split the backup files into multiple files that are each less than 5 TB\.
-
-Aurora limits the number of source files uploaded to an Amazon S3 bucket to 1 million files\. In some cases, backup data for your database, including all full and incremental backups, can come to a large number of files\. In these cases, use a tarball \(\.tar\.gz\) file to store full and incremental backup files in the Amazon S3 bucket\.
-
-Aurora consumes your backup files based on the file name\. Be sure to name your backup files with the appropriate file extension based on the file format—for example, `.xbstream` for files stored using the Percona xbstream format\.
-
-Aurora consumes your backup files in alphabetical order and also in natural number order\. Always use the `split` option when you issue the `xtrabackup` command to ensure that your backup files are written and named in the proper order\.
-
 Aurora doesn't support partial backups created using Percona XtraBackup\. You can't use the following options to create a partial backup when you back up the source files for your database: `--tables`, `--tables-exclude`, `--tables-file`, `--databases`, `--databases-exclude`, or `--databases-file`\.
 
 For more information about backing up your database with Percona XtraBackup, see [Percona XtraBackup \- documentation](https://www.percona.com/doc/percona-xtrabackup/LATEST/index.html) and [ The xtrabackup binary](https://www.percona.com/doc/percona-xtrabackup/LATEST/xtrabackup_bin/xtrabackup_binary.html) on the Percona website\. 
 
 Aurora supports incremental backups created using Percona XtraBackup\. For more information about creating incremental backups using Percona XtraBackup, see [Incremental backup](https://www.percona.com/doc/percona-xtrabackup/LATEST/backup_scenarios/incremental_backup.html)\.
+
+Aurora consumes your backup files based on the file name\. Be sure to name your backup files with the appropriate file extension based on the file format—for example, `.xbstream` for files stored using the Percona xbstream format\.
+
+Aurora consumes your backup files in alphabetical order and also in natural number order\. Always use the `split` option when you issue the `xtrabackup` command to ensure that your backup files are written and named in the proper order\.
+
+Amazon S3 limits the size of a file uploaded to an Amazon S3 bucket to 5 TB\. If the backup data for your database exceeds 5 TB, use the `split` command to split the backup files into multiple files that are each less than 5 TB\.
+
+Aurora limits the number of source files uploaded to an Amazon S3 bucket to 1 million files\. In some cases, backup data for your database, including all full and incremental backups, can come to a large number of files\. In these cases, use a tarball \(\.tar\.gz\) file to store full and incremental backup files in the Amazon S3 bucket\.
+
+When you upload a file to an Amazon S3 bucket, you can use server\-side encryption to encrypt the data\. You can then restore an Amazon Aurora MySQL DB cluster from those encrypted files\. Amazon Aurora MySQL can restore a DB cluster with files encrypted using the following types of server\-side encryption:
++ Server\-side encryption with Amazon S3–managed keys \(SSE\-S3\) – Each object is encrypted with a unique key employing strong multifactor encryption\.
++ Server\-side encryption with AWS KMS–managed keys \(SSE\-KMS\) – Similar to SSE\-S3, but you have the option to create and manage encryption keys yourself, and also other differences\.
+
+For information about using server\-side encryption when uploading files to an Amazon S3 bucket, see [Protecting data using server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) in the *Amazon S3 Developer Guide*\.
 
 ### Restoring an Amazon Aurora MySQL DB cluster from an Amazon S3 bucket<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Restore"></a>
 

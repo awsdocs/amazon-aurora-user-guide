@@ -35,7 +35,9 @@ To optimize performance, allocate enough RAM so that your working set resides al
  If your Aurora MySQL cluster uses parallel query, you might see an increase in `VolumeReadIOPS` values\. Parallel queries don't use the buffer pool\. Thus, although the queries are fast, this optimized processing can result in an increase in read operations and associated charges\. 
 + `BufferCacheHitRatio` – This metric measures the percentage of requests that are served by the buffer cache of a DB instance in your DB cluster\. This metric gives you an insight into the amount of data that is being served from memory\. If the hit ratio is low, it's a good indication that your queries on this DB instance are going to disk more often than not\. In this case, investigate your workload to see which queries are causing this behavior\.
 
-If, after investigating your workload, you find that you need more memory, consider scaling up the DB instance class to a class with more RAM\. After doing so, you can investigate the metrics discussed preceding and continue to scale up as necessary\. If your Aurora cluster is larger than 40 TB, don't use db\.t2 or db\.t3 instance classes\. For more information about monitoring a DB cluster, see [Viewing metrics in the Amazon RDS console](USER_Monitoring.md)\.
+If, after investigating your workload, you find that you need more memory, consider scaling up the DB instance class to a class with more RAM\. After doing so, you can investigate the metrics discussed preceding and continue to scale up as necessary\. If your Aurora cluster is larger than 40 TB, don't use db\.t2, db\.t3, or db\.t4g instance classes\.
+
+For more information, see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md)\.
 
 ## Monitoring Amazon Aurora<a name="Aurora.BestPractices.Monitoring"></a>
 
