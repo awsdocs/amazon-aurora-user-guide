@@ -163,7 +163,7 @@ When you call the Data API, you can pass credentials for the Aurora Serverless v
 
 1. Use Secrets Manager to create a secret that contains credentials for the Aurora DB cluster\.
 
-   For instructions, see [Creating a Basic Secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html) in the *AWS Secrets Manager User Guide*\.
+   For instructions, see [Create a database secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html) in the *AWS Secrets Manager User Guide*\.
 
 1. Use the Secrets Manager console to view the details for the secret you created, or run the `aws secretsmanager describe-secret` AWS CLI command\.
 

@@ -253,7 +253,7 @@ aws rds create-db-cluster  ^
 ```
 
 In the following list you can find more information about some of the options shown in the example\. Unless otherwise specified, these parameters are required\.
-+ `--db-cluster-identfier` – You need to give your new Aurora PostgreSQL DB cluster a name\.
++ `--db-cluster-identifier` – You need to give your new Aurora PostgreSQL DB cluster a name\.
 + `--db-subnet-group-name` – Create your Aurora PostgreSQL DB cluster in the same DB subnet as the source DB instance\.
 + `--vpc-security-group-ids` – Specify the security group for your Aurora PostgreSQL DB cluster\. 
 + `--engine-version` – Specify the version to use for the Aurora PostgreSQL DB cluster\. This should be the same as the version used by your source RDS for PostgreSQL DB instance\. 

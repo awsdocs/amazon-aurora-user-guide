@@ -83,7 +83,7 @@ The following AWS services are integrated with Amazon Aurora:
 + *Amazon CloudWatch Logs* lets you monitor, store, and access your log files from Amazon Aurora instances, CloudTrail, and other sources\. For more information, see [Monitoring Amazon Aurora log files](USER_LogAccess.md)\.
 + *AWS CloudTrail* captures API calls and related events made by or on behalf of your AWS account and delivers the log files to an Amazon S3 bucket that you specify\. For more information, see [Monitoring Amazon Aurora API calls in AWS CloudTrail](logging-using-cloudtrail.md)\.
 + *Database Activity Streams* is an Amazon Aurora feature that provides a near\-real\-time stream of the activity in your DB cluster\. For more information, see [Monitoring Amazon Aurora with Database Activity Streams](DBActivityStreams.md)\.
-+ *DevOps Guru for RDS* is a capability of Amazon DevOps Guru that applies machine learning to Performance Insights metrics for Amazon Aurora databases\. For more information, see [Analyzing performance anomalies with DevOps Guru for RDS](devops-guru-for-rds.md)\.
++ *DevOps Guru for RDS* is a capability of Amazon DevOps Guru that applies machine learning to Performance Insights metrics for Amazon Aurora databases\. For more information, see [Analyzing performance anomalies with Amazon DevOps Guru for Amazon RDS](devops-guru-for-rds.md)\.
 
 ### Manual monitoring tools<a name="monitoring_manual_tools"></a>
 

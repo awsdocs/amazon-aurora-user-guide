@@ -35,7 +35,7 @@ There might be an increase in the number of concurrent sessions with queries tha
 Health maintenance operations such as `VACUUM` and `ANALYZE` can significantly increase the number of conflicting locks\. `VACUUM FULL` acquires an `ACCESS EXCLUSIVE` lock, and `ANALYSE` acquires a `SHARE UPDATE EXCLUSIVE` lock\. Both types of locks can cause a `Lock:Relation` wait event\. Application data maintenance operations such as refreshing a materialized view can also increase blocked queries and transactions\.
 
 **Locks on reader instances**  
-There might be a conflict between the relation locks held by the writer and readers\. Currently, only `ACCESS EXCLUSIVE` relation locks are replicated to reader instances\. However, the `ACCESS EXLUSIVE` relation lock will conflict with any `ACCESS SHARE` relation locks held by the reader\. This can cause an increase in lock relation wait events on the reader\. 
+There might be a conflict between the relation locks held by the writer and readers\. Currently, only `ACCESS EXCLUSIVE` relation locks are replicated to reader instances\. However, the `ACCESS EXCLUSIVE` relation lock will conflict with any `ACCESS SHARE` relation locks held by the reader\. This can cause an increase in lock relation wait events on the reader\. 
 
 ## Actions<a name="apg-waits.lockrelation.actions"></a>
 

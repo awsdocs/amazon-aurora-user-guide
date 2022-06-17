@@ -108,7 +108,7 @@ Amazon's trademarks and trade dress may not be used in
             + [Viewing SQL statistics in the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.AnalyzingSQLLevel.md)
       + [Retrieving metrics with the Performance Insights API](USER_PerfInsights.API.md)
       + [Logging Performance Insights calls using AWS CloudTrail](USER_PerfInsights.CloudTrail.md)
-   + [Analyzing performance anomalies with DevOps Guru for RDS](devops-guru-for-rds.md)
+   + [Analyzing performance anomalies with Amazon DevOps Guru for Amazon RDS](devops-guru-for-rds.md)
    + [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)
       + [Overview of Enhanced Monitoring](USER_Monitoring.OS.overview.md)
       + [Setting up and enabling Enhanced Monitoring](USER_Monitoring.OS.Enabling.md)

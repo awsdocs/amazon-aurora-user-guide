@@ -53,8 +53,8 @@
 |  Provisioned cluster running Aurora MySQL version 3, compatible with MySQL 8\.0  |   This is the final stage for all conversions from existing Aurora MySQL clusters\.   If necessary, perform a minor version upgrade to version 3\.02\.0 or higher\. Use a provisioned DB instance for the writer DB instance\. Add one Aurora Serverless v2 reader DB instance\. Perform a failover to make that the writer DB instance\. Optional: Convert other provisioned DB instances in the cluster to Aurora Serverless v2, or add new Aurora Serverless v2 DB instances and remove the provisioned DB instances\.   For the full procedure and examples, see [Switching from a provisioned cluster to Aurora Serverless v2](#aurora-serverless-v2.switch-from-provisioned)\.   | 
 |  Provisioned cluster running Aurora MySQL version 2, compatible with MySQL 5\.7  |  Perform a major version upgrade to Aurora MySQL version 3\.02\.0 or higher\. Then follow the procedure for Aurora MySQL version 3 to switch the cluster to use Aurora Serverless v2 DB instances\.  | 
 |  Provisioned cluster running Aurora MySQL version 1, compatible with MySQL 5\.6  |  Perform an intermediate major version upgrade to Aurora MySQL version 2\. Perform another major version upgrade to Aurora MySQL version 3\.02\.0 or higher\. Then follow the procedure for Aurora MySQL version 3 to switch the cluster to use Aurora Serverless v2 DB instances\.  | 
-|  Aurora Serverless v1 cluster running Aurora MySQL version 2, compatible with MySQL 5\.7  |   To help plan your conversion from Aurora Serverless v1, consult [Moving from Aurora Serverless v1 to Aurora Serverless v2](#aurora-serverless-v2.move-from-serverless-v1) first\.   Use snapshot restore or fast cloning to create a provisioned cluster with the same data as the Aurora Serverless v1 cluster\. Choose the same engine version as the Aurora Serverless v1 cluster\. Then follow the procedure for upgrading from Aurora MySQL version 2 provisioned clusters\.   | 
-|  Aurora Serverless v1 cluster running Aurora MySQL version 1, compatible with MySQL 5\.6  |   To help plan your conversion from Aurora Serverless v1, consult [Moving from Aurora Serverless v1 to Aurora Serverless v2](#aurora-serverless-v2.move-from-serverless-v1) first\.   Use snapshot restore or fast cloning to create a provisioned cluster with the same data as the Aurora Serverless v1 cluster\. Choose the same engine version as the Aurora Serverless v1 cluster\. Then follow the procedure for upgrading from Aurora MySQL version 1 provisioned clusters\.   | 
+| Aurora Serverless v1 cluster running Aurora MySQL version 2, compatible with MySQL 5\.7 |   To help plan your conversion from Aurora Serverless v1, consult [Moving from Aurora Serverless v1 to Aurora Serverless v2](#aurora-serverless-v2.move-from-serverless-v1) first\.  Then follow the procedure in [Upgrading from an Aurora Serverless v1 cluster to Aurora Serverless v2](#aurora-serverless-v2.upgrade-from-serverless-v1-procedure)\.  | 
+| Aurora Serverless v1 cluster running Aurora MySQL version 1, compatible with MySQL 5\.6 |   To help plan your conversion from Aurora Serverless v1, consult [Moving from Aurora Serverless v1 to Aurora Serverless v2](#aurora-serverless-v2.move-from-serverless-v1) first\.  Then follow the procedure in [Upgrading from an Aurora Serverless v1 cluster to Aurora Serverless v2](#aurora-serverless-v2.upgrade-from-serverless-v1-procedure)\.  | 
 |  Aurora Serverless v2 \(preview\) cluster  |  Perform a logical dump and restore to a provisioned cluster that's running the same engine version as the preview cluster\. Then follow the procedure to upgrade from that version\.  | 
 
 ### Upgrade paths for PostgreSQL\-compatible clusters to use Aurora Serverless v2<a name="serverless-v2-upgrade-paths-apg"></a>
@@ -68,7 +68,7 @@
 |  Provisioned cluster running Aurora PostgreSQL version 12  |  Perform a major version upgrade to Aurora PostgreSQL version 13\.6 or higher\. Then follow the procedure for Aurora PostgreSQL version 13 to switch the cluster to use Aurora Serverless v2 DB instances\.  | 
 |  Provisioned cluster running Aurora PostgreSQL version 11  |  Perform an intermediate major version upgrade to each successive Aurora PostgreSQL major version until you reach Aurora PostgreSQL version 13\.6 or higher\. Depending on the starting version, you might be able to upgrade directly to the final Aurora PostgreSQL version\. For details about which Aurora PostgreSQL versions can upgrade directly to which other Aurora PostgreSQL major versions, see [How to perform a major version upgrade](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. Then follow the procedure for Aurora MySQL version 13 to switch the cluster to use Aurora Serverless v2 DB instances\.  | 
 |  Provisioned cluster running Aurora PostgreSQL version 10  |  Perform an intermediate major version upgrade to each successive Aurora PostgreSQL major version until you reach Aurora PostgreSQL version 13\.6 or higher\. Depending on the starting version, you might be able to upgrade directly to the final Aurora PostgreSQL version\. For details about which Aurora PostgreSQL versions can upgrade directly to which other Aurora PostgreSQL major versions, see [How to perform a major version upgrade](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. Then follow the procedure for Aurora MySQL version 13 to switch the cluster to use Aurora Serverless v2 DB instances\.  | 
-|  Aurora Serverless v1 cluster running Aurora PostgreSQL version 10\.18  |   To help plan your conversion from Aurora Serverless v1, consult [Moving from Aurora Serverless v1 to Aurora Serverless v2](#aurora-serverless-v2.move-from-serverless-v1) first\.   Use snapshot restore or fast cloning to create a provisioned cluster with the same data as the Aurora Serverless v1 cluster\. Choose the same engine version as the Aurora Serverless v1 cluster\. Then follow the procedure for upgrading from Aurora PostgreSQL version 10 provisioned clusters\.   | 
+| Aurora Serverless v1 cluster running Aurora PostgreSQL version 10\.18 |  To help plan your conversion from Aurora Serverless v1, consult [Moving from Aurora Serverless v1 to Aurora Serverless v2](#aurora-serverless-v2.move-from-serverless-v1) first\. Then follow the procedure in [Upgrading from an Aurora Serverless v1 cluster to Aurora Serverless v2](#aurora-serverless-v2.upgrade-from-serverless-v1-procedure)\.  | 
 
 ## Switching from a provisioned cluster to Aurora Serverless v2<a name="aurora-serverless-v2.switch-from-provisioned"></a>
 
@@ -309,11 +309,12 @@ mysql> select * from serverless_v2_demo.demo;
 |  DB engines  |  Aurora MySQL, Aurora PostgreSQL  |  Aurora MySQL, Aurora PostgreSQL  | 
 |  Supported Aurora MySQL versions  |  Version 3\.02\.0, compatible with MySQL 8\.0  |  Versions 1 and 2, compatible with MySQL 5\.6 and 5\.7  | 
 |  Supported Aurora PostgreSQL versions  |  Version 13\.6  |  Version 10\.18  | 
-|  Converting from provisioned or Aurora Serverless v1 clusters  |  You can use the following methods: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.upgrade.html)  |  Restore snapshot of provisioned cluster to create new Aurora Serverless v1 cluster\.  | 
+| Converting from provisioned DB cluster |  You can use the following methods: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.upgrade.html)  |  Restore snapshot of provisioned cluster to create new Aurora Serverless v1 cluster\.  | 
+| Converting from Aurora Serverless v1 cluster | Follow the procedure in [Upgrading from an Aurora Serverless v1 cluster to Aurora Serverless v2](#aurora-serverless-v2.upgrade-from-serverless-v1-procedure)\. | Not applicable | 
 |  Available DB instance classes  |  The special DB instance class db\.serverless\. In the AWS Management Console, it's labeled as Serverless\.  |  Not applicable\.  | 
 |  Port  |  Any port that's compatible with MySQL or PostgreSQL  |  Default MySQL or PostgreSQL port only  | 
 |  Public IP address allowed?  |  Yes  |  No  | 
-|  Virtual private cloud \(VPC\) required?  |  No  |  Yes\. Each Aurora Serverless v1 cluster consumes 2 interface and Gateway Load Balancer endpoints allocated to your VPC\.  | 
+|  Virtual private cloud \(VPC\) required?  | Yes |  Yes\. Each Aurora Serverless v1 cluster consumes 2 interface and Gateway Load Balancer endpoints allocated to your VPC\.  | 
 
 #### Comparison of Aurora Serverless v2 and Aurora Serverless v1 scaling and availability<a name="aurora-serverless.comparison-scaling"></a>
 
@@ -363,7 +364,7 @@ mysql> select * from serverless_v2_demo.demo;
 |  Cross\-Region snapshots  |  Yes  |  Snapshot must be encrypted with your own AWS Key Management Service \(AWS KMS\) key\.  | 
 |  TLS/SSL  |  Yes\. The support is the same as for provisioned clusters\. For usage information, see [Using TLS/SSL with Aurora Serverless v2](aurora-serverless-v2-administration.md#aurora-serverless-v2.tls)\.  |  Yes\. There are some differences from TLS support for provisioned clusters\. For usage information, see [Using TLS/SSL with Aurora Serverless v1](aurora-serverless.md#aurora-serverless.tls)\.  | 
 |  Cloning  |  Only from and to DB engine versions that are compatible with Aurora Serverless v2\. You can't use cloning to upgrade from Aurora Serverless v1 or from an earlier version of a provisioned cluster\.  |  Only from and to DB engine versions that are compatible with Aurora Serverless v1\.  | 
-|  Restoring from Amazon S3 backup  |  Not currently  |  Yes  | 
+| Integration with Amazon S3 | Yes | Yes | 
 |  Uploading logs to Amazon CloudWatch  |  Optional\. You choose which logs to turn on and which logs to upload to CloudWatch\.  |  All logs that are turned on are uploaded to CloudWatch automatically\.  | 
 |  Data API available  |  No  |  Yes  | 
 |  Query editor available  |  No  |  Yes  | 
@@ -388,7 +389,7 @@ mysql> select * from serverless_v2_demo.demo;
 
 The process of upgrading a DB cluster from Aurora Serverless v1 to Aurora Serverless v2 involves several steps\. That's because Aurora Serverless v1 isn't available for the same major Aurora MySQL and Aurora PostgreSQL versions as Aurora Serverless v2 is\. Thus, going from Aurora Serverless v1 to Aurora Serverless v2 always involves at least one major version upgrade\.
 
-**To upgrade an Aurora Serverless v1 cluster running Aurora MySQL version 2**
+**To upgrade an Aurora Serverless v1 cluster running Aurora MySQL version 2 \(MySQL 5\.7–compatible\)**
 
 1. Create a DB cluster snapshot of the Aurora Serverless v1 cluster\. Follow the procedure in [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\.
 
@@ -406,11 +407,9 @@ The process of upgrading a DB cluster from Aurora Serverless v1 to Aurora Server
 
    For details, see [Converting a provisioned writer or reader to Aurora Serverless v2](aurora-serverless-v2-administration.md#aurora-serverless-v2-converting-from-provisioned)\.
 
-**To upgrade an Aurora Serverless v1 cluster running Aurora MySQL version 1**
+**To upgrade an Aurora Serverless v1 cluster running Aurora MySQL version 1 \(MySQL 5\.6–compatible\)**
 
-1. Create a DB cluster snapshot of the Aurora Serverless v1 cluster\. Follow the procedure in [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\.
-
-1. Restore the snapshot to create a new Aurora Serverless v1 DB cluster running Aurora MySQL version 2\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
+1. Perform an in\-place upgrade of the Aurora Serverless v1 cluster\. Follow the procedure in [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\.
 
 1. Follow the steps in the previous procedure for upgrading from an Aurora Serverless v1 DB cluster running Aurora MySQL version 2\.
 

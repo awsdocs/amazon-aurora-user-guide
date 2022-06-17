@@ -80,7 +80,7 @@ Following are tables containing values for the default DB cluster parameter and 
 
 ## Aurora PostgreSQL cluster\-level parameters<a name="AuroraPostgreSQL.Reference.Parameters.Cluster"></a>
 
-The following table lists some of parameters available in the default DB cluster parameter group for Aurora PostgreSQL version 13\. If you create an Aurora PostgreSQL DB cluster without specifying your own custom DB parameter group, your DB cluster is created using the default Aurora DB cluster parameter group for the version chosen, such as `default.aurora-postresql13`, `default.aurora-postgresql12`, and so on\. 
+The following table lists some of parameters available in the default DB cluster parameter group for Aurora PostgreSQL version 13\. If you create an Aurora PostgreSQL DB cluster without specifying your own custom DB parameter group, your DB cluster is created using the default Aurora DB cluster parameter group for the version chosen, such as `default.aurora-postgresql13`, `default.aurora-postgresql12`, and so on\. 
 
 **Note**  
 All parameters in the following table are *dynamic* unless otherwise noted in the description\.

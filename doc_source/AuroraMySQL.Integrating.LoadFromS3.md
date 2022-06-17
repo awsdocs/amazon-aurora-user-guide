@@ -6,7 +6,7 @@ If you are using encryption, the Amazon S3 bucket must be encrypted with an AWS 
 
 **Note**  
 Loading data into a table from text files in an Amazon S3 bucket is available for Amazon Aurora MySQL version 1\.8 and later\. For more information about Aurora MySQL versions, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.  
- This feature currently isn't available for Aurora Serverless clusters\. 
+ This feature isn't supported for Aurora Serverless v1\. It is supported for Aurora Serverless v2\.
 
 ## Giving Aurora access to Amazon S3<a name="AuroraMySQL.Integrating.LoadFromS3.Authorize"></a>
 

@@ -109,16 +109,16 @@ For more information about the **batched\_key\_access** and **mrr\_cost\_based**
 
 #### Optimizing queries for asynchronous key prefetch<a name="Aurora.BestPractices.AKP.Optimizing"></a>
 
-You can confirm whether a query can take advantage of the AKP feature\. To do so, use the EXPLAIN statement with the EXTENDED keyword to profile the query before running it\. The *EXPLAIN statement* provides information about the execution plan to use for a specified query\.
+You can confirm whether a query can take advantage of the AKP feature\. To do so, use the `EXPLAIN` statement to profile the query before running it\. The `EXPLAIN` statement provides information about the execution plan to use for a specified query\.
 
-In the output for the EXPLAIN statement, the `Extra` column describes additional information included with the execution plan\. If the AKP feature applies to a table used in the query, this column includes one of the following values:
+In the output for the `EXPLAIN` statement, the `Extra` column describes additional information included with the execution plan\. If the AKP feature applies to a table used in the query, this column includes one of the following values:
 + `Using Key Prefetching`
 + `Using join buffer (Batched Key Access with Key Prefetching)`
 
-The following example shows use of EXPLAIN with EXTENDED to view the execution plan for a query that can take advantage of AKP\.
+The following example shows the use of `EXPLAIN` to view the execution plan for a query that can take advantage of AKP\.
 
 ```
-mysql> explain extended select sql_no_cache
+mysql> explain select sql_no_cache
     ->     ps_partkey,
     ->     sum(ps_supplycost * ps_availqty) as value
     -> from
@@ -158,7 +158,11 @@ mysql> explain extended select sql_no_cache
 6 rows in set, 1 warning (0.00 sec)
 ```
 
-For more information about the extended `EXPLAIN` output format, see [Extended EXPLAIN output format](https://dev.mysql.com/doc/refman/5.6/en/explain-extended.html) in the MySQL product documentation\.
+For more information about the `EXPLAIN` output format, see [Extended EXPLAIN output format](https://dev.mysql.com/doc/refman/8.0/en/explain-extended.html) in the MySQL product documentation\.
+
+**Note**  
+For MySQL 5\.6–compatible and older 5\.7–compatible versions, you use the `EXPLAIN` statement with the `EXTENDED` keyword\. This keyword has been deprecated in MySQL 5\.7 and 8\.0\.  
+For more information about the extended `EXPLAIN` output format in MySQL 5\.6, see [Extended EXPLAIN output format](https://dev.mysql.com/doc/refman/5.6/en/explain-extended.html) in the MySQL product documentation\.
 
 ### Optimizing large Aurora MySQL join queries with hash joins<a name="Aurora.BestPractices.HashJoin"></a>
 

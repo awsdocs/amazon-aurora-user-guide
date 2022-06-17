@@ -1,4 +1,4 @@
-# Analyzing performance anomalies with DevOps Guru for RDS<a name="devops-guru-for-rds"></a>
+# Analyzing performance anomalies with Amazon DevOps Guru for Amazon RDS<a name="devops-guru-for-rds"></a>
 
 Amazon DevOps Guru is a fully managed operations service that helps developers and operators improve the performance and availability of their applications\. DevOps Guru offloads the tasks associated with identifying operational issues so that you can quickly implement recommendations to improve your application\. To learn more, see [What is Amazon DevOps Guru?](https://docs.aws.amazon.com/devops-guru/latest/userguide/welcome.html) in the *Amazon DevOps Guru User Guide*\.
 
@@ -59,7 +59,7 @@ To learn more, see [Analyzing anomalies in Amazon Aurora clusters](https://docs.
 
 ## Setting up DevOps Guru for RDS<a name="devops-guru-for-rds.configuring"></a>
 
-To allow DevOps Guru for RDS to publish insights for an Amazon Aurora database, complete the following tasks\.
+To allow DevOps Guru for Amazon RDS to publish insights for an Amazon Aurora database, complete the following tasks\.
 
 **Topics**
 + [Configuring IAM access policies for DevOps Guru for RDS](#devops-guru-for-rds.configuring.access)
@@ -68,7 +68,7 @@ To allow DevOps Guru for RDS to publish insights for an Amazon Aurora database,
 
 ### Configuring IAM access policies for DevOps Guru for RDS<a name="devops-guru-for-rds.configuring.access"></a>
 
-To view alerts from DevOps Guru in the RDS console, your IAM user or role must have either of the following policies:
+To view alerts from DevOps Guru in the RDS console, your AWS Identity and Access Management \(IAM\) user or role must have either of the following policies:
 + The AWS managed policy `AmazonDevOpsGuruConsoleFullAccess`
 + The AWS managed policy `AmazonDevOpsGuruConsoleReadOnlyAccess` and either of the following policies:
   + The AWS managed policy `AmazonRDSFullAccess`
@@ -84,15 +84,15 @@ When you create an Aurora DB cluster or modify a cluster instance, you can turn 
 
 ### Turning on DevOps Guru and specifying resource coverage<a name="devops-guru-for-rds.configuring.coverage"></a>
 
-You can turn on DevOps Guru and allow it to monitor your Aurora databases in either of the following ways\.
+You can turn on DevOps Guru to have it monitor your Aurora databases in either of the following ways\.
 
 **Topics**
 + [Turning on DevOps Guru in the RDS console](#devops-guru-for-rds.configuring.coverage.rds-console)
-+ [Adding Aurora resources in the DevOps Guru console](#devops-guru-for-rds.configuring.coverage.guru-console)
++ [Adding Aurora resources on the DevOps Guru console](#devops-guru-for-rds.configuring.coverage.guru-console)
 
 #### Turning on DevOps Guru in the RDS console<a name="devops-guru-for-rds.configuring.coverage.rds-console"></a>
 
-Amazon RDS supports multiple paths for turning on DevOps Guru\.
+You can take multiple paths in the Amazon RDS console to turn on DevOps Guru\.
 
 **Topics**
 + [Turning on DevOps Guru when you create an Aurora database](#devops-guru-for-rds.configuring.coverage.rds-console.create)
@@ -116,7 +116,7 @@ The creation workflow includes a setting that turns on DevOps Guru coverage for
 
 1. Create a tag for your database so that DevOps Guru can monitor it\. Do the following:
    + In the text field for **Tag key**, enter a name that begins with **Devops\-Guru\-**\.
-   + In the text field for **Tag value**, enter any value\. For example, if you entered **rds\-database\-1** for the name of your Aurora database, you could also enter **rds\-database\-1** as the tag value\.
+   + In the text field for **Tag value**, enter any value\. For example, if you enter **rds\-database\-1** for the name of your Aurora database, you can also enter **rds\-database\-1** as the tag value\.
 
    For more information about tags, see "[Use tags to identify resources in your DevOps Guru applications](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-resource-tags.html)" in the *Amazon DevOps Guru User Guide*\.
 
@@ -145,7 +145,7 @@ In the Performance Insights dashboard, you can also turn off DevOps Guru\.
 
 ##### Responding to a permissions error when you turn on DevOps Guru<a name="devops-guru-for-rds.configuring.coverage.rds-console.error"></a>
 
-If turn on DevOps Guru from the RDS console when you create a database, RDS might display the following banner about missing permissions\.
+If you turn on DevOps Guru from the RDS console when you create a database, RDS might display the following banner about missing permissions\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/devops-guru-permissions-error.png)
 
@@ -155,7 +155,7 @@ If turn on DevOps Guru from the RDS console when you create a database, RDS mig
 
 1. Open the RDS console\.
 
-1. In the left navigation pane, choose **Performance Insights**\.
+1. In the navigation pane, choose **Performance Insights**\.
 
 1. Choose a DB instance in the cluster that you just created\.
 
@@ -167,11 +167,11 @@ If turn on DevOps Guru from the RDS console when you create a database, RDS mig
 
 1. Choose **Turn on DevOps Guru**\.
 
-#### Adding Aurora resources in the DevOps Guru console<a name="devops-guru-for-rds.configuring.coverage.guru-console"></a>
+#### Adding Aurora resources on the DevOps Guru console<a name="devops-guru-for-rds.configuring.coverage.guru-console"></a>
 
-You can specify your DevOps Guru resource coverage in the DevOps Guru console\. Follow the step described in "[Specify your DevOps Guru resource coverage](https://docs.aws.amazon.com/devops-guru/latest/userguide/choose-coverage.html)" in the *Amazon DevOps Guru User Guide*\. When you edit your analyzed resources, choose one of the following options:
+You can specify your DevOps Guru resource coverage on the DevOps Guru console\. Follow the step described in [Specify your DevOps Guru resource coverage](https://docs.aws.amazon.com/devops-guru/latest/userguide/choose-coverage.html) in the *Amazon DevOps Guru User Guide*\. When you edit your analyzed resources, choose one of the following options:
 + Choose **All account resources** to analyze all supported resources, including the Aurora databases, in your AWS account and Region\.
-+ Choose **CloudFormation stacks** to analyze the Aurora databases that are in stacks you choose\. For more information, see "[Use AWS CloudFormation stacks to identify resources in your DevOps Guru applications](https://docs.aws.amazon.com/https:/devops-guru/latest/userguide/working-with-cfn-stacks.html)" in the *Amazon DevOps Guru User Guide*\.
-+ Choose **Tags** to analyze the Aurora databases that you have tagged\. For more information, see "[Use tags to identify resources in your DevOps Guru applications](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-resource-tags.html)" in the *Amazon DevOps Guru User Guide*\.
++ Choose **CloudFormation stacks** to analyze the Aurora databases that are in stacks you choose\. For more information, see [Use AWS CloudFormation stacks to identify resources in your DevOps Guru applications](https://docs.aws.amazon.com/https:/devops-guru/latest/userguide/working-with-cfn-stacks.html) in the *Amazon DevOps Guru User Guide*\.
++ Choose **Tags** to analyze the Aurora databases that you have tagged\. For more information, see [Use tags to identify resources in your DevOps Guru applications](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-resource-tags.html) in the *Amazon DevOps Guru User Guide*\.
 
-For more information, see "[Enable DevOps Guru](https://docs.aws.amazon.com/httpdevops-guru/latest/userguide/getting-started-enable-service.html)" in the *Amazon DevOps Guru User Guide*\.
+For more information, see [Enable DevOps Guru](https://docs.aws.amazon.com/devops-guru/latest/userguide/getting-started-enable-service.html) in the *Amazon DevOps Guru User Guide*\.

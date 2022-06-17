@@ -143,7 +143,7 @@ After this 12\-month period, an automatic upgrade to the subsequent major versio
  LTS minor versions include only critical fixes \(through patch versions\)\. An LTS version doesn't include new features released after its introduction\. Once a year, DB clusters running on an LTS minor version are patched to the latest patch version of the LTS release\. We do this patching to help ensure that you benefit from cumulative security and stability fixes\. We might patch an LTS minor version more frequently if there are critical fixes, such as for security, that need to be applied\. 
 
 **Note**  
- If you want to remain on an LTS minor version for the duration of its lifecycle, make sure to turn off **Auto minor version upgrade** for your DB instances\. To avoid automatically upgrading your DB cluster from the LTS minor version, set **Auto minor version upgrade** to `No` on all DB instances in your Aurora cluster\. 
+ If you want to remain on an LTS minor version for the duration of its lifecycle, make sure to turn off **Auto minor version upgrade** for your DB instances\. To avoid automatically upgrading your DB cluster from the LTS minor version, set **Auto minor version upgrade** to `No` on any DB instance in your Aurora cluster\. 
 
  For the version numbers of all Aurora LTS versions, see [Aurora MySQL long\-term support \(LTS\) releases](AuroraMySQL.Updates.Versions.md#AuroraMySQL.Updates.LTS) and [Aurora PostgreSQL long\-term support \(LTS\) releases](AuroraPostgreSQL.Updates.LTS.md)\. 
 

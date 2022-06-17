@@ -45,7 +45,7 @@ For an Aurora PostgreSQL DB cluster, the parameters that affect logging behavior
 
 ### Setting the log retention period<a name="USER_LogAccess.Concepts.PostgreSQL.log_retention_period"></a>
 
-To set the retention period for system logs, use the `rds.log_retention_period` parameter\. You can find `rds.log_retention_period` in the DB parameter group associated with your Aurora PostgreSQL DB cluser\. The unit for this parameter is minutes\. For example, a setting of 1,440 retains logs for one day\. The default value is 4,320 \(three days\)\. The maximum value is 10,080 \(seven days\)\. Your instance needs enough allocated storage to contain the retained log files\.
+To set the retention period for system logs, use the `rds.log_retention_period` parameter\. You can find `rds.log_retention_period` in the DB parameter group associated with your Aurora PostgreSQL DB cluster\. The unit for this parameter is minutes\. For example, a setting of 1,440 retains logs for one day\. The default value is 4,320 \(three days\)\. The maximum value is 10,080 \(seven days\)\. Your instance needs enough allocated storage to contain the retained log files\.
 
 Amazon Aurora compresses older PostgreSQL logs when storage for the DB instance reaches a threshold\. Aurora compresses the files using the gzip compression utility\. For more information, see the [gzip](https://www.gzip.org) website\.
 

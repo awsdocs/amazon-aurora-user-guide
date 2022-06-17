@@ -37,7 +37,7 @@ Before installing the lo extension, make sure that you have `rds_superuser` priv
 You can now use the `lo` data type to define columns in your tables\. For example, you can create a table \(`images`\) that contains raster image data\. You can use the `lo` data type for a column `raster`, as shown in the following example, which creates a table\.
 
 ```
-postgres=> CREATE TABLE images (desc text, raster lo);
+postgres=> CREATE TABLE images (image_name text, raster lo);
 ```
 
 ## Using the lo\_manage trigger function to delete objects<a name="PostgreSQL_large_objects_lo_extension.using"></a>

@@ -312,6 +312,20 @@ A PostgreSQL DB instance is automatically upgraded during your maintenance windo
 
  If any of the DB instances in a cluster don't have the auto minor version upgrade setting turned on, Aurora doesn't automatically upgrade any of the instances in that cluster\. Make sure to keep that setting consistent for all the DB instances in the cluster\. 
 
+### Minor release upgrades and zero\-downtime patching<a name="USER_UpgradeDBInstance.PostgreSQL.Minor.zdp"></a>
+
+Upgrading an Aurora PostgreSQL DB cluster involves the possibility of an outage\. During the upgrade process, the database is shut down as it's being upgraded\. If you start the upgrade while the database is busy, you lose all connections and transactions that the DB cluster is processing\. If you wait until the database is idle to perform the upgrade, you might have to wait a long time\.
+
+The zero\-downtime patching \(ZDP\) feature improves the upgrading process\. With ZDP, both minor version upgrades and patches can be applied with minimal impact to your Aurora PostgreSQL DB cluster\. ZDP tries to preserve client connections through the Aurora PostgreSQL upgrade process\. When ZDP completes successfully, application sessions are preserved and the database engine restarts while the upgrade is still underway\. Although the database engine restart can cause a drop in throughput, that typically lasts only for a few seconds or at most, approximately one minute\. 
+
+**Note**  
+ZDP is supported by Aurora PostgreSQL 13\.7, 12\.11, 11\.16, and 10\.21 and higher releases of these minor versions only\.  
+ZDP isn't supported on Aurora Serverless v2\.
+
+In some cases, zero\-downtime patching \(ZDP\) might not succeed\. For example, if long\-running queries or transactions are in progress, ZDP might need to cancel these to complete\. If data definition language \(DDL\) statements are running or if temporary tables or table locks are in use for any other reason, ZDP might need to cancel the open transaction\. Parameter changes that are in a `pending` state on your Aurora PostgreSQL DB cluster or its instances also interfere with ZDP\. 
+
+You can find metrics and events for ZDP operations in **Events** page in the AWS Management Console\. The events include the start of the ZDP upgrade and completion of the upgrade\. In this event you can find how long the process took, and the numbers of preserved and dropped connections that occurred during the restart\. You can find details in your database error log\. 
+
 ### Turning on automatic minor version upgrades<a name="USER_UpgradeDBInstance.MinorUpgrade"></a>
 
 To turn on automatic minor version upgrades for an Aurora PostgreSQL DB cluster, use the following instructions for the AWS Management Console, the AWS CLI, or the RDS API\. 
@@ -345,7 +359,7 @@ To use the CLI to implement minor version upgrades, use the [modify\-db\-instanc
  You can use a CLI command such as the following to check the status of **Enable auto minor version upgrade** for all of the DB instances in your Aurora PostgreSQL clusters\. 
 
 ```
-aws rds describe-db-instances \
+aws RDS describe-db-instances \
   --query '*[].{DBClusterIdentifier:DBClusterIdentifier,DBInstanceIdentifier:DBInstanceIdentifier,AutoMinorVersionUpgrade:AutoMinorVersionUpgrade}'
 ```
 

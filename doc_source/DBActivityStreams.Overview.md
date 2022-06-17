@@ -54,18 +54,21 @@ In Aurora, database activity streams have the following requirements and limitat
 
 ## Supported Aurora engine versions for database activity streams<a name="DBActivityStreams.Overview.requirements.version"></a>
 
-For Aurora PostgreSQL, database activity streams are supported for the following versions:
+**For Aurora PostgreSQL, database activity streams are supported for the following versions:**  
 + All 13 versions
 + All 12 versions
 + Version 11\.6 and higher 11 versions
 + Version 10\.11 and higher 10 versions
 
-For more information about Aurora PostgreSQL versions, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\.
+**For Aurora MySQL, database activity streams are supported for the following versions:**  
+2\.08 or higher, which is compatible with MySQL version 5\.7
 
-For Aurora MySQL, database activity streams are supported for version 2\.08 or higher, which is compatible with MySQL version 5\.7\.
+**Database activity streams aren't supported for the following features:**  
++ Aurora Serverless v1
++ Aurora Serverless v2
++ Babelfish for Aurora PostgreSQL
 
-**Note**  
-Database activity streams aren't supported in Aurora Serverless v1 or Aurora Serverless v2\.
+For more information about Aurora PostgreSQL versions, see [Amazon Aurora PostgreSQL releases and engine versions\.](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html)\.
 
 ## Supported DB instance classes for database activity streams<a name="DBActivityStreams.Overview.requirements.classes"></a>
 
