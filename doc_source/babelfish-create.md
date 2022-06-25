@@ -1,6 +1,6 @@
-# Creating an Aurora PostgreSQL cluster with Babelfish<a name="babelfish-create"></a>
+# Creating a Babelfish for Aurora PostgreSQL DB cluster<a name="babelfish-create"></a>
 
-You can use Babelfish on Aurora PostgreSQL\. Babelfish is currently supported on Aurora PostgreSQL version 13\.4 and higher\.
+Babelfish for Aurora PostgreSQL is supported on Aurora PostgreSQL version 13\.4 and higher\.
 
 You can use the AWS Management Console or the AWS CLI to create an Aurora PostgreSQL cluster with Babelfish\.
 
@@ -22,22 +22,20 @@ In an Aurora PostgreSQL cluster, the `babelfish_db` database name is reserved fo
 
 1. For **Edition**, choose **Amazon Aurora PostgreSQL**\.
 
-1. Choose **Show filters**, and then choose **Show versions that support the Babelfish for PostgreSQL feature** to list the engine types that support Babelfish\. Babelfish is currently supported on Aurora PostgreSQL 13\.4 and higher\.
+1. Choose **Show filters**, and then choose **Show versions that support the Babelfish for PostgreSQL feature** to list the engine types that support Babelfish\. Babelfish is currently supported on Aurora PostgreSQL 13\.4 and higher versions\.
 
-1. For **Available versions**, choose an Aurora PostgreSQL version\.  
+1. For **Available versions**, choose an Aurora PostgreSQL version\. To get the latest Babelfish features, choose the highest Aurora PostgreSQL major version\.  
 ![\[\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/bbf_create_cluster_3.png)
 
 1. For **Templates**, choose the template that matches your use case\.
 
 1. For **DB cluster identifier**, enter a name that you can easily find later in the DB cluster list\.
 
-1. For **Master username**, enter an administrator user name\.
+1. For **Master username**, enter an administrator user name\. The default value for Aurora PostgreSQL is `postgres`\. You can accept the default or choose a different name\. For example, to follow the naming convention used on your SQL Server databases, you can enter `sa` \(system administrator\) for the Master username\.
 
-   Unlike SQL Server, Babelfish doesn't create an `sa` login\. To create a login named `sa`, enter the name for **Master username**\.
+   If you don't create a user named `sa` at this time, you can create one later with your choice of client\. After creating the user, use the `ALTER SERVER ROLE` command to add it to the `sysadmin` group \(role\) for the cluster\. 
 
-   If you don't create a user named `sa` at this time, you can create one later with your choice of client\. After creating the user, use the `ALTER SERVER ROLE` command to add it to `sysadmin`\.
-
-1. For **Master password**, enter a strong password for the administrative user that you just named, and confirm the password\. 
+1. For **Master password**, create a strong password and confirm the password\. 
 
 1. For the options that follow, until the **Babelfish settings** section, specify your DB cluster settings\. For information about each setting, see [Settings for Aurora DB clusters](Aurora.CreateInstance.md#Aurora.CreateInstance.Settings)\.
 
@@ -46,7 +44,7 @@ In an Aurora PostgreSQL cluster, the `babelfish_db` database name is reserved fo
 
 1. For **DB cluster parameter group**, do one of the following:
    + Choose **Create new** to create a new parameter group with Babelfish turned on\.
-   + Choose **Choose existing** to use an existing parameter group\. If you use an existing group, make sure to modify the group before creating the cluster and add values for Babelfish parameters\. For information about Babelfish parameters, see [Configuring a database for Babelfish](babelfish-configuration.md)\.
+   + Choose **Choose existing** to use an existing parameter group\. If you use an existing group, make sure to modify the group before creating the cluster and add values for Babelfish parameters\. For information about Babelfish parameters, see [DB cluster parameter group settings for Babelfish](babelfish-configuration.md)\.
 
      If you use an existing group, provide the group name in the box that follows\.
 
@@ -54,14 +52,14 @@ In an Aurora PostgreSQL cluster, the `babelfish_db` database name is reserved fo
    + **Single database** to migrate a single SQL Server database\.
 
      In some cases, you might migrate multiple user databases together, with your end goal a complete migration to native Aurora PostgreSQL without Babelfish\. If the final applications require consolidated schemas \(a single `dbo` schema\), make sure to first consolidate your SQL Server databases into a single SQL server database\. Then migrate to Babelfish using **Single database** mode\.
-   + **Multiple databases** to migrate multiple SQL Server databases \(originating from a single SQL Server installation\)\. Multiple database mode doesn't consolidate multiple databases that don't originate from a single SQL Server installation\. For information about migrating multiple databases, see [Using Babelfish with a single database or multiple databases](babelfish.md#babelfish-single_vs_multi_db)\.   
+   + **Multiple databases** to migrate multiple SQL Server databases \(originating from a single SQL Server installation\)\. Multiple database mode doesn't consolidate multiple databases that don't originate from a single SQL Server installation\. For information about migrating multiple databases, see [Using Babelfish with a single database or multiple databases](babelfish-architecture.md#babelfish-single_vs_multi_db)\.   
 ![\[\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/bbf_create_cluster_6.png)
 
-1. For **Default collation locale**, enter your server locale\. The default is `en-US`\. For detailed information about collations, see [Babelfish collation support](babelfish-collations.md)\.
+1. For **Default collation locale**, enter your server locale\. The default is `en-US`\. For detailed information about collations, see [Collations supported by Babelfish](babelfish-collations.md)\.
 
-1. For **Collation name** field, enter your default collation\. The default is `sql_latin1_general_cp1_ci_as`\. For detailed information, see [Babelfish collation support](babelfish-collations.md)\.
+1. For **Collation name** field, enter your default collation\. The default is `sql_latin1_general_cp1_ci_as`\. For detailed information, see [Collations supported by Babelfish](babelfish-collations.md)\.
 
-1. For **Babelfish TDS port**, enter the port number for your SQL Server client connect to\. The default is `1433`\.
+1. For **Babelfish TDS port**, enter the default port `1433` unless you specified a different port for your Babelfish DB cluster\.
 
 1. For **DB parameter group**, choose a parameter group or have Aurora create a new group for you with default settings\.
 
@@ -99,7 +97,7 @@ You can find your new database set up for Babelfish in the **Databases** listing
 
 ## AWS CLI<a name="babelfish-create-cluster.CLI"></a>
 
-Before you create an Aurora DB cluster with Babelfish running using the AWS CLI, make sure to fulfill the required prerequisites, such as creating a parameter group\. For more information, see [DB cluster prerequisites](Aurora.CreateInstance.md#Aurora.CreateInstance.Prerequisites)\.
+When you create an Babelfish for Aurora PostgreSQL; using the AWS CLI, you need to pass the command the name of the DB cluster parameter group to use for the cluster\. For more information, see [DB cluster prerequisites](Aurora.CreateInstance.md#Aurora.CreateInstance.Prerequisites)\.
 
 Before you can use the AWS CLI to create an Aurora PostgreSQL cluster with Babelfish, do the following:
 + Choose your endpoint URL from the list of services at [Amazon Aurora endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/aurora.html)\. 
@@ -108,26 +106,28 @@ Before you can use the AWS CLI to create an Aurora PostgreSQL cluster with Babel
 
 **To create an Aurora PostgreSQL DB cluster with Babelfish using the AWS CLI**
 
+The examples that follow use the default Master username, `postgres`\. Replace as needed with the username that you created for your DB cluster, such as `sa` or whatever username you chose if you didn't accept the default\. 
+
 1. Create a parameter group\.
 
    For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-cluster-parameter-group \
-   --endpoint-url my_endpoint_URL \
-   --db-cluster-parameter-group-name my_parameter_group \
-   --db-parameter-group-family aurora-postgresql13 \
-   --description "parameter_group_description"
+   --endpoint-url endpoint-url \
+   --db-cluster-parameter-group-name parameter-group \
+   --db-parameter-group-family aurora-postgresql14 \
+   --description "description"
    ```
 
    For Windows:
 
    ```
    aws rds create-db-cluster-parameter-group ^
-   --endpoint-url my_endpoint_URL ^
-   --db-cluster-parameter-group-name my_parameter_group ^
-   --db-parameter-group-family aurora-postgresql13 ^
-   --description "parameter_group_description"
+   --endpoint-url endpoint-URL ^
+   --db-cluster-parameter-group-name parameter-group ^
+   --db-parameter-group-family aurora-postgresql14 ^
+   --description "description"
    ```
 
 1. Modify your parameter group to turn on Babelfish\.
@@ -136,8 +136,8 @@ Before you can use the AWS CLI to create an Aurora PostgreSQL cluster with Babel
 
    ```
    aws rds modify-db-cluster-parameter-group \
-   --endpoint-url my_endpoint_URL \
-   --db-cluster-parameter-group-name my_parameter_group \
+   --endpoint-url endpoint-url \
+   --db-cluster-parameter-group-name parameter-group \
    --parameters "ParameterName=rds.babelfish_status,ParameterValue=on,ApplyMethod=pending-reboot"
    ```
 
@@ -145,8 +145,8 @@ Before you can use the AWS CLI to create an Aurora PostgreSQL cluster with Babel
 
    ```
    aws rds modify-db-cluster-parameter-group ^
-   --endpoint-url my_endpoint_URL ^
-   --db-cluster-parameter-group-name my_parameter_group ^
+   --endpoint-url endpoint-url ^
+   --db-cluster-parameter-group-name paramater-group ^
    --parameters "ParameterName=rds.babelfish_status,ParameterValue=on,ApplyMethod=pending-reboot"
    ```
 
@@ -156,40 +156,40 @@ Before you can use the AWS CLI to create an Aurora PostgreSQL cluster with Babel
 
    ```
    aws rds create-db-cluster \
-   --db-cluster-identifier my_cluster_name \
-   --master-username user_name \
-   --master-user-password my_password \
+   --db-cluster-identifier  cluster-name\
+   --master-username postgres \
+   --master-user-password password \
    --engine aurora-postgresql \
-   --engine-version 13.4 \
-   --vpc-security-group-ids my_security_group \
-   --db-subnet-group-name my_subnet_group \
-   --db-cluster-parameter-group-name my_parameter_group
+   --engine-version 14.3            \
+   --vpc-security-group-ids security-group \
+   --db-subnet-group-name subnet-group-name \
+   --db-cluster-parameter-group-name parameter-group
    ```
 
    For Windows:
 
    ```
    aws rds create-db-cluster ^
-   --db-cluster-identifier my_cluster_name ^
-   --master-username user_name ^
-   --master-user-password my_password ^
+   --db-cluster-identifier cluster-name ^
+   --master-username postgres ^
+   --master-user-password password ^
    --engine aurora-postgresql ^
-   --engine-version 13.4 ^
-   --vpc-security-group-ids my_security_group ^
-   --db-subnet-group-name my_subnet_group ^
-   --db-cluster-parameter-group-name my_parameter_group
+   --engine-version 14.3 ^
+   --vpc-security-group-ids security-group ^
+   --db-subnet-group-name subnet-group ^
+   --db-cluster-parameter-group-name parameter-group
    ```
 
-1. Explicitly create the primary instance\. Use the name of the cluster that you created preceding for the value of the `--db-cluster-identifier` option and run the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command as shown following\. 
+1. Explicitly create the primary instance for your DB cluster\. Use the name of the cluster that you created in step 3 for the `--db-cluster-identifier` argument when you call the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command, as shown following\. 
 
    For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-instance \
-   --db-instance-identifier my_instance_name \
-   --db-instance-class db.r5.4xlarge \
-   --db-subnet-group-name my_subnet_group \
-   --db-cluster-identifier my_cluster_name \
+   --db-instance-identifier instance-name \
+   --db-instance-class db.r6g \
+   --db-subnet-group-name subnet-group \
+   --db-cluster-identifier cluster-name \
    --engine aurora-postgresql
    ```
 
@@ -197,9 +197,9 @@ Before you can use the AWS CLI to create an Aurora PostgreSQL cluster with Babel
 
    ```
    aws rds create-db-instance ^
-   --db-instance-identifier my_instance_name ^
-   --db-instance-class db.r5.4xlarge ^
-   --db-subnet-group-name my_subnet_group ^
-   --db-cluster-identifier my_cluster_name ^
+   --db-instance-identifier instance-name ^
+   --db-instance-class db.r6g ^
+   --db-subnet-group-name subnet-group ^
+   --db-cluster-identifier cluster-name ^
    --engine aurora-postgresql
    ```

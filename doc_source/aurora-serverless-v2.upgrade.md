@@ -77,7 +77,7 @@
 1.  Check if the provisioned cluster needs to be upgraded to be used with Aurora Serverless v2 DB instances\. For the Aurora versions that are compatible with Aurora Serverless v2, see [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md)\. 
 
     If the provisioned cluster is running an engine version that isn't available for Aurora Serverless v2, upgrade the engine version of the cluster: 
-   +  If you have a MySQL 5\.6–compatible or MySQL 5\.7–compatible provisioned cluster, follow the upgrade instructions for Aurora MySQL version 3\. Use the procedures in [Upgrading to Aurora MySQL version 3](AuroraMySQL.MySQL80.md#AuroraMySQL.mysql80-upgrade-procedure)\. 
+   +  If you have a MySQL 5\.6–compatible or MySQL 5\.7–compatible provisioned cluster, follow the upgrade instructions for Aurora MySQL version 3\. Use the procedures in [Upgrading to Aurora MySQL version 3](AuroraMySQL.mysql80-upgrade-procedure.md)\. 
    +  If you have a PostgreSQL\-compatible provisioned cluster running PostgreSQL version 10 through 12, follow the upgrade instructions for Aurora PostgreSQL version 13\. Use the procedures in [How to perform a major version upgrade](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. 
 
 1.  Configure any other cluster properties to match the Aurora Serverless v2 requirements from [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md)\. 
@@ -365,6 +365,8 @@ mysql> select * from serverless_v2_demo.demo;
 |  TLS/SSL  |  Yes\. The support is the same as for provisioned clusters\. For usage information, see [Using TLS/SSL with Aurora Serverless v2](aurora-serverless-v2-administration.md#aurora-serverless-v2.tls)\.  |  Yes\. There are some differences from TLS support for provisioned clusters\. For usage information, see [Using TLS/SSL with Aurora Serverless v1](aurora-serverless.md#aurora-serverless.tls)\.  | 
 |  Cloning  |  Only from and to DB engine versions that are compatible with Aurora Serverless v2\. You can't use cloning to upgrade from Aurora Serverless v1 or from an earlier version of a provisioned cluster\.  |  Only from and to DB engine versions that are compatible with Aurora Serverless v1\.  | 
 | Integration with Amazon S3 | Yes | Yes | 
+| Exporting DB cluster snapshots to S3 | Yes | No | 
+| Associating an IAM role | Yes | No | 
 |  Uploading logs to Amazon CloudWatch  |  Optional\. You choose which logs to turn on and which logs to upload to CloudWatch\.  |  All logs that are turned on are uploaded to CloudWatch automatically\.  | 
 |  Data API available  |  No  |  Yes  | 
 |  Query editor available  |  No  |  Yes  | 
@@ -419,9 +421,9 @@ The process of upgrading a DB cluster from Aurora Serverless v1 to Aurora Server
 
 1. Restore the snapshot to create a new, provisioned DB cluster\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
 
-   Choose the latest minor engine version available for the new cluster, for example, 10\.20\.
+   Choose the latest minor engine version available for the new cluster, for example, 10\.21\.
 
-1. Modify the DB cluster to upgrade it to Aurora PostgreSQL version 13\.6, which is compatible with Aurora Serverless v2\. Follow the procedure in [Manually upgrading the Aurora PostgreSQL engine](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.Upgrading.Manual)\.
+1. Modify the DB cluster to upgrade it to an Aurora PostgreSQL version that's compatible with Aurora Serverless v2, for example, 13\.7\. Follow the procedure in [Upgrading the Aurora PostgreSQL engine to a new major version](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.Upgrading.Manual)\.
 
 1. Modify the writer DB instance of the provisioned DB cluster to use the Serverless v2 DB instance class\.
 

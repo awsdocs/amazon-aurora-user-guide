@@ -28,8 +28,7 @@ IAM database authentication is available for the following database engines:
   + Aurora MySQL version 2, all minor versions
   + Aurora MySQL version 1\.10 and higher 1\.1 minor versions
 + **Aurora PostgreSQL**
-  + All Aurora PostgreSQL 13 versions
-  + All Aurora PostgreSQL 12 versions
+  + All Aurora PostgreSQL 14, 13, and 12 versions
   + Aurora PostgreSQL 11\.6 and higher 11 versions
   + Aurora PostgreSQL 10\.11 and higher 10 versions
   + Aurora PostgreSQL 9\.6\.16 and higher 9\.6 versions

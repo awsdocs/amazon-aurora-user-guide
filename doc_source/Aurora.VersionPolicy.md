@@ -14,7 +14,6 @@ Amazon Aurora reuses code and maintains compatibility with the underlying MySQL 
 + [Automatic minor version upgrades](#Aurora.VersionPolicy.AMVU)
 + [How long Amazon Aurora major versions remain available](#Aurora.VersionPolicy.MajorVersionLifetime)
 + [How often Amazon Aurora minor versions are released](#Aurora.VersionPolicy.MinorVersionCadence)
-+ [How long Amazon Aurora minor versions remain available](#Aurora.VersionPolicy.MinorVersionLifetime)
 + [Long\-term support for selected Amazon Aurora minor versions](#Aurora.VersionPolicy.LTS)
 + [Manually controlling if and when your database cluster is upgraded to new versions](#Aurora.VersionPolicy.ManualUpgrades)
 + [Required Amazon Aurora upgrades](#Aurora.VersionPolicy.RequiredUpgrades)
@@ -73,10 +72,11 @@ aurora_version
 |  MySQL 5\.7  |  Aurora MySQL 2  | 
 |  MySQL 8\.0  |  Aurora MySQL 3  | 
 |  PostgreSQL 9\.6  |  Aurora PostgreSQL 1  | 
-|  PostgreSQL 10  |  Aurora PostgreSQL 2\. Not applicable for version 10\.18 and higher versions\. For these versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version and a third digit in patch location\.  | 
-|  PostgreSQL 11  |  Aurora PostgreSQL 3\. Not applicable for version 11\.13 amd higher versions\. For these versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version and a third digit in patch location\.  | 
-|  PostgreSQL 12  |  Aurora PostgreSQL 4\. Not applicable for version 12\.8 and higher versions\. For these versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version and a third digit in patch location\. | 
-|  PostgreSQL 13  | Aurora PostgreSQL 4\. Not applicable for version 13\.3 and higher versions\. For these versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version and a third digit in patch location\.  | 
+|  PostgreSQL 10  |  Aurora PostgreSQL 2\. Applies to PostgreSQL 10\.17 and older versions only\. For version 10\.18 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in patch location\.  | 
+|  PostgreSQL 11  |  Aurora PostgreSQL 3\. Applies to PostgreSQL 11\.12 and older versions only\. For version 11\.13 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location\.  | 
+|  PostgreSQL 12  |  Aurora PostgreSQL 4\. Applies to PostgreSQL 12\.7 and older versions only\. For version 12\.8 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location\. | 
+|  PostgreSQL 13  | Aurora PostgreSQL 4\. Applies to PostgreSQL 13\.2 and older versions only\. For version 13\.3 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location\.  | 
+|  PostgreSQL 14  | Aurora PostgreSQL 14\.3\. The Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location when patches to Aurora are released\. | 
 
 ## Amazon Aurora minor versions<a name="Aurora.VersionPolicy.MinorVersions"></a>
 
@@ -112,7 +112,7 @@ aurora_version
 
  You can stay up to date with Aurora minor versions by turning on **Auto minor version upgrade** for every DB instance in the Aurora cluster\. Aurora only performs the automatic upgrade if all DB instances in your cluster have this setting turned on\. Auto minor version upgrades are performed to the default minor version\. We typically schedule automatic upgrades twice a year for DB clusters that have the **Auto minor version upgrade** setting set to `Yes`\. These upgrades are started during the maintenance window that you specify for your cluster\. 
 
- For more information, see [Enabling automatic upgrades between minor Aurora MySQL versions](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.AMVU) and [Automatic minor version upgrades for PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.Minor)\. 
+ For more information, see [Enabling automatic upgrades between minor Aurora MySQL versions](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.AMVU) and [How to perform minor version upgrades and apply patches](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.Minor)\. 
 
 ## How long Amazon Aurora major versions remain available<a name="Aurora.VersionPolicy.MajorVersionLifetime"></a>
 
@@ -120,21 +120,13 @@ Amazon Aurora major versions remain available at least until community end of li
 
 <a name="aurora-version-minimum-eol"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.VersionPolicy.html)
 
-Before we ask that you upgrade to a newer major version and to help you plan, we provide a reminder at least 12 months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. We always recommend that you thoroughly test your applications against new database versions before performing a major version upgrade\. 
+Before we ask that you upgrade to a newer major version and to help you plan, we provide a reminder at least 12 months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. We always recommend that you thoroughly test your applications with new database versions before performing a major version upgrade\. 
 
 After this 12\-month period, an automatic upgrade to the subsequent major version might be applied to any database cluster still running the older version\. If so, the upgrade is started during scheduled maintenance windows\. 
 
 ## How often Amazon Aurora minor versions are released<a name="Aurora.VersionPolicy.MinorVersionCadence"></a>
 
  In general, Amazon Aurora minor versions are released quarterly\. The release schedule might vary to pick up additional features or fixes\. 
-
-## How long Amazon Aurora minor versions remain available<a name="Aurora.VersionPolicy.MinorVersionLifetime"></a>
-
- We intend to make each Amazon Aurora minor version of a particular major version available for at least 12 months\. At the end of this period, Aurora might apply an auto minor version upgrade to the subsequent default minor version\. Such an upgrade is started during the scheduled maintenance window for any cluster that is still running the older minor version\. 
-
- We might replace a minor version of a particular major version sooner than the usual 12\-month period if there are critical matters such as security issues, or if the major version has been deprecated\. 
-
- Before beginning automatic upgrades of minor versions, we generally provide a reminder three months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. 
 
 ## Long\-term support for selected Amazon Aurora minor versions<a name="Aurora.VersionPolicy.LTS"></a>
 

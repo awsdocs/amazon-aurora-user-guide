@@ -1,8 +1,8 @@
 # Using Aurora PostgreSQL extensions with Babelfish<a name="babelfish-postgres-aws-extensions"></a>
 
 Aurora PostgreSQL provides extensions for working with other AWS services\. These are optional extensions that support various use cases, such as using Amazon S3 with your DB cluster for importing or exporting data\. 
-+ To import data from an Amazon S3 bucket to your Babelfish for Aurora PostgreSQL DB cluster, you set up the `aws_s3` Aurora PostgreSQL extension\. This extension also lets you export data from your Aurora PostgreSQL DB cluster to an Amazon S3 bucket\. 
-+ AWS Lambda is a compute service that lets you run code without provisioning or managing servers\. You can use Lambda functions to do things like process event notifications from your DB instance\. To learn more about Lambda, see [What is AWS Lambda?](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) in the *AWS Lambda Developer Guide\.* To invoke Lambda functions from your Babelfish for Aurora PostgreSQL DB cluster, you set up the `aws_lambda` Aurora PostgreSQL extension\. 
++ To import data from an Amazon S3 bucket to your Babelfish DB cluster, you set up the `aws_s3` Aurora PostgreSQL extension\. This extension also lets you export data from your Aurora PostgreSQL DB cluster to an Amazon S3 bucket\. 
++ AWS Lambda is a compute service that lets you run code without provisioning or managing servers\. You can use Lambda functions to do things like process event notifications from your DB instance\. To learn more about Lambda, see [What is AWS Lambda?](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) in the *AWS Lambda Developer Guide\.* To invoke Lambda functions from your Babelfish DB cluster, you set up the `aws_lambda` Aurora PostgreSQL extension\. 
 
 To set up these extensions for your Babelfish cluster, you first need to grant permission to the internal Babelfish user to load the extensions\. After granting permission, you can then load Aurora PostgreSQL extensions\. 
 
@@ -16,7 +16,7 @@ This procedure loads both `aws_s3` and `aws_lambda`, one after the other\. You d
 
 **To set up your Babelfish DB cluster with privileges for the Aurora PostgreSQL extensions**
 
-1. Connect to your Babelfish for Aurora PostgreSQL DB cluster\. Use the name for the "master" user \(\-U\) that you specified when you created the Babelfish DB cluster\. The default \(`postgres`\) is shown in the examples\. 
+1. Connect to your Babelfish DB cluster\. Use the name for the "master" user \(\-U\) that you specified when you created the Babelfish DB cluster\. The default \(`postgres`\) is shown in the examples\. 
 
    For Linux, macOS, or Unix:
 
@@ -88,10 +88,10 @@ Before trying to import or export data using an Amazon S3 bucket, complete the f
 1. Upload files to your Amazon S3 bucket\. To do so, follow the steps in [Add an object to a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) in the *Amazon Simple Storage Service User Guide\.* 
 
 1. Set up permissions as needed:
-   + To import data from Amazon S3, the Babelfish for Aurora PostgreSQL DB cluster needs permission to access the bucket\. We recommend using an AWS Identity and Access Management \(IAM\) role and attaching an IAM policy to that role for your cluster\. To do so, follow the steps in [Using an IAM role to access an Amazon S3 bucket](USER_PostgreSQL.S3Import.md#USER_PostgreSQL.S3Import.ARNRole)\. 
-   + To export data from your Babelfish for Aurora PostgreSQL DB cluster, your cluster must be granted access to the Amazon S3 bucket\. As with importing, we recommend using an IAM role and policy\. To do so, follow the steps in [Setting up access to an Amazon S3 bucket](postgresql-s3-export.md#postgresql-s3-export-access-bucket)\.
+   + To import data from Amazon S3, the Babelfish DB cluster needs permission to access the bucket\. We recommend using an AWS Identity and Access Management \(IAM\) role and attaching an IAM policy to that role for your cluster\. To do so, follow the steps in [Using an IAM role to access an Amazon S3 bucket](USER_PostgreSQL.S3Import.md#USER_PostgreSQL.S3Import.ARNRole)\. 
+   + To export data from your Babelfish DB cluster, your cluster must be granted access to the Amazon S3 bucket\. As with importing, we recommend using an IAM role and policy\. To do so, follow the steps in [Setting up access to an Amazon S3 bucket](postgresql-s3-export.md#postgresql-s3-export-access-bucket)\.
 
-You can now use Amazon S3 with the `aws_s3` extension with your Babelfish for Aurora PostgreSQL DB cluster\. 
+You can now use Amazon S3 with the `aws_s3` extension with your Babelfish DB cluster\. 
 
 **To import data from Amazon S3 to Babelfish and to export Babelfish data to Amazon S3**
 
@@ -116,7 +116,7 @@ After the `aws_lambda` extension is loaded in your Babelfish DB cluster but befo
 
 **To set up access for your Babelfish DB cluster to work with Lambda**
 
-This procedure uses the AWS CLI to create the IAM policy, role, and associate these with the Babelfish DB cluster\. 
+This procedure uses the AWS CLI to create the IAM policy and role, and associate these with the Babelfish DB cluster\. 
 
 1. Create an IAM policy that allows access to Lambda from your Babelfish DB cluster\.
 
@@ -159,7 +159,7 @@ This procedure uses the AWS CLI to create the IAM policy, role, and associate th
        --role-name rds-lambda-role --region aws-region
    ```
 
-1. Attach the role to your Babelfish for Aurora PostgreSQL DB cluster
+1. Attach the role to your Babelfish DB cluster
 
    ```
    aws rds add-role-to-db-cluster \
@@ -185,11 +185,11 @@ def lambda_handler(event, context):
         'body': json.dumps('Hello from Lambda!')
 ```
 
-Currently, Babelfish for Aurora PostgreSQL doesn't support JSON\. If your function returns JSON, you use a wrapper to handle the JSON\. For example, say that the `lambda_function.py` shown preceding is stored in Lambda as `my-function`\.
+Currently, Babelfish doesn't support JSON\. If your function returns JSON, you use a wrapper to handle the JSON\. For example, say that the `lambda_function.py` shown preceding is stored in Lambda as `my-function`\.
 
 1. Connect to your Babelfish DB cluster using the `psql` client \(or the pgAdmin client\)\. For more information, see [Using psql to connect to the DB cluster](babelfish-connect-PostgreSQL.md#babelfish-connect-psql)\. 
 
-1. Create the wrapper\. This example uses PostgreSQL's procedural language for SQL, `PL/pgSQL`\. To learn more, see [PL/pgSQL–SQL Procedural Language](https://www.postgresql.org/docs/13/plpgsql.html)
+1. Create the wrapper\. This example uses PostgreSQL's procedural language for SQL, `PL/pgSQL`\. To learn more, see [PL/pgSQL–SQL Procedural Language](https://www.postgresql.org/docs/13/plpgsql.html)\.
 
    ```
    create or replace function master_dbo.lambda_wrapper()

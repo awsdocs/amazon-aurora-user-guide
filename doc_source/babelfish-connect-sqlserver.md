@@ -1,6 +1,14 @@
 # Using a SQL Server client to connect to your DB cluster<a name="babelfish-connect-sqlserver"></a>
 
-You can use a SQL Server client to connect with Babelfish on the TDS port\.
+You can use a SQL Server client to connect with Babelfish on the TDS port\. As of Babelfish 2\.1\.0 and higher releases, you can use the SSMS Object Explorer or the SSMS Query Editor to connect to your Babelfish cluster\. 
+
+**Limitations**
++ Using `PARSE` to check SQL syntax doesn't work as it should\. Rather than checking the syntax without running the query, the `PARSE` command runs the query but doesn't display any results\. Using the SMSS <Ctrl><F5> key combination to check syntax has the same anomalous behavior, that is, Babelfish unexpectedly runs the query without providing any output\. 
++ Babelfish doesn't support MARS \(Multiple Active Result Sets\)\. Be sure that any client applications that you use to connect to Babelfish aren't set to use MARS\. 
++ For Babelfish 1\.3\.0 and older versions, only the Query Editor is supported for SSMS\. To use SSMS with Babelfish, be sure to open the Query Editor connection dialog in SSMS, and not the Object Explorer\. If the Object Explorer dialog does open, cancel the dialog and re\-open the Query Editor\. In the following image, you can find the menu options to choose when connecting to Babelfish 1\.3\.0 or older versions\.  
+![\[\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/babelfish_connect_ssms.png)
+
+For more information about interoperability and behavioral differences between SQL Server and Babelfish, see [Differences between Babelfish for Aurora PostgreSQL and SQL Server](babelfish-compatibility.md)\.
 
 ## Using sqlcmd to connect to the DB cluster<a name="babelfish-connect-sqlcmd"></a>
 
@@ -16,23 +24,19 @@ The options are as follows:
 + `-P` is the password associated with the user\.
 + `-d` is the name of your Babelfish database\.
 
-After connecting, you can use many of the same commands that you use with SQL Server\. For some examples, see [Querying a database for object information](babelfish-query-database.md)\.
-
-To review a list of exceptions, see [Differences between Aurora PostgreSQL with Babelfish and SQL Server](babelfish-compatibility.md)\.
+After connecting, you can use many of the same commands that you use with SQL Server\. For some examples, see [Getting information from the Babelfish system catalog](babelfish-query-database.md)\.
 
 ## Using SSMS to connect to the DB cluster<a name="babelfish-connect-SSMS"></a>
 
-You can connect to an Aurora PostgreSQL DB cluster that supports Babelfish by using Microsoft SQL Server Management Studio \(SSMS\)\. SSMS includes a variety of tools\. By default, SSMS might be configured to launch the SSMS Object Explorer\. For connecting to your Babelfish database with SSMS, you can use only the SSMS Query Editor\. Currently, only the Query Editor is supported\.
+You can connect to an Aurora PostgreSQL DB cluster running Babelfish by using Microsoft SQL Server Management Studio \(SSMS\)\. SSMS includes a variety of tools, including the SQL Server Import amd Export Wizard discussed in [Migrating a SQL Server database to Babelfish for Aurora PostgreSQL](babelfish-migration.md)\. For more information about SSMS, see [ Download SQL Server Management Studio \(SSMS\)](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16) in the Microsoft documentation\.
 
 **To connect to your Babelfish database with SSMS**
 
 1. Start SSMS\.
 
-1. Open the **Connect to Server** dialog box\. Be sure that the Query Editor connection dialog opens, not the Object Explorer\. To continue with the connection, do one of the following:
+1. Open the **Connect to Server** dialog box\. To continue with the connection, do one of the following:
    + Choose **New Query**\.
    + If the Query Editor is open, choose **Query**, **Connection**, **Connect**\.
-**Note**  
-If the Object Explorer's dialog opens, cancel the dialog and re\-open the Query Editor\.
 
 1. Provide the following information for your database:
 

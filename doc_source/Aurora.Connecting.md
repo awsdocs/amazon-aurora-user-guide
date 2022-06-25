@@ -22,7 +22,7 @@ For more information, see [Troubleshooting Aurora connection failures](#Aurora.C
 
 To authenticate to your Aurora MySQL DB cluster, you can use either MySQL user name and password authentication or AWS Identity and Access Management \(IAM\) database authentication\. For more information on using MySQL user name and password authentication, see [ Access control and account management](https://dev.mysql.com/doc/refman/5.7/en/access-control.html) in the MySQL documentation\. For more information on using IAM database authentication, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\.
 
-When you have a connection to your Amazon Aurora DB cluster with MySQL 8\.0 compatibility, you can run SQL commands that are compatible with MySQL version 8\.0\. The minimum compatible version is MySQL 8\.0\.23\. For more information about MySQL 8\.0 SQL syntax, see the [MySQL 8\.0 reference manual](http://dev.mysql.com/doc/refman/8.0/en/index.html)\. For information about limitations that apply to Aurora MySQL version 3, see [Comparison of Aurora MySQL version 3 and community MySQL 8\.0](AuroraMySQL.MySQL80.md#Aurora.AuroraMySQL.Compare-80-v3)\. 
+When you have a connection to your Amazon Aurora DB cluster with MySQL 8\.0 compatibility, you can run SQL commands that are compatible with MySQL version 8\.0\. The minimum compatible version is MySQL 8\.0\.23\. For more information about MySQL 8\.0 SQL syntax, see the [MySQL 8\.0 reference manual](http://dev.mysql.com/doc/refman/8.0/en/index.html)\. For information about limitations that apply to Aurora MySQL version 3, see [Comparison of Aurora MySQL version 3 and MySQL 8\.0 Community Edition](Aurora.AuroraMySQL.Compare-80-v3.md)\. 
 
 When you have a connection to your Amazon Aurora DB cluster with MySQL 5\.7 compatibility, you can run SQL commands that are compatible with MySQL version 5\.7\. For more information about MySQL 5\.7 SQL syntax, see the [MySQL 5\.7 reference manual](http://dev.mysql.com/doc/refman/5.7/en/index.html)\. For information about limitations that apply to Aurora MySQL 5\.7, see [Aurora MySQL version 2 compatible with MySQL 5\.7](Aurora.AuroraMySQL.CompareMySQL57.md)\.
 
@@ -41,6 +41,12 @@ To view the cluster endpoint \(writer endpoint\), choose **Databases** on the Am
 
 ![\[Amazon Aurora details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraMySQLConnect.png)
 
+**Topics**
++ [Connection utilities for Aurora MySQL](#Aurora.Connecting.AuroraMySQL.Utilities)
++ [Connecting with Aurora MySQL using the MySQL utility](#Aurora.Connecting.mysql)
++ [Connecting with the Amazon Web Services JDBC Driver for MySQL](#Aurora.Connecting.JDBCDriverMySQL)
++ [Connecting with SSL for Aurora MySQL](#Aurora.Connecting.SSL)
+
 ### Connection utilities for Aurora MySQL<a name="Aurora.Connecting.AuroraMySQL.Utilities"></a>
 
 Some connection utilities you can use are the following:
@@ -51,7 +57,63 @@ Some connection utilities you can use are the following:
 Version 3\.0\.3 of the MariaDB Connector/J utility drops support for Aurora DB clusters, so we highly recommend moving to the AWS JDBC Driver for MySQL\. The AWS JDBC Driver for MySQL offers improved failover speed for Aurora MySQL DB clusters by caching DNS connections for quick use\.  
 If you are using an Aurora Serverless DB cluster, the failover benefits don't apply, but you can disable the feature by setting the `failureDetectionEnabled` parameter to `false`\. To review a complete list of configuration options, see the [AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
 
-#### Connecting with the Amazon Web Services JDBC Driver for MySQL<a name="Aurora.Connecting.JDBCDriverMySQL"></a>
+### Connecting with Aurora MySQL using the MySQL utility<a name="Aurora.Connecting.mysql"></a>
+
+Use the following procedure\. It assumes that you configured your DB cluster in a private subnet in your VPC\. You connect using an Amazon EC2 instance that you configured according to the tutorials in [Tutorial: Create a web server and an Amazon Aurora DB cluster](TUT_WebAppWithRDS.md)\.
+
+**Note**  
+This procedure doesn't require installing the web server in the tutorial, but it does require installing MariaDB 10\.5\.
+
+**To connect to a DB cluster using the MySQL utility**
+
+1. Log in to the EC2 instance that you're using to connect to your DB cluster\.
+
+   You should see output similar to the following\.
+
+   ```
+   Last login: Thu Jun 23 13:32:52 2022 from xxx.xxx.xxx.xxx
+   
+          __|  __|_  )
+          _|  (     /   Amazon Linux 2 AMI
+         ___|\___|___|
+   
+   https://aws.amazon.com/amazon-linux-2/
+   [ec2-user@ip-10-0-xxx.xxx ~]$
+   ```
+
+1. Type the following command at the command prompt to connect to the primary DB instance of your DB cluster\.
+
+   For the `-h` parameter, substitute the endpoint DNS name for your primary instance\. For the `-u` parameter, substitute the user ID of a database user account\.
+
+   ```
+   mysql -h primary-instance-endpoint.AWS_account.AWS_Region.rds.amazonaws.com -P 3306 -u database_user -p
+   ```
+
+   For example:
+
+   ```
+   mysql -h my-aurora-cluster-instance.c1xy5example.123456789012.eu-central-1.rds.amazonaws.com -P 3306 -u admin -p
+   ```
+
+1. Enter the password for the database user\.
+
+   You should see output similar to the following\.
+
+   ```
+   Welcome to the MariaDB monitor.  Commands end with ; or \g.
+   Your MySQL connection id is 1770
+   Server version: 8.0.23 Source distribution
+   
+   Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+   
+   Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+   
+   MySQL [(none)]>
+   ```
+
+1. Enter your SQL commands\.
+
+### Connecting with the Amazon Web Services JDBC Driver for MySQL<a name="Aurora.Connecting.JDBCDriverMySQL"></a>
 
 The AWS JDBC Driver for MySQL is a client driver designed for the high availability of Aurora MySQL\. The AWS JDBC Driver for MySQL is drop\-in compatible with the MySQL Connector/J driver\. To install or upgrade your connector, replace the MySQL connector \.jar file \(located in the application CLASSPATH\) with the AWS JDBC Driver for MySQL \.jar file, and update the connection URL prefix from `jdbc:mysql://` to `jdbc:mysql:aws://`\.
 

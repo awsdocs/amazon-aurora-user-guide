@@ -1,109 +1,130 @@
 # Upgrading the PostgreSQL DB engine for Aurora PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL"></a><a name="pgsql_upgrade"></a>
 
-When Aurora PostgreSQL supports a new version of a database engine, you can upgrade your DB clusters to the new version\. There are two kinds of upgrades for PostgreSQL DB clusters: major version upgrades and minor version upgrades\. 
+Amazon Aurora makes new versions of the PostgreSQL database engine available in AWS Regions only after extensive testing\. You can upgrade your Aurora PostgreSQL DB clusters to the new version when it's available in your Region\. 
 
-*Major version upgrades* can contain database changes that are not backward\-compatible with existing applications\. As a result, you must manually perform major version upgrades of your DB instances\. You can initiate a major version upgrade by modifying your DB cluster\. However, before you perform a major version upgrade, we recommend that you follow the steps described in [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\.
+Depending on the version of Aurora PostgreSQL that your DB cluster is currently running, an upgrade to the new release is either a minor upgrade or a major upgrade\. For example, upgrading an Aurora PostgreSQL 11\.15 DB cluster to Aurora PostgreSQL 13\.6 is a *major version upgrade*\. Upgrading an Aurora PostgreSQL 13\.3 DB cluster to Aurora PostgreSQL 13\.7 is a *minor version upgrade*\. In the following topics, you can find information about how to perform both types of upgrades\. 
 
-In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB cluster\. Or you can enable the **Auto minor version upgrade** option when creating or modifying a DB cluster\. Doing so means that your DB cluster is automatically upgraded after Aurora PostgreSQL tests and approves the new version\. For more details, see [Automatic minor version upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)\. For information about manually performing a minor version upgrade, see [Manually upgrading the Aurora PostgreSQL engine](#USER_UpgradeDBInstance.Upgrading.Manual)\.
-
-Aurora DB clusters that are configured as logical replication publishers or subscribers can't undergo a major version upgrade\. Before upgrading, you need to stop replication and drop any logical slots\. For more information, see [Stopping logical replication](AuroraPostgreSQL.Replication.Logical.md#AuroraPostgreSQL.Replication.Logical.Stop)\.
-
-For how to determine valid upgrade targets, see [Determining which engine version to upgrade to](#USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion)\. 
-
-**Topics**
-+ [Overview of upgrading Aurora PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Overview)
-+ [Determining which engine version to upgrade to](#USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion)
+**Contents**
++ [Overview of the Aurora PostgreSQL upgrade processes](#USER_UpgradeDBInstance.PostgreSQL.Overview)
 + [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)
-+ [Manually upgrading the Aurora PostgreSQL engine](#USER_UpgradeDBInstance.Upgrading.Manual)
-+ [In\-place major upgrades for global databases](#USER_UpgradeDBInstance.PostgreSQL.GlobalDB)
-+ [Automatic minor version upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)
+  + [Getting a list of available versions in your AWS Region](#USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion)
+  + [Before upgrading your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)
+  + [Upgrading the Aurora PostgreSQL engine to a new major version](#USER_UpgradeDBInstance.Upgrading.Manual)
+    + [Major upgrades for global databases](#USER_UpgradeDBInstance.PostgreSQL.GlobalDB)
++ [How to perform minor version upgrades and apply patches](#USER_UpgradeDBInstance.PostgreSQL.Minor)
+  + [Minor release upgrades and zero\-downtime patching](#USER_UpgradeDBInstance.PostgreSQL.Minor.zdp)
+  + [Upgrading the Aurora PostgreSQL engine to a new minor version](#USER_UpgradeDBInstance.MinorUpgrade)
 + [Upgrading PostgreSQL extensions](#USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades)
 
-## Overview of upgrading Aurora PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.Overview"></a>
+## Overview of the Aurora PostgreSQL upgrade processes<a name="USER_UpgradeDBInstance.PostgreSQL.Overview"></a>
 
-Major version upgrades can contain database changes that are not backward\-compatible with previous versions of the database\. This functionality can cause your existing applications to stop working correctly\. As a result, Amazon Aurora doesn't apply major version upgrades automatically\. To perform a major version upgrade, you modify your DB cluster manually\. 
+The differences between major and minor version upgrades are as follows:
 
-To safely upgrade your DB instances, Aurora PostgreSQL uses the pg\_upgrade utility described in the [PostgreSQL documentation](https://www.postgresql.org/docs/current/pgupgrade.html)\. After the writer upgrade completes, each reader instance experiences a brief outage while it's upgraded to the new major version automatically\.
+**Minor version upgrades and patches**  
+Minor version upgrades and patches include only those changes that are backward\-compatible with existing applications\. Minor version upgrades and patches become available to you only after Aurora PostgreSQL tests and approves them\.   
+Minor version upgrades can be applied for you automatically by Aurora\. When you create a new Aurora PostgreSQL DB cluster, the **Enable minor version upgrade** option is preselected\. Unless you turn off this option, minor version upgrades are applied automatically during your scheduled maintenance window\. For more information about the automatic minor version upgrade \(AMVU\) option and how to modify your Aurora DB cluster to use it, see [ Automatic minor version upgrades for Aurora DB clusters ](USER_UpgradeDBInstance.Maintenance.md#Aurora.Maintenance.AMVU)\.  
+If the automatic minor version upgrade option isn't set for your Aurora PostgreSQL DB cluster, your Aurora PostgreSQL isn't automatically upgraded to the new minor version\. Instead, when a new minor version is released in your AWS Region and your Aurora PostgreSQL DB cluster is running an older minor version, Aurora prompts you to upgrade\. It does so by adding a recommendation to the maintenance tasks for your cluster\.   
+Patches aren't considered an upgrade, and they aren't applied automatically\. Aurora PostgreSQL prompts you to apply any patches by adding a recommendation to maintenance tasks for your Aurora PostgreSQL DB cluster\. For more information, see [How to perform minor version upgrades and apply patches](#USER_UpgradeDBInstance.PostgreSQL.Minor)\.   
+Patches that resolve security or other critical issues are also added as maintenance tasks\. However, these patches are required\. Make sure to apply security patches to your Aurora PostgreSQL DB cluster when they become available in your pending maintenance tasks\.
+The upgrade process involves the possibility of brief outages as each instance in the cluster is upgraded to the new version\. However, after Aurora PostgreSQL 14\.3, 13\.7, 12\.11, 11\.16, and 10\.21 and other higher releases of these minor versions, the upgrade process uses the zero\-downtime patching \(ZDP\) feature\. This feature minimizes outages, and in most cases completely eliminate them\. For more information, see [Minor release upgrades and zero\-downtime patching](#USER_UpgradeDBInstance.PostgreSQL.Minor.zdp)\.
 
-Aurora PostgreSQL takes a DB cluster snapshot before a major version upgrade begins\. It doesn't take a DB cluster snapshot before a minor version upgrade\.
+**Major version upgrades**  
+Unlike for minor version upgrades and patches, Aurora PostgreSQL doesn't have an automatic major version upgrade option\. New major PostgreSQL versions might contain database changes that aren't backward\-compatible with existing applications\. The new functionality can cause your existing applications to stop working correctly\.  
+To prevent any issues, we strongly recommend that you follow the process outlined in [Before upgrading your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary) before upgrading the DB instances in your Aurora PostgreSQL DB clusters\. First ensure that your applications can run on the new version by following that procedure\. Then you can manually upgrade your Aurora PostgreSQL DB cluster to the new version\.   
+The upgrade process involves the possibility of brief outages as each instance in the cluster is upgraded to the new version\. The preliminary planning process also takes time\. We recommend that you always perform upgrade tasks during your cluster's maintenance window or when operations are minimal\. For more information, see [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\.
 
-If you want to return to a previous version after a major version upgrade is complete, you can restore the DB cluster from this snapshot\. You can also restore the DB cluster to a specific point in time before either a major or minor version upgrade started\. For more information, see [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md) or [Restoring a DB cluster to a specified time](aurora-pitr.md)\.
-
-During the major version upgrade process, a cloned volume is allocated\. If the upgrade fails for some reason, such as due to a schema incompatibility, Aurora PostgreSQL uses this clone to roll back the upgrade\. Note, when more than 15 clones of a source volume are allocated, subsequent clones become full copies and will take longer\. This can cause the upgrade process to take longer as well\. If Aurora PostgreSQL rolls back the upgrade, be aware of the following:
-+ You may see billing entries and metrics for both the original volume and the cloned volume allocated during the upgrade\. Aurora PostgreSQL will clean up the extra volume after the cluster backup retention window is beyond the time of the upgrade\.
-+ The next cross region snapshot copy from this cluster will be a full copy instead of an incremental copy\.
-
-## Determining which engine version to upgrade to<a name="USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion"></a>
-
-To determine which major engine version that you can upgrade your database to, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) CLI command\. If you can't do a major version upgrade\. You first upgrade to a minor version that has a major version upgrade path\.
-
-For example, the following command displays the major engine versions available for upgrading a DB cluster currently running the Aurora PostgreSQL engine version 10\.11\. 
-
-**Example**  
-For Linux, macOS, or Unix:  
-
-```
-aws rds describe-db-engine-versions \
-  --engine aurora-postgresql \
-  --engine-version 10.11 \
-  --query 'DBEngineVersions[].ValidUpgradeTarget[?IsMajorVersionUpgrade == `true`].{EngineVersion:EngineVersion}' \
-  --output text
-```
-For Windows:  
-
-```
-aws rds describe-db-engine-versions ^
-  --engine aurora-postgresql ^
-  --engine-version 10.11 ^
-  --query "DBEngineVersions[].ValidUpgradeTarget[?IsMajorVersionUpgrade == `true`].{EngineVersion:EngineVersion}" ^
-  --output text
-```
+**Note**  
+Both minor version upgrades and major version upgrades might involve brief outages\. For that reason, we recommend strongly that you perform or schedule upgrades during your maintenance window or during other periods of low utilization\.
 
 ## How to perform a major version upgrade<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion"></a>
 
-Major version upgrades can contain database changes that are not backward\-compatible with previous versions of the database\. This functionality can cause your existing applications to stop working correctly\. As a result, Amazon Aurora doesn't apply major version upgrades automatically\. To perform a major version upgrade, you modify your DB cluster manually\. 
+Major version upgrades might contain database changes that are not backward\-compatible with previous versions of the database\. New functionality in a new version can cause your existing applications to stop working correctly\. To avoid issues, Amazon Aurora doesn't apply major version upgrades automatically\. Rather, we recommend that you carefully plan for a major version upgrade by following these steps:
 
-The following Aurora PostgreSQL major version upgrades are available\. 
+1. Choose the major version that you want from the list of available targets from those listed for your version in the table\. You can get a precise list of versions available in your AWS Region for your current version by using the AWS CLI\. For details, see [Getting a list of available versions in your AWS Region](#USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion)\. 
+
+1. Verify that your applications work as expected on a trial deployment of the new version\. For information about the complete process, see [Before upgrading your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\.
+
+1. After verifying that your applications work as expected on the trial deployment, you can upgrade your cluster\. For details, see [Upgrading the Aurora PostgreSQL engine to a new major version](#USER_UpgradeDBInstance.Upgrading.Manual)\.
+
+**Note**  
+Currrently, you can't upgrade an Aurora PostgreSQL DB cluster running Babelfish to a new major version\.
+
+In the table, you can find the major version upgrades that are available for various Aurora PostgreSQL DB versions\.  
 
 
 | Current source version | Major upgrade targets | 
 | --- | --- | 
-| 13\.5 | [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) |   |   |   |   |   |   |   |   |   |   | 
-| 13\.4 | [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) | [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) |   |   |   |   |   |   |   |   |   | 
-| 13\.3 | [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) | [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) | [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) |   |   |   |   |   |   |   |   | 
-| 12\.10 | [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) |   |   |   |   |   |   |   |   |   |   | 
-| 12\.9 | [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) | [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) |   |   |   |   |   |   |   |   | 
-| 12\.8 | [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) | [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) | [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) | [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) |   |   |   |   |   |   | 
-| 12\.7 | [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) | [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) | [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) | [13\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.133X) | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) | [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) | [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) |   |   |   |   | 
-| 12\.6 | [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) | [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) | [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) | [13\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.133X) | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) | [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) | [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) | [12\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.42) |   |   |   | 
-| 12\.4 | [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) | [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) | [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) | [13\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.133X) | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) | [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) | [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) | [12\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.42) | [12\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.41) |   |   | 
-| 11\.15 | [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) |   |   |   |   |   |   |   |   |   | 
-| 11\.14 | [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) | [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) | [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) |   |   |   |   |   |   |   | 
-| 11\.13 | [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) | [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) | [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) | [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) | [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) |   |   |   |   |   | 
-| 11\.12 | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) | [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) | [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) | [12\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.42) | [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) | [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) | [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) |   |   |   |   | 
-| 11\.11 | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) | [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) | [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) | [12\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.42) | [12\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.41) | [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) | [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) | [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) | [11\.12](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.36) |   |   | 
-| 11\.9 | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) | [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) | [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) | [12\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.42) | [12\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.41) | [12\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.40) | [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) | [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) | [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) | [11\.12](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.36) | [11\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.35) | 
-| 10\.20 | [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) | [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) |   |   |   |   |   |   |   |   | 
-| 10\.19 | [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) | [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) | [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) | [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) | [10\.20](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1020) |   |   |   |   |   |   | 
-| 10\.18 | [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) | [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) | [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) | [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) | [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) | [10\.20](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1020) | [10\.19](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1019) |   |   |   |   | 
-| 10\.17 | [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) | [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) | [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) | [11\.12](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.36) | [10\.20](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1020) | [10\.19](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1019) | [10\.18](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1018) |   |   |   |   | 
-| 10\.16 | [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) | [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) | [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) | [11\.12](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.36) | [11\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.35) | [10\.20](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1020) | [10\.19](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1019) | [10\.18](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1018) | [10\.17](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.29) |   |   | 
-| 10\.14 | [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) | [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) | [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) | [11\.12](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.36) | [11\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.35) | [11\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.34) | [10\.20](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1020) | [10\.19](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1019) | [10\.18](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1018) | [10\.17](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.29) | [10\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.28) | 
-| 9\.6\.22 | [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) | [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) | [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) |  |  |  |  |  |  |  |  | 
+| 13\.7 |  [14\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.143X) |   |   |   |   |   |   |   |   |   |   |   |   | 
+| 13\.6 |  [14\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.143X) |  [13\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.137X) |   |   |   |   |   |   |   |   |   |   |   | 
+| 13\.5 | [14\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.143X) |  [13\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.137X) |  [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) |   |   |   |   |   |   |   |   |   |   | 
+| 13\.4 | [14\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.143X)  |  [13\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.137X)  |  [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X)  |  [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X)  |   |   |   |   |   |   |   |   |   | 
+| 13\.3 | [14\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.143X)  |  [13\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.137X)  |  [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) |  [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) |  [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) |   |   |   |   |   |   |   |   | 
+| 12\.11 | [14\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.143X)  |  [13\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.137X) |   |   |   |   |   |   |   |   |   |   |   | 
+| 12\.10 |  [13\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.137X) |  [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) |  [12\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1211X) |   |   |   |   |   |   |   |   |   |   | 
+| 12\.9 |  [13\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.137X) |  [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) |  [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) |  [12\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1211X) |  [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) |   |   |   |   |   |   |   |   | 
+| 12\.8 |  [13\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.137X) |  [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) |  [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) |  [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) |  [12\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1211X) |  [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) |  [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) |   |   |   |   |   |   | 
+| 12\.7 | [13\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.137X) | [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) | [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) | [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) | [13\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.133X) | [12\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1211X) | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) | [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) | [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) |   |   |   |   | 
+| 12\.6 |  [13\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.137X) |  [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) |  [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) |  [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) |  [13\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.133X) |  [12\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1211X) |  [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) |  [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) |  [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) |  [12\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.42) |   |   |   | 
+| 12\.4 |  [13\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.137X) |  [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) |  [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) |  [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) |  [13\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.133X) |  [12\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1211X) |  [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) |  [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) |  [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) |  [12\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.42) |  [12\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.41) |   |   | 
+| 11\.16 | [14\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.143X) |  [13\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.137X) |  [12\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1211X) |   |   |   |   |   |   |   |   |   |   | 
+| 11\.15 |  [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) |  [12\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1211X) |  [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) |  [11\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1116X) |   |   |   |   |   |   |   |   |   | 
+| 11\.14 | [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) | [12\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1211X) | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) | [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) | [11\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1116X) | [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) |   |   |   |   |   |   |   | 
+| 11\.13 |  [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) |  [12\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1211X) |  [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) |  [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) |  [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) |  [11\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1116X) |  [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) |  [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) |   |   |   |   |   | 
+| 11\.12 |  [12\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1211X) |  [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) |  [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) |  [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) |  [12\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.42) |  [11\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1116X) |  [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) |  [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) |  [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) |   |   |   |   | 
+| 11\.11 | [12\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1211X) | [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) | [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) | [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) | [12\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.42) | [12\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.41) | [11\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1116X) | [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) | [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) | [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) | [11\.12](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.36) |   |   | 
+| 11\.9 |  [12\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1211X) |  [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) |  [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) |  [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) |  [12\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.42) |  [12\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.41) |  [12\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.40) |  [11\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1116X) |  [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) |  [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) |  [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) |  [11\.12](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.36) |  [11\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.35) | 
+| 10\.21 |  [14\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.143X) |  [13\.7](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) |  [12\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1211X) |  [11\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1116X) |   |   |   |   |   |   |   |   |   | 
+| 10\.20 |  [13\.6](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.136X) |  [12\.10](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1210X) |  [11\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1116X) |  [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) |  [10\.21](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1021) |   |   |   |   |   |   |   |   | 
+| 10\.19 |  [13\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.135X) |  [12\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.129X) |  [11\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1116X) |  [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) |  [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) |  [10\.21](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1021) |  [10\.20](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1020) |   |   |   |   |   |   | 
+| 10\.18 |  [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) |  [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) |  [11\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1116X) |  [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) |  [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) |  [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) |  [10\.21](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1021) |  [10\.20](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1020) |  [10\.19](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1019) |   |   |   |   | 
+| 10\.17 |  [11\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1116X) |  [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) |  [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) |  [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) |  [11\.12](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.36) |  [10\.21](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1021) |  [10\.20](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1020) |  [10\.19](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1019) |  [10\.18](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1018) |   |   |   |   | 
+| 10\.16 |  [11\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1116X) |  [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) |  [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) |  [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) |  [11\.12](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.36) |  [11\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.35) |  [10\.21](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1021) |  [10\.20](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1020) |  [10\.19](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1019) |  [10\.18](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1018) |  [10\.17](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.29) |   |   | 
+| 10\.14 |  [11\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1116X) |  [11\.15](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1115X) |  [11\.14](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1114X) |  [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) |  [11\.12](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.36) |  [11\.11](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.35) |  [11\.9](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.34) |  [10\.20](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1020) |  [10\.19](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1019) |  [10\.18](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1018) |  [10\.17](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.29) |  [10\.16](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.28) |   | 
+| 9\.6\.22 |  [14\.3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.143X) |  [13\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.134X) |  [12\.8](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.128X) |  [11\.13](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.1113X) |   |   |   |   |   |   |   |   |   | 
 
-Before upgrading, be sure to check the availability of your cluster's DB instance class for the version being considered\. For more information about DB instance classes, including which ones are Graviton2\-based and which ones are Intel\-based, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
+For any version that you're considering, always check the availability of your cluster's DB instance class\. For more information about DB instance classes, including which ones are Graviton2\-based and which ones are Intel\-based, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
 
-Each major version includes enhancements and changes to the query optimizer that are designed to improve performance\. However, your workload might include queries that result in a worse performing plan in the new version\. That's why we recommend that you test and review performance before upgrading in production\. You can manage query plan stability across versions by using the Query Plan Management \(QPM\) extension, as detailed in [Ensuring plan stability after a major version upgrade](AuroraPostgreSQL.Optimize.BestPractice.md#AuroraPostgreSQL.Optimize.BestPractice.MajorVersionUpgrade)\. 
+### Getting a list of available versions in your AWS Region<a name="USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion"></a>
 
-Before applying an upgrade to your production DB clusters, make sure that you thoroughly test any upgrade to verify that all your applications work correctly\. We recommend the following process when upgrading an Aurora PostgreSQL DB cluster:
+You can get a list of engine versions available as upgrade targets for your Aurora PostgreSQL DB by querying your AWS Region using the following [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command, as follows\.
 
-1. Have a version\-compatible parameter group ready\.
+For Linux, macOS, or Unix:
 
-   If you are using a custom DB instance or DB cluster parameter group, you have two options: 
-   + Specify the default DB instance, DB cluster parameter group, or both for the new DB engine version\. 
-   + Create your own custom parameter group for the new DB engine version\.
+```
+aws rds describe-db-engine-versions \
+  --engine aurora-postgresql \
+  --engine-version 12.10 \
+  --query 'DBEngineVersions[].ValidUpgradeTarget[?IsMajorVersionUpgrade == `true`].{EngineVersion:EngineVersion}' \
+  --output text
+```
 
-   If you associate a new DB instance or DB cluster parameter group as a part of the upgrade request, make sure to reboot the database after the upgrade completes to apply the parameters\. If a DB instance needs to be rebooted to apply the parameter group changes, the instance's parameter group status shows `pending-reboot`\. You can view an instance's parameter group status in the console or by using a CLI command such as [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) or [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html)\.
+For Windows:
+
+```
+aws rds describe-db-engine-versions ^
+  --engine aurora-postgresql ^
+  --engine-version 12.10 ^
+  --query "DBEngineVersions[].ValidUpgradeTarget[?IsMajorVersionUpgrade == `true`].{EngineVersion:EngineVersion}" ^
+  --output text
+```
+
+In some cases, the version that you want to upgrade to isn't a target for your current version\. In such cases, use the information in the [versions table](#versions-table) to perform minor version upgrades until your cluster is at a version that has your chosen target in its row of targets\.
+
+### Before upgrading your production DB cluster to a new major version<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary"></a>
+
+Each new major version includes enhancements to the query optimizer that are designed to improve performance\. However, your workload might include queries that result in a worse performing plan in the new version\. That's why we recommend that you test and review performance before upgrading in production\. You can manage query plan stability across versions by using the Query Plan Management \(QPM\) extension, as detailed in [Ensuring plan stability after a major version upgrade](AuroraPostgreSQL.Optimize.BestPractice.md#AuroraPostgreSQL.Optimize.BestPractice.MajorVersionUpgrade)\. 
+
+Before upgrading your production Aurora PostgreSQL DB clusters to a new major version, we strongly recommend that you test the upgrade to verify that all your applications work correctly:
+
+1. Have a version\-compatible parameter group ready\.  
+
+   If you are using a custom DB instance or DB cluster parameter group, you can choose from two options: 
+
+   1. Specify the default DB instance, DB cluster parameter group, or both for the new DB engine version\. 
+
+   1. Create your own custom parameter group for the new DB engine version\.
+
+   If you associate a new DB instance or DB cluster parameter group as a part of the upgrade request, make sure to reboot the database after the upgrade completes to apply the parameters\. If a DB instance needs to be rebooted to apply the parameter group changes, the instance's parameter group status shows `pending-reboot`\. You can view an instance's parameter group status in the console or by using a CLI command such as [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) or [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html)\.
 
 1. Check for unsupported usage:
    + Commit or roll back all open prepared transactions before attempting an upgrade\. You can use the following query to verify that there are no open prepared transactions on your instance\. 
@@ -111,7 +132,7 @@ Before applying an upgrade to your production DB clusters, make sure that you th
      ```
      SELECT count(*) FROM pg_catalog.pg_prepared_xacts;
      ```
-   + Remove all uses of the *reg\** data types before attempting an upgrade\. Except for `regtype` and `regclass`, you can't upgrade the *reg\** data types\. The pg\_upgrade utility can't persist this data type, which is used by Amazon Aurora to do the upgrade\. For more information about the pg\_upgrade utility, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/pgupgrade.html)\.
+   + Remove all uses of the *reg\** data types before attempting an upgrade\. Except for `regtype` and `regclass`, you can't upgrade the *reg\** data types\. The pg\_upgrade utility \(used by Amazon Aurora to do the upgrade\) can't persist this data type\. To learn more about this utility, see [pg\_upgrade](https://www.postgresql.org/docs/current/pgupgrade.html) in the PostgreSQL documentation\.
 
      To verify that there are no uses of unsupported *reg\** data types, use the following query for each database\. 
 
@@ -134,7 +155,7 @@ Before applying an upgrade to your production DB clusters, make sure that you th
 
    The upgrade process creates a DB cluster snapshot of your DB cluster during upgrading\. If you also want to do a manual backup before the upgrade process, see [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md) for more information\.
 
-1. Upgrade certain extensions to the latest available version before performing the major version upgrade\. The extensions to update include the following:
+1. Upgrade certain extensions to the latest available version before performing the major version upgrade\. The extensions to update include the following: 
    + `pgRouting`
    + `postgis_raster`
    + `postgis_tiger_geocoder`
@@ -142,7 +163,7 @@ Before applying an upgrade to your production DB clusters, make sure that you th
    + `address_standardizer`
    + `address_standardizer_data_us`
 
-   Run the following command for each extension that you are using\. 
+   Run the following command for each extension that you're using\. 
 
    ```
    ALTER EXTENSION PostgreSQL-extension UPDATE TO 'new-version'
@@ -179,15 +200,15 @@ Before applying an upgrade to your production DB clusters, make sure that you th
        n.nspname !~ '^pg_toast_temp_' AND n.nspname NOT IN ('pg_catalog', 'information_schema');
    ```
 
-1. Perform a dry run upgrade\.
+1. Perform a dry\-run upgrade\.
 
    We highly recommend testing a major version upgrade on a duplicate of your production database before trying the upgrade on your production database\. To create a duplicate test instance, you can either restore your database from a recent snapshot or clone your database\. For more information, see [Restoring from a snapshot](aurora-restore-snapshot.md#aurora-restore-snapshot.Restoring) or [Cloning a volume for an Amazon Aurora DB cluster](Aurora.Managing.Clone.md)\.
 
-   For more information, see [Manually upgrading the Aurora PostgreSQL engine](#USER_UpgradeDBInstance.Upgrading.Manual)\. 
+   For more information, see [Upgrading the Aurora PostgreSQL engine to a new major version](#USER_UpgradeDBInstance.Upgrading.Manual)\. 
 
 1. Upgrade your production instance\.
 
-   When your dry\-run major version upgrade is successful, you should be able to upgrade your production database with confidence\. For more information, see [Manually upgrading the Aurora PostgreSQL engine](#USER_UpgradeDBInstance.Upgrading.Manual)\. 
+   When your dry\-run major version upgrade is successful, you should be able to upgrade your production database with confidence\. For more information, see [Upgrading the Aurora PostgreSQL engine to a new major version](#USER_UpgradeDBInstance.Upgrading.Manual)\. 
 
    
 **Note**  
@@ -212,16 +233,30 @@ After you complete a major version upgrade, we recommend the following:
   ```
 + We recommend that you test your application on the upgraded database with a similar workload to verify that everything works as expected\. After the upgrade is verified, you can delete this test instance\.
 
-## Manually upgrading the Aurora PostgreSQL engine<a name="USER_UpgradeDBInstance.Upgrading.Manual"></a>
+### Upgrading the Aurora PostgreSQL engine to a new major version<a name="USER_UpgradeDBInstance.Upgrading.Manual"></a>
 
-To perform an upgrade of an Aurora PostgreSQL DB cluster, use the following instructions for the AWS Management Console, the AWS CLI, or the RDS API\. 
+When you initiate the upgrade process to a new major version, Aurora PostgreSQL takes a snapshot of the Aurora DB cluster before it makes any changes to your cluster\. This snapshot is created for major version upgrades only, not minor version upgrades\. When the upgrade process completes, you can find this snapshot among the manual snapshots listed under **Snapshots** in the RDS console\. The snapshot name includes `preupgrade` as its prefix, the name of your Aurora PostgreSQL DB cluster, the source version, the target version, and the date and timestamp, as shown in the following example\. 
 
-**Note**  
-If you're performing a minor upgrade on an Aurora global database, upgrade all of the secondary clusters before you upgrade the primary cluster\.
+```
+preupgrade-docs-lab-apg-global-db-12-8-to-13-6-2022-05-19-00-19
+```
 
-### Console<a name="USER_UpgradeDBInstance.Upgrading.Manual.Console"></a>
+After the upgrade completes, you can use the snapshot that Aurora created and stored in your manual snapshot list to restore the DB cluster to its previous version, if necessary\. 
 
-**To upgrade the engine version of a DB cluster by using the console**
+**Tip**  
+In general, snapshots provide many ways to restore your Aurora DB cluster to various points in time\. To learn more, see [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md) and [Restoring a DB cluster to a specified time](aurora-pitr.md)\.
+
+During the major version upgrade process, Aurora allocates a volume and clones the source Aurora PostgreSQL DB cluster\. If the upgrade fails for any reason, Aurora PostgreSQL uses the clone to roll back the upgrade\. After more than 15 clones of a source volume are allocated, subsequent clones become full copies and take longer\. This can cause the upgrade process also to take longer\. If Aurora PostgreSQL rolls back the upgrade, be aware of the following:
++ You might see billing entries and metrics for both the original volume and the cloned volume allocated during the upgrade\. Aurora PostgreSQL cleans up the extra volume after the cluster backup retention window is beyond the time of the upgrade\. 
++ The next cross\-Region snapshot copy from this cluster will be a full copy instead of an incremental copy\.
+
+To safely upgrade the DB instances that make up your cluster, Aurora PostgreSQL uses the pg\_upgrade utility\. After the writer upgrade completes, each reader instance experiences a brief outage while it's upgraded to the new major version\. To learn more about this PostgreSQL utility, see [pg\_upgrade](https://www.postgresql.org/docs/current/pgupgrade.html) in the PostgreSQL documentation\. 
+
+You can upgrade your Aurora PostgreSQL DB cluster to a new version by using the AWS Management Console, the AWS CLI, or the RDS API\.
+
+#### Console<a name="USER_UpgradeDBInstance.Upgrading.Manual.Console"></a>
+
+**To upgrade the engine version of a DB cluster**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -239,13 +274,13 @@ If you're performing a minor upgrade on an Aurora global database, upgrade all o
 
    Or choose **Back** to edit your changes or **Cancel** to cancel your changes\. 
 
-### AWS CLI<a name="USER_UpgradeDBInstance.Upgrading.Manual.CLI"></a>
+#### AWS CLI<a name="USER_UpgradeDBInstance.Upgrading.Manual.CLI"></a>
 
-To upgrade the engine version of a DB cluster, use the CLI [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) command\. Specify the following parameters: 
-+ `--db-cluster-identifier` – the name of the DB cluster\. 
-+ `--engine-version` – the version number of the database engine to upgrade to\. For information about valid engine versions, use the AWS CLI [ describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) command\.
-+ `--allow-major-version-upgrade` – a required flag when the `--engine-version` parameter is a different major version than the DB cluster's current major version\.
-+ `--no-apply-immediately` – apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\. 
+To upgrade the engine version of a DB cluster, use the [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) AWS CLI command\. Specify the following parameters: 
++ `--db-cluster-identifier` – The name of the DB cluster\. 
++ `--engine-version` – The version number of the database engine to upgrade to\. For information about valid engine versions, use the AWS CLI [ describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) command\.
++ `--allow-major-version-upgrade` – A required flag when the `--engine-version` parameter is a different major version than the DB cluster's current major version\.
++ `--no-apply-immediately` – Apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\. 
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -267,133 +302,136 @@ For Windows:
 5.     --no-apply-immediately
 ```
 
-### RDS API<a name="USER_UpgradeDBInstance.Upgrading.Manual.API"></a>
+#### RDS API<a name="USER_UpgradeDBInstance.Upgrading.Manual.API"></a>
 
 To upgrade the engine version of a DB cluster, use the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) operation\. Specify the following parameters: 
-+ `DBClusterIdentifier` – the name of the DB cluster, for example *`mydbcluster`*\. 
-+ `EngineVersion` – the version number of the database engine to upgrade to\. For information about valid engine versions, use the [ DescribeDBEngineVersions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBEngineVersions.html) operation\.
-+ `AllowMajorVersionUpgrade` – a required flag when the `EngineVersion` parameter is a different major version than the DB cluster's current major version\.
-+ `ApplyImmediately` – whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to `true`\. To apply changes during the next maintenance window, set the value to `false`\. 
++ `DBClusterIdentifier` – The name of the DB cluster, for example *`mydbcluster`*\. 
++ `EngineVersion` – The version number of the database engine to upgrade to\. For information about valid engine versions, use the [ DescribeDBEngineVersions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBEngineVersions.html) operation\.
++ `AllowMajorVersionUpgrade` – A required flag when the `EngineVersion` parameter is a different major version than the DB cluster's current major version\.
++ `ApplyImmediately` – Whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to `true`\. To apply changes during the next maintenance window, set the value to `false`\. 
 
-## In\-place major upgrades for global databases<a name="USER_UpgradeDBInstance.PostgreSQL.GlobalDB"></a>
+#### Major upgrades for global databases<a name="USER_UpgradeDBInstance.PostgreSQL.GlobalDB"></a>
 
- For an Aurora global database, you upgrade the global database cluster\. Aurora automatically upgrades all of the clusters at the same time and makes sure that they all run the same engine version\. This requirement is because any changes to system tables, data file formats, and so on, are automatically replicated to all the secondary clusters\. 
+For an Aurora global database cluster, the upgrade process upgrades all DB clusters that make up your Aurora global database at the same time\. It does so to ensure that each runs the same Aurora PostgreSQL version\. It also ensures that any changes to system tables, data file formats, and so on, are automatically replicated to all secondary clusters\.
 
-Follow the instructions in [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. When you specify what to upgrade, make sure to choose the global database cluster instead of one of the clusters it contains\.
+To upgrade a global database cluster to a new major version of Aurora PostgreSQL, we recommend that you test your applications on the upgraded version, as detailed in [Before upgrading your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\. Be sure to prepare your DB cluster parameter group and DB parameter group settings for each AWS Region in your Aurora global database before the upgrade as detailed in [step 1.](#step-1) of [Before upgrading your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\. 
 
-If you use the AWS Management Console, choose the item with the role **Global database**\.
+If your Aurora PostgreSQL global database cluster has a recovery point objective \(RPO\) set for its `rds.global_db_rpo` parameter, make sure to reset the parameter before upgrading\. The major version upgrade process doesn't work if the RPO is turned on\. By default, this parameter is turned off\. For more information about Aurora PostgreSQL global databases and RPO, see [Managing RPOs for Aurora PostgreSQL–based global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
 
-![\[Upgrading global database cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-major-upgrade-global-cluster.png)
+If you verify that your applications can run as expected on the trial deployment of the new version, you can start the upgrade process\. To do so, see [Upgrading the Aurora PostgreSQL engine to a new major version](#USER_UpgradeDBInstance.Upgrading.Manual)\. Be sure to choose the top\-level item from the **Databases** list in the RDS console, **Global database**, as shown in the following image\.
 
- If you use the AWS CLI or RDS API, start the upgrade process by calling the [modify\-global\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-global-cluster.html) command or [ModifyGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyGlobalCluster.html) operation instead of `modify-db-cluster` or `ModifyDBCluster`\. 
+![\[Console image showing an Aurora global database, an Aurora Serverless DB cluster, and another Aurora PostgreSQL DB cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-database-plus-other.png)
 
-**Note**  
-You can't specify a custom parameter group for the global database cluster while you're performing a major version upgrade of that Aurora global database\. Create your custom parameter groups in each Region of the global cluster and then apply them manually to the Regional clusters after the upgrade\.  
-You can't perform a major version upgrade of the Aurora DB engine if the recovery point objective \(RPO\) feature is turned on\. Before you upgrade the DB engine, make sure that this feature is turned off\. For more information about the RPO feature, see [Managing RPOs for Aurora PostgreSQL–based global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
+As with any modification, you can confirm that you want the process to proceed when prompted\.
 
-## Automatic minor version upgrades for PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.Minor"></a>
+![\[Console image showing prompt to confirm the upgrade process for an Aurora PostgreSQL DB cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-db-apg-upgrade-2.png)
 
-For each PostgreSQL major version, one minor version is designated by Amazon Aurora as the automatic upgrade version\. After a minor version has been tested and approved by Amazon Aurora, the minor version upgrade occurs automatically during your maintenance window\. Aurora doesn't automatically set newer released minor versions as the automatic upgrade version\. Before Aurora designates a newer automatic upgrade version, several criteria are considered, such as the following:
-+ Known security issues
-+ Bugs in the PostgreSQL community version
-+ Overall fleet stability since the minor version was released
+Rather than using the console, you can start the upgrade process by using the AWS CLI or the RDS API\. As with the console, you operate on the Aurora global database cluster rather than any of its constituents, as follows:
++ Use the [modify\-global\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-global-cluster.html) AWS CLI command to start the upgrade for your Aurora global database by using the AWS CLI\. 
++ Use the [ModifyGlobalCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyGlobalCluster.html) API to start the upgrade\. 
 
-You can use the following AWS CLI command and script to determine the current automatic upgrade minor versions\. 
+## How to perform minor version upgrades and apply patches<a name="USER_UpgradeDBInstance.PostgreSQL.Minor"></a>
+
+Minor version upgrades and patches become available in AWS Regions only after rigorous testing\. Before releasing upgrades and patches, Aurora PostgreSQL tests to ensure that known security issues, bugs, and other issues that emerge after the release of the minor community version don't disrupt overall Aurora PostgreSQL fleet stability\. 
+
+As Aurora PostgreSQL makes new minor versions available, the instances that make up your Aurora PostgreSQL DB cluster can be automatically upgraded during your specified maintenance window\. For this to happen, your Aurora PostgreSQL DB cluster must have the **Enable auto minor version upgrade** option turned on\. All DB instances that make up your Aurora PostgreSQL DB cluster must have the automatic minor version upgrade \(AMVU\) option turned on so that the minor upgrade to be applied throughout the cluster\. 
+
+**Tip**  
+Make sure that the **Enable auto minor version upgrade** option is turned on for all PostgreSQL DB instances that make up your Aurora PostgreSQL DB cluster\. This option must be turned on for every instance in the DB cluster to work\.
+
+You can check the value of the **Enable auto minor version upgrade** option for all your Aurora PostgreSQL DB clusters by using the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) AWS CLI command with the following query\.
 
 ```
-aws rds describe-db-engine-versions --engine aurora-postgresql | grep -A 1 AutoUpgrade| grep -A 2 true |grep PostgreSQL | sort --unique | sed -e 's/"Description": "//g'
+aws rds describe-db-instances \
+  --query '*[].{DBClusterIdentifier:DBClusterIdentifier,DBInstanceIdentifier:DBInstanceIdentifier,AutoMinorVersionUpgrade:AutoMinorVersionUpgrade}'
 ```
 
-If no results are returned, there is no automatic minor version upgrade available and scheduled\.
+This query returns a list of all Aurora DB clusters and their instances with a `true` or `false` value for the status of the `AutoMinorVersionUpgrade` setting\. The command as shown assumes that you have your AWS CLI configured to target your default AWS Region\. 
 
-A PostgreSQL DB instance is automatically upgraded during your maintenance window if the following criteria are met:
-+ The DB cluster has the **Auto minor version upgrade** option turned on\.
-+ The DB cluster is running a minor DB engine version that is less than the current automatic upgrade minor version\.
+For more information about the AMVU option and how to modify your Aurora DB cluster to use it, see [ Automatic minor version upgrades for Aurora DB clusters ](USER_UpgradeDBInstance.Maintenance.md#Aurora.Maintenance.AMVU)\. 
 
- If any of the DB instances in a cluster don't have the auto minor version upgrade setting turned on, Aurora doesn't automatically upgrade any of the instances in that cluster\. Make sure to keep that setting consistent for all the DB instances in the cluster\. 
+You can upgrade your Aurora PostgreSQL DB clusters to new minor versions either by responding to maintenance tasks, or by modifying the cluster to use the new version\. 
+
+You can identify any available upgrades or patches for your Aurora PostgreSQL DB clusters by using the RDS console and opening the **Recommendations** menu\. There, you can find a list of various maintenance issues such as **Old minor versions**\. Depending on your production environment, you can choose to **Schedule** the upgrade or take immediate action, by choosing **Apply now**, as shown following\.
+
+![\[Console image showing Recommendation to upgrade to a newer minor version.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/apg-maintenance-upgrade-minor.png)
+
+To learn more about how to maintain an Aurora DB cluster, including how to manually apply patches and minor version upgrades, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
 
 ### Minor release upgrades and zero\-downtime patching<a name="USER_UpgradeDBInstance.PostgreSQL.Minor.zdp"></a>
 
 Upgrading an Aurora PostgreSQL DB cluster involves the possibility of an outage\. During the upgrade process, the database is shut down as it's being upgraded\. If you start the upgrade while the database is busy, you lose all connections and transactions that the DB cluster is processing\. If you wait until the database is idle to perform the upgrade, you might have to wait a long time\.
 
-The zero\-downtime patching \(ZDP\) feature improves the upgrading process\. With ZDP, both minor version upgrades and patches can be applied with minimal impact to your Aurora PostgreSQL DB cluster\. ZDP tries to preserve client connections through the Aurora PostgreSQL upgrade process\. When ZDP completes successfully, application sessions are preserved and the database engine restarts while the upgrade is still underway\. Although the database engine restart can cause a drop in throughput, that typically lasts only for a few seconds or at most, approximately one minute\. 
+The zero\-downtime patching \(ZDP\) feature improves the upgrading process\. With ZDP, both minor version upgrades and patches can be applied with minimal impact to your Aurora PostgreSQL DB cluster\. ZDP tries to preserve client connections through the Aurora PostgreSQL upgrade process\. When ZDP completes successfully, application sessions are preserved and the database engine restarts while the upgrade is still under way\. Although the database engine restart can cause a drop in throughput, that typically lasts only for a few seconds or at most, approximately one minute\. 
 
 **Note**  
-ZDP is supported by Aurora PostgreSQL 13\.7, 12\.11, 11\.16, and 10\.21 and higher releases of these minor versions only\.  
-ZDP isn't supported on Aurora Serverless v2\.
+ZDP is supported by all minor versions after Aurora PostgreSQL 14\.3, 13\.7, 12\.11, 11\.16, and 10\.21\. That is, upgrading to new minor versions from any of these releases onward uses ZDP\. 
 
 In some cases, zero\-downtime patching \(ZDP\) might not succeed\. For example, if long\-running queries or transactions are in progress, ZDP might need to cancel these to complete\. If data definition language \(DDL\) statements are running or if temporary tables or table locks are in use for any other reason, ZDP might need to cancel the open transaction\. Parameter changes that are in a `pending` state on your Aurora PostgreSQL DB cluster or its instances also interfere with ZDP\. 
 
-You can find metrics and events for ZDP operations in **Events** page in the AWS Management Console\. The events include the start of the ZDP upgrade and completion of the upgrade\. In this event you can find how long the process took, and the numbers of preserved and dropped connections that occurred during the restart\. You can find details in your database error log\. 
+You can find metrics and events for ZDP operations in **Events** page in the console\. The events include the start of the ZDP upgrade and completion of the upgrade\. In this event you can find how long the process took, and the numbers of preserved and dropped connections that occurred during the restart\. You can find details in your database error log\. 
 
-### Turning on automatic minor version upgrades<a name="USER_UpgradeDBInstance.MinorUpgrade"></a>
+### Upgrading the Aurora PostgreSQL engine to a new minor version<a name="USER_UpgradeDBInstance.MinorUpgrade"></a>
 
-To turn on automatic minor version upgrades for an Aurora PostgreSQL DB cluster, use the following instructions for the AWS Management Console, the AWS CLI, or the RDS API\. 
+ You can upgrade your Aurora PostgreSQL DB cluster to a new minor version by using the console, the AWS CLI, or the RDS API\.
 
 #### Console<a name="USER_UpgradeDBInstance.MinorUpgrade.Console"></a>
 
- Follow the general procedure to modify the DB instances in your cluster, as described in [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\. Repeat this procedure for each DB instance in your cluster\. 
+**To upgrade the engine version of your Aurora PostgreSQL DB cluster**
 
-**To use the console to implement automatic minor version upgrades for your cluster**
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1.  Sign in to the Amazon RDS console, choose **Databases**, and find the DB cluster where you want to turn automatic minor version upgrade on or off\. 
+1. In the navigation pane, choose **Databases**, and then choose the DB cluster that you want to upgrade\. 
 
-1.  Choose each DB instance in the DB cluster that you want to modify\. Apply the following change for each DB instance in sequence: 
+1. Choose **Modify**\. The **Modify DB cluster** page appears\.
 
-   1.  Choose **Modify**\. 
+1. For **Engine version**, choose the new version\.
 
-   1. In the **Maintenance** section, select the **Enable auto minor version upgrade** box\. 
+1. Choose **Continue** and check the summary of modifications\. 
 
-   1.  Choose **Continue** and check the summary of modifications\. 
+1. To apply the changes immediately, choose **Apply immediately**\. Choosing this option can cause an outage in some cases\. For more information, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\. 
 
-   1.  \(Optional\) Choose **Apply immediately** to apply the changes immediately\. 
+1. On the confirmation page, review your changes\. If they are correct, choose **Modify Cluster** to save your changes\. 
 
-   1.  On the confirmation page, choose **Modify DB instance**\. 
+   Or choose **Back** to edit your changes or **Cancel** to cancel your changes\. 
 
 #### AWS CLI<a name="USER_UpgradeDBInstance.MinorUpgrade.CLI"></a>
 
-To use the CLI to implement minor version upgrades, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. 
+To upgrade the engine version of a DB cluster, use the [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) AWS CLI command with the following parameters:
++ `--db-cluster-identifier` – The name of your Aurora PostgreSQL DB cluster\. 
++ `--engine-version` – The version number of the database engine to upgrade to\. For information about valid engine versions, use the AWS CLI [ describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) command\.
++ `--no-apply-immediately` – Apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately` instead\. 
 
- When you call the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command, specify the name of your DB instance for the `--db-instance-identifier` option and `true` for the `--auto-minor-version-upgrade` option\. Optionally, specify the `--apply-immediately` option to immediately turn this setting on for your DB instance\. Run a separate `modify-db-instance` command for each DB instance in the cluster\. 
-
- You can use a CLI command such as the following to check the status of **Enable auto minor version upgrade** for all of the DB instances in your Aurora PostgreSQL clusters\. 
-
-```
-aws RDS describe-db-instances \
-  --query '*[].{DBClusterIdentifier:DBClusterIdentifier,DBInstanceIdentifier:DBInstanceIdentifier,AutoMinorVersionUpgrade:AutoMinorVersionUpgrade}'
-```
-
- That command produces output similar to the following\. 
+For Linux, macOS, or Unix:
 
 ```
-[
-  {
-      "DBInstanceIdentifier": "db-t2-medium-instance",
-      "DBClusterIdentifier": "cluster-57-2020-06-03-6411",
-      "AutoMinorVersionUpgrade": true
-  },
-  {
-      "DBInstanceIdentifier": "db-t2-small-original-size",
-      "DBClusterIdentifier": "cluster-57-2020-06-03-6411",
-      "AutoMinorVersionUpgrade": false
-  },
-  {
-      "DBInstanceIdentifier": "instance-2020-05-01-2332",
-      "DBClusterIdentifier": "cluster-57-2020-05-01-4615",
-      "AutoMinorVersionUpgrade": true
-  },
-... output omitted ...
+aws rds modify-db-cluster \
+    --db-cluster-identifier mydbcluster \
+    --engine-version new_version \
+    --no-apply-immediately
+```
+
+For Windows:
+
+```
+aws rds modify-db-cluster ^
+    --db-cluster-identifier mydbcluster ^
+    --engine-version new_version ^
+    --no-apply-immediately
 ```
 
 #### RDS API<a name="USER_UpgradeDBInstance.MinorUpgrade.API"></a>
 
-To use the API to implement minor version upgrades, use the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) operation\. 
-
- Call the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation, and specify the name of your DB cluster for the `DBInstanceIdentifier` parameter and `true` for the `AutoMinorVersionUpgrade` parameter\. Optionally, set the `ApplyImmediately` parameter to `true` to immediately turn this setting on for your DB instance\. Call a separate `ModifyDBInstance` operation for each DB instance in the cluster\. 
+To upgrade the engine version of a DB cluster, use the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) operation\. Specify the following parameters: 
++ `DBClusterIdentifier` – The name of the DB cluster, for example *`mydbcluster`*\. 
++ `EngineVersion` – The version number of the database engine to upgrade to\. For information about valid engine versions, use the [ DescribeDBEngineVersions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBEngineVersions.html) operation\.
++ `ApplyImmediately` – Whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to `true`\. To apply changes during the next maintenance window, set the value to `false`\. 
 
 ## Upgrading PostgreSQL extensions<a name="USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades"></a>
 
-A PostgreSQL engine upgrade doesn't automatically upgrade any PostgreSQL extensions\. Installing PostgreSQL extensions requires `rds_superuser` privileges, and the permissions are typically delegated to only those users \(roles\) that use the extension\. This means that upgrading all extensions in an Aurora PostgreSQL DB instance after a database engine upgrade might involve many different users \(roles\)\. Keep this in mind also if you want to automate the upgrade process by using scripts\. For more information about PostgreSQL privileges and roles, see [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md)\. 
+Upgrading your Aurora PostgreSQL DB cluster to a new major version doesn't upgrade the PostgreSQL extensions at the same time\. For most extensions, you upgrade the extension after the major version upgrade completes\. However, in some cases, you upgrade the extension before you upgrade the Aurora PostgreSQL DB engine\. For more information, see [list of extensions to update](#upgrade-extensions) in [Before upgrading your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\.
+
+Installing PostgreSQL extensions requires `rds_superuser` privileges\. Typically, an `rds_superuser` delegates permissions over specific extensions to relevant users \(roles\), to facilitate the management of a given extension\. That means that the task of upgrading all the extensions in your Aurora PostgreSQL DB cluster might involve many different users \(roles\)\. Keep this in mind especially if you want to automate the upgrade process by using scripts\. For more information about PostgreSQL privileges and roles, see [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md)\. 
 
 **Note**  
 If you are running the `PostGIS` extension in your Amazon RDS PostgreSQL DB instance, see [ PostGIS\_Extensions\_Upgrade](https://postgis.net/docs/PostGIS_Extensions_Upgrade.html) in the PostGIS documentation to upgrade the extension\. 

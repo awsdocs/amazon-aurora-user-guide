@@ -44,21 +44,21 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.serverless – Aurora Serverless v2 instance class with automatic capacity scaling | 
 | db\.serverless | See [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md) | See [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md) | 
 | db\.x2g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
-| db\.x2g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.x2g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.x2g\.8xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.x2g\.4xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.x2g\.2xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.x2g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.x2g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.x2g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.x2g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.x2g\.8xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.x2g\.4xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.x2g\.2xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.x2g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.x2g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
 | db\.r6g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
-| db\.r6g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.8xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.4xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.2xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.r6g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.8xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.4xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.2xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.r6g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
 | db\.r5 – memory\-optimized instance classes | 
 | db\.r5\.24xlarge | 1\.22 and higher, 2\.06 and higher, 3\.01\.0 and higher | Yes | 
 | db\.r5\.16xlarge | 1\.22 and higher, 2\.06 and higher, 3\.01\.0 and higher | Yes | 
@@ -84,14 +84,14 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.t4g – burstable\-performance instance classes powered by AWS Graviton2 processors | 
 | db\.t4g\.2xlarge | No | No | 
 | db\.t4g\.xlarge | No | No | 
-| db\.t4g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
-| db\.t4g\.medium | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.t4g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
+| db\.t4g\.medium | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 12\.4 and higher, 11\.9 and higher | 
 | db\.t4g\.small | No | No | 
 | db\.t3 – burstable\-performance instance classes | 
 | db\.t3\.2xlarge | No | No | 
 | db\.t3\.xlarge | No | No | 
-| db\.t3\.large | 2\.10 and higher, 3\.01\.0 and higher | 13\.3, 11\.6 and higher, 10\.11 and higher | 
-| db\.t3\.medium | 1\.14\.4 and higher, 3\.01\.0 and higher | 13\.3, 10\.11 and higher | 
+| db\.t3\.large | 2\.10 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 11\.6 and higher, 10\.11 and higher | 
+| db\.t3\.medium | 1\.14\.4 and higher, 3\.01\.0 and higher | 14\.3, 13\.3, 10\.11 and higher | 
 | db\.t3\.small | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | No | 
 | db\.t3\.micro | No | No | 
 | db\.t2 – burstable\-performance instance classes | 

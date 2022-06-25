@@ -245,7 +245,6 @@
 |   `internal_tmp_mem_storage_engine`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
 |   `join_buffer_size`   |   Yes   |    | 
 |   `keep_files_on_create`   |   Yes   |    | 
-|   `key_buffer_size`   |   Yes   |    | 
 |   `key_cache_age_threshold`   |   Yes   |    | 
 |   `key_cache_block_size`   |   Yes   |    | 
 |   `key_cache_division_limit`   |   Yes   |    | 
@@ -414,14 +413,14 @@
 |   `table_open_cache`   |   Yes   |  The default value is represented by a formula\. For details about how the `DBInstanceClassMemory` value in the formula is calculated, see [DB parameter formula variables](USER_ParamValuesRef.md#USER_FormulaVariables)\.  | 
 |   `table_open_cache_instances`   |   Yes   |    | 
 |   `temp-pool`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
-|   `temptable_max_mmap`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\. For details, see [Storage engine for internal temporary tables](AuroraMySQL.MySQL80.md#AuroraMySQL.mysql80-internal-temp-tables-engine)\.   | 
-|   `temptable_max_ram`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\. For details, see [Storage engine for internal temporary tables](AuroraMySQL.MySQL80.md#AuroraMySQL.mysql80-internal-temp-tables-engine)\.   | 
-|   `temptable_use_mmap`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\. For details, see [Storage engine for internal temporary tables](AuroraMySQL.MySQL80.md#AuroraMySQL.mysql80-internal-temp-tables-engine)\.   | 
-|   `thread_handling`   |   No   |    | 
-|   `thread_stack`   |   Yes   |    | 
-|   `timed_mutexes`   |   Yes   |    | 
-|   `tmp_table_size`   |   Yes   |    | 
-|   `tmpdir`   |   No   |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
+|   `temptable_max_mmap`   |   Yes   |  This parameter applies to Aurora MySQL version 3 and higher\. For details, see [New temporary table behavior in Aurora MySQL version 3](ams3-temptable-behavior.md)\.  | 
+|  `temptable_max_ram`  |  Yes  |  This parameter applies to Aurora MySQL version 3 and higher\. For details, see [New temporary table behavior in Aurora MySQL version 3](ams3-temptable-behavior.md)\.  | 
+|  `temptable_use_mmap`  |  Yes  |  This parameter applies to Aurora MySQL version 3 and higher\. For details, see [New temporary table behavior in Aurora MySQL version 3](ams3-temptable-behavior.md)\.  | 
+|  `thread_handling`  |  No  |    | 
+|   `thread_stack`   |  Yes  |    | 
+|   `timed_mutexes`   |  Yes  |    | 
+|  `tmp_table_size`  |  Yes  |    | 
+|   `tmpdir`   |  No  |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
 |   `transaction_alloc_block_size`   |   Yes   |    | 
 |   `transaction_isolation`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\. It replaces `tx_isolation`\.   | 
 |   `transaction_prealloc_size`   |   Yes   |    | 
@@ -450,7 +449,7 @@
 +  `innodb_change_buffering` 
 +  `innodb_checksum_algorithm` 
 +  `innodb_data_file_path` 
-+  `innodb_deadlock_detect`\. This parameter isn't applicable to Aurora MySQL version 1 and 2\. It is available in Aurora MySQL version 3\.
++  `innodb_deadlock_detect`\. This parameter doesn't apply to Aurora MySQL version 1 and 2\. It is available in Aurora MySQL version 3\.
 +  `innodb_dedicated_server` 
 +  `innodb_doublewrite` 
 +  `innodb_flush_method` 
@@ -466,13 +465,14 @@
 +  `innodb_log_spin_cpu_abs_lwm` 
 +  `innodb_log_spin_cpu_pct_hwm` 
 +  `innodb_max_dirty_pages_pct` 
-+  innodb\_numa\_interleave 
++  `innodb_numa_interleave` 
 +  `innodb_page_size` 
 +  `innodb_redo_log_encrypt` 
 +  `innodb_undo_log_encrypt` 
 +  `innodb_undo_log_truncate` 
 +  `innodb_use_native_aio` 
 +  `innodb_write_io_threads` 
++ `key_buffer_size` – Key cache for MyISAM tables\. This parameter doesn't apply to Aurora\.
 +  `thread_cache_size` 
 
 ## MySQL status variables that don't apply to Aurora MySQL<a name="AuroraMySQL.Reference.StatusVars.Inapplicable"></a><a name="status_vars"></a>
@@ -582,7 +582,7 @@ This event is part of an event semaphore\. It provides exclusive access to varia
 Operations are checking, updating, deleting, or adding transaction IDs in InnoDB in a consistent or controlled manner\. These operations require a `trx_sys` mutex call, which is tracked by Performance Schema instrumentation\. Operations include management of the transaction system when the database starts or shuts down, rollbacks, undo cleanups, row read access, and buffer pool loads\. High database load with a large number of transactions results in the frequent appearance of this wait event\. For more information, see [synch/mutex/innodb/trx\_sys\_mutex](ams-waits.trxsysmutex.md)\.
 
 **synch/mutex/mysys/KEY\_CACHE::cache\_lock**  
-The `keycache->cache_lock` mutex controls access to the key cache for MyISAM tables\. In Aurora MySQL, this wait event is related to temporary table usage\. Check the size of the `key_buffer_size`\. Also check the values for `created_tmp_tables` or `created_tmp_disk_tables` at the time of the wait event spike\.
+The `keycache->cache_lock` mutex controls access to the key cache for MyISAM tables\. Therefore, this wait event doesn't apply to Aurora MySQL\.
 
 **synch/mutex/sql/FILE\_AS\_TABLE::LOCK\_offsets**  
 The engine acquires this mutex when opening or creating a table metadata file\. When this wait event occurs with excessive frequency, the number of tables being created or opened has spiked\. 

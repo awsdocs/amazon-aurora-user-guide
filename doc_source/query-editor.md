@@ -12,7 +12,7 @@ The Data API and query editor aren't supported for Aurora Serverless v2\.
 The query editor is only available for the following Aurora Serverless v1 DB clusters:
 + Aurora with MySQL version 5\.6 compatibility
 + Aurora with MySQL version 5\.7 compatibility
-+ Aurora with PostgreSQL version 10\.7 compatibility
++ Aurora with PostgreSQL version 10\.18 compatibility
 
 The query editor is currently available for Aurora Serverless v1 in the following AWS Regions:
 + US East \(Ohio\)
@@ -33,6 +33,9 @@ The query editor is currently available for Aurora Serverless v1 in the followin
 ## Authorizing access to the query editor<a name="query-editor.access"></a>
 
 A user must be authorized to run queries in the query editor\. You can authorize a user to run queries in the query editor by adding the `AmazonRDSDataFullAccess` policy, a predefined AWS Identity and Access Management \(IAM\) policy, to that user\.
+
+**Note**  
+Make sure to use the same user name and password when you create the IAM user as you did for the database user, such as the master user name and password\. For more information, see [Creating an IAM user in your AWS account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *AWS Identity and Access Management User Guide*\.
 
 You can also create an IAM policy that grants access to the query editor\. After you create the policy, add it to each user that requires access to the query editor\.
 

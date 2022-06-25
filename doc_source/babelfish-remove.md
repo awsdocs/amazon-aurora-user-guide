@@ -10,4 +10,4 @@ To turn off Babelfish, modify your parameter group, setting `rds.babelfish_statu
 
 If you turn off Babelfish in parameter group, all clusters that use that parameter group lose Babelfish functionality\.
 
-For more information about modifying parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
+For more information about modifying parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. For information about Babelfish–specific parameters, see [DB cluster parameter group settings for Babelfish](babelfish-configuration.md)\.

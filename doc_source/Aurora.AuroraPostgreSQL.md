@@ -11,7 +11,7 @@ Aurora PostgreSQL is FedRAMP HIGH eligible\. For details about AWS and complianc
 + [Updating applications to connect to Aurora PostgreSQL DB clusters using new SSL/TLS certificates](ssl-certificate-rotation-aurora-postgresql.md)
 + [Using Kerberos authentication with Aurora PostgreSQL](postgresql-kerberos.md)
 + [Migrating data to Amazon Aurora with PostgreSQL compatibility](AuroraPostgreSQL.Migrating.md)
-+ [Working with Babelfish for Aurora PostgreSQL](babelfish.md)
++ [Using Babelfish for Aurora PostgreSQL](babelfish.md)
 + [Managing Amazon Aurora PostgreSQL](AuroraPostgreSQL.Managing.md)
 + [Tuning with wait events for Aurora PostgreSQL](AuroraPostgreSQL.Tuning.md)
 + [Best practices with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md)

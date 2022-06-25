@@ -3,6 +3,8 @@
 View details about updates to AWS managed policies for Amazon RDS since this service began tracking these changes\. For automatic alerts about changes to this page, subscribe to the RSS feed on the Amazon RDS [Document history](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/WhatsNew.html) page\.
 
 
+
+
 | Change | Description | Date | 
 | --- | --- | --- | 
 |  [Identity\-based policies](UsingWithRDS.IAM.md#security_iam_access-manage-id-based-policies) – Update to an existing policy  |  Amazon RDS added a new permission to the `AmazonRDSFullAccess` managed policy to allow you to turn on DevOps Guru in the RDS console\. This permission is required for the IAM principal to create a service\-linked role for DevOps Guru and to collect DevOps Guru resources\. For more information, see [Configuring IAM access policies for DevOps Guru for RDS](devops-guru-for-rds.md#devops-guru-for-rds.configuring.access)\.  |  June 9, 2022  | 

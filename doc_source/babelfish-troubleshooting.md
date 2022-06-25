@@ -1,6 +1,6 @@
-# Troubleshooting for Babelfish<a name="babelfish-troubleshooting"></a>
+# Troubleshooting Babelfish<a name="babelfish-troubleshooting"></a>
 
-Following, you can find troubleshooting ideas and workarounds for some Babelfish for Aurora PostgreSQL DB cluster issues\. 
+Following, you can find troubleshooting ideas and workarounds for some Babelfish DB cluster issues\. 
 
 **Topics**
 + [Connection failure](#babelfish-troubleshooting-connectivity)
@@ -29,7 +29,7 @@ For more information about troubleshooting Aurora connection issues, see [Can't 
 
 ## Using `pg_dump` and `pg_restore` requires extra setup<a name="babelfish-troubleshooting-pg-dump_pg_restore"></a>
 
-Currently, if you try to use the PostgreSQL utilities `pg_dump` and `pg_restore` to move a database from one Babelfish for Aurora PostgreSQL DB cluster to another, you see the following error message: 
+Currently, if you try to use the PostgreSQL utilities `pg_dump` and `pg_restore` to move a database from one Babelfish DB cluster to another, you see the following error message: 
 
 ```
 psql:bbf.sql:29: ERROR:  role "db_owner" does not exist
@@ -40,7 +40,7 @@ To workaround this issue, you first create the same logical database on the targ
 
 **To use `pg_dump` and `pg_restore` to move a database between Babelfish DB clusters**
 
-1. Use `psql` or `pgAdmin` to connect to the target Babelfish for Aurora PostgreSQL DB cluster\. The following examples use `psql`\. For more information, see [Using psql to connect to the DB cluster](babelfish-connect-PostgreSQL.md#babelfish-connect-psql)\.
+1. Use `psql` or `pgAdmin` to connect to the target Babelfish DB cluster\. The following examples use `psql`\. For more information, see [Using psql to connect to the DB cluster](babelfish-connect-PostgreSQL.md#babelfish-connect-psql)\.
 
 1. Create the same logical database on the target that is on the source\.
 

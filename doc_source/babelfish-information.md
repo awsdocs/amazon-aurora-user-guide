@@ -1,81 +1,116 @@
-# Querying Babelfish to find version details<a name="babelfish-information"></a>
+# Babelfish version updates<a name="babelfish-information"></a>
 
-You can query Babelfish to find details about the Babelfish version, the Aurora PostgreSQL version, and the compatible Microsoft SQL Server version\.
+Babelfish is an option available with Aurora PostgreSQL version 13\.4 and higher releases\. Updates to Babelfish become available with certain new releases of the Aurora PostgreSQL database engine\. For more information, see the [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/Welcome.html)\. 
 
-Run these queries while connected to the TDS port\.
+For a list of supported functionality across different Babelfish releases, see [Supported functionality in Babelfish by version](babelfish-compatibility.supported-functionality-table.md)\. 
 
-To identify the Babelfish version, run the following query:
+For a list of currently unsupported functionality, see [Unsupported functionality in Babelfish](babelfish-compatibility.tsql.limitations-unsupported.md)\.
 
-```
-SELECT CAST(serverproperty('babelfishversion') AS VARCHAR)
-```
+**Note**  
+Currently, you can't upgrade Babelfish DB clusters running on Aurora PostgreSQL 13\.7 or older versions to Aurora PostgreSQL 14\.3 with Babelfish 2\.1\.0\. 
 
-The query returns results similar to the following:
+## Identifying your version of Babelfish<a name="babelfish-information-identify-version"></a>
 
-```
-1.2.0
-```
+You can query Babelfish to find details about the Babelfish version, the Aurora PostgreSQL version, and the compatible Microsoft SQL Server version\. You can use the TDS port or the PostgreSQL port\. 
 
-To identify the version of the Aurora PostgreSQL DB cluster, run the following query:
+**To use the TDS port to query for version information**
 
-```
-SELECT aurora_version() AS aurora_version 
-```
+1. Use `sqlcmd` or `ssms` to connect to the endpoint for your Babelfish DB cluster\.
 
-The query returns results similar to the following:
+   ```
+   sqlcmd -S bfish_db.cluster-123456789012.aws-region.rds.amazonaws.com,1433 -U
+       login-id -P password -d db_name
+   ```
 
-```
-13.6.0
-```
+1. To identify the Babelfish version, run the following query:
 
-To identify the compatible Microsoft SQL Server version, run the following query:
+   ```
+   1> SELECT CAST(serverproperty('babelfishversion') AS VARCHAR)
+   2> GO
+   ```
 
-```
-SELECT @@VERSION AS version
-```
+   The query returns results similar to the following:
 
-The query returns results similar to the following:
+   ```
+   serverproperty
+   ------------------------------
+   2.1.0
+   
+   (1 rows affected)
+   ```
 
-```
-Babelfish for Aurora Postgres with SQL Server Compatibility - 12.0.2000.8
-Mar 28 2022 14:37:26
-Copyright (c) Amazon Web Services
-PostgreSQL 13.6 on x86_64-pc-linux-gnu
-```
+1. To identify the version of the Aurora PostgreSQL DB cluster, run the following query:
 
-In addition, the following query returns `1` when executed on Babelfish, and `NULL` when executed on Microsoft SQL Server:
+   ```
+   1> SELECT aurora_version() AS aurora_version
+   2> GO
+   ```
+
+   The query returns results similar to the following:
+
+   ```
+   aurora_version                                                                                                                                                                                                                                  
+   -------------------------------------------------
+   14.3.0
+   
+   (1 rows affected)
+   ```
+
+1. To identify the compatible Microsoft SQL Server version, run the following query:
+
+   ```
+   1> SELECT @@VERSION AS version
+   2> GO
+   ```
+
+   The query returns results similar to the following:
+
+   ```
+   Babelfish for Aurora PostgreSQL with SQL Server Compatibility - 12.0.2000.8
+   May 23 2022 19:17:14
+   Copyright (c) Amazon Web Services
+   PostgreSQL 14.3 on x86_64-pc-linux-gnu
+   
+   (1 rows affected)
+   ```
+
+As an example that shows one minor difference between Babelfish and Microsoft SQL Server, you can run the following query\. On Babelfish, the query returns `1`, while on Microsoft SQL Server, the query returns `NULL`\. 
 
 ```
 SELECT CAST(serverproperty('babelfish') AS VARCHAR) AS runs_on_babelfish
 ```
 
-To query `babelfish_db` the same way using the PostgreSQL port, connect to the `babelfish_db` and run the following\.
+You can also use the PostgreSQL port to obtain version information, as shown in the following procedure\.
 
-```
-\x
-SELECT
-aurora_version() as aurora_version,
-version() as postgresql_version,
-sys.version() as Babelfish_compatibility,
-sys.SERVERPROPERTY('BabelfishVersion') as Babelfish_Version
-```
+**To use the PostgreSQL port to query for version information**
 
-The query returns the following\.
+1. Use `psql` or `pgAdmin` to connect to the endpoint for your Babelfish DB cluster\. 
 
-```
-babelfish_db=> \x
-Expanded display is on.
-babelfish_db=> SELECT
-babelfish_db-> aurora_version() as aurora_version,
-babelfish_db-> version() as postgresql_version,
-babelfish_db-> sys.version() as Babelfish_compatibility,
-babelfish_db-> sys.SERVERPROPERTY('BabelfishVersion') as Babelfish_Version ;
--[ RECORD 1 ]
-aurora_version          | 13.6.0
-postgresql_version      | PostgreSQL 13.6 on aarch64-unknown-linux-gnu, compiled by aarch64-unknown-linux-gnu-gcc (GCC) 7.4.0, 64-bit
-babelfish_compatibility | Babelfish for Aurora Postgres with SQL Server Compatibility - 12.0.2000.8                                  +
-                        | Mar 13 2022 17:34:47                                                                                       +
-                        | Copyright (c) Amazon Web Services                                                                          +
-                        | PostgreSQL 13.6 on aarch64-unknown-linux-gnu
-babelfish_version       | 1.2.0
-```
+   ```
+   psql host=bfish_db.cluster-123456789012.aws-region.rds.amazonaws.com
+        port=5432 dbname=babelfish_db user=sa
+   ```
+
+1. Turn on the extended feature \(`\x`\) of `psql` for more readable output\.
+
+   ```
+   babelfish_db=> \x
+   babelfish_db=> SELECT
+   babelfish_db=> aurora_version() AS aurora_version,
+   babelfish_db=> version() AS postgresql_version,
+   babelfish_db=> sys.version() AS Babelfish_compatibility,
+   babelfish_db=> sys.SERVERPROPERTY('BabelfishVersion') AS Babelfish_Version;
+   ```
+
+   The query returns output similar to the following:
+
+   ```
+   -[ RECORD 1 ]-----------+-----------------------------------------------------------------------------------------------
+   aurora_version          | 14.3.0
+   postgresql_version      | PostgreSQL 14.3 on x86_64-pc-linux-gnu, compiled by x86_64-pc-linux-gnu-gcc (GCC) 7.4.0, 64-bit
+   babelfish_compatibility | Babelfish for Aurora Postgres with SQL Server Compatibility - 12.0.2000.8                     +
+                           | May 23 2022 19:17:14                                                                          +
+                           | Copyright (c) Amazon Web Services                                                             +
+                           | PostgreSQL 14.3 on x86_64-pc-linux-gnu
+   babelfish_version       | 2.1.0
+   ```

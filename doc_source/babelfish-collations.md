@@ -1,16 +1,49 @@
-# Babelfish collation support<a name="babelfish-collations"></a>
+# Collations supported by Babelfish<a name="babelfish-collations"></a>
 
-A *collation* specifies the sort order and presentation format of data\. Babelfish maps SQL Server collations to comparable collations provided by Babelfish\. Babelfish predefines Unicode collations with culturally sensitive string comparisons and sort orders\. Babelfish also provides a way to translate the collations in your SQL Server DB to the closest\-matching Babelfish collation\. Locale\-specific collations are provided for different languages and regions\.
+When you create an Aurora PostgreSQL DB cluster with Babelfish, you choose a collation for your data\. A *collation* specifies the sort order and bit patterns that produce the text or characters in a given written human language\. A collation includes rules comparing data for a given set of bit patterns\. Collation is related to localization\. Different locales affect character mapping, sort order, and the like\. Collation attributes are reflected in the names of various collations\. For information about attributes, see the [Babelfish collation attributes table](#bfish-collation-attributes-table)\. 
 
-Some collations specify a code page that corresponds to a client\-side encoding\. Babelfish automatically translates from the server encoding to the client encoding depending on the collation of each output column\.
+Babelfish maps SQL Server collations to comparable collations provided by Babelfish\. Babelfish predefines Unicode collations with culturally sensitive string comparisons and sort orders\. Babelfish also provides a way to translate the collations in your SQL Server DB to the closest\-matching Babelfish collation\. Locale\-specific collations are provided for different languages and regions\. 
 
-Babelfish uses version 153\.80 of the ICU collation library\. For detailed information about PostgreSQL collation behavior, see [the PostgreSQL documentation](https://www.postgresql.org/docs/13/collation.html)\. 
+Some collations specify a code page that corresponds to a client\-side encoding\. Babelfish automatically translates from the server encoding to the client encoding depending on the collation of each output column\. 
+
+Babelfish supports the collations listed in the [Babelfish supported collations table](#bfish-collations-table)\. Babelfish maps SQL Server collations to comparable collations provided by Babelfish\. 
+
+Babelfish uses version 153\.80 of the International Components for Unicode \(ICU\) collation library\. For more information about ICU collations, see [ Collation](https://unicode-org.github.io/icu/userguide/collation/) in the ICU documentation\. To learn more about PostgreSQL and collation, see [Collation Support](https://www.postgresql.org/docs/current/collation.html) in the the PostgreSQL documentation\.
+
+**Topics**
++ [DB cluster parameters that control collation and locale](#babelfish-collations.parameters)
++ [Deterministic and nondeterministice collations and Babelfish](#babelfish-collations.deterministic-nondeterministic)
++ [Collations supported by Babelfish](#babelfish-collations.reference-tables-supported-collations)
++ [Managing collations](collation.managing.md)
++ [Collation limitations and behavior differences](collation.limitations.md)
+
+## DB cluster parameters that control collation and locale<a name="babelfish-collations.parameters"></a><a name="collation-related-parameters"></a>
+
+The following parameters affect collation behavior\. 
+
+**babelfishpg\_tsql\.default\_locale**  
+This parameter specifies the default locale used by the collation\. This parameter is used in combination with attributes listed in the [Babelfish collation attributes table](#bfish-collation-attributes-table) to customize collations for a specific language and region\. The default value for this parameter is `en-US`\.  
+The default locale applies to all Babelfish collation names that start with "BBF" and to all SQL Server collations that are mapped to Babelfish collations\. Changing the setting for this parameter on an existing Babelfish DB cluster doesn't affect the locale of existing collations\. For the list of collations, see the [Babelfish supported collations table](#bfish-collations-table)\. 
+
+**babelfishpg\_tsql\.server\_collation\_name**  
+This parameter specifies the default collation for the server \(Aurora PostgreSQL DB cluster instance\) and the database\. The default value is `sql_latin1_general_cp1_ci_as`\. The `server_collation_name` has to be a `CI_AS` collation because in T\-SQL, the server collation determines how identifiers are compared\.  
+When you create your Babelfish DB cluster, you choose the **Collation name** from the selectable list\. These include the collations listed in the [Babelfish supported collations table](#bfish-collations-table)\. Don't modify the `server_collation_name` after the Babelfish database is created\.
+
+The settings you choose when you create your Babelfish for Aurora PostgreSQL DB cluster are stored in the DB cluster parameter group associated with the cluster for these parameters and set its collation behavior\.
+
+## Deterministic and nondeterministice collations and Babelfish<a name="babelfish-collations.deterministic-nondeterministic"></a>
 
 Babelfish supports deterministic and nondeterministic collations:
-+ A *deterministic collation* considers two characters as equal if they have the exact same byte sequence\. A deterministic collation evaluates `x` and `X` as not equal\. Collations that are deterministic are case\-sensitive \(CS\) and accent\-sensitive \(AS\)\.
-+ A *nondeterministic collation* doesn't require an identical match\. A nondeterministic collation evaluates `x` and `X` as equal\. Nondeterministic collations are case\-insensitive \(CI\) and accent\-insensitive \(AI\)\.
++ A *deterministic collation* evaluates characters that have identical byte sequences as equal\. That means that `x` and `X` aren't equal in a deterministic collation\. Deterministic collations can be case\-sensitive \(CS\) and accent\-sensitive \(AS\)\.
++ A *nondeterministic collation* doesn't need an identical match\. A nondeterministic collation evaluates `x` and `X` as equal\. Nondeterministic collations are case\-insensitive \(CI\) and accent\-insensitive \(AI\)\.
 
-Babelfish and SQL Server follow a naming convention for collations that describe the collation attributes, as shown in the table following\.
+In the table following, you can find some behavior differences between Babelfish and PostgreSQL when using nondeterministic collations\.
+
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/babelfish-collations.html)
+
+For a list of other limitations and behavior differences for Babelfish compared to SQL Server and PostgreSQL, see [Collation limitations and behavior differences](collation.limitations.md)\. 
+
+Babelfish and SQL Server follow a naming convention for collations that describe the collation attributes, as shown in the table following\.<a name="bfish-collation-attributes-table"></a>
 
 
 | Attribute | Description | 
@@ -22,32 +55,24 @@ Babelfish and SQL Server follow a naming convention for collations that describe
 | CS | Case\-sensitive\. | 
 | PREF | To sort uppercase letters before lowercase letters, use a PREF collation\. If comparison is case\-insensitive, the uppercase version of a letter sorts before the lowercase version, if there is no other distinction\. The ICU library supports uppercase preference with `colCaseFirst=upper`, but not for CI\_AS collations\. PREF can be applied only to `CS_AS` deterministic collations\. | 
 
-PostgreSQL doesn't support the LIKE clause on nondeterministic collations, but Babelfish supports it for CI\_AS collations\. Babelfish doesn't support the `LIKE` clause on AI collations\. Pattern matching operations on nondeterministic collations also aren't supported\.
+## Collations supported by Babelfish<a name="babelfish-collations.reference-tables-supported-collations"></a>
 
-To establish Babelfish collation behavior, set the following parameters\.
-
-
-| Parameter | Description | 
-| --- | --- | 
-|  `default_locale`  |  The ` default_locale ` parameter is used in combination with the collation attributes in the table preceding to customize collations for a specific language and region\. The default value is `en-US`\.  The default locale applies to all Babelfish collations that start with the letters BBF, and to all SQL Server collations that are mapped to Babelfish collations\. You can change this parameter after initial Babelfish database creation, but it doesn't affect the locale of existing collations\.  | 
-|  `server_collation_name`  |  The collation used as the default collation at both the server level and the database level\. The default value is `sql_latin1_general_cp1_ci_as`\. The `server_collation_name` has to be a `CI_AS` collation because in T\-SQL, the server collation determines how identifiers are compared\. You can choose from the collations in the table that follows for the `Collation name` field when you create your Aurora PostgreSQL cluster for use with Babelfish\. Don't modify the `server_collation_name` after the Babelfish database is created\.  | 
-
-Use the following collations as a server collation or an object collation\.
+Use the following collations as a server collation or an object collation\.<a name="bfish-collations-table"></a>
 
 
 | Collation ID | Notes | 
 | --- | --- | 
-|  BBF\_Unicode\_General\_CI\_AS  |  Supports case\-insensitive comparison and the LIKE operator\.  | 
-|  BBF\_Unicode\_CP1\_CI\_AS  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1252.txt) also known as CP1252\.  | 
-|  BBF\_Unicode\_CP1250\_CI\_AS  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1250.txt) used to represent texts in Central European and Eastern European languages that use Latin script\.  | 
-|  BBF\_Unicode\_CP1251\_CI\_AS  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1251.txt) for languages that use the Cyrillic script\.  | 
-|  BBF\_Unicode\_CP1253\_CI\_AS  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1253.txt) used to represent modern Greek\.  | 
-|  BBF\_Unicode\_CP1254\_CI\_AS  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1254.txt) that supports Turkish\.  | 
-|  BBF\_Unicode\_CP1255\_CI\_AS  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1255.txt) that supports Hebrew\.  | 
-|  BBF\_Unicode\_CP1256\_CI\_AS  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1256.txt) used to write languages that use Arabic script\.  | 
-|  BBF\_Unicode\_CP1257\_CI\_AS  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1257.txt) used to support Estonian, Latvian, and Lithuanian languages\.  | 
-|  BBF\_Unicode\_CP1258\_CI\_AS  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1258.txt) used to write Vietnamese characters\.  | 
-|  BBF\_Unicode\_CP874\_CI\_AS  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit874.txt) used to write Thai characters\.  | 
+|  bbf\_unicode\_general\_ci\_as  |  Supports case\-insensitive comparison and the LIKE operator\.  | 
+|  bbf\_unicode\_cp1\_ci\_as  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1252.txt) also known as CP1252\.  | 
+|  bbf\_unicode\_CP1250\_ci\_as  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1250.txt) used to represent texts in Central European and Eastern European languages that use Latin script\.  | 
+|  bbf\_unicode\_CP1251\_ci\_as  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1251.txt) for languages that use the Cyrillic script\.  | 
+|  bbf\_unicode\_cp1253\_ci\_as  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1253.txt) used to represent modern Greek\.  | 
+|  bbf\_unicode\_cp1254\_ci\_as  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1254.txt) that supports Turkish\.  | 
+|  bbf\_unicode\_cp1255\_ci\_as  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1255.txt) that supports Hebrew\.  | 
+|  bbf\_unicode\_cp1256\_ci\_as  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1256.txt) used to write languages that use Arabic script\.  | 
+|  bbf\_unicode\_cp1257\_ci\_as  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1257.txt) used to support Estonian, Latvian, and Lithuanian languages\.  | 
+|  bbf\_unicode\_cp1258\_ci\_as  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1258.txt) used to write Vietnamese characters\.  | 
+|  bbf\_unicode\_cp874\_ci\_as  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit874.txt) used to write Thai characters\.  | 
 |  sql\_latin1\_general\_cp1250\_ci\_as  |  [Nondeterministic single\-byte character encoding](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1250.txt) used to represent Latin characters\.  | 
 |  sql\_latin1\_general\_cp1251\_ci\_as  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1251.txt) that supports Latin characters\.  | 
 |  sql\_latin1\_general\_cp1\_ci\_as  |  [Nondeterministic collation](https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WindowsBestFit/bestfit1252.txt) that supports Latin characters\.  | 
@@ -61,6 +86,7 @@ Use the following collations as a server collation or an object collation\.
 |  cyrillic\_general\_ci\_as  |  Nondeterministic collation that supports Cyrillic\.  | 
 |  finnish\_swedish\_ci\_as  |  Nondeterministic collation that supports Finnish\.  | 
 |  french\_ci\_as  |  Nondeterministic collation that supports French\.  | 
+|  japanese\_ci\_as  | Nondeterministic collation that supports Japanese\. Supported in Babelfish 2\.1\.0 and higher releases\. | 
 |  korean\_wansung\_ci\_as  |  Nondeterministic collation that supports Korean \(with dictionary sort\)\.  | 
 |  latin1\_general\_ci\_as  |  Nondeterministic collation that supports Latin characters\.  | 
 |  modern\_spanish\_ci\_as  |  Nondeterministic collation that supports Modern Spanish\.  | 
@@ -71,7 +97,7 @@ Use the following collations as a server collation or an object collation\.
 |  ukrainian\_ci\_as  |  Nondeterministic collation that supports Ukrainian\.  | 
 |  vietnamese\_ci\_as  |  Nondeterministic collation that supports Vietnamese\.  | 
 
-You can use the following collations as object collations\.
+You can use the following collations as object collations\.<a name="bfish-icu-collations-table"></a>
 
 
 | Dialect | Deterministic options | Nondeterministic options | 
@@ -84,6 +110,7 @@ You can use the following collations as object collations\.
 |  French  |  French\_CS\_AS  |  French\_CI\_AS, French\_CI\_AI  | 
 |  Greek  |  Greek\_CS\_AS  |  Greek\_CI\_AS, Greek\_CI\_AI  | 
 |  Hebrew  |  Hebrew\_CS\_AS  |  Hebrew\_CI\_AS, Hebrew\_CI\_AI  | 
+|  Japanese \(Babelfish 2\.1\.0 and higher\)  | Japanese\_CS\_AS | Japanese\_CI\_AI, Japanese\_CI\_AS | 
 |  Korean\_Wamsung  |  Korean\_Wamsung\_CS\_AS  |  Korean\_Wamsung\_CI\_AS, Korean\_Wamsung\_CI\_AI  | 
 |  Modern\_Spanish  |  Modern\_Spanish\_CS\_AS  |  Modern\_Spanish\_CI\_AS, Modern\_Spanish\_CI\_AI  | 
 |  Mongolian  |  Mongolian\_CS\_AS  |  Mongolian\_CI\_AS, Mongolian\_CI\_AI  | 

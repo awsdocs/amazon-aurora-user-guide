@@ -7,6 +7,7 @@ Following, you can learn how Aurora Serverless v1 works\.
 + [Autoscaling for Aurora Serverless v1](#aurora-serverless.how-it-works.auto-scaling)
 + [Timeout action for capacity changes](#aurora-serverless.how-it-works.timeout-action)
 + [Pause and resume for Aurora Serverless v1](#aurora-serverless.how-it-works.pause-resume)
++ [Determining the maximum number of database connections for Aurora Serverless v1](#aurora-serverless.max-connections)
 + [Parameter groups for Aurora Serverless v1](#aurora-serverless.parameter-groups)
 + [Logging for Aurora Serverless v1](#aurora-serverless.logging)
 + [Aurora Serverless v1 and maintenance](#aurora-serverless.maintenance)
@@ -118,6 +119,136 @@ $ aws rds describe-db-clusters --region us-west-1 --db-cluster-identifier west-c
 
 **Note**  
  If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot\. In this case, Aurora restores the DB cluster from the snapshot when there is a request to connect to it\. 
+
+## Determining the maximum number of database connections for Aurora Serverless v1<a name="aurora-serverless.max-connections"></a>
+
+The following examples are for an Aurora Serverless v1 DB cluster that's compatible with MySQL 5\.7\. You can use a MySQL client or the query editor, if you've configured access to it\. For more information, see [Running queries in the query editor](query-editor.md#query-editor.running)\.
+
+**To find the maximum number of database connections**
+
+1. Find the capacity range for your Aurora Serverless v1 DB cluster using the AWS CLI\.
+
+   ```
+   aws rds describe-db-clusters \
+       --db-cluster-identifier my-serverless-57-cluster \
+       --query 'DBClusters[*].ScalingConfigurationInfo|[0]'
+   ```
+
+   The result shows that its capacity range is 1–4 ACUs\.
+
+   ```
+   {
+       "MinCapacity": 1,
+       "AutoPause": true,
+       "MaxCapacity": 4,
+       "TimeoutAction": "RollbackCapacityChange",
+       "SecondsUntilAutoPause": 3600
+   }
+   ```
+
+1. Run the following SQL query to find the maximum number of connections\.
+
+   ```
+   select @@max_connections;
+   ```
+
+   The result shown is for the minimum capacity of the cluster, 1 ACU\.
+
+   ```
+   @@max_connections
+   90
+   ```
+
+1. Scale the cluster to 8–32 ACUs\.
+
+   For more information on scaling, see [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\.
+
+1. Confirm the capacity range\.
+
+   ```
+   {
+       "MinCapacity": 8,
+       "AutoPause": true,
+       "MaxCapacity": 32,
+       "TimeoutAction": "RollbackCapacityChange",
+       "SecondsUntilAutoPause": 3600
+   }
+   ```
+
+1. Find the maximum number of connections\.
+
+   ```
+   select @@max_connections;
+   ```
+
+   The result shown is for the minimum capacity of the cluster, 8 ACUs\.
+
+   ```
+   @@max_connections
+   1000
+   ```
+
+1. Scale the cluster to the maximum possible, 256–256 ACUs\.
+
+1. Confirm the capacity range\.
+
+   ```
+   {
+       "MinCapacity": 256,
+       "AutoPause": true,
+       "MaxCapacity": 256,
+       "TimeoutAction": "RollbackCapacityChange",
+       "SecondsUntilAutoPause": 3600
+   }
+   ```
+
+1. Find the maximum number of connections\.
+
+   ```
+   select @@max_connections;
+   ```
+
+   The result shown is for 256 ACUs\.
+
+   ```
+   @@max_connections
+   6000
+   ```
+**Note**  
+The `max_connections` value doesn't scale linearly with the number of ACUs\.
+
+1. Scale the cluster back down to 1–4 ACUs\.
+
+   ```
+   {
+       "MinCapacity": 1,
+       "AutoPause": true,
+       "MaxCapacity": 4,
+       "TimeoutAction": "RollbackCapacityChange",
+       "SecondsUntilAutoPause": 3600
+   }
+   ```
+
+   This time, the `max_connections` value is for 4 ACUs\.
+
+   ```
+   @@max_connections
+   270
+   ```
+
+1. Let the cluster scale down to 2 ACUs\.
+
+   ```
+   @@max_connections
+   180
+   ```
+
+   If you've configured the cluster to pause after a certain amount of time idle, it scales down to 0 ACUs\. However, `max_connections` doesn't drop below the value for 1 ACU\.
+
+   ```
+   @@max_connections
+   90
+   ```
 
 ## Parameter groups for Aurora Serverless v1<a name="aurora-serverless.parameter-groups"></a>
 

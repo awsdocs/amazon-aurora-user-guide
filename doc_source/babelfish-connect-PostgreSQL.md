@@ -4,19 +4,19 @@ You can use a PostgreSQL client to connect to Babelfish on the PostgreSQL port\.
 
 ## Using psql to connect to the DB cluster<a name="babelfish-connect-psql"></a>
 
-You can query an Aurora PostgreSQL DB cluster that supports Babelfish with the `psql` command line client\. When connecting, use the PostgreSQL port\. Use the following command to connect to Babelfish with the psql client:
+You can query an Aurora PostgreSQL DB cluster that supports Babelfish with the `psql` command line client\. When connecting, use the PostgreSQL port \(by default, port 5432\)\. Typically, you don't need to specify the port number unless you changed it from the default\. Use the following command to connect to Babelfish from the `psql` client:
 
 ```
-psql "host=babelfish_db.cluster-123456789012
-	port=portNumber dbname=babelfish_db user=userName"
+psql -h bfish-db.cluster-123456789012.aws-region.rds.amazonaws.com
+-p 5432 -U postgres -d babelfish_db -p
 ```
 
 The parameters are as follows:
-+ `host` – The host name of the DB cluster \(cluster endpoint\) that you want to access
-+ `port` – The PostgreSQL port number used to connect to your DB instance
-+ `dbname` – `babelfish_db`
-+ `user` – The database user account that you want to access
-+ `password` – The password of the database user
++ `-h` – The host name of the DB cluster \(cluster endpoint\) that you want to access\.
++ `-p` – The PostgreSQL port number used to connect to your DB instance\.
++ `-d` – `babelfish_db`
++ `-U` – The database user account that you want to access\. \(The example shows the default master username\.\)
++ `-p` – The password of the database user\.
 
 When you run a SQL command on the psql client, you end the command with a semicolon\. For example, the following SQL command queries the [pg\_tables system view](https://www.postgresql.org/docs/current/view-pg-tables.html) to return information about each table in the database\.
 
@@ -54,4 +54,4 @@ After connecting, you can use pgAdmin functionality to monitor and manage your A
 
 ![\[\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/pgAdmin3.png)
 
-For more details about using pgAdmin, visit the [pgAdmin web site](https://www.pgadmin.org/)\.
+To learn more, see the [pgAdmin](https://www.pgadmin.org/) web page\.

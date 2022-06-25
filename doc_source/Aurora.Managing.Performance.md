@@ -20,7 +20,7 @@ The size of your cluster volume is evaluated on an hourly basis to determine you
   +  Aurora MySQL 3 \(compatible with MySQL 8\.0\), all minor versions
   +  Aurora MySQL 2\.09 \(compatible with MySQL 5\.7\) and higher
   +  Aurora MySQL version 1\.23 \(compatible with MySQL 5\.6\) and higher
-  +  All Aurora PostgreSQL 13 versions
+  +  All Aurora PostgreSQL 14 and 13 versions
   +  Aurora PostgreSQL version 12\.4 and higher
   +  Aurora PostgreSQL version 11\.8 and higher
   +  Aurora PostgreSQL version 10\.13 and higher

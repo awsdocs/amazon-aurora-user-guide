@@ -55,8 +55,7 @@ In Aurora, database activity streams have the following requirements and limitat
 ## Supported Aurora engine versions for database activity streams<a name="DBActivityStreams.Overview.requirements.version"></a>
 
 **For Aurora PostgreSQL, database activity streams are supported for the following versions:**  
-+ All 13 versions
-+ All 12 versions
++ All 14, 13, and 12 versions
 + Version 11\.6 and higher 11 versions
 + Version 10\.11 and higher 10 versions
 

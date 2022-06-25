@@ -1,9 +1,9 @@
-# Managing Babelfish error handling<a name="babelfish-strict"></a>
+# Managing Babelfish error handling with escape hatches<a name="babelfish-strict"></a>
 
-Babelfish mimics SQL behavior in terms of control flow and transaction state whenever possible\. If Babelfish encounters an error, it returns an error code similar to the SQL Server error code if possible\. If Babelfish can't map the error, it returns a fixed error code \(`33557097`\)\. If an unmapped error is one of the following, the indicated result happens:
-+ If it's a compile time error, Babelfish rolls back the transaction\.
-+ If it's a runtime error, Babelfish ends the batch and rolls back the transaction\.
-+ If it's a protocol error between the client and server, the transaction isn't rolled back\.
+Babelfish mimics SQL behavior for control flow and transaction state whenever possible\. When Babelfish encounters an error, it returns an error code similar to the SQL Server error code\. If Babelfish can't map the error to a SQL Server code, it returns a fixed error code \(`33557097`\) and takes specific actions based on the type of error, as follows:
++ For compile time errors, Babelfish rolls back the transaction\.
++ For runtime errors, Babelfish ends the batch and rolls back the transaction\.
++ For protocol error between client and server, the transaction isn't rolled back\.
 
 If an error code can't be mapped to an equivalent code and the code for a similar error is available, the error code is mapped to the alternative code\. For example, the behaviors that cause SQL Server codes `8143` and `8144` are both mapped to `8143`\.
 
@@ -59,6 +59,7 @@ In the following table you can find descriptions and default values for the Babe
 | escape\_hatch\_nocheck\_add\_constraint |  Controls Babelfish behavior related to the WITH CHECK or NOCHECK clause for constraints\.  |  strict  | 
 | escape\_hatch\_nocheck\_existing\_constraint |  Controls Babelfish behavior related to FOREIGN KEY or CHECK constraints\.   |  strict  | 
 | escape\_hatch\_query\_hints |  Controls Babelfish behavior related to query hints\. When this option is set to ignore, the server ignores hints that use the OPTION \(\.\.\.\) clause to specify query processing aspects\. Examples include SELECT FROM \.\.\. OPTION\(MERGE JOIN HASH, MAXRECURSION 10\)\)\.  |  ignore  | 
+|  escape\_hatch\_rowversion | Controls the behavior of the ROWVERSION and TIMESTAMP datatypes\. For usage information, see [Using Babelfish features with limited implementation](babelfish-compatibility.tsql.limited-implementation.md)\. | strict | 
 | escape\_hatch\_schemabinding\_function |  Controls Babelfish behavior related to the WITH SCHEMABINDING clause\. By default, the WITH SCHEMABINDING clause is ignored when specified with the CREATE or ALTER FUNCTION command\.   |  ignore  | 
 | escape\_hatch\_schemabinding\_procedure |  Controls Babelfish behavior related to the WITH SCHEMABINDING clause\. By default, the WITH SCHEMABINDING clause is ignored when specified with the CREATE or ALTER PROCEDURE command\.   |  ignore  | 
 | escape\_hatch\_rowguidcol\_column |  Controls Babelfish behavior related to the ROWGUIDCOL clause when creating or altering a table\.  |  strict  | 
