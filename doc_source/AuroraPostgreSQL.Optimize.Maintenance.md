@@ -68,7 +68,7 @@ To reject or disable plans, pass `'reject'` or `'disable' `as the action paramet
 SELECT apg_plan_mgmt.evolve_plan_baselines(
 sql_hash,  -- The managed statement ID
 plan_hash, -- The plan ID
-1.1,       -- number of times faster the plan must be 
+0.9,       -- number of times faster the plan must be 
 'disable'  -- The action to take. This sets the enabled field to false.
 )
 FROM apg_plan_mgmt.dba_plans
