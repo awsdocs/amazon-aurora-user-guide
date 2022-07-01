@@ -1,4 +1,4 @@
-# Maintaining execution plans<a name="AuroraPostgreSQL.Optimize.Maintenance"></a>
+# Maintaining Aurora PostgreSQL execution plans<a name="AuroraPostgreSQL.Optimize.Maintenance"></a>
 
 Query plan management provides techniques and functions to add, maintain, and improve execution plans\.
 

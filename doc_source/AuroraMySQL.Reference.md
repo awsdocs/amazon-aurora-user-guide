@@ -582,7 +582,7 @@ This event is part of an event semaphore\. It provides exclusive access to varia
 Operations are checking, updating, deleting, or adding transaction IDs in InnoDB in a consistent or controlled manner\. These operations require a `trx_sys` mutex call, which is tracked by Performance Schema instrumentation\. Operations include management of the transaction system when the database starts or shuts down, rollbacks, undo cleanups, row read access, and buffer pool loads\. High database load with a large number of transactions results in the frequent appearance of this wait event\. For more information, see [synch/mutex/innodb/trx\_sys\_mutex](ams-waits.trxsysmutex.md)\.
 
 **synch/mutex/mysys/KEY\_CACHE::cache\_lock**  
-The `keycache->cache_lock` mutex controls access to the key cache for MyISAM tables\. Therefore, this wait event doesn't apply to Aurora MySQL\.
+The `keycache->cache_lock` mutex controls access to the key cache for MyISAM tables\. This wait event doesn't apply to Aurora MySQL, because the MyISAM storage engine isn't supported for persistent tables\.
 
 **synch/mutex/sql/FILE\_AS\_TABLE::LOCK\_offsets**  
 The engine acquires this mutex when opening or creating a table metadata file\. When this wait event occurs with excessive frequency, the number of tables being created or opened has spiked\. 

@@ -1,4 +1,4 @@
-# Parameter reference for query plan management<a name="AuroraPostgreSQL.Optimize.Parameters"></a>
+# Parameter reference for Aurora PostgreSQL query plan management<a name="AuroraPostgreSQL.Optimize.Parameters"></a>
 
 The `apg_plan_mgmt` extension provides the following parameters\.
 

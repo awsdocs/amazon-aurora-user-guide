@@ -1,4 +1,4 @@
-# Examining plans in the apg\_plan\_mgmt\.dba\_plans view<a name="AuroraPostgreSQL.Optimize.ViewPlans"></a>
+# Examining Aurora PostgreSQL query plans in the dba\_plans view<a name="AuroraPostgreSQL.Optimize.ViewPlans"></a>
 
 Query plan management provides SQL view for database administrators \(DBAs\) to use called `apg_plan_mgmt.dba_plans`\. This one view contains the plan history for all of the databases in the DB instance\.
 

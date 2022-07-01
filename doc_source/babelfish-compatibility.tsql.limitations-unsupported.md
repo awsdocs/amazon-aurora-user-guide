@@ -25,7 +25,7 @@ In the table you can find information about certain functionality that isn't cur
 | Cursors \(updatable\) | Updatable cursors aren't supported\. | 
 | Cursors \(global\) | GLOBAL cursors aren't supported\. | 
 | Cursor \(fetch behaviors\) | The following cursor fetch behaviors aren't supported: FETCH PRIOR, FIRST, LAST, ABSOLUTE, abd RELATIVE | 
-| Cursor\-typed \(variables and parameters\) | Cursor\-typed variables and parameters aren't supported\. | 
+| Cursor\-typed \(variables and parameters\) | Cursor\-typed variables and parameters aren't supported for output parameters \(an error is raised\)\.  | 
 | Cursor options | SCROLL, KEYSET, DYNAMIC, FAST\_FORWARD, SCROLL\_LOCKS, OPTIMISTIC, TYPE\_WARNING, and FOR UPDATE | 
 | Data encryption | Data encryption isn't supported\. | 
 | DBCC commands  | Microsoft SQL Server Database Console Commands \(DBCC\) aren't supported\. | 

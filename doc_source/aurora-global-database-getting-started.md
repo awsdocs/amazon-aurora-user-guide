@@ -46,7 +46,7 @@ To create an Aurora global database by using the AWS Management Console, the AWS
 
 The steps for creating an Aurora global database begin by signing in to an AWS Region that supports the Aurora global database feature\. For a complete list, see [Aurora global databases](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.GlobalDatabase)\.
 
-One of the following steps is choosing a virtual private cloud \(VPC\) based on Amazon VPC for your Aurora DB cluster\. To use your own VPC, we recommend that you create it in advance so it's available for you to choose\. At the same time, create any related subnets, and as needed a subnet group and security group\. To learn how, see [How to create a VPC for use with Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateVPC.html)\.
+One of the following steps is choosing a virtual private cloud \(VPC\) based on Amazon VPC for your Aurora DB cluster\. To use your own VPC, we recommend that you create it in advance so it's available for you to choose\. At the same time, create any related subnets, and as needed a subnet group and security group\. To learn how, see [Tutorial: Create an Amazon VPC for use with a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Tutorials.WebServerDB.CreateVPC.html)\.
 
 For general information about creating an Aurora DB cluster, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.
 

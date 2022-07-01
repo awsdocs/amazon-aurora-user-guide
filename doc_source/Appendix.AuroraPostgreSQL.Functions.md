@@ -5,6 +5,7 @@ Following, you can find a list of Aurora PostgreSQL functions that are available
 ## Overview<a name="Appendix.AuroraPostgreSQL.Functions.Overview"></a>
 
 You can use the following functions for Amazon RDS DB instances running Aurora PostgreSQL:
++ [aurora\_db\_instance\_identifier](aurora_db_instance_identifier.md)
 + [aurora\_ccm\_status](aurora_ccm_status.md)
 + [aurora\_global\_db\_instance\_status](aurora_global_db_instance_status.md)
 + [aurora\_global\_db\_status](aurora_global_db_status.md)

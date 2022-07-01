@@ -1,4 +1,4 @@
-# Using managed plans<a name="AuroraPostgreSQL.Optimize.UsePlans"></a>
+# Using Aurora PostgreSQL managed plans<a name="AuroraPostgreSQL.Optimize.UsePlans"></a>
 
 To get the optimizer to use captured plans for your managed statements, set the parameter `apg_plan_mgmt.use_plan_baselines` to `true`\. The following is a local instance example\. 
 
@@ -32,7 +32,7 @@ The flow is as follows:
 
 1. The optimizer goes through the capture plan processing if the parameter `apg_plan_mgmt.capture_plan_baselines` is `manual` or `automatic`\.
 
-   For details on how the optimizer captures plans, see [Capturing execution plans](AuroraPostgreSQL.Optimize.CapturePlans.md)\. 
+   For details on how the optimizer captures plans, see [Capturing Aurora PostgreSQL execution plans](AuroraPostgreSQL.Optimize.CapturePlans.md)\. 
 
 1. The optimizer runs the generated plan if `apg_plan_mgmt.use_plan_baselines` is `false`\.
 

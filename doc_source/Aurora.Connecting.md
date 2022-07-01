@@ -193,7 +193,7 @@ For more information about the AWS JDBC Driver for PostgreSQL and complete instr
 ## Troubleshooting Aurora connection failures<a name="Aurora.Connecting.Troubleshooting"></a>
 
 Common causes of connection failures to a new Aurora DB cluster include the following:
-+ **Security group in the VPC doesn't allow access** – Your VPC needs to allow connections from your device or from an Amazon EC2 instance by proper configuration of the Security group in the VPC\. To resolve, modify your VPC's Security group Inbound rules to allow connections\. For an example, see [Create a VPC and subnets](Aurora.CreateVPC.md#CHAP_Aurora.CreateVPC)\.
++ **Security group in the VPC doesn't allow access** – Your VPC needs to allow connections from your device or from an Amazon EC2 instance by proper configuration of the security group in the VPC\. To resolve, modify your VPC's Security group Inbound rules to allow connections\. For an example, see [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
 + **Port blocked by firewall rules** – Check the value of the port configured for your Aurora DB cluster\. If a firewall rule blocks that port, you can re\-create the instance using a different port\. 
 + **Incomplete or incorrect IAM configuration** – If you created your Aurora DB instance to use IAM–based authentication, make sure that it's properly configured\. For more information, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\.
 

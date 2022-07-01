@@ -10,6 +10,7 @@ In the following table you can find T\-SQL functionality supported by different 
 | CREATE ROLE | ✓ | – | – | – | 
 | Create unique indexes | ✓ | ✓ | ✓ | – | 
 | Cross–database references SELECT,SELECT\.\.INTO, INSERT, UPDATE, DELETE | ✓ | – | – | – | 
+| Cursor\-typed parameters for input parameters only \(not output\) | ✓ | ✓ | ✓ | ✓ | 
 | Data migration using the bcp client utility | ✓ | – | – | – | 
 | Data migration with the SSMS Import/Export Wizard | ✓ | – | – | – | 
 | Datatypes TIMESTAMP, ROWVERSION \(for usage information, see Features with limited implementation | ✓ | ✓ | – | – | 

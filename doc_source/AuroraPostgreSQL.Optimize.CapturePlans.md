@@ -1,4 +1,4 @@
-# Capturing execution plans<a name="AuroraPostgreSQL.Optimize.CapturePlans"></a>
+# Capturing Aurora PostgreSQL execution plans<a name="AuroraPostgreSQL.Optimize.CapturePlans"></a>
 
 You can capture execution plans for specific SQL statements by using manual plan capture\. Alternatively, you can capture all \(or the slowest\) plans that are executed two or more times as your application runs by using automatic plan capture\.
 

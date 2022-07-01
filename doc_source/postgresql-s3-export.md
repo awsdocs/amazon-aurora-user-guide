@@ -2,7 +2,7 @@
 
 You can query data from an Aurora PostgreSQL DB cluster and export it directly into files stored in an Amazon S3 bucket\. To do this, you use the `aws_s3` PostgreSQL extension that Aurora PostgreSQL provides\.
 
-You can export from a provisioned DB instance only\. That is, these steps aren't supported for Aurora Serverless v1\.
+You can export from a provisioned or an Aurora Serverless v2 DB instance\. These steps aren't supported for Aurora Serverless v1\. 
 
 For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service User Guide*\.
 
@@ -57,10 +57,11 @@ To export data stored in an Aurora PostgreSQL database to an Amazon S3 bucket, u
 ## Verify that your Aurora PostgreSQL version supports exports<a name="postgresql-s3-supported"></a>
 
 Currently, Amazon S3 exports are supported for the following versions of Aurora PostgreSQL:
-+ 10\.11 and higher 10 versions
-+ 11\.6 and higher 11 versions
-+ 12\.4 and higher 12 versions
++ 14\.3 and higher 14 versions
 + 13\.3 and higher 13 versions
++ 12\.4 and higher 12 versions
++ 11\.6 and higher 11 versions
++ 10\.11 and higher 10 versions
 
 You can also verify support by using the `describe-db-engine-versions` command\. The following example verify support for version 10\.14\.
 
@@ -357,7 +358,7 @@ SELECT * from aws_s3.query_export_to_s3('select * from basic_test', :'s3_uri_1',
 
 ## Troubleshooting access to Amazon S3<a name="postgresql-s3-export-troubleshoot"></a>
 
-If you encounter connection problems when attempting to export data to Amazon S3, first confirm that the outbound access rules for the VPC security group associated with your DB instance permit network connectivity\. Specifically, they must allow access to port 443 for SSL connections\. For more information, see [Provide access to the DB cluster in the VPC by creating a security group](CHAP_SettingUp_Aurora.md#CHAP_SettingUp_Aurora.SecurityGroup)\.
+If you encounter connection problems when attempting to export data to Amazon S3, first confirm that the outbound access rules for the VPC security group associated with your DB instance permit network connectivity\. Specifically, the security group must have a rule that allows the DB instance to send TCP traffic to port 443 and to any IPv4 addresses \(0\.0\.0\.0/0\)\. For more information, see [Provide access to the DB cluster in the VPC by creating a security group](CHAP_SettingUp_Aurora.md#CHAP_SettingUp_Aurora.SecurityGroup)\.
 
 See also the following for recommendations:
 + [Troubleshooting Amazon Aurora identity and access](security_iam_troubleshoot.md)

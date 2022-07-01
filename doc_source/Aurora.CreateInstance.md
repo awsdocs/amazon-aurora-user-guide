@@ -21,13 +21,13 @@ If you use the AWS Management Console to create your Aurora DB cluster, you can 
 
 By default, Amazon RDS creates the primary DB instance and the Aurora Replica in the AZs automatically for you\. To choose a specific AZ, you need to change the **Availability & durability** Multi\-AZ deployment setting to **Don't create an Aurora Replica**\. Doing so exposes a drop\-down selector that lets you choose from among the AZs in your VPC\. However, we strongly recommend that you keep the default setting and let Amazon RDS create a Multi\-AZ deployment and choose AZs for you\. By doing so, your Aurora DB cluster is created with the fast failover and high availability features that are two of Aurora's key benefits\. 
 
-For more information, see [How to create a VPC for use with Amazon Aurora](Aurora.CreateVPC.md)\. For information on VPCs, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
+For more information, see [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. For information on VPCs, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
 
 **Note**  
 You can communicate with an EC2 instance that is not in a VPC and an Amazon Aurora DB cluster using ClassicLink\. For more information, see [A DB instance in a VPC accessed by an EC2 instance not in a VPC](USER_VPC.Scenarios.md#USER_VPC.ClassicLink)\.
 
 If you don't have a default VPC or you haven't created a VPC, you can have Amazon RDS automatically create a VPC for you when you create an Aurora DB cluster using the console\. Otherwise, you must do the following:
-+ Create a VPC with at least one subnet in each of at least two of the Availability Zones in the AWS Region where you want to deploy your DB cluster\. For more information, see [How to create a VPC for use with Amazon Aurora](Aurora.CreateVPC.md)\.
++ Create a VPC with at least one subnet in each of at least two of the Availability Zones in the AWS Region where you want to deploy your DB cluster\. For more information, see [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
 + Specify a VPC security group that authorizes connections to your Aurora DB cluster\. For more information, see [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#Overview.RDSVPC.Create)\.
 + Specify an RDS DB subnet group that defines at least two subnets in the VPC that can be used by the Aurora DB cluster\. For more information, see [Working with DB subnet groups](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Subnets)\.
 

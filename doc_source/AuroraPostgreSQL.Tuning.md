@@ -1,9 +1,11 @@
 # Tuning with wait events for Aurora PostgreSQL<a name="AuroraPostgreSQL.Tuning"></a>
 
-Wait events are an important tuning tool for Aurora PostgreSQL\. If you can find out why sessions are waiting for resources and what they are doing, you are better able to reduce bottlenecks\. You can use the information in this section to find possible causes and corrective actions\.
+Wait events are an important tuning tool for Aurora PostgreSQL\. When you can find out why sessions are waiting for resources and what they are doing, you're better able to reduce bottlenecks\. You can use the information in this section to find possible causes and corrective actions\. Before delving into this section, we strongly recommend that you understand basic Aurora concepts, especially the following topics:
++ [Amazon Aurora storage and reliability](Aurora.Overview.StorageReliability.md)
++ [Managing performance and scaling for Aurora DB clusters](Aurora.Managing.Performance.md) 
 
 **Important**  
-The wait events in this section are specific to Aurora PostgreSQL\. Use the information in this section to tune only Amazon Aurora, not RDS for PostgreSQL\.  
+The wait events in this section are specific to Aurora PostgreSQL\. Use the information in this section to tune Amazon Aurora only, not RDS for PostgreSQL\.  
 Some wait events in this section have no analogs in the open source versions of these database engines\. Other wait events have the same names as events in open source engines, but behave differently\. For example, Amazon Aurora storage works differently from open source storage, so storage\-related wait events indicate different resource conditions\.
 
 **Topics**

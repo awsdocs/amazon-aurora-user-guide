@@ -4,6 +4,7 @@
 +  Upgrade from a provisioned Aurora cluster\. 
 +  Upgrade from an Aurora Serverless v1 cluster\. 
 +  Perform a dump and restore from an Aurora Serverless v2 \(preview\) cluster\. 
++ Migrate from an on\-premises database to an Aurora Serverless v2 cluster\.
 
  When your upgraded cluster is running the appropriate engine version as listed in [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md), you can begin adding Aurora Serverless v2 DB instances to it\. The first DB instance that you add to the upgraded cluster must be a provisioned DB instance\. Then you can switch over the processing for the write workload, the read workload, or both to the Aurora Serverless v2 DB instances\. 
 
@@ -20,6 +21,7 @@
   + [Adapting Aurora Serverless v1 use cases to Aurora Serverless v2](#aurora-serverless.comparison-approaches)
   + [Upgrading from an Aurora Serverless v1 cluster to Aurora Serverless v2](#aurora-serverless-v2.upgrade-from-serverless-v1-procedure)
 + [Upgrading from Aurora Serverless v2 \(preview\) to Aurora Serverless v2](#aurora-serverless-v2.upgrade-from-serverless-v2-preview)
++ [Migrating from an on\-premises database to Aurora Serverless v2](#aurora-serverless-v2.migrate-from-on-prem)
 
 ## Upgrading or switching existing clusters to use Aurora Serverless v2<a name="aurora-serverless-v2.getting-started-general-procedure"></a>
 
@@ -432,3 +434,9 @@ The process of upgrading a DB cluster from Aurora Serverless v1 to Aurora Server
 ## Upgrading from Aurora Serverless v2 \(preview\) to Aurora Serverless v2<a name="aurora-serverless-v2.upgrade-from-serverless-v2-preview"></a>
 
  Any Aurora MySQL clusters that you created using the Aurora Serverless v2 preview can't be upgraded using the snapshot restore mechanism\. The preview is intended for testing only\. Your preview clusters shouldn't contain any production or business\-critical data\. If you need to bring any data from an Aurora Serverless v2 preview cluster to Aurora Serverless v2, perform a logical dump and restore\. Use the `mysqldump` command as described in [Migrating from MySQL to Amazon Aurora by using mysqldump](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.mysqldump)\. 
+
+## Migrating from an on\-premises database to Aurora Serverless v2<a name="aurora-serverless-v2.migrate-from-on-prem"></a>
+
+You can migrate your on\-premises databases to Aurora Serverless v2, just as with provisioned Aurora MySQL and Aurora PostgreSQL\.
++ For MySQL databases, you can use the `mysqldump` command\. For more information, see [Importing data to a MySQL or MariaDB DB instance with reduced downtime](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html)\.
++ For PostgreSQL databases, you can use the `pg_dump` and `pg_restore` commands\. For more information, see the blog post [Best practices for migrating PostgreSQL databases to Amazon RDS and Amazon Aurora](https://aws.amazon.com/blogs/database/best-practices-for-migrating-postgresql-databases-to-amazon-rds-and-amazon-aurora/)\.

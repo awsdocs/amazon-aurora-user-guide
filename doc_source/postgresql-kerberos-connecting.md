@@ -1,6 +1,6 @@
 # Connecting to PostgreSQL with Kerberos authentication<a name="postgresql-kerberos-connecting"></a>
 
-You can connect to PostgreSQL with Kerberos authentication with the pgAdmin interface or with a command line interface such as psql\. For more information about connecting, see   [Connecting to an Amazon Aurora PostgreSQL DB cluster](Aurora.Connecting.md#Aurora.Connecting.AuroraPostgreSQL)\. 
+You can connect to PostgreSQL with Kerberos authentication with the pgAdmin interface or with a command\-line interface such as psql\. For more information about connecting, see   [Connecting to an Amazon Aurora PostgreSQL DB cluster](Aurora.Connecting.md#Aurora.Connecting.AuroraPostgreSQL)\. 
 
 ## pgAdmin<a name="collapsible-section-pgAdmin"></a>
 

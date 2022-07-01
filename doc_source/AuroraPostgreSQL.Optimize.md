@@ -14,21 +14,21 @@ With query plan management, you can control execution plans for a set of stateme
 + Try new optimizer features with less risk, because you can choose to approve only the plan changes that improve performance\.
 
 **Topics**
-+ [Enabling query plan management for Aurora PostgreSQL](#AuroraPostgreSQL.Optimize.Enable)
-+ [Upgrading query plan management](#AuroraPostgreSQL.Optimize.Upgrade)
-+ [Basics of query plan management](#AuroraPostgreSQL.Optimize.Start)
-+ [Best practices for query plan management](AuroraPostgreSQL.Optimize.BestPractice.md)
-+ [Examining plans in the apg\_plan\_mgmt\.dba\_plans view](AuroraPostgreSQL.Optimize.ViewPlans.md)
-+ [Capturing execution plans](AuroraPostgreSQL.Optimize.CapturePlans.md)
-+ [Using managed plans](AuroraPostgreSQL.Optimize.UsePlans.md)
-+ [Maintaining execution plans](AuroraPostgreSQL.Optimize.Maintenance.md)
-+ [Parameter reference for query plan management](AuroraPostgreSQL.Optimize.Parameters.md)
-+ [Function reference for query plan management](AuroraPostgreSQL.Optimize.Functions.md)
++ [Turning on query plan management for Aurora PostgreSQL](#AuroraPostgreSQL.Optimize.Enable)
++ [Upgrading Aurora PostgreSQL query plan management](#AuroraPostgreSQL.Optimize.Upgrade)
++ [Basics of Aurora PostgreSQL query plan management](#AuroraPostgreSQL.Optimize.Start)
++ [Best practices for Aurora PostgreSQL query plan management](AuroraPostgreSQL.Optimize.BestPractice.md)
++ [Examining Aurora PostgreSQL query plans in the dba\_plans view](AuroraPostgreSQL.Optimize.ViewPlans.md)
++ [Capturing Aurora PostgreSQL execution plans](AuroraPostgreSQL.Optimize.CapturePlans.md)
++ [Using Aurora PostgreSQL managed plans](AuroraPostgreSQL.Optimize.UsePlans.md)
++ [Maintaining Aurora PostgreSQL execution plans](AuroraPostgreSQL.Optimize.Maintenance.md)
++ [Parameter reference for Aurora PostgreSQL query plan management](AuroraPostgreSQL.Optimize.Parameters.md)
++ [Function reference for Aurora PostgreSQL query plan management](AuroraPostgreSQL.Optimize.Functions.md)
 
-## Enabling query plan management for Aurora PostgreSQL<a name="AuroraPostgreSQL.Optimize.Enable"></a>
+## Turning on query plan management for Aurora PostgreSQL<a name="AuroraPostgreSQL.Optimize.Enable"></a>
 
 Query plan management is available with the following Aurora PostgreSQL versions: 
-+ All Aurora PostgreSQL 13 versions
++ All Aurora PostgreSQL 14 and 13 versions
 + Aurora PostgreSQL version 12\.4 and higher
 + Aurora PostgreSQL version 11\.6 and higher
 + Aurora PostgreSQL version 10\.5 and higher
@@ -65,7 +65,7 @@ my-database=> SET apg_plan_mgmt.use_plan_baselines = off;
 my-database=> SET apg_plan_mgmt.capture_plan_baselines = off;
 ```
 
-## Upgrading query plan management<a name="AuroraPostgreSQL.Optimize.Upgrade"></a>
+## Upgrading Aurora PostgreSQL query plan management<a name="AuroraPostgreSQL.Optimize.Upgrade"></a>
 
 The latest version of query plan management is 2\.0\. If you installed an earlier version of query plan management, we strongly recommend that you upgrade to version 2\.0\. For version details, see [Extension versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)\.
 
@@ -77,12 +77,12 @@ SELECT apg_plan_mgmt.validate_plans('update_plan_hash');
 SELECT apg_plan_mgmt.reload();
 ```
 
-## Basics of query plan management<a name="AuroraPostgreSQL.Optimize.Start"></a>
+## Basics of Aurora PostgreSQL query plan management<a name="AuroraPostgreSQL.Optimize.Start"></a>
 
 You can manage any SELECT, INSERT, UPDATE, or DELETE statement with query plan management, regardless of how complex the statement is\. Prepared, dynamic, embedded, and immediate\-mode SQL statements are all supported\. All PostgreSQL language features can be used, including partitioned tables, inheritance, row\-level security, and recursive common table expressions \(CTEs\)\.
 
 **Topics**
-+ [Performing a manual plan capture](#AuroraPostgreSQL.Optimize.Start.Capture)
++ [Capturing an Aurora PostgreSQL query plan manually](#AuroraPostgreSQL.Optimize.Start.Capture)
 + [Viewing captured plans](#AuroraPostgreSQL.Optimize.Start.View)
 + [Working with managed statements and the SQL hash](#AuroraPostgreSQL.Optimize.Start.ManagedStatements)
 + [Working with automatic plan capture](#AuroraPostgreSQL.Optimize.Start.AutomaticCapture)
@@ -90,7 +90,7 @@ You can manage any SELECT, INSERT, UPDATE, or DELETE statement with query plan m
 + [Approving new plans that improve performance](#AuroraPostgreSQL.Optimize.Start.Verify)
 + [Deleting plans](#AuroraPostgreSQL.Optimize.Start.Delete)
 
-### Performing a manual plan capture<a name="AuroraPostgreSQL.Optimize.Start.Capture"></a>
+### Capturing an Aurora PostgreSQL query plan manually<a name="AuroraPostgreSQL.Optimize.Start.Capture"></a>
 
 To capture plans for specific statements, use the manual capture mode as in the following example\.
 
@@ -121,7 +121,7 @@ Each row displayed represents a managed plan\. The preceding example displays th
 + `enabled` – A value that indicates whether the plan is enabled for use or disabled and not for use\.
 + `plan_outline` – Details of the managed plan\.
 
-For more about the `apg_plan_mgmt.dba_plans` view, see [Examining plans in the apg\_plan\_mgmt\.dba\_plans view](AuroraPostgreSQL.Optimize.ViewPlans.md)\. 
+For more about the `apg_plan_mgmt.dba_plans` view, see [Examining Aurora PostgreSQL query plans in the dba\_plans view](AuroraPostgreSQL.Optimize.ViewPlans.md)\. 
 
 ### Working with managed statements and the SQL hash<a name="AuroraPostgreSQL.Optimize.Start.ManagedStatements"></a>
 
@@ -176,7 +176,7 @@ The set of all captured plans for a managed statement is known as the *plan hist
 
 To turn off automatic plan capture, set `apg_plan_mgmt.capture_plan_baselines` to `off` in the parameter group for the DB instance\. Follow the same general process as outlined above, modifying your custom DB parameter group value for `apg_plan_mgmt.capture_plan_baselines` and then applying the custom DB parameter group to your Aurora DB instance\.
 
-For more about plan capture, see [Capturing execution plans](AuroraPostgreSQL.Optimize.CapturePlans.md)\. 
+For more about plan capture, see [Capturing Aurora PostgreSQL execution plans](AuroraPostgreSQL.Optimize.CapturePlans.md)\. 
 
 ### Validating plans<a name="AuroraPostgreSQL.Optimize.Start.Validate"></a>
 
