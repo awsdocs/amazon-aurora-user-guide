@@ -31,13 +31,13 @@ No event category exists for Aurora Serverless in the DB cluster event type\. Th
 |  failover  | RDS\-EVENT\-0073 |  A failover for the DB cluster has begun across Availability Zones\.  | 
 |  failure  | RDS\-EVENT\-0083 |  Aurora was unable to copy backup data from an Amazon S3 bucket\. It is likely that the permissions for Aurora to access the Amazon S3 bucket are configured incorrectly\. For more information, see [Migrating data from MySQL by using an Amazon S3 bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3) \.   | 
 |  failure  | RDS\-EVENT\-0143 |  Scaling failed for the Aurora Serverless DB cluster\.  | 
-|  global failover  | RDS\-EVENT\-0181 |  The failover of the global database has started\. The process can be delayed because other operations are running on the DB cluster\.  | 
-|  global failover  | RDS\-EVENT\-0182 |  The old primary instance in the global database isn't accepting writes\. All volumes are synchronized\.  | 
-|  global failover  | RDS\-EVENT\-0183 |  A replication lag is occurring during the synchronization phase of the global database failover\.  | 
-|  global failover  | RDS\-EVENT\-0184 |  The volume topology of the global database is reestablished with the new primary volume\.  | 
-|  global failover  | RDS\-EVENT\-0185 |  The global database failover is finished on the primary DB cluster\. Replicas might take long to come online after the failover completes\.  | 
-|  global failover  | RDS\-EVENT\-0186 |  The global database failover is canceled\.  | 
-|  global failover  | RDS\-EVENT\-0187 |  The global failover to the DB cluster failed\.  | 
+|  global-failover  | RDS\-EVENT\-0181 |  The failover of the global database has started\. The process can be delayed because other operations are running on the DB cluster\.  | 
+|  global-failover  | RDS\-EVENT\-0182 |  The old primary instance in the global database isn't accepting writes\. All volumes are synchronized\.  | 
+|  global-failover  | RDS\-EVENT\-0183 |  A replication lag is occurring during the synchronization phase of the global database failover\.  | 
+|  global-failover  | RDS\-EVENT\-0184 |  The volume topology of the global database is reestablished with the new primary volume\.  | 
+|  global-failover  | RDS\-EVENT\-0185 |  The global database failover is finished on the primary DB cluster\. Replicas might take long to come online after the failover completes\.  | 
+|  global-failover  | RDS\-EVENT\-0186 |  The global database failover is canceled\.  | 
+|  global-failover  | RDS\-EVENT\-0187 |  The global failover to the DB cluster failed\.  | 
 |  low storage  | RDS\-EVENT\-0227 |  The Aurora storage subsystem is running low on space\.  | 
 |  maintenance  | RDS\-EVENT\-0156 |  The DB cluster has a DB engine minor version upgrade available\.  | 
 |  notification  | RDS\-EVENT\-0076 |  Migration to an Aurora DB cluster failed\.  | 
