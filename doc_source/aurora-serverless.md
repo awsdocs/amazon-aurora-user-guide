@@ -70,6 +70,9 @@
   +  Invoking AWS Lambda functions from within your Aurora MySQL DB cluster\. However, AWS Lambda functions can make calls to your Aurora Serverless v1 DB cluster\. 
   +  Restoring a snapshot from a DB instance that isn't Aurora MySQL or RDS for MySQL\. 
   +  Replicating data using replication based on binary logs \(binlogs\)\. This limitation is true regardless of whether your Aurora MySQL\-based DB cluster Aurora Serverless v1 is the source or the target of the replication\. To replicate data into an Aurora Serverless v1 DB cluster from a MySQL DB instance outside Aurora, such as one running on Amazon EC2, consider using AWS Database Migration Service\. For more information, see the [AWS Database Migration Service User Guide](https://docs.aws.amazon.com/dms/latest/userguide/)\. 
+  + Creating users with host\-based access \(`'username'@'IP_address'`\)\. This is because Aurora Serverless v1 uses a router fleet between the client and the database host for seamless scaling\. The IP address that the Aurora Serverless DB cluster sees is that of the router host and not your client\. For more information, see [Aurora Serverless v1 architecture](aurora-serverless-v1.how-it-works.md#aurora-serverless.architecture)\.
+
+    Instead, use the wildcard \(`'username'@'%'`\)\.
 +  Aurora PostgreSQL–based DB clusters running Aurora Serverless v1 have the following limitations: 
   +  Aurora PostgreSQL query plan management \(`apg_plan_management` extension\) isn't supported\. 
   +  The logical replication feature available in Amazon RDS PostgreSQL and Aurora PostgreSQL isn't supported\. 

@@ -47,7 +47,7 @@ Following, you can find a table that lists the highest value that should ever be
  For details about how Aurora Serverless v2 instances handle this parameter, see [Parameters that Aurora computes based on Aurora Serverless v2 maximum capacity](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.parameters-based-on-max-capacity)\. 
 
 
-| Instance class | Largest possible value for max\_connections | 
+| Instance class | Default max\_connections value | 
 | --- | --- | 
 | db\.x2g\.16xlarge | 5000 | 
 | db\.x2g\.12xlarge | 5000 | 

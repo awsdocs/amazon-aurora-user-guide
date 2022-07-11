@@ -6,9 +6,6 @@ When you use an Amazon VPC, you have control over your virtual networking enviro
 
 Accounts that support only the *EC2\-VPC* platform have a default VPC\. All new DB instances are created in the default VPC unless you specify otherwise\.
 
-**Note**  
-EC2\-Classic networking is retiring\. The end of life is planned for August 15, 2022\.
-
 **Topics**
 + [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)
 + [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)

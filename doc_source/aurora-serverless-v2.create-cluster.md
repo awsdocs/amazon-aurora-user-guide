@@ -60,7 +60,7 @@ The following example shows the creation of an Aurora Serverless v2 DB cluster\.
 aws rds create-db-cluster \
     --db-cluster-identifier my-serverless-v2-cluster \
     --region eu-central-1 \
-    --engine aurora-mysql
+    --engine aurora-mysql \
     --engine-version 8.0.mysql_aurora.3.02.0 \
     --serverless-v2-scaling-configuration MinCapacity=1,MaxCapacity=4 \
     --master-username myuser \
