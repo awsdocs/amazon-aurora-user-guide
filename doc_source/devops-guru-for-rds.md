@@ -8,6 +8,8 @@ The following video is an overview of DevOps Guru for RDS\.
 
 [![AWS Videos](http://img.youtube.com/vi/N3NNYgzYUDA/0.jpg)](http://www.youtube.com/watch?v=N3NNYgzYUDA)
 
+For a deep dive on this subject, see [Amazon DevOps Guru for RDS under the hood\.](http://aws.amazon.com/blogs/database/amazon-devops-guru-for-rds-under-the-hood/)
+
 **Topics**
 + [Benefits of DevOps Guru for RDS](#devops-guru-for-rds.benefits)
 + [How DevOps Guru for RDS works](#devops-guru-for-rds.how-it-works)

@@ -1,6 +1,9 @@
 # Backing up and restoring an Amazon Aurora DB cluster<a name="BackupRestoreAurora"></a>
 
-This section shows how to back up and restore Amazon Aurora DB clusters\. 
+These topics provide information about backing up and restoring Amazon Aurora DB clusters\.
+
+**Tip**  
+The Aurora high availability features and automatic backup capabilities help to keep your data safe without requiring extensive setup from you\. Before you implement a backup strategy, learn about the ways that Aurora maintains multiple copies of your data and helps you to access them across multiple DB instances and AWS Regions\. For details, see [High availability for Amazon Aurora](Concepts.AuroraHighAvailability.md)\.
 
 **Topics**
 + [Overview of backing up and restoring an Aurora DB cluster](Aurora.Managing.Backups.md)

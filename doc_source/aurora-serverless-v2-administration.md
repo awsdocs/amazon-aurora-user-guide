@@ -327,8 +327,8 @@ Aurora Serverless v2 DB clusters that are based on Aurora PostgreSQL support the
 
 |  Aurora PostgreSQL  |  Description  | 
 | --- | --- | 
-|   `log_connections`   |   Enabled by default, and can't be changed\. It logs details for all new client connections\.   | 
-|   `log_disconnections`   |   Enabled by default, and can't be changed\. Logs all client disconnections\.   | 
+|   `log_connections`   |  Logs each successful connection\.  | 
+|   `log_disconnections`   |  Logs end of a session including duration\.  | 
 |   `log_lock_waits`   |   Default is 0 \(off\)\. Set to 1 to log lock waits\.   | 
 |   `log_min_duration_statement`   |   The minimum duration \(in milliseconds\) for a statement to run before it's logged\.   | 
 |   `log_min_messages`   |  Sets the message levels that are logged\. Supported values are debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, panic\. To log performance data to the postgres log, set the value to debug1\.   | 

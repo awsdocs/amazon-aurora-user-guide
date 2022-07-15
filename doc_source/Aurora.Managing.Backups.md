@@ -2,9 +2,6 @@
 
 In the following sections, you can find information about Aurora backups and how to restore your Aurora DB cluster using the AWS Management Console\.
 
-**Tip**  
- The Aurora high availability features and automatic backup capabilities help to keep your data safe without requiring extensive setup from you\. Before you implement a backup strategy, learn about the ways that Aurora maintains multiple copies of your data and helps you to access them across multiple DB instances and AWS Regions\. For details, see [High availability for Amazon Aurora](Concepts.AuroraHighAvailability.md)\.
-
 ## Backups<a name="Aurora.Managing.Backups.Backup"></a>
 
 Aurora backs up your cluster volume automatically and retains restore data for the length of the *backup retention period*\. Aurora backups are continuous and incremental so you can quickly restore to any point within the backup retention period\. No performance impact or interruption of database service occurs as backup data is being written\. You can specify a backup retention period, from 1 to 35 days, when you create or modify a DB cluster\. Aurora backups are stored in Amazon S3\.

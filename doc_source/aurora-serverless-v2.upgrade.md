@@ -374,6 +374,7 @@ mysql> select * from serverless_v2_demo.demo;
 |  Query editor available  |  No  |  Yes  | 
 |  Performance Insights  |  Yes  |  No  | 
 |  Amazon RDS Proxy available  |  Yes  |  No  | 
+| Babelfish for Aurora PostgreSQL available | Yes\. Supported for Aurora PostgreSQL versions that are compatible with both Babelfish and Aurora Serverless v2\. | No | 
 
 ### Adapting Aurora Serverless v1 use cases to Aurora Serverless v2<a name="aurora-serverless.comparison-approaches"></a>
 

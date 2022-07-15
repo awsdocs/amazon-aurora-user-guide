@@ -26,7 +26,8 @@ Minor version upgrades can be applied for you automatically by Aurora\. When you
 If the automatic minor version upgrade option isn't set for your Aurora PostgreSQL DB cluster, your Aurora PostgreSQL isn't automatically upgraded to the new minor version\. Instead, when a new minor version is released in your AWS Region and your Aurora PostgreSQL DB cluster is running an older minor version, Aurora prompts you to upgrade\. It does so by adding a recommendation to the maintenance tasks for your cluster\.   
 Patches aren't considered an upgrade, and they aren't applied automatically\. Aurora PostgreSQL prompts you to apply any patches by adding a recommendation to maintenance tasks for your Aurora PostgreSQL DB cluster\. For more information, see [How to perform minor version upgrades and apply patches](#USER_UpgradeDBInstance.PostgreSQL.Minor)\.   
 Patches that resolve security or other critical issues are also added as maintenance tasks\. However, these patches are required\. Make sure to apply security patches to your Aurora PostgreSQL DB cluster when they become available in your pending maintenance tasks\.
-The upgrade process involves the possibility of brief outages as each instance in the cluster is upgraded to the new version\. However, after Aurora PostgreSQL 14\.3, 13\.7, 12\.11, 11\.16, and 10\.21 and other higher releases of these minor versions, the upgrade process uses the zero\-downtime patching \(ZDP\) feature\. This feature minimizes outages, and in most cases completely eliminate them\. For more information, see [Minor release upgrades and zero\-downtime patching](#USER_UpgradeDBInstance.PostgreSQL.Minor.zdp)\.
+The upgrade process involves the possibility of brief outages as each instance in the cluster is upgraded to the new version\. However, after Aurora PostgreSQL versions 14\.3\.1, 13\.7\.1, 12\.11\.1, 11\.16\.1, and 10\.21\.1 and other higher releases of these minor versions, the upgrade process uses the zero\-downtime patching \(ZDP\) feature\. This feature minimizes outages, and in most cases completely eliminates them\. For more information, see [Minor release upgrades and zero\-downtime patching](#USER_UpgradeDBInstance.PostgreSQL.Minor.zdp)\.  
+ZDP isn't supported for Aurora PostgreSQL DB clusters that are configured as Aurora Serverless v2, Aurora Serverless v1, Aurora global databases, or Babelfish\.
 
 **Major version upgrades**  
 Unlike for minor version upgrades and patches, Aurora PostgreSQL doesn't have an automatic major version upgrade option\. New major PostgreSQL versions might contain database changes that aren't backward\-compatible with existing applications\. The new functionality can cause your existing applications to stop working correctly\.  
@@ -362,10 +363,10 @@ To learn more about how to maintain an Aurora DB cluster, including how to manua
 
 Upgrading an Aurora PostgreSQL DB cluster involves the possibility of an outage\. During the upgrade process, the database is shut down as it's being upgraded\. If you start the upgrade while the database is busy, you lose all connections and transactions that the DB cluster is processing\. If you wait until the database is idle to perform the upgrade, you might have to wait a long time\.
 
-The zero\-downtime patching \(ZDP\) feature improves the upgrading process\. With ZDP, both minor version upgrades and patches can be applied with minimal impact to your Aurora PostgreSQL DB cluster\. ZDP is supported by all minor versions after Aurora PostgreSQL 14\.3, 13\.7, 12\.11, 11\.16, and 10\.21\. That is, upgrading to new minor versions from any of these releases onward uses ZDP\. 
+The zero\-downtime patching \(ZDP\) feature improves the upgrading process\. With ZDP, both minor version upgrades and patches can be applied with minimal impact to your Aurora PostgreSQL DB cluster\. ZDP will be  used when applying patches or newer minor version upgrades to Aurora PostgreSQL versions 14\.3\.1 or higher, 13\.7\.1 or higher, 12\.11\.1 or higher, 11\.16\.1 or higher, and 10\.21\.1 or higher\. That is, upgrading to new minor versions from any of these releases onward uses ZDP\. 
 
 **Note**  
-ZDP isn't supported for Aurora PostgreSQL DB clusters that are configured as Aurora Serverless v2, Aurora Serverless v1, or Aurora global databases\. 
+ZDP isn't supported for Aurora PostgreSQL DB clusters that are configured as Aurora Serverless v2, Aurora Serverless v1, Aurora global databases, or Babelfish\.
 
 ZDP works by preserving current client connections to your Aurora PostgreSQL DB cluster throughout the Aurora PostgreSQL upgrade process\. When ZDP completes successfully, application sessions are preserved and the database engine restarts while the upgrade is still under way\. Although the database engine restart can cause a drop in throughput, that typically lasts only for a few seconds or at most, approximately one minute\. 
 
@@ -375,7 +376,7 @@ You can find metrics and events for ZDP operations in **Events** page in the con
 
 ### Upgrading the Aurora PostgreSQL engine to a new minor version<a name="USER_UpgradeDBInstance.MinorUpgrade"></a>
 
- You can upgrade your Aurora PostgreSQL DB cluster to a new minor version by using the console, the AWS CLI, or the RDS API\.
+ You can upgrade your Aurora PostgreSQL DB cluster to a new minor version by using the console, the AWS CLI, or the RDS API\. Before performing the upgrade, we recommend that you follow the same best practice that we recommend for major version upgrades\. As with new major versions, new minor versions can also have optimizer improvements, such as fixes, that can cause query plan regressions\. To ensure plan stability, we recommend that you use the Query Plan Management \(QPM\) extension as detailed in [Ensuring plan stability after a major version upgrade](AuroraPostgreSQL.Optimize.BestPractice.md#AuroraPostgreSQL.Optimize.BestPractice.MajorVersionUpgrade)\. 
 
 #### Console<a name="USER_UpgradeDBInstance.MinorUpgrade.Console"></a>
 

@@ -43,6 +43,7 @@
 |   `aurora_binlog_use_large_read_buffer`   |   Yes   |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.md#AuroraMySQL.Replication.MySQL)\. Removed from Aurora MySQL version 3\.   | 
 |   `aurora_enable_replica_log_compression`   |   Yes   |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\. Removed from Aurora MySQL version 3\.   | 
 |   `aurora_enable_repl_bin_log_filtering`   |   Yes   |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\. Removed from Aurora MySQL version 3\.   | 
+|  `aurora_enable_staggered_replica_restart`  |  Yes  | Allow Aurora replicas to follow a staggered restart schedule to increase cluster availability\. This setting is available in Aurora MySQL versions 1 and 3\. | 
 |   `aurora_enable_zdr`   |   Yes   |   This setting is turned on by default in Aurora MySQL 2\.10 and higher\. For more information, see [Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Availability)\.   | 
 |   `aurora_load_from_s3_role`   |   Yes   |   For more information, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\. Currently not available in Aurora MySQL version 3\. Use `aws_default_s3_role`\.  | 
 |   `aurora_select_into_s3_role`   |   Yes   |   For more information, see [Saving data from an Amazon Aurora MySQL DB cluster into text files in an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\. Currently not available in Aurora MySQL version 3\. Use `aws_default_s3_role`\.  | 
@@ -75,10 +76,11 @@
 |   `collation_server`   |   Yes   |    | 
 |   `completion_type`   |   Yes   |    | 
 |   `default_storage_engine`   |   No   |   Aurora MySQL clusters use the InnoDB storage engine for all of your data\.   | 
-|   `enforce_gtid_consistency`   |   Sometimes   |   Modifiable in Aurora MySQL version 2\.04 and later\.   | 
-|   `gtid-mode`   |   Sometimes   |   Modifiable in Aurora MySQL version 2\.04 and later\.   | 
+|   `enforce_gtid_consistency`   |   Sometimes   |  Modifiable in Aurora MySQL version 2\.04 and later\.  | 
+|  `event_scheduler`  |  Yes  |  Indicates the status of the Event Scheduler\. Modifiable only at the cluster level in Aurora MySQL version 3\.  | 
+|   `gtid-mode`   |   Sometimes   |  Modifiable in Aurora MySQL version 2\.04 and later\.  | 
 |   `innodb_autoinc_lock_mode`   |   Yes   |    | 
-|   `innodb_checksums`   |   No   |  Removed from Aurora MySQL version 3\.   | 
+|   `innodb_checksums`   |   No   | Removed from Aurora MySQL version 3\.  | 
 |   `innodb_cmp_per_index_enabled`   |   Yes   |    | 
 |   `innodb_commit_concurrency`   |   Yes   |    | 
 |   `innodb_data_home_dir`   |   No   |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
@@ -174,7 +176,7 @@
 |   `div_precision_increment`   |   Yes   |    | 
 |   `end_markers_in_json`   |   Yes   |    | 
 |   `eq_range_index_dive_limit`   |   Yes   |    | 
-|   `event_scheduler`   |   Yes   |    | 
+|   `event_scheduler`   |  Sometimes  |  Indicates the status of the Event Scheduler\. Modifiable only at the cluster level in Aurora MySQL version 3\.  | 
 |   `explicit_defaults_for_timestamp`   |   Yes   |    | 
 |   `flush`   |   No   |    | 
 |   `flush_time`   |   Yes   |    | 

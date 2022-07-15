@@ -134,7 +134,7 @@ babelfishpg_tsql.explain_wal       off   Include information on WAL record g
 You can change the setting for these parameters using a SELECT statement with the PostgreSQL set\_config function, as shown in the following example\. 
 
 ```
-SELECT set_config('babelfish_tsql.explain_verbose', 'on', false);
+SELECT set_config('babelfishpg_tsql.explain_verbose', 'on', false);
 ```
 
 For more information about set\_config, see [Configuration Settings Functions](https://www.postgresql.org/docs/current/functions-admin.html#FUNCTIONS-ADMIN-SET) in the PostgreSQL documentation\. 

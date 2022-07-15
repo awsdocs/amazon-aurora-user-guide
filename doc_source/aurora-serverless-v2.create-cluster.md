@@ -68,9 +68,12 @@ aws rds create-db-cluster \
     --backup-retention 1
 ```
 
+**Note**  
+When you create an Aurora Serverless v2 DB cluster using the AWS CLI, the engine mode appears in the output as `provisioned` rather than `serverless`\. The `serverless` engine mode refers to Aurora Serverless v1\.
+
  For information about the Aurora Serverless v2 version requirements, see [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md)\. For information about the allowed numbers for the capacity range and what those numbers represent, see [Aurora Serverless v2 capacity](aurora-serverless-v2.how-it-works.md#aurora-serverless-v2.how-it-works.capacity) and [Performance and scaling for Aurora Serverless v2](aurora-serverless-v2.setting-capacity.md)\. 
 
- To check if an existing cluster has the capacity settings specified, check the output of the `describe-db-clusters` command for the `ServerlessV2ScalingConfiguration` attribute\. That attribute looks similar to the following\. 
+ To verify whether an existing cluster has the capacity settings specified, check the output of the `describe-db-clusters` command for the `ServerlessV2ScalingConfiguration` attribute\. That attribute looks similar to the following\. 
 
 ```
 "ServerlessV2ScalingConfiguration": {

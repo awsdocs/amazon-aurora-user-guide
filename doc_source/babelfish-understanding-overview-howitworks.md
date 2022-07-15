@@ -8,12 +8,13 @@ You manage the Aurora PostgreSQL\-Compatible Edition DB cluster running Babelfis
 + Amazon RDS events notify you by email or SMS message of important database events, such as an automated failover\. For more information, see [Monitoring Amazon Aurora events](working-with-events.md)\. 
 
 However, not all Aurora features are supported\. Currently, Babelfish doesn't support the following:
-+ Database activity streams \(DAS\)
-+ Query plan management \(QPM\)
-+ AWS Identity and Access Management
 + AWS Directory Service
++ AWS Identity and Access Management
++ Database activity streams \(DAS\)
 + Kerberos
++ Query plan management \(QPM\)
 + SCRAM \(salted challenge response authentication mechanism\)
++ Zero\-downtime patching \(ZDP\)
 
 Following, you can learn about Babelfish architecture and how the SQL Server databases that you migrate are handled by Babelfish\. When you create your Babelfish DB cluster, you need to make some decisions up front about single database or multiple databases, collations, and other details\. 
 

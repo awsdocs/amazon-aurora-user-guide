@@ -17,13 +17,10 @@ None
 ## Return type<a name="aurora_stat_wait_event-return-type"></a>
 
 SETOF record with following columns:
++ type\_id – The ID of the type of wait event\.
++ event\_id – The ID of the wait event\.
 + type\_name – Wait type name
 + event\_name – Wait event name
-+ wait – Number of waits
-+ wait\_time – Wait time in milliseconds 
-+ ms\_per\_wait – Average milliseconds by the number of an wait
-+ waits\_per\_xact – Average waits by the number of one transaction
-+ ms\_per\_xact – Average milliseconds by the number of transactions
 
 ## Usage notes<a name="aurora_stat_wait_event-usage-notes"></a>
 
