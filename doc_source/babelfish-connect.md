@@ -17,7 +17,7 @@ To learn more about connecting to Aurora PostgreSQL in general, see [Connecting 
 
 **Topics**
 + [Finding the writer endpoint and port number](#babelfish-connect-endpoint)
-+ [Creating C\# or JDBC client connections Babelfish](babelfish-connect-configure.md)
++ [Creating C\# or JDBC client connections to Babelfish](babelfish-connect-configure.md)
 + [Using a SQL Server client to connect to your DB cluster](babelfish-connect-sqlserver.md)
 + [Using a PostgreSQL client to connect to your DB cluster](babelfish-connect-PostgreSQL.md)
 

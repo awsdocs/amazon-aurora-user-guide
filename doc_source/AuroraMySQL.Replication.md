@@ -124,19 +124,21 @@
 alter table <schema>.<table_name> engine=innodb, algorithm=copy;
 ```
 
- Setting up MySQL replication with Aurora MySQL involves the following steps, which are discussed in detail following in this topic: 
+Setting up MySQL replication with Aurora MySQL involves the following steps, which are discussed in detail in this topic:
 
- [1\. Turn on binary logging on the replication source](#AuroraMySQL.Replication.MySQL.EnableBinlog) 
+[1\. Turn on binary logging on the replication source](#AuroraMySQL.Replication.MySQL.EnableBinlog)
 
- [2\. Retain binary logs on the replication source until no longer needed](#AuroraMySQL.Replication.MySQL.RetainBinlogs) 
+[2\. Retain binary logs on the replication source until no longer needed](#AuroraMySQL.Replication.MySQL.RetainBinlogs)
 
- [3\. Create a snapshot of your replication source](#AuroraMySQL.Replication.MySQL.CreateSnapshot) 
+[3\. Create a snapshot of your replication source](#AuroraMySQL.Replication.MySQL.CreateSnapshot)
 
- [4\. Load the snapshot into your replica target](#AuroraMySQL.Replication.MySQL.LoadSnapshot) 
+[4\. Load the snapshot into your replica target](#AuroraMySQL.Replication.MySQL.LoadSnapshot)
 
- [5\. Turn on replication on your replica target](#AuroraMySQL.Replication.MySQL.EnableReplication) 
+[5\. Create a replication user on your replication source](#AuroraMySQL.Replication.MySQL.CreateReplUser)
 
- [6\. Monitor your replica](#AuroraMySQL.Replication.MySQL.Monitor) 
+[6\. Turn on replication on your replica target](#AuroraMySQL.Replication.MySQL.EnableReplication)
+
+[7\. Monitor your replica](#AuroraMySQL.Replication.MySQL.Monitor)
 
 ### Setting up replication with MySQL or another Aurora DB cluster<a name="AuroraMySQL.Replication.MySQL.SettingUp"></a>
 
@@ -149,15 +151,15 @@ alter table <schema>.<table_name> engine=innodb, algorithm=copy;
 
 |  Database engine  |  Instructions  | 
 | --- | --- | 
-|   Aurora   |   **To turn on binary logging on an Aurora MySQL DB cluster**   Set the `binlog_format` parameter to `ROW`, `STATEMENT`, or `MIXED`\. `MIXED` is recommended unless you have a need for a specific binlog format\. The `binlog_format` parameter is a cluster\-level parameter that is in the default cluster parameter group\. If you are changing the `binlog_format` parameter from `OFF` to another value, then you need to reboot your Aurora DB cluster for the change to take effect\.   For more information, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithDBClusterParamGroups.md#Aurora.Managing.ParameterGroups) and [Working with parameter groups](USER_WorkingWithParamGroups.md)\.   | 
+|   Aurora   |   **To turn on binary logging on an Aurora MySQL DB cluster**  Set the `binlog_format` parameter to `ROW`, `STATEMENT`, or `MIXED`\. `MIXED` is recommended unless you have a need for a specific binlog format\. The `binlog_format` parameter is a cluster\-level parameter that is in the default cluster parameter group\. If you're changing the `binlog_format` parameter from `OFF` to another value, then you need to reboot your Aurora DB cluster for the change to take effect\.  For more information, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithDBClusterParamGroups.md#Aurora.Managing.ParameterGroups) and [Working with parameter groups](USER_WorkingWithParamGroups.md)\.   | 
 |   RDS for MySQL   |   **To turn on binary logging on an Amazon RDS DB instance**   You can't turn on binary logging directly for an Amazon RDS DB instance, but you can turn it on by doing one of the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  | 
 |   MySQL \(external\)   |   **To set up encrypted replication**   To replicate data securely with Aurora MySQL version 5\.6, you can use encrypted replication\.   Currently, encrypted replication with an external MySQL database is only supported for Aurora MySQL version 5\.6\.    If you don't need to use encrypted replication, you can skip these steps\.    The following are prerequisites for using encrypted replication:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  During encrypted replication, the Aurora MySQL DB cluster acts a client to the MySQL database server\. The certificates and keys for the Aurora MySQL client are in files in \.pem format\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  **To turn on binary logging on an external MySQL database**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  | 
 
 #### 2\. Retain binary logs on the replication source until no longer needed<a name="AuroraMySQL.Replication.MySQL.RetainBinlogs"></a>
 
- When you use MySQL binary log replication, Amazon RDS doesn't manage the replication process\. As a result, you need to ensure that the binlog files on your replication source are retained until after the changes have been applied to the replica\. This maintenance helps ensure that you can restore your source database in the event of a failure\. 
+When you use MySQL binary log replication, Amazon RDS doesn't manage the replication process\. As a result, you need to ensure that the binlog files on your replication source are retained until after the changes have been applied to the replica\. This maintenance helps you to restore your source database in the event of a failure\.
 
- Find instructions on how to retain binary logs for your database engine following\. 
+Use the following instructions to retain binary logs for your database engine\.
 
 
 |  Database engine  |  Instructions  | 
@@ -170,7 +172,7 @@ alter table <schema>.<table_name> engine=innodb, algorithm=copy;
 
  You use a snapshot of your replication source to load a baseline copy of your data onto your replica and then start replicating from that point on\. 
 
- Find instructions on how to create a snapshot of your replication source for your database engine following\. 
+Use the following instructions to create a snapshot of your replication source for your database engine\.
 
 
 |  Database engine  |  Instructions  | 
@@ -183,7 +185,7 @@ alter table <schema>.<table_name> engine=innodb, algorithm=copy;
 
  If you plan to load data from a dump of a MySQL database that is external to Amazon RDS, then you might want to create an EC2 instance to copy the dump files to, and then load the data into your DB cluster or DB instance from that EC2 instance\. Using this approach, you can compress the dump file\(s\) before copying them to the EC2 instance in order to reduce the network costs associated with copying data to Amazon RDS\. You can also encrypt the dump file or files to secure the data as it is being transferred across the network\. 
 
- Find instructions on how to load the snapshot of your replication source into your replica target for your database engine following\. 
+Use the following instructions to load the snapshot of your replication source into your replica target for your database engine\.
 
 
 |  Database engine  |  Instructions  | 
@@ -192,32 +194,34 @@ alter table <schema>.<table_name> engine=innodb, algorithm=copy;
 |   RDS for MySQL   |   **To load a snapshot into an Amazon RDS DB instance**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  | 
 |   MySQL \(external\)   |   **To load a snapshot into an external MySQL database**   You cannot load a DB snapshot or a DB cluster snapshot into an external MySQL database\. Instead, you must use the output from the `mysqldump` command\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  | 
 
-#### 5\. Turn on replication on your replica target<a name="AuroraMySQL.Replication.MySQL.EnableReplication"></a>
+#### 5\. Create a replication user on your replication source<a name="AuroraMySQL.Replication.MySQL.CreateReplUser"></a>
 
- Before you turn on replication, we recommend that you take a manual snapshot of the Aurora MySQL DB cluster or RDS for MySQL DB instance replica target\. If a problem arises and you need to re\-establish replication with the DB cluster or DB instance replica target, you can restore the DB cluster or DB instance from this snapshot instead of having to import the data into your replica target again\. 
-
- Also, create a user ID that is used solely for replication\. The following is an example\. 
+Create a user ID on the source that is used solely for replication\. The following is an example\.
 
 ```
 mysql> CREATE USER 'repl_user'@'<domain_name>' IDENTIFIED BY '<password>';
 ```
 
- The user requires the `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges\. Grant these privileges to the user\. 
+The user requires the `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges\. Grant these privileges to the user\.
+
+If you need to use encrypted replication, require SSL connections for the replication user\. For example, you can use one of the following statement to require SSL connections on the user account `repl_user`\.
 
 ```
 GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'<domain_name>';
 ```
-
- If you need to use encrypted replication, require SSL connections for the replication user\. For example, you can use one of the following statement to require SSL connections on the user account `repl_user`\. 
 
 ```
 GRANT USAGE ON *.* TO 'repl_user'@'<domain_name>' REQUIRE SSL;
 ```
 
 **Note**  
- If `REQUIRE SSL` isn't included, the replication connection might silently fall back to an unencrypted connection\. 
+If `REQUIRE SSL` isn't included, the replication connection might silently fall back to an unencrypted connection\.
 
- Find instructions on how to turn on replication for your database engine following\. 
+#### 6\. Turn on replication on your replica target<a name="AuroraMySQL.Replication.MySQL.EnableReplication"></a>
+
+Before you turn on replication, we recommend that you take a manual snapshot of the Aurora MySQL DB cluster or RDS for MySQL DB instance replica target\. If a problem arises and you need to re\-establish replication with the DB cluster or DB instance replica target, you can restore the DB cluster or DB instance from this snapshot instead of having to import the data into your replica target again\.
+
+Use the following instructions to turn on replication for your database engine\.
 
 
 |  Database engine  |  Instructions  | 
@@ -228,7 +232,7 @@ GRANT USAGE ON *.* TO 'repl_user'@'<domain_name>' REQUIRE SSL;
 
 If replication fails, it can result in a large increase in unintentional I/O on the replica, which can degrade performance\. If replication fails or is no longer needed, you can run the `mysql.rds_reset_external_master` stored procedure to remove the replication configuration\.
 
-#### 6\. Monitor your replica<a name="AuroraMySQL.Replication.MySQL.Monitor"></a>
+#### 7\. Monitor your replica<a name="AuroraMySQL.Replication.MySQL.Monitor"></a>
 
  When you set up MySQL replication with an Aurora MySQL DB cluster, you must monitor failover events for the Aurora MySQL DB cluster when it is the replica target\. If a failover occurs, then the DB cluster that is your replica target might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Working with Amazon RDS event notification](USER_Events.md)\. 
 

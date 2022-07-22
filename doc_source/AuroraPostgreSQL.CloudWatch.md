@@ -5,6 +5,7 @@ You can configure your Aurora PostgreSQL DB cluster to publish log data to a log
  
 
 Aurora PostgreSQL supports publishing logs to CloudWatch Logs for the following versions:
++ 14\.3 and higher 14 versions
 + 13\.3 and higher 13 versions
 + 12\.4 and higher 12 versions
 + 11\.6 and higher 11 versions

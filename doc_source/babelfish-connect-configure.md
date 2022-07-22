@@ -1,4 +1,4 @@
-# Creating C\# or JDBC client connections Babelfish<a name="babelfish-connect-configure"></a>
+# Creating C\# or JDBC client connections to Babelfish<a name="babelfish-connect-configure"></a>
 
 In the following you can find some examples of using C\# and JDBC classes to connect to an Babelfish for Aurora PostgreSQL\. 
 

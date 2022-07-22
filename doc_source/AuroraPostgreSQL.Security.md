@@ -126,17 +126,10 @@ Configurable cipher suites is supported in Aurora PostgreSQL versions 11\.8 and 
 To specify the list of permissible ciphers for encrypting connections, modify the `ssl_ciphers` cluster parameter\. Set the `ssl_ciphers` parameter in a cluster parameter group using the AWS Management Console, the AWS CLI, or the RDS API\. To set cluster parameters, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
 
 Set the `ssl_ciphers` parameter to a string of comma\-separated cipher values\. The valid ciphers include the following:
-+ `DHE-RSA-AES128-SHA`
-+ `DHE-RSA-AES128-SHA256`
-+ `DHE-RSA-AES128-GCM-SHA256`
-+ `DHE-RSA-AES256-SHA`
-+ `DHE-RSA-AES256-SHA256`
-+ `DHE-RSA-AES256-GCM-SHA384`
 + `ECDHE-RSA-AES128-SHA`
 + `ECDHE-RSA-AES128-SHA256`
 + `ECDHE-RSA-AES128-GCM-SHA256`
 + `ECDHE-RSA-AES256-SHA`
-+ `ECDHE-RSA-AES256-SHA384`
 + `ECDHE-RSA-AES256-GCM-SHA384`
 
 You can also use the [describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) CLI command to determine which cipher suites are currently supported for a specific parameter group family\. The following example shows how to get the allowed values for the `ssl_cipher` cluster parameter for Aurora PostgreSQL 11\.

@@ -260,7 +260,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Creating a Babelfish for Aurora PostgreSQL DB cluster](babelfish-create.md)
       + [Migrating a SQL Server database to Babelfish for Aurora PostgreSQL](babelfish-migration.md)
       + [Connecting to a Babelfish DB cluster](babelfish-connect.md)
-         + [Creating C# or JDBC client connections Babelfish](babelfish-connect-configure.md)
+         + [Creating C# or JDBC client connections to Babelfish](babelfish-connect-configure.md)
          + [Using a SQL Server client to connect to your DB cluster](babelfish-connect-sqlserver.md)
          + [Using a PostgreSQL client to connect to your DB cluster](babelfish-connect-PostgreSQL.md)
       + [Working with Babelfish](working-with-babelfish-usage-notes-features.md)

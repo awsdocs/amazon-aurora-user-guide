@@ -152,6 +152,20 @@ Before upgrading your production Aurora PostgreSQL DB clusters to a new major ve
      ```
    + If you are upgrading an Aurora PostgreSQL version 10\.18 or higher DB cluster that has the `pgRouting` extension installed, drop the extension before upgrading to version 12\.4 or higher\.
 
+1. Drop logical replication slots\. 
+
+   The upgrade process can't proceed if the Aurora PostgreSQL DB cluster is using any logical replication slots\. Logical replication slots are typically used for short\-term data migration tasks, such migrating data using AWS DMS or for replicating tables from the database to data lakes, BI tools, or other targets\. Before upgrading, make sure you know the purpose of any logical replication slots that exist, and confirm that it's okay to delete them\. You can check for logical replication slots using the following query:
+
+   ```
+   SELECT * FROM pg_replication_slots;
+   ```
+
+   If logical replication slots are still being used, you shouldn't delete them, and you can't proceed with the upgrade\. However, if the logical replication slots aren't needed, you can delete them using the following SQL:
+
+   ```
+   SELECT pg_drop_replication_slot(slot_name);
+   ```
+
 1. Perform a backup\.
 
    The upgrade process creates a DB cluster snapshot of your DB cluster during upgrading\. If you also want to do a manual backup before the upgrade process, see [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md) for more information\.
