@@ -563,7 +563,41 @@ upgrading to avoid compatibility issues."
 
  The next sequence of examples demonstrates how to fix this particular issue and run the upgrade process again\. This time, the upgrade succeeds\. 
 
- First, we go back to the original cluster and create a new table with the same structure and contents as the one with faulty metadata\. In practice, you would probably rename this table back to the original table name after the upgrade\. 
+ First, we go back to the original cluster\. And run the `OPTIMIZE TABLE tbl_name [, tbl_name] ...` on the tables causing the Error: `Table tbl_name contains
+ dangling FULLTEXT index. Kindly recreate the table before upgrade.`.
+ 
+ See Mysql Documentation: [Optimizing InnoDB Full-Text Indexes](https://dev.mysql.com/doc/refman/5.6/en/fulltext-fine-tuning.html#fulltext-optimize) and [OPTIMIZE TABLE Statement](https://dev.mysql.com/doc/refman/5.6/en/optimize-table.html)
+
+```
+$ mysql -u my_username -p \
+  -h problematic-57-80-upgrade.cluster-example123.us-east-1.rds.amazonaws.com
+
+mysql> show databases;
++---------------------+
+| Database            |
++---------------------+
+| information_schema  |
+| mysql               |
+| performance_schema  |
+| problematic_upgrade |
+| sys                 |
++---------------------+
+5 rows in set (0.00 sec)
+
+mysql> use problematic_upgrade;
+mysql> show tables;
++-------------------------------+
+| Tables_in_problematic_upgrade |
++-------------------------------+
+| dangling_fulltext_index       |
++-------------------------------+
+1 row in set (0.00 sec)
+
+mysql> OPTIMIZE TABLE dangling_fulltext_index;
+Query OK, 0 rows affected (0.05 sec)
+```
+
+ As an alternative solution you could create a new table with the same structure and contents as the one with faulty metadata\. In practice, you would probably rename this table back to the original table name after the upgrade\. 
 
 ```
 $ mysql -u my_username -p \
