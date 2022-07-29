@@ -154,7 +154,7 @@ Before upgrading your production Aurora PostgreSQL DB clusters to a new major ve
 
 1. Drop logical replication slots\. 
 
-   The upgrade process can't proceed if the Aurora PostgreSQL DB cluster is using any logical replication slots\. Logical replication slots are typically used for short\-term data migration tasks, such migrating data using AWS DMS or for replicating tables from the database to data lakes, BI tools, or other targets\. Before upgrading, make sure you know the purpose of any logical replication slots that exist, and confirm that it's okay to delete them\. You can check for logical replication slots using the following query:
+   The upgrade process can't proceed if the Aurora PostgreSQL DB cluster is using any logical replication slots\. Logical replication slots are typically used for short\-term data migration tasks, such as migrating data using AWS DMS or for replicating tables from the database to data lakes, BI tools, or other targets\. Before upgrading, make sure that you know the purpose of any logical replication slots that exist, and confirm that it's okay to delete them\. You can check for logical replication slots using the following query:
 
    ```
    SELECT * FROM pg_replication_slots;

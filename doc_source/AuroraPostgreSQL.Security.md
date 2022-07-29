@@ -13,7 +13,7 @@ For a general overview of Aurora security, see [Security in Amazon Aurora](Using
 
   PostgreSQL manages privileges by using *roles*\. The `rds_superuser` role is the most privileged role on an Aurora PostgreSQL DB cluster\. This role is created automatically, and it's granted to the user that creates the DB cluster \(the master user account, `postgres` by default\)\. To learn more, see [Understanding PostgreSQL roles and permissions](Appendix.PostgreSQL.CommonDBATasks.Roles.md)\. 
 
-Aurora PostgreSQL 14\.1 and higher releases support the Salted Challenge Response Authentication Mechanism \(SCRAM\) for passwords as an alternative to message digest \(MD5\)\. We recommend that you use SCRAM because it's more secure than MD5\. For more information, including how to migrate database user passwords from MD5 to SCRAM, see [Using SCRAM for PostgreSQL password encryption](Appendix.PostgreSQL.CommonDBATasks.Roles.md#PostgreSQL_Password_Encryption_configuration)\.
+Aurora PostgreSQL 14\.3 and higher releases support the Salted Challenge Response Authentication Mechanism \(SCRAM\) for passwords as an alternative to message digest \(MD5\)\. We recommend that you use SCRAM because it's more secure than MD5\. For more information, including how to migrate database user passwords from MD5 to SCRAM, see [Using SCRAM for PostgreSQL password encryption](Appendix.PostgreSQL.CommonDBATasks.Roles.md#PostgreSQL_Password_Encryption_configuration)\.
 
 ## Securing Aurora PostgreSQL data with SSL/TLS<a name="AuroraPostgreSQL.Security.SSL"></a>
 

@@ -1,6 +1,9 @@
 # Testing Amazon Aurora PostgreSQL by using fault injection queries<a name="AuroraPostgreSQL.Managing.FaultInjectionQueries"></a>
 
-You can test the fault tolerance of your Aurora PostgreSQL DB cluster by using fault injection queries\. Fault injection queries are issued as SQL commands to an Amazon Aurora instance\. Fault injection queries enable you to schedule simulated tests of the following events:
+You can test the fault tolerance of your Aurora PostgreSQL DB cluster by using fault injection queries\. Fault injection queries are issued as SQL commands to an Amazon Aurora instance\. Fault injection queries let you crash the instance so that you can test failover and recovery\. You can also simulate Aurora Replica failure, disk failure, and disk congestion\. Fault injection queries are supported by all available Aurora PostgreSQL versions, as follows\. 
++ Aurora PostgreSQL versions 12, 13, 14, and higher
++ Aurora PostgreSQL version 11\.7 and higher
++ Aurora PostgreSQL version 10\.11 and higher
 
 **Topics**
 + [Testing an instance crash](#AuroraPostgreSQL.Managing.FaultInjectionQueries.Crash)
@@ -11,12 +14,6 @@ You can test the fault tolerance of your Aurora PostgreSQL DB cluster by using f
 When a fault injection query specifies a crash, it forces a crash of the Aurora PostgreSQL DB instance\. The other fault injection queries result in simulations of failure events, but don't cause the event to occur\. When you submit a fault injection query, you also specify an amount of time for the failure event simulation to occur\.
 
 You can submit a fault injection query to one of your Aurora Replica instances by connecting to the endpoint for the Aurora Replica\. For more information, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\.
-
-**Note**  
-Fault injection queries for Aurora PostgreSQL are currently supported for the following versions:  
-Version 2\.4, which is compatible with PostgreSQL version 10\.11\.
-Version 3\.2, which is compatible with PostgreSQL version 11\.7\.
- 
 
 ## Testing an instance crash<a name="AuroraPostgreSQL.Managing.FaultInjectionQueries.Crash"></a>
 

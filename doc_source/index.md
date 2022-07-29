@@ -301,6 +301,7 @@ Amazon's trademarks and trade dress may not be used in
       + [LWLock:lock_manager](apg-waits.lw-lock-manager.md)
       + [Timeout:PgSleep](apg-waits.timeoutpgsleep.md)
    + [Best practices with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md)
+      + [Managing Aurora PostgreSQL connection churn with pooling](AuroraPostgreSQL.BestPractices.connection_pooling.md)
    + [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)
       + [Using PostgreSQL logical replication with Aurora](AuroraPostgreSQL.Replication.Logical.md)
    + [Integrating Amazon Aurora PostgreSQL with other AWS services](AuroraPostgreSQL.Integrating.md)

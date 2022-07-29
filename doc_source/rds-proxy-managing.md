@@ -341,7 +341,7 @@ Following are the MySQL variables that RDS Proxy tracks:
  For MySQL, the following interactions also cause pinning: 
 +  Explicit  table lock statements `LOCK TABLE`, `LOCK TABLES`, or `FLUSH TABLES WITH READ LOCK` cause the proxy to pin the session\. 
 +  Creating named locks by using `GET_LOCK` causes the proxy to pin the session\.  
-+  Setting a user variable or a system variable \(with some exceptions\) causes the proxy to pin the session\. If this situation reduces your connection reuse too much, you can choose for `SET` operations not to cause pinning\. For information about how to do so by setting the `SessionPinningFilters` property, see [Creating an RDS Proxy](rds-proxy-setup.md#rds-proxy-creating) and [Modifying an RDS Proxy](#rds-proxy-modifying-proxy)\. 
++  Setting a user variable or a system variable \(with some exceptions\) causes the proxy to pin the session\. If this situation reduces your connection reuse too much, you can choose for `SET` operations not to cause pinning\. For information about how to do so by setting the session pinning filters property, see [Creating an RDS Proxy](rds-proxy-setup.md#rds-proxy-creating) and [Modifying an RDS Proxy](#rds-proxy-modifying-proxy)\. 
 +  Creating a temporary table causes the proxy to pin the session\. That way, the contents of the temporary table are preserved throughout the session regardless of transaction boundaries\. 
 +  Calling the functions `ROW_COUNT`, `FOUND_ROWS`, and `LAST_INSERT_ID` sometimes causes pinning\.  
 

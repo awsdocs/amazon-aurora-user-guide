@@ -23,9 +23,6 @@ By default, Amazon RDS creates the primary DB instance and the Aurora Replica in
 
 For more information, see [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. For information on VPCs, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
 
-**Note**  
-You can communicate with an EC2 instance that is not in a VPC and an Amazon Aurora DB cluster using ClassicLink\. For more information, see [A DB instance in a VPC accessed by an EC2 instance not in a VPC](USER_VPC.Scenarios.md#USER_VPC.ClassicLink)\.
-
 If you don't have a default VPC or you haven't created a VPC, you can have Amazon RDS automatically create a VPC for you when you create an Aurora DB cluster using the console\. Otherwise, you must do the following:
 + Create a VPC with at least one subnet in each of at least two of the Availability Zones in the AWS Region where you want to deploy your DB cluster\. For more information, see [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
 + Specify a VPC security group that authorizes connections to your Aurora DB cluster\. For more information, see [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#Overview.RDSVPC.Create)\.

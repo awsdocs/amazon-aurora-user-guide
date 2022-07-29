@@ -9,7 +9,7 @@ For Aurora Serverless DB clusters, you connect to the database endpoint rather t
 
 Regardless of the Aurora DB engine and specific tools you use to work with the DB cluster or instance, the endpoint must be accessible\. An Amazon Aurora DB cluster can be created only in a virtual private cloud \(VPC\) based on the Amazon VPC service\. That means that you access the endpoint from either inside the VPC or outside the VPC using one of the following approaches\.
 + **Access the Amazon Aurora DB cluster inside the VPC** – Enable access to the Amazon Aurora DB cluster through the VPC\. You do so by editing the Inbound rules on the Security group for the VPC to allow access to your specific Aurora DB cluster\. To learn more, including how to configure your VPC for different Aurora DB cluster scenarios, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](https://docs.aws.amazon.com/en_us/AmazonRDS/latest/AuroraUserGuide/USER_VPC.html)\. 
-+ **Access the Amazon Aurora DB cluster outside the VPC** – To access an Amazon Aurora DB cluster from outside the VPC, use the public endpoint address of the Amazon Aurora DB cluster\. You can also connect to an Amazon Aurora DB cluster that's inside a VPC from an Amazon EC2 instance that's not in the VPC by using ClassicLink\. For more information, see [A DB instance in a VPC accessed by an EC2 instance not in a VPC](USER_VPC.Scenarios.md#USER_VPC.ClassicLink)\. 
++ **Access the Amazon Aurora DB cluster outside the VPC** – To access an Amazon Aurora DB cluster from outside the VPC, use the public endpoint address of the Amazon Aurora DB cluster\.
 
 For more information, see [Troubleshooting Aurora connection failures](#Aurora.Connecting.Troubleshooting)\. 
 
@@ -115,9 +115,11 @@ This procedure doesn't require installing the web server in the tutorial, but it
 
 ### Connecting with the Amazon Web Services JDBC Driver for MySQL<a name="Aurora.Connecting.JDBCDriverMySQL"></a>
 
-The AWS JDBC Driver for MySQL is a client driver designed for the high availability of Aurora MySQL\. The AWS JDBC Driver for MySQL is drop\-in compatible with the MySQL Connector/J driver\. To install or upgrade your connector, replace the MySQL connector \.jar file \(located in the application CLASSPATH\) with the AWS JDBC Driver for MySQL \.jar file, and update the connection URL prefix from `jdbc:mysql://` to `jdbc:mysql:aws://`\.
+The AWS JDBC Driver for MySQL is a client driver designed for the high availability of Aurora MySQL\. The driver is drop\-in compatible with the MySQL Connector/J driver\. To install or upgrade your connector, replace the MySQL connector \.jar file \(located in the application CLASSPATH\) with the AWS JDBC Driver for MySQL \.jar file, and update the connection URL prefix from `jdbc:mysql://` to `jdbc:mysql:aws://`\.
 
-The AWS JDBC Driver for MySQL takes full advantage of the failover capabilities of Aurora MySQL\. The AWS JDBC Driver for MySQL fully maintains a cache of the DB cluster topology and each DB instance's role, either primary DB instance or Aurora Replica\. It uses this topology to bypass the delays caused by DNS resolution so that a connection to the new primary DB instance is established as fast as possible\.
+The AWS JDBC Driver for MySQL takes full advantage of the failover capabilities of Aurora MySQL\. In the event of a failover, the driver queries the cluster directly for the new topology instead of using DNS resolution\. By querying the cluster directly, the driver is able to connect to the new primary faster in a reliable and predictable manner, avoiding potential delays caused by DNS resolution\.
+
+The AWS JDBC Driver for MySQL supports IAM database authentication\. For more information, see [AWS IAM Database Authentication](https://github.com/awslabs/aws-mysql-jdbc#aws-iam-database-authentication) in the AWS JDBC Driver for MySQL GitHub repository\. For more information about IAM database authentication, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\.
 
 For more information about the AWS JDBC Driver for MySQL and complete instructions for using it, see [the AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
 
