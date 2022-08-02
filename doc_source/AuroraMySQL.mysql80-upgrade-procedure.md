@@ -564,9 +564,9 @@ upgrading to avoid compatibility issues."
  The next sequence of examples demonstrates how to fix this particular issue and run the upgrade process again\. This time, the upgrade succeeds\. 
 
  First, we go back to the original cluster\. And run the `OPTIMIZE TABLE tbl_name [, tbl_name] ...` on the tables causing the Error: `Table tbl_name contains
- dangling FULLTEXT index. Kindly recreate the table before upgrade.`.
- 
- See Mysql Documentation: [Optimizing InnoDB Full-Text Indexes](https://dev.mysql.com/doc/refman/5.6/en/fulltext-fine-tuning.html#fulltext-optimize) and [OPTIMIZE TABLE Statement](https://dev.mysql.com/doc/refman/5.6/en/optimize-table.html)
+ dangling FULLTEXT index. Kindly recreate the table before upgrade.`\.
+
+ For more information, see [Optimizing InnoDB Full-Text Indexes](https://dev.mysql.com/doc/refman/5.6/en/fulltext-fine-tuning.html#fulltext-optimize) and [OPTIMIZE TABLE Statement](https://dev.mysql.com/doc/refman/5.6/en/optimize-table.html) in the MySQL documentation\.
 
 ```
 $ mysql -u my_username -p \
