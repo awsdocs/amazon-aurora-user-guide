@@ -19,6 +19,9 @@ The following tutorials in this guide show you how to perform common tasks with 
 + [Tutorial: Create a web server and an Amazon Aurora DB cluster](TUT_WebAppWithRDS.md)
 
   Learn how to install an Apache web server with PHP and create a MySQL database\. The web server runs on an Amazon EC2 instance using Amazon Linux, and the MySQL database is an Aurora MySQL DB cluster\. Both the Amazon EC2 instance and the DB cluster run in an Amazon VPC\.
++ [Tutorial: Restore an Amazon Aurora DB cluster from a DB cluster snapshot](tut-restore-cluster.md)
+
+  Learn how to restore a DB cluster from a DB cluster snapshot\.
 + [Tutorial: Use tags to specify which Aurora DB clusters to stop](USER_Tagging.md#Tagging.Aurora.Autostop)
 
   Learn how to use tags to specify which Aurora DB clusters to stop\.

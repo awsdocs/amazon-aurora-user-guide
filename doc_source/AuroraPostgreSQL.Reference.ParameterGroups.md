@@ -85,7 +85,7 @@ The following table lists some of parameters available in the default DB cluster
 **Note**  
 All parameters in the following table are *dynamic* unless otherwise noted in the description\.
 
-For a listing of the DB instance parameters for the same default Aurora parameter group, see [Aurora PostgreSQL instance\-level parameters](#AuroraPostgreSQL.Reference.Parameters.Instance)\.
+For a listing of the DB instance parameters for this same default DB cluster parameter group, see [Aurora PostgreSQL instance\-level parameters](#AuroraPostgreSQL.Reference.Parameters.Instance)\.
 
 
 | Parameter name | Description | 
@@ -338,7 +338,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 **Note**  
 All parameters in the following table are *dynamic* unless otherwise noted in the description\.
 
-For a listing of the DB cluster parameters for the default Aurora parameter group, see [Aurora PostgreSQL cluster\-level parameters](#AuroraPostgreSQL.Reference.Parameters.Cluster)\.
+For a listing of the DB cluster parameters for this same default DB parameter group, see [Aurora PostgreSQL cluster\-level parameters](#AuroraPostgreSQL.Reference.Parameters.Cluster)\.
 
 
 | Parameter name | Description | 

@@ -15,3 +15,4 @@ The Aurora high availability features and automatic backup capabilities help to 
 + [Exporting DB cluster snapshot data to Amazon S3](aurora-export-snapshot.md)
 + [Restoring a DB cluster to a specified time](aurora-pitr.md)
 + [Deleting a DB cluster snapshot](aurora-delete-snapshot.md)
++ [Tutorial: Restore an Amazon Aurora DB cluster from a DB cluster snapshot](tut-restore-cluster.md)

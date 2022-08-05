@@ -17,27 +17,37 @@ You have several options for viewing information about your Amazon Aurora DB clu
 
 ### Console<a name="Aurora.Viewing.Console"></a>
 
-In the Amazon RDS console, you can see details about a DB cluster by choosing **Databases** from the console's navigation pane\. You can also see details about DB instances that are members of an Amazon Aurora DB cluster on the **Databases** page\.
+In the Amazon RDS console, you can see details about a DB cluster by choosing **Databases** from the console's navigation pane\. You can also see details about DB instances that are members of an Amazon Aurora DB cluster\.
 
-The **Databases** list shows all of the DB clusters for your AWS account\. When you choose a DB cluster, you see both information about the DB cluster and also a list of the DB instances that are members of that DB cluster\. You can choose the identifier for a DB instance in the list to go directly to the details page for that DB instance in the RDS console\.
+**To view or modify DB clusters in the Amazon RDS console**
 
-To view the details page for a DB cluster, choose **Databases** in the navigation pane, and then choose the name of the DB cluster\.
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-You can modify your DB cluster by choosing **Databases** from the console's navigation pane to go to the **Databases** list\. To modify a DB cluster, select the DB cluster from the **Databases** list and choose **Modify**\.
+1. In the navigation pane, choose **Databases**\.
 
-To modify a DB instance that is a member of a DB cluster, choose **Databases** from the console's navigation pane to go to the **Databases** list\.
+1. Choose the name of the Aurora DB cluster that you want to view from the list\.
 
-For example, the following image shows the details page for the DB cluster named `aurora-test`\. The DB cluster has four DB instances shown in the **DB identifier** list\. The writer DB instance, `dbinstance4`, is the primary DB instance for the DB cluster\.
-
+   For example, the following image shows the details page for the DB cluster named `aurora-test`\. The DB cluster has four DB instances shown in the DB identifier list\. The writer DB instance, `dbinstance4`, is the primary DB instance for the DB cluster\.  
 ![\[Amazon Aurora DB Cluster View\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraView01.png)
 
-If you click the link for the `dbinstance4` DB instance identifier, the Amazon RDS console shows the details page for the `dbinstance4` DB instance, as shown in the following image\.
+1. To modify a DB cluster, select the DB cluster from the list and choose **Modify**\.
 
+**To view or modify DB instances of a DB cluster in the Amazon RDS console**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Do one of the following:
+   + To view a DB instance, choose one from the list that is a member of the Aurora DB cluster\.
+
+     For example, if you choose the `dbinstance4` DB instance identifier, the console shows the details page for the `dbinstance4` DB instance, as shown in the following image\.  
 ![\[Amazon Aurora DB Instance View\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraView02.png)
+   + To modify a DB instance, choose the DB instance from the list and choose **Modify**\. For more information about modifying a DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.  
 
 ### AWS CLI<a name="Aurora.Viewing.CLI"></a>
 
-To view DB cluster information by using the AWS CLI, use the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command\. For example, the following AWS CLI command lists the DB cluster information for all of the DB clusters in the `us-east-1` region for the configured AWS account\.
+To view DB cluster information by using the AWS CLI, use the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command\. For example, the following AWS CLI command lists the DB cluster information for all of the DB clusters in the modify `us-east-1` region for the configured AWS account\.
 
 ```
 aws rds describe-db-clusters --region us-east-1
@@ -207,10 +217,19 @@ The action returns the following output:
 
 ## Viewing DB cluster status<a name="Aurora.Status"></a>
 
-The status of a DB cluster indicates its health\. You can view the status of a DB cluster by using the Amazon RDS console, the AWS CLI command [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html), or the API operation [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html)\.
+The status of a DB cluster indicates its health\. You can view the status of a DB cluster and the cluster instances by using the Amazon RDS console, the AWS CLI, or the API\.
 
 **Note**  
-Aurora also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB cluster\. Maintenance status is independent of DB cluster status\. For more information on *maintenance status*, see [Applying updates for a DB cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\.
+Aurora also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB cluster\. Maintenance status is independent of DB cluster status\. For more information about maintenance status, see [Applying updates for a DB cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\.
+
+**To view the status of a DB cluster**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+   The **Databases page** appears with the list of DB clusters\. For each DB cluster, the status value is displayed\.  
+![\[Viewing the status of a DB cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Aurora_cluster_status.png)
 
 Find the possible status values for DB clusters in the following table\.
 
@@ -245,7 +264,16 @@ Find the possible status values for DB clusters in the following table\.
 The status of a DB instance in an Aurora cluster indicates the health of the DB instance\. You can view the status of a DB instance in a cluster by using the Amazon RDS console, the AWS CLI command [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html), or the API operation [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\.
 
 **Note**  
-Amazon RDS also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB instance\. Maintenance status is independent of DB instance status\. For more information on *maintenance status*, see [Applying updates for a DB cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\. 
+Amazon RDS also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB instance\. Maintenance status is independent of DB instance status\. For more information about maintenance status, see [Applying updates for a DB cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\. 
+
+**To view the status of a DB instance**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+   The **Databases page** appears with the list of DB instances\. For each DB instance in a cluster, the status value is displayed\.   
+![\[View the status of a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Aurora_instance_status.png)
 
 Find the possible status values for DB instances in the following table\. This table also shows whether you will be billed for the DB instance and storage, billed only for storage, or not billed\. For all DB instance statuses, you are always billed for backup usage\.
 
@@ -303,11 +331,9 @@ You can find examples of these recommendations in the following table\.
 
 Amazon Aurora generates recommendations for a resource when the resource is created or modified\. Amazon Aurora also periodically scans your resources and generates recommendations\.
 
-### Responding to Amazon Aurora recommendations<a name="USER_Recommendations.Responding"></a>
+### <a name="USER_Recommendations.Responding"></a>
 
-You can find recommendations in the AWS Management Console\. You can perform the recommended action immediately, schedule it for the next maintenance window, or dismiss it\.
-
-**To respond to Amazon Aurora recommendations**
+**To view Amazon Aurora recommendations**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -331,7 +357,7 @@ You can find recommendations in the AWS Management Console\. You can perform the
 
    From the **Preferences** window that appears, you can set display options\. These options include the visible columns and the number of recommendations to display on the page\.
 
-1. Manage your active recommendations:
+1. \(optional\) Respond to your active recommendations as follows:
 
    1. Choose **Active** and open one or more sections to view the recommendations in them\.
 

@@ -43,7 +43,7 @@
 |   `aurora_binlog_use_large_read_buffer`   |   Yes   |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.md#AuroraMySQL.Replication.MySQL)\. Removed from Aurora MySQL version 3\.   | 
 |   `aurora_enable_replica_log_compression`   |   Yes   |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\. Removed from Aurora MySQL version 3\.   | 
 |   `aurora_enable_repl_bin_log_filtering`   |   Yes   |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\. Removed from Aurora MySQL version 3\.   | 
-|  `aurora_enable_staggered_replica_restart`  |  Yes  | Allow Aurora replicas to follow a staggered restart schedule to increase cluster availability\. This setting is available in Aurora MySQL versions 1 and 3\. | 
+|  `aurora_enable_staggered_replica_restart`  |  Yes  | This setting is available in Aurora MySQL versions 1 and 3, but it isn't used\. | 
 |   `aurora_enable_zdr`   |   Yes   |   This setting is turned on by default in Aurora MySQL 2\.10 and higher\. For more information, see [Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Availability)\.   | 
 |   `aurora_load_from_s3_role`   |   Yes   |   For more information, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\. Currently not available in Aurora MySQL version 3\. Use `aws_default_s3_role`\.  | 
 |   `aurora_select_into_s3_role`   |   Yes   |   For more information, see [Saving data from an Amazon Aurora MySQL DB cluster into text files in an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\. Currently not available in Aurora MySQL version 3\. Use `aws_default_s3_role`\.  | 
@@ -953,7 +953,6 @@ EXPLAIN SELECT /*+ JOIN_ORDER (t1, t3) */ f1, f2
 + [mysql\.rds\_assign\_gtids\_to\_anonymous\_transactions \(Aurora MySQL version 3 and higher\)](#mysql_assign_gtids_to_anonymous_transactions)
 + [mysql\.rds\_set\_master\_auto\_position \(Aurora MySQL version 1 and 2\)](#mysql_rds_set_master_auto_position)
 + [mysql\.rds\_set\_source\_auto\_position \(Aurora MySQL version 3 and higher\)](#mysql_rds_set_source_auto_position)
-+ [mysql\.rds\_set\_source\_auto\_position \(Aurora MySQL version 3 and higher\)](#mysql_rds_set_source_auto_position)
 + [mysql\.rds\_set\_external\_master\_with\_auto\_position \(Aurora MySQL version 1 and 2\)](#mysql_rds_set_external_master_with_auto_position)
 + [mysql\.rds\_set\_external\_source\_with\_auto\_position \(Aurora MySQL version 3 and higher\)](#mysql_rds_set_external_source_with_auto_position)
 + [mysql\.rds\_skip\_transaction\_with\_gtid](#mysql_rds_skip_transaction_with_gtid)
@@ -1033,16 +1032,6 @@ mysql> call mysql.rds_assign_gtids_to_anonymous_transactions('317a4760-f3dd-3b74
 CALL mysql.rds_set_master_auto_position (auto_position_mode);
 ```
 
-### mysql\.rds\_set\_source\_auto\_position \(Aurora MySQL version 3 and higher\)<a name="mysql_rds_set_source_auto_position"></a>
-
- Sets the replication mode to be based on either binary log file positions or on global transaction identifiers \(GTIDs\)\. 
-
-#### Syntax<a name="mysql_rds_set_source_auto_position-syntax"></a>
-
-```
-CALL mysql.rds_set_source_auto_position (auto_position_mode);
-```
-
 #### Parameters<a name="mysql_rds_set_master_auto_position-parameters"></a>
 
 *auto\_position\_mode*  
@@ -1080,8 +1069,6 @@ CALL mysql.rds_set_source_auto_position (auto_position_mode);
  For an Aurora MySQL DB cluster, you call this stored procedure while connected to the primary instance\. 
 
  The administrative user must run the `mysql.rds_set_source_auto_position` procedure\. 
-
- For Aurora, this procedure is supported for Aurora MySQL version 2\.04 and later MySQL 5\.7–compatible versions\. GTID\-based replication isn't supported for Aurora MySQL 1\.1 or 1\.0\. 
 
 ### mysql\.rds\_set\_external\_master\_with\_auto\_position \(Aurora MySQL version 1 and 2\)<a name="mysql_rds_set_external_master_with_auto_position"></a>
 

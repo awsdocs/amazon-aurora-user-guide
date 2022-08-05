@@ -114,9 +114,9 @@ Returns runtime statistics for the specified SQL statements\. Use without `expla
 
  
 
-** Usage notes**
+**Usage notes**
 
-For the `explainOptionList`, you can use any of the same options that you would use with an `EXPLAIN` statement\. The Aurora PostgreSQL optimizer concatenates the list of options you provide to the `EXPLAIN` statement, so you can request any option that `EXPLAIN` supports\. 
+For the `explainOptionList`, you can use any of the same options that you would use with an `EXPLAIN` statement\. The Aurora PostgreSQL optimizer concatenates the list of options that you provide to the `EXPLAIN` statement\.
 
 ## apg\_plan\_mgmt\.plan\_last\_used<a name="AuroraPostgreSQL.Optimize.Functions.plan_last_used"></a>
 
@@ -294,7 +294,7 @@ The number of invalid plans\.
 | plan\_hash | The managed plan's plan\_hash ID\. Use NULL to mean all plans for the same sql\_hash ID value\. | 
 | action |  The action the function is to perform for invalid plans\. Valid string values include the following\. Case does not matter\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Optimize.Functions.html) Any other value is treated like the empty string\.  | 
 
-** Usage notes**
+**Usage notes**
 
 Use the form `validate_plans(action)` to validate all the managed plans for all the managed statements in the entire `apg_plan_mgmt.dba_plans` view\.
 

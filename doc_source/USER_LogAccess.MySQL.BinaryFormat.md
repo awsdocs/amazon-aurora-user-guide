@@ -9,7 +9,7 @@ The binary log records statements that are sent during replication\. It is also 
 
 Binary logs are accessible only from the primary DB instance, not from the replicas\.
 
-MySQL on Amazon Aurora supports the *row\-based*, *statement\-based*, and *mixed* binary logging formats\. The default binary logging format is mixed\. For details on the different Aurora MySQL binary log formats, see [Binary logging formats](https://dev.mysql.com/doc/refman/8.0/en/binary-log-formats.html) in the MySQL documentation\.
+MySQL on Amazon Aurora supports the *row\-based*, *statement\-based*, and *mixed* binary logging formats\. We recommend mixed unless you need a specific binlog format\. For details on the different Aurora MySQL binary log formats, see [Binary logging formats](https://dev.mysql.com/doc/refman/8.0/en/binary-log-formats.html) in the MySQL documentation\.
 
 If you plan to use replication, the binary logging format is important because it determines the record of data changes that is recorded in the source and sent to the replication targets\. For information about the advantages and disadvantages of different binary logging formats for replication, see [Advantages and disadvantages of statement\-based and row\-based replication](https://dev.mysql.com/doc/refman/8.0/en/replication-sbr-rbr.html) in the MySQL documentation\.
 

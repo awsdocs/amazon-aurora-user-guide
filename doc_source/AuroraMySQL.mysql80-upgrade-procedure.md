@@ -19,11 +19,14 @@
 ## Upgrade planning for Aurora MySQL version 3<a name="AuroraMySQL.mysql80-planning"></a>
 
  To help you decide the right time and approach to upgrade, you can learn the differences between Aurora MySQL version 3 and your current Aurora and MySQL environment: 
-+  If you are converting from RDS for MySQL 8\.0 or community MySQL 8\.0, see [Comparison of Aurora MySQL version 3 and MySQL 8\.0 Community Edition](Aurora.AuroraMySQL.Compare-80-v3.md)\. 
++  If you are converting from RDS for MySQL 8\.0 or MySQL 8\.0 Community Edition, see [Comparison of Aurora MySQL version 3 and MySQL 8\.0 Community Edition](Aurora.AuroraMySQL.Compare-80-v3.md)\. 
 +  If you are upgrading from Aurora MySQL version 2, RDS for MySQL 5\.7, or community MySQL 5\.7, see [Comparison of Aurora MySQL version 2 and Aurora MySQL version 3](Aurora.AuroraMySQL.Compare-v2-v3.md)\. 
 +  Create new MySQL 8\.0\-compatible versions of any custom parameter groups\. Apply any necessary custom parameter values to the new parameter groups\. Consult [Parameter changes for Aurora MySQL version 3](Aurora.AuroraMySQL.Compare-v2-v3.md#AuroraMySQL.mysql80-parameter-changes) to learn about parameter changes\. 
 **Note**  
- For most parameter settings, you can choose the custom parameter group either when you create the cluster or associate the parameter group with the cluster later\. However, if you use a nondefault setting for the `lower_case_table_names` parameter, you must set up the custom parameter group with this setting in advance\. Then specify the parameter group when you perform the snapshot restore to create the cluster\. Any change to the `lower_case_table_names` parameter has no effect after the cluster is created\. 
+For most parameter settings, you can choose the custom parameter group either when you create the cluster or associate the parameter group with the cluster later\.  
+However, if you use a nondefault setting for the `lower_case_table_names` parameter, you must set up the custom parameter group with this setting in advance\. Then specify the parameter group when you perform the snapshot restore to create the cluster\. Any change to the `lower_case_table_names` parameter has no effect after the cluster is created\.  
+We recommend that you use the same setting for `lower_case_table_names` when you upgrade from Aurora MySQL version 2 to version 3\.
++ Review your Aurora MySQL version 2 database schema and object definitions for the usage of new reserved keywords introduced in MySQL 8\.0 Community Edition, before you upgrade\. For more information, see [MySQL 8\.0 New Keywords and Reserved Words](https://dev.mysql.com/doc/mysqld-version-reference/en/keywords-8-0.html#keywords-new-in-8-0) in the MySQL documentation\.
 
  You can also find more MySQL\-specific upgrade considerations and tips in [Changes in MySQL 8\.0](https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html) in the *MySQL Reference Manual*\. For example, you can use the command `mysqlcheck --check-upgrade` to analyze your existing Aurora MySQL databases and identify potential upgrade issues\. 
 
@@ -563,41 +566,7 @@ upgrading to avoid compatibility issues."
 
  The next sequence of examples demonstrates how to fix this particular issue and run the upgrade process again\. This time, the upgrade succeeds\. 
 
- First, we go back to the original cluster\. And run the `OPTIMIZE TABLE tbl_name [, tbl_name] ...` on the tables causing the Error: `Table tbl_name contains
- dangling FULLTEXT index. Kindly recreate the table before upgrade.`\.
-
- For more information, see [Optimizing InnoDB Full-Text Indexes](https://dev.mysql.com/doc/refman/5.6/en/fulltext-fine-tuning.html#fulltext-optimize) and [OPTIMIZE TABLE Statement](https://dev.mysql.com/doc/refman/5.6/en/optimize-table.html) in the MySQL documentation\.
-
-```
-$ mysql -u my_username -p \
-  -h problematic-57-80-upgrade.cluster-example123.us-east-1.rds.amazonaws.com
-
-mysql> show databases;
-+---------------------+
-| Database            |
-+---------------------+
-| information_schema  |
-| mysql               |
-| performance_schema  |
-| problematic_upgrade |
-| sys                 |
-+---------------------+
-5 rows in set (0.00 sec)
-
-mysql> use problematic_upgrade;
-mysql> show tables;
-+-------------------------------+
-| Tables_in_problematic_upgrade |
-+-------------------------------+
-| dangling_fulltext_index       |
-+-------------------------------+
-1 row in set (0.00 sec)
-
-mysql> OPTIMIZE TABLE dangling_fulltext_index;
-Query OK, 0 rows affected (0.05 sec)
-```
-
- As an alternative solution you could create a new table with the same structure and contents as the one with faulty metadata\. In practice, you would probably rename this table back to the original table name after the upgrade\. 
+ First, we go back to the original cluster and create a new table with the same structure and contents as the one with faulty metadata\. In practice, you would probably rename this table back to the original table name after the upgrade\. 
 
 ```
 $ mysql -u my_username -p \
