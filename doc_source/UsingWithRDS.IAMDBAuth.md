@@ -14,7 +14,8 @@ In general, consider using IAM database authentication when your applications cr
 The AWS JDBC Driver for MySQL supports IAM database authentication\. For more information, see [AWS IAM Database Authentication](https://github.com/awslabs/aws-mysql-jdbc#aws-iam-database-authentication) in the AWS JDBC Driver for MySQL GitHub repository\.
 
 **Topics**
-+ [Availability for IAM database authentication](#UsingWithRDS.IAMDBAuth.Availability)
++ [Region and version availability](#UsingWithRDS.IAMDBAuth.Availability)
++ [CLI and SDK support](#UsingWithRDS.IAMDBAuth.cli-sdk)
 + [Limitations for IAM database authentication](#UsingWithRDS.IAMDBAuth.Limitations)
 + [Recommendations for IAM database authentication](#UsingWithRDS.IAMDBAuth.ConnectionsPerSecond)
 + [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
@@ -22,7 +23,9 @@ The AWS JDBC Driver for MySQL supports IAM database authentication\. For more in
 + [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
 + [Connecting to your DB cluster using IAM authentication](UsingWithRDS.IAMDBAuth.Connecting.md)
 
-## Availability for IAM database authentication<a name="UsingWithRDS.IAMDBAuth.Availability"></a>
+## Region and version availability<a name="UsingWithRDS.IAMDBAuth.Availability"></a>
+
+IAM database authentication is available in all Regions\.
 
 IAM database authentication is available for the following database engines:
 + **Aurora MySQL**
@@ -35,9 +38,11 @@ IAM database authentication is available for the following database engines:
   + Aurora PostgreSQL 10\.11 and higher 10 versions
   + Aurora PostgreSQL 9\.6\.16 and higher 9\.6 versions
 
-  For more information, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\.
+For more information, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\.
 
 For Aurora MySQL, all supported DB instance classes support IAM database authentication, except for db\.t2\.small and db\.t3\.small\. For information about the supported DB instance classes, see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora)\.
+
+## CLI and SDK support<a name="UsingWithRDS.IAMDBAuth.cli-sdk"></a>
 
 IAM database authentication is available for the [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/rds/generate-db-auth-token.html) and for the following language\-specific AWS SDKs:
 + [AWS SDK for \.NET](https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/RDS/TRDSAuthTokenGenerator.html)

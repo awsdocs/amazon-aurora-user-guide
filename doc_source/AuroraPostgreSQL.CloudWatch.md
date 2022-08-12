@@ -1,13 +1,13 @@
 # Publishing Aurora PostgreSQL logs to Amazon CloudWatch Logs<a name="AuroraPostgreSQL.CloudWatch"></a>
 
-You can configure your Aurora PostgreSQL DB cluster to export log data to Amazon CloudWatch Logs on an ongoing basis\. When you do so, events from your Aurora PostgreSQL DB cluster's PostgreSQL log are automatically *published* to Amazon CloudWatch, as Amazon CloudWatch Logs\. In CloudWatch, you can find the exported log data in a *Log group* for your Aurora PostgreSQL DB cluster\. The log group contains one or more *log streams* that contain the events from the PostgreSQL log from each instance in the cluster\. 
+You can configure your Aurora PostgreSQL DB cluster to export log data to Amazon CloudWatch Logs on a regular basis\. When you do so, events from your Aurora PostgreSQL DB cluster's PostgreSQL log are automatically *published* to Amazon CloudWatch, as Amazon CloudWatch Logs\. In CloudWatch, you can find the exported log data in a *Log group* for your Aurora PostgreSQL DB cluster\. The log group contains one or more *log streams* that contain the events from the PostgreSQL log from each instance in the cluster\. 
 
-Publishing the logs to CloudWatch Logs lets you keep your cluster's PostgreSQL log records in highly durable storage\. With the log data available in CloudWatch Logs, you can assess your cluster's operations and look for anomolous events You can also use CloudWatch to create alarms and view metrics\. To learn more, see [Monitoring log events in Amazon CloudWatch](#AuroraPostgreSQL.CloudWatch.Monitor)\.
+Publishing the logs to CloudWatch Logs allows you to keep your cluster's PostgreSQL log records in highly durable storage\. With the log data available in CloudWatch Logs, you can evaluate and improve your cluster's operations\. You can also use CloudWatch to create alarms and view metrics\. To learn more, see [Monitoring log events in Amazon CloudWatch](#AuroraPostgreSQL.CloudWatch.Monitor)\.
 
 **Note**  
 Publishing your PostgreSQL logs to CloudWatch Logs consumes storage, and you incur charges for that storage\. Be sure to delete any CloudWatch Logs that you no longer need\. 
 
-Turning the export log option off for an existing Aurora PostgreSQL DB cluster doesn't affect any data that's already held in CloudWatch Logs log groups\. Existing logs are still available in CloudWatch Logs, based on your log retention settings\. To learn more about CloudWatch Logs, see [What is Amazon CloudWatch Logs?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html) 
+Turning the export log option off for an existing Aurora PostgreSQL DB cluster doesn't affect any data that's already held in CloudWatch Logs\. Existing logs remain available in CloudWatch Logs based on your log retention settings\. To learn more about CloudWatch Logs, see [What is Amazon CloudWatch Logs?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html) 
 
 Aurora PostgreSQL supports publishing logs to CloudWatch Logs for the following versions\. 
 + 14\.3 and higher 14 versions
@@ -17,7 +17,7 @@ Aurora PostgreSQL supports publishing logs to CloudWatch Logs for the following
 
 ## Turning on the option to publish logs to Amazon CloudWatch<a name="AuroraPostgreSQL.CloudWatch.Publishing"></a>
 
-You can choose the Log export setting to publish your Aurora PostgreSQL DB cluster's PostgreSQL log to CloudWatch Logs when you create your Aurora PostgreSQL DB cluster\. Or, you can modify the cluster later and choose the option to start publishing the PostgreSQL log to CloudWatch from that point forward\. For Aurora PostgreSQL, the PostgreSQL log \(`postgresql.log`\) is the only log that gets published to Amazon CloudWatch\. 
+To publish your Aurora PostgreSQL DB cluster's PostgreSQL log to CloudWatch Logs, choose the **Log export** option for the cluster\. You can choose the Log export setting when you create your Aurora PostgreSQL DB cluster\. Or, you can modify the cluster later on\. When you modify an existing cluster, its PostgreSQL logs from each instance are published to CloudWatch cluster from that point on\. For Aurora PostgreSQL, the PostgreSQL log \(`postgresql.log`\) is the only log that gets published to Amazon CloudWatch\. 
 
 You can use the AWS Management Console, the AWS CLI, or the RDS API to turn on the Log export feature for your Aurora PostgreSQL DB cluster\. 
 

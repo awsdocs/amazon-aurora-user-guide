@@ -10,7 +10,6 @@ Security threats are both external and internal\. To protect against internal th
 + [Requirements for database activity streams](#DBActivityStreams.Overview.requirements)
 + [Supported Aurora engine versions for database activity streams](#DBActivityStreams.Overview.requirements.version)
 + [Supported DB instance classes for database activity streams](#DBActivityStreams.Overview.requirements.classes)
-+ [Supported AWS Regions for database activity streams](#DBActivityStreams.Overview.requirements.Regions)
 
 ## How database activity streams work<a name="DBActivityStreams.Overview.how-they-work"></a>
 
@@ -83,11 +82,3 @@ For Aurora PostgreSQL, you can use database activity streams with the following 
 + db\.r5
 + db\.r4
 + db\.x2g
-
-## Supported AWS Regions for database activity streams<a name="DBActivityStreams.Overview.requirements.Regions"></a>
-
-Database activity streams are supported in all AWS Regions except the following:
-+ China \(Beijing\) Region, `cn-north-1`
-+ China \(Ningxia\) Region, `cn-northwest-1`
-+ AWS GovCloud \(US\-East\), `us-gov-east-1`
-+ AWS GovCloud \(US\-West\), `us-gov-west-1`

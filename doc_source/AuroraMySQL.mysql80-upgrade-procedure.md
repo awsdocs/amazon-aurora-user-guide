@@ -534,8 +534,7 @@ table before upgrade.",
 $ cat upgrade-prechecks.log | grep -A 2 '"level": "Error"'
 "level": "Error",
 "dbObject": "problematic_upgrade.dangling_fulltext_index",
-"description": "Table `problematic_upgrade.dangling_fulltext_index` contains
-dangling FULLTEXT index. Kindly recreate the table before upgrade."
+"description": "Table `problematic_upgrade.dangling_fulltext_index` contains dangling FULLTEXT index. Kindly recreate the table before upgrade."
 ```
 
  This `defaultAuthenticationPlugin` check always displays this warning message for Aurora MySQL version 3 upgrades\. That's because Aurora MySQL version 3 uses the `mysql_native_password` plugin instead of `caching_sha2_password`\. You don't need to take any action for this warning\. 
@@ -559,14 +558,45 @@ used 'mysql_native_password' (and consequent improved client connection
     "errorCount": 1,
     "warningCount": 2,
     "noticeCount": 0,
-    "Summary": "1 errors were found. Please correct these issues before
-upgrading to avoid compatibility issues."
+    "Summary": "1 errors were found. Please correct these issues before upgrading to avoid compatibility issues."
 }
 ```
 
  The next sequence of examples demonstrates how to fix this particular issue and run the upgrade process again\. This time, the upgrade succeeds\. 
 
- First, we go back to the original cluster and create a new table with the same structure and contents as the one with faulty metadata\. In practice, you would probably rename this table back to the original table name after the upgrade\. 
+First, we go back to the original cluster\. Then we run `OPTIMIZE TABLE tbl_name [, tbl_name] ...` on the tables causing the following error:
+
+Table `tbl\_name` contains dangling FULLTEXT index\. Kindly recreate the table before upgrade\.
+
+```
+$ mysql -u my_username -p \
+  -h problematic-57-80-upgrade.cluster-example123.us-east-1.rds.amazonaws.com
+mysql> show databases;
++---------------------+
+| Database            |
++---------------------+
+| information_schema  |
+| mysql               |
+| performance_schema  |
+| problematic_upgrade |
+| sys                 |
++---------------------+
+5 rows in set (0.00 sec)
+mysql> use problematic_upgrade;
+mysql> show tables;
++-------------------------------+
+| Tables_in_problematic_upgrade |
++-------------------------------+
+| dangling_fulltext_index       |
++-------------------------------+
+1 row in set (0.00 sec)
+mysql> OPTIMIZE TABLE dangling_fulltext_index;
+Query OK, 0 rows affected (0.05 sec)
+```
+
+For more information, see [Optimizing InnoDB Full\-Text Indexes](https://dev.mysql.com/doc/refman/5.6/en/fulltext-fine-tuning.html#fulltext-optimize) and [OPTIMIZE TABLE Statement](https://dev.mysql.com/doc/refman/5.6/en/optimize-table.html) in the MySQL documentation\.
+
+As an alternative solution you could create a new table with the same structure and contents as the one with faulty metadata\. In practice, you would probably rename this table back to the original table name after the upgrade\.
 
 ```
 $ mysql -u my_username -p \

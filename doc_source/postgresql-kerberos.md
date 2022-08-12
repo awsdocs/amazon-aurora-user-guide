@@ -11,13 +11,13 @@ You can also access credentials from your own on\-premises Microsoft Active Dire
 A database can use Kerberos, AWS Identity and Access Management \(IAM\), or both Kerberos and IAM authentication\. However, since Kerberos and IAM authentication provide different authentication methods, a specific user can log in to a database using only one or the other authentication method but not both\. For more information about IAM authentication, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\. 
 
 **Topics**
-+ [Availability of Kerberos authentication](#postgresql-kerberos-availability)
++ [Region and version availability](#postgresql-kerberos.RegionVersionAvailability)
 + [Overview of Kerberos authentication for PostgreSQL DB clusters](#postgresql-kerberos-overview)
 + [Setting up Kerberos authentication for PostgreSQL DB clusters](postgresql-kerberos-setting-up.md)
 + [Managing a DB cluster in a Domain](postgresql-kerberos-managing.md)
 + [Connecting to PostgreSQL with Kerberos authentication](postgresql-kerberos-connecting.md)
 
-## Availability of Kerberos authentication<a name="postgresql-kerberos-availability"></a>
+## Region and version availability<a name="postgresql-kerberos.RegionVersionAvailability"></a>
 
 Kerberos authentication is supported on the following engine versions:
 + All PostgreSQL 14 and PostgreSQL 13 versions
@@ -27,7 +27,7 @@ Kerberos authentication is supported on the following engine versions:
 
 For more information, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\.
 
-Amazon Aurora supports Kerberos authentication for PostgreSQL DB clusters in the following AWS Regions: 
+Amazon Aurora supports Kerberos authentication for PostgreSQL DB clusters in the following AWS Regions:
 
 
 | Region name | Region | 

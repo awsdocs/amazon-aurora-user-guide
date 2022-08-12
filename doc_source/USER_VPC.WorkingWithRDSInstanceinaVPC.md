@@ -66,7 +66,7 @@ For information about modifying a DB instance to set the **Public access** optio
 
 ## Creating a DB instance in a VPC<a name="USER_VPC.InstanceInVPC"></a>
 
-The following procedures help you create a DB instance in a VPC\. If your account has a default VPC, you can begin with step 2 because the VPC and DB subnet group have already been created for you\. If your AWS account doesn't have a default VPC, or if you want to create an additional VPC, you can create a new VPC\. 
+The following procedures help you create a DB instance in a VPC\. If your account has a default VPC and you want to use it, you can begin with step 2\. The VPC and DB subnet group have already been created for you in the default VPC\. If you want to create an additional VPC, you can start with step 1 and create a new VPC\. 
 
 **Note**  
 If you want your DB instance in the VPC to be publicly accessible, you must update the DNS information for the VPC by enabling the VPC attributes *DNS hostnames* and *DNS resolution*\. For information about updating the DNS information for a VPC instance, see [Updating DNS support for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html)\. 

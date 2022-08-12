@@ -9,10 +9,7 @@ The Data API and query editor aren't supported for Aurora Serverless v2\.
 
 ## Availability of the query editor<a name="query-editor.regions"></a>
 
-The query editor is only available for the following Aurora Serverless v1 DB clusters:
-+ Aurora with MySQL version 5\.6 compatibility
-+ Aurora with MySQL version 5\.7 compatibility
-+ Aurora with PostgreSQL version 10\.18 compatibility
+The query editor is available only for Aurora Serverless v1 DB clusters using specific Aurora MySQL and Aurora PostgreSQL versions that support the Data API\. For more information, see [Data API for Aurora Serverless v1](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API)\. 
 
 The query editor is currently available for Aurora Serverless v1 in the following AWS Regions:
 + US East \(Ohio\)

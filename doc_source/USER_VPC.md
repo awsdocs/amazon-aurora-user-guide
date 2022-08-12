@@ -1,10 +1,10 @@
 # Amazon Virtual Private Cloud VPCs and Amazon Aurora<a name="USER_VPC"></a>
 
-Amazon Virtual Private Cloud \(Amazon VPC\) enables you to launch AWS resources, such as Aurora DB clusters, into a virtual private cloud \(VPC\)\. 
+Amazon Virtual Private Cloud \(Amazon VPC\) makes it possible for you to launch AWS resources, such as Aurora DB clusters, into a virtual private cloud \(VPC\)\. 
 
 When you use an Amazon VPC, you have control over your virtual networking environment: you can choose your own IP address range, create subnets, and configure routing and access control lists\. There is no additional cost to run your DB instance in an Amazon VPC\. 
 
-Accounts that support only the *EC2\-VPC* platform have a default VPC\. All new DB instances are created in the default VPC unless you specify otherwise\.
+Accounts have a default VPC\. All new DB instances are created in the default VPC unless you specify otherwise\.
 
 **Topics**
 + [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)

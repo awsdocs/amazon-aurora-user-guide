@@ -11,7 +11,7 @@
  RDS Proxy is fully compatible with the engine versions that it supports\. You can enable RDS Proxy for most applications with no code changes\. For a list of supported engine versions, see [Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraFeaturesRegionsDBEngines.grids.html#Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy)\. 
 
 **Topics**
-+ [Supported engines and Region availability for RDS Proxy](#rds-proxy.support)
++ [Region and version availability](#rds-proxy.RegionVersionAvailability)
 + [Quotas and limitations for RDS Proxy](#rds-proxy.limits)
 + [Planning where to use RDS Proxy](rds-proxy-planning.md)
 + [RDS Proxy concepts and terminology](rds-proxy.howitworks.md)
@@ -24,7 +24,7 @@
 + [Troubleshooting for RDS Proxy](rds-proxy.troubleshooting.md)
 + [Using RDS Proxy with AWS CloudFormation](rds-proxy-cfn.md)
 
-## Supported engines and Region availability for RDS Proxy<a name="rds-proxy.support"></a>
+## Region and version availability<a name="rds-proxy.RegionVersionAvailability"></a>
 
  For information about database engine version support and availability of RDS Proxy in a given AWS Region, see [Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraFeaturesRegionsDBEngines.grids.html#Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy)\. 
 

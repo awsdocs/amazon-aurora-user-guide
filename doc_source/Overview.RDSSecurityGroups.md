@@ -1,8 +1,8 @@
 # Controlling access with security groups<a name="Overview.RDSSecurityGroups"></a>
 
-Security groups control the access that traffic has in and out of a DB instance\. Aurora supports VPC security groups\.
+VPC security groups control the access that traffic has in and out of a DB cluster\.
 
-## VPC security groups<a name="Overview.RDSSecurityGroups.VPCSec"></a>
+## Overview of VPC security groups<a name="Overview.RDSSecurityGroups.VPCSec"></a>
 
 Each VPC security group rule enables a specific source to access a DB instance in a VPC that is associated with that VPC security group\. The source can be a range of addresses \(for example, 203\.0\.113\.0/24\), or another VPC security group\. By specifying a VPC security group as the source, you allow incoming traffic from all instances \(typically application servers\) that use the source VPC security group\. VPC security groups can have rules that govern both inbound and outbound traffic, though the outbound traffic rules typically do not apply to DB instances\. Outbound traffic rules only apply if the DB instance acts as a client\. You must use the [Amazon EC2 API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC Console to create VPC security groups\. 
 

@@ -59,9 +59,7 @@ For general information about creating an Aurora DB cluster, see [Creating an Am
    + For `Engine type` in the **Engine options** section, choose **Amazon Aurora**\.  
 ![\[Screenshot of some of the engine options on the Create database page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-db-create.png)
 
-Then choose **Amazon Aurora with MySQL compatibility** or **Amazon Aurora with PostgreSQL compatibility**, and continue creating your Aurora global database by using the steps from the following procedures\.
-
-**Topics**
+Continue creating your Aurora global database by using the steps from the following procedures:
 + [Creating a global database using Aurora MySQL](#aurora-global-database.create.console.MySQL)
 + [Creating a global database using Aurora PostgreSQL](#aurora-global-database.create.console.PostgreSQL)
 
@@ -75,16 +73,14 @@ Complete the **Create database** page\.
 
 1. For **Engine options**, choose the following:
 
-   1. For **Edition**, choose **Amazon Aurora with MySQL compatibility**\.
-
-   1. For **Capacity type**, choose **Provisioned**\.
+   1. For **Edition**, choose **Amazon Aurora MySQL\-Compatible Edition**\.
 
    1. Leave **Replication features** set to the default \(single\-master replication\)\.
 
-   1. Turn on **Show versions that support the global database feature**\.
+   1. Expand **Show filters**, and then turn on **Show versions that support the global database feature**\.
 
-   1. For **Version**, choose the version of Aurora MySQL that you want to use for your Aurora global database\.  
-![\[Screenshot of Edition, Capacity type, Replication features, Engine version, and Version choices when creating an Aurora DB cluster (first phase of Aurora global database).\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-db-create-ams-2.png)
+   1. For **Engine version**, choose the version of Aurora MySQL that you want to use for your Aurora global database\.  
+![\[Screenshot of Edition, Replication features, Engine version, and Version choices when creating an Aurora DB cluster (first phase of Aurora global database).\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-db-create-ams-2.png)
 
 1. For **Templates**, choose **Production**\. Or you can choose Dev/Test if appropriate for your use case\. Don't use Dev/Test in production environments\. 
 
@@ -130,15 +126,13 @@ Complete the **Create database** page\.
 
 1. For **Engine options**, choose the following:
 
-   1. For **Edition**, choose **Amazon Aurora with MySQL compatibility**\.
-
-   1. For **Capacity type**, choose **Provisioned**\.
+   1. For **Edition**, choose **Amazon Aurora MySQL\-Compatible Edition**\.
 
    1. Leave **Replication features** set to the default \(single\-master replication\)\.
 
-   1. Turn on **Show versions that support the global database feature**\.
+   1. Expand **Show filters**, and then turn on **Show versions that support the global database feature**\.
 
-   1. For **Version**, choose **Aurora \(MySQL 5\.6\) global\_10a**\. 
+   1. For **Engine version**, choose **Aurora \(MySQL 5\.6\) global\_10a**\.
 
 1. For **Templates**, choose **Production**\.
 
@@ -146,17 +140,17 @@ Complete the **Create database** page\.
 
    1. For **Global database identifier**, enter a meaningful name\. 
 
-   1. For **Credentials Settings**, enter your own password for the `postgres` user account for the DB instance, or have Aurora generate one for you\. If you choose Auto generate a password, you get an option to copy the password\.  
+   1. For **Credentials Settings**, enter your own password for the `admin` user account for the DB instance, or have Aurora generate one for you\. If you choose Auto generate a password, you get an option to copy the password\.  
 ![\[Screenshot of Aurora MySQL 5.6.10a Engine options when creating an Aurora global database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-db-create-ams-5610a-1.png)
 
 1. For **Encryption**, enable or disable encryption as needed\.
 
 1. The remaining sections of the **Create database** page configure the **Primary region settings**\. Complete these as follows:
 
-   1. For **DB instance class**, choose `db.r5.large` or another memory optimized DB instance class\. We recommend that you use a db\.r5 or higher instance class\.   
-![\[Screenshot of Aurora MySQL 5.6.10a Primary regions settings section of Create database page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-db-create-ams-5610a-2.png)
+   1. For **DB instance class**, choose `db.r5.large` or another memory optimized DB instance class\. We recommend that you use a db\.r5 or higher instance class\. 
 
-   1. For **Availability & durability**, we recommend that you choose to have Aurora create an Aurora Replica in a different AZ for you\. If you don't create an Aurora Replica now, you need to do it later\. 
+   1. For **Availability & durability**, we recommend that you choose to have Aurora create an Aurora Replica in a different AZ for you\. If you don't create an Aurora Replica now, you need to do it later\.  
+![\[Screenshot of Aurora MySQL 5.6.10a Primary regions settings section of Create database page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-db-create-ams-5610a-2.png)
 
    1. For **Connectivity**, choose the virtual private cloud \(VPC\) based on Amazon VPC that defines the virtual networking environment for this DB instance\. You can choose the defaults to simplify this task\. 
 
@@ -189,14 +183,12 @@ Complete the **Create database** page\.
 
 1. For **Engine options**, choose the following:
 
-   1. For **Edition**, choose **Amazon Aurora with PostgreSQL compatibility**\.
+   1. For **Edition**, choose **Amazon Aurora PostgreSQL\-Compatible Edition**\.
 
-   1. For **Capacity type**, choose **Provisioned**\. 
+   1. Expand **Show filters**, and then turn on **Show versions that support the global database feature**\.
 
-   1. Turn on **Show versions that support the global database feature**\.
-
-   1. For **Version**, choose the version of Aurora PostgreSQL that you want to use for your Aurora global database\.  
-![\[Screenshot of Edition, Capacity type, Replication features, Engine version, and Version choices when creating an Aurora DB cluster (first phase of Aurora global database).\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-db-create-apg-1.png)
+   1. For **Engine version**, choose the version of Aurora PostgreSQL that you want to use for your Aurora global database\.  
+![\[Screenshot of Edition, Replication features, Engine version, and Version choices when creating an Aurora DB cluster (first phase of Aurora global database).\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-db-create-apg-1.png)
 
 1. For **Templates**, choose **Production**\. Or you can choose Dev/Test if appropriate\. Don't use Dev/Test in production environments\. 
 
@@ -214,7 +206,7 @@ Complete the **Create database** page\.
 
 1. For **Connectivity**, choose the virtual private cloud \(VPC\) based on Amazon VPC that defines the virtual networking environment for this DB instance\. You can choose the defaults to simplify this task\. 
 
-1. Complete the **Database authentication** settings\. To simplify the process, you can choose **Password authentication** now and set up IAM or password and Kerberos authentication later\.
+1. \(Optional\) Complete the **Database authentication** settings\. Password authentication is always enabled\. To simplify the process, you can skip this section and set up IAM or password and Kerberos authentication later\.
 
 1. For **Additional configuration**, do the following:
 
@@ -222,7 +214,7 @@ Complete the **Create database** page\.
 
       Leave the defaults selected for the DB cluster parameter group and DB parameter group, unless you have your own custom parameter groups that you want to use\. 
 
-   1. Accept all other default settings for **Additional configuration**, such as Monitoring, Log exports, and so on\.
+   1. Accept all other default settings for **Additional configuration**, such as Encryption, Log exports, and so on\.
 
 1. Choose **Create database**\. 
 

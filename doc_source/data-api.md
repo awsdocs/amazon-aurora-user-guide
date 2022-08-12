@@ -28,7 +28,7 @@ The Data API and query editor aren't supported for Aurora Serverless v2\.
 
 ## Data API availability<a name="data-api.regions"></a>
 
-The Data API can be enabled for Aurora Serverless v1 DB clusters using specific Aurora MySQL and Aurora PostgreSQL versions only\. For more information, see [Data API for Aurora Serverless v1](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API)\. 
+The Data API is available only for Aurora Serverless v1 DB clusters using specific Aurora MySQL and Aurora PostgreSQL versions\. For more information, see [Data API for Aurora Serverless v1](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API)\. 
 
 The following table shows the AWS Regions where the Data API is currently available for Aurora Serverless v1\. To access the Data API in these Regions, use the HTTPS protocol\.
 
