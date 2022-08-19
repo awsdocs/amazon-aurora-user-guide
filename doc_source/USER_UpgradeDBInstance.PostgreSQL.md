@@ -178,13 +178,13 @@ Before upgrading your production Aurora PostgreSQL DB clusters to a new major ve
    + `address_standardizer`
    + `address_standardizer_data_us`
 
-   Run the following command for each extension that you're using\. 
+   Run the following command for each extension that's currently installed\.
 
    ```
    ALTER EXTENSION PostgreSQL-extension UPDATE TO 'new-version'
    ```
 
-   For more information, see [Upgrading PostgreSQL extensions](#USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades)\.
+   For more information, see [Upgrading PostgreSQL extensions](#USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades)\. To learn more about upgrading PostGIS, see [Step 6: Upgrade the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md#Appendix.PostgreSQL.CommonDBATasks.PostGIS.Update)\. 
 
 1. If you're upgrading to version 11\.x, drop the extensions that it doesn't support before performing the major version upgrade\. The extensions to drop include:
    + `chkpass`
@@ -446,12 +446,12 @@ To upgrade the engine version of a DB cluster, use the [ModifyDBCluster](https:/
 
 ## Upgrading PostgreSQL extensions<a name="USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades"></a>
 
-Upgrading your Aurora PostgreSQL DB cluster to a new major version doesn't upgrade the PostgreSQL extensions at the same time\. For most extensions, you upgrade the extension after the major version upgrade completes\. However, in some cases, you upgrade the extension before you upgrade the Aurora PostgreSQL DB engine\. For more information, see [list of extensions to update](#upgrade-extensions) in [Before upgrading your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\.
+Upgrading your Aurora PostgreSQL DB cluster to a new major version doesn't upgrade the PostgreSQL extensions at the same time\. For most extensions, you upgrade the extension after the major version upgrade completes\. However, in some cases, you upgrade the extension before you upgrade the Aurora PostgreSQL DB engine\. For more information, see the [list of extensions to update](#upgrade-extensions) in [Before upgrading your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\.
 
 Installing PostgreSQL extensions requires `rds_superuser` privileges\. Typically, an `rds_superuser` delegates permissions over specific extensions to relevant users \(roles\), to facilitate the management of a given extension\. That means that the task of upgrading all the extensions in your Aurora PostgreSQL DB cluster might involve many different users \(roles\)\. Keep this in mind especially if you want to automate the upgrade process by using scripts\. For more information about PostgreSQL privileges and roles, see [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md)\. 
 
 **Note**  
-If you are running the `PostGIS` extension in your Amazon RDS PostgreSQL DB instance, see [ PostGIS\_Extensions\_Upgrade](https://postgis.net/docs/PostGIS_Extensions_Upgrade.html) in the PostGIS documentation to upgrade the extension\. 
+For information about upgrading the PostGIS extension version, see [Managing spatial data with the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md) \( [Step 6: Upgrade the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md#Appendix.PostgreSQL.CommonDBATasks.PostGIS.Update)\)\. 
 
 To update an extension after an engine upgrade, use the `ALTER EXTENSION UPDATE` command\.
 

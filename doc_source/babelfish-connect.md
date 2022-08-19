@@ -3,7 +3,7 @@
 To connect to Babelfish, you connect to the endpoint of the Aurora PostgreSQL cluster running Babelfish\. Your client can use one of the following client drivers compliant with TDS version 7\.1 through 7\.4:
 + Open Database Connectivity \(ODBC\)
 + OLE DB Driver/MSOLEDBSQL
-+ Java Database Connectivity \(JDBC\)
++ Java Database Connectivity \(JDBC\) version 8\.2\.2 \(mssql\-jdbc\-8\.2\.2\) and higher
 + Microsoft SqlClient Data Provider for SQL Server
 + \.NET Data Provider for SQL Server
 + SQL Server Native Client 11\.0 \(deprecated\)

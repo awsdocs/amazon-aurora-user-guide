@@ -13,9 +13,12 @@ You can find more tutorials at the [AWS Database Blog](http://aws.amazon.com/blo
 ## Tutorials in this guide<a name="CHAP_Tutorials.ThisGuide"></a>
 
 The following tutorials in this guide show you how to perform common tasks with Amazon Aurora:
-+ [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
++ [Tutorial: Create a VPC for use with a DB cluster \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)
 
   Learn how to include a DB cluster in an Amazon virtual private cloud \(VPC\) that shares data with a web server that is running on an Amazon EC2 instance in the same VPC\.
++ [Tutorial: Create a VPC for use with a DB cluster \(dual\-stack mode\)](CHAP_Tutorials.CreateVPCDualStack.md)
+
+  Learn how to include a DB cluster in an Amazon virtual private cloud \(VPC\) that shares data with an Amazon EC2 instance in the same VPC\. In this tutorial, you create the VPC for this scenario that works with a database running in dual\-stack mode\. 
 + [Tutorial: Create a web server and an Amazon Aurora DB cluster](TUT_WebAppWithRDS.md)
 
   Learn how to install an Apache web server with PHP and create a MySQL database\. The web server runs on an Amazon EC2 instance using Amazon Linux, and the MySQL database is an Aurora MySQL DB cluster\. Both the Amazon EC2 instance and the DB cluster run in an Amazon VPC\.

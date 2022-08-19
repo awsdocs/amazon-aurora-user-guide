@@ -18,7 +18,7 @@ If the Aurora MySQL DB cluster can't access the AWS KMS endpoint, the activity s
 
 For an Aurora DB cluster to be public, it must meet the following requirements:
 + **Publicly Accessible** is **Yes** in the AWS Management Console cluster details page\.
-+ The DB cluster is in an Amazon VPC public subnet\. For more information about publicly accessible DB instances, see [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\. For more information about public Amazon VPC subnets, see [Your VPC and Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)\.
++ The DB cluster is in an Amazon VPC public subnet\. For more information about publicly accessible DB instances, see [Working with a DB cluster in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\. For more information about public Amazon VPC subnets, see [Your VPC and Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)\.
 
 ## Prerequisites for private availability<a name="DBActivityStreams.Prereqs.Private"></a>
 

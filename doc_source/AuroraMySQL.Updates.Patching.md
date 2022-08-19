@@ -114,13 +114,19 @@ That command produces output similar to the following:
 
  The zero\-downtime patching \(ZDP\) feature attempts, on a best\-effort basis, to preserve client connections through an Aurora MySQL upgrade\. If ZDP completes successfully, application sessions are preserved and the database engine restarts while the upgrade is in progress\. The database engine restart can cause a drop in throughput lasting for a few seconds to approximately one minute\. 
 
- ZDP is available in Aurora MySQL 2\.07\.2 and higher 2\.07 versions, and 2\.10\.0 and higher, compatible with MySQL 5\.7, and 3\.01\.0 and higher, compatible with MySQL 8\.0\. 
+The following table shows the Aurora MySQL versions and DB instance classes where ZDP is available\.
 
- In Aurora MySQL version 2, ZDP only applies to Aurora MySQL DB instances that use the `db.t2` or `db.t3` instance classes\. In Aurora MySQL version 3, ZDP applies to all instance classes\. 
+
+| Version | db\.r\* instance classes | db\.t\* instance classes | db\.serverless instance class | 
+| --- | --- | --- | --- | 
+| 2\.07\.2 and higher 2\.07 versions | No | Yes | N/A | 
+| 2\.10\.0 and higher 2\.10 versions | Yes | Yes | N/A | 
+| 3\.01\.0 and 3\.01\.1 | Yes | Yes | N/A | 
+| 3\.02\.0 and higher 3\.x versions | Yes | Yes | Yes | 
 
  You can see metrics of important attributes during ZDP in the MySQL error log\. You can also see information about when Aurora MySQL uses ZDP or chooses not to use ZDP on the **Events** page in the AWS Management Console\. 
 
- In Aurora MySQL 2\.10 and higher, Aurora can perform a zero\-downtime patch when binary log replication is enabled\. Aurora MySQL automatically drops the connection to the binlog target during a ZDP operation\. Aurora MySQL automatically reconnects to the binlog target and resumes replication after the restart finishes\. 
+In Aurora MySQL version 2\.10 and higher and version 3, Aurora can perform a zero\-downtime patch when binary log replication is enabled\. Aurora MySQL automatically drops the connection to the binlog target during a ZDP operation\. Aurora MySQL automatically reconnects to the binlog target and resumes replication after the restart finishes\.
 
  ZDP also works in combination with the reboot enhancements in Aurora MySQL 2\.10 and higher\. Patching the writer DB instance automatically patches readers at the same time\. After performing the patch, Aurora restores the connections on both the writer and reader DB instances\. Before Aurora MySQL 2\.10, ZDP applies only to the writer DB instance of a cluster\. 
 
@@ -143,15 +149,16 @@ That command produces output similar to the following:
 +  Attempting to upgrade the database with zero downtime\. 
 +  Attempt to upgrade the database with zero downtime finished\. The event reports how long the process took\. The event also reports how many connections were preserved during the restart and how many connections were dropped\. You can consult the database error log to see more details about what happened during the restart\. 
 
- The following table summarizes how ZDP works for upgrading from and to specific Aurora MySQL versions\. The instance class of the DB instance also affects whether Aurora uses the ZDP mechanism\. 
+The following table summarizes how ZDP works for upgrading from and to specific Aurora MySQL 1\.x and 2\.x versions\. The instance class of the DB instance also affects whether Aurora uses the ZDP mechanism\.
 
 
 |  Original version  |  Upgraded version  |  Does ZDP apply?  | 
 | --- | --- | --- | 
-|   Aurora MySQL 1\.\*   |   Any   |   No   | 
-|   Aurora MySQL 2\.\*, before 2\.07\.2   |   Any   |   No   | 
-|   Aurora MySQL 2\.07\.2, 2\.07\.3   |   2\.07\.4 and higher 2\.07 versions, 2\.10\.\*   |   Yes, on the writer instance for T2 and T3 instance classes only\. Aurora only performs ZDP if a quiet point is found before a timeout occurs\. After the timeout, Aurora performs a regular restart\.   | 
-|   2\.07\.4 and higher 2\.07 versions   |   2\.10\.\*   |   Yes, on the writer instance for T2 and T3 instances only\. Aurora rolls back transactions for active and idle transactions\. Connections using SSL, temporary tables, table locks, or user locks are disconnected\. Aurora might restart the engine and drop all connections if the engine takes too long to start after ZDP finishes\.   | 
+|  Aurora MySQL 1\.\*  |  Any  |  No  | 
+|  Aurora MySQL 2\.\*, before 2\.07\.2  |  Any  |  No  | 
+|  Aurora MySQL 2\.07\.2, 2\.07\.3  |  2\.07\.4 and higher 2\.07 versions, 2\.10\.\*  |  Yes, on the writer instance for T2 and T3 instance classes only\. Aurora only performs ZDP if a quiet point is found before a timeout occurs\. After the timeout, Aurora performs a regular restart\.  | 
+|  Aurora MySQL 2\.07\.4 and higher 2\.07 versions  |  2\.10\.\*  |  Yes, on the writer instance for T2 and T3 instances only\. Aurora rolls back transactions for active and idle transactions\. Connections using SSL, temporary tables, table locks, or user locks are disconnected\. Aurora might restart the engine and drop all connections if the engine takes too long to start after ZDP finishes\.  | 
+|  Aurora MySQL 2\.10\.\*  | 2\.10\.\* |  Yes, on the writer instance for `db.t*` and `db.r*` instances\. Aurora rolls back transactions for active and idle transactions\. Connections using SSL, temporary tables, table locks, or user locks are disconnected\. Aurora might restart the engine and drop all connections if the engine takes too long to start after ZDP finishes\.  | 
 
 ## Alternative blue\-green upgrade technique<a name="AuroraMySQL.Upgrading.BlueGreen"></a>
 

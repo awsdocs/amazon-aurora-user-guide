@@ -35,7 +35,7 @@ Once you have created an encrypted DB cluster, you can't change the KMS key used
 If you use the AWS CLI `create-db-cluster` command to create an encrypted DB cluster with a customer managed key, set the `--kms-key-id` parameter to any key identifier for the KMS key\. If you use the Amazon RDS API `CreateDBInstance` operation, set the `KmsKeyId` parameter to any key identifier for the KMS key\. To use a customer managed key in a different AWS account, specify the key ARN or alias ARN\.
 
 **Important**  
-Amazon Aurora can lose access to the KMS key for a DB cluster\. For example, RDS loses access when the KMS key isn't enabled, or when RDS access to a KMS key is revoked\. In these cases, the encrypted DB cluster goes into `inaccessible-encryption-credentials-recoverable` state\. The DB cluster remains in this state for seven days\. When you start the DB cluster during that time, it checks if the KMS key is active and recovers the DB cluster if it is\. Restart the DB cluster using the AWS CLI command [start\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/start-db-cluster.html)\. Currently, you can't start a DB cluster in this state using the AWS Management Console\.  
+Amazon Aurora can lose access to the KMS key for a DB cluster\. For example, Aurora loses access when the KMS key isn't enabled, or when Aurora access to a KMS key is revoked\. In these cases, the encrypted DB cluster goes into `inaccessible-encryption-credentials-recoverable` state\. The DB cluster remains in this state for seven days\. When you start the DB cluster during that time, it checks if the KMS key is active and recovers the DB cluster if it is\. Restart the DB cluster using the AWS CLI command [start\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/start-db-cluster.html)\. Currently, you can't start a DB cluster in this state using the AWS Management Console\.  
 If the DB cluster isn't recovered, then it goes into the terminal `inaccessible-encryption-credentials` state\. In this case, you can only restore the DB cluster from a backup\. We strongly recommend that you always turn on backups for encrypted DB instances to guard against the loss of encrypted data in your databases\.
 
 ## Determining whether encryption is turned on for a DB cluster<a name="Overview.Encryption.Determining"></a>
@@ -85,7 +85,7 @@ Amazon Aurora encryption is not available for the db\.t2\.micro DB instance clas
 ## Limitations of Amazon Aurora encrypted DB clusters<a name="Overview.Encryption.Limitations"></a>
 
 The following limitations exist for Amazon Aurora encrypted DB clusters:
-+ You can't disable encryption on an encrypted DB cluster\.
++ You can't turn off encryption on an encrypted DB cluster\.
 + You can't create an encrypted snapshot of an unencrypted DB cluster\.
 + A snapshot of an encrypted DB cluster must be encrypted using the same KMS key as the DB cluster\.
 + You can't convert an unencrypted DB cluster to an encrypted one\. However, you can restore an unencrypted snapshot to an encrypted Aurora DB cluster\. To do this, specify a KMS key when you restore from the unencrypted snapshot\.

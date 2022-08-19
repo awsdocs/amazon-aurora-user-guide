@@ -4,6 +4,7 @@ To add some types of functionality to your Aurora PostgreSQL\-Compatible Edition
 
 Following, you can find information about setting up and using some of the extensions and FDWs available for Aurora PostgreSQL\. For listings of the extensions and FDWs that you can use with currently available Aurora PostgreSQL versions, see [Extension versions for Aurora PostgreSQL\-Compatible Edition](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Extensions.html) in the *Release Notes for Aurora PostgreSQL*\.
 + [Managing large objects with the lo module](PostgreSQL_large_objects_lo_extension.md)
++ [Managing spatial data with the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md)
 + [Scheduling maintenance with the PostgreSQL pg\_cron extension](PostgreSQL_pg_cron.md)
 + [Managing PostgreSQL partitions with the pg\_partman extension](PostgreSQL_Partitions.md)
 + [Working with Oracle databases by using the oracle\_fdw extension](Appendix.PostgreSQL.CommonDBATasks.Extensions.foreign-data-wrappers.md#postgresql-oracle-fdw)

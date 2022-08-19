@@ -10,7 +10,7 @@ This tutorial works with Amazon Linux and might not work for other versions of L
 
 In the tutorial that follows, you specify the VPC, subnets, and security groups when you create the DB cluster\. You also specify them when you create the EC2 instance to host your web server\. The VPC, subnets, and security groups are required for the DB cluster and the web server to communicate\. After the VPC is set up, this tutorial shows you how to create the DB cluster and install the web server\. You connect your web server to your DB cluster in the VPC using the DB cluster writer endpoint\.
 
-1. Complete the tasks in [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
+1. Complete the tasks in [Tutorial: Create a VPC for use with a DB cluster \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
 
    Before you begin this tutorial, make sure that you have a VPC with both public and private subnets, and corresponding security groups\. If you don't have these, complete the following tasks in the tutorial: 
 
@@ -18,7 +18,7 @@ In the tutorial that follows, you specify the VPC, subnets, and security groups 
 
    1. [Create a VPC security group for a public web server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)
 
-   1. [Create a VPC security group for a private DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB)
+   1. [Create a VPC security group for a private DB cluster](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB)
 
    1. [Create a DB subnet group](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.DBSubnetGroup)
 
@@ -28,4 +28,4 @@ In the tutorial that follows, you specify the VPC, subnets, and security groups 
 
 The following diagram shows the configuration when the tutorial is complete\.
 
-![\[Single VPC Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/con-VPC-sec-grp.png)
+![\[Single VPC Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/con-VPC-sec-grp-aurora.png)

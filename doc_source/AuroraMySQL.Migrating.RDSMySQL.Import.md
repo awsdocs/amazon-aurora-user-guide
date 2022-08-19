@@ -166,7 +166,7 @@ You can also choose for your new Aurora MySQL DB cluster to be encrypted at rest
      + Its first character must be a letter\.
      + It cannot end with a hyphen or contain two consecutive hyphens\.
      + It must be unique for all DB instances per AWS account, per AWS Region\.
-   + **Virtual Private Cloud \(VPC\)**: If you have an existing VPC, then you can use that VPC with your Aurora MySQL DB cluster by selecting your VPC identifier, for example `vpc-a464d1c1`\. For information on creating a VPC, see [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
+   + **Virtual Private Cloud \(VPC\)**: If you have an existing VPC, then you can use that VPC with your Aurora MySQL DB cluster by selecting your VPC identifier, for example `vpc-a464d1c1`\. For information on creating a VPC, see [Tutorial: Create a VPC for use with a DB cluster \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
 
      Otherwise, you can choose to have Aurora create a VPC for you by selecting **Create a new VPC**\. 
    + **Subnet group**: If you have an existing subnet group, then you can use that subnet group with your Aurora MySQL DB cluster by selecting your subnet group identifier, for example `gs-subnet-group1`\.

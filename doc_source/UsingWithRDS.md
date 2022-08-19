@@ -9,7 +9,7 @@ Security is a shared responsibility between AWS and you\. The [shared responsibi
 This documentation helps you understand how to apply the shared responsibility model when using Amazon Aurora\. The following topics show you how to configure Amazon Aurora to meet your security and compliance objectives\. You also learn how to use other AWS services that help you monitor and secure your Amazon Aurora resources\. 
 
 You can manage access to your Amazon Aurora resources and your databases on a DB cluster\. The method you use to manage access depends on what type of task the user needs to perform with Amazon Aurora: 
-+ Run your DB cluster in a virtual private cloud \(VPC\) based on the Amazon VPC service for the greatest possible network access control\. For more information about creating a DB cluster in a VPC, see [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)\.
++ Run your DB cluster in a virtual private cloud \(VPC\) based on the Amazon VPC service for the greatest possible network access control\. For more information about creating a DB cluster in a VPC, see [Amazon VPC VPCs and Amazon Aurora](USER_VPC.md)\.
 + Use AWS Identity and Access Management \(IAM\) policies to assign permissions that determine who is allowed to manage Amazon Aurora resources\. For example, you can use IAM to determine who is allowed to create, describe, modify, and delete DB clusters, tag resources, or modify security groups\.
 
    For information on setting up an IAM user, see [Create an IAM user](CHAP_SettingUp_Aurora.md#CHAP_SettingUp_Aurora.IAM)\.
@@ -27,7 +27,7 @@ Aurora includes a high\-performance storage subsystem\. Its MySQL\- and PostgreS
 For both Amazon RDS and Aurora, you can access the RDS API programmatically, and you can use the AWS CLI to access the RDS API interactively\. Some RDS API operations and AWS CLI commands apply to both Amazon RDS and Aurora, while others apply to either Amazon RDS or Aurora\. For information about RDS API operations, see [Amazon RDS API reference](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/Welcome.html)\. For more information about the AWS CLI, see [AWS Command Line Interface reference for Amazon RDS](https://docs.aws.amazon.com/cli/latest/reference/rds/index.html)\. 
 
 **Note**  
-You only have to configure security for your use cases\. You don't have to configure security access for processes that Amazon Aurora manages\. These include creating backups, replicating data between a primary DB instance and a read replica, and other processes\.
+You have to configure security only for your use cases\. You don't have to configure security access for processes that Amazon Aurora manages\. These include creating backups, automatic failover, and other processes\.
 
 For more information on managing access to Amazon Aurora resources and your databases on a DB cluster, see the following topics\.
 
@@ -44,4 +44,4 @@ For more information on managing access to Amazon Aurora resources and your data
 + [Controlling access with security groups](Overview.RDSSecurityGroups.md)
 + [Master user account privileges](UsingWithRDS.MasterAccounts.md)
 + [Using service\-linked roles for Amazon Aurora](UsingWithRDS.IAM.ServiceLinkedRoles.md)
-+ [Amazon Virtual Private Cloud VPCs and Amazon Aurora](USER_VPC.md)
++ [Amazon VPC VPCs and Amazon Aurora](USER_VPC.md)

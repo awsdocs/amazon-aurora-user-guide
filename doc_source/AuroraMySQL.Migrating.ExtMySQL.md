@@ -19,6 +19,8 @@ Aurora MySQL doesn't restore everything from your database\. You should save the
 + Stored procedures
 + Time zone information\. Time zone information is loaded from the local operating system of your Amazon Aurora MySQL DB cluster\. For more information, see [Local time zone for Amazon Aurora DB clusters](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.LocalTimeZone)\.
 
+You can't migrate data from a DB snapshot export to Amazon S3\. You use Percona XtraBackup to back up your data to S3\. For more information, see [Installing Percona XtraBackup](#AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs.XtraBackup)\.
+
 You can't restore from an encrypted source database, but you can encrypt the data being migrated\. You can also leave the data unencrypted during the migration process\.
 
 You can't restore to an Aurora Serverless DB cluster\.

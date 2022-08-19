@@ -34,7 +34,7 @@ You can modify the scaling configuration of an Aurora DB cluster with the AWS Ma
    + Choose an Aurora MySQL version 2 version number if you want to perform an in\-place upgrade from a MySQL 5\.6–compatible cluster to a MySQL 5\.7–compatible one\.
    + Choose an Aurora PostgreSQL version 11 version number if you want to perform an in\-place upgrade from a PostgreSQL 10–compatible cluster to a PostgreSQL 11–compatible one\.
 
-   The following example shows an in\-place upgrade from Aurora MySQL 5\.6\.10a to 2\.07\.1\.  
+   The following example shows an in\-place upgrade from Aurora MySQL 1\.22\.3 to 2\.08\.3\.  
 ![\[Upgrading an Aurora Serverless v1 DB cluster using the console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/modify-serverless-v1-ams-cluster.png)
 
    If you perform a major version upgrade, leave all the other properties the same\. To change any of the other properties, do another **Modify** operation after the upgrade finishes\.
@@ -82,7 +82,7 @@ For Linux, macOS, or Unix:
 ```
 aws rds modify-db-cluster \
     --db-cluster-identifier sample-cluster \
-    --engine-version 5.7.mysql_aurora.2.07.1 \
+    --engine-version 5.7.mysql_aurora.2.08.3 \
     --allow-major-version-upgrade
 ```
 
@@ -91,7 +91,7 @@ For Windows:
 ```
 aws rds modify-db-cluster ^
     --db-cluster-identifier sample-cluster ^
-    --engine-version 5.7.mysql_aurora.2.07.1 ^
+    --engine-version 5.7.mysql_aurora.2.08.3 ^
     --allow-major-version-upgrade
 ```
 

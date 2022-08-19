@@ -115,11 +115,11 @@ Use the following procedure\.
 For Linux, macOS, or Unix:
 
 ```
-aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 5.6.10a \
+aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 5.6.mysql_aurora.1.22.3 \
 --engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true \
 --master-username username --master-user-password password
 
-aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql --engine-version 5.7.mysql_aurora.2.07.1 \
+aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql --engine-version 5.7.mysql_aurora.2.08.3 \
 --engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true \
 --master-username username --master-user-password password
 ```
@@ -127,11 +127,11 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
 For Windows:
 
 ```
-aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 5.6.10a ^
+aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 5.6.mysql_aurora.1.22.3 ^
 --engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true ^
 --master-username username --master-user-password password
 
-aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql --engine-version 5.7.mysql_aurora.2.07.1 ^
+aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql --engine-version 5.7.mysql_aurora.2.08.3 ^
 --engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true ^
 --master-username username --master-user-password password
 ```

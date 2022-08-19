@@ -398,17 +398,17 @@ The process of upgrading a DB cluster from Aurora Serverless v1 to Aurora Server
 
 1. Create a DB cluster snapshot of the Aurora Serverless v1 cluster\. Follow the procedure in [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\.
 
-1. Restore the snapshot to create a new, provisioned DB cluster running Aurora MySQL version 2\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
+1. Restore the snapshot to create a new, provisioned \(that is, *not* Aurora Serverless\) DB cluster running Aurora MySQL version 2\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
 
    Choose the latest minor engine version available for the new cluster, for example, 2\.10\.2\.
 
 1. Create a DB cluster snapshot of the provisioned Aurora MySQL version 2 cluster\.
 
-1. Restore the snapshot to create a new, provisioned DB cluster running Aurora MySQL version 3 that is compatible with Aurora Serverless v2\.
+1. Restore the snapshot to create a new, provisioned DB cluster running Aurora MySQL version 3 that's compatible with Aurora Serverless v2, for example, 3\.02\.0\.
 
-   For compatible versions, see [Aurora Serverless v2 requires minimum engine versions](aurora-serverless-v2.requirements.md#aurora-serverless-v2.requirements.versions)\.
+   For compatible versions, see [Aurora Serverless v2](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2)\.
 
-1. Modify the writer DB instance of the provisioned DB cluster to use the Serverless v2 DB instance class\.
+1. Modify the writer DB instance of the provisioned DB cluster to use the **Serverless v2** DB instance class\.
 
    For details, see [Converting a provisioned writer or reader to Aurora Serverless v2](aurora-serverless-v2-administration.md#aurora-serverless-v2-converting-from-provisioned)\.
 
@@ -422,13 +422,15 @@ The process of upgrading a DB cluster from Aurora Serverless v1 to Aurora Server
 
 1. Create a DB cluster snapshot of the Aurora Serverless v1 cluster\. Follow the procedure in [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\.
 
-1. Restore the snapshot to create a new, provisioned DB cluster\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
+1. Restore the snapshot to create a new, provisioned \(that is, *not* Aurora Serverless\) DB cluster\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
 
    Choose the latest minor engine version available for the new cluster, for example, 10\.21\.
 
-1. Modify the DB cluster to upgrade it to an Aurora PostgreSQL version that's compatible with Aurora Serverless v2, for example, 13\.7\. Follow the procedure in [Upgrading the Aurora PostgreSQL engine to a new major version](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.Upgrading.Manual)\.
+1. Modify the provisioned DB cluster to upgrade it to an Aurora PostgreSQL version that's compatible with Aurora Serverless v2, for example, 13\.7\.
 
-1. Modify the writer DB instance of the provisioned DB cluster to use the Serverless v2 DB instance class\.
+   Follow the procedure in [Upgrading the Aurora PostgreSQL engine to a new major version](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.Upgrading.Manual)\. For compatible versions, see [Aurora Serverless v2](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2)\.
+
+1. Modify the writer DB instance of the provisioned DB cluster to use the **Serverless v2** DB instance class\.
 
    For details, see [Converting a provisioned writer or reader to Aurora Serverless v2](aurora-serverless-v2-administration.md#aurora-serverless-v2-converting-from-provisioned)\.
 
