@@ -68,7 +68,7 @@ Following, you can find a discussion of several configuration changes for Aurora
 
 ### Reducing DNS cache timeouts<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.Timeouts"></a>
 
-When your application tries to establish a connection after a failover, the new Aurora PostgreSQL writer will be a previous reader\. You can find it by using the Aurora read\-only endpoint before DNS updates have fully propagated\. Setting the java DNS time to live \(TTL\) to a low value helps cycle between reader nodes on later connection attempts\.
+When your application tries to establish a connection after a failover, the new Aurora PostgreSQL writer will be a previous reader\. You can find it by using the Aurora read\-only endpoint before DNS updates have fully propagated\. Setting the java DNS time to live \(TTL\) to a low value, such as under 30 seconds, helps cycle between reader nodes on later connection attempts\.
 
 ```
 // Sets internal TTL to match the Aurora RO Endpoint TTL

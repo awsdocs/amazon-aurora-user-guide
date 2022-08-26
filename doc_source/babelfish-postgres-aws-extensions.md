@@ -98,7 +98,7 @@ You can now use Amazon S3 with the `aws_s3` extension with your Babelfish DB clu
 1. Use the `aws_s3` extension with your Babelfish DB cluster\. 
 
    When you do, make sure to reference the tables as they exist in the context of PostgreSQL\. That is, if you want to import into a Babelfish table named `[database].[schema].[tableA]`, refer to that table as `database_schema_tableA` in the `aws_s3` function:
-   + For an example of using an `aws_s3` function to import data, see [Using the aws\_s3\.table\_import\_from\_s3 function to import Amazon S3 data](USER_PostgreSQL.S3Import.md#USER_PostgreSQL.S3Import.FileFormats)\. 
+   + For an example of using an `aws_s3` function to import data, see [Importing data from Amazon S3 to your Aurora PostgreSQL DB cluster](USER_PostgreSQL.S3Import.md#USER_PostgreSQL.S3Import.FileFormats)\. 
    + For examples of using `aws_s3` functions to export data, see [Exporting query data using the aws\_s3\.query\_export\_to\_s3 function](postgresql-s3-export.md#postgresql-s3-export-examples)\. 
 
 1. Make sure to reference Babelfish tables using PostgreSQL naming when using the `aws_s3` extension and Amazon S3, as shown in the following table\.
@@ -108,7 +108,7 @@ You can now use Amazon S3 with the `aws_s3` extension with your Babelfish DB clu
 | --- | --- | 
 | `database.schema.table` | `database_schema_table` | 
 
-To learn more about using Amazon S3 with Aurora PostgreSQL, see [Importing Amazon S3 data into an Aurora PostgreSQL DB cluster](USER_PostgreSQL.S3Import.md) and [Exporting data from an Aurora PostgreSQL DB cluster to Amazon S3](postgresql-s3-export.md)\. 
+To learn more about using Amazon S3 with Aurora PostgreSQL, see [Importing data from Amazon S3 into an Aurora PostgreSQL DB cluster](USER_PostgreSQL.S3Import.md) and [Exporting data from an Aurora PostgreSQL DB cluster to Amazon S3](postgresql-s3-export.md)\. 
 
 ## Using Babelfish with AWS Lambda<a name="babelfish-postgres-aws-extensions-using-aws_lambda"></a>
 

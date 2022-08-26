@@ -42,6 +42,7 @@ In the following table you can find T\-SQL functionality supported by different 
 | ISJSON | ✓ | ✓ | – | – | 
 | JSON\_QUERY | ✓ | ✓ | – | – | 
 | JSON\_VALUE | ✓ | ✓ | – | – | 
+| OPENJSON | ✓ | – | – | – | 
 | ORIGINAL\_LOGIN | ✓ | ✓ | ✓ | – | 
 | PATINDEX | ✓ | – | – | – | 
 | SCHEMA\_NAME | ✓ | ✓ | ✓ | – | 

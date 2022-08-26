@@ -9,23 +9,7 @@ The Data API and query editor aren't supported for Aurora Serverless v2\.
 
 ## Availability of the query editor<a name="query-editor.regions"></a>
 
-The query editor is available only for Aurora Serverless v1 DB clusters using specific Aurora MySQL and Aurora PostgreSQL versions that support the Data API\. For more information, see [Data API for Aurora Serverless v1](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API)\. 
-
-The query editor is currently available for Aurora Serverless v1 in the following AWS Regions:
-+ US East \(Ohio\)
-+ US East \(N\. Virginia\)
-+ US West \(N\. California\)
-+ US West \(Oregon\)
-+ Asia Pacific \(Mumbai\)
-+ Asia Pacific \(Seoul\)
-+ Asia Pacific \(Singapore\)
-+ Asia Pacific \(Sydney\)
-+ Asia Pacific \(Tokyo\)
-+ Canada \(Central\)
-+ Europe \(Frankfurt\)
-+ Europe \(Ireland\)
-+ Europe \(London\)
-+ Europe \(Paris\)
+The query editor is available only for Aurora Serverless v1 DB clusters using specific Aurora MySQL and Aurora PostgreSQL versions that support the Data API\. The query editor is available only in AWS Regions where the Data API is supported\. For more information, see [Data API for Aurora Serverless v1](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API)\.
 
 ## Authorizing access to the query editor<a name="query-editor.access"></a>
 

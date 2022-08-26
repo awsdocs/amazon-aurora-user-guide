@@ -4,13 +4,13 @@
 *****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
-Amazon's trademarks and trade dress may not be used in 
-     connection with any product or service that is not Amazon's, 
-     in any manner that is likely to cause confusion among customers, 
-     or in any manner that disparages or discredits Amazon. All other 
-     trademarks not owned by Amazon are the property of their respective
-     owners, who may or may not be affiliated with, connected to, or 
-     sponsored by Amazon.
+Amazon's trademarks and trade dress may not be used in
+connection with any product or service that is not Amazon's,
+in any manner that is likely to cause confusion among customers,
+or in any manner that disparages or discredits Amazon. All other
+trademarks not owned by Amazon are the property of their respective
+owners, who may or may not be affiliated with, connected to, or
+sponsored by Amazon.
 
 -----
 ## Contents
@@ -309,7 +309,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)
       + [Using PostgreSQL logical replication with Aurora](AuroraPostgreSQL.Replication.Logical.md)
    + [Integrating Amazon Aurora PostgreSQL with other AWS services](AuroraPostgreSQL.Integrating.md)
-      + [Importing Amazon S3 data into an Aurora PostgreSQL DB cluster](USER_PostgreSQL.S3Import.md)
+      + [Importing data from Amazon S3 into an Aurora PostgreSQL DB cluster](USER_PostgreSQL.S3Import.md)
       + [Exporting data from an Aurora PostgreSQL DB cluster to Amazon S3](postgresql-s3-export.md)
       + [Invoking an AWS Lambda function from an Aurora PostgreSQL DB cluster](PostgreSQL-Lambda.md)
          + [AWS Lambda function reference](PostgreSQL-Lambda-functions.md)

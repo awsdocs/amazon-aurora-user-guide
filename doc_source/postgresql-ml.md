@@ -29,7 +29,7 @@ Aurora machine learning for PostgreSQL connects an Aurora cluster to SageMaker o
 
 ## Prerequisites for Aurora machine learning<a name="postgresql-ml-prereqs"></a>
 
-Aurora machine learning is available on any Aurora cluster that's running a supported Aurora PostgreSQL 10 or higher major version in an AWS Region that supports Aurora machine learning\. You can upgrade an Aurora cluster that's running a lower version of Aurora PostgreSQL to a supported higher version if you want to use Aurora machine learning with that cluster\. For more information, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
+You can upgrade an Aurora cluster that's running a lower version of Aurora PostgreSQL to a supported higher version if you want to use Aurora machine learning with that cluster\. For more information, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
 For more information about Regions and Aurora version availability, see [Aurora machine learning](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML)\. 
 

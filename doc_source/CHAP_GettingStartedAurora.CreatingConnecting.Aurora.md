@@ -72,8 +72,7 @@ For information about creating DB clusters with **Standard create**, see [Creati
 
    If you chose to use an automatically generated password, the **View credential details** button appears on the **Databases** page\.
 
-   To view the user name and password for the DB cluster, choose **View credential details**\.  
-![\[User credentials after automatic password generation.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-credentials.png)
+   To view the user name and password for the DB cluster, choose **View credential details**\.
 
    To connect to the DB cluster as the master user, use the user name and password that appear\.
 **Important**  

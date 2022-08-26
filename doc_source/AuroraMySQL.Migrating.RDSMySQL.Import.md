@@ -169,7 +169,7 @@ You can also choose for your new Aurora MySQL DB cluster to be encrypted at rest
    + **Virtual Private Cloud \(VPC\)**: If you have an existing VPC, then you can use that VPC with your Aurora MySQL DB cluster by selecting your VPC identifier, for example `vpc-a464d1c1`\. For information on creating a VPC, see [Tutorial: Create a VPC for use with a DB cluster \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
 
      Otherwise, you can choose to have Aurora create a VPC for you by selecting **Create a new VPC**\. 
-   + **Subnet group**: If you have an existing subnet group, then you can use that subnet group with your Aurora MySQL DB cluster by selecting your subnet group identifier, for example `gs-subnet-group1`\.
+   + **DB subnet group**: If you have an existing subnet group, then you can use that subnet group with your Aurora MySQL DB cluster by selecting your subnet group identifier, for example `gs-subnet-group1`\.
 
      Otherwise, you can choose to have Aurora create a subnet group for you by selecting **Create a new subnet group**\. 
    + **Public accessibility**: Select **No** to specify that instances in your DB cluster can only be accessed by resources inside of your VPC\. Select **Yes** to specify that instances in your DB cluster can be accessed by resources on the public network\. The default is **Yes**\.

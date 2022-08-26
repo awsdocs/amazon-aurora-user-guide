@@ -71,7 +71,7 @@ aurora_version
 |  MySQL 5\.6  |  Aurora MySQL 1  | 
 |  MySQL 5\.7  |  Aurora MySQL 2  | 
 |  MySQL 8\.0  |  Aurora MySQL 3  | 
-|  PostgreSQL 9\.6  |  Aurora PostgreSQL 1  | 
+|  PostgreSQL 9\.6 \(deprecated\)  |  Aurora PostgreSQL 1  | 
 |  PostgreSQL 10  |  Aurora PostgreSQL 2\. Applies to PostgreSQL 10\.17 and older versions only\. For version 10\.18 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in patch location\.  | 
 |  PostgreSQL 11  |  Aurora PostgreSQL 3\. Applies to PostgreSQL 11\.12 and older versions only\. For version 11\.13 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location\.  | 
 |  PostgreSQL 12  |  Aurora PostgreSQL 4\. Applies to PostgreSQL 12\.7 and older versions only\. For version 12\.8 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location\. | 

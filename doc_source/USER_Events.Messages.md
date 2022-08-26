@@ -38,7 +38,6 @@ No event category exists for Aurora Serverless in the DB cluster event type\. Th
 |  global failover  | RDS\-EVENT\-0185 |  The global database failover is finished on the primary DB cluster\. Replicas might take long to come online after the failover completes\.  | 
 |  global failover  | RDS\-EVENT\-0186 |  The global database failover is canceled\.  | 
 |  global failover  | RDS\-EVENT\-0187 |  The global failover to the DB cluster failed\.  | 
-|  low storage  | RDS\-EVENT\-0227 |  The Aurora storage subsystem is running low on space\.  | 
 |  maintenance  | RDS\-EVENT\-0156 |  The DB cluster has a DB engine minor version upgrade available\.  | 
 |  notification  | RDS\-EVENT\-0076 |  Migration to an Aurora DB cluster failed\.  | 
 |  notification  | RDS\-EVENT\-0077 |  An attempt to convert a table from the source database to InnoDB failed during the migration to an Aurora DB cluster\.  | 
@@ -62,7 +61,7 @@ No event category exists for Aurora Serverless in the DB cluster event type\. Th
 The following table shows the event category and a list of events when a DB instance is the source type\.
 
 
-|  Category  | Amazon RDS event ID |  Description  | 
+|  Category  | RDS event ID |  Description  | 
 | --- | --- | --- | 
 |  availability  | RDS\-EVENT\-0006 |  The DB instance restarted\.  | 
 |  availability  | RDS\-EVENT\-0004 |  DB instance shutdown\.  | 
@@ -91,6 +90,7 @@ The following table shows the event category and a list of events when a DB inst
 |  failure  | RDS\-EVENT\-0082 |  Aurora was unable to copy backup data from an Amazon S3 bucket\. It is likely that the permissions for Aurora to access the Amazon S3 bucket are configured incorrectly\. For more information, see [Migrating data from MySQL by using an Amazon S3 bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3) \.   | 
 |  low storage  | RDS\-EVENT\-0007 |  The allocated storage for the DB instance has been consumed\. To resolve this issue, allocate additional storage for the DB instance\. For more information, see the [RDS FAQ](https://aws.amazon.com/rds/faqs/#20)\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
 |  low storage  | RDS\-EVENT\-0089 |  The DB instance has consumed more than 90% of its allocated storage\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
+|  low storage  | RDS\-EVENT\-0227 |  The Aurora storage subsystem is running low on space\.  | 
 |  maintenance  | RDS\-EVENT\-0026 |  Offline maintenance of the DB instance is taking place\. The DB instance is currently unavailable\.  | 
 |  maintenance  | RDS\-EVENT\-0027 |  Offline maintenance of the DB instance is complete\. The DB instance is now available\.  | 
 |  maintenance  | RDS\-EVENT\-0047 |  The DB instance was patched\.  | 

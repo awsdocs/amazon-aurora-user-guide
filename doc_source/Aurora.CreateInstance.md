@@ -6,46 +6,108 @@ Following, you can find out how to create an Aurora DB cluster\. To get started,
 
 For simple instructions on connecting to your Aurora DB cluster, see [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\.
 
+**Topics**
++ [DB cluster prerequisites](#Aurora.CreateInstance.Prerequisites)
++ [Creating a DB cluster](#Aurora.CreateInstance.Creating)
++ [Settings for Aurora DB clusters](#Aurora.CreateInstance.Settings)
++ [Settings that don't apply to Amazon Aurora for DB clusters](#Aurora.CreateDBCluster.SettingsNotApplicableDBClusters)
++ [Settings that don't apply to Amazon Aurora DB instances](#Aurora.CreateInstance.SettingsNotApplicable)
+
 ## DB cluster prerequisites<a name="Aurora.CreateInstance.Prerequisites"></a>
 
 **Important**  
-Before you can create an Aurora DB cluster, you must complete the tasks in [Setting up your environment for Amazon Aurora](CHAP_SettingUp_Aurora.md)\. 
+Before you can create an Aurora DB cluster, you must complete the tasks in [Setting up your environment for Amazon Aurora](CHAP_SettingUp_Aurora.md)\.
 
-The following are prerequisites to create a DB cluster\.
+The following are prerequisites to complete before creating a DB cluster\.
 
-### VPC, subnets, and AZs<a name="Aurora.CreateInstance.Prerequisites.VPC"></a>
+**Topics**
++ [Configure the network for the DB cluster](#Aurora.CreateInstance.Prerequisites.VPC)
++ [Additional prerequisites](#Aurora.CreateInstance.Prerequisites.Additional)
+
+### Configure the network for the DB cluster<a name="Aurora.CreateInstance.Prerequisites.VPC"></a>
 
 You can create an Amazon Aurora DB cluster only in a virtual private cloud \(VPC\) based on the Amazon VPC service, in an AWS Region that has at least two Availability Zones\. The DB subnet group that you choose for the DB cluster must cover at least two Availability Zones\. This configuration ensures that your DB cluster always has at least one DB instance available for failover, in the unlikely event of an Availability Zone failure\.
 
-If you use the AWS Management Console to create your Aurora DB cluster, you can have Amazon RDS automatically create a VPC for you\. Or you can use an existing VPC or create a new VPC for your Aurora DB cluster\. Whichever approach you take, your VPC must have at least one subnet in each of at least two Availability Zones for you to use it with an Amazon Aurora DB cluster\. 
+If you plan to set up connectivity between your new DB cluster and an EC2 instance in the same VPC, you can do so during DB cluster creation\. If you plan to connect to your DB cluster from resources other than EC2 instances in the same VPC, you can configure the network connections manually\.
 
-By default, Amazon RDS creates the primary DB instance and the Aurora Replica in the AZs automatically for you\. To choose a specific AZ, you need to change the **Availability & durability** Multi\-AZ deployment setting to **Don't create an Aurora Replica**\. Doing so exposes a drop\-down selector that lets you choose from among the AZs in your VPC\. However, we strongly recommend that you keep the default setting and let Amazon RDS create a Multi\-AZ deployment and choose AZs for you\. By doing so, your Aurora DB cluster is created with the fast failover and high availability features that are two of Aurora's key benefits\. 
+**Topics**
++ [Configure automatic network connectivity with an EC2 instance](#Aurora.CreateInstance.Prerequisites.VPC.Automatic)
++ [Configure the network manually](#Aurora.CreateInstance.Prerequisites.VPC.Manual)
 
-For more information, see [Tutorial: Create a VPC for use with a DB cluster \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. For information on VPCs, see [Amazon VPC VPCs and Amazon Aurora](USER_VPC.md)\.
+#### Configure automatic network connectivity with an EC2 instance<a name="Aurora.CreateInstance.Prerequisites.VPC.Automatic"></a>
 
-If you don't have a default VPC or you haven't created a VPC, you can have Amazon RDS automatically create a VPC for you when you create an Aurora DB cluster using the console\. Otherwise, you must do the following:
-+ Create a VPC with at least one subnet in each of at least two of the Availability Zones in the AWS Region where you want to deploy your DB cluster\. For more information, see [Tutorial: Create a VPC for use with a DB cluster \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
-+ Specify a VPC security group that authorizes connections to your Aurora DB cluster\. For more information, see [Working with a DB cluster in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#Overview.RDSVPC.Create)\.
-+ Specify an RDS DB subnet group that defines at least two subnets in the VPC that can be used by the Aurora DB cluster\. For more information, see [Working with DB subnet groups](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Subnets)\.
+When you create an Aurora DB cluster, you can use the AWS Management Console to set up connectivity between an Amazon EC2 instance and the new DB cluster\. When you do so, RDS configures your VPC and network settings automatically\. The DB cluster is created in the same VPC as the EC2 instance so that the EC2 instance can access the DB cluster\.
+
+The following are requirements for connecting an EC2 instance with the DB cluster:
++ The EC2 instance must exist in the AWS Region before you create the DB cluster\.
+
+  If no EC2 instances exist in the AWS Region, the console provides a link to create one\.
++ Currently, the DB cluster can't be an Aurora Serverless DB cluster or part of an Aurora global database\.
++ The user who is creating the DB instance must have permissions to perform the following operations:
+  + `ec2:AssociateRouteTable` 
+  + `ec2:AuthorizeSecurityGroupEgress` 
+  + `ec2:CreateRouteTable` 
+  + `ec2:CreateSubnet` 
+  + `ec2:CreateSecurityGroup` 
+  + `ec2:DescribeInstances` 
+  + `ec2:DescribeNetworkInterfaces` 
+  + `ec2:DescribeRouteTables` 
+  + `ec2:DescribeSecurityGroups` 
+  + `ec2:DescribeSubnets` 
+  + `ec2:ModifyNetworkInterfaceAttribute` 
+  + `ec2:RevokeSecurityGroupEgress` 
+
+Using this option creates a private DB cluster\. The DB cluster uses a DB subnet group with only private subnets to restrict access to resources within the VPC\.
+
+To connect an EC2 instance to the DB cluster, choose **Connect to an EC2 compute resource** in the **Connectivity** section on the **Create database** page\.
+
+![\[Connect an EC2 instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/ec2-set-up-connection-create.png)
+
+When you choose **Connect to an EC2 compute resource**, RDS sets the following options automatically\. You can't change these settings unless you choose not to set up connectivity with an EC2 instance by choosing **Don't connect to an EC2 compute resource**\.
+
+
+****  
+
+| Console option | Automatic setting | 
+| --- | --- | 
+|  **Network type**  |  RDS sets network type to **IPv4**\. Currently, dual\-stack mode isn't supported when you set up a connection between an EC2 instance and the DB cluster\.  | 
+|  **Virtual Private Cloud \(VPC\)**  |  RDS sets the VPC to the one associated with the EC2 instance\.  | 
+|  **DB subnet group**  |  A DB subnet group with a private subnet in each Availability Zone in the AWS Region is required\. If a DB subnet group that meets this requirement exists, RDS uses the existing DB subnet group\. If a DB subnet group that meets this requirement doesn’t exist, RDS uses an available private subnet in each Availability Zone to create a DB subnet group using the private subnets\. If a private subnet isn’t available in an Availability Zone, RDS creates a private subnet in the Availability Zone and then creates the DB subnet group\. When a private subnet is available, RDS uses the route table associated with it and adds any subnets it creates to this route table\. When no private subnet is available, RDS creates a route table with no internet gateway access and adds the subnets it creates to the route table\.  | 
+|  **Public access**  |  RDS chooses **No** so that the DB cluster isn't publicly accessible\. For security, it is a best practice to keep the database private and make sure it isn't accessible from the internet\.  | 
+|  **VPC security group \(firewall\)**  |  RDS creates a new security group that is associated with the DB cluster\. The security group is named `rds-ec2-n`, where `n` is a number\. This security group includes an inbound rule with the EC2 VPC security group \(firewall\) as the source\. This security group that is associated with the DB cluster allows the EC2 instance to access the DB cluster\. RDS also creates a new security group that is associated with the EC2 instance\. The security group is named `ec2-rds-n`, where `n` is a number\. This security group includes an outbound rule with the VPC security group of the DB cluster as the source\. This security group allows the DB cluster to send traffic to the EC2 instance\. You can add another new security group by choosing **Create new** and typing the name of the new security group\. You can add existing security groups by choosing **Choose existing** and selecting security groups to add\.  | 
+|  **Availability Zone**  |  When you don't create an Aurora Replica in **Availability & durability** during DB cluster creation \(Single\-AZ deployment\), RDS chooses the Availability Zone of the EC2 instance\. When you create an Aurora Replica during DB cluster creation \(Multi\-AZ deployment\), RDS chooses the Availability Zone of the EC2 instance for one DB instance in the DB cluster\. RDS randomly chooses a different Availability Zone for the other DB instance in the DB cluster\. Either the primary DB instance or the Aurora Replica is created in the same Availability Zone as the EC2 instance\. There is the possibility of cross Availability Zone costs if the primary DB instance and EC2 instance are in different Availability Zones\.  | 
+
+For more information about these settings, see [Settings for Aurora DB clusters](#Aurora.CreateInstance.Settings)\.
+
+If you make any changes to these settings after the DB cluster is created, the changes might affect the connection between the EC2 instance and the DB cluster\.
+
+#### Configure the network manually<a name="Aurora.CreateInstance.Prerequisites.VPC.Manual"></a>
+
+If you plan to connect to your DB cluster from resources other than EC2 instances in the same VPC, you can configure the network connections manually\. If you use the AWS Management Console to create your DB cluster, you can have Amazon RDS automatically create a VPC for you\. Or you can use an existing VPC or create a new VPC for your Aurora DB cluster\. Whichever approach you take, your VPC must have at least one subnet in each of at least two Availability Zones for you to use it with an Amazon Aurora DB cluster\. 
+
+By default, Amazon RDS creates the primary DB instance and the Aurora Replica in the Availability Zones automatically for you\. To choose a specific Availability Zone, you need to change the **Availability & durability** Multi\-AZ deployment setting to **Don't create an Aurora Replica**\. Doing so exposes an **Availability Zone** setting that lets you choose from among the Availability Zones in your VPC\. However, we strongly recommend that you keep the default setting and let Amazon RDS create a Multi\-AZ deployment and choose Availability Zones for you\. By doing so, your Aurora DB cluster is created with the fast failover and high availability features that are two of Aurora's key benefits\. 
+
+If you don't have a default VPC or you haven't created a VPC, you can have Amazon RDS automatically create a VPC for you when you create a DB cluster using the console\. Otherwise, you must do the following:
++ Create a VPC with at least one subnet in each of at least two of the Availability Zones in the AWS Region where you want to deploy your DB cluster\. For more information, see [Working with a DB cluster in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#Overview.RDSVPC.Create) and [Tutorial: Create a VPC for use with a DB cluster \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
++ Specify a VPC security group that authorizes connections to your DB cluster\. For more information, see [Provide access to the DB cluster in the VPC by creating a security group](CHAP_SettingUp_Aurora.md#CHAP_SettingUp_Aurora.SecurityGroup) and [Controlling access with security groups](Overview.RDSSecurityGroups.md)\.
++ Specify an RDS DB subnet group that defines at least two subnets in the VPC that can be used by the DB cluster\. For more information, see [Working with DB subnet groups](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Subnets)\.
+
+ For information on VPCs, see [Amazon VPC VPCs and Amazon Aurora](USER_VPC.md)\. For a tutorial that configures the network for a private DB cluster, see [Tutorial: Create a VPC for use with a DB cluster \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
 
 ### Additional prerequisites<a name="Aurora.CreateInstance.Prerequisites.Additional"></a>
 
-If you are connecting to AWS using AWS Identity and Access Management \(IAM\) credentials, your AWS account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Identity and access management for Amazon Aurora](UsingWithRDS.IAM.md)\.
+Before you create your DB cluster, consider the following additional prerequisites:
++ If you are connecting to AWS using AWS Identity and Access Management \(IAM\) credentials, your AWS account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Identity and access management for Amazon Aurora](UsingWithRDS.IAM.md)\.
 
-If you are using IAM to access the Amazon RDS console, you must first sign on to the AWS Management Console with your IAM user credentials\. Then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-If you want to tailor the configuration parameters for your DB cluster, you must specify a DB cluster parameter group and DB parameter group with the required parameter settings\. For information about creating or modifying a DB cluster parameter group or DB parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
-
-You must determine the TCP/IP port number to specify for your DB cluster\. The firewalls at some companies block connections to the default ports \(3306 for MySQL, 5432 for PostgreSQL\) for Aurora\. If your company firewall blocks the default port, choose another port for your DB cluster\. All instances in a DB cluster use the same port\.
+  If you are using IAM to access the Amazon RDS console, you must first sign on to the AWS Management Console with your IAM user credentials\. Then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
++ If you want to tailor the configuration parameters for your DB cluster, you must specify a DB cluster parameter group and DB parameter group with the required parameter settings\. For information about creating or modifying a DB cluster parameter group or DB parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
++ Determine the TCP/IP port number to specify for your DB cluster\. The firewalls at some companies block connections to the default ports \(3306 for MySQL, 5432 for PostgreSQL\) for Aurora\. If your company firewall blocks the default port, choose another port for your DB cluster\. All instances in a DB cluster use the same port\.
 
 ## Creating a DB cluster<a name="Aurora.CreateInstance.Creating"></a>
 
 You can create an Aurora DB cluster using the AWS Management Console, the AWS CLI, or the RDS API\.
 
-**Note**  
-If you are using the console, a new console interface is available for database creation\. Choose either the **New Console** or the **Original Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
-
-### New console<a name="Aurora.CreateInstance.Creating.Console"></a>
+### Console<a name="Aurora.CreateInstance.Creating.Console"></a>
 
 You can create a DB instance running MySQL with the AWS Management Console with **Easy create** enabled or not enabled\. With **Easy create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default setting for other configuration options\. With **Easy create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
@@ -95,14 +157,17 @@ For this example, **Standard create** is enabled, and **Easy create** isn't enab
 
    By default, the new DB instance uses an automatically generated password for the master user\.
 
+1. \(Optional\) Set up a connection to a compute resource for this DB cluster\.
+
+   You can configure connectivity between an Amazon EC2 instance and the new DB cluster during DB cluster creation\. For more information, see [Configure automatic network connectivity with an EC2 instance](#Aurora.CreateInstance.Prerequisites.VPC.Automatic)\.
+
 1. For the remaining sections, specify your DB cluster settings\. For information about each setting, see [Settings for Aurora DB clusters](#Aurora.CreateInstance.Settings)\. 
 
 1. Choose **Create database**\. 
 
    If you chose to use an automatically generated password, the **View credential details** button appears on the **Databases** page\.
 
-   To view the master user name and password for the DB cluster, choose **View credential details**\.  
-![\[Master user credentials after automatically generated password.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-credentials.png)
+   To view the master user name and password for the DB cluster, choose **View credential details**\.
 
    To connect to the DB instance as the master user, use the user name and password that appear\.
 **Important**  
@@ -119,43 +184,6 @@ You can't view the master user password again\. If you don't record it, you migh
 ![\[Amazon Aurora DB Instances List\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch04.png)
 
    On the **Connectivity & security** tab, note the port and the endpoint of the writer DB instance\. Use the endpoint and port of the cluster in your JDBC and ODBC connection strings for any application that performs write or read operations\.
-
-### Original console<a name="Aurora.CreateInstance.Creating.CurrentConsole"></a>
-
-**To create an Aurora DB cluster using the AWS Management Console**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the top\-right corner of the AWS Management Console, choose the AWS Region in which you want to create the Aurora DB cluster\.
-
-1. In the navigation pane, choose **Databases**\.
-
-   If the navigation pane is closed, choose the menu icon at the top left to open it\.
-
-1. Choose **Create database** to open the **Select engine** page\.
-
-1. On the **Select engine** page, choose an edition of Aurora\. Choose either MySQL 5\.6\-compatible, MySQL 5\.7\-compatible, MySQL 8\.0\-compatible, or PostgreSQL\-compatible\.  
-![\[Amazon Aurora Select engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/CURRENT-AuroraLaunch01.png)
-
-1. Choose **Next**\.
-
-1. On the **Specify DB details** page, specify your DB instance information\. For information about each setting, see [Settings for Aurora DB clusters](#Aurora.CreateInstance.Settings)\.
-
-   A typical **Specify DB details** page looks like the following\.   
-![\[Amazon Aurora Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/CURRENT-AuroraLaunch02.png)
-
-1. Confirm your master password and choose **Next**\.
-
-1. On the **Configure advanced settings** page, you can customize additional settings for your Aurora DB cluster\. For information about each setting, see [Settings for Aurora DB clusters](#Aurora.CreateInstance.Settings)\. 
-
-1. Choose **Create database** to create your Aurora DB cluster, and then choose **Close**\. 
-
-   On the Amazon RDS console, the new DB cluster appears in the list of DB clusters\. The DB cluster will have a status of **creating** until the DB cluster is created and ready for use\. When the state changes to available, you can connect to the writer instance for your DB cluster\. Depending on the DB cluster class and store allocated, it can take several minutes for the new cluster to be available\.
-
-   To view the newly created cluster, choose **Databases** from the navigation pane in the Amazon RDS console and choose the DB cluster to show the DB cluster details\. For more information, see [Viewing an Amazon Aurora DB cluster](accessing-monitoring.md#Aurora.Viewing)\.  
-![\[Amazon Aurora DB Instances List\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/CURRENT-AuroraLaunch04.png)
-
-   Note the ports and the endpoints of the cluster\. Use the endpoint and port of the writer DB cluster in your JDBC and ODBC connection strings for any application that performs write or read operations\.
 
 ### AWS CLI<a name="Aurora.CreateInstance.Creating.CLI"></a>
 
@@ -337,6 +365,7 @@ Additional settings are available if you are creating an Aurora Serverless v1 DB
 |   **DB cluster parameter group**   |  Choose a DB cluster parameter group\. Aurora has a default DB cluster parameter group you can use, or you can create your own DB cluster parameter group\. For more information about DB cluster parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--db-cluster-parameter-group-name` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `DBClusterParameterGroupName` parameter\.  | 
 |   **DB instance class**   |  Applies only to the provisioned capacity type\. Choose a DB instance class that defines the processing and memory requirements for each instance in the DB cluster\. For more information about DB instance classes, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.  |   Set this value for every DB instance in your Aurora cluster\.  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) and set the `--db-instance-class` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) and set the `DBInstanceClass` parameter\.  | 
 |   **DB parameter group**   |  Choose a parameter group\. Aurora has a default parameter group you can use, or you can create your own parameter group\. For more information about parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.  |   Set this value for every DB instance in your Aurora cluster\.  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) and set the `--db-parameter-group-name` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) and set the `DBParameterGroupName` parameter\.  | 
+|   **DB subnet group**   |  Choose the DB subnet group to use for the DB cluster\. For more information, see [DB cluster prerequisites](#Aurora.CreateInstance.Prerequisites)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--db-subnet-group-name` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `DBSubnetGroupName` parameter\.  | 
 | Enable deletion protection | Choose Enable deletion protection to prevent your DB cluster from being deleted\. If you create a production DB cluster with the console, deletion protection is enabled by default\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--deletion-protection \| --no-deletion-protection` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `DeletionProtection` parameter\.  | 
 |   **Enable encryption**   |  Choose `Enable encryption` to enable encryption at rest for this DB cluster\. For more information, see [Encrypting Amazon Aurora resources](Overview.Encryption.md)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--storage-encrypted \| --no-storage-encrypted` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `StorageEncrypted` parameter\.  | 
 |  **Enable Enhanced Monitoring**  |  Choose **Enable enhanced monitoring** to enable gathering metrics in real time for the operating system that your DB cluster runs on\. For more information, see [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)\.   |   Set these values for every DB instance in your Aurora cluster\.  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) and set the `--monitoring-interval` and `--monitoring-role-arn` options\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) and set the `MonitoringInterval` and `MonitoringRoleArn` parameters\.  | 
@@ -347,16 +376,16 @@ Additional settings are available if you are creating an Aurora Serverless v1 DB
 | **Log exports** | In the Log exports section, choose the logs that you want to start publishing to Amazon CloudWatch Logs\. For more information about publishing Aurora MySQL logs to CloudWatch Logs, see [Publishing Amazon Aurora MySQL logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. For more information about publishing Aurora PostgreSQL logs to CloudWatch Logs, see [Publishing Aurora PostgreSQL logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--enable-cloudwatch-logs-exports` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `EnableCloudwatchLogsExports` parameter\.  | 
 |   **Maintenance window**   |  Choose **Select window** and specify the weekly time range during which system maintenance can occur\. Or choose **No preference** for Amazon RDS to assign a period randomly\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--preferred-maintenance-window` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `PreferredMaintenanceWindow` parameter\.  | 
 |   **Master password**   |  Enter a password to log on to your DB cluster: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html)  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--master-user-password` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `MasterUserPassword` parameter\.  | 
-|   **Master username**   |  Enter a name to use as the master user name to log on to your DB cluster: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html)  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--master-username` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `MasterUsername` parameter\.  | 
+|   **Master username**   |  Enter a name to use as the master user name to log on to your DB cluster: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html) You can't change the master user name after the DB cluster is created\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--master-username` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `MasterUsername` parameter\.  | 
 |   **Multi\-AZ deployment**   |  Applies only to the provisioned capacity type\. Determine if you want to create Aurora Replicas in other Availability Zones for failover support\. If you choose **Create Replica in Different Zone**, then Amazon RDS creates an Aurora Replica for you in your DB cluster in a different Availability Zone than the primary instance for your DB cluster\. For more information about multiple Availability Zones, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--availability-zones` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `AvailabilityZones` parameter\.  | 
 |   **Network type**   |  The IP addressing protocols supported by the DB cluster\. **IPv4** to specify that resources can communicate with the DB cluster only over the IPv4 addressing protocol\. **Dual\-stack mode** to specify that resources can communicate with the DB cluster over IPv4, IPv6, or both\. Use dual\-stack mode if you have any resources that must communicate with your DB cluster over the IPv6 addressing protocol\. To use dual\-stack mode, make sure at least two subnets spanning two Availability Zones that support both the IPv4 and IPv6 network protocol\. Also, make sure you associate an IPv6 CIDR block with subnets in the DB subnet group you specify\. For more information, see [Amazon Aurora IP addressing](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.IP_addressing)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `-network-type` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `NetworkType` parameter\.  | 
 |   **Public access**   |  Choose **Publicly accessible** to give the DB cluster a public IP address, or choose **Not publicly accessible**\. The instances in your DB cluster can be a mix of both public and private DB instances\. For more information about hiding instances from public access, see [Hiding a DB cluster in a VPC from the internet](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Hiding)\. To connect to a DB instance from outside of its Amazon VPC, the DB instance must be publicly accessible, access must be granted using the inbound rules of the DB instance's security group, and other requirements must be met\. For more information, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\. If your DB instance is isn't publicly accessible, you can also use an AWS Site\-to\-Site VPN connection or an AWS Direct Connect connection to access it from a private network\. For more information, see [Internetwork traffic privacy](inter-network-traffic-privacy.md)\.  |   Set this value for every DB instance in your Aurora cluster\.  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) and set the `--publicly-accessible \| --no-publicly-accessible` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) and set the `PubliclyAccessible` parameter\.  | 
+|   **RDS Proxy**   |  Choose **Create an RDS Proxy** to create a proxy for your DB cluster\. Amazon RDS automatically creates an IAM role and a Secrets Manager secret for the proxy\. For more information, see [Using Amazon RDS Proxy](rds-proxy.md)\.   |  Not available when creating a DB cluster\.  | 
 |   **Retention period**   |  Choose the length of time, from 1 to 35 days, that Aurora retains backup copies of the database\. Backup copies can be used for point\-in\-time restores \(PITR\) of your database down to the second\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--backup-retention-period` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `BackupRetentionPeriod` parameter\.  | 
-|   **Subnet group**   |  Choose the DB subnet group to use for the DB cluster\. For more information, see [DB cluster prerequisites](#Aurora.CreateInstance.Prerequisites)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--db-subnet-group-name` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `DBSubnetGroupName` parameter\.  | 
 |  **Turn on Performance Insights**   |  Choose **Turn on Performance Insights** to turn on Amazon RDS Performance Insights\. For more information, see [Monitoring DB load with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\.  |   Set these values for every DB instance in your Aurora cluster\.  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) and set the `--enable-performance-insights \| --no-enable-performance-insights`, `--performance-insights-kms-key-id`, and `--performance-insights-retention-period` options\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) and set the `EnablePerformanceInsights`, `PerformanceInsightsKMSKeyId`, and `PerformanceInsightsRetentionPeriod` parameters\.  | 
 |  **Turn on DevOps Guru**   |  Choose **Turn on DevOps Guru** to turn on Amazon DevOps Guru for your Aurora database\. For DevOps Guru for RDS to provide detailed analysis of performance anomalies, Performance Insights must be turned on\. For more information, see [Setting up DevOps Guru for RDS](devops-guru-for-rds.md#devops-guru-for-rds.configuring)\.  |  You can turn on DevOps Guru for RDS from within the RDS console, but not by using the RDS API or CLI\. For more information about turning on DevOps Guru, see the [https://docs.aws.amazon.com/htdevops-guru/latest/userguide/getting-started.html](https://docs.aws.amazon.com/htdevops-guru/latest/userguide/getting-started.html)\.  | 
 |   **Virtual Private Cloud \(VPC\)**   |  Choose the VPC to host the DB cluster\. Choose **Create a New VPC** to have Amazon RDS create a VPC for you\. For more information, see [DB cluster prerequisites](#Aurora.CreateInstance.Prerequisites)\.  |  For the AWS CLI and API, you specify the VPC security group IDs\.  | 
-|   **VPC security group**   |  Choose **Create new** to have Amazon RDS create a VPC security group for you\. Or choose **Choose existing** and specify one or more VPC security groups to secure network access to the DB cluster\. When you choose **Create new** in the RDS console, a new security group is created with an inbound rule that allows access to the DB instance from the IP address detected in your browser\. For more information, see [DB cluster prerequisites](#Aurora.CreateInstance.Prerequisites)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--vpc-security-group-ids` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `VpcSecurityGroupIds` parameter\.  | 
+|   **VPC security group \(firewall\)**   |  Choose **Create new** to have Amazon RDS create a VPC security group for you\. Or choose **Choose existing** and specify one or more VPC security groups to secure network access to the DB cluster\. When you choose **Create new** in the RDS console, a new security group is created with an inbound rule that allows access to the DB instance from the IP address detected in your browser\. For more information, see [DB cluster prerequisites](#Aurora.CreateInstance.Prerequisites)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--vpc-security-group-ids` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `VpcSecurityGroupIds` parameter\.  | 
 
 ## Settings that don't apply to Amazon Aurora for DB clusters<a name="Aurora.CreateDBCluster.SettingsNotApplicableDBClusters"></a>
 

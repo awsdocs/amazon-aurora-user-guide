@@ -48,6 +48,8 @@ In the table you can find information about certain functionality that isn't cur
 | Identifiers, table or column names that contain @ or \]\] characters | Table or column names that contain an `@` sign or square brackets aren't supported\. | 
 | Inline indexes | Inline indexes aren't supported\. | 
 | Invoking a procedure whose name is in a variable | Using a variable as a procedure name isn't supported\. | 
+| JSON\_MODIFY | Updating JSON string using JSON\_MODIFY isn't supported\. | 
+| FOR JSON clause | Formatting query results as JSON isn't supported\. | 
 | Materialized views | Materialized views aren't supported\. | 
 | NOT FOR REPLICATION clause | This syntax is accepted and ignored\.  | 
 | ODBC escape functions | ODBC escape functions aren't supported\. | 

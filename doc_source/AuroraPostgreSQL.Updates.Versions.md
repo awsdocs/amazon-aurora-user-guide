@@ -11,7 +11,7 @@ Aurora version numbers use the *major*\.*minor*\.*patch* naming scheme\. An Auro
 You can find out the Aurora version number of your Aurora PostgreSQL DB instance with the following SQL query:
 
 ```
-pgres=> SELECT aurora_version();
+postgres=> SELECT aurora_version();
 ```
 
 Starting with the release of PostgreSQL versions 13\.3, 12\.8, 11\.13, 10\.18, and for all other later versions, Aurora version numbers align more closely to the PostgreSQL engine version\. For example, querying an Aurora PostgreSQL 13\.3 DB cluster returns the following:
@@ -36,15 +36,15 @@ aurora_version
 
 Starting with PostgreSQL 10, PostgreSQL database engine versions use a *major*\.*minor* numbering scheme for all releases\. Some examples include PostgreSQL 10\.18, PostgreSQL 12\.7, and PostgreSQL 13\.3\. 
 
-Releases prior to PostgreSQL 10 use a *major*\.*major*\.*minor* numbering scheme in which the first two digits make up the major version number and a third digit denotes a minor version\. For example, PostgreSQL 9\.6 is a major version, with minor versions 9\.6\.19 or 9\.6\.21 indicated by the third digit\. 
+Releases prior to PostgreSQL 10 used a *major*\.*major*\.*minor* numbering scheme in which the first two digits make up the major version number and a third digit denotes a minor version\. For example, PostgreSQL 9\.6 was a major version, with minor versions 9\.6\.21 or 9\.6\.22 indicated by the third digit\.
 
 **Note**  
-The PostgreSQL engine version 9\.6 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\. 
+The PostgreSQL engine version 9\.6 is no longer supported\. To upgrade, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\. For version policies and release timelines, see [How long Amazon Aurora major versions remain available](Aurora.VersionPolicy.md#Aurora.VersionPolicy.MajorVersionLifetime)\.
 
 You can find out the PostgreSQL database engine version number with the following SQL query:
 
 ```
-pgres=> SELECT version();
+postgres=> SELECT version();
 ```
 
 For an Aurora PostgreSQL 13\.3 DB cluster, the results are as follows:

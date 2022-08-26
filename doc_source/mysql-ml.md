@@ -25,7 +25,7 @@ For details about using Aurora and SageMaker together, see [Using SageMaker to r
 
 ## Prerequisites for Aurora machine learning<a name="aurora-ml-prereqs"></a>
 
-Aurora machine learning is available for any Aurora cluster that's running an Aurora MySQL 2\.07\.0 or higher version in an AWS Region that supports Aurora machine learning\. You can upgrade an Aurora cluster that's running a lower version of Aurora MySQL to a supported higher version if you want to use Aurora machine learning with that cluster\. For more information, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\. 
+You can upgrade an Aurora cluster that's running a lower version of Aurora MySQL to a supported higher version if you want to use Aurora machine learning with that cluster\. For more information, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\. 
 
 For more information about Regions and Aurora version availability, see [Aurora machine learning](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML)\. 
 

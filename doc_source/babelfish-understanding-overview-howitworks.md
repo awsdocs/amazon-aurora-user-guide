@@ -16,6 +16,8 @@ However, not all Aurora features are supported\. Currently, Babelfish doesn't su
 + SCRAM \(salted challenge response authentication mechanism\)
 + Zero\-downtime patching \(ZDP\)
 
+Currently, Babelfish isn't a HIPAA eligible service listed in the AWS [HIPAA Eligible Services Reference](https://aws.amazon.com/compliance/hipaa-eligible-services-reference/)\. To learn more, see [Amazon Aurora PostgreSQL](https://docs.aws.amazon.com/whitepapers/latest/architecting-hipaa-security-and-compliance-on-aws/aurora-postgresql.html) in *Architecting for HIPAA Security and Compliance on Amazon Web Services*\. 
+
 Following, you can learn about Babelfish architecture and how the SQL Server databases that you migrate are handled by Babelfish\. When you create your Babelfish DB cluster, you need to make some decisions up front about single database or multiple databases, collations, and other details\. 
 
 **Topics**

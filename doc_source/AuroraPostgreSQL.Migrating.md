@@ -8,7 +8,7 @@ You can migrate data directly from an RDS for PostgreSQL DB snapshot to an Auror
 **[ Migrating an RDS for PostgreSQL DB instance using an Aurora read replica](#AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica)**  
 You can also migrate from an RDS for PostgreSQL DB instance by creating an Aurora PostgreSQL read replica of an RDS for PostgreSQL DB instance\. When the replica lag between the RDS for PostgreSQL DB instance and the Aurora PostgreSQL read replica is zero, you can stop replication\. At this point, you can make the Aurora read replica a standalone Aurora PostgreSQL DB cluster for reading and writing\.
 
-**[Importing S3 data into Aurora PostgreSQL ](USER_PostgreSQL.S3Import.md) **  
+**[Importing data from Amazon S3 into Aurora PostgreSQL ](USER_PostgreSQL.S3Import.md) **  
 You can migrate data by importing it from Amazon S3 into a table belonging to an Aurora PostgreSQL DB cluster\. 
 
 **Migrating from a database that is not PostgreSQL\-compatible**  
@@ -57,7 +57,7 @@ To migrate an RDS for PostgreSQL DB snapshot to an Aurora PostgreSQL DB cluster,
    + **Virtual private cloud \(VPC\)**: If you have an existing VPC, then you can use that VPC with your Aurora PostgreSQL DB cluster by choosing your VPC identifier, for example `vpc-a464d1c1`\. For information about creating a VPC, see [Tutorial: Create a VPC for use with a DB cluster \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
 
      Otherwise, you can choose to have Amazon RDS create a VPC for you by choosing **Create new VPC**\. 
-   + **Subnet group**: If you have an existing subnet group, then you can use that subnet group with your Aurora PostgreSQL DB cluster by choosing your subnet group identifier, for example `gs-subnet-group1`\.
+   + **DB subnet group**: If you have an existing subnet group, then you can use that subnet group with your Aurora PostgreSQL DB cluster by choosing your subnet group identifier, for example `gs-subnet-group1`\.
    + **Public access**: Choose **No** to specify that instances in your DB cluster can only be accessed by resources inside of your VPC\. Choose **Yes** to specify that instances in your DB cluster can be accessed by resources on the public network\.
 **Note**  
 Your production DB cluster might not need to be in a public subnet, because only your application servers require access to your DB cluster\. If your DB cluster doesn't need to be in a public subnet, set **Public access** to **No**\.

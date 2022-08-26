@@ -10,10 +10,10 @@ Because your DB cluster needs to be available only to your web server, and not t
 
 This tutorial configures an additional public and private subnet in a separate Availability Zone\. These subnets aren't used by the tutorial\. An RDS DB subnet group requires a subnet in at least two Availability Zones\. The additional subnet makes it easier to configure more than one Aurora DB instance\.
 
-This tutorial describes configuring a VPC for Amazon Aurora DB clusters\. For more information about Amazon VPC, see [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/) and [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\.
+This tutorial describes configuring a VPC for Amazon Aurora DB clusters\. For a tutorial that shows you how to create a web server for this VPC scenario, see [Tutorial: Create a web server and an Amazon Aurora DB cluster](TUT_WebAppWithRDS.md)\. For more information about Amazon VPC, see [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/) and [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\. 
 
-**Note**  
-For a tutorial that shows you how to create a web server for this VPC scenario, see [Tutorial: Create a web server and an Amazon Aurora DB cluster](TUT_WebAppWithRDS.md)\.
+**Tip**  
+You can set up network connectivity between an Amazon EC2 instance and a DB cluster automatically when you create the DB cluster\. The network configuration is similar to the one described in this tutorial\. For more information, see [Configure automatic network connectivity with an EC2 instance](Aurora.CreateInstance.md#Aurora.CreateInstance.Prerequisites.VPC.Automatic)\.
 
 ## Create a VPC with private and public subnets<a name="CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets"></a>
 

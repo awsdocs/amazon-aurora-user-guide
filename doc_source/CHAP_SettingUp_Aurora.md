@@ -135,7 +135,12 @@ Once you have the information you need to create the security group and the DB c
 
 Your DB cluster will be created in a VPC\. Security groups provide access to the DB cluster in the VPC\. They act as a firewall for the associated DB cluster, controlling both inbound and outbound traffic at the cluster level\. DB clusters are created by default with a firewall and a default security group that prevents access to the DB cluster\. You must therefore add rules to a security group that enable you to connect to your DB cluster\. Use the network and configuration information you determined in the previous step to create rules to allow access to your DB cluster\.
 
-For example, if you have an application that will access a database on your DB cluster in a VPC, you must add a custom TCP rule that specifies the port range and IP addresses that application will use to access the database\. If you have an application on an Amazon EC2 cluster, you can use the VPC security group you set up for the Amazon EC2 cluster\.
+For example, if you have an application that will access a database on your DB cluster in a VPC, you must add a custom TCP rule that specifies the port range and IP addresses that application will use to access the database\. If you have an application on an Amazon EC2 instance, you can use the VPC security group you set up for the Amazon EC2 instance\.
+
+You can configure connectivity between an Amazon EC2 instance a DB cluster when you create the DB cluster\. For more information, see [Configure automatic network connectivity with an EC2 instance](Aurora.CreateInstance.md#Aurora.CreateInstance.Prerequisites.VPC.Automatic)\.
+
+**Tip**  
+You can set up network connectivity between an Amazon EC2 instance and a DB cluster automatically when you create the DB cluster\. For more information, see [Configure automatic network connectivity with an EC2 instance](Aurora.CreateInstance.md#Aurora.CreateInstance.Prerequisites.VPC.Automatic)\.
 
 For more information about creating a VPC for use with Aurora, see [Tutorial: Create a VPC for use with a DB cluster \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. For information about common scenarios for accessing a DB instance, see [Scenarios for accessing a DB cluster in a VPC](USER_VPC.Scenarios.md)\.
 

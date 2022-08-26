@@ -28,27 +28,7 @@ The Data API and query editor aren't supported for Aurora Serverless v2\.
 
 ## Data API availability<a name="data-api.regions"></a>
 
-The Data API is available only for Aurora Serverless v1 DB clusters using specific Aurora MySQL and Aurora PostgreSQL versions\. For more information, see [Data API for Aurora Serverless v1](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API)\. 
-
-The following table shows the AWS Regions where the Data API is currently available for Aurora Serverless v1\. To access the Data API in these Regions, use the HTTPS protocol\.
-
-
-| Region | Link | 
-| --- | --- | 
-| US East \(Ohio\) | rds\-data\.us\-east\-2\.amazonaws\.com | 
-| US East \(N\. Virginia\) | rds\-data\.us\-east\-1\.amazonaws\.com | 
-| US West \(N\. California\) | rds\-data\.us\-west\-1\.amazonaws\.com | 
-| US West \(Oregon\) | rds\-data\.us\-west\-2\.amazonaws\.com | 
-| Asia Pacific \(Mumbai\) | rds\-data\.ap\-south\-1\.amazonaws\.com | 
-| Asia Pacific \(Seoul\) | rds\-data\.ap\-northeast\-2\.amazonaws\.com | 
-| Asia Pacific \(Singapore\) | rds\-data\.ap\-southeast\-1\.amazonaws\.com | 
-| Asia Pacific \(Sydney\) | rds\-data\.ap\-southeast\-2\.amazonaws\.com | 
-| Asia Pacific \(Tokyo\) | rds\-data\.ap\-northeast\-1\.amazonaws\.com | 
-| Canada \(Central\) | rds\-data\.ca\-central\-1\.amazonaws\.com | 
-| Europe \(Frankfurt\) | rds\-data\.eu\-central\-1\.amazonaws\.com | 
-| Europe \(Ireland\) | rds\-data\.eu\-west\-1\.amazonaws\.com | 
-| Europe \(London\) | rds\-data\.eu\-west\-2\.amazonaws\.com | 
-| Europe \(Paris\) | rds\-data\.eu\-west\-3\.amazonaws\.com | 
+The Data API is available only for Aurora Serverless v1 DB clusters using specific Aurora MySQL and Aurora PostgreSQL versions, and in specific AWS Regions\. For more information, see [Data API for Aurora Serverless v1](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API)\.
 
 If you require cryptographic modules validated by FIPS 140\-2 when accessing the Data API through a command line interface or an API, use a FIPS endpoint\. For more information about the available FIPS endpoints, see [Federal Information Processing Standard \(FIPS\) 140\-2](http://aws.amazon.com/compliance/fips/)\.
 
