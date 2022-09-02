@@ -21,9 +21,9 @@ To delete a shared or public snapshot, you must sign in to the AWS account that 
 
 1. Choose the DB cluster snapshot that you want to delete\.
 
-1. For **Actions**, choose **Delete Snapshot**\.
+1. For **Actions**, choose **Delete snapshot**\.
 
-1. Choose **Delete** on the confirmation page\. 
+1. Choose **Delete** on the confirmation page\.
 
 ### AWS CLI<a name="aurora-delete-snapshot.CLI"></a>
 

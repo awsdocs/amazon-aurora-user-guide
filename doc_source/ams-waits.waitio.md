@@ -100,11 +100,13 @@ Check for Performance Insights counter metrics such as `Innodb_rows_changed`\. I
 
 ### Check for other correlated wait events<a name="ams-waits.waitio.actions.maintenance"></a>
 
-If `synch/sxlock/innodb/btr_search_latch` and `io/table/sql/handler` contribute most to the DB load anomaly together, check whether the `innodb_adaptive_hash_index` variable is turned on\. If it is, consider increasing the `innodb_adaptive_hash_index_parts` parameter value\. 
+If `synch/sxlock/innodb/btr_search_latch` and `io/table/sql/handler` contribute most to the DB load anomaly together, check whether the `innodb_adaptive_hash_index` variable is turned on\. If it is, consider increasing the `innodb_adaptive_hash_index_parts` parameter value\.
 
-If the Adaptive Hash Index is turned off, and the situation warrants it, consider turning it on\. To learn more about the MySQL Adaptive Hash Index, see the following resources:
+If the Adaptive Hash Index is turned off, consider turning it on\. To learn more about the MySQL Adaptive Hash Index, see the following resources:
 + The article [Is Adaptive Hash Index in InnoDB right for my workload?](https://www.percona.com/blog/2016/04/12/is-adaptive-hash-index-in-innodb-right-for-my-workload) on the Percona website
 + [Adaptive Hash Index](https://dev.mysql.com/doc/refman/5.7/en/innodb-adaptive-hash.html) in the *MySQL Reference Manual*
 + The article [Contention in MySQL InnoDB: Useful Info From the Semaphores Section](https://www.percona.com/blog/2019/12/20/contention-in-mysql-innodb-useful-info-from-the-semaphores-section/) on the Percona website
 
-The Adaptive Hash Index isn't a viable option for Aurora reader nodes\. In some cases, performance might be poor on a reader node when `synch/sxlock/innodb/btr_search_latch` and `io/table/sql/handler` are dominant\. If so, consider redirecting the workload temporarily to the writer note and turning on the Adaptive Hash Index\.
+**Note**  
+The Adaptive Hash Index isn't supported on Aurora reader DB instances\.  
+In some cases, performance might be poor on a reader instance when `synch/sxlock/innodb/btr_search_latch` and `io/table/sql/handler` are dominant\. If so, consider redirecting the workload temporarily to the writer DB instance and turning on the Adaptive Hash Index\.

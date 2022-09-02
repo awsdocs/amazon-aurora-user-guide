@@ -66,9 +66,21 @@ Some of the tutorials use Amazon RDS DB instances, but they can be adapted to us
 + [ Creating a Job Posting Site using Amazon Aurora and Amazon Translation Services](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/usecases/Creating_amazon_aurora_app)
 
   Learn how to create a web application that stores and queries data by using Amazon Aurora, Elastic Beanstalk, and SDK for Java 2\.x\. The application created in this AWS tutorial is a job posting web application that lets an employer, an administrator, or human resources staff alert employees or the public about a job opening within a company\.
-+ [ Creating the Amazon Relational Database Service item tracker](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/usecases/Creating_rds_item_tracker)
++ [ Creating an Aurora Serverless v1 lending library](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python/cross_service/aurora_rest_lending_library)
 
-  Learn how to create an application that tracks and reports on work items using Amazon RDS, Amazon Simple Email Service, Elastic Beanstalk, and SDK for Java 2\.x\.
+  Learn how to create a lending library application where patrons can borrow and return books\. The example uses Aurora Serverless v1 and AWS SDK for Python \(Boto3\)\.
++ [ Creating an Amazon Aurora item tracker application with a Spring REST API that queries Aurora Serverless v1 data using SDK for Java 2\.x](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/usecases/Creating_Spring_RDS_%20Rest)
+
+  Learn how to create a Spring REST API that queries Aurora Serverless v1 data and for use by a React application using SDK for Java 2\.x\.
++ [ Creating an Amazon Aurora item tracker application that uses the Data API and Aurora Serverless v1 using SDK for Java 2\.x](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/usecases/Creating_serverless_aurora_app)
+
+  Learn how to create an application that uses the RdsDataClient of the Data API and Aurora Serverless v1 to track and reports on work items\. The example uses SDK for Java 2\.x\.
++ [ Creating an Amazon Aurora item tracker application that queries Aurora Serverless v1 data using AWS SDK for PHP](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/php/cross_service/aurora_item_tracker)
+
+  Learn how to create an application that uses the RdsDataClient of the Data API and Aurora Serverless v1 to track and reports on work items\. The example uses AWS SDK for PHP\.
++ [ Creating an Amazon Aurora item tracker application that queries Aurora Serverless v1 data using AWS SDK for Python \(Boto3\)](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python/cross_service/aurora_item_tracker)
+
+  Learn how to create an application that uses the RdsDataClient of the Data API and Aurora Serverless v1 to track and reports on work items\. The example uses AWS SDK for Python \(Boto3\)\.
 + [ SDK for Go code samples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/go/rds)
 
   View a collection of SDK for Go code samples for Amazon RDS and Aurora\.

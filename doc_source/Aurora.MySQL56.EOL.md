@@ -2,7 +2,7 @@
 
 Amazon Aurora MySQL\-Compatible Edition version 1 \(with MySQL 5\.6 compatibility\) is planned to reach end of life on February 28, 2023\. Amazon advises that you upgrade all clusters \(provisioned and Aurora Serverless\) running Aurora MySQL version 1 to Aurora MySQL version 2 \(with MySQL 5\.7 compatibility\) or Aurora MySQL version 3 \(with MySQL 8\.0 compatibility\)\. Do this before Aurora MySQL version 1 reaches the end of its support period\.
 
-For Aurora provisioned DB clusters, you can complete upgrades from Aurora MySQL version 1 to Aurora MySQL version 2 by several methods\. You can find instructions for the in\-place upgrade mechanism in [How to perform an in\-place upgrade](AuroraMySQL.Updates.MajorVersionUpgrade.md#AuroraMySQL.Upgrading.Procedure)\. Another way to complete the upgrade is to take a snapshot of an Aurora MySQL version 1 cluster and restore the snapshot to an Aurora MySQL version 2 cluster\. Or you can follow a multistep process that runs the old and new clusters side by side\. For more details about each method, see [Upgrading from Aurora MySQL 1\.x to 2\.x](AuroraMySQL.Updates.MajorVersionUpgrade.md#AuroraMySQL.Updates.MajorVersionUpgrade.1to2)
+For Aurora provisioned DB clusters, you can complete upgrades from Aurora MySQL version 1 to Aurora MySQL version 2 by several methods\. You can find instructions for the in\-place upgrade mechanism in [How to perform an in\-place upgrade](AuroraMySQL.Updates.MajorVersionUpgrade.md#AuroraMySQL.Upgrading.Procedure)\. Another way to complete the upgrade is to take a snapshot of an Aurora MySQL version 1 cluster and restore the snapshot to an Aurora MySQL version 2 cluster\. Or you can follow a multistep process that runs the old and new clusters side by side\. For more details about each method, see [Upgrading from Aurora MySQL 1\.x to 2\.x](AuroraMySQL.Updates.MajorVersionUpgrade.md#AuroraMySQL.Updates.MajorVersionUpgrade.1to2)\.
 
 For Aurora Serverless v1 DB clusters, you can perform an in\-place upgrade from Aurora MySQL version 1 to Aurora MySQL version 2\. For more details about this method, see [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\.
 
@@ -24,9 +24,11 @@ The following are additional milestones for upgrading Aurora MySQL version 1 clu
 
 1.  February 28, 2023 – After this time, we plan to automatically upgrade Aurora MySQL version 1 clusters to the default version of Aurora MySQL version 2 within a scheduled maintenance window that follows\. Restoring Aurora MySQL version 1 DB snapshots results in an automatic upgrade of the restored cluster to the default version of Aurora MySQL version 2 at that time\. 
 
-Upgrading between major versions requires more extensive planning and testing than for a minor version\. The process can take substantial time\. After the upgrade is finished, you also might have follow\-up work to do\. For example, you might need to follow up due to differences in SQL compatibility, the way certain MySQL\-related features work, or parameter settings between the old and new versions\. 
+Upgrading between major versions requires more extensive planning and testing than for a minor version\. The process can take substantial time\. For a detailed discussion of the v1\-to\-v2 upgrade process, see [Upgrade Amazon Aurora MySQL\-Compatible Edition version 1 \(with MySQL 5\.6 compatibility\)](http://aws.amazon.com/blogs/database/upgrade-amazon-aurora-mysql-compatible-edition-version-1-with-mysql-5-6-compatibility)\.
 
-To learn more about the methods, planning, testing, and troubleshooting of Aurora MySQL major version upgrades, be sure to thoroughly read [Upgrading the major version of an Aurora MySQL DB cluster](AuroraMySQL.Updates.MajorVersionUpgrade.md) \. 
+After the upgrade is finished, you also might have follow\-up work to do\. For example, you might need to follow up due to differences in SQL compatibility, the way certain MySQL\-related features work, or parameter settings between the old and new versions\.
+
+To learn more about the methods, planning, testing, and troubleshooting of Aurora MySQL major version upgrades, be sure to thoroughly read [Upgrading the major version of an Aurora MySQL DB cluster](AuroraMySQL.Updates.MajorVersionUpgrade.md)\.
 
 ## Finding clusters affected by this end\-of\-life process<a name="find-cluster"></a>
 

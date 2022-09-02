@@ -184,7 +184,7 @@ The following limitations apply to modifying a DB cluster to use dual\-stack mod
 
 #### Availability of dual\-stack network DB clusters<a name="USER_VPC.IP_addressing.dual-stack-availability"></a>
 
-The following DB engine versions support dual\-stack network DB clusters:
+The following DB engine versions support dual\-stack network DB clusters, except in the Middle East \(UAE\) Region:
 + Aurora MySQL version 3\.02\.0 and higher
 
   For more information about Aurora MySQL versions, see the [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html)\.

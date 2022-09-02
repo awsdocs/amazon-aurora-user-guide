@@ -12,6 +12,7 @@ Amazon RDS supports exporting snapshots in all AWS Regions except the following:
 + Asia Pacific \(Jakarta\)
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
++ Middle East \(UAE\)
 
 The following table shows the Aurora MySQL engine versions that are supported for exporting snapshot data to Amazon S3\. For more information about Aurora MySQL engine versions, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\. 
 

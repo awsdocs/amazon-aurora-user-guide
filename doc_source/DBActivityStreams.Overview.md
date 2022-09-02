@@ -53,12 +53,12 @@ In Aurora, database activity streams have the following requirements and limitat
 
 ## Supported Aurora engine versions for database activity streams<a name="DBActivityStreams.Overview.requirements.version"></a>
 
-**For Aurora PostgreSQL, database activity streams are supported for the following versions:**  
+**For Aurora PostgreSQL, database activity streams are supported for the following versions, except in the Middle East \(UAE\) Region:**  
 + All 14, 13, and 12 versions
 + Version 11\.6 and higher 11 versions
 + Version 10\.11 and higher 10 versions
 
-**For Aurora MySQL, database activity streams are supported for the following versions:**  
+**For Aurora MySQL, database activity streams are supported for the following versions, except in the Middle East \(UAE\) Region:**  
 2\.08 or higher, which is compatible with MySQL version 5\.7
 
 **Database activity streams aren't supported for the following features:**  

@@ -7,7 +7,7 @@ You can copy a snapshot within the same AWS Region, you can copy a snapshot acro
 You can't copy a DB cluster snapshot across Regions and accounts in a single step\. Perform one step for each of these copy actions\. As an alternative to copying, you can also share manual snapshots with other AWS accounts\. For more information, see [Sharing a DB cluster snapshot](aurora-share-snapshot.md)\. 
 
 **Note**  
-Amazon bills you based upon the amount of Amazon Aurora backup and snapshot data you keep and the period of time that you keep it\. For information about the storage associated with Aurora backups and snapshots, see [Understanding Aurora backup storage usage](aurora-storage-backup.md)\. For pricing information about Aurora storage, see [Amazon RDS for Aurora pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
+Amazon bills you based upon the amount of Amazon Aurora backup and snapshot data you keep and the period of time that you keep it\. For information about the storage associated with Aurora backups and snapshots, see [Understanding Amazon Aurora backup storage usage](aurora-storage-backup.md)\. For pricing information about Aurora storage, see [Amazon RDS for Aurora pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
 
 ## Limitations<a name="aurora-copy-snapshot.Limitations"></a>
 

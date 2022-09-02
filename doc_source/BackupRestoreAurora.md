@@ -7,7 +7,7 @@ The Aurora high availability features and automatic backup capabilities help to 
 
 **Topics**
 + [Overview of backing up and restoring an Aurora DB cluster](Aurora.Managing.Backups.md)
-+ [Understanding Aurora backup storage usage](aurora-storage-backup.md)
++ [Understanding Amazon Aurora backup storage usage](aurora-storage-backup.md)
 + [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)
 + [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)
 + [Copying a DB cluster snapshot](aurora-copy-snapshot.md)

@@ -8,24 +8,17 @@ There's no charge for creating an AWS account\. However, by completing this tuto
 **Note**  
 This tutorial works with Amazon Linux and might not work for other versions of Linux such as Ubuntu\.
 
-In the tutorial that follows, you specify the VPC, subnets, and security groups when you create the DB cluster\. You also specify them when you create the EC2 instance to host your web server\. The VPC, subnets, and security groups are required for the DB cluster and the web server to communicate\. After the VPC is set up, this tutorial shows you how to create the DB cluster and install the web server\. You connect your web server to your DB cluster in the VPC using the DB cluster writer endpoint\.
+In the tutorial that follows, you create an EC2 instance that uses the default VPC, subnets, and security group for your AWS account\. This tutorial shows you how to create the DB cluster and automatically set up connectivity with the EC2 instance that you created\. The tutorial then shows you how to install the web server on the EC2 instance\. You connect your web server to your DB cluster in the VPC using the DB cluster writer endpoint\.
 
-1. Complete the tasks in [Tutorial: Create a VPC for use with a DB cluster \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
-
-   Before you begin this tutorial, make sure that you have a VPC with both public and private subnets, and corresponding security groups\. If you don't have these, complete the following tasks in the tutorial: 
-
-   1. [Create a VPC with private and public subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)
-
-   1. [Create a VPC security group for a public web server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)
-
-   1. [Create a VPC security group for a private DB cluster](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB)
-
-   1. [Create a DB subnet group](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.DBSubnetGroup)
+1. [Launch an EC2 instance](CHAP_Tutorials.WebServerDB.LaunchEC2.md)
 
 1. [Create an Amazon Aurora DB cluster](CHAP_Tutorials.WebServerDB.CreateDBCluster.md)
 
-1. [Create an EC2 instance and install a web server](CHAP_Tutorials.WebServerDB.CreateWebServer.md)
+1. [Install a web server on your EC2 instance](CHAP_Tutorials.WebServerDB.CreateWebServer.md)
 
 The following diagram shows the configuration when the tutorial is complete\.
 
 ![\[Single VPC Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/con-VPC-sec-grp-aurora.png)
+
+**Note**  
+This tutorial uses the default VPC for your AWS account and automatically sets up connectivity between your EC2 instance and DB cluster\. If you would rather configure a new VPC for this scenario instead, complete the tasks in [Tutorial: Create a VPC for use with a DB cluster \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.

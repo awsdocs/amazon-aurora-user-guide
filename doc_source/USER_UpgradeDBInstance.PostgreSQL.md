@@ -227,7 +227,7 @@ Before upgrading your production Aurora PostgreSQL DB clusters to a new major ve
 
    
 **Note**  
-During the upgrade process, you can't do a point\-in\-time restore of your cluster\. Aurora PostgreSQL takes a DB cluster snapshot during the upgrade process if your backup retention period is greater than 0\. You can perform a point\-in\-time restore to times before the upgrade began and after the automatic snapshot of your instance has completed\. 
+During the upgrade process, Aurora PostgreSQL takes a DB cluster snapshot if the cluster's backup retention period is greater than 0\. You can't do a point\-in\-time restore of your cluster during this process\. Later, you can perform a point\-in\-time restore to times before the upgrade began and after the automatic snapshot of your instance has completed\. However, you can't perform a point\-in\-time restore to a previous minor version\. 
 
    For information about an upgrade in progress, you can use Amazon RDS to view two logs that the pg\_upgrade utility produces\. These are `pg_upgrade_internal.log` and `pg_upgrade_server.log`\. Amazon Aurora appends a timestamp to the file name for these logs\. You can view these logs as you can any other log\. For more information, see [Monitoring Amazon Aurora log files](USER_LogAccess.md)\.
 
@@ -259,7 +259,7 @@ preupgrade-docs-lab-apg-global-db-12-8-to-13-6-2022-05-19-00-19
 After the upgrade completes, you can use the snapshot that Aurora created and stored in your manual snapshot list to restore the DB cluster to its previous version, if necessary\. 
 
 **Tip**  
-In general, snapshots provide many ways to restore your Aurora DB cluster to various points in time\. To learn more, see [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md) and [Restoring a DB cluster to a specified time](aurora-pitr.md)\.
+In general, snapshots provide many ways to restore your Aurora DB cluster to various points in time\. To learn more, see [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md) and [Restoring a DB cluster to a specified time](aurora-pitr.md)\. However, Aurora PostgreSQL doesn't support using a snapshot to restore to a previous minor version\. 
 
 During the major version upgrade process, Aurora allocates a volume and clones the source Aurora PostgreSQL DB cluster\. If the upgrade fails for any reason, Aurora PostgreSQL uses the clone to roll back the upgrade\. After more than 15 clones of a source volume are allocated, subsequent clones become full copies and take longer\. This can cause the upgrade process also to take longer\. If Aurora PostgreSQL rolls back the upgrade, be aware of the following:
 + You might see billing entries and metrics for both the original volume and the cloned volume allocated during the upgrade\. Aurora PostgreSQL cleans up the extra volume after the cluster backup retention window is beyond the time of the upgrade\. 
