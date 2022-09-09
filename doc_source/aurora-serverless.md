@@ -50,7 +50,7 @@
 ## Limitations of Aurora Serverless v1<a name="aurora-serverless.limitations"></a>
 
  The following limitations apply to Aurora Serverless v1: 
-+  Aurora Serverless v1 is available in certain AWS Regions and for specific Aurora MySQL and Aurora PostgreSQL versions only\. For more information, see [Aurora Serverless v1](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless)\. 
++  Aurora Serverless v1 is available in certain AWS Regions and for specific Aurora MySQL and Aurora PostgreSQL versions only\. For more information, see [Aurora Serverless v1](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless.md)\. 
 +  Aurora Serverless v1 doesn't support the following features: 
   +  Aurora global databases 
   +  Aurora multi\-master clusters 
@@ -62,10 +62,10 @@
   + Viewing logs in the AWS Management Console
 +  Connections to an Aurora Serverless v1 DB cluster are closed automatically if held open for longer than one day\. 
 +  All Aurora Serverless v1 DB clusters have the following limitations: 
-  +  You can't export Aurora Serverless v1 snapshots to Amazon S3 buckets\. 
-  +  You can't save data to text files in Amazon S3\. 
-  +  You can't use AWS Database Migration Service and Change Data Capture \(CDC\) with Aurora Serverless v1 DB clusters\. Only provisioned Aurora DB clusters support CDC with AWS DMS as a source\. 
-  +  You can't load text file data to Aurora Serverless v1 from Amazon S3\. However, you can load data to Aurora Serverless v1 from Amazon S3 by using the `aws_s3` extension with the `aws_s3.table_import_from_s3` function and the `credentials` parameter\. For more information, see [Importing data from Amazon S3 into an Aurora PostgreSQL DB cluster](USER_PostgreSQL.S3Import.md)\. 
+  + You can't export Aurora Serverless v1 snapshots to Amazon S3 buckets\.
+  + You can't use AWS Database Migration Service and Change Data Capture \(CDC\) with Aurora Serverless v1 DB clusters\. Only provisioned Aurora DB clusters support CDC with AWS DMS as a source\.
+  + You can't save data to text files in Amazon S3 or load text file data to Aurora Serverless v1 from S3\.
+  + You can't attach an IAM role to an Aurora Serverless v1 DB cluster\. However, you can load data to Aurora Serverless v1 from Amazon S3 by using the `aws_s3` extension with the `aws_s3.table_import_from_s3` function and the `credentials` parameter\. For more information, see [Importing data from Amazon S3 into an Aurora PostgreSQL DB cluster](USER_PostgreSQL.S3Import.md)\.
 +  Aurora MySQL–based DB clusters running Aurora Serverless v1 don't support the following: 
   +  Invoking AWS Lambda functions from within your Aurora MySQL DB cluster\. However, AWS Lambda functions can make calls to your Aurora Serverless v1 DB cluster\. 
   +  Restoring a snapshot from a DB instance that isn't Aurora MySQL or RDS for MySQL\. 

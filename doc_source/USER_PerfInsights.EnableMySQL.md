@@ -35,6 +35,9 @@ Performance Insights and the Performance Schema are separate features, but they 
 
 When you create an Aurora MySQL DB instance with Performance Insights turned on, the Performance Schema is also turned on\. In this case, Performance Insights automatically manages your Performance Schema parameters\. This is the recommended configuration\.
 
+**Note**  
+Automatic management of the Performance Schema isn't supported for the t4g\.medium instance class\.
+
 For Performance Insights to manage the Performance Schema automatically, the `performance_schema` must be set to `0`\. By default, the value of **Source** is `system`\. 
 
 You can also manage the Performance Schema manually\. If you choose this option, set the parameters according to the values in the following table\.

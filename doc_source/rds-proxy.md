@@ -8,7 +8,7 @@
 
  You can reduce the overhead to process credentials and establish a secure connection for each new connection\. RDS Proxy can handle some of that work on behalf of the database\. 
 
- RDS Proxy is fully compatible with the engine versions that it supports\. You can enable RDS Proxy for most applications with no code changes\. For a list of supported engine versions, see [Amazon RDS Proxy](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy)\. 
+ RDS Proxy is fully compatible with the engine versions that it supports\. You can enable RDS Proxy for most applications with no code changes\. For a list of supported engine versions, see [Amazon RDS Proxy](Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy.md)\. 
 
 **Topics**
 + [Region and version availability](#rds-proxy.RegionVersionAvailability)
@@ -26,7 +26,7 @@
 
 ## Region and version availability<a name="rds-proxy.RegionVersionAvailability"></a>
 
- For information about database engine version support and availability of RDS Proxy in a given AWS Region, see [Amazon RDS Proxy](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy)\. 
+ For information about database engine version support and availability of RDS Proxy in a given AWS Region, see [Amazon RDS Proxy](Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy.md)\. 
 
 ## Quotas and limitations for RDS Proxy<a name="rds-proxy.limits"></a>
 

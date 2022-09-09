@@ -46,7 +46,7 @@ By using Aurora global databases, you can get the following advantages:
 ## Limitations of Amazon Aurora global databases<a name="aurora-global-database.limitations"></a>
 
 The following limitations currently apply to Aurora global databases:
-+ Aurora global databases are available in certain AWS Regions and for specific Aurora MySQL and Aurora PostgreSQL versions only\. For more information, see [Aurora global databases](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.GlobalDatabase)\.
++ Aurora global databases are available in certain AWS Regions and for specific Aurora MySQL and Aurora PostgreSQL versions only\. For more information, see [Aurora global databases](Concepts.Aurora_Fea_Regions_DB-eng.Feature.GlobalDatabase.md)\.
 + Aurora global databases have certain configuration requirements for supported Aurora DB instance classes, maximum number of AWS Regions, and so on\. For more information, see [Configuration requirements of an Amazon Aurora global database](aurora-global-database-getting-started.md#aurora-global-database.configuration.requirements)\. 
 + Managed planned failover for Aurora global databases requires one of the following Aurora database engines:
   + Aurora MySQL with MySQL 8\.0 compatibility, version 3\.01\.0 and higher

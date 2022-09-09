@@ -2,7 +2,7 @@
 
 When client applications connect and disconnect so often that Aurora PostgreSQL DB cluster response time slows, the cluster is said to be experiencing *connection churn*\. Each new connection to the Aurora PostgreSQL DB cluster endpoint consumes resources, thus reducing the resources that can be used to process the actual workload\. Connection churn is an issue that we recommend that you manage by following some of the best practices discussed following\.
 
-For starters, you can improve response times on Aurora PostgreSQL DB clusters that have high rates of connection churn\. To do this, you can use a connection pooler, such as RDS Proxy\. A *connection pooler* provides a cache of ready to use connections for clients\. Almost all versions of Aurora PostgreSQL support RDS Proxy\. For more information, see [Amazon RDS Proxy with Aurora PostgreSQL](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy.apg)\.
+For starters, you can improve response times on Aurora PostgreSQL DB clusters that have high rates of connection churn\. To do this, you can use a connection pooler, such as RDS Proxy\. A *connection pooler* provides a cache of ready to use connections for clients\. Almost all versions of Aurora PostgreSQL support RDS Proxy\. For more information, see [Amazon RDS Proxy with Aurora PostgreSQL](Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy.apg)\.
 
 If your specific version of Aurora PostgreSQL doesn't support RDS Proxy, you can use another PostgreSQL–compatible connection pooler, such as PgBouncer\. To learn more, see the [PgBouncer](https://www.pgbouncer.org/) website\. 
 

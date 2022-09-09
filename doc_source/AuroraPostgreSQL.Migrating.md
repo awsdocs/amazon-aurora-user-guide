@@ -73,7 +73,7 @@ You might be behind a corporate firewall that doesn't allow access to default po
 
 1. Choose **Migrate** to migrate your DB snapshot\. 
 
-1. Choose **Databases** to see the new DB cluster\. Choose the new DB cluster to monitor the progress of the migration\. On the **Connectivity & security** tab, you can find the cluster endpoint to use for connecting to the primary writer instance of the DB cluster\. For more information on connecting to an Aurora PostgreSQL DB cluster, see [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\. 
+1. Choose **Databases** to see the new DB cluster\. Choose the new DB cluster to monitor the progress of the migration\. When the migration completes, the Status for the cluster is **Available**\. On the **Connectivity & security** tab, you can find the cluster endpoint to use for connecting to the primary writer instance of the DB cluster\. For more information on connecting to an Aurora PostgreSQL DB cluster, see [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)\. 
 
 ### AWS CLI<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Import.Console.CLI"></a>
 

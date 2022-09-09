@@ -1,6 +1,6 @@
 # Aurora Serverless v1 and Aurora database engine versions<a name="aurora-serverless.relnotes"></a>
 
-Aurora Serverless v1 is available in certain AWS Regions and for specific Aurora MySQL and Aurora PostgreSQL versions only\. For the current list of AWS Regions that support Aurora Serverless v1 and the specific Aurora MySQL and Aurora PostgreSQL versions available in each Region, see [Aurora Serverless v1](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless)\.
+Aurora Serverless v1 is available in certain AWS Regions and for specific Aurora MySQL and Aurora PostgreSQL versions only\. For the current list of AWS Regions that support Aurora Serverless v1 and the specific Aurora MySQL and Aurora PostgreSQL versions available in each Region, see [Aurora Serverless v1](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless.md)\.
 
 Aurora Serverless v1 uses its associated Aurora database engine to identify specific supported releases for each database engine supported, as follows:
 + Aurora MySQL Serverless

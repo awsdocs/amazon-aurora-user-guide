@@ -87,6 +87,7 @@ The following settings aren't supported:
 + SET CURSOR\_CLOSE\_ON\_COMMIT ON
 + SET NUMERIC\_ROUNDABORT ON
 + SET PARSEONLY ON \(command doesn't work as expected\)
++ SET FMTONLY ON \(command doesn't work as expected\. It suppresses only the execution of SELECT statements but not others\.\)
 
 ## Commands that aren't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list1"></a>
 

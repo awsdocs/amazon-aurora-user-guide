@@ -28,7 +28,7 @@ The Data API and query editor aren't supported for Aurora Serverless v2\.
 
 ## Data API availability<a name="data-api.regions"></a>
 
-The Data API is available only for Aurora Serverless v1 DB clusters using specific Aurora MySQL and Aurora PostgreSQL versions, and in specific AWS Regions\. For more information, see [Data API for Aurora Serverless v1](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API)\.
+The Data API is available only for Aurora Serverless v1 DB clusters using specific Aurora MySQL and Aurora PostgreSQL versions, and in specific AWS Regions\. For more information, see [Data API for Aurora Serverless v1](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API.md)\.
 
 If you require cryptographic modules validated by FIPS 140\-2 when accessing the Data API through a command line interface or an API, use a FIPS endpoint\. For more information about the available FIPS endpoints, see [Federal Information Processing Standard \(FIPS\) 140\-2](http://aws.amazon.com/compliance/fips/)\.
 

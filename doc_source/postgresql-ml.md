@@ -31,7 +31,7 @@ Aurora machine learning for PostgreSQL connects an Aurora cluster to SageMaker o
 
 You can upgrade an Aurora cluster that's running a lower version of Aurora PostgreSQL to a supported higher version if you want to use Aurora machine learning with that cluster\. For more information, see [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
-For more information about Regions and Aurora version availability, see [Aurora machine learning](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML)\. 
+For more information about Regions and Aurora version availability, see [Aurora machine learning](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML.md)\. 
 
 ## Enabling Aurora machine learning<a name="postgresql-ml-enabling"></a>
 

@@ -5,7 +5,7 @@
  If you intend to use Aurora Serverless v2 DB instances in a cluster, make sure that the cluster's initial settings meet the requirements that are listed in [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md)\. Specify the following settings to make sure that you can add Aurora Serverless v2 DB instances to the cluster: 
 
 **AWS Region**  
- Create the cluster in an AWS Region where Aurora Serverless v2 DB instances are available\. For details about available Regions, see [Aurora Serverless v2](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2)\. 
+ Create the cluster in an AWS Region where Aurora Serverless v2 DB instances are available\. For details about available Regions, see [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md)\. 
 
 **DB engine version**  
  Choose an engine version that's compatible with Aurora Serverless v2\. For information about the Aurora Serverless v2 version requirements, see [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md)\. On the **Create database** page in the AWS Management Console, you can choose the filter setting **Show versions that support Serverless v2**\. You can also see the applicable versions in the **Info** panel on the **Create database** page\. 
@@ -36,7 +36,7 @@
 1.  Choose **Create Database**\. On the page that appears, choose the following options: 
    +  For **Engine type**, choose Aurora\. 
    +  For **Edition**, choose Aurora MySQL or Aurora PostgreSQL\. 
-   +  For **Version**, choose one of the compatible versions from [Aurora Serverless v2](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2)\. To see the available versions, choose the filter **Show versions that support Serverless v2**\. 
+   +  For **Version**, choose one of the compatible versions from [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md)\. To see the available versions, choose the filter **Show versions that support Serverless v2**\. 
 
 1.  For **Capacity settings**, you can accept the default range\. Or you can choose other values for minimum and maximum capacity units\. You can choose from 0\.5 ACUs minimum through 128 ACUs maximum, in increments of 0\.5 ACU\. 
 

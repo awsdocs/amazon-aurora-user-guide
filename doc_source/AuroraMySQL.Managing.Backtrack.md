@@ -31,14 +31,14 @@ Aurora always backtracks to a time that is consistent for the DB cluster\. Doing
 ### Backtracking limitations<a name="AuroraMySQL.Managing.Backtrack.Limitations"></a>
 
 The following limitations apply to backtracking:
-+ Backtracking an Aurora DB cluster is available in certain AWS Regions and for specific Aurora MySQL versions only\. For more information, see [Backtracking in Aurora](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Backtrack)\. 
++ Backtracking an Aurora DB cluster is available in certain AWS Regions and for specific Aurora MySQL versions only\. For more information, see [Backtracking in Aurora](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Backtrack.md)\. 
 + Backtracking is only available for DB clusters that were created with the Backtrack feature enabled\. You can enable the Backtrack feature when you create a new DB cluster or restore a snapshot of a DB cluster\. For DB clusters that were created with the Backtrack feature enabled, you can create a clone DB cluster with the Backtrack feature enabled\. Currently, you can't perform backtracking on DB clusters that were created with the Backtrack feature disabled\.
 + The limit for a backtrack window is 72 hours\.
 + Backtracking affects the entire DB cluster\. For example, you can't selectively backtrack a single table or a single data update\.
 + Backtracking isn't supported with binary log \(binlog\) replication\. Cross\-Region replication must be disabled before you can configure or use backtracking\.
 + You can't backtrack a database clone to a time before that database clone was created\. However, you can use the original database to backtrack to a time before the clone was created\. For more information about database cloning, see [Cloning a volume for an Amazon Aurora DB cluster](Aurora.Managing.Clone.md)\.
 + Backtracking causes a brief DB instance disruption\. You must stop or pause your applications before starting a backtrack operation to ensure that there are no new read or write requests\. During the backtrack operation, Aurora pauses the database, closes any open connections, and drops any uncommitted reads and writes\. It then waits for the backtrack operation to complete\.
-+ Backtracking isn't supported in all AWS Regions\. For information on where it is supported, see [Backtracking in Aurora](Concepts.AuroraFeaturesRegionsDBEngines.grids.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Backtrack)\.
++ Backtracking isn't supported in all AWS Regions\. For information on where it is supported, see [Backtracking in Aurora](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Backtrack.md)\.
 +  You can't restore a cross\-Region snapshot of a backtrack\-enabled cluster in an AWS Region that doesn't support backtracking\. 
 +  You can't use Backtrack with Aurora multi\-master clusters\. 
 +  If you perform an in\-place upgrade for a backtrack\-enabled cluster from Aurora MySQL version 1 to version 2, you can't backtrack to a point in time before the upgrade happened\. 
