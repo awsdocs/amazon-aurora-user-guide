@@ -1,6 +1,6 @@
 # Using Kerberos authentication with Aurora PostgreSQL<a name="postgresql-kerberos"></a>
 
-You can use Kerberos to authenticate users when they connect to your DB cluster running PostgreSQL\. In this case, your DB instance works with AWS Directory Service for Microsoft Active Directory to enable Kerberos authentication\. AWS Directory Service for Microsoft Active Directory is also called AWS Managed Microsoft AD\. 
+You can use Kerberos to authenticate users when they connect to your DB cluster running PostgreSQL\. To do so, you configure your DB instance to use AWS Directory Service for Microsoft Active Directory for Kerberos authentication\. AWS Directory Service for Microsoft Active Directory is also called AWS Managed Microsoft AD\. It's a feature available with AWS Directory Service\. To learn more, see [What is AWS Directory Service?](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html) in the *AWS Directory Service Administration Guide*\.
 
 You create an AWS Managed Microsoft AD directory to store user credentials\. You then provide to your PostgreSQL DB cluster the Active Directory's domain and other information\. When users authenticate with the PostgreSQL DB cluster, authentication requests are forwarded to the AWS Managed Microsoft AD directory\. 
 
@@ -19,37 +19,7 @@ A database can use Kerberos, AWS Identity and Access Management \(IAM\), or both
 
 ## Region and version availability<a name="postgresql-kerberos.RegionVersionAvailability"></a>
 
-Kerberos authentication is supported on the following engine versions:
-+ All PostgreSQL 14 and PostgreSQL 13 versions
-+ PostgreSQL 12\.4 and higher 12 versions
-+ PostgreSQL 11\.6 and higher 11 versions
-+ PostgreSQL 10\.11 and higher 10 versions
-
-For more information, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\.
-
-Amazon Aurora supports Kerberos authentication for PostgreSQL DB clusters in the following AWS Regions:
-
-
-| Region name | Region | 
-| --- | --- | 
-| US East \(Ohio\) | us\-east\-2 | 
-| US East \(N\. Virginia\) | us\-east\-1 | 
-| US West \(N\. California\) | us\-west\-1 | 
-| US West \(Oregon\) | us\-west\-2 | 
-| Asia Pacific \(Mumbai\) | ap\-south\-1 | 
-| Asia Pacific \(Seoul\) | ap\-northeast\-2 | 
-| Asia Pacific \(Singapore\) | ap\-southeast\-1 | 
-| Asia Pacific \(Sydney\) | ap\-southeast\-2 | 
-| Asia Pacific \(Tokyo\) | ap\-northeast\-1 | 
-| Canada \(Central\) | ca\-central\-1 | 
-| China \(Beijing\) | cn\-north\-1  | 
-| China \(Ningxia\) | cn\-northwest\-1 | 
-| Europe \(Frankfurt\) | eu\-central\-1 | 
-| Europe \(Ireland\) | eu\-west\-1 | 
-| Europe \(London\) | eu\-west\-2 | 
-|  Europe \(Paris\)  |  eu\-west\-3  | 
-| Europe \(Stockholm\) | eu\-north\-1 | 
-| South America \(São Paulo\) | sa\-east\-1 | 
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Aurora PostgreSQL with Kerberos authentication, see [Aurora Kerberos authentication](Concepts.Aurora_Fea_Regions_DB-eng.Feature.KerberosAuthentication.md)\.
 
 ## Overview of Kerberos authentication for PostgreSQL DB clusters<a name="postgresql-kerberos-overview"></a>
 

@@ -1,6 +1,6 @@
 # Overview of the Top SQL tab<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL"></a>
 
-By default, the **Top SQL** tab shows the SQL queries that are contributing the most to DB load\. To help tune your queries, you can analyze information such as the query text, statistics, and Support SQL ID\. You can also choose the statistics that you want to appear in the **Top SQL** tab\.
+By default, the **Top SQL** tab shows the 25 queries that are contributing the most to DB load\. To help tune your queries, you can analyze information such as the query text and SQL statistics\. You can also choose the statistics that you want to appear in the **Top SQL** tab\.
 
 **Topics**
 + [SQL text](#USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.text)
@@ -11,7 +11,7 @@ By default, the **Top SQL** tab shows the SQL queries that are contributing the 
 
 ## SQL text<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.text"></a>
 
-By default, each row in the **Top SQL** table shows 500 bytes of SQL text for each SQL statement\. 
+By default, each row in the **Top SQL** table shows 500 bytes of text for each statement\. 
 
 ![\[SQL text\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/./images/sql-text-apg.png)
 

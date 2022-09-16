@@ -5,6 +5,7 @@ Aurora MySQL\- and PostgreSQL\-compatible database engines support several Amazo
 **Topics**
 + [Backtracking in Aurora](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Backtrack.md)
 + [Aurora global databases](Concepts.Aurora_Fea_Regions_DB-eng.Feature.GlobalDatabase.md)
++ [Aurora Kerberos authentication](Concepts.Aurora_Fea_Regions_DB-eng.Feature.KerberosAuthentication.md)
 + [Aurora machine learning](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML.md)
 + [Aurora parallel queries](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ParallelQuery.md)
 + [Amazon RDS Proxy](Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy.md)

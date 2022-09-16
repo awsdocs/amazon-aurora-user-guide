@@ -213,7 +213,7 @@ You can modify a DB cluster to turn on or off public accessibility by modifying 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/VPC-example4.png)
 
-For information about modifying a DB instance to set the **Public access** option, see [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\.
+For information about modifying a DB instance to set the **Public access** option, see [Modifying a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\.
 
 ## Creating a DB cluster in a VPC<a name="USER_VPC.InstanceInVPC"></a>
 

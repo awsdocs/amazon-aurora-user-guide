@@ -45,7 +45,7 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | Instance class | Aurora MySQL | Aurora PostgreSQL | 
 | --- | --- | --- | 
 | db\.serverless – Aurora Serverless v2 instance class with automatic capacity scaling | 
-| db\.serverless | See [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md) | See [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md) | 
+| db\.serverless | See [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md) | See [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md) | 
 | db\.x2g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
 | db\.x2g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
 | db\.x2g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
@@ -63,15 +63,15 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.r6g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
 | db\.r6g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
 | db\.r6i – memory\-optimized instance classes | 
-| db\.r6i\.32xlarge | No | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.24xlarge | No | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.16xlarge | No | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.12xlarge | No | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.8xlarge | No | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.4xlarge | No | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.2xlarge | No | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.xlarge | No | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.large | No | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.32xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.24xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.16xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.12xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.8xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.4xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.2xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.large | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
 | db\.r5 – memory\-optimized instance classes | 
 | db\.r5\.24xlarge | 1\.22 and higher, 2\.06 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
 | db\.r5\.16xlarge | 1\.22 and higher, 2\.06 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 

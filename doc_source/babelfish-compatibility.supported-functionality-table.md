@@ -16,9 +16,11 @@ In the following table you can find T\-SQL functionality supported by different 
 | Datatypes TIMESTAMP, ROWVERSION \(for usage information, see Features with limited implementation | ✓ | ✓ | – | – | 
 | DROP IF EXISTS \(for SCHEMA, DATABASE, and USER objects\) | ✓ | ✓ | – | – | 
 | DROP ROLE | ✓ | – | – | – | 
+| GRANT | ✓ | ✓ | – | – | 
 | Identifiers with leading dot character | ✓ | ✓ | ✓ | – | 
 | INSTEAD OF triggers on tables \(tables only, not views\) | ✓ | ✓ | – | – | 
 | Partial support for the SSMS object explorer | ✓ | – | – | – | 
+| REVOKE | ✓ | ✓ | – | – | 
 | SET BABELFISH\_SHOWPLAN\_ALL ON \(and OFF\) | ✓ | – | – | – | 
 | SET BABELFISH\_STATISTICS PROFILE ON \(OFF\) | ✓ | – | – | – | 
 | SET LOCK\_TIMEOUT | ✓ | ✓ | – | – | 

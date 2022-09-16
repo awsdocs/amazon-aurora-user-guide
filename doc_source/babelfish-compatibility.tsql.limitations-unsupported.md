@@ -102,7 +102,7 @@ Certain functionality for the following commands isn't supported:
 + CREATE, ALTER, DROP, BACKUP CERTIFICATE
 + CREATE AGGREGATE
 + CREATE CONTRACT
-+ GRANT
++ CHECKPOINT
 
 ## Column names or attributes that aren't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list7"></a>
 
@@ -262,7 +262,6 @@ The following syntax isn't supported:
 + NEXT VALUE FOR sequence clause
 + READTEXT
 + REVERT
-+ REVOKE
 + SELECT PIVOT/UNPIVOT
 + SELECT TOP x PERCENT WHERE x <> 100
 + SELECT TOP\.\.\. WITH TIES

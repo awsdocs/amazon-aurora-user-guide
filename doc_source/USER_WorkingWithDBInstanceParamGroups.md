@@ -91,7 +91,7 @@ Include the following required parameters:
 
 You can create your own DB parameter groups with customized settings\. You can associate a DB parameter group with a DB instance using the AWS Management Console, the AWS CLI, or the RDS API\. You can do so when you create or modify a DB instance\.
 
-For information about creating a DB parameter group, see [Creating a DB parameter group](#USER_WorkingWithParamGroups.Creating)\. For information about modifying a DB instance, see [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\.
+For information about creating a DB parameter group, see [Creating a DB parameter group](#USER_WorkingWithParamGroups.Creating)\. For information about modifying a DB instance, see [Modifying a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\.
 
 **Note**  
 When you associate a new DB parameter group with a DB instance, the modified static and dynamic parameters are applied only after the DB instance is rebooted\. However, if you modify dynamic parameters in the newly associated DB parameter group, these changes are applied immediately without a reboot\.

@@ -11,7 +11,7 @@ Aurora Serverless v2 is an on\-demand, auto\-scaling feature designed to be a co
 | US West \(Oregon\) | Version 3\.02\.0 | Version 13\.6 and higher | Version 14\.3 and higher | 
 | Africa \(Cape Town\) | – | – | – | 
 | Asia Pacific \(Hong Kong\) | Version 3\.02\.0 | Version 13\.6 and higher | Version 14\.3 and higher | 
-| Asia Pacific \(Mumbai\) | Version 3\.02\.0 | Version 13\.6 and higher | Version 14\.3 and higher | 
+| Asia Pacific \(Jakarta\) | – | – | – | 
 | Asia Pacific \(Mumbai\) | Version 3\.02\.0 | Version 13\.6 and higher | Version 14\.3 and higher | 
 | Asia Pacific \(Osaka\) | – | – | – | 
 | Asia Pacific \(Seoul\) | Version 3\.02\.0 | Version 13\.6 and higher | Version 14\.3 and higher | 

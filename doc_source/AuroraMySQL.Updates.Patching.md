@@ -40,7 +40,7 @@ If you're performing a minor upgrade on an Aurora global database, upgrade all o
 
  **To enable automatic minor version upgrades for an Aurora MySQL DB cluster** 
 
-1.  Follow the general procedure to modify the DB instances in your cluster, as described in [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\. Repeat this procedure for each DB instance in your cluster\. 
+1.  Follow the general procedure to modify the DB instances in your cluster, as described in [Modifying a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\. Repeat this procedure for each DB instance in your cluster\. 
 
 1.  Do the following to enable automatic minor version upgrades for your cluster: 
 +  **By using the console** – Complete the following steps: 

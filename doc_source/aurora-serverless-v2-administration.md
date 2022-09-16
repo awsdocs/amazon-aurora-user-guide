@@ -189,7 +189,7 @@ aws rds create-db-instance \
 
 ## Converting a provisioned writer or reader to Aurora Serverless v2<a name="aurora-serverless-v2-converting-from-provisioned"></a>
 
- You can convert a provisioned DB instance to use Aurora Serverless v2\. To do so, you follow the procedure in [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\. The cluster must meet the requirements in [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md)\. For example, Aurora Serverless v2 DB instances require that the cluster be running certain minimum engine versions\. 
+ You can convert a provisioned DB instance to use Aurora Serverless v2\. To do so, you follow the procedure in [Modifying a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\. The cluster must meet the requirements in [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md)\. For example, Aurora Serverless v2 DB instances require that the cluster be running certain minimum engine versions\. 
 
  Suppose that you are converting a running provisioned cluster to take advantage of Aurora Serverless v2\. In that case, you can minimize downtime by converting a DB instance to Aurora Serverless v2 as the first step in the switchover process\. For the full procedure, see [Switching from a provisioned cluster to Aurora Serverless v2](aurora-serverless-v2.upgrade.md#aurora-serverless-v2.switch-from-provisioned)\. 
 
@@ -207,7 +207,7 @@ aws rds create-db-instance \
 
 ## Converting an Aurora Serverless v2 writer or reader to provisioned<a name="aurora-serverless-v2-converting-to-provisioned"></a>
 
- You can convert an Aurora Serverless v2 DB instance to a provisioned DB instance\. To do so, you follow the procedure in [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\. Choose a DB instance class other than **Serverless**\. 
+ You can convert an Aurora Serverless v2 DB instance to a provisioned DB instance\. To do so, you follow the procedure in [Modifying a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\. Choose a DB instance class other than **Serverless**\. 
 
  You might convert an Aurora Serverless v2 DB instance to provisioned if it needs a larger capacity than is available with the maximum Aurora capacity units \(ACUs\) of an Aurora Serverless v2 DB instance\. For example, the largest db\.r5 and db\.r6g DB instance classes have a larger memory capacity than an Aurora Serverless v2 DB instance can scale to\. 
 

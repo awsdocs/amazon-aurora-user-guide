@@ -113,7 +113,7 @@ You can get this error for several reasons\. It might be because your account is
 
 If you get locked out of your DB cluster, you can log in as the master user\. Then you can reset the credentials for other administrative users or roles\. If you can't log in as the master user, the AWS account owner can reset the master user password\. For details of which administrative accounts or roles you might need to reset, see [Master user account privileges](UsingWithRDS.MasterAccounts.md)\.
 
-You can change the DB instance password by using the Amazon RDS console, the AWS CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), or by using the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation\. For more information about modifying a DB instance in a DB cluster, see [Modify a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\.
+You can change the DB instance password by using the Amazon RDS console, the AWS CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), or by using the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation\. For more information about modifying a DB instance in a DB cluster, see [Modifying a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\.
 
 ## Amazon RDS DB instance outage or reboot<a name="CHAP_Troubleshooting.Reboots"></a>
 
