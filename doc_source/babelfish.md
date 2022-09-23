@@ -19,6 +19,7 @@ Babelfish runs the Transact\-SQL \(T\-SQL\) language with some differences\. For
 In the following sections, you can find information about setting up and using a Babelfish for Aurora PostgreSQL DB cluster\.
 
 **Topics**
++ [Babelfish limitations](babelfish-limitations.md)
 + [Understanding Babelfish architecture and configuration](babelfish-understanding-overview-howitworks.md)
 + [Creating a Babelfish for Aurora PostgreSQL DB cluster](babelfish-create.md)
 + [Migrating a SQL Server database to Babelfish for Aurora PostgreSQL](babelfish-migration.md)

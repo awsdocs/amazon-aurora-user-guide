@@ -67,7 +67,7 @@ Client connections from IP addresses within the range 169\.254\.0\.0/16 aren't p
 
 You can test your connection to a DB instance using common Linux or Microsoft Windows tools\. 
 
-From a Linux or Unix terminal, you can test the connection by entering the following \(replace `DB-instance-endpoint` with the endpoint and `port` with the port of your DB instance\)\.
+From a Linux or Unix terminal, you can test the connection by entering the following\. Replace `DB-instance-endpoint` with the endpoint and `port` with the port of your DB instance\.
 
 ```
 nc -zv DB-instance-endpoint port 
@@ -97,7 +97,7 @@ Amazon RDS doesn't accept internet control message protocol \(ICMP\) traffic, in
 
 ### Troubleshooting connection authentication<a name="CHAP_Troubleshooting.Connecting.Authorization"></a>
 
-If you can connect to your DB instance but you get authentication errors, you might want to reset the master user password for the DB instance\. You can do this by modifying the RDS instance\. 
+In some cases, you can connect to your DB instance but you get authentication errors\. In these cases, you might want to reset the master user password for the DB instance\. You can do this by modifying the RDS instance\. 
 
 ## Amazon RDS security issues<a name="CHAP_Troubleshooting.Security"></a>
 
@@ -117,12 +117,12 @@ You can change the DB instance password by using the Amazon RDS console, the AWS
 
 ## Amazon RDS DB instance outage or reboot<a name="CHAP_Troubleshooting.Reboots"></a>
 
-A DB instance outage can occur when a DB instance is rebooted\. It can also occur when the DB instance is put into a state that prevents access to it, and when the database is restarted\. A reboot can occur when you either manually reboot your DB instance or change a DB instance setting that requires a reboot before it can take effect\.
+A DB instance outage can occur when a DB instance is rebooted\. It can also occur when the DB instance is put into a state that prevents access to it, and when the database is restarted\. A reboot can occur when you manually reboot your DB instance\. A reboot can also occur when you change a DB instance setting that requires a reboot before it can take effect\.
 
- A DB instance reboot occurs when you change a setting that requires a reboot, or when you manually cause a reboot\. A reboot can occur immediately if you change a setting and request that the change take effect immediately or it can occur during the DB instance's maintenance window\.
+ A DB instance reboot occurs when you change a setting that requires a reboot, or when you manually cause a reboot\. A reboot can occur immediately if you change a setting and request that the change take effect immediately\. Or it can occur during the DB instance's maintenance window\.
 
  A DB instance reboot occurs immediately when one of the following occurs:
-+ You change the backup retention period for a DB instance from 0 to a nonzero value or from a nonzero value to 0 and set **Apply Immediately** to `true`\. 
++ You change the backup retention period for a DB instance from 0 to a nonzero value or from a nonzero value to 0\. You then set **Apply Immediately** to `true`\. 
 + You change the DB instance class, and **Apply Immediately** is set to `true`\. 
 
 A DB instance reboot occurs during the maintenance window when one of the following occurs:
@@ -135,7 +135,7 @@ When you change a static parameter in a DB parameter group, the change doesn't t
 
 In some cases, you might change a parameter in a DB parameter group but don't see the changes take effect\. If so, you likely need to reboot the DB instance associated with the DB parameter group\. When you change a dynamic parameter, the change takes effect immediately\. When you change a static parameter, the change doesn't take effect until you reboot the DB instance associated with the parameter group\.
 
-You can reboot a DB instance using the RDS console or explicitly calling the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) API operation \(without failover, if the DB instance is in a Multi\-AZ deployment\)\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call\. An example of this might be calling `ModifyDBInstance` to change the DB instance class\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+You can reboot a DB instance using the RDS console\. Or you can explicitly call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) API operation\. You can reboot without failover if the DB instance is in a Multi\-AZ deployment\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call\. An example of this is calling `ModifyDBInstance` to change the DB instance class\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
 ## Freeable memory issues in Amazon Aurora<a name="Troubleshooting.FreeableMemory"></a>
 
@@ -143,7 +143,7 @@ You can reboot a DB instance using the RDS console or explicitly calling the [ht
 
 You use the `FreeableMemory` metric in Amazon CloudWatch to monitor the freeable memory\. For more information, see [Overview of monitoring metrics in Amazon Aurora](MonitoringOverview.md)\.
 
-If your DB instance consistently runs low on freeable memory or uses swap space, you might need to scale up to a larger DB instance class\. For more information, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
+If your DB instance consistently runs low on freeable memory or uses swap space, consider scaling up to a larger DB instance class\. For more information, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
 
 You can also change the memory settings\. For example, on Aurora MySQL , you might adjust the size of the `innodb_buffer_pool_size` parameter\. This parameter is set by default to 75 percent of physical memory\. For more MySQL troubleshooting tips, see [How can I troubleshoot low freeable memory in an Amazon RDS for MySQL database?](https://aws.amazon.com/premiumsupport/knowledge-center/low-freeable-memory-rds-mysql-mariadb/)
 
@@ -151,13 +151,13 @@ For Aurora Serverless v2, `FreeableMemory` represents the amount of unused memor
 
 For every Aurora capacity unit \(ACU\) that the current capacity is below the maximum capacity, `FreeableMemory` increases by approximately 2 GiB\. Thus, this metric doesn't approach zero until the DB instance is scaled up as high as it can\.
 
-If this metric approaches a value of `0`, the DB instance has scaled up as much as it can and is nearing the limit of its available memory\. Consider increasing the maximum ACU setting for the cluster\. If this metric approaches a value of `0` on a reader DB instance, consider adding additional reader DB instances to the cluster\. That way, the read\-only part of the workload can be spread across more DB instances, reducing the memory usage on each reader DB instance\. For more information, see [Important Amazon CloudWatch metrics for Aurora Serverless v2](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.viewing.monitoring)\.
+If this metric approaches a value of `0`, the DB instance has scaled up as much as it can\. It's nearing the limit of its available memory\. Consider increasing the maximum ACU setting for the cluster\. If this metric approaches a value of `0` on a reader DB instance, consider adding additional reader DB instances to the cluster\. That way, the read\-only part of the workload can be spread across more DB instances, reducing the memory usage on each reader DB instance\. For more information, see [Important Amazon CloudWatch metrics for Aurora Serverless v2](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.viewing.monitoring)\.
 
 For Aurora Serverless v1, you can change the capacity range to use more ACUs\. For more information, see [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\.
 
 ## Amazon Aurora MySQL out of memory issues<a name="CHAP_Troubleshooting.AuroraMySQLOOM"></a>
 
-The Aurora MySQL `aurora_oom_response` instance\-level parameter can enable the DB instance to monitor the system memory and estimate the memory consumed by various statements and connections\. If the system runs low on memory, it can perform a list of actions to release that memory in an attempt to avoid out\-of\-memory \(OOM\) and database restart\. The instance\-level parameter takes a string of comma\-separated actions that a DB instance should take when its memory is low\. Valid actions include `print`, `tune`, `decline`, `kill_query`, or any combination of these\. An empty string means that no action should be taken and effectively disables the feature\.
+The Aurora MySQL `aurora_oom_response` instance\-level parameter can enable the DB instance to monitor the system memory and estimate the memory consumed by various statements and connections\. If the system runs low on memory, it can perform a list of actions to release that memory\. It does so in an attempt to avoid out\-of\-memory \(OOM\) and database restart\. The instance\-level parameter takes a string of comma\-separated actions that a DB instance should take when its memory is low\. Valid actions include `print`, `tune`, `decline`, `kill_query`, or any combination of these\. An empty string means that no action should be taken and effectively disables the feature\.
 
 **Note**  
  This parameter only applies to Aurora MySQL version 1\.18 and higher\. It isn't used in Aurora MySQL version 2\. 
@@ -226,12 +226,12 @@ You can reduce the lag between updates to a source DB instance and the subsequen
 
 ### Diagnosing and resolving a MySQL read replication failure<a name="CHAP_Troubleshooting.MySQL.RR"></a>
 
-Amazon RDS monitors the replication status of your read replicas and updates the **Replication State** field of the read replica instance to `Error` if replication stops for any reason\. You can review the details of the associated error thrown by the MySQL engines by viewing the **Replication Error** field\. Events that indicate the status of the read replica are also generated, including [RDS-EVENT-0045](USER_Events.Messages.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.Messages.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.Messages.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Working with Amazon RDS event notification](USER_Events.md)\. If a MySQL error message is returned, check the error in the [MySQL error message documentation](https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html)\. 
+Amazon RDS monitors the replication status of your read replicas\. RDS updates the **Replication State** field of the read replica instance to `Error` if replication stops for any reason\. You can review the details of the associated error thrown by the MySQL engines by viewing the **Replication Error** field\. Events that indicate the status of the read replica are also generated, including [RDS-EVENT-0045](USER_Events.Messages.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.Messages.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.Messages.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Working with Amazon RDS event notification](USER_Events.md)\. If a MySQL error message is returned, check the error in the [MySQL error message documentation](https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html)\. 
 
 Common situations that can cause replication errors include the following:
 + The value for the `max_allowed_packet` parameter for a read replica is less than the `max_allowed_packet` parameter for the source DB instance\. 
 
-  The `max_allowed_packet` parameter is a custom parameter that you can set in a DB parameter group\. The `max_allowed_packet` parameter is used to specify the maximum size of data manipulation language \(DML\) that can be run on the database\. If the `max_allowed_packet` value for the source DB instance is larger than the `max_allowed_packet` value for the read replica, the replication process can throw an error and stop replication\. The most common error is `packet bigger than 'max_allowed_packet' bytes`\. You can fix the error by having the source and read replica use DB parameter groups with the same `max_allowed_packet` parameter values\.
+  The `max_allowed_packet` parameter is a custom parameter that you can set in a DB parameter group\. The `max_allowed_packet` parameter is used to specify the maximum size of data manipulation language \(DML\) that can be run on the database\. In some cases, the `max_allowed_packet` value for the source DB instance might be larger than the `max_allowed_packet` value for the read replica\. If so, the replication process can throw an error and stop replication\. The most common error is `packet bigger than 'max_allowed_packet' bytes`\. You can fix the error by having the source and read replica use DB parameter groups with the same `max_allowed_packet` parameter values\.
 + Writing to tables on a read replica\. If you're creating indexes on a read replica, you need to have the `read_only` parameter set to *0* to create the indexes\. If you're writing to tables on the read replica, it can break replication\.
 + Using a nontransactional storage engine such as MyISAM\. Read replicas require a transactional storage engine\. Replication is only supported for the following storage engines: InnoDB for MySQL or MariaDB\.
 
@@ -242,9 +242,9 @@ Common situations that can cause replication errors include the following:
 
 The following steps can help resolve your replication error: 
 + If you encounter a logical error and you can safely skip the error, follow the steps described in [Skipping the current replication error](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.MySQL.CommonDBATasks.SkipError.html)\. Your Aurora MySQL DB instance must be running a version that includes the `mysql_rds_skip_repl_error` procedure\. For more information, see [mysql\_rds\_skip\_repl\_error](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_skip_repl_error.html)\.
-+ If you encounter a binary log \(binlog\) position issue, you can change the replica replay position with the `mysql.rds_next_master_log` \(Aurora MySQL version 1 and 2\) or `mysql.rds_next_source_log` \(Aurora MySQL version 3 and higher\) command\. Your Aurora MySQL DB instance must be running a version that supports this command to change the replica replay position\. For version information, see [mysql\_rds\_next\_master\_log](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_next_master_log.html)\.
++ If you encounter a binary log \(binlog\) position issue, you can change the replica replay position\. You do so with the `mysql.rds_next_master_log` command for Aurora MySQL version 1 and 2\. You do so with the `mysql.rds_next_source_log` command for Aurora MySQL version 3 and higher\. Your Aurora MySQL DB instance must be running a version that supports this command to change the replica replay position\. For version information, see [mysql\_rds\_next\_master\_log](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_next_master_log.html)\.
 + If you encounter a temporary performance issue due to high DML load, you can set the `innodb_flush_log_at_trx_commit` parameter to 2 in the DB parameter group on the read replica\. Doing this can help the read replica catch up, though it temporarily reduces atomicity, consistency, isolation, and durability \(ACID\)\.
-+ You can delete the read replica and create an instance using the same DB instance identifier so that the endpoint remains the same as that of your old read replica\.
++ You can delete the read replica and create an instance using the same DB instance identifier\. This way, the endpoint remains the same as that of your old read replica\.
 
 If a replication error is fixed, the **Replication State** changes to **replicating**\. For more information, see [Troubleshooting a MySQL read replica problem](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.Troubleshooting.html)\.
 

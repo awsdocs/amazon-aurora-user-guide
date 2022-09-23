@@ -1,14 +1,10 @@
 # Capturing Aurora PostgreSQL execution plans<a name="AuroraPostgreSQL.Optimize.CapturePlans"></a>
 
-You can capture execution plans for specific SQL statements by using manual plan capture\. Alternatively, you can capture all \(or the slowest\) plans that are executed two or more times as your application runs by using automatic plan capture\.
+Aurora PostgreSQL query plan management offers two different modes for capturing query execution plans, automatic or manual\. You choose the mode by setting the value of the `apg_plan_mgmt.capture_plans_baselines` to `automatic` or to `manual`\. You can capture execution plans for specific SQL statements by using manual plan capture\. Alternatively, you can capture all \(or the slowest\) plans that are executed two or more times as your application runs by using automatic plan capture\.
 
 When capturing plans, the optimizer sets the status of a managed statement's first captured plan to `approved`\. The optimizer sets the status of any additional plans captured for a managed statement to `unapproved`\. However, more than one plan might occasionally be saved with the `approved` status\. This can happen when multiple plans are created for a statement in parallel and before the first plan for the statement is committed\.
 
 To control the maximum number of plans that can be captured and stored in the `dba_plans` view, set the `apg_plan_mgmt.max_plans` parameter in your DB instance\-level parameter group\. A change to the `apg_plan_mgmt.max_plans` parameter requires a DB instance reboot for a new value to take effect\. For more information, see the [apg\_plan\_mgmt\.max\_plans](AuroraPostgreSQL.Optimize.Parameters.md#AuroraPostgreSQL.Optimize.Parameters.max_plans) parameter\. 
-
-**Topics**
-+ [Manually capturing plans for specific SQL statements](#AuroraPostgreSQL.Optimize.CapturePlans.Manual)
-+ [Automatically capturing plans](#AuroraPostgreSQL.Optimize.CapturePlans.Automatic)
 
 ## Manually capturing plans for specific SQL statements<a name="AuroraPostgreSQL.Optimize.CapturePlans.Manual"></a>
 

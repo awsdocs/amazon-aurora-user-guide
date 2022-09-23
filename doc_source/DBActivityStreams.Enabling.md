@@ -31,9 +31,11 @@ This choice applies only to Aurora PostgreSQL\. For Aurora MySQL, you can use on
 
      When you choose **Immediately**, the DB cluster restarts right away\. If you choose **During the next maintenance window**, the DB cluster doesn't restart right away\. In this case, the database activity stream doesn't start until the next maintenance window\.
 
-   When you're done entering settings, choose **Start database activity stream**\.
+1. Choose **Start database activity stream**\.
 
-   The status for the DB cluster shows that the activity stream is starting\. 
+   The status for the DB cluster shows that the activity stream is starting\.
+**Note**  
+If you get the error `You can't start a database activity stream in this configuration`, check [Supported DB instance classes for database activity streams](DBActivityStreams.Overview.md#DBActivityStreams.Overview.requirements.classes) to see whether your DB cluster is using a supported instance class\.
 
 ## AWS CLI<a name="DBActivityStreams.Enabling-collapsible-section-E2"></a>
 

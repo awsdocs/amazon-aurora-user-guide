@@ -41,7 +41,7 @@ Each formula variable returns an integer or a Boolean value\. The names of the v
 Returns an integer representing the size, in bytes, of the data volume\.
 
 *DBInstanceClassMemory*  
- Returns an integer for the number of bytes of memory available to the database process\. This number is internally calculated by taking the total amount of memory for the DB instance class and subtracting memory reserved for the operating system and the RDS processes that manage the instance\. Therefore, the number is always somewhat lower than the memory figures shown in the instance class tables in [Aurora DB instance classes](Concepts.DBInstanceClass.md)\. The exact value depends on a combination of instance class, DB engine, and whether it applies to an RDS instance or an instance that's part of an Aurora cluster\. 
+ Returns an integer for the number of bytes of memory available to the database process\. This number is internally calculated by starting with the total amount of memory for the DB instance class\. From this, the calculation subtracts memory reserved for the operating system and the RDS processes that manage the instance\. Therefore, the number is always somewhat lower than the memory figures shown in the instance class tables in [Aurora DB instance classes](Concepts.DBInstanceClass.md)\. The exact value depends on a combination of factors\. These include instance class, DB engine, and whether it applies to an RDS instance or an instance that's part of an Aurora cluster\. 
 
 *EndPointPort*  
 Returns an integer representing the port used when connecting to the DB instance\.

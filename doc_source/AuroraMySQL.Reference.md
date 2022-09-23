@@ -441,41 +441,42 @@
 
  Because of architectural differences between Aurora MySQL and MySQL, some MySQL parameters don't apply to Aurora MySQL\. 
 
- The following MySQL parameters don't apply to Aurora MySQL\. This list is not exhaustive\. 
-+  `activate_all_roles_on_login`\. This parameter isn't applicable to Aurora MySQL version 1 and 2\. It is available in Aurora MySQL version 3\.
-+  `big_tables` 
-+  `bind_address` 
-+  `character_sets_dir` 
-+  `innodb_adaptive_flushing` 
-+  `innodb_adaptive_flushing_lwm` 
-+  `innodb_change_buffering` 
-+  `innodb_checksum_algorithm` 
-+  `innodb_data_file_path` 
-+  `innodb_deadlock_detect`\. This parameter doesn't apply to Aurora MySQL version 1 and 2\. It is available in Aurora MySQL version 3\.
-+  `innodb_dedicated_server` 
-+  `innodb_doublewrite` 
-+  `innodb_flush_method` 
-+  `innodb_flush_neighbors` 
-+  `innodb_io_capacity` 
-+  `innodb_io_capacity_max` 
-+  `innodb_buffer_pool_chunk_size` 
-+  `innodb_buffer_pool_instances` 
-+  `innodb_log_buffer_size` 
-+  `innodb_default_row_format` 
-+  `innodb_log_file_size` 
-+  `innodb_log_files_in_group` 
-+  `innodb_log_spin_cpu_abs_lwm` 
-+  `innodb_log_spin_cpu_pct_hwm` 
-+  `innodb_max_dirty_pages_pct` 
-+  `innodb_numa_interleave` 
-+  `innodb_page_size` 
-+  `innodb_redo_log_encrypt` 
-+  `innodb_undo_log_encrypt` 
-+  `innodb_undo_log_truncate` 
-+  `innodb_use_native_aio` 
-+  `innodb_write_io_threads` 
+The following MySQL parameters don't apply to Aurora MySQL\. This list is not exhaustive\.
++ `activate_all_roles_on_login`\. This parameter doesn't apply to Aurora MySQL version 1 and 2\. It is available in Aurora MySQL version 3\.
++ `big_tables`
++ `bind_address`
++ `character_sets_dir`
++ `innodb_adaptive_flushing`
++ `innodb_adaptive_flushing_lwm`
++ `innodb_buffer_pool_chunk_size`
++ `innodb_buffer_pool_instances`
++ `innodb_change_buffering`
++ `innodb_checksum_algorithm`
++ `innodb_data_file_path`
++ `innodb_deadlock_detect`\. This parameter doesn't apply to Aurora MySQL version 1 and 2\. It is available in Aurora MySQL version 3\.
++ `innodb_dedicated_server`
++ `innodb_default_row_format`
++ `innodb_doublewrite`
++ `innodb_flush_method`
++ `innodb_flush_neighbors`
++ `innodb_io_capacity`
++ `innodb_io_capacity_max`
++ `innodb_log_buffer_size`
++ `innodb_log_file_size`
++ `innodb_log_files_in_group`
++ `innodb_log_spin_cpu_abs_lwm`
++ `innodb_log_spin_cpu_pct_hwm`
++ `innodb_max_dirty_pages_pct`
++ `innodb_numa_interleave`
++ `innodb_page_size`
++ `innodb_redo_log_capacity`
++ `innodb_redo_log_encrypt`
++ `innodb_undo_log_encrypt`
++ `innodb_undo_log_truncate`
++ `innodb_use_native_aio`
++ `innodb_write_io_threads`
 + `key_buffer_size` – Key cache for MyISAM tables\. This parameter doesn't apply to Aurora\.
-+  `thread_cache_size` 
++ `thread_cache_size`
 
 ## MySQL status variables that don't apply to Aurora MySQL<a name="AuroraMySQL.Reference.StatusVars.Inapplicable"></a><a name="status_vars"></a>
 

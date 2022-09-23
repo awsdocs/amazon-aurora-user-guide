@@ -6,24 +6,24 @@ In the following table you can find T\-SQL functionality supported by different 
 | Functionality or syntax | 2\.1\.0 | 1\.2\.1 | 1\.1\.0 | 1\.0\.0 | 
 | --- |--- |--- |--- |--- |
 | ALTER ROLE | ✓ | – | – | – | 
-| Connecting with the SSMS object explorer connection dialog | ✓ | – | – | – | 
 | CREATE ROLE | ✓ | – | – | – | 
 | Create unique indexes | ✓ | ✓ | ✓ | – | 
 | Cross–database references SELECT,SELECT\.\.INTO, INSERT, UPDATE, DELETE | ✓ | – | – | – | 
 | Cursor\-typed parameters for input parameters only \(not output\) | ✓ | ✓ | ✓ | ✓ | 
 | Data migration using the bcp client utility | ✓ | – | – | – | 
-| Data migration with the SSMS Import/Export Wizard | ✓ | – | – | – | 
 | Datatypes TIMESTAMP, ROWVERSION \(for usage information, see Features with limited implementation | ✓ | ✓ | – | – | 
 | DROP IF EXISTS \(for SCHEMA, DATABASE, and USER objects\) | ✓ | ✓ | – | – | 
 | DROP ROLE | ✓ | – | – | – | 
 | GRANT | ✓ | ✓ | – | – | 
 | Identifiers with leading dot character | ✓ | ✓ | ✓ | – | 
 | INSTEAD OF triggers on tables \(tables only, not views\) | ✓ | ✓ | – | – | 
-| Partial support for the SSMS object explorer | ✓ | – | – | – | 
 | REVOKE | ✓ | ✓ | – | – | 
 | SET BABELFISH\_SHOWPLAN\_ALL ON \(and OFF\) | ✓ | – | – | – | 
 | SET BABELFISH\_STATISTICS PROFILE ON \(OFF\) | ✓ | – | – | – | 
 | SET LOCK\_TIMEOUT | ✓ | ✓ | – | – | 
+| SSMS: Connecting with the object explorer connection dialog | ✓ | – | – | – | 
+| SSMS: Data migration with the Import/Export Wizard | ✓ | – | – | – | 
+| SSMS: Partial support for the object explorer | ✓ | – | – | – | 
 | Triggers with multiple DML actions can reference transition tables | ✓ | ✓ | ✓ | – | 
 | Built\-in functions: | 
 | --- |

@@ -16,7 +16,7 @@ You can scale Aurora PostgreSQL DB instances in two ways, instance scaling and r
 
 You can scale your Aurora PostgreSQL DB cluster by modifying the DB instance class for each DB instance in the DB cluster\. Aurora PostgreSQL supports several DB instance classes optimized for Aurora\. Don't use db\.t2 or db\.t3 instance classes for larger Aurora clusters of size greater than 40 terabytes \(TB\)\. 
 
-Scaling isn't instantaneous\. It can take 15 minutes or more to complete the change to a different DB instance class\. We recommend that if use this approach to modify the DB instance class, you apply the change during the next scheduled maintenance window \(rather than immediately\) to avoid affecting users\. 
+Scaling isn't instantaneous\. It can take 15 minutes or more to complete the change to a different DB instance class\. If you use this approach to modify the DB instance class, you apply the change during the next scheduled maintenance window \(rather than immediately\) to avoid affecting users\. 
 
 As an alternative to modifying the DB instance class directly, you can minimize downtime by using the high availability features of Amazon Aurora\. First, add an Aurora Replica to your cluster\. When creating the replica, choose the DB instance class size that you want to use for your cluster\. When the Aurora Replica is synchronized with the cluster, you then failover to the newly added Replica\. To learn more, see [Aurora Replicas](Aurora.Replication.md#Aurora.Replication.Replicas) and [Fast failover with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.FastFailover.md)\. 
 

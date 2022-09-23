@@ -8,7 +8,7 @@ Deferred DB cluster and instance modifications that you have chosen not to apply
 
 ## Viewing pending maintenance<a name="USER_UpgradeDBInstance.Maintenance.Viewing"></a>
 
-You can view whether a maintenance update is available for your DB cluster by using the RDS console, the AWS CLI, or the Amazon RDS API\. If an update is available, it is indicated in the **Maintenance** column for the DB cluster on the Amazon RDS console, as shown following\.
+View whether a maintenance update is available for your DB cluster by using the RDS console, the AWS CLI, or the RDS API\. If an update is available, it is indicated in the **Maintenance** column for the DB cluster on the Amazon RDS console, as shown following\.
 
 ![\[Offline patch available\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/offlinepatchavailable.png)
 
@@ -132,11 +132,11 @@ To return a list of resources that have at least one pending update, call the Am
 
 ## The Amazon RDS maintenance window<a name="Concepts.DBMaintenance"></a>
 
-Every DB cluster has a weekly maintenance window during which any system changes are applied\. You can think of the maintenance window as an opportunity to control when modifications and software patching occur, in the event either are requested or required\. If a maintenance event is scheduled for a given week, it is initiated during the 30\-minute maintenance window you identify\. Most maintenance events also complete during the 30\-minute maintenance window, although larger maintenance events may take more than 30 minutes to complete\. 
+Every DB cluster has a weekly maintenance window during which any system changes are applied\. Think of the maintenance window as an opportunity to control when modifications and software patching occur\. If a maintenance event is scheduled for a given week, it's initiated during the 30\-minute maintenance window you identify\. Most maintenance events also complete during the 30\-minute maintenance window, although larger maintenance events may take more than 30 minutes to complete\. 
 
-The 30\-minute maintenance window is selected at random from an 8\-hour block of time per region\. If you don't specify a preferred maintenance window when you create the DB cluster, then Amazon RDS assigns a 30\-minute maintenance window on a randomly selected day of the week\. 
+The 30\-minute maintenance window is selected at random from an 8\-hour block of time per region\. If you don't specify a maintenance window when you create the DB cluster, RDS assigns a 30\-minute maintenance window on a randomly selected day of the week\. 
 
-RDS will consume some of the resources on your DB cluster while maintenance is being applied\. You might observe a minimal effect on performance\. For a DB instance, on rare occasions, a Multi\-AZ failover might be required for a maintenance update to complete\. 
+RDS consumes some of the resources on your DB cluster while maintenance is being applied\. You might observe a minimal effect on performance\. For a DB instance, on rare occasions, a Multi\-AZ failover might be required for a maintenance update to complete\. 
 
 Following, you can find the time blocks for each region from which default maintenance windows are assigned\. 
 
@@ -206,7 +206,7 @@ To adjust the preferred DB cluster maintenance window, use the Amazon RDS [https
  The **Auto minor version upgrade** setting specifies whether Aurora automatically applies upgrades to your cluster\. These upgrades include patch levels containing bug fixes, and new minor versions containing additional features\. They don't include any incompatible changes\. 
 
 **Note**  
- This setting is enabled by default\. For each new cluster, choose the appropriate value for this setting based on its importance, expected lifetime, and the amount of verification testing that you do after each upgrade\. 
+ This setting is enabled by default\. For each new cluster, choose the appropriate value for this setting\. This value is based on its importance, expected lifetime, and the amount of verification testing that you do after each upgrade\. 
 
  For instructions about turning this setting on or off, see [Settings for Amazon Aurora](Aurora.Modifying.md#Aurora.Modifying.Settings)\. In particular, make sure to apply the same setting to all DB instances in the cluster\. If any DB instance in your cluster has this setting turned off, the cluster isn't automatically upgraded\. 
 
@@ -221,7 +221,7 @@ For more information about engine updates for Aurora PostgreSQL, see [Amazon Aur
  You might choose to upgrade an Aurora MySQL cluster rarely if some or all of the following conditions apply: 
 +  Your testing cycle for your application takes a long time for each update to the Aurora MySQL database engine\. 
 +  You have many DB clusters or many applications all running on the same Aurora MySQL version\. You prefer to upgrade all of your DB clusters and associated applications at the same time\. 
-+  You use both Aurora MySQL and RDS for MySQL, and you prefer to keep the Aurora MySQL clusters and RDS for MySQL DB instances compatible with the same level of MySQL\. 
++  You use both Aurora MySQL and RDS for MySQL\. You prefer to keep the Aurora MySQL clusters and RDS for MySQL DB instances compatible with the same level of MySQL\. 
 +  Your Aurora MySQL application is in production or is otherwise business\-critical\. You can't afford downtime for upgrades outside of rare occurrences for critical patches\. 
 +  Your Aurora MySQL application isn't limited by performance issues or feature gaps that are addressed in subsequent Aurora MySQL versions\. 
 
@@ -233,4 +233,4 @@ For more information about engine updates for Aurora PostgreSQL, see [Amazon Aur
 +  Your database environment uses a variety of Aurora MySQL versions, or Aurora MySQL and RDS for MySQL versions\. Each Aurora MySQL cluster has its own upgrade cycle\. 
 +  You are waiting for specific performance or feature improvements before you increase your usage of Aurora MySQL\. 
 
- If the preceding factors apply to your situation, you can enable Aurora to apply important upgrades more frequently by upgrading an Aurora MySQL DB cluster to a more recent Aurora MySQL version than the LTS version\. Doing so makes the latest performance enhancements, bug fixes, and features available to you more quickly\. 
+ If the preceding factors apply to your situation, you can enable Aurora to apply important upgrades more frequently\. To do so, upgrade an Aurora MySQL DB cluster to a more recent Aurora MySQL version than the LTS version\. Doing so makes the latest performance enhancements, bug fixes, and features available to you more quickly\. 

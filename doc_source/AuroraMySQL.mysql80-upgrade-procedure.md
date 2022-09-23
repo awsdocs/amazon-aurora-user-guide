@@ -142,7 +142,7 @@ mysql> select version();
 
  The Aurora MySQL version 1 cluster that we start with is named `aurora-mysql-v1-to-v2`\. It's running Aurora MySQL version 1\.23\.4\. It has at least one DB instance in the cluster\. 
 
- This example checks which Aurora MySQL version 2 versions can be upgraded to the `8.0.mysql_aurora.3.02.0` version to use on the upgraded cluster\. For this example, we choose version 2\.10\.0 as the intermediate version\. 
+ This example checks which Aurora MySQL version 2 versions can be upgraded to the `8.0.mysql_aurora.3.02.0` version to use on the upgraded cluster\. For this example, we choose version 2\.10\.2 as the intermediate version\. 
 
 ```
 $ aws rds describe-db-engine-versions --engine aurora-mysql \
@@ -154,15 +154,17 @@ $ aws rds describe-db-engine-versions --engine aurora-mysql \
 5.7.mysql_aurora.2.09.1
 5.7.mysql_aurora.2.09.2
 5.7.mysql_aurora.2.10.0
+5.7.mysql_aurora.2.10.1
+5.7.mysql_aurora.2.10.2
 ...
 ```
 
- The following example verifies that Aurora MySQL version 1\.23\.4 to 2\.10\.0 is an available upgrade path\. Thus, the Aurora MySQL version that we're running can be upgraded to 2\.10\.0\. Then that cluster can be upgraded to 3\.02\.0\. 
+The following example verifies that Aurora MySQL version 1\.23\.4 to 2\.10\.2 is an available upgrade path\. Thus, the Aurora MySQL version that we're running can be upgraded to 2\.10\.2\. Then that cluster can be upgraded to 3\.02\.0\.
 
 ```
 aws rds describe-db-engine-versions --engine aurora \
   --query '*[].{EngineVersion:EngineVersion,TargetVersions:ValidUpgradeTarget[*].EngineVersion} |
-    [?contains(TargetVersions, `'5.7.mysql_aurora.2.10.0'`) == `true`]|[].[EngineVersion]' \
+    [?contains(TargetVersions, `'5.7.mysql_aurora.2.10.2'`) == `true`]|[].[EngineVersion]' \
   --output text
 ...
 5.6.mysql_aurora.1.22.5
@@ -186,15 +188,13 @@ $ aws rds create-db-cluster-snapshot \
 }
 ```
 
- The following example creates the intermediate Aurora MySQL version 2 cluster from the version 1 snapshot\. This intermediate cluster is named `aurora-mysql-v2-to-v3`\. It's running Aurora MySQL version 2\.10\.0\. 
-
- The example also creates a writer instance for the cluster\. For the upgrade process to work properly, this intermediate cluster requires a writer instance\. 
+ The following example creates the intermediate Aurora MySQL version 2 cluster from the version 1 snapshot\. This intermediate cluster is named `aurora-mysql-v2-to-v3`\. It's running Aurora MySQL version 2\.10\.2\. 
 
 ```
 $ aws rds restore-db-cluster-from-snapshot \
   --snapshot-id aurora-mysql-v1-to-v2-snapshot \
   --db-cluster-id aurora-mysql-v2-to-v3 \
-  --engine aurora-mysql --engine-version 5.7.mysql_aurora.2.10.0 \
+  --engine aurora-mysql --engine-version 5.7.mysql_aurora.2.10.2 \
   --enable-cloudwatch-logs-exports '["error","general","slowquery","audit"]'
 {
     "DBCluster": {
@@ -205,16 +205,6 @@ $ aws rds restore-db-cluster-from-snapshot \
             "us-east-1f"
         ],
 ...
-
-$ aws rds create-db-instance --db-instance-identifier upgrade-demo-instance \
-  --db-cluster-identifier aurora-mysql-v2-to-v3 \
-  --db-instance-class db.r5.xlarge \
-  --engine aurora-mysql
-{
-  "DBInstanceIdentifier": "upgrade-demo-instance",
-  "DBInstanceClass": "db.r5.xlarge",
-  "DBInstanceStatus": "creating"
-}
 ```
 
  The following example creates a snapshot from the intermediate Aurora MySQL version 2 cluster\. This snapshot is named `aurora-mysql-v2-to-v3-snapshot`\. This is the snapshot to be restored to create the Aurora MySQL version 3 cluster\. 

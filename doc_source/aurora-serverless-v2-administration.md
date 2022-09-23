@@ -348,15 +348,14 @@ Aurora Serverless v2 DB clusters that are based on Aurora PostgreSQL support the
 
  Then you choose which of those logs to upload to CloudWatch, by using the **Log exports** settings in the AWS Management Console or the `--enable-cloudwatch-logs-exports`\. option in the AWS CLI\. 
 
- You can choose which of your Aurora Serverless v2 logs to upload to CloudWatch\. 
+You can choose which of your Aurora Serverless v2 logs to upload to CloudWatch\. For more information, see [Using Advanced Auditing with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Auditing.md)\.
 
- As with any type of Aurora DB cluster, you can't modify the default DB cluster parameter group\. Instead, create your own DB cluster parameter group based on a default parameter for your DB cluster and engine type\. For Aurora Serverless v2 and Aurora Serverless, you use a DB cluster parameter group only\. 
+As with any type of Aurora DB cluster, you can't modify the default DB cluster parameter group\. Instead, create your own DB cluster parameter group based on a default parameter for your DB cluster and engine type\. We recommend that you create your custom DB cluster parameter group before creating your Aurora Serverless v2 DB cluster, so that it's available to choose when you create a database on the console\.
 
- We recommend that you create your custom DB cluster parameter group before creating your Aurora Serverless v2 DB cluster, so that it's available to choose when you create a database on the console\. 
+**Note**  
+For Aurora Serverless v2, you can create both DB cluster and DB parameter groups\. This contrasts with Aurora Serverless v1, where you can only create DB cluster parameter groups\.
 
- For more information, see [Using Advanced Auditing with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Auditing.md)\. 
-
- After you apply your modified DB cluster parameter group to your Aurora Serverless v2 DB cluster, you can view the logs in CloudWatch\. 
+After you apply your modified DB cluster parameter group to your Aurora Serverless v2 DB cluster, you can view the logs in CloudWatch\.
 
 **To view Aurora Serverless v2 logs**
 

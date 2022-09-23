@@ -2,6 +2,11 @@
 
 Query plan management lets you control how and when query execution plans change\. As a DBA, your main goals when using QPM include preventing regressions when there are changes to your database, and controlling when the optimizer can use a new plan\. In the following, you can find some recommended best practices for using query plan management\. Proactive and reactive plan management approaches differ in how and when new plans get approved for use\. 
 
+**Contents**
++ [Proactive plan management to help prevent performance regression](#AuroraPostgreSQL.Optimize.BestPractice.Proactive)
+  + [Ensuring plan stability after a major version upgrade](#AuroraPostgreSQL.Optimize.BestPractice.MajorVersionUpgrade)
++ [Reactive plan management to detect and repair performance regressions](#AuroraPostgreSQL.Optimize.BestPractice.Reactive)
+
 ## Proactive plan management to help prevent performance regression<a name="AuroraPostgreSQL.Optimize.BestPractice.Proactive"></a>
 
 To prevent plan performance regressions from occurring, you gather evidence and then manually approve new plans after you have verified that they are faster\. 
@@ -20,7 +25,9 @@ To prevent plan performance regressions from occurring, you gather evidence and 
 
 Each major version of PostgreSQL includes enhancements and changes to the query optimizer that are designed to improve performance\. However, your workload may include queries that result in a worse performing plan in the new version\. You can use the query plan manager to ensure plan stability after a major version upgrade\.
 
-The optimizer always uses the minimum cost plan, even if more than one approved plans exist\. That means that you can have multiple approved plans for each statement in your workload prior to upgrading\. After the upgrade, the optimizer will use only one of the approved plans, even if the changes in the new major version might lead to a different plan being created\. After upgrading, you can use the `evolve_plan_baselines` function to compare plan performance before and after the upgrade using your query parameter bindings\. The following steps assume that you have been using approved managed plans in your production environment, as detailed in [Using Aurora PostgreSQL managed plans](AuroraPostgreSQL.Optimize.UsePlans.md)\. 
+The optimizer always uses the minimum cost plan, even if more than one approved plans exist\. That means that you can have multiple approved plans for each statement in your workload prior to upgrading\. After the upgrade, the optimizer will use only one of the approved plans, even if the changes in the new major version might lead to a different plan being created\. 
+
+After upgrading, you can use the `evolve_plan_baselines` function to compare plan performance before and after the upgrade using your query parameter bindings\. The following steps assume that you have been using approved managed plans in your production environment, as detailed in [Using Aurora PostgreSQL managed plans](AuroraPostgreSQL.Optimize.UsePlans.md)\. 
 
 1. Before upgrading, run your application with the query plan manager running\. While the application runs, add new plans as the optimizer discovers them\. For more information, see [Automatically capturing plans](AuroraPostgreSQL.Optimize.CapturePlans.md#AuroraPostgreSQL.Optimize.CapturePlans.Automatic)\. 
 

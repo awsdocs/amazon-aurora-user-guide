@@ -2,20 +2,9 @@
 
 Query plan management provides techniques and functions to add, maintain, and improve execution plans\.
 
-**Topics**
-+ [Evaluating plan performance](#AuroraPostgreSQL.Optimize.Maintenance.EvaluatingPerformance)
-+ [Validating plans](#AuroraPostgreSQL.Optimize.Maintenance.ValidatingPlans)
-+ [Fixing plans using pg\_hint\_plan](#AuroraPostgreSQL.Optimize.Maintenance.pg_hint_plan)
-+ [Deleting plans](#AuroraPostgreSQL.Optimize.Maintenance.DeletingPlans)
-+ [Exporting and importing plans](#AuroraPostgreSQL.Optimize.Maintenance.ExportingImporting)
-
 ## Evaluating plan performance<a name="AuroraPostgreSQL.Optimize.Maintenance.EvaluatingPerformance"></a>
 
 After the optimizer captures plans as unapproved, use the `apg_plan_mgmt.evolve_plan_baselines` function to compare plans based on their actual performance\. Depending on the outcome of your performance experiments, you can change a plan's status from unapproved to either approved or rejected\. You can instead decide to use the `apg_plan_mgmt.evolve_plan_baselines` function to temporarily disable a plan if it does not meet your requirements\. 
-
-**Topics**
-+ [Approving better plans](#AuroraPostgreSQL.Optimize.Maintenance.EvaluatingPerformance.Approving)
-+ [Rejecting or disabling slower plans](#AuroraPostgreSQL.Optimize.Maintenance.EvaluatingPerformance.Rejecting)
 
 ### Approving better plans<a name="AuroraPostgreSQL.Optimize.Maintenance.EvaluatingPerformance.Approving"></a>
 
@@ -110,7 +99,7 @@ FROM t1, t2
 WHERE t1.id = t2.id;
 ```
 
-Then suppose that the optimizer chooses the join order \(t1, t2\), but we know that the join order \(t2, t1\) is faster\. The following hint forces the optimizer to use the faster join order, \(t2, t1\)\. Include EXPLAIN so that the optimizer generates a plan for the SQL statement but does not run the statement\. \(Output not shown\.\)
+Then suppose that the optimizer chooses the join order \(t1, t2\), but you know that the join order \(t2, t1\) is faster\. The following hint forces the optimizer to use the faster join order, \(t2, t1\)\. Include EXPLAIN so that the optimizer generates a plan for the SQL statement but without running the statement\. \(Output not shown\.\)
 
 ```
 /*+ Leading ((t2 t1)) */ EXPLAIN SELECT * 
@@ -162,9 +151,11 @@ The following steps show how to use `pg_hint_plan`\.
 
 ## Deleting plans<a name="AuroraPostgreSQL.Optimize.Maintenance.DeletingPlans"></a>
 
-Delete plans that have not been used for a long time or that are no longer relevant\. Each plan has a `last_used` date that the optimizer updates each time it executes a plan or picks it as the minimum\-cost plan for a statement\. Use the `last_used` date to determine if a plan has been used recently and is still relevant\. 
+Plans are automatically deleted if they haven't been used in over a month, specifically, 32 days\. That's the default setting for the `apg_plan_mgmt.plan_retention_period` parameter\. You can change the plan retention period to a longer period of time, but 32 is the minimum\. Determining the number of days since a plan was last used is calculated by subtracting the `last_used` date from the current date\. The `last_used` date is the most recent date that the optimizer chose the plan as the minimum cost plan or that the plan was run\. The date is stored for the plan in the `apg_plan_mgmt.dba_plans` view\. 
 
-For example, you can use the `apg_plan_mgmt.delete_plan` function as follows\. Doing this deletes all plans that haven't been chosen as the minimum\-cost plan or haven't run in at least 31 days\. However, this example doesn't delete plans that have been explicitly rejected\.
+We recommend that you delete plans that haven't been used for a long time or that aren't useful\. Every plan has a `last_used` date that the optimizer updates each time it executes a plan or chooses the plan as the minimum\-cost plan for a statement\. Check the last `last_used` dates to identify the plans that you can safely delete\.
+
+Following is an example of how to use the `apg_plan_mgmt.delete_plan` function to delete all plans that haven't been chosen as the minimum\-cost plan in the last 31 days\. This example doesn't delete plans that have been explicitly rejected\.
 
 ```
 SELECT SUM(apg_plan_mgmt.delete_plan(sql_hash, plan_hash))
@@ -173,12 +164,12 @@ WHERE last_used < (current_date - interval '31 days')
 AND status <> 'Rejected';
 ```
 
-To delete any plan that is no longer valid and that you expect not to become valid again, use the `apg_plan_mgmt.validate_plans` function\. For more information, see [Validating plans](#AuroraPostgreSQL.Optimize.Maintenance.ValidatingPlans)\. 
+For more information, see [apg\_plan\_mgmt\.delete\_plan](AuroraPostgreSQL.Optimize.Functions.md#AuroraPostgreSQL.Optimize.Functions.delete_plan)\.
 
-You can implement your own policy for deleting plans\. Plans are automatically deleted when the current date `last_used` is greater than the value of the `apg_plan_mgmt.plan_retention_period` parameter, which defaults to 32 days\. You can specify a longer interval, or you can implement your own plan retention policy by calling the `delete_plan` function directly\. The `last_used` date is the most recent date that either the optimizer chose a plan as the minimum cost plan or that the plan was executed\.
+To delete plans that aren't valid and that you expect to remain invalid, use the `apg_plan_mgmt.validate_plans` function\. This function lets you delete or disable invalid plans\. For more information, see [Validating plans](#AuroraPostgreSQL.Optimize.Maintenance.ValidatingPlans)\. 
 
 **Important**  
-If you don't clean up plans, you might eventually run out of shared memory that's set aside for query plan management\. To control how much memory is available for managed plans, use the `apg_plan_mgmt.max_plans` parameter\. Set this parameter in your DB instance\-level parameter group and reboot your DB instance for changes to take effect\. For more information, see the [apg\_plan\_mgmt\.max\_plans](AuroraPostgreSQL.Optimize.Parameters.md#AuroraPostgreSQL.Optimize.Parameters.max_plans) parameter\. 
+If you don't delete extraneous plans, you might eventually run out of shared memory that's set aside for query plan management\. To control how much memory is available for managed plans, use the `apg_plan_mgmt.max_plans` parameter\. Set this parameter in your custom DB parameter group and reboot your DB instance for changes to take effect\. For more information, see the [apg\_plan\_mgmt\.max\_plans](AuroraPostgreSQL.Optimize.Parameters.md#AuroraPostgreSQL.Optimize.Parameters.max_plans) parameter\. 
 
 ## Exporting and importing plans<a name="AuroraPostgreSQL.Optimize.Maintenance.ExportingImporting"></a>
 

@@ -12,7 +12,7 @@ Aurora supports many different types of cloning:
 
 A cloned Aurora Serverless DB cluster has the same behavior and limitations as any Aurora Serverless v1 DB cluster\. For more information, see [Using Amazon Aurora Serverless v1](aurora-serverless.md)\. 
 
-When you create clones from your Aurora DB clusters, the clones are created in your AWS account—the same account that owns the source Aurora DB cluster\. However, you can also share provisioned Aurora DB clusters and clones with other AWS accounts\. For more information, see [Cross\-account cloning with AWS RAM and Amazon Aurora](#Aurora.Managing.Clone.Cross-Account)\.\.
+When you create clones from your Aurora DB clusters, the clones are created in your AWS account—the same account that owns the source Aurora DB cluster\. However, you can also share provisioned Aurora DB clusters and clones with other AWS accounts\. For more information, see [Cross\-account cloning with AWS RAM and Amazon Aurora](#Aurora.Managing.Clone.Cross-Account)\.
 
 Cross\-account cloning currently doesn't support cloning Aurora Serverless v1 DB clusters\. For more information, see [Limitations of cross\-account cloning](#Aurora.Managing.Clone.CrossAccount.Limitations)\.
 
@@ -567,7 +567,7 @@ If the encrypted cluster that you plan to share uses the default RDS key, make s
 
  For the procedures to work with invitations in the AWS RAM console, see [Accessing resources shared with you](https://docs.aws.amazon.com/ram/latest/userguide/working-with-shared.html) in the *AWS RAM User Guide*\. 
 
-##### Console<a name="Aurora.Managing.Clone.CrossAccount.accepting.console"></a>
+##### AWS CLI<a name="Aurora.Managing.Clone.CrossAccount.accepting.cli"></a>
 
 **To accept an invitation to share a cluster from another AWS account**
 

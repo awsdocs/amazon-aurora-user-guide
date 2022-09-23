@@ -21,7 +21,7 @@ Aurora MySQL writes errors in the `mysql-error.log` file\. Each log file has the
 
 Aurora MySQL writes to the error log only on startup, shutdown, and when it encounters errors\. A DB instance can go hours or days without new entries being written to the error log\. If you see no recent entries, it's because the server didn't encounter an error that would result in a log entry\.
 
-By design, the error logs are filtered so that only unexpected events such as errors are shown\. However, the error logs also contain some additional database information, for example query progress, that isn't shown\. Therefore, even without any actual errors the size of the error logs might increase because of ongoing database activities\.
+By design, the error logs are filtered so that only unexpected events such as errors are shown\. However, the error logs also contain some additional database information, for example query progress, which isn't shown\. Therefore, even without any actual errors the size of the error logs might increase because of ongoing database activities\.
 
 Aurora MySQL writes `mysql-error.log` to disk every 5 minutes\. It appends the contents of the log to `mysql-error-running.log`\.
 
@@ -32,13 +32,13 @@ The log retention period is different between Amazon RDS and Aurora\.
 
 ## Aurora MySQL slow query and general logs<a name="USER_LogAccess.MySQL.Generallog"></a>
 
-The Aurora MySQL slow query log and the general log can be written to a file or a database table by setting parameters in your DB parameter group\. For information about creating and modifying a DB parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. You must set these parameters before you can view the slow query log or general log in the Amazon RDS console or by using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\.
+You can write the Aurora MySQL slow query log and the general log to a file or a database table\. To do so, set parameters in your DB parameter group\. For information about creating and modifying a DB parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. You must set these parameters before you can view the slow query log or general log in the Amazon RDS console or by using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\.
 
 You can control Aurora MySQL logging by using the parameters in this list:
 + `slow_query_log`: To create the slow query log, set to 1\. The default is 0\.
 + `general_log`: To create the general log, set to 1\. The default is 0\.
-+ `long_query_time`: To prevent fast\-running queries from being logged in the slow query log, specify a value for the shortest query run time to be logged, in seconds\. The default is 10 seconds; the minimum is 0\. If log\_output = FILE, you can specify a floating point value that goes to microsecond resolution\. If log\_output = TABLE, you must specify an integer value with second resolution\. Only queries whose run time exceeds the `long_query_time` value are logged\. For example, setting `long_query_time` to 0\.1 prevents any query that runs for less than 100 milliseconds from being logged\.
-+ `log_queries_not_using_indexes`: To log all queries that do not use an index to the slow query log, set to 1\. Queries that don't use an index are logged even if their run time is less than the value of the `long_query_time` parameter\. The default is 0\.
++ `long_query_time`: To prevent fast\-running queries from being logged in the slow query log, specify a value for the shortest query runtime to be logged, in seconds\. The default is 10 seconds; the minimum is 0\. If log\_output = FILE, you can specify a floating point value that goes to microsecond resolution\. If log\_output = TABLE, you must specify an integer value with second resolution\. Only queries whose runtime exceeds the `long_query_time` value are logged\. For example, setting `long_query_time` to 0\.1 prevents any query that runs for less than 100 milliseconds from being logged\.
++ `log_queries_not_using_indexes`: To log all queries that do not use an index to the slow query log, set to 1\. Queries that don't use an index are logged even if their runtime is less than the value of the `long_query_time` parameter\. The default is 0\.
 + `log_output option`: You can specify one of the following options for the `log_output` parameter\. 
   + **TABLE** – Write general queries to the `mysql.general_log` table, and slow queries to the `mysql.slow_log` table\.
   + **FILE** – Write both general and slow query logs to the file system\.
@@ -70,4 +70,4 @@ To work with the logs from the Amazon RDS console, Amazon RDS API, Amazon RDS CL
 
 ## Size limits on BLOBs written to the redo log<a name="USER_LogAccess.MySQL.LogFileSize.BLOBs"></a>
 
-For Aurora MySQL, there is a size limit on BLOBs written to the redo log\. To account for this limit, ensure that the `innodb_log_file_size` parameter for your Aurora MySQL DB instance is 10 times larger than the largest BLOB data size found in your tables, plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in the same tables\. For information on how to set parameter values, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. For information on the redo log BLOB size limit, see [Changes in MySQL 5\.6\.20](http://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html) in the MySQL documentation\.
+For Aurora MySQL, there is a size limit on BLOBs written to the redo log\. To account for this limit, check the `innodb_log_file_size` parameter for your Aurora MySQL DB instance\. Make sure that it is 10 times larger than the largest BLOB data size found in your tables plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in these tables\. For information about how to set parameter values, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. For information about the redo log BLOB size limit, see [Changes in MySQL 5\.6\.20](http://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html) in the MySQL documentation\.

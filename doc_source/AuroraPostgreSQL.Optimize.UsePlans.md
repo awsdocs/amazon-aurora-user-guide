@@ -6,13 +6,38 @@ To get the optimizer to use captured plans for your managed statements, set the 
 SET apg_plan_mgmt.use_plan_baselines = true;
 ```
 
-While the application runs, this setting causes the optimizer to use the minimum\-cost, preferred, or approved plan that is valid and enabled, for each managed statement\. 
+While the application runs, this setting causes the optimizer to use the minimum\-cost, preferred, or approved plan that is valid and enabled for each managed statement\. 
+
+## Analyzing the optimizer's chosen plan<a name="AuroraPostgreSQL.Optimize.UsePlans.AnalyzePlans"></a>
+
+When the `apg_plan_mgmt.use_plan_baselines` parameter is set to `true`, you can use EXPLAIN ANALYZE SQL statements to cause the optimizer to show the plan it would use if it were to run the statement\. The following is an example\.
+
+```
+EXPLAIN ANALYZE EXECUTE rangeQuery (1,10000);
+```
+
+```
+                                                    QUERY PLAN           
+--------------------------------------------------------------------------
+ Aggregate  (cost=393.29..393.30 rows=1 width=8) (actual time=7.251..7.251 rows=1 loops=1)
+   ->  Index Only Scan using t1_pkey on t1 t  (cost=0.29..368.29 rows=10000 width=0) (actual time=0.061..4.859 rows=10000 loops=1)
+Index Cond: ((id >= 1) AND (id <= 10000))         
+         Heap Fetches: 10000
+ Planning time: 1.408 ms
+ Execution time: 7.291 ms
+ Note: An Approved plan was used instead of the minimum cost plan.
+ SQL Hash: 1984047223, Plan Hash: 512153379
+```
+
+The output shows the Approved plan from the baseline that would run\. However, the output also shows that it found a lower\-cost plan\. In this case, you capture this new minimum cost plan by turning on automatic plan capture as described in [Automatically capturing plans](AuroraPostgreSQL.Optimize.CapturePlans.md#AuroraPostgreSQL.Optimize.CapturePlans.Automatic)\. 
+
+New plans are always captured by the optimizer as `Unapproved`\. Use the `apg_plan_mgmt.evolve_plan_baselines` function to compare plans and change them to approved, rejected, or disabled\. For more information, see [Evaluating plan performance](AuroraPostgreSQL.Optimize.Maintenance.md#AuroraPostgreSQL.Optimize.Maintenance.EvaluatingPerformance)\. 
 
 ## How the optimizer chooses which plan to run<a name="AuroraPostgreSQL.Optimize.UsePlans.ChoosePlans"></a>
 
 The cost of an execution plan is an estimate that the optimizer makes to compare different plans\. When calculating a plan's cost, the optimizer includes factors such as CPU and I/O operations required by that plan\. To learn more about PostgreSQL query planner cost estimates, see [Query Planning](https://www.postgresql.org/docs/current/runtime-config-query.html) in the PostgreSQL documentation\.
 
-The following flowchart shows how a plan is chosen for a given SQL statement when query plan management is active, and when it's not\.
+The following image shows how a plan is chosen for a given SQL statement when query plan management is active, and when it's not\.
 
 
 
@@ -69,28 +94,3 @@ Database users with the `apg_plan_mgmt` role can pro\-actively compare plans, ch
 1. If the statement has any enabled and valid Approved plans, the optimizer chooses the minimum\-cost plan from among the Approved plans stored for this SQL statement\. The optimizer then runs the minimum\-cost Approved plan\. 
 
    If the statement doesn't have any valid and enabled Approved plans, the optimizer uses the minimum cost plan \(A\. Run Optimizer's plan\)\. 
-
-## Analyzing which plan the optimizer will use<a name="AuroraPostgreSQL.Optimize.UsePlans.AnalyzePlans"></a>
-
-When the `apg_plan_mgmt.use_plan_baselines` parameter is set to `true`, you can use EXPLAIN ANALYZE SQL statements to cause the optimizer to show the plan it would use if it were to run the statement\. The following is an example\.
-
-```
-EXPLAIN ANALYZE EXECUTE rangeQuery (1,10000);
-```
-
-```
-                                                    QUERY PLAN           
---------------------------------------------------------------------------
- Aggregate  (cost=393.29..393.30 rows=1 width=8) (actual time=7.251..7.251 rows=1 loops=1)
-   ->  Index Only Scan using t1_pkey on t1 t  (cost=0.29..368.29 rows=10000 width=0) (actual time=0.061..4.859 rows=10000 loops=1)
-Index Cond: ((id >= 1) AND (id <= 10000))         
-         Heap Fetches: 10000
- Planning time: 1.408 ms
- Execution time: 7.291 ms
- Note: An Approved plan was used instead of the minimum cost plan.
- SQL Hash: 1984047223, Plan Hash: 512153379
-```
-
-The optimizer indicates which plan it will run, but notice that in this example that it found a lower\-cost plan\. In this case, you capture this new minimum cost plan by turning on automatic plan capture as described in [Automatically capturing plans](AuroraPostgreSQL.Optimize.CapturePlans.md#AuroraPostgreSQL.Optimize.CapturePlans.Automatic)\. 
-
-The optimizer captures new plans as `Unapproved`\. Use the `apg_plan_mgmt.evolve_plan_baselines` function to compare plans and change them to approved, rejected, or disabled\. For more information, see [Evaluating plan performance](AuroraPostgreSQL.Optimize.Maintenance.md#AuroraPostgreSQL.Optimize.Maintenance.EvaluatingPerformance)\. 
