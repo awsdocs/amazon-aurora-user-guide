@@ -110,9 +110,11 @@ aurora_version
 
 ## Automatic minor version upgrades<a name="Aurora.VersionPolicy.AMVU"></a>
 
- You can stay up to date with Aurora minor versions by turning on **Auto minor version upgrade** for every DB instance in the Aurora cluster\. Aurora only performs the automatic upgrade if all DB instances in your cluster have this setting turned on\. Auto minor version upgrades are performed to the default minor version\. We typically schedule automatic upgrades twice a year for DB clusters that have the **Auto minor version upgrade** setting set to `Yes`\. These upgrades are started during the maintenance window that you specify for your cluster\. 
+You can stay up to date with Aurora minor versions by turning on **Auto minor version upgrade** for every DB instance in the Aurora cluster\. Aurora only performs the automatic upgrade if all DB instances in your cluster have this setting turned on\. Auto minor version upgrades are performed to the default minor version\.
 
- For more information, see [Enabling automatic upgrades between minor Aurora MySQL versions](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.AMVU) and [How to perform minor version upgrades and apply patches](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.Minor)\. 
+We typically schedule automatic upgrades twice a year for DB clusters that have the **Auto minor version upgrade** setting set to `Yes`\. These upgrades are started during the maintenance window that you specify for your cluster\. For more information, see [Enabling automatic upgrades between minor Aurora MySQL versions](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.AMVU) and [How to perform minor version upgrades and apply patches](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.Minor)\.
+
+Automatic minor version upgrades are communicated in advance through an Amazon RDS DB cluster event with a category of `maintenance` and ID of `RDS-EVENT-0156`\. For more information, see [Amazon RDS event categories and event messages](USER_Events.Messages.md)\.
 
 ## How long Amazon Aurora major versions remain available<a name="Aurora.VersionPolicy.MajorVersionLifetime"></a>
 

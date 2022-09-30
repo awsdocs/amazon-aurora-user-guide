@@ -113,9 +113,10 @@ You can use the AWS Management Console to work with reserved DB instances as sho
 
 1. For **DB instance class**, choose the DB instance class\.
 
-1. For **Multi\-AZ deployment**, choose whether you want a Multi\-AZ deployment\.
+1. For **Deployment Option**, choose whether you want a Multi\-AZ deployment\.
 **Note**  
-Reserved Amazon Aurora instances always have the **Multi\-AZ deployment** option set to `No`\. When you create an Amazon Aurora DB cluster from your reserved DB instance, the DB cluster is automatically created as Multi\-AZ\. You must purchase a reserved DB instance for each DB instance you plan to use, including Aurora Replicas\. 
+Reserved Amazon Aurora instances always have the deployment option set to **Single\-AZ DB instance**\. However, when you create an Aurora DB cluster, the default deployment option is **Create an Aurora Replica or Reader in a different AZ** \(Multi\-AZ\)\.  
+You must purchase a reserved DB instance for each DB instance you plan to use, including Aurora Replicas\. Therefore, for Multi\-AZ deployments on Aurora, you must purchase extra reserved DB instances\.
 
 1. For **Term**, choose the length of time you want the DB instance reserved\.
 

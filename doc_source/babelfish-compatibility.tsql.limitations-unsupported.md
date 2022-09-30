@@ -7,6 +7,7 @@ In the following table and lists, you can find functionality that isn't currentl
 + [Settings that aren't supported](#babelfish-compatibility.tsql.limitations-unsupported-list8)
 + [Commands that aren't supported](#babelfish-compatibility.tsql.limitations-unsupported-list1)
 + [Column names or attributes that aren't supported](#babelfish-compatibility.tsql.limitations-unsupported-list7)
++ [Data types that aren't supported](#babelfish-compatibility.tsql.limitations-unsupported-list9)
 + [Object types that aren't supported](#babelfish-compatibility.tsql.limitations-unsupported-list3)
 + [Functions that aren't supported](#babelfish-compatibility.tsql.limitations-unsupported-list4)
 + [Syntax that isn't supported](#babelfish-compatibility.tsql.limitations-unsupported-list5)
@@ -110,6 +111,12 @@ The following column names aren't supported:
 + $IDENTITY
 + $ROWGUID
 + IDENTITYCOL
+
+## Data types that aren't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list9"></a>
+
+The following data types aren't supported:
++ Geospatial \(GEOGRAPHY and GEOMETRY\)
++ HIERARCHYID
 
 ## Object types that aren't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list3"></a>
 

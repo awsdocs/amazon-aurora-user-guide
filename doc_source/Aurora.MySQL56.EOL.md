@@ -6,9 +6,13 @@ For Aurora provisioned DB clusters, you can complete upgrades from Aurora MySQL 
 
 For Aurora Serverless v1 DB clusters, you can perform an in\-place upgrade from Aurora MySQL version 1 to Aurora MySQL version 2\. For more details about this method, see [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\.
 
-For Aurora provisioned DB clusters, you can complete upgrades from Aurora MySQL version 1 to Aurora MySQL version 3 by using a two\-stage upgrade process\. The first stage requires an upgrade from Aurora MySQL version 1 to Aurora MySQL version 2 using the methods described preceding\. The second stage requires an upgrade from Aurora MySQL version 2 to Aurora MySQL version 3\. To perform this upgrade, take a snapshot of an Aurora MySQL version 2 cluster and restore the snapshot to an Aurora MySQL version 3 cluster\. For more details, see [Upgrading from Aurora MySQL 2\.x to 3\.x](AuroraMySQL.Updates.MajorVersionUpgrade.md#AuroraMySQL.Updates.MajorVersionUpgrade.2to3)\. Please note the [Feature differences between Aurora MySQL version 2 and 3](Aurora.AuroraMySQL.Compare-v2-v3.md#AuroraMySQL.Compare-v2-v3-features)\.
+For Aurora provisioned DB clusters, you can complete upgrades from Aurora MySQL version 1 to Aurora MySQL version 3 by using a two\-stage upgrade process:
 
-You can find upcoming end\-of\-life dates for Aurora major versions in [Amazon Aurora versions](Aurora.VersionPolicy.md)\. Amazon automatically upgrades any clusters that you don't upgrade yourself before the end\-of\-life date\. After the end\-of\-life date, these automatic upgrades to the subsequent major version occur during a scheduled maintenance window for clusters\.  
+1. Upgrade from Aurora MySQL version 1 to Aurora MySQL version 2 using the methods described preceding\.
+
+1. Upgrade from Aurora MySQL version 2 to Aurora MySQL version 3 using the same methods as for upgrading from version 1 to version 2\. For more details, see [Upgrading from Aurora MySQL 2\.x to 3\.x](AuroraMySQL.Updates.MajorVersionUpgrade.md#AuroraMySQL.Updates.MajorVersionUpgrade.2to3)\. Note the [Feature differences between Aurora MySQL version 2 and 3](Aurora.AuroraMySQL.Compare-v2-v3.md#AuroraMySQL.Compare-v2-v3-features)\.
+
+You can find upcoming end\-of\-life dates for Aurora major versions in [Amazon Aurora versions](Aurora.VersionPolicy.md)\. Amazon automatically upgrades any clusters that you don't upgrade yourself before the end\-of\-life date\. After the end\-of\-life date, these automatic upgrades to the subsequent major version occur during a scheduled maintenance window for clusters\. 
 
 The following are additional milestones for upgrading Aurora MySQL version 1 clusters \(provisioned and Aurora Serverless\) that are reaching end of life\. For each, the start time is 00:00 Universal Coordinated Time \(UTC\)\. 
 
@@ -28,7 +32,7 @@ Upgrading between major versions requires more extensive planning and testing th
 
 After the upgrade is finished, you also might have follow\-up work to do\. For example, you might need to follow up due to differences in SQL compatibility, the way certain MySQL\-related features work, or parameter settings between the old and new versions\.
 
-To learn more about the methods, planning, testing, and troubleshooting of Aurora MySQL major version upgrades, be sure to thoroughly read [Upgrading the major version of an Aurora MySQL DB cluster](AuroraMySQL.Updates.MajorVersionUpgrade.md)\.
+To learn more about the methods, planning, testing, and troubleshooting of Aurora MySQL major version upgrades, be sure to thoroughly read [Upgrading the major version of an Amazon Aurora MySQL DB cluster](AuroraMySQL.Updates.MajorVersionUpgrade.md)\.
 
 ## Finding clusters affected by this end\-of\-life process<a name="find-cluster"></a>
 

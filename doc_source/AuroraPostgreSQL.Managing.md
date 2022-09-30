@@ -84,20 +84,20 @@ Following, you can find a table that lists the highest value that should ever be
 
 ## Temporary storage limits for Aurora PostgreSQL<a name="AuroraPostgreSQL.Managing.TempStorage"></a>
 
-Aurora PostgreSQL stores tables and indexes in the Aurora storage subsystem\. Aurora PostgreSQL uses separate temporary storage for non\-persistent temporary files\. This includes files that are used for such purposes as sorting large data sets during query processing or for index build operations\. These local storage volumes are backed by Amazon Elastic Block Store and can be extended\. For more information about storage, see [Amazon Aurora storage and reliability](Aurora.Overview.StorageReliability.md)\.
+Aurora PostgreSQL stores tables and indexes in the Aurora storage subsystem\. Aurora PostgreSQL uses separate temporary storage for non\-persistent temporary files\. This includes files that are used for such purposes as sorting large data sets during query processing or for index build operations\. These local storage volumes are backed by Amazon Elastic Block Store and can be extended by using a larger DB instance class\. For more information about storage, see [Amazon Aurora storage and reliability](Aurora.Overview.StorageReliability.md)\.
 
-The following table shows the maximum amount of temporary storage available for each Aurora PostgreSQL DB instance class\.
+The following table shows the maximum amount of temporary storage available for each Aurora PostgreSQL DB instance class\. For more information on DB instance class support for Aurora, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
 
 
 | DB instance class | Maximum temporary storage available \(GiB\) | 
 | --- | --- | 
-| db\-x2g\-16xlarge | 1829 | 
-| db\-x2g\-12xlarge | 1606 | 
-| db\-x2g\-8xlarge | 1071 | 
-| db\-x2g\-4xlarge | 535 | 
-| db\-x2g\-2xlarge | 268 | 
-| db\-x2g\-xlarge | 134 | 
-| db\-x2g\-large | 67 | 
+| db\.x2g\.16xlarge | 1829 | 
+| db\.x2g\.12xlarge | 1606 | 
+| db\.x2g\.8xlarge | 1071 | 
+| db\.x2g\.4xlarge | 535 | 
+| db\.x2g\.2xlarge | 268 | 
+| db\.x2g\.xlarge | 134 | 
+| db\.x2g\.large | 67 | 
 | db\.r6g\.16xlarge | 1008 | 
 | db\.r6g\.12xlarge | 756 | 
 | db\.r6g\.8xlarge | 504 | 

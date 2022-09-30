@@ -244,7 +244,7 @@ sponsored by Amazon.
       + [Preparing for Amazon Aurora MySQL-Compatible Edition version 1 end of life](Aurora.MySQL56.EOL.md)
       + [Upgrading Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Upgrading.md)
          + [Upgrading the minor version or patch level of an Aurora MySQL DB cluster](AuroraMySQL.Updates.Patching.md)
-         + [Upgrading the major version of an Aurora MySQL DB cluster](AuroraMySQL.Updates.MajorVersionUpgrade.md)
+         + [Upgrading the major version of an Amazon Aurora MySQL DB cluster](AuroraMySQL.Updates.MajorVersionUpgrade.md)
       + [Database engine updates for Amazon Aurora MySQL version 3](AuroraMySQL.Updates.30Updates-moved.md)
       + [Database engine updates for Amazon Aurora MySQL version 2](AuroraMySQL.Updates.20Updates-moved.md)
       + [Database engine updates for Amazon Aurora MySQL version 1](AuroraMySQL.Updates.11Updates-moved.md)

@@ -14,7 +14,7 @@ There are additional considerations for both internal and user\-created temporar
 
 ## Storage engine for internal \(implicit\) temporary tables<a name="ams3-temptable-behavior-engine"></a>
 
-When generating intermediate result sets, Aurora MySQL initially attempts to write to in\-memory temporary tables\. If this is unsuccessful, because of either incompatible data types or configured limits, the temporary table is converted to an on\-disk temporary table rather than being held in memory\. More information on this can be found in the [Internal Temporary Table Use in MySQL](https://dev.mysql.com/doc/refman/8.0/en/internal-temporary-tables.html) in the MySQL documentation\.
+When generating intermediate result sets, Aurora MySQL initially attempts to write to in\-memory temporary tables\. This might be unsuccessful, because of either incompatible data types or configured limits\. If so, the temporary table is converted to an on\-disk temporary table rather than being held in memory\. More information on this can be found in the [Internal Temporary Table Use in MySQL](https://dev.mysql.com/doc/refman/8.0/en/internal-temporary-tables.html) in the MySQL documentation\.
 
 In Aurora MySQL version 3, the way internal temporary tables work is different from earlier Aurora MySQL versions\. Instead of choosing between the InnoDB and MyISAM storage engines for such temporary tables, now you choose between the `TempTable` and InnoDB storage engines\.
 
@@ -28,23 +28,23 @@ In some cases, the amount of temporary data fits within the `TempTable` memory p
 
 The `TempTable` storage engine is the default\. `TempTable` uses a common memory pool for all temporary tables that use this engine, instead of a maximum memory limit per table\. The size of this memory pool is specified by the [temptable\_max\_ram](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_temptable_max_ram) parameter\. It defaults to 1 GiB on DB instances with 16 or more GiB of memory, and 16 MB on DB instances with less than 16 GiB of memory\. The size of the memory pool influences session\-level memory consumption\.
 
-If you use the `TempTable` storage engine and the temporary data exceeds the size of the memory pool, Aurora MySQL stores the overflow data using a secondary mechanism\.
+In some cases when you use the `TempTable` storage engine, the temporary data might exceed the size of the memory pool\. If so, Aurora MySQL stores the overflow data using a secondary mechanism\.
 
 You can set the [temptable\_max\_mmap](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_temptable_max_mmap) parameter to specify if the data overflows to memory\-mapped temporary files or to InnoDB internal temporary tables on disk\. The different data formats and overflow criteria of these overflow mechanisms can affect query performance\. They do so by influencing the amount of data written to disk and the demand on disk storage throughput\.
 
- Aurora MySQL stores the overflow data differently depending on your choice of data overflow destination and whether the query runs on a writer or reader DB instance:
+ Aurora MySQL stores the overflow data differently depending on a couple of considerations\. These are your choice of data overflow destination and whether the query runs on a writer or reader DB instance:
 + On the writer instance, data that overflows to InnoDB internal temporary tables is stored in the Aurora cluster volume\.
 + On the writer instance, data that overflows to memory\-mapped temporary files resides on local storage on the Aurora MySQL version 3 instance\.
 + On reader instances, overflow data always resides on memory\-mapped temporary files on local storage\. That's because read\-only instances can't store any data on the Aurora cluster volume\.
 
 **Note**  
-The configuration parameters related to internal temporary tables apply differently to the writer and reader instances in your cluster\. For reader instances, Aurora MySQL always uses the `TempTable` storage engine and a value of 1 for `temptable_use_mmap`\. The size for `temptable_max_mmap` defaults to 1 GiB, for both writer and reader instances, regardless of the DB instance memory size\. You can adjust this value the same way as on the writer instance, except that you can't specify a value of zero for `temptable_max_mmap` on reader instances\.
+The configuration parameters related to internal temporary tables apply differently to the writer and reader instances in your cluster\. For reader instances, Aurora MySQL always uses the `TempTable` storage engine and a value of 1 for `temptable_use_mmap`\. The size for `temptable_max_mmap` defaults to 1 GiB, for both writer and reader instances, regardless of the DB instance memory size\. You can adjust this value similarly to how you do so on the writer instance\. However, you can't specify a value of zero for `temptable_max_mmap` on reader instances\.
 
 ## Mitigating fullness issues for internal temporary tables on Aurora Replicas<a name="ams3-temptable-behavior-mitigate"></a>
 
 To avoid size limitation issues for temporary tables, set the `temptable_max_ram` and `temptable_max_mmap` parameters to a combined value that can fit the requirements of your workload\.
 
-Be careful when setting the value of the `temptable_max_ram` parameter\. Setting the value too high reduces the available memory on the database instance, which can cause an out\-of\-memory condition\. Monitor the average freeable memory on the DB instance, and then determine an appropriate value for `temptable_max_ram` so that you will still have a reasonable amount of free memory left on the instance\. For more information, see [Freeable memory issues in Amazon Aurora](CHAP_Troubleshooting.md#Troubleshooting.FreeableMemory)\.
+Be careful when setting the value of the `temptable_max_ram` parameter\. Setting the value too high reduces the available memory on the database instance, which can cause an out\-of\-memory condition\. Monitor the average freeable memory on the DB instance\. Then determine an appropriate value for `temptable_max_ram` so that you will still have a reasonable amount of free memory left on the instance\. For more information, see [Freeable memory issues in Amazon Aurora](CHAP_Troubleshooting.md#Troubleshooting.FreeableMemory)\.
 
 It is also important to monitor the size of the local storage and the temporary table space consumption\. For more information on monitoring local storage on an instance, see the AWS Knowledge Center article [What is stored in Aurora MySQL\-compatible local storage, and how can I troubleshoot local storage issues?](https://aws.amazon.com/premiumsupport/knowledge-center/aurora-mysql-local-storage/)\.
 

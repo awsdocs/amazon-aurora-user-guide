@@ -1,17 +1,22 @@
 # Upgrading to Aurora MySQL version 3<a name="AuroraMySQL.mysql80-upgrade-procedure"></a>
 
- For specific upgrade paths to upgrade your database from Aurora MySQL version 1 or 2 to version 3, you can use one of the following approaches: 
-+  To upgrade an Aurora MySQL version 2 cluster to version 3, create a snapshot of the version 2 cluster and restore the snapshot to create a new version 3 cluster\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\. Currently, in\-place upgrade isn't available from Aurora MySQL version 2 to Aurora MySQL version 3\. 
-+  To upgrade from Aurora MySQL version 1, first do an intermediate upgrade to Aurora MySQL version 2\. To do the upgrade to Aurora MySQL version 2, use any of the upgrade methods in [Upgrading Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Upgrading.md)\. Then use the snapshot restore technique to upgrade from Aurora MySQL version 2 to Aurora MySQL version 3\. Snapshot restore isn't available from Aurora MySQL version 1 clusters \(MySQL 5\.6–compatible\) to Aurora MySQL version 3\. 
-+  Currently, you can't clone a MySQL 5\.7–compatible Aurora cluster to a MySQL 8\.0–compatible one\. Use the snapshot restore technique instead\. 
-+  If you have an Aurora MySQL version 2 cluster that uses backtrack, currently you can't use the snapshot restore method to upgrade to Aurora MySQL version 3\. This limitation applies to all clusters that use backtrack, regardless of whether the backtrack setting is turned on\. In this case, perform a logical dump and restore by using a tool such as the `mysqldump` command\. For more information about using `mysqldump` for Aurora MySQL, see [Migrating from MySQL to Amazon Aurora by using mysqldump](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.mysqldump)\. 
+For specific upgrade paths to upgrade your database from Aurora MySQL version 1 or 2 to version 3, you can use one of the following approaches:
++ To upgrade an Aurora MySQL version 2 cluster to version 3, you can perform an in\-place upgrade\. Follow the procedure in [How to perform an in\-place upgrade](AuroraMySQL.Updates.MajorVersionUpgrade.md#AuroraMySQL.Upgrading.Procedure)\.
+
+  You can also create a snapshot of the version 2 cluster and restore the snapshot to create a new version 3 cluster\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
++ To upgrade from Aurora MySQL version 1, first do an intermediate upgrade to Aurora MySQL version 2\. Use any of the upgrade methods in [Upgrading Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Upgrading.md)\.
+
+  Then upgrade from Aurora MySQL version 2 to Aurora MySQL version 3\. Direct upgrade isn't available from Aurora MySQL version 1 clusters \(MySQL 5\.6–compatible\) to Aurora MySQL version 3\.
++ If you have an Aurora MySQL version 2 cluster that uses backtrack, currently you can't use either the in\-place upgrade or snapshot restore method to upgrade to Aurora MySQL version 3\. This limitation applies to all clusters that use backtrack, regardless of whether the backtrack setting is turned on\.
+
+  In this case, perform a logical dump and restore by using a tool such as the `mysqldump` command\. For more information about using `mysqldump` for Aurora MySQL, see [Migrating from MySQL to Amazon Aurora by using mysqldump](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.mysqldump)\.
 
 **Tip**  
- In some cases, you might specify the option to upload database logs to CloudWatch when you restore the snapshot\. If so, examine the logs in CloudWatch to diagnose any issues that occur during the restore and associated upgrade operation\. The CLI examples in this section demonstrate how to do so using the `--enable-cloudwatch-logs-exports` option\. 
+ In some cases, you might specify the option to upload database logs to CloudWatch when you upgrade\. If so, examine the logs in CloudWatch to diagnose any issues that occur during the upgrade operation\. The CLI examples in this section demonstrate how to do so using the `--enable-cloudwatch-logs-exports` option\. 
 
 **Topics**
 + [Upgrade planning for Aurora MySQL version 3](#AuroraMySQL.mysql80-planning)
-+ [Example of upgrading from Aurora MySQL version 2 to version 3](#AuroraMySQL.mysql80-upgrade-example-v2-v3)
++ [Example of upgrading from Aurora MySQL version 2 to version 3 using the snapshot restore method](#AuroraMySQL.mysql80-upgrade-example-v2-v3)
 + [Example of upgrading from Aurora MySQL version 1 to version 3](#AuroraMySQL.mysql80-upgrade-example-v1-v3)
 + [Troubleshooting upgrade issues with Aurora MySQL version 3](#AuroraMySQL.mysql80-upgrade-troubleshooting)
 + [Post\-upgrade cleanup for Aurora MySQL version 3](#AuroraMySQL.mysql80-post-upgrade)
@@ -23,23 +28,23 @@
 +  If you are upgrading from Aurora MySQL version 2, RDS for MySQL 5\.7, or community MySQL 5\.7, see [Comparison of Aurora MySQL version 2 and Aurora MySQL version 3](Aurora.AuroraMySQL.Compare-v2-v3.md)\. 
 +  Create new MySQL 8\.0\-compatible versions of any custom parameter groups\. Apply any necessary custom parameter values to the new parameter groups\. Consult [Parameter changes for Aurora MySQL version 3](Aurora.AuroraMySQL.Compare-v2-v3.md#AuroraMySQL.mysql80-parameter-changes) to learn about parameter changes\. 
 **Note**  
-For most parameter settings, you can choose the custom parameter group either when you create the cluster or associate the parameter group with the cluster later\.  
+For most parameter settings, you can choose the custom parameter group at two points\. These are when you create the cluster or associate the parameter group with the cluster later\.  
 However, if you use a nondefault setting for the `lower_case_table_names` parameter, you must set up the custom parameter group with this setting in advance\. Then specify the parameter group when you perform the snapshot restore to create the cluster\. Any change to the `lower_case_table_names` parameter has no effect after the cluster is created\.  
 We recommend that you use the same setting for `lower_case_table_names` when you upgrade from Aurora MySQL version 2 to version 3\.
-+ Review your Aurora MySQL version 2 database schema and object definitions for the usage of new reserved keywords introduced in MySQL 8\.0 Community Edition, before you upgrade\. For more information, see [MySQL 8\.0 New Keywords and Reserved Words](https://dev.mysql.com/doc/mysqld-version-reference/en/keywords-8-0.html#keywords-new-in-8-0) in the MySQL documentation\.
++ Review your Aurora MySQL version 2 database schema and object definitions for the usage of new reserved keywords introduced in MySQL 8\.0 Community Edition\. Do so before you upgrade\. For more information, see [MySQL 8\.0 New Keywords and Reserved Words](https://dev.mysql.com/doc/mysqld-version-reference/en/keywords-8-0.html#keywords-new-in-8-0) in the MySQL documentation\.
 
  You can also find more MySQL\-specific upgrade considerations and tips in [Changes in MySQL 8\.0](https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html) in the *MySQL Reference Manual*\. For example, you can use the command `mysqlcheck --check-upgrade` to analyze your existing Aurora MySQL databases and identify potential upgrade issues\. 
 
- Currently, the primary upgrade path from earlier Aurora MySQL versions to Aurora MySQL version 3 is by restoring a snapshot to create a new cluster\. You can restore a snapshot of a cluster running any minor version of Aurora MySQL version 2 \(MySQL 5\.7–compatible\) to Aurora MySQL version 3\. To upgrade from Aurora MySQL version 1, you use a two\-step process\. First restore a snapshot to an Aurora MySQL version 2 cluster, then make a snapshot of that cluster and restore it to an Aurora MySQL version 3 cluster\. For the upgrade procedure from Aurora MySQL version 1 or 2, see [Upgrading to Aurora MySQL version 3](#AuroraMySQL.mysql80-upgrade-procedure)\. For general information about upgrading by restoring a snapshot, see [Upgrading Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Upgrading.md)\. 
+To upgrade from Aurora MySQL version 1, you use a two\-step process\. First upgrade to Aurora MySQL version 2, then upgrade to Aurora MySQL version 3\. For the upgrade procedure from Aurora MySQL version 1 or 2, see [Upgrading to Aurora MySQL version 3](#AuroraMySQL.mysql80-upgrade-procedure)\. You can use either the in\-place upgrade or snapshot restore method\.
 
 **Note**  
-We recommend using larger DB instance classes, such as db\.r5\.24xlarge, when upgrading to Aurora MySQL version 3 using the snapshot restore technique\. This helps the upgrade process to complete faster by using the majority of available CPU capacity on the DB instance\. You can change to the DB instance class that you want after the major version upgrade is complete\.
+We recommend using larger DB instance classes when upgrading to Aurora MySQL version 3 using the in\-place upgrade or snapshot restore technique\. Examples are db\.r5\.24xlarge and db\.r6g\.16xlarge\. This helps the upgrade process to complete faster by using the majority of available CPU capacity on the DB instance\. You can change to the DB instance class that you want after the major version upgrade is complete\.
 
  After you finish the upgrade itself, you can follow the post\-upgrade procedures in [Post\-upgrade cleanup for Aurora MySQL version 3](#AuroraMySQL.mysql80-post-upgrade)\. Finally, test your application's functionality and performance\. 
 
  If you are converting from RDS from MySQL or community MySQL, follow the migration procedure explained in [Migrating data to an Amazon Aurora MySQL DB cluster](AuroraMySQL.Migrating.md)\. In some cases, you might use binary log replication to synchronize your data with an Aurora MySQL version 3 cluster as part of the migration\. If so, the source system must run a version that's compatible with MySQL 5\.7, or a MySQL 8\.0–compatible version that is 8\.0\.23 or lower\. 
 
-## Example of upgrading from Aurora MySQL version 2 to version 3<a name="AuroraMySQL.mysql80-upgrade-example-v2-v3"></a>
+## Example of upgrading from Aurora MySQL version 2 to version 3 using the snapshot restore method<a name="AuroraMySQL.mysql80-upgrade-example-v2-v3"></a>
 
  The following AWS CLI example demonstrates the steps to upgrade an Aurora MySQL version 2 cluster to Aurora MySQL version 3\. 
 
@@ -50,6 +55,7 @@ We recommend using larger DB instance classes, such as db\.r5\.24xlarge, when up
 ```
 $ aws rds describe-db-clusters --db-cluster-id cluster-57-upgrade-ok \
   --query '*[].EngineVersion' --output text
+
 5.7.mysql_aurora.2.09.2
 ```
 
@@ -99,7 +105,7 @@ $ aws rds restore-db-cluster-from-snapshot \
 }
 ```
 
- Restoring the snapshot sets up the storage for the cluster and establishes the database version that the cluster can use\. Because the compute capacity of the cluster is separate from the storage, you set up any DB instances for the cluster once the cluster itself is created\. The following example creates a writer DB instance using one of the db\.r5 instance classes\. 
+ Restoring the snapshot sets up the storage for the cluster and establishes the database version that the cluster can use\. The compute capacity of the cluster is separate from the storage\. Thus, you set up any DB instances for the cluster after the cluster itself is created\. The following example creates a writer DB instance using one of the db\.r5 instance classes\. 
 
 **Tip**  
  You might have administration scripts that create DB instances using older instance classes such as db\.r3, db\.r4, db\.t2, or db\.t3\. If so, modify your scripts to use one of the instance classes that are supported with Aurora MySQL version 3\. For information about the instance classes that you can use with Aurora MySQL version 3, see [Instance class support](Aurora.AuroraMySQL.Compare-v2-v3.md#AuroraMySQL.mysql80-instance-classes)\. 
@@ -258,7 +264,7 @@ $ aws rds create-db-instance \
 
  If your upgrade to Aurora MySQL version 3 doesn't complete successfully, you can diagnose the cause of the problem\. Then you can make any required changes to the original database schema or table data and run the upgrade process again\. 
 
- If the upgrade process to Aurora MySQL version 3 fails, the problem is detected while creating and then upgrading the writer instance for the restored snapshot\. Aurora leaves behind the original 5\.7\-compatible writer instance\. That way, you can examine the log from the preliminary checks that Aurora runs before performing the upgrade\. The following examples start with a 5\.7\-compatible database that requires some changes before it can be upgraded to Aurora MySQL version 3\. The examples demonstrate how the first attempted upgrade doesn't succeed, how to examine the log file, and how to fix the problems and run a successful upgrade\. 
+ If the upgrade process to Aurora MySQL version 3 fails, the problem is detected while creating and then upgrading the writer instance for the restored snapshot\. Aurora leaves behind the original 5\.7\-compatible writer instance\. That way, you can examine the log from the preliminary checks that Aurora runs before performing the upgrade\. The following examples start with a 5\.7\-compatible database that requires some changes before it can be upgraded to Aurora MySQL version 3\. The examples demonstrate how the first attempted upgrade doesn't succeed and how to examine the log file\. They also show how to fix the problems and run a successful upgrade\. 
 
  First, we create a new MySQL 5\.7\-compatible cluster named `problematic-57-80-upgrade`\. As the name suggests, this cluster contains at least one schema object that causes a problem during an upgrade to a MySQL 8\.0\-compatible version\. 
 
@@ -521,7 +527,7 @@ table before upgrade.",
 ```
 
 **Tip**  
- To summarize all of those errors and display the associated object and description fields, you can run the command `grep -A 2 '"level": "Error"'` on the contents of the `upgrade-prechecks.log` file\. Doing so displays each error line and the two lines after it, which contain the name of the corresponding database object and guidance about how to correct the problem\.   
+ To summarize all of those errors and display the associated object and description fields, you can run the command `grep -A 2 '"level": "Error"'` on the contents of the `upgrade-prechecks.log` file\. Doing so displays each error line and the two lines after it\. These contain the name of the corresponding database object and guidance about how to correct the problem\.   
 
 ```
 $ cat upgrade-prechecks.log | grep -A 2 '"level": "Error"'
@@ -635,7 +641,7 @@ mysql> drop table dangling_fulltext_index;
 Query OK, 0 rows affected (0.05 sec)
 ```
 
- Now we go through the same process as before: creating a snapshot from the original cluster, restoring the snapshot to a new MySQL 8\.0\-compatible cluster, and creating a writer instance to complete the upgrade process\. 
+ Now we go through the same process as before\. We create a snapshot from the original cluster and restore the snapshot to a new MySQL 8\.0\-compatible cluster\. Then we create a writer instance to complete the upgrade process\. 
 
 ```
 $ aws rds create-db-cluster-snapshot --db-cluster-id problematic-57-80-upgrade \

@@ -40,7 +40,7 @@ Use the following to learn about changes to be aware of when you upgrade your Au
 +  `db.t3.small` 
 +  `db.t2` 
 
- Check your administration scripts for any CLI statements that create Aurora MySQL DB instances and hardcode instance class names that aren't available for Aurora MySQL version 3\. If necessary, modify the instance class names to ones that Aurora MySQL version 3 supports\. 
+ Check your administration scripts for any CLI statements that create Aurora MySQL DB instances\. Hardcode instance class names that aren't available for Aurora MySQL version 3\. If necessary, modify the instance class names to ones that Aurora MySQL version 3 supports\. 
 
 **Tip**  
  To check the instance classes that you can use for a specific combination of Aurora MySQL version and AWS Region, use the `describe-orderable-db-instance-options` AWS CLI command\. 
@@ -173,5 +173,5 @@ Use the following to learn about changes to be aware of when you upgrade your Au
  For usage information about binary log compression, see [Binary Log Transaction Compression](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html) in the MySQL Reference Manual\. 
 
  The following limitations apply to binary log compression in Aurora MySQL version 3: 
-+  Transactions whose binary log data is larger than the maximum allowed packet size aren't compressed, regardless of whether the Aurora MySQL binary log compression setting is turned on\. Such transactions are replicated without being compressed\. 
-+  If you use a connector for change data capture \(CDC\) that doesn't support MySQL 8\.0 yet, you can't use this feature\. We recommend that you test any third\-party connectors thoroughly with binary log compression before turning on binlog compression on systems that use binlog replication for CDC\. 
++  Transactions whose binary log data is larger than the maximum allowed packet size aren't compressed\. This is true regardless of whether the Aurora MySQL binary log compression setting is turned on\. Such transactions are replicated without being compressed\. 
++  If you use a connector for change data capture \(CDC\) that doesn't support MySQL 8\.0 yet, you can't use this feature\. We recommend that you test any third\-party connectors thoroughly with binary log compression\. Also, we recommend that you do so before turning on binlog compression on systems that use binlog replication for CDC\. 

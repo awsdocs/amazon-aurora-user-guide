@@ -9,6 +9,7 @@ When you perform a major version upgrade of an Amazon Aurora global database, yo
 To learn how to upgrade an Aurora PostgreSQL global database to a higher major version, see [Major upgrades for global databases](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.GlobalDB)\. To learn how to upgrade an Aurora MySQL global database to a higher major version, see [In\-place major upgrades for global databases](AuroraMySQL.Updates.MajorVersionUpgrade.md#AuroraMySQL.Upgrading.GlobalDB)\.
 
 **Note**  
+With an Aurora global database based on Aurora MySQL, you can't use the in\-place upgrade method to upgrade the Aurora DB engine from version 2 to version 3\. Use the snapshot restore method instead\. For more information, see [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.  
 With an Aurora global database based on Aurora PostgreSQL, you can't perform a major version upgrade of the Aurora DB engine if the recovery point objective \(RPO\) feature is turned on\.
 
 ## Minor version upgrades<a name="aurora-global-database-upgrade.minor"></a>

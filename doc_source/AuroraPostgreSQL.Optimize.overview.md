@@ -24,7 +24,7 @@ You can use the tools provided by query plan management proactively, to specify 
 
 Query plan management supports the following types of SQL statements\.
 + Any SELECT, INSERT, UPDATE, or DELETE statement, regardless of complexity\. 
-+ Prepared statements\. For more information, see [PREPARE](https://www.postgresql.org/docs/14/sql-prepare.html) in the PosgreSQL documentation\.
++ Prepared statements\. For more information, see [PREPARE](https://www.postgresql.org/docs/14/sql-prepare.html) in the PostgreSQL documentation\.
 + Dynamic statements, including those run in immediate\-mode\. For more information, see [Dynamic SQL](https://www.postgresql.org/docs/current/ecpg-dynamic.html) and [EXECUTE IMMEDIATE](https://www.postgresql.org/docs/current/ecpg-sql-execute-immediate.html) in PostgreSQL documentation\. 
 + Embedded SQL commands and statements\. For more information, see [Embedded SQL Commands](https://www.postgresql.org/docs/current/ecpg-sql-commands.html) in the PostgreSQL documentation\.
 + Statements inside named functions\. For more information, see [CREATE FUNCTION](https://www.postgresql.org/docs/current/sql-createfunction.html) in the PostgreSQL documentation\. 
@@ -47,7 +47,7 @@ When using query plan management, be aware of the following limitations\.
   HINT: You may need to increase max_worker_processes.
   ```
 
-  The number of max\_worker\_processes is limited by the DB instance class size\. In this case, you should scale up your Aurora PostgreSQL DB cluster to a DB instance class size with more memory\. For more information,see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora)\.
+  The number of max\_worker\_processes is limited by the DB instance class size\. In this case, you should scale up your Aurora PostgreSQL DB cluster to a DB instance class size with more memory\. For more information, see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora)\.
 
 ## Query plan management terminology<a name="AuroraPostgreSQL.Optimize.Start-terminology"></a>
 

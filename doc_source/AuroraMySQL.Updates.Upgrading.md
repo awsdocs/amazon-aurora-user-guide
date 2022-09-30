@@ -7,4 +7,4 @@
 
 **Topics**
 + [Upgrading the minor version or patch level of an Aurora MySQL DB cluster](AuroraMySQL.Updates.Patching.md)
-+ [Upgrading the major version of an Aurora MySQL DB cluster](AuroraMySQL.Updates.MajorVersionUpgrade.md)
++ [Upgrading the major version of an Amazon Aurora MySQL DB cluster](AuroraMySQL.Updates.MajorVersionUpgrade.md)

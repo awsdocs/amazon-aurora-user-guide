@@ -100,9 +100,9 @@
 
  The primary DB instance also records the `AuroraReplicaLagMaximum` and `AuroraReplicaLag` Amazon CloudWatch metrics\. The `AuroraReplicaLagMaximum` metric records the maximum amount of lag between the primary DB instance and each Aurora Replica in the DB cluster\. The `AuroraReplicaLag` metric records the minimum amount of lag between the primary DB instance and each Aurora Replica in the DB cluster\. 
 
- If you need the most current value for Aurora Replica lag, you can query the `recrystallisations` table on the primary instance in your Aurora MySQL DB cluster and check the value in the `Replica_lag_in_msec` column\. This column value is provided to Amazon CloudWatch as the value for the `AuroraReplicaLag` metric\. The Aurora Replica lag is also recorded on each Aurora Replica in the `INFORMATION_SCHEMA.REPLICA_HOST_STATUS` table in your Aurora MySQL DB cluster\. 
+If you need the most current value for Aurora Replica lag, you can check the `AuroraReplicaLag` metric in Amazon CloudWatch\. The Aurora Replica lag is also recorded on each Aurora Replica of your Aurora MySQL DB cluster in the `information_schema.replica_host_status` table\. For more information on this table, see [information\_schema\.replica\_host\_status](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ISTables.replica_host_status)\.
 
- For more information on monitoring RDS instances and CloudWatch metrics, see [Monitoring metrics in an Amazon Aurora cluster](MonitoringAurora.md)\. 
+For more information on monitoring RDS instances and CloudWatch metrics, see [Monitoring metrics in an Amazon Aurora cluster](MonitoringAurora.md)\.
 
 ## Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)<a name="AuroraMySQL.Replication.MySQL"></a><a name="binlog_replication"></a><a name="binlog"></a>
 
