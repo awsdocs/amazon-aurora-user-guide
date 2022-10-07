@@ -9,6 +9,24 @@ For a list of currently unsupported functionality, see [Unsupported functionalit
 **Note**  
 Currently, you can't upgrade Babelfish DB clusters running on Aurora PostgreSQL 13\.7 or older versions to Aurora PostgreSQL 14\.3 with Babelfish 2\.1\.0\. 
 
+You can use the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command to get a list of Aurora PostgreSQL versions in your AWS Region that support Babelfish, as shown in the following example\. 
+
+For Linux, macOS, or Unix:
+
+```
+$ aws rds describe-db-engine-versions --region us-east-1 \
+    --engine aurora-postgresql \
+    --query '*[]|[?SupportsBabelfish==`true`].[EngineVersion]' \
+    --output text
+13.4
+13.5
+13.6
+13.7
+14.3
+```
+
+For more information, see [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) in the *AWS CLI Command Reference*\.
+
 ## Identifying your version of Babelfish<a name="babelfish-information-identify-version"></a>
 
 You can query Babelfish to find details about the Babelfish version, the Aurora PostgreSQL version, and the compatible Microsoft SQL Server version\. You can use the TDS port or the PostgreSQL port\. 

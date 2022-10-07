@@ -4,7 +4,7 @@ You can use the `SELECT INTO OUTFILE S3` statement to query data from an Amazon 
 
 If you are using encryption, the Amazon S3 bucket must be encrypted with an AWS managed key\. Currently, you can't save data to a bucket that is encrypted with a customer managed key\.
 
- This feature currently isn't available for Aurora Serverless clusters\.
+ This feature isn't supported for Aurora Serverless v1 DB clusters\. It is supported for Aurora Serverless v2 DB clusters\.
 
 **Note**  
 You can save DB cluster snapshot data to Amazon S3 using the AWS Management Console, AWS CLI, or Amazon RDS API\. For more information, see [Exporting DB cluster snapshot data to Amazon S3](aurora-export-snapshot.md)\.
@@ -156,7 +156,7 @@ Following, you can find a list of the required and optional parameters used by t
 
    The `TEXT` option is the default and produces the existing MySQL export format\. 
 
-   The `CSV` option produces comma\-separated data values\. The CSV format follows the specification in [RFC\-4180](https://tools.ietf.org/html/rfc4180)\. If you specify the optional keyword `HEADER`, the output file contains one header line\. The labels in the header line correspond to the column names from the `SELECT` statement\. You can use the CSV files for training data models for use with AWS ML services\. For more information about using exported Aurora data with AWS ML services, see [Exporting data to Amazon S3 for SageMaker model training](mysql-ml.md#exporting-data-to-s3-for-model-training)\. 
+   The `CSV` option produces comma\-separated data values\. The CSV format follows the specification in [RFC\-4180](https://tools.ietf.org/html/rfc4180)\. If you specify the optional keyword `HEADER`, the output file contains one header line\. The labels in the header line correspond to the column names from the `SELECT` statement\. You can use the CSV files for training data models for use with AWS ML services\. For more information about using exported Aurora data with AWS ML services, see [Exporting data to Amazon S3 for SageMaker model training \(Advanced\)](mysql-ml.md#exporting-data-to-s3-for-model-training)\. 
 + **MANIFEST \{ON \| OFF\}** – Indicates whether a manifest file is created in Amazon S3\. The manifest file is a JavaScript Object Notation \(JSON\) file that can be used to load data into an Aurora DB cluster with the `LOAD DATA FROM S3 MANIFEST` statement\. For more information about `LOAD DATA FROM S3 MANIFEST`, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.
 
   If `MANIFEST ON` is specified in the query, the manifest file is created in Amazon S3 after all data files have been created and uploaded\. The manifest file is created using the following path: 

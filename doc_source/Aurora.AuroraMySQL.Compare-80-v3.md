@@ -89,8 +89,8 @@ SHOW GRANTS FOR name_of_administrative_user_for_your_cluster@'%';
 +  `AWS_LAMBDA_ACCESS` role, as an alternative to the `INVOKE LAMBDA` privilege\. For usage information, [Invoking a Lambda function from an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Lambda.md)\. 
 +  `AWS_LOAD_S3_ACCESS` role, as an alternative to the `LOAD FROM S3` privilege\. For usage information, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\. 
 +  `AWS_SELECT_S3_ACCESS` role, as an alternative to the `SELECT INTO S3` privilege\. For usage information, see [Saving data from an Amazon Aurora MySQL DB cluster into text files in an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\. 
-+  `AWS_SAGEMAKER_ACCESS` role, as an alternative to the `INVOKE SAGEMAKER` privilege\. For usage information, see [Using machine learning \(ML\) with Aurora MySQL](mysql-ml.md)\. 
-+  `AWS_COMPREHEND_ACCESS` role, as an alternative to the `INVOKE COMPREHEND` privilege\. For usage information, see [Using machine learning \(ML\) with Aurora MySQL](mysql-ml.md)\. 
++  `AWS_SAGEMAKER_ACCESS` role, as an alternative to the `INVOKE SAGEMAKER` privilege\. For usage information, see [Using Amazon Aurora machine learning with Aurora MySQL](mysql-ml.md)\. 
++  `AWS_COMPREHEND_ACCESS` role, as an alternative to the `INVOKE COMPREHEND` privilege\. For usage information, see [Using Amazon Aurora machine learning with Aurora MySQL](mysql-ml.md)\. 
 
  When you grant access by using roles in Aurora MySQL version 3, you also activate the role by using the `SET ROLE role_name` or `SET ROLE ALL` statement\. The following example shows how\. Substitute the appropriate role name for `AWS_SELECT_S3_ACCESS`\. 
 

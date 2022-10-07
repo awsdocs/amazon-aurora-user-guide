@@ -2,6 +2,8 @@
 
 Upgrading an Aurora global database follows the same procedures as upgrading Aurora DB clusters\. However, following are some important differences to take note of before you start the process\.
 
+We recommend that you upgrade the primary and secondary DB clusters to the same version\. Aurora global databases can't fail over from a primary to a secondary DB cluster when the primary and secondary have different DB engine versions—whether major, minor, or patch versions\.
+
 ## Major version upgrades<a name="aurora-global-database-upgrade.major"></a>
 
 When you perform a major version upgrade of an Amazon Aurora global database, you upgrade the global database cluster instead the individual clusters that it contains\.
@@ -17,3 +19,6 @@ With an Aurora global database based on Aurora PostgreSQL, you can't perform a m
 For a minor upgrade on an Aurora global database, you upgrade all of the secondary clusters before you upgrade the primary cluster\.
 
 To learn how to upgrade an Aurora PostgreSQL global database to a higher minor version, see [Upgrading the Aurora PostgreSQL engine to a new major version](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.Upgrading.Manual)\. To learn how to upgrade an Aurora MySQL global database to a higher minor version, see [Upgrading Aurora MySQL by modifying the engine version](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.Patching.ModifyEngineVersion)\.
+
+**Note**  
+A secondary cluster must have at least one DB instance to perform a minor upgrade\.

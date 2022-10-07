@@ -54,7 +54,7 @@ Some connection utilities you can use are the following:
 + **GUI** – You can use the MySQL Workbench utility to connect by using a UI interface\. For more information, see the [Download MySQL workbench](http://dev.mysql.com/downloads/workbench/) page\.
 + **Applications** – You can use the AWS JDBC Driver for MySQL to connect your client applications to an Aurora MySQL DB cluster\. For more information about the AWS JDBC Driver for MySQL and complete instructions for using it, see the [AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
 **Note**  
-Version 3\.0\.3 of the MariaDB Connector/J utility drops support for Aurora DB clusters, so we highly recommend moving to the AWS JDBC Driver for MySQL\. The AWS JDBC Driver for MySQL offers improved failover speed for Aurora MySQL DB clusters by caching DNS connections for quick use\.  
+Version 3\.0\.3 of the MariaDB Connector/J utility drops support for Aurora DB clusters, so we highly recommend moving to the AWS JDBC Driver for MySQL\. The AWS JDBC Driver for MySQL offers improved failover speed for Aurora MySQL DB clusters\.  
 If you are using an Aurora Serverless DB cluster, the failover benefits don't apply, but you can disable the feature by setting the `failureDetectionEnabled` parameter to `false`\. To review a complete list of configuration options, see the [AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
 
 ### Connecting with Aurora MySQL using the MySQL utility<a name="Aurora.Connecting.mysql"></a>
@@ -117,7 +117,7 @@ This procedure doesn't require installing the web server in the tutorial, but it
 
 The AWS JDBC Driver for MySQL is a client driver designed for the high availability of Aurora MySQL\. The driver is drop\-in compatible with the MySQL Connector/J driver\. To install or upgrade your connector, replace the MySQL connector \.jar file \(located in the application CLASSPATH\) with the AWS JDBC Driver for MySQL \.jar file, and update the connection URL prefix from `jdbc:mysql://` to `jdbc:mysql:aws://`\.
 
-The AWS JDBC Driver for MySQL takes full advantage of the failover capabilities of Aurora MySQL\. In the event of a failover, the driver queries the cluster directly for the new topology instead of using DNS resolution\. By querying the cluster directly, the driver is able to connect to the new primary faster in a reliable and predictable manner, avoiding potential delays caused by DNS resolution\.
+The AWS JDBC Driver for MySQL takes full advantage of the failover capabilities of Aurora MySQL\. In the event of a failover, the driver queries the cluster directly for the new topology instead of using DNS resolution\. By querying the cluster directly, the driver can connect to the new primary faster in a reliable and predictable manner\. This approach helps avoid potential delays caused by DNS resolution\.
 
 The AWS JDBC Driver for MySQL supports IAM database authentication\. For more information, see [AWS IAM Database Authentication](https://github.com/awslabs/aws-mysql-jdbc#aws-iam-database-authentication) in the AWS JDBC Driver for MySQL GitHub repository\. For more information about IAM database authentication, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\.
 
@@ -175,22 +175,19 @@ To view the cluster endpoint \(writer endpoint\), choose **Databases** on the Am
 ### Connection utilities for Aurora PostgreSQL<a name="Aurora.Connecting.AuroraPostgreSQL.Utilities"></a>
 
 Some connection utilities you can use are the following:
-+ **Command line** – You can connect to an Amazon Aurora PostgreSQL DB instance by using tools like psql, the PostgreSQL interactive terminal\. For more information on using the PostgreSQL interactive terminal, see [psql](https://www.postgresql.org/docs/current/app-psql.html) in the PostgreSQL documentation\.
-+ **GUI** – You can use the pgAdmin utility to connect to a PostgreSQL DB instance by using a UI interface\. For more information, see the [Download](https://www.pgadmin.org/download/) page from the pgAdmin website\.
-+ **Applications** – You can use the PostgreSQL JDBC driver to connect your applications to your PostgreSQL DB instance\. For more information, see the [Download](https://jdbc.postgresql.org/download/) page from the PostgreSQL JDBC driver website\.
++ **Command line** – You can connect to Aurora PostgreSQL DB clusters by using tools like psql, the PostgreSQL interactive terminal\. For more information on using the PostgreSQL interactive terminal, see [psql](https://www.postgresql.org/docs/current/app-psql.html) in the PostgreSQL documentation\.
++ **GUI** – You can use the pgAdmin utility to connect to Aurora PostgreSQL DB clusters by using a UI interface\. For more information, see the [Download](https://www.pgadmin.org/download/) page from the pgAdmin website\.
++ **Applications** – You can use the AWS JDBC Driver for PostgreSQL to connect your applications to your Aurora PostgreSQL DB clusters\. For more information, see the [Connecting with the AWS JDBC Driver for PostgreSQL](#Aurora.Connecting.AuroraPostgreSQL.JDBCDriverPostgreSQL)\.
 
-### Connecting with the Amazon Web Services JDBC Driver for PostgreSQL \(preview\)<a name="Aurora.Connecting.AuroraPostgreSQL.JDBCDriverPostgreSQL"></a>
+### Connecting with the AWS JDBC Driver for PostgreSQL<a name="Aurora.Connecting.AuroraPostgreSQL.JDBCDriverPostgreSQL"></a>
 
+The AWS JDBC Driver for PostgreSQL is a client wrapper designed to help you take full advantage of the high availability features of Aurora PostgreSQL\. For more information about the AWS JDBC Driver for PostgreSQL and complete instructions for using it, see the [AWS JDBC Driver for PostgreSQL GitHub repository](https://github.com/awslabs/aws-advanced-jdbc-wrapper)\.
 
-|  | 
-| --- |
-| This is preview documentation for Amazon Web Services JDBC Driver for PostgreSQL\. It is subject to change\. | 
+The AWS JDBC Driver for PostgreSQL extends the community pgJDBC driver\. It has been designed to take full advantage of the cluster\-aware failover capabilities of Aurora PostgreSQL\. In the event of a failover, the AWS JDBC Driver for PostgreSQL queries the cluster directly for the new topology instead of using DNS resolution\. By querying the cluster directly, the AWS JDBC Driver for PostgreSQL is able to connect to the new primary faster in a reliable and predictable manner, avoiding potential delays caused by DNS resolution\.
 
-The AWS JDBC Driver for PostgreSQL \(preview\) is a client driver designed for the high availability of Aurora PostgreSQL\. The AWS JDBC Driver for PostgreSQL is drop\-in compatible with the PostgreSQL JDBC Driver\.
+The AWS JDBC Driver for PostgreSQL supports AWS Identity and Access Management \(IAM\) database authentication and AWS Secrets Manager\. For more information on using these authentication mechanisms with the driver, see [AWS IAM Authentication Plugin](https://github.com/awslabs/aws-advanced-jdbc-wrapper/blob/main/docs/using-the-jdbc-driver/using-plugins/UsingTheIamAuthenticationPlugin.md) and [AWS Secrets Manager Plugin](https://github.com/awslabs/aws-advanced-jdbc-wrapper/blob/main/docs/using-the-jdbc-driver/using-plugins/UsingTheAwsSecretsManagerPlugin.md) in the AWS JDBC Driver for PostgreSQL GitHub repository\.
 
-The AWS JDBC Driver for PostgreSQL takes full advantage of the failover capabilities of Aurora PostgreSQL\. The AWS JDBC Driver for PostgreSQL fully maintains a cache of the DB cluster topology and each DB instance's role, either primary DB instance or Aurora Replica\. It uses this topology to bypass the delays caused by DNS resolution so that a connection to the new primary DB instance is established as fast as possible\.
-
-For more information about the AWS JDBC Driver for PostgreSQL and complete instructions for using it, see the [AWS JDBC Driver for PostgreSQL GitHub repository](https://awslabs.github.io/aws-postgresql-jdbc/)\.
+For more information about IAM database authentication, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\. For more information about Secrets Manager, see the [AWS Secrets Manager User Guide](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)\.
 
 ## Troubleshooting Aurora connection failures<a name="Aurora.Connecting.Troubleshooting"></a>
 

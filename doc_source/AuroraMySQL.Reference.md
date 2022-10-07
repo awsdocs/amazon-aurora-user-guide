@@ -109,6 +109,7 @@
 |   `innodb_undo_logs`   |   Yes   |  Removed from Aurora MySQL version 3\.   | 
 |   `innodb_undo_tablespaces`   |   No   |  Removed from Aurora MySQL version 3\.   | 
 |   `internal_tmp_mem_storage_engine`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
+|  `key_buffer_size`  |   Yes   |  Key cache for MyISAM tables\. For more information, see [keycache\->cache\_lock mutex](#key-cache.cache-lock)\.  | 
 |   `lc_time_names`   |   Yes   |    | 
 |   `lower_case_table_names`   |   Yes \(Aurora MySQL version 1 and 2\), only at cluster creation time \(Aurora MySQL version 3\)   |   In Aurora MySQL version 2\.10 and higher 2\.x versions, make sure to reboot all reader instances after changing this setting and rebooting the writer instance\. For details, see [Rebooting an Aurora MySQL cluster \(version 2\.10 and higher\)](USER_RebootCluster.md#aurora-mysql-survivable-replicas)\. In Aurora MySQL version 3, the value of this parameter is set permanently at the time the cluster is created\. If you use a nondefault value for this option, set up your Aurora MySQL version 3 custom parameter group before upgrading, and specify the parameter group during the snapshot restore operation that creates the version 3 cluster\.   | 
 |   `master-info-repository`   |   Yes   |  Removed from Aurora MySQL version 3\.   | 
@@ -248,6 +249,7 @@
 |   `internal_tmp_mem_storage_engine`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
 |   `join_buffer_size`   |   Yes   |    | 
 |   `keep_files_on_create`   |   Yes   |    | 
+|  `key_buffer_size`  |   Yes   |  Key cache for MyISAM tables\. For more information, see [keycache\->cache\_lock mutex](#key-cache.cache-lock)\.  | 
 |   `key_cache_age_threshold`   |   Yes   |    | 
 |   `key_cache_block_size`   |   Yes   |    | 
 |   `key_cache_division_limit`   |   Yes   |    | 
@@ -476,7 +478,6 @@ The following MySQL parameters don't apply to Aurora MySQL\. This list is not ex
 + `innodb_undo_log_truncate`
 + `innodb_use_native_aio`
 + `innodb_write_io_threads`
-+ `key_buffer_size` – Key cache for MyISAM tables\. This parameter doesn't apply to Aurora\.
 + `thread_cache_size`
 
 ## MySQL status variables that don't apply to Aurora MySQL<a name="AuroraMySQL.Reference.StatusVars.Inapplicable"></a><a name="status_vars"></a>
@@ -585,8 +586,8 @@ This event is part of an event semaphore\. It provides exclusive access to varia
 **synch/mutex/innodb/trx\_sys\_mutex**  
 Operations are checking, updating, deleting, or adding transaction IDs in InnoDB in a consistent or controlled manner\. These operations require a `trx_sys` mutex call, which is tracked by Performance Schema instrumentation\. Operations include management of the transaction system when the database starts or shuts down, rollbacks, undo cleanups, row read access, and buffer pool loads\. High database load with a large number of transactions results in the frequent appearance of this wait event\. For more information, see [synch/mutex/innodb/trx\_sys\_mutex](ams-waits.trxsysmutex.md)\.
 
-**synch/mutex/mysys/KEY\_CACHE::cache\_lock**  
-The `keycache->cache_lock` mutex controls access to the key cache for MyISAM tables\. This wait event doesn't apply to Aurora MySQL, because the MyISAM storage engine isn't supported for persistent tables\.
+**synch/mutex/mysys/KEY\_CACHE::cache\_lock**  <a name="key-cache.cache-lock"></a>
+The `keycache->cache_lock` mutex controls access to the key cache for MyISAM tables\. While Aurora MySQL doesn't allow usage of MyISAM tables to store persistent data, they are used to store internal temporary tables\. Consider checking the `created_tmp_tables` or `created_tmp_disk_tables` status counters, because in certain situations, temporary tables are written to disk when they no longer fit in memory\.
 
 **synch/mutex/sql/FILE\_AS\_TABLE::LOCK\_offsets**  
 The engine acquires this mutex when opening or creating a table metadata file\. When this wait event occurs with excessive frequency, the number of tables being created or opened has spiked\. 

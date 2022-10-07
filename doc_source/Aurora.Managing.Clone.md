@@ -41,7 +41,8 @@ When you finish using the clone for your testing, development, or other purposes
 ## Limitations of Aurora cloning<a name="Aurora.Managing.Clone.Limitations"></a>
 
 Aurora cloning currently has the following limitations:
-+ You can create as many clones as you want, up to the maximum number of DB clusters allowed in the AWS Region\. However, after you create 15 clones, the next clone is a full copy\. The cloning operation acts like a point\-in\-time recovery\.
++ You can create as many clones as you want, up to the maximum number of DB clusters allowed in the AWS Region\.
++ You can have up to 15 clones at the same time that were created by the copy\-on\-write protocol\. After you have 15 clones, the next clone that you create is a full copy\. The subsequent cloning operation acts like a point\-in\-time recovery\.
 + You can't create a clone in a different AWS Region from the source Aurora DB cluster\.
 + You can't create an Aurora Serverless v1 clone from a nonencrypted provisioned Aurora DB cluster\. 
 + You can't create a Aurora Serverless v1 clone from a MySQL 5\.6\-compatible provisioned cluster, or a provisioned clone of a MySQL 5\.6\-compatible Aurora Serverless v1 cluster\.

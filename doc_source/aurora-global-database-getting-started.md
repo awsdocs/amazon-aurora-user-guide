@@ -231,9 +231,7 @@ The AWS CLI commands in the procedures following accomplish the following tasks:
 
 1. Create an Aurora DB cluster for the Aurora global database\. 
 
-1. Create the Aurora DB instance for the cluster\.
-
-1. Create an Aurora DB instance for the Aurora DB cluster\.
+1. Create the Aurora DB instance for the cluster\. This is the primary Aurora DB cluster for the global database\.
 
 1. Create a second DB instance for Aurora DB cluster\. This is a reader to complete the Aurora DB cluster\. 
 
@@ -287,7 +285,7 @@ Follow the procedure for your Aurora database engine\.
    ```
    aws rds create-db-cluster \
      --region primary_region \
-     --db-cluster-identifier db_cluster_id \
+     --db-cluster-identifier primary_db_cluster_id \
      --master-username userid \
      --master-user-password password \
      --engine { aurora | aurora-mysql } \
@@ -301,7 +299,7 @@ Follow the procedure for your Aurora database engine\.
    ```
    aws rds create-db-cluster ^
      --region primary_region ^
-     --db-cluster-identifier db_cluster_id ^
+     --db-cluster-identifier primary_db_cluster_id ^
      --master-username userid ^
      --master-user-password password ^
      --engine { aurora | aurora-mysql } ^
@@ -315,7 +313,7 @@ Follow the procedure for your Aurora database engine\.
    Use the `[describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html)` AWS CLI command to confirm that the Aurora DB cluster is ready\. To single out a specific Aurora DB cluster, use `--db-cluster-identifier` parameter\. Or you can leave out the Aurora DB cluster name in the command to get details about all your Aurora DB clusters in the given Region\. 
 
    ```
-   aws rds describe-db-clusters --region primary_region --db-cluster-identifier db_cluster_id
+   aws rds describe-db-clusters --region primary_region --db-cluster-identifier primary_db_cluster_id
    ```
 
    When the response shows `"Status": "available"` for the cluster, it's ready to use\.
@@ -328,7 +326,7 @@ Follow the procedure for your Aurora database engine\.
 
    ```
    aws rds create-db-instance \
-     --db-cluster-identifier db_cluster_id \
+     --db-cluster-identifier primary_db_cluster_id \
      --db-instance-class instance_class \
      --db-instance-identifier db_instance_id \
      --engine { aurora | aurora-mysql} \
@@ -341,7 +339,7 @@ Follow the procedure for your Aurora database engine\.
 
    ```
    aws rds create-db-instance ^
-     --db-cluster-identifier db_cluster_id ^
+     --db-cluster-identifier primary_db_cluster_id ^
      --db-instance-class instance_class ^
      --db-instance-identifier db_instance_id ^
      --engine { aurora | aurora-mysql } ^
@@ -353,7 +351,7 @@ Follow the procedure for your Aurora database engine\.
    The `create-db-instance` operation might take some time to complete\. Check the status to see if the Aurora DB instance is available before continuing\.
 
    ```
-   aws rds describe-db-clusters --db-cluster-identifier sample_secondary_db_cluster
+   aws rds describe-db-clusters --db-cluster-identifier primary_db_cluster_id
    ```
 
    When the command returns a status of "available," you can create another Aurora DB instance for your primary DB cluster\. This is the reader instance \(the Aurora Replica\) for the Aurora DB cluster\.
@@ -364,9 +362,9 @@ Follow the procedure for your Aurora database engine\.
 
    ```
    aws rds create-db-instance \
-     --db-cluster-identifier sample_secondary_db_cluster \
+     --db-cluster-identifier primary_db_cluster_id \
      --db-instance-class instance_class \
-     --db-instance-identifier  sample_replica_db \
+     --db-instance-identifier replica_db_instance_id \
      --engine aurora
    ```
 
@@ -374,9 +372,9 @@ Follow the procedure for your Aurora database engine\.
 
    ```
    aws rds create-db-instance ^
-     --db-cluster-identifier sample_secondary_db_cluster ^
+     --db-cluster-identifier primary_db_cluster_id ^
      --db-instance-class instance_class ^
-     --db-instance-identifier sample_replica_db ^
+     --db-instance-identifier replica_db_instance_id ^
      --engine aurora
    ```
 
@@ -426,7 +424,7 @@ aws rds describe-global-clusters --region primary_region
    ```
    aws rds create-db-cluster \
      --region primary_region \
-     --db-cluster-identifier db_cluster_id \
+     --db-cluster-identifier primary_db_cluster_id \
      --master-username userid \
      --master-user-password password \
      --engine aurora-postgresql \
@@ -439,7 +437,7 @@ aws rds describe-global-clusters --region primary_region
    ```
    aws rds create-db-cluster ^
      --region primary_region ^
-     --db-cluster-identifier db_cluster_id ^
+     --db-cluster-identifier primary_db_cluster_id ^
      --master-username userid ^
      --master-user-password password ^
      --engine aurora-postgresql ^
@@ -450,45 +448,45 @@ aws rds describe-global-clusters --region primary_region
    Check that the Aurora DB cluster is ready\. When the response from the following command shows `"Status": "available"` for the Aurora DB cluster, you can continue\. 
 
    ```
-   aws rds describe-db-clusters --region primary_region --db-cluster-identifier db_cluster_id
+   aws rds describe-db-clusters --region primary_region --db-cluster-identifier primary_db_cluster_id
    ```
 
 1. Create the DB instance for your primary Aurora DB cluster\. To do so, use the `[create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)` CLI command\. 
 
-   1. Pass the name of your Aurora DB cluster with the `--db-instance-identifier` parameter\.
+   Pass the name of your Aurora DB cluster with the `--db-cluster-identifier` parameter\.
 
-     You don't need to pass the `--master-username` and `--master-user-password` parameters in the command, because it gets those from the Aurora DB cluster\.
+   You don't need to pass the `--master-username` and `--master-user-password` parameters in the command, because it gets those from the Aurora DB cluster\.
 
-     For the `--db-instance-class`, you can use only those from the memory optimized classes, such as `db.r5.large`\. We recommend that you use a db\.r5 or higher instance class\. For information about these classes, see [DB instance classes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html#Concepts.DBInstanceClass.Types)\. 
+   For the `--db-instance-class`, you can use only those from the memory optimized classes, such as `db.r5.large`\. We recommend that you use a db\.r5 or higher instance class\. For information about these classes, see [DB instance classes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html#Concepts.DBInstanceClass.Types)\. 
 
-     For Linux, macOS, or Unix:
+   For Linux, macOS, or Unix:
 
-     ```
-     aws rds create-db-instance \
-       --db-cluster-identifier db_cluster_id \
-       --db-instance-class instance_class \
-       --db-instance-identifier db_instance_id \
-       --engine aurora-postgresql \
-       --engine-version version \
-       --region primary_region
-     ```
+   ```
+   aws rds create-db-instance \
+     --db-cluster-identifier primary_db_cluster_id \
+     --db-instance-class instance_class \
+     --db-instance-identifier db_instance_id \
+     --engine aurora-postgresql \
+     --engine-version version \
+     --region primary_region
+   ```
 
-     For Windows:
+   For Windows:
 
-     ```
-     aws rds create-db-instance ^
-       --db-cluster-identifier db_cluster_id ^
-       --db-instance-class instance_class ^
-       --db-instance-identifier db_instance_id ^
-       --engine aurora-postgresql ^
-       --engine-version version ^
-       --region primary_region
-     ```
+   ```
+   aws rds create-db-instance ^
+     --db-cluster-identifier primary_db_cluster_id ^
+     --db-instance-class instance_class ^
+     --db-instance-identifier db_instance_id ^
+     --engine aurora-postgresql ^
+     --engine-version version ^
+     --region primary_region
+   ```
 
 1. Check the status of the Aurora DB instance before continuing\.
 
    ```
-   aws rds describe-db-clusters --db-cluster-identifier sample_secondary_db_cluster
+   aws rds describe-db-clusters --db-cluster-identifier primary_db_cluster_id
    ```
 
    If the response shows that Aurora DB instance status is "available," you can create another Aurora DB instance for your primary DB cluster\. 
@@ -499,9 +497,9 @@ aws rds describe-global-clusters --region primary_region
 
    ```
    aws rds create-db-instance \
-     --db-cluster-identifier sample_secondary_db_cluster \
+     --db-cluster-identifier primary_db_cluster_id \
      --db-instance-class instance_class \
-     --db-instance-identifier  sample_replica_db \
+     --db-instance-identifier replica_db_instance_id \
      --engine aurora-postgresql
    ```
 
@@ -509,9 +507,9 @@ aws rds describe-global-clusters --region primary_region
 
    ```
    aws rds create-db-instance ^
-     --db-cluster-identifier sample_secondary_db_cluster ^
+     --db-cluster-identifier primary_db_cluster_id ^
      --db-instance-class instance_class ^
-     --db-instance-identifier sample_replica_db ^
+     --db-instance-identifier replica_db_instance_id ^
      --engine aurora-postgresql
    ```
 
@@ -532,7 +530,8 @@ For example, if your Aurora global database has 5 secondary Regions, your primar
 The number of Aurora Replicas \(reader instances\) in the primary DB cluster determines the number of secondary DB clusters you can add\. The total number of reader instances in the primary DB cluster plus the number of secondary clusters can't exceed 15\. For example, if you have 14 reader instances in the primary DB cluster and 1 secondary cluster, you can't add another secondary cluster to the global database\.
 
 **Note**  
-For Aurora MySQL version 3, when you create a secondary cluster, make sure that the value of `lower_case_table_names` matches the value in the primary cluster\. This setting is a database parameter that affects how the server handles identifier case sensitivity\. For more information about database parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
+For Aurora MySQL version 3, when you create a secondary cluster, make sure that the value of `lower_case_table_names` matches the value in the primary cluster\. This setting is a database parameter that affects how the server handles identifier case sensitivity\. For more information about database parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.  
+We recommend that when you create a secondary cluster, you use the same DB engine version for the primary and secondary\. If necessary, upgrade the primary to be the same version as the secondary\. Aurora global databases can't fail over from a primary to a secondary DB cluster when the primary and secondary have different DB engine versions—whether major, minor, or patch versions\.
 
 ### Console<a name="aurora-global-database-attach.console"></a>
 
@@ -571,7 +570,7 @@ After you finish adding the Region to your Aurora global database, you can see i
 1. For `--region`, choose a different AWS Region than that of your Aurora primary Region\.
 
 1. Do one of the following:
-   + For an Aurora global database based on Aurora MySQL5\.6\.10a only, use the following parameters:
+   + For an Aurora global database based on Aurora MySQL 5\.6\.10a only, use the following parameters:
      + `--engine` – `aurora`
      + `--engine-mode` – `global`
      + `--engine-version` – `5.6.10a`

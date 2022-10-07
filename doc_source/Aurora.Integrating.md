@@ -6,7 +6,7 @@ Integrate Amazon Aurora with other AWS services so that you can extend your Auro
 + [Integrating AWS services with Amazon Aurora MySQL](#Aurora.Integrating.AuroraMySQL)
 + [Integrating AWS services with Amazon Aurora PostgreSQL](#Aurora.Integrating.AuroraPostgreSQL)
 + [Using Amazon Aurora Auto Scaling with Aurora replicas](Aurora.Integrating.AutoScaling.md)
-+ [Using machine learning \(ML\) capabilities with Amazon Aurora](aurora-ml.md)
++ [Using machine learning capabilities with Amazon Aurora](aurora-ml.md)
 
 ## Integrating AWS services with Amazon Aurora MySQL<a name="Aurora.Integrating.AuroraMySQL"></a>
 

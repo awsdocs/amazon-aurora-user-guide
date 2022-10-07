@@ -8,6 +8,9 @@ With an Aurora global database, there are two different approaches to failover d
 + **Manual unplanned failover** \("detach and promote"\) – To recover from an unplanned outage or to do disaster recovery \(DR\) testing, perform a cross\-Region failover to one of the secondaries in your Aurora global database\. The RTO for this manual process depends on how quickly you can perform the tasks listed in [Recovering an Amazon Aurora global database from an unplanned outage](#aurora-global-database-failover)\. The RPO is typically measured in seconds, but this depends on the Aurora storage replication lag across the network at the time of the failure\.
 + **Managed planned failover** – This feature is intended for controlled environments, such as operational maintenance and other planned operational procedures\. By using managed planned failover, you can relocate the primary DB cluster of your Aurora global database to one of the secondary Regions\. Because this feature synchronizes secondary DB clusters with the primary before making any other changes, RPO is 0 \(no data loss\)\. To learn more, see [Performing managed planned failovers for Amazon Aurora global databases](#aurora-global-database-disaster-recovery.managed-failover)\. 
 
+**Note**  
+Aurora global databases can't fail over from a primary to a secondary DB cluster when the primary and secondary have different DB engine versions—whether major, minor, or patch versions\.
+
 **Topics**
 + [Recovering an Amazon Aurora global database from an unplanned outage](#aurora-global-database-failover)
 + [Performing managed planned failovers for Amazon Aurora global databases](#aurora-global-database-disaster-recovery.managed-failover)
