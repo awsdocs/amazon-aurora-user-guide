@@ -16,7 +16,7 @@ After you enable the Data API, you can also use the query editor for Aurora Serv
 The Data API and query editor aren't supported for Aurora Serverless v2\.
 
 **Topics**
-+ [Data API availability](#data-api.regions)
++ [Region and version availability](#data-api.regions)
 + [Authorizing access to the Data API](#data-api.access)
 + [Enabling the Data API](#data-api.enabling)
 + [Creating an Amazon VPC endpoint for the Data API \(AWS PrivateLink\)](#data-api.vpc-endpoint)
@@ -26,7 +26,7 @@ The Data API and query editor aren't supported for Aurora Serverless v2\.
 + [Troubleshooting Data API issues](#data-api.troubleshooting)
 + [Logging Data API calls with AWS CloudTrail](logging-using-cloudtrail-data-api.md)
 
-## Data API availability<a name="data-api.regions"></a>
+## Region and version availability<a name="data-api.regions"></a>
 
 The Data API is available only for Aurora Serverless v1 DB clusters using specific Aurora MySQL and Aurora PostgreSQL versions, and in specific AWS Regions\. For more information, see [Data API for Aurora Serverless v1](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API.md)\.
 

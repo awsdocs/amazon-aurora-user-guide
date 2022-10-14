@@ -30,7 +30,8 @@ The size of your cluster volume is evaluated on an hourly basis to determine you
  Dynamic resizing applies to operations that physically remove or resize data files within the cluster volume\. Thus, it applies to SQL statements such as `DROP TABLE`, `DROP DATABASE`, `TRUNCATE TABLE`, and `ALTER TABLE ... DROP PARTITION`\. It doesn't apply to deleting rows using the `DELETE` statement\. If you delete a large number of rows from a table, you can run the Aurora MySQL `OPTIMIZE TABLE` statement or use the Aurora PostgreSQL `pg_repack` extension afterward to reorganize the table and dynamically resize the cluster volume\. 
 
 **Note**  
- For Aurora MySQL, the `innodb_file_per_table` affects how table storage is organized\. When tables are part of the system tablespace, dropping the table doesn't reduce the size of the system tablespace\. Thus, make sure to use the setting `innodb_file_per_table=1` for Aurora MySQL clusters to take full advantage of dynamic resizing\. 
+For Aurora MySQL, the `innodb_file_per_table` parameter affects how table storage is organized\. When tables are part of the system tablespace, dropping the table doesn't reduce the size of the system tablespace\. Thus, make sure to set `innodb_file_per_table` to 1 for Aurora MySQL DB clusters to take full advantage of dynamic resizing\.  
+The data resizing feature reclaims space from deleted tablespaces over time, not immediately, when tables in those tablespaces are dropped\. Space in the system tablespace isn't reclaimed because the system tablespace is never deleted\. Unreclaimed free space in a tablespace is reused when an operation needs space in that tablespace\.
 
  These Aurora versions also have a higher storage limit for the cluster volume than lower versions do\. Thus, you can consider upgrading to one of these versions if you are close to exceeding the original 64 TiB volume size\. 
 

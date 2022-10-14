@@ -8,7 +8,7 @@ Security threats are both external and internal\. To protect against internal th
 + [How database activity streams work](#DBActivityStreams.Overview.how-they-work)
 + [Asynchronous and synchronous mode for database activity streams](#DBActivityStreams.Overview.sync-mode)
 + [Requirements for database activity streams](#DBActivityStreams.Overview.requirements)
-+ [Supported Aurora engine versions for database activity streams](#DBActivityStreams.Overview.requirements.version)
++ [Region and version availability](#DBActivityStreams.Overview.Availability)
 + [Supported DB instance classes for database activity streams](#DBActivityStreams.Overview.requirements.classes)
 
 ## How database activity streams work<a name="DBActivityStreams.Overview.how-they-work"></a>
@@ -51,22 +51,9 @@ In Aurora, database activity streams have the following requirements and limitat
 + Start your database activity stream at the DB cluster level\. If you add a DB instance to your cluster, you don't need to start an activity stream on the instance: it is audited automatically\.
 + In an Aurora global database, make sure to start an activity stream on each DB cluster separately\. Each cluster delivers audit data to its own Kinesis stream within its own AWS Region\.
 
-## Supported Aurora engine versions for database activity streams<a name="DBActivityStreams.Overview.requirements.version"></a>
+## Region and version availability<a name="DBActivityStreams.Overview.Availability"></a>
 
-**For Aurora PostgreSQL, database activity streams are supported for the following versions, except in the Middle East \(UAE\) Region:**  
-+ All 14, 13, and 12 versions
-+ Version 11\.6 and higher 11 versions
-+ Version 10\.11 and higher 10 versions
-
-**For Aurora MySQL, database activity streams are supported for the following versions, except in the Middle East \(UAE\) Region:**  
-2\.08 or higher, which is compatible with MySQL version 5\.7
-
-**Database activity streams aren't supported for the following features:**  
-+ Aurora Serverless v1
-+ Aurora Serverless v2
-+ Babelfish for Aurora PostgreSQL
-
-For more information about Aurora PostgreSQL versions, see [Amazon Aurora PostgreSQL releases and engine versions\.](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html)\.
+Feature availability and support varies across specific versions of each Aurora database engine, and across AWS Regions\. For more information on version and Region availability with Aurora and database activity streams, see [Database activity streams in Aurora](Concepts.Aurora_Fea_Regions_DB-eng.Feature.DBActivityStreams.md)\. 
 
 ## Supported DB instance classes for database activity streams<a name="DBActivityStreams.Overview.requirements.classes"></a>
 

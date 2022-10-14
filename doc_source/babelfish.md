@@ -2,9 +2,6 @@
 
 Babelfish for Aurora PostgreSQL extends your Aurora PostgreSQL DB cluster with the ability to accept database connections from SQL Server clients\. With Babelfish, applications that were originally built for SQL Server can work directly with Aurora PostgreSQL with few code changes compared to a traditional migration and without changing database drivers\. For more information about migrating, see [Migrating a SQL Server database to Babelfish for Aurora PostgreSQL](babelfish-migration.md)\.
 
-**Note**  
-Babelfish for Aurora PostgreSQL is available with Aurora PostgreSQL 13\.4 and higher versions\.
-
 Babelfish provides an additional endpoint for an Aurora PostgreSQL database cluster that allows it to understand the SQL Server wire\-level protocol and commonly used SQL Server statements\. Client applications that use the Tabular Data Stream \(TDS\) wire protocol can connect natively to the TDS listener port on Aurora PostgreSQL\. To learn more about TDS, see [\[MS\-TDS\]: Tabular Data Stream Protocol](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-tds/b46a581a-39de-4745-b076-ec4dbb7d13ec) on the Microsoft website\.
 
 **Note**  

@@ -1,14 +1,14 @@
-# Data API for Aurora Serverless v1<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API"></a>
+# Aurora Serverless v1<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1"></a>
 
-The Data API for Aurora Serverless provides a web\-services interface to an Aurora Serverless v1 cluster\. Instead of managing database connections from client applications, you can run SQL commands against an HTTPS endpoint\. For more information, see [Using the Data API for Aurora Serverless v1](data-api.md)\. 
+Aurora Serverless is an on\-demand, auto\-scaling feature designed to be a cost\-effective approach to running intermittent or unpredictable workloads on Amazon Aurora\. It automatically starts up, shuts down, and scales capacity up or down, as needed by your applications, using a single DB instance in each cluster\. For more information, see [Using Amazon Aurora Serverless v1](aurora-serverless.md)\.
 
 **Topics**
-+ [Data API with Aurora MySQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API.amy)
-+ [Data API with Aurora PostgreSQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API.apg)
++ [Serverless v1 with Aurora MySQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.amy)
++ [Serverless v1 with Aurora PostgreSQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.apg)
 
-## Data API with Aurora MySQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API.amy"></a>
+## Serverless v1 with Aurora MySQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.amy"></a>
 
-Following are the supported engines and Region availability for Data API with Aurora MySQL\.
+Following are the supported engines and Region availability for Serverless v1 with Aurora MySQL\.
 
 
 | Region | Aurora MySQL version 3 | Aurora MySQL version 2 | Aurora MySQL version 1 | 
@@ -41,9 +41,9 @@ Following are the supported engines and Region availability for Data API with Au
 | AWS GovCloud \(US\-East\) | – | – | – | 
 | AWS GovCloud \(US\-West\) | – | – | – | 
 
-## Data API with Aurora PostgreSQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API.apg"></a>
+## Serverless v1 with Aurora PostgreSQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.apg"></a>
 
-Following are the supported engines and Region availability for Data API with Aurora PostgreSQL\.
+Following are the supported engines and Region availability for Serverless v1 with Aurora PostgreSQL\.
 
 
 | Region | Aurora PostgreSQL 11 | Aurora PostgreSQL 10 | 
@@ -69,7 +69,7 @@ Following are the supported engines and Region availability for Data API with Au
 | Europe \(London\) | Version 11\.13 | Version 10\.18 | 
 | Europe \(Milan\) | – | – | 
 | Europe \(Paris\) | Version 11\.13 | Version 10\.18 | 
-| Europe \(Stockholm\) | – | – | 
+| Europe \(Stockholm\) | Version 11\.13 | Version 10\.18 | 
 | Middle East \(Bahrain\) | – | – | 
 | Middle East \(UAE\) | – | – | 
 | South America \(São Paulo\) | – | – | 

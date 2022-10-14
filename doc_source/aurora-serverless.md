@@ -11,6 +11,7 @@
  For an Aurora Serverless v1 cluster, the cluster volume is always encrypted\. You can choose the encryption key, but you can't disable encryption\. That means that you can perform the same operations on an Aurora Serverless v1 that you can on encrypted snapshots\. For more information, see [Aurora Serverless v1 and snapshots](aurora-serverless-v1.how-it-works.md#aurora-serverless.snapshots)\. 
 
 **Topics**
++ [Region and version availability](#aurora-serverless-v1-Availability)
 + [Advantages of Aurora Serverless v1](#aurora-serverless-v1.advantages)
 + [Use cases for Aurora Serverless v1](#aurora-serverless-v1.use-cases)
 + [Limitations of Aurora Serverless v1](#aurora-serverless.limitations)
@@ -28,6 +29,10 @@
 **Important**  
  Aurora has two generations of serverless technology, Aurora Serverless v2 and Aurora Serverless v1\. If your application can run on MySQL 8\.0 or PostgreSQL 13, we recommend that you use Aurora Serverless v2\. Aurora Serverless v2 scales more quickly and in a more granular way\. Aurora Serverless v2 also has more compatibility with other Aurora features such as reader DB instances\. Thus, if you're already familiar with Aurora, you don't have to learn as many new procedures or limitations to use Aurora Serverless v2 as with Aurora Serverless v1\.   
  You can learn about Aurora Serverless v2 in [Using Aurora Serverless v2](aurora-serverless-v2.md)\. 
+
+## Region and version availability<a name="aurora-serverless-v1-Availability"></a>
+
+Feature availability and support varies across specific versions of each Aurora database engine, and across AWS Regions\. For more information on version and Region availability with Aurora and Aurora Serverless v1, see [Aurora Serverless v1](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.md)\. 
 
 ## Advantages of Aurora Serverless v1<a name="aurora-serverless-v1.advantages"></a>
 
@@ -50,7 +55,6 @@
 ## Limitations of Aurora Serverless v1<a name="aurora-serverless.limitations"></a>
 
  The following limitations apply to Aurora Serverless v1: 
-+  Aurora Serverless v1 is available in certain AWS Regions and for specific Aurora MySQL and Aurora PostgreSQL versions only\. For more information, see [Aurora Serverless v1](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless.md)\. 
 +  Aurora Serverless v1 doesn't support the following features: 
   +  Aurora global databases 
   +  Aurora multi\-master clusters 

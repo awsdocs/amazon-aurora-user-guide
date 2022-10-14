@@ -10,10 +10,13 @@ Amazon SageMaker is a fully managed machine learning service\. Data scientists a
 
 Using Amazon Comprehend with your Aurora DB cluster has less preliminary setup than using SageMaker\. If you're new to both AWS machine learning and to Aurora machine learning, we recommend that you start by exploring Amazon Comprehend\. 
 
-Aurora machine learning is supported in certain AWS Regions and for specific versions of Aurora MySQL only\. Before trying to set up Aurora machine learning, check availability for your Aurora MySQL version and your Region\. For details, see [Aurora machine learning with Aurora MySQL](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML.ams)\. 
+Aurora machine learning is supported in certain AWS Regions and for specific versions of Aurora MySQL only\. Before trying to set up Aurora machine learning, check availability for your Aurora MySQL version and your Region\. For details, see [Aurora machine learning with Aurora MySQL](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML.amy)\. 
 
 **Topics**
 + [Requirements for using Aurora machine learning with Aurora MySQL](#aurora-ml-prereqs)
++ [Prerequisites for Aurora machine learning](#aurora-ml-prereqs)
++ [Region and version availability](#aurora-ml-Availability)
++ [Enabling Aurora machine learning](#aurora-ml-enabling)
 + [Supported features and limitations of Aurora machine learning with Aurora MySQL](#aurora-ml-limitations)
 + [Setting up your Aurora MySQL DB cluster to use Aurora machine learning](#aurora-ml-setting-up-access)
 + [Using Amazon Comprehend with your Aurora MySQL DB cluster](#using-amazon-comprehend-for-sentiment-detection)
@@ -24,6 +27,18 @@ Aurora machine learning is supported in certain AWS Regions and for specific ver
 ## Requirements for using Aurora machine learning with Aurora MySQL<a name="aurora-ml-prereqs"></a>
 
 AWS machine learning services are managed services that are set up and run in their own production environments\. Aurora machine learning supports integration with Amazon Comprehend and SageMaker\. Before trying to set up your Aurora MySQL DB cluster to use Aurora machine learning, be sure you understand the following requirements and prerequisites\. 
+
+## Prerequisites for Aurora machine learning<a name="aurora-ml-prereqs"></a>
+
+You can upgrade an Aurora cluster that's running a lower version of Aurora MySQL to a supported higher version if you want to use Aurora machine learning with that cluster\. For more information, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\. 
+
+## Region and version availability<a name="aurora-ml-Availability"></a>
+
+Feature availability and support varies across specific versions of each Aurora database engine, and across AWS Regions\. For more information on version and Region availability with Aurora MySQL and Aurora machine learning, see [Aurora machine learning with Aurora MySQL](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML.amy)\. 
+
+## Enabling Aurora machine learning<a name="aurora-ml-enabling"></a>
+
+ Enabling the ML capabilities involves the following steps: 
 + The Amazon Comprehend and SageMaker services must be running in the same AWS Region as your Aurora MySQL DB cluster\. You can't use Amazon Comprehend or SageMaker services from an Aurora MySQL DB cluster in a different Region\.
 + If your Aurora MySQL DB cluster is in a different virtual public cloud \(VPC\) based on the Amazon VPC service than your Amazon Comprehend and SageMaker services, the VPC's Security group needs to allow outbound connections to the target Aurora machine learning service\. For more information, see [Enabling network communication from Amazon Aurora MySQL to other AWS services](AuroraMySQL.Integrating.Authorizing.Network.md)\. 
 + Your Aurora MySQL DB cluster needs to use a custom DB cluster parameter group\. At the end of the setup process for each Aurora machine learning service that you want to use, you add the Amazon Resource Name \(ARN\) of the associated IAM role that was created for the service\. We recommend that you create a custom DB cluster parameter group for your Aurora MySQL in advance and configure your Aurora MySQL DB cluster to use it so that it's ready for you to modify at the end of the setup process\.
@@ -34,7 +49,7 @@ AWS machine learning services are managed services that are set up and run in th
   + Create the IAM roles as detailed in [Setting up your Aurora MySQL DB cluster to use Aurora machine learning](#aurora-ml-setting-up-access)\.
   + Add the ARN of the IAM role to the custom DB cluster parameter group for each Aurora MySQL DB cluster in every AWS Region\. 
 
-  These tasks require that Aurora machine learning is available for your version of Aurora MySQL in all AWS Regions that make up your Aurora global database\. For the list of versions and Regions, see [Aurora machine learning with Aurora MySQL](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML.ams)\.
+  These tasks require that Aurora machine learning is available for your version of Aurora MySQL in all AWS Regions that make up your Aurora global database\.  
 
 ## Supported features and limitations of Aurora machine learning with Aurora MySQL<a name="aurora-ml-limitations"></a>
 

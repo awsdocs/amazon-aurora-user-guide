@@ -15,7 +15,7 @@ You can use the tools provided by query plan management proactively, to specify 
 + [Supported SQL statements](#AuroraPostgreSQL.Optimize.overview.features)
 + [Query plan management limitations](#AuroraPostgreSQL.Optimize.overview.limitations)
 + [Query plan management terminology](#AuroraPostgreSQL.Optimize.Start-terminology)
-+ [Aurora PostgreSQL versions and query plan management versions](#AuroraPostgreSQL.Optimize.overview.versions)
++ [Aurora PostgreSQL query plan management versions](#AuroraPostgreSQL.Optimize.overview.versions)
 + [Turning on Aurora PostgreSQL query plan management](#AuroraPostgreSQL.Optimize.Enable)
 + [Upgrading Aurora PostgreSQL query plan management](#AuroraPostgreSQL.Optimize.Upgrade)
 + [Turning off Aurora PostgreSQL query plan management](#AuroraPostgreSQL.Optimize.Enable.turnoff)
@@ -65,7 +65,7 @@ The set of all captured plans for a given managed statement\. The plan history c
 **query plan regression**  
 The case when the optimizer chooses a less optimal plan than it did before a given change to the database environment, such as a new PostgreSQL version or changes to statistics\.
 
-## Aurora PostgreSQL versions and query plan management versions<a name="AuroraPostgreSQL.Optimize.overview.versions"></a>
+## Aurora PostgreSQL query plan management versions<a name="AuroraPostgreSQL.Optimize.overview.versions"></a>
 
 Query plan management is supported by all currently available Aurora PostgreSQL releases\. For more information, see the list of [Amazon Aurora PostgreSQL updates](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) in the *Release Notes for Aurora PostgreSQL*\.
 
@@ -97,6 +97,8 @@ To learn how to upgrade the `apg_plan_mgmt` extension, see [Upgrading Aurora Pos
 Setting up query plan management for your Aurora PostgreSQL DB cluster involves installing an extension and changing several DB cluster parameter settings\. You need `rds_superuser` permissions to install the `apg_plan_mgmt` extension and to turn on the feature for the Aurora PostgreSQL DB cluster\.
 
 Installing the extension creates a new role, `apg_plan_mgmt`\. This role allows database users to view, manage, and maintain query plans\. As an administrator with `rds_superuser` privileges, be sure to grant the `apg_plan_mgmt` role to database users as needed\. 
+
+Only users with the `rds_superuser` role can complete the following procedure\. The `rds_superuser` is required for creating the `apg_plan_mgmt` extension and its `apg_plan_mgmt` role\. Users must be granted the `apg_plan_mgmt` role to administer the `apg_plan_mgmt` extension\.
 
 **To turn on query plan management for your Aurora PostgreSQL DB cluster**
 

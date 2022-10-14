@@ -25,7 +25,7 @@
 
 ## Upgrading or switching existing clusters to use Aurora Serverless v2<a name="aurora-serverless-v2.getting-started-general-procedure"></a>
 
- If your provisioned cluster has an engine version that supports Aurora Serverless v2, switching to Aurora Serverless v2 doesn't require an upgrade\. In that case, you can add Aurora Serverless v2 DB instances to your original cluster\. You can switch the cluster to use all Aurora Serverless v2 DB instances\. You can also use a combination of Aurora Serverless v2 and provisioned DB instances in the same DB cluster\. For the Aurora engine versions that support Aurora Serverless v2, see [Aurora Serverless v2 requires minimum engine versions](aurora-serverless-v2.requirements.md#aurora-serverless-v2.requirements.versions)\. 
+ If your provisioned cluster has an engine version that supports Aurora Serverless v2, switching to Aurora Serverless v2 doesn't require an upgrade\. In that case, you can add Aurora Serverless v2 DB instances to your original cluster\. You can switch the cluster to use all Aurora Serverless v2 DB instances\. You can also use a combination of Aurora Serverless v2 and provisioned DB instances in the same DB cluster\. For the Aurora engine versions that support Aurora Serverless v2, see [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md)\. 
 
  If you're running a lower engine version that doesn't support Aurora Serverless v2, you take these general steps: 
 

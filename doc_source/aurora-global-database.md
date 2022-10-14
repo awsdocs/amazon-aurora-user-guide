@@ -5,6 +5,7 @@ Amazon Aurora global databases span multiple AWS Regions, enabling low latency g
 **Topics**
 + [Overview of Amazon Aurora global databases](#aurora-global-database-overview)
 + [Advantages of Amazon Aurora global databases](#aurora-global-database.advantages)
++ [Region and version availability](#aurora-global-database.Availability)
 + [Limitations of Amazon Aurora global databases](#aurora-global-database.limitations)
 + [Getting started with Amazon Aurora global databases](aurora-global-database-getting-started.md)
 + [Managing an Amazon Aurora global database](aurora-global-database-managing.md)
@@ -42,6 +43,10 @@ By using Aurora global databases, you can get the following advantages:
 + **Scalable secondary Aurora DB clusters** – You can scale your secondary clusters by adding more read\-only instances \(Aurora Replicas\) to a secondary AWS Region\. The secondary cluster is read\-only, so it can support up to 16 read\-only Aurora Replica instances rather than the usual limit of 15 for a single Aurora cluster\.
 + **Fast replication from primary to secondary Aurora DB clusters** – The replication performed by an Aurora global database has little performance impact on the primary DB cluster\. The resources of the DB instances are fully devoted to serve application read and write workloads\.
 + **Recovery from Region\-wide outages** – The secondary clusters allow you to make an Aurora global database available in a new primary AWS Region more quickly \(lower RTO\) and with less data loss \(lower RPO\) than traditional replication solutions\. 
+
+## Region and version availability<a name="aurora-global-database.Availability"></a>
+
+Feature availability and support varies across specific versions of each Aurora database engine, and across AWS Regions\. For more information on version and Region availability with Aurora and global databases, see [Aurora global databases](Concepts.Aurora_Fea_Regions_DB-eng.Feature.GlobalDatabase.md)\. 
 
 ## Limitations of Amazon Aurora global databases<a name="aurora-global-database.limitations"></a>
 

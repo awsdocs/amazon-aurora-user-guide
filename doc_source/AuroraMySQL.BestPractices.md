@@ -22,6 +22,7 @@ This topic includes information on best practices and options for using or migra
   + [Invoking AWS Lambda functions using native MySQL functions](#AuroraMySQL.BestPractices.Lambda)
   + [Avoiding XA transactions with Amazon Aurora MySQL](#AuroraMySQL.BestPractices.XA)
   + [Keeping foreign keys turned on during DML statements](#Aurora.BestPractices.ForeignKeys)
+  + [Configuring how frequently the log buffer is flushed](#AuroraMySQL.BestPractices.Flush)
 
 ## Determining which DB instance you are connected to<a name="AuroraMySQL.BestPractices.DeterminePrimaryInstanceConnection"></a>
 
@@ -286,6 +287,7 @@ The following features are available in Aurora MySQL for MySQL compatibility\. H
 + [Invoking AWS Lambda functions using native MySQL functions](#AuroraMySQL.BestPractices.Lambda)
 + [Avoiding XA transactions with Amazon Aurora MySQL](#AuroraMySQL.BestPractices.XA)
 + [Keeping foreign keys turned on during DML statements](#Aurora.BestPractices.ForeignKeys)
++ [Configuring how frequently the log buffer is flushed](#AuroraMySQL.BestPractices.Flush)
 
 ### Using multithreaded replication in Aurora MySQL version 3<a name="AuroraMySQL.BestPractices.MTReplica"></a>
 
@@ -332,3 +334,22 @@ If you need to insert or update rows that require a transient violation of forei
 In addition, follow these other best practices for foreign key constraints:
 + Make sure that your client applications don't set the `foreign_key_checks` variable to `0` as a part of the `init_connect` variable\.
 + If a restore from a logical backup such as `mysqldump` fails or is incomplete, make sure that `foreign_key_checks` is set to `1` before starting any other operations in the same session\. A logical backup sets `foreign_key_checks` to `0` when it starts\.
+
+### Configuring how frequently the log buffer is flushed<a name="AuroraMySQL.BestPractices.Flush"></a>
+
+In MySQL Community Edition, to make transactions durable, the InnoDB log buffer must be flushed to durable storage\. You use the`innodb_flush_log_at_trx_commit` parameter to configure how frequently the log buffer is flushed to disk\.
+
+When you set the `innodb_flush_log_at_trx_commit` parameter to the default value of 1, the log buffer is flushed at each transaction commit\. This setting helps to keep the database [ACID](https://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_acid) compliant\. We recommend that you keep the default setting of 1\.
+
+Changing `innodb_flush_log_at_trx_commit` to a nondefault value, 0 or 2, can help reduce data manipulation language \(DML\) latency, but sacrifices the durability of the log records\. This lack of durability makes the database ACID noncompliant\. We recommend that your databases be ACID compliant to avoid the risk of data loss in the event of a server restart\. For more information on this parameter, see [innodb\_flush\_log\_at\_trx\_commit](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_flush_log_at_trx_commit) in the MySQL documentation\.
+
+In Aurora MySQL, redo log processing is offloaded to the storage layer, so no flushing to log files occurs on the DB instance\. When a write is issued, redo logs are sent from the writer DB instance directly to the Aurora cluster volume\. The only writes that cross the network are redo log records\. No pages are ever written from the database tier\.
+
+By default, in Aurora MySQL, the `innodb_flush_log_at_trx_commit` parameter is set to 1\. Each thread committing a transaction waits for confirmation from the Aurora cluster volume\. This confirmation indicates that this record and all previous redo log records are written and have achieved [quorum](https://aws.amazon.com/blogs/database/amazon-aurora-under-the-hood-quorum-and-correlated-failure/)\. Persisting the log records and achieving quorum make the transaction durable, whether through autocommit or explicit commit\. For more information on the Aurora storage architecture, see [Amazon Aurora storage demystified](https://d1.awsstatic.com/events/reinvent/2020/Amazon_Aurora_storage_demystified_DAT401.pdf)\.
+
+Aurora MySQL doesn't flush logs to data files as MySQL Community Edition does\. However, you can use the `innodb_flush_log_at_trx_commit` parameter to relax durability constraints when writing redo log records to the Aurora cluster volume\. When you set `innodb_flush_log_at_trx_commit` to a nondefault value \(0 or 2\), the database doesn't wait for confirmation that the redo log records are written to the Aurora cluster volume\. While these settings can lower DML latency to the client, they can also result in data loss in the event of a failover or restart\. Therefore, we recommend that you keep the `innodb_flush_log_at_trx_commit` parameter set to the default value of 1\.
+
+While data loss can occur in both MySQL Community Edition and Aurora MySQL, behavior differs in each database because of their different architectures\. These architectural differences can lead to varying degrees of data loss\. To make sure that your database is ACID compliant, always set `innodb_flush_log_at_trx_commit` to 1\.
+
+**Note**  
+You can't configure the `innodb_flush_log_at_trx_commit` parameter in Aurora MySQL version 3\. Aurora MySQL version 3 always uses the default setting of 1, which is ACID compliant\.

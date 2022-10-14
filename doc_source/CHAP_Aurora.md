@@ -4,6 +4,7 @@
 
 **Topics**
 + [Stopping and starting an Amazon Aurora DB cluster](aurora-cluster-stop-start.md)
++ [Connecting an EC2 instance and an Aurora DB cluster automatically](ec2-rds-connect.md)
 + [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)
 + [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)
 + [Managing performance and scaling for Aurora DB clusters](Aurora.Managing.Performance.md)

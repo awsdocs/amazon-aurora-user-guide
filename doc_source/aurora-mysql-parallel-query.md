@@ -1,6 +1,6 @@
 # Working with parallel query for Amazon Aurora MySQL<a name="aurora-mysql-parallel-query"></a><a name="parallel_query"></a><a name="pq"></a>
 
- Following, you can find a description of the parallel query performance optimization for Amazon Aurora MySQL\-Compatible Edition\. This feature uses a special processing path for certain data\-intensive queries, taking advantage of the Aurora shared storage architecture\. Parallel query works best with Aurora MySQL DB clusters that have tables with millions of rows and analytic queries that take minutes or hours to complete\. For information about Aurora MySQL versions that support parallel query in an AWS Region, see [Aurora parallel queries](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ParallelQuery.md)\. 
+ Following, you can find a description of the parallel query performance optimization for Amazon Aurora MySQL\-Compatible Edition\. This feature uses a special processing path for certain data\-intensive queries, taking advantage of the Aurora shared storage architecture\. Parallel query works best with Aurora MySQL DB clusters that have tables with millions of rows and analytic queries that take minutes or hours to complete\.  
 
 **Contents**
 + [Overview of parallel query for Aurora MySQL](#aurora-mysql-parallel-query-overview)
@@ -105,7 +105,7 @@
 +  Parallel query doesn't apply to tables using the `COMPRESSED` or `REDUNDANT` row formats\. Use the `COMPACT` or `DYNAMIC` row formats for tables you plan to use with parallel query\. 
 +  Aurora uses a cost\-based algorithm to determine whether to use the parallel query mechanism for each SQL statement\. Using certain SQL constructs in a statement can prevent parallel query or make parallel query unlikely for that statement\. For information about compatibility of SQL constructs with parallel query, see [How parallel query works with SQL constructs](#aurora-mysql-parallel-query-sql)\. 
 +  Each Aurora DB instance can run only a certain number of parallel query sessions at one time\. If a query has multiple parts that use parallel query, such as subqueries, joins, or `UNION` operators, those phases run in sequence\. The statement only counts as a single parallel query session at any one time\. You can monitor the number of active sessions using the [parallel query status variables](#aurora-mysql-parallel-query-monitoring)\. You can check the limit on concurrent sessions for a given DB instance by querying the status variable `Aurora_pq_max_concurrent_requests`\. 
-+  Parallel query is available in all AWS Regions that Aurora supports\. For most AWS Regions, the minimum required Aurora MySQL version to use parallel query is 1\.23 or 2\.09\. For more information, see [Aurora parallel queries](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ParallelQuery.md)\. 
++  Parallel query is available in all AWS Regions that Aurora supports\. For most AWS Regions, the minimum required Aurora MySQL version to use parallel query is 1\.23 or 2\.09\.  
 +  Aurora MySQL 1\.22\.2, 1\.20\.1, 1\.19\.6, and 5\.6\.10a only: Using parallel query with these older versions involves creating a new cluster, or restoring from an existing Aurora MySQL cluster snapshot\. 
 +  Aurora MySQL 1\.22\.2, 1\.20\.1, 1\.19\.6, and 5\.6\.10a only: Parallel query doesn't support AWS Identity and Access Management \(IAM\) database authentication\. 
 

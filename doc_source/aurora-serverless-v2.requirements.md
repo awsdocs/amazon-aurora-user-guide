@@ -3,23 +3,14 @@
  When you create a cluster where you intend to use Aurora Serverless v2 DB instances, pay attention to the following requirements\. 
 
 **Topics**
-+ [Aurora Serverless v2 is available in certain AWS Regions](#aurora-serverless-v2.requirements.regions)
-+ [Aurora Serverless v2 requires minimum engine versions](#aurora-serverless-v2.requirements.versions)
++ [Region and version availability](#aurora-serverless-v2-Availability)
 + [Clusters that use Aurora Serverless v2 must have a capacity range specified](#aurora-serverless-v2.requirements.capacity-range)
 + [Some provisioned features aren't supported in Aurora Serverless v2](#aurora-serverless-v2.limitations)
 + [Some Aurora Serverless v2 aspects are different from Aurora Serverless v1](#aurora-serverless-v2.requirements.v1-v2-differences)
 
-## Aurora Serverless v2 is available in certain AWS Regions<a name="aurora-serverless-v2.requirements.regions"></a>
+## Region and version availability<a name="aurora-serverless-v2-Availability"></a>
 
- For the AWS Regions where Aurora Serverless v2 DB instances are currently available, see [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md)\. 
-
-## Aurora Serverless v2 requires minimum engine versions<a name="aurora-serverless-v2.requirements.versions"></a>
-
- Aurora clusters that use Aurora Serverless v2 DB instances must be running one of the following DB engine versions:
-+ MySQL\-compatible DB instances for Aurora Serverless v2 require Aurora MySQL 3\.02\.0 or higher\. This Aurora MySQL version is compatible with MySQL 8\.0\.
-+ PostgreSQL\-compatible DB instances for Aurora Serverless v2 require Aurora PostgreSQL 13\.6 or higher\.
-
-For the complete list of supported versions and AWS Regions, see [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md)\.
+Feature availability and support varies across specific versions of each Aurora database engine, and across AWS Regions\. For more information on version and Region availability with Aurora and Aurora Serverless v2, see [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md)\. 
 
 The following example shows the AWS CLI commands to confirm the exact DB engine values you can use with Aurora Serverless v2 for a specific AWS Region\. The `--db-instance-class` parameter for Aurora Serverless v2 is always `db.serverless`\. The `--engine` parameter can be `aurora-mysql` or `aurora-postgresql`\. Substitute the appropriate `--region` and `--engine` values to confirm the `--engine-version` values that you can use\. If the command doesn't produce any output, Aurora Serverless v2 isn't available for that combination of AWS Region and DB engine\.
 

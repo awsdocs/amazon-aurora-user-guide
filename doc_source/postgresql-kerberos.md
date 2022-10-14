@@ -19,7 +19,7 @@ A database can use Kerberos, AWS Identity and Access Management \(IAM\), or both
 
 ## Region and version availability<a name="postgresql-kerberos.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Aurora PostgreSQL with Kerberos authentication, see [Aurora Kerberos authentication](Concepts.Aurora_Fea_Regions_DB-eng.Feature.KerberosAuthentication.md)\.
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Aurora PostgreSQL with Kerberos authentication, see [Kerberos authentication with Aurora](Concepts.Aurora_Fea_Regions_DB-eng.Feature.KerberosAuthentication.md)\.
 
 ## Overview of Kerberos authentication for PostgreSQL DB clusters<a name="postgresql-kerberos-overview"></a>
 

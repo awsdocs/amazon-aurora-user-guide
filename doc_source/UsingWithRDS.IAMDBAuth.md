@@ -25,22 +25,9 @@ The AWS JDBC Driver for MySQL supports IAM database authentication\. For more in
 
 ## Region and version availability<a name="UsingWithRDS.IAMDBAuth.Availability"></a>
 
-IAM database authentication is available in all Regions\.
+ Feature availability and support varies across specific versions of each Aurora database engine, and across AWS Regions\. For more information on version and Region availability with Aurora and IAM database authentication, see [IAM database authentication in Aurora](Concepts.Aurora_Fea_Regions_DB-eng.Feature.IAMdbauth.md)\. 
 
-IAM database authentication is available for the following database engines:
-+ **Aurora MySQL**
-  + Aurora MySQL version 3, all minor versions
-  + Aurora MySQL version 2, all minor versions
-  + Aurora MySQL version 1\.10 and higher 1\.1 minor versions
-+ **Aurora PostgreSQL**
-  + All Aurora PostgreSQL 14, 13, and 12 versions
-  + Aurora PostgreSQL 11\.6 and higher 11 versions
-  + Aurora PostgreSQL 10\.11 and higher 10 versions
-  + Aurora PostgreSQL 9\.6\.16 and higher 9\.6 versions
-
-For more information, see [Amazon Aurora PostgreSQL releases and engine versions](AuroraPostgreSQL.Updates.20180305.md)\.
-
-For Aurora MySQL, all supported DB instance classes support IAM database authentication, except for db\.t2\.small and db\.t3\.small\. For information about the supported DB instance classes, see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora)\.
+For Aurora MySQL, all supported DB instance classes support IAM database authentication, except for db\.t2\.small and db\.t3\.small\. For information about the supported DB instance classes, see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora)\. 
 
 ## CLI and SDK support<a name="UsingWithRDS.IAMDBAuth.cli-sdk"></a>
 

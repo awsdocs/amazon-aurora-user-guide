@@ -1,144 +1,206 @@
 # Using PostgreSQL logical replication with Aurora<a name="AuroraPostgreSQL.Replication.Logical"></a>
 
-PostgreSQL logical replication provides fine\-grained control over replicating and synchronizing parts of a database\. For example, you can use logical replication to replicate an individual table of a database\. 
+By using PostgreSQL's logical replication feature with your Aurora PostgreSQL DB cluster, you can replicate and synchronize individual tables rather than the entire database instance\. Logical replication uses a publish and subscribe model to replicate changes from a source to one or more recipients\. It works by using change records from the PostgreSQL write\-ahead log \(WAL\)\. The source, or *publisher*, sends WAL data for the specified tables to one or more recipients \(*subscriber*\), thus replicating the changes and keeping a subscriber's table synchronized with the publisher's table\. The set of changes from the publisher are identified using a *publication*\. Subscribers get the changes by creating a *subscription* that defines the connection to the publisher's database and its publications\. A *replication slot* is the mechanism used in this scheme to track progress of a subscription\. 
 
-Following, you can find information about how to work with PostgreSQL logical replication and Amazon Aurora\. For more detailed information about the PostgreSQL implementation of logical replication, see [Logical replication](https://www.postgresql.org/docs/current/logical-replication.html) and [Logical decoding concepts](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html) in the PostgreSQL documentation\.
+For Aurora PostgreSQL DB clusters, the WAL records are saved on Aurora storage\. The Aurora PostgreSQL DB cluster that's acting as the publisher in a logical replication scenario reads the WAL data from Aurora storage, decodes it, and sends it to the subscriber so that the changes can be applied to the table on that instance\. The publisher uses a *logical decoder* to decode the data for use by subscribers\. By default, Aurora PostgreSQL DB clusters use the native PostgreSQL `pgoutput` plugin when sending data\. Other logical decoders are available\. For example, Aurora PostgreSQL also supports the `[wal2json](https://github.com/eulerto/wal2json)` plugin that converts WAL data to JSON\. 
 
-**Note**  
-Logical replication is available with Aurora PostgreSQL version 2\.2\.0 \(compatible with PostgreSQL 10\.6\) and later\.
+Logical replication is supported by all currently available Aurora PostgreSQL versions\. For more information, [Amazon Aurora PostgreSQL updates](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) in the *Release Notes for Aurora PostgreSQL*\. 
 
-Following, you can find information about how to work with PostgreSQL logical replication and Amazon Aurora\.
+For more information about PostgreSQL logical replication, see [Logical replication](https://www.postgresql.org/docs/current/logical-replication.html) and [Logical decoding concepts](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html) in the PostgreSQL documentation\.
+
+In the following topics\. you can find information about set up logical replication between your Aurora PostgreSQL DB clusters\. 
 
 **Topics**
-+ [Configuring logical replication](#AuroraPostgreSQL.Replication.Logical.Configure)
-+ [Example of logical replication of a database table](#AuroraPostgreSQL.Replication.Logical.PostgreSQL-Example)
-+ [Logical replication using the AWS Database Migration Service](#AuroraPostgreSQL.Replication.Logical.DMS-Example)
-+ [Stopping logical replication](#AuroraPostgreSQL.Replication.Logical.Stop)
++ [Setting up logical replication for your Aurora PostgreSQL DB cluster](#AuroraPostgreSQL.Replication.Logical.Configure)
++ [Turning off logical replication](#AuroraPostgreSQL.Replication.Logical.Stop)
++ [Managing logical slots for Aurora PostgreSQL](#AuroraPostgreSQL.Replication.Logical.Configure.managing-logical-slots)
++ [Example: Using logical replication with Aurora PostgreSQL DB clusters](#AuroraPostgreSQL.Replication.Logical.PostgreSQL-Example)
++ [Example: Logical replication using Aurora PostgreSQL and AWS Database Migration Service](#AuroraPostgreSQL.Replication.Logical.DMS-Example)
 
-## Configuring logical replication<a name="AuroraPostgreSQL.Replication.Logical.Configure"></a>
+## Setting up logical replication for your Aurora PostgreSQL DB cluster<a name="AuroraPostgreSQL.Replication.Logical.Configure"></a>
 
-To use logical replication, you first set the `rds.logical_replication` parameter for a cluster parameter group\. You then set up the publisher and subscriber\.
+Setting up logical replication requires `rds_superuser` privileges\. Your Aurora PostgreSQL DB cluster must be configured to use a custom DB cluster parameter group so that you can set the necessary parameters as detailed in the procedure following\. For more information, see [Working with DB cluster parameter groups](USER_WorkingWithDBClusterParamGroups.md)\. 
 
-Logical replication uses a publish and subscribe model\. *Publishers* and *subscribers* are the nodes\. A *publication* is a set of changes generated from one or more database tables\. You specify a publication on a publisher\. A *subscription* defines the connection to another database and one or more publications to which it subscribes\. You specify a subscription on a subscriber\. The publication and subscription make the connection between the publisher and subscriber\. The replication process uses a *replication slot* to track the progress of a subscription\.
+**To set up PostgreSQL logical replication for an Aurora PostgreSQL DB cluster**
 
-**Note**  
-Following are requirements for logical replication:  
-To set up logical replication, you need to have `rds_superuser` permissions\.
-The source instance \(publisher node\) and the receiving instance \(subscriber node\) must each have automated backups turned on\. For more information, see [Enabling automated backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.Enabling) in the *Amazon RDS User Guide*\.
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-**To enable PostgreSQL logical replication with Aurora**
+1. In the navigation pane, choose your Aurora PostgreSQL DB cluster\.
 
-1. Create a new DB cluster parameter group to use for logical replication, as described in [Creating a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\. Use the following settings:
-   + For **Parameter group family**, choose your version of Aurora PostgreSQL, such as **aurora\-postgresql12**\. 
-   + For **Type**, choose **DB Cluster Parameter Group**\. 
+1. Open the **Configuration** tab\. Among the Instance details, find the **Parameter group** link\. 
 
-1. Modify the DB cluster parameter group, as described in [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. Set the `rds.logical_replication` static parameter to 1\. 
+1. Choose the link to open the custom parameters associated with your Aurora PostgreSQL DB cluster\. 
 
-   Enabling the `rds.logical_replication` parameter affects the DB cluster's performance\. 
+1. In the **Parameters** search field, type `rds` to find the `rds.logical_replication` parameter\. The default value for this parameter is `0`, meaning that it's turned off by default\. 
 
-1. Review the `max_replication_slots`, `max_wal_senders`, `max_logical_replication_workers`, and `max_worker_processes` parameters in your DB cluster parameter group based on your expected usage\. If necessary, modify the DB cluster parameter group to change the settings for these parameters, as described in [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
+1. Choose **Edit parameters** to access the property values, and then choose `1` from the selector to turn on the feature\. Depending on your expected usage, you might also need to change the settings for the following parameters\. However, in many cases, the default values are sufficient\. 
+   + `max_replication_slots` – Set this parameter to a value that's at least equal to your planned total number of logical replication publications and subscriptions\. If you are using AWS DMS, this parameter should equal at least your planned change data capture tasks from the cluster, plus logical replication publications and subscriptions\. 
+   + `max_wal_senders` and `max_logical_replication_workers` – Set these parameters to a value that's at least equal to the number of logical replication slots that you intend to be active, or the number of active AWS DMS tasks for change data capture\. Leaving a logical replication slot inactive prevents the vacuum from removing obsolete tuples from tables, so we recommend that you monitor replication slots and remove inactive slots as needed\. 
+   + `max_worker_processes` – Set this parameter to a value that's at least equal to the total of the `max_logical_replication_workers`, `autovacuum_max_workers`, and `max_parallel_workers` values\. On small DB instance classes, background worker processes can affect application workloads, so monitor the performance of your database if you set `max_worker_processes` higher than the default value\. \(The default value is the result of `GREATEST(${DBInstanceVCPU*2},8}`, which means that, by default, this is either 8 or twice the CPU equivalent of the DB instance class, whichever is greater\)\.
 
-   Follow these guidelines for setting the parameters:
-   + `max_replication_slots` – A *replication slot* tracks the progress of a subscription\. Set the value of the `max_replication_slots` parameter to the total number of subscriptions that you plan to create\. If you are using AWS DMS, set this parameter to the number of AWS DMS tasks that you plan to use for change data capture from this DB cluster\.
-   + `max_wal_senders` and `max_logical_replication_workers` – Ensure that `max_wal_senders` and `max_logical_replication_workers` are each set at least as high as the number of logical replication slots that you intend to be active, or the number of active AWS DMS tasks for change data capture\. Leaving a logical replication slot inactive prevents the vacuum from removing obsolete tuples from tables, so we recommend that you don't keep inactive replication slots for long periods of time\.
-   + `max_worker_processes` – Ensure that `max_worker_processes` is at least as high as the combined values of `max_logical_replication_workers`, `autovacuum_max_workers`, and `max_parallel_workers`\. Having a high number of background worker processes might affect application workloads on small DB instance classes, so monitor the performance of your database if you set `max_worker_processes` higher than the default value\.
+1. Choose **Save changes**\.
 
-**To configure a publisher for logical replication**
+1. Reboot the writer instance of your Aurora PostgreSQL DB cluster so that your changes takes effect\. In the Amazon RDS console, choose the primary DB instance of the cluster and choose **Reboot** from the **Actions** menu\. 
 
-1. Set the publisher's cluster parameter group:
-   + To use an existing Aurora PostgreSQL DB cluster for the publisher, the engine version must be 10\.6 or later\. Do the following:
+1. When the instance is available, you can verify that logical replication is turned on, as follows\. 
 
-     1. Modify the DB cluster parameter group to set it to the group that you created when you enabled logical replication\. For details about modifying an Aurora PostgreSQL DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
+   1. Use `psql` to connect to the writer instance of your Aurora PostgreSQL DB cluster\.
 
-     1. Restart the DB cluster for static parameter changes to take effect\. The DB cluster parameter group includes a change to the static parameter `rds.logical_replication`\.
-   + To use a new Aurora PostgreSQL DB cluster for the publisher, create the DB cluster using the following settings\. For details about creating an Aurora PostgreSQL DB cluster, see [Creating a DB cluster](Aurora.CreateInstance.md#Aurora.CreateInstance.Creating)\.
+      ```
+      psql --host=your-db-cluster-instance-1.aws-region.rds.amazonaws.com --port=5432 --username=postgrespostgres --password --dbname=labdb
+      ```
 
-     1. Choose the **Amazon Aurora** engine and choose the **PostgreSQL\-compatible** edition\.
+   1. Verify that logical replication has been enabled by using the following command\.
 
-     1. For **Engine version**, choose an Aurora PostgreSQL engine that is compatible with PostgreSQL 10\.6 or greater\.
+      ```
+      labdb=> SHOW rds.logical_replication;
+       rds.logical_replication
+      -------------------------
+       on
+      (1 row)
+      ```
 
-     1. For **DB cluster parameter group**, choose the group that you created when you enabled logical replication\.
+   1. Verify that the `wal_level` is set to `logical`\. 
 
-1. Modify the inbound rules of the security group for the publisher to allow the subscriber to connect\. Usually, you do this by including the IP address of the subscriber in the security group\. For details about modifying a security group, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+      ```
+      labdb=> SHOW wal_level;
+        wal_level
+      -----------
+       logical
+      (1 row)
+      ```
 
-## Example of logical replication of a database table<a name="AuroraPostgreSQL.Replication.Logical.PostgreSQL-Example"></a>
+For an example of using logical replication to keep a database table synchronized with changes from a source Aurora PostgreSQL DB cluster, see [Example: Using logical replication with Aurora PostgreSQL DB clusters](#AuroraPostgreSQL.Replication.Logical.PostgreSQL-Example)\. 
 
-To implement logical replication, use the PostgreSQL commands `CREATE PUBLICATION` and `CREATE SUBSCRIPTION`\. 
+## Turning off logical replication<a name="AuroraPostgreSQL.Replication.Logical.Stop"></a>
 
-For this example, table data is replicated from an Aurora PostgreSQL database as the publisher to a PostgreSQL database as the subscriber\. Note that a subscriber database can be an RDS PostgreSQL database or an Aurora PostgreSQL database\. A subscriber can also be an application that uses PostgreSQL logical replication\. After the logical replication mechanism is set up, changes on the publisher are continually sent to the subscriber as they occur\. 
+After completing your replication tasks, you should stop the replication process, drop replication slots, and turn off logical replication\. Before dropping slots, make sure that they're no longer needed\. Active replication slots can't be dropped\. 
 
-To set up logical replication for this example, do the following:
+**To turn off logical replication**
 
-1. Configure an Aurora PostgreSQL DB cluster as the publisher\. To do so, create a new Aurora PostgreSQL DB cluster, as described when configuring the publisher in [Configuring logical replication](#AuroraPostgreSQL.Replication.Logical.Configure)\.
+1. Drop all replication slots\.
 
-1. Set up the publisher database\. 
-
-   For example, create a table using the following SQL statement on the publisher database\. 
-
-   ```
-   CREATE TABLE LogicalReplicationTest (a int PRIMARY KEY);
-   ```
-
-1. Insert data into the publisher database by using the following SQL statement\.
-
-   ```
-   INSERT INTO LogicalReplicationTest VALUES (generate_series(1,10000));
-   ```
-
-1. Create a publication on the publisher by using the following SQL statement\. 
+   To drop all of the replication slots, connect to the publisher and run the following SQL command\.
 
    ```
-   CREATE PUBLICATION testpub FOR TABLE LogicalReplicationTest;
+   SELECT pg_drop_replication_slot(slot_name) FROM pg_replication_slots 
+      WHERE slot_name IN (SELECT slot_name FROM pg_replication_slots);
    ```
 
-1. Create your subscriber\. A subscriber database can be either of the following:
-   + Aurora PostgreSQL database version 2\.2\.0 \(compatible with PostgreSQL 10\.6\) or later\. 
-   + Amazon RDS for PostgreSQL database with the PostgreSQL DB engine version 10\.4 or later\.
+   The replication slots can't be active when you run this command\.
 
-   For this example, we create an Amazon RDS for PostgreSQL database as the subscriber\. For details on creating a DB instance, see [Creating a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html) in the *Amazon RDS User Guide\.* 
+1. Modify the custom DB cluster parameter group associated with the publisher as detailed in [Setting up logical replication for your Aurora PostgreSQL DB cluster](#AuroraPostgreSQL.Replication.Logical.Configure), but set the `rds.logical_replication` parameter to 0\. 
 
-1. Set up the subscriber database\. 
+   For more information about custom parameter groups, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. 
 
-   For this example, create a table like the one created for the publisher by using the following SQL statement\. 
+1. Restart the publisher Aurora PostgreSQL DB cluster for the change to the `rds.logical_replication` parameter to take effect\.
 
-   ```
-   CREATE TABLE LogicalReplicationTest (a int PRIMARY KEY);
-   ```
+## Managing logical slots for Aurora PostgreSQL<a name="AuroraPostgreSQL.Replication.Logical.Configure.managing-logical-slots"></a>
 
-1. Verify that there is data in the table at the publisher but no data yet at the subscriber by using the following SQL statement on both databases\.
+Streaming activity is captured in the `pg_replication_origin_status` view\. To see the contents of this view, you can use the `pg_show_replication_origin_status()` function, as shown following:
 
-   ```
-   SELECT count(*) FROM LogicalReplicationTest;
-   ```
+```
+SELECT * FROM pg_show_replication_origin_status();
+local_id | external_id | remote_lsn | local_lsn
+----------+-------------+------------+-----------
+(0 rows)
+```
 
-1. Create a subscription on the subscriber\. 
+You can get a list of your logical slots by using the following SQL query\.
 
-   Use the following SQL statement on the subscriber database and the following settings from the publisher cluster: 
-   + **host** – The publisher cluster's writer DB instance\.
-   + **port** – The port on which the writer DB instance is listening\. The default for PostgreSQL is 5432\.
-   + **dbname** – The DB name of the publisher cluster\.
+```
+SELECT * FROM pg_replication_slots;
+```
 
-   ```
-   CREATE SUBSCRIPTION testsub CONNECTION 
-      'host=publisher-cluster-writer-endpoint port=5432 dbname=db-name user=user password=password' 
-      PUBLICATION testpub;
-   ```
+To drop a logical slot, use the following command\.
 
-   After the subscription is created, a logical replication slot is created at the publisher\.
+```
+SELECT pg_drop_replication_slot('test_slot');
+pg_drop_replication_slot
+–––––––––
+(1 row)
+```
 
-1. To verify for this example that the initial data is replicated on the subscriber, use the following SQL statement on the subscriber database\.
+## Example: Using logical replication with Aurora PostgreSQL DB clusters<a name="AuroraPostgreSQL.Replication.Logical.PostgreSQL-Example"></a>
 
-   ```
-   SELECT count(*) FROM LogicalReplicationTest;
-   ```
+The following procedure shows you how to start logical replication between two Aurora PostgreSQL DB clusters\. Both the publisher and the subscriber must be configured for logical replication as detailed in [Setting up logical replication for your Aurora PostgreSQL DB cluster](#AuroraPostgreSQL.Replication.Logical.Configure)\.
+
+The Aurora PostgreSQL DB cluster that's the designated publisher must also allow access to the replication slot\. To do so, modify the security group associated with the Aurora PostgreSQL DB cluster 's virtual public cloud \(VPC\) based on the Amazon VPC service\. Allow inbound access by adding the security group associated with the subscriber's VPC to the publisher's security group\. For more information, see [Control traffic to resources using security groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon VPC User Guide*\. 
+
+With these prelimnary steps complete, you can use PostgreSQL commands `CREATE PUBLICATION` on the publisher and the `CREATE SUBSCRIPTION` on the subscriber, as detailed in the following procedure\. 
+
+**To start the logical replication process between two Aurora PostgreSQL DB clusters**
+
+These steps assume that your Aurora PostgreSQL DB clusters have a writer instance with a database in which to create the example tables\.
+
+1. **On the publisher Aurora PostgreSQL DB cluster**
+
+   1. Create a table using the following SQL statement\.
+
+      ```
+      CREATE TABLE LogicalReplicationTest (a int PRIMARY KEY);
+      ```
+
+   1. Insert data into the publisher database by using the following SQL statement\.
+
+      ```
+      INSERT INTO LogicalReplicationTest VALUES (generate_series(1,10000));
+      ```
+
+   1. Verify that data exists in the table by using the folling SQL statement\.
+
+      ```
+      SELECT count(*) FROM LogicalReplicationTest;
+      ```
+
+   1. Create a publication for this table by using the `CREATE PUBLICATION` statement, as follows\.
+
+      ```
+      CREATE PUBLICATION testpub FOR TABLE LogicalReplicationTest;
+      ```
+
+1. **On the subscriber Aurora PostgreSQL DB cluster**
+
+   1. Create the same `LogicalReplicationTest` table on the subscriber that you created on the publisher, as follows\.
+
+      ```
+      CREATE TABLE LogicalReplicationTest (a int PRIMARY KEY);
+      ```
+
+   1. Verify that this table is empty\.
+
+      ```
+      SELECT count(*) FROM LogicalReplicationTest;
+      ```
+
+   1. Create a subscription to get the changes from the publisher\. You need to use the following details about the publisher Aurora PostgreSQL DB cluster\.
+      + **host** – The publisher Aurora PostgreSQL DB cluster's writer DB instance\.
+      + **port** – The port on which the writer DB instance is listening\. The default for PostgreSQL is 5432\.
+      + **dbname** – The name of the database\.
+
+      ```
+      CREATE SUBSCRIPTION testsub CONNECTION 
+         'host=publisher-cluster-writer-endpoint port=5432 dbname=db-name user=user password=password' 
+         PUBLICATION testpub;
+      ```
+
+      After the subscription is created, a logical replication slot is created at the publisher\.
+
+   1. To verify for this example that the initial data is replicated on the subscriber, use the following SQL statement on the subscriber database\.
+
+      ```
+      SELECT count(*) FROM LogicalReplicationTest;
+      ```
 
 Any further changes on the publisher are replicated to the subscriber\.
 
-## Logical replication using the AWS Database Migration Service<a name="AuroraPostgreSQL.Replication.Logical.DMS-Example"></a>
+Logical replication affects performance\. We recommend that you turn off logical replication after your replication tasks are complete\. 
+
+## Example: Logical replication using Aurora PostgreSQL and AWS Database Migration Service<a name="AuroraPostgreSQL.Replication.Logical.DMS-Example"></a>
 
 You can use the AWS Database Migration Service \(AWS DMS\) to replicate a database or a portion of a database\. Use AWS DMS to migrate your data from an Aurora PostgreSQL database to another open source or commercial database\. For more information about AWS DMS, see the [AWS Database Migration Service User Guide](https://docs.aws.amazon.com/dms/latest/userguide/)\.
 
-The following example shows how to set up logical replication from an Aurora PostgreSQL database as the publisher and then use AWS DMS for migration\. This example uses the same publisher and subscriber that were created in [Example of logical replication of a database table](#AuroraPostgreSQL.Replication.Logical.PostgreSQL-Example)\.
+The following example shows how to set up logical replication from an Aurora PostgreSQL database as the publisher and then use AWS DMS for migration\. This example uses the same publisher and subscriber that were created in [Example: Using logical replication with Aurora PostgreSQL DB clusters](#AuroraPostgreSQL.Replication.Logical.PostgreSQL-Example)\.
 
 To set up logical replication with AWS DMS, you need details about your publisher and subscriber from Amazon RDS\. In particular, you need details about the publisher's writer DB instance and the subscriber's DB instance\.
 
@@ -195,24 +257,3 @@ Get the following information for the subscriber's DB instance:
    The rest of the task details depend on your migration project\. For more information about specifying all the details for DMS tasks, see [Working with AWS DMS tasks](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html) in the *AWS Database Migration Service User Guide\.*
 
 After AWS DMS creates the task, it begins migrating data from the publisher to the subscriber\. 
-
-## Stopping logical replication<a name="AuroraPostgreSQL.Replication.Logical.Stop"></a>
-
-You can stop using logical replication\.
-
-**To stop using logical replication**
-
-1. Drop all replication slots\.
-
-   To drop all of the replication slots, connect to the publisher and run the following SQL command
-
-   ```
-   SELECT pg_drop_replication_slot(slot_name) FROM pg_replication_slots 
-      WHERE slot_name IN (SELECT slot_name FROM pg_replication_slots);
-   ```
-
-   The replication slots can't be active when you run this command\.
-
-1. Modify the DB cluster parameter group associated with the publisher, as described in [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. Set the `rds.logical_replication` static parameter to 0\. 
-
-1. Restart the publisher DB cluster for the change to the `rds.logical_replication` static parameter to take effect\.

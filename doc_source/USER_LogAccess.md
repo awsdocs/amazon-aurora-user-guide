@@ -14,4 +14,4 @@ In some cases, logs contain hidden data\. Therefore, the AWS Management Console 
 + [Publishing database logs to Amazon CloudWatch Logs](USER_LogAccess.Procedural.UploadtoCloudWatch.md)
 + [Reading log file contents using REST](DownloadCompleteDBLogFile.md)
 + [Aurora MySQL database log files](USER_LogAccess.Concepts.MySQL.md)
-+ [PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)
++ [Aurora PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)

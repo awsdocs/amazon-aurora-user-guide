@@ -204,7 +204,7 @@ CREATE TABLE spill_file_tracking AS
     WHERE filename LIKE '%spill%';
 ```
 
-To see how spill files are used during logical replication, set up a publisher and subscriber and then start a simple replication\. For more information, see [Configuring logical replication](AuroraPostgreSQL.Replication.Logical.md#AuroraPostgreSQL.Replication.Logical.Configure)\. With replication under way, you can create a job that captures the result set from the `aurora_stat_file()` spill file function, as follows\.
+To see how spill files are used during logical replication, set up a publisher and subscriber and then start a simple replication\. For more information, see [Setting up logical replication for your Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Replication.Logical.md#AuroraPostgreSQL.Replication.Logical.Configure)\. With replication under way, you can create a job that captures the result set from the `aurora_stat_file()` spill file function, as follows\.
 
 ```
 INSERT INTO spill_file_tracking

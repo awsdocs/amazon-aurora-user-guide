@@ -52,7 +52,7 @@ When you restore a snapshot to an Aurora Serverless DB cluster, you can set the 
 + **Pause after inactivity** – The amount of time with no database traffic to scale to zero processing capacity\. When database traffic resumes, Aurora automatically resumes processing capacity and scales to handle the traffic\.
 
 **Note**  
-The version of the DB cluster snapshot must be compatible with Aurora Serverless v1\. For the list of supported versions, see [Aurora Serverless v1](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Serverless.md)\.
+The version of the DB cluster snapshot must be compatible with Aurora Serverless v1\. For the list of supported versions, see [Aurora Serverless v1](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.md)\.
 
  To restore a snapshot to an Aurora Serverless v1 cluster with MySQL 5\.7 compatibility, include the following additional parameters: 
 +  `--engine aurora-mysql` 
