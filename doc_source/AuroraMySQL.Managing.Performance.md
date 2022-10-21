@@ -12,6 +12,9 @@ The maximum number of connections allowed to an Aurora MySQL DB instance is dete
 
 The following table lists the resulting default value of `max_connections` for each DB instance class available to Aurora MySQL\. You can increase the maximum number of connections to your Aurora MySQL DB instance by scaling the instance up to a DB instance class with more memory, or by setting a larger value for the `max_connections` parameter in the DB parameter group for your instance, up to 16,000\.
 
+**Tip**  
+If your applications frequently open and close connections, or keep a large number of long\-lived connections open, we recommend that you use Amazon RDS Proxy\. RDS Proxy is a fully managed, highly available database proxy that uses connection pooling to share database connections securely and efficiently\. To learn more about RDS Proxy, see [Using Amazon RDS Proxy](rds-proxy.md)\.
+
  For details about how Aurora Serverless v2 instances handle this parameter, see [Parameters that Aurora computes based on Aurora Serverless v2 maximum capacity](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.parameters-based-on-max-capacity)\. 
 
 
@@ -70,7 +73,9 @@ The following table lists the resulting default value of `max_connections` for e
 
 ## Temporary storage limits for Aurora MySQL<a name="AuroraMySQL.Managing.TempStorage"></a>
 
-Aurora MySQL stores tables and indexes in the Aurora storage subsystem\. Aurora MySQL uses separate temporary storage for non\-persistent temporary files\. This includes files that are used for such purposes as sorting large datasets during query processing or for index build operations\. These local storage volumes are backed by Amazon Elastic Block Store and can be extended by using a larger DB instance class\. For more information about storage, see [Amazon Aurora storage and reliability](Aurora.Overview.StorageReliability.md)\.
+Aurora MySQL stores tables and indexes in the Aurora storage subsystem\. Aurora MySQL uses separate temporary storage for nonpersistent temporary files\. Aurora MySQL uses local storage for storing error logs, general logs, slow query logs, audit logs, and non\-InnoDB temporary tables\. Local storage also includes files that are used for such purposes as sorting large datasets during query processing or for index build operations\. It does not include InnoDB temporary tables\. For more information, see the article [What is stored in Aurora MySQL\-Compatible local storage, and how can I troubleshoot local storage issues?](https://aws.amazon.com/premiumsupport/knowledge-center/aurora-mysql-local-storage/)\. For more information on temporary tables in Aurora MySQL version 3, see [New temporary table behavior in Aurora MySQL version 3](ams3-temptable-behavior.md)\.
+
+These local storage volumes are backed by Amazon Elastic Block Store and can be extended by using a larger DB instance class\. For more information about storage, see [Amazon Aurora storage and reliability](Aurora.Overview.StorageReliability.md)\.
 
 **Note**  
 You might see `storage-optimization` events when scaling DB instances, for example, from db\.r5\.2xlarge to db\.r5\.4xlarge\. 

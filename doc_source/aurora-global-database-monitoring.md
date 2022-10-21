@@ -26,6 +26,10 @@ For DB instances associated with a global database, the factors affecting perfor
 
 To learn more about using Performance Insights, see [Monitoring DB load with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\. 
 
+## Monitoring Aurora global databases with Database Activity Streams<a name="aurora-global-database-monitoring.das"></a>
+
+By using the Database Activity Streams feature, you can monitor and set alarms for auditing activity in the DB clusters in your global database\. You start a database activity stream on each DB cluster separately\. Each cluster delivers audit data to its own Kinesis stream within its own AWS Region\. For more information, see [Monitoring Amazon Aurora with Database Activity Streams](DBActivityStreams.md)\.
+
 ## Monitoring Aurora PostgreSQL\-based Aurora global databases<a name="aurora-global-database-monitoring.postgres"></a>
 
 To view the status of a global database, use the `aurora_global_db_status` and `aurora_global_db_instance_status` functions\. 

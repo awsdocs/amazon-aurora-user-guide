@@ -7,6 +7,7 @@
 + [High availability for Aurora DB instances](#Concepts.AuroraHighAvailability.Instances)
 + [High availability across AWS Regions with Aurora global databases](#Concepts.AuroraHighAvailability.GlobalDB)
 + [Fault tolerance for an Aurora DB cluster](#Aurora.Managing.FaultTolerance)
++ [High availability with Amazon RDS Proxy](#Concepts.AuroraHighAvailability.Proxy)
 
 ## High availability for Aurora data<a name="Concepts.AuroraHighAvailability.Data"></a>
 
@@ -41,7 +42,8 @@ If the primary instance in a DB cluster using single\-master replication fails, 
 If the DB cluster has one or more Aurora Replicas, then an Aurora Replica is promoted to the primary instance during a failure event\. A failure event results in a brief interruption, during which read and write operations fail with an exception\. However, service is typically restored in less than 120 seconds, and often less than 60 seconds\. To increase the availability of your DB cluster, we recommend that you create at least one or more Aurora Replicas in two or more different Availability Zones\. 
 
 **Tip**  
- In Aurora MySQL 2\.10 and higher, you can improve availability during a failover by having more than one reader DB instance in a cluster\. In Aurora MySQL 2\.10 and higher, Aurora restarts only the writer DB instance and the failover target during a failover\. Other reader DB instances in the cluster remain available to continue processing queries through connections to the reader endpoint\. 
+ In Aurora MySQL 2\.10 and higher, you can improve availability during a failover by having more than one reader DB instance in a cluster\. In Aurora MySQL 2\.10 and higher, Aurora restarts only the writer DB instance and the failover target during a failover\. Other reader DB instances in the cluster remain available to continue processing queries through connections to the reader endpoint\.   
+You can also improve availability during a failover by using RDS Proxy with your Aurora DB cluster\. For more information, see [High availability with Amazon RDS Proxy](#Concepts.AuroraHighAvailability.Proxy)\.
 
 You can customize the order in which your Aurora Replicas are promoted to the primary instance after a failure by assigning each replica a priority\. Priorities range from 0 for the first priority to 15 for the last priority\. If the primary instance fails, Amazon RDS promotes the Aurora Replica with the better priority to the new primary instance\. You can modify the priority of an Aurora Replica at any time\. Modifying the priority doesn't trigger a failover\. 
 
@@ -56,3 +58,7 @@ Suppose that the primary instance in your cluster is unavailable because of an o
 
 **Note**  
 Amazon Aurora also supports replication with an external MySQL database, or an RDS MySQL DB instance\. For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.md#AuroraMySQL.Replication.MySQL)\.
+
+## High availability with Amazon RDS Proxy<a name="Concepts.AuroraHighAvailability.Proxy"></a>
+
+With RDS Proxy, you can build applications that can transparently tolerate database failures without needing to write complex failure handling code\. The proxy automatically routes traffic to a new database instance while preserving application connections\. It also bypasses Domain Name System \(DNS\) caches to reduce failover times by up to 66% for Aurora Multi\-AZ databases\.  For more information, see [Using Amazon RDS Proxy](rds-proxy.md)\. 

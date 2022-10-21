@@ -229,7 +229,8 @@ The maximum number of connections allowed to an Aurora DB instance is determined
 |  Amazon Aurora MySQL  |  See [Maximum connections to an Aurora MySQL DB instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections)  | 
 |  Amazon Aurora PostgreSQL  |  See [Maximum connections to an Aurora PostgreSQL DB instance](AuroraPostgreSQL.Managing.md#AuroraPostgreSQL.Managing.MaxConnections)  | 
 
-If your applications frequently open and close connections, or have long\-lived connections that approach or exceed the specified limits, we recommend using Amazon RDS Proxy\. RDS Proxy is a fully managed, highly available database proxy that uses connection pooling to share database connections securely and efficiently\. To learn more about RDS Proxy, see [Using Amazon RDS Proxy](rds-proxy.md)\.
+**Tip**  
+If your applications frequently open and close connections, or keep a large number of long\-lived connections open, we recommend that you use Amazon RDS Proxy\. RDS Proxy is a fully managed, highly available database proxy that uses connection pooling to share database connections securely and efficiently\. To learn more about RDS Proxy, see [Using Amazon RDS Proxy](rds-proxy.md)\.
 
 ## Managing query execution plans<a name="Aurora.Managing.Optimizing"></a>
 

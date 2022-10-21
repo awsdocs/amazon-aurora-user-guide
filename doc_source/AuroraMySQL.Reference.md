@@ -149,9 +149,9 @@
 |   `activate_all_roles_on_login`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
 |   `allow-suspicious-udfs`   |   No   |    | 
 |   `aurora_lab_mode`   |   Yes   |   For more information, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\. Removed from Aurora MySQL version 3\.   | 
-|   `aurora_oom_response`   |   Yes   |   This parameter only applies to Aurora MySQL version 1\.18 and higher\. It isn't used in Aurora MySQL version 2 or 3\. For more information, see [ Amazon Aurora MySQL out of memory issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.   | 
-|   `aurora_parallel_query`   |   Yes   |   Set to `ON` to turn on parallel query in Aurora MySQL versions 1\.23 and 2\.09 or higher\. The old `aurora_pq` parameter isn't used in these versions\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.   | 
-|   `aurora_pq`   |   Yes   |   Set to `OFF` to turn off parallel query for specific DB instances in Aurora MySQL versions before 1\.23 and 2\.09\. In 1\.23 and 2\.09 or higher, turn parallel query on and off with `aurora_parallel_query` instead\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.   | 
+|   `aurora_oom_response`   |   Yes   |  This parameter is supported for Aurora MySQL version 1\.18 and higher, and version 2\.04\.5 and higher\. It isn't supported for version 3\. For more information, see [ Amazon Aurora MySQL out of memory issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.  | 
+|   `aurora_parallel_query`   |   Yes   |  Set to `ON` to turn on parallel query in Aurora MySQL versions 1\.23 and 2\.09 or higher\. The old `aurora_pq` parameter isn't used in these versions\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
+|   `aurora_pq`   |   Yes   |  Set to `OFF` to turn off parallel query for specific DB instances in Aurora MySQL versions before 1\.23 and 2\.09\. In 1\.23 and 2\.09 or higher, turn parallel query on and off with `aurora_parallel_query` instead\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
 |   `autocommit`   |   Yes   |    | 
 |   `automatic_sp_privileges`   |   Yes   |    | 
 |   `back_log`   |   Yes   |    | 
@@ -191,8 +191,8 @@
 |   `general_log_file`   |   No   |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
 |   `group_concat_max_len`   |   Yes   |    | 
 |   `host_cache_size`   |   Yes   |    | 
-|   `init_connect`   |   Yes   |    | 
-|   `innodb_adaptive_hash_index`   |   Yes   |    | 
+|   `init_connect`   |   Yes   |  The string to be executed by the server for each client that connects\. Use double quotes \("\) for settings to avoid connection failures, for example: <pre>SET optimizer_switch="hash_join=off"</pre>  | 
+|   `innodb_adaptive_hash_index`   |   Yes   |  | 
 |   `innodb_adaptive_max_sleep_delay`   |   Yes   |   Modifying this parameter has no effect, because `innodb_thread_concurrency` is always 0 for Aurora\.   | 
 |   `innodb_autoextend_increment`   |   Yes   |    | 
 |   `innodb_buffer_pool_dump_at_shutdown`   |   No   |    | 

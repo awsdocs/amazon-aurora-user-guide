@@ -63,9 +63,9 @@ On a smaller instance size, adjust the value of `temptable_max_mmap` so that it 
 
 You can create explicit temporary tables using the `TEMPORARY` keyword in your `CREATE TABLE` statement\. Explicit temporary tables are supported on the writer DB instance in an Aurora DB cluster\. You can also use explicit temporary tables on reader DB instances, but the tables can't enforce the use of the InnoDB storage engine\.
 
-To avoid errors while creating explicit temporary tables on Aurora reader DB instances, make sure that all `CREATE TEMPORARY TABLE` statements on reader DB instances are run in either of the following ways:
-+ Without specifying the `ENGINE=InnoDB` clause
-+ With the SQL mode `NO_ENGINE_SUBSTITUTION=OFF`
+To avoid errors while creating explicit temporary tables on Aurora MySQL reader DB instances, make sure that you run all `CREATE TEMPORARY TABLE` statements in either or both of the following ways:
++ Don't specify the `ENGINE=InnoDB` clause\.
++ Don't set the SQL mode to `NO_ENGINE_SUBSTITUTION`\.
 
 ## Temporary table creation errors and mitigation<a name="ams3-temptable-behavior.errors"></a>
 

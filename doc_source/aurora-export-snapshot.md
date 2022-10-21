@@ -2,7 +2,7 @@
 
 You can export DB cluster snapshot data to an Amazon S3 bucket\. The export process runs in the background and doesn't affect the performance of your active DB cluster\.
 
-When you export a DB cluster snapshot, Amazon Aurora extracts data from the snapshot and stores it in an Amazon S3 bucket\. The data is stored in an Apache Parquet format that is compressed and consistent\.
+When you export a DB cluster snapshot, Amazon Aurora extracts data from the snapshot and stores it in an Amazon S3 bucket\. The data is stored in an Apache Parquet format that is compressed and consistent\. Individual Parquet files are usually \~20 GB in size\. However, because of performance improvements, you might see much larger \(\~200 GB\) files for Aurora MySQL version 2 and 3 exports\.
 
 You can export manual snapshots and automated system snapshots\. By default, all data in the snapshot is exported\. However, you can choose to export specific sets of databases, schemas, or tables\.
 
