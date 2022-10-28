@@ -39,9 +39,9 @@
 
 |  Parameter name  |  Modifiable  |  Notes  | 
 | --- | --- | --- | 
-|   `aurora_binlog_read_buffer_size`   |   Yes   |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.md#AuroraMySQL.Replication.MySQL)\. Removed from Aurora MySQL version 3\.   | 
-|   `aurora_binlog_replication_max_yield_seconds`   |   Yes   |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.md#AuroraMySQL.Replication.MySQL)\.   | 
-|   `aurora_binlog_use_large_read_buffer`   |   Yes   |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.md#AuroraMySQL.Replication.MySQL)\. Removed from Aurora MySQL version 3\.   | 
+|   `aurora_binlog_read_buffer_size`   |   Yes   |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. Removed from Aurora MySQL version 3\.   | 
+|   `aurora_binlog_replication_max_yield_seconds`   |   Yes   |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
+|   `aurora_binlog_use_large_read_buffer`   |   Yes   |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. Removed from Aurora MySQL version 3\.   | 
 |   `aurora_enable_replica_log_compression`   |   Yes   |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\. Removed from Aurora MySQL version 3\.   | 
 |   `aurora_enable_repl_bin_log_filtering`   |   Yes   |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\. Removed from Aurora MySQL version 3\.   | 
 |  `aurora_enable_staggered_replica_restart`  |  Yes  | This setting is available in Aurora MySQL versions 1 and 3, but it isn't used\. | 
@@ -54,7 +54,7 @@
 |   `aws_default_s3_role`   |   Yes   |    | 
 |   `binlog_checksum`   |   Yes   |   The AWS CLI and RDS API report a value of `None` if this parameter isn't set\. In that case, Aurora MySQL uses the engine default value, which is `CRC32`\. This is different than the explicit setting of `NONE`, which turns off the checksum\. For a bug fix related to this parameter, see [ Aurora MySQL database engine updates 2020\-09\-02 \(version 1\.23\.0\)](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.Updates.1230.html) and [ Aurora MySQL database engine updates 2020\-03\-05 \(version 1\.22\.2\)](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.Updates.1222.html) in the *Release Notes for Aurora MySQL*\.   | 
 |   `binlog-do-db`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `binlog_format`   |   Yes   |   For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.md#AuroraMySQL.Replication.MySQL)\.   | 
+|   `binlog_format`   |   Yes   |   For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
 |   `binlog_group_commit_sync_delay`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
 |   `binlog_group_commit_sync_no_delay_count`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
 |   `binlog-ignore-db`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
@@ -254,7 +254,7 @@
 |   `key_cache_division_limit`   |   Yes   |    | 
 |   `local_infile`   |   Yes   |    | 
 |   `lock_wait_timeout`   |   Yes   |    | 
-|   `log-bin`   |   No   |   Setting `binlog_format` to `STATEMENT`, `MIXED`, or `ROW` automatically sets `log-bin` to `ON`\. Setting `binlog_format` to `OFF` automatically sets `log-bin` to `OFF`\. For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.md#AuroraMySQL.Replication.MySQL)\.   | 
+|   `log-bin`   |   No   |   Setting `binlog_format` to `STATEMENT`, `MIXED`, or `ROW` automatically sets `log-bin` to `ON`\. Setting `binlog_format` to `OFF` automatically sets `log-bin` to `OFF`\. For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
 |   `log_bin_trust_function_creators`   |   Yes   |    | 
 |   `log_bin_use_v1_row_events`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
 |   `log_error`   |   No   |    | 

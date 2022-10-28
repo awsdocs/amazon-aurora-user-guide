@@ -12,7 +12,7 @@
 
 **Topics**
 + [Region and version availability](#rds-proxy.RegionVersionAvailability)
-+ [Quotas and limitations for RDS Proxy](#rds-proxy.limits)
++ [Quotas and limitations for RDS Proxy](#rds-proxy.limitations)
 + [Planning where to use RDS Proxy](rds-proxy-planning.md)
 + [RDS Proxy concepts and terminology](rds-proxy.howitworks.md)
 + [Getting started with RDS Proxy](rds-proxy-setup.md)
@@ -28,7 +28,7 @@
 
  For information about database engine version support and availability of RDS Proxy in a given AWS Region, see [Amazon RDS Proxy](Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy.md)\. 
 
-## Quotas and limitations for RDS Proxy<a name="rds-proxy.limits"></a>
+## Quotas and limitations for RDS Proxy<a name="rds-proxy.limitations"></a>
 
  The following quotas and limitations apply to RDS Proxy: 
 +  You can have up to 20 proxies for each AWS account ID\. If your application requires more proxies, you can request additional proxies by opening a ticket with the AWS Support organization\.  
@@ -48,7 +48,13 @@
 +  Each proxy can be associated with a single target DB instance or cluster\. However, you can associate multiple proxies with the same DB instance or cluster\. 
 + Any statement with a text size greater than 16 KB causes the proxy to pin the session to the current connection\.
 
- The following additional limitations apply to RDS Proxy with RDS for MySQL databases:
+For additional limitations for each DB engine, see the following sections:
++ [Additional limitations for Aurora MySQL](#rds-proxy.limitations-my)
++ [Additional limitations for Aurora PostgreSQL](#rds-proxy.limitations-pg)
+
+### Additional limitations for Aurora MySQL<a name="rds-proxy.limitations-my"></a>
+
+ The following additional limitations apply to RDS Proxy with Aurora MySQL databases:
 + RDS Proxy doesn't support the MySQL `sha256_password` and `caching_sha2_password` authentication plugins\. These plugins implement SHA\-256 hashing for user account passwords\.
 +  Currently, all proxies listen on port 3306 for MySQL\. The proxies still connect to your database using the port that you specified in the database settings\. 
 +  You can't use RDS Proxy with self\-managed MySQL databases in EC2 instances\.
@@ -59,10 +65,13 @@
 **Important**  
  For proxies associated with MySQL databases, don't set the configuration parameter `sql_auto_is_null` to `true` or a nonzero value in the initialization query\. Doing so might cause incorrect application behavior\. 
 
- The following additional limitations apply to RDS Proxy with RDS for PostgreSQL databases:
+### Additional limitations for Aurora PostgreSQL<a name="rds-proxy.limitations-pg"></a>
+
+ The following additional limitations apply to RDS Proxy with Aurora PostgreSQL databases:
 + RDS Proxy doesn't support session pinning filters for PostgreSQL\.
 + RDS Proxy doesn't support PostgreSQL SCRAM\-SHA\-256 authentication\.
 +  Currently, all proxies listen on port 5432 for PostgreSQL\.
 + For PostgreSQL, RDS Proxy doesn't currently support canceling a query from a client by issuing a `CancelRequest`\. This is the case, for example, when you cancel a long\-running query in an interactive psql session by using Ctrl\+C\. 
 +  The results of the PostgreSQL function [lastval](https://www.postgresql.org/docs/current/functions-sequence.html) aren't always accurate\. As a work\-around, use the [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) statement with the `RETURNING` clause\.
 + RDS Proxy doesn't multiplex connections when your client application drivers use the PostgreSQL extended query protocol\.
++ RDS Proxy currently doesn't support streaming replication mode\.

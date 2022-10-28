@@ -157,13 +157,13 @@ Use the following to learn about changes to be aware of when you upgrade your Au
 
  Aurora supports binary log replication from a MySQL 5\.7–compatible source to Aurora MySQL version 3\. The source system can be an Aurora MySQL DB cluster, an RDS for MySQL DB instance, or an on\-premises MySQL instance\. 
 
- As does community MySQL, Aurora MySQL supports replication from a source running a specific version to a target running the same major version or one major version higher\. For example, replication from a MySQL 5\.6–compatible system to Aurora MySQL version 3 isn't supported\. Replicating from Aurora MySQL version 3 to a MySQL 5\.7–compatible or MySQL 5\.6–compatible system isn't supported\. For details about using binary log replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.md#AuroraMySQL.Replication.MySQL)\. 
+ As does community MySQL, Aurora MySQL supports replication from a source running a specific version to a target running the same major version or one major version higher\. For example, replication from a MySQL 5\.6–compatible system to Aurora MySQL version 3 isn't supported\. Replicating from Aurora MySQL version 3 to a MySQL 5\.7–compatible or MySQL 5\.6–compatible system isn't supported\. For details about using binary log replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. 
 
  Aurora MySQL version 3 includes improvements to binary log replication in community MySQL 8\.0, such as filtered replication\. For details about the community MySQL 8\.0 improvements, see [How Servers Evaluate Replication Filtering Rules](https://dev.mysql.com/doc/refman/8.0/en/replication-rules.html) in the *MySQL Reference Manual*\. 
 
 ### Multithreaded replication<a name="AuroraMySQL.multithreaded-replication"></a>
 
- With Aurora MySQL version 3, Aurora MySQL supports multithreaded replication\. For usage information, see [Multithreaded binary log replication \(Aurora MySQL version 3 and higher\)](AuroraMySQL.Replication.md#binlog-optimization-multithreading)\. 
+ With Aurora MySQL version 3, Aurora MySQL supports multithreaded replication\. For usage information, see [Multithreaded binary log replication \(Aurora MySQL version 3 and higher\)](AuroraMySQL.Replication.MySQL.md#binlog-optimization-multithreading)\. 
 
 **Note**  
  We still recommend not using multithreaded replication with Aurora MySQL version 1 and version 2\. 

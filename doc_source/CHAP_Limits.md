@@ -42,7 +42,7 @@ The following table describes naming constraints in Amazon Aurora\.
 | DB cluster identifier |  Identifiers have these naming constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)  | 
 |  Initial database name  |  Database name constraints differ between Aurora MySQL and PostgreSQL\. For more information, see the available settings when creating each DB cluster\.  | 
 |  Master user name  |  Master user name constraints differ for each database engine\. For more information, see the available settings when creating each DB cluster\.  | 
-|  Master password  |  The password for the database master user can include any printable ASCII character except `/`, `'`, `"`, `@`, or a space\. Master password length constraints differ for each database engine\. For more information, see the available settings when creating each DB cluster\.  | 
+|  Master password  |  The password for the database master user can include any printable ASCII character except `/`, `'`, `"`, `@`, or a space\. The password has the following number of printable ASCII characters depending on the DB engine:   [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)  | 
 | DB parameter group name |  These names have these constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)  | 
 |  DB subnet group name  |  These names have these constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)  | 
 

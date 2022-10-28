@@ -55,6 +55,9 @@ No event category exists for Aurora Serverless in the DB cluster event type\. Th
 |  notification  | RDS\-EVENT\-0152 |  The DB cluster stop failed\.  | 
 |  notification  | RDS\-EVENT\-0153 |  The DB cluster is being started due to it exceeding the maximum allowed time being stopped\.  | 
 |  notification  | RDS\-EVENT\-0173 |  Patching of the DB cluster has completed\.  | 
+|  notification  | RDS\-EVENT\-0234 |  The DB cluster export task failed\.  | 
+|  notification  | RDS\-EVENT\-0235 |  The DB cluster export task was canceled\.  | 
+|  notification  | RDS\-EVENT\-0236 |  The DB cluster export task completed\.  | 
 
 ## DB instance events<a name="USER_Events.Messages.instance"></a>
 
@@ -109,6 +112,7 @@ The following table shows the event category and a list of events when a DB inst
 |  recovery  | RDS\-EVENT\-0053 |  Recovery of the Multi\-AZ instance is complete\.  | 
 |  restoration  | RDS\-EVENT\-0019 |  The DB instance has been restored from a point\-in\-time backup\.  | 
 |  restoration  | RDS\-EVENT\-0043 |  Restored from snapshot \[snapshot\_name\]\. The DB instance has been restored from a DB snapshot\.  | 
+|  security patching  | RDS\-EVENT\-0230 |  A system update is available for your DB instance\. For information about applying updates, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.  | 
 
 ## DB parameter group events<a name="USER_Events.Messages.parameter-group"></a>
 
@@ -142,9 +146,9 @@ The following table shows the event category and a list of events when an Aurora
 | --- | --- | --- | 
 |  backup  | RDS\-EVENT\-0074 |  Creation of a manual DB cluster snapshot has started\.  | 
 |  backup  | RDS\-EVENT\-0075 |  A manual DB cluster snapshot has been created\.  | 
-| notification | RDS\-EVENT\-0162 |  DB cluster snapshot export task failed\.  | 
-| notification | RDS\-EVENT\-0163 |  DB cluster snapshot export task canceled\.  | 
-| notification | RDS\-EVENT\-0164 |  DB cluster snapshot export task completed\.  | 
+| notification | RDS\-EVENT\-0162 |  The DB cluster snapshot export task failed\.  | 
+| notification | RDS\-EVENT\-0163 |  The DB cluster snapshot export task was canceled\.  | 
+| notification | RDS\-EVENT\-0164 |  The DB cluster snapshot export task completed\.  | 
 | backup | RDS\-EVENT\-0168 |  Creating automated cluster snapshot\.  | 
 | backup | RDS\-EVENT\-0169 |  Automated cluster snapshot created\.  | 
 | notification | RDS\-EVENT\-0172 |  Renamed DB cluster from \[old DB cluster name\] to \[new DB cluster name\]\.  | 

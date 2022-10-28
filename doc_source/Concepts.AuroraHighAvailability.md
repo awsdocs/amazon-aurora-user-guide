@@ -57,7 +57,7 @@ Suppose that the primary instance in your cluster is unavailable because of an o
 +  If your cluster uses Aurora Serverless v1, Aurora automatically creates a new DB instance in another AZ\. However, this process involves a host replacement and thus takes longer than a failover\. 
 
 **Note**  
-Amazon Aurora also supports replication with an external MySQL database, or an RDS MySQL DB instance\. For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.md#AuroraMySQL.Replication.MySQL)\.
+Amazon Aurora also supports replication with an external MySQL database, or an RDS MySQL DB instance\. For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.
 
 ## High availability with Amazon RDS Proxy<a name="Concepts.AuroraHighAvailability.Proxy"></a>
 

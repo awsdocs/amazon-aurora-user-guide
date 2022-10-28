@@ -11,7 +11,7 @@ An *Aurora global database* is a single database that spans multiple AWS Regions
 Following are the supported engines and Region availability for Aurora global databases with Aurora MySQL\.
 
 
-| Region | Aurora MySQL 8\.0 | Aurora MySQL 5\.7 | Aurora MySQL 5\.6 | 
+| Region | Aurora MySQL version 3 | Aurora MySQL version 2 | Aurora MySQL version 1 | 
 | --- | --- | --- | --- | 
 | US East \(Ohio\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | Version 5\.6\.10a; version 1\.22 and higher | 
 | US East \(N\. Virginia\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | Version 5\.6\.10a; version 1\.22 and higher | 

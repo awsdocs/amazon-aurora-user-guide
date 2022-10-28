@@ -1,14 +1,6 @@
 # SQL statistics for Aurora PostgreSQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL"></a>
 
-For each SQL call and for each second that a query runs, Performance Insights collects SQL statistics\. For other Aurora engines, statistics are collected at the statement\-level and the digest\-level\. However, for Aurora PostgreSQL, Performance Insights collects SQL statistics at the digest–level only\.
-
-A *SQL digest* is a composite of all queries having a given pattern but not necessarily having the same literal values\. The digest replaces literal values with a question mark\. For example, `SELECT * FROM emp WHERE lname= ?` is an example digest\. This digest might consist of the following child queries:
-
-```
-SELECT * FROM emp WHERE lname = 'Sanchez'
-SELECT * FROM emp WHERE lname = 'Olagappan'
-SELECT * FROM emp WHERE lname = 'Wu'
-```
+For each SQL call and for each second that a query runs, Performance Insights collects SQL statistics\. All Aurora engines collect statistics only at the digest\-level\.
 
 Following, you can find information about digest\-level statistics for Aurora PostgreSQL\. 
 
@@ -69,4 +61,4 @@ The following metrics provide per call statistics for a SQL statement\.
 | db\.sql\_tokenized\.stats\.blk\_read\_time\_per\_call | Read time per call \(in ms\) | 
 | db\.sql\_tokenized\.stats\.blk\_write\_time\_per\_call | Write time per call \(in ms\) | 
 
-For more information about these metrics, see [pg\_stat\_statements](https://www.postgresql.org/docs/10/pgstatstatements.html) in the PostgreSQL documentation\.
+For more information about these metrics, see [pg\_stat\_statements](https://www.postgresql.org/docs/current/pgstatstatements.html) in the PostgreSQL documentation\.

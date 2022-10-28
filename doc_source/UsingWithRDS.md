@@ -12,7 +12,7 @@ You can manage access to your Amazon Aurora resources and your databases on a DB
 + Run your DB cluster in a virtual private cloud \(VPC\) based on the Amazon VPC service for the greatest possible network access control\. For more information about creating a DB cluster in a VPC, see [Amazon VPC VPCs and Amazon Aurora](USER_VPC.md)\.
 + Use AWS Identity and Access Management \(IAM\) policies to assign permissions that determine who is allowed to manage Amazon Aurora resources\. For example, you can use IAM to determine who is allowed to create, describe, modify, and delete DB clusters, tag resources, or modify security groups\.
 
-   For information on setting up an IAM user, see [Create an IAM user](CHAP_SettingUp_Aurora.md#CHAP_SettingUp_Aurora.IAM)\.
+  To review IAM policy examples, see [Identity\-based policy examples for Amazon Aurora](security_iam_id-based-policy-examples.md)\.
 + Use security groups to control what IP addresses or Amazon EC2 instances can connect to your databases on a DB cluster\. When you first create a DB cluster, its firewall prevents any database access except through rules specified by an associated security group\. 
 + Use Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\) connections with DB clusters running the Aurora MySQL or Aurora PostgreSQL\. For more information on using SSL/TLS with a DB cluster, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\.
 + Use Amazon Aurora encryption to secure your DB clusters and snapshots at rest\. Amazon Aurora encryption uses the industry standard AES\-256 encryption algorithm to encrypt your data on the server that hosts your DB cluster\. For more information, see [Encrypting Amazon Aurora resources](Overview.Encryption.md)\.

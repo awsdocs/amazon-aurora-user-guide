@@ -244,7 +244,7 @@ For more information about the extended `EXPLAIN` output format, see [Extended E
 
 ### Using Amazon Aurora to scale reads for your MySQL database<a name="AuroraMySQL.BestPractices.ReadScaling"></a>
 
-You can use Amazon Aurora with your MySQL DB instance to take advantage of the read scaling capabilities of Amazon Aurora and expand the read workload for your MySQL DB instance\. To use Aurora to read scale your MySQL DB instance, create an Aurora MySQL DB cluster and make it a read replica of your MySQL DB instance\. Then connect to the Aurora MySQL cluster to process the read queries\. The source database can be an RDS for MySQL DB instance, or a MySQL database running external to Amazon RDS\. For more information, see [Using Amazon Aurora to scale reads for your MySQL database](AuroraMySQL.Replication.md#AuroraMySQL.Replication.ReadScaling)\.
+You can use Amazon Aurora with your MySQL DB instance to take advantage of the read scaling capabilities of Amazon Aurora and expand the read workload for your MySQL DB instance\. To use Aurora to read scale your MySQL DB instance, create an Aurora MySQL DB cluster and make it a read replica of your MySQL DB instance\. Then connect to the Aurora MySQL cluster to process the read queries\. The source database can be an RDS for MySQL DB instance, or a MySQL database running external to Amazon RDS\. For more information, see [Using Amazon Aurora to scale reads for your MySQL database](AuroraMySQL.Replication.MySQL.md#AuroraMySQL.Replication.ReadScaling)\.
 
 ## Best practices for Aurora MySQL high availability<a name="AuroraMySQL.BestPractices.HA"></a>
 
@@ -299,7 +299,7 @@ By default, Aurora uses single\-threaded replication when an Aurora MySQL DB clu
 
  If you do use multithreaded replication, we recommend that you test any use thoroughly\.
 
-For more information about using replication in Amazon Aurora, see [Replication with Amazon Aurora](Aurora.Replication.md)\. For information about multithreaded replication in Aurora MySQL version 3, see [Multithreaded binary log replication \(Aurora MySQL version 3 and higher\)](AuroraMySQL.Replication.md#binlog-optimization-multithreading)\. 
+For more information about using replication in Amazon Aurora, see [Replication with Amazon Aurora](Aurora.Replication.md)\. For information about multithreaded replication in Aurora MySQL version 3, see [Multithreaded binary log replication \(Aurora MySQL version 3 and higher\)](AuroraMySQL.Replication.MySQL.md#binlog-optimization-multithreading)\. 
 
 ### Invoking AWS Lambda functions using native MySQL functions<a name="AuroraMySQL.BestPractices.Lambda"></a>
 

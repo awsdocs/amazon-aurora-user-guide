@@ -26,9 +26,10 @@ The following are the memory optimized DB instance types available:
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.r6i** – Instance classes that are ideal for running memory\-intensive workloads\.
 + **db\.r5** – Instance classes optimized for memory\-intensive applications\. These offer improved networking performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
++ **db\.r4** – These instance classes are no longer supported for Aurora PostgreSQL\. If your Aurora PostgreSQL DB cluster currently uses a db\.r4 instance class, you should modify it to use **db\.r5** instead\. You can't upgrade your Aurora PostgreSQL version to a new release if your cluster uses a db\.r4 instance class\.
 + **db\.r3** – Instance classes that provide memory optimization\.
 
-  Amazon Aurora has started the the end\-of\-life process for db\.r3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all Aurora MySQL DB clusters that use db\.r3 DB instance classes, we recommend that you upgrade to a db\.r5 DB instance as soon as possible\.    
+  Amazon Aurora has started the the end\-of\-life process for db\.r3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all Aurora MySQL DB clusters that use db\.r3 DB instance classes, we recommend that you upgrade to a db\.r5 DB instance class as soon as possible\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html)
 
 The following are the burstable\-performance DB instance types available:
@@ -66,15 +67,15 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.r6g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
 | db\.r6g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
 | db\.r6i – memory\-optimized instance classes | 
-| db\.r6i\.32xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.24xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.16xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.12xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.8xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.4xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.2xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.xlarge | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.large | 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.32xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.24xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.16xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.12xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.8xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.4xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.2xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.large | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
 | db\.r5 – memory\-optimized instance classes | 
 | db\.r5\.24xlarge | 1\.22 and higher, 2\.06 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
 | db\.r5\.16xlarge | 1\.22 and higher, 2\.06 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
@@ -85,18 +86,18 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.r5\.xlarge | 1\.14\.4 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
 | db\.r5\.large | 1\.14\.4 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
 | db\.r4 – memory\-optimized instance classes | 
-| db\.r4\.16xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | 12\.7 and higher, 11\.12 and higher | 
-| db\.r4\.8xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | 12\.7 and higher, 11\.12 and higher | 
-| db\.r4\.4xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | 12\.7 and higher, 11\.12 and higher | 
-| db\.r4\.2xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | 12\.7 and higher, 11\.12 and higher | 
-| db\.r4\.xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | 12\.7 and higher, 11\.12 and higher | 
-| db\.r4\.large | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | 12\.7 and higher, 11\.12 and higher | 
+| db\.r4\.16xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | No | 
+| db\.r4\.8xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | No | 
+| db\.r4\.4xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | No | 
+| db\.r4\.2xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | No | 
+| db\.r4\.xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | No | 
+| db\.r4\.large | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | No | 
 | db\.r3 – memory\-optimized instance classes | 
-| db\.r3\.8xlarge | All 1\.x and 2\.x versions; not supported in 3\.01\.0 and higher | No | 
-| db\.r3\.4xlarge | All 1\.x and 2\.x versions; not supported in 3\.01\.0 and higher | No | 
-| db\.r3\.2xlarge | All 1\.x and 2\.x versions; not supported in 3\.01\.0 and higher | No | 
-| db\.r3\.xlarge | All 1\.x and 2\.x versions; not supported in 3\.01\.0 and higher | No | 
-| db\.r3\.large | All 1\.x and 2\.x versions; not supported in 3\.01\.0 and higher | No | 
+| db\.r3\.8xlarge | All version 1\.x; not supported in version 2\.11\.0 and higher; not supported in version 3\.01\.0 and higher | No | 
+| db\.r3\.4xlarge | All version 1\.x; not supported in version 2\.11\.0 and higher; not supported in version 3\.01\.0 and higher | No | 
+| db\.r3\.2xlarge | AAll version 1\.x; not supported in version 2\.11\.0 and higher; not supported in version 3\.01\.0 and higher | No | 
+| db\.r3\.xlarge | All version 1\.x; not supported in version 2\.11\.0 and higher; not supported in version 3\.01\.0 and higher | No | 
+| db\.r3\.large | All version 1\.x; not supported in version 2\.11\.0 and higher; not supported in version 3\.01\.0 and higher | No | 
 | db\.t4g – burstable\-performance instance classes powered by AWS Graviton2 processors | 
 | db\.t4g\.2xlarge | No | No | 
 | db\.t4g\.xlarge | No | No | 

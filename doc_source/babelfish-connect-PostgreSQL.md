@@ -8,7 +8,7 @@ You can query an Aurora PostgreSQL DB cluster that supports Babelfish with the `
 
 ```
 psql -h bfish-db.cluster-123456789012.aws-region.rds.amazonaws.com
--p 5432 -U postgres -d babelfish_db -p
+-p 5432 -U postgres -d babelfish_db
 ```
 
 The parameters are as follows:
@@ -16,7 +16,6 @@ The parameters are as follows:
 + `-p` – The PostgreSQL port number used to connect to your DB instance\.
 + `-d` – `babelfish_db`
 + `-U` – The database user account that you want to access\. \(The example shows the default master username\.\)
-+ `-p` – The password of the database user\.
 
 When you run a SQL command on the psql client, you end the command with a semicolon\. For example, the following SQL command queries the [pg\_tables system view](https://www.postgresql.org/docs/current/view-pg-tables.html) to return information about each table in the database\.
 
