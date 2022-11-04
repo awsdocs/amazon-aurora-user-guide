@@ -6,6 +6,9 @@ For Aurora PostgreSQL DB clusters, the WAL records are saved on Aurora storage\.
 
 Logical replication is supported by all currently available Aurora PostgreSQL versions\. For more information, [Amazon Aurora PostgreSQL updates](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) in the *Release Notes for Aurora PostgreSQL*\. 
 
+**Note**  
+In addition to the native PostgreSQL logical replication feature introduced in PostgreSQL 10, Aurora PostgreSQL also supports the `pglogical` extension\. For more information, see [Using pglogical to synchronize data across instances](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.pglogical)\.
+
 For more information about PostgreSQL logical replication, see [Logical replication](https://www.postgresql.org/docs/current/logical-replication.html) and [Logical decoding concepts](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html) in the PostgreSQL documentation\.
 
 In the following topics\. you can find information about set up logical replication between your Aurora PostgreSQL DB clusters\. 

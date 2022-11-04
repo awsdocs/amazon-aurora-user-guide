@@ -682,6 +682,6 @@ You can't create a provisioned Aurora DB cluster from a snapshot made from an Au
 
 During the restore process, choose the same DB engine type as the snapshot\. For example, suppose that you want to restore a snapshot that was made from an Aurora Serverless DB cluster running Aurora PostgreSQL\. In this case, you create an Aurora PostgreSQL DB cluster using that same Aurora DB engine and version\. 
 
-The restored DB cluster assumes the role of primary cluster for Aurora global database when you add an AWS Regions to it\. All data contained in this primary cluster is replicated to any secondary clusters that you add to your Aurora global database\.
+The restored DB cluster assumes the role of primary cluster for the Aurora global database when you add an AWS Region to it\. All data contained in this primary cluster is replicated to any secondary clusters that you add to your Aurora global database\.
 
 ![\[Screenshot showing the restore snapshot page for an Aurora global database.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-databases-restore-snapshot-01.png)

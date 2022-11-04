@@ -166,6 +166,8 @@ Before upgrading your production Aurora PostgreSQL DB clusters to a new major ve
    SELECT pg_drop_replication_slot(slot_name);
    ```
 
+   Logical replication scenarios that use the `pglogical` extension also need to have slots dropped from the publisher node for a successful major version upgrade on that node\. However, you can restart the replication process from the subscriber node after the upgrade\. For more information, see [Reestablishing logical replication after a major upgrade](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.pglogical.recover-replication-after-upgrade)\.
+
 1. Perform a backup\.
 
    The upgrade process creates a DB cluster snapshot of your DB cluster during upgrading\. If you also want to do a manual backup before the upgrade process, see [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md) for more information\.

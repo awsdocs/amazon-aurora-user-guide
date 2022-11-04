@@ -135,7 +135,7 @@ aws rds describe-db-clusters --query '*[].{DBClusterIdentifier:DBClusterIdentifi
 ]
 ```
 
- To find all secondary clusters that have global write forwarding enabled, run the following command\. This command also returns the cluster's reader endpoint\. You use the secondary cluster's reader endpoint to when you use write forwarding from the secondary to the primary in your Aurora global database\. 
+ To find all secondary clusters that have global write forwarding enabled, run the following command\. This command also returns the cluster's reader endpoint\. You use the secondary cluster's reader endpoint when you use write forwarding from the secondary to the primary in your Aurora global database\. 
 
 **Example**  
 

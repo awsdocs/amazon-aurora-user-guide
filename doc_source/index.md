@@ -322,6 +322,7 @@ sponsored by Amazon.
       + [Fast failover with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.FastFailover.md)
       + [Fast recovery after failover with cluster cache management for Aurora PostgreSQL](AuroraPostgreSQL.cluster-cache-mgmt.md)
       + [Managing Aurora PostgreSQL connection churn with pooling](AuroraPostgreSQL.BestPractices.connection_pooling.md)
+      + [Using logical replication to perform a major version upgrade for Aurora PostgreSQL](AuroraPostgreSQL.MajorVersionUpgrade.md)
       + [Tuning memory parameters for Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.Tuning-memory-parameters.md)
    + [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)
       + [Using PostgreSQL logical replication with Aurora](AuroraPostgreSQL.Replication.Logical.md)
