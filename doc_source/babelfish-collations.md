@@ -12,7 +12,7 @@ Babelfish uses version 153\.80 of the International Components for Unicode \(ICU
 
 **Topics**
 + [DB cluster parameters that control collation and locale](#babelfish-collations.parameters)
-+ [Deterministic and nondeterministice collations and Babelfish](#babelfish-collations.deterministic-nondeterministic)
++ [Deterministic and nondeterministic collations and Babelfish](#babelfish-collations.deterministic-nondeterministic)
 + [Collations supported by Babelfish](#babelfish-collations.reference-tables-supported-collations)
 + [Managing collations](collation.managing.md)
 + [Collation limitations and behavior differences](collation.limitations.md)
@@ -31,7 +31,7 @@ When you create your Babelfish DB cluster, you choose the **Collation name** fro
 
 The settings you choose when you create your Babelfish for Aurora PostgreSQL DB cluster are stored in the DB cluster parameter group associated with the cluster for these parameters and set its collation behavior\.
 
-## Deterministic and nondeterministice collations and Babelfish<a name="babelfish-collations.deterministic-nondeterministic"></a>
+## Deterministic and nondeterministic collations and Babelfish<a name="babelfish-collations.deterministic-nondeterministic"></a>
 
 Babelfish supports deterministic and nondeterministic collations:
 + A *deterministic collation* evaluates characters that have identical byte sequences as equal\. That means that `x` and `X` aren't equal in a deterministic collation\. Deterministic collations can be case\-sensitive \(CS\) and accent\-sensitive \(AS\)\.

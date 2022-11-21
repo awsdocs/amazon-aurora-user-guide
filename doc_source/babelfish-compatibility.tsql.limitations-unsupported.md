@@ -22,7 +22,6 @@ In the table you can find information about certain functionality that isn't cur
 | Assembly modules and SQL Common Language Runtime \(CLR\) routines  | Functionality related to assembly modules and CLR routines isn't supported\. | 
 | Column attributes | ROWGUIDCOL, SPARSE, FILESTREAM, and MASKED aren't supported\. | 
 | Contained databases | Contained databases with logins authenticated at the database level rather than at the server level aren't supported\. | 
-| CROSS APPLY | Lateral joins aren't supported\. | 
 | Cursors \(updatable\) | Updatable cursors aren't supported\. | 
 | Cursors \(global\) | GLOBAL cursors aren't supported\. | 
 | Cursor \(fetch behaviors\) | The following cursor fetch behaviors aren't supported: FETCH PRIOR, FIRST, LAST, ABSOLUTE, abd RELATIVE | 
@@ -40,7 +39,6 @@ In the table you can find information about certain functionality that isn't cur
 | Full\-text search | Full\-text search built\-in Functions and statements aren't supported\. | 
 | Function declarations with greater than 100 parameters | Function declarations that contain more than 100 parameters aren't supported\. | 
 | Function calls that include DEFAULT as a parameter value | DEFAULT isn't a supported parameter value for a function call\. | 
-| Function calls that include :: | Function calls that include :: aren't supported\. | 
 | Functions, externally defined | External functions, including SQL CLR functions, aren't supported\. | 
 | Global temporary tables \(tables with names that start with \#\#\) | Global temporary tables aren't supported\. | 
 | Graph functionality | All SQL graph functionality isn't supported\. | 
@@ -157,8 +155,6 @@ The following built\-in functions aren't supported:
 
 **Metadata functions**
 + COLUMNPROPERTY
-+ OBJECTPROPERTY
-+ OBJECTPROPERTYEX
 + TYPEPROPERTY
 + SERVERPROPERTY function – The following properties aren't supported:
   + BuildClrVersion
@@ -167,11 +163,9 @@ The following built\-in functions aren't supported:
   + HadrManagerStatus
   + InstanceDefaultDataPath
   + InstanceDefaultLogPath
-  + InstanceName
   + IsClustered
   + IsHadrEnabled
   + LCID
-  + MachineName
   + NumLicenses
   + ProcessID
   + ProductBuild

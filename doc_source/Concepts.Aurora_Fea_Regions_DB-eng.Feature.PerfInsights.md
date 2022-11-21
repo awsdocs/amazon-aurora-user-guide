@@ -3,11 +3,11 @@
 Performance Insights expands on existing Amazon RDS monitoring features to illustrate and help you analyze your database performance\. With the Performance Insights dashboard, you can visualize the database load on your Amazon RDS DB instance load and filter the load by waits, SQL statements, hosts, or users\. For more information, see [Overview of Performance Insights on Amazon Aurora](USER_PerfInsights.Overview.md)\. 
 
 **Topics**
-+ [Performance Insights with Aurora MySQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.amy)
++ [with Aurora MySQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.amy)
 + [Performance Insights with Aurora PostgreSQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.apg)
 + [Performance Insights with Aurora Serverless](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.serverless)
 
-## Performance Insights with Aurora MySQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.amy"></a>
+## with Aurora MySQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.amy"></a>
 
 **Note**  
 Engine version support is different for Performance Insights with Aurora MySQL if you have parallel query turned on\. For more information on parallel query, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.
@@ -44,7 +44,9 @@ Following are the supported engines and Region availability for Performance Insi
 | Europe \(London\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
 | Europe \(Milan\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
 | Europe \(Paris\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
+| Europe \(Spain\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
 | Europe \(Stockholm\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
+| Europe \(Zurich\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
 | Middle East \(Bahrain\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
 | Middle East \(UAE\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
 | South America \(São Paulo\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
@@ -79,7 +81,9 @@ Following are the supported engines and Region availability for Performance Insi
 | Europe \(London\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
 | Europe \(Milan\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
 | Europe \(Paris\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
+| Europe \(Spain\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
 | Europe \(Stockholm\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
+| Europe \(Zurich\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
 | Middle East \(Bahrain\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
 | Middle East \(UAE\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
 | South America \(São Paulo\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
@@ -114,7 +118,9 @@ Following are the supported engines and Region availability for Performance Insi
 | Europe \(London\) | All versions | All versions | All versions | All versions | All versions | 
 | Europe \(Milan\) | All versions | All versions | All versions | All versions | All versions | 
 | Europe \(Paris\) | All versions | All versions | All versions | All versions | All versions | 
+| Europe \(Spain\) | All versions | All versions | All versions | All versions | All versions | 
 | Europe \(Stockholm\) | All versions | All versions | All versions | All versions | All versions | 
+| Europe \(Zurich\) | All versions | All versions | All versions | All versions | All versions | 
 | Middle East \(Bahrain\) | All versions | All versions | All versions | All versions | All versions | 
 | Middle East \(UAE\) | All versions | All versions | All versions | All versions | All versions | 
 | South America \(São Paulo\) | All versions | All versions | All versions | All versions | All versions | 

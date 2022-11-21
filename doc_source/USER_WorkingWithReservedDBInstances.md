@@ -134,7 +134,7 @@ After you have information about the available reserved DB instance offerings, y
 
 1. In the navigation pane, choose **Reserved instances**\. 
 
-1. Choose **Purchase Reserved DB Instance**\.
+1. Choose **Purchase reserved DB instance**\.
 
 1. For **Product description**, choose the DB engine and licensing type\.
 
@@ -149,18 +149,13 @@ Reserved Amazon Aurora instances always have the **Multi\-AZ deployment** option
 1. For **Offering type**, choose the offering type\.
 
    After you choose the offering type, you can see the pricing information\.  
-![\[Purchase reserved DB instance console step 1\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/reservedinstance-aur.png)
+![\[Purchase reserved DB instance console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/reservedinstance-aur.png)
 
 1. \(Optional\) You can assign your own identifier to the reserved DB instances that you purchase to help you track them\. For **Reserved Id**, type an identifier for your reserved DB instance\.
 
-1. Choose **Continue**\. 
+1. Choose **Submit**\.
 
-   The **Purchase Reserved DB Instances** dialog box appears, with a summary of the reserved DB instance attributes that you've selected and the payment due\.  
-![\[Purchase reserved DB instance console step 2\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/reservedinstance2-aur.png)
-
-1. On the confirmation page, review your reserved DB instance\. If the information is correct, choose **Order** to purchase the reserved DB instance\.
-
-   Alternatively, choose **Back** to edit your reserved DB instance\.
+   Your reserved DB instance is purchased, then displayed in the **Reserved instances** list\.
 
 After you have purchased reserved DB instances, you can get information about your reserved DB instances as shown in the following procedure\.
 

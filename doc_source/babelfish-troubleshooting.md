@@ -4,7 +4,6 @@ Following, you can find troubleshooting ideas and workarounds for some Babelfish
 
 **Topics**
 + [Connection failure](#babelfish-troubleshooting-connectivity)
-+ [Using pg\_dump and pg\_restore requires extra setup](#babelfish-troubleshooting-pg-dump_pg_restore)
 
 ## Connection failure<a name="babelfish-troubleshooting-connectivity"></a>
 
@@ -26,28 +25,3 @@ Common causes of connection failures to a new Aurora DB cluster with Babelfish i
   If you are using SQL Server Management Studio \(SSMS\) to connect to Babelfish and you see this error, you can choose **Encrypt connection** and **Trust server certificate** connection options on the Connection Properties pane and try again\. These settings handle the SSL connection requirement for SSMS\. 
 
 For more information about troubleshooting Aurora connection issues, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\. 
-
-## Using pg\_dump and pg\_restore requires extra setup<a name="babelfish-troubleshooting-pg-dump_pg_restore"></a>
-
-Currently, if you try to use the PostgreSQL utilities pg\_dump and pg\_restore to move a database from one Babelfish DB cluster to another, you see the following error message\. 
-
-```
-psql:bbf.sql:29: ERROR:  role "db_owner" does not exist
-psql:bbf.sql:49: ERROR:  role "dbo" does not exist
-```
-
-To work around this issue, first create the same logical database on the target cluster that is on the source\. After that exists, you can create the needed roles to run pg\_dump and pg\_restore\. 
-
-**To use pg\_dump and pg\_restore to move a database between Babelfish DB clusters**
-
-1. Connect to your SQL Server endpoint using SQL Server Management Studio \(SSMS\)\.
-
-1. Create the same logical database on your target that is on your source\. To restore multiple databases, make sure to create those in advance\.
-
-   ```
-   CREATE DATABASE your-DB-name
-   ```
-
-1. Use pg\_restore to restore the DB instance from the source to the target\.
-
-To learn more about using these PostgreSQL utilities, see [pg\_dump](https://www.postgresql.org/docs/13/app-pgdump.html) and [pg\_restore](https://www.postgresql.org/docs/13/app-pgrestore.html) in the PostgreSQL documentation\.

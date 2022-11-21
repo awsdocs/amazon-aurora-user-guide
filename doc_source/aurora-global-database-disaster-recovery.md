@@ -47,7 +47,7 @@ We recommend that you understand this process before using it\. Have a plan read
 
 Make sure that application writes are sent to the correct Aurora DB cluster before, during, and after making these changes\. Doing this avoids data inconsistencies among the DB clusters in the Aurora global database \(*split\-brain* issues\)\.
 
-If you reconfigured in response to an outage in an AWS Region, you might be able to return your Aurora global database to its original primary AWS Region after the outage is resolved\. In this case, you use the managed planned failover process\. Your Aurora global database must use a version of Aurora PostgreSQL or Aurora MySQL that supports managed planned failovers\. For more information, see [Performing managed planned failovers for Amazon Aurora global databases](#aurora-global-database-disaster-recovery.managed-failover)\. 
+If you reconfigured in response to an outage in an AWS Region, you can make that AWS Region the primary again after the outage is resolved\. To do so, you add the old AWS Region to your new global database, and then use the managed planned failover process to switch its role\. Your Aurora global database must use a version of Aurora PostgreSQL or Aurora MySQL that supports managed planned failovers\. For more information, see [Performing managed planned failovers for Amazon Aurora global databases](#aurora-global-database-disaster-recovery.managed-failover)\. 
 
 ## Performing managed planned failovers for Amazon Aurora global databases<a name="aurora-global-database-disaster-recovery.managed-failover"></a>
 

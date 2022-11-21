@@ -14,6 +14,8 @@ You can use the following functions for Amazon RDS DB instances running Aurora P
 + [aurora\_stat\_backend\_waits](aurora_stat_backend_waits.md)
 + [aurora\_stat\_dml\_activity](aurora_stat_dml_activity.md)
 + [aurora\_stat\_get\_db\_commit\_latency](aurora_stat_get_db_commit_latency.md)
++ [aurora\_stat\_logical\_wal\_cache](aurora_stat_logical_wal_cache.md)
++ [aurora\_stat\_reset\_wal\_cache](aurora_stat_reset_wal_cache.md)
 + [aurora\_stat\_system\_waits](aurora_stat_system_waits.md)
 + [aurora\_stat\_wait\_event](aurora_stat_wait_event.md)
 + [aurora\_stat\_wait\_type](aurora_stat_wait_type.md)

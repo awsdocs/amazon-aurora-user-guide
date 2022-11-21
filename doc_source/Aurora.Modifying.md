@@ -9,7 +9,8 @@ We recommend that you test any changes on a test DB cluster or DB instance befor
 You can modify a DB cluster using the AWS Management Console, the AWS CLI, or the RDS API\.
 
 **Note**  
-For Aurora, when you modify a DB cluster, only changes to the **DB cluster identifier**, **IAM DB authentication**, and **New master password** settings are affected by the **Apply immediately** setting\. All other modifications are applied immediately, regardless of the value of the **Apply immediately** setting\.
+For Aurora, when you modify a DB cluster, only changes to the **DB cluster identifier**, **IAM DB authentication**, and **New master password** settings are affected by the **Apply immediately** setting\. All other modifications are applied immediately, regardless of the value of the **Apply immediately** setting\.  
+If you're using SSL endpoints and change the DB cluster identifier, stop and restart the DB cluster to update the SSL endpoints\. For more information, see [Stopping and starting an Amazon Aurora DB cluster](aurora-cluster-stop-start.md)\.
 
 ### Console<a name="Aurora.Modifying.Cluster.Console"></a>
 

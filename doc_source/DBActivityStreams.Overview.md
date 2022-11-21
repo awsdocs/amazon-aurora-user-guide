@@ -50,6 +50,7 @@ In Aurora, database activity streams have the following requirements and limitat
 + Applying additional encryption to your Amazon Kinesis data stream is incompatible with database activity streams, which are already encrypted with your AWS KMS key\.
 + Start your database activity stream at the DB cluster level\. If you add a DB instance to your cluster, you don't need to start an activity stream on the instance: it is audited automatically\.
 + In an Aurora global database, make sure to start an activity stream on each DB cluster separately\. Each cluster delivers audit data to its own Kinesis stream within its own AWS Region\.
++ In Aurora PostgreSQL, make sure to stop database activity stream before an upgrade\. You can start the database activity stream after the upgrade completes\.
 
 ## Region and version availability<a name="DBActivityStreams.Overview.Availability"></a>
 

@@ -62,6 +62,7 @@ Feature availability and support varies across specific versions of each Aurora 
   +  AWS Identity and Access Management \(IAM\) database authentication 
   +  Backtracking in Aurora 
   +  Database activity streams 
+  +  Kerberos authentication 
   +  Performance Insights 
   + Viewing logs in the AWS Management Console
 +  Connections to an Aurora Serverless v1 DB cluster are closed automatically if held open for longer than one day\. 

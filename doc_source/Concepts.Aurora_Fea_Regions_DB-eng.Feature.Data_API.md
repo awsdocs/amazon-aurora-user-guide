@@ -34,7 +34,9 @@ Following are the supported engines and Region availability for Data API with Au
 | Europe \(London\) | – | Version 2\.08\.3 | Version 1\.22\.3 | 
 | Europe \(Milan\) | – | – | – | 
 | Europe \(Paris\) | – | Version 2\.08\.3 | Version 1\.22\.3 | 
+| Europe \(Spain\) | – | – | – | 
 | Europe \(Stockholm\) | – | – | – | 
+| Europe \(Zurich\) | – | – | – | 
 | Middle East \(Bahrain\) | – | – | – | 
 | Middle East \(UAE\) | – | – | – | 
 | South America \(São Paulo\) | – | – | – | 
@@ -69,7 +71,9 @@ Following are the supported engines and Region availability for Data API with Au
 | Europe \(London\) | Version 11\.13 | Version 10\.18 | 
 | Europe \(Milan\) | – | – | 
 | Europe \(Paris\) | Version 11\.13 | Version 10\.18 | 
+| Europe \(Spain\) | – | – | 
 | Europe \(Stockholm\) | – | – | 
+| Europe \(Zurich\) | – | – | 
 | Middle East \(Bahrain\) | – | – | 
 | Middle East \(UAE\) | – | – | 
 | South America \(São Paulo\) | – | – | 

@@ -37,4 +37,4 @@ GRANT rds_iam TO db_userx;
 
 Make sure the specified database user name is the same as a resource in the IAM policy for IAM database access\. For more information, see [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. 
 
-Note that a PostgreSQL database user can use either IAM or Kerberos authentication but not both, so this user can't also have the `rds_ad` role\. This also applies to nested memberships\. For more information, see [ Step 7: Create Kerberos authentication PostgreSQL logins ](postgresql-kerberos-setting-up.md#postgresql-kerberos-setting-up.create-logins)\.
+Note that a PostgreSQL database user can use either IAM or Kerberos authentication but not both, so this user can't also have the `rds_ad` role\. This also applies to nested memberships\. For more information, see [ Step 7: Create PostgreSQL users for your Kerberos principals ](postgresql-kerberos-setting-up.md#postgresql-kerberos-setting-up.create-logins)\.

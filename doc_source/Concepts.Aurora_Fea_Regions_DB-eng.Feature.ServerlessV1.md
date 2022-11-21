@@ -1,14 +1,14 @@
 # Aurora Serverless v1<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1"></a>
 
-Aurora Serverless is an on\-demand, auto\-scaling feature designed to be a cost\-effective approach to running intermittent or unpredictable workloads on Amazon Aurora\. It automatically starts up, shuts down, and scales capacity up or down, as needed by your applications, using a single DB instance in each cluster\. For more information, see [Using Amazon Aurora Serverless v1](aurora-serverless.md)\.
+Aurora Serverless v1 is an on\-demand, auto\-scaling feature designed to be a cost\-effective approach to running intermittent or unpredictable workloads on Amazon Aurora\. It automatically starts up, shuts down, and scales capacity up or down, as needed by your applications, using a single DB instance in each cluster\. For more information, see [Using Amazon Aurora Serverless v1](aurora-serverless.md)\.
 
 **Topics**
-+ [Serverless v1 with Aurora MySQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.amy)
-+ [Serverless v1 with Aurora PostgreSQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.apg)
++ [Aurora Serverless v1 with Aurora MySQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.amy)
++ [Aurora Serverless v1 with Aurora PostgreSQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.apg)
 
-## Serverless v1 with Aurora MySQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.amy"></a>
+## Aurora Serverless v1 with Aurora MySQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.amy"></a>
 
-Following are the supported engines and Region availability for Serverless v1 with Aurora MySQL\.
+Following are the supported engines and Region availability for Aurora Serverless v1 with Aurora MySQL\.
 
 
 | Region | Aurora MySQL version 3 | Aurora MySQL version 2 | Aurora MySQL version 1 | 
@@ -34,16 +34,18 @@ Following are the supported engines and Region availability for Serverless v1 wi
 | Europe \(London\) | – | Version 2\.08\.3 | Version 1\.22\.3 | 
 | Europe \(Milan\) | – | – | – | 
 | Europe \(Paris\) | – | Version 2\.08\.3 | Version 1\.22\.3 | 
+| Europe \(Spain\) | – | – | – | 
 | Europe \(Stockholm\) | – | – | – | 
+| Europe \(Zurich\) | – | – | – | 
 | Middle East \(Bahrain\) | – | – | – | 
 | Middle East \(UAE\) | – | – | – | 
 | South America \(São Paulo\) | – | – | – | 
 | AWS GovCloud \(US\-East\) | – | – | – | 
 | AWS GovCloud \(US\-West\) | – | – | – | 
 
-## Serverless v1 with Aurora PostgreSQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.apg"></a>
+## Aurora Serverless v1 with Aurora PostgreSQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.apg"></a>
 
-Following are the supported engines and Region availability for Serverless v1 with Aurora PostgreSQL\.
+Following are the supported engines and Region availability for Aurora Serverless v1 with Aurora PostgreSQL\.
 
 
 | Region | Aurora PostgreSQL 11 | Aurora PostgreSQL 10 | 
@@ -69,7 +71,9 @@ Following are the supported engines and Region availability for Serverless v1 wi
 | Europe \(London\) | Version 11\.13 | Version 10\.18 | 
 | Europe \(Milan\) | – | – | 
 | Europe \(Paris\) | Version 11\.13 | Version 10\.18 | 
+| Europe \(Spain\) | – | – | 
 | Europe \(Stockholm\) | Version 11\.13 | Version 10\.18 | 
+| Europe \(Zurich\) | – | – | 
 | Middle East \(Bahrain\) | – | – | 
 | Middle East \(UAE\) | – | – | 
 | South America \(São Paulo\) | – | – | 

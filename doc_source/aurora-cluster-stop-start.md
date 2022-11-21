@@ -85,7 +85,9 @@ Stopping a DB cluster removes pending actions, except for the DB cluster paramet
 
 ## Starting an Aurora DB cluster<a name="aurora-cluster-start"></a>
 
-You always start an Aurora DB cluster beginning with an Aurora cluster that is already in the stopped state\. When you start the cluster, all its DB instances become available again\. The cluster keeps its configuration settings such as endpoints, parameter groups, and VPC security groups\. 
+You always start an Aurora DB cluster beginning with an Aurora cluster that is already in the stopped state\. When you start the cluster, all its DB instances become available again\. The cluster keeps its configuration settings such as endpoints, parameter groups, and VPC security groups\.
+
+Restarting a DB cluster usually takes several minutes\.
 
 ### Console<a name="aurora-start-cluster.CON"></a>
 

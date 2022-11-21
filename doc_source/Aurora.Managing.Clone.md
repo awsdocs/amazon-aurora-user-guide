@@ -44,8 +44,8 @@ Aurora cloning currently has the following limitations:
 + You can create as many clones as you want, up to the maximum number of DB clusters allowed in the AWS Region\.
 + You can have up to 15 clones at the same time that were created by the copy\-on\-write protocol\. After you have 15 clones, the next clone that you create is a full copy\. The subsequent cloning operation acts like a point\-in\-time recovery\.
 + You can't create a clone in a different AWS Region from the source Aurora DB cluster\.
-+ You can't create an Aurora Serverless v1 clone from a nonencrypted provisioned Aurora DB cluster\. 
-+ You can't create a Aurora Serverless v1 clone from a MySQL 5\.6\-compatible provisioned cluster, or a provisioned clone of a MySQL 5\.6\-compatible Aurora Serverless v1 cluster\.
++ You can't create an Aurora Serverless v1 clone from a nonencrypted, provisioned Aurora DB cluster\.
++ MySQL 5\.6\-compatible Aurora Serverless v1 doesn't support cloning\. You can't create an Aurora Serverless v1 clone from a MySQL 5\.6\-compatible provisioned cluster\. You can't create a provisioned clone of a MySQL 5\.6\-compatible Aurora Serverless v1 cluster, that is, a clone that uses a provisioned DB instance class such as `db.r5.large`\.
 + You can't create a clone from an Aurora DB cluster without the parallel query feature to a cluster that uses parallel query\. To bring data into a cluster that uses parallel query, create a snapshot of the original cluster and restore it to the cluster that's using the parallel query feature\.
 + You can't create a clone from an Aurora DB cluster that has no DB instances\. You can only clone Aurora DB clusters that have at least one DB instance\.
 + You can create a clone in a different virtual private cloud \(VPC\) than that of the Aurora DB cluster\. If you do, the subnets of the VPCs must map to the same Availability Zones\.

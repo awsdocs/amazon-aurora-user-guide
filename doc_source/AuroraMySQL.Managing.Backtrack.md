@@ -71,7 +71,9 @@ Following are the supported engines and Region availability for backtrack with A
 | Europe \(London\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
 | Europe \(Milan\) | – | – | – | 
 | Europe \(Paris\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
+| Europe \(Spain\) | – | – | – | 
 | Europe \(Stockholm\) | – | – | – | 
+| Europe \(Zurich\) | – | – | – | 
 | Middle East \(Bahrain\) | – | – | – | 
 | Middle East \(UAE\) | – | – | – | 
 | South America \(São Paulo\) | – | – | – | 

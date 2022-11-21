@@ -36,7 +36,9 @@ Aurora machine learning is supported for Aurora MySQL in the AWS Regions listed 
 | Europe \(London\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | – | 
 | Europe \(Milan\) | – | – | – | 
 | Europe \(Paris\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | – | 
+| Europe \(Spain\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | – | 
 | Europe \(Stockholm\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | – | 
+| Europe \(Zurich\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | – | 
 | Middle East \(Bahrain\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | – | 
 | Middle East \(UAE\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | – | 
 | South America \(São Paulo\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | – | 
@@ -73,7 +75,9 @@ Following are the supported engines and Region availability for Aurora machine l
 | Europe \(London\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 
 | Europe \(Milan\) | – | – | – | – | – | 
 | Europe \(Paris\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 
+| Europe \(Spain\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 
 | Europe \(Stockholm\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 
+| Europe \(Zurich\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 
 | Middle East \(Bahrain\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 
 | Middle East \(UAE\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 
 | South America \(São Paulo\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 

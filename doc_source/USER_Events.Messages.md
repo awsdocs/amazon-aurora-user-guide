@@ -1,6 +1,6 @@
 # Amazon RDS event categories and event messages<a name="USER_Events.Messages"></a>
 
-Amazon RDS generates a significant number of events in categories that you can subscribe to using the Amazon RDS Console, AWS CLI, or the API\. Each category applies to a source type\.
+Amazon RDS generates a significant number of events in categories that you can subscribe to using the Amazon RDS Console, AWS CLI, or the API\.
 
 **Topics**
 + [DB cluster events](#USER_Events.Messages.cluster)
@@ -9,10 +9,11 @@ Amazon RDS generates a significant number of events in categories that you can s
 + [DB security group events](#USER_Events.Messages.security-group)
 + [DB cluster snapshot events](#USER_Events.Messages.cluster-snapshot)
 + [RDS Proxy events](#USER_Events.Messages.rds-proxy)
++ [Message attributes](#USER_Events.Messages.Attributes)
 
 ## DB cluster events<a name="USER_Events.Messages.cluster"></a>
 
-The following table shows the event category and a list of events when an Aurora DB cluster is the source type\.
+The following table shows the event category and a list of events when a DB cluster is the source type\.
 
 **Note**  
 No event category exists for Aurora Serverless in the DB cluster event type\. The Aurora Serverless events range from RDS\-EVENT\-0141 to RDS\-EVENT\-0149\.
@@ -140,7 +141,7 @@ DB security groups are resources for EC2\-Classic\. EC2\-Classic was retired on 
 
 ## DB cluster snapshot events<a name="USER_Events.Messages.cluster-snapshot"></a>
 
-The following table shows the event category and a list of events when an Aurora DB cluster snapshot is the source type\.
+The following table shows the event category and a list of events when a DB cluster snapshot is the source type\.
 
 
 |  Category  | RDS event ID |  Description  | 
@@ -170,3 +171,14 @@ The following table shows the event category and a list of events when an RDS Pr
 |  creation  | RDS\-EVENT\-0206 |  RDS created the endpoint for the DB proxy \(RDS Proxy\)\.  | 
 | deletion | RDS\-EVENT\-0205 |  RDS deleted the DB proxy \(RDS Proxy\)\.  | 
 |  deletion  | RDS\-EVENT\-0208 |  RDS deleted the endpoint of DB proxy \(RDS Proxy\)\.  | 
+|  failure  | RDS\-EVENT\-0243 |  RDS couldn't provision capacity for the proxy because there aren't enough IP addresses available in your subnets\. To fix the issue, make sure that your subnets have the minimum number of unused IP addresses\. To determine the recommended number for your instance class, see [Planning for IP address capacity](rds-proxy-setup.md#rds-proxy-network-prereqs.plan-ip-address)\.  | 
+
+## Message attributes<a name="USER_Events.Messages.Attributes"></a>
+
+The following table shows the message attribute for RDS events\.
+
+
+| Amazon RDS event attribute |  Description  | 
+| --- | --- | 
+| Event ID |  Identifier for the RDS event message\. For example, RDS\-EVENT\-0006\.  | 
+| Resource |  The ARN identifier for the resource emitting the event\. For example, `arn:aws:rds:ap-southeast-2:123456789012:db:database-1`\.  | 

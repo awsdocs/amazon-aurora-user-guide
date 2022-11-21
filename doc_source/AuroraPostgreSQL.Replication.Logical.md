@@ -4,6 +4,8 @@ By using PostgreSQL's logical replication feature with your Aurora PostgreSQL DB
 
 For Aurora PostgreSQL DB clusters, the WAL records are saved on Aurora storage\. The Aurora PostgreSQL DB cluster that's acting as the publisher in a logical replication scenario reads the WAL data from Aurora storage, decodes it, and sends it to the subscriber so that the changes can be applied to the table on that instance\. The publisher uses a *logical decoder* to decode the data for use by subscribers\. By default, Aurora PostgreSQL DB clusters use the native PostgreSQL `pgoutput` plugin when sending data\. Other logical decoders are available\. For example, Aurora PostgreSQL also supports the `[wal2json](https://github.com/eulerto/wal2json)` plugin that converts WAL data to JSON\. 
 
+As of Aurora PostgreSQL version 14\.5, 13\.8, 12\.12, and 11\.17, Aurora PostgreSQL augments the PostgreSQL logical replication process with a *write\-through cache* to improve performance\. The WAL transaction logs are cached locally, in a buffer, to reduce the amount of disk I/O, that is, reading from Aurora storage during logical decoding\. The write\-through cache is used by default whenever you use logical replication for your Aurora PostgreSQL DB cluster\. Aurora provides several functions that you can use to manage the cache\. For more information, see [Managing the Aurora PostgreSQL logical replication write\-through cache](#AuroraPostgreSQL.Replication.Logical-write-through-cache)\. 
+
 Logical replication is supported by all currently available Aurora PostgreSQL versions\. For more information, [Amazon Aurora PostgreSQL updates](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) in the *Release Notes for Aurora PostgreSQL*\. 
 
 **Note**  
@@ -16,6 +18,7 @@ In the following topics\. you can find information about set up logical replicat
 **Topics**
 + [Setting up logical replication for your Aurora PostgreSQL DB cluster](#AuroraPostgreSQL.Replication.Logical.Configure)
 + [Turning off logical replication](#AuroraPostgreSQL.Replication.Logical.Stop)
++ [Managing the Aurora PostgreSQL logical replication write\-through cache](#AuroraPostgreSQL.Replication.Logical-write-through-cache)
 + [Managing logical slots for Aurora PostgreSQL](#AuroraPostgreSQL.Replication.Logical.Configure.managing-logical-slots)
 + [Example: Using logical replication with Aurora PostgreSQL DB clusters](#AuroraPostgreSQL.Replication.Logical.PostgreSQL-Example)
 + [Example: Logical replication using Aurora PostgreSQL and AWS Database Migration Service](#AuroraPostgreSQL.Replication.Logical.DMS-Example)
@@ -86,8 +89,9 @@ After completing your replication tasks, you should stop the replication process
    To drop all of the replication slots, connect to the publisher and run the following SQL command\.
 
    ```
-   SELECT pg_drop_replication_slot(slot_name) FROM pg_replication_slots 
-      WHERE slot_name IN (SELECT slot_name FROM pg_replication_slots);
+   SELECT pg_drop_replication_slot(slot_name)
+     FROM pg_replication_slots
+    WHERE slot_name IN (SELECT slot_name FROM pg_replication_slots);
    ```
 
    The replication slots can't be active when you run this command\.
@@ -98,15 +102,50 @@ After completing your replication tasks, you should stop the replication process
 
 1. Restart the publisher Aurora PostgreSQL DB cluster for the change to the `rds.logical_replication` parameter to take effect\.
 
+## Managing the Aurora PostgreSQL logical replication write\-through cache<a name="AuroraPostgreSQL.Replication.Logical-write-through-cache"></a>
+
+By default, Aurora PostgreSQL versions 14\.5, 13\.8, 12\.12, and 11\.17 and higher use a write\-through cache to improve the performance for logical replication\. Without the write\-through cache, Aurora PostgreSQL uses the Aurora storage layer in its implementation of the native PostgreSQL logical replication process\. It does so by writing WAL data to storage and then reading the data back from storage to decode it and send \(replicate\) to its targets \(subscribers\)\. This can result in bottlenecks during logical replication for Aurora PostgreSQL DB clusters\. 
+
+The write\-through cache reduces the need to use the Aurora storage layer\. Instead of always writing and reading from the Aurora storage layer, Aurora PostgreSQL uses a buffer to cache the logical WAL stream so that it can be used during the replication process, rather than always pulling from disk\. This buffer is the PostgreSQL native cache used by logical replication, identified in Aurora PostgreSQL DB cluster parameters as `rds.logical_wal_cache`\. By default, this cache uses 1/32 of the Aurora PostgreSQL DB cluster's buffer cache setting \(`shared_buffers`\) but not less than 64kB nor more than the size of one WAL segment, typically 16MB\. 
+
+When you use logical replication with your Aurora PostgreSQL DB cluster \(for the versions that support the write\-through cache\), you can monitor the cache hit ratio to see how well it's working for your use case\. To do so, connect to your Aurora PostgreSQL DB cluster's write instance using `psql` and then use the Aurora function, `aurora_stat_logical_wal_cache`, as shown in the following example\.
+
+```
+SELECT * FROM aurora_stat_logical_wal_cache();
+```
+
+The function returns output such as the following\.
+
+```
+name       | active_pid | cache_hit | cache_miss | blks_read | hit_rate | last_reset_timestamp
+-----------+------------+-----------+------------+-----------+----------+--------------
+test_slot1 | 79183      | 24        | 0          | 24        | 100.00%  | 2022-08-05 17:39...
+test_slot2 |            | 1         | 0          |  1        | 100.00%  | 2022-08-05 17:34...
+(2 rows)
+```
+
+The `last_reset_timestamp` values have been shortened for readability\. For more information about this function, see [aurora\_stat\_logical\_wal\_cache](aurora_stat_logical_wal_cache.md)\.
+
+You can get more information by using queries such as the following\.
+
+```
+SELECT wal_cache_blks_hit
+  FROM aurora_stat_logical_wal_cache()
+ WHERE wal_cache_blks_hit > 0;
+```
+
+Aurora PostgreSQL provides the following two functions for monitoring the write\-through cache\. 
++ The `aurora_stat_logical_wal_cache` function – For reference documentation, see [aurora\_stat\_logical\_wal\_cache](aurora_stat_logical_wal_cache.md)\.
++ The `aurora_stat_reset_wal_cache` function – For reference documentation, see [aurora\_stat\_reset\_wal\_cache](aurora_stat_reset_wal_cache.md)\.
+
+If you find that the automatically adjusted WAL cache size isn't sufficient for your workloads, you can change the the value of the `rds.logical_wal_cache` manually, by modifying the parameter in your custom DB cluster parameter group\. Note that any positive value less than 32kB is treated as 32kB\. For more information about the `wal_buffers`, see [Write Ahead Log](https://www.postgresql.org/docs/current/runtime-config-wal.html#RUNTIME-CONFIG-WAL-SETTINGS) in the PostgreSQL documentation\. 
+
 ## Managing logical slots for Aurora PostgreSQL<a name="AuroraPostgreSQL.Replication.Logical.Configure.managing-logical-slots"></a>
 
 Streaming activity is captured in the `pg_replication_origin_status` view\. To see the contents of this view, you can use the `pg_show_replication_origin_status()` function, as shown following:
 
 ```
 SELECT * FROM pg_show_replication_origin_status();
-local_id | external_id | remote_lsn | local_lsn
-----------+-------------+------------+-----------
-(0 rows)
 ```
 
 You can get a list of your logical slots by using the following SQL query\.
@@ -115,13 +154,10 @@ You can get a list of your logical slots by using the following SQL query\.
 SELECT * FROM pg_replication_slots;
 ```
 
-To drop a logical slot, use the following command\.
+To drop a logical slot, use the `pg_drop_replication_slot` with the name of the slot, as shown in the following command\.
 
 ```
 SELECT pg_drop_replication_slot('test_slot');
-pg_drop_replication_slot
-–––––––––
-(1 row)
 ```
 
 ## Example: Using logical replication with Aurora PostgreSQL DB clusters<a name="AuroraPostgreSQL.Replication.Logical.PostgreSQL-Example"></a>
@@ -130,7 +166,7 @@ The following procedure shows you how to start logical replication between two A
 
 The Aurora PostgreSQL DB cluster that's the designated publisher must also allow access to the replication slot\. To do so, modify the security group associated with the Aurora PostgreSQL DB cluster 's virtual public cloud \(VPC\) based on the Amazon VPC service\. Allow inbound access by adding the security group associated with the subscriber's VPC to the publisher's security group\. For more information, see [Control traffic to resources using security groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon VPC User Guide*\. 
 
-With these prelimnary steps complete, you can use PostgreSQL commands `CREATE PUBLICATION` on the publisher and the `CREATE SUBSCRIPTION` on the subscriber, as detailed in the following procedure\. 
+With these preliminary steps complete, you can use PostgreSQL commands `CREATE PUBLICATION` on the publisher and the `CREATE SUBSCRIPTION` on the subscriber, as detailed in the following procedure\. 
 
 **To start the logical replication process between two Aurora PostgreSQL DB clusters**
 
@@ -150,7 +186,7 @@ These steps assume that your Aurora PostgreSQL DB clusters have a writer instanc
       INSERT INTO LogicalReplicationTest VALUES (generate_series(1,10000));
       ```
 
-   1. Verify that data exists in the table by using the folling SQL statement\.
+   1. Verify that data exists in the table by using the following SQL statement\.
 
       ```
       SELECT count(*) FROM LogicalReplicationTest;

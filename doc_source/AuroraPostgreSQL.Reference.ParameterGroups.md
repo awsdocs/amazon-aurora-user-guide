@@ -223,6 +223,7 @@ For a listing of the DB instance parameters for this same default DB cluster par
 | idle\_session\_timeout | Terminate any session that has been idle \(that is, waiting for a client query\), but not within an open transaction, for longer than the specified amount of time | –  | 
 | intervalstyle | Sets the display format for interval values\. | –  | 
 | join\_collapse\_limit | Sets the FROM\-list size beyond which JOIN constructs are not flattened\. | –  | 
+| krb\_caseins\_users  | Sets whether GSSAPI \(Generic Security Service API\) user names should be treated case\-insensitively \(true\) or not\. By default, this parameter is set to false, so Kerberos expects user names to be case sensitive\. For more information, see [GSSAPI Authentication](https://www.postgresql.org/docs/current/gssapi-auth.html) in the PostgreSQL documentation\.  | false | 
 | lc\_messages | Sets the language in which messages are displayed\. | –  | 
 | lc\_monetary | Sets the locale for formatting monetary amounts\. | –  | 
 | lc\_numeric | Sets the locale for formatting numbers\. | –  | 

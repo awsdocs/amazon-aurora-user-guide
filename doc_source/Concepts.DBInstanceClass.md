@@ -79,12 +79,12 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.r5 – memory\-optimized instance classes | 
 | db\.r5\.24xlarge | 1\.22 and higher, 2\.06 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
 | db\.r5\.16xlarge | 1\.22 and higher, 2\.06 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
-| db\.r5\.12xlarge | 1\.14\.4 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
+| db\.r5\.12xlarge | 1\.14\.4 and higher, 2\.06 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
 | db\.r5\.8xlarge | 1\.22 and higher, 2\.06 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
-| db\.r5\.4xlarge | 1\.14\.4 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
-| db\.r5\.2xlarge | 1\.14\.4 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
-| db\.r5\.xlarge | 1\.14\.4 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
-| db\.r5\.large | 1\.14\.4 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
+| db\.r5\.4xlarge | 1\.14\.4 and higher, 2\.06 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
+| db\.r5\.2xlarge | 1\.14\.4 and higher, 2\.06 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
+| db\.r5\.xlarge | 1\.14\.4 and higher, 2\.06 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
+| db\.r5\.large | 1\.14\.4 and higher, 2\.06 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
 | db\.r4 – memory\-optimized instance classes | 
 | db\.r4\.16xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | No | 
 | db\.r4\.8xlarge | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | No | 

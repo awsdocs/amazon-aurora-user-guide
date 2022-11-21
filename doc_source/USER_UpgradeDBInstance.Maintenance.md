@@ -231,3 +231,82 @@ For more information about engine updates for Aurora PostgreSQL, see [Amazon Aur
 +  You are waiting for specific performance or feature improvements before you increase your usage of Aurora MySQL\. 
 
  If the preceding factors apply to your situation, you can enable Aurora to apply important upgrades more frequently\. To do so, upgrade an Aurora MySQL DB cluster to a more recent Aurora MySQL version than the LTS version\. Doing so makes the latest performance enhancements, bug fixes, and features available to you more quickly\. 
+
+## Working with operating system updates<a name="OS_Updates"></a>
+
+DB instances in Aurora MySQL and Aurora PostgreSQL DB clusters occasionally require operating system updates\. Amazon RDS upgrades the operating system to a newer version to improve database performance and customers’ overall security posture\. Typically, the updates take about 10 minutes\. Operating system updates don't change the DB engine version or DB instance class of a DB instance\.
+
+We recommend that you update the reader DB instances in a DB cluster first, then the writer DB instance\. We don't recommend updating reader and writer instances at the same time, because you might incur downtime in the event of a failover\.
+
+Operating system updates can be either optional or mandatory\.
++ An **optional update** doesn’t have an apply date and can be applied at any time\. While these updates are optional, we recommend that you apply them periodically to keep your RDS fleet up to date\. RDS *does not* apply these updates automatically\. To be notified when a new optional update becomes available, you can subscribe to [RDS\-EVENT\-0230](USER_Events.Messages.md#RDS-EVENT-0230) in the security patching event category\. For information about subscribing to RDS events, see [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)\.
++ A **mandatory update** is required and has an apply date\. Plan to schedule your update before this date\. After the specified apply date, Amazon RDS automatically upgrades the operating system for your DB instance to the latest version\. The update is performed in a subsequent maintenance window for the DB instance\.
+
+**Note**  
+Staying current on all optional and mandatory updates might be required to meet various compliance obligations\. We recommend that you apply all updates made available by RDS routinely during your maintenance windows\.
+
+You can use the AWS Management Console or the AWS CLI to determine whether an update is optional or mandatory\.
+
+### Console<a name="OS_Updates.CheckMaintenanceStatus.CON"></a>
+
+**To determine whether an update is optional or mandatory using the AWS Management Console**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, and then select the DB instance\.
+
+1. Choose **Maintenance**\.
+
+1. In the **Pending maintenance** section, find the operating system update, and check the **Status** value\.
+
+In the AWS Management Console, an optional update has its maintenance **Status** set to **available** and doesn't have an **Apply date**, as shown in the following image\.
+
+![\[Optional operating system update\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/os-update-optional-aur.png)
+
+A mandatory update has its maintenance **Status** set to **required** and has an **Apply date**, as shown in the following image\.
+
+![\[Required operating system update\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/os-update-required-aur.png)
+
+### AWS CLI<a name="OS_Updates.CheckMaintenanceStatus.CLI"></a>
+
+To determine whether an update is optional or mandatory using the AWS CLI, call the [describe\-pending\-maintenance\-actions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html) command\.
+
+```
+aws rds describe-pending-maintenance-actions
+```
+
+A mandatory operating system update includes an `AutoAppliedAfterDate` value and a `CurrentApplyDate` value\. An optional operating system update doesn't include these values\.
+
+The following output shows a mandatory operating system update\.
+
+```
+{
+  "ResourceIdentifier": "arn:aws:rds:us-east-1:123456789012:db:mydb1",
+  "PendingMaintenanceActionDetails": [
+    {
+      "Action": "system-update",
+      "AutoAppliedAfterDate": "2022-08-31T00:00:00+00:00",
+      "CurrentApplyDate": "2022-08-31T00:00:00+00:00",
+      "Description": "New Operating System update is available"
+    }
+  ]
+}
+```
+
+The following output shows an optional operating system update\.
+
+```
+{
+  "ResourceIdentifier": "arn:aws:rds:us-east-1:123456789012:db:mydb2",
+  "PendingMaintenanceActionDetails": [
+    {
+      "Action": "system-update",
+      "Description": "New Operating System update is available"
+    }
+  ]
+}
+```
+
+### Availability of operating system updates<a name="OS_Updates.Availability"></a>
+
+Operating system updates are specific to DB engine version and DB instance class\. Therefore, DB instances receive or require updates at different times\. When an operating system update is available for your DB instance based on its engine version and instance class, the update appears in the console\. It can also be viewed by running AWS CLI [describe\-pending\-maintenance\-actions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html) command or by calling the RDS [DescribePendingMaintenanceActions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html) API operation\. If an update is available for your instance, you can update your operating system by following the instructions in [Applying updates for a DB cluster](#USER_UpgradeDBInstance.OSUpgrades)\.

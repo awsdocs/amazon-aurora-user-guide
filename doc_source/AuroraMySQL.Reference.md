@@ -86,6 +86,7 @@
 |   `innodb_commit_concurrency`   |   Yes   |    | 
 |   `innodb_data_home_dir`   |   No   |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
 |   `innodb_deadlock_detect`   |  Yes  |  This option is used to disable deadlock detection on Aurora MySQL version 3\. On high\-concurrency systems, deadlock detection can cause a slowdown when numerous threads wait for the same lock\. Consult the MySQL documentation for more information on this parameter\.  | 
+|  `innodb_default_row_format`  | Yes |  This parameter defines the default row format for InnoDB tables \(including user\-created InnoDB temporary tables\)\. It applies to Aurora MySQL versions 2 and 3, but not version 1\. Its value can be `DYNAMIC`, `COMPACT`, or `REDUNDANT.`  | 
 |   `innodb_file_per_table`   |   Yes   |  This parameter affects how table storage is organized\. For more information, see [Storage scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.StorageScaling)\.  | 
 |  `innodb_flush_log_at_trx_commit`  |  Aurora MySQL version 1 and 2: Yes Aurora MySQL version 3: No  |  For Aurora MySQL version 1 and 2, we highly recommend that you use the default value of 1\. For Aurora MySQL version 3, Aurora always uses the default value of 1\. For more information, see [Configuring how frequently the log buffer is flushed](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.Flush)\.  | 
 |   `innodb_ft_max_token_size`   |   Yes   |    | 
@@ -457,7 +458,6 @@ The following MySQL parameters don't apply to Aurora MySQL\. This list is not ex
 + `innodb_data_file_path`
 + `innodb_deadlock_detect` – This parameter doesn't apply to Aurora MySQL version 1 and 2\. It is available in Aurora MySQL version 3\.
 + `innodb_dedicated_server`
-+ `innodb_default_row_format`
 + `innodb_doublewrite`
 + `innodb_flush_log_at_timeout` – This parameter doesn't apply to Aurora MySQL\. For more information, see [Configuring how frequently the log buffer is flushed](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.Flush)\.
 + `innodb_flush_method`

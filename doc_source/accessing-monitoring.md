@@ -43,7 +43,7 @@ In the Amazon RDS console, you can see details about a DB cluster by choosing **
 
      For example, if you choose the `dbinstance4` DB instance identifier, the console shows the details page for the `dbinstance4` DB instance, as shown in the following image\.  
 ![\[Amazon Aurora DB Instance View\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraView02.png)
-   + To modify a DB instance, choose the DB instance from the list and choose **Modify**\. For more information about modifying a DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.  
+   + To modify a DB instance, choose the DB instance from the list and choose **Modify**\. For more information about modifying a DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\. 
 
 ### AWS CLI<a name="Aurora.Viewing.CLI"></a>
 
@@ -148,72 +148,7 @@ The command returns the following output if your AWS CLI is configured for JSON 
 
 ### RDS API<a name="Aurora.Viewing.API"></a>
 
-To view DB cluster information using the Amazon RDS API, use the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) operation\. For example, the following Amazon RDS API command lists the DB cluster information for all of the DB clusters in the `us-east-1` region\.
-
-```
-https://rds.us-east-1.amazonaws.com/
-    ?Action=DescribeDBClusters
-    &MaxRecords=100
-    &SignatureMethod=HmacSHA256
-    &SignatureVersion=4
-    &Version=2014-10-31
-    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-    &X-Amz-Credential=AKIADQKE4SARGYLE/20140722/us-east-1/rds/aws4_request
-    &X-Amz-Date=20140722T200807Z
-    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-    &X-Amz-Signature=2d4f2b9e8abc31122b5546f94c0499bba47de813cb875f9b9c78e8e19c9afe1b
-```
-
-The action returns the following output:
-
-```
-<DescribeDBClustersResponse xmlns="http://rds.amazonaws.com/doc/2014-10-31/">
-  <DescribeDBClustersResult>
-    <DBClusters>
-      <DBCluster>
-        <Engine>aurora5.6</Engine>
-        <Status>available</Status>
-        <BackupRetentionPeriod>0</BackupRetentionPeriod>
-        <DBSubnetGroup>my-subgroup</DBSubnetGroup>
-        <EngineVersion>5.6.10a</EngineVersion>
-        <Endpoint>sample-cluster2.cluster-cbfvmgb0y5fy.us-east-1.rds.amazonaws.com</Endpoint>
-        <DBClusterIdentifier>sample-cluster2</DBClusterIdentifier>
-        <PreferredBackupWindow>04:45-05:15</PreferredBackupWindow>
-        <PreferredMaintenanceWindow>sat:05:56-sat:06:26</PreferredMaintenanceWindow>
-        <DBClusterMembers/>
-        <AllocatedStorage>15</AllocatedStorage>
-        <MasterUsername>awsuser</MasterUsername>
-      </DBCluster>
-      <DBCluster>
-        <Engine>aurora5.6</Engine>
-        <Status>available</Status>
-        <BackupRetentionPeriod>0</BackupRetentionPeriod>
-        <DBSubnetGroup>my-subgroup</DBSubnetGroup>
-        <EngineVersion>5.6.10a</EngineVersion>
-        <Endpoint>sample-cluster3.cluster-cefgqfx9y5fy.us-east-1.rds.amazonaws.com</Endpoint>
-        <DBClusterIdentifier>sample-cluster3</DBClusterIdentifier>
-        <PreferredBackupWindow>07:06-07:36</PreferredBackupWindow>
-        <PreferredMaintenanceWindow>tue:10:18-tue:10:48</PreferredMaintenanceWindow>
-        <DBClusterMembers>
-          <DBClusterMember>
-            <IsClusterWriter>true</IsClusterWriter>
-            <DBInstanceIdentifier>sample-cluster3-master</DBInstanceIdentifier>
-          </DBClusterMember>
-          <DBClusterMember>
-            <IsClusterWriter>false</IsClusterWriter>
-            <DBInstanceIdentifier>sample-cluster3-read1</DBInstanceIdentifier>
-          </DBClusterMember>
-        </DBClusterMembers>
-        <AllocatedStorage>15</AllocatedStorage>
-        <MasterUsername>awsuser</MasterUsername>
-      </DBCluster>
-    </DBClusters>
-  </DescribeDBClustersResult>
-  <ResponseMetadata>
-    <RequestId>d682b02c-1383-11b4-a6bb-172dfac7f170</RequestId>
-  </ResponseMetadata>
-</DescribeDBClustersResponse>
-```
+To view DB cluster information using the Amazon RDS API, use the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) operation\.
 
 ## Viewing DB cluster status<a name="Aurora.Status"></a>
 
@@ -221,6 +156,8 @@ The status of a DB cluster indicates its health\. You can view the status of a D
 
 **Note**  
 Aurora also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB cluster\. Maintenance status is independent of DB cluster status\. For more information about maintenance status, see [Applying updates for a DB cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\.
+
+### Console<a name="DBcluster.Status.Console"></a>
 
 **To view the status of a DB cluster**
 
@@ -259,12 +196,22 @@ Find the possible status values for DB clusters in the following table\.
 | update\-iam\-db\-auth | Billed |  IAM authorization for the DB cluster is being updated\.  | 
 | upgrading | Billed |  The DB cluster engine version is being upgraded\.  | 
 
+### CLI<a name="DBcluster.Status.Cli"></a>
+
+To view just the status of the DB clusters, use the following query in AWS CLI\.
+
+```
+aws rds describe-db-clusters --query 'DBClusters[*].[DBClusterIdentifier,Status]' --output table
+```
+
 ## Viewing DB instance status in an Aurora cluster<a name="Overview.DBInstance.Status"></a>
 
-The status of a DB instance in an Aurora cluster indicates the health of the DB instance\. You can view the status of a DB instance in a cluster by using the Amazon RDS console, the AWS CLI command [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html), or the API operation [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\.
+The status of a DB instance in an Aurora cluster indicates the health of the DB instance\. You can use the following procedures to view the DB instance status of a cluster in the Amazon RDS console, the AWS CLI command, or the API operation\.
 
 **Note**  
 Amazon RDS also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB instance\. Maintenance status is independent of DB instance status\. For more information about maintenance status, see [Applying updates for a DB cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\. 
+
+### Console<a name="DBinstance.Status.Console"></a>
 
 **To view the status of a DB instance**
 
@@ -310,6 +257,31 @@ Find the possible status values for DB instances in the following table\. This t
 |  **Storage\-full**  | Billed |  The DB instance has reached its storage capacity allocation\. This is a critical status, and we recommend that you fix this issue immediately\. To do so, scale up your storage by modifying the DB instance\. To avoid this situation, set Amazon CloudWatch alarms to warn you when storage space is getting low\.   | 
 |  **Storage\-optimization**  | Billed |  Amazon RDS is optimizing the storage of your DB instance\. The DB instance is fully operational\. The storage optimization process is usually short, but can sometimes take up to and even beyond 24 hours\.  | 
 |  **Upgrading**  | Billed |  The database engine version is being upgraded\.   | 
+
+### CLI<a name="DBinstance.Status.Cli"></a>
+
+To view DB instance and its status information by using the AWS CLI, use the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command\. For example, the following AWS CLI command lists all the DB instances information \.
+
+```
+aws rds describe-db-instances
+```
+
+To view a specific DB instance and its status, call the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command with the following option:
++ `DBInstanceIdentifier` – The name of the DB instance\. 
+
+```
+aws rds describe-db-instances --db-instance-identifier mydbinstance
+```
+
+To view just the status of all the DB instances, use the following query in AWS CLI\.
+
+```
+aws rds describe-db-instances --query 'DBInstances[*].[DBInstanceIdentifier,DBInstanceStatus]' --output table
+```
+
+### API<a name="DBinstance.Status.Api"></a>
+
+To view the status of the DB instance using the Amazon RDS API, call the [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation\.
 
 ## Viewing Amazon Aurora recommendations<a name="USER_Recommendations"></a>
 

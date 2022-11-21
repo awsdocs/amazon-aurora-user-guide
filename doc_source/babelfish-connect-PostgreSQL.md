@@ -4,6 +4,8 @@ You can use a PostgreSQL client to connect to Babelfish on the PostgreSQL port\.
 
 ## Using psql to connect to the DB cluster<a name="babelfish-connect-psql"></a>
 
+You can download the platform\-specific version of your PostgreSQL client from the [PostgreSQL website](https://www.postgresql.org/download/)\. Follow the instructions for your platform to install psql\.
+
 You can query an Aurora PostgreSQL DB cluster that supports Babelfish with the `psql` command line client\. When connecting, use the PostgreSQL port \(by default, port 5432\)\. Typically, you don't need to specify the port number unless you changed it from the default\. Use the following command to connect to Babelfish from the `psql` client:
 
 ```

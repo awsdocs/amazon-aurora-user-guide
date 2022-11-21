@@ -158,7 +158,7 @@ The following JSON schema describes the format and content of a manifest file\.
                 "id": "/properties/entries/items",
                 "properties": {
                     "mandatory": {
-                        "default": "false"
+                        "default": "false",
                         "id": "/properties/entries/items/properties/mandatory",
                         "type": "boolean"
                     },

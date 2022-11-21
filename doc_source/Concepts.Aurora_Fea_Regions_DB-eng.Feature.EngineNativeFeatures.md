@@ -11,8 +11,8 @@ Aurora database engines also support additional features and functionality speci
 Following are the engine\-native features for Aurora MySQL\.
 + [Advanced Auditing](AuroraMySQL.Auditing.md)
 + [Backtrack](AuroraMySQL.Managing.Backtrack.md)
-+ [Fault Injection Queries](AuroraMySQL.Managing.FaultInjectionQueries.md)
-+ [Parallel Query](aurora-mysql-parallel-query.md#aurora-mysql-parallel-query-planning)
++ [Fault injection queries](AuroraMySQL.Managing.FaultInjectionQueries.md)
++ [Parallel query](aurora-mysql-parallel-query.md#aurora-mysql-parallel-query-planning)
 
 ## Engine\-native features for Aurora PostgreSQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.EngineNativeFeatures.apg"></a>
 

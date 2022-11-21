@@ -39,7 +39,9 @@ Following are the supported engines and Region availability for database activit
 | Europe \(London\) | – | Aurora version 2\.08 and higher | – | 
 | Europe \(Milan\) | – | Aurora version 2\.08 and higher | – | 
 | Europe \(Paris\) | – | Aurora version 2\.08 and higher | – | 
+| Europe \(Spain\) | – | – | – | 
 | Europe \(Stockholm\) | – | Aurora version 2\.08 and higher | – | 
+| Europe \(Zurich\) | – | – | – | 
 | Middle East \(Bahrain\) | – | Aurora version 2\.08 and higher | – | 
 | Middle East \(UAE\) | – | – | – | 
 | South America \(São Paulo\) | – | Aurora version 2\.08 and higher | – | 
@@ -74,7 +76,9 @@ Following are the supported engines and Region availability for database activit
 | Europe \(London\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
 | Europe \(Milan\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
 | Europe \(Paris\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
+| Europe \(Spain\) | – | – | – | – | – | 
 | Europe \(Stockholm\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
+| Europe \(Zurich\) | – | – | – | – | – | 
 | Middle East \(Bahrain\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
 | Middle East \(UAE\) | – | – | – | – | – | 
 | South America \(São Paulo\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 

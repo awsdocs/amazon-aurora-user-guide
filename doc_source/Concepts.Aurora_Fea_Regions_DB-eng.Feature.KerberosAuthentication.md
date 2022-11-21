@@ -38,7 +38,9 @@ Following are the supported engines and Region availability for Kerberos Authent
 | Europe \(London\) | All versions | All versions | All versions | All versions | All versions | 
 | Europe \(Milan\) | – | – | – | – | – | 
 | Europe \(Paris\) | All versions | All versions | All versions | All versions | All versions | 
+| Europe \(Spain\) | – | – | – | – | – | 
 | Europe \(Stockholm\) | All versions | All versions | All versions | All versions | All versions | 
+| Europe \(Zurich\) | – | – | – | – | – | 
 | Middle East \(Bahrain\) | – | – | – | – | – | 
 | Middle East \(UAE\) | – | – | – | – | – | 
 | South America \(São Paulo\) | All versions | All versions | All versions | All versions | All versions | 
