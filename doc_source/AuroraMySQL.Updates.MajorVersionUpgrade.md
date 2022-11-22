@@ -50,7 +50,7 @@ To make sure that your applications and administration procedures work smoothly 
 
 To learn the sorts of issues that you might encounter during the upgrade, see [Troubleshooting for Aurora MySQL in\-place upgrade](#AuroraMySQL.Upgrading.Troubleshooting)\. For issues that might cause the upgrade to take a long time, you can test those conditions in advance and correct them\.
 
-You can check application compatibility, performance, maintenance procedures, and similar considerations for the upgraded cluster\. To do so, you can perform a simulation of the upgrade before doing the real upgrade\. This technique can be especially useful for production clusters\. Here, it's important to minimize downtime and have the upgraded cluster ready to go as soon as the upgrade as finished\.
+You can check application compatibility, performance, maintenance procedures, and similar considerations for the upgraded cluster\. To do so, you can perform a simulation of the upgrade before doing the real upgrade\. This technique can be especially useful for production clusters\. Here, it's important to minimize downtime and have the upgraded cluster ready to go as soon as the upgrade has finished\.
 
 Use the following steps:
 
