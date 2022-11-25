@@ -19,6 +19,7 @@ Following are the supported engines and Region availability for Aurora global da
 | US West \(Oregon\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | Version 5\.6\.10a; version 1\.22 and higher | 
 | Africa \(Cape Town\) | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | 
 | Asia Pacific \(Mumbai\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | Version 5\.6\.10a; version 1\.22 and higher | 
 | Asia Pacific \(Osaka\) | Version 3\.01\.0 and higher | Version 2\.07\.3 and higher | Version 1\.22\.3 and higher | 
@@ -56,6 +57,7 @@ Following are the supported engines and Region availability for Aurora global da
 | US West \(Oregon\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
 | Africa \(Cape Town\) | – | – | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | – | – | 
 | Asia Pacific \(Mumbai\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
 | Asia Pacific \(Osaka\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 

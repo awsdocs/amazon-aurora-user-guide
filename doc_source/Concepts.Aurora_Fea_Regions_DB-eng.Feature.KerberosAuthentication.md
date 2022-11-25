@@ -23,6 +23,7 @@ Following are the supported engines and Region availability for Kerberos Authent
 | US West \(Oregon\) | All versions | All versions | All versions | All versions | All versions | 
 | Africa \(Cape Town\) | – | – | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | – | – | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | – | – | – | – | – | 

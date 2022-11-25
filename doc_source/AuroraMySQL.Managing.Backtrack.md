@@ -56,6 +56,7 @@ Following are the supported engines and Region availability for backtrack with A
 | US West \(Oregon\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
 | Africa \(Cape Town\) | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | 
 | Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
 | Asia Pacific \(Osaka\) | Version 1\.22 and higher | Version 2\.07\.3 and higher | – | 

@@ -34,7 +34,7 @@
 
 ### Cluster\-level parameters<a name="AuroraMySQL.Reference.Parameters.Cluster"></a><a name="cluster_params"></a><a name="params"></a>
 
- The following table shows all of the parameters that apply to the entire Aurora MySQL DB cluster\. 
+The following table shows all of the parameters that apply to the entire Aurora MySQL DB cluster\.
 
 
 |  Parameter name  |  Modifiable  |  Notes  | 
@@ -47,6 +47,7 @@
 |  `aurora_enable_staggered_replica_restart`  |  Yes  | This setting is available in Aurora MySQL versions 1 and 3, but it isn't used\. | 
 |   `aurora_enable_zdr`   |   Yes   |   This setting is turned on by default in Aurora MySQL 2\.10 and higher\. For more information, see [Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Availability)\.   | 
 |   `aurora_load_from_s3_role`   |   Yes   |   For more information, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\. Currently not available in Aurora MySQL version 3\. Use `aws_default_s3_role`\.  | 
+|  `aurora_mask_password_hashes_type`  |  Yes  |  This setting is turned on by default in Aurora MySQL 2\.11 and higher\. Use this setting to mask Aurora MySQL password hashes in the general, slow query, and audit logs\. The allowed values are `0` and `1` \(default\)\. When set to `1`, passwords are logged as `<secret>`\. When set to `0`, passwords are logged as hash \(`#`\) values\.  | 
 |   `aurora_select_into_s3_role`   |   Yes   |   For more information, see [Saving data from an Amazon Aurora MySQL DB cluster into text files in an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\. Currently not available in Aurora MySQL version 3\. Use `aws_default_s3_role`\.  | 
 |   `auto_increment_increment`   |   Yes   |    | 
 |   `auto_increment_offset`   |   Yes   |    | 
@@ -150,7 +151,7 @@
 |   `activate_all_roles_on_login`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
 |   `allow-suspicious-udfs`   |   No   |    | 
 |   `aurora_lab_mode`   |   Yes   |   For more information, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\. Removed from Aurora MySQL version 3\.   | 
-|   `aurora_oom_response`   |   Yes   |  This parameter is supported for Aurora MySQL version 1\.18 and higher, and version 2\.04\.5 and higher\. It isn't supported for version 3\. For more information, see [ Amazon Aurora MySQL out of memory issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.  | 
+|   `aurora_oom_response`   |   Yes   |  This parameter is supported for Aurora MySQL version 1\.18 and higher, and version 2\.04\.5 and higher\. It isn't supported for version 3\. For more information, see [ Amazon Aurora MySQL out\-of\-memory issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.  | 
 |   `aurora_parallel_query`   |   Yes   |  Set to `ON` to turn on parallel query in Aurora MySQL versions 1\.23 and 2\.09 or higher\. The old `aurora_pq` parameter isn't used in these versions\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
 |   `aurora_pq`   |   Yes   |  Set to `OFF` to turn off parallel query for specific DB instances in Aurora MySQL versions before 1\.23 and 2\.09\. In 1\.23 and 2\.09 or higher, turn parallel query on and off with `aurora_parallel_query` instead\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
 |   `autocommit`   |   Yes   |    | 

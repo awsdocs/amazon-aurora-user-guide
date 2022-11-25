@@ -157,6 +157,34 @@ The status of a DB cluster indicates its health\. You can view the status of a D
 **Note**  
 Aurora also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB cluster\. Maintenance status is independent of DB cluster status\. For more information about maintenance status, see [Applying updates for a DB cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\.
 
+Find the possible status values for DB clusters in the following table\.
+
+
+| DB cluster status | Billed | Description | 
+| --- | --- | --- | 
+| Available | Billed |  The DB cluster is healthy and available\. When an Aurora Serverless cluster is available and paused, you're billed for storage only\.  | 
+| Backing\-up | Billed |  The DB cluster is currently being backed up\.  | 
+| Backtracking | Billed |  The DB cluster is currently being backtracked\. This status only applies to Aurora MySQL\.  | 
+| Cloning\-failed | Not billed |  Cloning a DB cluster failed\.  | 
+| Creating | Not billed |  The DB cluster is being created\. The DB cluster is inaccessible while it is being created\.  | 
+| Deleting | Not billed |  The DB cluster is being deleted\.  | 
+| Failing\-over | Billed |  A failover from the primary instance to an Aurora Replica is being performed\.  | 
+| Inaccessible\-encryption\-credentials | Not billed |  The AWS KMS key used to encrypt or decrypt the DB cluster can't be accessed or recovered\.  | 
+|  **Inaccessible\-encryption\-credentials\-recoverable**  | Billed for storage |  The KMS key used to encrypt or decrypt the DB cluster can't be accessed\. However, if the KMS key is active, restarting the DB cluster can recover it\. For more information, see [Encrypting an Amazon Aurora DB cluster](Overview.Encryption.md#Overview.Encryption.Enabling)\.  | 
+| Maintenance | Billed |  Amazon RDS is applying a maintenance update to the DB cluster\. This status is used for DB cluster\-level maintenance that RDS schedules well in advance\.  | 
+| Migrating | Billed |  A DB cluster snapshot is being restored to a DB cluster\.  | 
+| Migration\-failed | Not billed |  A migration failed\.  | 
+| Modifying | Billed |  The DB cluster is being modified because of a customer request to modify the DB cluster\.  | 
+| Promoting | Billed |  A read replica is being promoted to a standalone DB cluster\.  | 
+| Renaming | Billed |  The DB cluster is being renamed because of a customer request to rename it\.  | 
+| Resetting\-master\-credentials | Billed |  The master credentials for the DB cluster are being reset because of a customer request to reset them\.  | 
+| Starting | Billed for storage |  The DB cluster is starting\.  | 
+| Stopped | Billed for storage |  The DB cluster is stopped\.  | 
+| Stopping | Billed for storage |  The DB cluster is being stopped\.  | 
+| Storage\-optimization | Billed |  Your DB instance is being modified to change the storage size or type\. The DB instance is fully operational\. However, while the status of your DB instance is **storage\-optimization**, you can't request any changes to the storage of your DB instance\. The storage optimization process is usually short, but can sometimes take up to and even beyond 24 hours\.  | 
+| Update\-iam\-db\-auth | Billed |  IAM authorization for the DB cluster is being updated\.  | 
+| Upgrading | Billed |  The DB cluster engine version is being upgraded\.  | 
+
 ### Console<a name="DBcluster.Status.Console"></a>
 
 **To view the status of a DB cluster**
@@ -167,34 +195,6 @@ Aurora also uses another status called *maintenance status*, which is shown in t
 
    The **Databases page** appears with the list of DB clusters\. For each DB cluster, the status value is displayed\.  
 ![\[Viewing the status of a DB cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Aurora_cluster_status.png)
-
-Find the possible status values for DB clusters in the following table\.
-
-
-| DB cluster status | Billed | Description | 
-| --- | --- | --- | 
-| available | Billed |  The DB cluster is healthy and available\. When an Aurora Serverless cluster is available and paused, you're billed for storage only\.  | 
-| backing\-up | Billed |  The DB cluster is currently being backed up\.  | 
-| backtracking | Billed |  The DB cluster is currently being backtracked\. This status only applies to Aurora MySQL\.  | 
-| cloning\-failed | Not billed |  Cloning a DB cluster failed\.  | 
-| creating | Not billed |  The DB cluster is being created\. The DB cluster is inaccessible while it is being created\.  | 
-| deleting | Not billed |  The DB cluster is being deleted\.  | 
-| failing\-over | Billed |  A failover from the primary instance to an Aurora Replica is being performed\.  | 
-| inaccessible\-encryption\-credentials | Not billed |  The AWS KMS key used to encrypt or decrypt the DB cluster can't be accessed or recovered\.  | 
-|  **inaccessible\-encryption\-credentials\-recoverable**  | Billed for storage |  The KMS key used to encrypt or decrypt the DB cluster can't be accessed\. However, if the KMS key is active, restarting the DB cluster can recover it\. For more information, see [Encrypting an Amazon Aurora DB cluster](Overview.Encryption.md#Overview.Encryption.Enabling)\.  | 
-| maintenance | Billed |  Amazon RDS is applying a maintenance update to the DB cluster\. This status is used for DB cluster\-level maintenance that RDS schedules well in advance\.  | 
-| migrating | Billed |  A DB cluster snapshot is being restored to a DB cluster\.  | 
-| migration\-failed | Not billed |  A migration failed\.  | 
-| modifying | Billed |  The DB cluster is being modified because of a customer request to modify the DB cluster\.  | 
-| promoting | Billed |  A read replica is being promoted to a standalone DB cluster\.  | 
-| renaming | Billed |  The DB cluster is being renamed because of a customer request to rename it\.  | 
-| resetting\-master\-credentials | Billed |  The master credentials for the DB cluster are being reset because of a customer request to reset them\.  | 
-| starting | Billed for storage |  The DB cluster is starting\.  | 
-| stopped | Billed for storage |  The DB cluster is stopped\.  | 
-| stopping | Billed for storage |  The DB cluster is being stopped\.  | 
-| storage\-optimization | Billed |  Your DB instance is being modified to change the storage size or type\. The DB instance is fully operational\. However, while the status of your DB instance is **storage\-optimization**, you can't request any changes to the storage of your DB instance\. The storage optimization process is usually short, but can sometimes take up to and even beyond 24 hours\.  | 
-| update\-iam\-db\-auth | Billed |  IAM authorization for the DB cluster is being updated\.  | 
-| upgrading | Billed |  The DB cluster engine version is being upgraded\.  | 
 
 ### CLI<a name="DBcluster.Status.Cli"></a>
 
@@ -210,17 +210,6 @@ The status of a DB instance in an Aurora cluster indicates the health of the DB 
 
 **Note**  
 Amazon RDS also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB instance\. Maintenance status is independent of DB instance status\. For more information about maintenance status, see [Applying updates for a DB cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\. 
-
-### Console<a name="DBinstance.Status.Console"></a>
-
-**To view the status of a DB instance**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the navigation pane, choose **Databases**\.
-
-   The **Databases page** appears with the list of DB instances\. For each DB instance in a cluster, the status value is displayed\.   
-![\[View the status of a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Aurora_instance_status.png)
 
 Find the possible status values for DB instances in the following table\. This table also shows whether you will be billed for the DB instance and storage, billed only for storage, or not billed\. For all DB instance statuses, you are always billed for backup usage\.
 
@@ -257,6 +246,17 @@ Find the possible status values for DB instances in the following table\. This t
 |  **Storage\-full**  | Billed |  The DB instance has reached its storage capacity allocation\. This is a critical status, and we recommend that you fix this issue immediately\. To do so, scale up your storage by modifying the DB instance\. To avoid this situation, set Amazon CloudWatch alarms to warn you when storage space is getting low\.   | 
 |  **Storage\-optimization**  | Billed |  Amazon RDS is optimizing the storage of your DB instance\. The DB instance is fully operational\. The storage optimization process is usually short, but can sometimes take up to and even beyond 24 hours\.  | 
 |  **Upgrading**  | Billed |  The database engine version is being upgraded\.   | 
+
+### Console<a name="DBinstance.Status.Console"></a>
+
+**To view the status of a DB instance**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+   The **Databases page** appears with the list of DB instances\. For each DB instance in a cluster, the status value is displayed\.   
+![\[View the status of a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Aurora_instance_status.png)
 
 ### CLI<a name="DBinstance.Status.Cli"></a>
 

@@ -11,6 +11,7 @@ You can filter new Amazon Aurora features on the [What's New with Database?](htt
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Amazon Aurora is available in the Asia Pacific \(Hyderabad\) Region](#WhatsNew) | Aurora is now available in the Asia Pacific \(Hyderabad\) Region\. For more information, see [Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html)\. | November 22, 2022 | 
 | [Amazon Aurora is available in the Europe \(Spain\) Region](#WhatsNew) | Aurora is now available in the Europe \(Spain\) Region\. For more information, see [Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html)\. | November 16, 2022 | 
 | [Amazon Aurora available in the Europe \(Zurich\) Region](#WhatsNew) | Aurora is now available in the Europe \(Zurich\) Region\. For more information, see [Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html)\. | November 9, 2022 | 
 | [Amazon Aurora supports exporting data to Amazon S3 from DB clusters](#WhatsNew) | You can now export Aurora cluster data directly to S3, without having to create a snapshot first\. For more information, see [Exporting DB cluster data to Amazon S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/export-cluster-data.html)\. | October 27, 2022 | 

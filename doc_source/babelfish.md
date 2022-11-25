@@ -7,8 +7,8 @@ Babelfish provides an additional endpoint for an Aurora PostgreSQL database clus
 **Note**  
 Babelfish for Aurora PostgreSQL supports TDS versions 7\.1 through 7\.4\.
 
-Babelfish also provides access to data using the native PostgreSQL connection\. By default, both SQL dialects supported by Babelfish are available through their native wire protocols at the following ports: 
-+ SQL Server dialect \(T\-SQL\), clients connect to port 1433\. 
+Babelfish also provides access to data using the PostgreSQL connection\. By default, both SQL dialects supported by Babelfish are available through their native wire protocols at the following ports: 
++ SQL Server dialect \(T\-SQL\), clients connect to port 1433\.
 + PostgreSQL dialect \(PL/pgSQL\), clients connect to port 5432\.
 
 Babelfish runs the Transact\-SQL \(T\-SQL\) language with some differences\. For more information, see [Differences between Babelfish for Aurora PostgreSQL and SQL Server](babelfish-compatibility.md)\. 

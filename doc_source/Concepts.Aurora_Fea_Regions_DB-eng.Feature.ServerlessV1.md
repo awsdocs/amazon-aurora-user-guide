@@ -19,6 +19,7 @@ Following are the supported engines and Region availability for Aurora Serverles
 | US West \(Oregon\) | – | Version 2\.08\.3 | Version 1\.22\.3 | 
 | Africa \(Cape Town\) | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | 
 | Asia Pacific \(Mumbai\) | – | Version 2\.08\.3 | Version 1\.22\.3 | 
 | Asia Pacific \(Osaka\) | – | – | – | 
@@ -56,6 +57,7 @@ Following are the supported engines and Region availability for Aurora Serverles
 | US West \(Oregon\) | Version 11\.13 | Version 10\.18 | 
 | Africa \(Cape Town\) | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | 
 | Asia Pacific \(Mumbai\) | Version 11\.13 | Version 10\.18 | 
 | Asia Pacific \(Osaka\) | – | – | 

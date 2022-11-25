@@ -3,6 +3,7 @@
 The `apg_plan_mgmt` extension provides the following functions\.
 
 **Topics**
++ [apg\_plan\_mgmt\.copy\_outline](#AuroraPostgreSQL.Optimize.Functions.copy_outline)
 + [apg\_plan\_mgmt\.delete\_plan](#AuroraPostgreSQL.Optimize.Functions.delete_plan)
 + [apg\_plan\_mgmt\.evolve\_plan\_baselines](#AuroraPostgreSQL.Optimize.Functions.evolve_plan_baselines)
 + [apg\_plan\_mgmt\.get\_explain\_plan](#AuroraPostgreSQL.Optimize.Functions.get_explain_plan)
@@ -12,6 +13,40 @@ The `apg_plan_mgmt` extension provides the following functions\.
 + [apg\_plan\_mgmt\.set\_plan\_status](#AuroraPostgreSQL.Optimize.Functions.set_plan_status)
 + [apg\_plan\_mgmt\.update\_plans\_last\_used](#AuroraPostgreSQL.Optimize.Functions.update_plans_last_used)
 + [apg\_plan\_mgmt\.validate\_plans](#AuroraPostgreSQL.Optimize.Functions.validate_plans)
+
+## apg\_plan\_mgmt\.copy\_outline<a name="AuroraPostgreSQL.Optimize.Functions.copy_outline"></a>
+
+Copy a given SQL plan hash and plan outline to a target SQL plan hash and outline, thereby overwriting the target's plan hash and outline\. This function is available in `apg_plan_mgmt` 2\.3 and higher releases\. 
+
+**Syntax**
+
+```
+apg_plan_mgmt.copy_outline(
+    source_sql_hash,
+    source_plan_hash,
+    target_sql_hash,
+    target_plan_hash
+)
+```
+
+**Return value**  
+Returns 0 when the copy is successful\. Raises exceptions for invalid inputs\.
+
+**Parameters**
+
+
+****  
+
+| Parameter | Description | 
+| --- | --- | 
+| source\_sql\_hash  | The sql\_hash ID associated with the plan\_hash to copy to the target query\. | 
+| source\_plan\_hash  | The plan\_hash ID to copy to the target query\. | 
+| target\_sql\_hash | The sql\_hash ID of the query to update with the source plan hash and outline\. | 
+| target\_plan\_hash | The plan\_hash ID of the query to update with the source plan hash and outline\. | 
+
+**Usage notes**
+
+This function allows you to copy a plan hash and plan outline that uses hints to other, similar statements, and thus saves you from needing to use in\-line hint statements at every occurrence in the target statements\. If the updated target query results in an invalid plan, this function raises an error and rolls back the attempted update\. 
 
 ## apg\_plan\_mgmt\.delete\_plan<a name="AuroraPostgreSQL.Optimize.Functions.delete_plan"></a>
 

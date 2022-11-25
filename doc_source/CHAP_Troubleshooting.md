@@ -9,7 +9,7 @@ Use the following sections to help troubleshoot problems you have with DB instan
 + [Amazon RDS DB instance outage or reboot](#CHAP_Troubleshooting.Reboots)
 + [Amazon RDS DB parameter changes not taking effect](#CHAP_Troubleshooting.Parameters)
 + [Freeable memory issues in Amazon Aurora](#Troubleshooting.FreeableMemory)
-+ [Amazon Aurora MySQL out of memory issues](#CHAP_Troubleshooting.AuroraMySQLOOM)
++ [Amazon Aurora MySQL out\-of\-memory issues](#CHAP_Troubleshooting.AuroraMySQLOOM)
 + [Amazon Aurora MySQL replication issues](#CHAP_Troubleshooting.MySQL)
 
  For information about debugging problems using the Amazon RDS API, see [Troubleshooting applications on Aurora](APITroubleshooting.md)\. 
@@ -155,9 +155,9 @@ If this metric approaches a value of `0`, the DB instance has scaled up as much 
 
 For Aurora Serverless v1, you can change the capacity range to use more ACUs\. For more information, see [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\.
 
-## Amazon Aurora MySQL out of memory issues<a name="CHAP_Troubleshooting.AuroraMySQLOOM"></a>
+## Amazon Aurora MySQL out\-of\-memory issues<a name="CHAP_Troubleshooting.AuroraMySQLOOM"></a>
 
-The Aurora MySQL `aurora_oom_response` instance\-level parameter can enable the DB instance to monitor the system memory and estimate the memory consumed by various statements and connections\. If the system runs low on memory, it can perform a list of actions to release that memory\. It does so in an attempt to avoid out\-of\-memory \(OOM\) and database restart\. The instance\-level parameter takes a string of comma\-separated actions that a DB instance should take when its memory is low\. Valid actions include `print`, `tune`, `decline`, `kill_query`, or any combination of these\. An empty string means that no action should be taken and effectively disables the feature\.
+The Aurora MySQL `aurora_oom_response` instance\-level parameter can enable the DB instance to monitor the system memory and estimate the memory consumed by various statements and connections\. If the system runs low on memory, it can perform a list of actions to release that memory\. It does so in an attempt to avoid out\-of\-memory \(OOM\) and database restart\. The instance\-level parameter takes a string of comma\-separated actions that a DB instance should take when its memory is low\. Valid actions include `print`, `tune`, `decline`, `kill_query`, or any combination of these\. An empty string means that no action should be taken and effectively turns off the feature\.
 
 **Note**  
 This parameter is supported for Aurora MySQL version 1\.18 and higher, and version 2\.04\.5 and higher\. It isn't supported for version 3\.
@@ -165,6 +165,8 @@ This parameter is supported for Aurora MySQL version 1\.18 and higher, and versi
 The following are usage examples for the `aurora_oom_response` parameter:
 + `print` – Only prints the queries taking high amount of memory\.
 + `tune` – Tunes the internal table caches to release some memory back to the system\.
+
+  Aurora MySQL decreases the memory used for caches such as `table_open_cache`, `table_def_cache`, and `query_cache` in low\-memory conditions\. Eventually, Aurora MySQL sets their memory usage back to normal when the system is no longer low on memory\.
 + `decline` – Declines new queries once the instance is low on memory\.
 + `kill_query` – Ends the queries in descending order of memory consumption until the instance memory surfaces above the low threshold\. Data definition language \(DDL\) statements aren't ended\.
 + `print, tune` – Performs actions described for both `print` and `tune`\.

@@ -24,6 +24,7 @@ Following are the supported engines and Region availability for database activit
 | US West \(Oregon\) | – | Aurora version 2\.08 and higher | – | 
 | Africa \(Cape Town\) | – | Aurora version 2\.08 and higher | – | 
 | Asia Pacific \(Hong Kong\) | – | Aurora version 2\.08 and higher | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | Aurora version 2\.08 and higher | – | 
 | Asia Pacific \(Mumbai\) | – | Aurora version 2\.08 and higher | – | 
 | Asia Pacific \(Osaka\) | – | Aurora version 2\.08 and higher | – | 
@@ -61,6 +62,7 @@ Following are the supported engines and Region availability for database activit
 | US West \(Oregon\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
 | Africa \(Cape Town\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
 | Asia Pacific \(Hong Kong\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
+| Asia Pacific \(Hyderabad\) | – | – | – | – | – | 
 | Asia Pacific \(Jakarta\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
 | Asia Pacific \(Osaka\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
