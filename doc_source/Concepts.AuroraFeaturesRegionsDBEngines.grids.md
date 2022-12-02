@@ -6,6 +6,7 @@ Some of these features are Aurora\-only capabilities\. For example, Aurora Serve
 
 **Topics**
 + [Table conventions](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.TableConventions)
++ [Blue/Green Deployments](Concepts.Aurora_Fea_Regions_DB-eng.Feature.BlueGreenDeployments.md)
 + [Database activity streams in Aurora](Concepts.Aurora_Fea_Regions_DB-eng.Feature.DBActivityStreams.md)
 + [Exporting cluster data to Amazon S3](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ExportClusterToS3.md)
 + [Exporting snapshot data to Amazon S3](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.md)

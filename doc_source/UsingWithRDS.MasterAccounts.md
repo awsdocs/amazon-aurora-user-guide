@@ -10,8 +10,4 @@ If you accidentally delete the permissions for the master user, you can restore 
 
 The following table shows the privileges and database roles the master user gets for each of the database engines\.
 
-
-| Database engine | System privilege | Database role | 
-| --- | --- | --- | 
-| Amazon Aurora MySQL | `CREATE`, `DROP`, `GRANT OPTION`, `REFERENCES`, `EVENT`, `ALTER`, `DELETE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `TRIGGER`, `CREATE VIEW`, `SHOW VIEW`, `LOAD FROM S3`, `SELECT INTO S3`, `ALTER ROUTINE`, `CREATE ROUTINE`, `EXECUTE`, `CREATE USER`, `PROCESS`, `SHOW DATABASES `, `RELOAD`, `REPLICATION CLIENT`, `REPLICATION SLAVE` | — | 
-| Amazon Aurora PostgreSQL | `LOGIN`, `NOSUPERUSER`, `INHERIT`, `CREATEDB`, `CREATEROLE`, `NOREPLICATION`, `VALID UNTIL 'infinity'` | `RDS_SUPERUSER` For more information about RDS\_SUPERUSER, see [Understanding PostgreSQL roles and permissions](Appendix.PostgreSQL.CommonDBATasks.Roles.md)\. | 
+<a name="master-user-account-privileges"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.MasterAccounts.html)

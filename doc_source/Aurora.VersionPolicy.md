@@ -14,6 +14,7 @@ Amazon Aurora reuses code and maintains compatibility with the underlying MySQL 
 + [Automatic minor version upgrades](#Aurora.VersionPolicy.AMVU)
 + [How long Amazon Aurora major versions remain available](#Aurora.VersionPolicy.MajorVersionLifetime)
 + [How often Amazon Aurora minor versions are released](#Aurora.VersionPolicy.MinorVersionCadence)
++ [How long Amazon Aurora minor versions remain available](#Aurora.VersionPolicy.MinorVersionLifetime)
 + [Long\-term support for selected Amazon Aurora minor versions](#Aurora.VersionPolicy.LTS)
 + [Manually controlling if and when your database cluster is upgraded to new versions](#Aurora.VersionPolicy.ManualUpgrades)
 + [Required Amazon Aurora upgrades](#Aurora.VersionPolicy.RequiredUpgrades)
@@ -122,41 +123,49 @@ Amazon Aurora major versions remain available at least until community end of li
 
 <a name="aurora-version-minimum-eol"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.VersionPolicy.html)
 
-Before we ask that you upgrade to a newer major version and to help you plan, we provide a reminder at least 12 months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. We always recommend that you thoroughly test your applications with new database versions before performing a major version upgrade\. 
+Before we ask that you upgrade to a newer major version and to help you plan, we provide a reminder at least 12 months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. We always recommend that you thoroughly test your applications with new database versions before performing a major version upgrade\.
 
-After this 12\-month period, an automatic upgrade to the subsequent major version might be applied to any database cluster still running the older version\. If so, the upgrade is started during scheduled maintenance windows\. 
+After this 12\-month period, an automatic upgrade to the subsequent major version might be applied to any database cluster still running the older version\. If so, the upgrade is started during scheduled maintenance windows\.
 
 ## How often Amazon Aurora minor versions are released<a name="Aurora.VersionPolicy.MinorVersionCadence"></a>
 
- In general, Amazon Aurora minor versions are released quarterly\. The release schedule might vary to pick up additional features or fixes\. 
+In general, Amazon Aurora minor versions are released quarterly\. The release schedule might vary to pick up additional features or fixes\.
+
+## How long Amazon Aurora minor versions remain available<a name="Aurora.VersionPolicy.MinorVersionLifetime"></a>
+
+We intend to make each Amazon Aurora minor version of a particular major version available for at least 12 months\. At the end of this period, Aurora might apply an auto minor version upgrade to the subsequent default minor version\. Such an upgrade is started during the scheduled maintenance window for any cluster that is still running the older minor version\.
+
+We might replace a minor version of a particular major version sooner than the usual 12\-month period if there are critical matters such as security issues, or if the major version has reached end of life\.
+
+Before beginning automatic upgrades of minor versions that are approaching end of life, we generally provide a reminder three months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\.
 
 ## Long\-term support for selected Amazon Aurora minor versions<a name="Aurora.VersionPolicy.LTS"></a>
 
- For each Aurora major version, certain minor versions are designated as long\-term\-support \(LTS\) versions and made available for at least three years\. That is, at least one minor version per major version is made available for longer than the typical 12 months\. We generally provide a reminder six months before the end of this period\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. 
+For each Aurora major version, certain minor versions are designated as long\-term\-support \(LTS\) versions and made available for at least three years\. That is, at least one minor version per major version is made available for longer than the typical 12 months\. We generally provide a reminder six months before the end of this period\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\.
 
- LTS minor versions include only critical fixes \(through patch versions\)\. An LTS version doesn't include new features released after its introduction\. Once a year, DB clusters running on an LTS minor version are patched to the latest patch version of the LTS release\. We do this patching to help ensure that you benefit from cumulative security and stability fixes\. We might patch an LTS minor version more frequently if there are critical fixes, such as for security, that need to be applied\. 
+LTS minor versions include only critical fixes \(through patch versions\)\. An LTS version doesn't include new features released after its introduction\. Once a year, DB clusters running on an LTS minor version are patched to the latest patch version of the LTS release\. We do this patching to help ensure that you benefit from cumulative security and stability fixes\. We might patch an LTS minor version more frequently if there are critical fixes, such as for security, that need to be applied\.
 
 **Note**  
- If you want to remain on an LTS minor version for the duration of its lifecycle, make sure to turn off **Auto minor version upgrade** for your DB instances\. To avoid automatically upgrading your DB cluster from the LTS minor version, set **Auto minor version upgrade** to `No` on any DB instance in your Aurora cluster\. 
+If you want to remain on an LTS minor version for the duration of its lifecycle, make sure to turn off **Auto minor version upgrade** for your DB instances\. To avoid automatically upgrading your DB cluster from the LTS minor version, set **Auto minor version upgrade** to `No` on any DB instance in your Aurora cluster\.
 
- For the version numbers of all Aurora LTS versions, see [Aurora MySQL long\-term support \(LTS\) releases](AuroraMySQL.Updates.Versions.md#AuroraMySQL.Updates.LTS) and [Aurora PostgreSQL long\-term support \(LTS\) releases](AuroraPostgreSQL.Updates.LTS.md)\. 
+For the version numbers of all Aurora LTS versions, see [Aurora MySQL long\-term support \(LTS\) releases](AuroraMySQL.Updates.Versions.md#AuroraMySQL.Updates.LTS) and [Aurora PostgreSQL long\-term support \(LTS\) releases](AuroraPostgreSQL.Updates.LTS.md)\.
 
 ## Manually controlling if and when your database cluster is upgraded to new versions<a name="Aurora.VersionPolicy.ManualUpgrades"></a>
 
- Auto minor version upgrades are performed to the default minor version\. We typically schedule automatic upgrades twice a year for DB clusters that have the **Auto minor version upgrade** setting set to `Yes`\. These upgrades are started during customer\-specified maintenance windows\. If you want to turn off automatic minor version upgrades, set **Auto minor version upgrade** to `No` on any DB instance within an Aurora cluster\. Aurora performs an automatic minor version upgrade only if all DB instances in your cluster have the setting turned on\. 
+Auto minor version upgrades are performed to the default minor version\. We typically schedule automatic upgrades twice a year for DB clusters that have the **Auto minor version upgrade** setting set to `Yes`\. These upgrades are started during customer\-specified maintenance windows\. If you want to turn off automatic minor version upgrades, set **Auto minor version upgrade** to `No` on any DB instance within an Aurora cluster\. Aurora performs an automatic minor version upgrade only if all DB instances in your cluster have the setting turned on\.
 
- Because major version upgrades involve some compatibility risk, they don't occur automatically\. You must initiate these, except in the case of a major version deprecation, as explained earlier\. We always recommend that you thoroughly test your applications with new database versions before performing a major version upgrade\. 
+Because major version upgrades involve some compatibility risk, they don't occur automatically\. You must initiate these, except in the case of a major version deprecation, as explained earlier\. We always recommend that you thoroughly test your applications with new database versions before performing a major version upgrade\.
 
- For more information about upgrading a DB cluster to a new Aurora major version, see [Upgrading Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Upgrading.md) and [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\. 
+For more information about upgrading a DB cluster to a new Aurora major version, see [Upgrading Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Upgrading.md) and [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
 ## Required Amazon Aurora upgrades<a name="Aurora.VersionPolicy.RequiredUpgrades"></a>
 
- For certain critical fixes, we might perform a managed upgrade to a newer patch level within the same minor version\. These required upgrades happen even if **Auto minor version upgrade** is turned off\. Before doing so, we communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. Such managed upgrades are performed automatically\. Each such upgrade is started within the cluster maintenance window\. 
+For certain critical fixes, we might perform a managed upgrade to a newer patch level within the same minor version\. These required upgrades happen even if **Auto minor version upgrade** is turned off\. Before doing so, we communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. Such managed upgrades are performed automatically\. Each such upgrade is started within the cluster maintenance window\.
 
 ## Testing your DB cluster with a new Aurora version before upgrading<a name="Aurora.VersionPolicy.PreupgradeTesting"></a>
 
- You can test the upgrade process and how the new version works with your application and workload\. Use one of the following methods: 
-+  Clone your cluster using the Amazon Aurora fast database clone feature\. Perform the upgrade and any post\-upgrade testing on the new cluster\. 
-+  Restore from a cluster snapshot to create a new Aurora cluster\. You can create a cluster snapshot yourself from an existing Aurora cluster\. Aurora also automatically creates periodic snapshots for you for each of your clusters\. You can then initiate a version upgrade for the new cluster\. You can experiment on the upgraded copy of your cluster before deciding whether to upgrade your original cluster\. 
+You can test the upgrade process and how the new version works with your application and workload\. Use one of the following methods:
++ Clone your cluster using the Amazon Aurora fast database clone feature\. Perform the upgrade and any post\-upgrade testing on the new cluster\.
++ Restore from a cluster snapshot to create a new Aurora cluster\. You can create a cluster snapshot yourself from an existing Aurora cluster\. Aurora also automatically creates periodic snapshots for you for each of your clusters\. You can then initiate a version upgrade for the new cluster\. You can experiment on the upgraded copy of your cluster before deciding whether to upgrade your original cluster\.
 
- For more information on these ways to create new clusters for testing, see [Cloning a volume for an Amazon Aurora DB cluster](Aurora.Managing.Clone.md) and [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\. 
+For more information on these ways to create new clusters for testing, see [Cloning a volume for an Amazon Aurora DB cluster](Aurora.Managing.Clone.md) and [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\.

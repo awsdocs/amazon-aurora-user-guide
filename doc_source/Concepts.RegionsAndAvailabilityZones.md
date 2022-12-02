@@ -50,6 +50,18 @@ An Availability Zone is an isolated location in a given AWS Region\. Each Region
 
 Each Aurora DB cluster hosts copies of its storage in three separate AZs\. Every DB instance in the cluster must be in one of these three AZs\. When you create a DB instance in your cluster, Aurora automatically chooses an appropriate AZ if you don't specify an AZ\.
 
+Use the [describe\-availability\-zones](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-availability-zones.html) Amazon EC2 command as follows to describe the Availability Zones within the specified Region that are enabled for your account\.
+
+```
+aws ec2 describe-availability-zones --region region-name
+```
+
+For example, to describe the Availability Zones within the US East \(N\. Virginia\) Region \(us\-east\-1\) that are enabled for your account, run the following command:
+
+```
+aws ec2 describe-availability-zones --region us-east-1
+```
+
 To learn how to specify the AZ when you create a cluster or add instances to it, see [Configure the network for the DB cluster](Aurora.CreateInstance.md#Aurora.CreateInstance.Prerequisites.VPC)\.
 
 ## Local time zone for Amazon Aurora DB clusters<a name="Aurora.Overview.LocalTimeZone"></a>

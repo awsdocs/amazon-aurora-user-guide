@@ -392,7 +392,7 @@ As with cloning within the same AWS account, additional storage space is used on
  Aurora cross\-account cloning has the following limitations: 
 + You can't clone an Aurora Serverless cluster across AWS accounts\. 
 + You can't view or accept invitations to shared resources with the AWS Management Console\. Use the AWS CLI, the Amazon RDS API, or the AWS RAM console to view and accept invitations to shared resources\. 
-+ You can't create new clones from a clone that's been shared with your AWS account\. 
++ You can create only one new clone from a clone that's been shared with your AWS account\.
 + You can't share resources \(clones or Aurora DB clusters\) that have been shared with your AWS account\.
 + You can create a maximum of 15 cross\-account clones from any single Aurora DB cluster\. 
 +  Each of the 15 cross\-account clones must be owned by a different AWS account\. That is, you can only create one cross\-account clone of a cluster within any AWS account\. 

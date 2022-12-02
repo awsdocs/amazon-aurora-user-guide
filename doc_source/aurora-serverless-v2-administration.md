@@ -306,34 +306,34 @@ Aurora Serverless v2 DB clusters that are based on Aurora PostgreSQL support the
 
 ## Logging for Aurora Serverless v2<a name="aurora-serverless-v2.logging"></a>
 
- To turn on database logging, you specify the logs to enable using configuration parameters in your custom parameter group\. 
+To turn on database logging, you specify the logs to enable using configuration parameters in your custom parameter group\.
 
- For Aurora MySQL, you can enable the following logs\. 
+For Aurora MySQL, you can enable the following logs\.
 
 
-|  Aurora MySQL  |  Description  | 
+| Aurora MySQL | Description | 
 | --- | --- | 
-|   `general_log`   |   Creates the general log\. Set to 1 to turn on\. Default is off \(0\)\.   | 
-|   `log_queries_not_using_indexes`   |   Logs any queries to the slow query log that don't use an index\. Default is off \(0\)\. Set to 1 to turn on this log\.   | 
-|   `long_query_time`   |   Prevents fast\-running queries from being logged in the slow query log\. Can be set to a float between 0 and 31536000\. Default is 0 \(not active\)\.   | 
-|   `server_audit_events`   |   The list of events to capture in the logs\. Supported values are `CONNECT`, `QUERY`, `QUERY_DCL`, `QUERY_DDL`, `QUERY_DML`, and `TABLE`\.   | 
-|   `server_audit_logging`   |   Set to 1 to turn on server audit logging\. If you turn this on, you can specify the audit events to send to CloudWatch by listing them in the `server_audit_events` parameter\.   | 
-|   `slow_query_log`   |   Creates a slow query log\. Set to 1 to turn on the slow query log\. Default is off \(0\)\.   | 
+|  `general_log`  |  Creates the general log\. Set to 1 to turn on\. Default is off \(0\)\.  | 
+|  `log_queries_not_using_indexes`  |  Logs any queries to the slow query log that don't use an index\. Default is off \(0\)\. Set to 1 to turn on this log\.  | 
+|  `long_query_time`  |  Prevents fast\-running queries from being logged in the slow query log\. Can be set to a float between 0 and 31536000\. Default is 0 \(not active\)\.  | 
+|  `server_audit_events`  |  The list of events to capture in the logs\. Supported values are `CONNECT`, `QUERY`, `QUERY_DCL`, `QUERY_DDL`, `QUERY_DML`, and `TABLE`\.  | 
+|  `server_audit_logging`  |  Set to 1 to turn on server audit logging\. If you turn this on, you can specify the audit events to send to CloudWatch by listing them in the `server_audit_events` parameter\.  | 
+|  `slow_query_log`  |  Creates a slow query log\. Set to 1 to turn on the slow query log\. Default is off \(0\)\.  | 
 
- For more information, see [Using Advanced Auditing with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Auditing.md)\. 
+For more information, see [Using Advanced Auditing with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Auditing.md)\.
 
- For Aurora PostgreSQL, you can enable the following logs on your Aurora Serverless v2 DB instances\. 
+For Aurora PostgreSQL, you can enable the following logs on your Aurora Serverless v2 DB instances\.
 
 
 |  Aurora PostgreSQL  |  Description  | 
 | --- | --- | 
 |   `log_connections`   |  Logs each successful connection\.  | 
 |   `log_disconnections`   |  Logs end of a session including duration\.  | 
-|   `log_lock_waits`   |   Default is 0 \(off\)\. Set to 1 to log lock waits\.   | 
-|   `log_min_duration_statement`   |   The minimum duration \(in milliseconds\) for a statement to run before it's logged\.   | 
-|   `log_min_messages`   |  Sets the message levels that are logged\. Supported values are debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, panic\. To log performance data to the postgres log, set the value to debug1\.   | 
-|   `log_temp_files`   |   Logs the use of temporary files that are above the specified kilobytes \(kB\)\.   | 
-|   `log_statement`   |   Controls the specific SQL statements that get logged\. Supported values are `none`, `ddl`, `mod`, and `all`\. Default is `none`\.   | 
+|   `log_lock_waits`   |  Default is 0 \(off\)\. Set to 1 to log lock waits\.  | 
+|   `log_min_duration_statement`   |  The minimum duration \(in milliseconds\) for a statement to run before it's logged\.  | 
+|  `log_min_messages`  | Sets the message levels that are logged\. Supported values are debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, panic\. To log performance data to the postgres log, set the value to debug1\. | 
+|  `log_temp_files`  |  Logs the use of temporary files that are above the specified kilobytes \(kB\)\.  | 
+|  `log_statement`  |  Controls the specific SQL statements that get logged\. Supported values are `none`, `ddl`, `mod`, and `all`\. Default is `none`\.  | 
 
 **Topics**
 + [Logging with Amazon CloudWatch](#aurora-serverless-v2.how-it-works.logging)
@@ -344,9 +344,9 @@ Aurora Serverless v2 DB clusters that are based on Aurora PostgreSQL support the
 
  After you use the procedure in [Logging for Aurora Serverless v2](#aurora-serverless-v2.logging) to choose which database logs to turn on, you can choose which logs to upload \("publish"\) to Amazon CloudWatch\. 
 
- You can use Amazon CloudWatch to analyze log data, create alarms, and view metrics\. By default, error logs for Aurora Serverless v2 are enabled and automatically uploaded to CloudWatch\. You can also upload other logs from Aurora Serverless v2 DB instances to CloudWatch\. 
+You can use Amazon CloudWatch to analyze log data, create alarms, and view metrics\. By default, error logs for Aurora Serverless v2 are enabled and automatically uploaded to CloudWatch\. You can also upload other logs from Aurora Serverless v2 DB instances to CloudWatch\.
 
- Then you choose which of those logs to upload to CloudWatch, by using the **Log exports** settings in the AWS Management Console or the `--enable-cloudwatch-logs-exports`\. option in the AWS CLI\. 
+Then you choose which of those logs to upload to CloudWatch, by using the **Log exports** settings in the AWS Management Console or the `--enable-cloudwatch-logs-exports` option in the AWS CLI\.
 
 You can choose which of your Aurora Serverless v2 logs to upload to CloudWatch\. For more information, see [Using Advanced Auditing with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Auditing.md)\.
 
@@ -355,56 +355,43 @@ As with any type of Aurora DB cluster, you can't modify the default DB cluster p
 **Note**  
 For Aurora Serverless v2, you can create both DB cluster and DB parameter groups\. This contrasts with Aurora Serverless v1, where you can only create DB cluster parameter groups\.
 
-After you apply your modified DB cluster parameter group to your Aurora Serverless v2 DB cluster, you can view the logs in CloudWatch\.
-
-**To view Aurora Serverless v2 logs**
-
-1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
-
-1.  Choose **Log groups**\. 
-
-1.  Choose your Aurora Serverless v2 DB cluster log from the list\. For error logs, the naming pattern is as follows\. 
-
-   ```
-   /aws/rds/cluster/cluster_name/log_type
-   ```
-
- For more information on viewing details on your logs, see [Monitoring log events in Amazon CloudWatch](AuroraMySQL.Integrating.CloudWatch.md#AuroraMySQL.Integrating.CloudWatch.Monitor)\. 
-
 ### Viewing Aurora Serverless v2 logs in Amazon CloudWatch<a name="aurora-serverless-v2.logging.monitoring"></a>
 
- After you use the procedure in [Logging for Aurora Serverless v2](#aurora-serverless-v2.logging) to choose which database logs to turn on, you can view the contents of the logs\. 
+After you use the procedure in [Logging with Amazon CloudWatch](#aurora-serverless-v2.how-it-works.logging) to choose which database logs to turn on, you can view the contents of the logs\.
 
- For more information on using CloudWatch with Aurora MySQL and Aurora PostgreSQL logs, see [Monitoring log events in Amazon CloudWatch](AuroraMySQL.Integrating.CloudWatch.md#AuroraMySQL.Integrating.CloudWatch.Monitor) and [Publishing Aurora PostgreSQL logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)\. 
+For more information on using CloudWatch with Aurora MySQL and Aurora PostgreSQL logs, see [Monitoring log events in Amazon CloudWatch](AuroraMySQL.Integrating.CloudWatch.md#AuroraMySQL.Integrating.CloudWatch.Monitor) and [Publishing Aurora PostgreSQL logs to Amazon CloudWatch Logs](AuroraPostgreSQL.CloudWatch.md)\.
 
 **To view logs for your Aurora Serverless v2 DB cluster**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1.  Choose your AWS Region\. 
+1. Choose your AWS Region\.
 
-1.  Choose **Log groups**\. 
+1. Choose **Log groups**\.
 
-1.  Choose your Aurora Serverless v2 DB cluster log from the list\. For error logs, the naming pattern is as follows\. 
+1. Choose your Aurora Serverless v2 DB cluster log from the list\. The log naming pattern is as follows\.
 
    ```
-   /aws/rds/cluster/cluster-name/error
+   /aws/rds/cluster/cluster-name/log_type
    ```
+
+**Note**  
+For Aurora MySQL–compatible Aurora Serverless v2 DB clusters, the error log includes buffer pool scaling events even when there are no errors\.
 
 ### Monitoring capacity with Amazon CloudWatch<a name="aurora-serverless-v2.how-it-works.logging.monitoring"></a>
 
- With Aurora Serverless v2, you can use CloudWatch to to monitor the capacity and utilization of all the Aurora Serverless v2 DB instances in your cluster\. You can view instance\-level metrics to check the capacity of each Aurora Serverless v2 DB instance as it scales up and down\. You can also compare the capacity\-related metrics to other metrics to see how changes in workloads affect resource consumption\. For example, you can compare `ServerlessDatabaseCapacity` to `DatabaseUsedMemory`, `DatabaseConnections`, and `DMLThroughput` to assess how your DB cluster is responding during operations\. For details about the capacity\-related metrics that apply to Aurora Serverless v2, see [Important Amazon CloudWatch metrics for Aurora Serverless v2](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.viewing.monitoring)\. 
+With Aurora Serverless v2, you can use CloudWatch to to monitor the capacity and utilization of all the Aurora Serverless v2 DB instances in your cluster\. You can view instance\-level metrics to check the capacity of each Aurora Serverless v2 DB instance as it scales up and down\. You can also compare the capacity\-related metrics to other metrics to see how changes in workloads affect resource consumption\. For example, you can compare `ServerlessDatabaseCapacity` to `DatabaseUsedMemory`, `DatabaseConnections`, and `DMLThroughput` to assess how your DB cluster is responding during operations\. For details about the capacity\-related metrics that apply to Aurora Serverless v2, see [Important Amazon CloudWatch metrics for Aurora Serverless v2](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.viewing.monitoring)\.
 
 **To monitor your Aurora Serverless v2 DB cluster's capacity**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1.  Choose **Metrics**\. All available metrics appear as cards in the console, grouped by service name\. 
+1. Choose **Metrics**\. All available metrics appear as cards in the console, grouped by service name\.
 
-1.  Choose **RDS**\. 
+1. Choose **RDS**\.
 
-1.  \(Optional\) Use the **Search** box to find the metrics that are especially important for Aurora Serverless v2: `ServerlessDatabaseCapacity`, `ACUUtilization`, `CPUUtilization`, and `FreeableMemory`\. 
+1. \(Optional\) Use the **Search** box to find the metrics that are especially important for Aurora Serverless v2: `ServerlessDatabaseCapacity`, `ACUUtilization`, `CPUUtilization`, and `FreeableMemory`\.
 
- We recommend that you set up a CloudWatch dashboard to monitor your Aurora Serverless v2 DB cluster capacity using the capacity\-related metrics\. To learn how, see [Building dashboards with CloudWatch](https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html)\. 
+We recommend that you set up a CloudWatch dashboard to monitor your Aurora Serverless v2 DB cluster capacity using the capacity\-related metrics\. To learn how, see [Building dashboards with CloudWatch](https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html)\. 
 
- To learn more about using Amazon CloudWatch with Amazon Aurora, see [Publishing Amazon Aurora MySQL logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\. 
+To learn more about using Amazon CloudWatch with Amazon Aurora, see [Publishing Amazon Aurora MySQL logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\.

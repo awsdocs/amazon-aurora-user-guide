@@ -21,5 +21,6 @@ Aurora PostgreSQL is FedRAMP HIGH eligible\. For details about AWS and complianc
 + [Integrating Amazon Aurora PostgreSQL with other AWS services](AuroraPostgreSQL.Integrating.md)
 + [Managing query execution plans for Aurora PostgreSQL](AuroraPostgreSQL.Optimize.md)
 + [Working with extensions and foreign data wrappers](Appendix.PostgreSQL.CommonDBATasks.md)
++ [Working with Trusted Language Extensions for PostgreSQL](PostgreSQL_trusted_language_extension.md)
 + [Amazon Aurora PostgreSQL reference](AuroraPostgreSQL.Reference.md)
 + [Amazon Aurora PostgreSQL updates](AuroraPostgreSQL.Updates.md)

@@ -18,6 +18,7 @@ You can tag the following Amazon RDS resources:
 + DB subnet groups
 + RDS Proxies
 + RDS Proxy endpoints
++ Blue/green deployments
 
 **Note**  
 Currently, you can't tag RDS Proxies and RDS Proxy endpoints by using the AWS Management Console\.

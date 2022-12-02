@@ -230,7 +230,7 @@
  The storage for an Aurora cluster is independent from the DB instances\. The storage for each Aurora cluster always spans three AZs\.   
  When you test high availability features, always use DB instances with identical capacity in your test cluster\. Doing so avoids unpredictable changes in performance, latency, and so on whenever one DB instance takes over for another\. 
 
- To learn how to simulate failure conditions to test high availability features, see [Testing Amazon Aurora using fault injection queries](AuroraMySQL.Managing.FaultInjectionQueries.md)\. 
+ To learn how to simulate failure conditions to test high availability features, see [Testing Amazon Aurora MySQL using fault injection queries](AuroraMySQL.Managing.FaultInjectionQueries.md)\. 
 
  As part of your proof\-of\-concept exercise, one objective is to find the ideal number of DB instances and the optimal instance class for those DB instances\. Doing so requires balancing the requirements of high availability and performance\. 
 

@@ -187,7 +187,7 @@ Using the Amazon RDS console, you can share a manual DB cluster snapshot with up
 
 1. Select the manual snapshot that you want to share\.
 
-1. For **Actions**, choose **Share Snapshot**\.
+1. For **Actions**, choose **Share snapshot**\.
 
 1. Choose one of the following options for **DB snapshot visibility**\.
    + If the source is unencrypted, choose **Public** to permit all AWS accounts to restore a DB cluster from your manual DB cluster snapshot, or choose **Private** to permit only AWS accounts that you specify to restore a DB cluster from your manual DB cluster snapshot\.
@@ -210,7 +210,7 @@ If you set **DB snapshot visibility** to **Public**, all AWS accounts can restor
 
 1. Select the manual snapshot that you want to stop sharing\.
 
-1. Choose **Actions**, and then choose **Share Snapshot**\.
+1. Choose **Actions**, and then choose **Share snapshot**\.
 
 1. To remove permission for an AWS account, choose **Delete** for the AWS account identifier for that account from the list of authorized accounts\.  
 ![\[Permit AWS accounts to restore a manual DB cluster snapshot\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/ShareSnapshot_delete.png)

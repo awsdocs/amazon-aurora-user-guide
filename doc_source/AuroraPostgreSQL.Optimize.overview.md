@@ -34,20 +34,24 @@ You can use query plan management with `EXPLAIN` and `EXPLAIN ANALYZE` in manual
 
 Aurora PostgreSQL query plan management supports all PostgreSQL language features, including partitioned tables, inheritance, row\-level security, and recursive common table expressions \(CTEs\)\. To learn more about these PostgreSQL language features, see [Table Partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html), [Row Security Policies](https://www.postgresql.org/docs/current/ddl-rowsecurity.html), and [WITH Queries \(Common Table Expressions\)](https://www.postgresql.org/docs/current/queries-with.html) and other topics in the PostgreSQL documentation\. 
 
+For information about different versions of the Aurora PostgreSQL query plan management feature, see [Aurora PostgreSQL apg\_plan\_mgmt extension versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Extensions.html#AuroraPostgreSQL.Extensions.apg_plan_mgmt) in the *Release Notes for Aurora PostgreSQL*\.
+
 ## Query plan management limitations<a name="AuroraPostgreSQL.Optimize.overview.limitations"></a>
 
-When using query plan management, be aware of the following limitations\.
-+ **Plans aren't captured for certain types of SQL statements** – The current release of Aurora PostgreSQL query plan management doesn't capture plans for these statements\.
-  + Statements that reference system relations, such as `pg_class`\. This is by design, to prevent a large number of system\-generated plans that are used internally from being captured\. This also applies to system tables inside views\.
-  + Statements inside `DO` blocks\. This is also by design, given that these blocks contain transient, anonymous functions\.  
-+ **Larger DB instance class might be needed for your Aurora PostgreSQL DB cluster** – Depending on the workload, query plan management might require a DB instance class that provides more than 2 vCPUs\. This is because of the limited number of `max_worker_processes` allowed by a 2\-vCPU DB instance class \(db\.t3\.medium, for example\)\. We recommend that you consider the demands of your workload before setting up query plan management and choose a DB instance class with more than 2 vCPUs for your Aurora PostgreSQL DB cluster\. If the DB instance class falls short in its ability to support your workload, query plan management raises an error message such as the following\. 
+The current release of Aurora PostgreSQL query plan management has the following limitations\. 
++ **Plans aren't captured for statements that reference system relations** – Statements that reference system relations, such as `pg_class`, aren't captured\. This is by design, to prevent a large number of system\-generated plans that are used internally from being captured\. This also applies to system tables inside views\.
++ **Larger DB instance class might be needed for your Aurora PostgreSQL DB cluster** – Depending on the workload, query plan management might need a DB instance class that has more than 2 vCPUs\. The number of `max_worker_processes` is limited by the DB instance class size\. The number of `max_worker_processes` provided by a 2\-vCPU DB instance class \(db\.t3\.medium, for example\) might not be sufficient for a given workload\. We recommend that you choose a DB instance class with more than 2 vCPUs for your Aurora PostgreSQL DB cluster if you use query plan managment\.
+
+  When the DB instance class can't support the workload, query plan management raises an error message such as the following\. 
 
   ```
   WARNING: could not register plan insert background process
   HINT: You may need to increase max_worker_processes.
   ```
 
-  The number of max\_worker\_processes is limited by the DB instance class size\. In this case, you should scale up your Aurora PostgreSQL DB cluster to a DB instance class size with more memory\. For more information, see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora)\.
+  In this case, you should scale up your Aurora PostgreSQL DB cluster to a DB instance class size with more memory\. For more information, see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.SupportAurora)\.
+
+For information about different versions of the Aurora PostgreSQL query plan management feature, see [Aurora PostgreSQL apg\_plan\_mgmt extension versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Extensions.html#AuroraPostgreSQL.Extensions.apg_plan_mgmt) in the *Release Notes for Aurora PostgreSQL*\.
 
 ## Query plan management terminology<a name="AuroraPostgreSQL.Optimize.Start-terminology"></a>
 

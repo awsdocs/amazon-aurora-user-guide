@@ -90,7 +90,8 @@ You can turn on DevOps Guru to have it monitor your Aurora databases in either 
 
 **Topics**
 + [Turning on DevOps Guru in the RDS console](#devops-guru-for-rds.configuring.coverage.rds-console)
-+ [Adding Aurora resources on the DevOps Guru console](#devops-guru-for-rds.configuring.coverage.guru-console)
++ [Adding Aurora resources in the DevOps Guru console](#devops-guru-for-rds.configuring.coverage.guru-console)
++ [Adding Aurora resources using AWS CloudFormation](#devops-guru-for-rds.configuring.coverage.cfn)
 
 #### Turning on DevOps Guru in the RDS console<a name="devops-guru-for-rds.configuring.coverage.rds-console"></a>
 
@@ -169,7 +170,7 @@ If you turn on DevOps Guru from the RDS console when you create a database, RDS
 
 1. Choose **Turn on DevOps Guru**\.
 
-#### Adding Aurora resources on the DevOps Guru console<a name="devops-guru-for-rds.configuring.coverage.guru-console"></a>
+#### Adding Aurora resources in the DevOps Guru console<a name="devops-guru-for-rds.configuring.coverage.guru-console"></a>
 
 You can specify your DevOps Guru resource coverage on the DevOps Guru console\. Follow the step described in [Specify your DevOps Guru resource coverage](https://docs.aws.amazon.com/devops-guru/latest/userguide/choose-coverage.html) in the *Amazon DevOps Guru User Guide*\. When you edit your analyzed resources, choose one of the following options:
 + Choose **All account resources** to analyze all supported resources, including the Aurora databases, in your AWS account and Region\.
@@ -177,3 +178,54 @@ You can specify your DevOps Guru resource coverage on the DevOps Guru console\
 + Choose **Tags** to analyze the Aurora databases that you have tagged\. For more information, see [Use tags to identify resources in your DevOps Guru applications](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-resource-tags.html) in the *Amazon DevOps Guru User Guide*\.
 
 For more information, see [Enable DevOps Guru](https://docs.aws.amazon.com/devops-guru/latest/userguide/getting-started-enable-service.html) in the *Amazon DevOps Guru User Guide*\.
+
+#### Adding Aurora resources using AWS CloudFormation<a name="devops-guru-for-rds.configuring.coverage.cfn"></a>
+
+You can use tags to add coverage for your Aurora resources to your CloudFormation templates\. The following procedure assumes that you have a CloudFormation template both for your Aurora DB instance and DevOps Guru stack\.
+
+**To specify an Aurora DB instance using a CloudFormation tag**
+
+1. In the CloudFormation template for your DB instance, define a tag using a key/value pair\.
+
+   The following example assigns the value `my-aurora-db-instance1` to `Devops-guru-cfn-default` for an Aurora DB instance\.
+
+   ```
+   MyAuroraDBInstance1:
+     Type: "AWS::RDS::DBInstance"
+     Properties:
+       DBClusterIdentifier: my-aurora-db-cluster
+       DBInstanceIdentifier: my-aurora-db-instance1
+       Tags:
+         - Key: Devops-guru-cfn-default
+           Value: devopsguru-my-aurora-db-instance1
+   ```
+
+1. In the CloudFormation template for your DevOps Guru stack, specify the same tag in your resource collection filter\.
+
+   The following example configures DevOps Guru to provide coverage for the resource with the tag value `my-aurora-db-instance1`\.
+
+   ```
+   DevOpsGuruResourceCollection:
+     Type: AWS::DevOpsGuru::ResourceCollection
+     Properties:
+       ResourceCollectionFilter:
+         Tags:
+           - AppBoundaryKey: "Devops-guru-cfn-default"
+             TagValues:
+             - "devopsguru-my-aurora-db-instance1"
+   ```
+
+   The following example provides coverage for all resources within the application boundary `Devops-guru-cfn-default`\.
+
+   ```
+   DevOpsGuruResourceCollection:
+     Type: AWS::DevOpsGuru::ResourceCollection
+     Properties:
+       ResourceCollectionFilter:
+         Tags:
+           - AppBoundaryKey: "Devops-guru-cfn-default"
+             TagValues:
+             - "*"
+   ```
+
+For more information, see [AWS::DevOpsGuru::ResourceCollection](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-devopsguru-resourcecollection.html) and [AWS::RDS::DBInstance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbinstance.html) in the *AWS CloudFormation User Guide*\.

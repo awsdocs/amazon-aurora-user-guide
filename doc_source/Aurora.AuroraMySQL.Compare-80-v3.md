@@ -41,6 +41,9 @@ mysqlpump --exclude-databases=mysql --users
 
  To simplify managing permissions for many users or applications, you can use the `CREATE ROLE` statement to create a role that has a set of permissions\. Then you can use the `GRANT` and `SET ROLE` statements and the `current_role` function to assign roles to users or applications, switch the current role, and check which roles are in effect\. For more information on the role\-based permission system in MySQL 8\.0, see [Using Roles](https://dev.mysql.com/doc/refman/8.0/en/roles.html) in the MySQL Reference Manual\. 
 
+**Important**  
+We strongly recommend that you do not use the master user directly in your applications\. Instead, adhere to the best practice of using a database user created with the minimal privileges required for your application\.
+
  Aurora MySQL version 3 includes a special role that has all of the following privileges\. This role is named `rds_superuser_role`\. The primary administrative user for each cluster already has this role granted\. The `rds_superuser_role` role includes the following privileges for all database objects: 
 +  `ALTER` 
 +  `APPLICATION_PASSWORD_ADMIN` 

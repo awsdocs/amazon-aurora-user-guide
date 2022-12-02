@@ -18,4 +18,5 @@ Following are the engine\-native features for Aurora MySQL\.
 
 Following are the engine\-native features for Aurora PostgreSQL\.
 + [Babelfish](babelfish.md)
++ [Fault injection queries](AuroraPostgreSQL.Managing.FaultInjectionQueries.md)
 + [Query plan management](AuroraPostgreSQL.Optimize.md)

@@ -22,35 +22,12 @@ For more information, see [Security in Amazon Aurora](UsingWithRDS.md)\.
 
 ## Master user privileges with Amazon Aurora MySQL<a name="AuroraMySQL.Security.MasterUser"></a>
 
-When you create an Amazon Aurora MySQL DB instance, the master user has the following default privileges:
-+  `ALTER` 
-+  `ALTER ROUTINE` 
-+  `CREATE` 
-+  `CREATE ROUTINE` 
-+  `CREATE TEMPORARY TABLES` 
-+  `CREATE USER` 
-+  `CREATE VIEW` 
-+  `DELETE` 
-+  `DROP` 
-+  `EVENT` 
-+  `EXECUTE` 
-+  `GRANT OPTION` 
-+  `INDEX` 
-+  `INSERT` 
-+  `LOAD FROM S3` 
-+  `LOCK TABLES` 
-+  `PROCESS` 
-+  `REFERENCES` 
-+  `RELOAD` 
-+  `REPLICATION CLIENT` 
-+  `REPLICATION SLAVE` 
-+  `SELECT` 
-+  `SHOW DATABASES` 
-+  `SHOW VIEW` 
-+  `TRIGGER` 
-+  `UPDATE` 
+When you create an Amazon Aurora MySQL DB instance, the master user has the default privileges listed in [Master user account privileges](UsingWithRDS.MasterAccounts.md)\.
 
 To provide management services for each DB cluster, the `rdsadmin` user is created when the DB cluster is created\. Attempting to drop, rename, change the password, or change privileges for the `rdsadmin` account results in an error\.
+
+**Important**  
+We strongly recommend that you do not use the master user directly in your applications\. Instead, adhere to the best practice of using a database user created with the minimal privileges required for your application\.
 
 For management of the Aurora MySQL DB cluster, the standard `kill` and `kill_query` commands have been restricted\. Instead, use the Amazon RDS commands `rds_kill` and `rds_kill_query` to terminate user sessions or queries on Aurora MySQL DB instances\. 
 

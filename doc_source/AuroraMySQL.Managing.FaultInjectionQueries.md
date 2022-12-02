@@ -1,14 +1,18 @@
-# Testing Amazon Aurora using fault injection queries<a name="AuroraMySQL.Managing.FaultInjectionQueries"></a>
+# Testing Amazon Aurora MySQL using fault injection queries<a name="AuroraMySQL.Managing.FaultInjectionQueries"></a>
 
-You can test the fault tolerance of your Amazon Aurora DB cluster by using fault injection queries\. Fault injection queries are issued as SQL commands to an Amazon Aurora instance and they enable you to schedule a simulated occurrence of one of the following events:
+You can test the fault tolerance of your Aurora MySQL DB cluster by using fault injection queries\. Fault injection queries are issued as SQL commands to an Amazon Aurora instance\. They let you schedule a simulated occurrence of one of the following events:
 + A crash of a writer or reader DB instance
 + A failure of an Aurora Replica
 + A disk failure
 + Disk congestion
 
-When a fault injection query specifies a crash, it forces a crash of the Aurora DB instance\. The other fault injection queries result in simulations of failure events, but don't cause the event to occur\. When you submit a fault injection query, you also specify an amount of time for the failure event simulation to occur for\.
+When a fault injection query specifies a crash, it forces a crash of the Aurora MySQL DB instance\. The other fault injection queries result in simulations of failure events, but don't cause the event to occur\. When you submit a fault injection query, you also specify an amount of time for the failure event simulation to occur for\.
 
 You can submit a fault injection query to one of your Aurora Replica instances by connecting to the endpoint for the Aurora Replica\. For more information, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\.
+
+Running fault injection queries requires the following privileges:
++ Aurora MySQL version 1 – `PROCESS`\.
++ Aurora MySQL versions 2 and 3 – All of the master user privileges\. For more information, see [Master user account privileges](UsingWithRDS.MasterAccounts.md)\.
 
 ## Testing an instance crash<a name="AuroraMySQL.Managing.FaultInjectionQueries.Crash"></a>
 

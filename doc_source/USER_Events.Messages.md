@@ -9,6 +9,7 @@ Amazon RDS generates a significant number of events in categories that you can s
 + [DB security group events](#USER_Events.Messages.security-group)
 + [DB cluster snapshot events](#USER_Events.Messages.cluster-snapshot)
 + [RDS Proxy events](#USER_Events.Messages.rds-proxy)
++ [Blue/green deployment events](#USER_Events.Messages.BlueGreenDeployments)
 + [Message attributes](#USER_Events.Messages.Attributes)
 
 ## DB cluster events<a name="USER_Events.Messages.cluster"></a>
@@ -172,6 +173,25 @@ The following table shows the event category and a list of events when an RDS Pr
 | deletion | RDS\-EVENT\-0205 |  RDS deleted the DB proxy \(RDS Proxy\)\.  | 
 |  deletion  | RDS\-EVENT\-0208 |  RDS deleted the endpoint of DB proxy \(RDS Proxy\)\.  | 
 |  failure  | RDS\-EVENT\-0243 |  RDS couldn't provision capacity for the proxy because there aren't enough IP addresses available in your subnets\. To fix the issue, make sure that your subnets have the minimum number of unused IP addresses\. To determine the recommended number for your instance class, see [Planning for IP address capacity](rds-proxy-setup.md#rds-proxy-network-prereqs.plan-ip-address)\.  | 
+
+## Blue/green deployment events<a name="USER_Events.Messages.BlueGreenDeployments"></a>
+
+The following table shows the event category and a list of events when a blue/green deployment is the source type\.
+
+For more information about blue/green deployments, see [Using Amazon RDS Blue/Green Deployments for database updates](blue-green-deployments.md)\.
+
+
+|  Category  | Amazon RDS event ID |  Description  | 
+| --- | --- | --- | 
+|  creation  | RDS\-EVENT\-0244 |  Blue/green deployment tasks completed\. You can make more modifications to the green environment databases or switch over the deployment\.  | 
+|  deletion  | RDS\-EVENT\-0246 |  Blue/green deployment deleted\.  | 
+|  failure  | RDS\-EVENT\-0245 |  Creation of blue/green deployment failed\.  | 
+|  failure  | RDS\-EVENT\-0249 |  Switchover canceled on blue/green deployment\.  | 
+|  failure  | RDS\-EVENT\-0252 |  Switchover from primary source to target canceled\.  | 
+|  notification  | RDS\-EVENT\-0247 |  Switchover started on blue/green deployment\.  | 
+|  notification  | RDS\-EVENT\-0248 |  Switchover completed on blue/green deployment\.  | 
+|  notification  | RDS\-EVENT\-0250 |  Switchover from primary source to target started\.  | 
+|  notification  | RDS\-EVENT\-0251 |  Switchover from primary source to target completed and databases renamed\.  | 
 
 ## Message attributes<a name="USER_Events.Messages.Attributes"></a>
 

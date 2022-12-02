@@ -9,5 +9,6 @@ Amazon Aurora uses a cluster of replicated database servers\. Typically, monitor
 + [Monitoring Amazon Aurora metrics with Amazon CloudWatch](monitoring-cloudwatch.md)
 + [Monitoring DB load with Performance Insights on Amazon Aurora](USER_PerfInsights.md)
 + [Analyzing performance anomalies with Amazon DevOps Guru for Amazon RDS](devops-guru-for-rds.md)
++ [Monitoring threats with Amazon GuardDuty RDS Protection](guard-duty-rds-protection.md)
 + [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)
 + [Metrics reference for Amazon Aurora](metrics-reference.md)
