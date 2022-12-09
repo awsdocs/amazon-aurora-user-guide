@@ -393,6 +393,8 @@ In addition to the common options, specify the following options:
 + `--parameters` \(optional\) – The parameters for the SQL statement\.
 + `--include-result-metadata | --no-include-result-metadata` \(optional\) – A value that indicates whether to include metadata in the results\. The default is `--no-include-result-metadata`\.
 + `--database` \(optional\) – The name of the database\.
+
+  The `--database` option might not work when you run a SQL statement after running `--sql "use database_name;"` in the previous request\. We recommend that you use the `--database` option instead of running `--sql "use database_name;"` statements\.
 + `--continue-after-timeout | --no-continue-after-timeout` \(optional\) – A value that indicates whether to continue running the statement after the call times out\. The default is `--no-continue-after-timeout`\.
 
   For data definition language \(DDL\) statements, we recommend continuing to run the statement after the call times out to avoid errors and the possibility of corrupted data structures\.

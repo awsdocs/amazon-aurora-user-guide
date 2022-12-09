@@ -1,6 +1,6 @@
 # Best practices for Aurora PostgreSQL query plan management<a name="AuroraPostgreSQL.Optimize.BestPractice"></a>
 
-Query plan management lets you control how and when query execution plans change\. As a DBA, your main goals when using QPM include preventing regressions when there are changes to your database, and controlling when the optimizer can use a new plan\. In the following, you can find some recommended best practices for using query plan management\. Proactive and reactive plan management approaches differ in how and when new plans get approved for use\. 
+Query plan management lets you control how and when query execution plans change\. As a DBA, your main goals when using QPM include preventing regressions when there are changes to your database, and controlling whether to allow the optimizer to use a new plan\. In the following, you can find some recommended best practices for using query plan management\. Proactive and reactive plan management approaches differ in how and when new plans get approved for use\. 
 
 **Contents**
 + [Proactive plan management to help prevent performance regression](#AuroraPostgreSQL.Optimize.BestPractice.Proactive)
@@ -9,7 +9,7 @@ Query plan management lets you control how and when query execution plans change
 
 ## Proactive plan management to help prevent performance regression<a name="AuroraPostgreSQL.Optimize.BestPractice.Proactive"></a>
 
-To prevent plan performance regressions from occurring, you gather evidence and then manually approve new plans after you have verified that they are faster\. 
+To prevent plan performance regressions from occurring, you *evolve* plan baselines by running a procedure that compares the performance of newly discovered plans to the performance of the existing baseline of Approved plans, and then automatically approves the fastest set of plans as the new baseline\. In this way, the baseline of plans improves over time as faster plans are discovered\.
 
 1. In a development environment, identify the SQL statements that have the greatest impact on performance or system throughput\. Then capture the plans for these statements as described in [Manually capturing plans for specific SQL statements](AuroraPostgreSQL.Optimize.CapturePlans.md#AuroraPostgreSQL.Optimize.CapturePlans.Manual) and [Automatically capturing plans](AuroraPostgreSQL.Optimize.CapturePlans.md#AuroraPostgreSQL.Optimize.CapturePlans.Automatic)\. 
 

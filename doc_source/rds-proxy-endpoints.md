@@ -36,6 +36,8 @@
 
  A proxy endpoint uses the same authentication mechanism as its associated proxy\. RDS Proxy automatically sets up permissions and authorizations for the user\-defined endpoint, consistent with the properties of the associated proxy\. 
 
+To learn how proxy endpoints work for DB clusters in an Aurora global database, see [How RDS Proxy endpoints work with global databases](rds-proxy-gdb.md#rds-proxy-gdb.endpoints)\.
+
 ## Using reader endpoints with Aurora clusters<a name="rds-proxy-endpoints-reader"></a>
 
  You can create and connect to read\-only endpoints called *reader endpoints* when you use RDS Proxy with Aurora clusters\. These reader endpoints help to improve the read scalability of your query\-intensive applications\. Reader endpoints also help to improve the availability of your connections if a reader DB instance in your cluster becomes unavailable\. 

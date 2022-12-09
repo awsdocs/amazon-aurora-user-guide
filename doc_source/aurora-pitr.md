@@ -51,6 +51,8 @@ To restore a DB cluster to a specified time, use the AWS CLI command [https://do
 
 You can specify other settings\. For information about each setting, see [Settings for Aurora DB clusters](Aurora.CreateInstance.md#Aurora.CreateInstance.Settings)\.
 
+Resource tagging is supported for this operation\. When you use the `--tags` option, the source DB cluster tags are ignored and the provided ones are used\. Otherwise, the latest tags from the source cluster are used\.
+
 **Example**  
 For Linux, macOS, or Unix:  
 

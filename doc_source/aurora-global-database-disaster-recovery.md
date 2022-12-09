@@ -41,6 +41,8 @@ We recommend that you understand this process before using it\. Have a plan read
 
    This Aurora DB cluster becomes the primary cluster of a new Aurora global database when you start adding Regions to it in the next step\. 
 
+   If you are using RDS Proxy, make sure to redirect your application's write operations to the appropriate read/write endpoint of the proxy that's associated with the new primary cluster\. This proxy endpoint might be the default endpoint or a custom read/write endpoint\. For more information see [How RDS Proxy endpoints work with global databases](rds-proxy-gdb.md#rds-proxy-gdb.endpoints)\.
+
 1. Add an AWS Region to the DB cluster\. When you do this, the replication process from primary to secondary begins\. For detailed steps to add a Region, see [Adding an AWS Region to an Amazon Aurora global database](aurora-global-database-getting-started.md#aurora-global-database-attaching)\. 
 
 1. Add more AWS Regions as needed to recreate the topology needed to support your application\. 
@@ -78,6 +80,8 @@ When the failover process completes, the promoted Aurora DB cluster can handle w
 
 For example, the secondary cluster's endpoint `my-global.cluster-ro-aaaaaabbbbbb.us-west-1.rds.amazonaws.com` becomes `my-global.cluster-aaaaaabbbbbb.us-west-1.rds.amazonaws.com` when that cluster is promoted to primary\. 
 
+If you are using RDS Proxy, make sure to redirect your application's write operations to the appropriate read/write endpoint of the proxy that's associated with the new primary cluster\. This proxy endpoint might be the default endpoint or a custom read/write endpoint\. For more information see [How RDS Proxy endpoints work with global databases](rds-proxy-gdb.md#rds-proxy-gdb.endpoints)\.
+
 You can fail over your Aurora global database using the AWS Management Console, the AWS CLI, or the RDS API\.
 
 ### Console<a name="aurora-global-database-disaster-recovery.managed-failover.console"></a>
@@ -88,7 +92,7 @@ You can fail over your Aurora global database using the AWS Management Console, 
 
 1. Choose **Databases** and find the Aurora global database you want to fail over\.
 
-1. Choose **Fail over global database** from Actions menu\. The failover process doesn't begin until after you choose the failover target in the next step\. At this point, the failover is pending\.   
+1. Choose **Fail over global database** in the **Actions** menu\. The failover process doesn't begin until after you choose the failover target in the next step\. At this point, the failover is pending\.   
 ![\[Starting the failover process for an Aurora global database\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-global-db-managed-failover-1.png)
 
    1. Choose the secondary Aurora DB cluster that you want to promote to primary\. The secondary DB cluster must be **available**\. If you have more than one secondary DB cluster, you can compare the **lag** amount for all secondaries and choose the one with the smallest amount of lag\.  

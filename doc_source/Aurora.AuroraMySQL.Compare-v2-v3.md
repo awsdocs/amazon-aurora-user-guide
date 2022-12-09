@@ -97,9 +97,9 @@ In Aurora MySQL version 3, the `init_connect` and `read_only` parameters don't a
 |  Aurora\_fwd\_master\_errors\_session\_limit  |  Aurora\_fwd\_writer\_errors\_session\_limit  | 
 |  Aurora\_fwd\_master\_errors\_rpc\_timeout  |  Aurora\_fwd\_writer\_errors\_rpc\_timeout  | 
 
- The following configuration parameters have new names in Aurora MySQL version 3\. 
+The following configuration parameters have new names in Aurora MySQL version 3\.
 
- For compatibility, you can check the parameter values in the `mysql` client by using either name in the initial Aurora MySQL version 3 release\. You can only modify the values in a custom parameter group by using the new names\. The old parameter names are to be removed in a future release\. 
+For compatibility, you can check the parameter values in the `mysql` client by using either name in the initial Aurora MySQL version 3 release\. You can use only the new names when modifying values in a custom parameter group\. The old parameter names are to be removed in a future release\.
 
 
 |  Name to be removed  |  New or preferred name  | 

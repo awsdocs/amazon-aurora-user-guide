@@ -416,6 +416,7 @@ sponsored by Amazon.
    + [RDS Proxy command-line examples](rds-proxy.examples.md)
    + [Troubleshooting for RDS Proxy](rds-proxy.troubleshooting.md)
    + [Using RDS Proxy with AWS CloudFormation](rds-proxy-cfn.md)
+   + [Using RDS Proxy with Aurora global databases](rds-proxy-gdb.md)
 + [Using Aurora Serverless v2](aurora-serverless-v2.md)
    + [How Aurora Serverless v2 works](aurora-serverless-v2.how-it-works.md)
    + [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md)

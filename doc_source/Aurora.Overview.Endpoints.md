@@ -108,6 +108,9 @@ aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:Read
  Because custom endpoint names don't include the name of your cluster, you don't have to change those names if you rename a cluster\. You can't reuse the same custom endpoint name for more than one cluster in the same region\. Give each custom endpoint a name that is unique across the clusters owned by your user ID within a particular region\. 
 
  Each custom endpoint has an associated type that determines which DB instances are eligible to be associated with that endpoint\. Currently, the type can be `READER`, `WRITER`, or `ANY`\. The following considerations apply to the custom endpoint types: 
++ You can't select the custom endpoint type in the AWS Management Console\. All the custom endpoints you create through the AWS Management Console have a type of `ANY`\.
+
+  You can set and modify the custom endpoint type using the AWS CLI or Amazon RDS API\.
 +  Only DB instances that are read\-only Aurora Replicas can be part of a `READER` custom endpoint\. The `READER` type applies only to clusters using single\-master replication, because those clusters can include multiple read\-only DB instances\. 
 +  Both read\-only Aurora Replicas and the read/write primary instance can be part of an `ANY` custom endpoint\. Aurora directs connections to cluster endpoints with type `ANY` to any associated DB instance with equal probability\. Because you can't determine in advance if you are connecting to the primary instance of a read\-only Aurora Replica, use this kind of endpoint for read\-only connections only\. The `ANY` type applies to clusters using any replication topology\. 
 +  The `WRITER` type applies only to multi\-master clusters, because those clusters can include multiple read/write DB instances\. 

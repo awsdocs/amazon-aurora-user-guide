@@ -156,3 +156,4 @@ The following limitations apply to blue/green deployments:
   + You can't change an unencrypted DB cluster into an encrypted DB cluster\.
   + You can't change an encrypted DB cluster into an unencrypted DB cluster\.
   + You can't change a blue environment DB cluster to a higher engine version than its corresponding green environment DB cluster\.
+  + The resources in the blue environment and green environment must be in the same AWS account\.

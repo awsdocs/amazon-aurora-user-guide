@@ -28,9 +28,10 @@ The write forwarding configuration saves you from implementing your own mechanis
  To enable write forwarding using the Amazon RDS API, set the `EnableGlobalWriteForwarding` parameter to `true`\. This parameter works when you create a new secondary cluster using the `CreateDBCluster` operation\. It also works when you modify an existing secondary cluster using the `ModifyDBCluster` operation\. It requires that the global database uses an Aurora version that supports write forwarding\. You can turn write forwarding off by setting the `EnableGlobalWriteForwarding` parameter to `false`\. 
 
 **Note**  
- For a database session to use write forwarding, you also specify a setting for the `aurora_replica_read_consistency` configuration parameter\. Do this in every session that uses the write forwarding feature\. For information about this parameter, see [Isolation and consistency for write forwarding](#aurora-global-database-write-forwarding-isolation)\. 
+For a database session to use write forwarding, specify a setting for the `aurora_replica_read_consistency` configuration parameter\. Do this in every session that uses the write forwarding feature\. For information about this parameter, see [Isolation and consistency for write forwarding](#aurora-global-database-write-forwarding-isolation)\.   
+The RDS Proxy feature doesn't support the `SESSION` value for the `aurora_replica_read_consistency` variable\. Setting this value can cause unexpected behavior\.
 
- The following CLI examples show how you can set up an Aurora global database with write forwarding enabled or disabled\. The highlighted items represent the commands and options that are important to specify and keep consistent when setting up the infrastructure for an Aurora global database\. 
+The following CLI examples show how you can set up an Aurora global database with write forwarding enabled or disabled\. The highlighted items represent the commands and options that are important to specify and keep consistent when setting up the infrastructure for an Aurora global database\. 
 
  The following example creates an Aurora global database, a primary cluster, and a secondary cluster with write forwarding enabled\. Substitute your own choices for the user name, password, and primary and secondary AWS Regions\. 
 

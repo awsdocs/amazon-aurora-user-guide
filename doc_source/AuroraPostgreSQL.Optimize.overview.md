@@ -29,8 +29,9 @@ Query plan management supports the following types of SQL statements\.
 + Embedded SQL commands and statements\. For more information, see [Embedded SQL Commands](https://www.postgresql.org/docs/current/ecpg-sql-commands.html) in the PostgreSQL documentation\.
 + Statements inside named functions\. For more information, see [CREATE FUNCTION](https://www.postgresql.org/docs/current/sql-createfunction.html) in the PostgreSQL documentation\. 
 + Statements containing temp tables\.
++ Statements inside procedures and DO\-blocks\.
 
-You can use query plan management with `EXPLAIN` and `EXPLAIN ANALYZE` in manual mode to capture a plan without actually running it\. For more information, see [Analyzing the optimizer's chosen plan](AuroraPostgreSQL.Optimize.UsePlans.md#AuroraPostgreSQL.Optimize.UsePlans.AnalyzePlans)\. To learn more about query plan management's modes \(manual, automatic\), see [Capturing Aurora PostgreSQL execution plans](AuroraPostgreSQL.Optimize.CapturePlans.md)\.
+You can use query plan management with `EXPLAIN` in manual mode to capture a plan without actually running it\. For more information, see [Analyzing the optimizer's chosen plan](AuroraPostgreSQL.Optimize.UsePlans.md#AuroraPostgreSQL.Optimize.UsePlans.AnalyzePlans)\. To learn more about query plan management's modes \(manual, automatic\), see [Capturing Aurora PostgreSQL execution plans](AuroraPostgreSQL.Optimize.CapturePlans.md)\.
 
 Aurora PostgreSQL query plan management supports all PostgreSQL language features, including partitioned tables, inheritance, row\-level security, and recursive common table expressions \(CTEs\)\. To learn more about these PostgreSQL language features, see [Table Partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html), [Row Security Policies](https://www.postgresql.org/docs/current/ddl-rowsecurity.html), and [WITH Queries \(Common Table Expressions\)](https://www.postgresql.org/docs/current/queries-with.html) and other topics in the PostgreSQL documentation\. 
 
@@ -138,9 +139,9 @@ The following steps turn on query plan management for all SQL statements that ge
    CREATE EXTENSION
    ```
 **Tip**  
-Install the `apg_plan_mgmt` extension in the `template1` default PostgreSQL database so that the query plan management feature is available in all new databases that you create\. To learn more, see [Template Databases](https://www.postgresql.org/docs/current/manage-ag-templatedbs.html) in the PostgreSQL documentation\.
+Install the `apg_plan_mgmt` extension in the template database for your application\. The default template database is named `template1`\. To learn more, see [Template Databases](https://www.postgresql.org/docs/current/manage-ag-templatedbs.html) in the PostgreSQL documentation\.
 
-1. Change the `apg_plan_mgmt.capture_plan_baselines` parameter to `automatic`\. This setting causes the optimizer to generate plans for every SQL statement\. 
+1. Change the `apg_plan_mgmt.capture_plan_baselines` parameter to `automatic`\. This setting causes the optimizer to generate plans for every SQL statement that is either planned or executed two or more times\. 
 **Note**  
 Query plan management also has a *manual* mode that you can use for specific SQL statements\. To learn more, see [Capturing Aurora PostgreSQL execution plans](AuroraPostgreSQL.Optimize.CapturePlans.md)\. 
 

@@ -255,6 +255,9 @@ For example, suppose that you configured RDS Proxy to use 75 percent of the maxi
 
 This setting is represented by the **Connection pool maximum connections** field in the RDS console and the `MaxConnectionsPercent` setting in the AWS CLI and the API\. To learn how to change the value of the **Connection pool maximum connections** field in the RDS console, see [AWS Management Console](#rds-proxy-modifying-proxy.console)\. To learn how to change the value of the `MaxConnectionsPercent` setting, see the CLI command [modify\-db\-proxy\-target\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-proxy-target-group.html) or the API operation [ModifyDBProxyTargetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBProxyTargetGroup.html)\.
 
+**Important**  
+If the DB cluster is part of a global database with write forwarding turned on, reduce your proxy's `MaxConnectionsPercent` value by the quota that's allotted for write forwarding\. The write forwarding quota is set in the DB cluster parameter `aurora_fwd_writer_max_connections_pct`\. For information about write forwarding, see [Using write forwarding in an Amazon Aurora global database](aurora-global-database-write-forwarding.md)\.
+
  For information on database connection limits, see [Maximum connections to an Aurora MySQL DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Performance.html#AuroraMySQL.Managing.MaxConnections) and [Maximum connections to an Aurora PostgreSQL DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html#AuroraPostgreSQL.Managing.MaxConnections)\. 
 
 ### MaxIdleConnectionsPercent<a name="rds-proxy-connection-pooling-tuning.maxidleconnectionspercent"></a>

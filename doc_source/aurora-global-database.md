@@ -63,7 +63,7 @@ The following limitations currently apply to Aurora global databases:
   + Aurora multi\-master clusters
   + Aurora Serverless v1
   + Backtracking in Aurora
-  + Amazon RDS Proxy
++ For limitations with using the RDS Proxy feature with global databases, see [Limitations for RDS Proxy with global databases](rds-proxy-gdb.md#rds-proxy-gdb.limitations)\.
 + Automatic minor version upgrade doesn't apply to Aurora MySQL and Aurora PostgreSQL clusters that are part of an Aurora global database\. Note that you can specify this setting for a DB instance that is part of a global database cluster, but the setting has no effect\.
 + Aurora global databases currently don't support Aurora Auto Scaling for secondary DB clusters\.
 + You can start database activity streams on Aurora global databases running the following Aurora MySQL and Aurora PostgreSQL versions only\.    

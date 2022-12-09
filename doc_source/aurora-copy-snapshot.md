@@ -63,6 +63,7 @@ Cross\-Region copying of DB cluster snapshots isn't supported in the following o
 + Asia Pacific \(Hong Kong\)
 + Europe \(Milan\)
 + Middle East \(Bahrain\)
++ Middle East \(UAE\)
 
 Depending on the AWS Regions involved and the amount of data to be copied, a cross\-Region snapshot copy can take hours to complete\.
 
