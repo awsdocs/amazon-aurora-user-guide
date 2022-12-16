@@ -55,7 +55,7 @@ Some connection utilities you can use are the following:
 + **Applications** – You can use the AWS JDBC Driver for MySQL to connect your client applications to an Aurora MySQL DB cluster\. For more information about the AWS JDBC Driver for MySQL and complete instructions for using it, see the [AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
 **Note**  
 Version 3\.0\.3 of the MariaDB Connector/J utility drops support for Aurora DB clusters, so we highly recommend moving to the AWS JDBC Driver for MySQL\. The AWS JDBC Driver for MySQL offers improved failover speed for Aurora MySQL DB clusters\.  
-If you are using an Aurora Serverless DB cluster, the failover benefits don't apply, but you can disable the feature by setting the `failureDetectionEnabled` parameter to `false`\. To review a complete list of configuration options, see the [AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
+If you are using an Aurora Serverless v1 DB cluster, the failover benefits don't apply, but you can disable the feature by setting the `failureDetectionEnabled` parameter to `false`\. To review a complete list of configuration options, see the [AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
 
 ### Connecting with Aurora MySQL using the MySQL utility<a name="Aurora.Connecting.mysql"></a>
 

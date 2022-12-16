@@ -93,13 +93,13 @@ SELECT name, setting FROM pg_settings WHERE name in ('rds.logical_replication', 
 1. The clone is the ‘green’ instance in the deployment model\. It is the host of the replication subscription node\. When the node becomes available, connect with psql and query the new writer node to obtain the log sequence number \(LSN\)\. The LSN identifies the beginning of a record in the WAL stream\.
 
    ```
-   SELECT * FROM aurora_volume_logical_start_lsn;
+   SELECT aurora_volume_logical_start_lsn();
    ```
 
 1. In the response from the query, you find the LSN number\. You need this number later in the process, so make a note of it\.
 
    ```
-   postgres=> SELECT * FROM aurora_volume_logical_start_lsn;
+   postgres=> SELECT aurora_volume_logical_start_lsn();
    aurora_volume_logical_start_lsn 
    ---------------
    0/402E2F0

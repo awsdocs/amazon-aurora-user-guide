@@ -115,7 +115,7 @@ The following table shows the event category and a list of events when a DB inst
 |  recovery  | RDS\-EVENT\-0053 |  Recovery of the Multi\-AZ instance is complete\.  | 
 |  restoration  | RDS\-EVENT\-0019 |  The DB instance has been restored from a point\-in\-time backup\.  | 
 |  restoration  | RDS\-EVENT\-0043 |  Restored from snapshot \[snapshot\_name\]\. The DB instance has been restored from a DB snapshot\.  | 
-|  security patching  | RDS\-EVENT\-0230 |  A system update is available for your DB instance\. For information about applying updates, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.  | 
+|  security patching  | RDS\-EVENT\-0230 |  The operating system update is available for your DB instance\. For information about applying updates, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.  | 
 
 ## DB parameter group events<a name="USER_Events.Messages.parameter-group"></a>
 

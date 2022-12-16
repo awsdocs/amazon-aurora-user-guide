@@ -9,9 +9,9 @@ When you connect to the TDS port, the session is placed in the `babelfish_db` da
 
 ## Using Babelfish with a single database or multiple databases<a name="babelfish-single_vs_multi_db"></a>
 
-When you create an Aurora PostgreSQL cluster to use with Babelfish, you choose between using a single SQL Server database on its own or multiple SQL Server databases together\. Your choice affects how the names of SQL Server schemas inside the `babelfish_db` database appear from Aurora PostgreSQL\. The migration mode is stored in the `migration_mode` parameter\. You can't change this parameter after creating your cluster\.
+When you create an Aurora PostgreSQL cluster to use with Babelfish, you choose between using a single SQL Server database on its own or multiple SQL Server databases together\. Your choice affects how the names of SQL Server schemas inside the `babelfish_db` database appear from Aurora PostgreSQL\. The migration mode is stored in the `migration_mode` parameter\. You must not change this parameter after creating your cluster as you could lose access to all your previously created SQL objects\.
 
-In single\-database mode, the schema names of the user database in the `babelfish_db` database remain the same as in SQL Server\. If you choose to move a single database, schemas are recreated inside of the database and can be referenced with the same name used with SQL Server\. For example, the `dbo` and `smith` schemas reside inside the `dbA` database*\.* 
+In single\-db mode, the schema names of the SQL Server database remain the same in the `babelfish_db` database of the PostgreSQL\. If you choose to migrate only a single database, the schema names of the migrated user database can be referenced in PostgreSQL with the same names used in SQL Server\. For example, the `dbo` and `smith` schemas reside inside the `dbA` database*\.* 
 
 ![\[\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/babelfish_single_db_mode.png)
 
@@ -32,7 +32,7 @@ Inside the `babelfish_db` database, the T\-SQL user still needs to run `USE dbna
 
 ## Choosing a migration mode<a name="babelfish-choosing_single_vs_multi"></a>
 
-Each migration mode has advantages and disadvantages\. Choose your migration mode based on the number of user databases you have, and your migration plans\. After you create a cluster for use with Babelfish, you can't change the migration mode\. When choosing a migration mode, consider the requirements of your user databases and clients\.
+Each migration mode has advantages and disadvantages\. Choose your migration mode based on the number of user databases you have, and your migration plans\. After you create a cluster for use with Babelfish, you must not change the migration mode as you might lose access to all your previously created SQL objects\. When choosing a migration mode, consider the requirements of your user databases and clients\.
 
 When you create a cluster for use with Babelfish, Aurora PostgreSQL creates the system databases, `master` and `tempdb`\. If you created or modified objects in the system databases \(`master` or `tempdb`\), make sure to recreate those objects in your new cluster\. Unlike SQL Server, Babelfish doesn't reinitialize `tempdb` after a cluster reboot\.
 

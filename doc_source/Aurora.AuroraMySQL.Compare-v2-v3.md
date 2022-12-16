@@ -53,7 +53,7 @@ Use the following to learn about changes to be aware of when you upgrade your Au
 
  In Aurora MySQL version 3, the value of the `lower_case_table_names` parameter is set permanently at the time the cluster is created\. If you use a nondefault value for this option, set up your Aurora MySQL version 3 custom parameter group before upgrading\. Then specify the parameter group during the create cluster or snapshot restore operation\. 
 
-In Aurora MySQL version 3, the `init_connect` and `read_only` parameters don't apply for users who have the `CONNECTION_ADMIN` privilege\.
+In Aurora MySQL version 3, the `init_connect` and `read_only` parameters don't apply for users who have the `CONNECTION_ADMIN` privilege\. This includes the Aurora master user\. For more information, see [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\.
 
  For the full list of Aurora MySQL cluster parameters, see [Cluster\-level parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Parameters.Cluster)\. The table covers all the parameters from Aurora MySQL version 1, 2, and 3\. The table includes notes showing which parameters are new in Aurora MySQL version 3 or were removed from Aurora MySQL version 3\. 
 

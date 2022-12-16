@@ -51,33 +51,33 @@ Following are the supported engines and Region availability for RDS Proxy with A
 
 | Region | Aurora PostgreSQL 14 | Aurora PostgreSQL 13 | Aurora PostgreSQL 12 | Aurora PostgreSQL 11 | Aurora PostgreSQL 10 | 
 | --- | --- | --- | --- | --- | --- | 
-| US East \(Ohio\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| US East \(N\. Virginia\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| US West \(N\. California\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| US West \(Oregon\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| Africa \(Cape Town\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| Asia Pacific \(Hong Kong\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| US East \(Ohio\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| US East \(N\. Virginia\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| US West \(N\. California\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| US West \(Oregon\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Africa \(Cape Town\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Asia Pacific \(Hong Kong\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
 | Asia Pacific \(Hyderabad\) | – | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | – | – | 
-| Asia Pacific \(Mumbai\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| Asia Pacific \(Osaka\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| Asia Pacific \(Seoul\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| Asia Pacific \(Singapore\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| Asia Pacific \(Sydney\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| Asia Pacific \(Tokyo\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| Canada \(Central\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Asia Pacific \(Mumbai\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Asia Pacific \(Osaka\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Asia Pacific \(Seoul\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Asia Pacific \(Singapore\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Asia Pacific \(Sydney\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Asia Pacific \(Tokyo\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Canada \(Central\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
 | China \(Beijing\) | – | – | – | – | – | 
 | China \(Ningxia\) | – | – | – | – | – | 
-| Europe \(Frankfurt\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| Europe \(Ireland\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| Europe \(London\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| Europe \(Milan\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
-| Europe \(Paris\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Europe \(Frankfurt\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Europe \(Ireland\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Europe \(London\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Europe \(Milan\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Europe \(Paris\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
 | Europe \(Spain\) | – | – | – | – | – | 
-| Europe \(Stockholm\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Europe \(Stockholm\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
 | Europe \(Zurich\) | – | – | – | – | 
-| Middle East \(Bahrain\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| Middle East \(Bahrain\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
 | Middle East \(UAE\) | – | – | – | – | – | 
-| South America \(São Paulo\) | – | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
+| South America \(São Paulo\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9 and higher | Version 10\.14 and higher | 
 | AWS GovCloud \(US\-East\) | – | – | – | – | – | 
 | AWS GovCloud \(US\-West\) | – | – | – | – | – | 

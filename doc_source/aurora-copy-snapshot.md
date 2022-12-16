@@ -61,7 +61,11 @@ You can copy DB cluster snapshots across AWS Regions\. However, there are certai
 Cross\-Region copying of DB cluster snapshots isn't supported in the following opt\-in AWS Regions:
 + Africa \(Cape Town\)
 + Asia Pacific \(Hong Kong\)
++ Asia Pacific \(Hyderabad\)
++ Asia Pacific \(Jakarta\)
 + Europe \(Milan\)
++ Europe \(Spain\)
++ Europe \(Zurich\)
 + Middle East \(Bahrain\)
 + Middle East \(UAE\)
 
@@ -101,8 +105,8 @@ To cancel a copy operation once it is in progress, delete the target DB cluster 
 
 1. Select the check box for the DB cluster snapshot you want to copy\.
 
-1. For **Actions**, choose **Copy Snapshot**\. The **Make Copy of DB Snapshot** page appears\.   
-![\[Copy a DB cluster snapshot\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/DBClusterSnapshotCopy.png)
+1. For **Actions**, choose **Copy snapshot**\. The **Copy snapshot** page appears\.  
+![\[Copy a DB cluster snapshot\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/copy-db-cluster-snapshot.png)
 
 1. \(Optional\) To copy the DB cluster snapshot to a different AWS Region, choose that AWS Region for **Destination Region**\.
 

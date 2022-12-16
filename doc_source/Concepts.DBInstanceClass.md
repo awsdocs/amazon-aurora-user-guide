@@ -14,32 +14,32 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 
 ## DB instance class types<a name="Concepts.DBInstanceClass.Types"></a>
 
-Amazon Aurora supports three types of instance classes: Aurora Serverless v2, memory optimized, and burstable performance\. For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
+Amazon Aurora supports three types of instance classes: Aurora Serverless v2, memory\-optimized, and burstable performance\. For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
 
 The following is the Aurora Serverless v2 type available:
 +  **db\.serverless** – A special DB instance class used by Aurora Serverless v2\. Aurora adjusts the compute, memory, and network resources dynamically as the workload changes\. For usage details, see [Using Aurora Serverless v2](aurora-serverless-v2.md)\. 
 
-The following are the memory optimized DB instance types available:
-+ **db\.x2g** – Instance classes optimized for memory\-intensive applications and powered by AWS Graviton2 processors\. These offer low cost per GiB of memory\.
+The following are the memory\-optimized DB instance types available:
++ **db\.x2g** – Instance classes optimized for memory\-intensive applications and powered by AWS Graviton2 processors\. These instance classes offer low cost per GiB of memory\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
-+ **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
++ **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These instance classes are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.r6i** – Instance classes that are ideal for running memory\-intensive workloads\.
-+ **db\.r5** – Instance classes optimized for memory\-intensive applications\. These offer improved networking performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
++ **db\.r5** – Instance classes optimized for memory\-intensive applications\. These instance classes offer improved networking performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r4** – These instance classes are no longer supported for Aurora PostgreSQL\. If your Aurora PostgreSQL DB cluster currently uses a db\.r4 instance class, you should modify it to use **db\.r5** instead\. You can't upgrade your Aurora PostgreSQL version to a new release if your cluster uses a db\.r4 instance class\.
 + **db\.r3** – Instance classes that provide memory optimization\.
 
-  Amazon Aurora has started the the end\-of\-life process for db\.r3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all Aurora MySQL DB clusters that use db\.r3 DB instance classes, we recommend that you upgrade to a db\.r5 DB instance class as soon as possible\.    
+  Amazon Aurora has started the end\-of\-life process for db\.r3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all Aurora MySQL DB clusters that use db\.r3 DB instance classes, we recommend that you upgrade to a db\.r5 DB instance class as soon as possible\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html)
 
 The following are the burstable\-performance DB instance types available:
-+ **db\.t4g** – General\-purpose instance classes powered by Arm\-based AWS Graviton2 processors\. These deliver better price performance than previous burstable\-performance DB instance classes for a broad set of burstable general\-purpose workloads\. Amazon RDS T4g instances are configured for Unlimited mode\. This means that they can burst beyond the baseline over a 24\-hour window for an additional charge\.
++ **db\.t4g** – General\-purpose instance classes powered by Arm\-based AWS Graviton2 processors\. These instance classes deliver better price performance than previous burstable\-performance DB instance classes for a broad set of burstable general\-purpose workloads\. Amazon RDS T4g instances are configured for Unlimited mode\. This means that they can burst beyond the baseline over a 24\-hour window for an additional charge\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
-+ **db\.t3** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. T3 instances are configured for Unlimited mode\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\. 
-+ **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. T2 instances can be configured for Unlimited mode\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\.
++ **db\.t3** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. T3 instances are configured for Unlimited mode\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. We recommend using these instance classes only for development and test servers, or other non\-production servers\. 
++ **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. T2 instances can be configured for Unlimited mode\. We recommend using these instance classes only for development and test servers, or other non\-production servers\.
 
 For DB instance class hardware specifications, see [Hardware specifications for DB instance classes for Aurora](#Concepts.DBInstanceClass.Summary)\.
 
@@ -99,7 +99,7 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.r3 – memory\-optimized instance classes | 
 | db\.r3\.8xlarge | All version 1\.x; not supported in version 2\.11\.0 and higher; not supported in version 3\.01\.0 and higher | No | 
 | db\.r3\.4xlarge | All version 1\.x; not supported in version 2\.11\.0 and higher; not supported in version 3\.01\.0 and higher | No | 
-| db\.r3\.2xlarge | AAll version 1\.x; not supported in version 2\.11\.0 and higher; not supported in version 3\.01\.0 and higher | No | 
+| db\.r3\.2xlarge | All version 1\.x; not supported in version 2\.11\.0 and higher; not supported in version 3\.01\.0 and higher | No | 
 | db\.r3\.xlarge | All version 1\.x; not supported in version 2\.11\.0 and higher; not supported in version 3\.01\.0 and higher | No | 
 | db\.r3\.large | All version 1\.x; not supported in version 2\.11\.0 and higher; not supported in version 3\.01\.0 and higher | No | 
 | db\.t4g – burstable\-performance instance classes powered by AWS Graviton2 processors | 
@@ -284,63 +284,63 @@ For information about Aurora DB engine support for each DB instance class, see [
 
 ****  
 
-| Instance class | vCPU | ECU | Memory \(GiB\) | Max\. bandwidth \(mbps\) of local storage | Network performance | 
+| Instance class | vCPU | ECU | Memory \(GiB\) | Max\. bandwidth \(Mbps\) of local storage | Network performance \(Gbps\) | 
 | --- | --- | --- | --- | --- | --- | 
 | db\.x2g – memory\-optimized instance classes | 
-| db\.x2g\.16xlarge | 64 | — | 1024 | 19,000 | 25 Gbps | 
-| db\.x2g\.12xlarge | 48 | — | 768 | 14,250 | 20 Gbps | 
-| db\.x2g\.8xlarge | 32 | — | 512 | 9,500 | 12 Gbps | 
-| db\.x2g\.4xlarge | 16 | — | 256 | 4,750 | Up to 10 Gbps | 
-| db\.x2g\.2xlarge | 8 | — | 128 | Up to 4,750 | Up to 10 Gbps | 
-| db\.x2g\.xlarge | 4 | — | 64 | Up to 4,750 | Up to 10 Gbps | 
-| db\.x2g\.large | 2 | — | 32 | Up to 4,750 | Up to 10 Gbps | 
+| db\.x2g\.16xlarge | 64 | — | 1024 | 19,000 | 25 | 
+| db\.x2g\.12xlarge | 48 | — | 768 | 14,250 | 20 | 
+| db\.x2g\.8xlarge | 32 | — | 512 | 9,500 | 12 | 
+| db\.x2g\.4xlarge | 16 | — | 256 | 4,75 | Up to 10 | 
+| db\.x2g\.2xlarge | 8 | — | 128 | Up to 4,750 | Up to 10 | 
+| db\.x2g\.xlarge | 4 | — | 64 | Up to 4,750 | Up to 10 | 
+| db\.x2g\.large | 2 | — | 32 | Up to 4,750 | Up to 10 | 
 | db\.r6g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
-| db\.r6g\.16xlarge | 64 | — | 512 | 19,000 | 25 Gbps | 
-| db\.r6g\.12xlarge | 48 | — | 384 | 13,500 | 20 Gbps | 
-| db\.r6g\.8xlarge | 32 | — | 256 | 9,000 | 12 Gbps | 
-| db\.r6g\.4xlarge | 16 | — | 128 | 4,750 | Up to 10 Gbps  | 
-| db\.r6g\.2xlarge | 8 | — | 64 | Up to 4,750 | Up to 10 Gbps  | 
-| db\.r6g\.xlarge | 4 | — | 32 | Up to 4,750 | Up to 10 Gbps  | 
-| db\.r6g\.large | 2 | — | 16 | Up to 4,750 | Up to 10 Gbps  | 
+| db\.r6g\.16xlarge | 64 | — | 512 | 19,000 | 25 | 
+| db\.r6g\.12xlarge | 48 | — | 384 | 13,500 | 20 | 
+| db\.r6g\.8xlarge | 32 | — | 256 | 9,000 | 12 | 
+| db\.r6g\.4xlarge | 16 | — | 128 | 4,750 | Up to 10  | 
+| db\.r6g\.2xlarge | 8 | — | 64 | Up to 4,750 | Up to 10  | 
+| db\.r6g\.xlarge | 4 | — | 32 | Up to 4,750 | Up to 10  | 
+| db\.r6g\.large | 2 | — | 16 | Up to 4,750 | Up to 10  | 
 | db\.r6i – memory\-optimized instance classes | 
-| db\.r6i\.32xlarge | 128 | — | 1,024 | 40,000 | 50 Gbps | 
-| db\.r6i\.24xlarge | 96 | — | 768 | 30,000 | 37\.5 Gbps | 
-| db\.r6i\.16xlarge | 64 | — | 512 | 20,000 | 25 Gbps | 
-| db\.r6i\.12xlarge | 48 | — | 384 | 15,000 | 18\.75 Gbps | 
-| db\.r6i\.8xlarge | 32 | — | 256 | 10,000 | 12\.5 Gbps | 
-| db\.r6i\.4xlarge\* | 16 | — | 128 | Up to 10,000 | Up to 12\.5 Gbps | 
-| db\.r6i\.2xlarge\* | 8 | — | 64 | Up to 10,000 | Up to 12\.5 Gbps | 
-| db\.r6i\.xlarge\* | 4 | — | 32 | Up to 10,000 | Up to 12\.5 Gbps | 
-| db\.r6i\.large\* | 2 | — | 16 | Up to 10,000 | Up to 12\.5 Gbps | 
+| db\.r6i\.32xlarge | 128 | — | 1,024 | 40,000 | 50 | 
+| db\.r6i\.24xlarge | 96 | — | 768 | 30,000 | 37\.5 | 
+| db\.r6i\.16xlarge | 64 | — | 512 | 20,000 | 25 | 
+| db\.r6i\.12xlarge | 48 | — | 384 | 15,000 | 18\.75 | 
+| db\.r6i\.8xlarge | 32 | — | 256 | 10,000 | 12\.5 | 
+| db\.r6i\.4xlarge\* | 16 | — | 128 | Up to 10,000 | Up to 12\.5 | 
+| db\.r6i\.2xlarge\* | 8 | — | 64 | Up to 10,000 | Up to 12\.5 | 
+| db\.r6i\.xlarge\* | 4 | — | 32 | Up to 10,000 | Up to 12\.5 | 
+| db\.r6i\.large\* | 2 | — | 16 | Up to 10,000 | Up to 12\.5 | 
 | db\.r5 – memory\-optimized instance classes | 
-| db\.r5\.24xlarge | 96 | 347 | 768 | 19,000 | 25 Gbps | 
-| db\.r5\.16xlarge | 64 | 264 | 512 | 13,600 | 20 Gbps | 
-| db\.r5\.12xlarge | 48 | 173 | 384 | 9,500 | 10 Gbps | 
-| db\.r5\.8xlarge | 32 | 132 | 256 | 6,800 | 10 Gbps | 
-| db\.r5\.4xlarge | 16 | 71 | 128 | 4,750 | Up to 10 Gbps | 
-| db\.r5\.2xlarge | 8 | 38 | 64 | Up to 4,750 | Up to 10 Gbps | 
-| db\.r5\.xlarge | 4 | 19 | 32 | Up to 4,750 | Up to 10 Gbps | 
-| db\.r5\.large | 2 | 10 | 16 | Up to 4,750 | Up to 10 Gbps | 
+| db\.r5\.24xlarge | 96 | 347 | 768 | 19,000 | 25 | 
+| db\.r5\.16xlarge | 64 | 264 | 512 | 13,600 | 20 | 
+| db\.r5\.12xlarge | 48 | 173 | 384 | 9,500 | 10 | 
+| db\.r5\.8xlarge | 32 | 132 | 256 | 6,800 | 10 | 
+| db\.r5\.4xlarge | 16 | 71 | 128 | 4,750 | Up to 10 | 
+| db\.r5\.2xlarge | 8 | 38 | 64 | Up to 4,750 | Up to 10 | 
+| db\.r5\.xlarge | 4 | 19 | 32 | Up to 4,750 | Up to 10 | 
+| db\.r5\.large | 2 | 10 | 16 | Up to 4,750 | Up to 10 | 
 | db\.r4 – memory\-optimized instance classes | 
-| db\.r4\.16xlarge | 64 | 195 | 488 | 14,000 | 25 Gbps | 
-| db\.r4\.8xlarge | 32 | 99 | 244 | 7,000 | 10 Gbps | 
-| db\.r4\.4xlarge | 16 | 53 | 122 | 3,500 | Up to 10 Gbps | 
-| db\.r4\.2xlarge | 8 | 27 | 61 | 1,700 | Up to 10 Gbps | 
-| db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | 850 | Up to 10 Gbps | 
-| db\.r4\.large | 2 | 7 | 15\.25 | 425 | Up to 10 Gbps | 
+| db\.r4\.16xlarge | 64 | 195 | 488 | 14,000 | 25 | 
+| db\.r4\.8xlarge | 32 | 99 | 244 | 7,000 | 10 | 
+| db\.r4\.4xlarge | 16 | 53 | 122 | 3,500 | Up to 10 | 
+| db\.r4\.2xlarge | 8 | 27 | 61 | 1,700 | Up to 10 | 
+| db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | 850 | Up to 10 | 
+| db\.r4\.large | 2 | 7 | 15\.25 | 425 | Up to 10 | 
 | db\.r3 – memory\-optimized instance classes | 
-| db\.r3\.8xlarge | 32 | 104 | 244 | — | 10 Gbps | 
+| db\.r3\.8xlarge | 32 | 104 | 244 | — | 10 | 
 | db\.r3\.4xlarge | 16 | 52 | 122 | 2,000 | High | 
 | db\.r3\.2xlarge | 8 | 26 | 61 | 1,000 | High | 
 | db\.r3\.xlarge | 4 | 13 | 30\.5 | 500 | Moderate | 
 | db\.r3\.large | 2 | 6\.5 | 15\.25 | — | Moderate | 
 | db\.t4g – burstable\-performance instance classes | 
-| db\.t4g\.large | 2 | — | 8 | Up to 2,780 | Up to 5 Gbps | 
-| db\.t4g\.medium | 2 | — | 4 | Up to 2,085 | Up to 5 Gbps | 
+| db\.t4g\.large | 2 | — | 8 | Up to 2,780 | Up to 5 | 
+| db\.t4g\.medium | 2 | — | 4 | Up to 2,085 | Up to 5 | 
 | db\.t3 – burstable\-performance instance classes | 
-| db\.t3\.large | 2 | Variable | 8 | Up to 2,048 | Up to 5 Gbps | 
-| db\.t3\.medium | 2 | Variable | 4 | Up to 1,536 | Up to 5 Gbps | 
-| db\.t3\.small | 2 | Variable | 2 | Up to 1,536 | Up to 5 Gbps | 
+| db\.t3\.large | 2 | Variable | 8 | Up to 2,048 | Up to 5 | 
+| db\.t3\.medium | 2 | Variable | 4 | Up to 1,536 | Up to 5 | 
+| db\.t3\.small | 2 | Variable | 2 | Up to 1,536 | Up to 5 | 
 | db\.t2 – burstable\-performance instance classes | 
 | db\.t2\.medium | 2 | Variable | 4 | — | Moderate | 
 | db\.t2\.small | 1 | Variable | 2 | — | Low | 

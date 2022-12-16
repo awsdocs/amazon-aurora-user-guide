@@ -48,6 +48,8 @@ When you're satisfied with all testing, analysis, and any modifications needed f
 
  For best results, we recommend that you evaluate the generated DDL/DML and the client query code before actually migrating your SQL Server database application to Babelfish\. Depending on the version of Babelfish and the specific features of SQL Server that your application implements, you might need to refactor your application or use alternatives for functionality that aren't fully supported yet in Babelfish\.
 + To assess your SQL Server application code, use Babelfish Compass on the generated DDL to determine how much T\-SQL code is supported by Babelfish\. Identify T\-SQL code that might need modifications before running on Babelfish\. For more information about this tool, see [ Babelfish Compass tool](https://github.com/babelfish-for-postgresql/babelfish_compass/releases/latest) on GitHub\.
+**Note**  
+Babelfish Compass is an open\-source tool\. Report any issues with Babelfish Compass through GitHub instead of through AWS Support\.
 
 You can use Generate Script Wizard with SQL Server Management Studio \(SSMS\) to generate the SQL file that is assessed by Babelfish Compass or AWS Schema Conversion Tool CLI\. We recommend the following steps to streamline the assessment\.
 
@@ -68,9 +70,6 @@ You can use Generate Script Wizard with SQL Server Management Studio \(SSMS\) to
 ![\[\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Babelfish-advanced-scripting-options.png)
 
 1. Perform the remaining steps in the wizard to generate the file\.
-
-**Note**  
-Babelfish Compass is an open\-source tool\. Report any issues with Babelfish Compass through GitHub instead of to AWS Support\.
 
 ## Import/export tools for migrating from SQL Server to Babelfish<a name="babelfish-migration.import-export-tools"></a>
 

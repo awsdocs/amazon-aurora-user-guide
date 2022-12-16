@@ -3,11 +3,11 @@
 Performance Insights expands on existing Amazon RDS monitoring features to illustrate and help you analyze your database performance\. With the Performance Insights dashboard, you can visualize the database load on your Amazon RDS DB instance load and filter the load by waits, SQL statements, hosts, or users\. For more information, see [Overview of Performance Insights on Amazon Aurora](USER_PerfInsights.Overview.md)\. 
 
 **Topics**
-+ [with Aurora MySQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.amy)
++ [Performance Insights with Aurora MySQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.amy)
 + [Performance Insights with Aurora PostgreSQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.apg)
 + [Performance Insights with Aurora Serverless](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.serverless)
 
-## with Aurora MySQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.amy"></a>
+## Performance Insights with Aurora MySQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.amy"></a>
 
 **Note**  
 Engine version support is different for Performance Insights with Aurora MySQL if you have parallel query turned on\. For more information on parallel query, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.

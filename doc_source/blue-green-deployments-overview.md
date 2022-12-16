@@ -6,6 +6,9 @@ You can make changes to the Aurora DB cluster in the green environment without a
 
 Because the green environment is a copy of the topology of the production environment, the DB cluster and all of its DB instances are copied in the deployment\. The green environment also includes the features used by the DB cluster, such as DB cluster snapshots, Performance Insights, Enhanced Monitoring, and Aurora Serverless v2\.
 
+**Note**  
+Currently, blue/green deployments are supported only for Aurora MySQL\.
+
 **Topics**
 + [Benefits of using Amazon RDS Blue/Green Deployments](#blue-green-deployments-benefits)
 + [Workflow of a blue/green deployment](#blue-green-deployments-major-steps)

@@ -57,16 +57,16 @@ The table following shows how Babelfish behaves for each combination\.
 
 | Client SSL setting | Babelfish SSL setting | Connection allowed? | Value returned to client | 
 | --- | --- | --- | --- | 
-| ENCRYPT\_OFF | tds\_ssl\_encrypt=false | Allowed, the login packet is encrypted | ENCRYPT\_OFF | 
-| ENCRYPT\_OFF | tds\_ssl\_encrypt=true | Allowed, the entire connection is encrypted | ENCRYPT\_REQ | 
-| ENCRYPT\_ON | tds\_ssl\_encrypt=false | Allowed, the entire connection is encrypted | ENCRYPT\_ON | 
-| ENCRYPT\_ON | tds\_ssl\_encrypt=true | Allowed, the entire connection is encrypted | ENCRYPT\_ON | 
-| ENCRYPT\_NOT\_SUP | tds\_ssl\_encrypt=false | Yes | ENCRYPT\_NOT\_SUP | 
-| ENCRYPT\_NOT\_SUP | tds\_ssl\_encrypt=true | No, connection closed  | ENCRYPT\_REQ | 
-| ENCRYPT\_REQ | tds\_ssl\_encrypt=false | Allowed, the entire connection is encrypted | ENCRYPT\_ON | 
-| ENCRYPT\_REQ | tds\_ssl\_encrypt=true | Allowed, the entire connection is encrypted | ENCRYPT\_ON | 
-| ENCRYPT\_CLIENT\_CERT | tds\_ssl\_encrypt=false | No, connection closed | Unsupported | 
-| ENCRYPT\_CLIENT\_CERT | tds\_ssl\_encrypt=true | No, connection closed | Unsupported | 
+| ENCRYPT\_OFF | tds\_ssl\_encrypt=0 | Allowed, the login packet is encrypted | ENCRYPT\_OFF | 
+| ENCRYPT\_OFF | tds\_ssl\_encrypt=1 | Allowed, the entire connection is encrypted | ENCRYPT\_REQ | 
+| ENCRYPT\_ON | tds\_ssl\_encrypt=0 | Allowed, the entire connection is encrypted | ENCRYPT\_ON | 
+| ENCRYPT\_ON | tds\_ssl\_encrypt=1 | Allowed, the entire connection is encrypted | ENCRYPT\_ON | 
+| ENCRYPT\_NOT\_SUP | tds\_ssl\_encrypt=0 | Yes | ENCRYPT\_NOT\_SUP | 
+| ENCRYPT\_NOT\_SUP | tds\_ssl\_encrypt=1 | No, connection closed  | ENCRYPT\_REQ | 
+| ENCRYPT\_REQ | tds\_ssl\_encrypt=0 | Allowed, the entire connection is encrypted | ENCRYPT\_ON | 
+| ENCRYPT\_REQ | tds\_ssl\_encrypt=1 | Allowed, the entire connection is encrypted | ENCRYPT\_ON | 
+| ENCRYPT\_CLIENT\_CERT | tds\_ssl\_encrypt=0 | No, connection closed | Unsupported | 
+| ENCRYPT\_CLIENT\_CERT | tds\_ssl\_encrypt=1 | No, connection closed | Unsupported | 
 
 ## Client authentication to Babelfish<a name="babelfish-authentication"></a>
 

@@ -19,6 +19,7 @@
   + [How Aurora Serverless v2 metrics apply to your AWS bill](#aurora-serverless-v2-billing)
   + [Examples of CloudWatch commands for Aurora Serverless v2 metrics](#aurora-serverless-v2-cw-examples)
 + [Monitoring Aurora Serverless v2 performance with Performance Insights](#aurora-serverless-v2.viewing.performance-insights)
++ [Troubleshooting Aurora Serverless v2 capacity issues](#aurora-serverless-v2.troubleshooting)
 
 ## Choosing the Aurora Serverless v2 capacity range for an Aurora cluster<a name="aurora-serverless-v2-examples-setting-capacity-range-for-cluster"></a>
 
@@ -44,7 +45,8 @@
 +  If your provisioned workload has memory requirements that are too high for small DB instance classes such as T3 or T4g, choose a minimum ACU setting that provides memory comparable to an R5 or R6g DB instance\. 
 
    In particular, we recommend the following minimum capacity for use with the specified features \(these recommendations are subject to change\): 
-  +  **Performance Insights** – 2 ACUs\. 
+  + Performance Insights – 2 ACUs
+  + Aurora global databases – 8 ACUs
 +  In some cases, your cluster might contain Aurora Serverless v2 reader DB instances that scale independently from the writer\. If so, choose a minimum capacity setting that's high enough that when the writer DB instance is busy with a write\-intensive workload, the reader DB instances can apply the changes from the writer without falling behind\. If you observe replica lag in readers that are in promotion tiers 2–15, consider increasing the minimum capacity setting for your cluster\. For details on choosing whether reader DB instances scale along with the writer or independently, see [Choosing the promotion tier for an Aurora Serverless v2 reader](aurora-serverless-v2-administration.md#aurora-serverless-v2-choosing-promotion-tier)\. 
 +  If you have a mixed\-configuration cluster with a provisioned writer and Aurora Serverless v2 readers, the readers can't scale along with the writer\. In that case, setting a low minimum capacity can result in excessive replication lag\. That's because the readers might not have enough capacity to apply changes from the writer when the database is busy\. When your cluster uses a provisioned writer, set the minimum capacity to a value that represents a comparable amount of memory and CPU to the writer\. 
 +  For Aurora PostgreSQL, when you specify a minimum Aurora Serverless v2 capacity of 0\.5, the `max_connections` setting is permanently capped at 2000\. If you intend to use the Aurora PostgreSQL cluster for a high\-connection workload, consider using a minimum ACU setting of 1 or higher\. For details about how Aurora Serverless v2 handles the `max_connections` configuration parameter, see [Parameters that Aurora computes based on Aurora Serverless v2 maximum capacity](#aurora-serverless-v2.parameters-based-on-max-capacity)\. 
@@ -590,3 +592,16 @@ aws cloudwatch get-metric-statistics --metric-name "FreeableMemory" \
  For the full list of Performance Insights counters, see [Performance Insights counter metrics](USER_PerfInsights_Counters.md)\. 
 
  When `vCPU` values are shown for an Aurora Serverless v2 DB instance in Performance Insights, those values represent estimates based on the ACU value for the DB instance\. At the default interval of one minute, any fractional vCPU values are rounded up to the nearest whole number\. For longer intervals, the vCPU value shown is the average of the integer vCPU values for each minute\. 
+
+## Troubleshooting Aurora Serverless v2 capacity issues<a name="aurora-serverless-v2.troubleshooting"></a>
+
+In some cases, Aurora Serverless v2 doesn't scale down to the minimum capacity, even with no load on the database\. This can happen for the following reasons:
++ Certain features, such as Performance Insights and Aurora global databases, can increase resource usage and prevent the database from scaling down to minimum capacity\. For more information, see [Choosing the minimum Aurora Serverless v2 capacity setting for a cluster](#aurora-serverless-v2.min_capacity_considerations)\.
++ If a reader instance isn't scaling down to the minimum and stays at the same or higher capacity than the writer instance, then check the priority tier of the reader instance\. Aurora Serverless v2 reader DB instances in tier 0 or 1 are kept at a minimum capacity at least as high as the writer DB instance\. Change the priority tier of the reader to 2 or higher so that it scales up and down independently of the writer\. For more information, see [Choosing the promotion tier for an Aurora Serverless v2 reader](aurora-serverless-v2-administration.md#aurora-serverless-v2-choosing-promotion-tier)\.
++ Set any database parameters that impact the size of shared memory to their default values\. Setting a value higher than the default increases the shared memory requirement and prevents the database from scaling down to the minimum capacity\. Examples are `max_connections` and `max_locks_per_transaction`\.
+**Note**  
+Updating shared memory parameters requires a database restart for the changes to take effect\.
++ Workload characteristics, such as large database volumes, can increase resource usage\.
++ Background processes, such as purge, can also increase resource usage\.
+
+If the database still doesn't scale down to the minimum capacity configured, then stop and restart the database to reclaim any memory fragments that might have built up over time\. Stopping and starting a database results in downtime, so we recommend doing this sparingly\.

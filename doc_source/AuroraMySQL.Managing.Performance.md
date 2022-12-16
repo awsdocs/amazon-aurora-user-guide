@@ -53,6 +53,15 @@ If your applications frequently open and close connections, or keep a large numb
 | db\.r6g\.8xlarge | 5000 | 
 | db\.r6g\.12xlarge | 6000 | 
 | db\.r6g\.16xlarge | 6000 | 
+| db\.r6i\.large | 1000 | 
+| db\.r6i\.xlarge | 2000 | 
+| db\.r6i\.2xlarge | 3000 | 
+| db\.r6i\.4xlarge | 4000 | 
+| db\.r6i\.8xlarge | 5000 | 
+| db\.r6i\.12xlarge | 6000 | 
+| db\.r6i\.16xlarge | 6000 | 
+| db\.r6i\.24xlarge | 7000 | 
+| db\.r6i\.32xlarge | 7000 | 
 | db\.x2g\.large | 2000 | 
 | db\.x2g\.xlarge | 3000 | 
 | db\.x2g\.2xlarge | 4000 | 

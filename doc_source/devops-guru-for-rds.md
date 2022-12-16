@@ -34,11 +34,11 @@ To detect performance issues and help you resolve bottlenecks, DevOps Guru for 
 
 DevOps Guru for RDS collects data about your Aurora databases from Amazon RDS Performance Insights\. The most important metric is `DBLoad`\. DevOps Guru for RDS consumes the Performance Insights metrics, analyzes them with machine learning, and publishes insights to the dashboard\.
 
-### Insights<a name="devops-guru-for-rds.how-it-works.insights"></a>
+### DevOps Guru insights<a name="devops-guru-for-rds.how-it-works.insights"></a>
 
 An *insight* is a collection of related anomalies that were detected by DevOps Guru\. If DevOps Guru for RDS finds performance issues in your Amazon Aurora DB instances, it publishes an insight in the DevOps Guru dashboard\. To learn more about insights, see [Working with insights in DevOps Guru](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html) in the *Amazon DevOps Guru User Guide*\.
 
-### Anomalies<a name="devops-guru-for-rds.how-it-works.anomalies"></a>
+### DevOps Guru anomalies<a name="devops-guru-for-rds.how-it-works.anomalies"></a>
 
 In DevOps Guru for RDS, an *anomaly* is a pattern that deviates from what is considered normal performance for your Amazon Aurora database\. 
 
@@ -48,7 +48,7 @@ A *causal anomaly* is a top\-level anomaly within an insight\. **Database load \
 
 An anomaly measures performance impact by assigning a severity level of **High**, **Medium**, or **Low**\. To learn more, see [Key concepts for DevOps Guru for RDS](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-rds.overview.definitions.html) in the *Amazon DevOps Guru User Guide*\.
 
-If DevOps Guru detects an anomaly on your DB instance, you're alerted in the **Databases** page of the RDS console\. To go to the anomaly page from the RDS console, choose the link in the alert message\. The RDS console also alerts you in the page for your Amazon Aurora cluster\.
+If DevOps Guru detects a current anomaly on your DB instance, you're alerted in the **Databases** page of the RDS console\. The console also alerts you to anomalies that occurred in the past 24 hours\. To go to the anomaly page from the RDS console, choose the link in the alert message\. The RDS console also alerts you in the page for your Amazon Aurora DB cluster\.
 
 #### Contextual anomalies<a name="devops-guru-for-rds.how-it-works.anomalies.contextual"></a>
 
@@ -141,10 +141,6 @@ If your resources aren't covered by DevOps Guru, Amazon RDS notifies you with a
 ![\[Turn on DevOps Guru in the RDS console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/perf_insights_devops_guru.png)
 
 1. Choose **Turn on DevOps Guru**\.
-
-In the Performance Insights dashboard, you can also turn off DevOps Guru\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/devops-guru-pi-toggle.png)
 
 ##### Responding to a permissions error when you turn on DevOps Guru<a name="devops-guru-for-rds.configuring.coverage.rds-console.error"></a>
 

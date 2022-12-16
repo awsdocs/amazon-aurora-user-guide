@@ -50,10 +50,10 @@ Major version upgrades might contain database changes that are not backward\-com
 **Note**  
 Currently, you can't upgrade an Aurora PostgreSQL DB cluster running Babelfish to a new major version\.
 
-In the table, you can find the major version upgrades that are available for various Aurora PostgreSQL DB versions\.  
+In the table, you can find the version upgrades that are available for various Aurora PostgreSQL DB versions\.  
 
 
-| Current source version | Major upgrade targets | 
+| Current source version | Upgrade targets | 
 | --- | --- | 
 | 14\.4 | [14\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.145X) |   |   |   |   |   |   |   |   |   |   |   |   | 
 | 14\.3 | [14\.5](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.145X) | [14\.4](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html#AuroraPostgreSQL.Updates.20180305.144X) |   |   |   |   |   |   |   |   |   |   |   | 
