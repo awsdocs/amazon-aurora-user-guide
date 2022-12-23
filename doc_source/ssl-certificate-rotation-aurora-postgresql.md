@@ -99,7 +99,7 @@ The following provides information about using SSL/TLS connections for different
 
   A popular Python library for connecting to PostgreSQL databases is `psycopg2`\.
 
-  For information about using `psycopg2`, see the [psycopg2 documentation](https://pypi.org/project/psycopg2/)\. For a short tutorial on how to connect to a PostgreSQL database, see [Psycopg2 tutorial](https://wiki.postgresql.org/wiki/Psycopg2_Tutorial)\. You can find information about the options the connect command accepts in [The psycopg2 module content](http://initd.org/psycopg/docs/module.html#module-psycopg2)\.
+  For information about using `psycopg2`, see the [psycopg2 documentation](https://pypi.org/project/psycopg2/)\. For a short tutorial on how to connect to a PostgreSQL database, see [Psycopg2 tutorial](https://wiki.postgresql.org/wiki/Psycopg2_Tutorial)\. You can find information about the options the connect command accepts in [The psycopg2 module content](https://www.psycopg.org/docs/module.html)\.
 
 **Important**  
 After you have determined that your database connections use SSL/TLS and have updated your application trust store, you can update your database to use the rds\-ca\-2019 certificates\. For instructions, see step 3 in [Updating your CA certificate by modifying your DB instance](UsingWithRDS.SSL-certificate-rotation.md#UsingWithRDS.SSL-certificate-rotation-updating)\.

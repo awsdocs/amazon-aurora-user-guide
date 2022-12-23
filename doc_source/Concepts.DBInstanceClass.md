@@ -14,7 +14,7 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 
 ## DB instance class types<a name="Concepts.DBInstanceClass.Types"></a>
 
-Amazon Aurora supports three types of instance classes: Aurora Serverless v2, memory\-optimized, and burstable performance\. For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
+Amazon Aurora supports three types of DB instance classes: Aurora Serverless v2, memory\-optimized, and burstable performance\. For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
 
 The following is the Aurora Serverless v2 type available:
 +  **db\.serverless** – A special DB instance class used by Aurora Serverless v2\. Aurora adjusts the compute, memory, and network resources dynamically as the workload changes\. For usage details, see [Using Aurora Serverless v2](aurora-serverless-v2.md)\. 

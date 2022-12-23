@@ -309,11 +309,12 @@ mysql> select * from serverless_v2_demo.demo;
 |  Feature  |  Aurora Serverless v2 requirement  |  Aurora Serverless v1 requirement  | 
 | --- | --- | --- | 
 |  DB engines  |  Aurora MySQL, Aurora PostgreSQL  |  Aurora MySQL, Aurora PostgreSQL  | 
-|  Supported Aurora MySQL versions  |  Version 3\.02\.0, compatible with MySQL 8\.0  |  Versions 1 and 2, compatible with MySQL 5\.6 and 5\.7  | 
-|  Supported Aurora PostgreSQL versions  | Version 13\.6, 13\.7, or 14\.3 | Version 10\.18 or 11\.13 | 
+|  Supported Aurora MySQL versions  | See [Aurora Serverless v2 with Aurora MySQL](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.amy)\. | See [Aurora Serverless v1 with Aurora MySQL](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.amy)\. | 
+|  Supported Aurora PostgreSQL versions  | See [Aurora Serverless v2 with Aurora PostgreSQL](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.apg)\. | See [Aurora Serverless v1 with Aurora PostgreSQL](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.apg)\. | 
+| Upgrading a DB cluster | Similarly to provisioned DB clusters, you can perform upgrades manually without waiting for Aurora to upgrade the DB cluster for you\. For more information, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\. |  Minor version upgrades are applied automatically as they become available\. For more information, see [Aurora Serverless v1 and Aurora database engine versions](aurora-serverless.relnotes.md)\. You can perform major version upgrades manually\. For more information, see [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\.  | 
 | Converting from provisioned DB cluster |  You can use the following methods: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.upgrade.html)  |  Restore snapshot of provisioned cluster to create new Aurora Serverless v1 cluster\.  | 
 | Converting from Aurora Serverless v1 cluster | Follow the procedure in [Upgrading from an Aurora Serverless v1 cluster to Aurora Serverless v2](#aurora-serverless-v2.upgrade-from-serverless-v1-procedure)\. | Not applicable | 
-|  Available DB instance classes  |  The special DB instance class db\.serverless\. In the AWS Management Console, it's labeled as Serverless\.  |  Not applicable\.  | 
+| Available DB instance classes | The special DB instance class db\.serverless\. In the AWS Management Console, it's labeled as Serverless\. | Not applicable\. Aurora Serverless v1 uses the serverless engine mode\. | 
 |  Port  |  Any port that's compatible with MySQL or PostgreSQL  |  Default MySQL or PostgreSQL port only  | 
 |  Public IP address allowed?  |  Yes  |  No  | 
 |  Virtual private cloud \(VPC\) required?  | Yes |  Yes\. Each Aurora Serverless v1 cluster consumes 2 interface and Gateway Load Balancer endpoints allocated to your VPC\.  | 

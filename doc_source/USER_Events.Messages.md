@@ -56,6 +56,7 @@ No event category exists for Aurora Serverless in the DB cluster event type\. Th
 |  notification  | RDS\-EVENT\-0151 |  The DB cluster started\.  | 
 |  notification  | RDS\-EVENT\-0152 |  The DB cluster stop failed\.  | 
 |  notification  | RDS\-EVENT\-0153 |  The DB cluster is being started due to it exceeding the maximum allowed time being stopped\.  | 
+| notification | RDS\-EVENT\-0172 |  Renamed DB cluster from \[old DB cluster name\] to \[new DB cluster name\]\.  | 
 |  notification  | RDS\-EVENT\-0173 |  Patching of the DB cluster has completed\.  | 
 |  notification  | RDS\-EVENT\-0234 |  The DB cluster export task failed\.  | 
 |  notification  | RDS\-EVENT\-0235 |  The DB cluster export task was canceled\.  | 
@@ -154,7 +155,6 @@ The following table shows the event category and a list of events when a DB clus
 | notification | RDS\-EVENT\-0164 |  The DB cluster snapshot export task completed\.  | 
 | backup | RDS\-EVENT\-0168 |  Creating automated cluster snapshot\.  | 
 | backup | RDS\-EVENT\-0169 |  Automated cluster snapshot created\.  | 
-| notification | RDS\-EVENT\-0172 |  Renamed DB cluster from \[old DB cluster name\] to \[new DB cluster name\]\.  | 
 
 ## RDS Proxy events<a name="USER_Events.Messages.rds-proxy"></a>
 

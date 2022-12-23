@@ -87,10 +87,6 @@ lambda_sync (
 )
 ```
 
-**Note**  
-You can use triggers to call Lambda on data\-modifying statements\. Remember that triggers are not run once per SQL statement, but once per row modified, one row at a time\. When a trigger runs, the process is synchronous\. The data\-modifying statement only returns when the trigger completes\.  
-Be careful when invoking an AWS Lambda function from triggers on tables that experience high write traffic\. `INSERT`, `UPDATE`, and `DELETE` triggers are activated per row\. A write\-heavy workload on a table with `INSERT`, `UPDATE`, or `DELETE` triggers results in a large number of calls to your AWS Lambda function\. 
-
 #### Parameters for the lambda\_sync function<a name="AuroraMySQL.Integrating.NativeLambda.lambda_functions.Sync.Parameters"></a>
 
 The `lambda_sync` function has the following parameters\.
@@ -110,7 +106,7 @@ The following query based on `lambda_sync` invokes the Lambda function `BasicTes
 
 ```
 SELECT lambda_sync(
-    'arn:aws:lambda:us-east-1:868710585169:function:BasicTestLambda',
+    'arn:aws:lambda:us-east-1:123456789012:function:BasicTestLambda',
     '{"operation": "ping"}');
 ```
 
@@ -144,9 +140,32 @@ The following query based on `lambda_async` invokes the Lambda function `BasicTe
 
 ```
 SELECT lambda_async(
-    'arn:aws:lambda:us-east-1:868710585169:function:BasicTestLambda',
+    'arn:aws:lambda:us-east-1:123456789012:function:BasicTestLambda',
     '{"operation": "ping"}');
 ```
+
+#### Invoking a Lambda function within a trigger<a name="AuroraMySQL.Integrating.NativeLambda.lambda_functions.trigger"></a>
+
+You can use triggers to call Lambda on data\-modifying statements\. The following example uses the `lambda_async` native function and stores the result in a variable\.
+
+```
+mysql>SET @result=0;
+mysql>DELIMITER //
+mysql>CREATE TRIGGER myFirstTrigger
+      AFTER INSERT
+          ON Test_trigger FOR EACH ROW
+      BEGIN
+      SELECT lambda_async(
+          'arn:aws:lambda:us-east-1:123456789012:function:BasicTestLambda',
+          '{"operation": "ping"}')
+          INTO @result;
+      END; //
+mysql>DELIMITER ;
+```
+
+**Note**  
+Triggers aren't run once per SQL statement, but once per row modified, one row at a time\. When a trigger runs, the process is synchronous\. The data\-modifying statement only returns when the trigger completes\.  
+Be careful when invoking an AWS Lambda function from triggers on tables that experience high write traffic\. `INSERT`, `UPDATE`, and `DELETE` triggers are activated per row\. A write\-heavy workload on a table with `INSERT`, `UPDATE`, or `DELETE` triggers results in a large number of calls to your AWS Lambda function\.
 
 ## Invoking a Lambda function with an Aurora MySQL stored procedure \(deprecated\)<a name="AuroraMySQL.Integrating.ProcLambda"></a>
 

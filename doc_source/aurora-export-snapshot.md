@@ -4,9 +4,7 @@ You can export DB cluster snapshot data to an Amazon S3 bucket\. The export proc
 
 When you export a DB cluster snapshot, Amazon Aurora extracts data from the snapshot and stores it in an Amazon S3 bucket\. You can export manual snapshots and automated system snapshots\. By default, all data in the snapshot is exported\. However, you can choose to export specific sets of databases, schemas, or tables\.
 
-Export performance for Aurora MySQL version 2 and version 3 DB cluster snapshots is now up to 10 times faster than it was previously\.
-
-The data is stored in an Apache Parquet format that is compressed and consistent\. Individual Parquet files are usually \~20 GB in size\. However, because of the performance improvements, you might see much larger \(\~200 GB\) files for Aurora MySQL version 2 and 3 exports\.
+The data is stored in an Apache Parquet format that is compressed and consistent\. Individual Parquet files are usually \~20 GB in size\.
 
 After the data is exported, you can analyze the exported data directly through tools like Amazon Athena or Amazon Redshift Spectrum\. For more information on using Athena to read Parquet data, see [Parquet SerDe](https://docs.aws.amazon.com/athena/latest/ug/parquet-serde.html) in the *Amazon Athena User Guide*\. For more information on using Redshift Spectrum to read Parquet data, see [COPY from columnar data formats](https://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-columnar.html) in the *Amazon Redshift Database Developer Guide*\.
 
@@ -16,8 +14,8 @@ Feature availability and support varies across specific versions of each databas
 + [Limitations](#aurora-export-snapshot.Limits)
 + [Overview of exporting snapshot data](#aurora-export-snapshot.Overview)
 + [Setting up access to an Amazon S3 bucket](#aurora-export-snapshot.Setup)
-+ [Using a cross\-account AWS KMS key](#aurora-export-snapshot.CMK)
 + [Exporting a snapshot to an Amazon S3 bucket](#aurora-export-snapshot.Exporting)
++ [Export performance in Aurora MySQL](#aurora-export-snapshot.parallel)
 + [Monitoring snapshot exports](#aurora-export-snapshot.Monitoring)
 + [Canceling a snapshot export task](#aurora-export-snapshot.Canceling)
 + [Failure messages for Amazon S3 export tasks](#aurora-export-snapshot.failure-msg)
@@ -86,6 +84,7 @@ You identify the Amazon S3 bucket, then you give the snapshot permission to acce
 + [Identifying the Amazon S3 bucket for export](#aurora-export-snapshot.SetupBucket)
 + [Providing access to an Amazon S3 bucket using an IAM role](#aurora-export-snapshot.SetupIAMRole)
 + [Using a cross\-account Amazon S3 bucket](#aurora-export-snapshot.Setup.XAcctBucket)
++ [Using a cross\-account AWS KMS key](#aurora-export-snapshot.CMK)
 
 ### Identifying the Amazon S3 bucket for export<a name="aurora-export-snapshot.SetupBucket"></a>
 
@@ -209,7 +208,7 @@ You can use Amazon S3 buckets across AWS accounts\. To use a cross\-account buck
   }
   ```
 
-## Using a cross\-account AWS KMS key<a name="aurora-export-snapshot.CMK"></a>
+### Using a cross\-account AWS KMS key<a name="aurora-export-snapshot.CMK"></a>
 
 You can use a cross\-account AWS KMS key to encrypt Amazon S3 exports\. First, you add a key policy to the local account, then you add IAM policies in the external account\. For more information, see [Allowing users in other accounts to use a KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html)\.
 
@@ -384,6 +383,16 @@ To export a DB snapshot to Amazon S3 using the Amazon RDS API, use the [StartExp
 + `S3BucketName`
 + `IamRoleArn`
 + `KmsKeyId`
+
+## Export performance in Aurora MySQL<a name="aurora-export-snapshot.parallel"></a>
+
+Aurora MySQL version 2 and version 3 DB cluster snapshots use an advanced export mechanism to improve performance and reduce export time\. The mechanism includes optimizations such as multiple export threads and Aurora MySQL parallel query to take advantage of the Aurora shared storage architecture\. The optimizations are applied adaptively, depending on the data set size and structure\.
+
+You don't need to turn on parallel query to use the faster export process, but the process does have the same limitations as parallel query\. In addition, some data values aren't supported, such as dates where the day of the month is `0` or the year is `0000`\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.
+
+When performance optimizations are applied, you might also see much larger \(\~200 GB\) Parquet files for Aurora MySQL version 2 and 3 exports\.
+
+If the faster export process can't be used, for example because of incompatible data types or values, Aurora automatically switches to a single\-threaded export mode without parallel query\. Depending on which process is used, and the amount of data to be exported, export performance can vary\.
 
 ## Monitoring snapshot exports<a name="aurora-export-snapshot.Monitoring"></a>
 

@@ -36,7 +36,7 @@ This function is available for the following versions\.
 
 ## Examples<a name="aurora_stat_reset_wal_cache-examples"></a>
 
-The following example uses the `aurora_stat_reset_wal_cache` function to reset a slot named `test_results`, and then tries to reset a slot that doesna't exist\.
+The following example uses the `aurora_stat_reset_wal_cache` function to reset a slot named `test_results`, and then tries to reset a slot that doesn't exist\.
 
 ```
 => SELECT * 

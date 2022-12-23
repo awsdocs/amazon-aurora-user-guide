@@ -17,7 +17,7 @@ Following are the supported engines and Region availability for Aurora Serverles
 | US East \(N\. Virginia\) | Version 3\.02\.0 and higher | 
 | US West \(N\. California\) | Version 3\.02\.0 and higher | 
 | US West \(Oregon\) | Version 3\.02\.0 and higher | 
-| Africa \(Cape Town\) | – | 
+| Africa \(Cape Town\) | Version 3\.02\.0 and higher | 
 | Asia Pacific \(Hong Kong\) | Version 3\.02\.0 and higher | 
 | Asia Pacific \(Hyderabad\) | – | 
 | Asia Pacific \(Jakarta\) | Version 3\.02\.0 and higher | 
@@ -33,7 +33,7 @@ Following are the supported engines and Region availability for Aurora Serverles
 | Europe \(Frankfurt\) | Version 3\.02\.0 and higher | 
 | Europe \(Ireland\) | Version 3\.02\.0 and higher | 
 | Europe \(London\) | Version 3\.02\.0 and higher | 
-| Europe \(Milan\) | – | 
+| Europe \(Milan\) | Version 3\.02\.0 and higher | 
 | Europe \(Paris\) | Version 3\.02\.0 and higher | 
 | Europe \(Spain\) | – | 
 | Europe \(Stockholm\) | Version 3\.02\.0 and higher | 
@@ -55,7 +55,7 @@ Following are the supported engines and Region availability for Aurora Serverles
 | US East \(N\. Virginia\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | US West \(N\. California\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | US West \(Oregon\) | Version 14\.3 and higher | Version 13\.6 and higher | 
-| Africa \(Cape Town\) | – | – | 
+| Africa \(Cape Town\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Asia Pacific \(Hong Kong\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Asia Pacific \(Hyderabad\) | – | – | 
 | Asia Pacific \(Jakarta\) | Version 14\.3 and higher | Version 13\.6 and higher | 
@@ -71,7 +71,7 @@ Following are the supported engines and Region availability for Aurora Serverles
 | Europe \(Frankfurt\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Europe \(Ireland\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Europe \(London\) | Version 14\.3 and higher | Version 13\.6 and higher | 
-| Europe \(Milan\) | – | – | 
+| Europe \(Milan\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Europe \(Paris\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Europe \(Spain\) | – | – | 
 | Europe \(Stockholm\) | Version 14\.3 and higher | Version 13\.6 and higher | 

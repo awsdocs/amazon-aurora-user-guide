@@ -33,6 +33,7 @@ For more information on managing access to Amazon Aurora resources and your data
 
 **Topics**
 + [Database authentication with Amazon Aurora](database-authentication.md)
++ [Password management with Amazon Aurora and AWS Secrets Manager](rds-secrets-manager.md)
 + [Data protection in Amazon RDS](DataDurability.md)
 + [Identity and access management for Amazon Aurora](UsingWithRDS.IAM.md)
 + [Logging and monitoring in Amazon Aurora](Overview.LoggingAndMonitoring.md)

@@ -51,7 +51,7 @@ Complete the following major steps when you use a blue/green deployment for Auro
 
    RDS also configures replication from the primary DB instance in the blue environment to the primary DB instance in the green environment\.
 **Important**  
-After you create the blue/green deployment, the DB cluster in the green environment allows write operations by default\. You can make the DB cluster read\-only if necessary\.
+After you create the blue/green deployment, the DB cluster in the green environment allows write operations by default\. We recommend that you make the DB cluster read\-only\.
 
 1. Make changes to the staging environment\.
 
@@ -60,6 +60,8 @@ After you create the blue/green deployment, the DB cluster in the green environm
    For information about modifying a DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
 1. Test your staging environment\.
+
+   During testing, we recommend that you keep your databases in the green environment read only\. We recommend that you enable write operations on the green environment with caution because they can result in replication conflicts in the green environment\. They can also result in unintended data in the production databases after switchover\.
 
 1. When ready, switch over to promote the staging environment to be the new production environment\. For instructions, see [Switching a blue/green deployment](blue-green-deployments-switching.md)\.
 
@@ -131,6 +133,7 @@ After switching over a blue/green deployment, consider updating the resource IDs
 
 The following are best practices for blue/green deployments:
 + Thoroughly test the Aurora DB cluster in the green environment before switching over\.
++ Keep your databases in the green environment read only\. We recommend that you enable write operations on the green environment with caution because they can result in replication conflicts in the green environment\. They can also result in unintended data in the production databases after switchover\.
 + Identify the best time for the switchover\.
 
   During the switchover, writes are cut off from databases in both environments\. Identify a time when traﬃc is lowest on your production environment\. Long\-running transactions, such as active DDLs, can increase your switchover time, resulting in longer downtime for your production workloads\.

@@ -101,6 +101,15 @@ The following table shows the maximum amount of temporary storage available for 
 | db\.x2g\.2xlarge | 160 | 
 | db\.x2g\.xlarge | 80 | 
 | db\.x2g\.large | 40 | 
+| db\.r6i\.32xlarge | 2560 | 
+| db\.r6i\.24xlarge | 1920 | 
+| db\.r6i\.16xlarge | 1280 | 
+| db\.r6i\.12xlarge | 960 | 
+| db\.r6i\.8xlarge | 640 | 
+| db\.r6i\.4xlarge | 320 | 
+| db\.r6i\.2xlarge | 160 | 
+| db\.r6i\.xlarge | 80 | 
+| db\.r6i\.large | 32 | 
 | db\.r6g\.16xlarge | 1280 | 
 | db\.r6g\.12xlarge | 960 | 
 | db\.r6g\.8xlarge | 640 | 
