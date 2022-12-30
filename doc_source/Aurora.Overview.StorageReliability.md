@@ -41,9 +41,7 @@ To display the volume status, see [Displaying volume status for an Aurora MySQL 
 **Tip**  
  For earlier versions without the dynamic resizing feature, resetting the storage usage for a cluster involved doing a logical dump and restoring to a new cluster\. That operation can take a long time for a substantial volume of data\. If you encounter this situation, consider upgrading your cluster to a version that supports volume shrinking\. 
 
- For pricing information about Aurora data storage, see [Amazon RDS for Aurora Pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
-
- For information about how to minimize storage charges by monitoring storage usage for your cluster, see [Storage scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.StorageScaling)\. For pricing information about Aurora data storage, see [Amazon RDS for Aurora pricing](https://aws.amazon.com/rds/aurora/pricing)\. 
+For information about how to minimize storage charges by monitoring storage usage for your cluster, see [Storage scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.StorageScaling)\. For information about Aurora backup storage billing, see [Understanding Amazon Aurora backup storage usage](aurora-storage-backup.md)\. For pricing information about Aurora data storage, see [Amazon Aurora pricing](https://aws.amazon.com/rds/aurora/pricing)\.
 
 ## Amazon Aurora reliability<a name="Aurora.Overview.Reliability"></a>
 
