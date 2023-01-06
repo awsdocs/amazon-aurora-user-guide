@@ -1,7 +1,7 @@
 # Babelfish limitations<a name="babelfish-limitations"></a>
 
  The following limitations currently apply to Babelfish for Aurora PostgreSQL: 
-+  Babelfish currently don't support the following Aurora features: 
++  Babelfish currently doesn't support the following Aurora features: 
   +  AWS Directory Service 
   +  AWS Identity and Access Management 
   +  Database Activity Streams \(DAS\) 

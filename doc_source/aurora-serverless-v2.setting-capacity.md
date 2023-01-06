@@ -12,6 +12,7 @@
   + [Example: Change the Aurora Serverless v2 capacity range of an Aurora PostgreSQL cluster](#aurora-serverless-v2-examples-setting-capacity-range-walkthrough-apg)
 + [Working with parameter groups for Aurora Serverless v2](#aurora-serverless-v2.parameter-groups)
   + [Default parameter values](#aurora-serverless-v2.parameter-groups-defaults)
+  + [Maximum connections for Aurora Serverless v2](#aurora-serverless-v2.max-connections)
   + [Parameters that Aurora adjusts as Aurora Serverless v2 scales up and down](#aurora-serverless-v2.parameters-based-on-scaling)
   + [Parameters that Aurora computes based on Aurora Serverless v2 maximum capacity](#aurora-serverless-v2.parameters-based-on-max-capacity)
 + [Avoiding out\-of\-memory errors](#aurora-serverless-v2.setting-capacity.incompatible_parameters)
@@ -49,7 +50,7 @@
   + Aurora global databases – 8 ACUs
 +  In some cases, your cluster might contain Aurora Serverless v2 reader DB instances that scale independently from the writer\. If so, choose a minimum capacity setting that's high enough that when the writer DB instance is busy with a write\-intensive workload, the reader DB instances can apply the changes from the writer without falling behind\. If you observe replica lag in readers that are in promotion tiers 2–15, consider increasing the minimum capacity setting for your cluster\. For details on choosing whether reader DB instances scale along with the writer or independently, see [Choosing the promotion tier for an Aurora Serverless v2 reader](aurora-serverless-v2-administration.md#aurora-serverless-v2-choosing-promotion-tier)\. 
 +  If you have a mixed\-configuration cluster with a provisioned writer and Aurora Serverless v2 readers, the readers can't scale along with the writer\. In that case, setting a low minimum capacity can result in excessive replication lag\. That's because the readers might not have enough capacity to apply changes from the writer when the database is busy\. When your cluster uses a provisioned writer, set the minimum capacity to a value that represents a comparable amount of memory and CPU to the writer\. 
-+  For Aurora PostgreSQL, when you specify a minimum Aurora Serverless v2 capacity of 0\.5, the `max_connections` setting is permanently capped at 2000\. If you intend to use the Aurora PostgreSQL cluster for a high\-connection workload, consider using a minimum ACU setting of 1 or higher\. For details about how Aurora Serverless v2 handles the `max_connections` configuration parameter, see [Parameters that Aurora computes based on Aurora Serverless v2 maximum capacity](#aurora-serverless-v2.parameters-based-on-max-capacity)\. 
++  For Aurora PostgreSQL, when you specify a minimum Aurora Serverless v2 capacity of 0\.5, the `max_connections` setting is permanently capped at 2000\. If you intend to use the Aurora PostgreSQL cluster for a high\-connection workload, consider using a minimum ACU setting of 1 or higher\. For details about how Aurora Serverless v2 handles the `max_connections` configuration parameter, see [Maximum connections for Aurora Serverless v2](#aurora-serverless-v2.max-connections)\. 
 +  The time it takes for an Aurora Serverless v2 DB instance to scale from its minimum capacity to its maximum capacity depends on the difference between its minimum and maximum ACU values\. When the current capacity of the DB instance is large, Aurora Serverless v2 scales up in larger increments than when the DB instance starts from a small capacity\. Thus, if you specify a relatively large maximum capacity and the DB instance spends most of its time near that capacity, consider increasing the minimum ACU setting\. That way, an idle DB instance can scale back up to maximum capacity more quickly\. 
 
 ### Choosing the maximum Aurora Serverless v2 capacity setting for a cluster<a name="aurora-serverless-v2.max_capacity_considerations"></a>
@@ -68,10 +69,10 @@
 
 ### Example: Change the Aurora Serverless v2 capacity range of an Aurora MySQL cluster<a name="aurora-serverless-v2-examples-setting-capacity-range-walkthrough-ams"></a>
 
- The following AWS CLI example shows how to update the ACU range for Aurora Serverless v2 DB instances in an existing Aurora MySQL cluster\. Initially, the ACU range for the cluster 8–32\. 
+ The following AWS CLI example shows how to update the ACU range for Aurora Serverless v2 DB instances in an existing Aurora MySQL cluster\. Initially, the capacity range for the cluster is 8–32 ACUs\.
 
 ```
-$ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
+aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
   --query 'DBClusters[*].ServerlessV2ScalingConfiguration|[0]'
 {
     "MinCapacity": 8.0,
@@ -79,7 +80,7 @@ $ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
 }
 ```
 
- The following capacity\-related settings apply to the DB instance at this point\. The DB instance is idle and scaled down to 8 ACUs\. To represent the size of the buffer pool in easily readable units, we divide it by 2 to the power of 30, yielding a measurement in gibibytes \(GiB\)\. That's because memory\-related measurements for Aurora use units based on powers of 2, not powers of 10\. 
+The DB instance is idle and scaled down to 8 ACUs\. The following capacity\-related settings apply to the DB instance at this point\. To represent the size of the buffer pool in easily readable units, we divide it by 2 to the power of 30, yielding a measurement in gibibytes \(GiB\)\. That's because memory\-related measurements for Aurora use units based on powers of 2, not powers of 10\.
 
 ```
 mysql> select @@max_connections;
@@ -107,13 +108,13 @@ mysql> select @@innodb_buffer_pool_size / pow(2,30) as gibibytes;
 1 row in set (0.00 sec)
 ```
 
- Next, we change the capacity range for the cluster\. After the `modify-db-cluster` command finishes, the ACU range for the cluster is 12\.5–80\. 
+Next, we change the capacity range for the cluster\. After the `modify-db-cluster` command finishes, the ACU range for the cluster is 12\.5–80\.
 
 ```
-$ aws rds modify-db-cluster --db-cluster-identifier serverless-v2-cluster \
+aws rds modify-db-cluster --db-cluster-identifier serverless-v2-cluster \
   --serverless-v2-scaling-configuration MinCapacity=12.5,MaxCapacity=80
 
-$ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
+aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
   --query 'DBClusters[*].ServerlessV2ScalingConfiguration|[0]'
 {
     "MinCapacity": 12.5,
@@ -121,13 +122,13 @@ $ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
 }
 ```
 
- Changing the capacity range caused changes to the default values of some configuration parameters\. Aurora can apply some of those new defaults immediately\. However, some of the parameter changes take effect only after a reboot\. The `pending-reboot` status indicates that a reboot is needed to apply some parameter changes\. 
+Changing the capacity range caused changes to the default values of some configuration parameters\. Aurora can apply some of those new defaults immediately\. However, some of the parameter changes take effect only after a reboot\. The `pending-reboot` status indicates that a reboot is needed to apply some parameter changes\.
 
 **Tip**  
- You can reboot the DB instances yourself to apply these parameter changes\. Or you can wait for Aurora to do the reboot and apply the parameter changes during your next scheduled maintenance window\. 
+You can reboot the DB instances yourself to apply these parameter changes\. Or you can wait for Aurora to do the reboot and apply the parameter changes during your next scheduled maintenance window\.
 
 ```
-$ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
+aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
   --query '*[].{DBClusterMembers:DBClusterMembers[*].{DBInstanceIdentifier:DBInstanceIdentifier,DBClusterParameterGroupStatus:DBClusterParameterGroupStatus}}|[0]'
 {
     "DBClusterMembers": [
@@ -139,7 +140,7 @@ $ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
 }
 ```
 
- The following example shows how the `innodb_buffer_pool_size` parameter is already adjusted based on the current capacity of the DB instance\. At this point, the cluster is idle and the DB instance `serverless-v2-instance-1` is consuming 12\.5 ACUs\. The `max_connections` parameter still reflects the value from the former capacity range\. Resetting that value requires rebooting the DB instance\. 
+At this point, the cluster is idle and the DB instance `serverless-v2-instance-1` is consuming 12\.5 ACUs\. The `innodb_buffer_pool_size` parameter is already adjusted based on the current capacity of the DB instance\. The `max_connections` parameter still reflects the value from the former maximum capacity\. Resetting that value requires rebooting the DB instance, because `max_connections` is a static parameter for Aurora Serverless v2\.
 
 ```
 mysql> select @@max_connections;
@@ -167,21 +168,22 @@ mysql> select @@innodb_buffer_pool_size / pow(2,30) as gibibytes;
 1 row in set (0.00 sec)
 ```
 
- Now we reboot the DB instance and wait for it to become available again\. 
+Now we reboot the DB instance and wait for it to become available again\.
 
 ```
-$ aws rds reboot-db-instance --db-instance-identifier serverless-v2-instance-1
+aws rds reboot-db-instance --db-instance-identifier serverless-v2-instance-1
 {
   "DBInstanceIdentifier": "serverless-v2-instance-1",
   "DBInstanceStatus": "rebooting"
 }
-$ aws rds wait db-instance-available --db-instance-identifier serverless-v2-instance-1
+
+aws rds wait db-instance-available --db-instance-identifier serverless-v2-instance-1
 ```
 
- Now that the DB instance is rebooted, the `pending-reboot` status is cleared\. The value `in-sync` confirms that Aurora has applied all the pending parameter changes\. 
+The `pending-reboot` status is cleared\. The value `in-sync` confirms that Aurora has applied all the pending parameter changes\.
 
 ```
-$ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
+aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
   --query '*[].{DBClusterMembers:DBClusterMembers[*].{DBInstanceIdentifier:DBInstanceIdentifier,DBClusterParameterGroupStatus:DBClusterParameterGroupStatus}}|[0]'
 {
     "DBClusterMembers": [
@@ -193,7 +195,7 @@ $ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
 }
 ```
 
- The following example checks the same parameters as before the reboot\. The `innodb_buffer_pool_size` parameter has increased to its final size for an idle DB instance\. The `max_connections` parameter has increased to reflect a value derived from the maximum ACU value\. The formula that Aurora uses for `max_connections` causes an increase of 1,000 when the memory size doubles\. 
+The `innodb_buffer_pool_size` parameter has increased to its final size for an idle DB instance\. The `max_connections` parameter has increased to reflect a value derived from the maximum ACU value\. The formula that Aurora uses for `max_connections` causes an increase of 1,000 when the memory size doubles\.
 
 ```
 mysql> select @@innodb_buffer_pool_size;
@@ -221,7 +223,7 @@ mysql> select @@max_connections;
 1 row in set (0.00 sec)
 ```
 
- In the following example, we used the same procedure as before to set the capacity range at 0\.5–128 ACUs\. We rebooted the DB instance to apply any resulting changes to static parameters\. Now the idle DB instance has a buffer cache size that's less than 1 GiB, so we measure it in mebibytes \(MiB\)\. The `max_connections` value of 5000 is derived from the memory size of the maximum capacity setting\. 
+We set the capacity range to 0\.5–128 ACUs, and reboot the DB instance to apply any resulting changes to static parameters\. Now the idle DB instance has a buffer cache size that's less than 1 GiB, so we measure it in mebibytes \(MiB\)\. The `max_connections` value of 5000 is derived from the memory size of the maximum capacity setting\.
 
 ```
 mysql> select @@innodb_buffer_pool_size / pow(2,20) as mebibytes, @@max_connections;
@@ -235,10 +237,42 @@ mysql> select @@innodb_buffer_pool_size / pow(2,20) as mebibytes, @@max_connecti
 
 ### Example: Change the Aurora Serverless v2 capacity range of an Aurora PostgreSQL cluster<a name="aurora-serverless-v2-examples-setting-capacity-range-walkthrough-apg"></a>
 
- The following CLI example shows how to update the ACU range for Aurora Serverless v2 DB instances in an existing Aurora PostgreSQL cluster\. Initially, the ACU range for the cluster is 8–32\. 
+The following CLI examples show how to update the ACU range for Aurora Serverless v2 DB instances in an existing Aurora PostgreSQL cluster\.
+
+1. The capacity range for the cluster starts at 0\.5–1 ACU\.
+
+1. Change the capacity range to 8–32 ACUs\.
+
+1. Change the capacity range to 12\.5–80 ACUs\.
+
+1. Change the capacity range to 0\.5–128 ACUs\.
+
+1. Return the capacity to its initial range of 0\.5–1 ACU\.
+
+The following figure shows the capacity changes in Amazon CloudWatch\.
+
+![\[CloudWatch graph of Aurora Serverless v2 capacity changes\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/sv2-apg-scaling-example.png)
+
+The DB instance is idle and scaled down to 0\.5 ACUs\. The following capacity\-related settings apply to the DB instance at this point\.
 
 ```
-$ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
+postgres=> show max_connections;
+ max_connections
+-----------------
+ 189
+(1 row)
+
+postgres=> show shared_buffers;
+ shared_buffers
+----------------
+ 16384
+(1 row)
+```
+
+Next, we change the capacity range for the cluster\. After the `modify-db-cluster` command finishes, the ACU range for the cluster is 8\.0–32\.
+
+```
+aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
   --query 'DBClusters[*].ServerlessV2ScalingConfiguration|[0]'
 {
     "MinCapacity": 8.0,
@@ -246,43 +280,10 @@ $ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
 }
 ```
 
- The following capacity\-related settings apply to the DB instance at this point\. The DB instance is idle and scaled down to 8 ACUs\. 
+Changing the capacity range causes changes to the default values of some configuration parameters\. Aurora can apply some of those new defaults immediately\. However, some of the parameter changes take effect only after a reboot\. The `pending-reboot` status indicates that you need a reboot to apply some parameter changes\. You can reboot the DB instances yourself to apply these parameter changes\. Or you can wait for Aurora to do the reboot and apply the parameter changes during your next scheduled maintenance window\.
 
 ```
-postgres=> show shared_buffers;
- shared_buffers
-----------------
- 1327104
-(1 row)
-
-postgres=> show max_connections;
- max_connections
------------------
- 2000
-(1 row)
-```
-
- Next, we change the capacity range for the cluster\. After the `modify-db-cluster` command finishes, the ACU range for the cluster is 12\.5–80\. 
-
-```
-$ aws rds modify-db-cluster --db-cluster-identifier serverless-v2-cluster \
-  --serverless-v2-scaling-configuration MinCapacity=12.5,MaxCapacity=80
-
-$ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
-  --query 'DBClusters[*].ServerlessV2ScalingConfiguration|[0]'
-{
-    "MinCapacity": 12.5,
-    "MaxCapacity": 80.0
-}
-```
-
- Changing the capacity range causes changes to the default values of some configuration parameters\. Aurora can apply some of those new defaults immediately\. However, some of the parameter changes take effect only after a reboot\. The `pending-reboot` status indicates that you need a reboot to apply some parameter changes\. 
-
-**Tip**  
- You can reboot the DB instances yourself to apply these parameter changes\. Or you can wait for Aurora to do the reboot and apply the parameter changes during your next scheduled maintenance window\. 
-
-```
-$ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
+aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
   --query '*[].{DBClusterMembers:DBClusterMembers[*].{DBInstanceIdentifier:DBInstanceIdentifier,DBClusterParameterGroupStatus:DBClusterParameterGroupStatus}}|[0]'
 {
     "DBClusterMembers": [
@@ -294,45 +295,38 @@ $ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
 }
 ```
 
- The following example shows how the `shared_buffers` parameter is already adjusted based on the current capacity of the DB instance\. At this point, the cluster is idle and the DB instance `serverless-v2-instance-1` is consuming 12\.5 ACUs\. The `max_connections` parameter still reflects the value from the former capacity range\. Resetting that value requires rebooting the DB instance\. 
+At this point, the cluster is idle and the DB instance `serverless-v2-instance-1` is consuming 8\.0 ACUs\. The `shared_buffers` parameter is already adjusted based on the current capacity of the DB instance\. The `max_connections` parameter still reflects the value from the former maximum capacity\. Resetting that value requires rebooting the DB instance, because `max_connections` is a static parameter for Aurora Serverless v2 \(and Aurora PostgreSQL in general\)\.
 
 ```
-postgres=> show shared_buffers;
- shared_buffers
-----------------
- 344064
-(1 row)
-
 postgres=> show max_connections;
  max_connections
 -----------------
- 1034
+ 189
 (1 row)
 
-postgres=> select name as parameter_name, setting, unit, (((setting::BIGINT)*8)/1024)::BIGINT as "size_MiB",
-postgres->   (((setting::BIGINT)*8)/1024/1024)::BIGINT  as "size_GiB", pg_size_pretty((((setting::BIGINT)*8)*1024)::BIGINT)
-postgres-> from pg_settings where name in ('shared_buffers');
- parameter_name | setting | unit | size_MiB | size_GiB | pg_size_pretty
-----------------+---------+------+----------+----------+----------------
- shared_buffers | 32768   | 8kB  |     256  |       0  | 256 MB
+postgres=> show shared_buffers;
+ shared_buffers
+----------------
+ 1425408
 (1 row)
 ```
 
- Now we reboot the DB instance and wait for it to become available again\. 
+We reboot the DB instance and wait for it to become available again\.
 
 ```
-$ aws rds reboot-db-instance --db-instance-identifier serverless-v2-instance-1
+aws rds reboot-db-instance --db-instance-identifier serverless-v2-instance-1
 {
   "DBInstanceIdentifier": "serverless-v2-instance-1",
   "DBInstanceStatus": "rebooting"
 }
-$ aws rds wait db-instance-available --db-instance-identifier serverless-v2-instance-1
+
+aws rds wait db-instance-available --db-instance-identifier serverless-v2-instance-1
 ```
 
- Now that the DB instance is rebooted, the `pending-reboot` status is cleared\. The value `in-sync` confirms that Aurora has applied all the pending parameter changes\. 
+Now that the DB instance is rebooted, the `pending-reboot` status is cleared\. The value `in-sync` confirms that Aurora has applied all the pending parameter changes\.
 
 ```
-$ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
+aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
   --query '*[].{DBClusterMembers:DBClusterMembers[*].{DBInstanceIdentifier:DBInstanceIdentifier,DBClusterParameterGroupStatus:DBClusterParameterGroupStatus}}|[0]'
 {
     "DBClusterMembers": [
@@ -344,48 +338,99 @@ $ aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
 }
 ```
 
- The following example checks the same parameters as before the reboot\. The `shared_buffers` parameter has increased to its final size for an idle DB instance\. The `max_connections` parameter has increased to reflect a value derived from the maximum ACU value\. 
+After rebooting, `max_connections` shows the value from the new maximum capacity\.
 
 ```
+postgres=> show max_connections;
+ max_connections
+-----------------
+ 5000
+(1 row)
+
 postgres=> show shared_buffers;
  shared_buffers
 ----------------
  1425408
 (1 row)
+```
 
+Next, we change the capacity range for the cluster to 12\.5–80 ACUs\.
+
+```
+aws rds modify-db-cluster --db-cluster-identifier serverless-v2-cluster \
+  --serverless-v2-scaling-configuration MinCapacity=12.5,MaxCapacity=80
+
+aws rds describe-db-clusters --db-cluster-identifier serverless-v2-cluster \
+  --query 'DBClusters[*].ServerlessV2ScalingConfiguration|[0]'
+{
+    "MinCapacity": 12.5,
+    "MaxCapacity": 80.0
+}
+```
+
+At this point, the cluster is idle and the DB instance `serverless-v2-instance-1` is consuming 12\.5 ACUs\. The `shared_buffers` parameter is already adjusted based on the current capacity of the DB instance\. The `max_connections` value is still 5000\.
+
+```
 postgres=> show max_connections;
  max_connections
 -----------------
- 1034
+ 5000
 (1 row)
 
-postgres=> select name as parameter_name, setting, unit, pg_size_pretty((((setting::BIGINT)*8)*1024)::BIGINT)
-postgres->   from pg_settings where name in ('shared_buffers');
- parameter_name | setting | unit | pg_size_pretty
-----------------+---------+------+----------------
- shared_buffers | 1425408 | 8kB  | 11 GB
-(1 row)
-```
-
- In the following example, we used the same procedure as before to set the capacity range from 0\.5 to 128 ACUs\. We rebooted the DB instance to apply any resulting changes to static parameters\. The `max_connections` value of 2000 isn't derived from the maximum ACU setting\. When the minimum ACU setting is 0\.5, PostgreSQL\-compatible Aurora Serverless v2 DB instances use a default `max_connections` value of 2000 regardless of the maximum ACU value\. 
-
-```
 postgres=> show shared_buffers;
  shared_buffers
 ----------------
- 2228224
+ 2211840
 (1 row)
+```
 
+We reboot again, but the parameter values stay the same\. This is because `max_connections` has a maximum value of 5000 for an Aurora Serverless v2 DB cluster running Aurora PostgreSQL\.
+
+```
 postgres=> show max_connections;
  max_connections
 -----------------
- 1034
+ 5000
 (1 row)
 
-postgres=> select name as parameter_name, setting, unit, pg_size_pretty((((setting::BIGINT)*8)*1024)::BIGINT) from pg_settings where name in ('shared_buffers');
- parameter_name | setting | unit | pg_size_pretty
-----------------+---------+------+----------------
- shared_buffers | 2228224 | 8kB  | 17 GB
+postgres=> show shared_buffers;
+ shared_buffers
+----------------
+ 2211840
+(1 row)
+```
+
+Now we set the capacity range from 0\.5 to 128 ACUs\. The DB cluster scales down to 10 ACUs, then to 2\. We reboot the DB instance\.
+
+```
+postgres=> show max_connections;
+ max_connections
+-----------------
+ 2000
+(1 row)
+
+postgres=> show shared_buffers;
+ shared_buffers
+----------------
+ 16384
+(1 row)
+```
+
+The `max_connections` value of `2000` isn't derived from the maximum ACU setting\. When the minimum ACU setting is 0\.5, PostgreSQL\-compatible Aurora Serverless v2 DB instances have a maximum `max_connections` value of 2000\.
+
+Now we return the capacity to its initial range of 0\.5–1 ACU and reboot the DB instance\.
+
+```
+postgres=> show max_connections;
+ max_connections
+-----------------
+ 189
+(1 row)
+
+postgres=> show shared_buffers;
+ shared_buffers
+----------------
+ 16384
 (1 row)
 ```
 
@@ -400,6 +445,7 @@ postgres=> select name as parameter_name, setting, unit, pg_size_pretty((((setti
 
 **Topics**
 + [Default parameter values](#aurora-serverless-v2.parameter-groups-defaults)
++ [Maximum connections for Aurora Serverless v2](#aurora-serverless-v2.max-connections)
 + [Parameters that Aurora adjusts as Aurora Serverless v2 scales up and down](#aurora-serverless-v2.parameters-based-on-scaling)
 + [Parameters that Aurora computes based on Aurora Serverless v2 maximum capacity](#aurora-serverless-v2.parameters-based-on-max-capacity)
 
@@ -412,8 +458,9 @@ postgres=> select name as parameter_name, setting, unit, pg_size_pretty((((setti
 
 |  Database engine and version  |  Parameter group family  |  Default parameter group name  | 
 | --- | --- | --- | 
-|   Aurora MySQL version 3   |   `aurora-mysql8.0`   |   `default.aurora-mysql8.0`   | 
-|   Aurora PostgreSQL version 13\.x   |   `aurora-postgresql13`   |   `default.aurora-postgresql13`   | 
+|  Aurora MySQL version 3  |  `aurora-mysql8.0`  |  `default.aurora-mysql8.0`  | 
+|  Aurora PostgreSQL version 13\.x  |  `aurora-postgresql13`  |  `default.aurora-postgresql13`  | 
+|  Aurora PostgreSQL version 14\.x  |  `aurora-postgresql14`  |  `default.aurora-postgresql13`  | 
 
  The following example gets a list of parameters from the default DB cluster group for Aurora MySQL version 3 and Aurora PostgreSQL 13\. Those are the Aurora MySQL and Aurora PostgreSQL versions that you use with Aurora Serverless v2\. 
 
@@ -449,6 +496,33 @@ aws rds describe-db-cluster-parameters ^
   --output text
 ```
 
+### Maximum connections for Aurora Serverless v2<a name="aurora-serverless-v2.max-connections"></a>
+
+For both Aurora MySQL and Aurora PostgreSQL, Aurora Serverless v2 DB instances hold the `max_connections` parameter constant so that connections aren't dropped when the DB instance scales down\. The default value for this parameter is derived from a formula based on the memory size of the DB instance\. For details about the formula and the default values for provisioned DB instance classes, see [Maximum connections to an Aurora MySQL DB instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections) and [Maximum connections to an Aurora PostgreSQL DB instance](AuroraPostgreSQL.Managing.md#AuroraPostgreSQL.Managing.MaxConnections)\.
+
+When Aurora Serverless v2 evaluates the formula, it uses the memory size based on the maximum Aurora capacity units \(ACUs\) for the DB instance, not the current ACU value\. If you change the default value, we recommend using a variation of the formula instead of specifying a constant value\. That way,Aurora Serverless v2 can use an appropriate setting based on the maximum capacity\.
+
+**Note**  
+When you change the maximum capacity of an Aurora Serverless v2 DB cluster, you have to reboot the Aurora Serverless v2 DB instances to update the `max_connections` value\. This is because `max_connections` is a static parameter\.
+
+The following table shows the default values for `max_connections` for Aurora Serverless v2 based on the maximum ACU value\.
+
+
+| Maximum ACUs | Default maximum connections on Aurora MySQL | Default maximum connections on Aurora PostgreSQL | 
+| --- | --- | --- | 
+| 1 | 90 | 189 | 
+| 4 | 135 | 823 | 
+| 8 | 1,000 | 1,669 | 
+| 16 | 2,000 | 3,360 | 
+| 32 | 3,000 | 5,000 | 
+| 64 | 4,000 | 5,000 | 
+| 128 | 5,000 | 5,000 | 
+
+**Note**  
+When you specify a minimum capacity of 0\.5 ACUs, PostgreSQL\-compatible Aurora Serverless v2 DB instances set an upper limit of 2,000 on the `max_connections` setting\.
+
+For specific examples showing how `max_connections` changes with the maximum ACU value, see [Example: Change the Aurora Serverless v2 capacity range of an Aurora MySQL cluster](#aurora-serverless-v2-examples-setting-capacity-range-walkthrough-ams) and [Example: Change the Aurora Serverless v2 capacity range of an Aurora PostgreSQL cluster](#aurora-serverless-v2-examples-setting-capacity-range-walkthrough-apg)\.
+
 ### Parameters that Aurora adjusts as Aurora Serverless v2 scales up and down<a name="aurora-serverless-v2.parameters-based-on-scaling"></a>
 
  During autoscaling, Aurora Serverless v2 needs to be able to change parameters for each DB instance to work best for the increased or decreased capacity\. Thus, you can't override some parameters related to capacity\. For some parameters that you can override, avoid hardcoding fixed values\. The following considerations apply to these settings that are related to capacity\. 
@@ -459,25 +533,19 @@ aws rds describe-db-cluster-parameters ^
 +  `table_definition_cache` 
 +  `table_open_cache` 
 
- For Aurora PostgreSQL, Aurora Serverless v2 resizes the following parameters parameter dynamically during scaling\. For the following parameters, Aurora Serverless v2 doesn't use any custom parameter values that you specify: 
+ For Aurora PostgreSQL, Aurora Serverless v2 resizes the following parameter dynamically during scaling\. For the following parameters, Aurora Serverless v2 doesn't use any custom parameter values that you specify: 
 +  `shared_buffers` 
 
- For all parameters other than those listed here and in [Parameters that Aurora adjusts as Aurora Serverless v2 scales up and down](#aurora-serverless-v2.parameters-based-on-scaling), Aurora Serverless v2 DB instances work the same as provisioned DB instances\. The default parameter value is inherited from the cluster parameter group\. You can modify the default for the whole cluster by using a custom cluster parameter group\. Or you can modify the default for certain DB instances by using a custom DB parameter group\. Dynamic parameters are updated immediately\. Changes to static parameters only take effect after you reboot the DB instance\. 
+ For all parameters other than those listed here, Aurora Serverless v2 DB instances work the same as provisioned DB instances\. The default parameter value is inherited from the cluster parameter group\. You can modify the default for the whole cluster by using a custom cluster parameter group\. Or you can modify the default for certain DB instances by using a custom DB parameter group\. Dynamic parameters are updated immediately\. Changes to static parameters only take effect after you reboot the DB instance\.
 
 ### Parameters that Aurora computes based on Aurora Serverless v2 maximum capacity<a name="aurora-serverless-v2.parameters-based-on-max-capacity"></a>
 
- For both Aurora MySQL and Aurora PostgreSQL, Aurora Serverless v2 DB instances hold the `max_connections` parameter constant so that connections aren't dropped when the DB instance scales down\. The default value for this parameter is derived from a formula that refers to the memory size of the DB instance\. For details about the formula and the default values for provisioned DB instance classes, see [Maximum connections to an Aurora MySQL DB instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections) and [Maximum connections to an Aurora PostgreSQL DB instance](AuroraPostgreSQL.Managing.md#AuroraPostgreSQL.Managing.MaxConnections)\. 
-
- When Aurora Serverless v2 evaluates the formula, it uses the memory size based on the maximum Aurora capacity units \(ACUs\) for the DB instance, not the current ACU value\. If you change the default value, we recommend using a variation of the formula instead of specifying a constant value\. That way, Aurora Serverless v2 can use a setting that's sized appropriately based on the maximum capacity\. 
-
- When you specify a minimum capacity of 0\.5 ACUs, PostgreSQL\-compatible Aurora Serverless v2 DB instances set an upper limit of 2000 on the `max_connections` setting\. 
-
- For the following parameters, Aurora PostgreSQL also uses default values that are derived from the memory size based on the maximum ACU setting, the same as with `max_connections`: 
-+  `autovacuum_max_workers` 
-+  `autovacuum_vacuum_cost_limit` 
-+  `autovacuum_work_mem` 
-+  `effective_cache_size` 
-+  `maintenance_work_mem` 
+For the following parameters, Aurora PostgreSQL uses default values that are derived from the memory size based on the maximum ACU setting, the same as with `max_connections`:
++ `autovacuum_max_workers`
++ `autovacuum_vacuum_cost_limit`
++ `autovacuum_work_mem`
++ `effective_cache_size`
++ `maintenance_work_mem`
 
 ## Avoiding out\-of\-memory errors<a name="aurora-serverless-v2.setting-capacity.incompatible_parameters"></a>
 

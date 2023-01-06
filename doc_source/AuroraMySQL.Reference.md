@@ -1193,7 +1193,7 @@ CALL mysql.rds_set_external_source_with_auto_position (
 
  The administrative user must run the `mysql.rds_set_external_source_with_auto_position` procedure\. The administrative user runs this procedure on the primary instance of an Aurora MySQL DB cluster that acts as a replication target\. This can be the replication target of an external MySQL DB instance or an Aurora MySQL DB cluster\. 
 
- For Aurora, this procedure is supported for Aurora MySQL version 2\.04 and later MySQL 5\.7\-compatible versions\. It's also supported for Aurora MySQL version 3\. GTID\-based replication isn't supported for Aurora MySQL 1\.1 or 1\.0\. 
+This procedure is supported for Aurora MySQL version 3\.
 
  Before you run `mysql.rds_set_external_source_with_auto_position`, configure the external MySQL DB instance to be a replication source\. To connect to the external MySQL instance, specify values for `replication_user_name` and `replication_user_password`\. These values must indicate a replication user that has `REPLICATION CLIENT` and `REPLICATION SLAVE` permissions on the external MySQL instance\. 
 

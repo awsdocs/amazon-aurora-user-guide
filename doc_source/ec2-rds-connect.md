@@ -4,6 +4,8 @@ You can use the RDS console to simplify setting up a connection between an EC2 i
 
 ![\[Automatically connect an Aurora DB cluster with an EC2 instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-aurora-ec2.png)
 
+If you want to connect to an EC2 instance that isn't in the same VPC as the Aurora DB cluster, see the appropriate scenarios in [Scenarios for accessing a DB cluster in a VPC](USER_VPC.Scenarios.md)\.
+
 **Topics**
 + [Overview of automatic connectivity with an EC2 instance](#ec2-rds-connect-overview)
 + [Connecting an EC2 instance and an Aurora DB cluster automatically](#ec2-rds-connect-connecting)

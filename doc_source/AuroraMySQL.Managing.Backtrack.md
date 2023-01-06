@@ -37,41 +37,40 @@ The following limitations apply to backtracking:
 + Backtracking isn't supported with binary log \(binlog\) replication\. Cross\-Region replication must be disabled before you can configure or use backtracking\.
 + You can't backtrack a database clone to a time before that database clone was created\. However, you can use the original database to backtrack to a time before the clone was created\. For more information about database cloning, see [Cloning a volume for an Amazon Aurora DB cluster](Aurora.Managing.Clone.md)\.
 + Backtracking causes a brief DB instance disruption\. You must stop or pause your applications before starting a backtrack operation to ensure that there are no new read or write requests\. During the backtrack operation, Aurora pauses the database, closes any open connections, and drops any uncommitted reads and writes\. It then waits for the backtrack operation to complete\.
-+  You can't restore a cross\-Region snapshot of a backtrack\-enabled cluster in an AWS Region that doesn't support backtracking\. 
-+  You can't use Backtrack with Aurora multi\-master clusters\. 
-+  If you perform an in\-place upgrade for a backtrack\-enabled cluster from Aurora MySQL version 1 to version 2, you can't backtrack to a point in time before the upgrade happened\. 
++ You can't restore a cross\-Region snapshot of a backtrack\-enabled cluster in an AWS Region that doesn't support backtracking\.
++ You can't use the Backtrack feature with Aurora multi\-master clusters\.
++ If you perform an in\-place upgrade for a backtrack\-enabled cluster from Aurora MySQL version 1 to version 2, or version 2 to version 3, you can't backtrack to a point in time before the upgrade happened\.
 
 ## Region and version availability<a name="AuroraMySQL.Managing.Backtrack.Availability"></a>
 
 Backtrack is not available for Aurora PostgreSQL\.
 
-Following are the supported engines and Region availability for backtrack with Aurora MySQL\.
+Following are the supported engines and Region availability for Backtrack with Aurora MySQL\.
 
 
-| Region | Aurora MySQL 5\.6 | Aurora MySQL 5\.7 | Aurora MySQL 8\.0 | 
+| Region | Aurora MySQL version 3 | Aurora MySQL version 2 | Aurora MySQL version 1 | 
 | --- | --- | --- | --- | 
-| US East \(Ohio\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
-| US East \(N\. Virginia\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
-| US West \(N\. California\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
-| US West \(Oregon\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
+| US East \(Ohio\) | All versions | Version 2\.06 and higher | Version 5\.6\.10a | 
+| US East \(N\. Virginia\) | All versions | Version 2\.06 and higher | Version 5\.6\.10a | 
+| US West \(N\. California\) | All versions | Version 2\.06 and higher | Version 5\.6\.10a | 
+| US West \(Oregon\) | All versions | Version 2\.06 and higher | Version 5\.6\.10a | 
 | Africa \(Cape Town\) | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | 
-| Asia Pacific \(Hyderabad\) | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | 
-| Asia Pacific \(Mumbai\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
-| Asia Pacific \(Osaka\) | Version 1\.22 and higher | Version 2\.07\.3 and higher | – | 
-| Asia Pacific \(Seoul\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
-| Asia Pacific \(Singapore\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
-| Asia Pacific \(Sydney\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
-| Asia Pacific \(Tokyo\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
-| Canada \(Central\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
+| Asia Pacific \(Mumbai\) | All versions | Version 2\.06 and higher | Version 5\.6\.10a | 
+| Asia Pacific \(Osaka\) | All versions | Version 2\.07\.3 and higher | Version 1\.22 and higher | 
+| Asia Pacific \(Seoul\) | All versions | Version 2\.06 and higher | Version 5\.6\.10a | 
+| Asia Pacific \(Singapore\) | All versions | Version 2\.06 and higher | Version 5\.6\.10a | 
+| Asia Pacific \(Sydney\) | All versions | Version 2\.06 and higher | Version 5\.6\.10a | 
+| Asia Pacific \(Tokyo\) | All versions | Version 2\.06 and higher | Version 5\.6\.10a | 
+| Canada \(Central\) | All versions | Version 2\.06 and higher | Version 5\.6\.10a | 
 | China \(Beijing\) | – | – | – | 
 | China \(Ningxia\) | – | – | – | 
-| Europe \(Frankfurt\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
-| Europe \(Ireland\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
-| Europe \(London\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
+| Europe \(Frankfurt\) | All versions | Version 2\.06 and higher | Version 5\.6\.10a | 
+| Europe \(Ireland\) | All versions | Version 2\.06 and higher | Version 5\.6\.10a | 
+| Europe \(London\) | All versions | Version 2\.06 and higher | Version 5\.6\.10a | 
 | Europe \(Milan\) | – | – | – | 
-| Europe \(Paris\) | Version 5\.6\.10a | Version 2\.06 and higher | – | 
+| Europe \(Paris\) | All versions | Version 2\.06 and higher | Version 5\.6\.10a | 
 | Europe \(Spain\) | – | – | – | 
 | Europe \(Stockholm\) | – | – | – | 
 | Europe \(Zurich\) | – | – | – | 
@@ -83,11 +82,11 @@ Following are the supported engines and Region availability for backtrack with A
 
 ## Upgrade considerations for backtrack\-enabled clusters<a name="AuroraMySQL.Managing.Backtrack.Upgrade"></a>
 
- Backtracking is available for Aurora MySQL 1\.\*, which is compatible with MySQL 5\.6\. It's also available for Aurora MySQL 2\.06 and higher, which is compatible with MySQL 5\.7\. Because of the Aurora MySQL 2\.\* version requirement, if you created the Aurora MySQL 1\.\* cluster with the Backtrack setting enabled, you can only upgrade to a Backtrack\-compatible version of Aurora MySQL 2\.\*\. This requirement affects the following types of upgrade paths: 
-+  You can only restore a snapshot of the Aurora MySQL 1\.\* DB cluster to a Backtrack\-compatible version of Aurora MySQL 2\.\*\. 
-+  You can only perform point\-in\-time recovery on the Aurora MySQL 1\.\* DB cluster to restore it to a Backtrack\-compatible version of Aurora MySQL 2\.\*\. 
+If you created a Aurora MySQL 1\.\* cluster with the Backtrack setting enabled, you can only upgrade to a Backtrack\-compatible version of Aurora MySQL 2\.\*\. This requirement affects the following types of upgrade paths:
++ You can only restore a snapshot of the Aurora MySQL 1\.\* DB cluster to a Backtrack\-compatible version of Aurora MySQL 2\.\*\.
++ You can only perform point\-in\-time recovery on the Aurora MySQL 1\.\* DB cluster to restore it to a Backtrack\-compatible version of Aurora MySQL 2\.\*\.
 
- These upgrade requirements still apply even if you turn off Backtrack for the Aurora MySQL 1\.\* cluster\. 
+These upgrade requirements still apply even if you turn off Backtrack for the Aurora MySQL 1\.\* cluster\.
 
 ## Configuring backtracking<a name="AuroraMySQL.Managing.Backtrack.Configuring"></a>
 

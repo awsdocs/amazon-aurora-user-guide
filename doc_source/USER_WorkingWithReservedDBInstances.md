@@ -1,8 +1,8 @@
 # Reserved DB instances for Aurora<a name="USER_WorkingWithReservedDBInstances"></a>
 
-Using reserved DB instances, you can reserve a DB instance for a one\- or three\-year term\. Reserved DB instances provide you with a significant discount compared to on\-demand DB instance pricing\. Reserved DB instances are not physical instances, but rather a billing discount applied to the use of certain on\-demand DB instances in your account\. Discounts for reserved DB instances are tied to instance type and AWS Region\. 
+Using reserved DB instances, you can reserve a DB instance for a one\- or three\-year term\. Reserved DB instances provide you with a significant discount compared to on\-demand DB instance pricing\. Reserved DB instances are not physical instances, but rather a billing discount applied to the use of certain on\-demand DB instances in your account\. Discounts for reserved DB instances are tied to instance type and AWS Region\.
 
-The general process for working with reserved DB instances is: First get information about available reserved DB instance offerings, then purchase a reserved DB instance offering, and finally get information about your existing reserved DB instances\. 
+The general process for working with reserved DB instances is: First get information about available reserved DB instance offerings, then purchase a reserved DB instance offering, and finally get information about your existing reserved DB instances\.
 
 ## Overview of reserved DB instances<a name="USER_WorkingWithReservedDBInstances.Overview"></a>
 
@@ -14,26 +14,26 @@ If the specifications of the new DB instance match an existing reserved DB insta
 
 You can modify a reserved DB instance\. If the modification is within the specifications of the reserved DB instance, part or all of the discount still applies to the modified DB instance\. If the modification is outside the specifications, such as changing the instance class, the discount no longer applies\. For more information, see [Size\-flexible reserved DB instances](#USER_WorkingWithReservedDBInstances.SizeFlexible)\.
 
-For more information about reserved DB instances, including pricing, see [Amazon RDS reserved instances](http://aws.amazon.com/rds/reserved-instances/#2)\. 
+For more information about reserved DB instances, including pricing, see [Amazon RDS reserved instances](http://aws.amazon.com/rds/reserved-instances/#2)\.
 
 ### Offering types<a name="USER_WorkingWithReservedDBInstances.OfferingTypes"></a>
 
-Reserved DB instances are available in three varieties—No Upfront, Partial Upfront, and All Upfront—that let you optimize your Amazon RDS costs based on your expected usage\. 
+Reserved DB instances are available in three varieties—No Upfront, Partial Upfront, and All Upfront—that let you optimize your Amazon RDS costs based on your expected usage\.
 
 **No Upfront**  
-This option provides access to a reserved DB instance without requiring an upfront payment\. Your No Upfront reserved DB instance bills a discounted hourly rate for every hour within the term, regardless of usage, and no upfront payment is required\. This option is only available as a one\-year reservation\. 
+This option provides access to a reserved DB instance without requiring an upfront payment\. Your No Upfront reserved DB instance bills a discounted hourly rate for every hour within the term, regardless of usage, and no upfront payment is required\. This option is only available as a one\-year reservation\.
 
 **Partial Upfront**  
-This option requires a part of the reserved DB instance to be paid upfront\. The remaining hours in the term are billed at a discounted hourly rate, regardless of usage\. This option is the replacement for the previous Heavy Utilization option\. 
+This option requires a part of the reserved DB instance to be paid upfront\. The remaining hours in the term are billed at a discounted hourly rate, regardless of usage\. This option is the replacement for the previous Heavy Utilization option\.
 
 **All Upfront**  
-Full payment is made at the start of the term, with no other costs incurred for the remainder of the term regardless of the number of hours used\. 
+Full payment is made at the start of the term, with no other costs incurred for the remainder of the term regardless of the number of hours used\.
 
 If you are using consolidated billing, all the accounts in the organization are treated as one account\. This means that all accounts in the organization can receive the hourly cost benefit of reserved DB instances that are purchased by any other account\. For more information about consolidated billing, see [Amazon RDS reserved DB instances](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidatedbilling-other.html#consolidatedbilling-rds) in the *AWS Billing and Cost Management User Guide*\.
 
 ### Size\-flexible reserved DB instances<a name="USER_WorkingWithReservedDBInstances.SizeFlexible"></a>
 
-When you purchase a reserved DB instance, one thing that you specify is the instance class, for example db\.r5\.large\. For more information about instance classes, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\. 
+When you purchase a reserved DB instance, one thing that you specify is the instance class, for example db\.r5\.large\. For more information about instance classes, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
 
 If you have a DB instance, and you need to scale it to larger capacity, your reserved DB instance is automatically applied to your scaled DB instance\. That is, your reserved DB instances are automatically applied across all DB instance class sizes\. Size\-flexible reserved DB instances are available for DB instances with the same AWS Region and database engine\. Size\-flexible reserved DB instances can only scale in their instance class type\. For example, a reserved DB instance for a db\.r5\.large can apply to a db\.r5\.xlarge, but not to a db\.r6g\.large, because db\.r5 and db\.r6g are different instance class types\.
 
@@ -43,12 +43,10 @@ Size\-flexible reserved DB instances are available for the following Aurora data
 + Aurora MySQL
 + Aurora PostgreSQL
 
-You can compare usage for different reserved DB instance sizes by using normalized units\. For example, one unit of usage on two db\.r3\.large DB instances is equivalent to eight normalized units of usage on one db\.r3\.small\. The following table shows the number of normalized units for each DB instance size\. 
+You can compare usage for different reserved DB instance sizes by using normalized units\. For example, one unit of usage on two db\.r3\.large DB instances is equivalent to eight normalized units of usage on one db\.r3\.small\. The following table shows the number of normalized units for each DB instance size\.
 
 
-****  
-
-| Instance size | Single\-AZ normalized units | Multi\-AZ normalized units | 
+| Instance size | Single\-AZ normalized units \(deployment with one DB instance\) | Multi\-AZ normalized units \(deployment with two DB instances\) | 
 | --- | --- | --- | 
 | micro | 0\.5 | 1 | 
 | small | 1 | 2 | 
@@ -63,7 +61,7 @@ You can compare usage for different reserved DB instance sizes by using normaliz
 | 16xlarge | 128 | 256 | 
 | 24xlarge | 192 | 384 | 
 
-For example, suppose that you purchase a `db.t2.medium` reserved DB instance, and you have two running `db.t2.small` DB instances in your account in the same AWS Region\. In this case, the billing benefit is applied in full to both instances\. 
+For example, suppose that you purchase a `db.t2.medium` reserved DB instance, and you have two running `db.t2.small` DB instances in your account in the same AWS Region\. In this case, the billing benefit is applied in full to both instances\.
 
 ![\[Applying a reserved DB instance in full to smaller DB instances\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/ri-db-instance-flex-full.png)
 
@@ -74,20 +72,21 @@ Alternatively, if you have one `db.t2.large` instance running in your account in
 ### Reserved DB instance billing example<a name="USER_WorkingWithReservedDBInstances.BillingExample"></a>
 
 The price for a reserved DB instance doesn't include regular costs associated with storage, backups, and I/O\. The following example illustrates the total cost per month for a reserved DB instance:
-+ An Aurora MySQL reserved Single\-AZ db\.r4\.large DB instance class in US East \(N\. Virginia\) at a cost of $0\.19 per hour, or $138\.70 per month
++ An Aurora MySQL reserved Single\-AZ db\.r5\.large DB instance class in US East \(N\. Virginia\) at a cost of $0\.19 per hour, or $138\.70 per month
 + Aurora storage at a cost of $0\.10 per GiB per month \(assume $45\.60 per month for this example\)
 + Aurora I/O at a cost of $0\.20 per 1 million requests \(assume $20 per month for this example\)
 + Aurora backup storage at $0\.021 per GiB per month \(assume $30 per month for this example\)
 
 Add all of these options \($138\.70 \+ $45\.60 \+ $20 \+ $30\) with the reserved DB instance, and the total cost per month is $234\.30\.
 
-If you chose to use an on\-demand DB instance instead of a reserved DB instance, an Aurora MySQL Single\-AZ db\.r4\.large DB instance class in US East \(N\. Virginia\) costs $0\.29 per hour, or $217\.50 per month\. So, for an on\-demand DB instance, add all of these options \($217\.50 \+ $45\.60 \+ $20 \+ $30\), and the total cost per month is $313\.10\. You save nearly $79 per month by using the reserved DB instance\.
+If you choose to use an on\-demand DB instance instead of a reserved DB instance, an Aurora MySQL Single\-AZ db\.r5\.large DB instance class in US East \(N\. Virginia\) costs $0\.29 per hour, or $217\.50 per month\. So, for an on\-demand DB instance, add all of these options \($217\.50 \+ $45\.60 \+ $20 \+ $30\), and the total cost per month is $313\.10\. You save nearly $79 per month by using the reserved DB instance\.
 
+To use reserved instances for Aurora DB clusters, simply purchase one reserved instance for each DB instance in the cluster\.
 
+Extending the previous example, you have an Aurora MySQL DB cluster with one writer DB instance and two Aurora Replicas, for a total of three DB instances in the cluster\. They all use reserved db\.r5\.large DB instances, costs $234\.30 \+ 2 \* \($138\.70 \+ $20 I/O per instance\) for a total of $551\.70 per month\. The corresponding on\-demand cost for an Aurora MySQL DB cluster with one writer DB instance and two Aurora Replicas is $313\.10 \+ 2 \* \($217\.50 \+ $20 I/O per instance\) for a total of $788\.10 per month\. You save $236\.40 per month by using the reserved DB instances\.
 
 **Note**  
-The prices in this example are sample prices and might not match actual prices\.  
-For Aurora pricing information, see the [Aurora pricing page](https://aws.amazon.com/rds/aurora/pricing)\.
+The prices in these examples are sample prices and might not match actual prices\. For Aurora pricing information, see [Amazon Aurora pricing](https://aws.amazon.com/rds/aurora/pricing)\.
 
 ### Deleting a reserved DB instance<a name="USER_WorkingWithReservedDBInstances.Cancelling"></a>
 

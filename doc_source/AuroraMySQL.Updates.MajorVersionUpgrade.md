@@ -282,7 +282,7 @@ You can't specify a custom parameter group for the global database cluster while
 
 ## After the upgrade<a name="AuroraMySQL.Upgrading.PostUpgrade"></a>
 
- If the cluster that you upgraded had the backtrack feature enabled, you can't backtrack the upgraded cluster to a time that's before the upgrade\. 
+ If the cluster that you upgraded had the Backtrack feature enabled, you can't backtrack the upgraded cluster to a time that's before the upgrade\. 
 
 ## Troubleshooting for Aurora MySQL in\-place upgrade<a name="AuroraMySQL.Upgrading.Troubleshooting"></a>
 
@@ -565,4 +565,4 @@ $ aws rds describe-events --source-type db-cluster --source-identifier cluster-5
 
 ## Alternative blue\-green upgrade technique<a name="AuroraMySQL.Upgrading.BlueGreenBlog"></a>
 
-In some situations, your top priority is to perform an immediate switchover from the old cluster to an upgraded one\. In such situations, you can use a multistep process that runs the old and new clusters side\-by\-side\. Here, you replicate data from the old cluster to the new one until you are ready for the new cluster to take over\. For details, see the blog post [Performing major version upgrades for Amazon Aurora MySQL with minimum downtime](http://aws.amazon.com/blogs/database/performing-major-version-upgrades-for-amazon-aurora-mysql-with-minimum-downtime/) on the AWS Database Blog\.
+In some situations, your top priority is to perform an immediate switchover from the old cluster to an upgraded one\. In such situations, you can use a multistep process that runs the old and new clusters side\-by\-side\. Here, you replicate data from the old cluster to the new one until you are ready for the new cluster to take over\. For details, see [Using Amazon RDS Blue/Green Deployments for database updates](blue-green-deployments.md)\.

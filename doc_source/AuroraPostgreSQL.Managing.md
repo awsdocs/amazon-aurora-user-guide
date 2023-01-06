@@ -45,7 +45,7 @@ Following, you can find a table that lists the highest value that should ever be
 **Tip**  
 If your applications frequently open and close connections, or keep a large number of long\-lived connections open, we recommend that you use Amazon RDS Proxy\. RDS Proxy is a fully managed, highly available database proxy that uses connection pooling to share database connections securely and efficiently\. To learn more about RDS Proxy, see [Using Amazon RDS Proxy](rds-proxy.md)\.
 
- For details about how Aurora Serverless v2 instances handle this parameter, see [Parameters that Aurora computes based on Aurora Serverless v2 maximum capacity](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.parameters-based-on-max-capacity)\. 
+ For details about how Aurora Serverless v2 instances handle this parameter, see [Maximum connections for Aurora Serverless v2](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.max-connections)\. 
 
 
 | Instance class | Default max\_connections value | 
