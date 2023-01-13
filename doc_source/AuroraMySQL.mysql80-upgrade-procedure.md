@@ -7,9 +7,6 @@ For specific upgrade paths to upgrade your database from Aurora MySQL version 1 
 + To upgrade from Aurora MySQL version 1, first do an intermediate upgrade to Aurora MySQL version 2\. Use any of the upgrade methods in [Upgrading Amazon Aurora MySQL DB clusters](AuroraMySQL.Updates.Upgrading.md)\.
 
   Then upgrade from Aurora MySQL version 2 to Aurora MySQL version 3\. Direct upgrade isn't available from Aurora MySQL version 1 clusters \(MySQL 5\.6–compatible\) to Aurora MySQL version 3\.
-+ If you have an Aurora MySQL version 2 cluster that uses backtrack, currently you can't use either the in\-place upgrade or snapshot restore method to upgrade to Aurora MySQL version 3\. This limitation applies to all clusters that use backtrack, regardless of whether the backtrack setting is turned on\.
-
-  In this case, perform a logical dump and restore by using a tool such as the `mysqldump` command\. For more information about using `mysqldump` for Aurora MySQL, see [Migrating from MySQL to Amazon Aurora by using mysqldump](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.mysqldump)\.
 
 **Tip**  
  In some cases, you might specify the option to upload database logs to CloudWatch when you upgrade\. If so, examine the logs in CloudWatch to diagnose any issues that occur during the upgrade operation\. The CLI examples in this section demonstrate how to do so using the `--enable-cloudwatch-logs-exports` option\. 

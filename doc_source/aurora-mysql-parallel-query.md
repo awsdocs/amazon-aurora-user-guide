@@ -8,6 +8,7 @@
   + [Architecture](#aurora-mysql-parallel-query-architecture)
   + [Prerequisites](#aurora-mysql-parallel-query-prereqs)
   + [Limitations](#aurora-mysql-parallel-query-limitations)
+  + [I/O costs](#aurora-mysql-parallel-query-cost)
 + [Planning for a parallel query cluster](#aurora-mysql-parallel-query-planning)
   + [Checking Aurora MySQL version compatibility for parallel query](#aurora-mysql-parallel-query-checking-compatibility)
 + [Creating a DB cluster that works with parallel query](#aurora-mysql-parallel-query-creating-cluster)
@@ -66,6 +67,7 @@ The PostgreSQL database engine also has a feature that's also called "parallel q
 + [Architecture](#aurora-mysql-parallel-query-architecture)
 + [Prerequisites](#aurora-mysql-parallel-query-prereqs)
 + [Limitations](#aurora-mysql-parallel-query-limitations)
++ [I/O costs](#aurora-mysql-parallel-query-cost)
 
 ### Benefits<a name="aurora-mysql-parallel-query-benefits"></a>
 
@@ -107,8 +109,17 @@ The PostgreSQL database engine also has a feature that's also called "parallel q
 +  Aurora uses a cost\-based algorithm to determine whether to use the parallel query mechanism for each SQL statement\. Using certain SQL constructs in a statement can prevent parallel query or make parallel query unlikely for that statement\. For information about compatibility of SQL constructs with parallel query, see [How parallel query works with SQL constructs](#aurora-mysql-parallel-query-sql)\. 
 +  Each Aurora DB instance can run only a certain number of parallel query sessions at one time\. If a query has multiple parts that use parallel query, such as subqueries, joins, or `UNION` operators, those phases run in sequence\. The statement only counts as a single parallel query session at any one time\. You can monitor the number of active sessions using the [parallel query status variables](#aurora-mysql-parallel-query-monitoring)\. You can check the limit on concurrent sessions for a given DB instance by querying the status variable `Aurora_pq_max_concurrent_requests`\. 
 +  Parallel query is available in all AWS Regions that Aurora supports\. For most AWS Regions, the minimum required Aurora MySQL version to use parallel query is 1\.23 or 2\.09\.  
-+  Aurora MySQL 1\.22\.2, 1\.20\.1, 1\.19\.6, and 5\.6\.10a only: Using parallel query with these older versions involves creating a new cluster, or restoring from an existing Aurora MySQL cluster snapshot\. 
-+  Aurora MySQL 1\.22\.2, 1\.20\.1, 1\.19\.6, and 5\.6\.10a only: Parallel query doesn't support AWS Identity and Access Management \(IAM\) database authentication\. 
++ Aurora MySQL 1\.22\.2, 1\.20\.1, 1\.19\.6, and 5\.6\.10a only:
+  + Using parallel query with these older versions involves creating a new cluster, or restoring from an existing Aurora MySQL cluster snapshot\.
+  + Parallel query doesn't support AWS Identity and Access Management \(IAM\) database authentication\.
+
+### I/O costs<a name="aurora-mysql-parallel-query-cost"></a>
+
+If your Aurora MySQL cluster uses parallel query, you might see an increase in `VolumeReadIOPS` values\. Parallel queries don't use the buffer pool\. Thus, although the queries are fast, this optimized processing can result in an increase in read operations and associated charges\.
+
+Parallel query I/O costs for your query are metered at the storage layer, and will be the same or larger with parallel query turned on\. Your benefit is the improvement in query performance\. There are two reasons for potentially higher I/O costs with parallel query:
++ Even if some of the data in a table is in the buffer pool, parallel query requires all data to be scanned at the storage layer, incurring I/O costs\.
++ Running a parallel query doesn't warm up the buffer pool\. As a result, consecutive runs of the same parallel query incur the full I/O cost\.
 
 ## Planning for a parallel query cluster<a name="aurora-mysql-parallel-query-planning"></a>
 

@@ -13,20 +13,17 @@ Use the following to learn about changes to be aware of when you upgrade your Au
 
 ## Feature differences between Aurora MySQL version 2 and 3<a name="AuroraMySQL.Compare-v2-v3-features"></a>
 
- The following Amazon Aurora MySQL features are supported in Aurora MySQL for MySQL 5\.7, but these features aren't supported in Aurora MySQL for MySQL 8\.0: 
-+  Backtrack currently isn't available for Aurora MySQL version 3 clusters\. We intend to make this feature available in a subsequent minor version\. 
+The following Amazon Aurora MySQL features are supported in Aurora MySQL for MySQL 5\.7, but these features aren't supported in Aurora MySQL for MySQL 8\.0:
++ You can't use Aurora MySQL version 3 for Aurora Serverless v1 clusters\. Aurora MySQL version 3 works with Aurora Serverless v2\.
++ Lab mode doesn't apply to Aurora MySQL version 3\. There aren't any lab mode features in Aurora MySQL version 3\. Instant DDL supersedes the fast online DDL feature that was formerly available in lab mode\. For an example, see [Instant DDL \(Aurora MySQL version 3\)](AuroraMySQL.Managing.FastDDL.md#AuroraMySQL.mysql80-instant-ddl)\.
++ The query cache is removed from community MySQL 8\.0 and also from Aurora MySQL version 3\.
++ Aurora MySQL version 3 is compatible with the community MySQL hash join feature\. The Aurora\-specific implementation of hash joins in Aurora MySQL version 2 isn't used\. For information about using hash joins with Aurora parallel query, see [Turning on hash join for parallel query clusters](aurora-mysql-parallel-query.md#aurora-mysql-parallel-query-enabling-hash-join) and [Aurora MySQL hints](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Hints)\. For general usage information about hash joins, see [Hash Join Optimization](https://dev.mysql.com/doc/refman/8.0/en/hash-joins.html) in the *MySQL Reference Manual*\.
++ Currently, you can't restore a physical backup from the Percona XtraBackup tool to an Aurora MySQL version 3 cluster\. We intend to support this feature in a subsequent minor version\.
++ The `mysql.lambda_async` stored procedure that was deprecated in Aurora MySQL version 2 is removed in version 3\. For version 3, use the asynchronous function `lambda_async` instead\.
++ The default character set in Aurora MySQL version 3 is `utf8mb4`\. In Aurora MySQL version 2, the default character set was `latin1`\. For information about this character set, see [The utf8mb4 Character Set \(4\-Byte UTF\-8 Unicode Encoding\)](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-utf8mb4.html) in the *MySQL Reference Manual*\.
++ The `innodb_flush_log_at_trx_commit` configuration parameter can't be modified\. The default value of 1 always applies\.
 
-   If you have an Aurora MySQL version 2 cluster that uses backtrack, currently you can't use the snapshot restore method to upgrade to Aurora MySQL version 3\. This limitation applies to all clusters that use backtrack clusters, regardless of whether the backtrack setting is turned on\. For details about upgrade procedures, see [Upgrading to Aurora MySQL version 3](AuroraMySQL.mysql80-upgrade-procedure.md)\. 
-+  You can't use Aurora MySQL version 3 for Aurora Serverless v1 clusters\. Aurora MySQL version 3 works with Aurora Serverless v2\. 
-+  Lab mode doesn't apply to Aurora MySQL version 3\. There aren't any lab mode features in Aurora MySQL version 3\. Instant DDL supersedes the fast online DDL feature that was formerly available in lab mode\. For an example, see [Instant DDL \(Aurora MySQL version 3\)](AuroraMySQL.Managing.FastDDL.md#AuroraMySQL.mysql80-instant-ddl)\. 
-+  The query cache is removed from community MySQL 8\.0 and also from Aurora MySQL version 3\. 
-+  Aurora MySQL version 3 is compatible with the community MySQL hash join feature\. The Aurora\-specific implementation of hash joins in Aurora MySQL version 2 isn't used\. For information about using hash joins with Aurora parallel query, see [Turning on hash join for parallel query clusters](aurora-mysql-parallel-query.md#aurora-mysql-parallel-query-enabling-hash-join) and [Aurora MySQL hints](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Hints)\. For general usage information about hash joins, see [Hash Join Optimization](https://dev.mysql.com/doc/refman/8.0/en/hash-joins.html) in the *MySQL Reference Manual*\. 
-+  Currently, you can't restore a physical backup from the Percona XtraBackup tool to an Aurora MySQL version 3 cluster\. We intend to support this feature in a subsequent minor version\. 
-+  The `mysql.lambda_async` stored procedure that was deprecated in Aurora MySQL version 2 is removed in version 3\. For version 3, use the asynchronous function `lambda_async` instead\. 
-+  The default character set in Aurora MySQL version 3 is `utf8mb4`\. In Aurora MySQL version 2, the default character set was `latin1`\. For information about this character set, see [The utf8mb4 Character Set \(4\-Byte UTF\-8 Unicode Encoding\)](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-utf8mb4.html) in the *MySQL Reference Manual*\. 
-+  The `innodb_flush_log_at_trx_commit` configuration parameter can't be modified\. The default value of 1 always applies\. 
-
- Some Aurora MySQL features are available for certain combinations of AWS Region and DB engine version\. For details, see [Supported features in Amazon Aurora by AWS Region and Aurora DB engine](Concepts.AuroraFeaturesRegionsDBEngines.grids.md)\. 
+Some Aurora MySQL features are available for certain combinations of AWS Region and DB engine version\. For details, see [Supported features in Amazon Aurora by AWS Region and Aurora DB engine](Concepts.AuroraFeaturesRegionsDBEngines.grids.md)\.
 
 ## Instance class support<a name="AuroraMySQL.mysql80-instance-classes"></a>
 

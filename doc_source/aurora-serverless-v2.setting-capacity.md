@@ -460,7 +460,7 @@ postgres=> show shared_buffers;
 | --- | --- | --- | 
 |  Aurora MySQL version 3  |  `aurora-mysql8.0`  |  `default.aurora-mysql8.0`  | 
 |  Aurora PostgreSQL version 13\.x  |  `aurora-postgresql13`  |  `default.aurora-postgresql13`  | 
-|  Aurora PostgreSQL version 14\.x  |  `aurora-postgresql14`  |  `default.aurora-postgresql13`  | 
+|  Aurora PostgreSQL version 14\.x  |  `aurora-postgresql14`  |  `default.aurora-postgresql14`  | 
 
  The following example gets a list of parameters from the default DB cluster group for Aurora MySQL version 3 and Aurora PostgreSQL 13\. Those are the Aurora MySQL and Aurora PostgreSQL versions that you use with Aurora Serverless v2\. 
 

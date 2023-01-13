@@ -26,8 +26,8 @@ We recommend different actions depending on the other wait events that you see\.
 
 Use Performance Insights to identify the SQL statements responsible for this wait event\. Consider the following strategies:
 + If row locks are a persistent problem, consider rewriting the application to use optimistic locking\.
-+ Use multirow statements\. 
-+ Spread the workload over different database objects\. One way to do achieve this is through partitioning\.
++ Use multirow statements\.
++ Spread the workload over different database objects\. You can do this through partitioning\.
 + Check the value of the `innodb_lock_wait_timeout` parameter\. It controls how long transactions wait before generating a timeout error\.
 
 For a useful overview of troubleshooting using Performance Insights, see the blog post [Analyze Amazon Aurora MySQL Workloads with Performance Insights](https://aws.amazon.com/blogs/database/analyze-amazon-aurora-mysql-workloads-with-performance-insights/)\.

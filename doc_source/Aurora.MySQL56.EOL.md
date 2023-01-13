@@ -30,6 +30,8 @@ The following are additional milestones for upgrading Aurora MySQL version 1 clu
 
 Upgrading between major versions requires more extensive planning and testing than for a minor version\. The process can take substantial time\. For a detailed discussion of the v1\-to\-v2 upgrade process, see [Upgrade Amazon Aurora MySQL\-Compatible Edition version 1 \(with MySQL 5\.6 compatibility\)](http://aws.amazon.com/blogs/database/upgrade-amazon-aurora-mysql-compatible-edition-version-1-with-mysql-5-6-compatibility)\.
 
+For situations where the top priority is to reduce downtime, you can also use [blue/green deployments](https://aws.amazon.com/blogs/aws/new-fully-managed-blue-green-deployments-in-amazon-aurora-and-amazon-rds/) for performing the major version upgrade in provisioned Amazon Aurora DB clusters\. A blue/green deployment creates a staging environment that copies the production environment\. You can make changes to the Aurora DB cluster in the green \(staging\) environment without affecting production workloads\. The switchover typically takes under a minute with no data loss and no need for application changes\. For more information, see [Overview of Amazon RDS Blue/Green Deployments for Aurora](blue-green-deployments-overview.md)\.
+
 After the upgrade is finished, you also might have follow\-up work to do\. For example, you might need to follow up due to differences in SQL compatibility, the way certain MySQL\-related features work, or parameter settings between the old and new versions\.
 
 To learn more about the methods, planning, testing, and troubleshooting of Aurora MySQL major version upgrades, be sure to thoroughly read [Upgrading the major version of an Amazon Aurora MySQL DB cluster](AuroraMySQL.Updates.MajorVersionUpgrade.md)\.

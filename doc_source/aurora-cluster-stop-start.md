@@ -49,11 +49,15 @@ To use an Aurora DB cluster or perform administration, you always begin with a r
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1.  In the navigation pane, choose **Databases**, and then choose a cluster\. You can perform the stop operation from this page, or navigate to the details page for the DB cluster that you want to stop\. 
+1. In the navigation pane, choose **Databases**, and then choose a cluster\. You can perform the stop operation from this page, or navigate to the details page for the DB cluster that you want to stop\.
 
-    If an existing cluster can't be stopped and started, the **Stop** action isn't available from the **Actions** menu on the **Databases** page or the details page\. For the kinds of clusters that you can't start and stop, see [Limitations for stopping and starting Aurora DB clusters](#aurora-cluster-stop-limitations)\. 
+1. For **Actions**, choose **Stop temporarily**\.
 
-1. For **Actions**, choose **Stop**\. 
+   If a DB cluster can't be stopped and started, the **Stop temporarily** action isn't available from the **Actions** menu on the **Databases** page or the details page\. For the kinds of clusters that you can't start and stop, see [Limitations for stopping and starting Aurora DB clusters](#aurora-cluster-stop-limitations)\. 
+
+1. In the **Stop DB cluster temporarily** window, select the acknowledgement that the DB cluster will restart automatically after 7 days\.
+
+1. Choose **Stop temporarily** to stop the DB cluster, or choose **Cancel** to cancel the operation\.
 
 ### AWS CLI<a name="aurora-stop-cluster.CLI"></a>
 

@@ -155,7 +155,10 @@ The following limitations apply to blue/green deployments:
   + Amazon RDS Proxy
   + Cross\-Region read replicas
   + Aurora Serverless v1 DB clusters
+  + Aurora multi\-master clusters
   + DB clusters that are part of an Aurora global database
+
+    If an Aurora MySQL version 5\.6\.10a DB cluster was part of an Aurora global database, the DB cluster can't be included in a blue/green deployment even if the DB cluster was removed from the Aurora global database\. To include the DB cluster in a blue/green deployment, upgrade the DB cluster to a higher Aurora MySQL version\.
   + AWS CloudFormation
 + The following are limitations for changes in a blue/green deployment:
   + Aurora MySQL version 3 \(compatible with MySQL 8\.0\) DB clusters aren't supported in the blue environment, but they are supported in the green environment\.
@@ -163,3 +166,4 @@ The following limitations apply to blue/green deployments:
   + You can't change an encrypted DB cluster into an unencrypted DB cluster\.
   + You can't change a blue environment DB cluster to a higher engine version than its corresponding green environment DB cluster\.
   + The resources in the blue environment and green environment must be in the same AWS account\.
+  + During switchover, the blue DB cluster can't be the target of external replication\.

@@ -298,9 +298,8 @@ Feature availability and support varies across specific versions of each databas
 ## Limitations for Secrets Manager integration with Amazon Aurora<a name="rds-secrets-manager-limitations"></a>
 
 Managing master user passwords with Secrets Manager isn't supported for the following features:
-+ DB clusters with read replicas
-+ Read replicas
 + Amazon RDS Blue/Green Deployments
 + DB clusters that are part of an Aurora global database
 + Aurora Serverless v1 DB clusters
++ Aurora MySQL cross\-Region read replicas
 + AWS CloudFormation
