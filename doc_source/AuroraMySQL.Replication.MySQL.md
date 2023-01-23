@@ -24,9 +24,9 @@ Setting up MySQL replication with Aurora MySQL involves the following steps, whi
 
 [2\. Retain binary logs on the replication source until no longer needed](#AuroraMySQL.Replication.MySQL.RetainBinlogs)
 
-[3\. Create a snapshot of your replication source](#AuroraMySQL.Replication.MySQL.CreateSnapshot)
+[3\. Create a snapshot or dump of your replication source](#AuroraMySQL.Replication.MySQL.CreateSnapshot)
 
-[4\. Load the snapshot into your replica target](#AuroraMySQL.Replication.MySQL.LoadSnapshot)
+[4\. Load the snapshot or dump into your replica target](#AuroraMySQL.Replication.MySQL.LoadSnapshot)
 
 [5\. Create a replication user on your replication source](#AuroraMySQL.Replication.MySQL.CreateReplUser)
 
@@ -62,31 +62,31 @@ Use the following instructions to retain binary logs for your database engine\.
 |   RDS for MySQL   |   **To retain binary logs on an Amazon RDS DB instance**   You can retain binary log files on an Amazon RDS DB instance by setting the binlog retention hours just as with an Aurora MySQL DB cluster, described in the previous row\.  You can also retain binlog files on an Amazon RDS DB instance by creating a read replica for the DB instance\. This read replica is temporary and solely for the purpose of retaining binlog files\. After the read replica has been created, call the [mysql\.rds\_stop\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_stop_replication.html) procedure on the read replica\. While replication is stopped, Amazon RDS doesn't delete any of the binlog files on the replication source\. After you have set up replication with your permanent replica, you can delete the read replica when the replica lag \(`Seconds behind master` field\) between your replication source and your permanent replica reaches 0\.   | 
 |   MySQL \(external\)   |   **To retain binary logs on an external MySQL database**   Because binlog files on an external MySQL database are not managed by Amazon RDS, they are retained until you delete them\.   After replication has been started, you can verify that changes have been applied to your replica by running the `SHOW SLAVE STATUS` \(Aurora MySQL version 1 and 2\) or `SHOW REPLICA STATUS` \(Aurora MySQL version 3\) command on your replica and checking the `Seconds behind master` field\. If the `Seconds behind master` field is 0, then there is no replica lag\. When there is no replica lag, you can delete old binlog files\.   | 
 
-### 3\. Create a snapshot of your replication source<a name="AuroraMySQL.Replication.MySQL.CreateSnapshot"></a>
+### 3\. Create a snapshot or dump of your replication source<a name="AuroraMySQL.Replication.MySQL.CreateSnapshot"></a>
 
- You use a snapshot of your replication source to load a baseline copy of your data onto your replica and then start replicating from that point on\. 
+ You use a snapshot or dump of your replication source to load a baseline copy of your data onto your replica and then start replicating from that point on\. 
 
-Use the following instructions to create a snapshot of your replication source for your database engine\.
+Use the following instructions to create a snapshot or dump of the replication source for your database engine\.
 
 
-|  Database engine  |  Instructions  | 
+| Database engine | Instructions | 
 | --- | --- | 
-|   Aurora MySQL   |   **To create a snapshot of an Aurora MySQL DB cluster**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
-|   RDS for MySQL   |   **To create a snapshot of an Amazon RDS DB instance**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
-|   MySQL \(external\)   |   **To create a snapshot of an external MySQL database**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
+|   Aurora MySQL   |  **To create a snapshot of an Aurora MySQL DB cluster** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
+|  RDS for MySQL  |  **To create a snapshot of an Amazon RDS DB instance** Create a read replica of your Amazon RDS DB instance\. For more information, see [Creating a read replica](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Create) in the *Amazon Relational Database Service User Guide*\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
+|  MySQL \(external\)  |  **To create a dump of an external MySQL database** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
 
-### 4\. Load the snapshot into your replica target<a name="AuroraMySQL.Replication.MySQL.LoadSnapshot"></a>
+### 4\. Load the snapshot or dump into your replica target<a name="AuroraMySQL.Replication.MySQL.LoadSnapshot"></a>
 
- If you plan to load data from a dump of a MySQL database that is external to Amazon RDS, then you might want to create an EC2 instance to copy the dump files to, and then load the data into your DB cluster or DB instance from that EC2 instance\. Using this approach, you can compress the dump file\(s\) before copying them to the EC2 instance in order to reduce the network costs associated with copying data to Amazon RDS\. You can also encrypt the dump file or files to secure the data as it is being transferred across the network\. 
+If you plan to load data from a dump of a MySQL database that is external to Amazon RDS, then you might want to create an EC2 instance to copy the dump files to, and then load the data into your DB cluster or DB instance from that EC2 instance\. Using this approach, you can compress the dump file\(s\) before copying them to the EC2 instance in order to reduce the network costs associated with copying data to Amazon RDS\. You can also encrypt the dump file or files to secure the data as it is being transferred across the network\.
 
-Use the following instructions to load the snapshot of your replication source into your replica target for your database engine\.
+Use the following instructions to load the snapshot or dump of your replication source into your replica target for your database engine\.
 
 
-|  Database engine  |  Instructions  | 
+| Database engine | Instructions | 
 | --- | --- | 
-|   Aurora MySQL   |   **To load a snapshot into an Aurora MySQL DB cluster**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
-|   RDS for MySQL   |   **To load a snapshot into an Amazon RDS DB instance**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
-|   MySQL \(external\)   |   **To load a snapshot into an external MySQL database**   You cannot load a DB snapshot or a DB cluster snapshot into an external MySQL database\. Instead, you must use the output from the `mysqldump` command\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
+|  Aurora MySQL   |   **To load a snapshot or dump into an Aurora MySQL DB cluster**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
+|   RDS for MySQL   |  **To load a dump into an Amazon RDS DB instance** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
+|  MySQL \(external\)  |  **To load a dump into an external MySQL database** You can't load a DB snapshot or a DB cluster snapshot into an external MySQL database\. Instead, you must use the output from the `mysqldump` command\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
 
 ### 5\. Create a replication user on your replication source<a name="AuroraMySQL.Replication.MySQL.CreateReplUser"></a>
 

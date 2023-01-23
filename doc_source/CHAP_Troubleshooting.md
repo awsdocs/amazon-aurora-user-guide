@@ -103,7 +103,7 @@ In some cases, you can connect to your DB instance but you get authentication er
 
 To avoid security issues, never use your master AWS user name and password for a user account\. Best practice is to use your master AWS account to create users and assign those to DB user accounts\. You can also use your master account to create other user accounts, if necessary\.
 
-For information about creating IAM users, see [Creating an IAM user in your AWS account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)\. For information about creating users in AWS IAM Identity Center \(successor to AWS Single Sign\-On\), see [Manage identities in IAM Identity Center](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-sso.html)\.
+For information about creating users, see [Creating an IAM user in your AWS account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)\. For information about creating users in AWS IAM Identity Center \(successor to AWS Single Sign\-On\), see [Manage identities in IAM Identity Center](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-sso.html)\.
 
 ### Error message "failed to retrieve account attributes, certain console functions may be impaired\."<a name="CHAP_Troubleshooting.Security.AccountAttributes"></a>
 
@@ -228,7 +228,7 @@ You can reduce the lag between updates to a source DB instance and the subsequen
 
 ### Diagnosing and resolving a MySQL read replication failure<a name="CHAP_Troubleshooting.MySQL.RR"></a>
 
-Amazon RDS monitors the replication status of your read replicas\. RDS updates the **Replication State** field of the read replica instance to `Error` if replication stops for any reason\. You can review the details of the associated error thrown by the MySQL engines by viewing the **Replication Error** field\. Events that indicate the status of the read replica are also generated, including [RDS-EVENT-0045](USER_Events.Messages.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.Messages.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.Messages.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Working with Amazon RDS event notification](USER_Events.md)\. If a MySQL error message is returned, check the error in the [MySQL error message documentation](https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html)\. 
+Amazon RDS monitors the replication status of your read replicas\. RDS updates the **Replication State** field of the read replica instance to `Error` if replication stops for any reason\. You can review the details of the associated error thrown by the MySQL engines by viewing the **Replication Error** field\. Events that indicate the status of the read replica are also generated, including [RDS-EVENT-0045](USER_Events.Messages.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.Messages.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.Messages.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Working with Amazon RDS event notification](USER_Events.md)\. If a MySQL error message is returned, check the error in the [MySQL error message documentation](https://dev.mysql.com/doc/mysql-errors/8.0/en/server-error-reference.html)\. 
 
 Common situations that can cause replication errors include the following:
 + The value for the `max_allowed_packet` parameter for a read replica is less than the `max_allowed_packet` parameter for the source DB instance\. 

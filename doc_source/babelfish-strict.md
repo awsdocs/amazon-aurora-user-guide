@@ -42,6 +42,7 @@ In the following table you can find descriptions and default values for the Babe
 
 | Escape hatch | Description | Default | 
 | --- | --- | --- | 
+| escape\_hatch\_checkpoint |  Allows the use of CHECKPOINT statement in the procedural code, but the CHECKPOINT statement is currently not implemented\.  |  ignore  | 
 | escape\_hatch\_constraint\_name\_for\_default |  Controls Babelfish behavior related to default constraint names\.  |  ignore  | 
 | escape\_hatch\_database\_misc\_options |  Controls Babelfish behavior related to the following options on CREATE or ALTER DATABASE: CONTAINMENT, DB\_CHAINING, TRUSTWORTHY, PERSISTENT\_LOG\_BUFFER\.  |  ignore  | 
 | escape\_hatch\_for\_replication |  Controls Babelfish behavior related to the \[NOT\] FOR REPLICATION clause when creating or altering a table\.  |  strict  | 
@@ -66,6 +67,7 @@ In the following table you can find descriptions and default values for the Babe
 | escape\_hatch\_schemabinding\_trigger |  Controls Babelfish behavior related to the WITH SCHEMABINDING clause\. By default, the WITH SCHEMABINDING clause is ignored when specified with the CREATE or ALTER TRIGGER command\.  |  ignore  | 
 | escape\_hatch\_schemabinding\_view |  Controls Babelfish behavior related to the WITH SCHEMABINDING clause\. By default, the WITH SCHEMABINDING clause is ignored when specified with the CREATE or ALTER VIEW command\.  |  ignore  | 
 | escape\_hatch\_session\_settings |  Controls Babelfish behavior toward unsupported session\-level SET statements\.  |  ignore  | 
+| escape\_hatch\_showplan\_all |  Controls Babelfish behavior related to SET SHOWPLAN\_ALL and SET STATISTICS PROFILE\. When set to ignore, they behave like SET BABELFISH\_SHOWPLAN\_ALL and SET BABELFISH\_STATISTICS PROFILE; when set to strict, they are silently ignored\.  |  strict  | 
 | escape\_hatch\_storage\_on\_partition |  Controls Babelfish behavior related to the `ON partition_scheme column `clause when defining partitioning\. Babelfish currently doesn't implement partitioning\.  |  strict  | 
 | escape\_hatch\_storage\_options |  Escape hatch on any storage option used in CREATE, ALTER DATABASE, TABLE, INDEX\. This includes clauses \(LOG\) ON, TEXTIMAGE\_ON, FILESTREAM\_ON that define storage locations \(partitions, file groups\) for tables, indexes, and constraints, and also for a database\. This escape hatch setting applies to all of these clauses \(including ON \[PRIMARY\] and ON "DEFAULT"\)\. The exception is when a partition is specified for a table or index with ON partition\_scheme \(column\)\.  |  ignore  | 
 | escape\_hatch\_table\_hints |  Controls the behavior of table hints specified using the WITH \(\.\.\.\) clause\.   |  ignore  | 

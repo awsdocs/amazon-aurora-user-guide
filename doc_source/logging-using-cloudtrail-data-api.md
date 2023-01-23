@@ -17,7 +17,7 @@ For an ongoing record of events in your AWS account, including events for Data A
 All Data API operations are logged by CloudTrail and documented in the [https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/Welcome.html](https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/Welcome.html)\. For example, calls to the `BatchExecuteStatement`, `BeginTransaction`, `CommitTransaction`, and `ExecuteStatement` operations generate entries in the CloudTrail log files\. 
 
 Every event or log entry contains information about who generated the request\. The identity information helps you determine the following: 
-+ Whether the request was made with root or IAM user credentials\.
++ Whether the request was made with root or user credentials\.
 + Whether the request was made with temporary security credentials for a role or federated user\.
 + Whether the request was made by another AWS service\.
 

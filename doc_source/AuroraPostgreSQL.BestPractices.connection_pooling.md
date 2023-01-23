@@ -192,4 +192,4 @@ pgbench (14.3, server 13.3)
       tps = 156.396765 (without initial connection time)
 ```
 
-This example shows you that pooling connections can significantly improve response times\. For information about setting up RDS Proxy for your Aurora PostgreSQL DB cluster, see [Using Amazon RDS Proxy](rds-proxy.md)\. 
+This example shows you that pooling connections can significantly improve response times\. For information about setting up RDS Proxy for your Aurora PostgreSQL DB cluster, see [Using Amazon RDS Proxy for Aurora](rds-proxy.md)\. 

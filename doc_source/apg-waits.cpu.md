@@ -121,7 +121,7 @@ If the number of connections went up, compare the number of backend processes co
 + The number of backend processes consuming CPU is greater than the number of vCPUs\.
 
   In this case, consider the following options:
-  + Decrease the number of backend processes connected to your database\. For example, implement a connection pooling solution such as RDS Proxy\. To learn more, see [Using Amazon RDS Proxy](rds-proxy.md)\.
+  + Decrease the number of backend processes connected to your database\. For example, implement a connection pooling solution such as RDS Proxy\. To learn more, see [Using Amazon RDS Proxy for Aurora](rds-proxy.md)\.
   + Upgrade your instance size to get a higher number of vCPUs\.
   + Redirect some read\-only workloads to reader nodes, if applicable\.
 

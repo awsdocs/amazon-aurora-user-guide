@@ -107,4 +107,4 @@ To check the nature of the requests and queries from user accounts, use AuroraAu
 
 ### Pool your database connections<a name="ams-waits.client-connection.pooling"></a>
 
-Consider using Amazon RDS Proxy for connection management\. By using RDS Proxy, you can allow your applications to pool and share database connections to improve their ability to scale\. RDS Proxy makes applications more resilient to database failures by automatically connecting to a standby DB instance while preserving application connections\. For more information, see [Using Amazon RDS Proxy](rds-proxy.md)\.
+Consider using Amazon RDS Proxy for connection management\. By using RDS Proxy, you can allow your applications to pool and share database connections to improve their ability to scale\. RDS Proxy makes applications more resilient to database failures by automatically connecting to a standby DB instance while preserving application connections\. For more information, see [Using Amazon RDS Proxy for Aurora](rds-proxy.md)\.

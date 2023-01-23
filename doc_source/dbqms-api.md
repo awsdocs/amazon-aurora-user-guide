@@ -21,7 +21,7 @@ The following DBQMS actions are supported:
 
 ## CreateFavoriteQuery<a name="CreateFavoriteQuery"></a>
 
-Save a new favorite query\. Each IAM user can create up to 1000 saved queries\. This limit is subject to change in the future\.
+Save a new favorite query\. Each user can create up to 1000 saved queries\. This limit is subject to change in the future\.
 
 ## CreateQueryHistory<a name="CreateQueryHistory"></a>
 
@@ -29,7 +29,7 @@ Save a new query history entry\.
 
 ## CreateTab<a name="CreateTab"></a>
 
-Save a new query tab\. Each IAM user can create up to 10 query tabs\.
+Save a new query tab\. Each user can create up to 10 query tabs\.
 
 ## DeleteFavoriteQueries<a name="DeleteFavoriteQueries"></a>
 
@@ -45,7 +45,7 @@ Delete query tab entries\.
 
 ## DescribeFavoriteQueries<a name="DescribeFavoriteQueries"></a>
 
-List saved queries created by an IAM user in a given account\.
+List saved queries created by a user in a given account\.
 
 ## DescribeQueryHistory<a name="DescribeQueryHistory"></a>
 
@@ -53,7 +53,7 @@ List query history entries\.
 
 ## DescribeTabs<a name="DescribeTabs"></a>
 
-List query tabs created by an IAM user in a given account\.
+List query tabs created by a user in a given account\.
 
 ## GetQueryString<a name="GetQueryString"></a>
 

@@ -111,7 +111,7 @@ For more information about CPU, memory, and EBS network bandwidth, see [Amazon R
 If your total number of active connections exceeds the maximum vCPU, more OS processes require CPU than your instance type can support\. In this case, consider using or tuning a connection pool\. For more information about the vCPUs for your instance type, see [Amazon RDS Instance Types](https://aws.amazon.com/rds/instance-types/)\.
 
 For more information about connection pooling, see the following resources:
-+ [Using Amazon RDS Proxy](rds-proxy.md)
++ [Using Amazon RDS Proxy for Aurora](rds-proxy.md)
 + [pgbouncer](http://www.pgbouncer.org/usage.html)
 + [Connection Pools and Data Sources](https://www.postgresql.org/docs/7.4/jdbc-datasource.html) in the *PostgreSQL Documentation*
 

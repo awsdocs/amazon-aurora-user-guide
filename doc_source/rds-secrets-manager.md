@@ -302,4 +302,3 @@ Managing master user passwords with Secrets Manager isn't supported for the foll
 + DB clusters that are part of an Aurora global database
 + Aurora Serverless v1 DB clusters
 + Aurora MySQL cross\-Region read replicas
-+ AWS CloudFormation

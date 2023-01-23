@@ -37,6 +37,8 @@ Metrics are grouped first by the service namespace, and then by the various dime
    The following example filters on the **db\.t3\.medium** class and graphs the **CPUUtilization** metric\.  
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/rds-monitoring-03.png)
 
+You can find details about how to analyze resource usage for Aurora PostgreSQL using CloudWatch metrics\. For more information, see [Using Amazon CloudWatch metrics to analyze resource usage for Aurora PostgreSQL](AuroraPostgreSQL_AnayzeResourceUsage.md) 
+
 ## AWS CLI<a name="metrics_dimensions.CLI"></a>
 
 To obtain metric information by using the AWS CLI, use the CloudWatch command [https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/list-metrics.html](https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/list-metrics.html)\. In the following example, you list all metrics in the `AWS/RDS` namespace\.

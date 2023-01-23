@@ -61,4 +61,4 @@ Amazon Aurora also supports replication with an external MySQL database, or an R
 
 ## High availability with Amazon RDS Proxy<a name="Concepts.AuroraHighAvailability.Proxy"></a>
 
-With RDS Proxy, you can build applications that can transparently tolerate database failures without needing to write complex failure handling code\. The proxy automatically routes traffic to a new database instance while preserving application connections\. It also bypasses Domain Name System \(DNS\) caches to reduce failover times by up to 66% for Aurora Multi\-AZ databases\.  For more information, see [Using Amazon RDS Proxy](rds-proxy.md)\. 
+With RDS Proxy, you can build applications that can transparently tolerate database failures without needing to write complex failure handling code\. The proxy automatically routes traffic to a new database instance while preserving application connections\. It also bypasses Domain Name System \(DNS\) caches to reduce failover times by up to 66% for Aurora Multi\-AZ databases\.  For more information, see [Using Amazon RDS Proxy for Aurora](rds-proxy.md)\. 

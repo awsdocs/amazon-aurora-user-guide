@@ -81,7 +81,7 @@ For another AWS account to copy an encrypted DB cluster snapshot shared from you
 
 To allow another AWS account access to a KMS key, update the key policy for the KMS key\. You update it with the Amazon Resource Name \(ARN\) of the AWS account that you are sharing to as `Principal` in the KMS key policy\. Then you allow the `kms:CreateGrant` action\.
 
-After you have given an AWS account access to your KMS key, to copy your encrypted snapshot that AWS account must create an AWS Identity and Access Management \(IAM\) role or user if it doesn't already have one\. In addition, that AWS account must also attach an IAM policy to that IAM role or user that allows the role or user to copy an encrypted DB cluster snapshot using your KMS key\. The account must be an IAM user and cannot be a root AWS account identity due to AWS KMS security restrictions\.
+After you have given an AWS account access to your KMS key, to copy your encrypted snapshot that AWS account must create an AWS Identity and Access Management \(IAM\) role or user if it doesn't already have one\. In addition, that AWS account must also attach an IAM policy to that IAM role or permission set that allows the role or user to copy an encrypted DB cluster snapshot using your KMS key\. The account must be a user and cannot be a root AWS account identity due to AWS KMS security restrictions\.
 
 In the following key policy example, user `111122223333` is the owner of the KMS key, and user `444455556666` is the account that the key is being shared with\. This updated key policy gives the AWS account access to the KMS key by including the ARN for the root AWS account identity for user `444455556666` as a `Principal` for the policy, and by allowing the `kms:CreateGrant` action\. 
 
@@ -128,9 +128,9 @@ In the following key policy example, user `111122223333` is the owner of the KMS
 
 #### Creating an IAM policy to enable copying of the encrypted snapshot<a name="aurora-share-snapshot.Encrypted.KeyPolicy.IAM"></a>
 
-Once the external AWS account has access to your KMS key, the owner of that AWS account can create a policy that allows an IAM user created for that account to copy an encrypted snapshot encrypted with that KMS key\.
+Once the external AWS account has access to your KMS key, the owner of that AWS account can create a policy that allows a user created for that account to copy an encrypted snapshot encrypted with that KMS key\.
 
-The following example shows a policy that can be attached to an IAM user for AWS account `444455556666` that enables the IAM user to copy a shared snapshot from AWS account `111122223333` that has been encrypted with the KMS key `c989c1dd-a3f2-4a5d-8d96-e793d082ab26` in the `us-west-2` region\.
+The following example shows a policy that can be attached to a user for AWS account `444455556666` that enables the user to copy a shared snapshot from AWS account `111122223333` that has been encrypted with the KMS key `c989c1dd-a3f2-4a5d-8d96-e793d082ab26` in the `us-west-2` region\.
 
 ```
 {

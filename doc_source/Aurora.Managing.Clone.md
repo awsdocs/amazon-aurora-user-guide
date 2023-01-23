@@ -416,7 +416,7 @@ As with cloning within the same AWS account, additional storage space is used on
 
  If the cluster that you're sharing is encrypted, you also share the AWS KMS key for the cluster\. You can allow AWS Identity and Access Management \(IAM\) users or roles in one AWS account to use a KMS key in a different account\. 
 
-To do this, you first add the external account \(root user\) to the KMS key's key policy through AWS KMS\. You don't add the individual IAM users or roles to the key policy, only the external account that owns them\. You can only share a KMS key that you create, not the default RDS service key\. For information about access control for KMS keys, see [Authentication and access control for AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/control-access.html)\. 
+To do this, you first add the external account \(root user\) to the KMS key's key policy through AWS KMS\. You don't add the individual users or roles to the key policy, only the external account that owns them\. You can only share a KMS key that you create, not the default RDS service key\. For information about access control for KMS keys, see [Authentication and access control for AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/control-access.html)\. 
 
 ##### Console<a name="Aurora.Managing.Clone.CrossAccount.granting.console"></a>
 

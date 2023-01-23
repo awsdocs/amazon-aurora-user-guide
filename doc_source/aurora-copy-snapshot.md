@@ -281,7 +281,7 @@ You can enable other AWS accounts to copy DB cluster snapshots that you specify 
 
 1. \(If the snapshot is encrypted\) Using Account A, update the key policy for the KMS key, first adding the ARN of Account B as a `Principal`, and then allow the `kms:CreateGrant` action\.
 
-1. \(If the snapshot is encrypted\) Using Account B, choose or create an IAM user and attach an IAM policy to that user that allows it to copy an encrypted DB cluster snapshot using your KMS key\.
+1. \(If the snapshot is encrypted\) Using Account B, choose or create a user and attach an IAM policy to that user that allows it to copy an encrypted DB cluster snapshot using your KMS key\.
 
 1. Using Account B, call `CopyDBClusterSnapshot` and use the `SourceDBClusterSnapshotIdentifier` parameter to specify the ARN of the DB cluster snapshot to be copied, which must include the ID for Account A\.
 
@@ -359,7 +359,7 @@ Use the following procedure to copy an encrypted DB cluster snapshot to another 
 
 1. In the source account for the DB cluster snapshot, update the key policy for the KMS key, first adding the ARN of the target account as a `Principal`, and then allow the `kms:CreateGrant` action\. For more information, see [Allowing access to an AWS KMS key](aurora-share-snapshot.md#aurora-share-snapshot.Encrypted.KeyPolicy)\.
 
-1. In the target account, choose or create an IAM user and attach an IAM policy to that user that allows it to copy an encrypted DB cluster snapshot using your KMS key\. For more information, see [Creating an IAM policy to enable copying of the encrypted snapshot](aurora-share-snapshot.md#aurora-share-snapshot.Encrypted.KeyPolicy.IAM)\.
+1. In the target account, choose or create a user and attach an IAM policy to that user that allows it to copy an encrypted DB cluster snapshot using your KMS key\. For more information, see [Creating an IAM policy to enable copying of the encrypted snapshot](aurora-share-snapshot.md#aurora-share-snapshot.Encrypted.KeyPolicy.IAM)\.
 
 1. In the target account, call `CopyDBClusterSnapshot` and use the `SourceDBClusterSnapshotIdentifier` parameter to specify the ARN of the DB cluster snapshot to be copied, which must include the ID for the source account\.
 

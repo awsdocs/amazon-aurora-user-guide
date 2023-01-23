@@ -16,7 +16,7 @@ The query editor is available only for Aurora Serverless v1 DB clusters using sp
 A user must be authorized to run queries in the query editor\. You can authorize a user to run queries in the query editor by adding the `AmazonRDSDataFullAccess` policy, a predefined AWS Identity and Access Management \(IAM\) policy, to that user\.
 
 **Note**  
-Make sure to use the same user name and password when you create the IAM user as you did for the database user, such as the master user name and password\. For more information, see [Creating an IAM user in your AWS account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *AWS Identity and Access Management User Guide*\.
+Make sure to use the same user name and password when you create the user as you did for the database user, such as the master user name and password\. For more information, see [Creating an IAM user in your AWS account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *AWS Identity and Access Management User Guide*\.
 
 You can also create an IAM policy that grants access to the query editor\. After you create the policy, add it to each user that requires access to the query editor\.
 

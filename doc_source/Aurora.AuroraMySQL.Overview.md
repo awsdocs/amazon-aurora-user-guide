@@ -6,7 +6,7 @@ The following sections provide an overview of Amazon Aurora MySQL\.
 + [Amazon Aurora MySQL performance enhancements](#Aurora.AuroraMySQL.Performance)
 + [Amazon Aurora MySQL and spatial data](#Aurora.AuroraMySQL.Spatial)
 + [Aurora MySQL version 3 compatible with MySQL 8\.0](AuroraMySQL.MySQL80.md)
-+ [Aurora MySQL version 2 compatible with MySQL 5\.7](Aurora.AuroraMySQL.CompareMySQL57.md)
++ [Aurora MySQL version 2 compatible with MySQL 5\.7](AuroraMySQL.CompareMySQL57.md)
 
 ## Amazon Aurora MySQL performance enhancements<a name="Aurora.AuroraMySQL.Performance"></a>
 

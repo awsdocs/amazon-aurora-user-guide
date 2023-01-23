@@ -1,6 +1,6 @@
 # Amazon RDS Proxy<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy"></a>
 
-Amazon RDS Proxy is a fully managed, highly available database proxy that makes applications more scalable by pooling and sharing established database connections\. For more information about RDS Proxy, see [Using Amazon RDS Proxy](rds-proxy.md)\.
+Amazon RDS Proxy is a fully managed, highly available database proxy that makes applications more scalable by pooling and sharing established database connections\. For more information about RDS Proxy, see [Using Amazon RDS Proxy for Aurora](rds-proxy.md)\.
 
 **Topics**
 + [Amazon RDS Proxy with Aurora MySQL](#Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy.amy)

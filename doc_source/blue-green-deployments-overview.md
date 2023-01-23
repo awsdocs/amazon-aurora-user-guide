@@ -88,7 +88,7 @@ After you create the blue/green deployment, the DB cluster in the green environm
 
 ## Authorizing access to blue/green deployment operations<a name="blue-green-deployments-authorizing-access"></a>
 
-Users must have the required permissions to perform operations related to blue/green deployments\. You can create IAM policies that grant users and roles permission to perform specific API operations on the specified resources they need\. You can then attach those policies to the IAM users or groups that require those permissions\. For more information, see [Identity and access management for Amazon Aurora](UsingWithRDS.IAM.md)\.
+Users must have the required permissions to perform operations related to blue/green deployments\. You can create IAM policies that grant users and roles permission to perform specific API operations on the specified resources they need\. You can then attach those policies to the IAM permission sets or roles that require those permissions\. For more information, see [Identity and access management for Amazon Aurora](UsingWithRDS.IAM.md)\.
 
 The user who creates a blue/green deployment must have permissions to perform the following RDS operations:
 + `rds:AddTagsToResource` 
@@ -109,7 +109,11 @@ The user who deletes a blue/green deployment must have permissions to perform th
 
 Amazon RDS tracks resources in blue/green deployments with the `DbiResourceId` `and DbClusterResourceId` \(resource ID\) of each resource\. This resource ID is an AWS Region\-unique, immutable identifier for the resource\.
 
-The name of a resource changes when you switch over a blue/green deployment, but each resource keeps the same resource ID\. For example, a DB cluster identifier might have been `mycluster` in the blue environment\. After switchover, the same DB cluster might be renamed to `mycluster-old1`\. However, the resource ID of the DB cluster doesn't change during switchover\. So, when the green resources are promoted to be the new production resources, their resource IDs don't match the blue resource IDs that were previously in production\.
+The *resource* ID is separate from the DB *cluster*** ID:
+
+![\[Create blue/green deployment\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/blue-green-deployment-resource-id-aurora.png)
+
+The name \(cluster ID\) of a resource changes when you switch over a blue/green deployment, but each resource keeps the same resource ID\. For example, a DB cluster identifier might have been `mycluster` in the blue environment\. After switchover, the same DB cluster might be renamed to `mycluster-old1`\. However, the resource ID of the DB cluster doesn't change during switchover\. So, when the green resources are promoted to be the new production resources, their resource IDs don't match the blue resource IDs that were previously in production\.
 
 After switching over a blue/green deployment, consider updating the resource IDs to those of the newly promoted production resources for integrated features and services that you used with the production resources\. Specifically, consider the following updates:
 + If you perform filtering using the RDS API and resource IDs, adjust the resource IDs used in filtering after switchover\.

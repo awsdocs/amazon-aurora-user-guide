@@ -109,9 +109,10 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `innodb_sync_spin_loops`   |   Yes   |    | 
 |   `innodb_table_locks`   |   Yes   |    | 
 |   `innodb_undo_directory`   |   No   |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
-|   `innodb_undo_logs`   |   Yes   |  Removed from Aurora MySQL version 3\.   | 
-|   `innodb_undo_tablespaces`   |   No   |  Removed from Aurora MySQL version 3\.   | 
-|   `internal_tmp_mem_storage_engine`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
+|   `innodb_undo_logs`   |   Yes   |  Removed from Aurora MySQL version 3\.  | 
+|   `innodb_undo_tablespaces`   |   No   |  Removed from Aurora MySQL version 3\.  | 
+|  `internal_tmp_disk_storage_engine`  | Yes |  This parameter applies to Aurora MySQL version 2\. Allowed values are `INNODB` and `MYISAM`\.  | 
+|   `internal_tmp_mem_storage_engine`   |   Yes   |  This parameter applies to Aurora MySQL version 3\.  | 
 |  `key_buffer_size`  |   Yes   |  Key cache for MyISAM tables\. For more information, see [keycache\->cache\_lock mutex](#key-cache.cache-lock)\.  | 
 |   `lc_time_names`   |   Yes   |    | 
 |   `lower_case_table_names`   |   Yes \(Aurora MySQL version 1 and 2\), only at cluster creation time \(Aurora MySQL version 3\)   |   In Aurora MySQL version 2\.10 and higher 2\.x versions, make sure to reboot all reader instances after changing this setting and rebooting the writer instance\. For details, see [Rebooting an Aurora MySQL cluster \(version 2\.10 and higher\)](USER_RebootCluster.md#aurora-mysql-survivable-replicas)\. In Aurora MySQL version 3, the value of this parameter is set permanently at the time the cluster is created\. If you use a nondefault value for this option, set up your Aurora MySQL version 3 custom parameter group before upgrading, and specify the parameter group during the snapshot restore operation that creates the version 3 cluster\.   | 
@@ -249,7 +250,8 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `innodb_thread_concurrency`   |   No   |    | 
 |   `innodb_thread_sleep_delay`   |   Yes   |   Modifying this parameter has no effect, because `innodb_thread_concurrency` is always 0 for Aurora\.   | 
 |   `interactive_timeout`   |   Yes   |   Aurora evaluates the minimum value of `interactive_timeout` and `wait_timeout`\. It then uses that minimum as the timeout to end all idle sessions, both interactive and noninteractive\.   | 
-|   `internal_tmp_mem_storage_engine`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
+|  `internal_tmp_disk_storage_engine`  | Yes |  This parameter applies to Aurora MySQL version 2\. Allowed values are `INNODB` and `MYISAM`\.  | 
+|  `internal_tmp_mem_storage_engine`  |  Yes  |  This parameter applies to Aurora MySQL version 3\.  | 
 |   `join_buffer_size`   |   Yes   |    | 
 |   `keep_files_on_create`   |   Yes   |    | 
 |  `key_buffer_size`  |   Yes   |  Key cache for MyISAM tables\. For more information, see [keycache\->cache\_lock mutex](#key-cache.cache-lock)\.  | 

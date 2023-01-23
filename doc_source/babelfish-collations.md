@@ -14,6 +14,7 @@ Babelfish uses version 153\.80 of the International Components for Unicode \(ICU
 + [DB cluster parameters that control collation and locale](#babelfish-collations.parameters)
 + [Deterministic and nondeterministic collations and Babelfish](#babelfish-collations.deterministic-nondeterministic)
 + [Collations supported by Babelfish](#babelfish-collations.reference-tables-supported-collations)
++ [Default Collation in Babelfish](#babelfish-collations-default)
 + [Managing collations](collation.managing.md)
 + [Collation limitations and behavior differences](collation.limitations.md)
 
@@ -120,3 +121,7 @@ You can use the following collations as object collations\.<a name="bfish-icu-co
 |  Turkish  |  Turkish\_CS\_AS  |  Turkish\_CI\_AS, Turkish\_CI\_AI  | 
 |  Ukranian  |  Ukranian\_CS\_AS  |  Ukranian\_CI\_AS, Ukranian\_CI\_AI  | 
 |  Vietnamese  |  Vietnamese\_CS\_AS  |  Vietnamese\_CI\_AS, Vietnamese\_CI\_AI  | 
+
+## Default Collation in Babelfish<a name="babelfish-collations-default"></a>
+
+Earlier, the default collation of the collatable datatypes was `pg_catalog.default`\. The datatypes and the objects that depends on these datatypes follows cases\-sensitive collation\. This condition potentially impacts the T\-SQL objects of the data set with case\-insensitive collation\. Starting with Babelfish 2\.3\.0, the default collation for the collatable data types \(except TEXT and NTEXT\) is the same as the collation in the `babelfishpg_tsql.server_collation_name` parameter\. When you upgrade to Babelfish 2\.3\.0, the default collation is picked automatically at the time of DB cluster creation, which doesn't create any visible impact\. 

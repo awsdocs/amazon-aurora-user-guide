@@ -23,6 +23,9 @@ Use the Babelfish functions as follows:
 
 For more information about PostgreSQL `EXPLAIN` and `EXPLAIN ANALYZE` see [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html) in the PostgreSQL documentation\.
 
+**Note**  
+Starting with version 2\.2\.0, you can set the `escape_hatch_showplan_all` parameter to *ignore* in order to avoid the use of *BABELFISH\_* prefix in the SQL Server syntax for `SHOWPLAN_ALL` and `STATISTICS PROFILE` SET commands\.
+
 For example, the following command sequence turns on query planning and then returns an estimated query execution plan for the SELECT statement without running the query\. This example uses the SQL Server sample `northwind` database using the `sqlcmd` command\-line tool to query the TDS port: 
 
 ```
@@ -95,46 +98,45 @@ You can use the parameters shown in the following table to control the type of i
 | babelfishpg\_tsql\.explain\_costs | A boolean that turns on \(and off\) estimated startup and total cost information for the optimizer\. \(Default: on\) \(Allowable: off, on\)  | 
 | babelfishpg\_tsql\.explain\_format | Specifies the output format for the `EXPLAIN` plan\. \(Default: text\) \(Allowable: text, xml, json, yaml\)  | 
 | babelfishpg\_tsql\.explain\_settings | A boolean that turns on \(or off\) the inclusion of information about configuration parameters in the EXPLAIN plan output\. \(Default: off\) \(Allowable: off, on\)  | 
-| babelfishpg\_tsql\.explain\_summary | A boolean that turns on \(or off\) summary information such as total time after the query plan\. \(Default: off\) \(Allowable: off, on\)  | 
-| babelfishpg\_tsql\.explain\_timing | A boolean that turns on \(or off\) actual startup time and time spent in each node in the output\. \(Default: off\) \(Allowable: off, on\)  | 
+| babelfishpg\_tsql\.explain\_summary | A boolean that turns on \(or off\) summary information such as total time after the query plan\. \(Default: on\) \(Allowable: off, on\)  | 
+| babelfishpg\_tsql\.explain\_timing | A boolean that turns on \(or off\) actual startup time and time spent in each node in the output\. \(Default: on\) \(Allowable: off, on\)  | 
 | babelfishpg\_tsql\.explain\_verbose | A boolean that turns on \(or off\) the most detailed version of an explain plan\. \(Default: off\) \(Allowable: off, on\)  | 
 | babelfishpg\_tsql\.explain\_wal | A boolean that turns on \(or off\) generation of WAL record information as part of an explain plan\. \(Default: off\) \(Allowable: off, on\)  | 
 
-You can check the values of any Babelfish\-related parameters on your system by using either PostgreSQL client or SQL Server client\. You can get your current parameter values as follows: 
+You can check the values of any Babelfish\-related parameters on your system by using either PostgreSQL client or SQL Server client\. Run the following command to get your current parameter values: 
 
 ```
-1> :setvar SQLCMDMAXVARTYPEWIDTH 35
-2> :setvar SQLCMDMAXFIXEDTYPEWIDTH 10
-3> SELECT name,
-4> setting,
-5> short_desc,
-6> pending_restart
-7> FROM pg_settings
-8> WHERE name LIKE '%babelfishpg_tsql.explain%';
-9> GO
+1> execute sp_babelfish_configure '%explain%';
+2> GO
 ```
 
 In the following output, you can see that all settings on this particular Babelfish DB cluster are at their default values\. Not all output is shown in this example\.
 
 ```
-name             setting         short_desc
----------------------------------- ----- -----------------------------------
-babelfishpg_tsql.explain_buffers   off   Include information on buffer usage
-babelfishpg_tsql.explain_costs     on    Include information on estimated st
-babelfishpg_tsql.explain_format    text  Specify the output format, which ca
-babelfishpg_tsql.explain_settings  off   Include information on configuratio
-babelfishpg_tsql.explain_summary   off   Include summary information (e.g., 
-babelfishpg_tsql.explain_timing    off   Include actual startup time and tim
-babelfishpg_tsql.explain_verbose   off   Display additional information rega
-babelfishpg_tsql.explain_wal       off   Include information on WAL record g
+             name                   setting                     short_desc
+---------------------------------- -------- --------------------------------------------------------
+babelfishpg_tsql.explain_buffers   off      Include information on buffer usage
+babelfishpg_tsql.explain_costs     on       Include information on estimated startup and total cost
+babelfishpg_tsql.explain_format    text     Specify the output format, which can be TEXT, XML, JSON, or YAML
+babelfishpg_tsql.explain_settings  off      Include information on configuration parameters
+babelfishpg_tsql.explain_summary   on       Include summary information (e.g.,totaled timing information) after the query plan 
+babelfishpg_tsql.explain_timing    on       Include actual startup time and time spent in each node in the output
+babelfishpg_tsql.explain_verbose   off      Display additional information regarding the plan
+babelfishpg_tsql.explain_wal       off      Include information on WAL record generation
 
 (8 rows affected)
 ```
 
-You can change the setting for these parameters using a SELECT statement with the PostgreSQL set\_config function, as shown in the following example\. 
+You can change the setting for these parameters using `sp_babelfish_configure`, as shown in the following example\. 
 
 ```
-SELECT set_config('babelfishpg_tsql.explain_verbose', 'on', false);
+1> execute sp_babelfish_configure 'explain_verbose', 'on';
+2> GO
 ```
 
-For more information about set\_config, see [Configuration Settings Functions](https://www.postgresql.org/docs/current/functions-admin.html#FUNCTIONS-ADMIN-SET) in the PostgreSQL documentation\. 
+If you want make the setting permanent on a cluster\-wide level, include the keyword *server*, as shown in the following example\. 
+
+```
+1> execute sp_babelfish_configure 'explain_verbose', 'on', 'server';
+2> GO
+```
