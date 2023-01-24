@@ -94,7 +94,7 @@ The following provides information about using SSL/TLS connections for different
 
   JDBC enables database connections with Java applications\.
 
-  For general information about connecting to a PostgreSQL database with JDBC, see [Connecting to the database](https://jdbc.postgresql.org/documentation/head/connect.html) in the PostgreSQL documentation\. For information about connecting with SSL/TLS, see [Configuring the client](https://jdbc.postgresql.org/documentation/head/ssl-client.html) in the PostgreSQL documentation\. 
+  For general information about connecting to a PostgreSQL database with JDBC, see [Connecting to the database](https://jdbc.postgresql.org/documentation/use/) in the PostgreSQL documentation\. For information about connecting with SSL/TLS, see [Configuring the client](https://jdbc.postgresql.org/documentation/ssl/) in the PostgreSQL documentation\. 
 + **Python**
 
   A popular Python library for connecting to PostgreSQL databases is `psycopg2`\.
