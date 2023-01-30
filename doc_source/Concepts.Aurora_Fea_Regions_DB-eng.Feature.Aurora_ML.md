@@ -23,6 +23,7 @@ Aurora machine learning is supported for Aurora MySQL in the AWS Regions listed 
 | Asia Pacific \(Hong Kong\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | – | 
 | Asia Pacific \(Hyderabad\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | – | 
 | Asia Pacific \(Jakarta\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | – | 
+| Asia Pacific \(Melbourne\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | – | 
 | Asia Pacific \(Mumbai\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | – | 
 | Asia Pacific \(Osaka\) | Version 3\.01\.0 and higher | Version 2\.07\.3 and higher | – | 
 | Asia Pacific \(Seoul\) | Version 3\.01\.0 and higher | Version 2\.07 and higher | – | 
@@ -63,6 +64,7 @@ Following are the supported engines and Region availability for Aurora machine l
 | Asia Pacific \(Hong Kong\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 
 | Asia Pacific \(Hyderabad\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 
 | Asia Pacific \(Jakarta\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 
+| Asia Pacific \(Melbourne\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 
 | Asia Pacific \(Mumbai\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 
 | Asia Pacific \(Osaka\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 
 | Asia Pacific \(Seoul\) | Version 14\.3 | Version 13\.3 and higher | Version 12\.4 and higher | Version 11\.9, 11\.12 and higher | Version 10\.14 and higher | 

@@ -31,6 +31,7 @@ Following are the supported engines and Region availability for Performance Insi
 | Asia Pacific \(Hong Kong\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
 | Asia Pacific \(Hyderabad\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
 | Asia Pacific \(Jakarta\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
+| Asia Pacific \(Melbourne\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
 | Asia Pacific \(Mumbai\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
 | Asia Pacific \(Osaka\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
 | Asia Pacific \(Seoul\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
@@ -69,6 +70,7 @@ Following are the supported engines and Region availability for Performance Insi
 | Asia Pacific \(Hong Kong\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
 | Asia Pacific \(Hyderabad\) | – | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
 | Asia Pacific \(Jakarta\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
+| Asia Pacific \(Melbourne\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
 | Asia Pacific \(Mumbai\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
 | Asia Pacific \(Osaka\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
 | Asia Pacific \(Seoul\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
@@ -107,6 +109,7 @@ Following are the supported engines and Region availability for Performance Insi
 | Asia Pacific \(Hong Kong\) | All versions | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Hyderabad\) | All versions | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Jakarta\) | All versions | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Melbourne\) | All versions | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | All versions | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Seoul\) | All versions | All versions | All versions | All versions | All versions | 

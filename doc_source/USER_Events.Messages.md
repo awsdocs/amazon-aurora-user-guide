@@ -76,8 +76,8 @@ The following table shows the event category and a list of events when a DB inst
 |  backtrack  | RDS\-EVENT\-0132 |  The actual Backtrack window is the same as the target Backtrack window\.  | 
 |  configuration change  | RDS\-EVENT\-0009 |  The DB instance has been added to a security group\.  | 
 |  configuration change  | RDS\-EVENT\-0012 |  Applying modification to database instance class\.   | 
-|  configuration change  | RDS\-EVENT\-0011 |  A parameter group for this DB instance has changed\.  | 
-|  configuration change  | RDS\-EVENT\-0092 |  A parameter group for this DB instance has finished updating\.  | 
+|  configuration change  | RDS\-EVENT\-0011 |  Updated to use DBParameterGroup *name*\.  | 
+|  configuration change  | RDS\-EVENT\-0092 |  Finished updating DB parameter group\.  | 
 |  configuration change  | RDS\-EVENT\-0033 |  There are \[count\] users that match the master user name\. Users not tied to a specific host have been reset\.  | 
 |  configuration change  | RDS\-EVENT\-0025 |  The DB instance has been converted to a Multi\-AZ DB instance\.  | 
 |  configuration change  | RDS\-EVENT\-0029 |  The DB instance has been converted to a Single\-AZ DB instance\.  | 
@@ -125,8 +125,7 @@ The following table shows the event category and a list of events when a DB para
 
 |  Category  | RDS event ID |  Description  | 
 | --- | --- | --- | 
-|  configuration change  | RDS\-EVENT\-0011 |  Updated to use DBParameterGroup *name*\.  | 
-|  configuration change  | RDS\-EVENT\-0092 |  Finished updating DB parameter group\.  | 
+|  configuration change  | RDS\-EVENT\-0037 |  Updated parameter *name* to *value* with apply method *method*\.   | 
 
 ## DB security group events<a name="USER_Events.Messages.security-group"></a>
 

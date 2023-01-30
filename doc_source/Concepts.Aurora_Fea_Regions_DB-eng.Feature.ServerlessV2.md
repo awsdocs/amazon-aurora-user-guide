@@ -21,6 +21,7 @@ Following are the supported engines and Region availability for Aurora Serverles
 | Asia Pacific \(Hong Kong\) | Version 3\.02\.0 and higher | 
 | Asia Pacific \(Hyderabad\) | – | 
 | Asia Pacific \(Jakarta\) | Version 3\.02\.0 and higher | 
+| Asia Pacific \(Melbourne\) | – | 
 | Asia Pacific \(Mumbai\) | Version 3\.02\.0 and higher | 
 | Asia Pacific \(Osaka\) | Version 3\.02\.0 and higher | 
 | Asia Pacific \(Seoul\) | Version 3\.02\.0 and higher | 
@@ -59,6 +60,7 @@ Following are the supported engines and Region availability for Aurora Serverles
 | Asia Pacific \(Hong Kong\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Asia Pacific \(Hyderabad\) | – | – | 
 | Asia Pacific \(Jakarta\) | Version 14\.3 and higher | Version 13\.6 and higher | 
+| Asia Pacific \(Melbourne\) | – | – | 
 | Asia Pacific \(Mumbai\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Asia Pacific \(Osaka\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Asia Pacific \(Seoul\) | Version 14\.3 and higher | Version 13\.6 and higher | 

@@ -63,6 +63,7 @@ Cross\-Region copying of DB cluster snapshots isn't supported in the following o
 + Asia Pacific \(Hong Kong\)
 + Asia Pacific \(Hyderabad\)
 + Asia Pacific \(Jakarta\)
++ Asia Pacific \(Melbourne\)
 + Europe \(Milan\)
 + Europe \(Spain\)
 + Europe \(Zurich\)

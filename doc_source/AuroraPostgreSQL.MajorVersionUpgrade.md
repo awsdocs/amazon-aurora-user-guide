@@ -10,7 +10,7 @@ Logical replication in PostgreSQL tracks and transfers your data changes from in
 + [Requirements](#AuroraPostgreSQL.MajorVersionUpgrade.Requirements)
 + [Limitations](#AuroraPostgreSQL.MajorVersionUpgrade.Limitations)
 + [Setting and checking parameter values](#AuroraPostgreSQL.MajorVersionUpgrade.Parameters)
-+ [Upgrading the Aurora PostgreSQL to a new major version](#AuroraPostgreSQL.MajorVersionUpgrade.StartLogicalReplication)
++ [Upgrading Aurora PostgreSQL to a new major version](#AuroraPostgreSQL.MajorVersionUpgrade.StartLogicalReplication)
 + [Performing post\-upgrade tasks](#AuroraPostgreSQL.MajorVersionUpgrade.PostUpgrade)
 
 ## Requirements<a name="AuroraPostgreSQL.MajorVersionUpgrade.Requirements"></a>
@@ -53,7 +53,7 @@ For example, to get the settings for replication parameters, run the following q
 SELECT name, setting FROM pg_settings WHERE name in ('rds.logical_replication', 'max_replication_slots', 'max_wal_senders', 'max_logical_replication_workers', 'max_worker_processes');
 ```
 
-## Upgrading the Aurora PostgreSQL to a new major version<a name="AuroraPostgreSQL.MajorVersionUpgrade.StartLogicalReplication"></a>
+## Upgrading Aurora PostgreSQL to a new major version<a name="AuroraPostgreSQL.MajorVersionUpgrade.StartLogicalReplication"></a>
 
 **To prepare the publisher \(blue\)**
 
@@ -88,7 +88,7 @@ SELECT name, setting FROM pg_settings WHERE name in ('rds.logical_replication', 
 
 1. While the target instance is initiating, the **Status** column of the writer node displays Creating in the **Status** column\. When the instance is ready, the status changes to Available\.
 
-**To prepare the subscriber \(green\)**
+**To prepare the clone for an upgrade**
 
 1. The clone is the ‘green’ instance in the deployment model\. It is the host of the replication subscription node\. When the node becomes available, connect with psql and query the new writer node to obtain the log sequence number \(LSN\)\. The LSN identifies the beginning of a record in the WAL stream\.
 
@@ -106,15 +106,24 @@ SELECT name, setting FROM pg_settings WHERE name in ('rds.logical_replication', 
    (1 row)
    ```
 
-1. Because the new node is acting as a subscription server, you can drop the replication slot\. The slot is tracking replication progress from the blue instance\.
+1. Before upgrading the clone, drop the clone's replication slot\.
 
    ```
    SELECT pg_drop_replication_slot('replication_slot_name');
    ```
 
-1. The clone must be able to log on to the Aurora PostgreSQL DB cluster Writer instance\. At this point, confirm that the security group allows that communication and make any necessary adjustments\. Then, on the new instance, define the subscription\. 
+**To upgrade the cluster to a new major version**
++ After cloning the provider node, use the Amazon RDS Console to initiate a major version upgrade on the subscription node\. Highlight the instance name in the RDS console, and select the **Modify** button\. Select the updated version and your updated parameter groups, and apply the settings immediately to upgrade the target instance\.  
+![\[In-place upgrade of an Aurora MySQL DB cluster from version 2 to version 3\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/apg-logicalreplication-mvu-modify-DB-cluster.png)
++ You can also use the CLI to perform an upgrade:
 
-    To do so, you need to specify the following options in the `CREATE SUBSCRIPTION` command: 
+  ```
+  aws rds modify-db-cluster —db-cluster-identifier $TARGET_Aurora_ID —engine-version 13.6 —allow-major-version-upgrade —apply-immediately
+  ```
+
+**To prepare the subscriber \(green\)**
+
+1. When the clone becomes available, connect with psql and define the subscription\. To do so, you need to specify the following options in the `CREATE SUBSCRIPTION` command: 
    + `subscription_name` – The name of the subscription\.
    + `admin_user_name` – The name of an administrative user with rds\_superuser permissions\.
    + `admin_user_password` – The password associated with the administrative user\.
@@ -183,21 +192,13 @@ SELECT name, setting FROM pg_settings WHERE name in ('rds.logical_replication', 
    (1 row)
    ```
 
-**To upgrade the subscriber to a new major version**
-+ When replication is caught up on the subscription node and you’ve validated that your data has been replicated, use the Amazon RDS Console to initiate a major version upgrade on the subscription node\. Highlight the instance name in the RDS console, and select the **Modify** button\. Select the updated version and your updated parameter groups, and apply the settings immediately to upgrade the target instance\.  
-![\[In-place upgrade of an Aurora MySQL DB cluster from version 2 to version 3\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/apg-logicalreplication-mvu-modify-DB-cluster.png)
-
-  You can also use the CLI to perform an upgrade:
-
-  ```
-  aws rds modify-db-cluster —db-cluster-identifier $TARGET_Aurora_ID —engine-version 13.6 —allow-major-version-upgrade —apply-immediately
-  ```
-
 ## Performing post\-upgrade tasks<a name="AuroraPostgreSQL.MajorVersionUpgrade.PostUpgrade"></a>
 
 When the upgrade is complete, the instance status displays as **Available** in the **Status** column of the console dashboard\. On the new instance, we recommend you do the following:
 
 1. Redirect your applications to point to the writer node\.
+
+1. If you upgraded to Aurora PostgreSQL 14 or higher, update your [indexes](https://www.postgresql.org/docs/14/sql-reindex.html)\.
 
 1. Add reader nodes to manage the caseload and provide high\-availability in the event of an issue with the writer node\.
 

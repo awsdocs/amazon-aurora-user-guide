@@ -145,7 +145,7 @@ The following are best practices for blue/green deployments:
 
   For example, you can add new columns at the end of a table, create indexes, or drop indexes without disrupting replication from the blue deployment to the green deployment\. However, schema changes, such as renaming columns or renaming tables, break binary log replication to the green deployment\.
 
-  For more information about replication\-compatible changes, see [ Replication with Differing Table Definitions on Source and Replica](https://dev.mysql.com/doc/refman/8.0/en/replication-features-differing-tables.html) in the MySQL documentation\.
+  For more information about replication\-compatible changes, see [Replication with Differing Table Definitions on Source and Replica](https://dev.mysql.com/doc/refman/8.0/en/replication-features-differing-tables.html) in the MySQL documentation\.
 + Use the cluster endpoint, reader endpoint, or custom endpoint for all connections in both environments\. Don't use instance endpoints or custom endpoints with static or exclusion lists\.
 
 ## Region and version availability<a name="blue-green-deployments-region-version-availability"></a>
@@ -165,7 +165,6 @@ The following limitations apply to blue/green deployments:
     If an Aurora MySQL version 5\.6\.10a DB cluster was part of an Aurora global database, the DB cluster can't be included in a blue/green deployment even if the DB cluster was removed from the Aurora global database\. To include the DB cluster in a blue/green deployment, upgrade the DB cluster to a higher Aurora MySQL version\.
   + AWS CloudFormation
 + The following are limitations for changes in a blue/green deployment:
-  + Aurora MySQL version 3 \(compatible with MySQL 8\.0\) DB clusters aren't supported in the blue environment, but they are supported in the green environment\.
   + You can't change an unencrypted DB cluster into an encrypted DB cluster\.
   + You can't change an encrypted DB cluster into an unencrypted DB cluster\.
   + You can't change a blue environment DB cluster to a higher engine version than its corresponding green environment DB cluster\.

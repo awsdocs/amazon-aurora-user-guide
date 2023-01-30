@@ -5,6 +5,7 @@ You can export Aurora DB cluster snapshot data to an Amazon S3 bucket\. You can 
 Exporting snapshots to S3 is available in all AWS Regions except the following:
 + Asia Pacific \(Hyderabad\)
 + Asia Pacific \(Jakarta\)
++ Asia Pacific \(Melbourne\)
 + Europe \(Spain\)
 + Europe \(Zurich\)
 + Middle East \(UAE\)

@@ -8,7 +8,7 @@ Some of the steps that you can take to make failover perform fast include the fo
 + Set the timeout variables used in the JDBC connection string as low as possible\. Use separate connection objects for short\- and long\-running queries\.
 + Use the read and write Aurora endpoints that are provided to connect to the cluster\.
 + Use RDS API operations to test application response on server\-side failures\. Also, use a packet dropping tool to test application response for client\-side failures\.
-+ Use the AWS JDBC Driver for PostgreSQL \(preview\) to take full advantage of the failover capabilities of Aurora PostgreSQL\. For more information about the AWS JDBC Driver for PostgreSQL and complete instructions for using it, see the [AWS JDBC Driver for PostgreSQL GitHub repository](https://awslabs.github.io/aws-postgresql-jdbc/)\.
++ Use the AWS JDBC Driver for PostgreSQL to take full advantage of the failover capabilities of Aurora PostgreSQL\. For more information about the AWS JDBC Driver for PostgreSQL and complete instructions for using it, see the [AWS JDBC Driver for PostgreSQL GitHub repository](https://awslabs.github.io/aws-postgresql-jdbc/)\.
 
 These are covered in more detail following\. 
 

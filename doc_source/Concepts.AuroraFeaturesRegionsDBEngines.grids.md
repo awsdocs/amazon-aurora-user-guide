@@ -16,10 +16,10 @@ Some of these features are Aurora\-only capabilities\. For example, Aurora Serve
 + [Aurora machine learning](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Aurora_ML.md)
 + [Performance Insights with Aurora](Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.md)
 + [Amazon RDS Proxy](Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy.md)
++ [Secrets Manager integration](Concepts.Aurora_Fea_Regions_DB-eng.Feature.SecretsManager.md)
 + [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md)
 + [Aurora Serverless v1](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.md)
 + [Data API for Aurora Serverless v1](Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API.md)
-+ [Secrets Manager integration](Concepts.Aurora_Fea_Regions_DB-eng.Feature.SecretsManager.md)
 + [Engine\-native features](Concepts.Aurora_Fea_Regions_DB-eng.Feature.EngineNativeFeatures.md)
 
 ## Table conventions<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.TableConventions"></a>

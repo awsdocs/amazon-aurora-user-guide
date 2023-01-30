@@ -10,6 +10,9 @@ Aurora Serverless v1 is an on\-demand, auto\-scaling feature designed to be a co
 
 Following are the supported engines and Region availability for Aurora Serverless v1 with Aurora MySQL\.
 
+**Note**  
+To create an Aurora Serverless v1 DB cluster compatible with Aurora MySQL version 2 in the AWS Management Console, choose version 2\.07\.1\. However, the DB cluster is created on version 2\.08\.3\.
+
 
 | Region | Aurora MySQL version 3 | Aurora MySQL version 2 | Aurora MySQL version 1 | 
 | --- | --- | --- | --- | 
@@ -21,6 +24,7 @@ Following are the supported engines and Region availability for Aurora Serverles
 | Asia Pacific \(Hong Kong\) | – | – | – | 
 | Asia Pacific \(Hyderabad\) | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | 
+| Asia Pacific \(Melbourne\) | – | – | – | 
 | Asia Pacific \(Mumbai\) | – | Version 2\.08\.3 | Version 1\.22\.3 | 
 | Asia Pacific \(Osaka\) | – | – | – | 
 | Asia Pacific \(Seoul\) | – | Version 2\.08\.3 | Version 1\.22\.3 | 
@@ -59,6 +63,7 @@ Following are the supported engines and Region availability for Aurora Serverles
 | Asia Pacific \(Hong Kong\) | – | – | 
 | Asia Pacific \(Hyderabad\) | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | 
+| Asia Pacific \(Melbourne\) | – | – | 
 | Asia Pacific \(Mumbai\) | Version 11\.13 | Version 10\.18 | 
 | Asia Pacific \(Osaka\) | – | – | 
 | Asia Pacific \(Seoul\) | Version 11\.13 | Version 10\.18 | 

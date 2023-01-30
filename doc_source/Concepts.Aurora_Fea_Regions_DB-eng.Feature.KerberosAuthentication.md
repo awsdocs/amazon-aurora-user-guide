@@ -25,6 +25,7 @@ Following are the supported engines and Region availability for Kerberos Authent
 | Asia Pacific \(Hong Kong\) | – | – | – | – | – | 
 | Asia Pacific \(Hyderabad\) | – | – | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | – | – | 
+| Asia Pacific \(Melbourne\) | – | – | – | – | – | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | – | – | – | – | – | 
 | Asia Pacific \(Seoul\) | All versions | All versions | All versions | All versions | All versions | 

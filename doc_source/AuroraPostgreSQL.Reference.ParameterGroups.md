@@ -679,6 +679,7 @@ For a listing of the DB cluster parameters for this same default DB parameter gr
 | random\_page\_cost | Sets the planners estimate of the cost of a nonsequentially fetched disk page\. | –  | 
 | rds\.force\_admin\_logging\_level | See log messages for RDS admin user actions in customer databases\. | –  | 
 | rds\.log\_retention\_period | Amazon RDS will delete PostgreSQL log that are older than N minutes\. | 4320  | 
+| rds\.memory\_allocation\_guard | RDS parameter reserved for future use\. | –  | 
 | rds\.pg\_stat\_ramdisk\_size | Size of the stats ramdisk in MB\. A nonzero value will setup the ramdisk\. | 0  | 
 | rds\.rds\_superuser\_reserved\_connections | Sets the number of connection slots reserved for rds\_superusers\. | 2  | 
 | rds\.superuser\_variables | List of superuser\-only variables for which we elevate rds\_superuser modification statements\. | session\_replication\_role  | 

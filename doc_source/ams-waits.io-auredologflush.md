@@ -11,7 +11,7 @@ The `io/aurora_redo_log_flush` event occurs when a session is writing persistent
 ## Supported engine versions<a name="ams-waits.io-auredologflush.context.supported"></a>
 
 This wait event information is supported for the following engine versions:
-+ Aurora MySQL version 2\.x up to 2\.09\.2
++ Aurora MySQL version 2\.x up to 2\.10\.3
 + Aurora MySQL version 1\.x up to 1\.23\.1
 
 ## Context<a name="ams-waits.io-auredologflush.context"></a>

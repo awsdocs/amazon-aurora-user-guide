@@ -150,18 +150,21 @@ Set the `ssl_cipher` parameter to a string of comma\-separated cipher values\. T
 
 | Cipher | Encryption protocol | Supported Aurora MySQL versions | 
 | --- | --- | --- | 
-| `DHE-RSA-AES128-SHA` | TLS 1\.0 | 3\.01\.0 and higher, 2\.10\.2, 2\.10\.1, 2\.09\.3, 2\.08\.4, 2\.07\.7, 2\.04\.9 | 
-| `DHE-RSA-AES128-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.10\.1, 2\.09\.3, 2\.08\.4, 2\.07\.7, 2\.04\.9 | 
-| `DHE-RSA-AES128-GCM-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.10\.1, 2\.09\.3, 2\.08\.4, 2\.07\.7, 2\.04\.9 | 
-| `DHE-RSA-AES256-SHA` | TLS 1\.0 | 3\.01\.0 and higher, 2\.10\.2, 2\.10\.1, 2\.09\.3, 2\.08\.4, 2\.07\.7, 2\.04\.9 | 
-| `DHE-RSA-AES256-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.10\.1, 2\.09\.3, 2\.08\.4, 2\.07\.7, 2\.04\.9 | 
-| `DHE-RSA-AES256-GCM-SHA384` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.10\.1, 2\.09\.3, 2\.08\.4, 2\.07\.7, 2\.04\.9 | 
-| `ECDHE-RSA-AES128-SHA` | TLS 1\.0 | 3\.01\.0 and higher, 2\.10\.2, 2\.09\.3 | 
-| `ECDHE-RSA-AES128-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.09\.3 | 
-| `ECDHE-RSA-AES128-GCM-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.09\.3 | 
-| `ECDHE-RSA-AES256-SHA` | TLS 1\.0 | 3\.01\.0 and higher, 2\.10\.2, 2\.09\.3 | 
-| `ECDHE-RSA-AES256-SHA384` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.09\.3 | 
-| `ECDHE-RSA-AES256-GCM-SHA384` | TLS 1\.2 | 3\.01\.0 and higher, 2\.10\.2, 2\.09\.3 | 
+| `DHE-RSA-AES128-SHA` | TLS 1\.0 | 3\.01\.0 and higher, all below 2\.11\.0 | 
+| `DHE-RSA-AES128-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, all below 2\.11\.0 | 
+| `DHE-RSA-AES128-GCM-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, all below 2\.11\.0 | 
+| `DHE-RSA-AES256-SHA` | TLS 1\.0 | 3\.01\.0 and higher, all below 2\.11\.0 | 
+| `DHE-RSA-AES256-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, all below 2\.11\.0 | 
+| `DHE-RSA-AES256-GCM-SHA384` | TLS 1\.2 | 3\.01\.0 and higher, all below 2\.11\.0 | 
+| `ECDHE-RSA-AES128-SHA` | TLS 1\.0 | 3\.01\.0 and higher, 2\.09\.3 and higher | 
+| `ECDHE-RSA-AES128-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.09\.3 and higher | 
+| `ECDHE-RSA-AES128-GCM-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.09\.3 and higher | 
+| `ECDHE-RSA-AES256-SHA` | TLS 1\.0 | 3\.01\.0 and higher, 2\.09\.3 and higher | 
+| `ECDHE-RSA-AES256-SHA384` | TLS 1\.2 | 3\.01\.0 and higher, 2\.09\.3 and higher | 
+| `ECDHE-RSA-AES256-GCM-SHA384` | TLS 1\.2 | 3\.01\.0 and higher, 2\.09\.3 and higher | 
+
+**Note**  
+`DHE-RSA` ciphers are only supported by Aurora MySQL versions before 2\.11\.0\. Versions 2\.11\.0 and higher support only `ECDHE` ciphers\.
 
 You can also use the [describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) CLI command to determine which cipher suites are currently supported for a specific parameter group family\. The following example shows how to get the allowed values for the `ssl_cipher` cluster parameter for Aurora MySQL 5\.7\.
 

@@ -292,7 +292,7 @@ aws kms create-key --description "$PREFIX-test-key" --policy '{
 1.  Choose all the settings for your proxy\. 
 
     For **Proxy configuration**, provide information for the following: 
-   +  **Engine family**\. This setting determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database\. For Aurora MySQL, choose **MySQL**\. For Aurora PostgreSQL, choose **PostgreSQL**\. 
+   +  **Engine family**\. This setting determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database\. For Aurora MySQL, choose **MariaDB and MySQL**\. For Aurora PostgreSQL, choose **PostgreSQL**\. 
    +  **Proxy identifier**\. Specify a name of your choosing, unique within your AWS account ID and current AWS Region\. 
    +  **Idle client connection timeout**\. Choose a time period that a client connection can be idle before the proxy can close it\. The default is 1,800 seconds \(30 minutes\)\. A client connection is considered idle when the application doesn't submit a new request within the specified time after the previous request completed\. The underlying database connection stays open and is returned to the connection pool\. Thus, it's available to be reused for new client connections\. 
 
