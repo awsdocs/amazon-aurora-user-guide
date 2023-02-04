@@ -1,6 +1,12 @@
 # Tutorial: Create a VPC for use with a DB cluster \(dual\-stack mode\)<a name="CHAP_Tutorials.CreateVPCDualStack"></a>
 
-A common scenario includes a DB cluster in a virtual private cloud \(VPC\) based on the Amazon VPC service\. This VPC shares data with a public Amazon EC2 instance that is running in the same VPC\. In this tutorial, you create the VPC for this scenario that works with a database running in dual\-stack mode\.
+A common scenario includes a DB cluster in a virtual private cloud \(VPC\) based on the Amazon VPC service\. This VPC shares data with a public Amazon EC2 instance that is running in the same VPC\.
+
+For more information about IP addressing, see [Amazon Aurora IP addressing](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.IP_addressing)\.
+
+Dual\-stack network clusters are supported in most regions\. For more information see [Availability of dual\-stack network DB clusters](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.IP_addressing.dual-stack-availability)\. To see the limitations of dual\-stack mode, see [Limitations for dual\-stack network DB clusters](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.IP_addressing.dual-stack-limitations)\.
+
+In this tutorial, you create the VPC for this scenario that works with a database running in dual\-stack mode\.
 
 The following diagram shows this scenario\.
 
@@ -150,7 +156,7 @@ Your new DB subnet group appears in the DB subnet groups list on the RDS console
 
 ## Create an Amazon EC2 instance in dual\-stack mode<a name="CHAP_Tutorials.CreateVPCDualStack.CreateEC2Instance"></a>
 
-To create an Amazon EC2 instance, follow the instructions in [Launch an instance using the new launch instance wizard](https://docs.aws.amazon.com/ec2-launch-instance-wizard.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+To create an Amazon EC2 instance, follow the instructions in [Launch an instance using the new launch instance wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 On the **Configure Instance Details** page, set these values and keep the other values as their defaults:
 + **Network** – Choose the VPC with both public and private subnets that you chose for the DB cluster, such as **vpc\-*identifier* \| tutorial\-dual\-stack\-vpc** created in [Create a VPC with private and public subnets](#CHAP_Tutorials.CreateVPCDualStack.VPCAndSubnets)\.

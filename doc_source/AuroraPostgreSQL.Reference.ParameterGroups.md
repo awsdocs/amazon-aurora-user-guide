@@ -382,6 +382,7 @@ For a listing of the DB instance parameters for this same default DB cluster par
 | rds\.force\_ssl | Force SSL connections\. | 0  | 
 | rds\.global\_db\_rpo | \(s\) Recovery point objective threshold, in seconds, that blocks user commits when it is violated\. | –  | 
 | rds\.logical\_replication | Enables logical decoding\. | 0  | 
+| rds\.logically\_replicate\_unlogged\_tables | Unlogged tables are logically replicated\. | 1  | 
 | rds\.log\_retention\_period | Amazon RDS will delete PostgreSQL log that are older than N minutes\. | 4320  | 
 | rds\.pg\_stat\_ramdisk\_size | Size of the stats ramdisk in MB\. A nonzero value will setup the ramdisk\. | 0  | 
 | rds\.rds\_superuser\_reserved\_connections | Sets the number of connection slots reserved for rds\_superusers\. | 2  | 

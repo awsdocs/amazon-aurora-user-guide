@@ -33,7 +33,7 @@ Babelfish uses the ICU library for collation support\. PostgreSQL is built with 
   nondeterministic collations are not supported for substring searches
   ```
 **Note**  
-This limitation and workaround apply to Babelfish version 1\.x only \(Aurora PostgreSQL 13\.4 through 13\.7\)\. Babelfish 2\.1\.0 and higher releases don't have this issue\.
+This limitation and workaround apply to Babelfish version 1\.x only \(Aurora PostgreSQL 13\.x versions\)\. Babelfish 2\.1\.0 and higher releases don't have this issue\.
 
   You can work around this issue in one of the following ways:
   + Explicitly convert the expression to a case\-sensitive collation and case\-fold both arguments by applying LOWER or UPPER\. For example, `SELECT charindex('x', a) FROM t1` would become the following:

@@ -20,6 +20,8 @@
     + [Comparison of Aurora Serverless v2 and Aurora Serverless v1 feature support](#aurora-serverless.comparison-features)
   + [Adapting Aurora Serverless v1 use cases to Aurora Serverless v2](#aurora-serverless.comparison-approaches)
   + [Upgrading from an Aurora Serverless v1 cluster to Aurora Serverless v2](#aurora-serverless-v2.upgrade-from-serverless-v1-procedure)
+    + [Aurora MySQL\-compatible DB clusters](#sv1-to-sv2-ams)
+    + [Aurora PostgreSQL\-compatible DB clusters](#sv1-to-sv2-apg)
 + [Upgrading from Aurora Serverless v2 \(preview\) to Aurora Serverless v2](#aurora-serverless-v2.upgrade-from-serverless-v2-preview)
 + [Migrating from an on\-premises database to Aurora Serverless v2](#aurora-serverless-v2.migrate-from-on-prem)
 
@@ -395,6 +397,8 @@ The following table summarizes the different requirements to run your database u
 
 The process of upgrading a DB cluster from Aurora Serverless v1 to Aurora Serverless v2 involves several steps\. That's because Aurora Serverless v1 isn't available for the same major Aurora MySQL and Aurora PostgreSQL versions as Aurora Serverless v2 is\. Thus, going from Aurora Serverless v1 to Aurora Serverless v2 always involves at least one major version upgrade\.
 
+#### Aurora MySQL\-compatible DB clusters<a name="sv1-to-sv2-ams"></a>
+
 **To upgrade an Aurora Serverless v1 cluster running Aurora MySQL version 1 \(MySQL 5\.6–compatible\)**
 
 1. Perform an in\-place upgrade of the Aurora Serverless v1 cluster\. Follow the procedure in [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\.
@@ -405,11 +409,7 @@ The process of upgrading a DB cluster from Aurora Serverless v1 to Aurora Server
 
 1. Create a DB cluster snapshot of the Aurora Serverless v1 cluster\. Follow the procedure in [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\.
 
-1. Restore the snapshot to create a new, provisioned \(that is, *not* Aurora Serverless\) DB cluster running Aurora MySQL version 2\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
-
-   Choose the latest minor engine version available for the new cluster, for example, 2\.10\.2\.
-
-1. Upgrade the provisioned Aurora MySQL version 2 cluster to a version of Aurora MySQL version 3 that's compatible with Aurora Serverless v2, for example, 3\.02\.0\. Follow the procedure in [How to perform an in\-place upgrade](AuroraMySQL.Updates.MajorVersionUpgrade.md#AuroraMySQL.Upgrading.Procedure)\.
+1. Restore the snapshot to create a new, provisioned \(that is, *not* Aurora Serverless\) DB cluster running a version of Aurora MySQL version 3 that's compatible with Aurora Serverless v2, for example, 3\.02\.0\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
 
    For compatible versions, see [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md)\.
 
@@ -417,13 +417,15 @@ The process of upgrading a DB cluster from Aurora Serverless v1 to Aurora Server
 
    For details, see [Converting a provisioned writer or reader to Aurora Serverless v2](aurora-serverless-v2-administration.md#aurora-serverless-v2-converting-from-provisioned)\.
 
+#### Aurora PostgreSQL\-compatible DB clusters<a name="sv1-to-sv2-apg"></a>
+
 **To upgrade an Aurora Serverless v1 cluster running Aurora PostgreSQL**
 
 1. Create a DB cluster snapshot of the Aurora Serverless v1 cluster\. Follow the procedure in [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\.
 
 1. Restore the snapshot to create a new, provisioned \(that is, *not* Aurora Serverless\) DB cluster\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
 
-   Choose the latest minor engine version available for the new cluster, for example, 10\.21\.
+   Choose the latest minor engine version available for the new cluster, for example, 10\.21 or 11\.18\.
 
 1. Upgrade the provisioned DB cluster to an Aurora PostgreSQL version that's compatible with Aurora Serverless v2, for example, 13\.7\. Follow the procedure in [Upgrading the Aurora PostgreSQL engine to a new major version](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.Upgrading.Manual)\.
 

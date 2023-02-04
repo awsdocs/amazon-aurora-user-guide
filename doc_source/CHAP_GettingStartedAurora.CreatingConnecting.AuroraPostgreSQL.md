@@ -9,6 +9,7 @@ There's no charge for creating an AWS account\. However, by completing this tuto
 
 **Topics**
 + [Create an Aurora PostgreSQL DB cluster](#CHAP_GettingStarted.AuroraPostgreSQL.CreateDBCluster)
++ [Connecting an EC2 instance and an Aurora PostgreSQL DB cluster automatically](#CHAP_GettingStarted.Connecting.EC2.AuroraPostgreSQL)
 + [Connect to an instance in an Aurora PostgreSQL DB cluster](#CHAP_GettingStartedAurora.AuroraPostgreSQL.Connect)
 + [Delete the sample DB cluster, DB subnet group, and VPC](#CHAP_GettingStartedAurora.Deleting.AuroraPostgreSQL)
 
@@ -82,6 +83,45 @@ You can't view the master user password again\. If you don't record it, you migh
 
    On the RDS console, the details for new DB cluster appear\. The DB cluster and its DB instance have a status of **Creating** until the DB cluster is ready to use\. When the state changes to **Available** for both, you can connect to the DB cluster\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new DB cluster is available\.   
 ![\[Summary during DB cluster creation\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/creating-status-aurora-postgresql.png)
+
+## Connecting an EC2 instance and an Aurora PostgreSQL DB cluster automatically<a name="CHAP_GettingStarted.Connecting.EC2.AuroraPostgreSQL"></a>
+
+You can automatically connect an existing EC2 instance to the Aurora PostgreSQL DB cluster from the RDS console\. The RDS console simplifies setting up the connection between an EC2 instance and your PostgreSQL DB cluster\.
+
+Before setting up a connection between an EC2 instance and an Aurora DB cluster, make sure you meet the requirements described in [Overview of automatic connectivity with an EC2 instance](ec2-rds-connect.md#ec2-rds-connect-overview)\. If you make changes to required security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the Aurora DB cluster\.
+
+**Note**  
+You can only set up a connection between an EC2 instance and an Aurora DB cluster automatically by using the AWS Management Console\. You can't set up a connection automatically with the AWS CLI or RDS API\.
+
+**To connect an EC2 instance and an Aurora DB cluster automatically**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, and then choose the DB cluster\.
+
+1. For **Actions**, choose **Set up EC2 connection**\.
+
+   The **Set up EC2 connection** page appears\.  
+![\[Set up EC2 connection page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-rds-ec2-set-up.png)
+
+1. On the **Set up EC2 connection** page, choose the EC2 instance\.
+
+   If no EC2 instances exist in the same VPC, choose **Create EC2 instance** to create one\. In this case, make sure the new EC2 instance is in the same VPC as the DB cluster\.
+
+1. Choose **Continue**\.
+
+   The **Review and confirm** page appears\.  
+![\[EC2 connection review and confirmation page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-rds-ec2-confirm.png)
+
+1. On the **Review and confirm** page, review the changes that RDS will make to set up a connection with the EC2 instance\.
+
+   Do one of the following:
+   + If the changes are correct, choose **Set up connection**\.
+   + If the changes aren't correct, choose **Previous** or **Cancel**\.
+
+   If the changes aren't correct, choose **Previous** or **Cancel**\.
+
+1. To verify that the connection is made, choose **Connectivity and security** in the console and find the EC2 resource identifier under **Connected compute resource**\.
 
 ## Connect to an instance in an Aurora PostgreSQL DB cluster<a name="CHAP_GettingStartedAurora.AuroraPostgreSQL.Connect"></a>
 

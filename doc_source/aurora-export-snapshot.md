@@ -605,7 +605,7 @@ The file naming convention is subject to change\. Therefore, when reading target
 
 ## Data conversion when exporting to an Amazon S3 bucket<a name="aurora-export-snapshot.data-types"></a>
 
-When you export a DB snapshot to an Amazon S3 bucket, Amazon Aurora converts data to, exports data in, and stores data in the Parquet format\. For more information about Parquet, see the [Apache Parquet](https://parquet.apache.org/documentation/latest/) website\.
+When you export a DB snapshot to an Amazon S3 bucket, Amazon Aurora converts data to, exports data in, and stores data in the Parquet format\. For more information about Parquet, see the [Apache Parquet](https://parquet.apache.org/docs/) website\.
 
 Parquet stores all data as one of the following primitive types:
 + BOOLEAN

@@ -89,6 +89,8 @@ If you created a Aurora MySQL 1\.\* cluster with the Backtrack setting enabled, 
 
 These upgrade requirements still apply even if you turn off Backtrack for the Aurora MySQL 1\.\* cluster\.
 
+They don't apply to upgrades from Aurora MySQL version 2 to version 3, because all minor versions of Aurora MySQL version 3 are supported for Backtrack\.
+
 ## Configuring backtracking<a name="AuroraMySQL.Managing.Backtrack.Configuring"></a>
 
 To use the Backtrack feature, you must enable backtracking and specify a target backtrack window\. Otherwise, backtracking is disabled\.

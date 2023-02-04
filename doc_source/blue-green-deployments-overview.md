@@ -107,7 +107,7 @@ The user who deletes a blue/green deployment must have permissions to perform th
 
 ## Considerations for blue/green deployments<a name="blue-green-deployments-considerations"></a>
 
-Amazon RDS tracks resources in blue/green deployments with the `DbiResourceId` `and DbClusterResourceId` \(resource ID\) of each resource\. This resource ID is an AWS Region\-unique, immutable identifier for the resource\.
+Amazon RDS tracks resources in blue/green deployments with the `DbiResourceId` and `DbClusterResourceId` \(resource ID\) of each resource\. This resource ID is an AWS Region\-unique, immutable identifier for the resource\.
 
 The *resource* ID is separate from the DB *cluster*** ID:
 

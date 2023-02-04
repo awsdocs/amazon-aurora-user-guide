@@ -33,8 +33,8 @@ Following are the supported engines and Region availability for database activit
 | Asia Pacific \(Sydney\) | All versions | Aurora version 2\.08 and higher | – | 
 | Asia Pacific \(Tokyo\) | All versions | Aurora version 2\.08 and higher | – | 
 | Canada \(Central\) | All versions | Aurora version 2\.08 and higher | – | 
-| China \(Beijing\) | All versions | Aurora version 2\.08 and higher | – | 
-| China \(Ningxia\) | All versions | Aurora version 2\.08 and higher | – | 
+| China \(Beijing\) | – | – | – | 
+| China \(Ningxia\) | – | – | – | 
 | Europe \(Frankfurt\) | All versions | Aurora version 2\.08 and higher | – | 
 | Europe \(Ireland\) | All versions | Aurora version 2\.08 and higher | – | 
 | Europe \(London\) | All versions | Aurora version 2\.08 and higher | – | 
@@ -70,8 +70,8 @@ Following are the supported engines and Region availability for database activit
 | Asia Pacific \(Sydney\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
 | Asia Pacific \(Tokyo\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
 | Canada \(Central\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
-| China \(Beijing\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
-| China \(Ningxia\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
+| China \(Beijing\) | – | – | – | – | – | 
+| China \(Ningxia\) | – | – | – | – | – | 
 | Europe \(Frankfurt\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
 | Europe \(Ireland\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 
 | Europe \(London\) | All versions | All versions | All versions | Version 11\.6 and higher | Version 10\.11 and higher | 

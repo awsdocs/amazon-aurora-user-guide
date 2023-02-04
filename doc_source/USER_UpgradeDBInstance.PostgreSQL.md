@@ -48,7 +48,7 @@ Major version upgrades might contain database changes that are not backward\-com
 1. After verifying that your applications work as expected on the trial deployment, you can upgrade your cluster\. For details, see [Upgrading the Aurora PostgreSQL engine to a new major version](#USER_UpgradeDBInstance.Upgrading.Manual)\.
 
 **Note**  
-Currently, you can't upgrade an Aurora PostgreSQL DB cluster running Babelfish to a new major version\.
+You can perform a major version upgrade from Babelfish for Aurora PostgreSQL 13\-based versions starting from 13\.6 to Aurora PostgreSQL 14\-based versions starting from 14\.6\. Babelfish for Aurora PostgreSQL 13\.4 and 13\.5 don't support major version upgrade\.
 
 In the table, you can find the version upgrades that are available for various Aurora PostgreSQL DB versions\.  
 
@@ -389,7 +389,7 @@ Upgrading an Aurora PostgreSQL DB cluster involves the possibility of an outage\
 The zero\-downtime patching \(ZDP\) feature improves the upgrading process\. With ZDP, both minor version upgrades and patches can be applied with minimal impact to your Aurora PostgreSQL DB cluster\. ZDP is used when applying patches or newer minor version upgrades to Aurora PostgreSQL versions 14\.3\.3, 13\.7\.3, 12\.11\.3, 11\.16\.3, 10\.21\.3 and other higher releases of these minor versions and newer major versions\. That is, upgrading to new minor versions from any of these releases onward uses ZDP\. 
 
 **Note**  
-ZDP isn't supported for Aurora PostgreSQL DB clusters that are configured as Aurora Serverless v2, Aurora Serverless v1, Aurora global databases, or Babelfish\.
+ZDP isn't supported for Aurora PostgreSQL DB clusters that are configured as Aurora Serverless v2, Aurora Serverless v1, Aurora global databases\.
 
 ZDP works by preserving current client connections to your Aurora PostgreSQL DB cluster throughout the Aurora PostgreSQL upgrade process\. When ZDP completes successfully, application sessions are preserved and the database engine restarts while the upgrade is still under way\. Although the database engine restart can cause a drop in throughput, that typically lasts only for a few seconds or at most, approximately one minute\. 
 

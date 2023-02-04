@@ -1,24 +1,27 @@
 # Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)<a name="AuroraMySQL.Replication.MySQL"></a><a name="binlog_replication"></a><a name="binlog"></a>
 
- Because Amazon Aurora MySQL is compatible with MySQL, you can set up replication between a MySQL database and an Amazon Aurora MySQL DB cluster\. This type of replication uses the MySQL binary log replication, also referred to as *binlog replication*\. If you use binary log replication with Aurora, we recommend that your MySQL database run MySQL version 5\.5 or later\. You can set up replication where your Aurora MySQL DB cluster is the replication source or the replica\. You can replicate with an Amazon RDS MySQL DB instance, a MySQL database external to Amazon RDS, or another Aurora MySQL DB cluster\. 
+Because Amazon Aurora MySQL is compatible with MySQL, you can set up replication between a MySQL database and an Amazon Aurora MySQL DB cluster\. This type of replication uses the MySQL binary log replication, also referred to as *binlog replication*\. If you use binary log replication with Aurora, we recommend that your MySQL database run MySQL version 5\.5 or later\. You can set up replication where your Aurora MySQL DB cluster is the replication source or the replica\. You can replicate with an Amazon RDS MySQL DB instance, a MySQL database external to Amazon RDS, or another Aurora MySQL DB cluster\.
 
 **Note**  
- You can't use binlog replication to or from certain kinds of Aurora clusters\. In particular, binlog replication isn't available for Aurora Serverless v1 and multi\-master clusters\. If the `SHOW MASTER STATUS` and `SHOW SLAVE STATUS` \(Aurora MySQL version 1 and 2\) or `SHOW REPLICA STATUS` \(Aurora MySQL version 3\) statement returns no output, check that the cluster you're using is one that supports binlog replication\. 
+You can't use binlog replication to or from certain types of Aurora clusters\. In particular, binlog replication isn't available for Aurora Serverless v1 and multi\-master clusters\. If the `SHOW MASTER STATUS` and `SHOW SLAVE STATUS` \(Aurora MySQL version 1 and 2\) or `SHOW REPLICA STATUS` \(Aurora MySQL version 3\) statement returns no output, check that the cluster you're using supports binlog replication\.  
+In Aurora MySQL version 3, you can't replicate to the `mysql` system database using binlog replication\. Therefore, Data Control Language \(DCL\) statements such as `CREATE USER`, `GRANT`, and `REVOKE` aren't replicated in Aurora MySQL version 3\.
 
- You can also replicate with an RDS for MySQL DB instance or Aurora MySQL DB cluster in another AWS Region\. When you're performing replication across AWS Regions, make sure that your DB clusters and DB instances are publicly accessible\. If the Aurora MySQL DB clusters are in private subnets in your VPC, use VPC peering between the AWS Regions\. For more information, see [A DB cluster in a VPC accessed by an EC2 instance in a different VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario3)\.
+You can also replicate with an RDS for MySQL DB instance or Aurora MySQL DB cluster in another AWS Region\. When you're performing replication across AWS Regions, make sure that your DB clusters and DB instances are publicly accessible\. If the Aurora MySQL DB clusters are in private subnets in your VPC, use VPC peering between the AWS Regions\. For more information, see [A DB cluster in a VPC accessed by an EC2 instance in a different VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario3)\.
 
- If you want to configure replication between an Aurora MySQL DB cluster and an Aurora MySQL DB cluster in another region, you can create an Aurora MySQL DB cluster as a read replica in a different AWS Region than the source DB cluster\. For more information, see [Replicating Amazon Aurora MySQL DB clusters across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\. 
+If you want to configure replication between an Aurora MySQL DB cluster and an Aurora MySQL DB cluster in another AWS Region, you can create an Aurora MySQL DB cluster as a read replica in a different AWS Region from the source DB cluster\. For more information, see [Replicating Amazon Aurora MySQL DB clusters across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\.
 
- With Aurora MySQL 2\.04 and higher, you can replicate between Aurora MySQL and an external source or target that uses global transaction identifiers \(GTIDs\) for replication\. Ensure that the GTID\-related parameters in the Aurora MySQL DB cluster have settings that are compatible with the GTID status of the external database\. To learn how to do this, see [Using GTID\-based replication for Amazon Aurora MySQL](mysql-replication-gtid.md)\. In Aurora MySQL version 3\.01 and higher, you can choose how to assign GTIDs to transactions that are replicated from a source that doesn't use GTIDs\. For information about the stored procedure that controls that setting, see [mysql\.rds\_assign\_gtids\_to\_anonymous\_transactions \(Aurora MySQL version 3\)](AuroraMySQL.Reference.md#mysql_assign_gtids_to_anonymous_transactions)\. 
+With Aurora MySQL 2\.04 and higher, you can replicate between Aurora MySQL and an external source or target that uses global transaction identifiers \(GTIDs\) for replication\. Ensure that the GTID\-related parameters in the Aurora MySQL DB cluster have settings that are compatible with the GTID status of the external database\. To learn how to do this, see [Using GTID\-based replication for Amazon Aurora MySQL](mysql-replication-gtid.md)\. In Aurora MySQL version 3\.01 and higher, you can choose how to assign GTIDs to transactions that are replicated from a source that doesn't use GTIDs\. For information about the stored procedure that controls that setting, see [mysql\.rds\_assign\_gtids\_to\_anonymous\_transactions \(Aurora MySQL version 3\)](AuroraMySQL.Reference.md#mysql_assign_gtids_to_anonymous_transactions)\.
 
 **Warning**  
- When you replicate between Aurora MySQL and MySQL, ensure that you use only InnoDB tables\. If you have MyISAM tables that you want to replicate, you can convert them to InnoDB before setting up replication with the following command\.   
+ When you replicate between Aurora MySQL and MySQL, make sure that you use only InnoDB tables\. If you have MyISAM tables that you want to replicate, you can convert them to InnoDB before setting up replication with the following command\.   
 
 ```
 alter table <schema>.<table_name> engine=innodb, algorithm=copy;
 ```
 
-Setting up MySQL replication with Aurora MySQL involves the following steps, which are discussed in detail in this topic:
+## Setting up replication with MySQL or another Aurora DB cluster<a name="AuroraMySQL.Replication.MySQL.SettingUp"></a>
+
+Setting up MySQL replication with Aurora MySQL involves the following steps, which are discussed in detail:
 
 [1\. Turn on binary logging on the replication source](#AuroraMySQL.Replication.MySQL.EnableBinlog)
 
@@ -33,10 +36,6 @@ Setting up MySQL replication with Aurora MySQL involves the following steps, whi
 [6\. Turn on replication on your replica target](#AuroraMySQL.Replication.MySQL.EnableReplication)
 
 [7\. Monitor your replica](#AuroraMySQL.Replication.MySQL.Monitor)
-
-## Setting up replication with MySQL or another Aurora DB cluster<a name="AuroraMySQL.Replication.MySQL.SettingUp"></a>
-
- To set up Aurora replication with MySQL, take the following steps\. 
 
 ### 1\. Turn on binary logging on the replication source<a name="AuroraMySQL.Replication.MySQL.EnableBinlog"></a>
 

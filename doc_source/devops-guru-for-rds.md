@@ -170,7 +170,7 @@ If you turn on DevOps Guru from the RDS console when you create a database, RDS
 
 You can specify your DevOps Guru resource coverage on the DevOps Guru console\. Follow the step described in [Specify your DevOps Guru resource coverage](https://docs.aws.amazon.com/devops-guru/latest/userguide/choose-coverage.html) in the *Amazon DevOps Guru User Guide*\. When you edit your analyzed resources, choose one of the following options:
 + Choose **All account resources** to analyze all supported resources, including the Aurora databases, in your AWS account and Region\.
-+ Choose **CloudFormation stacks** to analyze the Aurora databases that are in stacks you choose\. For more information, see [Use AWS CloudFormation stacks to identify resources in your DevOps Guru applications](https://docs.aws.amazon.com/https:/devops-guru/latest/userguide/working-with-cfn-stacks.html) in the *Amazon DevOps Guru User Guide*\.
++ Choose **CloudFormation stacks** to analyze the Aurora databases that are in stacks you choose\. For more information, see [Use AWS CloudFormation stacks to identify resources in your DevOps Guru applications](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-cfn-stacks.html) in the *Amazon DevOps Guru User Guide*\.
 + Choose **Tags** to analyze the Aurora databases that you have tagged\. For more information, see [Use tags to identify resources in your DevOps Guru applications](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-resource-tags.html) in the *Amazon DevOps Guru User Guide*\.
 
 For more information, see [Enable DevOps Guru](https://docs.aws.amazon.com/devops-guru/latest/userguide/getting-started-enable-service.html) in the *Amazon DevOps Guru User Guide*\.

@@ -44,6 +44,7 @@ In the following table you can find T\-SQL functionality supported by different 
 | DATEPART | ✓ | – | – | – | – | – | 
 | DATETIMEFROMPARTS | ✓ | ✓ | ✓ | ✓ | ✓ | – | 
 | DATETIMEOFFSETFROMPARTS | ✓ | – | – | – | – | – | 
+| FOR JSON | ✓ | – | – | – | – | – | 
 | FULLTEXTSERVICEPROPERTY | ✓ | ✓ | ✓ | ✓ | – | – | 
 | HAS\_DBACCESS | ✓ | ✓ | ✓ | ✓ | – | – | 
 | HAS\_PERMS\_BY\_NAME | ✓ | ✓ | ✓ | – | – | – | 

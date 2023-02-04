@@ -508,7 +508,7 @@ SELECT ... LOCK IN SHARE MODE
 
 ### Using autoincrement columns<a name="using-auto-increment-columns"></a>
 
- Aurora multi\-master clusters handle autoincrement columns using the existing configuration parameters `auto_increment_increment` and `auto_increment_offset`\. For more information, see the [MySQL reference manual](https://dev.mysql.com/doc/refman/5.6/en/replication-options-master.html#sysvar_auto_increment_increment)\. 
+ Aurora multi\-master clusters handle autoincrement columns using the existing configuration parameters `auto_increment_increment` and `auto_increment_offset`\. For more information, see the [MySQL reference manual](https://dev.mysql.com/doc/refman/5.6/en/replication-options-source.html#sysvar_auto_increment_increment)\. 
 
  Parameter values are predetermined and you can't change them\. Specifically, the `auto_increment_increment` parameter is hardcoded to 16, which is the maximum number of DB instances in any kind of Aurora cluster\. 
 

@@ -70,7 +70,7 @@ You can use IAM condition keys to enforce Aurora management of the master user p
     "Statement": [
         {
             "Effect": "Deny",
-            "Action": ["rds:CreateDBInstance, rds:CreateDBCluster, rds:RestoreDBInstanceFromS3, rds:RestoreDBClusterFromS3"],
+            "Action": ["rds:CreateDBInstance", "rds:CreateDBCluster", "rds:RestoreDBInstanceFromS3", "rds:RestoreDBClusterFromS3"],
             "Resource": "*",
             "Condition": {
                 "Bool": {
@@ -81,6 +81,10 @@ You can use IAM condition keys to enforce Aurora management of the master user p
     ]
 }
 ```
+
+**Note**  
+This policy enforces password management in AWS Secrets Manager at creation\. However, you can still disable Secrets Manager integration and manually set a master password by modifying the cluster\.  
+To prevent this, include `rds:ModifyDBInstance`, `rds:ModifyDBCluster` in the Action block of the policy\. Be aware, this prevents the user from applying any further modifications to existing clusters which do not have Secrets Manager integration enabled\. 
 
 For more information about using condition keys in IAM policies, see [Policy condition keys for Aurora](security_iam_service-with-iam.md#UsingWithRDS.IAM.Conditions) and [Example policies: Using condition keys](security_iam_id-based-policy-examples.md#UsingWithRDS.IAM.Conditions.Examples)\.
 
@@ -302,3 +306,4 @@ Managing master user passwords with Secrets Manager isn't supported for the foll
 + DB clusters that are part of an Aurora global database
 + Aurora Serverless v1 DB clusters
 + Aurora MySQL cross\-Region read replicas
++ Managing master user password with Secrets Manager for a read replica

@@ -22,3 +22,9 @@ To learn how to upgrade an Aurora PostgreSQL global database to a higher minor v
 
 **Note**  
 A secondary cluster must have at least one DB instance to perform a minor upgrade\.
+
+### Version compatibility for failover<a name="aurora-global-database-upgrade.minor.incompatibility"></a>
+
+When you upgrade your Aurora global database to one of the following minor engine versions, you can perform a managed cross\-Region database failover\. You can perform this failover regardless of the patch versions of your primary and secondary DB clusters\. For minor engine versions lower than the ones on this list, you must upgrade your primary and secondary DB clusters to the same major, minor, and patch levels to perform a managed cross\-Region database failover\.
+
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-upgrade.html)

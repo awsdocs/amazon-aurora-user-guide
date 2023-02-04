@@ -25,7 +25,7 @@ In the table you can find information about certain functionality that isn't cur
 | Cursors \(updatable\) | Updatable cursors aren't supported\. | 
 | Cursors \(global\) | GLOBAL cursors aren't supported\. | 
 | Cursor \(fetch behaviors\) | The following cursor fetch behaviors aren't supported: FETCH PRIOR, FIRST, LAST, ABSOLUTE, abd RELATIVE | 
-| Cursor\-typed \(variables and parameters\) | Cursor\-typed variables and parameters aren't supported for output parameters \(an error is raised\)\.  | 
+| Cursor\-typed output parameters | Cursor\-typed variables and parameters aren't supported for output parameters \(an error is raised\)\.  | 
 | Cursor options | SCROLL, KEYSET, DYNAMIC, FAST\_FORWARD, SCROLL\_LOCKS, OPTIMISTIC, TYPE\_WARNING, and FOR UPDATE | 
 | Data encryption | Data encryption isn't supported\. | 
 | DBCC commands  | Microsoft SQL Server Database Console Commands \(DBCC\) aren't supported\. | 
@@ -42,13 +42,10 @@ In the table you can find information about certain functionality that isn't cur
 | Functions, externally defined | External functions, including SQL CLR functions, aren't supported\. | 
 | Global temporary tables \(tables with names that start with \#\#\) | Global temporary tables aren't supported\. | 
 | Graph functionality | All SQL graph functionality isn't supported\. | 
-| Hints | Hints aren't supported for joins, queries, or tables\. | 
 | Identifiers \(variables or parameters\) with multiple leading @ characters | Identifiers that start with more than one leading `@` aren't supported\. | 
 | Identifiers, table or column names that contain @ or \]\] characters | Table or column names that contain an `@` sign or square brackets aren't supported\. | 
 | Inline indexes | Inline indexes aren't supported\. | 
 | Invoking a procedure whose name is in a variable | Using a variable as a procedure name isn't supported\. | 
-| JSON\_MODIFY | Updating JSON string using JSON\_MODIFY isn't supported\. | 
-| FOR JSON clause | Formatting query results as JSON isn't supported\. | 
 | Materialized views | Materialized views aren't supported\. | 
 | NOT FOR REPLICATION clause | This syntax is accepted and ignored\.  | 
 | ODBC escape functions | ODBC escape functions aren't supported\. | 
@@ -72,7 +69,7 @@ In the table you can find information about certain functionality that isn't cur
 | Triggers, externally defined | These triggers aren't supported, including SQL Common Language Runtime \(CLR\)\. | 
 | Triggers, INSTEAD\-OF on views | INSTEAD\-OF triggers on views aren't supported\. INSTEAD\-OF triggers are supported \(Babelfish 1\.2\.0 and higher releases\)\. | 
 | Unquoted string values in stored procedure calls and default values | String parameters to stored procedure calls, and defaults for string parameters in CREATE PROCEDURE, aren't supported\. | 
-| WITHOUT SCHEMABINDING clause | This clause isn't supported in functions, procedures, triggers, or views\. The object is created, but as if WITH SCHEMABINDING was specified\. | 
+| Without SCHEMABINDING clause | Creating a view without SCHEMABINDING isn't supported, but the view is created as if WITH SCHEMABINDING was specified\. Using SCHEMABINDING when creating functions, procedures, triggers is silently ignored\. | 
 
 ## Settings that aren't supported<a name="babelfish-compatibility.tsql.limitations-unsupported-list8"></a>
 

@@ -58,7 +58,8 @@ The following limitations currently apply to Aurora global databases:
   + Aurora MySQL with MySQL 5\.7 compatibility, version 2\.09\.1 and higher
   + Aurora MySQL with MySQL 5\.6 compatibility, version 1\.23\.1 and higher
   +  Aurora PostgreSQL versions 13\.3 and higher, 12\.4 and higher, 11\.9 and higher, and 10\.14 and higher 
-+ Aurora global databases can't fail over from a primary to a secondary DB cluster when the primary and secondary have different DB engine versions—whether major, minor, or patch versions\.
++ You can only perform a managed cross\-Region database failover on an Aurora global database if the primary and secondary DB clusters have the same major and minor engine versions\. The patch levels can be different if the minor engine versions are one of the following:    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html)
 + Aurora global databases currently don't support the following Aurora features: 
   + Aurora multi\-master clusters
   + Aurora Serverless v1

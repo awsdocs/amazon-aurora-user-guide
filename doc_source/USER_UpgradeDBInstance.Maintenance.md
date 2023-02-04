@@ -200,16 +200,18 @@ To adjust the preferred DB cluster maintenance window, use the Amazon RDS [https
 
 ## Automatic minor version upgrades for Aurora DB clusters<a name="Aurora.Maintenance.AMVU"></a>
 
- The **Auto minor version upgrade** setting specifies whether Aurora automatically applies upgrades to your cluster\. These upgrades include patch levels containing bug fixes, and new minor versions containing additional features\. They don't include any incompatible changes\. 
+The **Auto minor version upgrade** setting specifies whether Aurora automatically applies upgrades to your cluster\. These upgrades include patch levels containing bug fixes, and new minor versions containing additional features\. They don't include any incompatible changes\.
 
 **Note**  
- This setting is enabled by default\. For each new cluster, choose the appropriate value for this setting\. This value is based on its importance, expected lifetime, and the amount of verification testing that you do after each upgrade\. 
+This setting is enabled by default\. For each new cluster, choose the appropriate value for this setting\. This value is based on its importance, expected lifetime, and the amount of verification testing that you do after each upgrade\.
 
- For instructions about turning this setting on or off, see [Settings for Amazon Aurora](Aurora.Modifying.md#Aurora.Modifying.Settings)\. In particular, make sure to apply the same setting to all DB instances in the cluster\. If any DB instance in your cluster has this setting turned off, the cluster isn't automatically upgraded\. 
+For instructions about turning this setting on or off, see [Settings for Amazon Aurora](Aurora.Modifying.md#Aurora.Modifying.Settings)\. In particular, make sure to apply the same setting to all DB instances in the cluster\. If any DB instance in your cluster has this setting turned off, the cluster isn't automatically upgraded\.
+
+Automatic minor version upgrades are communicated in advance through an Amazon RDS DB cluster event with a category of `maintenance` and ID of `RDS-EVENT-0156`\. For more information, see [Amazon RDS event categories and event messages](USER_Events.Messages.md)\.
 
 For more information about engine updates for Aurora PostgreSQL, see [Amazon Aurora PostgreSQL updates](AuroraPostgreSQL.Updates.md)\.
 
- For more information about the **Auto minor version upgrade** setting for Aurora MySQL, see [Enabling automatic upgrades between minor Aurora MySQL versions](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.AMVU)\. For general information about engine updates for Aurora MySQL, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\. 
+For more information about the **Auto minor version upgrade** setting for Aurora MySQL, see [Enabling automatic upgrades between minor Aurora MySQL versions](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.AMVU)\. For general information about engine updates for Aurora MySQL, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.
 
 ## Choosing the frequency of Aurora MySQL maintenance updates<a name="Aurora.Maintenance.LTS"></a>
 

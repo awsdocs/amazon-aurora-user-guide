@@ -1,6 +1,6 @@
 # Essential concepts for Aurora MySQL tuning<a name="AuroraMySQL.Managing.Tuning.concepts"></a>
 
-Before you tune your Aurora MySQL database, make sure to learn what wait events and thread states are and why they occur\. Also review the basic memory and disk architecture of Aurora MySQL when using the InnoDB storage engine\. For a helpful architecture diagram, see the [MySQL Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/images/innodb-architecture.png)\.
+Before you tune your Aurora MySQL database, make sure to learn what wait events and thread states are and why they occur\. Also review the basic memory and disk architecture of Aurora MySQL when using the InnoDB storage engine\. For a helpful architecture diagram, see the [MySQL Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/innodb-architecture.html)\.
 
 **Topics**
 + [Aurora MySQL wait events](#AuroraMySQL.Managing.Tuning.concepts.waits)

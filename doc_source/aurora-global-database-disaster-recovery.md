@@ -9,7 +9,7 @@ With an Aurora global database, there are two different approaches to failover d
 + **Managed planned failover** – This feature is intended for controlled environments, such as operational maintenance and other planned operational procedures\. By using managed planned failover, you can relocate the primary DB cluster of your Aurora global database to one of the secondary Regions\. Because this feature synchronizes secondary DB clusters with the primary before making any other changes, RPO is 0 \(no data loss\)\. To learn more, see [Performing managed planned failovers for Amazon Aurora global databases](#aurora-global-database-disaster-recovery.managed-failover)\. 
 
 **Note**  
-Aurora global databases can't fail over from a primary to a secondary DB cluster when the primary and secondary have different DB engine versions—whether major, minor, or patch versions\.
+You can only perform a managed cross\-Region database failover on an Aurora global database if the primary and secondary DB clusters have the same major and minor engine versions\. The patch levels can be different, depending on the minor engine version\. For more information, see [Version compatibility for failover](aurora-global-database-upgrade.md#aurora-global-database-upgrade.minor.incompatibility)\.
 
 **Topics**
 + [Recovering an Amazon Aurora global database from an unplanned outage](#aurora-global-database-failover)
