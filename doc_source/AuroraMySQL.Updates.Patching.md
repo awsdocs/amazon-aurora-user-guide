@@ -124,6 +124,9 @@ The following table shows the Aurora MySQL versions and DB instance classes wher
 | 3\.01\.0 and 3\.01\.1 | Yes | Yes | N/A | 
 | 3\.02\.0 and higher 3\.x versions | Yes | Yes | Yes | 
 
+**Note**  
+We recommend using the T DB instance classes only for development and test servers, or other non\-production servers\. For more details on the T instance classes, see [Using T instance classes for development and testing](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.T2Medium)\.
+
  You can see metrics of important attributes during ZDP in the MySQL error log\. You can also see information about when Aurora MySQL uses ZDP or chooses not to use ZDP on the **Events** page in the AWS Management Console\. 
 
 In Aurora MySQL version 2\.10 and higher and version 3, Aurora can perform a zero\-downtime patch when binary log replication is enabled\. Aurora MySQL automatically drops the connection to the binlog target during a ZDP operation\. Aurora MySQL automatically reconnects to the binlog target and resumes replication after the restart finishes\.

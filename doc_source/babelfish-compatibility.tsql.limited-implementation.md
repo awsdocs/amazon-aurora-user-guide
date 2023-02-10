@@ -17,12 +17,12 @@ As of version 1\.2\.0 of Babelfish, the following features currently have limite
     For example, when an UPDATE statement or INSERT\-SELECT statement affects multiple rows, in SQL Server, the affected rows all have different values in their ROWVERSION/TIMESTAMP column\. In Babelfish \(PostgreSQL\), the rows have the same value\.
   + In SQL Server, when you create a new table with SELECT\-INTO, you can cast an explicit value \(such as NULL\) to a to\-be\-created ROWVERSION/TIMESTAMP column\. When you do the same thing in Babelfish, an actual ROWVERSION/TIMESTAMP value is assigned to each row in the new table for you, by Babelfish\.
 
-These minor differences in ROWVERSION/TIMESTAMP datatypes shouldn't have an adverse impact on applications running on Babelfish\. 
+  These minor differences in ROWVERSION/TIMESTAMP datatypes shouldn't have an adverse impact on applications running on Babelfish\. 
 
-**Schema creation, ownership, and permissions** – Permissions to create objects in a schema that was created by the database owner \(using `CREATE SCHEMA…AUTHORIZATION DBO`\) differ for SQL Server and Babelfish non\-DBO users, as shown in the following table:
+**Schema creation, ownership, and permissions** – Permissions to create and access objects in a schema owned by a non\-DBO user \(using `CREATE SCHEMA schema name AUTHORIZATION user name`\) differ for SQL Server and Babelfish non\-DBO users, as shown in the following table:
 
 
-| Database user \(non\-DBO\) can do the following: | SQL Server | Babelfish | 
+| Database user \(non\-DBO\) who owns the schema can do the following: | SQL Server | Babelfish | 
 | --- | --- | --- | 
 |  Create objects in the schema without additional grants by the DBO?  |  No  |  Yes  | 
-|  Reference objects created in the schema by DBO without additional grants?  |  Yes  |  No  | 
+|  Access objects created by DBO in the schema without additional grants?  |  Yes  |  No  | 

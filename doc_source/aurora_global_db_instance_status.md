@@ -29,7 +29,7 @@ SETOF record with following columns:
 
 ## Usage notes<a name="aurora_global_db_instance_status-usage-notes"></a>
 
-This function shows replication statistics for an Aurora DB cluster\. For each Aurora PostgreSQL DB instance in the cluster, the function shows a row of data that includes any cross\-region replicas in a global database configuration\.
+This function shows replication statistics for an Aurora DB cluster\. For each Aurora PostgreSQL DB instance in the cluster, the function shows a row of data that includes any cross\-Region replicas in a global database configuration\.
 
 You can run this function from any instance in an Aurora PostgreSQL DB cluster or an Aurora PostgreSQL global database\. The function returns details about lag for all replica instances\.
 
@@ -41,7 +41,7 @@ To get started with Aurora global databases, see [Getting started with Amazon Au
 
 ## Examples<a name="aurora_global_db_instance_status-examples"></a>
 
-This example shows cross\-region instance stats\.
+This example shows cross\-Region instance stats\.
 
 ```
 => SELECT *

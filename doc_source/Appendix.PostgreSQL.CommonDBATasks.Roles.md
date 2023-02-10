@@ -198,7 +198,7 @@ The *Salted Challenge Response Authentication Mechanism \(SCRAM\)* is an alterna
 
 We recommend that you use SCRAM rather than MD5 as the password encryption scheme for your Aurora PostgreSQL DB cluster\. As of the Aurora PostgreSQL 14 release, SCRAM is supported in all available Aurora PostgreSQL versions, including versions 10, 11, 12, 13, and 14\. It's a cryptographic challenge\-response mechanism that uses the scram\-sha\-256 algorithm for password authentication and encryption\. 
 
-You might need to update libraries for your client applications to support SCRAM\. For example, JDBC versions before 42\.2\.0 don't support SCRAM\. For more information, see [PostgreSQL JDBC Driver](https://jdbc.postgresql.org/documentation/changelog.html#version_42.2.0) in the PostgreSQL JDBC Driver documentation\. For a list of other PostgreSQL drivers and SCRAM support, see [List of drivers](https://wiki.postgresql.org/wiki/List_of_drivers) in the PostgreSQL documentation\.
+You might need to update libraries for your client applications to support SCRAM\. For example, JDBC versions before 42\.2\.0 don't support SCRAM\. For more information, see [PostgreSQL JDBC Driver](https://jdbc.postgresql.org/changelogs/2018-01-17-42.2.0-release/) in the PostgreSQL JDBC Driver documentation\. For a list of other PostgreSQL drivers and SCRAM support, see [List of drivers](https://wiki.postgresql.org/wiki/List_of_drivers) in the PostgreSQL documentation\.
 
 **Note**  
 Aurora PostgreSQL version 14 and higher support scram\-sha\-256 for password encryption by default for new DB clusters\. That is, the default DB cluster parameter group \(`default.aurora-postgresql14`\) has its `password_encryption` value set to scram\-sha\-256\.

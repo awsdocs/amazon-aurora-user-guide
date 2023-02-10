@@ -6,6 +6,9 @@ You can scale Aurora MySQL DB instances in two ways, instance scaling and read s
 
 You can scale your Aurora MySQL DB cluster by modifying the DB instance class for each DB instance in the DB cluster\. Aurora MySQL supports several DB instance classes optimized for Aurora\. Don't use db\.t2 or db\.t3 instance classes for larger Aurora clusters of size greater than 40 TB\. For the specifications of the DB instance classes supported by Aurora MySQL, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
 
+**Note**  
+We recommend using the T DB instance classes only for development and test servers, or other non\-production servers\. For more details on the T instance classes, see [Using T instance classes for development and testing](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.T2Medium)\.
+
 ## Maximum connections to an Aurora MySQL DB instance<a name="AuroraMySQL.Managing.MaxConnections"></a><a name="max_connections"></a>
 
 The maximum number of connections allowed to an Aurora MySQL DB instance is determined by the `max_connections` parameter in the instance\-level parameter group for the DB instance\.

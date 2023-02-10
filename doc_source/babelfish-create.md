@@ -31,7 +31,7 @@ In an Aurora PostgreSQL cluster, the `babelfish_db` database name is reserved fo
 
 1. For **DB cluster identifier**, enter a name that you can easily find later in the DB cluster list\.
 
-1. For **Master username**, enter an administrator user name\. The default value for Aurora PostgreSQL is `postgres`\. You can accept the default or choose a different name\. For example, to follow the naming convention used on your SQL Server databases, you can enter `sa` \(system administrator\) for the Master username\.
+1. For **Master username**, enter an administrator user name\. Master username must always use lowercase characters\. The default value for Aurora PostgreSQL is `postgres`\. You can accept the default or choose a different name\. For example, to follow the naming convention used on your SQL Server databases, you can enter `sa` \(system administrator\) for the Master username\.
 
    If you don't create a user named `sa` at this time, you can create one later with your choice of client\. After creating the user, use the `ALTER SERVER ROLE` command to add it to the `sysadmin` group \(role\) for the cluster\. 
 
@@ -59,7 +59,7 @@ In an Aurora PostgreSQL cluster, the `babelfish_db` database name is reserved fo
 
 1. For **Collation name** field, enter your default collation\. The default is `sql_latin1_general_cp1_ci_as`\. For detailed information, see [Collations supported by Babelfish](babelfish-collations.md)\.
 
-1. For **Babelfish TDS port**, enter the default port `1433` unless you specified a different port for your Babelfish DB cluster\.
+1. For **Babelfish TDS port**, enter the default port `1433`\. Currently, Babelfish only supports port `1433` for your DB cluster\.
 
 1. For **DB parameter group**, choose a parameter group or have Aurora create a new group for you with default settings\.
 

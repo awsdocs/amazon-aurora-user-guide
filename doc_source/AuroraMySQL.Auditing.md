@@ -85,7 +85,9 @@ You can also get a list of the log files by using the [describe\-db\-log\-files]
 
 ## Audit log details<a name="AuroraMySQL.Auditing.Logs"></a>
 
-Log files are represented as comma\-separated variable \(CSV\) files in UTF\-8 format\. The audit log is stored separately on the local \(ephemeral\) storage of each instance\. Each Aurora instance distributes writes across four log files at a time\. The maximum size of the logs is 100 MB in aggregate\. When this non\-configurable limit is reached, Aurora rotates the files and generates four new files\. 
+Log files are represented as comma\-separated variable \(CSV\) files in UTF\-8 format\. Queries are also wrapped in single quotes \('\)\.
+
+The audit log is stored separately on the local \(ephemeral\) storage of each instance\. Each Aurora instance distributes writes across four log files at a time\. The maximum size of the logs is 100 MB in aggregate\. When this non\-configurable limit is reached, Aurora rotates the files and generates four new files\.
 
 **Tip**  
 Log file entries are not in sequential order\. To order the entries, use the timestamp value\. To see the latest events, you might have to review all log files\. For more flexibility in sorting and searching the log data, turn on the setting to upload the audit logs to CloudWatch and view them using the CloudWatch interface\.  

@@ -1,12 +1,6 @@
 # aurora\_global\_db\_status<a name="aurora_global_db_status"></a>
 
-Displays information about various aspects of Aurora global database lag, specifically, lag of the underlying Aurora storage \(so called durability lag\) and lag between the recovery point objective \(RPO\) \.
-
-This function is available for the following Aurora PostgreSQL versions:
-+ PostgreSQL 11\.7 \(Aurora PostgreSQL release 3\.2\) and higher versions 
-+ PostgreSQL 10\.11 \(Aurora PostgreSQL release 2\.4\) and higher versions
-
-When this function is used with Aurora PostgreSQL DB versions earlier than PostgreSQL 11\.7 \(Aurora PostgreSQL release 3\.2\), it returns less information than when used with PostgreSQL 11\.7 and later versions\. PostgreSQL 11\.7 \(Aurora PostgreSQL release 3\.2\) and higher versions returned enhanced statistics to this function\.
+Displays information about various aspects of Aurora global database lag, specifically, lag of the underlying Aurora storage \(so called durability lag\) and lag between the recovery point objective \(RPO\)\.
 
 ## Syntax<a name="aurora_global_db_status-syntax"></a>
 
@@ -25,13 +19,13 @@ None\.
 SETOF record with following columns:
 + `aws_region` – The AWS Region that this DB cluster is in\. For a complete listing of AWS Regions by engine, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\. 
 + `highest_lsn_written` – The highest log sequence number \(LSN\) that currently exists on this DB cluster\. A log sequence number \(LSN\) is a unique sequential number that identifies a record in the database transaction log\. LSNs are ordered such that a larger LSN represents a later transaction\. 
-+ `durability_lag_in_msec` – The difference in the timestamp values between the highest\_lsn\_written on a secondary DB cluster and the highest\_lsn\_written on the primary DB cluster\. A value of \-1 identifies the primary global database of an Aurora global database\. 
-+ `rpo_lag_in_msec` – The recovery point objective \(RPO\) lag\. The RPO lag is the time it takes for the most recent user transaction COMMIT to be stored on a secondary DB cluster after it's been stored on the primary DB cluster of an Aurora global database\. A value of \-1 denotes the primary global database \(and thus, lag isn't relevant\)\. 
++ `durability_lag_in_msec` – The difference in the timestamp values between the `highest_lsn_written` on a secondary DB cluster and the `highest_lsn_written` on the primary DB cluster\. A value of \-1 identifies the primary DB cluster of the Aurora global database\. 
++ `rpo_lag_in_msec` – The recovery point objective \(RPO\) lag\. The RPO lag is the time it takes for the most recent user transaction COMMIT to be stored on a secondary DB cluster after it's been stored on the primary DB cluster of the Aurora global database\. A value of \-1 denotes the primary DB cluster \(and thus, lag isn't relevant\)\. 
 
-  In simple terms, this metric calculates the recovery point objective for each Aurora PostgreSQL DB cluster in an Aurora global database, that is, how much data might be lost if there were an outage\. As with lag, RPO is measured in time\.
-+ `last_lag_calculation_time` – The timestamp that specifies when values were last calculated for `replication_lag_in_msec` and `rpo_lag_in_msec`\. A time value such as `1970-01-01 00:00:00+00` means this is the primary global database\. 
+  In simple terms, this metric calculates the recovery point objective for each Aurora PostgreSQL DB cluster in the Aurora global database, that is, how much data might be lost if there were an outage\. As with lag, RPO is measured in time\.
++ `last_lag_calculation_time` – The timestamp that specifies when values were last calculated for `durability_lag_in_msec` and `rpo_lag_in_msec`\. A time value such as `1970-01-01 00:00:00+00` means this is the primary DB cluster\. 
 + `feedback_epoch` – The epoch that the secondary DB cluster uses when it generates hot standby information\. A *hot standby* is a DB instance that supports connections and queries while the primary DB is in recovery or standby mode\. The hot standby information includes the epoch \(point in time\) and other details about the DB instance that's being used as a hot standby\. For more information, see [Hot Standby](https://www.postgresql.org/docs/current/hot-standby.html) in the PostgreSQL documentation\.
-+ `feedback_xmin` – The minimum \(oldest\) active transaction ID used by the secondary DB cluster\.
++ `feedback_xmin` – The minimum \(oldest\) active transaction ID used by a secondary DB cluster\.
 
 ## Usage notes<a name="aurora_global_db_status-usage-notes"></a>
 

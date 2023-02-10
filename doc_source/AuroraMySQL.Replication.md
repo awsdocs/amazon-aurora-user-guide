@@ -103,10 +103,8 @@ The following are some use cases for replication filters:
 + To reduce the size of a read replica\. With replication filtering, you can exclude the databases and tables that aren't needed on the read replica\.
 + To exclude databases and tables from read replicas for security reasons\.
 + To replicate different databases and tables for specific use cases at different read replicas\. For example, you might use specific read replicas for analytics or sharding\.
-+ For a DB instance that has read replicas in different AWS Regions, to replicate different databases or tables in different AWS Regions\.
-
-**Note**  
-You can also use replication filters to specify which databases and tables are replicated with a primary MySQL DB instance that is configured as a replica in an inbound replication topology\. For more information about this configuration, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.
++ For a DB cluster that has read replicas in different AWS Regions, to replicate different databases or tables in different AWS Regions\.
++ To specify which databases and tables are replicated with an Aurora MySQL DB cluster that is configured as a replica in an inbound replication topology\. For more information about this configuration, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.
 
 **Topics**
 + [Setting replication filtering parameters for Aurora MySQL](#AuroraMySQL.Replication.Filters.Configuring)
@@ -116,7 +114,7 @@ You can also use replication filters to specify which databases and tables are r
 
 ### Setting replication filtering parameters for Aurora MySQL<a name="AuroraMySQL.Replication.Filters.Configuring"></a>
 
-To configure replication filters, set the following replication filtering parameters on the read replica:
+To configure replication filters, set the following replication filtering parameters on the Aurora read replica:
 + `binlog-do-db` – Replicate changes to the specified binary logs\. When you set this parameter for a read replica, only the binary logs specified in the parameter are replicated\.
 + `binlog-ignore-db` – Don't replicate changes to the specified binary logs\. When the `binlog-do-db` parameter is set for a read replica, this parameter isn't evaluated\.
 + `replicate-do-db` – Replicate changes to the specified databases\. When you set this parameter for a read replica, only the databases specified in the parameter are replicated\.
@@ -152,12 +150,12 @@ The following limitations apply to replication filtering for Aurora MySQL:
 
 ### Replication filtering examples for Aurora MySQL<a name="AuroraMySQL.Replication.Filters.Examples"></a>
 
-To configure replication filtering for a read replica, modify the replication filtering parameters in the parameter group associated with the read replica\.
+To configure replication filtering for a read replica, modify the replication filtering parameters in the DB cluster parameter group associated with the read replica\.
 
 **Note**  
-You can't modify a default parameter group\. If the read replica is using a default parameter group, create a new parameter group and associate it with the read replica\. For more information on DB parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
+You can't modify a default DB cluster parameter group\. If the read replica is using a default parameter group, create a new parameter group and associate it with the read replica\. For more information on DB cluster parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
-You can set parameters in a parameter group using the AWS Management Console, AWS CLI, or RDS API\. For information about setting parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. When you set parameters in a parameter group, all of the DB instances associated with the parameter group use the parameter settings\. If you set the replication filtering parameters in a parameter group, make sure that the parameter group is associated only with read replicas\. Leave the replication filtering parameters empty for source DB instances\.
+You can set parameters in a DB cluster parameter group using the AWS Management Console, AWS CLI, or RDS API\. For information about setting parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. When you set parameters in a DB cluster parameter group, all of the DB clusters associated with the parameter group use the parameter settings\. If you set the replication filtering parameters in a DB cluster parameter group, make sure that the parameter group is associated only with read replica clusters\. Leave the replication filtering parameters empty for source DB instances\.
 
 The following examples set the parameters using the AWS CLI\. These examples set `ApplyMethod` to `immediate` so that the parameter changes occur immediately after the CLI command completes\. If you want a pending change to be applied after the read replica is rebooted, set `ApplyMethod` to `pending-reboot`\. 
 
@@ -165,7 +163,6 @@ The following examples set replication filters:
 + [Including databases in replication](#rep-filter-in-dbs-ams)
 + [Including tables in replication](#rep-filter-in-tables-ams)
 + [Including tables in replication with wildcard characters](#rep-filter-in-tables-wildcards-ams)
-+ [Escaping wildcard characters in names](#rep-filter-escape-wildcards-ams)
 + [Excluding databases from replication](#rep-filter-ex-dbs-ams)
 + [Excluding tables from replication](#rep-filter-ex-tables-ams)
 + [Excluding tables from replication using wildcard characters](#rep-filter-ex-tables-wildcards-ams)<a name="rep-filter-in-dbs-ams"></a>
@@ -175,16 +172,16 @@ The following example includes the `mydb1` and `mydb2` databases in replication\
 For Linux, macOS, or Unix:  
 
 ```
-aws rds modify-db-parameter-group \
-  --db-parameter-group-name myparametergroup \
-  --parameters "[{"ParameterName": "replicate-do-db", "ParameterValue": "mydb1,mydb2", "ApplyMethod":"immediate"}]"
+aws rds modify-db-cluster-parameter-group \
+  --db-cluster-parameter-group-name myparametergroup \
+  --parameters "ParameterName=replicate-do-db,ParameterValue='mydb1,mydb2',ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
-aws rds modify-db-parameter-group ^
-  --db-parameter-group-name myparametergroup ^
-  --parameters "[{"ParameterName": "replicate-do-db", "ParameterValue": "mydb1,mydb2", "ApplyMethod":"immediate"}]"
+aws rds modify-db-cluster-parameter-group ^
+  --db-cluster-parameter-group-name myparametergroup ^
+  --parameters "ParameterName=replicate-do-db,ParameterValue='mydb1,mydb2',ApplyMethod=immediate"
 ```<a name="rep-filter-in-tables-ams"></a>
 
 **Example Including tables in replication**  
@@ -192,102 +189,84 @@ The following example includes the `table1` and `table2` tables in database `myd
 For Linux, macOS, or Unix:  
 
 ```
-aws rds modify-db-parameter-group \
-  --db-parameter-group-name myparametergroup \
-  --parameters "[{"ParameterName": "replicate-do-table", "ParameterValue": "mydb1.table1,mydb1.table2", "ApplyMethod":"immediate"}]"
+aws rds modify-db-cluster-parameter-group \
+  --db-cluster-parameter-group-name myparametergroup \
+  --parameters "ParameterName=replicate-do-table,ParameterValue='mydb1.table1,mydb1.table2',ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
-aws rds modify-db-parameter-group ^
-  --db-parameter-group-name myparametergroup ^
-  --parameters "[{"ParameterName": "replicate-do-table", "ParameterValue": "mydb1.table1,mydb1.table2", "ApplyMethod":"immediate"}]"
+aws rds modify-db-cluster-parameter-group ^
+  --db-cluster-parameter-group-name myparametergroup ^
+  --parameters "ParameterName=replicate-do-table,ParameterValue='mydb1.table1,mydb1.table2',ApplyMethod=immediate"
 ```<a name="rep-filter-in-tables-wildcards-ams"></a>
 
 **Example Including tables in replication using wildcard characters**  
-The following example includes tables with names that begin with `orders` and `returns` in database `mydb` in replication\.  
+The following example includes tables with names that begin with `order` and `return` in database `mydb` in replication\.  
 For Linux, macOS, or Unix:  
 
 ```
-aws rds modify-db-parameter-group \
-  --db-parameter-group-name myparametergroup \
-  --parameters "[{"ParameterName": "replicate-wild-do-table", "ParameterValue": "mydb.orders%,mydb.returns%", "ApplyMethod":"immediate"}]"
+aws rds modify-db-cluster-parameter-group \
+  --db-cluster-parameter-group-name myparametergroup \
+  --parameters "ParameterName=replicate-wild-do-table,ParameterValue='mydb.order%,mydb.return%',ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
-aws rds modify-db-parameter-group ^
-  --db-parameter-group-name myparametergroup ^
-  --parameters "[{"ParameterName": "replicate-wild-do-table", "ParameterValue": "mydb.orders%,mydb.returns%", "ApplyMethod":"immediate"}]"
-```<a name="rep-filter-escape-wildcards-ams"></a>
-
-**Example Escaping wildcard characters in names**  
-The following example shows you how to use the escape character `\` to escape a wildcard character that is part of a name\.   
-Assume that you have several table names in database `mydb1` that start with `my_table`, and you want to include these tables in replication\. The table names include an underscore, which is also a wildcard character, so the example escapes the underscore in the table names\.  
-For Linux, macOS, or Unix:  
-
-```
-aws rds modify-db-parameter-group \
-  --db-parameter-group-name myparametergroup \
-  --parameters "[{"ParameterName": "replicate-wild-do-table", "ParameterValue": "my\_table%", "ApplyMethod":"immediate"}]"
-```
-For Windows:  
-
-```
-aws rds modify-db-parameter-group ^
-  --db-parameter-group-name myparametergroup ^
-  --parameters "[{"ParameterName": "replicate-wild-do-table", "ParameterValue": "my\_table%", "ApplyMethod":"immediate"}]"
+aws rds modify-db-cluster-parameter-group ^
+  --db-cluster-parameter-group-name myparametergroup ^
+  --parameters "ParameterName=replicate-wild-do-table,ParameterValue='mydb.order%,mydb.return%',ApplyMethod=immediate"
 ```<a name="rep-filter-ex-dbs-ams"></a>
 
 **Example Excluding databases from replication**  
-The following example excludes the `mydb1` and `mydb2` databases from replication\.  
+The following example excludes the `mydb5` and `mydb6` databases from replication\.  
 For Linux, macOS, or Unix:  
 
 ```
-aws rds modify-db-parameter-group \
-  --db-parameter-group-name myparametergroup \
-  --parameters "[{"ParameterName": "replicate-ignore-db", "ParameterValue": "mydb1,mydb2", "ApplyMethod":"immediate"}]"
+aws rds modify-db-cluster-parameter-group \
+  --db-cluster-parameter-group-name myparametergroup \
+  --parameters "ParameterName=replicate-ignore-db,ParameterValue='mydb5,mydb6',ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
-aws rds modify-db-parameter-group ^
-  --db-parameter-group-name myparametergroup ^
-  --parameters "[{"ParameterName": "replicate-ignore-db", "ParameterValue": "mydb1,mydb2", "ApplyMethod":"immediate"}]"
+aws rds modify-db-cluster-parameter-group ^
+  --db-cluster-parameter-group-name myparametergroup ^
+  --parameters "ParameterName=replicate-ignore-db,ParameterValue='mydb5,mydb6,ApplyMethod=immediate"
 ```<a name="rep-filter-ex-tables-ams"></a>
 
 **Example Excluding tables from replication**  
-The following example excludes tables `table1` and `table2` in database `mydb1` from replication\.  
+The following example excludes tables `table1` in database `mydb5` and `table2` in database `mydb6` from replication\.  
 For Linux, macOS, or Unix:  
 
 ```
-aws rds modify-db-parameter-group \
-  --db-parameter-group-name myparametergroup \
-  --parameters "[{"ParameterName": "replicate-ignore-table", "ParameterValue": "mydb1.table1,mydb1.table2", "ApplyMethod":"immediate"}]"
+aws rds modify-db-cluster-parameter-group \
+  --db-cluster-parameter-group-name myparametergroup \
+  --parameters "ParameterName=replicate-ignore-table,ParameterValue='mydb5.table1,mydb6.table2',ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
-aws rds modify-db-parameter-group ^
-  --db-parameter-group-name myparametergroup ^
-  --parameters "[{"ParameterName": "replicate-ignore-table", "ParameterValue": "mydb1.table1,mydb1.table2", "ApplyMethod":"immediate"}]"
+aws rds modify-db-cluster-parameter-group ^
+  --db-cluster-parameter-group-name myparametergroup ^
+  --parameters "ParameterName=replicate-ignore-table,ParameterValue='mydb5.table1,mydb6.table2',ApplyMethod=immediate"
 ```<a name="rep-filter-ex-tables-wildcards-ams"></a>
 
 **Example Excluding tables from replication using wildcard characters**  
-The following example excludes tables with names that begin with `orders` and `returns` in database `mydb` from replication\.  
+The following example excludes tables with names that begin with `order` and `return` in database `mydb7` from replication\.  
 For Linux, macOS, or Unix:  
 
 ```
-aws rds modify-db-parameter-group \
-  --db-parameter-group-name myparametergroup \
-  --parameters "[{"ParameterName": "replicate-wild-ignore-table", "ParameterValue": "mydb.orders%,mydb.returns%", "ApplyMethod":"immediate"}]"
+aws rds modify-db-cluster-parameter-group \
+  --db-cluster-parameter-group-name myparametergroup \
+  --parameters "ParameterName=replicate-wild-ignore-table,ParameterValue='mydb7.order%,mydb7.return%',ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
-aws rds modify-db-parameter-group ^
-  --db-parameter-group-name myparametergroup ^
-  --parameters "[{"ParameterName": "replicate-wild-ignore-table", "ParameterValue": "mydb.orders%,mydb.returns%", "ApplyMethod":"immediate"}]"
+aws rds modify-db-cluster-parameter-group ^
+  --db-cluster-parameter-group-name myparametergroup ^
+  --parameters "ParameterName=replicate-wild-ignore-table,ParameterValue='mydb7.order%,mydb7.return%',ApplyMethod=immediate"
 ```
 
 ### Viewing the replication filters for a read replica<a name="AuroraMySQL.Replication.Filters.Viewing"></a>

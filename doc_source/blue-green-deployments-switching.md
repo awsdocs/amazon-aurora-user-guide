@@ -7,6 +7,7 @@ A *switchover* promotes the DB cluster, including its DB instances, in the green
 + [Switchover guardrails](#blue-green-deployments-switching-guardrails)
 + [Switchover actions](#blue-green-deployments-switching-actions)
 + [Switchover best practices](#blue-green-deployments-switching-best-practices)
++ [Verifying CloudWatch metrics before switchover](#blue-green-deployments-switching-over-cloudwatch)
 + [Switching over a blue/green deployment](#blue-green-deployments-switching-over)
 + [After switchover](#blue-green-deployments-switching-after)
 
@@ -62,12 +63,22 @@ If the switchover starts and then stops before finishing for any reason, then an
 
 Before you switchover, we strongly recommend that you adhere to best practices by completing the following tasks:
 + Thoroughly test the resources in the green environment\. Make sure they function properly and efficiently\.
++ Monitor relevant Amazon CloudWatch metrics\. For more information, see [Verifying CloudWatch metrics before switchover](#blue-green-deployments-switching-over-cloudwatch)\.
 + Identify a time when traﬃc is lowest on your production environment\. During the switchover, writes are cut oﬀ from the databases in both environments\. Long\-running transactions, such as active DDLs can, increase your switchover time, resulting in longer downtime for your production workloads\.
 + Make sure the DB cluster and DB instances in both environments are in `Available` state\.
 + Make sure the DB cluster in the green environment is healthy and replicating\.
 
 **Note**  
 During a switchover, you can't modify any DB cluster included in the switchover\.
+
+## Verifying CloudWatch metrics before switchover<a name="blue-green-deployments-switching-over-cloudwatch"></a>
+
+Before you switch over a blue/green deployment, we recommend that you check the values of the following metrics within Amazon CloudWatch\.
++ `AuroraBinlogReplicaLag` – Use this metric to identify the current replication lag on the green environment\. To reduce downtime, make sure that this value is close to zero before you switch over\.
++ `DatabaseConnections` – Use this metric to estimate the level of activity on the blue/green deployment, and make sure that the value is at an acceptable level for your deployment before you switch over\. If Performance Insights is turned on, `DBLoad` is a more accurate metric\.
++ `ActiveTransactions` – If `innodb_monitor_enable` is set to `all` in the DB parameter group for any of your DB instances, use this metric to see if there's a high number of active transactions that might block switchover\.
+
+For more information about these metrics, see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md)\.
 
 ## Switching over a blue/green deployment<a name="blue-green-deployments-switching-over"></a>
 

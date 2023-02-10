@@ -27,11 +27,13 @@ Some Aurora MySQL features are available for certain combinations of AWS Region 
 
 ## Instance class support<a name="AuroraMySQL.mysql80-instance-classes"></a>
 
- Aurora MySQL version 3 supports a different set of instance classes than Aurora MySQL version 2 does: 
-+  For larger instances, you can use the modern instance classes such as `db.r5`, `db.r6g`, and `db.x2g`\. 
-+  For smaller instances, you can use the modern instance classes such as `db.t3` and `db.t4g`\. 
+Aurora MySQL version 3 supports a different set of instance classes from Aurora MySQL version 2:
++ For larger instances, you can use the modern instance classes such as `db.r5`, `db.r6g`, and `db.x2g`\.
++ For smaller instances, you can use the modern instance classes such as `db.t3` and `db.t4g`\.
+**Note**  
+We recommend using the T DB instance classes only for development and test servers, or other non\-production servers\. For more details on the T instance classes, see [Using T instance classes for development and testing](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.T2Medium)\.
 
- The following instance classes from Aurora MySQL version 2 aren't available for Aurora MySQL version 3: 
+The following instance classes from Aurora MySQL version 2 aren't available for Aurora MySQL version 3:
 +  `db.r4` 
 +  `db.r3` 
 +  `db.t3.small` 

@@ -12,7 +12,7 @@ The new DB instance that you create must match the specifications of the reserve
 
 If the specifications of the new DB instance match an existing reserved DB instance for your account, you are billed at the discounted rate offered for the reserved DB instance\. Otherwise, the DB instance is billed at an on\-demand rate\. 
 
-You can modify a reserved DB instance\. If the modification is within the specifications of the reserved DB instance, part or all of the discount still applies to the modified DB instance\. If the modification is outside the specifications, such as changing the instance class, the discount no longer applies\. For more information, see [Size\-flexible reserved DB instances](#USER_WorkingWithReservedDBInstances.SizeFlexible)\.
+You can modify a DB instance that you're using as a reserved DB instance\. If the modification is within the specifications of the reserved DB instance, part or all of the discount still applies to the modified DB instance\. If the modification is outside the specifications, such as changing the instance class, the discount no longer applies\. For more information, see [Size\-flexible reserved DB instances](#USER_WorkingWithReservedDBInstances.SizeFlexible)\.
 
 For more information about reserved DB instances, including pricing, see [Amazon RDS reserved instances](http://aws.amazon.com/rds/reserved-instances/#2)\.
 
@@ -68,6 +68,9 @@ For example, suppose that you purchase a `db.t2.medium` reserved DB instance, an
 Alternatively, if you have one `db.t2.large` instance running in your account in the same AWS Region, the billing benefit is applied to 50 percent of the usage of the DB instance\. 
 
 ![\[Applying a reserved DB instance in part to a larger DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/ri-db-instance-flex-partial.png)
+
+**Note**  
+We recommend using the T DB instance classes only for development and test servers, or other non\-production servers\. For more details on the T instance classes, see [DB instance class types](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Types)\.
 
 ### Reserved DB instance billing example<a name="USER_WorkingWithReservedDBInstances.BillingExample"></a>
 

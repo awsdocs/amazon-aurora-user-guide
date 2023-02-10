@@ -14,7 +14,10 @@ The following section discusses managing performance and scaling for an Amazon A
 
 You can scale Aurora PostgreSQL DB instances in two ways, instance scaling and read scaling\. For more information about read scaling, see [Read scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.ReadScaling)\.
 
-You can scale your Aurora PostgreSQL DB cluster by modifying the DB instance class for each DB instance in the DB cluster\. Aurora PostgreSQL supports several DB instance classes optimized for Aurora\. Don't use db\.t2 or db\.t3 instance classes for larger Aurora clusters of size greater than 40 terabytes \(TB\)\. 
+You can scale your Aurora PostgreSQL DB cluster by modifying the DB instance class for each DB instance in the DB cluster\. Aurora PostgreSQL supports several DB instance classes optimized for Aurora\. Don't use db\.t2 or db\.t3 instance classes for larger Aurora clusters of size greater than 40 terabytes \(TB\)\.
+
+**Note**  
+We recommend using the T DB instance classes only for development and test servers, or other non\-production servers\. For more details on the T instance classes, see [DB instance class types](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Types)\.
 
 Scaling isn't instantaneous\. It can take 15 minutes or more to complete the change to a different DB instance class\. If you use this approach to modify the DB instance class, you apply the change during the next scheduled maintenance window \(rather than immediately\) to avoid affecting users\. 
 

@@ -25,7 +25,7 @@ By design, the error logs are filtered so that only unexpected events such as er
 
 Aurora MySQL writes `mysql-error.log` to disk every 5 minutes\. It appends the contents of the log to `mysql-error-running.log`\.
 
-Aurora MySQL rotates the `mysql-error-running.log` file every hour\. It removes the audit, general, slow query, and SDK logs after either 24 hours or when 15% of storage has been consumed\.
+Aurora MySQL rotates the `mysql-error-running.log` file every hour\.
 
 **Note**  
 The log retention period is different between Amazon RDS and Aurora\.
@@ -58,6 +58,7 @@ Audit logging for Aurora MySQL is called Advanced Auditing\. To turn on Advanced
 
 When logging is enabled, Amazon Aurora rotates or deletes log files at regular intervals\. This measure is a precaution to reduce the possibility of a large log file either blocking database use or affecting performance\. Aurora MySQL handles rotation and deletion as follows:
 + The Aurora MySQL error log file sizes are constrained to no more than 15 percent of the local storage for a DB instance\. To maintain this threshold, logs are automatically rotated every hour\. Aurora MySQL removes logs after 30 days or when 15% of disk space is reached\. If the combined log file size exceeds the threshold after removing old log files, then the oldest log files are deleted until the log file size no longer exceeds the threshold\.
++ Aurora MySQL removes the audit, general, and slow query logs after either 24 hours or when 15% of storage has been consumed\.
 + When `FILE` logging is enabled, general log and slow query log files are examined every hour and log files more than 24 hours old are deleted\. In some cases, the remaining combined log file size after the deletion might exceed the threshold of 15 percent of a DB instance's local space\. In these cases, the oldest log files are deleted until the log file size no longer exceeds the threshold\.
 + When `TABLE` logging is enabled, log tables aren't rotated or deleted\. Log tables are truncated when the size of all logs combined is too large\. You can subscribe to the `low_free_storage` event to be notified when log tables should be manually rotated or deleted to free up space\. For more information, see [Working with Amazon RDS event notification](USER_Events.md)\.
 

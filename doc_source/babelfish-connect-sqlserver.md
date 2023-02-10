@@ -3,7 +3,7 @@
 You can use a SQL Server client to connect with Babelfish on the TDS port\. As of Babelfish 2\.1\.0 and higher releases, you can use the SSMS Object Explorer or the SSMS Query Editor to connect to your Babelfish cluster\. 
 
 **Limitations**
-+ Using `PARSE` to check SQL syntax doesn't work as it should\. Rather than checking the syntax without running the query, the `PARSE` command runs the query but doesn't display any results\. Using the SMSS <Ctrl><F5> key combination to check syntax has the same anomalous behavior, that is, Babelfish unexpectedly runs the query without providing any output\. 
++ In Babelfish 2\.1\.0 and older versions, using `PARSE` to check SQL syntax doesn't work as it should\. Rather than checking the syntax without running the query, the `PARSE` command runs the query but doesn't display any results\. Using the SMSS <Ctrl><F5> key combination to check syntax has the same anomalous behavior, that is, Babelfish unexpectedly runs the query without providing any output\. 
 + Babelfish doesn't support MARS \(Multiple Active Result Sets\)\. Be sure that any client applications that you use to connect to Babelfish aren't set to use MARS\. 
 + For Babelfish 1\.3\.0 and older versions, only the Query Editor is supported for SSMS\. To use SSMS with Babelfish, be sure to open the Query Editor connection dialog in SSMS, and not the Object Explorer\. If the Object Explorer dialog does open, cancel the dialog and re\-open the Query Editor\. In the following image, you can find the menu options to choose when connecting to Babelfish 1\.3\.0 or older versions\.  
 ![\[\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/babelfish_connect_ssms.png)

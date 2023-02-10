@@ -76,8 +76,8 @@ aurora_version
 |  PostgreSQL 10  |  Aurora PostgreSQL 2\. Applies to PostgreSQL 10\.17 and older versions only\. For version 10\.18 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in patch location\.  | 
 |  PostgreSQL 11  |  Aurora PostgreSQL 3\. Applies to PostgreSQL 11\.12 and older versions only\. For version 11\.13 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location\.  | 
 |  PostgreSQL 12  |  Aurora PostgreSQL 4\. Applies to PostgreSQL 12\.7 and older versions only\. For version 12\.8 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location\. | 
-|  PostgreSQL 13  | Aurora PostgreSQL 4\. Applies to PostgreSQL 13\.2 and older versions only\. For version 13\.3 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location\.  | 
-|  PostgreSQL 14  | Aurora PostgreSQL 14\.3\. The Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location when patches to Aurora are released\. | 
+|  PostgreSQL 13  | Aurora PostgreSQL 13\. For version 13\.3 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location when patches to Aurora are released\. | 
+|  PostgreSQL 14  | Aurora PostgreSQL 14\.3 and higher\. The Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location when patches to Aurora are released\. | 
 
 ## Amazon Aurora minor versions<a name="Aurora.VersionPolicy.MinorVersions"></a>
 

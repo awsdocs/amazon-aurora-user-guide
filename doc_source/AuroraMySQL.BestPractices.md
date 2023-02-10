@@ -48,7 +48,7 @@ You can apply the following best practices to improve the performance and scalab
 
 ### Using T instance classes for development and testing<a name="AuroraMySQL.BestPractices.T2Medium"></a>
 
-Amazon Aurora MySQL instances that use the `db.t2`, `db.t3`, or `db.t4g` DB instance classes are best suited for applications that do not support a high workload for an extended amount of time\. The T instances are designed to provide moderate baseline performance and the capability to burst to significantly higher performance as required by your workload\. They are intended for workloads that don't use the full CPU often or consistently, but occasionally need to burst\. We recommend only using the T DB instance classes for development and test servers, or other non\-production servers\. For more details on the T instance classes, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html)\.
+Amazon Aurora MySQL instances that use the `db.t2`, `db.t3`, or `db.t4g` DB instance classes are best suited for applications that do not support a high workload for an extended amount of time\. The T instances are designed to provide moderate baseline performance and the capability to burst to significantly higher performance as required by your workload\. They are intended for workloads that don't use the full CPU often or consistently, but occasionally need to burst\. We recommend using the T DB instance classes only for development and test servers, or other non\-production servers\. For more details on the T instance classes, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html)\.
 
 If your Aurora cluster is larger than 40 TB, don't use the T instance classes\. When your database has a large volume of data, the memory overhead for managing schema objects can exceed the capacity of a T instance\.
 
@@ -58,8 +58,8 @@ Don't enable the MySQL Performance Schema on Amazon Aurora MySQL T instances\. I
  If your database is sometimes idle but at other times has a substantial workload, you can use Aurora Serverless v2 as an alternative to T instances\. With Aurora Serverless v2, you define a capacity range and Aurora automatically scales your database up or down depending on the current workload\. For usage details, see [Using Aurora Serverless v2](aurora-serverless-v2.md)\. For the database engine versions that you can use with Aurora Serverless v2, see [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md)\. 
 
 When you use a T instance as a DB instance in an Aurora MySQL DB cluster, we recommend the following:
-+ If you use a T instance as a DB instance class in your DB cluster, use the same DB instance class for all instances in your DB cluster\. For example, if you use `db.t2.medium` for your writer instance, then we recommend that you use `db.t2.medium` for your reader instances also\.
-+  Don't adjust any memory\-related configuration settings, such as `innodb_buffer_pool_size`\. Aurora uses a highly tuned set of default values for memory buffers on T instances\. These special defaults are needed for Aurora to run on memory\-constrained instances\. If you change any memory\-related settings on a T instance, you are much more likely to encounter out\-of\-memory conditions, even if your change is intended to increase buffer sizes\. 
++ Use the same DB instance class for all instances in your DB cluster\. For example, if you use `db.t2.medium` for your writer instance, then we recommend that you use `db.t2.medium` for your reader instances also\.
++ Don't adjust any memory\-related configuration settings, such as `innodb_buffer_pool_size`\. Aurora uses a highly tuned set of default values for memory buffers on T instances\. These special defaults are needed for Aurora to run on memory\-constrained instances\. If you change any memory\-related settings on a T instance, you are much more likely to encounter out\-of\-memory conditions, even if your change is intended to increase buffer sizes\.
 + Monitor your CPU Credit Balance \(`CPUCreditBalance`\) to ensure that it is at a sustainable level\. That is, CPU credits are being accumulated at the same rate as they are being used\.
 
   When you have exhausted the CPU credits for an instance, you see an immediate drop in the available CPU and an increase in the read and write latency for the instance\. This situation results in a severe decrease in the overall performance of the instance\.
@@ -189,20 +189,20 @@ Single\-table updates or deletes are supported\.
 
 #### Enabling hash joins<a name="Aurora.BestPractices.HashJoin.Enabling"></a>
 
-To enable hash joins, set the MySQL server variable `optimizer_switch` to `hash_join=on` \(Aurora MySQL version 1 and 2\) or ` block_nested_loop=on` \(Aurora MySQL version 3\)\. Hash joins are turned on by default in Aurora MySQL version 3\. This optimization is turned off by default in Aurora MySQL version 1 and 2\. The following example illustrates how to enable hash joins\. You can issue the statement `select @@optimizer_switch` first to see what other settings are present in the `SET` parameter string\. Updating one setting in the `optimizer_switch` parameter doesn't erase or modify the other settings\.
+To enable hash joins:
++ Aurora MySQL version 1 and 2 – Set the DB parameter or DB cluster parameter `aurora_disable_hash_join` to `0`\. Turning off `aurora_disable_hash_join` sets the value of `optimizer_switch` to `hash_join=on`\.
++ Aurora MySQL version 3 – Set the MySQL server parameter `optimizer_switch` to `block_nested_loop=on`\.
+
+Hash joins are turned on by default in Aurora MySQL version 3 and turned off by default in Aurora MySQL version 1 and 2\. The following example illustrates how to enable hash joins for Aurora MySQL version 3\. You can issue the statement `select @@optimizer_switch` first to see what other settings are present in the `SET` parameter string\. Updating one setting in the `optimizer_switch` parameter doesn't erase or modify the other settings\.
 
 ```
-For Aurora MySQL version 1 and 2:
-mysql> SET optimizer_switch='hash_join=on';
-
-For Aurora MySQL version 3:
 mysql> SET optimizer_switch='block_nested_loop=on';
 ```
 
 **Note**  
- For Aurora MySQL version 3, hash join support is available in all minor versions and is turned on by default\.   
- For Aurora MySQL version 2, hash join support is available in version 2\.06 and higher\. In Aurora MySQL version 2, the hash join feature is always controlled by the `optimizer_switch` value\.   
- Prior to Aurora MySQL version 1\.22, the way to enable hash joins in Aurora MySQL version 1 is by enabling the `aurora_lab_mode` session\-level setting\. In those Aurora MySQL versions, the `optimizer_switch` setting for hash joins is enabled by default and you only need to enable `aurora_lab_mode`\. 
+For Aurora MySQL version 3, hash join support is available in all minor versions and is turned on by default\.  
+For Aurora MySQL version 2, hash join support is available in version 2\.06 and higher\. In Aurora MySQL version 2, the hash join feature is always controlled by the `aurora_disable_hash_join` value\.  
+Before Aurora MySQL version 1\.22, the way to enable hash joins in Aurora MySQL version 1 is by enabling the `aurora_lab_mode` session\-level setting\. In those Aurora MySQL versions, the `optimizer_switch` setting for hash joins is enabled by default and you only need to enable `aurora_lab_mode`\.
 
 With this setting, the optimizer chooses to use a hash join based on cost, query characteristics, and resource availability\. If the cost estimation is incorrect, you can force the optimizer to choose a hash join\. You do so by setting `hash_join_cost_based`, a MySQL server variable, to `off`\. The following example illustrates how to force the optimizer to choose a hash join\.
 

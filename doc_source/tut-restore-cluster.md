@@ -40,7 +40,9 @@ When you restore a DB cluster from a snapshot using the AWS Management Console, 
 
 1. Choose the **DB instance class**\.
 
-   For this tutorial, choose **Burstable classes \(includes t classes\)**, and then choose **db\.t3\.medium**\.  
+   For this tutorial, choose **Burstable classes \(includes t classes\)**, and then choose **db\.t3\.medium**\.
+**Note**  
+We recommend using the T DB instance classes only for development and test servers, or other non\-production servers\. For more details on the T instance classes, see [DB instance class types](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Types)\.  
 ![\[Instance configuration\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/tut-restore-cluster3.png)
 
 1. For **Database authentication**, use the default setting\.
@@ -177,6 +179,8 @@ To create the primary \(writer\) DB instance, you use the `create-db-instance` c
 + `--db-cluster-identifier` – The name of the restored DB cluster\.
 + `--db-instance-identifier` – The name of the primary DB instance\.
 + `--db-instance-class` – The instance class of the primary DB instance\. In this example, we use `db.t3.medium`\.
+**Note**  
+We recommend using the T DB instance classes only for development and test servers, or other non\-production servers\. For more details on the T instance classes, see [DB instance class types](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Types)\.
 + `--engine` – The database engine of the primary DB instance\. It must be the same database engine as the restored DB cluster uses\.
 
   The choices are the following:

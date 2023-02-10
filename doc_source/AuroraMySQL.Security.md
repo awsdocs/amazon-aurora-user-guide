@@ -7,6 +7,8 @@ Security for Amazon Aurora MySQL is managed at three levels:
 + Make sure to create Aurora MySQL DB clusters in a virtual public cloud \(VPC\) based on the Amazon VPC service\. To control which devices and Amazon EC2 instances can open connections to the endpoint and port of the DB instance for Aurora MySQL DB clusters in a VPC, use a VPC security group\. You can make these endpoint and port connections by using Secure Sockets Layer \(SSL\)\. In addition, firewall rules at your company can control whether devices running at your company can open connections to a DB instance\. For more information on VPCs, see [Amazon VPC VPCs and Amazon Aurora](USER_VPC.md)\.
 
   The supported VPC tenancy depends on the DB instance class used by your Aurora MySQL DB clusters\. With `default` VPC tenancy, the VPC runs on shared hardware\. With `dedicated` VPC tenancy, the VPC runs on a dedicated hardware instance\. The burstable performance DB instance classes support default VPC tenancy only\. The burstable performance DB instance classes include the db\.t2, db\.t3, and db\.t4g DB instance classes\. All other Aurora MySQL DB instance classes support both default and dedicated VPC tenancy\.
+**Note**  
+We recommend using the T DB instance classes only for development and test servers, or other non\-production servers\. For more details on the T instance classes, see [Using T instance classes for development and testing](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.T2Medium)\.
 
   For more information about instance classes, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\. For more information about `default` and `dedicated` VPC tenancy, see [Dedicated instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html) in the *Amazon Elastic Compute Cloud User Guide*\.
 + To authenticate login and permissions for an Amazon Aurora MySQL DB cluster, you can take either of the following approaches, or a combination of them:
@@ -24,7 +26,9 @@ For more information, see [Security in Amazon Aurora](UsingWithRDS.md)\.
 
 When you create an Amazon Aurora MySQL DB instance, the master user has the default privileges listed in [Master user account privileges](UsingWithRDS.MasterAccounts.md)\.
 
-To provide management services for each DB cluster, the `rdsadmin` user is created when the DB cluster is created\. Attempting to drop, rename, change the password, or change privileges for the `rdsadmin` account results in an error\.
+To provide management services for each DB cluster, the `admin` and `rdsadmin` users are created when the DB cluster is created\. Attempting to drop, rename, change the password, or change privileges for the `rdsadmin` account results in an error\.
+
+In Aurora MySQL version 2 DB clusters, the `admin` and `rdsadmin` users are created when the DB cluster is created\. In Aurora MySQL version 3 DB clusters, the `admin`, `rdsadmin`, and `rds_superuser_role` users are created\.
 
 **Important**  
 We strongly recommend that you do not use the master user directly in your applications\. Instead, adhere to the best practice of using a database user created with the minimal privileges required for your application\.
@@ -57,7 +61,7 @@ You can require that all user connections to your Aurora MySQL DB cluster use SS
 You can set the `require_secure_transport` parameter value by updating the DB cluster parameter group for your DB cluster\. You don't need to reboot your DB cluster for the change to take effect\. For more information on parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 **Note**  
-The `require_secure_transport` parameter is only available for Aurora MySQL version 5\.7\. You can set this parameter in a custom DB cluster parameter group\. The parameter isn't available in DB instance parameter groups\.
+The `require_secure_transport` parameter is available for Aurora MySQL version 2 and 3\. You can set this parameter in a custom DB cluster parameter group\. The parameter isn't available in DB instance parameter groups\.
 
 When the `require_secure_transport` parameter is set to `ON` for a DB cluster, a database client can connect to it if it can establish an encrypted connection\. Otherwise, an error message similar to the following is returned to the client:
 
@@ -80,7 +84,7 @@ Aurora MySQL supports Transport Layer Security \(TLS\) versions 1\.0, 1\.1, and 
 
  Although the community edition of MySQL 8\.0 supports TLS 1\.3, the MySQL 8\.0\-compatible Aurora MySQL version 3 currently doesn't support TLS 1\.3\. 
 
-For an Aurora MySQL 5\.7 DB cluster, you can use the `tls_version` DB cluster parameter to indicate the permitted protocol versions\. Similar client parameters exist for most client tools or database drivers\. Some older clients might not support newer TLS versions\. By default, the DB cluster attempts to use the highest TLS protocol version allowed by both the server and client configuration\.
+For an Aurora MySQL version 2 DB cluster, you can use the `tls_version` DB cluster parameter to indicate the permitted protocol versions\. Similar client parameters exist for most client tools or database drivers\. Some older clients might not support newer TLS versions\. By default, the DB cluster attempts to use the highest TLS protocol version allowed by both the server and client configuration\.
 
 Set the `tls_version` DB cluster parameter to one of the following values:
 + `TLSv1.2` – Only the TLS version 1\.2 protocol is permitted for encrypted connections\.
@@ -156,17 +160,17 @@ Set the `ssl_cipher` parameter to a string of comma\-separated cipher values\. T
 | `DHE-RSA-AES256-SHA` | TLS 1\.0 | 3\.01\.0 and higher, all below 2\.11\.0 | 
 | `DHE-RSA-AES256-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, all below 2\.11\.0 | 
 | `DHE-RSA-AES256-GCM-SHA384` | TLS 1\.2 | 3\.01\.0 and higher, all below 2\.11\.0 | 
-| `ECDHE-RSA-AES128-SHA` | TLS 1\.0 | 3\.01\.0 and higher, 2\.09\.3 and higher | 
-| `ECDHE-RSA-AES128-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.09\.3 and higher | 
-| `ECDHE-RSA-AES128-GCM-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.09\.3 and higher | 
-| `ECDHE-RSA-AES256-SHA` | TLS 1\.0 | 3\.01\.0 and higher, 2\.09\.3 and higher | 
-| `ECDHE-RSA-AES256-SHA384` | TLS 1\.2 | 3\.01\.0 and higher, 2\.09\.3 and higher | 
-| `ECDHE-RSA-AES256-GCM-SHA384` | TLS 1\.2 | 3\.01\.0 and higher, 2\.09\.3 and higher | 
+| `ECDHE-RSA-AES128-SHA` | TLS 1\.0 | 3\.01\.0 and higher, 2\.09\.3 and higher, 2\.10\.2 and higher | 
+| `ECDHE-RSA-AES128-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.09\.3 and higher, 2\.10\.2 and higher | 
+| `ECDHE-RSA-AES128-GCM-SHA256` | TLS 1\.2 | 3\.01\.0 and higher, 2\.09\.3 and higher, 2\.10\.2 and higher | 
+| `ECDHE-RSA-AES256-SHA` | TLS 1\.0 | 3\.01\.0 and higher, 2\.09\.3 and higher, 2\.10\.2 and higher | 
+| `ECDHE-RSA-AES256-SHA384` | TLS 1\.2 | 3\.01\.0 and higher, 2\.09\.3 and higher, 2\.10\.2 and higher | 
+| `ECDHE-RSA-AES256-GCM-SHA384` | TLS 1\.2 | 3\.01\.0 and higher, 2\.09\.3 and higher, 2\.10\.2 and higher | 
 
 **Note**  
 `DHE-RSA` ciphers are only supported by Aurora MySQL versions before 2\.11\.0\. Versions 2\.11\.0 and higher support only `ECDHE` ciphers\.
 
-You can also use the [describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) CLI command to determine which cipher suites are currently supported for a specific parameter group family\. The following example shows how to get the allowed values for the `ssl_cipher` cluster parameter for Aurora MySQL 5\.7\.
+You can also use the [describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) CLI command to determine which cipher suites are currently supported for a specific parameter group family\. The following example shows how to get the allowed values for the `ssl_cipher` cluster parameter for Aurora MySQL version 2\.
 
 ```
 aws rds describe-engine-default-cluster-parameters --db-parameter-group-family aurora-mysql5.7

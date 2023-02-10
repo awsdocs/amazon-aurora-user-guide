@@ -42,6 +42,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `aurora_binlog_read_buffer_size`   |   Yes   |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. Removed from Aurora MySQL version 3\.   | 
 |   `aurora_binlog_replication_max_yield_seconds`   |   Yes   |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
 |   `aurora_binlog_use_large_read_buffer`   |   Yes   |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. Removed from Aurora MySQL version 3\.   | 
+|  `aurora_disable_hash_join`   |  Yes  |  Set this parameter to `ON` to turn off hash join optimization in Aurora MySQL versions 1\.23 and 2\.09 or higher\. It isn't supported for version 3\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
 |   `aurora_enable_replica_log_compression`   |   Yes   |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\. Removed from Aurora MySQL version 3\.   | 
 |   `aurora_enable_repl_bin_log_filtering`   |   Yes   |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\. Removed from Aurora MySQL version 3\.   | 
 |  `aurora_enable_staggered_replica_restart`  |  Yes  | This setting is available in Aurora MySQL versions 1 and 3, but it isn't used\. | 
@@ -129,7 +130,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `replicate-ignore-table`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
 |   `replicate-wild-do-table`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
 |   `replicate-wild-ignore-table`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `require_secure_transport`   |   Yes   |   For more information, see [Using SSL/TLS with Aurora MySQL DB clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.   | 
+|   `require_secure_transport`   |   Yes   |   This parameter applies to Aurora MySQL version 2 and 3\. For more information, see [Using SSL/TLS with Aurora MySQL DB clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.   | 
 |   `rpl_read_size`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
 |   `server_audit_events`   |   Yes   |    | 
 |   `server_audit_excl_users`   |   Yes   |    | 
@@ -153,6 +154,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 | --- | --- | --- | 
 |   `activate_all_roles_on_login`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
 |   `allow-suspicious-udfs`   |   No   |    | 
+|  `aurora_disable_hash_join`   |  Yes  |  Set this parameter to `ON` to turn off hash join optimization in Aurora MySQL versions 1\.23 and 2\.09 or higher\. It isn't supported for version 3\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
 |   `aurora_lab_mode`   |   Yes   |   For more information, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\. Removed from Aurora MySQL version 3\.   | 
 |   `aurora_oom_response`   |   Yes   |  This parameter is supported for Aurora MySQL version 1\.18 and higher, and version 2\.04\.5 and higher\. It isn't supported for version 3\. For more information, see [ Amazon Aurora MySQL out\-of\-memory issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.  | 
 |   `aurora_parallel_query`   |   Yes   |  Set to `ON` to turn on parallel query in Aurora MySQL versions 1\.23 and 2\.09 or higher\. The old `aurora_pq` parameter isn't used in these versions\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 

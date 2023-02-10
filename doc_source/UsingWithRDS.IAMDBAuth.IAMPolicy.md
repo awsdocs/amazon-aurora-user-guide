@@ -41,7 +41,9 @@ The example policy includes a single statement with the following elements:
 
   In this format, replace the following:
   + `region` is the AWS Region for the DB cluster\. In the example policy, the AWS Region is `us-east-2`\.
-  + `account-id` is the AWS account number for the DB cluster\. In the example policy, the account number is `1234567890`\.
+  + `account-id` is the AWS account number for the DB cluster\. In the example policy, the account number is `1234567890`\. The user must be in the same account as the account for the DB cluster\.
+
+    To perform cross\-account access, create an IAM role with the policy shown above in the account for the DB cluster and allow your other account to assume the role\. 
   + `DbClusterResourceId` is the identifier for the DB cluster\. This identifier is unique to an AWS Region and never changes\. In the example policy, the identifier is `cluster-ABCDEFGHIJKL01234`\.
 
     To find a DB cluster resource ID in the AWS Management Console for Amazon Aurora, choose the DB cluster to see its details\. Then choose the **Configuration** tab\. The **Resource ID** is shown in the **Configuration** section\.

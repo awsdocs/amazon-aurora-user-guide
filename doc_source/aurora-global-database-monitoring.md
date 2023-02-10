@@ -63,10 +63,10 @@ Only Aurora PostgreSQL supports the `aurora_global_db_status` and `aurora_global
    + **durability\_lag\_in\_msec** – The timestamp difference between the highest log sequence number written on a secondary DB cluster \(`highest_lsn_written`\) and the `highest_lsn_written` on the primary DB cluster\.
    + **rpo\_lag\_in\_msec** – The recovery point objective \(RPO\) lag\. This lag is the time difference between the most recent user transaction commit stored on a secondary DB cluster and the most recent user transaction commit stored on the primary DB cluster\.
    + **last\_lag\_calculation\_time** – The timestamp when values were last calculated for `durability_lag_in_msec` and `rpo_lag_in_msec`\.
-   + **feedback\_epoch** – The epoch the secondary DB cluster uses when it generates hot standby information\.
+   + **feedback\_epoch** – The epoch a secondary DB cluster uses when it generates hot standby information\.
 
-     *Hot standby *is when a DB cluster can connect and query while the server is in recovery or standby mode\. Hot standby feedback is information about the DB cluster when it's in hot standby\. For more information, see [Hot standby](https://www.postgresql.org/docs/current/hot-standby.html) in the PostgreSQL documentation\.
-   + **feedback\_xmin** – The minimum \(oldest\) active transaction ID used by the secondary DB cluster\.
+     *Hot standby* is when a DB cluster can connect and query while the server is in recovery or standby mode\. Hot standby feedback is information about the DB cluster when it's in hot standby\. For more information, see [Hot standby](https://www.postgresql.org/docs/current/hot-standby.html) in the PostgreSQL documentation\.
+   + **feedback\_xmin** – The minimum \(oldest\) active transaction ID used by a secondary DB cluster\.
 
 1. Use the `aurora_global_db_instance_status` function to list all secondary DB instances for both the primary DB cluster and secondary DB clusters\.
 
@@ -88,10 +88,10 @@ Only Aurora PostgreSQL supports the `aurora_global_db_status` and `aurora_global
    + **session\_id** – A unique identifier for the current session\.
    + **aws\_region** – The AWS Region that this DB instance is in\. For tables listing AWS Regions by engine, see [ Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html#Aurora.Overview.Availability)\.
    + **durable\_lsn** – The LSN made durable in storage\.
-   + **highest\_lsn\_rcvd** – The highest LSN received by the DB Instance from the writer DB Instance\.
+   + **highest\_lsn\_rcvd** – The highest LSN received by the DB instance from the writer DB instance\.
    + **feedback\_epoch** – The epoch the DB instance uses when it generates hot standby information\.
 
-     Hot standby is when a DB instance can connect and query while the server is in recovery or standby mode\. Hot standby feedback is information about the DB instance when it's in hot standby\. For more information, see the PostgreSQL documentation on [Hot standby](https://www.postgresql.org/docs/current/hot-standby.html)\.
+     *Hot standby* is when a DB instance can connect and query while the server is in recovery or standby mode\. Hot standby feedback is information about the DB instance when it's in hot standby\. For more information, see the PostgreSQL documentation on [Hot standby](https://www.postgresql.org/docs/current/hot-standby.html)\.
    + **feedback\_xmin** – The minimum \(oldest\) active transaction ID used by the DB instance\.
    + **oldest\_read\_view\_lsn** – The oldest LSN used by the DB instance to read from storage\.
    + **visibility\_lag\_in\_msec** – How far this DB instance is lagging behind the writer DB instance\.
@@ -104,4 +104,4 @@ psql> INSERT INTO table1 SELECT Large_Data_That_Takes_1_Hr_To_Insert;
 psql> COMMIT;
 ```
 
-In some cases, there might be a network disconnect between the primary DB cluster and the secondary DB cluster after the `BEGIN` statement\. If so, the secondary DB cluster's `replication_lag_in_msec` value starts increasing\. At the end of the `INSERT` statement, the `replication_lag_in_msec` value is 1 hour\. However, the `rpo_lag_in_msec` value is 0 because all the user data committed between the primary DB cluster and secondary DB cluster are still the same\. As soon as the `COMMIT` statement completes, the `rpo_lag_in_msec` value increases\. 
+In some cases, there might be a network disconnect between the primary DB cluster and the secondary DB cluster after the `BEGIN` statement\. If so, the secondary DB cluster's `durability_lag_in_msec` value starts increasing\. At the end of the `INSERT` statement, the `durability_lag_in_msec` value is 1 hour\. However, the `rpo_lag_in_msec` value is 0 because all the user data committed between the primary DB cluster and secondary DB cluster are still the same\. As soon as the `COMMIT` statement completes, the `rpo_lag_in_msec` value increases\.

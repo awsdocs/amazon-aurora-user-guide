@@ -27,7 +27,9 @@ Create an Amazon Aurora MySQL DB cluster that maintains the data used by a web a
 
 1. In the **Instance configuration** section, set these values:
    + **Burstable classes \(includes t classes\)**
-   + **db\.t3\.small** or **db\.t3\.medium**  
+   + **db\.t3\.small** or **db\.t3\.medium**
+**Note**  
+We recommend using the T DB instance classes only for development and test servers, or other non\-production servers\. For more details on the T instance classes, see [DB instance class types](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Types)\.  
 ![\[Instance configuration section\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Tutorial_WebServer_DB_instance_small_aurora.png)
 
 1. In the **Availability and durability** section, use the default values\.

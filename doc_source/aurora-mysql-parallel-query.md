@@ -137,7 +137,7 @@ Parallel query I/O costs for your query are metered at the storage layer, and wi
 
 ### Checking Aurora MySQL version compatibility for parallel query<a name="aurora-mysql-parallel-query-checking-compatibility"></a>
 
- To check which Aurora MySQL versions are compatible with parallel query clusters, use the `describe-db-engine-versions` AWS CLI command and check the value of the `SupportsParallelQuery` field\. The following code example shows how to check which combinations are available for parallel query clusters in a specified AWS Region\. Make sure to specify the full `--query` parameter string on a single line\. 
+To check which Aurora MySQL versions are compatible with parallel query clusters, use the `describe-db-engine-versions` AWS CLI command and check the value of the `SupportsParallelQuery` field\. The following code example shows how to check which combinations are available for parallel query clusters in a specified AWS Region\. Make sure to specify the full `--query` parameter string on a single line\.
 
 ```
 aws rds describe-db-engine-versions --region us-east-1 --engine aurora --query '*[]|[?SupportsParallelQuery == `true`].[EngineVersion]' --output text
@@ -145,31 +145,37 @@ aws rds describe-db-engine-versions --region us-east-1 --engine aurora --query '
 aws rds describe-db-engine-versions --region us-east-1 --engine aurora-mysql --query '*[]|[?SupportsParallelQuery == `true`].[EngineVersion]' --output text
 ```
 
- The preceding commands produce output similar to the following\. The output might vary depending on which Aurora MySQL versions are available in the specified AWS Region\. 
+The preceding commands produce output similar to the following\. The output might vary depending on which Aurora MySQL versions are available in the specified AWS Region\.
 
 ```
 5.6.10a
 5.6.mysql_aurora.1.19.0
-5.6.mysql_aurora.1.19.1
 5.6.mysql_aurora.1.19.2
-5.6.mysql_aurora.1.19.3
-5.6.mysql_aurora.1.19.3.1
-5.6.mysql_aurora.1.19.3.90
-5.6.mysql_aurora.1.19.4
-5.6.mysql_aurora.1.19.4.1
-5.6.mysql_aurora.1.19.4.2
-5.6.mysql_aurora.1.19.4.3
-5.6.mysql_aurora.1.19.4.4
-5.6.mysql_aurora.1.19.4.5
 5.6.mysql_aurora.1.19.5
-5.6.mysql_aurora.1.19.5.90
 5.6.mysql_aurora.1.19.6
 5.6.mysql_aurora.1.20.1
-5.6.mysql_aurora.1.22.0
 5.6.mysql_aurora.1.22.2
+5.6.mysql_aurora.1.22.3
 5.6.mysql_aurora.1.23.0
+5.6.mysql_aurora.1.23.1
+5.6.mysql_aurora.1.23.2
+5.6.mysql_aurora.1.23.3
+5.6.mysql_aurora.1.23.4
 
 5.7.mysql_aurora.2.09.0
+5.7.mysql_aurora.2.09.1
+5.7.mysql_aurora.2.09.2
+5.7.mysql_aurora.2.09.3
+5.7.mysql_aurora.2.10.0
+5.7.mysql_aurora.2.10.1
+5.7.mysql_aurora.2.10.2
+5.7.mysql_aurora.2.10.3
+5.7.mysql_aurora.2.11.0
+8.0.mysql_aurora.3.01.0
+8.0.mysql_aurora.3.01.1
+8.0.mysql_aurora.3.02.0
+8.0.mysql_aurora.3.02.1
+8.0.mysql_aurora.3.02.2
 ```
 
  After you start using parallel query with a cluster, you can monitor performance and remove obstacles to parallel query usage\. For those instructions, see [Performance tuning for parallel query](#aurora-mysql-parallel-query-performance)\. 
@@ -200,13 +206,13 @@ aws rds describe-db-engine-versions --region us-east-1 --engine aurora-mysql --q
 
 1. \(For older versions only\) For **Capacity type**, choose **Provisioned with Aurora parallel query enabled**\. The AWS Management Console only displays this choice when you select an Aurora MySQL version lower than 1\.23\. For Aurora MySQL 1\.23 or 2\.09 and higher, you don't need to make any special choice to make the cluster compatible with parallel query\.
 
-1. \(For recent versions only\) For **Additional configuration**, choose a parameter group that you created for **DB cluster parameter group**\. Using such a custom parameter group is required for Aurora MySQL 1\.23 or 2\.09 or 3\.1 and higher\. In your DB cluster parameter group, specify the parameter settings `aurora_parallel_query=ON` and `aurora_disable_hash_join=OFF`\. Doing so turns on parallel query for the cluster, and turns on the hash join optimization which works in combination with parallel query\. 
+1. \(For recent versions only\) For **Additional configuration**, choose a parameter group that you created for **DB cluster parameter group**\. Using such a custom parameter group is required for Aurora MySQL 1\.23 or 2\.09 and higher\. In your DB cluster parameter group, specify the parameter settings `aurora_parallel_query=ON` and `aurora_disable_hash_join=OFF`\. Doing so turns on parallel query for the cluster, and turns on the hash join optimization that works in combination with parallel query\.
 
 **To verify that a new cluster can use parallel query**
 
 1. Create a cluster using the preceding technique\.
 
-1. \(For Aurora MySQL version 2\.09 and higher minor versions, or Aurora MySQL version 3\) Check that the `aurora_parallel_query` configuration setting is true\.
+1. \(For Aurora MySQL version 2 or 3\) Check that the `aurora_parallel_query` configuration setting is true\.
 
    ```
    mysql> select @@aurora_parallel_query;
@@ -217,7 +223,7 @@ aws rds describe-db-engine-versions --region us-east-1 --engine aurora-mysql --q
    +-------------------------+
    ```
 
-1. \(For Aurora MySQL version 2\.09 and higher minor versions\) Check that the `aurora_disable_hash_join` setting is false\.
+1. \(For Aurora MySQL version 2\) Check that the `aurora_disable_hash_join` setting is false\.
 
    ```
    mysql> select @@aurora_disable_hash_join;
@@ -402,7 +408,7 @@ mysql> select @@aurora_pq;
 
 ### Turning on hash join for parallel query clusters<a name="aurora-mysql-parallel-query-enabling-hash-join"></a>
 
-Parallel query is typically used for the kinds of resource\-intensive queries that benefit from the hash join optimization\. Thus, it's helpful to ensure that hash joins are turned on for clusters where you plan to use parallel query\. For information about how to use hash joins effectively, see [Optimizing large Aurora MySQL join queries with hash joins](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
+Parallel query is typically used for the kinds of resource\-intensive queries that benefit from the hash join optimization\. Thus, it's helpful to make sure that hash joins are turned on for clusters where you plan to use parallel query\. For information about how to use hash joins effectively, see [Optimizing large Aurora MySQL join queries with hash joins](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
 
 ### Turning on and turning off parallel query using the console<a name="aurora-mysql-parallel-query-enabling-console"></a>
 
@@ -551,17 +557,15 @@ ORDER BY revenue DESC,
 +----+-------------+----------+------------+------+---------------+------+---------+------+----------+----------+----------------------------------------------------+
 ```
 
- You can turn on hash join at the session level by issuing the following statement\. Afterwards, try the `EXPLAIN` statement again\. 
+For Aurora MySQL version 3, you turn on hash join at the session level by issuing the following statement\.
 
 ```
-# For Aurora MySQL version 3:
 SET optimizer_switch='block_nested_loop=on';
-
-# For Aurora MySQL version 2.09 and higher:
-SET optimizer_switch='hash_join=on';
 ```
 
- For information about how to use hash joins effectively, see [Optimizing large Aurora MySQL join queries with hash joins](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\. 
+For Aurora MySQL version 1\.19 and higher and 2\.09 and higher, you set the `aurora_disable_hash_join` DB parameter or DB cluster parameter to `0` \(off\)\. Turning off `aurora_disable_hash_join` sets the value of `optimizer_switch` to `hash_join=on`\.
+
+After you turn on hash join, try running the `EXPLAIN` statement again\. For information about how to use hash joins effectively, see [Optimizing large Aurora MySQL join queries with hash joins](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
 
  With hash join turned on but parallel query turned off, the query might have a plan like the following, which uses hash join but not parallel query\. 
 

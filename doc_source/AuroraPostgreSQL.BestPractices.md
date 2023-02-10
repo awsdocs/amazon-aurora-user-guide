@@ -38,7 +38,7 @@ Sorting, indexing, and grouping operations start in working memory but often mus
   For more information about working memory, see [Resource Consumption](https://www.postgresql.org/docs/current/runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-MEMORY) in the PostgreSQL documentation\. 
 + Change the log retention period so that logs are stored for shorter timeframes\. To learn how, see [Aurora PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)\.
 
-For Aurora PostgreSQL DB clusters larger than 40 TB, don't use db\.t2, db\.t3, or db\.t4g instance classes\. For more information, see [DB instance class types](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Types)\.
+For Aurora PostgreSQL DB clusters larger than 40 TB, don't use db\.t2, db\.t3, or db\.t4g instance classes\. We recommend using the T DB instance classes only for development and test servers, or other non\-production servers\. For more information, see [DB instance class types](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Types)\.
 
 ## Avoiding slow performance, automatic restart, and failover for Aurora PostgreSQL DB instances<a name="AuroraPostgreSQL.BestPractices.Avoiding"></a>
 

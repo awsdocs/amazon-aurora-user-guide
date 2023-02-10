@@ -104,7 +104,7 @@ For a listing of the DB instance parameters for this same default DB cluster par
 | apg\_plan\_mgmt\.unapproved\_plan\_execution\_threshold | Estimated total plan cost below which an Unapproved plan will be executed\. | 0  | 
 | apg\_plan\_mgmt\.use\_plan\_baselines | Use only approved or fixed plans for managed statements\. | false  | 
 | application\_name | Sets the application name to be reported in statistics and logs\. | –  | 
-| array\_–s | Enable input of – elements in arrays\. | –  | 
+| array\_nulls | Enable input of NULL elements in arrays\. | –  | 
 | authentication\_timeout | \(s\) Sets the maximum allowed time to complete client authentication\. | –  | 
 | auto\_explain\.log\_analyze | Use EXPLAIN ANALYZE for plan logging\. | –  | 
 | auto\_explain\.log\_buffers | Log buffers usage\. | –  | 
@@ -425,7 +425,7 @@ For a listing of the DB instance parameters for this same default DB cluster par
 | track\_functions | Collects function\-level statistics on database activity\. | pl  | 
 | track\_io\_timing | Collects timing statistics on database IO activity\. | 1  | 
 | track\_wal\_io\_timing | Collects timing statistics for WAL I/O activity\. | –  | 
-| transform\_–\_equals | Treats expr=– as expr IS –\. | –  | 
+| transform\_null\_equals | Treats expr=NULL as expr IS NULL\. | –  | 
 | update\_process\_title | Updates the process title to show the active SQL command\. | –  | 
 | vacuum\_cost\_delay | \(ms\) Vacuum cost delay in milliseconds\. | –  | 
 | vacuum\_cost\_limit | Vacuum cost amount available before napping\. | –  | 

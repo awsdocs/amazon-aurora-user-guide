@@ -107,7 +107,7 @@ The user who deletes a blue/green deployment must have permissions to perform th
 
 ## Considerations for blue/green deployments<a name="blue-green-deployments-considerations"></a>
 
-Amazon RDS tracks resources in blue/green deployments with the `DbiResourceId` and `DbClusterResourceId` \(resource ID\) of each resource\. This resource ID is an AWS Region\-unique, immutable identifier for the resource\.
+Amazon RDS tracks resources in blue/green deployments with the `DbiResourceId` and `DbClusterResourceId` of each resource\. This resource ID is an AWS Region\-unique, immutable identifier for the resource\.
 
 The *resource* ID is separate from the DB *cluster*** ID:
 
@@ -124,6 +124,7 @@ After switching over a blue/green deployment, consider updating the resource IDs
   You can monitor a database with the same name after switchover, but it doesn't contain the data from before the switchover\.
 + If you use resource IDs in IAM policies, make sure you add the resource IDs of the newly promoted resources when necessary\. For more information, see [Identity and access management for Amazon Aurora](UsingWithRDS.IAM.md)\.
 + If you want to restore a manual DB cluster snapshot for a DB cluster that was part of a blue/green deployment, make sure you restore the correct DB cluster snapshot by examining the time when the snapshot was taken\. For more information, see [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
++ Amazon Aurora creates the green environment by *cloning* the underlying Aurora storage volume in the blue environment\. The green cluster volume only stores incremental changes made to the green environment\. If you delete the DB cluster in the blue environment, the size of the underlying Aurora storage volume in the green environment grows to the full size\. For more information, see [Cloning a volume for an Amazon Aurora DB cluster](Aurora.Managing.Clone.md)\.
 + When you add a DB instance to the DB cluster in the green environment of a blue/green deployment, the new DB instance won't replace a DB instance in the blue environment when you switch over\. However, the new DB instance is retained in the DB cluster and becomes a DB instance in the new production environment\.
 + When you delete a DB instance in the DB cluster in the green environment of a blue/green deployment, you can't create a new DB instance to replace it in the blue/green deployment\.
 
@@ -155,6 +156,8 @@ Feature availability and support varies across specific versions of each databas
 ## Limitations for blue/green deployments<a name="blue-green-deployments-limitations"></a>
 
 The following limitations apply to blue/green deployments:
++ Aurora MySQL versions 2\.08 and 2\.09 aren't supported target versions for blue/green deployments\.
++ If your cluster is running Aurora MySQL version 5\.6 and you use temporary tables in your workload, switchover might fail unexpectedly\. To avoid this issue, we recommend that you upgrade your cluster to version 1\.23\.1 or higher before you create a blue/green deployment\. Alternately, close the connections that use temporary tables before you start switchover\.
 + Blue/green deployments aren't supported for the following features:
   + Amazon RDS Proxy
   + Cross\-Region read replicas
