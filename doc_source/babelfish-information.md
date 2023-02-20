@@ -254,8 +254,6 @@ If the settings for the Babelfish parameters in the custom DB cluster parameter 
 **Tip**  
 Parameter groups are managed at the AWS Region level\. When you work with AWS CLI, you can configure with a default Region instead of specifying the `--region` in the command\. To learn more about using the AWS CLI, see [Quick setup](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html) in the *AWS Command Line Interface User Guide*\. 
 
-In the following examples, you can find the series of AWS CLI commands that create a new DB cluster parameter group for Aurora PostgreSQL version 14 and then modify several values to match the settings of the existing Babelfish DB cluster parameters\. 
-
 #### Performing major version upgrade<a name="babelfish-performing-major-version-upgrade"></a>
 
 1. Upgrade Aurora PostgreSQL DB cluster to a new major version\. For more information, see [Upgrading the Aurora PostgreSQL engine to a new major version](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.Upgrading.Manual)\.
@@ -312,7 +310,7 @@ Run the statements one by one to reset the sequence values\.
 
 #### Example: Upgrading the Babelfish DB cluster to a major release<a name="babelfish-information-upgrading-example"></a>
 
- The following procedure shows an example of upgrading an Aurora PostgreSQL 13\.6\.4 DB cluster running Babelfish version 1\.2\.2 to Aurora PostgreSQL 14\.6\. First, you create a custom DB cluster parameter group for Aurora PostgreSQL 14\. Next, you modify the parameter values to match those of your Aurora PostgreSQL version 13 source\. Finally, you perform the upgrade by modifying the source cluster\. For more information, see [DB cluster parameter group settings for Babelfish](babelfish-configuration.md)\. In that topic, you can also find information about using the AWS Management Console to perform the upgrade\.
+ In this example, you can find the series of AWS CLI commands that explains how to upgrade an Aurora PostgreSQL 13\.6\.4 DB cluster running Babelfish version 1\.2\.2 to Aurora PostgreSQL 14\.6\. First, you create a custom DB cluster parameter group for Aurora PostgreSQL 14\. Next, you modify the parameter values to match those of your Aurora PostgreSQL version 13 source\. Finally, you perform the upgrade by modifying the source cluster\. For more information, see [DB cluster parameter group settings for Babelfish](babelfish-configuration.md)\. In that topic, you can also find information about using the AWS Management Console to perform the upgrade\.
 
 Use the [create\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster-parameter-group.html) CLI command to create the DB cluster parameter group for the new version\.
 

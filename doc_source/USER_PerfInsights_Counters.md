@@ -201,7 +201,7 @@ Native metrics are defined by the database engine and not by Amazon Aurora\. You
 | xact\_commit | Transactions | Commits per second | db\.Transactions\.xact\_commit | 
 | xaxt\_rollback | Transactions | Rollbacks per second | db\.Transactions\.xact\_rollback | 
 | numbackends | User | Connections | db\.User\.numbackends | 
-| total\_auth\_attempts | User | Connections | db\.User\.total\_auth\_attempts | 
+| total\_auth\_attempts | User | Connections per minute | db\.User\.total\_auth\_attempts | 
 | archived\_count | WAL | Files per minute | db\.WAL\.archived\_count | 
 | archive\_failed\_count | WAL | Files per minute | db\.WAL\.archive\_failed\_count | 
 

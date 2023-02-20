@@ -73,6 +73,7 @@ The following limitations currently apply to Aurora global databases:
   For information about database activity streams, see [Monitoring Amazon Aurora with Database Activity Streams](DBActivityStreams.md)\.
 + The following limitations currently apply to upgrading Aurora global databases:
   + You can't apply a custom parameter group to the global database cluster while you're performing a major version upgrade of that Aurora global database\. You create your custom parameter groups in each Region of the global cluster and you apply them manually to the Regional clusters after the upgrade\.
+  + With an Aurora global database based on Aurora MySQL, you can't perform an in\-place upgrade from Aurora MySQL version 2 to version 3 if the `lower_case_table_names` parameter is turned on\. For more information on the methods that you can use, see [Major version upgrades](aurora-global-database-upgrade.md#aurora-global-database-upgrade.major)\.
   + With an Aurora global database based on Aurora PostgreSQL, you can't perform a major version upgrade of the Aurora DB engine if the recovery point objective \(RPO\) feature is turned on\. For information about the RPO feature, see [Managing RPOs for Aurora PostgreSQL–based global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
 
   For information about upgrading an Aurora global database, see [Upgrading an Amazon Aurora global database](aurora-global-database-upgrade.md)\.

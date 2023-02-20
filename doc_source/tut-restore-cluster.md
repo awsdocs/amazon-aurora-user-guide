@@ -8,7 +8,10 @@ In this tutorial, we also upgrade the restored DB cluster from Aurora MySQL vers
 
 ## Restoring a DB cluster from a DB cluster snapshot using the Amazon RDS console<a name="tut-restore-cluster.console"></a>
 
-When you restore a DB cluster from a snapshot using the AWS Management Console, the primary \(reader\) DB instance is also created\.
+When you restore a DB cluster from a snapshot using the AWS Management Console, the primary \(writer\) DB instance is also created\.
+
+**Note**  
+While the primary DB instance is being created, it appears as a reader instance, but after creation it's a writer instance\.
 
 **To restore a DB cluster from a DB cluster snapshot**
 
@@ -76,9 +79,9 @@ While the primary DB instance is being created, it appears as a reader instance,
 
 Restoring a DB cluster from a snapshot using the AWS CLI has two steps:
 
-1. Restore the DB cluster using the [restore\-db\-cluster\-from\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) command\.
+1. [Restoring the DB cluster](#tut-restore-cluster.CLI.restore) using the [restore\-db\-cluster\-from\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) command
 
-1. Create the primary \(writer\) DB instance using the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command\.
+1. [Creating the primary \(writer\) DB instance](#tut-restore-cluster.CLI.create) using the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command
 
 ### Restoring the DB cluster<a name="tut-restore-cluster.CLI.restore"></a>
 

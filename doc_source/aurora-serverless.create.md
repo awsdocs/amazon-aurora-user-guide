@@ -40,17 +40,15 @@ Use the following general procedure\. For more information on creating an Aurora
 
 1. Choose Amazon RDS from the AWS Services list\.
 
-1. Choose **Create database**\. 
+1. Choose **Create database**\.
 
 1. On the **Create database** page:
 
-   1. Choose **Standard Create** for the database creation method\.
+   1. Choose **Standard create** for the database creation method\.
 
-   1. Choose **Amazon Aurora** for the Engine type in the **Engine options** section\.
-
-   1. Choose **Amazon Aurora with MySQL compatibility** or **Amazon Aurora with PostgreSQL compatibility**, and continue creating the Aurora Serverless v1 DB cluster by using the steps from the following examples\.
-
-      If you choose a version of the DB engine that doesn't support Aurora Serverless v1, the **Serverless** option doesn't display\.
+   1. Continue creating the Aurora Serverless v1 DB cluster by using the steps from the following examples\.
+**Note**  
+If you choose a version of the DB engine that doesn't support Aurora Serverless v1, the **Serverless** option doesn't display for **DB instance class**\.
 
 ### Example for Aurora MySQL<a name="aurora-serverless.create.console.MySQL"></a>
 
@@ -58,12 +56,12 @@ Use the following procedure\.
 
 **To create an Aurora Serverless v1 DB cluster for Aurora MySQL**
 
-1.  Choose **Amazon Aurora with MySQL Compatibility** for the Edition\.
+1. For **Engine type**, choose **Aurora \(MySQL Compatibile\)**\.
 
-1. Choose the Aurora MySQL version you want for your DB cluster\. The supported versions are shown on the right side of the page\.  
-![\[Create Aurora Serverless v1 DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-select.png)
+1. Choose the Aurora MySQL version, compatible with Aurora Serverless v1, that you want for your DB cluster\. The supported versions are shown on the right side of the page\.  
+![\[Create Aurora Serverless v1 DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/sv1-select-ams.png)
 
-1. For **DB instance class**, confirm that **Serverless** is chosen\.
+1. For **DB instance class**, choose **Serverless**\.
 
 1. Set the **Capacity range** for the DB cluster\.
 
@@ -82,12 +80,12 @@ Use the following procedure\.
 
 **To create an Aurora Serverless v1 DB cluster for Aurora PostgreSQL**
 
-1.  Choose **Amazon Aurora with Postgres; Compatibility** for the Edition\.
+1. For **Engine type**, choose **Aurora \(PostgreSQL Compatibile\)**\.
 
-1. Choose the Aurora PostgreSQL version you want for your DB cluster\. The supported versions are shown on the right side of the page\.  
-![\[Create Aurora PostgreSQL Serverless v1 DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-select-postgres.png)
+1. Choose the Aurora PostgreSQL version, compatible with Aurora Serverless v1, that you want for your DB cluster\. The supported versions are shown on the right side of the page\.  
+![\[Create Aurora PostgreSQL Serverless v1 DB cluster with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/sv1-select-apg.png)
 
-1. For **DB instance class**, confirm that **Serverless** is chosen\.
+1. For **DB instance class**, choose **Serverless**\.
 
 1. Set the **Capacity range** for the DB cluster\.
 
@@ -143,7 +141,7 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
 For Linux, macOS, or Unix:
 
 ```
-aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-postgresql --engine-version 10.12 \
+aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-postgresql --engine-version 11.13 \
 --engine-mode serverless --scaling-configuration MinCapacity=8,MaxCapacity=64,SecondsUntilAutoPause=1000,AutoPause=true \
 --master-username username --master-user-password password
 ```
@@ -151,7 +149,7 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
 For Windows:
 
 ```
-aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-postgresql --engine-version 10.12 ^
+aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-postgresql --engine-version 11.13 ^
 --engine-mode serverless --scaling-configuration MinCapacity=8,MaxCapacity=64,SecondsUntilAutoPause=1000,AutoPause=true ^
 --master-username username --master-user-password password
 ```

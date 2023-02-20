@@ -55,7 +55,9 @@ RDS associates the valid, existing EC2 security group with the EC2 instance\. Th
 
 ## Connecting an EC2 instance and an Aurora DB cluster automatically<a name="ec2-rds-connect-connecting"></a>
 
-Before setting up a connection between an EC2 instance and an Aurora DB cluster, make sure you meet the requirements described in [Overview of automatic connectivity with an EC2 instance](#ec2-rds-connect-overview)\. If you make changes to required security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the Aurora DB cluster\.
+Before setting up a connection between an EC2 instance and an Aurora DB cluster, make sure you meet the requirements described in [Overview of automatic connectivity with an EC2 instance](#ec2-rds-connect-overview)\.
+
+If you change these security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the Aurora DB cluster\.
 
 **Note**  
 You can only set up a connection between an EC2 instance and an Aurora DB cluster automatically by using the AWS Management Console\. You can't set up a connection automatically with the AWS CLI or RDS API\.
@@ -80,19 +82,15 @@ You can only set up a connection between an EC2 instance and an Aurora DB cluste
    The **Review and confirm** page appears\.  
 ![\[EC2 connection review and confirmation page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-rds-ec2-confirm.png)
 
-1. On the **Review and confirm** page, review the changes that RDS will make to set up a connection with the EC2 instance\.
+1. On the **Review and confirm** page, review the changes that RDS will make to set up connectivity with the EC2 instance\.
 
-   Do one of the following:
-   + If the changes are correct, choose **Set up connection**\.
-   + If the changes aren't correct, choose **Previous** or **Cancel**\.
+   If the changes are correct, choose **Set up connection**\.
 
    If the changes aren't correct, choose **Previous** or **Cancel**\.
 
-1. To verify that the connection is made, choose **Connectivity and security** in the console and find the EC2 resource identifier under **Connected compute resource**\.
-
 ## Viewing connected compute resources<a name="ec2-rds-connect-viewing"></a>
 
-You can use the AWS Management Console to view the compute resources that are connected to an DB cluster\. The resources shown include compute resource connections that were set up automatically\. You can set up connectivity with compute resources automatically in the following ways:
+You can use the AWS Management Console to view the compute resources that are connected to an Aurora DB cluster\. The resources shown include compute resource connections that were set up automatically\. You can set up connectivity with compute resources automatically in the following ways:
 + You can select the compute resource when you create the database\.
 
   For more information, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.

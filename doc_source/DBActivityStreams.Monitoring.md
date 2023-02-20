@@ -23,6 +23,7 @@ If an activity stream has a failure while monitoring your DB instance, you are n
 **Topics**
 + [Accessing an activity stream from Kinesis](#DBActivityStreams.KinesisAccess)
 + [Audit log contents and examples](#DBActivityStreams.AuditLog)
++ [databaseActivityEventList JSON array](#DBActivityStreams.AuditLog.databaseActivityEventList)
 + [Processing a database activity stream using the AWS SDK](#DBActivityStreams.CodeExample)
 
 ## Accessing an activity stream from Kinesis<a name="DBActivityStreams.KinesisAccess"></a>
@@ -73,14 +74,13 @@ Monitored events are represented in the database activity stream as JSON strings
 + [Examples of an audit log for an activity stream](#DBActivityStreams.AuditLog.Examples)
 + [DatabaseActivityMonitoringRecords JSON object](#DBActivityStreams.AuditLog.DatabaseActivityMonitoringRecords)
 + [databaseActivityEvents JSON Object](#DBActivityStreams.AuditLog.databaseActivityEvents)
-+ [databaseActivityEventList JSON array](#DBActivityStreams.AuditLog.databaseActivityEventList)
 
 ### Examples of an audit log for an activity stream<a name="DBActivityStreams.AuditLog.Examples"></a>
 
 Following are sample decrypted JSON audit logs of activity event records\.
 
 **Example Activity event record of an Aurora PostgreSQL CONNECT SQL statement**  
-Following is an activity event record of a login with the use of a `CONNECT` SQL statement \(`command`\) by a psql client \(`clientApplication`\)\.  
+The following activity event record shows a login with the use of a `CONNECT` SQL statement \(`command`\) by a psql client \(`clientApplication`\)\.  
 
 ```
 {
@@ -128,7 +128,7 @@ Following is an activity event record of a login with the use of a `CONNECT` SQL
 ```
 
 **Example Activity event record of an Aurora MySQL CONNECT SQL statement**  
-Following is an activity event record of a logon with the use of a `CONNECT` SQL statement \(`command`\) by a mysql client \(`clientApplication`\)\.   
+The following activity event record shows a logon with the use of a `CONNECT` SQL statement \(`command`\) by a mysql client \(`clientApplication`\)\.   
 
 ```
 {
@@ -172,7 +172,7 @@ Following is an activity event record of a logon with the use of a `CONNECT` SQL
 ```
 
 **Example Activity event record of an Aurora PostgreSQL CREATE TABLE statement**  
-Following is an example of a `CREATE TABLE` event for Aurora PostgreSQL\.  
+The following example shows a `CREATE TABLE` event for Aurora PostgreSQL\.  
 
 ```
 {
@@ -220,7 +220,7 @@ Following is an example of a `CREATE TABLE` event for Aurora PostgreSQL\.
 ```
 
 **Example Activity event record of an Aurora MySQL CREATE TABLE statement**  
-Following is an example of a `CREATE TABLE` statement for Aurora MySQL\. The operation is represented as two separate event records\. One event has `"class":"MAIN"`\. The other event has `"class":"AUX"`\. The messages might arrive in any order\. The `logTime` field of the `MAIN` event is always earlier than the `logTime` fields of any corresponding `AUX` events\.  
+The following example shows a `CREATE TABLE` statement for Aurora MySQL\. The operation is represented as two separate event records\. One event has `"class":"MAIN"`\. The other event has `"class":"AUX"`\. The messages might arrive in any order\. The `logTime` field of the `MAIN` event is always earlier than the `logTime` fields of any corresponding `AUX` events\.  
 The following example shows the event with a `class` value of `MAIN`\.   
 
 ```
@@ -307,7 +307,7 @@ The following example shows the event with a `class` value of `MAIN`\.
 ```
 
 **Example Activity event record of an Aurora PostgreSQL SELECT statement**  
-Following is an example of a `SELECT` event\.  
+The following example shows a `SELECT` event \.  
 
 ```
 {
@@ -354,8 +354,75 @@ Following is an example of a `SELECT` event\.
 }
 ```
 
+```
+{
+    "type": "DatabaseActivityMonitoringRecord",
+    "clusterId": "",
+    "instanceId": "db-4JCWQLUZVFYP7DIWP6JVQ77O3Q",
+    "databaseActivityEventList": [
+        {
+            "class": "TABLE",
+            "clientApplication": "Microsoft SQL Server Management Studio - Query",
+            "command": "SELECT",
+            "commandText": "select * from [testDB].[dbo].[TestTable]",
+            "databaseName": "testDB",
+            "dbProtocol": "SQLSERVER",
+            "dbUserName": "test",
+            "endTime": null,
+            "errorMessage": null,
+            "exitCode": 1,
+            "logTime": "2022-10-06 21:24:59.9422268+00",
+            "netProtocol": null,
+            "objectName": "TestTable",
+            "objectType": "TABLE",
+            "paramList": null,
+            "pid": null,
+            "remoteHost": "local machine",
+            "remotePort": null,
+            "rowCount": 0,
+            "serverHost": "172.31.30.159",
+            "serverType": "SQLSERVER",
+            "serverVersion": "15.00.4073.23.v1.R1",
+            "serviceName": "sqlserver-ee",
+            "sessionId": 62,
+            "startTime": null,
+            "statementId": "0x03baed90412f564fad640ebe51f89b99",
+            "substatementId": 1,
+            "transactionId": "4532935",
+            "type": "record",
+            "engineNativeAuditFields": {
+                "target_database_principal_id": 0,
+                "target_server_principal_id": 0,
+                "target_database_principal_name": "",
+                "server_principal_id": 2,
+                "user_defined_information": "",
+                "response_rows": 0,
+                "database_principal_name": "dbo",
+                "target_server_principal_name": "",
+                "schema_name": "dbo",
+                "is_column_permission": true,
+                "object_id": 581577110,
+                "server_instance_name": "EC2AMAZ-NFUJJNO",
+                "target_server_principal_sid": null,
+                "additional_information": "",
+                "duration_milliseconds": 0,
+                "permission_bitmask": "0x00000000000000000000000000000001",
+                "data_sensitivity_information": "",
+                "session_server_principal_name": "test",
+                "connection_id": "AD3A5084-FB83-45C1-8334-E923459A8109",
+                "audit_schema_version": 1,
+                "database_principal_id": 1,
+                "server_principal_sid": "0x010500000000000515000000bdc2795e2d0717901ba6998cf4010000",
+                "user_defined_event_id": 0,
+                "host_name": "EC2AMAZ-NFUJJNO"
+            }
+        }
+    ]
+}
+```
+
 **Example Activity event record of an Aurora MySQL SELECT statement**  
-Following is an example of a `SELECT` event\.  
+The following example shows a `SELECT` event\.  
  The following example shows the event with a `class` value of `MAIN`\.   
 
 ```
@@ -450,9 +517,9 @@ The database activity event records are in a JSON object that contains the follo
 | JSON Field | Data Type | Description | 
 | --- | --- | --- | 
 |  `type`  | string |  The type of JSON record\. The value is `DatabaseActivityMonitoringRecords`\.  | 
-| version | string | The version of the database activity monitoring records\. The version of the generated database activity records depends on the engine version of the DB cluster: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.Monitoring.html)All of the following fields are in both version 1\.0 and version 1\.1 except where specifically noted\. | 
-|  [databaseActivityEvents](#DBActivityStreams.AuditLog.databaseActivityEvents)  | string |  A JSON object containing the activity events\.  | 
-| key | string | An encryption key you use to decrypt the [databaseActivityEventList](#DBActivityStreams.AuditLog.databaseActivityEventList) databaseActivityEventList JSON array\. | 
+| version | string |  The version of the database activity monitoring records\. The version of the generated database activity records depends on the engine version of the DB cluster: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.Monitoring.html)All of the following fields are in both version 1\.0 and version 1\.1 except where specifically noted\. | 
+|  [databaseActivityEvents](#DBActivityStreams.AuditLog.databaseActivityEvents)  | string |  A JSON object that contains the activity events\.  | 
+| key | string | An encryption key that you use to decrypt the [databaseActivityEventList](#DBActivityStreams.AuditLog.databaseActivityEventList)  | 
 
 ### databaseActivityEvents JSON Object<a name="DBActivityStreams.AuditLog.databaseActivityEvents"></a>
 
@@ -510,7 +577,7 @@ The audit log activity event record is a JSON object that contains the following
 | instanceId | string | The DB instance resource identifier\. It corresponds to the DB instance attribute DbiResourceId\. | 
 |  [databaseActivityEventList](#DBActivityStreams.AuditLog.databaseActivityEventList)   | string |  An array of activity audit records or heartbeat messages\.  | 
 
-### databaseActivityEventList JSON array<a name="DBActivityStreams.AuditLog.databaseActivityEventList"></a>
+## databaseActivityEventList JSON array<a name="DBActivityStreams.AuditLog.databaseActivityEventList"></a>
 
 The audit log payload is an encrypted `databaseActivityEventList` JSON array\. The following tables lists alphabetically the fields for each activity event in the decrypted `DatabaseActivityEventList` array of an audit log\. The fields differ depending on whether you use Aurora PostgreSQL or Aurora MySQL\. Consult the table that applies to your database engine\.
 

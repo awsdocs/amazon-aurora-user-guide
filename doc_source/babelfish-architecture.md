@@ -17,7 +17,7 @@ In single\-db mode, the schema names of the SQL Server database remain the same 
 
 When connecting through TDS, you can run `USE dbA` to see schemas `dbo` and `smith` from T\-SQL, as you would in SQL Server\. The unchanged schema names are also visible from PostgreSQL\.
 
-In multiple\-database mode, the schema names of user databases become `dbname_schemaname` when seen from PostgreSQL\. The schema names remain the same when seen from T\-SQL\.
+In multiple\-database mode, the schema names of user databases become `dbname_schemaname` when accessed from PostgreSQL\. The schema names remain the same when accessed from T\-SQL\.
 
 ![\[\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/babelfish_multi_db_mode.png)
 
@@ -37,10 +37,9 @@ Each migration mode has advantages and disadvantages\. Choose your migration mod
 When you create a cluster for use with Babelfish, Aurora PostgreSQL creates the system databases, `master` and `tempdb`\. If you created or modified objects in the system databases \(`master` or `tempdb`\), make sure to recreate those objects in your new cluster\. Unlike SQL Server, Babelfish doesn't reinitialize `tempdb` after a cluster reboot\.
 
 Use single database migration mode in the following cases:
-+ If you are migrating a single SQL Server database\. In single database mode, migrated schema names are identical to the original SQL Server schema names\. When you migrate your application, you make fewer changes to your SQL code\.
++ If you are migrating a single SQL Server database\. In single database mode, migrated schema names when accessed from PostgreSQL are identical to those in original SQL Server schema names\. This reduces code changes to existing SQL queries if you want to optimize them to run with a PostgreSQL connection\.
 + If your end goal is a complete migration to native Aurora PostgreSQL\. Before migrating, consolidate your schemas into a single schema \(`dbo`\) and then migrate into a single cluster to lessen required changes\.
 
 Use multiple database migration mode in the following cases:
-+ If you are trying out Babelfish and you aren't sure of your future needs\. 
-+ If multiple user databases need to be migrated together, and the end goal isn't to perform a fully native PostgreSQL migration\.
-+ If you might be migrating multiple databases in the future\.
++ If you want the default SQL Server experience with multiple user databases in the same instance\.
++ If multiple user databases need to be migrated together\.

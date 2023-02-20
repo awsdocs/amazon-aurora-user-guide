@@ -36,25 +36,23 @@ For information about creating DB clusters with **Standard create**, see [Creati
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Choose **Create database** and make sure that **Easy Create** is chosen\.   
+1. Choose **Create database**, then choose **Easy create**\.  
 ![\[Easy create option\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-option.png)
 
-1. For **Engine type**, choose **Amazon Aurora**\.
-
-1. For **Edition**, choose **Amazon Aurora with PostgreSQL compatibility**\.
+1. For **Engine type**, choose **Aurora \(PostgreSQL Compatible\)**\.
 
 1. For **DB instance size**, choose **Dev/Test**\.
 
 1. For **DB cluster identifier**, enter a name for the DB cluster, or leave the default name\.
 
-1. For **Master username**, enter a name for the master user, or leave the default name\.
-
    The **Create database** page should look similar to the following image\.  
 ![\[Create database page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-aurora-postgresql.png)
 
-1. To use an automatically generated master password for the DB cluster, make sure that the **Auto generate a password** box is selected\.
+1. For **Master username**, enter a name for the user, or leave the default name \(**postgres**\)\. This user name and its password give you control over the Aurora PostgreSQL DB cluster\.
 
-   To enter your master password, clear the **Auto generate a password** box, and then enter the same password in **Master password** and **Confirm password**\.
+   To use an automatically generated password for the DB cluster, make sure that the **Auto generate a password** box is selected\.
+
+   To choose your own password, clear the **Auto generate a password** box, and then enter the same password in **Master password** and **Confirm password**\.
 
 1. \(Optional\) Open **View default settings for Easy create**\.  
 ![\[Easy create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-view-default-settings-aurora-postgresql.png)
@@ -88,7 +86,9 @@ You can't view the master user password again\. If you don't record it, you migh
 
 You can automatically connect an existing EC2 instance to the Aurora PostgreSQL DB cluster from the RDS console\. The RDS console simplifies setting up the connection between an EC2 instance and your PostgreSQL DB cluster\.
 
-Before setting up a connection between an EC2 instance and an Aurora DB cluster, make sure you meet the requirements described in [Overview of automatic connectivity with an EC2 instance](ec2-rds-connect.md#ec2-rds-connect-overview)\. If you make changes to required security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the Aurora DB cluster\.
+Before setting up a connection between an EC2 instance and an Aurora DB cluster, make sure you meet the requirements described in [Overview of automatic connectivity with an EC2 instance](ec2-rds-connect.md#ec2-rds-connect-overview)\.
+
+If you change these security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the Aurora DB cluster\.
 
 **Note**  
 You can only set up a connection between an EC2 instance and an Aurora DB cluster automatically by using the AWS Management Console\. You can't set up a connection automatically with the AWS CLI or RDS API\.
@@ -113,15 +113,11 @@ You can only set up a connection between an EC2 instance and an Aurora DB cluste
    The **Review and confirm** page appears\.  
 ![\[EC2 connection review and confirmation page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-rds-ec2-confirm.png)
 
-1. On the **Review and confirm** page, review the changes that RDS will make to set up a connection with the EC2 instance\.
+1. On the **Review and confirm** page, review the changes that RDS will make to set up connectivity with the EC2 instance\.
 
-   Do one of the following:
-   + If the changes are correct, choose **Set up connection**\.
-   + If the changes aren't correct, choose **Previous** or **Cancel**\.
+   If the changes are correct, choose **Set up connection**\.
 
    If the changes aren't correct, choose **Previous** or **Cancel**\.
-
-1. To verify that the connection is made, choose **Connectivity and security** in the console and find the EC2 resource identifier under **Connected compute resource**\.
 
 ## Connect to an instance in an Aurora PostgreSQL DB cluster<a name="CHAP_GettingStartedAurora.AuroraPostgreSQL.Connect"></a>
 

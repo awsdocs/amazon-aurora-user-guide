@@ -18,9 +18,7 @@ In an Aurora PostgreSQL cluster, the `babelfish_db` database name is reserved fo
    + To specify detailed engine options, choose **Standard create**\.
    + To use preconfigured options that support best practices for an Aurora cluster, choose **Easy create**\.
 
-1. For **Engine type**, choose **Amazon Aurora**\.
-
-1. For **Edition**, choose **Amazon Aurora PostgreSQL**\.
+1. For **Engine type**, choose **Aurora \(PostgreSQL Compatible\)**\.
 
 1. Choose **Show filters**, and then choose **Show versions that support the Babelfish for PostgreSQL feature** to list the engine types that support Babelfish\. Babelfish is currently supported on Aurora PostgreSQL 13\.4 and higher versions\.
 
@@ -31,9 +29,11 @@ In an Aurora PostgreSQL cluster, the `babelfish_db` database name is reserved fo
 
 1. For **DB cluster identifier**, enter a name that you can easily find later in the DB cluster list\.
 
-1. For **Master username**, enter an administrator user name\. Master username must always use lowercase characters\. The default value for Aurora PostgreSQL is `postgres`\. You can accept the default or choose a different name\. For example, to follow the naming convention used on your SQL Server databases, you can enter `sa` \(system administrator\) for the Master username\.
+1. For **Master username**, enter an administrator user name\. The default value for Aurora PostgreSQL is `postgres`\. You can accept the default or choose a different name\. For example, to follow the naming convention used on your SQL Server databases, you can enter `sa` \(system administrator\) for the Master username\.
 
    If you don't create a user named `sa` at this time, you can create one later with your choice of client\. After creating the user, use the `ALTER SERVER ROLE` command to add it to the `sysadmin` group \(role\) for the cluster\. 
+**Warning**  
+Master username must always use lowercase characters failing which the DB cluster can't connect to Babelfish via the TDS port\.
 
 1. For **Master password**, create a strong password and confirm the password\. 
 

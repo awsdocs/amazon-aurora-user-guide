@@ -2,6 +2,7 @@
 
 **Topics**
 + [Aurora PostgreSQL collations for EBCDIC and other mainframe migrations](#AuroraPostgreSQL.Reference.Collations.mainframe.migration)
++ [Collations supported in Aurora PostgreSQL](PostgreSQL-Collations.md)
 + [Aurora PostgreSQL functions reference](Appendix.AuroraPostgreSQL.Functions.md)
 + [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.ParameterGroups.md)
 + [Amazon Aurora PostgreSQL wait events](AuroraPostgreSQL.Reference.Waitevents.md)

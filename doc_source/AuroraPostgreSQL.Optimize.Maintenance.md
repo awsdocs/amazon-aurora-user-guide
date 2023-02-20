@@ -151,7 +151,7 @@ The following steps show how to use `pg_hint_plan`\.
 
 ## Deleting plans<a name="AuroraPostgreSQL.Optimize.Maintenance.DeletingPlans"></a>
 
-Plans are automatically deleted if they haven't been used in over a month, specifically, 32 days\. That's the default setting for the `apg_plan_mgmt.plan_retention_period` parameter\. You can change the plan retention period to a longer period of time, but 32 is the minimum\. Determining the number of days since a plan was last used is calculated by subtracting the `last_used` date from the current date\. The `last_used` date is the most recent date that the optimizer chose the plan as the minimum cost plan or that the plan was run\. The date is stored for the plan in the `apg_plan_mgmt.dba_plans` view\. 
+Plans are automatically deleted if they haven't been used in over a month, specifically, 32 days\. That's the default setting for the `apg_plan_mgmt.plan_retention_period` parameter\. You can change the plan retention period to a longer period of time, or to a shorter period of time starting from the value of 1\. Determining the number of days since a plan was last used is calculated by subtracting the `last_used` date from the current date\. The `last_used` date is the most recent date that the optimizer chose the plan as the minimum cost plan or that the plan was run\. The date is stored for the plan in the `apg_plan_mgmt.dba_plans` view\. 
 
 We recommend that you delete plans that haven't been used for a long time or that aren't useful\. Every plan has a `last_used` date that the optimizer updates each time it executes a plan or chooses the plan as the minimum\-cost plan for a statement\. Check the last `last_used` dates to identify the plans that you can safely delete\.
 

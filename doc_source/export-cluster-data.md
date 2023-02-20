@@ -8,7 +8,7 @@ Amazon Aurora clones the DB cluster, extracts data from the clone, and stores th
 
 The faster performance that you can get with exporting snapshot data for Aurora MySQL version 2 and version 3 doesn't apply to exporting DB cluster data\. For more information, see [Exporting DB cluster snapshot data to Amazon S3](aurora-export-snapshot.md)\.
 
-Cluster exports are billed per GB of data exported, similar to snapshot exports\. For more information, see the [Amazon Aurora pricing page](https://aws.amazon.com/rds/aurora/pricing/)\.
+You're charged for exporting the entire DB cluster, whether you export all or partial data\. For more information, see the [Amazon Aurora pricing page](https://aws.amazon.com/rds/aurora/pricing/)\.
 
 After the data is exported, you can analyze the exported data directly through tools like Amazon Athena or Amazon Redshift Spectrum\. For more information on using Athena to read Parquet data, see [Parquet SerDe](https://docs.aws.amazon.com/athena/latest/ug/parquet-serde.html) in the *Amazon Athena User Guide*\. For more information on using Redshift Spectrum to read Parquet data, see [COPY from columnar data formats](https://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-columnar.html) in the *Amazon Redshift Database Developer Guide*\.
 

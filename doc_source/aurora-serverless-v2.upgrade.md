@@ -425,7 +425,7 @@ The process of upgrading a DB cluster from Aurora Serverless v1 to Aurora Server
 
 1. Restore the snapshot to create a new, provisioned \(that is, *not* Aurora Serverless\) DB cluster\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
 
-   Choose the latest minor engine version available for the new cluster, for example, 10\.21 or 11\.18\.
+   Choose the latest minor engine version available for the new cluster, for example, 11\.18\.
 
 1. Upgrade the provisioned DB cluster to an Aurora PostgreSQL version that's compatible with Aurora Serverless v2, for example, 13\.7\. Follow the procedure in [Upgrading the Aurora PostgreSQL engine to a new major version](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.Upgrading.Manual)\.
 

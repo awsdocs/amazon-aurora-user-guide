@@ -8,4 +8,3 @@ Following, you can find information about Amazon Aurora PostgreSQL engine versio
 + [Extension versions for Amazon Aurora PostgreSQL](AuroraPostgreSQL.Extensions.md)
 + [Upgrading the PostgreSQL DB engine for Aurora PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md)
 + [Aurora PostgreSQL long\-term support \(LTS\) releases](AuroraPostgreSQL.Updates.LTS.md)
-+ [Collations supported in Aurora PostgreSQL](PostgreSQL-Collations.md)

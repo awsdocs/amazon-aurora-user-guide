@@ -34,9 +34,8 @@
 1.  Sign in using the AWS Management Console and open the Amazon RDS console\. 
 
 1.  Choose **Create Database**\. On the page that appears, choose the following options: 
-   +  For **Engine type**, choose Aurora\. 
-   +  For **Edition**, choose Aurora MySQL or Aurora PostgreSQL\. 
-   +  For **Version**, choose one of the compatible versions from [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md)\. To see the available versions, choose the filter **Show versions that support Serverless v2**\. 
+   + For **Engine type**, choose **Aurora \(MySQL Compatible\)** or **Aurora \(PostgreSQL Compatible\)**\.
+   + For **Version**, choose one of the compatible versions from [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md)\. To see the available versions, choose the filter **Show versions that support Serverless v2**\.
 
 1.  For **Capacity settings**, you can accept the default range\. Or you can choose other values for minimum and maximum capacity units\. You can choose from 0\.5 ACUs minimum through 128 ACUs maximum, in increments of 0\.5 ACU\. 
 

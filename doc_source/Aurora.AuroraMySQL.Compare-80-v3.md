@@ -24,6 +24,7 @@ You can use the following information to learn about the changes to be aware of 
 +  The `aurora_hot_page_contention` status variable isn't available\. The hot page contention feature isn't supported\. For the full list of status variables not available in Aurora MySQL version 3, see [Status variables](Aurora.AuroraMySQL.Compare-v2-v3.md#AuroraMySQL.mysql80-status-vars)\. 
 +  You can't modify the settings of any MySQL plugins\. 
 +  The X plugin isn't supported\. 
++ Multisource replication isn't supported\.
 
 ## Role\-based privilege model<a name="AuroraMySQL.privilege-model"></a>
 

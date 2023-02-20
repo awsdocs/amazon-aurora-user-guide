@@ -8,11 +8,20 @@ We recommend that you upgrade the primary and secondary DB clusters to the same 
 
 When you perform a major version upgrade of an Amazon Aurora global database, you upgrade the global database cluster instead the individual clusters that it contains\.
 
-To learn how to upgrade an Aurora PostgreSQL global database to a higher major version, see [Major upgrades for global databases](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.GlobalDB)\. To learn how to upgrade an Aurora MySQL global database to a higher major version, see [In\-place major upgrades for global databases](AuroraMySQL.Updates.MajorVersionUpgrade.md#AuroraMySQL.Upgrading.GlobalDB)\.
+To learn how to upgrade an Aurora PostgreSQL global database to a higher major version, see [Major upgrades for global databases](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.GlobalDB)\.
 
 **Note**  
-With an Aurora global database based on Aurora MySQL, you can't use the in\-place upgrade method to upgrade the Aurora DB engine from version 2 to version 3\. Use the snapshot restore method instead\. For more information, see [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.  
-With an Aurora global database based on Aurora PostgreSQL, you can't perform a major version upgrade of the Aurora DB engine if the recovery point objective \(RPO\) feature is turned on\.
+With an Aurora global database based on Aurora PostgreSQL, you can't perform a major version upgrade of the Aurora DB engine if the recovery point objective \(RPO\) feature is turned on\. For information about the RPO feature, see [Managing RPOs for Aurora PostgreSQL–based global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
+
+To learn how to upgrade an Aurora MySQL global database to a higher major version, see [In\-place major upgrades for global databases](AuroraMySQL.Updates.MajorVersionUpgrade.md#AuroraMySQL.Upgrading.GlobalDB)\.
+
+**Note**  
+With an Aurora global database based on Aurora MySQL, you can't perform an in\-place upgrade from Aurora MySQL version 2 to version 3 if the `lower_case_table_names` parameter is turned on\.  
+To perform a major version upgrade to Aurora MySQL version 3 when using `lower_case_table_names`, use the following process:  
+Remove all secondary Regions from the global cluster\. Follow the steps in [Removing a cluster from an Amazon Aurora global database](aurora-global-database-managing.md#aurora-global-database-detaching)\.
+Upgrade the engine version of the primary Region to Aurora MySQL version 3\. Follow the steps in [How to perform an in\-place upgrade](AuroraMySQL.Updates.MajorVersionUpgrade.md#AuroraMySQL.Upgrading.Procedure)\.
+Add secondary Regions to the global cluster\. Follow the steps in [Adding an AWS Region to an Amazon Aurora global database](aurora-global-database-getting-started.md#aurora-global-database-attaching)\.
+You can also use the snapshot restore method instead\. For more information, see [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
 
 ## Minor version upgrades<a name="aurora-global-database-upgrade.minor"></a>
 
@@ -20,8 +29,10 @@ For a minor upgrade on an Aurora global database, you upgrade all of the seconda
 
 To learn how to upgrade an Aurora PostgreSQL global database to a higher minor version, see [How to perform minor version upgrades and apply patches](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.Minor)\. To learn how to upgrade an Aurora MySQL global database to a higher minor version, see [Upgrading Aurora MySQL by modifying the engine version](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.Patching.ModifyEngineVersion)\.
 
-**Note**  
-A secondary cluster must have at least one DB instance to perform a minor upgrade\.
+Before you perform the upgrade, review the following considerations:
++ A secondary cluster must have at least one DB instance to perform a minor upgrade\.
++ If you upgrade an Aurora MySQL global database to version 2\.11\.\* and you have write forwarding turned on, you must upgrade your primary and secondary DB clusters to the exact same version, including the patch level, to continue using write forwarding\.
++ To support managed cross\-Region database failover, you must upgrade your primary and secondary DB clusters to the exact same version, including the patch level, depending on the engine version\. For more information, see [Version compatibility for failover](#aurora-global-database-upgrade.minor.incompatibility)\.
 
 ### Version compatibility for failover<a name="aurora-global-database-upgrade.minor.incompatibility"></a>
 

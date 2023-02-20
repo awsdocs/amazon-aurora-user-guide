@@ -133,30 +133,22 @@ For this example, **Standard create** is enabled, and **Easy create** isn't enab
 
 1. Choose **Create database**\.
 
-1. In **Choose a database creation method**, choose **Standard create**\.
+1. For **Choose a database creation method**, choose **Standard create**\.
 
-1. In **Engine options**, choose **Amazon Aurora**\.   
-![\[Engine options\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/AuroraLaunch01.png)
+1. For **Engine type**, choose one of the following:
+   + **Aurora \(MySQL Compatible\)**
+   + **Aurora \(PostgreSQL Compatible\)**  
+![\[Engine options\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-engine-options-mysql.png)
 
-1. In **Edition**, choose one of the following:
-   + **Amazon Aurora with MySQL compatibility**
-   + **Amazon Aurora with PostgreSQL compatibility**
+1. Choose the **Engine version**\.
 
-1. Choose one of the following in **Capacity type**:
-   + **Provisioned**
-
-     For more information, see [Amazon Aurora DB clusters](Aurora.Overview.md)\.
-   + **Serverless**
-
-     For more information, see [Using Aurora Serverless v2](aurora-serverless-v2.md) and [Using Amazon Aurora Serverless v1](aurora-serverless.md)\.
-
-1. For **Version**, choose the engine version\.
+   For more information, see [Amazon Aurora versions](Aurora.VersionPolicy.md)\. You can use the filters to choose versions that are compatible with features that you want, such as Aurora Serverless v2\. For more information, see [Using Aurora Serverless v2](aurora-serverless-v2.md)\.
 
 1. In **Templates**, choose the template that matches your use case\.
 
 1. To enter your master password, do the following:
 
-   1. In the **Settings** section, open **Credential Settings**\.
+   1. In the **Settings** section, expand **Credential Settings**\.
 
    1. Clear the **Auto generate a password** check box\.
 

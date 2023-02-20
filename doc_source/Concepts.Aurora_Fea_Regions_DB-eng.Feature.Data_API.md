@@ -52,29 +52,29 @@ Following are the supported engines and Region availability for Data API with Au
 
 | Region | Aurora PostgreSQL 11 | Aurora PostgreSQL 10 | 
 | --- | --- | --- | 
-| US East \(Ohio\) | Version 11\.13 | Version 10\.18 | 
-| US East \(N\. Virginia\) | Version 11\.13 | Version 10\.18 | 
-| US West \(N\. California\) | Version 11\.13 | Version 10\.18 | 
-| US West \(Oregon\) | Version 11\.13 | Version 10\.18 | 
+| US East \(Ohio\) | Version 11\.16 | Version 10\.21 | 
+| US East \(N\. Virginia\) | Version 11\.16 | Version 10\.21 | 
+| US West \(N\. California\) | Version 11\.16 | Version 10\.21 | 
+| US West \(Oregon\) | Version 11\.16 | Version 10\.21 | 
 | Africa \(Cape Town\) | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | 
 | Asia Pacific \(Hyderabad\) | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | 
 | Asia Pacific \(Melbourne\) | – | – | 
-| Asia Pacific \(Mumbai\) | Version 11\.13 | Version 10\.18 | 
+| Asia Pacific \(Mumbai\) | Version 11\.16 | Version 10\.21 | 
 | Asia Pacific \(Osaka\) | – | – | 
-| Asia Pacific \(Seoul\) | Version 11\.13 | Version 10\.18 | 
-| Asia Pacific \(Singapore\) | Version 11\.13 | Version 10\.18 | 
-| Asia Pacific \(Sydney\) | Version 11\.13 | Version 10\.18 | 
-| Asia Pacific \(Tokyo\) | Version 11\.13 | Version 10\.18 | 
-| Canada \(Central\) | Version 11\.13 | Version 10\.18 | 
+| Asia Pacific \(Seoul\) | Version 11\.16 | Version 10\.21 | 
+| Asia Pacific \(Singapore\) | Version 11\.16 | Version 10\.21 | 
+| Asia Pacific \(Sydney\) | Version 11\.16 | Version 10\.21 | 
+| Asia Pacific \(Tokyo\) | Version 11\.16 | Version 10\.21 | 
+| Canada \(Central\) | Version 11\.16 | Version 10\.21 | 
 | China \(Beijing\) | – | – | 
 | China \(Ningxia\) | – | – | 
-| Europe \(Frankfurt\) | Version 11\.13 | Version 10\.18 | 
-| Europe \(Ireland\) | Version 11\.13 | Version 10\.18 | 
-| Europe \(London\) | Version 11\.13 | Version 10\.18 | 
+| Europe \(Frankfurt\) | Version 11\.16 | Version 10\.21 | 
+| Europe \(Ireland\) | Version 11\.16 | Version 10\.21 | 
+| Europe \(London\) | Version 11\.16 | Version 10\.21 | 
 | Europe \(Milan\) | – | – | 
-| Europe \(Paris\) | Version 11\.13 | Version 10\.18 | 
+| Europe \(Paris\) | Version 11\.16 | Version 10\.21 | 
 | Europe \(Spain\) | – | – | 
 | Europe \(Stockholm\) | – | – | 
 | Europe \(Zurich\) | – | – | 

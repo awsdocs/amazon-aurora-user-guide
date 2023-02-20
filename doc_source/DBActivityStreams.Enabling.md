@@ -2,7 +2,7 @@
 
 To monitor database activity for all instances in your Aurora DB cluster, start an activity stream at the cluster level\. Any DB instances that you add to the cluster are also automatically monitored\. If you use an Aurora global database, start a database activity stream on each DB cluster separately\. Each cluster delivers audit data to its own Kinesis stream within its own AWS Region\.
 
-When you start an activity stream, each database activity event, such as a change or access, generates an activity stream event\. SQL commands such as `CONNECT` and `SELECT` generate access events\. SQL commands such as `CREATE` and `INSERT` generate change events\.
+When you start an activity stream, each database activity event that you configured in the audit policy generates an activity stream event\. SQL commands such as `CONNECT` and `SELECT` generate access events\. SQL commands such as `CREATE` and `INSERT` generate change events\.
 
 ## Console<a name="DBActivityStreams.Enabling-collapsible-section-E1"></a>
 
@@ -16,7 +16,7 @@ When you start an activity stream, each database activity event, such as a chang
 
 1. For **Actions**, choose **Start activity stream**\. 
 
-   The **Start database activity stream: *name*** window appears, where *name* is your DB cluster\.
+   The **Start database activity stream: ***name* window appears, where *name* is your DB cluster\.
 
 1. Enter the following settings:
    + For **AWS KMS key**, choose a key from the list of AWS KMS keys\.

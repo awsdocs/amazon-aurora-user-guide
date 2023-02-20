@@ -96,7 +96,7 @@ With Performance Insights running on your Aurora PostgreSQL DB cluster, you can 
 
 From the Performance Insights console, choose **Manage metrics**\. To analyze your Aurora PostgreSQL DB cluster's connection and disconnection activity, choose the following metrics\. These are all metrics from PostgreSQL\. 
 + `xact_commit` – The number of committed transactions\. 
-+ `total_auth_attempts` – The number of attempted authenticated user connections\.
++ `total_auth_attempts` – The number of attempted authenticated user connections per minute\.
 + `numbackends` – The number of backends currently connected to the database\.
 
 ![\[Image of accessing Performance Insights from within the RDS console and selected Aurora PostgreSQL DB cluster.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/postgres_connection_churn_PI_4.png)
