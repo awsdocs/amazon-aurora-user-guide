@@ -3,7 +3,7 @@
 A blue/green deployment copies a production database environment to a separate, synchronized staging environment\. By using Amazon RDS Blue/Green Deployments, you can make changes to the database in the staging environment without affecting the production environment\. For example, you can upgrade the major or minor DB engine version, change database parameters, or make schema changes in the staging environment\. When you are ready, you can promote the staging environment to be the new production database environment, with downtime typically under one minute\.
 
 **Note**  
-Currently, blue/green deployments are supported only for Aurora MySQL\.
+Currently, blue/green deployments are supported only for Aurora MySQL\. For Amazon RDS engine availabilty, see [Using Amazon RDS Blue/Green Deployments for database updates](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html) in the *Amazon RDS User Guide*\. 
 
 **Topics**
 + [Overview of Amazon RDS Blue/Green Deployments for Aurora](blue-green-deployments-overview.md)

@@ -41,7 +41,7 @@ To learn more about the methods, planning, testing, and troubleshooting of Auror
 To find clusters affected by this end\-of\-life process, use the following procedures\.
 
 **Important**  
-Be sure to perform these instructions in every AWS Region where your resources are located\.
+Be sure to perform these instructions in every AWS Region and for each AWS account where your resources are located\.
 
 ### Console<a name="aurora-find-mysqlv1-cluster.CON"></a>
 

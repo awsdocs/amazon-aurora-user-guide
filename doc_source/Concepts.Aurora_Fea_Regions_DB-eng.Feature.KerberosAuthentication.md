@@ -15,36 +15,36 @@ Amazon Aurora doesn't currently support Kerberos authentication for Aurora MySQL
 Following are the supported engines and Region availability for Kerberos Authentication with Aurora PostgreSQL\.
 
 
-| Region | Aurora PostgreSQL 14 | Aurora PostgreSQL 13 | Aurora PostgreSQL 12 | Aurora PostgreSQL 11 | Aurora PostgreSQL 10 | 
-| --- | --- | --- | --- | --- | --- | 
-| US East \(Ohio\) | All versions | All versions | All versions | All versions | All versions | 
-| US East \(N\. Virginia\) | All versions | All versions | All versions | All versions | All versions | 
-| US West \(N\. California\) | All versions | All versions | All versions | All versions | All versions | 
-| US West \(Oregon\) | All versions | All versions | All versions | All versions | All versions | 
-| Africa \(Cape Town\) | – | – | – | – | – | 
-| Asia Pacific \(Hong Kong\) | – | – | – | – | – | 
-| Asia Pacific \(Hyderabad\) | – | – | – | – | – | 
-| Asia Pacific \(Jakarta\) | – | – | – | – | – | 
-| Asia Pacific \(Melbourne\) | – | – | – | – | – | 
-| Asia Pacific \(Mumbai\) | All versions | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Osaka\) | – | – | – | – | – | 
-| Asia Pacific \(Seoul\) | All versions | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Singapore\) | All versions | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Sydney\) | All versions | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Tokyo\) | All versions | All versions | All versions | All versions | All versions | 
-| Canada \(Central\) | All versions | All versions | All versions | All versions | All versions | 
-| China \(Beijing\) | All versions | All versions | All versions | All versions | All versions | 
-| China \(Ningxia\) | All versions | All versions | All versions | All versions | All versions | 
-| Europe \(Frankfurt\) | All versions | All versions | All versions | All versions | All versions | 
-| Europe \(Ireland\) | All versions | All versions | All versions | All versions | All versions | 
-| Europe \(London\) | All versions | All versions | All versions | All versions | All versions | 
-| Europe \(Milan\) | – | – | – | – | – | 
-| Europe \(Paris\) | All versions | All versions | All versions | All versions | All versions | 
-| Europe \(Spain\) | – | – | – | – | – | 
-| Europe \(Stockholm\) | All versions | All versions | All versions | All versions | All versions | 
-| Europe \(Zurich\) | – | – | – | – | – | 
-| Middle East \(Bahrain\) | – | – | – | – | – | 
-| Middle East \(UAE\) | – | – | – | – | – | 
-| South America \(São Paulo\) | All versions | All versions | All versions | All versions | All versions | 
-| AWS GovCloud \(US\-East\) | – | – | – | – | – | 
-| AWS GovCloud \(US\-West\) | – | – | – | – | – | 
+| Region | Aurora PostgreSQL 14 | Aurora PostgreSQL 13 | Aurora PostgreSQL 12 | Aurora PostgreSQL 11 | 
+| --- | --- | --- | --- | --- | 
+| US East \(Ohio\) | All versions | All versions | All versions | All versions | 
+| US East \(N\. Virginia\) | All versions | All versions | All versions | All versions | 
+| US West \(N\. California\) | All versions | All versions | All versions | All versions | 
+| US West \(Oregon\) | All versions | All versions | All versions | All versions | 
+| Africa \(Cape Town\) | – | – | – | – | 
+| Asia Pacific \(Hong Kong\) | – | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | – | 
+| Asia Pacific \(Jakarta\) | – | – | – | – | 
+| Asia Pacific \(Melbourne\) | – | – | – | – | 
+| Asia Pacific \(Mumbai\) | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Osaka\) | – | – | – | – | 
+| Asia Pacific \(Seoul\) | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Singapore\) | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Sydney\) | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Tokyo\) | All versions | All versions | All versions | All versions | 
+| Canada \(Central\) | All versions | All versions | All versions | All versions | 
+| China \(Beijing\) | All versions | All versions | All versions | All versions | 
+| China \(Ningxia\) | All versions | All versions | All versions | All versions | 
+| Europe \(Frankfurt\) | All versions | All versions | All versions | All versions | 
+| Europe \(Ireland\) | All versions | All versions | All versions | All versions | 
+| Europe \(London\) | All versions | All versions | All versions | All versions | 
+| Europe \(Milan\) | – | – | – | – | 
+| Europe \(Paris\) | All versions | All versions | All versions | All versions | 
+| Europe \(Spain\) | – | – | – | – | 
+| Europe \(Stockholm\) | All versions | All versions | All versions | All versions | 
+| Europe \(Zurich\) | – | – | – | – | 
+| Middle East \(Bahrain\) | – | – | – | – | 
+| Middle East \(UAE\) | – | – | – | – | 
+| South America \(São Paulo\) | All versions | All versions | All versions | All versions | 
+| AWS GovCloud \(US\-East\) | – | – | – | – | 
+| AWS GovCloud \(US\-West\) | – | – | – | – | 

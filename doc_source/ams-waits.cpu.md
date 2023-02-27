@@ -71,7 +71,7 @@ After you identify the query or queries increasing CPU usage, you can either opt
 CALL mysql.rds_kill(processID);
 ```
 
-For more information, see [mysql\.rds\_kill](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_kill.html) in the *Amazon RDS User Guide*\.
+For more information, see [mysql\.rds\_kill](mysql-stored-proc-ending.md#mysql_rds_kill)\.
 
 If you end a session, the action might trigger a long rollback\.
 

@@ -49,7 +49,7 @@ For more information, see [The Temporary Tablespace](https://dev.mysql.com/doc/r
 Aurora MySQL version 2 uses different storage engines for on\-disk internal temporary tables depending on the role of the instance\.
 + On the writer instance, on\-disk temporary tables use the InnoDB storage engine by default\. They're stored in the temporary tablespace in the Aurora cluster volume\.
 
-  You can change this behavior on the writer instance by modifying the value for the DB parameter `internal_tmp_disk_storage_engine`\. For more information, see [Instance\-level parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Parameters.Instance)\.
+  You can change this behavior on the writer instance by modifying the value for the DB parameter `internal_tmp_disk_storage_engine`\. For more information, see [Instance\-level parameters](AuroraMySQL.Reference.ParameterGroups.md#AuroraMySQL.Reference.Parameters.Instance)\.
 + On reader instances, on\-disk temporary tables use the MyISAM storage engine, which uses local storage\. That's because read\-only instances can't store any data on the Aurora cluster volume\.
 
 ## Comparison of Aurora MySQL version 1 and Aurora MySQL version 2<a name="AuroraMySQL.Compare-56-57"></a>

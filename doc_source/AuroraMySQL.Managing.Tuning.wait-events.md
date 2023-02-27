@@ -1,6 +1,6 @@
 # Tuning Aurora MySQL with wait events<a name="AuroraMySQL.Managing.Tuning.wait-events"></a>
 
-The following table summarizes the Aurora MySQL wait events that most commonly indicate performance problems\. The following wait events are a subset of the list in [Aurora MySQL wait events](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Waitevents)\.
+The following table summarizes the Aurora MySQL wait events that most commonly indicate performance problems\. The following wait events are a subset of the list in [Aurora MySQL wait events](AuroraMySQL.Reference.Waitevents.md)\.
 
 
 | Wait event | Description | 

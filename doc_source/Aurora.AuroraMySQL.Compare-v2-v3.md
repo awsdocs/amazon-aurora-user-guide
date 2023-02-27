@@ -17,7 +17,7 @@ The following Amazon Aurora MySQL features are supported in Aurora MySQL for MyS
 + You can't use Aurora MySQL version 3 for Aurora Serverless v1 clusters\. Aurora MySQL version 3 works with Aurora Serverless v2\.
 + Lab mode doesn't apply to Aurora MySQL version 3\. There aren't any lab mode features in Aurora MySQL version 3\. Instant DDL supersedes the fast online DDL feature that was formerly available in lab mode\. For an example, see [Instant DDL \(Aurora MySQL version 3\)](AuroraMySQL.Managing.FastDDL.md#AuroraMySQL.mysql80-instant-ddl)\.
 + The query cache is removed from community MySQL 8\.0 and also from Aurora MySQL version 3\.
-+ Aurora MySQL version 3 is compatible with the community MySQL hash join feature\. The Aurora\-specific implementation of hash joins in Aurora MySQL version 2 isn't used\. For information about using hash joins with Aurora parallel query, see [Turning on hash join for parallel query clusters](aurora-mysql-parallel-query.md#aurora-mysql-parallel-query-enabling-hash-join) and [Aurora MySQL hints](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Hints)\. For general usage information about hash joins, see [Hash Join Optimization](https://dev.mysql.com/doc/refman/8.0/en/hash-joins.html) in the *MySQL Reference Manual*\.
++ Aurora MySQL version 3 is compatible with the community MySQL hash join feature\. The Aurora\-specific implementation of hash joins in Aurora MySQL version 2 isn't used\. For information about using hash joins with Aurora parallel query, see [Turning on hash join for parallel query clusters](aurora-mysql-parallel-query.md#aurora-mysql-parallel-query-enabling-hash-join) and [Aurora MySQL hints](AuroraMySQL.Reference.Hints.md)\. For general usage information about hash joins, see [Hash Join Optimization](https://dev.mysql.com/doc/refman/8.0/en/hash-joins.html) in the *MySQL Reference Manual*\.
 + Currently, you can't restore a physical backup from the Percona XtraBackup tool to an Aurora MySQL version 3 cluster\. We intend to support this feature in a subsequent minor version\.
 + The `mysql.lambda_async` stored procedure that was deprecated in Aurora MySQL version 2 is removed in version 3\. For version 3, use the asynchronous function `lambda_async` instead\.
 + The default character set in Aurora MySQL version 3 is `utf8mb4`\. In Aurora MySQL version 2, the default character set was `latin1`\. For information about this character set, see [The utf8mb4 Character Set \(4\-Byte UTF\-8 Unicode Encoding\)](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-utf8mb4.html) in the *MySQL Reference Manual*\.
@@ -57,15 +57,15 @@ With an Aurora global database based on Aurora MySQL, you can't perform an in\-p
 
 In Aurora MySQL version 3, the `init_connect` and `read_only` parameters don't apply for users who have the `CONNECTION_ADMIN` privilege\. This includes the Aurora master user\. For more information, see [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\.
 
-For the full list of Aurora MySQL cluster parameters, see [Cluster\-level parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Parameters.Cluster)\. The table covers all the parameters from Aurora MySQL version 1, 2, and 3\. The table includes notes showing which parameters are new in Aurora MySQL version 3 or were removed from Aurora MySQL version 3\.
+For the full list of Aurora MySQL cluster parameters, see [Cluster\-level parameters](AuroraMySQL.Reference.ParameterGroups.md#AuroraMySQL.Reference.Parameters.Cluster)\. The table covers all the parameters from Aurora MySQL version 1, 2, and 3\. The table includes notes showing which parameters are new in Aurora MySQL version 3 or were removed from Aurora MySQL version 3\.
 
-For the full list of Aurora MySQL instance parameters, see [Instance\-level parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Parameters.Instance)\. The table covers all the parameters from Aurora MySQL version 1, 2, and 3\. The table includes notes showing which parameters are new in Aurora MySQL version 3 and which parameters were removed from Aurora MySQL version 3\. It also includes notes showing which parameters were modifiable in earlier versions but not Aurora MySQL version 3\.
+For the full list of Aurora MySQL instance parameters, see [Instance\-level parameters](AuroraMySQL.Reference.ParameterGroups.md#AuroraMySQL.Reference.Parameters.Instance)\. The table covers all the parameters from Aurora MySQL version 1, 2, and 3\. The table includes notes showing which parameters are new in Aurora MySQL version 3 and which parameters were removed from Aurora MySQL version 3\. It also includes notes showing which parameters were modifiable in earlier versions but not Aurora MySQL version 3\.
 
 For information about parameter names that changed, see [Inclusive language changes for Aurora MySQL version 3](#AuroraMySQL.8.0-inclusive-language)\.
 
 ## Status variables<a name="AuroraMySQL.mysql80-status-vars"></a>
 
-For information about status variables that aren't applicable to Aurora MySQL, see [MySQL status variables that don't apply to Aurora MySQL](AuroraMySQL.Reference.md#AuroraMySQL.Reference.StatusVars.Inapplicable)\.
+For information about status variables that aren't applicable to Aurora MySQL, see [MySQL status variables that don't apply to Aurora MySQL](AuroraMySQL.Reference.ParameterGroups.md#AuroraMySQL.Reference.StatusVars.Inapplicable)\.
 
 ## Inclusive language changes for Aurora MySQL version 3<a name="AuroraMySQL.8.0-inclusive-language"></a>
 

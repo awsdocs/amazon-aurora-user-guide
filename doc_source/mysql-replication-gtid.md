@@ -69,7 +69,7 @@ When GTID\-based replication is enabled for an Aurora MySQL DB cluster, the GTID
 
 1. Associate the DB cluster parameter group with the Aurora MySQL cluster\. To do so, follow the procedures in [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
-1. In Aurora MySQL version 3 and higher, optionally specify how to assign GTIDs to transactions that don't include them\. To do so, call the stored procedure in [mysql\.rds\_assign\_gtids\_to\_anonymous\_transactions \(Aurora MySQL version 3\)](AuroraMySQL.Reference.md#mysql_assign_gtids_to_anonymous_transactions)\.
+1. In Aurora MySQL version 3 and higher, optionally specify how to assign GTIDs to transactions that don't include them\. To do so, call the stored procedure in [mysql\.rds\_assign\_gtids\_to\_anonymous\_transactions \(Aurora MySQL version 3\)](mysql-stored-proc-replicating.md#mysql_assign_gtids_to_anonymous_transactions)\.
 
 ## Disabling GTID\-based replication for an Aurora MySQL DB cluster<a name="mysql-replication-gtid.disabling"></a>
 
@@ -78,7 +78,7 @@ You can disable GTID\-based replication for an Aurora MySQL DB cluster\. Doing s
 **Note**  
 In the following procedure, *read replica* means the replication target in an Aurora configuration with binlog replication to or from an external database\. It doesn't mean the read\-only Aurora Replica DB instances\. For example, when an Aurora cluster accepts incoming replication from an external source, the Aurora primary instance acts as the read replica for binlog replication\. 
 
-For more details about the stored procedures mentioned in this section, see [Aurora MySQL stored procedures](AuroraMySQL.Reference.md#AuroraMySQL.Reference.StoredProcs)\. 
+For more details about the stored procedures mentioned in this section, see [Aurora MySQL stored procedures](AuroraMySQL.Reference.StoredProcs.md)\. 
 
 **To disable GTID\-based replication for an Aurora MySQL DB cluster**
 

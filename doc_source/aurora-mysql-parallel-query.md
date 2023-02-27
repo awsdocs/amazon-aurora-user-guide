@@ -1072,7 +1072,7 @@ mysql> explain delete from part where p_name is not null;
 
  On Aurora reader DB instances, parallel query applies to statements performed under the `REPEATABLE READ` isolation level\. Aurora MySQL versions 1\.23 and 2\.09 or higher can also use the `READ COMMITTED` isolation level on reader DB instances\. `REPEATABLE READ` is the default isolation level for Aurora reader DB instances\. To use `READ COMMITTED` isolation level on reader DB instances requires setting the `aurora_read_replica_read_committed` configuration option at the session level\. The `READ COMMITTED` isolation level for reader instances complies with SQL standard behavior\. However, the isolation is less strict on reader instances than when queries use `READ COMMITTED` isolation level on the writer instance\. 
 
- For more information about Aurora isolation levels, especially the differences in `READ COMMITTED` between writer and reader instances, see [Aurora MySQL isolation levels](AuroraMySQL.Reference.md#AuroraMySQL.Reference.IsolationLevels)\. 
+ For more information about Aurora isolation levels, especially the differences in `READ COMMITTED` between writer and reader instances, see [Aurora MySQL isolation levels](AuroraMySQL.Reference.IsolationLevels.md)\. 
 
  After a big transaction is finished, the table statistics might be stale\. Such stale statistics might require an `ANALYZE TABLE` statement before Aurora can accurately estimate the number of rows\. A large\-scale DML statement might also bring a substantial portion of the table data into the buffer pool\. Having this data in the buffer pool can lead to parallel query being chosen less frequently for that table until the data is evicted from the pool\. 
 

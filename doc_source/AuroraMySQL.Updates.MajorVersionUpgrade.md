@@ -17,7 +17,7 @@ In an Aurora MySQL version number such as 2\.08\.1, the 2 represents the major v
 + [After the upgrade](#AuroraMySQL.Upgrading.PostUpgrade)
 + [Troubleshooting for Aurora MySQL in\-place upgrade](#AuroraMySQL.Upgrading.Troubleshooting)
 + [Aurora MySQL in\-place upgrade tutorial](#AuroraMySQL.Upgrading.Tutorial)
-+ [Alternative blue\-green upgrade technique](#AuroraMySQL.Upgrading.BlueGreenBlog)
++ [Alternative blue\-green upgrade technique](#AuroraMySQL.UpgradingMajor.BlueGreen)
 
 ## Upgrading from Aurora MySQL 2\.x to 3\.x<a name="AuroraMySQL.Updates.MajorVersionUpgrade.2to3"></a>
 
@@ -25,7 +25,7 @@ If you have a MySQL 5\.7â€“compatible cluster and want to upgrade it to a MySQLâ
 
 The in\-place upgrade mechanism involves shutting down your DB cluster while the operation takes place\. Aurora performs a clean shutdown and completes outstanding operations such as transaction rollback and undo purge\. For more information, see [How the Aurora MySQL in\-place major version upgrade works](#AuroraMySQL.Upgrading.Sequence)\.
 
-The in\-place upgrade is convenient, because it is simple to perform and minimizes configuration changes to associated applications\. For example, an in\-place upgrade preserves the endpoints and set of DB instances for your cluster\. However, the time needed for an in\-place upgrade can vary depending on the properties of your schema and how busy the cluster is\. Thus, depending on the needs for your cluster, you might want to choose among the multiple upgrade techniques\. These include in\-place upgrade and snapshot restore, described in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\. They also include other upgrade techniques such as the one described in [Alternative blue\-green upgrade technique](#AuroraMySQL.Upgrading.BlueGreenBlog)\.
+The in\-place upgrade is convenient, because it is simple to perform and minimizes configuration changes to associated applications\. For example, an in\-place upgrade preserves the endpoints and set of DB instances for your cluster\. However, the time needed for an in\-place upgrade can vary depending on the properties of your schema and how busy the cluster is\. Thus, depending on the needs for your cluster, you might want to choose among the multiple upgrade techniques\. These include in\-place upgrade and snapshot restore, described in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\. They also include other upgrade techniques such as the one described in [Alternative blue\-green upgrade technique](#AuroraMySQL.UpgradingMajor.BlueGreen)\.
 
 For general information about Aurora MySQL version 3 and its new features, see [Aurora MySQL version 3 compatible with MySQL 8\.0](AuroraMySQL.MySQL80.md)\. For details about planning an upgrade, see [Upgrade planning for Aurora MySQL version 3](AuroraMySQL.mysql80-upgrade-procedure.md#AuroraMySQL.mysql80-planning) and [Upgrading to Aurora MySQL version 3](AuroraMySQL.mysql80-upgrade-procedure.md)\.
 
@@ -40,7 +40,7 @@ When you upgrade the major version of your cluster from 2\.x to 3\.x, the origin
 
  The in\-place upgrade mechanism involves shutting down your DB cluster while the operation takes place\. Aurora performs a clean shutdown and completes outstanding operations such as transaction rollback and undo purge\. 
 
- The in\-place upgrade is convenient, because it is simple to perform and minimizes configuration changes to associated applications\. For example, an in\-place upgrade preserves the endpoints and set of DB instances for your cluster\. However, the time needed for an in\-place upgrade can vary depending on the properties of your schema and how busy the cluster is\. Thus, depending on the needs for your cluster, you can choose between in\-place upgrade, snapshot restore as described in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md), or other upgrade techniques such as the one described in [Alternative blue\-green upgrade technique](#AuroraMySQL.Upgrading.BlueGreenBlog)\. 
+ The in\-place upgrade is convenient, because it is simple to perform and minimizes configuration changes to associated applications\. For example, an in\-place upgrade preserves the endpoints and set of DB instances for your cluster\. However, the time needed for an in\-place upgrade can vary depending on the properties of your schema and how busy the cluster is\. Thus, depending on the needs for your cluster, you can choose between in\-place upgrade, snapshot restore as described in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md), or other upgrade techniques such as the one described in [Alternative blue\-green upgrade technique](#AuroraMySQL.UpgradingMajor.BlueGreen)\. 
 
  If your cluster is running a version that's lower than 1\.22\.3, the upgrade might take longer\. This is because Aurora MySQL automatically performs an upgrade to 1\.22\.3 as a first step\. To minimize downtime during the major version upgrade, you can do an initial minor version upgrade to Aurora MySQL 1\.22\.3 in advance\. 
 
@@ -560,6 +560,6 @@ $ aws rds describe-events --source-type db-cluster --source-identifier cluster-5
 }
 ```
 
-## Alternative blue\-green upgrade technique<a name="AuroraMySQL.Upgrading.BlueGreenBlog"></a>
+## Alternative blue\-green upgrade technique<a name="AuroraMySQL.UpgradingMajor.BlueGreen"></a>
 
 In some situations, your top priority is to perform an immediate switchover from the old cluster to an upgraded one\. In such situations, you can use a multistep process that runs the old and new clusters side\-by\-side\. Here, you replicate data from the old cluster to the new one until you are ready for the new cluster to take over\. For details, see [Using Amazon RDS Blue/Green Deployments for database updates](blue-green-deployments.md)\.

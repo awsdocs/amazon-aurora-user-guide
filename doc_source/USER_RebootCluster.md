@@ -84,7 +84,7 @@ aws rds reboot-db-instance ^
 
  For parameters that change how queries interpret SQL statements or query output, you might need to take care to reboot the reader instances immediately\. You do this to avoid unexpected application behavior during queries\. For example, suppose that you change the `lower_case_table_names` parameter and reboot the writer instance\. In this case, the reader instances might not be able to access a newly created table until they are all rebooted\. 
 
- For a list of all the Aurora MySQL cluster parameters, see [Cluster\-level parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Parameters.Cluster)\. 
+ For a list of all the Aurora MySQL cluster parameters, see [Cluster\-level parameters](AuroraMySQL.Reference.ParameterGroups.md#AuroraMySQL.Reference.Parameters.Cluster)\. 
 
 **Tip**  
  Aurora MySQL might still reboot some of the reader instances along with the writer instance if your cluster is processing a workload with high throughput\.   

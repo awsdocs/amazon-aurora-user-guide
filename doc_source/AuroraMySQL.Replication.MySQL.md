@@ -10,7 +10,7 @@ You can also replicate with an RDS for MySQL DB instance or Aurora MySQL DB clus
 
 If you want to configure replication between an Aurora MySQL DB cluster and an Aurora MySQL DB cluster in another AWS Region, you can create an Aurora MySQL DB cluster as a read replica in a different AWS Region from the source DB cluster\. For more information, see [Replicating Amazon Aurora MySQL DB clusters across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\.
 
-With Aurora MySQL 2\.04 and higher, you can replicate between Aurora MySQL and an external source or target that uses global transaction identifiers \(GTIDs\) for replication\. Ensure that the GTID\-related parameters in the Aurora MySQL DB cluster have settings that are compatible with the GTID status of the external database\. To learn how to do this, see [Using GTID\-based replication for Amazon Aurora MySQL](mysql-replication-gtid.md)\. In Aurora MySQL version 3\.01 and higher, you can choose how to assign GTIDs to transactions that are replicated from a source that doesn't use GTIDs\. For information about the stored procedure that controls that setting, see [mysql\.rds\_assign\_gtids\_to\_anonymous\_transactions \(Aurora MySQL version 3\)](AuroraMySQL.Reference.md#mysql_assign_gtids_to_anonymous_transactions)\.
+With Aurora MySQL 2\.04 and higher, you can replicate between Aurora MySQL and an external source or target that uses global transaction identifiers \(GTIDs\) for replication\. Ensure that the GTID\-related parameters in the Aurora MySQL DB cluster have settings that are compatible with the GTID status of the external database\. To learn how to do this, see [Using GTID\-based replication for Amazon Aurora MySQL](mysql-replication-gtid.md)\. In Aurora MySQL version 3\.01 and higher, you can choose how to assign GTIDs to transactions that are replicated from a source that doesn't use GTIDs\. For information about the stored procedure that controls that setting, see [](mysql-stored-proc-replicating.md#mysql_assign_gtids_to_anonymous_transactions)\.
 
 **Warning**  
  When you replicate between Aurora MySQL and MySQL, make sure that you use only InnoDB tables\. If you have MyISAM tables that you want to replicate, you can convert them to InnoDB before setting up replication with the following command\.   
@@ -44,7 +44,7 @@ Setting up MySQL replication with Aurora MySQL involves the following steps, whi
 
 |  Database engine  |  Instructions  | 
 | --- | --- | 
-|   Aurora MySQL   |   **To turn on binary logging on an Aurora MySQL DB cluster**  Set the `binlog_format` parameter to `ROW`, `STATEMENT`, or `MIXED`\. `MIXED` is recommended unless you have a need for a specific binlog format\. The `binlog_format` parameter is a cluster\-level parameter that is in the default cluster parameter group\. If you're changing the `binlog_format` parameter from `OFF` to another value, then you need to reboot your Aurora DB cluster for the change to take effect\.  For more information, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithDBClusterParamGroups.md#Aurora.Managing.ParameterGroups) and [Working with parameter groups](USER_WorkingWithParamGroups.md)\.   | 
+|   Aurora MySQL   |   **To turn on binary logging on an Aurora MySQL DB cluster**  Set the `binlog_format` DB cluster parameter to `ROW`, `STATEMENT`, or `MIXED`\. `MIXED` is recommended unless you have a need for a specific binlog format\. \(The default value is `OFF`\.\) To change the `binlog_format` parameter, create a custom DB cluster parameter group and associate that custom parameter group with your DB cluster\. You can't change parameters in the default DB cluster parameter group\. If you're changing the `binlog_format` parameter from `OFF` to another value, reboot your Aurora DB cluster for the change to take effect\.  For more information, see [Amazon Aurora DB cluster and DB instance parameters](USER_WorkingWithDBClusterParamGroups.md#Aurora.Managing.ParameterGroups) and [Working with parameter groups](USER_WorkingWithParamGroups.md)\.   | 
 |   RDS for MySQL   |   **To turn on binary logging on an Amazon RDS DB instance**   You can't turn on binary logging directly for an Amazon RDS DB instance, but you can turn it on by doing one of the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
 |   MySQL \(external\)   |   **To set up encrypted replication**  To replicate data securely with Aurora MySQL versions 1 and 2, you can use encrypted replication\. Currently, encrypted replication with an external MySQL database is supported for Aurora MySQL version 1 and version 2, 2\.04\.2 and higher\.   If you don't need to use encrypted replication, you can skip these steps\.    The following are prerequisites for using encrypted replication:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  During encrypted replication, the Aurora MySQL DB cluster acts a client to the MySQL database server\. The certificates and keys for the Aurora MySQL client are in files in \.pem format\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  **To turn on binary logging on an external MySQL database**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
 
@@ -57,9 +57,9 @@ Use the following instructions to retain binary logs for your database engine\.
 
 |  Database engine  |  Instructions  | 
 | --- | --- | 
-|   Aurora MySQL  |   **To retain binary logs on an Aurora MySQL DB cluster**   You do not have access to the binlog files for an Aurora MySQL DB cluster\. As a result, you must choose a time frame to retain the binlog files on your replication source long enough to ensure that the changes have been applied to your replica before the binlog file is deleted by Amazon RDS\. You can retain binlog files on an Aurora MySQL DB cluster for up to 90 days\.   If you are setting up replication with a MySQL database or RDS for MySQL DB instance as the replica, and the database that you are creating a replica for is very large, choose a large time frame to retain binlog files until the initial copy of the database to the replica is complete and the replica lag has reached 0\.  To set the binary log retention time frame, use the [mysql\.rds\_set\_configuration](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_configuration.html) procedure and specify a configuration parameter of `'binlog retention hours'` along with the number of hours to retain binlog files on the DB cluster\. The maximum value for Aurora MySQL version 1 is 2160 \(90 days\)\. The maximum value for Aurora MySQL version 2 and 3 is 168 \(7 days\)\. The following example sets the retention period for binlog files to 6 days: <pre>CALL mysql.rds_set_configuration('binlog retention hours', 144);</pre> After replication has been started, you can verify that changes have been applied to your replica by running the `SHOW SLAVE STATUS` \(Aurora MySQL version 1 and 2\) or `SHOW REPLICA STATUS` \(Aurora MySQL version 3\) command on your replica and checking the `Seconds behind master` field\. If the `Seconds behind master` field is 0, then there is no replica lag\. When there is no replica lag, reduce the length of time that binlog files are retained by setting the `binlog retention hours` configuration parameter to a smaller time frame\. If this setting isn't specified, the default for Aurora MySQL is 24 \(1 day\)\. If you specify a value for `'binlog retention hours'` that is higher than the maximum value, then Aurora MySQL uses the maximum\.  | 
-|   RDS for MySQL   |   **To retain binary logs on an Amazon RDS DB instance**   You can retain binary log files on an Amazon RDS DB instance by setting the binlog retention hours just as with an Aurora MySQL DB cluster, described in the previous row\.  You can also retain binlog files on an Amazon RDS DB instance by creating a read replica for the DB instance\. This read replica is temporary and solely for the purpose of retaining binlog files\. After the read replica has been created, call the [mysql\.rds\_stop\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_stop_replication.html) procedure on the read replica\. While replication is stopped, Amazon RDS doesn't delete any of the binlog files on the replication source\. After you have set up replication with your permanent replica, you can delete the read replica when the replica lag \(`Seconds behind master` field\) between your replication source and your permanent replica reaches 0\.   | 
-|   MySQL \(external\)   |   **To retain binary logs on an external MySQL database**   Because binlog files on an external MySQL database are not managed by Amazon RDS, they are retained until you delete them\.   After replication has been started, you can verify that changes have been applied to your replica by running the `SHOW SLAVE STATUS` \(Aurora MySQL version 1 and 2\) or `SHOW REPLICA STATUS` \(Aurora MySQL version 3\) command on your replica and checking the `Seconds behind master` field\. If the `Seconds behind master` field is 0, then there is no replica lag\. When there is no replica lag, you can delete old binlog files\.   | 
+|   Aurora MySQL  |   **To retain binary logs on an Aurora MySQL DB cluster**  You do not have access to the binlog files for an Aurora MySQL DB cluster\. As a result, you must choose a time frame to retain the binlog files on your replication source long enough to ensure that the changes have been applied to your replica before the binlog file is deleted by Amazon RDS\. You can retain binlog files on an Aurora MySQL DB cluster for up to 90 days\. If you are setting up replication with a MySQL database or RDS for MySQL DB instance as the replica, and the database that you are creating a replica for is very large, choose a large time frame to retain binlog files until the initial copy of the database to the replica is complete and the replica lag has reached 0\. To set the binary log retention time frame, use the [mysql\.rds\_set\_configuration](mysql-stored-proc-configuring.md#mysql_rds_set_configuration) procedure and specify a configuration parameter of `'binlog retention hours'` along with the number of hours to retain binlog files on the DB cluster\. The maximum value for Aurora MySQL version 1 is 2160 \(90 days\)\. The maximum value for Aurora MySQL version 2 and 3 is 168 \(7 days\)\. The following example sets the retention period for binlog files to 6 days: <pre>CALL mysql.rds_set_configuration('binlog retention hours', 144);</pre> After replication has been started, you can verify that changes have been applied to your replica by running the `SHOW SLAVE STATUS` \(Aurora MySQL version 1 and 2\) or `SHOW REPLICA STATUS` \(Aurora MySQL version 3\) command on your replica and checking the `Seconds behind master` field\. If the `Seconds behind master` field is 0, then there is no replica lag\. When there is no replica lag, reduce the length of time that binlog files are retained by setting the `binlog retention hours` configuration parameter to a smaller time frame\. If this setting isn't specified, the default for Aurora MySQL is 24 \(1 day\)\. If you specify a value for `'binlog retention hours'` that is higher than the maximum value, then Aurora MySQL uses the maximum\.  | 
+|   RDS for MySQL   |   **To retain binary logs on an Amazon RDS DB instance**   You can retain binary log files on an Amazon RDS DB instance by setting the binlog retention hours just as with an Aurora MySQL DB cluster, described in the previous row\. You can also retain binlog files on an Amazon RDS DB instance by creating a read replica for the DB instance\. This read replica is temporary and solely for the purpose of retaining binlog files\. After the read replica has been created, call the [mysql\.rds\_stop\_replication](mysql-stored-proc-replicating.md#mysql_rds_stop_replication) procedure on the read replica\. While replication is stopped, Amazon RDS doesn't delete any of the binlog files on the replication source\. After you have set up replication with your permanent replica, you can delete the read replica when the replica lag \(`Seconds behind master` field\) between your replication source and your permanent replica reaches 0\.  | 
+|   MySQL \(external\)   |  **To retain binary logs on an external MySQL database** Because binlog files on an external MySQL database are not managed by Amazon RDS, they are retained until you delete them\. After replication has been started, you can verify that changes have been applied to your replica by running the `SHOW SLAVE STATUS` \(Aurora MySQL version 1 and 2\) or `SHOW REPLICA STATUS` \(Aurora MySQL version 3\) command on your replica and checking the `Seconds behind master` field\. If the `Seconds behind master` field is 0, then there is no replica lag\. When there is no replica lag, you can delete old binlog files\.  | 
 
 ### 3\. Create a snapshot or dump of your replication source<a name="AuroraMySQL.Replication.MySQL.CreateSnapshot"></a>
 
@@ -123,7 +123,7 @@ Use the following instructions to turn on replication for your database engine\.
 |   RDS for MySQL   |   **To turn on replication from an Amazon RDS DB instance**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html) To use SSL encryption, set the final value to `1` instead of `0`\.  | 
 |   MySQL \(external\)   |   **To turn on replication from an external MySQL database**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
 
-If replication fails, it can result in a large increase in unintentional I/O on the replica, which can degrade performance\. If replication fails or is no longer needed, you can run the `mysql.rds_reset_external_master` stored procedure to remove the replication configuration\.
+If replication fails, it can result in a large increase in unintentional I/O on the replica, which can degrade performance\. If replication fails or is no longer needed, you can run the [mysql\.rds\_reset\_external\_master \(Aurora MySQL version 1 and 2\)](mysql-stored-proc-replicating.md#mysql_rds_reset_external_master) or [mysql\.rds\_reset\_external\_source \(Aurora MySQL version 3\)](mysql-stored-proc-replicating.md#mysql_rds_reset_external_source) stored procedure to remove the replication configuration\.
 
 ### 7\. Monitor your replica<a name="AuroraMySQL.Replication.MySQL.Monitor"></a>
 
@@ -133,51 +133,51 @@ If replication fails, it can result in a large increase in unintentional I/O on 
 
 ## Stopping replication between Aurora and MySQL or between Aurora and another Aurora DB cluster<a name="AuroraMySQL.Replication.MySQL.Stopping"></a>
 
- To stop binary log replication with a MySQL DB instance, external MySQL database, or another Aurora DB cluster, follow these steps, discussed in detail following in this topic\. 
+To stop binary log replication with a MySQL DB instance, external MySQL database, or another Aurora DB cluster, follow these steps, discussed in detail following in this topic\.
 
- [1\. Stop binary log replication on the replica target](#AuroraMySQL.Replication.MySQL.Stopping.StopReplication) 
+[1\. Stop binary log replication on the replica target](#AuroraMySQL.Replication.MySQL.Stopping.StopReplication)
 
- [2\. Turn off binary logging on the replication source](#AuroraMySQL.Replication.MySQL.Stopping.DisableBinaryLogging) 
+[2\. Turn off binary logging on the replication source](#AuroraMySQL.Replication.MySQL.Stopping.DisableBinaryLogging)
 
 ### 1\. Stop binary log replication on the replica target<a name="AuroraMySQL.Replication.MySQL.Stopping.StopReplication"></a>
 
- Find instructions on how to stop binary log replication for your database engine following\. 
+Use the following instructions to stop binary log replication for your database engine\.
 
 
 |  Database engine  |  Instructions  | 
 | --- | --- | 
-|   Aurora MySQL   |   **To stop binary log replication on an Aurora MySQL DB cluster replica target**   Connect to the Aurora DB cluster that is the replica target, and call the [ mysql\.rds\_stop\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_stop_replication.html) procedure\.   | 
-|   RDS for MySQL   |   **To stop binary log replication on an Amazon RDS DB instance**   Connect to the RDS DB instance that is the replica target and call the [ mysql\.rds\_stop\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_stop_replication.html) procedure\. The `mysql.rds_stop_replication` procedure is only available for MySQL versions 5\.5 and later, 5\.6 and later, and 5\.7 and later\.   | 
-|   MySQL \(external\)   |   **To stop binary log replication on an external MySQL database**   Connect to the MySQL database and call the `STOP REPLICATION` command\.   | 
+|   Aurora MySQL   |  **To stop binary log replication on an Aurora MySQL DB cluster replica target** Connect to the Aurora DB cluster that is the replica target, and call the [mysql\.rds\_stop\_replication](mysql-stored-proc-replicating.md#mysql_rds_stop_replication) procedure\.  | 
+|   RDS for MySQL   |  **To stop binary log replication on an Amazon RDS DB instance** Connect to the RDS DB instance that is the replica target and call the [mysql\.rds\_stop\_replication](mysql-stored-proc-replicating.md#mysql_rds_stop_replication) procedure\.  | 
+|   MySQL \(external\)   |  **To stop binary log replication on an external MySQL database** Connect to the MySQL database and call the `STOP REPLICATION` command\.  | 
 
 ### 2\. Turn off binary logging on the replication source<a name="AuroraMySQL.Replication.MySQL.Stopping.DisableBinaryLogging"></a>
 
- Find instructions on how to turn off binary logging on the replication source for your database engine following\. 
+Use the instructions in the following table to turn off binary logging on the replication source for your database engine\.
 
 
-|  Database engine  |  Instructions  | 
+| Database engine | Instructions | 
 | --- | --- | 
-|   Aurora MySQL   |   **To turn off binary logging on an Amazon Aurora DB cluster**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
-|   RDS for MySQL   |   **To turn off binary logging on an Amazon RDS DB instance**   You can't turn off binary logging directly for an Amazon RDS DB instance, but you can turn it off by doing the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
-|   MySQL \(external\)   |   **To turn off binary logging on an external MySQL database**   Connect to the MySQL database and call the `STOP REPLICATION` command\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
+|   Aurora MySQL   |  **To turn off binary logging on an Amazon Aurora DB cluster** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
+|   RDS for MySQL   |  **To turn off binary logging on an Amazon RDS DB instance** You can't turn off binary logging directly for an Amazon RDS DB instance, but you can turn it off by doing the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
+|   MySQL \(external\)   |  **To turn off binary logging on an external MySQL database** Connect to the MySQL database and call the `STOP REPLICATION` command\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.html)  | 
 
 ## Using Amazon Aurora to scale reads for your MySQL database<a name="AuroraMySQL.Replication.ReadScaling"></a>
 
- You can use Amazon Aurora with your MySQL DB instance to take advantage of the read scaling capabilities of Amazon Aurora and expand the read workload for your MySQL DB instance\. To use Aurora to read scale your MySQL DB instance, create an Amazon Aurora MySQL DB cluster and make it a read replica of your MySQL DB instance\. This applies to an RDS for MySQL DB instance, or a MySQL database running external to Amazon RDS\. 
+You can use Amazon Aurora with your MySQL DB instance to take advantage of the read scaling capabilities of Amazon Aurora and expand the read workload for your MySQL DB instance\. To use Aurora to scale reads for your MySQL DB instance, create an Amazon Aurora MySQL DB cluster and make it a read replica of your MySQL DB instance\. This applies to an RDS for MySQL DB instance, or a MySQL database running external to Amazon RDS\.
 
- For information on creating an Amazon Aurora DB cluster, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\. 
+For information on creating an Amazon Aurora DB cluster, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.
 
- When you set up replication between your MySQL DB instance and your Amazon Aurora DB cluster, be sure to follow these guidelines: 
-+  Use the Amazon Aurora DB cluster endpoint address when you reference your Amazon Aurora MySQL DB cluster\. If a failover occurs, then the Aurora Replica that is promoted to the primary instance for the Aurora MySQL DB cluster continues to use the DB cluster endpoint address\. 
-+  Maintain the binlogs on your writer instance until you have verified that they have been applied to the Aurora Replica\. This maintenance ensures that you can restore your writer instance in the event of a failure\. 
+When you set up replication between your MySQL DB instance and your Amazon Aurora DB cluster, be sure to follow these guidelines:
++ Use the Amazon Aurora DB cluster endpoint address when you reference your Amazon Aurora MySQL DB cluster\. If a failover occurs, then the Aurora Replica that is promoted to the primary instance for the Aurora MySQL DB cluster continues to use the DB cluster endpoint address\.
++ Maintain the binlogs on your writer instance until you have verified that they have been applied to the Aurora Replica\. This maintenance ensures that you can restore your writer instance in the event of a failure\.
 
 **Important**  
- When using self\-managed replication, you're responsible for monitoring and resolving any replication issues that may occur\. For more information, see [Diagnosing and resolving lag between read replicas](CHAP_Troubleshooting.md#CHAP_Troubleshooting.MySQL.ReplicaLag)\. 
+When using self\-managed replication, you're responsible for monitoring and resolving any replication issues that may occur\. For more information, see [Diagnosing and resolving lag between read replicas](CHAP_Troubleshooting.md#CHAP_Troubleshooting.MySQL.ReplicaLag)\.
 
 **Note**  
- The permissions required to start replication on an Amazon Aurora MySQL DB cluster are restricted and not available to your Amazon RDS master user\. Because of this, you must use the Amazon RDS [ mysql\.rds\_set\_external\_source](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_external_source.html) and [ mysql\.rds\_start\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_start_replication.html) procedures to set up replication between your Amazon Aurora MySQL DB cluster and your MySQL DB instance\. 
+The permissions required to start replication on an Aurora MySQL DB cluster are restricted and not available to your Amazon RDS master user\. Therefore, you must use the [mysql\.rds\_set\_external\_master \(Aurora MySQL version 1 and 2\)](mysql-stored-proc-replicating.md#mysql_rds_set_external_master) or [mysql\.rds\_set\_external\_source \(Aurora MySQL version 3\)](mysql-stored-proc-replicating.md#mysql_rds_set_external_source) and [mysql\.rds\_start\_replication](mysql-stored-proc-replicating.md#mysql_rds_start_replication) procedures to set up replication between your Aurora MySQL DB cluster and your MySQL DB instance\.
 
-### Start replication between an external source instance and a MySQL DB instance on Amazon RDS<a name="AuroraMySQL.Replication.ReadScaling.Procedure"></a>
+### Start replication between an external source instance and an Aurora MySQL DB cluster<a name="AuroraMySQL.Replication.ReadScaling.Procedure"></a>
 
 1.  Make the source MySQL DB instance read\-only: 
 
@@ -195,7 +195,7 @@ If replication fails, it can result in a large increase in unintentional I/O on 
    ------------------------------------
    ```
 
-1.  Copy the database from the external MySQL DB instance to the Amazon Aurora MySQL DB cluster using `mysqldump`\. For very large databases, you might want to use the procedure in [ Importing data to a MySQL or MariaDB DB instance with reduced downtime](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html) in the * Amazon Relational Database Service User Guide*\. 
+1. Copy the database from the external MySQL DB instance to the Amazon Aurora MySQL DB cluster using `mysqldump`\. For very large databases, you might want to use the procedure in [Importing data to a MySQL or MariaDB DB instance with reduced downtime](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.NonRDSRepl.html) in the * Amazon Relational Database Service User Guide*\.
 
    For Linux, macOS, or Unix:
 
@@ -229,45 +229,47 @@ If replication fails, it can result in a large increase in unintentional I/O on 
            -p <RDS_password>
    ```
 **Note**  
- Make sure that there is not a space between the `-p` option and the entered password\. 
+Make sure that there is not a space between the `-p` option and the entered password\.
 
-    Use the `--host`, `--user (-u)`, `--port` and `-p` options in the `mysql` command to specify the hostname, user name, port, and password to connect to your Aurora DB cluster\. The host name is the DNS name from the Amazon Aurora DB cluster endpoint, for example, `mydbcluster.cluster-123456789012.us-east-1.rds.amazonaws.com`\. You can find the endpoint value in the cluster details in the Amazon RDS Management Console\. 
+   Use the `--host`, `--user (-u)`, `--port` and `-p` options in the `mysql` command to specify the hostname, user name, port, and password to connect to your Aurora DB cluster\. The host name is the DNS name from the Amazon Aurora DB cluster endpoint, for example, `mydbcluster.cluster-123456789012.us-east-1.rds.amazonaws.com`\. You can find the endpoint value in the cluster details in the Amazon RDS Management Console\.
 
-1.  Make the source MySQL DB instance writeable again: 
+1. Make the source MySQL DB instance writeable again:
 
    ```
    mysql> SET GLOBAL read_only = OFF;
    mysql> UNLOCK TABLES;
    ```
 
-    For more information on making backups for use with replication, see [http://dev.mysql.com/doc/refman/8.0/en/replication-solutions-backups-read-only.html](http://dev.mysql.com/doc/refman/8.0/en/replication-solutions-backups-read-only.html) in the MySQL documentation\. 
+   For more information on making backups for use with replication, see [http://dev.mysql.com/doc/refman/8.0/en/replication-solutions-backups-read-only.html](http://dev.mysql.com/doc/refman/8.0/en/replication-solutions-backups-read-only.html) in the MySQL documentation\.
 
-1.  In the Amazon RDS Management Console, add the IP address of the server that hosts the source MySQL database to the VPC security group for the Amazon Aurora DB cluster\. For more information on modifying a VPC security group, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+1. In the Amazon RDS Management Console, add the IP address of the server that hosts the source MySQL database to the VPC security group for the Amazon Aurora DB cluster\. For more information on modifying a VPC security group, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\.
 
-    You might also need to configure your local network to permit connections from the IP address of your Amazon Aurora DB cluster, so that it can communicate with your source MySQL instance\. To find the IP address of the Amazon Aurora DB cluster, use the `host` command\. 
+   You might also need to configure your local network to permit connections from the IP address of your Amazon Aurora DB cluster, so that it can communicate with your source MySQL instance\. To find the IP address of the Amazon Aurora DB cluster, use the `host` command\.
 
    ```
    host <aurora_endpoint_address>
    ```
 
-    The host name is the DNS name from the Amazon Aurora DB cluster endpoint\. 
+   The host name is the DNS name from the Amazon Aurora DB cluster endpoint\.
 
-1.  Using the client of your choice, connect to the external MySQL instance and create a MySQL user to be used for replication\. This account is used solely for replication and must be restricted to your domain to improve security\. The following is an example\. 
+1. Using the client of your choice, connect to the external MySQL instance and create a MySQL user to be used for replication\. This account is used solely for replication and must be restricted to your domain to improve security\. The following is an example\.
 
    ```
    CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY '<password>';
    ```
 
-1.  For the external MySQL instance, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. For example, to grant the `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the '`repl_user`' user for your domain, issue the following command\. 
+1. For the external MySQL instance, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. For example, to grant the `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the '`repl_user`' user for your domain, issue the following command\.
 
    ```
    GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com'
        IDENTIFIED BY '<password>';
    ```
 
-1.  Take a manual snapshot of the Aurora MySQL DB cluster to be the read replica before setting up replication\. If you need to reestablish replication with the DB cluster as a read replica, you can restore the Aurora MySQL DB cluster from this snapshot instead of having to import the data from your MySQL DB instance into a new Aurora MySQL DB cluster\. 
+1. Take a manual snapshot of the Aurora MySQL DB cluster to be the read replica before setting up replication\. If you need to reestablish replication with the DB cluster as a read replica, you can restore the Aurora MySQL DB cluster from this snapshot instead of having to import the data from your MySQL DB instance into a new Aurora MySQL DB cluster\.
 
-1.  Make the Amazon Aurora DB cluster the replica\. Connect to the Amazon Aurora DB cluster as the master user and identify the source MySQL database as the replication master by using the [ mysql\.rds\_set\_external\_source](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_set_external_source.html) procedure\. Use the master log file name and master log position that you determined in Step 2\. The following is an example\. 
+1. Make the Amazon Aurora DB cluster the replica\. Connect to the Amazon Aurora DB cluster as the master user and identify the source MySQL database as the replication master by using the [mysql\.rds\_set\_external\_master \(Aurora MySQL version 1 and 2\)](mysql-stored-proc-replicating.md#mysql_rds_set_external_master) or [mysql\.rds\_set\_external\_source \(Aurora MySQL version 3\)](mysql-stored-proc-replicating.md#mysql_rds_set_external_source) and [mysql\.rds\_start\_replication](mysql-stored-proc-replicating.md#mysql_rds_start_replication) procedures\.
+
+   Use the master log file name and master log position that you determined in Step 2\. The following is an example\.
 
    ```
    For Aurora MySQL version 1 and 2:
@@ -279,13 +281,13 @@ If replication fails, it can result in a large increase in unintentional I/O on 
        'repl_user', '<password>', 'mysql-bin-changelog.000031', 107, 0);
    ```
 
-1.  On the Amazon Aurora DB cluster, issue the [ mysql\.rds\_start\_replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_start_replication.html) procedure to start replication\. 
+1. On the Amazon Aurora DB cluster, call the [mysql\.rds\_start\_replication](mysql-stored-proc-replicating.md#mysql_rds_start_replication) procedure to start replication\.
 
    ```
    CALL mysql.rds_start_replication; 
    ```
 
- After you have established replication between your source MySQL DB instance and your Amazon Aurora DB cluster, you can add Aurora Replicas to your Amazon Aurora DB cluster\. You can then connect to the Aurora Replicas to read scale your data\. For information on creating an Aurora Replica, see [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)\. 
+After you have established replication between your source MySQL DB instance and your Amazon Aurora DB cluster, you can add Aurora Replicas to your Amazon Aurora DB cluster\. You can then connect to the Aurora Replicas to read scale your data\. For information on creating an Aurora Replica, see [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)\.
 
 ## Optimizing binary log replication<a name="binlog-optimization"></a>
 

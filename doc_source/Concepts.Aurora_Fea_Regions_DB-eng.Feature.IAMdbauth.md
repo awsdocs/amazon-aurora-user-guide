@@ -20,4 +20,3 @@ IAM database authentication with Aurora PostgreSQL is available in all Regions f
 + Aurora PostgreSQL 13 \(All versions\)
 + Aurora PostgreSQL 12 \(All versions\)
 + Aurora PostgreSQL 11 \(Version 11\.9, 11\.12 and higher\)
-+ Aurora PostgreSQL 10 \(Version 10\.11 and higher\)

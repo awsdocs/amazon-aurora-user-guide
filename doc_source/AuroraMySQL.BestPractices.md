@@ -240,7 +240,7 @@ In the output, the `Hash Join Inner table` is the table used to build hash table
 
 For more information about the extended `EXPLAIN` output format, see [Extended EXPLAIN output format](https://dev.mysql.com/doc/refman/5.6/en/explain-extended.html) in the MySQL product documentation\.
 
- In Aurora MySQL 2\.08 and higher, you can use SQL hints to influence whether a query uses hash join or not, and which tables to use for the build and probe sides of the join\. For details, see [Aurora MySQL hints](AuroraMySQL.Reference.md#AuroraMySQL.Reference.Hints)\. 
+ In Aurora MySQL 2\.08 and higher, you can use SQL hints to influence whether a query uses hash join or not, and which tables to use for the build and probe sides of the join\. For details, see [Aurora MySQL hints](AuroraMySQL.Reference.Hints.md)\. 
 
 ### Using Amazon Aurora to scale reads for your MySQL database<a name="AuroraMySQL.BestPractices.ReadScaling"></a>
 

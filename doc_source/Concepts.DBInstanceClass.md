@@ -293,7 +293,7 @@ For information about Aurora DB engine support for each DB instance class, see [
 | db\.x2g\.16xlarge | 64 | — | 1024 | 19,000 | 25 | 
 | db\.x2g\.12xlarge | 48 | — | 768 | 14,250 | 20 | 
 | db\.x2g\.8xlarge | 32 | — | 512 | 9,500 | 12 | 
-| db\.x2g\.4xlarge | 16 | — | 256 | 4,75 | Up to 10 | 
+| db\.x2g\.4xlarge | 16 | — | 256 | 4,750 | Up to 10 | 
 | db\.x2g\.2xlarge | 8 | — | 128 | Up to 4,750 | Up to 10 | 
 | db\.x2g\.xlarge | 4 | — | 64 | Up to 4,750 | Up to 10 | 
 | db\.x2g\.large | 2 | — | 32 | Up to 4,750 | Up to 10 | 

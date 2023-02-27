@@ -121,6 +121,7 @@ The following table shows the Aurora MySQL versions and DB instance classes wher
 | --- | --- | --- | --- | 
 | 2\.07\.2 and higher 2\.07 versions | No | Yes | N/A | 
 | 2\.10\.0 and higher 2\.10 versions | Yes | Yes | N/A | 
+| 2\.11\.0 and higher 2\.11 versions | Yes | Yes | N/A | 
 | 3\.01\.0 and 3\.01\.1 | Yes | Yes | N/A | 
 | 3\.02\.0 and higher 3\.x versions | Yes | Yes | Yes | 
 
@@ -163,6 +164,6 @@ The following table summarizes how ZDP works for upgrading from and to specific 
 |  Aurora MySQL 2\.07\.4 and higher 2\.07 versions  |  2\.10\.\*  |  Yes, on the writer instance for T2 and T3 instances only\. Aurora rolls back transactions for active and idle transactions\. Connections using SSL, temporary tables, table locks, or user locks are disconnected\. Aurora might restart the engine and drop all connections if the engine takes too long to start after ZDP finishes\.  | 
 |  Aurora MySQL 2\.10\.\*  | 2\.10\.\* |  Yes, on the writer instance for `db.t*` and `db.r*` instances\. Aurora rolls back transactions for active and idle transactions\. Connections using SSL, temporary tables, table locks, or user locks are disconnected\. Aurora might restart the engine and drop all connections if the engine takes too long to start after ZDP finishes\.  | 
 
-## Alternative blue\-green upgrade technique<a name="AuroraMySQL.Upgrading.BlueGreen"></a>
+## Alternative blue\-green upgrade technique<a name="AuroraMySQL.UpgradingMinor.BlueGreen"></a>
 
- Blog post: [Performing major version upgrades for Aurora MySQL with minimum downtime](http://aws.amazon.com/blogs/database/performing-major-version-upgrades-for-amazon-aurora-mysql-with-minimum-downtime/)\. 
+In some situations, your top priority is to perform an immediate switchover from the old cluster to an upgraded one\. In such situations, you can use a multistep process that runs the old and new clusters side\-by\-side\. Here, you replicate data from the old cluster to the new one until you are ready for the new cluster to take over\. For details, see [Using Amazon RDS Blue/Green Deployments for database updates](blue-green-deployments.md)\.

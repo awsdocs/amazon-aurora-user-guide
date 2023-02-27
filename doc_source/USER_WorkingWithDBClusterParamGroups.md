@@ -33,7 +33,7 @@ The DB cluster and DB instance parameters available to you in Aurora vary depend
 
 | Database engine | Parameters | 
 | --- | --- | 
-|  Aurora MySQL  |  See [Aurora MySQL configuration parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.  For Aurora Serverless clusters, see additional details in [Working with parameter groups for Aurora Serverless v2](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.parameter-groups) and [Parameter groups for Aurora Serverless v1](aurora-serverless-v1.how-it-works.md#aurora-serverless.parameter-groups)\.   | 
+|  Aurora MySQL  |  See [Aurora MySQL configuration parameters](AuroraMySQL.Reference.ParameterGroups.md)\.  For Aurora Serverless clusters, see additional details in [Working with parameter groups for Aurora Serverless v2](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.parameter-groups) and [Parameter groups for Aurora Serverless v1](aurora-serverless-v1.how-it-works.md#aurora-serverless.parameter-groups)\.   | 
 |  Aurora PostgreSQL  |  See [Amazon Aurora PostgreSQL parameters](AuroraPostgreSQL.Reference.ParameterGroups.md)\.  For Aurora Serverless clusters, see additional details in [Working with parameter groups for Aurora Serverless v2](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.parameter-groups) and [Parameter groups for Aurora Serverless v1](aurora-serverless-v1.how-it-works.md#aurora-serverless.parameter-groups)\.   | 
 
 **Note**  

@@ -201,7 +201,7 @@ Complete the following steps:
 
 1. Identify the DB subnet group and VPC security group ID for your new DB cluster, and then call the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command to create the Aurora MySQL DB cluster\.
 
-   For example, the following command creates a new MySQL 8\.0–compatible DB cluster named `sample-cluster`\.
+   For example, the following command creates a new MySQL 8\.0–compatible DB cluster named `sample-cluster`\. The cluster uses the default engine version\.
 
    For Linux, macOS, or Unix:
 
@@ -219,13 +219,13 @@ Complete the following steps:
        --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
    ```
 
-   The following command creates a new MySQL 5\.7–compatible DB cluster named `sample-cluster`\.
+   The following command creates a new MySQL 5\.7–compatible DB cluster named `sample-cluster`\. The cluster uses the default engine version\.
 
    For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql \
-        --engine-version 5.7.12 --master-username user-name --master-user-password password \
+        --engine-version 5.7 --master-username user-name --master-user-password password \
         --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
    ```
 
@@ -233,7 +233,7 @@ Complete the following steps:
 
    ```
    aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql ^
-       --engine-version 5.7.12 --master-username user-name --master-user-password password ^
+       --engine-version 5.7 --master-username user-name --master-user-password password ^
        --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
    ```
 

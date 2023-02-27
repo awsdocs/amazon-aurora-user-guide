@@ -9,7 +9,7 @@ When you create a blue/green deployment, you specify the DB cluster to copy in t
 
 ## Preparing an Aurora DB cluster for a blue/green deployment<a name="blue-green-deployments-creating-preparing-aurora"></a>
 
-Before you create a blue/green deployment for an Aurora MySQL DB cluster, the DB cluster must be associated with a custom DB cluster parameter group with binary logging turned on\. For example, set the `binlog_format` parameter to `ROW`\. Binary logging is required for replication from the blue environment to the green environment\. For information about creating a custom DB cluster parameter group and setting parameters, see [Working with DB cluster parameter groups](USER_WorkingWithDBClusterParamGroups.md)\.
+Before you create a blue/green deployment for an Aurora MySQL DB cluster, the DB cluster must be associated with a custom DB cluster parameter group with binary logging \(`binlog_format`\) turned on\. Binary logging is required for replication from the blue environment to the green environment\. While any binlog format works, we recommend `ROW` to reduce the risk of replication inconsistencies\. For information about creating a custom DB cluster parameter group and setting parameters, see [Working with DB cluster parameter groups](USER_WorkingWithDBClusterParamGroups.md)\.
 
 You can modify the DB cluster to associate it with a custom DB cluster parameter group\. For more information, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
