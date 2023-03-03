@@ -304,6 +304,7 @@ Feature availability and support varies across specific versions of each databas
 Managing master user passwords with Secrets Manager isn't supported for the following features:
 + Amazon RDS Blue/Green Deployments
 + DB clusters that are part of an Aurora global database
++ Aurora Serverless v2 DB clusters
 + Aurora Serverless v1 DB clusters
 + Aurora MySQL cross\-Region read replicas
 + Managing master user password with Secrets Manager for a read replica
