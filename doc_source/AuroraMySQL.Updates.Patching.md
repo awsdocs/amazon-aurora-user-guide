@@ -1,28 +1,32 @@
 # Upgrading the minor version or patch level of an Aurora MySQL DB cluster<a name="AuroraMySQL.Updates.Patching"></a>
 
  You can use the following methods to upgrade the minor version of a DB cluster or to patch a DB cluster: 
-+ [Upgrading Aurora MySQL by modifying the engine version](#AuroraMySQL.Updates.Patching.ModifyEngineVersion) \(for Aurora MySQL 1\.19\.0 and higher, or 2\.03\.2 and higher\)
++ [Upgrading Aurora MySQL by modifying the engine version](#AuroraMySQL.Updates.Patching.ModifyEngineVersion) \(for Aurora MySQL version 2 and 3\)
 + [Enabling automatic upgrades between minor Aurora MySQL versions](#AuroraMySQL.Updates.AMVU)
-+ [Upgrading Aurora MySQL by applying pending maintenance to an Aurora MySQL DB cluster](#AuroraMySQL.Updates.PendingMaintenance) \(before Aurora MySQL 1\.19\.0\)
 
  For information about how zero\-downtime patching can reduce interruptions during the upgrade process, see [Using zero\-downtime patching](#AuroraMySQL.Updates.ZDP)\. 
 
 ## Upgrading Aurora MySQL by modifying the engine version<a name="AuroraMySQL.Updates.Patching.ModifyEngineVersion"></a>
 
-Upgrading the minor version of an Aurora MySQL cluster applies additional fixes and new features to an existing cluster\. You can do this type of upgrade for clusters that are running Amazon Aurora MySQL version 1\.19\.0 and higher, or 2\.03\.2 and higher\.
+Upgrading the minor version of an Aurora MySQL cluster applies additional fixes and new features to an existing cluster\.
 
-This kind of upgrade applies to Aurora MySQL clusters where the original version and the upgraded version are both in the Aurora MySQL 1\.x series, or both in the Aurora MySQL 2\.x series\. The process is fast and straightforward because it doesn't involve any conversion for the Aurora MySQL metadata or reorganization of your table data\.
+This kind of upgrade applies to Aurora MySQL clusters where the original version and the upgraded version are both in the Aurora MySQL 2\.x series\. The process is fast and straightforward because it doesn't involve any conversion for the Aurora MySQL metadata or reorganization of your table data\.
 
-You perform this kind of upgrade by modifying the engine version of the DB cluster using the AWS Management Console, AWS CLI, or the RDS API\. If your cluster is running Aurora MySQL 1\.x, choose a higher 1\.x version\. If your cluster is running Aurora MySQL 2\.x, choose a higher 2\.x version\.
+You perform this kind of upgrade by modifying the engine version of the DB cluster using the AWS Management Console, AWS CLI, or the RDS API\. If your cluster is running Aurora MySQL 2\.x, choose a higher 2\.x version\.
 
-**Note**  
 If you're performing a minor upgrade on an Aurora global database, upgrade all of the secondary clusters before you upgrade the primary cluster\.
 
-**To modify the engine version of a DB cluster**
+**Note**  
+To perform a minor version upgrade to Aurora MySQL version 3\.03\.\*, use the following process:  
+Remove all secondary Regions from the global cluster\. Follow the steps in [Removing a cluster from an Amazon Aurora global database](aurora-global-database-managing.md#aurora-global-database-detaching)\.
+Upgrade the engine version of the primary Region to 3\.03\.\*\. Follow the steps in [To modify the engine version of a DB cluster](#modify-db-cluster-engine-version)\.
+Add secondary Regions to the global cluster\. Follow the steps in [Adding an AWS Region to an Amazon Aurora global database](aurora-global-database-getting-started.md#aurora-global-database-attaching)\.
+
+ **To modify the engine version of a DB cluster** 
 + **By using the console** – Modify the properties of your cluster\. In the **Modify DB cluster** window, change the Aurora MySQL engine version in the **DB engine version** box\. If you aren't familiar with the general procedure for modifying a cluster, follow the instructions at [Modifying the DB cluster by using the console, CLI, and API](Aurora.Modifying.md#Aurora.Modifying.Cluster)\.
 + **By using the AWS CLI** – Call the [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) AWS CLI command, and specify the name of your DB cluster for the `--db-cluster-identifier` option and the engine version for the `--engine-version` option\.
 
-  For example, to upgrade to Aurora MySQL version 2\.03\.2, set the `--engine-version` option to `5.7.mysql_aurora.2.03.2`\. Specify the `--apply-immediately` option to immediately update the engine version for your DB cluster\.
+  For example, to upgrade to Aurora MySQL version 2\.11\.1, set the `--engine-version` option to `5.7.mysql_aurora.2.11.1`\. Specify the `--apply-immediately` option to immediately update the engine version for your DB cluster\.
 + **By using the RDS API** – Call the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) API operation, and specify the name of your DB cluster for the `DBClusterIdentifier` parameter and the engine version for the `EngineVersion` parameter\. Set the `ApplyImmediately` parameter to `true` to immediately update the engine version for your DB cluster\.
 
 ## Enabling automatic upgrades between minor Aurora MySQL versions<a name="AuroraMySQL.Updates.AMVU"></a><a name="amvu"></a>
@@ -89,24 +93,6 @@ That command produces output similar to the following:
   },
 ... output omitted ...
 ```
-
-## Upgrading Aurora MySQL by applying pending maintenance to an Aurora MySQL DB cluster<a name="AuroraMySQL.Updates.PendingMaintenance"></a>
-
- When upgrading to Aurora MySQL version 1\.x versions, new database engine minor versions and patches show as an **available** maintenance upgrade for your DB cluster\. You can upgrade or patch the database version of your DB cluster by applying the available maintenance action\. We recommend applying the update on a nonproduction DB cluster first, so that you can see how changes in the new version affect your instances and applications\. 
-
- **To apply pending maintenance actions** 
-+  **By using the console** – Complete the following steps: 
-
-  1.  Sign in to the Amazon RDS console, choose **Databases**, and choose the DB cluster that shows the **available** maintenance upgrade\. 
-
-  1.  For **Actions**, choose **Upgrade now** to immediately update the database version for your DB cluster, or **Upgrade at next window** to update the database version for your DB cluster during the next DB cluster maintenance window\. 
-+  **By using the AWS CLI** – Call the [apply\-pending\-maintenance\-action](https://docs.aws.amazon.com/cli/latest/reference/rds/apply-pending-maintenance-action.html) AWS CLI command, and specify the Amazon Resource Name \(ARN\) for your DB cluster for the `--resource-id` option and `system-update` for the `--apply-action` option\. Set the `--opt-in-type` option to `immediate` to immediately update the database version for your DB cluster, or `next-maintenance` to update the database version for your DB cluster during the next cluster maintenance window\. 
-+  **By using the RDS API** – Call the [ApplyPendingMaintenanceAction](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html) API operation, and specify the ARN for your DB cluster for the `ResourceId` parameter and `system-update` for the `ApplyAction` parameter\. Set the `OptInType` parameter to `immediate` to immediately update the database version for your DB cluster, or `next-maintenance` to update the database version for your instance during the next cluster maintenance window\. 
-
- For more information on how Amazon RDS manages database and operating system updates, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
-
-**Note**  
- If your current Aurora MySQL version is 1\.14\.x but lower than 1\.14\.4, you can upgrade only to 1\.14\.4 \(which supports db\.r4 instance classes\)\. Also, to upgrade from 1\.14\.x to a higher minor Aurora MySQL version, such as 1\.17, the 1\.14\.x version must be 1\.14\.4\. 
 
 ## Using zero\-downtime patching<a name="AuroraMySQL.Updates.ZDP"></a><a name="zdp"></a>
 

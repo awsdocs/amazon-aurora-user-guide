@@ -12,7 +12,6 @@ The `cpu` wait event occurs when a thread is active in CPU or is waiting for CPU
 
 This wait event information is supported for the following engine versions:
 + Aurora MySQL version 2, up to 2\.09\.2
-+ Aurora MySQL version 1, up to 1\.23\.1
 
 ## Context<a name="ams-waits.cpu.context"></a>
 

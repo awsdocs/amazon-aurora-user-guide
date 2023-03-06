@@ -16,6 +16,7 @@ Aurora PostgreSQL is FedRAMP HIGH eligible\. For details about AWS and complianc
 + [Using Babelfish for Aurora PostgreSQL](babelfish.md)
 + [Managing Amazon Aurora PostgreSQL](AuroraPostgreSQL.Managing.md)
 + [Tuning with wait events for Aurora PostgreSQL](AuroraPostgreSQL.Tuning.md)
++ [Tuning Aurora PostgreSQL with Amazon DevOps Guru proactive insights](PostgreSQL.Tuning_proactive_insights.md)
 + [Best practices with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md)
 + [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)
 + [Integrating Amazon Aurora PostgreSQL with other AWS services](AuroraPostgreSQL.Integrating.md)

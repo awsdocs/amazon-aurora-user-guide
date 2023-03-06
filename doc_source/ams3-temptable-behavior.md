@@ -30,15 +30,21 @@ The `TempTable` storage engine is the default\. `TempTable` uses a common memory
 
 In some cases when you use the `TempTable` storage engine, the temporary data might exceed the size of the memory pool\. If so, Aurora MySQL stores the overflow data using a secondary mechanism\.
 
-You can set the [temptable\_max\_mmap](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_temptable_max_mmap) parameter to specify if the data overflows to memory\-mapped temporary files or to InnoDB internal temporary tables on disk\. The different data formats and overflow criteria of these overflow mechanisms can affect query performance\. They do so by influencing the amount of data written to disk and the demand on disk storage throughput\.
+You can set the [temptable\_max\_mmap](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_temptable_max_mmap) parameter to choose whether the data overflows to memory\-mapped temporary files or to InnoDB internal temporary tables on disk\. The different data formats and overflow criteria of these overflow mechanisms can affect query performance\. They do so by influencing the amount of data written to disk and the demand on disk storage throughput\.
 
- Aurora MySQL stores the overflow data differently depending on a couple of considerations\. These are your choice of data overflow destination and whether the query runs on a writer or reader DB instance:
+Aurora MySQL stores the overflow data differently depending on your choice of data overflow destination and whether the query runs on a writer or reader DB instance:
 + On the writer instance, data that overflows to InnoDB internal temporary tables is stored in the Aurora cluster volume\.
 + On the writer instance, data that overflows to memory\-mapped temporary files resides on local storage on the Aurora MySQL version 3 instance\.
 + On reader instances, overflow data always resides on memory\-mapped temporary files on local storage\. That's because read\-only instances can't store any data on the Aurora cluster volume\.
 
+The configuration parameters related to internal temporary tables apply differently to the writer and reader instances in your cluster:
++ On reader instances, Aurora MySQL always uses the `TempTable` storage engine\.
++ The size for `temptable_max_mmap` defaults to 1 GiB for both writer and reader instances, regardless of the DB instance memory size\. You can adjust this value on both writer and reader instances\.
++ Setting `temptable_max_mmap` to `0` turns off the use of memory\-mapped temporary files on writer instances\. 
++ You can't set `temptable_max_mmap` to `0` on reader instances\.
+
 **Note**  
-The configuration parameters related to internal temporary tables apply differently to the writer and reader instances in your cluster\. For reader instances, Aurora MySQL always uses the `TempTable` storage engine and a value of 1 for `temptable_use_mmap`\. The size for `temptable_max_mmap` defaults to 1 GiB, for both writer and reader instances, regardless of the DB instance memory size\. You can adjust this value similarly to how you do so on the writer instance\. However, you can't specify a value of zero for `temptable_max_mmap` on reader instances\.
+We don't recommend using the [temptable\_use\_mmap](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_temptable_use_mmap) parameter\. It has been deprecated, and support for it is expected to be removed in a future MySQL release\.
 
 ## Mitigating fullness issues for internal temporary tables on Aurora Replicas<a name="ams3-temptable-behavior-mitigate"></a>
 

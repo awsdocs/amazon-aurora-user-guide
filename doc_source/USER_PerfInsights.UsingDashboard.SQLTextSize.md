@@ -18,8 +18,7 @@ When you download SQL text, the database engine determines its maximum length\. 
 
 | DB engine | Maximum length of downloaded text | 
 | --- | --- | 
-| Aurora MySQL 5\.7 | 4,096 bytes | 
-| Aurora MySQL 5\.6 | 1,024 bytes | 
+| Aurora MySQL version 2 | 4,096 bytes | 
 
 The **SQL text** section of the Performance Insights console displays up to the maximum that the engine returns\. For example, if Aurora MySQL returns at most 1 KB to Performance Insights, it can only collect and show 1 KB, even if the original query is larger\. Thus, when you view the query in **SQL text** or download it, Performance Insights returns the same number of bytes\.
 

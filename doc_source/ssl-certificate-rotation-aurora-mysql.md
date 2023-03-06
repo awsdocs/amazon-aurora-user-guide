@@ -42,8 +42,6 @@ In this sample output, you can see both your own session \(`admin`\) and an appl
 3 rows in set (0.00 sec)
 ```
 
-If you are using Aurora MySQL version 1 \(compatible with MySQL 5\.6\), then you can't determine from the server side whether applications are connecting with or without SSL\. For those versions, you can determine whether SSL is used by examining the application's connection method\. You can find more information on examining the client connection configuration in the following section\.
-
 ## Determining whether a client requires certificate verification to connect<a name="ssl-certificate-rotation-aurora-mysql.determining-client"></a>
 
 You can check whether JDBC clients and MySQL clients require certificate verification to connect\.

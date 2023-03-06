@@ -1,12 +1,11 @@
 # Adding Aurora Replicas to a DB cluster<a name="aurora-replicas-adding"></a><a name="create_instance"></a>
 
-An Aurora DB cluster with single\-master replication has one primary DB instance and up to 15 Aurora Replicas\. The primary DB instance supports read and write operations, and performs all data modifications to the cluster volume\. Aurora Replicas connect to the same storage volume as the primary DB instance, but support read operations only\. You use Aurora Replicas to offload read workloads from the primary DB instance\. For more information, see [Aurora Replicas](Aurora.Replication.md#Aurora.Replication.Replicas)\. 
+An Aurora DB cluster with replication has one primary DB instance and up to 15 Aurora Replicas\. The primary DB instance supports read and write operations, and performs all data modifications to the cluster volume\. Aurora Replicas connect to the same storage volume as the primary DB instance, but support read operations only\. You use Aurora Replicas to offload read workloads from the primary DB instance\. For more information, see [Aurora Replicas](Aurora.Replication.md#Aurora.Replication.Replicas)\. 
 
 Amazon Aurora Replicas have the following limitations:
 + You can't create an Aurora Replica for an Aurora Serverless v1 DB cluster\. Aurora Serverless v1 has a single DB instance that scales up and down automatically to support all database read and write operations\. 
 
   However, you can add reader instances to Aurora Serverless v2 DB clusters\. For more information, see [Adding an Aurora Serverless v2 reader](aurora-serverless-v2-administration.md#aurora-serverless-v2-adding-reader)\.
-+ You can't create Aurora Replicas for an Aurora multi\-master cluster\. By design, an Aurora multi\-master cluster has read\-write DB instances only\. 
 
 We recommend that you distribute the primary instance and Aurora Replicas of your Aurora DB cluster over multiple Availability Zones to improve the availability of your DB cluster\. For more information, see [Region availability](Concepts.RegionsAndAvailabilityZones.md#Aurora.Overview.Availability)\.
 
@@ -60,13 +59,13 @@ aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a ^
     --availability-zone us-west-2a
 ```
 
-The following command creates a new MySQL 5\.6–compatible Aurora Replica named `sample-instance-us-west-2a`\.
+The following command creates a new MySQL 5\.7–compatible Aurora Replica named `sample-instance-us-west-2a`\.
 
 For Linux, macOS, or Unix:
 
 ```
 aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a \
-    --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r5.large \
+    --db-cluster-identifier sample-cluster --engine aurora-mysql --db-instance-class db.r5.large \
     --availability-zone us-west-2a
 ```
 

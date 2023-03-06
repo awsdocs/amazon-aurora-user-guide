@@ -11,8 +11,7 @@ The `synch/cond/mysys/my_thread_var::suspend` wait event indicates that threads 
 ## Supported engine versions<a name="ams-waits.suspend.context.supported"></a>
 
 This wait event information is supported for the following versions:
-+ Aurora MySQL version 2 up to 2\.09\.2
-+ Aurora MySQL version 1 up to 1\.23\.1
++ Aurora MySQL version 2, up to 2\.09\.2
 
 ## Context<a name="ams-waits.suspend.context"></a>
 

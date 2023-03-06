@@ -3,7 +3,7 @@
 The following are some common wait events for Aurora MySQL\.
 
 **Note**  
-For information about the naming conventions used in MySQL wait events, see [ Performance Schema instrument naming conventions](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-instrument-naming.html) in the MySQL documentation\.
+For information about the naming conventions used in MySQL wait events, see [ Performance Schema instrument naming conventions](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-instrument-naming.html) in the MySQL documentation\.
 
 **cpu**  
 The number of active connections that are ready to run is consistently higher than the number of vCPUs\. For more information, see [cpu](ams-waits.cpu.md)\.
@@ -12,13 +12,10 @@ The number of active connections that are ready to run is consistently higher th
 A session is persisting data to Aurora storage\. Typically, this wait event is for a write I/O operation in Aurora MySQL\. For more information, see [io/aurora\_redo\_log\_flush](ams-waits.io-auredologflush.md)\.
 
 **io/aurora\_respond\_to\_client**  
-Query processing has completed and results are being returned to the application client for the following Aurora MySQL versions: 2\.10\.2 and higher 2\.10 versions, 2\.09\.3 and higher 2\.09 versions, 2\.07\.7 and higher 2\.07 versions, and 1\.22\.6 and higher 1\.22 versions\. Compare the network bandwidth of the DB instance class with the size of the result set being returned\. Also, check client\-side response times\. If the client is unresponsive and can't process the TCP packets, packet drops and TCP retransmissions can occur\. This situation negatively affects network bandwidth\. In versions lower than 2\.10\.2, 2\.09\.3, 2\.07\.7, and 1\.22\.6, the wait event erroneously includes idle time\. To learn how to tune your database when this wait is prominent, see [io/aurora\_respond\_to\_client](ams-waits.resond-to-client.md)\.
+Query processing has completed and results are being returned to the application client for the following Aurora MySQL versions: 2\.10\.2 and higher 2\.10 versions, 2\.09\.3 and higher 2\.09 versions, and 2\.07\.7 and higher 2\.07 versions\. Compare the network bandwidth of the DB instance class with the size of the result set being returned\. Also, check client\-side response times\. If the client is unresponsive and can't process the TCP packets, packet drops and TCP retransmissions can occur\. This situation negatively affects network bandwidth\. In versions lower than 2\.10\.2, 2\.09\.3, and 2\.07\.7, the wait event erroneously includes idle time\. To learn how to tune your database when this wait is prominent, see [io/aurora\_respond\_to\_client](ams-waits.respond-to-client.md)\.
 
 **io/file/csv/data**  
 Threads are writing to tables in comma\-separated value \(CSV\) format\. Check your CSV table usage\. A typical cause of this event is setting `log_output` on a table\.
-
-**io/file/innodb/innodb\_data\_file**  
-Threads are waiting on I/O from storage\. This event is more prevalent in I/O\-intensive workloads\. When this wait event is prevalent, SQL statements might be running disk\-intensive queries or requesting data that can't be satisfied from the InnoDB buffer pool\. For more information, see [io/file/innodb/innodb\_data\_file](ams-waits.innodb-data-file.md)\.
 
 **io/file/sql/binlog**  
 A thread is waiting on a binary log \(binlog\) file that is being written to disk\.
@@ -30,13 +27,13 @@ The `mysqld` program is busy creating threads to handle incoming new client conn
 The engine is waiting for access to a table\. This event occurs regardless of whether the data is cached in the buffer pool or accessed on disk\. For more information, see [io/table/sql/handler](ams-waits.waitio.md)\.
 
 **lock/table/sql/handler**  
-This wait event is a table lock wait event handler\. For more information about atom and molecule events in the Performance Schema, see [ Performance Schema atom and molecule events](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\.
+This wait event is a table lock wait event handler\. For more information about atom and molecule events in the Performance Schema, see [ Performance Schema atom and molecule events](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\.
 
 **synch/cond/mysys/my\_thread\_var::suspend**  
 The thread is suspended while waiting on a table\-level lock because another thread issued `LOCK TABLES ... READ`\.
 
 **synch/cond/sql/MDL\_context::COND\_wait\_status**  
-Threads are waiting on a table metadata lock\. The engine uses this type of lock to manage concurrent access to a database schema and to ensure data consistency\. For more information, see [Optimizing locking operations](https://dev.mysql.com/doc/refman/5.6/en/locking-issues.html) in the MySQL documentation\. To learn how to tune your database when this event is prominent, see [synch/cond/sql/MDL\_context::COND\_wait\_status](ams-waits.cond-wait-status.md)\.
+Threads are waiting on a table metadata lock\. The engine uses this type of lock to manage concurrent access to a database schema and to ensure data consistency\. For more information, see [Optimizing locking operations](https://dev.mysql.com/doc/refman/8.0/en/locking-issues.html) in the MySQL documentation\. To learn how to tune your database when this event is prominent, see [synch/cond/sql/MDL\_context::COND\_wait\_status](ams-waits.cond-wait-status.md)\.
 
 **synch/cond/sql/MYSQL\_BIN\_LOG::COND\_done**  
 You have turned on binary logging\. There might be a high commit throughput, large number transactions committing, or replicas reading binlogs\. Consider using multirow statements or bundling statements into one transaction\. In Aurora, use global databases instead of binary log replication, or use the `aurora_binlog_*` parameters\.
@@ -49,9 +46,6 @@ The buffer pool isn't large enough to hold the working data set\. Or the workloa
 
 **synch/mutex/innodb/fil\_system\_mutex**  
 The process is waiting for access to the tablespace memory cache\. For more information, see [synch/mutex/innodb/fil\_system\_mutex](ams-waits.innodb-fil-system-mutex.md)\.
-
-**synch/mutex/innodb/os\_mutex**  
-This event is part of an event semaphore\. It provides exclusive access to variables used for signaling between threads\. Uses include statistics threads, full\-text search, buffer pool dump and load operations, and log flushes\. This wait event is specific to Aurora MySQL version 1\.
 
 **synch/mutex/innodb/trx\_sys\_mutex**  
 Operations are checking, updating, deleting, or adding transaction IDs in InnoDB in a consistent or controlled manner\. These operations require a `trx_sys` mutex call, which is tracked by Performance Schema instrumentation\. Operations include management of the transaction system when the database starts or shuts down, rollbacks, undo cleanups, row read access, and buffer pool loads\. High database load with a large number of transactions results in the frequent appearance of this wait event\. For more information, see [synch/mutex/innodb/trx\_sys\_mutex](ams-waits.trxsysmutex.md)\.
@@ -75,7 +69,7 @@ The number of tables that your sessions are opening exceeds the size of the tabl
 In this wait event, there are threads waiting on a log lock\. For example, a thread might wait for a lock to write to the slow query log file\.
 
 **synch/mutex/sql/MYSQL\_BIN\_LOG::LOCK\_commit**  
-In this wait event, there is a thread that is waiting to acquire a lock with the intention of committing to the binary log\. Binary logging contention can occur on databases with a very high change rate\. Depending on your version of MySQL, there are certain locks being used to protect the consistency and durability of the binary log\. In RDS for MySQL, binary logs are used for replication and the automated backup process\. In Aurora MySQL, binary logs are not needed for native replication or backups\. They are disabled by default but can be enabled and used for external replication or change data capture\. For more information, see [The binary log](https://dev.mysql.com/doc/refman/5.6/en/binary-log.html) in the MySQL documentation\.
+In this wait event, there is a thread that is waiting to acquire a lock with the intention of committing to the binary log\. Binary logging contention can occur on databases with a very high change rate\. Depending on your version of MySQL, there are certain locks being used to protect the consistency and durability of the binary log\. In RDS for MySQL, binary logs are used for replication and the automated backup process\. In Aurora MySQL, binary logs are not needed for native replication or backups\. They are disabled by default but can be enabled and used for external replication or change data capture\. For more information, see [The binary log](https://dev.mysql.com/doc/refman/8.0/en/binary-log.html) in the MySQL documentation\.
 
 **sync/mutex/sql/MYSQL\_BIN\_LOG::LOCK\_dump\_thread\_metrics\_collection**  
 If binary logging is turned on, the engine acquires this mutex when it prints active dump threads metrics to the engine error log and to the internal operations map\.
@@ -104,11 +98,8 @@ In this wait event, there are threads holding locks on InnoDB data dictionary op
 **synch/rwlock/innodb/dict sys RW lock**  
 A high number of concurrent data control language statements \(DCLs\) in data definition language code \(DDLs\) are triggered at the same time\. Reduce the application's dependency on DDLs during regular application activity\.
 
-**synch/rwlock/innodb/hash\_table\_locks**  
-The excessive occurrence of this wait event indicates contention when modifying the hash table that maps the buffer cache\. Consider increasing the buffer cache size and improving access paths for the relevant queries\. To learn how to tune your database when this wait is prominent, see [synch/rwlock/innodb/hash\_table\_locks](ams-waits.rw-lock-hash-table-locks.md)\.
-
 **synch/rwlock/innodb/index\_tree\_rw\_lock**  
-A large number of similar data manipulation language \(DML\) statements are accessing the same database object at the same time\. Try using multirow statements\. Also, spread the workload over different database objects\. For example, implement partitioning\. 
+A large number of similar data manipulation language \(DML\) statements are accessing the same database object at the same time\. Try using multirow statements\. Also, spread the workload over different database objects\. For example, implement partitioning\.
 
 **synch/sxlock/innodb/dict\_operation\_lock**  
 A high number of concurrent data control language statements \(DCLs\) in data definition language code \(DDLs\) are triggered at the same time\. Reduce the application's dependency on DDLs during regular application activity\.

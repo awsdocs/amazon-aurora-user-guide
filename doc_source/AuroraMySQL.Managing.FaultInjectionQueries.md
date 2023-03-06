@@ -10,9 +10,7 @@ When a fault injection query specifies a crash, it forces a crash of the Aurora 
 
 You can submit a fault injection query to one of your Aurora Replica instances by connecting to the endpoint for the Aurora Replica\. For more information, see [Amazon Aurora connection management](Aurora.Overview.Endpoints.md)\.
 
-Running fault injection queries requires the following privileges:
-+ Aurora MySQL version 1 – `PROCESS`\.
-+ Aurora MySQL versions 2 and 3 – All of the master user privileges\. For more information, see [Master user account privileges](UsingWithRDS.MasterAccounts.md)\.
+Running fault injection queries requires all of the master user privileges\. For more information, see [Master user account privileges](UsingWithRDS.MasterAccounts.md)\.
 
 ## Testing an instance crash<a name="AuroraMySQL.Managing.FaultInjectionQueries.Crash"></a>
 

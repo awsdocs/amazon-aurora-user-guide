@@ -111,9 +111,8 @@ aws rds describe-db-clusters --query '*[].{Endpoint:Endpoint,ReaderEndpoint:Read
 + You can't select the custom endpoint type in the AWS Management Console\. All the custom endpoints you create through the AWS Management Console have a type of `ANY`\.
 
   You can set and modify the custom endpoint type using the AWS CLI or Amazon RDS API\.
-+  Only DB instances that are read\-only Aurora Replicas can be part of a `READER` custom endpoint\. The `READER` type applies only to clusters using single\-master replication, because those clusters can include multiple read\-only DB instances\. 
++ Only DB instances that are read\-only Aurora Replicas can be part of a `READER` custom endpoint\.
 +  Both read\-only Aurora Replicas and the read/write primary instance can be part of an `ANY` custom endpoint\. Aurora directs connections to cluster endpoints with type `ANY` to any associated DB instance with equal probability\. Because you can't determine in advance if you are connecting to the primary instance of a read\-only Aurora Replica, use this kind of endpoint for read\-only connections only\. The `ANY` type applies to clusters using any replication topology\. 
-+  The `WRITER` type applies only to multi\-master clusters, because those clusters can include multiple read/write DB instances\. 
 +  If you try to create a custom endpoint with a type that isn't appropriate based on the replication configuration for a cluster, Aurora returns an error\. 
 
 ### Membership rules for custom endpoints<a name="Aurora.Endpoints.Custom.Membership"></a>
@@ -388,8 +387,8 @@ aws rds delete-db-cluster-endpoint --db-cluster-endpoint-identifier custom-end-p
  This example demonstrates the initial setup steps: creating an Aurora cluster and adding DB instances to it\. This is a heterogeneous cluster, meaning not all the DB instances have the same capacity\. Most instances use the AWS instance class `db.r4.4xlarge`, but the last two DB instances use `db.r4.16xlarge`\. Each of these sample `create-db-instance` commands prints its output to the screen and saves a copy of the JSON in a file for later inspection\. 
 
 ```
-aws rds create-db-cluster --db-cluster-identifier custom-endpoint-demo --engine aurora \
-     --engine-version 5.6.10a --master-username $MASTER_USER --master-user-password $MASTER_PW \
+aws rds create-db-cluster --db-cluster-identifier custom-endpoint-demo --engine aurora-mysql \
+     --engine-version 8.0.mysql_aurora.3.02.0 --master-username $MASTER_USER --master-user-password $MASTER_PW \
      --db-subnet-group-name $SUBNET_GROUP  --vpc-security-group-ids $VPC_SECURITY_GROUP \
      --region $REGION
 

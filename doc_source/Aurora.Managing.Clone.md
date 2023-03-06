@@ -799,29 +799,28 @@ The [RestoreDBClusterToPointInTime](https://docs.aws.amazon.com/AmazonRDS/latest
    In some cases, an entry might have a different AWS account number than yours in the `DBClusterArn` field\. In this case, that entry represents a cluster that is owned by a different AWS account and that you can clone\. Such entries have few fields other than `DBClusterArn`\. When creating the cloned cluster, specify the same `StorageEncrypted`, `Engine`, and `EngineVersion` values as in the original cluster\. 
 
   ```
-  $ aws rds describe-db-clusters --include-shared --region us-east-1
+  $aws rds describe-db-clusters --include-shared --region us-east-1
   {
     "DBClusters": [
         {
-            "EarliestRestorableTime": "2019-05-01T21:17:54.106Z",
-            "Engine": "aurora",
-            "EngineVersion": "5.6.10a",
+            "EarliestRestorableTime": "2023-02-01T21:17:54.106Z",
+            "Engine": "aurora-mysql",
+            "EngineVersion": "8.0.mysql_aurora.3.02.0",
             "CrossAccountClone": false,
   ...
         },
         {
-            "EarliestRestorableTime": "2019-04-09T16:01:07.398Z",
-            "Engine": "aurora",
-            "EngineVersion": "5.6.10a",
+            "EarliestRestorableTime": "2023-02-09T16:01:07.398Z",
+            "Engine": "aurora-mysql",
+            "EngineVersion": "8.0.mysql_aurora.3.02.0",
             "CrossAccountClone": true,
   ...
         },
         {
             "StorageEncrypted": false,
             "DBClusterArn": "arn:aws:rds:us-east-1:12345678:cluster:cluster-abcdefgh",
-            "Engine": "aurora",
-            "EngineVersion": "5.6.10a",
-        }
+            "Engine": "aurora-mysql",
+            "EngineVersion": "8.0.mysql_aurora.3.02.0
     ]
   }
   ```
@@ -839,24 +838,24 @@ The [RestoreDBClusterToPointInTime](https://docs.aws.amazon.com/AmazonRDS/latest
   {
     "DBClusters": [
         {
-            "EarliestRestorableTime": "2019-05-01T21:17:54.106Z",
-            "Engine": "aurora",
-            "EngineVersion": "5.6.10a",
+            "EarliestRestorableTime": "2023-02-01T21:17:54.106Z",
+            "Engine": "aurora-mysql",
+            "EngineVersion": "8.0.mysql_aurora.3.02.0",
             "CrossAccountClone": false,
   ...
         },
         {
-            "EarliestRestorableTime": "2019-04-09T16:01:07.398Z",
-            "Engine": "aurora",
-            "EngineVersion": "5.6.10a",
+            "EarliestRestorableTime": "2023-02-09T16:01:07.398Z",
+            "Engine": "aurora-mysql",
+            "EngineVersion": "8.0.mysql_aurora.3.02.0",
             "CrossAccountClone": true,
   ...
         },
         {
             "StorageEncrypted": false,
             "DBClusterArn": "arn:aws:rds:us-east-1:12345678:cluster:cluster-abcdefgh",
-            "Engine": "aurora",
-            "EngineVersion": "5.6.10a"
+            "Engine": "aurora-mysql",
+            "EngineVersion": "8.0.mysql_aurora.3.02.0"
         }
     ]
   }

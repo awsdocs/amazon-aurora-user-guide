@@ -60,12 +60,12 @@ The command returns the following output if your AWS CLI is configured for JSON 
     "DBClusters": [
         {
             "Status": "available",
-            "Engine": "aurora",
+            "Engine": "aurora-mysql",
             "Endpoint": "sample-cluster1.cluster-123456789012.us-east-1.rds.amazonaws.com"
             "AllocatedStorage": 1,
             "DBClusterIdentifier": "sample-cluster1",
             "MasterUsername": "mymasteruser",
-            "EarliestRestorableTime": "2016-03-30T03:35:42.563Z",
+            "EarliestRestorableTime": "2023-03-30T03:35:42.563Z",
             "DBClusterMembers": [
                 {
                     "IsClusterWriter": false,
@@ -89,25 +89,25 @@ The command returns the following output if your AWS CLI is configured for JSON 
             "DBSubnetGroup": "default",
             "StorageEncrypted": false,
             "DatabaseName": "sample",
-            "EngineVersion": "5.6.10a",
-            "DBClusterParameterGroup": "default.aurora5.6",
+            "EngineVersion": "5.7.mysql_aurora.2.11.0",
+            "DBClusterParameterGroup": "default.aurora-mysql5.7",
             "BackupRetentionPeriod": 1,
             "AvailabilityZones": [
                 "us-east-1b",
                 "us-east-1c",
                 "us-east-1d"
             ],
-            "LatestRestorableTime": "2016-03-31T20:06:08.903Z",
+            "LatestRestorableTime": "2023-03-31T20:06:08.903Z",
             "PreferredMaintenanceWindow": "wed:08:15-wed:08:45"
         },
         {
             "Status": "available",
-            "Engine": "aurora",
+            "Engine": "aurora-mysql",
             "Endpoint": "aurora-sample.cluster-123456789012.us-east-1.rds.amazonaws.com",
             "AllocatedStorage": 1,
             "DBClusterIdentifier": "aurora-sample-cluster",
             "MasterUsername": "mymasteruser",
-            "EarliestRestorableTime": "2016-03-30T10:21:34.826Z",
+            "EarliestRestorableTime": "2023-03-30T10:21:34.826Z",
             "DBClusterMembers": [
                 {
                     "IsClusterWriter": false,
@@ -131,15 +131,15 @@ The command returns the following output if your AWS CLI is configured for JSON 
             "DBSubnetGroup": "default",
             "StorageEncrypted": false,
             "DatabaseName": "sample",
-            "EngineVersion": "5.6.10a",
-            "DBClusterParameterGroup": "default.aurora5.6",
+            "EngineVersion": "5.7.mysql_aurora.2.11.0",
+            "DBClusterParameterGroup": "default.aurora-mysql5.7",
             "BackupRetentionPeriod": 1,
             "AvailabilityZones": [
                 "us-east-1b",
                 "us-east-1c",
                 "us-east-1d"
             ],
-            "LatestRestorableTime": "2016-03-31T20:00:11.491Z",
+            "LatestRestorableTime": "2023-03-31T20:00:11.491Z",
             "PreferredMaintenanceWindow": "sun:03:53-sun:04:23"
         }
     ]
@@ -292,8 +292,22 @@ You can find examples of these recommendations in the following table\.
 
 | Type | Description | Recommendation | Additional information | 
 | --- | --- | --- | --- | 
+|  Reader instances in the cluster are in the same Availability Zone  |  Your DB cluster has all the reader instances in the same Availability Zone\.  |  We recommend that you distribute the Reader instances across multiple Availability Zones\. Distribution increases the availability of the database, and improves the response time by reducing network latency between clients and database\.  |  [High availability for Amazon Aurora](Concepts.AuroraHighAvailability.md)  | 
+|  Enhanced Monitoring disabled  |  Your DB instance doesn't have Enhanced Monitoring enabled\.  |  We recommend enabling Enhanced Monitoring\. Enhanced Monitoring provides real\-time operating system metrics for monitoring and troubleshooting\.  |  [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)  | 
+|  Performance Insights disabled  |  Your DB instance doesn't have Performance Insights enabled\.  |  We recommend enabling Performance Insights\. Performance Insights monitors your database load for better analysis and troubleshooting\.  |  [Overview of Performance Insights on Amazon Aurora](USER_PerfInsights.Overview.md)  | 
 |  Nondefault custom memory parameters  |  Your DB parameter group sets memory parameters that diverge too much from the default values\.  |  Settings that diverge too much from the default values can cause poor performance and errors\. We recommend setting custom memory parameters to their default values in the DB parameter group used by the DB instance\.  |  [Working with parameter groups](USER_WorkingWithParamGroups.md)  | 
+|  Found an unsafe durability parameter value for a MySQL DB instance  |  Your DB instance has an unsafe value for the `innodb_flush_log_at_trx_commit` parameter\. This parameter controls the persistence of commit operations to disk\.  |  We recommend that you set the value of the `innodb_flush_log_at_trx_commit` parameter to `1`\. The current value might improve performance but transactions can be lost if the database crashes\.  |  [ Best practices for configuring parameters for Amazon RDS for MySQL, part 1: Parameters related to performance](http://aws.amazon.com/blogs/database/best-practices-for-configuring-parameters-for-amazon-rds-for-mysql-part-1-parameters-related-to-performance/) on the AWS Database Blog  | 
+|  Optimizer statistics aren't persisted to the disk for a MySQL DB instance  |  Your DB instance isn't configured to persist the InnoDB statistics to the disk\. When it isn't configured, the statistics may recalculate frequently, which leads to variations in query execution plan\. You can modify the value of this global parameter at the table level\.  |  Global statistics persistence is disabled\. We recommend that you set the `innodb_stats_persistent` parameter to `ON`\.  |  [ Best practices for configuring parameters for Amazon RDS for MySQL, part 1: Parameters related to performance](http://aws.amazon.com/blogs/database/best-practices-for-configuring-parameters-for-amazon-rds-for-mysql-part-1-parameters-related-to-performance/) on the AWS Database Blog  | 
+|  General logging is enabled for a MySQL DB instance  |  Your DB instance has the general logging turned on\. Turning on general logging increases the amount of I/O operations and allocated storage space,which can lead to contention and performance degradation\.  |  Evaluate your required general logging usage\. General logging can increase the amount of I/O operations and allocated storage space, and lead to contention and performance degradation\.  |  [Managing table\-based Aurora MySQL logs](Appendix.MySQL.CommonDBATasks.Logs.md)  | 
+|  Maximum InnoDB open files setting is misconfigured for a MySQL DB instance  |  Your DB instance has a low value for the maximum number of files InnoDB can open at one time\.  |  We recommend that you set the `innodb_open_files` parameter to a minimum value of `65`\.  |  [innodb\_open\_files](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_open_files)  | 
+|  Number of allowed simultaneous connections for a given database user is misconfigured for a MySQL DB instance  |  Your DB instance has a low value for the maximum number of simultaneous connections for each database account\.  |  We recommend that you increase the setting of the `max_user_connections` parameter to a number greater than 5\. The current `max_user_connections` value is low which impacts the database health checks and regular operations\.  |  [Setting Account Resource Limits](https://dev.mysql.com/doc/refman/8.0/en/user-resources.html)  | 
+|  Found an unsafe durability parameter value for a MySQL DB instance  |  The synchronization of the binary log to disk isn't enforced before the acknowledgement of the transactions commit in your DB instance\.  |  We recommend that you set the `sync_binlog` parameter to `1`\. Currently, the synchronization of the binary log to disk isn't enforced before acknowledgement of the transactions commit\. If there is a power failure or the operating system crashes, the committed transactions can be lost\.  |  [ Best practices for configuring parameters for Amazon RDS for MySQL, part 2: Parameters related to replication](http://aws.amazon.com/blogs/database/best-practices-for-configuring-parameters-for-amazon-rds-for-mysql-part-2-parameters-related-to-replication/) on the AWS Database Blog  | 
 |  Change buffering enabled for a MySQL DB instance  |  Your DB parameter group has change buffering enabled\.  |  Change buffering allows a MySQL DB instance to defer some writes necessary to maintain secondary indexes\. This configuration can improve performance slightly, but it can create a large delay in crash recovery\. During crash recovery, the secondary index must be brought up to date\. So, the benefits of change buffering are outweighed by the potentially very long crash recovery events\. We recommend disabling change buffering\.  |  [ Best practices for configuring parameters for Amazon RDS for MySQL, part 1: Parameters related to performance](http://aws.amazon.com/blogs/database/best-practices-for-configuring-parameters-for-amazon-rds-for-mysql-part-1-parameters-related-to-performance/) on the AWS Database Blog  | 
+|  Autovacuum is disabled for a PostgreSQL DB instance  |  Your DB instance has autovacuum turned off\. Turning off autovacuum increases table and index bloat and impacts performance\.  |  We recommend that you set the autovacuum parameter to on\.  |  [Understanding autovacuum in Amazon RDS for PostgreSQL environments](https://aws.amazon.com/blogs/database/understanding-autovacuum-in-amazon-rds-for-postgresql-environments/)  | 
+|  Synchronous commit is turned off for a PostgreSQL DB instance  |  When the `synchronous_commit` parameter is set to `OFF`, it causes data loss when the database crashes, which can impact the durability of the database\.  |  We recommend that you turn on the `synchronous_commit` parameter\.  |  [Asynchronous Commit](https://www.postgresql.org/docs/current/wal-async-commit.html)  | 
+|  `track_counts` parameter is disabled for a PostgreSQL DB instance  |  If the track\_counts parameter is turned off, the database doesn't collect the database activity statistics\. Autovacuum requires these statistics to work correctly\.  |  We recommend that you set `track_counts` parameter to `ON`\.  |  [track\_counts \(boolean\)](https://www.postgresql.org/docs/current/runtime-config-statistics.html#GUC-TRACK-COUNTS)  | 
+|  Index only scan plan type is disabled for a PostgreSQL DB instance  |  The query planner or optimizer can't use the index only scan plan when it is disabled\.   |  We recommend that you set the parameter `enable_indexonlyscan` to `ON`\.  |  [enable\_indexonlyscan \(boolean\)](https://www.postgresql.org/docs/current/runtime-config-query.html#GUC-ENABLE-INDEXONLYSCAN)  | 
+|  index\-scan plan type is disabled for a PostgreSQL DB instance  |  The query planner or optimizer can't use the index scan plan types when it is disabled\.  |  We recommend that you set the parameter `enable_indexscan` to `ON`\.  |  [enable\_indexscan \(boolean\) ](https://www.postgresql.org/docs/current/runtime-config-query.html#GUC-ENABLE-INDEXSCAN)  | 
 |  Logging to table  |  Your DB parameter group sets logging output to `TABLE`\.  |  Setting logging output to `TABLE` uses more storage than setting this parameter to `FILE`\. To avoid reaching the storage limit, we recommend setting the logging output parameter to `FILE`\.  |  [Aurora MySQL database log files](USER_LogAccess.Concepts.MySQL.md)  | 
 |  DB cluster with one DB instance  |  Your DB cluster only contains one DB instance\.  |  For improved performance and availability, we recommend adding another DB instance with the same DB instance class in a different Availability Zone\.  |  [High availability for Amazon Aurora](Concepts.AuroraHighAvailability.md)  | 
 |  DB cluster in one Availability Zone  |  Your DB cluster has all of its DB instances in the same Availability Zone\.  |  For improved availability, we recommend adding another DB instance with the same DB instance class in a different Availability Zone\.  |  [High availability for Amazon Aurora](Concepts.AuroraHighAvailability.md)  | 

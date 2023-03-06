@@ -12,7 +12,6 @@ The `synch/cond/sql/MDL_context::COND_wait_status` event occurs when there are t
 
 This wait event information is supported for the following engine versions:
 + Aurora MySQL version 2, up to 2\.09\.2
-+ Aurora MySQL version 1, up to 1\.23\.1
 
 ## Context<a name="ams-waits.cond-wait-status.context"></a>
 
@@ -49,7 +48,6 @@ We recommend different actions depending on the causes of your wait event and on
 **Topics**
 + [Identify the sessions and queries causing the events](#ams-waits.cond-wait-status.actions.identify)
 + [Check for past events](#ams-waits.cond-wait-status.actions.past-events)
-+ [Run queries on Aurora MySQL version 1](#ams-waits.cond-wait-status.actions.run-queries-aurora-mysql-56)
 + [Run queries on Aurora MySQL version 2](#ams-waits.cond-wait-status.actions.run-queries-aurora-mysql-57)
 + [Respond to the blocking session](#ams-waits.cond-wait-status.actions.blocker)
 
@@ -84,116 +82,6 @@ You can gain insight into this wait event to check for past occurrences of it\. 
 + If audit logs or general logs are turned on for the DB cluster, you can check for all queries run on the objects \(schema\.table\) involved in the waiting transaction\. You can also check for the queries that completed running before the transaction\.
 
 The information available to troubleshoot past events is limited\. Performing these checks doesn't show which object is waiting for information\. However, you can identify tables with heavy load at the time of the event and the set of frequently operated rows causing conflict at the time of issue\. You can then use this information to reproduce the issue in a test environment and provide insights about its cause\.
-
-### Run queries on Aurora MySQL version 1<a name="ams-waits.cond-wait-status.actions.run-queries-aurora-mysql-56"></a>
-
-In Aurora MySQL version 1, you can query tables in `information_schema` and `performance_schema` to identify a blocking session\. To run the queries, make sure that the DB cluster is configured with the `performance_schema` consumer `events_statements_history`\. Also, maintain an adequate number of queries in `events_statements_history` table in `performance_schema`\. You control the number of queries maintained in that table with the `performance_schema_events_statements_history_size` parameter\. If the required data isn't available in `performance_schema`, you can check the audit logs or general logs\. 
-
-An example can illustrate how to query tables to identify blocking queries and sessions\. In this example, every session runs fewer than 10 statements and required consumers are enabled on the DB cluster\.
-
-In the following process list output, process ID `59` \(running the `TRUNCATE` command\) and process ID `53` \(running the `INSERT` command\) have been waiting on a metadata lock for 33 seconds\. Also, both of the threads are running queries on same table named `sbtest.sbtest1`\.
-
-```
-MySQL [(none)]> select @@version, @@aurora_version;
-+-----------+------------------+
-| @@version | @@aurora_version |
-+-----------+------------------+
-| 5.6.10    | 1.23.0           |
-+-----------+------------------+
-1 row in set (0.00 sec)
-
-MySQL [performance_schema]> select * from setup_consumers where name='events_statements_history';
-+---------------------------+---------+
-| NAME                      | ENABLED |
-+---------------------------+---------+
-| events_statements_history | YES     |
-+---------------------------+---------+
-1 row in set (0.00 sec)
-
-MySQL [performance_schema]> show global variables like 'performance_schema_events_statements_history_size';
-+---------------------------------------------------+-------+
-| Variable_name                                     | Value |
-+---------------------------------------------------+-------+
-| performance_schema_events_statements_history_size | 10    |
-+---------------------------------------------------+-------+
-1 row in set (0.00 sec)
-
-MySQL [performance_schema]> show processlist;
-+----+------------------+--------------------+--------------------+---------+------+---------------------------------+------------------------------------------------------------------------------------------------------+
-| Id | User             | Host               | db                 | Command | Time | State                           | Info                                                                                                 |
-+----+------------------+--------------------+--------------------+---------+------+---------------------------------+------------------------------------------------------------------------------------------------------+
-| 11 | rdsadmin         | localhost          | NULL               | Sleep   |    0 | cleaned up                      | NULL                                                                                                 |
-| 14 | rdsadmin         | localhost          | NULL               | Sleep   |    1 | cleaned up                      | NULL                                                                                                 |
-| 15 | rdsadmin         | localhost          | NULL               | Sleep   |   14 | cleaned up                      | NULL                                                                                                 |
-| 16 | rdsadmin         | localhost          | NULL               | Sleep   |    1 | cleaned up                      | NULL                                                                                                 |
-| 17 | rdsadmin         | localhost          | NULL               | Sleep   |  214 | cleaned up                      | NULL                                                                                                 |
-| 40 | auroramysql56123 | 172.31.21.51:44876 | sbtest123          | Query   | 1843 | User sleep                      | select sleep(10000)                                                                                  |
-| 41 | auroramysql56123 | 172.31.21.51:44878 | performance_schema | Query   |    0 | init                            | show processlist                                                                                     |
-| 48 | auroramysql56123 | 172.31.21.51:44894 | sbtest123          | Execute |    0 | delayed commit ok initiated     | COMMIT                                                                                               |
-| 49 | auroramysql56123 | 172.31.21.51:44899 | sbtest123          | Execute |    0 | delayed commit ok initiated     | COMMIT                                                                                               |
-| 50 | auroramysql56123 | 172.31.21.51:44896 | sbtest123          | Execute |    0 | delayed commit ok initiated     | COMMIT                                                                                               |
-| 51 | auroramysql56123 | 172.31.21.51:44892 | sbtest123          | Execute |    0 | delayed commit ok initiated     | COMMIT                                                                                               |
-| 52 | auroramysql56123 | 172.31.21.51:44898 | sbtest123          | Execute |    0 | delayed commit ok initiated     | COMMIT                                                                                               |
-| 53 | auroramysql56123 | 172.31.21.51:44902 | sbtest             | Query   |   33 | Waiting for table metadata lock | INSERT INTO sbtest1 (id, k, c, pad) VALUES (0, 5021, '91560616281-61537173720-56678788409-8805377477 |
-| 56 | auroramysql56123 | 172.31.21.51:44908 | NULL               | Query   |  118 | User sleep                      | select sleep(10000)                                                                                  |
-| 58 | auroramysql56123 | 172.31.21.51:44912 | NULL               | Sleep   |   41 | cleaned up                      | NULL                                                                                                 |
-| 59 | auroramysql56123 | 172.31.21.51:44914 | NULL               | Query   |   33 | Waiting for table metadata lock | truncate table sbtest.sbtest1                                                                        |
-+----+------------------+--------------------+--------------------+---------+------+---------------------------------+------------------------------------------------------------------------------------------------------+
-16 rows in set (0.00 sec)
-```
-
-Given this output, run the following query\. This query identifies transactions that have been running for longer than 33 seconds with connection ID `59` waiting for a lock on a table for same amount of time\. 
-
-```
-MySQL [performance_schema]> select 
-      b.id, 
-      a.trx_id,
-      a.trx_state,
-      a.trx_started,
-      TIMESTAMPDIFF(SECOND,a.trx_started, now()) as "Seconds Transaction Has Been Open",
-      a.trx_rows_modified,
-      b.USER,
-      b.host,
-      b.db,
-      b.command,
-      b.time,
-      b.state 
-   from information_schema.innodb_trx a, 
-      information_schema.processlist b 
-   where a.trx_mysql_thread_id=b.id 
-      and TIMESTAMPDIFF(SECOND,a.trx_started, now()) > 33 order by trx_started;
-+----+---------+-----------+---------------------+-----------------------------------+-------------------+------------------+--------------------+-----------+---------+------+------------+
-| id | trx_id  | trx_state | trx_started         | Seconds Transaction Has Been Open | trx_rows_modified | USER             | host               | db        | command | time | state      |
-+----+---------+-----------+---------------------+-----------------------------------+-------------------+------------------+--------------------+-----------+---------+------+------------+
-| 40 | 1907737 | RUNNING   | 2021-02-02 12:58:16 |                              1955 |                 0 | auroramysql56123 | 172.31.21.51:44876 | sbtest123 | Query   | 1955 | User sleep |
-| 56 | 3797992 | RUNNING   | 2021-02-02 13:27:01 |                               230 |                 0 | auroramysql56123 | 172.31.21.51:44908 | NULL      | Query   |  230 | User sleep |
-| 58 | 3895074 | RUNNING   | 2021-02-02 13:28:18 |                               153 |                 0 | auroramysql56123 | 172.31.21.51:44912 | NULL      | Sleep   |  153 | cleaned up |
-+----+---------+-----------+---------------------+-----------------------------------+-------------------+------------------+--------------------+-----------+---------+------+------------+
-3 rows in set (0.00 sec)
-```
-
-In the output, processes 40, 56, and 58 have been active for long time\. Let's identify queries run by these sessions on the `sbtest.sbtest1` table\. 
-
-```
-MySQL [performance_schema]> select 
-            t.processlist_id, 
-            t.thread_id, 
-            sql_text 
-    from performance_schema.threads t 
-    join events_statements_history sh 
-          on t.thread_id=sh.thread_id 
-   where processlist_id in (40,56,58) 
-   and SQL_TEXT like '%sbtest1%' order by 1;
-+----------------+-----------+------------------------------------------+
-| processlist_id | thread_id | sql_text                                 |
-+----------------+-----------+------------------------------------------+
-|             56 |        84 | select * from sbtest123.sbtest10 limit 1 |
-|             58 |        86 | select * from sbtest.sbtest1 limit 1     |
-+----------------+-----------+------------------------------------------+
-2 rows in set (0.01 sec)
-```
-
-In this output, the session with a `processlist_id` of `58` ran a query on the table and holds an open transaction\. That open transaction is blocking the `TRUNCATE` command\.
 
 ### Run queries on Aurora MySQL version 2<a name="ams-waits.cond-wait-status.actions.run-queries-aurora-mysql-57"></a>
 

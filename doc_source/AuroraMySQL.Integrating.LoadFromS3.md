@@ -5,8 +5,7 @@ You can use the `LOAD DATA FROM S3` or `LOAD XML FROM S3` statement to load data
 If you are using encryption, the Amazon S3 bucket must be encrypted with an AWS managed key\. Currently, you can't load data from a bucket that is encrypted with a customer managed key\.
 
 **Note**  
-Loading data into a table from text files in an Amazon S3 bucket is available for Amazon Aurora MySQL version 1\.8 and later\. For more information about Aurora MySQL versions, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.  
- This feature isn't supported for Aurora Serverless v1\. It is supported for Aurora Serverless v2\.
+Loading data into a table from text files isn't supported for Aurora Serverless v1\. It is supported for Aurora Serverless v2\.
 
 ## Giving Aurora access to Amazon S3<a name="AuroraMySQL.Integrating.LoadFromS3.Authorize"></a>
 
@@ -22,7 +21,7 @@ Before you can load data from an Amazon S3 bucket, you must first give your Auro
 
    For more information about creating a custom DB cluster parameter group, see [Creating a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.CreatingCluster)\.
 
-1. For Aurora MySQL version 1 or 2, set either the `aurora_load_from_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aurora_load_from_s3_role`, Aurora uses the IAM role specified in `aws_default_s3_role`\.
+1. For Aurora MySQL version 2, set either the `aurora_load_from_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aurora_load_from_s3_role`, Aurora uses the IAM role specified in `aws_default_s3_role`\.
 
    For Aurora MySQL version 3, use `aws_default_s3_role`\.
 
@@ -38,7 +37,7 @@ Before you can load data from an Amazon S3 bucket, you must first give your Auro
 
 ## Granting privileges to load data in Amazon Aurora MySQL<a name="AuroraMySQL.Integrating.LoadFromS3.Grant"></a>
 
-The database user that issues the `LOAD DATA FROM S3` or `LOAD XML FROM S3` statement must have a specific role or privilege to issue either statement\. In Aurora MySQL version 3, you grant the `AWS_LOAD_S3_ACCESS` role\. In Aurora MySQL version 1 or 2, you grant the `LOAD FROM S3` privilege\. The administrative user for a DB cluster is granted the appropriate role or privilege by default\. You can grant the privilege to another user by using one of the following statements\.
+The database user that issues the `LOAD DATA FROM S3` or `LOAD XML FROM S3` statement must have a specific role or privilege to issue either statement\. In Aurora MySQL version 3, you grant the `AWS_LOAD_S3_ACCESS` role\. In Aurora MySQL version 2, you grant the `LOAD FROM S3` privilege\. The administrative user for a DB cluster is granted the appropriate role or privilege by default\. You can grant the privilege to another user by using one of the following statements\.
 
  Use the following statement for Aurora MySQL version 3: 
 
@@ -47,17 +46,17 @@ GRANT AWS_LOAD_S3_ACCESS TO 'user'@'domain-or-ip-address'
 ```
 
 **Tip**  
-When you use the role technique in Aurora MySQL version 3, you also activate the role by using the `SET ROLE role_name` or `SET ROLE ALL` statement\. If you aren't familiar with the MySQL 8\.0 role system, you can learn more in [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\. You can also find more details in [Using Roles](https://dev.mysql.com/doc/refman/8.0/en/roles.html) in the *MySQL Reference Manual*\.  
+When you use the role technique in Aurora MySQL version 3, you also activate the role by using the `SET ROLE role_name` or `SET ROLE ALL` statement\. If you aren't familiar with the MySQL 8\.0 role system, you can learn more in [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\. You can also find more details in [Using roles](https://dev.mysql.com/doc/refman/8.0/en/roles.html) in the *MySQL Reference Manual*\.  
 This only applies to the current active session\. When you reconnect, you have to run the `SET ROLE` statement again to grant privileges\. For more information, see [SET ROLE statement](https://dev.mysql.com/doc/refman/8.0/en/set-role.html) in the *MySQL Reference Manual*\.  
 You can also use the `activate_all_roles_on_login` DB cluster parameter to automatically activate all roles when a user connects to a DB instance\. When this parameter is set, you don't have to call the SET ROLE statement explicitly to activate a role\. For more information, see [activate\_all\_roles\_on\_login](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_activate_all_roles_on_login) in the *MySQL Reference Manual*\.
 
- Use the following statement for Aurora MySQL version 1 or 2: 
+Use the following statement for Aurora MySQL version 2:
 
 ```
 GRANT LOAD FROM S3 ON *.* TO 'user'@'domain-or-ip-address'
 ```
 
-The `AWS_LOAD_S3_ACCESS` role and `LOAD FROM S3` privilege are specific to Amazon Aurora and are not available for MySQL databases or RDS for MySQL DB instances\. If you have set up replication between an Aurora DB cluster as the replication master and a MySQL database as the replication client, then the `GRANT` statement for the role or privilege causes replication to stop with an error\. You can safely skip the error to resume replication\. To skip the error on an RDS for MySQL DB instance, use the [mysql\_rds\_skip\_repl\_error](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_skip_repl_error.html) procedure\. To skip the error on an external MySQL database, use the [SET GLOBAL sql\_slave\_skip\_counter](http://dev.mysql.com/doc/refman/5.7/en/set-global-sql-slave-skip-counter.html) statement \(Aurora MySQL version 1 and 2\) or [SET GLOBAL sql\_replica\_skip\_counter](http://dev.mysql.com/doc/refman/8.0/en/set-global-sql-slave-skip-counter.html) statement \(Aurora MySQL version 3\)\.
+The `AWS_LOAD_S3_ACCESS` role and `LOAD FROM S3` privilege are specific to Amazon Aurora and are not available for MySQL databases or RDS for MySQL DB instances\. If you have set up replication between an Aurora DB cluster as the replication master and a MySQL database as the replication client, then the `GRANT` statement for the role or privilege causes replication to stop with an error\. You can safely skip the error to resume replication\. To skip the error on an RDS for MySQL DB instance, use the [mysql\_rds\_skip\_repl\_error](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_skip_repl_error.html) procedure\. To skip the error on an external MySQL database, use the [SET GLOBAL sql\_slave\_skip\_counter](http://dev.mysql.com/doc/refman/5.7/en/set-global-sql-slave-skip-counter.html) statement \(Aurora MySQL version 2\) or [SET GLOBAL sql\_replica\_skip\_counter](http://dev.mysql.com/doc/refman/8.0/en/set-global-sql-slave-skip-counter.html) statement \(Aurora MySQL version 3\)\.
 
 ## Specifying a path to an Amazon S3 bucket<a name="AuroraMySQL.Integrating.LoadFromS3.URI"></a>
 
@@ -74,7 +73,7 @@ The path includes the following values:
 
 ## LOAD DATA FROM S3<a name="AuroraMySQL.Integrating.LoadFromS3.Text"></a>
 
-You can use the `LOAD DATA FROM S3` statement to load data from any text file format that is supported by the MySQL [LOAD DATA INFILE](https://dev.mysql.com/doc/refman/5.6/en/load-data.html) statement, such as text data that is comma\-delimited\. Compressed files are not supported\.
+You can use the `LOAD DATA FROM S3` statement to load data from any text file format that is supported by the MySQL [LOAD DATA INFILE](https://dev.mysql.com/doc/refman/8.0/en/load-data.html) statement, such as text data that is comma\-delimited\. Compressed files are not supported\.
 
 ### Syntax<a name="AuroraMySQL.Integrating.LoadFromS3.Text.Syntax"></a>
 
@@ -100,7 +99,7 @@ LOAD DATA FROM S3 [FILE | PREFIX | MANIFEST] 'S3-URI'
 
 ### Parameters<a name="AuroraMySQL.Integrating.LoadFromS3.Text.Parameters"></a>
 
-Following, you can find a list of the required and optional parameters used by the `LOAD DATA FROM S3` statement\. You can find more details about some of these parameters in [LOAD DATA INFILE syntax](https://dev.mysql.com/doc/refman/5.6/en/load-data.html) in the MySQL documentation\.
+Following, you can find a list of the required and optional parameters used by the `LOAD DATA FROM S3` statement\. You can find more details about some of these parameters in [LOAD DATA Statement](https://dev.mysql.com/doc/refman/8.0/en/load-data.html) in the MySQL documentation\.
 + **FILE \| PREFIX \| MANIFEST** – Identifies whether to load the data from a single file, from all files that match a given prefix, or from all files in a specified manifest\. `FILE` is the default\.
 + **S3\-URI** – Specifies the URI for a text or manifest file to load, or an Amazon S3 prefix to use\. Specify the URI using the syntax described in [Specifying a path to an Amazon S3 bucket](#AuroraMySQL.Integrating.LoadFromS3.URI)\.
 + **REPLACE \| IGNORE** – Determines what action to take if an input row as the same unique key values as an existing row in the database table\.
@@ -139,7 +138,7 @@ You cannot use the `LOCAL` keyword of the `LOAD DATA FROM S3` statement if you a
 
 ### Using a manifest to specify data files to load<a name="AuroraMySQL.Integrating.LoadFromS3.Manifest"></a>
 
-You can use the `LOAD DATA FROM S3` statement with the `MANIFEST` keyword to specify a manifest file in JSON format that lists the text files to be loaded into a table in your DB cluster\. You must be using Aurora 1\.11 or greater to use the `MANIFEST` keyword with the `LOAD DATA FROM S3` statement\.
+You can use the `LOAD DATA FROM S3` statement with the `MANIFEST` keyword to specify a manifest file in JSON format that lists the text files to be loaded into a table in your DB cluster\.
 
 The following JSON schema describes the format and content of a manifest file\.
 
@@ -317,7 +316,7 @@ LOAD XML FROM S3 'S3-URI'
 
 ### Parameters<a name="AuroraMySQL.Integrating.LoadFromS3.XML.Parameters"></a>
 
-Following, you can find a list of the required and optional parameters used by the `LOAD DATA FROM S3` statement\. You can find more details about some of these parameters in [LOAD XML syntax](https://dev.mysql.com/doc/refman/5.6/en/load-xml.html) in the MySQL documentation\.
+Following, you can find a list of the required and optional parameters used by the `LOAD DATA FROM S3` statement\. You can find more details about some of these parameters in [LOAD XML Statement](https://dev.mysql.com/doc/refman/8.0/en/load-xml.html) in the MySQL documentation\.
 + **FILE \| PREFIX** – Identifies whether to load the data from a single file, or from all files that match a given prefix\. `FILE` is the default\.
 + **REPLACE \| IGNORE** – Determines what action to take if an input row as the same unique key values as an existing row in the database table\.
   + Specify `REPLACE` if you want the input row to replace the existing row in the table\.

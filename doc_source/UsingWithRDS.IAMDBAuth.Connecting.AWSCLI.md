@@ -89,3 +89,5 @@ The following lines in the output show more details\.
 | ...           | ...
 +-----------------------------+
 ```
+
+If you want to connect to a DB cluster through a proxy, see [Connecting to a proxy using IAM authentication](rds-proxy-setup.md#rds-proxy-connecting-iam)\.

@@ -12,7 +12,6 @@ The `io/socket/sql/client_connection` event occurs when a thread is in the proce
 
 This wait event information is supported for the following engine versions:
 + Aurora MySQL version 2, up to 2\.09\.2
-+ Aurora MySQL version 1, up to 1\.23\.1
 
 ## Context<a name="ams-waits.client-connection.context"></a>
 

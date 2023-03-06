@@ -4,4 +4,4 @@ A blue/green deployment copies a production database environment in a separate, 
 
 The Blue/Green Deployments feature is available for all versions of Aurora MySQL\. The Blue/Green Deployments feature isn't available for Aurora PostgreSQL\.
 
-The Blue/Green Deployments feature is available in all AWS Regions except for the Asia Pacific \(Melbourne\) Region\.
+The Blue/Green Deployments feature is available in all AWS Regions\.

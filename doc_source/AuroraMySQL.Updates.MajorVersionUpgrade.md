@@ -1,12 +1,11 @@
 # Upgrading the major version of an Amazon Aurora MySQL DB cluster<a name="AuroraMySQL.Updates.MajorVersionUpgrade"></a><a name="mvu"></a>
 
-In an Aurora MySQL version number such as 2\.08\.1, the 2 represents the major version\. Aurora MySQL version 1 is compatible with MySQL 5\.6\. Aurora MySQL version 2 is compatible with MySQL 5\.7\. Aurora MySQL version 3 is compatible with MySQL 8\.0\.
+In an Aurora MySQL version number such as 2\.08\.1, the 2 represents the major version\. Aurora MySQL version 2 is compatible with MySQL 5\.7\. Aurora MySQL version 3 is compatible with MySQL 8\.0\.
 
  Upgrading between major versions requires more extensive planning and testing than for a minor version\. The process can take substantial time\. After the upgrade is finished, you also might have followup work to do\. For example, this might occur because of differences in SQL compatibility or the way certain MySQL\-related features work\. Or it might occur because of differing parameter settings between the old and new versions\. 
 
 **Topics**
 + [Upgrading from Aurora MySQL 2\.x to 3\.x](#AuroraMySQL.Updates.MajorVersionUpgrade.2to3)
-+ [Upgrading from Aurora MySQL 1\.x to 2\.x](#AuroraMySQL.Updates.MajorVersionUpgrade.1to2)
 + [Planning a major version upgrade for an Aurora MySQL cluster](#AuroraMySQL.Upgrading.Planning)
 + [Aurora MySQL major version upgrade paths](#AuroraMySQL.Upgrading.Compatibility)
 + [How the Aurora MySQL in\-place major version upgrade works](#AuroraMySQL.Upgrading.Sequence)
@@ -31,18 +30,6 @@ For general information about Aurora MySQL version 3 and its new features, see [
 
 **Tip**  
 When you upgrade the major version of your cluster from 2\.x to 3\.x, the original cluster and the upgraded one both use the same `aurora-mysql` value for the `engine` attribute\.
-
-## Upgrading from Aurora MySQL 1\.x to 2\.x<a name="AuroraMySQL.Updates.MajorVersionUpgrade.1to2"></a>
-
- Upgrading the major version from 1\.x to 2\.x changes the `engine` attribute of the cluster from `aurora` to `aurora-mysql`\. Make sure to update any AWS CLI or API automation that you use with this cluster to account for the changed `engine` value\. 
-
- If you have a MySQL 5\.6–compatible cluster and want to upgrade it to a MySQL–5\.7 compatible cluster, you can do so by running an upgrade process on the cluster itself\. This kind of upgrade is an *in\-place upgrade*, in contrast to upgrades that you do by creating a new cluster\. This technique keeps the same endpoint and other characteristics of the cluster\. The upgrade is relatively fast because it doesn't require copying all your data to a new cluster volume\. This stability helps to minimize any configuration changes in your applications\. It also helps to reduce the amount of testing for the upgraded cluster\. This is because the number of DB instances and their instance classes all stay the same\. 
-
- The in\-place upgrade mechanism involves shutting down your DB cluster while the operation takes place\. Aurora performs a clean shutdown and completes outstanding operations such as transaction rollback and undo purge\. 
-
- The in\-place upgrade is convenient, because it is simple to perform and minimizes configuration changes to associated applications\. For example, an in\-place upgrade preserves the endpoints and set of DB instances for your cluster\. However, the time needed for an in\-place upgrade can vary depending on the properties of your schema and how busy the cluster is\. Thus, depending on the needs for your cluster, you can choose between in\-place upgrade, snapshot restore as described in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md), or other upgrade techniques such as the one described in [Alternative blue\-green upgrade technique](#AuroraMySQL.UpgradingMajor.BlueGreen)\. 
-
- If your cluster is running a version that's lower than 1\.22\.3, the upgrade might take longer\. This is because Aurora MySQL automatically performs an upgrade to 1\.22\.3 as a first step\. To minimize downtime during the major version upgrade, you can do an initial minor version upgrade to Aurora MySQL 1\.22\.3 in advance\. 
 
 ## Planning a major version upgrade for an Aurora MySQL cluster<a name="AuroraMySQL.Upgrading.Planning"></a>
 
@@ -74,21 +61,18 @@ For information specific to upgrading to Aurora MySQL version 3, see [Upgrade pl
 
 ## Aurora MySQL major version upgrade paths<a name="AuroraMySQL.Upgrading.Compatibility"></a>
 
- Not all kinds or versions of Aurora MySQL clusters can use the in\-place upgrade mechanism\. You can learn the appropriate upgrade path for each Aurora MySQL cluster by consulting the following table\. 
+Not all kinds or versions of Aurora MySQL clusters can use the in\-place upgrade mechanism\. You can learn the appropriate upgrade path for each Aurora MySQL cluster by consulting the following table\.
 
 
 |  Type of Aurora MySQL DB cluster  | Can it use in\-place upgrade?  |  Action  | 
 | --- | --- | --- | 
-|   Aurora MySQL provisioned cluster, 1\.22\.3 or higher   |  Yes  |   This is the fastest upgrade path\. Aurora doesn't need to perform an intermediate upgrade first\.   | 
-|   Aurora MySQL provisioned cluster, lower than 1\.22\.3   |  Yes  |   If your cluster is running a version that's lower than Aurora MySQL 1\.22\.3, the upgrade might take longer\. This is because Aurora MySQL automatically performs an upgrade to 1\.22\.3 as a first step\. To minimize downtime during the major version upgrade, you can do an initial minor version upgrade to Aurora MySQL 1\.22\.3 in advance\.   | 
-|   Aurora MySQL provisioned cluster, 2\.0 or higher   |  Yes  |  In\-place upgrade is supported for 5\.7\-compatible Aurora MySQL clusters\.  For information about upgrading to Aurora MySQL version 3, see [Upgrade planning for Aurora MySQL version 3](AuroraMySQL.mysql80-upgrade-procedure.md#AuroraMySQL.mysql80-planning) and [Upgrading to Aurora MySQL version 3](AuroraMySQL.mysql80-upgrade-procedure.md)\.  | 
+|   Aurora MySQL provisioned cluster, 2\.0 or higher   |  Yes  |  In\-place upgrade is supported for 5\.7\-compatible Aurora MySQL clusters\. For information about upgrading to Aurora MySQL version 3, see [Upgrade planning for Aurora MySQL version 3](AuroraMySQL.mysql80-upgrade-procedure.md#AuroraMySQL.mysql80-planning) and [Upgrading to Aurora MySQL version 3](AuroraMySQL.mysql80-upgrade-procedure.md)\.  | 
 |   Aurora MySQL provisioned cluster, 3\.01\.0 or higher   |  N/A  |  Use a minor version upgrade procedure to upgrade between Aurora MySQL version 3 versions\.  | 
-|   Aurora Serverless v1 cluster   |  Yes  |  You can upgrade from a MySQL 5\.6\-compatible Aurora Serverless v1 version to a MySQL 5\.7\-compatible one by performing an in\-place upgrade\. For more information, see [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\.  | 
+|  Aurora Serverless v1 cluster  | Yes |  You can upgrade from a MySQL 5\.6\-compatible Aurora Serverless v1 version to a MySQL 5\.7\-compatible one by performing an in\-place upgrade\. For more information, see [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\.  | 
 |  Aurora Serverless v2 cluster  |  N/A  | Currently, Aurora Serverless v2 is supported for Aurora MySQL only on version 3\. | 
-|  Cluster in an Aurora global database  |  Yes  |  To upgrade Aurora MySQL from version 1 to version 2, or from version 2 to version 3, follow the [procedure for doing an in\-place upgrade](#AuroraMySQL.Upgrading.Procedure) for clusters in an Aurora global database\. Perform the upgrade on the global cluster\. Aurora upgrades the primary cluster and all the secondary clusters in the global database at the same time\. If you use the AWS CLI or RDS API, call the `modify-global-cluster` command or `ModifyGlobalCluster` operation instead of `modify-db-cluster` or `ModifyDBCluster`\. You can't perform an in\-place upgrade from Aurora MySQL version 2 to version 3 if the `lower_case_table_names` parameter is turned on\. For more information, see [Major version upgrades](aurora-global-database-upgrade.md#aurora-global-database-upgrade.major)\.  | 
-|  Multi\-master cluster  |  No  |   Currently, multi\-master replication isn't available for Aurora MySQL 5\.7–compatible clusters\. You also can't upgrade a multi\-master cluster by performing a snapshot restore\. To move your data from a multi\-master cluster to an Aurora MySQL 5\.7–compatible or 8\.0–compatible cluster, use a logical dump\. You can product a logical dump with a tool such as AWS Database Migration Service \(AWS DMS\) or the mysqldump command\.  | 
-|  Parallel query cluster  |  Yes  |  If you have an existing parallel query cluster using an older Aurora MySQL version, upgrade the cluster to Aurora MySQL 1\.23 first\. Follow the procedure in [Upgrade considerations for parallel query](aurora-mysql-parallel-query.md#aurora-mysql-parallel-query-upgrade)\. You make some changes to configuration parameters to turn parallel query back on after this initial upgrade\. Then you can perform an in\-place upgrade\. In this case, choose 2\.09\.1 or higher for the Aurora MySQL version\.  | 
-|  Cluster that is the target of binary log replication  |  Maybe  |  If the binary log replication is from a 5\.6\-compatible Aurora MySQL cluster, you can perform an in\-place upgrade\. You can't perform the upgrade if the binary log replication is from an RDS MySQL or an on\-premises MySQL DB instance\. In that case, you can upgrade using the snapshot restore mechanism\.  | 
+|  Cluster in an Aurora global database  |  Yes  |  To upgrade Aurora MySQL from version 2 to version 3, follow the [procedure for doing an in\-place upgrade](#AuroraMySQL.Upgrading.Procedure) for clusters in an Aurora global database\. Perform the upgrade on the global cluster\. Aurora upgrades the primary cluster and all the secondary clusters in the global database at the same time\. If you use the AWS CLI or RDS API, call the `modify-global-cluster` command or `ModifyGlobalCluster` operation instead of `modify-db-cluster` or `ModifyDBCluster`\. You can't perform an in\-place upgrade from Aurora MySQL version 2 to version 3 if the `lower_case_table_names` parameter is turned on\. For more information, see [Major version upgrades](aurora-global-database-upgrade.md#aurora-global-database-upgrade.major)\.  | 
+|  Parallel query cluster  |  Yes  |  You can perform an in\-place upgrade\. In this case, choose 2\.09\.1 or higher for the Aurora MySQL version\.  | 
+|  Cluster that is the target of binary log replication  |  Maybe  |  If the binary log replication is from an Aurora MySQL cluster, you can perform an in\-place upgrade\. You can't perform the upgrade if the binary log replication is from an RDS for MySQL or an on\-premises MySQL DB instance\. In that case, you can upgrade using the snapshot restore mechanism\.  | 
 |  Cluster with zero DB instances  |  No  |  Using the AWS CLI or the RDS API, you can create an Aurora MySQL cluster without any attached DB instances\. In the same way, you can also remove all DB instances from an Aurora MySQL cluster while leaving the data in the cluster volume intact\. While a cluster has zero DB instances, you can't perform an in\-place upgrade\. The upgrade mechanism requires a writer instance in the cluster to perform conversions on the system tables, data files, and so on\. In this case, use the AWS CLI or the RDS API to create a writer instance for the cluster\. Then you can perform an in\-place upgrade\.  | 
 |  Cluster with backtrack enabled  |  Yes  |  You can perform an in\-place upgrade for an Aurora MySQL cluster that uses the backtrack feature\. However, after the upgrade, you can't backtrack the cluster to a time before the upgrade\.  | 
 
@@ -219,47 +203,31 @@ If your cluster is part of an Aurora global database, the in\-place upgrade proc
 
 ## How in\-place upgrades affect the parameter groups for a cluster<a name="AuroraMySQL.Upgrading.ParamGroups"></a>
 
-Aurora parameter groups have different sets of configuration settings for clusters that are compatible with MySQL 5\.6, 5\.7, or 8\.0\. When you perform an in\-place upgrade, the upgraded cluster and all its instances must use the corresponding cluster and instance parameter groups:
-+ Your cluster and instances might use the default 5\.6\-compatible parameter groups\. If so, the upgraded cluster and instance start with the default 5\.7\-compatible parameter groups\. If your cluster and instances use any custom parameter groups, make sure to create corresponding 5\.7\-compatible parameter groups\. Also make sure to specify those during the upgrade process\.
-+ Your cluster and instances might use the default 5\.7\-compatible parameter groups\. If so, the upgraded cluster and instance start with the default 8\.0\-compatible parameter groups\. If your cluster and instances use any custom parameter groups, make sure to create corresponding or 8\.0\-compatible parameter groups\. Also make sure to specify those during the upgrade process\.
+Aurora parameter groups have different sets of configuration settings for clusters that are compatible with MySQL 5\.7 or 8\.0\. When you perform an in\-place upgrade, the upgraded cluster and all its instances must use the corresponding cluster and instance parameter groups:
+
+Your cluster and instances might use the default 5\.7\-compatible parameter groups\. If so, the upgraded cluster and instance start with the default 8\.0\-compatible parameter groups\. If your cluster and instances use any custom parameter groups, make sure to create corresponding or 8\.0\-compatible parameter groups\. Also make sure to specify those during the upgrade process\.
 
 **Important**  
  If you specify any custom parameter group during the upgrade process, make sure to manually reboot the cluster after the upgrade finishes\. Doing so makes the cluster begin using your custom parameter settings\. 
 
 ## Changes to cluster properties between Aurora MySQL versions<a name="AuroraMySQL.Upgrading.Attrs"></a>
 
-For MySQL 5\.6\-compatible clusters, the value that you use for the `engine` parameter in AWS CLI commands or RDS API operations is `aurora`\. For MySQL 5\.7–compatible or MySQL 8\.0–compatible clusters, the corresponding value is `aurora-mysql`\. When you upgrade from Aurora MySQL version 1 to version 2 or version 3, make sure to change any applications or scripts that you use to set up or manage Aurora MySQL clusters and DB instances\.
+When you upgrade from Aurora MySQL version 2 to version 3, make sure to check any applications or scripts that you use to set up or manage Aurora MySQL clusters and DB instances\.
 
-Also, change your code that manipulates parameter groups to account for the fact that the default parameter group names are different for 5\.6\-, 5\.7\-, and 8\.0\-compatible clusters\. The default parameter group name for Aurora MySQL version 1 clusters is `default.aurora5.6`\. The corresponding parameter group names for Aurora MySQL version 2 and 3 clusters are `default.aurora-mysql5.7` and `default.aurora-mysql8.0`\.
+Also, change your code that manipulates parameter groups to account for the fact that the default parameter group names are different for 5\.7\- and 8\.0\-compatible clusters\. The default parameter group names for Aurora MySQL version 2 and 3 clusters are `default.aurora-mysql5.7` and `default.aurora-mysql8.0`, respectively\.
 
 For example, you might have code like the following that applies to your cluster before an upgrade\.
 
 ```
-# Add a new DB instance to a MySQL 5.6–compatible cluster.
-aws rds create-db-instance --db-instance-identifier instance-2020-04-28-6889 --db-cluster-identifier cluster-2020-04-28-2690 \
-  --db-instance-class db.t2.small --engine aurora --region us-east-1
-
-# Find the Aurora MySQL v1.x versions available for minor version upgrades and patching.
-aws rds describe-orderable-db-instance-options --engine aurora --region us-east-1 \
-  --query 'OrderableDBInstanceOptions[].{EngineVersion:EngineVersion}' --output text
-
-# Check the default parameter values for MySQL 5.6–compatible clusters.
-aws rds describe-db-parameters --db-parameter-group-name default.aurora5.6 --region us-east-1
+# Check the default parameter values for MySQL 5.7–compatible clusters.
+aws rds describe-db-parameters --db-parameter-group-name default.aurora-mysql5.7 --region us-east-1
 ```
 
  After upgrading the major version of the cluster, modify that code as follows\.
 
 ```
-# Add a new DB instance to a MySQL 5.7–compatible cluster.
-aws rds create-db-instance --db-instance-identifier instance-2020-04-28-3333 --db-cluster-identifier cluster-2020-04-28-2690 \
-  --db-instance-class db.t2.small --engine aurora-mysql --region us-east-1
-
-# Find the Aurora MySQL v2.x versions available for minor version upgrades and patching.
-aws rds describe-orderable-db-instance-options --engine aurora-mysql --region us-east-1 \
-  --query 'OrderableDBInstanceOptions[].{EngineVersion:EngineVersion}' --output text
-
-# Check the default parameter values for MySQL 5.7–compatible clusters.
-aws rds describe-db-parameters --db-parameter-group-name default.aurora-mysql5.7 --region us-east-1
+# Check the default parameter values for MySQL 8.0–compatible clusters.
+aws rds describe-db-parameters --db-parameter-group-name default.aurora-mysql8.0 --region us-east-1
 ```
 
 ## In\-place major upgrades for global databases<a name="AuroraMySQL.Upgrading.GlobalDB"></a>
@@ -308,126 +276,130 @@ Use the following tips to help troubleshoot problems with Aurora MySQL in\-place
 
 ## Aurora MySQL in\-place upgrade tutorial<a name="AuroraMySQL.Upgrading.Tutorial"></a>
 
- The following Linux examples show how you might perform the general steps of the in\-place upgrade procedure using the AWS CLI\. 
+The following Linux examples show how you might perform the general steps of the in\-place upgrade procedure using the AWS CLI\.
 
- This first example creates an Aurora DB cluster that's running a 1\.x version of Aurora MySQL\. The cluster includes a writer DB instance and a reader DB instance\. The `wait db-instance-available` command pauses until the writer DB instance is available\. That's the point when the cluster is ready to be upgraded\. 
+This first example creates an Aurora DB cluster that's running a 2\.x version of Aurora MySQL\. The cluster includes a writer DB instance and a reader DB instance\. The `wait db-instance-available` command pauses until the writer DB instance is available\. That's the point when the cluster is ready to be upgraded\.
 
 ```
-$ aws rds create-db-cluster --db-cluster-identifier cluster-56-2020-11-17-3824 --engine aurora \
-  --db-cluster-version 5.6.mysql_aurora.1.22.3
+aws rds create-db-cluster --db-cluster-identifier mynewdbcluster --engine aurora-mysql \
+  --db-cluster-version 5.7.mysql_aurora.2.10.2
 ...
-$ aws rds create-db-instance --db-instance-identifier instance-2020-11-17-7832 \
-  --db-cluster-identifier cluster-56-2020-11-17-3824 --db-instance-class db.t2.medium --engine aurora
+aws rds create-db-instance --db-instance-identifier mynewdbcluster-instance1 \
+  --db-cluster-identifier mynewdbcluster --db-instance-class db.t4g.medium --engine aurora-mysql
 ...
-$ aws rds wait db-instance-available --db-instance-identifier instance-2020-11-17-7832 --region us-east-1
+aws rds wait db-instance-available --db-instance-identifier mynewdbcluster-instance1
 ```
 
- The Aurora MySQL 2\.x versions that you can upgrade the cluster to depend on the 1\.x version that the cluster is currently running and on the AWS Region where the cluster is located\. The first command, with `--output text`, just shows the available target version\. The second command shows the full JSON output of the response\. In that response, you can see details such as the `aurora-mysql` value that you use for the `engine` parameter\. You can also see the fact that upgrading to 2\.07\.3 represents a major version upgrade\. 
+The Aurora MySQL 3\.x versions that you can upgrade the cluster to depend on the 2\.x version that the cluster is currently running and on the AWS Region where the cluster is located\. The first command, with `--output text`, just shows the available target version\. The second command shows the full JSON output of the response\. In that response, you can see details such as the `aurora-mysql` value that you use for the `engine` parameter\. You can also see the fact that upgrading to 3\.02\.0 represents a major version upgrade\.
 
 ```
-$ aws rds describe-db-clusters --db-cluster-identifier cluster-56-2020-11-17-9355 \
+aws rds describe-db-clusters --db-cluster-identifier mynewdbcluster \
   --query '*[].{EngineVersion:EngineVersion}' --output text
-5.6.mysql_aurora.1.22.3
+5.7.mysql_aurora.2.10.2
 
-$ aws rds describe-db-engine-versions --engine aurora --engine-version 5.6.mysql_aurora.1.22.3 \
+aws rds describe-db-engine-versions --engine aurora-mysql --engine-version 5.7.mysql_aurora.2.10.2 \
   --query '*[].[ValidUpgradeTarget]'
-[
-    [
-        [
-            {
-                "Engine": "aurora-mysql",
-                "EngineVersion": "5.7.mysql_aurora.2.07.3",
-                "Description": "Aurora (MySQL 5.7) 2.07.3",
-                "AutoUpgrade": false,
-                "IsMajorVersionUpgrade": true
-            }
-        ]
-    ]
-]
+...
+{
+    "Engine": "aurora-mysql",
+    "EngineVersion": "8.0.mysql_aurora.3.02.0",
+    "Description": "Aurora MySQL 3.02.0 (compatible with MySQL 8.0.23)",
+    "AutoUpgrade": false,
+    "IsMajorVersionUpgrade": true,
+    "SupportedEngineModes": [
+        "provisioned"
+    ],
+    "SupportsParallelQuery": true,
+    "SupportsGlobalDatabases": true,
+    "SupportsBabelfish": false
+},
+...
 ```
 
- This example shows how if you enter a target version number that isn't a valid upgrade target for the cluster, Aurora doesn't perform the upgrade\. Aurora also doesn't perform a major version upgrade unless you include the `--allow-major-version-upgrade` parameter\. That way, you can't accidentally perform an upgrade that has the potential to require extensive testing and changes to your application code\. 
+This example shows how if you enter a target version number that isn't a valid upgrade target for the cluster, Aurora doesn't perform the upgrade\. Aurora also doesn't perform a major version upgrade unless you include the `--allow-major-version-upgrade` parameter\. That way, you can't accidentally perform an upgrade that has the potential to require extensive testing and changes to your application code\.
 
 ```
-$ aws rds modify-db-cluster --db-cluster-identifier cluster-56-2020-11-17-9355 \
-  --engine-version 5.7.mysql_aurora.2.04.9 --region us-east-1 --apply-immediately
-An error occurred (InvalidParameterCombination) when calling the ModifyDBCluster operation: Cannot find upgrade target from 5.6.mysql_aurora.1.22.3 with requested version 5.7.mysql_aurora.2.04.9.
+aws rds modify-db-cluster --db-cluster-identifier mynewdbcluster \
+  --engine-version 5.7.mysql_aurora.2.09.2 --apply-immediately
+An error occurred (InvalidParameterCombination) when calling the ModifyDBCluster operation: Cannot find upgrade target from 5.7.mysql_aurora.2.10.2 with requested version 5.7.mysql_aurora.2.09.2.
 
-$ aws rds modify-db-cluster --db-cluster-identifier cluster-56-2020-11-17-9355 \
-  --engine-version 5.7.mysql_aurora.2.09.0 --region us-east-1 --apply-immediately
+aws rds modify-db-cluster --db-cluster-identifier mynewdbcluster \
+  --engine-version 8.0.mysql_aurora.3.02.0 --region us-east-1 --apply-immediately
 An error occurred (InvalidParameterCombination) when calling the ModifyDBCluster operation: The AllowMajorVersionUpgrade flag must be present when upgrading to a new major version.
 
-$ aws rds modify-db-cluster --db-cluster-identifier cluster-56-2020-11-17-9355 \
-  --engine-version 5.7.mysql_aurora.2.09.0 --region us-east-1 --apply-immediately --allow-major-version-upgrade
+aws rds modify-db-cluster --db-cluster-identifier mynewdbcluster \
+  --engine-version 8.0.mysql_aurora.3.02.0 --apply-immediately --allow-major-version-upgrade
 {
-  "DBClusterIdentifier": "cluster-56-2020-11-17-9355",
+  "DBClusterIdentifier": "mynewdbcluster",
   "Status": "available",
-  "Engine": "aurora",
-  "EngineVersion": "5.6.mysql_aurora.1.22.3"
+  "Engine": "aurora-mysql",
+  "EngineVersion": "5.7.mysql_aurora.2.10.2"
 }
 ```
 
  It takes a few moments for the status of the cluster and associated DB instances to change to `upgrading`\. The version numbers for the cluster and DB instances only change when the upgrade is finished\. Again, you can use the `wait db-instance-available` command for the writer DB instance to wait until the upgrade is finished before proceeding\. 
 
 ```
-$ aws rds describe-db-clusters --db-cluster-identifier cluster-56-2020-11-17-9355 \
+aws rds describe-db-clusters --db-cluster-identifier mynewdbcluster \
   --query '*[].[Status,EngineVersion]' --output text
-upgrading 5.6.mysql_aurora.1.22.3
+upgrading 5.7.mysql_aurora.2.10.2
 
-$ aws rds describe-db-instances --db-instance-identifier instance-2020-11-17-5158 \
+aws rds describe-db-instances --db-instance-identifier mynewdbcluster-instance1 \
   --query '*[].{DBInstanceIdentifier:DBInstanceIdentifier,DBInstanceStatus:DBInstanceStatus} | [0]'
 {
-    "DBInstanceIdentifier": "instance-2020-11-17-5158",
+    "DBInstanceIdentifier": "mynewdbcluster-instance1",
     "DBInstanceStatus": "upgrading"
 }
 
-$ aws rds wait db-instance-available --db-instance-identifier instance-2020-11-17-5158
+aws rds wait db-instance-available --db-instance-identifier mynewdbcluster-instance1
 ```
 
  At this point, the version number for the cluster matches the one that was specified for the upgrade\. 
 
 ```
-$ aws rds describe-db-clusters --region us-east-1 --db-cluster-identifier cluster-56-2020-11-17-9355 \
+aws rds describe-db-clusters --db-cluster-identifier mynewdbcluster \
   --query '*[].[EngineVersion]' --output text
-5.7.mysql_aurora.2.09.0
+
+8.0.mysql_aurora.3.02.0
 ```
 
- The preceding example did an immediate upgrade by specifying the `--apply-immediately` parameter\. To let the upgrade happen at a convenient time when the cluster isn't expected to be busy, you can specify the `--no-apply-immediately` parameter\. Doing so makes the upgrade start during the next maintenance window for the cluster\. The maintenance window defines the period during which maintenance operations can start\. A long\-running operation might not finish during the maintenance window\. Thus, you don't need to define a larger maintenance window even if you expect that the upgrade might take a long time\. 
+The preceding example did an immediate upgrade by specifying the `--apply-immediately` parameter\. To let the upgrade happen at a convenient time when the cluster isn't expected to be busy, you can specify the `--no-apply-immediately` parameter\. Doing so makes the upgrade start during the next maintenance window for the cluster\. The maintenance window defines the period during which maintenance operations can start\. A long\-running operation might not finish during the maintenance window\. Thus, you don't need to define a larger maintenance window even if you expect that the upgrade might take a long time\.
 
- The following example upgrades a cluster that's initially running Aurora MySQL version 1\.22\.2\. In the `describe-db-engine-versions` output, the `False` and `True` values represent the `IsMajorVersionUpgrade` property\. From version 1\.22\.2, you can upgrade to some other 1\.\* versions\. Those upgrades aren't considered major version upgrades and so don't require an in\-place upgrade\. In\-place upgrade is only available for upgrades to the 2\.07 and 2\.09 versions that are shown in the list\. 
+The following example upgrades a cluster that's initially running Aurora MySQL version 2\.10\.2\. In the `describe-db-engine-versions` output, the `False` and `True` values represent the `IsMajorVersionUpgrade` property\. From version 2\.10\.2, you can upgrade to some other 2\.\* versions\. Those upgrades aren't considered major version upgrades and so don't require an in\-place upgrade\. In\-place upgrade is only available for upgrades to the 3\.\* versions that are shown in the list\.
 
 ```
-$ aws rds describe-db-clusters --region us-east-1 --db-cluster-identifier cluster-56-2020-11-17-3824 \
+aws rds describe-db-clusters --db-cluster-identifier mynewdbcluster \
   --query '*[].{EngineVersion:EngineVersion}' --output text
-5.6.mysql_aurora.1.22.2
-$ aws rds describe-db-engine-versions --engine aurora --engine-version 5.6.mysql_aurora.1.22.2 \
-  --query '*[].[ValidUpgradeTarget]|[0][0]|[*].[EngineVersion,IsMajorVersionUpgrade]' --output text
-5.6.mysql_aurora.1.22.3 False
-5.6.mysql_aurora.1.23.0 False
-5.6.mysql_aurora.1.23.1 False
-5.7.mysql_aurora.2.07.1 True
-5.7.mysql_aurora.2.07.1 True
-5.7.mysql_aurora.2.07.2 True
-5.7.mysql_aurora.2.07.3 True
-5.7.mysql_aurora.2.09.1 True
+5.7.mysql_aurora.2.10.2
 
-$ aws rds modify-db-cluster --db-cluster-identifier cluster-56-2020-11-17-9355 \
-  --engine-version 5.7.mysql_aurora.2.09.0 --region us-east-1 --no-apply-immediately --allow-major-version-upgrade
+aws rds describe-db-engine-versions --engine aurora-mysql --engine-version 5.7.mysql_aurora.2.10.2 \
+  --query '*[].[ValidUpgradeTarget]|[0][0]|[*].[EngineVersion,IsMajorVersionUpgrade]' --output text
+
+5.7.mysql_aurora.2.10.3 False
+5.7.mysql_aurora.2.11.0 False
+5.7.mysql_aurora.2.11.1 False
+8.0.mysql_aurora.3.01.1 True
+8.0.mysql_aurora.3.02.0 True
+8.0.mysql_aurora.3.02.2 True
+
+
+aws rds modify-db-cluster --db-cluster-identifier mynewdbcluster \
+  --engine-version 8.0.mysql_aurora.3.02.0 --no-apply-immediately --allow-major-version-upgrade
 ...
 ```
 
- When a cluster is created without a specified maintenance window, Aurora picks a random day of the week\. In this case, the `modify-db-cluster` command is submitted on a Monday\. Thus, we change the maintenance window to be Tuesday morning\. All times are represented in the UTC time zone\. The `tue:10:00-tue:10:30` window corresponds to 2\-2:30 AM Pacific time\. The change in the maintenance window takes effect immediately\. 
+When a cluster is created without a specified maintenance window, Aurora picks a random day of the week\. In this case, the `modify-db-cluster` command is submitted on a Monday\. Thus, we change the maintenance window to be Tuesday morning\. All times are represented in the UTC time zone\. The `tue:10:00-tue:10:30` window corresponds to 2:00\-2:30 AM Pacific time\. The change in the maintenance window takes effect immediately\.
 
 ```
-$ aws rds describe-db-clusters --db-cluster-identifier cluster-56-2020-11-17-9355 --region us-east-1 --query '*[].[PreferredMaintenanceWindow]'
+aws rds describe-db-clusters --db-cluster-identifier mynewdbcluster --query '*[].[PreferredMaintenanceWindow]'
 [
     [
         "sat:08:20-sat:08:50"
     ]
 ]
 
-$ aws rds modify-db-cluster --db-cluster-identifier cluster-56-2020-11-17-3824 --preferred-maintenance-window tue:10:00-tue:10:30"
-$ aws rds describe-db-clusters --db-cluster-identifier cluster-56-2020-11-17-3824 --region us-east-1 --query '*[].[PreferredMaintenanceWindow]'
+aws rds modify-db-cluster --db-cluster-identifier mynewdbcluster --preferred-maintenance-window tue:10:00-tue:10:30"
+aws rds describe-db-clusters --db-cluster-identifier mynewdbcluster --query '*[].[PreferredMaintenanceWindow]'
 [
     [
         "tue:10:00-tue:10:30"
@@ -435,126 +407,101 @@ $ aws rds describe-db-clusters --db-cluster-identifier cluster-56-2020-11-17-382
 ]
 ```
 
-```
-$ aws rds create-db-cluster --engine aurora --db-cluster-identifier cluster-56-2020-11-17-9355 \
-  --region us-east-1 --master-username my_username --master-user-password my_password
-{
-  "DBClusterIdentifier": "cluster-56-2020-11-17-9355",
-  "DBClusterArn": "arn:aws:rds:us-east-1:123456789012:cluster:cluster-56-2020-11-17-9355",
-  "Engine": "aurora",
-  "EngineVersion": "5.6.mysql_aurora.1.22.2",
-  "Status": "creating",
-  "Endpoint": "cluster-56-2020-11-17-9355.cluster-ccfbt21ixr91.us-east-1-integ.rds.amazonaws.com",
-  "ReaderEndpoint": "cluster-56-2020-11-17-9355.cluster-ro-ccfbt21ixr91.us-east-1-integ.rds.amazonaws.com"
-}
-
-$ aws rds create-db-instance --db-instance-identifier instance-2020-11-17-5158 \
-  --db-cluster-identifier cluster-56-2020-11-17-9355 --db-instance-class db.r5.large --region us-east-1 --engine aurora
-{
-  "DBInstanceIdentifier": "instance-2020-11-17-5158",
-  "DBClusterIdentifier": "cluster-56-2020-11-17-9355",
-  "DBInstanceClass": "db.r5.large",
-  "DBInstanceStatus": "creating"
-}
-
-$ aws rds wait db-instance-available --db-instance-identifier instance-2020-11-17-5158 --region us-east-1
-```
-
- The following example shows how to get a report of the events generated by the upgrade\. The `--duration` argument represents the number of minutes to retrieve the event information\. This argument is needed because by default, `describe-events` only returns events from the last hour\. 
+The following example shows how to get a report of the events generated by the upgrade\. The `--duration` argument represents the number of minutes to retrieve the event information\. This argument is needed because by default, `describe-events` only returns events from the last hour\.
 
 ```
-$ aws rds describe-events --source-type db-cluster --source-identifier cluster-56-2020-11-17-3824 --duration 20160
+aws rds describe-events --source-type db-cluster --source-identifier mynewdbcluster --duration 20160
 {
     "Events": [
         {
-            "SourceIdentifier": "cluster-56-2020-11-17-3824",
+            "SourceIdentifier": "mynewdbcluster",
             "SourceType": "db-cluster",
             "Message": "DB cluster created",
             "EventCategories": [
                 "creation"
             ],
-            "Date": "2020-11-17T01:24:11.093000+00:00",
-            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:cluster-56-2020-11-17-3824"
+            "Date": "2022-11-17T01:24:11.093000+00:00",
+            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:mynewdbcluster"
         },
         {
-            "SourceIdentifier": "cluster-56-2020-11-17-3824",
+            "SourceIdentifier": "mynewdbcluster",
             "SourceType": "db-cluster",
             "Message": "Upgrade in progress: Performing online pre-upgrade checks.",
             "EventCategories": [
                 "maintenance"
             ],
-            "Date": "2020-11-18T22:57:08.450000+00:00",
-            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:cluster-56-2020-11-17-3824"
+            "Date": "2022-11-18T22:57:08.450000+00:00",
+            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:mynewdbcluster"
         },
         {
-            "SourceIdentifier": "cluster-56-2020-11-17-3824",
+            "SourceIdentifier": "mynewdbcluster",
             "SourceType": "db-cluster",
             "Message": "Upgrade in progress: Performing offline pre-upgrade checks.",
             "EventCategories": [
                 "maintenance"
             ],
-            "Date": "2020-11-18T22:57:59.519000+00:00",
-            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:cluster-56-2020-11-17-3824"
+            "Date": "2022-11-18T22:57:59.519000+00:00",
+            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:mynewdbcluster"
         },
         {
-            "SourceIdentifier": "cluster-56-2020-11-17-3824",
+            "SourceIdentifier": "mynewdbcluster",
             "SourceType": "db-cluster",
-            "Message": "Upgrade in progress: Creating pre-upgrade snapshot [preupgrade-cluster-56-2020-11-17-3824-5-6-mysql-aurora-1-22-2-to-5-7-mysql-aurora-2-09-0-2020-11-18-22-55].",
+            "Message": "Upgrade in progress: Creating pre-upgrade snapshot [preupgrade-mynewdbcluster-5-7-mysql-aurora-2-10-2-to-8-0-mysql-aurora-3-02-0-2022-11-18-22-55].",
             "EventCategories": [
                 "maintenance"
             ],
-            "Date": "2020-11-18T23:00:22.318000+00:00",
-            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:cluster-56-2020-11-17-3824"
+            "Date": "2022-11-18T23:00:22.318000+00:00",
+            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:mynewdbcluster"
         },
         {
-            "SourceIdentifier": "cluster-56-2020-11-17-3824",
+            "SourceIdentifier": "mynewdbcluster",
             "SourceType": "db-cluster",
             "Message": "Upgrade in progress: Cloning volume.",
             "EventCategories": [
                 "maintenance"
             ],
-            "Date": "2020-11-18T23:01:45.428000+00:00",
-            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:cluster-56-2020-11-17-3824"
+            "Date": "2022-11-18T23:01:45.428000+00:00",
+            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:mynewdbcluster"
         },
         {
-            "SourceIdentifier": "cluster-56-2020-11-17-3824",
+            "SourceIdentifier": "mynewdbcluster",
             "SourceType": "db-cluster",
             "Message": "Upgrade in progress: Purging undo records for old row versions. Records remaining: 164",
             "EventCategories": [
                 "maintenance"
             ],
-            "Date": "2020-11-18T23:02:25.141000+00:00",
-            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:cluster-56-2020-11-17-3824"
+            "Date": "2022-11-18T23:02:25.141000+00:00",
+            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:mynewdbcluster"
         },
         {
-            "SourceIdentifier": "cluster-56-2020-11-17-3824",
+            "SourceIdentifier": "mynewdbcluster",
             "SourceType": "db-cluster",
             "Message": "Upgrade in progress: Purging undo records for old row versions. Records remaining: 164",
             "EventCategories": [
                 "maintenance"
             ],
-            "Date": "2020-11-18T23:06:23.036000+00:00",
-            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:cluster-56-2020-11-17-3824"
+            "Date": "2022-11-18T23:06:23.036000+00:00",
+            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:mynewdbcluster"
         },
         {
-            "SourceIdentifier": "cluster-56-2020-11-17-3824",
+            "SourceIdentifier": "mynewdbcluster",
             "SourceType": "db-cluster",
             "Message": "Upgrade in progress: Upgrading database objects.",
             "EventCategories": [
                 "maintenance"
             ],
-            "Date": "2020-11-18T23:06:48.208000+00:00",
-            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:cluster-56-2020-11-17-3824"
+            "Date": "2022-11-18T23:06:48.208000+00:00",
+            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:mynewdbcluster"
         },
         {
-            "SourceIdentifier": "cluster-56-2020-11-17-3824",
+            "SourceIdentifier": "mynewdbcluster",
             "SourceType": "db-cluster",
             "Message": "Database cluster major version has been upgraded",
             "EventCategories": [
                 "maintenance"
             ],
-            "Date": "2020-11-18T23:10:28.999000+00:00",
-            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:cluster-56-2020-11-17-3824"
+            "Date": "2022-11-18T23:10:28.999000+00:00",
+            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:mynewdbcluster"
         }
     ]
 }

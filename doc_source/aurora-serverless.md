@@ -55,15 +55,15 @@ Feature availability and support varies across specific versions of each Aurora 
 ## Limitations of Aurora Serverless v1<a name="aurora-serverless.limitations"></a>
 
  The following limitations apply to Aurora Serverless v1: 
-+  Aurora Serverless v1 doesn't support the following features: 
-  +  Aurora global databases 
-  +  Aurora multi\-master clusters 
-  +  Aurora Replicas 
-  +  AWS Identity and Access Management \(IAM\) database authentication 
-  +  Backtracking in Aurora 
-  +  Database activity streams 
-  +  Kerberos authentication 
-  +  Performance Insights 
++ Aurora Serverless v1 doesn't support the following features:
+  + Aurora global databases
+  + Aurora Replicas
+  + AWS Identity and Access Management \(IAM\) database authentication
+  + Backtracking in Aurora
+  + Database activity streams
+  + Kerberos authentication
+  + Performance Insights
+  + RDS Proxy
   + Viewing logs in the AWS Management Console
 +  Connections to an Aurora Serverless v1 DB cluster are closed automatically if held open for longer than one day\. 
 +  All Aurora Serverless v1 DB clusters have the following limitations: 
@@ -85,7 +85,8 @@ Feature availability and support varies across specific versions of each Aurora 
   +  Currently, certain SQL queries and commands aren't recommended\. These include session\-level advisory locks, temporary relations, asynchronous notifications \(`LISTEN`\), and cursors with hold \(`DECLARE name ... CURSOR WITH HOLD FOR query`\)\. Also, `NOTIFY` commands prevent scaling and aren't recommended\. 
 
      For more information, see [Autoscaling for Aurora Serverless v1](aurora-serverless-v1.how-it-works.md#aurora-serverless.how-it-works.auto-scaling)\. 
-+  You can't set the preferred backup window for an Aurora Serverless v1 DB cluster\. 
++ You can't set the preferred automated backup window for an Aurora Serverless v1 DB cluster\.
++ You can set the maintenance window for an Aurora Serverless v1 DB cluster\. For more information, see [Adjusting the preferred DB cluster maintenance window](USER_UpgradeDBInstance.Maintenance.md#AdjustingTheMaintenanceWindow.Aurora)\.
 
 ## Configuration requirements for Aurora Serverless v1<a name="aurora-serverless-v1.requirements"></a>
 

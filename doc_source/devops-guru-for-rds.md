@@ -1,8 +1,8 @@
 # Analyzing performance anomalies with Amazon DevOps Guru for Amazon RDS<a name="devops-guru-for-rds"></a>
 
-Amazon DevOps Guru is a fully managed operations service that helps developers and operators improve the performance and availability of their applications\. DevOps Guru offloads the tasks associated with identifying operational issues so that you can quickly implement recommendations to improve your application\. To learn more, see [What is Amazon DevOps Guru?](https://docs.aws.amazon.com/devops-guru/latest/userguide/welcome.html) in the *Amazon DevOps Guru User Guide*\.
+Amazon DevOps Guru is a fully managed operations service that helps developers and operators improve the performance and availability of their applications\. DevOps Guru offloads the tasks associated with identifying operational issues so that you can quickly implement recommendations to improve your application\. For more information, see [What is Amazon DevOps Guru?](https://docs.aws.amazon.com/devops-guru/latest/userguide/welcome.html) in the *Amazon DevOps Guru User Guide*\.
 
-DevOps Guru detects, analyzes, and makes recommendations for operational issues for all Amazon RDS DB engines\. DevOps Guru for RDS extends this capability by applying machine learning to Performance Insights metrics for Amazon Aurora databases\. These monitoring features allow DevOps Guru for RDS to detect and diagnose performance bottlenecks and recommend specific corrective actions\. To learn more, see [Overview of DevOps Guru for RDS](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-rds.overview.html) in the *Amazon DevOps Guru User Guide*\.
+DevOps Guru detects, analyzes, and makes recommendations for existing operational issues for all Amazon RDS DB engines\. DevOps Guru for RDS extends this capability by applying machine learning to Performance Insights metrics for Amazon Aurora databases\. These monitoring features allow DevOps Guru for RDS to detect and diagnose performance bottlenecks and recommend specific corrective actions\. DevOps Guru for RDS can also detect problematic conditions in your Aurora databases before they occur\.
 
 The following video is an overview of DevOps Guru for RDS\.
 
@@ -27,8 +27,8 @@ DevOps Guru for RDS continuously monitors and analyzes database telemetry\. Per
 **Fast resolution**  
 Each anomaly identifies the performance issue and suggests avenues of investigation or corrective actions\. For example, DevOps Guru for RDS might recommend that you investigate specific wait events\. Or it might recommend that you tune your application pool settings to limit the number of database connections\. Based on these recommendations, you can resolve performance issues more quickly than by troubleshooting manually\.
 
-**Deep knowledge of Amazon engineers**  
-To detect performance issues and help you resolve bottlenecks, DevOps Guru for RDS relies on machine learning \(ML\)\. Amazon database engineers contributed to the development of the DevOps Guru for RDS findings, which encapsulate many years of managing hundreds of thousands of databases\. By drawing on this collective knowledge, DevOps Guru for RDS can teach you best practices\.
+**Deep knowledge of Amazon engineers and machine learning**  
+To detect performance issues and help you resolve bottlenecks, DevOps Guru for RDS relies on machine learning \(ML\) and advanced mathematical formulas\. Amazon database engineers contributed to the development of the DevOps Guru for RDS findings, which encapsulate many years of managing hundreds of thousands of databases\. By drawing on this collective knowledge, DevOps Guru for RDS can teach you best practices\.
 
 ## How DevOps Guru for RDS works<a name="devops-guru-for-rds.how-it-works"></a>
 
@@ -36,7 +36,17 @@ DevOps Guru for RDS collects data about your Aurora databases from Amazon RDS P
 
 ### DevOps Guru insights<a name="devops-guru-for-rds.how-it-works.insights"></a>
 
-An *insight* is a collection of related anomalies that were detected by DevOps Guru\. If DevOps Guru for RDS finds performance issues in your Amazon Aurora DB instances, it publishes an insight in the DevOps Guru dashboard\. To learn more about insights, see [Working with insights in DevOps Guru](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html) in the *Amazon DevOps Guru User Guide*\.
+An *insight* is a collection of related anomalies that were detected by DevOps Guru\.
+
+#### Reactive insights<a name="devops-guru-for-rds.how-it-works.insights.reactive"></a>
+
+A *reactive insight* identifies anomalous behavior as it occurs\. If DevOps Guru for RDS finds performance issues in your Amazon Aurora DB instances, it publishes a reactive insight in the DevOps Guru dashboard\. For more information, see [Working with insights in DevOps Guru](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html) in the *Amazon DevOps Guru User Guide*\.
+
+#### Proactive insights<a name="devops-guru-for-rds.how-it-works.insights.proactive"></a>
+
+A *proactive insight* lets you know about problematic behavior before it occurs\. It contains anomalies with recommendations and related metrics to help you address issues in your Aurora databases before become bigger problems\. These insights are published in the DevOps Guru dashboard\.
+
+For example, DevOps Guru might detect that your Aurora PostgreSQL database is creating many on\-disk temporary tables\. If not addressed, this trend might lead to performance issues\. Each proactive insight includes recommendations for corrective behavior and links to relevant topics in either [Tuning Aurora MySQL with Amazon DevOps Guru proactive insights](MySQL.Tuning.proactive-insights.md) or [Tuning Aurora PostgreSQL with Amazon DevOps Guru proactive insights](PostgreSQL.Tuning_proactive_insights.md)\. For more information, see [Working with insights in DevOps Guru](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html) in the *Amazon DevOps Guru User Guide*\. 
 
 ### DevOps Guru anomalies<a name="devops-guru-for-rds.how-it-works.anomalies"></a>
 
@@ -44,7 +54,7 @@ In DevOps Guru for RDS, an *anomaly* is a pattern that deviates from what is co
 
 #### Causal anomalies<a name="devops-guru-for-rds.how-it-works.anomalies.causal"></a>
 
-A *causal anomaly* is a top\-level anomaly within an insight\. **Database load \(DB load\)** is the causal anomaly for DevOps Guru for RDS\. 
+A *causal anomaly* is a top\-level anomaly within a reactive insight\. **Database load \(DB load\)** is the causal anomaly for DevOps Guru for RDS\. 
 
 An anomaly measures performance impact by assigning a severity level of **High**, **Medium**, or **Low**\. To learn more, see [Key concepts for DevOps Guru for RDS](https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-rds.overview.definitions.html) in the *Amazon DevOps Guru User Guide*\.
 
@@ -52,7 +62,7 @@ If DevOps Guru detects a current anomaly on your DB instance, you're alerted in
 
 #### Contextual anomalies<a name="devops-guru-for-rds.how-it-works.anomalies.contextual"></a>
 
-A *contextual anomaly* is a finding within **Database load \(DB load\)**\. Each contextual anomaly describes a specific Amazon Aurora performance issue that requires investigation\. For example, DevOps Guru for RDS might recommend that you consider increasing CPU capacity or investigate wait events that are contributing to DB load\.
+A *contextual anomaly* is a finding within **Database load \(DB load\)** that is related to a reactive insight\. Each contextual anomaly describes a specific Amazon Aurora performance issue that requires investigation\. For example, DevOps Guru for RDS might recommend that you consider increasing CPU capacity or investigate wait events that are contributing to DB load\.
 
 **Important**  
 We recommend that you test any changes on a test instance before modifying a production instance\. In this way, you understand the impact of the change\.

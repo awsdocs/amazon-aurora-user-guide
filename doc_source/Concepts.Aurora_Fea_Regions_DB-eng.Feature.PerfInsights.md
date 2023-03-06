@@ -21,78 +21,78 @@ Engine version support is different for Performance Insights with Aurora MySQL i
 Following are the supported engines and Region availability for Performance Insights with Aurora MySQL and parallel query turned off\.
 
 
-| Region | Aurora MySQL 8\.0 | Aurora MySQL 5\.7 | Aurora MySQL 5\.6 | 
-| --- | --- | --- | --- | 
-| US East \(Ohio\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| US East \(N\. Virginia\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| US West \(N\. California\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| US West \(Oregon\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Africa \(Cape Town\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Asia Pacific \(Hong Kong\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Asia Pacific \(Hyderabad\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Asia Pacific \(Jakarta\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Asia Pacific \(Melbourne\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Asia Pacific \(Mumbai\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Asia Pacific \(Osaka\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Asia Pacific \(Seoul\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Asia Pacific \(Singapore\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Asia Pacific \(Sydney\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Asia Pacific \(Tokyo\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Canada \(Central\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| China \(Beijing\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| China \(Ningxia\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Europe \(Frankfurt\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Europe \(Ireland\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Europe \(London\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Europe \(Milan\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Europe \(Paris\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Europe \(Spain\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Europe \(Stockholm\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Europe \(Zurich\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Middle East \(Bahrain\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Middle East \(UAE\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| South America \(São Paulo\) | Version 3\.0 and higher | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| AWS GovCloud \(US\-East\) | – | – | – | 
-| AWS GovCloud \(US\-West\) | – | – | – | 
+| Region | Aurora MySQL version 3 | Aurora MySQL version 2 | 
+| --- | --- | --- | 
+| US East \(Ohio\) | All versions | All versions | 
+| US East \(N\. Virginia\) | All versions | All versions | 
+| US West \(N\. California\) | All versions | All versions | 
+| US West \(Oregon\) | All versions | All versions | 
+| Africa \(Cape Town\) | All versions | All versions | 
+| Asia Pacific \(Hong Kong\) | All versions | All versions | 
+| Asia Pacific \(Hyderabad\) | All versions | All versions | 
+| Asia Pacific \(Jakarta\) | All versions | All versions | 
+| Asia Pacific \(Melbourne\) | All versions | All versions | 
+| Asia Pacific \(Mumbai\) | All versions | All versions | 
+| Asia Pacific \(Osaka\) | All versions | All versions | 
+| Asia Pacific \(Seoul\) | All versions | All versions | 
+| Asia Pacific \(Singapore\) | All versions | All versions | 
+| Asia Pacific \(Sydney\) | All versions | All versions | 
+| Asia Pacific \(Tokyo\) | All versions | All versions | 
+| Canada \(Central\) | All versions | All versions | 
+| China \(Beijing\) | All versions | All versions | 
+| China \(Ningxia\) | All versions | All versions | 
+| Europe \(Frankfurt\) | All versions | All versions | 
+| Europe \(Ireland\) | All versions | All versions | 
+| Europe \(London\) | All versions | All versions | 
+| Europe \(Milan\) | All versions | All versions | 
+| Europe \(Paris\) | All versions | All versions | 
+| Europe \(Spain\) | All versions | All versions | 
+| Europe \(Stockholm\) | All versions | All versions | 
+| Europe \(Zurich\) | All versions | All versions | 
+| Middle East \(Bahrain\) | All versions | All versions | 
+| Middle East \(UAE\) | All versions | All versions | 
+| South America \(São Paulo\) | All versions | All versions | 
+| AWS GovCloud \(US\-East\) | – | – | 
+| AWS GovCloud \(US\-West\) | – | – | 
 
 ### Performance Insights with Aurora MySQL and parallel query turned on<a name="Feature.PerfInsights.regions.amy.pqoff"></a>
 
 Following are the supported engines and Region availability for Performance Insights with Aurora MySQL and parallel query turned on\.
 
 
-| Region | Aurora MySQL 8\.0 | Aurora MySQL 5\.7 | Aurora MySQL 5\.6 | 
-| --- | --- | --- | --- | 
-| US East \(Ohio\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| US East \(N\. Virginia\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| US West \(N\. California\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| US West \(Oregon\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Africa \(Cape Town\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Asia Pacific \(Hong Kong\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Asia Pacific \(Hyderabad\) | – | Version 2\.04\.2 and higher | Version 1\.17\.3 and higher | 
-| Asia Pacific \(Jakarta\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Asia Pacific \(Melbourne\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Asia Pacific \(Mumbai\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Asia Pacific \(Osaka\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Asia Pacific \(Seoul\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Asia Pacific \(Singapore\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Asia Pacific \(Sydney\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Asia Pacific \(Tokyo\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Canada \(Central\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| China \(Beijing\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| China \(Ningxia\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Europe \(Frankfurt\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Europe \(Ireland\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Europe \(London\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Europe \(Milan\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Europe \(Paris\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Europe \(Spain\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Europe \(Stockholm\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Europe \(Zurich\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Middle East \(Bahrain\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| Middle East \(UAE\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| South America \(São Paulo\) | – | Version 2\.09\.0 and higher | Version 1\.23\.0 and higher | 
-| AWS GovCloud \(US\-East\) | – | – | – | 
-| AWS GovCloud \(US\-West\) | – | – | – | 
+| Region | Aurora MySQL version 3 | Aurora MySQL version 2 | 
+| --- | --- | --- | 
+| US East \(Ohio\) | – | Version 2\.09\.0 and higher | 
+| US East \(N\. Virginia\) | – | Version 2\.09\.0 and higher | 
+| US West \(N\. California\) | – | Version 2\.09\.0 and higher | 
+| US West \(Oregon\) | – | Version 2\.09\.0 and higher | 
+| Africa \(Cape Town\) | – | Version 2\.09\.0 and higher | 
+| Asia Pacific \(Hong Kong\) | – | Version 2\.09\.0 and higher | 
+| Asia Pacific \(Hyderabad\) | – | All versions | 
+| Asia Pacific \(Jakarta\) | – | Version 2\.09\.0 and higher | 
+| Asia Pacific \(Melbourne\) | – | Version 2\.09\.0 and higher | 
+| Asia Pacific \(Mumbai\) | – | Version 2\.09\.0 and higher | 
+| Asia Pacific \(Osaka\) | – | Version 2\.09\.0 and higher | 
+| Asia Pacific \(Seoul\) | – | Version 2\.09\.0 and higher | 
+| Asia Pacific \(Singapore\) | – | Version 2\.09\.0 and higher | 
+| Asia Pacific \(Sydney\) | – | Version 2\.09\.0 and higher | 
+| Asia Pacific \(Tokyo\) | – | Version 2\.09\.0 and higher | 
+| Canada \(Central\) | – | Version 2\.09\.0 and higher | 
+| China \(Beijing\) | – | Version 2\.09\.0 and higher | 
+| China \(Ningxia\) | – | Version 2\.09\.0 and higher | 
+| Europe \(Frankfurt\) | – | Version 2\.09\.0 and higher | 
+| Europe \(Ireland\) | – | Version 2\.09\.0 and higher | 
+| Europe \(London\) | – | Version 2\.09\.0 and higher | 
+| Europe \(Milan\) | – | Version 2\.09\.0 and higher | 
+| Europe \(Paris\) | – | Version 2\.09\.0 and higher | 
+| Europe \(Spain\) | – | Version 2\.09\.0 and higher | 
+| Europe \(Stockholm\) | – | Version 2\.09\.0 and higher | 
+| Europe \(Zurich\) | – | Version 2\.09\.0 and higher | 
+| Middle East \(Bahrain\) | – | Version 2\.09\.0 and higher | 
+| Middle East \(UAE\) | – | Version 2\.09\.0 and higher | 
+| South America \(São Paulo\) | – | Version 2\.09\.0 and higher | 
+| AWS GovCloud \(US\-East\) | – | – | 
+| AWS GovCloud \(US\-West\) | – | – | 
 
 ## Performance Insights with Aurora PostgreSQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.apg"></a>
 

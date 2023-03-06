@@ -1,12 +1,12 @@
-# Altering tables in Amazon Aurora using fast DDL<a name="AuroraMySQL.Managing.FastDDL"></a>
+# Altering tables in Amazon Aurora using Fast DDL<a name="AuroraMySQL.Managing.FastDDL"></a>
 
 Amazon Aurora includes optimizations to run an `ALTER TABLE` operation in place, nearly instantaneously\. The operation completes without requiring the table to be copied and without having a material impact on other DML statements\. Because the operation doesn't consume temporary storage for a table copy, it makes DDL statements practical even for large tables on small instance classes\.
 
- Aurora MySQL version 3 is compatible with the MySQL 8\.0 feature called instant DDL\. Aurora MySQL versions 1 and 2 use a different implementation called fast DDL\. 
+Aurora MySQL version 3 is compatible with the MySQL 8\.0 feature called instant DDL\. Aurora MySQL version 2 uses a different implementation called Fast DDL\.
 
 **Topics**
 + [Instant DDL \(Aurora MySQL version 3\)](#AuroraMySQL.mysql80-instant-ddl)
-+ [Fast DDL \(Aurora MySQL version 1 and 2\)](#AuroraMySQL.Managing.FastDDL-v2)
++ [Fast DDL \(Aurora MySQL version 2\)](#AuroraMySQL.Managing.FastDDL-v2)
 
 ## Instant DDL \(Aurora MySQL version 3\)<a name="AuroraMySQL.mysql80-instant-ddl"></a><a name="instant_ddl"></a>
 
@@ -76,7 +76,7 @@ mysql> ALTER TABLE ts ALTER COLUMN a SET DEFAULT 20,
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-## Fast DDL \(Aurora MySQL version 1 and 2\)<a name="AuroraMySQL.Managing.FastDDL-v2"></a>
+## Fast DDL \(Aurora MySQL version 2\)<a name="AuroraMySQL.Managing.FastDDL-v2"></a>
 
  <a name="fast_ddl"></a>
 
@@ -89,23 +89,21 @@ For example, suppose that you use an `ALTER TABLE` operation to add a column to 
 + Applying table locks while applying concurrent DML changes
 + Slowing concurrent DML throughput
 
- The optimization performed by Aurora MySQL version 1 and 2 to improve the efficiency of some DDL operations is called fast DDL\. 
+The optimization performed by Aurora MySQL version 2 to improve the efficiency of some DDL operations is called Fast DDL\.
 
- In Aurora MySQL version 3, Aurora uses the MySQL 8\.0 feature called instant DDL\. Aurora MySQL versions 1 and 2 use a different implementation called fast DDL\. 
+In Aurora MySQL version 3, Aurora uses the MySQL 8\.0 feature called instant DDL\. Aurora MySQL version 2 uses a different implementation called Fast DDL\.
 
 **Important**  
-Currently, Aurora lab mode must be enabled to use fast DDL for Aurora MySQL\. We don't recommend using fast DDL for production DB clusters\. For information about enabling Aurora lab mode, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\.
+Currently, Aurora lab mode must be enabled to use Fast DDL for Aurora MySQL\. We don't recommend using Fast DDL for production DB clusters\. For information about enabling Aurora lab mode, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\.
 
 ### Fast DDL limitations<a name="AuroraMySQL.FastDDL.Limitations"></a>
 
-Currently, fast DDL has the following limitations:
+Currently, Fast DDL has the following limitations:
 + Fast DDL only supports adding nullable columns, without default values, to the end of an existing table\.
 + Fast DDL doesn't work for partitioned tables\.
 + Fast DDL doesn't work for InnoDB tables that use the REDUNDANT row format\.
 +  Fast DDL doesn't work for tables with full\-text search indexes\. 
-+ If the maximum possible record size for the DDL operation is too large, fast DDL is not used\. A record size is too large if it is greater than half the page size\. The maximum size of a record is computed by adding the maximum sizes of all columns\. For variable sized columns, according to InnoDB standards, extern bytes are not included for computation\.
-**Note**  
-The maximum record size check was added in Aurora 1\.15\.
++ If the maximum possible record size for the DDL operation is too large, Fast DDL is not used\. A record size is too large if it is greater than half the page size\. The maximum size of a record is computed by adding the maximum sizes of all columns\. For variable sized columns, according to InnoDB standards, extern bytes are not included for computation\.
 
 ### Fast DDL syntax<a name="AuroraMySQL.FastDDL.Syntax"></a>
 
@@ -118,13 +116,13 @@ This statement takes the following options:
 + **`col_name` — **The name of the column to be added\.
 + **`col_definition` — **The definition of the column to be added\.
 **Note**  
-You must specify a nullable column definition without a default value\. Otherwise, fast DDL isn't used\.
+You must specify a nullable column definition without a default value\. Otherwise, Fast DDL isn't used\.
 
 ### Fast DDL examples<a name="AuroraMySQL.FastDDL.Examples"></a>
 
- The following examples demonstrate the speedup from fast DDL operations\. The first SQL example runs `ALTER TABLE` statements on a large table without using fast DDL\. This operation takes substantial time\. A CLI example shows how to enable fast DDL for the cluster\. Then another SQL example runs the same `ALTER TABLE` statements on an identical table\. With fast DDL enabled, the operation is very fast\. 
+ The following examples demonstrate the speedup from Fast DDL operations\. The first SQL example runs `ALTER TABLE` statements on a large table without using Fast DDL\. This operation takes substantial time\. A CLI example shows how to enable Fast DDL for the cluster\. Then another SQL example runs the same `ALTER TABLE` statements on an identical table\. With Fast DDL enabled, the operation is very fast\. 
 
- This example uses the `ORDERS` table from the TPC\-H benchmark, containing 150 million rows\. This cluster intentionally uses a relatively small instance class, to demonstrate how long `ALTER TABLE` statements can take when you can't use fast DDL\. The example creates a clone of the original table containing identical data\. Checking the `aurora_lab_mode` setting confirms that the cluster can't use fast DDL, because lab mode isn't enabled\. Then `ALTER TABLE ADD COLUMN` statements take substantial time to add new columns at the end of the table\. 
+ This example uses the `ORDERS` table from the TPC\-H benchmark, containing 150 million rows\. This cluster intentionally uses a relatively small instance class, to demonstrate how long `ALTER TABLE` statements can take when you can't use Fast DDL\. The example creates a clone of the original table containing identical data\. Checking the `aurora_lab_mode` setting confirms that the cluster can't use Fast DDL, because lab mode isn't enabled\. Then `ALTER TABLE ADD COLUMN` statements take substantial time to add new columns at the end of the table\. 
 
 ```
 mysql> create table orders_regular_ddl like orders;
@@ -164,28 +162,28 @@ ERROR 1238 (HY000): Variable 'aurora_lab_mode' is a read only variable
 
 ```
 $ aws rds create-db-cluster-parameter-group \
-  --db-parameter-group-family aurora5.6 \
-    --db-cluster-parameter-group-name lab-mode-enabled-56 --description 'TBD'
+  --db-parameter-group-family aurora5.7 \
+    --db-cluster-parameter-group-name lab-mode-enabled-57 --description 'TBD'
 $ aws rds describe-db-cluster-parameters \
-  --db-cluster-parameter-group-name lab-mode-enabled-56 \
+  --db-cluster-parameter-group-name lab-mode-enabled-57 \
     --query '*[*].[ParameterName,ParameterValue]' \
       --output text | grep aurora_lab_mode
 aurora_lab_mode 0
 $ aws rds modify-db-cluster-parameter-group \
-  --db-cluster-parameter-group-name lab-mode-enabled-56 \
+  --db-cluster-parameter-group-name lab-mode-enabled-57 \
     --parameters ParameterName=aurora_lab_mode,ParameterValue=1,ApplyMethod=pending-reboot
 {
-    "DBClusterParameterGroupName": "lab-mode-enabled-56"
+    "DBClusterParameterGroupName": "lab-mode-enabled-57"
 }
 
-# Assign the custom parameter group to the cluster that's going to use fast DDL.
+# Assign the custom parameter group to the cluster that's going to use Fast DDL.
 $ aws rds modify-db-cluster --db-cluster-identifier tpch100g \
-  --db-cluster-parameter-group-name lab-mode-enabled-56
+  --db-cluster-parameter-group-name lab-mode-enabled-57
 {
   "DBClusterIdentifier": "tpch100g",
-  "DBClusterParameterGroup": "lab-mode-enabled-56",
-  "Engine": "aurora",
-  "EngineVersion": "5.6.mysql_aurora.1.22.2",
+  "DBClusterParameterGroup": "lab-mode-enabled-57",
+  "Engine": "aurora-mysql",
+  "EngineVersion": "5.7.mysql_aurora.2.10.2",
   "Status": "available"
 }
 
@@ -198,16 +196,16 @@ $ aws rds reboot-db-instance --db-instance-identifier instance-2020-12-22-5208
 
 $ aws rds describe-db-clusters --db-cluster-identifier tpch100g \
   --query '*[].[DBClusterParameterGroup]' --output text
-lab-mode-enabled-56
+lab-mode-enabled-57
 
 $ aws rds describe-db-cluster-parameters \
-  --db-cluster-parameter-group-name lab-mode-enabled-56 \
+  --db-cluster-parameter-group-name lab-mode-enabled-57 \
     --query '*[*].{ParameterName:ParameterName,ParameterValue:ParameterValue}' \
       --output text | grep aurora_lab_mode
 aurora_lab_mode 1
 ```
 
- The following example shows the remaining steps after the parameter group change takes effect\. It tests the `aurora_lab_mode` setting to make sure that the cluster can use fast DDL\. Then it runs `ALTER TABLE` statements to add columns to the end of another large table\. This time, the statements finish very quickly\. 
+ The following example shows the remaining steps after the parameter group change takes effect\. It tests the `aurora_lab_mode` setting to make sure that the cluster can use Fast DDL\. Then it runs `ALTER TABLE` statements to add columns to the end of another large table\. This time, the statements finish very quickly\. 
 
 ```
 mysql> select @@aurora_lab_mode;

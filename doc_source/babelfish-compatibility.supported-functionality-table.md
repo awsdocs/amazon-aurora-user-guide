@@ -76,12 +76,12 @@ In the following table you can find T\-SQL functionality supported by different 
 | CHECK\_CONSTRAINTS | ✓ | ✓ | – | – | – | – | 
 | COLUMN\_DOMAIN\_USAGE | ✓ | ✓ | – | – | – | – | 
 | COLUMNS | ✓ | ✓ | ✓ | ✓ | – | – | 
-| CONSTRAINT\_COLUMN\_USAGE | ✓ | ✓ | ✓ | – | – | – | – | 
+| CONSTRAINT\_COLUMN\_USAGE | ✓ | ✓ | ✓ | – | – | – | 
 | DOMAINS | ✓ | ✓ | ✓ | ✓ | – | – | 
 | ROUTINES | ✓ | ✓ | – | – | – | – | 
 | TABLES | ✓ | ✓ | ✓ | ✓ | – | – | 
 | TABLE\_CONSTRAINTS | ✓ | ✓ | ✓ | ✓ | – | – | 
-| VIEWS | ✓ | ✓ | ✓ | – | – | – | – | 
+| VIEWS | ✓ | ✓ | ✓ | – | – | – | 
 | System\-defined @@ variables: | 
 | --- |
 | @@CURSOR\_ROWS | ✓ | ✓ | ✓ | ✓ | ✓ | – | 

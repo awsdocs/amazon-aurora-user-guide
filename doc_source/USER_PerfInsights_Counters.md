@@ -90,7 +90,7 @@ The following database counters are available with Performance Insights for Auro
 
 ### Native counters for Aurora MySQL<a name="USER_PerfInsights_Counters.Aurora_MySQL.Native"></a>
 
-Native metrics are defined by the database engine and not by Amazon Aurora\. You can find definitions for these native metrics in [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.
+Native metrics are defined by the database engine and not by Amazon Aurora\. You can find definitions for these native metrics in [Server status variables](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html) in the MySQL documentation\.
 
 
 | Counter | Type | Unit | Metric | 
@@ -144,7 +144,7 @@ Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native m
 | --- | --- | --- | --- | --- | 
 | innodb\_buffer\_pool\_hits | Cache | db\.Cache\.innoDB\_buffer\_pool\_hits | The number of reads that InnoDB could satisfy from the buffer pool\. | innodb\_buffer\_pool\_read\_requests \- innodb\_buffer\_pool\_reads | 
 | innodb\_buffer\_pool\_hit\_rate | Cache | db\.Cache\.innoDB\_buffer\_pool\_hit\_rate | The percentage of reads that InnoDB could satisfy from the buffer pool\. | 100 \* innodb\_buffer\_pool\_read\_requests / \(innodb\_buffer\_pool\_read\_requests \+ innodb\_buffer\_pool\_reads\) | 
-| innodb\_buffer\_pool\_usage | Cache | db\.Cache\.innoDB\_buffer\_pool\_usage |  The percentage of the InnoDB buffer pool that contains data \(pages\)\.  When using compressed tables, this value can vary\. For more information, see the information about `Innodb_buffer_pool_pages_data` and `Innodb_buffer_pool_pages_total` in [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.   | Innodb\_buffer\_pool\_pages\_data / Innodb\_buffer\_pool\_pages\_total \* 100\.0 | 
+| innodb\_buffer\_pool\_usage | Cache | db\.Cache\.innoDB\_buffer\_pool\_usage |  The percentage of the InnoDB buffer pool that contains data \(pages\)\.  When using compressed tables, this value can vary\. For more information, see the information about `Innodb_buffer_pool_pages_data` and `Innodb_buffer_pool_pages_total` in [Server status sariables](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html) in the MySQL documentation\.   | Innodb\_buffer\_pool\_pages\_data / Innodb\_buffer\_pool\_pages\_total \* 100\.0 | 
 | query\_cache\_hit\_rate | Cache | db\.Cache\.query\_cache\_hit\_rate | The hit ratio for the MySQL result set cache \(query cache\)\. | Qcache\_hits / \(QCache\_hits \+ Com\_select\) \* 100 | 
 | innodb\_rows\_changed | SQL | db\.SQL\.innodb\_rows\_changed | The total InnoDB row operations\. | db\.SQL\.Innodb\_rows\_inserted \+ db\.SQL\.Innodb\_rows\_deleted \+ db\.SQL\.Innodb\_rows\_updated | 
 | active\_transactions | Transactions | db\.Transactions\.active\_transactions | The total active transactions\. | SELECT COUNT\(1\) AS active\_transactions FROM INFORMATION\_SCHEMA\.INNODB\_TRX | 

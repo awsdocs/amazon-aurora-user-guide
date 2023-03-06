@@ -50,7 +50,9 @@
   + Aurora global databases – 8 ACUs
 +  In some cases, your cluster might contain Aurora Serverless v2 reader DB instances that scale independently from the writer\. If so, choose a minimum capacity setting that's high enough that when the writer DB instance is busy with a write\-intensive workload, the reader DB instances can apply the changes from the writer without falling behind\. If you observe replica lag in readers that are in promotion tiers 2–15, consider increasing the minimum capacity setting for your cluster\. For details on choosing whether reader DB instances scale along with the writer or independently, see [Choosing the promotion tier for an Aurora Serverless v2 reader](aurora-serverless-v2-administration.md#aurora-serverless-v2-choosing-promotion-tier)\. 
 +  If you have a mixed\-configuration cluster with a provisioned writer and Aurora Serverless v2 readers, the readers can't scale along with the writer\. In that case, setting a low minimum capacity can result in excessive replication lag\. That's because the readers might not have enough capacity to apply changes from the writer when the database is busy\. When your cluster uses a provisioned writer, set the minimum capacity to a value that represents a comparable amount of memory and CPU to the writer\. 
-+  For Aurora PostgreSQL, when you specify a minimum Aurora Serverless v2 capacity of 0\.5, the `max_connections` setting is permanently capped at 2000\. If you intend to use the Aurora PostgreSQL cluster for a high\-connection workload, consider using a minimum ACU setting of 1 or higher\. For details about how Aurora Serverless v2 handles the `max_connections` configuration parameter, see [Maximum connections for Aurora Serverless v2](#aurora-serverless-v2.max-connections)\. 
++ The value of the `max_connections` parameter for Aurora Serverless v2DB instances is based on the memory size derived from the maximum ACUs\. However, when you specify a minimum capacity of 0\.5 ACUs on PostgreSQL\-compatible DB instances, the maximum value of `max_connections` is capped at 2,000\.
+
+  If you intend to use the Aurora PostgreSQL cluster for a high\-connection workload, consider using a minimum ACU setting of 1 or higher\. For details about how Aurora Serverless v2 handles the `max_connections` configuration parameter, see [Maximum connections for Aurora Serverless v2](#aurora-serverless-v2.max-connections)\.
 +  The time it takes for an Aurora Serverless v2 DB instance to scale from its minimum capacity to its maximum capacity depends on the difference between its minimum and maximum ACU values\. When the current capacity of the DB instance is large, Aurora Serverless v2 scales up in larger increments than when the DB instance starts from a small capacity\. Thus, if you specify a relatively large maximum capacity and the DB instance spends most of its time near that capacity, consider increasing the minimum ACU setting\. That way, an idle DB instance can scale back up to maximum capacity more quickly\. 
 
 ### Choosing the maximum Aurora Serverless v2 capacity setting for a cluster<a name="aurora-serverless-v2.max_capacity_considerations"></a>
@@ -416,9 +418,9 @@ postgres=> show shared_buffers;
 (1 row)
 ```
 
-The `max_connections` value of `2000` isn't derived from the maximum ACU setting\. When the minimum ACU setting is 0\.5, PostgreSQL\-compatible Aurora Serverless v2 DB instances have a maximum `max_connections` value of 2000\.
+The `max_connections` value for Aurora Serverless v2 DB instances is based on the memory size derived from the maximum ACUs\. However, when you specify a minimum capacity of 0\.5 ACUs on PostgreSQL\-compatible DB instances, the maximum value of `max_connections` is capped at 2,000\.
 
-Now we return the capacity to its initial range of 0\.5–1 ACU and reboot the DB instance\.
+Now we return the capacity to its initial range of 0\.5–1 ACU and reboot the DB instance\. The `max_connections` parameter has returned to its original value\.
 
 ```
 postgres=> show max_connections;
@@ -502,8 +504,7 @@ For both Aurora MySQL and Aurora PostgreSQL, Aurora Serverless v2 DB instances h
 
 When Aurora Serverless v2 evaluates the formula, it uses the memory size based on the maximum Aurora capacity units \(ACUs\) for the DB instance, not the current ACU value\. If you change the default value, we recommend using a variation of the formula instead of specifying a constant value\. That way,Aurora Serverless v2 can use an appropriate setting based on the maximum capacity\.
 
-**Note**  
-When you change the maximum capacity of an Aurora Serverless v2 DB cluster, you have to reboot the Aurora Serverless v2 DB instances to update the `max_connections` value\. This is because `max_connections` is a static parameter\.
+When you change the maximum capacity of an Aurora Serverless v2 DB cluster, you have to reboot the Aurora Serverless v2 DB instances to update the `max_connections` value\. This is because `max_connections` is a static parameter for Aurora Serverless v2\.
 
 The following table shows the default values for `max_connections` for Aurora Serverless v2 based on the maximum ACU value\.
 
@@ -519,7 +520,7 @@ The following table shows the default values for `max_connections` for Aurora Se
 | 128 | 5,000 | 5,000 | 
 
 **Note**  
-When you specify a minimum capacity of 0\.5 ACUs, PostgreSQL\-compatible Aurora Serverless v2 DB instances set an upper limit of 2,000 on the `max_connections` setting\.
+The `max_connections` value for Aurora Serverless v2DB instances is based on the memory size derived from the maximum ACUs\. However, when you specify a minimum capacity of 0\.5 ACUs on PostgreSQL\-compatible DB instances, the maximum value of `max_connections` is capped at 2,000\.
 
 For specific examples showing how `max_connections` changes with the maximum ACU value, see [Example: Change the Aurora Serverless v2 capacity range of an Aurora MySQL cluster](#aurora-serverless-v2-examples-setting-capacity-range-walkthrough-ams) and [Example: Change the Aurora Serverless v2 capacity range of an Aurora PostgreSQL cluster](#aurora-serverless-v2-examples-setting-capacity-range-walkthrough-apg)\.
 

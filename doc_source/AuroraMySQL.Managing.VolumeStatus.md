@@ -8,9 +8,6 @@ You can simulate the failure of an entire storage node, or a single logical bloc
 
 You can avoid that error by using the `SHOW VOLUME STATUS` statement\. The statement returns two server status variables, `Disks` and `Nodes`\. These variables represent the total number of logical blocks of data and storage nodes, respectively, for the DB cluster volume\.
 
-**Note**  
-The `SHOW VOLUME STATUS` statement is available for Aurora version 1\.12 and later\. For more information about Aurora versions, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.
-
 ## Syntax<a name="AuroraMySQL.Managing.VolumeStatus.Syntax"></a>
 
 ```

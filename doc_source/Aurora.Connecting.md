@@ -26,8 +26,6 @@ When you have a connection to your Amazon Aurora DB cluster with MySQL 8\.0 comp
 
 When you have a connection to your Amazon Aurora DB cluster with MySQL 5\.7 compatibility, you can run SQL commands that are compatible with MySQL version 5\.7\. For more information about MySQL 5\.7 SQL syntax, see the [MySQL 5\.7 reference manual](http://dev.mysql.com/doc/refman/5.7/en/index.html)\. For information about limitations that apply to Aurora MySQL 5\.7, see [Aurora MySQL version 2 compatible with MySQL 5\.7](AuroraMySQL.CompareMySQL57.md)\.
 
-When you have a connection to your Amazon Aurora DB cluster with MySQL 5\.6 compatibility, you can run SQL commands that are compatible with MySQL version 5\.6\. For more information about MySQL 5\.6 SQL syntax, see the [MySQL 5\.6 reference manual](http://dev.mysql.com/doc/refman/5.6/en/index.html)\.
-
 **Note**  
 For a helpful and detailed guide on connecting to an Amazon Aurora MySQL DB cluster, you can see the [Aurora connection management](https://d1.awsstatic.com/whitepapers/RDS/amazon-aurora-connection-management-handbook.pdf) handbook\.
 
@@ -50,7 +48,7 @@ To view the cluster endpoint \(writer endpoint\), choose **Databases** on the Am
 ### Connection utilities for Aurora MySQL<a name="Aurora.Connecting.AuroraMySQL.Utilities"></a>
 
 Some connection utilities you can use are the following:
-+ **Command line** – You can connect to an Amazon Aurora DB cluster by using tools like the MySQL command line utility\. For more information on using the MySQL utility, see [mysql \- the MySQL command line tool](http://dev.mysql.com/doc/refman/5.6/en/mysql.html) in the MySQL documentation\.
++ **Command line** – You can connect to an Amazon Aurora DB cluster by using tools like the MySQL command line utility\. For more information on using the MySQL utility, see [mysql — the MySQL command\-line client](http://dev.mysql.com/doc/refman/8.0/en/mysql.html) in the MySQL documentation\.
 + **GUI** – You can use the MySQL Workbench utility to connect by using a UI interface\. For more information, see the [Download MySQL workbench](http://dev.mysql.com/downloads/workbench/) page\.
 + **Applications** – You can use the AWS JDBC Driver for MySQL to connect your client applications to an Aurora MySQL DB cluster\. For more information about the AWS JDBC Driver for MySQL and complete instructions for using it, see the [AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
 **Note**  
@@ -147,7 +145,7 @@ You should see output similar to the following\.
 ```
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 350
-Server version: 5.6.10-log MySQL Community Server (GPL)
+Server version: 8.0.26-log MySQL Community Server (GPL)
 
 Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
 

@@ -49,13 +49,13 @@ The following table describes naming constraints in Amazon Aurora\.
 
 **Storage size limits**  
 An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\) for the following engine versions:  
-+ Aurora MySQL versions 3\.01 and higher \(compatible with MySQL 8\.0\), 2\.09 and higher \(compatible with MySQL 5\.7\), and 1\.23 and higher \(compatible with MySQL 5\.6\)
-+ All Aurora PostgreSQL 14 and 13 versions; Aurora PostgreSQL 12\.4, 11\.7, 10\.12, and 9\.6\.17 and higher minor versions of each of these versions\.
++ All available Aurora MySQL version 3 versions; Aurora MySQL version 2, versions 2\.09 and higher
++ All available Aurora PostgreSQL versions
 For lower engine versions, the maximum size of an Aurora cluster volume is 64 TiB\. For more information, see [How Aurora storage automatically resizes](Aurora.Overview.StorageReliability.md#aurora-storage-growth)\.  
 To monitor the remaining storage space, you can use the `AuroraVolumeBytesLeftTotal` metric\. For more information, see [Cluster\-level metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md#Aurora.AuroraMySQL.Monitoring.Metrics.clusters)\.
 
 **SQL table size limits**  
-For Aurora MySQL, the maximum table size is 64 tebibytes \(TiB\)\. For an Aurora PostgreSQL DB cluster, the maximum table size is 32 tebibytes \(TiB\)\. We recommend that you follow table design best practices, such as partitioning of large tables\.
+For an Aurora MySQL DB cluster, the maximum table size is 64 tebibytes \(TiB\)\. For an Aurora PostgreSQL DB cluster, the maximum table size is 32 tebibytes \(TiB\)\. We recommend that you follow table design best practices, such as partitioning of large tables\.
 
 **Table space ID limits**  
 The maximum table space ID for Aurora MySQL is 2147483647\. If you frequently create and drop tables, make sure to be aware of your table space IDs and plan to use logical dumps\. For more information, see [Migrating from MySQL to Amazon Aurora by using mysqldump](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.mysqldump)\.

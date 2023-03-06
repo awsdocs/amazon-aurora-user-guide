@@ -67,17 +67,17 @@ aurora_version
  Aurora versions use the `major.minor.patch` scheme\. An *Aurora major version* refers to the MySQL or PostgreSQL community major version that Aurora is compatible with\. The following example shows the mapping between community MySQL and PostgreSQL versions and the corresponding Aurora versions\. 
 
 
-|  Community major version  |  Aurora major version  | 
+| Community major version | Aurora major version | 
 | --- | --- | 
-|  MySQL 5\.6  |  Aurora MySQL 1  | 
-|  MySQL 5\.7  |  Aurora MySQL 2  | 
-|  MySQL 8\.0  |  Aurora MySQL 3  | 
-|  PostgreSQL 9\.6 \(deprecated\)  |  Aurora PostgreSQL 1  | 
-|  PostgreSQL 10  |  Aurora PostgreSQL 2\. Applies to PostgreSQL 10\.17 and older versions only\. For version 10\.18 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in patch location\.  | 
-|  PostgreSQL 11  |  Aurora PostgreSQL 3\. Applies to PostgreSQL 11\.12 and older versions only\. For version 11\.13 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location\.  | 
-|  PostgreSQL 12  |  Aurora PostgreSQL 4\. Applies to PostgreSQL 12\.7 and older versions only\. For version 12\.8 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location\. | 
-|  PostgreSQL 13  | Aurora PostgreSQL 13\. For version 13\.3 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location when patches to Aurora are released\. | 
-|  PostgreSQL 14  | Aurora PostgreSQL 14\.3 and higher\. The Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location when patches to Aurora are released\. | 
+| MySQL 5\.6 | Aurora MySQL 1 \(deprecated\) | 
+| MySQL 5\.7 | Aurora MySQL 2 | 
+| MySQL 8\.0 | Aurora MySQL 3 | 
+| PostgreSQL 9\.6 \(deprecated\) | Aurora PostgreSQL 1 \(deprecated\) | 
+| PostgreSQL 10 | Aurora PostgreSQL 2 \(deprecated\)\. Applies to PostgreSQL 10\.17 and older versions only\. For version 10\.18 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location\. | 
+| PostgreSQL 11 | Aurora PostgreSQL 3\. Applies to PostgreSQL 11\.12 and older versions only\. For version 11\.13 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location\. | 
+| PostgreSQL 12 | Aurora PostgreSQL 4\. Applies to PostgreSQL 12\.7 and older versions only\. For version 12\.8 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location\. | 
+| PostgreSQL 13 | Aurora PostgreSQL 13\. For version 13\.3 and higher versions, the Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location when patches to Aurora are released\. | 
+| PostgreSQL 14 | Aurora PostgreSQL 14\.3 and higher\. The Aurora version is the same as the major\.minor version of the PostgreSQL community version, with a third digit in the patch location when patches to Aurora are released\. | 
 
 ## Amazon Aurora minor versions<a name="Aurora.VersionPolicy.MinorVersions"></a>
 
@@ -87,7 +87,7 @@ aurora_version
 
 ## Amazon Aurora patch versions<a name="Aurora.VersionPolicy.PatchVersions"></a>
 
- Aurora versions use the `major.minor.patch` scheme\. An Aurora patch version includes important fixes added to a minor version after its initial release \(for example, Aurora MySQL 2\.04\.0, 2\.04\.1, \.\.\., 2\.04\.9\)\. While each new minor version provides new Aurora features, new patch versions within a specific minor version are primarily used to resolve important issues\. 
+ Aurora versions use the `major.minor.patch` scheme\. An Aurora patch version includes important fixes added to a minor version after its initial release \(for example, Aurora MySQL 2\.10\.0, 2\.10\.1, \.\.\., 2\.10\.3\)\. While each new minor version provides new Aurora features, new patch versions within a specific minor version are primarily used to resolve important issues\. 
 
  For more information on patching, see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\. 
 

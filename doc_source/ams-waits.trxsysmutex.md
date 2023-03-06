@@ -11,8 +11,7 @@ The `synch/mutex/innodb/trx_sys_mutex` event occurs when there is high database 
 ## Relevant engine versions<a name="ams-waits.trxsysmutex.context.supported"></a>
 
 This wait event information is supported for the following engine versions:
-+ Aurora MySQL version 2\.x up to 2\.09\.2
-+ Aurora MySQL version 1\.x up to 1\.23\.1
++ Aurora MySQL version 2, up to 2\.09\.2
 
 ## Context<a name="ams-waits.trxsysmutex.context"></a>
 
@@ -35,7 +34,7 @@ These calls happen inside three functions:
 
 The InnoDB Performance Schema instrumentation tracks all `trx_sys` mutex calls\. Tracking includes, but isn't limited to, management of `trx_sys` on database startup or shutdown, rollback operations, undo cleanups, row read access, and buffer pool loads\. High database activity with a large number of transactions results in `synch/mutex/innodb/trx_sys_mutex` appearing among the top wait events\.
 
-For more information, see [Monitoring InnoDB Mutex Waits Using Performance Schema](https://dev.mysql.com/doc/refman/5.6/en/monitor-innodb-mutex-waits-performance-schema.html) in the MySQL documentation\.
+For more information, see [Monitoring InnoDB Mutex Waits Using Performance Schema](https://dev.mysql.com/doc/refman/5.7/en/monitor-innodb-mutex-waits-performance-schema.html) in the MySQL documentation\.
 
 ## Actions<a name="ams-waits.trxsysmutex.actions"></a>
 

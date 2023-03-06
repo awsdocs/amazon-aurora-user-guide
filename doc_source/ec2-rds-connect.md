@@ -1,10 +1,10 @@
 # Connecting an EC2 instance and an Aurora DB cluster automatically<a name="ec2-rds-connect"></a>
 
-You can use the RDS console to simplify setting up a connection between an EC2 instance and an Aurora DB cluster\. 
+You can use the RDS console to simplify setting up a connection between an EC2 instance and an Aurora DB cluster\. For instructions about setting up a connection between an EC2 instance and a Multi\-AZ DB cluster, see [](USER_VPC.Scenarios.md)\.
 
-![\[Automatically connect an Aurora DB cluster with an EC2 instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-aurora-ec2.png)
+![\[Automatically connect an Aurora DB cluster with an EC2 instance.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-aurora-ec2.png)
 
-If you want to connect to an EC2 instance that isn't in the same VPC as the Aurora DB cluster, see the appropriate scenarios in [Scenarios for accessing a DB cluster in a VPC](USER_VPC.Scenarios.md)\.
+If you want to connect to an EC2 instance that isn't in the same VPC as the Aurora DB cluster, see the scenarios in [Scenarios for accessing a DB cluster in a VPC](USER_VPC.Scenarios.md)\.
 
 **Topics**
 + [Overview of automatic connectivity with an EC2 instance](#ec2-rds-connect-overview)
@@ -73,14 +73,14 @@ You can only set up a connection between an EC2 instance and an Aurora DB cluste
    The **Set up EC2 connection** page appears\.
 
 1. On the **Set up EC2 connection** page, choose the EC2 instance\.  
-![\[Set up EC2 connection page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-rds-ec2-set-up.png)
+![\[Set up EC2 connection page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-rds-ec2-set-up.png)
 
    If no EC2 instances exist in the same VPC, choose **Create EC2 instance** to create one\. In this case, make sure the new EC2 instance is in the same VPC as the DB cluster\.
 
 1. Choose **Continue**\.
 
    The **Review and confirm** page appears\.  
-![\[EC2 connection review and confirmation page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-rds-ec2-confirm.png)
+![\[EC2 connection review and confirmation page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-rds-ec2-confirm.png)
 
 1. On the **Review and confirm** page, review the changes that RDS will make to set up connectivity with the EC2 instance\.
 
@@ -115,4 +115,4 @@ For a compute resource to be listed, the following conditions must apply:
 1. In the navigation pane, choose **Databases**, and then choose the name of the DB cluster\.
 
 1. On the **Connectivity & security** tab, view the compute resources in the **Connected compute resources**\.  
-![\[Connected compute resources\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/ec2-connected-compute-resources.png)
+![\[Connected compute resources.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/ec2-connected-compute-resources.png)

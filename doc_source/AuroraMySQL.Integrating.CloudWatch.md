@@ -2,7 +2,7 @@
 
 You can configure your Aurora MySQL DB cluster to publish general, slow, audit, and error log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\.
 
-To publish logs to CloudWatch Logs, the respective logs must be enabled\. Error logs are enabled by default, but you must enable the other types of logs explicitly\. For information about enabling logs in MySQL, see [Selecting general query and slow query log output destinations](https://dev.mysql.com/doc/refman/5.6/en/log-destinations.html) in the MySQL documentation\. For more information about enabling Aurora MySQL audit logs, see [Enabling Advanced Auditing](AuroraMySQL.Auditing.md#AuroraMySQL.Auditing.Enable)\. 
+To publish logs to CloudWatch Logs, the respective logs must be enabled\. Error logs are enabled by default, but you must enable the other types of logs explicitly\. For information about enabling logs in MySQL, see [Selecting general query and slow query log output destinations](https://dev.mysql.com/doc/refman/8.0/en/log-destinations.html) in the MySQL documentation\. For more information about enabling Aurora MySQL audit logs, see [Enabling Advanced Auditing](AuroraMySQL.Auditing.md#AuroraMySQL.Auditing.Enable)\. 
 
 **Note**  
 Be aware of the following:  

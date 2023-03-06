@@ -193,9 +193,7 @@ You can use the AWS CLI to create an Aurora MySQL DB cluster or an Aurora Postgr
 
 **To create an Aurora MySQL DB cluster using the AWS CLI**
 
-When you create an Aurora MySQL DB cluster or DB instance, ensure that you specify the correct value for the `--engine` option value based on the MySQL compatibility of the DB cluster or DB instance\.
-+ When you create an Aurora MySQL 8\.0\-compatible or 5\.7\-compatible DB cluster or DB instance, you specify `aurora-mysql` for the `--engine` option\.
-+ When you create an Aurora MySQL 5\.6\-compatible DB cluster or DB instance, you specify `aurora` for the `--engine` option\.
+When you create an Aurora MySQL 8\.0\-compatible or 5\.7\-compatible DB cluster or DB instance, you specify `aurora-mysql` for the `--engine` option\.
 
 Complete the following steps:
 
@@ -237,24 +235,6 @@ Complete the following steps:
        --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
    ```
 
-   The following command creates a new MySQL 5\.6–compatible DB cluster named `sample-cluster`\.
-
-   For Linux, macOS, or Unix:
-
-   ```
-   aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora \
-        --engine-version 5.6.10a --master-username user-name --master-user-password password \
-        --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
-   ```
-
-   For Windows:
-
-   ```
-   aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora ^
-       --engine-version 5.6.10a --master-username user-name --master-user-password password ^
-       --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
-   ```
-
 1. If you use the console to create a DB cluster, then Amazon RDS automatically creates the primary instance \(writer\) for your DB cluster\. If you use the AWS CLI to create a DB cluster, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
 
    Call the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create the primary instance for your DB cluster\. Include the name of the DB cluster as the `--db-cluster-identifier` option value\.
@@ -273,22 +253,6 @@ Complete the following steps:
    ```
    aws rds create-db-instance --db-instance-identifier sample-instance ^
         --db-cluster-identifier sample-cluster --engine aurora-mysql --db-instance-class db.r5.large
-   ```
-
-   The following command creates a new MySQL 5\.6–compatible DB instance named `sample-instance`\.
-
-   For Linux, macOS, or Unix:
-
-   ```
-   aws rds create-db-instance --db-instance-identifier sample-instance \
-        --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r5.large
-   ```
-
-   For Windows:
-
-   ```
-   aws rds create-db-instance --db-instance-identifier sample-instance ^
-        --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r5.large
    ```<a name="Aurora.CreateInstance.Creating.CLI.DBCluster.PostgreSQL"></a>
 
 **To create an Aurora PostgreSQL DB cluster using the AWS CLI**
@@ -338,9 +302,7 @@ Before you can create an Aurora DB cluster using the AWS CLI, you must fulfill t
 
 Identify the DB subnet group and VPC security group ID for your new DB cluster, and then call the [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) operation to create the DB cluster\.
 
-When you create an Aurora MySQL DB cluster or DB instance, ensure that you specify the correct value for the `Engine` parameter value based on the MySQL compatibility of the DB cluster or DB instance\.
-+ When you create an Aurora MySQL 5\.7 DB cluster or DB instance, you must specify `aurora-mysql` for the `Engine` parameter\.
-+ When you create an Aurora MySQL 5\.6 DB cluster or DB instance, you must specify `aurora` for the `Engine` parameter\.
+When you create an Aurora MySQL version 2 or 3 DB cluster or DB instance, you must specify `aurora-mysql` for the `Engine` parameter\.
 
 When you create an Aurora PostgreSQL DB cluster or DB instance, specify `aurora-postgresql` for the `Engine` parameter\.
 
@@ -354,7 +316,7 @@ Additional settings are available if you are creating an Aurora Serverless v1 DB
 
 | Console setting | Setting description | CLI option and RDS API parameter | 
 | --- | --- | --- | 
-|   **Auto minor version upgrade**   |  Choose **Enable auto minor version upgrade** if you want to enable your Aurora DB cluster to receive preferred minor version upgrades to the DB engine automatically when they become available\. The **Auto minor version upgrade** setting applies to both Aurora PostgreSQL and Aurora MySQL DB clusters\. For Aurora MySQL version 1 and version 2 clusters, this setting upgrades the clusters to a maximum version of 1\.22\.2 and 2\.07\.2, respectively\. For more information about engine updates for Aurora PostgreSQL, see [Amazon Aurora PostgreSQL updates](AuroraPostgreSQL.Updates.md)\. For more information about engine updates for Aurora MySQL, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.  |   Set this value for every DB instance in your Aurora cluster\. If any DB instance in your cluster has this setting turned off, the cluster isn't automatically upgraded\.  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) and set the `--auto-minor-version-upgrade\|--no-auto-minor-version-upgrade` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) and set the `AutoMinorVersionUpgrade` parameter\.  | 
+|   **Auto minor version upgrade**   |  Choose **Enable auto minor version upgrade** if you want to enable your Aurora DB cluster to receive preferred minor version upgrades to the DB engine automatically when they become available\. The **Auto minor version upgrade** setting applies to both Aurora PostgreSQL and Aurora MySQL DB clusters\. For more information about engine updates for Aurora PostgreSQL, see [Amazon Aurora PostgreSQL updates](AuroraPostgreSQL.Updates.md)\. For more information about engine updates for Aurora MySQL, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.  |   Set this value for every DB instance in your Aurora cluster\. If any DB instance in your cluster has this setting turned off, the cluster isn't automatically upgraded\.  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) and set the `--auto-minor-version-upgrade\|--no-auto-minor-version-upgrade` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) and set the `AutoMinorVersionUpgrade` parameter\.  | 
 |   **AWS KMS key**   |  Only available if **Encryption** is set to **Enable encryption**\. Choose the AWS KMS key to use for encrypting this DB cluster\. For more information, see [Encrypting Amazon Aurora resources](Overview.Encryption.md)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--kms-key-id` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `KmsKeyId` parameter\.  | 
 |   **Backtrack**   |  Applies only to Aurora MySQL\. Choose **Enable Backtrack** to enable backtracking or **Disable Backtrack** to disable backtracking\. Using backtracking, you can rewind a DB cluster to a specific time, without creating a new DB cluster\. It is disabled by default\. If you enable backtracking, also specify the amount of time that you want to be able to backtrack your DB cluster \(the target backtrack window\)\. For more information, see [Backtracking an Aurora DB cluster](AuroraMySQL.Managing.Backtrack.md)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--backtrack-window` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `BacktrackWindow` parameter\.  | 
 |  **Certificate authority**  |  The certificate authority \(CA\) for the server certificate used by the DB instances in the DB cluster\. For more information, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\.   |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) and set the `--ca-certificate-identifier` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) and set the `CACertificateIdentifier` parameter\.  | 

@@ -360,7 +360,7 @@ You can minimize pinning by doing the following:
 +  Creating a temporary table causes the proxy to pin the session\. That way, the contents of the temporary table are preserved throughout the session regardless of transaction boundaries\. 
 +  Calling the functions `ROW_COUNT`, `FOUND_ROWS`, and `LAST_INSERT_ID` sometimes causes pinning\.  
 
-   The exact circumstances where these functions cause pinning might differ between Aurora MySQL versions that are compatible with MySQL 5\.6 and MySQL 5\.7\. 
+  The exact circumstances where these functions cause pinning might differ among Aurora MySQL versions that are compatible with MySQL 5\.7\.
 
  Calling stored procedures and stored functions doesn't cause pinning\. RDS Proxy doesn't detect any session state changes resulting from such calls\. Therefore, make sure that your application doesn't change session state inside stored routines and rely on that session state to persist across transactions\. For example, if a stored procedure creates a temporary table that is intended to persist across transactions, that application currently isn't compatible with RDS Proxy\. 
 

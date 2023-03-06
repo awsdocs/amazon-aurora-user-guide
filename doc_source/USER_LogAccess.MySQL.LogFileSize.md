@@ -44,7 +44,7 @@ You can control Aurora MySQL logging by using the parameters in this list:
   + **FILE** – Write both general and slow query logs to the file system\.
   + **NONE** – Disable logging\.
 
-  For Aurora MySQL 5\.6, the default for `log_output` is `TABLE`\. For Aurora MySQL 5\.7, the default for `log_output` is `FILE`\.
+  For Aurora MySQL version 2, the default for `log_output` is `FILE`\.
 
 For more information about the slow query and general logs, go to the following topics in the MySQL documentation:
 + [The slow query log](https://dev.mysql.com/doc/refman/8.0/en/slow-query-log.html)

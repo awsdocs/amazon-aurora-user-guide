@@ -6,9 +6,6 @@ This topic includes information on best practices and options for using or migra
 + [Determining which DB instance you are connected to](#AuroraMySQL.BestPractices.DeterminePrimaryInstanceConnection)
 + [Best practices for Aurora MySQL performance and scaling](#AuroraMySQL.BestPractices.Performance)
   + [Using T instance classes for development and testing](#AuroraMySQL.BestPractices.T2Medium)
-  + [Optimizing Amazon Aurora indexed join queries with asynchronous key prefetch](#Aurora.BestPractices.AKP)
-    + [Enabling asynchronous key prefetch](#Aurora.BestPractices.AKP.Enabling)
-    + [Optimizing queries for asynchronous key prefetch](#Aurora.BestPractices.AKP.Optimizing)
   + [Optimizing large Aurora MySQL join queries with hash joins](#Aurora.BestPractices.HashJoin)
     + [Enabling hash joins](#Aurora.BestPractices.HashJoin.Enabling)
     + [Optimizing queries for hash joins](#Aurora.BestPractices.HashJoin.Optimizing)
@@ -34,7 +31,7 @@ SHOW GLOBAL VARIABLES LIKE 'innodb_read_only';
 
 The `innodb_read_only` variable is set to `ON` if you are connected to a reader DB instance\. This setting is `OFF` if you are connected to a writer DB instance, such as primary instance in a provisioned cluster\.
 
-This approach can be helpful if you want to add logic to your application code to balance the workload or to ensure that a write operation is using the correct connection\. This technique only applies to Aurora clusters using single\-master replication\. For multi\-master clusters, all the DB instances have the setting `innodb_read_only=OFF`\.
+This approach can be helpful if you want to add logic to your application code to balance the workload or to ensure that a write operation is using the correct connection\.
 
 ## Best practices for Aurora MySQL performance and scaling<a name="AuroraMySQL.BestPractices.Performance"></a>
 
@@ -42,7 +39,6 @@ You can apply the following best practices to improve the performance and scalab
 
 **Topics**
 + [Using T instance classes for development and testing](#AuroraMySQL.BestPractices.T2Medium)
-+ [Optimizing Amazon Aurora indexed join queries with asynchronous key prefetch](#Aurora.BestPractices.AKP)
 + [Optimizing large Aurora MySQL join queries with hash joins](#Aurora.BestPractices.HashJoin)
 + [Using Amazon Aurora to scale reads for your MySQL database](#AuroraMySQL.BestPractices.ReadScaling)
 
@@ -67,7 +63,7 @@ When you use a T instance as a DB instance in an Aurora MySQL DB cluster, we rec
   If your CPU credit balance is not at a sustainable level, then we recommend that you modify your DB instance to use a one of the supported R DB instance classes \(scale compute\)\.
 
   For more information on monitoring metrics, see [Viewing metrics in the Amazon RDS console](USER_Monitoring.md)\.
-+ For your Aurora MySQL DB clusters using single\-master replication, monitor the replica lag \(`AuroraReplicaLag`\) between the writer instance and the reader instances\.
++ Monitor the replica lag \(`AuroraReplicaLag`\) between the writer instance and the reader instances\.
 
   If a reader instance runs out of CPU credits before the writer instance does, the resulting lag can cause the reader instance to restart frequently\. This result is common when an application has a heavy load of read operations distributed among reader instances, at the same time that the writer instance has a minimal load of write operations\.
 
@@ -77,94 +73,6 @@ When you use a T instance as a DB instance in an Aurora MySQL DB cluster, we rec
 + Keep the number of inserts per transaction below 1 million for DB clusters that have binary logging enabled\.
 
   If the DB cluster parameter group for your DB cluster has the `binlog_format` parameter set to a value other than `OFF`, then your DB cluster might experience out\-of\-memory conditions if the DB cluster receives transactions that contain over 1 million rows to insert\. You can monitor the freeable memory \(`FreeableMemory`\) metric to determine if your DB cluster is running out of available memory\. You then check the write operations \(`VolumeWriteIOPS`\) metric to see if a writer instance is receiving a heavy load of write operations\. If this is the case, then we recommend that you update your application to limit the number of inserts in a transaction to less than 1 million\. Alternatively, you can modify your instance to use one of the supported R DB instance classes \(scale compute\)\.
-
-### Optimizing Amazon Aurora indexed join queries with asynchronous key prefetch<a name="Aurora.BestPractices.AKP"></a>
-
-**Note**  
-The asynchronous key prefetch \(AKP\) feature is available for Amazon Aurora MySQL version 1\.15 and later\. For more information about Aurora MySQL versions, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.
-
-Amazon Aurora can use AKP to improve the performance of queries that join tables across indexes\. This feature improves performance by anticipating the rows needed to run queries in which a JOIN query requires use of the Batched Key Access \(BKA\) Join algorithm and Multi\-Range Read \(MRR\) optimization features\. For more information about BKA and MRR, see [Block nested\-loop and batched key access joins](https://dev.mysql.com/doc/refman/5.6/en/bnl-bka-optimization.html) and [Multi\-range read optimization](https://dev.mysql.com/doc/refman/5.6/en/mrr-optimization.html) in the MySQL documentation\.
-
-To take advantage of the AKP feature, a query must use both BKA and MRR\. Typically, such a query occurs when the JOIN clause of a query uses a secondary index, but also needs some columns from the primary index\. For example, you can use AKP when a JOIN clause represents an equijoin on index values between a small outer and large inner table, and the index is highly selective on the larger table\. AKP works in concert with BKA and MRR to perform a secondary to primary index lookup during the evaluation of the JOIN clause\. AKP identifies the rows required to run the query during the evaluation of the JOIN clause\. It then uses a background thread to asynchronously load the pages containing those rows into memory before running the query\.
-
-#### Enabling asynchronous key prefetch<a name="Aurora.BestPractices.AKP.Enabling"></a>
-
-You can enable the AKP feature by setting `aurora_use_key_prefetch`, a MySQL server variable, to `on`\. By default, this value is set to `on`\. However, AKP cannot be enabled until you also enable the BKA Join algorithm and disable cost\-based MRR functionality\. To do so, you must set the following values for `optimizer_switch`, a MySQL server variable:
-+ Set `batched_key_access` to `on`\. This value controls the use of the BKA Join algorithm\. By default, this value is set to `off`\.
-+ Set `mrr_cost_based` to `off`\. This value controls the use of cost\-based MRR functionality\. By default, this value is set to `on`\.
-
-Currently, you can set these values only at the session level\. The following example illustrates how to set these values to enable AKP for the current session by executing SET statements\.
-
-```
-mysql> set @@session.aurora_use_key_prefetch=on;
-mysql> set @@session.optimizer_switch='batched_key_access=on,mrr_cost_based=off';
-```
-
-Similarly, you can use SET statements to disable AKP and the BKA Join algorithm and re\-enable cost\-based MRR functionality for the current session, as shown in the following example\.
-
-```
-mysql> set @@session.aurora_use_key_prefetch=off;
-mysql> set @@session.optimizer_switch='batched_key_access=off,mrr_cost_based=on';
-```
-
-For more information about the **batched\_key\_access** and **mrr\_cost\_based** optimizer switches, see [Switchable optimizations](https://dev.mysql.com/doc/refman/5.6/en/switchable-optimizations.html) in the MySQL documentation\.
-
-#### Optimizing queries for asynchronous key prefetch<a name="Aurora.BestPractices.AKP.Optimizing"></a>
-
-You can confirm whether a query can take advantage of the AKP feature\. To do so, use the `EXPLAIN` statement to profile the query before running it\. The `EXPLAIN` statement provides information about the execution plan to use for a specified query\.
-
-In the output for the `EXPLAIN` statement, the `Extra` column describes additional information included with the execution plan\. If the AKP feature applies to a table used in the query, this column includes one of the following values:
-+ `Using Key Prefetching`
-+ `Using join buffer (Batched Key Access with Key Prefetching)`
-
-The following example shows the use of `EXPLAIN` to view the execution plan for a query that can take advantage of AKP\.
-
-```
-mysql> explain select sql_no_cache
-    ->     ps_partkey,
-    ->     sum(ps_supplycost * ps_availqty) as value
-    -> from
-    ->     partsupp,
-    ->     supplier,
-    ->     nation
-    -> where
-    ->     ps_suppkey = s_suppkey
-    ->     and s_nationkey = n_nationkey
-    ->     and n_name = 'ETHIOPIA'
-    -> group by
-    ->     ps_partkey having
-    ->         sum(ps_supplycost * ps_availqty) > (
-    ->             select
-    ->                 sum(ps_supplycost * ps_availqty) * 0.0000003333
-    ->             from
-    ->                 partsupp,
-    ->                 supplier,
-    ->                 nation
-    ->             where
-    ->                 ps_suppkey = s_suppkey
-    ->                 and s_nationkey = n_nationkey
-    ->                 and n_name = 'ETHIOPIA'
-    ->         )
-    -> order by
-    ->     value desc;
-+----+-------------+----------+------+-----------------------+---------------+---------+----------------------------------+------+----------+-------------------------------------------------------------+
-| id | select_type | table    | type | possible_keys         | key           | key_len | ref                              | rows | filtered | Extra                                                       |
-+----+-------------+----------+------+-----------------------+---------------+---------+----------------------------------+------+----------+-------------------------------------------------------------+
-|  1 | PRIMARY     | nation   | ALL  | PRIMARY               | NULL          | NULL    | NULL                             |   25 |   100.00 | Using where; Using temporary; Using filesort                |
-|  1 | PRIMARY     | supplier | ref  | PRIMARY,i_s_nationkey | i_s_nationkey | 5       | dbt3_scale_10.nation.n_nationkey | 2057 |   100.00 | Using index                                                 |
-|  1 | PRIMARY     | partsupp | ref  | i_ps_suppkey          | i_ps_suppkey  | 4       | dbt3_scale_10.supplier.s_suppkey |   42 |   100.00 | Using join buffer (Batched Key Access with Key Prefetching) |
-|  2 | SUBQUERY    | nation   | ALL  | PRIMARY               | NULL          | NULL    | NULL                             |   25 |   100.00 | Using where                                                 |
-|  2 | SUBQUERY    | supplier | ref  | PRIMARY,i_s_nationkey | i_s_nationkey | 5       | dbt3_scale_10.nation.n_nationkey | 2057 |   100.00 | Using index                                                 |
-|  2 | SUBQUERY    | partsupp | ref  | i_ps_suppkey          | i_ps_suppkey  | 4       | dbt3_scale_10.supplier.s_suppkey |   42 |   100.00 | Using join buffer (Batched Key Access with Key Prefetching) |
-+----+-------------+----------+------+-----------------------+---------------+---------+----------------------------------+------+----------+-------------------------------------------------------------+
-6 rows in set, 1 warning (0.00 sec)
-```
-
-For more information about the `EXPLAIN` output format, see [Extended EXPLAIN output format](https://dev.mysql.com/doc/refman/8.0/en/explain-extended.html) in the MySQL product documentation\.
-
-**Note**  
-For MySQL 5\.6–compatible and older 5\.7–compatible versions, you use the `EXPLAIN` statement with the `EXTENDED` keyword\. This keyword has been deprecated in MySQL 5\.7 and 8\.0\.  
-For more information about the extended `EXPLAIN` output format in MySQL 5\.6, see [Extended EXPLAIN output format](https://dev.mysql.com/doc/refman/5.6/en/explain-extended.html) in the MySQL product documentation\.
 
 ### Optimizing large Aurora MySQL join queries with hash joins<a name="Aurora.BestPractices.HashJoin"></a>
 
@@ -180,7 +88,7 @@ A hash join column can be any complex expression\. In a hash join column, you ca
 You can't compare data types in different categories\.
 
 The following restrictions apply to hash joins for Aurora MySQL:
-+ Left\-right outer joins aren't supported for Aurora MySQL versions 1 and 2, but are supported for version 3\.
++ Left\-right outer joins aren't supported for Aurora MySQL version 2, but are supported for version 3\.
 + Semijoins such as subqueries aren't supported, unless the subqueries are materialized first\.
 + Multiple\-table updates or deletes aren't supported\.
 **Note**  
@@ -190,10 +98,10 @@ Single\-table updates or deletes are supported\.
 #### Enabling hash joins<a name="Aurora.BestPractices.HashJoin.Enabling"></a>
 
 To enable hash joins:
-+ Aurora MySQL version 1 and 2 – Set the DB parameter or DB cluster parameter `aurora_disable_hash_join` to `0`\. Turning off `aurora_disable_hash_join` sets the value of `optimizer_switch` to `hash_join=on`\.
++ Aurora MySQL version 2 – Set the DB parameter or DB cluster parameter `aurora_disable_hash_join` to `0`\. Turning off `aurora_disable_hash_join` sets the value of `optimizer_switch` to `hash_join=on`\.
 + Aurora MySQL version 3 – Set the MySQL server parameter `optimizer_switch` to `block_nested_loop=on`\.
 
-Hash joins are turned on by default in Aurora MySQL version 3 and turned off by default in Aurora MySQL version 1 and 2\. The following example illustrates how to enable hash joins for Aurora MySQL version 3\. You can issue the statement `select @@optimizer_switch` first to see what other settings are present in the `SET` parameter string\. Updating one setting in the `optimizer_switch` parameter doesn't erase or modify the other settings\.
+Hash joins are turned on by default in Aurora MySQL version 3 and turned off by default in Aurora MySQL version 2\. The following example illustrates how to enable hash joins for Aurora MySQL version 3\. You can issue the statement `select @@optimizer_switch` first to see what other settings are present in the `SET` parameter string\. Updating one setting in the `optimizer_switch` parameter doesn't erase or modify the other settings\.
 
 ```
 mysql> SET optimizer_switch='block_nested_loop=on';
@@ -201,8 +109,7 @@ mysql> SET optimizer_switch='block_nested_loop=on';
 
 **Note**  
 For Aurora MySQL version 3, hash join support is available in all minor versions and is turned on by default\.  
-For Aurora MySQL version 2, hash join support is available in version 2\.06 and higher\. In Aurora MySQL version 2, the hash join feature is always controlled by the `aurora_disable_hash_join` value\.  
-Before Aurora MySQL version 1\.22, the way to enable hash joins in Aurora MySQL version 1 is by enabling the `aurora_lab_mode` session\-level setting\. In those Aurora MySQL versions, the `optimizer_switch` setting for hash joins is enabled by default and you only need to enable `aurora_lab_mode`\.
+For Aurora MySQL version 2, hash join support is available in all minor versions\. In Aurora MySQL version 2, the hash join feature is always controlled by the `aurora_disable_hash_join` value\.
 
 With this setting, the optimizer chooses to use a hash join based on cost, query characteristics, and resource availability\. If the cost estimation is incorrect, you can force the optimizer to choose a hash join\. You do so by setting `hash_join_cost_based`, a MySQL server variable, to `off`\. The following example illustrates how to force the optimizer to choose a hash join\.
 
@@ -238,7 +145,7 @@ mysql> explain SELECT sql_no_cache * FROM hj_small, hj_big, hj_big2
 
 In the output, the `Hash Join Inner table` is the table used to build hash table, and the `Hash Join Outer table` is the table that is used to probe the hash table\.
 
-For more information about the extended `EXPLAIN` output format, see [Extended EXPLAIN output format](https://dev.mysql.com/doc/refman/5.6/en/explain-extended.html) in the MySQL product documentation\.
+For more information about the extended `EXPLAIN` output format, see [Extended EXPLAIN Output Format](https://dev.mysql.com/doc/refman/8.0/en/explain-extended.html) in the MySQL product documentation\.
 
  In Aurora MySQL 2\.08 and higher, you can use SQL hints to influence whether a query uses hash join or not, and which tables to use for the build and probe sides of the join\. For details, see [Aurora MySQL hints](AuroraMySQL.Reference.Hints.md)\. 
 
@@ -291,19 +198,19 @@ The following features are available in Aurora MySQL for MySQL compatibility\. H
 
 ### Using multithreaded replication in Aurora MySQL version 3<a name="AuroraMySQL.BestPractices.MTReplica"></a>
 
-By default, Aurora uses single\-threaded replication when an Aurora MySQL DB cluster is used as a read replica for binary log replication\. 
+By default, Aurora uses single\-threaded replication when an Aurora MySQL DB cluster is used as a read replica for binary log replication\.
 
- Although Aurora MySQL doesn't prohibit multithreaded replication, this feature is only supported in Aurora MySQL version 3 and higher\. 
+Although Aurora MySQL doesn't prohibit multithreaded replication, this feature is only supported in Aurora MySQL version 3\.
 
- Aurora MySQL version 1 and 2 inherited several issues regarding multithreaded replication from MySQL\. For those versions, we recommend that you don't use multithreaded replication in production\. 
+Aurora MySQL version 2 inherited several issues regarding multithreaded replication from MySQL\. For that version, we recommend that you not use multithreaded replication in production\.
 
- If you do use multithreaded replication, we recommend that you test any use thoroughly\.
+If you do use multithreaded replication, we recommend that you test any use thoroughly\.
 
 For more information about using replication in Amazon Aurora, see [Replication with Amazon Aurora](Aurora.Replication.md)\. For information about multithreaded replication in Aurora MySQL version 3, see [Multithreaded binary log replication \(Aurora MySQL version 3 and higher\)](AuroraMySQL.Replication.MySQL.md#binlog-optimization-multithreading)\. 
 
 ### Invoking AWS Lambda functions using native MySQL functions<a name="AuroraMySQL.BestPractices.Lambda"></a>
 
-If you are using Amazon Aurora version 1\.16 or later, we recommend using the native MySQL functions `lambda_sync` and `lambda_async` to invoke Lambda functions\.
+We recommend using the native MySQL functions `lambda_sync` and `lambda_async` to invoke Lambda functions\.
 
 If you are using the deprecated `mysql.lambda_async` procedure, we recommend that you wrap calls to the `mysql.lambda_async` procedure in a stored procedure\. You can call this stored procedure from different sources, such as triggers or client code\. This approach can help to avoid impedance mismatch issues and make it easier for your database programmers to invoke Lambda functions\.
 
@@ -315,7 +222,7 @@ We recommend that you don't use eXtended Architecture \(XA\) transactions with A
 + Don't leave an XA transaction open in the `PREPARED` state\.
 + Keep XA transactions as small as possible\.
 
-For more information about using XA transactions with MySQL, see [XA transactions](https://dev.mysql.com/doc/refman/5.6/en/xa.html) in the MySQL documentation\.
+For more information about using XA transactions with MySQL, see [XA transactions](https://dev.mysql.com/doc/refman/8.0/en/xa.html) in the MySQL documentation\.
 
 ### Keeping foreign keys turned on during DML statements<a name="Aurora.BestPractices.ForeignKeys"></a>
 

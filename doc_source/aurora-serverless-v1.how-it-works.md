@@ -52,16 +52,16 @@ Following, you can learn how Aurora Serverless v1 works\.
 By default, the **Force the capacity change** option isn't selected\. Keep this option clear to have your Aurora Serverless v1 DB cluster's capacity remain unchanged if the scaling operation times out without finding a scaling point\. 
 
 Selecting this option causes your Aurora Serverless v1 DB cluster to enforce the capacity change, even without a scaling point\. Before selecting this option, be aware of the consequences of this selection:
-+  Any in\-process transactions are interrupted, and the following error message appears\. 
++ Any in\-process transactions are interrupted, and the following error message appears\.
 
-   **Aurora MySQL 5\.6** – `ERROR 1105 (HY000): The last transaction was aborted due to an unknown error. Please retry.` 
+  Aurora MySQL version 1 – ERROR 1105 \(HY000\): The last transaction was aborted due to an unknown error\. Please retry\.
 
-   **Aurora MySQL 5\.7** – `ERROR 1105 (HY000): The last transaction was aborted due to Seamless Scaling. Please retry.` 
+  Aurora MySQL version 2 – ERROR 1105 \(HY000\): The last transaction was aborted due to Seamless Scaling\. Please retry\. 
 
-   You can resubmit the transactions as soon as your Aurora Serverless v1 DB cluster is available\. 
-+  Connections to temporary tables and locks are dropped\. 
+  You can resubmit the transactions as soon as your Aurora Serverless v1 DB cluster is available\.
++ Connections to temporary tables and locks are dropped\.
 
-  We recommend that you select the **Force the capacity change** option only if your application can recover from dropped connections or incomplete transactions\. 
+  We recommend that you select the **Force the capacity change** option only if your application can recover from dropped connections or incomplete transactions\.
 
  The choices that you make in the AWS Management Console when you create an Aurora Serverless v1 DB cluster are stored in the `ScalingConfigurationInfo` object, in the `SecondsBeforeTimeout` and `TimeoutAction` properties\. The value of the `TimeoutAction` property is set to one of the following values when you create your cluster: 
 +  `RollbackCapacityChange` – This value is set when you select the **Roll back the capacity change** option\. This is the default behavior\. 
@@ -261,19 +261,20 @@ The `max_connections` value doesn't scale linearly with the number of ACUs\.
 
 |  |  | 
 | --- |--- |
-|   Aurora MySQL 5\.6   |   `aurora5.6`   | 
-|   Aurora MySQL 5\.7   |   `aurora-mysql5.7`   | 
-|   Aurora PostgreSQL 10\.12 \(and later\)   |   `aurora-postgresql10`   | 
+|  Aurora MySQL version 1  |  `aurora5.6`  | 
+|  Aurora MySQL version 2  |  `aurora-mysql5.7`  | 
+|  Aurora PostgreSQL version 10  |  `aurora-postgresql10`  | 
+|  Aurora PostgreSQL version 11  |  `aurora-postgresql11`  | 
 
 We recommend that you configure your AWS CLI with your AWS access key ID and AWS secret access key, and that you set your AWS Region before using AWS CLI commands\. Providing the Region to your CLI configuration saves you from entering the `--region` parameter when running commands\. To learn more about configuring AWS CLI, see [Configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config) in the *AWS Command Line Interface User Guide*\. 
 
- The following example gets a list of parameters from the default DB cluster group for Aurora MySQL 5\.6\. 
+ The following example gets a list of parameters from the default DB cluster group for Aurora MySQL version 2\.
 
 For Linux, macOS, or Unix:
 
 ```
 aws rds describe-engine-default-cluster-parameters \
-  --db-parameter-group-family aurora5.6 --query \
+  --db-parameter-group-family aurora-mysql5.7 --query \
   'EngineDefaults.Parameters[*].{ParameterName:ParameterName,SupportedEngineModes:SupportedEngineModes} | [?contains(SupportedEngineModes, `serverless`) == `true`] | [*].{param:ParameterName}' \
   --output text
 ```
@@ -282,7 +283,7 @@ For Windows:
 
 ```
 aws rds describe-engine-default-cluster-parameters ^
-   --db-parameter-group-family aurora5.6 --query ^
+   --db-parameter-group-family aurora-mysql5.7 --query ^
    "EngineDefaults.Parameters[*].{ParameterName:ParameterName,SupportedEngineModes:SupportedEngineModes} | [?contains(SupportedEngineModes, 'serverless') == `true`] | [*].{param:ParameterName}" ^
    --output text
 ```
@@ -348,7 +349,7 @@ You can also use the console to view a side\-by\-side comparison of the values i
 |   `log_temp_files`   |   Logs the use of temporary files that are above the specified kilobytes \(kB\)\.   | 
 |   `log_statement`   |   Controls the specific SQL statements that get logged\. Supported values are `none`, `ddl`, `mod`, and `all`\. Default is `none`\.   | 
 
- After you turn on logs for Aurora MySQL 5\.6, Aurora MySQL 5\.7, or Aurora PostgreSQL for your Aurora Serverless v1 DB cluster, you can view the logs in CloudWatch\. 
+ After you turn on logs for Aurora MySQL or Aurora PostgreSQL for your Aurora Serverless v1 DB cluster, you can view the logs in CloudWatch\. 
 
 ### Viewing Aurora Serverless v1 logs with Amazon CloudWatch<a name="aurora-serverless.logging.monitoring"></a>
 
@@ -378,9 +379,11 @@ You can also use the console to view a side\-by\-side comparison of the values i
 
 ## Aurora Serverless v1 and maintenance<a name="aurora-serverless.maintenance"></a>
 
- Maintenance for Aurora Serverless v1 DB cluster, such as applying the latest features, fixes, and security updates, is performed automatically for you\. Unlike provisioned Aurora DB clusters, Aurora Serverless v1 doesn't have user\-settable maintenance windows\. However, it does have a maintenance window that you can view in the AWS Management Console in **Maintenance & backups** for your Aurora Serverless v1 DB cluster\. You can find the date and time that maintenance might be performed and if any maintenance is pending for your Aurora Serverless v1 DB cluster, as shown following\. 
+ Maintenance for Aurora Serverless v1 DB cluster, such as applying the latest features, fixes, and security updates, is performed automatically for you\. Aurora Serverless v1 has a maintenance window that you can view in the AWS Management Console in **Maintenance & backups** for your Aurora Serverless v1 DB cluster\. You can find the date and time that maintenance might be performed and if any maintenance is pending for your Aurora Serverless v1 DB cluster, as shown following\. 
 
-![\[Maintenance window for an example Aurora Serverless v1 DB cluster, not user settable, no pending maintenance\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-maintenance-window.png)
+![\[Maintenance window for an example Aurora Serverless v1 DB cluster, no pending maintenance\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-serverless-maintenance-window.png)
+
+You can set the maintenance window when you create the Aurora Serverless v1 DB cluster, and you can modify the window later\. For more information, see [Adjusting the preferred DB cluster maintenance window](USER_UpgradeDBInstance.Maintenance.md#AdjustingTheMaintenanceWindow.Aurora)\.
 
  Whenever possible, Aurora Serverless v1 performs maintenance in a nondisruptive manner\. When maintenance is required, your Aurora Serverless v1 DB cluster scales its capacity to handle the necessary operations\. Before scaling, Aurora Serverless v1 looks for a scaling point\. It does so for up to seven days if necessary\. 
 

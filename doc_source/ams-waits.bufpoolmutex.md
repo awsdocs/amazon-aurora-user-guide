@@ -11,14 +11,13 @@ The `synch/mutex/innodb/buf_pool_mutex` event occurs when a thread has acquired 
 ## Relevant engine versions<a name="ams-waits.bufpoolmutex.context.supported"></a>
 
 This wait event information is supported for the following engine versions:
-+ Aurora MySQL version 2\.x up to 2\.09\.2
-+ Aurora MySQL version 1\.x up to 1\.23\.1
++ Aurora MySQL version 2, up to 2\.09\.2
 
 ## Context<a name="ams-waits.bufpoolmutex.context"></a>
 
 The `buf_pool` mutex is a single mutex that protects the control data structures of the buffer pool\.
 
-For more information, see [Monitoring InnoDB Mutex Waits Using Performance Schema](https://dev.mysql.com/doc/refman/5.6/en/monitor-innodb-mutex-waits-performance-schema.html) in the MySQL documentation\.
+For more information, see [Monitoring InnoDB Mutex Waits Using Performance Schema](https://dev.mysql.com/doc/refman/5.7/en/monitor-innodb-mutex-waits-performance-schema.html) in the MySQL documentation\.
 
 ## Likely causes of increased waits<a name="ams-waits.bufpoolmutex.causes"></a>
 

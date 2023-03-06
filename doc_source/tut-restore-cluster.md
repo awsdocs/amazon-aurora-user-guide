@@ -91,7 +91,6 @@ You use the `restore-db-cluster-from-snapshot` command\. The following options a
 + `--engine` – The database engine of the restored DB cluster\. It must be compatible with the database engine of the source DB cluster\.
 
   The choices are the following:
-  + `aurora` – Aurora MySQL 5\.6 compatible\.
   + `aurora-mysql` – Aurora MySQL 5\.7 and 8\.0 compatible\.
   + `aurora-postgresql` – Aurora PostgreSQL compatible\.
 
@@ -187,7 +186,6 @@ We recommend using the T DB instance classes only for development and test serve
 + `--engine` – The database engine of the primary DB instance\. It must be the same database engine as the restored DB cluster uses\.
 
   The choices are the following:
-  + `aurora` – Aurora MySQL 5\.6 compatible\.
   + `aurora-mysql` – Aurora MySQL 5\.7 and 8\.0 compatible\.
   + `aurora-postgresql` – Aurora PostgreSQL compatible\.
 

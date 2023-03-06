@@ -419,7 +419,7 @@ If `REQUIRE SSL` is not included, the replication connection might silently fall
 
    The host name is the DNS name from the Aurora MySQL DB cluster endpoint\.
 
-1. Enable binary log replication by running the `mysql.rds_set_external_master` \(Aurora MySQL version 1 and 2\) or `mysql.rds_set_external_source` \(Aurora MySQL version 3 and higher\) stored procedure\. This stored procedure has the following syntax\.
+1. Enable binary log replication by running the `mysql.rds_set_external_master` \(Aurora MySQL version 2\) or `mysql.rds_set_external_source` \(Aurora MySQL version 3\) stored procedure\. This stored procedure has the following syntax\.
 
    ```
    CALL mysql.rds_set_external_master (
@@ -482,7 +482,7 @@ If `REQUIRE SSL` is not included, the replication connection might silently fall
 1. Monitor how far the Aurora MySQL DB cluster is behind the MySQL replication primary database\. To do so, connect to the Aurora MySQL DB cluster and run the following command\.
 
    ```
-   Aurora MySQL version 1 and 2:
+   Aurora MySQL version 2:
    SHOW SLAVE STATUS;
    
    Aurora MySQL version 3:

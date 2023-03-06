@@ -68,7 +68,7 @@ For Linux, macOS, or Unix:
 ```
 aws rds create-db-parameter-group \
     --db-parameter-group-name mydbparametergroup \
-    --db-parameter-group-family aurora5.6 \
+    --db-parameter-group-family aurora-mysql5.7 \
     --description "My new parameter group"
 ```
 For Windows:  
@@ -76,13 +76,13 @@ For Windows:
 ```
 aws rds create-db-parameter-group ^
     --db-parameter-group-name mydbparametergroup ^
-    --db-parameter-group-family aurora5.6 ^
+    --db-parameter-group-family aurora-mysql5.7 ^
     --description "My new parameter group"
 ```
 This command produces output similar to the following:  
 
 ```
-DBPARAMETERGROUP  mydbparametergroup  aurora5.6  My new parameter group					
+DBPARAMETERGROUP  mydbparametergroup  aurora-mysql5.7  My new parameter group					
 ```
 
 ### RDS API<a name="USER_WorkingWithParamGroups.Creating.API"></a>

@@ -7,7 +7,7 @@ For Aurora, you can use this feature only with Aurora MySQL clusters that use bi
 
 If you use binlog replication and aren't familiar with GTID\-based replication with MySQL, see [Replication with global transaction identifiers](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids.html) in the MySQL documentation for background\.
 
-GTID\-based replication is supported for MySQL 5\.7\-compatible clusters in Aurora MySQL version 2\.04 and higher\. GTID\-based replication isn't supported for MySQL 5\.6\-compatible clusters in Aurora MySQL version 1\.
+GTID\-based replication is supported for Aurora MySQL version 2 and 3\.
 
 **Topics**
 + [Overview of global transaction identifiers \(GTIDs\)](#mysql-replication-gtid.overview)
@@ -69,7 +69,7 @@ When GTID\-based replication is enabled for an Aurora MySQL DB cluster, the GTID
 
 1. Associate the DB cluster parameter group with the Aurora MySQL cluster\. To do so, follow the procedures in [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
-1. In Aurora MySQL version 3 and higher, optionally specify how to assign GTIDs to transactions that don't include them\. To do so, call the stored procedure in [mysql\.rds\_assign\_gtids\_to\_anonymous\_transactions \(Aurora MySQL version 3\)](mysql-stored-proc-replicating.md#mysql_assign_gtids_to_anonymous_transactions)\.
+1. \(Optional\) Specify how to assign GTIDs to transactions that don't include them\. To do so, call the stored procedure in [mysql\.rds\_assign\_gtids\_to\_anonymous\_transactions \(Aurora MySQL version 3\)](mysql-stored-proc-replicating.md#mysql_assign_gtids_to_anonymous_transactions)\.
 
 ## Disabling GTID\-based replication for an Aurora MySQL DB cluster<a name="mysql-replication-gtid.disabling"></a>
 
@@ -85,8 +85,8 @@ For more details about the stored procedures mentioned in this section, see [Aur
 1. On the Aurora primary instance, run the following procedure\.
 
    ```
-   CALL mysql.rds_set_master_auto_position(0); (Aurora MySQL version 1 and 2)
-   CALL mysql.rds_set_source_auto_position(0); (Aurora MySQL version 3 and higher)
+   CALL mysql.rds_set_master_auto_position(0); (Aurora MySQL version 2)
+   CALL mysql.rds_set_source_auto_position(0); (Aurora MySQL version 3)
    ```
 
 1. Reset the `gtid_mode` to `ON_PERMISSIVE`\.

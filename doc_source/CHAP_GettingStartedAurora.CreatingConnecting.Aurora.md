@@ -105,14 +105,14 @@ You can only set up a connection between an EC2 instance and an Aurora DB cluste
    The **Set up EC2 connection** page appears\.
 
 1. On the **Set up EC2 connection** page, choose the EC2 instance\.  
-![\[Set up EC2 connection page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-rds-ec2-set-up.png)
+![\[Set up EC2 connection page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-rds-ec2-set-up.png)
 
    If no EC2 instances exist in the same VPC, choose **Create EC2 instance** to create one\. In this case, make sure the new EC2 instance is in the same VPC as the DB cluster\.
 
 1. Choose **Continue**\.
 
    The **Review and confirm** page appears\.  
-![\[EC2 connection review and confirmation page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-rds-ec2-confirm.png)
+![\[EC2 connection review and confirmation page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-rds-ec2-confirm.png)
 
 1. On the **Review and confirm** page, review the changes that RDS will make to set up connectivity with the EC2 instance\.
 
@@ -156,7 +156,7 @@ After Amazon RDS provisions your DB cluster and creates the primary instance, yo
    ```
    Welcome to the MySQL monitor.  Commands end with ; or \g.
    Your MySQL connection id is 350
-   Server version: 5.6.10-log MySQL Community Server (GPL)
+   Server version: 8.0.26-log MySQL Community Server (GPL)
    
    Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
    

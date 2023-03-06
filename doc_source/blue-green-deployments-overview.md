@@ -157,15 +157,11 @@ Feature availability and support varies across specific versions of each databas
 
 The following limitations apply to blue/green deployments:
 + Aurora MySQL versions 2\.08 and 2\.09 aren't supported target versions for blue/green deployments\.
-+ If your cluster is running Aurora MySQL version 5\.6 and you use temporary tables in your workload, switchover might fail unexpectedly\. To avoid this issue, we recommend that you upgrade your cluster to version 1\.23\.1 or higher before you create a blue/green deployment\. Alternately, close the connections that use temporary tables before you start switchover\.
 + Blue/green deployments aren't supported for the following features:
   + Amazon RDS Proxy
   + Cross\-Region read replicas
   + Aurora Serverless v1 DB clusters
-  + Aurora multi\-master clusters
   + DB clusters that are part of an Aurora global database
-
-    If an Aurora MySQL version 5\.6\.10a DB cluster was part of an Aurora global database, the DB cluster can't be included in a blue/green deployment even if the DB cluster was removed from the Aurora global database\. To include the DB cluster in a blue/green deployment, upgrade the DB cluster to a higher Aurora MySQL version\.
   + AWS CloudFormation
 + The following are limitations for changes in a blue/green deployment:
   + You can't change an unencrypted DB cluster into an encrypted DB cluster\.

@@ -19,7 +19,7 @@ Before you can save data into an Amazon S3 bucket, you must first give your Auro
 
 1. Create an IAM role, and attach the IAM policy you created in [Creating an IAM policy to access Amazon S3 resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md) to the new IAM role\. For instructions, see [Creating an IAM role to allow Amazon Aurora to access AWS services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.
 
-1. For Aurora MySQL version 1 or 2, set either the `aurora_select_into_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aurora_select_into_s3_role`, Aurora uses the IAM role specified in `aws_default_s3_role`\.
+1. For Aurora MySQL version 2, set either the `aurora_select_into_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aurora_select_into_s3_role`, Aurora uses the IAM role specified in `aws_default_s3_role`\.
 
    For Aurora MySQL version 3, use `aws_default_s3_role`\.
 
@@ -39,7 +39,7 @@ Before you can save data into an Amazon S3 bucket, you must first give your Auro
 
 ## Granting privileges to save data in Aurora MySQL<a name="AuroraMySQL.Integrating.SaveIntoS3.Grant"></a>
 
-The database user that issues the `SELECT INTO OUTFILE S3` statement must have a specific role or privilege\. In Aurora MySQL version 3, you grant the `AWS_SELECT_S3_ACCESS` role\. In Aurora MySQL version 1 or 2, you grant the `SELECT INTO S3` privilege\. The administrative user for a DB cluster is granted the appropriate role or privilege by default\. You can grant the privilege to another user by using one of the following statements\.
+The database user that issues the `SELECT INTO OUTFILE S3` statement must have a specific role or privilege\. In Aurora MySQL version 3, you grant the `AWS_SELECT_S3_ACCESS` role\. In Aurora MySQL version 2, you grant the `SELECT INTO S3` privilege\. The administrative user for a DB cluster is granted the appropriate role or privilege by default\. You can grant the privilege to another user by using one of the following statements\.
 
  Use the following statement for Aurora MySQL version 3: 
 
@@ -48,17 +48,17 @@ GRANT AWS_SELECT_S3_ACCESS TO 'user'@'domain-or-ip-address'
 ```
 
 **Tip**  
-When you use the role technique in Aurora MySQL version 3, you also activate the role by using the `SET ROLE role_name` or `SET ROLE ALL` statement\. If you aren't familiar with the MySQL 8\.0 role system, you can learn more in [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\. You can also find more details in [Using Roles](https://dev.mysql.com/doc/refman/8.0/en/roles.html) in the *MySQL Reference Manual*\.  
+When you use the role technique in Aurora MySQL version 3, you also activate the role by using the `SET ROLE role_name` or `SET ROLE ALL` statement\. If you aren't familiar with the MySQL 8\.0 role system, you can learn more in [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\. You can also find more details in [Using roles](https://dev.mysql.com/doc/refman/8.0/en/roles.html) in the *MySQL Reference Manual*\.  
 This only applies to the current active session\. When you reconnect, you have to run the `SET ROLE` statement again to grant privileges\. For more information, see [SET ROLE statement](https://dev.mysql.com/doc/refman/8.0/en/set-role.html) in the *MySQL Reference Manual*\.  
 You can also use the `activate_all_roles_on_login` DB cluster parameter to automatically activate all roles when a user connects to a DB instance\. When this parameter is set, you don't have to call the SET ROLE statement explicitly to activate a role\. For more information, see [activate\_all\_roles\_on\_login](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_activate_all_roles_on_login) in the *MySQL Reference Manual*\.
 
- Use the following statement for Aurora MySQL version 1 or 2: 
+Use the following statement for Aurora MySQL version 2:
 
 ```
 GRANT SELECT INTO S3 ON *.* TO 'user'@'domain-or-ip-address'
 ```
 
-The `AWS_SELECT_S3_ACCESS` role and `SELECT INTO S3` privilege are specific to Amazon Aurora MySQL and are not available for MySQL databases or RDS for MySQL DB instances\. If you have set up replication between an Aurora MySQL DB cluster as the replication master and a MySQL database as the replication client, then the `GRANT` statement for the role or privilege causes replication to stop with an error\. You can safely skip the error to resume replication\. To skip the error on an RDS for MySQL DB instance, use the [mysql\_rds\_skip\_repl\_error](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_skip_repl_error.html) procedure\. To skip the error on an external MySQL database, use the [SET GLOBAL sql\_slave\_skip\_counter](http://dev.mysql.com/doc/refman/5.7/en/set-global-sql-slave-skip-counter.html) statement \(Aurora MySQL version 1 and 2\) or [SET GLOBAL sql\_replica\_skip\_counter](http://dev.mysql.com/doc/refman/8.0/en/set-global-sql-slave-skip-counter.html) statement \(Aurora MySQL version 3\)\.
+The `AWS_SELECT_S3_ACCESS` role and `SELECT INTO S3` privilege are specific to Amazon Aurora MySQL and are not available for MySQL databases or RDS for MySQL DB instances\. If you have set up replication between an Aurora MySQL DB cluster as the replication master and a MySQL database as the replication client, then the `GRANT` statement for the role or privilege causes replication to stop with an error\. You can safely skip the error to resume replication\. To skip the error on an RDS for MySQL DB instance, use the [mysql\_rds\_skip\_repl\_error](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql_rds_skip_repl_error.html) procedure\. To skip the error on an external MySQL database, use the [SET GLOBAL sql\_slave\_skip\_counter](http://dev.mysql.com/doc/refman/5.7/en/set-global-sql-slave-skip-counter.html) statement \(Aurora MySQL version 2\) or [SET GLOBAL sql\_replica\_skip\_counter](http://dev.mysql.com/doc/refman/8.0/en/set-global-sql-slave-skip-counter.html) statement \(Aurora MySQL version 3\)\.
 
 ## Specifying a path to an Amazon S3 bucket<a name="AuroraMySQL.Integrating.SaveIntoS3.URI"></a>
 
@@ -168,7 +168,7 @@ Following, you can find a list of the required and optional parameters used by t
   For more information about the format of the manifest file's contents, see [Creating a manifest to list data files](#AuroraMySQL.Integrating.SaveIntoS3.Manifest)\.
 + **OVERWRITE \{ON \| OFF\}** – Indicates whether existing files in the specified Amazon S3 bucket are overwritten\. If `OVERWRITE ON` is specified, existing files that match the file prefix in the URI specified in `s3-uri`are overwritten\. Otherwise, an error occurs\.
 
-You can find more details about other parameters in [SELECT syntax](https://dev.mysql.com/doc/refman/5.6/en/select.html) and [LOAD DATA INFILE syntax](https://dev.mysql.com/doc/refman/5.6/en/load-data.html), in the MySQL documentation\.
+You can find more details about other parameters in [SELECT statement](https://dev.mysql.com/doc/refman/8.0/en/select.html) and [LOAD DATA statement](https://dev.mysql.com/doc/refman/8.0/en/load-data.html), in the MySQL documentation\.
 
 ### Considerations<a name="AuroraMySQL.Integrating.SaveIntoS3.Considerations"></a>
 

@@ -14,7 +14,7 @@ We recommend using the T DB instance classes only for development and test serve
 + To authenticate login and permissions for an Amazon Aurora MySQL DB cluster, you can take either of the following approaches, or a combination of them:
   + You can take the same approach as with a standalone instance of MySQL\.
 
-    Commands such as `CREATE USER`, `RENAME USER`, `GRANT`, `REVOKE`, and `SET PASSWORD` work just as they do in on\-premises databases, as does directly modifying database schema tables\. For more information, see [ Access control and account management](https://dev.mysql.com/doc/refman/5.6/en/access-control.html) in the MySQL documentation\.
+    Commands such as `CREATE USER`, `RENAME USER`, `GRANT`, `REVOKE`, and `SET PASSWORD` work just as they do in on\-premises databases, as does directly modifying database schema tables\. For more information, see [ Access control and account management](https://dev.mysql.com/doc/refman/8.0/en/access-control.html) in the MySQL documentation\.
   + You can also use IAM database authentication\.
 
     With IAM database authentication, you authenticate to your DB cluster by using an IAM user or IAM role and an authentication token\. An *authentication token* is a unique value that is generated using the Signature Version 4 signing process\. By using IAM database authentication, you can use the same credentials to control access to your AWS resources and your databases\. For more information, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\.
@@ -80,7 +80,6 @@ Aurora MySQL supports Transport Layer Security \(TLS\) versions 1\.0, 1\.1, and 
 | --- | --- | --- | --- | 
 |  Aurora MySQL version 3  |  Supported  |  Supported  |  Supported  | 
 |  Aurora MySQL version 2  |  Supported  |  Supported  |  Supported  | 
-|  Aurora MySQL version 1  |  Supported  |  Supported for Aurora MySQL 1\.23\.1 and higher  |  Supported for Aurora MySQL 1\.23\.1 and higher  | 
 
  Although the community edition of MySQL 8\.0 supports TLS 1\.3, the MySQL 8\.0\-compatible Aurora MySQL version 3 currently doesn't support TLS 1\.3\. 
 
@@ -94,9 +93,6 @@ Set the `tls_version` DB cluster parameter to one of the following values:
 If the parameter isn't set, then TLS version 1\.0, 1\.1, and 1\.2 protocols are permitted for encrypted connections\.
 
 For information about modifying parameters in a DB cluster parameter group, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\. If you use the AWS CLI to modify the `tls_version` DB cluster parameter, the `ApplyMethod` must be set to `pending-reboot`\. When the application method is `pending-reboot`, changes to parameters are applied after you stop and restart the DB clusters associated with the parameter group\.
-
-**Note**  
-The `tls_version` DB cluster parameter isn't available for Aurora MySQL 5\.6\.
 
 ### Encrypting connections to an Aurora MySQL DB cluster<a name="AuroraMySQL.Security.SSL.EncryptingConnections"></a>
 

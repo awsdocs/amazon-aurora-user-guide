@@ -56,12 +56,10 @@ The following limitations currently apply to Aurora global databases:
 + Managed planned failover for Aurora global databases requires one of the following Aurora database engines:
   + Aurora MySQL with MySQL 8\.0 compatibility, version 3\.01\.0 and higher
   + Aurora MySQL with MySQL 5\.7 compatibility, version 2\.09\.1 and higher
-  + Aurora MySQL with MySQL 5\.6 compatibility, version 1\.23\.1 and higher
   +  Aurora PostgreSQL versions 13\.3 and higher, 12\.4 and higher, 11\.9 and higher, and 10\.14 and higher 
 + You can only perform a managed cross\-Region database failover on an Aurora global database if the primary and secondary DB clusters have the same major and minor engine versions\. The patch levels can be different if the minor engine versions are one of the following:    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html)
 + Aurora global databases currently don't support the following Aurora features: 
-  + Aurora multi\-master clusters
   + Aurora Serverless v1
   + Backtracking in Aurora
 + For limitations with using the RDS Proxy feature with global databases, see [Limitations for RDS Proxy with global databases](rds-proxy-gdb.md#rds-proxy-gdb.limitations)\.
@@ -75,6 +73,7 @@ The following limitations currently apply to Aurora global databases:
   + You can't apply a custom parameter group to the global database cluster while you're performing a major version upgrade of that Aurora global database\. You create your custom parameter groups in each Region of the global cluster and you apply them manually to the Regional clusters after the upgrade\.
   + With an Aurora global database based on Aurora MySQL, you can't perform an in\-place upgrade from Aurora MySQL version 2 to version 3 if the `lower_case_table_names` parameter is turned on\. For more information on the methods that you can use, see [Major version upgrades](aurora-global-database-upgrade.md#aurora-global-database-upgrade.major)\.
   + With an Aurora global database based on Aurora PostgreSQL, you can't perform a major version upgrade of the Aurora DB engine if the recovery point objective \(RPO\) feature is turned on\. For information about the RPO feature, see [Managing RPOs for Aurora PostgreSQL–based global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
+  + With an Aurora global database based on Aurora MySQL, you can't perform a minor version upgrade from version 3\.01 or 3\.02 to 3\.03 or higher by using the standard process\. For details about the process to use, see [Upgrading Aurora MySQL by modifying the engine version](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.Patching.ModifyEngineVersion)\.
 
   For information about upgrading an Aurora global database, see [Upgrading an Amazon Aurora global database](aurora-global-database-upgrade.md)\.
 + You can't stop or start the Aurora DB clusters in your Aurora global database individually\. To learn more, see [Stopping and starting an Amazon Aurora DB cluster](aurora-cluster-stop-start.md)\. 

@@ -138,7 +138,7 @@ $ echo "Start: $((182872522752/$GB)) GB, End: $((206833664000/$GB)) GB"
 Start: 182 GB, End: 206 GB
 ```
 
-The `VolumeBytesUsed` metric tells you how much storage in the cluster is incurring charges\. Thus, it's best to minimize this number when practical\. However, this metric doesn't include some storage that Aurora uses internally in the cluster and doesn't charge for\. If your cluster is approaching the storage limit and might run out of space, it's more helpful to monitor the `AuroraVolumeBytesLeftTotal` metric and try to maximize that number\. The following example runs a similar calculation as the previous one, but for `AuroraVolumeBytesLeftTotal` instead of `VolumeBytesUsed`\. You can see that the free size for this cluster reflects the original 64 TiB limit, because the cluster is running Aurora MySQL version 1\.22\.
+The `VolumeBytesUsed` metric tells you how much storage in the cluster is incurring charges\. Thus, it's best to minimize this number when practical\. However, this metric doesn't include some storage that Aurora uses internally in the cluster and doesn't charge for\. If your cluster is approaching the storage limit and might run out of space, it's more helpful to monitor the `AuroraVolumeBytesLeftTotal` metric and try to maximize that number\. The following example runs a similar calculation as the previous one, but for `AuroraVolumeBytesLeftTotal` instead of `VolumeBytesUsed`\.
 
 ```
 $ aws cloudwatch get-metric-statistics --metric-name "AuroraVolumeBytesLeftTotal" \
@@ -146,8 +146,7 @@ $ aws cloudwatch get-metric-statistics --metric-name "AuroraVolumeBytesLeftTotal
   --namespace "AWS/RDS" --statistics Maximum --dimensions Name=DBClusterIdentifier,Value=my_old_cluster_id \
   --output text | sort -k 3
 AuroraVolumeBytesLeftTotal
-DATAPOINTS      69797193744384.0        2020-08-05T17:52:00+00:00       Count
-DATAPOINTS      69797193744384.0        2020-08-05T18:52:00+00:00       Count
+DATAPOINTS      140530528288768.0       2023-02-23T19:25:00+00:00       Count
 $ TiB=$((1024*1024*1024*1024))
 $ TB=$((1000*1000*1000*1000))
 $ echo "$((69797067915264 / $TB)) TB remaining for this cluster"
@@ -156,7 +155,7 @@ $ echo "$((69797067915264 / $TiB)) TiB remaining for this cluster"
 63 TiB remaining for this cluster
 ```
 
-For a cluster running Aurora MySQL version 1\.23 or 2\.09 and higher, or Aurora PostgreSQL 3\.3\.0 or 2\.6\.0 and higher, the free size reported by `VolumeBytesUsed` increases when data is added and decreases when data is removed\. The following example shows how\. This report shows the maximum and minimum storage size for a cluster at 15\-minute intervals as tables with temporary data are created and dropped\. The report lists the maximum value before the minimum value\. Thus, to understand how storage usage changed within the 15\-minute interval, interpret the numbers from right to left\.
+For a cluster running Aurora MySQL version 2\.09 or higher, or Aurora PostgreSQL, the free size reported by `VolumeBytesUsed` increases when data is added and decreases when data is removed\. The following example shows how\. This report shows the maximum and minimum storage size for a cluster at 15\-minute intervals as tables with temporary data are created and dropped\. The report lists the maximum value before the minimum value\. Thus, to understand how storage usage changed within the 15\-minute interval, interpret the numbers from right to left\.
 
 ```
 $ aws cloudwatch get-metric-statistics --metric-name "VolumeBytesUsed" \
@@ -174,7 +173,7 @@ DATAPOINTS	15614263296.0	15614263296.0	2020-08-05T23:49:00+00:00	Bytes
 DATAPOINTS	15614263296.0	15614263296.0	2020-08-06T00:19:00+00:00	Bytes
 ```
 
-The following example shows how with a cluster running Aurora MySQL version 1\.23 or 2\.09 and higher, or Aurora PostgreSQL 3\.3\.0 or 2\.6\.0 and higher, the free size reported by `AuroraVolumeBytesLeftTotal` reflects the higher 128 TiB size limit\.
+The following example shows how with a cluster running Aurora MySQL version 2\.09 or higher, or Aurora PostgreSQL, the free size reported by `AuroraVolumeBytesLeftTotal` reflects the 128\-TiB size limit\.
 
 ```
 $ aws cloudwatch get-metric-statistics --region us-east-1 --metric-name "AuroraVolumeBytesLeftTotal" \
@@ -210,7 +209,7 @@ You can scale your Aurora DB cluster as needed by modifying the DB instance clas
 
 ## Read scaling<a name="Aurora.Managing.Performance.ReadScaling"></a>
 
-You can achieve read scaling for your Aurora DB cluster by creating up to 15 Aurora Replicas in a DB cluster that uses single\-master replication\. Each Aurora Replica returns the same data from the cluster volume with minimal replica lag—usually considerably less than 100 milliseconds after the primary instance has written an update\. As your read traffic increases, you can create additional Aurora Replicas and connect to them directly to distribute the read load for your DB cluster\. Aurora Replicas don't have to be of the same DB instance class as the primary instance\.
+You can achieve read scaling for your Aurora DB cluster by creating up to 15 Aurora Replicas in a DB cluster\. Each Aurora Replica returns the same data from the cluster volume with minimal replica lag—usually considerably less than 100 milliseconds after the primary instance has written an update\. As your read traffic increases, you can create additional Aurora Replicas and connect to them directly to distribute the read load for your DB cluster\. Aurora Replicas don't have to be of the same DB instance class as the primary instance\.
 
 For information about adding Aurora Replicas to a DB cluster, see [Adding Aurora Replicas to a DB cluster](aurora-replicas-adding.md)\.
 

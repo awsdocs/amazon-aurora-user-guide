@@ -12,7 +12,6 @@ The `sending data` thread state indicates that a thread is reading and filtering
 
 This thread state information is supported for the following versions:
 + Aurora MySQL version 2 up to 2\.09\.2
-+ Aurora MySQL version 1 up to 1\.23\.1
 
 ## Context<a name="ams-states.sending-data.context"></a>
 

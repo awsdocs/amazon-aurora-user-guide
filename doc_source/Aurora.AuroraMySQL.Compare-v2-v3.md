@@ -57,9 +57,9 @@ With an Aurora global database based on Aurora MySQL, you can't perform an in\-p
 
 In Aurora MySQL version 3, the `init_connect` and `read_only` parameters don't apply for users who have the `CONNECTION_ADMIN` privilege\. This includes the Aurora master user\. For more information, see [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\.
 
-For the full list of Aurora MySQL cluster parameters, see [Cluster\-level parameters](AuroraMySQL.Reference.ParameterGroups.md#AuroraMySQL.Reference.Parameters.Cluster)\. The table covers all the parameters from Aurora MySQL version 1, 2, and 3\. The table includes notes showing which parameters are new in Aurora MySQL version 3 or were removed from Aurora MySQL version 3\.
+For the full list of Aurora MySQL cluster parameters, see [Cluster\-level parameters](AuroraMySQL.Reference.ParameterGroups.md#AuroraMySQL.Reference.Parameters.Cluster)\. The table covers all the parameters from Aurora MySQL version 2 and 3\. The table includes notes showing which parameters are new in Aurora MySQL version 3 or were removed from Aurora MySQL version 3\.
 
-For the full list of Aurora MySQL instance parameters, see [Instance\-level parameters](AuroraMySQL.Reference.ParameterGroups.md#AuroraMySQL.Reference.Parameters.Instance)\. The table covers all the parameters from Aurora MySQL version 1, 2, and 3\. The table includes notes showing which parameters are new in Aurora MySQL version 3 and which parameters were removed from Aurora MySQL version 3\. It also includes notes showing which parameters were modifiable in earlier versions but not Aurora MySQL version 3\.
+For the full list of Aurora MySQL instance parameters, see [Instance\-level parameters](AuroraMySQL.Reference.ParameterGroups.md#AuroraMySQL.Reference.Parameters.Instance)\. The table covers all the parameters from Aurora MySQL version 2 and 3\. The table includes notes showing which parameters are new in Aurora MySQL version 3 and which parameters were removed from Aurora MySQL version 3\. It also includes notes showing which parameters were modifiable in earlier versions but not Aurora MySQL version 3\.
 
 For information about parameter names that changed, see [Inclusive language changes for Aurora MySQL version 3](#AuroraMySQL.8.0-inclusive-language)\.
 
@@ -170,7 +170,7 @@ For compatibility, you can check the parameter values in the `mysql` client by u
  With Aurora MySQL version 3, Aurora MySQL supports multithreaded replication\. For usage information, see [Multithreaded binary log replication \(Aurora MySQL version 3 and higher\)](AuroraMySQL.Replication.MySQL.md#binlog-optimization-multithreading)\. 
 
 **Note**  
- We still recommend not using multithreaded replication with Aurora MySQL version 1 and version 2\. 
+We still recommend not using multithreaded replication with Aurora MySQL version 2\.
 
 ### Transaction compression for binary log replication<a name="AuroraMySQL.binlog-transaction-compression"></a>
 

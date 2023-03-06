@@ -1,13 +1,10 @@
-# Single\-master replication with Amazon Aurora MySQL<a name="AuroraMySQL.Replication"></a><a name="replication"></a>
+# Replication with Amazon Aurora MySQL<a name="AuroraMySQL.Replication"></a><a name="replication"></a>
 
  The Aurora MySQL replication features are key to the high availability and performance of your cluster\. Aurora makes it easy to create or resize clusters with up to 15 Aurora Replicas\. 
 
  All the replicas work from the same underlying data\. If some database instances go offline, others remain available to continue processing queries or to take over as the writer if needed\. Aurora automatically spreads your read\-only connections across multiple database instances, helping an Aurora cluster to support query\-intensive workloads\. 
 
- Following, you can find information about how Aurora MySQL replication works and how to fine\-tune replication settings for best availability and performance\. 
-
-**Note**  
- Following, you can learn about replication features for Aurora clusters using single\-master replication\. This kind of cluster is the default for Aurora\. For information about Aurora multi\-master clusters, see [Working with Aurora multi\-master clusters](aurora-multi-master.md)\. 
+In the following topics, you can find information about how Aurora MySQL replication works and how to fine\-tune replication settings for best availability and performance\. 
 
 **Topics**
 + [Using Aurora Replicas](#AuroraMySQL.Replication.Replicas)
@@ -62,9 +59,9 @@
 
  The following features help you to fine\-tune the performance of Aurora MySQL replication\. 
 
- Starting in Aurora MySQL 1\.17\.4, the replica log compression feature automatically reduces network bandwidth for replication messages\. Because each message is transmitted to all Aurora Replicas, the benefits are greater for larger clusters\. This feature involves some CPU overhead on the writer node to perform the compression\. Thus, the feature is only available on the `8xlarge` and `16xlarge` instance classes, which have high CPU capacity\. It is enabled by default on these instance classes\. You can control this feature by turning off the `aurora_enable_replica_log_compression` parameter\. For example, you might turn off replica log compression for larger instance classes if your writer node is near its maximum CPU capacity\. 
+The replica log compression feature automatically reduces network bandwidth for replication messages\. Because each message is transmitted to all Aurora Replicas, the benefits are greater for larger clusters\. This feature involves some CPU overhead on the writer node to perform the compression\. Thus, the feature is only available on the `8xlarge` and `16xlarge` instance classes, which have high CPU capacity\. It is enabled by default on these instance classes\. You can control this feature by turning off the `aurora_enable_replica_log_compression` parameter\. For example, you might turn off replica log compression for larger instance classes if your writer node is near its maximum CPU capacity\.
 
- Starting in Aurora MySQL 1\.17\.4, the binlog filtering feature automatically reduces network bandwidth for replication messages\. Because the Aurora Replicas don't use the binlog information that is included in the replication messages, that data is omitted from the messages sent to those nodes\. You control this feature by changing the `aurora_enable_repl_bin_log_filtering` parameter\. This parameter is on by default\. Because this optimization is intended to be transparent, you might turn off this setting only during diagnosis or troubleshooting for issues related to replication\. For example, you can do so to match the behavior of an older Aurora MySQL cluster where this feature was not available\. 
+The binlog filtering feature automatically reduces network bandwidth for replication messages\. Because the Aurora Replicas don't use the binlog information that is included in the replication messages, that data is omitted from the messages sent to those nodes\. You control this feature by changing the `aurora_enable_repl_bin_log_filtering` parameter\. This parameter is on by default\. Because this optimization is intended to be transparent, you might turn off this setting only during diagnosis or troubleshooting for issues related to replication\. For example, you can do so to match the behavior of an older Aurora MySQL cluster where this feature was not available\.
 
 ## Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL<a name="AuroraMySQL.Replication.Availability"></a><a name="zdr"></a>
 
@@ -89,8 +86,6 @@
 
 |  Aurora MySQL version  |  Does ZDR apply to the writer?  |  Does ZDR apply to readers?  |  Notes  | 
 | --- | --- | --- | --- | 
-|   Aurora MySQL version 1\.\*, 1\.17\.3 and lower   |   No   |   No   |   ZDR isn't available for these versions\.   | 
-|   Aurora MySQL version 1\.\*, 1\.17\.4 and higher   |   No   |   Yes   |   In these Aurora MySQL versions, the following conditions apply to the ZDR mechanism:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  | 
 |   Aurora MySQL version 2\.\*, before 2\.10\.0   |   No   |   No   |   ZDR isn't available for these versions\. The `aurora_enable_zdr` parameter isn't available in the default cluster parameter group for Aurora MySQL version 2\.   | 
 |   Aurora MySQL version 2\.\*, 2\.10\.0 and higher   |   Yes   |   Yes   |   The ZDR mechanism is always enabled\.   In these Aurora MySQL versions, the following conditions apply to the ZDR mechanism:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.html)  | 
 |   Aurora MySQL version 3\.\*   |   Yes   |   Yes   |   The ZDR mechanism is always enabled\.   The same conditions apply as in Aurora MySQL version 2\.10\. ZDR applies to all instance classes\.   | 

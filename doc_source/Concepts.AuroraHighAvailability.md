@@ -17,7 +17,7 @@ When data is written to the primary DB instance, Aurora synchronously replicates
 
 ## High availability for Aurora DB instances<a name="Concepts.AuroraHighAvailability.Instances"></a>
 
-For a cluster using single\-master replication, after you create the primary instance, you can create up to 15 read\-only Aurora Replicas\. The Aurora Replicas are also known as reader instances\. 
+After you create the primary \(writer\) instance, you can create up to 15 read\-only Aurora Replicas\. The Aurora Replicas are also known as reader instances\.
 
  During day\-to\-day operations, you can offload some of the work for read\-intensive applications by using the reader instances to process `SELECT` queries\. When a problem affects the primary instance, one of these reader instances takes over as the primary instance\. This mechanism is known as *failover*\. Many Aurora features apply to the failover mechanism\. For example, Aurora detects database problems and activates the failover mechanism automatically when necessary\. Aurora also has features that reduce the time for failover to complete\. Doing so minimizes the time that the database is unavailable for writing during a failover\. 
 
@@ -35,7 +35,7 @@ You can set up a Multi\-AZ cluster by making a simple choice when you create the
 
 An Aurora DB cluster is fault tolerant by design\. The cluster volume spans multiple Availability Zones \(AZs\) in a single AWS Region, and each Availability Zone contains a copy of the cluster volume data\. This functionality means that your DB cluster can tolerate a failure of an Availability Zone without any loss of data and only a brief interruption of service\.
 
-If the primary instance in a DB cluster using single\-master replication fails, Aurora automatically fails over to a new primary instance in one of two ways:
+If the primary instance in a DB cluster fails, Aurora automatically fails over to a new primary instance in one of two ways:
 + By promoting an existing Aurora Replica to the new primary instance
 + By creating a new primary instance
 

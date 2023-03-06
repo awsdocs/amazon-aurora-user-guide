@@ -24,15 +24,15 @@ For more information about DB parameter groups, see [Working with parameter grou
 The following table shows all of the parameters that apply to the entire Aurora MySQL DB cluster\.
 
 
-|  Parameter name  |  Modifiable  |  Notes  | 
+| Parameter name | Modifiable | Notes | 
 | --- | --- | --- | 
-|   `aurora_binlog_read_buffer_size`   |   Yes   |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. Removed from Aurora MySQL version 3\.   | 
-|   `aurora_binlog_replication_max_yield_seconds`   |   Yes   |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
-|   `aurora_binlog_use_large_read_buffer`   |   Yes   |   Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. Removed from Aurora MySQL version 3\.   | 
-|  `aurora_disable_hash_join`   |  Yes  |  Set this parameter to `ON` to turn off hash join optimization in Aurora MySQL versions 1\.23 and 2\.09 or higher\. It isn't supported for version 3\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
+|  `aurora_binlog_read_buffer_size`  |  Yes  |  Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. Removed from Aurora MySQL version 3\.  | 
+|  `aurora_binlog_replication_max_yield_seconds`  |  Yes  |  Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.  | 
+|  `aurora_binlog_use_large_read_buffer`  |  Yes  |  Only affects clusters that use binary log \(binlog\) replication\. For information about binlog replication, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\. Removed from Aurora MySQL version 3\.  | 
+|  `aurora_disable_hash_join`   |  Yes  |  Set this parameter to `ON` to turn off hash join optimization in Aurora MySQL version 2\.09 or higher\. It isn't supported for version 3\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
 |   `aurora_enable_replica_log_compression`   |   Yes   |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\. Removed from Aurora MySQL version 3\.   | 
 |   `aurora_enable_repl_bin_log_filtering`   |   Yes   |   For more information, see [Performance considerations for Amazon Aurora MySQL replication](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Performance)\. Doesn't apply to clusters that are part of an Aurora global database\. Removed from Aurora MySQL version 3\.   | 
-|  `aurora_enable_staggered_replica_restart`  |  Yes  | This setting is available in Aurora MySQL versions 1 and 3, but it isn't used\. | 
+|  `aurora_enable_staggered_replica_restart`  |  Yes  | This setting is available in Aurora MySQL version 3, but it isn't used\. | 
 |   `aurora_enable_zdr`   |   Yes   |   This setting is turned on by default in Aurora MySQL 2\.10 and higher\. For more information, see [Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Availability)\.   | 
 |   `aurora_load_from_s3_role`   |   Yes   |   For more information, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\. Currently not available in Aurora MySQL version 3\. Use `aws_default_s3_role`\.  | 
 |  `aurora_mask_password_hashes_type`  |  Yes  |  This setting is turned on by default in Aurora MySQL 2\.11 and higher\. Use this setting to mask Aurora MySQL password hashes in the general, slow query, and audit logs\. The allowed values are `0` and `1` \(default\)\. When set to `1`, passwords are logged as `<secret>`\. When set to `0`, passwords are logged as hash \(`#`\) values\.  | 
@@ -40,21 +40,21 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `auto_increment_increment`   |   Yes   |    | 
 |   `auto_increment_offset`   |   Yes   |    | 
 |   `aws_default_lambda_role`   |   Yes   |   For more information, see [Invoking a Lambda function from an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Lambda.md)\.   | 
-|  `aws_default_s3_role`  | Yes |  Used when invoking the `LOAD DATA FROM S3`, `LOAD XML FROM S3`, or `SELECT INTO OUTFILE S3` statement from your DB cluster\. In Aurora MySQL version 1 and 2, the IAM role specified in this parameter is used if an IAM role isn't specified for `aurora_load_from_s3_role` or `aurora_select_into_s3_role` for the appropriate statement\. In Aurora MySQL version 3, the IAM role specified for this parameter is always used\. For more information, see [Associating an IAM role with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.  | 
-|   `binlog_checksum`   |   Yes   |   The AWS CLI and RDS API report a value of `None` if this parameter isn't set\. In that case, Aurora MySQL uses the engine default value, which is `CRC32`\. This is different than the explicit setting of `NONE`, which turns off the checksum\. For a bug fix related to this parameter, see [ Aurora MySQL database engine updates 2020\-09\-02 \(version 1\.23\.0\)](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.Updates.1230.html) and [ Aurora MySQL database engine updates 2020\-03\-05 \(version 1\.22\.2\)](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.Updates.1222.html) in the *Release Notes for Aurora MySQL*\.   | 
-|   `binlog-do-db`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
+|  `aws_default_s3_role`  | Yes |  Used when invoking the `LOAD DATA FROM S3`, `LOAD XML FROM S3`, or `SELECT INTO OUTFILE S3` statement from your DB cluster\. In Aurora MySQL version 2, the IAM role specified in this parameter is used if an IAM role isn't specified for `aurora_load_from_s3_role` or `aurora_select_into_s3_role` for the appropriate statement\. In Aurora MySQL version 3, the IAM role specified for this parameter is always used\. For more information, see [Associating an IAM role with an Amazon Aurora MySQL DB cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.  | 
+|   `binlog_checksum`   |   Yes   |  The AWS CLI and RDS API report a value of `None` if this parameter isn't set\. In that case, Aurora MySQL uses the engine default value, which is `CRC32`\. This is different from the explicit setting of `NONE`, which turns off the checksum\.  | 
+|   `binlog-do-db`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
 |   `binlog_format`   |   Yes   |   For more information, see [Replication between Aurora and MySQL or between Aurora and another Aurora DB cluster \(binary log replication\)](AuroraMySQL.Replication.MySQL.md)\.   | 
-|   `binlog_group_commit_sync_delay`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `binlog_group_commit_sync_no_delay_count`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `binlog-ignore-db`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
+|   `binlog_group_commit_sync_delay`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `binlog_group_commit_sync_no_delay_count`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `binlog-ignore-db`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
 |   `binlog_row_image`   |   No   |    | 
-|   `binlog_row_metadata`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `binlog_row_value_options`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
+|   `binlog_row_metadata`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `binlog_row_value_options`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
 |   `binlog_rows_query_log_events`   |   Yes   |    | 
-|   `binlog_transaction_compression`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `binlog_transaction_compression_level_zstd`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `binlog_transaction_dependency_history_size`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `binlog_transaction_dependency_tracking`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
+|   `binlog_transaction_compression`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `binlog_transaction_compression_level_zstd`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `binlog_transaction_dependency_history_size`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `binlog_transaction_dependency_tracking`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
 |   `character-set-client-handshake`   |   Yes   |    | 
 |   `character_set_client`   |   Yes   |    | 
 |   `character_set_connection`   |   Yes   |    | 
@@ -66,9 +66,9 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `collation_server`   |   Yes   |    | 
 |   `completion_type`   |   Yes   |    | 
 |   `default_storage_engine`   |   No   |   Aurora MySQL clusters use the InnoDB storage engine for all of your data\.   | 
-|   `enforce_gtid_consistency`   |   Sometimes   |  Modifiable in Aurora MySQL version 2\.04 and later\.  | 
+|   `enforce_gtid_consistency`   |   Sometimes   |  Modifiable in Aurora MySQL version 2 and higher\.  | 
 |  `event_scheduler`  |  Yes  |  Indicates the status of the Event Scheduler\. Modifiable only at the cluster level in Aurora MySQL version 3\.  | 
-|   `gtid-mode`   |   Sometimes   |  Modifiable in Aurora MySQL version 2\.04 and later\.  | 
+|   `gtid-mode`   |   Sometimes   |  Modifiable in Aurora MySQL version 2 and higher\.  | 
 |   `init_connect`   |   Yes   |  The command to be run by the server for each client that connects\. Use double quotes \("\) for settings to avoid connection failures, for example: <pre>SET optimizer_switch="hash_join=off"</pre> In Aurora MySQL version 3, this parameter doesn't apply for users who have the `CONNECTION_ADMIN` privilege\. This includes the Aurora master user\. For more information, see [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\.  | 
 |   `innodb_autoinc_lock_mode`   |   Yes   |    | 
 |   `innodb_checksums`   |   No   | Removed from Aurora MySQL version 3\.  | 
@@ -76,9 +76,9 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `innodb_commit_concurrency`   |   Yes   |    | 
 |   `innodb_data_home_dir`   |   No   |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
 |   `innodb_deadlock_detect`   |  Yes  |  This option is used to disable deadlock detection on Aurora MySQL version 3\. On high\-concurrency systems, deadlock detection can cause a slowdown when numerous threads wait for the same lock\. Consult the MySQL documentation for more information on this parameter\.  | 
-|  `innodb_default_row_format`  | Yes |  This parameter defines the default row format for InnoDB tables \(including user\-created InnoDB temporary tables\)\. It applies to Aurora MySQL versions 2 and 3, but not version 1\. Its value can be `DYNAMIC`, `COMPACT`, or `REDUNDANT.`  | 
+|  `innodb_default_row_format`  | Yes |  This parameter defines the default row format for InnoDB tables \(including user\-created InnoDB temporary tables\)\. It applies to Aurora MySQL versions 2 and 3\. Its value can be `DYNAMIC`, `COMPACT`, or `REDUNDANT.`  | 
 |   `innodb_file_per_table`   |   Yes   |  This parameter affects how table storage is organized\. For more information, see [Storage scaling](Aurora.Managing.Performance.md#Aurora.Managing.Performance.StorageScaling)\.  | 
-|  `innodb_flush_log_at_trx_commit`  |  Aurora MySQL version 1 and 2: Yes Aurora MySQL version 3: No  |  For Aurora MySQL version 1 and 2, we highly recommend that you use the default value of `1`\. For Aurora MySQL version 3, Aurora always uses the default value of `1`\. For more information, see [Configuring how frequently the log buffer is flushed](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.Flush)\.  | 
+|  `innodb_flush_log_at_trx_commit`  |  Aurora MySQL version 2: Yes Aurora MySQL version 3: No  |  For Aurora MySQL version 2, we highly recommend that you use the default value of `1`\. For Aurora MySQL version 3, Aurora always uses the default value of `1`\. For more information, see [Configuring how frequently the log buffer is flushed](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.Flush)\.  | 
 |   `innodb_ft_max_token_size`   |   Yes   |    | 
 |   `innodb_ft_min_token_size`   |   Yes   |    | 
 |   `innodb_ft_num_word_optimize`   |   Yes   |    | 
@@ -103,22 +103,22 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `internal_tmp_mem_storage_engine`   |   Yes   |  This parameter applies to Aurora MySQL version 3\.  | 
 |  `key_buffer_size`  |   Yes   |  Key cache for MyISAM tables\. For more information, see [keycache\->cache\_lock mutex](AuroraMySQL.Reference.Waitevents.md#key-cache.cache-lock)\.  | 
 |   `lc_time_names`   |   Yes   |    | 
-|  `lower_case_table_names`  |  Yes \(Aurora MySQL version 1 and 2\) Only at cluster creation time \(Aurora MySQL version 3\)  |  In Aurora MySQL version 2\.10 and higher 2\.x versions, make sure to reboot all reader instances after changing this setting and rebooting the writer instance\. For details, see [Rebooting an Aurora MySQL cluster \(version 2\.10 and higher\)](USER_RebootCluster.md#aurora-mysql-survivable-replicas)\. In Aurora MySQL version 3, the value of this parameter is set permanently at the time the cluster is created\. If you use a nondefault value for this option, set up your Aurora MySQL version 3 custom parameter group before upgrading, and specify the parameter group during the snapshot restore operation that creates the version 3 cluster\. With an Aurora global database based on Aurora MySQL, you can't perform an in\-place upgrade from Aurora MySQL version 2 to version 3 if the `lower_case_table_names` parameter is turned on\. For more information on the methods that you can use, see [Major version upgrades](aurora-global-database-upgrade.md#aurora-global-database-upgrade.major)\.  | 
+|  `lower_case_table_names`  |  Yes \(Aurora MySQL version 2\) Only at cluster creation time \(Aurora MySQL version 3\)  |  In Aurora MySQL version 2\.10 and higher 2\.x versions, make sure to reboot all reader instances after changing this setting and rebooting the writer instance\. For details, see [Rebooting an Aurora MySQL cluster \(version 2\.10 and higher\)](USER_RebootCluster.md#aurora-mysql-survivable-replicas)\. In Aurora MySQL version 3, the value of this parameter is set permanently at the time the cluster is created\. If you use a nondefault value for this option, set up your Aurora MySQL version 3 custom parameter group before upgrading, and specify the parameter group during the snapshot restore operation that creates the version 3 cluster\. With an Aurora global database based on Aurora MySQL, you can't perform an in\-place upgrade from Aurora MySQL version 2 to version 3 if the `lower_case_table_names` parameter is turned on\. For more information on the methods that you can use, see [Major version upgrades](aurora-global-database-upgrade.md#aurora-global-database-upgrade.major)\.  | 
 |   `master-info-repository`   |   Yes   |  Removed from Aurora MySQL version 3\.  | 
-|   `master_verify_checksum`   |   Yes   |  Aurora MySQL version 1 and 2\. Use `source_verify_checksum` in Aurora MySQL version 3\.  | 
-|   `partial_revokes`   |   No   |  This parameter applies to Aurora MySQL version 3 and higher\.  | 
+|   `master_verify_checksum`   |   Yes   |  Aurora MySQL version 2\. Use `source_verify_checksum` in Aurora MySQL version 3\.  | 
+|   `partial_revokes`   |   No   |  This parameter applies to Aurora MySQL version 3\.  | 
 |   `read_only`   |   Yes   |  When this parameter is turned on, the server permits no updates except from those performed by replica threads\. In Aurora MySQL version 3, this parameter doesn't apply for users who have the `CONNECTION_ADMIN` privilege\. This includes the Aurora master user\. For more information, see [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\.  | 
-|   `relay-log-space-limit`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `replica_preserve_commit_order`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `replica_transaction_retries`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `replicate-do-db`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `replicate-do-table`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `replicate-ignore-db`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `replicate-ignore-table`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `replicate-wild-do-table`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `replicate-wild-ignore-table`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
+|   `relay-log-space-limit`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `replica_preserve_commit_order`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `replica_transaction_retries`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `replicate-do-db`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `replicate-do-table`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `replicate-ignore-db`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `replicate-ignore-table`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `replicate-wild-do-table`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `replicate-wild-ignore-table`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
 |   `require_secure_transport`   |   Yes   |   This parameter applies to Aurora MySQL version 2 and 3\. For more information, see [Using SSL/TLS with Aurora MySQL DB clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.   | 
-|   `rpl_read_size`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
+|   `rpl_read_size`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
 |   `server_audit_events`   |   Yes   |    | 
 |   `server_audit_excl_users`   |   Yes   |    | 
 |   `server_audit_incl_users`   |   Yes   |    | 
@@ -127,7 +127,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `skip-character-set-client-handshake`   |   Yes   |    | 
 |   `skip_name_resolve`   |   No   |    | 
 |   `slave-skip-errors`   |   Yes   |   Only applies to Aurora MySQL version 2 clusters, with MySQL 5\.7 compatibility\.   | 
-|   `source_verify_checksum`   |   Yes   |   Aurora MySQL version 3 and higher   | 
+|   `source_verify_checksum`   |   Yes   |   Aurora MySQL version 3   | 
 |   `sync_frm`   |   Yes   |  Removed from Aurora MySQL version 3\.   | 
 |   `time_zone`   |   Yes   |    | 
 |   `tls_version`   |   Yes   |   For more information, see [TLS versions for Aurora MySQL](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL.TLS_Version)\.   | 
@@ -139,13 +139,13 @@ The following table shows all of the parameters that apply to the entire Aurora 
 
 |  Parameter name  |  Modifiable  |  Notes  | 
 | --- | --- | --- | 
-|   `activate_all_roles_on_login`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
+|   `activate_all_roles_on_login`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
 |   `allow-suspicious-udfs`   |   No   |    | 
-|  `aurora_disable_hash_join`   |  Yes  |  Set this parameter to `ON` to turn off hash join optimization in Aurora MySQL versions 1\.23 and 2\.09 or higher\. It isn't supported for version 3\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
+|  `aurora_disable_hash_join`   |  Yes  |  Set this parameter to `ON` to turn off hash join optimization in Aurora MySQL version 2\.09 or higher\. It isn't supported for version 3\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
 |   `aurora_lab_mode`   |   Yes   |   For more information, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\. Removed from Aurora MySQL version 3\.   | 
-|   `aurora_oom_response`   |   Yes   |  This parameter is supported for Aurora MySQL version 1\.18 and higher, and version 2\.04\.5 and higher\. It isn't supported for version 3\. For more information, see [ Amazon Aurora MySQL out\-of\-memory issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.  | 
-|   `aurora_parallel_query`   |   Yes   |  Set to `ON` to turn on parallel query in Aurora MySQL versions 1\.23 and 2\.09 or higher\. The old `aurora_pq` parameter isn't used in these versions\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
-|   `aurora_pq`   |   Yes   |  Set to `OFF` to turn off parallel query for specific DB instances in Aurora MySQL versions before 1\.23 and 2\.09\. In 1\.23 and 2\.09 or higher, turn parallel query on and off with `aurora_parallel_query` instead\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
+|   `aurora_oom_response`   |   Yes   |  This parameter is supported for Aurora MySQL version 2\. It isn't supported for version 3\. For more information, see [ Amazon Aurora MySQL out\-of\-memory issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.  | 
+|   `aurora_parallel_query`   |   Yes   |  Set to `ON` to turn on parallel query in Aurora MySQL version 2\.09 or higher\. The old `aurora_pq` parameter isn't used in these versions\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
+|   `aurora_pq`   |   Yes   |  Set to `OFF` to turn off parallel query for specific DB instances in Aurora MySQL versions before 2\.09\. In version 2\.09 or higher, turn parallel query on and off with `aurora_parallel_query` instead\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
 |   `autocommit`   |   Yes   |    | 
 |   `automatic_sp_privileges`   |   Yes   |    | 
 |   `back_log`   |   Yes   |    | 
@@ -154,14 +154,14 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `binlog_max_flush_queue_time`   |   Yes   |    | 
 |   `binlog_order_commits`   |   Yes   |    | 
 |   `binlog_stmt_cache_size`   |   Yes   |    | 
-|   `binlog_transaction_compression`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
-|   `binlog_transaction_compression_level_zstd`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
+|   `binlog_transaction_compression`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|   `binlog_transaction_compression_level_zstd`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
 |   `bulk_insert_buffer_size`   |   Yes   |    | 
 |   `concurrent_insert`   |   Yes   |    | 
 |   `connect_timeout`   |   Yes   |    | 
 |   `core-file`   |   No   |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
 |   `datadir`   |   No   |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
-|   `default_authentication_plugin`   |   No   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
+|   `default_authentication_plugin`   |   No   |   This parameter applies to Aurora MySQL version 3\.   | 
 |   `default_time_zone`   |   No   |    | 
 |   `default_tmp_storage_engine`   |   Yes   |    | 
 |   `default_week_format`   |   Yes   |    | 
@@ -255,8 +255,8 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `log_error`   |   No   |    | 
 |   `log_output`   |   Yes   |    | 
 |   `log_queries_not_using_indexes`   |   Yes   |    | 
-|   `log_slave_updates`   |   No   |   Aurora MySQL version 1 and 2\. Use `log_replica_updates` in Aurora MySQL version 3\.   | 
-|   `log_replica_updates`   |   No   |   Aurora MySQL version 3 and higher   | 
+|   `log_slave_updates`   |   No   |   Aurora MySQL version 2\. Use `log_replica_updates` in Aurora MySQL version 3\.   | 
+|   `log_replica_updates`   |   No   |   Aurora MySQL version 3   | 
 |   `log_throttle_queries_not_using_indexes`   |   Yes   |    | 
 |   `log_warnings`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
 |   `long_query_time`   |   Yes   |    | 
@@ -375,24 +375,24 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `read_rnd_buffer_size`   |   Yes   |    | 
 |   `relay-log`   |   No   |    | 
 |   `relay_log_info_repository`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
-|   `relay_log_recovery`   |   No   |    | 
+|   `relay_log_recovery`  |   No   |    | 
+|  `replica_checkpoint_group`  |   Yes   |   Aurora MySQL version 3   | 
+|  `replica_checkpoint_period`  |   Yes   |  Aurora MySQL version 3   | 
+|  `replica_parallel_workers`  |   Yes   |  Aurora MySQL version 3   | 
+|  `replica_pending_jobs_size_max`  |   Yes   |  Aurora MySQL version 3   | 
+|  `replica_skip_errors`  |   Yes   |  Aurora MySQL version 3   | 
+|  `replica_sql_verify_checksum`  |   Yes   |  Aurora MySQL version 3   | 
 |   `safe-user-create`   |   Yes   |    | 
-|   `secure_auth`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
+|   `secure_auth`   |   Yes   |  This parameter is always turned on in Aurora MySQL version 2\. Trying to turn it off generates an error\. Removed from Aurora MySQL version 3\.  | 
 |   `secure_file_priv`   |   No   |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
 |   `skip-slave-start`   |   No   |    | 
 |   `skip_external_locking`   |   No   |    | 
 |   `skip_show_database`   |   Yes   |    | 
-|   `slave_checkpoint_group`   |   Yes   |   Aurora MySQL version 1 and 2\. Use `replica_checkpoint_group` in Aurora MySQL version 3\.   | 
-|   `replica_checkpoint_group`   |   Yes   |   Aurora MySQL version 3 and higher   | 
-|   `slave_checkpoint_period`   |   Yes   |   Aurora MySQL version 1 and 2\. Use `replica_checkpoint_period` in Aurora MySQL version 3\.   | 
-|   `replica_checkpoint_period`   |   Yes   |   Aurora MySQL version 3 and higher   | 
-|   `slave_parallel_workers`   |   Yes   |   Aurora MySQL version 1 and 2\. Use `replica_parallel_workers` in Aurora MySQL version 3\.   | 
-|   `replica_parallel_workers`   |   Yes   |   Aurora MySQL version 3 and higher   | 
-|   `slave_pending_jobs_size_max`   |   Yes   |   Aurora MySQL version 1 and 2\. Use `replica_pending_jobs_size_max` in Aurora MySQL version 3\.   | 
-|   `replica_pending_jobs_size_max`   |   Yes   |   Aurora MySQL version 3 and higher   | 
-|   `replica_skip_errors`   |   Yes   |   Aurora MySQL version 3 and higher   | 
-|   `slave_sql_verify_checksum`   |   Yes   |   Aurora MySQL version 1 and 2\. Use `replica_sql_verify_checksum` in Aurora MySQL version 3\.   | 
-|   `replica_sql_verify_checksum`   |   Yes   |   Aurora MySQL version 3 and higher   | 
+|   `slave_checkpoint_group`   |   Yes   |   Aurora MySQL version 2\. Use `replica_checkpoint_group` in Aurora MySQL version 3\.   | 
+|   `slave_checkpoint_period`   |   Yes   |   Aurora MySQL version 2\. Use `replica_checkpoint_period` in Aurora MySQL version 3\.   | 
+|   `slave_parallel_workers`   |   Yes   |   Aurora MySQL version 2\. Use `replica_parallel_workers` in Aurora MySQL version 3\.   | 
+|   `slave_pending_jobs_size_max`   |   Yes   |   Aurora MySQL version 2\. Use `replica_pending_jobs_size_max` in Aurora MySQL version 3\.   | 
+|   `slave_sql_verify_checksum`   |   Yes   |   Aurora MySQL version 2\. Use `replica_sql_verify_checksum` in Aurora MySQL version 3\.   | 
 |   `slow_launch_time`   |   Yes   |    | 
 |   `slow_query_log`   |   Yes   |   For instructions on uploading the logs to CloudWatch Logs, see [Publishing Amazon Aurora MySQL logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\.   | 
 |   `slow_query_log_file`   |   No   |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
@@ -403,7 +403,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `stored_program_cache`   |   Yes   |    | 
 |   `sync_binlog`   |   No   |    | 
 |   `sync_master_info`   |   Yes   |    | 
-|   `sync_source_info`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\.   | 
+|   `sync_source_info`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
 |   `sync_relay_log`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
 |   `sync_relay_log_info`   |   Yes   |    | 
 |   `sysdate-is-now`   |   Yes   |    | 
@@ -412,16 +412,16 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `table_open_cache`   |   Yes   |  The default value is represented by a formula\. For details about how the `DBInstanceClassMemory` value in the formula is calculated, see [DB parameter formula variables](USER_ParamValuesRef.md#USER_FormulaVariables)\.  | 
 |   `table_open_cache_instances`   |   Yes   |    | 
 |   `temp-pool`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
-|   `temptable_max_mmap`   |   Yes   |  This parameter applies to Aurora MySQL version 3 and higher\. For details, see [New temporary table behavior in Aurora MySQL version 3](ams3-temptable-behavior.md)\.  | 
-|  `temptable_max_ram`  |  Yes  |  This parameter applies to Aurora MySQL version 3 and higher\. For details, see [New temporary table behavior in Aurora MySQL version 3](ams3-temptable-behavior.md)\.  | 
-|  `temptable_use_mmap`  |  Yes  |  This parameter applies to Aurora MySQL version 3 and higher\. For details, see [New temporary table behavior in Aurora MySQL version 3](ams3-temptable-behavior.md)\.  | 
+|   `temptable_max_mmap`   |   Yes   |  This parameter applies to Aurora MySQL version 3\. For details, see [New temporary table behavior in Aurora MySQL version 3](ams3-temptable-behavior.md)\.  | 
+|  `temptable_max_ram`  |  Yes  |  This parameter applies to Aurora MySQL version 3\. For details, see [New temporary table behavior in Aurora MySQL version 3](ams3-temptable-behavior.md)\.  | 
+|  `temptable_use_mmap`  |  Yes  |  This parameter applies to Aurora MySQL version 3\. For details, see [New temporary table behavior in Aurora MySQL version 3](ams3-temptable-behavior.md)\.  | 
 |  `thread_handling`  |  No  |    | 
 |   `thread_stack`   |  Yes  |    | 
 |   `timed_mutexes`   |  Yes  |    | 
 |  `tmp_table_size`  |  Yes  |    | 
 |   `tmpdir`   |  No  |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
 |   `transaction_alloc_block_size`   |   Yes   |    | 
-|   `transaction_isolation`   |   Yes   |   This parameter applies to Aurora MySQL version 3 and higher\. It replaces `tx_isolation`\.   | 
+|   `transaction_isolation`   |   Yes   |   This parameter applies to Aurora MySQL version 3\. It replaces `tx_isolation`\.   | 
 |   `transaction_prealloc_size`   |   Yes   |    | 
 |   `tx_isolation`   |   Yes   |   Removed from Aurora MySQL version 3\. It is replaced by `transaction_isolation`\.   | 
 |   `updatable_views_with_limit`   |   Yes   |    | 
@@ -439,7 +439,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
  Because of architectural differences between Aurora MySQL and MySQL, some MySQL parameters don't apply to Aurora MySQL\. 
 
 The following MySQL parameters don't apply to Aurora MySQL\. This list isn't exhaustive\.
-+ `activate_all_roles_on_login` – This parameter doesn't apply to Aurora MySQL version 1 and 2\. It is available in Aurora MySQL version 3\.
++ `activate_all_roles_on_login` – This parameter doesn't apply to Aurora MySQL version 2\. It is available in Aurora MySQL version 3\.
 + `big_tables`
 + `bind_address`
 + `character_sets_dir`
@@ -450,7 +450,7 @@ The following MySQL parameters don't apply to Aurora MySQL\. This list isn't exh
 + `innodb_change_buffering`
 + `innodb_checksum_algorithm`
 + `innodb_data_file_path`
-+ `innodb_deadlock_detect` – This parameter doesn't apply to Aurora MySQL version 1 and 2\. It is available in Aurora MySQL version 3\.
++ `innodb_deadlock_detect` – This parameter doesn't apply to Aurora MySQL version 2\. It is available in Aurora MySQL version 3\.
 + `innodb_dedicated_server`
 + `innodb_doublewrite`
 + `innodb_flush_log_at_timeout` – This parameter doesn't apply to Aurora MySQL\. For more information, see [Configuring how frequently the log buffer is flushed](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.Flush)\.
@@ -483,7 +483,7 @@ The following MySQL parameters don't apply to Aurora MySQL\. This list isn't exh
 +  `innodb_buffer_pool_pages_dirty` 
 +  `innodb_buffer_pool_pages_flushed` 
 
- Aurora MySQL version 3 removes the following status variables that were in Aurora MySQL version 2: 
+Aurora MySQL version 3 removes the following status variables that were in Aurora MySQL version 2:
 +  `AuroraDb_lockmgr_bitmaps0_in_use` 
 +  `AuroraDb_lockmgr_bitmaps1_in_use` 
 +  `AuroraDb_lockmgr_bitmaps_mem_used` 
@@ -515,7 +515,7 @@ The following MySQL parameters don't apply to Aurora MySQL\. This list isn't exh
 +  `Slave_running` 
 +  `Time_since_zero_connections` 
 
- These MySQL status variables are available in Aurora MySQL version 1 or 2, but they aren't available in Aurora MySQL version 3: 
+These MySQL status variables are available in Aurora MySQL version 2, but they aren't available in Aurora MySQL version 3:
 +  `Innodb_redo_log_enabled` 
 +  `Innodb_undo_tablespaces_total` 
 +  `Innodb_undo_tablespaces_implicit` 
