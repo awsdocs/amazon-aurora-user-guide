@@ -15,7 +15,6 @@ The following are some limitations when you copy snapshots:
 + You can't copy a snapshot to or from the following AWS Regions:
   + China \(Beijing\)
   + China \(Ningxia\)
-  + Asia Pacific \(Jakarta\)
 + You can copy a snapshot between AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\)\. However, you can't copy a snapshot between these AWS GovCloud \(US\) Regions and commercial AWS Regions\.
 + If you delete a source snapshot before the target snapshot becomes available, the snapshot copy might fail\. Verify that the target snapshot has a status of `AVAILABLE` before you delete a source snapshot\. 
 + You can have up to five snapshot copy requests in progress to a single destination Region per account\.
@@ -57,18 +56,6 @@ Aurora doesn't support incremental snapshot copying\. Aurora DB cluster snapshot
 ## Cross\-Region snapshot copying<a name="aurora-copy-snapshot.AcrossRegions"></a>
 
 You can copy DB cluster snapshots across AWS Regions\. However, there are certain constraints and considerations for cross\-Region snapshot copying\.
-
-Cross\-Region copying of DB cluster snapshots isn't supported in the following opt\-in AWS Regions:
-+ Africa \(Cape Town\)
-+ Asia Pacific \(Hong Kong\)
-+ Asia Pacific \(Hyderabad\)
-+ Asia Pacific \(Jakarta\)
-+ Asia Pacific \(Melbourne\)
-+ Europe \(Milan\)
-+ Europe \(Spain\)
-+ Europe \(Zurich\)
-+ Middle East \(Bahrain\)
-+ Middle East \(UAE\)
 
 Depending on the AWS Regions involved and the amount of data to be copied, a cross\-Region snapshot copy can take hours to complete\.
 

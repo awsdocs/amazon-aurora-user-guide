@@ -1,6 +1,6 @@
 # Working with parallel query for Amazon Aurora MySQL<a name="aurora-mysql-parallel-query"></a><a name="parallel_query"></a><a name="pq"></a>
 
- Following, you can find a description of the parallel query performance optimization for Amazon Aurora MySQL\-Compatible Edition\. This feature uses a special processing path for certain data\-intensive queries, taking advantage of the Aurora shared storage architecture\. Parallel query works best with Aurora MySQL DB clusters that have tables with millions of rows and analytic queries that take minutes or hours to complete\.  
+This topic describes the parallel query performance optimization for Amazon Aurora MySQL\-Compatible Edition\. This feature uses a special processing path for certain data\-intensive queries, taking advantage of the Aurora shared storage architecture\. Parallel query works best with Aurora MySQL DB clusters that have tables with millions of rows and analytic queries that take minutes or hours to complete\.  
 
 **Contents**
 + [Overview of parallel query for Aurora MySQL](#aurora-mysql-parallel-query-overview)
@@ -53,7 +53,7 @@
  Aurora MySQL parallel query is an optimization that parallelizes some of the I/O and computation involved in processing data\-intensive queries\. The work that is parallelized includes retrieving rows from storage, extracting column values, and determining which rows match the conditions in the `WHERE` clause and join clauses\. This data\-intensive work is delegated \(in database optimization terms, *pushed down*\) to multiple nodes in the Aurora distributed storage layer\. Without parallel query, each query brings all the scanned data to a single node within the Aurora MySQL cluster \(the head node\) and performs all the query processing there\. 
 
 **Tip**  
-The PostgreSQL database engine also has a feature that's also called "parallel query\." That feature is unrelated to Aurora parallel query\.
+The PostgreSQL database engine also has a feature called "parallel query\." That feature is unrelated to Aurora parallel query\.
 
  When the parallel query feature is turned on, the Aurora MySQL engine automatically determines when queries can benefit, without requiring SQL changes such as hints or table attributes\. In the following sections, you can find an explanation of when parallel query is applied to a query\. You can also find how to make sure that parallel query is applied where it provides the most benefit\. 
 
@@ -91,20 +91,22 @@ The PostgreSQL database engine also has a feature that's also called "parallel q
 
 To use all features of parallel query requires an Aurora MySQL DB cluster that's running version 2\.09 or higher\. If you already have a cluster that you want to use with parallel query, you can upgrade it to a compatible version and turn on parallel query afterward\. In that case, make sure to follow the upgrade procedure in [Upgrade considerations for parallel query](#aurora-mysql-parallel-query-upgrade) because the configuration setting names and default values are different in these newer versions\.
 
- The DB instances in your cluster must be using the `db.r*` instance classes\. 
+The DB instances in your cluster must use the `db.r*` instance classes\.
 
-Make sure that the hash join optimization is turned on for your cluster\. To learn how, see [Turning on hash join for parallel query clusters](#aurora-mysql-parallel-query-enabling-hash-join)\. 
+Make sure that hash join optimization is turned on for your cluster\. To learn how, see [Turning on hash join for parallel query clusters](#aurora-mysql-parallel-query-enabling-hash-join)\.
 
  To customize parameters such as `aurora_parallel_query` and `aurora_disable_hash_join`, you must have a custom parameter group that you use with your cluster\. You can specify these parameters individually for each DB instance by using a DB parameter group\. However, we recommend that you specify them in a DB cluster parameter group\. That way, all DB instances in your cluster inherit the same settings for these parameters\. 
 
 ### Limitations<a name="aurora-mysql-parallel-query-limitations"></a>
 
- The following limitations apply to the parallel query feature: 
+The following limitations apply to the parallel query feature:
 + You can't use parallel query with the db\.t2 or db\.t3 instance classes\. This limitation applies even if you request parallel query using the `aurora_pq_force` session variable\.
 +  Parallel query doesn't apply to tables using the `COMPRESSED` or `REDUNDANT` row formats\. Use the `COMPACT` or `DYNAMIC` row formats for tables you plan to use with parallel query\. 
 +  Aurora uses a cost\-based algorithm to determine whether to use the parallel query mechanism for each SQL statement\. Using certain SQL constructs in a statement can prevent parallel query or make parallel query unlikely for that statement\. For information about compatibility of SQL constructs with parallel query, see [How parallel query works with SQL constructs](#aurora-mysql-parallel-query-sql)\. 
 +  Each Aurora DB instance can run only a certain number of parallel query sessions at one time\. If a query has multiple parts that use parallel query, such as subqueries, joins, or `UNION` operators, those phases run in sequence\. The statement only counts as a single parallel query session at any one time\. You can monitor the number of active sessions using the [parallel query status variables](#aurora-mysql-parallel-query-monitoring)\. You can check the limit on concurrent sessions for a given DB instance by querying the status variable `Aurora_pq_max_concurrent_requests`\. 
-+  Parallel query is available in all AWS Regions that Aurora supports\. For most AWS Regions, the minimum required Aurora MySQL version to use parallel query is 2\.09\.  
++  Parallel query is available in all AWS Regions that Aurora supports\. For most AWS Regions, the minimum required Aurora MySQL version to use parallel query is 2\.09\.
++ Parallel query is designed to improve the performance of data\-intensive queries\. It isn't designed for lightweight queries\.
++ We recommend that you use reader nodes for SELECT statements, especially data\-intensive ones\.
 
 ### I/O costs<a name="aurora-mysql-parallel-query-cost"></a>
 

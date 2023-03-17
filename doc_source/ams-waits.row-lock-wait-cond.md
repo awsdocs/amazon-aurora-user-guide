@@ -1,30 +1,27 @@
-# synch/mutex/innodb/aurora\_lock\_thread\_slot\_futex<a name="ams-waits.waitsynch"></a>
+# synch/cond/innodb/row\_lock\_wait\_cond<a name="ams-waits.row-lock-wait-cond"></a>
 
-The `synch/mutex/innodb/aurora_lock_thread_slot_futex` event occurs when one session has locked a row for an update, and another session tries to update the same row\. For more information, see [InnoDB locking](https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html) in the *MySQL Reference*\.
+The `synch/cond/innodb/row_lock_wait_cond` event occurs when one session has locked a row for an update, and another session tries to update the same row\. For more information, see [InnoDB locking](https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html) in the *MySQL Reference*\.
 
 
 
-## Supported engine versions<a name="ams-waits.waitsynch.versions"></a>
+## Supported engine versions<a name="ams-waits.row-lock-wait-cond.versions"></a>
 
 This wait event information is supported for the following engine versions:
-+ Aurora MySQL version 2, up to 2\.09\.3, and 2\.10\.1 and 2\.10\.2
++ Aurora MySQL version 2: 2\.10\.3, 2\.11\.0, 2\.11\.1
 
-**Note**  
-In Aurora MySQL versions 3\.01\.0 and 3\.01\.1, this wait event is reported as [io/table/sql/handler](ams-waits.waitio.md)\.
-
-## Likely causes of increased waits<a name="ams-waits.waitsynch.causes"></a>
+## Likely causes of increased waits<a name="ams-waits.row-lock-wait-cond.causes"></a>
 
 Multiple data manipulation language \(DML\) statements are accessing the same row or rows simultaneously\.
 
-## Actions<a name="ams-waits.waitsynch.actions"></a>
+## Actions<a name="ams-waits.row-lock-wait-cond.actions"></a>
 
 We recommend different actions depending on the other wait events that you see\.
 
 **Topics**
-+ [Find and respond to the SQL statements responsible for this wait event](#ams-waits.waitsynch.actions.id)
-+ [Find and respond to the blocking session](#ams-waits.waitsynch.actions.blocker)
++ [Find and respond to the SQL statements responsible for this wait event](#ams-waits.row-lock-wait-cond.actions.id)
++ [Find and respond to the blocking session](#ams-waits.row-lock-wait-cond.actions.blocker)
 
-### Find and respond to the SQL statements responsible for this wait event<a name="ams-waits.waitsynch.actions.id"></a>
+### Find and respond to the SQL statements responsible for this wait event<a name="ams-waits.row-lock-wait-cond.actions.id"></a>
 
 Use Performance Insights to identify the SQL statements responsible for this wait event\. Consider the following strategies:
 + If row locks are a persistent problem, consider rewriting the application to use optimistic locking\.
@@ -34,7 +31,7 @@ Use Performance Insights to identify the SQL statements responsible for this wai
 
 For a useful overview of troubleshooting using Performance Insights, see the blog post [Analyze Amazon Aurora MySQL Workloads with Performance Insights](https://aws.amazon.com/blogs/database/analyze-amazon-aurora-mysql-workloads-with-performance-insights/)\.
 
-### Find and respond to the blocking session<a name="ams-waits.waitsynch.actions.blocker"></a>
+### Find and respond to the blocking session<a name="ams-waits.row-lock-wait-cond.actions.blocker"></a>
 
 Determine whether the blocking session is idle or active\. Also, find out whether the session comes from an application or an active user\.
 
@@ -43,14 +40,14 @@ To identify the session holding the lock, you can run `SHOW ENGINE INNODB STATUS
 ```
 mysql> SHOW ENGINE INNODB STATUS;
 
----------------------TRANSACTION 302631452, ACTIVE 2 sec starting index read
+---TRANSACTION 2771110, ACTIVE 112 sec starting index read
 mysql tables in use 1, locked 1
-LOCK WAIT 2 lock struct(s), heap size 376, 1 row lock(s)
-MySQL thread id 80109, OS thread handle 0x2ae915060700, query id 938819 10.0.4.12 reinvent updating
-UPDATE sbtest1 SET k=k+1 WHERE id=503
-------- TRX HAS BEEN WAITING 2 SEC FOR THIS LOCK TO BE GRANTED:
-RECORD LOCKS space id 148 page no 11 n bits 30 index `PRIMARY` of table `sysbench2`.`sbtest1` trx id 302631452 lock_mode X locks rec but not gap waiting
-Record lock, heap no 30 PHYSICAL RECORD: n_fields 6; compact format; info bits 0
+LOCK WAIT 2 lock struct(s), heap size 1136, 1 row lock(s)
+MySQL thread id 24, OS thread handle 70369573642160, query id 13271336 172.31.14.179 reinvent Sending data
+select id1 from test.t1 where id1=1 for update
+------- TRX HAS BEEN WAITING 43 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 11 page no 3 n bits 0 index GEN_CLUST_INDEX of table test.t1 trx id 2771110 lock_mode X waiting
+Record lock, heap no 2 PHYSICAL RECORD: n_fields 5; compact format; info bits 0
 ```
 
 Or you can use the following query to extract details on current locks\.

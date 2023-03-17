@@ -16,9 +16,9 @@ You can use the AWS Management Console to apply a scaling policy based on a pred
 
 ## Before you begin<a name="Aurora.Integrating.AutoScaling.BYB"></a>
 
-Before you can use Aurora Auto Scaling with an Aurora DB cluster, you must first create an Aurora DB cluster with a primary instance and at least one Aurora Replica\. Although Aurora Auto Scaling manages Aurora Replicas, the Aurora DB cluster must start with at least one Aurora Replica\. For more information about creating an Aurora DB cluster, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.
+Before you can use Aurora Auto Scaling with an Aurora DB cluster, you must first create an Aurora DB cluster with a primary DB instance\. For more information about creating an Aurora DB cluster, see [Creating an Amazon Aurora DB cluster](Aurora.CreateInstance.md)\.
 
-Aurora Auto Scaling only scales a DB cluster if all Aurora Replicas in a DB cluster are in the available state\. If any of the Aurora Replicas are in a state other than available, Aurora Auto Scaling waits until the whole DB cluster becomes available for scaling\. 
+Aurora Auto Scaling only scales a DB cluster if the DB cluster is in the available state\.
 
 When Aurora Auto Scaling adds a new Aurora Replica, the new Aurora Replica is the same DB instance class as the one used by the primary instance\. For more information about DB instance classes, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\. Also, the promotion tier for new Aurora Replicas is set to the last priority, which is 15 by default\. This means that during a failover, a replica with a better priority, such as one created manually, would be promoted first\. For more information, see [Fault tolerance for an Aurora DB cluster](Concepts.AuroraHighAvailability.md#Aurora.Managing.FaultTolerance)\.
 

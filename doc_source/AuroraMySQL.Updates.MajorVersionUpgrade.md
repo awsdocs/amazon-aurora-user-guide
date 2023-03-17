@@ -1,6 +1,6 @@
 # Upgrading the major version of an Amazon Aurora MySQL DB cluster<a name="AuroraMySQL.Updates.MajorVersionUpgrade"></a><a name="mvu"></a>
 
-In an Aurora MySQL version number such as 2\.08\.1, the 2 represents the major version\. Aurora MySQL version 2 is compatible with MySQL 5\.7\. Aurora MySQL version 3 is compatible with MySQL 8\.0\.
+In an Aurora MySQL version number such as 2\.11\.1, the 2 represents the major version\. Aurora MySQL version 2 is compatible with MySQL 5\.7\. Aurora MySQL version 3 is compatible with MySQL 8\.0\.
 
  Upgrading between major versions requires more extensive planning and testing than for a minor version\. The process can take substantial time\. After the upgrade is finished, you also might have followup work to do\. For example, this might occur because of differences in SQL compatibility or the way certain MySQL\-related features work\. Or it might occur because of differing parameter settings between the old and new versions\. 
 
@@ -24,7 +24,10 @@ If you have a MySQL 5\.7â€“compatible cluster and want to upgrade it to a MySQLâ
 
 The in\-place upgrade mechanism involves shutting down your DB cluster while the operation takes place\. Aurora performs a clean shutdown and completes outstanding operations such as transaction rollback and undo purge\. For more information, see [How the Aurora MySQL in\-place major version upgrade works](#AuroraMySQL.Upgrading.Sequence)\.
 
-The in\-place upgrade is convenient, because it is simple to perform and minimizes configuration changes to associated applications\. For example, an in\-place upgrade preserves the endpoints and set of DB instances for your cluster\. However, the time needed for an in\-place upgrade can vary depending on the properties of your schema and how busy the cluster is\. Thus, depending on the needs for your cluster, you might want to choose among the multiple upgrade techniques\. These include in\-place upgrade and snapshot restore, described in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\. They also include other upgrade techniques such as the one described in [Alternative blue\-green upgrade technique](#AuroraMySQL.UpgradingMajor.BlueGreen)\.
+The in\-place upgrade method is convenient, because it is simple to perform and minimizes configuration changes to associated applications\. For example, an in\-place upgrade preserves the endpoints and set of DB instances for your cluster\. However, the time needed for an in\-place upgrade can vary depending on the properties of your schema and how busy the cluster is\. Thus, depending on the needs for your cluster, you might want to choose among the multiple upgrade techniques\. These include in\-place upgrade and snapshot restore, described in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\. They also include other upgrade techniques such as the one described in [Alternative blue\-green upgrade technique](#AuroraMySQL.UpgradingMajor.BlueGreen)\.
+
+**Note**  
+If you use the AWS CLI or RDS API for the snapshot restore upgrade method, you must run a subsequent operation to create a writer DB instance in the restored DB cluster\.
 
 For general information about Aurora MySQL version 3 and its new features, see [Aurora MySQL version 3 compatible with MySQL 8\.0](AuroraMySQL.MySQL80.md)\. For details about planning an upgrade, see [Upgrade planning for Aurora MySQL version 3](AuroraMySQL.mysql80-upgrade-procedure.md#AuroraMySQL.mysql80-planning) and [Upgrading to Aurora MySQL version 3](AuroraMySQL.mysql80-upgrade-procedure.md)\.
 

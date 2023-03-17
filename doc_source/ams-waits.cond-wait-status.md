@@ -140,6 +140,6 @@ MySQL [(none)]> select * from sys.schema_table_lock_waits;
 
 When you identify the session, your options include the following:
 + Contact the application owner or the user\.
-+ If the blocking session is idle, consider ending the blocking session\. This action might trigger a long rollback\. To learn how to end a session, see [Ending a session or query](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.MySQL.CommonDBATasks.html#Appendix.MySQL.CommonDBATasks.End) in the *Amazon RDS User Guide*\.
++ If the blocking session is idle, consider ending the blocking session\. This action might trigger a long rollback\. To learn how to end a session, see [Ending a session or query](mysql-stored-proc-ending.md)\.
 
 For more information about identifying blocking transactions, see [Using InnoDB Transaction and Locking Information](https://dev.mysql.com/doc/refman/5.7/en/innodb-information-schema-examples.html) in the MySQL documentation\.

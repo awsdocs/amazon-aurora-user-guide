@@ -36,11 +36,13 @@ Add secondary Regions to the global cluster\. Follow the steps in [Adding an AWS
  The automatic upgrades occur during the maintenance window for the database\. 
 
  Automatic minor version upgrade doesn't apply to the following kinds of Aurora MySQL clusters: 
-+  Multi\-master clusters\. 
-+  Clusters that are part of an Aurora global database\. 
-+  Clusters that have cross\-Region replicas\. 
++ Clusters that are part of an Aurora global database
++ Clusters that have cross\-Region replicas
 
  The outage duration varies depending on workload, cluster size, the amount of binary log data, and if Aurora can use the zero\-downtime patching \(ZDP\) feature\. Aurora restarts the database cluster, so you might experience a short period of unavailability before resuming use of your cluster\. In particular, the amount of binary log data affects recovery time\. The DB instance processes the binary log data during recovery\. Thus, a high volume of binary log data increases recovery time\. 
+
+**Note**  
+Aurora only performs the automatic upgrade if all DB instances in your cluster have this setting turned on\. Auto minor version upgrades are performed to the default minor version\.
 
  **To enable automatic minor version upgrades for an Aurora MySQL DB cluster** 
 
@@ -65,7 +67,7 @@ Add secondary Regions to the global cluster\. Follow the steps in [Adding an AWS
 +  **By using the AWS CLI** – Call the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command\. Specify the name of your DB instance for the `--db-instance-identifier` option and `true` for the `--auto-minor-version-upgrade` option\. Optionally, specify the `--apply-immediately` option to immediately enable this setting for your DB instance\. Run a separate `modify-db-instance` command for each DB instance in the cluster\. 
 +  **By using the RDS API** – Call the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation and specify the name of your DB cluster for the `DBInstanceIdentifier` parameter and `true` for the `AutoMinorVersionUpgrade` parameter\. Optionally, set the `ApplyImmediately` parameter to `true` to immediately enable this setting for your DB instance\. Call a separate `ModifyDBInstance` operation for each DB instance in the cluster\. 
 
- You can use a CLI command such as the following to check the status of the **Enable auto minor version upgrade** for all of the DB instances in your Aurora MySQL clusters\. 
+ You can use a CLI command such as the following to check the status of the **Enable auto minor version upgrade** setting for all of the DB instances in your Aurora MySQL clusters\. 
 
 ```
 aws rds describe-db-instances \
@@ -93,6 +95,8 @@ That command produces output similar to the following:
   },
 ... output omitted ...
 ```
+
+In this example, **Enable auto minor version upgrade** is turned off for the DB cluster `cluster-57-2020-06-03-6411`, because it's turned off for one of the DB instances in the cluster\.
 
 ## Using zero\-downtime patching<a name="AuroraMySQL.Updates.ZDP"></a><a name="zdp"></a>
 

@@ -3,6 +3,7 @@
 The following are some common wait events for Aurora MySQL\.
 
 **Note**  
+For information on tuning Aurora MySQL performance using wait events, see [Tuning Aurora MySQL with wait events](AuroraMySQL.Managing.Tuning.wait-events.md)\.  
 For information about the naming conventions used in MySQL wait events, see [ Performance Schema instrument naming conventions](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-instrument-naming.html) in the MySQL documentation\.
 
 **cpu**  

@@ -14,12 +14,15 @@ This topic includes information on best practices and options for using or migra
   + [Using Amazon Aurora for Disaster Recovery with your MySQL databases](#AuroraMySQL.BestPractices.DisasterRecovery)
   + [Migrating from MySQL to Amazon Aurora MySQL with reduced downtime](#AuroraMySQL.BestPractices.Migrating)
   + [Avoiding slow performance, automatic restart, and failover for Aurora MySQL DB instances](#AuroraMySQL.BestPractices.Avoiding)
-+ [Recommendations for MySQL features](#AuroraMySQL.BestPractices.FeatureRecommendations)
++ [Recommendations for Aurora MySQL](#AuroraMySQL.BestPractices.FeatureRecommendations)
   + [Using multithreaded replication in Aurora MySQL version 3](#AuroraMySQL.BestPractices.MTReplica)
   + [Invoking AWS Lambda functions using native MySQL functions](#AuroraMySQL.BestPractices.Lambda)
   + [Avoiding XA transactions with Amazon Aurora MySQL](#AuroraMySQL.BestPractices.XA)
   + [Keeping foreign keys turned on during DML statements](#Aurora.BestPractices.ForeignKeys)
   + [Configuring how frequently the log buffer is flushed](#AuroraMySQL.BestPractices.Flush)
+  + [Minimizing and troubleshooting Aurora MySQL deadlocks](#AuroraMySQL.BestPractices.deadlocks)
+    + [Minimizing InnoDB deadlocks](#AuroraMySQL.BestPractices.deadlocks-minimize)
+    + [Monitoring InnoDB deadlocks](#AuroraMySQL.BestPractices.deadlocks-monitor)
 
 ## Determining which DB instance you are connected to<a name="AuroraMySQL.BestPractices.DeterminePrimaryInstanceConnection"></a>
 
@@ -185,7 +188,7 @@ If you're running a heavy workload or workloads that spike beyond the allocated 
 
 If your workload exhausts the resources you're using, your DB instance might slow down, restart, or even fail over to another DB instance\. To avoid this, monitor your resource utilization, examine the workload running on your DB instance, and make optimizations where necessary\. If optimizations don't improve the instance metrics and mitigate the resource exhaustion, consider scaling up your DB instance before you reach its limits\. For more information on available DB instance classes and their specifications, see [Aurora DB instance classes](Concepts.DBInstanceClass.md)\.
 
-## Recommendations for MySQL features<a name="AuroraMySQL.BestPractices.FeatureRecommendations"></a>
+## Recommendations for Aurora MySQL<a name="AuroraMySQL.BestPractices.FeatureRecommendations"></a>
 
 The following features are available in Aurora MySQL for MySQL compatibility\. However, they have performance, scalability, stability, or compatibility issues in the Aurora environment\. Thus, we recommend that you follow certain guidelines in your use of these features\. For example, we recommend that you don't use certain features for production Aurora deployments\.
 
@@ -195,6 +198,7 @@ The following features are available in Aurora MySQL for MySQL compatibility\. H
 + [Avoiding XA transactions with Amazon Aurora MySQL](#AuroraMySQL.BestPractices.XA)
 + [Keeping foreign keys turned on during DML statements](#Aurora.BestPractices.ForeignKeys)
 + [Configuring how frequently the log buffer is flushed](#AuroraMySQL.BestPractices.Flush)
++ [Minimizing and troubleshooting Aurora MySQL deadlocks](#AuroraMySQL.BestPractices.deadlocks)
 
 ### Using multithreaded replication in Aurora MySQL version 3<a name="AuroraMySQL.BestPractices.MTReplica"></a>
 
@@ -260,3 +264,68 @@ While data loss can occur in both MySQL Community Edition and Aurora MySQL, beha
 
 **Note**  
 You can't configure the `innodb_flush_log_at_trx_commit` parameter in Aurora MySQL version 3\. Aurora MySQL version 3 always uses the default setting of 1, which is ACID compliant\.
+
+### Minimizing and troubleshooting Aurora MySQL deadlocks<a name="AuroraMySQL.BestPractices.deadlocks"></a>
+
+Users running workloads that regularly experience constraint violations on unique secondary indexes or foreign keys, when modifying records on the same data page concurrently, might experience increased deadlocks and lock wait timeouts\. These deadlocks and timeouts are because of a MySQL Community Edition [bug fix](https://bugs.mysql.com/bug.php?id=98324)\.
+
+This fix is included in MySQL Community Edition versions 5\.7\.26 and higher, and was backported into Aurora MySQL versions 2\.10\.3 and higher\. The fix is necessary for enforcing *serializability*, by implementing additional locking for these types of data manipulation language \(DML\) operations, on changes made to records in an InnoDB table\. This issue was uncovered as part of an investigation into deadlock issues introduced by a previous MySQL Community Edition [bug fix](https://dev.mysql.com/doc/relnotes/mysql/5.7/en/news-5-7-26.html)\.
+
+The fix changed the internal handling for the *partial rollback* of a tuple \(row\) update in the InnoDB storage engine\. Operations that generate constraint violations on foreign keys or unique secondary indexes cause partial rollback\. This includes, but isn't limited to, concurrent `INSERT...ON DUPLICATE KEY UPDATE`, `REPLACE INTO,` and `INSERT IGNORE` statements \(*upserts*\)\.
+
+In this context, partial rollback doesn't refer to the rollback of application\-level transactions, but rather an internal InnoDB rollback of changes to a clustered index, when a constraint violation is encountered\. For example, a duplicate key value is found during an upsert operation\.
+
+In a normal insert operation, InnoDB atomically creates [clustered](https://dev.mysql.com/doc/refman/5.7/en/innodb-index-types.html) and secondary index entries for each index\. If InnoDB detects a duplicate value on a unique secondary index during an upsert operation, the inserted entry in the clustered index has to be reverted \(partial rollback\), and the update then has to be applied to the existing duplicate row\. During this internal partial rollback step, InnoDB must lock each record seen as part of the operation\. The fix ensures transaction serializability by introducing additional locking after the partial rollback\.
+
+#### Minimizing InnoDB deadlocks<a name="AuroraMySQL.BestPractices.deadlocks-minimize"></a>
+
+You can take the following approaches to reduce the frequency of deadlocks in your database instance\. More examples can be found in the [MySQL documentation](https://bugs.mysql.com/bug.php?id=98324)\.
+
+1. To reduce the chances of deadlocks, commit transactions immediately after making a related set of changes\. You can do this by breaking up large transactions \(multiple row updates between commits\) into smaller ones\. If you're batch inserting rows, then try to reduce batch insert sizes, especially when using the upsert operations mentioned previously\.
+
+   To reduce the number of possible partial rollbacks, you can try some of the following approaches:
+
+   1. Replace batch insert operations with inserting one row at a time\. This can reduce the amount of time where locks are held by transactions that might have conflicts\.
+
+   1. Instead of using `REPLACE INTO`, rewrite the SQL statement as a multistatement transaction such as the following:
+
+      ```
+      BEGIN;
+      DELETE conflicting rows;
+      INSERT new rows;
+      COMMIT;
+      ```
+
+   1. Instead of using `INSERT...ON DUPLICATE KEY UPDATE`, rewrite the SQL statement as a multistatement transaction such as the following:
+
+      ```
+      BEGIN;
+      SELECT rows that conflict on secondary indexes;
+      UPDATE conflicting rows;
+      INSERT new rows;
+      COMMIT;
+      ```
+
+1. Avoid long\-running transactions, active or idle, that might hold onto locks\. This includes interactive MySQL client sessions that might be open for an extended period with an uncommitted transaction\. When optimizing transaction sizes or batch sizes, the impact can vary depending on a number of factors such as concurrency, number of duplicates, and table structure\. Any changes should be implemented and tested based on your workload\.
+
+1. In some situations, deadlocks can occur when two transactions attempt to access the same datasets, either in one or multiple tables, in different orders\. To prevent this, you can modify the transactions to access the data in the same order, thereby serializing the access\. For example, create a queue of transactions to be completed\. This approach can help to avoid deadlocks when multiple transactions occur concurrently\.
+
+1. Adding carefully chosen indexes to your tables can improve selectivity and reduce the need to access rows, which leads to less locking\.
+
+1. If you encounter [gap locking](https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-gap-locks), you can modify the transaction isolation level to `READ COMMITTED` for the session or transaction to prevent it\. For more information on InnoDB isolation levels and their behaviors, see [Transaction isolation levels](https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html) in the MySQL documentation\.
+
+**Note**  
+While you can take precautions to reduce the possibility of deadlocks occurring, deadlocks are an expected database behavior and can still occur\. Applications should have the necessary logic to handle deadlocks when they are encountered\. For example, implement retry and backing\-off logic in the application\. It’s best to address the root cause of the issue but if a deadlock does occur, the application has the option to wait and retry\.
+
+#### Monitoring InnoDB deadlocks<a name="AuroraMySQL.BestPractices.deadlocks-monitor"></a>
+
+[Deadlocks](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_deadlock) can occur in MySQL when application transactions try to take table\-level and row\-level locks in a way that results in circular waiting\. An occasional InnoDB deadlock isn't necessarily an issue, because the InnoDB storage engine detects the condition immediately and rolls back one of the transactions automatically\. If you encounter deadlocks frequently, we recommend reviewing and modifying your application to alleviate performance issues and avoid deadlocks\. When [deadlock detection](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_deadlock_detection) is turned on \(the default\), InnoDB automatically detects transaction deadlocks and rolls back a transaction or transactions to break the deadlock\. InnoDB tries to pick small transactions to roll back, where the size of a transaction is determined by the number of rows inserted, updated, or deleted\.
++ `SHOW ENGINE` statement – The `SHOW ENGINE INNODB STATUS \G` statement contains [details](https://dev.mysql.com/doc/refman/5.7/en/show-engine.html) of the most recent deadlock encountered on the database since the last restart\.
++ MySQL error log – If you encounter frequent deadlocks where the output of the `SHOW ENGINE` statement is inadequate, you can turn on the [innodb\_print\_all\_deadlocks](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_print_all_deadlocks) DB cluster parameter\.
+
+  When this parameter is turned on, information about all deadlocks in InnoDB user transactions is recorded in the Aurora MySQL [error log](https://dev.mysql.com/doc/refman/8.0/en/error-log.html)\.
++ Amazon CloudWatch metrics – We also recommend that you proactively monitor deadlocks using the CloudWatch metric `Deadlocks`\. For more information, see [Instance\-level metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md#Aurora.AuroraMySQL.Monitoring.Metrics.instances)\.
++ Amazon CloudWatch Logs – With CloudWatch Logs, you can view metrics, analyze log data, and create real\-time alarms\. For more information, see [Monitor errors in Amazon Aurora MySQL and Amazon RDS for MySQL using Amazon CloudWatch and send notifications using Amazon SNS](https://aws.amazon.com/blogs/database/monitor-errors-in-amazon-aurora-mysql-and-amazon-rds-for-mysql-using-amazon-cloudwatch-and-send-notifications-using-amazon-sns/)\.
+
+  Using CloudWatch Logs with `innodb_print_all_deadlocks` turned on, you can configure alarms to notify you when the number of deadlocks exceeds a given threshold\. To define a threshold, we recommend that you observe your trends and use a value based on your normal workload\.
++ Performance Insights – When you use Performance Insights, you can monitor the `innodb_deadlocks` and `innodb_lock_wait_timeout` metrics\. For more information on these metrics, see [Non\-native counters for Aurora MySQL](USER_PerfInsights_Counters.md#USER_PerfInsights_Counters.Aurora_MySQL.NonNative)\.

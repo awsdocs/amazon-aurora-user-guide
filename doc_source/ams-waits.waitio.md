@@ -11,6 +11,7 @@ The `io/table/sql/handler` event occurs when work has been delegated to a storag
 ## Supported engine versions<a name="ams-waits.waitio.context.supported"></a>
 
 This wait event information is supported for the following engine versions:
++ Aurora MySQL version 3: 3\.01\.0 and 3\.01\.1
 + Aurora MySQL version 2, up to 2\.09\.2
 
 ## Context<a name="ams-waits.waitio.context"></a>
@@ -21,15 +22,21 @@ A *handler* is a routine specialized in a certain type of data or focused on cer
 
 Views such as `performance_schema.events_waits_current` often show `io/table/sql/handler` when the actual wait is a nested wait event such as a lock\. When the actual wait isn't `io/table/sql/handler`, Performance Insights reports the nested wait event\. When Performance Insights reports `io/table/sql/handler`, it represents the actual I/O wait and not a hidden nested wait event\. For more information, see [Performance Schema Atom and Molecule Events](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-atom-molecule-events.html) in the *MySQL Reference Manual*\.
 
+**Note**  
+However, in Aurora MySQL versions 3\.01\.0 and 3\.01\.1, [synch/mutex/innodb/aurora\_lock\_thread\_slot\_futex](ams-waits.waitsynch.md) is reported as `io/table/sql/handler`\.
+
 The `io/table/sql/handler` event often appears in top wait events with I/O waits such as `io/aurora_redo_log_flush` and `io/file/innodb/innodb_data_file`\.
 
 ## Likely causes of increased waits<a name="ams-waits.waitio.causes"></a>
 
 In Performance Insights, sudden spikes in the `io/table/sql/handler` event indicate an increase in workload activity\. Increased activity means increased I/O\. 
 
-Performance Insights filters the nesting event IDs and doesn't report a `io/table/sql/handler` wait when the underlying nested event is a lock wait\. For example, if the root cause event is `synch/mutex/innodb/aurora_lock_thread_slot_futex`, Performance Insights displays this wait in top wait events and not `io/table/sql/handler`\.
+Performance Insights filters the nesting event IDs and doesn't report a `io/table/sql/handler` wait when the underlying nested event is a lock wait\. For example, if the root cause event is [synch/mutex/innodb/aurora\_lock\_thread\_slot\_futex](ams-waits.waitsynch.md), Performance Insights displays this wait in top wait events and not `io/table/sql/handler`\.
 
 In views such as `performance_schema.events_waits_current`, waits for `io/table/sql/handler` often appear when the actual wait is a nested wait event such as a lock\. When the actual wait differs from `io/table/sql/handler`, Performance Insights looks up the nested wait and reports the actual wait instead of `io/table/sql/handler`\. When Performance Insights reports `io/table/sql/handler`, the real wait is `io/table/sql/handler` and not a hidden nested wait event\. For more information, see [Performance Schema Atom and Molecule Events](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-atom-molecule-events.html) in the *MySQL 5\.7 Reference Manual*\.
+
+**Note**  
+However, in Aurora MySQL versions 3\.01\.0 and 3\.01\.1, [synch/mutex/innodb/aurora\_lock\_thread\_slot\_futex](ams-waits.waitsynch.md) is reported as `io/table/sql/handler`\.
 
 ## Actions<a name="ams-waits.waitio.actions"></a>
 
@@ -74,6 +81,7 @@ Check for Performance Insights counter metrics such as `Innodb_rows_changed`\. I
 
    ```
    mysql> select * from sys.schema_table_statistics limit 1\G
+   
    *************************** 1. row ***************************
         table_schema: read_only_db
           table_name: sbtest41

@@ -1,12 +1,12 @@
 # Using Kerberos authentication with Aurora PostgreSQL<a name="postgresql-kerberos"></a>
 
-You can use Kerberos to authenticate users when they connect to your DB cluster running PostgreSQL\. To do so, you configure your DB instance to use AWS Directory Service for Microsoft Active Directory for Kerberos authentication\. AWS Directory Service for Microsoft Active Directory is also called AWS Managed Microsoft AD\. It's a feature available with AWS Directory Service\. To learn more, see [What is AWS Directory Service?](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html) in the *AWS Directory Service Administration Guide*\.
+You can use Kerberos to authenticate users when they connect to your DB cluster running PostgreSQL\. To do so, configure your DB cluster to use AWS Directory Service for Microsoft Active Directory for Kerberos authentication\. AWS Directory Service for Microsoft Active Directory is also called AWS Managed Microsoft AD\. It's a feature available with AWS Directory Service\. To learn more, see [What is AWS Directory Service?](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html) in the *AWS Directory Service Administration Guide*\.
 
-You create an AWS Managed Microsoft AD directory to store user credentials\. You then provide to your PostgreSQL DB cluster the Active Directory's domain and other information\. When users authenticate with the PostgreSQL DB cluster, authentication requests are forwarded to the AWS Managed Microsoft AD directory\. 
+To start, create an AWS Managed Microsoft AD directory to store user credentials\. Then, provide to your PostgreSQL DB cluster the Active Directory's domain and other information\. When users authenticate with the PostgreSQL DB cluster, authentication requests are forwarded to the AWS Managed Microsoft AD directory\. 
 
-Keeping all of your credentials in the same directory can save you time and effort\. You have a centralized place for storing and managing credentials for multiple DB clusters\. Using a directory can also improve your overall security profile\.
+Keeping all of your credentials in the same directory can save you time and effort\. You have a centralized location for storing and managing credentials for multiple DB clusters\. Using a directory can also improve your overall security profile\.
 
-You can also access credentials from your own on\-premises Microsoft Active Directory\. To do so you create a trusting domain relationship so that the AWS Managed Microsoft AD directory trusts your on\-premises Microsoft Active Directory\. In this way, your users can access your PostgreSQL clusters with the same Windows single sign\-on \(SSO\) experience as when they access workloads in your on\-premises network\.
+In addition, you can access credentials from your own on\-premises Microsoft Active Directory\. To do so, create a trusting domain relationship so that the AWS Managed Microsoft AD directory trusts your on\-premises Microsoft Active Directory\. In this way, your users can access your PostgreSQL clusters with the same Windows single sign\-on \(SSO\) experience as when they access workloads in your on\-premises network\.
 
 A database can use Kerberos, AWS Identity and Access Management \(IAM\), or both Kerberos and IAM authentication\. However, because Kerberos and IAM authentication provide different authentication methods, a specific database user can log in to a database using only one or the other authentication method but not both\. For more information about IAM authentication, see [IAM database authentication](UsingWithRDS.IAMDBAuth.md)\. 
 
@@ -19,7 +19,7 @@ A database can use Kerberos, AWS Identity and Access Management \(IAM\), or both
 
 ## Region and version availability<a name="postgresql-kerberos.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Aurora PostgreSQL with Kerberos authentication, see [Kerberos authentication with Aurora](Concepts.Aurora_Fea_Regions_DB-eng.Feature.KerberosAuthentication.md)\.
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Aurora PostgreSQL with Kerberos authentication, see [Kerberos authentication with Aurora PostgreSQL](Concepts.Aurora_Fea_Regions_DB-eng.Feature.KerberosAuthentication.md#Concepts.Aurora_Fea_Regions_DB-eng.Feature.KerberosAuthentication.apg)\.
 
 ## Overview of Kerberos authentication for PostgreSQL DB clusters<a name="postgresql-kerberos-overview"></a>
 

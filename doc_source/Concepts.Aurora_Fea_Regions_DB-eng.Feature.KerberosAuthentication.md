@@ -8,7 +8,38 @@ By using Kerberos authentication with Aurora, you can support external authentic
 
 ## Kerberos authentication with Aurora MySQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.KerberosAuthentication.amy"></a>
 
-Amazon Aurora doesn't currently support Kerberos authentication for Aurora MySQL\.
+The following table lists the supported engines and Region availability for Kerberos Authentication with Aurora MySQL\.
+
+
+| Region | Aurora MySQL version 3 | 
+| --- | --- | 
+| US East \(Ohio\) | Version 3\.03\.0 and higher | 
+| US East \(N\. Virginia\) | Version 3\.03\.0 and higher | 
+| US West \(N\. California\) | Version 3\.03\.0 and higher | 
+| US West \(Oregon\) | Version 3\.03\.0 and higher | 
+| Africa \(Cape Town\) | – | 
+| Asia Pacific \(Hong Kong\) | – | 
+| Asia Pacific \(Jakarta\) | – | 
+| Asia Pacific \(Mumbai\) | Version 3\.03\.0 and higher | 
+| Asia Pacific \(Osaka\) | – | 
+| Asia Pacific \(Seoul\) | Version 3\.03\.0 and higher | 
+| Asia Pacific \(Singapore\) | Version 3\.03\.0 and higher | 
+| Asia Pacific \(Sydney\) | Version 3\.03\.0 and higher | 
+| Asia Pacific \(Tokyo\) | Version 3\.03\.0 and higher | 
+| Canada \(Central\) | Version 3\.03\.0 and higher | 
+| China \(Beijing\) | Version 3\.03\.0 and higher | 
+| China \(Ningxia\) | Version 3\.03\.0 and higher | 
+| Europe \(Frankfurt\) | Version 3\.03\.0 and higher | 
+| Europe \(Ireland\) | Version 3\.03\.0 and higher | 
+| Europe \(London\) | Version 3\.03\.0 and higher | 
+| Europe \(Milan\) | – | 
+| Europe \(Paris\) | Version 3\.03\.0 and higher | 
+| Europe \(Stockholm\) | Version 3\.03\.0 and higher | 
+| Middle East \(Bahrain\) | – | 
+| Middle East \(UAE\) | – | 
+| South America \(São Paulo\) | Version 3\.03\.0 and higher | 
+| AWS GovCloud \(US\-East\) | – | 
+| AWS GovCloud \(US\-West\) | – | 
 
 ## Kerberos authentication with Aurora PostgreSQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.KerberosAuthentication.apg"></a>
 

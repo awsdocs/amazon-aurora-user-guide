@@ -17,10 +17,10 @@ The following table shows the available Regions and engine versions for Aurora g
 | US East \(N\. Virginia\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 
 | US West \(N\. California\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 
 | US West \(Oregon\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 
-| Africa \(Cape Town\) | – | – | 
-| Asia Pacific \(Hong Kong\) | – | – | 
-| Asia Pacific \(Hyderabad\) | – | – | 
-| Asia Pacific \(Jakarta\) | – | – | 
+| Africa \(Cape Town\) | Version 3\.01\.0 and higher | Version 2\.07\.1 and higher | 
+| Asia Pacific \(Hong Kong\) | Version 3\.01\.0 and higher | Version 2\.07\.1 and higher | 
+| Asia Pacific \(Hyderabad\) | Version 3\.02\.0 and higher | – | 
+| Asia Pacific \(Jakarta\) | Version 3\.01\.0 and higher | Version 2\.07\.6 and higher | 
 | Asia Pacific \(Melbourne\) | – | – | 
 | Asia Pacific \(Mumbai\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 
 | Asia Pacific \(Osaka\) | Version 3\.01\.0 and higher | Version 2\.07\.3 and higher | 
@@ -34,13 +34,13 @@ The following table shows the available Regions and engine versions for Aurora g
 | Europe \(Frankfurt\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 
 | Europe \(Ireland\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 
 | Europe \(London\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 
-| Europe \(Milan\) | – | – | 
+| Europe \(Milan\) | Version 3\.01\.0 and higher | Version 2\.07\.1 and higher | 
 | Europe \(Paris\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 
-| Europe \(Spain\) | – | – | 
+| Europe \(Spain\) | Version 3\.02\.0 and higher | – | 
 | Europe \(Stockholm\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 
-| Europe \(Zurich\) | – | – | 
-| Middle East \(Bahrain\) | – | – | 
-| Middle East \(UAE\) | – | – | 
+| Europe \(Zurich\) | Version 3\.02\.0 and higher | – | 
+| Middle East \(Bahrain\) | Version 3\.01\.0 and higher | Version 2\.07\.1 and higher | 
+| Middle East \(UAE\) | Version 3\.02\.0 and higher | – | 
 | South America \(São Paulo\) | Version 3\.01\.0 and higher | Version 2\.07\.1 and higher | 
 | AWS GovCloud \(US\-East\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 
 | AWS GovCloud \(US\-West\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 
@@ -56,10 +56,10 @@ The following table shows the available Regions and engine versions for Aurora g
 | US East \(N\. Virginia\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | US West \(N\. California\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | US West \(Oregon\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
-| Africa \(Cape Town\) | – | – | – | – | 
-| Asia Pacific \(Hong Kong\) | – | – | – | – | 
-| Asia Pacific \(Hyderabad\) | – | – | – | – | 
-| Asia Pacific \(Jakarta\) | – | – | – | – | 
+| Africa \(Cape Town\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
+| Asia Pacific \(Hong Kong\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
+| Asia Pacific \(Hyderabad\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
+| Asia Pacific \(Jakarta\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | Asia Pacific \(Melbourne\) | – | – | – | – | 
 | Asia Pacific \(Mumbai\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | Asia Pacific \(Osaka\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
@@ -73,13 +73,13 @@ The following table shows the available Regions and engine versions for Aurora g
 | Europe \(Frankfurt\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | Europe \(Ireland\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | Europe \(London\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
-| Europe \(Milan\) | – | – | – | – | 
+| Europe \(Milan\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | Europe \(Paris\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
-| Europe \(Spain\) | – | – | – | – | 
+| Europe \(Spain\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | Europe \(Stockholm\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
-| Europe \(Zurich\) | – | – | – | – | 
-| Middle East \(Bahrain\) | – | – | – | – | 
-| Middle East \(UAE\) | – | – | – | – | 
+| Europe \(Zurich\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
+| Middle East \(Bahrain\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
+| Middle East \(UAE\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | South America \(São Paulo\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | AWS GovCloud \(US\-East\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | AWS GovCloud \(US\-West\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 

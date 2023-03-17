@@ -202,7 +202,7 @@ Perform these tasks on the Aurora PostgreSQL DB cluster using an account that ha
 1. Create a foreign server in the Aurora PostgreSQL DB cluster:
 
    ```
-   test=> CREATE SERVER sqlserverdb FOREIGN DATA WRAPPER tds_fdw OPTIONS (servername 'mssql2019.aws-region.rds.amazonaws.com, port '1433', database 'tds_fdw_testing');
+   test=> CREATE SERVER sqlserverdb FOREIGN DATA WRAPPER tds_fdw OPTIONS (servername 'mssql2019.aws-region.rds.amazonaws.com', port '1433', database 'tds_fdw_testing');
    CREATE SERVER
    ```
 

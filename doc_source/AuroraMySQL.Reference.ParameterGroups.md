@@ -86,6 +86,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `innodb_online_alter_log_max_size`   |   Yes   |    | 
 |   `innodb_optimize_fulltext_only`   |   Yes   |    | 
 |   `innodb_page_size`   |   No   |    | 
+|   `innodb_print_all_deadlocks`   |   Yes   |  When turned on, records information about all InnoDB deadlocks in the Aurora MySQL error log\. For more information, see [](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.deadlocks)\.  | 
 |   `innodb_purge_batch_size`   |   Yes   |    | 
 |   `innodb_purge_threads`   |   Yes   |    | 
 |   `innodb_rollback_on_timeout`   |   Yes   |    | 
@@ -223,7 +224,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `innodb_old_blocks_pct`   |   Yes   |    | 
 |   `innodb_old_blocks_time`   |   Yes   |    | 
 |   `innodb_open_files`   |   Yes   |    | 
-|   `innodb_print_all_deadlocks`   |   Yes   |    | 
+|   `innodb_print_all_deadlocks`   |   Yes   |  When turned on, records information about all InnoDB deadlocks in the Aurora MySQL error log\. For more information, see [](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.deadlocks)\.  | 
 |   `innodb_random_read_ahead`   |   Yes   |    | 
 |   `innodb_read_ahead_threshold`   |   Yes   |    | 
 |   `innodb_read_io_threads`   |   No   |    | 
