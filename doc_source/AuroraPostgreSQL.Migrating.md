@@ -324,7 +324,7 @@ For more information, see [https://docs.aws.amazon.com/AmazonRDS/latest/APIRefer
 
 The migration to Aurora PostgreSQL isn't complete until you promote the Replica cluster, so don't delete the RDS for PostgreSQL source DB instance just yet\. 
 
-Before promoting the Replica cluster, make sure that the RDS for PostgreSQL DB instance doesn't have any in\-process transactions or other activity writing to the database\. When the replica lag on the Aurora read replica reaches zero \(0\), you can promote the Replica cluster\. For more information about monitoring replica lag, see [Monitoring Aurora PostgreSQL replication](AuroraPostgreSQL.Replication.md#AuroraPostgreSQL.Replication.Monitoring) and [Instance\-level metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md#Aurora.AuroraMySQL.Monitoring.Metrics.instances)\.
+Before promoting the Replica cluster, make sure that the RDS for PostgreSQL DB instance doesn't have any in\-process transactions or other activity writing to the database\. When the replica lag on the Aurora read replica reaches zero \(0\), you can promote the Replica cluster\. For more information about monitoring replica lag, see [Monitoring Aurora PostgreSQL replication](AuroraPostgreSQL.Replication.md#AuroraPostgreSQL.Replication.Monitoring) and [Instance\-level metrics for Amazon Aurora](Aurora.AuroraMonitoring.Metrics.md#Aurora.AuroraMySQL.Monitoring.Metrics.instances)\.
 
 #### Console<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Promote.Console"></a>
 

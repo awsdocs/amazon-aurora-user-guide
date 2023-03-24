@@ -78,7 +78,7 @@ Before you switch over a blue/green deployment, we recommend that you check the 
 + `DatabaseConnections` – Use this metric to estimate the level of activity on the blue/green deployment, and make sure that the value is at an acceptable level for your deployment before you switch over\. If Performance Insights is turned on, `DBLoad` is a more accurate metric\.
 + `ActiveTransactions` – If `innodb_monitor_enable` is set to `all` in the DB parameter group for any of your DB instances, use this metric to see if there's a high number of active transactions that might block switchover\.
 
-For more information about these metrics, see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md)\.
+For more information about these metrics, see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMonitoring.Metrics.md)\.
 
 ## Switching over a blue/green deployment<a name="blue-green-deployments-switching-over"></a>
 

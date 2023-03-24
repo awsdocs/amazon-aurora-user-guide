@@ -68,4 +68,4 @@ The following limitations apply to Kerberos authentication for Aurora MySQL:
 + Replicating to DB instances that don't support the `authentication_kerberos` plugin can lead to replication failure\.
 + For Aurora global databases to use Kerberos authentication, you must configure it for every DB cluster in the global database\.
 + The domain name must be less than 62 characters long\.
-+ Don't modify the DB cluster port after turning on Kerberos authentication\. If you modify the port, then Kerberos authentication will no longer work\. turned or some other time? 
++ Don't modify the DB cluster port after turning on Kerberos authentication\. If you modify the port, then Kerberos authentication will no longer work\. 

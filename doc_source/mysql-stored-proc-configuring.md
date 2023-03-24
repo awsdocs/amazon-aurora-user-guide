@@ -44,7 +44,7 @@ To specify the number of hours to retain binary logs on a DB cluster, use the `m
 `call mysql.rds_set_configuration('binlog retention hours', 24);`
 
 **Note**  
-You can't use the value `0` for `binlog retention hours`\. Use `NULL` instead\.
+You can't use the value `0` for `binlog retention hours`\.
 
 For Aurora MySQL version 2 and 3 DB clusters, the maximum `binlog retention hours` value is 168 \(7 days\)\.
 

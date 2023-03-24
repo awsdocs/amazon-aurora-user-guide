@@ -52,7 +52,7 @@ An Aurora cluster volume can grow to a maximum size of 128 tebibytes \(TiB\) for
 + All available Aurora MySQL version 3 versions; Aurora MySQL version 2, versions 2\.09 and higher
 + All available Aurora PostgreSQL versions
 For lower engine versions, the maximum size of an Aurora cluster volume is 64 TiB\. For more information, see [How Aurora storage automatically resizes](Aurora.Overview.StorageReliability.md#aurora-storage-growth)\.  
-To monitor the remaining storage space, you can use the `AuroraVolumeBytesLeftTotal` metric\. For more information, see [Cluster\-level metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md#Aurora.AuroraMySQL.Monitoring.Metrics.clusters)\.
+To monitor the remaining storage space, you can use the `AuroraVolumeBytesLeftTotal` metric\. For more information, see [Cluster\-level metrics for Amazon Aurora](Aurora.AuroraMonitoring.Metrics.md#Aurora.AuroraMySQL.Monitoring.Metrics.clusters)\.
 
 **SQL table size limits**  
 For an Aurora MySQL DB cluster, the maximum table size is 64 tebibytes \(TiB\)\. For an Aurora PostgreSQL DB cluster, the maximum table size is 32 tebibytes \(TiB\)\. We recommend that you follow table design best practices, such as partitioning of large tables\.

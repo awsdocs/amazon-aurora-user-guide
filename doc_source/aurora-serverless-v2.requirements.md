@@ -32,7 +32,6 @@ aws rds describe-orderable-db-instance-options --engine aurora-postgresql --db-i
 
 The following features from Aurora provisioned DB instances currently aren't available for Amazon Aurora Serverless v2:
 + Database activity streams \(DAS\)\.
-+ Backtracking for Aurora MySQL\. This feature currently isn't available for Aurora MySQL version 3\. For details of Aurora MySQL version 3 feature support, see [Aurora MySQL version 3 compatible with MySQL 8\.0](AuroraMySQL.MySQL80.md)\.
 + Cluster cache management for Aurora PostgreSQL\. The `apg_ccm_enabled` configuration parameter doesn't apply to Aurora Serverless v2 DB instances\.
 
 Some Aurora features work with Aurora Serverless v2, but might cause issues if your capacity range is lower than needed for the memory requirements for those features with your specific workload\. In that case, your database might not perform as well as usual, or might encounter out\-of\-memory errors\. For recommendations about setting the appropriate capacity range, see [Choosing the Aurora Serverless v2 capacity range for an Aurora cluster](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2-examples-setting-capacity-range-for-cluster)\. For troubleshooting information if your database encounters out\-of\-memory errors due to a misconfigured capacity range, see [Avoiding out\-of\-memory errors](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.setting-capacity.incompatible_parameters)\.

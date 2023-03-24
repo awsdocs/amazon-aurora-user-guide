@@ -67,7 +67,7 @@ You can use the following automated tools to watch Amazon Aurora and report when
 
 Amazon Aurora integrates with Amazon CloudWatch for additional monitoring capabilities\.
 + **Amazon CloudWatch** – This service monitors your AWS resources and the applications you run on AWS in real time\. You can use the following Amazon CloudWatch features with Amazon Aurora:
-  + **Amazon CloudWatch metrics** – Amazon Aurora automatically sends metrics to CloudWatch every minute for each active database\. You don't get additional charges for Amazon RDS metrics in CloudWatch\. For more information, see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md) 
+  + **Amazon CloudWatch metrics** – Amazon Aurora automatically sends metrics to CloudWatch every minute for each active database\. You don't get additional charges for Amazon RDS metrics in CloudWatch\.  For more information, see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMonitoring.Metrics.md) 
   + **Amazon CloudWatch alarms** – You can watch a single Amazon Aurora metric over a specific time period\. You can then perform one or more actions based on the value of the metric relative to a threshold that you set\. 
 
 #### Amazon RDS Performance Insights and operating\-system monitoring<a name="MonitoringOverview.tools.automated.metrics.rds"></a>

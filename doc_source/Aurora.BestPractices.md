@@ -39,7 +39,7 @@ To optimize performance, allocate enough RAM so that your working set resides al
 
 If, after investigating your workload, you find that you need more memory, consider scaling up the DB instance class to a class with more RAM\. After doing so, you can investigate the metrics discussed preceding and continue to scale up as necessary\. If your Aurora cluster is larger than 40 TB, don't use db\.t2, db\.t3, or db\.t4g instance classes\.
 
-For more information, see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md)\.
+For more information, see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMonitoring.Metrics.md)\.
 
 ## Monitoring Amazon Aurora<a name="Aurora.BestPractices.Monitoring"></a>
 

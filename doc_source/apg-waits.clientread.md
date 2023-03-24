@@ -70,7 +70,7 @@ Use `NetworkReceiveThroughput` and `NetworkTransmitThroughput` Amazon CloudWatch
 
 If your network bandwidth isn't enough, increase it\. If the AWS client or your DB instance is reaching the network bandwidth limits, the only way to increase the bandwidth is to increase your DB instance size\.
 
-For more information about CloudWatch metrics, see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md)\.
+For more information about CloudWatch metrics,  see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMonitoring.Metrics.md)\.
 
 ### Monitor maximums for network performance<a name="apg-waits.clientread.actions.monitor-network-performance"></a>
 

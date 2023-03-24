@@ -41,6 +41,7 @@ No event category exists for Aurora Serverless in the DB cluster event type\. Th
 |  global failover  | RDS\-EVENT\-0186 |  The global database failover is canceled\.  | 
 |  global failover  | RDS\-EVENT\-0187 |  The global failover to the DB cluster failed\.  | 
 |  maintenance  | RDS\-EVENT\-0156 |  The DB cluster has a DB engine minor version upgrade available\.  | 
+|  maintenance  | RDS\-EVENT\-0173 |  Patching of the DB cluster has completed\.  | 
 |  notification  | RDS\-EVENT\-0076 |  Migration to an Aurora DB cluster failed\.  | 
 |  notification  | RDS\-EVENT\-0077 |  An attempt to convert a table from the source database to InnoDB failed during the migration to an Aurora DB cluster\.  | 
 |  notification  | RDS\-EVENT\-0085 |  An error occurred while attempting to patch the Aurora DB cluster\. Check your instance status, resolve the issue, and try again\. For more information see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.  | 
@@ -57,7 +58,6 @@ No event category exists for Aurora Serverless in the DB cluster event type\. Th
 |  notification  | RDS\-EVENT\-0152 |  The DB cluster stop failed\.  | 
 |  notification  | RDS\-EVENT\-0153 |  The DB cluster is being started due to it exceeding the maximum allowed time being stopped\.  | 
 | notification | RDS\-EVENT\-0172 |  Renamed DB cluster from \[old DB cluster name\] to \[new DB cluster name\]\.  | 
-|  notification  | RDS\-EVENT\-0173 |  Patching of the DB cluster has completed\.  | 
 |  notification  | RDS\-EVENT\-0234 |  The DB cluster export task failed\.  | 
 |  notification  | RDS\-EVENT\-0235 |  The DB cluster export task was canceled\.  | 
 |  notification  | RDS\-EVENT\-0236 |  The DB cluster export task completed\.  | 

@@ -57,7 +57,7 @@ RDS associates the valid, existing EC2 security group with the EC2 instance\. Th
 
 Before setting up a connection between an EC2 instance and an Aurora DB cluster, make sure you meet the requirements described in [Overview of automatic connectivity with an EC2 instance](#ec2-rds-connect-overview)\.
 
-If you change these security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the Aurora DB cluster\.
+If you make changes to security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the Aurora DB cluster\.
 
 **Note**  
 You can only set up a connection between an EC2 instance and an Aurora DB cluster automatically by using the AWS Management Console\. You can't set up a connection automatically with the AWS CLI or RDS API\.

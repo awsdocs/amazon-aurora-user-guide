@@ -44,7 +44,7 @@ A log sequence number \(LSN\) is a unique sequential number that identifies a re
 + `pending_read_ios` – The outstanding page reads that are still pending on replica\. 
 + `read_ios` – The total number of page reads on replica\.
 + `iops` – Not used\.
-+ `cpu` – CPU usage by the replica process\. Note that this isn't CPU usage by the instance but rather the process\. For information about CPU usage by the instance, see [Instance\-level metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md#Aurora.AuroraMySQL.Monitoring.Metrics.instances)\.
++ `cpu` – CPU usage by the replica process\. Note that this isn't CPU usage by the instance but rather the process\. For information about CPU usage by the instance, see [Instance\-level metrics for Amazon Aurora](Aurora.AuroraMonitoring.Metrics.md#Aurora.AuroraMySQL.Monitoring.Metrics.instances)\.
 
 ## Usage notes<a name="aurora_replica_status-usage-notes"></a>
 

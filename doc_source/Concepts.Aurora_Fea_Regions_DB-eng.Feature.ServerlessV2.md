@@ -29,8 +29,8 @@ Following are the supported engines and Region availability for Aurora Serverles
 | Asia Pacific \(Sydney\) | Version 3\.02\.0 and higher | 
 | Asia Pacific \(Tokyo\) | Version 3\.02\.0 and higher | 
 | Canada \(Central\) | Version 3\.02\.0 and higher | 
-| China \(Beijing\) | – | 
-| China \(Ningxia\) | – | 
+| China \(Beijing\) | Version 3\.02\.2 and higher | 
+| China \(Ningxia\) | Version 3\.02\.2 and higher | 
 | Europe \(Frankfurt\) | Version 3\.02\.0 and higher | 
 | Europe \(Ireland\) | Version 3\.02\.0 and higher | 
 | Europe \(London\) | Version 3\.02\.0 and higher | 
@@ -68,8 +68,8 @@ Following are the supported engines and Region availability for Aurora Serverles
 | Asia Pacific \(Sydney\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Asia Pacific \(Tokyo\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Canada \(Central\) | Version 14\.3 and higher | Version 13\.6 and higher | 
-| China \(Beijing\) | – | – | 
-| China \(Ningxia\) | – | – | 
+| China \(Beijing\) | Version 14\.3 and higher | Version 13\.6 and higher | 
+| China \(Ningxia\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Europe \(Frankfurt\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Europe \(Ireland\) | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Europe \(London\) | Version 14\.3 and higher | Version 13\.6 and higher | 

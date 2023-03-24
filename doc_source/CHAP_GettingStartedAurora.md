@@ -8,6 +8,6 @@ The following procedures are tutorials that demonstrate the basics of getting st
 Before you can create or connect to a DB cluster, make sure to complete the tasks in [Setting up your environment for Amazon Aurora](CHAP_SettingUp_Aurora.md)\.
 
 **Topics**
-+ [Creating a DB cluster and connecting to a database on an Aurora MySQL DB cluster](CHAP_GettingStartedAurora.CreatingConnecting.Aurora.md)
++ [Creating and connecting to an Aurora MySQL DB cluster](CHAP_GettingStartedAurora.CreatingConnecting.Aurora.md)
 + [Creating a DB cluster and connecting to a database on an Aurora PostgreSQL DB cluster](CHAP_GettingStartedAurora.CreatingConnecting.AuroraPostgreSQL.md)
 + [Tutorial: Create a web server and an Amazon Aurora DB cluster](TUT_WebAppWithRDS.md)

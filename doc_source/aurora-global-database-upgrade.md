@@ -2,7 +2,7 @@
 
 Upgrading an Aurora global database follows the same procedures as upgrading Aurora DB clusters\. However, following are some important differences to take note of before you start the process\.
 
-We recommend that you upgrade the primary and secondary DB clusters to the same version\. You can only perform a managed cross\-Region database failover on an Aurora global database if the primary and secondary DB clusters have the same major and minor engine versions\. The patch levels can be different, depending on the minor engine version\. For more information, see [Version compatibility for failover](#aurora-global-database-upgrade.minor.incompatibility)\.
+We recommend that you upgrade the primary and secondary DB clusters to the same version\. You can only perform a managed cross\-Region database failover on an Aurora global database if the primary and secondary DB clusters have the same major, minor, and patch level engine versions\. However, the patch levels can be different, depending on the minor engine version\. For more information, see [Version compatibility for failover](#aurora-global-database-upgrade.minor.incompatibility)\.
 
 ## Major version upgrades<a name="aurora-global-database-upgrade.major"></a>
 

@@ -43,7 +43,7 @@ To determine the cause of the increased `IO:XactSync` events, check the followin
 + `WriteLatency` and `CommitLatency` – Changes in write latency or commit latency can show that the storage subsystem is being asked to do more work\.
 + `CPUUtilization` – If the instance's CPU utilization is above 90 percent, the Aurora storage daemon might not be getting sufficient time on the CPU\. In this case, I/O performance degrades\.
 
-For information about these metrics, see [Instance\-level metrics for Amazon Aurora](Aurora.AuroraMySQL.Monitoring.Metrics.md#Aurora.AuroraMySQL.Monitoring.Metrics.instances)\.
+For information about these metrics, see [Instance\-level metrics for Amazon Aurora](Aurora.AuroraMonitoring.Metrics.md#Aurora.AuroraMySQL.Monitoring.Metrics.instances)\.
 
 ### Scale up the CPU<a name="apg-waits.xactsync.actions.scalecpu"></a>
 

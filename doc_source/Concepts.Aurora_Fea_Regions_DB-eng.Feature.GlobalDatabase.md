@@ -21,7 +21,7 @@ The following table shows the available Regions and engine versions for Aurora g
 | Asia Pacific \(Hong Kong\) | Version 3\.01\.0 and higher | Version 2\.07\.1 and higher | 
 | Asia Pacific \(Hyderabad\) | Version 3\.02\.0 and higher | – | 
 | Asia Pacific \(Jakarta\) | Version 3\.01\.0 and higher | Version 2\.07\.6 and higher | 
-| Asia Pacific \(Melbourne\) | – | – | 
+| Asia Pacific \(Melbourne\) | Version 3\.03\.0 and higher | – | 
 | Asia Pacific \(Mumbai\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 
 | Asia Pacific \(Osaka\) | Version 3\.01\.0 and higher | Version 2\.07\.3 and higher | 
 | Asia Pacific \(Seoul\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 
@@ -60,7 +60,7 @@ The following table shows the available Regions and engine versions for Aurora g
 | Asia Pacific \(Hong Kong\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | Asia Pacific \(Hyderabad\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | Asia Pacific \(Jakarta\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
-| Asia Pacific \(Melbourne\) | – | – | – | – | 
+| Asia Pacific \(Melbourne\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | Asia Pacific \(Mumbai\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | Asia Pacific \(Osaka\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 
 | Asia Pacific \(Seoul\) | Version 14\.3 and higher | Version 13\.3 and higher | Version 12\.7 and higher | Version 11\.9 and version 11\.12 and higher | 

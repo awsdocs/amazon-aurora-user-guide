@@ -48,7 +48,7 @@ For information about creating DB clusters with **Standard create**, see [Creati
    The **Create database** page should look similar to the following image\.  
 ![\[Create database page\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/easy-create-aurora-postgresql.png)
 
-1. For **Master username**, enter a name for the user, or leave the default name \(**postgres**\)\. This user name and its password give you control over the Aurora PostgreSQL DB cluster\.
+1. For **Master username**, enter a name for the user, or leave the default name \(**postgres**\)\. This username and its password give you control over the Aurora PostgreSQL DB cluster\.
 
    To use an automatically generated password for the DB cluster, make sure that the **Auto generate a password** box is selected\.
 
@@ -71,9 +71,9 @@ For information about creating DB clusters with **Standard create**, see [Creati
 
    If you chose to use an automatically generated password, the **View credential details** button appears on the **Databases** page\.
 
-   To view the master user name and password for the DB cluster, choose **View credential details**\.
+   To view the master username and password for the DB cluster, choose **View credential details**\.
 
-   To connect to the DB cluster as the master user, use the user name and password that appear\.
+   To connect to the DB cluster as the master user, use the username and password that appear\.
 **Important**  
 You can't view the master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB cluster is available, you can modify the DB cluster to do so\. For more information about modifying a DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
@@ -88,7 +88,7 @@ You can automatically connect an existing EC2 instance to the Aurora PostgreSQL 
 
 Before setting up a connection between an EC2 instance and an Aurora DB cluster, make sure you meet the requirements described in [Overview of automatic connectivity with an EC2 instance](ec2-rds-connect.md#ec2-rds-connect-overview)\.
 
-If you change these security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the Aurora DB cluster\.
+If you make changes to security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the Aurora DB cluster\.
 
 **Note**  
 You can only set up a connection between an EC2 instance and an Aurora DB cluster automatically by using the AWS Management Console\. You can't set up a connection automatically with the AWS CLI or RDS API\.
