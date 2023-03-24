@@ -16,7 +16,7 @@ This wait event information is supported for all versions of Aurora PostgreSQL\.
 
 Most PostgreSQL commands implicitly use locks to control concurrent access to data in tables\. You can also use these locks explicitly in your application code with the `LOCK` command\. Many lock modes aren't compatible with each other, and they can block transactions when they're trying to access the same object\. When this happens, Aurora PostgreSQL generates a `Lock:Relation` event\. Some common examples are the following:
 + Exclusive locks such as `ACCESS EXCLUSIVE` can block all concurrent access\. Data definition language \(DDL\) operations such as `DROP TABLE`, `TRUNCATE`, `VACUUM FULL`, and `CLUSTER` acquire `ACCESS EXCLUSIVE` locks implicitly\. `ACCESS EXCLUSIVE` is also the default lock mode for `LOCK TABLE` statements that don't specify a mode explicitly\.
-+ Using `CREATE INDEX (without CONCURRENT)` on a table conflicts with data manipulation language \(DML\) statements `UPDATE`, `DELETE`, and `INSERT`, which acquire `ROW EXCLUSIVE` locks\.
++ Using `CREATE INDEX` (without `CONCURRENTLY`) on a table conflicts with data manipulation language \(DML\) statements `UPDATE`, `DELETE`, and `INSERT`, which acquire `ROW EXCLUSIVE` locks\.
 
 For more information about table\-level locks and conflicting lock modes, see [Explicit Locking](https://www.postgresql.org/docs/13/explicit-locking.html) in the PostgreSQL documentation\.
 
