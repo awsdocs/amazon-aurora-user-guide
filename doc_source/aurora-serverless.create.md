@@ -113,10 +113,6 @@ Use the following procedure\.
 For Linux, macOS, or Unix:
 
 ```
-aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 5.6.mysql_aurora.1.22.3 \
---engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true \
---master-username username --master-user-password password
-
 aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql --engine-version 5.7.mysql_aurora.2.08.3 \
 --engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true \
 --master-username username --master-user-password password
@@ -125,10 +121,6 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
 For Windows:
 
 ```
-aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora --engine-version 5.6.mysql_aurora.1.22.3 ^
---engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true ^
---master-username username --master-user-password password
-
 aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql --engine-version 5.7.mysql_aurora.2.08.3 ^
 --engine-mode serverless --scaling-configuration MinCapacity=4,MaxCapacity=32,SecondsUntilAutoPause=1000,AutoPause=true ^
 --master-username username --master-user-password password
@@ -136,7 +128,7 @@ aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora
 
 ### Example for Aurora PostgreSQL<a name="aurora-serverless.create.cli.PostgreSQL"></a>
 
- The following command creates a new PostgreSQL 10\.12–compatible Serverless DB cluster\. Valid capacity values for Aurora PostgreSQL are `2`, `4`, `8`, `16`, `32`, `64`, `192`, and `384`\. 
+ The following command creates a new PostgreSQL 11\.13–compatible Serverless DB cluster\. Valid capacity values for Aurora PostgreSQL are `2`, `4`, `8`, `16`, `32`, `64`, `192`, and `384`\. 
 
 For Linux, macOS, or Unix:
 

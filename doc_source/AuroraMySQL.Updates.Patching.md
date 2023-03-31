@@ -42,7 +42,8 @@ Add secondary Regions to the global cluster\. Follow the steps in [Adding an AWS
  The outage duration varies depending on workload, cluster size, the amount of binary log data, and if Aurora can use the zero\-downtime patching \(ZDP\) feature\. Aurora restarts the database cluster, so you might experience a short period of unavailability before resuming use of your cluster\. In particular, the amount of binary log data affects recovery time\. The DB instance processes the binary log data during recovery\. Thus, a high volume of binary log data increases recovery time\. 
 
 **Note**  
-Aurora only performs the automatic upgrade if all DB instances in your cluster have this setting turned on\. Auto minor version upgrades are performed to the default minor version\.
+Aurora only performs the automatic upgrade if all DB instances in your cluster have this setting turned on\. The setting for automatic minor version upgrade at the DB cluster level doesn't override the settings for the DB instances in the cluster\.  
+Auto minor version upgrades are performed to the default minor version\.
 
  **To enable automatic minor version upgrades for an Aurora MySQL DB cluster** 
 
@@ -120,7 +121,7 @@ We recommend using the T DB instance classes only for development and test serve
 
  You can see metrics of important attributes during ZDP in the MySQL error log\. You can also see information about when Aurora MySQL uses ZDP or chooses not to use ZDP on the **Events** page in the AWS Management Console\. 
 
-In Aurora MySQL version 2\.10 and higher and version 3, Aurora can perform a zero\-downtime patch when binary log replication is enabled\. Aurora MySQL automatically drops the connection to the binlog target during a ZDP operation\. Aurora MySQL automatically reconnects to the binlog target and resumes replication after the restart finishes\.
+In Aurora MySQL version 2\.10 and higher and version 3, Aurora can perform a zero\-downtime patch whether or not binary log replication is enabled\. If binary log replication is enabled, Aurora MySQL automatically drops the connection to the binlog target during a ZDP operation\. Aurora MySQL automatically reconnects to the binlog target and resumes replication after the restart finishes\.
 
  ZDP also works in combination with the reboot enhancements in Aurora MySQL 2\.10 and higher\. Patching the writer DB instance automatically patches readers at the same time\. After performing the patch, Aurora restores the connections on both the writer and reader DB instances\. Before Aurora MySQL 2\.10, ZDP applies only to the writer DB instance of a cluster\. 
 

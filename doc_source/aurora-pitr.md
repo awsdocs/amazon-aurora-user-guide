@@ -10,6 +10,8 @@ Amazon Aurora uploads log records for DB clusters to Amazon S3 continuously\. To
 
 You can restore to any point in time within your backup retention period\. To see the earliest restorable time for a DB cluster, use the AWS CLI [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) command and look at the value returned in the `EarliestRestorableTime` field for the DB cluster\.
 
+The backup retention period of the restored DB cluster is the same as that of the source DB cluster\.
+
 **Note**  
 Information in this topic applies to Amazon Aurora\. For information on restoring an Amazon RDS DB instance, see [Restoring a DB instance to a specified time](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html)\.  
 For more information about backing up and restoring an Aurora DB cluster, see [Overview of backing up and restoring an Aurora DB cluster](Aurora.Managing.Backups.md)\.  

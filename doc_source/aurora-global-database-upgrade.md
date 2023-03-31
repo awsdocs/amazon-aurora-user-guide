@@ -31,7 +31,7 @@ To learn how to upgrade an Aurora PostgreSQL global database to a higher minor v
 
 Before you perform the upgrade, review the following considerations:
 + A secondary cluster must have at least one DB instance to perform a minor upgrade\.
-+ If you upgrade an Aurora MySQL global database to version 2\.11\.\* and you have write forwarding turned on, you must upgrade your primary and secondary DB clusters to the exact same version, including the patch level, to continue using write forwarding\.
++ If you upgrade an Aurora MySQL global database to version 2\.11\.\*, you must upgrade your primary and secondary DB clusters to the exact same version, including the patch level\.
 + To support managed cross\-Region database failover, you must upgrade your primary and secondary DB clusters to the exact same version, including the patch level, depending on the engine version\. For more information, see [Version compatibility for failover](#aurora-global-database-upgrade.minor.incompatibility)\.
 
 ### Version compatibility for failover<a name="aurora-global-database-upgrade.minor.incompatibility"></a>

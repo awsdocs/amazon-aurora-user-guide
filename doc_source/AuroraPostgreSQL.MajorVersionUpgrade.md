@@ -186,11 +186,13 @@ SELECT name, setting FROM pg_settings WHERE name in ('rds.logical_replication', 
    postgres=> SELECT now() AS CURRENT_TIME, slot_name, active, active_pid, pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(), 
    confirmed_flush_lsn)) AS diff_size, pg_wal_lsn_diff(pg_current_wal_lsn(), confirmed_flush_lsn) AS diff_bytes FROM pg_replication_slots WHERE slot_type = 'logical';
     
-   current_time | slot_name | active | active_pid | diff_size | diff_bytes 
+   current_time                   | slot_name             | active | active_pid | diff_size | diff_bytes 
    -------------------------------+-----------------------+--------+------------+-----------+------------
-   2022-04-13 15:11:00.243401+00 | replication_slot_name | t | 21854 | 136 bytes | 136
+   2022-04-13 15:11:00.243401+00  | replication_slot_name | t      | 21854      | 136 bytes | 136
    (1 row)
    ```
+
+   You can monitor the replication lag using `diff_size` and `diff_bytes` values\. When these values reach 0, the replica has caught up to the source DB instance\. 
 
 ## Performing post\-upgrade tasks<a name="AuroraPostgreSQL.MajorVersionUpgrade.PostUpgrade"></a>
 

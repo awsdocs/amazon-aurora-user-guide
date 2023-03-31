@@ -327,6 +327,7 @@ sponsored by Amazon.
       + [Testing Amazon Aurora PostgreSQL by using fault injection queries](AuroraPostgreSQL.Managing.FaultInjectionQueries.md)
       + [Displaying volume status for an Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)
       + [Specifying the RAM disk for the stats_temp_directory](AuroraPostgreSQL.Managing.RamDisk.md)
+      + [Managing temporary files with PostgreSQL](PostgreSQL.ManagingTempFiles.md)
    + [Tuning with wait events for Aurora PostgreSQL](AuroraPostgreSQL.Tuning.md)
       + [Essential concepts for Aurora PostgreSQL tuning](AuroraPostgreSQL.Tuning.concepts.md)
       + [Aurora PostgreSQL wait events](AuroraPostgreSQL.Tuning.concepts.summary.md)

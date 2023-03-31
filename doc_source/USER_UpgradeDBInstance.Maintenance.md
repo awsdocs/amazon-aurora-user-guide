@@ -240,7 +240,11 @@ DB instances in Aurora MySQL and Aurora PostgreSQL DB clusters occasionally requ
 
 We recommend that you update the reader DB instances in a DB cluster first, then the writer DB instance\. We don't recommend updating reader and writer instances at the same time, because you might incur downtime in the event of a failover\.
 
-Operating system updates can be either optional or mandatory\.
+There are two types of operating system updates, differentiated by the description visible in the pending maintenance action on the DB instance:
++ **Operating system distribution upgrade** – Used to migrate to the latest supported major version of Amazon Linux\. Its description in the pending maintenance action is `New Operating System upgrade is available`\.
++ **Operating system patch** – Used to apply various security fixes and sometimes to improve database performance\. Its description in the pending maintenance action is `New Operating System patch is available`\.
+
+Operating system updates can be either optional or mandatory:
 + An **optional update** doesn’t have an apply date and can be applied at any time\. While these updates are optional, we recommend that you apply them periodically to keep your RDS fleet up to date\. RDS *does not* apply these updates automatically\. To be notified when a new optional update becomes available, you can subscribe to [RDS\-EVENT\-0230](USER_Events.Messages.md#RDS-EVENT-0230) in the security patching event category\. For information about subscribing to RDS events, see [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)\.
 + A **mandatory update** is required and has an apply date\. Plan to schedule your update before this date\. After the specified apply date, Amazon RDS automatically upgrades the operating system for your DB instance to the latest version\. The update is performed in a subsequent maintenance window for the DB instance\.
 
@@ -263,11 +267,11 @@ You can use the AWS Management Console or the AWS CLI to determine whether an up
 
 In the AWS Management Console, an optional update has its maintenance **Status** set to **available** and doesn't have an **Apply date**, as shown in the following image\.
 
-![\[Optional operating system update\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/os-update-optional-aur.png)
+![\[Optional operating system update.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/os-update-optional-aur.png)
 
 A mandatory update has its maintenance **Status** set to **required** and has an **Apply date**, as shown in the following image\.
 
-![\[Required operating system update\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/os-update-required-aur.png)
+![\[Required operating system update.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/os-update-required-aur.png)
 
 ### AWS CLI<a name="OS_Updates.CheckMaintenanceStatus.CLI"></a>
 
@@ -287,9 +291,9 @@ The following output shows a mandatory operating system update\.
   "PendingMaintenanceActionDetails": [
     {
       "Action": "system-update",
-      "AutoAppliedAfterDate": "2022-08-31T00:00:00+00:00",
-      "CurrentApplyDate": "2022-08-31T00:00:00+00:00",
-      "Description": "New Operating System update is available"
+      "AutoAppliedAfterDate": "2023-04-02T00:00:00+00:00",
+      "CurrentApplyDate": "2023-04-02T00:00:00+00:00",
+      "Description": "New Operating System upgrade is available"
     }
   ]
 }
@@ -303,7 +307,7 @@ The following output shows an optional operating system update\.
   "PendingMaintenanceActionDetails": [
     {
       "Action": "system-update",
-      "Description": "New Operating System update is available"
+      "Description": "New Operating System patch is available"
     }
   ]
 }

@@ -30,6 +30,12 @@ The engine is waiting for access to a table\. This event occurs regardless of wh
 **lock/table/sql/handler**  
 This wait event is a table lock wait event handler\. For more information about atom and molecule events in the Performance Schema, see [ Performance Schema atom and molecule events](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-atom-molecule-events.html) in the MySQL documentation\.
 
+**synch/cond/innodb/row\_lock\_wait**  
+Multiple data manipulation language \(DML\) statements are accessing the same database rows at the same time\. For more information, see [synch/cond/innodb/row\_lock\_wait](ams-waits.row-lock-wait.md)\.
+
+**synch/cond/innodb/row\_lock\_wait\_cond**  
+Multiple DML statements are accessing the same database rows at the same time\. For more information, see [synch/cond/innodb/row\_lock\_wait\_cond](ams-waits.row-lock-wait-cond.md)\.
+
 **synch/cond/mysys/my\_thread\_var::suspend**  
 The thread is suspended while waiting on a table\-level lock because another thread issued `LOCK TABLES ... READ`\.
 
@@ -40,7 +46,7 @@ Threads are waiting on a table metadata lock\. The engine uses this type of lock
 You have turned on binary logging\. There might be a high commit throughput, large number transactions committing, or replicas reading binlogs\. Consider using multirow statements or bundling statements into one transaction\. In Aurora, use global databases instead of binary log replication, or use the `aurora_binlog_*` parameters\.
 
 **synch/mutex/innodb/aurora\_lock\_thread\_slot\_futex**  
-Multiple data manipulation language \(DML\) statements are accessing the same database rows at the same time\. For more information, see [synch/mutex/innodb/aurora\_lock\_thread\_slot\_futex](ams-waits.waitsynch.md)\.
+Multiple DML statements are accessing the same database rows at the same time\. For more information, see [synch/mutex/innodb/aurora\_lock\_thread\_slot\_futex](ams-waits.waitsynch.md)\.
 
 **synch/mutex/innodb/buf\_pool\_mutex**  
 The buffer pool isn't large enough to hold the working data set\. Or the workload accesses pages from a specific table, which leads to contention in the buffer pool\. For more information, see [synch/mutex/innodb/buf\_pool\_mutex](ams-waits.bufpoolmutex.md)\.

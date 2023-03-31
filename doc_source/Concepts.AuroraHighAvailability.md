@@ -39,7 +39,7 @@ If the primary instance in a DB cluster fails, Aurora automatically fails over t
 + By promoting an existing Aurora Replica to the new primary instance
 + By creating a new primary instance
 
-If the DB cluster has one or more Aurora Replicas, then an Aurora Replica is promoted to the primary instance during a failure event\. A failure event results in a brief interruption, during which read and write operations fail with an exception\. However, service is typically restored in less than 120 seconds, and often less than 60 seconds\. To increase the availability of your DB cluster, we recommend that you create at least one or more Aurora Replicas in two or more different Availability Zones\. 
+If the DB cluster has one or more Aurora Replicas, then an Aurora Replica is promoted to the primary instance during a failure event\. A failure event results in a brief interruption, during which read and write operations fail with an exception\. However, service is typically restored in less than 60 seconds, and often less than 30 seconds\. To increase the availability of your DB cluster, we recommend that you create at least one or more Aurora Replicas in two or more different Availability Zones\. 
 
 **Tip**  
  In Aurora MySQL 2\.10 and higher, you can improve availability during a failover by having more than one reader DB instance in a cluster\. In Aurora MySQL 2\.10 and higher, Aurora restarts only the writer DB instance and the failover target during a failover\. Other reader DB instances in the cluster remain available to continue processing queries through connections to the reader endpoint\.   
