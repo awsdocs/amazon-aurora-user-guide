@@ -82,3 +82,35 @@ In the following table you can find the SQL Server views currently implemented i
 | `sys.xml_schema_collections` | For information, see [sys\.xml\_schema\_collections](https://docs.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-xml-schema-collections-transact-sql?view=sql-server-ver16) in Microsoft Transact\-SQL documentation\. | 
 
 PostgreSQL implements system catalogs that are similar to the SQL Server object catalog views\. For a complete list of system catalogs, see [System Catalogs](https://www.postgresql.org/docs/current/catalogs.html) in the PostgreSQL documentation\.
+
+## DDL exports supported by Babelfish<a name="babelfish-ddl-exports"></a>
+
+For Babelfish 2\.4\.0 and 3\.1\.0 versions, Babelfish supports DDL exports from various tools\. For example, you can use this functionality from SQL Server Management Studio \(SSMS\) to generate the data definition scripts for various objects in a Babelfish for Aurora PostgreSQL database\. You can then use the generated DDL commands in this script to create the same objects in another Babelfish for Aurora PostgreSQL or SQL Server database\. 
+
+Babelfish supports DDL exports for the following objects in the specified versions\.
+
+
+| List of objects | 2\.4\.0 | 3\.1\.0 | 
+| --- | --- | --- | 
+| User tables | Yes | Yes | 
+| Primary keys | Yes | Yes | 
+| Foreign keys | Yes | Yes | 
+| Unique constraints | Yes | Yes | 
+| Indexes | Yes | Yes | 
+| Check constraints | Yes | Yes | 
+| Views | Yes | Yes | 
+| Stored procedures | Yes | Yes | 
+| User\-defined functions | Yes | Yes | 
+| Table\-valued functions | Yes | Yes | 
+| Triggers | Yes | Yes | 
+| User Defined Datatypes | No | No | 
+| User Defined Table Types | No | No | 
+| Users | No | No | 
+| Logins | No | No | 
+| Sequences | No | No | 
+| Roles | No | No | 
+
+### Limitations with the exported DDLs<a name="babelfish-ddl-exports-limitations"></a>
++ **Scripting multiple objects at once** – When you try to perform DDL export for multiple objects in a database at the same time, SSMS produces an error when there is at least one view involved\. As a workaround, script only one view at a time, and don't combine the view with other objects\.
++ **Use escape hatches before recreating the objects with the exported DDLs** – Babelfish doesn't support all the commands in the exported DDL script\. Use escape hatches to avoid errors caused when recreating the objects from the DDL commands in Babelfish\. For more information on escape hatches, see [Managing Babelfish error handling with escape hatches](babelfish-strict.md)
++ **Objects containing CHECK constraints with explicit COLLATE clauses** – The scripts with these objects generated from a SQL Server database have different but equivalent collations as in the Babelfish database\. For example, a few collations, such as sql\_latin1\_general\_cp1\_cs\_as, sql\_latin1\_general\_cp1251\_cs\_as, and latin1\_general\_cs\_as are generated as latin1\_general\_cs\_as, which is the closest Windows collation\.

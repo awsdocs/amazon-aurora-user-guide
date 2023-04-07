@@ -167,8 +167,6 @@ The following built\-in functions aren't supported:
   + ProcessID
   + ProductBuild
   + ProductBuildType
-  + ProductLevel
-  + ProductUpdateLevel
   + ProductUpdateReference
   + ResourceLastUpdateDateTime
   + ResourceVersion
@@ -257,7 +255,6 @@ The following syntax isn't supported:
 + INSERT\.\.\. TOP
 + KILL
 + MERGE
-+ NEXT VALUE FOR sequence clause
 + READTEXT
 + REVERT
 + SELECT PIVOT/UNPIVOT

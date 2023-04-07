@@ -2,7 +2,7 @@
 
 You can use PostgreSQL Multiversion Concurrency Control \(MVCC\) to help preserve data integrity\. PostgreSQL MVCC works by saving an internal copy of updated or deleted rows \(also called *tuples*\) until a transaction is either committed or rolled back\. This saved internal copy is invisible to users\. However, table bloat can occur when those invisible copies aren't cleaned up regularly by the VACUUM or AUTOVACUUM utilities\. Unchecked, table bloat can incur increased storage costs and slow your processing speed\. 
 
-In many cases, the default settings for VACUUM or AUTOVACUUM on Aurora are sufficient for handling unwanted table bloat\. However, you may want to check for bloat if your application is experiencing the following conditions\.
+In many cases, the default settings for VACUUM or AUTOVACUUM on Aurora are sufficient for handling unwanted table bloat\. However, you may want to check for bloat if your application is experiencing the following conditions:
 + Processes a large number of transactions in a relatively short time between VACUUM processes\.
 + Performs poorly and runs out of storage\.
 
@@ -14,14 +14,14 @@ To create the `pgstattuple` extension on Aurora, connect a client session to the
 CREATE EXTENSION pgstattuple;
 ```
 
-Create the extension in each database which you want to profile\. After creating the extension, use the command line interface \(CLI\) to measure how much unusable space you can reclaim\. Before gathering statistics, modify the cluster parameter group by setting AUTOVACUUM to 0\. A setting of 0 prevents Aurora from automatically cleaning up any dead tuples left behind by your application, which can impact the accuracy of the results\. Enter the following command to create a simple table:
+Create the extension in each database that you want to profile\. After creating the extension, use the command line interface \(CLI\) to measure how much unusable space you can reclaim\. Before gathering statistics, modify the cluster parameter group by setting AUTOVACUUM to 0\. A setting of 0 prevents Aurora from automatically cleaning up any dead tuples left behind by your application, which can impact the accuracy of the results\. Enter the following command to create a simple table:
 
 ```
 postgres=> CREATE TABLE lab AS SELECT generate_series (0,100000);
 SELECT 100001
 ```
 
-In the following example, we run the query with AUTOVACUUM turned on for the DB cluster\. The `dead_tuple_count` is 0 which indicates that the AUTOVACUUM has deleted the obsolete data or tuples from the PostgreSQL database\.
+In the following example, we run the query with AUTOVACUUM turned on for the DB cluster\. The `dead_tuple_count` is 0, which indicates that the AUTOVACUUM has deleted the obsolete data or tuples from the PostgreSQL database\.
 
 To use `pgstattuple` to gather information about the table, specify the name of a table or an object identifier \(OID\) in the query:
 
@@ -90,7 +90,7 @@ The `ON COMMIT DELETE ROWS` clause truncates the temporary table when the transa
 
 When you change an indexed field in a table, the index update results in one or more dead tuples in that index\. By default, the autovacuum process cleans up bloat in indexes, but that cleanup uses a significant amount of time and resources\. To specify index cleanup preferences when you create a table, include the vacuum\_index\_cleanup clause\. By default, at table creation time, the clause is set to AUTO, which means that the server decides if your index requires cleanup when it vacuums the table\. You can set the clause to ON to turn on index cleanup for a specific table, or OFF to turn off index cleanup for that table\. Remember, turning off index cleanup might save time, but can potentially lead to a bloated index\. 
 
-You can manually control index cleanup when you VACUUM a table at the command line\. Include the INDEX\_CLEANUP clause with a value of ON and the table name to vacuum a table and remove dead tuples from the indexes:
+You can manually control index cleanup when you VACUUM a table at the command line\. To vacuum a table and remove dead tuples from the indexes, include the INDEX\_CLEANUP clause with a value of ON and the table name:
 
 ```
 acctg=> VACUUM (INDEX_CLEANUP ON) receivables;

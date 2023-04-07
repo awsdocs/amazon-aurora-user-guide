@@ -9,7 +9,8 @@ You can manage both cluster\-level and instance\-level parameters using the AWS 
 You can view both cluster\-level and instance\-level parameters in the console, or by using the CLI or RDS API\. For example, you can use the [describe\-db\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) AWS CLI command to view cluster\-level parameters in a DB cluster parameter group\. You can use the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) CLI command to view instance\-level parameters in a DB parameter group for a DB instance in a DB cluster\.
 
 **Note**  
-Each [default parameter group](USER_WorkingWithParamGroups.md) contains the default values for all parameters in the parameter group\. If the parameter has "engine default" for this value, see the version\-specific MySQL or PostgreSQL documentation for the actual default value\.
+Each [default parameter group](USER_WorkingWithParamGroups.md) contains the default values for all parameters in the parameter group\. If the parameter has "engine default" for this value, see the version\-specific MySQL or PostgreSQL documentation for the actual default value\.  
+Unless otherwise noted, parameters listed in the following tables are valid for Aurora MySQL versions 2 and 3\.
 
 For more information about DB parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. For rules and restrictions for Aurora Serverless v1 clusters, see [Parameter groups for Aurora Serverless v1](aurora-serverless-v1.how-it-works.md#aurora-serverless.parameter-groups)\.
 
@@ -70,6 +71,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `event_scheduler`  |  Yes  |  Indicates the status of the Event Scheduler\. Modifiable only at the cluster level in Aurora MySQL version 3\.  | 
 |   `gtid-mode`   |   Sometimes   |  Modifiable in Aurora MySQL version 2 and higher\.  | 
 |   `init_connect`   |   Yes   |  The command to be run by the server for each client that connects\. Use double quotes \("\) for settings to avoid connection failures, for example: <pre>SET optimizer_switch="hash_join=off"</pre> In Aurora MySQL version 3, this parameter doesn't apply for users who have the `CONNECTION_ADMIN` privilege\. This includes the Aurora master user\. For more information, see [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\.  | 
+|  `innodb_adaptive_hash_index`  |  Yes  |  Modifiable only at the cluster level in Aurora MySQL version 3\.  | 
 |   `innodb_autoinc_lock_mode`   |   Yes   |    | 
 |   `innodb_checksums`   |   No   | Removed from Aurora MySQL version 3\.  | 
 |   `innodb_cmp_per_index_enabled`   |   Yes   |    | 
@@ -108,6 +110,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `master-info-repository`   |   Yes   |  Removed from Aurora MySQL version 3\.  | 
 |   `master_verify_checksum`   |   Yes   |  Aurora MySQL version 2\. Use `source_verify_checksum` in Aurora MySQL version 3\.  | 
 |   `partial_revokes`   |   No   |  This parameter applies to Aurora MySQL version 3\.  | 
+|  `query_cache_type`  |  Yes  |  Removed from Aurora MySQL version 3\.  | 
 |   `read_only`   |   Yes   |  When this parameter is turned on, the server permits no updates except from those performed by replica threads\. In Aurora MySQL version 3, this parameter doesn't apply for users who have the `CONNECTION_ADMIN` privilege\. This includes the Aurora master user\. For more information, see [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\.  | 
 |   `relay-log-space-limit`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
 |   `replica_preserve_commit_order`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
@@ -187,7 +190,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `group_concat_max_len`   |   Yes   |    | 
 |   `host_cache_size`   |   Yes   |    | 
 |   `init_connect`   |   Yes   |  The command to be run by the server for each client that connects\. Use double quotes \("\) for settings to avoid connection failures, for example: <pre>SET optimizer_switch="hash_join=off"</pre> In Aurora MySQL version 3, this parameter doesn't apply for users who have the `CONNECTION_ADMIN` privilege, including the Aurora master user\. For more information, see [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\.  | 
-|   `innodb_adaptive_hash_index`   |   Yes   |  | 
+|  `innodb_adaptive_hash_index`  |  Yes  |  Modifiable only at the cluster level in Aurora MySQL version 3\.  | 
 |   `innodb_adaptive_max_sleep_delay`   |   Yes   |   Modifying this parameter has no effect because `innodb_thread_concurrency` is always 0 for Aurora\.   | 
 |   `innodb_autoextend_increment`   |   Yes   |    | 
 |   `innodb_buffer_pool_dump_at_shutdown`   |   No   |    | 
@@ -367,7 +370,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `query_cache_limit`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
 |   `query_cache_min_res_unit`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
 |   `query_cache_size`   |   Yes   |  The default value is represented by a formula\. For details about how the `DBInstanceClassMemory` value in the formula is calculated, see [DB parameter formula variables](USER_ParamValuesRef.md#USER_FormulaVariables)\.  Removed from Aurora MySQL version 3\.   | 
-|   `query_cache_type`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
+|  `query_cache_type`  |  Yes  |  Removed from Aurora MySQL version 3\.  | 
 |   `query_cache_wlock_invalidate`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
 |   `query_prealloc_size`   |   Yes   |    | 
 |   `range_alloc_block_size`   |   Yes   |    | 

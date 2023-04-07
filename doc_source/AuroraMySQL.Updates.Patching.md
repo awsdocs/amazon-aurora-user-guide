@@ -108,13 +108,12 @@ In this example, **Enable auto minor version upgrade** is turned off for the DB 
 The following table shows the Aurora MySQL versions and DB instance classes where ZDP is available\.
 
 
-| Version | db\.r\* instance classes | db\.t\* instance classes | db\.serverless instance class | 
-| --- | --- | --- | --- | 
-| 2\.07\.2 and higher 2\.07 versions | No | Yes | N/A | 
-| 2\.10\.0 and higher 2\.10 versions | Yes | Yes | N/A | 
-| 2\.11\.0 and higher 2\.11 versions | Yes | Yes | N/A | 
-| 3\.01\.0 and 3\.01\.1 | Yes | Yes | N/A | 
-| 3\.02\.0 and higher 3\.x versions | Yes | Yes | Yes | 
+| Version | db\.r\* instance classes | db\.t\* instance classes | db\.x\* instance classes | db\.serverless instance class | 
+| --- | --- | --- | --- | --- | 
+| 2\.07\.2 and higher 2\.07 versions | No | Yes | No | N/A | 
+| 2\.10\.0 and higher 2\.x versions | Yes | Yes | Yes | N/A | 
+| 3\.01\.0 and 3\.01\.1 | Yes | Yes | Yes | N/A | 
+| 3\.02\.0 and higher 3\.x versions | Yes | Yes | Yes | Yes | 
 
 **Note**  
 We recommend using the T DB instance classes only for development and test servers, or other non\-production servers\. For more details on the T instance classes, see [Using T instance classes for development and testing](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.T2Medium)\.

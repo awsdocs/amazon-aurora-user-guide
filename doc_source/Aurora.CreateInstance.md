@@ -285,14 +285,14 @@ Complete the following steps:
 
    ```
    aws rds create-db-instance --db-instance-identifier sample-instance \
-        --db-cluster-identifier sample-cluster --engine aurora-postgresql --db-instance-class db.r4.large
+        --db-cluster-identifier sample-cluster --engine aurora-postgresql --db-instance-class db.r5.large
    ```
 
    For Windows:
 
    ```
    aws rds create-db-instance --db-instance-identifier sample-instance ^
-        --db-cluster-identifier sample-cluster --engine aurora-postgresql --db-instance-class db.r4.large
+        --db-cluster-identifier sample-cluster --engine aurora-postgresql --db-instance-class db.r5.large
    ```
 
 ### RDS API<a name="Aurora.CreateInstance.Creating.API"></a>

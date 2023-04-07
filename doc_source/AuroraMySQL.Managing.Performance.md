@@ -73,15 +73,16 @@ If your applications frequently open and close connections, or keep a large numb
 | db\.x2g\.12xlarge | 7000 | 
 | db\.x2g\.16xlarge | 7000 | 
 
- If you create a new parameter group to customize your own default for the connection limit, you'll see that the default connection limit is derived using a formula based on the `DBInstanceClassMemory` value\. As shown in the preceding table, the formula produces connection limits that increase by 1000 as the memory doubles between progressively larger R3, R4, and R5 instances, and by 45 for different memory sizes of T2 and T3 instances\. 
+If you create a new parameter group to customize your own default for the connection limit, you'll see that the default connection limit is derived using a formula based on the `DBInstanceClassMemory` value\. As shown in the preceding table, the formula produces connection limits that increase by 1000 as the memory doubles between progressively larger R3, R4, and R5 instances, and by 45 for different memory sizes of T2 and T3 instances\.
 
- See [Specifying DB parameters](USER_ParamValuesRef.md) for more details on how `DBInstanceClassMemory` is calculated\. 
+See [Specifying DB parameters](USER_ParamValuesRef.md) for more details on how `DBInstanceClassMemory` is calculated\.
 
- Aurora MySQL and RDS for MySQL DB instances have different amounts of memory overhead\. Therefore, the `max_connections` value can be different for Aurora MySQL and RDS for MySQL DB instances that use the same instance class\. The values in the table only apply to Aurora MySQL DB instances\. 
+Aurora MySQL and RDS for MySQL DB instances have different amounts of memory overhead\. Therefore, the `max_connections` value can be different for Aurora MySQL and RDS for MySQL DB instances that use the same instance class\. The values in the table only apply to Aurora MySQL DB instances\.
 
- The much lower connectivity limits for T2 and T3 instances are because with Aurora, those instance classes are intended only for development and test scenarios, not for production workloads\. 
+**Note**  
+The much lower connectivity limits for T2 and T3 instances are because with Aurora, those instance classes are intended only for development and test scenarios, not for production workloads\.
 
- The default connection limits are tuned for systems that use the default values for other major memory consumers, such as the buffer pool and query cache\. If you change those other settings for your cluster, consider adjusting the connection limit to account for the increase or decrease in available memory on the DB instances\. 
+The default connection limits are tuned for systems that use the default values for other major memory consumers, such as the buffer pool and query cache\. If you change those other settings for your cluster, consider adjusting the connection limit to account for the increase or decrease in available memory on the DB instances\.
 
 ## Temporary storage limits for Aurora MySQL<a name="AuroraMySQL.Managing.TempStorage"></a>
 

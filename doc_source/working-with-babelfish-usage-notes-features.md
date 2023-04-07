@@ -9,3 +9,4 @@ Following, you can find usage information for Babelfish, including some of the d
 + [Using explain plan to improve Babelfish query performance](working-with-babelfish-usage-notes-features.using.explain.md)
 + [Using Aurora PostgreSQL extensions with Babelfish](babelfish-postgres-aws-extensions.md)
 + [Using T\-SQL query hints to improve Babelfish query performance](babelfish-tsql-hints.md)
++ [Babelfish supports linked servers](babelfish-postgres-linkedservers.md)

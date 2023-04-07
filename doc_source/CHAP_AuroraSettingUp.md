@@ -9,3 +9,4 @@ This section shows how to set up your Aurora DB cluster\. Before creating an Aur
 + [Connecting to an Amazon Aurora DB cluster](Aurora.Connecting.md)
 + [Working with parameter groups](USER_WorkingWithParamGroups.md)
 + [Migrating data to an Amazon Aurora DB cluster](Aurora.Migrate.md)
++ [Creating an Amazon ElastiCache cluster using Aurora DB cluster settings](creating-elasticache-cluster-with-RDS-settings.md)

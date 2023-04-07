@@ -12,5 +12,6 @@ Following, you can learn about Babelfish architecture and how the SQL Server dat
 **Topics**
 + [Babelfish architecture](babelfish-architecture.md)
 + [DB cluster parameter group settings for Babelfish](babelfish-configuration.md)
++ [Babelfish for Aurora PostgreSQL with AWS Managed Microsoft Active Directory](babelfish-active-directory.md)
 + [Collations supported by Babelfish](babelfish-collations.md)
 + [Managing Babelfish error handling with escape hatches](babelfish-strict.md)

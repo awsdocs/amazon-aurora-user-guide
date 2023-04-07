@@ -36,7 +36,7 @@ To set up Kerberos authentication for a PostgreSQL DB cluster, take the followin
 1. If you plan to locate the directory and the DB instance in different AWS accounts or virtual private clouds \(VPCs\), configure VPC peering\. For more information, see [What is VPC peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon VPC Peering Guide*\.
 
 1. Create or modify a PostgreSQL DB cluster either from the console, CLI, or RDS API using one of the following methods:
-   + [Creating a DB cluster and connecting to a database on an Aurora PostgreSQL DB cluster](CHAP_GettingStartedAurora.CreatingConnecting.AuroraPostgreSQL.md) 
+   + [Creating and connecting to an Aurora PostgreSQL DB cluster](CHAP_GettingStartedAurora.CreatingConnecting.AuroraPostgreSQL.md) 
    + [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)
    + [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)
    + [Restoring a DB cluster to a specified time](aurora-pitr.md)

@@ -2,11 +2,11 @@
 
 Amazon Aurora uses AWS Identity and Access Management \(IAM\)[ service\-linked roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role)\. A service\-linked role is a unique type of IAM role that is linked directly to Amazon Aurora\. Service\-linked roles are predefined by Amazon Aurora and include all the permissions that the service requires to call other AWS services on your behalf\. 
 
-A service\-linked role makes using Amazon Aurora easier because you don't have to manually add the necessary permissions\. Amazon Aurora defines the permissions of its service\-linked roles, and unless defined otherwise, only Amazon Aurora can assume its roles\. The defined permissions include the trust policy and the permissions policy, and that permissions policy cannot be attached to any other IAM entity\.
+A service\-linked role makes using Amazon Aurora easier because you don't have to manually add the necessary permissions\. Amazon Aurora defines the permissions of its service\-linked roles, and unless defined otherwise, only Amazon Aurora can assume its roles\. The defined permissions include the trust policy and the permissions policy, and that permissions policy can't be attached to any other IAM entity\. For more information on managed policies, see [AWS managed policies for Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-security-iam-awsmanpol.html)\.
 
-You can delete the roles only after first deleting their related resources\. This protects your Amazon Aurora resources because you can't inadvertently remove permission to access the resources\.
+You can delete the roles only after first deleting their related resources\. This condition protects your Amazon Aurora resources because you can't inadvertently remove permission to access the resources\.
 
-For information about other services that support service\-linked roles, see [AWS services that work with IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html) and look for the services that have **Yes **in the **Service\-Linked Role** column\. Choose a **Yes** with a link to view the service\-linked role documentation for that service\.
+For information about other services that support service\-linked roles, see [AWS services that work with IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html) and look for the services that have **Yes ** in the **Service\-Linked Role** column\. Choose a **Yes** with a link to view the service\-linked role documentation for that service\.
 
 ## Service\-linked role permissions for Amazon Aurora<a name="service-linked-role-permissions"></a>
 

@@ -450,7 +450,7 @@ The number of Aurora Replicas \(reader instances\) in the primary DB cluster det
 
 **Note**  
 For Aurora MySQL version 3, when you create a secondary cluster, make sure that the value of `lower_case_table_names` matches the value in the primary cluster\. This setting is a database parameter that affects how the server handles identifier case sensitivity\. For more information about database parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.  
-We recommend that when you create a secondary cluster, you use the same DB engine version for the primary and secondary\. If necessary, upgrade the primary to be the same version as the secondary\. For more information, see [Version compatibility for failover](aurora-global-database-upgrade.md#aurora-global-database-upgrade.minor.incompatibility)\.
+We recommend that when you create a secondary cluster, you use the same DB engine version for the primary and secondary\. If necessary, upgrade the primary to be the same version as the secondary\. For more information, see [Patch level compatibility for managed cross\-Region failover](aurora-global-database-upgrade.md#aurora-global-database-upgrade.minor.incompatibility)\.
 
 ### Console<a name="aurora-global-database-attach.console"></a>
 

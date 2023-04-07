@@ -6,7 +6,7 @@ When you create an Aurora PostgreSQL DB cluster using the AWS Management Console
 
 You can choose another name rather than accept the default \(`postgres`\)\. If you do, the name you choose must start with a letter and be between 1 and 16 alphanumeric characters\. For simplicity's sake, we refer to this main user account by its default value \(`postgres`\) throughout this guide\.
 
- If you use the `create-db-cluster` AWS CLI rather than the AWS Management Console, you create the user name by passing it with the `master-username` parameter\. For more information, see [Create an Aurora PostgreSQL DB cluster](CHAP_GettingStartedAurora.CreatingConnecting.AuroraPostgreSQL.md#CHAP_GettingStarted.AuroraPostgreSQL.CreateDBCluster)\.
+ If you use the `create-db-cluster` AWS CLI rather than the AWS Management Console, you create the user name by passing it with the `master-username` parameter\. For more information, see [Step 1: Create an Aurora PostgreSQL DB cluster](CHAP_GettingStartedAurora.CreatingConnecting.AuroraPostgreSQL.md#CHAP_GettingStarted.AuroraPostgreSQL.CreateDBCluster)\.
 
 Whether you use the AWS Management Console, the AWS CLI, or the Amazon RDS API, and whether you use the default `postgres` name or choose a different name, this first database user account is a member of the `rds_superuser` group and has `rds_superuser` privileges\.
 
