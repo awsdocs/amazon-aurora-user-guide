@@ -197,13 +197,9 @@ SELECT name, setting FROM pg_settings WHERE name in ('rds.logical_replication', 
 ## Performing post\-upgrade tasks<a name="AuroraPostgreSQL.MajorVersionUpgrade.PostUpgrade"></a>
 
 When the upgrade is complete, the instance status displays as **Available** in the **Status** column of the console dashboard\. On the new instance, we recommend you do the following:
-
-1. Redirect your applications to point to the writer node\.
-
-1. If you upgraded to Aurora PostgreSQL 14 or higher, update your [indexes](https://www.postgresql.org/docs/14/sql-reindex.html)\.
-
-1. Add reader nodes to manage the caseload and provide high\-availability in the event of an issue with the writer node\.
-
-1. Update user permissions on the new instance to ensure access\.
++ Redirect your applications to point to the writer node\.
++ Add reader nodes to manage the caseload and provide high\-availability in the event of an issue with the writer node\.
++ Aurora PostgreSQL DB clusters occasionally require operating system updates\. These updates might include a newer version of glibc library\. During such updates, we recommend you to follow the guidelines as described in [Collations supported in Aurora PostgreSQL](PostgreSQL-Collations.md)\. 
++ Update user permissions on the new instance to ensure access\.
 
 After testing your application and data on the new instance, we recommend that you make a final backup of your initial instance before removing it\. For more information about using logical replication on an Aurora host, see [Setting up logical replication for your Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Replication.Logical.md#AuroraPostgreSQL.Replication.Logical.Configure)\. 

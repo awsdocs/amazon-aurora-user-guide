@@ -1,6 +1,6 @@
 # Connecting an EC2 instance and an Aurora DB cluster automatically<a name="ec2-rds-connect"></a>
 
-You can use the RDS console to simplify setting up a connection between an EC2 instance and an Aurora DB cluster\. 
+You can use the RDS console to simplify setting up a connection between an EC2 instance and an Aurora DB cluster\. You can use the RDS console to simplify setting up a connection between an EC2 instance and a DB cluster\. Often, your DB cluster is in a private subnet and your EC2 instance is in a public subnet within a VPC\. You can use a SQL client on your EC2 instance to connect to your DB cluster \. The EC2 instance can also run web servers or applications that access your private DB cluster \. 
 
 ![\[Automatically connect an Aurora DB cluster with an EC2 instance.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/auto-connect-aurora-ec2.png)
 
@@ -10,6 +10,7 @@ If you want to connect to an EC2 instance that isn't in the same VPC as the Auro
 + [Overview of automatic connectivity with an EC2 instance](#ec2-rds-connect-overview)
 + [Connecting an EC2 instance and an Aurora DB cluster automatically](#ec2-rds-connect-connecting)
 + [Viewing connected compute resources](#ec2-rds-connect-viewing)
++ [Connecting to a DB instance that is running a specific DB engine](#ec2-rds-Connect-DBEngine)
 
 ## Overview of automatic connectivity with an EC2 instance<a name="ec2-rds-connect-overview"></a>
 
@@ -116,3 +117,9 @@ For a compute resource to be listed, the following conditions must apply:
 
 1. On the **Connectivity & security** tab, view the compute resources in the **Connected compute resources**\.  
 ![\[Connected compute resources.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/ec2-connected-compute-resources.png)
+
+## Connecting to a DB instance that is running a specific DB engine<a name="ec2-rds-Connect-DBEngine"></a>
+
+For information about connecting to a DB instance that is running a specific DB engine, follow the instructions for your DB engine:
++ [Connecting to an Amazon Aurora MySQL DB cluster](Aurora.Connecting.md#Aurora.Connecting.AuroraMySQL)
++ [Connecting to an Amazon Aurora PostgreSQL DB cluster](Aurora.Connecting.md#Aurora.Connecting.AuroraPostgreSQL)

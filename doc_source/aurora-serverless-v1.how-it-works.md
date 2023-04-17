@@ -385,6 +385,8 @@ You can also use the console to view a side\-by\-side comparison of the values i
 
 You can set the maintenance window when you create the Aurora Serverless v1 DB cluster, and you can modify the window later\. For more information, see [Adjusting the preferred DB cluster maintenance window](USER_UpgradeDBInstance.Maintenance.md#AdjustingTheMaintenanceWindow.Aurora)\.
 
+Maintenance windows are used for scheduled major version upgrades\. Minor version upgrades and patches are applied immediately during scaling, which happens according to your setting for `TimeoutAction`\. If `TimeoutAction` is set to `RollbackCapacityChange`, Aurora forcibly updates the cluster after 7 days from the first patch attempt, or earlier if needed\.
+
  Whenever possible, Aurora Serverless v1 performs maintenance in a nondisruptive manner\. When maintenance is required, your Aurora Serverless v1 DB cluster scales its capacity to handle the necessary operations\. Before scaling, Aurora Serverless v1 looks for a scaling point\. It does so for up to seven days if necessary\. 
 
  At the end of each day that Aurora Serverless v1 can't find a scaling point, it creates a cluster event\. This event notifies you of the pending maintenance and the need to scale to perform maintenance\. The notification includes the date when Aurora Serverless v1 can force the DB cluster to scale\. 

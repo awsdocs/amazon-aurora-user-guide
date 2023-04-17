@@ -43,4 +43,6 @@ Amazon Aurora support for Kerberos and Active Directory provides the benefits of
 
 You can make it possible for your database users to authenticate against DB clusters in two ways\. They can use credentials stored either in AWS Directory Service for Microsoft Active Directory or in your on\-premises Active Directory\.
 
-Aurora supports Kerberos authentication for Aurora MySQL and Aurora PostgreSQL DB clusters\. With Kerberos authentication, Aurora DB clusters support one\- and two\-way forest trust relationships\. For more information, see [Using Kerberos authentication for Aurora MySQL](aurora-mysql-kerberos.md) or [Using Kerberos authentication with Aurora PostgreSQL](postgresql-kerberos.md)\.
+Aurora supports Kerberos authentication for Aurora MySQL and Aurora PostgreSQL DB clusters\. For more information about Kerberos authentication for Aurora MySQL, see [Using Kerberos authentication for Aurora MySQL](aurora-mysql-kerberos.md)\.
+
+With Kerberos authentication, Aurora PostgreSQL DB clusters support one\- and two\-way forest trust relationships\. For more information, see [Using Kerberos authentication with Aurora PostgreSQL](postgresql-kerberos.md)\.

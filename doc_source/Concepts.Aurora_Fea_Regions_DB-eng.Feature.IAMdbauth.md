@@ -9,13 +9,13 @@ With IAM database authentication in Aurora, you can authenticate to your DB clus
 ## IAM database authentication with Aurora MySQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.IAMdbauth.amy"></a>
 
 IAM database authentication with Aurora MySQL is available in all Regions for the following versions:
-+ Aurora MySQL version 3
-+ Aurora MySQL version 2
++ Aurora MySQL 3 – All available versions
++ Aurora MySQL 2 – All available versions
 
 ## IAM database authentication with Aurora PostgreSQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.IAMdbauth.apg"></a>
 
-IAM database authentication with Aurora PostgreSQL is available in all Regions for the following versions:
-+ Aurora PostgreSQL 14 \(All versions\)
-+ Aurora PostgreSQL 13 \(All versions\)
-+ Aurora PostgreSQL 12 \(All versions\)
-+ Aurora PostgreSQL 11 \(Version 11\.9, 11\.12 and higher\)
+IAM database authentication with Aurora PostgreSQL is available in the following Regions and engine versions:
++ Aurora PostgreSQL 14 – All available versions
++ Aurora PostgreSQL 13 – All available versions
++ Aurora PostgreSQL 12 – All available versions
++ Aurora PostgreSQL 11 – All available versions

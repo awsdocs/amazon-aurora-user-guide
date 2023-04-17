@@ -53,7 +53,6 @@ We strongly recommend that you do not use the master user directly in your appli
 +  `CREATE` 
 +  `CREATE ROLE` 
 +  `CREATE ROUTINE` 
-+  `CREATE TABLESPACE` 
 +  `CREATE TEMPORARY TABLES` 
 +  `CREATE USER` 
 +  `CREATE VIEW` 

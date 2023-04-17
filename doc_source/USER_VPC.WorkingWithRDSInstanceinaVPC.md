@@ -125,7 +125,19 @@ To determine whether a DB cluster is in dual\-stack mode by using the console, v
 
 You can modify an IPv4\-only DB cluster to use dual\-stack mode\. To do so, change the network type of the DB cluster\. The modification might result in downtime\.
 
-Before modifying a DB cluster to use dual\-stack mode, make sure that its DB subnet group supports dual\-stack mode\. If the DB subnet group associated with the DB cluster doesn't support dual\-stack mode, specify a different DB subnet group that supports it when you modify the DB cluster\. If you modify the DB subnet group of a DB cluster before you change the DB cluster to use dual\-stack mode, make sure that the DB subnet group is valid for the DB cluster before and after the change\.
+It is recommended that you change the network type of your Amazon Aurora clusters during a maintenance window\. Setting the network type of new instances to dual stack by default is currently unsuspported\. Set network type manually by using the modify\-db\-cluster command\. 
+
+Before modifying a DB cluster to use dual\-stack mode, make sure that its DB subnet group supports dual\-stack mode\. If the DB subnet group associated with the DB cluster doesn't support dual\-stack mode, specify a different DB subnet group that supports it when you modify the DB cluster\. Modifying the DB subnet group of a DB cluster can cause downtime\.
+
+If you modify the DB subnet group of a DB cluster before you change the DB cluster to use dual\-stack mode, make sure that the DB subnet group is valid for the DB cluster before and after the change\. 
+
+We recommend that you call the [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) API with only the `--network-type` parameter with value `DUAL` to change the network of an Amazon Aurora cluster to dual stack\. Adding other parameters along with the `--network-type` parameter in the same API call could result in downtime\. 
+
+For exmaple: 
+
+```
+aws rds modify-db-cluster --db-cluster-identifier my-cluster --network-type "DUAL" 
+```
 
 If you can't connect to the DB cluster after the change, make sure that the client and database security firewalls and route tables are accurately configured to allow cross traffic to the database on the selected network \(either IPv4 or IPv6\)\. You might also need to modify operating system parameter, libraries, or drivers to connect using an IPv6 address\.
 

@@ -67,6 +67,7 @@ Before you switchover, we strongly recommend that you adhere to best practices b
 + Identify a time when traﬃc is lowest on your production environment\. During the switchover, writes are cut oﬀ from the databases in both environments\. Long\-running transactions, such as active DDLs can, increase your switchover time, resulting in longer downtime for your production workloads\.
 + Make sure the DB cluster and DB instances in both environments are in `Available` state\.
 + Make sure the DB cluster in the green environment is healthy and replicating\.
++ Make sure that your network and client configurations don’t increase the DNS cache Time\-To\-Live \(TTL\) beyond five seconds, which is the default for Aurora DNS zones\.  Otherwise, applications will continue to send write traffic to the blue environment after  switchover\.
 
 **Note**  
 During a switchover, you can't modify any DB cluster included in the switchover\.

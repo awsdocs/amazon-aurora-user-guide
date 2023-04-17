@@ -8,7 +8,7 @@ The Data API for Aurora Serverless provides a web\-services interface to an Auro
 
 ## Data API with Aurora MySQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API.amy"></a>
 
-Following are the supported engines and Region availability for Data API with Aurora MySQL\.
+The following Regions and engine versions are available for Data API with Aurora MySQL\.
 
 
 | Region | Aurora MySQL version 3 | Aurora MySQL version 2 | Aurora MySQL version 1 | 
@@ -47,7 +47,7 @@ Following are the supported engines and Region availability for Data API with Au
 
 ## Data API with Aurora PostgreSQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.Data_API.apg"></a>
 
-Following are the supported engines and Region availability for Data API with Aurora PostgreSQL\.
+The following Regions and engine versions are available for Data API with Aurora PostgreSQL\.
 
 
 | Region | Aurora PostgreSQL 11 | Aurora PostgreSQL 10 | 

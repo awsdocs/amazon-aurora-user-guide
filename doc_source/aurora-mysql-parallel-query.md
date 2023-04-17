@@ -46,6 +46,7 @@ This topic describes the parallel query performance optimization for Amazon Auro
   + [Full\-text search \(FTS\) indexes](#aurora-mysql-parallel-query-sql-fts)
   + [Virtual columns](#aurora-mysql-parallel-query-sql-virtual-column)
   + [Built\-in caching mechanisms](#aurora-mysql-parallel-query-sql-caching)
+  + [Optimizer hints](#aurora-mysql-parallel-query-hints)
   + [MyISAM temporary tables](#aurora-mysql-parallel-query-sql-myisam)
 
 ## Overview of parallel query for Aurora MySQL<a name="aurora-mysql-parallel-query-overview"></a>
@@ -607,6 +608,7 @@ After you turn on hash join, try running the `EXPLAIN` statement again\. For inf
 + [Full\-text search \(FTS\) indexes](#aurora-mysql-parallel-query-sql-fts)
 + [Virtual columns](#aurora-mysql-parallel-query-sql-virtual-column)
 + [Built\-in caching mechanisms](#aurora-mysql-parallel-query-sql-caching)
++ [Optimizer hints](#aurora-mysql-parallel-query-hints)
 + [MyISAM temporary tables](#aurora-mysql-parallel-query-sql-myisam)
 
 ### EXPLAIN statement<a name="aurora-mysql-parallel-query-sql-explain"></a>
@@ -1065,6 +1067,14 @@ mysql> explain select o_orderpriority, o_shippriority from orders where o_clerk 
 **Note**  
  When conducting performance comparisons, the query cache can produce artificially low timing numbers\. Therefore, in benchmark\-like situations, you can use the `sql_no_cache` hint\. This hint prevents the result from being served from the query cache, even if the same query had been run previously\. The hint comes immediately after the `SELECT` statement in a query\. Many parallel query examples in this topic include this hint, to make query times comparable between versions of the query for which parallel query is turned on and turned off\.   
  Make sure that you remove this hint from your source when you move to production use of parallel query\. 
+
+### Optimizer hints<a name="aurora-mysql-parallel-query-hints"></a>
+
+Another way to control the optimizer is by using optimizer hints, which can be specified within individual statements\. For example, you can turn on an optimization for one table in a statement, and then turn off the optimization for a different table\. For more information about these hints, see [Optimizer Hints](https://dev.mysql.com/doc/refman/8.0/en/optimizer-hints.html) in the *MySQL Reference Manual*\.
+
+You can use SQL hints with Aurora MySQL queries to fine\-tune performance\. You can also use hints to prevent execution plans for important queries from changing because of unpredictable conditions\.
+
+We have extended the SQL hints feature to help you control optimizer choices for your query plans\. These hints apply to queries that use parallel query optimization\. For more information, see [Aurora MySQL hints](AuroraMySQL.Reference.Hints.md)\.
 
 ### MyISAM temporary tables<a name="aurora-mysql-parallel-query-sql-myisam"></a>
 

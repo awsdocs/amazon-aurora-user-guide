@@ -14,8 +14,8 @@ Create an Amazon Aurora MySQL DB cluster that maintains the data used by a web a
 
 1. On the **Create database** page, choose **Standard create**\.
 
-1. For **Engine type**, choose **Aurora \(MySQL Compatible\)**\.  
-![\[Select engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-engine-options-mysql.png)
+1. For **Engine options**, choose **Aurora \(MySQL Compatible\)**\.  
+![\[Select engine type and template\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-engine-options-mysql.png)
 
    Keep the default values for **Version** and the other engine options\.
 

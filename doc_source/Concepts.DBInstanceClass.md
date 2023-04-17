@@ -2,7 +2,7 @@
 
 The DB instance class determines the computation and memory capacity of an Amazon Aurora DB instance\. The DB instance class that you need depends on your processing power and memory requirements\.
 
-A DB instance class consists of both the DB instance type and the size\. For example, db\.m6g is a general\-purpose DB instance type powered by AWS Graviton2 processors\. Within the db\.m6g instance type, db\.m6g\.2xlarge is a DB instance class\.
+A DB instance class consists of both the DB instance type and the size\. For example, db\.r6g is a general\-purpose DB instance type powered by AWS Graviton2 processors\. Within the db\.r6g instance type, db\.r6g\.2xlarge is a DB instance class\.
 
 For more information about instance class pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\.
 
@@ -272,11 +272,11 @@ The relative measure of the integer processing power of an Amazon EC2 instance\.
 **Memory \(GiB\)**  
 The RAM, in gibibytes, allocated to the DB instance\. There is often a consistent ratio between memory and vCPU\. As an example, take the db\.r4 instance class, which has a memory to vCPU ratio similar to the db\.r5 instance class\. However, for most use cases the db\.r5 instance class provides better, more consistent performance than the db\.r4 instance class\. 
 
-**Max\. Bandwidth \(Mbps\)**  
-The maximum bandwidth in megabits per second\. Divide by 8 to get the expected throughput in megabytes per second\.   
+**Max\. EBS bandwidth \(Mbps\)**  
+The maximum EBS bandwidth in megabits per second\. Divide by 8 to get the expected throughput in megabytes per second\.   
 This figure refers to I/O bandwidth for local storage within the DB instance\. It doesn't apply to communication with the Aurora cluster volume\.
 
-**Network Performance**  
+**Network bandwidth**  
 The network speed relative to other DB instance classes\.
 
 In the following table, you can find hardware details about the Amazon RDS DB instance classes for Aurora\. 

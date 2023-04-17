@@ -8,7 +8,7 @@ By using Kerberos authentication with Aurora, you can support external authentic
 
 ## Kerberos authentication with Aurora MySQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.KerberosAuthentication.amy"></a>
 
-The following table lists the supported engines and Region availability for Kerberos Authentication with Aurora MySQL\.
+The following Regions and engine versions are available for Kerberos Authentication with Aurora MySQL\.
 
 
 | Region | Aurora MySQL version 3 | 
@@ -43,7 +43,7 @@ The following table lists the supported engines and Region availability for Kerb
 
 ## Kerberos authentication with Aurora PostgreSQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.KerberosAuthentication.apg"></a>
 
-Following are the supported engines and Region availability for Kerberos Authentication with Aurora PostgreSQL\.
+The following Regions and engine versions are available for Kerberos Authentication with Aurora PostgreSQL\.
 
 
 | Region | Aurora PostgreSQL 14 | Aurora PostgreSQL 13 | Aurora PostgreSQL 12 | Aurora PostgreSQL 11 | 

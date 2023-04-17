@@ -51,7 +51,7 @@ Aurora machine learning is supported for Aurora MySQL in the AWS Regions listed 
 
 Aurora machine learning is supported for Aurora PostgreSQL in the AWS Regions listed in the table\. In addition to having your version of Aurora PostgreSQL available, the AWS Region must also support the service that you want to use\. For a list of AWS Regions where Amazon SageMaker is available, see [Amazon SageMaker endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/sagemaker.html) in the *Amazon Web Services General Reference*\. For a list of AWS Regions where Amazon Comprehend is available, see [Amazon Comprehend endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/comprehend.html) in the *Amazon Web Services General Reference*\.
 
-Following are the supported engines and Region availability for Aurora machine learning with Aurora PostgreSQL\.
+The following Regions and engine versions are available for Aurora machine learning with Aurora PostgreSQL\.
 
 
 | Region | Aurora PostgreSQL 14 | Aurora PostgreSQL 13 | Aurora PostgreSQL 12 | Aurora PostgreSQL 11 | 

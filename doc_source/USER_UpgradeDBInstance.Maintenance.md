@@ -245,7 +245,11 @@ There are two types of operating system updates, differentiated by the descripti
 + **Operating system patch** – Used to apply various security fixes and sometimes to improve database performance\. Its description in the pending maintenance action is `New Operating System patch is available`\.
 
 Operating system updates can be either optional or mandatory:
-+ An **optional update** doesn’t have an apply date and can be applied at any time\. While these updates are optional, we recommend that you apply them periodically to keep your RDS fleet up to date\. RDS *does not* apply these updates automatically\. To be notified when a new optional update becomes available, you can subscribe to [RDS\-EVENT\-0230](USER_Events.Messages.md#RDS-EVENT-0230) in the security patching event category\. For information about subscribing to RDS events, see [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)\.
++ An **optional update** doesn’t have an apply date and can be applied at any time\. While these updates are optional, we recommend that you apply them periodically to keep your RDS fleet up to date\. RDS *does not* apply these updates automatically\.
+
+  To be notified when a new, minor version, optional update becomes available, you can subscribe to [RDS\-EVENT\-0230](USER_Events.Messages.md#RDS-EVENT-0230) in the security patching event category\. For information about subscribing to RDS events, see [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)\.
+**Note**  
+`RDS-EVENT-0230` doesn't apply to major version upgrades\.
 + A **mandatory update** is required and has an apply date\. Plan to schedule your update before this date\. After the specified apply date, Amazon RDS automatically upgrades the operating system for your DB instance to the latest version\. The update is performed in a subsequent maintenance window for the DB instance\.
 
 **Note**  

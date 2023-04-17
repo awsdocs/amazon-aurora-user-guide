@@ -8,7 +8,7 @@ Aurora Serverless v2 is an on\-demand, auto\-scaling feature designed to be a co
 
 ## Aurora Serverless v2 with Aurora MySQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.amy"></a>
 
-Following are the supported engines and Region availability for Aurora Serverless v2 with Aurora MySQL\.
+The following Regions and engine versions are available for Aurora Serverless v2 with Aurora MySQL\.
 
 
 | Region | Aurora MySQL version 3 | 
@@ -47,7 +47,7 @@ Following are the supported engines and Region availability for Aurora Serverles
 
 ## Aurora Serverless v2 with Aurora PostgreSQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.apg"></a>
 
-Following are the supported engines and Region availability for Aurora Serverless v2 with Aurora PostgreSQL\.
+The following Regions and engine versions are available for Aurora Serverless v2 with Aurora PostgreSQL\.
 
 
 | Region | Aurora PostgreSQL 15 | Aurora PostgreSQL 14 | Aurora PostgreSQL 13 | 

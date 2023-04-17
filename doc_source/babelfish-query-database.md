@@ -72,7 +72,7 @@ In the following table you can find the SQL Server views currently implemented i
 | `sys.languages` | For information, see [sys\.languages](https://docs.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-fulltext-languages-transact-sql?view=sql-server-ver16) in Microsoft Transact\-SQL documentation\.  | 
 | `sys.schemas` | All schemas | 
 | `sys.server_principals` | All logins and roles | 
-| `sys.sql_modules` | For information, see [sys\.sql\_modules](https://docs.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys.sql_modules-transact-sql?view=sql-server-ver16) in Microsoft Transact\-SQL documentation\. | 
+| `sys.sql_modules` | For information, see [sys\.sql\_modules](https://docs.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-sql-modules-transact-sql?view=sql-server-ver16) in Microsoft Transact\-SQL documentation\. | 
 | `sys.sysconfigures` | Babelfish support limited to a single read\-only configuration\. | 
 | `sys.syscurconfigs` | Babelfish support limited to a single read\-only configuration\. | 
 | `sys.sysprocesses` | For information, see [sys\.sysprocesses](https://docs.microsoft.com/en-us/sql/relational-databases/system-compatibility-views/sys-sysprocesses-transact-sql?view=sql-server-ver16) in Microsoft Transact\-SQL documentation\. | 

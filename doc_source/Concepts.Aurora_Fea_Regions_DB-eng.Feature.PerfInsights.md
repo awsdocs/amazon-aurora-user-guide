@@ -18,7 +18,7 @@ Engine version support is different for Performance Insights with Aurora MySQL i
 
 ### Performance Insights with Aurora MySQL and parallel query turned off<a name="Feature.PerfInsights.regions.amy.pq"></a>
 
-Following are the supported engines and Region availability for Performance Insights with Aurora MySQL and parallel query turned off\.
+The following Regions and engine versions are available for Performance Insights with Aurora MySQL and parallel query turned off\.
 
 
 | Region | Aurora MySQL version 3 | Aurora MySQL version 2 | 
@@ -57,7 +57,7 @@ Following are the supported engines and Region availability for Performance Insi
 
 ### Performance Insights with Aurora MySQL and parallel query turned on<a name="Feature.PerfInsights.regions.amy.pqoff"></a>
 
-Following are the supported engines and Region availability for Performance Insights with Aurora MySQL and parallel query turned on\.
+The following Regions and engine versions are available for Performance Insights with Aurora MySQL and parallel query turned on\.
 
 
 | Region | Aurora MySQL version 3 | Aurora MySQL version 2 | 
@@ -96,7 +96,7 @@ Following are the supported engines and Region availability for Performance Insi
 
 ## Performance Insights with Aurora PostgreSQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.PerfInsights.apg"></a>
 
-Following are the supported engines and Region availability for Performance Insights with Aurora PostgreSQL\.
+The following Regions and engine versions are available for Performance Insights with Aurora PostgreSQL\.
 
 
 | Region | Aurora PostgreSQL 14 | Aurora PostgreSQL 13 | Aurora PostgreSQL 12 | Aurora PostgreSQL 11 | Aurora PostgreSQL 10 | 

@@ -8,7 +8,7 @@ Aurora Serverless v1 is an on\-demand, auto\-scaling feature designed to be a co
 
 ## Aurora Serverless v1 with Aurora MySQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.amy"></a>
 
-Following are the supported engines and Region availability for Aurora Serverless v1 with Aurora MySQL\.
+The following Regions and engine versions are available for Aurora Serverless v1 with Aurora MySQL\.
 
 **Note**  
 To create an Aurora Serverless v1 DB cluster compatible with Aurora MySQL version 2 in the AWS Management Console, choose version 2\.07\.1\. However, the DB cluster is created on version 2\.08\.3\.
@@ -50,7 +50,7 @@ To create an Aurora Serverless v1 DB cluster compatible with Aurora MySQL versio
 
 ## Aurora Serverless v1 with Aurora PostgreSQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV1.apg"></a>
 
-Following are the supported engines and Region availability for Aurora Serverless v1 with Aurora PostgreSQL\.
+The following Regions and engine versions are available for Aurora Serverless v1 with Aurora PostgreSQL\.
 
 
 | Region | Aurora PostgreSQL 11 | Aurora PostgreSQL 10 | 

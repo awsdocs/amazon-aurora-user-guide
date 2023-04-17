@@ -38,6 +38,9 @@ Before you perform the upgrade, review the following considerations:
 
 When you upgrade your Aurora global database to one of the following minor engine versions, you can perform a managed cross\-Region database failover even if the patch levels of your primary and secondary DB clusters don't match\. For minor engine versions lower than the ones on this list, you must upgrade your primary and secondary DB clusters to the same major, minor, and patch levels to perform a managed cross\-Region database failover\. Make sure to review the version information and the notes in the following table\.
 
+**Note**  
+For manual unplanned cross\-Region failovers, you can perform the failover operation as long as the target secondary DB cluster is running the same major and minor engine version as the primary DB cluster\. In this case, the patch levels don't need to match\.
+
 
 | Database engine | Minor engine versions | Notes | 
 | --- | --- | --- | 

@@ -37,6 +37,8 @@ The upgrade process involves the possibility of brief outages as each instance i
 **Note**  
 Both minor version upgrades and major version upgrades might involve brief outages\. For that reason, we recommend strongly that you perform or schedule upgrades during your maintenance window or during other periods of low utilization\.
 
+Aurora PostgreSQL DB clusters occasionally require operating system updates\. These updates might include a newer version of glibc library\. During such updates, we recommend you to follow the guidelines as described in [Collations supported in Aurora PostgreSQL](PostgreSQL-Collations.md)\. 
+
 ## Getting a list of available versions in your AWS Region<a name="USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion"></a>
 
 You can get a list of all engine versions available as upgrade targets for your Aurora PostgreSQL DB cluster by querying your AWS Region using the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command, as follows\.

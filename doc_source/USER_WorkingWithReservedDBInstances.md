@@ -14,6 +14,12 @@ If the specifications of the new DB instance match an existing reserved DB insta
 
 You can modify a DB instance that you're using as a reserved DB instance\. If the modification is within the specifications of the reserved DB instance, part or all of the discount still applies to the modified DB instance\. If the modification is outside the specifications, such as changing the instance class, the discount no longer applies\. For more information, see [Size\-flexible reserved DB instances](#USER_WorkingWithReservedDBInstances.SizeFlexible)\.
 
+**Topics**
++ [Offering types](#USER_WorkingWithReservedDBInstances.OfferingTypes)
++ [Size\-flexible reserved DB instances](#USER_WorkingWithReservedDBInstances.SizeFlexible)
++ [Reserved DB instance billing example](#USER_WorkingWithReservedDBInstances.BillingExample)
++ [Deleting a reserved DB instance](#USER_WorkingWithReservedDBInstances.Cancelling)
+
 For more information about reserved DB instances, including pricing, see [Amazon RDS reserved instances](http://aws.amazon.com/rds/reserved-instances/#2)\.
 
 ### Offering types<a name="USER_WorkingWithReservedDBInstances.OfferingTypes"></a>
@@ -46,20 +52,20 @@ Size\-flexible reserved DB instances are available for the following Aurora data
 You can compare usage for different reserved DB instance sizes by using normalized units\. For example, one unit of usage on two db\.r3\.large DB instances is equivalent to eight normalized units of usage on one db\.r3\.small\. The following table shows the number of normalized units for each DB instance size\.
 
 
-| Instance size | Single\-AZ normalized units \(deployment with one DB instance\) | Multi\-AZ normalized units \(deployment with two DB instances\) | 
-| --- | --- | --- | 
-| micro | 0\.5 | 1 | 
-| small | 1 | 2 | 
-| medium | 2 | 4 | 
-| large | 4 | 8 | 
-| xlarge | 8 | 16 | 
-| 2xlarge | 16 | 32 | 
-| 4xlarge | 32 | 64 | 
-| 8xlarge | 64 | 128 | 
-| 10xlarge | 80 | 160 | 
-| 12xlarge | 96 | 192 | 
-| 16xlarge | 128 | 256 | 
-| 24xlarge | 192 | 384 | 
+| Instance size | Single\-AZ normalized units \(deployment with one DB instance\) | Multi\-AZ DB instance normalized units \(deployment with one DB instance and one standby\) | Multi\-AZ DB cluster normalized units \(deployment with one DB instance and two standbys\) | 
+| --- | --- | --- | --- | 
+|  micro  |  0\.5  |  1  | 1\.5 | 
+|  small  |  1  |  2  | 3 | 
+|  medium  |  2  |  4  | 6 | 
+|  large  |  4  |  8  | 12 | 
+|  xlarge  |  8  |  16  | 24 | 
+|  2xlarge  |  16  |  32  | 48 | 
+|  4xlarge  |  32  |  64  | 96 | 
+|  8xlarge  |  64  |  128  | 192 | 
+|  10xlarge  |  80  |  160  | 240 | 
+|  12xlarge  |  96  |  192  | 288 | 
+|  16xlarge  |  128  |  256  | 384 | 
+|  24xlarge  |  192  |  384  | 576 | 
 
 For example, suppose that you purchase a `db.t2.medium` reserved DB instance, and you have two running `db.t2.small` DB instances in your account in the same AWS Region\. In this case, the billing benefit is applied in full to both instances\.
 
@@ -119,12 +125,12 @@ You can use the AWS Management Console to work with reserved DB instances as sho
 
 1. For **DB instance class**, choose the DB instance class\.
 
-1. For **Deployment Option**, choose whether you want a Multi\-AZ deployment\.
+1. For **Deployment Option**, choose whether you want a Single\-AZ or Multi\-AZ DB instance deployment\.
 **Note**  
-Reserved Amazon Aurora instances always have the deployment option set to **Single\-AZ DB instance**\. However, when you create an Aurora DB cluster, the default deployment option is **Create an Aurora Replica or Reader in a different AZ** \(Multi\-AZ\)\.  
-You must purchase a reserved DB instance for each DB instance you plan to use, including Aurora Replicas\. Therefore, for Multi\-AZ deployments on Aurora, you must purchase extra reserved DB instances\.
+Reserved Amazon Aurora *instances* always have the deployment option set to **Single\-AZ DB instance**\. However, when you create an Aurora DB *cluster*, the default deployment option is **Create an Aurora Replica or Reader in a different AZ** \(Multi\-AZ\)\.  
+You must purchase a reserved DB instance for each instance that you plan to use, including Aurora Replicas\. Therefore, for Multi\-AZ deployments on Aurora, you must purchase extra reserved DB instances\.
 
-1. For **Term**, choose the length of time you want the DB instance reserved\.
+1. For **Term**, choose the length of time to reserve the the DB instance\.
 
 1. For **Offering type**, choose the offering type\. 
 
@@ -146,9 +152,9 @@ After you have information about the available reserved DB instance offerings, y
 
 1. For **DB instance class**, choose the DB instance class\.
 
-1. For **Multi\-AZ deployment**, choose whether you want a Multi\-AZ deployment\.
+1. For **Multi\-AZ deployment**, choose whether you want a Single\-AZ or Multi\-AZ DB instance deployment\.
 **Note**  
-Reserved Amazon Aurora instances always have the **Multi\-AZ deployment** option set to `No`\. When you create an Amazon Aurora DB cluster from your reserved DB instance, the DB cluster is automatically created as Multi\-AZ\. You must purchase a reserved DB instance for each DB instance you plan to use, including Aurora Replicas\.
+Reserved Amazon Aurora *instances* always have the deployment option set to **Single\-AZ DB instance**\. When you create an Amazon Aurora DB *cluster* from your reserved DB instance, the DB cluster is automatically created as Multi\-AZ\. Make sure to purchase a reserved DB instance for each DB instance that you plan to use, including Aurora Replicas\.
 
 1. For **Term**, choose the length of time you want the DB instance reserved\.
 

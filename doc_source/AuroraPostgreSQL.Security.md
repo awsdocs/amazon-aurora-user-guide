@@ -123,14 +123,16 @@ By using configurable cipher suites, you can have more control over the security
 
 Configurable cipher suites is supported in Aurora PostgreSQL versions 11\.8 and higher\.
 
-To specify the list of permissible ciphers for encrypting connections, modify the `ssl_ciphers` cluster parameter\. Set the `ssl_ciphers` parameter in a cluster parameter group using the AWS Management Console, the AWS CLI, or the RDS API\. To set cluster parameters, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
+To specify the list of permissible ciphers for encrypting connections, modify the `ssl_ciphers` cluster parameter\. Set the `ssl_ciphers` parameter to a string of comma\-separated cipher values in a cluster parameter group using the AWS Management Console, the AWS CLI, or the RDS API\. To set cluster parameters, see [Modifying parameters in a DB cluster parameter group](USER_WorkingWithDBClusterParamGroups.md#USER_WorkingWithParamGroups.ModifyingCluster)\.
 
-Set the `ssl_ciphers` parameter to a string of comma\-separated cipher values\. The valid ciphers include the following:
-+ `ECDHE-RSA-AES128-SHA`
-+ `ECDHE-RSA-AES128-SHA256`
-+ `ECDHE-RSA-AES128-GCM-SHA256`
-+ `ECDHE-RSA-AES256-SHA`
-+ `ECDHE-RSA-AES256-GCM-SHA384`
+The following table shows the supported ciphers for the valid Aurora PostgreSQL engine versions\.
+
+
+| Aurora PostgreSQL engine versions | Supported ciphers | 
+| --- | --- | 
+|  9\.6, 10\.20 and lower, 11\.15 and lower, 12\.10 and lower, 13\.6 and lower  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Security.html)  | 
+|  10\.21, 11\.16, 12\.11, 13\.7, 14\.3 and 14\.4  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Security.html)  | 
+|  10\.22 and higher, 11\.17 and higher, 12\.12 and higher, 13\.8 and higher, 14\.5 and higher, and 15\.2 and higher  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Security.html)  | 
 
 You can also use the [describe\-engine\-default\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-cluster-parameters.html) CLI command to determine which cipher suites are currently supported for a specific parameter group family\. The following example shows how to get the allowed values for the `ssl_cipher` cluster parameter for Aurora PostgreSQL 11\.
 
@@ -144,7 +146,10 @@ aws rds describe-engine-default-cluster-parameters --db-parameter-group-family a
 		"Source": "engine-default",
 		"ApplyType": "dynamic",
 		"DataType": "list",
-		"AllowedValues": "ECDHE-RSA-AES256-GCM-SHA384,ECDHE-RSA-AES256-SHA384,AES256-SHA,AES128-SHA,DES-CBC3-SHA,ADH-DES-CBC3-SHA,EDH-RSA-DES-CBC3-SHA,EDH-DSS-DES-CBC3-SHA,ADH-AES256-SHA,DHE-RSA-AES256-SHA,DHE-DSS-AES256-SHA,ADH-AES128-SHA,DHE-RSA-AES128-SHA,DHE-DSS-AES128-SHA,HIGH",
+		"AllowedValues": "DHE-RSA-AES128-SHA,DHE-RSA-AES128-SHA256,DHE-RSA-AES128-GCM-SHA256,DHE-RSA-AES256-SHA,DHE-RSA-AES256-SHA256,DHE-RSA-AES256-GCM-SHA384,
+		ECDHE-RSA-AES128-SHA,ECDHE-RSA-AES128-SHA256,ECDHE-RSA-AES128-GCM-SHA256,ECDHE-RSA-AES256-SHA,ECDHE-RSA-AES256-SHA384,ECDHE-RSA-AES256-GCM-SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,
+		TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256,
+		TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
 		"IsModifiable": true,
 		"MinimumEngineVersion": "11.8",
 		"SupportedEngineModes": [
@@ -154,4 +159,4 @@ aws rds describe-engine-default-cluster-parameters --db-parameter-group-family a
     ...some output truncated...
 ```
 
-The `ssl_ciphers` parameter has no default string of cipher suites\. For more information about ciphers, see the [ssl\_ciphers](https://www.postgresql.org/docs/current/runtime-config-connection.html#GUC-SSL-CIPHERS) variable in the PostgreSQL documentation\. For more information about cipher suite formats, see the [openssl\-ciphers list format](https://www.openssl.org/docs/manmaster/man1/openssl-ciphers.html#CIPHER-LIST-FORMAT) and [openssl\-ciphers string format](https://www.openssl.org/docs/manmaster/man1/openssl-ciphers.html#CIPHER-STRINGS) documentation on the OpenSSL website\.
+The `ssl_ciphers` parameter defaults to all allowed cipher suites\. For more information about ciphers, see the [ssl\_ciphers](https://www.postgresql.org/docs/current/runtime-config-connection.html#GUC-SSL-CIPHERS) variable in the PostgreSQL documentation\. 
