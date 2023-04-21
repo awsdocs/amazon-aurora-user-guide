@@ -61,7 +61,7 @@ This event is related to workload\. You can use Performance Insights to do the f
 
 You can create Aurora Replicas to serve read\-only traffic\. You can also use Aurora Auto Scaling to handle surges in read traffic\. Make sure to run scheduled read\-only tasks and logical backups on Aurora Replicas\.
 
-For more information, see [Using Amazon Aurora Auto Scaling with Aurora replicas](Aurora.Integrating.AutoScaling.md)\.
+For more information, see [Using Amazon Aurora Auto Scaling with Aurora Replicas](Aurora.Integrating.AutoScaling.md)\.
 
 ### Examine the buffer pool size<a name="ams-waits.bufpoolmutex.actions.action3"></a>
 

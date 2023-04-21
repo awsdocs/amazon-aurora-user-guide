@@ -6,7 +6,7 @@ Alarms invoke actions for sustained state changes only\. CloudWatch alarms don't
 
 **Note**  
 For Aurora, use `WRITER` or `READER` role metrics to set up alarms instead of relying on metrics for specific DB instances\. Aurora DB instance roles can change roles over time\. You can find these role\-based metrics in the CloudWatch console\.  
-Aurora Auto Scaling automatically sets alarms based on `READER` role metrics\. For more information about Aurora Auto Scaling, see [Using Amazon Aurora Auto Scaling with Aurora replicas](Aurora.Integrating.AutoScaling.md)\. 
+Aurora Auto Scaling automatically sets alarms based on `READER` role metrics\. For more information about Aurora Auto Scaling, see [Using Amazon Aurora Auto Scaling with Aurora Replicas](Aurora.Integrating.AutoScaling.md)\. 
 
 **To set alarms using the CloudWatch console**
 

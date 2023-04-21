@@ -10,7 +10,6 @@ Amazon RDS generates a significant number of events in categories that you can s
 + [DB cluster snapshot events](#USER_Events.Messages.cluster-snapshot)
 + [RDS Proxy events](#USER_Events.Messages.rds-proxy)
 + [Blue/green deployment events](#USER_Events.Messages.BlueGreenDeployments)
-+ [Message attributes](#USER_Events.Messages.Attributes)
 
 ## DB cluster events<a name="USER_Events.Messages.cluster"></a>
 
@@ -95,7 +94,7 @@ The following table shows the event category and a list of events when a DB inst
 |  failure  | RDS\-EVENT\-0080 |  Enhanced Monitoring was disabled due to an error making the configuration change\. It is likely that the enhanced monitoring IAM role is configured incorrectly\. For information on creating the enhanced monitoring IAM role, see [To create an IAM role for Amazon RDS enhanced monitoring](USER_Monitoring.OS.Enabling.md#USER_Monitoring.OS.IAMRole)\.  | 
 |  failure  | RDS\-EVENT\-0082 |  Aurora was unable to copy backup data from an Amazon S3 bucket\. It is likely that the permissions for Aurora to access the Amazon S3 bucket are configured incorrectly\. For more information, see [Migrating data from MySQL by using an Amazon S3 bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3) \.   | 
 | failure | RDS\-EVENT\-0254 |  The storage for your AWS account has exceeded the allowed storage quota\. Increase the quota to let the autoscaling operation proceed\.  | 
-|  low storage  | RDS\-EVENT\-0007 |  The allocated storage for the DB instance has been consumed\. To resolve this issue, allocate additional storage for the DB instance\. For more information, see the [RDS FAQ](https://aws.amazon.com/rds/faqs/#20)\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
+|  low storage  | RDS\-EVENT\-0007 |  The allocated storage for the DB instance has been consumed\. To resolve this issue, allocate additional storage for the DB instance\. For more information, see the [RDS FAQ](https://aws.amazon.com/rds/faqs)\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
 |  low storage  | RDS\-EVENT\-0089 |  The DB instance has consumed more than 90% of its allocated storage\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
 |  low storage  | RDS\-EVENT\-0227 |  The Aurora storage subsystem is running low on space\.  | 
 |  maintenance  | RDS\-EVENT\-0026 |  Offline maintenance of the DB instance is taking place\. The DB instance is currently unavailable\.  | 
@@ -194,15 +193,3 @@ For more information about blue/green deployments, see [Using Amazon RDS Blue/Gr
 |  notification  | RDS\-EVENT\-0251 |  Switchover from primary source to target completed and databases renamed\.  | 
 |  notification  | RDS\-EVENT\-0259 |  Switchover from source to target started\.  | 
 |  notification  | RDS\-EVENT\-0260 |  Switchover from source to target completed\.  | 
-
-## Message attributes<a name="USER_Events.Messages.Attributes"></a>
-
-The following table shows the message attribute for RDS events\.
-
-
-| Amazon RDS event attribute |  Description  | 
-| --- | --- | 
-| Event ID |  Identifier for the RDS event message\. For example, RDS\-EVENT\-0006\.  | 
-| Resource |  The ARN identifier for the resource emitting the event\. For example, `arn:aws:rds:ap-southeast-2:123456789012:db:database-1`\.  | 
-
-By default, an Amazon SNS topic subscriber receives every message published to the topic\. To receive only a subset of the messages, the subscriber must assign a filter policy to the topic subscription\. For more information about SNS message filtering, see [Amazon SNS message filtering](https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html) in the *Amazon Simple Notification Service Developer Guide*

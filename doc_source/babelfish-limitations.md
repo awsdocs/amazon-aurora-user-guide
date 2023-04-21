@@ -2,10 +2,8 @@
 
  The following limitations currently apply to Babelfish for Aurora PostgreSQL: 
 +  Babelfish currently doesn't support the following Aurora features: 
-  +  AWS Directory Service 
   +  AWS Identity and Access Management 
   +  Database Activity Streams \(DAS\) 
-  +  Kerberos 
   +  Query plan management \(QPM\) 
   +  Salted challenge response authentication mechanism \(SCRAM\) 
 +  Babelfish currently doesn't support the following PostgreSQL features: 

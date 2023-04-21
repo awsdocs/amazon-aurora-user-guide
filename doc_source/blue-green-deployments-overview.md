@@ -157,6 +157,7 @@ Feature availability and support varies across specific versions of each databas
 
 The following limitations apply to blue/green deployments:
 + Aurora MySQL versions 2\.08 and 2\.09 aren't supported as upgrade source or target versions\.
++ The blue environment can't contain any databases named `tmp`\. Databases with this name will not be copied to the green environment\.
 + Blue/green deployments aren't supported for the following features:
   + Amazon RDS Proxy
   + Cross\-Region read replicas

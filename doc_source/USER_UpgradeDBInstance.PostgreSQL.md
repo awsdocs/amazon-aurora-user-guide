@@ -27,7 +27,7 @@ If the automatic minor version upgrade option isn't set for your Aurora PostgreS
 Patches aren't considered an upgrade, and they aren't applied automatically\. Aurora PostgreSQL prompts you to apply any patches by adding a recommendation to maintenance tasks for your Aurora PostgreSQL DB cluster\. For more information, see [How to perform minor version upgrades and apply patches](#USER_UpgradeDBInstance.PostgreSQL.Minor)\.   
 Patches that resolve security or other critical issues are also added as maintenance tasks\. However, these patches are required\. Make sure to apply security patches to your Aurora PostgreSQL DB cluster when they become available in your pending maintenance tasks\.
 The upgrade process involves the possibility of brief outages as each instance in the cluster is upgraded to the new version\. However, after Aurora PostgreSQL versions 14\.3\.3, 13\.7\.3, 12\.11\.3, 11\.16\.3, 10\.21\.3 and other higher releases of these minor versions and newer major versions, the upgrade process uses the zero\-downtime patching \(ZDP\) feature\. This feature minimizes outages, and in most cases completely eliminates them\. For more information, see [Minor release upgrades and zero\-downtime patching](#USER_UpgradeDBInstance.PostgreSQL.Minor.zdp)\.  
-ZDP isn't supported for Aurora PostgreSQL DB clusters that are configured as Aurora Serverless v1, or Aurora global databases\.
+ZDP isn't supported for Aurora PostgreSQL DB clusters that are configured as Aurora Serverless v1, or Aurora global databases\. ZDP isn't supported during OS patches and OS upgrades\.
 
 **Major version upgrades**  
 Unlike for minor version upgrades and patches, Aurora PostgreSQL doesn't have an automatic major version upgrade option\. New major PostgreSQL versions might contain database changes that aren't backward\-compatible with existing applications\. The new functionality can cause your existing applications to stop working correctly\.  
@@ -432,11 +432,19 @@ Upgrading an Aurora PostgreSQL DB cluster involves the possibility of an outage\
 The zero\-downtime patching \(ZDP\) feature improves the upgrading process\. With ZDP, both minor version upgrades and patches can be applied with minimal impact to your Aurora PostgreSQL DB cluster\. ZDP is used when applying patches or newer minor version upgrades to Aurora PostgreSQL versions 14\.3\.3, 13\.7\.3, 12\.11\.3, 11\.16\.3, 10\.21\.3 and other higher releases of these minor versions and newer major versions\. That is, upgrading to new minor versions from any of these releases onward uses ZDP\. 
 
 **Note**  
-ZDP isn't supported for Aurora PostgreSQL DB clusters that are configured as Aurora Serverless v1, or Aurora global databases\.
+ZDP isn't supported for Aurora PostgreSQL DB clusters that are configured as Aurora Serverless v1, or Aurora global databases\. ZDP isn't supported during OS patches and OS upgrades\.
 
-ZDP works by preserving current client connections to your Aurora PostgreSQL DB cluster throughout the Aurora PostgreSQL upgrade process\. When ZDP completes successfully, application sessions are preserved and the database engine restarts while the upgrade is still under way\. Although the database engine restart can cause a drop in throughput, that typically lasts only for a few seconds or at most, approximately one minute\. 
+ZDP works by preserving current client connections to your Aurora PostgreSQL DB cluster throughout the Aurora PostgreSQL upgrade process\. However, in the following cases, connections will be dropped for ZDP to complete:
++ Long running query or transactions are in progress\.
++ Data definition language \(DDL\) statements are running\.
++ Temporary tables or table locks are in use\.
++ All sessions are listening on notification channels\.
++ A cursor in ‘WITH HOLD’ status is in use\.
++ TLSv1\.3 or TLSv1\.1 connections are in use\.
 
-In some cases, zero\-downtime patching \(ZDP\) might not succeed\. For example, if long\-running queries or transactions are in progress, ZDP might need to cancel these to complete\. If data definition language \(DDL\) statements are running or if temporary tables or table locks are in use for any other reason, ZDP might need to cancel the open transaction\. Parameter changes that are in a `pending` state on your Aurora PostgreSQL DB cluster or its instances also interfere with ZDP\. 
+When ZDP completes successfully, application sessions are preserved except sessions of dropped connections, and the database engine restarts while the upgrade is still under way\. Although the database engine restart can cause a drop in throughput, that typically lasts only for a few seconds or at most, approximately one minute\. 
+
+In some cases, zero\-downtime patching \(ZDP\) might not succeed\. For example, parameter changes that are in a `pending` state on your Aurora PostgreSQL DB cluster or its instances interfere with ZDP\.
 
 You can find metrics and events for ZDP operations in **Events** page in the console\. The events include the start of the ZDP upgrade and completion of the upgrade\. In this event you can find how long the process took, and the numbers of preserved and dropped connections that occurred during the restart\. You can find details in your database error log\. 
 

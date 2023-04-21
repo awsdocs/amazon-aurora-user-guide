@@ -1,4 +1,4 @@
-# Using Amazon Aurora Auto Scaling with Aurora replicas<a name="Aurora.Integrating.AutoScaling"></a>
+# Using Amazon Aurora Auto Scaling with Aurora Replicas<a name="Aurora.Integrating.AutoScaling"></a>
 
 To meet your connectivity and workload requirements, Aurora Auto Scaling dynamically adjusts the number of Aurora Replicas provisioned for an Aurora DB cluster\. Aurora Auto Scaling is available for both Aurora MySQL and Aurora PostgreSQL\. Aurora Auto Scaling enables your Aurora DB cluster to handle sudden increases in connectivity or workload\. When the connectivity or workload decreases, Aurora Auto Scaling removes unnecessary Aurora Replicas so that you don't pay for unused provisioned DB instances\.
 
@@ -13,6 +13,7 @@ You can use the AWS Management Console to apply a scaling policy based on a pred
 + [Editing a scaling policy](#Aurora.Integrating.AutoScaling.Edit)
 + [Deleting a scaling policy](#Aurora.Integrating.AutoScaling.Delete)
 + [DB instance IDs and tagging](#Aurora.Integrating.AutoScaling.Concepts.Tagging)
++ [Aurora Auto Scaling and Performance Insights](#aurora-auto-scaling-pi)
 
 ## Before you begin<a name="Aurora.Integrating.AutoScaling.BYB"></a>
 
@@ -520,3 +521,13 @@ The following tag is automatically added to the DB instance\. You can view it on
 | application\-autoscaling:resourceId | cluster:mynewcluster\-cluster | 
 
 For more information on Amazon RDS resource tags, see [Tagging Amazon RDS resources](USER_Tagging.md)\.
+
+## Aurora Auto Scaling and Performance Insights<a name="aurora-auto-scaling-pi"></a>
+
+You can use Performance Insights to monitor replicas that have been added by Aurora Auto Scaling, the same as with any Aurora reader DB instance\.
+
+When you turn on Performance Insights for an Aurora DB cluster, it's turned on for the writer DB instance and any existing Aurora Auto Scaling replicas\.
+
+Performance Insights isn't turned on automatically for new replicas that Aurora Auto Scaling adds after you turn it on for the cluster\. You have to modify the new replicas and turn on Performance Insights for them individually after they're created\.
+
+For more information on using Performance Insights to monitor Aurora DB clusters, see [Monitoring DB load with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\.

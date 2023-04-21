@@ -9,5 +9,3 @@ Secrets Manager integration is available for all Aurora DB engines and all versi
 Secrets Manager integration is available in all AWS Regions except the following:
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
-+ China \(Beijing\)
-+ China \(Ningxia\)

@@ -4,7 +4,7 @@ Because Amazon Aurora MySQL is compatible with MySQL, you can set up replication
 
 **Note**  
 You can't use binlog replication to or from certain types of Aurora DB clusters\. In particular, binlog replication isn't available for Aurora Serverless v1 clusters\. If the `SHOW MASTER STATUS` and `SHOW SLAVE STATUS` \(Aurora MySQL version 2\) or `SHOW REPLICA STATUS` \(Aurora MySQL version 3\) statement returns no output, check that the cluster you're using supports binlog replication\.  
-In Aurora MySQL version 3, you can't replicate to the `mysql` system database using binlog replication\. Therefore, Data Control Language \(DCL\) statements such as `CREATE USER`, `GRANT`, and `REVOKE` aren't replicated in Aurora MySQL version 3\.
+In Aurora MySQL version 3, binary log replication doesn't replicate to the `mysql` system database\. Passwords and accounts aren't replicated by binlog replication in Aurora MySQL version 3\. Therefore, Data Control Language \(DCL\) statements such as `CREATE USER`, `GRANT`, and `REVOKE` aren't replicated\.
 
 You can also replicate with an RDS for MySQL DB instance or Aurora MySQL DB cluster in another AWS Region\. When you're performing replication across AWS Regions, make sure that your DB clusters and DB instances are publicly accessible\. If the Aurora MySQL DB clusters are in private subnets in your VPC, use VPC peering between the AWS Regions\. For more information, see [A DB cluster in a VPC accessed by an EC2 instance in a different VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario3)\.
 
@@ -148,7 +148,7 @@ Use the following instructions to stop binary log replication for your database 
 | --- | --- | 
 |   Aurora MySQL   |  **To stop binary log replication on an Aurora MySQL DB cluster replica target** Connect to the Aurora DB cluster that is the replica target, and call the [mysql\.rds\_stop\_replication](mysql-stored-proc-replicating.md#mysql_rds_stop_replication) procedure\.  | 
 |   RDS for MySQL   |  **To stop binary log replication on an Amazon RDS DB instance** Connect to the RDS DB instance that is the replica target and call the [mysql\.rds\_stop\_replication](mysql-stored-proc-replicating.md#mysql_rds_stop_replication) procedure\.  | 
-|   MySQL \(external\)   |  **To stop binary log replication on an external MySQL database** Connect to the MySQL database and call the `STOP REPLICATION` command\.  | 
+|   MySQL \(external\)   |  **To stop binary log replication on an external MySQL database** Connect to the MySQL database and run the `STOP SLAVE` \(version 5\.7\) or `STOP REPLICA` \(version 8\.0\) command\.  | 
 
 ### 2\. Turn off binary logging on the replication source<a name="AuroraMySQL.Replication.MySQL.Stopping.DisableBinaryLogging"></a>
 
@@ -481,6 +481,8 @@ Use the following DB cluster parameters to turn on binlog optimization\.
 
 ## Synchronizing passwords between replication source and target<a name="AuroraMySQL.Replication.passwords"></a>
 
- When you change user accounts and passwords on the replication source using SQL statements, those changes are replicated to the replication target automatically\. 
+In Aurora MySQL version 2, when you change user accounts and passwords on the replication source using SQL statements, those changes are replicated to the replication target automatically\.
 
- If you use the AWS Management Console, the AWS CLI, or the RDS API to change the master password on the replication source, those changes are not automatically replicated to the replication target\. If you want to synchronize the master user and master password between the source and target systems, you must make the same change on the replication target yourself\. 
+If you use the AWS Management Console, the AWS CLI, or the RDS API to change the master password on the replication source, those changes are not automatically replicated to the replication target\. If you want to synchronize the master user and master password between the source and target systems, you must make the same change on the replication target yourself\.
+
+In Aurora MySQL version 3, binary log replication doesn't replicate to the `mysql` system database\. Passwords and accounts aren't replicated by binlog replication in Aurora MySQL version 3\. Therefore, Data Control Language \(DCL\) statements such as `CREATE USER`, `GRANT`, and `REVOKE` aren't replicated\.

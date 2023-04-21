@@ -147,7 +147,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `allow-suspicious-udfs`   |   No   |    | 
 |  `aurora_disable_hash_join`   |  Yes  |  Set this parameter to `ON` to turn off hash join optimization in Aurora MySQL version 2\.09 or higher\. It isn't supported for version 3\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
 |   `aurora_lab_mode`   |   Yes   |   For more information, see [Amazon Aurora MySQL lab mode](AuroraMySQL.Updates.LabMode.md)\. Removed from Aurora MySQL version 3\.   | 
-|   `aurora_oom_response`   |   Yes   |  This parameter is supported for Aurora MySQL version 2\. It isn't supported for version 3\. For more information, see [ Amazon Aurora MySQL out\-of\-memory issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.  | 
+|   `aurora_oom_response`   |   Yes   |  This parameter is supported for Aurora MySQL versions 2 and 3\. For more information, see [ Amazon Aurora MySQL out\-of\-memory issues ](CHAP_Troubleshooting.md#CHAP_Troubleshooting.AuroraMySQLOOM)\.  | 
 |   `aurora_parallel_query`   |   Yes   |  Set to `ON` to turn on parallel query in Aurora MySQL version 2\.09 or higher\. The old `aurora_pq` parameter isn't used in these versions\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
 |   `aurora_pq`   |   Yes   |  Set to `OFF` to turn off parallel query for specific DB instances in Aurora MySQL versions before 2\.09\. In version 2\.09 or higher, turn parallel query on and off with `aurora_parallel_query` instead\. For more information, see [Working with parallel query for Amazon Aurora MySQL](aurora-mysql-parallel-query.md)\.  | 
 |   `autocommit`   |   Yes   |    | 
@@ -498,7 +498,6 @@ Aurora MySQL version 3 removes the following status variables that were in Auror
 +  `Aurora_new_lock_manager_lock_release_cnt` 
 +  `Aurora_new_lock_manager_lock_release_total_duration_micro` 
 +  `Aurora_new_lock_manager_lock_timeout_cnt` 
-+  `Aurora_oom_response` 
 +  `Aurora_total_op_memory` 
 +  `Aurora_total_op_temp_space` 
 +  `Aurora_used_alter_table_log_entries` 

@@ -19,7 +19,7 @@ The following Regions and engine versions are available for Aurora global databa
 | US West \(Oregon\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 
 | Africa \(Cape Town\) | Version 3\.01\.0 and higher | Version 2\.07\.1 and higher | 
 | Asia Pacific \(Hong Kong\) | Version 3\.01\.0 and higher | Version 2\.07\.1 and higher | 
-| Asia Pacific \(Hyderabad\) | Version 3\.02\.0 and higher | – | 
+| Asia Pacific \(Hyderabad\) | Version 3\.02\.0 and higher | Version 2\.11\.2 and higher | 
 | Asia Pacific \(Jakarta\) | Version 3\.01\.0 and higher | Version 2\.07\.6 and higher | 
 | Asia Pacific \(Melbourne\) | Version 3\.03\.0 and higher | – | 
 | Asia Pacific \(Mumbai\) | Version 3\.01\.0 and higher | Version 2\.07\.0 and higher | 

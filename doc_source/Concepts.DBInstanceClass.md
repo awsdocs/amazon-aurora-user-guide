@@ -28,10 +28,10 @@ The following are the memory\-optimized DB instance types available:
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.r6i** – Instance classes that are ideal for running memory\-intensive workloads\.
 + **db\.r5** – Instance classes optimized for memory\-intensive applications\. These instance classes offer improved networking performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
-+ **db\.r4** – These instance classes are no longer supported for Aurora PostgreSQL\. If your Aurora PostgreSQL DB cluster currently uses a db\.r4 instance class, you should modify it to use **db\.r5** instead\. You can't upgrade your Aurora PostgreSQL version to a new release if your cluster uses a db\.r4 instance class\.
++ **db\.r4** – These instance classes are supported only for Aurora PostgreSQL 11 and 12 versions\. For all Aurora PostgreSQL DB clusters that use db\.r4 DB instance classes, We recommend that you upgrade to a db\.r5 or newer instance class as soon as possible\.
 + **db\.r3** – Instance classes that provide memory optimization\.
 
-  Amazon Aurora has started the end\-of\-life process for db\.r3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all Aurora MySQL DB clusters that use db\.r3 DB instance classes, we recommend that you upgrade to a db\.r5 DB instance class as soon as possible\.    
+  Amazon Aurora has started the end\-of\-life process for db\.r3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all Aurora MySQL DB clusters that use db\.r3 DB instance classes, we recommend that you upgrade to a db\.r5 or higher DB instance class as soon as possible\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html)
 
 The following are the burstable\-performance DB instance types available:

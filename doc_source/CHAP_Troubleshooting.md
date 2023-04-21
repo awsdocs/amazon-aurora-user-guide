@@ -160,7 +160,7 @@ For Aurora Serverless v1, you can change the capacity range to use more ACUs\. F
 The Aurora MySQL `aurora_oom_response` instance\-level parameter can enable the DB instance to monitor the system memory and estimate the memory consumed by various statements and connections\. If the system runs low on memory, it can perform a list of actions to release that memory\. It does so in an attempt to avoid out\-of\-memory \(OOM\) and database restart\. The instance\-level parameter takes a string of comma\-separated actions that a DB instance should take when its memory is low\. Valid actions include `print`, `tune`, `decline`, `kill_query`, or any combination of these\. An empty string means that no action should be taken and effectively turns off the feature\.
 
 **Note**  
-This parameter is supported for Aurora MySQL version 2\. It isn't supported for version 3\.
+This parameter is supported for Aurora MySQL versions 2 and 3\.
 
 The following are usage examples for the `aurora_oom_response` parameter:
 + `print` – Only prints the queries taking high amount of memory\.
