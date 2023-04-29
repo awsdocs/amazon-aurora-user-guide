@@ -324,7 +324,7 @@ AND (
       coalesce(cvsf.value::float,autovacuum_vacuum_scale_factor::float) * c.reltuples <= n_dead_tup
     -- or 1 = 1
 )
-ORDER BY age(relfrozenxid) DES;
+ORDER BY age(relfrozenxid) DESC;
 ```
 
 ### Respond to high numbers of connections<a name="apg-waits.iodatafileread.actions.connections"></a>

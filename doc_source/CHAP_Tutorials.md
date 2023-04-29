@@ -8,6 +8,8 @@ You can find more tutorials at the [AWS Database Blog](http://aws.amazon.com/blo
 **Topics**
 + [Tutorials in this guide](#CHAP_Tutorials.ThisGuide)
 + [Tutorials in other AWS guides](#CHAP_Tutorials.OtherGuides)
++ [AWS workshop and lab content portal for Amazon Aurora PostgreSQL](#CHAP_Tutorials_postgreslabs)
++ [AWS workshop and lab content portal for Amazon Aurora MySQL](#CHAP_Tutorials_sqllabs)
 + [Tutorials and sample code in GitHub](#CHAP_Tutorials.GitHub)
 + [Using this service with an AWS SDK](#sdk-general-information-section)
 
@@ -57,6 +59,89 @@ Some of the tutorials use Amazon RDS DB instances, but they can be adapted to us
 + [ Manually Enabling Access to an Amazon RDS Instance in a VPC](https://docs.aws.amazon.com/quicksight/latest/user/rds-vpc-access.html) in the *Amazon QuickSight User Guide*
 
   Learn how to enable Amazon QuickSight access to an Amazon RDS DB instance in a VPC\.
+
+## AWS workshop and lab content portal for Amazon Aurora PostgreSQL<a name="CHAP_Tutorials_postgreslabs"></a>
+
+The below collection of workshops and other hands\-on content helps you to gain an understanding of the Amazon Aurora PostgreSQL features and capabilities: 
++ [ Creating an Aurora Cluster ](https://catalog.us-east-1.prod.workshops.aws/workshops/098605dc-8eee-4e84-85e9-c5c6c9e43de2/en-US/lab1-create-aurora-cluster)
+
+  Learn how to create an Amazon Aurora PostgreSQL cluster manually\.
++ [ Creating a Cloud9 Cloud\-based IDE environment to connect to your database ](https://catalog.us-east-1.prod.workshops.aws/workshops/098605dc-8eee-4e84-85e9-c5c6c9e43de2/en-US/lab1-5-client)
+
+  Learn how to configure Cloud9 and initializing the PostgreSQL database\.
++ [ Fast Cloning ](https://catalog.us-east-1.prod.workshops.aws/workshops/098605dc-8eee-4e84-85e9-c5c6c9e43de2/en-US/lab2-fast-cloning)
+
+  Learn how to create an Aurora fast clone\.
++ [ Query Plan Management ](https://catalog.us-east-1.prod.workshops.aws/workshops/098605dc-8eee-4e84-85e9-c5c6c9e43de2/en-US/lab3-query-plan-mgmt)
+
+  Learn how to control execution plans for a set of statements using query plan management\.
++ [ Cluster Cache Management ](https://catalog.us-east-1.prod.workshops.aws/workshops/098605dc-8eee-4e84-85e9-c5c6c9e43de2/en-US/lab4-cluster-cache-mgmt)
+
+  Learn about Cluster Cache Management feature in Aurora PostgreSQL\.
++ [ Database Activity Streaming ](https://catalog.us-east-1.prod.workshops.aws/workshops/098605dc-8eee-4e84-85e9-c5c6c9e43de2/en-US/lab5-db-activity-stream)
+
+  Learn how to monitor and audit your database activity with this feature\.
++ [ Using Performance Insights ](https://catalog.us-east-1.prod.workshops.aws/workshops/098605dc-8eee-4e84-85e9-c5c6c9e43de2/en-US/lab6-perf-insights)
+
+  Learn how to monitor and tune your DB instance using Performance insights\.
++ [ Performance Monitoring with RDS Tools ](https://catalog.us-east-1.prod.workshops.aws/workshops/31babd91-aa9a-4415-8ebf-ce0a6556a216/en-US)
+
+  Learn how to use AWS and Postgres tools\(Cloudwatch, Enhanced Monitoring, Slow Query Logs, Performance Insights, PostgreSQL Catalog Views\) to understand performance issues and identify ways to improve performance of your database\.
++ [ Auto Scaling Read Replicas ](https://catalog.us-east-1.prod.workshops.aws/workshops/098605dc-8eee-4e84-85e9-c5c6c9e43de2/en-US/lab7-load-data-auto-scale)
+
+  Learn how Aurora read replica auto scaling works in practice using a load generator script\.
++ [ Testing Fault Tolerance ](https://catalog.us-east-1.prod.workshops.aws/workshops/098605dc-8eee-4e84-85e9-c5c6c9e43de2/en-US/lab8-fault-tolerance)
+
+  Learn how a DB cluster can tolerate a failure\.
++ [ Aurora Global Database ](https://catalog.us-east-1.prod.workshops.aws/workshops/098605dc-8eee-4e84-85e9-c5c6c9e43de2/en-US/lab9-aurora-global-db)
+
+  Learn about Aurora Global Database\.
++ [ Aurora Serverless v2 ](https://catalog.us-east-1.prod.workshops.aws/workshops/098605dc-8eee-4e84-85e9-c5c6c9e43de2/en-US/lab13-aurora-serverless-v2)
+
+  Learn about Aurora Serverless v2\.
++ [ Using Machine Learning ](https://catalog.us-east-1.prod.workshops.aws/workshops/098605dc-8eee-4e84-85e9-c5c6c9e43de2/en-US/lab11-aurora-pg-ml)
+
+  Learn about Aurora Machine Learning\.
+
+## AWS workshop and lab content portal for Amazon Aurora MySQL<a name="CHAP_Tutorials_sqllabs"></a>
+
+The below collection of workshops and other hands\-on content helps you to gain an understanding of the Amazon Aurora MySQL features and capabilities: 
++ [ Creating an Aurora Cluster ](https://catalog.workshops.aws/awsauroramysql/en-US/provisioned/create/)
+
+  Learn how to create an Amazon Aurora MySQL cluster manually\.
++ [ Creating a Cloud9 Cloud\-based IDE environment to connect to your database ](https://catalog.workshops.aws/awsauroramysql/en-US/prereqs/connect)
+
+  Learn how to configure Cloud9 and initializing the MySQL database\.
++ [ Fast Cloning ](https://catalog.workshops.aws/awsauroramysql/en-US/provisioned/clone/)
+
+  Learn how to create an Aurora fast clone\.
++ [ Backtrack a Cluster ](https://catalog.workshops.aws/awsauroramysql/en-US/provisioned/backtrack/)
+
+  Learn how to backtrack a DB cluster\.
++ [ Using Performance Insights ](https://catalog.workshops.aws/awsauroramysql/en-US/provisioned/pi/)
+
+  Learn how to monitor and tune your DB instance using Performance insights\.
++ [ Performance Monitoring with RDS Tools ](https://catalog.workshops.aws/awsauroramysql/en-US/provisioned/perfobserve/)
+
+  Learn how to use AWS and SQL tools to understand performance issues and identify ways to improve performance of your database\.
++ [ Analyze Query Performance ](https://catalog.workshops.aws/awsauroramysql/en-US/provisioned/perfanalyze/)
+
+  Learn how to troubleshoot SQL performance related issues using different tools\.
++ [ Auto Scaling Read Replicas ](https://catalog.workshops.aws/awsauroramysql/en-US/provisioned/autoscale/)
+
+  Learn how auto scaling read replicas work\.
++ [ Testing Fault Tolerance ](https://catalog.workshops.aws/awsauroramysql/en-US/provisioned/ft/)
+
+  Learn about high availability and fault tolerance features in Aurora MySQL\.
++ [ Aurora Global Database ](https://catalog.workshops.aws/awsauroramysql/en-US/global)
+
+  Learn about Aurora Global Database\.
++ [ Aurora Serverless v2 ](https://catalog.workshops.aws/awsauroramysql/en-US/sv2)
+
+  Learn about Aurora Serverless v2\.
++ [ Using Machine Learning ](https://catalog.workshops.aws/awsauroramysql/en-US/ml)
+
+  Learn about Aurora Machine Learning\.
 
 ## Tutorials and sample code in GitHub<a name="CHAP_Tutorials.GitHub"></a>
 

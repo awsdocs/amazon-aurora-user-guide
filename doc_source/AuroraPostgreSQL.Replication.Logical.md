@@ -53,7 +53,7 @@ Setting up logical replication requires `rds_superuser` privileges\. Your Aurora
    1. Use `psql` to connect to the writer instance of your Aurora PostgreSQL DB cluster\.
 
       ```
-      psql --host=your-db-cluster-instance-1.aws-region.rds.amazonaws.com --port=5432 --username=postgrespostgres --password --dbname=labdb
+      psql --host=your-db-cluster-instance-1.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password --dbname=labdb
       ```
 
    1. Verify that logical replication has been enabled by using the following command\.

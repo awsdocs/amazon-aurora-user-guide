@@ -53,36 +53,36 @@ To create an Aurora Serverless v1 DB cluster compatible with Aurora MySQL versio
 The following Regions and engine versions are available for Aurora Serverless v1 with Aurora PostgreSQL\.
 
 
-| Region | Aurora PostgreSQL 11 | Aurora PostgreSQL 10 | 
-| --- | --- | --- | 
-| US East \(Ohio\) | Version 11\.16 | Version 10\.21 | 
-| US East \(N\. Virginia\) | Version 11\.16 | Version 10\.21 | 
-| US West \(N\. California\) | Version 11\.16 | Version 10\.21 | 
-| US West \(Oregon\) | Version 11\.16 | Version 10\.21 | 
-| Africa \(Cape Town\) | – | – | 
-| Asia Pacific \(Hong Kong\) | – | – | 
-| Asia Pacific \(Hyderabad\) | – | – | 
-| Asia Pacific \(Jakarta\) | – | – | 
-| Asia Pacific \(Melbourne\) | – | – | 
-| Asia Pacific \(Mumbai\) | Version 11\.16 | Version 10\.21 | 
-| Asia Pacific \(Osaka\) | – | – | 
-| Asia Pacific \(Seoul\) | Version 11\.16 | Version 10\.21 | 
-| Asia Pacific \(Singapore\) | Version 11\.16 | Version 10\.21 | 
-| Asia Pacific \(Sydney\) | Version 11\.16 | Version 10\.21 | 
-| Asia Pacific \(Tokyo\) | Version 11\.16 | Version 10\.21 | 
-| Canada \(Central\) | Version 11\.16 | Version 10\.21 | 
-| China \(Beijing\) | – | – | 
-| China \(Ningxia\) | – | – | 
-| Europe \(Frankfurt\) | Version 11\.16 | Version 10\.21 | 
-| Europe \(Ireland\) | Version 11\.16 | Version 10\.21 | 
-| Europe \(London\) | Version 11\.16 | Version 10\.21 | 
-| Europe \(Milan\) | – | – | 
-| Europe \(Paris\) | Version 11\.16 | Version 10\.21 | 
-| Europe \(Spain\) | – | – | 
-| Europe \(Stockholm\) | – | – | 
-| Europe \(Zurich\) | – | – | 
-| Middle East \(Bahrain\) | – | – | 
-| Middle East \(UAE\) | – | – | 
-| South America \(São Paulo\) | – | – | 
-| AWS GovCloud \(US\-East\) | – | – | 
-| AWS GovCloud \(US\-West\) | – | – | 
+| Region | Aurora PostgreSQL 13 | Aurora PostgreSQL 11 | Aurora PostgreSQL 10 | 
+| --- | --- | --- | --- | 
+| US East \(Ohio\) | Version 13\.9 | Version 11\.16 | Version 10\.21 | 
+| US East \(N\. Virginia\) | Version 13\.9 | Version 11\.16 | Version 10\.21 | 
+| US West \(N\. California\) | Version 13\.9 | Version 11\.16 | Version 10\.21 | 
+| US West \(Oregon\) | Version 13\.9 | Version 11\.16 | Version 10\.21 | 
+| Africa \(Cape Town\) | – | – | – | 
+| Asia Pacific \(Hong Kong\) | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | 
+| Asia Pacific \(Jakarta\) | – | – | – | 
+| Asia Pacific \(Melbourne\) | – | – | – | 
+| Asia Pacific \(Mumbai\) | Version 13\.9 | Version 11\.16 | Version 10\.21 | 
+| Asia Pacific \(Osaka\) | – | – | – | 
+| Asia Pacific \(Seoul\) | Version 13\.9 | Version 11\.16 | Version 10\.21 | 
+| Asia Pacific \(Singapore\) | Version 13\.9 | Version 11\.16 | Version 10\.21 | 
+| Asia Pacific \(Sydney\) | Version 13\.9 | Version 11\.16 | Version 10\.21 | 
+| Asia Pacific \(Tokyo\) | Version 13\.9 | Version 11\.16 | Version 10\.21 | 
+| Canada \(Central\) | Version 13\.9 | Version 11\.16 | Version 10\.21 | 
+| China \(Beijing\) | – | – | – | 
+| China \(Ningxia\) | – | – | – | 
+| Europe \(Frankfurt\) | Version 13\.9 | Version 11\.16 | Version 10\.21 | 
+| Europe \(Ireland\) | Version 13\.9 | Version 11\.16 | Version 10\.21 | 
+| Europe \(London\) | Version 13\.9 | Version 11\.16 | Version 10\.21 | 
+| Europe \(Milan\) | – | – | – | 
+| Europe \(Paris\) | Version 13\.9 | Version 11\.16 | Version 10\.21 | 
+| Europe \(Spain\) | – | – | – | 
+| Europe \(Stockholm\) | – | – | – | 
+| Europe \(Zurich\) | – | – | – | 
+| Middle East \(Bahrain\) | – | – | – | 
+| Middle East \(UAE\) | – | – | – | 
+| South America \(São Paulo\) | – | – | – | 
+| AWS GovCloud \(US\-East\) | – | – | – | 
+| AWS GovCloud \(US\-West\) | – | – | – | 

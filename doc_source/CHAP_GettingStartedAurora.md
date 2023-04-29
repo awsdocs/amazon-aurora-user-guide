@@ -4,6 +4,8 @@ In this section, you can find out how to create and connect to an Aurora DB clus
 
 The following procedures are tutorials that demonstrate the basics of getting started with Aurora\. Later sections introduce more advanced Aurora concepts and procedures, such as the different kinds of endpoints and how to scale Aurora clusters up and down\. 
 
+
+
 **Important**  
 Before you can create or connect to a DB cluster, make sure to complete the tasks in [Setting up your environment for Amazon Aurora](CHAP_SettingUp_Aurora.md)\.
 

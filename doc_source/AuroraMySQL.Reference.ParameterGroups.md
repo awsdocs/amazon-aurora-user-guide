@@ -36,7 +36,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `aurora_enable_staggered_replica_restart`  |  Yes  | This setting is available in Aurora MySQL version 3, but it isn't used\. | 
 |   `aurora_enable_zdr`   |   Yes   |   This setting is turned on by default in Aurora MySQL 2\.10 and higher\. For more information, see [Zero\-downtime restart \(ZDR\) for Amazon Aurora MySQL](AuroraMySQL.Replication.md#AuroraMySQL.Replication.Availability)\.   | 
 |   `aurora_load_from_s3_role`   |   Yes   |   For more information, see [Loading data into an Amazon Aurora MySQL DB cluster from text files in an Amazon S3 bucket](AuroraMySQL.Integrating.LoadFromS3.md)\. Currently not available in Aurora MySQL version 3\. Use `aws_default_s3_role`\.  | 
-|  `aurora_mask_password_hashes_type`  |  Yes  |  This setting is turned on by default in Aurora MySQL 2\.11 and higher\. Use this setting to mask Aurora MySQL password hashes in the general, slow query, and audit logs\. The allowed values are `0` and `1` \(default\)\. When set to `1`, passwords are logged as `<secret>`\. When set to `0`, passwords are logged as hash \(`#`\) values\.  | 
+|  `aurora_mask_password_hashes_type`  |  Yes  |  This setting is turned on by default in Aurora MySQL 2\.11 and higher\. Use this setting to mask Aurora MySQL password hashes in the slow query and audit logs\. The allowed values are `0` and `1` \(default\)\. When set to `1`, passwords are logged as `<secret>`\. When set to `0`, passwords are logged as hash \(`#`\) values\.  | 
 |   `aurora_select_into_s3_role`   |   Yes   |   For more information, see [Saving data from an Amazon Aurora MySQL DB cluster into text files in an Amazon S3 bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\. Currently not available in Aurora MySQL version 3\. Use `aws_default_s3_role`\.  | 
 |   `auto_increment_increment`   |   Yes   |    | 
 |   `auto_increment_offset`   |   Yes   |    | 
@@ -375,7 +375,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `query_prealloc_size`   |   Yes   |    | 
 |   `range_alloc_block_size`   |   Yes   |    | 
 |   `read_buffer_size`   |   Yes   |    | 
-|   `read_only`   |   Yes   |  When this parameter is turned on, the server permits no updates except from those performed by replica threads\. Removed at the instance level from Aurora MySQL version 3\.  | 
+|   `read_only`   |   Yes   |  When this parameter is turned on, the server permits no updates except from those performed by replica threads\. We recommend that you use the DB cluster parameter group in Aurora MySQL version 2 to make sure that the `read_only` parameter is applied to new writer instances on failover\.  Reader instances are always read only, because Aurora MySQL sets `innodb_read_only` to `1` on all readers\. Therefore, `read_only` is redundant on reader instances\.  Removed at the instance level from Aurora MySQL version 3\.  | 
 |   `read_rnd_buffer_size`   |   Yes   |    | 
 |   `relay-log`   |   No   |    | 
 |   `relay_log_info_repository`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 

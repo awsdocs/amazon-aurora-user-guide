@@ -326,7 +326,7 @@ sponsored by Amazon.
       + [Babelfish version updates](babelfish-information.md)
          + [Identifying your version of Babelfish](babelfish-information-identify-version.md)
          + [Upgrading your Babelfish cluster to a new version](babelfish-information-upgrading.md)
-         + [Using Babelfish product version GUC](babelfish-guc-version.md)
+         + [Using Babelfish product version parameter](babelfish-guc-version.md)
       + [Babelfish for Aurora PostgreSQL reference](USER_AuroraPostgreSQL_Babelfish_Reference.md)
          + [Unsupported functionality in Babelfish](babelfish-compatibility.tsql.limitations-unsupported.md)
          + [Supported functionality in Babelfish by version](babelfish-compatibility.supported-functionality-table.md)

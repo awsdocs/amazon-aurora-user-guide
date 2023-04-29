@@ -14,27 +14,39 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 
 ## DB instance class types<a name="Concepts.DBInstanceClass.Types"></a>
 
-Amazon Aurora supports three types of DB instance classes: Aurora Serverless v2, memory\-optimized, and burstable performance\. For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
+Amazon Aurora supports the following types of DB instance classes:
++ [Aurora Serverless v2](#Concepts.DBInstanceClass.Types.serverless-v2)
++ [Memory\-optimized](#Concepts.DBInstanceClass.Types.memory)
++ [Burstable\-performance](#Concepts.DBInstanceClass.Types.burstable)
 
-The following is the Aurora Serverless v2 type available:
+ For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
+
+### Aurora Serverless v2 instance class type<a name="Concepts.DBInstanceClass.Types.serverless-v2"></a>
+
+The following Aurora Serverless v2 type is available:
 +  **db\.serverless** – A special DB instance class used by Aurora Serverless v2\. Aurora adjusts the compute, memory, and network resources dynamically as the workload changes\. For usage details, see [Using Aurora Serverless v2](aurora-serverless-v2.md)\. 
 
-The following are the memory\-optimized DB instance types available:
+### Memory\-optimized instance class types<a name="Concepts.DBInstanceClass.Types.memory"></a>
+
+The memory\-optimized X family supports the following instance class types:
 + **db\.x2g** – Instance classes optimized for memory\-intensive applications and powered by AWS Graviton2 processors\. These instance classes offer low cost per GiB of memory\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
-+ **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These instance classes are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
+
+The memory\-optimized R family supports the following instance class types:
++ **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These instance classes are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\. 
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.r6i** – Instance classes that are ideal for running memory\-intensive workloads\.
-+ **db\.r5** – Instance classes optimized for memory\-intensive applications\. These instance classes offer improved networking performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r4** – These instance classes are supported only for Aurora PostgreSQL 11 and 12 versions\. For all Aurora PostgreSQL DB clusters that use db\.r4 DB instance classes, We recommend that you upgrade to a db\.r5 or newer instance class as soon as possible\.
 + **db\.r3** – Instance classes that provide memory optimization\.
 
   Amazon Aurora has started the end\-of\-life process for db\.r3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all Aurora MySQL DB clusters that use db\.r3 DB instance classes, we recommend that you upgrade to a db\.r5 or higher DB instance class as soon as possible\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html)
 
-The following are the burstable\-performance DB instance types available:
+### Burstable\-performance instance class types<a name="Concepts.DBInstanceClass.Types.burstable"></a>
+
+The following burstable\-performance DB instance types are available:
 + **db\.t4g** – General\-purpose instance classes powered by Arm\-based AWS Graviton2 processors\. These instance classes deliver better price performance than previous burstable\-performance DB instance classes for a broad set of burstable general\-purpose workloads\. Amazon RDS T4g instances are configured for Unlimited mode\. This means that they can burst beyond the baseline over a 24\-hour window for an additional charge\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
@@ -42,7 +54,7 @@ The following are the burstable\-performance DB instance types available:
 + **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. We recommend using these instance classes only for development and test servers, or other non\-production servers\.
 
 **Note**  
-We recommend using the T DB instance classes only for development and test servers, or other non\-production servers\. For more detailed recommendations for the T instance classes, see [Using T instance classes for development and testing](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.T2Medium)\.
+We recommend using the T DB instance classes only for development, test, or other nonproduction servers\. For more detailed recommendations for the T instance classes, see [Using T instance classes for development and testing](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.T2Medium)\.
 
 For DB instance class hardware specifications, see [Hardware specifications for DB instance classes for Aurora](#Concepts.DBInstanceClass.Summary)\.
 

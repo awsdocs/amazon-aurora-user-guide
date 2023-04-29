@@ -400,15 +400,15 @@ The process of upgrading a DB cluster from Aurora Serverless v1 to Aurora Server
 
 **To upgrade an Aurora Serverless v1 cluster running Aurora MySQL version 1 \(MySQL 5\.6–compatible\)**
 
-1. Perform an in\-place upgrade of the Aurora Serverless v1 cluster\. Follow the procedure in [Modifying an Aurora Serverless v1 DB cluster](aurora-serverless.modifying.md)\.
+1. Upgrade the Aurora Serverless v1 cluster to Aurora MySQL version 2 \(MySQL 5\.7–compatible\)\. Follow the procedure in [Upgrading the major version](aurora-serverless.modifying.md#aurora-serverless.modifying.upgrade)\.
 
 1. Follow the steps in the next procedure for upgrading from an Aurora Serverless v1 DB cluster running Aurora MySQL version 2\.
 
 **To upgrade an Aurora Serverless v1 cluster running Aurora MySQL version 2 \(MySQL 5\.7–compatible\)**
 
-1. Create a DB cluster snapshot of the Aurora Serverless v1 cluster\. Follow the procedure in [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\.
+1. Convert the Aurora Serverless v1 DB cluster to a provisioned Aurora MySQL version 2 cluster\. Follow the procedure in [Converting from Aurora Serverless v1 to provisioned](aurora-serverless.modifying.md#aurora-serverless.modifying.convert)\.
 
-1. Restore the snapshot to create a new, provisioned \(that is, *not* Aurora Serverless\) DB cluster running a version of Aurora MySQL version 3 that's compatible with Aurora Serverless v2, for example, 3\.02\.0\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
+1. Upgrade the provisioned Aurora MySQL version 2 cluster to a version of Aurora MySQL version 3 that's compatible with Aurora Serverless v2, for example, 3\.02\.0\. Follow the procedure in [How to perform an in\-place upgrade](AuroraMySQL.Updates.MajorVersionUpgrade.md#AuroraMySQL.Upgrading.Procedure)\.
 
    For compatible versions, see [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md)\.
 
@@ -418,17 +418,27 @@ The process of upgrading a DB cluster from Aurora Serverless v1 to Aurora Server
 
 #### Aurora PostgreSQL\-compatible DB clusters<a name="sv1-to-sv2-apg"></a>
 
-**To upgrade an Aurora Serverless v1 cluster running Aurora PostgreSQL**
+**To upgrade an Aurora Serverless v1 cluster running Aurora PostgreSQL version 10**
 
-1. Create a DB cluster snapshot of the Aurora Serverless v1 cluster\. Follow the procedure in [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\.
+1. Upgrade the Aurora Serverless v1 cluster to Aurora PostgreSQL version 11\. Follow the procedure in [Upgrading the major version](aurora-serverless.modifying.md#aurora-serverless.modifying.upgrade)\.
 
-1. Restore the snapshot to create a new, provisioned \(that is, *not* Aurora Serverless\) DB cluster\. Follow the procedure in [Restoring from a DB cluster snapshot](aurora-restore-snapshot.md)\.
+1. Follow the steps in the next procedure for upgrading from an Aurora Serverless v1 DB cluster running Aurora PostgreSQL version 11\.
 
-   Choose the latest minor engine version available for the new cluster, for example, 11\.18\.
+**To upgrade an Aurora Serverless v1 cluster running Aurora PostgreSQL version 11**
 
-1. Upgrade the provisioned DB cluster to an Aurora PostgreSQL version that's compatible with Aurora Serverless v2, for example, 13\.7\. Follow the procedure in [Upgrading the Aurora PostgreSQL engine to a new major version](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.Upgrading.Manual)\.
+1. Upgrade the Aurora Serverless v1 cluster to an Aurora PostgreSQL version 13 version that's compatible with Aurora Serverless v2, for example, 13\.9\. Follow the procedure in [Upgrading the major version](aurora-serverless.modifying.md#aurora-serverless.modifying.upgrade)\.
 
    For compatible versions, see [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md)\.
+
+1. Convert the Aurora Serverless v1 DB cluster to a provisioned Aurora PostgreSQL cluster\. Follow the procedure in [Converting from Aurora Serverless v1 to provisioned](aurora-serverless.modifying.md#aurora-serverless.modifying.convert)\.
+
+1. Modify the writer DB instance of the provisioned DB cluster to use the **Serverless v2** \(db\.serverless\) DB instance class\.
+
+   For details, see [Converting a provisioned writer or reader to Aurora Serverless v2](aurora-serverless-v2-administration.md#aurora-serverless-v2-converting-from-provisioned)\.
+
+**To upgrade an Aurora Serverless v1 cluster running Aurora PostgreSQL version 13**
+
+1. Convert the Aurora Serverless v1 DB cluster to a provisioned Aurora PostgreSQL cluster\. Follow the procedure in [Converting from Aurora Serverless v1 to provisioned](aurora-serverless.modifying.md#aurora-serverless.modifying.convert)\.
 
 1. Modify the writer DB instance of the provisioned DB cluster to use the **Serverless v2** \(db\.serverless\) DB instance class\.
 
