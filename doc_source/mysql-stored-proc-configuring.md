@@ -46,7 +46,7 @@ To specify the number of hours to retain binary logs on a DB cluster, use the `m
 **Note**  
 You can't use the value `0` for `binlog retention hours`\.
 
-For Aurora MySQL version 2 and 3 DB clusters, the maximum `binlog retention hours` value is 168 \(7 days\)\.
+For Aurora MySQL version 2\.11\.0 and higher and version 3 DB clusters, the maximum `binlog retention hours` value is 2160 \(90 days\)\.
 
 After you set the retention period, monitor storage usage for the DB instance to make sure that the retained binary logs don't take up too much storage\.
 

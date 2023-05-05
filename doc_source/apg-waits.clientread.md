@@ -33,7 +33,7 @@ A large number of network round trips between the Aurora PostgreSQL DB cluster a
 During a copy operation, the data is transferred from the client's file system to the Aurora PostgreSQL DB cluster\. Sending a large amount of data to the DB cluster can delay transmission of data from the client to the DB cluster\.
 
 **Idle client connection**  
-When a client connects to the Aurora PostgreSQL DB cluster in an `idle in transaction` state, the DB cluster might wait for the client to send more data or issue a command\. A connection in this state can lead to an increase in `Client:ClientRead` events\.
+A connection to an Aurora PostgreSQL DB instance is in idle in transaction state and is waiting for a client to send more data or issue a command\. This state can lead to an increase in `Client:ClientRead` events\.
 
 **PgBouncer used for connection pooling**  
 PgBouncer has a low\-level network configuration setting called `pkt_buf`, which is set to 4,096 by default\. If the workload is sending query packets larger than 4,096 bytes through PgBouncer, we recommend increasing the `pkt_buf` setting to 8,192\. If the new setting doesn't decrease the number of `Client:ClientRead` events, we recommend increasing the `pkt_buf` setting to larger values, such as 16,384 or 32,768\. If the query text is large, the larger setting can be particularly helpful\.

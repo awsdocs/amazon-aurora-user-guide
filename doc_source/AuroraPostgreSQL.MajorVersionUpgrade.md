@@ -26,7 +26,7 @@ For detailed information about the permissions required to configure and manage 
 
 ## Limitations<a name="AuroraPostgreSQL.MajorVersionUpgrade.Limitations"></a>
 
- When you upgrade your Aurora PostgreSQL DB cluster to a new major version by deploying the blue\-green upgrade process, you are using the native PostgreSQL logical replication feature\. It has the same capabilities and limitations\. For more information about the limitations of PostgreSQL logical replication, see [PostgreSQL logical replication restrictions](https://www.postgresql.org/docs/13/logical-replication-restrictions.html)\. 
+ When you upgrade your Aurora PostgreSQL DB cluster to a new major version by deploying the blue\-green upgrade process, you are using the native PostgreSQL logical replication feature\. It has the same capabilities and limitations as the PostgreSQL logical replication\. For more information, see [PostgreSQL logical replication](https://www.postgresql.org/docs/13/logical-replication.html)\. 
 + Data definition language \(DDL\) commands are not replicated\. 
 + Replication doesn't support schema changes in a live database\. The schema is recreated in its original form during the cloning process\. If you change the schema after cloning, but before completing the upgrade, it isn't reflected in the upgraded instance\.
 + Large objects are not replicated, but you can store data in normal tables\.

@@ -491,6 +491,7 @@ sponsored by Amazon.
    + [Scenarios for Aurora using AWS SDKs](service_code_examples_scenarios.md)
       + [Get started with Aurora DB clusters using an AWS SDK](example_aurora_Scenario_GetStartedClusters_section.md)
    + [Cross-service examples for Aurora using AWS SDKs](service_code_examples_cross-service_examples.md)
+      + [Create a lending library REST API](example_cross_AuroraRestLendingLibrary_section.md)
       + [Create an Aurora Serverless work item tracker](example_cross_RDSDataTracker_section.md)
 + [Best practices with Amazon Aurora](Aurora.BestPractices.md)
 + [Performing a proof of concept with Amazon Aurora](aurora-poc.md)

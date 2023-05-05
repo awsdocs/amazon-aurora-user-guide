@@ -19,7 +19,7 @@ The following Regions and engine versions are available for Aurora Serverless v2
 | US West \(Oregon\) | Version 3\.02\.0 and higher | 
 | Africa \(Cape Town\) | Version 3\.02\.0 and higher | 
 | Asia Pacific \(Hong Kong\) | Version 3\.02\.0 and higher | 
-| Asia Pacific \(Hyderabad\) | – | 
+| Asia Pacific \(Hyderabad\) | Version 3\.02\.3 and higher | 
 | Asia Pacific \(Jakarta\) | Version 3\.02\.0 and higher | 
 | Asia Pacific \(Melbourne\) | – | 
 | Asia Pacific \(Mumbai\) | Version 3\.02\.0 and higher | 
@@ -36,14 +36,14 @@ The following Regions and engine versions are available for Aurora Serverless v2
 | Europe \(London\) | Version 3\.02\.0 and higher | 
 | Europe \(Milan\) | Version 3\.02\.0 and higher | 
 | Europe \(Paris\) | Version 3\.02\.0 and higher | 
-| Europe \(Spain\) | – | 
+| Europe \(Spain\) | Version 3\.02\.3 and higher | 
 | Europe \(Stockholm\) | Version 3\.02\.0 and higher | 
-| Europe \(Zurich\) | – | 
+| Europe \(Zurich\) | Version 3\.02\.3 and higher | 
 | Middle East \(Bahrain\) | Version 3\.02\.0 and higher | 
-| Middle East \(UAE\) | – | 
+| Middle East \(UAE\) | Version 3\.02\.3 and higher | 
 | South America \(São Paulo\) | Version 3\.02\.0 and higher | 
-| AWS GovCloud \(US\-East\) | – | 
-| AWS GovCloud \(US\-West\) | – | 
+| AWS GovCloud \(US\-East\) | Version 3\.02\.2 and higher | 
+| AWS GovCloud \(US\-West\) | Version 3\.02\.2 and higher | 
 
 ## Aurora Serverless v2 with Aurora PostgreSQL<a name="Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.apg"></a>
 
@@ -58,7 +58,7 @@ The following Regions and engine versions are available for Aurora Serverless v2
 | US West \(Oregon\) | Version 15\.2 and higher | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Africa \(Cape Town\) | Version 15\.2 and higher | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Asia Pacific \(Hong Kong\) | Version 15\.2 and higher | Version 14\.3 and higher | Version 13\.6 and higher | 
-| Asia Pacific \(Hyderabad\) | – | – | – | 
+| Asia Pacific \(Hyderabad\) | Version 15\.2 and higher | Version 14\.6 and higher | Version 13\.9 and higher | 
 | Asia Pacific \(Jakarta\) | Version 15\.2 and higher | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Asia Pacific \(Melbourne\) | – | – | – | 
 | Asia Pacific \(Mumbai\) | Version 15\.2 and higher | Version 14\.3 and higher | Version 13\.6 and higher | 
@@ -75,11 +75,11 @@ The following Regions and engine versions are available for Aurora Serverless v2
 | Europe \(London\) | Version 15\.2 and higher | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Europe \(Milan\) | Version 15\.2 and higher | Version 14\.3 and higher | Version 13\.6 and higher | 
 | Europe \(Paris\) | Version 15\.2 and higher | Version 14\.3 and higher | Version 13\.6 and higher | 
-| Europe \(Spain\) | – | – | – | 
+| Europe \(Spain\) | Version 15\.2 and higher | Version 14\.6 and higher | Version 13\.9 and higher | 
 | Europe \(Stockholm\) | Version 15\.2 and higher | Version 14\.3 and higher | Version 13\.6 and higher | 
-| Europe \(Zurich\) | – | – | – | 
+| Europe \(Zurich\) | Version 15\.2 and higher | Version 14\.6 and higher | Version 13\.9 and higher | 
 | Middle East \(Bahrain\) | Version 15\.2 and higher | Version 14\.3 and higher | Version 13\.6 and higher | 
-| Middle East \(UAE\) | – | – | – | 
+| Middle East \(UAE\) | Version 15\.2 and higher | Version 14\.6 and higher | Version 13\.9 and higher | 
 | South America \(São Paulo\) | Version 15\.2 and higher | Version 14\.3 and higher | Version 13\.6 and higher | 
-| AWS GovCloud \(US\-East\) | – | – | – | 
-| AWS GovCloud \(US\-West\) | – | – | – | 
+| AWS GovCloud \(US\-East\) | Version 15\.2 and higher | Version 14\.3 and higher | Version 13\.6 and higher | 
+| AWS GovCloud \(US\-West\) | Version 15\.2 and higher | Version 14\.3 and higher | Version 13\.6 and higher | 

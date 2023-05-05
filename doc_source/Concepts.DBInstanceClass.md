@@ -2,7 +2,7 @@
 
 The DB instance class determines the computation and memory capacity of an Amazon Aurora DB instance\. The DB instance class that you need depends on your processing power and memory requirements\.
 
-A DB instance class consists of both the DB instance type and the size\. For example, db\.r6g is a general\-purpose DB instance type powered by AWS Graviton2 processors\. Within the db\.r6g instance type, db\.r6g\.2xlarge is a DB instance class\.
+A DB instance class consists of both the DB instance class type and the size\. For example, db\.r6g is a memory\-optimized DB instance class type powered by AWS Graviton2 processors\. Within the db\.r6g instance class type, db\.r6g\.2xlarge is a DB instance class\. The size of this class is 2xlarge\.
 
 For more information about instance class pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\.
 
@@ -14,7 +14,7 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 
 ## DB instance class types<a name="Concepts.DBInstanceClass.Types"></a>
 
-Amazon Aurora supports the following types of DB instance classes:
+Amazon Aurora supports DB instance classes for the following use cases:
 + [Aurora Serverless v2](#Concepts.DBInstanceClass.Types.serverless-v2)
 + [Memory\-optimized](#Concepts.DBInstanceClass.Types.memory)
 + [Burstable\-performance](#Concepts.DBInstanceClass.Types.burstable)
@@ -24,7 +24,7 @@ Amazon Aurora supports the following types of DB instance classes:
 ### Aurora Serverless v2 instance class type<a name="Concepts.DBInstanceClass.Types.serverless-v2"></a>
 
 The following Aurora Serverless v2 type is available:
-+  **db\.serverless** – A special DB instance class used by Aurora Serverless v2\. Aurora adjusts the compute, memory, and network resources dynamically as the workload changes\. For usage details, see [Using Aurora Serverless v2](aurora-serverless-v2.md)\. 
++  **db\.serverless** – A special DB instance class type used by Aurora Serverless v2\. Aurora adjusts the compute, memory, and network resources dynamically as the workload changes\. For usage details, see [Using Aurora Serverless v2](aurora-serverless-v2.md)\. 
 
 ### Memory\-optimized instance class types<a name="Concepts.DBInstanceClass.Types.memory"></a>
 
@@ -46,7 +46,7 @@ The memory\-optimized R family supports the following instance class types:
 
 ### Burstable\-performance instance class types<a name="Concepts.DBInstanceClass.Types.burstable"></a>
 
-The following burstable\-performance DB instance types are available:
+The following burstable\-performance DB instance class types are available:
 + **db\.t4g** – General\-purpose instance classes powered by Arm\-based AWS Graviton2 processors\. These instance classes deliver better price performance than previous burstable\-performance DB instance classes for a broad set of burstable general\-purpose workloads\. Amazon RDS T4g instances are configured for Unlimited mode\. This means that they can burst beyond the baseline over a 24\-hour window for an additional charge\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
@@ -359,4 +359,4 @@ For information about Aurora DB engine support for each DB instance class, see [
 | db\.t2\.medium | 2 | Variable | 4 | — | Moderate | 
 | db\.t2\.small | 1 | Variable | 2 | — | Low | 
 
-\*\* The r3\.8xlarge instance doesn't have dedicated EBS bandwidth and therefore doesn't offer EBS optimization\. On this instance, network traffic and Amazon EBS traffic share the same 10\-gigabit network interface\.
+\*\* The r3\.8xlarge DB instance class doesn't have dedicated EBS bandwidth and therefore doesn't offer EBS optimization\. For this instance class, network traffic and Amazon EBS traffic share the same 10\-gigabit network interface\.

@@ -26,6 +26,9 @@
 +  **Minimum ACUs** – The Aurora Serverless v2 DB instance can reduce capacity down to this number of ACUs\. 
 +  **Maximum ACUs** – The Aurora Serverless v2 DB instance can increase capacity up to this number of ACUs\. 
 
+**Note**  
+When you modify the capacity range for an Aurora Serverless v2 DB cluster, the change takes place immediately, regardless of whether you choose to apply it immediately or during the next scheduled maintenance window\.
+
  For details about the effects of the capacity range and how to monitor and fine\-tune it, see [Important Amazon CloudWatch metrics for Aurora Serverless v2](aurora-serverless-v2.setting-capacity.md#aurora-serverless-v2.viewing.monitoring) and [Performance and scaling for Aurora Serverless v2](aurora-serverless-v2.setting-capacity.md)\. Your goal is to make sure that the maximum capacity for the cluster is high enough to handle spikes in workload, and the minimum is low enough to minimize costs when the cluster isn't busy\. 
 
  Suppose that you determine based on your monitoring that the ACU range for the cluster should be higher, lower, wider, or narrower\. You can set the capacity of an Aurora cluster to a specific range of ACUs with the AWS Management Console, the AWS CLI, or the Amazon RDS API\. This capacity range applies to every Aurora Serverless v2 DB instance in the cluster\. 
@@ -63,7 +66,9 @@
 
 1.  Choose **Continue**\. The **Summary of modifications** page appears\. 
 
-1.  Choose whether to apply the capacity change immediately, or during the next scheduled maintenance window\. 
+1. Choose **Apply immediately**\.
+
+   The capacity modification takes place immediately, regardless of whether you choose to apply it immediately or during the next scheduled maintenance window\.
 
 1.  Choose **Modify cluster** to accept the summary of modifications\. You can also choose **Back** to modify your changes or **Cancel** to discard your changes\. 
 
@@ -75,8 +80,11 @@
  In this example, you set the ACU range of an Aurora DB cluster named `sample-cluster` to a minimum of `48.5` and a maximum of 64\.  
 
 ```
-aws rds modify-db-cluster --db-cluster-identifier sample-cluster --serverless-v2-scaling-configuration MinCapacity=48.5,MaxCapacity=64
+aws rds modify-db-cluster --db-cluster-identifier sample-cluster \
+--serverless-v2-scaling-configuration MinCapacity=48.5,MaxCapacity=64
 ```
+
+The capacity modification takes place immediately, regardless of whether you choose to apply it immediately or during the next scheduled maintenance window\.
 
  After doing so, you can add Aurora Serverless v2 DB instances to the cluster and each new DB instance can scale between 48\.5 and 64 ACUs\. The new capacity range also applies to any Aurora Serverless v2 DB instances that were already in the cluster\. The DB instances scale up or down if necessary to fall within the new capacity range\. 
 
@@ -110,6 +118,8 @@ aws rds modify-db-cluster --db-cluster-identifier sample-cluster ^
  You can modify the scaling configuration of a cluster containing Aurora Serverless v2 DB instances with the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) API operation\. Specify the `ServerlessV2ScalingConfiguration` parameter to configure the minimum capacity and the maximum capacity\. Valid capacity values include the following: 
 +  Aurora MySQL: `0.5`, `1`, `1.5`, `2`, and so on, in increments of 0\.5 ACUs up to a maximum of `128`\. 
 +  Aurora PostgreSQL: `0.5`, `1`, `1.5`, `2`, and so on, in increments of 0\.5 ACUs up to a maximum of `128`\. 
+
+The capacity modification takes place immediately, regardless of whether you choose to apply it immediately or during the next scheduled maintenance window\.
 
 ## Checking the capacity range for Aurora Serverless v2<a name="aurora-serverless-v2-checking-capacity"></a>
 

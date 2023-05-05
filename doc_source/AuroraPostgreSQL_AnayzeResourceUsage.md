@@ -19,7 +19,7 @@ You need the **Resource ID** of your DB instance to query the CloudWatch **Logs 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/Aur_PG_resource_id.png)
 
-## <a name="w307aac30c57c27b7"></a>
+## <a name="w315aac30c57c27b7"></a>
 
 **To query your log files for resource storage metrics:**
 

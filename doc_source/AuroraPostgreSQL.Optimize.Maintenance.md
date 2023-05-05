@@ -155,13 +155,24 @@ Plans are automatically deleted if they haven't been used in over a month, speci
 
 We recommend that you delete plans that haven't been used for a long time or that aren't useful\. Every plan has a `last_used` date that the optimizer updates each time it executes a plan or chooses the plan as the minimum\-cost plan for a statement\. Check the last `last_used` dates to identify the plans that you can safely delete\.
 
-Following is an example of how to use the `apg_plan_mgmt.delete_plan` function to delete all plans that haven't been chosen as the minimum\-cost plan in the last 31 days\. This example doesn't delete plans that have been explicitly rejected\.
+The following query returns a three column table with the count on the total number of plans, plans failed to delete, and the plans successfully deleted\. It has a nested query that is an example of how to use the `apg_plan_mgmt.delete_plan` function to delete all plans that haven't been chosen as the minimum\-cost plan in the last 31 days and its status is not `Rejected`\.
 
 ```
-SELECT SUM(apg_plan_mgmt.delete_plan(sql_hash, plan_hash))
-FROM apg_plan_mgmt.dba_plans 
-WHERE last_used < (current_date - interval '31 days') 
-AND status <> 'Rejected';
+SELECT (SELECT COUNT(*) from apg_plan_mgmt.dba_plans) total_plans,
+       COUNT(*) FILTER (WHERE result = -1) failed_to_delete,
+       COUNT(*) FILTER (WHERE result = 0) successfully_deleted
+       FROM (
+            SELECT apg_plan_mgmt.delete_plan(sql_hash, plan_hash) as result
+            FROM apg_plan_mgmt.dba_plans
+            WHERE last_used < (current_date - interval '31 days')
+            AND status <> 'Rejected'
+            ) as dba_plans ;
+```
+
+```
+ total_plans | failed_to_delete | successfully_deleted
+-------------+------------------+----------------------
+           3 |                0 |                    2
 ```
 
 For more information, see [apg\_plan\_mgmt\.delete\_plan](AuroraPostgreSQL.Optimize.Functions.md#AuroraPostgreSQL.Optimize.Functions.delete_plan)\.

@@ -15,7 +15,7 @@ You can set the following specific values for the scaling configuration:
 + **Minimum Aurora capacity unit** – Aurora Serverless can reduce capacity down to this capacity unit\.
 + **Maximum Aurora capacity unit** – Aurora Serverless can increase capacity up to this capacity unit\.
 +  **Autoscaling timeout and action** – This section specifies how long Aurora Serverless waits to find a scaling point before timing out\. It also specifies the action to take when a capacity modification times out because it can't find a scaling point\. Aurora can force the capacity change to set the capacity to the specified value as soon as possible\. Or, it can roll back the capacity change to cancel it\. For more information, see [Timeout action for capacity changes](aurora-serverless-v1.how-it-works.md#aurora-serverless.how-it-works.timeout-action)\.
-+ **Pause after inactivity** – The amount of time with no database traffic to scale to zero processing capacity\. When database traffic resumes, Aurora automatically resumes processing capacity and scales to handle the traffic\.
++ **Pause after inactivity** – Use the optional **Scale the capacity to 0 ACUs when cluster is idle** setting to scale the database to zero processing capacity while it's inactive\. When database traffic resumes, Aurora automatically resumes processing capacity and scales to handle the traffic\.
 
 ### Console<a name="aurora-serverless.modifying.scaling.CON"></a>
 
