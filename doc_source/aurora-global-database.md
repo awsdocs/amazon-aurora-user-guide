@@ -28,7 +28,7 @@ In the following diagram, you can find an example Aurora global database that sp
 
 You can scale up each secondary cluster independently, by adding one or more Aurora Replicas \(read\-only Aurora DB instances\) to serve read\-only workloads\. 
 
-Only the primary cluster performs write operations\. Clients that perform write operations connect to the DB cluster endpoint of the primary DB cluster\. As shown in the diagram, Aurora global database uses the cluster storage volume and not the database engine for replication\. To learn more, see [Overview of Aurora storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\. 
+Only the primary cluster performs write operations\. Clients that perform write operations connect to the DB cluster endpoint of the primary DB cluster\. As shown in the diagram, Aurora global database uses the cluster storage volume and not the database engine for replication\. To learn more, see [Overview of Amazon Aurora storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\. 
 
 Aurora global databases are designed for applications with a worldwide footprint\. The read\-only secondary DB clusters \(AWS Regions\) allow you to support read operations closer to application users\. By using features such as write forwarding, you can also configure an Aurora MySQL–based global database so that secondary clusters send data to the primary\. For more information, see [Using write forwarding in an Amazon Aurora global database](aurora-global-database-write-forwarding.md)\. 
 

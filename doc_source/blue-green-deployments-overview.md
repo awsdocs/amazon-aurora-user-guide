@@ -171,3 +171,4 @@ The following limitations apply to blue/green deployments:
   + You can't change a blue environment DB cluster to a higher engine version than its corresponding green environment DB cluster\.
   + The resources in the blue environment and green environment must be in the same AWS account\.
   + During switchover, the blue DB cluster can't be the target of external replication\.
+  + If the blue environment contains any [Aurora Auto Scaling policies](), these policies aren't copied over to the green environment\. You must manually re\-add the policies to the green environment\.

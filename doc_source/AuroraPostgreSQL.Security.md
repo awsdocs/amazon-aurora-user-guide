@@ -17,7 +17,7 @@ Aurora PostgreSQL 14\.3 and higher releases support the Salted Challenge Respons
 
 ## Securing Aurora PostgreSQL data with SSL/TLS<a name="AuroraPostgreSQL.Security.SSL"></a>
 
-Amazon RDS supports Secure Socket Layer \(SSL\) and Transport Layer Security \(TLS\) encryption for Aurora PostgreSQL DB clusters\. Using SSL/TLS, you can encrypt a connection between your applications and your Aurora PostgreSQL DB clusters\. You can also force all connections to your Aurora PostgreSQL DB cluster to use SSL/TLS\. Amazon Aurora PostgreSQL supports Transport Layer Security \(TLS\) versions 1\.1, 1\.2, and 1\.3\. We recommend using TLS 1\.2 for encrypted connections\.
+Amazon RDS supports Secure Socket Layer \(SSL\) and Transport Layer Security \(TLS\) encryption for Aurora PostgreSQL DB clusters\. Using SSL/TLS, you can encrypt a connection between your applications and your Aurora PostgreSQL DB clusters\. You can also force all connections to your Aurora PostgreSQL DB cluster to use SSL/TLS\. Amazon Aurora PostgreSQL supports Transport Layer Security \(TLS\) versions 1\.1 and 1\.2\. We recommend using TLS 1\.2 for encrypted connections\.
 
 For general information about SSL/TLS support and PostgreSQL databases, see [SSL support](https://www.postgresql.org/docs/current/libpq-ssl.html) in the PostgreSQL documentation\. For information about using an SSL/TLS connection over JDBC, see [Configuring the client](https://jdbc.postgresql.org/documentation/head/ssl-client.html) in the PostgreSQL documentation\.
 

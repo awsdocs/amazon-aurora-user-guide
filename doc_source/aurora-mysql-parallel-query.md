@@ -8,7 +8,7 @@ This topic describes the parallel query performance optimization for Amazon Auro
   + [Architecture](#aurora-mysql-parallel-query-architecture)
   + [Prerequisites](#aurora-mysql-parallel-query-prereqs)
   + [Limitations](#aurora-mysql-parallel-query-limitations)
-  + [I/O costs](#aurora-mysql-parallel-query-cost)
+  + [I/O costs with parallel query](#aurora-mysql-parallel-query-cost)
 + [Planning for a parallel query cluster](#aurora-mysql-parallel-query-planning)
   + [Checking Aurora MySQL version compatibility for parallel query](#aurora-mysql-parallel-query-checking-compatibility)
 + [Creating a DB cluster that works with parallel query](#aurora-mysql-parallel-query-creating-cluster)
@@ -66,7 +66,7 @@ The PostgreSQL database engine also has a feature called "parallel query\." That
 + [Architecture](#aurora-mysql-parallel-query-architecture)
 + [Prerequisites](#aurora-mysql-parallel-query-prereqs)
 + [Limitations](#aurora-mysql-parallel-query-limitations)
-+ [I/O costs](#aurora-mysql-parallel-query-cost)
++ [I/O costs with parallel query](#aurora-mysql-parallel-query-cost)
 
 ### Benefits<a name="aurora-mysql-parallel-query-benefits"></a>
 
@@ -101,6 +101,7 @@ Make sure that hash join optimization is turned on for your cluster\. To learn h
 ### Limitations<a name="aurora-mysql-parallel-query-limitations"></a>
 
 The following limitations apply to the parallel query feature:
++ Parallel query isn't supported with the Aurora I/O\-Optimized DB cluster storage configuration\.
 + You can't use parallel query with the db\.t2 or db\.t3 instance classes\. This limitation applies even if you request parallel query using the `aurora_pq_force` session variable\.
 +  Parallel query doesn't apply to tables using the `COMPRESSED` or `REDUNDANT` row formats\. Use the `COMPACT` or `DYNAMIC` row formats for tables you plan to use with parallel query\. 
 +  Aurora uses a cost\-based algorithm to determine whether to use the parallel query mechanism for each SQL statement\. Using certain SQL constructs in a statement can prevent parallel query or make parallel query unlikely for that statement\. For information about compatibility of SQL constructs with parallel query, see [How parallel query works with SQL constructs](#aurora-mysql-parallel-query-sql)\. 
@@ -109,7 +110,7 @@ The following limitations apply to the parallel query feature:
 + Parallel query is designed to improve the performance of data\-intensive queries\. It isn't designed for lightweight queries\.
 + We recommend that you use reader nodes for SELECT statements, especially data\-intensive ones\.
 
-### I/O costs<a name="aurora-mysql-parallel-query-cost"></a>
+### I/O costs with parallel query<a name="aurora-mysql-parallel-query-cost"></a>
 
 If your Aurora MySQL cluster uses parallel query, you might see an increase in `VolumeReadIOPS` values\. Parallel queries don't use the buffer pool\. Thus, although the queries are fast, this optimized processing can result in an increase in read operations and associated charges\.
 
@@ -125,6 +126,7 @@ Consider the following as part of planning:
 + If you use Aurora MySQL that's compatible with MySQL 5\.7, you must choose Aurora MySQL 2\.09 or higher\. In this case, you always create a provisioned cluster\. Then you turn on parallel query using the `aurora_parallel_query` parameter\.
 
   If you have an existing Aurora MySQL cluster that's running version 2\.09 or higher, you don't have to create a new cluster to use parallel query\. You can associate your cluster, or specific DB instances in the cluster, with a parameter group that has the `aurora_parallel_query` parameter turned on\. By doing so, you can reduce the time and effort to set up the relevant data to use with parallel query\.
++ If your queries frequently use parallel query, then we recommend that you choose the Aurora I/O\-Optimized storage type\. You pay a fixed price for I/O operations as part of the storage costs\. For more information, see [Storage configurations for Amazon Aurora DB clusters](Aurora.Overview.StorageReliability.md#aurora-storage-type)\.
 + Plan for any large tables that you need to reorganize so that you can use parallel query when accessing them\. You might need to create new versions of some large tables where parallel query is useful\. For example, you might need to remove full\-text search indexes\. For details, see [Creating schema objects to take advantage of parallel query](#aurora-mysql-parallel-query-tables)\.
 
 ### Checking Aurora MySQL version compatibility for parallel query<a name="aurora-mysql-parallel-query-checking-compatibility"></a>

@@ -53,7 +53,7 @@ To migrate an RDS for PostgreSQL DB snapshot to an Aurora PostgreSQL DB cluster,
      + Its first character must be a letter\.
      + It can't end with a hyphen or contain two consecutive hyphens\.
      + It must be unique for all DB instances per AWS account, per AWS Region\.
-   + **DB instance class**: Choose a DB instance class that has the required storage and capacity for your database, for example `db.r6g.large`\. Aurora cluster volumes automatically grow as the amount of data in your database increases\. So you only need to choose a DB instance class that meets your current storage requirements\. For more information, see [Overview of Aurora storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\.
+   + **DB instance class**: Choose a DB instance class that has the required storage and capacity for your database, for example `db.r6g.large`\. Aurora cluster volumes automatically grow as the amount of data in your database increases\. So you only need to choose a DB instance class that meets your current storage requirements\. For more information, see [Overview of Amazon Aurora storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\.
    + **Virtual private cloud \(VPC\)**: If you have an existing VPC, then you can use that VPC with your Aurora PostgreSQL DB cluster by choosing your VPC identifier, for example `vpc-a464d1c1`\. For information about creating a VPC, see [Tutorial: Create a VPC for use with a DB cluster \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
 
      Otherwise, you can choose to have Amazon RDS create a VPC for you by choosing **Create new VPC**\. 

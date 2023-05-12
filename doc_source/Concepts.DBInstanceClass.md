@@ -34,7 +34,10 @@ The memory\-optimized X family supports the following instance class types:
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 
 The memory\-optimized R family supports the following instance class types:
-+ **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These instance classes are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\. 
++ **db\.r7g** – Instance classes powered by AWS Graviton3 processors\. These instance classes are ideal for running memory\-intensive workloads\.
+
+  You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton3 processors\. To do so, complete the same steps as with any other DB instance modification\.
++ **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These instance classes are ideal for running memory\-intensive workloads\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.r6i** – Instance classes that are ideal for running memory\-intensive workloads\.
@@ -77,6 +80,14 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.x2g\.2xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
 | db\.x2g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
 | db\.x2g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.r7g – memory\-optimized instance classes powered by AWS Graviton3 processors | 
+| db\.r7g\.16xlarge | 3\.03\.1 and higher | 15\.2 and higher, 14\.7 and higher, 13\.10 and higher | 
+| db\.r7g\.12xlarge | 3\.03\.1 and higher | 15\.2 and higher, 14\.7 and higher, 13\.10 and higher | 
+| db\.r7g\.8xlarge | 3\.03\.1 and higher | 15\.2 and higher, 14\.7 and higher, 13\.10 and higher | 
+| db\.r7g\.4xlarge | 3\.03\.1 and higher | 15\.2 and higher, 14\.7 and higher, 13\.10 and higher | 
+| db\.r7g\.2xlarge | 3\.03\.1 and higher | 15\.2 and higher, 14\.7 and higher, 13\.10 and higher | 
+| db\.r7g\.xlarge | 3\.03\.1 and higher | 15\.2 and higher, 14\.7 and higher, 13\.10 and higher | 
+| db\.r7g\.large | 3\.03\.1 and higher | 15\.2 and higher, 14\.7 and higher, 13\.10 and higher | 
 | db\.r6g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
 | db\.r6g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
 | db\.r6g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
@@ -308,6 +319,14 @@ For information about Aurora DB engine support for each DB instance class, see [
 | db\.x2g\.2xlarge | 8 | — | 128 | Up to 4,750 | Up to 10 | 
 | db\.x2g\.xlarge | 4 | — | 64 | Up to 4,750 | Up to 10 | 
 | db\.x2g\.large | 2 | — | 32 | Up to 4,750 | Up to 10 | 
+| db\.r7g – memory\-optimized instance classes powered by AWS Graviton3 processors | 
+| db\.r7g\.16xlarge | 64 | — | 512 | 20,000 | 30 | 
+| db\.r7g\.12xlarge | 48 | — | 384 | 15,000 | 22\.5 | 
+| db\.r7g\.8xlarge | 32 | — | 256 | 10,000 | 15 | 
+| db\.r7g\.4xlarge | 16 | — | 128 | Up to 10,000 | Up to 15 | 
+| db\.r7g\.2xlarge | 8 | — | 64 | Up to 10,000 | Up to 15 | 
+| db\.r7g\.xlarge | 4 | — | 32 | Up to 10,000 | Up to 12\.5 | 
+| db\.r7g\.large | 2 | — | 16 | Up to 10,000 | Up to 12\.5 | 
 | db\.r6g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
 | db\.r6g\.16xlarge | 64 | — | 512 | 19,000 | 25 | 
 | db\.r6g\.12xlarge | 48 | — | 384 | 13,500 | 20 | 

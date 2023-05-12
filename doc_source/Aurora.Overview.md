@@ -12,3 +12,5 @@ The following diagram illustrates the relationship between the cluster volume, t
 The preceding information applies to provisioned clusters, parallel query clusters, global database clusters, Aurora Serverless clusters, and all MySQL 8\.0\-compatible, 5\.7\-compatible, and PostgreSQL\-compatible clusters\.
 
 The Aurora cluster illustrates the separation of compute capacity and storage\. For example, an Aurora configuration with only a single DB instance is still a cluster, because the underlying storage volume involves multiple storage nodes distributed across multiple Availability Zones \(AZs\)\.
+
+Input/output \(I/O\) operations in Aurora DB clusters are counted the same way, regardless of whether they're on a writer or reader DB instance\. For more information, see [Storage configurations for Amazon Aurora DB clusters](Aurora.Overview.StorageReliability.md#aurora-storage-type)\.

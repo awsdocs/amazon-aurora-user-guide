@@ -41,7 +41,7 @@ Times are shown in your local time zone, which is indicated by an offset from Co
 
 1. For **DB instance identifier**, enter the name of the target restored DB cluster\. The name must be unique\.
 
-1. Choose other options as needed, such as DB instance class\.
+1. Choose other options as needed, such as the DB instance class and DB cluster storage configuration\.
 
    For information about each setting, see [Settings for Aurora DB clusters](Aurora.CreateInstance.md#Aurora.CreateInstance.Settings)\.
 

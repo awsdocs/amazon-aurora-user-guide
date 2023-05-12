@@ -20,6 +20,7 @@ In the following sections, you can find information about setting up and using a
 + [Understanding Babelfish architecture and configuration](babelfish-understanding-overview-howitworks.md)
 + [Creating a Babelfish for Aurora PostgreSQL DB cluster](babelfish-create.md)
 + [Migrating a SQL Server database to Babelfish for Aurora PostgreSQL](babelfish-migration.md)
++ [Database authentication with Babelfish for Aurora PostgreSQL](babelfish-db-authentication.md)
 + [Connecting to a Babelfish DB cluster](babelfish-connect.md)
 + [Working with Babelfish](working-with-babelfish-usage-notes-features.md)
 + [Troubleshooting Babelfish](babelfish-troubleshooting.md)

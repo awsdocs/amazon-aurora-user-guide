@@ -3,13 +3,14 @@
  Following, you can learn about the Aurora storage subsystem\. Aurora uses a distributed and shared storage architecture that is an important factor in performance, scalability, and reliability for Aurora clusters\. 
 
 **Topics**
-+ [Overview of Aurora storage](#Aurora.Overview.Storage)
++ [Overview of Amazon Aurora storage](#Aurora.Overview.Storage)
 + [What the cluster volume contains](#aurora-storage-contents)
++ [Storage configurations for Amazon Aurora DB clusters](#aurora-storage-type)
 + [How Aurora storage automatically resizes](#aurora-storage-growth)
 + [How Aurora data storage is billed](#aurora-storage-data-billing)
 + [Amazon Aurora reliability](#Aurora.Overview.Reliability)
 
-## Overview of Aurora storage<a name="Aurora.Overview.Storage"></a>
+## Overview of Amazon Aurora storage<a name="Aurora.Overview.Storage"></a>
 
 Aurora data is stored in the *cluster volume*, which is a single, virtual volume that uses solid state drives \(SSDs\)\. A cluster volume consists of copies of the data across three Availability Zones in a single AWS Region\. Because the data is automatically replicated across Availability Zones, your data is highly durable with less possibility of data loss\. This replication also ensures that your database is more available during a failover\. It does so because the data copies already exist in the other Availability Zones and continue to serve data requests to the DB instances in your DB cluster\. The amount of replication is independent of the number of DB instances in your cluster\.
 
@@ -21,6 +22,22 @@ Aurora uses separate local storage for nonpersistent, temporary files\. This inc
 
  The Aurora shared storage architecture makes your data independent from the DB instances in the cluster\. For example, you can add a DB instance quickly because Aurora doesn't make a new copy of the table data\. Instead, the DB instance connects to the shared volume that already contains all your data\. You can remove a DB instance from a cluster without removing any of the underlying data from the cluster\. Only when you delete the entire cluster does Aurora remove the data\. 
 
+## Storage configurations for Amazon Aurora DB clusters<a name="aurora-storage-type"></a>
+
+Amazon Aurora has two DB cluster storage configurations:
++ **Aurora I/O\-Optimized** – Improved price performance and predictability for I/O\-intensive applications\. You pay only for the usage and storage of your DB clusters, with no additional charges for read and write I/O operations\.
+
+  Aurora I/O\-Optimized is the best choice when your I/O spending is 25% or more of your total Aurora database spending\.
+
+  You can choose Aurora I/O\-Optimized when you create or modify a DB cluster with a DB engine version that supports the Aurora I/O\-Optimized cluster configuration\. You can switch from Aurora I/O\-Optimized to Aurora Standard at any time\.
++ **Aurora Standard** – Cost\-effective pricing for many applications with moderate I/O usage\. In addition to the usage and storage of your DB clusters, you also pay a standard rate per 1 million requests for I/O operations\.
+
+  Aurora Standard is the best choice when your I/O spending is less than 25% of your total Aurora database spending\.
+
+  You can switch from Aurora Standard to Aurora I/O\-Optimized only once per month\.
+
+For information on AWS Region and version support, see [Aurora cluster storage configurations](Concepts.Aurora_Fea_Regions_DB-eng.Feature.storage-type.md)\. For more information on pricing for Amazon Aurora storage configurations, see [Amazon Aurora pricing](https://aws.amazon.com/rds/aurora/pricing/)\.
+
 ## How Aurora storage automatically resizes<a name="aurora-storage-growth"></a>
 
 Aurora cluster volumes automatically grow as the amount of data in your database increases\. The maximum size for an Aurora cluster volume is 128 tebibytes \(TiB\) or 64 TiB, depending on the DB engine version\. For details about the maximum size for a specific version, see [Amazon Aurora size limits](CHAP_Limits.md#RDS_Limits.FileSize.Aurora)\. This automatic storage scaling is combined with a high\-performance and highly distributed storage subsystem\. These make Aurora a good choice for your important enterprise data when your main objectives are reliability and high availability\.
@@ -30,7 +47,8 @@ To display the volume status, see [Displaying volume status for an Aurora MySQL 
 When Aurora data is removed, the space allocated for that data is freed\. Examples of removing data include dropping or truncating a table\. This automatic reduction in storage usage helps you to minimize storage charges\.
 
 **Note**  
-The storage limits and dynamic resizing behavior discussed here apply to persistent tables and other data stored in the cluster volume\. Data for temporary tables is stored in the local DB instance for Aurora PostgreSQL and Aurora MySQL version 1\.  
+The storage limits and dynamic resizing behavior discussed here apply to persistent tables and other data stored in the cluster volume\.   
+For Aurora PostgreSQL, temporary table data is stored in the local DB instance\.  
 For Aurora MySQL version 2, temporary table data is stored by default in the cluster volume for writer instances and in local storage for reader instances\. For more information, see [Storage engine for on\-disk temporary tables](AuroraMySQL.CompareMySQL57.md#AuroraMySQL.StorageEngine57)\.  
 For Aurora MySQL version 3, temporary table data is stored in the local DB instance or in the cluster volume\. For more information, see [New temporary table behavior in Aurora MySQL version 3](ams3-temptable-behavior.md)\.  
 The maximum size of temporary tables that reside in local storage is limited by the maximum local storage size of the DB instance\. The local storage size depends on the instance class that you use\. For more information, see [Temporary storage limits for Aurora MySQLTemporary storage limits](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.TempStorage) and [Temporary storage limits for Aurora PostgreSQLTemporary storage limits](AuroraPostgreSQL.Managing.md#AuroraPostgreSQL.Managing.TempStorage)\.

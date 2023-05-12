@@ -238,7 +238,7 @@ You can restore your backup files from your Amazon S3 bucket to create a new Ama
 
       For more information, see [Protecting data using server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) in the *Amazon S3 Developer Guide*\.
 
-1. Choose settings for your DB cluster, such as the DB cluster identifier and the login credentials\. For information about each setting, see [Settings for Aurora DB clusters](Aurora.CreateInstance.md#Aurora.CreateInstance.Settings)\.
+1. Choose settings for your DB cluster, such as the DB cluster storage configuration, DB instance class, DB cluster identifier, and login credentials\. For information about each setting, see [Settings for Aurora DB clusters](Aurora.CreateInstance.md#Aurora.CreateInstance.Settings)\.
 
 1. Customize additional settings for your Aurora MySQL DB cluster as needed\.
 

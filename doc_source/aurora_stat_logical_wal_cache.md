@@ -28,7 +28,7 @@ SETOF record with following columns:
 ## Usage notes<a name="aurora_stat_logical_wal_cache-usage-notes"></a>
 
 This function is available for the following versions\.
-+ Aurora PostgreSQL 14\.5 and higher
++ Aurora PostgreSQL 14\.7
 + Aurora PostgreSQL version 13\.8 and higher
 + Aurora PostgreSQL version 12\.12 and higher
 + Aurora PostgreSQLversion 11\.17 and higher

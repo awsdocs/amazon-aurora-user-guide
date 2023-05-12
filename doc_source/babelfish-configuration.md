@@ -67,13 +67,3 @@ The table following shows how Babelfish behaves for each combination\.
 | ENCRYPT\_REQ | tds\_ssl\_encrypt=1 | Allowed, the entire connection is encrypted | ENCRYPT\_ON | 
 | ENCRYPT\_CLIENT\_CERT | tds\_ssl\_encrypt=0 | No, connection closed | Unsupported | 
 | ENCRYPT\_CLIENT\_CERT | tds\_ssl\_encrypt=1 | No, connection closed | Unsupported | 
-
-## Client authentication to Babelfish<a name="babelfish-authentication"></a>
-
-Babelfish for Aurora PostgreSQL supports password authentication\. Passwords are stored in encrypted form on disk\. For more information about authentication on an Aurora PostgreSQL cluster, see [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md)\.
-
-You might be prompted for credentials each time you connect to Babelfish\. Any user migrated to or created on Aurora PostgreSQL can use the same credentials on both the SQL Server port and the PostgreSQL port\. Babelfish doesn't enforce password policies, but we recommend that you do the following:
-+ Require a complex password that's at least eight \(8\) characters long\.
-+ Enforce a password expiration policy\.
-
-To review a complete list of database users, use the command `SELECT * FROM pg_user;`\.

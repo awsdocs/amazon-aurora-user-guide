@@ -52,7 +52,7 @@ Aurora cloning currently has the following limitations:
 
 ## How Aurora cloning works<a name="Aurora.Managing.Clone.Protocol"></a>
 
-Aurora cloning works at the storage layer of an Aurora DB cluster\. It uses a *copy\-on\-write* protocol that's both fast and space\-efficient in terms of the underlying durable media supporting the Aurora storage volume\. You can learn more about Aurora cluster volumes in the [Overview of Aurora storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\.
+Aurora cloning works at the storage layer of an Aurora DB cluster\. It uses a *copy\-on\-write* protocol that's both fast and space\-efficient in terms of the underlying durable media supporting the Aurora storage volume\. You can learn more about Aurora cluster volumes in the [Overview of Amazon Aurora storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\.
 
 **Topics**
 + [Understanding the copy\-on\-write protocol](#Aurora.Managing.Clone.Protocol.Before)
@@ -113,21 +113,26 @@ Creating a clone using the AWS Management Console results in an Aurora DB cluste
 1. Choose your Aurora DB cluster from the list, and for **Actions**, choose **Create clone**\.  
 ![\[Creating a clone starts by selecting your Aurora DB cluster.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-cloning-create-clone-1.png)
 
-   The Create clone page opens, where you can configure **Instance specifications**, **Connectivity**, and other options for the Aurora DB cluster clone\. 
+   The Create clone page opens, where you can configure **Settings**, **Connectivity**, and other options for the Aurora DB cluster clone\.
 
-1. In the **Instance specifications** section, do the following:
+1. In the **Settings** section, do the following:
 
-   1. For **DB cluster identifier**, enter the name that you want to give to your cloned Aurora DB cluster\.  
+   1. For **DB instance identifier**, enter the name that you want to give to your cloned Aurora DB cluster\.  
 ![\[Creating a clone starts by selecting your Aurora DB cluster.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-cloning-create-clone-2.png)
 
    1. For **Capacity type**, choose **Provisioned** or **Serverless** as needed for your use case\. 
 
       You can choose **Serverless** only if the source Aurora DB cluster is an Aurora Serverless v1 DB cluster or is a provisioned Aurora DB cluster that is encrypted\.
-      + If you choose **Provisioned**, you see a **DB instance size** configuration card\.  
+
+   1. For **Cluster storage configuration**, choose either **Aurora I/O\-Optimized** or **Aurora Standard**\. For more information, see [Storage configurations for Amazon Aurora DB clusters](Aurora.Overview.StorageReliability.md#aurora-storage-type)\.  
+![\[Cluster storage configuration showing Aurora I/O-Optimized.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/cluster-storage-configuration-create.png)
+
+   1. Choose the DB instance size or DB cluster capacity:
+      + If you choose **Provisioned** for **Capacity type**, you see a **DB instance size** configuration card\.  
 ![\[To create a provisioned clone from an Aurora DB cluster, specify the DB instance size.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-cloning-create-clone-3-provisioned.png)
 
         You can accept the provided setting, or you can use a different DB instance class for your clone\.
-      + If you choose **Serverless**, you see a **Capacity settings** configuration card\.  
+      + If you choose **Serverless** for **Capacity type**, you see a **Capacity settings** configuration card\.  
 ![\[To create a Serverless clone from an Aurora DB cluster, specify the capacity.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/aurora-cloning-create-clone-3-serverless.png)
 
         You can accept the provided settings, or you can change them for your use case\. 

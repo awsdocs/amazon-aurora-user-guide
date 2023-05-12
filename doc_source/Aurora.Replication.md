@@ -15,7 +15,7 @@ Aurora Replicas have two main purposes\. You can issue queries to them to scale 
 
 An Aurora DB cluster can contain up to 15 Aurora Replicas\. The Aurora Replicas can be distributed across the Availability Zones that a DB cluster spans within an AWS Region\.
 
-The data in your DB cluster has its own high availability and reliability features, independent of the DB instances in the cluster\. If you aren't familiar with Aurora storage features, see [Overview of Aurora storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\. The DB cluster volume is physically made up of multiple copies of the data for the DB cluster\. The primary instance and the Aurora Replicas in the DB cluster all see the data in the cluster volume as a single logical volume\. 
+The data in your DB cluster has its own high availability and reliability features, independent of the DB instances in the cluster\. If you aren't familiar with Aurora storage features, see [Overview of Amazon Aurora storage](Aurora.Overview.StorageReliability.md#Aurora.Overview.Storage)\. The DB cluster volume is physically made up of multiple copies of the data for the DB cluster\. The primary instance and the Aurora Replicas in the DB cluster all see the data in the cluster volume as a single logical volume\. 
 
 As a result, all Aurora Replicas return the same data for query results with minimal replica lag\. This lag is usually much less than 100 milliseconds after the primary instance has written an update\. Replica lag varies depending on the rate of database change\. That is, during periods where a large amount of write operations occur for the database, you might see an increase in replica lag\.
 

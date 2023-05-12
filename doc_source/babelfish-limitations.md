@@ -6,6 +6,7 @@
   +  Database Activity Streams \(DAS\) 
   +  Query plan management \(QPM\) 
   +  Salted challenge response authentication mechanism \(SCRAM\) 
++ Babelfish currently doesn't support Kerberos based authentication using Active Directory security groups\.
 +  Babelfish currently doesn't support the following PostgreSQL features: 
   +  pg\_dump/pg\_restore utility to move a database from one Aurora PostgreSQL DB cluster to another 
   +  pg\_stat\_statement extension 

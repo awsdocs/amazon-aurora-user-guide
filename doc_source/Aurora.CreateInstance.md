@@ -156,6 +156,9 @@ For this example, **Standard create** is enabled, and **Easy create** isn't enab
 
    By default, the new DB instance uses an automatically generated password for the master user\.
 
+1. For **Cluster storage configuration**, choose either **Aurora I/O\-Optimized** or **Aurora Standard**\. For more information, see [Storage configurations for Amazon Aurora DB clusters](Aurora.Overview.StorageReliability.md#aurora-storage-type)\.  
+![\[Cluster storage configuration showing Aurora I/O-Optimized.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/cluster-storage-configuration-create.png)
+
 1. \(Optional\) Set up a connection to a compute resource for this DB cluster\.
 
    You can configure connectivity between an Amazon EC2 instance and the new DB cluster during DB cluster creation\. For more information, see [Configure automatic network connectivity with an EC2 instance](#Aurora.CreateInstance.Prerequisites.VPC.Automatic)\.
@@ -199,45 +202,55 @@ Complete the following steps:
 
 1. Identify the DB subnet group and VPC security group ID for your new DB cluster, and then call the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command to create the Aurora MySQL DB cluster\.
 
-   For example, the following command creates a new MySQL 8\.0–compatible DB cluster named `sample-cluster`\. The cluster uses the default engine version\.
+   For example, the following command creates a new MySQL 8\.0–compatible DB cluster named `sample-cluster`\. The cluster uses the default engine version and the Aurora I/O\-Optimized storage type\.
 
    For Linux, macOS, or Unix:
 
    ```
-   aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql \
-        --engine-version 8.0 --master-username user-name --master-user-password password \
-        --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
-   ```
-
-   For Windows:
-
-   ```
-   aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql ^
-       --engine-version 8.0 --master-username user-name --master-user-password password ^
+   aws rds create-db-cluster --db-cluster-identifier sample-cluster \
+       --engine aurora-mysql --engine-version 8.0 \
+       --storage-type aurora-iopt1 \
+       --master-username user-name --master-user-password password \
        --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
    ```
 
-   The following command creates a new MySQL 5\.7–compatible DB cluster named `sample-cluster`\. The cluster uses the default engine version\.
+   For Windows:
+
+   ```
+   aws rds create-db-cluster --db-cluster-identifier sample-cluster ^
+       --engine aurora-mysql --engine-version 8.0 ^
+       --storage-type aurora-iopt1 ^
+       --master-username user-name --master-user-password password ^
+       --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
+   ```
+
+   The following command creates a new MySQL 5\.7–compatible DB cluster named `sample-cluster`\. The cluster uses the default engine version and the Aurora Standard storage type\.
 
    For Linux, macOS, or Unix:
 
    ```
-   aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql \
-        --engine-version 5.7 --master-username user-name --master-user-password password \
-        --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
+   aws rds create-db-cluster --db-cluster-identifier sample-cluster  \
+       --engine aurora-mysql --engine-version 5.7 \
+       --storage-type aurora \
+       --master-username user-name --master-user-password password \
+       --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
    ```
 
    For Windows:
 
    ```
-   aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql ^
-       --engine-version 5.7 --master-username user-name --master-user-password password ^
+   aws rds create-db-cluster --db-cluster-identifier sample-cluster sample-cluster  ^
+       --engine aurora-mysql --engine-version 5.7 ^
+       --storage-type aurora ^
+       --master-username user-name --master-user-password password ^
        --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
    ```
 
 1. If you use the console to create a DB cluster, then Amazon RDS automatically creates the primary instance \(writer\) for your DB cluster\. If you use the AWS CLI to create a DB cluster, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
 
    Call the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create the primary instance for your DB cluster\. Include the name of the DB cluster as the `--db-cluster-identifier` option value\.
+**Note**  
+You can't set the `--storage-type` option for DB instances\. You can set it only for DB clusters\.
 
    For example, the following command creates a new MySQL 5\.7–compatible or MySQL 8\.0–compatible DB instance named `sample-instance`\.
 
@@ -259,20 +272,24 @@ Complete the following steps:
 
 1. Identify the DB subnet group and VPC security group ID for your new DB cluster, and then call the [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command to create the Aurora PostgreSQL DB cluster\.
 
-   For example, the following command creates a new DB cluster named `sample-cluster`\.
+   For example, the following command creates a new DB cluster named `sample-cluster`\. The cluster uses the default engine version and the Aurora I/O\-Optimized storage type\.
 
    For Linux, macOS, or Unix:
 
    ```
-   aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-postgresql \
-        --master-username user-name --master-user-password password \
-        --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
+   aws rds create-db-cluster --db-cluster-identifier sample-cluster \
+       --engine aurora-postgresql \
+       --storage-type aurora-iopt1 \
+       --master-username user-name --master-user-password password \
+       --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
    ```
 
    For Windows:
 
    ```
-   aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-postgresql ^
+   aws rds create-db-cluster --db-cluster-identifier sample-cluster ^
+       --engine aurora-postgresql ^
+       --storage-type aurora-iopt1 ^
        --master-username user-name --master-user-password password ^
        --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
    ```
@@ -302,9 +319,11 @@ Before you can create an Aurora DB cluster using the AWS CLI, you must fulfill t
 
 Identify the DB subnet group and VPC security group ID for your new DB cluster, and then call the [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) operation to create the DB cluster\.
 
-When you create an Aurora MySQL version 2 or 3 DB cluster or DB instance, you must specify `aurora-mysql` for the `Engine` parameter\.
+When you create an Aurora MySQL version 2 or 3 DB cluster or DB instance, specify `aurora-mysql` for the `Engine` parameter\.
 
 When you create an Aurora PostgreSQL DB cluster or DB instance, specify `aurora-postgresql` for the `Engine` parameter\.
+
+If you use the console to create a DB cluster, then Amazon RDS automatically creates the primary instance \(writer\) for your DB cluster\. If you use the RDS API to create a DB cluster, you must explicitly create the primary instance for your DB cluster using the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)\. The primary instance is the first instance that is created in a DB cluster\.
 
 ## Settings for Aurora DB clusters<a name="Aurora.CreateInstance.Settings"></a>
 
@@ -320,6 +339,7 @@ Additional settings are available if you are creating an Aurora Serverless v1 DB
 |   **AWS KMS key**   |  Only available if **Encryption** is set to **Enable encryption**\. Choose the AWS KMS key to use for encrypting this DB cluster\. For more information, see [Encrypting Amazon Aurora resources](Overview.Encryption.md)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--kms-key-id` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `KmsKeyId` parameter\.  | 
 |   **Backtrack**   |  Applies only to Aurora MySQL\. Choose **Enable Backtrack** to enable backtracking or **Disable Backtrack** to disable backtracking\. Using backtracking, you can rewind a DB cluster to a specific time, without creating a new DB cluster\. It is disabled by default\. If you enable backtracking, also specify the amount of time that you want to be able to backtrack your DB cluster \(the target backtrack window\)\. For more information, see [Backtracking an Aurora DB cluster](AuroraMySQL.Managing.Backtrack.md)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--backtrack-window` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `BacktrackWindow` parameter\.  | 
 |  **Certificate authority**  |  The certificate authority \(CA\) for the server certificate used by the DB instances in the DB cluster\. For more information, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\.   |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) and set the `--ca-certificate-identifier` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) and set the `CACertificateIdentifier` parameter\.  | 
+|  **Cluster storage configuration**  |  The storage type for the DB cluster: **Aurora I/O\-Optimized** or **Aurora Standard**\. For more information, see [Storage configurations for Amazon Aurora DB clusters](Aurora.Overview.StorageReliability.md#aurora-storage-type)\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--storage-type` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `StorageType` parameter\.  | 
 |  Copy tags to snapshots  |  Choose this option to copy any DB instance tags to a DB snapshot when you create a snapshot\.  For more information, see [Tagging Amazon RDS resources](USER_Tagging.md)\.   |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--copy-tags-to-snapshot \| --no-copy-tags-to-snapshot` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `CopyTagsToSnapshot` parameter\.  | 
 |  Database authentication  |  The database authentication you want to use\. For MySQL: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html) For PostgreSQL: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html)  |  To use IAM database authentication with the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--enable-iam-database-authentication \| --no-enable-iam-database-authentication` option\. To use IAM database authentication with the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `EnableIAMDatabaseAuthentication` parameter\. To use Kerberos authentication with the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--domain` and `--domain-iam-role-name` options\. To use Kerberos authentication with the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `Domain` and `DomainIAMRoleName` parameters\.  | 
 |   **Database port**   |  Specify the port for applications and utilities to use to access the database\. Aurora MySQL DB clusters default to the default MySQL port, 3306, and Aurora PostgreSQL DB clusters default to the default PostgreSQL port, 5432\. The firewalls at some companies block connections to these default ports\. If your company firewall blocks the default port, choose another port for the new DB cluster\.  |  Using the AWS CLI, run [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and set the `--port` option\. Using the RDS API, call [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and set the `Port` parameter\.  | 
@@ -373,7 +393,6 @@ The AWS Management Console doesn't show these settings for Aurora DB clusters\.
 |  `--performance-insights-kms-key-id`  |  `PerformanceInsightsKMSKeyId`  | 
 |  `--performance-insights-retention-period`  |  `PerformanceInsightsRetentionPeriod`  | 
 |  `--publicly-accessible \| --no-publicly-accessible`  |  `PubliclyAccessible`  | 
-|  `--storage-type`  |  `StorageType`  | 
 
 ## Settings that don't apply to Amazon Aurora DB instances<a name="Aurora.CreateInstance.SettingsNotApplicable"></a>
 
