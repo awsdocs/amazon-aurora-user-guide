@@ -57,29 +57,28 @@ When you purchase a reserved DB instance, one thing that you specify is the inst
 
 If you have a DB instance, and you need to scale it to larger capacity, your reserved DB instance is automatically applied to your scaled DB instance\. That is, your reserved DB instances are automatically applied across all DB instance class sizes\. Size\-flexible reserved DB instances are available for DB instances with the same AWS Region and database engine\. Size\-flexible reserved DB instances can only scale in their instance class type\. For example, a reserved DB instance for a db\.r5\.large can apply to a db\.r5\.xlarge, but not to a db\.r6g\.large, because db\.r5 and db\.r6g are different instance class types\.
 
-Reserved DB instance benefits also apply for both Multi\-AZ and Single\-AZ configurations\. Flexibility means that you can move freely between configurations within the same DB instance class type\. For example, you can move from a Single\-AZ deployment running on one large DB instance \(four normalized units\) to a Multi\-AZ deployment running on two small DB instances \(2\*2 = 4 normalized units\)\.
+Reserved DB instance benefits also apply for both Multi\-AZ and Single\-AZ configurations\. Flexibility means that you can move freely between configurations within the same DB instance class type\. For example, you can move from a Single\-AZ deployment running on one large DB instance \(four normalized units per hour\) to a Multi\-AZ deployment running on two small DB instances \(2\*2 = 4 normalized units per hour\)\.
 
 Size\-flexible reserved DB instances are available for the following Aurora database engines:
 + Aurora MySQL
 + Aurora PostgreSQL
 
-You can compare usage for different reserved DB instance sizes by using normalized units\. For example, one unit of usage on two db\.r3\.large DB instances is equivalent to eight normalized units of usage on one db\.r3\.small\. The following table shows the number of normalized units for each DB instance size\.
+You can compare usage for different reserved DB instance sizes by using normalized units per hour\. For example, one unit of usage on two db\.r3\.large DB instances is equivalent to eight normalized units per hour of usage on one db\.r3\.small\. The following table shows the number of normalized units per hour for each DB instance size\.
 
 
-| Instance size | Single\-AZ normalized units \(deployment with one DB instance\) | Single\-AZ normalized units for Aurora I/O\-Optimized | Multi\-AZ DB instance normalized units \(deployment with one DB instance and one standby\) | Multi\-AZ DB cluster normalized units \(deployment with one DB instance and two standbys\) | 
+| Instance size | Normalized units per hour for one DB instance, Aurora Standard | Normalized units per hour for one DB instance, Aurora I/O\-Optimized | Normalized units per hour for three DB instances \(writer and two readers\), Aurora Standard | Normalized units per hour for three DB instances \(writer and two readers\), Aurora I/O\-Optimized | 
 | --- | --- | --- | --- | --- | 
-|  micro  |  0\.5  | 0\.65 |  1  | 1\.5 | 
-|  small  |  1  | 1\.3 |  2  | 3 | 
-|  medium  |  2  | 2\.6 |  4  | 6 | 
-|  large  |  4  | 5\.2 |  8  | 12 | 
-|  xlarge  |  8  | 10\.4 |  16  | 24 | 
-|  2xlarge  |  16  | 20\.8 |  32  | 48 | 
-|  4xlarge  |  32  | 41\.6 |  64  | 96 | 
-|  8xlarge  |  64  | 83\.2 |  128  | 192 | 
-|  10xlarge  |  80  | 104 |  160  | 240 | 
-|  12xlarge  |  96  | 124\.8 |  192  | 288 | 
-|  16xlarge  |  128  | 166\.4 |  256  | 384 | 
-|  24xlarge  |  192  | 249\.2 |  384  | 576 | 
+|  small  |  1  | 1\.3 |  3  | 3\.9 | 
+|  medium  |  2  | 2\.6 |  6  | 7\.8 | 
+|  large  |  4  | 5\.2 |  12  | 15\.6 | 
+|  xlarge  |  8  | 10\.4 |  24  | 31\.2 | 
+|  2xlarge  |  16  | 20\.8 |  48  | 62\.4 | 
+|  4xlarge  |  32  | 41\.6 |  96  | 124\.8 | 
+|  8xlarge  |  64  | 83\.2 |  192  | 249\.6 | 
+|  12xlarge  |  96  | 124\.8 |  288  | 374\.4 | 
+|  16xlarge  |  128  | 166\.4 |  384  | 499\.2 | 
+|  24xlarge  |  192  | 249\.6 |  576  | 748\.8 | 
+|  32xlarge  |  256  | 332\.8 |  768  | 998\.4 | 
 
 For example, suppose that you purchase a `db.t2.medium` reserved DB instance, and you have two running `db.t2.small` DB instances in your account in the same AWS Region\. In this case, the billing benefit is applied in full to both instances\.
 
@@ -116,17 +115,23 @@ Extending the first example, you have an Aurora MySQL DB cluster with one writer
 
  The corresponding on\-demand cost for an Aurora MySQL DB cluster with one writer DB instance and two Aurora Replicas is $313\.10 \+ 2 \* \($217\.50 \+ $20 I/O per instance\) for a total of $788\.10 per month\. You save $236\.40 per month by using the reserved DB instances\.
 
-#### Example using Aurora I/O\-Optimized<a name="ri-example-aurio"></a>
+#### Example using Aurora I/O\-Optimized<a name="ri-example-io"></a>
 
-When a DB cluster has the Aurora I/O\-Optimized configuration, it uses 1\.3 normalized units for each 1 normalized unit that it would have used for the same DB instance class in the Aurora Standard configuration\.
+You can reuse your existing Aurora Standard reserved DB instances with Aurora I/O\-Optimized\. To fully use the benefits of your reserved instance discounts with Aurora I/O\-Optimized, you can buy 30% additional reserved instances similar to your current reserved instances\.
 
-For example, if you buy an Aurora MySQL db\.r6g\.xlarge instance for a year all upfront, you pay $2,479 for a total of 70,080 normalized units \(8 normalized units per hour \* 24 hours per day \* 365 days per year\) for Aurora Standard\. This is enough for a full year of usage \(8,760 hours\) when using Aurora Standard\.
+The following table shows examples of how to estimate the additional reserved instances when using Aurora I/O\-Optimized\. If the required reserved instances are a fraction, you can take advantage of the size flexibility available with reserved instances to get to a whole number\. In these examples, "current" refers to the Aurora Standard reserved instances that you have now\. Additional reserved instances are the number of Aurora Standard reserved instances that you must buy to maintain your current reserved instance discounts when using Aurora I/O\-Optimized\.
 
-If you decide to use Aurora I/O\-Optimized, a db\.r6g\.xlarge instance uses 10\.4 normalized units per hour\. This means that the total normalized units are divided by 1\.3, providing 53,908 units \(70,080/1\.3\)\. This is 6,738 hours of usage when using Aurora I/O\-Optimized\.
+
+| DB instance class | Current Aurora Standard reserved instances | Reserved instances required for Aurora I/O\-Optimized | Additional reserved instances needed | Additional reserved instances needed, using size flexibility | 
+| --- | --- | --- | --- | --- | 
+| db\.r6g\.large | 10 | 10 \* 1\.3 = 13 | 3 \* db\.r6g\.large | 3 \* db\.r6g\.large | 
+| db\.r6g\.4xlarge | 20 | 20 \* 1\.3 = 26 | 6 \* db\.r6g\.4xlarge | 6 \* db\.r6g\.4xlarge | 
+| db\.r6g\.12xlarge | 5 | 5 \* 1\.3 = 6\.5 | 1\.5 \* db\.r6g\.12xlarge |  One each of db\.r6g\.12xlarge, r6g\.4xlarge, and r6g\.2xlarge \(0\.5 \* db\.r6g\.12xlarge = 1 \* db\.r6g\.4xlarge \+ 1 \* db\.r6g\.2xlarge \)  | 
+| db\.r6i\.24xlarge | 15 | 15 \* 1\.3 = 19\.5 | 4\.5 \* db\.r6i\.24xlarge |  4 \* db\.r6i\.24xlarge \+ 1 \* db\.r6i\.12xlarge \(0\.5 \* db\.r6i\.24xlarge = 1 \* db\.r6i\.12xlarge\)  | 
 
 #### Example using an Aurora I/O\-Optimized DB cluster with two reader instances<a name="ri-example-3db-io"></a>
 
-You have an Aurora MySQL DB cluster with one writer DB instance and two Aurora Replicas, for a total of three DB instances in the cluster\. They use the Aurora I/O\-Optimized DB cluster configuration\. To use reserved DB instances for this cluster, you would need to buy four reserved DB instances of the same DB instance class\. Three DB instances using Aurora I/O\-Optimized consume 3\.9 normalized units, compared to 3 normalized units for three DB instances using Aurora Standard\. However, you save the monthly I/O costs for each DB instance\.
+You have an Aurora MySQL DB cluster with one writer DB instance and two Aurora Replicas, for a total of three DB instances in the cluster\. They use the Aurora I/O\-Optimized DB cluster configuration\. To use reserved DB instances for this cluster, you would need to buy four reserved DB instances of the same DB instance class\. Three DB instances using Aurora I/O\-Optimized consume 3\.9 normalized units per hour, compared to 3 normalized units per hour for three DB instances using Aurora Standard\. However, you save the monthly I/O costs for each DB instance\.
 
 **Note**  
 The prices in these examples are sample prices and might not match actual prices\. For Aurora pricing information, see [Amazon Aurora pricing](https://aws.amazon.com/rds/aurora/pricing)\.

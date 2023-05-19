@@ -42,6 +42,8 @@ The memory\-optimized R family supports the following instance class types:
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.r6i** – Instance classes that are ideal for running memory\-intensive workloads\.
 + **db\.r4** – These instance classes are supported only for Aurora PostgreSQL 11 and 12 versions\. For all Aurora PostgreSQL DB clusters that use db\.r4 DB instance classes, We recommend that you upgrade to a db\.r5 or newer instance class as soon as possible\.
+
+  The db\.r4 instance classes aren't available for the Aurora I/O\-Optimized cluster storage configuration\.
 + **db\.r3** – Instance classes that provide memory optimization\.
 
   Amazon Aurora has started the end\-of\-life process for db\.r3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all Aurora MySQL DB clusters that use db\.r3 DB instance classes, we recommend that you upgrade to a db\.r5 or higher DB instance class as soon as possible\.    
@@ -55,6 +57,8 @@ The following burstable\-performance DB instance class types are available:
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.t3** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. T3 instances are configured for Unlimited mode\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. We recommend using these instance classes only for development and test servers, or other non\-production servers\. 
 + **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. We recommend using these instance classes only for development and test servers, or other non\-production servers\.
+
+  The db\.t2 instance classes aren't available for the Aurora I/O\-Optimized cluster storage configuration\.
 
 **Note**  
 We recommend using the T DB instance classes only for development, test, or other nonproduction servers\. For more detailed recommendations for the T instance classes, see [Using T instance classes for development and testing](AuroraMySQL.BestPractices.md#AuroraMySQL.BestPractices.T2Medium)\.

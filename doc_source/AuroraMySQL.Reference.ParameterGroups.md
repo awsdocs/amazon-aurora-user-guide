@@ -71,7 +71,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `event_scheduler`  |  Yes  |  Indicates the status of the Event Scheduler\. Modifiable only at the cluster level in Aurora MySQL version 3\.  | 
 |   `gtid-mode`   |   Sometimes   |  Modifiable in Aurora MySQL version 2 and higher\.  | 
 |   `init_connect`   |   Yes   |  The command to be run by the server for each client that connects\. Use double quotes \("\) for settings to avoid connection failures, for example: <pre>SET optimizer_switch="hash_join=off"</pre> In Aurora MySQL version 3, this parameter doesn't apply for users who have the `CONNECTION_ADMIN` privilege\. This includes the Aurora master user\. For more information, see [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\.  | 
-|  `innodb_adaptive_hash_index`  |  Yes  |  Modifiable only at the cluster level in Aurora MySQL version 3\.  | 
+|  `innodb_adaptive_hash_index`  |  Yes  |  You can modify this parameter at the DB cluster level in Aurora MySQL versions 2 and 3\. The Adaptive Hash Index isn't supported on reader DB instances\.  | 
 |   `innodb_autoinc_lock_mode`   |   Yes   |    | 
 |   `innodb_checksums`   |   No   | Removed from Aurora MySQL version 3\.  | 
 |   `innodb_cmp_per_index_enabled`   |   Yes   |    | 
@@ -190,7 +190,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `group_concat_max_len`   |   Yes   |    | 
 |   `host_cache_size`   |   Yes   |    | 
 |   `init_connect`   |   Yes   |  The command to be run by the server for each client that connects\. Use double quotes \("\) for settings to avoid connection failures, for example: <pre>SET optimizer_switch="hash_join=off"</pre> In Aurora MySQL version 3, this parameter doesn't apply for users who have the `CONNECTION_ADMIN` privilege, including the Aurora master user\. For more information, see [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\.  | 
-|  `innodb_adaptive_hash_index`  |  Yes  |  Modifiable only at the cluster level in Aurora MySQL version 3\.  | 
+|  `innodb_adaptive_hash_index`  |  Yes  |  You can modify this parameter at the DB instance level in Aurora MySQL version 2\. It's modifiable only at the DB cluster level in Aurora MySQL version 3\. The Adaptive Hash Index isn't supported on reader DB instances\.  | 
 |   `innodb_adaptive_max_sleep_delay`   |   Yes   |   Modifying this parameter has no effect because `innodb_thread_concurrency` is always 0 for Aurora\.   | 
 |   `innodb_autoextend_increment`   |   Yes   |    | 
 |   `innodb_buffer_pool_dump_at_shutdown`   |   No   |    | 

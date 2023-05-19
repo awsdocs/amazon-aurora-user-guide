@@ -6,6 +6,15 @@ Some maintenance items require that Amazon RDS take your DB cluster offline for 
 
 Deferred DB cluster and instance modifications that you have chosen not to apply immediately are also applied during the maintenance window\. For example, you might choose to change DB instance classes or cluster or DB parameter groups during the maintenance window\. Such modifications that you specify using the **pending reboot** setting don't show up in the **Pending maintenance** list\. For information about modifying a DB cluster, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
+**Topics**
++ [Viewing pending maintenance](#USER_UpgradeDBInstance.Maintenance.Viewing)
++ [Applying updates for a DB cluster](#USER_UpgradeDBInstance.OSUpgrades)
++ [The Amazon RDS maintenance window](#Concepts.DBMaintenance)
++ [Adjusting the preferred DB cluster maintenance window](#AdjustingTheMaintenanceWindow.Aurora)
++ [Automatic minor version upgrades for Aurora DB clusters](#Aurora.Maintenance.AMVU)
++ [Choosing the frequency of Aurora MySQL maintenance updates](#Aurora.Maintenance.LTS)
++ [Working with operating system updates](#OS_Updates)
+
 ## Viewing pending maintenance<a name="USER_UpgradeDBInstance.Maintenance.Viewing"></a>
 
 View whether a maintenance update is available for your DB cluster by using the RDS console, the AWS CLI, or the RDS API\. If an update is available, it is indicated in the **Maintenance** column for the DB cluster on the Amazon RDS console, as shown following\.
@@ -245,17 +254,17 @@ There are two types of operating system updates, differentiated by the descripti
 + **Operating system patch** – Used to apply various security fixes and sometimes to improve database performance\. Its description in the pending maintenance action is `New Operating System patch is available`\.
 
 Operating system updates can be either optional or mandatory:
-+ An **optional update** doesn’t have an apply date and can be applied at any time\. While these updates are optional, we recommend that you apply them periodically to keep your RDS fleet up to date\. RDS *does not* apply these updates automatically\.
++ An **optional update** can be applied at any time\. While these updates are optional, we recommend that you apply them periodically to keep your RDS fleet up to date\. RDS *does not* apply these updates automatically\.
 
-  To be notified when a new, minor version, optional update becomes available, you can subscribe to [RDS\-EVENT\-0230](USER_Events.Messages.md#RDS-EVENT-0230) in the security patching event category\. For information about subscribing to RDS events, see [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)\.
+  To be notified when a new, optional operating system patch becomes available, you can subscribe to [RDS\-EVENT\-0230](USER_Events.Messages.md#RDS-EVENT-0230) in the security patching event category\. For information about subscribing to RDS events, see [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)\.
 **Note**  
-`RDS-EVENT-0230` doesn't apply to major version upgrades\.
-+ A **mandatory update** is required and has an apply date\. Plan to schedule your update before this date\. After the specified apply date, Amazon RDS automatically upgrades the operating system for your DB instance to the latest version\. The update is performed in a subsequent maintenance window for the DB instance\.
+`RDS-EVENT-0230` doesn't apply to operating system distribution upgrades\.
++ A **mandatory update** is required, and we send a notification before the mandatory update\. The notification might contain a due date\. Plan to schedule your update before this due date\. After the specified due date, Amazon RDS automatically upgrades the operating system for your DB instance to the latest version during one of your assigned maintenance windows\.
 
 **Note**  
 Staying current on all optional and mandatory updates might be required to meet various compliance obligations\. We recommend that you apply all updates made available by RDS routinely during your maintenance windows\.
 
-You can use the AWS Management Console or the AWS CLI to determine whether an update is optional or mandatory\.
+You can use the AWS Management Console or the AWS CLI to get information about the type of operating system upgrade\.
 
 ### Console<a name="OS_Updates.CheckMaintenanceStatus.CON"></a>
 
@@ -267,27 +276,25 @@ You can use the AWS Management Console or the AWS CLI to determine whether an up
 
 1. Choose **Maintenance**\.
 
-1. In the **Pending maintenance** section, find the operating system update, and check the **Status** value\.
+1. In the **Pending maintenance** section, find the operating system update, and check the **Description** value\.
 
-In the AWS Management Console, an optional update has its maintenance **Status** set to **available** and doesn't have an **Apply date**, as shown in the following image\.
+In the AWS Management Console, an operating system distribution upgrade has its **Description** set to **New Operating System upgrade is available**, as shown in the following image\.
 
-![\[Optional operating system update.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/os-update-optional-aur.png)
+![\[Operating system distribution upgrade.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/os-update-required-aur.png)
 
-A mandatory update has its maintenance **Status** set to **required** and has an **Apply date**, as shown in the following image\.
+An operating system patch has its **Description** set to **New Operating System patch is available**, as shown in the following image\.
 
-![\[Required operating system update.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/os-update-required-aur.png)
+![\[Operating system patch.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/os-update-optional-aur.png)
 
 ### AWS CLI<a name="OS_Updates.CheckMaintenanceStatus.CLI"></a>
 
-To determine whether an update is optional or mandatory using the AWS CLI, call the [describe\-pending\-maintenance\-actions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html) command\.
+To get update information from the AWS CLI, use the [describe\-pending\-maintenance\-actions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html) command\.
 
 ```
 aws rds describe-pending-maintenance-actions
 ```
 
-A mandatory operating system update includes an `AutoAppliedAfterDate` value and a `CurrentApplyDate` value\. An optional operating system update doesn't include these values\.
-
-The following output shows a mandatory operating system update\.
+The following output shows an operating system distribution upgrade\.
 
 ```
 {
@@ -295,15 +302,13 @@ The following output shows a mandatory operating system update\.
   "PendingMaintenanceActionDetails": [
     {
       "Action": "system-update",
-      "AutoAppliedAfterDate": "2023-04-02T00:00:00+00:00",
-      "CurrentApplyDate": "2023-04-02T00:00:00+00:00",
       "Description": "New Operating System upgrade is available"
     }
   ]
 }
 ```
 
-The following output shows an optional operating system update\.
+The following output shows an operating system patch\.
 
 ```
 {

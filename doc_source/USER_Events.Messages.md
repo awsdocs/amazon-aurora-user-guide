@@ -41,6 +41,12 @@ No event category exists for Aurora Serverless in the DB cluster event type\. Th
 |  global failover  | RDS\-EVENT\-0187 |  Global failover to DB cluster *name* in Region *name* failed\.  |    | 
 |  maintenance  | RDS\-EVENT\-0156 |  The DB cluster has a DB engine minor version upgrade available\.  |    | 
 |  maintenance  | RDS\-EVENT\-0173 |  Database cluster engine version has been upgraded\.  |  Patching of the DB cluster has completed\.  | 
+|  maintenance  | RDS\-EVENT\-0176 |  Database cluster engine major version has been upgraded\.  |  | 
+|  maintenance  | RDS\-EVENT\-0286 |  Database cluster engine version upgrade started\.  |  | 
+|  maintenance  | RDS\-EVENT\-0287 |  Operating system upgrade requirement detected\.  |  | 
+|  maintenance  | RDS\-EVENT\-0288 |  Cluster operating system upgrade starting\.  |  | 
+|  maintenance  | RDS\-EVENT\-0289 |  Cluster operating system upgrade completed\.  |  | 
+|  maintenance  | RDS\-EVENT\-0290 |  Database cluster has been patched: source version *version\_number* => *new\_version\_number*\.  |  | 
 |  notification  | RDS\-EVENT\-0076 |  Failed to migrate from *name* to *name*\. Reason: *reason*\.  |  Migration to an Aurora DB cluster failed\.  | 
 |  notification  | RDS\-EVENT\-0077 |  Failed to convert *name*\.*name* to InnoDB\. Reason: *reason*\.  |  An attempt to convert a table from the source database to InnoDB failed during the migration to an Aurora DB cluster\.  | 
 |  notification  | RDS\-EVENT\-0085 |  Unable to upgrade DB cluster *name* because the instance *name* has a status of *name*\. Resolve the issue or delete the instance and try again\.  |  An error occurred while attempting to patch the Aurora DB cluster\. Check your instance status, resolve the issue, and try again\. For more information see [Maintaining an Amazon Aurora DB cluster](USER_UpgradeDBInstance.Maintenance.md)\.  | 

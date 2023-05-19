@@ -29,9 +29,9 @@ Feature availability and support varies across specific versions of each databas
 ## Limitations<a name="export-cluster-data.Limits"></a>
 
 Exporting DB cluster data to Amazon S3 has the following limitations:
-+ Multimaster and Aurora Serverless v1 DB clusters don't support exports to S3\.
-+ Aurora MySQL supports exports to S3 for the provisioned, global, and parallel query engine modes\.
-+ Aurora PostgreSQL supports exports to S3 only for the provisioned engine mode\.
++ You can't run multiple export tasks for the same DB cluster simultaneously\. This applies to both full and partial exports\.
++ Aurora Serverless v1 DB clusters don't support exports to S3\.
++ Aurora MySQL and Aurora PostgreSQL support exports to S3 only for the provisioned engine mode\.
 + DB clusters can have at most 15 clones\. Because of this limit, if your cluster already has 15 clones, the export task copies the DB cluster instead of cloning it\. Copying causes the export task to take longer\. For more information on cloning, see [Cloning a volume for an Amazon Aurora DB cluster](Aurora.Managing.Clone.md)\.
 + The following characters in the S3 file path are converted to underscores \(\_\) during export:
 

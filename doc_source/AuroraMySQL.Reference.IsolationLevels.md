@@ -10,6 +10,8 @@ You can use the isolation levels `REPEATABLE READ`, `READ COMMITTED`, `READ UNCO
 
 By default, Aurora MySQL DB instances that are configured as read\-only Aurora Replicas always use the `REPEATABLE READ` isolation level\. These DB instances ignore any `SET TRANSACTION ISOLATION LEVEL` statements and continue using the `REPEATABLE READ` isolation level\.
 
+You can't set the isolation level for reader DB instances using DB parameters or DB cluster parameters\.
+
 ## READ COMMITTED isolation level for reader instances<a name="AuroraMySQL.Reference.IsolationLevels.relaxed"></a>
 
 If your application includes a write\-intensive workload on the primary instance and long\-running queries on the Aurora Replicas, you might experience substantial purge lag\. *Purge lag* happens when internal garbage collection is blocked by long\-running queries\. The symptom that you see is a high value for `history list length` in the output from the `SHOW ENGINE INNODB STATUS` command\. You can monitor this value using the `RollbackSegmentHistoryListLength` metric in CloudWatch\. Substantial purge lag can reduce the effectiveness of secondary indexes, decrease overall query performance, and lead to wasted storage space\.

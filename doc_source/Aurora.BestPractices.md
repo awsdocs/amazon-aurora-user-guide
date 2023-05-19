@@ -18,7 +18,7 @@ For common recommendations for Aurora, see [Viewing Amazon Aurora recommendation
 + [DB instance RAM recommendations](#Aurora.BestPractices.Performance.Sizing)
 + [Monitoring Amazon Aurora](#Aurora.BestPractices.Monitoring)
 + [Working with DB parameter groups and DB cluster parameter groups](#Aurora.BestPractices.ParameterGroups)
-+ [Amazon Aurora best practices presentation video](#Aurora.BestPractices.Presentation)
++ [Amazon Aurora best practices video](#Aurora.BestPractices.Presentation)
 
 ## Basic operational guidelines for Amazon Aurora<a name="Aurora.BestPractices.OperationalGuidelines"></a>
 
@@ -51,8 +51,8 @@ We recommend that you try out DB parameter group and DB cluster parameter group 
 
 Always use caution when modifying DB engine parameters, and back up your DB cluster before modifying a DB parameter group\. For information about backing up your DB cluster, see [Backing up and restoring an Amazon Aurora DB cluster](BackupRestoreAurora.md)\.
 
-## Amazon Aurora best practices presentation video<a name="Aurora.BestPractices.Presentation"></a>
+## Amazon Aurora best practices video<a name="Aurora.BestPractices.Presentation"></a>
 
-The 2016 AWS Summit conference in Chicago included a presentation on best practices for creating and configuring an Amazon Aurora DB cluster to be more secure and highly available\. You can find a video of the presentation following:
+The AWS Online Tech Talks channel on YouTube includes a video presentation on best practices for creating and configuring an Amazon Aurora DB cluster to be more secure and highly available\.
 
-[![AWS Videos](http://img.youtube.com/vi/https://www.youtube.com/embed/DZFPYzp1JJA/0.jpg)](http://www.youtube.com/watch?v=https://www.youtube.com/embed/DZFPYzp1JJA)
+[![AWS Videos](http://img.youtube.com/vi/https://www.youtube.com/embed/ydzd95r4_VQ/0.jpg)](http://www.youtube.com/watch?v=https://www.youtube.com/embed/ydzd95r4_VQ)

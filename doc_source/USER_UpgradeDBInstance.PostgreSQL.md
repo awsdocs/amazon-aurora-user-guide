@@ -27,7 +27,10 @@ If the automatic minor version upgrade option isn't set for your Aurora PostgreS
 Patches aren't considered an upgrade, and they aren't applied automatically\. Aurora PostgreSQL prompts you to apply any patches by adding a recommendation to maintenance tasks for your Aurora PostgreSQL DB cluster\. For more information, see [How to perform minor version upgrades and apply patches](#USER_UpgradeDBInstance.PostgreSQL.Minor)\.   
 Patches that resolve security or other critical issues are also added as maintenance tasks\. However, these patches are required\. Make sure to apply security patches to your Aurora PostgreSQL DB cluster when they become available in your pending maintenance tasks\.
 The upgrade process involves the possibility of brief outages as each instance in the cluster is upgraded to the new version\. However, after Aurora PostgreSQL versions 14\.3\.3, 13\.7\.3, 12\.11\.3, 11\.16\.3, 10\.21\.3 and other higher releases of these minor versions and newer major versions, the upgrade process uses the zero\-downtime patching \(ZDP\) feature\. This feature minimizes outages, and in most cases completely eliminates them\. For more information, see [Minor release upgrades and zero\-downtime patching](#USER_UpgradeDBInstance.PostgreSQL.Minor.zdp)\.  
-ZDP isn't supported for Aurora PostgreSQL DB clusters that are configured as Aurora Serverless v1, or Aurora global databases\. ZDP isn't supported during OS patches and OS upgrades\.
+ZDP isn't supported in the following cases:  
++ When Aurora PostgreSQL DB clusters are configured as Aurora Serverless v1\.
++ During the upgrade of reader instances in Aurora global database\.
++ During OS patches and OS upgrades\.
 
 **Major version upgrades**  
 Unlike for minor version upgrades and patches, Aurora PostgreSQL doesn't have an automatic major version upgrade option\. New major PostgreSQL versions might contain database changes that aren't backward\-compatible with existing applications\. The new functionality can cause your existing applications to stop working correctly\.  

@@ -26,6 +26,7 @@ Feature availability and support varies across specific versions of each databas
 ## Limitations<a name="aurora-export-snapshot.Limits"></a>
 
 Exporting DB snapshot data to Amazon S3 has the following limitations:
++ You can't run multiple export tasks for the same DB cluster snapshot simultaneously\. This applies to both full and partial exports\.
 + The following characters in the S3 file path are converted to underscores \(\_\) during export:
 
   ```
