@@ -277,7 +277,7 @@ $ aws rds describe-events \
             "SourceIdentifier": "instance-attempt-1",
             "SourceType": "db-instance",
             "Message": "Database cluster is in a state that cannot be upgraded:
-PreUpgrade checks failed: Oscar PreChecker Found 1 errors",
+PreUpgrade checks failed: PreChecker Found 1 errors",
             "EventCategories": [
                 "maintenance"
             ],

@@ -43,7 +43,7 @@ For more information, see [Amazon CloudWatch metrics for Amazon Aurora](Aurora.A
 
 ## Monitoring Amazon Aurora<a name="Aurora.BestPractices.Monitoring"></a>
 
-Amazon Aurora provides a variety of Amazon CloudWatch metrics that you can monitor to determine the health and performance of your Aurora DB cluster\. You can use various tools, such as the AWS Management Console, AWS CLI, and CloudWatch API, to view Aurora metrics\. For more information, see [Monitoring metrics in an Amazon Aurora cluster](MonitoringAurora.md)\.
+Amazon Aurora provides various metrics and insights that you can monitor to determine the health and performance of your Aurora DB cluster\. You can use various tools, such as the AWS Management Console, AWS CLI, and CloudWatch API, to view Aurora metrics\. You can now view the combined Performance Insights and CloudWatch metrics in the Performance Insights dashboard and monitor your DB instance\. To use this monitoring view, Performance Insights must be turned on for your DB instance\. For information about this monitoring view, see [Viewing combined metrics in the Amazon RDS console](Viewing_Unifiedmetrics.md)\.
 
 ## Working with DB parameter groups and DB cluster parameter groups<a name="Aurora.BestPractices.ParameterGroups"></a>
 

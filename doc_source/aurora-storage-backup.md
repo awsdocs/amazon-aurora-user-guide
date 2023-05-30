@@ -1,13 +1,13 @@
 # Understanding Amazon Aurora backup storage usage<a name="aurora-storage-backup"></a>
 
-Amazon Aurora stores continuous backups \(within the backup retention period\) and snapshots in Aurora backup storage\. To control your backup storage usage and related costs, you can reduce the backup retention interval, remove old manual snapshots when they are no longer needed, or both\. Because Aurora backups are incremental, you can also review updates to the database, so that continuous backup stores less data, and you incur fewer costs\.
+Amazon Aurora stores automated backups \(within the backup retention period\) and snapshots in Aurora backup storage\. To control your backup storage usage and related costs, you can reduce the backup retention interval, remove old manual snapshots when they're no longer needed, or both\. Because Aurora automated backups are incremental, you can also review updates to the database, so that continuous backup stores less data, and you incur fewer costs\.
 
 For general information about Aurora backups, see [Backups](Aurora.Managing.Backups.md#Aurora.Managing.Backups.Backup)\. For pricing information about Aurora backup storage, see the [Amazon Aurora pricing](https://aws.amazon.com/rds/aurora/pricing) page\.
 
 ## Amazon CloudWatch metrics for Aurora backup storage<a name="aurora-storage-backup.metrics"></a>
 
 You can monitor your Aurora clusters and create reports using Amazon CloudWatch metrics through the [CloudWatch console](https://console.aws.amazon.com/cloudwatch/)\. You can use the following CloudWatch metrics to review and monitor the amount of storage used by your Aurora backups\. These metrics are computed independently for each Aurora DB cluster\.
-+ `BackupRetentionPeriodStorageUsed` – Represents the amount of backup storage used, in bytes, for storing continuous backups at the current time\. This value depends on the size of the cluster volume and the amount of changes you make during the retention period\.
++ `BackupRetentionPeriodStorageUsed` – Represents the amount of backup storage used, in bytes, for storing automated backups at the current time\. This value depends on the size of the cluster volume and the amount of changes you make during the retention period\.
 
   For billing purposes, `BackupRetentionPeriodStorageUsed` doesn't exceed the cumulative cluster volume size during the retention period\. There is no additional charge for backup storage of up to 100% of your total Aurora database storage for each Aurora DB cluster\. There is also no additional charge for automated backups retained up to one day, such as system snapshots\. Backups that you retain for more than one day might be charged depending on the amount of data changes performed on the database\.
 

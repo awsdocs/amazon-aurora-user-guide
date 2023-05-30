@@ -221,7 +221,7 @@ For a listing of the DB instance parameters for this same default DB cluster par
 | hash\_mem\_multiplier | Multiple of work\_mem to use for hash tables\. | –  | 
 | hba\_file | Sets the servers hba configuration file\. | /rdsdbdata/config/pg\_hba\.conf  | 
 | hot\_standby\_feedback | Allows feedback from a hot standby to the primary that will avoid query conflicts\. | on  | 
-| huge\_pages | Use of huge pages on Linux\. | on  | 
+| huge\_pages | Reduces overhead when a DB instance is working with large contiguous chunks of memory, such as that used by shared buffers\. It is turned on by default for all the DB instance classes other than t3\.medium,db\.t3\.large,db\.t4g\.medium,db\.t4g\.large instance classes\.  | on  | 
 | ident\_file | Sets the servers ident configuration file\. | /rdsdbdata/config/pg\_ident\.conf  | 
 | idle\_in\_transaction\_session\_timeout | \(ms\) Sets the maximum allowed duration of any idling transaction\. | 86400000  | 
 | idle\_session\_timeout | Terminate any session that has been idle \(that is, waiting for a client query\), but not within an open transaction, for longer than the specified amount of time | –  | 

@@ -156,6 +156,8 @@ For this example, **Standard create** is enabled, and **Easy create** isn't enab
 
    By default, the new DB instance uses an automatically generated password for the master user\.
 
+1. In the **Connectivity** section under **VPC security group \(firewall\)**, if you select **Create new**, a VPC security group is created is added to the database with an inbound rule that allows your local computer's IP address to access the database\. 
+
 1. For **Cluster storage configuration**, choose either **Aurora I/O\-Optimized** or **Aurora Standard**\. For more information, see [Storage configurations for Amazon Aurora DB clusters](Aurora.Overview.StorageReliability.md#aurora-storage-type)\.  
 ![\[Cluster storage configuration showing Aurora I/O-Optimized.\]](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/images/cluster-storage-configuration-create.png)
 

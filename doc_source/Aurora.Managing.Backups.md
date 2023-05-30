@@ -4,9 +4,9 @@ In the following sections, you can find information about Aurora backups and how
 
 ## Backups<a name="Aurora.Managing.Backups.Backup"></a>
 
-Aurora backs up your cluster volume automatically and retains restore data for the length of the *backup retention period*\. Aurora backups are continuous and incremental so you can quickly restore to any point within the backup retention period\. No performance impact or interruption of database service occurs as backup data is being written\. You can specify a backup retention period, from 1 to 35 days, when you create or modify a DB cluster\. Aurora backups are stored in Amazon S3\.
+Aurora backs up your cluster volume automatically and retains restore data for the length of the *backup retention period*\. Aurora automated backups are continuous and incremental, so you can quickly restore to any point within the backup retention period\. No performance impact or interruption of database service occurs as backup data is being written\. You can specify a backup retention period from 1–35 days when you create or modify a DB cluster\. Aurora automated backups are stored in Amazon S3\.
 
-If you want to retain a backup beyond the backup retention period, you can also take a snapshot of the data in your cluster volume\. Because Aurora retains incremental restore data for the entire backup retention period, you only need to create a snapshot for data that you want to retain beyond the backup retention period\. You can create a new DB cluster from the snapshot\.
+If you want to retain data beyond the backup retention period, you can take a snapshot of the data in your cluster volume\. Aurora DB cluster snapshots don't expire\. You can create a new DB cluster from the snapshot\. For more information, see [Creating a DB cluster snapshot](USER_CreateSnapshotCluster.md)\.
 
 **Note**  
 For Amazon Aurora DB clusters, the default backup retention period is one day regardless of how the DB cluster is created\.

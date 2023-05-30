@@ -6,6 +6,7 @@ The following section discusses managing performance and scaling for an Amazon A
 + [Scaling Aurora PostgreSQL DB instances](#AuroraPostgreSQL.Managing.Performance.InstanceScaling)
 + [Maximum connections to an Aurora PostgreSQL DB instance](#AuroraPostgreSQL.Managing.MaxConnections)
 + [Temporary storage limits for Aurora PostgreSQL](#AuroraPostgreSQL.Managing.TempStorage)
++ [Huge pages for Aurora PostgreSQL](#AuroraPostgreSQL.Managing.HugePages)
 + [Testing Amazon Aurora PostgreSQL by using fault injection queries](AuroraPostgreSQL.Managing.FaultInjectionQueries.md)
 + [Displaying volume status for an Aurora PostgreSQL DB cluster](AuroraPostgreSQL.Managing.VolumeStatus.md)
 + [Specifying the RAM disk for the stats\_temp\_directory](AuroraPostgreSQL.Managing.RamDisk.md)
@@ -132,3 +133,9 @@ The following table shows the maximum amount of temporary storage available for 
 You can monitor the temporary storage available for a DB instance with the `FreeLocalStorage` CloudWatch metric, \-\-> described in [Amazon CloudWatch metrics for Amazon Aurora](Aurora.AuroraMonitoring.Metrics.md)\. \(This doesn't apply to Aurora Serverless v2\.\)
 
 For some workloads, you can reduce the amount of temporary storage by allocating more memory to the processes that are performing the operation\. To increase the memory available to an operation, increasing the values of the [work\_mem](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-WORK-MEM) or [maintenance\_work\_mem](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) PostgreSQL parameters\.
+
+## Huge pages for Aurora PostgreSQL<a name="AuroraPostgreSQL.Managing.HugePages"></a>
+
+*Huge pages* are a memory management feature that reduces overhead when a DB instance is working with large contiguous chunks of memory, such as that used by shared buffers\. This PostgreSQL feature is supported by all currently available Aurora PostgreSQL versions\.
+
+`Huge_pages` parameter is turned on by default for all DB instance classes other than t3\.medium,db\.t3\.large,db\.t4g\.medium,db\.t4g\.large instance classes\. You can't change the `huge_pages` parameter value or turn off this feature in the supported instance classes of Aurora PostgreSQL\.
