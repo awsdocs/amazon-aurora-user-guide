@@ -15,6 +15,8 @@ Modify the values of the following variables as needed:
 + `dbName` – The database that you want to access
 + `dbUser` – The database account that you want to access
 + `dbHost` – The endpoint of the DB cluster that you want to access
+**Note**  
+You cannot use a custom Route 53 DNS record or an Aurora custom endpoint instead of the DB cluster endpoint to generate the authentication token\.
 + `dbPort` – The port number used for connecting to your DB cluster
 + `region` – The AWS Region where the DB cluster is running
 

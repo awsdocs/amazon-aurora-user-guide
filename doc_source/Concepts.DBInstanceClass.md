@@ -77,13 +77,13 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.serverless – Aurora Serverless v2 instance class with automatic capacity scaling | 
 | db\.serverless | See [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md) | See [Aurora Serverless v2](Concepts.Aurora_Fea_Regions_DB-eng.Feature.ServerlessV2.md) | 
 | db\.x2g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
-| db\.x2g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
-| db\.x2g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
-| db\.x2g\.8xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
-| db\.x2g\.4xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
-| db\.x2g\.2xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
-| db\.x2g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
-| db\.x2g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.x2g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.x2g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.x2g\.8xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.x2g\.4xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.x2g\.2xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.x2g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.x2g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
 | db\.r7g – memory\-optimized instance classes powered by AWS Graviton3 processors | 
 | db\.r7g\.16xlarge | 3\.03\.1 and higher | 15\.2 and higher, 14\.7 and higher, 13\.10 and higher | 
 | db\.r7g\.12xlarge | 3\.03\.1 and higher | 15\.2 and higher, 14\.7 and higher, 13\.10 and higher | 
@@ -93,23 +93,23 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.r7g\.xlarge | 3\.03\.1 and higher | 15\.2 and higher, 14\.7 and higher, 13\.10 and higher | 
 | db\.r7g\.large | 3\.03\.1 and higher | 15\.2 and higher, 14\.7 and higher, 13\.10 and higher | 
 | db\.r6g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
-| db\.r6g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
-| db\.r6g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
-| db\.r6g\.8xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
-| db\.r6g\.4xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
-| db\.r6g\.2xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
-| db\.r6g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
-| db\.r6g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.r6g\.16xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.r6g\.12xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.r6g\.8xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.r6g\.4xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.r6g\.2xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.r6g\.xlarge | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
+| db\.r6g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.8 and higher, 11\.9, 11\.12 and higher | 
 | db\.r6i – memory\-optimized instance classes | 
-| db\.r6i\.32xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.24xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.16xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.12xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.8xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.4xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.2xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
-| db\.r6i\.large | 2\.11\.0 and higher, 3\.02\.1 and higher | 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.32xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 15\.2 and higher, 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.24xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 15\.2 and higher, 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.16xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 15\.2 and higher, 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.12xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 15\.2 and higher, 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.8xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 15\.2 and higher, 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.4xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 15\.2 and higher, 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.2xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 15\.2 and higher, 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.xlarge | 2\.11\.0 and higher, 3\.02\.1 and higher | 15\.2 and higher, 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
+| db\.r6i\.large | 2\.11\.0 and higher, 3\.02\.1 and higher | 15\.2 and higher, 14\.3 and higher, 13\.5 and higher, 12\.9 and higher | 
 | db\.r5 – memory\-optimized instance classes | 
 | db\.r5\.24xlarge | 1\.22 and higher, 2\.06 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
 | db\.r5\.16xlarge | 1\.22 and higher, 2\.06 and higher, 3\.01\.0 and higher | [All currently available versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) | 
@@ -135,14 +135,14 @@ In the following table, you can find details about supported Amazon Aurora DB in
 | db\.t4g – burstable\-performance instance classes powered by AWS Graviton2 processors | 
 | db\.t4g\.2xlarge | No | No | 
 | db\.t4g\.xlarge | No | No | 
-| db\.t4g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.7 and higher, 11\.12 and higher | 
-| db\.t4g\.medium | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.7 and higher, 11\.12 and higher | 
+| db\.t4g\.large | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.7 and higher, 11\.12 and higher | 
+| db\.t4g\.medium | 2\.09\.2 and higher, 2\.10\.0 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.7 and higher, 11\.12 and higher | 
 | db\.t4g\.small | No | No | 
 | db\.t3 – burstable\-performance instance classes | 
 | db\.t3\.2xlarge | No | No | 
 | db\.t3\.xlarge | No | No | 
-| db\.t3\.large | 2\.10 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.7 and higher, 11\.12 and higher | 
-| db\.t3\.medium | 1\.14\.4 and higher, 3\.01\.0 and higher | 14\.3 and higher, 13\.3 and higher, 12\.7 and higher, 11\.12 and higher | 
+| db\.t3\.large | 2\.10 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.7 and higher, 11\.12 and higher | 
+| db\.t3\.medium | 1\.14\.4 and higher, 3\.01\.0 and higher | 15\.2 and higher, 14\.3 and higher, 13\.3 and higher, 12\.7 and higher, 11\.12 and higher | 
 | db\.t3\.small | 1\.14\.4 and higher; not supported in 3\.01\.0 and higher | No | 
 | db\.t3\.micro | No | No | 
 | db\.t2 – burstable\-performance instance classes | 

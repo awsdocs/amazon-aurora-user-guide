@@ -59,15 +59,19 @@ Feature availability and support varies across specific versions of each Aurora 
 ## Supported DB instance classes for database activity streams<a name="DBActivityStreams.Overview.requirements.classes"></a>
 
 For Aurora MySQL, you can use database activity streams with the following DB instance classes:
++ db\.r7g\.\*large
 + db\.r6g\.\*large
++ db\.r6i\.\*large
 + db\.r5\.\*large
 + db\.r4\.\*large
 + db\.r3\.\*large
 + db\.x2g\.\*
 
 For Aurora PostgreSQL, you can use database activity streams with the following DB instance classes:
++ db\.r7g\.\*large
 + db\.r6g\.\*large
 + db\.r6i\.\*large
++ db\.r6id\.\*large
 + db\.r5\.\*large
 + db\.r4\.\*large
 + db\.x2g\.\*

@@ -25,6 +25,9 @@ This code connects to an Aurora MySQL DB cluster\. Modify the values of the foll
 
   To download a certificate, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\.
 
+**Note**  
+You cannot use a custom Route 53 DNS record or an Aurora custom endpoint instead of the DB cluster endpoint to generate the authentication token\.
+
 ```
 using System;
 using System.Data;
@@ -75,6 +78,9 @@ Modify the values of the following variables as needed:
 + `Root Certificate` – The full path to the SSL certificate for Amazon Aurora
 
   To download a certificate, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\.
+
+**Note**  
+You cannot use a custom Route 53 DNS record or an Aurora custom endpoint instead of the DB cluster endpoint to generate the authentication token\.
 
 ```
 using System;

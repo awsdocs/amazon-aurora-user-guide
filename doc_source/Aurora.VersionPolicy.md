@@ -140,6 +140,12 @@ We might replace a minor version of a particular major version sooner than the u
 
 Before beginning automatic upgrades of minor versions that are approaching end of life, we generally provide a reminder three months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. Notifications with less than three months notice are used when there are critical matters, such as security issues, that necessitate quicker action\.
 
+If you don't have the **Auto minor version upgrade** setting enabled, you get a reminder but no RDS event notification\. Upgrades occur within a maintenance window after the mandatory upgrade deadline has passed\.
+
+If you do have the **Auto minor version upgrade** setting enabled, you get a reminder and an Amazon RDS DB cluster event with a category of `maintenance` and ID of `RDS-EVENT-0156`\. Upgrades occur during the next maintenance window\.
+
+For more information on auto minor version upgrades, see [ Automatic minor version upgrades for Aurora DB clusters](USER_UpgradeDBInstance.Maintenance.md#Aurora.Maintenance.AMVU)\.
+
 ## Long\-term support for selected Amazon Aurora minor versions<a name="Aurora.VersionPolicy.LTS"></a>
 
 For each Aurora major version, certain minor versions are designated as long\-term\-support \(LTS\) versions and made available for at least three years\. That is, at least one minor version per major version is made available for longer than the typical 12 months\. We generally provide a reminder six months before the end of this period\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB clusters, and the actions that we recommend that you take\. Notifications with less than six months notice are used when there are critical matters, such as security issues, that necessitate quicker action\.

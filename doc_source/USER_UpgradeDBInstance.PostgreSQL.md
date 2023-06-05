@@ -8,7 +8,7 @@ Depending on the version of Aurora PostgreSQL that your DB cluster is currently 
 + [Overview of the Aurora PostgreSQL upgrade processes](#USER_UpgradeDBInstance.PostgreSQL.Overview)
 + [Getting a list of available versions in your AWS Region](#USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion)
 + [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)
-  + [Before upgrading your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)
+  + [Testing an upgrade of your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)
   + [Upgrading the Aurora PostgreSQL engine to a new major version](#USER_UpgradeDBInstance.Upgrading.Manual)
     + [Major upgrades for global databases](#USER_UpgradeDBInstance.PostgreSQL.GlobalDB)
 + [How to perform minor version upgrades and apply patches](#USER_UpgradeDBInstance.PostgreSQL.Minor)
@@ -22,7 +22,7 @@ The differences between major and minor version upgrades are as follows:
 
 **Minor version upgrades and patches**  
 Minor version upgrades and patches include only those changes that are backward\-compatible with existing applications\. Minor version upgrades and patches become available to you only after Aurora PostgreSQL tests and approves them\.   
-Minor version upgrades can be applied for you automatically by Aurora\. When you create a new Aurora PostgreSQL DB cluster, the **Enable minor version upgrade** option is preselected\. Unless you turn off this option, minor version upgrades are applied automatically during your scheduled maintenance window\. For more information about the automatic minor version upgrade \(AMVU\) option and how to modify your Aurora DB cluster to use it, see [ Automatic minor version upgrades for Aurora DB clusters ](USER_UpgradeDBInstance.Maintenance.md#Aurora.Maintenance.AMVU)\.  
+Minor version upgrades can be applied for you automatically by Aurora\. When you create a new Aurora PostgreSQL DB cluster, the **Enable minor version upgrade** option is preselected\. Unless you turn off this option, minor version upgrades are applied automatically during your scheduled maintenance window\. For more information about the automatic minor version upgrade \(AMVU\) option and how to modify your Aurora DB cluster to use it, see [ Automatic minor version upgrades for Aurora DB clusters](USER_UpgradeDBInstance.Maintenance.md#Aurora.Maintenance.AMVU)\.  
 If the automatic minor version upgrade option isn't set for your Aurora PostgreSQL DB cluster, your Aurora PostgreSQL isn't automatically upgraded to the new minor version\. Instead, when a new minor version is released in your AWS Region and your Aurora PostgreSQL DB cluster is running an older minor version, Aurora prompts you to upgrade\. It does so by adding a recommendation to the maintenance tasks for your cluster\.   
 Patches aren't considered an upgrade, and they aren't applied automatically\. Aurora PostgreSQL prompts you to apply any patches by adding a recommendation to maintenance tasks for your Aurora PostgreSQL DB cluster\. For more information, see [How to perform minor version upgrades and apply patches](#USER_UpgradeDBInstance.PostgreSQL.Minor)\.   
 Patches that resolve security or other critical issues are also added as maintenance tasks\. However, these patches are required\. Make sure to apply security patches to your Aurora PostgreSQL DB cluster when they become available in your pending maintenance tasks\.
@@ -34,7 +34,7 @@ ZDP isn't supported in the following cases:
 
 **Major version upgrades**  
 Unlike for minor version upgrades and patches, Aurora PostgreSQL doesn't have an automatic major version upgrade option\. New major PostgreSQL versions might contain database changes that aren't backward\-compatible with existing applications\. The new functionality can cause your existing applications to stop working correctly\.  
-To prevent any issues, we strongly recommend that you follow the process outlined in [Before upgrading your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary) before upgrading the DB instances in your Aurora PostgreSQL DB clusters\. First ensure that your applications can run on the new version by following that procedure\. Then you can manually upgrade your Aurora PostgreSQL DB cluster to the new version\.   
+To prevent any issues, we strongly recommend that you follow the process outlined in [Testing an upgrade of your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary) before upgrading the DB instances in your Aurora PostgreSQL DB clusters\. First ensure that your applications can run on the new version by following that procedure\. Then you can manually upgrade your Aurora PostgreSQL DB cluster to the new version\.   
 The upgrade process involves the possibility of brief outages as each instance in the cluster is upgraded to the new version\. The preliminary planning process also takes time\. We recommend that you always perform upgrade tasks during your cluster's maintenance window or when operations are minimal\. For more information, see [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\.
 
 **Note**  
@@ -131,7 +131,7 @@ Major version upgrades might contain database changes that are not backward\-com
 
 1. Choose the major version that you want from the list of available targets from those listed for your version in the table\. You can get a precise list of versions available in your AWS Region for your current version by using the AWS CLI\. For details, see [Getting a list of available versions in your AWS Region](#USER_UpgradeDBInstance.PostgreSQL.UpgradeVersion)\. 
 
-1. Verify that your applications work as expected on a trial deployment of the new version\. For information about the complete process, see [Before upgrading your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\.
+1. Verify that your applications work as expected on a trial deployment of the new version\. For information about the complete process, see [Testing an upgrade of your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\.
 
 1. After verifying that your applications work as expected on the trial deployment, you can upgrade your cluster\. For details, see [Upgrading the Aurora PostgreSQL engine to a new major version](#USER_UpgradeDBInstance.Upgrading.Manual)\.
 
@@ -162,7 +162,7 @@ aws rds describe-db-engine-versions ^
 
 In some cases, the version that you want to upgrade to isn't a target for your current version\. In such cases, use the information in the [versions table](#versions-table) to perform minor version upgrades until your cluster is at a version that has your chosen target in its row of targets\.
 
-### Before upgrading your production DB cluster to a new major version<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary"></a>
+### Testing an upgrade of your production DB cluster to a new major version<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary"></a>
 
 Each new major version includes enhancements to the query optimizer that are designed to improve performance\. However, your workload might include queries that result in a worse performing plan in the new version\. That's why we recommend that you test and review performance before upgrading in production\. You can manage query plan stability across versions by using the Query Plan Management \(QPM\) extension, as detailed in [Ensuring plan stability after a major version upgrade](AuroraPostgreSQL.Optimize.BestPractice.md#AuroraPostgreSQL.Optimize.BestPractice.MajorVersionUpgrade)\. 
 
@@ -401,7 +401,7 @@ To upgrade the engine version of a DB cluster, use the [ModifyDBCluster](https:/
 
 For an Aurora global database cluster, the upgrade process upgrades all DB clusters that make up your Aurora global database at the same time\. It does so to ensure that each runs the same Aurora PostgreSQL version\. It also ensures that any changes to system tables, data file formats, and so on, are automatically replicated to all secondary clusters\.
 
-To upgrade a global database cluster to a new major version of Aurora PostgreSQL, we recommend that you test your applications on the upgraded version, as detailed in [Before upgrading your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\. Be sure to prepare your DB cluster parameter group and DB parameter group settings for each AWS Region in your Aurora global database before the upgrade as detailed in [step 1.](#step-1) of [Before upgrading your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\. 
+To upgrade a global database cluster to a new major version of Aurora PostgreSQL, we recommend that you test your applications on the upgraded version, as detailed in [Testing an upgrade of your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\. Be sure to prepare your DB cluster parameter group and DB parameter group settings for each AWS Region in your Aurora global database before the upgrade as detailed in [step 1.](#step-1) of [Testing an upgrade of your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\. 
 
 If your Aurora PostgreSQL global database cluster has a recovery point objective \(RPO\) set for its `rds.global_db_rpo` parameter, make sure to reset the parameter before upgrading\. The major version upgrade process doesn't work if the RPO is turned on\. By default, this parameter is turned off\. For more information about Aurora PostgreSQL global databases and RPO, see [Managing RPOs for Aurora PostgreSQL–based global databases](aurora-global-database-disaster-recovery.md#aurora-global-database-manage-recovery)\.
 
@@ -435,7 +435,7 @@ aws rds describe-db-instances \
 
 This query returns a list of all Aurora DB clusters and their instances with a `true` or `false` value for the status of the `AutoMinorVersionUpgrade` setting\. The command as shown assumes that you have your AWS CLI configured to target your default AWS Region\. 
 
-For more information about the AMVU option and how to modify your Aurora DB cluster to use it, see [ Automatic minor version upgrades for Aurora DB clusters ](USER_UpgradeDBInstance.Maintenance.md#Aurora.Maintenance.AMVU)\. 
+For more information about the AMVU option and how to modify your Aurora DB cluster to use it, see [ Automatic minor version upgrades for Aurora DB clusters](USER_UpgradeDBInstance.Maintenance.md#Aurora.Maintenance.AMVU)\. 
 
 You can upgrade your Aurora PostgreSQL DB clusters to new minor versions either by responding to maintenance tasks, or by modifying the cluster to use the new version\. 
 
@@ -526,7 +526,7 @@ To upgrade the engine version of a DB cluster, use the [ModifyDBCluster](https:/
 
 ## Upgrading PostgreSQL extensions<a name="USER_UpgradeDBInstance.Upgrading.ExtensionUpgrades"></a>
 
-Upgrading your Aurora PostgreSQL DB cluster to a new major or minor version doesn't upgrade the PostgreSQL extensions at the same time\. For most extensions, you upgrade the extension after the major or minor version upgrade completes\. However, in some cases, you upgrade the extension before you upgrade the Aurora PostgreSQL DB engine\. For more information, see the [list of extensions to update](#upgrade-extensions) in [Before upgrading your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\.
+Upgrading your Aurora PostgreSQL DB cluster to a new major or minor version doesn't upgrade the PostgreSQL extensions at the same time\. For most extensions, you upgrade the extension after the major or minor version upgrade completes\. However, in some cases, you upgrade the extension before you upgrade the Aurora PostgreSQL DB engine\. For more information, see the [list of extensions to update](#upgrade-extensions) in [Testing an upgrade of your production DB cluster to a new major version](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\.
 
 Installing PostgreSQL extensions requires `rds_superuser` privileges\. Typically, an `rds_superuser` delegates permissions over specific extensions to relevant users \(roles\), to facilitate the management of a given extension\. That means that the task of upgrading all the extensions in your Aurora PostgreSQL DB cluster might involve many different users \(roles\)\. Keep this in mind especially if you want to automate the upgrade process by using scripts\. For more information about PostgreSQL privileges and roles, see [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md)\. 
 

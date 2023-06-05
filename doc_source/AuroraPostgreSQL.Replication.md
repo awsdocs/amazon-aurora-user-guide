@@ -35,7 +35,7 @@ The read availability feature is available by default on the following versions 
 
 To use the read availability feature for a DB cluster created on one of these versions prior to this launch, restart the writer instance of the DB cluster\.
 
-When you modify static parameters of your Aurora PostgreSQL DB cluster, you must to restart the writer instance so that the parameter changes take effect\. For example, you must restart the writer instance when you set the value of `shared_buffers`\. With the improved availability of Aurora Replicas, the DB cluster maintains read availability during these restarts, which reduces the impact of changes to the writer instance\. The reader instances don't restart and continue to respond to the read requests\. To apply static parameter changes, reboot each individual reader instance\. 
+When you modify static parameters of your Aurora PostgreSQL DB cluster, you must restart the writer instance so that the parameter changes take effect\. For example, you must restart the writer instance when you set the value of `shared_buffers`\. With the improved availability of Aurora Replicas, the DB cluster maintains read availability during these restarts, which reduces the impact of changes to the writer instance\. The reader instances don't restart and continue to respond to the read requests\. To apply static parameter changes, reboot each individual reader instance\. 
 
 An Aurora PostgreSQL DB cluster's Aurora Replica can recover from replication errors such as writer restarts, failover, slow replication, and network issues by quickly recovering to in\-memory database state after it reconnects with the writer\. This approach allows Aurora Replica instances to reach consistency with the latest storage updates while the client database is still available\.
 
@@ -55,7 +55,7 @@ You can monitor the Aurora Replicas when recovering from a writer disconnect\. U
 ### Limitations<a name="AuroraPostgreSQL.Replication.Replicas.SRO.limitations"></a>
 
 The following limitations apply to Aurora Replica's with improved availability:
-+ Global DB Aurora Replicas aren't supported\.
++ Global DB Aurora Replicas in the secondary AWS Regions aren't supported\.
 + Aurora Replicas don't support online replication recovery if one is already in progress and will restart\. 
 + Aurora Replicas will restart when your DB instance is nearing the transaction ID wraparound\. For more information on transaction ID wraparound, see [Preventing Transaction ID Wraparound Failures](https://www.postgresql.org/docs/current/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND                     )\.
 + Aurora Replicas can restart when the replication process is blocked under certain circumstances\.

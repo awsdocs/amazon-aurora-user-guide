@@ -120,7 +120,6 @@ The following table shows the event category and a list of events when a DB inst
 |  recovery  | RDS\-EVENT\-0052 |  Multi\-AZ instance recovery started\.  | Recovery time will vary with the amount of data to be recovered\. | 
 |  recovery  | RDS\-EVENT\-0053 |  Multi\-AZ instance recovery completed\. Pending failover or activation\.  |  | 
 |  restoration  | RDS\-EVENT\-0019 |  Restored from DB instance *name* to *name*\.  |  The DB instance has been restored from a point\-in\-time backup\.  | 
-|  restoration  | RDS\-EVENT\-0043 |  Restored from snapshot *snapshot\_name*  |  The DB instance has been restored from a DB snapshot\.  | 
 |  security patching  | RDS\-EVENT\-0230 |  A system update is available for your DB instance\. For information about applying updates, see 'Maintaining a DB instance' in the RDS User Guide\.  |   A new Operating System patch is available\.  A new, minor version, operating system update is available for your DB instance\. For information about applying updates, see [Working with operating system updates](USER_UpgradeDBInstance.Maintenance.md#OS_Updates)\.  | 
 
 ## DB parameter group events<a name="USER_Events.Messages.parameter-group"></a>
@@ -170,6 +169,7 @@ The following table shows the event category and a list of events when an RDS Pr
 | configuration change | RDS\-EVENT\-0204 |  RDS modified DB proxy *name*\.  |  | 
 | configuration change | RDS\-EVENT\-0207 |  RDS modified the end point of the DB proxy *name*\.  |  | 
 | configuration change | RDS\-EVENT\-0213 |  RDS detected the addition of the DB instance and automatically added it to the target group of the DB proxy *name*\.  |  | 
+|  configuration change  | RDS\-EVENT\-0213 | RDS detected creation of DB instance *name* and automatically added it to target group *name* of DB proxy *name*\.  |  | 
 |  configuration change  | RDS\-EVENT\-0214 |  RDS detected deletion of DB instance *name* and automatically removed it from target group *name* of DB proxy *name*\.  |  | 
 |  configuration change  | RDS\-EVENT\-0215 |  RDS detected deletion of DB cluster *name* and automatically removed it from target group *name* of DB proxy *name*\.  |  | 
 |  creation  | RDS\-EVENT\-0203 |  RDS created DB proxy *name*\.  |  | 

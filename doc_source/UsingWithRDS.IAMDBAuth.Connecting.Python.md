@@ -27,6 +27,9 @@ Modify the values of the following variables as needed:
 
   For `ssl_ca`, specify an SSL certificate\. To download an SSL certificate, see [Using SSL/TLS to encrypt a connection to a DB cluster](UsingWithRDS.SSL.md)\.
 
+**Note**  
+You cannot use a custom Route 53 DNS record or an Aurora custom endpoint instead of the DB cluster endpoint to generate the authentication token\.
+
 This code connects to an Aurora MySQL DB cluster\.
 
 Before running this code, install the PyMySQL driver by following the instructions in the [ Python Package Index](https://pypi.org/project/PyMySQL/)\.

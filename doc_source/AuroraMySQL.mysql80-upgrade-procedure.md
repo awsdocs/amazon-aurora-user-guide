@@ -276,8 +276,10 @@ $ aws rds describe-events \
         {
             "SourceIdentifier": "instance-attempt-1",
             "SourceType": "db-instance",
-            "Message": "Database cluster is in a state that cannot be upgraded:
-PreUpgrade checks failed: PreChecker Found 1 errors",
+            "Message": "Database cluster is in a state that cannot be upgraded: PreUpgrade checks failed. More details can 
+             be found in the upgrade-prechecks.log file. Please refer to 
+             https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.MySQL80.html#AuroraMySQL.mysql80-upgrade-troubleshooting 
+             for more details on troubleshooting the cause of the upgrade failure",
             "EventCategories": [
                 "maintenance"
             ],

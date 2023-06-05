@@ -190,7 +190,7 @@ SELECT topology.createtopology('my_new_topo',26986,0.5);
 
 Each new release of PostgreSQL supports one or more versions of the PostGIS extension compatible with that release\. Upgrading the PostgreSQL engine to a new version doesn't automatically upgrade the PostGIS extension\. Before upgrading the PostgreSQL engine, you typically upgrade PostGIS to the newest available version for the current PostgreSQL version\. For details, see [PostGIS extension versions](#CHAP_PostgreSQL.Extensions.PostGIS)\. 
 
-After the PostgreSQL engine upgrade, you then upgrade the PostGIS extension again, to the version supported for the newly upgraded PostgreSQL engine version\. For more information about upgrading the PostgreSQL engine, see [Before upgrading your production DB cluster to a new major version](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\. 
+After the PostgreSQL engine upgrade, you then upgrade the PostGIS extension again, to the version supported for the newly upgraded PostgreSQL engine version\. For more information about upgrading the PostgreSQL engine, see [Testing an upgrade of your production DB cluster to a new major version](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\. 
 
 You can check for available PostGIS extension version updates on your Aurora PostgreSQL DB cluster at any time\. To do so, run the following command\. This function is available with PostGIS 2\.5\.0 and higher versions\.
 
@@ -212,7 +212,7 @@ ALTER EXTENSION postgis UPDATE TO "2.5.5";
 
 Depending on the version that you're upgrading from, you might need to use this function again\. The result of the first run of the function determines if an additional upgrade function is needed\. For example, this is the case for upgrading from PostGIS 2 to PostGIS 3\. For more information, see [Upgrading PostGIS 2 to PostGIS 3](#PostgreSQL.Extensions.PostGIS.versions.upgrading.2-to-3)\.
 
-If you upgraded this extension to prepare for a major version upgrade of the PostgreSQL engine, you can continue with other preliminary tasks\. For more information, see [Before upgrading your production DB cluster to a new major version](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\. 
+If you upgraded this extension to prepare for a major version upgrade of the PostgreSQL engine, you can continue with other preliminary tasks\. For more information, see [Testing an upgrade of your production DB cluster to a new major version](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Upgrade.preliminary)\. 
 
 ## PostGIS extension versions<a name="CHAP_PostgreSQL.Extensions.PostGIS"></a>
 

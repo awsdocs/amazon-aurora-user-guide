@@ -13,7 +13,7 @@ The parameters that you can set to manage memory and assess your Aurora PostgreS
 + `log_temp_files` – Logs temporary file creation, file names, and sizes\. When this parameter is turned on, a log entry is stored for each temporary file that gets created\. Turn this on to see how frequently your Aurora PostgreSQL DB cluster needs to write to disk\. Turn it off again after you've gathered information about your Aurora PostgreSQL DB cluster's temporary file generation, to avoid excessive logging\.
 + `logical_decoding_work_mem` – Specifies the amount of memory \(in megabytes\) to use for logical decoding\. *Logical decoding* is the process used to create a replica\. This process is done by converting data from the write\-ahead log \(WAL\) file to the logical streaming output needed by the target\. 
 
-  The value of this parameter creates a single buffer of the size specified for each replication connection\. By default, it's 64 megabytes\. After this buffer is filled, the excess is written to disk as a file\. To minimize disk activity, you can set the value of this parameter to a much higher value than that of `work_mem`\. 
+  The value of this parameter creates a single buffer of the size specified for each replication connection\. By default, it's 65536 KB\. After this buffer is filled, the excess is written to disk as a file\. To minimize disk activity, you can set the value of this parameter to a much higher value than that of `work_mem`\. 
 
 These are all dynamic parameters, so you can change them for the current session\. To do this, connect to the Aurora PostgreSQL DB cluster with psql and using the `SET` statement, as shown following\.
 
@@ -177,7 +177,7 @@ Time: 567.095 ms
 
 Logical replication has been available in all versions of Aurora PostgreSQL since its introduction in PostgreSQL version 10\. When you configure logical replication, you can also set the `logical_decoding_work_mem` parameter to specify the amount of memory that the logical decoding process can use for the decoding and streaming process\. 
 
-During logical decoding, write\-ahead log \(WAL\) records are converted to SQL statements that are then sent to another target for logical replication or another task\. When a transaction is written to the WAL and then converted, the entire transaction must fit into the value specified for `logical_decoding_work_mem`\. By default, this parameter is set to 64 MB\. Any overflow is written to disk\. This means that it must be reread from the disk before it can be sent to its destination, thus slowing the overall process\. 
+During logical decoding, write\-ahead log \(WAL\) records are converted to SQL statements that are then sent to another target for logical replication or another task\. When a transaction is written to the WAL and then converted, the entire transaction must fit into the value specified for `logical_decoding_work_mem`\. By default, this parameter is set to 65536 KB\. Any overflow is written to disk\. This means that it must be reread from the disk before it can be sent to its destination, thus slowing the overall process\. 
 
 You can assess the amount of transaction overflow in your current workload at a specific point in time by using the `aurora_stat_file` function as shown in the following example\. 
 

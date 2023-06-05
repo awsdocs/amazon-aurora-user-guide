@@ -1,12 +1,12 @@
 # Getting started with Aurora Serverless v2<a name="aurora-serverless-v2.upgrade"></a>
 
- To convert an existing database to use Aurora Serverless v2, you can do the following: 
-+  Upgrade from a provisioned Aurora cluster\. 
-+  Upgrade from an Aurora Serverless v1 cluster\. 
-+  Perform a dump and restore from an Aurora Serverless v2 \(preview\) cluster\. 
+To convert an existing DB cluster to use Aurora Serverless v2, you can do the following:
++ Upgrade from a provisioned Aurora DB cluster\.
++ Upgrade from an Aurora Serverless v1 cluster\.
++ Perform a dump and restore from an Aurora Serverless v2 \(preview\) cluster\.
 + Migrate from an on\-premises database to an Aurora Serverless v2 cluster\.
 
- When your upgraded cluster is running the appropriate engine version as listed in [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md), you can begin adding Aurora Serverless v2 DB instances to it\. The first DB instance that you add to the upgraded cluster must be a provisioned DB instance\. Then you can switch over the processing for the write workload, the read workload, or both to the Aurora Serverless v2 DB instances\. 
+When your upgraded cluster is running the appropriate engine version as listed in [Requirements for Aurora Serverless v2](aurora-serverless-v2.requirements.md), you can begin adding Aurora Serverless v2 DB instances to it\. The first DB instance that you add to the upgraded cluster must be a provisioned DB instance\. Then you can switch over the processing for the write workload, the read workload, or both to the Aurora Serverless v2 DB instances\.
 
 **Contents**
 + [Upgrading or switching existing clusters to use Aurora Serverless v2](#aurora-serverless-v2.getting-started-general-procedure)
@@ -24,6 +24,9 @@
     + [Aurora PostgreSQL\-compatible DB clusters](#sv1-to-sv2-apg)
 + [Upgrading from Aurora Serverless v2 \(preview\) to Aurora Serverless v2](#aurora-serverless-v2.upgrade-from-serverless-v2-preview)
 + [Migrating from an on\-premises database to Aurora Serverless v2](#aurora-serverless-v2.migrate-from-on-prem)
+
+**Note**  
+These topics describe how to convert an existing DB cluster\. For information on creating a new Aurora Serverless v2 DB cluster, see [Creating a cluster that uses Aurora Serverless v2](aurora-serverless-v2.create-cluster.md)\.
 
 ## Upgrading or switching existing clusters to use Aurora Serverless v2<a name="aurora-serverless-v2.getting-started-general-procedure"></a>
 
@@ -333,7 +336,7 @@ The following table summarizes the different requirements to run your database u
 |  Maximum ACUs \(Aurora MySQL\)  |  128  |  256  | 
 |  Maximum ACUs \(Aurora PostgreSQL\)  |  128  |  384  | 
 |  Stopping a cluster  |  You can manually stop and start the cluster by using [the same cluster stop and start feature](aurora-cluster-stop-start.md) as provisioned clusters\.  |  The cluster pauses automatically after a timeout\. It takes some time to become available when activity resumes\.  | 
-|  Scaling for DB instances  |  Scale up and down with minimum increment of 0\.5 ACUs  |  Scale up and down by doubling or halving the ACUs  | 
+|  Scaling for DB instances  | Scale up and down with minimum increment of 0\.5 ACUs\. | Scale up and down by doubling or halving the ACUs\. | 
 |  Number of DB instances  |  Same as a provisioned cluster: 1 writer DB instance, up to 15 reader DB instances\.  |  1 DB instance handling both reads and writes\.  | 
 |  Scaling can happen while SQL statements are running?  |  Yes\. Aurora Serverless v2 doesn't require waiting for a quiet point\.  |  No\. For example, scaling waits for completion of long\-running transactions, temporary tables, and table locks\.  | 
 |  Reader DB instances scale along with writer  |  Optional\.  |  Not applicable\.  | 

@@ -16,7 +16,7 @@ Enabling binary logging increases the number of write disk I/O operations to the
 
 You can modify the DB cluster to associate it with a custom DB cluster parameter group\. For more information, see [Modifying an Amazon Aurora DB cluster](Aurora.Modifying.md)\.
 
-If you change the `binlog_format` parameter setting for a DB cluster, reboot the writer instance of the DB cluster\. For more information, see [Rebooting a DB instance within an Aurora cluster](USER_RebootCluster.md#aurora-reboot-db-instance)\.
+If you change the `binlog_format` parameter setting or any other parameter settings for a DB cluster, check the **DB cluster parameter group** setting on the cluster's **Configuration** tab\. If the status is `Pending reboot`, reboot the DB cluster\. Blue/green deployments *require* that the writer instance be in sync with the DB cluster parameter group, otherwise creation fails\. For more information, see [Rebooting a DB instance within an Aurora cluster](USER_RebootCluster.md#aurora-reboot-db-instance)\.
 
 ## Making changes in the green environment<a name="blue-green-deployments-creating-changes"></a>
 
