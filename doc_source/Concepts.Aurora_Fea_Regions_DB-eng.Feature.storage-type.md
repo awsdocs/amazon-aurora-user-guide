@@ -7,8 +7,6 @@ Amazon Aurora has two DB cluster storage configurations, Aurora I/O\-Optimized a
 Aurora I/O\-Optimized is available in all AWS Regions except for the following:
 + China \(Beijing\)
 + China \(Ningxia\)
-+ AWS GovCloud \(US\-East\)
-+ AWS GovCloud \(US\-West\)
 
 Aurora I/O\-Optimized is available for the following Amazon Aurora versions:
 + Aurora MySQL version 3\.03\.1 and higher

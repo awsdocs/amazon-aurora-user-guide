@@ -209,18 +209,92 @@ To adjust the preferred DB cluster maintenance window, use the Amazon RDS [https
 
 ## Automatic minor version upgrades for Aurora DB clusters<a name="Aurora.Maintenance.AMVU"></a>
 
-The **Auto minor version upgrade** setting specifies whether Aurora automatically applies upgrades to your cluster\. These upgrades include patch levels containing bug fixes, and new minor versions containing additional features\. They don't include any incompatible changes\.
+The **Auto minor version upgrade** setting specifies whether Aurora automatically applies upgrades to your DB cluster\. These upgrades include new minor versions containing additional features and patches containing bug fixes\.
 
-**Note**  
-This setting is enabled by default\. For each new cluster, choose the appropriate value for this setting\. This value is based on its importance, expected lifetime, and the amount of verification testing that you do after each upgrade\.
+This setting is turned on by default\. For each new DB cluster, choose the appropriate value for this setting\. This value is based on its importance, expected lifetime, and the amount of verification testing that you do after each upgrade\.
 
-For instructions about turning this setting on or off, see [Settings for Amazon Aurora](Aurora.Modifying.md#Aurora.Modifying.Settings)\. In particular, make sure to apply the same setting to all DB instances in the cluster\. If any DB instance in your cluster has this setting turned off, the cluster isn't automatically upgraded\.
+For instructions on turning the **Auto minor version upgrade** setting on or off, see the following:
++ [Enabling automatic minor version upgrades for an Aurora DB cluster](#aurora-amvu-cluster)
++ [Enabling automatic minor version upgrades for individual DB instances in an Aurora DB cluster](#aurora-amvu-instance)
+
+**Important**  
+We strongly recommend that for new and existing DB clusters, you apply this setting to the DB cluster and not to the DB instances in the cluster individually\. If any DB instance in your cluster has this setting turned off, the DB cluster isn't automatically upgraded\.
+
+The following table shows how the **Auto minor version upgrade** setting works when applied at the cluster and instance levels\.
+
+
+| Action | Cluster setting | Instance settings | Cluster upgraded automatically? | 
+| --- | --- | --- | --- | 
+| You set it to True on the DB cluster\. | True | True for all new and existing instances | Yes | 
+| You set it to False on the DB cluster\. | False | False for all new and existing instances | No | 
+|  It was set previously to True on the DB cluster\. You set it to False on at least one DB instance\.  | Changes to False | False for one or more instances | No | 
+|  It was set previously to False on the DB cluster\. You set it to True on at least one DB instance, but not all instances\.  | False | True for one or more instances, but not all instances | No | 
+|  It was set previously to False on the DB cluster\. You set it to True on all DB instances\.  | Changes to True | True for all instances | Yes | 
 
 Automatic minor version upgrades are communicated in advance through an Amazon RDS DB cluster event with a category of `maintenance` and ID of `RDS-EVENT-0156`\. For more information, see [Amazon RDS event categories and event messages](USER_Events.Messages.md)\.
+
+Automatic upgrades occur during the maintenance window\. If the individual DB instances in the DB cluster have different maintenance windows from the cluster maintenance window, then the cluster maintenance window takes precedence\.
 
 For more information about engine updates for Aurora PostgreSQL, see [Amazon Aurora PostgreSQL updates](AuroraPostgreSQL.Updates.md)\.
 
 For more information about the **Auto minor version upgrade** setting for Aurora MySQL, see [Enabling automatic upgrades between minor Aurora MySQL versions](AuroraMySQL.Updates.Patching.md#AuroraMySQL.Updates.AMVU)\. For general information about engine updates for Aurora MySQL, see [Database engine updates for Amazon Aurora MySQL](AuroraMySQL.Updates.md)\.
+
+### Enabling automatic minor version upgrades for an Aurora DB cluster<a name="aurora-amvu-cluster"></a>
+
+Follow the general procedure in [Modifying the DB cluster by using the console, CLI, and API](Aurora.Modifying.md#Aurora.Modifying.Cluster)\.
+
+**Console**  
+On the **Modify DB cluster** page, in the **Maintenance** section, select the **Enable auto minor version upgrade** check box\.
+
+**AWS CLI**  
+Call the [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) AWS CLI command\. Specify the name of your DB cluster for the `--db-cluster-identifier` option and `true` for the `--auto-minor-version-upgrade` option\. Optionally, specify the `--apply-immediately` option to immediately enable this setting for your DB cluster\.
+
+**RDS API**  
+Call the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) API operation and specify the name of your DB cluster for the `DBClusterIdentifier` parameter and `true` for the `AutoMinorVersionUpgrade` parameter\. Optionally, set the `ApplyImmediately` parameter to `true` to immediately enable this setting for your DB cluster\.
+
+### Enabling automatic minor version upgrades for individual DB instances in an Aurora DB cluster<a name="aurora-amvu-instance"></a>
+
+Follow the general procedure in [Modifying a DB instance in a DB cluster](Aurora.Modifying.md#Aurora.Modifying.Instance)\.
+
+**Console**  
+On the **Modify DB instance** page, in the **Maintenance** section, select the **Enable auto minor version upgrade** check box\.
+
+**AWS CLI**  
+Call the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command\. Specify the name of your DB instance for the `--db-instance-identifier` option and `true` for the `--auto-minor-version-upgrade` option\. Optionally, specify the `--apply-immediately` option to immediately enable this setting for your DB instance\. Run a separate `modify-db-instance` command for each DB instance in the cluster\.
+
+**RDS API**  
+Call the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation and specify the name of your DB cluster for the `DBInstanceIdentifier` parameter and `true` for the `AutoMinorVersionUpgrade` parameter\. Optionally, set the `ApplyImmediately` parameter to `true` to immediately enable this setting for your DB instance\. Call a separate `ModifyDBInstance` operation for each DB instance in the cluster\.
+
+You can use a CLI command such as the following to check the status of the `AutoMinorVersionUpgrade` setting for all of the DB instances in your Aurora MySQL clusters\.
+
+```
+aws rds describe-db-instances \
+  --query '*[].{DBClusterIdentifier:DBClusterIdentifier,DBInstanceIdentifier:DBInstanceIdentifier,AutoMinorVersionUpgrade:AutoMinorVersionUpgrade}'
+```
+
+That command produces output similar to the following:
+
+```
+[
+  {
+      "DBInstanceIdentifier": "db-writer-instance",
+      "DBClusterIdentifier": "my-db-cluster-57",
+      "AutoMinorVersionUpgrade": true
+  },
+  {
+      "DBInstanceIdentifier": "db-reader-instance1",
+      "DBClusterIdentifier": "my-db-cluster-57",
+      "AutoMinorVersionUpgrade": false
+  },
+  {
+      "DBInstanceIdentifier": "db-writer-instance2",
+      "DBClusterIdentifier": "my-db-cluster-80",
+      "AutoMinorVersionUpgrade": true
+  },
+... output omitted ...
+```
+
+In this example, **Enable auto minor version upgrade** is turned off for the DB cluster `my-db-cluster-57`, because it's turned off for one of the DB instances in the cluster\.
 
 ## Choosing the frequency of Aurora MySQL maintenance updates<a name="Aurora.Maintenance.LTS"></a>
 

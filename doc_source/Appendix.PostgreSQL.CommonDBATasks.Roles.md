@@ -305,14 +305,14 @@ You can now associate the custom parameter group with your DB instance\.
 
    ```
    aws rds modify-db-cluster --db-cluster-identifier 'your-instance-name' \
-           ----db-cluster-parameter-group-name "docs-lab-scram-passwords
+           --db-cluster-parameter-group-name "docs-lab-scram-passwords
    ```
 
    For Windows:
 
    ```
    aws rds modify-db-cluster --db-cluster-identifier "your-instance-name" ^
-           ----db-cluster-parameter-group-name "docs-lab-scram-passwords
+           --db-cluster-parameter-group-name "docs-lab-scram-passwords
    ```
 
    To resynchronize your Aurora PostgreSQL DB cluster with your custom DB cluster parameter group, reboot the primary and all other instances of the cluster\. 
@@ -333,7 +333,7 @@ With a custom DB cluster parameter group attached to your Aurora PostgreSQL DB c
   For Linux, macOS, or Unix:
 
   ```
-  aws rds modify-db-cluster-parameter-group --db-parameter-group-name \
+  aws rds modify-db-cluster-parameter-group --db-cluster-parameter-group-name \
     'docs-lab-scram-passwords' --parameters 'ParameterName=password_encryption,ParameterValue=scram-sha-256,ApplyMethod=immediate'
   ```
 

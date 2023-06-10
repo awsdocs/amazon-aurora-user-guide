@@ -105,17 +105,23 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `innodb_undo_directory`   |   No   |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
 |   `innodb_undo_logs`   |   Yes   |  Removed from Aurora MySQL version 3\.  | 
 |   `innodb_undo_tablespaces`   |   No   |  Removed from Aurora MySQL version 3\.  | 
-|  `internal_tmp_disk_storage_engine`  | Yes |  This parameter applies to Aurora MySQL version 2\. Allowed values are `INNODB` and `MYISAM`\.  | 
-|   `internal_tmp_mem_storage_engine`   |   Yes   |  This parameter applies to Aurora MySQL version 3\.  | 
+|  `internal_tmp_disk_storage_engine`  | Yes |  Controls which in\-memory storage engine is used for internal temporary tables\. Allowed values are `INNODB` and `MYISAM`\. This parameter applies to Aurora MySQL version 2\.  | 
+|  `internal_tmp_mem_storage_engine`  |   Yes   |  Controls which in\-memory storage engine is used for internal temporary tables\. Allowed values are `MEMORY` and `TempTable`\. This parameter applies to Aurora MySQL version 3\.  | 
 |  `key_buffer_size`  |   Yes   |  Key cache for MyISAM tables\. For more information, see [keycache\->cache\_lock mutex](AuroraMySQL.Reference.Waitevents.md#key-cache.cache-lock)\.  | 
 |   `lc_time_names`   |   Yes   |    | 
+|  `low_priority_updates`  | Yes |  `INSERT`, `UPDATE`, `DELETE`, and `LOCK TABLE WRITE` operations wait until there's no pending `SELECT` operation\. This parameter affects only storage engines that use only table\-level locking \(MyISAM, MEMORY, MERGE\)\. This parameter applies to Aurora MySQL version 3\.  | 
 |  `lower_case_table_names`  |  Yes \(Aurora MySQL version 2\) Only at cluster creation time \(Aurora MySQL version 3\)  |  In Aurora MySQL version 2\.10 and higher 2\.x versions, make sure to reboot all reader instances after changing this setting and rebooting the writer instance\. For details, see [Rebooting an Aurora MySQL cluster \(version 2\.10 and higher\)](USER_RebootCluster.md#aurora-mysql-survivable-replicas)\. In Aurora MySQL version 3, the value of this parameter is set permanently at the time the cluster is created\. If you use a nondefault value for this option, set up your Aurora MySQL version 3 custom parameter group before upgrading, and specify the parameter group during the snapshot restore operation that creates the version 3 cluster\. With an Aurora global database based on Aurora MySQL, you can't perform an in\-place upgrade from Aurora MySQL version 2 to version 3 if the `lower_case_table_names` parameter is turned on\. For more information on the methods that you can use, see [Major version upgrades](aurora-global-database-upgrade.md#aurora-global-database-upgrade.major)\.  | 
 |   `master-info-repository`   |   Yes   |  Removed from Aurora MySQL version 3\.  | 
 |   `master_verify_checksum`   |   Yes   |  Aurora MySQL version 2\. Use `source_verify_checksum` in Aurora MySQL version 3\.  | 
+|  `max_delayed_threads`  | Yes |  Sets the maximum number of threads to handle `INSERT DELAYED` statements\. This parameter applies to Aurora MySQL version 3\.  | 
+|  `max_error_count`  | Yes |  The maximum number of error, warning, and note messages to be stored for display\. This parameter applies to Aurora MySQL version 3\.  | 
+|  `min_examined_row_limit`  | Yes |  Use this parameter to prevent queries that examine fewer than the specified number of rows from being logged\. This parameter applies to Aurora MySQL version 3\.  | 
 |   `partial_revokes`   |   No   |  This parameter applies to Aurora MySQL version 3\.  | 
+|  `preload_buffer_size`  | Yes |  The size of the buffer that's allocated when preloading indexes\. This parameter applies to Aurora MySQL version 3\.  | 
 |  `query_cache_type`  |  Yes  |  Removed from Aurora MySQL version 3\.  | 
 |   `read_only`   |   Yes   |  When this parameter is turned on, the server permits no updates except from those performed by replica threads\. In Aurora MySQL version 3, this parameter doesn't apply for users who have the `CONNECTION_ADMIN` privilege\. This includes the Aurora master user\. For more information, see [Role\-based privilege model](Aurora.AuroraMySQL.Compare-80-v3.md#AuroraMySQL.privilege-model)\.  | 
 |   `relay-log-space-limit`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
+|  `replica_parallel_type`  | Yes |  This parameter enables parallel execution on the replica of all uncommitted threads already in the prepare phase, without violating consistency\. It applies to Aurora MySQL version 3\. In Aurora MySQL version 3\.03\.\* and lower, the default value is DATABASE\. In Aurora MySQL version 3\.04 and higher, the default value is LOGICAL\_CLOCK\.  | 
 |   `replica_preserve_commit_order`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
 |   `replica_transaction_retries`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
 |   `replicate-do-db`   |   Yes   |   This parameter applies to Aurora MySQL version 3\.   | 
@@ -246,8 +252,8 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `innodb_thread_concurrency`   |   No   |    | 
 |   `innodb_thread_sleep_delay`   |   Yes   |   Modifying this parameter has no effect because `innodb_thread_concurrency` is always 0 for Aurora\.   | 
 |   `interactive_timeout`   |   Yes   |   Aurora evaluates the minimum value of `interactive_timeout` and `wait_timeout`\. It then uses that minimum as the timeout to end all idle sessions, both interactive and noninteractive\.   | 
-|  `internal_tmp_disk_storage_engine`  | Yes |  This parameter applies to Aurora MySQL version 2\. Allowed values are `INNODB` and `MYISAM`\.  | 
-|  `internal_tmp_mem_storage_engine`  |  Yes  |  This parameter applies to Aurora MySQL version 3\.  | 
+|  `internal_tmp_disk_storage_engine`  | Yes |  Controls which in\-memory storage engine is used for internal temporary tables\. Allowed values are `INNODB` and `MYISAM`\. This parameter applies to Aurora MySQL version 2\.  | 
+|  `internal_tmp_mem_storage_engine`  |  Yes  |  Controls which in\-memory storage engine is used for internal temporary tables\. Allowed values are `MEMORY` and `TempTable`\. This parameter applies to Aurora MySQL version 3\.  | 
 |   `join_buffer_size`   |   Yes   |    | 
 |   `keep_files_on_create`   |   Yes   |    | 
 |  `key_buffer_size`  |   Yes   |  Key cache for MyISAM tables\. For more information, see [keycache\->cache\_lock mutex](AuroraMySQL.Reference.Waitevents.md#key-cache.cache-lock)\.  | 
@@ -267,15 +273,15 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `log_throttle_queries_not_using_indexes`   |   Yes   |    | 
 |   `log_warnings`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
 |   `long_query_time`   |   Yes   |    | 
-|   `low_priority_updates`   |   Yes   |    | 
+|   `low_priority_updates`   |   Yes   |  `INSERT`, `UPDATE`, `DELETE`, and `LOCK TABLE WRITE` operations wait until there's no pending `SELECT` operation\. This parameter affects only storage engines that use only table\-level locking \(MyISAM, MEMORY, MERGE\)\. This parameter applies to Aurora MySQL version 3\.  | 
 |   `max_allowed_packet`   |   Yes   |    | 
 |   `max_binlog_cache_size`   |   Yes   |    | 
 |   `max_binlog_size`   |   No   |    | 
 |   `max_binlog_stmt_cache_size`   |   Yes   |    | 
 |   `max_connect_errors`   |   Yes   |    | 
 |   `max_connections`   |   Yes   |  The default value is represented by a formula\. For details about how the `DBInstanceClassMemory` value in the formula is calculated, see [DB parameter formula variables](USER_ParamValuesRef.md#USER_FormulaVariables)\. For the default values depending on the instance class, see [Maximum connections to an Aurora MySQL DB instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections)\.   | 
-|   `max_delayed_threads`   |   Yes   |    | 
-|   `max_error_count`   |   Yes   |    | 
+|   `max_delayed_threads`   |   Yes   |  Sets the maximum number of threads to handle `INSERT DELAYED` statements\. This parameter applies to Aurora MySQL version 3\.  | 
+|   `max_error_count`   |   Yes   |  The maximum number of error, warning, and note messages to be stored for display\. This parameter applies to Aurora MySQL version 3\.  | 
 |   `max_heap_table_size`   |   Yes   |    | 
 |   `max_insert_delayed_threads`   |   Yes   |    | 
 |   `max_join_size`   |   Yes   |    | 
@@ -288,7 +294,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `max_user_connections`   |   Yes   |    | 
 |   `max_write_lock_count`   |   Yes   |    | 
 |   `metadata_locks_cache_size`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 
-|   `min_examined_row_limit`   |   Yes   |    | 
+|   `min_examined_row_limit`   |   Yes   |  Use this parameter to prevent queries that examine fewer than the specified number of rows from being logged\. This parameter applies to Aurora MySQL version 3\.  | 
 |   `myisam_data_pointer_size`   |   Yes   |    | 
 |   `myisam_max_sort_file_size`   |   Yes   |    | 
 |   `myisam_mmap_size`   |   Yes   |    | 
@@ -367,7 +373,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |   `pid_file`   |   No   |    | 
 |   `plugin_dir`   |   No   |   Aurora MySQL uses managed instances where you don't access the file system directly\.   | 
 |   `port`   |   No   |   Aurora MySQL manages the connection properties and enforces consistent settings for all DB instances in a cluster\.   | 
-|   `preload_buffer_size`   |   Yes   |    | 
+|   `preload_buffer_size`   |   Yes   |  The size of the buffer that's allocated when preloading indexes\. This parameter applies to Aurora MySQL version 3\.  | 
 |   `profiling_history_size`   |   Yes   |    | 
 |   `query_alloc_block_size`   |   Yes   |    | 
 |   `query_cache_limit`   |   Yes   |   Removed from Aurora MySQL version 3\.   | 

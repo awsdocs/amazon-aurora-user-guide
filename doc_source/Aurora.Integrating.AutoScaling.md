@@ -526,8 +526,8 @@ For more information on Amazon RDS resource tags, see [Tagging Amazon RDS resour
 
 You can use Performance Insights to monitor replicas that have been added by Aurora Auto Scaling, the same as with any Aurora reader DB instance\.
 
-When you turn on Performance Insights for an Aurora DB cluster, it's turned on for the writer DB instance and any existing Aurora Auto Scaling replicas\.
+You can't turn on Performance Insights for an Aurora DB cluster\. You can manually turn on Performance Insights for each DB instance in the DB cluster\.
 
-Performance Insights isn't turned on automatically for new replicas that Aurora Auto Scaling adds after you turn it on for the cluster\. You have to modify the new replicas and turn on Performance Insights for them individually after they're created\.
+When you turn on Performance Insights for the writer DB instance in your Aurora DB cluster, Performance Insights isn't turned on automatically for reader DB instances\. You have to turn on Performance Insights manually for the existing reader DB instances and new replicas added by Aurora Auto Scaling\.
 
 For more information on using Performance Insights to monitor Aurora DB clusters, see [Monitoring DB load with Performance Insights on Amazon Aurora](USER_PerfInsights.md)\.

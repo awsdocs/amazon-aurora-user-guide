@@ -33,7 +33,7 @@ Setting up logical replication requires `rds_superuser` privileges\. Your Aurora
 
 1. In the navigation pane, choose your Aurora PostgreSQL DB cluster\.
 
-1. Open the **Configuration** tab\. Among the Instance details, find the **Parameter group** link\. 
+1. Open the **Configuration** tab\. Among the Instance details, find the **Parameter group** link with **DB cluster parameter group** for **Type**\.
 
 1. Choose the link to open the custom parameters associated with your Aurora PostgreSQL DB cluster\. 
 
@@ -43,6 +43,8 @@ Setting up logical replication requires `rds_superuser` privileges\. Your Aurora
    + `max_replication_slots` – Set this parameter to a value that's at least equal to your planned total number of logical replication publications and subscriptions\. If you are using AWS DMS, this parameter should equal at least your planned change data capture tasks from the cluster, plus logical replication publications and subscriptions\. 
    + `max_wal_senders` and `max_logical_replication_workers` – Set these parameters to a value that's at least equal to the number of logical replication slots that you intend to be active, or the number of active AWS DMS tasks for change data capture\. Leaving a logical replication slot inactive prevents the vacuum from removing obsolete tuples from tables, so we recommend that you monitor replication slots and remove inactive slots as needed\. 
    + `max_worker_processes` – Set this parameter to a value that's at least equal to the total of the `max_logical_replication_workers`, `autovacuum_max_workers`, and `max_parallel_workers` values\. On small DB instance classes, background worker processes can affect application workloads, so monitor the performance of your database if you set `max_worker_processes` higher than the default value\. \(The default value is the result of `GREATEST(${DBInstanceVCPU*2},8}`, which means that, by default, this is either 8 or twice the CPU equivalent of the DB instance class, whichever is greater\)\.
+**Note**  
+You can modify parameter values in a customer\-created DB parameter group\. you can't change the parameter values in a default DB parameter group\.
 
 1. Choose **Save changes**\.
 

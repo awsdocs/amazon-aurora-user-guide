@@ -61,7 +61,7 @@ After you create the blue/green deployment, the DB cluster in the green environm
 
 1. Test your staging environment\.
 
-   During testing, we recommend that you keep your databases in the green environment read only\. We recommend that you enable write operations on the green environment with caution because they can result in replication conflicts in the green environment\. They can also result in unintended data in the production databases after switchover\.
+   During testing, we recommend that you keep your databases in the green environment read only\. We recommend that you enable write operations on the green environment with caution because they can result in replication conflicts\. They can also result in unintended data in the production databases after switchover\.
 
 1. When ready, switch over to promote the staging environment to be the new production environment\. For instructions, see [Switching a blue/green deployment](blue-green-deployments-switching.md)\.
 
@@ -139,7 +139,7 @@ After switching over a blue/green deployment, consider updating the resource IDs
 
 The following are best practices for blue/green deployments:
 + Thoroughly test the Aurora DB cluster in the green environment before switching over\.
-+ Keep your databases in the green environment read only\. We recommend that you enable write operations on the green environment with caution because they can result in replication conflicts in the green environment\. They can also result in unintended data in the production databases after switchover\.
++ Keep your databases in the green environment read only\. We recommend that you enable write operations on the green environment with caution because they can result in replication conflicts\. They can also result in unintended data in the production databases after switchover\.
 + Identify the best time for the switchover\.
 
   During the switchover, writes are cut off from databases in both environments\. Identify a time when traﬃc is lowest on your production environment\. Long\-running transactions, such as active DDLs, can increase your switchover time, resulting in longer downtime for your production workloads\.

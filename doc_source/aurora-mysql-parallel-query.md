@@ -126,7 +126,6 @@ Consider the following as part of planning:
 + If you use Aurora MySQL that's compatible with MySQL 5\.7, you must choose Aurora MySQL 2\.09 or higher\. In this case, you always create a provisioned cluster\. Then you turn on parallel query using the `aurora_parallel_query` parameter\.
 
   If you have an existing Aurora MySQL cluster that's running version 2\.09 or higher, you don't have to create a new cluster to use parallel query\. You can associate your cluster, or specific DB instances in the cluster, with a parameter group that has the `aurora_parallel_query` parameter turned on\. By doing so, you can reduce the time and effort to set up the relevant data to use with parallel query\.
-+ If your queries frequently use parallel query, then we recommend that you choose the Aurora I/O\-Optimized storage type\. You pay a fixed price for I/O operations as part of the storage costs\. For more information, see [Storage configurations for Amazon Aurora DB clusters](Aurora.Overview.StorageReliability.md#aurora-storage-type)\.
 + Plan for any large tables that you need to reorganize so that you can use parallel query when accessing them\. You might need to create new versions of some large tables where parallel query is useful\. For example, you might need to remove full\-text search indexes\. For details, see [Creating schema objects to take advantage of parallel query](#aurora-mysql-parallel-query-tables)\.
 
 ### Checking Aurora MySQL version compatibility for parallel query<a name="aurora-mysql-parallel-query-checking-compatibility"></a>

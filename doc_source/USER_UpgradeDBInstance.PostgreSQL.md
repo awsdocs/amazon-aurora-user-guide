@@ -424,7 +424,7 @@ Minor version upgrades and patches become available in AWS Regions only after ri
 As Aurora PostgreSQL makes new minor versions available, the instances that make up your Aurora PostgreSQL DB cluster can be automatically upgraded during your specified maintenance window\. For this to happen, your Aurora PostgreSQL DB cluster must have the **Enable auto minor version upgrade** option turned on\. All DB instances that make up your Aurora PostgreSQL DB cluster must have the automatic minor version upgrade \(AMVU\) option turned on so that the minor upgrade to be applied throughout the cluster\. 
 
 **Tip**  
-Make sure that the **Enable auto minor version upgrade** option is turned on for all PostgreSQL DB instances that make up your Aurora PostgreSQL DB cluster\. This option must be turned on for every instance in the DB cluster to work\.
+Make sure that the **Enable auto minor version upgrade** option is turned on for all PostgreSQL DB instances that make up your Aurora PostgreSQL DB cluster\. This option must be turned on for every instance in the DB cluster to work\. For information on how to set **Auto minor version upgrade**, and how the setting works when applied at the cluster and instance levels, see [ Automatic minor version upgrades for Aurora DB clusters](USER_UpgradeDBInstance.Maintenance.md#Aurora.Maintenance.AMVU)\.
 
 You can check the value of the **Enable auto minor version upgrade** option for all your Aurora PostgreSQL DB clusters by using the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) AWS CLI command with the following query\.
 
