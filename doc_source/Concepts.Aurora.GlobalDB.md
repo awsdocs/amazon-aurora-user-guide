@@ -1,3 +1,0 @@
-# Aurora global databases<a name="Concepts.Aurora.GlobalDB"></a>
-
- For high availability across multiple AWS Regions, you can set up Aurora global databases\. Each Aurora global database spans multiple AWS Regions, enabling low latency global reads and disaster recovery from outages across an AWS Region\. Aurora automatically handles replicating all data and updates from the primary AWS Region to each of the secondary Regions\. For more information, see [Using Amazon Aurora global databases](aurora-global-database.md)\. 
